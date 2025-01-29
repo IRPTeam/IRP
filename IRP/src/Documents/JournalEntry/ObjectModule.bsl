@@ -4,6 +4,10 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 	
+	If CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "SetELedger", False) Then
+		Return;
+	EndIf;
+	
 	If ValueIsFilled(ThisObject.Basis) Then
 		ThisObject.Date = ThisObject.Basis.Date;
 		If CommonFunctionsClientServer.ObjectHasProperty(ThisObject.Basis, "Branch") Then
@@ -39,10 +43,16 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 					
 		AccountingServer.SetDataRegisterRecords(DataTable, ThisObject.LedgerType, ThisObject.RegisterRecords.Basic);
 	EndIf;
+	
+	ThisObject.DocumentAmount = ThisObject.RegisterRecords.Basic.Unload().Total("Amount");
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
+		Return;
+	EndIf;
+	
+	If CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "SetELedger", False) Then
 		Return;
 	EndIf;
 	

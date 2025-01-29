@@ -184,6 +184,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="faad1c4a-1cd9-4e58-beda-a9406b5799e9">
+      <name>Branch</name>
+      <synonym>
+        <key>en</key>
+        <value>Branch</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <createOnInput>DontUse</createOnInput>
+      <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+    </attributes>
     <attributes uuid="9398e525-a9a0-4e3f-9bd3-1c25118c2080">
       <name>Quantity</name>
       <synonym>

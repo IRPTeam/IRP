@@ -4,6 +4,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	SetCodeMask();
+	Items.ExtDimensionTypesELedgerDetailed.Visible = FOServer.IsUseELedger();
 EndProcedure
 
 &AtClient
@@ -63,6 +64,22 @@ Procedure ExtDimensionTypesOnStartEdit(Item, NewRow, Clone)
 		Item.CurrentData.Amount = True;
 		Item.CurrentData.Currency = Object.Currency;
 		Item.CurrentData.Quantity = Object.Quantity;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure ExtDimensionTypesELedgerDetailedOnChange(Item)
+	CurrentData = Items.ExtDimensionTypes.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If CurrentData.ELedgerDetailed Then
+		For Each Row In Object.ExtDimensionTypes Do
+			If CurrentData.LineNumber <> Row.LineNumber Then
+				Row.ELedgerDetailed = False;
+			EndIf;
+		EndDo;
 	EndIf;
 EndProcedure
 

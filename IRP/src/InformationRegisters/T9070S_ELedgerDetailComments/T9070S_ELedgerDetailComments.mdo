@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2059ee65-ce9d-4e04-8fda-ebb41a4d96cb">
+  <producedTypes>
+    <selectionType typeId="9bf56ced-d070-41da-be8e-1e2174358cd2" valueTypeId="9dfdf39f-8883-45a4-8cb5-4d1aae099bcb"/>
+    <listType typeId="ddda7898-f21f-4188-8ff8-ae99b0756800" valueTypeId="c02a5ac5-28f2-43b7-8672-3265f28539a6"/>
+    <managerType typeId="37e28216-b696-426d-b77d-d05878f37f1d" valueTypeId="955c1600-dc94-4353-8061-392a097eae77"/>
+    <recordSetType typeId="26d97d54-3b34-467d-849b-25f30235fc95" valueTypeId="463e0289-eea6-41ad-bd9c-8cba372af966"/>
+    <recordKeyType typeId="715b79dd-77f1-4171-a612-ee3e03ffb39e" valueTypeId="9fe92330-f62c-4527-b0ba-94ada383ae9b"/>
+    <recordType typeId="805932cc-5c3a-4ac3-9d0a-f4fad62b90bb" valueTypeId="4c972e02-b082-4162-98f6-f757401fb363"/>
+    <recordManagerType typeId="989626a9-5b48-4e68-9253-8b3ee9a79d88" valueTypeId="019c9dc1-19cc-4a44-ae2f-30796b75a856"/>
+  </producedTypes>
+  <name>T9070S_ELedgerDetailComments</name>
+  <synonym>
+    <key>en</key>
+    <value>T9070 eLedger detail comments</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="2124ccfc-b339-4343-9db0-fee4f7dde3ee">
+    <name>DetailComment</name>
+    <synonym>
+      <key>en</key>
+      <value>Detail comment</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>512</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="37d3eefe-d2fc-4657-accc-29eb92b78786">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="4d4ffc16-f07f-40c1-b4ca-93f25e1d5b83">
+    <name>LedgerType</name>
+    <synonym>
+      <key>en</key>
+      <value>Ledger type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LedgerTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="077c1916-3b51-4a50-b2d8-9a13198d0973">
+    <name>AccountingOperation</name>
+    <synonym>
+      <key>en</key>
+      <value>Accounting operation</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.AccountingOperations</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="dc3fce65-57cb-4407-905f-31f0101cc5fe">
+    <name>LocalizationCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Localization code</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>5</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <forms uuid="9b853df8-3267-45a6-b537-0b65cc187c83">
+    <name>EditForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Edit form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:InformationRegister>

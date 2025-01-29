@@ -133,8 +133,13 @@ Procedure Upload(StructureParams)
 	// 
 	// BeginPutFileToServer(New CallbackDescription("Upload_END", ThisObject, Structure), , , , OpenFileDialog, StructureParams.UUID);
 	
+	FileExtension = StructureParams.FileExtension;
+	If Not ValueIsFilled(FileExtension) Then
+		FileExtension = PictureViewerClientServer.FilterForPicturesDialog();
+	EndIf;
+	
 	FilesClient.StartFileLoading(
-		PictureViewerClientServer.FilterForPicturesDialog(), 
+		FileExtension, 
 		New CallbackDescription("Upload_END", ThisObject, Structure), 
 		StructureParams.UUID);
 	
@@ -240,11 +245,16 @@ Procedure CurrentFilesTableOnActivateRow(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	If IsPDF(CurrentData.File) Then 
+	
+	Extension = CommonFunctionsServer.GetRefAttribute(CurrentData.File, "Extension"); // String
+	
+	If Not StrCompare(Extension, "pdf") Then
 		ShowPreviewPDF(CurrentData.File);
-	Else
+	ElsIf PictureViewerServer.isImage(Extension) Then
 		ShowPreview(CurrentData.File);
 		GetFullPicture(CurrentData);
+	Else
+		ShowNoPreview();
 	EndIf;
 EndProcedure
 
@@ -276,6 +286,12 @@ Procedure UpdateDocsDataInTables(DocsArray)
 	QueryStructure = PrepareQueryStructure(DocsArray);
 	FillDocumentsTables(QueryStructure, True);
 	
+EndProcedure
+
+&AtServer
+Procedure ShowNoPreview()
+	Items.PDFViewer.Visible = False;
+	Items.Preview.Visible = False;
 EndProcedure
 
 &AtServer
@@ -398,7 +414,8 @@ Function GetCurrentDocInTable()
 		CurrentDataCurrentAttachments = CurrentDataAttachedDocs;
 	EndIf;
 	PrintFormName = CurrentDataCurrentAttachments.FilePresentation;
-	FilePrefix = GetDocPrefix(CurrentData.DocRef, CurrentDataCurrentAttachments.NamingFormat);		
+	FilePrefix = GetDocPrefix(CurrentData.DocRef, CurrentDataCurrentAttachments.NamingFormat);
+	FileExtension = CurrentDataCurrentAttachments.FileExtension; 		
 	
 	Structure.Object.Insert("Ref", CurrentData.DocRef); 
 	Structure.Insert("ID", CurrentData.ID);
@@ -409,6 +426,7 @@ Function GetCurrentDocInTable()
 	Structure.Insert("Storage", CurrentData.FileStorageVolume);
 	Structure.Insert("FilePrefix", FilePrefix);
 	Structure.Insert("PrintFormName", PrintFormName);
+	Structure.Insert("FileExtension", FileExtension);
 	Structure.Insert("MaxSize", CurrentDataAttachedDocs.MaximumFileSize);
 	
 	Return Structure;
@@ -660,7 +678,6 @@ EndProcedure
 Async Procedure OpenDocByRef(DocRef)
 	OpenValueAsync(DocRef);
 EndProcedure	
-
 
 &AtServer
 Procedure FillDocumentsToControl()
@@ -999,9 +1016,8 @@ EndProcedure
 &AtClient
 Function IsPDF(FileRef)
 	
-	FileAsString = String(FileRef);
-	
-	Return ?(StrFind(FileAsString, ".pdf")> 0, True, False)
+	Extension = CommonFunctionsServer.GetRefAttribute(FileRef, "Extension"); // String
+	Return Not StrCompare(Extension, "pdf");
 	
 EndFunction
 

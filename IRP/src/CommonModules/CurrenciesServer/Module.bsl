@@ -127,6 +127,10 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 	If Not IsOffsetOfAdvances Then
 		UpdatePartnerBalanceTables(PartnerBalanceTables);
 	EndIf;
+	
+	If Parameters.Property("PostingDataTables") Then
+		SetAccountingCurrenciesAndAmounts(Parameters);
+	EndIf;
 EndProcedure
 
 Function IsUseAgreementMovementType(RegMetadata)
@@ -1922,6 +1926,74 @@ Function GetMetadataReisterName(RegisterName)
 		Return RegisterName;
 	EndIf;
 EndFunction
+
+#EndRegion
+
+#Region ACCOUNTING_PARTNER_BALANCE
+
+Procedure SetAccountingCurrenciesAndAmounts(Parameters)
+	RegAccountingAmounts = Parameters.PostingDataTables.Get(Metadata.AccumulationRegisters.T1040T_AccountingAmounts);
+	RegPartnerBalance = Parameters.PostingDataTables.Get(Metadata.AccumulationRegisters.R5020B_PartnersBalance);
+	
+	If RegAccountingAmounts = Undefined Or RegPartnerBalance = Undefined Then
+		Return;
+	EndIf;
+	
+	If RegAccountingAmounts.PrepareTable.Count() = 0 Or RegPartnerBalance.PrepareTable.Count() = 0 Then
+		Return;
+	EndIf;
+	
+	AccountingKeyIsPresent = CommonFunctionsClientServer.ObjectHasProperty(RegAccountingAmounts.PrepareTable[0], "Key");
+	PartnerBalanceKeyIsPresent = CommonFunctionsClientServer.ObjectHasProperty(RegPartnerBalance.PrepareTable[0], "Key");
+	
+	AccountKeyIsFilled = False;
+	If AccountingKeyIsPresent Then
+		AccountKeyIsFilled = Not IsBlankString(RegAccountingAmounts.PrepareTable[0].Key);
+	EndIf;
+	
+	PartnerBalanceKeyIsFilled = False;
+	If PartnerBalanceKeyIsPresent Then
+		PartnerBalanceKeyIsFilled = Not IsBlankString(RegPartnerBalance.PrepareTable[0].Key);
+	EndIf;
+	
+	If AccountKeyIsFilled <> PartnerBalanceKeyIsFilled Then
+		Return;
+	EndIf;
+	
+	Map = AccountingServer.GetMappingOperationsToPartnerBalance();	
+	
+	For Each Row In RegAccountingAmounts.PrepareTable Do
+		ArrayOfOperationInfo = Map.Get(Row.Operation);
+		If ArrayOfOperationInfo = Undefined Then
+			Continue;
+		EndIf;
+		
+		Filter = New Structure();
+		Filter.Insert("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
+		If AccountKeyIsFilled Then
+			Filter.Insert("Key", Row.Key);
+		EndIf;
+			
+		PartnerBalanceRows = RegPartnerBalance.PrepareTable.Copy(Filter); 
+				
+		For Each OperationInfo In ArrayOfOperationInfo Do
+			FoundedRow = Undefined;
+			For Each PartnerBalanceRow In PartnerBalanceRows Do
+				If ValueIsFilled(PartnerBalanceRow[OperationInfo.ResourceName]) Then
+					FoundedRow = PartnerBalanceRow;
+					Break;
+				EndIf;
+			EndDo;
+			
+			If FoundedRow = Undefined Then
+				Continue;
+			EndIf;
+			
+			Row[OperationInfo.AccountType + "Currency"] = FoundedRow.Currency;
+			Row[OperationInfo.AccountType + "CurrencyAmount"] = FoundedRow[OperationInfo.ResourceName];			
+		EndDo;
+	EndDo;
+EndProcedure
 
 #EndRegion
 

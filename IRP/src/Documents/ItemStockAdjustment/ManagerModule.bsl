@@ -485,6 +485,7 @@ Function T6020S_BatchKeysInfo()
 		   |	ItemList.Period,
 		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction,
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	ItemList.Store,
 		   |	ItemList.ItemKey,
 		   |	ItemList.Key AS RowID,
@@ -496,6 +497,7 @@ Function T6020S_BatchKeysInfo()
 		   |	TRUE
 		   |GROUP BY
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	ItemList.ItemKey,
 		   |	ItemList.Period,
 		   |	ItemList.Store,
@@ -508,6 +510,7 @@ Function T6020S_BatchKeysInfo()
 		   |	ItemList.Period,
 		   |	VALUE(Enum.BatchDirection.Expense),
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	ItemList.Store,
 		   |	ItemList.ItemKeyWriteOff,
 		   |	ItemList.Key,
@@ -518,6 +521,7 @@ Function T6020S_BatchKeysInfo()
 		   |	TRUE
 		   |GROUP BY
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	ItemList.ItemKeyWriteOff,
 		   |	ItemList.Period,
 		   |	ItemList.Store,

@@ -189,6 +189,7 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams.Insert("Ref", Ref);
 	StrParams.Insert("Period", EndOfDay(Ref.EndDate));
 	StrParams.Insert("Company", Ref.Company);
+	StrParams.Insert("Branch", Ref.Branch);
 	Return StrParams;
 EndFunction
 
@@ -215,6 +216,7 @@ Function T6020S_BatchKeysInfo()
 	Return "SELECT
 		   |	&Period AS Period,
 		   |	&Company AS Company,
+		   |	&Branch AS Branch,
 		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction,
 		   |	BatchKeysInfo.Store,
 		   |	BatchKeysInfo.ItemKey,

@@ -11,5 +11,6 @@
   <content>Document.PhysicalInventory</content>
   <content>Document.StockAdjustmentAsSurplus</content>
   <content>Document.StockAdjustmentAsWriteOff</content>
+  <content>Document.StockCorrection</content>
   <parentSubsystem>Subsystem.Inventory</parentSubsystem>
 </mdclass:Subsystem>

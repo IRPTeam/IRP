@@ -1114,6 +1114,10 @@ Procedure ShowRowKey(Form) Export
 EndProcedure
 
 Procedure SetCurrentRow(Object, Form, Item, FormParameters, AttributeName) Export
+	If FormParameters.Property("CurrentRow") Then
+		Return;
+	EndIf;
+	
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, Item.Name) Then
 		FormParameters.Insert("CurrentRow", Object[Item.Name]);
 	Else

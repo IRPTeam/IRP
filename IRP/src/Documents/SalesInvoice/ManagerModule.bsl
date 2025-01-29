@@ -1220,6 +1220,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Key,
 		|	ItemList.ItemKey,
 		|	ItemList.Store,
+		|	ItemList.Branch,
 		|	ItemList.Company,
 		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorBatches,
 		|	ItemList.Quantity AS Quantity,
@@ -1237,6 +1238,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Key,
 		|	ItemList.ItemKey,
 		|	ItemList.TradeAgentStore,
+		|	ItemList.Branch,
 		|	ItemList.Company,
 		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorBatches,
 		|	ItemList.Quantity AS Quantity,
@@ -1254,6 +1256,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.Store,
+		|	BatchKeysInfo_1.Branch,
 		|	BatchKeysInfo_1.Company,
 		|	CASE
 		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
@@ -1275,6 +1278,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	BatchKeysInfo_2.ItemKey,
 		|	BatchKeysInfo_2.TradeAgentStore,
+		|	BatchKeysInfo_2.Branch,
 		|	BatchKeysInfo_2.Company,
 		|	CASE
 		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
@@ -1295,6 +1299,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	BatchKeysInfo.ItemKey,
 		|	BatchKeysInfo.Store,
+		|	BatchKeysInfo.Branch,
 		|	BatchKeysInfo.Company,
 		|	SUM(ISNULL(BatchKeysInfo.Quantity, 0)) AS Quantity,
 		|	BatchKeysInfo.Period,
@@ -1309,6 +1314,7 @@ Function T6020S_BatchKeysInfo()
 		|GROUP BY
 		|	BatchKeysInfo.ItemKey,
 		|	BatchKeysInfo.Store,
+		|	BatchKeysInfo.Branch,
 		|	BatchKeysInfo.Company,
 		|	BatchKeysInfo.Period,
 		|	BatchKeysInfo.Direction,

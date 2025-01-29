@@ -2,6 +2,10 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
+	If Object.Parent <> Catalogs.ConfigurationMetadata.Documents Then
+		Items.ELedgerLongDescription.Visible = False;
+		Items.ELedgerShortDescription.Visible = False;
+	EndIf;
 EndProcedure
 
 #Region COMMANDS

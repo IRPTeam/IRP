@@ -511,6 +511,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Key,
 		|	ItemList.ItemKey,
 		|	ItemList.Store,
+		|	ItemList.Branch,
 		|	ItemList.Company,
 		|	ItemList.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
 		|	ItemList.Company.LandedCostCurrencyMovementType.Currency AS Currency,
@@ -530,6 +531,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.Store,
+		|	BatchKeysInfo_1.Branch,
 		|	BatchKeysInfo_1.Company,
 		|	BatchKeysInfo_1.CurrencyMovementType,
 		|	BatchKeysInfo_1.Currency,
@@ -555,6 +557,7 @@ Function T6020S_BatchKeysInfo()
 		|GROUP BY
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.Store,
+		|	BatchKeysInfo_1.Branch,
 		|	BatchKeysInfo_1.Company,
 		|	BatchKeysInfo_1.CurrencyMovementType,
 		|	BatchKeysInfo_1.Currency,
@@ -568,6 +571,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.Store,
+		|	BatchKeysInfo_1.Branch,
 		|	BatchKeysInfo_1.Company,
 		|	BatchKeysInfo_1.CurrencyMovementType,
 		|	BatchKeysInfo_1.Currency,

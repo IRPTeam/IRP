@@ -567,6 +567,7 @@ Function T6020S_BatchKeysInfo()
 		   |	ItemLIst.Key,
 		   |	ItemList.ItemKey,
 		   |	ItemList.TradeAgentStore AS Store,
+		   |	ItemList.Branch AS Branch,
 		   |	ItemList.Company,
 		   |	ItemList.Quantity AS Quantity,
 		   |	ItemList.Period,
@@ -581,6 +582,7 @@ Function T6020S_BatchKeysInfo()
 		   |SELECT
 		   |	BatchKeysInfo_1.ItemKey,
 		   |	BatchKeysInfo_1.Store,
+		   |	BatchKeysInfo_1.Branch,
 		   |	BatchKeysInfo_1.Company,
 		   |	SUM(CASE
 		   |		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
@@ -599,6 +601,7 @@ Function T6020S_BatchKeysInfo()
 		   |GROUP BY
 		   |	BatchKeysInfo_1.ItemKey,
 		   |	BatchKeysInfo_1.Store,
+		   |	BatchKeysInfo_1.Branch,
 		   |	BatchKeysInfo_1.Company,
 		   |	BatchKeysInfo_1.Period,
 		   |	BatchKeysInfo_1.Direction,

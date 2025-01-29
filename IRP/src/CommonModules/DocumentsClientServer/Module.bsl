@@ -206,7 +206,9 @@ EndProcedure
 Function FindRowInArrayOfStructures(ArrayOfStructures, KeyNames, 
                                     Value1 = Undefined, 
                                     Value2 = Undefined, 
-                                    Value3 = Undefined) Export
+                                    Value3 = Undefined, 
+                                    Value4 = Undefined, 
+                                    Value5 = Undefined) Export
 	ArrayOfKeys = StrSplit(KeyNames, ",");
 	EqualRow = Undefined;
 	For Each Row In ArrayOfStructures Do
@@ -230,6 +232,20 @@ Function FindRowInArrayOfStructures(ArrayOfStructures, KeyNames,
 			
 			If KeyNumber = 3 And Value3 <> Undefined Then
 				If Row[TrimAll(KeyName)] <> Value3 Then
+					RowIsEqual = False;
+					Break;
+				EndIf;
+			EndIf;
+			
+			If KeyNumber = 4 And Value4 <> Undefined Then
+				If Row[TrimAll(KeyName)] <> Value4 Then
+					RowIsEqual = False;
+					Break;
+				EndIf;
+			EndIf;
+			
+			If KeyNumber = 5 And Value5 <> Undefined Then
+				If Row[TrimAll(KeyName)] <> Value5 Then
 					RowIsEqual = False;
 					Break;
 				EndIf;

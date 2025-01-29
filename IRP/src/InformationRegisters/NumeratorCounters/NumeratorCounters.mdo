@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="880b2281-e4bf-4d9d-952a-519e5dda60b0">
+  <producedTypes>
+    <selectionType typeId="7a790b43-6c0d-48ff-840f-f3229fd6c9f5" valueTypeId="3135d7f0-8f78-4ae2-af99-62dab2ad86e4"/>
+    <listType typeId="3540e961-efb1-4507-b485-98c4e802ea45" valueTypeId="a3453f16-c32e-427b-ab52-df5ff72e4472"/>
+    <managerType typeId="a3136229-5b92-4d63-bb30-68931817a748" valueTypeId="b93af5ac-ff0b-499e-837a-013a944d917b"/>
+    <recordSetType typeId="ab6cf12e-06fa-4de9-ade4-b22e8d28e248" valueTypeId="129084c8-d662-4744-911c-04f146e32474"/>
+    <recordKeyType typeId="e37f544d-403c-43d1-97f4-0e17cfcfc630" valueTypeId="daa37ba9-fc2b-4d5a-a611-a25073657867"/>
+    <recordType typeId="229545c1-1725-4ac3-8a7d-3c2db9451679" valueTypeId="c3f43421-ffff-4d10-854f-48c924a08180"/>
+    <recordManagerType typeId="9f402708-c2ff-4d7e-9d1d-52d7748ef397" valueTypeId="12505fa1-d6f2-45dc-90c4-550e41b816ad"/>
+  </producedTypes>
+  <name>NumeratorCounters</name>
+  <synonym>
+    <key>en</key>
+    <value>Numerator counters</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="9726c1a9-9925-47d2-b270-dd197ecf41ff">
+    <name>Counter</name>
+    <synonym>
+      <key>en</key>
+      <value>Counter</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>12</precision>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="6846097c-5a32-4fbd-9c7a-3a04d3d7ed5f">
+    <name>NumeratorRules</name>
+    <synonym>
+      <key>en</key>
+      <value>Numerator rules</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.NumeratorGroups</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="530f9116-f7da-4c8a-a6f3-72113a1a0752">
+    <name>TemplateNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Template number</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>150</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="a46a6732-cef5-4dc3-8e03-84caa831cb94">
+    <name>StartDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Start date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+</mdclass:InformationRegister>

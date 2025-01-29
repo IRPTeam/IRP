@@ -173,6 +173,11 @@ Procedure RefreshRowsAllocationTreesAtServer()
 			NewRow_SecondLevel.Icon = 0;
 			FillPropertyValues(NewRow_SecondLevel, RowDetail);
 			NewRow_SecondLevel.Presentation = String(NewRow_SecondLevel.ItemKey.Item) + ", " + String(NewRow_SecondLevel.ItemKey);
+			
+			If ValueIsFilled(NewRow_SecondLevel.SerialLotNumber) Then
+				NewRow_SecondLevel.Presentation = NewRow_SecondLevel.Presentation + ", " + String(NewRow_SecondLevel.SerialLotNumber);
+			EndIf;
+			
 			TotalAmount    = TotalAmount    + NewRow_SecondLevel.Amount;
 			TotalTaxAmount = TotalTaxAmount + NewRow_SecondLevel.TaxAmount;
 			FooterTotalAmount    = FooterTotalAmount    + NewRow_SecondLevel.Amount;
@@ -328,6 +333,7 @@ Procedure AllocationRowsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Para
 		SelectedRow.Insert("Document"  , Row.Document);
 		SelectedRow.Insert("Store"     , Row.Store);
 		SelectedRow.Insert("ItemKey"   , Row.ItemKey);
+		SelectedRow.Insert("SerialLotNumber", Row.SerialLotNumber);
 		ArrayOfSelectedRows.Add(SelectedRow)
 	EndDo;
 	
@@ -471,8 +477,13 @@ Procedure AllocationRowsBeforeAddRowEnd(Result, AdditionalParameters) Export
 	
 	// Add new rows
 	For Each ResultRow In Result.SelectedRows Do
-		If Object.AllocationList.FindRows(New Structure("BasisRowID, RowID, Document", 
-			ResultRow.BasisRowID, ResultRow.RowID, ResultRow.Document)).Count() Then
+		Filter = New Structure();
+		Filter.Insert("BasisRowID", ResultRow.BasisRowID);
+		Filter.Insert("RowID", ResultRow.RowID);
+		Filter.Insert("Document", ResultRow.Document);
+		Filter.Insert("ItemKey", ResultRow.ItemKey);
+		Filter.Insert("SerialLotNumber", ResultRow.SerialLotNumber);
+		If Object.AllocationList.FindRows(Filter).Count() Then
 			Continue;
 		EndIf;
 		NewRow = Object.AllocationList.Add();
@@ -485,8 +496,9 @@ Procedure AllocationRowsBeforeAddRowEnd(Result, AdditionalParameters) Export
 		If Result.BasisRowID <> Row.BasisRowID Then
 			Continue;
 		EndIf;
-		If DocumentsClientServer.FindRowInArrayOfStructures(Result.SelectedRows, "BasisRowID, RowID, Document", 
-			Row.BasisRowID, Row.RowID, Row.Document) = Undefined Then
+		If DocumentsClientServer.FindRowInArrayOfStructures(Result.SelectedRows, 
+			"BasisRowID, RowID, Document, ItemKey, SerialLotNumber", 
+			Row.BasisRowID, Row.RowID, Row.Document, Row.ItemKey, Row.SerialLotNumber) = Undefined Then
 			ArrayForDelete.Add(Row);
 		EndIf;
 	EndDo;
@@ -532,7 +544,10 @@ Procedure AllocateRevenueAmount(Command)
 		For Each Row_SecondLevel In Row_TopLevel.GetItems() Do
 			For Each Row In Result.ArrayOfAllocatedAmounts Do
 				If Row_SecondLevel.BasisRowID = Row.BasisRowID
-				 	And Row_SecondLevel.RowID = Row.RowID Then
+				 	And Row_SecondLevel.RowID = Row.RowID 
+				 	And Row_SecondLevel.ItemKey = Row.ItemKey 
+				 	And Row_SecondLevel.SerialLotNumber = Row.SerialLotNumber Then
+				 		
 						Row_SecondLevel.Amount    = Row.Amount;
 						Row_SecondLevel.TaxAmount = Row.TaxAmount;
 						TotalAmount    = TotalAmount    + Row.Amount;
@@ -564,7 +579,10 @@ Procedure UpdateAllocatedStatus()
 			
 			For Each RowAlloclv1 In ThisObject.AllocationRows.GetItems() Do
 				For Each RowAlloclv2 In RowAlloclv1.GetItems() Do
-					If RowLevel2.RowID = RowAlloclv2.BasisRowID Then
+					If RowLevel2.RowID = RowAlloclv2.BasisRowID 
+						And RowLevel2.ItemKey = RowAlloclv2.ItemKey 
+						And RowLevel2.SerialLotNumber = RowAlloclv2.SerialLotNumber Then
+						
 						AmountByRows    = AmountByRows    + RowAlloclv2.Amount;
 						TaxAmountByRows = TaxAmountByRows + RowAlloclv2.TaxAmount;
 					EndIf;
@@ -617,13 +635,23 @@ Function AllocateRevenueAmountAtServer()
 			TotalAllocated    = TotalAllocated    + Amount;
 			TotalTaxAllocated = TotalTaxAllocated + TaxAmount;
 			
-			AllocatedAmount = New Structure("BasisRowID, RowID, Amount, TaxAmount", 
-				Row_RevenueList.RowID, Row_BatchKeyInfo.RowID, Amount, TaxAmount);
+			AllocatedAmount = New Structure();
+			AllocatedAmount.Insert("BasisRowID", Row_RevenueList.RowID);
+			AllocatedAmount.Insert("RowID", Row_BatchKeyInfo.RowID);
+			AllocatedAmount.Insert("Amount", Amount);
+			AllocatedAmount.Insert("TaxAmount", TaxAmount);
+			AllocatedAmount.Insert("ItemKey", Row_BatchKeyInfo.ItemKey);
+			AllocatedAmount.Insert("SerialLotNumber", Row_BatchKeyInfo.SerialLotNumber);
 			
 			Result.ArrayOfAllocatedAmounts.Add(AllocatedAmount);
 			
-			AllocationListRows = Object.AllocationList.FindRows(New Structure("BasisRowID, RowID",
-				Row_RevenueList.RowID, Row_BatchKeyInfo.RowID));
+			Filter = New Structure();
+			Filter.Insert("BasisRowID", Row_RevenueList.RowID);
+			Filter.Insert("RowID", Row_BatchKeyInfo.RowID);
+			Filter.Insert("ItemKey", Row_BatchKeyInfo.ItemKey);
+			Filter.Insert("SerialLotNumber", Row_BatchKeyInfo.SerialLotNumber);
+			
+			AllocationListRows = Object.AllocationList.FindRows(Filter);
 			
 			If AllocationListRows.Count() Then
 				AllocationListRows[0].Amount    = Amount;
@@ -652,7 +680,11 @@ Function AllocateRevenueAmountAtServer()
 		If Row_RevenueList.Amount <> TotalAllocated And MaxRow <> Undefined Then
 			MaxRow.Amount = MaxRow.Amount + (Row_RevenueList.Amount - TotalAllocated);
 			For Each Row In Result.ArrayOfAllocatedAmounts Do
-				If Row.BasisRowID = MaxRow.BasisRowID And Row.RowID = MaxRow.RowID Then
+				If Row.BasisRowID = MaxRow.BasisRowID 
+					And Row.RowID = MaxRow.RowID 
+					And Row.ItemKey = MaxRow.ItemKey 
+					And Row.SerialLotNumber = MaxRow.SerialLotNumber Then
+						
 					Row.Amount = MaxRow.Amount;
 					Break;
 				EndIf;
@@ -662,7 +694,11 @@ Function AllocateRevenueAmountAtServer()
 		If Row_RevenueList.TaxAmount <> TotalTaxAllocated And MaxRowTax <> Undefined Then
 			MaxRowTax.TaxAmount = MaxRowTax.TaxAmount + (Row_RevenueList.TaxAmount - TotalTaxAllocated);
 			For Each Row In Result.ArrayOfAllocatedAmounts Do
-				If Row.BasisRowID = MaxRow.BasisRowID And Row.RowID = MaxRow.RowID Then
+				If Row.BasisRowID = MaxRow.BasisRowID 
+					And Row.RowID = MaxRow.RowID 
+					And Row.ItemKey = MaxRow.ItemKey 
+					And Row.SerialLotNumber = MaxRow.SerialLotNumber Then
+						
 					Row.TaxAmount = MaxRow.TaxAmount;
 					Break;
 				EndIf;
@@ -681,7 +717,8 @@ Function GetBatchKeyInfo(FilterTable)
 	|	FilterTable.RowID,
 	|	FilterTable.Document,
 	|	FilterTable.Store,
-	|	FilterTable.ItemKey
+	|	FilterTable.ItemKey,
+	|	FilterTable.SerialLotNumber
 	|INTO FilterTable
 	|FROM
 	|	&FilterTable AS FilterTable
@@ -692,6 +729,7 @@ Function GetBatchKeyInfo(FilterTable)
 	|	FilterTable.RowID,
 	|	FilterTable.Document,
 	|	FilterTable.ItemKey,
+	|	FilterTable.SerialLotNumber,
 	|	FilterTable.Store,
 	|	SUM(T6020S_BatchKeysInfo.InvoiceAmount) AS Amount,
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
@@ -706,9 +744,11 @@ Function GetBatchKeyInfo(FilterTable)
 	|		ON FilterTable.Document = T6020S_BatchKeysInfo.Recorder
 	|		AND FilterTable.Store = T6020S_BatchKeysInfo.Store
 	|		AND FilterTable.ItemKey = T6020S_BatchKeysInfo.ItemKey
+	|		AND FilterTable.SerialLotNumber = T6020S_BatchKeysInfo.SerialLotNumber
 	|GROUP BY
 	|	FilterTable.Document,
 	|	FilterTable.ItemKey,
+	|	FilterTable.SerialLotNumber,
 	|	FilterTable.RowID,
 	|	FilterTable.Store";
 	Query.SetParameter("FilterTable", FilterTable);
@@ -811,6 +851,20 @@ Procedure UpdateAccountingData()
 		                                          _AccountingExtDimensions, "AllocationResult");
 	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
 	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
+EndProcedure
+
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure
 
 #Region ItemCompany

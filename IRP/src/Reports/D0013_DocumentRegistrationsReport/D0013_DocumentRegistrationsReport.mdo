@@ -124,6 +124,8 @@
       <types>DocumentRef.ProductionPlanningClosing</types>
       <types>DocumentRef.RetailGoodsReceipt</types>
       <types>DocumentRef.CashExpense</types>
+      <types>DocumentRef.ELedgerRegistry</types>
+      <types>DocumentRef.StockCorrection</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

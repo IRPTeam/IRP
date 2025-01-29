@@ -17,5 +17,10 @@
   <content>Catalog.FileStorageVolumes</content>
   <content>Catalog.DataBaseStatus</content>
   <content>Catalog.InterfaceGroups</content>
+  <content>InformationRegister.NumeratorCounters</content>
+  <content>Catalog.NumeratorGroups</content>
+  <content>Catalog.NumeratorBasicRules</content>
+  <content>FunctionalOption.UseNumberingRules</content>
+  <content>CommonAttribute.NumeratorRules</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

@@ -61,7 +61,7 @@ EndProcedure
 
 #Region SalesOrderClosing
 
-Function GetClosingBySalesOrder(SalesOrder) Export
+Function GetClosingBySalesOrder(SalesOrder, ClosingDoc = Undefined) Export
 	SalesOrderClosing = Documents.SalesOrderClosing.EmptyRef();
 
 	Query = New Query();
@@ -72,9 +72,16 @@ Function GetClosingBySalesOrder(SalesOrder) Export
 	|	Document.SalesOrderClosing AS SalesOrderClosing
 	|WHERE
 	|	SalesOrderClosing.Posted
-	|	AND SalesOrderClosing.SalesOrder = &SalesOrder";
+	|	AND SalesOrderClosing.SalesOrder = &SalesOrder
+	|	AND CASE
+	|		WHEN &Filter_ClosingDoc
+	|			THEN SalesOrderClosing.Ref <> &ClosingDoc
+	|		ELSE TRUE
+	|	END";
 
 	Query.SetParameter("SalesOrder", SalesOrder);
+	Query.SetParameter("Filter_ClosingDoc", ValueIsFilled(ClosingDoc));
+	Query.SetParameter("ClosingDoc", ClosingDoc);
 
 	QueryResult = Query.Execute();
 
@@ -233,7 +240,7 @@ EndProcedure
 
 #Region PurchaseOrderClosing
 
-Function GetClosingByPurchaseOrder(PurchaseOrder) Export
+Function GetClosingByPurchaseOrder(PurchaseOrder, ClosingDoc = Undefined) Export
 	PurchaseOrderClosing = Documents.PurchaseOrderClosing.EmptyRef();
 
 	Query = New Query();
@@ -244,9 +251,16 @@ Function GetClosingByPurchaseOrder(PurchaseOrder) Export
 	|	Document.PurchaseOrderClosing AS PurchaseOrderClosing
 	|WHERE
 	|	PurchaseOrderClosing.Posted
-	|	AND PurchaseOrderClosing.PurchaseOrder = &PurchaseOrder";
+	|	AND PurchaseOrderClosing.PurchaseOrder = &PurchaseOrder
+	|	AND CASE
+	|		WHEN &FIlter_ClosingDoc
+	|			THEN PurchaseOrderClosing.Ref <> &ClosingDoc
+	|		ELSE TRUE
+	|	END";
 
 	Query.SetParameter("PurchaseOrder", PurchaseOrder);
+	Query.SetParameter("FIlter_ClosingDoc", ValueIsFilled(ClosingDoc));
+	Query.SetParameter("ClosingDoc", ClosingDoc);
 
 	QueryResult = Query.Execute();
 

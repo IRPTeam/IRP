@@ -1,3 +1,4 @@
+
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
@@ -59,3 +60,11 @@ Procedure OnCopy(CopiedObject)
 	ThisObject.SalesOrder      = Undefined;
 	ThisObject.TransactionType = Undefined;
 EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	If ValueIsFilled(DocOrderClosingServer.GetClosingBySalesOrder(ThisObject.SalesOrder, ThisObject.Ref)) Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_178);
+		Cancel = True;
+	EndIf;	
+EndProcedure
+

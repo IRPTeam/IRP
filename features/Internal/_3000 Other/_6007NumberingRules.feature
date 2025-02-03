@@ -151,7 +151,7 @@ Scenario: _607701 check numeration for documents (continuous numbering is used f
 		Then the form attribute named "DocumentNumber" became equal to "72520001"
 				
 		
-Scenario: _607701 check numeration for catalog (partner term)
+Scenario: _607702 check numeration for catalog (partner term)
 	And I close all client application windows
 	* Create Partber term
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
@@ -163,5 +163,5 @@ Scenario: _607701 check numeration for catalog (partner term)
 		And I input "24.01.2025" text in the field named "Date"
 		And I change the radio button named "Type" value to "Customer"
 		And I click "Save" button
-		Then the form attribute named "DocumentNumber" became equal to "72510128"
+		Then the form attribute named "Number" became equal to "72510128"
 	And I close all client application windows

@@ -160,6 +160,20 @@ Procedure ErrorsOnActivateRow(Item)
 	Items.Records.CurrentRow = Row.GetID();
 EndProcedure
 
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	NumberingRulesServer.SetSourceNewNumber(Object);
+EndProcedure
+
 #Region ADD_ATTRIBUTES
 
 &AtClient

@@ -2,6 +2,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)	
 	ThisObject.Formula     = Parameters.Formula;
+	ThisObject.SourceName  = Parameters.SourceName;
 	ThisObject.PropertySet = Parameters.PropertySet;
 	DCS = Catalogs[Parameters.TemplateOwner].GetTemplate(Parameters.TemplateName);	
 	DCS.Parameters.PropertySet.Value = ThisObject.PropertySet;
@@ -171,7 +172,7 @@ Function OperandTextProcessing(Val OperandText)
 		
 	OperandText = StrReplace(OperandText, "[", "");
 	OperandText = StrReplace(OperandText, "]", "");
-	OperandText = StrReplace(OperandText, "Item.", "");
+	OperandText = StrReplace(OperandText, SourceName+".", "");
 	OperandText = GetAttributeUniqueID(OperandText);
 	Return "[" + OperandText + "]";
 EndFunction

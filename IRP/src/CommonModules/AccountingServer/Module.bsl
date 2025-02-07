@@ -2578,7 +2578,6 @@ Function GetTableOfJEDocuments(ArrayOfBasisDocuments, ArrayOfLedgerTypes) Export
 	|	Documents AS Documents
 	|		LEFT JOIN Document.JournalEntry AS JournalEntry
 	|		ON Documents.Document = JournalEntry.Basis
-	|		AND NOT JournalEntry.DeletionMark
 	|		AND JournalEntry.LedgerType = Documents.LedgerType";
 
 	DocumentTable = New ValueTable();

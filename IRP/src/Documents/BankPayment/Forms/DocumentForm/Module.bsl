@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -681,6 +682,20 @@ Procedure PaymentByDocumentSelectionEnd(Result, NotifyParams) Export
 	For Each Row In Result Do
 		ViewClient_V2.PaymentListAddFilledRow(Object, ThisObject, Row);
 	EndDo;
+EndProcedure
+
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure
 
 #EndRegion

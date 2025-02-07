@@ -1644,6 +1644,16 @@ Scenario: set True value to the constant Use lock data modification
 		And I click "Save" button
 		And I close current window	
 
+Scenario: set True value to the constant Use numbering rules
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                        |
+			| 'Use numbering rules'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+
 Scenario: set False value to the constant DisableLinkedRowsIntegrity
 		And I execute 1C:Enterprise script at server
 				| "Constants.DisableLinkedRowsIntegrity.Set(False);"     |

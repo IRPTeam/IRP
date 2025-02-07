@@ -346,7 +346,7 @@ Scenario: _972007 create an Issue within Project
 	And I click Choice button of the field named "Location"
 	And I go to line in "List" table
 		| 'Description' | 'City'  |
-		| 'CITY 1'      | 'City1' |
+		| 'CO2 MALL 1'  | 'City1' |
 	And I select current line in "List" table	
 	And I go to line in "List" table
 		| "Description" |

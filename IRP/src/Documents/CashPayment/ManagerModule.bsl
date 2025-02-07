@@ -66,7 +66,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 EndFunction
 
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+	OffsetOfAdvancesServer.CheckAdvanceBalance(Ref, Cancel, Parameters, "R2020B_AdvancesFromCustomers", AccumulationRecordType.Receipt);
 EndProcedure
 
 #EndRegion
@@ -142,6 +142,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(PostingServer.Exists_R2020B_AdvancesFromCustomers());
 	Return QueryArray;
 EndFunction
 

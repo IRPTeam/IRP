@@ -151,7 +151,7 @@ Scenario: _972003 create an Issue
 	And I click Choice button of the field named "Location"
 	And I go to line in "List" table
 		| 'Description' | 'City'  |
-		| 'CITY 2'      | 'City2' |
+		| 'CO1 MALL 2'  | 'City2' |
 	And I select current line in "List" table	
 	And I go to line in "List" table
 		| "Description" |
@@ -552,8 +552,8 @@ Scenario: _972011 create an Issue from Tools
 	And I click the button named "FormChoose"
 	And I click Choice button of the field named "Location"
 	And I go to line in "List" table
-		| 'Description' |
-		| 'CITY 1'      |
+		| 'Description' | 'City'  |
+		| 'CO2 MALL 1'  | 'City1' |
 	And I select current line in "List" table
 	And I go to line in "List" table
 		| "Description" |

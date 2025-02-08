@@ -2834,7 +2834,7 @@
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListIsVariableItemKey</name>
-          <id>968</id>
+          <id>978</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -2845,7 +2845,7 @@
           </dataPath>
           <extendedTooltip>
             <name>ItemListIsVariableItemKeyExtendedTooltip</name>
-            <id>970</id>
+            <id>980</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2860,7 +2860,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>ItemListIsVariableItemKeyContextMenu</name>
-            <id>969</id>
+            <id>979</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>

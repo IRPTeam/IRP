@@ -16,6 +16,7 @@ Background:
 
 Scenario: _2060001 preparation
 	When set True value to the constant
+	When set False value to the constant DisableLinkedRowsIntegrity
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -3134,6 +3135,8 @@ Scenario: _2060029 check link/unlink form in the SO - SI - SC (use variable item
 		And I go to line in "ItemListRows" table
 			| "Quantity" | "Row presentation"                             | "Store"    | "Unit" |
 			| "1,000"    | "Product 7 with SLN (new row) (ODS) (9009099)" | "Store 03" | "pcs"  |
+		And I remove checkbox "Use reverse basises tree"
+		And Delay 2		
 		And I go to line in "BasisesTree" table
 			| "Currency" | "Price"  | "Quantity" | "Row presentation"                             | "Unit" |
 			| "TRY"      | "120,00" | "1,000"    | "Product 7 with SLN (new row) (ODS) (9009099)" | "pcs"  |

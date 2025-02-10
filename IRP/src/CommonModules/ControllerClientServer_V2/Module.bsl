@@ -610,6 +610,7 @@ Function GetAllBindingsByDefault(Parameters)
 	Binding.Insert("ItemList.DeliveryDate"   , BindDefaultItemListDeliveryDate(Parameters));
 	Binding.Insert("ItemList.Quantity"       , BindDefaultItemListQuantity(Parameters));
 	Binding.Insert("ItemList.InventoryOrigin", BindDefaultItemListInventoryOrigin(Parameters));
+	Binding.Insert("ItemList.IsVariableItemKey", BindDefaultItemListIsVariableItemKey(Parameters));
 	
 	Binding.Insert("ItemList.VatRate"    , BindDefaultItemListVatRate(Parameters));
 	Binding.Insert("PaymentList.VatRate" , BindDefaultPaymentListVatRate(Parameters));
@@ -13764,6 +13765,72 @@ Procedure StepChangeisControlCodeStringByItem(Parameters, Chain) Export
 		Options.StepName = "StepChangeisControlCodeStringByItem";
 		Chain.ChangeisControlCodeStringByItem.Options.Add(Options);
 	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_IS_VARIABLE_ITEMKEY
+
+// ItemList.IsVariableItemKey.OnChange
+Procedure ItemListIsVariableItemKeyOnChange(Parameters) Export
+	Binding = BindItemListIsVariableItemKey(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.IsVariableItemKey.Set
+Procedure SetItemListIsVariableItemKey(Parameters, Results) Export
+	Binding = BindItemListIsVariableItemKey(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+Function GetDefaultBindingStructure_ItemListIsVariableItemKey(Parameters)
+	Result = New Structure("Binding, DataPath, ExtensionPrefix", New Structure(), Undefined, "");
+	Result.DataPath = "ItemList.IsVariableItemKey";
+	Result.Binding.Insert("SalesOrder", "StepItemListDefaultIsVariableItemKeyInList");
+	Result.Binding.Insert("PurchaseOrder", "StepItemListDefaultIsVariableItemKeyInList");
+	Return Result;
+EndFunction
+
+// ItemList.IsVariableItemKey.Default.Bind
+Function BindDefaultItemListIsVariableItemKey(Parameters)
+	DataBinding = GetDefaultBindingStructure_ItemListIsVariableItemKey(Parameters);
+	Return BindSteps("BindVoid", 
+		DataBinding.DataPath, 
+		DataBinding.Binding, 
+		Parameters, 
+		"BindDefaultItemListIsVariableItemKey", 
+		DataBinding.ExtensionPrefix);
+EndFunction
+
+Function GetBindingStructure_ItemListIsVariableItemKey(Parameters)
+	Result = New Structure("Binding, DataPath, ExtensionPrefix", New Structure(), Undefined, "");
+	Result.DataPath = "ItemList.IsVariableItemKey";
+	Return Result;
+EndFunction
+
+// ItemList.IsVariableItemKey.Bind
+Function BindItemListIsVariableItemKey(Parameters)
+	DataBinding = GetBindingStructure_ItemListIsVariableItemKey(Parameters);		
+	Return BindSteps("BindVoid", 
+		DataBinding.DataPath, 
+		DataBinding.Binding, 
+		Parameters, 
+		"BindItemListIsVariableItemKey",
+		DataBinding.ExtensionPrefix);
+EndFunction
+
+// ItemList.IsVariableItemKey.ByDefault.Step
+Procedure StepItemListDefaultIsVariableItemKeyInList(Parameters, Chain) Export
+	Chain.DefaultIsVariableItemKeyInList.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.DefaultIsVariableItemKeyInList.Setter = "SetItemListIsVariableItemKey";
+	Options = ModelClientServer_V2.DefaultIsVariableItemKeyInListOptions();
+	NewRow = Parameters.RowFilledByUserSettings;
+	Options.Company = GetCompany(Parameters);
+	Options.Key = NewRow.Key;
+	Chain.DefaultIsVariableItemKeyInList.Options.Add(Options);
 EndProcedure
 
 #EndRegion

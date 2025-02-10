@@ -237,6 +237,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(IncomingStocksReal());
+	QueryArray.Add(OrderItemList());
 	QueryArray.Add(Exists_R4035B_IncomingStocks());
 	QueryArray.Add(Exists_R4036B_IncomingStocksRequested());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
@@ -379,6 +380,81 @@ Function SerialLotNumbers()
 		   |	SerialLotNumbers.Ref = &Ref";
 EndFunction
 
+Function OrderItemList()
+	Return
+		"SELECT
+		|	RowIDInfo.RowRef,
+		|	MAX(RowIDInfo.RowID) AS RowID,
+		|	RowIDInfo.Key
+		|INTO OrderItemList_tmp1
+		|FROM
+		|	Document.GoodsReceipt.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|GROUP BY
+		|	RowIDInfo.RowRef,
+		|	RowIDInfo.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Key,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.PurchaseOrder,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.Quantity,
+		|	ItemList.PurchaseOrderExists
+		|INTO OrderItemList_tmp2
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.PurchaseOrderExists
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp1.RowRef,
+		|	tmp2.Period,
+		|	tmp2.Company,
+		|	tmp2.Branch,
+		|	tmp2.PurchaseOrder,
+		|	tmp2.ItemKey,
+		|	tmp2.RowKey,
+		|	tmp2.Quantity,
+		|	tmp2.PurchaseOrderExists
+		|INTO OrderItemList_tmp3
+		|FROM
+		|	OrderItemList_tmp1 AS tmp1
+		|		INNER JOIN OrderItemList_tmp2 AS tmp2
+		|		ON tmp1.Key = tmp2.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp3.Period,
+		|	tmp3.Company,
+		|	tmp3.Branch,
+		|	tmp3.PurchaseOrder,
+		|	tmp3.ItemKey,
+		|	tmp3.RowKey,
+		|	tmp3.Quantity,
+		|	tmp3.PurchaseOrderExists,
+		|	SalesOrderItemList.ItemKey AS OrderItemKey
+		|INTO OrderItemList
+		|FROM
+		|	OrderItemList_tmp3 AS tmp3
+		|		INNER JOIN Document.PurchaseOrder.RowIDInfo AS SalesOrderRowIDInfo
+		|		ON SalesOrderRowIDInfo.RowRef = tmp3.RowRef
+		|		INNER JOIN Document.PurchaseOrder.ItemList AS SalesOrderItemList
+		|		ON SalesOrderItemList.Key = SalesOrderRowIDInfo.Key
+		|		AND SalesOrderItemList.Ref = tmp3.PurchaseOrder
+		|		AND SalesOrderItemList.IsVariableItemKey
+		|		AND SalesOrderItemList.ItemKey <> tmp3.ItemKey";	
+EndFunction
+
 Function Exists_R4035B_IncomingStocks()
 	Return "SELECT *
 		   |	INTO Exists_R4035B_IncomingStocks
@@ -403,15 +479,53 @@ EndFunction
 #Region Posting_MainTables
 
 Function R1011B_PurchaseOrdersReceipt()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.PurchaseOrder AS Order,
-		   |	*
-		   |INTO R1011B_PurchaseOrdersReceipt
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.PurchaseOrderExists";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.PurchaseOrder AS Order,
+		|	ItemList.OrderItemKey AS ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.Quantity
+		|INTO R1011B_PurchaseOrdersReceipt
+		|FROM
+		|	OrderItemList AS ItemList
+		|WHERE
+		|	ItemList.PurchaseOrderExists
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.PurchaseOrder,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.Quantity
+		|FROM
+		|	OrderItemList AS ItemList
+		|WHERE
+		|	ItemList.PurchaseOrderExists
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.PurchaseOrder,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.PurchaseOrderExists";
 EndFunction
 
 Function R1031B_ReceiptInvoicing()

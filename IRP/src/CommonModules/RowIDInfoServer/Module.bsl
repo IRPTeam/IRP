@@ -2085,15 +2085,36 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		EndIf;
 	EndIf;
 	
-	If Is.SO Or Is.PO Then
-		RowRefObject.Item = Catalogs.Items.EmptyRef();
-		RowRefObject.ItemKey = Catalogs.ItemKeys.EmptyRef();
-		
+	If Is.SO Or Is.PO Then	
 		If RowRefObject.IsVariableItemKey Then
-			RowRefObject.Item = RowItemList.ItemKey.Item;
-		Else
-			RowRefObject.ItemKey = RowItemList.ItemKey;
+			Rows = FieldsForCheckRowRef.FindRows(New Structure("FieldName", "ItemKey"));
+			For Each Row In Rows Do
+				FieldsForCheckRowRef.Delete(Row);
+			EndDo;
 		EndIf;
+		
+		If Not RowRefObject.IsFixedItemKey Then 
+			
+			RowRefObject.Item = Catalogs.Items.EmptyRef();
+			RowRefObject.ItemKey = Catalogs.ItemKeys.EmptyRef();
+			
+			If RowRefObject.IsVariableItemKey Then
+				RowRefObject.Item = RowItemList.ItemKey.Item;	
+			Else
+				RowRefObject.ItemKey = RowItemList.ItemKey;
+			EndIf;
+		
+		EndIf;	
+		
+	Else                        
+		If RowRefObject.IsVariableItemKey And Not RowRefObject.IsFixedItemKey Then
+			RowRefObject.ItemKey = RowItemList.ItemKey;
+			Rows = FieldsForCheckRowRef.FindRows(New Structure("FieldName", "ItemKey"));
+			For Each Row In Rows Do
+				FieldsForCheckRowRef.Delete(Row);
+			EndDo; 
+			RowRefObject.IsFixedItemKey = True;
+		EndIf;		
 	EndIf;
 	
 	ArrayOfDifferenceFields = New Array();

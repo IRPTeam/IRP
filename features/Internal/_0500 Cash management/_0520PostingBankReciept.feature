@@ -1288,3 +1288,29 @@ Scenario: _052028 checking display Branch column depending on the transactin typ
 		* Salary return
 			And I select "Salary return" exact value from "Transaction type" drop-down list			
 			And I activate field named "PaymentListBranch" in "PaymentList" table	
+
+Scenario: _052029 Prevent negative refund transactions in Bank receipt
+	And I close all client application windows
+	* Open BR
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+	* Filling main details
+		And I select "Return from vendor" exact value from "Transaction type" drop-down list
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Account" by "Bank account, TRY" string
+	* Filling payment list
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select current line in "PaymentList" table
+		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
+		And I activate "Partner term" field in "PaymentList" table
+		And I input "Vendor Ferron, TRY" text in "Partner term" field of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "1 000 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+	* Check
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [1 000 000]'|
+		And I close all client application windows

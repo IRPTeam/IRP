@@ -45,11 +45,39 @@ Scenario: _0224000 preparation (Purchase order closing)
 		When Create catalog CancelReturnReasons objects
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
+		When Create catalog AccessGroups objects
+		When Create catalog AccessProfiles objects
+		When Create catalog Users objects		
 	* Create test PO
 		When Create document PO, GR, PI objects (for check closing)
+		When Create document PO, SO objects (for check double closing)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Write);"     |
 			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* User rights 
+		Given I open hyperlink 'e1cib/list/Catalog.AccessProfiles'
+		And I go to line in "List" table
+            | 'Description' |
+            | 'Run client'  |
+        And I select current line in "List" table
+		And I go to line in "Roles" table
+			| "Configuration" | "Presentation" | "Use" |
+			| "IRP"           | "Full access"  | "Yes" |
+		And I change checkbox named "RolesUse" in "Roles" table
+		And I click the button named "FormWriteAndClose"
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
+        And I go to line in "List" table
+            | 'Description' |
+            | 'Run client'  |
+        And I select current line in "List" table
+        And I move to the tab named "GroupUsers"
+        And in the table "Users" I click the button named "UsersAdd"
+        And I click choice button of the attribute named "UsersUser" in "Users" table
+        And I go to line in "List" table
+        	| "Code" | "Description" | "Login" |
+        	| "3"    | "Admin"       | "Admin" |
+        And I click the button named "FormChoose"
+        And I click the button named "FormWriteAndClose"
 
 Scenario: _02240001 check preparation
 	When check preparation
@@ -229,3 +257,73 @@ Scenario: _0230002 create and check filling Purchase order closing (PO partially
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Then user message window does not contain messages
 		And I close all client application windows
+
+Scenario: _0230003 create Purchase order closing and check for double records
+	And I close all client application windows
+	* Create Purchase order closing by CI User (Save)
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '38'     |
+		And I click the button named "FormDocumentPurchaseOrderClosingGenerate"
+		And I click "Save" button
+		And I delete "$$NumberPurchaseOrderClosing0224002$$" variable
+		And I delete "$$PurchaseOrderClosing0224002$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrderClosing0224002$$"
+		And I save the window as "$$PurchaseOrderClosing0224002$$"		
+		And I close current test client session
+	* Create Purchase order closing by CI Test User (Post) 
+		And I connect "new" TestClient using "Admin" login and " " password
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '38'     |
+		And I click the button named "FormDocumentPurchaseOrderClosingGenerate"
+		And I click "Post and close" button
+		And I close "new" TestClient
+	* Post Purchase order closing by CI User (Post)
+		And I connect "This Client" TestClient using "CI" login and "ci" password
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+		And I go to line in "List" table
+			| "Number"                                    |
+			| "$$NumberPurchaseOrderClosing0224002$$"     |
+		And I select current line in "List" table
+		And I click "Post and close" button	
+		Then there are lines in TestClient message log
+			|'Order already closed'|
+	And I close all client application windows	
+
+Scenario: _0230004 create Sales order closing and check for double records
+	And I close all client application windows
+	* Create Purchase order closing by CI User (Save)
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I click the button named "FormDocumentSalesOrderClosingGenerate"
+		And I click "Save" button
+		And I delete "$$NumberSalesOrderClosing0224002$$" variable
+		And I delete "$$SalesOrderClosing0224002$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrderClosing0224002$$"
+		And I save the window as "$$SalesOrderClosing02240022$$"		
+		And I close current test client session
+	* Create Purchase order closing by CI Test User (Post) 
+		And I connect "new" TestClient using "Admin" login and " " password
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I click the button named "FormDocumentSalesOrderClosingGenerate"
+		And I click "Post and close" button
+		And I close "new" TestClient
+	* Post Purchase order closing by CI User (Post)
+		And I connect "This Client" TestClient using "CI" login and "ci" password
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I go to line in "List" table
+			| "Number"                                    |
+			| "$$NumberSalesOrderClosing0224002$$"     |
+		And I select current line in "List" table
+		And I click "Post and close" button	
+		Then there are lines in TestClient message log
+			|'Order already closed'|
+	And I close all client application windows	

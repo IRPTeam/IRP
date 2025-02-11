@@ -300,7 +300,7 @@ When Create catalog PartnerItems objects (test data base)
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+ 		And Delay "10"
 * Posting CashReceipt
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"    |

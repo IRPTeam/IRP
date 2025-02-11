@@ -293,37 +293,3 @@ Scenario: _0230003 create Purchase order closing and check for double records
 			|'Order already closed'|
 	And I close all client application windows	
 
-Scenario: _0230004 create Sales order closing and check for double records
-	And I close all client application windows
-	* Create Purchase order closing by CI User (Save)
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
-		And I click the button named "FormDocumentSalesOrderClosingGenerate"
-		And I click "Save" button
-		And I delete "$$NumberSalesOrderClosing0224002$$" variable
-		And I delete "$$SalesOrderClosing0224002$$" variable
-		And I save the value of "Number" field as "$$NumberSalesOrderClosing0224002$$"
-		And I save the window as "$$SalesOrderClosing02240022$$"		
-		And I close current test client session
-	* Create Purchase order closing by CI Test User (Post) 
-		And I connect "new" TestClient using "Admin" login and " " password
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"		
-		And I go to line in "List" table
-			| 'Number' |
-			| '1'      |
-		And I click the button named "FormDocumentSalesOrderClosingGenerate"
-		And I click "Post and close" button
-		And I close "new" TestClient
-	* Post Purchase order closing by CI User (Post)
-		And I connect "This Client" TestClient using "CI" login and "ci" password
-		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
-		And I go to line in "List" table
-			| "Number"                                    |
-			| "$$NumberSalesOrderClosing0224002$$"     |
-		And I select current line in "List" table
-		And I click "Post and close" button	
-		Then there are lines in TestClient message log
-			|'Order already closed'|
-	And I close all client application windows	

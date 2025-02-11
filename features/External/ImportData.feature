@@ -3827,3 +3827,22 @@ Scenario: Create catalog TaxExemptionReasons objects
 		| 'e1cib/data/Catalog.TaxExemptionReasons?ref=b85495740888175a11ef8b9a67d20627' | 'False'        | 3      | 'Tax exeption reason 2 (0%, Turkey)'        | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' | 'Tax exeption reason 2 (0%, Turkey)'        | ''                 | ''               | ''               |
 
 
+Scenario: Create catalog NumeratorBasicRules, NumeratorGroups objects and Counter
+
+	And I check or create catalog "NumeratorBasicRules" objects:
+		| 'Ref'                                                                         | 'DeletionMark' | 'Code' | 'UseCompanyPrefix' | 'UseBranchPrefix' | 'UseDocumentPrefix' | 'UseCatalogPrefix' | 'UseTransactionTypePrefix' | 'PrefixTemplate' | 'Description_en'                    | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'NotActive' |
+		| 'e1cib/data/Catalog.NumeratorBasicRules?ref=b857ef6bdcc86de611efda2e71ee5283' | 'False'        | 1      | 'True'             | 'False'           | 'True'              | 'True'             | 'False'                    | ''               | 'basic(Company, Catalog, Document)' | ''                 | ''               | ''               | 'False'     |
+
+	And I refill object tabular section "CompanyPrefixes":
+		| 'Ref'                                                                         | 'Company'                                                           | 'Prefix' |
+		| 'e1cib/data/Catalog.NumeratorBasicRules?ref=b857ef6bdcc86de611efda2e71ee5283' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | '7'      |
+
+	And I check or create catalog "NumeratorGroups" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code' | 'BasicRule'                                                                   | 'BeginDate'           | 'EndDate'             | 'ByDefault' | 'NumberingPeriod'                | 'NumberTemplate'                                                | 'StartNumber' | 'TotalLength' | 'WithoutLeadingZeros' | 'Description_en'        | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'NotActive' |
+		| 'e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5284' | 'False'        | 1      | 'e1cib/data/Catalog.NumeratorBasicRules?ref=b857ef6bdcc86de611efda2e71ee5283' | '01.01.2025 00:00:00' | '31.12.2025 00:00:00' | 'False'     | 'Enum.NumberingPeriods.NoPeriod' | '[basic.company][year2][basic.document][basic.catalog][number]' | 1             | 8             | 'False'               | 'Basic numerator group' | ''                 | ''               | ''               | 'False'     |
+
+	And I check or create information register "NumeratorCounters" records:
+		| 'NumeratorRules'                                                          | 'TemplateNumber' | 'StartDate'           | 'Counter' |
+		| 'e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5284' | '72510000'       | '01.01.0001 00:00:00' | 127       |
+		| 'e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5284' | '72530000'       | '01.01.0001 00:00:00' | 15        |
+

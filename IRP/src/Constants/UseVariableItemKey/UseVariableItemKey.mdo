@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cab40564-4b6e-49be-b7f8-37fcc41744fc">
+  <producedTypes>
+    <managerType typeId="11b717da-afcd-4913-8890-ce19732dfeec" valueTypeId="d2084b2e-39e4-4526-aa7c-29e5a8777fb5"/>
+    <valueManagerType typeId="a196bbfc-7e8e-45da-9662-f00766407574" valueTypeId="1ce10b49-957f-464a-b008-13db3db741b9"/>
+    <valueKeyType typeId="f8d2a949-bdc4-4212-82ff-ee82dc7715aa" valueTypeId="2a7c3262-5c38-4eb8-8453-8ffc7d2769c4"/>
+  </producedTypes>
+  <name>UseVariableItemKey</name>
+  <synonym>
+    <key>en</key>
+    <value>Use variable item key</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

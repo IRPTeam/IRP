@@ -1314,6 +1314,48 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
+     <name>ItemListIsUnlockItemKey</name>
+     <id>829</id>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.ItemList.IsUnlockItemKey</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>ItemListIsUnlockItemKeyExtendedTooltip</name>
+      <id>831</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ItemListIsUnlockItemKeyContextMenu</name>
+      <id>830</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>CheckBoxField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormField">
      <name>ItemListItem</name>
      <id>44</id>
      <visible>true</visible>
@@ -6525,6 +6567,31 @@
      <common>true</common>
     </edit>
     <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
+   </columns>
+   <columns>
+    <name>IsUnlockItemKey</name>
+    <title>
+     <key>tr</key>
+     <value>Varyant kilidi açık</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Фиксация с характеристики снята</value>
+    </title>
+    <title>
+     <key>en</key>
+     <value>Is unlock item key</value>
+    </title>
+    <id>181</id>
+    <valueType>
+     <types>Boolean</types>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
    </columns>
   </additionalColumns>
  </attributes>

@@ -249,6 +249,7 @@ Function GetChain()
 	Chain.Insert("DefaultCurrencyInList"     , GetChainLink("DefaultCurrencyInListExecute"));
 	Chain.Insert("DefaultInventoryOrigin"    , GetChainLink("DefaultInventoryOriginExecute"));
 	Chain.Insert("DefaultVatRateInList"      , GetChainLink("DefaultVatRateInListExecute"));
+	Chain.Insert("DefaultIsVariableItemKeyInList", GetChainLink("DefaultIsVariableItemKeyInListExecute"));
 	
 	// Empty.Header
 	Chain.Insert("EmptyStoreInHeader"     , GetChainLink("EmptyStoreInHeaderExecute"));
@@ -4515,6 +4516,21 @@ Function ChangeSalaryBySalaryTypeExecute(Options) Export
 	EndIf;
 	
 	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region IS_VARIABLE_ITEM_KEY
+
+Function DefaultIsVariableItemKeyInListOptions() Export
+	Return GetChainLinkOptions("Company");
+EndFunction
+	
+Function DefaultIsVariableItemKeyInListExecute(Options) Export	
+	If ValueIsFilled(Options.Company) Then
+		Return CommonFunctionsServer.GetRefAttribute(Options.Company, "UseVariableItemKeyInOrders");
+	EndIf;
+	Return False;
 EndFunction
 
 #EndRegion

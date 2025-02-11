@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f2c5748f-678f-4777-8f45-11dc8cce429c">
+ <name>UseVariableItemKey</name>
+ <synonym>
+  <key>tr</key>
+  <value>Değişken varyant kullan</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать заменяемые характеристики</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use variable item key</value>
+ </synonym>
+ <location>Constant.UseVariableItemKey</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.SalesOrder.TabularSection.ItemList.Attribute.IsVariableItemKey</content>
+ <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.IsVariableItemKey</content>
+ <content>Catalog.RowIDs.Attribute.IsVariableItemKey</content>
+ <content>Catalog.RowIDs.Attribute.Item</content>
+ <content>Catalog.Companies.Attribute.UseVariableItemKeyInOrders</content>
+</mdclass:FunctionalOption>

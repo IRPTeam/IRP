@@ -668,6 +668,10 @@ EndFunction
 &AtClient
 Procedure AutoLink(Command)
 	For Each ItemListRow In ThisObject.ItemListRows Do
+		If  ThisObject.ResultsTable.FindRows(New Structure("Key", ItemListRow.Key)).Count() > 0 Then
+			Continue;
+		EndIf;
+	
 		RowInfo = RowIDInfoClient.GetSelectedRowInfo(ItemListRow, StrSplit(ThisObject.ArrayOfFilterExcludeFields, ","));
 		NeedAutoLink = NeedAutoLinkAtServer(RowInfo);
 		If NeedAutoLink.IsOk Then

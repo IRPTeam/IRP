@@ -1072,6 +1072,75 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="9023ed6d-b463-4fdb-8219-e02dcaa51e9e">
+  <name>Item</name>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Номенклатура</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="65999a93-2445-4fea-b229-f26c59b95bb5">
+  <name>IsVariableItemKey</name>
+  <synonym>
+   <key>tr</key>
+   <value>Değişken varyant</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Заменяемая характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Is variable item key</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="7bda96d1-2d55-41f6-873b-eb3621714ebb">
+  <name>IsFixedItemKey</name>
+  <synonym>
+   <key>tr</key>
+   <value>Sabit varyant</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Исправленая характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Is fixed item key</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="651805ba-bc1e-443a-8ae5-b2b855347771">
   <name>ItemForm</name>
   <synonym>

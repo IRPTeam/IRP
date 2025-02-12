@@ -149,6 +149,8 @@ Scenario: _043500 preparation (Cash payment)
 			| "Documents.CashPayment.FindByNumber(326).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document CashPayment objects (return to customer)
 		And I execute 1C:Enterprise script at server
+			| "Documents.CashReceipt.FindByNumber(1527).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(327).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document CashPayment objects (with partner term by document, without basis)
 		And I execute 1C:Enterprise script at server

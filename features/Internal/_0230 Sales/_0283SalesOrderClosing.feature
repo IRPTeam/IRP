@@ -56,15 +56,21 @@ Scenario: _0230000 preparation (Sales order closing)
 	* User rights 
 		Given I open hyperlink 'e1cib/list/Catalog.AccessProfiles'
 		And I go to line in "List" table
-            | 'Description' |
-            | 'Run client'  |
-        And I select current line in "List" table
+			| "Code" | "Description" |
+			| "6"    | "Run client"  |
+		And I select current line in "List" table	
 		And I go to line in "Roles" table
 			| "Configuration" | "Presentation" | "Use" |
-			| "IRP"           | "Full access"  | "Yes" |
+			| "IRP"           | "Full access"  | "No"  |
+		And I activate field named "RolesConfiguration" in "Roles" table
+		And I activate field named "RolesUse" in "Roles" table
 		And I change checkbox named "RolesUse" in "Roles" table
+		And I finish line editing in "Roles" table
+		And I click the button named "FormWrite"
+		And in the table "Roles" I click the button named "RolesUpdateRoles"
 		And I click the button named "FormWriteAndClose"
 		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
+//		And In the command interface I select "Settings" "User access groups"
         And I go to line in "List" table
             | 'Description' |
             | 'Run client'  |
@@ -73,11 +79,12 @@ Scenario: _0230000 preparation (Sales order closing)
         And in the table "Users" I click the button named "UsersAdd"
         And I click choice button of the attribute named "UsersUser" in "Users" table
         And I go to line in "List" table
-        	| "Code" | "Description" | "Login" |
-        	| "3"    | "Admin"       | "Admin" |
+        	| "Description" |
+        	| "Admin"       |
         And I click the button named "FormChoose"
-        And I click the button named "FormWriteAndClose"	
+        And I click the button named "FormWriteAndClose"
 		
+				
 Scenario: _0230001 check preparation
 	When check preparation
 

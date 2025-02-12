@@ -2127,7 +2127,7 @@ Function AdvancesClosingQueryText(Parameters)
 		   |	FALSE", Parameters.DocumentName);
 EndFunction
 
-Procedure CheckAdvanceBalance(Ref, Cancel, Parameters, RegisterName) Export		
+Procedure CheckAdvanceBalance(Ref, Cancel, Parameters, RegisterName, RecordType = Undefined) Export		
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	If Unposting Then
 		Return;
@@ -2142,7 +2142,12 @@ Procedure CheckAdvanceBalance(Ref, Cancel, Parameters, RegisterName) Export
 	
 	Filter = New Structure("CurrencyMovementType, RecordType");
 	Filter.CurrencyMovementType = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency;
-	Filter.RecordType = AccumulationRecordType.Expense;
+	
+	If RecordType <> Undefined Then
+		Filter.RecordType = RecordType;
+	Else
+		Filter.RecordType = AccumulationRecordType.Expense;
+	EndIf;
 	
 	Expense_Advances = Advances.Copy(Filter);
 	Expense_Exists_Advances = Exists_Advances.Copy(Filter);

@@ -1005,3 +1005,32 @@ Scenario: _050024 create Cash receipt based on SI (Partner term - TRY, document 
 			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
 	And I close all client application windows				
+
+Scenario: _050025 Prevent negative refund transactions in Cash receipt
+	And I close all client application windows
+	* Open CR
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
+	* Filling main details
+		And I select "Return from vendor" exact value from "Transaction type" drop-down list
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "CashAccount" by "Cash desk №3" string
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+	* Filling payment list
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select current line in "PaymentList" table
+		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
+		And I activate "Partner term" field in "PaymentList" table
+		And I input "Vendor Ferron, TRY" text in "Partner term" field of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "1 000 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+	* Check
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [1 000 000]'|
+		And I close all client application windows
+				
+				

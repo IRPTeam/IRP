@@ -69,21 +69,22 @@ Scenario: _0230000 preparation (Sales order closing)
 		And I click the button named "FormWrite"
 		And in the table "Roles" I click the button named "RolesUpdateRoles"
 		And I click the button named "FormWriteAndClose"
+		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
 //		And In the command interface I select "Settings" "User access groups"
-        And I go to line in "List" table
-            | 'Description' |
-            | 'Run client'  |
-        And I select current line in "List" table
-        And I move to the tab named "GroupUsers"
-        And in the table "Users" I click the button named "UsersAdd"
-        And I click choice button of the attribute named "UsersUser" in "Users" table
-        And I go to line in "List" table
-        	| "Description" |
-        	| "Admin"       |
-        And I click the button named "FormChoose"
-        And I click the button named "FormWriteAndClose"
-		
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Run client'  |
+		And I select current line in "List" table
+		And I move to the tab named "GroupUsers"
+		And in the table "Users" I click the button named "UsersAdd"
+		And I click choice button of the attribute named "UsersUser" in "Users" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Admin"       |
+		And I click the button named "FormChoose"
+		And I click the button named "FormWriteAndClose"
+				
 				
 Scenario: _0230001 check preparation
 	When check preparation

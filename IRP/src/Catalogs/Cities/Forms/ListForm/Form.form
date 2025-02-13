@@ -66,7 +66,7 @@
    <id>19</id>
    <title>
     <key>tr</key>
-    <value>Description</value>
+    <value>Açıklama</value>
    </title>
    <title>
     <key>ru</key>
@@ -433,7 +433,7 @@ FROM
      <localValue>
       <content>
        <key>tr</key>
-       <value>Description</value>
+       <value>Açıklama</value>
       </content>
       <content>
        <key>ru</key>

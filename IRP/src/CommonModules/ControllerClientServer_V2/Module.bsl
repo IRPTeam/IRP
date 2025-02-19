@@ -906,6 +906,7 @@ Function BindListOnDelete(Parameters)
 	DataPath = "";
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation"       , "StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("ShipmentPlaningOrder"       , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("RetailShipmentConfirmation" , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("GoodsReceipt"               , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("RetailGoodsReceipt"         , "StepChangeStoreInHeaderByStoresInList");
@@ -3357,6 +3358,7 @@ Function GetBindingStructure_Partner(Parameters)
 	Result.DataPath = "Partner";
 	
 	Result.Binding.Insert("ShipmentConfirmation", "StepChangeLegalNameByPartner");
+	Result.Binding.Insert("ShipmentPlaningOrder", "StepChangeLegalNameByPartner");
 	Result.Binding.Insert("GoodsReceipt"        , "StepChangeLegalNameByPartner");
 	Result.Binding.Insert("RetailGoodsReceipt"  , "StepChangeLegalNameByPartner");
 	
@@ -4847,6 +4849,7 @@ Function BindDefaultStore(Parameters)
 	DataPath = "Store";
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation" , "StepDefaultStoreInHeader_WithoutAgreement");
+	Binding.Insert("ShipmentPlaningOrder" , "StepDefaultStoreInHeader_WithoutAgreement");
 	Binding.Insert("GoodsReceipt"         , "StepDefaultStoreInHeader_WithoutAgreement");
 	
 	Binding.Insert("RetailShipmentConfirmation" , "StepDefaultStoreInHeader_WithoutAgreement");
@@ -4872,6 +4875,7 @@ Function BindEmptyStore(Parameters)
 	DataPath = "Store";
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "StepEmptyStoreInHeader_WithoutAgreement");
+	Binding.Insert("ShipmentPlaningOrder", "StepEmptyStoreInHeader_WithoutAgreement");
 	Binding.Insert("GoodsReceipt"        , "StepEmptyStoreInHeader_WithoutAgreement");
 	
 	Binding.Insert("RetailShipmentConfirmation", "StepEmptyStoreInHeader_WithoutAgreement");
@@ -10744,6 +10748,7 @@ Function GetBindingStructure_ItemListItem(Parameters)
 	Result.DataPath = "ItemList.Item";
 	
 	Result.Binding.Insert("ShipmentConfirmation"      , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("ShipmentPlaningOrder"      , "StepItemListChangeItemKeyByItem");
 	Result.Binding.Insert("GoodsReceipt"              , "StepItemListChangeItemKeyByItem");
 	Result.Binding.Insert("RetailShipmentConfirmation"      , "StepItemListChangeItemKeyByItem");
 	Result.Binding.Insert("RetailGoodsReceipt"              , "StepItemListChangeItemKeyByItem");
@@ -10844,6 +10849,8 @@ Function GetBindingStructure_ItemListItemKey(Parameters)
 	Result.Binding.Insert("ShipmentConfirmation",
 		"StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey");
+		
+	Result.Binding.Insert("ShipmentPlaningOrder", "StepItemListChangeUnitByItemKey");
 		
 	Result.Binding.Insert("GoodsReceipt",
 		"StepChangeUseSerialLotNumberByItemKey,
@@ -11539,6 +11546,7 @@ Function BindDefaultItemListStore(Parameters)
 	DataPath = "ItemList.Store";
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "StepItemListDefaultStoreInList_WithoutAgreement");
+	Binding.Insert("ShipmentPlaningOrder", "StepItemListDefaultStoreInList_WithoutAgreement");
 	Binding.Insert("GoodsReceipt"        , "StepItemListDefaultStoreInList_WithoutAgreement");
 	
 	Binding.Insert("RetailShipmentConfirmation", "StepItemListDefaultStoreInList_WithoutAgreement");
@@ -11568,6 +11576,7 @@ Function BindItemListStore(Parameters)
 	DataPath = "ItemList.Store";
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation"      , "StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("ShipmentPlaningOrder"      , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("GoodsReceipt"              , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("CommissioningOfFixedAsset" , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("ModernizationOfFixedAsset" , "StepChangeStoreInHeaderByStoresInList");

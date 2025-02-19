@@ -488,6 +488,7 @@
   <roles>Role.UseOutput</roles>
   <roles>Role.Document_ELedgerRegistry</roles>
   <roles>Role.Document_StockCorrection</roles>
+  <roles>Role.Document_ShipmentPlaningOrder</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>

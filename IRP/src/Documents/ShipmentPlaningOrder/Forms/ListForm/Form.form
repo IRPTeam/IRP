@@ -715,7 +715,6 @@ GROUP BY
 	ShipmentPlaningOrder.Company,
 	ShipmentPlaningOrder.LegalName,
 	ShipmentPlaningOrder.Partner,
-	ShipmentPlaningOrder.TransactionType,
 	ShipmentPlaningOrder.Author,
 	ShipmentPlaningOrder.Branch,
 	ShipmentPlaningOrder.Comment,
@@ -800,6 +799,38 @@ GROUP BY
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>PointInTime</dataPath>
         <field>PointInTime</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Editor</dataPath>
+        <field>Editor</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ManualMovementsEdit</dataPath>
+        <field>ManualMovementsEdit</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>NumeratorRules</dataPath>
+        <field>NumeratorRules</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SourceNodeID</dataPath>
+        <field>SourceNodeID</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CreateDate</dataPath>
+        <field>CreateDate</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DocumentNumber</dataPath>
+        <field>DocumentNumber</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>UniqueID</dataPath>
+        <field>UniqueID</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ModifyDate</dataPath>
+        <field>ModifyDate</field>
       </fields>
     </extInfo>
   </attributes>

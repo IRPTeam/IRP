@@ -242,6 +242,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.ShipmentPlaningOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.WorkSheet</metadata>
     <use>Use</use>
   </content>

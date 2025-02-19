@@ -11567,6 +11567,9 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False, Ref = Und
 		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, LegalName, Currency";
 	ElsIf DocReceiverMetadata = Metadata.Documents.WorkSheet Then
 		Return "Company, Branch, Partner, LegalName, Currency";
+	
+	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentPlaningOrder Then
+		Return "Company, Branch, Partner, LegalName";
 	Else
 		Raise StrTemplate("GetSeparatorColumns( %1 ) not supported", String(DocReceiverMetadata));
 	EndIf;

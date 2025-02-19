@@ -831,6 +831,8 @@
   <commonModules>CommonModule.DocStockCorrectionServer</commonModules>
   <commonModules>CommonModule.NumberingRulesServer</commonModules>
   <commonModules>CommonModule.NumberingRulesClientServer</commonModules>
+  <commonModules>CommonModule.DocShipmentPlaningOrderClient</commonModules>
+  <commonModules>CommonModule.DocShipmentPlaningOrderServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1313,6 +1315,7 @@
   <documents>Document.WorkSheet</documents>
   <documents>Document.ELedgerRegistry</documents>
   <documents>Document.StockCorrection</documents>
+  <documents>Document.ShipmentPlaningOrder</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

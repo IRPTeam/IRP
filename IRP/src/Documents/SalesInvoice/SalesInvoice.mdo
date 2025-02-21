@@ -1500,6 +1500,7 @@
       </synonym>
       <type>
         <types>DocumentRef.ShipmentConfirmation</types>
+        <types>DocumentRef.ShipmentPlaningOrder</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -2043,6 +2044,7 @@
       <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.WorkSheet</types>
       <types>DocumentRef.SalesReportToConsignor</types>
+      <types>DocumentRef.ShipmentPlaningOrder</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

@@ -299,6 +299,13 @@
         <value>33</value>
       </code>
     </items>
+    <items id="f43fe474-3f91-4217-a2a0-4d0b9a767021">
+      <name>SI_SC_SPO</name>
+      <description>SI&amp;SC&amp;SPO</description>
+      <code xsi:type="core:StringValue">
+        <value>34</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

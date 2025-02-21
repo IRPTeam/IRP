@@ -959,6 +959,7 @@
   <functionalOptions>FunctionalOption.UseELedger</functionalOptions>
   <functionalOptions>FunctionalOption.UseVariableItemKey</functionalOptions>
   <functionalOptions>FunctionalOption.UseNumberingRules</functionalOptions>
+  <functionalOptions>FunctionalOption.UseShipmentAndReceiptPlaningOrders</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1077,6 +1078,7 @@
   <constants>Constant.UseELedger</constants>
   <constants>Constant.UseVariableItemKey</constants>
   <constants>Constant.UseNumberingRules</constants>
+  <constants>Constant.UseShipmentAndReceiptPlaningOrders</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>

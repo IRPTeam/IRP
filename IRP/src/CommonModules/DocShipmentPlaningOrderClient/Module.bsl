@@ -6,6 +6,8 @@ Procedure OnOpen(Object, Form, Cancel) Export
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
 	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters);
 EndProcedure
 

@@ -10850,7 +10850,9 @@ Function GetBindingStructure_ItemListItemKey(Parameters)
 		"StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey");
 		
-	Result.Binding.Insert("ShipmentPlaningOrder", "StepItemListChangeUnitByItemKey");
+	Result.Binding.Insert("ShipmentPlaningOrder",
+		"StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey");
 		
 	Result.Binding.Insert("GoodsReceipt",
 		"StepChangeUseSerialLotNumberByItemKey,

@@ -3296,7 +3296,50 @@ Function ExtractData_FromSPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
 	|GROUP BY
 	|	BasisesTable.Key,
-	|	SerialLotNumbers.SerialLotNumber";
+	|	SerialLotNumbers.SerialLotNumber
+	|;
+	|///////////////////////////////////////////////////////////////////////////////
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.ShipmentPlaningOrder.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|
+	|UNION ALL
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.ShipmentPlaningOrder.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|	
+	|	INNER JOIN
+	|	
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS Reg
+	|	
+	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
+	|	AND SourceOfOrigins.Key = Reg.BasisKey
+	|	AND NOT SourceOfOrigins.SerialLotNumber.Ref IS NULL";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3305,6 +3348,7 @@ Function ExtractData_FromSPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TableItemList              = QueryResults[2].Unload();
 	TableShipmentPlaningOrders = QueryResults[3].Unload();
 	TableSerialLotNumbers      = QueryResults[4].Unload();
+	TableSourceOfOrigins       = QueryResults[5].Unload();
 	
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
@@ -3315,7 +3359,7 @@ Function ExtractData_FromSPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
 	Tables.Insert("ShipmentPlaningOrders" , TableShipmentPlaningOrders);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
-	
+	Tables.Insert("SourceOfOrigins"       , TableSourceOfOrigins);
 	AddTables(Tables);
 
 	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
@@ -3632,6 +3676,7 @@ Function ExtractData_FromSC_ThenFromSPO(BasisesTable, DataReceiver, AddInfo = Un
 	Tables.Insert("ShipmentPlaningOrders" , TablesSPO.ShipmentPlaningOrders);
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
+	Tables.Insert("SourceOfOrigins"       , TablesSPO.SourceOfOrigins);
 
 	AddTables(Tables);
 
@@ -3718,6 +3763,7 @@ Function ExtractData_FromSC_ThenFromSPO_ThenFromSO(BasisesTable, DataReceiver, A
 	Tables.Insert("ShipmentPlaningOrders" , TablesSPO.ShipmentPlaningOrders);
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
+	Tables.Insert("SourceOfOrigins"       , TablesSPO.SourceOfOrigins);
 
 	AddTables(Tables);
 
@@ -3787,7 +3833,50 @@ Function ExtractData_FromSPO_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
 	|GROUP BY
 	|	BasisesTable.Key,
-	|	SerialLotNumbers.SerialLotNumber";
+	|	SerialLotNumbers.SerialLotNumber
+	|;
+	|///////////////////////////////////////////////////////////////////////////////
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.ShipmentPlaningOrder.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|
+	|UNION ALL
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.ShipmentPlaningOrder.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|	
+	|	INNER JOIN
+	|	
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS Reg
+	|	
+	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
+	|	AND SourceOfOrigins.Key = Reg.BasisKey
+	|	AND NOT SourceOfOrigins.SerialLotNumber.Ref IS NULL";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3798,6 +3887,7 @@ Function ExtractData_FromSPO_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	TableRowIDInfo             = QueryResults[1].Unload();
 	TableShipmentPlaningOrders = QueryResults[3].Unload();
 	TableSerialLotNumbers      = QueryResults[4].Unload();
+	TableSourceOfOrigins       = QueryResults[5].Unload();
 	
 	Tables = New Structure();
 	Tables.Insert("ItemList"              , TablesSO.ItemList);
@@ -3805,6 +3895,7 @@ Function ExtractData_FromSPO_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	Tables.Insert("SpecialOffers"         , TablesSO.SpecialOffers);
 	Tables.Insert("ShipmentPlaningOrders" , TableShipmentPlaningOrders);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
+	Tables.Insert("SourceOfOrigins"       , TableSourceOfOrigins);
 
 	AddTables(Tables);
 	
@@ -6172,7 +6263,11 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 		
 		If NotGroupArray.Count() Then
 			UniqueColumnNames = UniqueColumnNames + ", UniqueColumn";
-			Tables.ItemList.Columns.Add("UniqueColumn");
+			
+			If Tables.ItemList.Columns.Find("UniqueColumn") = Undefined Then
+				Tables.ItemList.Columns.Add("UniqueColumn");
+			EndIf;
+			
 			For Each Row In NotGroupArray Do
 				Row.UniqueColumn = New UUID();
 			EndDo;

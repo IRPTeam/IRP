@@ -2380,6 +2380,8 @@ Function CreateTablesForExtractData(EmptyTable)
 	Tables.Insert("FromRSC_ThenFromSO", EmptyTable.Copy());
 	Tables.Insert("FromSC_ThenFromSI", EmptyTable.Copy());
 	Tables.Insert("FromSC_ThenFromPIGR_ThenFromSO", EmptyTable.Copy());
+	Tables.Insert("FromSC_ThenFromSPO_ThenFromSO", EmptyTable.Copy());
+	Tables.Insert("FromSC_ThenFromSPO", EmptyTable.Copy());
 	Tables.Insert("FromPO", EmptyTable.Copy());
 	Tables.Insert("FromPI", EmptyTable.Copy());
 	Tables.Insert("FromGR", EmptyTable.Copy());
@@ -2422,7 +2424,7 @@ Function ExtractDataByTables(Tables, DataReceiver, AddInfo = Undefined)
 	EndIf;
 	
 	If Tables.FromSPO.Count() Then
-		ExtractedData.Add(ExtractData_FromSPO(Tables.FromSC, DataReceiver, AddInfo));
+		ExtractedData.Add(ExtractData_FromSPO(Tables.FromSPO, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromRSC.Count() Then
@@ -2448,7 +2450,15 @@ Function ExtractDataByTables(Tables, DataReceiver, AddInfo = Undefined)
 	If Tables.FromSC_ThenFromPIGR_ThenFromSO.Count() Then
 		ExtractedData.Add(ExtractData_FromSC_ThenFromPIGR_ThenFromSO(Tables.FromSC_ThenFromPIGR_ThenFromSO, DataReceiver, AddInfo));
 	EndIf;
-
+	
+	If Tables.FromSC_ThenFromSPO_ThenFromSO.Count() Then
+		ExtractedData.Add(ExtractData_FromSC_ThenFromSPO_ThenFromSO(Tables.FromSC_ThenFromSPO_ThenFromSO, DataReceiver, AddInfo));
+	EndIf;
+	
+	If Tables.FromSC_ThenFromSPO.Count() Then
+		ExtractedData.Add(ExtractData_FromSC_ThenFromSPO(Tables.FromSC_ThenFromSPO, DataReceiver, AddInfo));
+	EndIf;
+		
 	If Tables.FromSC_ThenFromSI.Count() Then
 		ExtractedData.Add(ExtractData_FromSC_ThenFromSI(Tables.FromSC_ThenFromSI, DataReceiver, AddInfo));
 	EndIf;
@@ -2557,6 +2567,18 @@ Procedure FillTablesFrom_SC(Tables, DataReceiver, RowBasisesTable)
 	ElsIf Is(BasisesInfo.ParentBasis).SI Then
 
 		NewRow = Tables.FromSC_ThenFromSI.Add();
+		FillPropertyValues(NewRow, RowBasisesTable);
+		NewRow.ParentBasis = BasisesInfo.ParentBasis;
+	
+	ElsIf Is(BasisesInfo.ParentBasis).SPO And Is(BasisesInfo.RowRef.Basis).SO Then
+
+		NewRow = Tables.FromSC_ThenFromSPO_ThenFromSO.Add();
+		FillPropertyValues(NewRow, RowBasisesTable);
+		NewRow.ParentBasis = BasisesInfo.ParentBasis;
+	
+	ElsIf Is(BasisesInfo.ParentBasis).SPO Then
+
+		NewRow = Tables.FromSC_ThenFromSPO.Add();
 		FillPropertyValues(NewRow, RowBasisesTable);
 		NewRow.ParentBasis = BasisesInfo.ParentBasis;
 
@@ -2734,7 +2756,8 @@ Function GetQueryText_BasisesTable()
 	|	BasisesTable.ParentBasis,
 	|	BasisesTable.Unit,
 	|	BasisesTable.BasisUnit,
-	|	BasisesTable.QuantityInBaseUnit
+	|	BasisesTable.QuantityInBaseUnit,
+	|	BasisesTable.*
 	|INTO BasisesTable
 	|FROM
 	|	&BasisesTable AS BasisesTable
@@ -2749,7 +2772,8 @@ Function GetQueryText_BasisesTable()
 	|	BasisesTable.CurrentStep,
 	|	BasisesTable.RowRef,
 	|	BasisesTable.Basis,
-	|	BasisesTable.QuantityInBaseUnit AS Quantity
+	|	BasisesTable.QuantityInBaseUnit AS Quantity,
+	|	BasisesTable.*
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|;
@@ -2829,7 +2853,8 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		False 
 	|	ELSE 
 	|		ItemList.Item.ControlCodeString 
-	|	END AS isControlCodeString
+	|	END AS isControlCodeString,
+	|	BasisesTable.*
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.SalesOrder.ItemList AS ItemList
@@ -3216,6 +3241,7 @@ Function ExtractData_FromSPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
 	|	value(Enum.SalesTransactionTypes.Sales) as TransactionTypeSales,
+	|	value(Enum.ShipmentConfirmationTransactionTypes.Sales) as TransactionType,
 	|	0 AS Quantity,
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
@@ -3239,9 +3265,9 @@ Function ExtractData_FromSPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.Key,
 	|	BasisesTable.BasisKey,
-	|	BasisesTable.Basis AS ShipmentConfirmation,
+	|	BasisesTable.Basis AS ShipmentPlaningOrder,
 	|	BasisesTable.QuantityInBaseUnit AS Quantity,
-	|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentPlaningOrder
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.ShipmentPlaningOrder.ItemList AS ItemList
@@ -3277,7 +3303,7 @@ Function ExtractData_FromSPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	TableRowIDInfo             = QueryResults[1].Unload();
 	TableItemList              = QueryResults[2].Unload();
-	TableShipmentConfirmations = QueryResults[3].Unload();
+	TableShipmentPlaningOrders = QueryResults[3].Unload();
 	TableSerialLotNumbers      = QueryResults[4].Unload();
 	
 	For Each RowItemList In TableItemList Do
@@ -3287,7 +3313,7 @@ Function ExtractData_FromSPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables = New Structure();
 	Tables.Insert("ItemList"              , TableItemList);
 	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
-	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
+	Tables.Insert("ShipmentPlaningOrders" , TableShipmentPlaningOrders);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
 	
 	AddTables(Tables);
@@ -3526,7 +3552,7 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
 EndFunction
 
-Function ExtractData_FromSPO_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
+Function ExtractData_FromSC_ThenFromSPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text + 
 	"SELECT DISTINCT ALLOWED
@@ -3542,7 +3568,7 @@ Function ExtractData_FromSPO_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	|	BasisesTable.QuantityInBaseUnit
 	|FROM
 	|	BasisesTable AS BasisesTable
-	|		LEFT JOIN Document.ShipmentPlaningOrder.RowIDInfo AS RowIDInfo
+	|		LEFT JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
 	|		ON BasisesTable.Basis = RowIDInfo.Ref
 	|		AND BasisesTable.BasisKey = RowIDInfo.Key
 	|;
@@ -3559,6 +3585,179 @@ Function ExtractData_FromSPO_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	|	BasisesTable.Basis AS ShipmentConfirmation,
 	|	BasisesTable.QuantityInBaseUnit AS Quantity,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
+	|FROM
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
+	
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+
+	TablesSPO = ExtractData_FromSPO(QueryResults[2].Unload(), DataReceiver);
+	TablesSPO.ItemList.FillValues(True, "UseShipmentConfirmation");
+
+	TableRowIDInfo             = QueryResults[1].Unload();
+	TableShipmentConfirmations = QueryResults[3].Unload();
+	TableSerialLotNumbers      = QueryResults[4].Unload();
+	
+	Tables = New Structure();
+	Tables.Insert("ItemList"              , TablesSPO.ItemList);
+	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
+	Tables.Insert("ShipmentPlaningOrders" , TablesSPO.ShipmentPlaningOrders);
+	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
+	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
+
+	AddTables(Tables);
+
+	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
+EndFunction
+
+Function ExtractData_FromSC_ThenFromSPO_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text + 
+	"SELECT DISTINCT ALLOWED
+	|	BasisesTable.Key,
+	|	RowIDInfo.BasisKey AS BasisKey,
+	|	BasisesTable.RowID,
+	|	BasisesTable.CurrentStep,
+	|	BasisesTable.RowRef,
+	|	BasisesTable.RowRef.Basis AS ParentBasis,
+	|	BasisesTable.ParentBasis AS Basis,
+	|	BasisesTable.Unit,
+	|	BasisesTable.BasisUnit,
+	|	BasisesTable.QuantityInBaseUnit
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
+	|		ON BasisesTable.Basis = RowIDInfo.Ref
+	|		AND BasisesTable.BasisKey = RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.Key,
+	|	BasisesTable.BasisKey,
+	|	BasisesTable.Basis AS ShipmentConfirmation,
+	|	BasisesTable.QuantityInBaseUnit AS Quantity,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
+	|FROM
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
+	
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+
+	TablesSPO = ExtractData_FromSPO_ThenFromSO(QueryResults[2].Unload(), DataReceiver);
+	TablesSPO.ItemList.FillValues(True, "UseShipmentConfirmation");
+
+	TableRowIDInfo             = QueryResults[1].Unload();
+	TableShipmentConfirmations = QueryResults[3].Unload();
+	TableSerialLotNumbers      = QueryResults[4].Unload();
+	
+	Tables = New Structure();
+	Tables.Insert("ItemList"              , TablesSPO.ItemList);
+	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
+	Tables.Insert("ShipmentPlaningOrders" , TablesSPO.ShipmentPlaningOrders);
+	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
+	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
+
+	AddTables(Tables);
+
+	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
+EndFunction
+
+Function ExtractData_FromSPO_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text + 
+	"SELECT DISTINCT ALLOWED
+	|	BasisesTable.Key,
+	|	RowIDInfo.BasisKey AS BasisKey,
+	|	BasisesTable.RowID,
+	|	BasisesTable.CurrentStep,
+	|	BasisesTable.RowRef,
+	|	VALUE(Document.SalesOrder.EmptyRef) AS ParentBasis,
+	|	BasisesTable.ParentBasis AS Basis,
+	|	BasisesTable.Unit,
+	|	BasisesTable.BasisUnit,
+	|	BasisesTable.QuantityInBaseUnit,
+	|	BasisesTable.Basis AS ShipmentPlaningOrder
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.ShipmentPlaningOrder.RowIDInfo AS RowIDInfo
+	|		ON BasisesTable.Basis = RowIDInfo.Ref
+	|		AND BasisesTable.BasisKey = RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.Key,
+	|	BasisesTable.BasisKey,
+	|	BasisesTable.Basis AS ShipmentPlaningOrder,
+	|	BasisesTable.QuantityInBaseUnit AS Quantity,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentPlaningOrder
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.ShipmentPlaningOrder.ItemList AS ItemList
@@ -3592,23 +3791,29 @@ Function ExtractData_FromSPO_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
-
-	TablesSO = ExtractData_FromSO(QueryResults[2].Unload(), DataReceiver);
-
+	
+	BasisTebleForSO = QueryResults[2].Unload();
+	TablesSO = ExtractData_FromSO(BasisTebleForSO, DataReceiver);
+		
 	TableRowIDInfo             = QueryResults[1].Unload();
-	TableShipmentConfirmations = QueryResults[3].Unload();
+	TableShipmentPlaningOrders = QueryResults[3].Unload();
 	TableSerialLotNumbers      = QueryResults[4].Unload();
 	
 	Tables = New Structure();
 	Tables.Insert("ItemList"              , TablesSO.ItemList);
 	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
 	Tables.Insert("SpecialOffers"         , TablesSO.SpecialOffers);
-	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
+	Tables.Insert("ShipmentPlaningOrders" , TableShipmentPlaningOrders);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
 
 	AddTables(Tables);
-
-	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
+	
+	If TypeOf(DataReceiver) = Type("DocumentRef.ShipmentConfirmation") Then
+		Return Tables;
+	Else
+		CollapsedTables = CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
+		Return CollapsedTables;
+	EndIf; 
 EndFunction
 
 Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -5873,6 +6078,10 @@ Procedure AddTables(Tables)
 	If Not Tables.Property("ShipmentConfirmations") Then
 		Tables.Insert("ShipmentConfirmations", GetEmptyTable_ShipmentConfirmations());
 	EndIf;
+	
+	If Not Tables.Property("ShipmentPlaningOrders") Then
+		Tables.Insert("ShipmentPlaningOrders", GetEmptyTable_ShipmentPlaningOrders());
+	EndIf;
 
 	If Not Tables.Property("GoodsReceipts") Then
 		Tables.Insert("GoodsReceipts", GetEmptyTable_GoodsReceipts());
@@ -6014,6 +6223,10 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 			For Each Row In Tables.ShipmentConfirmations.FindRows(Filter) Do
 				Row.Key = NewKey;
 			EndDo;
+			
+			For Each Row In Tables.ShipmentPlaningOrders.FindRows(Filter) Do
+				Row.Key = NewKey;
+			EndDo;
 
 			For Each Row In Tables.GoodsReceipts.FindRows(Filter) Do
 				Row.Key = NewKey;
@@ -6040,6 +6253,7 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 
 	Tables.SpecialOffers.GroupBy(GetColumnNames_SpecialOffers()                 , GetColumnNamesSum_SpecialOffers());
 	Tables.ShipmentConfirmations.GroupBy(GetColumnNames_ShipmentConfirmations() , GetColumnNamesSum_ShipmentConfirmations());
+	Tables.ShipmentPlaningOrders.GroupBy(GetColumnNames_ShipmentPlaningOrders() , GetColumnNamesSum_ShipmentPlaningOrders());
 	Tables.GoodsReceipts.GroupBy(GetColumnNames_GoodsReceipts()                 , GetColumnNamesSum_GoodsReceipts());
 	Tables.WorkSheets.GroupBy(GetColumnNames_WorkSheets()                       , GetColumnNamesSum_WorkSheets());
 	Tables.SerialLotNumbers.GroupBy(GetColumnNames_SerialLotNumbers()           , GetColumnNamesSum_SerialLotNumbers());
@@ -6926,6 +7140,7 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SO);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SC);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.WS);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SPO);
 	EndIf;
 	
 	If Is.SC Then 
@@ -6933,6 +7148,7 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.PR);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SI);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SPO);
 	EndIf;
 	
 	If Is.SPO Then 
@@ -8666,13 +8882,13 @@ Procedure ApplyFilterSet_SPO_ForSC(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_PartnerPurchases
-	|					THEN RowRef.PartnerPurchases = &PartnerPurchases
+	|				WHEN &Filter_PartnerSales
+	|					THEN RowRef.PartnerSales = &PartnerSales
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_LegalNamePurchases
-	|					THEN RowRef.LegalNamePurchases = &LegalNamePurchases
+	|				WHEN &Filter_LegalNameSales
+	|					THEN RowRef.LegalNameSales = &LegalNameSales
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -12261,6 +12477,7 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData, Ref = Un
 		EndDo;
 		
 		tmpTable_ShipmentConfirmations = GetEmptyTable_ShipmentConfirmations();
+		tmpTable_ShipmentPlaningOrders = GetEmptyTable_ShipmentPlaningorders();
 		tmpTable_GoodsReceipts         = GetEmptyTable_GoodsReceipts();
 		tmpTable_WorkSheets            = GetEmptyTable_WorkSheets();
 		tmpTable_RowIDInfo             = GetEmptyTable_RowIDInfo();
@@ -12281,6 +12498,8 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData, Ref = Un
 				For Each Row_DepTable In DepTable Do
 					If Upper(TableName_Refreshable) = Upper("ShipmentConfirmations") Then
 						FillPropertyValues(tmpTable_ShipmentConfirmations.Add(), Row_DepTable);
+					ElsIf Upper(TableName_Refreshable) = Upper("ShipmentPlaningOrders") Then
+						FillPropertyValues(tmpTable_ShipmentPlaningOrders.Add(), Row_DepTable);
 					ElsIf Upper(TableName_Refreshable) = Upper("GoodsReceipts") Then
 						FillPropertyValues(tmpTable_GoodsReceipts.Add(), Row_DepTable);
 					ElsIf Upper(TableName_Refreshable) = Upper("RowIDInfo") Then
@@ -12299,6 +12518,11 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData, Ref = Un
 		tmpTable_ShipmentConfirmations.GroupBy((GetColumnNames_ShipmentConfirmations() + ", " + GetColumnNamesSum_ShipmentConfirmations()));
 		For Each Row_DepTable In tmpTable_ShipmentConfirmations Do
 			FillingValues.ShipmentConfirmations.Add(ValueTableRowToStructure(Tables.ShipmentConfirmations.Columns, Row_DepTable));
+		EndDo;
+	
+		tmpTable_ShipmentPlaningOrders.GroupBy((GetColumnNames_ShipmentPlaningOrders() + ", " + GetColumnNamesSum_ShipmentPlaningOrders()));
+		For Each Row_DepTable In tmpTable_ShipmentPlaningOrders Do
+			FillingValues.ShipmentPlaningOrders.Add(ValueTableRowToStructure(Tables.ShipmentPlaningOrders.Columns, Row_DepTable));
 		EndDo;
 	
 		tmpTable_GoodsReceipts.GroupBy((GetColumnNames_GoodsReceipts() + ", " + GetColumnNamesSum_GoodsReceipts()));
@@ -12371,6 +12595,7 @@ Function JoinAllExtractedData(ArrayOfData)
 	Tables.Insert("RowIDInfo"             , GetEmptyTable_RowIDInfo());
 	Tables.Insert("SpecialOffers"         , GetEmptyTable_SpecialOffers());
 	Tables.Insert("ShipmentConfirmations" , GetEmptyTable_ShipmentConfirmations());
+	Tables.Insert("ShipmentPlaningOrders" , GetEmptyTable_ShipmentPlaningOrders());
 	Tables.Insert("GoodsReceipts"         , GetEmptyTable_GoodsReceipts());
 	Tables.Insert("WorkSheets"            , GetEmptyTable_WorkSheets());
 	Tables.Insert("SerialLotNumbers"      , GetEmptyTable_SerialLotNumbers());
@@ -12393,6 +12618,7 @@ Function GetTableNames_Refreshable(Excludings = "")
 	NamesArray.Add("RowIDInfo");
 	NamesArray.Add("SpecialOffers");
 	NamesArray.Add("ShipmentConfirmations");
+	NamesArray.Add("ShipmentPlaningOrders");
 	NamesArray.Add("GoodsReceipts");
 	NamesArray.Add("WorkSheets");
 	NamesArray.Add("SerialLotNumbers");
@@ -12416,6 +12642,7 @@ EndFunction
 Function GetTableNames_LinkedDocuments()
 	NamesArray = New Array();
 	NamesArray.Add("ShipmentConfirmations");
+	NamesArray.Add("ShipmentPlaningOrders");
 	NamesArray.Add("GoodsReceipts");
 	NamesArray.Add("WorkSheets");
 	Return NamesArray;
@@ -12595,6 +12822,22 @@ EndFunction
 
 Function GetEmptyTable_ShipmentConfirmations()
 	Return GetEmptyTable(GetColumnNames_ShipmentConfirmations() + ", " + GetColumnNamesSum_ShipmentConfirmations());
+EndFunction
+
+#EndRegion
+
+#Region EmptyTables_ShipmentPlaningOrders
+
+Function GetColumnNames_ShipmentPlaningOrders()
+	Return "Ref, Key, BasisKey, ShipmentPlaningOrder";
+EndFunction
+
+Function GetColumnNamesSum_ShipmentPlaningOrders()
+	Return "Quantity, QuantityInShipmentPlaningOrder";
+EndFunction
+
+Function GetEmptyTable_ShipmentPlaningOrders()
+	Return GetEmptyTable(GetColumnNames_ShipmentPlaningOrders() + ", " + GetColumnNamesSum_ShipmentPlaningOrders());
 EndFunction
 
 #EndRegion

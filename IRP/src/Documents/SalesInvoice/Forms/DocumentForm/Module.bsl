@@ -584,6 +584,11 @@ Procedure LinkedDocuments_ShipmentConfirmations(Command)
 EndProcedure
 
 &AtClient
+Procedure LinkedDocuments_ShipmentPlaningOrders(Command)
+	DocumentsClient.OpenLinkedDocuments(Object, ThisObject, "ShipmentPlaningOrders", "ShipmentPlaningOrder", "QuantityInShipmentPlaningOrder");
+EndProcedure
+
+&AtClient
 Procedure LinkedDocuments_WorkSheets(Command)
 	DocumentsClient.OpenLinkedDocuments(Object, ThisObject, "WorkSheets", "WorkSheet", "QuantityInWorkSheet");
 EndProcedure

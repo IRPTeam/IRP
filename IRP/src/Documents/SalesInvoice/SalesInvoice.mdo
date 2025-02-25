@@ -1500,7 +1500,6 @@
       </synonym>
       <type>
         <types>DocumentRef.ShipmentConfirmation</types>
-        <types>DocumentRef.ShipmentPlaningOrder</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -2022,6 +2021,85 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="b6b2b639-d98a-41be-9f7a-55d9081206dd">
+    <producedTypes>
+      <objectType typeId="a047aee1-e579-4b8c-aa3d-6fcbd39699b5" valueTypeId="6e527028-8e23-4c99-92bc-614e1435a9ef"/>
+      <rowType typeId="82647614-eaee-4648-8470-fc9d28740598" valueTypeId="1b5c3a66-c3be-48bf-ba1d-c9aae8658b71"/>
+    </producedTypes>
+    <name>ShipmentPlaningOrders</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipment planing orders</value>
+    </synonym>
+    <attributes uuid="4d983cb8-d00c-46dd-af64-84806605052c">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e57612c3-4a15-43c0-8277-f1f1c8788291">
+      <name>ShipmentPlaningOrder</name>
+      <synonym>
+        <key>en</key>
+        <value>Shipment planing order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.ShipmentPlaningOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f831f59f-08bc-41e5-af0b-b7cd3d0b7889">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="bbbe5825-0d49-405c-88d8-3798bd541e44">
+      <name>QuantityInShipmentPlaningOrder</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in shipment planing order</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="07f4b8b2-be4d-46ab-9d4b-650172c487df">
+      <name>BasisKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
   <templates uuid="3ff8fed4-eec7-453a-bebe-b7c540c6a558">

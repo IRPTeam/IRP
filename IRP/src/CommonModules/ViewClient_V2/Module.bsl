@@ -1026,8 +1026,12 @@ Procedure OnOpenFormNotify(Parameters) Export
 		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Parameters.Object);
 	EndIf;
 	
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
+		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentPlaningOrders");
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
 	EndIf;
 	
@@ -2734,6 +2738,10 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentConfirmations");
 	EndIf;
 	
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentPlaningOrders") Then
+		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentPlaningOrders");
+	EndIf;
+	
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "GoodsReceipts") Then
 		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "GoodsReceipts");
 	EndIf;
@@ -3596,8 +3604,12 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 			ControlCodeStringsClient.UpdateState(Parameters.Object);
 		EndIf;
 					
-		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
+		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
+			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentPlaningOrders");
+		EndIf;
+		
+		If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
 		EndIf;
 		

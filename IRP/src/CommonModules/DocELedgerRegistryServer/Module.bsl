@@ -172,17 +172,16 @@ Function CreateHeader(JERef, BasisShortDescription, LocalizationCode)
 	Values.Add(Format(JERef.Date,"DF=yyyy-MM-dd"));
 		
 	// Number
-	Values.Add(String(JERef.Number));
+	Values.Add(Format(JERef.Number, "NG=0"));
 	
 	// Comment
-	Comment = "";
-	If ValueIsFilled(JEBasis) And ValueIsFilled(JEBasis.Comment) Then
+	Comment = JERef.Comment;
+	If IsBlankString(Comment) 
+		And ValueIsFilled(JEBasis) And ValueIsFilled(JEBasis.Comment) Then
 		Comment = JEBasis.Comment;
-	Else
-		Comment = JERef.Comment;
+		
+		Comment = TrimAll(BasisShortDescription + " " + Left(Comment, 100));
 	EndIf;
-	
-	Comment = Comment + " " + BasisShortDescription;
 	
 	If Not IsBlankString(Comment) Then
 		Values.Add(Comment);
@@ -197,7 +196,7 @@ Function CreateHeader(JERef, BasisShortDescription, LocalizationCode)
 	Values.Add(Format(JERef.DocumentAmount, "NFD=2; NDS=.; NG=;"));
 	
 	// Sequental number
-	Values.Add(String(JERef.SequentalNumber));
+	Values.Add(Format(JERef.SequentalNumber, "NG=0"));
 	
 	Return Values;
 EndFunction
@@ -215,7 +214,7 @@ Function CreateRecords(LineNumber, JERef, BasisLongDescription, LocalizationCode
 	
 	If ValueIsFilled(JERef.Basis) Then
 		
-		DocumentRef = String(JERef.Number);
+		DocumentRef = Format(JERef.Number, "NG=0");
 		DocumentDate = Format(JERef.Basis.Date,"DF=yyyy-MM-dd");
 		DocumentTypeDescription = BasisLongDescription;
 			
@@ -223,7 +222,7 @@ Function CreateRecords(LineNumber, JERef, BasisLongDescription, LocalizationCode
 			DocumentType = "invoice";
 		ElsIf TypeOf(JERef.Basis) = Type("DocumentRef.PurchaseInvoice") Then
 			DocumentType = "invoice";
-			DocumentNumber = JERef.Basis.DocNumber;
+			DocumentNumber = TrimAll(JERef.Basis.DocNumber);
 		Else
 			DocumentType = "other";
 		EndIf;
@@ -266,7 +265,16 @@ Function CreateRecords(LineNumber, JERef, BasisLongDescription, LocalizationCode
 		AccountSubDr = GetSubAccount(Record, "AccountDr");
 		If ValueIsFilled(AccountSubDr) Then
 			ValuesDr.Add(AccountSubDr["Description_" + LocalizationCode]);
-			ValuesDr.Add(String(AccountSubDr.Code));
+			If TypeOf(AccountSubDr) = Type("ChartOfAccountsRef.Basic") Then
+				ValuesDr.Add(String(AccountSubDr.Code));
+			Else
+				ArraySubDr = New Array;	
+				ArraySubDr.Add(Record.AccountDr.Code);
+				ArraySubDr.Add(".");
+				ArraySubDr.Add(Format(AccountSubDr.Code, "ND=5; NLZ=; NG=0"));
+				
+				ValuesDr.Add(StrConcat(ArraySubDr));
+			EndIf;
 		Else
 			Raise StrTemplate("Not defined Account sub Dr [%1] [%2]", JERef, Record.AccountDr.Code);
 		EndIf;
@@ -305,8 +313,16 @@ Function CreateRecords(LineNumber, JERef, BasisLongDescription, LocalizationCode
 		EndIf;
 		
 		If ValueIsFilled(AccountSubCr) Then
-			ValuesCr.Add(String(AccountSubCr.Code));
 			ValuesCr.Add(AccountSubCr["Description_" + LocalizationCode]);
+			If TypeOf(AccountSubCr) = Type("ChartOfAccountsRef.Basic") Then
+				ValuesCr.Add(String(AccountSubCr.Code));
+			Else
+				ArraySubCr = New Array;					ArraySubCr.Add(Record.AccountCr.Code);
+				ArraySubCr.Add(".");
+				ArraySubCr.Add(Format(AccountSubCr.Code, "ND=5; NLZ=; NG=0"));
+				
+				ValuesCr.Add(StrConcat(ArraySubCr)); 
+			EndIf;
 		Else
 			Raise StrTemplate("Not defined Account sub Cr [%1] [%2]", JERef, Record.AccountCr.Code);
 		EndIf;
@@ -340,22 +356,18 @@ Function GetMainAccount(Record, AccountType)
 EndFunction
 
 Function GetSubAccount(Record, AccountType)
-	If ValueIsFilled(Record[AccountType].Parent) Then
+	
+	ExtDimensionType = Undefined;
+	For Each Row In Record[AccountType].ExtDimensionTypes Do
+		If Row.ELedgerDetailed Then
+			ExtDimensionType = Row.ExtDimensionType;
+			Break;
+		EndIf;		
+	EndDo;
+	                                              
+	If ExtDimensionType = Undefined Then
 		Return Record[AccountType];
 	Else
-		ExtDimensionType = Undefined;
-		
-		If Record[AccountType].ExtDimensionTypes.Count() = 1 Then
-			ExtDimensionType = Record[AccountType].ExtDimensionTypes[0].ExtDimensionType;
-		Else
-			For Each Row In Record[AccountType].ExtDimensionTypes Do
-				If Row.ELedgerDetailed Then
-					ExtDimensionType = Row.ExtDimensionType;
-					Break;
-				EndIf;		
-			EndDo;
-		EndIf;
-		
 		If ExtDimensionType <> Undefined Then
 			For Each Row In ?(AccountType = "AccountDr", Record.ExtDimensionsDr, Record.ExtDimensionsCr) Do
 				If Row.Key = ExtDimensionType Then

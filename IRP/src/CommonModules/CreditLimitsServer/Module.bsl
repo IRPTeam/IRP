@@ -75,7 +75,7 @@ Function GetCreditLimits(ShipmentDoc, Date, Partner, CurrencyMovementType)
 	LimitAmount = 0;
 	
 	If QuerySelection.Next() Then
-		LimitAmount = QuerySelection.LimitAmount;
+		LimitAmount = ?(ValueIsFilled(QuerySelection.LimitAmount), QuerySelection.LimitAmount, 0);
 	EndIf;
 	Return LimitAmount;
 EndFunction

@@ -1580,6 +1580,7 @@
   <informationRegisters>InformationRegister.T9052S_AccountingRelevance</informationRegisters>
   <informationRegisters>InformationRegister.T9070S_ELedgerDetailComments</informationRegisters>
   <informationRegisters>InformationRegister.NumeratorCounters</informationRegisters>
+  <informationRegisters>InformationRegister.CreditLimits</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

@@ -111,4 +111,20 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			EndIf;
 		EndDo;
 	EndIf;
+	
+	//If IsCreditLimitExeeded() Then
+	//	Cancel = True;
+	//EndIf;
 EndProcedure
+
+Function IsCreditLimitExeeded()
+	// Credit limit exceeded. Limit: %1, limit balance: %2, transaction: %3, lack: %4 %5
+	//		Message = StrTemplate(R().Error_085, CreditLimitAmount, CreditLimitAmount - QuerySelection.AmountBalance,
+	//			Ref.DocumentAmount, (QuerySelection.AmountBalance + Ref.DocumentAmount) - CreditLimitAmount,
+	//			Ref.Currency);
+	
+EndFunction
+
+
+
+

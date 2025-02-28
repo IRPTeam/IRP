@@ -628,6 +628,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.CreditLimits</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9530S_WorkDays</name>
 		<right>
 			<name>Read</name>

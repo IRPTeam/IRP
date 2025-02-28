@@ -207,6 +207,7 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(R9610T_ShipmentPlaning());
 	Return QueryArray;
 EndFunction
 
@@ -232,6 +233,18 @@ Function ItemList()
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
+		|	SourceOfOrigins.Key,
+		|	SourceOfOrigins.SourceOfOrigin,
+		|	SourceOfOrigins.Quantity
+		|INTO SourceOfOrigins
+		|FROM
+		|	Document.ShipmentPlaningOrder.SourceOfOrigins AS SourceOfOrigins
+		|WHERE
+		|	SourceOfOrigins.Ref = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	ItemList.Ref.Company AS Company,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey AS ItemKey,
@@ -244,12 +257,18 @@ Function ItemList()
 		|	ItemList.SalesOrder AS SalesOrder,
 		|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
 		|	ItemList.Ref.Branch AS Branch,
-		|	ItemList.Key
+		|	ItemList.Key,
+		|	SourceOfOrigins.SourceOfOrigin,
+		|	SourceOfOrigins.Quantity AS SourceOfOriginQuantity,
+		|	ItemList.Item,
+		|	ItemList.Ref.Partner
 		|INTO ItemList
 		|FROM
 		|	Document.ShipmentPlaningOrder.ItemList AS ItemList
 		|		INNER JOIN TableRowIDInfo AS TableRowIDInfo
 		|		ON ItemList.Key = TableRowIDInfo.Key
+		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON ItemList.Key = SourceOfOrigins.Key
 		|WHERE
 		|	ItemList.Ref = &Ref";
 EndFunction
@@ -257,6 +276,27 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
+
+Function R9610T_ShipmentPlaning()
+	Return
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Store,
+		|	ItemList.Partner,
+		|	ItemList.Item,
+		|	ItemList.ItemKey,
+		|	ItemList.SourceOfOrigin AS SourceOfOrigin,
+		|	ItemList.SalesOrder AS Order,
+		|	0 AS PlannedQuantity,
+		|	ItemList.SourceOfOriginQuantity AS ShippedQuantity
+		|INTO R9610T_ShipmentPlaning
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesOrderExists";
+EndFunction
 
 Function T3010S_RowIDInfo()
 	Return 

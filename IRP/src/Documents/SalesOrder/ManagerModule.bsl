@@ -323,6 +323,7 @@ Function ItemList()
 		   |		ELSE SalesOrderItemList.ReservationDate
 		   |	END AS ReservationDate,
 		   |	SalesOrderItemList.SalesPerson,
+		   |	SalesOrderItemList.Ref.Partner AS Partner,
 		   |	SalesOrderItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
 		   |	SalesOrderItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
 		   |	NOT SalesOrderItemList.Ref.ShipmentMode.Ref IS NULL AS IsRetailShipment
@@ -363,6 +364,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(R4037B_PlannedReceiptReservationRequests());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(R9610T_ShipmentPlaning());	
 	Return QueryArray;
 EndFunction
 
@@ -629,6 +631,27 @@ Function R3026B_SalesOrdersCustomerAdvance()
 		   |	ELSE UNDEFINED
 		   |	END
 		   |	";
+EndFunction
+
+Function R9610T_ShipmentPlaning()
+	Return
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Store,
+		|	ItemList.Partner,
+		|	ItemList.Item,
+		|	ItemList.ItemKey,
+		|	Undefined AS SourceOfOrigin,
+		|	ItemList.Order,
+		|	ItemList.Quantity AS PlannedQuantity,
+		|	0 AS ShippedQuantity
+		|INTO R9610T_ShipmentPlaning
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
 EndFunction
 
 #EndRegion

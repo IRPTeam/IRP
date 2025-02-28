@@ -67,6 +67,7 @@
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
+  <registerRecords>AccumulationRegister.R9610T_ShipmentPlaning</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -117,10 +118,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="1e8f7ee8-569e-499a-a45d-3359fcaafa1d">
-    <name>ShipmentDate</name>
+    <name>ShipmentStartDate</name>
     <synonym>
       <key>en</key>
-      <value>Shipment date</value>
+      <value>Shipment start date</value>
     </synonym>
     <type>
       <types>Date</types>
@@ -131,6 +132,24 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="25e99cc7-c347-44d3-8c51-803cd486d304">
+    <name>ShipmentEndDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipment end date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

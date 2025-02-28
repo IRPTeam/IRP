@@ -639,7 +639,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ShipmentDate</name>
+          <name>ShipmentPeriod</name>
           <id>462</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -647,10 +647,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ShipmentDate</segments>
+            <segments>ShipmentPeriod</segments>
           </dataPath>
           <extendedTooltip>
-            <name>ShipmentDateExtendedTooltip</name>
+            <name>ShipmentPeriodExtendedTooltip</name>
             <id>464</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -665,7 +665,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ShipmentDateContextMenu</name>
+            <name>ShipmentPeriodContextMenu</name>
             <id>463</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -3889,6 +3889,24 @@
     <extInfo xsi:type="form:ValueListExtInfo">
       <itemValueType/>
     </extInfo>
+  </attributes>
+  <attributes>
+    <name>ShipmentPeriod</name>
+    <title>
+      <key>en</key>
+      <value>Shipment period</value>
+    </title>
+    <id>25</id>
+    <valueType>
+      <types>StandardPeriod</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <savedData>true</savedData>
   </attributes>
   <formCommands>
     <name>SearchByBarcode</name>

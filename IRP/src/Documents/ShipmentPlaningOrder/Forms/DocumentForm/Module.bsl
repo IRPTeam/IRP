@@ -17,6 +17,8 @@ EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	CurrentObject.ShipmentStartDate = ThisObject.ShipmentPeriod.StartDate;
+	CurrentObject.ShipmentEndDate = ThisObject.ShipmentPeriod.EndDate;
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
@@ -91,6 +93,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	For Each Row In Form.Object.ItemList Do
 		Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
 	EndDo;
+	Form.ShipmentPeriod.StartDate = Object.ShipmentStartDate;
+	Form.ShipmentPeriod.EndDate = Object.ShipmentEndDate;
 EndProcedure
 
 &AtClient

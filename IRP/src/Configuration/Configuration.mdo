@@ -489,6 +489,7 @@
   <roles>Role.Document_ELedgerRegistry</roles>
   <roles>Role.Document_StockCorrection</roles>
   <roles>Role.Document_ShipmentPlaningOrder</roles>
+  <roles>Role.AccumulationRegisters_R9610T_ShipmentPlaning</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -1684,6 +1685,7 @@
   <accumulationRegisters>AccumulationRegister.R9570T_AdditionalDeduction</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5020B_PartnersBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.T1040T_RowIDSerialLotNumbers</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R9610T_ShipmentPlaning</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

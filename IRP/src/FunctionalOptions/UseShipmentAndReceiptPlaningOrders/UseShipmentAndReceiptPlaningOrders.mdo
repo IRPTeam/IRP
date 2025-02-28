@@ -8,4 +8,5 @@
   <location>Constant.UseShipmentAndReceiptPlaningOrders</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Document.ShipmentPlaningOrder</content>
+  <content>AccumulationRegister.R9610T_ShipmentPlaning</content>
 </mdclass:FunctionalOption>

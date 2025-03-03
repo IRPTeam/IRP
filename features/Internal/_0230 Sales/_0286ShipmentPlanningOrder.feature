@@ -123,6 +123,44 @@ Scenario: _0286002 create Shipment receipt planing order - Shipment confirmation
 			| 'Number'                         |
 			| '$$NumberShipmentPlaningOrder1$$'|
 	* Create Shipment confirmation
+		And I go to line in "List" table
+			| 'Number'                          |
+			| '$$NumberShipmentPlaningOrder1$$' |
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "Ok" button
+	* Check
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "Branch" became equal to "Logistics department"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "isPackage" became equal to "No"
+		And "ItemList" table became equal
+			| '#' | 'Item'       | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Sales invoice' | 'Store'    | 'Shipment basis'                              | 'Sales order'                                 | 'Shipment planing order'    | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Shirt'      | ''                   | '38/Black' | ''                   | 'pcs'  | '5,000'    | ''              | 'Store 01' | 'Sales order 2 112 dated 03.03.2025 10:36:15' | 'Sales order 2 112 dated 03.03.2025 10:36:15' | '$$ShipmentPlaningOrder1$$' | ''                         | ''                      | ''                |
+			| '2' | 'Boots'      | ''                   | '38/18SD'  | ''                   | 'pcs'  | '15,000'   | ''              | 'Store 01' | 'Sales order 2 112 dated 03.03.2025 10:36:15' | 'Sales order 2 112 dated 03.03.2025 10:36:15' | '$$ShipmentPlaningOrder1$$' | ''                         | ''                      | ''                |
+			| '3' | 'High shoes' | ''                   | '37/19SD'  | ''                   | 'pcs'  | '2,000'    | ''              | 'Store 01' | 'Sales order 2 112 dated 03.03.2025 10:36:15' | 'Sales order 2 112 dated 03.03.2025 10:36:15' | '$$ShipmentPlaningOrder1$$' | ''                         | ''                      | ''                |
+		
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "TransactionType" became equal to "Sales"
+		And I click the button named "FormPost"
+		And I delete "$$NumberShipmentConfirmation1$$" variable
+		And I delete "$$ShipmentConfirmation1$$" variable
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation1$$"
+		And I save the window as "$$ShipmentConfirmation1$$"
+		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And "List" table contains lines
+			| 'Number'                         |
+			| '$$NumberShipmentConfirmation1$$'|
+		And I close all client application windows
+		
+
+				
+				
+				
 
 		
 

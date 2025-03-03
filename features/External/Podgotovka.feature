@@ -1537,6 +1537,27 @@ Scenario: set True value to the constant Use salary
 		And I click "Save" button
 		And I close current window	
 
+		
+Scenario: set True value to the constant Use shipment and receipt planing orders
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        |
+			| 'Use shipment and receipt planing orders'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+
+Scenario: set False value to the constant Use shipment and receipt planing orders
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        |
+			| 'Use fixed assets'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+
 Scenario: set True value to the constant Use fixed assets
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
@@ -1546,6 +1567,7 @@ Scenario: set True value to the constant Use fixed assets
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window	
+
 
 Scenario: set True value to the constant Use additional table control document
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
@@ -1662,6 +1684,10 @@ Scenario: set True value to the constant Use numbering rules
 Scenario: set False value to the constant DisableLinkedRowsIntegrity
 		And I execute 1C:Enterprise script at server
 				| "Constants.DisableLinkedRowsIntegrity.Set(False);"     |
+
+Scenario: set True value to the constant DisableLinkedRowsIntegrity
+		And I execute 1C:Enterprise script at server
+				| "Constants.DisableLinkedRowsIntegrity.Set(True);"     |
 
 Scenario: set True value to the constant SaasMode
 		And I execute 1C:Enterprise script at server

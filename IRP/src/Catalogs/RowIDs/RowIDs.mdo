@@ -110,6 +110,7 @@
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.RowIDs.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.RowIDs.Form.ListForm</defaultListForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="2c75300d-a052-41c5-9a04-d95eda280216">
     <name>AgreementPurchases</name>
     <synonym>

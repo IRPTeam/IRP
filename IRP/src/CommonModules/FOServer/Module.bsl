@@ -105,6 +105,10 @@ Function IsUseUseSerialLotNumbers() Export
 	Return GetFunctionalOption("UseSerialLotNumbers");
 EndFunction
 
+Function IsUseShipmentAndReceiptPlaningOrders() Export
+	Return GetFunctionalOption("UseShipmentAndReceiptPlaningOrders");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

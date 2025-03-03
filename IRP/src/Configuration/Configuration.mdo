@@ -488,6 +488,8 @@
   <roles>Role.UseOutput</roles>
   <roles>Role.Document_ELedgerRegistry</roles>
   <roles>Role.Document_StockCorrection</roles>
+  <roles>Role.Document_ShipmentPlaningOrder</roles>
+  <roles>Role.AccumulationRegisters_R9610T_ShipmentPlaning</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -831,6 +833,8 @@
   <commonModules>CommonModule.DocStockCorrectionServer</commonModules>
   <commonModules>CommonModule.NumberingRulesServer</commonModules>
   <commonModules>CommonModule.NumberingRulesClientServer</commonModules>
+  <commonModules>CommonModule.DocShipmentPlaningOrderClient</commonModules>
+  <commonModules>CommonModule.DocShipmentPlaningOrderServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -956,6 +960,7 @@
   <functionalOptions>FunctionalOption.UseELedger</functionalOptions>
   <functionalOptions>FunctionalOption.UseVariableItemKey</functionalOptions>
   <functionalOptions>FunctionalOption.UseNumberingRules</functionalOptions>
+  <functionalOptions>FunctionalOption.UseShipmentAndReceiptPlaningOrders</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1074,6 +1079,7 @@
   <constants>Constant.UseELedger</constants>
   <constants>Constant.UseVariableItemKey</constants>
   <constants>Constant.UseNumberingRules</constants>
+  <constants>Constant.UseShipmentAndReceiptPlaningOrders</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
@@ -1313,6 +1319,7 @@
   <documents>Document.WorkSheet</documents>
   <documents>Document.ELedgerRegistry</documents>
   <documents>Document.StockCorrection</documents>
+  <documents>Document.ShipmentPlaningOrder</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1574,6 +1581,7 @@
   <informationRegisters>InformationRegister.T9052S_AccountingRelevance</informationRegisters>
   <informationRegisters>InformationRegister.T9070S_ELedgerDetailComments</informationRegisters>
   <informationRegisters>InformationRegister.NumeratorCounters</informationRegisters>
+  <informationRegisters>InformationRegister.CreditLimits</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -1677,6 +1685,7 @@
   <accumulationRegisters>AccumulationRegister.R9570T_AdditionalDeduction</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5020B_PartnersBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.T1040T_RowIDSerialLotNumbers</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R9610T_ShipmentPlaning</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

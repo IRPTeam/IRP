@@ -355,6 +355,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ShipmentPlaningOrder.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.TaxesOperation.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -1099,6 +1106,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ShipmentPlaningOrder.TabularSection.ItemList.Attribute.Store</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.SalesInvoice.Attribute.TransactionType</name>
 		<right>
 			<name>View</name>
@@ -1535,6 +1549,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ShipmentPlaningOrder</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.WorkSheet</name>
 		<right>
 			<name>Read</name>
@@ -1633,6 +1658,13 @@
 	</object>
 	<object>
 		<name>Document.CashRevenue.TabularSection.PaymentList.Attribute.RevenueType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ShipmentPlaningOrder.TabularSection.ItemList</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

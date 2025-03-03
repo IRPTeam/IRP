@@ -112,6 +112,12 @@ Procedure _DetachIdleHandler() Export
 	DetachIdleHandler("_IdeHandler");
 EndProcedure
 
+&AtClient
+Procedure ShipmentPeriodOnChange(Item)
+	Object.ShipmentStartDate = ThisObject.ShipmentPeriod.StartDate;
+	Object.ShipmentEndDate = ThisObject.ShipmentPeriod.EndDate;
+EndProcedure
+
 #EndRegion
 
 #Region COMPANY

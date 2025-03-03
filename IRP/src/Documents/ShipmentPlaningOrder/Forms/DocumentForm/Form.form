@@ -649,6 +649,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>ShipmentPeriod</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ShipmentPeriodOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ShipmentPeriodExtendedTooltip</name>
             <id>464</id>

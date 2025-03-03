@@ -285,7 +285,6 @@ Function R9610T_ShipmentPlaning()
 		|	ItemList.Branch,
 		|	ItemList.Store,
 		|	ItemList.Partner,
-		|	ItemList.Item,
 		|	ItemList.ItemKey,
 		|	ItemList.SourceOfOrigin AS SourceOfOrigin,
 		|	ItemList.SalesOrder AS Order,

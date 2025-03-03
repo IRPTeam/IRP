@@ -270,12 +270,9 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	StrParams.Insert("StatusInfoPosting", StatusInfo.Posting);
+	StrParams.Insert("IsUseShipmentAndReceiptPlaningOrders", FOServer.IsUseShipmentAndReceiptPlaningOrders());
 	Return StrParams;
 EndFunction
-
-#EndRegion
-
-#Region Posting_SourceTable
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
@@ -284,6 +281,29 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(R4037B_PlannedReceiptReservationRequests_Exists());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R2010T_SalesOrders());
+	QueryArray.Add(R2011B_SalesOrdersShipment());
+	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
+	QueryArray.Add(R2013T_SalesOrdersProcurement());
+	QueryArray.Add(R2014T_CanceledSalesOrders());
+	QueryArray.Add(R2022B_CustomersPaymentPlanning());
+	QueryArray.Add(R3024B_SalesOrdersToBePaid());
+	QueryArray.Add(R3026B_SalesOrdersCustomerAdvance());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4034B_GoodsShipmentSchedule());
+	QueryArray.Add(R4037B_PlannedReceiptReservationRequests());
+	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(R9610T_ShipmentPlaning());	
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return "SELECT
@@ -348,25 +368,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R2010T_SalesOrders());
-	QueryArray.Add(R2011B_SalesOrdersShipment());
-	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
-	QueryArray.Add(R2013T_SalesOrdersProcurement());
-	QueryArray.Add(R2014T_CanceledSalesOrders());
-	QueryArray.Add(R2022B_CustomersPaymentPlanning());
-	QueryArray.Add(R3024B_SalesOrdersToBePaid());
-	QueryArray.Add(R3026B_SalesOrdersCustomerAdvance());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4012B_StockReservation());
-	QueryArray.Add(R4034B_GoodsShipmentSchedule());
-	QueryArray.Add(R4037B_PlannedReceiptReservationRequests());
-	QueryArray.Add(T3010S_RowIDInfo());
-	QueryArray.Add(R9610T_ShipmentPlaning());	
-	Return QueryArray;
-EndFunction
 
 Function R2010T_SalesOrders()
 	Return "SELECT
@@ -641,7 +642,6 @@ Function R9610T_ShipmentPlaning()
 		|	ItemList.Branch,
 		|	ItemList.Store,
 		|	ItemList.Partner,
-		|	ItemList.Item,
 		|	ItemList.ItemKey,
 		|	Undefined AS SourceOfOrigin,
 		|	ItemList.Order,
@@ -651,7 +651,7 @@ Function R9610T_ShipmentPlaning()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	TRUE";
+		|	&IsUseShipmentAndReceiptPlaningOrders";
 EndFunction
 
 #EndRegion

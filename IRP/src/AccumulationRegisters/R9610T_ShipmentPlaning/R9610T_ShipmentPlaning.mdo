@@ -99,20 +99,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="b561be35-aadb-40b4-93f7-431179ef50ec">
-    <name>Item</name>
-    <synonym>
-      <key>en</key>
-      <value>Item</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Items</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
   <dimensions uuid="15409b47-e31d-4ebf-8f2c-f8621a0cce1a">
     <name>ItemKey</name>
     <synonym>

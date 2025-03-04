@@ -2168,6 +2168,23 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		
 		EndIf;	
 		
+		If RowRefObject.IsVariableStore Then
+			Rows = FieldsForCheckRowRef.FindRows(New Structure("FieldName", "Store"));
+			For Each Row In Rows Do
+				FieldsForCheckRowRef.Delete(Row);
+			EndDo;
+		EndIf;
+		
+		If Not RowRefObject.IsFixedStore Then 
+			
+			RowRefObject.Store = Catalogs.Stores.EmptyRef();
+			
+			If Not RowRefObject.IsVariableStore Then
+				RowRefObject.Store = RowItemList.Store;
+			EndIf;
+		
+		EndIf;
+	
 	Else                        
 		If RowRefObject.IsVariableItemKey And Not RowRefObject.IsFixedItemKey Then
 			RowRefObject.ItemKey = RowItemList.ItemKey;
@@ -2177,6 +2194,16 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 			EndDo; 
 			RowRefObject.IsFixedItemKey = True;
 		EndIf;		
+		
+		If RowRefObject.IsVariableStore And Not RowRefObject.IsFixedStore Then
+			RowRefObject.Store = RowItemList.Store;
+			Rows = FieldsForCheckRowRef.FindRows(New Structure("FieldName", "Store"));
+			For Each Row In Rows Do
+				FieldsForCheckRowRef.Delete(Row);
+			EndDo; 
+			RowRefObject.IsFixedStore = True;
+		EndIf;
+		
 	EndIf;
 	
 	ArrayOfDifferenceFields = New Array();
@@ -7543,12 +7570,20 @@ Procedure ApplyFilterSet_SO_ForSI(Query)
 	|					end
 	|				else true
 	|			end
-	|			AND CASE
-	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|			AND 
+	|			
+	|			CASE
+	|				WHEN &Filter_Store 
+	|                   then case
+	|					when RowRef.IsVariableStore then true					
+	|
+	|					else RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
+	|
 	|				ELSE TRUE
-	|			END))) AS RowIDMovements";
+	|			END
+	|
+	|))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
 
@@ -7602,8 +7637,9 @@ Procedure ApplyFilterSet_SO_ForPRR(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7664,8 +7700,9 @@ Procedure ApplyFilterSet_SO_ForSC(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7721,8 +7758,9 @@ Procedure ApplyFilterSet_SO_ForSPO(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7773,8 +7811,9 @@ Procedure ApplyFilterSet_SO_ForRSC(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7896,8 +7935,9 @@ Procedure ApplyFilterSet_SO_ForWO(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -8014,8 +8054,9 @@ Procedure ApplyFilterSet_SO_ForRSR(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -9511,8 +9552,9 @@ Procedure ApplyFilterSet_PO_ForPI(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StorePurchases = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StorePurchases = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -9573,8 +9615,9 @@ Procedure ApplyFilterSet_PO_ForGR(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StorePurchases = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StorePurchases = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -13714,14 +13757,18 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|		and case when RowIDInfoFull.RowRef.IsVariableItemKey 
 	|		then RowIDInfoFull.Item = BasisesTable.Item
 	|		else RowIDInfoFull.ItemKey = BasisesTable.ItemKey end
-	|
+	|		
+	|		
 	|		AND CASE
 	|			WHEN &Filter_Store then
+	|				
+	|				case when RowRef.IsVariableStore then true else
+	|
 	|				case 
 	|					when RowIDInfoFull.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Product) then 
 	|						RowIDInfoFull.Store = BasisesTable.Store
 	|					else True 
-	|				end
+	|				end end
 	|			ELSE TRUE
 	|		END
 	|WHERE
@@ -13811,6 +13858,13 @@ Procedure LockInternalLinkedRows(Object, Form)
 		Else
 			Row.IsUnlockItemKey = False;
 		EndIf;
+		
+		DataVariableStore = InternalLinkedData.KeysVariableStore.FindRows(New Structure("Key", Row.Key));
+		If DataVariableStore.Count() > 0 Then
+			Row.IsUnlockStore = True;
+		Else
+			Row.IsUnlockStore = False;
+		EndIf;		
 	EndDo;
 EndProcedure
 
@@ -13887,6 +13941,9 @@ Function GetInternalLinkedKeys(RowIDInfoTable, Ref)
 	
 	KeysVariableItemKeyTable = New ValueTable();
 	KeysVariableItemKeyTable.Columns.Add("Key");
+
+	KeysVariableStoreTable = New ValueTable();
+	KeysVariableStoreTable.Columns.Add("Key");
 	
 	If InternalLinkedDocsTable.Count() = 1 Then
 		If TrimAll(Upper(InternalLinkedDocsTable[0].Doc)) = Upper("SalesOrder")
@@ -13896,13 +13953,17 @@ Function GetInternalLinkedKeys(RowIDInfoTable, Ref)
 				If Row.RowRef.IsVariableItemKey Then
 					KeysVariableItemKeyTable.Add().Key = Row.Key;
 				EndIf;
+				
+				If Row.RowRef.IsVariableStore Then
+					KeysVariableStoreTable.Add().Key = Row.Key;
+				EndIf;				
 			EndDo;
 			
 		EndIf;
 	EndIf;
-	
-	Return New Structure("Keys, InternalLinkedDocs, KeysVariableItemKey", 
-		KeysTable, InternalLinkedDocsTable.UnloadColumn("Doc"), KeysVariableItemKeyTable);
+		
+	Return New Structure("Keys, InternalLinkedDocs, KeysVariableItemKey, KeysVariableStore", 
+		KeysTable, InternalLinkedDocsTable.UnloadColumn("Doc"), KeysVariableItemKeyTable, KeysVariableStoreTable);
 EndFunction
 
 Procedure GetBasisInfoRecursive(Basis, BasisKey, RowID, ResultTable, Key)
@@ -14014,6 +14075,7 @@ Procedure AddAppearance_Header(Object, Form, FieldsToLock)
 	
 	// Set ReadOnly
 	For Each FieldName In FieldsToLock.Header Do
+				
 		Element.Fields.Items.Add().Field = New DataCompositionField(FieldName);
 		FormElement = Form.Items.Find(FieldName);
 		If FormElement <> Undefined Then
@@ -14062,7 +14124,21 @@ Procedure AddAppearance_ItemList(Object, Form, FieldsToLock, Condition)
 			Filter.LeftValue = New DataCompositionField("Object.ItemList.IsUnlockItemKey");
 			Filter.ComparisonType = DataCompositionComparisonType.Equal;
 			Filter.RightValue = False;
+		
+		ElsIf TrimAll(Upper(Row.FieldName)) = Upper("Store") And Condition = "InternalLinks" Then
+			FilterGroup = Element.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
+			FilterGroup.GroupType = DataCompositionFilterItemsGroupType.AndGroup;
 			
+			Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
+			Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);
+			Filter.ComparisonType = DataCompositionComparisonType.Contains;
+			Filter.RightValue = Row.LinkedDoc;
+			
+			Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
+			Filter.LeftValue = New DataCompositionField("Object.ItemList.IsUnlockStore");
+			Filter.ComparisonType = DataCompositionComparisonType.Equal;
+			Filter.RightValue = False;
+					
 		Else
 			Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
 			Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);

@@ -790,6 +790,36 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="2b816e3b-1f5f-4bc3-801f-35afe3ce360c">
+    <name>IsVariableStore</name>
+    <synonym>
+      <key>en</key>
+      <value>Is variable store</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5b29fd0b-b8ce-4557-ab29-c81c013a6354">
+    <name>IsFixedStore</name>
+    <synonym>
+      <key>en</key>
+      <value>Is fixed store</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="651805ba-bc1e-443a-8ae5-b2b855347771">
     <name>ItemForm</name>
     <synonym>

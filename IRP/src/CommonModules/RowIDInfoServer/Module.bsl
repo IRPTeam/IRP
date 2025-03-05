@@ -13751,24 +13751,24 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|		AND RowIDInfoFull.Basis = BasisesTable.Basis
 	|		AND RowIDInfoFull.BasisKey = BasisesTable.BasisKey
 	|		AND RowIDInfoFull.CurrentStep = BasisesTable.CurrentStep
-	|
-//	|		AND RowIDInfoFull.ItemKey = BasisesTable.ItemKey
-	|
-	|		and case when RowIDInfoFull.RowRef.IsVariableItemKey 
-	|		then RowIDInfoFull.Item = BasisesTable.Item
-	|		else RowIDInfoFull.ItemKey = BasisesTable.ItemKey end
-	|		
-	|		
 	|		AND CASE
-	|			WHEN &Filter_Store then
-	|				
-	|				case when RowRef.IsVariableStore then true else
-	|
-	|				case 
-	|					when RowIDInfoFull.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Product) then 
-	|						RowIDInfoFull.Store = BasisesTable.Store
-	|					else True 
-	|				end end
+	|			WHEN RowIDInfoFull.RowRef.IsVariableItemKey
+	|			AND NOT RowIDInfoFull.RowRef.IsFixedItemKey
+	|				THEN RowIDInfoFull.Item = BasisesTable.Item
+	|			ELSE RowIDInfoFull.ItemKey = BasisesTable.ItemKey
+	|		END
+	|		AND CASE
+	|			WHEN &Filter_Store
+	|				THEN CASE
+	|					WHEN RowIDInfoFull.RowRef.IsVariableStore
+	|					AND NOT RowIDInfoFull.RowRef.IsFixedStore
+	|						THEN TRUE
+	|					ELSE CASE
+	|						WHEN RowIDInfoFull.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+	|							THEN RowIDInfoFull.Store = BasisesTable.Store
+	|						ELSE TRUE
+	|					END
+	|				END
 	|			ELSE TRUE
 	|		END
 	|WHERE

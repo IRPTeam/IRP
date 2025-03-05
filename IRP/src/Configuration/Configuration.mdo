@@ -1225,6 +1225,7 @@
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.NumeratorBasicRules</catalogs>
   <catalogs>Catalog.NumeratorGroups</catalogs>
+  <catalogs>Catalog.PrintFormTemplates</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalDeduction</documents>
   <documents>Document.AdditionalCostAllocation</documents>
@@ -1424,6 +1425,7 @@
   <enums>Enum.MessageTypes</enums>
   <enums>Enum.IssueLevel</enums>
   <enums>Enum.NumberingPeriods</enums>
+  <enums>Enum.PrintFormTypes</enums>
   <reports>Report.A0010_TrialBalance</reports>
   <reports>Report.A0011_TrialBalanceByAccount</reports>
   <reports>Report.A0012_AccountCard</reports>
@@ -1582,6 +1584,7 @@
   <informationRegisters>InformationRegister.T9070S_ELedgerDetailComments</informationRegisters>
   <informationRegisters>InformationRegister.NumeratorCounters</informationRegisters>
   <informationRegisters>InformationRegister.CreditLimits</informationRegisters>
+  <informationRegisters>InformationRegister.ObjectsPrintTemplates</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

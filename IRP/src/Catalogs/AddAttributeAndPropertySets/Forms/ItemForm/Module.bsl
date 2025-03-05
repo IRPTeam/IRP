@@ -63,6 +63,43 @@ Procedure AfterWrite(WriteParameters)
 	Notify("UpdateAddAttributeAndPropertySets", New Structure(), ThisObject);
 EndProcedure
 
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	
+	Query = New Query;
+	Query.SetParameter("Ref", Object.Ref);
+	Query.Text =
+	"SELECT
+	|	ObjectsPrintTemplates.PrintTemplate
+	|FROM
+	|	InformationRegister.ObjectsPrintTemplates AS ObjectsPrintTemplates
+	|WHERE
+	|	ObjectsPrintTemplates.Object = &Ref";
+	
+	PrintTemplates.Clear();
+	QuerySelection = Query.Execute().Select();
+	While QuerySelection.Next() Do
+		PrintTemplates.Add(QuerySelection.PrintTemplate);
+	EndDo;
+
+EndProcedure
+
+&AtServer
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+
+	ObjectRecords = InformationRegisters.ObjectsPrintTemplates.CreateRecordSet();
+	ObjectRecords.Filter.Object.Set(CurrentObject.Ref, True);
+	
+	For Each PrintTemplateItem In PrintTemplates Do
+		Record = ObjectRecords.Add();
+		Record.Object = CurrentObject.Ref;
+		Record.PrintTemplate = PrintTemplateItem.Value;
+	EndDo;
+	
+	ObjectRecords.Write(True);
+
+EndProcedure
+
 #EndRegion
 
 #Region FormTableItemsEventHandlers

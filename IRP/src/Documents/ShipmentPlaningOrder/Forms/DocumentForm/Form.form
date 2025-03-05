@@ -3797,7 +3797,7 @@
     <name>IsClosedOrder</name>
     <title>
      <key>tr</key>
-     <value>Is closed order</value>
+     <value>Sipariş kapalı</value>
     </title>
     <title>
      <key>ru</key>
@@ -4090,7 +4090,7 @@
   <name>ShipmentPeriod</name>
   <title>
    <key>tr</key>
-   <value>Shipment period</value>
+   <value>Sevk dönemi</value>
   </title>
   <title>
    <key>ru</key>

@@ -9163,7 +9163,7 @@
     <name>IsClosedOrder</name>
     <title>
      <key>tr</key>
-     <value>Is closed order</value>
+     <value>Sipariş kapalı</value>
     </title>
     <title>
      <key>ru</key>
@@ -10237,7 +10237,7 @@
   <name>LinkedDocuments_ShipmentPlaningOrders</name>
   <title>
    <key>tr</key>
-   <value>Shipment planing orders</value>
+   <value>Sevk planlama siparişleri</value>
   </title>
   <title>
    <key>ru</key>

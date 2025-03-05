@@ -1462,7 +1462,7 @@
   <name>TrailerList</name>
   <synonym>
    <key>tr</key>
-   <value>Trailer list</value>
+   <value>Dorse listesi</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -1476,7 +1476,7 @@
    <name>Trailer</name>
    <synonym>
     <key>tr</key>
-    <value>Trailer</value>
+    <value>Dorse</value>
    </synonym>
    <synonym>
     <key>ru</key>

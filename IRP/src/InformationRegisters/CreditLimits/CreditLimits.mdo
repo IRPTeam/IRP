@@ -12,7 +12,7 @@
  <name>CreditLimits</name>
  <synonym>
   <key>tr</key>
-  <value>Credit limits</value>
+  <value>Kredi limitleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -30,7 +30,7 @@
   <name>LimitAmount</name>
   <synonym>
    <key>tr</key>
-   <value>Limit amount</value>
+   <value>Limit tutarı</value>
   </synonym>
   <synonym>
    <key>ru</key>

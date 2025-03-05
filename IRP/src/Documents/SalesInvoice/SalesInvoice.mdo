@@ -3119,7 +3119,7 @@
   <name>ShipmentPlaningOrders</name>
   <synonym>
    <key>tr</key>
-   <value>Shipment planing orders</value>
+   <value>Sevk planlama siparişleri</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -3155,7 +3155,7 @@
    <name>ShipmentPlaningOrder</name>
    <synonym>
     <key>tr</key>
-    <value>Shipment planing order</value>
+    <value>Sevk planlama siparişi</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -3198,7 +3198,7 @@
    <name>QuantityInShipmentPlaningOrder</name>
    <synonym>
     <key>tr</key>
-    <value>Quantity in shipment planing order</value>
+    <value>Sevk planlama siparişindeki miktar</value>
    </synonym>
    <synonym>
     <key>ru</key>

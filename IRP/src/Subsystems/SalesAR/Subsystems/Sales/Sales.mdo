@@ -20,5 +20,6 @@
  <content>Document.ShipmentConfirmation</content>
  <content>Document.SalesOrderClosing</content>
  <content>Document.PlannedReceiptReservation</content>
+ <content>Document.ShipmentPlaningOrder</content>
  <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

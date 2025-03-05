@@ -244,6 +244,15 @@ Function GetFileBinaryData(FileRef) Export
 	FileParameters = GetFileInfo(FileRef);
 	FileURL = PictureViewerServer.GetVolumeURLByIntegrationSettings(FileParameters.IntegrationSettings, FileParameters.URI);
 	
+	// some cloud providers give full URL in prepare function
+	//@skip-check server-execution-safe-mode, dynamic-access-method-not-found
+	If FileURL = FileParameters.URI Then
+		PictureParameters = PictureViewerServer.CreatePictureParameters(FileRef);
+		URLStructure = PictureViewerServer.GetPictureURL(PictureParameters);
+		ProcessingCommonModule = Eval(URLStructure.ProcessingModule);
+		FileURL = ProcessingCommonModule.PreparePictureURL(URLStructure.IntegrationSettings, URLStructure.PictureURL); // String
+	EndIf;
+	
 	If IsBlankString(FileURL) Then
 		Return Undefined;
 	ElsIf StrStartsWith(FileURL, "e1cib/tempstorage") Then

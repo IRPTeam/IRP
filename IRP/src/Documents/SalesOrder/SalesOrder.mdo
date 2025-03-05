@@ -122,6 +122,7 @@
  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
  <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
+ <registerRecords>AccumulationRegister.R9610T_ShipmentPlaning</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

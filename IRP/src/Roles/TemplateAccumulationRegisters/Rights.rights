@@ -235,6 +235,20 @@
 		</right>
 	</object>
 	<object>
+		<name>AccumulationRegister.R9610T_ShipmentPlaning</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</name>
 		<right>
 			<name>Read</name>

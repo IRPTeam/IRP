@@ -158,6 +158,7 @@
    <types>DocumentRef.CashExpense</types>
    <types>DocumentRef.ELedgerRegistry</types>
    <types>DocumentRef.StockCorrection</types>
+   <types>DocumentRef.ShipmentPlaningOrder</types>
   </commandParameterType>
   <representation>Auto</representation>
  </commands>

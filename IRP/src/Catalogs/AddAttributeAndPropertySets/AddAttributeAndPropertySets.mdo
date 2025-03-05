@@ -1001,6 +1001,13 @@
     <value>161</value>
    </code>
   </items>
+  <items id="d7322f5b-a987-43d8-96c5-6d47856dc60a">
+   <name>Document_ShipmentPlaningOrder</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>162</value>
+   </code>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

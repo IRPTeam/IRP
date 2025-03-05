@@ -317,6 +317,7 @@ Procedure OnChainComplete(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentPlaningOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt" Then
 		__tmp_GoodsShipmentReceipt_OnChainComplete(Parameters);
 		Return;
@@ -1025,8 +1026,12 @@ Procedure OnOpenFormNotify(Parameters) Export
 		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Parameters.Object);
 	EndIf;
 	
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
+		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentPlaningOrders");
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
 	EndIf;
 	
@@ -2706,6 +2711,7 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentPlaningOrder" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailShipmentConfirmation" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt"
@@ -2730,6 +2736,10 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentConfirmations") Then
 		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentConfirmations");
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentPlaningOrders") Then
+		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentPlaningOrders");
 	EndIf;
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "GoodsReceipts") Then
@@ -3594,8 +3604,12 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 			ControlCodeStringsClient.UpdateState(Parameters.Object);
 		EndIf;
 					
-		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
+		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
+			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentPlaningOrders");
+		EndIf;
+		
+		If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
 		EndIf;
 		
@@ -3953,6 +3967,7 @@ Procedure OnSetPartnerNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentPlaningOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReceiptCorrection"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"

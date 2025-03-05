@@ -1177,6 +1177,7 @@
     <types>DocumentRef.WorkSheet</types>
     <types>DocumentRef.GoodsReceipt</types>
     <types>DocumentRef.RetailGoodsReceipt</types>
+    <types>DocumentRef.ShipmentPlaningOrder</types>
    </valueType>
    <view>
     <common>true</common>

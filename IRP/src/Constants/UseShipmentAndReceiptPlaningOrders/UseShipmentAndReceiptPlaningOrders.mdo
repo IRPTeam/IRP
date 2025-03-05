@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="10494fda-f378-4737-a941-4d11055b2df3">
+ <producedTypes>
+  <managerType typeId="36680c9a-06b2-4497-9a1f-de04466a1700" valueTypeId="67b49e6d-4533-4f3e-8a29-1a9e61a38aa8"/>
+  <valueManagerType typeId="9f644ee3-e896-435f-b069-fd3aeea09254" valueTypeId="3659224c-07c3-4788-9e7c-5543e5e8efaf"/>
+  <valueKeyType typeId="f0ec31a9-c8ec-4c88-892d-fa78ae8cdd01" valueTypeId="8843a1eb-44db-4698-9597-09a5aa83242a"/>
+ </producedTypes>
+ <name>UseShipmentAndReceiptPlaningOrders</name>
+ <synonym>
+  <key>tr</key>
+  <value>Use shipment and receipt planing orders</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Use shipment and receipt planing orders</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use shipment and receipt planing orders</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

@@ -5000,6 +5000,57 @@
         <textEdit>true</textEdit>
        </extInfo>
       </items>
+      <items xsi:type="form:FormField">
+       <name>Trailers</name>
+       <id>471</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <dataPath xsi:type="form:DataPath">
+        <segments>Trailers</segments>
+       </dataPath>
+       <extendedTooltip>
+        <name>TrailersExtendedTooltip</name>
+        <id>473</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+         <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+       </extendedTooltip>
+       <contextMenu>
+        <name>TrailersContextMenu</name>
+        <id>472</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+       </contextMenu>
+       <type>InputField</type>
+       <editMode>Enter</editMode>
+       <showInHeader>true</showInHeader>
+       <headerHorizontalAlign>Left</headerHorizontalAlign>
+       <showInFooter>true</showInFooter>
+       <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <extendedEditMultipleValues>true</extendedEditMultipleValues>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+       </extInfo>
+      </items>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -5959,6 +6010,36 @@
   </edit>
   <extInfo xsi:type="form:ValueListExtInfo">
    <itemValueType/>
+  </extInfo>
+ </attributes>
+ <attributes>
+  <name>Trailers</name>
+  <title>
+   <key>tr</key>
+   <value>Trailers</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Trailers</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Trailers</value>
+  </title>
+  <id>168</id>
+  <valueType>
+   <types>ValueList</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+  <extInfo xsi:type="form:ValueListExtInfo">
+   <itemValueType>
+    <types>CatalogRef.Vehicles</types>
+   </itemValueType>
   </extInfo>
  </attributes>
  <formCommands>

@@ -896,6 +896,28 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="dbac8d30-ccd4-4467-8fac-2dff3e08ddc4">
+   <name>ShipmentPlaningOrder</name>
+   <synonym>
+    <key>tr</key>
+    <value>Shipment planing order</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Shipment planing order</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Shipment planing order</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.ShipmentPlaningOrder</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="cb82e4d6-7eb8-4d89-9ecb-61f7c9fd8643">
   <producedTypes>
@@ -1247,6 +1269,47 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
+ <tabularSections uuid="afa76736-6347-4730-b229-7f4736fd3df6">
+  <producedTypes>
+   <objectType typeId="b158d785-402f-43d0-abb1-67a5e4e282a8" valueTypeId="a995b070-3221-46d0-9d1c-453c49455792"/>
+   <rowType typeId="0e360a2c-806c-4e70-8dec-d8a9b1f0b2b7" valueTypeId="ccdf5cea-7ada-4beb-b710-2017a8b63704"/>
+  </producedTypes>
+  <name>TrailerList</name>
+  <synonym>
+   <key>tr</key>
+   <value>Trailer list</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Trailer list</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Trailer list</value>
+  </synonym>
+  <attributes uuid="13de9d50-28a6-49ef-8ff4-cb0f3fb4ecbd">
+   <name>Trailer</name>
+   <synonym>
+    <key>tr</key>
+    <value>Trailer</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Trailer</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Trailer</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Vehicles</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <createOnInput>Use</createOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
  <templates uuid="f464c3b4-b4dd-4cc5-94ef-11f99bb1b154">
   <name>ShipmentConfirmationPrint</name>
   <synonym>
@@ -1282,6 +1345,7 @@
    <types>DocumentRef.SalesOrder</types>
    <types>DocumentRef.InventoryTransfer</types>
    <types>DocumentRef.SalesInvoice</types>
+   <types>DocumentRef.ShipmentPlaningOrder</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
   <representation>Auto</representation>

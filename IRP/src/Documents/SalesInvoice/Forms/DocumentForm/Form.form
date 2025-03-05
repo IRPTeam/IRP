@@ -3499,6 +3499,36 @@
        <representationInContextMenu>Auto</representationInContextMenu>
       </items>
       <items xsi:type="form:Button">
+       <name>ItemListLinkedDocuments_ShipmentPlaningOrders</name>
+       <id>1529</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <extendedTooltip>
+        <name>ItemListLinkedDocuments_ShipmentPlaningOrdersExtendedTooltip</name>
+        <id>1530</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+         <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+       </extendedTooltip>
+       <commandName>Form.Command.LinkedDocuments_ShipmentPlaningOrders</commandName>
+       <representation>Auto</representation>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <placementArea>UserCmds</placementArea>
+       <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
+      <items xsi:type="form:Button">
        <name>ItemListLinkedDocuments_WorkSheets</name>
        <id>1331</id>
        <visible>true</visible>
@@ -10201,6 +10231,32 @@
   </action>
   <functionalOptions>FunctionalOption.UseNumberingRules</functionalOptions>
   <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>LinkedDocuments_ShipmentPlaningOrders</name>
+  <title>
+   <key>tr</key>
+   <value>Shipment planing orders</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Shipment planing orders</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Shipment planing orders</value>
+  </title>
+  <id>23</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>LinkedDocuments_ShipmentPlaningOrders</name>
+   </handler>
+  </action>
+  <functionalOptions>FunctionalOption.UseShipmentAndReceiptPlaningOrders</functionalOptions>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

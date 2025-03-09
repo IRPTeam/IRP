@@ -1099,7 +1099,7 @@ Function GetFormItemNames()
 				|CalculationsKey,
 				|RecordsKey, ItemListIsClosedOrder,
 				|AllocationResultKey, AllocationResultRowID, AllocationResultBasisRowID,
-				|ItemListIsUnlockItemKey";
+				|ItemListIsUnlockItemKey, ItemListIsUnlockStore";
 	Return ItemNames;
 EndFunction	
 

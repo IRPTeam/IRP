@@ -95,7 +95,7 @@
 			</c>
 			<c>
 				<c>
-					<f>4</f>
+					<f>5</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -106,7 +106,7 @@
 			</c>
 			<c>
 				<c>
-					<f>4</f>
+					<f>5</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -117,7 +117,7 @@
 			</c>
 			<c>
 				<c>
-					<f>4</f>
+					<f>5</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -128,7 +128,7 @@
 			</c>
 			<c>
 				<c>
-					<f>5</f>
+					<f>6</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -139,7 +139,7 @@
 			</c>
 			<c>
 				<c>
-					<f>6</f>
+					<f>7</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -150,7 +150,7 @@
 			</c>
 			<c>
 				<c>
-					<f>4</f>
+					<f>8</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -166,19 +166,19 @@
 		<row>
 			<c>
 				<c>
-					<f>7</f>
+					<f>9</f>
 					<parameter>AccountDr</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>8</f>
+					<f>10</f>
 					<parameter>ExtDimensionDr1</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>9</f>
+					<f>11</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -190,19 +190,19 @@
 			</c>
 			<c>
 				<c>
-					<f>7</f>
+					<f>12</f>
 					<parameter>AccountCr</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>8</f>
+					<f>10</f>
 					<parameter>ExtDimensionCr1</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>10</f>
+					<f>13</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -214,7 +214,7 @@
 			</c>
 			<c>
 				<c>
-					<f>7</f>
+					<f>14</f>
 					<parameter>Amount</parameter>
 				</c>
 			</c>
@@ -225,19 +225,19 @@
 		<row>
 			<c>
 				<c>
-					<f>7</f>
+					<f>9</f>
 					<parameter>Dr</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>8</f>
+					<f>15</f>
 					<parameter>ExtDimensionDr2</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>9</f>
+					<f>11</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -249,19 +249,19 @@
 			</c>
 			<c>
 				<c>
-					<f>7</f>
+					<f>12</f>
 					<parameter>Dr</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>8</f>
+					<f>15</f>
 					<parameter>ExtDimensionCr2</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>10</f>
+					<f>13</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -273,7 +273,7 @@
 			</c>
 			<c>
 				<c>
-					<f>7</f>
+					<f>14</f>
 					<parameter>Dr</parameter>
 				</c>
 			</c>
@@ -284,50 +284,50 @@
 		<row>
 			<c>
 				<c>
-					<f>7</f>
+					<f>9</f>
 					<parameter>Dr</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>8</f>
+					<f>16</f>
 					<parameter>ExtDimensionDr3</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>8</f>
+					<f>16</f>
 					<parameter>QuantityDr</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>7</f>
+					<f>12</f>
 					<parameter>Dr</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>8</f>
+					<f>16</f>
 					<parameter>ExtDimensionCr3</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>8</f>
+					<f>16</f>
 					<parameter>QuantityCr</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>7</f>
+					<f>14</f>
 					<parameter>Dr</parameter>
 				</c>
 			</c>
 		</row>
 	</rowsItem>
 	<templateMode>true</templateMode>
-	<defaultFormatIndex>11</defaultFormatIndex>
+	<defaultFormatIndex>17</defaultFormatIndex>
 	<height>4</height>
 	<vgRows>4</vgRows>
 	<merge>
@@ -383,12 +383,15 @@
 	<line width="1" gap="false">
 		<v8ui:style xsi:type="v8ui:SpreadsheetDocumentCellLineType">Solid</v8ui:style>
 	</line>
+	<line width="1" gap="false">
+		<v8ui:style xsi:type="v8ui:SpreadsheetDocumentCellLineType">ThinDashed</v8ui:style>
+	</line>
 	<format>
 		<width>80</width>
 		<widthWeightFactor>1</widthWeightFactor>
 	</format>
 	<format>
-		<width>120</width>
+		<width>160</width>
 		<widthWeightFactor>1</widthWeightFactor>
 	</format>
 	<format>
@@ -396,37 +399,99 @@
 		<widthWeightFactor>1</widthWeightFactor>
 	</format>
 	<format>
-		<border>0</border>
+		<leftBorder>0</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>1</rightBorder>
+		<bottomBorder>0</bottomBorder>
 	</format>
 	<format>
-		<border>0</border>
+		<leftBorder>1</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>1</rightBorder>
+		<bottomBorder>0</bottomBorder>
+	</format>
+	<format>
+		<leftBorder>1</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>1</rightBorder>
+		<bottomBorder>0</bottomBorder>
 		<width>112</width>
 	</format>
 	<format>
-		<border>0</border>
+		<leftBorder>1</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>1</rightBorder>
+		<bottomBorder>0</bottomBorder>
 		<width>88</width>
 	</format>
 	<format>
-		<border>0</border>
+		<leftBorder>1</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>0</rightBorder>
+		<bottomBorder>0</bottomBorder>
+	</format>
+	<format>
+		<leftBorder>0</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>1</rightBorder>
+		<bottomBorder>0</bottomBorder>
 		<horizontalAlignment>Center</horizontalAlignment>
 		<verticalAlignment>Center</verticalAlignment>
 		<fillType>Parameter</fillType>
 	</format>
 	<format>
-		<border>0</border>
+		<leftBorder>1</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>1</rightBorder>
+		<bottomBorder>1</bottomBorder>
 		<fillType>Parameter</fillType>
 	</format>
 	<format>
-		<border>0</border>
+		<leftBorder>1</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>1</rightBorder>
+		<bottomBorder>1</bottomBorder>
 		<verticalAlignment>Top</verticalAlignment>
 		<fillType>Template</fillType>
 	</format>
 	<format>
-		<border>0</border>
+		<leftBorder>1</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>1</rightBorder>
+		<bottomBorder>0</bottomBorder>
+		<horizontalAlignment>Center</horizontalAlignment>
+		<verticalAlignment>Center</verticalAlignment>
+		<fillType>Parameter</fillType>
+	</format>
+	<format>
+		<leftBorder>1</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>1</rightBorder>
+		<bottomBorder>1</bottomBorder>
 		<width>64</width>
 		<widthWeightFactor>1</widthWeightFactor>
 		<verticalAlignment>Top</verticalAlignment>
 		<fillType>Template</fillType>
+	</format>
+	<format>
+		<leftBorder>1</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>0</rightBorder>
+		<bottomBorder>0</bottomBorder>
+		<horizontalAlignment>Center</horizontalAlignment>
+		<verticalAlignment>Center</verticalAlignment>
+		<fillType>Parameter</fillType>
+	</format>
+	<format>
+		<border>1</border>
+		<fillType>Parameter</fillType>
+	</format>
+	<format>
+		<leftBorder>1</leftBorder>
+		<topBorder>1</topBorder>
+		<rightBorder>1</rightBorder>
+		<bottomBorder>0</bottomBorder>
+		<fillType>Parameter</fillType>
 	</format>
 	<format>
 		<width>72</width>

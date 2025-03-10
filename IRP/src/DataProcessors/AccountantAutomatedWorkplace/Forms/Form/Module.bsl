@@ -39,9 +39,19 @@ EndProcedure
 &AtClient
 Procedure RefreshJE(Command)
 	If Items.DocumentList.CurrentData = Undefined Then
-		RefreshJEAtServer(Items.DocumentList.CurrentData.Document);
+		RefreshJEAtServer(Undefined);
 	Else
-		RefreshJEAtServer(Items.DocumentList.CurrentData.Document);
+		RefreshJEAtServer(Items.DocumentList.CurrentData.JournalEntry);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure OpenJE(Command)
+	If Items.DocumentList.CurrentData <> Undefined Then
+		JournalEntry = Items.DocumentList.CurrentData.JournalEntry;
+		If ValueIsFilled(JournalEntry) Then
+			OpenValueAsync(JournalEntry);
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -59,12 +69,13 @@ Procedure DocumentListOnActivateRow(Item)
 	
 	If Items.DocumentList.CurrentData <> Undefined Then
 		If CurrentDocument <> Items.DocumentList.CurrentData.Document Then
-			CurrentDocument = Items.DocumentList.CurrentData.Document;
-			LoadDocumentInfo(CurrentDocument);
+			LoadDocumentInfo(
+				Items.DocumentList.CurrentData.Document, 
+				Items.DocumentList.CurrentData.JournalEntry);
 			SetCurrentPageAtClient();
 		EndIf;
 	ElsIf Not InfoUpdated Then
-		LoadDocumentInfo(Undefined);
+		LoadDocumentInfo(Undefined, Undefined);
 		SetCurrentPageAtClient();
 	EndIf;
 
@@ -147,46 +158,23 @@ Function UnlockAtServer()
 EndFunction
 
 &AtServer
-Procedure LoadDocumentInfo(DocumentRef)
-	RefreshJEAtServer(DocumentRef);
+Procedure LoadDocumentInfo(DocumentRef, JournalEntryRef)
+	RefreshJEAtServer(JournalEntryRef);
 	RefreshFilesAtServer(DocumentRef);
+	CurrentDocument = DocumentRef;
 	InfoUpdated = True;
 EndProcedure
 
 &AtServer
-Procedure RefreshJEAtServer(DocumentRef)
+Procedure RefreshJEAtServer(JournalEntryRef)
 	
-	If DocumentRef = Undefined Then
-		AccountingReport = New SpreadsheetDocument();
-		Return;
-	EndIf;
-
-	AccountingReport = GetPrintFormJE(DocumentRef);
-
-EndProcedure
-
-&AtServer
-Function GetPrintFormJE(DocumentRef)
-	
-	Report = New SpreadsheetDocument();
+	AccountingReport = New SpreadsheetDocument();
 	
 	Template = DataProcessors.AccountantAutomatedWorkplace.GetTemplate("PrintFormJE");
-	
-	Report.Put(Template.GetArea("Header"));
+	AccountingReport.Put(Template.GetArea("Header"));
 	
 	Query = New Query;
-	
-	Query.SetParameter("DocumentRef", DocumentRef);
-	Query.Text =
-	"SELECT ALLOWED
-	|	JournalEntry.Ref AS RefJE
-	|FROM
-	|	Document.JournalEntry AS JournalEntry
-	|WHERE
-	|	JournalEntry.Basis = &DocumentRef";
-	Journals = Query.Execute().Unload().UnloadColumn(0); 
-	
-	Query.SetParameter("Journals", Journals);
+	Query.SetParameter("DocumentRef", JournalEntryRef);
 	Query.Text =
 	"SELECT ALLOWED
 	|	BasicRecordsWithExtDimensions.LineNumber,
@@ -206,7 +194,7 @@ Function GetPrintFormJE(DocumentRef)
 	|	BasicRecordsWithExtDimensions.QuantityCr,
 	|	BasicRecordsWithExtDimensions.Amount
 	|FROM
-	|	AccountingRegister.Basic.RecordsWithExtDimensions(,, Recorder IN (&Journals),,) AS BasicRecordsWithExtDimensions
+	|	AccountingRegister.Basic.RecordsWithExtDimensions(,, Recorder = &DocumentRef,,) AS BasicRecordsWithExtDimensions
 	|
 	|ORDER BY
 	|	BasicRecordsWithExtDimensions.LineNumber";
@@ -215,31 +203,30 @@ Function GetPrintFormJE(DocumentRef)
 	While QuerySelection.Next() Do
 		Row = Template.GetArea("Row");
 		Row.Parameters.Fill(QuerySelection);
-		Report.Put(Row);
+		AccountingReport.Put(Row);
 	EndDo;
 	
-	Return Report;
-
-EndFunction
+EndProcedure
 
 &AtServer
 Procedure RefreshFilesAtServer(DocumentRef)
 	
 	FileTable.Clear();
 	
-	Items.NoFile.Visible = False;
-	Items.FilePDF.Visible = False;
-	Items.FilePicture.Visible = False;
+	Items.PagesFiles.CurrentPage = Items.FirstPage;
+	
+	Items.NoFileLabel.Visible = False;
+	Items.PDFPreview.Visible = False;
+	Items.ImagePreview.Visible = False;
 	
 	If DocumentRef = Undefined Then
-		Items.GroupFiles.CurrentPage = Items.NoFile;
-		Items.NoFile.Visible = True;
+		Items.NoFileLabel.Visible = True;
 		Return;
 	EndIf;
 	
 	ForDelete = New Array;
-	For Each PageItem In Items.GroupFiles.ChildItems Do
-		If PageItem <> Items.NoFile And PageItem <> Items.FilePDF And PageItem <> Items.FilePicture Then
+	For Each PageItem In Items.PagesFiles.ChildItems Do
+		If PageItem <> Items.FirstPage Then
 			For Each ChildItem In PageItem.ChildItems Do
 				ForDelete.Add(ChildItem);
 			EndDo;
@@ -278,8 +265,8 @@ Procedure RefreshFilesAtServer(DocumentRef)
 	EndDo;
 	
 	If FileTable.Count() = 0 Then
-		Items.GroupFiles.CurrentPage = Items.NoFile;
-		Items.NoFile.Visible = True;
+		Items.NoFileLabel.Visible = True;
+		Items.FirstPage.Title = Items.NoFileLabel.Title;
 		Return;
 	EndIf;
 	
@@ -287,15 +274,13 @@ Procedure RefreshFilesAtServer(DocumentRef)
 		FileIndex = Format(FileTable.IndexOf(FileRecord), "NZ=; NG=;");
 		If FileIndex = "0" Then
 			If FileRecord.isPDF Then
-				CurrentPage = Items.FilePDF;
+				Items.PDFPreview.Visible = True;
 			Else
-				CurrentPage = Items.FilePicture;
+				Items.ImagePreview.Visible = True;
 			EndIf;
-			CurrentPage.Visible = True;
-			CurrentPage.Title = FileRecord.Name;
-			Items.GroupFiles.CurrentPage = CurrentPage;
+			Items.FirstPage.Title = FileRecord.Name;
 		Else
-			NewPage = Items.Add("Page_"+FileIndex, Type("FormGroup"), Items.GroupFiles);
+			NewPage = Items.Add("Page_"+FileIndex, Type("FormGroup"), Items.PagesFiles);
 			NewPage.Type = FormGroupType.Page;
 			NewPage.Title = FileRecord.Name;
 			If FileRecord.isPDF Then
@@ -318,23 +303,18 @@ EndProcedure
 &AtClient
 Procedure SetCurrentPageAtClient()
 	
-	If Items.GroupFiles.CurrentPage = Undefined Then
-		If FileTable.Count() = 0 Then
-			Items.GroupFiles.CurrentPage = Items.NoFile
-		Else
-			FileRecord = FileTable.Get(0);
-			Items.GroupFiles.CurrentPage = ?(FileRecord.isPDF, Items.FilePDF, Items.FilePicture);
-		EndIf;
+	If Items.PagesFiles.CurrentPage = Undefined Then
+		Items.PagesFiles.CurrentPage = Items.FirstPage
 	EndIf;
 	
-	If Items.GroupFiles.CurrentPage = Items.NoFile Then
+	If FileTable.Count() = 0 Then
 		Return;
 	EndIf;
 	
-	If Items.GroupFiles.CurrentPage = Items.FilePDF Or Items.GroupFiles.CurrentPage = Items.FilePicture Then
+	If Items.PagesFiles.CurrentPage = Items.FirstPage Then
 		FileRecord = FileTable.Get(0);
 	Else
-		FileIndex = Number(StrReplace(Items.GroupFiles.CurrentPage.Name, "Page_", ""));
+		FileIndex = Number(StrReplace(Items.PagesFiles.CurrentPage.Name, "Page_", ""));
 		FileRecord = FileTable.Get(FileIndex);
 	EndIf;
 	

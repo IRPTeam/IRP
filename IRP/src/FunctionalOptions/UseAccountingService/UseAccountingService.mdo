@@ -20,5 +20,4 @@
   <content>InformationRegister.T9068S_AccountingMappingAccountsMatching</content>
   <content>Catalog.LedgerTypes.Attribute.SourceLedgerType</content>
   <content>Catalog.LedgerTypes.Attribute.IntegrationSettings</content>
-  <content>DataProcessor.AccountantAutomatedWorkplace</content>
 </mdclass:FunctionalOption>

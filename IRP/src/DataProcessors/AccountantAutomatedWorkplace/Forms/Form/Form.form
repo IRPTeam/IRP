@@ -821,6 +821,54 @@
             <textEdit>true</textEdit>
           </extInfo>
         </items>
+        <items xsi:type="form:FormField">
+          <name>DocumentListJournalEntry</name>
+          <id>145</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible/>
+          <dataPath xsi:type="form:DataPath">
+            <segments>DocumentList.JournalEntry</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>DocumentListJournalEntryExtendedTooltip</name>
+            <id>147</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>DocumentListJournalEntryContextMenu</name>
+            <id>146</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
         <autoCommandBar>
           <name>DocumentListCommandBar</name>
           <id>76</id>
@@ -1165,17 +1213,81 @@
     <items xsi:type="form:FormGroup">
       <name>GroupReport</name>
       <id>128</id>
-      <items xsi:type="form:Button">
-        <name>FormRefreshJE</name>
-        <id>118</id>
+      <items xsi:type="form:FormGroup">
+        <name>GroupCommandsJE</name>
+        <id>150</id>
+        <items xsi:type="form:Button">
+          <name>FormRefreshJE</name>
+          <id>118</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <extendedTooltip>
+            <name>FormRefreshJEExtendedTooltip</name>
+            <id>119</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <commandName>Form.Command.RefreshJE</commandName>
+          <representation>Auto</representation>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <placementArea>UserCmds</placementArea>
+          <representationInContextMenu>Auto</representationInContextMenu>
+        </items>
+        <items xsi:type="form:Button">
+          <name>OpenJE</name>
+          <id>148</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <extendedTooltip>
+            <name>OpenJEExtendedTooltip</name>
+            <id>149</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <commandName>Form.Command.OpenJE</commandName>
+          <representation>Auto</representation>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <placementArea>UserCmds</placementArea>
+          <representationInContextMenu>Auto</representationInContextMenu>
+        </items>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
+        <title>
+          <key>en</key>
+          <value>Commands JE</value>
+        </title>
         <extendedTooltip>
-          <name>FormRefreshJEExtendedTooltip</name>
-          <id>119</id>
+          <name>GroupCommandsJEExtendedTooltip</name>
+          <id>151</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1188,13 +1300,10 @@
             <horizontalAlign>Left</horizontalAlign>
           </extInfo>
         </extendedTooltip>
-        <type>UsualButton</type>
-        <commandName>Form.Command.RefreshJE</commandName>
-        <representation>Auto</representation>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <placementArea>UserCmds</placementArea>
-        <representationInContextMenu>Auto</representationInContextMenu>
+        <type>CommandBar</type>
+        <extInfo xsi:type="form:CommandBarExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
       </items>
       <items xsi:type="form:FormField">
         <name>AccountingReport</name>
@@ -1290,229 +1399,213 @@
     </items>
     <items xsi:type="form:FormGroup">
       <name>GroupFiles</name>
-      <id>68</id>
+      <id>152</id>
       <items xsi:type="form:FormGroup">
-        <name>NoFile</name>
-        <id>70</id>
-        <items xsi:type="form:Decoration">
-          <name>NoFileLabel</name>
-          <id>72</id>
-          <title>
-            <key>en</key>
-            <value>No file</value>
-          </title>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <extendedTooltip>
-            <name>NoFileLabelExtendedTooltip</name>
-            <id>74</id>
+        <name>PagesFiles</name>
+        <id>68</id>
+        <items xsi:type="form:FormGroup">
+          <name>FirstPage</name>
+          <id>70</id>
+          <items xsi:type="form:Decoration">
+            <name>NoFileLabel</name>
+            <id>72</id>
+            <title>
+              <key>en</key>
+              <value>No file</value>
+            </title>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>NoFileLabelContextMenu</name>
-            <id>73</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>Label</type>
-          <autoMaxHeight>true</autoMaxHeight>
-          <horizontalStretch>true</horizontalStretch>
-          <verticalStretch>true</verticalStretch>
-          <textColor xsi:type="core:ColorRef">
-            <color>Style.SpecialTextColor</color>
-          </textColor>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Center</horizontalAlign>
-            <verticalAlign>Center</verticalAlign>
-          </extInfo>
-        </items>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <title>
-          <key>en</key>
-          <value>No file</value>
-        </title>
-        <extendedTooltip>
-          <name>NoFileExtendedTooltip</name>
-          <id>71</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <type>Page</type>
-        <extInfo xsi:type="form:PageGroupExtInfo">
-          <group>Vertical</group>
-          <showTitle>true</showTitle>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormGroup">
-        <name>FilePDF</name>
-        <id>130</id>
-        <items xsi:type="form:FormField">
-          <name>PDFPreview</name>
-          <id>132</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>PDFPreview</segments>
-          </dataPath>
-          <titleLocation>None</titleLocation>
-          <extendedTooltip>
-            <name>PDFPreviewExtendedTooltip</name>
-            <id>134</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>PDFPreviewContextMenu</name>
-            <id>133</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>PDFDocumentField</type>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:PDFDocumentFieldExtInfo">
-            <viewStatusAddition>
+            <extendedTooltip>
+              <name>NoFileLabelExtendedTooltip</name>
+              <id>74</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <name>PDFPreviewViewStatus</name>
-              <id>135</id>
-              <extendedTooltip>
-                <name>PDFPreviewViewStatusExtendedTooltip</name>
-                <id>137</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>PDFPreviewViewStatusContextMenu</name>
-                <id>136</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>ViewStatusAddition</type>
-              <source>PDFPreview</source>
-              <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
-                <autoMaxWidth>true</autoMaxWidth>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
               </extInfo>
-            </viewStatusAddition>
-            <width>50</width>
-            <height>10</height>
+            </extendedTooltip>
+            <contextMenu>
+              <name>NoFileLabelContextMenu</name>
+              <id>73</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>Label</type>
             <autoMaxHeight>true</autoMaxHeight>
             <horizontalStretch>true</horizontalStretch>
             <verticalStretch>true</verticalStretch>
-          </extInfo>
-        </items>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <title>
-          <key>en</key>
-          <value>PDF</value>
-        </title>
-        <extendedTooltip>
-          <name>FilePDFExtendedTooltip</name>
-          <id>131</id>
+            <textColor xsi:type="core:ColorRef">
+              <color>Style.SpecialTextColor</color>
+            </textColor>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Center</horizontalAlign>
+              <verticalAlign>Center</verticalAlign>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormField">
+            <name>PDFPreview</name>
+            <id>132</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>PDFPreview</segments>
+            </dataPath>
+            <titleLocation>None</titleLocation>
+            <extendedTooltip>
+              <name>PDFPreviewExtendedTooltip</name>
+              <id>134</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>PDFPreviewContextMenu</name>
+              <id>133</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>PDFDocumentField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:PDFDocumentFieldExtInfo">
+              <viewStatusAddition>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <name>PDFPreviewViewStatus</name>
+                <id>135</id>
+                <extendedTooltip>
+                  <name>PDFPreviewViewStatusExtendedTooltip</name>
+                  <id>137</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <contextMenu>
+                  <name>PDFPreviewViewStatusContextMenu</name>
+                  <id>136</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <autoFill>true</autoFill>
+                </contextMenu>
+                <type>ViewStatusAddition</type>
+                <source>PDFPreview</source>
+                <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
+                  <autoMaxWidth>true</autoMaxWidth>
+                </extInfo>
+              </viewStatusAddition>
+              <width>50</width>
+              <height>10</height>
+              <autoMaxHeight>true</autoMaxHeight>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormField">
+            <name>ImagePreview</name>
+            <id>140</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>ImagePreview</segments>
+            </dataPath>
+            <titleLocation>None</titleLocation>
+            <extendedTooltip>
+              <name>ImagePreviewExtendedTooltip</name>
+              <id>142</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>ImagePreviewContextMenu</name>
+              <id>141</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>PictureField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:ImageFieldExtInfo">
+              <autoMaxHeight>true</autoMaxHeight>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
+              <pictureSize>Proportionally</pictureSize>
+              <fileDragMode>AsFileRef</fileDragMode>
+            </extInfo>
+          </items>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <type>Page</type>
-        <extInfo xsi:type="form:PageGroupExtInfo">
-          <group>Vertical</group>
-          <showTitle>true</showTitle>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormGroup">
-        <name>FilePicture</name>
-        <id>138</id>
-        <items xsi:type="form:FormField">
-          <name>ImagePreview</name>
-          <id>140</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>ImagePreview</segments>
-          </dataPath>
-          <titleLocation>None</titleLocation>
+          <title>
+            <key>en</key>
+            <value>First page</value>
+          </title>
           <extendedTooltip>
-            <name>ImagePreviewExtendedTooltip</name>
-            <id>142</id>
+            <name>FirstPageExtendedTooltip</name>
+            <id>71</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1525,27 +1618,10 @@
               <horizontalAlign>Left</horizontalAlign>
             </extInfo>
           </extendedTooltip>
-          <contextMenu>
-            <name>ImagePreviewContextMenu</name>
-            <id>141</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>PictureField</type>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:ImageFieldExtInfo">
-            <autoMaxHeight>true</autoMaxHeight>
-            <horizontalStretch>true</horizontalStretch>
-            <verticalStretch>true</verticalStretch>
-            <pictureSize>Proportionally</pictureSize>
-            <fileDragMode>AsFileRef</fileDragMode>
+          <type>Page</type>
+          <extInfo xsi:type="form:PageGroupExtInfo">
+            <group>Vertical</group>
+            <showTitle>true</showTitle>
           </extInfo>
         </items>
         <visible>true</visible>
@@ -1555,11 +1631,11 @@
         </userVisible>
         <title>
           <key>en</key>
-          <value>Picture</value>
+          <value>Group of files</value>
         </title>
         <extendedTooltip>
-          <name>FilePictureExtendedTooltip</name>
-          <id>139</id>
+          <name>PagesFilesExtendedTooltip</name>
+          <id>69</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1572,10 +1648,14 @@
             <horizontalAlign>Left</horizontalAlign>
           </extInfo>
         </extendedTooltip>
-        <type>Page</type>
-        <extInfo xsi:type="form:PageGroupExtInfo">
-          <group>Vertical</group>
-          <showTitle>true</showTitle>
+        <type>Pages</type>
+        <extInfo xsi:type="form:PagesGroupExtInfo">
+          <handlers>
+            <event>OnCurrentPageChange</event>
+            <name>GroupFilesOnCurrentPageChange</name>
+          </handlers>
+          <pagesRepresentation>Auto</pagesRepresentation>
+          <currentRowUse>Auto</currentRowUse>
         </extInfo>
       </items>
       <visible>true</visible>
@@ -1590,7 +1670,7 @@
       <width>40</width>
       <extendedTooltip>
         <name>GroupFilesExtendedTooltip</name>
-        <id>69</id>
+        <id>153</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -1603,13 +1683,13 @@
           <horizontalAlign>Left</horizontalAlign>
         </extInfo>
       </extendedTooltip>
-      <type>Pages</type>
-      <extInfo xsi:type="form:PagesGroupExtInfo">
-        <handlers>
-          <event>OnCurrentPageChange</event>
-          <name>GroupFilesOnCurrentPageChange</name>
-        </handlers>
-        <pagesRepresentation>Auto</pagesRepresentation>
+      <type>UsualGroup</type>
+      <extInfo xsi:type="form:UsualGroupExtInfo">
+        <group>HorizontalIfPossible</group>
+        <behavior>Auto</behavior>
+        <showLeftMargin>true</showLeftMargin>
+        <united>true</united>
+        <throughAlign>Auto</throughAlign>
         <currentRowUse>Auto</currentRowUse>
       </extInfo>
     </items>
@@ -1790,6 +1870,9 @@
     <edit>
       <common>true</common>
     </edit>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>DocumentList.JournalEntry</segments>
+    </notDefaultUseAlwaysAttributes>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
 	Registry.Document,
@@ -1801,13 +1884,17 @@
 	Registry.Editor,
 	MAX(NOT AuditLock.Document IS NULL) AS Locked,
 	MAX(AttachedFiles.File IS NULL) AS FileNotExist,
-	COUNT(DISTINCT AttachedFiles.File) AS Files
+	COUNT(DISTINCT AttachedFiles.File) AS Files,
+	MAX(ISNULL(JournalEntry.Ref, UNDEFINED)) AS JournalEntry
 FROM
 	InformationRegister.PostedDocumentsRegistry AS Registry
 		LEFT JOIN InformationRegister.AttachedFiles AS AttachedFiles
 		ON Registry.Document = AttachedFiles.Owner
 		LEFT JOIN InformationRegister.AuditLock AS AuditLock
 		ON Registry.Document = AuditLock.Document
+		LEFT JOIN Document.JournalEntry AS JournalEntry
+		ON Registry.Document = JournalEntry.Basis
+		AND NOT JournalEntry.DeletionMark
 WHERE
 	FALSE
 GROUP BY
@@ -1886,6 +1973,10 @@ GROUP BY
             </content>
           </localValue>
         </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>JournalEntry</dataPath>
+        <field>JournalEntry</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>LineNumber</dataPath>
@@ -2140,6 +2231,27 @@ GROUP BY
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>RefreshJE</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>OpenJE</name>
+    <title>
+      <key>en</key>
+      <value>Open JE</value>
+    </title>
+    <id>5</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.ShowData</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>OpenJE</name>
       </handler>
     </action>
     <representation>TextPicture</representation>

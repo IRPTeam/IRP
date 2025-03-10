@@ -14073,8 +14073,20 @@ Procedure AddAppearance_Header(Object, Form, FieldsToLock)
 	Element = Form.ConditionalAppearance.Items.Add();
 	Element.Presentation = "FieldsToLock";
 	
+	AllStoresInUnlock = True;
+	For Each Row In Object.ItemList Do
+		If Not Row.IsUnlockStore Or ValueIsFilled(Row.ExternalLinks) Then
+			AllStoresInUnlock = False;
+			Break;
+		EndIf;
+	EndDo;
+	
 	// Set ReadOnly
 	For Each FieldName In FieldsToLock.Header Do
+		
+		If Upper(FieldName) = Upper("Store") And AllStoresInUnlock Then
+			Continue;
+		EndIf;
 				
 		Element.Fields.Items.Add().Field = New DataCompositionField(FieldName);
 		FormElement = Form.Items.Find(FieldName);

@@ -2186,24 +2186,31 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		EndIf;
 	
 	Else                        
-		If RowRefObject.IsVariableItemKey And Not RowRefObject.IsFixedItemKey Then
-			RowRefObject.ItemKey = RowItemList.ItemKey;
-			Rows = FieldsForCheckRowRef.FindRows(New Structure("FieldName", "ItemKey"));
-			For Each Row In Rows Do
-				FieldsForCheckRowRef.Delete(Row);
-			EndDo; 
-			RowRefObject.IsFixedItemKey = True;
+		If RowRefObject.IsVariableItemKey Then
+			If Not RowRefObject.IsFixedItemKey Then
+				RowRefObject.ItemKey = RowItemList.ItemKey;
+				Rows = FieldsForCheckRowRef.FindRows(New Structure("FieldName", "ItemKey"));
+				For Each Row In Rows Do
+					FieldsForCheckRowRef.Delete(Row);
+				EndDo;  
+				RowRefObject.IsFixedItemKey = True;
+			Else
+			    RowRefObject.ItemKey = RowItemList.ItemKey;
+			EndIf;
 		EndIf;		
 		
-		If RowRefObject.IsVariableStore And Not RowRefObject.IsFixedStore Then
-			RowRefObject.Store = RowItemList.Store;
-			Rows = FieldsForCheckRowRef.FindRows(New Structure("FieldName", "Store"));
-			For Each Row In Rows Do
-				FieldsForCheckRowRef.Delete(Row);
-			EndDo; 
-			RowRefObject.IsFixedStore = True;
+		If RowRefObject.IsVariableStore Then
+			If Not RowRefObject.IsFixedStore Then
+				RowRefObject.Store = RowItemList.Store;
+				Rows = FieldsForCheckRowRef.FindRows(New Structure("FieldName", "Store"));
+				For Each Row In Rows Do
+					FieldsForCheckRowRef.Delete(Row);
+				EndDo; 
+				RowRefObject.IsFixedStore = True; 
+			Else
+				RowRefObject.Store = RowItemList.Store;
+			EndIf;
 		EndIf;
-		
 	EndIf;
 	
 	ArrayOfDifferenceFields = New Array();
@@ -2826,9 +2833,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.ManagerSegment AS ManagerSegment,
 	|	ItemList.Ref.Currency AS Currency,
 	|	ItemList.Ref.Company AS Company,
-	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.ItemKey.Item AS Item,
-	|	ItemList.Store AS Store,
 	|	case when &IsPurchase then Undefined else ItemList.PriceType end AS PriceType,
 	|	case when &IsPurchase	then 0 else ISNULL(ItemList.Price, 0) end AS Price,
 	|	ItemList.DeliveryDate AS DeliveryDate,
@@ -2881,6 +2886,10 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ELSE 
 	|		ItemList.Item.ControlCodeString 
 	|	END AS isControlCodeString,
+	|
+	| 	case when BasisesTable.RowRef.IsFixedStore then BasisesTable.RowRef.Store else ItemList.Store end as Store,
+	| 	case when BasisesTable.RowRef.IsFixedItemKey then BasisesTable.RowRef.ItemKey else ItemList.ItemKey end as ItemKey,
+	|
 	|	BasisesTable.*
 	|FROM
 	|	BasisesTable AS BasisesTable
@@ -4313,9 +4322,7 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.Agreement AS Agreement,
 	|	ItemList.Ref.Currency AS Currency,
 	|	ItemList.Ref.Company AS Company,
-	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.ItemKey.Item AS Item,
-	|	ItemList.Store AS Store,
 	|	ItemList.PriceType AS PriceType,
 	|	ItemList.DeliveryDate AS DeliveryDate,
 	|	ItemList.DontCalculateRow AS DontCalculateRow,
@@ -4348,6 +4355,8 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
+	| 	case when BasisesTable.RowRef.IsFixedStore then BasisesTable.RowRef.Store else ItemList.Store end as Store,
+	| 	case when BasisesTable.RowRef.IsFixedItemKey then BasisesTable.RowRef.ItemKey else ItemList.ItemKey end as ItemKey,
 	|	ItemList.VatRate
 	|FROM
 	|	BasisesTable AS BasisesTable
@@ -13753,7 +13762,6 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|		AND RowIDInfoFull.CurrentStep = BasisesTable.CurrentStep
 	|		AND CASE
 	|			WHEN RowIDInfoFull.RowRef.IsVariableItemKey
-	|			AND NOT RowIDInfoFull.RowRef.IsFixedItemKey
 	|				THEN RowIDInfoFull.Item = BasisesTable.Item
 	|			ELSE RowIDInfoFull.ItemKey = BasisesTable.ItemKey
 	|		END
@@ -13761,7 +13769,6 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|			WHEN &Filter_Store
 	|				THEN CASE
 	|					WHEN RowIDInfoFull.RowRef.IsVariableStore
-	|					AND NOT RowIDInfoFull.RowRef.IsFixedStore
 	|						THEN TRUE
 	|					ELSE CASE
 	|						WHEN RowIDInfoFull.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)

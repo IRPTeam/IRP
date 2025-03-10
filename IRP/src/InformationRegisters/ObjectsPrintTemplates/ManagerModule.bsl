@@ -17,7 +17,7 @@ EndFunction
 //  PrintTemplate - CatalogRef.PrintFormTemplates - Print template
 // 
 // Returns:
-//  Array of CatalogRef.AddAttributeAndPropertySets - Get objects for print template
+//  Array of CatalogRef.ConfigurationMetadata - Get objects for print template
 Function GetObjectsForPrintTemplate(PrintTemplate) Export
 	
 	Query = New Query;

@@ -178,7 +178,7 @@ EndProcedure
 &AtServer
 Procedure SaveTemplate(RealObject)
 	
-	If Object.PrintFormType = PredefinedValue("Enum.PrintFormTypes.TXT") Then
+	If Object.PrintFormType = Enums.PrintFormTypes.TXT Then
 		RealObject.Template = New ValueStorage(TemplateTXT);
 		
 	EndIf;

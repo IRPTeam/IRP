@@ -831,7 +831,7 @@ Function PrintTemplates_GetCommandDescription(CommandName)
 	
 	Targets = CommandDescription.Targets;
 	For Each ObjectRef In InformationRegisters.ObjectsPrintTemplates.GetObjectsForPrintTemplate(TemplateRef) Do
-		Targets.Add(StrReplace(ObjectRef.PredefinedDataName, "_", "."));
+		Targets.Add(ObjectRef.ObjectFullName);
 	EndDo;
 	CommandDescription.Targets = New FixedArray(Targets);
 	

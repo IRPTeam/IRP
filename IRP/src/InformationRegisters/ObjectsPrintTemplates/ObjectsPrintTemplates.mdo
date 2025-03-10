@@ -57,7 +57,7 @@
       <value>Object</value>
     </synonym>
     <type>
-      <types>CatalogRef.AddAttributeAndPropertySets</types>
+      <types>CatalogRef.ConfigurationMetadata</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

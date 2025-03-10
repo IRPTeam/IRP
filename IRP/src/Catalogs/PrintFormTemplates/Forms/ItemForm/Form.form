@@ -1267,7 +1267,7 @@
     </edit>
     <extInfo xsi:type="form:ValueListExtInfo">
       <itemValueType>
-        <types>CatalogRef.AddAttributeAndPropertySets</types>
+        <types>CatalogRef.ConfigurationMetadata</types>
       </itemValueType>
     </extInfo>
   </attributes>

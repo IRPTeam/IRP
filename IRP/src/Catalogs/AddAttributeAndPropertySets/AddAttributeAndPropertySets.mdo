@@ -992,6 +992,13 @@
         <value>162</value>
       </code>
     </items>
+    <items id="832a212e-a431-490b-9e6d-639c4a3c8123">
+      <name>Document_WithholdingTaxInvoice</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>163</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

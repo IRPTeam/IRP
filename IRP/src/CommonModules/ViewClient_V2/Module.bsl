@@ -243,6 +243,7 @@ Procedure OnChainComplete(Parameters) Export
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WithholdingTaxInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
@@ -3964,6 +3965,7 @@ EndProcedure
 Procedure OnSetPartnerNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WithholdingTaxInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"

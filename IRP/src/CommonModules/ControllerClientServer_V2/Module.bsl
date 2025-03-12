@@ -772,6 +772,7 @@ Function BindFormOnOpen(Parameters)
 	
 	Binding.Insert("PurchaseOrder"        , "StepChangeTaxVisible, StepChangePartnerChoiceList");
 	Binding.Insert("PurchaseInvoice"      , "StepChangeTaxVisible, StepChangePartnerChoiceList");
+	Binding.Insert("WithholdingTaxInvoice", "StepChangeTaxVisible, StepChangePartnerChoiceList");
 	Binding.Insert("PurchaseReturnOrder"  , "StepChangeTaxVisible, StepChangePartnerChoiceList");
 	Binding.Insert("PurchaseReturn"       , "StepChangeTaxVisible, StepChangePartnerChoiceList");
 	
@@ -981,7 +982,7 @@ Function BindListOnCopy(Parameters)
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListCalculations_IsCopyRow,
 		|StepUpdatePaymentTerms");
-	
+		
 	Binding.Insert("BankPayment"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("BankReceipt"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("CashPayment"  , "StepPaymentListCalculations_IsCopyRow");
@@ -2146,6 +2147,9 @@ Function BindCurrency(Parameters)
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListChangePriceByPriceType");
 	
+	Binding.Insert("WithholdingTaxInvoice",
+		"StepItemListChangePriceByPriceType");
+	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepItemListChangePriceByPriceType");
 	
@@ -2726,6 +2730,13 @@ Function BindDate(Parameters)
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepUpdatePaymentTerms");
 	
+	Binding.Insert("WithholdingTaxInvoice",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		|StepChangeTaxVisible,
+		|StepItemListChangeVatRate_AgreementInHeader");
+	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType, 
@@ -2897,6 +2908,12 @@ Function BindCompany(Parameters)
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey,
 		|StepChangeCurrencyRevaluationInvoiceByBasis");
+	
+	Binding.Insert("WithholdingTaxInvoice",
+		"StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
+		|StepItemListChangeVatRate_AgreementInHeader,
+		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepChangeTaxVisible,
@@ -3398,6 +3415,10 @@ Function GetBindingStructure_Partner(Parameters)
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner,
 		|StepChangeCurrencyRevaluationInvoiceByBasis");
+	
+	Result.Binding.Insert("WithholdingTaxInvoice",
+		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		|StepChangeLegalNameByPartner");
 	
 	Result.Binding.Insert("SalesReportFromTradeAgent",
 		"StepChangeAgreementByPartner_AgreementTypeIsTradeAgent,
@@ -5374,6 +5395,14 @@ Function GetBindingStructure_Agreement(Parameters)
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepChangeRecordPurchasePricesByAgreement,
 		|StepChangeCurrencyRevaluationInvoiceByBasis");
+		
+	Result.Binding.Insert("WithholdingTaxInvoice",
+		"StepChangeCompanyByAgreement,
+		|StepChangeCurrencyByAgreement,
+		|StepItemListChangePriceTypeByAgreement,
+		|StepChangePriceIncludeTaxByAgreement,
+		|StepChangeTaxVisible,
+		|StepItemListChangeVatRate_AgreementInHeader");
 		
 	Result.Binding.Insert("SalesReportFromTradeAgent",
 		"StepChangeCompanyByAgreement,
@@ -10766,6 +10795,7 @@ Function GetBindingStructure_ItemListItem(Parameters)
 	Result.Binding.Insert("RetailReceiptCorrection"        , "StepItemListChangeItemKeyByItem,StepChangeisControlCodeStringByItem");
 	Result.Binding.Insert("PurchaseOrder"             , "StepItemListChangeItemKeyByItem");
 	Result.Binding.Insert("PurchaseInvoice"           , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("WithholdingTaxInvoice"     , "StepItemListChangeItemKeyByItem");
 	Result.Binding.Insert("RetailReturnReceipt"       , "StepItemListChangeItemKeyByItem,StepChangeisControlCodeStringByItem");
 	Result.Binding.Insert("PurchaseReturnOrder"       , "StepItemListChangeItemKeyByItem");
 	Result.Binding.Insert("PurchaseReturn"            , "StepItemListChangeItemKeyByItem");
@@ -10997,6 +11027,14 @@ Function GetBindingStructure_ItemListItemKey(Parameters)
 		|StepItemListChangePriceByPriceType,
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey,
+		|StepItemListChangeExpenseTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
+	
+	Result.Binding.Insert("WithholdingTaxInvoice",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeUnitByItemKey,
 		|StepItemListChangeExpenseTypeByItemKey,
 		|StepChangeIsServiceByItemKey");
@@ -11377,6 +11415,10 @@ Function BindItemListUnit(Parameters)
 		|StepItemListChangePriceByPriceType");
 	
 	Binding.Insert("PurchaseInvoice", 
+		"StepItemListCalculateQuantityInBaseUnit,
+		|StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("WithholdingTaxInvoice", 
 		"StepItemListCalculateQuantityInBaseUnit,
 		|StepItemListChangePriceByPriceType");
 	
@@ -12033,6 +12075,7 @@ Function BindItemListPrice(Parameters)
 		Binding.Insert("RetailReceiptCorrection"   , "StepItemListCalculations_IsPriceChanged");
 		Binding.Insert("PurchaseOrder"        , "StepItemListCalculations_IsPriceChanged");
 		Binding.Insert("PurchaseInvoice"      , "StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("WithholdingTaxInvoice", "StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");
 		Binding.Insert("RetailReturnReceipt"  , "StepItemListCalculations_IsPriceChanged");
 		Binding.Insert("PurchaseReturnOrder"  , "StepItemListCalculations_IsPriceChanged");
 		Binding.Insert("PurchaseReturn"       , "StepItemListCalculations_IsPriceChanged");
@@ -12069,6 +12112,10 @@ Function BindItemListPrice(Parameters)
 		Binding.Insert("PurchaseInvoice",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
 			|StepItemListCalculations_IsPriceChanged");
+	
+		Binding.Insert("WithholdingTaxInvoice",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");
 	
 		Binding.Insert("SalesReportFromTradeAgent",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
@@ -12158,6 +12205,7 @@ Function BindItemListDontCalculateRow(Parameters)
 	
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
+	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
 	
 	Return BindSteps("StepItemListCalculations_IsDontCalculateRowChanged", DataPath, Binding, Parameters, "BindItemListDontCalculateRow");
 EndFunction
@@ -12200,6 +12248,7 @@ Function BindItemListVatRate(Parameters)
 	
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
+	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	
 	Binding.Insert("StockAdjustmentAsSurplus", "StepItemListCalculations_IsVatRateChanged_StockDocuments");
 	
@@ -12575,6 +12624,9 @@ Function BindItemListQuantityInBaseUnit(Parameters)
 	
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("WithholdingTaxInvoice",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOffers");
 	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOffers");
@@ -13022,6 +13074,9 @@ Function BindItemListTaxAmount(Parameters)
 	Binding.Insert("PurchaseInvoice", 
 		"StepItemListCalculations_IsTaxAmountChanged");
 	
+	Binding.Insert("WithholdingTaxInvoice", 
+		"StepItemListCalculations_IsTaxAmountChanged_Without_SpecialOffers");
+	
 	Binding.Insert("SalesReportFromTradeAgent", 
 		"StepItemListCalculations_IsTaxAmountChanged_Without_SpecialOffers");
 	
@@ -13070,6 +13125,7 @@ Function BindItemListTaxAmountUserForm(Parameters)
 	Binding.Insert("RetailReceiptCorrection"   , "StepItemListCalculations_IsTaxAmountUserFormChanged");
 	Binding.Insert("PurchaseOrder"        , "StepItemListCalculations_IsTaxAmountUserFormChanged");
 	Binding.Insert("PurchaseInvoice"      , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Binding.Insert("WithholdingTaxInvoice", "StepItemListCalculations_IsTaxAmountUserFormChanged");
 	Binding.Insert("RetailReturnReceipt"  , "StepItemListCalculations_IsTaxAmountUserFormChanged");
 	Binding.Insert("PurchaseReturnOrder"  , "StepItemListCalculations_IsTaxAmountUserFormChanged");
 	Binding.Insert("PurchaseReturn"       , "StepItemListCalculations_IsTaxAmountUserFormChanged");
@@ -13181,6 +13237,10 @@ Function BindItemListTotalAmount(Parameters)
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
 		|StepItemListCalculations_IsTotalAmountChanged");
+	
+	Binding.Insert("WithholdingTaxInvoice",
+		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
+		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
 	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,

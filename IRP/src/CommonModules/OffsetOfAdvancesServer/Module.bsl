@@ -1023,6 +1023,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 				Or DocMetadata = Metadata.Documents.CashPayment
 				Or DocMetadata = Metadata.Documents.SalesReportToConsignor
 				Or DocMetadata = Metadata.Documents.PurchaseInvoice
+				Or DocMetadata = Metadata.Documents.WithholdingTaxInvoice
 				Or (DocMetadata = Metadata.Documents.DebitCreditNote And Row.Document.ReceiveDebtType = Enums.DebtTypes.TransactionVendor)
 				Or (DocMetadata = Metadata.Documents.CreditNote And IsVendorAdvanceClosing)
 				Or DocMetadata = Metadata.Documents.PurchaseReturn
@@ -1234,6 +1235,11 @@ Function GetAccountingOperation(DocMetadata, Doc, IsCustomerAdvanceClosing, IsVe
 	ElsIf DocMetadata = Metadata.Documents.PurchaseInvoice Then
 		
 		Return AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors;
+	
+	// Withholding Tax invoice
+	ElsIf DocMetadata = Metadata.Documents.WithholdingTaxInvoice Then
+		
+		Return AO.WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors;
 	
 	// Purchase return
 	ElsIf DocMetadata = Metadata.Documents.PurchaseReturn Then

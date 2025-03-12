@@ -490,6 +490,7 @@
   <roles>Role.Document_StockCorrection</roles>
   <roles>Role.Document_ShipmentPlaningOrder</roles>
   <roles>Role.AccumulationRegisters_R9610T_ShipmentPlaning</roles>
+  <roles>Role.Document_WithholdingTaxInvoice</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -835,6 +836,8 @@
   <commonModules>CommonModule.NumberingRulesClientServer</commonModules>
   <commonModules>CommonModule.DocShipmentPlaningOrderClient</commonModules>
   <commonModules>CommonModule.DocShipmentPlaningOrderServer</commonModules>
+  <commonModules>CommonModule.DocWithholdingTaxInvoiceClient</commonModules>
+  <commonModules>CommonModule.DocWithholdingTaxInvoiceServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1322,6 +1325,7 @@
   <documents>Document.ELedgerRegistry</documents>
   <documents>Document.StockCorrection</documents>
   <documents>Document.ShipmentPlaningOrder</documents>
+  <documents>Document.WithholdingTaxInvoice</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

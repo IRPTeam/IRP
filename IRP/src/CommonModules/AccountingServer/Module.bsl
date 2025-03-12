@@ -309,6 +309,10 @@ Function GetOperationsDefinition()
 	// Additional revenue allocation
 	Map.Insert(AO.AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory, New Structure("ByRow", True));
 	
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors, New Structure("ByRow", True));
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions, New Structure("ByRow", True));
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions, New Structure("ByRow", True));
+	
 	Return Map;
 EndFunction
 

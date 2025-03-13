@@ -1376,6 +1376,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_176", NStr("en = 'Fill Integration Settings in ""Ledger Type""'", Lang));
 	Strings.Insert("Error_177", NStr("en = 'Lack of advances [%1] [%2] [%3]'", Lang));
 	Strings.Insert("Error_178", NStr("en = 'Order already closed'", Lang));
+	Strings.Insert("Error_179", NStr("en = 'Number [%1] is already used for [%2]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	

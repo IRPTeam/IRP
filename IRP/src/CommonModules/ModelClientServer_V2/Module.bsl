@@ -250,6 +250,7 @@ Function GetChain()
 	Chain.Insert("DefaultInventoryOrigin"    , GetChainLink("DefaultInventoryOriginExecute"));
 	Chain.Insert("DefaultVatRateInList"      , GetChainLink("DefaultVatRateInListExecute"));
 	Chain.Insert("DefaultIsVariableItemKeyInList", GetChainLink("DefaultIsVariableItemKeyInListExecute"));
+	Chain.Insert("DefaultIsVariableStoreInList"  , GetChainLink("DefaultIsVariableStoreInListExecute"));
 	
 	// Empty.Header
 	Chain.Insert("EmptyStoreInHeader"     , GetChainLink("EmptyStoreInHeaderExecute"));
@@ -4529,6 +4530,21 @@ EndFunction
 Function DefaultIsVariableItemKeyInListExecute(Options) Export	
 	If ValueIsFilled(Options.Company) Then
 		Return CommonFunctionsServer.GetRefAttribute(Options.Company, "UseVariableItemKeyInOrders");
+	EndIf;
+	Return False;
+EndFunction
+
+#EndRegion
+
+#Region IS_VARIABLE_STORE
+
+Function DefaultIsVariableStoreInListOptions() Export
+	Return GetChainLinkOptions("Company");
+EndFunction
+	
+Function DefaultIsVariableStoreInListExecute(Options) Export	
+	If ValueIsFilled(Options.Company) Then
+		Return CommonFunctionsServer.GetRefAttribute(Options.Company, "UseVariableStoreInOrders");
 	EndIf;
 	Return False;
 EndFunction

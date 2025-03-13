@@ -7,6 +7,10 @@ Procedure SetNewDocumentNumberBeforeWrite(Source, Cancel, WriteMode, PostingMode
 		Return;
 	EndIf;
 	
+	If Source.AdditionalProperties.Property("WithoutSetNewNumber") Then
+		Return;
+	EndIf;
+	
 	If Constants.UseNumberingRules.Get() = False Then
 		Return;
 	EndIf;
@@ -22,11 +26,19 @@ Procedure SetNewDocumentNumberBeforeWrite(Source, Cancel, WriteMode, PostingMode
 	
 	SetSourceNewNumber(Source);
 	
+	If Source.NumeratorRules.UniquenessControl Then
+		CheckNumberUniqueness(Source, Cancel);
+	EndIf;
+	
 EndProcedure
 
 Procedure SetNewCatalogNumberBeforeWrite(Source, Cancel) Export
 	
 	If Source.DataExchange.Load = True Then
+		Return;
+	EndIf;
+	
+	If Source.AdditionalProperties.Property("WithoutSetNewNumber") Then
 		Return;
 	EndIf;
 	
@@ -44,6 +56,10 @@ Procedure SetNewCatalogNumberBeforeWrite(Source, Cancel) Export
 	EndIf;
 	
 	SetSourceNewNumber(Source);
+	
+	If Source.NumeratorRules.UniquenessControl Then
+		CheckNumberUniqueness(Source, Cancel);
+	EndIf;
 	
 EndProcedure
 
@@ -135,7 +151,10 @@ Function FillNumeratorDescription(NumeratorRules) Export
 	
 	NumeratorDescription.BeginDate = NumeratorRules.BeginDate;
 	NumeratorDescription.EndDate = NumeratorRules.EndDate;
+	
 	NumeratorDescription.ByDefault = NumeratorRules.ByDefault;
+	NumeratorDescription.UniquenessControl = NumeratorRules.UniquenessControl;
+	NumeratorDescription.AllowedManualEditing = NumeratorRules.AllowedManualEditing;
 	
 	NumeratorDescription.NumberingPeriod = NumeratorRules.NumberingPeriod;
 	NumeratorDescription.StartNumber = NumeratorRules.StartNumber;
@@ -554,5 +573,34 @@ Function GetNumberNameByMetadata(MetadataName, NumeratorRulesRef) Export
 	Return DefaultAttribute;
 	
 EndFunction
+
+Procedure CheckNumberUniqueness(Source, Cancel)
+	
+	TableName = Source.Ref.Metadata().FullName();
+	NumberName = GetNumberNameByMetadata(TableName, Source.NumeratorRules);
+	NumberValue = Source[NumberName];
+	If Not ValueIsFilled(NumberValue) Then
+		Return;
+	EndIf;
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT Table.Ref
+	|FROM "+TableName+" AS Table
+	|WHERE
+	|	Table.Ref <> &Ref
+	|	AND Table.NumeratorRules = &Numerator
+	|	AND Table."+NumberName+" = &DocNumber";
+	Query.SetParameter("Ref", Source.Ref);
+	Query.SetParameter("Numerator", Source.NumeratorRules);
+	Query.SetParameter("DocNumber", NumberValue);
+	
+	QuerySelection = Query.Execute().Select();
+	If QuerySelection.Next() Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_179, NumberValue, QuerySelection.Ref));
+		Cancel = True;
+	EndIf;
+	
+EndProcedure
 
 #EndRegion

@@ -340,11 +340,29 @@ EndFunction
 // See InternalCommandsServer.OnInitialization
 Procedure ShowNumerator_OnInitialization(CommandName, CommandParameters, Cancel, AddInfo)
 
-	NumeratorItem = CommandParameters.Form.Items.Find("NumeratorRules");
-	If NumeratorItem = Undefined Then
-		Cancel = True;
-	Else
-		NumeratorItem.Visible = False;
+	If CommandParameters.FormType = Enums.FormTypes.ObjectForm Then
+		NumeratorItem = CommandParameters.Form.Items.Find("NumeratorRules");
+		If NumeratorItem = Undefined Then
+			Cancel = True;
+		Else
+			NumeratorItem.Visible = False;
+		EndIf;
+		
+		//@skip-check property-return-type
+		RuleRef = CommandParameters.MainAttribute.NumeratorRules; // CatalogRef.NumeratorGroups
+		If Not ValueIsFilled(RuleRef) Then
+			RuleRef = NumberingRulesServer.GetNumeratorGroupForDocument(
+				CommandParameters.ObjectFullName, CommonFunctionsServer.GetCurrentSessionDate());
+		EndIf;
+		
+		NumeratorDescription = NumberingRulesServer.FillNumeratorDescription(RuleRef);
+		If Not RuleRef.IsEmpty() And Not NumeratorDescription.AllowedManualEditing Then
+			NumberName = NumberingRulesServer.GetNumberNameByMetadata(CommandParameters.ObjectFullName, RuleRef);
+			DocumentNumberItem = CommandParameters.Form.Items.Find(NumberName);
+			If DocumentNumberItem <> Undefined Then
+				DocumentNumberItem.ReadOnly = True;
+			EndIf;
+		EndIf;
 	EndIf;
 		 
 EndProcedure

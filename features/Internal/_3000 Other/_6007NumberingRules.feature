@@ -165,3 +165,50 @@ Scenario: _607702 check numeration for catalog (partner term)
 		And I click "Save" button
 		Then the form attribute named "Number" became equal to "72510128"
 	And I close all client application windows
+
+Scenario: _607703 check manual editing for numerator
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I click "Create" button
+	And I select from the drop-down list named "Company" by "Main Company" string
+	When I Check the steps for Exception
+		| 'And I input "4545566" text in "Document number" field'    |
+		
+
+Scenario: _607704 check uniqueness control for documents
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.NumeratorGroups"
+		And I go to line in "List" table
+			| "Description"           |
+			| "Basic numerator group" |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I set checkbox "Uniqueness control"
+		And I set checkbox "Allowed manual editing"		
+		And I click "Save and close" button
+	* Create first SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I click "Save" button
+		And I save the value of the field named "DocumentNumber" as "SI1DocumentNumber"
+		And I save the window as "SalesInvoice607704"
+		And I close current window
+	* Create second SI	
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I input "$SI1DocumentNumber$" variable value in the field named "DocumentNumber"
+		And I click "Save" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Number [$SI1DocumentNumber$] is already used for [$SalesInvoice607704$]'|
+	And I close all client application windows
+	
+				
+				
+
+
+		

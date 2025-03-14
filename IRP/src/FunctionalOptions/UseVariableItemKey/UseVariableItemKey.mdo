@@ -12,4 +12,5 @@
   <content>Catalog.RowIDs.Attribute.IsVariableItemKey</content>
   <content>Catalog.RowIDs.Attribute.Item</content>
   <content>Catalog.Companies.Attribute.UseVariableItemKeyInOrders</content>
+  <content>Catalog.RowIDs.Attribute.IsFixedItemKey</content>
 </mdclass:FunctionalOption>

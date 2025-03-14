@@ -306,6 +306,78 @@ EndProcedure
 
 #EndRegion
 
+#Region ShowNumerator
+
+// Show not active get command description.
+// 
+// Returns:
+//  See InternalCommandsServer.GetCommandDescription
+Function ShowNumerator_GetCommandDescription()
+	
+	CommandDescription = InternalCommandsServer.GetCommandDescription();
+	
+	CommandDescription.Name = "ShowNumerator";
+	//@skip-check statement-type-change, property-return-type
+	CommandDescription.Title = R().InternalCommands_ShowNumerator;
+	//@skip-check statement-type-change, property-return-type
+	CommandDescription.TitleCheck = R().InternalCommands_ShowNumerator_Check;
+	CommandDescription.ToolTip = CommandDescription.Title;
+	CommandDescription.Picture = "ShowPassword";
+	CommandDescription.PictureCheck = "HidePassword";
+	CommandDescription.EnableChecking = True;
+	
+	CommandDescription.LocationGroup = "CommandBar.Tools";
+	CommandDescription.LocationInCommandBar = "InAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
+	CommandDescription.ModifiesStoredData = False;
+	
+	CommandDescription.HasActionInitialization = True;
+	
+	CommandDescription.UsingObjectForm = True;
+	
+	Targets = CommandDescription.Targets;
+	For Each ContentItem In Metadata.CommonAttributes.NumeratorRules.Content Do
+		If ContentItem.Use = Metadata.ObjectProperties.CommonAttributeUse.Use  Then
+			Targets.Add(ContentItem.Metadata.FullName());
+		EndIf;
+	EndDo;
+	CommandDescription.Targets = New FixedArray(Targets);
+	
+	Return CommandDescription;
+	
+EndFunction
+
+// See InternalCommandsServer.OnInitialization
+Procedure ShowNumerator_OnInitialization(CommandName, CommandParameters, Cancel, AddInfo)
+
+	If CommandParameters.FormType = Enums.FormTypes.ObjectForm Then
+		NumeratorItem = CommandParameters.Form.Items.Find("NumeratorRules");
+		If NumeratorItem = Undefined Then
+			Cancel = True;
+		Else
+			NumeratorItem.Visible = False;
+		EndIf;
+		
+		//@skip-check property-return-type
+		RuleRef = CommandParameters.MainAttribute.NumeratorRules; // CatalogRef.NumeratorGroups
+		If Not ValueIsFilled(RuleRef) Then
+			RuleRef = NumberingRulesServer.GetNumeratorGroupForDocument(
+				CommandParameters.ObjectFullName, CommonFunctionsServer.GetCurrentSessionDate());
+		EndIf;
+		
+		NumeratorDescription = NumberingRulesServer.FillNumeratorDescription(RuleRef);
+		If Not RuleRef.IsEmpty() And Not NumeratorDescription.AllowedManualEditing Then
+			NumberName = NumberingRulesServer.GetNumberNameByMetadata(CommandParameters.ObjectFullName, RuleRef);
+			DocumentNumberItem = CommandParameters.Form.Items.Find(NumberName);
+			If DocumentNumberItem <> Undefined Then
+				DocumentNumberItem.ReadOnly = True;
+			EndIf;
+		EndIf;
+	EndIf;
+		 
+EndProcedure
+
+#EndRegion
+
 #Region GroupEditingProperties
 
 // Group editing properties get command description.

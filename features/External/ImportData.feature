@@ -3846,3 +3846,19 @@ Scenario: Create catalog NumeratorBasicRules, NumeratorGroups objects and Counte
 		| 'e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5284' | '72510000'       | '01.01.0001 00:00:00' | 127       |
 		| 'e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5284' | '72530000'       | '01.01.0001 00:00:00' | 15        |
 
+Scenario: Create catalog PrintFormTemplates objects (for Sales order)
+
+	And I check or create catalog "PrintFormTemplates" objects:
+		| 'Ref'                                                                        | 'DeletionMark' | 'Code' | 'PrintFormType'           | 'Template'                                                                                                                                                                                                                                                                                                                                                                                                  | 'Author'                                                        | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | 'False'        | 1      | 'Enum.PrintFormTypes.TXT' | 'ValueStorage:AQERAQAAAAAAAO+7v3siUyIsIlByZWNvbmRpdGlvbnM6DQoNClNhbGVzIG9yZGVyIDxPcmRlciBOdW1iZXI+IGlzIGNyZWF0ZWQgaW4gdGhlIHN5c3RlbS4NCg0KU2FsZXMgb3JkZXIgY29udGFpbnMgZGF0YSBmb3IgZmllbGRzOg0KIA0KQ3VzdG9tZXIgPEN1c3RvbWVyIE5hbWU+LCANCg0KT3JkZXIgRGF0ZSA8T3JkZXIgRGF0ZT4sIEl0ZW1zIDxJdGVtIExpc3Q+LCANCg0KUXVhbnRpdHkgPFF1YW50aXRpZXM+LCBQcmljZXMgPFByaWNlcz4sIFRvdGFsIEFtb3VudCA8VG90YWwgQW1vdW50Pi4ifQ==' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Print form SO'  | ''                 | ''               | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '14.03.2025 14:12:01' | '14.03.2025 14:37:05' | 'False'     |
+
+	And I refill object tabular section "Parameters":
+		| 'Ref'                                                                        | 'Name'            | 'Expression'                                   |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Customer Name>' | 'Result = Source.Partner;'                     |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Item List>'     | ''                                             |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Order Date>'    | 'Result = Format(Source.Date, "DF=dd.MM.yy");' |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Order Number>'  | 'Result = Source.Number;'                      |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Prices>'        | ''                                             |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Quantities>'    | ''                                             |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Total Amount>'  | ''                                             |
+

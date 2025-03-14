@@ -583,7 +583,13 @@ Procedure CheckNumberUniqueness(Source, Cancel)
 		Return;
 	EndIf;
 	
+	DefaultAttribute = Metadata.CommonAttributes.DocumentNumber.Name;
+	
 	Query = New Query;
+	Query.SetParameter("Ref", Source.Ref);
+	Query.SetParameter("Numerator", Source.NumeratorRules);
+	Query.SetParameter("DocNumber", NumberValue);
+	
 	Query.Text =
 	"SELECT Table.Ref
 	|FROM "+TableName+" AS Table
@@ -591,9 +597,46 @@ Procedure CheckNumberUniqueness(Source, Cancel)
 	|	Table.Ref <> &Ref
 	|	AND Table.NumeratorRules = &Numerator
 	|	AND Table."+NumberName+" = &DocNumber";
-	Query.SetParameter("Ref", Source.Ref);
-	Query.SetParameter("Numerator", Source.NumeratorRules);
-	Query.SetParameter("DocNumber", NumberValue);
+	
+	For Each MetadataRow In Source.NumeratorRules.Documents Do
+		If MetadataRow.Document.IsEmpty() Then
+			Continue;
+		EndIf;
+		RowTableName = MetadataRow.Document.ObjectFullName;
+		If RowTableName = TableName Then
+			Continue;
+		EndIf;
+		NumberName = ?(MetadataRow.NumberName = "", DefaultAttribute, MetadataRow.NumberName);
+		Query.Text = Query.Text + "
+		|
+		|UNION ALL
+		|
+		|SELECT Ref
+		|FROM " + RowTableName + "
+		|WHERE
+		|	NumeratorRules = &Numerator
+		|	AND " + NumberName + " = &DocNumber";
+	EndDo;
+	
+	For Each MetadataRow In Source.NumeratorRules.Catalogs Do
+		If MetadataRow.Catalog.IsEmpty() Then
+			Continue;
+		EndIf;
+		RowTableName = MetadataRow.Catalog.ObjectFullName;
+		If RowTableName = TableName Then
+			Continue;
+		EndIf;
+		NumberName = ?(MetadataRow.NumberName = "", DefaultAttribute, MetadataRow.NumberName);
+		Query.Text = Query.Text + "
+		|
+		|UNION ALL
+		|
+		|SELECT Ref
+		|FROM " + RowTableName + "
+		|WHERE
+		|	NumeratorRules = &Numerator
+		|	AND " + NumberName + " = &DocNumber";
+	EndDo;
 	
 	QuerySelection = Query.Execute().Select();
 	If QuerySelection.Next() Then

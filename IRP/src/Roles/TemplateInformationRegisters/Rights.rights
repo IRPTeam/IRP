@@ -784,6 +784,13 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.ObjectsPrintTemplates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9065S_AccountingMappingExtDimensions</name>
 		<right>
 			<name>Read</name>

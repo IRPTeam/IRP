@@ -205,6 +205,16 @@ Scenario: _607704 check uniqueness control for documents
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
 			|'Number [$SI1DocumentNumber$] is already used for [$SalesInvoice607704$]'|
+	* Create PI with the same number (continuous numbering for PI and SI)
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click "Create" button
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I input "$SI1DocumentNumber$" variable value in the field named "DocumentNumber"
+		And I click "Save" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Number [$SI1DocumentNumber$] is already used for [$SalesInvoice607704$]'|
 	And I close all client application windows
 	
 				

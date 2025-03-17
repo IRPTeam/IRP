@@ -77,6 +77,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.PrintFormTemplates</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.SalesOrder</metadata>
     <use>Use</use>
   </content>

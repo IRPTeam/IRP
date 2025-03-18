@@ -1206,6 +1206,48 @@
      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
     </items>
     <items xsi:type="form:FormField">
+     <name>ItemListIsUnlockStore</name>
+     <id>453</id>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.ItemList.IsUnlockStore</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>ItemListIsUnlockStoreExtendedTooltip</name>
+      <id>455</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ItemListIsUnlockStoreContextMenu</name>
+      <id>454</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>CheckBoxField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormField">
      <name>ItemListItem</name>
      <id>47</id>
      <visible>true</visible>
@@ -1416,6 +1458,65 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>ItemListSourceOfOriginsPresentation</name>
+     <id>456</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.ItemList.SourceOfOriginsPresentation</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>ItemListSourceOfOriginsPresentationExtendedTooltip</name>
+      <id>458</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ItemListSourceOfOriginsPresentationContextMenu</name>
+      <id>457</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <handlers>
+       <event>Clearing</event>
+       <name>ItemListSourceOfOriginsPresentationClearing</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>ItemListSourceOfOriginsPresentationStartChoice</name>
+      </handlers>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <clearButton>true</clearButton>
       <chooseType>true</chooseType>
       <typeDomainEnabled>true</typeDomainEnabled>
       <textEdit>true</textEdit>
@@ -4967,6 +5068,57 @@
     <edit>
      <common>true</common>
     </edit>
+   </columns>
+   <columns>
+    <name>IsUnlockStore</name>
+    <title>
+     <key>tr</key>
+     <value>Depo kilidi açık</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Is unlock store</value>
+    </title>
+    <title>
+     <key>en</key>
+     <value>Is unlock store</value>
+    </title>
+    <id>23</id>
+    <valueType>
+     <types>Boolean</types>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+   </columns>
+   <columns>
+    <name>SourceOfOriginsPresentation</name>
+    <title>
+     <key>tr</key>
+     <value>Envanter menşeileri</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Источники происхождения</value>
+    </title>
+    <title>
+     <key>en</key>
+     <value>Source of origins</value>
+    </title>
+    <id>24</id>
+    <valueType>
+     <types>ValueList</types>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+    <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
    </columns>
   </additionalColumns>
  </attributes>

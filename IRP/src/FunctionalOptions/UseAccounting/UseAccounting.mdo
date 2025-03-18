@@ -41,4 +41,5 @@
  <content>Report.A0013_AccountAnalysis</content>
  <content>Subsystem.Reports.Subsystem.Accounting</content>
  <content>Catalog.ExtDimensions</content>
+ <content>DataProcessor.AccountantAutomatedWorkplace</content>
 </mdclass:FunctionalOption>

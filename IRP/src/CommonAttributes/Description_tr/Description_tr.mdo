@@ -49,6 +49,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.PrintFormTemplates</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.Units</metadata>
   <use>Use</use>
  </content>

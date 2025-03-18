@@ -19,6 +19,10 @@ Function GetAllCommandDescriptions() Export
 	Result.Add(GetCommandDescription("AuditLock"));
 	Result.Add(GetCommandDescription("OpenVendorPrices"));
 	
+	For Each PrintTemplate_Name In PrintTemplates_GetCommandNames() Do
+		Result.Add(GetCommandDescription(PrintTemplate_Name));
+	EndDo;
+	
 	Return Result;
 	
 EndFunction
@@ -52,8 +56,13 @@ Function GetCommandDescription(CommandName) Export
 	
 	ElsIf CommandName = "AuditLock" Then
 		Return AuditLock_GetCommandDescription();
+	
 	ElsIf CommandName = "OpenVendorPrices" Then	
 		Return OpenVendorPrices_GetCommandDescription();
+	
+	ElsIf Right(CommandName, 14) = "_PrintTemplate" Then
+		Return PrintTemplates_GetCommandDescription(CommandName);
+	
 	EndIf;
 	
 	Raise StrTemplate(R().Exc_011, CommandName);
@@ -340,11 +349,29 @@ EndFunction
 // See InternalCommandsServer.OnInitialization
 Procedure ShowNumerator_OnInitialization(CommandName, CommandParameters, Cancel, AddInfo)
 
-	NumeratorItem = CommandParameters.Form.Items.Find("NumeratorRules");
-	If NumeratorItem = Undefined Then
-		Cancel = True;
-	Else
-		NumeratorItem.Visible = False;
+	If CommandParameters.FormType = Enums.FormTypes.ObjectForm Then
+		NumeratorItem = CommandParameters.Form.Items.Find("NumeratorRules");
+		If NumeratorItem = Undefined Then
+			Cancel = True;
+		Else
+			NumeratorItem.Visible = False;
+		EndIf;
+		
+		//@skip-check property-return-type
+		RuleRef = CommandParameters.MainAttribute.NumeratorRules; // CatalogRef.NumeratorGroups
+		If Not ValueIsFilled(RuleRef) Then
+			RuleRef = NumberingRulesServer.GetNumeratorGroupForDocument(
+				CommandParameters.ObjectFullName, CommonFunctionsServer.GetCurrentSessionDate());
+		EndIf;
+		
+		NumeratorDescription = NumberingRulesServer.FillNumeratorDescription(RuleRef);
+		If Not RuleRef.IsEmpty() And Not NumeratorDescription.AllowedManualEditing Then
+			NumberName = NumberingRulesServer.GetNumberNameByMetadata(CommandParameters.ObjectFullName, RuleRef);
+			DocumentNumberItem = CommandParameters.Form.Items.Find(NumberName);
+			If DocumentNumberItem <> Undefined Then
+				DocumentNumberItem.ReadOnly = True;
+			EndIf;
+		EndIf;
 	EndIf;
 		 
 EndProcedure
@@ -775,6 +802,7 @@ EndProcedure
 #EndRegion
 
 #Region OpenVendorPrices
+
 Function OpenVendorPrices_GetCommandDescription()
 	
 	CommandDescription = InternalCommandsServer.GetCommandDescription();
@@ -803,6 +831,82 @@ Function OpenVendorPrices_GetCommandDescription()
 	Targets.Add(Metadata.Documents.PurchaseInvoice.FullName());
 	Targets.Add(Metadata.Documents.PurchaseOrder.FullName());
 	
+	CommandDescription.Targets = New FixedArray(Targets);
+	
+	Return CommandDescription;
+	
+EndFunction
+
+#EndRegion
+
+#Region PrintTemplates
+
+// Print templates get command names.
+// 
+// Returns:
+//  Array - Print templates get command names
+Function PrintTemplates_GetCommandNames()
+	
+	Results = New Array; // Array of String
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT DISTINCT
+	|	PrintFormTemplates.Code AS Code
+	|FROM
+	|	Catalog.PrintFormTemplates AS PrintFormTemplates
+	|		INNER JOIN InformationRegister.ObjectsPrintTemplates AS ObjectsPrintTemplates
+	|		ON PrintFormTemplates.Ref = ObjectsPrintTemplates.PrintTemplate
+	|WHERE
+	|	NOT PrintFormTemplates.DeletionMark
+	|	AND NOT PrintFormTemplates.NotActive
+	|
+	|ORDER BY
+	|	Code";
+	
+	QuerySelection = Query.Execute().Select();
+	
+	While QuerySelection.Next() Do
+		//@skip-check invocation-parameter-type-intersect, property-return-type
+		Results.Add("ID_" + Format(QuerySelection.Code, "NG=;") + "_PrintTemplate");
+	EndDo;
+	
+	Return Results;
+	
+EndFunction
+
+// Show not active get command description.
+// 
+// Parameters:
+//  CommandName - String - Command name
+// 
+// Returns:
+//  See InternalCommandsServer.GetCommandDescription
+Function PrintTemplates_GetCommandDescription(CommandName)
+	
+	NameParts = StrSplit(CommandName, "_");
+	TemplateCode = Number(NameParts[1]);
+	TemplateRef = Catalogs.PrintFormTemplates.FindByCode(TemplateCode);
+	
+	CommandDescription = InternalCommandsServer.GetCommandDescription();
+	
+	CommandDescription.Name = CommandName;
+	CommandDescription.Title = String(TemplateRef);
+	CommandDescription.ToolTip = String(TemplateRef);
+	CommandDescription.Picture = "Print";
+	CommandDescription.EnableChecking = False;
+	
+	CommandDescription.Representation = "PictureAndText";
+	CommandDescription.LocationGroup = "CommandBar.FormPrint";
+	CommandDescription.LocationInCommandBar = "InCommandBarAndInAdditionalSubmenu"; // ButtonLocationInCommandBar.InCommandBarAndInAdditionalSubmenu
+	
+	CommandDescription.UsingListForm = True;
+	CommandDescription.UsingChoiceForm = True;
+	
+	Targets = CommandDescription.Targets;
+	For Each ObjectRef In InformationRegisters.ObjectsPrintTemplates.GetObjectsForPrintTemplate(TemplateRef) Do
+		Targets.Add(ObjectRef.ObjectFullName);
+	EndDo;
 	CommandDescription.Targets = New FixedArray(Targets);
 	
 	Return CommandDescription;

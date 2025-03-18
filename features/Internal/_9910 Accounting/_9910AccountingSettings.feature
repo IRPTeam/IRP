@@ -155,6 +155,8 @@ Scenario: _099100 preparation
 		When Create catalog FixedAssets objects (test data base)
 		When Create document ForeignCurrencyRevaluation objects (test data base)
 		When import data for debit credit note (accounting)
+		When Create catalog IntegrationSettings objects (Attach File Control)
+		When Create catalog FileStorageVolumes objects (Attach File Control)
 	* Load data for Salary system
 		When Create document EmployeeHiring objects (test data base)
 		When Create document EmployeeVacation objects (test data base)
@@ -174,7 +176,21 @@ Scenario: _099100 preparation
 		When Create information register T9012S_AccountsPartner records (Basic LTV) (test data base)
 		When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 		When Create information register T9016S_AccountsEmployee records (test data base)
-		When Create information register T9015S_AccountsFixedAsset records (test data base)
+		When Create information register T9015S_AccountsFixedAsset records (test data base)		
+	* Default files storage
+		And In the command interface I select "Settings" "Edit constants"
+		And I click Select button of "Default files storage volume" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'DEFAULT DOCUMENT STORAGE' |
+		And I select current line in "List" table
+		And I click Select button of "Default picture storage volume" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'DEFAULT DOCUMENT STORAGE' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And Delay 3
 	* Posting first documents
 		And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -3968,5 +3984,247 @@ Scenario: _0991211 edit accounting manualy (document without tabular part)
 				| "11.03.2023 14:34:06" | "420.5"      | "82,49"    | ""              | "Yes"      | "TRY"             | ""                  | "82,49"        | "Business unit 3"     | ""                | "Foreign exchange losses" | "TRY"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)"   | "Own company 2"       | "82,49"         | ""                    |
 		And I close all client application windows
 					
+
+Scenario: _0991212 check accountant automated workplace
+	And I close all client application windows
+	* Preparation (add files for SI)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3'      |
+		And I click "Attached files" button
+		Then "Attach file" window is opened
+		And I click Choice button of the field named "DefaultFilesStorageVolume"
+		And I go to line in "List" table
+			| "Description"              | "Files type" |
+			| "DEFAULT DOCUMENT STORAGE" | "Other"      |
+		And I select current line in "List" table
+		And I input "$Path$/features/Internal/_4000 TestWithExtension/16466.png" text in the field named "dragFile"
+		And I click the button named "dragFileBtn"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I input "$Path$/features/Internal/_4000 TestWithExtension/Test pdf 1 page.pdf" text in the field named "dragFile"
+		And I click the button named "dragFileBtn"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I input "$Path$/features/Internal/_4000 TestWithExtension/Test pdf 1 page.pdf" text in the field named "dragFile"
+		And I click the button named "dragFileBtn"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I input "$Path$/features/Internal/_4000 TestWithExtension/test.docx" text in the field named "dragFile"
+		And I click the button named "dragFileBtn"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "FileList" table became equal
+			| 'File'                | 'Volume'                   |
+			| '16466.png'           | 'DEFAULT DOCUMENT STORAGE' |
+			| 'Test pdf 1 page.pdf' | 'DEFAULT DOCUMENT STORAGE' |
+			| 'test.docx'           | 'DEFAULT DOCUMENT STORAGE' |
+		And I close current window
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I click "Attached files" button
+		And I click Choice button of the field named "DefaultFilesStorageVolume"
+		And I go to line in "List" table
+			| "Description"              | "Files type" |
+			| "DEFAULT DOCUMENT STORAGE" | "Other"      |
+		And I select current line in "List" table
+		And I input "$Path$/features/Internal/_4000 TestWithExtension/testjpg1.jpg" text in the field named "dragFile"
+		And I click the button named "dragFileBtn"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I close all client application windows
+	* Open accountant automated workplace and fill filters
+		Given I open hyperlink "e1cib/app/DataProcessor.AccountantAutomatedWorkplace"
+		And I click Choice button of the field named "Period"
+		Then "Select period" window is opened
+		And I input "24.02.2023" text in the field named "DateBegin"
+		And I input "30.03.2024" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I select "All documents" exact value from "Document type" drop-down list
+		And I select "All" exact value from "Lock" drop-down list
+		And I select "All" exact value from the drop-down list named "FilesType"	
+		And I click "Find" button
+		And "DocumentList" table contains lines
+			| 'Document'                                                  | 'Files' |
+			| 'Bank payment 5 dated 01.04.2023 12:00:01'                  | ''      |
+			| 'Bank payment 6 dated 02.04.2023 10:06:39'                  | ''      |
+			| 'Bank receipt 11 dated 02.12.2023 14:00:00'                 | ''      |
+			| 'Bank receipt 12 dated 02.12.2023 15:00:00'                 | ''      |
+			| 'Calculation movement costs 7 dated 31.07.2023 12:00:00'    | ''      |
+			| 'Calculation movement costs 8 dated 31.08.2023 12:00:00'    | ''      |
+			| 'Cash expense 1 dated 24.02.2023 10:52:43'                  | ''      |
+			| 'Cash payment 1 dated 24.02.2023 10:50:30'                  | ''      |
+			| 'Cash payment 2 dated 24.02.2023 11:01:03'                  | ''      |
+			| 'Cash receipt 1 dated 10.03.2023 00:00:00'                  | ''      |
+			| 'Cash receipt 2 dated 04.04.2023 12:00:00'                  | ''      |
+			| 'Cash revenue 1 dated 24.02.2023 10:53:15'                  | ''      |
+			| 'Cash statement 1 dated 25.02.2023 22:01:16'                | ''      |
+			| 'Cash transfer order 2 dated 24.02.2023 11:00:53'           | ''      |
+			| 'Cash transfer order 3 dated 31.03.2023 09:38:37'           | ''      |
+			| 'Commissioning of fixed asset 1 dated 02.02.2024 00:00:00'  | ''      |
+			| 'Credit note 1 dated 24.02.2023 11:02:48'                   | ''      |
+			| 'Credit note 2 dated 07.05.2023 12:00:01'                   | ''      |
+			| 'Debit/Credit note 1 dated 23.02.2024 12:00:00'             | ''      |
+			| 'Debit/Credit note 2 dated 20.02.2024 13:27:56'             | ''      |
+			| 'Debit/Credit note 3 dated 30.03.2024 11:34:17'             | ''      |
+			| 'Debit note 1 dated 24.02.2023 11:03:25'                    | ''      |
+			| 'Employee cash advance 1 dated 01.07.2023 00:00:00'         | ''      |
+			| 'Expense accrual 1 dated 30.01.2024 00:00:00'               | ''      |
+			| 'Expense accrual 5 dated 28.02.2024 12:00:00'               | ''      |
+			| 'Goods receipt 1 dated 24.02.2023 10:05:00'                 | ''      |
+			| 'Goods receipt 4 dated 27.02.2023 10:17:04'                 | ''      |
+			| 'Incoming payment order 1 dated 24.02.2023 11:04:45'        | ''      |
+			| 'Internal supply request 1 dated 24.02.2023 10:26:21'       | ''      |
+			| 'Inventory transfer 1 dated 27.02.2023 12:00:00'            | ''      |
+			| 'Inventory transfer order 1 dated 24.02.2023 10:26:34'      | ''      |
+			| 'Item stock adjustment 1 dated 24.02.2023 17:02:02'         | ''      |
+			| 'Money transfer 2 dated 11.03.2023 14:34:06'                | ''      |
+			| 'Money transfer 3 dated 10.07.2023 14:38:53'                | ''      |
+			| 'Outgoing payment order 1 dated 24.02.2023 11:05:26'        | ''      |
+			| 'Payroll 2 dated 28.02.2023 12:00:00'                       | ''      |
+			| 'Physical inventory 1 dated 24.02.2023 10:33:41'            | ''      |
+			| 'Planned receipt reservation 1 dated 24.02.2023 10:22:37'   | ''      |
+			| 'Price list 1 dated 24.02.2023 09:48:53'                    | ''      |
+			| 'Price list 3 dated 24.02.2023 12:50:42'                    | ''      |
+			| 'Purchase invoice 1 dated 24.02.2023 10:04:33'              | ''      |
+			| 'Purchase invoice 2 dated 22.07.2023 09:38:02'              | ''      |
+			| 'Purchase invoice 3 dated 30.11.2023 16:01:04'              | ''      |
+			| 'Purchase order 2 dated 24.02.2023 10:21:35'                | ''      |
+			| 'Purchase order 3 dated 27.02.2023 12:00:02'                | ''      |
+			| 'Purchase return 3 dated 10.12.2023 12:00:00'               | ''      |
+			| 'Purchase return 112 dated 20.03.2024 11:28:01'             | ''      |
+			| 'Purchase return order 1 dated 07.03.2023 12:52:21'         | ''      |
+			| 'Reconciliation statement 1 dated 02.04.2023 12:00:00'      | ''      |
+			| 'Retail return receipt 1 dated 10.03.2023 14:00:00'         | ''      |
+			| 'Retail sales receipt 4 dated 02.02.2024 00:00:05'          | ''      |
+			| 'Retail sales receipt 5 dated 02.03.2023 12:00:00'          | ''      |
+			| 'Revenue accrual 1 dated 30.01.2024 12:00:00'               | ''      |
+			| 'Revenue accrual 2 dated 01.02.2024 12:00:00'               | ''      |
+			| 'Sales invoice 1 dated 24.02.2023 10:14:47'                 | '1'     |
+			| 'Sales invoice 2 dated 24.02.2023 10:18:20'                 | ''      |
+			| 'Sales invoice 3 dated 30.03.2023 12:23:56'                 | '3'     |
+			| 'Sales order 1 dated 24.02.2023 10:13:53'                   | ''      |
+			| 'Sales order 2 dated 24.02.2023 11:13:25'                   | ''      |
+			| 'Sales order closing 1 dated 22.07.2023 09:15:12'           | ''      |
+			| 'Sales return 1 dated 02.03.2023 15:00:00'                  | ''      |
+			| 'Sales return 2 dated 07.05.2023 12:00:00'                  | ''      |
+			| 'Sales return order 1 dated 01.03.2023 00:00:00'            | ''      |
+			| 'Shipment confirmation 1 dated 24.02.2023 10:14:17'         | ''      |
+			| 'Shipment confirmation 5 dated 27.02.2023 10:32:04'         | ''      |
+			| 'Stock adjustment as surplus 1 dated 24.02.2023 10:37:36'   | ''      |
+			| 'Stock adjustment as write-off 1 dated 24.02.2023 10:38:09' | ''      |
+			| 'Time sheet 2 dated 28.02.2023 12:00:00'                    | ''      |
+			| 'Time sheet 3 dated 31.03.2023 12:00:00'                    | ''      |
+			| 'Unbundling 1 dated 27.02.2023 12:00:01'                    | ''      |
+			| 'Vendors advances closing 2 dated 28.02.2023 12:00:00'      | ''      |
+			| 'Vendors advances closing 3 dated 31.03.2023 12:00:00'      | ''      |
+			| 'Work order 1 dated 27.03.2023 11:01:50'                    | ''      |
+			| 'Work sheet 1 dated 28.03.2023 12:00:00'                    | ''      |
+	* Check filter by document type
+		And I select from "Document type" drop-down list by "Sales invoice" string
+		And I click "Find" button
+		And "DocumentList" table contains lines
+			| 'Document'                                                  | 'Files' |
+			| 'Sales invoice 1 dated 24.02.2023 10:14:47'                 | '1'     |
+			| 'Sales invoice 2 dated 24.02.2023 10:18:20'                 | ''      |
+			| 'Sales invoice 3 dated 30.03.2023 12:23:56'                 | '3'     |
+		And "DocumentList" table does not contain lines
+			| 'Document'                                                  | 'Files' |	
+			| 'Purchase invoice 3 dated 30.11.2023 16:01:04'              | ''      |
+			| 'Purchase order 2 dated 24.02.2023 10:21:35'                | ''      |
+	* Check audit lock
+		And I go to line in "DocumentList" table
+			| "Document"                                  | "Files" |
+			| "Sales invoice 3 dated 30.03.2023 12:23:56" | "3"     |
+		And I activate "Locked" field in "DocumentList" table
+		And in the table "DocumentList" I click "Lock" button
+		And I go to line in "DocumentList" table
+			| "Document"                                  | "Files" |
+			| "Sales invoice 1 dated 24.02.2023 10:14:47" | "1"     |
+		And I activate "Locked" field in "DocumentList" table
+		And in the table "DocumentList" I click "Lock" button
+	* Check filter by audit locked
+		And I select "Locked" exact value from "Lock" drop-down list
+		And I click "Find" button
+		And "DocumentList" table became equal
+			| 'Document'                                  | 'Files' |
+			| 'Sales invoice 1 dated 24.02.2023 10:14:47' | '1'     |
+			| 'Sales invoice 3 dated 30.03.2023 12:23:56' | '3'     |
+	* Check filter by audit unlocked
+		And I select "Unlocked" exact value from "Lock" drop-down list
+		And I click "Find" button
+		And "DocumentList"  table does not contain lines
+			| 'Document'                                  | 'Files' |
+			| 'Sales invoice 1 dated 24.02.2023 10:14:47' | '1'     |
+			| 'Sales invoice 3 dated 30.03.2023 12:23:56' | '3'     |
+	* Check filter by files
+		And I select "All" exact value from "Lock" drop-down list
+		And I select "With files" exact value from the drop-down list named "FilesType"	
+		And I click "Find" button
+		And I go to line in "DocumentList" table
+			| "Document"                                  | "Files" |
+			| "Sales invoice 1 dated 24.02.2023 10:14:47" | "1"     |
+		And in the table "DocumentList" I click "Unlock" button
+		And "DocumentList" table became equal
+			| 'Document'                                  | 'Files' |
+			| 'Sales invoice 1 dated 24.02.2023 10:14:47' | '1'     |
+			| 'Sales invoice 3 dated 30.03.2023 12:23:56' | '3'     |
+	* Check JE
+		And I go to line in "DocumentList" table
+			| "Document"                                  | "Files" |
+			| "Sales invoice 3 dated 30.03.2023 12:23:56" | "3"     |
+		Then "AccountingReport" spreadsheet document is equal
+			| 'Account Dr' | 'Ext. Dim. Debit'                                         | 'Dr amount'   | 'Account Cr' | 'Ext. Dim. Credit'   | 'Cr amount'   | 'Amount' |
+			| '4010'       | 'Customer 1 (3 partner terms)'                            | '316,67\nTRY' | '9100'       | 'Business unit 1'    | '316,67\nTRY' | '316,67' |
+			| ''           | 'Partner term with customer (by document + credit limit)' | '316,67\nTRY' | ''           | ''                   | '316,67\nTRY' | ''       |
+			| ''           | 'Business unit 1'                                         | ''            | ''           | ''                   | ''            | ''       |
+			| '4010'       | 'Customer 1 (3 partner terms)'                            | '63,33\nTRY'  | '5302'       | 'VAT'                | '63,33\nTRY'  | '63,33'  |
+			| ''           | 'Partner term with customer (by document + credit limit)' | '63,33\nTRY'  | ''           | 'Business unit 1'    | '63,33\nTRY'  | ''       |
+			| ''           | 'Business unit 1'                                         | ''            | ''           | ''                   | ''            | ''       |
+			| '420.1'      | 'Item with item key'                                      | '100\nTRY'    | '3540'       | 'Item with item key' | '100\nTRY'    | '100'    |
+			| ''           | 'Business unit 1'                                         | '100\nTRY'    | ''           | 'S/Color 1'          | '100\nTRY'    | ''       |
+			| ''           | 'Purchase of goods for sale'                              | ''            | ''           | 'Business unit 1'    | '2'           | ''       |
+			| '4010'       | 'Customer 1 (3 partner terms)'                            | '83,33\nTRY'  | '9100'       | 'Business unit 1'    | '83,33\nTRY'  | '83,33'  |
+			| ''           | 'Partner term with customer (by document + credit limit)' | '83,33\nTRY'  | ''           | ''                   | '83,33\nTRY'  | ''       |
+			| ''           | 'Business unit 1'                                         | ''            | ''           | ''                   | ''            | ''       |
+			| '4010'       | 'Customer 1 (3 partner terms)'                            | '16,67\nTRY'  | '5302'       | 'VAT'                | '16,67\nTRY'  | '16,67'  |
+			| ''           | 'Partner term with customer (by document + credit limit)' | '16,67\nTRY'  | ''           | 'Business unit 1'    | '16,67\nTRY'  | ''       |
+			| ''           | 'Business unit 1'                                         | ''            | ''           | ''                   | ''            | ''       |
+	* Check Open JE
+		And I click "Open JE" button
+		Then "JE Sales invoice * dated *" window is opened
+		And I close current window
+	* Check files
+		And I move to "Test pdf 1 page.pdf" tab
+		And I move to "16466.png" tab
+	And I close all client application windows
+	
 				
+				
+				
+		
+				
+				
+
+				
+		
+				
+		
+				
+				
+				
+				
+
+
+				
+		
+						
+
+				
+		
+
+					
 				

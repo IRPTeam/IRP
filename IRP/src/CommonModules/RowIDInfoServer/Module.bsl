@@ -2168,15 +2168,49 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		
 		EndIf;	
 		
-	Else                        
-		If RowRefObject.IsVariableItemKey And Not RowRefObject.IsFixedItemKey Then
-			RowRefObject.ItemKey = RowItemList.ItemKey;
-			Rows = FieldsForCheckRowRef.FindRows(New Structure("FieldName", "ItemKey"));
+		If RowRefObject.IsVariableStore Then
+			Rows = FieldsForCheckRowRef.FindRows(New Structure("FieldName", "Store"));
 			For Each Row In Rows Do
 				FieldsForCheckRowRef.Delete(Row);
-			EndDo; 
-			RowRefObject.IsFixedItemKey = True;
+			EndDo;
+		EndIf;
+		
+		If Not RowRefObject.IsFixedStore Then 
+			
+			RowRefObject.Store = Catalogs.Stores.EmptyRef();
+			
+			If Not RowRefObject.IsVariableStore Then
+				RowRefObject.Store = RowItemList.Store;
+			EndIf;
+		
+		EndIf;
+	
+	Else                        
+		If RowRefObject.IsVariableItemKey Then
+			If Not RowRefObject.IsFixedItemKey Then
+				RowRefObject.ItemKey = RowItemList.ItemKey;
+				Rows = FieldsForCheckRowRef.FindRows(New Structure("FieldName", "ItemKey"));
+				For Each Row In Rows Do
+					FieldsForCheckRowRef.Delete(Row);
+				EndDo;  
+				RowRefObject.IsFixedItemKey = True;
+			Else
+			    RowRefObject.ItemKey = RowItemList.ItemKey;
+			EndIf;
 		EndIf;		
+		
+		If RowRefObject.IsVariableStore Then
+			If Not RowRefObject.IsFixedStore Then
+				RowRefObject.Store = RowItemList.Store;
+				Rows = FieldsForCheckRowRef.FindRows(New Structure("FieldName", "Store"));
+				For Each Row In Rows Do
+					FieldsForCheckRowRef.Delete(Row);
+				EndDo; 
+				RowRefObject.IsFixedStore = True; 
+			Else
+				RowRefObject.Store = RowItemList.Store;
+			EndIf;
+		EndIf;
 	EndIf;
 	
 	ArrayOfDifferenceFields = New Array();
@@ -2799,9 +2833,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.ManagerSegment AS ManagerSegment,
 	|	ItemList.Ref.Currency AS Currency,
 	|	ItemList.Ref.Company AS Company,
-	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.ItemKey.Item AS Item,
-	|	ItemList.Store AS Store,
 	|	case when &IsPurchase then Undefined else ItemList.PriceType end AS PriceType,
 	|	case when &IsPurchase	then 0 else ISNULL(ItemList.Price, 0) end AS Price,
 	|	ItemList.DeliveryDate AS DeliveryDate,
@@ -2854,6 +2886,10 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ELSE 
 	|		ItemList.Item.ControlCodeString 
 	|	END AS isControlCodeString,
+	|
+	| 	case when BasisesTable.RowRef.IsFixedStore then BasisesTable.RowRef.Store else ItemList.Store end as Store,
+	| 	case when BasisesTable.RowRef.IsFixedItemKey then BasisesTable.RowRef.ItemKey else ItemList.ItemKey end as ItemKey,
+	|
 	|	BasisesTable.*
 	|FROM
 	|	BasisesTable AS BasisesTable
@@ -3200,7 +3236,52 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
 	|GROUP BY
 	|	BasisesTable.Key,
-	|	SerialLotNumbers.SerialLotNumber";
+	|	SerialLotNumbers.SerialLotNumber
+	|;
+	|////////////////////////////////////////////////////////////////////////////////////////////
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.ShipmentConfirmation.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|		AND SourceOfOrigins.SerialLotNumber.Ref IS NULL
+	|
+	|UNION ALL
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.ShipmentConfirmation.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|	
+	|	INNER JOIN
+	|	
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS Reg
+	|	
+	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
+	|	AND SourceOfOrigins.Key = Reg.BasisKey
+	|	AND NOT SourceOfOrigins.SerialLotNumber.Ref IS NULL";
+	
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3209,6 +3290,7 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TableItemList              = QueryResults[2].Unload();
 	TableShipmentConfirmations = QueryResults[3].Unload();
 	TableSerialLotNumbers      = QueryResults[4].Unload();
+	TableSourceOfOrigins       = QueryResults[5].Unload();
 	
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
@@ -3219,6 +3301,7 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
+	Tables.Insert("SourceOfOrigins"       , TableSourceOfOrigins);
 	
 	AddTables(Tables);
 
@@ -4286,9 +4369,7 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.Agreement AS Agreement,
 	|	ItemList.Ref.Currency AS Currency,
 	|	ItemList.Ref.Company AS Company,
-	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.ItemKey.Item AS Item,
-	|	ItemList.Store AS Store,
 	|	ItemList.PriceType AS PriceType,
 	|	ItemList.DeliveryDate AS DeliveryDate,
 	|	ItemList.DontCalculateRow AS DontCalculateRow,
@@ -4321,6 +4402,8 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
+	| 	case when BasisesTable.RowRef.IsFixedStore then BasisesTable.RowRef.Store else ItemList.Store end as Store,
+	| 	case when BasisesTable.RowRef.IsFixedItemKey then BasisesTable.RowRef.ItemKey else ItemList.ItemKey end as ItemKey,
 	|	ItemList.VatRate
 	|FROM
 	|	BasisesTable AS BasisesTable
@@ -4628,15 +4711,59 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
 	|GROUP BY
 	|	BasisesTable.Key,
-	|	SerialLotNumbers.SerialLotNumber";
+	|	SerialLotNumbers.SerialLotNumber
+	|;
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.GoodsReceipt.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|		AND SourceOfOrigins.SerialLotNumber.Ref IS NULL
+	|
+	|UNION ALL
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.GoodsReceipt.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|	
+	|	INNER JOIN
+	|	
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS Reg
+	|	
+	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
+	|	AND SourceOfOrigins.Key = Reg.BasisKey
+	|	AND NOT SourceOfOrigins.SerialLotNumber.Ref IS NULL";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
-	TableRowIDInfo     = QueryResults[1].Unload();
-	TableItemList      = QueryResults[2].Unload();
-	TableGoodsReceipts = QueryResults[3].Unload();
+	TableRowIDInfo        = QueryResults[1].Unload();
+	TableItemList         = QueryResults[2].Unload();
+	TableGoodsReceipts    = QueryResults[3].Unload();
 	TableSerialLotNumbers = QueryResults[4].Unload();
+	TableSourceOfOrigins  = QueryResults[5].Unload();
 	
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit,
@@ -4644,10 +4771,11 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	EndDo;
 
 	Tables = New Structure();
-	Tables.Insert("ItemList", TableItemList);
-	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("GoodsReceipts", TableGoodsReceipts);
-	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+	Tables.Insert("ItemList"         , TableItemList);
+	Tables.Insert("RowIDInfo"        , TableRowIDInfo);
+	Tables.Insert("GoodsReceipts"    , TableGoodsReceipts);
+	Tables.Insert("SerialLotNumbers" , TableSerialLotNumbers);
+	Tables.Insert("SourceOfOrigins"  , TableSourceOfOrigins);
 	
 	AddTables(Tables);
 
@@ -7543,12 +7671,20 @@ Procedure ApplyFilterSet_SO_ForSI(Query)
 	|					end
 	|				else true
 	|			end
-	|			AND CASE
-	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|			AND 
+	|			
+	|			CASE
+	|				WHEN &Filter_Store 
+	|                   then case
+	|					when RowRef.IsVariableStore then true					
+	|
+	|					else RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
+	|
 	|				ELSE TRUE
-	|			END))) AS RowIDMovements";
+	|			END
+	|
+	|))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
 
@@ -7602,8 +7738,9 @@ Procedure ApplyFilterSet_SO_ForPRR(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7664,8 +7801,9 @@ Procedure ApplyFilterSet_SO_ForSC(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7721,8 +7859,9 @@ Procedure ApplyFilterSet_SO_ForSPO(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7773,8 +7912,9 @@ Procedure ApplyFilterSet_SO_ForRSC(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7896,8 +8036,9 @@ Procedure ApplyFilterSet_SO_ForWO(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -8014,8 +8155,9 @@ Procedure ApplyFilterSet_SO_ForRSR(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StoreSales = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -9511,8 +9653,9 @@ Procedure ApplyFilterSet_PO_ForPI(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StorePurchases = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StorePurchases = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -9573,8 +9716,9 @@ Procedure ApplyFilterSet_PO_ForGR(Query)
 	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|					OR RowRef.StorePurchases = &Store
+	|					then case when RowRef.IsVariableStore then true else
+	|					RowRef.Store = &Store
+	|					OR RowRef.StorePurchases = &Store end
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -13708,20 +13852,22 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|		AND RowIDInfoFull.Basis = BasisesTable.Basis
 	|		AND RowIDInfoFull.BasisKey = BasisesTable.BasisKey
 	|		AND RowIDInfoFull.CurrentStep = BasisesTable.CurrentStep
-	|
-//	|		AND RowIDInfoFull.ItemKey = BasisesTable.ItemKey
-	|
-	|		and case when RowIDInfoFull.RowRef.IsVariableItemKey 
-	|		then RowIDInfoFull.Item = BasisesTable.Item
-	|		else RowIDInfoFull.ItemKey = BasisesTable.ItemKey end
-	|
 	|		AND CASE
-	|			WHEN &Filter_Store then
-	|				case 
-	|					when RowIDInfoFull.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Product) then 
-	|						RowIDInfoFull.Store = BasisesTable.Store
-	|					else True 
-	|				end
+	|			WHEN RowIDInfoFull.RowRef.IsVariableItemKey
+	|				THEN RowIDInfoFull.Item = BasisesTable.Item
+	|			ELSE RowIDInfoFull.ItemKey = BasisesTable.ItemKey
+	|		END
+	|		AND CASE
+	|			WHEN &Filter_Store
+	|				THEN CASE
+	|					WHEN RowIDInfoFull.RowRef.IsVariableStore
+	|						THEN TRUE
+	|					ELSE CASE
+	|						WHEN RowIDInfoFull.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+	|							THEN RowIDInfoFull.Store = BasisesTable.Store
+	|						ELSE TRUE
+	|					END
+	|				END
 	|			ELSE TRUE
 	|		END
 	|WHERE
@@ -13811,6 +13957,13 @@ Procedure LockInternalLinkedRows(Object, Form)
 		Else
 			Row.IsUnlockItemKey = False;
 		EndIf;
+		
+		DataVariableStore = InternalLinkedData.KeysVariableStore.FindRows(New Structure("Key", Row.Key));
+		If DataVariableStore.Count() > 0 Then
+			Row.IsUnlockStore = True;
+		Else
+			Row.IsUnlockStore = False;
+		EndIf;		
 	EndDo;
 EndProcedure
 
@@ -13887,6 +14040,9 @@ Function GetInternalLinkedKeys(RowIDInfoTable, Ref)
 	
 	KeysVariableItemKeyTable = New ValueTable();
 	KeysVariableItemKeyTable.Columns.Add("Key");
+
+	KeysVariableStoreTable = New ValueTable();
+	KeysVariableStoreTable.Columns.Add("Key");
 	
 	If InternalLinkedDocsTable.Count() = 1 Then
 		If TrimAll(Upper(InternalLinkedDocsTable[0].Doc)) = Upper("SalesOrder")
@@ -13896,13 +14052,17 @@ Function GetInternalLinkedKeys(RowIDInfoTable, Ref)
 				If Row.RowRef.IsVariableItemKey Then
 					KeysVariableItemKeyTable.Add().Key = Row.Key;
 				EndIf;
+				
+				If Row.RowRef.IsVariableStore Then
+					KeysVariableStoreTable.Add().Key = Row.Key;
+				EndIf;				
 			EndDo;
 			
 		EndIf;
 	EndIf;
-	
-	Return New Structure("Keys, InternalLinkedDocs, KeysVariableItemKey", 
-		KeysTable, InternalLinkedDocsTable.UnloadColumn("Doc"), KeysVariableItemKeyTable);
+		
+	Return New Structure("Keys, InternalLinkedDocs, KeysVariableItemKey, KeysVariableStore", 
+		KeysTable, InternalLinkedDocsTable.UnloadColumn("Doc"), KeysVariableItemKeyTable, KeysVariableStoreTable);
 EndFunction
 
 Procedure GetBasisInfoRecursive(Basis, BasisKey, RowID, ResultTable, Key)
@@ -14012,8 +14172,21 @@ Procedure AddAppearance_Header(Object, Form, FieldsToLock)
 	Element = Form.ConditionalAppearance.Items.Add();
 	Element.Presentation = "FieldsToLock";
 	
+	AllStoresInUnlock = True;
+	For Each Row In Object.ItemList Do
+		If Not Row.IsUnlockStore Or ValueIsFilled(Row.ExternalLinks) Then
+			AllStoresInUnlock = False;
+			Break;
+		EndIf;
+	EndDo;
+	
 	// Set ReadOnly
 	For Each FieldName In FieldsToLock.Header Do
+		
+		If Upper(FieldName) = Upper("Store") And AllStoresInUnlock Then
+			Continue;
+		EndIf;
+				
 		Element.Fields.Items.Add().Field = New DataCompositionField(FieldName);
 		FormElement = Form.Items.Find(FieldName);
 		If FormElement <> Undefined Then
@@ -14062,7 +14235,21 @@ Procedure AddAppearance_ItemList(Object, Form, FieldsToLock, Condition)
 			Filter.LeftValue = New DataCompositionField("Object.ItemList.IsUnlockItemKey");
 			Filter.ComparisonType = DataCompositionComparisonType.Equal;
 			Filter.RightValue = False;
+		
+		ElsIf TrimAll(Upper(Row.FieldName)) = Upper("Store") And Condition = "InternalLinks" Then
+			FilterGroup = Element.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
+			FilterGroup.GroupType = DataCompositionFilterItemsGroupType.AndGroup;
 			
+			Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
+			Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);
+			Filter.ComparisonType = DataCompositionComparisonType.Contains;
+			Filter.RightValue = Row.LinkedDoc;
+			
+			Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
+			Filter.LeftValue = New DataCompositionField("Object.ItemList.IsUnlockStore");
+			Filter.ComparisonType = DataCompositionComparisonType.Equal;
+			Filter.RightValue = False;
+					
 		Else
 			Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
 			Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);

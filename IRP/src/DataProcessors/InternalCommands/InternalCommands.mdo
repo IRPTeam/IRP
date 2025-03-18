@@ -172,6 +172,23 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <forms uuid="f7488c15-ff05-4fa7-b83a-90c9f0f159c6">
+  <name>PrintTemplate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon yazdır</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон печати</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Print template</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
  <forms uuid="96ba903f-48e1-416e-b190-e10e2e09f416">
   <name>ShowNumerator</name>
   <synonym>

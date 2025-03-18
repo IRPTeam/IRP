@@ -982,28 +982,24 @@
   </items>
   <items id="d3e25e41-f858-41b4-b0d6-667872d57dbf">
    <name>Document_ELedgerRegistry</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>159</value>
    </code>
   </items>
   <items id="03c8d558-442e-41e3-b96b-f38ac9ac6545">
    <name>Document_StockCorrection</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>160</value>
    </code>
   </items>
   <items id="99821afb-0d05-4790-9b9e-3788d18bfcdd">
    <name>Catalog_ObjectLocations</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>161</value>
    </code>
   </items>
   <items id="d7322f5b-a987-43d8-96c5-6d47856dc60a">
    <name>Document_ShipmentPlaningOrder</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>162</value>
    </code>

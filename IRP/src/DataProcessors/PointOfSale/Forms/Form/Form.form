@@ -7599,6 +7599,56 @@ End</presentationExpression>
      <common>true</common>
     </edit>
    </columns>
+   <columns>
+    <name>IsUnlockItemKey</name>
+    <title>
+     <key>tr</key>
+     <value>Varyant kilidi açık</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Фиксация с характеристики снята</value>
+    </title>
+    <title>
+     <key>en</key>
+     <value>Is unlock item key</value>
+    </title>
+    <id>214</id>
+    <valueType>
+     <types>Boolean</types>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+   </columns>
+   <columns>
+    <name>IsUnlockStore</name>
+    <title>
+     <key>tr</key>
+     <value>Depo kilidi açık</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Is unlock store</value>
+    </title>
+    <title>
+     <key>en</key>
+     <value>Is unlock store</value>
+    </title>
+    <id>215</id>
+    <valueType>
+     <types>Boolean</types>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+   </columns>
   </additionalColumns>
  </attributes>
  <attributes>

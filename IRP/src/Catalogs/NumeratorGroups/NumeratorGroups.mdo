@@ -270,6 +270,52 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="bbecdb02-69f5-47f0-b46f-434dabc18d9f">
+  <name>UniquenessControl</name>
+  <synonym>
+   <key>tr</key>
+   <value>Benzersizlik kontrolü</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Uniqueness control</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Uniqueness control</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="6ad3f9b8-ecb0-4cc1-beda-16694fea0808">
+  <name>AllowedManualEditing</name>
+  <synonym>
+   <key>tr</key>
+   <value>Manuel düzenlemeye izin verildi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Allowed manual editing</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Allowed manual editing</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="05e78981-f83e-434f-86bb-bc1810e4054c">
   <producedTypes>
    <objectType typeId="782dbce7-5171-4277-8a4f-93ab0912916a" valueTypeId="92c4b858-d0bf-4efb-ab77-46193c275892"/>

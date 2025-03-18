@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ae4468e9-41f1-4724-9778-18beae96b6fc">
+ <name>UseVariableStore</name>
+ <synonym>
+  <key>tr</key>
+  <value>Değişken depo kullan</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Use variable store</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use variable store</value>
+ </synonym>
+ <location>Constant.UseVariableStore</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.IsVariableStore</content>
+ <content>Catalog.RowIDs.Attribute.IsVariableStore</content>
+ <content>Catalog.Companies.Attribute.UseVariableStoreInOrders</content>
+ <content>Document.SalesOrder.TabularSection.ItemList.Attribute.IsVariableStore</content>
+ <content>Catalog.RowIDs.Attribute.IsFixedStore</content>
+</mdclass:FunctionalOption>

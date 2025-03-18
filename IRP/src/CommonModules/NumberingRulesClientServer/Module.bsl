@@ -91,6 +91,8 @@ Function GetNumeratorDescription() Export
 	Description.Insert("BeginDate", Date(1,1,1));
 	Description.Insert("EndDate", Date(1,1,1));
 	Description.Insert("ByDefault", False);
+	Description.Insert("UniquenessControl", False);
+	Description.Insert("AllowedManualEditing", False);
 	
 	Description.Insert("NumberingPeriod", PredefinedValue("Enum.NumberingPeriods.NoPeriod"));
 	Description.Insert("StartNumber", 0);

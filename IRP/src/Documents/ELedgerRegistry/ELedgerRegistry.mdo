@@ -329,4 +329,24 @@
   </commandParameterType>
   <representation>Auto</representation>
  </commands>
+ <commands uuid="71c33c5f-9f13-4b1e-977e-e11016d0f29b">
+  <name>ExportToCSV_ZIP</name>
+  <synonym>
+   <key>tr</key>
+   <value>CSV.ZIP'e aktar</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Export to CSV.ZIP</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Export to CSV.ZIP</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>DocumentRef.ELedgerRegistry</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

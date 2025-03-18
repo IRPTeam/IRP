@@ -1511,6 +1511,48 @@
      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
     </items>
     <items xsi:type="form:FormField">
+     <name>ItemListIsUnlockStore</name>
+     <id>984</id>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.ItemList.IsUnlockStore</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>ItemListIsUnlockStoreExtendedTooltip</name>
+      <id>986</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ItemListIsUnlockStoreContextMenu</name>
+      <id>985</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>CheckBoxField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormField">
      <name>ItemListPartnerItem</name>
      <id>707</id>
      <visible>true</visible>
@@ -2901,6 +2943,49 @@
      <contextMenu>
       <name>ItemListIsVariableItemKeyContextMenu</name>
       <id>979</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>CheckBoxField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>ItemListIsVariableStore</name>
+     <id>981</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.ItemList.IsVariableStore</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>ItemListIsVariableStoreExtendedTooltip</name>
+      <id>983</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ItemListIsVariableStoreContextMenu</name>
+      <id>982</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -8278,6 +8363,31 @@
      <value>Is unlock item key</value>
     </title>
     <id>192</id>
+    <valueType>
+     <types>Boolean</types>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+   </columns>
+   <columns>
+    <name>IsUnlockStore</name>
+    <title>
+     <key>tr</key>
+     <value>Depo kilidi açık</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Is unlock store</value>
+    </title>
+    <title>
+     <key>en</key>
+     <value>Is unlock store</value>
+    </title>
+    <id>193</id>
     <valueType>
      <types>Boolean</types>
     </valueType>

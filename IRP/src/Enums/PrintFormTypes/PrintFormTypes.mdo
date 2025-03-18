@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="5045558e-d376-4324-ae48-f35cb28a2bb0">
+ <producedTypes>
+  <refType typeId="2d349e53-667e-4468-bc43-7896860b2a0f" valueTypeId="bbb93e14-f82c-48d2-a969-0956c540459e"/>
+  <listType typeId="5fa2313a-124e-4d6d-b78e-161471269079" valueTypeId="973915ca-88f7-4755-ad6b-c4bb86897b52"/>
+  <managerType typeId="48dffcfd-60dd-4ef3-895c-f4a7f1d48e9e" valueTypeId="d12faf9c-9ccd-4fe7-a364-1f43175eaa74"/>
+ </producedTypes>
+ <name>PrintFormTypes</name>
+ <synonym>
+  <key>tr</key>
+  <value>Yazdırma formu tipleri</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Print form types</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Print form types</value>
+ </synonym>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Order</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="68550154-23c9-45ef-a711-6afa74cc7149">
+  <name>TXT</name>
+  <synonym>
+   <key>tr</key>
+   <value>TXT</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>TXT</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>TXT</value>
+  </synonym>
+ </enumValues>
+</mdclass:Enum>

@@ -107,7 +107,7 @@ Scenario: _0206003 сheck data verification in Goods receipt
 		And Delay 25	
 		And I expand a line in "CheckList" table
 			| 'Date'                  | 'Fixed'   | 'Line number'   | 'Ref'                                              |
-			| '10.03.2023 15:43:56'   | 'No'      | '1'             | 'Goods receipt 8 811 dated 10.03.2023 15:43:56'    |
+			| '10.03.2023 15:43:56'   | 'No'      | '3'             | 'Goods receipt 8 811 dated 10.03.2023 15:43:56'    |
 		And I go to line in "CheckList" table
 			| 'Date'                  | 'Error ID'                                  | 'Fixed'   | 'Line number'   | 'Ref'                                              |
 			| '10.03.2023 15:43:56'   | 'ErrorQuantityNotEqualQuantityInBaseUnit'   | 'No'      | '1'             | 'Goods receipt 8 811 dated 10.03.2023 15:43:56'    |

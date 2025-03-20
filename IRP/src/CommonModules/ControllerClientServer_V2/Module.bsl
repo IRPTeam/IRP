@@ -12235,7 +12235,7 @@ Function BindItemListDontCalculateRow(Parameters)
 	
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
-	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_Withholding_Tax");
+	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_IsPriceChanged_Withholding_Tax");
 	
 	Return BindSteps("StepItemListCalculations_IsDontCalculateRowChanged", DataPath, Binding, Parameters, "BindItemListDontCalculateRow");
 EndFunction

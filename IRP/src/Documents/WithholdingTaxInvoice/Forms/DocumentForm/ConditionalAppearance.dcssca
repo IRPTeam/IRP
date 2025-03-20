@@ -11,6 +11,12 @@
 			<item>
 				<field>ItemListTotalAmount</field>
 			</item>
+			<item>
+				<field>ItemListWithholdingTaxAmount</field>
+			</item>
+			<item>
+				<field>ItemListBruttoAmount</field>
+			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">

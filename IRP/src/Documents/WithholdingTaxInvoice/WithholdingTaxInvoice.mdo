@@ -542,6 +542,48 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="dcf56afa-097c-40d4-b9be-0f517be9eb25">
+      <name>WithholdingTaxAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Withholding tax amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="71598bfe-6b79-489b-b36f-25ec24567d50">
+      <name>WithholdingTaxRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Withholding tax rate</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.TaxRates</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8208f8e7-cbca-47b3-8e78-b97b83a650d3">
+      <name>BruttoAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Brutto amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="44696ce2-6878-458e-8533-cd17c17141f0">
     <producedTypes>

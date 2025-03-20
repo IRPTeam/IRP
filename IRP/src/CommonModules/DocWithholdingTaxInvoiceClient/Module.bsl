@@ -291,10 +291,42 @@ EndProcedure
 
 #EndRegion
 
+#Region BRUTTO_AMOUNT
+
+Procedure ItemListBruttoAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListBruttoAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region WITHHOLDING_TAX_AMOUNT
+
+Procedure ItemListWithholdingTaxAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListWithholdingTaxAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region WITHHOLDING_TAX_RATE
+
+Procedure ItemListWithholdingTaxRateOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListWithholdingTaxRateOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
 #Region TAX_AMOUNT
 
 Procedure ItemListTaxAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListTaxAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region NET_AMOUNT
+
+Procedure ItemListNetAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListNetAmountOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion

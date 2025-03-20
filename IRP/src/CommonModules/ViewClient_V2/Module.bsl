@@ -233,8 +233,15 @@ Procedure OnChainComplete(Parameters) Export
 			TaxesClientServer.LoadChoiceList(Parameters.Form, Parameters.TaxChoiceList);
 		EndIf;
 	EndIf;
+	
 	If Parameters.TaxExemptionReasonVisible <> Undefined Then
 		TaxesClientServer.ChangeTaxExemptionReasonVisible(Parameters.Form, Parameters.TaxExemptionReasonVisible);
+	EndIf;
+
+	If Parameters.WithholdingTaxVisible <> Undefined Then
+		If Parameters.WithholdingTaxVisible = True Then
+			TaxesClientServer.LoadChoiceList_WithholdingTax(Parameters.Form, Parameters.WithholdingTaxChoiceList);
+		EndIf;
 	EndIf;
 	
 	If Parameters.PartnerChoiceList <> Undefined Then
@@ -2639,6 +2646,39 @@ Procedure ItemListTotalAmountOnChange(Object, Form, CurrentData = Undefined) Exp
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
 	ControllerClientServer_V2.ItemListTotalAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_BRUTTO_AMOUNT
+
+// ItemList.BruttoAmount
+Procedure ItemListBruttoAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListBruttoAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_WITHHOLDING_TAX_AMOUNT
+
+// ItemList.WithholdingTaxAmount
+Procedure ItemListWithholdingTaxAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListWithholdingTaxAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_WITHHOLDING_TAX_RATE
+
+// ItemList.WithholdingTaxRate
+Procedure ItemListWithholdingTaxRateOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListWithholdingTaxRateOnChange(Parameters);
 EndProcedure
 
 #EndRegion

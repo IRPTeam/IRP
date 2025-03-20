@@ -332,11 +332,48 @@ EndProcedure
 
 #EndRegion
 
+#Region BRUTTO_AMOUNT
+
+&AtClient
+Procedure ItemListBruttoAmountOnChange(Item, AddInfo = Undefined) Export
+	DocWithholdingTaxInvoiceClient.ItemListBruttoAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region WITHHOLDING_TAX_AMOUNT
+
+&AtClient
+Procedure ItemListWithholdingTaxAmountOnChange(Item, AddInfo = Undefined) Export
+	DocWithholdingTaxInvoiceClient.ItemListWithholdingTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region WITHHOLDING_TAX_RATE
+
+&AtClient
+Procedure ItemListWithholdingTaxRateOnChange(Item, AddInfo = Undefined) Export
+	DocWithholdingTaxInvoiceClient.ItemListWithholdingTaxRateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+
 #Region TAX_AMOUNT
 
 &AtClient
 Procedure ItemListTaxAmountOnChange(Item)
 	DocWithholdingTaxInvoiceClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region NET_AMOUNT
+
+&AtClient
+Procedure ItemListNetAmountOnChange(Item)
+	DocWithholdingTaxInvoiceClient.ItemListNetAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

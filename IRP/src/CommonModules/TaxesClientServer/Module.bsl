@@ -46,6 +46,10 @@ Procedure LoadChoiceList(Form, ChoiceList) Export
 	LoadChoiceList_VatRate(Form, ChoiceList, "TransactionsVATRate");
 EndProcedure
 
+Procedure LoadChoiceList_WithholdingTax(Form, ChoiceList) Export
+	LoadChoiceList_VatRate(Form, ChoiceList, "ItemListWithholdingTaxRate");
+EndProcedure
+
 Procedure LoadChoiceList_VatRate(Form, ChoiceList, ItemName)
 	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, ItemName) Then
 		Form.Items[ItemName].ChoiceList.Clear();

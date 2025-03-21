@@ -1,3 +1,10 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
 
 #Region Posting
 
@@ -179,7 +186,9 @@ Function R1001T_Purchases()
 		|	ItemList.RowKey,
 		|	ItemList.Quantity,
 		|	ItemList.Amount,
-		|	ItemList.NetAmount
+		|	ItemList.NetAmount,
+		|	Undefined AS SerialLotNumber,
+		|	0 AS OffersAmount
 		|INTO R1001T_Purchases
 		|FROM
 		|	ItemList AS ItemList

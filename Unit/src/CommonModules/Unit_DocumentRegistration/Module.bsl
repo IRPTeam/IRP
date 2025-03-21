@@ -653,6 +653,16 @@ Function GetIgnored_Fields()
 	Array.Add("OpeningEntry.R5015B_OtherPartnersTransactions.Basis");
 	Array.Add("OpeningEntry.R3021B_CashInTransitIncoming.Basis");
 	
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.ProfitLossCenter");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.ExpenseType");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.FixedAsset");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.LedgerType");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.AdditionalAnalytic");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.AmountCost");
+	Array.Add("WithholdingTaxInvoice.T2015S_TransactionsInfo.Key");
+	Array.Add("WithholdingTaxInvoice.T2015S_TransactionsInfo.IsCustomerTransaction");
+	Array.Add("WithholdingTaxInvoice.T2015S_TransactionsInfo.IsPaid");
+	
 	Map = New Map();
 	
 	For Each ExcludeItem In Array Do

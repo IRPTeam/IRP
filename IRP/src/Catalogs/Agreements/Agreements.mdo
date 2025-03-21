@@ -568,6 +568,36 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="b3c5996d-1cdc-4162-a39b-91c20d51c97e">
+    <name>Intercompany</name>
+    <synonym>
+      <key>en</key>
+      <value>Intercompany</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9e0581be-fc68-4610-b8e9-b069f5008342">
+    <name>IntercompanyBaseAgreement</name>
+    <synonym>
+      <key>en</key>
+      <value>Intercompany base agreement</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Agreements</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="69eb3895-7a1b-4bca-bb86-0c2b645bcef0">
     <producedTypes>
       <objectType typeId="74b01d8e-f8c5-4099-8431-c6019c94d81b" valueTypeId="8a953f0b-b885-45c1-a31a-f84bdaa24b85"/>

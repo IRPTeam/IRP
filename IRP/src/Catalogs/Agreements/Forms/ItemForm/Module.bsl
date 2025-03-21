@@ -103,6 +103,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.TradeAgentFeePercent.Visible = (IsConsignor Or IsTradeAgent)
 		And Object.TradeAgentFeeType = PredefinedValue("Enum.TradeAgentFeeTypes.Percent");
+		
+	Form.Items.Intercompany.Visible = Object.Type = PredefinedValue("Enum.AgreementTypes.Customer")
+		Or  Object.Type = PredefinedValue("Enum.AgreementTypes.Vendor");
+		
+	Form.Items.IntercompanyBaseAgreement.Visible = Object.Intercompany;
 EndProcedure
 
 #EndRegion
@@ -221,6 +226,12 @@ EndProcedure
 
 &AtClient
 Procedure TypeOnChange(Item)
+	
+	If Not (Object.Type = PredefinedValue("Enum.AgreementTypes.Customer")
+		Or  Object.Type = PredefinedValue("Enum.AgreementTypes.Vendor")) Then
+		Object.Intercompany = False;
+	EndIf;
+	
 	If Object.Type <> PredefinedValue("Enum.AgreementTypes.Customer") Then
 		Object.UseCreditLimit = False;
 		Object.CreditLimitAmount = 0;
@@ -324,6 +335,11 @@ Procedure SetNewNumberAtServer()
 			NumberingRulesServer.GetNumeratorGroupForCatalog(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
+EndProcedure
+
+&AtClient
+Procedure IntercompanyOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #Region AddAttributes

@@ -14,11 +14,22 @@ Procedure BeforeWrite(Cancel)
 	If ThisObject.ApArPostingDetail <> Enums.ApArPostingDetail.ByStandardAgreement Then
 		ThisObject.StandardAgreement = Catalogs.Agreements.EmptyRef();
 	EndIf;
+	
+	AdditionalProperties.Insert("IntercompanyBeforeWrite", Ref.Intercompany);
+	AdditionalProperties.Insert("isNew", IsNew());
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
+	EndIf;
+	
+	If AdditionalProperties.Property("isNew") And AdditionalProperties.isNew 
+		And ThisObject.Intercompany And ThisObject.IntercompanyBaseAgreement.IsEmpty() Then
+		CatAgreementsServer.CreateMirorrAgreement(ThisObject);
+	ElsIf AdditionalProperties.Property("isNew") And Not AdditionalProperties.isNew 
+		And ThisObject.Intercompany And ThisObject.IntercompanyBaseAgreement.IsEmpty() Then
+		CatAgreementsServer.UpdateMirorrAgreement(ThisObject);
 	EndIf;
 EndProcedure
 
@@ -82,8 +93,22 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If ThisObject.Type = Enums.AgreementTypes.Other Then
 		CommonFunctionsClientServer.DeleteValueFromArray(CheckedAttributes, "PriceType");
 	EndIf;
+	
+	If ThisObject.Intercompany Then
+		
+		If Not(ThisObject.Type = Enums.AgreementTypes.Customer 
+			Or ThisObject.Type = Enums.AgreementTypes.Vendor) Then
+				Cancel = True;
+		EndIf;
+		
+		CheckedAttributes.Add("Partner");
+		CheckedAttributes.Add("Company");
+		CheckedAttributes.Add("LegalName");
+	EndIf;
 EndProcedure
 
 Procedure OnCopy(CopiedObject)
 	ThisObject.Number = "";
+	ThisObject.Intercompany = False;
+	ThisObject.IntercompanyBaseAgreement = Catalogs.Agreements.EmptyRef();
 EndProcedure

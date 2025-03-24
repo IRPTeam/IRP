@@ -1071,6 +1071,20 @@
 		</right>
 	</object>
 	<object>
+		<name>AccumulationRegister.R3040B_WithholdingTax</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.R1031B_ReceiptInvoicing</name>
 		<right>
 			<name>Read</name>

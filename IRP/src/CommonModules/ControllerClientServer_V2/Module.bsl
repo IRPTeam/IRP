@@ -30,6 +30,9 @@ Function GetFormParameters(Form) Export
 	Result.Insert("TaxVisible", Undefined); // Undefined - do not change visible, True or False - change visible
 	Result.Insert("TaxChoiceList", New Array());
 	
+	Result.Insert("WithholdingTaxVisible", Undefined);
+	Result.Insert("WithholdingTaxChoiceList", New Array());
+	
 	Result.Insert("TaxExemptionReasonVisible", Undefined);
 	
 	Result.Insert("PartnerChoiceList", Undefined);
@@ -78,6 +81,9 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	
 	Parameters.Insert("TaxVisible"   , FormParameters.TaxVisible);
 	Parameters.Insert("TaxChoiceList", FormParameters.TaxChoiceList);
+	
+	Parameters.Insert("WithholdingTaxVisible"   , FormParameters.WithholdingTaxVisible);
+	Parameters.Insert("WithholdingTaxChoiceList", FormParameters.WithholdingTaxChoiceList);
 	
 	Parameters.Insert("TaxExemptionReasonVisible"   , FormParameters.TaxExemptionReasonVisible);
 
@@ -725,6 +731,29 @@ Procedure StepChangeTaxExemptionReasonVisible(Parameters, Chain) Export
 	Chain.ChangeTaxExemptionReasonVisible.Options.Add(Options);	
 EndProcedure
 
+// WithholdingTaxVisible.Set
+Procedure SetWithholdingTaxVisible(Parameters, Results) Export
+	For Each _result In Results Do
+		Parameters.WithholdingTaxVisible    = _result.Value.WithholdingTaxVisible;
+		Parameters.WithholdingTaxChoiceList = _result.Value.WithholdingTaxChoiceList;
+	EndDo;
+EndProcedure
+
+// Form.StepChangeTaxVisible.Step
+Procedure StepChangeWithholdingTaxVisible(Parameters, Chain) Export
+	Chain.ChangeWithholdingTaxVisible.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeWithholdingTaxVisible.Setter = "SetWithholdingTaxVisible";
+	Options = ModelClientServer_V2.ChangeWithholdingTaxVisibleOptions();
+	Options.Date           = GetDate(Parameters);
+	Options.Company        = GetCompany(Parameters);
+	Options.DocumentName   = Parameters.ObjectMetadataInfo.MetadataName;
+	Options.StepName = "StepChangeWithholdingTaxVisible";
+	Chain.ChangeWithholdingTaxVisible.Options.Add(Options);	
+EndProcedure
+
 // PartnerChoiceList.Set
 Procedure SetPartnerChoiceList(Parameters, Results) Export
 	If Results.Count() > 0 Then
@@ -772,6 +801,7 @@ Function BindFormOnOpen(Parameters)
 	
 	Binding.Insert("PurchaseOrder"        , "StepChangeTaxVisible, StepChangePartnerChoiceList");
 	Binding.Insert("PurchaseInvoice"      , "StepChangeTaxVisible, StepChangePartnerChoiceList");
+	Binding.Insert("WithholdingTaxInvoice", "StepChangeTaxVisible, StepChangeWithholdingTaxVisible, StepChangePartnerChoiceList");
 	Binding.Insert("PurchaseReturnOrder"  , "StepChangeTaxVisible, StepChangePartnerChoiceList");
 	Binding.Insert("PurchaseReturn"       , "StepChangeTaxVisible, StepChangePartnerChoiceList");
 	
@@ -981,7 +1011,7 @@ Function BindListOnCopy(Parameters)
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListCalculations_IsCopyRow,
 		|StepUpdatePaymentTerms");
-	
+		
 	Binding.Insert("BankPayment"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("BankReceipt"  , "StepPaymentListCalculations_IsCopyRow");
 	Binding.Insert("CashPayment"  , "StepPaymentListCalculations_IsCopyRow");
@@ -2146,6 +2176,9 @@ Function BindCurrency(Parameters)
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListChangePriceByPriceType");
 	
+	Binding.Insert("WithholdingTaxInvoice",
+		"StepItemListChangePriceByPriceType");
+	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepItemListChangePriceByPriceType");
 	
@@ -2726,6 +2759,14 @@ Function BindDate(Parameters)
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepUpdatePaymentTerms");
 	
+	Binding.Insert("WithholdingTaxInvoice",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		|StepChangeTaxVisible,
+		|StepChangeWithholdingTaxVisible,
+		|StepItemListChangeVatRate_AgreementInHeader");
+	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType, 
@@ -2897,6 +2938,13 @@ Function BindCompany(Parameters)
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey,
 		|StepChangeCurrencyRevaluationInvoiceByBasis");
+	
+	Binding.Insert("WithholdingTaxInvoice",
+		"StepChangeTaxVisible,
+		|StepChangeWithholdingTaxVisible,
+		|StepChangePartnerChoiceList,
+		|StepItemListChangeVatRate_AgreementInHeader,
+		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepChangeTaxVisible,
@@ -3398,6 +3446,10 @@ Function GetBindingStructure_Partner(Parameters)
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner,
 		|StepChangeCurrencyRevaluationInvoiceByBasis");
+	
+	Result.Binding.Insert("WithholdingTaxInvoice",
+		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		|StepChangeLegalNameByPartner");
 	
 	Result.Binding.Insert("SalesReportFromTradeAgent",
 		"StepChangeAgreementByPartner_AgreementTypeIsTradeAgent,
@@ -5375,6 +5427,15 @@ Function GetBindingStructure_Agreement(Parameters)
 		|StepChangeRecordPurchasePricesByAgreement,
 		|StepChangeCurrencyRevaluationInvoiceByBasis");
 		
+	Result.Binding.Insert("WithholdingTaxInvoice",
+		"StepChangeCompanyByAgreement,
+		|StepChangeCurrencyByAgreement,
+		|StepItemListChangePriceTypeByAgreement,
+		|StepChangePriceIncludeTaxByAgreement,
+		|StepChangeTaxVisible,
+		|StepChangeWithholdingTaxVisible,
+		|StepItemListChangeVatRate_AgreementInHeader");
+		
 	Result.Binding.Insert("SalesReportFromTradeAgent",
 		"StepChangeCompanyByAgreement,
 		|StepChangeCurrencyByAgreement,
@@ -5732,6 +5793,7 @@ Function BindPriceIncludeTax(Parameters)
 	
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsPriceIncludeTaxChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsPriceIncludeTaxChanged_Without_SpecialOffers");
+	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_Withholding_Tax");
 	
 	Return BindSteps("StepItemListCalculations_IsPriceIncludeTaxChanged", DataPath, Binding, Parameters, "BindPriceIncludeTax");
 EndFunction
@@ -10766,6 +10828,7 @@ Function GetBindingStructure_ItemListItem(Parameters)
 	Result.Binding.Insert("RetailReceiptCorrection"        , "StepItemListChangeItemKeyByItem,StepChangeisControlCodeStringByItem");
 	Result.Binding.Insert("PurchaseOrder"             , "StepItemListChangeItemKeyByItem");
 	Result.Binding.Insert("PurchaseInvoice"           , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("WithholdingTaxInvoice"     , "StepItemListChangeItemKeyByItem");
 	Result.Binding.Insert("RetailReturnReceipt"       , "StepItemListChangeItemKeyByItem,StepChangeisControlCodeStringByItem");
 	Result.Binding.Insert("PurchaseReturnOrder"       , "StepItemListChangeItemKeyByItem");
 	Result.Binding.Insert("PurchaseReturn"            , "StepItemListChangeItemKeyByItem");
@@ -10997,6 +11060,14 @@ Function GetBindingStructure_ItemListItemKey(Parameters)
 		|StepItemListChangePriceByPriceType,
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey,
+		|StepItemListChangeExpenseTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
+	
+	Result.Binding.Insert("WithholdingTaxInvoice",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeUnitByItemKey,
 		|StepItemListChangeExpenseTypeByItemKey,
 		|StepChangeIsServiceByItemKey");
@@ -11377,6 +11448,10 @@ Function BindItemListUnit(Parameters)
 		|StepItemListChangePriceByPriceType");
 	
 	Binding.Insert("PurchaseInvoice", 
+		"StepItemListCalculateQuantityInBaseUnit,
+		|StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("WithholdingTaxInvoice", 
 		"StepItemListCalculateQuantityInBaseUnit,
 		|StepItemListChangePriceByPriceType");
 	
@@ -12033,6 +12108,7 @@ Function BindItemListPrice(Parameters)
 		Binding.Insert("RetailReceiptCorrection"   , "StepItemListCalculations_IsPriceChanged");
 		Binding.Insert("PurchaseOrder"        , "StepItemListCalculations_IsPriceChanged");
 		Binding.Insert("PurchaseInvoice"      , "StepItemListCalculations_IsPriceChanged");
+		Binding.Insert("WithholdingTaxInvoice", "StepItemListCalculations_IsPriceChanged_Withholding_Tax");
 		Binding.Insert("RetailReturnReceipt"  , "StepItemListCalculations_IsPriceChanged");
 		Binding.Insert("PurchaseReturnOrder"  , "StepItemListCalculations_IsPriceChanged");
 		Binding.Insert("PurchaseReturn"       , "StepItemListCalculations_IsPriceChanged");
@@ -12069,6 +12145,10 @@ Function BindItemListPrice(Parameters)
 		Binding.Insert("PurchaseInvoice",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
 			|StepItemListCalculations_IsPriceChanged");
+	
+		Binding.Insert("WithholdingTaxInvoice",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged_Withholding_Tax");
 	
 		Binding.Insert("SalesReportFromTradeAgent",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
@@ -12158,6 +12238,7 @@ Function BindItemListDontCalculateRow(Parameters)
 	
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
+	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_IsPriceChanged_Withholding_Tax");
 	
 	Return BindSteps("StepItemListCalculations_IsDontCalculateRowChanged", DataPath, Binding, Parameters, "BindItemListDontCalculateRow");
 EndFunction
@@ -12200,6 +12281,7 @@ Function BindItemListVatRate(Parameters)
 	
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
+	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_Withholding_Tax");
 	
 	Binding.Insert("StockAdjustmentAsSurplus", "StepItemListCalculations_IsVatRateChanged_StockDocuments");
 	
@@ -12575,6 +12657,9 @@ Function BindItemListQuantityInBaseUnit(Parameters)
 	
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("WithholdingTaxInvoice",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged_Withholding_Tax");
 	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOffers");
@@ -13022,6 +13107,9 @@ Function BindItemListTaxAmount(Parameters)
 	Binding.Insert("PurchaseInvoice", 
 		"StepItemListCalculations_IsTaxAmountChanged");
 	
+	Binding.Insert("WithholdingTaxInvoice", 
+		"StepItemListCalculations_Withholding_Tax");
+	
 	Binding.Insert("SalesReportFromTradeAgent", 
 		"StepItemListCalculations_IsTaxAmountChanged_Without_SpecialOffers");
 	
@@ -13070,6 +13158,7 @@ Function BindItemListTaxAmountUserForm(Parameters)
 	Binding.Insert("RetailReceiptCorrection"   , "StepItemListCalculations_IsTaxAmountUserFormChanged");
 	Binding.Insert("PurchaseOrder"        , "StepItemListCalculations_IsTaxAmountUserFormChanged");
 	Binding.Insert("PurchaseInvoice"      , "StepItemListCalculations_IsTaxAmountUserFormChanged");
+	Binding.Insert("WithholdingTaxInvoice", "StepItemListCalculations_IsTaxAmountUserFormChanged");
 	Binding.Insert("RetailReturnReceipt"  , "StepItemListCalculations_IsTaxAmountUserFormChanged");
 	Binding.Insert("PurchaseReturnOrder"  , "StepItemListCalculations_IsTaxAmountUserFormChanged");
 	Binding.Insert("PurchaseReturn"       , "StepItemListCalculations_IsTaxAmountUserFormChanged");
@@ -13126,6 +13215,7 @@ EndFunction
 Function BindItemListNetAmount(Parameters)
 	DataPath = "ItemList.NetAmount";
 	Binding = New Structure();
+	Binding.Insert("WithholdingTaxInvoice", "StepItemListCalculations_IsNetAmountChanged_Withholding_Tax");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListNetAmount");
 EndFunction
 
@@ -13182,6 +13272,8 @@ Function BindItemListTotalAmount(Parameters)
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
 		|StepItemListCalculations_IsTotalAmountChanged");
 	
+	Binding.Insert("WithholdingTaxInvoice", "StepItemListChangePriceTypeAsManual_IsTotalAmountChange");
+	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
 		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
@@ -13214,6 +13306,93 @@ Function BindItemListTotalAmount(Parameters)
 		"StepItemListCalculations_IsTotalAmountChanged_StockDocuments");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListTotalAmount");
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_WITHHOLDING_TAX_AMOUNT
+
+// ItemList.WithholdingTaxAmount.OnChange
+Procedure ItemListWithholdingTaxAmountOnChange(Parameters) Export
+	Binding = BindItemListWithholdingTaxAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.WithholdingTaxAmount.Set
+Procedure SetItemListWithholdingTaxAmount(Parameters, Results) Export
+	Binding = BindItemListWithholdingTaxAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.WithholdingTaxAmount.Get
+Function GetItemListWithholdingTaxAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListWithholdingTaxAmount(Parameters).DataPath , _Key);
+EndFunction
+
+// ItemList.TotalAmount.Bind
+Function BindItemListWithholdingTaxAmount(Parameters)
+	DataPath = "ItemList.WithholdingTaxAmount";
+	Binding = New Structure();	
+	Binding.Insert("WithholdingTaxInvoice", "StepItemListCalculations_IsWithholdingTaxAmountChanged_Withholding_Tax");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListWithholdingTaxAmount");
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_WITHHOLDING_TAX_RATE
+
+// ItemList.WithholdingTaxRate.OnChange
+Procedure ItemListWithholdingTaxRateOnChange(Parameters) Export
+	Binding = BindItemListWithholdingTaxRate(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.WithholdingTaxRate.Set
+Procedure SetItemListWithholdingTaxRate(Parameters, Results) Export
+	Binding = BindItemListWithholdingTaxRate(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.WithholdingTaxRate.Get
+Function GetItemListWithholdingTaxRate(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListWithholdingTaxRate(Parameters).DataPath , _Key);
+EndFunction
+
+// ItemList.WithholdingTaxRate.Bind
+Function BindItemListWithholdingTaxRate(Parameters)
+	DataPath = "ItemList.WithholdingTaxRate";
+	Binding = New Structure();	
+	Binding.Insert("WithholdingTaxInvoice", "StepItemListCalculations_IsWithholdingTaxRateChanged_Withholding_Tax");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListWithholdingTaxRate");
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_BRUTTO_AMOUNT
+
+// ItemList.BruttoAmount.OnChange
+Procedure ItemListBruttoAmountOnChange(Parameters) Export
+	Binding = BindItemListBruttoAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.BruttoAmount.Set
+Procedure SetItemListBruttoAmount(Parameters, Results) Export
+	Binding = BindItemListBruttoAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.BruttoAmount.Get
+Function GetItemListBruttoAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListBruttoAmount(Parameters).DataPath , _Key);
+EndFunction
+
+// ItemList.BruttoAmount.Bind
+Function BindItemListBruttoAmount(Parameters)
+	DataPath = "ItemList.BruttoAmount";
+	Binding = New Structure();
+	Binding.Insert("WithholdingTaxInvoice", "StepItemListCalculations_IsBruttoAmountChanged_Withholding_Tax");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListBruttoAmount");
 EndFunction
 
 #EndRegion
@@ -13280,6 +13459,88 @@ Function BindItemListCalculations(Parameters)
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListCalculations");
 EndFunction
+
+#Region ITEM_LIST_CALCULATIONS_WITHHOLDING_TAX
+
+// ItemList.Calculations.[IsQuantityInBaseUnitChanged_Withholding_Tax].Step
+Procedure StepItemListCalculations_IsQuantityInBaseUnitChanged_Withholding_Tax(Parameters, Chain) Export
+	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsQuantityInBaseUnitChanged");
+EndProcedure
+
+// ItemList.Calculations.[IsPriceChanged_Withholding_Tax].Step
+Procedure StepItemListCalculations_IsPriceChanged_Withholding_Tax(Parameters, Chain) Export
+	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsPriceChanged");
+EndProcedure
+
+// ItemList.Calculations.[IsWithholdingTaxRateChanged_Withholding_Tax].Step
+Procedure StepItemListCalculations_IsWithholdingTaxRateChanged_Withholding_Tax(Parameters, Chain) Export
+	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsWithholdingTaxRateChanged");
+EndProcedure
+
+// ItemList.Calculations.[IsWithholdingTaxAmountChanged_Withholding_Tax].Step
+Procedure StepItemListCalculations_IsWithholdingTaxAmountChanged_Withholding_Tax(Parameters, Chain) Export
+	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsWithholdingTaxAmountChanged");
+EndProcedure
+
+// ItemList.Calculations.[IsBruttoAmountChanged_Withholding_Tax].Step
+Procedure StepItemListCalculations_IsBruttoAmountChanged_Withholding_Tax(Parameters, Chain) Export
+	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsBruttoAmountChanged");
+EndProcedure
+
+// ItemList.Calculations.[IsNetAmountChanged_Withholding_Tax].Step
+Procedure StepItemListCalculations_IsNetAmountChanged_Withholding_Tax(Parameters, Chain) Export
+	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsNetAmountChanged");
+EndProcedure
+
+// ItemList.Calculations_Withholding_Tax.Set
+Procedure SetItemListCalculations_Withholding_Tax(Parameters, Results) Export
+	ViewNotify = "OnSetCalculationsNotify";
+	NotifyAnyway = True;
+	Binding = BindItemListCalculations(Parameters);
+	
+	SetterObject(Undefined, "ItemList.Price"                , Parameters, Results, ViewNotify, "Price"                , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.NetAmount"            , Parameters, Results, ViewNotify, "NetAmount"            , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.TaxAmount"            , Parameters, Results, ViewNotify, "VatAmount"            , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.TotalAmount"          , Parameters, Results, ViewNotify, "TotalAmount"          , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.WithholdingTaxAmount" , Parameters, Results, ViewNotify, "WithholdingTaxAmount" , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.BruttoAmount"         , Parameters, Results, ViewNotify, "BruttoAmount"         , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.WithholdingTaxRate"   , Parameters, Results, ViewNotify, "WithholdingTaxRate"   , NotifyAnyway);
+
+EndProcedure
+
+Procedure StepItemListCalculations_Withholding_Tax(Parameters, Chain, WhoIsChanged = Undefined) Export
+	Chain.CalculationsWithholdingTax.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.CalculationsWithholdingTax.Setter = "SetItemListCalculations_Withholding_Tax";
+
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do	
+		Options = ModelClientServer_V2.CalculationsWithHoldingTaxOptions();
+		
+		Options.DontCalculateBrutto = False;
+		
+		Options.WhoIsChanged = WhoIsChanged;
+		
+		Options.VatRate              = GetItemListVatRate(Parameters, Row.Key);
+		Options.PriceIncludeTax      = GetPriceIncludeTax(Parameters);
+		Options.Price                = GetItemListPrice(Parameters, Row.Key);
+		Options.NetAmount            = GetItemListNetAmount(Parameters, Row.Key);
+		Options.VatAmount            = GetItemListTaxAmount(Parameters, Row.Key);
+		Options.TotalAmount          = GetItemListTotalAmount(Parameters, Row.Key);
+		Options.QuantityInBaseUnit   = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.WithholdingTaxAmount = GetItemListWithholdingTaxAmount(Parameters, Row.Key);
+		Options.WithholdingTaxRate   = GetItemListWithholdingTaxRate(Parameters, Row.Key);
+		Options.BruttoAmount         = GetItemListBruttoAmount(Parameters, Row.Key);		
+		Options.DontCalculateRow     = GetItemListDontCalculateRow(Parameters, Row.Key);
+		
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListCalculations_Withholding_Tax";
+		Chain.CalculationsWithholdingTax.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
 
 #Region ITEM_LIST_CALCULATIONS_WITHOUT_SPECIAL_OFFERS
 

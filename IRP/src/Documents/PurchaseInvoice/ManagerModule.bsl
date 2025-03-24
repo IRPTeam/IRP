@@ -1171,11 +1171,11 @@ Function R1012B_PurchaseOrdersInvoiceClosing()
 EndFunction
 
 Function R1020B_AdvancesToVendors()
-	Return AccumulationRegisters.R1020B_AdvancesToVendors.R1020B_AdvancesToVendors_PI_PR_POC_SRTC();
+	Return AccumulationRegisters.R1020B_AdvancesToVendors.R1020B_AdvancesToVendors_PI_PR_POC_SRTC_WTI();
 EndFunction
 
 Function R1021B_VendorsTransactions()
-	Return AccumulationRegisters.R1021B_VendorsTransactions.R1021B_VendorsTransactions_PI_SRTC();
+	Return AccumulationRegisters.R1021B_VendorsTransactions.R1021B_VendorsTransactions_PI_SRTC_WTI();
 EndFunction
 
 Function R5012B_VendorsAging()
@@ -1753,7 +1753,7 @@ Function S1001L_VendorsPricesByItemKey()
 EndFunction
 
 Function R5020B_PartnersBalance()
-	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_PI();
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_PI_WTI();
 EndFunction
 
 #EndRegion

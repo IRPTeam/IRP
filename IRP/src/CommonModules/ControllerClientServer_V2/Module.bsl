@@ -2764,6 +2764,7 @@ Function BindDate(Parameters)
 		|StepItemListChangePriceByPriceType,
 		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
 		|StepChangeTaxVisible,
+		|StepChangeWithholdingTaxVisible,
 		|StepItemListChangeVatRate_AgreementInHeader");
 	
 	Binding.Insert("SalesReportFromTradeAgent",
@@ -2940,6 +2941,7 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("WithholdingTaxInvoice",
 		"StepChangeTaxVisible,
+		|StepChangeWithholdingTaxVisible,
 		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
@@ -5431,6 +5433,7 @@ Function GetBindingStructure_Agreement(Parameters)
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
 		|StepChangeTaxVisible,
+		|StepChangeWithholdingTaxVisible,
 		|StepItemListChangeVatRate_AgreementInHeader");
 		
 	Result.Binding.Insert("SalesReportFromTradeAgent",

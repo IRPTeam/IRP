@@ -2645,13 +2645,7 @@ Function CalculationsWithHoldingTaxExecute(Options) Export
 	
 	If Options.WhoIsChanged = "IsNetAmountChanged"  Then
 		
-		If Result.miktar = 0 Then
-			Result.Fiyat = Result.Tutar;
-			Result.miktar = 1;
-		Else
-			Result.Fiyat = Result.Tutar / Result.miktar;
-		EndIf;
-		
+		Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
 		Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate, Options.DontCalculateBrutto);
 		Result.BruttoAmount =  Result.NetAmount + Result.WithholdingTaxAmount;
 		
@@ -2659,12 +2653,12 @@ Function CalculationsWithHoldingTaxExecute(Options) Export
 		
 		Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate, Options.DontCalculateBrutto);
 		Result.NetAmount = Result.BruttoAmount - Result.WithholdingTaxAmount;
-		Result.Price = Result.NetAmount / Result.QuantityInBaseUnit;
+		Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
 		
 	ElsIf Options.WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
 		
 		If Options.DontCalculateBrutto Then
-			Result.Price = Result.NetAmount / Result.QuantityInBaseUnit;
+			Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
 		Else
 			Result.NetAmount = Result.QuantityInBaseUnit * Result.Price;
 		EndIf;
@@ -2683,9 +2677,9 @@ Function CalculationsWithHoldingTaxExecute(Options) Export
 		If Options.DontCalculateBrutto Then
 			Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate, Options.DontCalculateBrutto);
 			Result.NetAmount = Result.BruttoAmount - Result.WithholdingTaxAmount;
-			Result.Price = Result.NetAmount / Result.QuantityInBaseUnit;
+			Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
 		Else
-			Result.Price = Result.NetAmount / Result.QuantityInBaseUnit;			
+			Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);			
 			Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate, Options.DontCalculateBrutto);
 			Result.BruttoAmount =  Result.NetAmount + Result.WithholdingTaxAmount;
 		EndIf;
@@ -2693,18 +2687,15 @@ Function CalculationsWithHoldingTaxExecute(Options) Export
 	ElsIf Options.WhoIsChanged = "IsWithholdingTaxAmountChanged" Then
 		
 		If Options.DontCalculateBrutto Then
-			
 			Result.WithholdingTaxRate = GetArbitraryWithholdintTaxRate();
 			Result.NetAmount =  Result.BruttoAmount - Result.WithholdingTaxAmount;
-			Result.Price = Result.NetAmount / Result.QuantityInBaseUnit;
+			Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
 		Else
-			
-			Result.Price = Result.NetAmount / Result.QuantityInBaseUnit;
+			Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
 			Result.WithholdingTaxRate = GetArbitraryWithholdintTaxRate();
 			Result.BruttoAmount = Result.NetAmount + Result.WithholdingTaxAmount;
-			
-		EndIf;
-				
+		EndIf;		
+		
 	EndIf;
 	
 	If ValueIsFilled(Options.VatRate) Then
@@ -2712,17 +2703,15 @@ Function CalculationsWithHoldingTaxExecute(Options) Export
 			If Options.DontCalculateBrutto Then
 				Result.VatAmount =  CalculateVatAmount(Result.TotalAmount, Options.VatRate, Options.PriceIncludeTax);				
 				Result.NetAmount =  Result.TotalAmount - Result.VatAmount;
-				Result.Price = Result.NetAmount / Result.QuantityInBaseUnit;
+				Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
 			Else
 				Result.TotalAmount = Result.NetAmount;				
 				Result.VatAmount = CalculateVatAmount(Result.TotalAmount, Options.VatRate, Options.PriceIncludeTax);				
 			EndIf;
-			
 		Else
 			Result.VatAmount = CalculateVatAmount(Result.BruttoAmount, Options.VatRate, Options.PriceIncludeTax);
 			Result.TotalAmount = Result.NetAmount + Result.VatAmount;
 		EndIf;
-		
 	Else
 		Result.TotalAmount = Result.NetAmount;
 	Endif;
@@ -2772,6 +2761,13 @@ Function CalculateVatAmount(Amount, VatRate, PriceIncludeTax)
 	Else
 		Return (Amount / 100) * Rate;
 	EndIf; 
+EndFunction
+
+Function CalculatePrice(NetAmount, Quantity)
+	If Not ValueIsFilled(Quantity) Then
+		Return 0;
+	EndIf;
+	Return NetAmount / Quantity;
 EndFunction
 
 #EndRegion

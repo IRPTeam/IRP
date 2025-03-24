@@ -2166,6 +2166,9 @@ Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransa
 Strings.Insert("WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
 	NStr("en = 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'", Lang));
 
+Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax",
+	NStr("en = 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R3040B_WithholdingTax)'", Lang));
+
 	
 Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External accounting operation exchange report'", Lang));	
 

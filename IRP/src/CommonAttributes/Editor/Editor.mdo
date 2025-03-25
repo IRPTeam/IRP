@@ -97,6 +97,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.WithholdingTaxInvoice</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.FixedAssetsLedgerTypes</metadata>
     <use>Use</use>
   </content>

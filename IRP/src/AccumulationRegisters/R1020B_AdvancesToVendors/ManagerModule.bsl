@@ -117,7 +117,7 @@ Function R1020B_AdvancesToVendors_BR_CR() Export
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
 EndFunction
 
-Function R1020B_AdvancesToVendors_PI_PR_POC_SRTC() Export 
+Function R1020B_AdvancesToVendors_PI_PR_POC_SRTC_WTI() Export 
 	Return 
 		"SELECT
 		|	CASE

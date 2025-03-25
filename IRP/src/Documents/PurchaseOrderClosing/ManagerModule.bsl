@@ -299,7 +299,7 @@ Function T2014S_AdvancesInfo()
 EndFunction
 
 Function R1020B_AdvancesToVendors()
-	Return AccumulationRegisters.R1020B_AdvancesToVendors.R1020B_AdvancesToVendors_PI_PR_POC_SRTC();
+	Return AccumulationRegisters.R1020B_AdvancesToVendors.R1020B_AdvancesToVendors_PI_PR_POC_SRTC_WTI();
 EndFunction
 
 Function R1021B_VendorsTransactions()

@@ -127,6 +127,7 @@
       <types>DocumentRef.ELedgerRegistry</types>
       <types>DocumentRef.StockCorrection</types>
       <types>DocumentRef.ShipmentPlaningOrder</types>
+      <types>DocumentRef.WithholdingTaxInvoice</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

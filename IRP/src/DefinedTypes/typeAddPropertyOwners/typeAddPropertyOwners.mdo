@@ -169,5 +169,6 @@
     <types>DocumentRef.StockCorrection</types>
     <types>CatalogRef.ObjectLocations</types>
     <types>DocumentRef.ShipmentPlaningOrder</types>
+    <types>DocumentRef.WithholdingTaxInvoice</types>
   </type>
 </mdclass:DefinedType>

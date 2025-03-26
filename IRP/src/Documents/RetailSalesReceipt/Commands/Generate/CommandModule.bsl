@@ -5,13 +5,11 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		PredefinedValue("Document.RetailSalesReceipt.EmptyRef")));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo());
 	FormParameters.Insert("SetAllCheckedOnOpen", True);
-
-	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+	RowIDInfoClient.OpenForm_AddLinkedDocumentRows(Undefined, ThisObject, FormParameters, "AddDocumentRowsContinue");
 EndProcedure
 
 &AtClient
-Procedure AddDocumentRowsContinue(Result, AdditionalParameters) Export
+Procedure AddDocumentRowsContinue(Result, NotifyParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;

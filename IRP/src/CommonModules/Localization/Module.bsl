@@ -3582,6 +3582,27 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	NStr("en='AdditionalRevenueAllocation DR (R5021T_Revenues) CR (R4050B_StockInventory)';
 		|ru='Дополнительное распределение доходов DR (R5021T_Revenues) CR (R4050B_StockInventory)';
 		|tr='Ek Gelir Dağılımı DR (R5021T_Gelirler) CR (R4050B_StokEnvanteri)'", Lang));
+
+Strings.Insert("WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
+	NStr("en='WithholdingTaxInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
+		|ru='WithholdingTaxInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)';
+		|tr='SerbestMeslekMakbuzu DR (R1021B_TedarikçiKayıtları) CR (R1020B_TedarikçiAvansları)'", Lang));
+
+Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
+	NStr("en='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)';
+		|ru='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)';
+		|tr='SerbestMeslekMakbuzu DR (R5022T_Giderler) CR (R1021B_TedarikçiKayıtları)'", Lang));
+
+Strings.Insert("WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
+	NStr("en='WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)';
+		|ru='WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)';
+		|tr='SerbestMeslekMakbuzu DR (R1040B_VergiÇıkan) CR (R1021B_TedarikçiKayıtları)'", Lang));
+
+Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax",
+	NStr("en='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R3040B_WithholdingTax)';
+		|ru='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R3040B_WithholdingTax)';
+		|tr='SerbestMeslekMakbuzu DR (R5022T_Giderler) CR (R3040B_Stopaj)'", Lang));
+
 	
 Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External accounting operation exchange report';
 	|ru='Отчет по обменам внешних бухгалтерских операци';

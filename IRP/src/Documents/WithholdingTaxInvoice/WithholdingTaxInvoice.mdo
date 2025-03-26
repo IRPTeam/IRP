@@ -1,0 +1,1178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="19ce6afb-a58e-4874-88d1-cbae0ce7def7">
+ <producedTypes>
+  <objectType typeId="21b2fa40-4508-4570-a8c9-e2b1b55a36db" valueTypeId="a8c5b241-3fef-4e3c-8e46-0525d69830b3"/>
+  <refType typeId="8f6a4764-b426-449b-8be4-eb4163ef7f0b" valueTypeId="cceb9bfc-d978-4554-b635-be0d5a478c8e"/>
+  <selectionType typeId="49e5a9a0-95d0-4bf6-adad-4e8932f275f9" valueTypeId="1462e75b-3bc4-4fb3-be58-c86b0a81902a"/>
+  <listType typeId="09703567-ec11-481b-846e-91c0764e5ab7" valueTypeId="1c5c0d23-54d7-49a1-83fa-161b53674a89"/>
+  <managerType typeId="e12d138e-58f8-4536-b3e1-dcb962f6668d" valueTypeId="832afd08-c57a-4556-b2b9-e6b2269ac25d"/>
+ </producedTypes>
+ <name>WithholdingTaxInvoice</name>
+ <synonym>
+  <key>tr</key>
+  <value>Serbest meslek makbuzu</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Withholding tax invoice</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Withholding tax invoice</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.WithholdingTaxInvoice.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_WithholdingTaxInvoice</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_WithholdingTaxInvoice</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Document.WithholdingTaxInvoice.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.WithholdingTaxInvoice.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.WithholdingTaxInvoice.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.WithholdingTaxInvoice.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesOrderField>Document.WithholdingTaxInvoice.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Serbest meslek makbuzu</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Withholding tax invoice</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Withholding tax invoice</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Serbest meslek makbuzları</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Withholding tax invoices</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Withholding tax invoices</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.WithholdingTaxInvoice.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.WithholdingTaxInvoice.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.WithholdingTaxInvoice.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+ <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R1001T_Purchases</registerRecords>
+ <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+ <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
+ <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+ <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <registerRecords>AccumulationRegister.R3040B_WithholdingTax</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="2ad9046d-ec47-415f-aa79-90d231e2b450">
+  <name>Agreement</name>
+  <synonym>
+   <key>tr</key>
+   <value>Sözleşme</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Соглашение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner term</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="71e8d0d7-020b-4a06-a996-d67047625393">
+  <name>Company</name>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="9e823bdd-a938-4031-b417-fc7ab9029236">
+  <name>Currency</name>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="a7f0903b-4591-4f3c-a1f5-2695d9e6d9fe">
+  <name>DocDate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak tarihi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Doc date</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="003d366f-7e46-4f04-ac10-d66b3d7da130">
+  <name>DocNumber</name>
+  <synonym>
+   <key>tr</key>
+   <value>Belge numarası</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Номер документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Doc number</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="964db3ad-f4ae-4264-bf16-0b0e04ee78bc">
+  <name>LegalName</name>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesabı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Контрагент</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Legal name</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="aba6b05a-e2d2-4160-bed4-8e62dfa8838c">
+  <name>Partner</name>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Партнер</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="35468b34-8d58-4e76-ae84-0d3fe03db0a5">
+  <name>PriceIncludeTax</name>
+  <synonym>
+   <key>tr</key>
+   <value>Fiyata KDV dahil</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Цена включает НДС</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Price includes tax</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="6342a227-1186-4a1c-9031-a8e79554f442">
+  <name>LegalNameContract</name>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesap kontratı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Договор контрагента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Legal name contract</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LegalNameContracts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LegalName</name>
+   <field>Document.WithholdingTaxInvoice.Attribute.LegalName</field>
+  </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.Company</name>
+   <field>Document.WithholdingTaxInvoice.Attribute.Company</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="9a4aa5d5-bbcc-495e-8f7d-8eef4025b7e8">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="6f17d5fc-b9fb-4c51-8e9b-d68d31946301">
+  <name>ListForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="04871200-544d-48cb-a8cb-f73205457317">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="f85f730a-c846-4724-ac2c-5441d49acea9">
+  <producedTypes>
+   <objectType typeId="9353cd92-1d92-4e82-b742-6a725b554e03" valueTypeId="558909a7-6d22-4348-bec7-0360750c8e6a"/>
+   <rowType typeId="38a32e79-c8a4-467e-a2a4-628fde661994" valueTypeId="bf507f0f-5317-481e-a716-2e07a398fb3d"/>
+  </producedTypes>
+  <name>ItemList</name>
+  <synonym>
+   <key>tr</key>
+   <value>Malzeme listesi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Товары</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item list</value>
+  </synonym>
+  <attributes uuid="186e5dd1-01db-4d5e-9299-8cadb89a229f">
+   <name>Key</name>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2dc6e3ed-8bf7-43fe-bf95-68308eed93d7">
+   <name>Item</name>
+   <synonym>
+    <key>tr</key>
+    <value>Malzeme</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Номенклатура</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Item</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Items</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="47b55c17-2dde-4799-ab38-b0aae10ca7f1">
+   <name>ItemKey</name>
+   <synonym>
+    <key>tr</key>
+    <value>Varyant</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Item key</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ItemKeys</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameterLinks>
+    <name>Filter.Item</name>
+    <changeMode>DontChange</changeMode>
+    <field>Document.WithholdingTaxInvoice.TabularSection.ItemList.Attribute.Item</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="88fbf82f-08f8-4114-ac42-0d7bb5304fb5">
+   <name>Unit</name>
+   <synonym>
+    <key>tr</key>
+    <value>Unit</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Unit</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Unit</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Units</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Item</name>
+    <changeMode>DontChange</changeMode>
+    <field>Document.WithholdingTaxInvoice.TabularSection.ItemList.Attribute.Item</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e1f327ba-362e-4c7a-af1c-b0ee7daeb071">
+   <name>Quantity</name>
+   <synonym>
+    <key>tr</key>
+    <value>Quantity</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Quantity</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Quantity</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="bf9c19b2-74aa-443e-b099-5ce960a003b4">
+   <name>Price</name>
+   <synonym>
+    <key>tr</key>
+    <value>Fiyat</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Цена</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Price</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typePrice</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="8545c100-7a79-47a6-906e-332e61c30ab0">
+   <name>PriceType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Fiyat tipi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Тип цен</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Price type</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.PriceTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="5ca4e775-cfc2-4f54-9161-58dbb49d3a5c">
+   <name>TaxAmount</name>
+   <synonym>
+    <key>tr</key>
+    <value>Vergi tutarı</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма налогов</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Tax amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="402526f3-00cd-488e-8160-82cbd6bdf65f">
+   <name>TotalAmount</name>
+   <synonym>
+    <key>tr</key>
+    <value>Toplam tutar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Итого</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Total amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a83e789a-8c77-451d-a180-1f3769afe2bf">
+   <name>NetAmount</name>
+   <synonym>
+    <key>tr</key>
+    <value>Net tutar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма без налогов</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Net amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="2ce41679-5176-4f8e-b096-ac2faee9e19f">
+   <name>ProfitLossCenter</name>
+   <synonym>
+    <key>tr</key>
+    <value>Kar/Zarar merkezi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Центр прибылей/убытков</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Profit loss center</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a1fb68d1-0d9b-4a14-9288-353cc7b57be8">
+   <name>ExpenseType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Gider tipi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Статья затрат</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Expense type</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9c6171e1-1e83-4a0b-a7e8-ad1d4eae0682">
+   <name>AdditionalAnalytic</name>
+   <synonym>
+    <key>tr</key>
+    <value>Ek detaylar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Дополнительная аналитика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Additional analytic</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="75fd40d0-b62f-4430-aae1-01707e277b15">
+   <name>DontCalculateRow</name>
+   <synonym>
+    <key>tr</key>
+    <value>Satır hesaplanmayacak</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Не рассчитывать строки</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Dont calculate row</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="39db1f2b-62dc-4d4d-b625-28bb6f08fc8d">
+   <name>QuantityInBaseUnit</name>
+   <synonym>
+    <key>tr</key>
+    <value>Stok miktarı</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Количество остатков</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Stock quantity</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="3f992d55-40a5-4a25-8c76-181f6b85254a">
+   <name>IsService</name>
+   <synonym>
+    <key>tr</key>
+    <value>Bu hizmet</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Это услуга</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Is service</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="e8c9a736-645b-4a82-8371-2c618da7cb7e">
+   <name>QuantityIsFixed</name>
+   <synonym>
+    <key>tr</key>
+    <value>Miktar sabitlendi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Количество исправлено</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Quantity is fixed</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="48465088-a433-4db3-86eb-0fe0477be260">
+   <name>VatRate</name>
+   <synonym>
+    <key>tr</key>
+    <value>KDV</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>НДС</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>VAT</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="708f6d2a-3165-444c-bb26-6b5f2c5cffaa">
+   <name>Project</name>
+   <synonym>
+    <key>tr</key>
+    <value>Proje</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Проект</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Project</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Projects</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="dcf56afa-097c-40d4-b9be-0f517be9eb25">
+   <name>WithholdingTaxAmount</name>
+   <synonym>
+    <key>tr</key>
+    <value>Stopaj tutar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Withholding tax amount</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Withholding tax amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="71598bfe-6b79-489b-b36f-25ec24567d50">
+   <name>WithholdingTaxRate</name>
+   <synonym>
+    <key>tr</key>
+    <value>Stopaj oranı</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Withholding tax rate</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Withholding tax rate</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="8208f8e7-cbca-47b3-8e78-b97b83a650d3">
+   <name>BruttoAmount</name>
+   <synonym>
+    <key>tr</key>
+    <value>Brutto tutar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Brutto amount</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Brutto amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="44696ce2-6878-458e-8533-cd17c17141f0">
+  <producedTypes>
+   <objectType typeId="55ae3f84-a113-4008-878d-25f9fbb4f9a9" valueTypeId="7c11dbb6-8679-44b4-b942-eb162c87bd5b"/>
+   <rowType typeId="76875ec7-ea28-450e-ab09-7d90d26342df" valueTypeId="038265fa-dc5b-41f1-bda3-8c524778aafb"/>
+  </producedTypes>
+  <name>Currencies</name>
+  <synonym>
+   <key>tr</key>
+   <value>Dövizler</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currencies</value>
+  </synonym>
+  <attributes uuid="b56f21a4-9fe4-439c-a23d-db2a4e11cdbe">
+   <name>Key</name>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="e40b64e3-92f1-4a4d-a1bc-2e09e0a594ab">
+   <name>CurrencyFrom</name>
+   <synonym>
+    <key>tr</key>
+    <value>Dövizden</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>С валюты</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Currency from</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Currencies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="f4963c85-c2cc-4829-9fc4-b6e88c98734b">
+   <name>Rate</name>
+   <synonym>
+    <key>tr</key>
+    <value>Oran</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ставка</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Rate</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="1690e95f-787c-4f71-9236-94f55d6517e0">
+   <name>ReverseRate</name>
+   <synonym>
+    <key>tr</key>
+    <value>Ters kur</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Обратный курс</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Reverse rate</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6053e603-8cfb-4e8e-8135-15f54f947642">
+   <name>ShowReverseRate</name>
+   <synonym>
+    <key>tr</key>
+    <value>Ters kur göster</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Показать обратный курс</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Show reverse rate</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="e83c8d54-b162-4e1a-b8d0-82964dd06160">
+   <name>Multiplicity</name>
+   <synonym>
+    <key>tr</key>
+    <value>Çarpan</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Кратность</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Multiplicity</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d9b9d7e7-b284-492c-82c0-949435cbaf85">
+   <name>MovementType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Hareket tipi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вид движения</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Movement type</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="486318e8-6765-4eca-9e50-cd34738eb46c">
+   <name>Amount</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="990f45b9-f26b-4718-b38b-6315a0fe4304">
+   <name>IsFixed</name>
+   <synonym>
+    <key>tr</key>
+    <value>Sabittir</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Фиксированный</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Is fixed</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="258ef778-5819-4d14-95ca-154afbbce359">
+  <producedTypes>
+   <objectType typeId="188dbb1c-27e1-4fb8-ab27-f4835b06c15c" valueTypeId="708a6d46-1c88-4a78-a51a-4854e6039453"/>
+   <rowType typeId="5711b648-d624-4ec3-b57b-47870b038bc4" valueTypeId="e1601f40-61fd-499f-9b2e-6a4dcb0bcb3a"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <attributes uuid="ca8c9c55-2d4e-4291-9c66-a38ad987db1f">
+   <name>Property</name>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Свойство</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="130c30c0-da81-4912-a16d-10bf3208e407">
+   <name>Value</name>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.WithholdingTaxInvoice.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+</mdclass:Document>

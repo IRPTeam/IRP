@@ -235,6 +235,7 @@
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
    <types>DocumentRef.PurchaseReturn</types>
+   <types>DocumentRef.WithholdingTaxInvoice</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

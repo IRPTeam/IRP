@@ -28,6 +28,31 @@ Function _GetVatRef() Export
 	Return _vat;
 EndFunction
 
+Function GetWithholdingTaxRef() Export
+	Return ServerReuse.GetWithholdingTaxRef();
+EndFunction
+
+Function _GetWithholdingTaxRef() Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 1
+	|	Taxes.Ref
+	|FROM
+	|	Catalog.Taxes AS Taxes
+	|WHERE
+	|	Taxes.Kind = VALUE(Enum.TaxKind.WithholdingTax)
+	|	AND NOT Taxes.DeletionMark";
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	_vat = Undefined;
+	If QuerySelection.Next() Then
+		_vat = QuerySelection.Ref;
+	EndIf;
+	Return _vat;
+EndFunction
+
+
+
 Function GetVatRateByPriority(Parameters) Export
 	
 	_vat = GetVatRef();

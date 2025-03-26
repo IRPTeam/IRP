@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8295c536-07b3-4fad-aa7d-18abb7dff25d">
+ <name>DocWithholdingTaxInvoiceClient</name>
+ <synonym>
+  <key>tr</key>
+  <value>Belge serbest meslek makbuzu client</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Doc withholding tax invoice client</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc withholding tax invoice client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

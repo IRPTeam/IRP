@@ -570,6 +570,8 @@
  <roles>Role.Document_StockCorrection</roles>
  <roles>Role.Document_ShipmentPlaningOrder</roles>
  <roles>Role.AccumulationRegisters_R9610T_ShipmentPlaning</roles>
+ <roles>Role.Document_WithholdingTaxInvoice</roles>
+ <roles>Role.AccumulationRegisters_R3040B_WithholdingTax</roles>
  <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -915,6 +917,8 @@
  <commonModules>CommonModule.NumberingRulesClientServer</commonModules>
  <commonModules>CommonModule.DocShipmentPlaningOrderClient</commonModules>
  <commonModules>CommonModule.DocShipmentPlaningOrderServer</commonModules>
+ <commonModules>CommonModule.DocWithholdingTaxInvoiceClient</commonModules>
+ <commonModules>CommonModule.DocWithholdingTaxInvoiceServer</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
  <commonAttributes>CommonAttribute.Branch</commonAttributes>
  <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1403,6 +1407,7 @@
  <documents>Document.ELedgerRegistry</documents>
  <documents>Document.StockCorrection</documents>
  <documents>Document.ShipmentPlaningOrder</documents>
+ <documents>Document.WithholdingTaxInvoice</documents>
  <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
  <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
  <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1772,6 +1777,7 @@
  <accumulationRegisters>AccumulationRegister.R5020B_PartnersBalance</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.T1040T_RowIDSerialLotNumbers</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R9610T_ShipmentPlaning</accumulationRegisters>
+ <accumulationRegisters>AccumulationRegister.R3040B_WithholdingTax</accumulationRegisters>
  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

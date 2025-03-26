@@ -469,7 +469,7 @@ Function R5020B_PartnersBalance_BR_CR() Export
 		|	PaymentList.IsOtherPartner";
 EndFunction
 
-Function R5020B_PartnersBalance_PI() Export
+Function R5020B_PartnersBalance_PI_WTI() Export
 	Return 
 		// Vendor transaction
 		"SELECT

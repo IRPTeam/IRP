@@ -25,6 +25,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.WithholdingTaxInvoice</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.PurchaseReturnOrder</metadata>
   <use>Use</use>
  </content>

@@ -16,9 +16,7 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		FormParameters.Insert("Filter", New Structure("Basises, Ref", ArrayOf_SalesOrder, PredefinedValue("Document.WorkOrder.EmptyRef")));
 		FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo());
 		FormParameters.Insert("SetAllCheckedOnOpen", True);
-
-		OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-			New NotifyDescription("AddDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+		RowIDInfoClient.OpenForm_AddLinkedDocumentRows(Undefined, ThisObject, FormParameters, "AddDocumentRowsContinue");
 	ElsIf ArrayOf_Issue.Count() > 0 Then       
 		FillingValues = New Structure;
 		FillingValues.Insert("BasedOn", ArrayOf_Issue);
@@ -30,7 +28,7 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 EndProcedure
 
 &AtClient
-Procedure AddDocumentRowsContinue(Result, AdditionalParameters) Export
+Procedure AddDocumentRowsContinue(Result, NotifyParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;

@@ -21,6 +21,10 @@ Function GetVatRef() Export
 	Return TaxesServer._GetVatRef();
 EndFunction
 
+Function GetWithholdingTaxRef() Export
+	Return TaxesServer._GetWithholdingTaxRef();
+EndFunction
+
 // Get item info
 
 Function ItemPriceInfo(Parameter_Period, Parameter_ItemKey, Parameter_Unit, Parameter_PriceType) Export

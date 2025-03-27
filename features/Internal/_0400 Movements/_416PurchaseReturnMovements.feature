@@ -417,13 +417,13 @@ Scenario: _041615 check Purchase return with serial lot numbers movements by the
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 232 dated 14.03.2021 19:21:16'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                 | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                | 'Expense'       | '14.03.2021 19:21:16'   | '10'          | 'Store 02'     | 'S/Yellow'   | '0512'                 |
-			| ''                                                | 'Expense'       | '14.03.2021 19:21:16'   | '12'          | 'Store 02'     | '37/18SD'    | ''                     |
+			| 'Purchase return 232 dated 14.03.2021 19:21:16'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                 | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                | 'Expense'       | '14.03.2021 19:21:16'   | '10'          | 'Store 02'     | 'S/Yellow'   | '0512'                 | ''                     |
+			| ''                                                | 'Expense'       | '14.03.2021 19:21:16'   | '12'          | 'Store 02'     | '37/18SD'    | ''                     | ''                     |
 		And I close all client application windows
 		
 			

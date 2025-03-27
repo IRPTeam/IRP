@@ -825,16 +825,16 @@ Scenario: _0401025 check Purchase invoice movements by the Register  "R4010 Actu
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 195 dated 02.11.2022 16:31:38' | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Document registrations records'                 | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Register  "R4010 Actual stocks"'                | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
-			| ''                                               | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Store 02'   | 'ODS'      | '1123'              |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'UNIQ'     | '0512'              |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'UNIQ'     | '11111111111111'    |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'M/Black'  | ''                  |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '14'        | 'Store 02'   | 'XL/Red'   | ''                  |		
+			| 'Purchase invoice 195 dated 02.11.2022 16:31:38' | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| 'Register  "R4010 Actual stocks"'                | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  | ''                     |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' | 'Source of origin'     |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Store 02'   | 'ODS'      | '1123'              | ''                     |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'UNIQ'     | '0512'              | ''                     |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'UNIQ'     | '11111111111111'    | ''                     |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Store 02'   | 'M/Black'  | ''                  | ''                     |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '14'        | 'Store 02'   | 'XL/Red'   | ''                  | ''                     |		
 		And I close all client application windows
 
 Scenario: _0401026 check Purchase invoice movements by the Register  "R4011 Free stocks" (Receipt from consignor)

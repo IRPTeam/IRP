@@ -236,6 +236,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(SerialLotNumbers());
+	QueryArray.Add(SourceOfOrigins());
 	QueryArray.Add(IncomingStocksReal());
 	QueryArray.Add(OrderItemList());
 	QueryArray.Add(Exists_R4035B_IncomingStocks());

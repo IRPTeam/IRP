@@ -1074,76 +1074,97 @@ Function R5011B_CustomersAging()
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	CASE
-		   |		WHEN ItemList.SerialLotNumber.StockBalanceDetail
-		   |			THEN ItemList.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END SerialLotNumber,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Quantity
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ShipmentToTradeAgent.Period,
-		   |	CASE
-		   |		WHEN ShipmentToTradeAgent.SerialLotNumber.StockBalanceDetail
-		   |			THEN ShipmentToTradeAgent.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END SerialLotNumber,
-		   |	ShipmentToTradeAgent.StoreTradeAgent,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	ShipmentToTradeAgent.Quantity
-		   |FROM
-		   |	ShipmentToTradeAgent
-		   |WHERE
-		   |	TRUE
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ShipmentToTradeAgent.Period,
-		   |	CASE
-		   |		WHEN ShipmentToTradeAgent.SerialLotNumber.StockBalanceDetail
-		   |			THEN ShipmentToTradeAgent.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END SerialLotNumber,
-		   |	ShipmentToTradeAgent.Store,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	ShipmentToTradeAgent.Quantity
-		   |FROM
-		   |	ShipmentToTradeAgent
-		   |WHERE
-		   |	TRUE
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ReceiptFromConsignor.Period,
-		   |	CASE
-		   |		WHEN ReceiptFromConsignor.SerialLotNumber.StockBalanceDetail
-		   |			THEN ReceiptFromConsignor.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END SerialLotNumber,
-		   |	ReceiptFromConsignor.Store,
-		   |	ReceiptFromConsignor.ItemKey,
-		   |	ReceiptFromConsignor.Quantity
-		   |FROM
-		   |	ReceiptFromConsignor
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	CASE
+		|		WHEN ItemList.SerialLotNumber.StockBalanceDetail
+		|			THEN ItemList.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END SerialLotNumber,
+		|	CASE
+		|		WHEN ItemList.SourceOfOrigin.StockBalanceDetail
+		|			THEN ItemList.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END SourceOfOrigin,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Quantity
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ShipmentToTradeAgent.Period,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SerialLotNumber.StockBalanceDetail
+		|			THEN ShipmentToTradeAgent.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END SerialLotNumber,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SourceOfOrigin.StockBalanceDetail
+		|			THEN ShipmentToTradeAgent.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END SourceOfOrigin,
+		|	ShipmentToTradeAgent.StoreTradeAgent,
+		|	ShipmentToTradeAgent.ItemKey,
+		|	ShipmentToTradeAgent.Quantity
+		|FROM
+		|	ShipmentToTradeAgent
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ShipmentToTradeAgent.Period,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SerialLotNumber.StockBalanceDetail
+		|			THEN ShipmentToTradeAgent.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END SerialLotNumber,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SourceOfOrigin.StockBalanceDetail
+		|			THEN ShipmentToTradeAgent.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END SourceOfOrigin,
+		|	ShipmentToTradeAgent.Store,
+		|	ShipmentToTradeAgent.ItemKey,
+		|	ShipmentToTradeAgent.Quantity
+		|FROM
+		|	ShipmentToTradeAgent
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ReceiptFromConsignor.Period,
+		|	CASE
+		|		WHEN ReceiptFromConsignor.SerialLotNumber.StockBalanceDetail
+		|			THEN ReceiptFromConsignor.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END SerialLotNumber,
+		|	CASE
+		|		WHEN ReceiptFromConsignor.SourceOfOrigin.StockBalanceDetail
+		|			THEN ReceiptFromConsignor.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END SourceOfOrigin,
+		|	ReceiptFromConsignor.Store,
+		|	ReceiptFromConsignor.ItemKey,
+		|	ReceiptFromConsignor.Quantity
+		|FROM
+		|	ReceiptFromConsignor
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R4011B_FreeStocks()

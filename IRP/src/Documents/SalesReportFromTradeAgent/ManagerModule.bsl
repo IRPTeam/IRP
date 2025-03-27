@@ -232,10 +232,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -243,6 +239,27 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(SourceOfOrigins());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R2001T_Sales());
+	QueryArray.Add(R2020B_AdvancesFromCustomers());
+	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R2040B_TaxesIncoming());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R5020B_PartnersBalance());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return "SELECT
@@ -356,23 +373,6 @@ EndFunction
 
 #Region Posting_MainTables
 
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R2001T_Sales());
-	QueryArray.Add(R2020B_AdvancesFromCustomers());
-	QueryArray.Add(R2021B_CustomersTransactions());
-	QueryArray.Add(R2040B_TaxesIncoming());
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R5010B_ReconciliationStatement());
-	QueryArray.Add(R5021T_Revenues());
-	QueryArray.Add(R9010B_SourceOfOriginStock());
-	QueryArray.Add(T2015S_TransactionsInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
-	QueryArray.Add(R5020B_PartnersBalance());
-	Return QueryArray;
-EndFunction
-
 Function R9010B_SourceOfOriginStock()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
@@ -475,38 +475,52 @@ Function R4050B_StockInventory()
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.TradeAgentStore AS Store,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END AS SerialLotNumber,
-		   |	SUM(CASE
-		   |		WHEN SerialLotNumbers.SerialLotNumber IS NULL
-		   |			THEN ItemList.Quantity
-		   |		ELSE SerialLotNumbers.Quantity
-		   |	END) AS Quantity
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
-		   |		ON ItemList.Key = SerialLotNumbers.Key
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.Period,
-		   |	ItemList.TradeAgentStore,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.TradeAgentStore AS Store,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end AS SourceOfOrigin,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|		left join SourceOfOrigins AS SourceOfOrigins
+		|		on ItemList.Key = SourceOfOrigins.Key
+		|		and SerialLotNumbers.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
+		|WHERE
+		|	NOT ItemList.IsService
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END";
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()

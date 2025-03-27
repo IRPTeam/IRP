@@ -389,7 +389,7 @@ Function R4010B_ActualStocks()
 		|		ON ItemList.Key = SerialLotNumbers.Key
 		|		left join SourceOfOrigins AS SourceOfOrigins
 		|		on ItemList.Key = SourceOfOrigins.Key
-		|		and SerialLotNumbers.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
+		|		and SerialLotNumbers.SerialLotNumber = SourceOfOrigins.SerialLotNumber
 		|WHERE
 		|	TRUE
 		|GROUP BY

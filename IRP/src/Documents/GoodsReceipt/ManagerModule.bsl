@@ -455,6 +455,44 @@ Function OrderItemList()
 		|		AND SalesOrderItemList.ItemKey <> tmp3.ItemKey";	
 EndFunction
 
+Function SourceOfOrigins()
+	Return 
+		"SELECT
+		|	SourceOfOrigins.Key AS Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
+		|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
+		|	SUM(SourceOfOrigins.Quantity) AS Quantity
+		|INTO SourceOfOrigins
+		|FROM
+		|	Document.GoodsReceipt.SourceOfOrigins AS SourceOfOrigins
+		|WHERE
+		|	SourceOfOrigins.Ref = &Ref
+		|GROUP BY
+		|	SourceOfOrigins.Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END,
+		|	SourceOfOrigins.SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumber";
+EndFunction
+
 Function Exists_R4035B_IncomingStocks()
 	Return "SELECT *
 		   |	INTO Exists_R4035B_IncomingStocks

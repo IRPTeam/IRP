@@ -822,11 +822,11 @@ Scenario: _1035 create document Production
 			And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "R4010 Actual stocks"'    | ''               | ''                        | ''             | ''              | ''                                           | ''                      |
-				| ''                                   | 'Record type'    | 'Period'                  | 'Resources'    | 'Dimensions'    | ''                                           | ''                      |
-				| ''                                   | ''               | ''                        | 'Quantity'     | 'Store'         | 'Item key'                                   | 'Serial lot number'     |
-				| ''                                   | 'Receipt'        | '$$DateProduction02$$'    | '20'           | 'Store 05'      | 'Копыта на стремянки Класс 20х20, черный'    | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction02$$'    | '19,6'         | 'Store 05'      | 'ПВД 158'                                    | ''                      |
+				| 'Register  "R4010 Actual stocks"'    | ''               | ''                        | ''             | ''              | ''                                           | ''                      | ''                      |
+				| ''                                   | 'Record type'    | 'Period'                  | 'Resources'    | 'Dimensions'    | ''                                           | ''                      | ''                      |
+				| ''                                   | ''               | ''                        | 'Quantity'     | 'Store'         | 'Item key'                                   | 'Serial lot number'     | 'Source of origin'      |
+				| ''                                   | 'Receipt'        | '$$DateProduction02$$'    | '20'           | 'Store 05'      | 'Копыта на стремянки Класс 20х20, черный'    | ''                      | ''                      |
+				| ''                                   | 'Expense'        | '$$DateProduction02$$'    | '19,6'         | 'Store 05'      | 'ПВД 158'                                    | ''                      | ''                      |
 			And I input "" text in "Register" field
 			And I select "R7010 Detailing supplies" exact value from "Register" drop-down list
 			And I click "Generate report" button			
@@ -1146,19 +1146,19 @@ Scenario: _1035 create document Production
 			And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "R4010 Actual stocks"'    | ''               | ''                        | ''             | ''              | ''                                           | ''                      |
-				| ''                                   | 'Record type'    | 'Period'                  | 'Resources'    | 'Dimensions'    | ''                                           | ''                      |
-				| ''                                   | ''               | ''                        | 'Quantity'     | 'Store'         | 'Item key'                                   | 'Serial lot number'     |
-				| ''                                   | 'Receipt'        | '$$DateProduction01$$'    | '10'           | 'Store 05'      | 'Стремянка номер 6 ступенчатая'              | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '10'           | 'Store 05'      | 'Краска порошковая серая 9006'               | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '10'           | 'Store 05'      | 'Коврик для стремянок Класс, черный'         | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '20'           | 'Store 05'      | 'Катанка Ст3сп 6,5'                          | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '20'           | 'Store 05'      | 'труба электросварная круглая 10х1х5660'     | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '20'           | 'Store 05'      | 'Копыта на стремянки Класс 20х20, черный'    | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '20'           | 'Store 05'      | 'Копыта на стремянки Класс 30х20, черный'    | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '50'           | 'Store 05'      | 'Втулка на стремянки Класс 10 мм, черный'    | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '100'          | 'Store 05'      | 'Скобы 3515 (Упаковочные)'                   | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '150'          | 'Store 05'      | 'Заклепка 6х47 полупустотелая'               | ''                      |
+				| 'Register  "R4010 Actual stocks"'    | ''               | ''                        | ''             | ''              | ''                                           | ''                      | ''                      |
+				| ''                                   | 'Record type'    | 'Period'                  | 'Resources'    | 'Dimensions'    | ''                                           | ''                      | ''                      |
+				| ''                                   | ''               | ''                        | 'Quantity'     | 'Store'         | 'Item key'                                   | 'Serial lot number'     | 'Source of origin'      |
+				| ''                                   | 'Receipt'        | '$$DateProduction01$$'    | '10'           | 'Store 05'      | 'Стремянка номер 6 ступенчатая'              | ''                      | ''                      |
+				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '10'           | 'Store 05'      | 'Краска порошковая серая 9006'               | ''                      | ''                      |
+				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '10'           | 'Store 05'      | 'Коврик для стремянок Класс, черный'         | ''                      | ''                      |
+				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '20'           | 'Store 05'      | 'Катанка Ст3сп 6,5'                          | ''                      | ''                      |
+				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '20'           | 'Store 05'      | 'труба электросварная круглая 10х1х5660'     | ''                      | ''                      |
+				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '20'           | 'Store 05'      | 'Копыта на стремянки Класс 20х20, черный'    | ''                      | ''                      |
+				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '20'           | 'Store 05'      | 'Копыта на стремянки Класс 30х20, черный'    | ''                      | ''                      |
+				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '50'           | 'Store 05'      | 'Втулка на стремянки Класс 10 мм, черный'    | ''                      | ''                      |
+				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '100'          | 'Store 05'      | 'Скобы 3515 (Упаковочные)'                   | ''                      | ''                      |
+				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '150'          | 'Store 05'      | 'Заклепка 6х47 полупустотелая'               | ''                      | ''                      |
 			And I close all client application windows
 
 
@@ -1280,19 +1280,19 @@ Scenario: _1036 check Production movements when unpost, re-post document
 			And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "R4010 Actual stocks"'    | ''               | ''                        | ''             | ''              | ''                                           | ''                      |
-				| ''                                   | 'Record type'    | 'Period'                  | 'Resources'    | 'Dimensions'    | ''                                           | ''                      |
-				| ''                                   | ''               | ''                        | 'Quantity'     | 'Store'         | 'Item key'                                   | 'Serial lot number'     |
-				| ''                                   | 'Receipt'        | '$$DateProduction01$$'    | '10'           | 'Store 05'      | 'Стремянка номер 6 ступенчатая'              | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '10'           | 'Store 05'      | 'Краска порошковая серая 9006'               | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '10'           | 'Store 05'      | 'Коврик для стремянок Класс, черный'         | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '20'           | 'Store 05'      | 'Катанка Ст3сп 6,5'                          | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '20'           | 'Store 05'      | 'труба электросварная круглая 10х1х5660'     | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '20'           | 'Store 05'      | 'Копыта на стремянки Класс 20х20, черный'    | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '20'           | 'Store 05'      | 'Копыта на стремянки Класс 30х20, черный'    | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '50'           | 'Store 05'      | 'Втулка на стремянки Класс 10 мм, черный'    | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '100'          | 'Store 05'      | 'Скобы 3515 (Упаковочные)'                   | ''                      |
-				| ''                                   | 'Expense'        | '$$DateProduction01$$'    | '150'          | 'Store 05'      | 'Заклепка 6х47 полупустотелая'               | ''                      |
+				| 'Register  "R4010 Actual stocks"' | ''            | ''                     | ''          | ''           | ''                                        | ''                  | ''                 |
+				| ''                                | 'Record type' | 'Period'               | 'Resources' | 'Dimensions' | ''                                        | ''                  | ''                 |
+				| ''                                | ''            | ''                     | 'Quantity'  | 'Store'      | 'Item key'                                | 'Serial lot number' | 'Source of origin' |
+				| ''                                | 'Receipt'     | '$$DateProduction01$$' | '10'        | 'Store 05'   | 'Стремянка номер 6 ступенчатая'           | ''                  | ''                 |
+				| ''                                | 'Expense'     | '$$DateProduction01$$' | '10'        | 'Store 05'   | 'Краска порошковая серая 9006'            | ''                  | ''                 |
+				| ''                                | 'Expense'     | '$$DateProduction01$$' | '10'        | 'Store 05'   | 'Коврик для стремянок Класс, черный'      | ''                  | ''                 |
+				| ''                                | 'Expense'     | '$$DateProduction01$$' | '20'        | 'Store 05'   | 'Катанка Ст3сп 6,5'                       | ''                  | ''                 |
+				| ''                                | 'Expense'     | '$$DateProduction01$$' | '20'        | 'Store 05'   | 'труба электросварная круглая 10х1х5660'  | ''                  | ''                 |
+				| ''                                | 'Expense'     | '$$DateProduction01$$' | '20'        | 'Store 05'   | 'Копыта на стремянки Класс 20х20, черный' | ''                  | ''                 |
+				| ''                                | 'Expense'     | '$$DateProduction01$$' | '20'        | 'Store 05'   | 'Копыта на стремянки Класс 30х20, черный' | ''                  | ''                 |
+				| ''                                | 'Expense'     | '$$DateProduction01$$' | '50'        | 'Store 05'   | 'Втулка на стремянки Класс 10 мм, черный' | ''                  | ''                 |
+				| ''                                | 'Expense'     | '$$DateProduction01$$' | '100'       | 'Store 05'   | 'Скобы 3515 (Упаковочные)'                | ''                  | ''                 |
+				| ''                                | 'Expense'     | '$$DateProduction01$$' | '150'       | 'Store 05'   | 'Заклепка 6х47 полупустотелая'            | ''                  | ''                 |
 			And I close all client application windows
 
 			
@@ -1682,13 +1682,13 @@ Scenario: _10342 check movements Production (Repacking)
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$Production1041$$'                | ''              | ''                         | ''            | ''             | ''                                | ''                     |
-			| 'Document registrations records'    | ''              | ''                         | ''            | ''             | ''                                | ''                     |
-			| 'Register  "R4010 Actual stocks"'   | ''              | ''                         | ''            | ''             | ''                                | ''                     |
-			| ''                                  | 'Record type'   | 'Period'                   | 'Resources'   | 'Dimensions'   | ''                                | ''                     |
-			| ''                                  | ''              | ''                         | 'Quantity'    | 'Store'        | 'Item key'                        | 'Serial lot number'    |
-			| ''                                  | 'Receipt'       | '$$DateProduction1041$$'   | '2'           | 'Store 02'     | 'Стремянка номер 5 ступенчатая'   | ''                     |
-			| ''                                  | 'Expense'       | '$$DateProduction1041$$'   | '2'           | 'Store 03'     | 'Стремянка номер 8'               | ''                     |
+			| '$$Production1041$$'              | ''            | ''                       | ''          | ''           | ''                              | ''                  | ''                 |
+			| 'Document registrations records'  | ''            | ''                       | ''          | ''           | ''                              | ''                  | ''                 |
+			| 'Register  "R4010 Actual stocks"' | ''            | ''                       | ''          | ''           | ''                              | ''                  | ''                 |
+			| ''                                | 'Record type' | 'Period'                 | 'Resources' | 'Dimensions' | ''                              | ''                  | ''                 |
+			| ''                                | ''            | ''                       | 'Quantity'  | 'Store'      | 'Item key'                      | 'Serial lot number' | 'Source of origin' |
+			| ''                                | 'Receipt'     | '$$DateProduction1041$$' | '2'         | 'Store 02'   | 'Стремянка номер 5 ступенчатая' | ''                  | ''                 |
+			| ''                                | 'Expense'     | '$$DateProduction1041$$' | '2'         | 'Store 03'   | 'Стремянка номер 8'             | ''                  | ''                 |
 	* R4011 Free stocks
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button

@@ -285,38 +285,41 @@ Function SerialLotNumbers()
 EndFunction
 
 Function SourceOfOrigins()
-	Return "SELECT
-		   |	SourceOfOrigins.Key AS Key,
-		   |	CASE
-		   |		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
-		   |			THEN SourceOfOrigins.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END AS SerialLotNumber,
-		   |	CASE
-		   |		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
-		   |			THEN SourceOfOrigins.SourceOfOrigin
-		   |		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		   |	END AS SourceOfOrigin,
-		   |	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
-		   |	SUM(SourceOfOrigins.Quantity) AS Quantity
-		   |INTO SourceOfOrigins
-		   |FROM
-		   |	Document.StockAdjustmentAsWriteOff.SourceOfOrigins AS SourceOfOrigins
-		   |WHERE
-		   |	SourceOfOrigins.Ref = &Ref
-		   |GROUP BY
-		   |	SourceOfOrigins.Key,
-		   |	CASE
-		   |		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
-		   |			THEN SourceOfOrigins.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END,
-		   |	CASE
-		   |		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
-		   |			THEN SourceOfOrigins.SourceOfOrigin
-		   |		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		   |	END,
-		   |	SourceOfOrigins.SourceOfOrigin";
+	Return 
+		"SELECT
+		|	SourceOfOrigins.Key AS Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
+		|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
+		|	SUM(SourceOfOrigins.Quantity) AS Quantity
+		|INTO SourceOfOrigins
+		|FROM
+		|	Document.StockAdjustmentAsWriteOff.SourceOfOrigins AS SourceOfOrigins
+		|WHERE
+		|	SourceOfOrigins.Ref = &Ref
+		|GROUP BY
+		|	SourceOfOrigins.Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END,
+		|	SourceOfOrigins.SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumber";
 EndFunction
 
 #EndRegion
@@ -407,7 +410,7 @@ Function R4010B_ActualStocks()
 		|		ON ItemList.Key = SerialLotNumbers.Key
 		|		left join SourceOfOrigins AS SourceOfOrigins
 		|		on ItemList.Key = SourceOfOrigins.Key
-		|		and SerialLotNumbers.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber,Value(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
 		|WHERE
 		|	NOT ItemList.PhysicalInventoryExists
 		|GROUP BY

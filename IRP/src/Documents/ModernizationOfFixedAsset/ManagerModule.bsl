@@ -328,6 +328,7 @@ Function SourceOfOrigins()
 		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
 		|	END AS SourceOfOrigin,
 		|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
 		|	SUM(SourceOfOrigins.Quantity) AS Quantity
 		|INTO SourceOfOrigins
 		|FROM
@@ -346,7 +347,8 @@ Function SourceOfOrigins()
 		|			THEN SourceOfOrigins.SourceOfOrigin
 		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
 		|	END,
-		|	SourceOfOrigins.SourceOfOrigin";
+		|	SourceOfOrigins.SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumber";
 EndFunction
 
 #EndRegion
@@ -418,7 +420,7 @@ Function R4010B_ActualStocks()
 		|		ON ItemList.Key = SerialLotNumbers.Key
 		|		left join SourceOfOrigins AS SourceOfOrigins
 		|		on ItemList.Key = SourceOfOrigins.Key
-		|		and SerialLotNumbers.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber,Value(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
 		|WHERE
 		|	TRUE
 		|GROUP BY

@@ -3655,7 +3655,53 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
 	|GROUP BY
 	|	BasisesTable.Key,
-	|	SerialLotNumbers.SerialLotNumber";
+	|	SerialLotNumbers.SerialLotNumber
+	|
+	|;
+	|////////////////////////////////////////////////////////////////////////////////////////////
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.ShipmentConfirmation.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|		AND SourceOfOrigins.SerialLotNumber.Ref IS NULL
+	|
+	|UNION ALL
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.ShipmentConfirmation.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|	
+	|	INNER JOIN
+	|	
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS Reg
+	|	
+	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
+	|	AND SourceOfOrigins.Key = Reg.BasisKey
+	|	AND NOT SourceOfOrigins.SerialLotNumber.Ref IS NULL";
+
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3666,6 +3712,7 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 	TableRowIDInfo             = QueryResults[1].Unload();
 	TableShipmentConfirmations = QueryResults[3].Unload();
 	TableSerialLotNumbers      = QueryResults[4].Unload();
+	TableSourceOfOrigins      = QueryResults[5].Unload();
 	
 	Tables = New Structure();
 	Tables.Insert("ItemList"              , TablesSO.ItemList);
@@ -3673,6 +3720,7 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 	Tables.Insert("SpecialOffers"         , TablesSO.SpecialOffers);
 	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
 	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
+	Tables.Insert("SourceOfOrigins"       , TableSourceOfOrigins);
 
 	AddTables(Tables);
 
@@ -4844,7 +4892,52 @@ Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver, AddInfo = Und
 	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
 	|GROUP BY
 	|	BasisesTable.Key,
-	|	SerialLotNumbers.SerialLotNumber";
+	|	SerialLotNumbers.SerialLotNumber
+	|;
+	|
+	|//////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.GoodsReceipt.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|		AND SourceOfOrigins.SerialLotNumber.Ref IS NULL
+	|
+	|UNION ALL
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.GoodsReceipt.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|	
+	|	INNER JOIN
+	|	
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS Reg
+	|	
+	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
+	|	AND SourceOfOrigins.Key = Reg.BasisKey
+	|	AND NOT SourceOfOrigins.SerialLotNumber.Ref IS NULL";
+	
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -4855,6 +4948,7 @@ Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver, AddInfo = Und
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableGoodsReceipts = QueryResults[3].Unload();
 	TableSerialLotNumbers = QueryResults[4].Unload();
+	TableSourceOfOrigins = QueryResults[5].Unload();
 	
 	Tables = New Structure();
 	Tables.Insert("ItemList", TablesPO.ItemList);
@@ -4862,6 +4956,7 @@ Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver, AddInfo = Und
 	Tables.Insert("SpecialOffers", TablesPO.SpecialOffers);
 	Tables.Insert("GoodsReceipts", TableGoodsReceipts);
 	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+	Tables.Insert("SourceOfOrigins", TableSourceOfOrigins);
 
 	AddTables(Tables);
 

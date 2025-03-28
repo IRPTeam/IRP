@@ -120,6 +120,10 @@ Function IsIgnored_Field(Ignored_Fields, DocName, RegName, FieldName)
 		Return True;
 	EndIf;
 	
+	If StrFind(FieldName, "_") = 4 Then
+		Return True; // Field from extension
+	EndIf;
+	
 	ArrayOfFields = New Array();
 			
 	PutFieldsToArray(ArrayOfFields, Ignored_Fields, DocName, RegName);

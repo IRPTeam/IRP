@@ -957,7 +957,7 @@ Function R4010B_ActualStocks()
 		|		ON ItemList.Key = SerialLotNumbers.Key
 		|		left join SourceOfOrigins AS SourceOfOrigins
 		|		on ItemList.Key = SourceOfOrigins.Key
-		|		and SerialLotNumbers.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND NOT ItemList.UseGoodsReceipt
@@ -1006,7 +1006,7 @@ Function R4010B_ActualStocks()
 		|		ON ItemList.Key = SerialLotNumbers.Key
 		|		left join SourceOfOrigins AS SourceOfOrigins
 		|		on ItemList.Key = SourceOfOrigins.Key
-		|		and SerialLotNumbers.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND NOT ItemList.UseGoodsReceipt

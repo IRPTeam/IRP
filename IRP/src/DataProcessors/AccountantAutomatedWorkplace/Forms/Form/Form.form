@@ -223,7 +223,7 @@
      </presentation>
      <presentation>
       <key>ru</key>
-      <value>Unlocked</value>
+      <value>Не заблокированные</value>
      </presentation>
      <presentation>
       <key>en</key>
@@ -312,7 +312,7 @@
      </presentation>
      <presentation>
       <key>ru</key>
-      <value>With files</value>
+      <value>Имеющие файлы</value>
      </presentation>
      <presentation>
       <key>en</key>
@@ -329,7 +329,7 @@
      </presentation>
      <presentation>
       <key>ru</key>
-      <value>No file</value>
+      <value>Нет файла</value>
      </presentation>
      <presentation>
       <key>en</key>
@@ -1041,7 +1041,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Document list form group</value>
+       <value>Группа формы скиска документов</value>
       </title>
       <title>
        <key>en</key>
@@ -1370,7 +1370,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Commands JE</value>
+      <value>Команды БухОпераций</value>
      </title>
      <title>
       <key>en</key>
@@ -1464,7 +1464,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Group of report</value>
+     <value>Группа отчетов</value>
     </title>
     <title>
      <key>en</key>
@@ -1513,7 +1513,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>No file</value>
+        <value>Нет файла</value>
        </title>
        <title>
         <key>en</key>
@@ -1711,7 +1711,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>First page</value>
+       <value>Первая страница</value>
       </title>
       <title>
        <key>en</key>
@@ -1749,7 +1749,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Group of files</value>
+      <value>Группа файлов</value>
      </title>
      <title>
       <key>en</key>
@@ -1791,7 +1791,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Group of files</value>
+     <value>Группа файлов</value>
     </title>
     <title>
      <key>en</key>
@@ -2208,7 +2208,7 @@ GROUP BY
       </content>
       <content>
        <key>ru</key>
-       <value>File not exist</value>
+       <value>Файл не существует</value>
       </content>
       <content>
        <key>en</key>
@@ -2247,7 +2247,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Accounting report</value>
+   <value>Бухгалтерский отчет</value>
   </title>
   <title>
    <key>en</key>
@@ -2273,7 +2273,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Info updated</value>
+   <value>Обновленная информация</value>
   </title>
   <title>
    <key>en</key>
@@ -2475,7 +2475,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Find</value>
+   <value>Найти</value>
   </title>
   <title>
    <key>en</key>
@@ -2562,7 +2562,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Refresh JE</value>
+   <value>Обновить БухОперацию</value>
   </title>
   <title>
    <key>en</key>
@@ -2591,7 +2591,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Open JE</value>
+   <value>Открыть БухОперацию</value>
   </title>
   <title>
    <key>en</key>

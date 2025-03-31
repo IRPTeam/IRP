@@ -281,12 +281,12 @@ Scenario: _046008 check Sales report from trade agent movements by the Register 
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales report from trade agent 1 dated 03.11.2022 10:53:35' | ''                    | ''           | ''                  | ''         | ''                  | ''         |
-			| 'Register  "R4010 Actual stocks"'                           | ''                    | ''           | ''                  | ''         | ''                  | ''         |
-			| ''                                                          | 'Period'              | 'RecordType' | 'Store'             | 'Item key' | 'Serial lot number' | 'Quantity' |
-			| ''                                                          | '03.11.2022 10:53:35' | 'Expense'    | 'Trade agent store' | 'XS/Blue'  | ''                  | '2'        |
-			| ''                                                          | '03.11.2022 10:53:35' | 'Expense'    | 'Trade agent store' | 'PZU'      | '8908899879'        | '1'        |
-			| ''                                                          | '03.11.2022 10:53:35' | 'Expense'    | 'Trade agent store' | 'UNIQ'     | ''                  | '2'        |	
+			| 'Sales report from trade agent 1 dated 03.11.2022 10:53:35' | ''                    | ''           | ''                  | ''         | ''                  | ''                  | ''         |
+			| 'Register  "R4010 Actual stocks"'                           | ''                    | ''           | ''                  | ''         | ''                  | ''                  | ''         |
+			| ''                                                          | 'Period'              | 'RecordType' | 'Store'             | 'Item key' | 'Serial lot number' | 'Source of origin'  | 'Quantity' |
+			| ''                                                          | '03.11.2022 10:53:35' | 'Expense'    | 'Trade agent store' | 'XS/Blue'  | ''                  | ''                  | '2'        |
+			| ''                                                          | '03.11.2022 10:53:35' | 'Expense'    | 'Trade agent store' | 'PZU'      | '8908899879'        | ''                  | '1'        |
+			| ''                                                          | '03.11.2022 10:53:35' | 'Expense'    | 'Trade agent store' | 'UNIQ'     | ''                  | ''                  | '2'        |	
 		And I close all client application windows
 
 Scenario: _046009 check Sales report from trade agent movements by the Register  "T2015 Transactions info"

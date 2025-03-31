@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Withholding tax invoice</value>
+  <value>Поступление услуг с удерживаемым подоходным налогом</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -61,7 +61,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Withholding tax invoice</value>
+  <value>Поступление услуг с удерживаемым подоходным налогом</value>
  </objectPresentation>
  <objectPresentation>
   <key>en</key>
@@ -73,7 +73,7 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Withholding tax invoices</value>
+  <value>Поступления услуг с удерживаемым подоходным налогом</value>
  </listPresentation>
  <listPresentation>
   <key>en</key>
@@ -503,7 +503,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Quantity</value>
+    <value>Количество</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -831,7 +831,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Withholding tax amount</value>
+    <value>Сумма УПН</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -853,7 +853,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Withholding tax rate</value>
+    <value>Ставка УПН</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -875,7 +875,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Brutto amount</value>
+    <value>Сумма брутто</value>
    </synonym>
    <synonym>
     <key>en</key>

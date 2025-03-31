@@ -2052,7 +2052,7 @@ Function Strings(Lang) Export
 		|ru='Заказ уже закрыт';
 		|tr='Sipariş daha önce kapanmıştı'", Lang));
 	Strings.Insert("Error_179", NStr("en='Number [%1] is already used for [%2]';
-		|ru='Number [%1] is already used for [%2]';
+		|ru='Номер [%1] уже использован для [%2]';
 		|tr='[%1] numarası [%2] için zaten kullanılıyor'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';

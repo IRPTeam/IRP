@@ -5,13 +5,13 @@
   <id>1</id>
   <title>
    <key>tr</key>
-   <value>&lt;b&gt;Result&lt;/&gt; - variable for the calculation result
-&lt;b&gt;Source&lt;/&gt; - reference to the printed object</value>
+   <value>&lt;b&gt;Result&lt;/&gt; - sonuç hesaplamak için değişken
+&lt;b&gt;Source&lt;/&gt; - objeye ref</value>
   </title>
   <title>
    <key>ru</key>
-   <value>&lt;b&gt;Result&lt;/&gt; - variable for the calculation result
-&lt;b&gt;Source&lt;/&gt; - reference to the printed object</value>
+   <value>&lt;b&gt;Result&lt;/&gt; - Переменная что бы посчитать результат
+&lt;b&gt;Source&lt;/&gt; - Ссылка на объект печати</value>
   </title>
   <title>
    <key>en</key>
@@ -252,11 +252,11 @@
   </userVisible>
   <title>
    <key>tr</key>
-   <value>Group of test</value>
+   <value>Group test</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Group of test</value>
+   <value>Группа тестирования</value>
   </title>
   <title>
    <key>en</key>
@@ -374,11 +374,11 @@
   <name>FormulaText</name>
   <title>
    <key>tr</key>
-   <value>Formula text</value>
+   <value>Formül metni</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Formula text</value>
+   <value>Текст формулы</value>
   </title>
   <title>
    <key>en</key>

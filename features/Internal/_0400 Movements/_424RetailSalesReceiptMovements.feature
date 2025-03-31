@@ -153,14 +153,14 @@ Scenario: _042401 check Retail sales receipt movements by the Register  "R4010 A
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| 'Document registrations records'                       | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| 'Register  "R4010 Actual stocks"'                      | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| ''                                                     | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     |
-			| ''                                                     | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    |
-			| ''                                                     | 'Expense'       | '15.03.2021 16:01:04'   | '1'           | 'Store 01'     | 'XS/Blue'     | ''                     |
-			| ''                                                     | 'Expense'       | '15.03.2021 16:01:04'   | '2'           | 'Store 01'     | '38/Yellow'   | ''                     |
-			| ''                                                     | 'Expense'       | '15.03.2021 16:01:04'   | '12'          | 'Store 01'     | '36/18SD'     | ''                     |
+			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Document registrations records'                       | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                      | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| ''                                                     | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     | ''                     |
+			| ''                                                     | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                     | 'Expense'       | '15.03.2021 16:01:04'   | '1'           | 'Store 01'     | 'XS/Blue'     | ''                     | ''                     |
+			| ''                                                     | 'Expense'       | '15.03.2021 16:01:04'   | '2'           | 'Store 01'     | '38/Yellow'   | ''                     | ''                     |
+			| ''                                                     | 'Expense'       | '15.03.2021 16:01:04'   | '12'          | 'Store 01'     | '36/18SD'     | ''                     | ''                     |
 		And I close all client application windows
 
 Scenario: _042402 check Retail sales receipt movements by the Register  "R4011 Free stocks"
@@ -216,14 +216,14 @@ Scenario: _042404 check Retail sales receipt with serial lot number movements by
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 1 112 dated 24.05.2022 14:18:49'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                         | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                        | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                       | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                       | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                       | 'Expense'       | '24.05.2022 14:18:49'   | '5'           | 'Store 03'     | 'PZU'        | '8908899877'           |
-			| ''                                                       | 'Expense'       | '24.05.2022 14:18:49'   | '5'           | 'Store 03'     | 'PZU'        | '8908899879'           |
-			| ''                                                       | 'Expense'       | '24.05.2022 14:18:49'   | '10'          | 'Store 03'     | 'UNIQ'       | ''                     |
+			| 'Retail sales receipt 1 112 dated 24.05.2022 14:18:49'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                         | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                        | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                       | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                       | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                       | 'Expense'       | '24.05.2022 14:18:49'   | '5'           | 'Store 03'     | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                                       | 'Expense'       | '24.05.2022 14:18:49'   | '5'           | 'Store 03'     | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                                       | 'Expense'       | '24.05.2022 14:18:49'   | '10'          | 'Store 03'     | 'UNIQ'       | ''                     | ''                     |
 		And I close all client application windows
 
 Scenario: _042408 check Retail sales receipt movements by the Register  "R2021 Customer transactions"
@@ -435,14 +435,14 @@ Scenario: _042418 check Retail sales receipt movements by the Register  "R4010 A
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Register  "R4010 Actual stocks"'                      | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
-			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '1'         | 'Store 02'   | 'XL/Black' | ''                  |
-			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Store 02'   | 'UNIQ'     | ''                  |
-			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '4'         | 'Store 02'   | 'XL/Green' | ''                  |	
+			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| 'Register  "R4010 Actual stocks"'                      | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  | ''                     |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' | 'Source of origin'     |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '1'         | 'Store 02'   | 'XL/Black' | ''                  | ''                     |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Store 02'   | 'UNIQ'     | ''                  | ''                     |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '4'         | 'Store 02'   | 'XL/Green' | ''                  | ''                     |	
 		And I close all client application windows
 
 Scenario: _042419 check Retail sales receipt movements by the Register  "R4011 Free stocks" (consignor and own stocks) 

@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Shipment planing order</value>
+  <value>Задание на отгрузку товаров</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -61,7 +61,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Shipment planing order</value>
+  <value>Задание на отгрузку товаров</value>
  </objectPresentation>
  <objectPresentation>
   <key>en</key>
@@ -73,7 +73,7 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Shipment planing orders</value>
+  <value>Задания на отгрузку товаров</value>
  </listPresentation>
  <listPresentation>
   <key>en</key>
@@ -173,7 +173,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Shipment start date</value>
+   <value>Дата начала отгрузки</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -200,7 +200,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Shipment end date</value>
+   <value>Дата окончания отгрузки</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -421,7 +421,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Quantity</value>
+    <value>Количество</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -687,7 +687,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Quantity</value>
+    <value>Количество</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -881,7 +881,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Quantity</value>
+    <value>Количество</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -988,7 +988,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Quantity</value>
+    <value>Количество</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -1011,7 +1011,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Shipment planing order</value>
+   <value>Задание на отгрузку товаров</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -1026,7 +1026,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Shipment planing order</value>
+   <value>Задание на отгрузку товаров</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -1047,7 +1047,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Shipment planing order</value>
+   <value>Задание на отгрузку товаров</value>
   </synonym>
   <synonym>
    <key>en</key>

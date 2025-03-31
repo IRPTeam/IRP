@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Print form templates</value>
+  <value>Печатная форма шаблонов</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -122,7 +122,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Print form type</value>
+   <value>Тип формы печати</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -215,11 +215,11 @@
    <name>Expression</name>
    <synonym>
     <key>tr</key>
-    <value>Expression</value>
+    <value>İfade</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Expression</value>
+    <value>Выражение</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -290,11 +290,11 @@
   <name>FormulaEditing</name>
   <synonym>
    <key>tr</key>
-   <value>Formula editing</value>
+   <value>Formula değiştir</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Formula editing</value>
+   <value>Редактирования формулы</value>
   </synonym>
   <synonym>
    <key>en</key>

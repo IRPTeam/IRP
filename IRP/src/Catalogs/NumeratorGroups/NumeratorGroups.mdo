@@ -278,7 +278,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Uniqueness control</value>
+   <value>Контроль уникальности</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -301,7 +301,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Allowed manual editing</value>
+   <value>Разрешено ручное исправление</value>
   </synonym>
   <synonym>
    <key>en</key>

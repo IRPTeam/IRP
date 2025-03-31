@@ -1332,7 +1332,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Quantity</value>
+    <value>Количество</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -1466,7 +1466,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Trailer list</value>
+   <value>Список прицепов</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -1480,7 +1480,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Trailer</value>
+    <value>Прицеп</value>
    </synonym>
    <synonym>
     <key>en</key>

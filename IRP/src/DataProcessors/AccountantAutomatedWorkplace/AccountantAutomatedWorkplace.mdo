@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Accountant automated workplace</value>
+  <value>Рабочее место бухгалтера</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -44,7 +44,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Print form JE</value>
+   <value>Печатная форма БухОперации</value>
   </synonym>
   <synonym>
    <key>en</key>

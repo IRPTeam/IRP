@@ -2989,7 +2989,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Quantity</value>
+    <value>Количество</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -3123,7 +3123,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Shipment planing orders</value>
+   <value>Задания на отгрузку товаров</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -3159,7 +3159,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Shipment planing order</value>
+    <value>Задание на отгрузку товаров</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -3181,7 +3181,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Quantity</value>
+    <value>Количество</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -3202,7 +3202,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Quantity in shipment planing order</value>
+    <value>Количество в задании на отгрузку товаров</value>
    </synonym>
    <synonym>
     <key>en</key>

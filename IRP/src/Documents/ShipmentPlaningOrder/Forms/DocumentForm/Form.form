@@ -3970,7 +3970,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Is unlock store</value>
+     <value>Фиксация с склада снята</value>
     </title>
     <title>
      <key>en</key>
@@ -4161,7 +4161,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Shipment period</value>
+   <value>Период отгрузки</value>
   </title>
   <title>
    <key>en</key>

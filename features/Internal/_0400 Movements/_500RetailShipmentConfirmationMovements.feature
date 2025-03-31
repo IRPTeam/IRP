@@ -130,15 +130,15 @@ Scenario: _050003 check Retail shipment confirmation movements by the Register  
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                               | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                              | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                             | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '1'           | 'Store 01'     | 'PZU'        | '8908899877'           |
-			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '1'           | 'Store 01'     | 'PZU'        | '8908899879'           |
-			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '2'           | 'Store 01'     | 'XS/Blue'    | ''                     |
-			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '2'           | 'Store 01'     | '37/18SD'    | ''                     |
+			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                               | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                              | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                             | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '1'           | 'Store 01'     | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '1'           | 'Store 01'     | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '2'           | 'Store 01'     | 'XS/Blue'    | ''                     | ''                     |
+			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '2'           | 'Store 01'     | '37/18SD'    | ''                     | ''                     |
 	
 
 		

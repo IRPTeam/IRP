@@ -354,7 +354,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Template pages</value>
+     <value>Страницы шаблона</value>
     </title>
     <title>
      <key>en</key>
@@ -799,7 +799,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Parameter preview</value>
+     <value>Параметры просмотра</value>
     </title>
     <title>
      <key>en</key>
@@ -1144,7 +1144,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Objects</value>
+    <value>Объекты</value>
    </title>
    <title>
     <key>en</key>
@@ -1267,7 +1267,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>To delete</value>
+     <value>Для удаления</value>
     </title>
     <title>
      <key>en</key>
@@ -1294,7 +1294,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Template TXT</value>
+   <value>Шаблон TXT</value>
   </title>
   <title>
    <key>en</key>
@@ -1316,11 +1316,11 @@
   <name>EditingMode</name>
   <title>
    <key>tr</key>
-   <value>Editing mode</value>
+   <value>Düzeltme modu</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Editing mode</value>
+   <value>Режим редактирования</value>
   </title>
   <title>
    <key>en</key>
@@ -1345,7 +1345,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Objects list</value>
+   <value>Список объектов</value>
   </title>
   <title>
    <key>en</key>
@@ -1375,7 +1375,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Start editing</value>
+   <value>Начать редактирование</value>
   </title>
   <title>
    <key>en</key>
@@ -1429,11 +1429,11 @@
   <name>OpenExpression</name>
   <title>
    <key>tr</key>
-   <value>Expression</value>
+   <value>İfade</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Expression</value>
+   <value>Выражение</value>
   </title>
   <title>
    <key>en</key>
@@ -1446,7 +1446,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Open expression</value>
+   <value>Открыть выражение</value>
   </toolTip>
   <toolTip>
    <key>en</key>

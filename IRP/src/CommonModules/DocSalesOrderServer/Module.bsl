@@ -55,6 +55,22 @@ EndProcedure
 
 #EndRegion
 
+#Region ListFormEvents
+
+Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ChoiceFormEvents
+
+Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 Function CheckItemList(Object) Export
 
 	Query = New Query();
@@ -100,18 +116,29 @@ Function CheckItemList(Object) Export
 	Return StrTemplate(R().Error_064, Stores);
 EndFunction
 
-#Region ListFormEvents
+Function CheckRelatedDocuments(SalesOrderRef, ShowWarning = False) Export
 
-Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
-	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
-EndProcedure
+	Query = New Query;
+	Query.Text =
+	"SELECT TOP 1
+	|	SalesOrderClosing.Ref
+	|FROM
+	|	Document.SalesOrderClosing AS SalesOrderClosing
+	|WHERE
+	|	SalesOrderClosing.SalesOrder = &SalesOrder
+	|	AND NOT SalesOrderClosing.DeletionMark";
+	
+	Query.SetParameter("SalesOrder", SalesOrderRef);
+	
+	QuerySelection = Query.Execute().Select();
+	
+	If QuerySelection.Next() Then
+		If ShowWarning Then
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Exc_013, QuerySelection.Ref));
+		EndIf;
+		Return True;
+	EndIf;
+	
+	Return False;
 
-#EndRegion
-
-#Region ChoiceFormEvents
-
-Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
-	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
-EndProcedure
-
-#EndRegion
+EndFunction

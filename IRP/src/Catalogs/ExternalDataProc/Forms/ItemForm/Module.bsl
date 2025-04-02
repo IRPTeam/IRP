@@ -28,6 +28,16 @@ Procedure AddExtDataProcEnd(Result, Address, FileName, Parameters) Export
 	ThisObject.DataProcStorageAddress = TransferFileToServer(New BinaryData(FileName), ThisObject.UUID);
 	ThisObject.Modified = True;
 	Object.PathToExtDataProcForTest = FileName;
+	
+	AddDataProcInfo = AddDataProcServer.GetDataProcessInfo(ThisObject.DataProcStorageAddress);
+	If Not IsBlankString(AddDataProcInfo.Name) Then
+		Object.Name = AddDataProcInfo.Name;
+		Object.Description_en = AddDataProcInfo.Description;
+		If AddDataProcInfo.Property("Commands") and AddDataProcInfo.Commands.Count() Then
+			AddCommandsAtServer(AddDataProcInfo.Commands);
+		EndIf;
+	EndIf;
+	
 EndProcedure
 
 &AtServer
@@ -101,6 +111,26 @@ Function GetFileFromStorage()
 	EndIf;
 	Return Undefined;
 EndFunction
+
+&AtServer
+Procedure AddCommandsAtServer(Commands)
+	
+	Write();
+	
+	For Each CommandInfo In Commands Do // See AddDataProcServer.DataProcessCommandInfo
+		MetadataRef = CatConfigurationMetadataServer.GetConfigurationMetadataItemByFullName(CommandInfo.ConfigurationMetadata);
+		If MetadataRef = Undefined Then
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Exc_010, CommandInfo.ConfigurationMetadata));
+			Continue;
+		EndIf;
+		NewRecord = InformationRegisters.ExternalCommands.CreateRecordManager();
+		NewRecord.ConfigurationMetadata = MetadataRef;
+		NewRecord.ExternalDataProc = Object.Ref;
+		NewRecord.FormType = CommandInfo.FormType;
+		NewRecord.Write(True);
+	EndDo;
+	
+EndProcedure
 
 #Region AddAttributes
 

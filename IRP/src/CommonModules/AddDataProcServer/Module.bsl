@@ -103,3 +103,48 @@ EndFunction
 Function UseInternalDataProcessor(DataProcName) Export
 	Return Metadata.DataProcessors.Find(DataProcName) <> Undefined;
 EndFunction
+
+// Data process info.
+// 
+// Returns:
+//  Structure - Data process info:
+// * Name - String - 
+// * Description - String - 
+// * Commands - Array of See DataProcessCommandInfo 
+Function DataProcessInfo() Export
+	Info = New Structure;
+	Info.Insert("Name", "");
+	Info.Insert("Description", "");
+	Info.Insert("Commands", New Array);
+	Return Info;	
+EndFunction
+
+// Data process command info.
+// 
+// Returns:
+//  Structure - Data process connand info:
+// * ConfigurationMetadata - String - 
+// * FormType - EnumRef.FormTypes - 
+Function DataProcessCommandInfo() Export
+	Info = New Structure;
+	Info.Insert("ConfigurationMetadata", "");
+	Info.Insert("FormType", Enums.FormTypes.ObjectForm);
+	Return Info;	
+EndFunction
+
+Function GetDataProcessInfo(DataProcStorageAddress) Export
+	
+	Info = DataProcessInfo();
+	
+	Try
+		ExternalDataProcName = "Ext_" + StrReplace(New UUID(), "-", "_");
+		ExternalDataProcessors.Connect(DataProcStorageAddress, ExternalDataProcName);
+		ExtDataProc = ExternalDataProcessors.Create(ExternalDataProcName);
+		Info = ExtDataProc.DataProcessInfo();
+	Except
+		CommonFunctionsClientServer.ShowUsersMessage(ErrorDescription());
+	EndTry;	
+	
+	Return Info;
+		
+EndFunction

@@ -12364,7 +12364,7 @@ Function LinkUnlinkDocumentRows(Object, FillingValues, CalculateRows = True) Exp
 	AttributeNames_LinkedDocuments = GetAttributeNames_LinkedDocuments();
 	
 	// Refreshable tables on unlink documents
-	TableNames_Refreshable = GetTableNames_Refreshable("SerialLotNumbers");
+	TableNames_Refreshable = GetTableNames_Refreshable("SerialLotNumbers, SourceOfOrigins");
 
 	UpdatedProperties = New Array();
 	UpdatedRows = New Array();

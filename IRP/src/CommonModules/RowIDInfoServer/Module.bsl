@@ -267,6 +267,7 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;
+	Is = Is(Source);
 	
 	Records_Exists = AccumulationRegisters.TM1010B_RowIDMovements.GetExistsRecords(Source.Ref);
 	Records_InDocument  = GetRecordsInDocument(Source).TM1010B_RowIDMovements;
@@ -281,7 +282,6 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 	
 	CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting);
 	
-	Is = Is(Source);
 	If Not Cancel And (Is.RSR Or Is.RRR Or Is.SI Or Is.SR) Then
 		Source.RegisterRecords.TM1010T_RowIDMovements.Clear();
 		Source.RegisterRecords.TM1010T_RowIDMovements.Write();
@@ -298,6 +298,22 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 			Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
 			CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
 		EndIf;		
+	EndIf;
+	
+	If Not Cancel Then
+		For Each Row In Source.RowIDInfo Do
+			If ValueIsFilled(Row.Basis) Then
+				IsBasis = Is(Row.Basis);
+				If IsBasis.SO Or IsBasis.PO Then
+					If Row.RowRef.IsFixedItemKey Or Row.RowRef.IsFixedStore Then
+						RowRefObject = Row.RowRef.GetObject();
+						RowRefObject.IsFixedItemKey = False;
+						RowRefObject.IsFixedStore = False;
+						RowRefObject.Write();
+					EndIf;
+				EndIf;
+			EndIf;
+		EndDo;
 	EndIf;
 EndProcedure
 

@@ -791,27 +791,21 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 		Return;
 	EndIf;
 	ThisObject.Modified = True;
-	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
-	If ExtractedData <> Undefined Then
-		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
-	EndIf;
-	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
-	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(Object, ThisObject, "ItemList");
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
-Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
-	ExtractedData = Undefined;
+Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
-		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
+		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+		ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
 	EndIf;
-	ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
 	LockLinkedRows();
-	Return ExtractedData;
-EndFunction
+EndProcedure
 
 &AtServer
 Procedure LockLinkedRows()

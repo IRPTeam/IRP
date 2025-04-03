@@ -812,12 +812,8 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, NotifyParameters) Export
 			ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 			
 	Else
-		ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
-		If ExtractedData <> Undefined Then
-			ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
-		EndIf;
-		SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
-		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(Object, ThisObject, "ItemList");
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
 
@@ -837,26 +833,20 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		EndDo;
 	EndIf;
 	
-	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
-	If ExtractedData <> Undefined Then
-		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
-	EndIf;
-	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
-	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(Object, ThisObject, "ItemList");
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
-Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
-	ExtractedData = Undefined;
+Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
 		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;
-	ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
+	ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
 	LockLinkedRows();
-	Return ExtractedData;
-EndFunction
+EndProcedure
 
 &AtServer
 Procedure LockLinkedRows()

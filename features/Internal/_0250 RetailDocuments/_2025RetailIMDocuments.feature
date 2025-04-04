@@ -855,9 +855,9 @@ Scenario: _0155273 select items from RSC in POS
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
 		And "Payments" table became equal
-			| 'Payment done' | 'Payment type' | 'Amount' |
-			| ' '            | 'Advance'      | '20,00'  |
-			| ' '            | 'Cash'         | '674,00' |
+			| 'Payment done'| 'Payment type' | 'Amount' |
+			| ''            | 'Advance'      | '20,00'  |
+			| ''            | 'Cash'         | '674,00' |
 		And I click "OK" button
 		And I move to the next attribute
 	* Check RSR

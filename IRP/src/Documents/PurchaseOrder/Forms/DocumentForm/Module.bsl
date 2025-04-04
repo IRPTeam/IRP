@@ -812,6 +812,7 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, NotifyParameters) Export
 			ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 			
 	Else
+		AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
 		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(Object, ThisObject, "ItemList");
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
@@ -832,7 +833,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 			EndDo;
 		EndDo;
 	EndIf;
-	
+	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
 	ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(Object, ThisObject, "ItemList");
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure

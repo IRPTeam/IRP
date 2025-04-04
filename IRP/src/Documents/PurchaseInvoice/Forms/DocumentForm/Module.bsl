@@ -775,6 +775,7 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 		Return;
 	EndIf;
 	ThisObject.Modified = True;
+	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
 	ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(Object, ThisObject, "ItemList");
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure

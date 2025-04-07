@@ -166,16 +166,17 @@ Function CreateLinkedObject(Source, Rule, OTS)
 	If Rule.TargetType.Parent = Catalogs.ConfigurationMetadata.Documents Then
 		//@skip-check dynamic-access-method-not-found
 		Object = ObjectManager.CreateDocument(); // DocumentObjectDocumentName
+		//@skip-check invocation-parameter-type-intersect
+		Wrapper = BuilderAPI.Init(Object, , , "ItemList");
 	ElsIf Rule.TargetType.Parent = Catalogs.ConfigurationMetadata.Catalogs Then
 		//@skip-check dynamic-access-method-not-found, statement-type-change, statement-type-change
 		Object = ObjectManager.CreateItem(); // CatalogObjectDocumentName
+		//@skip-check invocation-parameter-type-intersect
+		Wrapper = BuilderAPI.Init(Object);
 	Else
 		Raise "Unsupported type " + Rule.TargetType.ObjectFullName;
 	EndIf;
 	
-	//@skip-check invocation-parameter-type-intersect
-	Wrapper = BuilderAPI.Init(Object);
-
 	For Each AttrRule In Rule.Mapping Do
 		TargetTable = ?(StrSplit(AttrRule.TargetAttribute, ".").Count() = 1, "", StrSplit(AttrRule.TargetAttribute, ".")[0]);
 		SourceTable = ?(StrSplit(AttrRule.SourceAttribute, ".").Count() = 1, "", StrSplit(AttrRule.SourceAttribute, ".")[0]);

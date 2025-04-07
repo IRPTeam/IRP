@@ -26,6 +26,11 @@ Procedure MappingOnActivateCell(Item)
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
+	
+	If IsBlankString(CurrentRow.TargetAttribute) Then
+		Return;
+	EndIf;	
+	
 	ThisObject.Items.MappingDefaultValue.TypeRestriction = FillValueType(CurrentRow.TargetAttribute);
 	ThisObject.Items.MappingDefaultValue.InputHint = String(ThisObject.Items.MappingDefaultValue.TypeRestriction);
 EndProcedure
@@ -66,7 +71,7 @@ Function FillValueType(AttributePath)
 	Else
 		Table = StrSplit(AttributePath, ".")[0];
 		AttrName = StrSplit(AttributePath, ".")[1];
-		TypeRestriction = Metadata.FindByFullName(Object.TargetType.ObjectFullName).Tables[Table].Attributes[AttrName].Type;
+		TypeRestriction = Metadata.FindByFullName(Object.TargetType.ObjectFullName).TabularSections[Table].Attributes[AttrName].Type;
 	EndIf;
 	Return TypeRestriction;
 EndFunction

@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Поступление услуг с удерживаемым подоходным налогом</value>
+  <value>Акт (услуги) с удержанным налогом</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -61,7 +61,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Поступление услуг с удерживаемым подоходным налогом</value>
+  <value>Акт (услуги) с удержанным налогом</value>
  </objectPresentation>
  <objectPresentation>
   <key>en</key>
@@ -73,7 +73,7 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Поступления услуг с удерживаемым подоходным налогом</value>
+  <value>Акты (услуги) с удержанным налогом</value>
  </listPresentation>
  <listPresentation>
   <key>en</key>

@@ -65,4 +65,6 @@
  <content>Document.PurchaseReturn.Attribute.LegalName</content>
  <content>Document.RetailReturnReceipt.Attribute.LegalName</content>
  <content>Document.PurchaseOrder.Attribute.LegalName</content>
+ <content>Document.WithholdingTaxInvoice.Attribute.LegalName</content>
+ <content>Document.ShipmentPlaningOrder.Attribute.LegalName</content>
 </mdclass:FunctionalOption>

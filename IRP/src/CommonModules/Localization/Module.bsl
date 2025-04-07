@@ -3815,7 +3815,7 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 	// %2 - Document number
 	// %3 - Document date
 	Strings.Insert("DocPresentation", NStr("en='%1 %2 dated %3';
-		|ru='%1 %2 создано %3';
+		|ru='%1 %2 от %3';
 		|tr='%1 %2 tarih %3'", Lang));	
 #EndRegion
 

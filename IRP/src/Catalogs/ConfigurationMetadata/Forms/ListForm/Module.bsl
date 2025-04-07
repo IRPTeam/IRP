@@ -9,6 +9,7 @@ EndProcedure
 &AtClient
 Procedure RefillMetadata(Command)
 	CatConfigurationMetadataServer.RefillMetadata();
+	NotifyChanged(Type("CatalogRef.ConfigurationMetadata"));
 EndProcedure
 
 #EndRegion

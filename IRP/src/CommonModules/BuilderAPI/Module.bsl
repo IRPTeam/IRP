@@ -103,7 +103,7 @@ EndFunction
 
 #Region ForServer
 
-// Initialize for server.
+// Deprecated. Initialize for server.
 // 
 // Parameters:
 //  Doc - String, DocumentRefDocumentName - Document name ex. SalesOrder, or Document ref
@@ -122,7 +122,6 @@ Function Initialize(Doc = Undefined, InitialData = Undefined, FillingData = Unde
 		If TypeOf(Doc) = Type("String") Then
 			DocMetadata = Metadata.Documents[Doc];
 			DocObject = Documents[DocMetadata.Name].CreateDocument();
-			DocObject.Fill(FillingData);
 		Else
 			DocMetadata = Doc.Metadata();
 			If Doc.IsEmpty() Then
@@ -136,37 +135,60 @@ Function Initialize(Doc = Undefined, InitialData = Undefined, FillingData = Unde
 		DocObject = DocInfo.DocObject;
 	EndIf;
 	
+	Wrapper = Init(DocObject, InitialData, FillingData, DefaultTable);
+	Return Wrapper
+EndFunction
+
+// Init.
+// 
+// Parameters:
+//  Object - DocumentObjectDocumentName, CatalogObjectCatalogName - Ref object
+//  InitialData - Structure, Undefined - Initial data
+//  FillingData - Structure, Undefined - Filling data
+//  DefaultTable - String, Undefined - Default table
+// 
+// Returns:
+//  See CreateWrapper
+Function Init(Object, InitialData = Undefined, FillingData = Undefined, DefaultTable = Undefined) Export
+	
+	RefObject = Object;
+	
+	If Not FillingData = Undefined Then
+		RefObject.Fill(FillingData);
+	EndIf;
+	
+	RefMetadata = RefObject.Metadata();
 	Wrapper = CreateWrapper(DefaultTable);
 	
-	For Each Attr In DocMetadata.StandardAttributes Do
-		FillAttrInfo(Wrapper, DocObject, Attr);
+	For Each Attr In RefMetadata.StandardAttributes Do
+		FillAttrInfo(Wrapper, RefObject, Attr);
 	EndDo;
-	For Each Attr In DocMetadata.Attributes Do
-		FillAttrInfo(Wrapper, DocObject, Attr);
+	For Each Attr In RefMetadata.Attributes Do
+		FillAttrInfo(Wrapper, RefObject, Attr);
 	EndDo;
 	For Each Attr In Metadata.CommonAttributes Do
-		If CommonFunctionsServer.isCommonAttributeUseForMetadata(Attr.Name, DocMetadata) Then
-			FillAttrInfo(Wrapper, DocObject, Attr);
+		If CommonFunctionsServer.isCommonAttributeUseForMetadata(Attr.Name, RefMetadata) Then
+			FillAttrInfo(Wrapper, RefObject, Attr);
 		EndIf;
 	EndDo;
-	For Each Table In DocMetadata.TabularSections Do
+	For Each Table In RefMetadata.TabularSections Do
 		Wrapper.Object.Insert(Table.Name, New ValueTable());
 		Wrapper.Tables.Insert(Table.Name, New Structure("_TableName_", Table.Name));
 		For Each Column In Table.StandardAttributes Do // StandardAttributeDescriptions
 			//@skip-check invocation-parameter-type-intersect
-			FillColumnInfo(Wrapper, DocObject, Table, Column);
+			FillColumnInfo(Wrapper, RefObject, Table, Column);
 		EndDo;
 		For Each Column In Table.Attributes Do
-			FillColumnInfo(Wrapper, DocObject, Table, Column);
+			FillColumnInfo(Wrapper, RefObject, Table, Column);
 		EndDo;
 		
-		For Each Row In DocObject[Table.Name] Do // ValueTableRow
+		For Each Row In RefObject[Table.Name] Do // ValueTableRow
 			//@skip-check dynamic-access-method-not-found
 			FillPropertyValues(Wrapper.Object[Table.Name].Add(), Row);
 		EndDo;
 	EndDo;
 	
-	If InitialData <> Undefined Then
+	If Not InitialData = Undefined Then
 		FillInitData(Wrapper, InitialData);
 	EndIf;
 	Return Wrapper

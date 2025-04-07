@@ -149,6 +149,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.PrintFormTemplates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.LegalNameContracts</name>
 		<right>
 			<name>Read</name>
@@ -322,6 +337,21 @@
 	</object>
 	<object>
 		<name>Catalog.CurrencyMovementSets</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.TransformationRules</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -920,6 +950,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.ExtDimensions</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.AccessGroups</name>
 		<right>
 			<name>Read</name>
@@ -1168,6 +1213,21 @@
 	</object>
 	<object>
 		<name>Catalog.RowIDs</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.NumeratorBasicRules</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -1618,6 +1678,21 @@
 	</object>
 	<object>
 		<name>Catalog.UserGroups</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.NumeratorGroups</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

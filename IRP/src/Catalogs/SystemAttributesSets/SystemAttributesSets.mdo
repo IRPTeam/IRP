@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="de4da1c5-b157-44e1-a49f-eb71e29e3ffd">
+  <producedTypes>
+    <objectType typeId="ebc8e7da-2187-4b61-9965-d227061ad4b3" valueTypeId="91785e12-6312-465f-bc2a-cde1541338ae"/>
+    <refType typeId="2c784b0c-78f0-4785-a4ef-172323f863d0" valueTypeId="e231a077-eac7-4892-a5fb-1e70079d2d80"/>
+    <selectionType typeId="9f7f2282-d1af-4743-a61f-559cb7a86d21" valueTypeId="0383afcc-0fb7-4fc8-957b-0429e4dce395"/>
+    <listType typeId="bef90ed2-e4b1-410e-91d0-b5cccd3b951b" valueTypeId="0acf9f68-7736-426f-ac84-96be9169aa2c"/>
+    <managerType typeId="0abd8375-8c2e-424e-967b-9c24b6b68660" valueTypeId="7e4b583b-b7d9-4507-a8df-f6c503c785c0"/>
+  </producedTypes>
+  <name>SystemAttributesSets</name>
+  <synonym>
+    <key>en</key>
+    <value>System attributes sets</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <predefined>
+    <items id="d07ca9cc-dd4c-4a75-a10e-2a6425693521">
+      <name>Document_SalesOrder</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>1</value>
+      </code>
+    </items>
+  </predefined>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.SystemAttributesSets.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.SystemAttributesSets.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.SystemAttributesSets.Form.ChoiceForm</defaultChoiceForm>
+  <tabularSections uuid="741848bc-de00-406e-abb6-ab387c9e14ac">
+    <producedTypes>
+      <objectType typeId="afddcc5a-808e-4a63-a48e-7286094c45ed" valueTypeId="3f47e538-6ec9-4542-bb50-4d39d8fa8ebb"/>
+      <rowType typeId="6fa6a8d9-6945-40c5-adde-2b07f7da315b" valueTypeId="850e8f40-c420-4982-bfd4-6b67d585ee67"/>
+    </producedTypes>
+    <name>Attributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Attributes</value>
+    </synonym>
+    <attributes uuid="5d89ba3b-7da2-4abf-bd82-357c89a004e2">
+      <name>Attribute</name>
+      <synonym>
+        <key>en</key>
+        <value>Attribute</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.SystemAttributes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="45e6e4a1-2396-48d2-97b8-a997f066487f">
+      <name>Collection</name>
+      <synonym>
+        <key>en</key>
+        <value>Collection</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="5b6059ca-ef88-40bd-b4c5-3d2ceae21916">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="37b8e0b6-bc65-4fac-8e78-a7a21fc02822">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="12127867-c361-487b-a510-086f8b5b9b22">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

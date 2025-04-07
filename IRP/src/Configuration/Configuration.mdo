@@ -839,6 +839,7 @@
   <commonModules>CommonModule.DocShipmentPlaningOrderServer</commonModules>
   <commonModules>CommonModule.DocWithholdingTaxInvoiceClient</commonModules>
   <commonModules>CommonModule.DocWithholdingTaxInvoiceServer</commonModules>
+  <commonModules>CommonModule.SystemAttributesServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -904,6 +905,7 @@
   <eventSubscriptions>EventSubscription.BeforeWrite_SetNewDocumentNumber</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_SetNewCatalogNumber</eventSubscriptions>
   <eventSubscriptions>EventSubscription.OnCopy_CatalogProcessing</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnWrite_SystemAttributes</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
@@ -1232,6 +1234,7 @@
   <catalogs>Catalog.NumeratorBasicRules</catalogs>
   <catalogs>Catalog.NumeratorGroups</catalogs>
   <catalogs>Catalog.PrintFormTemplates</catalogs>
+  <catalogs>Catalog.SystemAttributesSets</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalDeduction</documents>
   <documents>Document.AdditionalCostAllocation</documents>
@@ -1593,6 +1596,7 @@
   <informationRegisters>InformationRegister.NumeratorCounters</informationRegisters>
   <informationRegisters>InformationRegister.CreditLimits</informationRegisters>
   <informationRegisters>InformationRegister.ObjectsPrintTemplates</informationRegisters>
+  <informationRegisters>InformationRegister.SystemAttributes</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -1703,6 +1707,7 @@
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>
+  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.SystemAttributes</chartsOfCharacteristicTypes>
   <chartsOfAccounts>ChartOfAccounts.Basic</chartsOfAccounts>
   <accountingRegisters>AccountingRegister.Basic</accountingRegisters>
 </mdclass:Configuration>

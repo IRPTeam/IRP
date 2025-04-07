@@ -676,3 +676,18 @@ Function GetAccessKey(Obj) Export
 EndFunction
 
 #EndRegion
+
+#Region SystemAttributes
+
+Function GetSystemAttributeValues(Obj, SystemAttribute) Export
+	Values = New Array();
+	If SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.Store Then
+		For Each Row In Obj.ItemList Do
+			Values.Add(Row.Store);
+		EndDo;
+	EndIf;
+	Return Values;
+EndFunction
+
+#EndRegion
+

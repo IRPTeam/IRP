@@ -11,7 +11,11 @@ Procedure OnWrite_SystemAttributesOnWrite(Source, Cancel) Export
 	|WHERE
 	|	SystemAttributesSets.PredefinedDataName = &PredefinedDataName";
 	Query.SetParameter("PredefinedDataName", StrReplace(Source.Metadata().FullName(), ".", "_"));
+	Try // temp
 	QueryResult = Query.Execute();
+	Except
+		Return;
+	EndTry;
 	QuerySelection = QueryResult.Select();
 	
 	RecordSet = InformationRegisters.SystemAttributes.CreateRecordSet();

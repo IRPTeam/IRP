@@ -678,7 +678,12 @@ Scenario: _1000004 check credit limit in SI (same currency)
 			And I finish line editing in "ItemList" table
 			And I move to the tab named "GroupOther"
 			And I move to the tab named "GroupMore"
-			And I input "08.04.2025  0:00:00" text in the field named "Date"
+			And I input "08.04.2025 20:00:00" text in the field named "Date"
+			And I move to the next attribute
+			Then "Update item list info" window is opened
+			And I change checkbox named "PriceTypes"
+			And I change checkbox named "Prices"
+			And I click the button named "FormOK"
 			And I click the button named "FormPost"
 			And I click the button named "FormPostAndClose"
 	* Create SI 2
@@ -705,6 +710,12 @@ Scenario: _1000004 check credit limit in SI (same currency)
 			And I move to the tab named "GroupOther"
 			And I move to the tab named "GroupMore"
 			And I input "08.04.2025 21:00:00" text in the field named "Date"
+			And I move to the next attribute
+			Then "Update item list info" window is opened
+			And I change checkbox named "PriceTypes"
+			And I change checkbox named "Prices"
+			And I click the button named "FormOK"
+			And I click "Save" button
 			And I click the button named "FormPost"
 			Then there are lines in TestClient message log
 				|'Credit limit exceeded. Limit: 1 000, limit balance: 500, transaction: 600, lack: 100 USD'|
@@ -736,9 +747,15 @@ Scenario: _1000005 check credit limit in SI (different currency)
 			And I move to the tab named "GroupOther"
 			And I move to the tab named "GroupMore"
 			And I input "08.04.2025 23:00:00" text in the field named "Date"
+			And I move to the next attribute
+			Then "Update item list info" window is opened
+			And I change checkbox named "PriceTypes"
+			And I remove checkbox named "PaymentTerm"
+			And I click the button named "FormOK"
+			And I click "Save" button
 			And I click the button named "FormPost"
 			Then there are lines in TestClient message log
-				|'Credit limit exceeded. Limit: 1 000, limit balance: 500, transaction: 600, lack: 100 USD'|
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
 	And I close all client application windows	
 
 Scenario: _1000006 check credit limit at different time intervals
@@ -767,6 +784,12 @@ Scenario: _1000006 check credit limit at different time intervals
 			And I move to the tab named "GroupOther"
 			And I move to the tab named "GroupMore"
 			And I input "11.04.2025  21:30:00" text in the field named "Date"
+			And I move to the next attribute
+			Then "Update item list info" window is opened
+			And I change checkbox named "PriceTypes"
+			And I change checkbox named "Prices"
+			And I click the button named "FormOK"
+			And I click "Save" button
 			And I click the button named "FormPost"
 			And I click the button named "FormPostAndClose"
 	* Create SI different currency
@@ -793,9 +816,15 @@ Scenario: _1000006 check credit limit at different time intervals
 			And I move to the tab named "GroupOther"
 			And I move to the tab named "GroupMore"
 			And I input "12.04.2025 23:00:00" text in the field named "Date"
+			And I move to the next attribute
+			Then "Update item list info" window is opened
+			And I change checkbox named "PriceTypes"
+			And I remove checkbox named "PaymentTerm"
+			And I click the button named "FormOK"
+			And I click "Save" button
 			And I click the button named "FormPost"
 			Then there are lines in TestClient message log
-				|'Credit limit exceeded. Limit: 2 000, limit balance: 1 300, transaction: 1 900, lack: 600 USD'|
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 48 500, lack: 38 500 TRY'|
 	And I close all client application windows	
 
 Scenario: _1000007 create SPO from SO and check credit limit
@@ -806,6 +835,7 @@ Scenario: _1000007 create SPO from SO and check credit limit
 			| 'Partner'   |
 			| 'Ferron BP' |
 		And I select current line in "List" table
+		And I click the button named "FormPost"
 	* Create SPO
 		And I click the button named "FormDocumentShipmentPlaningOrderGenerate"
 		Then "Add linked document rows" window is opened
@@ -818,9 +848,13 @@ Scenario: _1000007 create SPO from SO and check credit limit
 		And I click the button named "Select"
 		And I go to the first line in "ItemList" table
 		And I input "50,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
 		And I move one line down in "ItemList" table					
 		And I input "30,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I move to the tab named "GroupOther"
+		And I input "12.04.2025 23:30:00" text in the field named "Date"
+		And I move to the next attribute
 		And I click "Save" button
 		And I click the button named "FormPost"
 		Then there are lines in TestClient message log

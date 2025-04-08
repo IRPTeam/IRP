@@ -261,3 +261,25 @@ EndProcedure
 
 #EndRegion
 
+Procedure OpenForm_LinkUnlinkDocumentRows(Object, Form, FormParameters, 
+		ProcedureName = "AddOrLinkUnlinkDocumentRowsContinue") Export
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
+	
+	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
+		New NotifyDescription(ProcedureName, Form, NotifyParameters), 
+			FormWindowOpeningMode.LockOwnerWindow);	
+EndProcedure
+
+Procedure OpenForm_AddLinkedDocumentRows(Object, Form, FormParameters, 
+		ProcedureName = "AddOrLinkUnlinkDocumentRowsContinue") Export
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
+	
+	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
+		New NotifyDescription(ProcedureName, Form, NotifyParameters), 
+			FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+

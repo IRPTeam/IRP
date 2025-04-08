@@ -201,6 +201,10 @@ Scenario: _043600 preparation (Cash receipt)
 			| "Documents.CashReceipt.FindByNumber(331).GetObject().Write(DocumentWriteMode.Posting);"    |
 	When Create document CashReceipt objects (return from vendor)
 	And I execute 1C:Enterprise script at server
+		| "Documents.CashPayment.FindByNumber(1527).GetObject().Write(DocumentWriteMode.Posting);"   |
+	And I execute 1C:Enterprise script at server
+		| "Documents.CashPayment.FindByNumber(1528).GetObject().Write(DocumentWriteMode.Posting);"   |
+	And I execute 1C:Enterprise script at server
 		| "Documents.CashReceipt.FindByNumber(516).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
 		| "Documents.CashReceipt.FindByNumber(517).GetObject().Write(DocumentWriteMode.Posting);"   |
@@ -1112,10 +1116,10 @@ Scenario: _043651 check Cash receipt movements by the Register  "T2014 Advances 
 		And I select "T2014 Advances info" exact value from "Register" drop-down list
 		And I click "Generate report" button	
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash receipt 516 dated 02.09.2021 14:17:00' | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
-			| 'Register  "T2014 Advances info"'            | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
-			| ''                                           | 'Company'      | 'Branch'       | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'        | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
-			| ''                                           | 'Main Company' | 'Front office' | '02.09.2021 14:17:00' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | ''      | 'Yes'               | 'No'                  | '*'         | 'Basic Partner terms, TRY' | ''        | '-100'   | 'No'                      | 'No'                   | 'Receipt'     |
+			| 'Cash receipt 516 dated 02.09.2021 14:17:00' | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                   | ''        | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'            | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                   | ''        | ''       | ''                        | ''                     | ''            |
+			| ''                                           | 'Company'      | 'Branch'       | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'  | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                           | 'Main Company' | 'Front office' | '02.09.2021 14:17:00' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor Ferron, TRY' | ''        | '-100'   | 'No'                      | 'No'                   | 'Receipt'     |
 	And I close all client application windows
 
 Scenario: _043652 check absence Cash receipt movements by the Register  "T2015 Transactions info" (Return from vendor, without basis)

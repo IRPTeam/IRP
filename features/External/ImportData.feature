@@ -1593,6 +1593,29 @@ Scenario: Create catalog Taxes objects
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReportFromTradeAgent'   |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'RetailReceiptCorrection'     |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'StockAdjustmentAsSurplus'    |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'WithholdingTaxInvoice'       |
+	
+	// WithholdingTax
+
+	And I check or create catalog "Taxes" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'ExternalDataProcSettings'              | 'DELETE_ExternalDataProc' | 'Type'              | 'Kind'                        | 'TaxPayer'               | 'Author'                                                        | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.Taxes?ref=b859cac83bc53c4411f008898caa1f5a' | 'False'        | 2      | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''                        | 'Enum.TaxType.Rate' | 'Enum.TaxKind.WithholdingTax' | 'Enum.TaxPayers.Company' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Witholding tax' | ''                 | ''               | ''               | ''             | ''       | '24.03.2025 10:29:35' | '01.01.0001 00:00:00' | 'False'     |
+
+	And I refill object tabular section "TaxRates":
+		| 'Ref'                                                           | 'TaxRate'                                                          |
+		| 'e1cib/data/Catalog.Taxes?ref=b859cac83bc53c4411f008898caa1f5a' | 'e1cib/data/Catalog.TaxRates?ref=b859cac83bc53c4411f008898caa1f59' |
+
+	And I refill object tabular section "UseDocuments":
+		| 'Ref'                                                           | 'DocumentName'          |
+		| 'e1cib/data/Catalog.Taxes?ref=b859cac83bc53c4411f008898caa1f5a' | 'WithholdingTaxInvoice' |
+
+	And I check or create catalog "TaxRates" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Code' | 'Rate' | 'NoRate' | 'Country' | 'Author'                                                        | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' | 'SourceNode' |
+		| 'e1cib/data/Catalog.TaxRates?ref=b859cac83bc53c4411f008898caa1f59' | 'False'        | 6      | 20     | 'False'  | ''        | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '20% WT'         | ''                 | ''               | ''               | '_f07a59bfe015458b91d2bfe06db843a9' | ''             | ''       | '24.03.2025 10:29:00' | '01.01.0001 00:00:00' | 'False'     | ''           |
+
+	And I check or create information register "TaxSettings" records:
+		| 'Period'              | 'Company'                                                           | 'Tax'                                                           | 'ItemKey' | 'Item' | 'ItemType' | 'Agreement' | 'TransactionType' | 'TaxRate'                                                          |
+		| '24.03.2024 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=b859cac83bc53c4411f008898caa1f5a' | ''        | ''     | ''         | ''          | ''                | 'e1cib/data/Catalog.TaxRates?ref=b859cac83bc53c4411f008898caa1f59' |
 
 
 Scenario: Create catalog Taxes objects (with transaction type)
@@ -1630,6 +1653,7 @@ Scenario: Create catalog Taxes objects (with transaction type)
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashReceipt'               |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'EmployeeCashAdvance'       |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashPayment'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'WithholdingTaxInvoice'     |
 
 	And I refill object tabular section "TransactionTypes":
 		| 'Ref'                                                            | 'DocumentName'         | 'TransactionType'                                           |
@@ -1653,6 +1677,28 @@ Scenario: Create catalog Taxes objects (with transaction type)
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashPayment'          | 'Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer'     |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashReceipt'          | 'Enum.IncomingPaymentTransactionType.PaymentFromCustomer'   |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashReceipt'          | 'Enum.IncomingPaymentTransactionType.ReturnFromVendor'      |
+
+	// WithholdingTax
+
+	And I check or create catalog "Taxes" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'ExternalDataProcSettings'              | 'DELETE_ExternalDataProc' | 'Type'              | 'Kind'                        | 'TaxPayer'               | 'Author'                                                        | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.Taxes?ref=b859cac83bc53c4411f008898caa1f5a' | 'False'        | 2      | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''                        | 'Enum.TaxType.Rate' | 'Enum.TaxKind.WithholdingTax' | 'Enum.TaxPayers.Company' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Witholding tax' | ''                 | ''               | ''               | ''             | ''       | '24.03.2025 10:29:35' | '01.01.0001 00:00:00' | 'False'     |
+
+	And I refill object tabular section "TaxRates":
+		| 'Ref'                                                           | 'TaxRate'                                                          |
+		| 'e1cib/data/Catalog.Taxes?ref=b859cac83bc53c4411f008898caa1f5a' | 'e1cib/data/Catalog.TaxRates?ref=b859cac83bc53c4411f008898caa1f59' |
+
+	And I refill object tabular section "UseDocuments":
+		| 'Ref'                                                           | 'DocumentName'          |
+		| 'e1cib/data/Catalog.Taxes?ref=b859cac83bc53c4411f008898caa1f5a' | 'WithholdingTaxInvoice' |
+
+	And I check or create catalog "TaxRates" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Code' | 'Rate' | 'NoRate' | 'Country' | 'Author'                                                        | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' | 'SourceNode' |
+		| 'e1cib/data/Catalog.TaxRates?ref=b859cac83bc53c4411f008898caa1f59' | 'False'        | 6      | 20     | 'False'  | ''        | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '20% WT'         | ''                 | ''               | ''               | '_f07a59bfe015458b91d2bfe06db843a9' | ''             | ''       | '24.03.2025 10:29:00' | '01.01.0001 00:00:00' | 'False'     | ''           |
+
+	And I check or create information register "TaxSettings" records:
+		| 'Period'              | 'Company'                                                           | 'Tax'                                                           | 'ItemKey' | 'Item' | 'ItemType' | 'Agreement' | 'TransactionType' | 'TaxRate'                                                          |
+		| '24.03.2024 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=b859cac83bc53c4411f008898caa1f5a' | ''        | ''     | ''         | ''          | ''                | 'e1cib/data/Catalog.TaxRates?ref=b859cac83bc53c4411f008898caa1f59' |
 
 
 Scenario: Create catalog Taxes objects (for work order)
@@ -1802,7 +1848,7 @@ Scenario: Create information register Taxes records (VAT)
 	And I check or create information register "Taxes" records:
 		| 'Period'               | 'Company'                                                            | 'Tax'                                                            | 'Use'   | 'Priority'   |
 		| '01.01.2020 00:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'True'  | '5'          |
-
+		| '01.01.2020 00:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c'  | 'e1cib/data/Catalog.Taxes?ref=b859cac83bc53c4411f008898caa1f5a'  | 'True'  | '6'          |
 
 Scenario: Create information register PricesByItemKeys records
 
@@ -3845,4 +3891,20 @@ Scenario: Create catalog NumeratorBasicRules, NumeratorGroups objects and Counte
 		| 'NumeratorRules'                                                          | 'TemplateNumber' | 'StartDate'           | 'Counter' |
 		| 'e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5284' | '72510000'       | '01.01.0001 00:00:00' | 127       |
 		| 'e1cib/data/Catalog.NumeratorGroups?ref=b857ef6bdcc86de611efda2e71ee5284' | '72530000'       | '01.01.0001 00:00:00' | 15        |
+
+Scenario: Create catalog PrintFormTemplates objects (for Sales order)
+
+	And I check or create catalog "PrintFormTemplates" objects:
+		| 'Ref'                                                                        | 'DeletionMark' | 'Code' | 'PrintFormType'           | 'Template'                                                                                                                                                                                                                                                                                                                                                                                                  | 'Author'                                                        | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | 'False'        | 1      | 'Enum.PrintFormTypes.TXT' | 'ValueStorage:AQERAQAAAAAAAO+7v3siUyIsIlByZWNvbmRpdGlvbnM6DQoNClNhbGVzIG9yZGVyIDxPcmRlciBOdW1iZXI+IGlzIGNyZWF0ZWQgaW4gdGhlIHN5c3RlbS4NCg0KU2FsZXMgb3JkZXIgY29udGFpbnMgZGF0YSBmb3IgZmllbGRzOg0KIA0KQ3VzdG9tZXIgPEN1c3RvbWVyIE5hbWU+LCANCg0KT3JkZXIgRGF0ZSA8T3JkZXIgRGF0ZT4sIEl0ZW1zIDxJdGVtIExpc3Q+LCANCg0KUXVhbnRpdHkgPFF1YW50aXRpZXM+LCBQcmljZXMgPFByaWNlcz4sIFRvdGFsIEFtb3VudCA8VG90YWwgQW1vdW50Pi4ifQ==' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Print form SO'  | ''                 | ''               | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '14.03.2025 14:12:01' | '14.03.2025 14:37:05' | 'False'     |
+
+	And I refill object tabular section "Parameters":
+		| 'Ref'                                                                        | 'Name'            | 'Expression'                                   |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Customer Name>' | 'Result = Source.Partner;'                     |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Item List>'     | ''                                             |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Order Date>'    | 'Result = Format(Source.Date, "DF=dd.MM.yy");' |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Order Number>'  | 'Result = Source.Number;'                      |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Prices>'        | ''                                             |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Quantities>'    | ''                                             |
+		| 'e1cib/data/Catalog.PrintFormTemplates?ref=b859cac83bc53c4411f000c6ac04c0df' | '<Total Amount>'  | ''                                             |
 

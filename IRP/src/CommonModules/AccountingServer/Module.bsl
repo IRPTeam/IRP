@@ -309,6 +309,11 @@ Function GetOperationsDefinition()
 	// Additional revenue allocation
 	Map.Insert(AO.AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory, New Structure("ByRow", True));
 	
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors, New Structure("ByRow", True));
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions, New Structure("ByRow", True));
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions, New Structure("ByRow", True));
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax, New Structure("ByRow", True));
+	
 	Return Map;
 EndFunction
 
@@ -1177,6 +1182,13 @@ Function GetT9013S_AccountsTax(AccountParameters, TaxInfo) Export
 		TaxInfo.Tax, TaxInfo.VatRate);	
 EndFunction
 
+Function GetT9013S_AccountsWithholdingTax(AccountParameters, WithholdingTaxInfo) Export
+	Return AccountingServerReuse.GetT9013S_AccountsTax_Reuse(AccountParameters.Period,
+		AccountParameters.Company,
+		AccountParameters.LedgerTypeVariant,
+		WithholdingTaxInfo.Tax, WithholdingTaxInfo.WithholdingTaxRate);	
+EndFunction
+
 Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRate) Export
 	Query = New Query();
 	Query.Text = 
@@ -1864,7 +1876,15 @@ Function GetDocumentData(Object, TableRow, MainTableName)
 			TaxInfo.Insert("VatRate", TableRow.VatRate);
 			Result.RowData.Insert("TaxInfo", TaxInfo);
 		EndIf;
-				
+		
+		If CommonFunctionsClientServer.ObjectHasProperty(TableRow, "WithholdingTaxRate") Then
+			WithholdingTaxInfo = New Structure();
+			WithholdingTaxInfo.Insert("Key", TableRow.Key);
+			WithholdingTaxInfo.Insert("Tax", TaxesServer.GetWithholdingTaxRef());
+			WithholdingTaxInfo.Insert("WithholdingTaxRate", TableRow.WithholdingTaxRate);
+			Result.RowData.Insert("WithholdingTaxInfo", WithholdingTaxInfo);
+		EndIf;
+						
 	Else
 		Result.RowData.Insert("Key", "");
 	EndIf;

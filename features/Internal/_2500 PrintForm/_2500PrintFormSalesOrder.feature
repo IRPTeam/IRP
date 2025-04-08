@@ -45,6 +45,7 @@ Scenario: _092001 preparation (PrintFormSalesOrder)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create information register Taxes records (VAT)
+		When Create catalog PrintFormTemplates objects (for Sales order)
 	* Load SO
 		When auto filling Configuration metadata catalog
 		When Create catalog CancelReturnReasons objects
@@ -60,7 +61,25 @@ Scenario: _092001 preparation (PrintFormSalesOrder)
 			| "Documents.SalesOrder.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Add one more print form for SO
+		Given I open hyperlink "e1cib/list/Catalog.ConfigurationMetadata"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Sales order' |	
+		And I select current line in "List" table
+		And I move to "Print templates" tab
+		And in the table "PrintTemplates" I click the button named "PrintTemplatesAdd"
+		And I click choice button of "Value" attribute in "PrintTemplates" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Print form SO' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	And I close TestClient session
+	Given I open new TestClient session or connect the existing one	
+				
 
+			
 Scenario: _0920011 check preparation
 	When check preparation
 
@@ -235,3 +254,118 @@ Scenario: _25005 check Sales order printing (change template)
 		When I Check the steps for Exception
 			| 'And in "Result" spreadsheet document I input text "Trousers3"'    |
 		And I close all client application windows
+
+
+Scenario: _25006 check Sales order printing (use print template)
+	And I close all client application windows
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"				
+		And I go to line in "List" table and invert selection:
+			| "Number"    |
+			| "1"         |
+	* Print and check parameters filling
+		And I click "Print form SO" button
+		Then "Result" spreadsheet document is equal
+			| 'Preconditions:'                          |
+			| ''                                        |
+			| 'Sales order 1 is created in the system.' |
+			| ''                                        |
+			| 'Sales order contains data for fields:'   |
+			| ' '                                       |
+			| 'Customer Ferron BP, '                    |
+			| ''                                        |
+			| 'Order Date 27.01.21, Items , '           |
+			| ''                                        |
+			| 'Quantity , Prices , Total Amount .'      |
+	And I close all client application windows
+	
+Scenario: _25010 create Print form template
+	And I close all client application windows
+	* Open Print form template catalog and create new element
+		Given I open hyperlink "e1cib/list/Catalog.PrintFormTemplates"				
+		And I click "Create" button
+		And I input "Print form for SO 2" text in "ENG" field
+		And I click "Start editing" button
+		And I input "Order Date <Order Date>, Items <Item List>, <Order Partner>" text in the field named "TemplateTXT"
+		And I click the button named "SaveTXT"
+		And I move to "Parameters" tab
+		And "Parameters" table became equal
+			| '#' | 'Name'            | 'Expression' |
+			| '1' | '<Item List>'     | ''           |
+			| '2' | '<Order Date>'    | ''           |
+			| '3' | '<Order Partner>' | ''           |
+	* Fill code for Parameters
+		And I activate "Expression" field in "Parameters" table
+		And I go to line in "Parameters" table
+			| "Name"         |
+			| "<Order Date>" |
+		And I select current line in "Parameters" table
+		And I click Open button of "Expression" field
+		Then "Formula editing" window is opened
+		And I input "Result = Source.Date;" text in the field named "FormulaText"
+		And I click Choice button of the field named "Source"
+		Then "Select data type" window is opened
+		And I go to line in "" table
+			| ""            |
+			| "Sales order" |
+		And I select current line in "" table
+		Then "Sales orders" window is opened
+		And I go to line in "List" table
+			| "Date"                | "Number" |
+			| "30.05.2021 12:24:18" | "112"    |
+		And I activate field named "Date" in "List" table
+		And I select current line in "List" table
+		And I click the button named "Test"
+		Then the form attribute named "Result" became equal to "30.05.2021 12:24:18"
+		And I click "Save" button
+		And I finish line editing in "Parameters" table
+		And I go to line in "Parameters" table
+			| "Name"            |
+			| "<Order Partner>" |
+		And I select current line in "Parameters" table
+		And I click Open button of "Expression" field
+		And I input "Result = Source.Partner;" text in the field named "FormulaText"
+		And I click "Save" button
+		And I finish line editing in "Parameters" table
+		And "Parameters" table became equal
+			| '#' | 'Name'            | 'Expression'               |
+			| '1' | '<Item List>'     | ''                         |
+			| '2' | '<Order Date>'    | 'Result = Source.Date;'    |
+			| '3' | '<Order Partner>' | 'Result = Source.Partner;' |
+		And I move to "Objects" tab
+		And in the table "ObjectsList" I click "Add" button
+		And I click choice button of "Value" attribute in "ObjectsList" table
+		And I click "List" button
+		And I go to line in "List" table
+			| "Description" |
+			| "Sales order" |
+		And I select current line in "List" table
+		And I finish line editing in "ObjectsList" table
+		And I click "Save and close" button
+	* Check creation
+		And "List" table contains lines
+			| 'Description'         | 'Print form type' |
+			| 'Print form for SO 2' | 'TXT'             |
+		And I close all client application windows
+		
+		
+				
+
+				
+		
+				
+				
+				
+				
+
+				
+		
+						
+				
+
+		
+			
+		
+				
+				
+	

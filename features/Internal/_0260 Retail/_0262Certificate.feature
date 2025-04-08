@@ -237,7 +237,7 @@ Scenario: _0262106 try modify sum when pay by certificate
 		And I click "⌫" button
 		And "Payments" table became equal
 			| 'Payment done' | 'Payment type' | 'Amount' |
-			| ' '            | 'Certificate'  | '500,00' |
+			| ''             | 'Certificate'  | '500,00' |
 		And I delete all lines of "Payments" table
 		And I close current window	
 		If "Point of sales *" window is opened Then
@@ -264,8 +264,8 @@ Scenario: _0262107 payment by certificate and cash (POS, without retail customer
 		And I click "Cash (/)" button
 		And "Payments" table became equal
 			| 'Payment done' | 'Payment type' | 'Amount' |
-			| ' '            | 'Certificate'  | '500,00' |
-			| ' '            | 'Cash'         | '50,00'  |
+			| ''             | 'Certificate'  | '500,00' |
+			| ''             | 'Cash'         | '50,00'  |
 		And I click "OK" button
 	* Check
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -342,8 +342,8 @@ Scenario: _0262115 return items that was paid by certificate
 		And I click "Cash (/)" button
 		And "Payments" table became equal
 			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
-			| ' '            | 'Certificate'  | '500,00' | ''        |
-			| ' '            | 'Cash'         | '50,00'  | ''        |
+			| ''             | 'Certificate'  | '500,00' | ''        |
+			| ''             | 'Cash'         | '50,00'  | ''        |
 		And I click "OK" button
 	* Check 
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"

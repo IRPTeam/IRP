@@ -119,7 +119,7 @@ Function R1021B_VendorsTransactions_BR_CR() Export
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
 EndFunction
 
-Function R1021B_VendorsTransactions_PI_SRTC() Export 
+Function R1021B_VendorsTransactions_PI_SRTC_WTI() Export 
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,

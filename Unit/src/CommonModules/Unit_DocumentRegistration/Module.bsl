@@ -120,6 +120,10 @@ Function IsIgnored_Field(Ignored_Fields, DocName, RegName, FieldName)
 		Return True;
 	EndIf;
 	
+	If StrFind(FieldName, "_") = 4 Then
+		Return True; // Field from extension
+	EndIf;
+	
 	ArrayOfFields = New Array();
 			
 	PutFieldsToArray(ArrayOfFields, Ignored_Fields, DocName, RegName);
@@ -198,6 +202,7 @@ Function GetIgnored_Fields()
 	Array.Add("BankReceipt.R5021T_Revenues.AdditionalAnalytic");
 	
 	Array.Add("Production.R4010B_ActualStocks.SerialLotNumber");
+	Array.Add("Production.R4010B_ActualStocks.SourceOfOrigin");
 	
 	Array.Add("WorkSheet.R5022T_Expenses.FixedAsset");
 	Array.Add("WorkSheet.R5022T_Expenses.LedgerType");
@@ -436,6 +441,7 @@ Function GetIgnored_Fields()
 	Array.Add("SalesReportFromTradeAgent.T2015S_TransactionsInfo.IsVendorTransaction");
 	
 	Array.Add("WorkSheet.R4010B_ActualStocks.SerialLotNumber");
+	Array.Add("WorkSheet.R4010B_ActualStocks.SourceOfOrigin");
 	Array.Add("WorkSheet.R5022T_Expenses.Project");
 	Array.Add("WorkSheet.R5022T_Expenses.AdditionalAnalytic");
 
@@ -460,8 +466,10 @@ Function GetIgnored_Fields()
 	Array.Add("PlannedReceiptReservation.R4037B_PlannedReceiptReservationRequests.ItemKey");
 
 	Array.Add("Bundling.R4010B_ActualStocks.SerialLotNumber");
+	Array.Add("Bundling.R4010B_ActualStocks.SourceOfOrigin");
 
 	Array.Add("Unbundling.R4010B_ActualStocks.SerialLotNumber");
+	Array.Add("Unbundling.R4010B_ActualStocks.SourceOfOrigin");
 
 	Array.Add("CashPayment.R2021B_CustomersTransactions.Order");
 	Array.Add("CashPayment.R5015B_OtherPartnersTransactions.Basis");
@@ -652,6 +660,18 @@ Function GetIgnored_Fields()
 	Array.Add("OpeningEntry.T2015S_TransactionsInfo.IsPaid");
 	Array.Add("OpeningEntry.R5015B_OtherPartnersTransactions.Basis");
 	Array.Add("OpeningEntry.R3021B_CashInTransitIncoming.Basis");
+	
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.ProfitLossCenter");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.ExpenseType");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.FixedAsset");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.LedgerType");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.AdditionalAnalytic");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.AmountCost");
+	Array.Add("WithholdingTaxInvoice.T2015S_TransactionsInfo.Key");
+	Array.Add("WithholdingTaxInvoice.T2015S_TransactionsInfo.IsCustomerTransaction");
+	Array.Add("WithholdingTaxInvoice.T2015S_TransactionsInfo.IsPaid");
+	
+	Array.Add("RetailGoodsReceipt.R4010B_ActualStocks.SourceOfOrigin");
 	
 	Map = New Map();
 	

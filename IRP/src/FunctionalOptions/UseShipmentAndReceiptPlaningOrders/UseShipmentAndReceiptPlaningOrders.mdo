@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fae9094f-9a5a-40a7-b689-b52f94c929c9">
+  <name>UseShipmentAndReceiptPlaningOrders</name>
+  <synonym>
+    <key>en</key>
+    <value>Use shipment and receipt planing orders</value>
+  </synonym>
+  <location>Constant.UseShipmentAndReceiptPlaningOrders</location>
+  <privilegedGetMode>true</privilegedGetMode>
+  <content>Document.ShipmentPlaningOrder</content>
+  <content>AccumulationRegister.R9610T_ShipmentPlaning</content>
+</mdclass:FunctionalOption>

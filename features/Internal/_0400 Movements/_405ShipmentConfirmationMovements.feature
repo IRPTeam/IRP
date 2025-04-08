@@ -140,13 +140,13 @@ Scenario: _040171 check Shipment confirmation movements by the Register  "R4010 
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 dated 28.01.2021 18:42:17'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                     | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:42:17'   | '1'           | 'Store 02'     | 'XS/Blue'    | ''                     |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:42:17'   | '10'          | 'Store 02'     | '36/Red'     | ''                     |
+			| 'Shipment confirmation 1 dated 28.01.2021 18:42:17'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                     | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                    | 'Expense'       | '28.01.2021 18:42:17'   | '1'           | 'Store 02'     | 'XS/Blue'    | ''                     | ''                     |
+			| ''                                                    | 'Expense'       | '28.01.2021 18:42:17'   | '10'          | 'Store 02'     | '36/Red'     | ''                     | ''                     |
 		And I close all client application windows
 		
 Scenario: _040172 check Shipment confirmation movements by the Register  "R4022 Shipment of stock transfer orders" (not transfer)
@@ -251,14 +251,14 @@ Scenario: _040176 check Shipment confirmation with serial lot number movements b
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 112 dated 24.05.2022 11:01:23'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                          | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                         | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                        | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                        | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                        | 'Expense'       | '24.05.2022 11:01:23'   | '5'           | 'Store 02'     | 'PZU'        | '8908899877'           |
-			| ''                                                        | 'Expense'       | '24.05.2022 11:01:23'   | '5'           | 'Store 02'     | 'PZU'        | '8908899879'           |
-			| ''                                                        | 'Expense'       | '24.05.2022 11:01:23'   | '5'           | 'Store 02'     | 'UNIQ'       | ''                     |
+			| 'Shipment confirmation 1 112 dated 24.05.2022 11:01:23'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                          | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                         | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                        | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                        | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                        | 'Expense'       | '24.05.2022 11:01:23'   | '5'           | 'Store 02'     | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                                        | 'Expense'       | '24.05.2022 11:01:23'   | '5'           | 'Store 02'     | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                                        | 'Expense'       | '24.05.2022 11:01:23'   | '5'           | 'Store 02'     | 'UNIQ'       | ''                     | ''                     |
 		And I close all client application windows
 
 
@@ -522,14 +522,14 @@ Scenario: _040186 check Shipment confirmation movements by the Register  "R4010 
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 2 dated 28.01.2021 18:43:36'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                     | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:43:36'   | '5'           | 'Store 02'     | 'XS/Blue'    | ''                     |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:43:36'   | '10'          | 'Store 02'     | '36/Red'     | ''                     |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:43:36'   | '12'          | 'Store 02'     | '36/18SD'    | ''                     |
+			| 'Shipment confirmation 2 dated 28.01.2021 18:43:36'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                     | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                    | 'Expense'       | '28.01.2021 18:43:36'   | '5'           | 'Store 02'     | 'XS/Blue'    | ''                     | ''                     |
+			| ''                                                    | 'Expense'       | '28.01.2021 18:43:36'   | '10'          | 'Store 02'     | '36/Red'     | ''                     | ''                     |
+			| ''                                                    | 'Expense'       | '28.01.2021 18:43:36'   | '12'          | 'Store 02'     | '36/18SD'    | ''                     | ''                     |
 		And I close all client application windows
 
 // 8 (SC>SI>SO)
@@ -546,12 +546,12 @@ Scenario: _040190 check Shipment confirmation movements by the Register  "R4010 
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 8 dated 18.02.2021 10:48:53'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                     | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                    | 'Expense'       | '18.02.2021 10:48:53'   | '26'          | 'Store 02'     | 'XS/Blue'    | ''                     |
+			| 'Shipment confirmation 8 dated 18.02.2021 10:48:53'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                     | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                    | 'Expense'       | '18.02.2021 10:48:53'   | '26'          | 'Store 02'     | 'XS/Blue'    | ''                     | ''                     |
 		And I close all client application windows
 
 Scenario: _040191 check Shipment confirmation movements by the Register  "R4032 Goods in transit (outgoing)" (SO-SI-SC, SC>SI>SO)

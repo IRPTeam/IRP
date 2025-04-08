@@ -950,6 +950,31 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="ecd1843e-cf1a-437b-942a-626f202b1d57">
+    <producedTypes>
+      <objectType typeId="6ad4be13-f251-478f-84ea-75a0b24ceee7" valueTypeId="3cf5cc50-9b05-4a60-843a-b8dd33c1ac14"/>
+      <rowType typeId="3b608f83-263c-45a4-a2fe-b26d35e988f2" valueTypeId="e301d3e4-c343-4deb-8e47-817e0de1b0e4"/>
+    </producedTypes>
+    <name>TrailerList</name>
+    <synonym>
+      <key>en</key>
+      <value>Trailer list</value>
+    </synonym>
+    <attributes uuid="9c04d45b-ff91-474d-b73e-4a291597670b">
+      <name>Trailer</name>
+      <synonym>
+        <key>en</key>
+        <value>Trailer</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Vehicles</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <createOnInput>Use</createOnInput>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <templates uuid="5720e8a3-9228-45d9-9d84-8ffee0147302">
     <name>InventoryTransferPrint</name>
     <synonym>

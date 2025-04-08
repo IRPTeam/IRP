@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="213b451e-d85e-4bbf-a501-f7e7ed03475e">
+  <name>AccumulationRegisters_R3040B_WithholdingTax</name>
+  <synonym>
+    <key>en</key>
+    <value>AccumulationRegisters R3040B Withholding tax</value>
+  </synonym>
+</mdclass:Role>

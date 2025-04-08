@@ -109,10 +109,10 @@ Scenario: _051502 check Commissioning of fixed asset movements by the Register "
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Commissioning of fixed asset 11 dated 12.01.2024 12:00:00' | ''                    | ''           | ''         | ''              | ''                  | ''         |
-			| 'Register  "R4010 Actual stocks"'                           | ''                    | ''           | ''         | ''              | ''                  | ''         |
-			| ''                                                          | 'Period'              | 'RecordType' | 'Store'    | 'Item key'      | 'Serial lot number' | 'Quantity' |
-			| ''                                                          | '12.01.2024 12:00:00' | 'Expense'    | 'Store 02' | 'Fixed asset 1' | ''                  | '1'        |		
+			| 'Commissioning of fixed asset 11 dated 12.01.2024 12:00:00' | ''                    | ''           | ''         | ''              | ''                  | ''                  | ''         |
+			| 'Register  "R4010 Actual stocks"'                           | ''                    | ''           | ''         | ''              | ''                  | ''                  | ''         |
+			| ''                                                          | 'Period'              | 'RecordType' | 'Store'    | 'Item key'      | 'Serial lot number' | 'Source of origin'  | 'Quantity' |
+			| ''                                                          | '12.01.2024 12:00:00' | 'Expense'    | 'Store 02' | 'Fixed asset 1' | ''                  | ''                  | '1'        |		
 	And I close all client application windows
 
 Scenario: _051503 check Commissioning of fixed asset movements by the Register "R4011 Free stocks"

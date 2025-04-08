@@ -204,6 +204,11 @@ Scenario: _2060001 preparation
 			| "Documents.SalesOrder.FindByNumber(3056).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(3056).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create SO and PO for link (use variable store)
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(3057).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(3057).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document RetailSalesReceipt objects (with retail customer)
 	And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Write);"|
@@ -3027,9 +3032,9 @@ Scenario: _2060029 check link/unlink form in the SO - SI - SC (use variable item
 			| 'No'                 | 'Dress'                        | 'XS/Blue'   | ''                   | '1,000'    | 'Basic Price without VAT' | 'pcs'            | '440,68'   | '18%' | '79,32'      | '440,68'     | '520,00'       | 'Store 03' |
 			| 'Yes'                | 'Shirt'                        | '38/Black'  | ''                   | '11,000'   | 'Basic Price without VAT' | 'pcs'            | '296,61'   | '18%' | '587,29'     | '3 262,71'   | '3 850,00'     | 'Store 03' |
 			| 'Yes'                | 'Boots'                        | '37/18SD'   | ''                   | '3,000'    | 'Basic Price without VAT' | 'Boots (12 pcs)' | '7 777,80' | '18%' | '4 200,01'   | '23 333,40'  | '27 533,41'    | 'Store 03' |
-			| 'Yes'                | 'Service'                      | 'Internet'  | ''                   | '1,000'    | 'en description is empty' | 'pcs'            | '100,00'   | '18%' | '18,00'      | '100,00'     | '118,00'       | ''         |
+			| 'Yes'                | 'Service'                      | 'Internet'  | ''                   | '1,000'    | 'en description is empty' | 'pcs'            | '100,00'   | '18%' | '18,00'      | '100,00'     | '118,00'       | 'Store 03' |
 			| 'Yes'                | 'Product 3 with SLN'           | 'UNIQ'      | '09987897977890'     | '10,000'   | 'Basic Price without VAT' | 'pcs'            | ''         | '18%' | ''           | ''           | ''             | 'Store 03' |
-			| 'Yes'                | 'Product 7 with SLN (new row)' | 'PZU'       | '9009099'            | '1,000'    | 'Basic Price without VAT' | 'pcs'            | ''         | '18%' | ''           | ''           | ''             | 'Store 03' |	
+			| 'Yes'                | 'Product 7 with SLN (new row)' | 'PZU'       | '9009099'            | '1,000'    | 'Basic Price without VAT' | 'pcs'            | ''         | '18%' | ''           | ''           | ''             | 'Store 03' |
 	* Unlink line
 		And in the table "ItemList" I click "Link unlink basis documents" button		
 		Then "Link / unlink document row" window is opened
@@ -3078,7 +3083,7 @@ Scenario: _2060029 check link/unlink form in the SO - SI - SC (use variable item
 			| 'Dress'                        | 'XS/Blue'   | '1,000'    | 'pcs'            | '440,68'   | '18%' | '79,32'      | '440,68'     | '520,00'       | 'Store 03' | ''                                            |
 			| 'Shirt'                        | '36/Red'    | '11,000'   | 'pcs'            | '296,61'   | '18%' | '587,29'     | '3 262,71'   | '3 850,00'     | 'Store 03' | 'Sales order 3 056 dated 07.02.2025 08:36:23' |
 			| 'Boots'                        | '37/18SD'   | '3,000'    | 'Boots (12 pcs)' | '7 777,80' | '18%' | '4 200,01'   | '23 333,40'  | '27 533,41'    | 'Store 03' | ''                                            |
-			| 'Service'                      | 'Internet'  | '1,000'    | 'pcs'            | '100,00'   | '18%' | '18,00'      | '100,00'     | '118,00'       | ''         | ''                                            |
+			| 'Service'                      | 'Internet'  | '1,000'    | 'pcs'            | '100,00'   | '18%' | '18,00'      | '100,00'     | '118,00'       | 'Store 03' | ''                                            |
 			| 'Product 3 with SLN'           | 'UNIQ'      | '10,000'   | 'pcs'            | ''         | '18%' | ''           | ''           | ''             | 'Store 03' | 'Sales order 3 056 dated 07.02.2025 08:36:23' |
 			| 'Product 7 with SLN (new row)' | 'ODS'       | '1,000'    | 'pcs'            | '120,00'   | '18%' | '21,60'      | '120,00'     | '141,60'       | 'Store 03' | 'Sales order 3 056 dated 07.02.2025 08:36:23' |
 	* Auto link all lines
@@ -3539,7 +3544,7 @@ Scenario: _2060031 check link/unlink form in the PO - PI - GR (use variable item
 			| '1' | ' PurchaseOrder' | 'No'                 | 'Dress'                        | 'XS/Blue'  | 'No'         | 'No'                    | ''                   | '1,000'    | 'Basic Price Types'       | 'pcs'            | '520,00'   | '18%' | 'No'                 | '93,60'      | '520,00'     | '613,60'       | 'Store 02' | ''             | ''                   | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'Yes'               |
 			| '2' | ' PurchaseOrder' | 'Yes'                | 'Shirt'                        | '38/Black' | 'No'         | 'No'                    | ''                   | '11,000'   | 'Basic Price Types'       | 'pcs'            | '350,00'   | '18%' | 'No'                 | '693,00'     | '3 850,00'   | '4 543,00'     | 'Store 02' | ''             | ''                   | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'Yes'               |
 			| '3' | ' PurchaseOrder' | 'Yes'                | 'Boots'                        | '37/18SD'  | 'No'         | 'No'                    | ''                   | '3,000'    | 'Basic Price Types'       | 'Boots (12 pcs)' | '8 400,00' | '18%' | 'No'                 | '4 536,00'   | '25 200,00'  | '29 736,00'    | 'Store 02' | ''             | ''                   | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'Yes'               |
-			| '4' | ' PurchaseOrder' | 'Yes'                | 'Service'                      | 'Internet' | 'Yes'        | 'No'                    | ''                   | '1,000'    | 'en description is empty' | 'pcs'            | '100,00'   | '18%' | 'No'                 | '18,00'      | '100,00'     | '118,00'       | ''         | ''             | ''                   | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'No'                |
+			| '4' | ' PurchaseOrder' | 'Yes'                | 'Service'                      | 'Internet' | 'Yes'        | 'No'                    | ''                   | '1,000'    | 'en description is empty' | 'pcs'            | '100,00'   | '18%' | 'No'                 | '18,00'      | '100,00'     | '118,00'       | 'Store 02' | ''             | ''                   | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'No'                |
 			| '5' | ' PurchaseOrder' | 'Yes'                | 'Product 3 with SLN'           | 'UNIQ'     | 'No'         | 'Yes'                   | '09987897977890'     | '10,000'   | 'en description is empty' | 'pcs'            | '120,00'   | '18%' | 'No'                 | '216,00'     | '1 200,00'   | '1 416,00'     | 'Store 02' | ''             | ''                   | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'Yes'               |
 			| '6' | ' PurchaseOrder' | 'Yes'                | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'         | 'Yes'                   | '9009099'            | '1,000'    | 'Basic Price Types'       | 'pcs'            | ''         | '18%' | 'No'                 | ''           | ''           | ''             | 'Store 02' | ''             | ''                   | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'Yes'               |
 	* Unlink line
@@ -3589,7 +3594,7 @@ Scenario: _2060031 check link/unlink form in the PO - PI - GR (use variable item
 			| '1' | ''               | ''               | 'No'                 | 'Dress'                        | 'XS/Blue'  | 'No'         | 'No'                    | ''                   | ''                  | '1,000'    | 'Basic Price Types'       | 'pcs'            | '520,00'   | '18%' | 'No'                 | '93,60'      | '520,00'     | '613,60'       | 'Store 02' | ''             | ''                   | 'No'              | ''                                               | ''            | 'Yes'               |
 			| '2' | ' PurchaseOrder' | ''               | 'Yes'                | 'Shirt'                        | '36/Red'   | 'No'         | 'No'                    | ''                   | ''                  | '11,000'   | 'Basic Price Types'       | 'pcs'            | '350,00'   | '18%' | 'No'                 | '693,00'     | '3 850,00'   | '4 543,00'     | 'Store 02' | ''             | ''                   | 'No'              | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | ''            | 'Yes'               |
 			| '3' | ''               | ''               | 'No'                 | 'Boots'                        | '37/18SD'  | 'No'         | 'No'                    | ''                   | ''                  | '3,000'    | 'Basic Price Types'       | 'Boots (12 pcs)' | '8 400,00' | '18%' | 'No'                 | '4 536,00'   | '25 200,00'  | '29 736,00'    | 'Store 02' | ''             | ''                   | 'No'              | ''                                               | ''            | 'Yes'               |
-			| '4' | ''               | ''               | 'No'                 | 'Service'                      | 'Internet' | 'Yes'        | 'No'                    | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '100,00'   | '18%' | 'No'                 | '18,00'      | '100,00'     | '118,00'       | ''         | ''             | ''                   | 'No'              | ''                                               | ''            | 'No'                |
+			| '4' | ''               | ''               | 'No'                 | 'Service'                      | 'Internet' | 'Yes'        | 'No'                    | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '100,00'   | '18%' | 'No'                 | '18,00'      | '100,00'     | '118,00'       | 'Store 02' | ''             | ''                   | 'No'              | ''                                               | ''            | 'No'                |
 			| '5' | ' PurchaseOrder' | ''               | 'Yes'                | 'Product 3 with SLN'           | 'UNIQ'     | 'No'         | 'Yes'                   | '09987897977890'     | ''                  | '10,000'   | 'en description is empty' | 'pcs'            | '120,00'   | '18%' | 'No'                 | '216,00'     | '1 200,00'   | '1 416,00'     | 'Store 02' | ''             | ''                   | 'No'              | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | ''            | 'Yes'               |
 			| '6' | ' PurchaseOrder' | ''               | 'Yes'                | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | 'Yes'                   | '9009099'            | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '130,00'   | '18%' | 'No'                 | '23,40'      | '130,00'     | '153,40'       | 'Store 02' | ''             | ''                   | 'No'              | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | ''            | 'Yes'               |
 	* Auto link all lines
@@ -3928,4 +3933,926 @@ Scenario: _2060032 check link/unlink form in the PO - GR - PI (use variable item
 		And I click "Post" button
 		Then user message window does not contain messages
 		And I close all client application windows						
-				
+
+Scenario: _2060033 check link/unlink form in the SO - SI - SC (use variable store)	
+	And I close all client application windows
+	* Open form for create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company | 
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term DFC'     |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Accountants office' |
+		And I select current line in "List" table	
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 08    |
+		And I select current line in "List" table	
+	* Select items from basis documents
+		And in the table "ItemList" I click "Add basis documents" button
+		And I expand current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Row presentation"                            | "Use" |
+			| "Sales order 3 057 dated 07.03.2025 12:46:54" | "No"  |
+		And I set "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button	
+	* Check RowIDInfo
+		And "RowIDInfo" table became equal
+			| '#' | 'Quantity' | 'Basis'                                       | 'Current step' | 'Next step' |
+			| '1' | '5,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | ''          |
+			| '2' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | ''          |
+			| '3' | '11,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | ''          |
+			| '4' | '36,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | ''          |
+			| '5' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&WO&WS'     | ''          |
+			| '6' | '10,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | ''          |
+			| '7' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | ''          |
+		Then the number of "RowIDInfo" table lines is "равно" "7"
+	// Temp
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 08    |
+		And I select current line in "List" table
+		If "Update item list info" window is opened Then
+			And I click "OK" button	
+	// EndTemp
+		And "ItemList" table became equal
+			| '#' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key'  | 'Is service' | 'Use serial lot number' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit'           | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use shipment confirmation' | 'Store'    | 'Sales order'                                 | 'Profit loss center' | 'Detail' | 'Additional analytic' | 'Other period revenue type' |
+			| '1' | 'Yes'                | 'Yes'             | 'Trousers'                     | '38/Yellow' | 'No'         | 'No'                    | ''                   | ''                  | '5,000'    | 'Basic Price without VAT' | 'pcs'            | '338,98'   | '18%' | ''              | 'No'                 | '305,08'     | '1 694,90'   | '1 999,98'     | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |
+			| '2' | 'No'                 | 'Yes'             | 'Dress'                        | 'XS/Blue'   | 'No'         | 'No'                    | ''                   | ''                  | '1,000'    | 'Basic Price without VAT' | 'pcs'            | '440,68'   | '18%' | ''              | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |
+			| '3' | 'Yes'                | 'Yes'             | 'Shirt'                        | '36/Red'    | 'No'         | 'No'                    | ''                   | ''                  | '11,000'   | 'Basic Price without VAT' | 'pcs'            | '296,61'   | '18%' | ''              | 'No'                 | '587,29'     | '3 262,71'   | '3 850,00'     | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |
+			| '4' | 'Yes'                | 'Yes'             | 'Boots'                        | '37/18SD'   | 'No'         | 'No'                    | ''                   | ''                  | '3,000'    | 'Basic Price without VAT' | 'Boots (12 pcs)' | '7 777,80' | '18%' | ''              | 'No'                 | '4 200,01'   | '23 333,40'  | '27 533,41'    | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |
+			| '5' | 'Yes'                | 'Yes'             | 'Service'                      | 'Internet'  | 'Yes'        | 'No'                    | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '100,00'   | '18%' | ''              | 'No'                 | '18,00'      | '100,00'     | '118,00'       | 'No'                        | ''         | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |
+			| '6' | 'Yes'                | 'Yes'             | 'Product 3 with SLN'           | 'UNIQ'      | 'No'         | 'Yes'                   | ''                   | ''                  | '10,000'   | 'Basic Price without VAT' | 'pcs'            | ''         | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |
+			| '7' | 'Yes'                | 'Yes'             | 'Product 7 with SLN (new row)' | 'ODS'       | 'No'         | 'Yes'                   | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '120,00'   | '18%' | ''              | 'No'                 | '21,60'      | '120,00'     | '141,60'       | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |					
+	* Unlink line
+		And in the table "ItemList" I click "Link unlink basis documents" button		
+		Then "Link / unlink document row" window is opened
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And I go to line in "ItemList" table
+			| "Item"               | "Item key" |
+			| "Product 3 with SLN" | "UNIQ"     |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| "Owner" | "Serial number"  |
+			| "UNIQ"  | "09987897977890" |
+		And I select current line in "List" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "10,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| "Item"                         | "Item key" |
+			| "Product 7 with SLN (new row)" | "ODS"      |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And I click Select button of "Serial lot number" field
+		And I go to line in "List" table
+			| "Serial number" |
+			| "9009100"       |
+		And I select current line in "List" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table	
+		And I click "Post" button
+		And "ItemList" table became equal
+			| '#' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key'  | 'Is service' | 'Use serial lot number' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit'           | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use shipment confirmation' | 'Store'    | 'Sales order' | 'Profit loss center' | 'Detail' | 'Additional analytic' | 'Other period revenue type' |
+			| '1' | 'No'                 | 'No'              | 'Trousers'                     | '38/Yellow' | 'No'         | 'No'                    | ''                   | ''                  | '5,000'    | 'Basic Price without VAT' | 'pcs'            | '338,98'   | '18%' | ''              | 'No'                 | '305,08'     | '1 694,90'   | '1 999,98'     | 'Yes'                       | 'Store 08' | ''            | ''                   | ''       | ''                    | ''                          |
+			| '2' | 'No'                 | 'No'              | 'Dress'                        | 'XS/Blue'   | 'No'         | 'No'                    | ''                   | ''                  | '1,000'    | 'Basic Price without VAT' | 'pcs'            | '440,68'   | '18%' | ''              | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Yes'                       | 'Store 08' | ''            | ''                   | ''       | ''                    | ''                          |
+			| '3' | 'No'                 | 'No'              | 'Shirt'                        | '36/Red'    | 'No'         | 'No'                    | ''                   | ''                  | '11,000'   | 'Basic Price without VAT' | 'pcs'            | '296,61'   | '18%' | ''              | 'No'                 | '587,29'     | '3 262,71'   | '3 850,00'     | 'Yes'                       | 'Store 08' | ''            | ''                   | ''       | ''                    | ''                          |
+			| '4' | 'No'                 | 'No'              | 'Boots'                        | '37/18SD'   | 'No'         | 'No'                    | ''                   | ''                  | '3,000'    | 'Basic Price without VAT' | 'Boots (12 pcs)' | '7 777,80' | '18%' | ''              | 'No'                 | '4 200,01'   | '23 333,40'  | '27 533,41'    | 'Yes'                       | 'Store 08' | ''            | ''                   | ''       | ''                    | ''                          |
+			| '5' | 'No'                 | 'No'              | 'Service'                      | 'Internet'  | 'Yes'        | 'No'                    | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '100,00'   | '18%' | ''              | 'No'                 | '18,00'      | '100,00'     | '118,00'       | 'No'                        | ''         | ''            | ''                   | ''       | ''                    | ''                          |
+			| '6' | 'No'                 | 'No'              | 'Product 3 with SLN'           | 'UNIQ'      | 'No'         | 'Yes'                   | '09987897977890'     | ''                  | '10,000'   | 'Basic Price without VAT' | 'pcs'            | ''         | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'Yes'                       | 'Store 08' | ''            | ''                   | ''       | ''                    | ''                          |
+			| '7' | 'No'                 | 'No'              | 'Product 7 with SLN (new row)' | 'ODS'       | 'No'         | 'Yes'                   | '9009100'            | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '120,00'   | '18%' | ''              | 'No'                 | '21,60'      | '120,00'     | '141,60'       | 'Yes'                       | 'Store 08' | ''            | ''                   | ''       | ''                    | ''                          |
+	* Auto link all lines
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And I go to line in "ItemList" table
+			| "Item"     | "Item key"  | "Quantity" |
+			| "Trousers" | "38/Yellow" | "5,000"    |
+		And I remove "Use shipment confirmation" checkbox in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button	
+		And "RowIDInfo" table became equal
+			| '#' | 'Quantity' | 'Basis'                                       | 'Current step' | 'Next step' |
+			| '1' | '5,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | ''          |
+			| '2' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SC'        |
+			| '3' | '11,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SC'        |
+			| '4' | '36,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SC'        |
+			| '5' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&WO&WS'     | ''          |
+			| '6' | '10,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SC'        |
+			| '7' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SC'        |
+		Then the number of "RowIDInfo" table lines is "равно" "7"	
+		// Temp
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 08    |
+		And I select current line in "List" table
+		If "Update item list info" window is opened Then
+			And I click "OK" button	
+		// EndTemp
+		And "ItemList" table became equal
+			| '#' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key'  | 'Is service' | 'Use serial lot number' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit'           | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use shipment confirmation' | 'Store'    | 'Sales order'                                 | 'Profit loss center' | 'Detail' | 'Additional analytic' | 'Other period revenue type' |
+			| '1' | 'Yes'                | 'Yes'             | 'Trousers'                     | '38/Yellow' | 'No'         | 'No'                    | ''                   | ''                  | '5,000'    | 'Basic Price without VAT' | 'pcs'            | '338,98'   | '18%' | ''              | 'No'                 | '305,08'     | '1 694,90'   | '1 999,98'     | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |
+			| '2' | 'No'                 | 'Yes'             | 'Dress'                        | 'XS/Blue'   | 'No'         | 'No'                    | ''                   | ''                  | '1,000'    | 'Basic Price without VAT' | 'pcs'            | '440,68'   | '18%' | ''              | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |
+			| '3' | 'Yes'                | 'Yes'             | 'Shirt'                        | '36/Red'    | 'No'         | 'No'                    | ''                   | ''                  | '11,000'   | 'Basic Price without VAT' | 'pcs'            | '296,61'   | '18%' | ''              | 'No'                 | '587,29'     | '3 262,71'   | '3 850,00'     | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |
+			| '4' | 'Yes'                | 'Yes'             | 'Boots'                        | '37/18SD'   | 'No'         | 'No'                    | ''                   | ''                  | '3,000'    | 'Basic Price without VAT' | 'Boots (12 pcs)' | '7 777,80' | '18%' | ''              | 'No'                 | '4 200,01'   | '23 333,40'  | '27 533,41'    | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |
+			| '5' | 'Yes'                | 'Yes'             | 'Service'                      | 'Internet'  | 'Yes'        | 'No'                    | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '100,00'   | '18%' | ''              | 'No'                 | '18,00'      | '100,00'     | '118,00'       | 'No'                        | ''         | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |
+			| '6' | 'Yes'                | 'Yes'             | 'Product 3 with SLN'           | 'UNIQ'      | 'No'         | 'Yes'                   | '09987897977890'     | ''                  | '10,000'   | 'Basic Price without VAT' | 'pcs'            | ''         | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |
+			| '7' | 'Yes'                | 'Yes'             | 'Product 7 with SLN (new row)' | 'ODS'       | 'No'         | 'Yes'                   | '9009100'            | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '120,00'   | '18%' | ''              | 'No'                 | '21,60'      | '120,00'     | '141,60'       | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | ''                   | ''       | ''                    | ''                          |
+	* Post SI and create SC
+		And I click "Post" button
+		And I delete "$$SalesInvoice2060033$$" variable
+		And I delete "$$NumberSalesInvoice2060033$$" variable
+		And I save the window as "$$SalesInvoice2060033$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice2060033$$"
+	* Create SC
+		And I click "Shipment confirmation" button
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| '#' | 'Item'                         | 'Item key'  | 'Serial lot numbers' | 'Quantity' | 'Unit'           | 'Store'    | 'Shipment basis'          | 'Sales order'                                 | 'Sales invoice'           |
+			| '1' | 'Trousers'                     | '38/Yellow' | ''                   | '5,000'    | 'pcs'            | 'Store 08' | '$$SalesInvoice2060033$$' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | '$$SalesInvoice2060033$$' |
+			| '2' | 'Dress'                        | 'XS/Blue'   | ''                   | '1,000'    | 'pcs'            | 'Store 08' | '$$SalesInvoice2060033$$' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | '$$SalesInvoice2060033$$' |
+			| '3' | 'Shirt'                        | '36/Red'    | ''                   | '11,000'   | 'pcs'            | 'Store 08' | '$$SalesInvoice2060033$$' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | '$$SalesInvoice2060033$$' |
+			| '4' | 'Boots'                        | '37/18SD'   | ''                   | '3,000'    | 'Boots (12 pcs)' | 'Store 08' | '$$SalesInvoice2060033$$' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | '$$SalesInvoice2060033$$' |
+			| '5' | 'Product 3 with SLN'           | 'UNIQ'      | '09987897977890'     | '10,000'   | 'pcs'            | 'Store 08' | '$$SalesInvoice2060033$$' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | '$$SalesInvoice2060033$$' |
+			| '6' | 'Product 7 with SLN (new row)' | 'ODS'       | '9009100'            | '1,000'    | 'pcs'            | 'Store 08' | '$$SalesInvoice2060033$$' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | '$$SalesInvoice2060033$$' |
+		And I click "Post" button
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+	* Relink SC
+		And I activate "Item key" field in "ItemList" table
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		Then "Link / unlink document row" window is opened
+		And I go to line in "ItemListRows" table
+			| "Quantity" | "Row presentation"                             | "Store"    | "Unit" |
+			| "1,000"    | "Product 7 with SLN (new row) (ODS) (9009100)" | "Store 08" | "pcs"  |
+		And I remove checkbox "Use reverse basises tree"
+		And Delay 2		
+		And I go to line in "BasisesTree" table
+			| "Currency" | "Price"  | "Quantity" | "Row presentation"                             | "Unit" |
+			| "TRY"      | "120,00" | "1,000"    | "Product 7 with SLN (new row) (ODS) (9009100)" | "pcs"  |
+		And I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| "Quantity" | "Row presentation"          | "Store"    | "Unit" |
+			| "10,000"   | "Product 3 with SLN (UNIQ)" | "Store 08" | "pcs"  |
+		And I go to line in "BasisesTree" table
+			| "Row presentation"                              |
+			| "$$SalesInvoice2060033$$" |
+		And I go to line in "BasisesTree" table
+			| "Currency" | "Quantity" | "Row presentation"          | "Unit" |
+			| "TRY"      | "10,000"   | "Product 3 with SLN (UNIQ)" | "pcs"  |
+		And I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| "Quantity" | "Row presentation"| "Store"    | "Unit" |
+			| "1,000"    | "Dress (XS/Blue)" | "Store 08" | "pcs"  |
+		And I go to line in "BasisesTree" table
+			| "Row presentation"                              |
+			| "$$SalesInvoice2060033$$" |
+		And I go to line in "BasisesTree" table
+			| "Currency" | "Price"  | "Quantity" | "Row presentation" | "Unit" |
+			| "TRY"      | "440,68" | "1,000"    | "Dress (XS/Blue)"  | "pcs"  |
+		And I click the button named "Link"
+		And I click "Ok" button
+		And I click "Post" button
+		Then user message window does not contain messages
+	* Try change line Store
+		And I go to line in "ItemList" table
+			| "Item"                         | "Item key" |
+			| "Product 7 with SLN (new row)" | "ODS"      |
+		When I Check the steps for Exception
+			| 'And I select "Store 03" from "Store" drop-down list by string in "ItemList" table'         |	
+	* Post SC
+		And I delete "$$ShipmentConfirmation2060033$$" variable
+		And I delete "$$NumberShipmentConfirmation2060033$$" variable
+		And I save the window as "$$ShipmentConfirmation2060033$$"
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation2060033$$"
+		And I close all client application windows
+
+Scenario: _2060034 check link/unlink form in the SO - SC - SI (use variable stores)
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		If "List" table	contains lines Then
+			| 'Number'  |
+			| '$$NumberShipmentConfirmation2060033$$' |
+			And I go to line in "List" table
+				| 'Number'  |
+				| '$$NumberShipmentConfirmation2060033$$' |
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		If "List" table	contains lines Then
+			| 'Number'  |
+			| '$$NumberSalesInvoice2060033$$' |
+			And I go to line in "List" table
+				| 'Number'  |
+				| '$$NumberSalesInvoice2060033$$' |
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
+	* Open form for create SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I select "Sales" exact value from "Transaction type" drop-down list
+		And I activate field named "ItemListLineNumber" in "ItemList" table	
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 08    |
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'     |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Accountants office' |
+		And I select current line in "List" table
+	* Select items from basis documents
+		And in the table "ItemList" I click "Add basis documents" button
+		And I expand current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Row presentation"                            | "Use" |
+			| "Sales order 3 057 dated 07.03.2025 12:46:54" | "No"  |
+		And I set "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button
+	* Check RowIDInfo
+		And "RowIDInfo" table became equal
+			| '#' | 'Quantity' | 'Basis'                                       | 'Current step' | 'Next step' |
+			| '1' | '5,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | ''          |
+			| '2' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | ''          |
+			| '3' | '11,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | ''          |
+			| '4' | '36,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | ''          |
+			| '5' | '10,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | ''          |
+			| '6' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | ''          |
+		Then the number of "RowIDInfo" table lines is "равно" "6"	
+	// Temp
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 08    |
+		And I select current line in "List" table
+		If "1C:Enterprise" window is opened Then
+			And I click "Yes" button		
+	// EndTemp
+		And "ItemList" table became equal
+			| '#' | 'Internal links' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key'  | 'Use serial lot number' | 'Quantity' | 'Unit'           | 'Store'    | 'Shipment basis'                              | 'Is closed order' | 'Sales order'                                 |
+			| '1' | ' SalesOrder'    | 'Yes'                | 'Yes'             | 'Trousers'                     | '38/Yellow' | 'No'                    | '5,000'    | 'pcs'            | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'No'              | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '2' | ' SalesOrder'    | 'No'                 | 'Yes'             | 'Dress'                        | 'XS/Blue'   | 'No'                    | '1,000'    | 'pcs'            | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'No'              | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '3' | ' SalesOrder'    | 'Yes'                | 'Yes'             | 'Shirt'                        | '36/Red'    | 'No'                    | '11,000'   | 'pcs'            | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'No'              | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '4' | ' SalesOrder'    | 'Yes'                | 'Yes'             | 'Boots'                        | '37/18SD'   | 'No'                    | '3,000'    | 'Boots (12 pcs)' | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'No'              | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '5' | ' SalesOrder'    | 'Yes'                | 'Yes'             | 'Product 3 with SLN'           | 'UNIQ'      | 'Yes'                   | '10,000'   | 'pcs'            | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'No'              | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '6' | ' SalesOrder'    | 'Yes'                | 'Yes'             | 'Product 7 with SLN (new row)' | 'ODS'       | 'Yes'                   | '1,000'    | 'pcs'            | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'No'              | 'Sales order 3 057 dated 07.03.2025 12:46:54' |	
+	* Unlink line
+		And in the table "ItemList" I click "Link unlink basis documents" button		
+		Then "Link / unlink document row" window is opened
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And I go to line in "ItemList" table
+			| "Item"               | "Item key" |
+			| "Product 3 with SLN" | "UNIQ"     |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| "Owner" | "Serial number"  |
+			| "UNIQ"  | "09987897977890" |
+		And I select current line in "List" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "10,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| "Item"                         | "Item key" |
+			| "Product 7 with SLN (new row)" | "ODS"      |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And I click Select button of "Serial lot number" field
+		And I go to line in "List" table
+			| "Serial number" |
+			| "9009100"       |
+		And I select current line in "List" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table	
+		And I click "Post" button
+		And "ItemList" table became equal
+			| '#' | 'Internal links' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key'  | 'Use serial lot number' | 'Quantity' | 'Unit'           | 'Store'    | 'Shipment basis' | 'Is closed order' | 'Sales order' |
+			| '1' | ''               | 'No'                 | 'No'              | 'Trousers'                     | '38/Yellow' | 'No'                    | '5,000'    | 'pcs'            | 'Store 08' | ''               | 'No'              | ''            |
+			| '2' | ''               | 'No'                 | 'No'              | 'Dress'                        | 'XS/Blue'   | 'No'                    | '1,000'    | 'pcs'            | 'Store 08' | ''               | 'No'              | ''            |
+			| '3' | ''               | 'No'                 | 'No'              | 'Shirt'                        | '36/Red'    | 'No'                    | '11,000'   | 'pcs'            | 'Store 08' | ''               | 'No'              | ''            |
+			| '4' | ''               | 'No'                 | 'No'              | 'Boots'                        | '37/18SD'   | 'No'                    | '3,000'    | 'Boots (12 pcs)' | 'Store 08' | ''               | 'No'              | ''            |
+			| '5' | ''               | 'No'                 | 'No'              | 'Product 3 with SLN'           | 'UNIQ'      | 'Yes'                   | '10,000'   | 'pcs'            | 'Store 08' | ''               | 'No'              | ''            |
+			| '6' | ''               | 'No'                 | 'No'              | 'Product 7 with SLN (new row)' | 'ODS'       | 'Yes'                   | '1,000'    | 'pcs'            | 'Store 08' | ''               | 'No'              | ''            |
+	* Auto link all lines
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And I click "Post" button	
+		And "RowIDInfo" table became equal
+			| '#' | 'Quantity' | 'Basis'                                       | 'Current step' | 'Next step' |
+			| '1' | '5,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI'          |
+			| '2' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI'        |
+			| '3' | '11,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI'        |
+			| '4' | '36,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI'        |
+			| '5' | '10,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI'        |
+			| '6' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI'        |
+		Then the number of "RowIDInfo" table lines is "равно" "6"	
+		// Temp
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 08    |
+		And I select current line in "List" table
+		If "1C:Enterprise" window is opened Then
+			And I click "Yes" button
+		// EndTemp
+		And "ItemList" table became equal
+			| '#' | 'Internal links' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key'  | 'Use serial lot number' | 'Quantity' | 'Unit'           | 'Store'    | 'Shipment basis'                              | 'Is closed order' | 'Sales order'                                 |
+			| '1' | ' SalesOrder'    | 'Yes'                | 'Yes'             | 'Trousers'                     | '38/Yellow' | 'No'                    | '5,000'    | 'pcs'            | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'No'              | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '2' | ' SalesOrder'    | 'No'                 | 'Yes'             | 'Dress'                        | 'XS/Blue'   | 'No'                    | '1,000'    | 'pcs'            | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'No'              | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '3' | ' SalesOrder'    | 'Yes'                | 'Yes'             | 'Shirt'                        | '36/Red'    | 'No'                    | '11,000'   | 'pcs'            | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'No'              | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '4' | ' SalesOrder'    | 'Yes'                | 'Yes'             | 'Boots'                        | '37/18SD'   | 'No'                    | '3,000'    | 'Boots (12 pcs)' | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'No'              | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '5' | ' SalesOrder'    | 'Yes'                | 'Yes'             | 'Product 3 with SLN'           | 'UNIQ'      | 'Yes'                   | '10,000'   | 'pcs'            | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'No'              | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '6' | ' SalesOrder'    | 'Yes'                | 'Yes'             | 'Product 7 with SLN (new row)' | 'ODS'       | 'Yes'                   | '1,000'    | 'pcs'            | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'No'              | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+	* Post SI and create SC
+		And I click "Post" button
+		And I delete "$$ShipmentConfirmation2060034$$" variable
+		And I delete "$$NumberShipmentConfirmation2060034$$" variable
+		And I save the window as "$$ShipmentConfirmation2060034$$"
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation2060034$$"	
+	* Create SI
+		And I click "Sales invoice" button
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| '#' | 'Item'                         | 'Item key'  | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit'           | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use shipment confirmation' | 'Store'    | 'Sales order'                                 |
+			| '1' | 'Trousers'                     | '38/Yellow' | ''                   | ''                  | '5,000'    | 'Basic Price without VAT' | 'pcs'            | '338,98'   | '18%' | ''              | 'No'                 | '305,08'     | '1 694,90'   | '1 999,98'     | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '2' | 'Dress'                        | 'XS/Blue'   | ''                   | ''                  | '1,000'    | 'Basic Price without VAT' | 'pcs'            | '440,68'   | '18%' | ''              | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '3' | 'Shirt'                        | '36/Red'    | ''                   | ''                  | '11,000'   | 'Basic Price without VAT' | 'pcs'            | '296,61'   | '18%' | ''              | 'No'                 | '587,29'     | '3 262,71'   | '3 850,00'     | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '4' | 'Boots'                        | '37/18SD'   | ''                   | ''                  | '3,000'    | 'Basic Price without VAT' | 'Boots (12 pcs)' | '7 777,80' | '18%' | ''              | 'No'                 | '4 200,01'   | '23 333,40'  | '27 533,41'    | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '5' | 'Product 3 with SLN'           | 'UNIQ'      | '09987897977890'     | ''                  | '10,000'   | 'Basic Price without VAT' | 'pcs'            | ''         | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+			| '6' | 'Product 7 with SLN (new row)' | 'ODS'       | '9009100'            | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '120,00'   | '18%' | ''              | 'No'                 | '21,60'      | '120,00'     | '141,60'       | 'Yes'                       | 'Store 08' | 'Sales order 3 057 dated 07.03.2025 12:46:54' |
+		And I click "Post" button
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+	* Relink SI
+		And I activate "Item key" field in "ItemList" table
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		Then "Link / unlink document row" window is opened
+		And I go to line in "ItemListRows" table
+			| "Quantity" | "Row presentation"                             | "Store"    | "Unit" |
+			| "1,000"    | "Product 7 with SLN (new row) (ODS) (9009100)" | "Store 08" | "pcs"  |
+		And I remove checkbox "Use reverse basises tree"
+		And Delay 2		
+		And I go to line in "BasisesTree" table
+			| "Currency" | "Price"  | "Quantity" | "Row presentation"                             | "Unit" |
+			| "TRY"      | "120,00" | "1,000"    | "Product 7 with SLN (new row) (ODS) (9009100)" | "pcs"  |
+		And I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| "Quantity" | "Row presentation"          | "Store"    | "Unit" |
+			| "10,000"   | "Product 3 with SLN (UNIQ)" | "Store 08" | "pcs"  |
+		And I go to line in "BasisesTree" table
+			| "Row presentation"                              |
+			| "$$ShipmentConfirmation2060034$$" |
+		And I go to line in "BasisesTree" table
+			| "Currency" | "Quantity" | "Row presentation"          | "Unit" |
+			| "TRY"      | "10,000"   | "Product 3 with SLN (UNIQ)" | "pcs"  |
+		And I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| "Quantity" | "Row presentation"| "Store"    | "Unit" |
+			| "1,000"    | "Dress (XS/Blue)" | "Store 08" | "pcs"  |
+		And I go to line in "BasisesTree" table
+			| "Row presentation"                              |
+			| "$$ShipmentConfirmation2060034$$" |
+		And I go to line in "BasisesTree" table
+			| "Currency" | "Price"  | "Quantity" | "Row presentation" | "Unit" |
+			| "TRY"      | "440,68" | "1,000"    | "Dress (XS/Blue)"  | "pcs"  |
+		And I click the button named "Link"
+		And I click "Ok" button
+		And I click "Post" button
+		Then user message window does not contain messages
+	* Try change line Store
+		And I go to line in "ItemList" table
+			| "Item"                         | "Item key" |
+			| "Product 7 with SLN (new row)" | "ODS"      |
+		When I Check the steps for Exception
+			| 'And I select "Store 03" from "Store" drop-down list by string in "ItemList" table'         |	
+	* Post SI
+		And I delete "$$SalesInvoice2060034$$" variable
+		And I delete "$$NumberSalesInvoice2060034$$" variable
+		And I save the window as "$$SalesInvoice2060034$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice2060034$$"
+		And I close all client application windows	
+
+
+Scenario: _2060035 check link/unlink form in the PO - PI - GR (use variable store)	
+	And I close all client application windows
+	* Open form for create PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company | 
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Adel'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Adel'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Vendor, TRY'     |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Accountants office' |
+		And I select current line in "List" table	
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 08    |
+		And I select current line in "List" table	
+	* Select items from basis documents
+		And in the table "ItemList" I click "Add basis documents" button
+		And I expand current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Row presentation"                               | "Use" |
+			| "Purchase order 3 057 dated 07.03.2025 12:45:28" | "No"  |
+		And I set "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button	
+	* Check RowIDInfo
+		And "RowIDInfo" table became equal
+			| '#' | 'Quantity' | 'Basis'                                          | 'Current step' | 'Next step' |
+			| '1' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | ''          |
+			| '2' | '11,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | ''          |
+			| '3' | '36,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | ''          |
+			| '4' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI'           | ''          |
+			| '5' | '10,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | ''          |
+			| '6' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | ''          |
+		Then the number of "RowIDInfo" table lines is "равно" "6"
+	// Temp
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 08    |
+		And I select current line in "List" table
+		If "Update item list info" window is opened Then
+			And I click "OK" button	
+	// EndTemp
+		And "ItemList" table became equal
+			| '#' | 'Internal links' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key' | 'Is service' | 'Use serial lot number' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit'           | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Expense type' | 'Profit loss center' | 'Purchase order'                                 | 'Use goods receipt' |
+			| '1' | ' PurchaseOrder' | 'No'                 | 'Yes'             | 'Dress'                        | 'XS/Blue'  | 'No'         | 'No'                    | ''                   | ''                  | '1,000'    | 'Basic Price Types'       | 'pcs'            | '520,00'   | '18%' | ''              | 'No'                 | '93,60'      | '520,00'     | '613,60'       | 'Store 08' | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'No'                |
+			| '2' | ' PurchaseOrder' | 'Yes'                | 'Yes'             | 'Shirt'                        | '36/Red'   | 'No'         | 'No'                    | ''                   | ''                  | '11,000'   | 'Basic Price Types'       | 'pcs'            | '350,00'   | '18%' | ''              | 'No'                 | '693,00'     | '3 850,00'   | '4 543,00'     | 'Store 08' | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'No'                |
+			| '3' | ' PurchaseOrder' | 'Yes'                | 'Yes'             | 'Boots'                        | '37/18SD'  | 'No'         | 'No'                    | ''                   | ''                  | '3,000'    | 'Basic Price Types'       | 'Boots (12 pcs)' | '8 400,00' | '18%' | ''              | 'No'                 | '4 536,00'   | '25 200,00'  | '29 736,00'    | 'Store 08' | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'No'                |
+			| '4' | ' PurchaseOrder' | 'Yes'                | 'Yes'             | 'Service'                      | 'Internet' | 'Yes'        | 'No'                    | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '100,00'   | '18%' | ''              | 'No'                 | '18,00'      | '100,00'     | '118,00'       | ''         | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'No'                |
+			| '5' | ' PurchaseOrder' | 'Yes'                | 'Yes'             | 'Product 3 with SLN'           | 'UNIQ'     | 'No'         | 'Yes'                   | ''                   | ''                  | '10,000'   | 'en description is empty' | 'pcs'            | '120,00'   | '18%' | ''              | 'No'                 | '216,00'     | '1 200,00'   | '1 416,00'     | 'Store 08' | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'No'                |
+			| '6' | ' PurchaseOrder' | 'Yes'                | 'Yes'             | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | 'Yes'                   | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '130,00'   | '18%' | ''              | 'No'                 | '23,40'      | '130,00'     | '153,40'       | 'Store 08' | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'No'                |		
+	* Unlink line
+		And in the table "ItemList" I click "Link unlink basis documents" button		
+		Then "Link / unlink document row" window is opened
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And I go to line in "ItemList" table
+			| "Item"               | "Item key" |
+			| "Product 3 with SLN" | "UNIQ"     |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| "Owner" | "Serial number"  |
+			| "UNIQ"  | "09987897977890" |
+		And I select current line in "List" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "10,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| "Item"                         | "Item key" |
+			| "Product 7 with SLN (new row)" | "ODS"      |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And I click Select button of "Serial lot number" field
+		And I go to line in "List" table
+			| "Serial number" |
+			| "9009100"       |
+		And I select current line in "List" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table	
+		And I click "Post" button
+		And "ItemList" table became equal
+			| '#' | 'Internal links' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key' | 'Is service' | 'Use serial lot number' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit'           | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Expense type' | 'Profit loss center' | 'Purchase order' | 'Use goods receipt' |
+			| '1' | ''               | 'No'                 | 'No'              | 'Dress'                        | 'XS/Blue'  | 'No'         | 'No'                    | ''                   | ''                  | '1,000'    | 'Basic Price Types'       | 'pcs'            | '520,00'   | '18%' | ''              | 'No'                 | '93,60'      | '520,00'     | '613,60'       | 'Store 08' | ''             | ''                   | ''               | 'No'                |
+			| '2' | ''               | 'No'                 | 'No'              | 'Shirt'                        | '36/Red'   | 'No'         | 'No'                    | ''                   | ''                  | '11,000'   | 'Basic Price Types'       | 'pcs'            | '350,00'   | '18%' | ''              | 'No'                 | '693,00'     | '3 850,00'   | '4 543,00'     | 'Store 08' | ''             | ''                   | ''               | 'No'                |
+			| '3' | ''               | 'No'                 | 'No'              | 'Boots'                        | '37/18SD'  | 'No'         | 'No'                    | ''                   | ''                  | '3,000'    | 'Basic Price Types'       | 'Boots (12 pcs)' | '8 400,00' | '18%' | ''              | 'No'                 | '4 536,00'   | '25 200,00'  | '29 736,00'    | 'Store 08' | ''             | ''                   | ''               | 'No'                |
+			| '4' | ''               | 'No'                 | 'No'              | 'Service'                      | 'Internet' | 'Yes'        | 'No'                    | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '100,00'   | '18%' | ''              | 'No'                 | '18,00'      | '100,00'     | '118,00'       | ''         | ''             | ''                   | ''               | 'No'                |
+			| '5' | ''               | 'No'                 | 'No'              | 'Product 3 with SLN'           | 'UNIQ'     | 'No'         | 'Yes'                   | '09987897977890'     | ''                  | '10,000'   | 'en description is empty' | 'pcs'            | '120,00'   | '18%' | ''              | 'No'                 | '216,00'     | '1 200,00'   | '1 416,00'     | 'Store 08' | ''             | ''                   | ''               | 'No'                |
+			| '6' | ''               | 'No'                 | 'No'              | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | 'Yes'                   | '9009100'            | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '130,00'   | '18%' | ''              | 'No'                 | '23,40'      | '130,00'     | '153,40'       | 'Store 08' | ''             | ''                   | ''               | 'No'                |
+	* Auto link all lines
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And I click "Post" button	
+		And "RowIDInfo" table became equal
+			| '#' | 'Quantity' | 'Basis'                                          | 'Current step' | 'Next step' |
+			| '1' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'GR'        |
+			| '2' | '11,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'GR'        |
+			| '3' | '36,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'GR'        |
+			| '4' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI'           | ''          |
+			| '5' | '10,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'GR'        |
+			| '6' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'GR'        |
+		Then the number of "RowIDInfo" table lines is "равно" "6"	
+		// Temp
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 08    |
+		And I select current line in "List" table
+		If "Update item list info" window is opened Then
+			And I click "OK" button	
+		// EndTemp
+		And "ItemList" table became equal
+			| '#' | 'Internal links' | 'External links' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key' | 'Is service' | 'Use serial lot number' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit'           | 'Price'    | 'VAT' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Expense type' | 'Profit loss center' | 'Purchase order'                                 | 'Use goods receipt' |
+			| '1' | ' PurchaseOrder' | ''               | 'No'                 | 'Yes'             | 'Dress'                        | 'XS/Blue'  | 'No'         | 'No'                    | ''                   | ''                  | '1,000'    | 'Basic Price Types'       | 'pcs'            | '520,00'   | '18%' | '93,60'      | '520,00'     | '613,60'       | 'Store 08' | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'No'                |
+			| '2' | ' PurchaseOrder' | ''               | 'Yes'                | 'Yes'             | 'Shirt'                        | '36/Red'   | 'No'         | 'No'                    | ''                   | ''                  | '11,000'   | 'Basic Price Types'       | 'pcs'            | '350,00'   | '18%' | '693,00'     | '3 850,00'   | '4 543,00'     | 'Store 08' | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'No'                |
+			| '3' | ' PurchaseOrder' | ''               | 'Yes'                | 'Yes'             | 'Boots'                        | '37/18SD'  | 'No'         | 'No'                    | ''                   | ''                  | '3,000'    | 'Basic Price Types'       | 'Boots (12 pcs)' | '8 400,00' | '18%' | '4 536,00'   | '25 200,00'  | '29 736,00'    | 'Store 08' | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'No'                |
+			| '4' | ' PurchaseOrder' | ''               | 'Yes'                | 'Yes'             | 'Service'                      | 'Internet' | 'Yes'        | 'No'                    | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '100,00'   | '18%' | '18,00'      | '100,00'     | '118,00'       | ''         | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'No'                |
+			| '5' | ' PurchaseOrder' | ''               | 'Yes'                | 'Yes'             | 'Product 3 with SLN'           | 'UNIQ'     | 'No'         | 'Yes'                   | '09987897977890'     | ''                  | '10,000'   | 'en description is empty' | 'pcs'            | '120,00'   | '18%' | '216,00'     | '1 200,00'   | '1 416,00'     | 'Store 08' | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'No'                |
+			| '6' | ' PurchaseOrder' | ''               | 'Yes'                | 'Yes'             | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | 'Yes'                   | '9009100'            | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '130,00'   | '18%' | '23,40'      | '130,00'     | '153,40'       | 'Store 08' | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'No'                |
+	* Post PI and create GR
+		And for each line of "ItemList" table I do
+			And I set "Use goods receipt" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table		
+		And I click "Post" button
+		And I delete "$$PurchaseInvoice2060035$$" variable
+		And I delete "$$NumberPurchaseInvoice2060035$$" variable
+		And I save the window as "$$PurchaseInvoice2060035$$"
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice2060035$$"
+	* Create GR
+		And I click "Goods receipt" button
+		And I click "Ok" button
+		And I click "Post" button
+		And "ItemList" table became equal
+			| '#' | 'Item'                         | 'Item key' | 'Serial lot numbers' | 'Store'    | 'Quantity' | 'Unit'           | 'Receipt basis'              | 'Currency' | 'Purchase order'                                 | 'Purchase invoice'           | 'Sales order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Internal supply request' | 'Sales return' | 'Sales return order' | 'Production planning' |
+			| '1' | 'Dress'                        | 'XS/Blue'  | ''                   | 'Store 08' | '1,000'    | 'pcs'            | '$$PurchaseInvoice2060035$$' | 'TRY'      | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | '$$PurchaseInvoice2060035$$' | ''            | ''              | ''                         | ''                   | ''                        | ''             | ''                   | ''                    |
+			| '2' | 'Shirt'                        | '36/Red'   | ''                   | 'Store 08' | '11,000'   | 'pcs'            | '$$PurchaseInvoice2060035$$' | 'TRY'      | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | '$$PurchaseInvoice2060035$$' | ''            | ''              | ''                         | ''                   | ''                        | ''             | ''                   | ''                    |
+			| '3' | 'Boots'                        | '37/18SD'  | ''                   | 'Store 08' | '3,000'    | 'Boots (12 pcs)' | '$$PurchaseInvoice2060035$$' | 'TRY'      | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | '$$PurchaseInvoice2060035$$' | ''            | ''              | ''                         | ''                   | ''                        | ''             | ''                   | ''                    |
+			| '4' | 'Product 3 with SLN'           | 'UNIQ'     | '09987897977890'     | 'Store 08' | '10,000'   | 'pcs'            | '$$PurchaseInvoice2060035$$' | 'TRY'      | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | '$$PurchaseInvoice2060035$$' | ''            | ''              | ''                         | ''                   | ''                        | ''             | ''                   | ''                    |
+			| '5' | 'Product 7 with SLN (new row)' | 'ODS'      | '9009100'            | 'Store 08' | '1,000'    | 'pcs'            | '$$PurchaseInvoice2060035$$' | 'TRY'      | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | '$$PurchaseInvoice2060035$$' | ''            | ''              | ''                         | ''                   | ''                        | ''             | ''                   | ''                    |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+	* Relink GR
+		And I activate "Item key" field in "ItemList" table
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		Then "Link / unlink document row" window is opened
+		And I go to line in "ItemListRows" table
+			| "Quantity" | "Row presentation"                             | "Store"    | "Unit" |
+			| "1,000"    | "Product 7 with SLN (new row) (ODS) (9009100)" | "Store 08" | "pcs"  |
+		And I remove checkbox "Use reverse basises tree"
+		And Delay 2		
+		And I go to line in "BasisesTree" table
+			| "Currency" | "Price"  | "Quantity" | "Row presentation"                             | "Unit" |
+			| "TRY"      | "130,00" | "1,000"    | "Product 7 with SLN (new row) (ODS) (9009100)" | "pcs"  |
+		And I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| "Quantity" | "Row presentation"          | "Store"    | "Unit" |
+			| "10,000"   | "Product 3 with SLN (UNIQ)" | "Store 08" | "pcs"  |
+		And I go to line in "BasisesTree" table
+			| "Row presentation"                              |
+			| "$$PurchaseInvoice2060035$$" |
+		And I go to line in "BasisesTree" table
+			| "Currency" | "Quantity" | "Row presentation"          | "Unit" |
+			| "TRY"      | "10,000"   | "Product 3 with SLN (UNIQ)" | "pcs"  |
+		And I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| "Quantity" | "Row presentation"| "Store"    | "Unit" |
+			| "1,000"    | "Dress (XS/Blue)" | "Store 08" | "pcs"  |
+		And I go to line in "BasisesTree" table
+			| "Row presentation"                              |
+			| "$$PurchaseInvoice2060035$$" |
+		And I go to line in "BasisesTree" table
+			| "Currency" | "Price"  | "Quantity" | "Row presentation" | "Unit" |
+			| "TRY"      | "520,00" | "1,000"    | "Dress (XS/Blue)"  | "pcs"  |
+		And I click the button named "Link"
+		And I click "Ok" button
+		And I click "Post" button
+		Then user message window does not contain messages
+	* Try change line Store
+		And I go to line in "ItemList" table
+			| "Item"                         | "Item key" |
+			| "Product 7 with SLN (new row)" | "ODS"      |
+		When I Check the steps for Exception
+			| 'And I select "Store 03" from "Store" drop-down list by string in "ItemList" table'         |	
+	* Post GR
+		And I delete "$$GoodsReceipt2060035$$" variable
+		And I delete "$$NumberGoodsReceipt2060035$$" variable
+		And I save the window as "$$GoodsReceipt2060035$$"
+		And I save the value of "Number" field as "$$NumberGoodsReceipt2060035$$"
+		And I close all client application windows	
+
+Scenario: _2060036 check link/unlink form in the PO - GR - PI (use variable stores)
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		If "List" table	contains lines Then
+			| 'Number'  |
+			| '$$NumberGoodsReceipt2060035$$' |
+			And I go to line in "List" table
+				| 'Number'  |
+				| '$$NumberGoodsReceipt2060035$$' |
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		If "List" table	contains lines Then
+			| 'Number'  |
+			| '$$NumberPurchaseInvoice2060035$$' |
+			And I go to line in "List" table
+				| 'Number'  |
+				| '$$NumberPurchaseInvoice2060035$$' |
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
+	* Open form for create GR
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I select "Purchase" exact value from "Transaction type" drop-down list
+		And I activate field named "ItemListLineNumber" in "ItemList" table	
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 05    |
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Adel'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Adel'     |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Accountants office' |
+		And I select current line in "List" table
+	* Select items from basis documents
+		And in the table "ItemList" I click "Add basis documents" button
+		And I expand current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Row presentation"                               | "Use" |
+			| "Purchase order 3 057 dated 07.03.2025 12:45:28" | "No"  |
+		And I set "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button
+	* Check RowIDInfo
+		And "RowIDInfo" table became equal
+			| '#' | 'Quantity' | 'Basis'                                          | 'Current step' | 'Next step' |
+			| '1' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | ''          |
+			| '2' | '11,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | ''          |
+			| '3' | '36,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | ''          |
+			| '4' | '10,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | ''          |
+			| '5' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | ''          |
+		Then the number of "RowIDInfo" table lines is "равно" "5"	
+	// Temp
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 05    |
+		And I select current line in "List" table
+		If "1C:Enterprise" window is opened Then
+			And I click "Yes" button		
+	// EndTemp
+		And "ItemList" table became equal
+			| '#' | 'Internal links' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key' | 'Use serial lot number' | 'Serial lot numbers' | 'Store'    | 'Quantity' | 'Unit'           | 'Receipt basis'                                  | 'Currency' | 'Is closed order' | 'Purchase order'                                 | 'Purchase invoice' |
+			| '1' | ' PurchaseOrder' | 'No'                 | 'Yes'             | 'Dress'                        | 'XS/Blue'  | 'No'                    | ''                   | 'Store 05' | '1,000'    | 'pcs'            | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'TRY'      | 'No'              | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''                 |
+			| '2' | ' PurchaseOrder' | 'Yes'                | 'Yes'             | 'Shirt'                        | '36/Red'   | 'No'                    | ''                   | 'Store 05' | '11,000'   | 'pcs'            | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'TRY'      | 'No'              | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''                 |
+			| '3' | ' PurchaseOrder' | 'Yes'                | 'Yes'             | 'Boots'                        | '37/18SD'  | 'No'                    | ''                   | 'Store 05' | '3,000'    | 'Boots (12 pcs)' | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'TRY'      | 'No'              | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''                 |
+			| '4' | ' PurchaseOrder' | 'Yes'                | 'Yes'             | 'Product 3 with SLN'           | 'UNIQ'     | 'Yes'                   | ''                   | 'Store 05' | '10,000'   | 'pcs'            | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'TRY'      | 'No'              | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''                 |
+			| '5' | ' PurchaseOrder' | 'Yes'                | 'Yes'             | 'Product 7 with SLN (new row)' | 'ODS'      | 'Yes'                   | ''                   | 'Store 05' | '1,000'    | 'pcs'            | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'TRY'      | 'No'              | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''                 |
+	* Unlink line
+		And in the table "ItemList" I click "Link unlink basis documents" button		
+		Then "Link / unlink document row" window is opened
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And I go to line in "ItemList" table
+			| "Item"               | "Item key" |
+			| "Product 3 with SLN" | "UNIQ"     |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| "Owner" | "Serial number"  |
+			| "UNIQ"  | "09987897977890" |
+		And I select current line in "List" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "10,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| "Item"                         | "Item key" |
+			| "Product 7 with SLN (new row)" | "ODS"      |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And I click Select button of "Serial lot number" field
+		And I go to line in "List" table
+			| "Serial number" |
+			| "9009100"       |
+		And I select current line in "List" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table	
+		And I click "Post" button
+		And "ItemList" table became equal
+			| '#' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key' | 'Use serial lot number' | 'Serial lot numbers' | 'Store'    | 'Quantity' | 'Unit'           | 'Receipt basis' | 'Currency' | 'Is closed order' | 'Purchase order' | 'Purchase invoice' |
+			| '1' | 'No'                 | 'No'              | 'Dress'                        | 'XS/Blue'  | 'No'                    | ''                   | 'Store 05' | '1,000'    | 'pcs'            | ''              | ''         | 'No'              | ''               | ''                 |
+			| '2' | 'No'                 | 'No'              | 'Shirt'                        | '36/Red'   | 'No'                    | ''                   | 'Store 05' | '11,000'   | 'pcs'            | ''              | ''         | 'No'              | ''               | ''                 |
+			| '3' | 'No'                 | 'No'              | 'Boots'                        | '37/18SD'  | 'No'                    | ''                   | 'Store 05' | '3,000'    | 'Boots (12 pcs)' | ''              | ''         | 'No'              | ''               | ''                 |
+			| '4' | 'No'                 | 'No'              | 'Product 3 with SLN'           | 'UNIQ'     | 'Yes'                   | '09987897977890'     | 'Store 05' | '10,000'   | 'pcs'            | ''              | ''         | 'No'              | ''               | ''                 |
+			| '5' | 'No'                 | 'No'              | 'Product 7 with SLN (new row)' | 'ODS'      | 'Yes'                   | '9009100'            | 'Store 05' | '1,000'    | 'pcs'            | ''              | ''         | 'No'              | ''               | ''                 |
+	* Auto link all lines
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And I click "Post" button	
+		And "RowIDInfo" table became equal
+			| '#' | 'Quantity' | 'Basis'                                          | 'Current step' | 'Next step' |
+			| '1' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI'        |
+			| '2' | '11,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI'        |
+			| '3' | '36,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI'        |
+			| '4' | '10,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI'        |
+			| '5' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI'        |
+		Then the number of "RowIDInfo" table lines is "равно" "5"	
+		// Temp
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 05    |
+		And I select current line in "List" table
+		If "1C:Enterprise" window is opened Then
+			And I click "Yes" button
+		// EndTemp
+		And "ItemList" table became equal
+			| '#' | 'Internal links' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key' | 'Use serial lot number' | 'Serial lot numbers' | 'Store'    | 'Quantity' | 'Unit'           | 'Receipt basis'                                  | 'Currency' | 'Is closed order' | 'Purchase order'                                 | 'Purchase invoice' |
+			| '1' | ' PurchaseOrder' | 'No'                 | 'Yes'             | 'Dress'                        | 'XS/Blue'  | 'No'                    | ''                   | 'Store 05' | '1,000'    | 'pcs'            | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'TRY'      | 'No'              | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''                 |
+			| '2' | ' PurchaseOrder' | 'Yes'                | 'Yes'             | 'Shirt'                        | '36/Red'   | 'No'                    | ''                   | 'Store 05' | '11,000'   | 'pcs'            | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'TRY'      | 'No'              | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''                 |
+			| '3' | ' PurchaseOrder' | 'Yes'                | 'Yes'             | 'Boots'                        | '37/18SD'  | 'No'                    | ''                   | 'Store 05' | '3,000'    | 'Boots (12 pcs)' | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'TRY'      | 'No'              | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''                 |
+			| '4' | ' PurchaseOrder' | 'Yes'                | 'Yes'             | 'Product 3 with SLN'           | 'UNIQ'     | 'Yes'                   | '09987897977890'     | 'Store 05' | '10,000'   | 'pcs'            | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'TRY'      | 'No'              | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''                 |
+			| '5' | ' PurchaseOrder' | 'Yes'                | 'Yes'             | 'Product 7 with SLN (new row)' | 'ODS'      | 'Yes'                   | '9009100'            | 'Store 05' | '1,000'    | 'pcs'            | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'TRY'      | 'No'              | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''                 |		
+	* Post PI and create GR
+		And I click "Post" button
+		And I delete "$$GoodsReceipt2060037$$" variable
+		And I delete "$$NumberGoodsReceipt2060037$$" variable
+		And I save the window as "$$GoodsReceipt2060037$$"
+		And I save the value of "Number" field as "$$NumberGoodsReceipt2060037$$"	
+	* Create PI
+		And I click "Purchase invoice" button
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| '#' | 'Item'                         | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit'           | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Project' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'                                 | 'Sales order' | 'Internal supply request' | 'Use goods receipt' | 'Detail' | 'Additional analytic' | 'Other period expense type' |
+			| '1' | 'Dress'                        | 'XS/Blue'  | ''                   | ''                  | '1,000'    | 'Basic Price Types'       | 'pcs'            | '520,00'   | '18%' | ''              | 'No'                 | '93,60'      | '520,00'     | '613,60'       | 'Store 05' | ''        | ''              | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''            | ''                        | 'Yes'               | ''       | ''                    | ''                          |
+			| '2' | 'Shirt'                        | '36/Red'   | ''                   | ''                  | '11,000'   | 'Basic Price Types'       | 'pcs'            | '350,00'   | '18%' | ''              | 'No'                 | '693,00'     | '3 850,00'   | '4 543,00'     | 'Store 05' | ''        | ''              | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''            | ''                        | 'Yes'               | ''       | ''                    | ''                          |
+			| '3' | 'Boots'                        | '37/18SD'  | ''                   | ''                  | '3,000'    | 'Basic Price Types'       | 'Boots (12 pcs)' | '8 400,00' | '18%' | ''              | 'No'                 | '4 536,00'   | '25 200,00'  | '29 736,00'    | 'Store 05' | ''        | ''              | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''            | ''                        | 'Yes'               | ''       | ''                    | ''                          |
+			| '4' | 'Product 3 with SLN'           | 'UNIQ'     | '09987897977890'     | ''                  | '10,000'   | 'en description is empty' | 'pcs'            | '120,00'   | '18%' | ''              | 'No'                 | '216,00'     | '1 200,00'   | '1 416,00'     | 'Store 05' | ''        | ''              | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''            | ''                        | 'Yes'               | ''       | ''                    | ''                          |
+			| '5' | 'Product 7 with SLN (new row)' | 'ODS'      | '9009100'            | ''                  | '1,000'    | 'en description is empty' | 'pcs'            | '130,00'   | '18%' | ''              | 'No'                 | '23,40'      | '130,00'     | '153,40'       | 'Store 05' | ''        | ''              | ''             | ''                   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | ''            | ''                        | 'Yes'               | ''       | ''                    | ''                          |		
+		And I click "Post" button
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+	* Relink GR
+		And I activate "Item key" field in "ItemList" table
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		Then "Link / unlink document row" window is opened
+		And I go to line in "ItemListRows" table
+			| "Quantity" | "Row presentation"                             | "Store"    | "Unit" |
+			| "1,000"    | "Product 7 with SLN (new row) (ODS) (9009100)" | "Store 05" | "pcs"  |
+		And I remove checkbox "Use reverse basises tree"
+		And Delay 2		
+		And I go to line in "BasisesTree" table
+			| "Currency" | "Price"  | "Quantity" | "Row presentation"                             | "Unit" |
+			| "TRY"      | "130,00" | "1,000"    | "Product 7 with SLN (new row) (ODS) (9009100)" | "pcs"  |
+		And I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| "Quantity" | "Row presentation"          | "Store"    | "Unit" |
+			| "10,000"   | "Product 3 with SLN (UNIQ)" | "Store 05" | "pcs"  |
+		And I go to line in "BasisesTree" table
+			| "Row presentation"        |
+			| "$$GoodsReceipt2060037$$" |
+		And I go to line in "BasisesTree" table
+			| "Currency" | "Quantity" | "Row presentation"          | "Unit" |
+			| "TRY"      | "10,000"   | "Product 3 with SLN (UNIQ)" | "pcs"  |
+		And I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| "Quantity" | "Row presentation"| "Store"    | "Unit" |
+			| "1,000"    | "Dress (XS/Blue)" | "Store 05" | "pcs"  |
+		And I go to line in "BasisesTree" table
+			| "Row presentation"        |
+			| "$$GoodsReceipt2060037$$" |
+		And I go to line in "BasisesTree" table
+			| "Currency" | "Price"  | "Quantity" | "Row presentation" | "Unit" |
+			| "TRY"      | "520,00" | "1,000"    | "Dress (XS/Blue)"  | "pcs"  |
+		And I click the button named "Link"
+		And I click "Ok" button
+		And I click "Post" button
+		Then user message window does not contain messages
+	* Try change line Store
+		And I go to line in "ItemList" table
+			| "Item"                         | "Item key" |
+			| "Product 7 with SLN (new row)" | "ODS"      |
+		When I Check the steps for Exception
+			| 'And I select "Store 03" from "Store" drop-down list by string in "ItemList" table'         |	
+	* Post PI
+		And I delete "$$PurchaseInvoice2060037$$" variable
+		And I delete "$$NumberPurchaseInvoice2060037$$" variable
+		And I save the window as "$$PurchaseInvoice2060037$$"
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice2060037$$"
+		And I close all client application windows

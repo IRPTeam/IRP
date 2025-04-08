@@ -653,7 +653,7 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
 			And I click "OK" button
-			Then I wait that in user messages the "Credit limit exceeded. Limit: 4 000, limit balance: 4 000, transaction: 6 490, lack: 2 490 TRY" substring will appear in 20 seconds
+			Then I wait that in user messages the "Credit limit exceeded. Limit: 4 000, limit balance: 10 755, transaction: 32 450, lack: 21 695 TRY" substring will appear in 20 seconds
 			And I close all client application windows
 			
 

@@ -312,6 +312,7 @@ Function SourceOfOrigins()
 		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
 		|	END AS SourceOfOrigin,
 		|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
 		|	SUM(SourceOfOrigins.Quantity) AS Quantity
 		|INTO SourceOfOrigins
 		|FROM
@@ -330,7 +331,8 @@ Function SourceOfOrigins()
 		|			THEN SourceOfOrigins.SourceOfOrigin
 		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
 		|	END,
-		|	SourceOfOrigins.SourceOfOrigin";
+		|	SourceOfOrigins.SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumber";
 EndFunction
 
 #EndRegion
@@ -374,6 +376,11 @@ Function R4010B_ActualStocks()
 		|			THEN SerialLotNumbers.SerialLotNumber
 		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
 		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOriginStock
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
 		|	SUM(CASE
 		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
 		|			THEN ItemList.Quantity
@@ -384,6 +391,9 @@ Function R4010B_ActualStocks()
 		|	ItemList AS ItemList
 		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
 		|		ON ItemList.Key = SerialLotNumbers.Key
+		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON ItemList.Key = SourceOfOrigins.Key
+		|		AND ISNULL(SerialLotNumbers.SerialLotNumber,Value(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
 		|WHERE
 		|	TRUE
 		|GROUP BY
@@ -392,10 +402,16 @@ Function R4010B_ActualStocks()
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOriginStock
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END,
+		|	CASE
 		|		WHEN SerialLotNumbers.StockBalanceDetail
 		|			THEN SerialLotNumbers.SerialLotNumber
 		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		|	END";
+		|	END,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 Function R4050B_StockInventory()

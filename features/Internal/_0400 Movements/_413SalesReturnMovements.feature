@@ -429,12 +429,12 @@ Scenario: _041310 check Sales return movements by the Register  "R4010 Actual st
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 101 dated 12.03.2021 08:44:18'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'              | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                             | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '2'           | 'Store 02'     | '36/Red'     | ''                     |
+			| 'Sales return 101 dated 12.03.2021 08:44:18'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'               | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'              | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                             | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '2'           | 'Store 02'     | '36/Red'     | ''                     | ''                     |
 		
 	And I close all client application windows
 
@@ -644,15 +644,15 @@ Scenario: _041320 check Sales return with serial lot numbers movements by the Re
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 1 112 dated 20.05.2022 18:36:56'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                 | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                               | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                               | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                               | 'Receipt'       | '20.05.2022 18:36:56'   | '5'           | 'Store 02'     | 'PZU'        | '8908899877'           |
-			| ''                                               | 'Receipt'       | '20.05.2022 18:36:56'   | '5'           | 'Store 02'     | 'PZU'        | '8908899879'           |
-			| ''                                               | 'Receipt'       | '20.05.2022 18:36:56'   | '10'          | 'Store 02'     | 'XL/Green'   | ''                     |
-			| ''                                               | 'Receipt'       | '20.05.2022 18:36:56'   | '10'          | 'Store 02'     | 'UNIQ'       | ''                     |
+			| 'Sales return 1 112 dated 20.05.2022 18:36:56'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                 | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                               | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                               | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                               | 'Receipt'       | '20.05.2022 18:36:56'   | '5'           | 'Store 02'     | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                               | 'Receipt'       | '20.05.2022 18:36:56'   | '5'           | 'Store 02'     | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                               | 'Receipt'       | '20.05.2022 18:36:56'   | '10'          | 'Store 02'     | 'XL/Green'   | ''                     | ''                     |
+			| ''                                               | 'Receipt'       | '20.05.2022 18:36:56'   | '10'          | 'Store 02'     | 'UNIQ'       | ''                     | ''                     |
 	And I close all client application windows
 
 Scenario: _041321 check Sales return movements by the Register  "R2012 Invoice closing of sales orders" (Return from trade agent)
@@ -908,17 +908,17 @@ Scenario: _041328 check Sales return movements by the Register  "R4010 Actual st
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 192 dated 02.11.2022 10:53:27'   | ''              | ''                      | ''            | ''                    | ''           | ''                     |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''                    | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'              | ''              | ''                      | ''            | ''                    | ''           | ''                     |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'          | ''           | ''                     |
-			| ''                                             | ''              | ''                      | 'Quantity'    | 'Store'               | 'Item key'   | 'Serial lot number'    |
-			| ''                                             | 'Receipt'       | '02.11.2022 10:53:27'   | '1'           | 'Store 01'            | 'XS/Blue'    | ''                     |
-			| ''                                             | 'Receipt'       | '02.11.2022 10:53:27'   | '2'           | 'Store 01'            | 'PZU'        | '8908899877'           |
-			| ''                                             | 'Receipt'       | '02.11.2022 10:53:27'   | '2'           | 'Store 01'            | 'PZU'        | '8908899879'           |
-			| ''                                             | 'Expense'       | '02.11.2022 10:53:27'   | '1'           | 'Trade agent store'   | 'XS/Blue'    | ''                     |
-			| ''                                             | 'Expense'       | '02.11.2022 10:53:27'   | '2'           | 'Trade agent store'   | 'PZU'        | '8908899877'           |
-			| ''                                             | 'Expense'       | '02.11.2022 10:53:27'   | '2'           | 'Trade agent store'   | 'PZU'        | '8908899879'           |
+			| 'Sales return 192 dated 02.11.2022 10:53:27'   | ''              | ''                      | ''            | ''                    | ''           | ''                     | ''                     |
+			| 'Document registrations records'               | ''              | ''                      | ''            | ''                    | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'              | ''              | ''                      | ''            | ''                    | ''           | ''                     | ''                     |
+			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'          | ''           | ''                     | ''                     |
+			| ''                                             | ''              | ''                      | 'Quantity'    | 'Store'               | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                             | 'Receipt'       | '02.11.2022 10:53:27'   | '1'           | 'Store 01'            | 'XS/Blue'    | ''                     | ''                     |
+			| ''                                             | 'Receipt'       | '02.11.2022 10:53:27'   | '2'           | 'Store 01'            | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                             | 'Receipt'       | '02.11.2022 10:53:27'   | '2'           | 'Store 01'            | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                             | 'Expense'       | '02.11.2022 10:53:27'   | '1'           | 'Trade agent store'   | 'XS/Blue'    | ''                     | ''                     |
+			| ''                                             | 'Expense'       | '02.11.2022 10:53:27'   | '2'           | 'Trade agent store'   | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                             | 'Expense'       | '02.11.2022 10:53:27'   | '2'           | 'Trade agent store'   | 'PZU'        | '8908899879'           | ''                     |
 		And I close all client application windows
 		
 Scenario: _041329 check Sales return movements by the Register  "R4011 Free stocks" (Return from trade agent)

@@ -22,5 +22,6 @@
   <content>Catalog.NumeratorBasicRules</content>
   <content>FunctionalOption.UseNumberingRules</content>
   <content>CommonAttribute.NumeratorRules</content>
+  <content>Catalog.PrintFormTemplates</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

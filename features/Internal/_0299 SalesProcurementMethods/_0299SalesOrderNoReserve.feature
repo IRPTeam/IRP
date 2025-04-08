@@ -194,13 +194,13 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029901$$'            | ''              | ''                             | ''            | ''             | ''            | ''                     |
-			| 'Document registrations records'    | ''              | ''                             | ''            | ''             | ''            | ''                     |
-			| 'Register  "R4010 Actual stocks"'   | ''              | ''                             | ''            | ''             | ''            | ''                     |
-			| ''                                  | 'Record type'   | 'Period'                       | 'Resources'   | 'Dimensions'   | ''            | ''                     |
-			| ''                                  | ''              | ''                             | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    |
-			| ''                                  | 'Expense'       | '$$DateSalesInvoice029901$$'   | '31'          | 'Store 01'     | '38/Yellow'   | ''                     |
-			| ''                                  | 'Expense'       | '$$DateSalesInvoice029901$$'   | '40'          | 'Store 01'     | '38/Black'    | ''                     |
+			| '$$SalesInvoice029901$$'            | ''              | ''                             | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Document registrations records'    | ''              | ''                             | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'   | ''              | ''                             | ''            | ''             | ''            | ''                     | ''                     |
+			| ''                                  | 'Record type'   | 'Period'                       | 'Resources'   | 'Dimensions'   | ''            | ''                     | ''                     |
+			| ''                                  | ''              | ''                             | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                  | 'Expense'       | '$$DateSalesInvoice029901$$'   | '31'          | 'Store 01'     | '38/Yellow'   | ''                     | ''                     |
+			| ''                                  | 'Expense'       | '$$DateSalesInvoice029901$$'   | '40'          | 'Store 01'     | '38/Black'    | ''                     | ''                     |
 
 	* Check SI movements (Register  "R2011 Shipment of sales orders")
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
@@ -440,13 +440,13 @@ Scenario: _029904 create Shipment confirmation for SO without reserve and check 
 			And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| '$$ShipmentConfirmation029903$$'    | ''              | ''                                     | ''            | ''             | ''            | ''                     |
-			| 'Document registrations records'    | ''              | ''                                     | ''            | ''             | ''            | ''                     |
-			| 'Register  "R4010 Actual stocks"'   | ''              | ''                                     | ''            | ''             | ''            | ''                     |
-			| ''                                  | 'Record type'   | 'Period'                               | 'Resources'   | 'Dimensions'   | ''            | ''                     |
-			| ''                                  | ''              | ''                                     | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    |
-			| ''                                  | 'Expense'       | '$$DateShipmentConfirmation029903$$'   | '31'          | 'Store 02'     | '38/Yellow'   | ''                     |
-			| ''                                  | 'Expense'       | '$$DateShipmentConfirmation029903$$'   | '40'          | 'Store 02'     | '38/Black'    | ''                     |
+			| '$$ShipmentConfirmation029903$$'    | ''              | ''                                     | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Document registrations records'    | ''              | ''                                     | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'   | ''              | ''                                     | ''            | ''             | ''            | ''                     | ''                     |
+			| ''                                  | 'Record type'   | 'Period'                               | 'Resources'   | 'Dimensions'   | ''            | ''                     | ''                     |
+			| ''                                  | ''              | ''                                     | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                  | 'Expense'       | '$$DateShipmentConfirmation029903$$'   | '31'          | 'Store 02'     | '38/Yellow'   | ''                     | ''                     |
+			| ''                                  | 'Expense'       | '$$DateShipmentConfirmation029903$$'   | '40'          | 'Store 02'     | '38/Black'    | ''                     | ''                     |
 	
 	
 		* Check SC movements Register  "R2031 Shipment invoicing"

@@ -32,7 +32,11 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	
 	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);
 	
-	If DeletionMark And Not Ref.IsEmpty() And DocSalesOrderServer.CheckRelatedDocuments(Ref, True) Then
+	If Not Ref.IsEmpty()  
+			And (DeletionMark 
+				OR WriteMode = DocumentWriteMode.UndoPosting 
+				OR Not Posted And Ref.Posted) 
+			And DocSalesOrderServer.CheckRelatedDocuments(Ref, True) Then
 		Cancel = True;
 	EndIf;
 EndProcedure

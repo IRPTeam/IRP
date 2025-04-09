@@ -79,7 +79,7 @@ Function CheckRelatedDocuments(PurchaseOrderRef, ShowWarning = False) Export
 	|	Document.PurchaseOrderClosing AS PurchaseOrderClosing
 	|WHERE
 	|	PurchaseOrderClosing.PurchaseOrder = &PurchaseOrder
-	|	AND NOT PurchaseOrderClosing.DeletionMark";
+	|	AND PurchaseOrderClosing.Posted";
 	
 	Query.SetParameter("PurchaseOrder", PurchaseOrderRef);
 	

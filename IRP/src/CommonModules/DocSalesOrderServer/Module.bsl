@@ -126,7 +126,7 @@ Function CheckRelatedDocuments(SalesOrderRef, ShowWarning = False) Export
 	|	Document.SalesOrderClosing AS SalesOrderClosing
 	|WHERE
 	|	SalesOrderClosing.SalesOrder = &SalesOrder
-	|	AND NOT SalesOrderClosing.DeletionMark";
+	|	AND SalesOrderClosing.Posted";
 	
 	Query.SetParameter("SalesOrder", SalesOrderRef);
 	

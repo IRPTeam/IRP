@@ -650,7 +650,8 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
 			And I click "OK" button
-			Then I wait that in user messages the "Credit limit exceeded. Limit: 4 000, limit balance: 4 000, transaction: 6 490, lack: 2 490 TRY" substring will appear in 20 seconds
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 4 000, limit balance: 14 000, transaction: 32 450, lack: 18 450 TRY'|
 			And I close all client application windows
 
 Scenario: _1000004 check credit limit in SI (same currency)
@@ -754,6 +755,8 @@ Scenario: _1000005 check credit limit in SI (different currency)
 			And I click the button named "FormOK"
 			And I click "Save" button
 			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
 			Then there are lines in TestClient message log
 				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
 	And I close all client application windows	
@@ -823,6 +826,8 @@ Scenario: _1000006 check credit limit at different time intervals
 			And I click the button named "FormOK"
 			And I click "Save" button
 			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
 			Then there are lines in TestClient message log
 				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 48 500, lack: 38 500 TRY'|
 	And I close all client application windows	

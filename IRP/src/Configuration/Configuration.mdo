@@ -966,6 +966,9 @@
   <functionalOptions>FunctionalOption.UseNumberingRules</functionalOptions>
   <functionalOptions>FunctionalOption.UseShipmentAndReceiptPlaningOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePurchase</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSales</functionalOptions>
+  <functionalOptions>FunctionalOption.UseFinance</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1086,6 +1089,9 @@
   <constants>Constant.UseNumberingRules</constants>
   <constants>Constant.UseShipmentAndReceiptPlaningOrders</constants>
   <constants>Constant.UseVariableStore</constants>
+  <constants>Constant.UsePurchase</constants>
+  <constants>Constant.UseSales</constants>
+  <constants>Constant.UseFinance</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>

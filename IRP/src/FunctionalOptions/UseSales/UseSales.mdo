@@ -52,4 +52,5 @@
   <content>AccumulationRegister.R5011B_CustomersAging</content>
   <content>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</content>
   <content>AccumulationRegister.R2005T_SalesSpecialOffers</content>
+  <content>Subsystem.MasterData.Subsystem.PurchaseAndSales</content>
 </mdclass:FunctionalOption>

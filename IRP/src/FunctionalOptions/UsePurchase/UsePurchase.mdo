@@ -44,4 +44,5 @@
   <content>AccumulationRegister.R1020B_AdvancesToVendors</content>
   <content>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</content>
   <content>AccumulationRegister.R1011B_PurchaseOrdersReceipt</content>
+  <content>Subsystem.MasterData.Subsystem.PurchaseAndSales</content>
 </mdclass:FunctionalOption>

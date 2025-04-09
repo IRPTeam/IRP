@@ -12370,6 +12370,23 @@ Function LinkUnlinkDocumentRows(Object, FillingValues, CalculateRows = True) Exp
 		
 		// Link
 		LinkRows = GetLinkRows(Object, FillingValue);
+		
+		If FillingValue.Property("ItemList") Then
+			For Each Row In FillingValue.ItemList Do
+				ArrayOfEmptyProperties = New Array();
+				For Each KeyValue In Row Do
+					If Not ValueIsFilled(Row[KeyValue.Key]) Then
+						If ArrayOfEmptyProperties.Find(KeyValue.Key) = Undefined Then
+							ArrayOfEmptyProperties.Add(KeyValue.Key);
+						EndIf;
+					EndIf;
+				EndDo;
+				For Each ColumnName In ArrayOfEmptyProperties Do
+					Row.Delete(ColumnName);
+				EndDo;
+			EndDo;
+		EndIf;
+		
 		Link(Object, FillingValue, LinkRows, TableNames_Refreshable, UpdatedProperties, UpdatedRows, CalculateRows);
 
 		Object.RowIDInfo.Clear();

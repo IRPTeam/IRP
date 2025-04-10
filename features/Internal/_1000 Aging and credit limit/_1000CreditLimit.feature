@@ -15,6 +15,7 @@ Background:
 
 Scenario: _1000000 preparation (credit limit)
 	When set True value to the constant
+	When set True value to the constant Use shipment and receipt planing orders
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -720,6 +721,21 @@ Scenario: _1000004 check credit limit in SI (same currency)
 			And I click the button named "FormPost"
 			Then there are lines in TestClient message log
 				|'Credit limit exceeded. Limit: 1 000, limit balance: 500, transaction: 600, lack: 100 USD'|
+		* Try to re-port
+			And I click the button named "FormPost"
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 1 000, limit balance: 500, transaction: 600, lack: 100 USD'|
+		* Change amount
+			And I move to the tab named "GroupItemList"
+			And I go to line in "ItemList" table
+				| "#" | "Dont calculate row" | "Item"  | "Item key" | "Net amount" | "Price" | "Price type"              | "Quantity" | "Store"    | "Tax amount" | "Total amount" | "Unit" | "Use shipment confirmation" | "Use work sheet" | "VAT" |
+				| "1" | "No"                 | "Dress" | "S/Yellow" | "211,86"     | "25,00" | "en description is empty" | "10,000"   | "Store 01" | "38,14"      | "250,00"       | "pcs"  | "No"                        | "No"             | "18%" |
+			And I input "6,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "FormWrite"
+			And I click the button named "FormPost"
+		* Un-post SI 2
+			And I click the button named "FormUndoPosting"					
 	And I close all client application windows
 
 Scenario: _1000005 check credit limit in SI (different currency)
@@ -759,7 +775,24 @@ Scenario: _1000005 check credit limit in SI (different currency)
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
 				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
-	And I close all client application windows	
+		* Try to re-port
+			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"						
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
+		* Change amount
+			And I move to the tab named "GroupItemList"
+			And I go to line in "ItemList" table
+				| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+				| '1' | 'Dress' | 'S/Yellow' | ''                   | ''                  | '10,000'   | 'en description is empty' | 'pcs'  | '550,00' | '18%' | ''              | 'No'                 | '838,98'     | '4 661,02'   | '5 500,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "FormWrite"
+			And I click the button named "FormPost"
+		* Un-post SI 2
+			And I click the button named "FormUndoPosting"
+			And I close all client application windows	
 
 Scenario: _1000006 check credit limit at different time intervals
 	And I close all client application windows
@@ -830,6 +863,29 @@ Scenario: _1000006 check credit limit at different time intervals
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
 				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 48 500, lack: 38 500 TRY'|
+		* Try to re-port
+			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"						
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 48 500, lack: 38 500 TRY'|
+		* Change amount
+			And I move to the tab named "GroupItemList"
+			And I go to line in "ItemList" table
+				| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+				| '1' | 'Dress' | 'S/Yellow' | ''                   | ''                  | '50,000'   | 'en description is empty' | 'pcs'  | '550,00' | '18%' | ''              | 'No'                 | '4 194,92'   | '23 305,08'  | '27 500,00'    | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+				| '2' | 'Boots' | '36/18SD'  | ''                   | ''                  | '30,000'   | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '3 203,39'   | '17 796,61'  | '21 000,00'    | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "FormWrite"
+			And I click the button named "FormPost"
+		* Un-post SI 2
+			And I click the button named "FormUndoPosting"
+			And I close all client application windows	
 	And I close all client application windows	
 
 Scenario: _1000007 create SPO from SO and check credit limit
@@ -864,9 +920,28 @@ Scenario: _1000007 create SPO from SO and check credit limit
 		And I click the button named "FormPost"
 		Then there are lines in TestClient message log
 			|'Credit limit exceeded. Limit: 2 000, limit balance: 1 300, transaction: 1 900, lack: 600 USD'|
+	* Try to re-port
+		And I click the button named "FormPost"			
+		Then there are lines in TestClient message log
+			|'Credit limit exceeded. Limit: 2 000, limit balance: 1 300, transaction: 1 900, lack: 600 USD'|
+	* Change amount
+		And I move to the tab named "GroupItemList"
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Unit' | 'Store'    | 'Shipment basis'                          | 'Sales order'                             |
+			| '1' | 'Dress' | 'S/Yellow' | ''                   | ''                  | '50,000'   | 'pcs'  | 'Store 01' | 'Sales order 1 dated 08.04.2025 16:34:45' | 'Sales order 1 dated 08.04.2025 16:34:45' |
+		And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Unit' | 'Store'    | 'Shipment basis'                          | 'Sales order'                             |
+			| '2' | 'Boots' | '36/18SD'  | ''                   | ''                  | '30,000'   | 'pcs'  | 'Store 01' | 'Sales order 1 dated 08.04.2025 16:34:45' | 'Sales order 1 dated 08.04.2025 16:34:45' |
+		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormWrite"
+		And I click the button named "FormPost"
+	* Un-post SI 2
+		And I click the button named "FormUndoPosting"
+		And I close all client application windows
 	And I close all client application windows				
-
-
 
 
 Scenario: _999999 close TestClient session

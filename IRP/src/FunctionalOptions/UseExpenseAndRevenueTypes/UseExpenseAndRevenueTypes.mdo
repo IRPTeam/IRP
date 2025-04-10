@@ -34,24 +34,4 @@
   <content>InformationRegister.T6070S_BatchRevenueAllocationInfo</content>
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.RevenueType</content>
   <content>AccumulationRegister.R6080T_OtherPeriodsRevenues</content>
-  <content>Document.BankPayment.TabularSection.PaymentList.Attribute.ProfitLossCenter</content>
-  <content>Document.CashExpense.TabularSection.PaymentList.Attribute.ProfitLossCenter</content>
-  <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.ProfitLossCenter</content>
-  <content>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.ProfitLossCenter</content>
-  <content>AccumulationRegister.R5021T_Revenues.Dimension.ProfitLossCenter</content>
-  <content>Document.CreditNote.TabularSection.Transactions.Attribute.ProfitLossCenter</content>
-  <content>Document.RetailReturnReceipt.TabularSection.ItemList.Attribute.ProfitLossCenter</content>
-  <content>Document.DebitNote.TabularSection.Transactions.Attribute.ProfitLossCenter</content>
-  <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.ProfitLossCenter</content>
-  <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.ProfitLossCenter</content>
-  <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ProfitLossCenter</content>
-  <content>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.ProfitLossCenter</content>
-  <content>Document.CashRevenue.TabularSection.PaymentList.Attribute.ProfitLossCenter</content>
-  <content>Document.SalesOrder.TabularSection.ItemList.Attribute.ProfitLossCenter</content>
-  <content>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.ProfitLossCenter</content>
-  <content>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.ProfitLossCenter</content>
-  <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.ProfitLossCenter</content>
-  <content>AccumulationRegister.R5022T_Expenses.Dimension.ProfitLossCenter</content>
-  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ProfitLossCenter</content>
-  <content>Document.SalesReturnOrder.TabularSection.ItemList.Attribute.ProfitLossCenter</content>
 </mdclass:FunctionalOption>

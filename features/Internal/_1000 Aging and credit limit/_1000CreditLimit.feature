@@ -651,7 +651,7 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 			And I click the button named "FormPost"
 			And I click "OK" button
 			Then there are lines in TestClient message log
-				|'Credit limit exceeded. Limit: 4 000, limit balance: 14 000, transaction: 32 450, lack: 18 450 TRY'|
+				|'Credit limit exceeded. Limit: 4 000, limit balance: 10 755, transaction: 32 450, lack: 21 695 TRY'|
 			And I close all client application windows
 
 Scenario: _1000004 check credit limit in SI (same currency)

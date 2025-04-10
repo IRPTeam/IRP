@@ -844,6 +844,8 @@ Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+	Else
+		Raise StrTemplate("Unsupported operation [%1]", Result.Operation);
 	EndIf;
 	ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
 	LockLinkedRows();

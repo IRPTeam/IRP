@@ -18,8 +18,8 @@ Procedure FillCheckProcessing_Catalog_SerialLotNumbers(Cancel, Object) Export
 	
 	RegIsFilled = R4014B_SerialLotNumber_IsFilled(Object.Ref);
 	
-	If Object.StockBalanceDetailSerialLotNumber <> Object.Ref.StockBalanceDetailSerialLotNumber And RegIsFilled Then
-		ShowUserMessage(Cancel, Object, "StockBalanceDetailSerialLotNumber");
+	If Object.StockBalanceDetail <> Object.Ref.StockBalanceDetail And RegIsFilled Then
+		ShowUserMessage(Cancel, Object, "StockBalanceDetail");
 	EndIf;
 	
 	If Object.SerialLotNumberOwner <> Object.Ref.SerialLotNumberOwner And RegIsFilled Then
@@ -34,8 +34,8 @@ Procedure FillCheckProcessing_Catalog_SourceOfOrigins(Cancel, Object) Export
 	
 	RegIsFilled = R9010B_SourceOfOriginStock_IsFilled(Object.Ref);
 	
-	If Object.StockBalanceDetailSourceOfOrigins <> Object.Ref.StockBalanceDetailSourceOfOrigins And RegIsFilled Then
-		ShowUserMessage(Cancel, Object, "StockBalanceDetailSourceOfOrigins");
+	If Object.StockBalanceDetail <> Object.Ref.StockBalanceDetail And RegIsFilled Then
+		ShowUserMessage(Cancel, Object, "StockBalanceDetail");
 	EndIf;
 	
 	If Object.SourceOfOriginOwner <> Object.Ref.SourceOfOriginOwner And RegIsFilled Then

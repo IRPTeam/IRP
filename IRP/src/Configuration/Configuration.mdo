@@ -1407,7 +1407,7 @@
   <enums>Enum.ShippingStatuses</enums>
   <enums>Enum.SpecialOfferTypes</enums>
   <enums>Enum.SpecificationType</enums>
-  <enums>Enum.StockBalanceDetail</enums>
+  <enums>Enum.DELETE_StockBalanceDetail</enums>
   <enums>Enum.SystemClientType</enums>
   <enums>Enum.TaxKind</enums>
   <enums>Enum.TaxType</enums>

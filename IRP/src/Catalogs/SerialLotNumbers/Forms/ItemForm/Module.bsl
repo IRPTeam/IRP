@@ -95,13 +95,15 @@ Procedure UpdateAttributesByOwner()
 	
 	OwnerInfo = GetOwnerInfo(Object.SerialLotNumberOwner);
 	Object.StockBalanceDetail          = OwnerInfo.StockBalanceDetail;
+	Object.BatchBalanceDetail          = OwnerInfo.BatchBalanceDetail;
 	Object.EachSerialLotNumberIsUnique = OwnerInfo.EachSerialLotNumberIsUnique;
 EndProcedure
 
 &AtServerNoContext
 Function GetOwnerInfo(OwnerRef)
 	Result = New Structure();
-	Result.Insert("StockBalanceDetail", Undefined);
+	Result.Insert("StockBalanceDetail", False);
+	Result.Insert("BatchBalanceDetail", False);
 	Result.Insert("EachSerialLotNumberIsUnique", False);
 	
 	If Not ValueIsFilled(OwnerRef) Then
@@ -109,6 +111,7 @@ Function GetOwnerInfo(OwnerRef)
 	EndIf;
 	
 	Result.StockBalanceDetail = SerialLotNumbersServer.GetStockBalanceDetailByOwner(OwnerRef);
+	Result.BatchBalanceDetail = SerialLotNumbersServer.GetBatchBalanceDetailByOwner(OwnerRef);
 	Result.EachSerialLotNumberIsUnique = SerialLotNumbersServer.isEachSerialLotNumberIsUniqueByOwner(OwnerRef);
 	
 	Return Result;
@@ -181,6 +184,7 @@ Procedure FillParamsOnCreate()
 	
 	OwnerInfo = GetOwnerInfo(Object.SerialLotNumberOwner);
 	Object.StockBalanceDetail          = OwnerInfo.StockBalanceDetail;
+	Object.BatchBalanceDetail          = OwnerInfo.BatchBalanceDetail;
 	Object.EachSerialLotNumberIsUnique = OwnerInfo.EachSerialLotNumberIsUnique;
 	
 	// delete manual, if have other types

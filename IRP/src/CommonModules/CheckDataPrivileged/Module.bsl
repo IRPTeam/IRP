@@ -22,6 +22,10 @@ Procedure FillCheckProcessing_Catalog_SerialLotNumbers(Cancel, Object) Export
 		ShowUserMessage(Cancel, Object, "StockBalanceDetail");
 	EndIf;
 	
+	If Object.BatchBalanceDetail <> Object.Ref.BatchBalanceDetail And RegIsFilled Then
+		ShowUserMessage(Cancel, Object, "BatchBalanceDetail");
+	EndIf;
+	
 	If Object.SerialLotNumberOwner <> Object.Ref.SerialLotNumberOwner And RegIsFilled Then
 		ShowUserMessage(Cancel, Object, "SerialLotNumberOwner");
 	EndIf;
@@ -36,6 +40,10 @@ Procedure FillCheckProcessing_Catalog_SourceOfOrigins(Cancel, Object) Export
 	
 	If Object.StockBalanceDetail <> Object.Ref.StockBalanceDetail And RegIsFilled Then
 		ShowUserMessage(Cancel, Object, "StockBalanceDetail");
+	EndIf;
+	
+	If Object.BatchBalanceDetail <> Object.Ref.BatchBalanceDetail And RegIsFilled Then
+		ShowUserMessage(Cancel, Object, "BatchBalanceDetail");
 	EndIf;
 	
 	If Object.SourceOfOriginOwner <> Object.Ref.SourceOfOriginOwner And RegIsFilled Then

@@ -115,3 +115,33 @@ Function CalculateSourceOfOriginsTable(Array_ItemList, Array_SerialLotNumbers, A
 	EndDo;
 	Return Result;
 EndFunction
+
+Function GetStockBalanceDetailByOwner(Owner) Export
+	ItemType = GetItemTypeByOwner(Owner);
+	If ValueIsFilled(ItemType) Then
+		Return ItemType.StockBalanceDetailSourceOfOrigins;
+	EndIf;
+	Return False;
+EndFunction
+
+Function GetBatchBalanceDetailByOwner(Owner) Export
+	ItemType = GetItemTypeByOwner(Owner);
+	If ValueIsFilled(ItemType) Then
+		Return ItemType.BatchBalanceDetailSourceOfOrigins;
+	EndIf;
+	Return False;
+EndFunction
+
+Function GetItemTypeByOwner(Owner) Export
+	ItemType = Catalogs.ItemTypes.EmptyRef(); 
+	If Not ValueIsFilled(Owner) Then
+		
+	ElsIf TypeOf(Owner) = Type("CatalogRef.ItemKeys") Then
+		ItemType = Owner.Item.ItemType;
+	ElsIf TypeOf(Owner) = Type("CatalogRef.Items") Then
+		ItemType = Owner.ItemType;
+	ElsIf TypeOf(Owner) = Type("CatalogRef.ItemTypes") Then
+		ItemType = Owner;
+	EndIf;
+	Return ItemType;
+EndFunction

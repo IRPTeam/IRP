@@ -809,6 +809,10 @@ Scenario: _1000005 check credit limit in SI (different currency)
 			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormWrite"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
 			And I click the button named "FormPost"
 			Then there are lines in TestClient message log
 				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
@@ -919,6 +923,10 @@ Scenario: _1000006 check credit limit at different time intervals
 			And I input "30,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormWrite"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
 			And I click the button named "FormPost"
 			Then there are lines in TestClient message log
 				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
@@ -991,6 +999,10 @@ Scenario: _1000007 create SPO from SO and check credit limit
 		And I input "30,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormWrite"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Credit limit exceeded. Limit: 2 000, limit balance: 1 300, transaction: 1 900, lack: 600 USD'|
 		And I click the button named "FormPost"
 		Then there are lines in TestClient message log
 			|'Credit limit exceeded. Limit: 2 000, limit balance: 1 300, transaction: 1 900, lack: 600 USD'|

@@ -814,6 +814,8 @@ Scenario: _1000005 check credit limit in SI (different currency)
 			Then there are lines in TestClient message log
 				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
 			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
 			Then there are lines in TestClient message log
 				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
 		* Un-post SI 2
@@ -913,23 +915,24 @@ Scenario: _1000006 check credit limit at different time intervals
 			And I move to the tab named "GroupItemList"
 			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
-				| '1' | 'Dress' | 'S/Yellow' | ''                   | ''                  | '5,000'    | 'en description is empty' | 'pcs'  | '550,00' | '18%' | ''              | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+				| '1' | 'Dress' | 'S/Yellow' | ''                   | ''                  | '10,000'   | 'en description is empty' | 'pcs'  | '550,00' | '18%' | ''              | 'No'                 | '838,98'     | '4 661,02'   | '5 500,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
 			And I input "50,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
-			And "ItemList" table became equal
 				| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
-				| '2' | 'Boots' | '36/18SD'  | ''                   | ''                  | '10,000'   | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '1 067,80'   | '5 932,20'   | '7 000,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+				| '2' | 'Boots' | '36/18SD'  | ''                   | ''                  | '5,000'    | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '533,90'     | '2 966,10'   | '3 500,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
 			And I input "30,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormWrite"
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 48 500, lack: 38 500 TRY'|
 			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 48 500, lack: 38 500 TRY'|
 		* Un-post SI 2
 			And I click the button named "FormUndoPosting"
 			And I close all client application windows	
@@ -974,13 +977,13 @@ Scenario: _1000007 create SPO from SO and check credit limit
 	* Change amount (less than limit)
 		And I move to the tab named "GroupItemList"
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Unit' | 'Store'    | 'Shipment basis'                          | 'Sales order'                             |
-			| '1' | 'Dress' | 'S/Yellow' | ''                   | ''                  | '50,000'   | 'pcs'  | 'Store 01' | 'Sales order 1 dated 08.04.2025 16:34:45' | 'Sales order 1 dated 08.04.2025 16:34:45' |
+			| "Item"  |
+			| "Dress" |
 		And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Unit' | 'Store'    | 'Shipment basis'                          | 'Sales order'                             |
-			| '2' | 'Boots' | '36/18SD'  | ''                   | ''                  | '30,000'   | 'pcs'  | 'Store 01' | 'Sales order 1 dated 08.04.2025 16:34:45' | 'Sales order 1 dated 08.04.2025 16:34:45' |
+			| "Item"  |
+			| "Boots" |
 		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormWrite"
@@ -988,19 +991,16 @@ Scenario: _1000007 create SPO from SO and check credit limit
 	* Change amount (more than limit)
 		And I move to the tab named "GroupItemList"
 		And I go to line in "ItemList" table
-			| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
-			| '1' | 'Dress' | 'S/Yellow' | ''                   | ''                  | '5,000'    | 'en description is empty' | 'pcs'  | '550,00' | '18%' | ''              | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			| "Item"  |
+			| "Dress" |
 		And I input "50,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
-		And "ItemList" table became equal
-			| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
-			| '2' | 'Boots' | '36/18SD'  | ''                   | ''                  | '10,000'   | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '1 067,80'   | '5 932,20'   | '7 000,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			| "Item"  |
+			| "Boots" |
 		And I input "30,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormWrite"
-		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
 		Then there are lines in TestClient message log
 			|'Credit limit exceeded. Limit: 2 000, limit balance: 1 300, transaction: 1 900, lack: 600 USD'|
 		And I click the button named "FormPost"

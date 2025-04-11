@@ -157,14 +157,3 @@ Scenario: _0286002 create Shipment receipt planing order - Shipment confirmation
 			| '$$NumberShipmentConfirmation1$$'|
 		And I close all client application windows
 		
-
-				
-				
-				
-
-		
-
-				
-
-					
-				

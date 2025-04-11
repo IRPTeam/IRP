@@ -3616,12 +3616,14 @@ Procedure OnSetStoreNotify(Parameters) Export
 	EndDo;
 	If StoreArray.Count() > 1 Then
 		Parameters.Form.Items.Store.InputHint = StrConcat(StoreArray, "; ");
+	ElsIf StoreArray.Count() = 1 Then
+		Parameters.Form.Store = StoreArray[0];
 	Else
 		Parameters.Form.Items.Store.InputHint = "";
 	EndIf;
 EndProcedure
 
-Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames) Export
+Procedure OnAddOrLinkUnlinkDocumentRows(Object, Form, TableNames) Export
 	For Each TableName In StrSplit(TableNames, ",") Do
 		FormParameters = GetFormParameters(Form);
 		ServerParameters = GetServerParameters(Object);
@@ -3641,6 +3643,11 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 			SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
 		EndIf;
 		
+		If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
+			SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Parameters.Object);
+			SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Parameters.Object);
+		EndIf;
+				
 		If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
 			ControlCodeStringsClient.UpdateState(Parameters.Object);
 		EndIf;

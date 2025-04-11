@@ -59,4 +59,5 @@
   <content>Document.PurchaseOrder.Attribute.LegalName</content>
   <content>Document.WithholdingTaxInvoice.Attribute.LegalName</content>
   <content>Document.ShipmentPlaningOrder.Attribute.LegalName</content>
+  <content>Catalog.Companies.Command.OpenCompanyList</content>
 </mdclass:FunctionalOption>

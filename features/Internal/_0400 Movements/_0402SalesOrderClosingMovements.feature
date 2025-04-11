@@ -53,6 +53,7 @@ Scenario: _040158 preparation (Sales order closing)
 		When Create catalog PartnersBankAccounts objects
 		When Create information register Taxes records (VAT)
 	When Create Document discount
+	When Create document SO, SC, SI, SOC objects (for order closing)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -403,6 +404,37 @@ Scenario: _040170 check Sales order closing movements by the Register "Posted do
 			| ''                                                | 'Sales order closing 1 dated 28.01.2021 14:46:50' | '28.01.2021 14:46:50' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
 		And I close all client application windows
 
-		
-						
-				
+Scenario: _040170 check Sales order closing movements by the Register (different ItemKey)		
+	And I close all client application windows
+	* Select Sales order closing
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I go to line in "List" table
+			| 'Date'                |
+			| '10.04.2025 22:14:52' |
+		And I click the button named "FormPost"						
+	* Check movements by the Register "Posted documents registry"
+		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order closing 1 dated 10.04.2025 22:14:52'   | ''                                                | ''                    | ''             | ''                    | ''                                          | ''         | ''                                     | ''                                     | ''         | ''        | ''           |
+			| 'Register  "Posted documents registry"'             | ''                                                | ''                    | ''             | ''                    | ''                                          | ''         | ''                                     | ''                                     | ''         | ''        | ''           |
+			| ''                                                  | 'Document'                                        | 'Date'                | 'Number'       | 'Create date'         | 'Modify date'                               | 'Author'   | 'Editor'                               | 'Manual movements edit'                | ''         | ''        | ''           |
+			| ''                                                  | 'Sales order closing 1 dated 10.04.2025 22:14:52' | '10.04.2025 22:14:52' | '*'            | '10.04.2025 22:14:52' | '11.04.2025 21:53:29'                       | 'CI'       | 'CI'                                   | 'No'                                   | ''         | ''        | ''           |
+			| ''                                                  | ''                                                | ''                    | ''             | ''                    | ''                                          | ''         | ''                                     | ''                                     | ''         | ''        | ''           |
+			| 'Register  "R2011 Shipment of sales orders"'        | ''                                                | ''                    | ''             | ''                    | ''                                          | ''         | ''                                     | ''                                     | ''         | ''        | ''           |
+			| ''                                                  | 'Period'                                          | 'RecordType'          | 'Company'      | 'Branch'              | 'Order'                                     | 'Item key' | 'Row key'                              | 'Quantity'                             | ''         | ''        | ''           |
+			| ''                                                  | '10.04.2025 22:14:52'                             | 'Receipt'             | 'Main Company' | ''                    | 'Sales order 316 dated 10.04.2025 22:03:13' | 'XS/Blue'  | 'dc45f5ab-d66f-4e97-9657-b9d795e3a812' | '50'                                   | ''         | ''        | ''           |
+			| ''                                                  | '10.04.2025 22:14:52'                             | 'Receipt'             | 'Main Company' | ''                    | 'Sales order 316 dated 10.04.2025 22:03:13' | 'M/White'  | 'dc45f5ab-d66f-4e97-9657-b9d795e3a812' | '-50'                                  | ''         | ''        | ''           |
+			| ''                                                  | ''                                                | ''                    | ''             | ''                    | ''                                          | ''         | ''                                     | ''                                     | ''         | ''        | ''           |
+			| 'Register  "R2012 Invoice closing of sales orders"' | ''                                                | ''                    | ''             | ''                    | ''                                          | ''         | ''                                     | ''                                     | ''         | ''        | ''           |
+			| ''                                                  | 'Period'                                          | 'RecordType'          | 'Company'      | 'Branch'              | 'Order'                                     | 'Currency' | 'Item key'                             | 'Row key'                              | 'Quantity' | 'Amount'  | 'Net amount' |
+			| ''                                                  | '10.04.2025 22:14:52'                             | 'Receipt'             | 'Main Company' | ''                    | 'Sales order 316 dated 10.04.2025 22:03:13' | 'TRY'      | 'XS/Blue'                              | 'dc45f5ab-d66f-4e97-9657-b9d795e3a812' | '50'       | '26 000'  | '22 033,9'   |
+			| ''                                                  | '10.04.2025 22:14:52'                             | 'Receipt'             | 'Main Company' | ''                    | 'Sales order 316 dated 10.04.2025 22:03:13' | 'TRY'      | 'M/White'                              | 'dc45f5ab-d66f-4e97-9657-b9d795e3a812' | '-50'      | '-26 000' | '-22 033,9'  |
+			| ''                                                  | ''                                                | ''                    | ''             | ''                    | ''                                          | ''         | ''                                     | ''                                     | ''         | ''        | ''           |
+			| 'Register  "R4011 Free stocks"'                     | ''                                                | ''                    | ''             | ''                    | ''                                          | ''         | ''                                     | ''                                     | ''         | ''        | ''           |
+			| ''                                                  | 'Period'                                          | 'RecordType'          | 'Store'        | 'Item key'            | 'Quantity'                                  | ''         | ''                                     | ''                                     | ''         | ''        | ''           |
+			| ''                                                  | '10.04.2025 22:14:52'                             | 'Expense'             | 'Store 03'     | 'M/White'             | '-50'                                       | ''         | ''                                     | ''                                     | ''         | ''        | ''           |
+			| ''                                                  | ''                                                | ''                    | ''             | ''                    | ''                                          | ''         | ''                                     | ''                                     | ''         | ''        | ''           |
+			| 'Register  "R4012 Stock Reservation"'               | ''                                                | ''                    | ''             | ''                    | ''                                          | ''         | ''                                     | ''                                     | ''         | ''        | ''           |
+			| ''                                                  | 'Period'                                          | 'RecordType'          | 'Store'        | 'Item key'            | 'Order'                                     | 'Quantity' | ''                                     | ''                                     | ''         | ''        | ''           |
+			| ''                                                  | '10.04.2025 22:14:52'                             | 'Receipt'             | 'Store 03'     | 'M/White'             | 'Sales order 316 dated 10.04.2025 22:03:13' | '-50'      | ''                                     | ''                                     | ''         | ''        | ''           |
+		And I close all client application windows		

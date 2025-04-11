@@ -51,6 +51,7 @@ Scenario: _041158 preparation (Purchase order closing)
 		When Create catalog PartnersBankAccounts objects
 		When Create information register Taxes records (VAT)
 	When Create Document discount
+	When Create document PO, GR, PI, POC objects (for order closing)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -331,3 +332,20 @@ Scenario: _041168 check Purchase order closing movements by the Register  "Poste
 			| ''                                      | 'Document'                   | 'Date' | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
 			| ''                                      | '$$PurchaseOrderClosing37$$' | '*'    | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
 	And I close all client application windows		
+
+Scenario: _041170 check Purchase order closing movements by the Register (different ItemKey)		
+	And I close all client application windows
+	* Select Sales order closing
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+		And I go to line in "List" table
+			| 'Date'                |
+			| '10.04.2025 22:26:08' |
+		And I click the button named "FormPost"						
+	* Check movements by the Register "Posted documents registry"
+		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase order closing 1 dated 10.04.2025 22:26:08' | ''                                                   | ''                    | ''       | ''                    | ''                    | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"'              | ''                                                   | ''                    | ''       | ''                    | ''                    | ''       | ''       | ''                      |
+			| ''                                                   | 'Document'                                           | 'Date'                | 'Number' | 'Create date'         | 'Modify date'         | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                                   | 'Purchase order closing 1 dated 10.04.2025 22:26:08' | '10.04.2025 22:26:08' | '*'      | '11.04.2025 22:41:31' | '11.04.2025 22:42:30' | 'CI'     | 'CI'     | 'No'                    |
+		And I close all client application windows

@@ -51,6 +51,7 @@ Scenario: _0224000 preparation (Purchase order closing)
 	* Create test PO
 		When Create document PO, GR, PI objects (for check closing)
 		When Create document PO, SO objects (for check double closing)
+		When Create document PO, GR, PI objects (for order closing)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Write);"     |
 			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);"   |
@@ -299,3 +300,20 @@ Scenario: _0230003 create Purchase order closing and check for double records
 		Then there are lines in TestClient message log
 			|'Order already closed'|
 	And I close all client application windows
+
+Scenario: _0230004 create Purchase order closing (different ItemKey)
+	And I close all client application windows
+	* Create SOC
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Date'                |
+			| '10.04.2025 22:01:33' |
+		Then "Purchase orders" window is opened
+		And I click the button named "FormDocumentPurchaseOrderClosingGenerate"
+		And I click "Save" button
+		And I delete "$$NumberPurchaseOrderClosing0230004$$" variable
+		And I delete "$$PurchaseOrderClosing0230004$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrderClosing0230004$$"
+		And I save the window as "$$PurchaseOrderClosing0230004$$"
+		And I click "Post and close" button	
+		And I close current test client session	

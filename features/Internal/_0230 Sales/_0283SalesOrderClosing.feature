@@ -51,6 +51,8 @@ Scenario: _0230000 preparation (Sales order closing)
 		When Create catalog Users objects
 	* Create test SO
 		When Create document SO, SI, SC objects (SI before SC for check closing)
+		When Create document SO, SC, SI objects (for order closing)
+
 		And I execute 1C:Enterprise script at server
 				| "Documents.SalesOrder.FindByNumber(132).GetObject().Write(DocumentWriteMode.Posting);"     |
 	* User rights 
@@ -309,4 +311,19 @@ Scenario: _0230003 create Sales order closing and check for double records
 		And I click "Post and close" button	
 		Then there are lines in TestClient message log
 			|'Order already closed'|
-	And I close all client application windows	
+	And I close all client application windows
+
+Scenario: _0230004 create Sales order closing (different ItemKey)
+	And I close all client application windows
+	* Create SOC
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Date'                |
+			| '10.04.2025 22:03:13' |
+		And I click the button named "FormDocumentSalesOrderClosingGenerate"
+		And I click "Save" button
+		And I delete "$$NumberSalesOrderClosing0230004$$" variable
+		And I delete "$$SalesOrderClosing0230004$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrderClosing0230004$$"
+		And I save the window as "$$SalesOrderClosing0230004$$"		
+		And I close current test client session	

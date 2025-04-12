@@ -53,7 +53,6 @@ Scenario: _040158 preparation (Sales order closing)
 		When Create catalog PartnersBankAccounts objects
 		When Create information register Taxes records (VAT)
 	When Create Document discount
-	When Create document SO, SC, SI, SOC objects (for order closing)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -94,7 +93,21 @@ Scenario: _040158 preparation (Sales order closing)
 			| 'Number'    |
 			| '4'         |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		And I close all client application windows
+	When Create document SO, SC, SI, SOC objects (for order closing)
+	* Repost documents
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I select all lines of "List" table
+		And I click the button named "FormPost"				
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I select all lines of "List" table
+		And I click the button named "FormPost"	
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I select all lines of "List" table
+		And I click the button named "FormPost"	
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I select all lines of "List" table
+		And I click the button named "FormPost"					
+	And I close all client application windows
 	// * Check query for sales order closing movements
 	// 	Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"
 	// 	And in the table "Info" I click "Fill movements" button

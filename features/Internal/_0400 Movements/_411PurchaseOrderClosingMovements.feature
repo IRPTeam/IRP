@@ -51,7 +51,6 @@ Scenario: _041158 preparation (Purchase order closing)
 		When Create catalog PartnersBankAccounts objects
 		When Create information register Taxes records (VAT)
 	When Create Document discount
-	When Create document PO, GR, PI, POC objects (for order closing)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -117,7 +116,21 @@ Scenario: _041158 preparation (Purchase order closing)
 		// 	| 'Number' |
 		// 	| '2'      |
 		// And in the table "List" I click the button named "ListContextMenuPost"
-		And I close all client application windows
+	When Create document PO, GR, PI, POC objects (for order closing)
+	* Repost documents
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I select all lines of "List" table
+		And I click the button named "FormPost"				
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I select all lines of "List" table
+		And I click the button named "FormPost"	
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I select all lines of "List" table
+		And I click the button named "FormPost"	
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+		And I select all lines of "List" table
+		And I click the button named "FormPost"
+	And I close all client application windows
 		
 Scenario: _0411581 check preparation
 	When check preparation		

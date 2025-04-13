@@ -1043,7 +1043,7 @@ Scenario: _030023 moving a special offer inside another special offer (Parent ch
 	And I go to line in "List" table
 		| 'Description'   |
 		| 'Min'           |
-	And I click "Move to folder" button
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I move one level down in "List" table
 	And I go to line in "List" table
@@ -1054,7 +1054,7 @@ Scenario: _030023 moving a special offer inside another special offer (Parent ch
 	And I go to line in "List" table
 		| 'Description'   |
 		| 'Maximum'       |
-	And I click "Move to folder" button
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I click "List" button
 	And I go to line in "List" table
@@ -1066,14 +1066,14 @@ Scenario: _030023 moving a special offer inside another special offer (Parent ch
 	And I go to line in "List" table
 		| 'Description'   |
 		| 'Sum'           |
-	And I click "Move to folder" button
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
 	And I go to line in "List" table
 		| 'Description'      |
 		| 'Special Offers'   |
 	And I click the button named "FormChoose"
 	Then "Special offers" window is opened
-	And I click "Move to folder" button
+	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	And I close current window
 
 Scenario: _030024 create special offer Present Discount

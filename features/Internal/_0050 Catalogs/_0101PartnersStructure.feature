@@ -230,7 +230,7 @@ Scenario: _010009 check filling legal name in the partner term (complex partner 
 		And I go to line in "List" table
 			| 'Description'    |
 			| 'MIO'            |
-		And in the table "List" I click "Mark for deletion / Unmark for deletion" button
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And In this window I click command interface button "Partner terms"

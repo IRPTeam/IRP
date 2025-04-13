@@ -178,7 +178,7 @@ Scenario: _206107 try to change type in item type that used in the documents
 	* Try change item type
 		And I change the radio button named "Type" value to "Service"		
 		And I click "Save and close" button
-		Then I wait that in user messages the "[Stock balance detail] cannot be changed, has posted documents" substring will appear in 10 seconds
+		Then I wait that in user messages the "[Type] cannot be changed, has posted documents" substring will appear in 10 seconds
 				
 Scenario: _206108 try to change Use item type marker and stock balance details in item type that used in the documents
 	And I close all client application windows
@@ -190,7 +190,7 @@ Scenario: _206108 try to change Use item type marker and stock balance details i
 		And I select current line in "List" table
 	* Try change item type
 		And I set checkbox "Use serial lot number"
-		And I select "By item key" exact value from "Stock balance detail" drop-down list
+		And I set checkbox named "StockBalanceDetailSerialLotNumber"
 		And I click "Save" button
 		Then there are lines in TestClient message log
 			|'[Use serial lot number] cannot be changed, has posted documents'|

@@ -682,7 +682,7 @@ Scenario: _2990013 check the question of saving Physical inventory before creati
 	* Check message output
 		And I click "Physical count by location" button
 		Then the form attribute named "Message" became equal to
-		| 'To run the "Physical count by location" command, you must save your work. Click OK to save and continue, or click Cancel to return.'   |
+		| 'To run the "Physical count by location" command, you must save your work. Click OK to save and continue, or click Cancel to return. '   |
 	And I close all client application windows
 
 
@@ -819,10 +819,10 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 			And I click "Save and close" button
 	* Check update Physical count by location tab in the Physical inventory
 		And "PhysicalCountByLocationList" table contains lines
-			| 'Reference'           | 'Status'     | 'Count rows'   | 'Phys. count'    |
-			| 'Location count 1*'   | 'Prepared'   | ''             | ''               |
-			| 'Location count 2*'   | 'Prepared'   | ''             | ''               |
-			| 'Location count 3*'   | 'Prepared'   | '5'            | '222,000'        |
+			| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
+			| 'Location count 1*' | 'Prepared' | ''           | ''            |
+			| 'Location count 2*' | 'Prepared' | ''           | ''            |
+			| 'Location count 3*' | 'Prepared' | '5'          | '222'         |
 		Then the number of "PhysicalCountByLocationList" table lines is "равно" 3
 		And I close all client application windows
 

@@ -483,7 +483,7 @@ Scenario: _400003 opening entry advance balance
 		And I finish line editing in "AdvanceFromCustomers" table
 		And I click "Post" button
 		Then there are lines in TestClient message log
-			|'The "Partner term" is required on line 1 of the "Advance from customers" list.'|
+			|'"Partner term" is required in row 1 of the "Account receivable by agreements" list.'|
 		And I select current line in "AdvanceFromCustomers" table
 		And I select "Basic Partner terms, TRY" from "Partner term" drop-down list by string in "AdvanceFromCustomers" table	
 	* Filling in AdvanceToSuppliers

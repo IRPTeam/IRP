@@ -1114,7 +1114,7 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I move to "Physical count by location" tab
 		And I go to the first line in "PhysicalCountByLocationList" table
 		And I select current line in "PhysicalCountByLocationList" table
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I close "Location count * dated *" window
@@ -1135,7 +1135,7 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I move to "Physical count by location" tab
 		And I go to the first line in "PhysicalCountByLocationList" table
 		And I select current line in "PhysicalCountByLocationList" table
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Then "Location count * dated *" window is opened

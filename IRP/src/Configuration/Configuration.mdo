@@ -1464,6 +1464,7 @@
   <reports>Report.T0001_FilesAnalyser</reports>
   <reports>Report.F0010_FixedAssetsTransferCost</reports>
   <reports>Report.F0011_InventoryBook</reports>
+  <reports>Report.F0012_DepreciationStatement</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>

@@ -65,6 +65,10 @@
 				<left xsi:type="dcscor:Field">Object.Mapping.DefaultValue</left>
 				<comparisonType>Equal</comparisonType>
 			</item>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.Mapping.LinkedByRule</left>
+				<comparisonType>NotFilled</comparisonType>
+			</item>
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
@@ -239,6 +243,9 @@
 			<item>
 				<field>MappingLockTargetAttribute</field>
 			</item>
+			<item>
+				<field>MappingLinkedByRule</field>
+			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
@@ -273,6 +280,9 @@
 		<selection>
 			<item>
 				<field>MappingCopy</field>
+			</item>
+			<item>
+				<field>MappingLinkedByRule</field>
 			</item>
 		</selection>
 		<filter>

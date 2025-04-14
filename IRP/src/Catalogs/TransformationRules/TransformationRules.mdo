@@ -283,6 +283,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="7dc52d58-4a75-410c-8952-591ea56dec26">
+      <name>LinkedByRule</name>
+      <synonym>
+        <key>en</key>
+        <value>Linked by rule</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.TransformationRules</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <forms uuid="04612d3a-a8c0-42d2-bed3-67be3728f9bd">
     <name>ItemForm</name>

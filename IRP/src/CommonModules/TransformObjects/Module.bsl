@@ -2,59 +2,64 @@
 
 #Region Settings
 
-// Table filling priority.
+// Returns priority order for table filling during transformation process.
 // 
 // Returns:
-//  Array of String - Table filling priority
+//  Array of String - Ordered list of table names to be processed first
 Function TableFillingPriority() Export
 	
-	Array = New Array; // Array Of String
-	Array.Add("ItemList");
-	Array.Add("SerialLotNumbers");
-	Array.Add("SpecialOffers");
-	Array.Add("SourceOfOrigins");
+	Result = New Array; // Array Of String
+	Result.Add("ItemList");
+	Result.Add("SerialLotNumbers");
+	Result.Add("SpecialOffers");
+	Result.Add("SourceOfOrigins");
 	
-	Return Array;
+	Return Result;
 	
 EndFunction
 
-// Ignore attribute on mapping.
+// Returns list of attributes to be ignored during object mapping.
 // 
 // Returns:
-//  Array of String - Ignore attribute on mapping
+//  Array of String - List of attribute names to ignore
 Function IgnoreAttributeOnMapping() Export
-	Array = New Array; // Array Of String
-	Array.Add("Ref");
-	Array.Add("PredefinedDataName");
-	Array.Add("Predefined");
-	Array.Add("SourceNodeID");
-	Array.Add("Editor");
-	Array.Add("CreateDate");
-	Array.Add("ModifyDate");
-	Array.Add("NotActive");
-	Array.Add("Posting");
-	Array.Add("DataVersion");
-	Array.Add("Key");
-	Array.Add("Posted");
+	Result = New Array; // Array Of String
+	Result.Add("Ref");
+	Result.Add("PredefinedDataName");
+	Result.Add("Predefined");
+	Result.Add("SourceNodeID");
+	Result.Add("Editor");
+	Result.Add("CreateDate");
+	Result.Add("ModifyDate");
+	Result.Add("NotActive");
+	Result.Add("Posting");
+	Result.Add("DataVersion");
+	Result.Add("Key");
+	Result.Add("Posted");
 	
-	Return Array;
+	Return Result;
 EndFunction
 
-// Ignore tables on mapping.
+// Returns list of tables to be ignored during object mapping.
 // 
 // Returns:
-//  Array of String - Ignore tables on mapping
+//  Array of String - List of table names to ignore
 Function IgnoreTablesOnMapping() Export
-	Array = New Array; // Array Of String
-	Array.Add("RowIDInfo");
+	Result = New Array; // Array Of String
+	Result.Add("RowIDInfo");
 	
-	Return Array;
+	Return Result;
 EndFunction
 
 #EndRegion
 
 #Region Subscriptions
 
+// Handler for OnWrite event of objects that support transformation.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Object being written
+//  Cancel - Boolean - Cancel flag
 Procedure OnWrite_ObjectTransformation(Source, Cancel) Export
 	
 	If Source.DataExchange.Load Then
@@ -65,9 +70,16 @@ Procedure OnWrite_ObjectTransformation(Source, Cancel) Export
 		Return;
 	EndIf;
 	
-	OnWrite(Source);
+	ProcessObjectTransformation(Source);
 EndProcedure
 
+// Handler for BeforeWrite event of documents that support transformation.
+// 
+// Parameters:
+//  Source - DocumentObject - Document being written
+//  Cancel - Boolean - Cancel flag
+//  WriteMode - DocumentWriteMode - Mode of document writing
+//  PostingMode - DocumentPostingMode - Mode of document posting
 Procedure BeforeWrite_DocumentObjectTransformation(Source, Cancel, WriteMode, PostingMode) Export
 	If Source.DataExchange.Load Then
 		Return;
@@ -76,14 +88,20 @@ Procedure BeforeWrite_DocumentObjectTransformation(Source, Cancel, WriteMode, Po
 	If Not GetFunctionalOption("UseObjectTransformation") Then
 		Return;
 	EndIf;
-	WriteSettings = WriteSettings();
-	WriteSettings.Cancel = Cancel;
-	WriteSettings.WriteMode = WriteMode;
-	WriteSettings.PostingMode = PostingMode;
 	
-	BeforeWrite(Source, WriteSettings);
+	Settings = CreateWriteSettings();
+	Settings.Cancel = Cancel;
+	Settings.WriteMode = WriteMode;
+	Settings.PostingMode = PostingMode;
+	
+	PrepareForTransformation(Source, Settings);
 EndProcedure
 
+// Handler for BeforeWrite event of catalogs that support transformation.
+// 
+// Parameters:
+//  Source - CatalogObject - Catalog being written
+//  Cancel - Boolean - Cancel flag
 Procedure BeforeWrite_CatalogObjectTransformation(Source, Cancel) Export
 	If Source.DataExchange.Load Then
 		Return;
@@ -93,93 +111,149 @@ Procedure BeforeWrite_CatalogObjectTransformation(Source, Cancel) Export
 		Return;
 	EndIf;
 		
-	WriteSettings = WriteSettings();
-	WriteSettings.Cancel = Cancel;
+	Settings = CreateWriteSettings();
+	Settings.Cancel = Cancel;
 	
-	BeforeWrite(Source, WriteSettings);
+	PrepareForTransformation(Source, Settings);
 EndProcedure
 
-// Write settings.
+// Creates structure with write settings.
 // 
 // Returns:
-//  Structure - Write settings:
-// * Cancel - Boolean - 
-// * WriteMode - Undefined - 
-// * PostingMode - Undefined - 
-Function WriteSettings();
-	Str = New Structure();
-	Str.Insert("Cancel", False);
-	Str.Insert("WriteMode", Undefined);
-	Str.Insert("PostingMode", Undefined);
-	Return Str;
+//  Structure - Write settings with the following properties:
+// * Cancel - Boolean - Flag to cancel the write operation
+// * WriteMode - Undefined, DocumentWriteMode - Write mode for documents
+// * PostingMode - Undefined, DocumentPostingMode - Posting mode for documents
+Function CreateWriteSettings()
+	Result = New Structure();
+	Result.Insert("Cancel", False);
+	Result.Insert("WriteMode", Undefined);
+	Result.Insert("PostingMode", Undefined);
+	Return Result;
 EndFunction
 
-// Object transformation settings.
+// Creates structure with object transformation settings.
 // 
 // Parameters:
-//  Source - CatalogObject, DocumentObject - Source
-//  WriteSettings - See WriteSettings
+//  Source - CatalogObject, DocumentObject - Source object
+//  WriteSettings - See CreateWriteSettings
+// 
 // Returns:
-//  Structure - Object transformation settings:
-//  * isNew - Boolean - 
-//  * WriteSettings - See WriteSettings
-Function ObjectTransformationSettings(Source, WriteSettings) 
-	Str = New Structure();
-	Str.Insert("isNew", Source.IsNew());
-	Str.Insert("WriteSettings", WriteSettings);
-	Return Str;
+//  Structure - Object transformation settings with properties:
+//  * IsNew - Boolean - Flag indicating if the object is new
+//  * WriteSettings - See CreateWriteSettings
+Function CreateTransformationSettings(Source, WriteSettings) 
+	Result = New Structure();
+	Result.Insert("IsNew", Source.IsNew());
+	Result.Insert("WriteSettings", WriteSettings);
+	Return Result;
 EndFunction
 
-Procedure BeforeWrite(Source, WriteSettings)
-	Source.AdditionalProperties.Insert("ObjectTransformation", ObjectTransformationSettings(Source, WriteSettings));
+// Prepares object for transformation by storing settings in additional properties.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source object
+//  WriteSettings - See CreateWriteSettings
+Procedure PrepareForTransformation(Source, WriteSettings)
+	Source.AdditionalProperties.Insert("ObjectTransformation", 
+		CreateTransformationSettings(Source, WriteSettings));
 EndProcedure
 
-Procedure OnWrite(Source)
+// Main procedure to process object transformation.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source object
+Procedure ProcessObjectTransformation(Source)
 	
 	If Not Source.AdditionalProperties.Property("ObjectTransformation") Then
 		Return;
 	EndIf;
 	
 	//@skip-check property-return-type
-	ObjectTransformationSettings = Source.AdditionalProperties.ObjectTransformation; // See ObjectTransformationSettings
+	TransformationSettings = Source.AdditionalProperties.ObjectTransformation; // See CreateTransformationSettings
+	
 	BeginTransaction();
 	Try
+		// Update existing linked objects first
+		ProcessExistingLinks(Source, TransformationSettings);
 		
-		LinkedTargetRef = GetLinkedTargetRef(Source.Ref);
-		For Each TargetLink In LinkedTargetRef Do
-			If TargetLink.TransformationRule.UpdateLinkedTarget Then
-				UpdateLinkedObject(Source, TargetLink.Target, TargetLink.TransformationRule, ObjectTransformationSettings);
-			EndIf;
-		EndDo;
-	
-		Rules = GetAutoRules(Source);	
-		For Each Rule In Rules Do
+		// Create new linked objects based on auto-rules
+		ProcessAutoRules(Source, TransformationSettings);
 		
-			If LinkedTargetRef.FindRows(New Structure("Source, TransformationRule", Source.Ref, Rule)).Count() = 0 Then
-				LinkedRef = CreateLinkedObject(Source, Rule, ObjectTransformationSettings);
-				Info = InformationRegisters.TranformedObjectsLink.CreateRecordManager();
-				Info.Source = Source.Ref;
-				Info.Target = LinkedRef;
-				Info.TransformationRule = Rule;
-				Info.Write();
-			EndIf;
-			
-		EndDo;
 		CommitTransaction();
 	Except
 		RollbackTransaction();
-		ErrorInfo = ErrorInfo();
-		Log.Write("Tranfer object", ErrorProcessing.DetailErrorDescription(ErrorInfo));
-		Raise ErrorProcessing.BriefErrorDescription(ErrorInfo);
+		LogError("Object transformation error", ErrorInfo());
+		Raise ErrorProcessing.BriefErrorDescription(ErrorInfo());
 	EndTry;
+EndProcedure
+
+// Processes existing linked objects for the given source.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source object
+//  TransformationSettings - See CreateTransformationSettings
+Procedure ProcessExistingLinks(Source, TransformationSettings)
+	LinkedTargetRefs = GetLinkedTargetRef(Source.Ref);
+	
+	For Each TargetLink In LinkedTargetRefs Do
+		If TargetLink.TransformationRule.UpdateLinkedTarget Then
+			UpdateLinkedObject(
+				Source, 
+				TargetLink.Target, 
+				TargetLink.TransformationRule, 
+				TransformationSettings
+			);
+		EndIf;
+	EndDo;
+EndProcedure
+
+// Processes automatic transformation rules for the given source.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source object
+//  TransformationSettings - See CreateTransformationSettings
+Procedure ProcessAutoRules(Source, TransformationSettings)
+	Rules = GetAutoRules(Source);
+	LinkedTargetRefs = GetLinkedTargetRef(Source.Ref);
+	
+	For Each Rule In Rules Do
+		If LinkedTargetRefs.FindRows(New Structure("Source, TransformationRule", Source.Ref, Rule)).Count() = 0 Then
+			// No existing link found, create new linked object
+			LinkedRef = CreateLinkedObject(Source, Rule, TransformationSettings);
+			
+			// Register the link
+			RegisterObjectLink(Source.Ref, LinkedRef, Rule);
+		EndIf;
+	EndDo;
+EndProcedure
+
+// Registers a link between source and target objects.
+// 
+// Parameters:
+//  SourceRef - AnyRef - Reference to source object
+//  TargetRef - AnyRef - Reference to target object
+//  Rule - CatalogRef.TransformationRules - Transformation rule used
+Procedure RegisterObjectLink(SourceRef, TargetRef, Rule)
+	LinkRecord = InformationRegisters.TranformedObjectsLink.CreateRecordManager();
+	LinkRecord.Source = SourceRef;
+	LinkRecord.Target = TargetRef;
+	LinkRecord.TransformationRule = Rule;
+	LinkRecord.Write();
 EndProcedure
 
 #EndRegion
 
 #Region TransformObject
 
-Procedure UpdateLinkedObject(Source, Target, Rule, OTS)
-
+// Updates existing linked object according to transformation rule.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source object
+//  Target - AnyRef - Reference to target object
+//  Rule - CatalogRef.TransformationRules - Transformation rule
+//  TransformationSettings - See CreateTransformationSettings
+Procedure UpdateLinkedObject(Source, Target, Rule, TransformationSettings)
 	Object = Target.GetObject(); // DocumentObjectDocumentName, CatalogObjectDocumentName
 	
 	//@skip-check invocation-parameter-type-intersect
@@ -187,14 +261,23 @@ Procedure UpdateLinkedObject(Source, Target, Rule, OTS)
 
 	UpdateTargetObject(Source, Rule, Wrapper, True);
 	
-	WriteObject(Rule, OTS, Object, Wrapper);
-	
+	WriteTransformedObject(Rule, TransformationSettings, Object, Wrapper);
 EndProcedure
 
-Function CreateLinkedObject(Source, Rule, OTS)
-
-	ObjectManager = MetadataInfo.GetManager(Rule.TargetType.ObjectFullName); 
+// Creates new linked object according to transformation rule.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source object
+//  Rule - CatalogRef.TransformationRules - Transformation rule
+//  TransformationSettings - See CreateTransformationSettings
+// 
+// Returns:
+//  AnyRef - Reference to created object
+Function CreateLinkedObject(Source, Rule, TransformationSettings)
+	ObjectManager = MetadataInfo.GetManager(Rule.TargetType.ObjectFullName);
 	Object = Undefined; // DocumentObjectDocumentName, CatalogObjectDocumentName
+	Wrapper = Undefined;
+	
 	If Rule.TargetType.Parent = Catalogs.ConfigurationMetadata.Documents Then
 		//@skip-check dynamic-access-method-not-found
 		Object = ObjectManager.CreateDocument(); // DocumentObjectDocumentName
@@ -211,21 +294,176 @@ Function CreateLinkedObject(Source, Rule, OTS)
 	
 	UpdateTargetObject(Source, Rule, Wrapper, False);
 	
-	WriteObject(Rule, OTS, Object, Wrapper);
+	WriteTransformedObject(Rule, TransformationSettings, Object, Wrapper);
 	
 	Return Object.Ref;
 EndFunction
 
-// Update target object.
+// Updates target object based on source object and transformation rule.
 // 
 // Parameters:
-//  Source - CatalogObject, DocumentObject - Source
-//  Rule - CatalogRef.TransformationRules, Arbitrary - Rule
+//  Source - CatalogObject, DocumentObject - Source object
+//  Rule - CatalogRef.TransformationRules - Transformation rule
 //  Wrapper - See BuilderAPI.Init
-//  isUpdate - Boolean - Is update
-Procedure UpdateTargetObject(Source, Rule, Wrapper, isUpdate)
+//  IsUpdate - Boolean - True if updating existing object, False if creating new
+Procedure UpdateTargetObject(Source, Rule, Wrapper, IsUpdate)
 	
-	// Fill headers attribute
+	// Process header attributes first
+	FillHeaderAttributes(Source, Rule, Wrapper);
+	
+	// Process tabular sections in priority order
+	TablePriority = TableFillingPriority();
+	FillPriorityTables(Source, Rule, Wrapper, TablePriority);
+	
+	// Process remaining tables
+	FillRemainingTables(Source, Rule, Wrapper, TablePriority);
+EndProcedure
+
+// Fills tabular sections in priority order.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source object
+//  Rule - CatalogRef.TransformationRules - Transformation rule
+//  Wrapper - See BuilderAPI.Init
+//  TablePriority - Array - Priority order for tables
+Procedure FillPriorityTables(Source, Rule, Wrapper, TablePriority)
+	TargetTables = GetTargetTables(Rule);
+	TargetTableList = TargetTables.UnloadColumn("SortingIndex"); // Array Of String
+	
+	For Each TableName In TablePriority Do
+		If IsBlankString(TableName) Or StrStartsWith(TableName, "0") Then
+			Continue;
+		EndIf;
+		
+		If TargetTableList.Find(TableName) = Undefined Then // Table not exists
+			Continue;
+		EndIf;
+		
+		FillTableRows(Source, Rule, Wrapper, TableName);
+	EndDo;
+EndProcedure
+
+// Fills remaining tabular sections.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source object
+//  Rule - CatalogRef.TransformationRules - Transformation rule
+//  Wrapper - See BuilderAPI.Init
+//  TablePriority - Array - Priority order for tables
+Procedure FillRemainingTables(Source, Rule, Wrapper, TablePriority)
+	TargetTables = GetTargetTables(Rule);
+	TargetTableList = TargetTables.UnloadColumn("SortingIndex"); // Array Of String
+	
+	For Each TableName In TargetTableList Do
+		If IsBlankString(TableName) Or StrStartsWith(TableName, "0") Then
+			Continue;
+		EndIf;
+		
+		If Not TablePriority.Find(TableName) = Undefined Then
+			Continue; // Already processed in priority order
+		EndIf;
+		
+		FillTableRows(Source, Rule, Wrapper, TableName);
+	EndDo;
+EndProcedure
+
+// Returns target tables from transformation rule.
+// 
+// Parameters:
+//  Rule - CatalogRef.TransformationRules - Transformation rule
+// 
+// Returns:
+//  ValueTable - Table with SortingIndex column
+Function GetTargetTables(Rule)
+	TargetTables = Rule.Mapping.Unload(, "SortingIndex");
+	TargetTables.GroupBy("SortingIndex");
+	Return TargetTables;
+EndFunction
+
+// Fills rows in a tabular section.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source object
+//  Rule - CatalogRef.TransformationRules - Transformation rule
+//  Wrapper - See BuilderAPI.Init
+//  TableName - String - Name of the table to fill
+Procedure FillTableRows(Source, Rule, Wrapper, TableName)
+	TableRules = Rule.Mapping.Unload(New Structure("SortingIndex", TableName));
+	
+	//@skip-check variable-value-type
+	For Each SourceRow In Source[TableName] Do // ValueTableRow
+		TableHasKey = CommonFunctionsClientServer.ObjectHasProperty(SourceRow, "Key");
+		TargetRow = BuilderAPI.AddRow(Wrapper, TableName, False, ?(TableHasKey, SourceRow.Key, Undefined));
+		
+		FillTableRowAttributes(Source, SourceRow, Rule, Wrapper, TargetRow, TableName, TableRules);
+	EndDo;
+EndProcedure
+
+// Writes transformed object to database.
+// 
+// Parameters:
+//  Rule - CatalogRef.TransformationRules - Transformation rule
+//  TransformationSettings - See CreateTransformationSettings
+//  Object - CatalogObject, DocumentObject - Object to write
+//  Wrapper - See BuilderAPI.Init
+Procedure WriteTransformedObject(Rule, TransformationSettings, Object, Wrapper)
+	If Rule.TargetType.Parent = Catalogs.ConfigurationMetadata.Documents Then
+		BuilderAPI.Write(Wrapper, 
+			TransformationSettings.WriteSettings.WriteMode, 
+			TransformationSettings.WriteSettings.PostingMode, 
+			Object);
+		
+		Object.CheckFilling();
+		Object.Write(
+			TransformationSettings.WriteSettings.WriteMode, 
+			TransformationSettings.WriteSettings.PostingMode);
+	ElsIf Rule.TargetType.Parent = Catalogs.ConfigurationMetadata.Catalogs Then
+		BuilderAPI.Write(Wrapper, , , Object);
+		
+		Object.CheckFilling();
+		Object.Write();
+	Else
+		Raise "Unsupported type " + Rule.TargetType.ObjectFullName;
+	EndIf;
+EndProcedure
+
+// Evaluates expression for header attribute.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source object
+//  Wrapper - See BuilderAPI.Init
+//  Expression - String - Expression to evaluate
+// 
+// Returns:
+//  Arbitrary - Result of evaluation
+Function EvaluateExpression(Source, Wrapper, Expression)
+	SetSafeMode(True);
+	Return Eval(Expression);
+EndFunction
+
+// Evaluates expression for table row attribute.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source object
+//  SourceRow - ValueTableRow - Source row
+//  Wrapper - See BuilderAPI.Init
+//  Expression - String - Expression to evaluate
+// 
+// Returns:
+//  Arbitrary - Result of evaluation
+Function EvaluateRowExpression(Source, SourceRow, Wrapper, Expression)
+	SetSafeMode(True);
+	Return Eval(Expression);
+EndFunction
+
+
+// Fills header attributes of target object.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source object
+//  Rule - CatalogRef.TransformationRules - Transformation rule
+//  Wrapper - See BuilderAPI.Init
+Procedure FillHeaderAttributes(Source, Rule, Wrapper)
 	For Each AttrRule In Rule.Mapping Do
 		TargetTable = ?(StrSplit(AttrRule.TargetAttribute, ".").Count() = 1, "", StrSplit(AttrRule.TargetAttribute, ".")[0]);
 		SourceTable = ?(StrSplit(AttrRule.SourceAttribute, ".").Count() = 1, "", StrSplit(AttrRule.SourceAttribute, ".")[0]);
@@ -236,178 +474,114 @@ Procedure UpdateTargetObject(Source, Rule, Wrapper, isUpdate)
 			ElsIf Not AttrRule.DefaultValue = Undefined Then
 				BuilderAPI.SetProperty(Wrapper, AttrRule.TargetAttribute, AttrRule.DefaultValue);
 			ElsIf Not IsBlankString(AttrRule.EvalTargetAttribute) Then
-				BuilderAPI.SetProperty(Wrapper, AttrRule.TargetAttribute, EvalAttribute(Source, Wrapper, AttrRule.EvalTargetAttribute));
+				BuilderAPI.SetProperty(Wrapper, AttrRule.TargetAttribute, 
+					EvaluateExpression(Source, Wrapper, AttrRule.EvalTargetAttribute));
+			ElsIf Not AttrRule.LinkedByRule.IsEmpty() Then		
+				//@skip-check invocation-parameter-type-intersect, bsl-legacy-check-static-feature-access
+				LinkedTarget = GetLinkedTargetRefByRule(Source[AttrRule.SourceAttribute], AttrRule.LinkedByRule);
+				If Not LinkedTarget = Undefined Then
+					BuilderAPI.SetProperty(Wrapper, AttrRule.TargetAttribute, LinkedTarget);
+				EndIf;
 			EndIf;
 		EndIf;
 	EndDo;
-	
-	TablePriority = TableFillingPriority();
-	TargetTables = Rule.Mapping.Unload(, "SortingIndex"); 
-	TargetTables.GroupBy("SortingIndex");
-	TargetTableList = TargetTables.UnloadColumn("SortingIndex"); // Array Of String
-	// Fill Pririty tables, if exists
-	For Each Table In TablePriority Do
-		If IsBlankString(Table) Or StrStartsWith(Table, "0") Then
-			Continue;
-		EndIf;
-		
-		If TargetTableList.Find(Table) = Undefined Then // Table not exists
-			Continue;
-		EndIf;
-		
-		TableRules = Rule.Mapping.Unload(New Structure("SortingIndex", Table));
-		
-		//@skip-check variable-value-type
-		For Each SourceRow In Source[Table] Do // ValueTableRow
-			TableHasKey = CommonFunctionsClientServer.ObjectHasProperty(SourceRow, "Key");
-			TargetRow = BuilderAPI.AddRow(Wrapper, Table, False, ?(TableHasKey, SourceRow.Key, Undefined));
-			For Each AttrRule In TableRules Do
-				If IsBlankString(AttrRule.TargetAttribute) Then
-					Continue;
-				EndIf;
-				TargetAttribute = StrSplit(AttrRule.TargetAttribute, ".")[1];
-				If Not IsBlankString(AttrRule.SourceAttribute) Then
-					SourceAttribute = StrSplit(AttrRule.SourceAttribute, ".")[1];
-				Else
-					SourceAttribute = "";
-				EndIf;
-				
-				If AttrRule.Copy Then
-					BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, SourceRow[SourceAttribute], Table);
-				ElsIf Not AttrRule.DefaultValue = Undefined Then
-					BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, AttrRule.DefaultValue, Table);
-				ElsIf Not IsBlankString(AttrRule.EvalTargetAttribute) Then
-					BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, EvalRowAttribute(Source, SourceRow, Wrapper, AttrRule.EvalTargetAttribute), Table);
-				EndIf;
-			EndDo;
-		EndDo;
-	EndDo;
-	
-	// Fill all other tables
-	For Each Table In TargetTableList Do
-		If IsBlankString(Table) Or StrStartsWith(Table, "0") Then
-			Continue;
-		EndIf;
-		
-		If Not TablePriority.Find(Table) = Undefined Then
-			Continue;
-		EndIf;
-		
-		TableRules = Rule.Mapping.Unload(New Structure("SortingIndex", Table));
-		
-		//@skip-check variable-value-type
-		For Each SourceRow In Source[Table] Do // ValueTableRow
-			TableHasKey = CommonFunctionsClientServer.ObjectHasProperty(SourceRow, "Key");
-			TargetRow = BuilderAPI.AddRow(Wrapper, Table, , ?(TableHasKey, SourceRow.Key, Undefined));
-			For Each AttrRule In TableRules Do
-			
-				If IsBlankString(AttrRule.TargetAttribute) Then
-					Continue;
-				EndIf;
-				TargetAttribute = StrSplit(AttrRule.TargetAttribute, ".")[1];
-				If Not IsBlankString(AttrRule.SourceAttribute) Then
-					SourceAttribute = StrSplit(AttrRule.SourceAttribute, ".")[1];
-				Else
-					SourceAttribute = "";
-				EndIf;
-				
-				If AttrRule.Copy Then
-					BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, SourceRow[SourceAttribute]);
-				ElsIf Not AttrRule.DefaultValue = Undefined Then
-					BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, AttrRule.DefaultValue);
-				ElsIf Not IsBlankString(AttrRule.EvalTargetAttribute) Then
-					BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, EvalRowAttribute(Source, SourceRow, Wrapper, AttrRule.EvalTargetAttribute));
-				EndIf;
-			EndDo;
-		EndDo;
-	EndDo;
 EndProcedure
 
-Procedure WriteObject(Rule, OTS, Object, Wrapper)
-	If Rule.TargetType.Parent = Catalogs.ConfigurationMetadata.Documents Then
-		BuilderAPI.Write(Wrapper, OTS.WriteSettings.WriteMode, OTS.WriteSettings.PostingMode, Object);
-		Object.CheckFilling();
-		Object.Write(OTS.WriteSettings.WriteMode, OTS.WriteSettings.PostingMode);
-	ElsIf Rule.TargetType.Parent = Catalogs.ConfigurationMetadata.Catalogs Then
-		BuilderAPI.Write(Wrapper, , , Object);
-		Object.CheckFilling();
-		Object.Write();
-	Else
-		Raise "Unsupported type " + Rule.TargetType.ObjectFullName;
-	EndIf;
+// Fills attributes for a row in a tabular section.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source object
+//  SourceRow - ValueTableRow - Source row
+//  Rule - CatalogRef.TransformationRules - Transformation rule
+//  Wrapper - See BuilderAPI.Init
+//  TargetRow - ValueTableRow - Target row
+//  TableName - String - Name of the table
+//  TableRules - ValueTable - Rules for the table
+Procedure FillTableRowAttributes(Source, SourceRow, Rule, Wrapper, TargetRow, TableName, TableRules)
+	For Each AttrRule In TableRules Do
+		If IsBlankString(AttrRule.TargetAttribute) Then
+			Continue;
+		EndIf;
+		
+		TargetAttribute = StrSplit(AttrRule.TargetAttribute, ".")[1];
+		
+		If Not IsBlankString(AttrRule.SourceAttribute) Then
+			SourceAttribute = StrSplit(AttrRule.SourceAttribute, ".")[1];
+		Else
+			SourceAttribute = "";
+		EndIf;
+		
+		If AttrRule.Copy Then
+			BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, SourceRow[SourceAttribute], TableName);
+		ElsIf Not AttrRule.DefaultValue = Undefined Then
+			BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, AttrRule.DefaultValue, TableName);
+		ElsIf Not IsBlankString(AttrRule.EvalTargetAttribute) Then
+			BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, 
+				EvaluateRowExpression(Source, SourceRow, Wrapper, AttrRule.EvalTargetAttribute), TableName);
+		ElsIf Not AttrRule.LinkedByRule.IsEmpty() Then		
+			//@skip-check invocation-parameter-type-intersect, bsl-legacy-check-static-feature-access
+			LinkedTarget = GetLinkedTargetRefByRule(SourceRow[AttrRule.SourceAttribute], AttrRule.LinkedByRule);
+			If Not LinkedTarget = Undefined Then
+				BuilderAPI.SetRowProperty(Wrapper, TargetRow, AttrRule.TargetAttribute, LinkedTarget, TableName);
+			EndIf;
+		EndIf;
+	EndDo;
 EndProcedure
-
-// Eval attribute.
-// 
-// Parameters:
-//  Source - CatalogObject, DocumentObject - Source
-//  Wrapper - See BuilderAPI.Init
-//  EvalTargetAttribute - String - Eval target attribute
-// 
-// Returns:
-//  Arbitrary - Eval attribute
-Function EvalAttribute(Source, Wrapper, EvalTargetAttribute)
-	SetSafeMode(True);
-	Return Eval(EvalTargetAttribute);
-EndFunction
-
-// Eval Row attribute.
-// 
-// Parameters:
-//  Source - CatalogObject, DocumentObject - Source
-//  SourceRow - ValueTableRow
-//  Wrapper - See BuilderAPI.Init
-//  EvalTargetAttribute - String - Eval target attribute
-// 
-// Returns:
-//  Arbitrary - Eval attribute
-Function EvalRowAttribute(Source, SourceRow, Wrapper, EvalTargetAttribute)
-	SetSafeMode(True);
-	Return Eval(EvalTargetAttribute);
-EndFunction
 
 #EndRegion
 
 #Region Rules
 
-// Get auto rules.
+// Gets automatic transformation rules applicable to the source object.
 // 
 // Parameters:
-//  Source - CatalogObjectCatalogName, DocumentObjectDocumentName - Source
+//  Source - CatalogObject, DocumentObject - Source object
 // 
 // Returns:
-//  Array Of CatalogRef.TransformationRules
+//  Array of CatalogRef.TransformationRules - Applicable rules
 Function GetAutoRules(Source)
 	SourceMetaType = CatConfigurationMetadataServer.GetConfigurationMetadataItemByObject(Source);
 	AllRules = GetRulesBySource(SourceMetaType);
-	Rules = New Array; // Array Of CatalogRef.TransformationRules
+	Result = New Array; // Array Of CatalogRef.TransformationRules
+	
 	For Each Rule In AllRules Do
 		If Not Rule.AutoTransform Then
 			Continue;
 		EndIf;
-		If Not CheckIsRuleApplied(Source, Rule.SourceCondition) Then
+		
+		If Not IsRuleApplicable(Source, Rule.SourceCondition) Then
 			Continue;
 		EndIf;
-		Rules.Add(Rule.Ref);
+		
+		Result.Add(Rule.Ref);
 	EndDo;
-	Return Rules;
+	
+	Return Result;
 EndFunction
 
-Function CheckIsRuleApplied(Source, SourceCondition)
-	SetSafeMode(True);
-	Return Eval(SourceCondition)
-EndFunction
-
-// Get rules by source.
+// Checks if a rule is applicable to the source object based on condition.
 // 
 // Parameters:
-//  SourceMetaType - CatalogRef.ConfigurationMetadata - Source meta type
+//  Source - CatalogObject, DocumentObject - Source object
+//  Condition - String - Condition to evaluate
 // 
 // Returns:
-//  ValueTable - Get rules by source:
-//  * Ref - CatalogRef.TransformationRules
-//  * AutoTransform - Boolean
-//  * SourceCondition - String
+//  Boolean - True if rule is applicable
+Function IsRuleApplicable(Source, Condition)
+	SetSafeMode(True);
+	Return Eval(Condition);
+EndFunction
+
+// Gets all transformation rules for the given source metadata type.
+// 
+// Parameters:
+//  SourceMetaType - CatalogRef.ConfigurationMetadata - Source metadata type
+// 
+// Returns:
+//  ValueTable - Rules with columns:
+//  * Ref - CatalogRef.TransformationRules - Rule reference
+//  * AutoTransform - Boolean - Flag for automatic transformation
+//  * SourceCondition - String - Condition for applying the rule
 Function GetRulesBySource(SourceMetaType)
 	Query = New Query;
 	Query.Text =
@@ -426,18 +600,17 @@ Function GetRulesBySource(SourceMetaType)
 	Return Query.Execute().Unload();
 EndFunction
 
-// Get linked target ref.
+// Gets links from source object to target objects.
 // 
 // Parameters:
-//  Source - AnyRef - Source
+//  Source - AnyRef - Source object reference
 // 
 // Returns:
-//  ValueTable - Get linked target ref:
-//  * Source - AnyRef -
-//  * Target - AnyRef -
-//  * TransformationRule - CatalogRef.TransformationRules
+//  ValueTable - Links with columns:
+//  * Source - AnyRef - Source object reference
+//  * Target - AnyRef - Target object reference
+//  * TransformationRule - CatalogRef.TransformationRules - Rule reference
 Function GetLinkedTargetRef(Source)
-	
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -454,18 +627,50 @@ Function GetLinkedTargetRef(Source)
 	Return Query.Execute().Unload();
 EndFunction
 
-// Get linked target ref.
+// Gets linked target objects.
 // 
 // Parameters:
-//  Target - AnyRef - Target
+//  Source - AnyRef - Source object reference
+//  Rule - CatalogRef.TransformationRules - 
 // 
 // Returns:
-//  ValueTable - Get linked target ref:
-//  * Source - AnyRef -
-//  * Target - AnyRef -
-//  * TransformationRule - CatalogRef.TransformationRules
-Function GetLinkedSourceRef(Target)
+//  AnyRef
+Function GetLinkedTargetRefByRule(Source, Rule)
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	TranformedObjectsLink.Source,
+		|	TranformedObjectsLink.Target,
+		|	TranformedObjectsLink.TransformationRule
+		|FROM
+		|	InformationRegister.TranformedObjectsLink AS TranformedObjectsLink
+		|WHERE
+		|	TranformedObjectsLink.Source = &Source
+		|	AND TranformedObjectsLink.TransformationRule = &TransformationRule";
 	
+	Query.SetParameter("Source", Source);
+	Query.SetParameter("TransformationRule", Rule);
+	
+	Result = Query.Execute().Select();
+	If Result.Next() Then
+		//@skip-check property-return-type
+		Return Result.Target;
+	EndIf;
+	
+	Return Undefined;
+EndFunction
+
+// Gets links from target object to source objects.
+// 
+// Parameters:
+//  Target - AnyRef - Target object reference
+// 
+// Returns:
+//  ValueTable - Links with columns:
+//  * Source - AnyRef - Source object reference
+//  * Target - AnyRef - Target object reference
+//  * TransformationRule - CatalogRef.TransformationRules - Rule reference
+Function GetLinkedSourceRef(Target)
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -481,5 +686,14 @@ Function GetLinkedSourceRef(Target)
 	
 	Return Query.Execute().Unload();
 EndFunction
+
+// Logs error information.
+// 
+// Parameters:
+//  Message - String - Error message
+//  ErrorInfo - ErrorInfo - Error information
+Procedure LogError(Message, ErrorInfo)
+	Log.Write(Message, ErrorProcessing.DetailErrorDescription(ErrorInfo));
+EndProcedure
 
 #EndRegion

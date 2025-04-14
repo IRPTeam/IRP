@@ -16952,13 +16952,19 @@ Procedure _CommitChainChanges(Cache, Source, Parameters)
 			// tabular parts ItemList and PaymentList moved by rows, key in rows is unique
 			If IsRowWithKey Then
 				For Each Row In PropertyValue Do
-					FoundedRow = Source[PropertyName].FindRows(New Structure("Key", Row.Key))[0];
+					If TypeOf(Row.Key) = Type("Number") Then
+						FoundedRow = Source[PropertyName].FindRows(New Structure("LineNumber", Row.Key))[0];
+					Else
+						FoundedRow = Source[PropertyName].FindRows(New Structure("Key", Row.Key))[0];
+					EndIf;
 					FoundedRowInMap = Parameters.TableRowsMap.Get(PropertyName+":"+Row.Key);
 					For Each KeyValue In Row Do
 						If FoundedRowInMap <> Undefined Then
 							FoundedRowInMap[KeyValue.Key] = KeyValue.Value;
 						EndIf;
-						FoundedRow[KeyValue.Key] = KeyValue.Value;
+						If Not TypeOf(Row.Key) = Type("Number") Then
+							FoundedRow[KeyValue.Key] = KeyValue.Value;
+						EndIf;
 					EndDo;
 				EndDo;
 			Else

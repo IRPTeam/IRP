@@ -82,41 +82,50 @@ Procedure FillMappingAtServer()
 	SourceMetadata = CatConfigurationMetadataServer.GetMetadataByConfigurationMetadata(Object.SourceType); // MetadataObjectDocument
 	TargetMetadata = CatConfigurationMetadataServer.GetMetadataByConfigurationMetadata(Object.TargetType); // MetadataObjectDocument
 	
-	Ignore = IgnoreAttribute();
-	FillAttributeData(SourceMetadata, "Source", Ignore);
-	FillAttributeData(TargetMetadata, "Target", Ignore);
+	Ignore = TransformObjects.IgnoreAttributeOnMapping();
+	IgnoreTables = TransformObjects.IgnoreTablesOnMapping();
+	FillAttributeData(SourceMetadata, "Source", Ignore, IgnoreTables);
+	FillAttributeData(TargetMetadata, "Target", Ignore, IgnoreTables);
+	Object.Mapping.Sort("SortingIndex, TargetAttribute, SourceAttribute");
 EndProcedure
 
 &AtServer
-Procedure FillAttributeData(TypeMetadata, DataType, Ignore)
+Procedure FillAttributeData(TypeMetadata, DataType, Ignore, IgnoreTables)
 	For Each Attribute In TypeMetadata.StandardAttributes Do
-		FillRow(Ignore, Attribute, DataType);
+		FillRow(Ignore, Attribute, DataType, , "01. StandardAttributes");
 	EndDo;
 	For Each Attribute In TypeMetadata.Attributes Do
-		FillRow(Ignore, Attribute, DataType);
+		FillRow(Ignore, Attribute, DataType, , "02. Attributes");
 	EndDo;
 	For Each AttributeDescription In Metadata.CommonAttributes Do
 		If Not AttributeDescription.Content.Find(TypeMetadata) = Undefined 
 				AND AttributeDescription.Content.Find(TypeMetadata).Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
-			FillRow(Ignore, AttributeDescription, DataType);
+			FillRow(Ignore, AttributeDescription, DataType, , "03. CommonAttributes");
 		EndIf;
 	EndDo;
 	
 	For Each Table In TypeMetadata.TabularSections Do
+		
+		If Not IgnoreTables.Find(Table.Name) = Undefined Then
+			Return;
+		EndIf;
+		
 		For Each Attribute In TypeMetadata.TabularSections[Table.Name].Attributes Do
-			FillRow(Ignore, Attribute, DataType, Table.Name + ".");
+			FillRow(Ignore, Attribute, DataType, Table.Name);
 		EndDo;
 	EndDo;
 EndProcedure
 
 &AtServer
-Procedure FillRow(Ignore, Attribute, FillingType, Table = "")
+Procedure FillRow(Ignore, Attribute, FillingType, Val Table = "", Val SortIndex = "")
 	If Not Ignore.Find(Attribute.Name) = Undefined Then
 		Return;
 	EndIf;
 	
+	TablePath = ?(IsBlankString(Table), "", Table + ".");
+	
 	AttributeType = GetTypeView(Attribute);
-	FirstRow = Object.Mapping.FindRows(New Structure(FillingType + "Attribute", Table + Attribute.Name));
+	FirstRow = Object.Mapping.FindRows(New Structure(FillingType + "Attribute", TablePath + Attribute.Name));
 	If FirstRow.Count() > 0 Then
 		If Not FirstRow[0][FillingType + "Type"] = AttributeType Then
 			FirstRow[0][FillingType + "Type"] = AttributeType
@@ -124,17 +133,19 @@ Procedure FillRow(Ignore, Attribute, FillingType, Table = "")
 		Return;
 	EndIf;
 	
-	ExRows = Object.Mapping.FindRows(New Structure(?(FillingType = "Target", "Source", "Target") + "Attribute", Table + Attribute.Name));
+	ExRows = Object.Mapping.FindRows(New Structure(?(FillingType = "Target", "Source", "Target") + "Attribute", TablePath + Attribute.Name));
 	If ExRows.Count() > 0 Then
 		Row = ExRows[0];
 	Else
 		Row = Object.Mapping.Add();
 	EndIf;
+	Row.SortingIndex = ?(IsBlankString(SortIndex), Table, SortIndex);
 	Row[FillingType + "Type"] = AttributeType;
-	Row[FillingType + "Attribute"] = Table + Attribute.Name;
+	Row[FillingType + "Attribute"] = TablePath + Attribute.Name;
 	If FillingType = "Target" Then
 		Row.MustBeFilled = Attribute.FillChecking = FillChecking.ShowError;
 	EndIf;
+	
 EndProcedure
 
 &AtServer
@@ -153,22 +164,6 @@ Function GetTypeView(Attribute)
 	JSON = StrReplace(JSON, "[", "");
 	JSON = StrReplace(JSON, """", "");
 	Return JSON;
-EndFunction
-
-&AtServer
-Function IgnoreAttribute()
-	Array = New Array; // Array Of String
-	Array.Add("Ref");
-	Array.Add("PredefinedDataName");
-	Array.Add("Predefined");
-	Array.Add("SourceNodeID");
-	Array.Add("Editor");
-	Array.Add("CreateDate");
-	Array.Add("ModifyDate");
-	Array.Add("NotActive");
-	Array.Add("Posting");
-	Array.Add("DataVersion");
-	Return Array;
 EndFunction
 
 #EndRegion

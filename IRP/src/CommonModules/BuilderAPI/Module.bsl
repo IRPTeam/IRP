@@ -432,16 +432,24 @@ EndFunction
 //  Wrapper - See CreateWrapper
 //  TableName - String - Table name
 //  ReturnRowKey - Boolean -
+//  RowKey - String -
 // 
 // Returns:
 //  ValueTableRow, String
-Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False) Export
+Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False, RowKey = "") Export
 	If TableName = Undefined Then
 		TableName = Wrapper.DefaultTable;
 	EndIf;
 	WrapperTable = Wrapper.Object[TableName]; // See Document.SalesInvoice.ItemList
 	NewRow = WrapperTable.Add();
-	NewRow.Key = String(New UUID());
+	KeyFieldExists = CommonFunctionsClientServer.ObjectHasProperty(NewRow, "Key");
+	If KeyFieldExists Then
+		If IsBlankString(RowKey) Then
+			NewRow.Key = String(New UUID());
+		Else
+			NewRow.Key = RowKey;
+		EndIf;
+	EndIf;
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
 	ServerParameters.TableName = TableName;
 	Rows = New Array(); // Array Of DocumentTabularSectionRow.SalesInvoice.ItemList
@@ -449,11 +457,19 @@ Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False) Export
 	ServerParameters.Rows = Rows;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
 	ControllerClientServer_V2.AddNewRow(TableName, Parameters);
-	NewRow = WrapperTable.FindRows(New Structure("Key", NewRow.Key))[0];
-	If ReturnRowKey Then
-		Return NewRow.Key;
+	If KeyFieldExists Then
+		NewRow = WrapperTable.FindRows(New Structure("Key", NewRow.Key))[0];
+		If ReturnRowKey Then
+			Return NewRow.Key;
+		Else
+			Return NewRow;
+		EndIf;
 	Else
-		Return NewRow;
+		If ReturnRowKey Then
+			Return "";
+		Else
+			Return WrapperTable[WrapperTable.Count() - 1];
+		EndIf;
 	EndIf;
 EndFunction
 

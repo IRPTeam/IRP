@@ -1,6 +1,60 @@
 // @strict-types
 
+#Region Settings
+
+// Table filling priority.
+// 
+// Returns:
+//  Array of String - Table filling priority
+Function TableFillingPriority() Export
+	
+	Array = New Array; // Array Of String
+	Array.Add("ItemList");
+	Array.Add("SerialLotNumbers");
+	Array.Add("SpecialOffers");
+	Array.Add("SourceOfOrigins");
+	
+	Return Array;
+	
+EndFunction
+
+// Ignore attribute on mapping.
+// 
+// Returns:
+//  Array of String - Ignore attribute on mapping
+Function IgnoreAttributeOnMapping() Export
+	Array = New Array; // Array Of String
+	Array.Add("Ref");
+	Array.Add("PredefinedDataName");
+	Array.Add("Predefined");
+	Array.Add("SourceNodeID");
+	Array.Add("Editor");
+	Array.Add("CreateDate");
+	Array.Add("ModifyDate");
+	Array.Add("NotActive");
+	Array.Add("Posting");
+	Array.Add("DataVersion");
+	Array.Add("Key");
+	Array.Add("Posted");
+	
+	Return Array;
+EndFunction
+
+// Ignore tables on mapping.
+// 
+// Returns:
+//  Array of String - Ignore tables on mapping
+Function IgnoreTablesOnMapping() Export
+	Array = New Array; // Array Of String
+	Array.Add("RowIDInfo");
+	
+	Return Array;
+EndFunction
+
+#EndRegion
+
 #Region Subscriptions
+
 Procedure OnWrite_ObjectTransformation(Source, Cancel) Export
 	
 	If Source.DataExchange.Load Then
@@ -91,14 +145,17 @@ Procedure OnWrite(Source)
 	BeginTransaction();
 	Try
 		
-		For Each TargetLink In GetLinkedTargetRef(Source.Ref) Do
-			UpdateLinkedObject(Source, TargetLink.Target, TargetLink.TransformationRule, ObjectTransformationSettings);
+		LinkedTargetRef = GetLinkedTargetRef(Source.Ref);
+		For Each TargetLink In LinkedTargetRef Do
+			If TargetLink.TransformationRule.UpdateLinkedTarget Then
+				UpdateLinkedObject(Source, TargetLink.Target, TargetLink.TransformationRule, ObjectTransformationSettings);
+			EndIf;
 		EndDo;
 	
 		Rules = GetAutoRules(Source);	
 		For Each Rule In Rules Do
 		
-			If ObjectTransformationSettings.isNew Then
+			If LinkedTargetRef.FindRows(New Structure("Source, TransformationRule", Source.Ref, Rule)).Count() = 0 Then
 				LinkedRef = CreateLinkedObject(Source, Rule, ObjectTransformationSettings);
 				Info = InformationRegisters.TranformedObjectsLink.CreateRecordManager();
 				Info.Source = Source.Ref;
@@ -126,36 +183,11 @@ Procedure UpdateLinkedObject(Source, Target, Rule, OTS)
 	Object = Target.GetObject(); // DocumentObjectDocumentName, CatalogObjectDocumentName
 	
 	//@skip-check invocation-parameter-type-intersect
-	Wrapper = BuilderAPI.Init(Object);
+	Wrapper = BuilderAPI.Init(Object, , , "ItemList");
 
-	For Each AttrRule In Rule.Mapping Do
-		TargetTable = ?(StrSplit(AttrRule.TargetAttribute, ".").Count() = 1, "", StrSplit(AttrRule.TargetAttribute, ".")[0]);
-		SourceTable = ?(StrSplit(AttrRule.SourceAttribute, ".").Count() = 1, "", StrSplit(AttrRule.SourceAttribute, ".")[0]);
-		
-		// Fill headers attribute
-		If TargetTable = "" Then
-			If AttrRule.Copy Then
-				BuilderAPI.SetProperty(Wrapper, AttrRule.TargetAttribute, Source[AttrRule.SourceAttribute]);
-			ElsIf Not AttrRule.DefaultValue = Undefined Then
-				BuilderAPI.SetProperty(Wrapper, AttrRule.TargetAttribute, AttrRule.DefaultValue);
-			ElsIf Not IsBlankString(AttrRule.EvalTargetAttribute) Then
-				BuilderAPI.SetProperty(Wrapper, AttrRule.TargetAttribute, EvalAttribute(Source, Wrapper, AttrRule.EvalTargetAttribute));
-			EndIf;
-		EndIf;
-		
-	EndDo;
+	UpdateTargetObject(Source, Rule, Wrapper, True);
 	
-	If Rule.TargetType.Parent = Catalogs.ConfigurationMetadata.Documents Then
-		BuilderAPI.Write(Wrapper, OTS.WriteSettings.WriteMode, OTS.WriteSettings.PostingMode, Object);
-		Object.CheckFilling();
-		Object.Write(OTS.WriteSettings.WriteMode, OTS.WriteSettings.PostingMode);
-	ElsIf Rule.TargetType.Parent = Catalogs.ConfigurationMetadata.Catalogs Then
-		BuilderAPI.Write(Wrapper, , , Object);
-		Object.CheckFilling();
-		Object.Write();
-	Else
-		Raise "Unsupported type " + Rule.TargetType.ObjectFullName;
-	EndIf;
+	WriteObject(Rule, OTS, Object, Wrapper);
 	
 EndProcedure
 
@@ -177,11 +209,27 @@ Function CreateLinkedObject(Source, Rule, OTS)
 		Raise "Unsupported type " + Rule.TargetType.ObjectFullName;
 	EndIf;
 	
+	UpdateTargetObject(Source, Rule, Wrapper, False);
+	
+	WriteObject(Rule, OTS, Object, Wrapper);
+	
+	Return Object.Ref;
+EndFunction
+
+// Update target object.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source
+//  Rule - CatalogRef.TransformationRules, Arbitrary - Rule
+//  Wrapper - See BuilderAPI.Init
+//  isUpdate - Boolean - Is update
+Procedure UpdateTargetObject(Source, Rule, Wrapper, isUpdate)
+	
+	// Fill headers attribute
 	For Each AttrRule In Rule.Mapping Do
 		TargetTable = ?(StrSplit(AttrRule.TargetAttribute, ".").Count() = 1, "", StrSplit(AttrRule.TargetAttribute, ".")[0]);
 		SourceTable = ?(StrSplit(AttrRule.SourceAttribute, ".").Count() = 1, "", StrSplit(AttrRule.SourceAttribute, ".")[0]);
 		
-		// Fill headers attribute
 		If TargetTable = "" Then
 			If AttrRule.Copy Then
 				BuilderAPI.SetProperty(Wrapper, AttrRule.TargetAttribute, Source[AttrRule.SourceAttribute]);
@@ -191,9 +239,91 @@ Function CreateLinkedObject(Source, Rule, OTS)
 				BuilderAPI.SetProperty(Wrapper, AttrRule.TargetAttribute, EvalAttribute(Source, Wrapper, AttrRule.EvalTargetAttribute));
 			EndIf;
 		EndIf;
-		
 	EndDo;
 	
+	TablePriority = TableFillingPriority();
+	TargetTables = Rule.Mapping.Unload(, "SortingIndex"); 
+	TargetTables.GroupBy("SortingIndex");
+	TargetTableList = TargetTables.UnloadColumn("SortingIndex"); // Array Of String
+	// Fill Pririty tables, if exists
+	For Each Table In TablePriority Do
+		If IsBlankString(Table) Or StrStartsWith(Table, "0") Then
+			Continue;
+		EndIf;
+		
+		If TargetTableList.Find(Table) = Undefined Then // Table not exists
+			Continue;
+		EndIf;
+		
+		TableRules = Rule.Mapping.Unload(New Structure("SortingIndex", Table));
+		
+		//@skip-check variable-value-type
+		For Each SourceRow In Source[Table] Do // ValueTableRow
+			TableHasKey = CommonFunctionsClientServer.ObjectHasProperty(SourceRow, "Key");
+			TargetRow = BuilderAPI.AddRow(Wrapper, Table, False, ?(TableHasKey, SourceRow.Key, Undefined));
+			For Each AttrRule In TableRules Do
+				If IsBlankString(AttrRule.TargetAttribute) Then
+					Continue;
+				EndIf;
+				TargetAttribute = StrSplit(AttrRule.TargetAttribute, ".")[1];
+				If Not IsBlankString(AttrRule.SourceAttribute) Then
+					SourceAttribute = StrSplit(AttrRule.SourceAttribute, ".")[1];
+				Else
+					SourceAttribute = "";
+				EndIf;
+				
+				If AttrRule.Copy Then
+					BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, SourceRow[SourceAttribute], Table);
+				ElsIf Not AttrRule.DefaultValue = Undefined Then
+					BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, AttrRule.DefaultValue, Table);
+				ElsIf Not IsBlankString(AttrRule.EvalTargetAttribute) Then
+					BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, EvalRowAttribute(Source, SourceRow, Wrapper, AttrRule.EvalTargetAttribute), Table);
+				EndIf;
+			EndDo;
+		EndDo;
+	EndDo;
+	
+	// Fill all other tables
+	For Each Table In TargetTableList Do
+		If IsBlankString(Table) Or StrStartsWith(Table, "0") Then
+			Continue;
+		EndIf;
+		
+		If Not TablePriority.Find(Table) = Undefined Then
+			Continue;
+		EndIf;
+		
+		TableRules = Rule.Mapping.Unload(New Structure("SortingIndex", Table));
+		
+		//@skip-check variable-value-type
+		For Each SourceRow In Source[Table] Do // ValueTableRow
+			TableHasKey = CommonFunctionsClientServer.ObjectHasProperty(SourceRow, "Key");
+			TargetRow = BuilderAPI.AddRow(Wrapper, Table, , ?(TableHasKey, SourceRow.Key, Undefined));
+			For Each AttrRule In TableRules Do
+			
+				If IsBlankString(AttrRule.TargetAttribute) Then
+					Continue;
+				EndIf;
+				TargetAttribute = StrSplit(AttrRule.TargetAttribute, ".")[1];
+				If Not IsBlankString(AttrRule.SourceAttribute) Then
+					SourceAttribute = StrSplit(AttrRule.SourceAttribute, ".")[1];
+				Else
+					SourceAttribute = "";
+				EndIf;
+				
+				If AttrRule.Copy Then
+					BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, SourceRow[SourceAttribute]);
+				ElsIf Not AttrRule.DefaultValue = Undefined Then
+					BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, AttrRule.DefaultValue);
+				ElsIf Not IsBlankString(AttrRule.EvalTargetAttribute) Then
+					BuilderAPI.SetRowProperty(Wrapper, TargetRow, TargetAttribute, EvalRowAttribute(Source, SourceRow, Wrapper, AttrRule.EvalTargetAttribute));
+				EndIf;
+			EndDo;
+		EndDo;
+	EndDo;
+EndProcedure
+
+Procedure WriteObject(Rule, OTS, Object, Wrapper)
 	If Rule.TargetType.Parent = Catalogs.ConfigurationMetadata.Documents Then
 		BuilderAPI.Write(Wrapper, OTS.WriteSettings.WriteMode, OTS.WriteSettings.PostingMode, Object);
 		Object.CheckFilling();
@@ -205,9 +335,7 @@ Function CreateLinkedObject(Source, Rule, OTS)
 	Else
 		Raise "Unsupported type " + Rule.TargetType.ObjectFullName;
 	EndIf;
-	
-	Return Object.Ref;
-EndFunction
+EndProcedure
 
 // Eval attribute.
 // 
@@ -219,6 +347,21 @@ EndFunction
 // Returns:
 //  Arbitrary - Eval attribute
 Function EvalAttribute(Source, Wrapper, EvalTargetAttribute)
+	SetSafeMode(True);
+	Return Eval(EvalTargetAttribute);
+EndFunction
+
+// Eval Row attribute.
+// 
+// Parameters:
+//  Source - CatalogObject, DocumentObject - Source
+//  SourceRow - ValueTableRow
+//  Wrapper - See BuilderAPI.Init
+//  EvalTargetAttribute - String - Eval target attribute
+// 
+// Returns:
+//  Arbitrary - Eval attribute
+Function EvalRowAttribute(Source, SourceRow, Wrapper, EvalTargetAttribute)
 	SetSafeMode(True);
 	Return Eval(EvalTargetAttribute);
 EndFunction

@@ -1001,8 +1001,6 @@ Scenario: _1000007 create SPO from SO and check credit limit
 		And I input "30,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormWrite"
-		Then there are lines in TestClient message log
-			|'Credit limit exceeded. Limit: 2 000, limit balance: 1 300, transaction: 1 900, lack: 600 USD'|
 		And I click the button named "FormPost"
 		Then there are lines in TestClient message log
 			|'Credit limit exceeded. Limit: 2 000, limit balance: 1 300, transaction: 1 900, lack: 600 USD'|

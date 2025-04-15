@@ -219,6 +219,7 @@ Function CreateNewSerialLotNumber(Options) Export
 	NewSerial.Description = Options.Description;
 	NewSerial.SerialLotNumberOwner = Options.Owner;
 	NewSerial.StockBalanceDetail = GetStockBalanceDetailByOwner(Options.Owner);
+	NewSerial.BatchBalanceDetail = GetBatchBalanceDetailByOwner(Options.Owner);
 	NewSerial.EachSerialLotNumberIsUnique = GetItemTypeByOwner(Options.Owner).EachSerialLotNumberIsUnique;
 	If NewSerial.CheckFilling() Then
 		NewSerial.Write();
@@ -342,7 +343,25 @@ EndFunction
 //  Boolean - Get stock balance detail by owner
 Function GetStockBalanceDetailByOwner(Owner) Export
 	ItemType = GetItemTypeByOwner(Owner);
-	Return ItemType.StockBalanceDetail = Enums.StockBalanceDetail.BySerialLotNumber;
+	If ValueIsFilled(ItemType) Then
+		Return ItemType.StockBalanceDetailSerialLotNumber;
+	EndIf;
+	Return False;
+EndFunction
+
+// Get batch balance detail by owner.
+// 
+// Parameters:
+//  Owner - See Catalog.SerialLotNumbers.SerialLotNumberOwner
+// 
+// Returns:
+//  Boolean - Get stock balance detail by owner
+Function GetBatchBalanceDetailByOwner(Owner) Export
+	ItemType = GetItemTypeByOwner(Owner);
+	If ValueIsFilled(ItemType) Then
+		Return ItemType.BatchBalanceDetailSerialLotNumber;
+	EndIf;
+	Return False;
 EndFunction
 
 // Is each serial lot number is unique by owner.

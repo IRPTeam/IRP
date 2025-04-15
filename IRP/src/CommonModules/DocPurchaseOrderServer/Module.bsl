@@ -68,3 +68,30 @@ Procedure SetGroupItemsList(Object, Form)
 EndProcedure
 
 #EndRegion
+
+Function CheckRelatedDocuments(PurchaseOrderRef, ShowWarning = False) Export
+
+	Query = New Query;
+	Query.Text =
+	"SELECT TOP 1
+	|	PurchaseOrderClosing.Ref
+	|FROM
+	|	Document.PurchaseOrderClosing AS PurchaseOrderClosing
+	|WHERE
+	|	PurchaseOrderClosing.PurchaseOrder = &PurchaseOrder
+	|	AND PurchaseOrderClosing.Posted";
+	
+	Query.SetParameter("PurchaseOrder", PurchaseOrderRef);
+	
+	QuerySelection = Query.Execute().Select();
+	
+	If QuerySelection.Next() Then
+		If ShowWarning Then
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Exc_013, QuerySelection.Ref));
+		EndIf;
+		Return True;
+	EndIf;
+	
+	Return False;
+
+EndFunction

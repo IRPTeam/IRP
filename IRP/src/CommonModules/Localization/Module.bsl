@@ -1602,6 +1602,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Exc_010", NStr("en = 'Unknown metadata type: %1'", Lang));
 	Strings.Insert("Exc_011", NStr("en = 'Unknown command name: %1'", Lang));
 	Strings.Insert("Exc_012", NStr("en = 'Save error! Changing ""%1"" is available only for user ""%2""'", Lang));
+	Strings.Insert("Exc_013", NStr("en = 'Related document exists: %1'", Lang));
 #EndRegion
 
 #Region Saas

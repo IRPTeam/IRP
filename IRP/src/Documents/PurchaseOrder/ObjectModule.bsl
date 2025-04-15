@@ -20,7 +20,16 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	
 	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
 	ThisObject.DocumentNumber = DocumentsServer.GenerateDocumentNumber(ThisObject);
+	
 	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);
+	
+	If Not Ref.IsEmpty() 
+			And (DeletionMark 
+				OR WriteMode = DocumentWriteMode.UndoPosting 
+				OR Not Posted And Ref.Posted) 
+			And DocPurchaseOrderServer.CheckRelatedDocuments(Ref, True) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)

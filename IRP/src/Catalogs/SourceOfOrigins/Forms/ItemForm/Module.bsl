@@ -53,7 +53,27 @@ Procedure UpdateAttributesByOwner()
 	If OwnerSelect <> "Manual" Then
 		Object.SourceOfOriginOwner = ThisObject[OwnerSelect];
 	EndIf;
+	
+	OwnerInfo = GetOwnerInfo(Object.SourceOfOriginOwner);
+	Object.StockBalanceDetail = OwnerInfo.StockBalanceDetail;
+	Object.BatchBalanceDetail = OwnerInfo.BatchBalanceDetail;
 EndProcedure
+
+&AtServerNoContext
+Function GetOwnerInfo(OwnerRef)
+	Result = New Structure();
+	Result.Insert("StockBalanceDetail", False);
+	Result.Insert("BatchBalanceDetail", False);
+	
+	If Not ValueIsFilled(OwnerRef) Then
+		Return Result;
+	EndIf;
+	
+	Result.StockBalanceDetail = SourceOfOriginServer.GetStockBalanceDetailByOwner(OwnerRef);
+	Result.BatchBalanceDetail = SourceOfOriginServer.GetBatchBalanceDetailByOwner(OwnerRef);
+	
+	Return Result;
+EndFunction
 
 &AtServer
 Procedure FillParamsOnCreate()
@@ -80,6 +100,10 @@ Procedure FillParamsOnCreate()
 		ThisObject.OwnerSelect = "ItemKey";
 	EndIf;
 		
+	OwnerInfo = GetOwnerInfo(Object.SourceOfOriginOwner);
+	Object.StockBalanceDetail          = OwnerInfo.StockBalanceDetail;
+	Object.BatchBalanceDetail          = OwnerInfo.BatchBalanceDetail;
+	
 	// delete manual, if have other types
 	If Items.OwnerSelect.ChoiceList.Count() > 1 Then
 		Items.OwnerSelect.ChoiceList.Delete(0);

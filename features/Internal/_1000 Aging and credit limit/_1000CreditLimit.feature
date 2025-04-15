@@ -15,6 +15,7 @@ Background:
 
 Scenario: _1000000 preparation (credit limit)
 	When set True value to the constant
+	When set True value to the constant Use shipment and receipt planing orders
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -46,6 +47,7 @@ Scenario: _1000000 preparation (credit limit)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create information register Taxes records (VAT)
+		When Create document SalesOrder objects (credit limit)
 	* Creation of a Sales order on Crystal, Basic Partner terms, TRY, Sales invoice before Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -330,9 +332,6 @@ Scenario: _1000000 preparation (credit limit)
 Scenario: _10000001 check preparation
 	When check preparation
 			
-						
-
-
 Scenario: _1000001 filling in credit limit in the Partner term
 	Given I open hyperlink "e1cib/list/Catalog.Agreements"
 	* Basic Partner terms, TRY
@@ -361,7 +360,6 @@ Scenario: _1000001 filling in credit limit in the Partner term
 		And I set checkbox "Use credit limit"
 		And I input "4000,00" text in "Amount" field
 		And I click "Save and close" button
-
 
 Scenario: _1000002 check credit limit when post Sales invoice based on Sales order (Ap-Ar posting detail by documents)
 	* Create Sales invoice for $$SalesOrder20400011$$
@@ -653,9 +651,364 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
 			And I click "OK" button
-			Then I wait that in user messages the "Credit limit exceeded. Limit: 4 000, limit balance: 10 755, transaction: 32 450, lack: 21 695 TRY" substring will appear in 20 seconds
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 4 000, limit balance: 10 755, transaction: 32 450, lack: 21 695 TRY'|
 			And I close all client application windows
-			
+
+Scenario: _1000004 check credit limit in SI (same currency)
+	And I close all client application windows
+	* Create SI 1
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		* Filling main info
+			And I select from the drop-down list named "Partner" by "Ferron BP" string
+			And I select from the drop-down list named "Company" by "Main company" string
+			And I select from the drop-down list named "Agreement" by "Ferron, USD" string
+			And I select from the drop-down list named "Store" by "Store 01" string
+		* Adding items
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select "Dress" by string from the drop-down list named "ItemListItem" in "ItemList" table
+			And I select "S/Yellow" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "20,00" text in the field named "ItemListPrice" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select "Boots" by string from the drop-down list named "ItemListItem" in "ItemList" table
+			And I select "36/18sd" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "30,00" text in the field named "ItemListPrice" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I move to the tab named "GroupOther"
+			And I move to the tab named "GroupMore"
+			And I input "08.04.2025 20:00:00" text in the field named "Date"
+			And I move to the next attribute
+			Then "Update item list info" window is opened
+			And I change checkbox named "PriceTypes"
+			And I change checkbox named "Prices"
+			And I click the button named "FormOK"
+			And I click the button named "FormPost"
+			And I click the button named "FormPostAndClose"
+	* Create SI 2
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+			And I click the button named "FormCreate"
+		* Filling main info
+			And I select from the drop-down list named "Partner" by "Ferron BP" string
+			And I select from the drop-down list named "Company" by "Main company" string
+			And I select from the drop-down list named "Agreement" by "Ferron, USD" string
+			And I select from the drop-down list named "Store" by "Store 01" string
+		* Adding items
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select "Dress" by string from the drop-down list named "ItemListItem" in "ItemList" table
+			And I select "S/Yellow" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "25,00" text in the field named "ItemListPrice" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select "Boots" by string from the drop-down list named "ItemListItem" in "ItemList" table
+			And I select "36/18sd" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "35,00" text in the field named "ItemListPrice" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I move to the tab named "GroupOther"
+			And I move to the tab named "GroupMore"
+			And I input "08.04.2025 21:00:00" text in the field named "Date"
+			And I move to the next attribute
+			Then "Update item list info" window is opened
+			And I change checkbox named "PriceTypes"
+			And I change checkbox named "Prices"
+			And I click the button named "FormOK"
+			And I click "Save" button
+			And I click the button named "FormPost"
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 1 000, limit balance: 500, transaction: 600, lack: 100 USD'|
+		* Try to re-port
+			And I click the button named "FormPost"
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 1 000, limit balance: 500, transaction: 600, lack: 100 USD'|
+		* Change amount (less than limit)
+			And I move to the tab named "GroupItemList"
+			And I go to line in "ItemList" table
+				| "#" | "Dont calculate row" | "Item"  | "Item key" | "Net amount" | "Price" | "Price type"              | "Quantity" | "Store"    | "Tax amount" | "Total amount" | "Unit" | "Use shipment confirmation" | "Use work sheet" | "VAT" |
+				| "1" | "No"                 | "Dress" | "S/Yellow" | "211,86"     | "25,00" | "en description is empty" | "10,000"   | "Store 01" | "38,14"      | "250,00"       | "pcs"  | "No"                        | "No"             | "18%" |
+			And I input "6,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "FormWrite"
+			And I click the button named "FormPost"
+		* Change amount (more than limit)
+			And I move to the tab named "GroupItemList"
+			And I go to line in "ItemList" table
+				| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+				| '1' | 'Dress' | 'S/Yellow' | ''                   | ''                  | '6,000'    | 'en description is empty' | 'pcs'  | '25,00' | '18%' | ''              | 'No'                 | '22,88'      | '127,12'     | '150,00'       | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "FormWrite"
+			And I click the button named "FormPost"
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 1 000, limit balance: 500, transaction: 600, lack: 100 USD'|
+		* Un-post SI 2
+			And I click the button named "FormUndoPosting"					
+	And I close all client application windows
+
+Scenario: _1000005 check credit limit in SI (different currency)
+	And I close all client application windows
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		* Filling main info
+			And I select from the drop-down list named "Partner" by "Ferron BP" string
+			And I select from the drop-down list named "Company" by "Main company" string
+			And I select from the drop-down list named "Agreement" by "Basic Partner terms, TRY" string
+			And I select from the drop-down list named "Store" by "Store 01" string
+		* Adding items
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select "Dress" by string from the drop-down list named "ItemListItem" in "ItemList" table
+			And I select "S/Yellow" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "550,00" text in the field named "ItemListPrice" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select "Boots" by string from the drop-down list named "ItemListItem" in "ItemList" table
+			And I select "36/18sd" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "700,00" text in the field named "ItemListPrice" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I move to the tab named "GroupOther"
+			And I move to the tab named "GroupMore"
+			And I input "08.04.2025 23:00:00" text in the field named "Date"
+			And I move to the next attribute
+			Then "Update item list info" window is opened
+			And I change checkbox named "PriceTypes"
+			And I remove checkbox named "PaymentTerm"
+			And I click the button named "FormOK"
+			And I click "Save" button
+			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
+		* Try to re-port
+			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"						
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
+		* Change amount (less than limit)
+			And I move to the tab named "GroupItemList"
+			And I go to line in "ItemList" table
+				| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+				| '1' | 'Dress' | 'S/Yellow' | ''                   | ''                  | '10,000'   | 'en description is empty' | 'pcs'  | '550,00' | '18%' | ''              | 'No'                 | '838,98'     | '4 661,02'   | '5 500,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "FormWrite"
+			And I click the button named "FormPost"
+		* Change amount (more than limit)
+			And I move to the tab named "GroupItemList"
+			And I go to line in "ItemList" table
+				| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+				| '1' | 'Dress' | 'S/Yellow' | ''                   | ''                  | '5,000'    | 'en description is empty' | 'pcs'  | '550,00' | '18%' | ''              | 'No'                 | '419,49'     | '2 330,51'   | '2 750,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "FormWrite"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
+			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 12 500, lack: 2 500 TRY'|
+		* Un-post SI 2
+			And I click the button named "FormUndoPosting"
+	And I close all client application windows	
+
+Scenario: _1000006 check credit limit at different time intervals
+	And I close all client application windows
+	* Create SI same currency
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		* Filling main info
+			And I select from the drop-down list named "Partner" by "Ferron BP" string
+			And I select from the drop-down list named "Company" by "Main company" string
+			And I select from the drop-down list named "Agreement" by "Ferron, USD" string
+			And I select from the drop-down list named "Store" by "Store 01" string
+		* Adding items
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select "Dress" by string from the drop-down list named "ItemListItem" in "ItemList" table
+			And I select "S/Yellow" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I input "7,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "20,00" text in the field named "ItemListPrice" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select "Boots" by string from the drop-down list named "ItemListItem" in "ItemList" table
+			And I select "36/18sd" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "30,00" text in the field named "ItemListPrice" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I move to the tab named "GroupOther"
+			And I move to the tab named "GroupMore"
+			And I input "11.04.2025  21:30:00" text in the field named "Date"
+			And I move to the next attribute
+			Then "Update item list info" window is opened
+			And I change checkbox named "PriceTypes"
+			And I change checkbox named "Prices"
+			And I click the button named "FormOK"
+			And I click "Save" button
+			And I click the button named "FormPost"
+			And I click the button named "FormPostAndClose"
+	* Create SI different currency
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		* Filling main info
+			And I select from the drop-down list named "Partner" by "Ferron BP" string
+			And I select from the drop-down list named "Company" by "Main company" string
+			And I select from the drop-down list named "Agreement" by "Basic Partner terms, TRY" string
+			And I select from the drop-down list named "Store" by "Store 01" string
+		* Adding items
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select "Dress" by string from the drop-down list named "ItemListItem" in "ItemList" table
+			And I select "S/Yellow" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I input "50,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "550,00" text in the field named "ItemListPrice" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I select "Boots" by string from the drop-down list named "ItemListItem" in "ItemList" table
+			And I select "36/18sd" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+			And I input "30,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "700,00" text in the field named "ItemListPrice" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I move to the tab named "GroupOther"
+			And I move to the tab named "GroupMore"
+			And I input "12.04.2025 23:00:00" text in the field named "Date"
+			And I move to the next attribute
+			Then "Update item list info" window is opened
+			And I change checkbox named "PriceTypes"
+			And I remove checkbox named "PaymentTerm"
+			And I click the button named "FormOK"
+			And I click "Save" button
+			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 48 500, lack: 38 500 TRY'|
+		* Try to re-port
+			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"						
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 48 500, lack: 38 500 TRY'|
+		* Change amount (less than limit)
+			And I move to the tab named "GroupItemList"
+			And I go to line in "ItemList" table
+				| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+				| '1' | 'Dress' | 'S/Yellow' | ''                   | ''                  | '50,000'   | 'en description is empty' | 'pcs'  | '550,00' | '18%' | ''              | 'No'                 | '4 194,92'   | '23 305,08'  | '27 500,00'    | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+				| '2' | 'Boots' | '36/18SD'  | ''                   | ''                  | '30,000'   | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '3 203,39'   | '17 796,61'  | '21 000,00'    | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "FormWrite"
+			And I click the button named "FormPost"
+		* Change amount (more than limit)
+			And I move to the tab named "GroupItemList"
+			And I go to line in "ItemList" table
+				| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+				| '1' | 'Dress' | 'S/Yellow' | ''                   | ''                  | '10,000'   | 'en description is empty' | 'pcs'  | '550,00' | '18%' | ''              | 'No'                 | '838,98'     | '4 661,02'   | '5 500,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			And I input "50,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| '#' | 'Item'  | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+				| '2' | 'Boots' | '36/18SD'  | ''                   | ''                  | '5,000'    | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '533,90'     | '2 966,10'   | '3 500,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			And I input "30,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click the button named "FormWrite"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 48 500, lack: 38 500 TRY'|
+			And I click the button named "FormPost"
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
+			Then there are lines in TestClient message log
+				|'Credit limit exceeded. Limit: 10 000, limit balance: 10 000, transaction: 48 500, lack: 38 500 TRY'|
+		* Un-post SI 2
+			And I click the button named "FormUndoPosting"
+			And I close all client application windows	
+	And I close all client application windows	
+
+Scenario: _1000007 create SPO from SO and check credit limit
+	And I close all client application windows
+	* Open a SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Partner'   |
+			| 'Ferron BP' |
+		And I select current line in "List" table
+		And I click the button named "FormPost"
+	* Create SPO
+		And I click the button named "FormDocumentShipmentPlaningOrderGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I click Choice button of the field named "ShipmentPeriod"
+		Then "Select period" window is opened
+		And I input "01.04.2025" text in the field named "DateBegin"
+		And I input "30.04.2025" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I go to the first line in "ItemList" table
+		And I input "50,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move one line down in "ItemList" table					
+		And I input "30,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to the tab named "GroupOther"
+		And I input "12.04.2025 23:30:00" text in the field named "Date"
+		And I move to the next attribute
+		And I click "Save" button
+		And I click the button named "FormPost"
+		Then there are lines in TestClient message log
+			|'Credit limit exceeded. Limit: 2 000, limit balance: 1 300, transaction: 1 900, lack: 600 USD'|
+	* Try to re-port
+		And I click the button named "FormPost"			
+		Then there are lines in TestClient message log
+			|'Credit limit exceeded. Limit: 2 000, limit balance: 1 300, transaction: 1 900, lack: 600 USD'|
+	* Change amount (less than limit)
+		And I move to the tab named "GroupItemList"
+		And I go to line in "ItemList" table
+			| "Item"  |
+			| "Dress" |
+		And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| "Item"  |
+			| "Boots" |
+		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormWrite"
+		And I click the button named "FormPost"
+	* Change amount (more than limit)
+		And I move to the tab named "GroupItemList"
+		And I go to line in "ItemList" table
+			| "Item"  |
+			| "Dress" |
+		And I input "50,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| "Item"  |
+			| "Boots" |
+		And I input "30,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormWrite"
+		And I click the button named "FormPost"
+		Then there are lines in TestClient message log
+			|'Credit limit exceeded. Limit: 2 000, limit balance: 1 300, transaction: 1 900, lack: 600 USD'|
+	* Un-post SI 2
+		And I click the button named "FormUndoPosting"
+		And I close all client application windows
+	And I close all client application windows				
+
 
 Scenario: _999999 close TestClient session
 	* Clear postings

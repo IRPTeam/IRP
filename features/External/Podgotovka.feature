@@ -1536,7 +1536,6 @@ Scenario: set True value to the constant Use salary
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window	
-
 		
 Scenario: set True value to the constant Use shipment and receipt planing orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"

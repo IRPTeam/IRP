@@ -520,27 +520,23 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, NotifyParameters) Export
 		Return;
 	EndIf;
 	ThisObject.Modified = True;
-	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
-	If ExtractedData <> Undefined Then
-		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
-	EndIf;
-	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
-	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(Object, ThisObject, "ItemList");
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
-Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
-	ExtractedData = Undefined;
+Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
-		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
+		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
-		ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
+	Else
+		Raise StrTemplate("Unsupported operation [%1]", Result.Operation);
 	EndIf;
+	ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
 	LockLinkedRows();
-	Return ExtractedData;
-EndFunction
+EndProcedure
 
 &AtServer
 Procedure LockLinkedRows()

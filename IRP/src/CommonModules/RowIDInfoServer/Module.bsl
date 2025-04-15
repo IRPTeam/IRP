@@ -267,6 +267,7 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;
+	Is = Is(Source);
 	
 	Records_Exists = AccumulationRegisters.TM1010B_RowIDMovements.GetExistsRecords(Source.Ref);
 	Records_InDocument  = GetRecordsInDocument(Source).TM1010B_RowIDMovements;
@@ -281,7 +282,6 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 	
 	CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting);
 	
-	Is = Is(Source);
 	If Not Cancel And (Is.RSR Or Is.RRR Or Is.SI Or Is.SR) Then
 		Source.RegisterRecords.TM1010T_RowIDMovements.Clear();
 		Source.RegisterRecords.TM1010T_RowIDMovements.Write();
@@ -298,6 +298,22 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 			Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
 			CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
 		EndIf;		
+	EndIf;
+	
+	If Not Cancel Then
+		For Each Row In Source.RowIDInfo Do
+			If ValueIsFilled(Row.Basis) Then
+				IsBasis = Is(Row.Basis);
+				If IsBasis.SO Or IsBasis.PO Then
+					If Row.RowRef.IsFixedItemKey Or Row.RowRef.IsFixedStore Then
+						RowRefObject = Row.RowRef.GetObject();
+						RowRefObject.IsFixedItemKey = False;
+						RowRefObject.IsFixedStore = False;
+						RowRefObject.Write();
+					EndIf;
+				EndIf;
+			EndIf;
+		EndDo;
 	EndIf;
 EndProcedure
 
@@ -12348,7 +12364,7 @@ Function LinkUnlinkDocumentRows(Object, FillingValues, CalculateRows = True) Exp
 	AttributeNames_LinkedDocuments = GetAttributeNames_LinkedDocuments();
 	
 	// Refreshable tables on unlink documents
-	TableNames_Refreshable = GetTableNames_Refreshable("SerialLotNumbers");
+	TableNames_Refreshable = GetTableNames_Refreshable("SerialLotNumbers, SourceOfOrigins");
 
 	UpdatedProperties = New Array();
 	UpdatedRows = New Array();
@@ -12370,6 +12386,23 @@ Function LinkUnlinkDocumentRows(Object, FillingValues, CalculateRows = True) Exp
 		
 		// Link
 		LinkRows = GetLinkRows(Object, FillingValue);
+		
+		If FillingValue.Property("ItemList") Then
+			For Each Row In FillingValue.ItemList Do
+				ArrayOfEmptyProperties = New Array();
+				For Each KeyValue In Row Do
+					If Not ValueIsFilled(Row[KeyValue.Key]) Then
+						If ArrayOfEmptyProperties.Find(KeyValue.Key) = Undefined Then
+							ArrayOfEmptyProperties.Add(KeyValue.Key);
+						EndIf;
+					EndIf;
+				EndDo;
+				For Each ColumnName In ArrayOfEmptyProperties Do
+					Row.Delete(ColumnName);
+				EndDo;
+			EndDo;
+		EndIf;
+		
 		Link(Object, FillingValue, LinkRows, TableNames_Refreshable, UpdatedProperties, UpdatedRows, CalculateRows);
 
 		Object.RowIDInfo.Clear();

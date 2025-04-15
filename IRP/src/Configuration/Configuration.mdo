@@ -968,6 +968,7 @@
   <functionalOptions>FunctionalOption.UseNumberingRules</functionalOptions>
   <functionalOptions>FunctionalOption.UseShipmentAndReceiptPlaningOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
+  <functionalOptions>FunctionalOption.UseProfitLossCenter</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1088,6 +1089,7 @@
   <constants>Constant.UseNumberingRules</constants>
   <constants>Constant.UseShipmentAndReceiptPlaningOrders</constants>
   <constants>Constant.UseVariableStore</constants>
+  <constants>Constant.UseProfitLossCenter</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
@@ -1410,7 +1412,7 @@
   <enums>Enum.ShippingStatuses</enums>
   <enums>Enum.SpecialOfferTypes</enums>
   <enums>Enum.SpecificationType</enums>
-  <enums>Enum.StockBalanceDetail</enums>
+  <enums>Enum.DELETE_StockBalanceDetail</enums>
   <enums>Enum.SystemClientType</enums>
   <enums>Enum.TaxKind</enums>
   <enums>Enum.TaxType</enums>

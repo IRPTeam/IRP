@@ -463,6 +463,8 @@ Scenario: _0202603 create RRR based on RGR (without RSR)
 		And I save the value of "Number" field as "$$NumberRRR2$$"
 		And I save the window as "$$RRR2$$"
 		And I close current window
+		If "1C:Enterprise" window is opened Then
+			And I click "No" button		
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table

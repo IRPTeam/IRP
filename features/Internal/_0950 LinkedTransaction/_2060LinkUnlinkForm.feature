@@ -2111,9 +2111,9 @@ Scenario: _2060017 check link form in the SI with 3 lines with the same items
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| '#' | 'Revenue type' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 |
-			| '1' | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '99,000'   | 'pcs'  | '1 608,19'   | '100,00' | '18%' | ''              | '8 291,81'   | '9 900,00'     | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | 'Sales order 1 052 dated 07.09.2021 21:06:20' |
-			| '2' | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '3,000'    | 'pcs'  | '48,73'      | '100,00' | '18%' | ''              | '251,27'     | '300,00'       | ''                    | 'Store 01' | ''              | 'No'                        | ''       | 'Sales order 1 053 dated 07.09.2021 10:00:00' |
-			| '3' | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '1,000'    | 'pcs'  | '16,24'      | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | 'Sales order 1 052 dated 07.09.2021 21:06:20' |
+			| '1' | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '99,000'   | 'pcs'  | '1 510,17'   | '100,00' | '18%' | ''              | '8 389,83'   | '9 900,00'     | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | 'Sales order 1 052 dated 07.09.2021 21:06:20' |
+			| '2' | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '3,000'    | 'pcs'  | '45,76'      | '100,00' | '18%' | ''              | '254,24'     | '300,00'       | ''                    | 'Store 01' | ''              | 'No'                        | ''       | 'Sales order 1 053 dated 07.09.2021 10:00:00' |
+			| '3' | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '1,000'    | 'pcs'  | '15,25'      | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | 'Sales order 1 052 dated 07.09.2021 21:06:20' |
 	* Auto link
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I set checkbox "Linked documents"
@@ -2129,9 +2129,9 @@ Scenario: _2060017 check link form in the SI with 3 lines with the same items
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| '#' | 'Revenue type' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' |
-			| '1' | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '99,000'   | 'pcs'  | '1 608,19'   | '100,00' | '18%' | ''              | '8 291,81'   | '9 900,00'     | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            |
-			| '2' | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '3,000'    | 'pcs'  | '48,73'      | '100,00' | '18%' | ''              | '251,27'     | '300,00'       | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            |
-			| '3' | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '1,000'    | 'pcs'  | '16,24'      | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            |
+			| '1' | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '99,000'   | 'pcs'  | '1 510,17'   | '100,00' | '18%' | ''              | '8 389,83'   | '9 900,00'     | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            |
+			| '2' | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '3,000'    | 'pcs'  | '45,76'      | '100,00' | '18%' | ''              | '254,24'     | '300,00'       | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            |
+			| '3' | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '1,000'    | 'pcs'  | '15,25'      | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            |
 		And I close all client application windows
 
 
@@ -3112,7 +3112,7 @@ Scenario: _2060029 check link/unlink form in the SO - SI - SC (use variable item
 			| "No"                 | "Dress" | "XS/Blue"  |
 		When I Check the steps for Exception
 			| 'And I select "S/Yellow" from "Item key" drop-down list by string in "ItemList" table'         |				
-	* Post SI and create SC
+	* Post SI
 		And I click "Post" button
 		And I delete "$$SalesInvoice2060029$$" variable
 		And I delete "$$NumberSalesInvoice2060029$$" variable
@@ -4856,3 +4856,173 @@ Scenario: _2060036 check link/unlink form in the PO - GR - PI (use variable stor
 		And I save the window as "$$PurchaseInvoice2060037$$"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice2060037$$"
 		And I close all client application windows
+
+Scenario: _2060040 check link/unlink form in the SO - SI (use variable item key, delete previous document)
+	And I close all client application windows
+	* Create SO (use variable item key)
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"		
+		And I click "Create" button
+		And I select from the drop-down list named "Partner" by "Crystal" string
+		And I select from the drop-down list named "Agreement" by "Basic Partner terms, TRY" string
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Phone A"     |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| "Item"    | "Item key" |
+			| "Phone A" | "Blue"     |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I set "Is variable item key" checkbox in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Router"      |
+		And I select current line in "List" table
+		And I activate "Price" field in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I delete "$$SalesOrder2060040$$" variable
+		And I delete "$$NumberSalesOrder2060040$$" variable
+		And I save the window as "$$SalesOrder2060040$$"
+		And I save the value of "Number" field as "$$NumberSalesOrder2060040$$"
+	* Create SI and change item key
+		And I click "Sales invoice" button
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| 'Item'    | 'Item key' | 'Quantity' |
+			| 'Phone A' | 'Blue'     | '5,000'    |
+			| 'Router'  | 'Router'   | '1,000'    |
+		And I go to line in "ItemList" table
+			| "Item"    | "Item key" |
+			| "Phone A" | "Blue"     |
+		And I select current line in "ItemList" table
+		And I select "White" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I input "3,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I select "12345670" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+	* Delete SI and check fillings items in the new SI
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		When in opened panel I select "$$SalesOrder2060040$$"	
+		And I click "Sales invoice" button
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| 'Item'    | 'Item key' | 'Quantity' |
+			| 'Phone A' | 'Blue'     | '5,000'    |
+			| 'Router'  | 'Router'   | '1,000'    |
+		And I close all client application windows
+
+Scenario: _2060041 check link/unlink form in the PO - PI (use variable item key, delete previous document)
+	And I close all client application windows
+	* Create PO (use variable item key)
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"		
+		And I click "Create" button
+		And I select from the drop-down list named "Partner" by "Crystal" string
+		And I select from the drop-down list named "Agreement" by "Vendor, TRY" string
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Phone A"     |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| "Item"    | "Item key" |
+			| "Phone A" | "Blue"     |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I set "Is variable item key" checkbox in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Router"      |
+		And I select current line in "List" table
+		And I activate "Price" field in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I click "Post" button
+		And I delete "$$PurchaseOrder2060041$$" variable
+		And I delete "$$NumberPurchaseOrder2060041$$" variable
+		And I save the window as "$$PurchaseOrder2060041$$"
+		And I save the value of "Number" field as "$$NumberPurchaseOrder2060041$$"
+	* Create PI and change item key
+		And I click "Purchase invoice" button
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| 'Item'    | 'Item key' | 'Quantity' |
+			| 'Phone A' | 'Blue'     | '5,000'    |
+			| 'Router'  | 'Router'   | '1,000'    |
+		And I go to line in "ItemList" table
+			| "Item"    | "Item key" |
+			| "Phone A" | "Blue"     |
+		And I select current line in "ItemList" table
+		And I select "White" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I input "3,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I select "12345670" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "3,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+	* Delete PI and check fillings items in the new SI
+		And I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		When in opened panel I select "$$PurchaseOrder2060041$$"	
+		And I click "Purchase invoice" button
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| 'Item'    | 'Item key' | 'Quantity' |
+			| 'Phone A' | 'Blue'     | '5,000'    |
+			| 'Router'  | 'Router'   | '1,000'    |
+		And I close all client application windows
+		
+
+				
+
+				
+		
+				
+				
+				
+
+				

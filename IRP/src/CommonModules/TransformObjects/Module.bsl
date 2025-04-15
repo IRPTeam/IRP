@@ -256,8 +256,15 @@ EndProcedure
 Procedure UpdateLinkedObject(Source, Target, Rule, TransformationSettings)
 	Object = Target.GetObject(); // DocumentObjectDocumentName, CatalogObjectDocumentName
 	
-	//@skip-check invocation-parameter-type-intersect
-	Wrapper = BuilderAPI.Init(Object, , , "ItemList");
+	If Rule.TargetType.Parent = Catalogs.ConfigurationMetadata.Documents Then
+		//@skip-check invocation-parameter-type-intersect
+		Wrapper = BuilderAPI.Init(Object, , , "ItemList");
+	ElsIf Rule.TargetType.Parent = Catalogs.ConfigurationMetadata.Catalogs Then
+		//@skip-check invocation-parameter-type-intersect
+		Wrapper = BuilderAPI.Init(Object);
+	Else
+		Raise "Unsupported type " + Rule.TargetType.ObjectFullName;
+	EndIf;
 
 	UpdateTargetObject(Source, Rule, Wrapper, True);
 	

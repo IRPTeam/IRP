@@ -118,7 +118,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Initial cost</v8:content>
+					<v8:content>İlk maliyet değeri</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -353,7 +353,7 @@ WHERE
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>tr</v8:lang>
-								<v8:content>Doc date, number</v8:content>
+								<v8:content>Belge tarihi, numarası</v8:content>
 							</v8:item>
 							<v8:item>
 								<v8:lang>ru</v8:lang>

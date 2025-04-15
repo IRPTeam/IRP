@@ -42,4 +42,5 @@
  <content>Subsystem.Reports.Subsystem.Accounting</content>
  <content>Catalog.ExtDimensions</content>
  <content>DataProcessor.AccountantAutomatedWorkplace</content>
+ <content>InformationRegister.T9016S_AccountsEmployee</content>
 </mdclass:FunctionalOption>

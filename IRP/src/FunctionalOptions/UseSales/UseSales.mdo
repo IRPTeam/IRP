@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2bcaf8ab-32cc-4635-bcae-9ffad0333224">
+ <name>UseSales</name>
+ <synonym>
+  <key>tr</key>
+  <value>Satış modülü kullan</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Use sales</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use sales</value>
+ </synonym>
+ <location>Constant.UseSales</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>CommonCommand.OpenCustomerAgreements</content>
+ <content>Catalog.Items</content>
+ <content>CommonCommand.OpenPartnersCustomer</content>
+ <content>Catalog.SpecialOfferTypes</content>
+ <content>Catalog.PartnersBankAccounts</content>
+ <content>Catalog.PartnerItems</content>
+ <content>Catalog.SpecialOfferRules</content>
+ <content>Catalog.SpecialOffers</content>
+ <content>Catalog.Agreements</content>
+ <content>Catalog.PriceTypes</content>
+ <content>Subsystem.SalesAR</content>
+ <content>Catalog.LegalNameContracts</content>
+ <content>Subsystem.Reports.Subsystem.Sales</content>
+ <content>Document.SalesOrder</content>
+ <content>Report.R1100_CustomersAging</content>
+ <content>Document.SalesReturnOrder</content>
+ <content>Document.PriceList</content>
+ <content>Document.WorkOrder</content>
+ <content>Report.D2001_Sales</content>
+ <content>Document.WorkSheet</content>
+ <content>Document.SalesReportFromTradeAgent</content>
+ <content>Report.A1010_PartnersBalance</content>
+ <content>Document.SalesReportToConsignor</content>
+ <content>Document.PlannedReceiptReservation</content>
+ <content>Document.ShipmentConfirmation</content>
+ <content>Document.WorkOrderClosing</content>
+ <content>Document.SalesReturn</content>
+ <content>Document.CustomersAdvancesClosing</content>
+ <content>Report.R2001_Sales</content>
+ <content>Document.SalesInvoice</content>
+ <content>Document.SalesOrderClosing</content>
+ <content>Document.ShipmentPlaningOrder</content>
+ <content>AccumulationRegister.R2001T_Sales</content>
+ <content>AccumulationRegister.R2010T_SalesOrders</content>
+ <content>AccumulationRegister.R2014T_CanceledSalesOrders</content>
+ <content>AccumulationRegister.R2021B_CustomersTransactions</content>
+ <content>AccumulationRegister.R2022B_CustomersPaymentPlanning</content>
+ <content>AccumulationRegister.R5020B_PartnersBalance</content>
+ <content>AccumulationRegister.R2020B_AdvancesFromCustomers</content>
+ <content>AccumulationRegister.R2013T_SalesOrdersProcurement</content>
+ <content>AccumulationRegister.R2002T_SalesReturns</content>
+ <content>AccumulationRegister.R2011B_SalesOrdersShipment</content>
+ <content>AccumulationRegister.R5011B_CustomersAging</content>
+ <content>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</content>
+ <content>AccumulationRegister.R2005T_SalesSpecialOffers</content>
+ <content>Subsystem.MasterData.Subsystem.PurchaseAndSales</content>
+</mdclass:FunctionalOption>

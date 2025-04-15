@@ -221,21 +221,21 @@
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="af5eae2d-d246-4a21-8c2e-e867874e2716">
-  <name>StockBalanceDetail</name>
+  <name>DELETE_StockBalanceDetail</name>
   <synonym>
    <key>tr</key>
-   <value>Stok bakiye detayları</value>
+   <value>DELETE Stok bakiyesi ayrıntısını</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Вид учета товаров по складам</value>
+   <value>DELETE stock balance detail</value>
   </synonym>
   <synonym>
    <key>en</key>
-   <value>Stock balance detail</value>
+   <value>DELETE stock balance detail</value>
   </synonym>
   <type>
-   <types>EnumRef.StockBalanceDetail</types>
+   <types>EnumRef.DELETE_StockBalanceDetail</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -484,6 +484,98 @@
    <stringQualifiers>
     <length>1024</length>
    </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="16fcf447-ac23-4fa1-833e-0561160f069e">
+  <name>StockBalanceDetailSerialLotNumber</name>
+  <synonym>
+   <key>tr</key>
+   <value>Stok bakiye detayları</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид учета товаров по складам</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Stock balance detail</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="95acbc55-0e21-49fb-8983-d6eae46a2c64">
+  <name>BatchBalanceDetailSerialLotNumber</name>
+  <synonym>
+   <key>tr</key>
+   <value>Parti bakiye detayları</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид учета партий товаров</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Batch balance detail</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3c8d94bf-fe78-4d3e-992d-ff4392bcd3e5">
+  <name>StockBalanceDetailSourceOfOrigins</name>
+  <synonym>
+   <key>tr</key>
+   <value>Stok bakiye detayları</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид учета товаров по складам</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Stock balance detail</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="5304d91f-9d39-403a-ab3e-e9a1a0428782">
+  <name>BatchBalanceDetailSourceOfOrigins</name>
+  <synonym>
+   <key>tr</key>
+   <value>Parti bakiye detayları</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид учета партий товаров</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Batch balance detail</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

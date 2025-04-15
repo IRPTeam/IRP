@@ -3593,7 +3593,6 @@ Scenario: _092060 check serial lot number settings
 	* Add reg exp
 		And I move to "Serial lot number settings" tab
 		And I set checkbox "Use serial lot number"	
-		And I select "By item key" exact value from "Stock balance detail" drop-down list
 		And in the table "RegExpSerialLotNumbersRules" I click the button named "RegExpSerialLotNumbersRulesAdd"
 		And I input "^\d\d\d\w\/\d$" text in "Reg exp" field of "RegExpSerialLotNumbersRules" table
 		And I activate "Example" field in "RegExpSerialLotNumbersRules" table

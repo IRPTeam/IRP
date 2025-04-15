@@ -46,7 +46,6 @@
  <content>Document.SalesInvoice.Attribute.Company</content>
  <content>Document.GoodsReceipt.Attribute.Company</content>
  <content>Document.CashReceipt.Attribute.Company</content>
- <content>Catalog.Companies.Command.OpenCompanyList</content>
  <content>Document.PurchaseInvoice.Attribute.Company</content>
  <content>Document.RetailSalesReceipt.Attribute.Company</content>
  <content>Document.EmployeeFiring.Attribute.Company</content>

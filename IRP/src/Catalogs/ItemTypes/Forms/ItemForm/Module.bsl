@@ -46,13 +46,17 @@ EndProcedure
 Procedure TypeOnChange(Item)
 	If Object.Type = PredefinedValue("Enum.ItemTypes.Service") Then
 		Object.UseSerialLotNumber = False;
-		Object.StockBalanceDetail = PredefinedValue("Enum.StockBalanceDetail.ByItemKey");
+		
+		Object.StockBalanceDetailSerialLotNumber = False;
+		Object.StockBalanceDetailSourceOfOrigins = False;
+		Object.BatchBalanceDetailSerialLotNumber = False;
+		Object.BatchBalanceDetailSourceOfOrigins = False;
+		
 	ElsIf Object.Type = PredefinedValue("Enum.ItemTypes.Certificate") Then
 		Object.UseSerialLotNumber = True;
 		Object.AlwaysAddNewRowAfterScan = True;
 		Object.EachSerialLotNumberIsUnique = True;
 		Object.NotUseLineGrouping = True;
-		Object.StockBalanceDetail = PredefinedValue("Enum.StockBalanceDetail.EmptyRef");
 		Object.SingleRow = True;
 	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);
@@ -61,7 +65,8 @@ EndProcedure
 &AtClient
 Procedure UseSerialLotNumberOnChange(Item)
 	If Not Object.UseSerialLotNumber Then
-		Object.StockBalanceDetail = PredefinedValue("Enum.StockBalanceDetail.ByItemKey");
+		Object.StockBalanceDetailSerialLotNumber = False;
+		Object.BatchBalanceDetailSerialLotNumber = False;
 		Object.SingleRow = False;
 	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);
@@ -94,16 +99,25 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.UseSerialLotNumber.ReadOnly = False;
 		Form.Items.AlwaysAddNewRowAfterScan.ReadOnly = Object.UseSerialLotNumber And Object.SingleRow;
 		Form.Items.EachSerialLotNumberIsUnique.ReadOnly = False;
-		Form.Items.StockBalanceDetail.ReadOnly = Not Object.UseSerialLotNumber;
+		
+		Form.Items.StockBalanceDetailSerialLotNumber.ReadOnly = Not Object.UseSerialLotNumber;
+		Form.Items.BatchBalanceDetailSerialLotNumber.ReadOnly = Not Object.UseSerialLotNumber;
+		
 		Form.Items.NotUseLineGrouping.ReadOnly = Object.SingleRow OR Object.AlwaysAddNewRowAfterScan;
 	ElsIf IsService Then
 		Form.Items.UseSerialLotNumber.ReadOnly = False;
 		Form.Items.AlwaysAddNewRowAfterScan.ReadOnly = False;
 		Form.Items.EachSerialLotNumberIsUnique.ReadOnly = False;
-		Form.Items.StockBalanceDetail.ReadOnly = Not Object.UseSerialLotNumber;
+		
+		Form.Items.StockBalanceDetailSerialLotNumber.ReadOnly = Not Object.UseSerialLotNumber;
+		Form.Items.BatchBalanceDetailSerialLotNumber.ReadOnly = Not Object.UseSerialLotNumber;
+		
 		Form.Items.NotUseLineGrouping.ReadOnly = Object.SingleRow OR Object.AlwaysAddNewRowAfterScan;
 	ElsIf IsCertificate Then
-		Form.Items.StockBalanceDetail.ReadOnly = True;
+		
+		Form.Items.StockBalanceDetailSerialLotNumber.ReadOnly = Not Object.UseSerialLotNumber;
+		Form.Items.BatchBalanceDetailSerialLotNumber.ReadOnly = Not Object.UseSerialLotNumber;
+		
 		Form.Items.UseSerialLotNumber.ReadOnly = True;
 		Form.Items.AlwaysAddNewRowAfterScan.ReadOnly = True;
 		Form.Items.EachSerialLotNumberIsUnique.ReadOnly = True;

@@ -2553,6 +2553,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Exc_012", NStr("en='Save error! Changing ""%1"" is available only for user ""%2""';
 		|ru='Ошибка сохранения! Изменение ""%1"" доступно только для пользователя ""%2""';
 		|tr='Kayıt hatası! ""%1"" değişikliği yalnızca ""%2"" kullanıcısı için mümkündür'", Lang));
+	Strings.Insert("Exc_013", NStr("en='Related document exists: %1';
+		|ru='Related document exists: %1';
+		|tr='İlgili belge mevcut: %1'", Lang));
 #EndRegion
 
 #Region Saas

@@ -282,37 +282,530 @@
    </choiceList>
   </extInfo>
  </items>
- <items xsi:type="form:FormField">
-  <name>AlwaysAddNewRowAfterScan</name>
-  <id>86</id>
+ <items xsi:type="form:FormGroup">
+  <name>GrouSettings</name>
+  <id>168</id>
+  <items xsi:type="form:FormGroup">
+   <name>GroupCommonSettngs</name>
+   <id>166</id>
+   <items xsi:type="form:FormField">
+    <name>AlwaysAddNewRowAfterScan</name>
+    <id>86</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.AlwaysAddNewRowAfterScan</segments>
+    </dataPath>
+    <toolTip>
+     <key>tr</key>
+     <value>Taramadan sonra, ürün her zaman yeni bir satır olarak eklenecektir. Ancak, farklı yerlerde, örneğin serilere göre gruplandırılabilir.</value>
+    </toolTip>
+    <toolTip>
+     <key>ru</key>
+     <value>После сканирования товар всегда будет добавлен как новая строка. Однако в разных местах он все равно может быть сгруппирован, например, по серии.</value>
+    </toolTip>
+    <toolTip>
+     <key>en</key>
+     <value>After scanning, the product will always be added as a new line. However, in different places, it can still be grouped, for example, by series.</value>
+    </toolTip>
+    <toolTipRepresentation>Button</toolTipRepresentation>
+    <handlers>
+     <event>OnChange</event>
+     <name>AlwaysAddNewRowAfterScanOnChange</name>
+    </handlers>
+    <extendedTooltip>
+     <name>AlwaysAddNewRowAfterScanExtendedTooltip</name>
+     <id>88</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>AlwaysAddNewRowAfterScanContextMenu</name>
+     <id>87</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>CheckBoxField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+     <checkBoxType>Switcher</checkBoxType>
+    </extInfo>
+   </items>
+   <items xsi:type="form:FormField">
+    <name>NotUseLineGrouping</name>
+    <id>100</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.NotUseLineGrouping</segments>
+    </dataPath>
+    <toolTip>
+     <key>tr</key>
+     <value>Temel alınarak belgeler oluşturulurken, tarama yapılırken, yükleme yapılırken - ürün gruplanmayacak, kaynaktaki gibi aynı şekilde yüklenecek.</value>
+    </toolTip>
+    <toolTip>
+     <key>ru</key>
+     <value>При создании документов на основании, при сканировании, при загрузке - товар не будет сгруппирован, но будет загружен таким же образом, как в источнике.</value>
+    </toolTip>
+    <toolTip>
+     <key>en</key>
+     <value>When creating documents based on, when scanning, when uploading - the product will not be grouped, but will be loaded the same way as in the source.</value>
+    </toolTip>
+    <toolTipRepresentation>Button</toolTipRepresentation>
+    <extendedTooltip>
+     <name>NotUseLineGroupingExtendedTooltip</name>
+     <id>102</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>NotUseLineGroupingContextMenu</name>
+     <id>101</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>CheckBoxField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+     <checkBoxType>Switcher</checkBoxType>
+    </extInfo>
+   </items>
+   <items xsi:type="form:FormField">
+    <name>UseSerialLotNumber</name>
+    <id>48</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.UseSerialLotNumber</segments>
+    </dataPath>
+    <toolTip>
+     <key>tr</key>
+     <value>Seri numaralarına göre takibi etkinleştir. Bu durumda, ürün serileri tüm belgelerde belirtilmelidir. Bu seçenek, bu tür ürünlerle ilgili daha önce oluşturulmuş belgeler varsa değiştirilmemelidir.</value>
+    </toolTip>
+    <toolTip>
+     <key>ru</key>
+     <value>Включите отслеживание по серийным номерам. В этом случае серия товара должна быть указана во всех документах. Этот параметр не следует изменять, если ранее были созданы документы с участием товаров этого типа.</value>
+    </toolTip>
+    <toolTip>
+     <key>en</key>
+     <value>Enable tracking by serial numbers. In this case, the product series must be specified in all documents. This option should not be changed if there were previously created documents involving products of this type.</value>
+    </toolTip>
+    <toolTipRepresentation>Button</toolTipRepresentation>
+    <handlers>
+     <event>OnChange</event>
+     <name>UseSerialLotNumberOnChange</name>
+    </handlers>
+    <extendedTooltip>
+     <name>UseSerialLotNumberExtendedTooltip</name>
+     <id>50</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>UseSerialLotNumberContextMenu</name>
+     <id>49</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>CheckBoxField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+     <checkBoxType>Switcher</checkBoxType>
+    </extInfo>
+   </items>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <title>
+    <key>tr</key>
+    <value>Genel ayarlar</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Common settings</value>
+   </title>
+   <title>
+    <key>en</key>
+    <value>Common settings</value>
+   </title>
+   <extendedTooltip>
+    <name>GroupCommonSettngsExtendedTooltip</name>
+    <id>167</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <type>UsualGroup</type>
+   <extInfo xsi:type="form:UsualGroupExtInfo">
+    <group>Vertical</group>
+    <behavior>Auto</behavior>
+    <showLeftMargin>true</showLeftMargin>
+    <united>true</united>
+    <throughAlign>Auto</throughAlign>
+    <currentRowUse>Auto</currentRowUse>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormGroup">
+   <name>GroupSerialLotNumberSettings</name>
+   <id>170</id>
+   <items xsi:type="form:FormField">
+    <name>StockBalanceDetailSerialLotNumber</name>
+    <id>172</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.StockBalanceDetailSerialLotNumber</segments>
+    </dataPath>
+    <extendedTooltip>
+     <name>StockBalanceDetailSerialLotNumberExtendedTooltip</name>
+     <id>174</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>StockBalanceDetailSerialLotNumberContextMenu</name>
+     <id>173</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>CheckBoxField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+     <checkBoxType>Switcher</checkBoxType>
+    </extInfo>
+   </items>
+   <items xsi:type="form:FormField">
+    <name>BatchBalanceDetailSerialLotNumber</name>
+    <id>175</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.BatchBalanceDetailSerialLotNumber</segments>
+    </dataPath>
+    <extendedTooltip>
+     <name>BatchBalanceDetailSerialLotNumberExtendedTooltip</name>
+     <id>177</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>BatchBalanceDetailSerialLotNumberContextMenu</name>
+     <id>176</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>CheckBoxField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+     <checkBoxType>Switcher</checkBoxType>
+    </extInfo>
+   </items>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <title>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Серия номенклатуры</value>
+   </title>
+   <title>
+    <key>en</key>
+    <value>Serial lot number</value>
+   </title>
+   <extendedTooltip>
+    <name>GroupSerialLotNumberSettingsExtendedTooltip</name>
+    <id>171</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <type>UsualGroup</type>
+   <extInfo xsi:type="form:UsualGroupExtInfo">
+    <group>Vertical</group>
+    <behavior>Auto</behavior>
+    <representation>WeakSeparation</representation>
+    <showLeftMargin>true</showLeftMargin>
+    <united>true</united>
+    <showTitle>true</showTitle>
+    <throughAlign>Auto</throughAlign>
+    <currentRowUse>Auto</currentRowUse>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormGroup">
+   <name>GroupSourceOfOriginsSettings</name>
+   <id>178</id>
+   <items xsi:type="form:FormField">
+    <name>StockBalanceDetailSourceOfOrigins</name>
+    <id>183</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.StockBalanceDetailSourceOfOrigins</segments>
+    </dataPath>
+    <extendedTooltip>
+     <name>StockBalanceDetailSourceOfOriginsExtendedTooltip</name>
+     <id>185</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>StockBalanceDetailSourceOfOriginsContextMenu</name>
+     <id>184</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>CheckBoxField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+     <checkBoxType>Switcher</checkBoxType>
+    </extInfo>
+   </items>
+   <items xsi:type="form:FormField">
+    <name>BatchBalanceDetailSourceOfOrigins</name>
+    <id>180</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.BatchBalanceDetailSourceOfOrigins</segments>
+    </dataPath>
+    <extendedTooltip>
+     <name>BatchBalanceDetailSourceOfOriginsExtendedTooltip</name>
+     <id>182</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>BatchBalanceDetailSourceOfOriginsContextMenu</name>
+     <id>181</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>CheckBoxField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+     <checkBoxType>Switcher</checkBoxType>
+    </extInfo>
+   </items>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <title>
+    <key>tr</key>
+    <value>Envanter menşeileri</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Источники происхождения</value>
+   </title>
+   <title>
+    <key>en</key>
+    <value>Source of origins</value>
+   </title>
+   <extendedTooltip>
+    <name>GroupSourceOfOriginsSettingsExtendedTooltip</name>
+    <id>179</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <type>UsualGroup</type>
+   <extInfo xsi:type="form:UsualGroupExtInfo">
+    <group>Vertical</group>
+    <behavior>Auto</behavior>
+    <representation>WeakSeparation</representation>
+    <showLeftMargin>true</showLeftMargin>
+    <united>true</united>
+    <showTitle>true</showTitle>
+    <throughAlign>Auto</throughAlign>
+    <currentRowUse>Auto</currentRowUse>
+   </extInfo>
+  </items>
   <visible>true</visible>
   <enabled>true</enabled>
   <userVisible>
    <common>true</common>
   </userVisible>
-  <dataPath xsi:type="form:DataPath">
-   <segments>Object.AlwaysAddNewRowAfterScan</segments>
-  </dataPath>
-  <toolTip>
+  <title>
    <key>tr</key>
-   <value>Taramadan sonra, ürün her zaman yeni bir satır olarak eklenecektir. Ancak, farklı yerlerde, örneğin serilere göre gruplandırılabilir.</value>
-  </toolTip>
-  <toolTip>
+   <value>Ayarlar</value>
+  </title>
+  <title>
    <key>ru</key>
-   <value>После сканирования товар всегда будет добавлен как новая строка. Однако в разных местах он все равно может быть сгруппирован, например, по серии.</value>
-  </toolTip>
-  <toolTip>
+   <value>Настройки</value>
+  </title>
+  <title>
    <key>en</key>
-   <value>After scanning, the product will always be added as a new line. However, in different places, it can still be grouped, for example, by series.</value>
-  </toolTip>
-  <toolTipRepresentation>Button</toolTipRepresentation>
-  <handlers>
-   <event>OnChange</event>
-   <name>AlwaysAddNewRowAfterScanOnChange</name>
-  </handlers>
+   <value>Settings</value>
+  </title>
   <extendedTooltip>
-   <name>AlwaysAddNewRowAfterScanExtendedTooltip</name>
-   <id>88</id>
+   <name>GrouSettingsExtendedTooltip</name>
+   <id>169</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
@@ -325,193 +818,16 @@
     <horizontalAlign>Left</horizontalAlign>
    </extInfo>
   </extendedTooltip>
-  <contextMenu>
-   <name>AlwaysAddNewRowAfterScanContextMenu</name>
-   <id>87</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <autoFill>true</autoFill>
-  </contextMenu>
-  <type>CheckBoxField</type>
-  <editMode>Enter</editMode>
-  <showInHeader>true</showInHeader>
-  <headerHorizontalAlign>Left</headerHorizontalAlign>
-  <showInFooter>true</showInFooter>
-  <extInfo xsi:type="form:CheckBoxFieldExtInfo">
-   <checkBoxType>Switcher</checkBoxType>
-  </extInfo>
- </items>
- <items xsi:type="form:FormField">
-  <name>NotUseLineGrouping</name>
-  <id>100</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
-  <dataPath xsi:type="form:DataPath">
-   <segments>Object.NotUseLineGrouping</segments>
-  </dataPath>
-  <toolTip>
-   <key>tr</key>
-   <value>Temel alınarak belgeler oluşturulurken, tarama yapılırken, yükleme yapılırken - ürün gruplanmayacak, kaynaktaki gibi aynı şekilde yüklenecek.</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>При создании документов на основании, при сканировании, при загрузке - товар не будет сгруппирован, но будет загружен таким же образом, как в источнике.</value>
-  </toolTip>
-  <toolTip>
-   <key>en</key>
-   <value>When creating documents based on, when scanning, when uploading - the product will not be grouped, but will be loaded the same way as in the source.</value>
-  </toolTip>
-  <toolTipRepresentation>Button</toolTipRepresentation>
-  <extendedTooltip>
-   <name>NotUseLineGroupingExtendedTooltip</name>
-   <id>102</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <type>Label</type>
-   <autoMaxWidth>true</autoMaxWidth>
-   <autoMaxHeight>true</autoMaxHeight>
-   <extInfo xsi:type="form:LabelDecorationExtInfo">
-    <horizontalAlign>Left</horizontalAlign>
-   </extInfo>
-  </extendedTooltip>
-  <contextMenu>
-   <name>NotUseLineGroupingContextMenu</name>
-   <id>101</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <autoFill>true</autoFill>
-  </contextMenu>
-  <type>CheckBoxField</type>
-  <editMode>Enter</editMode>
-  <showInHeader>true</showInHeader>
-  <headerHorizontalAlign>Left</headerHorizontalAlign>
-  <showInFooter>true</showInFooter>
-  <extInfo xsi:type="form:CheckBoxFieldExtInfo">
-   <checkBoxType>Switcher</checkBoxType>
-  </extInfo>
- </items>
- <items xsi:type="form:FormField">
-  <name>UseSerialLotNumber</name>
-  <id>48</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
-  <dataPath xsi:type="form:DataPath">
-   <segments>Object.UseSerialLotNumber</segments>
-  </dataPath>
-  <toolTip>
-   <key>tr</key>
-   <value>Seri numaralarına göre takibi etkinleştir. Bu durumda, ürün serileri tüm belgelerde belirtilmelidir. Bu seçenek, bu tür ürünlerle ilgili daha önce oluşturulmuş belgeler varsa değiştirilmemelidir.</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Включите отслеживание по серийным номерам. В этом случае серия товара должна быть указана во всех документах. Этот параметр не следует изменять, если ранее были созданы документы с участием товаров этого типа.</value>
-  </toolTip>
-  <toolTip>
-   <key>en</key>
-   <value>Enable tracking by serial numbers. In this case, the product series must be specified in all documents. This option should not be changed if there were previously created documents involving products of this type.</value>
-  </toolTip>
-  <toolTipRepresentation>Button</toolTipRepresentation>
-  <handlers>
-   <event>OnChange</event>
-   <name>UseSerialLotNumberOnChange</name>
-  </handlers>
-  <extendedTooltip>
-   <name>UseSerialLotNumberExtendedTooltip</name>
-   <id>50</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <type>Label</type>
-   <autoMaxWidth>true</autoMaxWidth>
-   <autoMaxHeight>true</autoMaxHeight>
-   <extInfo xsi:type="form:LabelDecorationExtInfo">
-    <horizontalAlign>Left</horizontalAlign>
-   </extInfo>
-  </extendedTooltip>
-  <contextMenu>
-   <name>UseSerialLotNumberContextMenu</name>
-   <id>49</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <autoFill>true</autoFill>
-  </contextMenu>
-  <type>CheckBoxField</type>
-  <editMode>Enter</editMode>
-  <showInHeader>true</showInHeader>
-  <headerHorizontalAlign>Left</headerHorizontalAlign>
-  <showInFooter>true</showInFooter>
-  <extInfo xsi:type="form:CheckBoxFieldExtInfo">
-   <checkBoxType>Switcher</checkBoxType>
-  </extInfo>
- </items>
- <items xsi:type="form:FormField">
-  <name>StockBalanceDetail</name>
-  <id>56</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
-  <dataPath xsi:type="form:DataPath">
-   <segments>Object.StockBalanceDetail</segments>
-  </dataPath>
-  <extendedTooltip>
-   <name>StockBalanceDetailExtendedTooltip</name>
-   <id>58</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <type>Label</type>
-   <autoMaxWidth>true</autoMaxWidth>
-   <autoMaxHeight>true</autoMaxHeight>
-   <extInfo xsi:type="form:LabelDecorationExtInfo">
-    <horizontalAlign>Left</horizontalAlign>
-   </extInfo>
-  </extendedTooltip>
-  <contextMenu>
-   <name>StockBalanceDetailContextMenu</name>
-   <id>57</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <autoFill>true</autoFill>
-  </contextMenu>
-  <type>InputField</type>
-  <editMode>Enter</editMode>
-  <showInHeader>true</showInHeader>
-  <headerHorizontalAlign>Left</headerHorizontalAlign>
-  <showInFooter>true</showInFooter>
-  <extInfo xsi:type="form:InputFieldExtInfo">
-   <autoMaxWidth>true</autoMaxWidth>
-   <autoMaxHeight>true</autoMaxHeight>
-   <wrap>true</wrap>
-   <chooseType>true</chooseType>
-   <typeDomainEnabled>true</typeDomainEnabled>
-   <textEdit>true</textEdit>
+  <type>UsualGroup</type>
+  <extInfo xsi:type="form:UsualGroupExtInfo">
+   <group>AlwaysHorizontal</group>
+   <behavior>Auto</behavior>
+   <representation>WeakSeparation</representation>
+   <showLeftMargin>true</showLeftMargin>
+   <united>true</united>
+   <showTitle>true</showTitle>
+   <throughAlign>Auto</throughAlign>
+   <currentRowUse>Auto</currentRowUse>
   </extInfo>
  </items>
  <items xsi:type="form:FormGroup">

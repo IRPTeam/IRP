@@ -25,7 +25,7 @@ Procedure FillCheckProcessing_Catalog_SerialLotNumbers(Cancel, Object) Export
 	If Object.BatchBalanceDetail <> Object.Ref.BatchBalanceDetail And RegIsFilled Then
 		ShowUserMessage(Cancel, Object, "BatchBalanceDetail");
 	EndIf;
-
+	
 	If Object.SerialLotNumberOwner <> Object.Ref.SerialLotNumberOwner And RegIsFilled Then
 		ShowUserMessage(Cancel, Object, "SerialLotNumberOwner");
 	EndIf;
@@ -38,13 +38,17 @@ Procedure FillCheckProcessing_Catalog_SourceOfOrigins(Cancel, Object) Export
 	
 	RegIsFilled = R9010B_SourceOfOriginStock_IsFilled(Object.Ref);
 	
-	If Object.SourceOfOriginOwner <> Object.Ref.SourceOfOriginOwner And RegIsFilled Then
-		ShowUserMessage(Cancel, Object, "SourceOfOriginOwner");
+	If Object.StockBalanceDetail <> Object.Ref.StockBalanceDetail And RegIsFilled Then
+		ShowUserMessage(Cancel, Object, "StockBalanceDetail");
 	EndIf;
 	
 	If Object.BatchBalanceDetail <> Object.Ref.BatchBalanceDetail And RegIsFilled Then
 		ShowUserMessage(Cancel, Object, "BatchBalanceDetail");
 	EndIf;
+	
+	If Object.SourceOfOriginOwner <> Object.Ref.SourceOfOriginOwner And RegIsFilled Then
+		ShowUserMessage(Cancel, Object, "SourceOfOriginOwner");
+	EndIf;	
 EndProcedure
 
 Procedure FillCheckProcessing_Catalog_ItemTypes(Cancel, Object) Export
@@ -54,7 +58,7 @@ Procedure FillCheckProcessing_Catalog_ItemTypes(Cancel, Object) Export
 	
 	If Object.Type = Object.Ref.Type 
 		And Object.UseSerialLotNumber = Object.Ref.UseSerialLotNumber
-		And Object.StockBalanceDetail = Object.Ref.StockBalanceDetail Then
+		And Object.StockBalanceDetailSerialLotNumber = Object.Ref.StockBalanceDetailSerialLotnumber Then
 		Return;
 	EndIf;
 	
@@ -68,8 +72,8 @@ Procedure FillCheckProcessing_Catalog_ItemTypes(Cancel, Object) Export
 		ShowUserMessage(Cancel, Object, "UseSerialLotNumber");
 	EndIf;
 
-	If Object.StockBalanceDetail <> Object.Ref.StockBalanceDetail And RegIsFilled Then
-		ShowUserMessage(Cancel, Object, "StockBalanceDetail");
+	If Object.StockBalanceDetailSerialLotNumber <> Object.Ref.StockBalanceDetailSerialLotNumber And RegIsFilled Then
+		ShowUserMessage(Cancel, Object, "StockBalanceDetailSerialLotNumber");
 	EndIf;
 EndProcedure
 
@@ -84,7 +88,7 @@ Procedure FillCheckProcessing_Catalog_Items(Cancel, Object) Export
 		
 		If NewItemType.Type <> OldItemType.Type 
 			Or NewItemType.UseSerialLotNumber <> OldItemType.UseSerialLotNumber 
-			Or NewItemType.StockBalanceDetail <> OldItemType.StockBalanceDetail Then
+			Or NewItemType.StockBalanceDetailSerialLotNumber <> OldItemType.StockBalanceDetailSerialLotNumber Then
 			
 			RegIsFilled_ItemType = R4010B_ActualStocs_R4050B_StockInventory_IsFilled(OldItemType);
 			If RegIsFilled_ItemType Then	  

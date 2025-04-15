@@ -41,4 +41,6 @@
  <content>Catalog.SourceOfOrigins</content>
  <content>AccumulationRegister.R9010B_SourceOfOriginStock</content>
  <content>Document.SalesReportToConsignor</content>
+ <content>Catalog.ItemTypes.Attribute.StockBalanceDetailSourceOfOrigins</content>
+ <content>Catalog.ItemTypes.Attribute.BatchBalanceDetailSourceOfOrigins</content>
 </mdclass:FunctionalOption>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="546f3e59-b605-4305-b1a0-77fea28c0c42">
+ <producedTypes>
+  <managerType typeId="55a9bbdb-5dc8-4666-af6b-222165af115d" valueTypeId="03586f61-4422-4139-af00-0a9148c9a629"/>
+  <valueManagerType typeId="23d8ca1d-32b8-4938-a4a8-d9c803d6b666" valueTypeId="f4329148-18d1-4193-ae1e-efd40bbe649a"/>
+  <valueKeyType typeId="77a8245d-ca8a-47c9-8a7d-65672f892f1d" valueTypeId="b1a5dd4d-511f-4330-8ae4-bccf352fe322"/>
+ </producedTypes>
+ <name>UseFinance</name>
+ <synonym>
+  <key>tr</key>
+  <value>Finans modülü kullan</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Use finance</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use finance</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

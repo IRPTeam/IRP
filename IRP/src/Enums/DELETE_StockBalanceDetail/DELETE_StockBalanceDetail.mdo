@@ -5,18 +5,18 @@
   <listType typeId="2d13ecdc-c3bb-4234-a0bb-bf2d8d75c527" valueTypeId="6aa19d63-e01f-47fc-bad2-5bb184147f39"/>
   <managerType typeId="3ce4ae9d-4d89-47f7-817c-76dd99ec9c72" valueTypeId="c6034fae-198c-4498-ac7b-59f680e1083f"/>
  </producedTypes>
- <name>StockBalanceDetail</name>
+ <name>DELETE_StockBalanceDetail</name>
  <synonym>
   <key>tr</key>
-  <value>Stok bakiye detayları</value>
+  <value>DELETE Stok bakiyesi ayrıntısını</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Вид учета товаров по складам</value>
+  <value>DELETE stock balance detail</value>
  </synonym>
  <synonym>
   <key>en</key>
-  <value>Stock balance detail</value>
+  <value>DELETE stock balance detail</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -24,7 +24,7 @@
   <name>ByItemKey</name>
   <synonym>
    <key>tr</key>
-   <value>Varyanta göre</value>
+   <value>Varyant bazlı</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -39,7 +39,7 @@
   <name>BySerialLotNumber</name>
   <synonym>
    <key>tr</key>
-   <value>Seri lot numarasına göre</value>
+   <value>Seri lot numara bazlı</value>
   </synonym>
   <synonym>
    <key>ru</key>

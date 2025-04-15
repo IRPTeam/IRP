@@ -302,7 +302,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Açılış tutarı</v8:content>
+					<v8:content>Açılış bakiyesi</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -3983,7 +3983,7 @@ WHERE
 					<dcsset:lwsTitle>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Açılış tutarı</v8:content>
+							<v8:content>Açılış bakiyesi</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>

@@ -1,7 +1,67 @@
 
 Procedure OnWrite_SystemAttributesOnWrite(Source, Cancel) Export
 	SetPrivilegedMode(True);
+		
+	ArrayOfAttributes = GetSystemAttributes(Source.Metadata().FullName());
 	
+	RecordSet = InformationRegisters.SystemAttributes.CreateRecordSet();
+	RecordSet.Filter.Object.Set(Source.Ref);
+	
+	For Each Attr In ArrayOfAttributes Do
+		Values = Documents[Source.Metadata().Name].GetSystemAttributeValues(Source, Attr);
+		
+		If Values = Undefined Then
+			Continue;
+		EndIf;
+		
+		ValueTable = New ValueTable();
+		ValueTable.Columns.Add("Value");
+		For Each Value In Values Do
+			ValueTable.Add().Value = Value;
+		EndDo;
+		ValueTable.GroupBy("Value");
+		
+		LineNumber = 1;
+		For Each TableRow In ValueTable Do
+			If Not ValueIsFilled(TableRow.Value) Then
+				Continue;
+			EndIf;
+			Record = RecordSet.Add();
+			Record.Object = Source.Ref;
+			Record.Property = Attr;
+			Record.Key = LineNumber;
+			Record.Value = TableRow.Value;
+			LineNumber = LineNumber + 1;
+		EndDo;
+
+	EndDo;
+	
+	RecordSet.AdditionalProperties.Insert("SystemRecord", True);
+	RecordSet.Write();
+EndProcedure
+
+Procedure OutputSystemAttributes(Form, PlaceInFront = "", ListName = "List") Export
+	ArrayOfSystemAttributes = GetSystemAttributes(Form[ListName].MainTable);
+	For Each Attr In ArrayOfSystemAttributes Do
+		AttrPresentation = String(Attr); 
+		If ValueIsFilled(PlaceInFront) Then
+			NewColumn = Form.Items.Insert(Attr.PredefinedDataName, Type("FormField"), Form.Items[ListName], Form.Items[PlaceInFront]);
+		Else
+			NewColumn = Form.Items.Add(Attr.PredefinedDataName, Type("FormField"), Form.Items[ListName]);
+		EndIf;
+		
+		If StrFind(AttrPresentation, " ") = 0 Then
+			NewColumn.DataPath = "List.Ref." + AttrPresentation;
+		Else
+			NewColumn.DataPath = "List.Ref.[" + AttrPresentation +"]";
+		EndIf;
+		
+		NewColumn.Title = AttrPresentation;
+		NewColumn.Visible = True;
+	EndDo;
+Endprocedure
+
+Function GetSystemAttributes(MetadataFullName)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -9,49 +69,23 @@ Procedure OnWrite_SystemAttributesOnWrite(Source, Cancel) Export
 	|FROM
 	|	Catalog.SystemAttributesSets AS SystemAttributesSets
 	|WHERE
-	|	SystemAttributesSets.PredefinedDataName = &PredefinedDataName";
-	Query.SetParameter("PredefinedDataName", StrReplace(Source.Metadata().FullName(), ".", "_"));
+	|	SystemAttributesSets.PredefinedDataName = &PredefinedDataName
+	|	AND NOT SystemAttributesSets.DeletionMark";
+	Query.SetParameter("PredefinedDataName", StrReplace(MetadataFullName, ".", "_"));
 	Try // temp
-	QueryResult = Query.Execute();
+		QueryResult = Query.Execute();
 	Except
-		Return;
+		Return New Array();
 	EndTry;
-	QuerySelection = QueryResult.Select();
+	QueryTable = QueryResult.Unload();
 	
-	RecordSet = InformationRegisters.SystemAttributes.CreateRecordSet();
-	RecordSet.Filter.Object.Set(Source.Ref);
+	ArrayOfAttributes = New Array();
 	
-	If QuerySelection.Next() Then
-		For Each Row In QuerySelection.Ref.Attributes Do
-			Values = Documents[Source.Metadata().Name].GetSystemAttributeValues(Source, Row.Attribute);
-			
-			If Values = Undefined Then
-				Continue;
-			EndIf;
-			
-			ValueTable = New ValueTable();
-			ValueTable.Columns.Add("Value");
-			For Each Value In Values Do
-				ValueTable.Add().Value = Value;
-			EndDo;
-			ValueTable.GroupBy("Value");
-			
-			LineNumber = 1;
-			For Each TableRow In ValueTable Do
-				If Not ValueIsFilled(TableRow.Value) Then
-					Continue;
-				EndIf;
-				Record = RecordSet.Add();
-				Record.Object = Source.Ref;
-				Record.Property = Row.Attribute;
-				Record.Key = LineNumber;
-				Record.Value = TableRow.Value;
-				LineNumber = LineNumber + 1;
-			EndDo;
-
+	If QueryTable.Count() = 1 Then
+		For Each Row In QueryTable[0].Ref.Attributes Do
+			ArrayOfAttributes.Add(Row.Attribute);
 		EndDo;
 	EndIf;
 	
-	RecordSet.AdditionalProperties.Insert("SystemRecord", True);
-	RecordSet.Write();
-EndProcedure
+	Return ArrayOfAttributes;
+EndFunction

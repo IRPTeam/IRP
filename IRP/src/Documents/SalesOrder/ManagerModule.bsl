@@ -682,12 +682,9 @@ EndFunction
 Function GetSystemAttributeValues(Obj, SystemAttribute) Export
 	Values = New Array();
 	If SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.Store Then
-		For Each Row In Obj.ItemList Do
-			Values.Add(Row.Store);
-		EndDo;
+		Values = Obj.ItemList.Unload(, "Store").UnloadColumn("Store");
 	EndIf;
 	Return Values;
 EndFunction
 
 #EndRegion
-

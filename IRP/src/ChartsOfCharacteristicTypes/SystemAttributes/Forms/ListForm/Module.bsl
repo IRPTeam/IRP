@@ -7,7 +7,8 @@ EndProcedure
 
 &AtClient
 Procedure FillDefaultDescriptions(Command)
-	FillDefaultDescriptionsAtServer()
+	FillDefaultDescriptionsAtServer();
+	ThisObject.Items.List.Refresh();
 EndProcedure
 
 &AtServer

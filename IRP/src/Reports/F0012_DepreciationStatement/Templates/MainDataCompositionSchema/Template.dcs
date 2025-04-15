@@ -32,29 +32,6 @@
 			</role>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>InventoryNumber</dataPath>
-			<field>InventoryNumber</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Inventory number</v8:content>
-				</v8:item>
-			</title>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">15</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Document</dataPath>
-			<field>Document</field>
-			<role>
-				<dcscom:dimension>true</dcscom:dimension>
-			</role>
-		</field>
-		<field xsi:type="DataSetFieldField">
 			<dataPath>Branch</dataPath>
 			<field>Branch</field>
 			<role>
@@ -73,22 +50,6 @@
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">15</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>DepreciationRate</dataPath>
-			<field>DepreciationRate</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Depreciation rate</v8:content>
-				</v8:item>
-			</title>
 			<appearance>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 					<dcscor:parameter>MinWidth</dcscor:parameter>
@@ -230,12 +191,90 @@
 			<dataPath>TransactionCurrency</dataPath>
 			<field>TransactionCurrency</field>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance</dataPath>
+			<field>OpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Opening balance</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Group</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">15</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance</dataPath>
+			<field>ClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Closing balance</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Group</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">15</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>InventoryNumber</dataPath>
+			<field>InventoryNumber</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Inventory number</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>DepreciationRate</dataPath>
+			<field>DepreciationRate</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Depreciation rate</v8:content>
+				</v8:item>
+			</title>
+		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT
-	T8515S_FixedAssetsLocationSliceLast.Company AS Company,
 	T8515S_FixedAssetsLocationSliceLast.FixedAsset AS FixedAsset,
 	T8515S_FixedAssetsLocationSliceLast.FixedAsset.InventoryNumber AS InventoryNumber,
-	T8510S_FixedAssetsInfo.Document AS Document,
 	T8515S_FixedAssetsLocationSliceLast.Branch AS Branch,
 	T8515S_FixedAssetsLocationSliceLast.ResponsiblePerson AS ResponsiblePerson,
 	T8515S_FixedAssetsLocationSliceLast.FixedAsset.Parent.DepreciationRate AS DepreciationRate,
@@ -245,7 +284,9 @@
 	T8510S_FixedAssetsInfo.Period AS CommissioningDate,
 	T8510S_FixedAssetsInfo.LedgerType AS LedgerType,
 	T8510S_FixedAssetsInfo.Schedule AS Schedule,
-	SUM(R8510B_BookValueOfFixedAssetTurnovers.AmountExpense) AS DepreciationAmount
+	R8510B_BookValueOfFixedAssetTurnovers.AmountOpeningBalance AS OpeningBalance,
+	R8510B_BookValueOfFixedAssetTurnovers.AmountExpense AS DepreciationAmount,
+	R8510B_BookValueOfFixedAssetTurnovers.AmountClosingBalance AS ClosingBalance
 FROM
 	InformationRegister.T8515S_FixedAssetsLocation.SliceLast({ENDOFPERIOD(&amp;EndDate, DAY)}, Company = &amp;Company) AS
 		T8515S_FixedAssetsLocationSliceLast
@@ -253,8 +294,8 @@ FROM
 		ON T8515S_FixedAssetsLocationSliceLast.FixedAsset = T8510S_FixedAssetsInfo.FixedAsset
 		AND (T8510S_FixedAssetsInfo.Document REFS Document.CommissioningOfFixedAsset
 		OR T8510S_FixedAssetsInfo.Document REFS Document.OpeningEntry)
-		LEFT JOIN AccumulationRegister.R8510B_BookValueOfFixedAsset.Turnovers({BEGINOFPERIOD(&amp;StartDate, DAY)},
-			{ENDOFPERIOD(&amp;EndDate, DAY)}, Record, Company = &amp;Company
+		LEFT JOIN AccumulationRegister.R8510B_BookValueOfFixedAsset.BalanceAndTurnovers({BEGINOFPERIOD(&amp;StartDate, DAY)},
+			{ENDOFPERIOD(&amp;EndDate, DAY)},,, Company = &amp;Company
 		AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
 			R8510B_BookValueOfFixedAssetTurnovers
 		ON R8510B_BookValueOfFixedAssetTurnovers.Company = T8510S_FixedAssetsInfo.Company
@@ -262,47 +303,8 @@ FROM
 		AND R8510B_BookValueOfFixedAssetTurnovers.Schedule = T8510S_FixedAssetsInfo.Schedule
 		AND R8510B_BookValueOfFixedAssetTurnovers.FixedAsset = T8510S_FixedAssetsInfo.FixedAsset
 WHERE
-	T8515S_FixedAssetsLocationSliceLast.IsActive
-GROUP BY
-	T8515S_FixedAssetsLocationSliceLast.Company,
-	T8515S_FixedAssetsLocationSliceLast.FixedAsset,
-	T8515S_FixedAssetsLocationSliceLast.FixedAsset.InventoryNumber,
-	T8510S_FixedAssetsInfo.Document,
-	T8515S_FixedAssetsLocationSliceLast.Branch,
-	T8515S_FixedAssetsLocationSliceLast.ResponsiblePerson,
-	T8515S_FixedAssetsLocationSliceLast.FixedAsset.Parent.DepreciationRate,
-	ISNULL(T8510S_FixedAssetsInfo.Amount, 0),
-	T8510S_FixedAssetsInfo.Document.Date,
-	T8510S_FixedAssetsInfo.Document.Number,
-	T8510S_FixedAssetsInfo.Period,
-	T8510S_FixedAssetsInfo.LedgerType,
-	T8510S_FixedAssetsInfo.Schedule</query>
+	T8515S_FixedAssetsLocationSliceLast.IsActive</query>
 	</dataSet>
-	<calculatedField>
-		<dataPath>BalanceAmount</dataPath>
-		<expression>InitialCost - DepreciationAmount</expression>
-		<title xsi:type="v8:LocalStringType">
-			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content>Balance amount</v8:content>
-			</v8:item>
-		</title>
-		<appearance>
-			<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-				<dcscor:parameter>MinWidth</dcscor:parameter>
-				<dcscor:value xsi:type="xs:decimal">15</dcscor:value>
-			</dcscor:item>
-			<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-				<dcscor:parameter>Format</dcscor:parameter>
-				<dcscor:value xsi:type="v8:LocalStringType">
-					<v8:item>
-						<v8:lang>en</v8:lang>
-						<v8:content>NFD=2</v8:content>
-					</v8:item>
-				</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</calculatedField>
 	<totalField>
 		<dataPath>InitialCost</dataPath>
 		<expression>Sum(InitialCost)</expression>
@@ -312,8 +314,12 @@ GROUP BY
 		<expression>Sum(DepreciationAmount)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>BalanceAmount</dataPath>
-		<expression>Sum(BalanceAmount)</expression>
+		<dataPath>OpeningBalance</dataPath>
+		<expression>Count(OpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance</dataPath>
+		<expression>Count(ClosingBalance)</expression>
 	</totalField>
 	<parameter>
 		<name>Company</name>
@@ -460,10 +466,13 @@ GROUP BY
 					<dcsset:field>InitialCost</dcsset:field>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>OpeningBalance</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
 					<dcsset:field>DepreciationAmount</dcsset:field>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
-					<dcsset:field>BalanceAmount</dcsset:field>
+					<dcsset:field>ClosingBalance</dcsset:field>
 				</dcsset:item>
 			</dcsset:selection>
 			<dcsset:dataParameters>

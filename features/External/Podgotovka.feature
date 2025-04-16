@@ -1524,6 +1524,11 @@ Scenario: set True value to the constant
 	* Disable LinkedRowsIntegrity
 		And I execute 1C:Enterprise script at server
 			| "Constants.DisableLinkedRowsIntegrity.Set(True);"     |
+	* Fill default settings for system attributes
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.SystemAttributes"	
+		And I click "Fill default descriptions" button
+		Given I open hyperlink "e1cib/list/Catalog.SystemAttributesSets"	
+		And I click "Fill by default" button
 
 		
 		
@@ -2198,3 +2203,4 @@ Scenario: Create information register UserSettings records (DisableAutomaticCrea
 		And I check or create information register "UserSettings" records:
 		| 'UserOrGroup'                                                   | 'MetadataObject'                                                                                  | 'AttributeName'                                           | 'KindOfAttribute'                          | 'Value' |
 		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Catalogs.AllCatalogs.AdditionalSettings.DisableAutomaticCreationOfCompanyAndAgreementForPartner' | 'DisableAutomaticCreationOfCompanyAndAgreementForPartner' | 'Enum.KindsOfAttributes.AdditionalSetting' | 'False' |
+

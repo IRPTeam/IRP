@@ -21,6 +21,7 @@ Scenario: 960000 preparation (access rights system documents)
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	When Create catalog Users and AccessProfiles objects (LimitedAccess)
+
 	* Create documents for tests
 		Given I open hyperlink "e1cib/app/DataProcessor.Unit_RunTest"
 		And I go to line in "TestList" table

@@ -337,6 +337,7 @@ Scenario: _0230004 create Sales order closing (different ItemKey)
 		And I delete "$$SalesOrderClosing0230004$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrderClosing0230004$$"
 		And I save the window as "$$SalesOrderClosing0230004$$"
+		And I click "Post" button
 	* Check
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"

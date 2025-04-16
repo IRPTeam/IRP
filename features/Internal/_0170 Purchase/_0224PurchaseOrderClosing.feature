@@ -327,7 +327,7 @@ Scenario: _0230004 create Purchase order closing (different ItemKey)
 		And I delete "$$PurchaseOrderClosing0230004$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrderClosing0230004$$"
 		And I save the window as "$$PurchaseOrderClosing0230004$$"
-		And I click "Post and close" button
+		And I click "Post" button
 	* Check
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the number of "ItemList" table lines is "равно" 0

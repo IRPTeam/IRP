@@ -52,6 +52,18 @@ Scenario: _0224000 preparation (Purchase order closing)
 		When Create document PO, GR, PI objects (for check closing)
 		When Create document PO, SO objects (for check double closing)
 		When Create document PO, GR, PI objects (for order closing)
+	* Repost
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Date'                |
+			| '10.04.2025 22:01:33' |
+		And I click the button named "FormPost"
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Date'                |
+			| '10.04.2025 22:06:27' |
+		And I click the button named "FormPost"
+
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Write);"     |
 			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);"   |
@@ -315,5 +327,12 @@ Scenario: _0230004 create Purchase order closing (different ItemKey)
 		And I delete "$$PurchaseOrderClosing0230004$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrderClosing0230004$$"
 		And I save the window as "$$PurchaseOrderClosing0230004$$"
-		And I click "Post and close" button	
-		And I close current test client session	
+		And I click "Post and close" button
+	* Check
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the number of "ItemList" table lines is "равно" 0
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "TransactionType" became equal to "Purchase"
+	And I close all client application windows

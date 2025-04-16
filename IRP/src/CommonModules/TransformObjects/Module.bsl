@@ -440,10 +440,11 @@ EndProcedure
 //  Source - CatalogObject, DocumentObject - Source object
 //  Wrapper - See BuilderAPI.Init
 //  Expression - String - Expression to evaluate
+//  Rule - CatalogRef.TransformationRules - Transformation rule
 // 
 // Returns:
 //  Arbitrary - Result of evaluation
-Function EvaluateExpression(Source, Wrapper, Expression)
+Function EvaluateExpression(Source, Wrapper, Expression, Rule)
 	SetSafeMode(True);
 	Return Eval(Expression);
 EndFunction
@@ -482,7 +483,7 @@ Procedure FillHeaderAttributes(Source, Rule, Wrapper)
 				BuilderAPI.SetProperty(Wrapper, AttrRule.TargetAttribute, AttrRule.DefaultValue);
 			ElsIf Not IsBlankString(AttrRule.EvalTargetAttribute) Then
 				BuilderAPI.SetProperty(Wrapper, AttrRule.TargetAttribute, 
-					EvaluateExpression(Source, Wrapper, AttrRule.EvalTargetAttribute));
+					EvaluateExpression(Source, Wrapper, AttrRule.EvalTargetAttribute, AttrRule.LinkedByRule));
 			ElsIf Not AttrRule.LinkedByRule.IsEmpty() Then		
 				//@skip-check invocation-parameter-type-intersect, bsl-legacy-check-static-feature-access
 				LinkedTarget = GetLinkedTargetRefByRule(Source[AttrRule.SourceAttribute], AttrRule.LinkedByRule);
@@ -704,3 +705,36 @@ Procedure LogError(Message, ErrorInfo)
 EndProcedure
 
 #EndRegion
+
+// Gets linked target objects.
+// 
+// Parameters:
+//  Source - AnyRef - Source object reference
+//  RuleCode - Number - 
+// 
+// Returns:
+//  AnyRef
+Function Linked(Source, RuleCode) Export
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	TranformedObjectsLink.Source,
+		|	TranformedObjectsLink.Target,
+		|	TranformedObjectsLink.TransformationRule
+		|FROM
+		|	InformationRegister.TranformedObjectsLink AS TranformedObjectsLink
+		|WHERE
+		|	TranformedObjectsLink.Source = &Source
+		|	AND TranformedObjectsLink.TransformationRule.Code = &RuleCode";
+	
+	Query.SetParameter("Source", Source);
+	Query.SetParameter("RuleCode", RuleCode);
+	
+	Result = Query.Execute().Select();
+	If Result.Next() Then
+		//@skip-check property-return-type
+		Return Result.Target;
+	EndIf;
+	
+	Return Undefined;
+EndFunction

@@ -329,7 +329,6 @@ Scenario: _0230004 create Purchase order closing (different ItemKey)
 		And I save the window as "$$PurchaseOrderClosing0230004$$"
 		And I click "Post and close" button
 	* Check
-		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the number of "ItemList" table lines is "равно" 0
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"

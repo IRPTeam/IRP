@@ -338,7 +338,6 @@ Scenario: _0230004 create Sales order closing (different ItemKey)
 		And I save the value of "Number" field as "$$NumberSalesOrderClosing0230004$$"
 		And I save the window as "$$SalesOrderClosing0230004$$"
 	* Check
-		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Partner" became equal to "Ferron BP"

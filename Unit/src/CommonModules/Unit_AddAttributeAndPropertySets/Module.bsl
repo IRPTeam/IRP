@@ -74,6 +74,7 @@ Function GetExclude_AddAttributes()
 	ArrayOfExcluded.Add("Catalog.NumeratorBasicRules");
 	ArrayOfExcluded.Add("Catalog.NumeratorGroups");
 	ArrayOfExcluded.Add("Catalog.PrintFormTemplates");
+	ArrayOfExcluded.Add("Catalog.SystemAttributesSets");
 
 	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");
 	ArrayOfExcluded.Add("Document.AdditionalRevenueAllocation");

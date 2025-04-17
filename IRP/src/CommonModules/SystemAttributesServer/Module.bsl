@@ -61,7 +61,7 @@ Procedure OutputSystemAttributes(Form, PlaceInFront = "", ListName = "List") Exp
 	EndDo;
 Endprocedure
 
-Function GetSystemAttributes(MetadataFullName)
+Function GetSystemAttributes(MetadataFullName) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT

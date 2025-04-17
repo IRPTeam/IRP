@@ -689,7 +689,8 @@ Function R5021T_Revenues()
 		|	PaymentList.Currency,
 		|	PaymentList.AdditionalAnalytic,
 		|	PaymentList.TaxDiscountAmount AS Amount,
-		|	PaymentList.TaxDiscountAmount AS AmountWithTaxes
+		|	PaymentList.TaxDiscountAmount AS AmountWithTaxes,
+		|	Undefined AS ItemKey
 		|INTO R5021T_Revenues
 		|FROM
 		|	PaymentList AS PaymentList

@@ -3922,6 +3922,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Result.Insert("Tax"                      , Options.Tax);
 	Result.Insert("TaxDiscountAmount"        , Options.TaxDiscountAmount);
 	Result.Insert("RevenueType"              , Options.RevenueType);
+	Result.Insert("ProfitLossCenter"         , Options.ProfitLossCenter);
 
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");

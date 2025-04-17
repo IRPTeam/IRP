@@ -3495,9 +3495,7 @@ Function GetBindingStructure_Partner(Parameters)
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 		
-	Result.Binding.Insert("Payroll",
-		"StepChangeAgreementByPartner_AgreementTypeIsOther,
-		|StepChangeLegalNameByPartner");
+	Result.Binding.Insert("Payroll", "StepChangeLegalNameByPartner");
 	
 	Result.Binding.Insert("TaxesOperation",
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,

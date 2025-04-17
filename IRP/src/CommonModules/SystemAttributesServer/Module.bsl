@@ -1,5 +1,13 @@
 
 Procedure OnWrite_SystemAttributesOnWrite(Source, Cancel) Export
+	If CommonFunctionsClientServer.ObjectHasProperty(Source, "AdditionalProperties") Then
+		UpdateSystemAttributes = 
+			CommonFunctionsClientServer.GetFromAddInfo(Source.AdditionalProperties, "UpdateSystemAttributes", True);
+		If Not UpdateSystemAttributes Then
+			Return;
+		EndIf;
+	EndIf;
+	
 	SetPrivilegedMode(True);
 		
 	ArrayOfAttributes = GetSystemAttributes(Source.Metadata().FullName());

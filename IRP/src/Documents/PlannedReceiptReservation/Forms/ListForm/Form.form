@@ -668,6 +668,7 @@
 	PlannedReceiptReservation.Posted,
 	PlannedReceiptReservation.Company,
 	PlannedReceiptReservation.Requester,
+	PlannedReceiptReservation.Comment,
 	PlannedReceiptReservation.Store AS StoreIncoming
 FROM
 	Document.PlannedReceiptReservation AS PlannedReceiptReservation</queryText>
@@ -718,6 +719,10 @@ FROM
         </title>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Comment</dataPath>
+        <field>Comment</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Store</dataPath>
         <field>Store</field>
       </fields>
@@ -738,44 +743,40 @@ FROM
         <field>PointInTime</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Branch</dataPath>
+        <field>Branch</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>ManualMovementsEdit</dataPath>
         <field>ManualMovementsEdit</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Editor</dataPath>
-        <field>Editor</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>SourceNodeID</dataPath>
-        <field>SourceNodeID</field>
+        <dataPath>DocumentNumber</dataPath>
+        <field>DocumentNumber</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>NumeratorRules</dataPath>
         <field>NumeratorRules</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Comment</dataPath>
-        <field>Comment</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Branch</dataPath>
-        <field>Branch</field>
+        <dataPath>Editor</dataPath>
+        <field>Editor</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Author</dataPath>
         <field>Author</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ModifyDate</dataPath>
-        <field>ModifyDate</field>
+        <dataPath>SourceNodeID</dataPath>
+        <field>SourceNodeID</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>UniqueID</dataPath>
         <field>UniqueID</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>DocumentNumber</dataPath>
-        <field>DocumentNumber</field>
+        <dataPath>ModifyDate</dataPath>
+        <field>ModifyDate</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>CreateDate</dataPath>

@@ -228,7 +228,7 @@
     <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   </attributes>
   <attributes uuid="3d7d97bd-63ac-428a-a46b-8a8c99fc07b3">
-    <name>Agreement</name>
+    <name>DELETE_Agreement</name>
     <synonym>
       <key>en</key>
       <value>Partner term</value>
@@ -1033,6 +1033,34 @@
       </synonym>
       <type>
         <types>CatalogRef.SalaryCalculationType</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a055139e-3466-42ad-8f5d-464bcb8116a5">
+      <name>Agreement</name>
+      <synonym>
+        <key>en</key>
+        <value>Partner term</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Agreements</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6101e6a6-c30f-467c-a331-60d15a488869">
+      <name>TakeAccountFromTaxes</name>
+      <synonym>
+        <key>en</key>
+        <value>Take account from taxes</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

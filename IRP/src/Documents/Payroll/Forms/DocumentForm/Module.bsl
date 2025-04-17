@@ -158,7 +158,6 @@ EndProcedure
 	
 #EndRegion
 
-
 #Region PARTNER
 
 &AtClient
@@ -197,25 +196,6 @@ EndProcedure
 
 #EndRegion
 
-#Region AGREEMENT
-
-&AtClient
-Procedure AgreementOnChange(Item)
-	DocPayrollClient.AgreementOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPayrollClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
-	DocPayrollClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
 #Region SALARY_TAX_LIST
 
 &AtClient
@@ -236,6 +216,21 @@ EndProcedure
 &AtClient
 Procedure SalaryTaxListAfterDeleteRow(Item)
 	DocPayrollClient.PayrollListsAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListAgreementOnChange(Item)
+	DocPayrollClient.SalaryTaxListAgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPayrollClient.SalaryTaxListAgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListAgreementEditTextChange(Item, Text, StandardProcessing)
+	DocPayrollClient.SalaryTaxListAgreementEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

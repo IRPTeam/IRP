@@ -210,6 +210,13 @@
           <value>93</value>
         </code>
       </content>
+      <content id="80212b76-adc0-441a-99b2-9d96f5f337a6">
+        <name>BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>166</value>
+        </code>
+      </content>
     </items>
     <items id="e1dd6187-4d04-4b2a-8c5b-f6ca00ed7cc6">
       <name>Document_BankReceipt</name>
@@ -556,6 +563,13 @@
         <name>CashPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand</name>
         <code xsi:type="core:NumberValue">
           <value>94</value>
+        </code>
+      </content>
+      <content id="30db4c4c-e21f-476f-8464-3d27efc5f3da">
+        <name>CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>167</value>
         </code>
       </content>
     </items>

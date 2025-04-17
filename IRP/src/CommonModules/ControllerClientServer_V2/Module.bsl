@@ -1778,6 +1778,9 @@ Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("ExpenseType"              , BindPaymentListExpenseType(Parameters));
 	ResourceToBinding.Insert("ProfitLossCenter"         , BindPaymentListProfitLossCenter(Parameters));
 	ResourceToBinding.Insert("AdditionalAnalytic"       , BindPaymentListAdditionalAnalytic(Parameters));
+	ResourceToBinding.Insert("Tax"                      , BindPaymentListTax(Parameters));
+	ResourceToBinding.Insert("TaxDiscountAmount"        , BindPaymentListTaxDiscountAmount(Parameters));
+	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
 		
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
@@ -1834,6 +1837,11 @@ Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("ReceiptingAccount"        , BindPaymentListReceiptingAccount(Parameters));
 	ResourceToBinding.Insert("ReceiptingBranch"         , BindPaymentListReceiptingBranch(Parameters));
 	ResourceToBinding.Insert("Project"                  , BindPaymentListProject(Parameters));
+	ResourceToBinding.Insert("AdditionalAnalytic"       , BindPaymentListAdditionalAnalytic(Parameters));
+	ResourceToBinding.Insert("Tax"                      , BindPaymentListTax(Parameters));
+	ResourceToBinding.Insert("TaxDiscountAmount"        , BindPaymentListTaxDiscountAmount(Parameters));
+	ResourceToBinding.Insert("ProfitLossCenter"         , BindPaymentListProfitLossCenter(Parameters));
+	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1924,6 +1932,9 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.ExpenseType              = GetPaymentListExpenseType(Parameters, Row.Key);
 		Options.ProfitLossCenter         = GetPaymentListProfitLossCenter(Parameters, Row.Key);
 		Options.AdditionalAnalytic       = GetPaymentListAdditionalAnalytic(Parameters, Row.Key);
+		Options.Tax                      = GetPaymentListTax(Parameters, Row.Key);
+		Options.TaxDiscountAmount        = GetPaymentListTaxDiscountAmount(Parameters, Row.Key);
+		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
 		
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankPayment";
@@ -2000,6 +2011,11 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.ReceiptingAccount        = GetPaymentListReceiptingAccount(Parameters, Row.Key);
 		Options.ReceiptingBranch         = GetPaymentListReceiptingBranch(Parameters, Row.Key);
 		Options.Project                  = GetPaymentListProject(Parameters, Row.Key);
+		Options.AdditionalAnalytic       = GetPaymentListAdditionalAnalytic(Parameters, Row.Key);
+		Options.Tax                      = GetPaymentListTax(Parameters, Row.Key);
+		Options.TaxDiscountAmount        = GetPaymentListTaxDiscountAmount(Parameters, Row.Key);
+		Options.ProfitLossCenter         = GetPaymentListProfitLossCenter(Parameters, Row.Key);
+		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashPayment";
 		Chain.ClearByTransactionTypeCashPayment.Options.Add(Options);
@@ -5450,10 +5466,6 @@ Function GetBindingStructure_Agreement(Parameters)
 		|StepItemListChangeTradeAgentFeePercentByAgreement,
 		|StepChangeTradeAgentFeeTypeByAgreement");
 	
-	Result.Binding.Insert("Payroll",
-		"StepChangeCompanyByAgreement,
-		|StepChangeCurrencyByAgreement");
-	
 	Result.Binding.Insert("TaxesOperation",
 		"StepChangeCompanyByAgreement,
 		|StepChangeCurrencyByAgreement");
@@ -8800,6 +8812,50 @@ Function BindPaymentListFinancialMovementTypeOtherCompany(Parameters)
 	DataPath = "PaymentList.FinancialMovementTypeOtherCompany";
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListFinancialMovementTypeOtherCompany");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_TAX
+
+// PaymentList.Tax.Set
+Procedure SetPaymentListTax(Parameters, Results) Export
+	Binding = BindPaymentListTax(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.Tax.Get
+Function GetPaymentListTax(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListTax(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.Tax.Bind
+Function BindPaymentListTax(Parameters)
+	DataPath = "PaymentList.Tax";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListTax");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_TAX_DISCOUNT_AMOUNT
+
+// PaymentList.TaxDiscountAmount.Set
+Procedure SetPaymentListTaxDiscountAmount(Parameters, Results) Export
+	Binding = BindPaymentListTaxDiscountAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.TaxDiscountAmount.Get
+Function GetPaymentListTaxDiscountAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListTaxDiscountAmount(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.TaxDiscountAmount.Bind
+Function BindPaymentListTaxDiscountAmount(Parameters)
+	DataPath = "PaymentList.TaxDiscountAmount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListTaxDiscountAmount");
 EndFunction
 
 #EndRegion

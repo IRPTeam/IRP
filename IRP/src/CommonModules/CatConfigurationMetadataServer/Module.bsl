@@ -52,8 +52,15 @@ Procedure RefillMetadata() Export
 	RefillDocuments();
 EndProcedure
 
+// Get configuration metadata item by object.
+// 
+// Parameters:
+//  Object - CatalogObjectCatalogName, DocumentObjectDocumentName - Object
+// 
+// Returns:
+//  CatalogRef.ConfigurationMetadata
 Function GetConfigurationMetadataItemByObject(Object) Export
-	Return GetConfigurationMetadataItemByFullName(Object.Metadata().FullName);
+	Return GetConfigurationMetadataItemByFullName(Object.Ref.Metadata().FullName());
 EndFunction
 
 Function GetConfigurationMetadataItemByFullName(ObjectFullName) Export
@@ -77,6 +84,19 @@ Function GetConfigurationMetadataItemByFullName(ObjectFullName) Export
 	Return ReturnValue;
 EndFunction
 
+// Get metadata by configuration metadata.
+// 
+// Parameters:
+//  Ref - CatalogRef.ConfigurationMetadata - Ref
+// 
+// Returns:
+//  MetadataObject
+Function GetMetadataByConfigurationMetadata(Ref) Export
+
+	Return Metadata.FindByFullName(Ref.ObjectFullName);
+	
+EndFunction
+
 #EndRegion
 
 #Region Private
@@ -84,10 +104,9 @@ EndFunction
 Procedure RefillCatalogs()
 	MetadataObjectNames = New ValueTable();
 	MetadataObjectNames.Columns.Add("ObjectName", Metadata.Catalogs.ConfigurationMetadata.Attributes["ObjectName"].Type);
-	MetadataObjectNames.Columns.Add("ObjectFullName",
-		Metadata.Catalogs.ConfigurationMetadata.Attributes["ObjectFullName"].Type);
-	MetadataObjectNames.Columns.Add("ObjectFullSynonym",
-		Metadata.Catalogs.ConfigurationMetadata.Attributes["ObjectFullName"].Type);
+	MetadataObjectNames.Columns.Add("ObjectFullName", Metadata.Catalogs.ConfigurationMetadata.Attributes["ObjectFullName"].Type);
+	MetadataObjectNames.Columns.Add("ObjectFullSynonym", Metadata.Catalogs.ConfigurationMetadata.Attributes["ObjectFullName"].Type);
+		
 	For Each MetadataObject In Metadata.Catalogs Do
 		NewRow = MetadataObjectNames.Add();
 		NewRow.ObjectName = MetadataObject.Name;

@@ -59,9 +59,9 @@ Procedure OutputSystemAttributes(Form, PlaceInFront = "", ListName = "List") Exp
 		EndIf;
 		
 		If StrFind(AttrPresentation, " ") = 0 Then
-			NewColumn.DataPath = "List.Ref." + AttrPresentation;
+			NewColumn.DataPath = ListName + ".Ref." + AttrPresentation;
 		Else
-			NewColumn.DataPath = "List.Ref.[" + AttrPresentation +"]";
+			NewColumn.DataPath = ListName + ".Ref.[" + AttrPresentation +"]";
 		EndIf;
 		
 		NewColumn.Title = AttrPresentation;
@@ -73,19 +73,14 @@ Function GetSystemAttributes(MetadataFullName) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	SystemAttributesSets.Ref
+	|	SystemAttributesSets.Ref.Attributes AS Attributes
 	|FROM
 	|	Catalog.SystemAttributesSets AS SystemAttributesSets
 	|WHERE
 	|	SystemAttributesSets.PredefinedDataName = &PredefinedDataName
 	|	AND NOT SystemAttributesSets.DeletionMark";
 	Query.SetParameter("PredefinedDataName", StrReplace(MetadataFullName, ".", "_"));
-	Try // temp
-		QueryResult = Query.Execute();
-	Except
-		Return New Array();
-	EndTry;
-	QueryTable = QueryResult.Unload();
+	QueryTable = Query.Execute().Unload();
 	
 	ArrayOfAttributes = New Array();
 	

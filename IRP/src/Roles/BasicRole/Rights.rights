@@ -1980,6 +1980,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.SystemAttributesSets</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonAttribute.ID</name>
 		<right>
 			<name>View</name>
@@ -2163,6 +2170,13 @@
 		<name>CommonForm.EditStores</name>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.SystemAttributes</name>
+		<right>
+			<name>Read</name>
 			<value>true</value>
 		</right>
 	</object>

@@ -598,6 +598,8 @@
   <commonModules>CommonModule.DocDecommissioningOfFixedAssetServer</commonModules>
   <commonModules>CommonModule.DocDepreciationCalculationClient</commonModules>
   <commonModules>CommonModule.DocDepreciationCalculationServer</commonModules>
+  <commonModules>CommonModule.DocELedgerRegistryClient</commonModules>
+  <commonModules>CommonModule.DocELedgerRegistryServer</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceClient</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceServer</commonModules>
   <commonModules>CommonModule.DocEmployeeFiringClient</commonModules>
@@ -698,10 +700,14 @@
   <commonModules>CommonModule.DocSalesReturnServer</commonModules>
   <commonModules>CommonModule.DocShipmentConfirmationClient</commonModules>
   <commonModules>CommonModule.DocShipmentConfirmationServer</commonModules>
+  <commonModules>CommonModule.DocShipmentPlaningOrderClient</commonModules>
+  <commonModules>CommonModule.DocShipmentPlaningOrderServer</commonModules>
   <commonModules>CommonModule.DocStockAdjustmentAsSurplusClient</commonModules>
   <commonModules>CommonModule.DocStockAdjustmentAsSurplusServer</commonModules>
   <commonModules>CommonModule.DocStockAdjustmentAsWriteOffClient</commonModules>
   <commonModules>CommonModule.DocStockAdjustmentAsWriteOffServer</commonModules>
+  <commonModules>CommonModule.DocStockCorrectionClient</commonModules>
+  <commonModules>CommonModule.DocStockCorrectionServer</commonModules>
   <commonModules>CommonModule.DocTaxesOperationClient</commonModules>
   <commonModules>CommonModule.DocTaxesOperationServer</commonModules>
   <commonModules>CommonModule.DocTimeSheetClient</commonModules>
@@ -715,6 +721,8 @@
   <commonModules>CommonModule.DocUnbundlingServer</commonModules>
   <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
   <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
+  <commonModules>CommonModule.DocWithholdingTaxInvoiceClient</commonModules>
+  <commonModules>CommonModule.DocWithholdingTaxInvoiceServer</commonModules>
   <commonModules>CommonModule.DocWorkOrderClient</commonModules>
   <commonModules>CommonModule.DocWorkOrderClosingClient</commonModules>
   <commonModules>CommonModule.DocWorkOrderClosingServer</commonModules>
@@ -778,6 +786,8 @@
   <commonModules>CommonModule.ModelClientServer_V2</commonModules>
   <commonModules>CommonModule.ModelServer_V2</commonModules>
   <commonModules>CommonModule.MoneyDocumentsServer</commonModules>
+  <commonModules>CommonModule.NumberingRulesClientServer</commonModules>
+  <commonModules>CommonModule.NumberingRulesServer</commonModules>
   <commonModules>CommonModule.ObjectAccessFullAccess</commonModules>
   <commonModules>CommonModule.ObjectStatusesClient</commonModules>
   <commonModules>CommonModule.ObjectStatusesServer</commonModules>
@@ -829,16 +839,7 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.DocELedgerRegistryClient</commonModules>
-  <commonModules>CommonModule.DocELedgerRegistryServer</commonModules>
-  <commonModules>CommonModule.DocStockCorrectionClient</commonModules>
-  <commonModules>CommonModule.DocStockCorrectionServer</commonModules>
-  <commonModules>CommonModule.NumberingRulesServer</commonModules>
-  <commonModules>CommonModule.NumberingRulesClientServer</commonModules>
-  <commonModules>CommonModule.DocShipmentPlaningOrderClient</commonModules>
-  <commonModules>CommonModule.DocShipmentPlaningOrderServer</commonModules>
-  <commonModules>CommonModule.DocWithholdingTaxInvoiceClient</commonModules>
-  <commonModules>CommonModule.DocWithholdingTaxInvoiceServer</commonModules>
+  <commonModules>CommonModule.TransformObjects</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -872,38 +873,41 @@
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>
-  <eventSubscriptions>EventSubscription.FillCheckProcessing_AdditionalTableControlDocument</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_AuditLock</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_CatalogObjectTransformation</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_Catalogs_CommonDataFilling</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CatalogsLockDataModification</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_CheckFillingRowKey</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_DescriptionsCheckFilling</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_DocumentObjectTransformation</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_Documents_CommonDataFilling</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_DocumentsLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_InformationRegistersLockDataModification</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_ObjectAccessDocument</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_RefreshReusableValues</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_RegistersClearData</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_SetNewCatalogNumber</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_SetNewDocumentNumber</eventSubscriptions>
   <eventSubscriptions>EventSubscription.ChoiceDataGetProcessing_FindDataForInputString</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.FillCheckProcessing_AdditionalTableControlDocument</eventSubscriptions>
   <eventSubscriptions>EventSubscription.FillCheckProcessing_DescriptionCheckFilling</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.Filling_CatalogsWithDefaultData</eventSubscriptions>
   <eventSubscriptions>EventSubscription.Filling_DocumentsWithDefaultData</eventSubscriptions>
   <eventSubscriptions>EventSubscription.FormGetProcessing_OpenMobileForm</eventSubscriptions>
   <eventSubscriptions>EventSubscription.OnCopy_AddAttributes</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopy_CatalogProcessing</eventSubscriptions>
   <eventSubscriptions>EventSubscription.OnCopy_ClearDocumentBasises</eventSubscriptions>
   <eventSubscriptions>EventSubscription.OnCopy_DocumentProcessing</eventSubscriptions>
   <eventSubscriptions>EventSubscription.OnCopy_RemoveUniqueID</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnWrite_ObjectTransformation</eventSubscriptions>
   <eventSubscriptions>EventSubscription.OnWrite_UpdateUsersRoleOnWrite</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetCatalogPresentationFields</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_ObjectAccessDocument</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_CheckFillingRowKey</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_Catalogs_CommonDataFilling</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_Documents_CommonDataFilling</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.Filling_CatalogsWithDefaultData</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_AuditLock</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_RegistersClearData</eventSubscriptions>
   <eventSubscriptions>EventSubscription.Posting_DocumentsRegistry</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetCatalogPresentationFields</eventSubscriptions>
   <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetDocumentPresentationFields</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
   <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetDocumentPresentation</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_SetNewDocumentNumber</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.BeforeWrite_SetNewCatalogNumber</eventSubscriptions>
-  <eventSubscriptions>EventSubscription.OnCopy_CatalogProcessing</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
@@ -966,6 +970,7 @@
   <functionalOptions>FunctionalOption.UseNumberingRules</functionalOptions>
   <functionalOptions>FunctionalOption.UseShipmentAndReceiptPlaningOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
+  <functionalOptions>FunctionalOption.UseObjectTransformation</functionalOptions>
   <functionalOptions>FunctionalOption.UsePurchase</functionalOptions>
   <functionalOptions>FunctionalOption.UseSales</functionalOptions>
   <functionalOptions>FunctionalOption.UseFinance</functionalOptions>
@@ -1032,6 +1037,7 @@
   <constants>Constant.DefaultSMSProvider</constants>
   <constants>Constant.DisableLinkedRowsIntegrity</constants>
   <constants>Constant.MaximumServerDifficultLevel</constants>
+  <constants>Constant.MaxUploadFileSize</constants>
   <constants>Constant.SaasMode</constants>
   <constants>Constant.UseAccounting</constants>
   <constants>Constant.UseAccountingService</constants>
@@ -1050,6 +1056,7 @@
   <constants>Constant.UseConsolidatedRetailSales</constants>
   <constants>Constant.UseContactInformation</constants>
   <constants>Constant.UseDeliveryDate</constants>
+  <constants>Constant.UseELedger</constants>
   <constants>Constant.UseEquipments</constants>
   <constants>Constant.UseExpenseAndRevenueTypes</constants>
   <constants>Constant.UseFixedAssets</constants>
@@ -1059,14 +1066,15 @@
   <constants>Constant.UseJobQueueForExternalFunctions</constants>
   <constants>Constant.UseLandedCost</constants>
   <constants>Constant.UseLegalName</constants>
-  <constants>Constant.MaxUploadFileSize</constants>
   <constants>Constant.UseLegalNameContract</constants>
   <constants>Constant.UseLockDataModification</constants>
   <constants>Constant.UseManagersAndSalesPersons</constants>
   <constants>Constant.UseManufacturing</constants>
   <constants>Constant.UseMessaging</constants>
   <constants>Constant.UseMobile</constants>
+  <constants>Constant.UseNumberingRules</constants>
   <constants>Constant.UseObjectAccess</constants>
+  <constants>Constant.UseObjectTransformation</constants>
   <constants>Constant.UseOrders</constants>
   <constants>Constant.UsePartnerItems</constants>
   <constants>Constant.UsePartnersHierarchy</constants>
@@ -1078,18 +1086,16 @@
   <constants>Constant.UseRetailOrders</constants>
   <constants>Constant.UseSalary</constants>
   <constants>Constant.UseSerialLotNumbers</constants>
+  <constants>Constant.UseShipmentAndReceiptPlaningOrders</constants>
   <constants>Constant.UseShipmentConfirmationAndGoodsReceipts</constants>
   <constants>Constant.UseSimpleMode</constants>
   <constants>Constant.UseSourceOfOrigin</constants>
   <constants>Constant.UseSpecialOffers</constants>
   <constants>Constant.UseStores</constants>
   <constants>Constant.UseUnitsAndDimensions</constants>
-  <constants>Constant.UseWorkOrders</constants>
-  <constants>Constant.UseELedger</constants>
   <constants>Constant.UseVariableItemKey</constants>
-  <constants>Constant.UseNumberingRules</constants>
-  <constants>Constant.UseShipmentAndReceiptPlaningOrders</constants>
   <constants>Constant.UseVariableStore</constants>
+  <constants>Constant.UseWorkOrders</constants>
   <constants>Constant.UsePurchase</constants>
   <constants>Constant.UseSales</constants>
   <constants>Constant.UseFinance</constants>
@@ -1174,7 +1180,6 @@
   <catalogs>Catalog.EquipmentDrivers</catalogs>
   <catalogs>Catalog.ExpenseAndRevenueTypes</catalogs>
   <catalogs>Catalog.ExtDimensions</catalogs>
-  <catalogs>Catalog.TaxExemptionReasons</catalogs>
   <catalogs>Catalog.Extensions</catalogs>
   <catalogs>Catalog.ExternalDataProc</catalogs>
   <catalogs>Catalog.ExternalFunctions</catalogs>
@@ -1198,10 +1203,12 @@
   <catalogs>Catalog.LedgerTypes</catalogs>
   <catalogs>Catalog.LedgerTypeVariants</catalogs>
   <catalogs>Catalog.LegalNameContracts</catalogs>
-  <catalogs>Catalog.ObjectLocations</catalogs>
   <catalogs>Catalog.LockDataModificationReasons</catalogs>
   <catalogs>Catalog.MovementRules</catalogs>
+  <catalogs>Catalog.NumeratorBasicRules</catalogs>
+  <catalogs>Catalog.NumeratorGroups</catalogs>
   <catalogs>Catalog.ObjectAccessKeys</catalogs>
+  <catalogs>Catalog.ObjectLocations</catalogs>
   <catalogs>Catalog.ObjectStatuses</catalogs>
   <catalogs>Catalog.PartnerItems</catalogs>
   <catalogs>Catalog.Partners</catalogs>
@@ -1213,6 +1220,7 @@
   <catalogs>Catalog.PlanningPeriods</catalogs>
   <catalogs>Catalog.PriceKeys</catalogs>
   <catalogs>Catalog.PriceTypes</catalogs>
+  <catalogs>Catalog.PrintFormTemplates</catalogs>
   <catalogs>Catalog.PrintInfo</catalogs>
   <catalogs>Catalog.PrintTemplates</catalogs>
   <catalogs>Catalog.Projects</catalogs>
@@ -1229,7 +1237,9 @@
   <catalogs>Catalog.Stores</catalogs>
   <catalogs>Catalog.TaxAnalytics</catalogs>
   <catalogs>Catalog.Taxes</catalogs>
+  <catalogs>Catalog.TaxExemptionReasons</catalogs>
   <catalogs>Catalog.TaxRates</catalogs>
+  <catalogs>Catalog.TransformationRules</catalogs>
   <catalogs>Catalog.Units</catalogs>
   <catalogs>Catalog.UnitsOfMeasurement</catalogs>
   <catalogs>Catalog.UserGroups</catalogs>
@@ -1237,9 +1247,6 @@
   <catalogs>Catalog.Vehicles</catalogs>
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.NumeratorBasicRules</catalogs>
-  <catalogs>Catalog.NumeratorGroups</catalogs>
-  <catalogs>Catalog.PrintFormTemplates</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalDeduction</documents>
   <documents>Document.AdditionalCostAllocation</documents>
@@ -1503,8 +1510,8 @@
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
   <dataProcessors>DataProcessor.AccountantAutomatedWorkplace</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
-  <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
+  <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
   <informationRegisters>InformationRegister.AuditLock</informationRegisters>
   <informationRegisters>InformationRegister.AuditLockHistory</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>
@@ -1514,14 +1521,18 @@
   <informationRegisters>InformationRegister.ChequeBondStatuses</informationRegisters>
   <informationRegisters>InformationRegister.CompanyLedgerTypes</informationRegisters>
   <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
+  <informationRegisters>InformationRegister.CreditLimits</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
   <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
   <informationRegisters>InformationRegister.DataVersions</informationRegisters>
   <informationRegisters>InformationRegister.DELETE_ConsignorSerialLotNumbers</informationRegisters>
+  <informationRegisters>InformationRegister.DELETE_T2011S_TransactionsCurrencyRevaluation</informationRegisters>
+  <informationRegisters>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</informationRegisters>
   <informationRegisters>InformationRegister.DELETE_T8010S_ConsignorBatches</informationRegisters>
   <informationRegisters>InformationRegister.DocumentFiscalStatus</informationRegisters>
   <informationRegisters>InformationRegister.ExpenseRevenueTypeSettings</informationRegisters>
   <informationRegisters>InformationRegister.ExternalCommands</informationRegisters>
+  <informationRegisters>InformationRegister.FilePartsForUpload</informationRegisters>
   <informationRegisters>InformationRegister.HardwareLog</informationRegisters>
   <informationRegisters>InformationRegister.IDInfo</informationRegisters>
   <informationRegisters>InformationRegister.IntegrationInfo</informationRegisters>
@@ -1529,8 +1540,12 @@
   <informationRegisters>InformationRegister.JobQueue</informationRegisters>
   <informationRegisters>InformationRegister.LedgerTypeOperations</informationRegisters>
   <informationRegisters>InformationRegister.LockDataModificationRules</informationRegisters>
+  <informationRegisters>InformationRegister.MessagesQueueToSend</informationRegisters>
+  <informationRegisters>InformationRegister.NumeratorCounters</informationRegisters>
+  <informationRegisters>InformationRegister.ObjectsPrintTemplates</informationRegisters>
   <informationRegisters>InformationRegister.ObjectStatuses</informationRegisters>
   <informationRegisters>InformationRegister.PartnerSegments</informationRegisters>
+  <informationRegisters>InformationRegister.PostedDocumentsRegistry</informationRegisters>
   <informationRegisters>InformationRegister.PricesByItemKeys</informationRegisters>
   <informationRegisters>InformationRegister.PricesByItems</informationRegisters>
   <informationRegisters>InformationRegister.PricesByProperties</informationRegisters>
@@ -1541,8 +1556,6 @@
   <informationRegisters>InformationRegister.T1010S_ScannedBarcode</informationRegisters>
   <informationRegisters>InformationRegister.T1020S_Cache</informationRegisters>
   <informationRegisters>InformationRegister.T2010S_OffsetOfAdvances</informationRegisters>
-  <informationRegisters>InformationRegister.DELETE_T2011S_TransactionsCurrencyRevaluation</informationRegisters>
-  <informationRegisters>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</informationRegisters>
   <informationRegisters>InformationRegister.T2013S_OffsetOfAging</informationRegisters>
   <informationRegisters>InformationRegister.T2014S_AdvancesInfo</informationRegisters>
   <informationRegisters>InformationRegister.T2015S_TransactionsInfo</informationRegisters>
@@ -1572,6 +1585,17 @@
   <informationRegisters>InformationRegister.T9016S_AccountsEmployee</informationRegisters>
   <informationRegisters>InformationRegister.T9050S_AccountingRowAnalytics</informationRegisters>
   <informationRegisters>InformationRegister.T9051S_AccountingExtDimensions</informationRegisters>
+  <informationRegisters>InformationRegister.T9052S_AccountingRelevance</informationRegisters>
+  <informationRegisters>InformationRegister.T9060S_AccountingMappingChartsOfAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.T9061S_AccountingMappingAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.T9062S_AccountingMappingCompanies</informationRegisters>
+  <informationRegisters>InformationRegister.T9063S_AccountingMappingCurrencies</informationRegisters>
+  <informationRegisters>InformationRegister.T9064S_AccountingMappingRegisters</informationRegisters>
+  <informationRegisters>InformationRegister.T9065S_AccountingMappingExtDimensions</informationRegisters>
+  <informationRegisters>InformationRegister.T9066S_AccountingMappingExtDimensionRefValues</informationRegisters>
+  <informationRegisters>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</informationRegisters>
+  <informationRegisters>InformationRegister.T9068S_AccountingMappingAccountsMatching</informationRegisters>
+  <informationRegisters>InformationRegister.T9070S_ELedgerDetailComments</informationRegisters>
   <informationRegisters>InformationRegister.T9100A_ObjectAccessMap</informationRegisters>
   <informationRegisters>InformationRegister.T9101A_ObjectAccessRegisters</informationRegisters>
   <informationRegisters>InformationRegister.T9500S_AccrualAndDeductionValues</informationRegisters>
@@ -1584,24 +1608,8 @@
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
+  <informationRegisters>InformationRegister.TranformedObjectsLink</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
-  <informationRegisters>InformationRegister.T9060S_AccountingMappingChartsOfAccounts</informationRegisters>
-  <informationRegisters>InformationRegister.T9061S_AccountingMappingAccounts</informationRegisters>
-  <informationRegisters>InformationRegister.T9062S_AccountingMappingCompanies</informationRegisters>
-  <informationRegisters>InformationRegister.T9063S_AccountingMappingCurrencies</informationRegisters>
-  <informationRegisters>InformationRegister.T9064S_AccountingMappingRegisters</informationRegisters>
-  <informationRegisters>InformationRegister.T9065S_AccountingMappingExtDimensions</informationRegisters>
-  <informationRegisters>InformationRegister.T9066S_AccountingMappingExtDimensionRefValues</informationRegisters>
-  <informationRegisters>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</informationRegisters>
-  <informationRegisters>InformationRegister.T9068S_AccountingMappingAccountsMatching</informationRegisters>
-  <informationRegisters>InformationRegister.MessagesQueueToSend</informationRegisters>
-  <informationRegisters>InformationRegister.FilePartsForUpload</informationRegisters>
-  <informationRegisters>InformationRegister.PostedDocumentsRegistry</informationRegisters>
-  <informationRegisters>InformationRegister.T9052S_AccountingRelevance</informationRegisters>
-  <informationRegisters>InformationRegister.T9070S_ELedgerDetailComments</informationRegisters>
-  <informationRegisters>InformationRegister.NumeratorCounters</informationRegisters>
-  <informationRegisters>InformationRegister.CreditLimits</informationRegisters>
-  <informationRegisters>InformationRegister.ObjectsPrintTemplates</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

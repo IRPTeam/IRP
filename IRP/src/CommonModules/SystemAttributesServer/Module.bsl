@@ -70,25 +70,10 @@ Procedure OutputSystemAttributes(Form, PlaceInFront = "", ListName = "List") Exp
 Endprocedure
 
 Function GetSystemAttributes(MetadataFullName) Export
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	SystemAttributesSets.Ref.Attributes AS Attributes
-	|FROM
-	|	Catalog.SystemAttributesSets AS SystemAttributesSets
-	|WHERE
-	|	SystemAttributesSets.PredefinedDataName = &PredefinedDataName
-	|	AND NOT SystemAttributesSets.DeletionMark";
-	Query.SetParameter("PredefinedDataName", StrReplace(MetadataFullName, ".", "_"));
-	QueryTable = Query.Execute().Unload();
-	
-	ArrayOfAttributes = New Array();
-	
-	If QueryTable.Count() = 1 Then
-		For Each Row In QueryTable[0].Ref.Attributes Do
-			ArrayOfAttributes.Add(Row.Attribute);
-		EndDo;
+	PredefinedName = StrReplace(MetadataFullName, ".", "_");
+	If Metadata.Catalogs.SystemAttributesSets.GetPredefinedNames().Find(PredefinedName) = Undefined Then
+		Return New Array;
 	EndIf;
 	
-	Return ArrayOfAttributes;
+	Return Catalogs.SystemAttributesSets[PredefinedName].Attributes.UnloadColumn("Attribute");
 EndFunction

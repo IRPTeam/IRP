@@ -122,7 +122,9 @@ Function Initialize(Doc = Undefined, InitialData = Undefined, FillingData = Unde
 		If TypeOf(Doc) = Type("String") Then
 			DocMetadata = Metadata.Documents[Doc];
 			DocObject = Documents[DocMetadata.Name].CreateDocument();
+			
 			DocObject.Fill(FillingData);
+			FillingData = Undefined;
 		Else
 			DocMetadata = Doc.Metadata();
 			If Doc.IsEmpty() Then

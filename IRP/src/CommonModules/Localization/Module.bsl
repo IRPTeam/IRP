@@ -1377,6 +1377,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_177", NStr("en = 'Lack of advances [%1] [%2] [%3]'", Lang));
 	Strings.Insert("Error_178", NStr("en = 'Order already closed'", Lang));
 	Strings.Insert("Error_179", NStr("en = 'Number [%1] is already used for [%2]'", Lang));
+	Strings.Insert("Error_180", NStr("en = 'Only system record allowed'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -2307,5 +2308,10 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
     Strings.Insert("Issue_1", NStr("en = 'Issues were already created for all locations.'", Lang));
 	Strings.Insert("Issue_2", NStr("en = 'Create issue for locations: %1?'", Lang));
 #EndRegion
+
+#Region SytemAttributes
+	Strings.Insert("SystemAttribute_Store", NStr("en = 'Store'", Lang));
+#EndRegion
+
 	Return Strings;
 EndFunction

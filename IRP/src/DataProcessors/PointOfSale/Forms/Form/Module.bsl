@@ -1616,7 +1616,7 @@ EndFunction
 //  DocumentRef.CashReceipt
 &AtServer
 Function CreateAndPostCashInAtServer(FillingData)
-	Wrapper = BuilderAPI.Initialize("CashReceipt", , FillingData);
+	Wrapper = BuilderAPI.Initialize("CashReceipt", , FillingData, "PaymentList");
 	Doc = BuilderAPI.Write(Wrapper, DocumentWriteMode.Posting);
 	Return Doc.Ref;
 EndFunction

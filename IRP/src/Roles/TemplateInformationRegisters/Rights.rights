@@ -1610,6 +1610,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.SystemAttributes</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9550S_EmployeeSickLeave</name>
 		<right>
 			<name>Read</name>

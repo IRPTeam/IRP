@@ -53,17 +53,12 @@ Scenario: _0224000 preparation (Purchase order closing)
 		When Create document PO, SO objects (for check double closing)
 		When Create document PO, GR, PI objects (for order closing)
 	* Repost
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to line in "List" table
-			| 'Date'                |
-			| '10.04.2025 22:01:33' |
-		And I click the button named "FormPost"
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Date'                |
-			| '10.04.2025 22:06:27' |
-		And I click the button named "FormPost"
-
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(1124).GetObject().Write(DocumentWriteMode.Write);"     |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(1124).GetObject().Write(DocumentWriteMode.Write);"     |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(11).GetObject().Write(DocumentWriteMode.Write);"     |
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Write);"     |
 			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);"   |

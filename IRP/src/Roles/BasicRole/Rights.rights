@@ -142,6 +142,13 @@
 		</right>
 	</object>
 	<object>
+		<name>ChartOfCharacteristicTypes.SystemAttributes</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Constant.UseAddAttributesAndProperties</name>
 		<right>
 			<name>Read</name>

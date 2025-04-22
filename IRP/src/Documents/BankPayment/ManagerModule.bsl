@@ -473,31 +473,12 @@ Function R5015B_OtherPartnersTransactions()
 		|	PaymentList.Currency,
 		|	PaymentList.Agreement,
 		|	PaymentList.Key,
-		|	PaymentList.Amount AS Amount
+		|	PaymentList.Amount + PaymentList.TaxDiscountAmount AS Amount
 		|INTO R5015B_OtherPartnersTransactions
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	PaymentList.IsOtherPartner
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	PaymentList.Period,
-		|	PaymentList.Company,
-		|	PaymentList.Branch,
-		|	PaymentList.Partner,
-		|	PaymentList.LegalName,
-		|	PaymentList.Currency,
-		|	PaymentList.Agreement,
-		|	PaymentList.Key,
-		|	PaymentList.TaxDiscountAmount AS Amount
-		|FROM
-		|	PaymentList AS PaymentList
-		|WHERE
-		|	PaymentList.IsOtherPartner
-		|	AND PaymentList.TaxDiscountAmount <> 0";
+		|	PaymentList.IsOtherPartner";
 EndFunction
 
 Function R2023B_AdvancesFromRetailCustomers()
@@ -537,7 +518,7 @@ Function R5010B_ReconciliationStatement()
 		|	PaymentList.LegalName,
 		|	PaymentList.LegalNameContract AS LegalNameContract,
 		|	PaymentList.Currency,
-		|	SUM(PaymentList.Amount) AS Amount,
+		|	SUM(PaymentList.Amount + PaymentList.TaxDiscountAmount) AS Amount,
 		|	PaymentList.Period
 		|INTO R5010B_ReconciliationStatement
 		|FROM
@@ -554,32 +535,7 @@ Function R5010B_ReconciliationStatement()
 		|	PaymentList.LegalNameContract,
 		|	PaymentList.Currency,
 		|	PaymentList.Period,
-		|	VALUE(AccumulationRecordType.Receipt)
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	PaymentList.Company,
-		|	PaymentList.Branch,
-		|	PaymentList.LegalName,
-		|	PaymentList.LegalNameContract AS LegalNameContract,
-		|	PaymentList.Currency,
-		|	SUM(PaymentList.TaxDiscountAmount) AS Amount,
-		|	PaymentList.Period
-		|FROM
-		|	PaymentList AS PaymentList
-		|WHERE
-		|	PaymentList.IsOtherPartner
-		|	AND PaymentList.TaxDiscountAmount <> 0
-		|GROUP BY
-		|	PaymentList.Company,
-		|	PaymentList.Branch,
-		|	PaymentList.LegalName,
-		|	PaymentList.LegalNameContract,
-		|	PaymentList.Currency,
-		|	PaymentList.Period,
-		|	VALUE(AccumulationRecordType.Expense)";
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 Function R3010B_CashOnHand()
@@ -592,7 +548,7 @@ Function R3010B_CashOnHand()
 		|	PaymentList.Branch,
 		|	PaymentList.Account,
 		|	PaymentList.Currency,
-		|	PaymentList.Amount - PaymentList.TaxDiscountAmount AS Amount
+		|	PaymentList.Amount AS Amount
 		|INTO R3010B_CashOnHand
 		|FROM
 		|	PaymentList AS PaymentList
@@ -613,7 +569,7 @@ Function R3011T_CashFlow()
 		|	PaymentList.PlanningPeriod,
 		|	PaymentList.Currency,
 		|	PaymentList.Key,
-		|	PaymentList.Amount - PaymentList.TaxDiscountAmount AS Amount
+		|	PaymentList.Amount AS Amount
 		|INTO R3011T_CashFlow
 		|FROM
 		|	PaymentList AS PaymentList
@@ -936,7 +892,7 @@ Function T1040T_AccountingAmounts()
 		|	PaymentList.Key AS RowKey,
 		|	PaymentList.Key AS Key,
 		|	PaymentList.Currency,
-		|	PaymentList.Amount - PaymentList.TaxDiscountAmount,
+		|	PaymentList.Amount,
 		|	VALUE(Catalog.AccountingOperations.BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|FROM

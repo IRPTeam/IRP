@@ -236,39 +236,13 @@ Function R5020B_PartnersBalance_BP_CP() Export
 		|	0 AS CustomerAdvance,
 		|	0 AS VendorTransaction,
 		|	0 AS VendorAdvance,
-		|	PaymentList.Amount AS OtherTransaction,
+		|	PaymentList.Amount + PaymentList.TaxDiscountAmount AS OtherTransaction,
 		|	UNDEFINED AS AdvancesClosing,
 		|	PaymentList.Key
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	PaymentList.IsOtherPartner
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	PaymentList.Period,
-		|	PaymentList.Company,
-		|	PaymentList.Branch,
-		|	PaymentList.Partner,
-		|	PaymentList.LegalName,
-		|	PaymentList.Agreement,
-		|	UNDEFINED AS Document,
-		|	PaymentList.Currency,
-		|	0 AS Amount,
-		|	0 AS CustomerTransaction,
-		|	0 AS CustomerAdvance,
-		|	0 AS VendorTransaction,
-		|	0 AS VendorAdvance,
-		|	PaymentList.TaxDiscountAmount AS OtherTransaction,
-		|	UNDEFINED AS AdvancesClosing,
-		|	PaymentList.Key
-		|FROM
-		|	PaymentList AS PaymentList
-		|WHERE
-		|	PaymentList.IsOtherPartner AND PaymentList.TaxDiscountAmount <> 0";
+		|	PaymentList.IsOtherPartner";
 EndFunction
 
 Function R5020B_PartnersBalance_BR_CR() Export

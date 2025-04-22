@@ -127,7 +127,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	EndIf;
 	
 	If Not Cancel = True Then
-		CreditLimitsServer.CheckCreditLimitByPartner(ThisObject.Ref, ThisObject.Date, Cancel);
+		CreditLimitsServer.CheckCreditLimitByPartner(ThisObject, ThisObject.Date, Cancel);
 	EndIf;
 EndProcedure
 

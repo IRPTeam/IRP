@@ -150,7 +150,31 @@ Scenario: _0224001 create and check filling Purchase order closing (PO not shipp
 		And I click Open button of "Purchase order" field
 		Then the form attribute named "ClosingOrder" became equal to "$$PurchaseOrderClosing0224001$$"
 		And I close all client application windows
-	
+	* Check ban on deleation of PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'   | 'Date'                   |
+			| '37'       | '09.03.2021 14:29:00'    |
+		And I click the button named "FormSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "Button0"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Related document exists: $$PurchaseOrderClosing0224001$$'|
+		And I close all client application windows		
+	* Check ban on unposting of PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'   | 'Date'                   |
+			| '37'       | '09.03.2021 14:29:00'    |
+		And I click the button named "FormUndoPosting"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Related document exists: $$PurchaseOrderClosing0224001$$'|
+		And I close all client application windows		
+
 
 Scenario: _0230002 create and check filling Purchase order closing (PO partially shipped)
 		And I close all client application windows

@@ -29,7 +29,7 @@ Procedure CheckCreditLimit(Ref, Cancel) Export
 EndProcedure
 
 Procedure CheckCreditLimitByPartner(ShipmentDoc, Date, Cancel) Export
-	DocumentType = TypeOf(ShipmentDoc);
+	DocumentType = TypeOf(ShipmentDoc.Ref);
 	
 	If DocumentType = Type("DocumentRef.SalesInvoice") Then
 		DocumentData = GetInvoiceAmount(ShipmentDoc);
@@ -37,15 +37,15 @@ Procedure CheckCreditLimitByPartner(ShipmentDoc, Date, Cancel) Export
 	 		Or DocumentType = Type("DocumentRef.ShipmentConfirmation") Then
 		DocumentData = GetShipmentAmount(ShipmentDoc);
 	Else
-		Raise StrTemplate("Unsupported document type [%1]", TypeOf(ShipmentDoc));
+		Raise StrTemplate("Unsupported document type [%1]", DocumentType);
 	EndIf;
 	
-	LimitAmount = GetCreditLimits(ShipmentDoc, Date, DocumentData.Partner, DocumentData.CurrencyMovementType);
+	LimitAmount = GetCreditLimits(ShipmentDoc.Ref, Date, DocumentData.Partner, DocumentData.CurrencyMovementType);
 	If LimitAmount = 0 Then
 		Return;
 	EndIf;
 	
-	DebtData = GetDebtAmount(ShipmentDoc, DocumentData.Partner, DocumentData.Currency);
+	DebtData = GetDebtAmount(ShipmentDoc.Ref, Date, DocumentData.Partner, DocumentData.Currency);
 	
 	If (DebtData.DebtAmount + DocumentData.Amount) > LimitAmount Then
 		Cancel = True;
@@ -56,7 +56,7 @@ Procedure CheckCreditLimitByPartner(ShipmentDoc, Date, Cancel) Export
 	EndIf;
 EndProcedure
 
-Function GetCreditLimits(ShipmentDoc, Date, Partner, CurrencyMovementType)
+Function GetCreditLimits(DocRef, Date, Partner, CurrencyMovementType)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -67,7 +67,7 @@ Function GetCreditLimits(ShipmentDoc, Date, Partner, CurrencyMovementType)
 	
 	Query.SetParameter("Partner", Partner);
 	Query.SetParameter("CurrencyMovementType", CurrencyMovementType);
-	Query.SetParameter("Period", CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(ShipmentDoc, Date));
+	Query.SetParameter("Period", CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(DocRef, Date));
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -80,7 +80,7 @@ Function GetCreditLimits(ShipmentDoc, Date, Partner, CurrencyMovementType)
 	Return LimitAmount;
 EndFunction
 
-Function GetDebtAmount(ShipmentDoc, Partner, Currency)
+Function GetDebtAmount(DocRef, Date, Partner, Currency)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -96,10 +96,10 @@ Function GetDebtAmount(ShipmentDoc, Partner, Currency)
 	|	R5020B_PartnersBalanceBalance.Partner,
 	|	R5020B_PartnersBalanceBalance.TransactionCurrency";
 	
-	If ValueIsFilled(ShipmentDoc) Then
-		BalancePeriod = New Boundary(ShipmentDoc.PointInTime(), BoundaryType.Excluding);
+	If ValueIsFilled(DocRef) Then
+		BalancePeriod = New Boundary(DocRef.PointInTime(), BoundaryType.Excluding);
 	Else
-		BalancePeriod = New Boundary(ShipmentDoc.Date, BoundaryType.Excluding);
+		BalancePeriod = New Boundary(EndOfDay(Date), BoundaryType.Excluding);
 	EndIf;
 	
 	Query.SetParameter("Partner", Partner);
@@ -121,18 +121,36 @@ EndFunction
 
 Function GetShipmentAmount(ShipmentDoc)
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
+	|	ItemList.Quantity,
+	|	ItemList.Key
+	|INTO ItemList
+	|FROM
+	|	&ItemList AS ItemList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.Basis,
+	|	RowIDInfo.Key
+	|INTO RowIDInfo
+	|FROM
+	|	&RowIDInfo AS RowIDInfo
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
 	|	ItemList.Quantity AS ShipmentQuantity,
 	|	RowIDInfo.RowID AS RowID,
 	|	RowIDInfo.Basis AS Basis
 	|INTO Shipment
 	|FROM
-	|	Document.ShipmentPlaningOrder.ItemList AS ItemList
-	|		INNER JOIN Document.ShipmentPlaningOrder.RowIDInfo AS RowIDInfo
+	|	ItemList AS ItemList
+	|		INNER JOIN RowIDInfo AS RowIDInfo
 	|		ON ItemList.Key = RowIDInfo.Key
 	|		AND RowIDInfo.Basis REFS Document.SalesOrder
-	|		AND ItemList.Ref = &ShipmentDoc
 	|GROUP BY
 	|	ItemList.Quantity,
 	|	RowIDInfo.RowID,
@@ -179,8 +197,8 @@ Function GetShipmentAmount(ShipmentDoc)
 	|	SalesOrderItemList.Ref.Agreement.CurrencyMovementType,
 	|	SalesOrderItemList.Ref.Agreement.CurrencyMovementType.Currency";
 
-	Query.Text = StrReplace(Query.Text, "ShipmentPlaningOrder", ShipmentDoc.Metadata().Name);	
-	Query.SetParameter("ShipmentDoc", ShipmentDoc);
+	Query.SetParameter("ItemList", ShipmentDoc.ItemList.Unload());
+	Query.SetParameter("RowIDInfo", ShipmentDoc.RowIDInfo.Unload());
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
@@ -201,15 +219,22 @@ Function GetInvoiceAmount(ShipmentDoc)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	ItemList.Ref.Partner AS Partner,
-	|	ItemList.Ref.Agreement AS Agreement,
-	|	ItemList.TotalAmount AS TotalAmount,
-	|	ItemList.Ref AS Ref
+	|	&Partner AS Partner,
+	|	&Agreement AS Agreement,
+	|	ItemList.TotalAmount
 	|INTO ItemList
 	|FROM
-	|	Document.SalesInvoice.ItemList AS ItemList
-	|WHERE
-	|	ItemList.Ref = &ShipmentDoc
+	|	&ItemList AS ItemList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Currencies.Multiplicity,
+	|	Currencies.Rate,
+	|	Currencies.MovementType
+	|INTO Currencies
+	|FROM
+	|	&Currencies AS Currencies
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -225,16 +250,25 @@ Function GetInvoiceAmount(ShipmentDoc)
 	|	ItemList.Agreement.CurrencyMovementType.Currency AS Currency
 	|FROM
 	|	ItemList AS ItemList
-	|		INNER JOIN Document.SalesInvoice.Currencies AS Currencies
+	|		INNER JOIN Currencies AS Currencies
 	|		ON Currencies.MovementType = ItemList.Agreement.CurrencyMovementType
-	|		AND Currencies.Ref = ItemList.Ref
 	|GROUP BY
 	|	ItemList.Partner,
 	|	ItemList.Agreement,
 	|	ItemList.Agreement.CurrencyMovementType,
 	|	ItemList.Agreement.CurrencyMovementType.Currency";
-		
-	Query.SetParameter("ShipmentDoc", ShipmentDoc);
+	
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ShipmentDoc) Then
+		Parameters = CurrenciesClientServer.GetParameters_V3(ShipmentDoc);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ShipmentDoc.Currencies);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ShipmentDoc.Currencies);
+	EndIf;
+	 
+	Query.SetParameter("Currencies", ShipmentDoc.Currencies.Unload());
+	Query.SetParameter("ItemList", ShipmentDoc.ItemList.Unload());
+	Query.SetParameter("Partner", ShipmentDoc.Partner);
+	Query.SetParameter("Agreement", ShipmentDoc.Agreement);
+	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
@@ -250,5 +284,3 @@ Function GetInvoiceAmount(ShipmentDoc)
 	EndIf;
 	Return Result;
 EndFunction
-
-	

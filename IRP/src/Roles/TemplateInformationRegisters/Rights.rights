@@ -802,6 +802,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.TranformedObjectsLink</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9010S_AccountsItemKey</name>
 		<right>
 			<name>Read</name>
@@ -1589,6 +1600,17 @@
 	</object>
 	<object>
 		<name>InformationRegister.UserSettings</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.SystemAttributes</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

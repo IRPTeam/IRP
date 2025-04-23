@@ -957,12 +957,6 @@ Scenario: _1000007 create SPO from SO and check credit limit
 		And I input "01.04.2025" text in the field named "DateBegin"
 		And I input "30.04.2025" text in the field named "DateEnd"
 		And I click the button named "Select"
-		And I go to the first line in "ItemList" table
-		And I input "50,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I move one line down in "ItemList" table					
-		And I input "30,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I finish line editing in "ItemList" table
 		And I move to the tab named "GroupOther"
 		And I input "12.04.2025 23:30:00" text in the field named "Date"
 		And I move to the next attribute

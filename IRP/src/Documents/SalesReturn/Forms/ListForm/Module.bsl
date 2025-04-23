@@ -5,6 +5,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocSalesReturnServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
 	Items.Status.Visible = FOServer.IsUseShipmentConfirmationAndGoodsReceipts();
+	SystemAttributesServer.OutputSystemAttributes(ThisObject, "TransactionType");
 EndProcedure
 
 #EndRegion

@@ -920,3 +920,15 @@ EndFunction
 #EndRegion
 
 #EndRegion
+
+#Region SystemAttributes
+
+Function GetSystemAttributeValues(Obj, SystemAttribute) Export
+	Values = New Array();
+	If SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.Store Then
+		Values = Obj.ItemList.Unload(, "Store").UnloadColumn("Store");
+	EndIf;
+	Return Values;
+EndFunction
+
+#EndRegion

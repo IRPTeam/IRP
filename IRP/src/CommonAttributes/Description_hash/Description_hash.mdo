@@ -37,6 +37,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>ChartOfCharacteristicTypes.SystemAttributes</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.SpecialOfferTypes</metadata>
     <use>Use</use>
   </content>
@@ -262,6 +266,10 @@
   </content>
   <content>
     <metadata>Catalog.LedgerTypeVariants</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.SystemAttributesSets</metadata>
     <use>Use</use>
   </content>
   <content>

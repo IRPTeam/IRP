@@ -4,9 +4,16 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
-	For Each DocMetadata In Metadata.Documents Do
-		Items.DocumentType.ChoiceList.Add(DocMetadata.Name, DocMetadata.Synonym);
-	EndDo;
+	FillDocumentTypeList();
+
+EndProcedure
+
+&AtServer
+Procedure BeforeLoadDataFromSettingsAtServer(Settings)
+	
+	If Settings.Count() Then
+		FillDocumentTypeList(Settings);
+	EndIf;
 
 EndProcedure
 
@@ -62,6 +69,9 @@ EndProcedure
 &AtClient
 Procedure FilterOnChange(Item)
 	Items.FindDocuments.BackColor = New Color(255, 255, 153);
+	If Item = Items.Period Or Item = Items.Company Or Item = Items.LedgerType Then
+		FillDocumentTypeList();
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -99,6 +109,12 @@ Procedure SetListFilterAtServer()
 	If Period.EndDate > Date(1,1,1) Then
 		DynamicListAPI.AddFilter(QuerySchemaAPI, "Registry.Date Between &StartDate AND &EndDate");
 	EndIf;
+	If Not Company.IsEmpty() Then
+		DynamicListAPI.AddFilter(QuerySchemaAPI, "JournalEntry.Company = &Company");
+	EndIf;
+	If Not LedgerType.IsEmpty() Then
+		DynamicListAPI.AddFilter(QuerySchemaAPI, "JournalEntry.LedgerType = &LedgerType");
+	EndIf;
 	If Not IsBlankString(DocumentType) And DocumentType <> "All" Then
 		DynamicListAPI.AddFilter(QuerySchemaAPI, "Registry.Document Refs Document." + DocumentType);
 	EndIf;
@@ -118,6 +134,12 @@ Procedure SetListFilterAtServer()
 	If Period.EndDate > Date(1,1,1) Then
 		DocumentList.Parameters.SetParameterValue("StartDate", Period.StartDate);
 		DocumentList.Parameters.SetParameterValue("EndDate", Period.EndDate); 
+	EndIf;
+	If Not Company.IsEmpty() Then
+		DocumentList.Parameters.SetParameterValue("Company", Company);
+	EndIf;
+	If Not LedgerType.IsEmpty() Then
+		DocumentList.Parameters.SetParameterValue("LedgerType", LedgerType);
 	EndIf;
 
 	InfoUpdated = False;
@@ -325,6 +347,73 @@ Procedure SetCurrentPageAtClient()
 		ImagePreview = PictureViewerClient.GetPictureURL(PictureParameters);
 	EndIf;
 	
+EndProcedure
+
+Procedure FillDocumentTypeList(Settings=Undefined)
+	
+	Items.DocumentType.ChoiceList.Clear();	
+	
+	PeriodFilter = Undefined;
+	CompanyFilter = Undefined;
+	LedgerTypeFilter = Undefined;
+	
+	If Settings <> Undefined Then
+		PeriodFilter = Settings.Get("Period");
+		CompanyFilter = Settings.Get("Company");
+		LedgerTypeFilter = Settings.Get("Ledger");
+	EndIf;
+	If PeriodFilter = Undefined Then
+		PeriodFilter = Period;
+	EndIf;
+	If CompanyFilter = Undefined Then
+		CompanyFilter = Company;
+	EndIf;
+	If LedgerTypeFilter = Undefined Then
+		LedgerTypeFilter = LedgerType;
+	EndIf;
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT DISTINCT
+	|	VALUETYPE(BasicTurnovers.Recorder.Basis) AS RecorderType
+	|FROM
+	|	AccountingRegister.Basic.Turnovers(&Begin, &End, Recorder,,, TRUE
+	|	AND Company = &Company
+	|	AND LedgerType = &LedgerType,,) AS BasicTurnovers
+	|WHERE
+	|	NOT BasicTurnovers.Recorder.Basis IS NULL
+	|	AND BasicTurnovers.Recorder.Basis <> UNDEFINED";
+	
+	If PeriodFilter.StartDate = Date(1,1,1) Then
+		Query.Text = StrReplace(Query.Text, "&Begin", "");
+	Else
+		Query.SetParameter("Begin", PeriodFilter.StartDate);
+	EndIf;
+	If PeriodFilter.EndDate = Date(1,1,1) Then
+		Query.Text = StrReplace(Query.Text, "&End", "");
+	Else	
+		Query.SetParameter("End", PeriodFilter.EndDate);
+	EndIf;
+	If CompanyFilter.IsEmpty() Then
+		Query.Text = StrReplace(Query.Text, "Company = &Company", "True");
+	Else	
+		Query.SetParameter("Company", CompanyFilter);
+	EndIf;
+	If LedgerTypeFilter.IsEmpty() Then
+		Query.Text = StrReplace(Query.Text, "LedgerType = &LedgerType", "True");
+	Else	
+		Query.SetParameter("LedgerType", LedgerTypeFilter);
+	EndIf;
+	
+	QuerySelection = Query.Execute().Select();
+	While QuerySelection.Next() Do
+		DocMetadata = Metadata.FindByType(QuerySelection.RecorderType);
+		Items.DocumentType.ChoiceList.Add(DocMetadata.Name, DocMetadata.Synonym);
+	EndDo;
+	Items.DocumentType.ChoiceList.SortByPresentation();
+	
+	Items.DocumentType.ChoiceList.Insert(0, "All", "<" + R().Form_033 + ">");
+
 EndProcedure
 
 #EndRegion

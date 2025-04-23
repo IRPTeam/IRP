@@ -196,11 +196,11 @@ Scenario: _043300 preparation (Bank payment)
 			| "Documents.BankPayment.FindByNumber(329).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(1333).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.BankPayment.FindByNumber(1334).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When create BankPayment (OtherPartnersTransactions)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(1331).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(1334).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When create BankPayment (Other expense)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(1332).GetObject().Write(DocumentWriteMode.Posting);"    |

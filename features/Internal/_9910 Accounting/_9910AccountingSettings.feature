@@ -4054,7 +4054,7 @@ Scenario: _0991211 edit accounting manualy (document without tabular part)
 		And I close all client application windows
 					
 
-Scenario: _0991212 check accountant automated workplace
+Scenario: _0991230 check accountant automated workplace
 	And I close all client application windows
 	* Preparation (add files for SI)
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -4112,93 +4112,80 @@ Scenario: _0991212 check accountant automated workplace
 		And I input "24.02.2023" text in the field named "DateBegin"
 		And I input "30.03.2024" text in the field named "DateEnd"
 		And I click the button named "Select"
-		And I select "All documents" exact value from "Document type" drop-down list
+		And I select "<Show all>" exact value from "Document type" drop-down list
+		And I select from the drop-down list named "Company" by "Own company 2" string
 		And I select "All" exact value from "Lock" drop-down list
 		And I select "All" exact value from the drop-down list named "FilesType"	
 		And I click "Find" button
 		And "DocumentList" table contains lines
-			| 'Document'                                                  | 'Files' |
-			| 'Bank payment 5 dated 01.04.2023 12:00:01'                  | ''      |
-			| 'Bank payment 6 dated 02.04.2023 10:06:39'                  | ''      |
-			| 'Bank receipt 11 dated 02.12.2023 14:00:00'                 | ''      |
-			| 'Bank receipt 12 dated 02.12.2023 15:00:00'                 | ''      |
-			| 'Calculation movement costs 7 dated 31.07.2023 12:00:00'    | ''      |
-			| 'Calculation movement costs 8 dated 31.08.2023 12:00:00'    | ''      |
-			| 'Cash expense 1 dated 24.02.2023 10:52:43'                  | ''      |
-			| 'Cash payment 1 dated 24.02.2023 10:50:30'                  | ''      |
-			| 'Cash payment 2 dated 24.02.2023 11:01:03'                  | ''      |
-			| 'Cash receipt 1 dated 10.03.2023 00:00:00'                  | ''      |
-			| 'Cash receipt 2 dated 04.04.2023 12:00:00'                  | ''      |
-			| 'Cash revenue 1 dated 24.02.2023 10:53:15'                  | ''      |
-			| 'Cash statement 1 dated 25.02.2023 22:01:16'                | ''      |
-			| 'Cash transfer order 2 dated 24.02.2023 11:00:53'           | ''      |
-			| 'Cash transfer order 3 dated 31.03.2023 09:38:37'           | ''      |
-			| 'Commissioning of fixed asset 1 dated 02.02.2024 00:00:00'  | ''      |
-			| 'Credit note 1 dated 24.02.2023 11:02:48'                   | ''      |
-			| 'Credit note 2 dated 07.05.2023 12:00:01'                   | ''      |
-			| 'Debit/Credit note 1 dated 23.02.2024 12:00:00'             | ''      |
-			| 'Debit/Credit note 2 dated 20.02.2024 13:27:56'             | ''      |
-			| 'Debit/Credit note 3 dated 30.03.2024 11:34:17'             | ''      |
-			| 'Debit note 1 dated 24.02.2023 11:03:25'                    | ''      |
-			| 'Employee cash advance 1 dated 01.07.2023 00:00:00'         | ''      |
-			| 'Expense accrual 1 dated 30.01.2024 00:00:00'               | ''      |
-			| 'Expense accrual 5 dated 28.02.2024 12:00:00'               | ''      |
-			| 'Goods receipt 1 dated 24.02.2023 10:05:00'                 | ''      |
-			| 'Goods receipt 4 dated 27.02.2023 10:17:04'                 | ''      |
-			| 'Incoming payment order 1 dated 24.02.2023 11:04:45'        | ''      |
-			| 'Internal supply request 1 dated 24.02.2023 10:26:21'       | ''      |
-			| 'Inventory transfer 1 dated 27.02.2023 12:00:00'            | ''      |
-			| 'Inventory transfer order 1 dated 24.02.2023 10:26:34'      | ''      |
-			| 'Item stock adjustment 1 dated 24.02.2023 17:02:02'         | ''      |
-			| 'Money transfer 2 dated 11.03.2023 14:34:06'                | ''      |
-			| 'Money transfer 3 dated 10.07.2023 14:38:53'                | ''      |
-			| 'Outgoing payment order 1 dated 24.02.2023 11:05:26'        | ''      |
-			| 'Payroll 2 dated 28.02.2023 12:00:00'                       | ''      |
-			| 'Physical inventory 1 dated 24.02.2023 10:33:41'            | ''      |
-			| 'Planned receipt reservation 1 dated 24.02.2023 10:22:37'   | ''      |
-			| 'Price list 1 dated 24.02.2023 09:48:53'                    | ''      |
-			| 'Price list 3 dated 24.02.2023 12:50:42'                    | ''      |
-			| 'Purchase invoice 1 dated 24.02.2023 10:04:33'              | ''      |
-			| 'Purchase invoice 2 dated 22.07.2023 09:38:02'              | ''      |
-			| 'Purchase invoice 3 dated 30.11.2023 16:01:04'              | ''      |
-			| 'Purchase order 2 dated 24.02.2023 10:21:35'                | ''      |
-			| 'Purchase order 3 dated 27.02.2023 12:00:02'                | ''      |
-			| 'Purchase return 3 dated 10.12.2023 12:00:00'               | ''      |
-			| 'Purchase return 112 dated 20.03.2024 11:28:01'             | ''      |
-			| 'Purchase return order 1 dated 07.03.2023 12:52:21'         | ''      |
-			| 'Reconciliation statement 1 dated 02.04.2023 12:00:00'      | ''      |
-			| 'Retail return receipt 1 dated 10.03.2023 14:00:00'         | ''      |
-			| 'Retail sales receipt 4 dated 02.02.2024 00:00:05'          | ''      |
-			| 'Retail sales receipt 5 dated 02.03.2023 12:00:00'          | ''      |
-			| 'Revenue accrual 1 dated 30.01.2024 12:00:00'               | ''      |
-			| 'Revenue accrual 2 dated 01.02.2024 12:00:00'               | ''      |
-			| 'Sales invoice 1 dated 24.02.2023 10:14:47'                 | '1'     |
-			| 'Sales invoice 2 dated 24.02.2023 10:18:20'                 | ''      |
-			| 'Sales invoice 3 dated 30.03.2023 12:23:56'                 | '3'     |
-			| 'Sales order 1 dated 24.02.2023 10:13:53'                   | ''      |
-			| 'Sales order 2 dated 24.02.2023 11:13:25'                   | ''      |
-			| 'Sales order closing 1 dated 22.07.2023 09:15:12'           | ''      |
-			| 'Sales return 1 dated 02.03.2023 15:00:00'                  | ''      |
-			| 'Sales return 2 dated 07.05.2023 12:00:00'                  | ''      |
-			| 'Sales return order 1 dated 01.03.2023 00:00:00'            | ''      |
-			| 'Shipment confirmation 1 dated 24.02.2023 10:14:17'         | ''      |
-			| 'Shipment confirmation 5 dated 27.02.2023 10:32:04'         | ''      |
-			| 'Stock adjustment as surplus 1 dated 24.02.2023 10:37:36'   | ''      |
-			| 'Stock adjustment as write-off 1 dated 24.02.2023 10:38:09' | ''      |
-			| 'Time sheet 2 dated 28.02.2023 12:00:00'                    | ''      |
-			| 'Time sheet 3 dated 31.03.2023 12:00:00'                    | ''      |
-			| 'Unbundling 1 dated 27.02.2023 12:00:01'                    | ''      |
-			| 'Vendors advances closing 2 dated 28.02.2023 12:00:00'      | ''      |
-			| 'Vendors advances closing 3 dated 31.03.2023 12:00:00'      | ''      |
-			| 'Work order 1 dated 27.03.2023 11:01:50'                    | ''      |
-			| 'Work sheet 1 dated 28.03.2023 12:00:00'                    | ''      |
+			| 'Document'                                                 | 'Company'       | 'Files' |
+			| 'Bank payment 1 dated 24.02.2023 10:51:48'                 | 'Own company 2' | ''      |
+			| 'Bank payment 2 dated 24.02.2023 11:00:05'                 | 'Own company 2' | ''      |
+			| 'Bank payment 3 dated 11.08.2023 12:00:00'                 | 'Own company 2' | ''      |
+			| 'Bank payment 4 dated 01.04.2023 12:00:00'                 | 'Own company 2' | ''      |
+			| 'Bank payment 5 dated 01.04.2023 12:00:01'                 | 'Own company 2' | ''      |
+			| 'Bank payment 13 dated 22.03.2024 10:51:11'                | 'Own company 2' | ''      |
+			| 'Bank receipt 1 dated 24.02.2023 10:49:55'                 | 'Own company 2' | ''      |
+			| 'Bank receipt 2 dated 24.02.2023 11:01:13'                 | 'Own company 2' | ''      |
+			| 'Bank receipt 7 dated 25.02.2023 12:00:00'                 | 'Own company 2' | ''      |
+			| 'Bank receipt 13 dated 05.12.2023 10:00:00'                | 'Own company 2' | ''      |
+			| 'Bank receipt 14 dated 11.01.2024 10:00:00'                | 'Own company 2' | ''      |
+			| 'Bank receipt 18 dated 03.02.2024 12:00:00'                | 'Own company 2' | ''      |
+			| 'Cash expense 1 dated 24.02.2023 10:52:43'                 | 'Own company 2' | ''      |
+			| 'Cash payment 1 dated 24.02.2023 10:50:30'                 | 'Own company 2' | ''      |
+			| 'Cash receipt 1 dated 10.03.2023 00:00:00'                 | 'Own company 2' | ''      |
+			| 'Cash revenue 1 dated 24.02.2023 10:53:15'                 | 'Own company 2' | ''      |
+			| 'Commissioning of fixed asset 1 dated 02.02.2024 00:00:00' | 'Own company 2' | ''      |
+			| 'Credit note 1 dated 24.02.2023 11:02:48'                  | 'Own company 2' | ''      |
+			| 'Credit note 3 dated 27.03.2024 14:45:40'                  | 'Own company 2' | ''      |
+			| 'Credit note 6 dated 21.03.2024 12:00:00'                  | 'Own company 2' | ''      |
+			| 'Debit/Credit note 1 dated 23.02.2024 12:00:00'            | 'Own company 2' | ''      |
+			| 'Debit/Credit note 2 dated 20.02.2024 13:27:56'            | 'Own company 2' | ''      |
+			| 'Debit/Credit note 3 dated 30.03.2024 11:34:17'            | 'Own company 2' | ''      |
+			| 'Debit note 1 dated 24.02.2023 11:03:25'                   | 'Own company 2' | ''      |
+			| 'Debit note 2 dated 01.04.2023 14:10:35'                   | 'Own company 2' | ''      |
+			| 'Employee cash advance 1 dated 01.07.2023 00:00:00'        | 'Own company 2' | ''      |
+			| 'Employee cash advance 2 dated 01.08.2023 12:00:00'        | 'Own company 2' | ''      |
+			| 'Employee cash advance 3 dated 22.03.2024 11:52:17'        | 'Own company 2' | ''      |
+			| 'Expense accrual 1 dated 30.01.2024 00:00:00'              | 'Own company 2' | ''      |
+			| 'Expense accrual 2 dated 01.02.2024 12:00:00'              | 'Own company 2' | ''      |
+			| 'Expense accrual 4 dated 01.03.2024 12:00:00'              | 'Own company 2' | ''      |
+			| 'Expense accrual 5 dated 28.02.2024 12:00:00'              | 'Own company 2' | ''      |
+			| 'Money transfer 2 dated 11.03.2023 14:34:06'               | 'Own company 2' | ''      |
+			| 'Purchase invoice 1 dated 24.02.2023 10:04:33'             | 'Own company 2' | ''      |
+			| 'Purchase invoice 2 dated 22.07.2023 09:38:02'             | 'Own company 2' | ''      |
+			| 'Purchase invoice 3 dated 30.11.2023 16:01:04'             | 'Own company 2' | ''      |
+			| 'Purchase invoice 7 dated 05.12.2023 12:00:00'             | 'Own company 2' | ''      |
+			| 'Purchase return 1 dated 24.02.2023 17:01:27'              | 'Own company 2' | ''      |
+			| 'Purchase return 112 dated 20.03.2024 11:28:01'            | 'Own company 2' | ''      |
+			| 'Retail sales receipt 1 dated 25.02.2023 15:00:00'         | 'Own company 2' | ''      |
+			| 'Revenue accrual 1 dated 30.01.2024 12:00:00'              | 'Own company 2' | ''      |
+			| 'Revenue accrual 2 dated 01.02.2024 12:00:00'              | 'Own company 2' | ''      |
+			| 'Revenue accrual 4 dated 01.03.2024 12:00:00'              | 'Own company 2' | ''      |
+			| 'Revenue accrual 5 dated 28.02.2024 12:00:00'              | 'Own company 2' | ''      |
+			| 'Sales invoice 1 dated 24.02.2023 10:14:47'                | 'Own company 2' | '1'     |
+			| 'Sales invoice 3 dated 30.03.2023 12:23:56'                | 'Own company 2' | '3'     |
+			| 'Sales return 1 dated 02.03.2023 15:00:00'                 | 'Own company 2' | ''      |
+			| 'Sales return 112 dated 20.03.2024 11:27:09'               | 'Own company 2' | ''      |	
+	* Check filter by company
+		And I select from the drop-down list named "Company" by "Own company 3" string
+		And I click "Find" button
+		Then the number of "DocumentList" table lines is "равно" 0
+		And I select from the drop-down list named "Company" by "Own company 2" string
+		And I click "Find" button		
+		Then the number of "DocumentList" table lines is "больше" 0	
+	* Check filter by ledger type
+		And I select from the drop-down list named "LedgerType" by "Manager analitics" string
+		And I click "Find" button
+		Then the number of "DocumentList" table lines is "равно" 0
+		And I select from the drop-down list named "LedgerType" by "Basic LTV" string
+		And I click "Find" button
 	* Check filter by document type
 		And I select from "Document type" drop-down list by "Sales invoice" string
 		And I click "Find" button
 		And "DocumentList" table contains lines
 			| 'Document'                                                  | 'Files' |
 			| 'Sales invoice 1 dated 24.02.2023 10:14:47'                 | '1'     |
-			| 'Sales invoice 2 dated 24.02.2023 10:18:20'                 | ''      |
 			| 'Sales invoice 3 dated 30.03.2023 12:23:56'                 | '3'     |
 		And "DocumentList" table does not contain lines
 			| 'Document'                                                  | 'Files' |	

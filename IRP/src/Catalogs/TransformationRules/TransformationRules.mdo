@@ -10,7 +10,7 @@
  <name>TransformationRules</name>
  <synonym>
   <key>tr</key>
-  <value>Transformation rules</value>
+  <value>Dönüşüm kuralları</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -42,7 +42,7 @@
   <name>SourceType</name>
   <synonym>
    <key>tr</key>
-   <value>Source type</value>
+   <value>Kaynak tür</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -65,7 +65,7 @@
   <name>TargetType</name>
   <synonym>
    <key>tr</key>
-   <value>Target type</value>
+   <value>Hedef tür</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -88,7 +88,7 @@
   <name>SourceCondition</name>
   <synonym>
    <key>tr</key>
-   <value>Source condition</value>
+   <value>Kaynak koşul</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -112,7 +112,7 @@
   <name>AutoTransform</name>
   <synonym>
    <key>tr</key>
-   <value>Auto transform</value>
+   <value>Otomatik dönüşüm</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -135,7 +135,7 @@
   <name>UpdateLinkedTarget</name>
   <synonym>
    <key>tr</key>
-   <value>Update linked target</value>
+   <value>Bağlantılı hedefi güncelle</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -176,7 +176,7 @@
    <name>SourceAttribute</name>
    <synonym>
     <key>tr</key>
-    <value>Source attribute</value>
+    <value>Kaynak özniteliği</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -199,7 +199,7 @@
    <name>TargetAttribute</name>
    <synonym>
     <key>tr</key>
-    <value>Target attribute</value>
+    <value>Hedef niteliği</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -222,7 +222,7 @@
    <name>Copy</name>
    <synonym>
     <key>tr</key>
-    <value>Copy</value>
+    <value>Kopyala</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -244,7 +244,7 @@
    <name>LockTargetAttribute</name>
    <synonym>
     <key>tr</key>
-    <value>Lock target attribute</value>
+    <value>Hedef niteliğini kilitle</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -266,7 +266,7 @@
    <name>EvalTargetAttribute</name>
    <synonym>
     <key>tr</key>
-    <value>Eval target attribute</value>
+    <value>Hedef niteliğini değerlendir</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -282,7 +282,7 @@
    </type>
    <toolTip>
     <key>tr</key>
-    <value>Eval some code where can be used "Source" as Ref, And "SourceRow" as current row from source</value>
+    <value>"Kaynak"ın Referans olarak ve "KaynakSatırı"nın kaynaktan geçerli satır olarak kullanılabileceği bazı kodları değerlendirin</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
@@ -301,7 +301,7 @@
    <name>MustBeFilled</name>
    <synonym>
     <key>tr</key>
-    <value>Must be filled</value>
+    <value>Doldurulması gerekir</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -323,7 +323,7 @@
    <name>SourceType</name>
    <synonym>
     <key>tr</key>
-    <value>Source type</value>
+    <value>Kaynak tür</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -346,7 +346,7 @@
    <name>TargetType</name>
    <synonym>
     <key>tr</key>
-    <value>Target type</value>
+    <value>Hedef tür</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -406,7 +406,7 @@
    <name>SortingIndex</name>
    <synonym>
     <key>tr</key>
-    <value>Sorting index</value>
+    <value>Sıralama dizini</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -431,7 +431,7 @@
    <name>LinkedByRule</name>
    <synonym>
     <key>tr</key>
-    <value>Linked by rule</value>
+    <value>Kuralla bağlı</value>
    </synonym>
    <synonym>
     <key>ru</key>

@@ -1593,7 +1593,7 @@
    <name>TakeAccountFromTaxes</name>
    <synonym>
     <key>tr</key>
-    <value>Take account from taxes</value>
+    <value>Hesapları vergilerden al</value>
    </synonym>
    <synonym>
     <key>ru</key>

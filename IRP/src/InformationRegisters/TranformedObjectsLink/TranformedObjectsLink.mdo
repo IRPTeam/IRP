@@ -12,7 +12,7 @@
  <name>TranformedObjectsLink</name>
  <synonym>
   <key>tr</key>
-  <value>Tranformed objects link</value>
+  <value>Dönüştürülmüş nesneler bağlantısı</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -29,7 +29,7 @@
   <name>TransformationRule</name>
   <synonym>
    <key>tr</key>
-   <value>Transformation rule</value>
+   <value>Dönüşüm kuralı</value>
   </synonym>
   <synonym>
    <key>ru</key>

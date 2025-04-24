@@ -3,7 +3,7 @@
  <name>BeforeWrite_CatalogObjectTransformation</name>
  <synonym>
   <key>tr</key>
-  <value>Before write catalog object transformation</value>
+  <value>Katalog nesnesi dönüşümü saklanmadan önce</value>
  </synonym>
  <synonym>
   <key>ru</key>

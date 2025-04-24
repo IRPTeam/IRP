@@ -2056,7 +2056,7 @@ Function Strings(Lang) Export
 		|tr='[%1] numarası [%2] için zaten kullanılıyor'", Lang));
 	Strings.Insert("Error_180", NStr("en='Only system record allowed';
 		|ru='Только системная запись разрешена';
-		|tr='Only system record allowed'", Lang));
+		|tr='Yalnızca sistem kaydına izin verilir'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -3377,7 +3377,7 @@ Strings.Insert("BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand",
 Strings.Insert("BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues",
 	NStr("en='BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)';
 		|ru='BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)';
-		|tr='BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'", Lang));
+		|tr='BankaÖdemeFişi Borç (R5015B_DiğerPartnerİşlemleri) Alacak (R5021T_Gelirler)'", Lang));
 
 Strings.Insert("CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder",
 	NStr("en='CashPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)';
@@ -3392,7 +3392,7 @@ Strings.Insert("CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOn
 Strings.Insert("CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues",
 	NStr("en='CashPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)';
 		|ru='CashPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)';
-		|tr='CashPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'", Lang));
+		|tr='NakitÖdemeFişi Borç (R5015B_DiğerPartnerİşlemleri) Alacak (R5021T_Gelirler)'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
 	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)';

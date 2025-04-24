@@ -3,7 +3,7 @@
  <name>BeforeWrite_DocumentObjectTransformation</name>
  <synonym>
   <key>tr</key>
-  <value>Before write document object transformation</value>
+  <value>Belge nesnesi dönüşümü saklanmadan önce</value>
  </synonym>
  <synonym>
   <key>ru</key>

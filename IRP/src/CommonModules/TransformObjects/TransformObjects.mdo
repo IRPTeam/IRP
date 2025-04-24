@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5131da51-a60c-4474-a659-1c4af63ba4bf">
+ <name>TransformObjects</name>
+ <synonym>
+  <key>tr</key>
+  <value>Transform objects</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Преобразование объектов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Transform objects</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

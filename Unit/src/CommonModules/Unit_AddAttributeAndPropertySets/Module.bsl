@@ -74,6 +74,8 @@ Function GetExclude_AddAttributes()
 	ArrayOfExcluded.Add("Catalog.NumeratorBasicRules");
 	ArrayOfExcluded.Add("Catalog.NumeratorGroups");
 	ArrayOfExcluded.Add("Catalog.PrintFormTemplates");
+	ArrayOfExcluded.Add("Catalog.SystemAttributesSets");
+	ArrayOfExcluded.Add("Catalog.TransformationRules");
 
 	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");
 	ArrayOfExcluded.Add("Document.AdditionalRevenueAllocation");
@@ -125,7 +127,10 @@ Function GetExclude_Properties()
 	ArrayOfExcluded.Add("Catalog.NumeratorBasicRules");
 	ArrayOfExcluded.Add("Catalog.NumeratorGroups");
 	ArrayOfExcluded.Add("Catalog.PrintFormTemplates");
+	ArrayOfExcluded.Add("Catalog.SystemAttributesSets");
 	
+	ArrayOfExcluded.Add("Catalog.TransformationRules");
+
 	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");
 	ArrayOfExcluded.Add("Document.AdditionalRevenueAllocation");
 	ArrayOfExcluded.Add("Document.CalculationMovementCosts");

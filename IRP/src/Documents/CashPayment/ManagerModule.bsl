@@ -142,6 +142,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(PostingServer.Exists_R2020B_AdvancesFromCustomers());
 	Return QueryArray;
 EndFunction
@@ -228,7 +229,12 @@ Function PaymentList()
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.OtherPartner) AS IsOtherPartner,
 		|	PaymentList.CashFlowCenter,
 		|	PaymentList.Project,
-		|	FALSE AS IsReturnToCustomerByPOS
+		|	FALSE AS IsReturnToCustomerByPOS,
+		|	PaymentList.Tax,
+		|	PaymentList.TaxDiscountAmount,
+		|	PaymentList.RevenueType,
+		|	PaymentList.AdditionalAnalytic,
+		|	PaymentList.ProfitLossCenter
 		|INTO PaymentList
 		|FROM
 		|	Document.CashPayment.PaymentList AS PaymentList
@@ -401,22 +407,23 @@ Function R2021B_CustomersTransactions()
 EndFunction
 
 Function R5015B_OtherPartnersTransactions()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Partner,
-		   |	PaymentList.LegalName,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Agreement,
-		   |	PaymentList.Key,
-		   |	PaymentList.Amount AS Amount
-		   |INTO R5015B_OtherPartnersTransactions
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsOtherPartner";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Partner,
+		|	PaymentList.LegalName,
+		|	PaymentList.Currency,
+		|	PaymentList.Agreement,
+		|	PaymentList.Key,
+		|	PaymentList.Amount + PaymentList.TaxDiscountAmount AS Amount
+		|INTO R5015B_OtherPartnersTransactions
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherPartner";
 EndFunction
 
 Function R1020B_AdvancesToVendors()
@@ -452,48 +459,70 @@ Function R5011B_CustomersAging()
 EndFunction
 
 Function R5010B_ReconciliationStatement()
-	Return "SELECT
+	Return 
+		"SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
+		   |	PaymentList.Company,
+		   |	PaymentList.Branch,
+		   |	PaymentList.LegalName,
+		   |	PaymentList.LegalNameContract AS LegalNameContract,
+		   |	PaymentList.Currency,
+		   |	SUM(PaymentList.Amount + PaymentList.TaxDiscountAmount) AS Amount,
+		   |	PaymentList.Period
 		   |INTO R5010B_ReconciliationStatement
 		   |FROM
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	PaymentList.IsPaymentToVendor
 		   |	OR PaymentList.IsReturnToCustomer
-		   |	OR PaymentList.IsOtherPartner";
+		   |	OR PaymentList.IsOtherPartner
+		   |GROUP BY
+		   |	PaymentList.Company,
+		   |	PaymentList.Branch,
+		   |	PaymentList.LegalName,
+		   |	PaymentList.LegalNameContract,
+		   |	PaymentList.Currency,
+		   |	PaymentList.Period,
+		   |	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 Function R3010B_CashOnHand()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	PaymentList.CashAccount AS Account,
-		   |	*
-		   |INTO R3010B_CashOnHand
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Key,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.CashAccount AS Account,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount AS Amount
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R3011T_CashFlow()
-	Return "SELECT
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.CashAccount AS Account,
-		   |	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
-		   |	PaymentList.FinancialMovementType,
-		   |	PaymentList.CashFlowCenter,
-		   |	PaymentList.PlanningPeriod,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Key AS Key,
-		   |	PaymentList.Amount
-		   |INTO R3011T_CashFlow
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.CashAccount AS Account,
+		|	VALUE(Enum.CashFlowDirections.Outgoing) AS Direction,
+		|	PaymentList.FinancialMovementType,
+		|	PaymentList.CashFlowCenter,
+		|	PaymentList.PlanningPeriod,
+		|	PaymentList.Currency,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Amount AS Amount
+		|INTO R3011T_CashFlow
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R3015B_CashAdvance()
@@ -627,6 +656,29 @@ Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_BP_CP();
 EndFunction
 
+Function R5021T_Revenues()
+	Return 
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Project,
+		|	PaymentList.ProfitLossCenter,
+		|	PaymentList.RevenueType,
+		|	PaymentList.Currency,
+		|	PaymentList.AdditionalAnalytic,
+		|	PaymentList.TaxDiscountAmount AS Amount,
+		|	PaymentList.TaxDiscountAmount AS AmountWithTaxes,
+		|	Undefined AS ItemKey
+		|INTO R5021T_Revenues
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherPartner
+		|	AND PaymentList.TaxDiscountAmount <> 0";
+EndFunction
+
 #EndRegion
 
 #Region AccessObject
@@ -751,6 +803,22 @@ Function T1040T_AccountingAmounts()
 		|
 		|UNION ALL
 		|
+		// Revenue tax discount
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key AS RowKey,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Currency,
+		|	PaymentList.TaxDiscountAmount,
+		|	VALUE(Catalog.AccountingOperations.CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherPartner AND PaymentList.TaxDiscountAmount <> 0
+		|
+		|UNION ALL
+		|
 		// Salary payment
 		|SELECT
 		|	PaymentList.Period,
@@ -800,7 +868,9 @@ Function GetAccountingAnalytics(Parameters) Export
 	ElsIf Parameters.Operation = AO.CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand Then
 		Return GetAnalytics_SalaryPayment(Parameters); // Salary payment - Cash on hand
 	ElsIf Parameters.Operation = AO.CashPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand Then
-		Return GetAnalytics_EmployeeCashAdvance(Parameters); // Employee cash advance - Cash on hand
+		Return GetAnalytics_EmployeeCashAdvance(Parameters); // Employee cash advance - Cash on hand		
+	ElsIf Parameters.Operation = AO.CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues Then
+		Return GetAnalytics_Revenue(Parameters); // Other partner - Revenue
 	EndIf;
 	
 	Return Undefined;
@@ -945,14 +1015,22 @@ Function GetAnalytics_OtherPartner(Parameters)
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
 	// Debit
-	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-		                                               Parameters.RowData.Partner, 
-		                                               Parameters.RowData.Agreement,
-		                                               Parameters.ObjectData.Currency);
-		                                               
-	AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
-	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
-
+	If ValueIsFilled(Parameters.RowData.Tax) Then
+		Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters,
+			New Structure("Tax, VatRate", Parameters.RowData.Tax));
+		AccountingAnalytics.Debit = Debit.OutgoingAccount;
+		AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics,
+			New Structure("Tax, VatRate", Parameters.RowData.Tax));			
+	Else
+		Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+			                                               Parameters.RowData.Partner, 
+			                                               Parameters.RowData.Agreement,
+			                                               Parameters.ObjectData.Currency);
+			                                               
+		AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
+		AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	EndIf;
+	
 	// Credit
 	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
 															Parameters.ObjectData.CashAccount,
@@ -961,6 +1039,39 @@ Function GetAnalytics_OtherPartner(Parameters)
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Other partner - Revenue
+Function GetAnalytics_Revenue(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	If ValueIsFilled(Parameters.RowData.Tax) Then
+		Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters,
+			New Structure("Tax, VatRate", Parameters.RowData.Tax));
+		AccountingAnalytics.Debit = Debit.OutgoingAccount;
+		AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics,
+			New Structure("Tax, VatRate", Parameters.RowData.Tax));			
+	Else
+		Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+			                                               Parameters.RowData.Partner, 
+			                                               Parameters.RowData.Agreement,
+			                                               Parameters.ObjectData.Currency);
+			                                               
+		AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
+		AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	EndIf;
+	
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+		                                                      Parameters.RowData.RevenueType, 
+		                                                      Parameters.RowData.ProfitLossCenter);
+		                                               
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	
 	Return AccountingAnalytics;
 EndFunction

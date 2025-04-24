@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocDecommissioningOfFixedAssetServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
+	SystemAttributesServer.OutputSystemAttributes(ThisObject, "Company");
 EndProcedure
 
 #EndRegion

@@ -260,16 +260,21 @@ EndProcedure
 
 Function WrapRows(Parameters, Rows) Export
 	ArrayOfRows = New Array();
+	RowLine = 0;
 	For Each Row In Rows Do
 		NewRow = New Structure(Parameters.ObjectMetadataInfo.Tables[Parameters.TableName].Columns);
 		FillPropertyValues(NewRow, Row);
+		
+		If Not NewRow.Property("Key") Then
+			NewRow.Insert("Key", RowLine);
+			RowLine = RowLine + 1;
+		EndIf;
 		ArrayOfRows.Add(NewRow);
-
-		FilterByKey = New Structure("Key", Row.Key);
 		
 		// SpecialOffers
 		ArrayOfRowsSpecialOffers = New Array();
 		If Parameters.SpecialOffersIsExists Then
+			FilterByKey = New Structure("Key", NewRow.Key);
 			For Each SpecialOfferRow In Parameters.Object.SpecialOffers.FindRows(FilterByKey) Do
 				NewRowSpecialOffer = New Structure(Parameters.ObjectMetadataInfo.Tables.SpecialOffers.Columns);
 				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
@@ -280,6 +285,7 @@ Function WrapRows(Parameters, Rows) Export
 		// SpecialOffersCache
 		ArrayOfRowsSpecialOffersCache = New Array();
 		If Parameters.FormIsExists And CommonFunctionsClientServer.ObjectHasProperty(Parameters.Form, "SpecialOffersCache") Then
+			FilterByKey = New Structure("Key", NewRow.Key);
 			For Each SpecialOfferRow In Parameters.Form.SpecialOffersCache.FindRows(FilterByKey) Do
 				NewRowSpecialOffer = OffersServer.GetOffersTableRow();
 				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
@@ -290,6 +296,7 @@ Function WrapRows(Parameters, Rows) Export
 		// BillOfMaterials
 		ArrayOfRowsBillOfMaterialsList = New Array();
 		If Parameters.BillOfMaterialsListExists Then
+			FilterByKey = New Structure("Key", NewRow.Key);
 			For Each RowBillOfMaterials In Parameters.Object.BillOfMaterialsList.FindRows(FilterByKey) Do
 				NewRowBillOfMaterials = New Structure(Parameters.ObjectMetadataInfo.Tables.BillOfMaterialsList.Columns);
 				FillPropertyValues(NewRowBillOfMaterials, RowBillOfMaterials);
@@ -300,6 +307,7 @@ Function WrapRows(Parameters, Rows) Export
 		// RowIDInfo
 		ArrayOfRowsRowIDInfo = New Array();
 		If Parameters.RowIDInfoExists Then
+			FilterByKey = New Structure("Key", NewRow.Key);
 			For Each RowRowIDInfo In Parameters.Object.RowIDInfo.FindRows(FilterByKey) Do
 				NewRowRowIDInfo = New Structure(Parameters.ObjectMetadataInfo.Tables.RowIDInfo.Columns);
 				FillPropertyValues(NewRowRowIDInfo, RowRowIDInfo);
@@ -1778,6 +1786,9 @@ Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("ExpenseType"              , BindPaymentListExpenseType(Parameters));
 	ResourceToBinding.Insert("ProfitLossCenter"         , BindPaymentListProfitLossCenter(Parameters));
 	ResourceToBinding.Insert("AdditionalAnalytic"       , BindPaymentListAdditionalAnalytic(Parameters));
+	ResourceToBinding.Insert("Tax"                      , BindPaymentListTax(Parameters));
+	ResourceToBinding.Insert("TaxDiscountAmount"        , BindPaymentListTaxDiscountAmount(Parameters));
+	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
 		
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
@@ -1834,6 +1845,11 @@ Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("ReceiptingAccount"        , BindPaymentListReceiptingAccount(Parameters));
 	ResourceToBinding.Insert("ReceiptingBranch"         , BindPaymentListReceiptingBranch(Parameters));
 	ResourceToBinding.Insert("Project"                  , BindPaymentListProject(Parameters));
+	ResourceToBinding.Insert("AdditionalAnalytic"       , BindPaymentListAdditionalAnalytic(Parameters));
+	ResourceToBinding.Insert("Tax"                      , BindPaymentListTax(Parameters));
+	ResourceToBinding.Insert("TaxDiscountAmount"        , BindPaymentListTaxDiscountAmount(Parameters));
+	ResourceToBinding.Insert("ProfitLossCenter"         , BindPaymentListProfitLossCenter(Parameters));
+	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1924,6 +1940,9 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.ExpenseType              = GetPaymentListExpenseType(Parameters, Row.Key);
 		Options.ProfitLossCenter         = GetPaymentListProfitLossCenter(Parameters, Row.Key);
 		Options.AdditionalAnalytic       = GetPaymentListAdditionalAnalytic(Parameters, Row.Key);
+		Options.Tax                      = GetPaymentListTax(Parameters, Row.Key);
+		Options.TaxDiscountAmount        = GetPaymentListTaxDiscountAmount(Parameters, Row.Key);
+		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
 		
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankPayment";
@@ -2000,6 +2019,11 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.ReceiptingAccount        = GetPaymentListReceiptingAccount(Parameters, Row.Key);
 		Options.ReceiptingBranch         = GetPaymentListReceiptingBranch(Parameters, Row.Key);
 		Options.Project                  = GetPaymentListProject(Parameters, Row.Key);
+		Options.AdditionalAnalytic       = GetPaymentListAdditionalAnalytic(Parameters, Row.Key);
+		Options.Tax                      = GetPaymentListTax(Parameters, Row.Key);
+		Options.TaxDiscountAmount        = GetPaymentListTaxDiscountAmount(Parameters, Row.Key);
+		Options.ProfitLossCenter         = GetPaymentListProfitLossCenter(Parameters, Row.Key);
+		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashPayment";
 		Chain.ClearByTransactionTypeCashPayment.Options.Add(Options);
@@ -3479,9 +3503,7 @@ Function GetBindingStructure_Partner(Parameters)
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 		
-	Result.Binding.Insert("Payroll",
-		"StepChangeAgreementByPartner_AgreementTypeIsOther,
-		|StepChangeLegalNameByPartner");
+	Result.Binding.Insert("Payroll", "StepChangeLegalNameByPartner");
 	
 	Result.Binding.Insert("TaxesOperation",
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
@@ -5449,10 +5471,6 @@ Function GetBindingStructure_Agreement(Parameters)
 		|StepChangePriceIncludeTaxByAgreement,
 		|StepItemListChangeTradeAgentFeePercentByAgreement,
 		|StepChangeTradeAgentFeeTypeByAgreement");
-	
-	Result.Binding.Insert("Payroll",
-		"StepChangeCompanyByAgreement,
-		|StepChangeCurrencyByAgreement");
 	
 	Result.Binding.Insert("TaxesOperation",
 		"StepChangeCompanyByAgreement,
@@ -8800,6 +8818,50 @@ Function BindPaymentListFinancialMovementTypeOtherCompany(Parameters)
 	DataPath = "PaymentList.FinancialMovementTypeOtherCompany";
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListFinancialMovementTypeOtherCompany");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_TAX
+
+// PaymentList.Tax.Set
+Procedure SetPaymentListTax(Parameters, Results) Export
+	Binding = BindPaymentListTax(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.Tax.Get
+Function GetPaymentListTax(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListTax(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.Tax.Bind
+Function BindPaymentListTax(Parameters)
+	DataPath = "PaymentList.Tax";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListTax");
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_TAX_DISCOUNT_AMOUNT
+
+// PaymentList.TaxDiscountAmount.Set
+Procedure SetPaymentListTaxDiscountAmount(Parameters, Results) Export
+	Binding = BindPaymentListTaxDiscountAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.TaxDiscountAmount.Get
+Function GetPaymentListTaxDiscountAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListTaxDiscountAmount(Parameters).DataPath , _Key);
+EndFunction
+
+// PaymentList.TaxDiscountAmount.Bind
+Function BindPaymentListTaxDiscountAmount(Parameters)
+	DataPath = "PaymentList.TaxDiscountAmount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListTaxDiscountAmount");
 EndFunction
 
 #EndRegion
@@ -12621,8 +12683,7 @@ Procedure SetItemListQuantityInBaseUnit(Parameters, Results) Export
 	EndIf;
 	
 	Binding = BindItemListQuantityInBaseUnit(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results,
-		"OnSetItemListQuantityInBaseUnitNotify", "QuantityInBaseUnit",,, _IsChanged);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results, "OnSetItemListQuantityInBaseUnitNotify", "QuantityInBaseUnit",,, _IsChanged);
 EndProcedure
 
 Function GetItemListQuantityInBaseUnit(Parameters, _Key)
@@ -16945,13 +17006,19 @@ Procedure _CommitChainChanges(Cache, Source, Parameters)
 			// tabular parts ItemList and PaymentList moved by rows, key in rows is unique
 			If IsRowWithKey Then
 				For Each Row In PropertyValue Do
-					FoundedRow = Source[PropertyName].FindRows(New Structure("Key", Row.Key))[0];
+					If TypeOf(Row.Key) = Type("Number") Then
+						FoundedRow = Source[PropertyName].FindRows(New Structure("LineNumber", Row.Key))[0];
+					Else
+						FoundedRow = Source[PropertyName].FindRows(New Structure("Key", Row.Key))[0];
+					EndIf;
 					FoundedRowInMap = Parameters.TableRowsMap.Get(PropertyName+":"+Row.Key);
 					For Each KeyValue In Row Do
 						If FoundedRowInMap <> Undefined Then
 							FoundedRowInMap[KeyValue.Key] = KeyValue.Value;
 						EndIf;
-						FoundedRow[KeyValue.Key] = KeyValue.Value;
+						If Not TypeOf(Row.Key) = Type("Number") Then
+							FoundedRow[KeyValue.Key] = KeyValue.Value;
+						EndIf;
 					EndDo;
 				EndDo;
 			Else
@@ -17041,8 +17108,7 @@ Procedure MultiSetterObject(Parameters, Results, ResourceToBinding, ViewNotify =
 	EndDo;
 EndProcedure
 
-Procedure SetterObject(StepNames, DataPath, Parameters, Results, 
-	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False, _IsChanged = False)
+Procedure SetterObject(StepNames, DataPath, Parameters, Results, ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False, _IsChanged = False)
 	Setter("Object", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache, _IsChanged);
 EndProcedure
 
@@ -17051,7 +17117,7 @@ Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, V
 	DisableNextSteps = False;
 	For Each Result In Results Do
 		_Key   = Result.Options.Key;
-		If ValueIsFilled(ValueDataPath) Then
+		If ValueIsFilled(ValueDataPath) And TypeOf(Result.Value) = Type("Structure") Then
 			_Value = ?(Result.Value = Undefined, Undefined, Result.Value[ValueDataPath]);
 		Else
 			_Value = Result.Value;
@@ -17151,7 +17217,16 @@ Function GetProperty(Parameters, Cache, Source, DataPath, Key, ReadOnlyFromCache
 			RowByKey = Row;
 		EndIf;
 		// not found in cache
-		If RowByKey = Undefined Then
+		
+		If TypeOf(Key) = Type("Number") Then
+			RowsInNotChached = Parameters.Object[TableName].FindRows(New Structure("LineNumber", Key));
+			If RowsInNotChached.Count() = 0 Then
+				Raise StrTemplate("Not found row in table [%1] line [%2]", TableName, Key);
+			Else
+				RowByKey = RowsInNotChached[0];
+			EndIf;
+			
+		ElsIf RowByKey = Undefined Then
 			If ReadOnlyFromCache Then
 				Return Undefined;
 			EndIf;

@@ -71,6 +71,21 @@
   <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.PurchaseOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.SystemAttributesSets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.SystemAttributesSets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.SystemAttributesSets.Document_PurchaseOrder</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.SystemAttributes</characteristicValues>
+  <objectField>InformationRegister.SystemAttributes.Dimension.Object</objectField>
+  <typeField>InformationRegister.SystemAttributes.Dimension.Property</typeField>
+  <valueField>InformationRegister.SystemAttributes.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>

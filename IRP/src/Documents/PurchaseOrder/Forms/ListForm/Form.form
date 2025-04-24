@@ -546,56 +546,6 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Store</name>
-   <id>52</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>List.Store</segments>
-   </dataPath>
-   <extendedTooltip>
-    <name>StoreExtendedTooltip</name>
-    <id>54</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>StoreContextMenu</name>
-    <id>53</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>InputField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:InputFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <wrap>true</wrap>
-    <chooseType>true</chooseType>
-    <typeDomainEnabled>true</typeDomainEnabled>
-    <textEdit>true</textEdit>
-   </extInfo>
-  </items>
-  <items xsi:type="form:FormField">
    <name>Author</name>
    <id>40</id>
    <visible>true</visible>
@@ -993,20 +943,13 @@
 	PurchaseOrderList.Branch,
 	PurchaseOrderList.Comment,
 	PurchaseOrderList.DocumentAmount,
-	Not PurchaseOrderClosing.Ref IS NULL AS Closed,
-	PurchaseOrderClosing.Ref AS ClosingOrder,
-	CASE
-		WHEN COUNT(DISTINCT PurchaseOrderItemList.Store) = 1
-			THEN MAX(PurchaseOrderItemList.Store)
-		ELSE UNDEFINED
-	END AS Store
+	NOT PurchaseOrderClosing.Ref IS NULL AS Closed,
+	PurchaseOrderClosing.Ref AS ClosingOrder
 FROM
 	Document.PurchaseOrder AS PurchaseOrderList
 		LEFT JOIN Document.PurchaseOrderClosing AS PurchaseOrderClosing
 		ON PurchaseOrderClosing.PurchaseOrder = PurchaseOrderList.Ref
 		AND PurchaseOrderClosing.Posted
-		LEFT JOIN Document.PurchaseOrder.ItemList AS PurchaseOrderItemList
-		ON PurchaseOrderItemList.Ref = PurchaseOrderList.Ref
 GROUP BY
 	PurchaseOrderList.Ref,
 	PurchaseOrderList.DeletionMark,
@@ -1030,6 +973,7 @@ GROUP BY
 	NOT PurchaseOrderClosing.Ref IS NULL,
 	PurchaseOrderClosing.Ref</queryText>
    <mainTable>Document.PurchaseOrder</mainTable>
+   <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>
    <customQuery>true</customQuery>
    <autoSaveUserSettings>true</autoSaveUserSettings>
@@ -1050,26 +994,6 @@ GROUP BY
       <content>
        <key>en</key>
        <value>Closed</value>
-      </content>
-     </localValue>
-    </title>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Store</dataPath>
-    <field>Store</field>
-    <title>
-     <localValue>
-      <content>
-       <key>tr</key>
-       <value>Depo</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Склад</value>
-      </content>
-      <content>
-       <key>en</key>
-       <value>Store</value>
       </content>
      </localValue>
     </title>
@@ -1143,10 +1067,6 @@ GROUP BY
     <field>Branch</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Description</dataPath>
-    <field>Description</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>DocumentAmount</dataPath>
     <field>DocumentAmount</field>
    </fields>
@@ -1171,6 +1091,10 @@ GROUP BY
     </title>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Comment</dataPath>
+    <field>Comment</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>ItemList</dataPath>
     <field>ItemList</field>
    </fields>
@@ -1179,8 +1103,8 @@ GROUP BY
     <field>SpecialOffers</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>TaxList</dataPath>
-    <field>TaxList</field>
+    <dataPath>DELETE_TaxList</dataPath>
+    <field>DELETE_TaxList</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>Currencies</dataPath>
@@ -1201,6 +1125,54 @@ GROUP BY
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>PointInTime</dataPath>
     <field>PointInTime</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LocalNetAmount</dataPath>
+    <field>LocalNetAmount</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceNodeID</dataPath>
+    <field>SourceNodeID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>NumeratorRules</dataPath>
+    <field>NumeratorRules</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LocalTotalAmount</dataPath>
+    <field>LocalTotalAmount</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>UniqueID</dataPath>
+    <field>UniqueID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DocumentNumber</dataPath>
+    <field>DocumentNumber</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CreateDate</dataPath>
+    <field>CreateDate</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ManualMovementsEdit</dataPath>
+    <field>ManualMovementsEdit</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Editor</dataPath>
+    <field>Editor</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LocalTaxAmount</dataPath>
+    <field>LocalTaxAmount</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LocalRate</dataPath>
+    <field>LocalRate</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ModifyDate</dataPath>
+    <field>ModifyDate</field>
    </fields>
   </extInfo>
  </attributes>

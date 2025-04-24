@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="829b0602-3cda-4d0a-b2c6-2d2ed88fdb2c">
+ <name>SystemAttributes</name>
+ <synonym>
+  <key>tr</key>
+  <value>System attributes</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Системные атрибуты</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>System attributes</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>ChartOfCharacteristicTypes.SystemAttributes</content>
+ <content>InformationRegister.SystemAttributes</content>
+ <content>Catalog.SystemAttributesSets</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
+</mdclass:Subsystem>

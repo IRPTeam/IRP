@@ -67,7 +67,10 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.Project,
 	|PaymentList.ExpenseType,
 	|PaymentList.ProfitLossCenter,
-	|PaymentList.AdditionalAnalytic";
+	|PaymentList.AdditionalAnalytic,
+	|PaymentList.Tax,
+	|PaymentList.TaxDiscountAmount,
+	|PaymentList.RevenueType";
 		
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -128,7 +131,12 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.Partner,
 		|PaymentList.Agreement,
 		|PaymentList.Payee,
-		|PaymentList.LegalNameContract";
+		|PaymentList.LegalNameContract,
+		|PaymentList.AdditionalAnalytic,
+		|PaymentList.Tax,
+		|PaymentList.TaxDiscountAmount,
+		|PaymentList.ProfitLossCenter,
+		|PaymentList.RevenueType";
 	ElsIf TransactionType = PaymentByCheque Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis";

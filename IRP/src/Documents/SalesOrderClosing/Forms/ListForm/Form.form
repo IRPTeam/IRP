@@ -409,68 +409,6 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Store</name>
-   <id>46</id>
-   <title>
-    <key>tr</key>
-    <value>Depo</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Склад</value>
-   </title>
-   <title>
-    <key>en</key>
-    <value>Store</value>
-   </title>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>List.Store</segments>
-   </dataPath>
-   <extendedTooltip>
-    <name>StoreExtendedTooltip</name>
-    <id>48</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>StoreContextMenu</name>
-    <id>47</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>InputField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:InputFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <wrap>true</wrap>
-    <chooseType>true</chooseType>
-    <typeDomainEnabled>true</typeDomainEnabled>
-    <textEdit>true</textEdit>
-   </extInfo>
-  </items>
-  <items xsi:type="form:FormField">
    <name>Author</name>
    <id>40</id>
    <title>
@@ -887,32 +825,9 @@
 	SalesOrderClosing.Author,
 	SalesOrderClosing.Branch,
 	SalesOrderClosing.Comment,
-	SalesOrderClosing.DocumentAmount,
-	CASE
-		WHEN COUNT(DISTINCT SalesOrderClosingItemList.Store) = 1
-			THEN MAX(SalesOrderClosingItemList.Store)
-		ELSE UNDEFINED
-	END AS Store
+	SalesOrderClosing.DocumentAmount
 FROM
-	Document.SalesOrderClosing AS SalesOrderClosing
-		LEFT JOIN Document.SalesOrderClosing.ItemList AS SalesOrderClosingItemList
-		ON SalesOrderClosingItemList.Ref = SalesOrderClosing.Ref
-GROUP BY
-	SalesOrderClosing.Ref,
-	SalesOrderClosing.DeletionMark,
-	SalesOrderClosing.Number,
-	SalesOrderClosing.Date,
-	SalesOrderClosing.Posted,
-	SalesOrderClosing.Agreement,
-	SalesOrderClosing.Company,
-	SalesOrderClosing.TransactionType,
-	SalesOrderClosing.LegalName,
-	SalesOrderClosing.Partner,
-	SalesOrderClosing.SalesOrder,
-	SalesOrderClosing.Author,
-	SalesOrderClosing.Branch,
-	SalesOrderClosing.Comment,
-	SalesOrderClosing.DocumentAmount</queryText>
+	Document.SalesOrderClosing AS SalesOrderClosing</queryText>
    <mainTable>Document.SalesOrderClosing</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>
@@ -972,32 +887,12 @@ GROUP BY
     <field>Branch</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Description</dataPath>
-    <field>Description</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>DocumentAmount</dataPath>
     <field>DocumentAmount</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Store</dataPath>
-    <field>Store</field>
-    <title>
-     <localValue>
-      <content>
-       <key>tr</key>
-       <value>Depo</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Склад</value>
-      </content>
-      <content>
-       <key>en</key>
-       <value>Store</value>
-      </content>
-     </localValue>
-    </title>
+    <dataPath>Comment</dataPath>
+    <field>Comment</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>ItemList</dataPath>
@@ -1010,6 +905,38 @@ GROUP BY
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>PointInTime</dataPath>
     <field>PointInTime</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ManualMovementsEdit</dataPath>
+    <field>ManualMovementsEdit</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Editor</dataPath>
+    <field>Editor</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceNodeID</dataPath>
+    <field>SourceNodeID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>NumeratorRules</dataPath>
+    <field>NumeratorRules</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ModifyDate</dataPath>
+    <field>ModifyDate</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>UniqueID</dataPath>
+    <field>UniqueID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DocumentNumber</dataPath>
+    <field>DocumentNumber</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CreateDate</dataPath>
+    <field>CreateDate</field>
    </fields>
   </extInfo>
  </attributes>

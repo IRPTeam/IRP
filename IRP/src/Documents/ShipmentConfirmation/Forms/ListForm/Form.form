@@ -203,56 +203,6 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Store</name>
-   <id>37</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>List.Store</segments>
-   </dataPath>
-   <extendedTooltip>
-    <name>StoreExtendedTooltip</name>
-    <id>39</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>StoreContextMenu</name>
-    <id>38</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>InputField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:InputFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <wrap>true</wrap>
-    <chooseType>true</chooseType>
-    <typeDomainEnabled>true</typeDomainEnabled>
-    <textEdit>true</textEdit>
-   </extInfo>
-  </items>
-  <items xsi:type="form:FormField">
    <name>TransactionType</name>
    <id>28</id>
    <visible>true</visible>
@@ -808,26 +758,26 @@ INDEX BY
 ;
 
 ////////////////////////////////////////////////////////////////////////////////
- SELECT
+SELECT
 	ShipmentConfirmation.Ref AS Ref,
 	CASE
-		WHEN case
-			when ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0) &lt; 0
-				then -ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
-			else ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
-		end = 0
+		WHEN CASE
+			WHEN ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0) &lt; 0
+				THEN -ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
+			ELSE ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
+		END = 0
 			THEN VALUE(Enum.InvoicingStatuses.Closed)
-		WHEN ItemListTable.QuantityInBaseUnit = case
-			when ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0) &lt; 0
-				then -ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
-			else ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
-		end
+		WHEN ItemListTable.QuantityInBaseUnit = CASE
+			WHEN ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0) &lt; 0
+				THEN -ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
+			ELSE ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
+		END
 			THEN VALUE(Enum.InvoicingStatuses.Awaiting)
-		WHEN ItemListTable.QuantityInBaseUnit &lt;&gt; case
-			when ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0) &lt; 0
-				then -ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
-			else ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
-		end
+		WHEN ItemListTable.QuantityInBaseUnit &lt;&gt; CASE
+			WHEN ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0) &lt; 0
+				THEN -ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
+			ELSE ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
+		END
 			THEN VALUE(Enum.InvoicingStatuses.Processing)
 	END AS Status,
 	ShipmentConfirmation.DeletionMark AS DeletionMark,
@@ -840,12 +790,7 @@ INDEX BY
 	ShipmentConfirmation.TransactionType AS TransactionType,
 	ShipmentConfirmation.Author AS Author,
 	ShipmentConfirmation.Branch AS Branch,
-	ShipmentConfirmation.Comment AS Comment,
-	CASE
-		WHEN ItemListTable.StoreCount = 1
-			THEN ItemListTable.Store
-		ELSE VALUE(Catalog.Stores.EmptyRef)
-	END AS Store
+	ShipmentConfirmation.Comment AS Comment
 FROM
 	Document.ShipmentConfirmation AS ShipmentConfirmation
 		LEFT JOIN ItemListTable AS ItemListTable
@@ -865,30 +810,25 @@ GROUP BY
 	ShipmentConfirmation.Author,
 	ShipmentConfirmation.Branch,
 	ShipmentConfirmation.Comment,
-	CASE
-		WHEN ItemListTable.StoreCount = 1
-			THEN ItemListTable.Store
-		ELSE VALUE(Catalog.Stores.EmptyRef)
-	END,
 	R4032B_GoodsInTransitOutgoing.QuantityBalance,
 	CASE
-		WHEN case
-			when ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0) &lt; 0
-				then -ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
-			else ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
-		end = 0
+		WHEN CASE
+			WHEN ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0) &lt; 0
+				THEN -ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
+			ELSE ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
+		END = 0
 			THEN VALUE(Enum.InvoicingStatuses.Closed)
-		WHEN ItemListTable.QuantityInBaseUnit = case
-			when ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0) &lt; 0
-				then -ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
-			else ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
-		end
+		WHEN ItemListTable.QuantityInBaseUnit = CASE
+			WHEN ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0) &lt; 0
+				THEN -ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
+			ELSE ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
+		END
 			THEN VALUE(Enum.InvoicingStatuses.Awaiting)
-		WHEN ItemListTable.QuantityInBaseUnit &lt;&gt; case
-			when ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0) &lt; 0
-				then -ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
-			else ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
-		end
+		WHEN ItemListTable.QuantityInBaseUnit &lt;&gt; CASE
+			WHEN ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0) &lt; 0
+				THEN -ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
+			ELSE ISNULL(R4032B_GoodsInTransitOutgoing.QuantityBalance, 0)
+		END
 			THEN VALUE(Enum.InvoicingStatuses.Processing)
 	END</queryText>
    <mainTable>Document.ShipmentConfirmation</mainTable>
@@ -982,16 +922,20 @@ GROUP BY
     <field>Branch</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Description</dataPath>
-    <field>Description</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>Basis</dataPath>
     <field>Basis</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>ItemKey</dataPath>
     <field>ItemKey</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Comment</dataPath>
+    <field>Comment</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SerialLotNumber</dataPath>
+    <field>SerialLotNumber</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>SaveScannedBarcode</dataPath>
@@ -1054,8 +998,48 @@ GROUP BY
     <field>SerialLotNumbers</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>TrailerList</dataPath>
+    <field>TrailerList</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceOfOrigins</dataPath>
+    <field>SourceOfOrigins</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>PointInTime</dataPath>
     <field>PointInTime</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ManualMovementsEdit</dataPath>
+    <field>ManualMovementsEdit</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Editor</dataPath>
+    <field>Editor</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceNodeID</dataPath>
+    <field>SourceNodeID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>NumeratorRules</dataPath>
+    <field>NumeratorRules</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ModifyDate</dataPath>
+    <field>ModifyDate</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>UniqueID</dataPath>
+    <field>UniqueID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DocumentNumber</dataPath>
+    <field>DocumentNumber</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CreateDate</dataPath>
+    <field>CreateDate</field>
    </fields>
    <parameters>
     <name>Period</name>

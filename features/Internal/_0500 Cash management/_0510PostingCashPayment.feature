@@ -864,6 +864,7 @@ And I close all client application windows
 	And I input "Movement type 1" text in "Financial movement type" field of "PaymentList" table
 	And I activate "Cash flow center" field in "PaymentList" table
 	And I select "Distribution department" from "Cash flow center" drop-down list by string in "PaymentList" table
+	And I select "Income tax" from "Partner term" drop-down list by string in "PaymentList" table
 	And I finish line editing in "PaymentList" table
 	And I click the button named "FormPost"
 * Check
@@ -872,7 +873,7 @@ And I close all client application windows
 	Then the form attribute named "Currency" became equal to "TRY"
 	And "PaymentList" table became equal
 		| '#' | 'Partner'       | 'Payee'         | 'Partner term' | 'Legal name contract' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        |
-		| '1' | 'Tax authority' | 'Tax authority' | 'Tax'          | ''                    | '100,00'       | 'Movement type 1'         | 'Distribution department' |		
+		| '1' | 'Tax authority' | 'Tax authority' | 'Income tax'   | ''                    | '100,00'       | 'Movement type 1'         | 'Distribution department' |		
 	And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
 	Then the form attribute named "TransactionType" became equal to "Other partner"
 	And I save the value of "Number" field as "NumberCashPayment053023"

@@ -2372,19 +2372,19 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
-     <name>PaymentListAdditionalAnalytic</name>
-     <id>250</id>
+     <name>PaymentListRevenueType</name>
+     <id>442</id>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.PaymentList.AdditionalAnalytic</segments>
+      <segments>Object.PaymentList.RevenueType</segments>
      </dataPath>
      <extendedTooltip>
-      <name>PaymentListAdditionalAnalyticExtendedTooltip</name>
-      <id>252</id>
+      <name>PaymentListRevenueTypeExtendedTooltip</name>
+      <id>444</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -2398,8 +2398,8 @@
       </extInfo>
      </extendedTooltip>
      <contextMenu>
-      <name>PaymentListAdditionalAnalyticContextMenu</name>
-      <id>251</id>
+      <name>PaymentListRevenueTypeContextMenu</name>
+      <id>443</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -2450,6 +2450,156 @@
      <contextMenu>
       <name>PaymentListBranchContextMenu</name>
       <id>421</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>PaymentListTax</name>
+     <id>433</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.PaymentList.Tax</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>PaymentListTaxExtendedTooltip</name>
+      <id>435</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>PaymentListTaxContextMenu</name>
+      <id>434</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>PaymentListTaxDiscountAmount</name>
+     <id>439</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.PaymentList.TaxDiscountAmount</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>PaymentListTaxDiscountAmountExtendedTooltip</name>
+      <id>441</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>PaymentListTaxDiscountAmountContextMenu</name>
+      <id>440</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>PaymentListAdditionalAnalytic</name>
+     <id>250</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.PaymentList.AdditionalAnalytic</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>PaymentListAdditionalAnalyticExtendedTooltip</name>
+      <id>252</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>PaymentListAdditionalAnalyticContextMenu</name>
+      <id>251</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

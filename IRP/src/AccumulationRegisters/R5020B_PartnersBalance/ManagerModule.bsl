@@ -236,7 +236,7 @@ Function R5020B_PartnersBalance_BP_CP() Export
 		|	0 AS CustomerAdvance,
 		|	0 AS VendorTransaction,
 		|	0 AS VendorAdvance,
-		|	PaymentList.Amount AS OtherTransaction,
+		|	PaymentList.Amount + PaymentList.TaxDiscountAmount AS OtherTransaction,
 		|	UNDEFINED AS AdvancesClosing,
 		|	PaymentList.Key
 		|FROM

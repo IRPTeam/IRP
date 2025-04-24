@@ -556,56 +556,6 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Store</name>
-   <id>43</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>List.Store</segments>
-   </dataPath>
-   <extendedTooltip>
-    <name>StoreExtendedTooltip</name>
-    <id>45</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>StoreContextMenu</name>
-    <id>44</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>InputField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:InputFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <wrap>true</wrap>
-    <chooseType>true</chooseType>
-    <typeDomainEnabled>true</typeDomainEnabled>
-    <textEdit>true</textEdit>
-   </extInfo>
-  </items>
-  <items xsi:type="form:FormField">
    <name>RetailCustomer</name>
    <id>58</id>
    <visible>true</visible>
@@ -1101,11 +1051,6 @@
 	RetailReturnReceipt.Branch,
 	RetailReturnReceipt.Comment,
 	RetailReturnReceipt.DocumentAmount,
-	CASE
-		WHEN COUNT(DISTINCT RetailReturnReceiptItemList.Store) = 1
-			THEN MAX(RetailReturnReceiptItemList.Store)
-		ELSE UNDEFINED
-	END AS Store,
 	RetailReturnReceipt.StatusType,
 	DocumentFiscalStatus.Status,
 	DocumentFiscalStatus.CheckNumber,
@@ -1117,8 +1062,6 @@
 	END) AS IsHaveJE
 FROM
 	Document.RetailReturnReceipt AS RetailReturnReceipt
-		LEFT JOIN Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
-		ON RetailReturnReceiptItemList.Ref = RetailReturnReceipt.Ref
 		LEFT JOIN InformationRegister.DocumentFiscalStatus AS DocumentFiscalStatus
 		ON DocumentFiscalStatus.Document = RetailReturnReceipt.Ref
 		LEFT JOIN Document.JournalEntry AS JE
@@ -1151,26 +1094,6 @@ GROUP BY
    <customQuery>true</customQuery>
    <autoSaveUserSettings>true</autoSaveUserSettings>
    <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Store</dataPath>
-    <field>Store</field>
-    <title>
-     <localValue>
-      <content>
-       <key>tr</key>
-       <value>Depo</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Склад</value>
-      </content>
-      <content>
-       <key>en</key>
-       <value>Store</value>
-      </content>
-     </localValue>
-    </title>
-   </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>Ref</dataPath>
     <field>Ref</field>
@@ -1232,10 +1155,6 @@ GROUP BY
     <field>Branch</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Description</dataPath>
-    <field>Description</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>DocumentAmount</dataPath>
     <field>DocumentAmount</field>
    </fields>
@@ -1274,6 +1193,10 @@ GROUP BY
       </content>
      </localValue>
     </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Comment</dataPath>
+    <field>Comment</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>UsePartnerTransactions</dataPath>
@@ -1344,28 +1267,52 @@ GROUP BY
     <field>PointInTime</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LocalNetAmount</dataPath>
+    <field>LocalNetAmount</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>SourceNodeID</dataPath>
     <field>SourceNodeID</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Editor</dataPath>
-    <field>Editor</field>
+    <dataPath>NumeratorRules</dataPath>
+    <field>NumeratorRules</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LocalTotalAmount</dataPath>
+    <field>LocalTotalAmount</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>UniqueID</dataPath>
     <field>UniqueID</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>ModifyDate</dataPath>
-    <field>ModifyDate</field>
+    <dataPath>DocumentNumber</dataPath>
+    <field>DocumentNumber</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CreateDate</dataPath>
+    <field>CreateDate</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>ManualMovementsEdit</dataPath>
     <field>ManualMovementsEdit</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>CreateDate</dataPath>
-    <field>CreateDate</field>
+    <dataPath>Editor</dataPath>
+    <field>Editor</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LocalTaxAmount</dataPath>
+    <field>LocalTaxAmount</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LocalRate</dataPath>
+    <field>LocalRate</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ModifyDate</dataPath>
+    <field>ModifyDate</field>
    </fields>
   </extInfo>
  </attributes>

@@ -846,68 +846,6 @@
        <textEdit>true</textEdit>
       </extInfo>
      </items>
-     <items xsi:type="form:FormField">
-      <name>Agreement</name>
-      <id>1583</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-       <segments>Object.Agreement</segments>
-      </dataPath>
-      <handlers>
-       <event>OnChange</event>
-       <name>AgreementOnChange</name>
-      </handlers>
-      <extendedTooltip>
-       <name>AgreementExtendedTooltip</name>
-       <id>1585</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <type>Label</type>
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-       </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-       <name>AgreementContextMenu</name>
-       <id>1584</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-       <handlers>
-        <event>EditTextChange</event>
-        <name>AgreementEditTextChange</name>
-       </handlers>
-       <handlers>
-        <event>StartChoice</event>
-        <name>AgreementStartChoice</name>
-       </handlers>
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <wrap>true</wrap>
-       <chooseType>true</chooseType>
-       <typeDomainEnabled>true</typeDomainEnabled>
-       <textEdit>true</textEdit>
-      </extInfo>
-     </items>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -3812,6 +3750,111 @@
       <typeDomainEnabled>true</typeDomainEnabled>
       <textEdit>true</textEdit>
      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>SalaryTaxListAgreement</name>
+     <id>1619</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.SalaryTaxList.Agreement</segments>
+     </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>SalaryTaxListAgreementOnChange</name>
+     </handlers>
+     <extendedTooltip>
+      <name>SalaryTaxListAgreementExtendedTooltip</name>
+      <id>1621</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>SalaryTaxListAgreementContextMenu</name>
+      <id>1620</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <handlers>
+       <event>StartChoice</event>
+       <name>SalaryTaxListAgreementStartChoice</name>
+      </handlers>
+      <handlers>
+       <event>EditTextChange</event>
+       <name>SalaryTaxListAgreementEditTextChange</name>
+      </handlers>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>SalaryTaxListTakeAccountFromTaxes</name>
+     <id>1622</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.SalaryTaxList.TakeAccountFromTaxes</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>SalaryTaxListTakeAccountFromTaxesExtendedTooltip</name>
+      <id>1624</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>SalaryTaxListTakeAccountFromTaxesContextMenu</name>
+      <id>1623</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>CheckBoxField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
     </items>
     <items xsi:type="form:FormField">
      <name>SalaryTaxListExpenseType</name>

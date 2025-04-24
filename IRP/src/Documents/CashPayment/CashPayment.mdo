@@ -123,6 +123,7 @@
  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
  <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
+ <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
  <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
@@ -827,6 +828,122 @@
    </synonym>
    <type>
     <types>CatalogRef.SalaryCalculationType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="72a4480d-002c-4c2e-bff6-b25a97c9e51d">
+   <name>Tax</name>
+   <synonym>
+    <key>tr</key>
+    <value>Vergi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Налог</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Tax</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Taxes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9377dc23-2654-4eb0-9ee9-1b2ffeca4551">
+   <name>TaxDiscountAmount</name>
+   <synonym>
+    <key>tr</key>
+    <value>Tax discount amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма налоговой скидки</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Tax discount amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="8b87a55a-2f04-4aea-9d3a-a3d283625d3c">
+   <name>RevenueType</name>
+   <synonym>
+    <key>tr</key>
+    <value>Gelir tipi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Статья доходов</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Revenue type</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.IsRevenue</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="f1091b34-07c1-430e-a123-fca0638bc9c1">
+   <name>AdditionalAnalytic</name>
+   <synonym>
+    <key>tr</key>
+    <value>Ek detaylar</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Дополнительная аналитика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Additional analytic</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6624f2bd-5edd-4e60-8ce5-8f13ab2e66d0">
+   <name>ProfitLossCenter</name>
+   <synonym>
+    <key>tr</key>
+    <value>Kar/Zarar merkezi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Центр прибылей/убытков</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Profit loss center</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

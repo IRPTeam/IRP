@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocOrderClosingServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
+	SystemAttributesServer.OutputSystemAttributes(ThisObject, "TransactionType");
 EndProcedure
 
 #EndRegion

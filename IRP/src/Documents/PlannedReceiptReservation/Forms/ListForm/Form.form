@@ -198,19 +198,19 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Store</name>
-   <id>37</id>
+   <name>StoreIncoming</name>
+   <id>46</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Store</segments>
+    <segments>List.StoreIncoming</segments>
    </dataPath>
    <extendedTooltip>
-    <name>StoreExtendedTooltip</name>
-    <id>39</id>
+    <name>StoreIncomingExtendedTooltip</name>
+    <id>48</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -224,58 +224,8 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>StoreContextMenu</name>
-    <id>38</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>InputField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:InputFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <wrap>true</wrap>
-    <chooseType>true</chooseType>
-    <typeDomainEnabled>true</typeDomainEnabled>
-    <textEdit>true</textEdit>
-   </extInfo>
-  </items>
-  <items xsi:type="form:FormField">
-   <name>StoreOutgoing</name>
-   <id>40</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>List.StoreOutgoing</segments>
-   </dataPath>
-   <extendedTooltip>
-    <name>StoreOutgoingExtendedTooltip</name>
-    <id>42</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>StoreOutgoingContextMenu</name>
-    <id>41</id>
+    <name>StoreIncomingContextMenu</name>
+    <id>47</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -726,27 +676,10 @@
 	PlannedReceiptReservation.Posted,
 	PlannedReceiptReservation.Company,
 	PlannedReceiptReservation.Requester,
-	PlannedReceiptReservation.Store,
-	PlannedReceiptReservation.Author,
 	PlannedReceiptReservation.Comment,
-	CASE WHEN COUNT(DISTINCT PlannedReceiptReservationItemList.Store) = 1 THEN
-		MAX(PlannedReceiptReservationItemList.Store)
-	ELSE UNDEFINED END AS StoreOutgoing
+	PlannedReceiptReservation.Store AS StoreIncoming
 FROM
-	Document.PlannedReceiptReservation AS PlannedReceiptReservation
-		LEFT JOIN Document.PlannedReceiptReservation.ItemList AS PlannedReceiptReservationItemList
-		ON PlannedReceiptReservation.Ref = PlannedReceiptReservationItemList.Ref
-GROUP BY
-	PlannedReceiptReservation.Ref,
-	PlannedReceiptReservation.DeletionMark,
-	PlannedReceiptReservation.Number,
-	PlannedReceiptReservation.Date,
-	PlannedReceiptReservation.Posted,
-	PlannedReceiptReservation.Company,
-	PlannedReceiptReservation.Requester,
-	PlannedReceiptReservation.Store,
-	PlannedReceiptReservation.Author,
-	PlannedReceiptReservation.Comment</queryText>
+	Document.PlannedReceiptReservation AS PlannedReceiptReservation</queryText>
    <mainTable>Document.PlannedReceiptReservation</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>
@@ -754,24 +687,116 @@ GROUP BY
    <autoSaveUserSettings>true</autoSaveUserSettings>
    <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>StoreOutgoing</dataPath>
-    <field>StoreOutgoing</field>
+    <dataPath>Ref</dataPath>
+    <field>Ref</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DeletionMark</dataPath>
+    <field>DeletionMark</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Number</dataPath>
+    <field>Number</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Date</dataPath>
+    <field>Date</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Posted</dataPath>
+    <field>Posted</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Company</dataPath>
+    <field>Company</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Requester</dataPath>
+    <field>Requester</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>StoreIncoming</dataPath>
+    <field>StoreIncoming</field>
     <title>
      <localValue>
       <content>
        <key>tr</key>
-       <value>Çıkış depo</value>
+       <value>Store incoming</value>
       </content>
       <content>
        <key>ru</key>
-       <value>Склад отправитель</value>
+       <value>Склад-получатель</value>
       </content>
       <content>
        <key>en</key>
-       <value>Store outgoing</value>
+       <value>Store incoming</value>
       </content>
      </localValue>
     </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Comment</dataPath>
+    <field>Comment</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Store</dataPath>
+    <field>Store</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ItemList</dataPath>
+    <field>ItemList</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>AddAttributes</dataPath>
+    <field>AddAttributes</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>RowIDInfo</dataPath>
+    <field>RowIDInfo</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PointInTime</dataPath>
+    <field>PointInTime</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Branch</dataPath>
+    <field>Branch</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ManualMovementsEdit</dataPath>
+    <field>ManualMovementsEdit</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DocumentNumber</dataPath>
+    <field>DocumentNumber</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>NumeratorRules</dataPath>
+    <field>NumeratorRules</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Editor</dataPath>
+    <field>Editor</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Author</dataPath>
+    <field>Author</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceNodeID</dataPath>
+    <field>SourceNodeID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>UniqueID</dataPath>
+    <field>UniqueID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ModifyDate</dataPath>
+    <field>ModifyDate</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CreateDate</dataPath>
+    <field>CreateDate</field>
    </fields>
   </extInfo>
  </attributes>

@@ -3541,7 +3541,10 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 		|Project,
 		|ExpenseType,
 		|ProfitLossCenter,
-		|AdditionalAnalytic");
+		|AdditionalAnalytic,
+		|Tax,
+		|TaxDiscountAmount,
+		|RevenueType");
 EndFunction
 
 Function ClearByTransactionTypeBankPaymentExecute(Options) Export
@@ -3567,6 +3570,9 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result.Insert("ExpenseType"              , Options.ExpenseType);
 	Result.Insert("ProfitLossCenter"         , Options.ProfitLossCenter);
 	Result.Insert("AdditionalAnalytic"       , Options.AdditionalAnalytic);
+	Result.Insert("Tax"                      , Options.Tax);
+	Result.Insert("TaxDiscountAmount"        , Options.TaxDiscountAmount);
+	Result.Insert("RevenueType"              , Options.RevenueType);
 		
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3625,8 +3631,12 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 		StrByType = "
 		|Agreement,
 		|Payee,
-		|LegalNameContract";
-		
+		|LegalNameContract,
+		|Tax,
+		|TaxDiscountAmount,
+		|RevenueType,
+		|ProfitLossCenter,
+		|AdditionalAnalytic";
 		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
 		If PartnerType = "Other" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then
 			StrByType = StrByType + ", 
@@ -3884,7 +3894,12 @@ Function ClearByTransactionTypeCashPaymentOptions() Export
 		|CalculationType,
 		|ReceiptingAccount,
 		|ReceiptingBranch,
-		|Project");
+		|Project,
+		|AdditionalAnalytic,
+		|Tax,
+		|TaxDiscountAmount,
+		|ProfitLossCenter,
+		|RevenueType");		
 EndFunction
 
 Function ClearByTransactionTypeCashPaymentExecute(Options) Export
@@ -3903,6 +3918,11 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Result.Insert("ReceiptingAccount"        , Options.ReceiptingAccount);
 	Result.Insert("ReceiptingBranch"         , Options.ReceiptingBranch);
 	Result.Insert("Project"                  , Options.Project);
+	Result.Insert("AdditionalAnalytic"       , Options.AdditionalAnalytic);
+	Result.Insert("Tax"                      , Options.Tax);
+	Result.Insert("TaxDiscountAmount"        , Options.TaxDiscountAmount);
+	Result.Insert("RevenueType"              , Options.RevenueType);
+	Result.Insert("ProfitLossCenter"         , Options.ProfitLossCenter);
 
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3947,8 +3967,12 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 		StrByType = "
 		|Agreement,
 		|Payee,
-		|LegalNameContract";
-		
+		|LegalNameContract,
+		|AdditionalAnalytic,
+		|Tax,
+		|TaxDiscountAmount,
+		|ProfitLossCenter,
+		|RevenueType";		
 		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
 		If PartnerType = "Other" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then
 			StrByType = StrByType + ", 

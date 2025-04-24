@@ -410,13 +410,44 @@ Scenario: _020014 create ITO based on Internal supply request
 			| '$$NumberInventoryTransferOrder020014$$'    |
 		And I close all client application windows
 
-	
-
-
-
-		
-				
-
-
-	
-
+Scenario: _020015 check Trailers, Carrier in IT
+	And I close all client application windows
+	* Create IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "StoreSender" by "Store 03" string
+		And I select from the drop-down list named "StoreReceiver" by "Store 05" string
+	* Add Item and Trailers, Carrier
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Boots" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "36/18sd" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "10 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to the tab named "GroupOther"
+		And I select from the drop-down list named "Carrier" by "Avira" string
+		And I select from the drop-down list named "Trailers" by "Vehicles 2" string
+		And I click the button named "FormWrite"
+		And I delete "$$InventoryTransfer01$$" variable
+		And I delete "$$NumberInventoryTransfer01$$" variable
+		And I save the window as "$$InventoryTransfer01$$"
+		And I save the value of "Number" field as "$$NumberInventoryTransfer01$$"
+		And I save the value of the field named "Carrier" as "$Carrier$"
+		And I save the value of the field named "Trailers" as "$Trailers$"
+		And I click the button named "FormPost"
+		And I click the button named "FormPostAndClose"
+	* Check
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$$NumberInventoryTransfer01$$' |
+		And I select current line in "List" table
+		And form attributes have values:
+			| 'Name'          | 'Value'        |
+			| 'Carrier'       | "$Carrier$"    |
+			| 'Company'       | "Main Company" |
+			| 'StoreReceiver' | "Store 05"     |
+			| 'StoreSender'   | "Store 03"     |
+			| 'Trailers'      | "$Trailers$"   |
+	And I close all client application windows

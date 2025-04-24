@@ -2436,6 +2436,7 @@ Scenario: _0991082 check Bank payment accounting movements (Other partners)
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Business unit' | 'Company'       | 'Partner'       | 'Credit' | 'Cash/Bank account' | 'Operation'                                                                |
 			| '9200'  | ''              | 'Other partner' | 'Other partner' | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
+			| '9200'  | ''              | 'Other partner' | 'Other partner' | '9100'   | ''                  | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3311,19 +3312,19 @@ Scenario: _0991195 check Payroll accounting movements (acruals, deductions, taxe
 	* Check accounting movements
 		And I click "Journal entry" button
 		And I click "Save" button
-		And "RegisterRecords" table contains lines
-			| "Period"              | "Account Dr" | "Amount"    | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit" | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr"   | "Debit currency" | "Account Cr" | "Ext. Dim. Credit" | "Operation"                                                                         | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
-			| "31.01.2023 12:00:00" | "420.3"      | "3 272,73"  | ""              | "Yes"      | "TRY"             | "Employee 2"      | "3 272,73"     | "Business unit 2"     | ""                | "Salary (expense)"      | "TRY"            | "9200"       | "Business unit 2"  | "Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)"        | "Own company 2"       | "3 272,73"      | "Tax authority"       |
-			| "31.01.2023 12:00:00" | "420.3"      | "3 660,36"  | ""              | "Yes"      | "TRY"             | "Employee 1"      | "3 660,36"     | "Business unit 2"     | ""                | "Salary (expense)"      | "TRY"            | "9200"       | "Business unit 2"  | "Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)"        | "Own company 2"       | "3 660,36"      | "Tax authority"       |
-			| "31.01.2023 12:00:00" | "420.2"      | "16 363,64" | ""              | "Yes"      | "TRY"             | "Employee 2"      | "16 363,64"    | "Business unit 2"     | ""                | "Other expence"         | "TRY"            | "5401"       | ""                 | "Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)"                  | ""                    | "16 363,64"     | ""                    |
-			| "31.01.2023 12:00:00" | "420.2"      | "19 090,91" | ""              | "Yes"      | "TRY"             | "Employee 1"      | "19 090,91"    | "Business unit 2"     | ""                | "Other expence"         | "TRY"            | "5401"       | ""                 | "Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)"                  | ""                    | "19 090,91"     | ""                    |
-			| "31.01.2023 12:00:00" | "420.3"      | "120,00"    | ""              | "Yes"      | "TRY"             | "Employee 1"      | "120"          | "Business unit 2"     | ""                | "Expence and revenue 1" | "TRY"            | "5401"       | ""                 | "Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)"                  | ""                    | "120"           | ""                    |
-			| "31.01.2023 12:00:00" | "420.3"      | "-100,00"   | ""              | "Yes"      | "TRY"             | "Employee 1"      | "-100"         | "Business unit 2"     | ""                | "Expence and revenue 1" | "TRY"            | "5401"       | ""                 | "Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)" | ""                    | "-100"          | ""                    |
-			| "31.01.2023 12:00:00" | "420.3"      | "-100,00"   | ""              | "Yes"      | "TRY"             | "Employee 2"      | "-100"         | "Business unit 2"     | ""                | "Expence and revenue 1" | "TRY"            | "5401"       | ""                 | "Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)" | ""                    | "-100"          | ""                    |
-			| "31.01.2023 12:00:00" | "5401"       | "2 745,27"  | ""              | "Yes"      | "TRY"             | ""                | "2 745,27"     | ""                    | ""                | ""                      | "TRY"            | "9200"       | ""                 | "Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)"   | "Own company 2"       | "2 745,27"      | "Tax authority"       |
-			| "31.01.2023 12:00:00" | "5401"       | "1 830,18"  | ""              | "Yes"      | "TRY"             | ""                | "1 830,18"     | ""                    | ""                | ""                      | "TRY"            | "9200"       | ""                 | "Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)"   | "Own company 2"       | "1 830,18"      | "Tax authority"       |
-			| "31.01.2023 12:00:00" | "5401"       | "2 454,55"  | ""              | "Yes"      | "TRY"             | ""                | "2 454,55"     | ""                    | ""                | ""                      | "TRY"            | "9200"       | ""                 | "Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)"   | "Own company 2"       | "2 454,55"      | "Tax authority"       |
-			| "31.01.2023 12:00:00" | "5401"       | "1 636,36"  | ""              | "Yes"      | "TRY"             | ""                | "1 636,36"     | ""                    | ""                | ""                      | "TRY"            | "9200"       | ""                 | "Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)"   | "Own company 2"       | "1 636,36"      | "Tax authority"       |
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'   | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'    | 'Operation'                                                                         |
+			| '31.01.2023 12:00:00' | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '2 745,27'     | ''              | '5301'       | 'Income Tax (Emloyee)'        | ''                    | ''                    | 'TRY'             | '2 745,27'      | ''                | '2 745,27'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
+			| '31.01.2023 12:00:00' | 'Yes'      | '420.3'      | 'Employee 1'      | 'Business unit 2'     | 'Expence and revenue 1' | 'TRY'            | '-100'         | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '-100'          | ''                | '-100,00'   | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)' |
+			| '31.01.2023 12:00:00' | 'Yes'      | '420.3'      | 'Employee 2'      | 'Business unit 2'     | 'Salary (expense)'      | 'TRY'            | '3 272,73'     | ''              | '9200'       | 'Business unit 2'             | 'Own company 2'       | 'Tax authority'       | 'TRY'             | '3 272,73'      | ''                | '3 272,73'  | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'        |
+			| '31.01.2023 12:00:00' | 'Yes'      | '420.3'      | 'Employee 2'      | 'Business unit 2'     | 'Expence and revenue 1' | 'TRY'            | '-100'         | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '-100'          | ''                | '-100,00'   | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)' |
+			| '31.01.2023 12:00:00' | 'Yes'      | '420.2'      | 'Employee 2'      | 'Business unit 2'     | 'Other expence'         | 'TRY'            | '16 363,64'    | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '16 363,64'     | ''                | '16 363,64' | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  |
+			| '31.01.2023 12:00:00' | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '1 830,18'     | ''              | '5301'       | 'Social Insurance (Employee)' | ''                    | ''                    | 'TRY'             | '1 830,18'      | ''                | '1 830,18'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
+			| '31.01.2023 12:00:00' | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '2 454,55'     | ''              | '5301'       | 'Income Tax (Emloyee)'        | ''                    | ''                    | 'TRY'             | '2 454,55'      | ''                | '2 454,55'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
+			| '31.01.2023 12:00:00' | 'Yes'      | '420.2'      | 'Employee 1'      | 'Business unit 2'     | 'Other expence'         | 'TRY'            | '19 090,91'    | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '19 090,91'     | ''                | '19 090,91' | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  |
+			| '31.01.2023 12:00:00' | 'Yes'      | '420.3'      | 'Employee 1'      | 'Business unit 2'     | 'Salary (expense)'      | 'TRY'            | '3 660,36'     | ''              | '9200'       | 'Business unit 2'             | 'Own company 2'       | 'Tax authority'       | 'TRY'             | '3 660,36'      | ''                | '3 660,36'  | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'        |
+			| '31.01.2023 12:00:00' | 'Yes'      | '420.3'      | 'Employee 1'      | 'Business unit 2'     | 'Expence and revenue 1' | 'TRY'            | '120'          | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '120'           | ''                | '120,00'    | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  |
+			| '31.01.2023 12:00:00' | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '1 636,36'     | ''              | '5301'       | 'Social Insurance (Employee)' | ''                    | ''                    | 'TRY'             | '1 636,36'      | ''                | '1 636,36'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
 		Then the number of "RegisterRecords" table lines is "равно" "11"
 	And I close all client application windows
 
@@ -3433,16 +3434,19 @@ Scenario: _0991212 check DebitCreditNote movements (CT-VA, by documents, same pa
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit"  | "Partner"                            | "Business unit"   | "Partner term"          | "Credit" | "Operation"                                                                              |
-			| "4020.2" | "Vendor and Customer (by documents)" | "Business unit 2" | "Partner term, TRY"     | "4010"   | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
-			| "5201"   | "Vendor and Customer (by documents)" | "Business unit 2" | "Vendor (by documents)" | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |		
+			| 'Debit'  | 'Partner'                            | 'Business unit'   | 'Partner term'          | 'Credit' | 'Operation'                                                                              |
+			| '4020.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY'     | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '4020.2' | 'Business unit 2'                    | ''                | 'Own company 2'         | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                    | "Debit amount" | "Extra dimension2 Dr"   | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                   | "Operation"                                | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
-			| "23.02.2024 12:00:00" | "4020.2"     | "1" | "20,00"  | ""              | "Yes"      | "TRY"             | "Vendor and Customer (by documents)" | "1"            | "Vendor (by documents)" | ""                | "Business unit 2"     | "EUR"            | "4010"       | "Vendor and Customer (by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Partner term, TRY"   | "20"            | "Business unit 2"     |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                    | 'Extra dimension2 Dr'   | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                   | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                       |
+			| '23.02.2024 12:00:00' | '1' | 'Yes'      | '4020.2'     | 'Vendor and Customer (by documents)' | 'Vendor (by documents)' | 'Business unit 2'     | 'EUR'            | '1'            | ''              | '4010'       | 'Vendor and Customer (by documents)' | 'Partner term, TRY'   | 'Business unit 2'     | 'TRY'             | '20'            | ''                | '20,00'  | 'DebitCreditNote (R5020B_PartnersBalance)'                        |
+			| '23.02.2024 12:00:00' | '2' | 'Yes'      | '4020.2'     | 'Vendor and Customer (by documents)' | 'Vendor (by documents)' | 'Business unit 2'     | 'EUR'            | ''             | ''              | '9100'       | 'Business unit 2'                    | 'Own company 2'       | ''                    | 'TRY'             | ''              | ''                | '12,70'  | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)' |		
 		And I close all client application windows	
 
 Scenario: _0991213 check DebitCreditNote movements (CA-CT, by documents, same partner, Agreement currency - EURO, invoice and payment TRY)
@@ -3457,9 +3461,11 @@ Scenario: _0991213 check DebitCreditNote movements (CA-CT, by documents, same pa
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"                            | "Business unit"   | "Partner term"      | "Credit" | "Operation"                                                                                    |
-			| "5202"  | "Vendor and Customer (by documents)" | "Business unit 2" | "Partner term, EUR" | "4010"   | "DebitCreditNote (R5020B_PartnersBalance)"                                                     |
-			| "5202"  | "Vendor and Customer (by documents)" | "Business unit 2" | "Partner term, EUR" | "4010"   | "DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)" |		
+			| 'Debit' | 'Partner'                            | 'Business unit'   | 'Partner term'      | 'Credit' | 'Operation'                                                                                    |
+			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '4010'  | 'Business unit 2'                    | ''                | 'Own company 2'     | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '420.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3481,16 +3487,19 @@ Scenario: _0991214 check DebitCreditNote movements (CA-CA, by documents, same pa
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"                            | "Business unit"   | "Partner term"      | "Credit" | "Operation"                                                                                    |
-			| "5202"  | "Vendor and Customer (by documents)" | "Business unit 2" | "Partner term, TRY" | "5202"   | "DebitCreditNote (R5020B_PartnersBalance)"                                                     |
-			| "5202"  | "Vendor and Customer (by documents)" | "Business unit 2" | "Partner term, TRY" | "4010"   | "DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)" |	
+			| 'Debit' | 'Partner'                            | 'Business unit'   | 'Partner term'      | 'Credit' | 'Operation'                                                                                    |
+			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '5202'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '5202'  | 'Business unit 2'                    | ''                | 'Own company 2'     | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '420.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, TRY' | '5202'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                    | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                   | "Operation"                                | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
-			| "30.03.2024 11:34:17" | "5202"       | "1" | "327,05" | ""              | "Yes"      | "TRY"             | "Vendor and Customer (by documents)" | "10"           | "Partner term, EUR"   | ""                | "Business unit 2"     | "EUR"            | "5202"       | "Vendor and Customer (by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Partner term, TRY"   | "380"           | "Business unit 2"     |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                    | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                   | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                        |
+			| '30.03.2024 11:34:17' | '1' | 'Yes'      | '5202'       | 'Vendor and Customer (by documents)' | 'Partner term, EUR'   | 'Business unit 2'     | 'EUR'            | '10'           | ''              | '5202'       | 'Vendor and Customer (by documents)' | 'Partner term, TRY'   | 'Business unit 2'     | 'TRY'             | '380'           | ''                | '327,05' | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
+			| '30.03.2024 11:34:17' | '2' | 'Yes'      | '420.2'      | 'Vendor and Customer (by documents)' | 'Business unit 2'     | 'Other expence'       | 'TRY'            | ''             | ''              | '5202'       | 'Vendor and Customer (by documents)' | 'Partner term, TRY'   | 'Business unit 2'     | 'TRY'             | ''              | ''                | '52,95'  | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |		
 		And I close all client application windows	
 
 Scenario: _0991215 check DebitCreditNote movements (VA-VA, by documents, same partner)
@@ -3505,9 +3514,11 @@ Scenario: _0991215 check DebitCreditNote movements (VA-VA, by documents, same pa
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit"  | "Partner"                            | "Business unit"   | "Partner term"            | "Credit" | "Operation"                                                                              |
-			| "4020.2" | "Vendor and Customer (by documents)" | "Business unit 2" | "Vendor (by documents)"   | "4020.2" | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
-			| "5201"   | "Vendor and Customer (by documents)" | "Business unit 2" | "Vendor (by documents) 2" | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |		
+			| 'Debit'  | 'Partner'                            | 'Business unit'   | 'Partner term'            | 'Credit' | 'Operation'                                                                              |
+			| '4020.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents)'   | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '4020.2' | 'Business unit 2'                    | ''                | 'Own company 2'           | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3529,9 +3540,11 @@ Scenario: _0991216 check DebitCreditNote movements (CT-CT, by partner terms, sam
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"                                   | "Business unit"   | "Partner term"                              | "Credit" | "Operation"                                                                                    |
-			| "4010"  | "Customer (Transactions, by partner terms)" | "Business unit 3" | "Customer (Transacrions, by partner terms)" | "4010"   | "DebitCreditNote (R5020B_PartnersBalance)"                                                     |
-			| "5202"  | "Customer (Transactions, by partner terms)" | "Business unit 3" | "Customer (Transacrions, by partner terms)" | "4010"   | "DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)" |		
+			| 'Debit' | 'Partner'                                   | 'Business unit'   | 'Partner term'                              | 'Credit' | 'Operation'                                                                                    |
+			| '4010'  | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'  | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '4010'  | 'Business unit 2'                           | ''                | 'Own company 2'                             | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '420.2' | 'Customer (Transactions, by partner terms)' | 'Business unit 3' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3553,9 +3566,11 @@ Scenario: _0991217 check DebitCreditNote movements (VT-VT, by partner terms, sam
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"                                | "Business unit"   | "Partner term"                        | "Credit" | "Operation"                                                                              |
-			| "5201"  | "Vendor (Transactions, by partner term)" | "Business unit 3" | "Vendor, transaction by partner term" | "5201"   | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
-			| "5201"  | "Vendor (Transactions, by partner term)" | "Business unit 3" | "Vendor, transaction by partner term" | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |		
+			| 'Debit' | 'Partner'                                | 'Business unit'   | 'Partner term'                        | 'Credit' | 'Operation'                                                                              |
+			| '5201'  | 'Vendor (Transactions, by partner term)' | 'Business unit 3' | 'Vendor, transaction by partner term' | '5201'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'  | 'Vendor (Transactions, by partner term)' | 'Business unit 3' | 'Vendor, transaction by partner term' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '5201'  | 'Business unit 2'                        | ''                | 'Own company 2'                       | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '420.2' | 'Vendor (Transactions, by partner term)' | 'Business unit 3' | 'Vendor, transaction by partner term' | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3577,9 +3592,11 @@ Scenario: _0991218 check DebitCreditNote movements (VA-VT, by documents, differe
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"                             | "Business unit"   | "Partner term"                        | "Credit" | "Operation"                                                                              |
-			| "5201"  | "Vendor (Advance, by documents)"      | "Business unit 2" | "Vendor (Advance, by documents)"      | "4020.2" | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
-			| "5201"  | "Vendor (Transactions, by documents)" | "Business unit 2" | "Vendor (Transactions, by documents)" | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |		
+			| 'Debit' | 'Partner'                             | 'Business unit'   | 'Partner term'                        | 'Credit' | 'Operation'                                                                              |
+			| '5201'  | 'Vendor (Advance, by documents)'      | 'Business unit 2' | 'Vendor (Advance, by documents)'      | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'  | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '5201'  | 'Business unit 2'                     | ''                | 'Own company 2'                       | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '420.2' | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3601,16 +3618,19 @@ Scenario: _0991219 check DebitCreditNote movements (VT-CA, by documents, differe
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"                          | "Business unit"   | "Partner term"               | "Credit" | "Operation"                                                                                    |
-			| "5201"  | "Customer (Advance, by documents)" | "Business unit 2" | "Advance, by documents, EUR" | "5202"   | "DebitCreditNote (R5020B_PartnersBalance)"                                                     |
-			| "5202"  | "Customer (Advance, by documents)" | "Business unit 2" | "Advance, by documents, EUR" | "4010"   | "DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)" |		
+			| 'Debit' | 'Partner'                          | 'Business unit'   | 'Partner term'               | 'Credit' | 'Operation'                                                                                    |
+			| '5201'  | 'Customer (Advance, by documents)' | 'Business unit 2' | 'Advance, by documents, EUR' | '5202'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'  | 'Customer (Advance, by documents)' | 'Business unit 2' | 'Advance, by documents, EUR' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '5202'  | 'Business unit 2'                  | ''                | 'Own company 2'              | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '420.2' | 'Customer (Advance, by documents)' | 'Business unit 2' | 'Advance, by documents, EUR' | '5202'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                     | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                 | "Operation"                                | "Extra dimension2 Cr"        | "Credit amount" | "Extra dimension3 Cr" |
-			| "03.04.2024 14:19:17" | "5201"       | "1" | "60,00"  | ""              | "Yes"      | "EUR"             | "Vendor (Transactions, by documents)" | "60"           | "Vendor (Transactions, by documents)" | ""                | "Business unit 2"     | "TRY"            | "5202"       | "Customer (Advance, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Advance, by documents, EUR" | "2"             | "Business unit 2"     |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                     | 'Extra dimension2 Dr'                 | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                 | 'Extra dimension2 Cr'        | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                        |
+			| '03.04.2024 14:19:17' | '1' | 'Yes'      | '5201'       | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Business unit 2'     | 'TRY'            | '60'           | ''              | '5202'       | 'Customer (Advance, by documents)' | 'Advance, by documents, EUR' | 'Business unit 2'     | 'EUR'             | '2'             | ''                | '60,00'  | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
+			| '03.04.2024 14:19:17' | '2' | 'Yes'      | '420.2'      | 'Vendor (Transactions, by documents)' | 'Business unit 2'                     | 'Other expence'       | 'TRY'            | ''             | ''              | '5202'       | 'Customer (Advance, by documents)' | 'Advance, by documents, EUR' | 'Business unit 2'     | 'EUR'             | ''              | ''                | '5,41'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |		
 		And I close all client application windows
 
 Scenario: _0991220 check DebitCreditNote movements (VT-CT, by documents, different partners)
@@ -3625,9 +3645,11 @@ Scenario: _0991220 check DebitCreditNote movements (VT-CT, by documents, differe
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"                               | "Business unit"   | "Partner term"                          | "Credit" | "Operation"                                                                                    |
-			| "5201"  | "Customer (Transactions, by documents)" | "Business unit 2" | "Customer (Transactions, by documents)" | "4010"   | "DebitCreditNote (R5020B_PartnersBalance)"                                                     |
-			| "5202"  | "Customer (Transactions, by documents)" | "Business unit 2" | "Customer (Transactions, by documents)" | "4010"   | "DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)" |
+			| 'Debit' | 'Partner'                               | 'Business unit'   | 'Partner term'                          | 'Credit' | 'Operation'                                                                                    |
+			| '5201'  | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'  | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '4010'  | 'Business unit 2'                       | ''                | 'Own company 2'                         | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '420.2' | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3649,9 +3671,11 @@ Scenario: _0991221 check DebitCreditNote movements (CT-VA, by documents, differe
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit"  | "Partner"                               | "Business unit"   | "Partner term"                          | "Credit" | "Operation"                                                                              |
-			| "4020.2" | "Customer (Transactions, by documents)" | "Business unit 2" | "Customer (Transactions, by documents)" | "4010"   | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
-			| "5201"   | "Vendor (Advance, by documents)"        | "Business unit 2" | "Vendor (Advance, by documents)"        | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |		
+			| 'Debit'  | 'Partner'                               | 'Business unit'   | 'Partner term'                          | 'Credit' | 'Operation'                                                                              |
+			| '4020.2' | 'Customer (Transactions, by documents)' | 'Business unit 2' | 'Customer (Transactions, by documents)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'   | 'Vendor (Advance, by documents)'        | 'Business unit 2' | 'Vendor (Advance, by documents)'        | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '4020.2' | 'Business unit 2'                       | ''                | 'Own company 2'                         | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '420.2'  | 'Vendor (Advance, by documents)'        | 'Business unit 2' | 'Vendor (Advance, by documents)'        | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3673,16 +3697,19 @@ Scenario: _0991222 check DebitCreditNote movements (CT-VA, by documents, differe
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"                        | "Business unit"   | "Partner term"                   | "Credit" | "Operation"                                                                              |
-			| "5202"  | "Vendor (Advance, by documents)" | "Business unit 2" | "Vendor (Advance, by documents)" | "4020.2" | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
-			| "5201"  | "Vendor (Advance, by documents)" | "Business unit 2" | "Vendor (Advance, by documents)" | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |	
+			| 'Debit'  | 'Partner'                        | 'Business unit'   | 'Partner term'                   | 'Credit' | 'Operation'                                                                              |
+			| '5202'   | 'Vendor (Advance, by documents)' | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'   | 'Vendor (Advance, by documents)' | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '4020.2' | 'Business unit 2'                | ''                | 'Own company 2'                  | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '420.2'  | 'Vendor (Advance, by documents)' | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                  | "Debit amount" | "Extra dimension2 Dr"        | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"               | "Operation"                                | "Extra dimension2 Cr"            | "Credit amount" | "Extra dimension3 Cr" |
-			| "29.04.2024 10:25:38" | "5202"       | "1" | "327,05" | ""              | "Yes"      | "TRY"             | "Customer (Advance, by documents)" | "10"           | "Advance, by documents, EUR" | ""                | "Business unit 2"     | "EUR"            | "4020.2"     | "Vendor (Advance, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Vendor (Advance, by documents)" | "320"           | "Business unit 2"     |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                  | 'Extra dimension2 Dr'        | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'               | 'Extra dimension2 Cr'            | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                        |
+			| '29.04.2024 10:25:38' | '1' | 'Yes'      | '5202'       | 'Customer (Advance, by documents)' | 'Advance, by documents, EUR' | 'Business unit 2'     | 'EUR'            | '10'           | ''              | '4020.2'     | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | 'Business unit 2'     | 'TRY'             | '320'           | ''                | '327,05' | 'DebitCreditNote (R5020B_PartnersBalance)'                         |
+			| '29.04.2024 10:25:38' | '2' | 'Yes'      | '420.2'      | 'Customer (Advance, by documents)' | 'Business unit 2'            | 'Other expence'       | 'TRY'            | ''             | ''              | '4020.2'     | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | 'Business unit 2'     | 'TRY'             | ''              | ''                | '327,05' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)' |		
 		And I close all client application windows
 
 Scenario: _0991223 check DebitCreditNote movements (CT-VT, by partner terms, different partners)
@@ -3697,9 +3724,11 @@ Scenario: _0991223 check DebitCreditNote movements (CT-VT, by partner terms, dif
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"                                   | "Business unit"   | "Partner term"                              | "Credit" | "Operation"                                                                              |
-			| "5201"  | "Customer (Transactions, by partner terms)" | "Business unit 2" | "Customer (Transacrions, by partner terms)" | "4010"   | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
-			| "5201"  | "Vendor (Transactions, by partner term)"    | "Business unit 2" | "Vendor, transaction by partner term"       | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |		
+			| 'Debit' | 'Partner'                                   | 'Business unit'   | 'Partner term'                              | 'Credit' | 'Operation'                                                                              |
+			| '5201'  | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'  | 'Vendor (Transactions, by partner term)'    | 'Business unit 2' | 'Vendor, transaction by partner term'       | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '5201'  | 'Business unit 2'                           | ''                | 'Own company 2'                             | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '420.2' | 'Vendor (Transactions, by partner term)'    | 'Business unit 2' | 'Vendor, transaction by partner term'       | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3721,9 +3750,11 @@ Scenario: _0991224 check DebitCreditNote movements (VA-VA, by documents, differe
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit"  | "Partner"                            | "Business unit"   | "Partner term"                   | "Credit" | "Operation"                                                                              |
-			| "4020.2" | "Vendor (Advance, by documents)"     | "Business unit 2" | "Vendor (Advance, by documents)" | "4020.2" | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
-			| "5201"   | "Vendor and Customer (by documents)" | "Business unit 2" | "Vendor (by documents) 2"        | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |		
+			| 'Debit'  | 'Partner'                            | 'Business unit'   | 'Partner term'                   | 'Credit' | 'Operation'                                                                              |
+			| '4020.2' | 'Vendor (Advance, by documents)'     | 'Business unit 2' | 'Vendor (Advance, by documents)' | '4020.2' | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'   | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2'        | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '4020.2' | 'Business unit 2'                    | ''                | 'Own company 2'                  | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '420.2'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Vendor (by documents) 2'        | '4020.2' | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3745,9 +3776,11 @@ Scenario: _0991225 check DebitCreditNote movements (СA-СA, by documents, diffe
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"                            | "Business unit"   | "Partner term"      | "Credit" | "Operation"                                                                                    |
-			| "5202"  | "Vendor and Customer (by documents)" | "Business unit 2" | "Partner term, EUR" | "5202"   | "DebitCreditNote (R5020B_PartnersBalance)"                                                     |
-			| "5202"  | "Vendor and Customer (by documents)" | "Business unit 2" | "Partner term, EUR" | "4010"   | "DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)" |		
+			| 'Debit' | 'Partner'                            | 'Business unit'   | 'Partner term'      | 'Credit' | 'Operation'                                                                                    |
+			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '5202'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'  | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '5202'  | 'Business unit 2'                    | ''                | 'Own company 2'     | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '420.2' | 'Vendor and Customer (by documents)' | 'Business unit 2' | 'Partner term, EUR' | '5202'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3769,16 +3802,19 @@ Scenario: _0991226 check DebitCreditNote movements (СT-СT, by documents and pa
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"                                   | "Business unit"   | "Partner term"                              | "Credit" | "Operation"                                                                                    |
-			| "4010"  | "Customer (Transactions, by documents)"     | "Business unit 2" | "Customer (Transactions, by documents)"     | "4010"   | "DebitCreditNote (R5020B_PartnersBalance)"                                                     |
-			| "5202"  | "Customer (Transactions, by partner terms)" | "Business unit 2" | "Customer (Transacrions, by partner terms)" | "4010"   | "DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)" |		
+			| 'Debit' | 'Partner'                                   | 'Business unit'   | 'Partner term'                              | 'Credit' | 'Operation'                                                                                    |
+			| '4010'  | 'Customer (Transactions, by documents)'     | 'Business unit 2' | 'Customer (Transactions, by documents)'     | '4010'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                                     |
+			| '5202'  | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)' |
+			| '4010'  | 'Business unit 2'                           | ''                | 'Own company 2'                             | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                              |
+			| '420.2' | 'Customer (Transactions, by partner terms)' | 'Business unit 2' | 'Customer (Transacrions, by partner terms)' | '4010'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                             |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                           | "Debit amount" | "Extra dimension2 Dr"                       | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                      | "Operation"                                | "Extra dimension2 Cr"                   | "Credit amount" | "Extra dimension3 Cr" |
-			| "29.04.2024 11:21:10" | "4010"       | "1" | "60,00"  | ""              | "Yes"      | "TRY"             | "Customer (Transactions, by partner terms)" | "2"            | "Customer (Transacrions, by partner terms)" | ""                | "Business unit 2"     | "EUR"            | "4010"       | "Customer (Transactions, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Customer (Transactions, by documents)" | "60"            | "Business unit 2"     |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                           | 'Extra dimension2 Dr'                       | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                      | 'Extra dimension2 Cr'                   | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                       |
+			| '29.04.2024 11:21:10' | '1' | 'Yes'      | '4010'       | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Business unit 2'     | 'EUR'            | '2'            | ''              | '4010'       | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Business unit 2'     | 'TRY'             | '60'            | ''                | '60,00'  | 'DebitCreditNote (R5020B_PartnersBalance)'                        |
+			| '29.04.2024 11:21:10' | '2' | 'Yes'      | '4010'       | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Business unit 2'     | 'EUR'            | ''             | ''              | '9100'       | 'Business unit 2'                       | 'Own company 2'                         | ''                    | 'TRY'             | ''              | ''                | '5,41'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)' |		
 		And I close all client application windows
 
 Scenario: _0991227 check DebitCreditNote movements (VT-VT, by partner terms, different partners)
@@ -3793,17 +3829,48 @@ Scenario: _0991227 check DebitCreditNote movements (VT-VT, by partner terms, dif
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Partner"                             | "Business unit"   | "Partner term"                        | "Credit" | "Operation"                                                                              |
-			| "5201"  | "Vendor (Transactions, by documents)" | "Business unit 2" | "Vendor (Transactions, by documents)" | "5201"   | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
-			| "5201"  | "Vendor (Transactions, by documents)" | "Business unit 2" | "Vendor (Transactions, by documents)" | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |		
+			| 'Debit' | 'Partner'                             | 'Business unit'   | 'Partner term'                        | 'Credit' | 'Operation'                                                                              |
+			| '5201'  | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '5201'   | 'DebitCreditNote (R5020B_PartnersBalance)'                                               |
+			| '5201'  | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '4020.2' | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)' |
+			| '5201'  | 'Business unit 2'                     | ''                | 'Own company 2'                       | '9100'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'                        |
+			| '420.2' | 'Vendor (Transactions, by documents)' | 'Business unit 2' | 'Vendor (Transactions, by documents)' | '5201'   | 'DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'                       |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| "Period"              | "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                        | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                    | "Operation"                                | "Extra dimension2 Cr"                 | "Credit amount" | "Extra dimension3 Cr" |
-			| "29.04.2024 12:14:25" | "5201"       | "1" | "1 635,25" | ""              | "Yes"      | "TRY"             | "Vendor (Transactions, by partner term)" | "50"           | "Vendor, transaction by partner term" | ""                | "Business unit 2"     | "EUR"            | "5201"       | "Vendor (Transactions, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Vendor (Transactions, by documents)" | "1 500"         | "Business unit 2"     |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                        | 'Extra dimension2 Dr'                 | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                    | 'Extra dimension2 Cr'                 | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                       |
+			| '29.04.2024 12:14:25' | '1' | 'Yes'      | '5201'       | 'Vendor (Transactions, by partner term)' | 'Vendor, transaction by partner term' | 'Business unit 2'     | 'EUR'            | '50'           | ''              | '5201'       | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Business unit 2'     | 'TRY'             | '1 500'         | ''                | '1 635,25' | 'DebitCreditNote (R5020B_PartnersBalance)'                        |
+			| '29.04.2024 12:14:25' | '2' | 'Yes'      | '5201'       | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | 'Business unit 2'     | 'TRY'            | ''             | ''              | '9100'       | 'Business unit 2'                     | 'Own company 2'                       | ''                    | 'TRY'             | ''              | ''                | '135,25'   | 'DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)' |		
 		And I close all client application windows
+
+
+Scenario: _0991228 check Bank payment accounting movements (Other partner, tax with discount)
+	And I close all client application windows
+	* Select BP
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number' |
+			| '18'     |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check accounting movements
+		And in the table "PaymentList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Tax type'                    | 'Business unit' | 'Company'       | ' ' | 'Credit' | 'Cash/Bank account' | 'Operation'                                                                |
+			| '5301'  | 'Social Insurance (Employee)' | ''              | 'Tax authority' | ''  | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
+			| '5301'  | 'Social Insurance (Employee)' | ''              | 'Tax authority' | ''  | '9100'   | ''                  | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |		
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'             | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                                |
+			| '22.04.2025 17:39:44' | '1' | 'Yes'      | '5301'       | 'Social Insurance (Employee)' | ''                    | ''                    | 'TRY'            | '3 400'        | ''              | '3250'       | 'Bank account, TRY' | 'Tax authority'       | ''                    | 'TRY'             | '3 400'         | ''                | '3 400,00' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
+			| '22.04.2025 17:39:44' | '2' | 'Yes'      | '5301'       | 'Social Insurance (Employee)' | ''                    | ''                    | 'TRY'            | '66,54'        | ''              | '9100'       | ''                  | 'Tax authority'       | ''                    | 'TRY'             | '66,54'         | ''                | '66,54'    | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |
+			| '22.04.2025 17:39:44' | '3' | 'Yes'      | '5402'       | ''                            | ''                    | ''                    | 'TRY'            | '6 933,09'     | ''              | '3250'       | 'Bank account, TRY' | 'Tax authority'       | ''                    | 'TRY'             | '6 933,09'      | ''                | '6 933,09' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |		
+	And I close all client application windows
+
 
 Scenario: _0991199 check create JE from Data processor fix document problems
 	And I close all client application windows

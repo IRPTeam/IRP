@@ -21,6 +21,8 @@ Function GetOperationsDefinition()
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.CurrencyExchange));
 	// Transaction type - Other partner
 	Map.Insert(AO.BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));		
+	Map.Insert(AO.BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues,
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));	
 	// Transaction type - Other expense
 	Map.Insert(AO.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand,
@@ -80,6 +82,8 @@ Function GetOperationsDefinition()
 	//  Transaction type - Other partner
 	Map.Insert(AO.CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand,
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));	
+	Map.Insert(AO.CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));		
 	//  Transaction type - Other partner
 	Map.Insert(AO.CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand,
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.SalaryPayment));	

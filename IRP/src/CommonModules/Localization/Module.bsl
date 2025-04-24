@@ -2031,11 +2031,17 @@ Strings.Insert("BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand",
 Strings.Insert("BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand",
 	NStr("en = 'BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)'", Lang));
 
+Strings.Insert("BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues",
+	NStr("en = 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'", Lang));
+
 Strings.Insert("CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder",
 	NStr("en = 'CashPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)'", Lang));
 
 Strings.Insert("CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand",
 	NStr("en = 'CashPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)'", Lang));
+
+Strings.Insert("CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues",
+	NStr("en = 'CashPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
 	NStr("en = 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)'", Lang));

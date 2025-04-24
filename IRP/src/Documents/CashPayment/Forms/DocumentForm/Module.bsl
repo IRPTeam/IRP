@@ -60,7 +60,12 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.CalculationType,
 	|PaymentList.ReceiptingAccount,
 	|PaymentList.ReceiptingBranch,
-	|PaymentList.Project";
+	|PaymentList.Project,
+	|PaymentList.AdditionalAnalytic,
+	|PaymentList.Tax,
+	|PaymentList.TaxDiscountAmount,
+	|PaymentList.ProfitLossCenter,
+	|PaymentList.RevenueType";
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -104,7 +109,12 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.Partner,
 		|PaymentList.Agreement,
 		|PaymentList.Payee,
-		|PaymentList.LegalNameContract";		
+		|PaymentList.LegalNameContract,
+		|PaymentList.AdditionalAnalytic,
+		|PaymentList.Tax,
+		|PaymentList.TaxDiscountAmount,
+		|PaymentList.ProfitLossCenter,
+		|PaymentList.RevenueType";		
 	ElsIf TransactionType = RetailCustomerAdvance Then
 		StrByType = "
 		|PaymentList.RetailCustomer,

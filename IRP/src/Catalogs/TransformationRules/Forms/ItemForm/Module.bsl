@@ -107,7 +107,7 @@ Procedure FillAttributeData(TypeMetadata, DataType, Ignore, IgnoreTables)
 	For Each Table In TypeMetadata.TabularSections Do
 		
 		If Not IgnoreTables.Find(Table.Name) = Undefined Then
-			Return;
+			Continue;
 		EndIf;
 		
 		For Each Attribute In TypeMetadata.TabularSections[Table.Name].Attributes Do

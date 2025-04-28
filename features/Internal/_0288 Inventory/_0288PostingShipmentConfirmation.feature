@@ -54,6 +54,7 @@ Scenario: _028800 preparation (Shipment confirmation)
 		When Create catalog Partners objects
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog Vehicles objects
 		When Create information register Taxes records (VAT)
 		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
 		And I set checkbox "Number editing available"
@@ -812,4 +813,47 @@ Scenario: _300506 check connection to Shipment Confirmation report "Related docu
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "* Related documents" window is opened
+	And I close all client application windows
+
+Scenario: _028833 check Trailers, Carrier fields in SC
+	And I close all client application windows
+	* create SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "TransactionType" by "Inventor" string
+		And I select from the drop-down list named "Store" by "Store 05" string
+	* Add Item and Trailers, Carrier
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Boots" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "36/18SD" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "10 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to the tab named "GroupOther"
+		And I select from the drop-down list named "Carrier" by "Avira" string
+		And I select from the drop-down list named "Trailers" by "Vehicles 2" string
+		And I click the button named "FormWrite"
+		And I delete "$$ShipmentConfirmation01$$" variable
+		And I delete "$$NumberShipmentConfirmation01$$" variable
+		And I save the window as "$$ShipmentConfirmation01$$"
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation01$$"
+		And I save the value of the field named "Carrier" as "$Carrier$"
+		And I save the value of the field named "Trailers" as "$Trailers$"
+		And I click the button named "FormPost"
+		And I click the button named "FormPostAndClose"
+	* Check
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberShipmentConfirmation01$$' |
+		And I select current line in "List" table
+		And form attributes have values:
+			| 'Name'            | 'Value'                  |
+			| 'Carrier'         | "$Carrier$"              |
+			| 'Comment'         | "Click to enter comment" |
+			| 'Company'         | "Main Company"           |
+			| 'Store'           | "Store 05"               |
+			| 'Trailers'        | "$Trailers$"             |
+			| 'TransactionType' | "Inventory transfer"     |
 	And I close all client application windows

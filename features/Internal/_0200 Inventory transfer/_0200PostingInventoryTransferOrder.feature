@@ -410,13 +410,3 @@ Scenario: _020014 create ITO based on Internal supply request
 			| '$$NumberInventoryTransferOrder020014$$'    |
 		And I close all client application windows
 
-	
-
-
-
-		
-				
-
-
-	
-

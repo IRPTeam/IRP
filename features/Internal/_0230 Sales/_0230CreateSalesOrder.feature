@@ -479,46 +479,6 @@ Scenario: _0154034 check item key selection in the form of item key
 	And I close all client application windows
 
 
-Scenario: _0154037 check impossibility deleting of the store field by line with the product in a Sales order
-	* Open a creation form Sales Order
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I click the button named "FormCreate"
-	* Add to the table part of the product with the item type - Product
-		And I click Choice button of the field named "Store"
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Store 01'       |
-		And I select current line in "List" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Dress'          |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'    | 'Item key'    |
-			| 'Dress'   | 'M/White'     |
-		And I select current line in "List" table
-		And I activate "Quantity" field in "ItemList" table
-		And I input "1,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And "ItemList" table contains lines
-		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
-		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
-	* Delete store field by product line 
-		And I activate field named "ItemListStore" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click Clear button of "Store" attribute in "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Check that the store field is still filled
-		And "ItemList" table contains lines
-		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
-		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
-		And I close all client application windows
-
-
 Scenario: _023014 check movements by status and status history of a Sales Order document
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table

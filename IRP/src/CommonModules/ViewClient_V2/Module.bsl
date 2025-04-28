@@ -374,9 +374,6 @@ Function NeedCommitChangesItemListStoreOnUserChange(Parameters)
 				Break;
 			EndDo;
 						
-			If Row.Property("Store") And Not ValueIsFilled(Row.Store) And Not IsService Then
-				Return False; // clear ItemList.Store impossible
-			EndIf;
 		EndDo;
 	EndIf;
 	Return True;

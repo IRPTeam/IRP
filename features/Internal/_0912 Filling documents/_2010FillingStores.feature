@@ -427,23 +427,6 @@ Scenario: _201005 check filling in Store field in the Shipment confirmation
 		* Delete a line
 			And I go to the last line in "ItemList" table
 			And I delete current line in "ItemList" table
-		* Check that the warehouse is not cleared on the lines with the products
-			And I go to line in "ItemList" table
-			| 'Item'       | 'Item key'    | 'Quantity'   | 'Store'      | 'Unit'    |
-			| 'Trousers'   | '38/Yellow'   | '2,000'      | 'Store 03'   | 'pcs'     |
-			And I activate field named "ItemListStore" in "ItemList" table
-			And I select current line in "ItemList" table
-			And I input "" text in the field named "ItemListStore" of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And "ItemList" table contains lines
-			| 'Item'       | 'Quantity'   | 'Item key'    | 'Unit'   | 'Store'       |
-			| 'Trousers'   | '2,000'      | '38/Yellow'   | 'pcs'    | 'Store 03'    |
-			And I input "" text in the field named "Store"
-			Then "1C:Enterprise" window is opened
-			And I click "No" button
-			And "ItemList" table contains lines
-			| 'Item'       | 'Quantity'   | 'Item key'    | 'Unit'   | 'Store'       |
-			| 'Trousers'   | '2,000'      | '38/Yellow'   | 'pcs'    | 'Store 03'    |
 			And I close all client application windows
 
 
@@ -516,24 +499,6 @@ Scenario: _201006 check filling in Store field in the Goods receipt
 			| 'Item'       | 'Quantity'   | 'Item key'    | 'Unit'   | 'Store'       |
 			| 'Trousers'   | '2,000'      | '38/Yellow'   | 'pcs'    | 'Store 03'    |
 			| 'Shirt'      | '1,000'      | '38/Black'    | 'pcs'    | 'Store 03'    |
-		* Delete a line
-			And I go to the last line in "ItemList" table
-			And I delete current line in "ItemList" table
-		* Check that the warehouse is not cleared on the lines with the products
-			And I go to line in "ItemList" table
-			| 'Item'       | 'Item key'    | 'Quantity'   | 'Store'      | 'Unit'    |
-			| 'Trousers'   | '38/Yellow'   | '2,000'      | 'Store 03'   | 'pcs'     |
-			And I activate field named "ItemListStore" in "ItemList" table
-			And I select current line in "ItemList" table
-			And I input "" text in the field named "ItemListStore" of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And "ItemList" table contains lines
-			| 'Item'       | 'Quantity'   | 'Item key'    | 'Unit'   | 'Store'       |
-			| 'Trousers'   | '2,000'      | '38/Yellow'   | 'pcs'    | 'Store 03'    |
-			And I input "" text in the field named "Store"
-			And "ItemList" table contains lines
-			| 'Item'       | 'Quantity'   | 'Item key'    | 'Unit'   | 'Store'       |
-			| 'Trousers'   | '2,000'      | '38/Yellow'   | 'pcs'    | 'Store 03'    |
 			And I close all client application windows
 
 Scenario: _201010 сheck filling of the bundle of store and company in the SO

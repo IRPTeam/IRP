@@ -55,6 +55,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When create items for work order
 		When Create catalog BillOfMaterials objects
 		When Create catalog PartnerItems objects
+		When Create catalog TaxExemptionReasons objects
 		When Create information register Taxes records (VAT)
 	* Add plugin for discount
 		When Create Document discount
@@ -9100,4 +9101,243 @@ Scenario: _0154200 check auto filling partner term in the BR (filter by Company)
 		And "PaymentList" table contains lines
 			| 'Partner' | 'Partner term'                |
 			| 'NDB'     | 'Partner term Second Company' |
-	And I close all client application windows					
+	And I close all client application windows
+
+Scenario: _0154201 check row separation in SI 
+	And I close all client application windows
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling main info
+		And I select from the drop-down list named "Partner" by "Lomaniti" string
+		Then the form attribute named "LegalName" became equal to "Company Lomaniti"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+	* Add Item with SLN								
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Product 5 with SLN" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I select "0512" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I input "110,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I select "0514" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I input "120,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click the button named "FormOk"
+		And I activate field named "ItemListPrice" in "ItemList" table
+		And I input "5,01" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Add Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Skittles" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I input "10 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I input "0,53" text in the field named "ItemListPrice" of "ItemList" table
+		And I select "0%" exact value from the drop-down list named "ItemListVatRate" in "ItemList" table
+		And I select "Tax exeption reason 1 (0%, All countries)" by string from the drop-down list named "ItemListTaxExemptionReason" in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		And "ItemList" table became equal
+			| '#' | 'Price type'              | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Source of origins' | 'Quantity'   | 'Price' | 'Tax exemption reason'                      | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Additional analytic' | 'Project' | 'Store'    | 'Delivery date' | 'Other period revenue type' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Work order' | 'Revenue type' | 'Sales person' |
+			| '1' | 'en description is empty' | 'Product 5 with SLN' | 'ODS'      | ''                   | 'No'                 | '175,77'     | 'pcs'  | '0512; 0514'         | ''                  | '230,000'    | '5,01'  | ''                                          | '18%' | ''              | '976,53'     | '1 152,30'     | 'No'             | ''                    | ''        | 'Store 01' | ''              | ''                          | 'No'                        | ''       | ''            | ''           | ''             | ''             |
+			| '2' | 'en description is empty' | 'Skittles'           | 'Fruit'    | ''                   | 'No'                 | ''           | 'pcs'  | ''                   | ''                  | '10 000,000' | '0,53'  | 'Tax exeption reason 1 (0%, All countries)' | '0%'  | ''              | '5 300,00'   | '5 300,00'     | 'No'             | ''                    | ''        | 'Store 01' | ''              | ''                          | 'No'                        | ''       | ''            | ''           | ''             | ''             |
+		
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "6 276,53"
+		Then the form attribute named "ItemListTotalOffersAmount" became equal to "0,00"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "175,77"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "6 452,30"
+		Then the form attribute named "LegalName" became equal to "Company Lomaniti"
+		Then the form attribute named "ManagerSegment" became equal to "Region 2"
+		Then the form attribute named "Partner" became equal to "Lomaniti"
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "TransactionType" became equal to "Sales"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+	* Split first Item
+		And I go to line in "ItemList" table
+			| "#" | "Dont calculate row" | "Item"               | "Item key" | "Net amount" | "Price" | "Price type"              | "Quantity" | "Serial lot numbers" | "Store"    | "Tax amount" | "Total amount" | "Unit" | "Use shipment confirmation" | "Use work sheet" | "VAT" |
+			| "1" | "No"                 | "Product 5 with SLN" | "ODS"      | "976,53"     | "5,01"  | "en description is empty" | "230,000"  | "0512; 0514"         | "Store 01" | "175,77"     | "1 152,30"     | "pcs"  | "No"                        | "No"             | "18%" |
+		And in the table "ItemList" I click the button named "ItemListSplitRow"
+		Then "Set the quantity for the new row" window is opened
+		And I input "130" text in the field named "InputFld"
+		And I click the button named "OK"
+	* Check separation
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity'   | 'Price type'              | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason'                      |
+			| '1' | 'Product 5 with SLN' | 'ODS'      | '0512'               | ''                  | '100,000'    | 'en description is empty' | 'pcs'  | '5,01'  | '18%' | ''              | 'No'                 | '76,42'      | '424,58'     | '501,00'       | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                                          |
+			| '2' | 'Skittles'           | 'Fruit'    | ''                   | ''                  | '10 000,000' | 'en description is empty' | 'pcs'  | '0,53'  | '0%'  | ''              | 'No'                 | ''           | '5 300,00'   | '5 300,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | 'Tax exeption reason 1 (0%, All countries)' |
+			| '3' | 'Product 5 with SLN' | 'ODS'      | '0514; 0512'         | ''                  | '130,000'    | 'en description is empty' | 'pcs'  | '5,01'  | '18%' | ''              | 'No'                 | '99,35'      | '551,95'     | '651,30'       | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                                          |
+		And form attributes have values:
+			| 'Name'                      | 'Value'                    |
+			| 'Agreement'                 | "Basic Partner terms, TRY" |
+			| 'Company'                   | "Main Company"             |
+			| 'Currency'                  | "TRY"                      |
+			| 'CurrencyTotalAmount'       | "TRY"                      |
+			| 'ItemListTotalNetAmount'    | "6 276,53"                 |
+			| 'ItemListTotalTaxAmount'    | "175,77"                   |
+			| 'ItemListTotalTotalAmount'  | "6 452,30"                 |
+			| 'LegalName'                 | "Company Lomaniti"         |
+			| 'ManagerSegment'            | "Region 2"                 |
+			| 'Partner'                   | "Lomaniti"                 |
+			| 'PriceIncludeTax'           | "Yes"                      |
+			| 'Store'                     | "Store 01"                 |
+			| 'TransactionType'           | "Sales"                    |
+		And I go to line in "ItemList" table
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity'   | 'Price type'              | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason'                      |
+			| '3' | 'Product 5 with SLN' | 'ODS'      | '0514; 0512'         | ''                  | '130,000'    | 'en description is empty' | 'pcs'  | '5,01'  | '18%' | ''              | 'No'                 | '99,35'      | '551,95'     | '651,30'       | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                                          |
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And "SerialLotNumbers" table became equal
+			| 'Serial lot number' | 'Quantity' | 'Code is approved' |
+			| '0514'              | '120,000'  | 'No'               |
+			| '0512'              | '10,000'   | 'No'               |
+		And I close current window
+		And I go to line in "ItemList" table
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity'   | 'Price type'              | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason'                      |
+			| '1' | 'Product 5 with SLN' | 'ODS'      | '0512'               | ''                  | '100,000'    | 'en description is empty' | 'pcs'  | '5,01'  | '18%' | ''              | 'No'                 | '76,42'      | '424,58'     | '501,00'       | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                                          |
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And "SerialLotNumbers" table became equal
+			| 'Serial lot number' | 'Quantity' | 'Code is approved' |
+			| '0512'              | '100,000'  | 'No'               |
+		And I close current window
+	* Split second Item
+		And I go to line in "ItemList" table
+			| "#" | "Dont calculate row" | "Item"     | "Item key" | "Net amount" | "Price" | "Price type"              | "Quantity"   | "Store"    | "Tax exemption reason"                      | "Total amount" | "Unit" | "Use shipment confirmation" | "Use work sheet" | "VAT" |
+			| "2" | "No"                 | "Skittles" | "Fruit"    | "5 300,00"   | "0,53"  | "en description is empty" | "10 000,000" | "Store 01" | "Tax exeption reason 1 (0%, All countries)" | "5 300,00"     | "pcs"  | "No"                        | "No"             | "0%"  |
+		And in the table "ItemList" I click the button named "ItemListSplitRow"
+		Then "Set the quantity for the new row" window is opened
+		And I input "5 000" text in the field named "InputFld"
+		And I click the button named "OK"
+	* Check separation
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity'  | 'Price type'              | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason'                      |
+			| '1' | 'Product 5 with SLN' | 'ODS'      | '0512'               | ''                  | '100,000'   | 'en description is empty' | 'pcs'  | '5,01'  | '18%' | ''              | 'No'                 | '76,42'      | '424,58'     | '501,00'       | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                                          |
+			| '2' | 'Skittles'           | 'Fruit'    | ''                   | ''                  | '5 000,000' | 'en description is empty' | 'pcs'  | '0,53'  | '0%'  | ''              | 'No'                 | ''           | '2 650,00'   | '2 650,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | 'Tax exeption reason 1 (0%, All countries)' |
+			| '3' | 'Product 5 with SLN' | 'ODS'      | '0514; 0512'         | ''                  | '130,000'   | 'en description is empty' | 'pcs'  | '5,01'  | '18%' | ''              | 'No'                 | '99,35'      | '551,95'     | '651,30'       | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                                          |
+			| '4' | 'Skittles'           | 'Fruit'    | ''                   | ''                  | '5 000,000' | 'en description is empty' | 'pcs'  | '0,53'  | '0%'  | ''              | 'No'                 | ''           | '2 650,00'   | '2 650,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | 'Tax exeption reason 1 (0%, All countries)' |
+		And form attributes have values:
+			| 'Name'                      | 'Value'                    |
+			| 'Agreement'                 | "Basic Partner terms, TRY" |
+			| 'Company'                   | "Main Company"             |
+			| 'Currency'                  | "TRY"                      |
+			| 'CurrencyTotalAmount'       | "TRY"                      |
+			| 'ItemListTotalNetAmount'    | "6 276,53"                 |
+			| 'ItemListTotalTaxAmount'    | "175,77"                   |
+			| 'ItemListTotalTotalAmount'  | "6 452,30"                 |
+			| 'LegalName'                 | "Company Lomaniti"         |
+			| 'ManagerSegment'            | "Region 2"                 |
+			| 'Partner'                   | "Lomaniti"                 |
+			| 'PriceIncludeTax'           | "Yes"                      |
+			| 'Store'                     | "Store 01"                 |
+			| 'TransactionType'           | "Sales"                    |
+	* Save and Post
+		And I click the button named "FormWrite"
+		And I delete "$$SalesInvoice01$$" variable
+		And I delete "$$NumberSalesInvoice01$$" variable
+		And I save the window as "$$SalesInvoice01$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice01$$"		
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows								
+
+Scenario: _0154202 check row separation in SC 
+	And I close all client application windows
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+		And I select "Inventory transfer" exact value from the drop-down list named "TransactionType"
+	* Add Item with SLN
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Product 5 with SLN" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I select "0512" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I input "110,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I select "0514" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I input "120,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click the button named "FormOk"
+		And I finish line editing in "ItemList" table
+	* Add Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Skittles" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I input "10 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "TransactionType" became equal to "Inventory transfer"
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Source of origins' | 'Quantity'   | 'Sales invoice' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Shipment planing order' | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Product 5 with SLN' | ''                   | 'ODS'      | '0512; 0514'         | 'pcs'  | ''                  | '230,000'    | ''              | 'Store 02' | ''               | ''            | ''                       | ''                         | ''                      | ''                |
+			| '2' | 'Skittles'           | ''                   | 'Fruit'    | ''                   | 'pcs'  | ''                  | '10 000,000' | ''              | 'Store 02' | ''               | ''            | ''                       | ''                         | ''                      | ''                |
+	* Split first Item
+		And I go to line in "ItemList" table
+			| "#" | "Item"               | "Item key" | "Quantity" | "Serial lot numbers" | "Store"    | "Unit" |
+			| "1" | "Product 5 with SLN" | "ODS"      | "230,000"  | "0512; 0514"         | "Store 02" | "pcs"  |
+		And in the table "ItemList" I click the button named "ItemListSplitRow"
+		And I input "130" text in the field named "InputFld"
+		And I click the button named "OK"
+	* Check separation
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity'   | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Shipment planing order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Product 5 with SLN' | 'ODS'      | '0512'               | ''                  | '100,000'    | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '2' | 'Skittles'           | 'Fruit'    | ''                   | ''                  | '10 000,000' | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '3' | 'Product 5 with SLN' | 'ODS'      | '0514; 0512'         | ''                  | '130,000'    | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+		And form attributes have values:
+			| 'Name'            | 'Value'              |
+			| 'Company'         | "Main Company"       |
+			| 'Store'           | "Store 02"           |
+			| 'TransactionType' | "Inventory transfer" |
+		And I go to line in "ItemList" table
+			| "#" | "Item"               | "Item key" | "Quantity" | "Serial lot numbers" | "Store"    | "Unit" |
+			| "3" | "Product 5 with SLN" | "ODS"      | "130,000"  | "0514; 0512"         | "Store 02" | "pcs"  |
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		Then the form attribute named "AutoCreateNewSerialLotNumbers" became equal to "No"
+		And "SerialLotNumbers" table became equal
+			| 'Serial lot number' | 'Quantity' | 'Code is approved' |
+			| '0514'              | '120,000'  | 'No'               |
+			| '0512'              | '10,000'   | 'No'               |
+		And I close current window		
+		And I go to line in "ItemList" table
+			| "#" | "Item"               | "Item key" | "Quantity" | "Serial lot numbers" | "Store"    | "Unit" |
+			| "1" | "Product 5 with SLN" | "ODS"      | "100,000"  | "0512"               | "Store 02" | "pcs"  |
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		Then the form attribute named "AutoCreateNewSerialLotNumbers" became equal to "No"
+		And "SerialLotNumbers" table became equal
+			| 'Serial lot number' | 'Quantity' | 'Code is approved' |
+			| '0512'              | '100,000'  | 'No'               |
+		And I close current window	
+	* Split second Item
+		And I go to line in "ItemList" table
+			| "#" | "Item"     | "Item key" | "Quantity"   | "Store"    | "Unit" |
+			| "2" | "Skittles" | "Fruit"    | "10 000,000" | "Store 02" | "pcs"  |
+		And in the table "ItemList" I click the button named "ItemListSplitRow"
+		Then "Set the quantity for the new row" window is opened
+		And I input "5 000" text in the field named "InputFld"
+		And I click the button named "OK"
+	* Check separation
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity'  | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Shipment planing order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Product 5 with SLN' | 'ODS'      | '0512'               | ''                  | '100,000'   | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '2' | 'Skittles'           | 'Fruit'    | ''                   | ''                  | '5 000,000' | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '3' | 'Product 5 with SLN' | 'ODS'      | '0514; 0512'         | ''                  | '130,000'   | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '4' | 'Skittles'           | 'Fruit'    | ''                   | ''                  | '5 000,000' | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+		And form attributes have values:
+			| 'Name'                                   | 'Value'                                                                                                                   | 'HowToSearch' |
+			| 'Company'                                | "Main Company"                                                                                                            | ''            |
+			| 'Store'                                  | "Store 02"                                                                                                                | ''            |
+			| 'TransactionType'                        | "Inventory transfer"                                                                                                      | ''            |
+	* Save and Post
+		And I click the button named "FormWrite"
+		And I delete "$$ShipmentConfirmation01$$" variable
+		And I delete "$$NumberShipmentConfirmation01$$" variable
+		And I save the window as "$$ShipmentConfirmation01$$"
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation01$$"		
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows								

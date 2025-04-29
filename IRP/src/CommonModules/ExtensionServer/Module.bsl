@@ -63,7 +63,13 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 			Parent = Form;
 		EndIf;
 
-		NewAttribute = Form.Items.Add(Attribute.Attribute, Type("FormField"), Parent);
+		Try
+			NewAttribute = Form.Items.Add(Attribute.Attribute, Type("FormField"), Parent);
+		Except
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_181, Attribute.Attribute));
+			Continue;
+		EndTry;
+		
 		NewAttribute.Type = FormFieldType.InputField;
 		NewAttribute.DataPath = "Object." + Attribute.Attribute;
 		If ObjectMetadata.Attributes.Find(Attribute.Attribute) = Undefined Then

@@ -1086,7 +1086,7 @@ Function Strings(Lang) Export
 		"en = 'Cannot clear the ""%2"" check box. Documents ""%3"" from store %1 were already created.'", Lang));
 	
 	// %1 - sales order
-	Strings.Insert("Error_054", NStr("en = 'Cannot continue. The ""%1""document has an incorrect status.'", Lang));
+	Strings.Insert("Error_054", NStr("en = 'Cannot continue. The ""%1"" document has an incorrect status.'", Lang));
 
 	Strings.Insert("Error_055", NStr("en = 'There are no lines with a correct procurement method.'", Lang));
 
@@ -1378,6 +1378,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_178", NStr("en = 'Order already closed'", Lang));
 	Strings.Insert("Error_179", NStr("en = 'Number [%1] is already used for [%2]'", Lang));
 	Strings.Insert("Error_180", NStr("en = 'Only system record allowed'", Lang));
+	Strings.Insert("Error_181", NStr("en = 'Attribute already on form. Remove duplicate from set: [%1]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	

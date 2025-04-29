@@ -68,6 +68,7 @@
     </items>
   </predefined>
   <editType>InDialog</editType>
+  <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.Units.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.Units.Form.ListForm</defaultListForm>

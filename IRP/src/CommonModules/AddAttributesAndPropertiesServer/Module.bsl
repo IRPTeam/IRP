@@ -488,7 +488,11 @@ Function GetObjectInfo(Object, Prefix)
 	FormInfo.Insert("Ref", Object.Ref);
 	FormInfo.Insert("Metadata", Object.Ref.Metadata());
 	FormInfo.Insert("IsNew", FormInfo.Ref.IsEmpty());
-	FormInfo.Insert("AddAttributes", Object[Prefix + "AddAttributes"]);
+	If Not Object.Ref.Metadata().TabularSections.Find(Prefix + "AddAttributes") = Undefined Then
+		FormInfo.Insert("AddAttributes", Object[Prefix + "AddAttributes"]);
+	Else
+		FormInfo.Insert("AddAttributes", New ValueTable());
+	EndIf;
 
 	If FormInfo.Metadata = Metadata.Catalogs.ItemKeys 
 		Or FormInfo.Metadata = Metadata.Catalogs.PriceKeys Then
@@ -546,6 +550,9 @@ EndFunction
 // Returns:
 //  See ReduceObjectAttributes
 Function ObjectAttributes(FormInfo, AddAttributeAndPropertySetName, AddInfo = Undefined) Export
+	If Metadata.Catalogs.AddAttributeAndPropertySets.GetPredefinedNames().Find(AddAttributeAndPropertySetName) = Undefined Then
+		Return New Array;
+	EndIf;
 	AllItems = Catalogs.AddAttributeAndPropertySets[AddAttributeAndPropertySetName].Attributes;
 	Return ReduceObjectAttributes(FormInfo, AllItems, AddAttributeAndPropertySetName, AddInfo);
 EndFunction

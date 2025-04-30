@@ -24,9 +24,12 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog ItemKeys objects
 		When Create catalog ItemKeys objects (serial lot numbers)
 		When Create catalog ItemTypes objects
+		When Create catalog ItemTypes objects (serial lot numbers)
 		When Create catalog Units objects
 		When Create catalog Items objects
 		When Create catalog Items objects (serial lot numbers)
+		When  Create catalog SerialLotNumbers objects
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
 		When Create chart of characteristic types AddAttributeAndProperty objects
@@ -9113,12 +9116,16 @@ Scenario: _0154201 check row separation in SI
 	* Filling main info
 		And I select from the drop-down list named "Partner" by "Lomaniti" string
 		Then the form attribute named "LegalName" became equal to "Company Lomaniti"
-		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		And I select from the drop-down list named "Agreement" by "Basic Partner terms, TRY" string
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 	* Add Item with SLN								
 		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I select "Product 5 with SLN" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| "Code" | "Description"        |
+			| "165"  | "Product 5 with SLN" |
+		And I click the button named "FormChoose"
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
 		And I select "0512" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
@@ -9249,7 +9256,9 @@ Scenario: _0154202 check row separation in SC
 	And I close all client application windows
 	* Create SI
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
-		And I click the button named "FormCreate"
+		And I click the button named "FormCreate"		
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Store" by "Store 02" string
 		And I select "Inventory transfer" exact value from the drop-down list named "TransactionType"
 	* Add Item with SLN
 		And in the table "ItemList" I click the button named "ItemListAdd"

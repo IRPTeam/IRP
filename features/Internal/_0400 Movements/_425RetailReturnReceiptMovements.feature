@@ -147,7 +147,16 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create document RetailReturnReceipt objects (serial lot numbers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailReturnReceipt.FindByNumber(1115).GetObject().Write(DocumentWriteMode.Posting);"    |
-
+		When create Retail document for register R6060 Cost of goods sold
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(329).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(1317).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(2209).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I close all client application windows
 
 Scenario: _0425001 check preparation
 	When check preparation
@@ -1067,4 +1076,24 @@ Scenario: _042542 check Retail return receipt movements by the Register  "Posted
 			| 'Register  "Posted documents registry"'               | ''                                                    | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
 			| ''                                                    | 'Document'                                            | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
 			| ''                                                    | 'Retail return receipt 201 dated 15.03.2021 16:01:25' | '15.03.2021 16:01:25' | '201'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		
+
+Scenario: _042543 check Retail return receipt movements by the Register  "R6060 Cost of goods sold"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	And I go to line in "List" table
+		| 'Number' |
+		| '2 209'  |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "R6060 Cost of goods sold" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 2 209 dated 15.04.2025 0:00:00' | ''                   | ''             | ''                                                    | ''              | ''                        | ''         | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                                                      |
+			| 'Register  "R6060 Cost of goods sold !Manual edit"'    | ''                   | ''             | ''                                                    | ''              | ''                        | ''         | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                                                      |
+			| ''                                                     | 'Period'             | 'Company'      | 'Sales invoice'                                       | 'Item key'      | 'Currency movement type'  | 'Currency' | 'Quantity' | 'Invoice amount' | 'Invoice tax amount' | 'Indirect cost amount' | 'Indirect cost tax amount' | 'Extra cost amount by ratio' | 'Extra cost tax amount by ratio' | 'Extra direct cost amount' | 'Extra direct cost tax amount' | 'Allocated cost amount' | 'Allocated cost tax amount' | 'Allocated revenue amount' | 'Allocated revenue tax amount' | 'Total amount' | 'Total net amount' | 'Total tax amount' | 'Calculation movement cost'                             |
+			| ''                                                     | '15.04.2025 0:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 0:00:00' | 'Scarf + Dress' | 'Local currency'          | 'TRY'      | '-10'      | '-1 406,88'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | 'Calculation movement costs 1 dated 01.05.2025 0:00:00' |
+			| ''                                                     | '15.04.2025 0:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 0:00:00' | 'Scarf + Dress' | 'en description is empty' | 'TRY'      | '-10'      | '-1 406,88'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-1 406,88'    | '-1 406,88'        | ''                 | 'Calculation movement costs 1 dated 01.05.2025 0:00:00' |
+			| ''                                                     | '15.04.2025 0:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 0:00:00' | 'Scarf + Dress' | 'Local currency'          | 'TRY'      | '-10'      | '-1 406,88'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-1 406,88'    | '-1 406,88'        | ''                 | 'Calculation movement costs 1 dated 01.05.2025 0:00:00' |
+			| ''                                                     | '15.04.2025 0:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 0:00:00' | 'Scarf + Dress' | 'Reporting currency'      | 'USD'      | '-10'      | '-240,86'        | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-240,86'      | '-240,86'          | ''                 | 'Calculation movement costs 1 dated 01.05.2025 0:00:00' |
 	And I close all client application windows		

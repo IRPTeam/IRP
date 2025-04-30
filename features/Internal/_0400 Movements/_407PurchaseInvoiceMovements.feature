@@ -147,6 +147,23 @@ Scenario: _04096 preparation (Purchase invoice)
 			| "Documents.GoodsReceipt.FindByNumber(2114).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(2116).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Load documents for register R6060 Cost of goods sold
+		When create document for register R6060 Cost of goods sold
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.SalesInvoice.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(2506).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.PurchaseInvoice.FindByNumber(2506).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseReturn.FindByNumber(234).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.PurchaseReturn.FindByNumber(234).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.SalesReturn.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.CalculationMovementCosts.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I close all client application windows
 	
 
@@ -1242,4 +1259,18 @@ Scenario: _0401045 check Purchase invoice movements by the Register  "Posted doc
 			| 'Register  "Posted documents registry"'          | ''                                               | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
 			| ''                                               | 'Document'                                       | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
 			| ''                                               | 'Purchase invoice 118 dated 12.02.2021 16:08:41' | '12.02.2021 16:08:41' | '118'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		
+
+Scenario: __0401046 check Purchase invoice movements by the Register  "R6060 Cost of goods sold"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '2 506'  |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "R6060 Cost of goods sold" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 2 506 dated 02.05.2025 0:00:00' |
 	And I close all client application windows		

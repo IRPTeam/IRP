@@ -1272,5 +1272,5 @@ Scenario: __0401046 check Purchase invoice movements by the Register  "R6060 Cos
 		And I select "R6060 Cost of goods sold" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 2 506 dated 02.05.2025 0:00:00' |
+			| 'Purchase invoice 2 506 dated 02.05.2025 00:00:00' |
 	And I close all client application windows		

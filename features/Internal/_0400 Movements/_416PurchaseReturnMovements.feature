@@ -843,5 +843,5 @@ Scenario: _041632 check Purchase return movements by the Register  "R6060 Cost o
 		And I select "R6060 Cost of goods sold" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 234 dated 07.05.2025 0:00:00' |
+			| 'Purchase return 234 dated 07.05.2025 00:00:00' |
 	And I close all client application windows		

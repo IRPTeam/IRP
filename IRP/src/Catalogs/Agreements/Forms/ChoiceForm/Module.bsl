@@ -30,10 +30,14 @@ EndProcedure
 
 &AtServer
 Procedure SetCompanyFilter()
+	ArrayOfCompanies = New Array();
+	ArrayOfCompanies.Add(ThisObject.FilterCompany);
+	ArrayOfCompanies.Add(Catalogs.Companies.EmptyRef());
+	
 	CommonFunctionsClientServer.SetFilterItem(List.Filter.Items, 
 		"Company", 
-		ThisObject.FilterCompany, 
-		DataCompositionComparisonType.Equal, ThisObject.FilterCompanyUse);
+		ArrayOfCompanies, 
+		DataCompositionComparisonType.InList, ThisObject.FilterCompanyUse);
 EndProcedure
 
 #Region COMMANDS

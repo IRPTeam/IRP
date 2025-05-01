@@ -1949,27 +1949,48 @@ Procedure FillAccountingRowAnalytics(Parameters, Row = Undefined)
 	AnalyticRow.LedgerType = AnalyticData.LedgerType;
 	
 	AnalyticRow.AccountDebit = AnalyticData.Debit;
+	ClearAccountingExtDimensions(AnalyticData, 
+		AnalyticData.DebitExtDimensions, 
+		Parameters.AccountingExtDimensions,
+		Enums.AccountingAnalyticTypes.Debit);
 	FillAccountingExtDimensions(AnalyticData.DebitExtDimensions, Parameters.AccountingExtDimensions);
 	
 	AnalyticRow.AccountCredit = AnalyticData.Credit;
+	ClearAccountingExtDimensions(AnalyticData, 
+		AnalyticData.CreditExtDimensions, 
+		Parameters.AccountingExtDimensions,
+		Enums.AccountingAnalyticTypes.Credit);
 	FillAccountingExtDimensions(AnalyticData.CreditExtDimensions, Parameters.AccountingExtDimensions);
 EndProcedure
 
-Procedure FillAccountingExtDimensions(ArrayOfData, AccountingExtDimensions)
-	For Each ExtDim In ArrayOfData Do
+Procedure ClearAccountingExtDimensions(AnalyticData, ArrayOfData, AccountingExtDimensions, AnalyticType)
+	If ArrayOfData.Count() = 0 Then
 		Filter = New Structure();
-		If ValueIsFilled(ExtDim.Key) Then
-			Filter.Insert("Key" , ExtDim.Key);
-		EndIf;
-		Filter.Insert("AnalyticType" , ExtDim.AnalyticType);
-		Filter.Insert("Operation"    , ExtDim.Operation);
-		Filter.Insert("LedgerType"   , ExtDim.LedgerType);
+		Filter.Insert("AnalyticType" , AnalyticType);
+		Filter.Insert("Operation"    , AnalyticData.Operation);
+		Filter.Insert("LedgerType"   , AnalyticData.LedgerType);
 		AccountingExtDimensionRows = AccountingExtDimensions.FindRows(Filter);
 		For Each RowForDelete In AccountingExtDimensionRows Do
 			AccountingExtDimensions.Delete(RowForDelete);
 		EndDo;
-	EndDo;
-	
+	Else
+		For Each ExtDim In ArrayOfData Do
+			Filter = New Structure();
+			If ValueIsFilled(ExtDim.Key) Then
+				Filter.Insert("Key" , ExtDim.Key);
+			EndIf;
+			Filter.Insert("AnalyticType" , ExtDim.AnalyticType);
+			Filter.Insert("Operation"    , ExtDim.Operation);
+			Filter.Insert("LedgerType"   , ExtDim.LedgerType);
+			AccountingExtDimensionRows = AccountingExtDimensions.FindRows(Filter);
+			For Each RowForDelete In AccountingExtDimensionRows Do
+				AccountingExtDimensions.Delete(RowForDelete);
+			EndDo;
+		EndDo;		
+	EndIf;	
+EndProcedure
+
+Procedure FillAccountingExtDimensions(ArrayOfData, AccountingExtDimensions)
 	For Each ExtDim In ArrayOfData Do
 		NewRow = AccountingExtDimensions.Add();
 		NewRow.Key              = ExtDim.Key;

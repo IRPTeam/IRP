@@ -358,26 +358,7 @@ Function GetDocumentsWithTax() Export
 	For Each Document In Metadata.Documents Do
 		FindTaxInTabularSection(Document, "PaymentList"  , List);
 		FindTaxInTabularSection(Document, "ItemList"     , List);
-		FindTaxInTabularSection(Document, "Transactions" , List);
-		
-//		If Document.TabularSections.Find("PaymentList") <> Undefined Then
-//			For Each _column In Document.TabularSections.PaymentList.Attributes Do
-//				If Upper(_column.Name) = Upper("VatRate") Then
-//					List.Add(Document.Name, Document.Synonym);
-//					Break;
-//				EndIf;
-//			EndDo;					
-//		EndIf;
-//		
-//		If Document.TabularSections.Find("ItemList") <> Undefined Then
-//			For Each _column In Document.TabularSections.ItemList.Attributes Do
-//				If Upper(_column.Name) = Upper("VatRate") Then
-//					List.Add(Document.Name, Document.Synonym);
-//					Break;
-//				EndIf;
-//			EndDo;					
-//		EndIf;
-		
+		FindTaxInTabularSection(Document, "Transactions" , List);		
 	EndDo;
 	Return List;
 EndFunction

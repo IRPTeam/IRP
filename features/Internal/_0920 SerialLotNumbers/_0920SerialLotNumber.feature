@@ -4111,6 +4111,10 @@ Scenario: _092083 check serial lot numbers in the POS
 		And I expand current line in "ItemsPickup" table
 	* Add items with serial lot numbers
 		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
 			| '(10001) Dress, XS/Blue'    |
 		And I select current line in "ItemsPickup" table

@@ -1067,7 +1067,7 @@ Scenario: _042542 check Retail return receipt movements by the Register  "Posted
 	And I go to line in "List" table
 		| 'Number' |
 		| '201'    |
-	* Check movements by the Register "Posted documents registry"
+	* Check movements by the Register "R6060 Cost of goods sold"
 		And I click "Registrations report info" button
 		And I select "Posted documents registry" exact value from "Register" drop-down list
 		And I click "Generate report" button

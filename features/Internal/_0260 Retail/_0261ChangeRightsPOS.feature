@@ -94,6 +94,10 @@ Scenario: _0260209 check that change price and Return in POS is not available fo
 	* Add item and try change price
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
 			| '(10001) Dress, XS/Blue'    |
 		And I select current line in "ItemsPickup" table
@@ -111,6 +115,10 @@ Scenario: _0260210 one-time change of access rights (POS)
 	* Open POS
 		And In the command interface I select "Retail" "Point of sale"
 	* Add item and try change price
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
@@ -156,6 +164,10 @@ Scenario: _0260212 keep rights when change access rights (POS)
 	* Open POS
 		And In the command interface I select "Retail" "Point of sale"
 	* Change rights and return item
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
@@ -242,6 +254,10 @@ Scenario: _0260214 settings of access rights from user group
 	* Open POS
 		And In the command interface I select "Retail" "Point of sale"
 	* Add item and try change price
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |

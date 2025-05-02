@@ -1267,7 +1267,7 @@ Scenario: __0401046 check Purchase invoice movements by the Register  "R6060 Cos
 	And I go to line in "List" table
 		| 'Number' |
 		| '2 506'  |
-	* Check movements by the Register "Posted documents registry"
+	* Check movements by the Register "R6060 Cost of goods sold"
 		And I click "Registrations report info" button
 		And I select "R6060 Cost of goods sold" exact value from "Register" drop-down list
 		And I click "Generate report" button

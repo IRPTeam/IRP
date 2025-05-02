@@ -1106,7 +1106,7 @@ Scenario: _041342 check Sales return movements by the Register  "R6060 Cost of g
 	And I go to line in "List" table
 		| 'Number' |
 		| '1 114'  |
-	* Check movements by the Register "Posted documents registry"
+	* Check movements by the Register "R6060 Cost of goods sold"
 		And I click "Registrations report info" button
 		And I select "R6060 Cost of goods sold" exact value from "Register" drop-down list
 		And I click "Generate report" button

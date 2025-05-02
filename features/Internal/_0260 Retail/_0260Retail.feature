@@ -587,6 +587,9 @@ Scenario: _0260132 create RSR (payment by bank credit)
 		And I close all client application windows
 	* Open POS and create RSR
 		And In the command interface I select "Retail" "Point of sale"
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
@@ -695,6 +698,9 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		And I close all client application windows
 	* Create RSR and check using advance 
 		And In the command interface I select "Retail" "Point of sale"
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |

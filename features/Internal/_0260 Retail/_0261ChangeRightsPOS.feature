@@ -115,7 +115,6 @@ Scenario: _0260210 one-time change of access rights (POS)
 	* Open POS
 		And In the command interface I select "Retail" "Point of sale"
 	* Add item and try change price
-		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| "Item"          |
 			| "(10001) Dress" |
@@ -145,6 +144,9 @@ Scenario: _0260210 one-time change of access rights (POS)
 		And I click the button named "Enter"		
 		Then the form attribute named "UserAdmin" became equal to ""
 	* Check the return of access rights
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
@@ -192,6 +194,9 @@ Scenario: _0260212 keep rights when change access rights (POS)
 		And I click the button named "Enter"
 		Then the form attribute named "UserAdmin" became equal to "Arina Brown (Financier 3)"
 	* Change price and return
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |

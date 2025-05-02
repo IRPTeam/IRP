@@ -213,6 +213,9 @@ Scenario: _0260212 keep rights when change access rights (POS)
 		Then the form attribute named "UserAdmin" became equal to "Arina Brown (Financier 3)"
 	* Check the return of access rights	
 		And I click "Rollback rights" button
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |

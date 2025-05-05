@@ -4,9 +4,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
-	If Parameters.Key.IsEmpty() Then
-		SetVisibilityAvailability(Object, ThisObject);
-	EndIf;
+	SetVisibilityAvailability(Object, ThisObject);
 	
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
@@ -16,41 +14,32 @@ EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	
 	SetVisibilityAvailability(Object, ThisObject);
+	
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
+	
 	SetVisibilityAvailability(Object, ThisObject);
+	
 	LoadTemplateData();
-EndProcedure
-
-&AtClient
-Procedure BeforeWrite(Cancel, WriteParameters)
-	OldParameters = Object.Parameters.FindRows(New Structure("ToDelete", True));
-	For Each OldParameter In OldParameters Do
-		Object.Parameters.Delete(OldParameter);
-	EndDo;
+	LoadObjectsForPrinting();
+	
 EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	SaveTemplate(CurrentObject);
+	
+	SaveTemplateData(CurrentObject);
+	
 EndProcedure
 
 &AtServer
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	
-	ObjectRecords = InformationRegisters.ObjectsPrintTemplates.CreateRecordSet();
-	ObjectRecords.Filter.PrintTemplate.Set(CurrentObject.Ref, True);
-	
-	For Each ObjectsItem In ObjectsList Do
-		Record = ObjectRecords.Add();
-		Record.PrintTemplate = CurrentObject.Ref;
-		Record.Object = ObjectsItem.Value;
-	EndDo;
-	
-	ObjectRecords.Write(True);
+	SaveObjectsForPrinting(CurrentObject);
 	
 EndProcedure
 
@@ -59,11 +48,24 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	
 	If EventName = "FormulaIsReady" Then
 		
-		CurrentRow = Items.Parameters.CurrentData;
-		If CurrentRow = Undefined Then
-			Return;
-		Else
-			CurrentRow.Expression = Parameter;
+		If Items.Pages.CurrentPage = Items.PageTables Then
+			
+			CurrentRow = Items.Tables.CurrentData;
+			If CurrentRow = Undefined Then
+				Return;
+			Else
+				CurrentRow.Expression = Parameter;
+			EndIf;
+			
+		ElsIf Items.Pages.CurrentPage = Items.PageParameters Then
+			
+			CurrentRow = Items.Parameters.CurrentData;
+			If CurrentRow = Undefined Then
+				Return;
+			Else
+				CurrentRow.Expression = Parameter;
+			EndIf;
+			
 		EndIf;
 		
 	EndIf;
@@ -79,6 +81,21 @@ Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure UseTablesOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure PrintFormTypeOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure PrintFormVariableTypeOnChange(Item)
+	RefreshParameters(Undefined);
+EndProcedure
+
 #EndRegion
 
 #Region FormTableItemsEventHandlersParameters
@@ -86,7 +103,13 @@ EndProcedure
 &AtClient
 Procedure ParametersExpressionOpening(Item, StandardProcessing)
 	StandardProcessing = False;
-	OpenExpression(Undefined);
+	OpenExpressionParameter(Undefined);
+EndProcedure
+
+&AtClient
+Procedure TablesExpressionOpening(Item, StandardProcessing)
+	StandardProcessing = False;
+	OpenExpressionTable(Undefined);
 EndProcedure
 
 #EndRegion
@@ -94,29 +117,149 @@ EndProcedure
 #Region FormCommandsEventHandlers
 
 &AtClient
-Procedure EditTXT(Command)
+Procedure LoadFromFile(Command)
+	
+	Dialog = New FileDialog(FileDialogMode.Open);
+	Dialog.CheckFileExist = True;
+	Dialog.Multiselect = False;
+	
+	Dialog.Show(New CallbackDescription("LoadFromFileEnd", ThisObject));
+
+EndProcedure
+
+&AtClient
+Procedure EditTemplate(Command)
 	EditingMode = True;
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
-Procedure SaveTXT(Command)
+Procedure SaveTemplate(Command)
 	EditingMode = False;
 	Modified = True;
-	ProcessTemplateTXT();
+	RefreshParameters(Undefined);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
-Procedure OpenExpression(Command)
+Procedure RefreshParameters(Command)
+	If Object.PrintFormType = PredefinedValue("Enum.PrintFormTypes.TXT") Then
+		ExpractParametersFromTemplateTXT();
+	ElsIf  Object.PrintFormType = PredefinedValue("Enum.PrintFormTypes.MXL") Then
+		ExpractParametersFromTemplateMXL();
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure OpenExpressionParameter(Command)
 	
 	CurrentRow = Items.Parameters.CurrentData;
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
 	
-	OpenForm("Catalog.PrintFormTemplates.Form.FormulaEditing", 
-		New Structure("Expression", CurrentRow.Expression), ThisObject, ,,,, FormWindowOpeningMode.LockOwnerWindow);
+	TableData = New Map;
+	For Each TableRow In Object.Tables Do
+		TableData.Insert(TableRow.Name, TableRow.Expression);
+	EndDo;
+	
+	OpenForm("Catalog.PrintFormTemplates.Form.FormulaEditingParameter", 
+		New Structure("Name, Table, Expression, TableData", 
+			CurrentRow.Name, CurrentRow.Table, CurrentRow.Expression, TableData), 
+		ThisObject, ,,,, FormWindowOpeningMode.LockOwnerWindow);
+	
+EndProcedure
+
+&AtClient
+Procedure OpenExpressionTable(Command)
+	
+	CurrentRow = Items.Tables.CurrentData;
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	OpenForm("Catalog.PrintFormTemplates.Form.FormulaEditingTable", 
+		New Structure("Name, Expression", CurrentRow.Name, CurrentRow.Expression), 
+		ThisObject, ,,,, FormWindowOpeningMode.LockOwnerWindow);
+	
+EndProcedure
+
+&AtClient
+Procedure DeleteNotUsed(Command)
+	OldParameters = Object.Parameters.FindRows(New Structure("ToDelete", True));
+	For Each OldParameter In OldParameters Do
+		Object.Parameters.Delete(OldParameter);
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure AddToTable(Command)
+	
+	CurrentRow = Items.Parameters.CurrentData;
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	UsedTables = New Array;
+	ExistingRows = Object.Parameters.FindRows(New Structure("Name", CurrentRow.Name));
+	For Each ExistingRow In ExistingRows Do
+		UsedTables.Add(ExistingRow.Table);
+	EndDo;
+	
+	AvailableTables = New ValueList();
+	For Each TableRow In Object.Tables Do
+		If Not IsBlankString(TableRow.Name) And UsedTables.Find(TableRow.Name) = Undefined Then
+			AvailableTables.Add(TableRow.Name);
+		EndIf;
+	EndDo;
+	
+	If AvailableTables.Count() > 0 Then
+		AvailableTables.ShowChooseItem(New CallbackDescription("ChooseTableEnd", ThisObject, "Add"));
+	EndIf;
+	
+EndProcedure
+
+&AtClient
+Procedure MoveToTable(Command)
+	
+	CurrentRow = Items.Parameters.CurrentData;
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	UsedTables = New Array;
+	ExistingRows = Object.Parameters.FindRows(New Structure("Name", CurrentRow.Name));
+	For Each ExistingRow In ExistingRows Do
+		UsedTables.Add(ExistingRow.Table);
+	EndDo;
+	
+	AvailableTables = New ValueList();
+	For Each TableRow In Object.Tables Do
+		If Not IsBlankString(TableRow.Name) And UsedTables.Find(TableRow.Name) = Undefined Then
+			AvailableTables.Add(TableRow.Name);
+		EndIf;
+	EndDo;
+	
+	If AvailableTables.Count() > 0 Then
+		AvailableTables.ShowChooseItem(New CallbackDescription("ChooseTableEnd", ThisObject, "Move"));
+	EndIf;
+	
+EndProcedure
+
+&AtClient
+Procedure RemoveFromTable(Command)
+	
+	CurrentRow = Items.Parameters.CurrentData;
+	If CurrentRow = Undefined OR IsBlankString(CurrentRow.Table) Then
+		Return;
+	EndIf;
+	
+	ExistingRows = Object.Parameters.FindRows(New Structure("Name,Table", CurrentRow.Name, ""));
+	If ExistingRows.Count() = 0 Then
+		CurrentRow.Table = "";
+	Else
+		Object.Parameters.Delete(CurrentRow);
+	EndIf;
 	
 EndProcedure
 
@@ -128,19 +271,41 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 
 	If Object.PrintFormType = PredefinedValue("Enum.PrintFormTypes.TXT") Then
-		Form.Items.TemplatePages.CurrentPage = Form.Items.PageTXT; 
+		Form.Items.TemplatePages.CurrentPage = Form.Items.PageTXT;
+	ElsIf Object.PrintFormType = PredefinedValue("Enum.PrintFormTypes.MXL") Then
+		Form.Items.TemplatePages.CurrentPage = Form.Items.PageMXL;
 	EndIf;
-	
-	Form.Items.EditTXT.Visible = Not Form.EditingMode;
-	Form.Items.SaveTXT.Visible = Form.EditingMode;
-	
-	Form.Items.TemplateTXT.ReadOnly = Not Form.EditingMode;
 	
 	If Form.EditingMode Then
+		Form.Items.EditTXT.Visible = False;
+		Form.Items.SaveTXT.Visible = True;
+		Form.Items.TemplateTXT.ReadOnly = False;
 		Form.Items.TemplateTXT.BackColor = WebColors.MintCream;
+		
+		Form.Items.EditMXL.Visible = False;
+		Form.Items.SaveMXL.Visible = True;
+		Form.Items.TemplateMXL.Edit = True;
+		Form.Items.TemplateMXL.ShowGrid = True;
+		Form.Items.TemplateMXL.ShowHeaders = True;
+		Form.Items.TemplateMXL.BorderColor = WebColors.Red;
 	Else
+		Form.Items.EditTXT.Visible = True;
+		Form.Items.SaveTXT.Visible = False;
+		Form.Items.TemplateTXT.ReadOnly = True;
 		Form.Items.TemplateTXT.BackColor = WebColors.GhostWhite;
+		
+		Form.Items.EditMXL.Visible = True;
+		Form.Items.SaveMXL.Visible = False;
+		Form.Items.TemplateMXL.Edit = False;
+		Form.Items.TemplateMXL.ShowGrid = False;
+		Form.Items.TemplateMXL.ShowHeaders = False;
+		Form.Items.TemplateMXL.BorderColor = WebColors.Black;
 	EndIf;
+	
+	Form.Items.PageTables.Visible = Object.UseTables;
+	Form.Items.ParametersTable.Visible = Object.UseTables;
+	Form.Items.ParametersTablesGroup.Visible = Object.UseTables;
+	Form.Items.ParametersContextMenuTableGroup.Visible = Object.UseTables;
 
 EndProcedure
 
@@ -155,8 +320,33 @@ Procedure LoadTemplateData()
 			TemplateTXT = TemplateData;
 		EndIf;
 		
+	ElsIf Object.PrintFormType = PredefinedValue("Enum.PrintFormTypes.MXL") Then
+		If TypeOf(TemplateData) = Type("SpreadsheetDocument") Then
+			TemplateMXL = TemplateData;
+		Else
+			TemplateMXL = New SpreadsheetDocument();
+		EndIf;
+		
 	EndIf;
 	 
+EndProcedure
+
+&AtServer
+Procedure SaveTemplateData(RealObject)
+	
+	If Object.PrintFormType = Enums.PrintFormTypes.TXT Then
+		RealObject.Template = New ValueStorage(TemplateTXT);
+		
+	ElsIf Object.PrintFormType = Enums.PrintFormTypes.MXL Then
+		RealObject.Template = New ValueStorage(TemplateMXL);
+		
+	EndIf;
+	 
+EndProcedure
+
+&AtServer
+Procedure LoadObjectsForPrinting()
+
 	Query = New Query;
 	Query.SetParameter("Ref", Object.Ref);
 	Query.Text =
@@ -176,35 +366,159 @@ Procedure LoadTemplateData()
 EndProcedure
 
 &AtServer
-Procedure SaveTemplate(RealObject)
+Procedure SaveObjectsForPrinting(CurrentObject)
+
+	ObjectRecords = InformationRegisters.ObjectsPrintTemplates.CreateRecordSet();
+	ObjectRecords.Filter.PrintTemplate.Set(CurrentObject.Ref, True);
 	
-	If Object.PrintFormType = Enums.PrintFormTypes.TXT Then
-		RealObject.Template = New ValueStorage(TemplateTXT);
-		
+	For Each ObjectsItem In ObjectsList Do
+		Record = ObjectRecords.Add();
+		Record.PrintTemplate = CurrentObject.Ref;
+		Record.Object = ObjectsItem.Value;
+	EndDo;
+	
+	ObjectRecords.Write(True);
+	
+EndProcedure
+
+&AtClient
+Procedure LoadFromFileEnd(ChoosenFiles, AddInfo) Export
+	
+	If ChoosenFiles = Undefined Then
+		Return;
 	EndIf;
-	 
+	
+	If Object.PrintFormType = PredefinedValue("Enum.PrintFormTypes.TXT") Then
+		TextDocument = New TextDocument();
+		TextDocument.Read(ChoosenFiles[0]);
+		TemplateTXT = TextDocument.GetText();
+		
+	ElsIf Object.PrintFormType = PredefinedValue("Enum.PrintFormTypes.MXL") Then
+		ChoosenFile = New File(ChoosenFiles[0]);
+		FileDescription = New Structure;
+		FileDescription.Insert("Extension", ChoosenFile.Extension);
+		FileDescription.Insert("BinaryData", New BinaryData(ChoosenFile.FullName));
+		LoadFromFileAtServer(FileDescription);
+	EndIf;
+	
+	Modified = True;
+	RefreshParameters(Undefined);
+	SetVisibilityAvailability(Object, ThisObject);
+	
 EndProcedure
 
 &AtServer
-Procedure ProcessTemplateTXT()
+Procedure LoadFromFileAtServer(FileDescription)
+	
+	TempName = GetTempFileName(FileDescription.Extension);
+	FileDescription.BinaryData.Write(TempName);
+	
+	NewDocument = New SpreadsheetDocument();
+	NewDocument.Read(TempName);
+	ThisObject.TemplateMXL = NewDocument;
+	
+	DeleteFiles(TempName); 
+
+EndProcedure
+
+&AtServer
+Procedure ExpractParametersFromTemplateTXT()
 	
 	For Each ParameterRow In Object.Parameters Do
 		ParameterRow.ToDelete = True;
 	EndDo;
 	
-	FindResults = StrFindAllByRegularExpression(TemplateTXT, "<[^>]*>");
+	If Object.PrintFormVariableType = Enums.PrintFormVariableTypes.XMLStyle Then
+		FindResults = StrFindAllByRegularExpression(TemplateTXT, "<[^>]*?>");
+	ElsIf Object.PrintFormVariableType = Enums.PrintFormVariableTypes.WikiStyle Then
+		FindResults = StrFindAllByRegularExpression(TemplateTXT, "\[[^\]]*?\]");
+	ElsIf Object.PrintFormVariableType = Enums.PrintFormVariableTypes.CurlyBrace Then
+		FindResults = StrFindAllByRegularExpression(TemplateTXT, "\{[^\}]*?\}");
+	Else
+		FindResults = New Array();
+	EndIf;
+	
 	For Each FindResult In FindResults Do
 		TextTag = TrimAll(FindResult.Value);
 		ParameterRows = Object.Parameters.FindRows(New Structure("Name", TextTag));
 		If ParameterRows.Count() = 0 Then
 			Object.Parameters.Add().Name = TextTag;
 		Else
-			ParameterRows[0].ToDelete = False;
+			For Each ParameterRow In ParameterRows Do
+				ParameterRow.ToDelete = False;
+			EndDo;
 		EndIf;
 	EndDo;
 	
-	Object.Parameters.Sort("Name");
+	Object.Parameters.Sort("Name, Table");
 	 
+EndProcedure
+
+&AtServer
+Procedure ExpractParametersFromTemplateMXL()
+	
+	For Each ParameterRow In Object.Parameters Do
+		ParameterRow.ToDelete = True;
+	EndDo;
+	
+	AllTextArray = New Array; 
+	For RowNum = 1 To TemplateMXL.TableHeight Do
+		For ColNum = 1 To TemplateMXL.TableWidth Do
+			CellText = TrimAll(TemplateMXL.Area("R" + Format(RowNum, "NG=;") + "C" + Format(ColNum, "NG=;")).Text);
+			If Not IsBlankString(CellText) And AllTextArray.Find(CellText) = Undefined Then
+				AllTextArray.Add(CellText);
+			EndIf;
+		EndDo;
+	EndDo;
+	AllText = StrConcat(AllTextArray, "  ");
+	
+	If Object.PrintFormVariableType = Enums.PrintFormVariableTypes.XMLStyle Then
+		FindResults = StrFindAllByRegularExpression(AllText, "<[^>]*?>");
+	ElsIf Object.PrintFormVariableType = Enums.PrintFormVariableTypes.WikiStyle Then
+		FindResults = StrFindAllByRegularExpression(AllText, "\[[^\]]*?\]");
+	ElsIf Object.PrintFormVariableType = Enums.PrintFormVariableTypes.CurlyBrace Then
+		FindResults = StrFindAllByRegularExpression(AllText, "\{[^\}]*?\}");
+	Else
+		FindResults = New Array();
+	EndIf;
+	
+	For Each FindResult In FindResults Do
+		TextTag = TrimAll(FindResult.Value);
+		ParameterRows = Object.Parameters.FindRows(New Structure("Name", TextTag));
+		If ParameterRows.Count() = 0 Then
+			Object.Parameters.Add().Name = TextTag;
+		Else
+			For Each ParameterRow In ParameterRows Do
+				ParameterRow.ToDelete = False;
+			EndDo;
+		EndIf;
+	EndDo;
+	
+	Object.Parameters.Sort("Name, Table");
+	 
+EndProcedure
+
+&AtClient
+Procedure ChooseTableEnd(ChoosenTable, Action) Export
+	
+	If ChoosenTable = Undefined Then
+		Return;
+	EndIf;
+	
+	ChoosenTableName = ChoosenTable.Value;
+	
+	If Action = "Add" Then
+		CurrentIndex = Object.Parameters.IndexOf(Items.Parameters.CurrentData);
+		NewRow = Object.Parameters.Insert(CurrentIndex + 1);
+		FillPropertyValues(NewRow, Items.Parameters.CurrentData);
+		NewRow.Table = ChoosenTableName;
+		
+	ElsIf Action = "Move" Then
+		Items.Parameters.CurrentData.Table = ChoosenTableName;
+	EndIf;
+	
+	Modified = True;
+	
 EndProcedure
 
 #EndRegion

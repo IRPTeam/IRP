@@ -9053,6 +9053,31 @@
         <autoCommandBar>
           <name>InfRegisterRecordersDescriptionsCommandBar</name>
           <id>679</id>
+          <items xsi:type="form:Button">
+            <name>InfRegisterRecordersDescriptionsFillRecordersMapping</name>
+            <id>710</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>InfRegisterRecordersDescriptionsFillRecordersMappingExtendedTooltip</name>
+              <id>711</id>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Command.FillRecordersMapping</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
           <horizontalAlign>Left</horizontalAlign>
           <autoFill>true</autoFill>
         </autoCommandBar>
@@ -12769,27 +12794,6 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>FillRecordersMapping</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>FillPresentationForEAO</name>
-    <title>
-      <key>en</key>
-      <value>Fill presentation for EAO</value>
-    </title>
-    <id>29</id>
-    <toolTip>
-      <key>en</key>
-      <value>It fills in the representations for documents EAO that already exist in the database.</value>
-    </toolTip>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>FillPresentationForEAO</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

@@ -3975,9 +3975,12 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 		Else
 			DocObject = QueryTable[0].DocRef.GetObject();
 		EndIf;
-				
+		
 		FillPropertyValues(DocObject, QueryTable[0], , "Posted");
 		DocObject.Date = QueryTable[0].RecorderDate;
+		
+		RecorderPresentationStructure = RecorderPresentationStructure(Data.RecorderName, DocObject.Date, Data.RecorderNumber);
+		FillPropertyValues(DocObject, RecorderPresentationStructure, "Description_en, Description_ru, Description_tr");
 		
 		DocObject.Records.Clear();
 		DocObject.Errors.Clear();
@@ -4086,6 +4089,45 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 	ResultStructure.EAORef = DocObject.Ref;
 	
 	Return ResultStructure;
+EndFunction
+
+// Recorder presentation structure.
+// 
+// Parameters:
+//  RecorderMetaName - String
+// 
+// Returns:
+//  Structure - Recorder presentation structure:
+// * Description_en - String - 
+// * Description_ru - String - 
+// * Description_tr - String - 
+Function RecorderPresentationStructure(RecorderMetaName, RecorderDate, RecorderNumber)
+	Structure = New Structure;
+	Structure.Insert("Description_en", "");
+	Structure.Insert("Description_ru", "");
+	Structure.Insert("Description_tr", "");
+	
+	Query = New Query;
+	Query.SetParameter("RecorderMetaName", RecorderMetaName);
+	Query.Text =
+		"SELECT
+		|	T9069S_AccountingMappingRecordersDescription.RecorderMetaName,
+		|	T9069S_AccountingMappingRecordersDescription.Description_en,
+		|	T9069S_AccountingMappingRecordersDescription.Description_ru,
+		|	T9069S_AccountingMappingRecordersDescription.Description_tr
+		|FROM
+		|	InformationRegister.T9069S_AccountingMappingRecordersDescription AS T9069S_AccountingMappingRecordersDescription
+		|WHERE
+		|	T9069S_AccountingMappingRecordersDescription.RecorderMetaName = &RecorderMetaName";
+	
+	QueryResult = Query.Execute();
+	SelectionDetailRecords = QueryResult.Select();
+	If SelectionDetailRecords.Next() Then
+		Structure.Description_en = StrTemplate("%1 %2 dated %3", SelectionDetailRecords.Description_en, RecorderNumber, RecorderDate);
+		Structure.Description_ru = StrTemplate("%1 %2 от %3", SelectionDetailRecords.Description_ru, RecorderNumber, RecorderDate);
+		Structure.Description_tr = StrTemplate("%1 %2 tarih %3", SelectionDetailRecords.Description_tr, RecorderNumber, RecorderDate);		
+	EndIf;
+	Return Structure;
 EndFunction
 
 Procedure SetRates(DocObject, LedgerType, Data, IntegrationSettings)

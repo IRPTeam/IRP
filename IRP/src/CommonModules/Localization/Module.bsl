@@ -310,7 +310,9 @@
 // * Error_PartnerBalanceCheckfailed - String - 
 // * Error_145 - String - 
 // * Error_146 - String - 
-// * Error_147 - String - 
+// * Error_147 - String -
+// * Error_148 - String - 
+// * Error_181 - String -
 // * Error_FillTotalAmount - String - 
 // * MF_Error_001 - String - 
 // * MF_Error_002 - String - 
@@ -1378,6 +1380,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_178", NStr("en = 'Order already closed'", Lang));
 	Strings.Insert("Error_179", NStr("en = 'Number [%1] is already used for [%2]'", Lang));
 	Strings.Insert("Error_180", NStr("en = 'Only system record allowed'", Lang));
+	Strings.Insert("Error_181", NStr("en = 'Fill integration settings'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	

@@ -110,6 +110,11 @@ Scenario: _053000 preparation (Bank payment)
 		| "Documents.PurchaseOrder.FindByNumber(235).GetObject().Write(DocumentWriteMode.Posting);"    |
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseOrder.FindByNumber(236).GetObject().Write(DocumentWriteMode.Posting);"    |
+	When create document WithholdingTaxInvoice objects (Bank payment)
+	And I execute 1C:Enterprise script at server
+		| "Documents.WithholdingTaxInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
+		| "Documents.WithholdingTaxInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
+
 
 Scenario: _0530001 check preparation
 	When check preparation
@@ -958,3 +963,109 @@ Scenario: _053028 Prevent negative refund transactions in Bank payment
 		Then there are lines in TestClient message log
 			|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [1 000 000]'|
 		And I close all client application windows
+
+Scenario: _053029 check one Bank payment in WithholdingTaxInvoice
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3'      |
+		And I select current line in "List" table
+	* create Bank payment
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
+		And I select from the drop-down list named "Account" by "Bank account, TRY" string
+		And I click choice button of the attribute named "PaymentListFinancialMovementType" in "PaymentList" table
+		And I go to line in "List" table
+			| "Code" | "Description"     | "Is expense" | "Is financial movement type" | "Is revenue" |
+			| "10"   | "Movement type 1" | "No"         | "Yes"                        | "No"         |
+		And I click the button named "FormChoose"
+		And I activate field named "PaymentListCashFlowCenter" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListCashFlowCenter" in "PaymentList" table
+		Then "Business units" window is opened
+		And I go to line in "List" table
+			| "Code" | "Department" | "Description"  | "Workshop" |
+			| "1"    | "Yes"        | "Front office" | "No"       |
+		And I activate field named "Description" in "List" table
+		And I click the button named "FormChoose"
+		And I finish line editing in "PaymentList" table
+		And I move to the tab named "GroupOther"
+		And I input "05.05.2025 13:44:00" text in the field named "Date"
+		And I click the button named "FormWrite"
+	* Check
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		Then the form attribute named "Date" became equal to "02.05.2025 10:00:00"
+		And "PaymentList" table became equal
+			| '#' | 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                      | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Withholding tax invoice 3 dated 01.05.2025 13:10:48' | ''        | ''      | '600,00'       | 'Movement type 1'         | 'Front office'     | ''                           |
+		
+		Then the form attribute named "PaymentListTotalNetAmount" became equal to "600"
+		Then the form attribute named "PaymentListTotalTaxAmount" became equal to "0"
+		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "600,00"
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows		
+
+
+Scenario: _053030 check two Bank payments in WithholdingTaxInvoice
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4'      |
+		And I select current line in "List" table
+	* create first Bank payment
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
+		And I select from the drop-down list named "Account" by "Bank account, TRY" string
+		And I input "500,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I select "Movement type 3" by string from the drop-down list named "PaymentListFinancialMovementType" in "PaymentList" table
+		And I select "Distribution department" by string from the drop-down list named "PaymentListCashFlowCenter" in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I move to the tab named "GroupOther"
+		And I input "05.05.2025 13:57:00" text in the field named "Date"
+		And I click the button named "FormWrite"
+	* check first Bank payment
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		Then the form attribute named "Date" became equal to "05.05.2025 13:57:00"
+		And "PaymentList" table became equal
+			| '#' | 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                      | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        | 'Planning transaction basis' |
+			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Withholding tax invoice 4 dated 02.05.2025 15:12:12' | ''        | ''      | '500,00'       | 'Movement type 3'         | 'Distribution department' | ''                           |
+		
+		Then the form attribute named "PaymentListTotalNetAmount" became equal to "500"
+		Then the form attribute named "PaymentListTotalTaxAmount" became equal to "0"
+		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "500,00"
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		And I click the button named "FormPostAndClose"
+	* create second Bank Payment
+		And I click the button named "FormDocumentBankPaymentGenerateBankPayment"
+		And I select from the drop-down list named "Account" by "Bank account, TRY" string
+		And the field named "PaymentListTotalAmount" in "PaymentList" table is equal to "250,00"
+		And I select "Movement type 3" by string from the drop-down list named "PaymentListFinancialMovementType" in "PaymentList" table
+		And I select "Distribution department" by string from the drop-down list named "PaymentListCashFlowCenter" in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I move to the tab named "GroupOther"
+		And I input "06.05.2025 14:20:00" text in the field named "Date"
+		And I click the button named "FormWrite"
+	* check second Bank Payment
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		Then the form attribute named "Date" became equal to "06.05.2025 14:20:00"
+		And "PaymentList" table became equal
+			| '#' | 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                      | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        | 'Planning transaction basis' |
+			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Withholding tax invoice 4 dated 02.05.2025 15:12:12' | ''        | ''      | '250,00'       | 'Movement type 3'         | 'Distribution department' | ''                           |
+		
+		Then the form attribute named "PaymentListTotalNetAmount" became equal to "250"
+		Then the form attribute named "PaymentListTotalTaxAmount" became equal to "0"
+		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "250,00"
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows

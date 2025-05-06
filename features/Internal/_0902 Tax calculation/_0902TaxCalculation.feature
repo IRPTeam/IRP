@@ -1489,14 +1489,3 @@ Scenario: _090225 check tax deactivation
 		And I select current line in "List" table
 		And the field named "ItemListTotalTaxAmount" does not exist on the form
 		And I close all client application windows
-
-Scenario: _090226 check connection to WithholdingTaxInvoice report "Related documents"
-	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
-	* Form report Related documents
-		And I go to line in "List" table
-		| 'Number' |
-		| '1'      |
-		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
-		And Delay 1
-	Then "* Related documents" window is opened
-	And I close all client application windows

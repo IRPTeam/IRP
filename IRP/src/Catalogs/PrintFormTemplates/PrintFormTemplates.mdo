@@ -198,6 +198,35 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="7aa8c28f-fbb0-4ebf-8348-f69deb860124">
+      <name>Expression</name>
+      <synonym>
+        <key>en</key>
+        <value>Expression</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="69d61933-6e64-407a-baf6-3714f1e77c2d">
+      <name>RepeatingArea</name>
+      <synonym>
+        <key>en</key>
+        <value>Repeating area</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="a0758ce6-d644-4a48-99de-3f4306f5fca0">
       <name>LineStart</name>
       <synonym>
@@ -213,7 +242,6 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -229,22 +257,6 @@
           <precision>10</precision>
           <nonNegative>true</nonNegative>
         </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7aa8c28f-fbb0-4ebf-8348-f69deb860124">
-      <name>Expression</name>
-      <synonym>
-        <key>en</key>
-        <value>Expression</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

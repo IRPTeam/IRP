@@ -32,6 +32,44 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	
+	RepeatingAreas = New Array;
+	For Each TableRow In Object.Tables Do
+		If TableRow.RepeatingArea Then
+			TableIndex = Object.Tables.IndexOf(TableRow);
+			RepeatingAreas.Add(TableRow);
+			If TableRow.LineStart = 0 Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(
+					R().S_027, "Object.Tables[" + Format(TableIndex, "NG=") + "].LineStart", "Object");
+			EndIf;
+			If TableRow.LineEnd = 0 Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(
+					R().S_027, "Object.Tables[" + Format(TableIndex, "NG=") + "].LineEnd", "Object");
+			EndIf;
+			If TableRow.LineEnd < TableRow.LineStart Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(
+					R().Exc_014, "Object.Tables[" + Format(TableIndex, "NG=") + "].LineEnd", "Object");
+			EndIf;
+		EndIf;
+	EndDo;
+	
+	RepeatingAreaTable = Object.Tables.Unload(RepeatingAreas);
+	RepeatingAreaTable.Sort("LineStart");
+	For Each TableRow In RepeatingAreaTable Do
+		TableIndex = RepeatingAreaTable.IndexOf(TableRow);
+		If TableIndex > 0 And TableRow.LineStart <= RepeatingAreaTable[TableIndex].LineEnd Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(
+				R().Exc_015, "Object.Tables", "Object");
+		EndIf;
+	EndDo;
+	
+	If Cancel = True Then
+		Return;
+	EndIf;
+
 	SaveTemplateData(CurrentObject);
 	
 EndProcedure

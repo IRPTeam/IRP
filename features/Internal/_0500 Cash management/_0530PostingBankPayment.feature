@@ -115,7 +115,6 @@ Scenario: _053000 preparation (Bank payment)
 		| "Documents.WithholdingTaxInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
 		| "Documents.WithholdingTaxInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
 
-
 Scenario: _0530001 check preparation
 	When check preparation
 

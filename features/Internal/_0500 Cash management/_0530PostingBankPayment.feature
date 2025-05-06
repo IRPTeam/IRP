@@ -996,7 +996,7 @@ Scenario: _053029 check one Bank payment in WithholdingTaxInvoice
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Currency" became equal to "TRY"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
-		Then the form attribute named "Date" became equal to "02.05.2025 10:00:00"
+		Then the form attribute named "Date" became equal to "05.05.2025 13:44:00"
 		And "PaymentList" table became equal
 			| '#' | 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                      | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
 			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Withholding tax invoice 3 dated 01.05.2025 13:10:48' | ''        | ''      | '600,00'       | 'Movement type 1'         | 'Front office'     | ''                           |

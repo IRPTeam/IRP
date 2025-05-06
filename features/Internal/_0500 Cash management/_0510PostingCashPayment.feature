@@ -1036,20 +1036,20 @@ Scenario: _051028 check one Cash payment in WithholdingTaxInvoice
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		And I click Choice button of the field named "CashAccount"
 		And I go to line in "List" table
-			| "Code" | "Currency" | "Description"  |
-			| "9"    | "TRY"      | "Cash desk №4" |
+			| "Description"  |
+			| "Cash desk №4" |
 		And I click the button named "FormChoose"
 		And I click choice button of the attribute named "PaymentListFinancialMovementType" in "PaymentList" table
 		And I go to line in "List" table
-			| "Code" | "Description"     | "Is expense" | "Is financial movement type" | "Is revenue" |
-			| "10"   | "Movement type 1" | "No"         | "Yes"                        | "No"         |
+			| "Description"     |
+			| "Movement type 1" |
 		And I click the button named "FormChoose"
 		And I activate field named "PaymentListCashFlowCenter" in "PaymentList" table
 		And I click choice button of the attribute named "PaymentListCashFlowCenter" in "PaymentList" table
 		Then "Business units" window is opened
 		And I go to line in "List" table
-			| "Code" | "Department" | "Description"  | "Workshop" |
-			| "1"    | "Yes"        | "Front office" | "No"       |
+			| "Description"  |
+			| "Front office" |
 		And I activate field named "Description" in "List" table
 		And I click the button named "FormChoose"
 		And I finish line editing in "PaymentList" table
@@ -1084,7 +1084,6 @@ Scenario: _051028 check two Cash payments in WithholdingTaxInvoice
 		And I select current line in "List" table
 	* create first Cash payment
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
-		And I select from the drop-down list named "CashAccount" by "Cash desk " string
 		And I select from the drop-down list named "CashAccount" by "Cash desk №4" string
 		And I input "150,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I select "Movement type 3" by string from the drop-down list named "PaymentListFinancialMovementType" in "PaymentList" table

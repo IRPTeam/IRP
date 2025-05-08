@@ -1481,7 +1481,7 @@ Scenario: _0433331 check Bank payment movements by the Register "Posted document
 			| 'Bank payment 1 336 dated 05.05.2025 13:57:00' | ''                                             | ''                    | ''       | ''                    | ''                    | ''                        | ''                        | ''                      |
 			| 'Register  "Posted documents registry"'        | ''                                             | ''                    | ''       | ''                    | ''                    | ''                        | ''                        | ''                      |
 			| ''                                             | 'Document'                                     | 'Date'                | 'Number' | 'Create date'         | 'Modify date'         | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
-			| ''                                             | 'Bank payment 1 336 dated 05.05.2025 13:57:00' | '05.05.2025 13:57:00' | '1 336'  | '06.05.2025 20:28:45' | '07.05.2025 19:51:31' | 'en description is empty' | 'en description is empty' | 'No'                    |		
+			| ''                                             | 'Bank payment 1 336 dated 05.05.2025 13:57:00' | '05.05.2025 13:57:00' | '1 336'  | '*'                   | '*'                   | 'en description is empty' | 'en description is empty' | 'No'                    |		
 	And I close all client application windows		
 
 Scenario: _0433332 check Bank payment movements by the Register "R1021 Vendors transactions" (WithholdingTaxInvoice)

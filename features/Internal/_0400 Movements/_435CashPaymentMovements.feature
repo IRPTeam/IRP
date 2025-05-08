@@ -938,7 +938,7 @@ Scenario: _043544 check Cash payment movements by the Register "Posted documents
 			| 'Cash payment 1 529 dated 05.05.2025 13:57:00' | ''                                             | ''                    | ''       | ''                    | ''                    | ''                        | ''                        | ''                      |
 			| 'Register  "Posted documents registry"'        | ''                                             | ''                    | ''       | ''                    | ''                    | ''                        | ''                        | ''                      |
 			| ''                                             | 'Document'                                     | 'Date'                | 'Number' | 'Create date'         | 'Modify date'         | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
-			| ''                                             | 'Cash payment 1 529 dated 05.05.2025 13:57:00' | '05.05.2025 13:57:00' | '1 529'  | '06.05.2025 20:18:58' | '07.05.2025 19:51:33' | 'en description is empty' | 'en description is empty' | 'No'                    |		
+			| ''                                             | 'Cash payment 1 529 dated 05.05.2025 13:57:00' | '05.05.2025 13:57:00' | '1 529'  | '*'                   | '*'                   | 'en description is empty' | 'en description is empty' | 'No'                    |		
 	And I close all client application windows
 
 Scenario: _043545 check Cash payment movements by the Register "R1021 Vendors transactions" (WithholdingTaxInvoice)

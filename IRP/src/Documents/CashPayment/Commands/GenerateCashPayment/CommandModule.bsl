@@ -60,6 +60,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_SalesReturn            = New Array();
 	ArrayOf_SalesReportToConsignor = New Array();
 	ArrayOf_EmployeeCashAdvance    = New Array();
+	ArrayOf_WithholdingTaxInvoice  = New Array();
 	
 	For Each Row In ArrayOfBasisDocuments Do
 
@@ -77,6 +78,8 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 			ArrayOf_SalesReportToConsignor.Add(Row);
 		ElsIf TypeOf(Row) = Type("DocumentRef.EmployeeCashAdvance") Then
 			ArrayOf_EmployeeCashAdvance.Add(Row);
+		ElsIf TypeOf(Row) = Type("DocumentRef.WithholdingTaxInvoice") Then
+			ArrayOf_WithholdingTaxInvoice.Add(Row);
 		Else
 			Raise R().Error_043;
 		EndIf;
@@ -91,6 +94,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_SalesReturn(ArrayOf_SalesReturn));
 	ArrayOfTables.Add(GetDocumentTable_SalesReportToConsignor(ArrayOf_SalesReportToConsignor));
 	ArrayOfTables.Add(GetDocumentTable_EmployeeCashAdvance(ArrayOf_EmployeeCashAdvance));
+	ArrayOfTables.Add(GetDocumentTable_WithholdingTaxInvoice(ArrayOf_WithholdingTaxInvoice));
 	
 	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
@@ -293,6 +297,11 @@ EndFunction
 &AtServer
 Function GetDocumentTable_PurchaseInvoice(ArrayOfBasisDocuments)
 	Return DocumentsGenerationServer.GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, "PurchaseInvoice");
+EndFunction
+
+&AtServer
+Function GetDocumentTable_WithholdingTaxInvoice(ArrayOfBasisDocuments)
+	Return DocumentsGenerationServer.GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, "WithholdingTaxInvoice");
 EndFunction
 
 &AtServer

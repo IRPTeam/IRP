@@ -207,6 +207,7 @@
       <types>DocumentRef.RetailGoodsReceipt</types>
       <types>DocumentRef.CashExpense</types>
       <types>DocumentRef.ShipmentPlaningOrder</types>
+      <types>DocumentRef.WithholdingTaxInvoice</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

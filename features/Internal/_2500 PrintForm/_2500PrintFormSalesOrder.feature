@@ -300,8 +300,7 @@ Scenario: _25010 create Print form template
 			| "Name"         |
 			| "<Order Date>" |
 		And I select current line in "Parameters" table
-		And I click Open button of "Expression" field
-		Then "Formula editing" window is opened
+		And I click Open button of the field named "ParametersExpression"			
 		And I input "Result = Source.Date;" text in the field named "FormulaText"
 		And I click Choice button of the field named "Source"
 		Then "Select data type" window is opened
@@ -323,7 +322,7 @@ Scenario: _25010 create Print form template
 			| "Name"            |
 			| "<Order Partner>" |
 		And I select current line in "Parameters" table
-		And I click Open button of "Expression" field
+		And I click Open button of the field named "ParametersExpression"	
 		And I input "Result = Source.Partner;" text in the field named "FormulaText"
 		And I click "Save" button
 		And I finish line editing in "Parameters" table

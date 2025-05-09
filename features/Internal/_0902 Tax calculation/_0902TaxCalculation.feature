@@ -54,7 +54,12 @@ Scenario: _0902000 preparation
 		When Create catalog TaxExemptionReasons objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Countries objects
-		When Create catalog BusinessUnits objects 
+		When Create catalog BusinessUnits objects
+		When create documents for WithholdingTaxInvoice (Tax calculation)
+		And I execute 1C:Enterprise script at server
+			| "Documents.WithholdingTaxInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashPayment.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"           |
+			| "Documents.CashPayment.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"           |
 	* Filling tax rates for Item key in the register
 		Given I open hyperlink "e1cib/list/InformationRegister.TaxSettings"
 		And I click the button named "FormCreate"
@@ -1489,3 +1494,14 @@ Scenario: _090225 check tax deactivation
 		And I select current line in "List" table
 		And the field named "ItemListTotalTaxAmount" does not exist on the form
 		And I close all client application windows
+
+Scenario: _090226 check connection to WithholdingTaxInvoice report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+	* Form report Related documents
+		And I go to line in "List" table
+		| 'Number' |
+		| '2'      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "* Related documents" window is opened
+	And I close all client application windows

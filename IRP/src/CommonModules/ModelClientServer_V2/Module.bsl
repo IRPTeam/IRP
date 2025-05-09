@@ -50,7 +50,6 @@ Procedure EntryPoint(StepNames, Parameters, ExecuteLazySteps = False) Export
 	
 	EndIf;
 
-	
 	// if cache was initialized from this EntryPoint then ChainComplete
 	If Parameters.ModelEnvironment.FirstStepNames = StepNames Or ExecuteLazySteps Then
 		If Parameters.ModelEnvironment.ArrayOfLazySteps.Count() Then
@@ -2198,7 +2197,13 @@ Function DefaultStoreInHeaderExecute(Options) Export
 EndFunction
 
 Function DefaultStoreInListOptions() Export
-	Return GetChainLinkOptions("StoreFromUserSettings, StoreInList, StoreInHeader, Agreement, StoreInPreviousRow, IsService");
+	Return GetChainLinkOptions(
+	"StoreFromUserSettings, 
+	|StoreInList, 
+	|StoreInHeader, 
+	|Agreement, 
+	|StoreInPreviousRow, 
+	|IsService");
 EndFunction
 
 // fill store in tabular part ItemList by default
@@ -2206,6 +2211,7 @@ Function DefaultStoreInListExecute(Options) Export
 	If Options.IsService = True Then
 		Return Undefined;
 	EndIf;
+	
 	If ValueIsFilled(Options.StoreInList) Then
 		Return Options.StoreInList; // store already is filled
 	EndIf;
@@ -2282,9 +2288,11 @@ Function FillStoresInListExecute(Options) Export
 	If Options.IsService = True Then
 		Return Undefined;
 	EndIf;
+		
 	If Options.IsUserChange = True Then
 		Return Options.Store;
 	EndIf;
+	
 	If ValueIsFilled(Options.Store) Then
 		Return Options.Store;
 	EndIf;

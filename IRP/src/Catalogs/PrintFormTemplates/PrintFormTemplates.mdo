@@ -117,8 +117,27 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:ReferenceValue">
       <value>Enum.PrintFormTypes.EnumValue.TXT</value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="72e14f64-fb6d-4a0f-82bd-861aeb24f2bb">
+    <name>PrintFormVariableType</name>
+    <synonym>
+      <key>en</key>
+      <value>Print form variable type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.PrintFormVariableTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.PrintFormVariableTypes.EnumValue.XMLStyle</value>
     </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -138,6 +157,113 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="92384732-ecce-4aae-be49-95564888376b">
+    <name>UseTables</name>
+    <synonym>
+      <key>en</key>
+      <value>Use tables</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <tabularSections uuid="275e9f33-9f22-4b1b-8dba-01bec67e6c71">
+    <producedTypes>
+      <objectType typeId="214c0a4c-5a2d-4995-a3e6-17b11f138ed5" valueTypeId="58a0e5a5-e2a8-479a-97a4-29633466482e"/>
+      <rowType typeId="a67e6978-cc61-44ae-9fb1-4a5d6295370e" valueTypeId="487d67c9-f509-45a3-be3f-fe4bf7025ef9"/>
+    </producedTypes>
+    <name>Tables</name>
+    <synonym>
+      <key>en</key>
+      <value>Tables</value>
+    </synonym>
+    <attributes uuid="3882bfeb-8def-4958-9d68-e61c01254095">
+      <name>Name</name>
+      <synonym>
+        <key>en</key>
+        <value>Name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7aa8c28f-fbb0-4ebf-8348-f69deb860124">
+      <name>Expression</name>
+      <synonym>
+        <key>en</key>
+        <value>Expression</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="69d61933-6e64-407a-baf6-3714f1e77c2d">
+      <name>RepeatingArea</name>
+      <synonym>
+        <key>en</key>
+        <value>Repeating area</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a0758ce6-d644-4a48-99de-3f4306f5fca0">
+      <name>LineStart</name>
+      <synonym>
+        <key>en</key>
+        <value>Line start</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+          <nonNegative>true</nonNegative>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="39d0c30e-1e5a-440a-9082-b1701eafe396">
+      <name>LineEnd</name>
+      <synonym>
+        <key>en</key>
+        <value>Line end</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+          <nonNegative>true</nonNegative>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <tabularSections uuid="7e50c18d-e86d-497c-8308-dd9936160f28">
     <producedTypes>
       <objectType typeId="558b4ae1-a0c3-4a40-ac6a-ce5a229900bb" valueTypeId="eaccd904-4a41-4944-a584-94c1b30011e5"/>
@@ -171,6 +297,21 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="1182fd87-d527-48ba-9946-c6ae3f427682">
+      <name>Table</name>
+      <synonym>
+        <key>en</key>
+        <value>Table</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="bc61b1cc-e86c-469d-b726-d1dbb73d82b8">
       <name>Expression</name>
       <synonym>
@@ -185,6 +326,19 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7a17a8c1-9881-4c4f-b84b-cceb953d6ecc">
+      <name>ToDelete</name>
+      <synonym>
+        <key>en</key>
+        <value>To delete</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
   <forms uuid="c3393446-ebf8-4c0e-aacd-ba60eab7d262">
@@ -215,10 +369,19 @@
     <usePurposes>MobileDevice</usePurposes>
   </forms>
   <forms uuid="5173aaef-1ef1-4a7c-a975-a7cfe208e2b3">
-    <name>FormulaEditing</name>
+    <name>FormulaEditingTable</name>
     <synonym>
       <key>en</key>
-      <value>Formula editing</value>
+      <value>Formula editing table</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="0523a6c0-7e09-4f1c-a3af-4534d09d6cd0">
+    <name>FormulaEditingParameter</name>
+    <synonym>
+      <key>en</key>
+      <value>Formula editing parameter</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

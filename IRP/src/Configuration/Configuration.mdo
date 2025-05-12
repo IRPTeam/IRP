@@ -1250,6 +1250,7 @@
   <catalogs>Catalog.Vehicles</catalogs>
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.Batch_V2</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>
@@ -1690,6 +1691,7 @@
   <accumulationRegisters>AccumulationRegister.R5022T_Expenses</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6010B_BatchWiseBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6020B_BatchBalance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6025_BatchV2</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6030T_BatchShortageOutgoing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6040T_BatchShortageIncoming</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6050T_SalesBatches</accumulationRegisters>

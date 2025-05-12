@@ -2559,6 +2559,12 @@ Function Strings(Lang) Export
 	Strings.Insert("Exc_013", NStr("en='Related document exists: %1';
 		|ru='Related document exists: %1';
 		|tr='İlgili belge mevcut: %1'", Lang));
+	Strings.Insert("Exc_014", NStr("en='Wrong range';
+		|ru='Wrong range';
+		|tr='Yanlış aralık'", Lang));
+	Strings.Insert("Exc_015", NStr("en='Overlapping ranges';
+		|ru='Overlapping ranges';
+		|tr='Çakışan aralıklar'", Lang));
 #EndRegion
 
 #Region Saas

@@ -1501,6 +1501,7 @@
  <enums>Enum.PriceAssignment</enums>
  <enums>Enum.PriceListTypes</enums>
  <enums>Enum.PrintFormTypes</enums>
+ <enums>Enum.PrintFormVariableTypes</enums>
  <enums>Enum.PrintTemplateTypes</enums>
  <enums>Enum.ProcurementMethods</enums>
  <enums>Enum.ProductionPlanningTypes</enums>

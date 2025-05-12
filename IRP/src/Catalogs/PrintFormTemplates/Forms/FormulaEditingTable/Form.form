@@ -1,115 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
- <items xsi:type="form:Decoration">
-  <name>DecorationHeader</name>
-  <id>1</id>
-  <title>
-   <key>tr</key>
-   <value>&lt;b&gt;Result&lt;/&gt; - sonuç hesaplamak için değişken
-&lt;b&gt;Source&lt;/&gt; - objeye ref</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>&lt;b&gt;Result&lt;/&gt; - Переменная что бы посчитать результат
-&lt;b&gt;Source&lt;/&gt; - Ссылка на объект печати</value>
-  </title>
-  <title>
-   <key>en</key>
-   <value>&lt;b&gt;Result&lt;/&gt; - variable for the calculation result
-&lt;b&gt;Source&lt;/&gt; - reference to the printed object</value>
-  </title>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
-  <extendedTooltip>
-   <name>DecorationHeaderExtendedTooltip</name>
-   <id>3</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <type>Label</type>
-   <autoMaxWidth>true</autoMaxWidth>
-   <autoMaxHeight>true</autoMaxHeight>
-   <extInfo xsi:type="form:LabelDecorationExtInfo">
-    <horizontalAlign>Left</horizontalAlign>
-   </extInfo>
-  </extendedTooltip>
-  <contextMenu>
-   <name>DecorationHeaderContextMenu</name>
-   <id>2</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <autoFill>true</autoFill>
-  </contextMenu>
-  <formatted>true</formatted>
-  <type>Label</type>
-  <autoMaxWidth>true</autoMaxWidth>
-  <autoMaxHeight>true</autoMaxHeight>
-  <extInfo xsi:type="form:LabelDecorationExtInfo">
-   <horizontalAlign>Left</horizontalAlign>
-  </extInfo>
- </items>
- <items xsi:type="form:FormField">
-  <name>FormulaText</name>
-  <id>4</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
-  <dataPath xsi:type="form:DataPath">
-   <segments>FormulaText</segments>
-  </dataPath>
-  <titleLocation>None</titleLocation>
-  <extendedTooltip>
-   <name>FormulaTextExtendedTooltip</name>
-   <id>6</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <type>Label</type>
-   <autoMaxWidth>true</autoMaxWidth>
-   <autoMaxHeight>true</autoMaxHeight>
-   <extInfo xsi:type="form:LabelDecorationExtInfo">
-    <horizontalAlign>Left</horizontalAlign>
-   </extInfo>
-  </extendedTooltip>
-  <contextMenu>
-   <name>FormulaTextContextMenu</name>
-   <id>5</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <autoFill>true</autoFill>
-  </contextMenu>
-  <type>InputField</type>
-  <editMode>Enter</editMode>
-  <showInHeader>true</showInHeader>
-  <headerHorizontalAlign>Left</headerHorizontalAlign>
-  <showInFooter>true</showInFooter>
-  <extInfo xsi:type="form:InputFieldExtInfo">
-   <autoMaxHeight>true</autoMaxHeight>
-   <horizontalStretch>true</horizontalStretch>
-   <verticalStretch>true</verticalStretch>
-   <wrap>true</wrap>
-   <multiLine>true</multiLine>
-   <extendedEditMultipleValues>true</extendedEditMultipleValues>
-   <chooseType>true</chooseType>
-   <typeDomainEnabled>true</typeDomainEnabled>
-   <textEdit>true</textEdit>
-  </extInfo>
- </items>
  <items xsi:type="form:FormGroup">
   <name>GroupTest</name>
   <id>11</id>
@@ -252,15 +142,15 @@
   </userVisible>
   <title>
    <key>tr</key>
-   <value>Group test</value>
+   <value>Test</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Группа тестирования</value>
+   <value>Тест</value>
   </title>
   <title>
    <key>en</key>
-   <value>Group of test</value>
+   <value>Test</value>
   </title>
   <extendedTooltip>
    <name>GroupTestExtendedTooltip</name>
@@ -270,6 +160,153 @@
    <userVisible>
     <common>true</common>
    </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <type>UsualGroup</type>
+  <extInfo xsi:type="form:UsualGroupExtInfo">
+   <group>HorizontalIfPossible</group>
+   <behavior>Auto</behavior>
+   <representation>StrongSeparation</representation>
+   <showLeftMargin>true</showLeftMargin>
+   <united>true</united>
+   <throughAlign>Auto</throughAlign>
+   <currentRowUse>Auto</currentRowUse>
+  </extInfo>
+ </items>
+ <items xsi:type="form:FormField">
+  <name>FormulaText</name>
+  <id>4</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <dataPath xsi:type="form:DataPath">
+   <segments>FormulaText</segments>
+  </dataPath>
+  <defaultItem>true</defaultItem>
+  <titleLocation>None</titleLocation>
+  <extendedTooltip>
+   <name>FormulaTextExtendedTooltip</name>
+   <id>6</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <contextMenu>
+   <name>FormulaTextContextMenu</name>
+   <id>5</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <autoFill>true</autoFill>
+  </contextMenu>
+  <type>TextDocumentField</type>
+  <editMode>Enter</editMode>
+  <showInHeader>true</showInHeader>
+  <headerHorizontalAlign>Left</headerHorizontalAlign>
+  <showInFooter>true</showInFooter>
+  <extInfo xsi:type="form:TextDocFieldExtInfo">
+   <width>50</width>
+   <autoMaxWidth>true</autoMaxWidth>
+   <height>5</height>
+   <autoMaxHeight>true</autoMaxHeight>
+   <horizontalStretch>true</horizontalStretch>
+   <verticalStretch>true</verticalStretch>
+  </extInfo>
+ </items>
+ <items xsi:type="form:FormGroup">
+  <name>GroupInsertCommands</name>
+  <id>31</id>
+  <items xsi:type="form:Button">
+   <name>InsertResult</name>
+   <id>23</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>InsertResultExtendedTooltip</name>
+    <id>24</id>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <type>UsualButton</type>
+   <commandName>Form.Command.InsertResult</commandName>
+   <representation>Auto</representation>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <placementArea>UserCmds</placementArea>
+   <toolTipRepresentation>Button</toolTipRepresentation>
+   <representationInContextMenu>Auto</representationInContextMenu>
+  </items>
+  <items xsi:type="form:Button">
+   <name>InsertSource</name>
+   <id>25</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>InsertSourceExtendedTooltip</name>
+    <id>26</id>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <type>UsualButton</type>
+   <commandName>Form.Command.InsertSource</commandName>
+   <representation>Auto</representation>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <placementArea>UserCmds</placementArea>
+   <toolTipRepresentation>Button</toolTipRepresentation>
+   <representationInContextMenu>Auto</representationInContextMenu>
+  </items>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <title>
+   <key>tr</key>
+   <value>Grup ekleme komutları</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Group insert commands</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Group insert commands</value>
+  </title>
+  <extendedTooltip>
+   <name>GroupInsertCommandsExtendedTooltip</name>
+   <id>32</id>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -505,8 +542,89 @@
   <representation>TextPicture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
+ <formCommands>
+  <name>InsertResult</name>
+  <title>
+   <key>tr</key>
+   <value>Sonuç</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Результат</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Result</value>
+  </title>
+  <id>3</id>
+  <toolTip>
+   <key>tr</key>
+   <value>Hesaplama sonucu için değişken</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>variable for the calculation result</value>
+  </toolTip>
+  <toolTip>
+   <key>en</key>
+   <value>variable for the calculation result</value>
+  </toolTip>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>InsertResult</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>InsertSource</name>
+  <title>
+   <key>tr</key>
+   <value>Kaynak</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Источник</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Source</value>
+  </title>
+  <id>4</id>
+  <toolTip>
+   <key>tr</key>
+   <value>Yazdırılan nesne referansı</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>reference to the printed object</value>
+  </toolTip>
+  <toolTip>
+   <key>en</key>
+   <value>reference to the printed object</value>
+  </toolTip>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>InsertSource</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
  <parameters>
   <name>Expression</name>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+ </parameters>
+ <parameters>
+  <name>Name</name>
   <valueType>
    <types>String</types>
    <stringQualifiers/>

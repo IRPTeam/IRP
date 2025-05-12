@@ -70,17 +70,24 @@ Scenario: _980001 preparation (fixed assets)
 		When Create information register Taxes records (VAT)
 		When Create test data for fixed assets
 		When Create document PurchaseInvoice and Calculation movement cost objects (fixed assets)
+		When create data for DepreciationStatement report (fixed assets)
 		* Posting Purchase invoice
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "5"
+			And I execute 1C:Enterprise script at server
+				| "Documents.CommissioningOfFixedAsset.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.CommissioningOfFixedAsset.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.CommissioningOfFixedAsset.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);" |
 		* Posting Calculation movement costs
 			Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 			Then "Calculations movement costs" window is opened
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "5"
+			And I execute 1C:Enterprise script at server
+				| "Documents.DepreciationCalculation.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |			
 	And I close all client application windows
 	
 Scenario: _980002 check preparation
@@ -639,12 +646,16 @@ Scenario: _9800033 Inventory Look Report
 		| ''                        | ''                          | 'Doc date, number' | 'Commissioning date' | 'Branch'       | 'Responsible person' | ''                  | ''             |
 		| ''                        | ''                          | ' ,  '             | ''                   | ''             | ''                   | ''                  | ''             |
 		| 'Manufacturing Equipment' | '957'                       | '4, 13.02.2024'    | '13.02.2024'         | 'Front office' | 'Arina Brown'        | '25'                | '2 500,00'     |
-		| 'Computer Servers'        | '985'                       | '1, 12.01.2024'    | '12.01.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '5 000,00'     |
+		| 'Manufacturing Equipment' | '957'                       | '5, 14.04.2025'    | '14.04.2025'         | 'Front office' | 'Arina Brown'        | '25'                | '1 377,12'     |
+		| 'Manufacturing Equipment' | '957'                       | '7, 25.04.2025'    | '25.04.2025'         | 'Front office' | 'Arina Brown'        | '25'                | '850,00'       |
+		| 'Computer Servers'        | '985'                       | '8, 12.01.2024'    | '12.01.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '5 000,00'     |
 		| 'Software Licenses'       | '989'                       | '3, 06.02.2024'    | '06.02.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '2 000,00'     |
-		| 'Office Furniture'        | '947'                       | '2, 03.02.2024'    | '03.02.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '7 000,00'     |
-	
+		| 'Office Furniture'        | '947'                       | '9, 03.02.2024'    | '03.02.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '7 000,00'     |
+		| 'Office Furniture'        | '947'                       | '6, 25.04.2025'    | '25.04.2025'         | 'Front office' | 'Arina Brown'        | ''                  | '850,00'       |
+	And I close all client application windows	
 		
 Scenario: _9800034 Fixed Assets Transfer Cost report
+	And I close all client application windows
 * Re-post documents
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"	
 	And I go to the first line in "List" table
@@ -698,5 +709,37 @@ Scenario: _9800034 Fixed Assets Transfer Cost report
 		| 'RATED'                   | '25'                              | '5 000,00'     | '2 500,00'          | ''                   | ''                    | ''              | '7 500,00'               | '187 500,00'   | '-180 000,00'  |
 		| 'Manufacturing Equipment' | '25'                              | '5 000,00'     | '2 500,00'          | ''                   | ''                    | ''              | '7 500,00'               | '187 500,00'   | '-180 000,00'  |
 		| 'Total'                   | '25'                              | '35 000,00'    | '11 500,00'         | '300,00'             | '-5 000,00'           | ''              | '51 800,00'              | '187 500,00'   | '-135 700,00'  |
-	
-		
+	And I close all client application windows
+
+Scenario: _9800035 check F0012_DepreciationStatement report
+	And I close all client application windows
+	* Open a report
+		Given I open hyperlink "e1cib/app/Report.F0012_DepreciationStatement"
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem0Value" by "Main Company" string
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
+		And I input "01.04.2025" text in the field named "DateBegin"
+		And I input "30.04.2025" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I click the button named "FormGenerate"
+	* Check
+		Then "Result" spreadsheet document is equal
+			| 'Data parameters:'        | 'Company: Main Company'           | ''                 | ''                   | ''                        | ''                   | ''                  | ''                                            | ''                              | ''             | ''                | ''                    | ''                |
+			| ''                        | 'Period: 01.04.2025 - 30.04.2025' | ''                 | ''                   | ''                        | ''                   | ''                  | ''                                            | ''                              | ''             | ''                | ''                    | ''                |
+			| ''                        | ''                                | ''                 | ''                   | ''                        | ''                   | ''                  | ''                                            | ''                              | ''             | ''                | ''                    | ''                |
+			| 'Fixed asset'             | 'Inventory number'                | 'Receipt'          | ''                   | ''                        | ''                   | 'Depreciation rate' | 'Ledger type'                                 | 'Schedule'                      | 'Initial cost' | 'Opening balance' | 'Depreciation amount' | 'Closing balance' |
+			| ''                        | ''                                | 'Doc date, number' | 'Commissioning date' | 'Branch'                  | 'Responsible person' | ''                  | ''                                            | ''                              | ''             | ''                | ''                    | ''                |
+			| ''                        | ''                                | ' ,  '             | ''                   | ''                        | ''                   | ''                  | ''                                            | ''                              | ''             | ''                | ''                    | ''                |
+			| 'Manufacturing Equipment' | '957'                             | '4, 13.02.2024'    | '13.02.2024'         | 'Front office'            | 'Arina Brown'        | '25'                | 'Machinery and Equipment (with deprecation)'  | 'Straight line (48 months)'     | '2 500,00'     | '2 395,84'        | ''                    | '4 622,96'        |
+			| 'Manufacturing Equipment' | '957'                             | '5, 14.04.2025'    | '14.04.2025'         | 'Front office'            | 'Arina Brown'        | '25'                | 'Machinery and Equipment (with deprecation)'  | 'Straight line (48 months)'     | '1 377,12'     | '2 395,84'        | ''                    | '4 622,96'        |
+			| 'Manufacturing Equipment' | '957'                             | '7, 25.04.2025'    | '25.04.2025'         | 'Front office'            | 'Arina Brown'        | '25'                | 'Machinery and Equipment (with deprecation)'  | 'Straight line (48 months)'     | '850,00'       | '2 395,84'        | ''                    | '4 622,96'        |
+			| 'Computer Servers'        | '985'                             | '8, 12.01.2024'    | '12.01.2024'         | 'Front office'            | 'Arina Brown'        | ''                  | 'Computer Hardware (with deprecation)'        | 'Straight line (36 months)'     | '5 000,00'     | '-416,67'         | ''                    | '-416,67'         |
+			| 'Software Licenses'       | '989'                             | '3, 06.02.2024'    | '06.02.2024'         | 'Front office'            | 'Arina Brown'        | ''                  | 'Intellectual Property (without deprecation)' | 'Straight line (36 months)'     | '2 000,00'     | '2 300,00'        | ''                    | '2 300,00'        |
+			| 'Office Furniture'        | '947'                             | '9, 03.02.2024'    | '03.02.2024'         | 'Front office'            | 'Arina Brown'        | ''                  | 'Furniture and Fixtures (with deprecation)'   | 'Declining balance (60 months)' | '7 000,00'     | '4 861,11'        | ''                    | '5 711,11'        |
+			| 'Office Furniture'        | '947'                             | '6, 25.04.2025'    | '25.04.2025'         | 'Front office'            | 'Arina Brown'        | ''                  | 'Furniture and Fixtures (with deprecation)'   | 'Declining balance (60 months)' | '850,00'       | '4 861,11'        | ''                    | '5 711,11'        |
+			| 'Manufacturing Equipment' | '957'                             | '4, 13.02.2024'    | '13.02.2024'         | 'Distribution department' | 'David Romanov'      | '25'                | 'Machinery and Equipment (with deprecation)'  | 'Straight line (48 months)'     | '2 500,00'     | '2 395,84'        | ''                    | '4 622,96'        |
+			| 'Manufacturing Equipment' | '957'                             | '5, 14.04.2025'    | '14.04.2025'         | 'Distribution department' | 'David Romanov'      | '25'                | 'Machinery and Equipment (with deprecation)'  | 'Straight line (48 months)'     | '1 377,12'     | '2 395,84'        | ''                    | '4 622,96'        |
+			| 'Manufacturing Equipment' | '957'                             | '7, 25.04.2025'    | '25.04.2025'         | 'Distribution department' | 'David Romanov'      | '25'                | 'Machinery and Equipment (with deprecation)'  | 'Straight line (48 months)'     | '850,00'       | '2 395,84'        | ''                    | '4 622,96'        |
+			| 'Office Furniture'        | '947'                             | '9, 03.02.2024'    | '03.02.2024'         | 'Distribution department' | 'Anna Petrova'       | ''                  | 'Furniture and Fixtures (with deprecation)'   | 'Declining balance (60 months)' | '7 000,00'     | '4 861,11'        | ''                    | '5 711,11'        |
+			| 'Office Furniture'        | '947'                             | '6, 25.04.2025'    | '25.04.2025'         | 'Distribution department' | 'Anna Petrova'       | ''                  | 'Furniture and Fixtures (with deprecation)'   | 'Declining balance (60 months)' | '850,00'       | '4 861,11'        | ''                    | '5 711,11'        |
+			| 'Total'                   | ''                                | ''                 | ''                   | ''                        | ''                   | ''                  | ''                                            | ''                              | '32 154,24'    | '12,00'           | ''                    | '12,00'           |
+	And I close all client application windows	

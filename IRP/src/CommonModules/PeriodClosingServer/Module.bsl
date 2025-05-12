@@ -64,7 +64,7 @@ Function RepostingDocuments(Company, StartDate, EndDate, UpdateCurrenciesTable) 
 	
 	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
-		Return JobAddErrorEmptyCollection(Msg, Errors, "No documents for reposting: 0");
+		Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "No documents for reposting: 0");
 	EndIf;
 
 	Msg = BackgroundJobAPIServer.NotifySettings();
@@ -83,16 +83,16 @@ Function RepostingDocuments(Company, StartDate, EndDate, UpdateCurrenciesTable) 
 			DocObject.Write(DocumentWriteMode.Posting);
 		Except
 			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
-			JobAddErrorMessage(Msg, Errors, QuerySelection.Ref, ErrorDescription);
+			BackgroundJobAPIServer.JobAddErrorMessage(Msg, Errors, QuerySelection.Ref, ErrorDescription);
 			HaveErrors = True;
 			Break;
 		EndTry;
 				
 		Count = Count + 1;
-		JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);		
+		BackgroundJobAPIServer.JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);		
 	EndDo;
 	
-	JobAddEndMessage(Errors);
+	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
 		Raise "Job aborted";
@@ -128,7 +128,7 @@ Function CalculationMovementCosts(Company, StartDate, EndDate, CalculationMode, 
 	
 	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
-		Return JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
+		Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
 	EndIf;
 
 	Msg = BackgroundJobAPIServer.NotifySettings();
@@ -162,17 +162,17 @@ Function CalculationMovementCosts(Company, StartDate, EndDate, CalculationMode, 
 			DocObject.Write(DocumentWriteMode.Posting);
 		Except
 			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
-			JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
+			BackgroundJobAPIServer.JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
 			HaveErrors = True;
 			Break;
 		EndTry;
 				
 		Count = Count + 1;
-		JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);
+		BackgroundJobAPIServer.JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);
 		
 	EndDo;
 	
-	JobAddEndMessage(Errors);
+	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
 		Raise "Job aborted";
@@ -206,7 +206,7 @@ Function VendorsAdvancesClosing(Company, StartDate, EndDate, DontOffsetEmptyProj
 	
 	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
-		Return JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
+		Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
 	EndIf;
 
 	Msg = BackgroundJobAPIServer.NotifySettings();
@@ -239,17 +239,17 @@ Function VendorsAdvancesClosing(Company, StartDate, EndDate, DontOffsetEmptyProj
 			DocObject.Write(DocumentWriteMode.Posting);
 		Except
 			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
-			JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
+			BackgroundJobAPIServer.JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
 			HaveErrors = True;
 			Break;
 		EndTry;
 				
 		Count = Count + 1;
-		JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);
+		BackgroundJobAPIServer.JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);
 		
 	EndDo;
 	
-	JobAddEndMessage(Errors);
+	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
 		Raise "Job aborted";
@@ -283,7 +283,7 @@ Function CustomersAdvancesClosing(Company, StartDate, EndDate, DontOffsetEmptyPr
 	
 	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
-		Return JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
+		Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
 	EndIf;
 
 	Msg = BackgroundJobAPIServer.NotifySettings();
@@ -316,17 +316,17 @@ Function CustomersAdvancesClosing(Company, StartDate, EndDate, DontOffsetEmptyPr
 			DocObject.Write(DocumentWriteMode.Posting);
 		Except
 			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
-			JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
+			BackgroundJobAPIServer.JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
 			HaveErrors = True;
 			Break;
 		EndTry;
 				
 		Count = Count + 1;
-		JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);
+		BackgroundJobAPIServer.JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);
 		
 	EndDo;
 	
-	JobAddEndMessage(Errors);
+	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
 		Raise "Job aborted";
@@ -390,7 +390,7 @@ Function DepreciationCalculation_ByBranch(Company, StartDate, EndDate, Branch, P
 	
 	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
-		Return JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
+		Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
 	EndIf;
 
 	Msg = BackgroundJobAPIServer.NotifySettings();
@@ -425,23 +425,22 @@ Function DepreciationCalculation_ByBranch(Company, StartDate, EndDate, Branch, P
 					DocObject.Company, 
 					DocObject.Branch));
 			
-			
 			DocObject.AdditionalProperties.Insert("UpdateCurrenciesTable", True);
 			DocObject.Write(DocumentWriteMode.Write);
 			DocObject.Write(DocumentWriteMode.Posting);
 		Except
 			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
-			JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
+			BackgroundJobAPIServer.JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
 			HaveErrors = True;
 			Break;
 		EndTry;
 				
 		Count = Count + 1;
-		JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);
+		BackgroundJobAPIServer.JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);
 		
 	EndDo;
 	
-	JobAddEndMessage(Errors);
+	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
 		Raise "Job aborted";
@@ -451,8 +450,6 @@ Function DepreciationCalculation_ByBranch(Company, StartDate, EndDate, Branch, P
 EndFunction
 
 #EndRegion
-
-//-----------------------------------------------------------------------------
 
 #Region ForeignCurrencyRevaluation
 
@@ -491,7 +488,7 @@ Function ForeignCurrencyRevaluation(Company, StartDate, EndDate, Analytics, Peri
 	
 	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
-		Return JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
+		Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
 	EndIf;
 
 	Msg = BackgroundJobAPIServer.NotifySettings();
@@ -530,17 +527,17 @@ Function ForeignCurrencyRevaluation(Company, StartDate, EndDate, Analytics, Peri
 			DocObject.Write(DocumentWriteMode.Posting);
 		Except
 			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
-			JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
+			BackgroundJobAPIServer.JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
 			HaveErrors = True;
 			Break;
 		EndTry;
 				
 		Count = Count + 1;
-		JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);
+		BackgroundJobAPIServer.JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);
 		
 	EndDo;
 	
-	JobAddEndMessage(Errors);
+	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
 		Raise "Job aborted";
@@ -560,7 +557,7 @@ Function AccountingTranslation(ArrayOfDocuments) Export
 	
 	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
-		Return JobAddErrorEmptyCollection(Msg, Errors, "Empty documents array: 0");
+		Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "Empty documents array: 0");
 	EndIf;
 
 	Msg = BackgroundJobAPIServer.NotifySettings();
@@ -587,67 +584,18 @@ Function AccountingTranslation(ArrayOfDocuments) Export
 			EndDo;							
 		Except
 			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
-			JobAddErrorMessage(Msg, Errors, DocRef, ErrorDescription);
+			BackgroundJobAPIServer.JobAddErrorMessage(Msg, Errors, DocRef, ErrorDescription);
 		EndTry;
 				
 		Count = Count + 1;
-		JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);
+		BackgroundJobAPIServer.JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);
 		
 	EndDo;
 	
-	JobAddEndMessage(Errors);
+	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 		
 	Return Errors;
 EndFunction
-
-
-
-#EndRegion
-
-#Region BacjgroundJob
-
-Procedure JobAddErrorMessage(Msg, Errors, Doc, ErrorDescription)
-	Msg = BackgroundJobAPIServer.NotifySettings();
-	Msg.Log = "Error: " + Doc + ":" + Chars.LF + ErrorDescription;
-	BackgroundJobAPIServer.NotifyStream(Msg);
-			
-	Result = New Structure;
-	Result.Insert("Ref", Doc);
-	Result.Insert("RegInfo", New Array);
-	Result.Insert("Error", Msg.Log);
-	Errors.Add(Result);
-EndProcedure
-
-Function JobAddErrorEmptyCollection(Msg, Errors, Message)
-	Msg = BackgroundJobAPIServer.NotifySettings();
-	Msg.Log = "Empty doc list: 0";
-	Msg.End = True;
-	Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
-	BackgroundJobAPIServer.NotifyStream(Msg);
-	Return Errors;
-EndFunction
-
-Procedure JobAddPercentMessage(Count, TotalCount, LastPercentLogged, StartDate)
-	Percent = 100 * Count / TotalCount;
-	If (Percent - LastPercentLogged >= 1) Then  
-		LastPercentLogged = Int(Percent);
-		Msg = BackgroundJobAPIServer.NotifySettings();
-		DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
-		If DateDiff = 0 Then
-			DateDiff = 1;
-		EndIf;
-		Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
-		Msg.Percent = Percent;
-		BackgroundJobAPIServer.NotifyStream(Msg);
-	EndIf;
-EndProcedure
-
-Procedure JobAddEndMessage(Errors)
-	Msg = BackgroundJobAPIServer.NotifySettings();
-	Msg.End = True;
-	Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
-	BackgroundJobAPIServer.NotifyStream(Msg);
-EndProcedure
 
 #EndRegion
 
@@ -793,9 +741,5 @@ Function GetPeriodsTable(StartDate, EndDate, Periodicity)
 		_StartDate = EndOfDay(_StartDate) + 1; // next day
 	EndDo;
 	Return PeriodsTable;
-EndFunction
-
-Function AccountingTranslatons(Company, StartDate, EndDate) Export
-
 EndFunction
 

@@ -841,6 +841,7 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.UpdateManagerServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1513,6 +1514,7 @@
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
+  <dataProcessors>DataProcessor.UpdateDatabase</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
@@ -1615,6 +1617,7 @@
   <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
   <informationRegisters>InformationRegister.TranformedObjectsLink</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
+  <informationRegisters>InformationRegister.AppliedDatabaseUpdates</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>

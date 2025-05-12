@@ -144,9 +144,6 @@
 	<item>
 		<selection>
 			<item>
-				<field>ItemListProcurementMethod</field>
-			</item>
-			<item>
 				<field>ItemListStore</field>
 			</item>
 		</selection>

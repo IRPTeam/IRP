@@ -2182,7 +2182,7 @@ Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTa
 	NStr("en = 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R3040B_WithholdingTax)'", Lang));
 
 	
-Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External accounting operation exchange report'", Lang));	
+Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External accounting operation exchange report'", Lang));
 
 #EndRegion
 
@@ -2274,7 +2274,9 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	// %1 - Object presentation
 	// %2 - Document number
 	// %3 - Document date
-	Strings.Insert("DocPresentation", NStr("en = '%1 %2 dated %3'", Lang));	
+	Strings.Insert("DocPresentation", NStr("en = '%1 %2 dated %3'", Lang));
+	
+	Strings.Insert("DatePresentation", NStr("en = 'dated'", Lang));	
 #EndRegion
 
 #Region PeriodClosing

@@ -4121,11 +4121,11 @@ Function RecorderPresentationStructure(RecorderMetaName, RecorderDate, RecorderN
 		|	T9069S_AccountingMappingRecordersDescription.RecorderMetaName = &RecorderMetaName";
 	
 	QueryResult = Query.Execute();
-	SelectionDetailRecords = QueryResult.Select();
-	If SelectionDetailRecords.Next() Then
-		Structure.Description_en = StrTemplate("%1 %2 dated %3", SelectionDetailRecords.Description_en, RecorderNumber, RecorderDate);
-		Structure.Description_ru = StrTemplate("%1 %2 от %3", SelectionDetailRecords.Description_ru, RecorderNumber, RecorderDate);
-		Structure.Description_tr = StrTemplate("%1 %2 tarih %3", SelectionDetailRecords.Description_tr, RecorderNumber, RecorderDate);		
+	Selection = QueryResult.Select();
+	If Selection.Next() Then
+		Structure.Description_en = StrTemplate("%1 %2 %3 %4", Selection.Description_en, RecorderNumber, LocalizationReuse.Strings("en").DatePresentation, RecorderDate);
+		Structure.Description_ru = StrTemplate("%1 %2 %3 %4", Selection.Description_ru, RecorderNumber, LocalizationReuse.Strings("ru").DatePresentation, RecorderDate);
+		Structure.Description_tr = StrTemplate("%1 %2 %3 %4", Selection.Description_tr, RecorderNumber, LocalizationReuse.Strings("tr").DatePresentation, RecorderDate);		
 	EndIf;
 	Return Structure;
 EndFunction

@@ -838,6 +838,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9069S_AccountingMappingRecordersDescription</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</name>
 		<right>
 			<name>Read</name>

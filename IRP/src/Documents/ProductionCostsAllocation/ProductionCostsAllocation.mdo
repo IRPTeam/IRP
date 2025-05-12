@@ -70,7 +70,7 @@
   <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R6025_BatchV2</registerRecords>
+  <registerRecords>AccumulationRegister.R6025B_BatchV2</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

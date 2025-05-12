@@ -1691,7 +1691,7 @@
   <accumulationRegisters>AccumulationRegister.R5022T_Expenses</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6010B_BatchWiseBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6020B_BatchBalance</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R6025_BatchV2</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6025B_BatchV2</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6030T_BatchShortageOutgoing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6040T_BatchShortageIncoming</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6050T_SalesBatches</accumulationRegisters>

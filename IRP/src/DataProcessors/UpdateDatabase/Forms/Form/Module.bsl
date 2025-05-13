@@ -17,51 +17,30 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndDo;
 	
 	UpdateAppliedUpdates();
-		
+	ThisObject.LastReleaseNumber = Constants.LastReleaseNumber.Get();
+	ThisObject.CurrentReleaseNumber = Metadata.Version;
 	ThisObject.UpdatePause = 5;
 EndProcedure
 
 &AtServer
 Procedure UpdateAppliedUpdates(UpdateMethod = Undefined)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	AppliedDatabaseUpdates.UpdateMethod,
-	|	AppliedDatabaseUpdates.AppliedDate,
-	|	AppliedDatabaseUpdates.ReleaseNumber
-	|FROM
-	|	InformationRegister.AppliedDatabaseUpdates AS AppliedDatabaseUpdates
-	|WHERE
-	|	AppliedDatabaseUpdates.UpdateMethod IN (&UpdateMethods)";
-	
-	UpdateMethods = New Array();
-	For Each Row In ThisObject.UpdateInfoList Do
-		If UpdateMethod <> Undefined And Row.Method <> UpdateMethod Then
-			Continue;
-		EndIf;
-		UpdateMethods.Add(Row.Method);
-	EndDo;
-	
-	Query.SetParameter("UpdateMethods", UpdateMethods);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	QuerySelection.Reset();
-
+	UnappliedUpdates = UpdateManagerServer.GetUnappliedUpdates(UpdateMethod);
 	For Each Row In ThisObject.UpdateInfoList Do
 		If UpdateMethod <> Undefined And Row.Method <> UpdateMethod Then
 			Continue;
 		EndIf;
 		
-		If QuerySelection.FindNext(New Structure("UpdateMethod", Row.Method)) Then
-			Row.AppliedDate   = QuerySelection.AppliedDate;
-			Row.ReleaseNumber = QuerySelection.ReleaseNumber;
-			SetUpdateStatus_Complete(Object, ThisObject, Row.Method);
-		Else
-			Row.AppliedDate   = Undefined;
-			Row.ReleaseNumber = Undefined;	
-			SetUpdateStatus_Waiting(Object, ThisObject, Row.Method);		
-		EndIf;
-		QuerySelection.Reset();
+		For Each Row2 In UnappliedUpdates Do
+			If Row.Method = Row2.Method Then
+				If Row2.Applied = True Then
+					SetUpdateStatus_Complete(Object, ThisObject, Row.Method);
+				Else
+					SetUpdateStatus_Waiting(Object, ThisObject, Row.Method);
+				EndIf;
+				Row.AppliedDate   = Row2.AppliedDate;
+				Row.ReleaseNumber = Row2.ReleaseNumber;
+			EndIf;
+		EndDo;
 	EndDo;
 EndProcedure
 
@@ -70,6 +49,16 @@ Procedure OnOpen(Cancel)
 	UpdateLabels();
 	CheckJobStatus();
 	SetVisibilityAvailability(Object, ThisObject);	
+EndProcedure
+
+&AtClient
+Procedure OnClose(Exit)
+	OnCloseAtServer();
+EndProcedure
+
+&AtServerNoContext
+Procedure OnCloseAtServer()
+	Constants.LastReleaseNumber.Set(Metadata.Version);	
 EndProcedure
 
 &AtClient
@@ -87,6 +76,10 @@ EndProcedure
 Procedure RunCurrent(Command)
 	CurrentData = Items.UpdateInfoList.CurrentData;
 	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If CurrentData.Status = "Complete" Then
 		Return;
 	EndIf;
 	

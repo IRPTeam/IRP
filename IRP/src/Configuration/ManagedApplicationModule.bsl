@@ -33,6 +33,7 @@ Procedure OnStart()
 	ClientApplication.SetCaption(ServiceSystemClient.GetProgramTitle());
 	
 	UsersEventClient.OpenChangePasswordForm();
+	UpdateManagerClient.UpdateDatabase();
 	
 	AttachIdleHandler("ConnectAllEquipments", 0.1, True);
 	

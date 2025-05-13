@@ -2321,5 +2321,14 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("SystemAttribute_Store", NStr("en = 'Store'", Lang));
 #EndRegion
 
+#Region Updates
+	Strings.Insert("Update_001", NStr("en = 'Update system attribute [Store]'", Lang));
+	Strings.Insert("UpdateDesc_001", NStr("en = 'Update information register System Attributes using all old documents'", Lang));
+	
+	Strings.Insert("Update_002", NStr("en = 'Update Catalog.ItemType  '", Lang));
+	Strings.Insert("UpdateDesc_002", NStr("en = 'Covert attribute 
+		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber'", Lang));	
+#EndRegion
+
 	Return Strings;
 EndFunction

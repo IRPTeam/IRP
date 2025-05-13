@@ -842,6 +842,7 @@
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.UpdateManagerServer</commonModules>
+  <commonModules>CommonModule.UpdateManagerClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1103,6 +1104,7 @@
   <constants>Constant.UseVariableItemKey</constants>
   <constants>Constant.UseVariableStore</constants>
   <constants>Constant.UseWorkOrders</constants>
+  <constants>Constant.LastReleaseNumber</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>

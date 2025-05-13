@@ -260,6 +260,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.AppliedDatabaseUpdates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Constant.UsePartnersHierarchy</name>
 		<right>
 			<name>Read</name>
@@ -718,6 +729,17 @@
 		</right>
 	</object>
 	<object>
+		<name>DataProcessor.UpdateDatabase</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Constant.UseNumberingRules</name>
 		<right>
 			<name>Read</name>
@@ -866,6 +888,17 @@
 	</object>
 	<object>
 		<name>CommonForm.BackgroundMultiJob</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.LastReleaseNumber</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>

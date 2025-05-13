@@ -2,42 +2,18 @@
 Function GetUpdateInfo() Export
 	ArrayOfUpdateInfo = New Array();
 	
-//	UpdateInfo = GetUpdateInfoDefenition();
-//	UpdateInfo.Method = "UpdateManagerServer.RunUpdate_UpdateSystemAttributes_Store";
-//	UpdateInfo.Description = "Update system attribute [Store]";
-//	UpdateInfo.FullDescription = "Full description Update system attribute [Store]";
-//	ArrayOfUpdateInfo.Add(UpdateInfo);
-	
 	UpdateInfo = GetUpdateInfoDefenition();
-	UpdateInfo.Method = "UpdateManagerServer.RunUpdate_Update1";
-	UpdateInfo.Description = "Update 1";
-	UpdateInfo.FullDescription = "Full description Update 1";
+	UpdateInfo.Method = "UpdateManagerServer.RunUpdate_UpdateSystemAttributes_Store";
+	UpdateInfo.Description = R().Update_001;
+	UpdateInfo.FullDescription = R().UpdateDesc_001;
 	ArrayOfUpdateInfo.Add(UpdateInfo);
 	
 	UpdateInfo = GetUpdateInfoDefenition();
-	UpdateInfo.Method = "UpdateManagerServer.RunUpdate_Update2";
-	UpdateInfo.Description = "Update 2";
-	UpdateInfo.FullDescription = "Full description 2";
+	UpdateInfo.Method = "UpdateManagerServer.RunUpdate_ItemType_StockBalanceDetail_SerialLotNumber";
+	UpdateInfo.Description = R().Update_002;
+	UpdateInfo.FullDescription = R().UpdateDesc_002;
 	ArrayOfUpdateInfo.Add(UpdateInfo);
-	
-	UpdateInfo = GetUpdateInfoDefenition();
-	UpdateInfo.Method = "UpdateManagerServer.RunUpdate_Update3";
-	UpdateInfo.Description = "Update 3";
-	UpdateInfo.FullDescription = "Full description 3";
-	ArrayOfUpdateInfo.Add(UpdateInfo);
-	
-	UpdateInfo = GetUpdateInfoDefenition();
-	UpdateInfo.Method = "UpdateManagerServer.RunUpdate_Update4";
-	UpdateInfo.Description = "Update 4";
-	UpdateInfo.FullDescription = "Full description 4";
-	ArrayOfUpdateInfo.Add(UpdateInfo);
-	
-	UpdateInfo = GetUpdateInfoDefenition();
-	UpdateInfo.Method = "UpdateManagerServer.RunUpdate_Update5";
-	UpdateInfo.Description = "Update 5";
-	UpdateInfo.FullDescription = "Full description 5";
-	ArrayOfUpdateInfo.Add(UpdateInfo);
-	
+		
 	Return ArrayOfUpdateInfo;
 EndFunction
 
@@ -59,6 +35,69 @@ Procedure ApplieDatabaseUpdate(MethodName)
 	RecordSet.AdditionalProperties.Insert("SystemRecord", True);
 	RecordSet.Write();
 EndProcedure
+
+Function GetUnappliedUpdates(MethodName = Undefined) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	AppliedDatabaseUpdates.UpdateMethod,
+	|	AppliedDatabaseUpdates.AppliedDate,
+	|	AppliedDatabaseUpdates.ReleaseNumber
+	|FROM
+	|	InformationRegister.AppliedDatabaseUpdates AS AppliedDatabaseUpdates
+	|WHERE
+	|	AppliedDatabaseUpdates.UpdateMethod IN (&UpdateMethods)";
+	
+	UpdateMethods = New Array();
+	ArrayOfUpdateInfo = GetUpdateInfo();
+	For Each Row In ArrayOfUpdateInfo Do
+		If MethodName <> Undefined And Row.Method <> MethodName Then
+			Continue;
+		EndIf;
+		UpdateMethods.Add(Row.Method);
+	EndDo;
+	
+	Query.SetParameter("UpdateMethods", UpdateMethods);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	QuerySelection.Reset();
+	
+	Result = New Array();
+	
+	For Each Row In ArrayOfUpdateInfo Do
+		If MethodName <> Undefined And Row.Method <> MethodName Then
+			Continue;
+		EndIf;
+		
+		ResultRow = New Structure("Method, Applied, AppliedDate, ReleaseNumber");
+		ResultRow.Method = Row.Method;
+		
+		If QuerySelection.FindNext(New Structure("UpdateMethod", Row.Method)) Then
+			ResultRow.Applied = True;
+			ResultRow.AppliedDate   = QuerySelection.AppliedDate;
+			ResultRow.ReleaseNumber = QuerySelection.ReleaseNumber;
+		Else
+			ResultRow.Applied = False;
+			ResultRow.AppliedDate   = Undefined;
+			ResultRow.ReleaseNumber = Undefined;	
+		EndIf;
+		Result.Add(ResultRow);
+		QuerySelection.Reset();
+	EndDo;
+	Return Result;
+EndFunction
+
+Function NeedOpenForm_UpdateDataBase() Export
+	If Metadata.Version <> Constants.LastReleaseNumber.Get() Then
+		UnappliedUpdates = GetUnappliedUpdates();
+		For Each Row In UnappliedUpdates Do
+			If Row.Applied = False Then
+				Return True;
+			EndIf;
+		EndDo;
+	EndIf;
+	Return False;
+EndFunction
 
 #Region UPDATE_METHODS
 
@@ -173,11 +212,25 @@ Function RunUpdate_UpdateSystemAttributes_Store() Export
 	Return Errors;
 EndFunction
 
-Function RunUpdate_Update1() Export	
+Function RunUpdate_ItemType_StockBalanceDetail_SerialLotNumber() Export	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemTypes.Ref
+	|FROM
+	|	Catalog.ItemTypes AS ItemTypes
+	|WHERE
+	|	NOT ItemTypes.DeletionMark";
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
 	
 	Errors = New Array();
 	
-	TotalCount = 1000;
+	TotalCount = QuerySelection.Count();
+	
+	Msg = BackgroundJobAPIServer.NotifySettings();
+	Msg.Log = "Start update item types: " + TotalCount;
+	BackgroundJobAPIServer.NotifyStream(Msg);
 	
 	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
@@ -185,7 +238,7 @@ Function RunUpdate_Update1() Export
 	EndIf;
 
 	Msg = BackgroundJobAPIServer.NotifySettings();
-	Msg.Log = "Start update 1: " + TotalCount;
+	Msg.Log = "Start update item types: " + TotalCount;
 	BackgroundJobAPIServer.NotifyStream(Msg);
 	
 	Count = 0; 
@@ -194,9 +247,13 @@ Function RunUpdate_Update1() Export
 	
 	HaveErrors = False;
 	
-	For i=0 to 1000 Do
+	While QuerySelection.Next() Do
 		Try
-			// do something
+			Obj = Catalogs.ItemTypes.CreateItem();  //QuerySelection.Ref.GetObject();
+			Obj.DataExchange.Load = True;
+			Obj.StockBalanceDetailSerialLotNumber = 
+				(Obj.DELETE_StockBalanceDetail = Enums.DELETE_StockBalanceDetail.BySerialLotNumber);
+			Obj.Write();
 		Except
 			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
 			BackgroundJobAPIServer.JobAddErrorMessage(Msg, Errors, Undefined, ErrorDescription);
@@ -216,204 +273,7 @@ Function RunUpdate_Update1() Export
 	EndIf;
 	
 	If Errors.Count() = 0 Then
-		ApplieDatabaseUpdate("UpdateManagerServer.RunUpdate_Update1");
-	EndIf;
-	
-	Return Errors;
-EndFunction
-
-Function RunUpdate_Update2() Export	
-	
-	Errors = New Array();
-	
-	TotalCount = 1000;
-	
-	If TotalCount = 0 Then
-		Msg = BackgroundJobAPIServer.NotifySettings();
-		Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "No data for update: 0");
-	EndIf;
-
-	Msg = BackgroundJobAPIServer.NotifySettings();
-	Msg.Log = "Start update 2: " + TotalCount;
-	BackgroundJobAPIServer.NotifyStream(Msg);
-	
-	Count = 0; 
-	LastPercentLogged = 0;
-	JobStartDate = CurrentUniversalDateInMilliseconds();
-	
-	HaveErrors = False;
-	
-	For i=0 to 1000 Do
-		Try
-			// do something
-		Except
-			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
-			BackgroundJobAPIServer.JobAddErrorMessage(Msg, Errors, Undefined, ErrorDescription);
-			HaveErrors = True;
-			Break;
-		EndTry;
-		
-		Count = Count + 1;
-		BackgroundJobAPIServer.JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);		
-		
-	EndDo;
-	
-	BackgroundJobAPIServer.JobAddEndMessage(Errors);
-	
-	If HaveErrors Then
-		Raise "Job aborted";
-	EndIf;
-	
-	If Errors.Count() = 0 Then
-		ApplieDatabaseUpdate("UpdateManagerServer.RunUpdate_Update2");
-	EndIf;
-
-	Return Errors;
-EndFunction
-
-Function RunUpdate_Update3() Export	
-	
-	Errors = New Array();
-	
-	TotalCount = 1000;
-	
-	If TotalCount = 0 Then
-		Msg = BackgroundJobAPIServer.NotifySettings();
-		Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "No data for update: 0");
-	EndIf;
-
-	Msg = BackgroundJobAPIServer.NotifySettings();
-	Msg.Log = "Start update 3: " + TotalCount;
-	BackgroundJobAPIServer.NotifyStream(Msg);
-	
-	Count = 0; 
-	LastPercentLogged = 0;
-	JobStartDate = CurrentUniversalDateInMilliseconds();
-	
-	HaveErrors = False;
-	
-	For i=0 to 1000 Do
-		Try
-			// do something
-		Except
-			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
-			BackgroundJobAPIServer.JobAddErrorMessage(Msg, Errors, Undefined, ErrorDescription);
-			HaveErrors = True;
-			Break;
-		EndTry;
-		
-		Count = Count + 1;
-		BackgroundJobAPIServer.JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);		
-		
-	EndDo;
-	
-	BackgroundJobAPIServer.JobAddEndMessage(Errors);
-	
-	If HaveErrors Then
-		Raise "Job aborted";
-	EndIf;
-	
-	If Errors.Count() = 0 Then
-		ApplieDatabaseUpdate("UpdateManagerServer.RunUpdate_Update3");
-	EndIf;
-	
-	Return Errors;
-EndFunction
-
-Function RunUpdate_Update4() Export	
-	
-	Errors = New Array();
-	
-	TotalCount = 1000;
-	
-	If TotalCount = 0 Then
-		Msg = BackgroundJobAPIServer.NotifySettings();
-		Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "No data for update: 0");
-	EndIf;
-
-	Msg = BackgroundJobAPIServer.NotifySettings();
-	Msg.Log = "Start update 4: " + TotalCount;
-	BackgroundJobAPIServer.NotifyStream(Msg);
-	
-	Count = 0; 
-	LastPercentLogged = 0;
-	JobStartDate = CurrentUniversalDateInMilliseconds();
-	
-	HaveErrors = False;
-	
-	For i=0 to 1000 Do
-		Try
-			// do something
-			//d=12/0;
-		Except
-			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
-			BackgroundJobAPIServer.JobAddErrorMessage(Msg, Errors, Undefined, ErrorDescription);
-			HaveErrors = True;
-			Break;
-		EndTry;
-		
-		Count = Count + 1;
-		BackgroundJobAPIServer.JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);		
-		
-	EndDo;
-	
-	BackgroundJobAPIServer.JobAddEndMessage(Errors);
-	
-	If HaveErrors Then
-		Raise "Job aborted";
-	EndIf;
-	
-	If Errors.Count() = 0 Then
-		ApplieDatabaseUpdate("UpdateManagerServer.RunUpdate_Update4");
-	EndIf;
-	
-	Return Errors;
-EndFunction
-
-Function RunUpdate_Update5() Export	
-	
-	Errors = New Array();
-	
-	TotalCount = 1000;
-	
-	If TotalCount = 0 Then
-		Msg = BackgroundJobAPIServer.NotifySettings();
-		Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "No data for update: 0");
-	EndIf;
-
-	Msg = BackgroundJobAPIServer.NotifySettings();
-	Msg.Log = "Start update 5: " + TotalCount;
-	BackgroundJobAPIServer.NotifyStream(Msg);
-	
-	Count = 0; 
-	LastPercentLogged = 0;
-	JobStartDate = CurrentUniversalDateInMilliseconds();
-	
-	HaveErrors = False;
-	
-	For i=0 to 1000 Do
-		Try
-			// do something
-		Except
-			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
-			BackgroundJobAPIServer.JobAddErrorMessage(Msg, Errors, Undefined, ErrorDescription);
-			HaveErrors = True;
-			Break;
-		EndTry;
-		
-		Count = Count + 1;
-		BackgroundJobAPIServer.JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);		
-		
-	EndDo;
-	
-	BackgroundJobAPIServer.JobAddEndMessage(Errors);
-	
-	If HaveErrors Then
-		Raise "Job aborted";
-	EndIf;
-	
-	If Errors.Count() = 0 Then
-		ApplieDatabaseUpdate("UpdateManagerServer.RunUpdate_Update5");
+		ApplieDatabaseUpdate("UpdateManagerServer.RunUpdate_ItemType_StockBalanceDetail_SerialLotNumber");
 	EndIf;
 	
 	Return Errors;

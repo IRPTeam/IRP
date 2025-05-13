@@ -358,7 +358,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Tables</value>
+     <value>Таблицы</value>
     </title>
     <title>
      <key>en</key>
@@ -390,7 +390,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Insert table commands</value>
+    <value>Вставить команды таблицы</value>
    </title>
    <title>
     <key>en</key>
@@ -420,7 +420,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Group insert commands</value>
+   <value>Группа команд вставить</value>
   </title>
   <title>
    <key>en</key>
@@ -734,7 +734,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>variable for the calculation result</value>
+   <value>Переменная для расчитываемого результата</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -771,7 +771,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>reference to the printed object</value>
+   <value>Ссылка на объект печати</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -795,7 +795,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Current row</value>
+   <value>Текущая строка</value>
   </title>
   <title>
    <key>en</key>
@@ -808,7 +808,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>variable for the current table row</value>
+   <value>Переменная для текущей строки таблицы</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -845,7 +845,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>variable for the table row number</value>
+   <value>Переменная для номера стоки таблицы</value>
   </toolTip>
   <toolTip>
    <key>en</key>

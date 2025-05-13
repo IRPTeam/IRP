@@ -2560,10 +2560,10 @@ Function Strings(Lang) Export
 		|ru='Related document exists: %1';
 		|tr='İlgili belge mevcut: %1'", Lang));
 	Strings.Insert("Exc_014", NStr("en='Wrong range';
-		|ru='Wrong range';
+		|ru='Не правильный диапазон';
 		|tr='Yanlış aralık'", Lang));
 	Strings.Insert("Exc_015", NStr("en='Overlapping ranges';
-		|ru='Overlapping ranges';
+		|ru='Пересекающиеся диапазоны';
 		|tr='Çakışan aralıklar'", Lang));
 #EndRegion
 

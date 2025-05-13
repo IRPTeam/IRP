@@ -141,7 +141,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Group descriptions header</value>
+   <value>Группа наименований шапки</value>
   </title>
   <title>
    <key>en</key>
@@ -289,7 +289,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Group template types</value>
+     <value>Группа типов шаблона</value>
     </title>
     <title>
      <key>en</key>
@@ -420,7 +420,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Group command TXT</value>
+       <value>Группа команд TXT</value>
       </title>
       <title>
        <key>en</key>
@@ -632,7 +632,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Group command MXL</value>
+       <value>Группа команд MXL</value>
       </title>
       <title>
        <key>en</key>
@@ -1214,7 +1214,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Tables</value>
+    <value>Таблицы</value>
    </title>
    <title>
     <key>en</key>
@@ -1568,7 +1568,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Tables</value>
+       <value>Таблицы</value>
       </title>
       <title>
        <key>en</key>
@@ -1879,7 +1879,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Parameters context menu table group</value>
+       <value>Группа параметров контекста меню таблицы</value>
       </title>
       <title>
        <key>en</key>
@@ -2501,7 +2501,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Template MXL</value>
+   <value>MXL шаблон</value>
   </title>
   <title>
    <key>en</key>
@@ -2725,7 +2725,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Delete not used</value>
+   <value>Удалить не используемые</value>
   </title>
   <title>
    <key>en</key>
@@ -2754,7 +2754,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Add to table</value>
+   <value>Добавить в таблицу</value>
   </title>
   <title>
    <key>en</key>
@@ -2783,7 +2783,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Move to table</value>
+   <value>Переместить в таблицу</value>
   </title>
   <title>
    <key>en</key>
@@ -2812,7 +2812,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Remove from table</value>
+   <value>Удалиить из таблицы</value>
   </title>
   <title>
    <key>en</key>

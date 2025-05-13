@@ -148,7 +148,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Print form variable type</value>
+   <value>Печатная форма типов переменных</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -197,7 +197,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Use tables</value>
+   <value>Использовать таблицы</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -224,7 +224,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Tables</value>
+   <value>Таблицы</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -285,7 +285,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Repeating area</value>
+    <value>Повторяющаяся зона</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -307,7 +307,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Line start</value>
+    <value>Начало строки</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -333,7 +333,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Line end</value>
+    <value>Конец строки</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -528,7 +528,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Formula editing table</value>
+   <value>Таблица изменения формулы</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -545,7 +545,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Formula editing parameter</value>
+   <value>Параметры изменения формулы</value>
   </synonym>
   <synonym>
    <key>en</key>

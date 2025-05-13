@@ -298,7 +298,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Group insert commands</value>
+   <value>Группа команд вставить</value>
   </title>
   <title>
    <key>en</key>
@@ -563,7 +563,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>variable for the calculation result</value>
+   <value>Переменная для расчитываемого результата</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -600,7 +600,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>reference to the printed object</value>
+   <value>Ссылка на объект печати</value>
   </toolTip>
   <toolTip>
    <key>en</key>

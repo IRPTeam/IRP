@@ -5,6 +5,9 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	If Parameters.Filter.Property("Ref") And TypeOf(Parameters.Filter.Ref) = Type("DocumentRef.WorkOrder") Then
 		ChoiceData.Add(Stock);
 		ChoiceData.Add(NoReserve);
+	ElsIf Parameters.Filter.Property("IsService") And Parameters.Filter.IsService = True Then
+		ChoiceData.Add(EmptyRef());
+		ChoiceData.Add(Purchase);
 	Else
 		ChoiceData.Add(Stock);	
 		ChoiceData.Add(Purchase);

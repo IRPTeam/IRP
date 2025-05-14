@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="35bb1dc7-7c32-4d36-8cb4-159aedd19570">
+  <producedTypes>
+    <objectType typeId="745cef74-f50d-4c8a-ac1c-70e148847539" valueTypeId="f120d2a0-5e60-4b2b-b377-b5fb3a21b1f7"/>
+    <managerType typeId="e14f84d9-ee26-42b3-b13a-291bf5c47776" valueTypeId="8d74c9cc-84c2-47b7-bdb2-f8247f4ebcd8"/>
+  </producedTypes>
+  <name>R3021A_CashInTransit</name>
+  <synonym>
+    <key>en</key>
+    <value>R3021A Cash in transit</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <mainDataCompositionSchema>Report.R3021A_CashInTransit.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+  <templates uuid="e0f42c6e-fe27-4ffe-856e-ea66ae49020a">
+    <name>MainDataCompositionSchema</name>
+    <synonym>
+      <key>en</key>
+      <value>Main data composition schema</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
+</mdclass:Report>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="daf0e6b5-951b-4454-99c3-bf6374311945">
+  <producedTypes>
+    <objectType typeId="1362de00-3360-4b3e-b58d-060a5c396d29" valueTypeId="ecdee6fa-857e-4572-9ae2-80c04584bf53"/>
+    <managerType typeId="e11397af-67a5-43a6-a89a-876b34b8f287" valueTypeId="41b6200b-4d9e-46e4-a61e-7671fbc80932"/>
+  </producedTypes>
+  <name>R9101S_InventoryResults</name>
+  <synonym>
+    <key>en</key>
+    <value>R9101S Inventory results</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <mainDataCompositionSchema>Report.R9101S_InventoryResults.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+  <templates uuid="4e96985f-fb67-4b34-a201-580d4c7c71b2">
+    <name>MainDataCompositionSchema</name>
+    <synonym>
+      <key>en</key>
+      <value>Main data composition schema</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
+</mdclass:Report>

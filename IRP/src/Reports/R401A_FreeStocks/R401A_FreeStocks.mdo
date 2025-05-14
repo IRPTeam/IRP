@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4cdc222b-a8f6-4c3d-a993-f4a166d55293">
+  <producedTypes>
+    <objectType typeId="4377a7b2-c4ee-48d3-9331-9525ae666517" valueTypeId="b1cbaf08-1693-4ba5-ada6-4de60df1919f"/>
+    <managerType typeId="99959a0f-d994-4499-9630-dbf20be53fff" valueTypeId="515b3222-b02c-489a-b9e4-1a1311ec4048"/>
+  </producedTypes>
+  <name>R401A_FreeStocks</name>
+  <synonym>
+    <key>en</key>
+    <value>R401A Free stocks</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <mainDataCompositionSchema>Report.R401A_FreeStocks.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+  <templates uuid="b1d0ccfd-34d1-44b3-ac23-8c6f25e6a0ae">
+    <name>MainDataCompositionSchema</name>
+    <synonym>
+      <key>en</key>
+      <value>Main data composition schema</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
+</mdclass:Report>

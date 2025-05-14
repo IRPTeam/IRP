@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ff97fa76-b09c-47ee-b9e8-79bbdebbf10e">
+  <name>OldReports</name>
+  <synonym>
+    <key>en</key>
+    <value>Old reports</value>
+  </synonym>
+  <includeHelpInContents>true</includeHelpInContents>
+  <includeInCommandInterface>true</includeInCommandInterface>
+  <content>Report.A0010_TrialBalance</content>
+  <content>Report.A0011_TrialBalanceByAccount</content>
+  <content>Report.A0012_AccountCard</content>
+  <content>Report.A0013_AccountAnalysis</content>
+  <content>Report.A1010_PartnersBalance</content>
+  <content>Report.D0010_ItemsInfo</content>
+  <content>Report.D0011_PriceInfo</content>
+  <content>Report.D0012_AdditionalDocumentTablesCheck</content>
+  <content>Report.D0013_DocumentRegistrationsReport</content>
+  <content>Report.D1001_Purchases</content>
+  <content>Report.D2001_Sales</content>
+  <content>Report.D4010_ActualStocks</content>
+  <content>Report.D4011_FreeStocks</content>
+  <content>Report.D4012_StockReservation</content>
+  <content>Report.F0010_FixedAssetsTransferCost</content>
+  <content>Report.F0011_InventoryBook</content>
+  <content>Report.F0012_DepreciationStatement</content>
+  <content>Report.R1001_Purchases</content>
+  <content>Report.R1100_CustomersAging</content>
+  <content>Report.R1200_VendorsAging</content>
+  <content>Report.R2001_Sales</content>
+  <content>Report.R3010_CashOnHand</content>
+  <content>Report.R5020_PartnersBalance</content>
+  <content>Report.R5020_ProfitLosses</content>
+  <content>Report.R6020_BatchBalance</content>
+  <content>Report.R6021_BatchBalanceSimple</content>
+  <content>Report.R7010_DetailingSupplies</content>
+  <content>Report.R7030_ProductionPlanning</content>
+  <content>Report.S1001L_VendorsPrices</content>
+  <content>Report.T0001_FilesAnalyser</content>
+  <parentSubsystem>Subsystem.Technical</parentSubsystem>
+</mdclass:Subsystem>

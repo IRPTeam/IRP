@@ -13,4 +13,6 @@
   <subsystems>CopyPaste</subsystems>
   <subsystems>InternalCommands</subsystems>
   <subsystems>Messaging</subsystems>
+  <subsystems>StandartReports</subsystems>
+  <subsystems>OldReports</subsystems>
 </mdclass:Subsystem>

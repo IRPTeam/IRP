@@ -2327,11 +2327,7 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	
 	Strings.Insert("Update_002", NStr("en = 'Update Catalog.ItemType  '", Lang));
 	Strings.Insert("UpdateDesc_002", NStr("en = 'Covert attribute 
-		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber'", Lang));
-		
-	Strings.Insert("Update_003", NStr("en = 'Update 001'", Lang));
-	Strings.Insert("UpdateDesc_003", NStr("en = 'full description'", Lang));
-		
+		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber'", Lang));		
 #EndRegion
 
 	Return Strings;

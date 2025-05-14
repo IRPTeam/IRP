@@ -53,6 +53,9 @@ EndProcedure
 
 &AtClient
 Procedure OnClose(Exit)
+	If Exit Then
+		Return;
+	EndIf;
 	OnCloseAtServer();
 EndProcedure
 
@@ -85,7 +88,9 @@ Procedure RunCurrent(Command)
 	
 	SetUpdateStatus_InProgress(Object, ThisObject, CurrentData.Method);
 	SetVisibilityAvailability(Object, ThisObject);
-	RunUpdate(CurrentData.Method, CurrentData.Description);
+	JobParameters = New Array();
+	JobParameters.Add(CurrentData.Method);
+	RunUpdate(CurrentData.Method, CurrentData.Description, JobParameters);
 	CheckJobStatus();
 EndProcedure
 
@@ -317,11 +322,12 @@ Procedure UpdateLabels()
 EndProcedure
 
 &AtServer
-Procedure RunUpdate(UpdateMethod, Title)
+Procedure RunUpdate(UpdateMethod, Title, JobParameters)
 	ClearJobList(UpdateMethod);	
 	JobRow = JobList.Add();
 	JobRow.UpdateMethod = UpdateMethod;
 	JobRow.Title = Title;
+	JobRow.JobParameters = CommonFunctionsServer.PutToCache(JobParameters);
 	JobRow.Icon = PictureLib.AppearanceCircleYellow;
 	JobRow.Status = Enums.JobStatus.Wait;
 	JobRow.ProcedurePath = UpdateMethod;
@@ -366,7 +372,9 @@ Procedure CheckJobStatus() Export
 			ScheduledUpdateIsRun = True;
 			UpdateInfo.Scheduled = False;
 			SetUpdateStatus_InProgress(Object, ThisObject, UpdateInfo.Method);
-			RunUpdate(UpdateInfo.Method, UpdateInfo.Description);
+			JobParameters = New Array();
+			JobParameters.Add(UpdateInfo.Method);
+			RunUpdate(UpdateInfo.Method, UpdateInfo.Description, JobParameters);
 		EndDo;
 		
 		If ScheduledUpdateIsRun Then

@@ -4101,11 +4101,17 @@ EndFunction
 // * Description_en - String - 
 // * Description_ru - String - 
 // * Description_tr - String - 
-Function RecorderPresentationStructure(RecorderMetaName, RecorderDate, RecorderNumber)
+Function RecorderPresentationStructure(RecorderMetaName, RecorderDate, RecorderNumber) Export
+	AllDescriptionArray =  LocalizationServer.AllDescription();
+	Index = AllDescriptionArray.Find("Description_hash");
+	If Index <> Undefined Then
+		AllDescriptionArray.Delete(Index);
+	EndIf;	
+		
 	Structure = New Structure;
-	Structure.Insert("Description_en", "");
-	Structure.Insert("Description_ru", "");
-	Structure.Insert("Description_tr", "");
+	For Each Description In AllDescriptionArray Do
+		Structure.Insert(Description, "");		
+	EndDo;	
 	
 	Query = New Query;
 	Query.SetParameter("RecorderMetaName", RecorderMetaName);
@@ -4123,12 +4129,29 @@ Function RecorderPresentationStructure(RecorderMetaName, RecorderDate, RecorderN
 	QueryResult = Query.Execute();
 	Selection = QueryResult.Select();
 	If Selection.Next() Then
-		Structure.Description_en = StrTemplate("%1 %2 %3 %4", Selection.Description_en, RecorderNumber, LocalizationReuse.Strings("en").DatePresentation, RecorderDate);
-		Structure.Description_ru = StrTemplate("%1 %2 %3 %4", Selection.Description_ru, RecorderNumber, LocalizationReuse.Strings("ru").DatePresentation, RecorderDate);
-		Structure.Description_tr = StrTemplate("%1 %2 %3 %4", Selection.Description_tr, RecorderNumber, LocalizationReuse.Strings("tr").DatePresentation, RecorderDate);		
+		For Each Description In AllDescriptionArray Do
+			LangCode = LangCodeFromDescription(Description);
+			Structure[Description] = StrTemplate("%1 %2 %3 %4", Selection[Description], RecorderNumber, LocalizationReuse.Strings(LangCode).DatePresentation, RecorderDate);;		
+		EndDo;				
 	EndIf;
 	Return Structure;
 EndFunction
+
+// Lang code from description.
+// 
+// Parameters:
+//  Description - String
+// 
+// Returns:
+//  String - Lang code from description
+Function LangCodeFromDescription(Description)
+	LangCode = "en";
+	Counter = StrFind(Description, "_");
+	If Counter > 0 Then
+		LangCode = Mid(Description, Counter + 1);
+	EndIf;
+	Return LangCode;
+EndFunction	
 
 Procedure SetRates(DocObject, LedgerType, Data, IntegrationSettings)
 	LedgerTypeCurrency = LedgerType.CurrencyMovementType.Currency;

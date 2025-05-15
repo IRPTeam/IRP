@@ -33,9 +33,9 @@ Procedure FillRecordersMappingAtServer()
 	|WHERE
 	|	NOT TT_AllNames.RecorderName IN
 	|		(SELECT
-	|			TT_NamesExist.RecorderMetaName AS RecorderMetaName
+	|			TT_NamesExist.RecorderMetaName
 	|		FROM
-	|			TT_NamesExist AS TT_NamesExist)";
+	|			TT_NamesExist)";
 	
 	QueryResult = Query.Execute();
 	

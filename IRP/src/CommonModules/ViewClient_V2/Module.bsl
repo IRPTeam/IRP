@@ -726,6 +726,9 @@ Procedure __tmp_BankCashPaymentReceipt_CommitChanges(Parameters)
 			For Each RowData In Parameters.ExtractedData.DataAgreementApArPostingDetail Do
 				If RowData.Key = RowPaymentList.Key Then
 					RowPaymentList.ApArPostingDetail = RowData.ApArPostingDetail;
+					If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Form, "PaymentListApArPostingDetailNoSplits") Then
+						Parameters.Form.PaymentListApArPostingDetailNoSplits = RowData.ApArPostingDetail;
+					EndIf;
 					Break;
 				EndIf;
 			EndDo;
@@ -1058,6 +1061,8 @@ Procedure OnOpenFormNotify(Parameters) Export
 	If Parameters.Form.IsCopyingInteractive Then
 		SetDate(Parameters.Object, Parameters.Form, Parameters.TableName, CommonFunctionsServer.GetCurrentSessionDate());
 	EndIf;
+	
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
 	
 	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
 EndProcedure
@@ -2972,14 +2977,21 @@ EndFunction
 
 Procedure PaymentListOnAddRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 Procedure PaymentListOnCopyRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 Procedure PaymentListAfterDeleteRow(Object, Form) Export
-	DeleteRows(Object, Form, "PaymentList");
+	DeleteRows(Object, Form, "PaymentList", "PaymentListAfterDeleteRowFormNotify");
+EndProcedure
+
+Procedure PaymentListAfterDeleteRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 Procedure PaymentListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
@@ -2994,24 +3006,52 @@ EndProcedure
 #Region _PAYMENT_LIST_COLUMNS
 
 // PaymentList.Partner
-Procedure PaymentListPartnerOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListPartnerOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListPartnerOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListPartnerNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
 // PaymentList.Agreement
-Procedure PaymentListAgreementOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListAgreementOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListAgreementOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListAgreementNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
+EndProcedure
+
 // PaymentList.LegalName
-Procedure PaymentListLegalNameOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListLegalNameOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListLegalNameOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetPaymentListLegalNameNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
+// PaymentList.FinancialMovementType
+Procedure PaymentListFinancialMovementTypeOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
+	ControllerClientServer_V2.PaymentListFinancialMovementTypeOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetPaymentListFinancialMovementTypeNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
 EndProcedure
 
 // PaymentList.Account
@@ -3022,26 +3062,33 @@ Procedure PaymentListAccountOnChange(Object, Form, CurrentData = Undefined) Expo
 EndProcedure
 
 // PaymentList.BasisDocument
-Procedure PaymentListBasisDocumentOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListBasisDocumentOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListBasisDocumentOnChange(Parameters);
 EndProcedure
 
 // PaymentList.BasisDocument.Set
-Procedure SetPaymentListBasisDocument(Object, Form, Row, Value) Export
+Procedure SetPaymentListBasisDocument(Object, Form, Row, Value, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Row.BasisDocument = Value;
 	Rows = GetRowsByCurrentData(Form, "PaymentList", Row);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
 	Parameters.Insert("IsProgramChange", True);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListBasisDocumentOnChange(Parameters);
 EndProcedure
 
 // PaymentList.PlanningTransactionBasis
-Procedure PaymentListPlanningTransactionBasisOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListPlanningTransactionBasisOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListPlanningTransactionBasisOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetPaymentListPlanningTransactionBasisNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
 EndProcedure
 
 // PaymentList.MoneyTransfer
@@ -3075,23 +3122,34 @@ Procedure PaymentListDontCalculateRowOnChange(Object, Form, CurrentData = Undefi
 EndProcedure
 
 // PaymentList.TaxAmount
-Procedure PaymentListTaxAmountOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListTaxAmountOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListTaxAmountOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListTaxAmountNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
 // PaymentList.NetAmount
-Procedure PaymentListNetAmountOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListNetAmountOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListNetAmountOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListNetAmountNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
 // PaymentList.TotalAmount
-Procedure PaymentListTotalAmountOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListTotalAmountOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListTotalAmountOnChange(Parameters);
 EndProcedure
 
@@ -3104,6 +3162,10 @@ Procedure SetPaymentListTotalAmount(Object, Form, Row, Value) Export
 	ControllerClientServer_V2.PaymentListTotalAmountOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListTotalAmountNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
 // PaymentList.Commission
 Procedure PaymentListCommissionOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
@@ -3112,17 +3174,27 @@ Procedure PaymentListCommissionOnChange(Object, Form, CurrentData = Undefined) E
 EndProcedure
 
 // PaymentList.PaymentType
-Procedure PaymentListPaymentTypeOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListPaymentTypeOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListPaymentTypeOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListPaymentTypeNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
 // PaymentList.BankTerm
-Procedure PaymentListBankTermOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListBankTermOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListBankTermOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetPaymentListBankTermNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
 EndProcedure
 
 // PaymentList.CommissionPercent
@@ -3133,10 +3205,15 @@ Procedure PaymentListCommissionPercentOnChange(Object, Form, CurrentData = Undef
 EndProcedure
 
 // PaymentList.VatRate
-Procedure PaymentListVatRateOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListVatRateOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListVatRateOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetPaymentListVatRateNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
 EndProcedure
 
 #EndRegion
@@ -3865,6 +3942,25 @@ EndProcedure
 
 Procedure OnSetCompanyNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region DETAILS_BY_ROW
+
+Procedure DetailsByRowOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.DetailsByRowOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetDetailsByRowNotify(Parameters) Export
+	Parameters.Form.FormSetVisibilityAvailability();
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");	
 EndProcedure
 
 #EndRegion

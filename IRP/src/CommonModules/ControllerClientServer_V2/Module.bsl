@@ -53,6 +53,7 @@ Function GetFormParameters(Form) Export
 	
 	Result.Insert("IsBackgroundJob", False);
 	Result.Insert("ShowBackgroundJobSplash", False);
+	Result.Insert("FormAttributeUpdateDirection", "FromListToHeader");
 	Return Result;
 EndFunction
 
@@ -231,6 +232,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters.Insert("ShowBackgroundJobSplash", FormParameters.ShowBackgroundJobSplash Or LoadParameters.ShowBackgroundJobSplash);
 	Parameters.Insert("BackgroundJobTitle", R().BgJ_Title_001);
 	
+	Parameters.Insert("FormAttributeUpdateDirection", FormParameters.FormAttributeUpdateDirection);
 	Return Parameters;
 EndFunction
 
@@ -3252,6 +3254,30 @@ Procedure StepChangeReceiveBranchByAccount(Parameters, Chain) Export
 	Options.StepName = "StepChangeReceiveBranchByAccount";
 	Chain.ChangeReceiveBranchByAccount.Options.Add(Options);
 EndProcedure
+
+#EndRegion
+
+#Region DETAILS_BY_ROW
+
+// DetailsByRow.OnChange
+Procedure DetailsByRowOnChange(Parameters) Export
+	AddViewNotify("OnSetDetailsByRowNotify", Parameters);
+	Binding = BindCompany(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// DetailsByRow.Set
+Procedure SetDetailsByRow(Parameters, Results) Export
+	Binding = BindDetailsByRow(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetDetailsByRowNotify");
+EndProcedure
+
+// DetailsByRow.Bind
+Function BindDetailsByRow(Parameters)
+	DataPath = "DetailsByRow";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindDetailsByRow");
+EndFunction
 
 #EndRegion
 
@@ -7075,6 +7101,7 @@ EndProcedure
 
 // PaymentList.Partner.OnChange
 Procedure PaymentListPartnerOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListPartnerNotify", Parameters);
 	Binding = BindPaymentListPartner(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -7082,7 +7109,7 @@ EndProcedure
 // PaymentList.Partner.Set
 Procedure SetPaymentListPartner(Parameters, Results) Export
 	Binding = BindPaymentListPartner(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListPartnerNotify");
 EndProcedure
 
 // PaymentList.Partner.Get
@@ -7404,6 +7431,7 @@ EndProcedure
 
 // PaymentList.Agreement.OnChange
 Procedure PaymentListAgreementOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListAgreementNotify", Parameters);
 	Binding = BindPaymentListAgreement(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -7411,7 +7439,7 @@ EndProcedure
 // PaymentList.Agreement.Set
 Procedure SetPaymentListAgreement(Parameters, Results) Export
 	Binding = BindPaymentListAgreement(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListAgreementNotify");
 EndProcedure
 
 // PaymentList.Agreement.Get
@@ -7530,6 +7558,7 @@ EndProcedure
 
 // PaymentList.LegalName.OnChange
 Procedure PaymentListLegalNameOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListLegalNameNotify", Parameters);
 	Binding = BindPaymentListLegalName(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -7537,7 +7566,7 @@ EndProcedure
 // PaymentList.LegalName.Set
 Procedure SetPaymentListLegalName(Parameters, Results) Export
 	Binding = BindPaymentListLegalName(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListLegalNameNotify");
 EndProcedure
 
 // PaymentList.LegalName.Get
@@ -7844,6 +7873,7 @@ EndProcedure
 
 // PaymentList.PlanningTransactionBasis.OnChange
 Procedure PaymentListPlanningTransactionBasisOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListPlanningTransactionBasisNotify", Parameters);
 	Binding = BindPaymentListPlanningTransactionBasis(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -7851,7 +7881,7 @@ EndProcedure
 // PaymentList.PlanningTransactionBasis.Set
 Procedure SetPaymentListPlanningTransactionBasis(Parameters, Results) Export
 	Binding = BindPaymentListPlanningTransactionBasis(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListPlanningTransactionBasisNotify");
 EndProcedure
 
 // PaymentList.PlanningTransactionBasis.Get
@@ -7897,7 +7927,7 @@ Procedure MultiSetPaymentListPlanningTransactionBasis_BankPayment(Parameters, Re
 	ResourceToBinding.Insert("ReceiptingAccount" , BindPaymentListReceiptingAccount(Parameters));
 	ResourceToBinding.Insert("ReceiptingBranch"  , BindPaymentListReceiptingBranch(Parameters));
 	ResourceToBinding.Insert("FinancialMovementType"  , BindPaymentListFinancialMovementType(Parameters));
-	MultiSetterObject(Parameters, Results, ResourceToBinding);
+	MultiSetterObject(Parameters, Results, ResourceToBinding, "OnSetPaymentListPlanningTransactionBasisNotify");
 EndProcedure
 
 // PaymentList.PlanningTransactionBasis.CashPayment.MultiSet
@@ -8182,6 +8212,7 @@ EndFunction
 
 // PaymentList.VatRate.OnChange
 Procedure PaymentListVatRateOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListVatRateNotify", Parameters);
 	Binding = BindPaymentListVatRate(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -8189,7 +8220,7 @@ EndProcedure
 // PaymentList.VatRate.Set
 Procedure SetPaymentListVatRate(Parameters, Results) Export
 	Binding = BindPaymentListVatRate(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListVatRateNotify");
 EndProcedure
 
 // PaymentList.VatRate.Get
@@ -8335,6 +8366,7 @@ EndFunction
 
 // PaymentList.TaxAmount.OnChange
 Procedure PaymentListTaxAmountOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListTaxAmountNotify", Parameters);
 	Binding = BindPaymentListTaxAmount(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -8342,12 +8374,12 @@ EndProcedure
 // PaymentList.TaxAmount.Set
 Procedure SetPaymentListTaxAmount(Parameters, Results) Export
 	Binding = BindPaymentListTaxAmount(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListTaxAmountNotify");
 EndProcedure
 
 // PaymentList.TaxAmount.Get
 Function GetPaymentListTaxAmount(Parameters, _Key)
-	Return GetPropertyObject(Parameters, "PaymentList.TaxAmount", _Key);
+	Return GetPropertyObject(Parameters, BindPaymentListTaxAmount(Parameters).DataPath, _Key);
 EndFunction
 
 // PaymentList.TaxAmount.Bind
@@ -8380,13 +8412,14 @@ EndFunction
 
 // PaymentList.NetAmount.OnChange
 Procedure PaymentListNetAmountOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListNetAmountNotify", Parameters);
 	Binding = BindPaymentListNetAmount(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
 // PaymentList.NetAmount.Get
 Function GetPaymentListNetAmount(Parameters, _Key)
-	Return GetPropertyObject(Parameters, "PaymentList.NetAmount", _Key);
+	Return GetPropertyObject(Parameters, BindPaymentListNetAmount(Parameters).DataPath, _Key);
 EndFunction
 
 // PaymentList.NetAmount.Bind
@@ -8403,6 +8436,7 @@ EndFunction
 
 // PaymentList.TotalAmount.OnChange
 Procedure PaymentListTotalAmountOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListTotalAmountNotify", Parameters);
 	Binding = BindPaymentListTotalAmount(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -8410,12 +8444,12 @@ EndProcedure
 // PaymentList.TotalAmount.Set
 Procedure SetPaymentListTotalAmount(Parameters, Results) Export
 	Binding = BindPaymentListTotalAmount(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListTotalAmountNotify");
 EndProcedure
 
 // PaymentList.TotalAmount.Get
 Function GetPaymentListTotalAmount(Parameters, _Key)
-	Return GetPropertyObject(Parameters, "PaymentList.TotalAmount", _Key);
+	Return GetPropertyObject(Parameters, BindPaymentListTotalAmount(Parameters).DataPath, _Key);
 EndFunction
 
 // PaymentList.TotalAmount.Bind
@@ -8462,9 +8496,9 @@ EndFunction
 // PaymentList.Calculations.Set
 Procedure SetPaymentListCalculations(Parameters, Results) Export
 	Binding = BindPaymentListCalculations(Parameters);
-	SetterObject(Undefined, "PaymentList.NetAmount"   , Parameters, Results, , "NetAmount");
-	SetterObject(Undefined, "PaymentList.TaxAmount"   , Parameters, Results, , "TaxAmount");
-	SetterObject(Binding.StepsEnabler, "PaymentList.TotalAmount" , Parameters, Results, , "TotalAmount");
+	SetterObject(Undefined          , "PaymentList.NetAmount"  , Parameters, Results , "OnSetPaymentListNetAmountNotify"  , "NetAmount");
+	SetterObject(Undefined          , "PaymentList.TaxAmount"  , Parameters, Results , "OnSetPaymentListTaxAmountNotify"  , "TaxAmount");
+	SetterObject(Binding.StepsEnabler, "PaymentList.TotalAmount", Parameters, Results , "OnSetPaymentListTotalAmountNotify", "TotalAmount");
 EndProcedure
 
 // PaymentList.Calculations.Bind
@@ -8575,6 +8609,7 @@ EndProcedure
 
 // PaymentList.PaymentType.OnChange
 Procedure PaymentListPaymentTypeOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListPaymentTypeNotify", Parameters);
 	Binding = BindPaymentListPaymentType(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -8582,7 +8617,7 @@ EndProcedure
 // PaymentList.PaymentType.Set
 Procedure SetPaymentListPaymentType(Parameters, Results) Export
 	Binding = BindPaymentListPaymentType(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListPaymentTypeNotify");
 EndProcedure
 
 // PaymentList.PaymentType.Get
@@ -8628,6 +8663,7 @@ EndFunction
 
 // PaymentList.BankTerm.OnChange
 Procedure PaymentListBankTermOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListBankTermNotify", Parameters);
 	Binding = BindPaymentListBankTerm(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -8635,7 +8671,7 @@ EndProcedure
 // PaymentList.BankTerm.Set
 Procedure SetPaymentListBankTerm(Parameters, Results) Export
 	Binding = BindPaymentListBankTerm(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListBankTermNotify");
 EndProcedure
 
 // PaymentList.BankTerm.Get
@@ -8780,10 +8816,17 @@ EndProcedure
 
 #Region PAYMENT_LIST_FINANCIAL_MOVEMENT_TYPE
 
+// PaymentList.FinancialMovementType.OnChange
+Procedure PaymentListFinancialMovementTypeOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListFinancialMovementTypeNotify", Parameters);
+	Binding = BindPaymentListFinancialMovementType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
 // PaymentList.FinancialMovementType.Set
 Procedure SetPaymentListFinancialMovementType(Parameters, Results) Export
 	Binding = BindPaymentListFinancialMovementType(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListFinancialMovementTypeNotify");
 EndProcedure
 
 // PaymentList.FinancialMovementType.Get
@@ -16936,6 +16979,21 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	
 	ElsIf ViewNotify = "TaxesIncomingOutgoingAfterDeleteRowFormNotify"  Then ViewClient_V2.TaxesIncomingOutgoingAfterDeleteRowFormNotify(Parameters);
 	ElsIf ViewNotify = "OnChangeTaxesIncomingOutgoingTotalAmountNotify" Then ViewClient_V2.OnChangeTaxesIncomingOutgoingTotalAmountNotify(Parameters);
+	
+	//------------------------
+	ElsIf ViewNotify = "OnSetPaymentListPartnerNotify"                  Then ViewClient_V2.OnSetPaymentListPartnerNotify(Parameters);
+	ElsIf ViewNotify = "OnSetDetailsByRowNotify"                        Then ViewClient_V2.OnSetDetailsByRowNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListAgreementNotify"                Then ViewClient_V2.OnSetPaymentListAgreementNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListLegalNameNotify"                Then ViewClient_V2.OnSetPaymentListLegalNameNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListFinancialMovementTypeNotify"    Then ViewClient_V2.OnSetPaymentListFinancialMovementTypeNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListPaymentTypeNotify"              Then ViewClient_V2.OnSetPaymentListPaymentTypeNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListBankTermNotify"                 Then ViewClient_V2.OnSetPaymentListBankTermNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListTaxAmountNotify"                Then ViewClient_V2.OnSetPaymentListTaxAmountNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListNetAmountNotify"                Then ViewClient_V2.OnSetPaymentListNetAmountNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListTotalAmountNotify"              Then ViewClient_V2.OnSetPaymentListTotalAmountNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListVatRateNotify"                  Then ViewClient_V2.OnSetPaymentListVatRateNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListPlanningTransactionBasisNotify" Then ViewClient_V2.OnSetPaymentListPlanningTransactionBasisNotify(Parameters);
+	ElsIf ViewNotify = "PaymentListAfterDeleteRowFormNotify"            Then ViewClient_V2.PaymentListAfterDeleteRowFormNotify(Parameters);
 	
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);

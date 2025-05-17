@@ -266,9 +266,9 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	DetailsByRowAvailable = Object.PaymentList.Count() = 1;
-	Form.Items.DetailsByRow.Enabled          = DetailsByRowAvailable;
-	Form.Items.DetailsByRowNoSplits.Enabled  = DetailsByRowAvailable;
+	DetailsByRowEnabled = (Object.PaymentList.Count() <= 1);
+	Form.Items.DetailsByRow.Enabled          = DetailsByRowEnabled;
+	Form.Items.DetailsByRowNoSplits.Enabled  = DetailsByRowEnabled;
 	
 	Form.Items.GroupByRow.Visible    = Object.DetailsByRow;
 	Form.Items.GroupByList.Visible   = Not Object.DetailsByRow;

@@ -283,7 +283,7 @@ Scenario: _1002015 create Bank payment and check Aging register movements
 					| 'Bank account, TRY'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |

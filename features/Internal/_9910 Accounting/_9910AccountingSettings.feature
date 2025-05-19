@@ -2165,7 +2165,7 @@ Scenario: _0991070 check Bank receipt accounting movements (Payment from custome
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Cash/Bank account'           | 'Company'                                     | 'Business unit'   | 'Partner'                     | 'Credit' | 'Partner term'                                | 'Operation'                                                                                         |
 			| '3250'  | 'Bank account, TRY'           | 'Client 2'                                    | 'Business unit 1' | 'Customer 2 (2 partner term)' | '4010'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
@@ -2189,7 +2189,7 @@ Scenario: _0991071 check Bank payment accounting movements (Payment to the vendo
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
@@ -2214,7 +2214,7 @@ Scenario: _0991072 check Bank payment accounting movements (Payment to the vendo
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
 			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
@@ -2238,7 +2238,7 @@ Scenario: _0991073 check Bank payment accounting movements (Cash transfer order)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Cash/Bank account' | 'Company' | 'Partner' | 'Business unit' | 'Credit' | 'Operation'                                                                            |
 			| '3221'  | 'Bank account, TRY' | ''        | ''        | ''              | '3250'   | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)' |	
@@ -2261,7 +2261,7 @@ Scenario: _0991074 check Bank receipt accounting movements (Cash transfer order)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Cash/Bank account' | 'Company' | 'Business unit' | 'Partner' | 'Credit' | 'Operation'                                                                            |
 			| '3250'  | 'Bank account, TRY' | ''        | ''              | ''        | '3221'   | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)' |	
@@ -2284,7 +2284,7 @@ Scenario: _0991075 check Bank payment accounting movements (Currency exchange)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Cash/Bank account' | 'Company' | 'Partner' | 'Business unit' | 'Credit' | 'Operation'                                                                                |
 			| '3221'  | 'Bank account, TRY' | ''        | ''        | ''              | '3250'   | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)' |	
@@ -2308,7 +2308,7 @@ Scenario: _0991076 check Bank receipt accounting movements (Currency exchange)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Cash/Bank account' | 'Company'       | 'Partner' | 'Business unit' | 'Credit' | ' ' | 'Operation'                                                                                |
 			| '3221'  | 'Transit, TRY'      | 'Own company 2' | ''        | ''              | '9100'   | ''  | 'BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                               |
@@ -2336,7 +2336,7 @@ Scenario: _0991077 check Bank payment accounting movements (Return to customer)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                      | 'Business unit'   | 'Company'                                                 | 'Partner term'                                            | 'Credit' | 'Cash/Bank account'            | 'Operation'                                                                                         |
 			| '4010'  | 'Customer 1 (3 partner terms)' | 'Business unit 1' | 'Client 1'                                                | 'Partner term with customer (by document + credit limit)' | '3250'   | 'Bank account, TRY'            | 'BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)' |
@@ -2360,7 +2360,7 @@ Scenario: _0991078 check Bank receipt accounting movements (Return from vendor)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit'  | 'Cash/Bank account'   | 'Company'                                                | 'Business unit' | 'Partner'             | 'Credit' | 'Partner term'                                           | 'Operation'                                                                                   |
 			| '3250'   | 'Bank account, TRY'   | 'Client and vendor'                                      | ''              | 'Customer and vendor' | '4020.2' | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
@@ -2385,7 +2385,7 @@ Scenario: _0991079 check Bank receipt accounting movements (Other partner)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| "Debit" | "Cash/Bank account" | "Company"       | "Business unit" | "Partner"       | "Credit" | "Operation"                                                                |
 			| "3250"  | "Bank account, TRY" | "Other partner" | ""              | "Other partner" | "9200"   | "BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)" |	
@@ -2408,7 +2408,7 @@ Scenario: _0991081 check Bank receipt accounting movements (Other income)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Cash/Bank account' | 'Company' | 'Business unit'   | 'Credit' | ' ' | 'Operation'                                              |
 			| '3250'  | 'Bank account, TRY' | ''        | 'Business unit 3' | '9100'   | ''  | 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)' |	
@@ -2432,7 +2432,7 @@ Scenario: _0991082 check Bank payment accounting movements (Other partners)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Business unit' | 'Company'       | 'Partner'       | 'Credit' | 'Cash/Bank account' | 'Operation'                                                                |
 			| '9200'  | ''              | 'Other partner' | 'Other partner' | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
@@ -2457,7 +2457,7 @@ Scenario: _0991083 check Bank payment accounting movements (Other expense)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner' | 'Business unit'   | 'Company' | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
 			| '420.2' | ''        | 'Business unit 3' | ''        | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |	
@@ -2481,7 +2481,7 @@ Scenario: _0991084 check Bank payment accounting movements (Salary)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Company' | 'Business unit' | 'Operation'                                                    |
 			| '5401'  | ''  | '3250'   | 'Bank account, TRY' | ''        | ''              | 'BankPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)' |	
@@ -2506,7 +2506,7 @@ Scenario: _0991085 check Bank payment accounting movements (Employee cash advanc
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit'  | 'Partner'    | 'Business unit' | 'Company' | ' ' | 'Credit' | 'Cash/Bank account' | 'Operation'                                                          |
 			| '4020.1' | 'Employee 1' | ''              | ''        | ''  | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)' |	
@@ -2530,7 +2530,7 @@ Scenario: _0991086 check Bank payment accounting movements (Other expense)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner' | 'Business unit'   | 'Company' | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
 			| '420.2' | ''        | 'Business unit 3' | ''        | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |	
@@ -2554,7 +2554,7 @@ Scenario: _0991087 check Bank payment accounting movements (Salary)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner' | 'Business unit'   | 'Company' | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
 			| '420.2' | ''        | 'Business unit 3' | ''        | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |	
@@ -2760,7 +2760,7 @@ Scenario: _0991100 check Cash payment accounting movements
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
 			| '5201'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Vendor 1'                   | 'Partner term with vendor 1' | '3240'   | 'Cash, TRY'                 | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
@@ -2784,7 +2784,7 @@ Scenario: _0991110 check Cash receipt accounting movements
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Cash/Bank account'            | 'Company'                                                 | 'Partner'                      | 'Business unit'   | 'Credit' | 'Partner term'                                            | 'Operation'                                                                                         |
 			| '3240'  | 'Cash, TRY'                    | 'Client 1'                                                | 'Customer 1 (3 partner terms)' | 'Business unit 1' | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
@@ -2809,7 +2809,7 @@ Scenario: _0991120 check Cash expense accounting movements
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner' | 'Business unit'   | 'Company'       | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
 			| '420.2' | ''        | 'Business unit 1' | 'Own company 2' | 'Other expence'            | '3240'   | 'Cash, TRY'         | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
@@ -2832,7 +2832,7 @@ Scenario: _0991130 check Cash revenue accounting movements
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Cash/Bank account' | 'Company'       | 'Partner' | 'Business unit'   | 'Credit' | ' ' | 'Operation'                                              |
 			| '3240'  | 'Cash, TRY'         | 'Own company 2' | ''        | 'Business unit 1' | '9100'   | ''  | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' |	
@@ -3013,7 +3013,7 @@ Scenario: _0991160 check Employee cash advance accounting movements (with PI and
 		And I select current line in "List" table
 		And I click "Post" button		
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| "Debit" | "Partner"    | "Business unit"   | "Partner term"             | "Credit" | " " | "Operation"                                                                           |
 			| "5201"  | "Employee 1" | "Business unit 1" | "Vendor 4 (partner term) " | "4020.1" | ""  | "EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)" |		
@@ -3036,7 +3036,7 @@ Scenario: _0991161 check Employee cash advance accounting movements (without PI,
 		And I select current line in "List" table
 		And I click "Post" button		
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| "Debit" | "Partner"    | "Business unit"   | "Expense and revenue type" | "Credit" | " " | "Operation"                                                                     |
 			| "420.2" | "Employee 1" | "Business unit 1" | "Other expence"            | "4020.1" | ""  | "EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)"      |
@@ -3061,7 +3061,7 @@ Scenario: _0991162 check Employee cash advance accounting movements (without PI 
 		And I select current line in "List" table
 		And I click "Post" button		
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| "Debit" | "Partner"    | "Business unit"   | "Expense and revenue type" | "Credit" | " " | "Operation"                                                                     |
 			| "420.2" | "Employee 2" | "Business unit 1" | "Other expence"            | "4020.1" | ""  | "EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)"      |
@@ -3855,7 +3855,7 @@ Scenario: _0991228 check Bank payment accounting movements (Other partner, tax w
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And in the table "PaymentList" I click "Edit accounting" button
+		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Tax type'                    | 'Business unit' | 'Company'       | ' ' | 'Credit' | 'Cash/Bank account' | 'Operation'                                                                |
 			| '5301'  | 'Social Insurance (Employee)' | ''              | 'Tax authority' | ''  | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |

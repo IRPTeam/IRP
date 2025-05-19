@@ -1160,6 +1160,28 @@
         </code>
       </content>
     </items>
+    <items id="6e94a935-a622-4259-9851-305f2640a3d0">
+      <name>Document_FixedAssetRevaluation</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>168</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="ffe7e9b8-469f-4433-ab6d-baf472ee2c5a">
+        <name>FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>169</value>
+        </code>
+      </content>
+      <content id="42be3b68-b882-4b3e-9b5a-cb84a9a2fe13">
+        <name>FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>170</value>
+        </code>
+      </content>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

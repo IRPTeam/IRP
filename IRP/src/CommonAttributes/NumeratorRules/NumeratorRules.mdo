@@ -61,6 +61,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.FixedAssetRevaluation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.AdditionalCostAllocation</metadata>
     <use>Use</use>
   </content>

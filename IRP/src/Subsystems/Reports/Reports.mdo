@@ -26,4 +26,5 @@
   <subsystems>Manufacturing</subsystems>
   <subsystems>Accounting</subsystems>
   <subsystems>Salary</subsystems>
+  <subsystems>StandartReports</subsystems>
 </mdclass:Subsystem>

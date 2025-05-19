@@ -6,7 +6,6 @@
     <value>Old reports</value>
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
   <content>Report.A0010_TrialBalance</content>
   <content>Report.A0011_TrialBalanceByAccount</content>
   <content>Report.A0012_AccountCard</content>

@@ -455,7 +455,7 @@ Function GetAnalytics_Expenses_Depreciation(Parameters)
 	
 	// Credit
 	Credit = AccountingServer.GetT9015S_AccountsFixedAsset(AccountParameters, Parameters.RowData.FixedAsset);
-	AccountingAnalytics.Credit = Credit.AccountDepreciation;
+	AccountingAnalytics.Credit = Credit.Account;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	Return AccountingAnalytics;
 EndFunction
@@ -467,7 +467,7 @@ Function GetAnalytics_Depreciation_Revenues(Parameters)
 
 	// Debit
 	Debit = AccountingServer.GetT9015S_AccountsFixedAsset(AccountParameters, Parameters.RowData.FixedAsset);
-	AccountingAnalytics.Debit = Debit.AccountDepreciation;	
+	AccountingAnalytics.Debit = Debit.Account;	
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 
 	// Credit

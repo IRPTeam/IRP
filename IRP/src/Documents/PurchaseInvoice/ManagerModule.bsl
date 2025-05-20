@@ -727,7 +727,9 @@ Function ItemList()
 	       |	PurchaseInvoiceItemList.OtherPeriodExpenseType AS OtherPeriodExpenseType,
 	       |	case when PurchaseInvoiceItemList.ItemKey = PurchaseInvoiceItemList.Ref.Company.CurrencyRevaluationItemKey 
 	       |				then true else false end AS IsCurrencyRevaluation,
-	       |	ISNULL(PurchaseInvoiceItemList.Ref.CurrencyRevaluationInvoice.Ref, Undefined) AS CurrencyRevaluationInvoice
+	       |	ISNULL(PurchaseInvoiceItemList.Ref.CurrencyRevaluationInvoice.Ref, Undefined) AS CurrencyRevaluationInvoice,
+	       |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
 	       |INTO ItemList
 	       |FROM
 	       |	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList

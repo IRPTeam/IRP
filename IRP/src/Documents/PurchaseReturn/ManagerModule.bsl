@@ -378,7 +378,9 @@ Function ItemList()
 		   |	PurchaseReturnItemList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor) AS IsReturnToConsignor,
 		   |	PurchaseReturnItemList.VatRate AS VatRate,
 		   |	PurchaseReturnItemList.TaxAmount AS TaxAmount,
-		   |	PurchaseReturnItemList.Project
+		   |	PurchaseReturnItemList.Project,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
 		   |INTO ItemList
 		   |FROM
 		   |	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList

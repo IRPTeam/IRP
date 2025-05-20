@@ -494,7 +494,7 @@ Function R5020B_PartnersBalance_PI_WTI() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsPurchase
+		|	ItemList.IsPurchase AND ItemList.IsVendor
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Expense),
 		|	ItemList.Period,

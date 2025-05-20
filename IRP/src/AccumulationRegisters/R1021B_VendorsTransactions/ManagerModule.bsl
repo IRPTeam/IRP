@@ -139,7 +139,7 @@ Function R1021B_VendorsTransactions_PI_SRTC_WTI() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsPurchase
+		|	ItemList.IsPurchase AND ItemList.IsVendor
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,

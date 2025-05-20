@@ -149,7 +149,9 @@ Function ItemList()
 		   |				THEN Order.OffersAmount
 		   |			ELSE Order.OffersAmount / Order.QuantityInBaseUnit * Closing.QuantityInBaseUnit
 		   |		END
-		   |	END AS OffersAmount
+		   |	END AS OffersAmount,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
 		   |INTO ItemList
 		   |FROM
 		   |	Document.PurchaseOrder.ItemList AS Order

@@ -3,7 +3,8 @@
 
 &AtClient
 Procedure FillRecordersMapping(Command)
-	FillRecordersMappingAtServer();	
+	FillRecordersMappingAtServer();
+	NotifyChanged(Type("InformationRegisterRecordKey.T9069S_AccountingMappingRecordersDescription"));	
 EndProcedure
 
 &AtServer
@@ -42,11 +43,13 @@ Procedure FillRecordersMappingAtServer()
 	SelectionDetailRecords = QueryResult.Select();
 	
 	While SelectionDetailRecords.Next() Do
+		If IsBlankString(SelectionDetailRecords.RecorderName) Then
+			Continue;
+		EndIf;		
 		Record = InformationRegisters.T9069S_AccountingMappingRecordersDescription.CreateRecordManager();
 		Record.RecorderMetaName = SelectionDetailRecords.RecorderName;
 		Record.Write();
-	EndDo;
-	Items.InfRegisterRecordersDescriptions.Refresh();	
+	EndDo;		
 EndProcedure
 
 #EndRegion

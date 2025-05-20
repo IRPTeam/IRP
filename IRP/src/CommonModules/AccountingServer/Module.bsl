@@ -4115,13 +4115,14 @@ Function RecorderPresentationStructure(RecorderMetaName, RecorderDate, RecorderN
 	
 	Query = New Query;
 	Query.SetParameter("RecorderMetaName", RecorderMetaName);
-	Query.Text =
-		"SELECT
-		|	T9069S_AccountingMappingRecordersDescription.RecorderMetaName,
-		|	T9069S_AccountingMappingRecordersDescription.Description_en,
-		|	T9069S_AccountingMappingRecordersDescription.Description_ru,
-		|	T9069S_AccountingMappingRecordersDescription.Description_tr
-		|FROM
+	Query.Text = "SELECT T9069S_AccountingMappingRecordersDescription.RecorderMetaName,";
+	StringsArray = New Array;
+	For Each Description In AllDescriptionArray Do
+		StringsArray.Add(StrTemplate("T9069S_AccountingMappingRecordersDescription.%1", Description));
+	EndDo;
+	Query.Text = Query.Text + StrConcat(StringsArray, ",");
+	Query.Text = Query.Text +  	
+		" FROM
 		|	InformationRegister.T9069S_AccountingMappingRecordersDescription AS T9069S_AccountingMappingRecordersDescription
 		|WHERE
 		|	T9069S_AccountingMappingRecordersDescription.RecorderMetaName = &RecorderMetaName";
@@ -4130,28 +4131,12 @@ Function RecorderPresentationStructure(RecorderMetaName, RecorderDate, RecorderN
 	Selection = QueryResult.Select();
 	If Selection.Next() Then
 		For Each Description In AllDescriptionArray Do
-			LangCode = LangCodeFromDescription(Description);
-			Structure[Description] = StrTemplate("%1 %2 %3 %4", Selection[Description], RecorderNumber, LocalizationReuse.Strings(LangCode).DatePresentation, RecorderDate);;		
+			LangCode = StrReplace(Description, "Description_", "");			
+			Structure[Description] = StrTemplate("%1 %2 %3 %4", Selection[Description], RecorderNumber, R(LangCode).DatePresentation, RecorderDate);		
 		EndDo;				
-	EndIf;
+	EndIf;	
 	Return Structure;
 EndFunction
-
-// Lang code from description.
-// 
-// Parameters:
-//  Description - String
-// 
-// Returns:
-//  String - Lang code from description
-Function LangCodeFromDescription(Description)
-	LangCode = "en";
-	Counter = StrFind(Description, "_");
-	If Counter > 0 Then
-		LangCode = Mid(Description, Counter + 1);
-	EndIf;
-	Return LangCode;
-EndFunction	
 
 Procedure SetRates(DocObject, LedgerType, Data, IntegrationSettings)
 	LedgerTypeCurrency = LedgerType.CurrencyMovementType.Currency;

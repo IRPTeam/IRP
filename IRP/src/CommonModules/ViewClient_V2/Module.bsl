@@ -2303,7 +2303,7 @@ Async Function ItemListSplitRow(Object, Form) Export
 		For Each Row In SerialTable Do
 			If Row.Quantity <= CurrentDataQuantity Then
 				CurrentDataQuantity = CurrentDataQuantity - Row.Quantity;
-			ElsIf Row.Quantity > CurrentDataQuantity AND CurrentDataQuantity > 0 Then
+			ElsIf Row.Quantity > CurrentDataQuantity And CurrentDataQuantity > 0 Then
 				CurrentRowQuantity = Row.Quantity;
 				Row.Quantity = CurrentDataQuantity;
 				
@@ -2312,12 +2312,38 @@ Async Function ItemListSplitRow(Object, Form) Export
 				NewSerial.Quantity = CurrentRowQuantity - Row.Quantity;
 				NewSerial.Key = NewRow.Key;
 				CurrentDataQuantity = 0;
+				
+				If Object.Property("SourceOfOrigins") Then
+					SourceOfOriginsTable = 
+						Object.SourceOfOrigins.FindRows(New Structure("Key, SerialLotNumber", CurrentData.Key, Row.SerialLotNumber));
+				
+					For Each RowSoO In SourceOfOriginsTable Do
+						RowSoO.Quantity = Row.Quantity;
+						
+						NewSoO = Object.SourceOfOrigins.Add();
+						FillPropertyValues(NewSoO, NewSerial);
+						NewSoO.SourceOfOrigin = RowSoO.SourceOfOrigin; 
+					EndDo;
+			
+				EndIf;
+				
 			Else
+				OldRowKey = Row.Key;
 				Row.Key = NewRow.Key;
-			EndIf;
+				If Object.Property("SourceOfOrigins") Then
+					SourceOfOriginsTable = 
+						Object.SourceOfOrigins.FindRows(New Structure("Key, SerialLotNumber", OldRowKey, Row.SerialLotNumber));
+				
+					For Each RowSoO In SourceOfOriginsTable Do
+						FillPropertyValues(RowSoO, Row);
+					EndDo;
+			
+				EndIf;
+			
+			EndIf;			
 		EndDo;
 	EndIf;
-	
+			
 	RowIDInfoTable = Object.RowIDInfo.FindRows(New Structure("Key", CurrentData.Key));
 	If RowIDInfoTable.Count() > 0 Then
 		For Each Row In RowIDInfoTable Do
@@ -2338,6 +2364,7 @@ Async Function ItemListSplitRow(Object, Form) Export
 	EndIf;
 	
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
 	RowIDInfoClient.UpdateQuantity(Object, Form);
 	SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Object, Form);	
 	Return NewRow;

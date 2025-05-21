@@ -40,4 +40,18 @@
       <value>Transaction (Customer)</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="1b82ec7b-9667-4f44-84c1-04e4614e7ded">
+    <name>OtherPartnerPayable</name>
+    <synonym>
+      <key>en</key>
+      <value>Other partner (payable)</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="e3aaa14e-335a-419c-86e0-05de150d440e">
+    <name>OtherPartnerReceivable</name>
+    <synonym>
+      <key>en</key>
+      <value>Other partner (receivable)</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

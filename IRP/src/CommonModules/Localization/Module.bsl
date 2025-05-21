@@ -310,7 +310,9 @@
 // * Error_PartnerBalanceCheckfailed - String - 
 // * Error_145 - String - 
 // * Error_146 - String - 
-// * Error_147 - String - 
+// * Error_147 - String -
+// * Error_148 - String - 
+// * Error_181 - String -
 // * Error_FillTotalAmount - String - 
 // * MF_Error_001 - String - 
 // * MF_Error_002 - String - 
@@ -2182,7 +2184,7 @@ Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTa
 	NStr("en = 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R3040B_WithholdingTax)'", Lang));
 
 	
-Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External accounting operation exchange report'", Lang));	
+Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External accounting operation exchange report'", Lang));
 
 #EndRegion
 
@@ -2274,7 +2276,9 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	// %1 - Object presentation
 	// %2 - Document number
 	// %3 - Document date
-	Strings.Insert("DocPresentation", NStr("en = '%1 %2 dated %3'", Lang));	
+	Strings.Insert("DocPresentation", NStr("en = '%1 %2 dated %3'", Lang));
+	
+	Strings.Insert("DatePresentation", NStr("en = 'dated'", Lang));	
 #EndRegion
 
 #Region PeriodClosing

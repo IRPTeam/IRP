@@ -3975,9 +3975,12 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 		Else
 			DocObject = QueryTable[0].DocRef.GetObject();
 		EndIf;
-				
+		
 		FillPropertyValues(DocObject, QueryTable[0], , "Posted");
 		DocObject.Date = QueryTable[0].RecorderDate;
+		
+		RecorderPresentationStructure = RecorderPresentationStructure(Data.RecorderName, DocObject.Date, Data.RecorderNumber);
+		FillPropertyValues(DocObject, RecorderPresentationStructure, "Description_en, Description_ru, Description_tr");
 		
 		DocObject.Records.Clear();
 		DocObject.Errors.Clear();
@@ -4086,6 +4089,53 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 	ResultStructure.EAORef = DocObject.Ref;
 	
 	Return ResultStructure;
+EndFunction
+
+// Recorder presentation structure.
+// 
+// Parameters:
+//  RecorderMetaName - String
+// 
+// Returns:
+//  Structure - Recorder presentation structure:
+// * Description_en - String - 
+// * Description_ru - String - 
+// * Description_tr - String - 
+Function RecorderPresentationStructure(RecorderMetaName, RecorderDate, RecorderNumber) Export
+	AllDescriptionArray =  LocalizationServer.AllDescription();
+	Index = AllDescriptionArray.Find("Description_hash");
+	If Index <> Undefined Then
+		AllDescriptionArray.Delete(Index);
+	EndIf;	
+		
+	Structure = New Structure;
+	For Each Description In AllDescriptionArray Do
+		Structure.Insert(Description, "");		
+	EndDo;	
+	
+	Query = New Query;
+	Query.SetParameter("RecorderMetaName", RecorderMetaName);
+	Query.Text = "SELECT T9069S_AccountingMappingRecordersDescription.RecorderMetaName,";
+	StringsArray = New Array;
+	For Each Description In AllDescriptionArray Do
+		StringsArray.Add(StrTemplate("T9069S_AccountingMappingRecordersDescription.%1", Description));
+	EndDo;
+	Query.Text = Query.Text + StrConcat(StringsArray, ",");
+	Query.Text = Query.Text +  	
+		" FROM
+		|	InformationRegister.T9069S_AccountingMappingRecordersDescription AS T9069S_AccountingMappingRecordersDescription
+		|WHERE
+		|	T9069S_AccountingMappingRecordersDescription.RecorderMetaName = &RecorderMetaName";
+	
+	QueryResult = Query.Execute();
+	Selection = QueryResult.Select();
+	If Selection.Next() Then
+		For Each Description In AllDescriptionArray Do
+			LangCode = StrReplace(Description, "Description_", "");			
+			Structure[Description] = StrTemplate("%1 %2 %3 %4", Selection[Description], RecorderNumber, R(LangCode).DatePresentation, RecorderDate);		
+		EndDo;				
+	EndIf;	
+	Return Structure;
 EndFunction
 
 Procedure SetRates(DocObject, LedgerType, Data, IntegrationSettings)

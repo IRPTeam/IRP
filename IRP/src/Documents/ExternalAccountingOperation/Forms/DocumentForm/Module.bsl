@@ -11,6 +11,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
+	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
+	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 EndProcedure
 
 &AtServer
@@ -290,6 +292,11 @@ EndProcedure
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
 	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure DescriptionOpening(Item, StandardProcessing) Export
+	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion

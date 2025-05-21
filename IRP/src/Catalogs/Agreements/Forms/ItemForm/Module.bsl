@@ -28,6 +28,7 @@ EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
+	CheckDocumentExisting();
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -103,6 +104,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.TradeAgentFeePercent.Visible = (IsConsignor Or IsTradeAgent)
 		And Object.TradeAgentFeeType = PredefinedValue("Enum.TradeAgentFeeTypes.Percent");
+		
+	If Form.DocumentsExist Then
+		For Each FormItem In Form.Items Do
+			If TypeOf(FormItem) <> Type("FormField") 
+				OR FormItem.Parent = Form.Items.GroupDescriptions
+				OR FormItem.Parent = Form.Items.GroupPeriodOfUse
+				OR FormItem = Form.Items.Date
+				OR FormItem = Form.Items.Number
+				OR FormItem = Form.Items.Account
+			Then
+				Continue;
+			EndIf;
+			FormItem.ReadOnly = True;
+		EndDo;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -324,6 +340,25 @@ Procedure SetNewNumberAtServer()
 			NumberingRulesServer.GetNumeratorGroupForCatalog(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
+EndProcedure
+
+&AtServer
+Procedure CheckDocumentExisting()
+
+	Query = New Query;
+	Query.SetParameter("Ref", Object.Ref);
+	
+	Query.Text =
+	"SELECT ALLOWED TOP 1
+	|	AgreementDocuments.Ref
+	|FROM
+	|	FilterCriterion.AgreementDocuments(&Ref) AS AgreementDocuments
+	|WHERE
+	|	AgreementDocuments.Ref.Posted";
+	
+	QueryResult = Query.Execute().Select();
+	DocumentsExist = QueryResult.Next(); 
+
 EndProcedure
 
 #Region AddAttributes

@@ -321,6 +321,7 @@ Function R5015B_OtherPartnersTransactions()
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Basis,
 		|	ItemList.Key,
 		|	SUM(ItemList.Amount) AS Amount
 		|INTO R5015B_OtherPartnersTransactions
@@ -337,6 +338,7 @@ Function R5015B_OtherPartnersTransactions()
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
 		|	ItemList.Key";
 EndFunction
 

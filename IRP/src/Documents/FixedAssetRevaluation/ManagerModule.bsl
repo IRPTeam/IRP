@@ -29,6 +29,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	PostingServer.SetRegisters(Tables, Ref);
 	
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5021T_Revenues.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R8510B_BookValueOfFixedAsset.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
@@ -170,6 +171,12 @@ Function R5022T_Expenses()
 		|	Calculations.ExpenseType,
 		|	Calculations.Amount,
 		|	&Date AS Period,
+		|	Undefined AS ItemKey,
+		|	Undefined AS AdditionalAnalytic,
+		|	Undefined AS Project,
+		|	Calculations.Key,
+		|	Calculations.Amount AS AmountWithTaxes,
+		|	Undefined AS AmountCost,
 		|	Calculations.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency
 		|INTO R5022T_Expenses
 		|FROM
@@ -189,6 +196,12 @@ Function R5021T_Revenues()
 		|	Calculations.RevenueType,
 		|	Calculations.Amount,
 		|	&Date AS Period,
+		|	Undefined AS ItemKey,
+		|	Undefined AS AdditionalAnalytic,
+		|	Undefined AS Project,
+		|	Calculations.Key,
+		|	Calculations.Amount AS AmountWithTaxes,
+		|	Undefined AS AmountCost,
 		|	Calculations.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency
 		|INTO R5021T_Revenues
 		|FROM

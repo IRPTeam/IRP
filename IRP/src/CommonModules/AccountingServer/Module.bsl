@@ -3811,8 +3811,7 @@ Procedure LoadAccountingOpeningEntry(IntegrationSettings, Date, RegisterName = "
 			Else
 				DeleteExternalAccountingOperation(IntegrationSettings, Data, ExternalRegister.LedgerType);
 			EndIf;
-		EndDo;
-		
+		EndDo;		
 	EndDo;
 EndProcedure
 

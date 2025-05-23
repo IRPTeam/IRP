@@ -7,6 +7,7 @@ Function Tests() Export
 	TestList.Add("CommonFunctionsServer_GetAttributesFromRef");
 	TestList.Add("GetItemInfo_GetPackageDimensions");
 	TestList.Add("CommonFunctionsClientServer_isBase64Value");
+	TestList.Add("SystemAttributesSets_CheckModules");
 	Return TestList;
 EndFunction
 
@@ -342,4 +343,100 @@ Function CommonFunctionsClientServer_isBase64Value() Export
 
 	Return Undefined;
 EndFunction
+
+//@skip-check property-return-type
+Function SystemAttributesSets_CheckModules() Export
+
+	ArrayOfErrors = New Array(); // Array of String
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	SystemAttributesSets.Ref,
+	|	SystemAttributesSets.PredefinedDataName
+	|FROM
+	|	Catalog.SystemAttributesSets AS SystemAttributesSets
+	|WHERE
+	|	NOT SystemAttributesSets.DeletionMark
+	|	AND SystemAttributesSets.Predefined";
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+
+	While QuerySelection.Next() Do
+		
+		//@skip-check invocation-parameter-type-intersect
+		NameSegments = StrSplit(QuerySelection.PredefinedDataName, "_");
+		If NameSegments.Count() <> 2 Then
+			ArrayOfErrors.Add("Wrong predefined data name: " + QuerySelection.PredefinedDataName);
+			Continue;
+		EndIf;
+		
+		//@skip-check statement-type-change
+		If NameSegments[0] = "Document" Then
+			MetadataTypeManager = Documents;
+		ElsIf NameSegments[0] = "Catalog" Then
+			MetadataTypeManager = Catalogs;
+		Else
+			ArrayOfErrors.Add("Not found type manager: " + NameSegments[0]);
+			Continue;
+		EndIf;
+		
+		Try
+			MetadataManager = MetadataTypeManager[NameSegments[1]];
+		Except
+			ArrayOfErrors.Add("Not found manager: " + QuerySelection.PredefinedDataName);
+			Continue;
+		EndTry;
+		
+		Try
+			//@skip-check dynamic-access-method-not-found, variable-value-type
+			PredefinedSystemAttributes = MetadataManager.GetPredefinedSystemAttributes();
+		Except
+			ArrayOfErrors.Add("Not found method: " + QuerySelection.PredefinedDataName + ".GetPredefinedSystemAttributes()");
+			Continue;
+		EndTry;
+		
+		If TypeOf(PredefinedSystemAttributes) <> Type("Array") Then
+			ArrayOfErrors.Add("Wrong return from method: " + QuerySelection.PredefinedDataName + ".GetPredefinedSystemAttributes()");
+			Continue;
+		EndIf;
+		
+		Try
+			//@skip-check dynamic-access-method-not-found, variable-value-type
+			SystemAttributeValues = MetadataManager.GetSystemAttributeValues(Undefined, Undefined);
+		Except
+			ArrayOfErrors.Add("Not found method: " + QuerySelection.PredefinedDataName + ".GetSystemAttributeValues()");
+			Continue;
+		EndTry;
+		
+		If TypeOf(SystemAttributeValues) <> Type("Array") Then
+			ArrayOfErrors.Add("Wrong return from method: " + QuerySelection.PredefinedDataName + ".GetSystemAttributeValues()");
+			Continue;
+		EndIf;
+		
+		CharacteristicExists = False;
+		MetadataObject = Metadata.FindByType(TypeOf(MetadataManager.EmptyRef()));
+		MetadaCharacteristics = MetadataObject.Characteristics; // MetadataObjectCollection
+		For Each CharacteristicRow In MetadaCharacteristics Do
+			If CharacteristicRow.TypesFilterValue = QuerySelection.Ref Then
+				CharacteristicExists = True;
+				Break;
+			EndIf;
+		EndDo;
+		If Not CharacteristicExists Then
+			ArrayOfErrors.Add("Characteristics not set for: " + QuerySelection.PredefinedDataName);
+			Continue;
+		EndIf;
+		
+	EndDo;
+	
+	If ArrayOfErrors.Count() Then
+		Unit_Service.assertFalse("Check System Attributes settings: " + Chars.LF +
+			StrConcat(ArrayOfErrors, Chars.LF));
+	EndIf;
+
+	Return Undefined;
+
+EndFunction
+
 #EndRegion

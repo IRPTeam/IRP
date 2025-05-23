@@ -3,6 +3,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocBankPaymentServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
+	SystemAttributesServer.OutputSystemAttributes(ThisObject, "Company");
 	Items.IsHaveJE.Visible = FOServer.IsUseAccounting();
 EndProcedure
 

@@ -13,32 +13,22 @@ EndProcedure
 
 &AtServer
 Procedure FillDefaultDescriptionsAtServer()
-	Query = New Query;
-	Query.Text =
+	
+	Query = New Query();
+	Query.Text = 
 	"SELECT
-	|	SystemAttributes.Ref
+	|	SystemAttributes.Ref,
+	|	SystemAttributes.PredefinedDataName
 	|FROM
-	|	ChartOfCharacteristicTypes.SystemAttributes AS SystemAttributes";
+	|	ChartOfCharacteristicTypes.SystemAttributes AS SystemAttributes
+	|WHERE
+	|	SystemAttributes.Predefined";
+	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
-	Langs = New Array();
-	For Each Attr In Metadata.CommonAttributes Do
-		If StrStartsWith(Attr.Name, "Description_") Then
-			Langs.Add(StrReplace(Attr.Name, "Description_", ""));
-		EndIf;
-	EndDo;
-	
 	While QuerySelection.Next() Do
-		Obj = QuerySelection.Ref.GetObject();
-		
-		For Each Lang In Langs Do
-			If Upper(Lang) = Upper("hash") Then
-				Continue;
-			EndIf;
-			Obj["Description_" + Lang] = 
-				LocalizationReuse.Strings(Lang)["SystemAttribute_" + Obj.PredefinedDataName];
-			Obj.Write();
-		EndDo;
+		ChartsOfCharacteristicTypes.SystemAttributes.UpdatePredefinedNames(QuerySelection.PredefinedDataName);
 	EndDo;
+
 EndProcedure

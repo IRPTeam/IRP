@@ -1,8 +1,17 @@
 
 #Region FormEvents
 
+// On create at server.
+// 
+// Parameters:
+//  Object - DocumentObjectDocumentName - Object
+//  Form - ClientApplicationForm - Form
+//  Cancel - Boolean - Cancel
+//  StandardProcessing - Boolean - Standard processing
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	
+	SetDocumentState(Object, Form);
+		
 	If Form.Parameters.Key.IsEmpty() Then
 		SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
 	EndIf;
@@ -54,7 +63,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 EndProcedure
 
 Procedure OnWriteAtServer(Object, Form, Cancel, CurrentObject, WriteParameters) Export
-	Return;
+	SetDocumentState(CurrentObject, Form);
 EndProcedure
 
 #EndRegion
@@ -1217,3 +1226,15 @@ EndProcedure
 Function GenerateDocumentNumber(Object) Export
 	Return Object.DocumentNumber;
 EndFunction
+
+Procedure SetDocumentState(Object, Form) Export
+	FormPostAndClose = Form.Items.FormPostAndClose; // FormButton
+	If Object.DeletionMark Then
+		FormPostAndClose.Picture = PictureLib.DocumentDeleted;
+	ElsIf Object.Posted Then 
+		FormPostAndClose.Picture = PictureLib.DocumentPosted;
+	Else
+		FormPostAndClose.Picture = PictureLib.DocumentUnposted;
+	EndIf;
+	FormPostAndClose.Representation = ButtonRepresentation.PictureAndText;
+EndProcedure

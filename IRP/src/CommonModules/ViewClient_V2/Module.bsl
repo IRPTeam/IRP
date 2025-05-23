@@ -1010,6 +1010,12 @@ EndProcedure
 
 #Region FORM
 
+// On open.
+// 
+// Parameters:
+//  Object - FormDataStructure - Object
+//  Form - ClientApplicationForm - Form
+//  TableNames - String - Table names
 Procedure OnOpen(Object, Form, TableNames) Export
 	UpdateCacheBeforeChange(Object, Form);
 	For Each TableName In StrSplit(TableNames, ",") Do

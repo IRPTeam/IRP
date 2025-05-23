@@ -235,6 +235,9 @@
   <commonPictures>CommonPicture.Unlock</commonPictures>
   <commonPictures>CommonPicture.Waiting</commonPictures>
   <commonPictures>CommonPicture.Work</commonPictures>
+  <commonPictures>CommonPicture.DocumentUnposted</commonPictures>
+  <commonPictures>CommonPicture.DocumentPosted</commonPictures>
+  <commonPictures>CommonPicture.DocumentDeleted</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>

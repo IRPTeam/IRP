@@ -97,28 +97,28 @@ EndFunction
 &AtClientAtServerNoContext
 Function GetFormAttributeMapping() Export
 	Map = New Map();
-	Map.Insert("PaymentList.Employee"                , " PaymentListEmployeeNoSplits");
-	Map.Insert("PaymentList.PaymentPeriod"           , " PaymentListPaymentPeriodNoSplits");
-	Map.Insert("PaymentList.CalculationType"         , " PaymentListCalculationTypeNoSplits");
-	Map.Insert("PaymentList.RetailCustomer"          , " PaymentListRetailCustomerNoSplits");
-	Map.Insert("PaymentList.Partner"                 , " PaymentListPartnerNoSplits");
-	Map.Insert("PaymentList.Payer"                   , " PaymentListPayerNoSplits");
-	Map.Insert("PaymentList.Agreement"               , " PaymentListAgreementNoSplits");
-	Map.Insert("PaymentList.LegalNameContract"       , " PaymentListLegalNameContractNoSplits");
-	Map.Insert("PaymentList.BasisDocument"           , " PaymentListBasisDocumentNoSplits");
-	Map.Insert("PaymentList.Project"                 , " PaymentListProjectNoSplits");
-	Map.Insert("PaymentList.Order"                   , " PaymentListOrderNoSplits");
-	Map.Insert("PaymentList.VatRate"                 , " PaymentListVatRateNoSplits");
-	Map.Insert("PaymentList.NetAmount"               , " PaymentListNetAmountNoSplits");
-	Map.Insert("PaymentList.TaxAmount"               , " PaymentListTaxAmountNoSplits");
-	Map.Insert("PaymentList.TotalAmount"             , " PaymentListTotalAmountNoSplits");
-	Map.Insert("PaymentList.FinancialMovementType"   , " PaymentListFinancialMovementTypeNoSplits");
-	Map.Insert("PaymentList.CashFlowCenter"          , " PaymentListCashFlowCenterNoSplits");
-	Map.Insert("PaymentList.SendingAccount"          , " PaymentListSendingAccountNoSplits");
-	Map.Insert("PaymentList.SendingBranch"           , " PaymentListSendingBranchNoSplits");
-	Map.Insert("PaymentList.AmountExchange"          , " PaymentListAmountExchangeNoSplits");
-	Map.Insert("PaymentList.PlaningTransactionBasis" , " PaymentListPlaningTransactionBasisNoSplits");
-	Map.Insert("PaymentList.MoneyTransfer"           , " PaymentListMoneyTransferNoSplits");
+	Map.Insert("PaymentList.Employee"                , "PaymentListEmployeeNoSplits");
+	Map.Insert("PaymentList.PaymentPeriod"           , "PaymentListPaymentPeriodNoSplits");
+	Map.Insert("PaymentList.CalculationType"         , "PaymentListCalculationTypeNoSplits");
+	Map.Insert("PaymentList.RetailCustomer"          , "PaymentListRetailCustomerNoSplits");
+	Map.Insert("PaymentList.Partner"                 , "PaymentListPartnerNoSplits");
+	Map.Insert("PaymentList.Payer"                   , "PaymentListPayerNoSplits");
+	Map.Insert("PaymentList.Agreement"               , "PaymentListAgreementNoSplits");
+	Map.Insert("PaymentList.LegalNameContract"       , "PaymentListLegalNameContractNoSplits");
+	Map.Insert("PaymentList.BasisDocument"           , "PaymentListBasisDocumentNoSplits");
+	Map.Insert("PaymentList.Project"                 , "PaymentListProjectNoSplits");
+	Map.Insert("PaymentList.Order"                   , "PaymentListOrderNoSplits");
+	Map.Insert("PaymentList.VatRate"                 , "PaymentListVatRateNoSplits");
+	Map.Insert("PaymentList.NetAmount"               , "PaymentListNetAmountNoSplits");
+	Map.Insert("PaymentList.TaxAmount"               , "PaymentListTaxAmountNoSplits");
+	Map.Insert("PaymentList.TotalAmount"             , "PaymentListTotalAmountNoSplits");
+	Map.Insert("PaymentList.FinancialMovementType"   , "PaymentListFinancialMovementTypeNoSplits");
+	Map.Insert("PaymentList.CashFlowCenter"          , "PaymentListCashFlowCenterNoSplits");
+	Map.Insert("PaymentList.SendingAccount"          , "PaymentListSendingAccountNoSplits");
+	Map.Insert("PaymentList.SendingBranch"           , "PaymentListSendingBranchNoSplits");
+	Map.Insert("PaymentList.AmountExchange"          , "PaymentListAmountExchangeNoSplits");
+	Map.Insert("PaymentList.PlaningTransactionBasis" , "PaymentListPlaningTransactionBasisNoSplits");
+	Map.Insert("PaymentList.MoneyTransfer"           , "PaymentListMoneyTransferNoSplits");
 	Return Map;
 EndFunction
 

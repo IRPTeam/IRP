@@ -8696,6 +8696,7 @@ EndFunction
 
 // PaymentList.Commission.OnChange
 Procedure PaymentListCommissionOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListCommissionNotify", Parameters);
 	Binding = BindPaymentListCommission(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -8703,7 +8704,7 @@ EndProcedure
 // PaymentList.Commission.Set
 Procedure SetPaymentListCommission(Parameters, Results) Export
 	Binding = BindPaymentListCommission(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListCommissionNotify");
 EndProcedure
 
 // PaymentList.Commission.Get
@@ -8748,6 +8749,7 @@ EndProcedure
 
 // PaymentList.CommissionPercent.OnChange
 Procedure PaymentListCommissionPercentOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListCommissionPercentNotify", Parameters);
 	Binding = BindPaymentListCommissionPercent(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -8755,7 +8757,7 @@ EndProcedure
 // PaymentList.CommissionPercent.Set
 Procedure SetPaymentListCommissionPercent(Parameters, Results) Export
 	Binding = BindPaymentListCommissionPercent(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListCommissionPercentNotify");
 EndProcedure
 
 // PaymentList.CommissionPercent.Get
@@ -16980,7 +16982,6 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "TaxesIncomingOutgoingAfterDeleteRowFormNotify"  Then ViewClient_V2.TaxesIncomingOutgoingAfterDeleteRowFormNotify(Parameters);
 	ElsIf ViewNotify = "OnChangeTaxesIncomingOutgoingTotalAmountNotify" Then ViewClient_V2.OnChangeTaxesIncomingOutgoingTotalAmountNotify(Parameters);
 	
-	//------------------------
 	ElsIf ViewNotify = "OnSetPaymentListPartnerNotify"                  Then ViewClient_V2.OnSetPaymentListPartnerNotify(Parameters);
 	ElsIf ViewNotify = "OnSetDetailsByRowNotify"                        Then ViewClient_V2.OnSetDetailsByRowNotify(Parameters);
 	ElsIf ViewNotify = "OnSetPaymentListAgreementNotify"                Then ViewClient_V2.OnSetPaymentListAgreementNotify(Parameters);
@@ -16994,6 +16995,8 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetPaymentListVatRateNotify"                  Then ViewClient_V2.OnSetPaymentListVatRateNotify(Parameters);
 	ElsIf ViewNotify = "OnSetPaymentListPlanningTransactionBasisNotify" Then ViewClient_V2.OnSetPaymentListPlanningTransactionBasisNotify(Parameters);
 	ElsIf ViewNotify = "PaymentListAfterDeleteRowFormNotify"            Then ViewClient_V2.PaymentListAfterDeleteRowFormNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListCommissionNotify"               Then ViewClient_V2.OnSetPaymentListCommissionNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListCommissionPercentNotify"        Then ViewClient_V2.OnSetPaymentListCommissionPercentNotify(Parameters);
 	
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);

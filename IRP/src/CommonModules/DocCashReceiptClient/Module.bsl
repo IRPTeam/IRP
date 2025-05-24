@@ -1,9 +1,28 @@
 #Region FORM
 
 Procedure OnOpen(Object, Form, Cancel) Export
+	AddNewSingleRow(Object, Form);
 	ViewClient_V2.OnOpen(Object, Form, "PaymentList");
 EndProcedure
 
+Procedure AddNewSingleRow(Object, Form)
+	If Object.DetailsByRow Then
+		If Object.PaymentList.Count() = 0 Then
+			NewRowCancel = False;
+			ViewClient_V2.PaymentListBeforeAddRow(Object, Form, NewRowCancel, False);
+		EndIf;
+	EndIf;	
+EndProcedure
+
+#EndRegion
+
+#Region DETAILS_BY_ROW
+
+Procedure DetailsByRowOnChange(Object, Form, Item) Export
+	AddNewSingleRow(Object, Form);
+	ViewClient_V2.DetailsByRowOnChange(Object, Form, "PaymentList");
+EndProcedure
+	
 #EndRegion
 
 #Region _DATE
@@ -104,11 +123,11 @@ EndProcedure
 
 #Region PARTNER
 
-Procedure PaymentListPartnerOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListPartnerOnChange(Object, Form, CurrentData);
+Procedure PaymentListPartnerOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
+	ViewClient_V2.PaymentListPartnerOnChange(Object, Form, CurrentData, FormAttributeUpdateDirection);
 EndProcedure
 
-Procedure PaymentListPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+Procedure PaymentListPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, CurrentData = Undefined) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 
 	OpenSettings.ArrayOfFilters = New Array();
@@ -122,17 +141,21 @@ Procedure PaymentListPartnerStartChoice(Object, Form, Item, ChoiceData, Standard
 		If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange") Then
 			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Employee", True, DataCompositionComparisonType.Equal));
 		EndIf;
-	
-		If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then
-			OpenSettings.FormParameters.Insert("Company", Form.Items.PaymentList.CurrentData.Payer);
+		
+		If CurrentData = Undefined Then
+			CurrentData = Form.Items.PaymentList.CurrentData;
+		EndIf;
+		
+		If ValueIsFilled(CurrentData.Payer) Then
+			OpenSettings.FormParameters.Insert("Company", CurrentData.Payer);
 			OpenSettings.FormParameters.Insert("FilterPartnersByCompanies", True);
 		EndIf;
-		OpenSettings.FillingData.Insert("Company", Form.Items.PaymentList.CurrentData.Payer);
+		OpenSettings.FillingData.Insert("Company", CurrentData.Payer);
 	EndIf;
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
-Procedure PaymentListPartnerEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+Procedure PaymentListPartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, CurrentData = Undefined) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	AdditionalParameters = New Structure();
@@ -143,8 +166,13 @@ Procedure PaymentListPartnerEditTextChange(Object, Form, Item, Text, StandardPro
 		If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange") Then
 			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Employee", True, ComparisonType.Equal));
 		EndIf;
-		If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then
-			AdditionalParameters.Insert("Company", Form.Items.PaymentList.CurrentData.Payer);
+		
+		If CurrentData = Undefined Then
+			CurrentData = Form.Items.PaymentList.CurrentData;
+		EndIf;
+		
+		If ValueIsFilled(CurrentData.Payer) Then
+			AdditionalParameters.Insert("Company", CurrentData.Payer);
 			AdditionalParameters.Insert("FilterPartnersByCompanies", True);
 		EndIf;
 	EndIf;
@@ -155,32 +183,42 @@ EndProcedure
 
 #Region PAYER
 
-Procedure PaymentListPayerOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListLegalNameOnChange(Object, Form, CurrentData);
+Procedure PaymentListPayerOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
+	ViewClient_V2.PaymentListLegalNameOnChange(Object, Form, CurrentData, FormAttributeUpdateDirection);
 EndProcedure
 
-Procedure PaymentListPayerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+Procedure PaymentListPayerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, CurrentData = Undefined) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", False,
 		DataCompositionComparisonType.Equal));
 	OpenSettings.FormParameters = New Structure();
-	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Partner) Then
-		OpenSettings.FormParameters.Insert("Partner", Form.Items.PaymentList.CurrentData.Partner);
+	
+	If CurrentData = Undefined Then
+			CurrentData = Form.Items.PaymentList.CurrentData;
+		EndIf;
+		
+	If ValueIsFilled(CurrentData.Partner) Then
+		OpenSettings.FormParameters.Insert("Partner", CurrentData.Partner);
 		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
-	OpenSettings.FillingData = New Structure("Partner", Form.Items.PaymentList.CurrentData.Partner);
+	OpenSettings.FillingData = New Structure("Partner", CurrentData.Partner);
 
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
-Procedure PaymentListPayerEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+Procedure PaymentListPayerEditTextChange(Object, Form, Item, Text, StandardProcessing, CurrentData = Undefined) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	AdditionalParameters = New Structure();
-	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Partner) Then
-		AdditionalParameters.Insert("Partner", Form.Items.PaymentList.CurrentData.Partner);
+	
+	If CurrentData = Undefined Then
+		CurrentData = Form.Items.PaymentList.CurrentData;
+	EndIf;
+		
+	If ValueIsFilled(CurrentData.Partner) Then
+		AdditionalParameters.Insert("Partner", CurrentData.Partner);
 		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
 	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
@@ -191,14 +229,13 @@ EndProcedure
 
 #Region AGREEMENT
 
-Procedure PaymentListAgreementOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListAgreementOnChange(Object, Form, CurrentData);
+Procedure PaymentListAgreementOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
+	ViewClient_V2.PaymentListAgreementOnChange(Object, Form, CurrentData, FormAttributeUpdateDirection);
 EndProcedure
 
-Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
+Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, CurrentData = Undefined) Export
 	If CurrentData = Undefined Then
-		Return;
+		CurrentData = Form.Items.PaymentList.CurrentData;
 	EndIf;
 
 	Parameters = New Structure();
@@ -209,10 +246,9 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, Object.TransactionType, Parameters);
 EndProcedure
 
-Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
+Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing, CurrentData = Undefined) Export
 	If CurrentData = Undefined Then
-		Return;
+		CurrentData = Form.Items.PaymentList.CurrentData;
 	EndIf;
 
 	Parameters = New Structure();
@@ -225,16 +261,15 @@ EndProcedure
 
 #Region BASIS_DOCUMENT
 
-Procedure PaymentListBasisDocumentOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListBasisDocumentOnChange(Object, Form, CurrentData);
+Procedure PaymentListBasisDocumentOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
+	ViewClient_V2.PaymentListBasisDocumentOnChange(Object, Form, CurrentData, FormAttributeUpdateDirection);
 EndProcedure
 
-Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, CurrentData = Undefined) Export
 	StandardProcessing = False;
 
-	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData = Undefined Then
-		Return;
+		CurrentData = Form.Items.PaymentList.CurrentData;
 	EndIf;
 
 	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance") Then
@@ -248,14 +283,16 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	
 	Parameters = New Structure();
 	Parameters.Insert("Filter", New Structure());
-	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then
-		Parameters.Filter.Insert("LegalName", Form.Items.PaymentList.CurrentData.Payer);
+	If ValueIsFilled(CurrentData.Payer) Then
+		Parameters.Filter.Insert("LegalName", CurrentData.Payer);
 	EndIf;
 	Parameters.Filter.Insert("Company", Object.Company);
 
 	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
 	
 	NotifyParameters = New Structure("Object, Form", Object, Form);
+	NotifyParameters.Insert("CurrentData", CurrentData);
+	
 	Notify = New NotifyDescription("PaymentListBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
 	Parameters.Insert("Notify", Notify);
 	Parameters.Insert("TableName", "DocumentsForIncomingPayment");
@@ -275,7 +312,7 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 	EndIf;
 	Form = AdditionalParameters.Form;
 	Object = AdditionalParameters.Object;
-	CurrentData = Form.Items.PaymentList.CurrentData;
+	CurrentData = AdditionalParameters.CurrentData;
 	If CurrentData <> Undefined Then
 		ViewClient_V2.SetPaymentListBasisDocument(Object, Form, CurrentData, Result.BasisDocument);
 		If CurrentData.TotalAmount = 0 Then
@@ -288,14 +325,13 @@ EndProcedure
 
 #Region PLANNING_TRANSACTION_BASIS
 
-Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListPlanningTransactionBasisOnChange(Object, Form, CurrentData);
+Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
+	ViewClient_V2.PaymentListPlanningTransactionBasisOnChange(Object, Form, CurrentData, FormAttributeUpdateDirection);
 EndProcedure
 
-Procedure PaymentListTransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
+Procedure PaymentListTransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, CurrentData = Undefined) Export
 	If CurrentData = Undefined Then
-		Return;
+		CurrentData = Form.Items.PaymentList.CurrentData;
 	EndIf;
 
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
@@ -357,14 +393,13 @@ EndProcedure
 
 #Region MONEY_TRANSFER
 
-Procedure PaymentListMoneyTransferOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListMoneyTransferOnChange(Object, Form, CurrentData);
+Procedure PaymentListMoneyTransferOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
+	ViewClient_V2.PaymentListMoneyTransferOnChange(Object, Form, CurrentData, FormAttributeUpdateDirection);
 EndProcedure
 
-Procedure PaymentListMoneyTransferStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
+Procedure PaymentListMoneyTransferStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, CurrentData = Undefined) Export
 	If CurrentData = Undefined Then
-		Return;
+		CurrentData = Form.Items.PaymentList.CurrentData;
 	EndIf;
 
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
@@ -406,12 +441,10 @@ EndProcedure
 
 #Region _ORDER
 
-Procedure PaymentListOrderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+Procedure PaymentListOrderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, CurrentData = Undefined) Export
 	StandardProcessing = False;
-
-	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData = Undefined Then
-		Return;
+		CurrentData = Form.Items.PaymentList.CurrentData;
 	EndIf;
 
 	Parameters = New Structure();
@@ -431,6 +464,8 @@ Procedure PaymentListOrderStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
 	
 	NotifyParameters = New Structure("Object, Form", Object, Form);
+	NotifyParameters.Insert("CurrentData", CurrentData);
+	
 	Notify = New NotifyDescription("PaymentListOrderStartChoiceEnd", ThisObject, NotifyParameters);
 	Parameters.Insert("Notify"    , Notify);
 	Parameters.Insert("TableName" , "DocumentsForIncomingPayment");	
@@ -446,7 +481,7 @@ Procedure PaymentListOrderStartChoiceEnd(Result, AdditionalParameters) Export
 	
 	Form = AdditionalParameters.Form;
 	Object = AdditionalParameters.Object;
-	CurrentData = Form.Items.PaymentList.CurrentData;
+	CurrentData = AdditionalParameters.CurrentData;
 	If CurrentData <> Undefined Then
 		
 		ViewClient_V2.SetPaymentListOrder(Object, Form, CurrentData, Result.BasisDocument);
@@ -472,32 +507,32 @@ EndProcedure
 
 #Region NET_AMOUNT
 
-Procedure PaymentListNetAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListNetAmountOnChange(Object, Form, CurrentData);
+Procedure PaymentListNetAmountOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
+	ViewClient_V2.PaymentListNetAmountOnChange(Object, Form, CurrentData, FormAttributeUpdateDirection);
 EndProcedure
 
 #EndRegion
 
 #Region TOTAL_AMOUNT
 
-Procedure PaymentListTotalAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListTotalAmountOnChange(Object, Form, CurrentData);
+Procedure PaymentListTotalAmountOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
+	ViewClient_V2.PaymentListTotalAmountOnChange(Object, Form, CurrentData, FormAttributeUpdateDirection);
 EndProcedure
 
 #EndRegion
 
 #Region TAX_AMOUNT
 
-Procedure ItemListTaxAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListTaxAmountOnChange(Object, Form, CurrentData);
+Procedure ItemListTaxAmountOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
+	ViewClient_V2.PaymentListTaxAmountOnChange(Object, Form, CurrentData, FormAttributeUpdateDirection);
 EndProcedure
 
 #EndRegion
 
 #Region VAT_RATE
 
-Procedure PaymentListVatRateOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListVatRateOnChange(Object, Form, CurrentData);
+Procedure PaymentListVatRateOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
+	ViewClient_V2.PaymentListVatRateOnChange(Object, Form, CurrentData, FormAttributeUpdateDirection);
 EndProcedure
 
 #EndRegion

@@ -3167,10 +3167,15 @@ Procedure OnSetPaymentListTotalAmountNotify(Parameters) Export
 EndProcedure
 
 // PaymentList.Commission
-Procedure PaymentListCommissionOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListCommissionOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListCommissionOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetPaymentListCommissionNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
 EndProcedure
 
 // PaymentList.PaymentType
@@ -3198,10 +3203,15 @@ Procedure OnSetPaymentListBankTermNotify(Parameters) Export
 EndProcedure
 
 // PaymentList.CommissionPercent
-Procedure PaymentListCommissionPercentOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListCommissionPercentOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListCommissionPercentOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetPaymentListCommissionPercentNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
 EndProcedure
 
 // PaymentList.VatRate

@@ -114,7 +114,7 @@ Function GetFormAttributeMapping() Export
 	Map.Insert("PaymentList.Order"                   , "PaymentListOrderNoSplits");
 	Map.Insert("PaymentList.VatRate"                 , "PaymentListVatRateNoSplits");
 	Map.Insert("PaymentList.NetAmount"               , "PaymentListNetAmountNoSplits");
-	Map.Insert("PaymentList.TaxAmount"           , "PaymentListTaxAmountNoSplits");
+	Map.Insert("PaymentList.TaxAmount"               , "PaymentListTaxAmountNoSplits");
 	Map.Insert("PaymentList.TotalAmount"             , "PaymentListTotalAmountNoSplits");
 	Map.Insert("PaymentList.FinancialMovementType"   , "PaymentListFinancialMovementTypeNoSplits");
 	Map.Insert("PaymentList.CashFlowCenter"          , "PaymentListCashFlowCenterNoSplits");

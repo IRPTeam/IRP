@@ -938,12 +938,6 @@ EndProcedure
 #Region MoneyTransfer
 
 Procedure MoneyTransferStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
-
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
 	If OpenSettings = Undefined Then
 		OpenSettings = GetOpenSettingsStructure();
 	EndIf;

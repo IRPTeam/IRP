@@ -536,6 +536,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
+	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
 
@@ -634,7 +635,8 @@ Function ItemList()
 		   |	ItemList.InventoryOrigin AS InventoryOrigin,
 		   |	ItemList.VatRate AS VatRate,
 		   |	ItemList.TaxAmount AS TaxAmount,
-		   |	ItemList.Project
+		   |	ItemList.Project,
+		   |	ItemList.SimpleBatch AS SimpleBatch
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReturn.ItemList AS ItemList
@@ -1293,6 +1295,25 @@ EndFunction
 
 Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_SR();
+EndFunction
+
+Function R6025B_SimpleBatch()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	ItemList.Quantity,
+	|	ItemList.Amount,
+	|	UseSimpleBatch.Value
+	|INTO R6025B_SimpleBatch
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
+	|		ON TRUE
+	|WHERE
+	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	AND UseSimpleBatch.Value";
 EndFunction
 
 #EndRegion

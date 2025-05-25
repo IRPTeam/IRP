@@ -288,6 +288,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
+	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
 
@@ -296,98 +297,100 @@ EndFunction
 #Region Posting_SourceTable
 
 Function ItemList()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Ref,
-		   |	RowIDInfo.Key AS Key,
-		   |	MAX(RowIDInfo.RowID) AS RowID
-		   |INTO TableRowIDInfo
-		   |FROM
-		   |	Document.PurchaseReturn.RowIDInfo AS RowIDInfo
-		   |WHERE
-		   |	RowIDInfo.Ref = &Ref
-		   |GROUP BY
-		   |	RowIDInfo.Ref,
-		   |	RowIDInfo.Key
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	ShipmentConfirmations.Key,
-		   |	ShipmentConfirmations.ShipmentConfirmation
-		   |INTO ShipmentConfirmations
-		   |FROM
-		   |	Document.PurchaseReturn.ShipmentConfirmations AS ShipmentConfirmations
-		   |WHERE
-		   |	ShipmentConfirmations.Ref = &Ref
-		   |GROUP BY
-		   |	ShipmentConfirmations.Key,
-		   |	ShipmentConfirmations.ShipmentConfirmation
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	PurchaseReturnItemList.Ref.Company AS Company,
-		   |	PurchaseReturnItemList.Store AS Store,
-		   |	PurchaseReturnItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
-		   |	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
-		   |	ShipmentConfirmations.ShipmentConfirmation,
-		   |	PurchaseReturnItemList.ItemKey AS ItemKey,
-		   |	PurchaseReturnItemList.PurchaseReturnOrder AS PurchaseReturnOrder,
-		   |	NOT PurchaseReturnItemList.PurchaseReturnOrder.Ref IS NULL AS PurchaseReturnOrderExists,
-		   |	PurchaseReturnItemList.Ref AS PurchaseReturn,
-		   |	CASE
-		   |		WHEN PurchaseReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			THEN PurchaseReturnItemList.Ref
-		   |		ELSE UNDEFINED
-		   |	END AS BasisDocument,
-		   |	PurchaseReturnItemList.Ref AS AdvanceBasis,
-		   |	PurchaseReturnItemList.QuantityInBaseUnit AS Quantity,
-		   |	PurchaseReturnItemList.TotalAmount AS TotalAmount,
-		   |	PurchaseReturnItemList.TotalAmount AS Amount,
-		   |	PurchaseReturnItemList.Ref.Partner AS Partner,
-		   |	PurchaseReturnItemList.Ref.LegalName AS LegalName,
-		   |	CASE
-		   |		WHEN PurchaseReturnItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		   |		AND PurchaseReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		   |			THEN PurchaseReturnItemList.Ref.Agreement.StandardAgreement
-		   |		ELSE PurchaseReturnItemList.Ref.Agreement
-		   |	END AS Agreement,
-		   |	ISNULL(PurchaseReturnItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
-		   |	PurchaseReturnItemList.Ref.Date AS Period,
-		   |	CASE
-		   |		WHEN PurchaseReturnItemList.PurchaseInvoice.Ref IS NULL
-		   |		OR VALUETYPE(PurchaseReturnItemList.PurchaseInvoice) <> TYPE(Document.PurchaseInvoice)
-		   |			THEN PurchaseReturnItemList.Ref
-		   |		ELSE PurchaseReturnItemList.PurchaseInvoice
-		   |	END AS PurchaseInvoice,
-		   |	PurchaseReturnItemList.PurchaseInvoice AS BatchDocument,
-		   |	TableRowIDInfo.RowID AS RowKey,
-		   |	PurchaseReturnItemList.Key,
-		   |	PurchaseReturnItemList.IsService AS IsService,
-		   |	PurchaseReturnItemList.NetAmount,
-		   |	PurchaseReturnItemList.PurchaseInvoice AS Invoice,
-		   |	PurchaseReturnItemList.ReturnReason,
-		   |	PurchaseReturnItemList.ProfitLossCenter AS ProfitLossCenter,
-		   |	PurchaseReturnItemList.ExpenseType AS ExpenseType,
-		   |	PurchaseReturnItemList.AdditionalAnalytic AS AdditionalAnalytic,
-		   |	PurchaseReturnItemList.Ref.Branch AS Branch,
-		   |	PurchaseReturnItemList.Ref.LegalNameContract AS LegalNameContract,
-		   |	PurchaseReturnItemList.OffersAmount,
-		   |	PurchaseReturnItemList.Detail AS Detail,
-		   |	PurchaseReturnItemList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToVendor) AS IsReturnToVendor,
-		   |	PurchaseReturnItemList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor) AS IsReturnToConsignor,
-		   |	PurchaseReturnItemList.VatRate AS VatRate,
-		   |	PurchaseReturnItemList.TaxAmount AS TaxAmount,
-		   |	PurchaseReturnItemList.Project
-		   |INTO ItemList
-		   |FROM
-		   |	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
-		   |		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
-		   |		ON PurchaseReturnItemList.Key = ShipmentConfirmations.Key
-		   |		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
-		   |		ON PurchaseReturnItemList.Key = TableRowIDInfo.Key
-		   |WHERE
-		   |	PurchaseReturnItemList.Ref = &Ref";
+	Return 
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO TableRowIDInfo
+	|FROM
+	|	Document.PurchaseReturn.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ShipmentConfirmations.Key,
+	|	ShipmentConfirmations.ShipmentConfirmation
+	|INTO ShipmentConfirmations
+	|FROM
+	|	Document.PurchaseReturn.ShipmentConfirmations AS ShipmentConfirmations
+	|WHERE
+	|	ShipmentConfirmations.Ref = &Ref
+	|GROUP BY
+	|	ShipmentConfirmations.Key,
+	|	ShipmentConfirmations.ShipmentConfirmation
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Store AS Store,
+	|	ItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
+	|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
+	|	ShipmentConfirmations.ShipmentConfirmation,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.PurchaseReturnOrder AS PurchaseReturnOrder,
+	|	NOT ItemList.PurchaseReturnOrder.Ref IS NULL AS PurchaseReturnOrderExists,
+	|	ItemList.Ref AS PurchaseReturn,
+	|	CASE
+	|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN ItemList.Ref
+	|		ELSE UNDEFINED
+	|	END AS BasisDocument,
+	|	ItemList.Ref AS AdvanceBasis,
+	|	ItemList.QuantityInBaseUnit AS Quantity,
+	|	ItemList.TotalAmount AS TotalAmount,
+	|	ItemList.TotalAmount AS Amount,
+	|	ItemList.Ref.Partner AS Partner,
+	|	ItemList.Ref.LegalName AS LegalName,
+	|	CASE
+	|		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+	|		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+	|			THEN ItemList.Ref.Agreement.StandardAgreement
+	|		ELSE ItemList.Ref.Agreement
+	|	END AS Agreement,
+	|	ISNULL(ItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
+	|	ItemList.Ref.Date AS Period,
+	|	CASE
+	|		WHEN ItemList.PurchaseInvoice.Ref IS NULL
+	|		OR VALUETYPE(ItemList.PurchaseInvoice) <> TYPE(Document.PurchaseInvoice)
+	|			THEN ItemList.Ref
+	|		ELSE ItemList.PurchaseInvoice
+	|	END AS PurchaseInvoice,
+	|	ItemList.PurchaseInvoice AS BatchDocument,
+	|	TableRowIDInfo.RowID AS RowKey,
+	|	ItemList.Key,
+	|	ItemList.IsService AS IsService,
+	|	ItemList.NetAmount,
+	|	ItemList.PurchaseInvoice AS Invoice,
+	|	ItemList.ReturnReason,
+	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+	|	ItemList.ExpenseType AS ExpenseType,
+	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.LegalNameContract AS LegalNameContract,
+	|	ItemList.OffersAmount,
+	|	ItemList.Detail AS Detail,
+	|	ItemList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToVendor) AS IsReturnToVendor,
+	|	ItemList.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor) AS IsReturnToConsignor,
+	|	ItemList.VatRate AS VatRate,
+	|	ItemList.TaxAmount AS TaxAmount,
+	|	ItemList.Project,
+	|	ItemList.SimpleBatch AS SimpleBatch
+	|INTO ItemList
+	|FROM
+	|	Document.PurchaseReturn.ItemList AS ItemList
+	|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
+	|		ON ItemList.Key = ShipmentConfirmations.Key
+	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON ItemList.Key = TableRowIDInfo.Key
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -890,6 +893,25 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.BatchDocument,
 		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
 		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))";
+EndFunction
+
+Function R6025B_SimpleBatch()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	ItemList.Quantity,
+	|	ItemList.Amount,
+	|	UseSimpleBatch.Value
+	|INTO R6025B_SimpleBatch
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
+	|		ON TRUE
+	|WHERE
+	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	AND UseSimpleBatch.Value";
 EndFunction
 
 #EndRegion

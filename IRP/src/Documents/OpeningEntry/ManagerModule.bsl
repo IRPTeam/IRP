@@ -420,6 +420,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2040B_TaxesIncoming());
 	QueryArray.Add(R1040B_TaxesOutgoing());
 	QueryArray.Add(T8510S_FixedAssetsInfo());
+	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
 
@@ -428,27 +429,29 @@ EndFunction
 #Region Posting_SourceTable
 
 Function ItemList()
-	Return "SELECT
-		   |	OpeningEntryInventory.Ref,
-		   |	OpeningEntryInventory.Key,
-		   |	OpeningEntryInventory.ItemKey,
-		   |	OpeningEntryInventory.Store,
-		   |	OpeningEntryInventory.Quantity,
-		   |	NOT OpeningEntryInventory.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
-		   |	OpeningEntryInventory.SerialLotNumber,
-		   |	OpeningEntryInventory.Ref.Date AS Period,
-		   |	OpeningEntryInventory.Ref.Company AS Company,
-		   |	OpeningEntryInventory.Ref.Branch AS Branch,
-		   |	OpeningEntryInventory.Amount AS Amount,
-		   |	OpeningEntryInventory.AmountTax AS AmountTax,
-		   |	OpeningEntryInventory.Ref.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
-		   |	OpeningEntryInventory.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency,
-		   |	OpeningEntryInventory.SourceOfOrigin AS SourceOfOrigin
-		   |INTO ItemList
-		   |FROM
-		   |	Document.OpeningEntry.Inventory AS OpeningEntryInventory
-		   |WHERE
-		   |	OpeningEntryInventory.Ref = &Ref";
+	Return 
+	"SELECT
+	|	ItemList.Ref,
+	|	ItemList.Key,
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	ItemList.Quantity,
+	|	NOT ItemList.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
+	|	ItemList.SerialLotNumber,
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Amount AS Amount,
+	|	ItemList.AmountTax AS AmountTax,
+	|	ItemList.Ref.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
+	|	ItemList.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency,
+	|	ItemList.SourceOfOrigin AS SourceOfOrigin,
+	|	ItemList.SimpleBatch AS SimpleBatch
+	|INTO ItemList
+	|FROM
+	|	Document.OpeningEntry.Inventory AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function AccountBalance()
@@ -2158,6 +2161,25 @@ Function T8510S_FixedAssetsInfo()
 		|	FixedAssets AS FixedAssets
 		|WHERE
 		|	TRUE";
+EndFunction
+
+Function R6025B_SimpleBatch()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	ItemList.Quantity,
+	|	ItemList.Amount,
+	|	UseSimpleBatch.Value
+	|INTO R6025B_SimpleBatch
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
+	|		ON TRUE
+	|WHERE
+	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	AND UseSimpleBatch.Value";
 EndFunction
 
 #EndRegion

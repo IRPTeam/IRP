@@ -330,6 +330,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
 	QueryArray.Add(R5020B_PartnersBalance());	
+	QueryArray.Add(R6025B_SimpleBatch());	
 	Return QueryArray;
 EndFunction
 
@@ -338,122 +339,122 @@ EndFunction
 #Region Posting_SourceTable
 
 Function ItemList()
-	Return "SELECT
-	       |	RowIDInfo.Ref AS Ref,
-	       |	RowIDInfo.Key AS Key,
-	       |	MAX(RowIDInfo.RowID) AS RowID
-	       |INTO TableRowIDInfo
-	       |FROM
-	       |	Document.SalesInvoice.RowIDInfo AS RowIDInfo
-	       |WHERE
-	       |	RowIDInfo.Ref = &Ref
-	       |
-	       |GROUP BY
-	       |	RowIDInfo.Ref,
-	       |	RowIDInfo.Key
-	       |;
-	       |
-	       |////////////////////////////////////////////////////////////////////////////////
-	       |SELECT
-	       |	ShipmentConfirmations.Key AS Key
-	       |INTO ShipmentConfirmations
-	       |FROM
-	       |	Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
-	       |WHERE
-	       |	ShipmentConfirmations.Ref = &Ref
-	       |
-	       |GROUP BY
-	       |	ShipmentConfirmations.Key
-	       |;
-	       |
-	       |////////////////////////////////////////////////////////////////////////////////
-	       |SELECT
-	       |	SalesInvoiceItemList.Ref.Company AS Company,
-	       |	SalesInvoiceItemList.Store AS Store,
-	       |	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
-	       |	SalesInvoiceItemList.Ref AS Invoice,
-	       |	SalesInvoiceItemList.ItemKey AS ItemKey,
-	       |	SalesInvoiceItemList.Quantity AS UnitQuantity,
-	       |	SalesInvoiceItemList.QuantityInBaseUnit AS Quantity,
-	       |	SalesInvoiceItemList.TotalAmount AS Amount,
-	       |	SalesInvoiceItemList.Ref.Partner AS Partner,
-	       |	SalesInvoiceItemList.Ref.LegalName AS LegalName,
-	       |	CASE
-	       |		WHEN SalesInvoiceItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-	       |				AND SalesInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-	       |			THEN SalesInvoiceItemList.Ref.Agreement.StandardAgreement
-	       |		ELSE SalesInvoiceItemList.Ref.Agreement
-	       |	END AS Agreement,
-	       |	SalesInvoiceItemList.Ref.Currency AS Currency,
-	       |	SalesInvoiceItemList.Unit AS Unit,
-	       |	SalesInvoiceItemList.Ref.Date AS Period,
-	       |	SalesInvoiceItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
-	       |	SalesInvoiceItemList.SalesOrder AS SalesOrder,
-	       |	CASE
-	       |		WHEN SalesInvoiceItemList.Ref.Agreement.UseOrdersForSettlements
-	       |			THEN SalesInvoiceItemList.SalesOrder
-	       |		ELSE UNDEFINED
-	       |	END AS SalesOrderSettlements,
-	       |	NOT SalesInvoiceItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
-	       |	TableRowIDInfo.RowID AS RowKey,
-	       |	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
-	       |	SalesInvoiceItemList.IsService AS IsService,
-	       |	SalesInvoiceItemList.ProfitLossCenter AS ProfitLossCenter,
-	       |	SalesInvoiceItemList.RevenueType AS RevenueType,
-	       |	SalesInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
-	       |	CASE
-	       |		WHEN SalesInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-	       |			THEN SalesInvoiceItemList.Ref
-	       |		ELSE UNDEFINED
-	       |	END AS Basis,
-	       |	SalesInvoiceItemList.NetAmount AS NetAmount,
-	       |	SalesInvoiceItemList.OffersAmount AS OffersAmount,
-	       |	SalesInvoiceItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
-	       |	SalesInvoiceItemList.Key AS Key,
-	       |	SalesInvoiceItemList.Ref.Branch AS Branch,
-	       |	SalesInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
-	       |	SalesInvoiceItemList.PriceType AS PriceType,
-	       |	SalesInvoiceItemList.Price AS Price,
-	       |	SalesInvoiceItemList.SalesPerson AS SalesPerson,
-	       |(SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales)
-	       |	OR SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.CurrencyRevaluationCustomer)
-	       |	OR SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.CurrencyRevaluationVendor)) AS IsSales,
-	       |
-	       |	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
-	       |	SalesInvoiceItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
-	       |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
-	       |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
-	       |	SalesInvoiceItemList.InventoryOrigin AS InventoryOrigin,
-	       |	SalesInvoiceItemList.VatRate AS VatRate,
-	       |	SalesInvoiceItemList.TaxAmount AS TaxAmount,
-	       |	SalesInvoiceItemList.Project AS Project,
-	       |	SalesInvoiceItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType,
-	       |
-	       |	case when SalesInvoiceItemList.ItemKey = SalesInvoiceItemList.Ref.Company.CurrencyRevaluationItemKey 
-	       |				then true else false end AS IsCurrencyRevaluation,
-	       |	ISNULL(SalesInvoiceItemList.Ref.CurrencyRevaluationInvoice.Ref, Undefined) AS CurrencyRevaluationInvoice
-	       |
-	       |INTO ItemList
-	       |FROM
-	       |	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
-	       |		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
-	       |		ON SalesInvoiceItemList.Key = ShipmentConfirmations.Key
-	       |		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
-	       |		ON SalesInvoiceItemList.Key = TableRowIDInfo.Key
-	       |WHERE
-	       |	SalesInvoiceItemList.Ref = &Ref
-	       |;
-	       |
-	       |////////////////////////////////////////////////////////////////////////////////
-	       |SELECT
-	       |	SalesInvoiceShipmentConfirmations.Key AS Key,
-	       |	SalesInvoiceShipmentConfirmations.ShipmentConfirmation AS ShipmentConfirmation,
-	       |	SalesInvoiceShipmentConfirmations.Quantity AS Quantity
-	       |INTO ShipmentConfirmationsInfo
-	       |FROM
-	       |	Document.SalesInvoice.ShipmentConfirmations AS SalesInvoiceShipmentConfirmations
-	       |WHERE
-	       |	SalesInvoiceShipmentConfirmations.Ref = &Ref";
+	Return 
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO TableRowIDInfo
+	|FROM
+	|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ShipmentConfirmations.Key AS Key
+	|INTO ShipmentConfirmations
+	|FROM
+	|	Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
+	|WHERE
+	|	ShipmentConfirmations.Ref = &Ref
+	|GROUP BY
+	|	ShipmentConfirmations.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Store AS Store,
+	|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
+	|	ItemList.Ref AS Invoice,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Quantity AS UnitQuantity,
+	|	ItemList.QuantityInBaseUnit AS Quantity,
+	|	ItemList.TotalAmount AS Amount,
+	|	ItemList.Ref.Partner AS Partner,
+	|	ItemList.Ref.LegalName AS LegalName,
+	|	CASE
+	|		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+	|		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+	|			THEN ItemList.Ref.Agreement.StandardAgreement
+	|		ELSE ItemList.Ref.Agreement
+	|	END AS Agreement,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.Unit AS Unit,
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
+	|	ItemList.SalesOrder AS SalesOrder,
+	|	CASE
+	|		WHEN ItemList.Ref.Agreement.UseOrdersForSettlements
+	|			THEN ItemList.SalesOrder
+	|		ELSE UNDEFINED
+	|	END AS SalesOrderSettlements,
+	|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
+	|	TableRowIDInfo.RowID AS RowKey,
+	|	ItemList.DeliveryDate AS DeliveryDate,
+	|	ItemList.IsService AS IsService,
+	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+	|	ItemList.RevenueType AS RevenueType,
+	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+	|	CASE
+	|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN ItemList.Ref
+	|		ELSE UNDEFINED
+	|	END AS Basis,
+	|	ItemList.NetAmount AS NetAmount,
+	|	ItemList.OffersAmount AS OffersAmount,
+	|	ItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
+	|	ItemList.Key AS Key,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.LegalNameContract AS LegalNameContract,
+	|	ItemList.PriceType AS PriceType,
+	|	ItemList.Price AS Price,
+	|	ItemList.SalesPerson AS SalesPerson,
+	|	(ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales)
+	|	OR ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.CurrencyRevaluationCustomer)
+	|	OR ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.CurrencyRevaluationVendor)) AS IsSales,
+	|	ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
+	|	ItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
+	|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
+	|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
+	|	ItemList.InventoryOrigin AS InventoryOrigin,
+	|	ItemList.VatRate AS VatRate,
+	|	ItemList.TaxAmount AS TaxAmount,
+	|	ItemList.Project AS Project,
+	|	ItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType,
+	|	case
+	|		when ItemList.ItemKey = ItemList.Ref.Company.CurrencyRevaluationItemKey
+	|			then true
+	|		else false
+	|	end AS IsCurrencyRevaluation,
+	|	ISNULL(ItemList.Ref.CurrencyRevaluationInvoice.Ref, Undefined) AS CurrencyRevaluationInvoice,
+	|	ItemList.SimpleBatch AS SimpleBatch
+	|INTO ItemList
+	|FROM
+	|	Document.SalesInvoice.ItemList AS ItemList
+	|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
+	|		ON ItemList.Key = ShipmentConfirmations.Key
+	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON ItemList.Key = TableRowIDInfo.Key
+	|WHERE
+	|	ItemList.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SalesInvoiceShipmentConfirmations.Key AS Key,
+	|	SalesInvoiceShipmentConfirmations.ShipmentConfirmation AS ShipmentConfirmation,
+	|	SalesInvoiceShipmentConfirmations.Quantity AS Quantity
+	|INTO ShipmentConfirmationsInfo
+	|FROM
+	|	Document.SalesInvoice.ShipmentConfirmations AS SalesInvoiceShipmentConfirmations
+	|WHERE
+	|	SalesInvoiceShipmentConfirmations.Ref = &Ref";
 EndFunction
 
 Function ItemListLandedCost()
@@ -1554,7 +1555,25 @@ EndFunction
 Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_SI();
 EndFunction
-		 
+	
+ Function R6025B_SimpleBatch()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	ItemList.Quantity,
+	|	ItemList.Amount,
+	|	UseSimpleBatch.Value
+	|INTO R6025B_SimpleBatch
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
+	|		ON TRUE
+	|WHERE
+	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	AND UseSimpleBatch.Value";
+EndFunction
 #EndRegion
 
 #Region AccessObject

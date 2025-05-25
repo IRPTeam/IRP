@@ -43,10 +43,10 @@
     <fullTextSearch>Use</fullTextSearch>
   </resources>
   <dimensions uuid="f6e9d799-7423-4e89-b8fe-380c5a939718">
-    <name>Batch</name>
+    <name>SimpleBatch</name>
     <synonym>
       <key>en</key>
-      <value>Batch</value>
+      <value>Simple batch</value>
     </synonym>
     <type>
       <types>CatalogRef.SimpleBatch</types>

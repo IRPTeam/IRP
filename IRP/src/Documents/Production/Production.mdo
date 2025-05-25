@@ -81,7 +81,6 @@
   <registerRecords>AccumulationRegister.R7010T_DetailingSupplies</registerRecords>
   <registerRecords>AccumulationRegister.R7050T_ProductionDurations</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R6025B_BatchV2</registerRecords>
   <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>

@@ -7,14 +7,14 @@
     <listType typeId="e5a71dd0-298f-48e0-980d-a14bb9cecf8e" valueTypeId="6c1bed27-d8c5-4d69-85ad-7c056eb7a69a"/>
     <managerType typeId="666eeb9b-93e7-43d3-9d1a-844d7b0c1c1b" valueTypeId="5f008669-da6c-4180-8d1e-7014fa1e23b6"/>
   </producedTypes>
-  <name>Batch_V2</name>
+  <name>SimpleBatch</name>
   <synonym>
     <key>en</key>
-    <value>Batch v2</value>
+    <value>Simple batch</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.Batch_V2.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.Batch_V2.StandardAttribute.Description</inputByString>
+  <inputByString>Catalog.SimpleBatch.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.SimpleBatch.StandardAttribute.Description</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>

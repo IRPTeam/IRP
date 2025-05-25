@@ -128,7 +128,7 @@
   <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R6025B_BatchV2</registerRecords>
+  <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
   <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
@@ -1050,6 +1050,20 @@
         <field>Document.SalesInvoice.TabularSection.ItemList.Attribute.VatRate</field>
       </choiceParameterLinks>
       <createOnInput>Use</createOnInput>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6f7d9c20-18f9-4934-9ae4-34f71ae2f20a">
+      <name>SimpleBatch</name>
+      <synonym>
+        <key>en</key>
+        <value>Simple batch</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SimpleBatch</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>

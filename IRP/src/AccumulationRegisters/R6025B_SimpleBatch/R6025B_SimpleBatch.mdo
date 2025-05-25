@@ -8,10 +8,10 @@
     <recordKeyType typeId="c91b80aa-5383-4f20-82ac-f6fabb386442" valueTypeId="215e473c-3355-457e-bc39-5936fb4802e1"/>
     <recordType typeId="97c7553d-4036-42d6-b2af-2c883b7f8ae9" valueTypeId="9c7b2322-8815-4161-9705-9d719b65c4c4"/>
   </producedTypes>
-  <name>R6025B_BatchV2</name>
+  <name>R6025B_SimpleBatch</name>
   <synonym>
     <key>en</key>
-    <value>R6025B Batch v2</value>
+    <value>R6025B Simple batch</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -49,7 +49,7 @@
       <value>Batch</value>
     </synonym>
     <type>
-      <types>CatalogRef.Batch_V2</types>
+      <types>CatalogRef.SimpleBatch</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

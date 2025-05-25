@@ -3098,7 +3098,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.Batch</segments>
+            <segments>Object.ItemList.SimpleBatch</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemListBatchExtendedTooltip</name>

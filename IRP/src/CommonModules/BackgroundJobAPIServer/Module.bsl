@@ -424,3 +424,46 @@ Procedure RunJobsFromServer(JobDataSettings, JobList) Export
 		EndIf;
 	EndDo;
 EndProcedure
+
+Procedure JobAddErrorMessage(Msg, Errors, Doc, ErrorDescription) Export
+	Msg = NotifySettings();
+	Msg.Log = "Error: " + Doc + ":" + Chars.LF + ErrorDescription;
+	NotifyStream(Msg);
+			
+	Result = New Structure;
+	Result.Insert("Ref", Doc);
+	Result.Insert("RegInfo", New Array);
+	Result.Insert("Error", Msg.Log);
+	Errors.Add(Result);
+EndProcedure
+
+Function JobAddErrorEmptyCollection(Msg, Errors, Message) Export
+	Msg = NotifySettings();
+	Msg.Log = "Empty doc list: 0";
+	Msg.End = True;
+	Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+	NotifyStream(Msg);
+	Return Errors;
+EndFunction
+
+Procedure JobAddPercentMessage(Count, TotalCount, LastPercentLogged, StartDate) Export
+	Percent = 100 * Count / TotalCount;
+	If (Percent - LastPercentLogged >= 1) Then  
+		LastPercentLogged = Int(Percent);
+		Msg = NotifySettings();
+		DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
+		If DateDiff = 0 Then
+			DateDiff = 1;
+		EndIf;
+		Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+		Msg.Percent = Percent;
+		NotifyStream(Msg);
+	EndIf;
+EndProcedure
+
+Procedure JobAddEndMessage(Errors) Export
+	Msg = NotifySettings();
+	Msg.End = True;
+	Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+	NotifyStream(Msg);
+EndProcedure

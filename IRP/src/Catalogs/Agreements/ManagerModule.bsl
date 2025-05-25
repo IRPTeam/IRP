@@ -165,6 +165,7 @@ EndFunction
 
 Function GetDefaultChoiceRef(Parameters, AgreementParameters) Export
 	QueryTable = GetChoiceDataTable(New Structure("SearchString, Filter", "", Parameters));
+	QueryTable.GroupBy("Ref, Presentation");
 
 	Agreement = Catalogs.Agreements.EmptyRef();
 

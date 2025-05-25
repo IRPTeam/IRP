@@ -1,4 +1,59 @@
 
+#Region RecordersDescriptionMapping
+
+&AtClient
+Procedure FillRecordersMapping(Command)
+	FillRecordersMappingAtServer();
+	NotifyChanged(Type("InformationRegisterRecordKey.T9069S_AccountingMappingRecordersDescription"));	
+EndProcedure
+
+&AtServer
+Procedure FillRecordersMappingAtServer()
+	Query = New Query;
+	Query.Text =
+	"SELECT DISTINCT
+	|	ExternalAccountingOperation.RecorderName AS RecorderName
+	|INTO TT_AllNames
+	|FROM
+	|	Document.ExternalAccountingOperation AS ExternalAccountingOperation
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	T9069S_AccountingMappingRecordersDescription.RecorderMetaName AS RecorderMetaName
+	|INTO TT_NamesExist
+	|FROM
+	|	InformationRegister.T9069S_AccountingMappingRecordersDescription AS T9069S_AccountingMappingRecordersDescription
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TT_AllNames.RecorderName AS RecorderName
+	|FROM
+	|	TT_AllNames AS TT_AllNames
+	|WHERE
+	|	NOT TT_AllNames.RecorderName IN
+	|		(SELECT
+	|			TT_NamesExist.RecorderMetaName
+	|		FROM
+	|			TT_NamesExist)";
+	
+	QueryResult = Query.Execute();
+	
+	SelectionDetailRecords = QueryResult.Select();
+	
+	While SelectionDetailRecords.Next() Do
+		If IsBlankString(SelectionDetailRecords.RecorderName) Then
+			Continue;
+		EndIf;		
+		Record = InformationRegisters.T9069S_AccountingMappingRecordersDescription.CreateRecordManager();
+		Record.RecorderMetaName = SelectionDetailRecords.RecorderName;
+		Record.Write();
+	EndDo;		
+EndProcedure
+
+#EndRegion
+
 &AtClient
 Procedure GroupStepsOnCurrentPageChange(Item, CurrentPage)
 	If CurrentPage = Items.GroupStep2 Then
@@ -94,7 +149,6 @@ Procedure FillAvailableExtraDimensionTypes()
 			StrTemplate("%1 [%2]", QuerySelection.ExternalName , QuerySelection.ExtraDimensionTypesName));
 	EndDo;
 EndProcedure
-
 
 #Region ChartsOfAccounts
 
@@ -386,8 +440,7 @@ Procedure FillAccountMatchingAtServer()
 		
 		NewRow.AllExtDimensionValues1 = Row.AllExtDimensionValues1;
 		NewRow.AllExtDimensionValues2 = Row.AllExtDimensionValues2;
-		NewRow.AllExtDimensionValues3 = Row.AllExtDimensionValues3;
-		
+		NewRow.AllExtDimensionValues3 = Row.AllExtDimensionValues3;		
 		
 		// ext dimensions
 		For Each Analytic In Row.Analytics Do
@@ -454,6 +507,7 @@ Procedure GetMappingAccountMatchingAtServer()
 	EndDo;
 EndProcedure
 
+&AtServer
 Function FindOrCreateAnalytic(Row, Number)
 		
 		ExternalIsRef = Upper(Row["BaseClass" + Number]) = Upper("Catalogs") 

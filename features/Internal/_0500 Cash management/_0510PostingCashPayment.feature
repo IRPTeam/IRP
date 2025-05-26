@@ -128,7 +128,7 @@ Scenario: _051001 create Cash payment based on Purchase invoice
 	And "PaymentList" table contains lines
 		| 'Partner'     | 'Payee'               | 'Partner term'         | 'Total amount'   | 'Basis document'               |
 		| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '137 000,00'     | '$$PurchaseInvoice018001$$'    |
-	And in the table "PaymentList" I click "Edit currencies" button
+	And I click the button named "EditCurrencies"
 	And "CurrenciesTable" table became equal
 		| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'       |
 		| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '23 454,40'    |
@@ -147,7 +147,7 @@ Scenario: _051001 create Cash payment based on Purchase invoice
 	And "PaymentList" table contains lines
 		| 'Partner'     | 'Payee'               | 'Partner term'         | 'Total amount'   | 'Basis document'               |
 		| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '137 000,00'     | '$$PurchaseInvoice018001$$'    |
-	And in the table "PaymentList" I click "Edit currencies" button
+	And I click the button named "EditCurrencies"
 	And "CurrenciesTable" table became equal
 		| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'       |
 		| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '23 454,40'    |

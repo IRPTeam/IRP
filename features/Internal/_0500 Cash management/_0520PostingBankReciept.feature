@@ -134,7 +134,7 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 		And "PaymentList" table contains lines
 			| 'Partner'     | 'Partner term'               | 'Total amount'   | 'Payer'               | 'Basis document'           | 'Planning transaction basis'    |
 			| 'Ferron BP'   | 'Basic Partner terms, TRY'   | '3 687,25'       | 'Company Ferron BP'   | '$$SalesInvoice024001$$'   | ''                              |
-		And in the table "PaymentList" I click "Edit currencies" button
+		And I click the button named "EditCurrencies"
 		And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount'   |
 			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,171200' | '631,26'   |
@@ -153,7 +153,7 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 		And "PaymentList" table contains lines
 			| 'Partner'     | 'Partner term'               | 'Total amount'   | 'Payer'               | 'Basis document'           | 'Planning transaction basis'    |
 			| 'Ferron BP'   | 'Basic Partner terms, TRY'   | '3 687,25'       | 'Company Ferron BP'   | '$$SalesInvoice024001$$'   | ''                              |
-		And in the table "PaymentList" I click "Edit currencies" button
+		And I click the button named "EditCurrencies"
 		And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount'    |
 			| 'Local currency'     | 'Legal'        | 'TRY' | 'USD'  | '1'            | '5,627500' | '20 750,00' |

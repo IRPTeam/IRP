@@ -492,6 +492,7 @@
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseGroupEditingProperties</roles>
   <roles>Role.UseOutput</roles>
+  <roles>Role.Document_FixedAssetRevaluation</roles>
   <roles>Role.StandartReports</roles>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
@@ -846,6 +847,8 @@
   <commonModules>CommonModule.UpdateManagerClient</commonModules>
   <commonModules>CommonModule.UpdateManagerInitialServer</commonModules>
   <commonModules>CommonModule.UpdateManagerReleaseServer</commonModules>
+  <commonModules>CommonModule.DocFixedAssetRevaluationClient</commonModules>
+  <commonModules>CommonModule.DocFixedAssetRevaluationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1352,6 +1355,7 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
+  <documents>Document.FixedAssetRevaluation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

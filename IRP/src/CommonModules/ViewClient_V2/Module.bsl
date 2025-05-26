@@ -3190,40 +3190,6 @@ EndProcedure
 
 #EndRegion
 
-#Region _CALCULATIONS
-
-Procedure CalculationsAfterDeleteRow(Object, Form) Export
-	DeleteRows(Object, Form, "Calculations", "CalculationsAfterDeleteRowFormNotify");
-EndProcedure
-
-Function CalculationsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
-	NewRow = AddOrCopyRow(Object, Form, "Calculations", Cancel, Clone, CurrentData,
-		"CalculationsOnAddRowFormNotify", "CalculationsOnCopyRowFormNotify");
-	Form.Items.Calculations.CurrentRow = NewRow.GetID();
-	If Form.Items.Calculations.CurrentRow <> Undefined Then
-		Form.Items.Calculations.ChangeRow();
-	EndIf;
-	Return NewRow;
-EndFunction
-
-Procedure CalculationsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
-	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-Procedure CalculationsOnAddRowFormNotify(Parameters) Export
-	Parameters.Form.Modified = True;
-EndProcedure
-
-Procedure CalculationsOnCopyRowFormNotify(Parameters) Export
-	Parameters.Form.Modified = True;
-EndProcedure
-
-Procedure CalculationsAfterDeleteRowFormNotify(Parameters) Export
-	Parameters.Form.Modified = True;
-EndProcedure
-
-#EndRegion
-
 #Region _TRANSACTIONS_LIST_COLUMNS
 
 // Transactions.Partner
@@ -3274,6 +3240,66 @@ Procedure TransactionsAmountOnChange(Object, Form, CurrentData = Undefined) Expo
 	Parameters = GetSimpleParameters(Object, Form, "Transactions", Rows);
 	ControllerClientServer_V2.TransactionsAmountOnChange(Parameters);
 EndProcedure
+
+#EndRegion
+
+#Region _CALCULATIONS
+
+Procedure CalculationsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "Calculations", "CalculationsAfterDeleteRowFormNotify");
+EndProcedure
+
+Function CalculationsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "Calculations", Cancel, Clone, CurrentData,
+		"CalculationsOnAddRowFormNotify", "CalculationsOnCopyRowFormNotify");
+	Form.Items.Calculations.CurrentRow = NewRow.GetID();
+	If Form.Items.Calculations.CurrentRow <> Undefined Then
+		Form.Items.Calculations.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure CalculationsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Procedure CalculationsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure CalculationsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure CalculationsAfterDeleteRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+#EndRegion
+
+#Region _CALCULATIONS_COLUMNS
+
+#Region _CALCULATIONS_AMOUNT
+
+// Calculations.Amount
+Procedure CalculationsAmountOnChange(Object, Form, TableName, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+	ControllerClientServer_V2.CalculationsAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region _CALCULATIONS_NEW_AMOUNT_BALANCE
+
+// Calculations.NewAmountBalance
+Procedure CalculationsNewAmountBalanceOnChange(Object, Form, TableName, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+	ControllerClientServer_V2.CalculationsNewAmountBalanceOnChange(Parameters);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 

@@ -183,7 +183,7 @@ And I close all client application windows
 	And I select from the drop-down list named "Company" by "Main Company" string
 	And I select from "Cash account" drop-down list by "Cash desk №2" string
 	And I select from "Transaction type" drop-down list by "Payment from customer" string
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I select current line in "PaymentList" table
 	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
 	And I select "Company Ferron BP" from "Payee" drop-down list by string in "PaymentList" table
@@ -202,7 +202,7 @@ And I close all client application windows
 		| 'Partner'   | 'Partner term'       | 'Total amount' | 'Payee'             | 'Basis document'            |
 		| 'Ferron BP' | 'Vendor Ferron, TRY' | '5 000,00'     | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' |
 // * Add one more line with the same invoice and check amount
-// 	And in the table "PaymentList" I click the button named "PaymentListAdd"
+// 	And I click the button named "PaymentListAdd"
 // 	And I select current line in "PaymentList" table
 // 	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
 // 	And I select "Company Ferron BP" from "Payee" drop-down list by string in "PaymentList" table
@@ -241,7 +241,7 @@ Scenario: _0510011 create Cash payment (independently)
 			| Code    | Description      |
 			| TRY     | Turkish lira     |
 		And I click "Select" button
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	* Filling in a partner in a tabular part
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -316,7 +316,7 @@ Scenario: _0510011 create Cash payment (independently)
 			| Code    | Description         |
 			| USD     | American dollar     |
 		And I click "Select" button
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	* Filling in a partner in a tabular part
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -382,7 +382,7 @@ Scenario: _0510011 create Cash payment (independently)
 			| Code    | Description     |
 			| EUR     | Euro            |
 		And I click "Select" button
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	* Filling in a partner in a tabular part
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -439,7 +439,7 @@ Scenario: _0510012 check form for select basis document
 			| Description      |
 			| Cash desk №1     |
 		And I select current line in "List" table
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	* Filling in a partner in a tabular part
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -473,7 +473,7 @@ Scenario: _0510012 check form for select basis document
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -570,7 +570,7 @@ And I click the button named "FormCreate"
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "TransactionType" became equal to "Return to customer"
 * Filling in partner and legal name
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I click choice button of "Partner" attribute in "PaymentList" table
 	And I go to line in "List" table
 		| Description    |
@@ -643,7 +643,7 @@ And I select "Payment to the vendor" exact value from "Transaction type" drop-do
 	And form attribute named "Currency" is available
 	And form attribute named "Date" is available
 * And I check the display of the tabular part
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I click choice button of "Partner" attribute in "PaymentList" table
 	And I go to line in "List" table
 		| Description    |
@@ -668,7 +668,7 @@ And I select "Currency exchange" exact value from "Transaction type" drop-down l
 	And form attribute named "Currency" is available
 	And form attribute named "Date" is available
 * And I check the display of the tabular part
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I click choice button of "Partner" attribute in "PaymentList" table
 	And I go to line in "List" table
 		| Description     |
@@ -691,7 +691,7 @@ And I select "Cash transfer order" exact value from "Transaction type" drop-down
 	And form attribute named "Currency" is available
 	And form attribute named "Date" is available
 * And I check the display of the tabular part
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I input "100,00" text in "Total amount" field of "PaymentList" table
 	And I finish line editing in "PaymentList" table
 	If "PaymentList" table does not contain column named "Payee" Then
@@ -860,7 +860,7 @@ And I close all client application windows
 	And I select from the drop-down list named "Company" by "Main Company" string
 	And I select from the drop-down list named "CashAccount" by "Cash desk №4" string
 * Filling payment list
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I select current line in "PaymentList" table
 	And I input "Tax authority" text in "Partner" field of "PaymentList" table
 	And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -1008,7 +1008,7 @@ Scenario: _051027 Prevent negative refund transactions in Cash payment
 		And I select from the drop-down list named "CashAccount" by "Cash desk №3" string
 		And I select from the drop-down list named "Currency" by "Turkish lira" string
 	* Filling payment list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
 		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
 		And I activate "Partner term" field in "PaymentList" table

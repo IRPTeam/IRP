@@ -197,7 +197,7 @@ Scenario: _052002 check that the amount does not change when select basis docume
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I select from "Account" drop-down list by "Bank account, TRY" string
 		And I select from "Transaction type" drop-down list by "Payment from customer" string
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
 		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
 		And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
@@ -216,7 +216,7 @@ Scenario: _052002 check that the amount does not change when select basis docume
 			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Payer'               | 'Basis document'            |
 			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '5 000,00'       | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
 	* Add one more line with the same invoice and check amount
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
 		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
 		And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
@@ -256,7 +256,7 @@ Scenario: _052001 create Bank receipt (independently)
 				| Description           |
 				| Bank account, TRY     |
 			And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -335,7 +335,7 @@ Scenario: _052001 create Bank receipt (independently)
 				| Description           |
 				| Bank account, USD     |
 			And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -407,7 +407,7 @@ Scenario: _052001 create Bank receipt (independently)
 				| Description           |
 				| Bank account, EUR     |
 			And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -542,7 +542,7 @@ Scenario: _052013 check the display of details on the form Bank receipt with the
 		And form attribute named "TransitAccount" is unavailable
 		And form attribute named "CurrencyExchange" is unavailable
 	* And I check the display of the tabular part
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
@@ -567,7 +567,7 @@ Scenario: _052014 check the display of details on the form Bank receipt with the
 		And form attribute named "Date" is available
 		And form attribute named "TransitAccount" is available
 	* And I check the display of the tabular part
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "2 000,00" text in "Amount exchange" field of "PaymentList" table
@@ -591,7 +591,7 @@ Scenario: _052015 check the display of details on the form Bank receipt with the
 		And form attribute named "Date" is available
 		And form attribute named "TransitAccount" is unavailable
 	* And I check the display of the tabular part
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		If "PaymentList" table does not contain column named "Payer" Then
@@ -883,7 +883,7 @@ Scenario: _052019 try post Bank receipt with empty amount
 			| Description           |
 			| Bank account, TRY     |
 		And I select current line in "List" table
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	* Filling in partners in a tabular part
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -1044,7 +1044,7 @@ Scenario: _052022 create Bank receipt with transaction type Other income
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I select from the drop-down list named "Account" by "Bank account, TRY" string
 	* Filling payment list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -1084,7 +1084,7 @@ Scenario: _052023 create Bank receipt with transaction type Other partner
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I select from the drop-down list named "Account" by "Bank account, TRY" string
 	* Filling payment list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
 		And I input "Tax authority" text in "Partner" field of "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -1301,7 +1301,7 @@ Scenario: _052029 Prevent negative refund transactions in Bank receipt
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I select from the drop-down list named "Account" by "Bank account, TRY" string
 	* Filling payment list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
 		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
 		And I activate "Partner term" field in "PaymentList" table

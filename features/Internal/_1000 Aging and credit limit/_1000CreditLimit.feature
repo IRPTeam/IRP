@@ -437,7 +437,7 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 			| 'Description'     |
 			| 'Turkish lira'    |
 		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -594,7 +594,7 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 			| 'Description'     |
 			| 'Turkish lira'    |
 		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table

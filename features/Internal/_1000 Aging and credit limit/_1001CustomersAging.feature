@@ -259,7 +259,7 @@ Scenario: _1000009 create Cash receipt and check Aging register movements
 				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'     |
@@ -343,7 +343,7 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 					| 'Bank account, TRY'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -366,7 +366,7 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 				And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 				And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -588,7 +588,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Bank account, TRY'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -621,7 +621,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Cash desk №4'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -655,7 +655,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Bank account, TRY'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -715,7 +715,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Cash desk №4'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -957,7 +957,7 @@ Scenario: _1000057 create BR based on SO (Prepaid)
 	* Try select SO in BR
 		And I activate "Partner term" field in "PaymentList" table
 		And I delete a line in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table

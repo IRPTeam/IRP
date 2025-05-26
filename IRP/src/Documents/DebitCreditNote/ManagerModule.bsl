@@ -32,6 +32,8 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R2021B_CustomersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -93,6 +95,8 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ReceiveTransactions());
 	QueryArray.Add(OtherPartnerSendTransactions());
 	QueryArray.Add(OtherPartnerReceiveTransactions());
+	QueryArray.Add(EmployeeSendTransactions());
+	QueryArray.Add(EmployeeReceiveTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -110,6 +114,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R3027B_EmployeeCashAdvance());
 	QueryArray.Add(PostingServer.Exists_R1020B_AdvancesToVendors());
 	QueryArray.Add(PostingServer.Exists_R2020B_AdvancesFromCustomers());
 	Return QueryArray;
@@ -407,6 +412,56 @@ Function OtherPartnerReceiveTransactions()
 		|	OR Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.OtherPartnerReceivable))";
 EndFunction
 
+Function EmployeeSendTransactions()
+	Return
+		"SELECT
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.EmployeeReceivable) AS IsSendEmployeeReceivable,
+		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.EmployeePayable) AS IsSendEmployeePayable,
+		|	Doc.Date AS Period,
+		|	Doc.Company,
+		|	Doc.Branch AS SendBranch,
+		|	Doc.SendPartner,
+		|	Doc.SendLegalName,
+		|	Doc.SendLegalNameContract,
+		|	Doc.SendCurrency,
+		|	Doc.SendAgreement,
+		|	Doc.SendBasisDocument,
+		|	Doc.SendAmount,
+		|	Doc.SendUUID AS Key
+		|INTO EmployeeSendTransactions
+		|FROM
+		|	Document.DebitCreditNote AS Doc
+		|WHERE
+		|	Doc.Ref = &Ref
+		|	AND (Doc.SendDebtType = VALUE(Enum.DebtTypes.EmployeePayable)
+		|	OR Doc.SendDebtType = VALUE(Enum.DebtTypes.EmployeeReceivable))";
+EndFunction
+
+Function EmployeeReceiveTransactions()
+	Return
+		"SELECT
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.EmployeeReceivable) AS IsReceiveEmployeeReceivable,
+		|	Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.EmployeePayable) AS IsReceiveEmployeePayable,
+		|	Doc.Date AS Period,
+		|	Doc.Company,
+		|	Doc.ReceiveBranch,
+		|	Doc.ReceivePartner,
+		|	Doc.ReceiveLegalName,
+		|	Doc.ReceiveLegalNameContract,
+		|	Doc.ReceiveCurrency,
+		|	Doc.ReceiveAgreement,
+		|	Doc.ReceiveBasisDocument,
+		|	Doc.ReceiveAmount,
+		|	Doc.ReceiveUUID AS Key
+		|INTO EmployeeReceiveTransactions
+		|FROM
+		|	Document.DebitCreditNote AS Doc
+		|WHERE
+		|	Doc.Ref = &Ref
+		|	AND (Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.EmployeePayable)
+		|	OR Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.EmployeeReceivable))";
+EndFunction
+
 #EndRegion
 
 #Region Posting_MainTables
@@ -658,6 +713,50 @@ Function R5015B_OtherPartnersTransactions()
 		|WHERE TRUE";
 EndFunction
 
+Function R3027B_EmployeeCashAdvance()
+	Return
+		"SELECT
+		|	CASE
+		|		WHEN EmployeeSendTransactions.IsSendEmployeeReceivable
+		|			THEN VALUE(AccumulationRecordType.Expense)
+		|		WHEN EmployeeSendTransactions.IsSendEmployeePayable
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|	END AS RecordType,
+		|	EmployeeSendTransactions.Period,
+		|	EmployeeSendTransactions.Company,
+		|	EmployeeSendTransactions.SendBranch AS Branch,
+		|	EmployeeSendTransactions.SendCurrency AS Currency,
+		|	EmployeeSendTransactions.SendPartner AS Partner,
+		|	EmployeeSendTransactions.SendAgreement AS Agreement,
+		|	EmployeeSendTransactions.SendAmount AS Amount
+		|INTO R3027B_EmployeeCashAdvance
+		|FROM
+		|	EmployeeSendTransactions AS EmployeeSendTransactions
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	CASE
+		|		WHEN EmployeeReceiveTransactions.IsReceiveEmployeeReceivable
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|		WHEN EmployeeReceiveTransactions.IsReceiveEmployeePayable
+		|			THEN VALUE(AccumulationRecordType.Expense)
+		|	END AS RecordType,
+		|	EmployeeReceiveTransactions.Period,
+		|	EmployeeReceiveTransactions.Company,
+		|	EmployeeReceiveTransactions.ReceiveBranch,
+		|	EmployeeReceiveTransactions.ReceiveCurrency,
+		|	EmployeeReceiveTransactions.ReceivePartner,
+		|	EmployeeReceiveTransactions.ReceiveAgreement,
+		|	EmployeeReceiveTransactions.ReceiveAmount
+		|FROM
+		|	EmployeeReceiveTransactions AS EmployeeReceiveTransactions
+		|WHERE
+		|	TRUE";
+EndFunction
+
 Function T2014S_AdvancesInfo()
 	Return InformationRegisters.T2014S_AdvancesInfo.T2014S_AdvancesInfo_DebitCreditNote();
 EndFunction
@@ -732,13 +831,15 @@ Function T1040T_AccountingAmounts()
 		|	case 
 		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionCustomer) 
 		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceVendor) 
-		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerReceivable) Then
+		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerReceivable)
+		|			or Doc.SendDebtType = value(enum.DebtTypes.EmployeeReceivable) Then
 		|			
 		|			Doc.ReceiveCurrency
 		|		
 		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionVendor)
 		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceCustomer)
-		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerPayable) Then
+		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerPayable)
+		|			or Doc.SendDebtType = value(enum.DebtTypes.EmployeePayable) Then
 		|			
 		|			Doc.SendCurrency
 		|
@@ -747,13 +848,15 @@ Function T1040T_AccountingAmounts()
 		|	case 
 		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionCustomer) 
 		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceVendor)
-		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerReceivable) Then
+		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerReceivable)
+		|			or Doc.SendDebtType = value(enum.DebtTypes.EmployeeReceivable) Then
 		|			
 		|			Doc.ReceiveAmount
 		|		
 		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionVendor)
 		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceCustomer)
-		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerPayable) Then
+		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerPayable)
+		|			or Doc.SendDebtType = value(enum.DebtTypes.EmployeePayable) Then
 		|			
 		|			Doc.SendAmount
 		|
@@ -762,13 +865,15 @@ Function T1040T_AccountingAmounts()
 		|	case 
 		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionCustomer) 
 		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceVendor)
-		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerReceivable) Then
+		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerReceivable)
+		|			or Doc.SendDebtType = value(enum.DebtTypes.EmployeeReceivable) Then
 		|			
 		|			Doc.SendCurrency
 		|		
 		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionVendor)
 		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceCustomer)
-		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerPayable) Then
+		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerPayable)
+		|			or Doc.SendDebtType = value(enum.DebtTypes.EmployeePayable) Then
 		|			
 		|			Doc.ReceiveCurrency
 		|
@@ -777,13 +882,15 @@ Function T1040T_AccountingAmounts()
 		|	case 
 		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionCustomer) 
 		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceVendor)
-		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerReceivable) Then
+		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerReceivable)
+		|			or Doc.SendDebtType = value(enum.DebtTypes.EmployeeReceivable) Then
 		|			
 		|			Doc.SendAmount
 		|		
 		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionVendor)
 		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceCustomer)
-		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerPayable) Then
+		|			or Doc.SendDebtType = value(enum.DebtTypes.OtherPartnerPayable)
+		|			or Doc.SendDebtType = value(enum.DebtTypes.EmployeePayable) Then
 		|			
 		|			Doc.ReceiveAmount
 		|
@@ -860,34 +967,6 @@ EndFunction
 Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-
-	// Sender
-	AdditionalAnalytics_Sender = New Structure();
-	AdditionalAnalytics_Sender.Insert("Partner"       , Parameters.ObjectData.SendPartner);
-	AdditionalAnalytics_Sender.Insert("LegalName"     , Parameters.ObjectData.SendLegalName);
-	AdditionalAnalytics_Sender.Insert("Agreement"     , Parameters.ObjectData.SendAgreement);
-	AdditionalAnalytics_Sender.Insert("Contract"      , Parameters.ObjectData.SendLegalNameContract);
-	AdditionalAnalytics_Sender.Insert("Order"         , Parameters.ObjectData.SendOrder);
-	AdditionalAnalytics_Sender.Insert("BasisDocument" , Parameters.ObjectData.SendBasisDocument);
-	
-	Sender = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-		                                               Parameters.ObjectData.SendPartner, 
-		                                               Parameters.ObjectData.SendAgreement,
-		                                               Parameters.ObjectData.SendCurrency);
-		                                               
-	// Receiver
-	AdditionalAnalytics_Receiver = New Structure();
-	AdditionalAnalytics_Receiver.Insert("Partner"       , Parameters.ObjectData.ReceivePartner);
-	AdditionalAnalytics_Receiver.Insert("LegalName"     , Parameters.ObjectData.ReceiveLegalName);
-	AdditionalAnalytics_Receiver.Insert("Agreement"     , Parameters.ObjectData.ReceiveAgreement);
-	AdditionalAnalytics_Receiver.Insert("Contract"      , Parameters.ObjectData.ReceiveLegalNameContract);
-	AdditionalAnalytics_Receiver.Insert("Order"         , Parameters.ObjectData.ReceiveOrder);
-	AdditionalAnalytics_Receiver.Insert("BasisDocument" , Parameters.ObjectData.ReceiveBasisDocument);
-	
-	Receiver = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-		                                                  Parameters.ObjectData.ReceivePartner, 
-		                                                  Parameters.ObjectData.ReceiveAgreement,
-		                                                  Parameters.ObjectData.ReceiveCurrency);
 	
 	// Customer - Customer
 	From_CustomerAdvance_To_CustomerAdvance = 
@@ -944,6 +1023,47 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.OtherPartnerPayable
 		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.OtherPartnerPayable);
 		
+	// Employee - Employee
+	From_EmployeeReceivable_To_EmployeeReceivable = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.EmployeeReceivable
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.EmployeeReceivable);
+		
+	From_EmployeePayable_To_EmployeePayable = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.EmployeePayable
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.EmployeePayable);
+		
+	// Sender
+	AdditionalAnalytics_Sender = New Structure();
+	AdditionalAnalytics_Sender.Insert("Partner"       , Parameters.ObjectData.SendPartner);
+	AdditionalAnalytics_Sender.Insert("LegalName"     , Parameters.ObjectData.SendLegalName);
+	AdditionalAnalytics_Sender.Insert("Agreement"     , Parameters.ObjectData.SendAgreement);
+	AdditionalAnalytics_Sender.Insert("Contract"      , Parameters.ObjectData.SendLegalNameContract);
+	AdditionalAnalytics_Sender.Insert("Order"         , Parameters.ObjectData.SendOrder);
+	AdditionalAnalytics_Sender.Insert("BasisDocument" , Parameters.ObjectData.SendBasisDocument);
+	
+	// Receiver
+	AdditionalAnalytics_Receiver = New Structure();
+	AdditionalAnalytics_Receiver.Insert("Partner"       , Parameters.ObjectData.ReceivePartner);
+	AdditionalAnalytics_Receiver.Insert("LegalName"     , Parameters.ObjectData.ReceiveLegalName);
+	AdditionalAnalytics_Receiver.Insert("Agreement"     , Parameters.ObjectData.ReceiveAgreement);
+	AdditionalAnalytics_Receiver.Insert("Contract"      , Parameters.ObjectData.ReceiveLegalNameContract);
+	AdditionalAnalytics_Receiver.Insert("Order"         , Parameters.ObjectData.ReceiveOrder);
+	AdditionalAnalytics_Receiver.Insert("BasisDocument" , Parameters.ObjectData.ReceiveBasisDocument);
+	
+	If From_EmployeeReceivable_To_EmployeeReceivable Or From_EmployeePayable_To_EmployeePayable Then
+		Sender = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.ObjectData.SendPartner);
+		Receiver = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.ObjectData.ReceivePartner);
+	Else
+		Sender = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+			                                               Parameters.ObjectData.SendPartner, 
+			                                               Parameters.ObjectData.SendAgreement,
+			                                               Parameters.ObjectData.SendCurrency);
+		Receiver = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+			                                                  Parameters.ObjectData.ReceivePartner, 
+			                                                  Parameters.ObjectData.ReceiveAgreement,
+			                                                  Parameters.ObjectData.ReceiveCurrency);
+	EndIf;
+			
 	// Advance customer (sender) -> Advance customer (receiver)*
 	If From_CustomerAdvance_To_CustomerAdvance Then
 		
@@ -1054,6 +1174,23 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 		Debit_Analytics = AdditionalAnalytics_Sender;
 	
 		Credit_Account = Receiver.AccountTransactionsOther;
+		Credit_Analytics = AdditionalAnalytics_Receiver;		
+	
+	// Employee
+	ElsIf From_EmployeeReceivable_To_EmployeeReceivable Then
+		
+		Debit_Account = Receiver.AccountCashAdvance;
+		Debit_Analytics = AdditionalAnalytics_Receiver;
+	
+		Credit_Account = Sender.AccountCashAdvance;
+		Credit_Analytics = AdditionalAnalytics_Sender;
+	
+	ElsIf From_EmployeePayable_To_EmployeePayable Then
+		
+		Debit_Account = Sender.AccountCashAdvance;
+		Debit_Analytics = AdditionalAnalytics_Sender;
+	
+		Credit_Account = Receiver.AccountCashAdvance;
 		Credit_Analytics = AdditionalAnalytics_Receiver;		
 	
 	EndIf;

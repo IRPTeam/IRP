@@ -404,6 +404,9 @@ Function GetAgreementTypeByDebtType(DebtType) Export
 	ElsIf DebtType = Enums.DebtTypes.OtherPartnerPayable
 		Or DebtType = Enums.DebtTypes.OtherPartnerReceivable Then
 		Return  Enums.AgreementTypes.Other;
+	ElsIf DebtType = Enums.DebtTypes.EmployeePayable
+		Or DebtType = Enums.DebtTypes.EmployeeReceivable Then
+		Return  Enums.AgreementTypes.Other;
 	Else
 		Raise StrTemplate("Unknown AgreementType by DebtType [%1]", DebtType);
 	EndIf;

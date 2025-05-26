@@ -54,4 +54,18 @@
       <value>Other partner (receivable)</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="7483a393-cca8-4409-9298-2106c6645c19">
+    <name>EmployeePayable</name>
+    <synonym>
+      <key>en</key>
+      <value>Employee (payable)</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="efa3a887-1dfe-43e5-b5ba-fcc03d05a598">
+    <name>EmployeeReceivable</name>
+    <synonym>
+      <key>en</key>
+      <value>Employee (receivable)</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

@@ -32,7 +32,8 @@ Procedure TrialBalanceReconciliationAtServer(IntegrationSettingsRef, DateFrom, D
 			NewRow.CurrencyUUID = New UUID(ItemInArray.CurrencyUUID);
 		EndIf;	
 		
-		For Counter = 1 To 3 Do
+		NumberOfAnalytics = Metadata.ChartsOfAccounts.Basic.MaxExtDimensionCount;
+		For Counter = 1 To NumberOfAnalytics Do
 			AnalyticColumn = StrTemplate("Analytic%1UUID", Counter);
 			AnalyticValue = ItemInArray[AnalyticColumn];
 			If IsBlankString(AnalyticValue) Then
@@ -55,115 +56,82 @@ Procedure TrialBalanceReconciliationAtServer(IntegrationSettingsRef, DateFrom, D
 		EndDo;	
 	EndDo;
 	
-	Query = New Query;
-	Query.SetParameter("SourceTable", SourceDataTable);
-	Query.SetParameter("IntegrationSettings", IntegrationSettingsRef);	
-	#Region QueryText
-	Query.Text = 		
-	"SELECT
-	|	SourceTable.AccountUUID,
-	|	SourceTable.KindOfAnalitycUUID1,
-	|	SourceTable.KindOfAnalitycUUID2,
-	|	SourceTable.KindOfAnalitycUUID3,
-	|	SourceTable.Analytic1UUID,
-	|	SourceTable.Analytic2UUID,
-	|	SourceTable.Analytic3UUID,
-	|	SourceTable.BaseClassAnalytic1,
-	|	SourceTable.BaseClassAnalytic2,
-	|	SourceTable.BaseClassAnalytic3,
-	|	SourceTable.ClassAnalytic1,
-	|	SourceTable.ClassAnalytic2,
-	|	SourceTable.ClassAnalytic3,
-	|	SourceTable.CurrencyUUID,
-	|	SourceTable.OpenBalanceCr,
-	|	SourceTable.OpenBalanceDt,
-	|	SourceTable.TurnoversCr,
-	|	SourceTable.TurnoversDt,
-	|	SourceTable.ClosingBalanceCr,
-	|	SourceTable.ClosingBalanceDt,
-	|	SourceTable.IsRefAnalytic1,
-	|	SourceTable.IsRefAnalytic2,
-	|	SourceTable.IsRefAnalytic3,
-	|	SourceTable.DimensionType1,
-	|	SourceTable.DimensionType2,
-	|	SourceTable.DimensionType3
-	|INTO TT_SourceTable
-	|FROM
-	|	&SourceTable AS SourceTable
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	TT_SourceTable.AccountUUID,
-	|	TT_SourceTable.KindOfAnalitycUUID1,
-	|	TT_SourceTable.KindOfAnalitycUUID2,
-	|	TT_SourceTable.KindOfAnalitycUUID3,
-	|	TT_SourceTable.Analytic1UUID,
-	|	TT_SourceTable.Analytic2UUID,
-	|	TT_SourceTable.Analytic3UUID,
-	|	TT_SourceTable.BaseClassAnalytic1,
-	|	TT_SourceTable.BaseClassAnalytic2,
-	|	TT_SourceTable.BaseClassAnalytic3,
-	|	TT_SourceTable.ClassAnalytic1,
-	|	TT_SourceTable.ClassAnalytic2,
-	|	TT_SourceTable.ClassAnalytic3,
-	|	TT_SourceTable.CurrencyUUID,
-	|	TT_SourceTable.OpenBalanceCr,
-	|	TT_SourceTable.OpenBalanceDt,
-	|	TT_SourceTable.TurnoversCr,
-	|	TT_SourceTable.TurnoversDt,
-	|	TT_SourceTable.ClosingBalanceCr,
-	|	TT_SourceTable.ClosingBalanceDt,
-	|	TT_SourceTable.IsRefAnalytic1,
-	|	TT_SourceTable.IsRefAnalytic2,
-	|	TT_SourceTable.IsRefAnalytic3,
-	|	TT_SourceTable.DimensionType1,
-	|	TT_SourceTable.DimensionType2,
-	|	TT_SourceTable.DimensionType3,
-	|	T9066S_AccountingMappingAnalytic1.ExtDimensionValue AS Analytic1,
-	|	T9066S_AccountingMappingAnalytic2.ExtDimensionValue AS Analytic2,
-	|	T9066S_AccountingMappingAnalytic3.ExtDimensionValue AS Analytic3,
-	|	ISNULL(T9061S_AccountingMappingAccounts.InternalRef, VALUE(ChartOfAccounts.Basic.EmptyRef)) AS Account,
-	|	ISNULL(T9063S_AccountingMappingCurrencies.InternalRef, VALUE(Catalog.Currencies.EmptyRef)) AS Currency
-	|FROM
-	|	TT_SourceTable AS TT_SourceTable
-	|		LEFT JOIN InformationRegister.T9066S_AccountingMappingExtDimensionRefValues AS T9066S_AccountingMappingAnalytic1
-	|		ON TT_SourceTable.Analytic1UUID = T9066S_AccountingMappingAnalytic1.ExternalRef
-	|		AND TT_SourceTable.DimensionType1 = T9066S_AccountingMappingAnalytic1.ExtDimensionType
-	|		LEFT JOIN InformationRegister.T9066S_AccountingMappingExtDimensionRefValues AS T9066S_AccountingMappingAnalytic2
-	|		ON TT_SourceTable.Analytic2UUID = T9066S_AccountingMappingAnalytic2.ExternalRef
-	|		AND TT_SourceTable.DimensionType2 = T9066S_AccountingMappingAnalytic2.ExtDimensionType
-	|		LEFT JOIN InformationRegister.T9066S_AccountingMappingExtDimensionRefValues AS T9066S_AccountingMappingAnalytic3
-	|		ON TT_SourceTable.Analytic3UUID = T9066S_AccountingMappingAnalytic3.ExternalRef
-	|		AND TT_SourceTable.DimensionType3 = T9066S_AccountingMappingAnalytic3.ExtDimensionType
-	|		LEFT JOIN InformationRegister.T9061S_AccountingMappingAccounts AS T9061S_AccountingMappingAccounts
-	|		ON TT_SourceTable.AccountUUID = T9061S_AccountingMappingAccounts.ExternalRef
-	|		AND T9061S_AccountingMappingAccounts.IntegrationSettings = &IntegrationSettings
-	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS T9063S_AccountingMappingCurrencies
-	|		ON TT_SourceTable.CurrencyUUID = T9063S_AccountingMappingCurrencies.ExternalRef
-	|		AND T9063S_AccountingMappingCurrencies.IntegrationSettings = &IntegrationSettings
-	|
-	|ORDER BY
-	|	Account,
-	|	Currency,
-	|	Analytic1,
-	|	Analytic2,
-	|	Analytic3";
-	#EndRegion	
-	SourceTableWithRefs = Query.Execute().Unload();
+	SourceTableWIthRefs = SourceTableWIthRefs(IntegrationSettingsRef, SourceDataTable);
 	
 	Query = New Query;
 	Query.SetParameter("DateFrom", DateFrom);
 	Query.SetParameter("DateTo", DateTo);
 	Query.SetParameter("LedgerType", LedgerTypeRef);
 	Query.SetParameter("AccountingTable", SourceTableWithRefs);
-	#Region QueryText
-	Query.Text = "SELECT
+	Query.Text = ReconcilationQueryText();
+			
+	Template = DataProcessors.AccountingService.GetTemplate("TrialBalanceReconcilation");
+	
+	AreaHeader = Template.GetArea("Header");
+	AreaAccount = Template.GetArea("Account");
+	AreaCurrency = Template.GetArea("Currency");
+	AreaAnalytics1 = Template.GetArea("Analytics1");
+	AreaAnalytics2 = Template.GetArea("Analytics2");
+	AreaAnalytics3 = Template.GetArea("Analytics3");
+		
+	ReconcilationBalanceResult.Clear();
+	AreaHeader.Parameters.Period = TrialBalancePeriod;
+	ReconcilationBalanceResult.Put(AreaHeader);	
+	
+	ReconcilationBalanceResult.StartRowAutoGrouping();
+	
+	SelectionAccount = Query.Execute().Select(QueryResultIteration.ByGroups, "Account");
+	While SelectionAccount.Next() Do
+		AreaAccount.Parameters.Fill(SelectionAccount);
+		ReconcilationBalanceResult.Put(AreaAccount, SelectionAccount.Level());
+		SelectionCurrency = SelectionAccount.Select(QueryResultIteration.ByGroups, "Currency");
+		While SelectionCurrency.Next() Do
+			AreaCurrency.Parameters.Fill(SelectionCurrency);
+			ReconcilationBalanceResult.Put(AreaCurrency, SelectionCurrency.Level());
+			
+			SelectionAnalytics1 = SelectionCurrency.Select(QueryResultIteration.ByGroups, "Analytics1");
+			While SelectionAnalytics1.Next() Do
+				AreaAnalytics1.Parameters.Fill(SelectionAnalytics1);
+				ReconcilationBalanceResult.Put(AreaAnalytics1, SelectionAnalytics1.Level());
+				
+				SelectionAnalytics2 = SelectionAnalytics1.Select(QueryResultIteration.ByGroups, "Analytics2");
+				While SelectionAnalytics2.Next() Do
+					AreaAnalytics2.Parameters.Fill(SelectionAnalytics2);
+					ReconcilationBalanceResult.Put(AreaAnalytics2, SelectionAnalytics2.Level());
+					
+					SelectionAnalytics3 = SelectionAnalytics2.Select();
+					While SelectionAnalytics3.Next() Do
+						AreaAnalytics3.Parameters.Fill(SelectionAnalytics3);
+						ReconcilationBalanceResult.Put(AreaAnalytics3, SelectionAnalytics3.Level());
+					EndDo
+				EndDo;		
+			EndDo;
+		EndDo;	
+	EndDo;
+
+	ReconcilationBalanceResult.EndRowAutoGrouping();
+	
+	Levels = ReconcilationBalanceResult.RowGroupLevelCount();
+	For Counter = 0 To Levels Do
+		ReconcilationBalanceResult.ShowRowGroupLevel(Levels - Counter);		
+	EndDo;	
+		
+	ReconcilationBalanceResult.FixedTop = 4;
+	ReconcilationBalanceResult.FixedLeft = 4;
+EndProcedure
+
+// Reconcilation query text.
+// 
+// Returns:
+//  String - Reconcilation query text
+&AtServerNoContext
+Function ReconcilationQueryText()
+	QueryText = "SELECT
 	|	BasicBalanceAndTurnovers.Account AS Account,
-	|	BasicBalanceAndTurnovers.ExtDimension1 AS Analytics1,
-	|	BasicBalanceAndTurnovers.ExtDimension2 AS Analytics2,
-	|	BasicBalanceAndTurnovers.ExtDimension3 AS Analytics3,
-	|	BasicBalanceAndTurnovers.Currency AS Currency,
+	|	ISNULL(BasicBalanceAndTurnovers.ExtDimension1, """") AS Analytics1,
+	|	ISNULL(BasicBalanceAndTurnovers.ExtDimension2, """") AS Analytics2,
+	|	ISNULL(BasicBalanceAndTurnovers.ExtDimension3, """") AS Analytics3,
+	|	ISNULL(BasicBalanceAndTurnovers.Currency, """") AS Currency,
 	|	BasicBalanceAndTurnovers.AmountOpeningBalanceDr AS OpenBalanceDt,
 	|	BasicBalanceAndTurnovers.AmountOpeningBalanceCr AS OpenBalanceCr,
 	|	BasicBalanceAndTurnovers.AmountTurnoverDr AS TurnoversDt,
@@ -179,10 +147,10 @@ Procedure TrialBalanceReconciliationAtServer(IntegrationSettingsRef, DateFrom, D
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	AccountingTable.Account,
-	|	AccountingTable.Currency,
-	|	AccountingTable.Analytic1 AS Analytics1,
-	|	AccountingTable.Analytic2 AS Analytics2,
-	|	AccountingTable.Analytic3 AS Analytics3,
+	|	ISNULL(AccountingTable.Currency,  """") AS Currency,
+	|	ISNULL(AccountingTable.Analytic1, """") AS Analytics1,
+	|	ISNULL(AccountingTable.Analytic2, """") AS Analytics2,
+	|	ISNULL(AccountingTable.Analytic3, """") AS Analytics3,
 	|	AccountingTable.OpenBalanceDt,
 	|	AccountingTable.OpenBalanceCr,
 	|	AccountingTable.TurnoversDt,
@@ -295,62 +263,143 @@ Procedure TrialBalanceReconciliationAtServer(IntegrationSettingsRef, DateFrom, D
 	|	Currency,
 	|	Analytics1,
 	|	Analytics2";
-	#EndRegion
+	
+	Return QueryText;
+EndFunction
+
+// Source table with refs.
+// 
+// Parameters:
+//  IntegrationSettingsRef - CatalogRef.IntegrationSettings - Integration settings ref
+//  SourceDataTable - ValueTable - Source data table:
+// * AccountUUID - UUID
+// * KindOfAnalitycUUID1 - UUID 
+// * KindOfAnalitycUUID2 - UUID
+// * KindOfAnalitycUUID3 - UUID
+// * Analytic1UUID - UUID
+// * Analytic2UUID - UUID
+// * Analytic3UUID - UUID
+// * BaseClassAnalytic1 - String
+// * BaseClassAnalytic2 - String
+// * BaseClassAnalytic3 - String
+// * ClassAnalytic1 - String
+// * ClassAnalytic2 - String
+// * ClassAnalytic3 - String
+// * CurrencyUUID - UUID
+// * OpenBalanceCr - Number
+// * OpenBalanceDt - Number
+// * TurnoversCr - Number
+// * TurnoversDt - Number
+// * ClosingBalanceCr - Number
+// * ClosingBalanceDt - Number
+// * IsRefAnalytic1 - Boolean
+// * IsRefAnalytic2 - Boolean
+// * IsRefAnalytic3 - Boolean
+// * DimensionType1 - AnyRef 
+// * DimensionType2 - AnyRef
+// * DimensionType3 - AnyRef
+// 
+// Returns:
+//  ValueTable
+&AtServer
+Function SourceTableWIthRefs(IntegrationSettingsRef, SourceDataTable)
+	Query = New Query;
+	Query.SetParameter("SourceTable", SourceDataTable);
+	Query.SetParameter("IntegrationSettings", IntegrationSettingsRef);	
+	Query.Text = 		
+	"SELECT
+	|	SourceTable.AccountUUID,
+	|	SourceTable.KindOfAnalitycUUID1,
+	|	SourceTable.KindOfAnalitycUUID2,
+	|	SourceTable.KindOfAnalitycUUID3,
+	|	SourceTable.Analytic1UUID,
+	|	SourceTable.Analytic2UUID,
+	|	SourceTable.Analytic3UUID,
+	|	SourceTable.BaseClassAnalytic1,
+	|	SourceTable.BaseClassAnalytic2,
+	|	SourceTable.BaseClassAnalytic3,
+	|	SourceTable.ClassAnalytic1,
+	|	SourceTable.ClassAnalytic2,
+	|	SourceTable.ClassAnalytic3,
+	|	SourceTable.CurrencyUUID,
+	|	SourceTable.OpenBalanceCr,
+	|	SourceTable.OpenBalanceDt,
+	|	SourceTable.TurnoversCr,
+	|	SourceTable.TurnoversDt,
+	|	SourceTable.ClosingBalanceCr,
+	|	SourceTable.ClosingBalanceDt,
+	|	SourceTable.IsRefAnalytic1,
+	|	SourceTable.IsRefAnalytic2,
+	|	SourceTable.IsRefAnalytic3,
+	|	SourceTable.DimensionType1,
+	|	SourceTable.DimensionType2,
+	|	SourceTable.DimensionType3
+	|INTO TT_SourceTable
+	|FROM
+	|	&SourceTable AS SourceTable
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TT_SourceTable.AccountUUID,
+	|	TT_SourceTable.KindOfAnalitycUUID1,
+	|	TT_SourceTable.KindOfAnalitycUUID2,
+	|	TT_SourceTable.KindOfAnalitycUUID3,
+	|	TT_SourceTable.Analytic1UUID,
+	|	TT_SourceTable.Analytic2UUID,
+	|	TT_SourceTable.Analytic3UUID,
+	|	TT_SourceTable.BaseClassAnalytic1,
+	|	TT_SourceTable.BaseClassAnalytic2,
+	|	TT_SourceTable.BaseClassAnalytic3,
+	|	TT_SourceTable.ClassAnalytic1,
+	|	TT_SourceTable.ClassAnalytic2,
+	|	TT_SourceTable.ClassAnalytic3,
+	|	TT_SourceTable.CurrencyUUID,
+	|	TT_SourceTable.OpenBalanceCr,
+	|	TT_SourceTable.OpenBalanceDt,
+	|	TT_SourceTable.TurnoversCr,
+	|	TT_SourceTable.TurnoversDt,
+	|	TT_SourceTable.ClosingBalanceCr,
+	|	TT_SourceTable.ClosingBalanceDt,
+	|	TT_SourceTable.IsRefAnalytic1,
+	|	TT_SourceTable.IsRefAnalytic2,
+	|	TT_SourceTable.IsRefAnalytic3,
+	|	TT_SourceTable.DimensionType1,
+	|	TT_SourceTable.DimensionType2,
+	|	TT_SourceTable.DimensionType3,
+	|	T9066S_AccountingMappingAnalytic1.ExtDimensionValue AS Analytic1,
+	|	T9066S_AccountingMappingAnalytic2.ExtDimensionValue AS Analytic2,
+	|	T9066S_AccountingMappingAnalytic3.ExtDimensionValue AS Analytic3,
+	|	ISNULL(T9061S_AccountingMappingAccounts.InternalRef, VALUE(ChartOfAccounts.Basic.EmptyRef)) AS Account,
+	|	ISNULL(T9063S_AccountingMappingCurrencies.InternalRef, VALUE(Catalog.Currencies.EmptyRef)) AS Currency
+	|FROM
+	|	TT_SourceTable AS TT_SourceTable
+	|		LEFT JOIN InformationRegister.T9066S_AccountingMappingExtDimensionRefValues AS T9066S_AccountingMappingAnalytic1
+	|		ON TT_SourceTable.Analytic1UUID = T9066S_AccountingMappingAnalytic1.ExternalRef
+	|		AND TT_SourceTable.DimensionType1 = T9066S_AccountingMappingAnalytic1.ExtDimensionType
+	|		LEFT JOIN InformationRegister.T9066S_AccountingMappingExtDimensionRefValues AS T9066S_AccountingMappingAnalytic2
+	|		ON TT_SourceTable.Analytic2UUID = T9066S_AccountingMappingAnalytic2.ExternalRef
+	|		AND TT_SourceTable.DimensionType2 = T9066S_AccountingMappingAnalytic2.ExtDimensionType
+	|		LEFT JOIN InformationRegister.T9066S_AccountingMappingExtDimensionRefValues AS T9066S_AccountingMappingAnalytic3
+	|		ON TT_SourceTable.Analytic3UUID = T9066S_AccountingMappingAnalytic3.ExternalRef
+	|		AND TT_SourceTable.DimensionType3 = T9066S_AccountingMappingAnalytic3.ExtDimensionType
+	|		LEFT JOIN InformationRegister.T9061S_AccountingMappingAccounts AS T9061S_AccountingMappingAccounts
+	|		ON TT_SourceTable.AccountUUID = T9061S_AccountingMappingAccounts.ExternalRef
+	|		AND T9061S_AccountingMappingAccounts.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS T9063S_AccountingMappingCurrencies
+	|		ON TT_SourceTable.CurrencyUUID = T9063S_AccountingMappingCurrencies.ExternalRef
+	|		AND T9063S_AccountingMappingCurrencies.IntegrationSettings = &IntegrationSettings
+	|
+	|ORDER BY
+	|	Account,
+	|	Currency,
+	|	Analytic1,
+	|	Analytic2,
+	|	Analytic3";
 		
-	Template = DataProcessors.AccountingService.GetTemplate("TrialBalanceReconcilation");
-	
-	AreaHeader = Template.GetArea("Header");
-	AreaAccount = Template.GetArea("Account");
-	AreaCurrency = Template.GetArea("Currency");
-	AreaAnalytics1 = Template.GetArea("Analytics1");
-	AreaAnalytics2 = Template.GetArea("Analytics2");
-	AreaAnalytics3 = Template.GetArea("Analytics3");
-		
-	ReconcilationBalanceResult.Clear();
-	AreaHeader.Parameters.Period = TrialBalancePeriod;
-	ReconcilationBalanceResult.Put(AreaHeader);	
-	
-	ReconcilationBalanceResult.StartRowAutoGrouping();
-	
-	SelectionAccount = Query.Execute().Select(QueryResultIteration.ByGroups, "Account");
-	While SelectionAccount.Next() Do
-		AreaAccount.Parameters.Fill(SelectionAccount);
-		ReconcilationBalanceResult.Put(AreaAccount, SelectionAccount.Level());
-		SelectionCurrency = SelectionAccount.Select(QueryResultIteration.ByGroups, "Currency");
-		While SelectionCurrency.Next() Do
-			AreaCurrency.Parameters.Fill(SelectionCurrency);
-			ReconcilationBalanceResult.Put(AreaCurrency, SelectionCurrency.Level());
-			
-			SelectionAnalytics1 = SelectionCurrency.Select(QueryResultIteration.ByGroups, "Analytics1");
-			While SelectionAnalytics1.Next() Do
-				AreaAnalytics1.Parameters.Fill(SelectionAnalytics1);
-				ReconcilationBalanceResult.Put(AreaAnalytics1, SelectionAnalytics1.Level());
-				
-				SelectionAnalytics2 = SelectionAnalytics1.Select(QueryResultIteration.ByGroups, "Analytics2");
-				While SelectionAnalytics2.Next() Do
-					AreaAnalytics2.Parameters.Fill(SelectionAnalytics2);
-					ReconcilationBalanceResult.Put(AreaAnalytics2, SelectionAnalytics2.Level());
-					
-					SelectionAnalytics3 = SelectionAnalytics2.Select();
-					While SelectionAnalytics3.Next() Do
-						AreaAnalytics3.Parameters.Fill(SelectionAnalytics3);
-						ReconcilationBalanceResult.Put(AreaAnalytics3, SelectionAnalytics3.Level());
-					EndDo
-				EndDo;		
-			EndDo;
-		EndDo;	
-	EndDo;
-	
-	ReconcilationBalanceResult.EndRowAutoGrouping();
-	
-	Levels = 4;
-	For Counter = 0 To Levels Do
-		ReconcilationBalanceResult.ShowRowGroupLevel(Levels - Counter);		
-	EndDo;	
-		
-	ReconcilationBalanceResult.FixedTop = 4;
-	ReconcilationBalanceResult.FixedLeft = 4;
-EndProcedure
+	SourceTableWithRefs = Query.Execute().Unload();
+	Return SourceTableWithRefs;
+EndFunction
 
 &AtServer
 Function AccountingMappingExtDimensionsTable(IntegrationSettingsRef)

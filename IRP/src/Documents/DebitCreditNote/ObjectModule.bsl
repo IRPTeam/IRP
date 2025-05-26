@@ -97,7 +97,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
    		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceVendor       And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
    		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceVendor       And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer)
    		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionVendor   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor) Then
-   
+   		 
    		CommonFunctionsClientServer.ShowUsersMessage(R().Error_142, "SendDebtType", ThisObject);
    		Cancel = True;
    EndIf;
@@ -110,9 +110,43 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	   		CommonFunctionsClientServer.ShowUsersMessage(R().Error_142, "SendDebtType", ThisObject);
 	   		Cancel = True;
 		EndIf;
-	Else
-				
 	EndIf;
+
+	// Other partner
+
+   	If (ThisObject.SendDebtType = Enums.DebtTypes.OtherPartnerPayable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionVendor)
+   		Or (ThisObject.SendDebtType = Enums.DebtTypes.OtherPartnerPayable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer)
+   		Or (ThisObject.SendDebtType = Enums.DebtTypes.OtherPartnerPayable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor)
+   		Or (ThisObject.SendDebtType = Enums.DebtTypes.OtherPartnerPayable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
+   		
+   		Or (ThisObject.SendDebtType = Enums.DebtTypes.OtherPartnerReceivable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionVendor)
+   		Or (ThisObject.SendDebtType = Enums.DebtTypes.OtherPartnerReceivable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer)
+   		Or (ThisObject.SendDebtType = Enums.DebtTypes.OtherPartnerReceivable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor)
+   		Or (ThisObject.SendDebtType = Enums.DebtTypes.OtherPartnerReceivable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
+   		
+   		Or (ThisObject.SendDebtType = Enums.DebtTypes.OtherPartnerReceivable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerPayable)
+   		Or (ThisObject.SendDebtType = Enums.DebtTypes.OtherPartnerPayable      And ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerReceivable) Then
+   
+   		CommonFunctionsClientServer.ShowUsersMessage(R().Error_142, "SendDebtType", ThisObject);
+   		Cancel = True;
+    EndIf;
+
+	If (ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerPayable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionVendor)
+   		Or (ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerPayable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer)
+   		Or (ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerPayable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor)
+   		Or (ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerPayable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
+   
+    	Or (ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerReceivable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionVendor)
+   		Or (ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerReceivable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer)
+   		Or (ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerReceivable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor)
+   		Or (ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerReceivable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
+   		
+   		Or (ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerReceivable   And ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerPayable)
+   		Or (ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerPayable      And ThisObject.ReceiveDebtType = Enums.DebtTypes.OtherPartnerReceivable) Then
+  
+   		CommonFunctionsClientServer.ShowUsersMessage(R().Error_142, "ReceiveDebtType", ThisObject);
+   		Cancel = True;
+    EndIf;
 
 EndProcedure
 

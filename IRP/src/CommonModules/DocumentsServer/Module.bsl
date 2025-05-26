@@ -1227,7 +1227,15 @@ Function GenerateDocumentNumber(Object) Export
 	Return Object.DocumentNumber;
 EndFunction
 
+// Set document state.
+// 
+// Parameters:
+//  Object - DocumentObjectDocumentName - Object
+//  Form - ClientApplicationForm - Form
 Procedure SetDocumentState(Object, Form) Export
+	If Form.Items.Find("FormPostAndClose") = Undefined Then
+		Return;
+	EndIf;
 	FormPostAndClose = Form.Items.FormPostAndClose; // FormButton
 	If Object.DeletionMark Then
 		FormPostAndClose.Picture = PictureLib.DocumentDeleted;

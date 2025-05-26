@@ -114,6 +114,7 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <horizontalStretch>true</horizontalStretch>
         <extendedTooltip>
           <name>GroupTitleCollapsedExtendedTooltip</name>
           <id>239</id>
@@ -243,6 +244,7 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <horizontalStretch>true</horizontalStretch>
         <extendedTooltip>
           <name>GroupTitleUncollapsedExtendedTooltip</name>
           <id>247</id>
@@ -272,6 +274,7 @@
       <userVisible>
         <common>true</common>
       </userVisible>
+      <horizontalStretch>true</horizontalStretch>
       <extendedTooltip>
         <name>GroupTitleDecorationsExtendedTooltip</name>
         <id>237</id>

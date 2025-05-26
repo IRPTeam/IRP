@@ -1304,7 +1304,7 @@ Function R6025B_SimpleBatch()
 	|	ItemList.Period,
 	|	ItemList.SimpleBatch,
 	|	ItemList.Quantity,
-	|	ItemList.Amount,
+	|	0 AS Amount,
 	|	UseSimpleBatch.Value
 	|INTO R6025B_SimpleBatch
 	|FROM

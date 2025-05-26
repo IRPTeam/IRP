@@ -110,9 +110,14 @@ Procedure SetVisibilityAvailability(Object, Form)
 			If TypeOf(FormItem) <> Type("FormField") 
 				OR FormItem.Parent = Form.Items.GroupDescriptions
 				OR FormItem.Parent = Form.Items.GroupPeriodOfUse
+				OR FormItem.Parent = Form.Items.GroupStoreAndDeliverySettings
 				OR FormItem = Form.Items.Date
 				OR FormItem = Form.Items.Number
 				OR FormItem = Form.Items.Account
+				OR FormItem = Form.Items.ItemSegment
+				OR FormItem = Form.Items.PriceType
+				OR FormItem = Form.Items.PriceIncludeTax
+				OR FormItem = Form.Items.PaymentTerm
 			Then
 				Continue;
 			EndIf;

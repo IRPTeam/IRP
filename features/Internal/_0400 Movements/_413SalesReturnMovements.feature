@@ -1109,6 +1109,7 @@ Scenario: _041342 check Sales return movements by the Register  "R6060 Cost of g
 	* Check movements by the Register "R6060 Cost of goods sold"
 		And I click "Registrations report info" button
 		And I select "R6060 Cost of goods sold" exact value from "Register" drop-down list
+		And Delay 10
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
 			| 'Sales return 1 114 dated 12.05.2025 00:00:00'      | ''                    | ''             | ''                                              | ''         | ''                        | ''         | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                                                       |

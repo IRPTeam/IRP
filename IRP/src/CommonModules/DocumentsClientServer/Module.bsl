@@ -51,6 +51,7 @@ Procedure ChangeTitleGroupTitle(Object, Form, Settings = Undefined) Export
 	If SessionParameters.isMobile Then
 		Return;
 	EndIf;
+	DocumentsServer.SetDocumentState(Object, Form);
 #ElsIf MobileClient Then
 	Return;
 #EndIf

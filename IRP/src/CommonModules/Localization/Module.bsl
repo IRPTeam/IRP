@@ -310,7 +310,9 @@
 // * Error_PartnerBalanceCheckfailed - String - 
 // * Error_145 - String - 
 // * Error_146 - String - 
-// * Error_147 - String - 
+// * Error_147 - String -
+// * Error_148 - String - 
+// * Error_181 - String -
 // * Error_FillTotalAmount - String - 
 // * MF_Error_001 - String - 
 // * MF_Error_002 - String - 
@@ -1520,9 +1522,9 @@ Function Strings(Lang) Export
 		|tr='""%2"" onay kutusu temizlenemiyor. %1 mağazasından ""%3"" belgeleri zaten oluşturulmuş.'", Lang));
 	
 	// %1 - sales order
-	Strings.Insert("Error_054", NStr("en='Cannot continue. The ""%1""document has an incorrect status.';
-		|ru='Невозможно продолжить. Статус документа ""%1"" для продолжения неверный.';
-		|tr='Devam edilemez. ""%1"" belgesinin durumu yanlış.'", Lang));
+	Strings.Insert("Error_054", NStr("en='Cannot continue. The ""%1"" document has an incorrect status.';
+		|ru='Cannot continue. The ""%1"" document has an incorrect status.';
+		|tr='Devam edilemiyor. ""%1"" belgesinin durumu yanlış.'", Lang));
 
 	Strings.Insert("Error_055", NStr("en='There are no lines with a correct procurement method.';
 		|ru='Отсутствуют строки с нужным способом обеспечения.';
@@ -2057,6 +2059,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_180", NStr("en='Only system record allowed';
 		|ru='Только системная запись разрешена';
 		|tr='Yalnızca sistem kaydına izin verilir'", Lang));
+	Strings.Insert("Error_181", NStr("en='Attribute already on form. Remove duplicate from set: [%1]';
+		|ru='Attribute already on form. Remove duplicate from set: [%1]';
+		|tr='Öznitelik zaten formda mevcut. Tekrarlayan kaldırın: [%1]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -3625,10 +3630,20 @@ Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTa
 		|ru='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R3040B_WithholdingTax)';
 		|tr='SerbestMeslekMakbuzu DR (R5022T_Giderler) CR (R3040B_Stopaj)'", Lang));
 
+Strings.Insert("FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues",
+	NStr("en='FixedAssetRevaluation DR (R8510B BookValueOfFixedAsset) CR (R5021T Revenues)';
+		|ru='FixedAssetRevaluation DR (R8510B BookValueOfFixedAsset) CR (R5021T Revenues)';
+		|tr='Sabit Varlık Yeniden Değerlemesi Borç (R8510B Sabit Varlığın Defter Değeri) Alacak (R5021T Gelirler)'", Lang));
+
+Strings.Insert("FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset",
+	NStr("en='FixedAssetRevaluation DR (R5022T Expenses) CR (R8510B BookValueOfFixedAsset)';
+		|ru='FixedAssetRevaluation DR (R5022T Expenses) CR (R8510B BookValueOfFixedAsset)';
+		|tr='Sabit Varlık Yeniden Değerlemesi Borç (R5022T Giderleri) Alacak (R8510B Sabit Varlığın Defter Değeri)'", Lang));
+
 	
 Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External accounting operation exchange report';
 	|ru='Отчет по обменам внешних бухгалтерских операци';
-	|tr='Dış muhaseb evrakları veri alış veriş raporu'", Lang));	
+	|tr='Dış muhaseb evrakları veri alış veriş raporu'", Lang));
 
 #EndRegion
 
@@ -3838,7 +3853,11 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 	// %3 - Document date
 	Strings.Insert("DocPresentation", NStr("en='%1 %2 dated %3';
 		|ru='%1 %2 от %3';
-		|tr='%1 %2 tarih %3'", Lang));	
+		|tr='%1 %2 tarih %3'", Lang));
+	
+	Strings.Insert("DatePresentation", NStr("en='dated';
+		|ru='dated';
+		|tr='tarihli'", Lang));	
 #EndRegion
 
 #Region PeriodClosing
@@ -3942,6 +3961,25 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 	Strings.Insert("SystemAttribute_Store", NStr("en='Store';
 		|ru='Склад';
 		|tr='Depo'", Lang));
+#EndRegion
+
+#Region Updates
+	Strings.Insert("Update_001", NStr("en='Update system attribute [Store]';
+		|ru='Update system attribute [Store]';
+		|tr='Sistem niteliğini güncelle [Store]'", Lang));
+	Strings.Insert("UpdateDesc_001", NStr("en='Update information register System Attributes using all old documents';
+		|ru='Update information register System Attributes using all old documents';
+		|tr='Tüm eski belgeleri kullanarak bilgi kayıt sistemi niteliklerini güncelle'", Lang));
+	
+	Strings.Insert("Update_002", NStr("en='Update Catalog.ItemType  ';
+		|ru='Update Catalog.ItemType  ';
+		|tr='Katalog.MazlemeTipi güncelle'", Lang));
+	Strings.Insert("UpdateDesc_002", NStr("en='Covert attribute 
+		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber';
+		|ru='Covert attribute 
+		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber';
+		|tr='Gizli öznitelik
+		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber'", Lang));		
 #EndRegion
 
 	Return Strings;

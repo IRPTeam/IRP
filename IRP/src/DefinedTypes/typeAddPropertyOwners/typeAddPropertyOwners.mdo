@@ -178,5 +178,6 @@
   <types>CatalogRef.ObjectLocations</types>
   <types>DocumentRef.ShipmentPlaningOrder</types>
   <types>DocumentRef.WithholdingTaxInvoice</types>
+  <types>DocumentRef.FixedAssetRevaluation</types>
  </type>
 </mdclass:DefinedType>

@@ -247,7 +247,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Bakiye (VA)</v8:content>
+					<v8:content>Bakiye (TA)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -293,7 +293,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Bakiye (CT)</v8:content>
+					<v8:content>Bakiye (Mİ)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -339,7 +339,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Açılış (VA)</v8:content>
+					<v8:content>Açılış (TA)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -385,7 +385,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Makbuz (VA)</v8:content>
+					<v8:content>Gelen (TA)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -426,7 +426,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Gider (VA)</v8:content>
+					<v8:content>Çıkan (TA)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -467,7 +467,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Açılış (CA)</v8:content>
+					<v8:content>Açılış (MA)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -513,7 +513,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Bakiye (VT)</v8:content>
+					<v8:content>Bakiye (Tİ)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -559,7 +559,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Makbuz (CA)</v8:content>
+					<v8:content>Gelen (MA)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -600,7 +600,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Gider (CA)</v8:content>
+					<v8:content>Çıkan (MA)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -641,7 +641,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Açılış (VT)</v8:content>
+					<v8:content>Açılış (Tİ)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -687,7 +687,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Bakiye (CA)</v8:content>
+					<v8:content>Bakiye (MA)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -733,7 +733,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Makbuz (VT)</v8:content>
+					<v8:content>Gelen (Tİ)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -774,7 +774,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Gider (VT)</v8:content>
+					<v8:content>Çıkan (Tİ)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -815,7 +815,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Açılış (CT)</v8:content>
+					<v8:content>Açılış (Mİ)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -861,7 +861,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Makbuz (CT)</v8:content>
+					<v8:content>Gelen (Mİ)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -902,7 +902,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Gider (CT)</v8:content>
+					<v8:content>Çıkan (Mİ)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -1016,7 +1016,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Giriş</v8:content>
+					<v8:content>Gelen</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -1057,7 +1057,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Gider</v8:content>
+					<v8:content>Çıkan</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -1183,7 +1183,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Müşteri İşlemleri (CT)</v8:content>
+					<v8:content>Müşteri İşlemleri (Mİ)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -1200,7 +1200,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Müşteri Avansları (CA)</v8:content>
+					<v8:content>Müşteri Avansları (MA)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -1217,7 +1217,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Satıcı İşlemleri (VT)</v8:content>
+					<v8:content>Tedarikçi İşlemleri (Tİ)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -1234,7 +1234,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Satıcı Avansları (VA)</v8:content>
+					<v8:content>Tedarikçi Avansları (TA)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>

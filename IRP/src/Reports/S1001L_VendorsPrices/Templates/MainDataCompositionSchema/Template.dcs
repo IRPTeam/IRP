@@ -116,7 +116,7 @@ ORDER BY
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>tr</v8:lang>
-				<v8:content>Vendor prices</v8:content>
+				<v8:content>Tedarikçi fiyatları</v8:content>
 			</v8:item>
 			<v8:item>
 				<v8:lang>ru</v8:lang>

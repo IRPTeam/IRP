@@ -1011,6 +1011,13 @@
     <value>163</value>
    </code>
   </items>
+  <items id="0c98a16a-9478-4dec-84c6-3b3d08514189">
+   <name>Document_FixedAssetRevaluation</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>164</value>
+   </code>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

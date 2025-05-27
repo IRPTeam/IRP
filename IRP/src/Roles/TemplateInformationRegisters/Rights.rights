@@ -192,6 +192,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.AppliedDatabaseUpdates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.PricesByItems</name>
 		<right>
 			<name>Read</name>
@@ -828,6 +839,17 @@
 	</object>
 	<object>
 		<name>InformationRegister.IDInfo</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9069S_AccountingMappingRecordersDescription</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

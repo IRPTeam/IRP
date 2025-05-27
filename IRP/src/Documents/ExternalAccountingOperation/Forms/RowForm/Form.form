@@ -5554,7 +5554,7 @@
   <name>Activity</name>
   <title>
    <key>tr</key>
-   <value>Aktivite </value>
+   <value>Faaliyet</value>
   </title>
   <title>
    <key>ru</key>
@@ -5604,7 +5604,7 @@
   <name>CompanyPresentation</name>
   <title>
    <key>tr</key>
-   <value>Şirket sunumu </value>
+   <value>İş yerlerinin tanıtımı</value>
   </title>
   <title>
    <key>ru</key>
@@ -5960,7 +5960,7 @@
   <name>QuantityCr</name>
   <title>
    <key>tr</key>
-   <value>Miktar Alacak </value>
+   <value>Alacak miktarı</value>
   </title>
   <title>
    <key>ru</key>

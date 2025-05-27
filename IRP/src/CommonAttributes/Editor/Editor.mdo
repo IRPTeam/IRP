@@ -141,6 +141,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.FixedAssetRevaluation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.InterfaceGroups</metadata>
   <use>Use</use>
  </content>

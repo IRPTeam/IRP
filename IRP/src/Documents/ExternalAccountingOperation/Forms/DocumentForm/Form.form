@@ -3037,6 +3037,34 @@
   <items xsi:type="form:FormGroup">
    <name>GroupOther</name>
    <id>483</id>
+   <items xsi:type="form:FormGroup">
+    <name>GroupDescriptions</name>
+    <id>584</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>GroupDescriptionsExtendedTooltip</name>
+     <id>585</id>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <type>UsualGroup</type>
+    <extInfo xsi:type="form:UsualGroupExtInfo">
+     <group>HorizontalIfPossible</group>
+     <behavior>Auto</behavior>
+     <showLeftMargin>true</showLeftMargin>
+     <united>true</united>
+     <throughAlign>Auto</throughAlign>
+     <currentRowUse>Auto</currentRowUse>
+    </extInfo>
+   </items>
    <items xsi:type="form:FormField">
     <name>Number</name>
     <id>1</id>

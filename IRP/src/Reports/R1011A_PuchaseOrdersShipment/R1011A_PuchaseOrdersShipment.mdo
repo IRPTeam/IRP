@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="383f65cd-1d75-4ce5-b15a-73dcc353bc74">
+ <producedTypes>
+  <objectType typeId="77f756e6-6e3a-4d52-b461-8bebc0366eda" valueTypeId="7683782f-ffbb-471f-bf58-f7eea0a8fe0f"/>
+  <managerType typeId="b1f67bbe-cd31-4ebe-85c7-d9b6808d9393" valueTypeId="1ea05b92-71e3-4347-a004-f695a79f5fcd"/>
+ </producedTypes>
+ <name>R1011A_PuchaseOrdersShipment</name>
+ <synonym>
+  <key>tr</key>
+  <value>R1011A Satınalma siparişlerin sevkiyatı</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R1011A Puchase orders shipment</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R1011A Puchase orders shipment</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R1011A_PuchaseOrdersShipment.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="7563ee7a-00aa-4bf2-9d97-f5443d7b0592">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

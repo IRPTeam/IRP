@@ -1312,7 +1312,7 @@
    </userVisible>
    <title>
     <key>tr</key>
-    <value>Attachments</value>
+    <value>Dosyalar</value>
    </title>
    <title>
     <key>ru</key>
@@ -2362,7 +2362,7 @@
   <name>OpenFile</name>
   <title>
    <key>tr</key>
-   <value>Open file</value>
+   <value>Dosya nasıl açılır?</value>
   </title>
   <title>
    <key>ru</key>

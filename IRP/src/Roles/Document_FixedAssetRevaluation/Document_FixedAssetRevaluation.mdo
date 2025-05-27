@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="89dea5ac-2455-46cd-b598-aebfec5193c5">
+ <name>Document_FixedAssetRevaluation</name>
+ <synonym>
+  <key>tr</key>
+  <value>"Sabit kıymet yeniden değerlemesi" belgesi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Document "Fixed asset revaluation"</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Document "Fixed asset revaluation"</value>
+ </synonym>
+</mdclass:Role>

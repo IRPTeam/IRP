@@ -24,7 +24,7 @@
   <name>Expense</name>
   <synonym>
    <key>tr</key>
-   <value>Gider</value>
+   <value>Çıkan</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -39,7 +39,7 @@
   <name>Receipt</name>
   <synonym>
    <key>tr</key>
-   <value>Giriş</value>
+   <value>Gelen</value>
   </synonym>
   <synonym>
    <key>ru</key>

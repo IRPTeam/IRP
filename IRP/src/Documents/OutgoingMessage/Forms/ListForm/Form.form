@@ -989,7 +989,7 @@ GROUP BY
      <localValue>
       <content>
        <key>tr</key>
-       <value>Date sent</value>
+       <value>Gönderilme tarihi</value>
       </content>
       <content>
        <key>ru</key>
@@ -1009,7 +1009,7 @@ GROUP BY
      <localValue>
       <content>
        <key>tr</key>
-       <value>Recipients</value>
+       <value>SMS alıcıları</value>
       </content>
       <content>
        <key>ru</key>
@@ -1033,7 +1033,7 @@ GROUP BY
      <localValue>
       <content>
        <key>tr</key>
-       <value>To send</value>
+       <value>Göndermek için</value>
       </content>
       <content>
        <key>ru</key>

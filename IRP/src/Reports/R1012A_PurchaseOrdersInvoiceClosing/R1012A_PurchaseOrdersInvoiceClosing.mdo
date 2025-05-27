@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fc4ad541-6115-4667-9cd3-a23ca005ada3">
+ <producedTypes>
+  <objectType typeId="ae88e0c7-6371-4c32-86a7-42803ffa4026" valueTypeId="be412691-01f8-47bb-ad00-870bac1fa6dc"/>
+  <managerType typeId="298473e6-cf77-43c8-934a-1cb5cfc45c3f" valueTypeId="2daa414c-b78a-495e-a440-eac3bc2a8996"/>
+ </producedTypes>
+ <name>R1012A_PurchaseOrdersInvoiceClosing</name>
+ <synonym>
+  <key>tr</key>
+  <value>R1012A Satınalma siparişlerin faturalandırılması</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R1012A Purchase orders invoice closing</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R1012A Purchase orders invoice closing</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R1012A_PurchaseOrdersInvoiceClosing.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="a5bc81c6-b84b-44fc-be85-80d0759ff0ca">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

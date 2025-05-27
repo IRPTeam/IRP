@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b61672f5-0201-4840-a0d3-140ae7c45dbd">
+ <producedTypes>
+  <objectType typeId="b522bf0d-2db7-4ff1-b112-82bf91709fda" valueTypeId="7b9e0ce4-b086-47f2-ae7c-d5a5f48219b3"/>
+  <managerType typeId="db5ca6e7-b159-4ba1-9f61-f7bde462cced" valueTypeId="4f8ba48b-9da6-4505-a564-22e43253f542"/>
+ </producedTypes>
+ <name>R502A_ProfitLosses</name>
+ <synonym>
+  <key>tr</key>
+  <value>R502A Kar ve Zararlar</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R502A Profit &amp; Losses</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R502A Profit &amp; Losses</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R502A_ProfitLosses.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="a712bd25-662e-4a8f-9a61-66fab9793c2f">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

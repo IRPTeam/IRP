@@ -2149,7 +2149,7 @@
   <name>LockType</name>
   <title>
    <key>tr</key>
-   <value>Kilit</value>
+   <value>Kilitle</value>
   </title>
   <title>
    <key>ru</key>
@@ -2712,7 +2712,7 @@ GROUP BY
   <name>Lock</name>
   <title>
    <key>tr</key>
-   <value>Kilit</value>
+   <value>Kilitle</value>
   </title>
   <title>
    <key>ru</key>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="aa4adc20-6213-4909-9ff2-e6225f0ea122">
+ <producedTypes>
+  <objectType typeId="a856ed83-2865-4ced-ae2f-9c96a438a0a3" valueTypeId="2234e4f7-af87-4acb-b2b6-a65a9f23e47a"/>
+  <managerType typeId="d8178094-9317-4476-a2c3-e11fe139b007" valueTypeId="1f2ccf50-af21-4e63-9fbf-54ce4c0cbbe0"/>
+ </producedTypes>
+ <name>R4010A_StockBalance</name>
+ <synonym>
+  <key>tr</key>
+  <value>R4010A Stok bakiyesi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R4010A Stock balance</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R4010A Stock balance</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R4010A_StockBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="c1ef6f3a-4ce0-4e2a-b46b-41dfd33cb9ed">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

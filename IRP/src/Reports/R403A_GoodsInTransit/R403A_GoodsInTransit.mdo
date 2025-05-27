@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="243e1b0f-53c3-477e-aa09-a40f75c717e6">
+ <producedTypes>
+  <objectType typeId="f697713d-b35b-4750-a109-5b320d525d15" valueTypeId="a0e0d99c-4035-47f7-b5d9-79d12ef0b820"/>
+  <managerType typeId="6e8f03d1-f8b7-479d-9061-364a44095b0f" valueTypeId="48e21cf4-a4d8-413e-b741-a812efa18fb6"/>
+ </producedTypes>
+ <name>R403A_GoodsInTransit</name>
+ <synonym>
+  <key>tr</key>
+  <value>R403A Yoldaki mallar</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R403A Goods in transit</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R403A Goods in transit</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R403A_GoodsInTransit.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="8e0b7ab3-5632-4457-9bfe-5f581a0046d3">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

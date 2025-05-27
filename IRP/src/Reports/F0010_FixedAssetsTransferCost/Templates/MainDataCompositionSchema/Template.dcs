@@ -419,7 +419,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>tr</v8:lang>
-				<v8:content>Depreciation</v8:content>
+				<v8:content>Amortisman tahakkuku</v8:content>
 			</v8:item>
 			<v8:item>
 				<v8:lang>ru</v8:lang>

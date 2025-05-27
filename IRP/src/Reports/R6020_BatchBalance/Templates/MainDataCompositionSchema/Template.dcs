@@ -4039,7 +4039,7 @@ WHERE
 					<dcsset:lwsTitle>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Giriş</v8:content>
+							<v8:content>Gelen</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -4095,7 +4095,7 @@ WHERE
 					<dcsset:lwsTitle>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Gider</v8:content>
+							<v8:content>Çıkan</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>

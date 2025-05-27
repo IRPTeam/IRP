@@ -175,7 +175,7 @@
   <name>Subject</name>
   <synonym>
    <key>tr</key>
-   <value>Subject</value>
+   <value>Kusurun kısa açıklaması</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -273,7 +273,7 @@
   <name>Importance</name>
   <synonym>
    <key>tr</key>
-   <value>Importance</value>
+   <value>Görevin önemi</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -324,7 +324,7 @@
   <name>HasAttachments</name>
   <synonym>
    <key>tr</key>
-   <value>Has attachments</value>
+   <value>Eki var</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -453,7 +453,7 @@
    <name>Addressee</name>
    <synonym>
     <key>tr</key>
-    <value>Addressee</value>
+    <value>Alıcı</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -478,7 +478,7 @@
    <name>Destination</name>
    <synonym>
     <key>tr</key>
-    <value>Destination</value>
+    <value>Nereye</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -552,7 +552,7 @@
   <name>Attachments</name>
   <synonym>
    <key>tr</key>
-   <value>Attachments</value>
+   <value>Dosyalar</value>
   </synonym>
   <synonym>
    <key>ru</key>

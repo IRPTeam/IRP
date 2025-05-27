@@ -180,7 +180,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Юридическое имя (отправка)</value>
+   <value>Контрагент(отправка)</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -203,7 +203,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Условие партнера (отправка)</value>
+   <value>Соглашение (отправка)</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -375,7 +375,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Юридическое имя (получение)</value>
+   <value>Контрагент (получение)</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -398,7 +398,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Условие партнера (получение)</value>
+   <value>Соглашение (получение)</value>
   </synonym>
   <synonym>
    <key>en</key>

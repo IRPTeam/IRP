@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="42efc32d-9b0d-4450-8e90-a9ab5aa352af">
+ <producedTypes>
+  <objectType typeId="ae6b1d25-f369-45cd-b916-b9b2fdcd24af" valueTypeId="3e24d1c9-a5c7-49dc-bc1d-bca668564d22"/>
+  <managerType typeId="41cd0bdc-0e91-44f2-97b2-da017e12d8e9" valueTypeId="329fd2d5-dbc0-4c9b-9169-0fd450e91c2a"/>
+ </producedTypes>
+ <name>UpdateDatabase</name>
+ <synonym>
+  <key>tr</key>
+  <value>Veritabanı güncelle</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Update database</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Update database</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.UpdateDatabase.Form.Form</defaultForm>
+ <forms uuid="53f2db0b-5d93-40de-baaa-08b5a6564be2">
+  <name>Form</name>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:DataProcessor>

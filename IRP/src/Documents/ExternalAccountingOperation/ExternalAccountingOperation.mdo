@@ -537,7 +537,7 @@
    <name>CurrencyPresentation</name>
    <synonym>
     <key>tr</key>
-    <value>Para birimi sunumu </value>
+    <value>Para birimi sunumu</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -744,7 +744,7 @@
    <name>QuantityDr</name>
    <synonym>
     <key>tr</key>
-    <value>Miktar Borç </value>
+    <value>Borç miktarı</value>
    </synonym>
    <synonym>
     <key>ru</key>

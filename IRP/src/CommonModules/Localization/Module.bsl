@@ -2330,15 +2330,26 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 
 #Region SytemAttributes
 	Strings.Insert("SystemAttribute_Store", NStr("en = 'Store'", Lang));
+	Strings.Insert("SystemAttribute_Partner", NStr("en = 'Partner'", Lang));
+	Strings.Insert("SystemAttribute_PartnerTerm", NStr("en = 'Partner term'", Lang));
+	Strings.Insert("SystemAttribute_LegalName", NStr("en = 'Legal name'", Lang));
+	Strings.Insert("SystemAttribute_LegalNameContract", NStr("en = 'Legal name contract'", Lang));
 #EndRegion
 
 #Region Updates
-	Strings.Insert("Update_001", NStr("en = 'Update system attribute [Store]'", Lang));
-	Strings.Insert("UpdateDesc_001", NStr("en = 'Update information register System Attributes using all old documents'", Lang));
-	
-	Strings.Insert("Update_002", NStr("en = 'Update Catalog.ItemType  '", Lang));
-	Strings.Insert("UpdateDesc_002", NStr("en = 'Covert attribute 
+	Strings.Insert("Update_001", NStr("en = 'Update Catalog.ItemType  '", Lang));
+	Strings.Insert("UpdateDesc_001", NStr("en = 'Covert attribute 
 		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber'", Lang));		
+	
+	Strings.Insert("Update_002", NStr("en = 'Update system attributes'", Lang));
+	Strings.Insert("UpdateDesc_002", NStr("en = 'Updating predefined system attribute names'", Lang));
+	
+	Strings.Insert("Update_003", NStr("en = 'Update system attributes sets'", Lang));
+	Strings.Insert("UpdateDesc_003", NStr("en = 'Updating the predefined composition of system attribute sets'", Lang));
+	
+	Strings.Insert("Update_004", NStr("en = 'Update system attributes values'", Lang));
+	Strings.Insert("UpdateDesc_004", NStr("en = 'Update information register System Attributes using all old documents'", Lang));
+	
 #EndRegion
 
 	Return Strings;

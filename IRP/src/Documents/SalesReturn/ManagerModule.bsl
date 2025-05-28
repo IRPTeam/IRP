@@ -1502,6 +1502,12 @@ EndFunction
 
 #Region SystemAttributes
 
+Function GetPredefinedSystemAttributes() Export
+	SystemAttributes = New Array(); // Array of ChartOfCharacteristicTypesRef.SystemAttributes
+	SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.Store);
+	Return SystemAttributes;
+EndFunction
+
 Function GetSystemAttributeValues(Obj, SystemAttribute) Export
 	Values = New Array();
 	If SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.Store Then

@@ -180,6 +180,8 @@ Function CostOfGoodsSold_CollectRecords(DocObject) Export
 	|	END AS AllocatedRevenueTaxAmount,
 	|
 	|	R6010B_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
+	|	R6010B_BatchWiseBalance.BatchKey.SerialLotNumber AS SerialLotNumber, 
+	|	R6010B_BatchWiseBalance.BatchKey.SourceOfOrigin AS SourceOfOrigin,
 	|	R6010B_BatchWiseBalance.Batch.Company AS Company,
 	|	R6010B_BatchWiseBalance.Recorder AS CalculationMovementCost
 	|INTO BatchWiseBalance
@@ -213,6 +215,8 @@ Function CostOfGoodsSold_CollectRecords(DocObject) Export
 	|	BatchWiseBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
 	|
 	|	BatchWiseBalance.ItemKey AS ItemKey,
+	|	BatchWiseBalance.SerialLotNumber AS SerialLotNumber,
+	|	BatchWiseBalance.SourceOfOrigin AS SourceOfOrigin,
 	|	BatchWiseBalance.Company AS Company,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.SalesInvoice.Ref IS NULL
@@ -228,6 +232,8 @@ Function CostOfGoodsSold_CollectRecords(DocObject) Export
 	|		ON T6020S_BatchKeysInfo.Recorder = &Document
 	|		AND BatchWiseBalance.Company = T6020S_BatchKeysInfo.Company
 	|		AND BatchWiseBalance.ItemKey = T6020S_BatchKeysInfo.ItemKey
+	|		AND BatchWiseBalance.SerialLotNumber = T6020S_BatchKeysInfo.SerialLotNumber
+	|		AND BatchWiseBalance.SourceOfOrigin = T6020S_BatchKeysInfo.SourceOfOrigin
 	|WHERE
 	|	BatchWiseBalance.Quantity <> 0	
 	|	AND (BatchWiseBalance.InvoiceAmount <> 0
@@ -415,6 +421,8 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|		ELSE 0
 	|	END AS AllocatedRevenueTaxAmount,
 	|	R6010B_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
+	|	R6010B_BatchWiseBalance.BatchKey.SerialLotNumber AS SerialLotNumber,
+	|	R6010B_BatchWiseBalance.BatchKey.SourceOfOrigin AS SourceOfOrigin,
 	|	R6010B_BatchWiseBalance.Batch.Company AS Company
 	|INTO BatchWiseBalance
 	|FROM
@@ -443,6 +451,8 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchWiseBalance.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	BatchWiseBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
 	|	BatchWiseBalance.ItemKey AS ItemKey,
+	|	BatchWiseBalance.SerialLotNumber AS SerialLotNumber,
+	|	BatchWiseBalance.SourceOfOrigin AS SourceOfOrigin,
 	|	BatchWiseBalance.Company AS Company,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.SalesInvoice.Ref IS NULL
@@ -458,6 +468,8 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|		ON BatchWiseBalance.Document = T6020S_BatchKeysInfo.Recorder
 	|		AND BatchWiseBalance.Company = T6020S_BatchKeysInfo.Company
 	|		AND BatchWiseBalance.ItemKey = T6020S_BatchKeysInfo.ItemKey
+	|		AND BatchWiseBalance.SerialLotNumber = T6020S_BatchKeysInfo.SerialLotNumber
+	|		AND BatchWiseBalance.SourceOfOrigin = T6020S_BatchKeysInfo.SourceOfOrigin
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -479,6 +491,8 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchWiseBalance_BatchKeysInfo.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	BatchWiseBalance_BatchKeysInfo.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
 	|	BatchWiseBalance_BatchKeysInfo.ItemKey AS ItemKey,
+	|	BatchWiseBalance_BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
+	|	BatchWiseBalance_BatchKeysInfo.SourceOfOrigin AS SourceOfOrigin,
 	|	BatchWiseBalance_BatchKeysInfo.Company AS Company,
 	|	BatchWiseBalance_BatchKeysInfo.SalesInvoice AS SalesInvoice,
 	|	BatchWiseBalance_BatchKeysInfo.CurrencyMovementType AS CurrencyMovementType,

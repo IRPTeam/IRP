@@ -2056,9 +2056,9 @@ Scenario: _150087 check row separation in SI
 		And I activate field named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
 // needs to update
 		And "SourceOfOrigins" table became equal
-			| 'Serial lot number' | 'Source of origin' | 'Quantity' |
-			| '90808979899'       | ''                 | '120,000'  |
-			| '90808979898'       | ''                 | '10,000'   |
+			| 'Serial lot number' | 'Source of origin'   | 'Quantity' |
+			| '90808979899'       | 'Source of origin 6' | '120,000'  |
+			| '90808979898'       | 'Source of origin 6' | '10,000'   |
 		And I close current window	
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And "SerialLotNumbers" table became equal
@@ -2202,7 +2202,7 @@ Scenario: _150088 check row separation in SC
 		And "SourceOfOrigins" table became equal
 			| 'Serial lot number' | 'Source of origin'   | 'Quantity' |
 			| '90808979899'       | 'Source of origin 6' | '120,000'  |
-			| '90808979898'       | 'Source of origin 6' | '10'       |
+			| '90808979898'       | 'Source of origin 6' | '10,000'   |
 		And I close current window
 		And I go to line in "ItemList" table
 			| "#" | "Item"               |
@@ -2213,7 +2213,7 @@ Scenario: _150088 check row separation in SC
 			| 'Serial lot number' | 'Quantity' | 'Code is approved' |
 			| '90808979898'       | '100,000'  | 'No'               |
 		And I close current window
-				And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
 		And "SourceOfOrigins" table became equal
 			| 'Serial lot number' | 'Source of origin'   | 'Quantity' |
 			| '90808979898'       | 'Source of origin 6' | '100,000'  |

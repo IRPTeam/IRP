@@ -691,6 +691,8 @@ When Create document ConsolidatedRetailSales objects (test data base)
 		And Delay "3"
 When set False value to the constant DisableLinkedRowsIntegrity
 And I close all client application windows
+And I close TestClient main window
+And I launch TestClient opening script or connect the existing one
 
 
 Scenario: _971002 check System Attributes
@@ -705,113 +707,136 @@ Scenario: _971002 check System Attributes
 		| 'Legal name contract' |
 	And I close all client application windows		
 				
-Scenario: _971003 check System Attributes Sets
+Scenario: _971003 check System Attributes Sets (BankPayment)
 	And I close all client application windows
-	* check BP
-		Given I open hyperlink "e1cib/list/Catalog.SystemAttributesSets"
-		And I go to line in "List" table
-			| "Predefined data item name" |
-			| 'Document_BankPayment'      |
-		And I select current line in "List" table
-		And "Attributes" table contains lines
-			| 'Attribute'           | 'Collection' |
-			| 'Partner'             | 'Yes'        |
-			| 'Partner term'        | 'Yes'        |
-			| 'Legal name'          | 'Yes'        |
-			| 'Legal name contract' | 'Yes'        |
-		And I close current window
-	* check BR
-		And I go to line in "List" table
-			| "Predefined data item name" |
-			| 'Document_BankReceipt'      |
-		And I select current line in "List" table
-		And "Attributes" table contains lines
-			| 'Attribute'           | 'Collection' |
-			| 'Partner'             | 'Yes'        |
-			| 'Partner term'        | 'Yes'        |
-			| 'Legal name'          | 'Yes'        |
-			| 'Legal name contract' | 'Yes'        |
-		And I close current window
-	* check CP
-		And I go to line in "List" table
-			| "Predefined data item name" |
-			| 'Document_CashPayment'      |
-		And I select current line in "List" table
-		And "Attributes" table contains lines
-			| 'Attribute'           | 'Collection' |
-			| 'Partner'             | 'Yes'        |
-			| 'Partner term'        | 'Yes'        |
-			| 'Legal name'          | 'Yes'        |
-			| 'Legal name contract' | 'Yes'        |
-		And I close current window
-	* check CR
-		And I go to line in "List" table
-			| "Predefined data item name" |
-			| 'Document_CashReceipt'      |
-		And I select current line in "List" table
-		And "Attributes" table contains lines
-			| 'Attribute'           | 'Collection' |
-			| 'Partner'             | 'Yes'        |
-			| 'Partner term'        | 'Yes'        |
-			| 'Legal name'          | 'Yes'        |
-			| 'Legal name contract' | 'Yes'        |
-		And I close current window				
-	* check CrN
-		And I go to line in "List" table
-			| "Predefined data item name" |
-			| 'Document_CreditNote'       |
-		And I select current line in "List" table
-		And "Attributes" table contains lines
-			| 'Attribute'           | 'Collection' |
-			| 'Partner'             | 'Yes'        |
-			| 'Partner term'        | 'Yes'        |
-			| 'Legal name'          | 'Yes'        |
-			| 'Legal name contract' | 'Yes'        |
-		And I close current window
-	* check DrN
-		And I go to line in "List" table
-			| "Predefined data item name" |
-			| 'Document_DebitNote'        |
-		And I select current line in "List" table
-		And "Attributes" table contains lines
-			| 'Attribute'           | 'Collection' |
-			| 'Partner'             | 'Yes'        |
-			| 'Partner term'        | 'Yes'        |
-			| 'Legal name'          | 'Yes'        |
-			| 'Legal name contract' | 'Yes'        |
-		And I close current window
+	Given I open hyperlink "e1cib/list/Catalog.SystemAttributesSets"
+	And I go to line in "List" table
+		| "Predefined data item name" |
+		| 'Document_BankPayment'      |
+	And I select current line in "List" table
+	And "Attributes" table contains lines
+		| 'Attribute'           | 'Collection' |
+		| 'Partner'             | 'Yes'        |
+		| 'Partner term'        | 'Yes'        |
+		| 'Legal name'          | 'Yes'        |
+		| 'Legal name contract' | 'Yes'        |
+	And I close all client application windows		
+				
+Scenario: _971004 check System Attributes Sets (BankReceipt)
+	And I close all client application windows
+	And I go to line in "List" table
+		| "Predefined data item name" |
+		| 'Document_BankReceipt'      |
+	And I select current line in "List" table
+	And "Attributes" table contains lines
+		| 'Attribute'           | 'Collection' |
+		| 'Partner'             | 'Yes'        |
+		| 'Partner term'        | 'Yes'        |
+		| 'Legal name'          | 'Yes'        |
+		| 'Legal name contract' | 'Yes'        |
+	And I close all client application windows		
+				
+Scenario: _971005 check System Attributes Sets (CashPayment)
+	And I close all client application windows
+	And I go to line in "List" table
+		| "Predefined data item name" |
+		| 'Document_CashPayment'      |
+	And I select current line in "List" table
+	And "Attributes" table contains lines
+		| 'Attribute'           | 'Collection' |
+		| 'Partner'             | 'Yes'        |
+		| 'Partner term'        | 'Yes'        |
+		| 'Legal name'          | 'Yes'        |
+		| 'Legal name contract' | 'Yes'        |
+	And I close all client application windows		
+				
+Scenario: _971006 check System Attributes Sets (CashReceipt)
+	And I close all client application windows
+	And I go to line in "List" table
+		| "Predefined data item name" |
+		| 'Document_CashReceipt'      |
+	And I select current line in "List" table
+	And "Attributes" table contains lines
+		| 'Attribute'           | 'Collection' |
+		| 'Partner'             | 'Yes'        |
+		| 'Partner term'        | 'Yes'        |
+		| 'Legal name'          | 'Yes'        |
+		| 'Legal name contract' | 'Yes'        |
+	And I close all client application windows		
+				
+Scenario: _971007 check System Attributes Sets (CreditNote)
+	And I close all client application windows
+	And I go to line in "List" table
+		| "Predefined data item name" |
+		| 'Document_CreditNote'       |
+	And I select current line in "List" table
+	And "Attributes" table contains lines
+		| 'Attribute'           | 'Collection' |
+		| 'Partner'             | 'Yes'        |
+		| 'Partner term'        | 'Yes'        |
+		| 'Legal name'          | 'Yes'        |
+		| 'Legal name contract' | 'Yes'        |
+	And I close all client application windows		
+				
+Scenario: _971008 check System Attributes Sets (DebitNote)
+	And I close all client application windows
+	And I go to line in "List" table
+		| "Predefined data item name" |
+		| 'Document_DebitNote'        |
+	And I select current line in "List" table
+	And "Attributes" table contains lines
+		| 'Attribute'           | 'Collection' |
+		| 'Partner'             | 'Yes'        |
+		| 'Partner term'        | 'Yes'        |
+		| 'Legal name'          | 'Yes'        |
+		| 'Legal name contract' | 'Yes'        |
+	And I close current window
 	And I close all client application windows
 
-Scenario: _971004 check Partner, Partner term, Legal name, Legal name fields in document list
+Scenario: _971009 check Partner, Partner term, Legal name, Legal name fields in document list (BankPayment)
 	And I close all client application windows
-	* check BP
-		Given I open hyperlink "e1cib/list/Document.BankPayment"
-		And "List" table contains lines
-			| 'Number' | 'Legal name contract' | 'Date'                | 'Amount' | 'Partner'                      | 'Company'       | 'Account'           | 'Currency' | 'Transaction type'   | 'Author' | 'Partner term'                                            | 'Legal name' | 'Comment' |
-			| '3'      | 'CM-9008'             | '11.08.2023 12:00:00' | '100,00' | 'Customer 1 (3 partner terms)' | 'Own company 2' | 'Bank account, TRY' | 'TRY'      | 'Return to customer' | 'CI'     | 'Partner term with customer (by document + credit limit)' | 'Client 1'   | ''        |
-	* check BR
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And "List" table contains lines
-			| 'Number' | 'Legal name contract' | 'Date'                | 'Amount' | 'Partner'                   | 'Company'       | 'Account'           | 'Currency' | 'Transaction type'   | 'Author' | 'Partner term'               | 'Legal name' | 'Comment' |
-			| '8'      | 'VD-7889'             | '10.08.2023 12:00:00' | '100,00' | 'Vendor 1 (1 partner term)' | 'Own company 2' | 'Bank account, TRY' | 'TRY'      | 'Return from vendor' | 'CI'     | 'Partner term with vendor 1' | 'Vendor 1'   | ''        |
-	* check CP
-		Given I open hyperlink "e1cib/list/Document.CashPayment"
-		And "List" table contains lines
-			| 'Number' | 'Date'                | 'Cash account' | 'Amount' | 'Currency' | 'Transaction type'      | 'Partner'                   | 'Partner term'               | 'Legal name' | 'Legal name contract' | 'Company'       | 'Author' | 'Comment' |
-			| '1'      | '24.02.2023 10:50:30' | 'Cash, TRY'    | '500,00' | 'TRY'      | 'Payment to the vendor' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Vendor 1'   | 'VD-7889'             | 'Own company 2' | 'CI'     | ''        |
-	* check CR
-		Given I open hyperlink "e1cib/list/Document.CashReceipt"
-		And "List" table contains lines
-			| 'Number' | 'Date'               | 'Cash account' | 'Amount'   | 'Currency' | 'Transaction type'      | 'Partner'                                                   | 'Partner term'                                                                                         | 'Legal name'         | 'Legal name contract' | 'Company'       | 'Author' | 'Comment' |
-			| '1'      | '10.03.2023 0:00:00' | 'Cash, TRY'    | '1 350,00' | 'TRY'      | 'Payment from customer' | 'Customer 1 (3 partner terms), Customer 2 (2 partner term)' | 'Partner term with customer (by document + credit limit), Individual partner term 1 (by partner term)' | 'Client 1, Client 2' | 'CM-9008'             | 'Own company 2' | 'CI'     | ''        |
-	* check CrN
-		Given I open hyperlink "e1cib/list/Document.CreditNote"
-		And "List" table contains lines
-			| 'Number' | 'Date'                | 'Partner'                      | 'Partner term'                                            | 'Legal name' | 'Legal name contract' | 'Company'       | 'Author' | 'Comment' |
-			| '2'      | '07.05.2023 12:00:01' | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Client 1'   | 'CM-9008'             | 'Own company 2' | 'CI'     | ''        |
-	* check DrN
-		Given I open hyperlink "e1cib/list/Document.DebitNote"
-		And "List" table contains lines
-			| 'Number' | 'Date'                | 'Partner'                   | 'Partner term'               | 'Legal name' | 'Legal name contract' | 'Company'       | 'Author' | 'Comment' |
-			| '1'      | '24.02.2023 11:03:25' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Vendor 1'   | 'VD-7889'             | 'Own company 2' | 'CI'     | ''        |
+	Given I open hyperlink "e1cib/list/Document.BankPayment"
+	And "List" table contains lines
+		| 'Number' | 'Legal name contract' | 'Date'                | 'Amount' | 'Partner'                      | 'Company'       | 'Account'           | 'Currency' | 'Transaction type'   | 'Author' | 'Partner term'                                            | 'Legal name' | 'Comment' |
+		| '3'      | 'CM-9008'             | '11.08.2023 12:00:00' | '100,00' | 'Customer 1 (3 partner terms)' | 'Own company 2' | 'Bank account, TRY' | 'TRY'      | 'Return to customer' | 'CI'     | 'Partner term with customer (by document + credit limit)' | 'Client 1'   | ''        |
+	And I close all client application windows
+
+Scenario: _971010 check Partner, Partner term, Legal name, Legal name fields in document list (BankReceipt)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankReceipt"
+	And "List" table contains lines
+		| 'Number' | 'Legal name contract' | 'Date'                | 'Amount' | 'Partner'                   | 'Company'       | 'Account'           | 'Currency' | 'Transaction type'   | 'Author' | 'Partner term'               | 'Legal name' | 'Comment' |
+		| '8'      | 'VD-7889'             | '10.08.2023 12:00:00' | '100,00' | 'Vendor 1 (1 partner term)' | 'Own company 2' | 'Bank account, TRY' | 'TRY'      | 'Return from vendor' | 'CI'     | 'Partner term with vendor 1' | 'Vendor 1'   | ''        |
+	And I close all client application windows
+
+Scenario: _971011 check Partner, Partner term, Legal name, Legal name fields in document list (CashPayment)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And "List" table contains lines
+		| 'Number' | 'Date'                | 'Cash account' | 'Amount' | 'Currency' | 'Transaction type'      | 'Partner'                   | 'Partner term'               | 'Legal name' | 'Legal name contract' | 'Company'       | 'Author' | 'Comment' |
+		| '1'      | '24.02.2023 10:50:30' | 'Cash, TRY'    | '500,00' | 'TRY'      | 'Payment to the vendor' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Vendor 1'   | 'VD-7889'             | 'Own company 2' | 'CI'     | ''        |
+	And I close all client application windows
+
+Scenario: _971012 check Partner, Partner term, Legal name, Legal name fields in document list (CashReceipt)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashReceipt"
+	And "List" table contains lines
+		| 'Number' | 'Date'                | 'Cash account' | 'Amount'   | 'Currency' | 'Transaction type'      | 'Partner'                                                   | 'Partner term'                                                                                         | 'Legal name'         | 'Legal name contract' | 'Company'       | 'Author' | 'Comment' |
+		| '1'      | '10.03.2023 00:00:00' | 'Cash, TRY'    | '1 350,00' | 'TRY'      | 'Payment from customer' | 'Customer 1 (3 partner terms), Customer 2 (2 partner term)' | 'Partner term with customer (by document + credit limit), Individual partner term 1 (by partner term)' | 'Client 1, Client 2' | 'CM-9008'             | 'Own company 2' | 'CI'     | ''        |
+	And I close all client application windows
+
+Scenario: _971013 check Partner, Partner term, Legal name, Legal name fields in document list (CreditNote)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CreditNote"
+	And "List" table contains lines
+		| 'Number' | 'Date'                | 'Partner'                      | 'Partner term'                                            | 'Legal name' | 'Legal name contract' | 'Company'       | 'Author' | 'Comment' |
+		| '2'      | '07.05.2023 12:00:01' | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Client 1'   | 'CM-9008'             | 'Own company 2' | 'CI'     | ''        |
+	And I close all client application windows
+
+Scenario: _971014 check Partner, Partner term, Legal name, Legal name fields in document list (DebitNote)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.DebitNote"
+	And "List" table contains lines
+		| 'Number' | 'Date'                | 'Partner'                   | 'Partner term'               | 'Legal name' | 'Legal name contract' | 'Company'       | 'Author' | 'Comment' |
+		| '1'      | '24.02.2023 11:03:25' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Vendor 1'   | 'VD-7889'             | 'Own company 2' | 'CI'     | ''        |
 	And I close all client application windows

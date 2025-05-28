@@ -56,10 +56,15 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Or Object.SendDebtType = PredefinedValue("Enum.DebtTypes.EmployeeReceivable"));
 	
 	IsReceiveEmployee = (Object.ReceiveDebtType = PredefinedValue("Enum.DebtTypes.EmployeePayable")
-		Or Object.SendDebtType = PredefinedValue("Enum.DebtTypes.EmployeeReceivable"));
+		Or Object.ReceiveDebtType = PredefinedValue("Enum.DebtTypes.EmployeeReceivable"));
 		
 	Form.Items.SendLegalName.Enabled    = ValueIsFilled(Object.SendPartner) And Not IsSendEmployee;
 	Form.Items.ReceiveLegalName.Enabled = ValueIsFilled(Object.ReceivePartner) And Not IsReceiveEmployee;
+	
+	Form.Items.SendLegalNameContract.Enabled     = Not IsSendEmployee;
+	Form.Items.SendOrder.Enabled                 = Not IsSendEmployee;
+	Form.Items.ReceiveLegalNameContract.Enabled  = Not IsReceiveEmployee;
+	Form.Items.ReceiveOrder.Enabled              = Not IsReceiveEmployee;
 	
 	Form.Items.EditCurrenciesSender.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesReceiver.Enabled = Not Form.ReadOnly;

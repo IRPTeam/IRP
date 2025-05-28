@@ -724,6 +724,7 @@ Scenario: _971003 check System Attributes Sets (BankPayment)
 				
 Scenario: _971004 check System Attributes Sets (BankReceipt)
 	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.SystemAttributesSets"
 	And I go to line in "List" table
 		| "Predefined data item name" |
 		| 'Document_BankReceipt'      |
@@ -738,6 +739,7 @@ Scenario: _971004 check System Attributes Sets (BankReceipt)
 				
 Scenario: _971005 check System Attributes Sets (CashPayment)
 	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.SystemAttributesSets"
 	And I go to line in "List" table
 		| "Predefined data item name" |
 		| 'Document_CashPayment'      |
@@ -752,6 +754,7 @@ Scenario: _971005 check System Attributes Sets (CashPayment)
 				
 Scenario: _971006 check System Attributes Sets (CashReceipt)
 	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.SystemAttributesSets"
 	And I go to line in "List" table
 		| "Predefined data item name" |
 		| 'Document_CashReceipt'      |
@@ -766,6 +769,7 @@ Scenario: _971006 check System Attributes Sets (CashReceipt)
 				
 Scenario: _971007 check System Attributes Sets (CreditNote)
 	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.SystemAttributesSets"
 	And I go to line in "List" table
 		| "Predefined data item name" |
 		| 'Document_CreditNote'       |
@@ -780,6 +784,7 @@ Scenario: _971007 check System Attributes Sets (CreditNote)
 				
 Scenario: _971008 check System Attributes Sets (DebitNote)
 	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.SystemAttributesSets"
 	And I go to line in "List" table
 		| "Predefined data item name" |
 		| 'Document_DebitNote'        |

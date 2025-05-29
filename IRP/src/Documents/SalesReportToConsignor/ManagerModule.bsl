@@ -141,6 +141,7 @@ Function ItemList()
 		   |	UNDEFINED AS PurchaseOrder,
 		   |	UNDEFINED AS PurchaseOrderSettlements,
 		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Consignor) AS IsConsignor,
 		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
 		   |INTO ItemList
 		   |FROM

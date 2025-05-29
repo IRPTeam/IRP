@@ -170,6 +170,7 @@ Function ItemList()
 		|	ItemList.WithholdingTaxRate AS WithholdingTaxRate,
 		|	ItemList.Project AS Project,
 		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Consignor) AS IsConsignor,
 		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
 		|INTO ItemList
 		|FROM

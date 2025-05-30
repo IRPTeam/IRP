@@ -2257,7 +2257,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			| TRY     |
 		And I select current line in "List" table
 	* Check the choice of a partner in the tabular section and filling in the legal name if one
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2268,7 +2268,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			| 'NDB'       | 'Company NDB'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -2280,7 +2280,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			| 'Nicoletta'   | 'Posting by Standard Partner term Customer'   | 'Company Nicoletta'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -2328,7 +2328,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		When I Check the steps for Exception
 			| 'Given form with "Documents for incoming payment" header is opened in the active window'    |
 	* Check the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -2443,20 +2443,20 @@ Scenario: _0154108 total amount calculation in Cash receipt
 			| 'Cash desk №1'    |
 		And I select current line in "List" table			
 	* Check the Total amount calculation when adding rows
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "180,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "430,00"		
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -2482,7 +2482,7 @@ Scenario: _0154108 total amount calculation in Cash receipt
 		And I delete a line in "PaymentList" table
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "930,00"
 	* Check the Total amount calculation when adding rows
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
@@ -2536,7 +2536,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 			| Bank account, TRY    |
 		And I select current line in "List" table
 	* Check the choice of a partner in the tabular section and filling in the legal name if one
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2547,7 +2547,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 			| 'NDB'       | 'Company NDB'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -2559,7 +2559,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 			| 'Nicoletta'   | 'Posting by Standard Partner term Customer'   | 'Company Nicoletta'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -2607,7 +2607,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 		When I Check the steps for Exception
 			| 'Given form with "Documents for incoming payment" header is opened in the active window'    |
 	* Check the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -2718,20 +2718,20 @@ Scenario: _0154110 total amount calculation in Bank receipt
 			| 'Bank account, TRY'    |
 		And I select current line in "List" table			
 	* Check the Total amount calculation when adding rows
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "180,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "430,00"
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -2757,7 +2757,7 @@ Scenario: _0154110 total amount calculation in Bank receipt
 		And I delete a line in "PaymentList" table
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "930,00"
 	* Check the Total amount calculation when adding rows
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
@@ -2828,7 +2828,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 			| TRY     |
 		And I select current line in "List" table
 	* Check the choice of a partner in the tabular section and filling in the legal name if one
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2839,7 +2839,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 			| 'NDB'       | 'Company NDB'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -2851,7 +2851,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 			| 'Veritas'   | 'Posting by Standard Partner term (Veritas)'   | 'Company Veritas'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms (for vendor)
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -2898,7 +2898,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		When I Check the steps for Exception
 			| 'Given form with "Documents for incoming payment" header is opened in the active window'    |
 	* Check the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -3003,20 +3003,20 @@ Scenario: _0154112 total amount calculation in Cash payment
 			| 'Cash desk №1'    |
 		And I select current line in "List" table
 	* Check the Total amount calculation when adding rows
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "180,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "430,00"
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I finish line editing in "PaymentList" table
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -3049,7 +3049,7 @@ Scenario: _0154112 total amount calculation in Cash payment
 		And I delete a line in "PaymentList" table
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "13 380,00"
 	* Check the Total amount calculation when adding rows
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
@@ -3998,7 +3998,7 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 			| 'Reporting currency'   | 'Reporting'   | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '37,76'     |
 		And I close current window
 	* Add one more line
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'     |
@@ -4121,7 +4121,7 @@ Scenario: _0154118 check the details cleaning on the form Cash receipt
 			| TRY     |
 		And I select current line in "List" table
 	* Fillin in Partner, Payer and Partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -4179,7 +4179,7 @@ Scenario: _0154119 check the details cleaning on the form Cash payment when re-s
 		And I select current line in "List" table
 		And I select "Return to customer" exact value from "Transaction type" drop-down list
 	* Fillin in Partner, Payer and Partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -4235,7 +4235,7 @@ Scenario: _0154120 check the details cleaning on the form Bank receipt when re-s
 			| TRY     |
 		And I select current line in "List" table
 	* Fillin in Partner, Payer and Partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -4582,7 +4582,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 			| 'EUR'        | 'Bank account, EUR'    |
 		And I select current line in "List" table
 	* Check the selection by Planing transaction basis
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Quantity"
@@ -4620,7 +4620,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
 		And in the table "PaymentList" I click "Delete" button
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Quantity"
 		Then "Quantity" variable is equal to 1
@@ -4666,7 +4666,7 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		| 'USD'   | 'American dollar'   |
 		And I select current line in "List" table
 	* Check the selection by Planing transaction basis
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Quantity"
 		Then "Quantity" variable is equal to 1
@@ -4701,7 +4701,7 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
 		And in the table "PaymentList" I click "Delete" button
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Quantity"
 		Then "Quantity" variable is equal to 1
@@ -4747,7 +4747,7 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 			| 'TRY'     |
 		And I select current line in "List" table
 	* Check the selection by Planing transaction basis
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Quantity"
 		Then "Quantity" variable is equal to 1
@@ -4782,7 +4782,7 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
 		And in the table "PaymentList" I click "Delete" button
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Quantity"
 		Then "Quantity" variable is equal to 1
@@ -4897,7 +4897,7 @@ Scenario: _0154130 check the selection by Planing transaction basis in Bank Rece
 			| 'EUR'        | 'Bank account, EUR'    |
 		And I select current line in "List" table
 	* Check the selection by Planing transaction basis
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Quantity"
 		Then "Quantity" variable is equal to 1
@@ -4932,7 +4932,7 @@ Scenario: _0154130 check the selection by Planing transaction basis in Bank Rece
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
 		And in the table "PaymentList" I click "Delete" button
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Quantity"
 		Then "Quantity" variable is equal to 1
@@ -5007,7 +5007,7 @@ Scenario: _0154131 check currency form in  Bank Receipt
 			And I select current line in "List" table
 			Then the form attribute named "Currency" became equal to "TRY"
 		* Check the choice of a partner in the tabular section and filling in the legal name if one
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
@@ -5066,7 +5066,7 @@ Scenario: _0154131 check currency form in  Bank Receipt
 				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'        | '250'    |	
 			And I close current window
 		* Check the standard currency rate when adding the next line
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
@@ -5124,7 +5124,7 @@ Scenario: _0154132 check currency form in Incoming payment order
 			And I select current line in "List" table
 			Then the form attribute named "Currency" became equal to "TRY"
 		* Check the choice of a partner in the tabular section and filling in the legal name if one
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'     |
@@ -5177,7 +5177,7 @@ Scenario: _0154132 check currency form in Incoming payment order
 				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '1'               | '0,171200'  | '42,80'      |
 			And I close current window
 		* Check the standard currency rate when adding the next line
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| Description     |
@@ -5233,7 +5233,7 @@ Scenario: _0154133 check currency form in Outgoing payment order
 			And I select current line in "List" table
 			Then the form attribute named "Currency" became equal to "TRY"
 		* Check the choice of a partner in the tabular section and filling in the legal name if one
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'     |
@@ -5285,7 +5285,7 @@ Scenario: _0154133 check currency form in Outgoing payment order
 				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '1'               | '0,171200'  | '42,80'      |
 			And I close current window
 		* Check the standard currency rate when adding the next line
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| Description     |
@@ -9047,7 +9047,7 @@ Scenario: _0154197 check auto filling partner term in the CR (filter by Company)
 			| 'Second Company'     |
 		And I select current line in "List" table	
 	* Check filter by company for partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner' | 'Partner term'                |
@@ -9065,7 +9065,7 @@ Scenario: _0154198 check auto filling partner term in the CP (filter by Company)
 			| 'Second Company'     |
 		And I select current line in "List" table	
 	* Check filter by company for partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner' | 'Partner term'                       |
@@ -9083,7 +9083,7 @@ Scenario: _0154199 check auto filling partner term in the BP (filter by Company)
 			| 'Second Company'     |
 		And I select current line in "List" table	
 	* Check filter by company for partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner' | 'Partner term'                       |
@@ -9101,7 +9101,7 @@ Scenario: _0154200 check auto filling partner term in the BR (filter by Company)
 			| 'Second Company'     |
 		And I select current line in "List" table	
 	* Check filter by company for partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner' | 'Partner term'                |

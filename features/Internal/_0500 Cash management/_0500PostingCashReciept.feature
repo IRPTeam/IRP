@@ -718,7 +718,7 @@ Scenario: _050017 check selection form (Payment by documents) in CR
 		And I select from the drop-down list named "Currency" by "Turkish lira" string
 	* Check filter by Branch
 		* Without branch
-			And in the table "PaymentList" I click "Payment by documents" button
+			And I click "Payment by documents" button	
 			And "Documents" table became equal
 				| 'Document'                                   | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                                   | 'Project' | 'Amount'    | 'Payment' |
 				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 6 dated 04.09.2023 13:03:16' | ''        | '2 600,00'  | ''        |
@@ -730,7 +730,7 @@ Scenario: _050017 check selection form (Payment by documents) in CR
 			And I move to "Other" tab
 			And I select from the drop-down list named "Branch" by "Distribution department" string
 			And I move to "Payments" tab
-			And in the table "PaymentList" I click "Payment by documents" button
+			And I click "Payment by documents" button	
 			And "Documents" table became equal
 				| "Check" | "Document"                                   | "Partner"         | "Partner term"                  | "Legal name"       | "Order" | "Amount"    | "Payment" | "Legal name contract" | "Project" |
 				| "No"    | ""                                           | "Partner Kalipso" | "Partner Kalipso Customer"      | "Company Kalipso"  | ""      | "3 000,00"  | ""        | ""                    | ""        |
@@ -763,14 +763,14 @@ Scenario: _050017 check selection form (Payment by documents) in CR
 				| "2" | "DFC"             | "DFC"              | "DFC Customer by Partner terms" | ""                    | ""                                           | ""        | ""      | "2 944,00"     | ""                        | ""                 | ""                           |
 				| "3" | "Lomaniti"        | "Company Lomaniti" | "Basic Partner terms, TRY"      | ""                    | "Sales invoice 14 dated 16.02.2021 12:14:54" | ""        | ""      | "12 400,00"    | ""                        | ""                 | ""                           |
 				| "4" | "Lomaniti"        | "Company Lomaniti" | "Basic Partner terms, TRY"      | ""                    | "Sales invoice 15 dated 12.04.2021 12:00:01" | ""        | ""      | "20 000,00"    | ""                        | ""                 | ""                           |			
-			And in the table "PaymentList" I click "Payment by documents" button
+			And I click "Payment by documents" button	
 			Then the number of "Documents" table lines is "равно" "0"
 	* Allocation check	(two partners)
 			And I close current window	
 			And I move to "Other" tab
 			And I input "" text in the field named "Branch"		
 			And I move to "Payments" tab
-			And in the table "PaymentList" I click "Payment by documents" button
+			And I click "Payment by documents" button	
 		* Select lines and check allocation	
 			And I go to line in "Documents" table
 				| 'Amount'   | 'Document'                                   | 'Legal name'    | 'Order'                                   | 'Partner' | 'Partner term'             |
@@ -803,7 +803,7 @@ Scenario: _050017 check selection form (Payment by documents) in CR
 				| '4' | 'Lomaniti'        | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 15 dated 12.04.2021 12:00:01' | ''        | ''                     | '20 000,00'    | ''                        | ''                 | ''                           |
 				| '5' | 'Ferron BP'       | 'Company Ferron BP' | 'Basic Partner terms, TRY'         | ''                    | '$$SalesInvoice024001$$'                     | ''        | '$$SalesOrder023001$$' | '3 687,25'     | ''                        | ''                 | ''                           |
 				| '6' | 'Ferron BP'       | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | ''                    | '$$SalesInvoice024008$$'                     | ''        | '$$SalesOrder023005$$' | '1 312,75'     | ''                        | ''                 | ''                           |
-			And in the table "PaymentList" I click "Payment by documents" button
+			And I click "Payment by documents" button	
 			And "Documents" table does not contain lines
 				| 'Document'               | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                | 'Project' | 'Amount'    |
 				| '$$SalesInvoice024001$$' | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$' | ''        | '3 687,25'  |
@@ -956,7 +956,7 @@ Scenario: _050023 create Cash receipt based on SI (Partner term - USD, document 
 		* From payment distribution
 			And I select current line in "PaymentList" table
 			And I delete a line in "PaymentList" table
-			And in the table "PaymentList" I click "Payment by documents" button
+			And I click "Payment by documents" button	
 			And I go to line in "Documents" table
 				| "Amount" | "Document"                                    |
 				| "171,20" | "Sales invoice 236 dated 08.08.2024 11:20:30" |
@@ -995,7 +995,7 @@ Scenario: _050024 create Cash receipt based on SI (Partner term - TRY, document 
 	* Reselect SI
 		And I select current line in "PaymentList" table
 		And I delete a line in "PaymentList" table
-		And in the table "PaymentList" I click "Payment by documents" button
+		And I click "Payment by documents" button	
 		And I go to line in "Documents" table
 			| "Amount"    | "Check" | "Document"                                    | "Legal name"       | "Partner"  | "Partner term"             |
 			| "19 268,56" | "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29" | "Company Lomaniti" | "Lomaniti" | "Basic Partner terms, TRY" |

@@ -80,7 +80,7 @@ Scenario: _0960005 create Outgoing payment order (employee cash advance, from ba
 		And I select "Approved" exact value from the drop-down list named "Status"
 		And I select "Employee cash advance" exact value from "Transaction type" drop-down list
 	* Filling tabular part
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -135,7 +135,7 @@ Scenario: _0960006 create Outgoing payment order (employee cash advance, from ca
 		And I select "Approved" exact value from the drop-down list named "Status"
 		And I select "Employee cash advance" exact value from "Transaction type" drop-down list
 	* Filling tabular part
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -152,7 +152,7 @@ Scenario: _0960006 create Outgoing payment order (employee cash advance, from ca
 		And I activate "Amount" field in "PaymentList" table
 		And I input "1 000,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -540,7 +540,7 @@ Scenario: _0960019 create document Bank payment/Employee cash advance (purchase,
 			And I select current line in "List" table
 			And I select "Employee cash advance" exact value from "Transaction type" drop-down list
 		* Filling tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I select current line in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table

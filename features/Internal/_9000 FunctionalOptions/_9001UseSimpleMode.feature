@@ -760,7 +760,7 @@ Scenario: _900035 return money from vendor
 	* Filling CR
 		And I select "Return from vendor" exact value from "Transaction type" drop-down list
 		And I activate "Partner" field in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "vendor and" from "Partner" drop-down list by string in "PaymentList" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table

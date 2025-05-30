@@ -723,7 +723,7 @@ And I close all client application windows
 	And I select from the drop-down list named "Currency" by "Turkish lira" string
 * Check filter by Branch
 	* Without branch
-		And in the table "PaymentList" I click "Payment by documents" button
+		And I click "Payment by documents" button
 		And "Documents" table became equal
 			| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment' |
 			| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''        |
@@ -735,7 +735,7 @@ And I close all client application windows
 		And I move to "Other" tab
 		And I select from the drop-down list named "Branch" by "Front office" string
 		And I move to "Payments" tab
-		And in the table "PaymentList" I click "Payment by documents" button
+		And I click "Payment by documents" button
 		And "Documents" table became equal
 			| "Check" | "Document"                                       | "Partner" | "Partner term"                | "Legal name"    | "Order"                                        | "Amount" | "Payment" | "Legal name contract" | "Project" |
 			| "No"    | ""                                               | "DFC"     | "DFC Vendor by Partner terms" | "DFC"           | ""                                             | "670,00" | ""        | ""                    | ""        |
@@ -770,7 +770,7 @@ And I close all client application windows
 			| '2' | 'Maxim'   | 'Company Maxim' | 'Partner term Maxim' | ''                    | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | ''        | ''                                             | '100,00'       | ''                        | ''                 | ''                           |
 			| '3' | 'Maxim'   | 'Company Aldis' | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 118 dated 04.09.2023 13:46:08' | '900,00'       | ''                        | ''                 | ''                           |
 			| '4' | 'Maxim'   | 'Company Aldis' | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 119 dated 04.09.2023 13:50:07' | '900,00'       | ''                        | ''                 | ''                           |
-		And in the table "PaymentList" I click "Payment by documents" button
+		And I click "Payment by documents" button
 		And "Documents" table became equal
 			| "Check" | "Document" | "Partner" | "Partner term"                | "Legal name" | "Order" | "Amount" | "Payment" | "Legal name contract" | "Project" |
 			| "No"    | ""         | "DFC"     | "DFC Vendor by Partner terms" | "DFC"        | ""      | "670,00" | ""        | ""                    | ""        |		
@@ -779,7 +779,7 @@ And I close all client application windows
 		And I move to "Other" tab
 		And I input "" text in the field named "Branch"		
 		And I move to "Payments" tab
-		And in the table "PaymentList" I click "Payment by documents" button
+		And I click "Payment by documents" button
 	* Select lines and check allocation	
 		And I go to line in "Documents" table
 			| 'Amount'     | 'Document'                  |

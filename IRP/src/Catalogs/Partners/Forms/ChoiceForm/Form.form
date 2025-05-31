@@ -1007,6 +1007,32 @@ WHERE
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>FilterGroupType</name>
+  <title>
+   <key>tr</key>
+   <value>Filter group type</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Группа отбора типов</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Filter group type</value>
+  </title>
+  <id>10</id>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <parameters>
   <name>Company</name>
   <valueType>
@@ -1017,6 +1043,13 @@ WHERE
   <name>FilterPartnersByCompanies</name>
   <valueType>
    <types>Boolean</types>
+  </valueType>
+ </parameters>
+ <parameters>
+  <name>FilterGroupType</name>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
   </valueType>
  </parameters>
  <commandInterface>

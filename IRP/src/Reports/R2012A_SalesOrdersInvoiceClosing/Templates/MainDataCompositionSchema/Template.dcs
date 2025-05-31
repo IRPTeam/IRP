@@ -114,7 +114,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Порядок</v8:content>
+					<v8:content>Заказ</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -176,7 +176,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>To be invoiced</v8:content>
+					<v8:content>Требуется реализация</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -252,7 +252,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Порядок</v8:content>
+					<v8:content>Заказ</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -396,7 +396,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>To be invoiced</v8:content>
+					<v8:content>Требуется реализация</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -516,7 +516,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Beginin balance</v8:content>
+					<v8:content>Начальный остаток</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -571,7 +571,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Beginin balance</v8:content>
+					<v8:content>Начальный остаток</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>

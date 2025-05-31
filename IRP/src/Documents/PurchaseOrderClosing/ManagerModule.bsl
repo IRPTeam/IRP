@@ -149,7 +149,9 @@ Function ItemList()
 		   |				THEN Order.OffersAmount
 		   |			ELSE Order.OffersAmount / Order.QuantityInBaseUnit * Closing.QuantityInBaseUnit
 		   |		END
-		   |	END AS OffersAmount
+		   |	END AS OffersAmount,
+		   |	Order.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+		   |	Order.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
 		   |INTO ItemList
 		   |FROM
 		   |	Document.PurchaseOrder.ItemList AS Order
@@ -334,6 +336,12 @@ EndFunction
 #EndRegion
 
 #Region SystemAttributes
+
+Function GetPredefinedSystemAttributes() Export
+	SystemAttributes = New Array(); // Array of ChartOfCharacteristicTypesRef.SystemAttributes
+	SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.Store);
+	Return SystemAttributes;
+EndFunction
 
 Function GetSystemAttributeValues(Obj, SystemAttribute) Export
 	Values = New Array();

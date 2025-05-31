@@ -1523,7 +1523,7 @@ Function Strings(Lang) Export
 	
 	// %1 - sales order
 	Strings.Insert("Error_054", NStr("en='Cannot continue. The ""%1"" document has an incorrect status.';
-		|ru='Cannot continue. The ""%1"" document has an incorrect status.';
+		|ru='Продолжение невозможно. Документ ""%1"" имеет не корректный статус.';
 		|tr='Devam edilemiyor. ""%1"" belgesinin durumu yanlış.'", Lang));
 
 	Strings.Insert("Error_055", NStr("en='There are no lines with a correct procurement method.';
@@ -2060,7 +2060,7 @@ Function Strings(Lang) Export
 		|ru='Только системная запись разрешена';
 		|tr='Yalnızca sistem kaydına izin verilir'", Lang));
 	Strings.Insert("Error_181", NStr("en='Attribute already on form. Remove duplicate from set: [%1]';
-		|ru='Attribute already on form. Remove duplicate from set: [%1]';
+		|ru='Реквизиты уже на форме. Удалите дублированный набор: [%1]';
 		|tr='Öznitelik zaten formda mevcut. Tekrarlayan kaldırın: [%1]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
@@ -2562,7 +2562,7 @@ Function Strings(Lang) Export
 		|ru='Ошибка сохранения! Изменение ""%1"" доступно только для пользователя ""%2""';
 		|tr='Kayıt hatası! ""%1"" değişikliği yalnızca ""%2"" kullanıcısı için mümkündür'", Lang));
 	Strings.Insert("Exc_013", NStr("en='Related document exists: %1';
-		|ru='Related document exists: %1';
+		|ru='Есть связанные документы: %1';
 		|tr='İlgili belge mevcut: %1'", Lang));
 	Strings.Insert("Exc_014", NStr("en='Wrong range';
 		|ru='Не правильный диапазон';
@@ -3632,12 +3632,12 @@ Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTa
 
 Strings.Insert("FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues",
 	NStr("en='FixedAssetRevaluation DR (R8510B BookValueOfFixedAsset) CR (R5021T Revenues)';
-		|ru='FixedAssetRevaluation DR (R8510B BookValueOfFixedAsset) CR (R5021T Revenues)';
+		|ru='Переоценка основных средств Дт (R8510B BookValueOfFixedAsset) Кт (R5021T Revenues)';
 		|tr='Sabit Varlık Yeniden Değerlemesi Borç (R8510B Sabit Varlığın Defter Değeri) Alacak (R5021T Gelirler)'", Lang));
 
 Strings.Insert("FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset",
 	NStr("en='FixedAssetRevaluation DR (R5022T Expenses) CR (R8510B BookValueOfFixedAsset)';
-		|ru='FixedAssetRevaluation DR (R5022T Expenses) CR (R8510B BookValueOfFixedAsset)';
+		|ru='Переоценка основных средств Дт (R5022T Expenses) Кт (R8510B BookValueOfFixedAsset)';
 		|tr='Sabit Varlık Yeniden Değerlemesi Borç (R5022T Giderleri) Alacak (R8510B Sabit Varlığın Defter Değeri)'", Lang));
 
 	
@@ -3856,7 +3856,7 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 		|tr='%1 %2 tarih %3'", Lang));
 	
 	Strings.Insert("DatePresentation", NStr("en='dated';
-		|ru='dated';
+		|ru='дата';
 		|tr='tarihli'", Lang));	
 #EndRegion
 
@@ -3961,25 +3961,52 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 	Strings.Insert("SystemAttribute_Store", NStr("en='Store';
 		|ru='Склад';
 		|tr='Depo'", Lang));
+	Strings.Insert("SystemAttribute_Partner", NStr("en='Partner';
+		|ru='Партнер';
+		|tr='Cari hesap'", Lang));
+	Strings.Insert("SystemAttribute_PartnerTerm", NStr("en='Partner term';
+		|ru='Соглашение';
+		|tr='Sözleşme'", Lang));
+	Strings.Insert("SystemAttribute_LegalName", NStr("en='Legal name';
+		|ru='Контрагент';
+		|tr='Fatura hesabı'", Lang));
+	Strings.Insert("SystemAttribute_LegalNameContract", NStr("en='Legal name contract';
+		|ru='Договор контрагента';
+		|tr='Fatura hesap kontratı'", Lang));
 #EndRegion
 
 #Region Updates
-	Strings.Insert("Update_001", NStr("en='Update system attribute [Store]';
-		|ru='Update system attribute [Store]';
-		|tr='Sistem niteliğini güncelle [Store]'", Lang));
-	Strings.Insert("UpdateDesc_001", NStr("en='Update information register System Attributes using all old documents';
-		|ru='Update information register System Attributes using all old documents';
-		|tr='Tüm eski belgeleri kullanarak bilgi kayıt sistemi niteliklerini güncelle'", Lang));
-	
-	Strings.Insert("Update_002", NStr("en='Update Catalog.ItemType  ';
-		|ru='Update Catalog.ItemType  ';
+	Strings.Insert("Update_001", NStr("en='Update Catalog.ItemType  ';
+		|ru='Обновить справочник Виды номенклатуры';
 		|tr='Katalog.MazlemeTipi güncelle'", Lang));
-	Strings.Insert("UpdateDesc_002", NStr("en='Covert attribute 
+	Strings.Insert("UpdateDesc_001", NStr("en='Covert attribute 
 		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber';
-		|ru='Covert attribute 
-		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber';
+		|ru='Сконвертировать реквизит 
+		|DELETE_StockBalanceDetail в StockBalanceDetailSerialLotNumber';
 		|tr='Gizli öznitelik
 		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber'", Lang));		
+	
+	Strings.Insert("Update_002", NStr("en='Update system attributes';
+		|ru='Обновление системных реквизитов';
+		|tr='Update system attributes'", Lang));
+	Strings.Insert("UpdateDesc_002", NStr("en='Updating predefined system attribute names';
+		|ru='Обновление предопределенных системных реквизитов';
+		|tr='Updating predefined system attribute names'", Lang));
+	
+	Strings.Insert("Update_003", NStr("en='Update system attributes sets';
+		|ru='Обновления набора системных реквизитов';
+		|tr='Update system attributes sets'", Lang));
+	Strings.Insert("UpdateDesc_003", NStr("en='Updating the predefined composition of system attribute sets';
+		|ru='Обновление предопределенных составов наборов системных реквизитов';
+		|tr='Updating the predefined composition of system attribute sets'", Lang));
+	
+	Strings.Insert("Update_004", NStr("en='Update system attributes values';
+		|ru='Обновление значений системных реквизитов';
+		|tr='Update system attributes values'", Lang));
+	Strings.Insert("UpdateDesc_004", NStr("en='Update information register System Attributes using all old documents';
+		|ru='Обновить регистр сведений Системные реквизиты используя все старые документы';
+		|tr='Tüm eski belgeleri kullanarak bilgi kayıt sistemi niteliklerini güncelle'", Lang));
+	
 #EndRegion
 
 	Return Strings;

@@ -298,7 +298,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Local amount</v8:content>
+					<v8:content>Сумма в лок. валюте</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -339,7 +339,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Amount with taxes local</v8:content>
+					<v8:content>Сумма в лок. валюте с налогами</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>

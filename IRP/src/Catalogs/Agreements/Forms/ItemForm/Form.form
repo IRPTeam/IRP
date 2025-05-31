@@ -2648,6 +2648,31 @@
   <main>true</main>
   <savedData>true</savedData>
  </attributes>
+ <attributes>
+  <name>DocumentsExist</name>
+  <title>
+   <key>tr</key>
+   <value>Documents exist</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Есть документы</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Documents exist</value>
+  </title>
+  <id>2</id>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>SetNewNumber</name>
   <title>
@@ -2696,6 +2721,18 @@
     <command>InformationRegister.T9012S_AccountsPartner.StandardCommand.OpenByValue.Agreement</command>
     <group>FormNavigationPanelGoTo</group>
     <index>0</index>
+   </cmiFragmentRecord>
+   <cmiFragmentRecord>
+    <command>FilterCriterion.AgreementDocuments.StandardCommand.OpenByValue</command>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+   </cmiFragmentRecord>
+   <cmiFragmentRecord>
+    <command>InformationRegister.TaxSettings.StandardCommand.OpenByValue.Agreement</command>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
    </cmiFragmentRecord>
   </navigationPanel>
   <commandBar/>

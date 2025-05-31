@@ -97,7 +97,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Quantity surplus</v8:content>
+					<v8:content>Количество излишков</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -143,7 +143,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Quantity write off</v8:content>
+					<v8:content>Количество списаний</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -189,7 +189,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Quantity total</v8:content>
+					<v8:content>Количество итого</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>

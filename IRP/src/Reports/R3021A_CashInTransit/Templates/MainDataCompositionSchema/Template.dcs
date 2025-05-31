@@ -184,7 +184,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Starting balance</v8:content>
+					<v8:content>Начальный остаток</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -332,7 +332,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Ending balance</v8:content>
+					<v8:content>Конечный остаток</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -382,7 +382,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Account.Type</v8:content>
+					<v8:content>Вид кассы/рас. счета</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -527,7 +527,7 @@ FROM
 			</v8:item>
 			<v8:item>
 				<v8:lang>ru</v8:lang>
-				<v8:content>Today cash</v8:content>
+				<v8:content>За сегодня</v8:content>
 			</v8:item>
 			<v8:item>
 				<v8:lang>en</v8:lang>

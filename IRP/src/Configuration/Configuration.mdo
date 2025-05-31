@@ -586,6 +586,7 @@
  <commonTemplates>CommonTemplate.HTMLTextField</commonTemplates>
  <commonTemplates>CommonTemplate.XMLPrettyPrint</commonTemplates>
  <filterCriteria>FilterCriterion.RelatedDocuments</filterCriteria>
+ <filterCriteria>FilterCriterion.AgreementDocuments</filterCriteria>
  <commonModules>CommonModule.AccountingClient</commonModules>
  <commonModules>CommonModule.AccountingClientServer</commonModules>
  <commonModules>CommonModule.AccountingServer</commonModules>

@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Fixed asset revaluation</value>
+  <value>Переоценка основных средств</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -61,7 +61,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Fixed asset revaluation</value>
+  <value>Переоценка основных средств</value>
  </objectPresentation>
  <objectPresentation>
   <key>en</key>
@@ -73,7 +73,7 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Fixed asset revaluations</value>
+  <value>Переоценки основных средств</value>
  </listPresentation>
  <listPresentation>
   <key>en</key>
@@ -678,7 +678,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>New amount balance</value>
+    <value>Сумма остаток (без налогов)</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -701,7 +701,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Initial amount</value>
+    <value>Начальная сумма</value>
    </synonym>
    <synonym>
     <key>en</key>

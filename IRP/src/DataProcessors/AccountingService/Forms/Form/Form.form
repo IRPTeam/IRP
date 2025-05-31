@@ -9329,7 +9329,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Step 5 (Recorders Alias)</value>
+    <value>Шаг 5 (Синонимы регистраторов)</value>
    </title>
    <title>
     <key>en</key>
@@ -10039,7 +10039,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Trial balance reconcilation</value>
+    <value>Сверка оборотно сальдовой ведомости</value>
    </title>
    <title>
     <key>en</key>
@@ -13856,7 +13856,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Trial balance period</value>
+   <value>Период ОСВ</value>
   </title>
   <title>
    <key>en</key>
@@ -13906,7 +13906,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Reconcilation balance result</value>
+   <value>Результат остатков сверки</value>
   </title>
   <title>
    <key>en</key>
@@ -14591,7 +14591,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Fill recorders mapping</value>
+   <value>Заполнить соответствие регистраторов</value>
   </title>
   <title>
    <key>en</key>
@@ -14616,7 +14616,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Trial balance reconciliation</value>
+   <value>Сверка оборотно сальдовой ведомости</value>
   </title>
   <title>
    <key>en</key>

@@ -27,6 +27,10 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <type>
+  <types>CatalogRef.Companies</types>
+  <types>CatalogRef.LegalNameContracts</types>
+  <types>CatalogRef.Partners</types>
+  <types>CatalogRef.Agreements</types>
   <types>CatalogRef.Stores</types>
  </type>
  <foldersOnTop>true</foldersOnTop>
@@ -39,6 +43,38 @@
    <code/>
    <type>
     <types>CatalogRef.Stores</types>
+   </type>
+  </items>
+  <items id="8040f5d5-f2be-4356-a670-2140c759ac70">
+   <name>Partner</name>
+   <description/>
+   <code/>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+  </items>
+  <items id="a18b16cb-9374-461e-89dd-43b7a2a8e6ad">
+   <name>PartnerTerm</name>
+   <description/>
+   <code/>
+   <type>
+    <types>CatalogRef.Agreements</types>
+   </type>
+  </items>
+  <items id="1c35ce2d-a5b3-403c-935d-77cc5a89aa24">
+   <name>LegalName</name>
+   <description/>
+   <code/>
+   <type>
+    <types>CatalogRef.Companies</types>
+   </type>
+  </items>
+  <items id="e69564a3-2abe-414e-8961-fffe8bc69018">
+   <name>LegalNameContract</name>
+   <description/>
+   <code/>
+   <type>
+    <types>CatalogRef.LegalNameContracts</types>
    </type>
   </items>
  </predefined>

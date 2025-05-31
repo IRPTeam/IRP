@@ -38,7 +38,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Expense quantity</v8:content>
+					<v8:content>Количество (расход)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -144,7 +144,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Quantity Closing Balance</v8:content>
+					<v8:content>Количество (кон. остаток)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -261,7 +261,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Quantity Opening Balance</v8:content>
+					<v8:content>Количество (нач. остаток)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -534,7 +534,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Total amount opening balance</v8:content>
+					<v8:content>Сумма с налогами (нач. остаток)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -584,7 +584,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Total amount closing balance</v8:content>
+					<v8:content>Сумма с налогами (кон. остаток)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -634,7 +634,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Total amount receipt</v8:content>
+					<v8:content>Сумма с налогами (приход)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -675,7 +675,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Total amount expense</v8:content>
+					<v8:content>Сумма с налогами (расход)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -716,7 +716,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Net amount opening balance</v8:content>
+					<v8:content>Сумма (нач. остаток)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -766,7 +766,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Net amount receipt</v8:content>
+					<v8:content>Сумма (приход)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -807,7 +807,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Net amount expense</v8:content>
+					<v8:content>Сумма (расход)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -848,7 +848,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Net amount closing balance</v8:content>
+					<v8:content>Сумма (кон. остаток)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -1073,7 +1073,7 @@ FROM
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>AVG Closing Price</v8:content>
+							<v8:content>СРД Цена (кон. остаток)</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -1110,7 +1110,7 @@ End</dcsset:totalExpressionPresentation>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>AVG Opening Price</v8:content>
+							<v8:content>СРД Цена (нач. остаток)</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -1147,7 +1147,7 @@ End</dcsset:totalExpressionPresentation>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>AVG Receipt Price</v8:content>
+							<v8:content>СРД Цена (приход)</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -1184,7 +1184,7 @@ End</dcsset:totalExpressionPresentation>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>AVG Expense Price</v8:content>
+							<v8:content>СРД Цена (расход)</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -1222,7 +1222,7 @@ End</dcsset:totalExpressionPresentation>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Begining balance</v8:content>
+							<v8:content>Начальный остаток</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -1300,7 +1300,7 @@ End</dcsset:totalExpressionPresentation>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Ending balance</v8:content>
+							<v8:content>Конечный остаток</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>

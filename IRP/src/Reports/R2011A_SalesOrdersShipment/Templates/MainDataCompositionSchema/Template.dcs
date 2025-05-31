@@ -93,7 +93,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>To be shipped</v8:content>
+					<v8:content>К отправке</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -159,7 +159,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Порядок</v8:content>
+					<v8:content>Заказ</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -265,7 +265,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Order closed</v8:content>
+					<v8:content>Закрыто</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -301,7 +301,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>In reserve</v8:content>
+					<v8:content>В резерве</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -342,7 +342,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>To be reserved</v8:content>
+					<v8:content>К резерву</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>

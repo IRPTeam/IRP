@@ -37,7 +37,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Отгрузить со склада</v8:content>
+					<v8:content>На складе</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -103,7 +103,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Free stock</v8:content>
+					<v8:content>Свободные остатки</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FilterCriterion xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5d3d1ee9-48e9-4ff8-955d-a71ca1d16507">
+ <producedTypes>
+  <listType typeId="c9ba7826-11d7-46d9-8e92-bc7d666bb4a4" valueTypeId="49414959-27c3-46e4-9426-211789e0ceed"/>
+  <managerType typeId="842721da-c5f9-43cf-9122-6c9da4b35724" valueTypeId="0f66dd38-6f7b-4eed-aba6-57d48d9c59e1"/>
+ </producedTypes>
+ <name>AgreementDocuments</name>
+ <synonym>
+  <key>tr</key>
+  <value>Agreement documents</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документы соглашения</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Agreement documents</value>
+ </synonym>
+ <type>
+  <types>CatalogRef.Agreements</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <content>Document.BankPayment.TabularSection.PaymentList.Attribute.Agreement</content>
+ <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.Agreement</content>
+ <content>Document.CashPayment.TabularSection.PaymentList.Attribute.Agreement</content>
+ <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.Agreement</content>
+ <content>Document.ChequeBondTransaction.TabularSection.ChequeBonds.Attribute.Agreement</content>
+ <content>Document.ChequeBondTransactionItem.Attribute.Agreement</content>
+ <content>Document.CreditNote.TabularSection.Transactions.Attribute.Agreement</content>
+ <content>Document.DebitCreditNote.Attribute.SendAgreement</content>
+ <content>Document.DebitCreditNote.Attribute.ReceiveAgreement</content>
+ <content>Document.DebitNote.TabularSection.Transactions.Attribute.Agreement</content>
+ <content>Document.EmployeeCashAdvance.Attribute.Agreement</content>
+ <content>Document.OpeningEntry.Attribute.AgreementTradeAgent</content>
+ <content>Document.OpeningEntry.Attribute.AgreementConsignor</content>
+ <content>Document.OpeningEntry.TabularSection.AdvanceFromCustomers.Attribute.Agreement</content>
+ <content>Document.OpeningEntry.TabularSection.AdvanceToSuppliers.Attribute.Agreement</content>
+ <content>Document.OpeningEntry.TabularSection.AccountPayableByAgreements.Attribute.Agreement</content>
+ <content>Document.OpeningEntry.TabularSection.AccountPayableByDocuments.Attribute.Agreement</content>
+ <content>Document.OpeningEntry.TabularSection.AccountReceivableByDocuments.Attribute.Agreement</content>
+ <content>Document.OpeningEntry.TabularSection.AccountReceivableByAgreements.Attribute.Agreement</content>
+ <content>Document.OpeningEntry.TabularSection.EmployeeCashAdvance.Attribute.Agreement</content>
+ <content>Document.OpeningEntry.TabularSection.AccountReceivableOther.Attribute.Agreement</content>
+ <content>Document.OpeningEntry.TabularSection.AccountPayableOther.Attribute.Agreement</content>
+ <content>Document.Payroll.TabularSection.CashAdvanceDeductionList.Attribute.Agreement</content>
+ <content>Document.Payroll.TabularSection.SalaryTaxList.Attribute.Agreement</content>
+ <content>Document.PurchaseInvoice.Attribute.Agreement</content>
+ <content>Document.PurchaseOrder.Attribute.Agreement</content>
+ <content>Document.PurchaseOrderClosing.Attribute.Agreement</content>
+ <content>Document.PurchaseReturn.Attribute.Agreement</content>
+ <content>Document.PurchaseReturnOrder.Attribute.Agreement</content>
+ <content>Document.RetailReceiptCorrection.Attribute.Agreement</content>
+ <content>Document.RetailReceiptCorrection.TabularSection.Payments.Attribute.PaymentAgentPartnerTerms</content>
+ <content>Document.RetailReturnReceipt.Attribute.Agreement</content>
+ <content>Document.RetailReturnReceipt.TabularSection.Payments.Attribute.PaymentAgentPartnerTerms</content>
+ <content>Document.RetailSalesReceipt.Attribute.Agreement</content>
+ <content>Document.RetailSalesReceipt.TabularSection.Payments.Attribute.PaymentAgentPartnerTerms</content>
+ <content>Document.SalesInvoice.Attribute.Agreement</content>
+ <content>Document.SalesOrder.Attribute.Agreement</content>
+ <content>Document.SalesOrderClosing.Attribute.Agreement</content>
+ <content>Document.SalesReportFromTradeAgent.Attribute.Agreement</content>
+ <content>Document.SalesReportToConsignor.Attribute.Agreement</content>
+ <content>Document.SalesReturn.Attribute.Agreement</content>
+ <content>Document.SalesReturnOrder.Attribute.Agreement</content>
+ <content>Document.TaxesOperation.Attribute.Agreement</content>
+ <content>Document.WithholdingTaxInvoice.Attribute.Agreement</content>
+ <content>Document.WorkOrder.Attribute.Agreement</content>
+ <defaultForm>FilterCriterion.AgreementDocuments.Form.ListForm</defaultForm>
+ <forms uuid="52936619-769a-400b-914a-934344296fd9">
+  <name>ListForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:FilterCriterion>

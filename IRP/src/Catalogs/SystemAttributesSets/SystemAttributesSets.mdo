@@ -187,6 +187,48 @@
     <value>22</value>
    </code>
   </items>
+  <items id="84b39e4a-4fcd-4bff-9169-c484a11b97fc">
+   <name>Document_BankPayment</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>23</value>
+   </code>
+  </items>
+  <items id="112a5ca9-ab1d-4ac1-842d-475df946a9ff">
+   <name>Document_BankReceipt</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>24</value>
+   </code>
+  </items>
+  <items id="bd407fcd-a3d3-44b4-9fd3-d54085e7cafa">
+   <name>Document_CashPayment</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>25</value>
+   </code>
+  </items>
+  <items id="b02cf47f-dcbe-45c6-9a55-feb76141ebf4">
+   <name>Document_CashReceipt</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>26</value>
+   </code>
+  </items>
+  <items id="87049c11-3757-4009-8c12-c1f757c28faf">
+   <name>Document_CreditNote</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>27</value>
+   </code>
+  </items>
+  <items id="78e655d2-3ad1-4a32-96ba-a751a82dd176">
+   <name>Document_DebitNote</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>28</value>
+   </code>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

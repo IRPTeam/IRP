@@ -127,7 +127,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Amount Receipt</v8:content>
+					<v8:content>Сумма (приход)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -168,7 +168,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Amount Expense</v8:content>
+					<v8:content>Сумма (расход)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -231,7 +231,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Amount Starting balance</v8:content>
+					<v8:content>Сумма (кон. остаток)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -281,7 +281,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Amount Ending balance</v8:content>
+					<v8:content>Сумма (нач. остаток)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -366,7 +366,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Partner contrat</v8:content>
+					<v8:content>Договор</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>

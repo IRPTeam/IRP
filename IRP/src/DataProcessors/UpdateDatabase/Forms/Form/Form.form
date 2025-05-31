@@ -124,7 +124,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Release number</value>
+     <value>Номер релиза</value>
     </title>
     <title>
      <key>en</key>
@@ -287,7 +287,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Update info list group</value>
+      <value>Группа список уведомлений по обновлению</value>
      </title>
      <title>
       <key>en</key>
@@ -4281,7 +4281,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>DELETE step number</value>
+    <value>УДАЛИТЬ номер шага</value>
    </title>
    <title>
     <key>en</key>
@@ -4335,7 +4335,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Update method</value>
+    <value>Метод обновления</value>
    </title>
    <title>
     <key>en</key>
@@ -4665,7 +4665,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Update info list</value>
+   <value>Список уведомлений обновления</value>
   </title>
   <title>
    <key>en</key>
@@ -4846,7 +4846,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Applied date</value>
+    <value>Дата установки</value>
    </title>
    <title>
     <key>en</key>
@@ -4872,7 +4872,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Release number</value>
+    <value>Номер релиза</value>
    </title>
    <title>
     <key>en</key>
@@ -4899,7 +4899,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Current update method</value>
+   <value>Текущий способ обновления</value>
   </title>
   <title>
    <key>en</key>
@@ -4925,7 +4925,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Last release number</value>
+   <value>Последний номер релиза</value>
   </title>
   <title>
    <key>en</key>
@@ -4951,7 +4951,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Current release number</value>
+   <value>Текущий номер релиза</value>
   </title>
   <title>
    <key>en</key>
@@ -4977,7 +4977,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Run current</value>
+   <value>Запустить текущий</value>
   </title>
   <title>
    <key>en</key>
@@ -5035,7 +5035,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Run all</value>
+   <value>Запустить все</value>
   </title>
   <title>
    <key>en</key>

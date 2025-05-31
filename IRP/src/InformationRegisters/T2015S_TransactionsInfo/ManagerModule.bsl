@@ -628,7 +628,7 @@ Function T2015S_TransactionsInfo_WTI() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	TRUE
+		|	ItemList.IsVendor
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Company,

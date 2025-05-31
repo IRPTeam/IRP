@@ -48,6 +48,34 @@ Scenario: _1000000 preparation (credit limit)
 		When Create information register CurrencyRates records
 		When Create information register Taxes records (VAT)
 		When Create document SalesOrder objects (credit limit)
+	* Filling in credit limit in the Partner term
+		Given I open hyperlink "e1cib/list/Catalog.Agreements"
+		* Basic Partner terms, TRY
+			And I go to line in "List" table
+				| 'Description'                 |
+				| 'Basic Partner terms, TRY'    |
+			And I select current line in "List" table
+			And I move to "Credit limit & Aging" tab
+			And I set checkbox "Use credit limit"
+			And I input "10000,00" text in "Amount" field
+			And I click "Save and close" button
+		* DFC Customer by Partner terms
+			Given I open hyperlink "e1cib/list/Catalog.Agreements"
+			And I go to line in "List" table
+				| 'Description'                      |
+				| 'DFC Customer by Partner terms'    |
+			And I select current line in "List" table
+			And I input "" text in "Partner" field
+			And I input "" text in "Legal name" field
+			And I click Select button of "Partner segment" field
+			And I go to line in "List" table
+				| 'Description'    |
+				| 'Retail'         |
+			And I select current line in "List" table
+			And I move to "Credit limit & Aging" tab
+			And I set checkbox "Use credit limit"
+			And I input "4000,00" text in "Amount" field
+			And I click "Save and close" button
 	* Creation of a Sales order on Crystal, Basic Partner terms, TRY, Sales invoice before Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -332,34 +360,6 @@ Scenario: _1000000 preparation (credit limit)
 Scenario: _10000001 check preparation
 	When check preparation
 			
-Scenario: _1000001 filling in credit limit in the Partner term
-	Given I open hyperlink "e1cib/list/Catalog.Agreements"
-	* Basic Partner terms, TRY
-		And I go to line in "List" table
-			| 'Description'                 |
-			| 'Basic Partner terms, TRY'    |
-		And I select current line in "List" table
-		And I move to "Credit limit & Aging" tab
-		And I set checkbox "Use credit limit"
-		And I input "10000,00" text in "Amount" field
-		And I click "Save and close" button
-	* DFC Customer by Partner terms
-	Given I open hyperlink "e1cib/list/Catalog.Agreements"
-		And I go to line in "List" table
-			| 'Description'                      |
-			| 'DFC Customer by Partner terms'    |
-		And I select current line in "List" table
-		And I input "" text in "Partner" field
-		And I input "" text in "Legal name" field
-		And I click Select button of "Partner segment" field
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Retail'         |
-		And I select current line in "List" table
-		And I move to "Credit limit & Aging" tab
-		And I set checkbox "Use credit limit"
-		And I input "4000,00" text in "Amount" field
-		And I click "Save and close" button
 
 Scenario: _1000002 check credit limit when post Sales invoice based on Sales order (Ap-Ar posting detail by documents)
 	* Create Sales invoice for $$SalesOrder20400011$$

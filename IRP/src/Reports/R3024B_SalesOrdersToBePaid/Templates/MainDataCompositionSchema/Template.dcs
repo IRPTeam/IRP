@@ -147,7 +147,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Begining balance</v8:content>
+					<v8:content>Начальный остаток</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -300,7 +300,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Closing amount</v8:content>
+					<v8:content>Итоговая сумма</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>

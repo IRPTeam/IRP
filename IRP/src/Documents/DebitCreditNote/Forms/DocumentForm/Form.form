@@ -1349,6 +1349,8 @@
       <key>en</key>
       <value>From</value>
      </title>
+     <horizontalStretch>true</horizontalStretch>
+     <verticalStretch>true</verticalStretch>
      <extendedTooltip>
       <name>GroupInfoTitleLeftExtendedTooltip</name>
       <id>34</id>
@@ -2113,6 +2115,8 @@
       <key>en</key>
       <value>To</value>
      </title>
+     <horizontalStretch>true</horizontalStretch>
+     <verticalStretch>true</verticalStretch>
      <extendedTooltip>
       <name>GroupInfoTitleRightExtendedTooltip</name>
       <id>36</id>
@@ -2144,6 +2148,8 @@
     <userVisible>
      <common>true</common>
     </userVisible>
+    <horizontalStretch>true</horizontalStretch>
+    <verticalStretch>true</verticalStretch>
     <extendedTooltip>
      <name>GroupInfoTitleExtendedTooltip</name>
      <id>32</id>

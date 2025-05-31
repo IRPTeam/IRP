@@ -3988,21 +3988,21 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 	
 	Strings.Insert("Update_002", NStr("en='Update system attributes';
 		|ru='Обновление системных реквизитов';
-		|tr='Update system attributes'", Lang));
+		|tr='Sistem özniteliklerini güncelle'", Lang));
 	Strings.Insert("UpdateDesc_002", NStr("en='Updating predefined system attribute names';
 		|ru='Обновление предопределенных системных реквизитов';
-		|tr='Updating predefined system attribute names'", Lang));
+		|tr='Önceden tanımlanmış sistem öznitelik adlarını güncelleme'", Lang));
 	
 	Strings.Insert("Update_003", NStr("en='Update system attributes sets';
 		|ru='Обновления набора системных реквизитов';
-		|tr='Update system attributes sets'", Lang));
+		|tr='Sistem öznitelik kümelerini güncelle'", Lang));
 	Strings.Insert("UpdateDesc_003", NStr("en='Updating the predefined composition of system attribute sets';
 		|ru='Обновление предопределенных составов наборов системных реквизитов';
-		|tr='Updating the predefined composition of system attribute sets'", Lang));
+		|tr='Sistem öznitelik kümelerinin önceden tanımlanmış bileşiminin güncellenmesi'", Lang));
 	
 	Strings.Insert("Update_004", NStr("en='Update system attributes values';
 		|ru='Обновление значений системных реквизитов';
-		|tr='Update system attributes values'", Lang));
+		|tr='Sistem öznitelik değerlerini güncelle'", Lang));
 	Strings.Insert("UpdateDesc_004", NStr("en='Update information register System Attributes using all old documents';
 		|ru='Обновить регистр сведений Системные реквизиты используя все старые документы';
 		|tr='Tüm eski belgeleri kullanarak bilgi kayıt sistemi niteliklerini güncelle'", Lang));

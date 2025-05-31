@@ -84,7 +84,7 @@
   <name>OtherPartnerPayable</name>
   <synonym>
    <key>tr</key>
-   <value>Other partner (payable)</value>
+   <value>Diğer cari hesap (ödenecek)</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -99,7 +99,7 @@
   <name>OtherPartnerReceivable</name>
   <synonym>
    <key>tr</key>
-   <value>Other partner (receivable)</value>
+   <value>Diğer cari hesap (alacak)</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -114,7 +114,7 @@
   <name>EmployeePayable</name>
   <synonym>
    <key>tr</key>
-   <value>Employee (payable)</value>
+   <value>Çalışan (ödenecek)</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -129,7 +129,7 @@
   <name>EmployeeReceivable</name>
   <synonym>
    <key>tr</key>
-   <value>Employee (receivable)</value>
+   <value>Çalışan (alacak)</value>
   </synonym>
   <synonym>
    <key>ru</key>

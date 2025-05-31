@@ -322,11 +322,13 @@ Function ItemList()
 		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS IsTransaction_ReturnFromCustomer,
 		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer) AS IsTransaction_InventoryTransfer,
 		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromTradeAgent) AS IsTransaction_ReturnFromTradeAgent,
+		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.PreliminaryStock) AS isPreliminaryStock,
 		   |	ItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
 		   |	ItemList.Ref.Branch AS Branch,
 		   |	ItemList.ProductionPlanning AS ProductionPlanning,
 		   |	ItemList.Key,
-		   |	ItemList.SimpleBatch AS SimpleBatch
+		   |	ItemList.SimpleBatch AS SimpleBatch,
+		   |	ItemList.Amount
 		   |INTO ItemList
 		   |FROM
 		   |	Document.GoodsReceipt.ItemList AS ItemList
@@ -939,7 +941,7 @@ Function R6025B_SimpleBatch()
 	|	ItemList.Period,
 	|	ItemList.SimpleBatch,
 	|	ItemList.Quantity,
-	|	0 AS Amount,
+	|	ItemList.Amount,
 	|	UseSimpleBatch.Value
 	|INTO R6025B_SimpleBatch
 	|FROM
@@ -948,7 +950,8 @@ Function R6025B_SimpleBatch()
 	|		ON TRUE
 	|WHERE
 	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
-	|	AND UseSimpleBatch.Value";
+	|	AND UseSimpleBatch.Value
+	|	AND ItemList.isPreliminaryStock";
 EndFunction
 
 #EndRegion

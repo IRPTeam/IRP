@@ -1571,7 +1571,8 @@ EndFunction
 	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
 	|		ON TRUE
 	|WHERE
-	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	NOT ItemList.IsService
+	|	AND NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
 	|	AND UseSimpleBatch.Value";
 EndFunction
 #EndRegion

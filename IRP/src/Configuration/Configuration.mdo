@@ -1556,6 +1556,7 @@
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
   <dataProcessors>DataProcessor.UpdateDatabase</dataProcessors>
+  <dataProcessors>DataProcessor.SimpleBatchSequence</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>

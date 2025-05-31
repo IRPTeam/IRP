@@ -19,4 +19,6 @@
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.SimpleBatch</content>
   <content>Catalog.SimpleBatch</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SimpleBatch</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.Amount</content>
+  <content>DataProcessor.SimpleBatchSequence</content>
 </mdclass:FunctionalOption>

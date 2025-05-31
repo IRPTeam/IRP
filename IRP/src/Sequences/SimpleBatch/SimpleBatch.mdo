@@ -10,15 +10,12 @@
     <key>en</key>
     <value>Simple batch</value>
   </synonym>
-  <documents>Document.OpeningEntry</documents>
-  <documents>Document.PurchaseInvoice</documents>
+  <moveBoundaryOnPosting>DontMove</moveBoundaryOnPosting>
   <documents>Document.PurchaseReturn</documents>
   <documents>Document.SalesInvoice</documents>
   <documents>Document.SalesReturn</documents>
   <documents>Document.ShipmentConfirmation</documents>
-  <documents>Document.StockAdjustmentAsSurplus</documents>
   <documents>Document.StockAdjustmentAsWriteOff</documents>
-  <documents>Document.GoodsReceipt</documents>
   <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
   <dataLockControlMode>Managed</dataLockControlMode>
   <dimensions uuid="36798efe-f04a-4f25-91e8-95ec4c2897c0">
@@ -30,15 +27,11 @@
     <type>
       <types>CatalogRef.SimpleBatch</types>
     </type>
-    <documentMap>Document.OpeningEntry.TabularSection.Inventory.Attribute.SimpleBatch</documentMap>
-    <documentMap>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
     <documentMap>Document.PurchaseReturn.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
     <documentMap>Document.SalesInvoice.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
     <documentMap>Document.SalesReturn.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
     <documentMap>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
-    <documentMap>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
     <documentMap>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
-    <documentMap>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SimpleBatch</documentMap>
     <registerRecordsMap>AccumulationRegister.R6025B_SimpleBatch.Dimension.SimpleBatch</registerRecordsMap>
   </dimensions>
 </mdclass:Sequence>

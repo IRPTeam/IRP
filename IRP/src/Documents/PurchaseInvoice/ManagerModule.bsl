@@ -1778,7 +1778,7 @@ Function R6025B_SimpleBatch()
 	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 	|	ItemList.Period,
 	|	ItemList.SimpleBatch,
-	|	ItemList.Quantity,
+	|	0 AS Quantity,
 	|	ItemList.Amount,
 	|	UseSimpleBatch.Value
 	|INTO R6025B_SimpleBatch
@@ -1788,7 +1788,9 @@ Function R6025B_SimpleBatch()
 	|		ON TRUE
 	|WHERE
 	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
-	|	AND UseSimpleBatch.Value";
+	|	AND UseSimpleBatch.Value
+	|	AND NOT ItemList.IsService
+	|	AND ItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.PurchaisePreliminaryStock)";
 EndFunction
 
 #EndRegion

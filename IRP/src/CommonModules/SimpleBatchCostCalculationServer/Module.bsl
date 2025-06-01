@@ -69,13 +69,12 @@ EndFunction
 // Parameters:
 //  SimpleBatchArray - Array of CatalogRef.SimpleBatch - Array of simple batch references
 //  CalculationDate - Date - Date for which calculate average cost
-//  Company - CatalogRef.Companies - Company filter (optional)
 // 
 // Returns:
 //  Map - Calculation results:
 //   * Key - CatalogRef.SimpleBatch - Simple batch reference
 //   * Value - Structure - See CalculateAverageCost result
-Function CalculateAverageCostBulk(SimpleBatchArray, CalculationDate, Company = Undefined) Export
+Function CalculateAverageCostBulk(SimpleBatchArray, CalculationDate) Export
 	
 	Results = New Map;
 	
@@ -208,6 +207,5 @@ Function GetEmptyCalculationResult()
 	Return Result;
 	
 EndFunction
-
 
 #EndRegion 

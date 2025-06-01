@@ -128,6 +128,7 @@
       <types>DocumentRef.StockCorrection</types>
       <types>DocumentRef.ShipmentPlaningOrder</types>
       <types>DocumentRef.WithholdingTaxInvoice</types>
+      <types>DocumentRef.FixedAssetRevaluation</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

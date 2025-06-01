@@ -318,6 +318,10 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions, New Structure("ByRow", True));
 	Map.Insert(AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax, New Structure("ByRow", True));
 	
+	// Fixed asset revaluation
+	Map.Insert(AO.FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues, New Structure("ByRow", True));
+	Map.Insert(AO.FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow", True));
+	
 	Return Map;
 EndFunction
 
@@ -3811,8 +3815,7 @@ Procedure LoadAccountingOpeningEntry(IntegrationSettings, Date, RegisterName = "
 			Else
 				DeleteExternalAccountingOperation(IntegrationSettings, Data, ExternalRegister.LedgerType);
 			EndIf;
-		EndDo;
-		
+		EndDo;		
 	EndDo;
 EndProcedure
 

@@ -51,16 +51,27 @@ Procedure PartnerOnChange(Object, Form, Item) Export
 EndProcedure
 
 Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	PartnerType = "Vendor";
+	//PartnerType = "Vendor";
 	
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
 	
 	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FormParameters.Insert("Filter", New Structure(PartnerType, True));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(PartnerType, True, DataCompositionComparisonType.Equal));
-	OpenSettings.FillingData = New Structure(PartnerType, True);
+	
+	//OpenSettings.FormParameters.Insert("Filter", New Structure(PartnerType, True));
+	OpenSettings.FormParameters.Insert("DocumentFilter", New Structure("Vendor, Other", True, True));
+	OpenSettings.FormParameters.Insert("FilterGroupType", "OrGroup");
+		
+	//OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(PartnerType, True, DataCompositionComparisonType.Equal));
+	//--
+	FilterGroup = DocumentsClientServer.CreateFilterGroup(DataCompositionFilterItemsGroupType.OrGroup);
+	FilterGroup.Items.Add(DocumentsClientServer.CreateFilterItem("Vendor", True, DataCompositionComparisonType.Equal));
+	FilterGroup.Items.Add(DocumentsClientServer.CreateFilterItem("Other", True, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(FilterGroup);
+	
+	//OpenSettings.FillingData = New Structure(PartnerType, True);
+	OpenSettings.FillingData = New Structure("Vendor", True);
 	
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
@@ -71,6 +82,11 @@ Procedure PartnerTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(PartnerType, True, ComparisonType.Equal));
+	
+	//FilterGroup = DocumentsClientServer.CreateFilterGroup(DataCompositionFilterItemsGroupType.OrGroup);
+	//FilterGroup.Items.Add(DocumentsClientServer.CreateFilterItem("Vendor", True, DataCompositionComparisonType.Equal));
+	//FilterGroup.Items.Add(DocumentsClientServer.CreateFilterItem("Other", True, DataCompositionComparisonType.Equal));
+	//ArrayOfFilters.Add(FilterGroup);
 	
 	AdditionalParameters = New Structure();
 	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
@@ -123,8 +139,11 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue("Enum.AgreementTypes.Vendor"), DataCompositionComparisonType.Equal));
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
+	ArrayOfAgreementTypes = New Array();
+	ArrayOfAgreementTypes.Add(PredefinedValue("Enum.AgreementTypes.Vendor"));
+	ArrayOfAgreementTypes.Add(PredefinedValue("Enum.AgreementTypes.Other"));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", ArrayOfAgreementTypes, DataCompositionComparisonType.InList));
 	
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FormParameters.Insert("Partner"                     , Object.Partner);

@@ -297,8 +297,7 @@ EndFunction
 #Region Posting_SourceTable
 
 Function ItemList()
-	Return 
-	"SELECT
+	Return "SELECT
 	|	RowIDInfo.Ref AS Ref,
 	|	RowIDInfo.Key AS Key,
 	|	MAX(RowIDInfo.RowID) AS RowID
@@ -381,7 +380,10 @@ Function ItemList()
 	|	ItemList.VatRate AS VatRate,
 	|	ItemList.TaxAmount AS TaxAmount,
 	|	ItemList.Project,
-	|	ItemList.SimpleBatch AS SimpleBatch
+	|	ItemList.SimpleBatch AS SimpleBatch,
+	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Consignor) AS IsConsignor,
+	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseReturn.ItemList AS ItemList
@@ -1099,6 +1101,12 @@ EndFunction
 #EndRegion
 
 #Region SystemAttributes
+
+Function GetPredefinedSystemAttributes() Export
+	SystemAttributes = New Array(); // Array of ChartOfCharacteristicTypesRef.SystemAttributes
+	SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.Store);
+	Return SystemAttributes;
+EndFunction
 
 Function GetSystemAttributeValues(Obj, SystemAttribute) Export
 	Values = New Array();

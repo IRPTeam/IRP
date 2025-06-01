@@ -610,8 +610,7 @@ EndFunction
 #Region Posting_SourceTable
 
 Function ItemList()
-	Return 
-	"SELECT
+	Return "SELECT
 	|	RowIDInfo.Ref AS Ref,
 	|	RowIDInfo.Key AS Key,
 	|	MAX(RowIDInfo.RowID) AS RowID
@@ -639,27 +638,27 @@ Function ItemList()
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	PurchaseInvoiceItemList.Ref.Date AS Period,
-	|	PurchaseInvoiceItemList.Ref AS Invoice,
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref AS Invoice,
 	|	TableRowIDInfo.RowID AS RowKey,
-	|	PurchaseInvoiceItemList.ItemKey AS ItemKey,
-	|	PurchaseInvoiceItemList.Ref.Company AS Company,
-	|	PurchaseInvoiceItemList.Ref.Currency AS Currency,
-	|	PurchaseInvoiceSpecialOffers.Offer AS SpecialOffer,
-	|	PurchaseInvoiceSpecialOffers.Amount AS OffersAmount,
-	|	PurchaseInvoiceSpecialOffers.Bonus AS OffersBonus,
-	|	PurchaseInvoiceSpecialOffers.AddInfo AS OffersAddInfo,
-	|	PurchaseInvoiceSpecialOffers.Ref.Branch AS Branch
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Currency AS Currency,
+	|	SpecialOffers.Offer AS SpecialOffer,
+	|	SpecialOffers.Amount AS OffersAmount,
+	|	SpecialOffers.Bonus AS OffersBonus,
+	|	SpecialOffers.AddInfo AS OffersAddInfo,
+	|	SpecialOffers.Ref.Branch AS Branch
 	|INTO OffersInfo
 	|FROM
-	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
-	|		INNER JOIN Document.PurchaseInvoice.SpecialOffers AS PurchaseInvoiceSpecialOffers
-	|		ON PurchaseInvoiceItemList.Key = PurchaseInvoiceSpecialOffers.Key
+	|	Document.PurchaseInvoice.ItemList AS ItemList
+	|		INNER JOIN Document.PurchaseInvoice.SpecialOffers AS SpecialOffers
+	|		ON ItemList.Key = SpecialOffers.Key
 	|		INNER JOIN TableRowIDInfo AS TableRowIDInfo
-	|		ON PurchaseInvoiceItemList.Key = TableRowIDInfo.Key
+	|		ON ItemList.Key = TableRowIDInfo.Key
 	|WHERE
-	|	PurchaseInvoiceItemList.Ref = &Ref
-	|	AND PurchaseInvoiceSpecialOffers.Ref = &Ref
+	|	ItemList.Ref = &Ref
+	|	AND SpecialOffers.Ref = &Ref
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -730,7 +729,10 @@ Function ItemList()
 	|		else false
 	|	end AS IsCurrencyRevaluation,
 	|	ISNULL(ItemList.Ref.CurrencyRevaluationInvoice.Ref, Undefined) AS CurrencyRevaluationInvoice,
-	|	ItemList.SimpleBatch AS SimpleBatch
+	|	ItemList.SimpleBatch AS SimpleBatch,
+	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Consignor) AS IsConsignor,
+	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS ItemList
@@ -744,14 +746,14 @@ Function ItemList()
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	PurchaseInvoiceGoodsReceipts.Key AS Key,
-	|	PurchaseInvoiceGoodsReceipts.GoodsReceipt AS GoodsReceipt,
-	|	PurchaseInvoiceGoodsReceipts.Quantity AS Quantity
+	|	GoodsReceipts.Key AS Key,
+	|	GoodsReceipts.GoodsReceipt AS GoodsReceipt,
+	|	GoodsReceipts.Quantity AS Quantity
 	|INTO GoodReceiptInfo
 	|FROM
-	|	Document.PurchaseInvoice.GoodsReceipts AS PurchaseInvoiceGoodsReceipts
+	|	Document.PurchaseInvoice.GoodsReceipts AS GoodsReceipts
 	|WHERE
-	|	PurchaseInvoiceGoodsReceipts.Ref = &Ref";
+	|	GoodsReceipts.Ref = &Ref";
 EndFunction
 
 Function ItemListLandedCost()
@@ -2001,6 +2003,12 @@ EndFunction
 #EndRegion
 
 #Region SystemAttributes
+
+Function GetPredefinedSystemAttributes() Export
+	SystemAttributes = New Array(); // Array of ChartOfCharacteristicTypesRef.SystemAttributes
+	SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.Store);
+	Return SystemAttributes;
+EndFunction
 
 Function GetSystemAttributeValues(Obj, SystemAttribute) Export
 	Values = New Array();

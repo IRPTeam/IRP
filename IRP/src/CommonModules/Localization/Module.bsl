@@ -2187,6 +2187,12 @@ Strings.Insert("WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsT
 Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax",
 	NStr("en = 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R3040B_WithholdingTax)'", Lang));
 
+Strings.Insert("FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues",
+	NStr("en = 'FixedAssetRevaluation DR (R8510B BookValueOfFixedAsset) CR (R5021T Revenues)'", Lang));
+
+Strings.Insert("FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset",
+	NStr("en = 'FixedAssetRevaluation DR (R5022T Expenses) CR (R8510B BookValueOfFixedAsset)'", Lang));
+
 	
 Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External accounting operation exchange report'", Lang));
 
@@ -2328,15 +2334,26 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 
 #Region SytemAttributes
 	Strings.Insert("SystemAttribute_Store", NStr("en = 'Store'", Lang));
+	Strings.Insert("SystemAttribute_Partner", NStr("en = 'Partner'", Lang));
+	Strings.Insert("SystemAttribute_PartnerTerm", NStr("en = 'Partner term'", Lang));
+	Strings.Insert("SystemAttribute_LegalName", NStr("en = 'Legal name'", Lang));
+	Strings.Insert("SystemAttribute_LegalNameContract", NStr("en = 'Legal name contract'", Lang));
 #EndRegion
 
 #Region Updates
-	Strings.Insert("Update_001", NStr("en = 'Update system attribute [Store]'", Lang));
-	Strings.Insert("UpdateDesc_001", NStr("en = 'Update information register System Attributes using all old documents'", Lang));
-	
-	Strings.Insert("Update_002", NStr("en = 'Update Catalog.ItemType  '", Lang));
-	Strings.Insert("UpdateDesc_002", NStr("en = 'Covert attribute 
+	Strings.Insert("Update_001", NStr("en = 'Update Catalog.ItemType  '", Lang));
+	Strings.Insert("UpdateDesc_001", NStr("en = 'Covert attribute 
 		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber'", Lang));		
+	
+	Strings.Insert("Update_002", NStr("en = 'Update system attributes'", Lang));
+	Strings.Insert("UpdateDesc_002", NStr("en = 'Updating predefined system attribute names'", Lang));
+	
+	Strings.Insert("Update_003", NStr("en = 'Update system attributes sets'", Lang));
+	Strings.Insert("UpdateDesc_003", NStr("en = 'Updating the predefined composition of system attribute sets'", Lang));
+	
+	Strings.Insert("Update_004", NStr("en = 'Update system attributes values'", Lang));
+	Strings.Insert("UpdateDesc_004", NStr("en = 'Update information register System Attributes using all old documents'", Lang));
+	
 #EndRegion
 
 	Return Strings;

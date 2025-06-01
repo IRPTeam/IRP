@@ -235,6 +235,9 @@
   <commonPictures>CommonPicture.Unlock</commonPictures>
   <commonPictures>CommonPicture.Waiting</commonPictures>
   <commonPictures>CommonPicture.Work</commonPictures>
+  <commonPictures>CommonPicture.DocumentUnposted</commonPictures>
+  <commonPictures>CommonPicture.DocumentPosted</commonPictures>
+  <commonPictures>CommonPicture.DocumentDeleted</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -492,6 +495,7 @@
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseGroupEditingProperties</roles>
   <roles>Role.UseOutput</roles>
+  <roles>Role.Document_FixedAssetRevaluation</roles>
   <roles>Role.StandartReports</roles>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
@@ -502,6 +506,7 @@
   <commonTemplates>CommonTemplate.HTMLTextField</commonTemplates>
   <commonTemplates>CommonTemplate.XMLPrettyPrint</commonTemplates>
   <filterCriteria>FilterCriterion.RelatedDocuments</filterCriteria>
+  <filterCriteria>FilterCriterion.AgreementDocuments</filterCriteria>
   <commonModules>CommonModule.AccountingClient</commonModules>
   <commonModules>CommonModule.AccountingClientServer</commonModules>
   <commonModules>CommonModule.AccountingServer</commonModules>
@@ -847,6 +852,8 @@
   <commonModules>CommonModule.UpdateManagerInitialServer</commonModules>
   <commonModules>CommonModule.UpdateManagerReleaseServer</commonModules>
   <commonModules>CommonModule.SimpleBatchCostCalculationServer</commonModules>
+  <commonModules>CommonModule.DocFixedAssetRevaluationClient</commonModules>
+  <commonModules>CommonModule.DocFixedAssetRevaluationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1357,6 +1364,7 @@
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
   <sequences>Sequence.SimpleBatch</sequences>
+  <documents>Document.FixedAssetRevaluation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

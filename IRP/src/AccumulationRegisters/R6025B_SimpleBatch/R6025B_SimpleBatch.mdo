@@ -11,7 +11,7 @@
   <name>R6025B_SimpleBatch</name>
   <synonym>
     <key>en</key>
-    <value>R6025B Simple batch</value>
+    <value>R6025 Simple batch</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>

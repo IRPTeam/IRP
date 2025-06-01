@@ -333,6 +333,7 @@
   <roles>Role.AccumulationRegisters_R5022T_Expenses</roles>
   <roles>Role.AccumulationRegisters_R6010B_BatchWiseBalance</roles>
   <roles>Role.AccumulationRegisters_R6020B_BatchBalance</roles>
+  <roles>Role.AccumulationRegisters_R6025B_SimpleBatch</roles>
   <roles>Role.AccumulationRegisters_R6030T_BatchShortageOutgoing</roles>
   <roles>Role.AccumulationRegisters_R6040T_BatchShortageIncoming</roles>
   <roles>Role.AccumulationRegisters_R6050T_SalesBatches</roles>
@@ -402,6 +403,7 @@
   <roles>Role.Document_EmployeeTransfer</roles>
   <roles>Role.Document_EmployeeVacation</roles>
   <roles>Role.Document_ExternalAccountingOperation</roles>
+  <roles>Role.Document_FixedAssetRevaluation</roles>
   <roles>Role.Document_FixedAssetTransfer</roles>
   <roles>Role.Document_ForeignCurrencyRevaluation</roles>
   <roles>Role.Document_GoodsReceipt</roles>
@@ -472,6 +474,7 @@
   <roles>Role.RunThinClient</roles>
   <roles>Role.RunWebClient</roles>
   <roles>Role.SaveUserData</roles>
+  <roles>Role.StandartReports</roles>
   <roles>Role.Subsystem_Accounting</roles>
   <roles>Role.Subsystem_Incidents</roles>
   <roles>Role.Subsystem_Inventory</roles>
@@ -495,8 +498,6 @@
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseGroupEditingProperties</roles>
   <roles>Role.UseOutput</roles>
-  <roles>Role.Document_FixedAssetRevaluation</roles>
-  <roles>Role.StandartReports</roles>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -1363,8 +1364,8 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
-  <sequences>Sequence.SimpleBatch</sequences>
   <documents>Document.FixedAssetRevaluation</documents>
+  <sequences>Sequence.SimpleBatch</sequences>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

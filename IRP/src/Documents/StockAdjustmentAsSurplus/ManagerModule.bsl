@@ -670,7 +670,7 @@ Function R6025B_SimpleBatch()
 	|	ItemList.Period,
 	|	ItemList.SimpleBatch,
 	|	SUM(ItemList.Quantity) AS Quantity,
-	|	SUM(ItemList.Amount) AS Amount
+	|	SUM(ItemList.TotalAmount) AS Amount
 	|INTO R6025B_SimpleBatch
 	|FROM
 	|	ItemList AS ItemList

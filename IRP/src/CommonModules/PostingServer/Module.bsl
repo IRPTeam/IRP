@@ -28,7 +28,16 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	EndIf;
 		
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
-
+	
+	//@skip-check bsl-legacy-check-expression-type
+	R6025B_SimpleBatchData = Parameters.PostingDataTables.Get(Metadata.AccumulationRegisters.R6025B_SimpleBatch);
+	If Not R6025B_SimpleBatchData = Undefined Then
+		OutgoingMovements = SimpleBatchCostCalculationServer.UpdateOutgoingMovementsCost(Parameters.Object.Ref, R6025B_SimpleBatchData.PrepareTable, Cancel, , , AddInfo);
+		If Not OutgoingMovements = Undefined Then
+			R6025B_SimpleBatchData.PrepareTable = OutgoingMovements;
+		EndIf;
+	EndIf;
+	
 	RegisteredRecords = RegisterRecords(Parameters);
 	If Parameters.Cancel Then
 		For Each Message In Parameters.Messages Do
@@ -52,8 +61,6 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 		RegisteredRecordsArray.Add(Record.Value.RecordSet);
 	EndDo;
 	Parameters.Insert("RegisteredRecords", RegisteredRecordsArray);
-
-	Parameters.Module.PostingCheckAfterWrite(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
 
 	// Accounting MD5
 	If Not Cancel And Metadata.DefinedTypes.typeAccountingDocuments.Type.Types().Find(TypeOf(Parameters.Object.Ref)) <> Undefined Then
@@ -82,11 +89,11 @@ EndProcedure
 // * DocumentDataTables - Map -
 // * LockDataSources - Map -
 // * PostingDataTables - Array Of KeyAndValue:
-// ** Key - MetadataObjectDocument - Meta doc
+// ** Key - MetadataObjectAccumulationRegister - Meta doc
 // ** Value - See PostingTableSettings
 // * ManualMovementsEdit - Boolean -  
 // * Messages -  Array of String - User message
-Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
+Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined) Export
 	Cancel = False;
 	
 	Parameters = New Structure();
@@ -212,7 +219,8 @@ Function RegisterRecords(Parameters)
 		EndIf;
 		
 		If Row.Value.Metadata = Metadata.AccumulationRegisters.R6020B_BatchBalance 
-			Or Row.Value.Metadata = AccumulationRegisters.R6060T_CostOfGoodsSold Then
+			Or Row.Value.Metadata = AccumulationRegisters.R6060T_CostOfGoodsSold
+			Or Row.Value.Metadata = AccumulationRegisters.R6025B_SimpleBatch Then
 				Continue; //Never rewrite
 		EndIf;
 		
@@ -826,6 +834,7 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 			Cancel = True;
 		EndIf;
 	EndIf;
+	
 EndProcedure
 
 Function CheckBalance_R4050B_StockInventory(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export

@@ -1303,9 +1303,8 @@ Function R6025B_SimpleBatch()
 	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 	|	ItemList.Period,
 	|	ItemList.SimpleBatch,
-	|	ItemList.Quantity,
-	|	0 AS Amount,
-	|	UseSimpleBatch.Value
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	0 AS Amount
 	|INTO R6025B_SimpleBatch
 	|FROM
 	|	ItemList AS ItemList
@@ -1313,7 +1312,11 @@ Function R6025B_SimpleBatch()
 	|		ON TRUE
 	|WHERE
 	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
-	|	AND UseSimpleBatch.Value";
+	|	AND UseSimpleBatch.Value
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion

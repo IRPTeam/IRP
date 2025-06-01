@@ -720,6 +720,7 @@ Function ItemList()
 	|	OR ItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.CurrencyRevaluationCustomer)
 	|	OR ItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.CurrencyRevaluationVendor)) AS IsPurchase,
 	|	ItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) AS IsReceiptFromConsignor,
+	|	ItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.PurchaisePreliminaryStock) AS IsPurchaisePreliminaryStock,
 	|	ItemList.VatRate AS VatRate,
 	|	ItemList.Project AS Project,
 	|	ItemList.OtherPeriodExpenseType AS OtherPeriodExpenseType,
@@ -1778,9 +1779,8 @@ Function R6025B_SimpleBatch()
 	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 	|	ItemList.Period,
 	|	ItemList.SimpleBatch,
-	|	0 AS Quantity,
-	|	ItemList.Amount,
-	|	UseSimpleBatch.Value
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	SUM(ItemList.Amount) AS Amount
 	|INTO R6025B_SimpleBatch
 	|FROM
 	|	ItemList AS ItemList
@@ -1789,8 +1789,11 @@ Function R6025B_SimpleBatch()
 	|WHERE
 	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
 	|	AND UseSimpleBatch.Value
-	|	AND NOT ItemList.IsService
-	|	AND ItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.PurchaisePreliminaryStock)";
+	|	AND ItemList.IsPurchaisePreliminaryStock
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion

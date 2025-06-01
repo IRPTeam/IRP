@@ -19,6 +19,39 @@
         </dataPath>
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
+          <name>ListisActualBatch</name>
+          <id>70</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>List.isActualBatch</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ListisActualBatchExtendedTooltip</name>
+            <id>72</id>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ListisActualBatchContextMenu</name>
+            <id>71</id>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>CheckBoxField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+        </items>
+        <items xsi:type="form:FormField">
           <name>Period</name>
           <id>14</id>
           <visible>true</visible>
@@ -126,9 +159,166 @@
             <autoMaxHeight>true</autoMaxHeight>
           </extInfo>
         </items>
+        <items xsi:type="form:FormField">
+          <name>ListCurrentDocumentPointPresentation</name>
+          <id>64</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>List.CurrentDocumentPointPresentation</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ListCurrentDocumentPointPresentationExtendedTooltip</name>
+            <id>66</id>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ListCurrentDocumentPointPresentationContextMenu</name>
+            <id>65</id>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ListLastDocumentPointPresentation</name>
+          <id>67</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>List.LastDocumentPointPresentation</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ListLastDocumentPointPresentationExtendedTooltip</name>
+            <id>69</id>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ListLastDocumentPointPresentationContextMenu</name>
+            <id>68</id>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
         <autoCommandBar>
           <name>ListCommandBar</name>
           <id>3</id>
+          <items xsi:type="form:Button">
+            <name>ListRestoreSelected</name>
+            <id>54</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ListRestoreSelectedExtendedTooltip</name>
+              <id>55</id>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Command.RestoreSelected</commandName>
+            <representation>Auto</representation>
+            <defaultButton>true</defaultButton>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>ListRestoreAll</name>
+            <id>56</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ListRestoreAllExtendedTooltip</name>
+              <id>57</id>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Command.RestoreAll</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>ListRefresh</name>
+            <id>73</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ListRefreshExtendedTooltip</name>
+              <id>74</id>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Item.List.StandardCommand.Refresh</commandName>
+            <representation>PictureAndText</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+            <locationInCommandBar>InCommandBar</locationInCommandBar>
+          </items>
           <horizontalAlign>Left</horizontalAlign>
           <autoFill>true</autoFill>
         </autoCommandBar>
@@ -616,6 +806,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <main>true</main>
   </attributes>
   <attributes>
     <name>List</name>
@@ -633,23 +824,38 @@
     <edit>
       <common>true</common>
     </edit>
-    <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
+	SimpleBatchSeq.SimpleBatch AS SimpleBatch,
+	MAX(SimpleBatchSeq.Recorder) AS PointInTime
+INTO LastSeq
+FROM
+	Sequence.SimpleBatch AS SimpleBatchSeq
+
+GROUP BY
+	SimpleBatchSeq.SimpleBatch
+
+INDEX BY
+	SimpleBatch,
+	PointInTime
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
 	SequenceSimpleBatchBoundaries.SimpleBatch AS SimpleBatch,
 	SequenceSimpleBatchBoundaries.Period AS Period,
 	SequenceSimpleBatchBoundaries.Recorder AS Recorder,
-	SequenceSimpleBatchBoundaries.PointInTime AS PointInTime
+	SequenceSimpleBatchBoundaries.Recorder = LastSeq.PointInTime AS isActualBatch,
+	PRESENTATION(SequenceSimpleBatchBoundaries.PointInTime) AS CurrentDocumentPointPresentation,
+	PRESENTATION(LastSeq.PointInTime) AS LastDocumentPointPresentation
 FROM
-	Sequence.SimpleBatch.Boundaries AS SequenceSimpleBatchBoundaries</queryText>
+	LastSeq AS LastSeq
+		LEFT JOIN Sequence.SimpleBatch.Boundaries AS SequenceSimpleBatchBoundaries
+		ON (SequenceSimpleBatchBoundaries.SimpleBatch = LastSeq.SimpleBatch)</queryText>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>PointInTime</dataPath>
-        <field>PointInTime</field>
-      </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>SimpleBatch</dataPath>
         <field>SimpleBatch</field>
@@ -662,6 +868,43 @@ FROM
         <dataPath>Recorder</dataPath>
         <field>Recorder</field>
       </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>LastDocumentPointPresentation</dataPath>
+        <field>LastDocumentPointPresentation</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Last document point presentation</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CurrentDocumentPointPresentation</dataPath>
+        <field>CurrentDocumentPointPresentation</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Current document point presentation</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>isActualBatch</dataPath>
+        <field>isActualBatch</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Is actual batch</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <keyField>SimpleBatch</keyField>
     </extInfo>
   </attributes>
   <attributes>
@@ -705,9 +948,43 @@ FROM
       </fields>
     </extInfo>
   </attributes>
+  <formCommands>
+    <name>RestoreSelected</name>
+    <title>
+      <key>en</key>
+      <value>Restore selected</value>
+    </title>
+    <id>1</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>RestoreSelected</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>RestoreAll</name>
+    <title>
+      <key>en</key>
+      <value>Restore all</value>
+    </title>
+    <id>2</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>RestoreAll</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>
   </commandInterface>
-  <extInfo xsi:type="form:DynamicListFormExtInfo"/>
+  <extInfo xsi:type="form:ObjectFormExtInfo"/>
 </form:Form>

@@ -713,6 +713,10 @@ Function Strings(Lang) Export
 
 	Strings = New Structure();
 
+#Region SimpleBatch
+	Strings.Insert("SB_NotEnoughBatch", NStr("en = 'Not enough batch %1: On stock: %2; In document: %3.'", Lang));
+#EndRegion
+
 #Region Access
 	Strings.Insert("ACS_UnknownValueType", NStr("en = 'Can not create Access Key. Unknows value type.'", Lang));
 #EndRegion

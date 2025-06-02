@@ -160,7 +160,6 @@ Procedure ChangeTitleGroupTitle(Object, Form, Settings = Undefined) Export
 
 EndProcedure
 
-// TODO: Delete parameter Object
 Procedure ChangeTitleCollapse(Object = Undefined, Form, TitleVisible = True) Export
 
 #If Server Then
@@ -183,11 +182,20 @@ EndProcedure
 
 Function CreateFilterItem(FieldName, Value = Undefined, ComparisonTypeValue = Undefined, DataCompositionComparisonTypeValue = Undefined) Export
 	FilterStructure = New Structure();
+	FilterStructure.Insert("FilterType", "Item");
 	FilterStructure.Insert("FieldName", FieldName);
 	FilterStructure.Insert("Value", Value);
 	FilterStructure.Insert("ComparisonType", ComparisonTypeValue);
 	FilterStructure.Insert("DataCompositionComparisonType", DataCompositionComparisonTypeValue);
 	Return FilterStructure;
+EndFunction
+
+Function CreateFilterGroup(GroupType) Export
+	FilterGroupStructure = New Structure();
+	FilterGroupStructure.Insert("FilterType", "Group");
+	FilterGroupStructure.Insert("GroupType", GroupType);
+	FilterGroupStructure.Insert("Items", New Array());
+	Return FilterGroupStructure;
 EndFunction
 
 #EndRegion

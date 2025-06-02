@@ -471,17 +471,17 @@ EndProcedure
 #Region PAYMENT_PERIOD
 
 &AtClient
-Procedure PaymentListPaymentPeriodNoSplitsOnChange(Item)
+Procedure PaymentListPaymentPeriodOnChange(Item)
 	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
 EndProcedure
 
 &AtClient
-Procedure PaymentListPaymentPeriodOnChange(Item)
+Procedure PaymentListPaymentPeriodNoSplitsOnChange(Item)
 	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
 	If LineAttribute <> Undefined Then
 		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
 	EndIf;
-	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");	
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
 EndProcedure
 
 #EndRegion

@@ -112,7 +112,7 @@ Function GetParameterValue(Val Expression, Val Source, Val TableInfo = Undefined
 	EndDo;
 	
 	// for formula testing
-	If TableInfo.TableName <> "" And CurrentRow = Undefined Then
+	If TableInfo.TableName <> "" And TypeOf(CurrentRow) = Type("Structure") And CurrentRow.Count() = 0 Then
 		TableValue = TableData[TableInfo.TableName];
 		If TableValue.Count() > 0 Then
 			RowNumber = 1;

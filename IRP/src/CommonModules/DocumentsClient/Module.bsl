@@ -12,7 +12,14 @@ Procedure OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, Ope
 	EndIf;
 
 	For Each Filter In OpenSettings.ArrayOfFilters Do
-		AddFilterToChoiceForm(ChoiceForm, Filter.FieldName, Filter.Value, Filter.ComparisonType);
+		If Filter.FilterType = "Group" Then
+			FilterGroup = AddFilterGroupToChoiceForm(ChoiceForm, Filter.GroupType);
+			For Each GroupItem In Filter.Items Do
+				AddFilterToChoiceForm(ChoiceForm, GroupItem.FieldName, GroupItem.Value, GroupItem.ComparisonType, FilterGroup);
+			EndDo;
+		Else
+			AddFilterToChoiceForm(ChoiceForm, Filter.FieldName, Filter.Value, Filter.ComparisonType);
+		EndIf;
 	EndDo;
 	ChoiceForm.Open();
 EndProcedure
@@ -709,18 +716,37 @@ EndProcedure
 
 Function CreateFilterItem(FieldName, Value, ComparisonType) Export
 	FilterStructure = New Structure();
+	FilterStructure.Insert("FilterType", "Item");
 	FilterStructure.Insert("FieldName", FieldName);
 	FilterStructure.Insert("Value", Value);
 	FilterStructure.Insert("ComparisonType", ComparisonType);
 	Return FilterStructure;
 EndFunction
 
-Procedure AddFilterToChoiceForm(ChoiceForm, PathToField, Value, ComparisonType)
-	FilterItem = ChoiceForm.List.Filter.Items.Add(Type("DataCompositionFilterItem"));
+Function CreateFilterGroup(GroupType) Export
+	FilterGroupStructure = New Structure();
+	FilterGroupStructure.Insert("FilterType", "Group");
+	FilterGroupStructure.Insert("GroupType", GroupType);
+	FilterGroupStructure.Insert("Items", New Array());
+	Return FilterGroupStructure;
+EndFunction
+
+Procedure AddFilterToChoiceForm(ChoiceForm, PathToField, Value, ComparisonType, FilterGroup = Undefined)
+	If FilterGroup <> Undefined Then
+		FilterItem = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
+	Else
+		FilterItem = ChoiceForm.List.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	EndIf;
 	FilterItem.LeftValue = New DataCompositionField(PathToField);
 	FilterItem.RightValue = Value;
 	FilterItem.ComparisonType = ComparisonType;
 EndProcedure
+
+Function AddFilterGroupToChoiceForm(ChoiceForm, GroupType);
+	FilterGroup = ChoiceForm.List.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
+	FilterGroup.GroupType = GroupType;
+	Return FilterGroup;
+EndFunction
 
 #EndRegion
 

@@ -2,8 +2,8 @@
 Procedure GetUpdateInfo(ArrayOfUpdateInfo) Export
 	UpdateInfo = UpdateManagerServer.GetUpdateInfoDefenition();
 	UpdateInfo.Method = "UpdateManagerReleaseServer.RunUpdate_ItemType_StockBalanceDetail_SerialLotNumber";
-	UpdateInfo.Description = R().Update_002;
-	UpdateInfo.FullDescription = R().UpdateDesc_002;
+	UpdateInfo.Description = R().Update_001;
+	UpdateInfo.FullDescription = R().UpdateDesc_001;
 	ArrayOfUpdateInfo.Add(UpdateInfo);				
 EndProcedure
 

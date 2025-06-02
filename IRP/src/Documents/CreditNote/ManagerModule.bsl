@@ -657,3 +657,36 @@ EndFunction
 #EndRegion
 
 #EndRegion
+
+#Region SystemAttributes
+
+Function GetPredefinedSystemAttributes() Export
+	SystemAttributes = New Array(); // Array of ChartOfCharacteristicTypesRef.SystemAttributes
+	SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.Partner);
+	If GetFunctionalOption("UsePartnerTerms") = True Then
+		SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.PartnerTerm);
+	EndIf;
+	If GetFunctionalOption("UseLegalName") = True Then
+		SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.LegalName);
+	EndIf;
+	If GetFunctionalOption("UseLegalNameContract") = True Then
+		SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.LegalNameContract);
+	EndIf;
+	Return SystemAttributes;
+EndFunction
+
+Function GetSystemAttributeValues(Obj, SystemAttribute) Export
+	Values = New Array();
+	If SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.Partner Then
+		Values = Obj.Transactions.Unload(, "Partner").UnloadColumn("Partner");
+	ElsIf SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.PartnerTerm Then
+		Values = Obj.Transactions.Unload(, "Agreement").UnloadColumn("Agreement");
+	ElsIf SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.LegalName Then
+		Values = Obj.Transactions.Unload(, "LegalName").UnloadColumn("LegalName");
+	ElsIf SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.LegalNameContract Then
+		Values = Obj.Transactions.Unload(, "LegalNameContract").UnloadColumn("LegalNameContract");
+	EndIf;
+	Return Values;
+EndFunction
+
+#EndRegion

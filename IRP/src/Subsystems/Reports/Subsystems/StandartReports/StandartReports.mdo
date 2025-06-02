@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8622cca3-0b6f-40ce-8219-dee56e483acd">
+  <name>StandartReports</name>
+  <synonym>
+    <key>en</key>
+    <value>Standart reports</value>
+  </synonym>
+  <includeHelpInContents>true</includeHelpInContents>
+  <includeInCommandInterface>true</includeInCommandInterface>
+  <content>Role.StandartReports</content>
+  <content>Report.R1031A_ReceiptInvoicingBalance</content>
+  <content>Report.R1001A_Purchases</content>
+  <content>Report.R1010A_PurchaseOrders</content>
+  <content>Report.R4011B_FreeStockMovements</content>
+  <content>Report.R2012A_SalesOrdersInvoiceClosing</content>
+  <content>Report.R4050A_InventoryBalance</content>
+  <content>Report.M1010A_PriceList</content>
+  <content>Report.R6060A_CostOfGoodsSold</content>
+  <content>Report.R403A_GoodsInTransit</content>
+  <content>Report.R5010A_ReconciliationStatement</content>
+  <content>Report.R3021A_CashInTransit</content>
+  <content>Report.R2011A_SalesOrdersShipment</content>
+  <content>Report.R3027A_CashAdvance</content>
+  <content>Report.R4010A_StockBalance</content>
+  <content>Report.R401A_FreeStocks</content>
+  <content>Report.R3011A_CashFlow</content>
+  <content>Report.R5021A_Revenues</content>
+  <content>Report.R3010A_CashOnHand</content>
+  <content>Report.R1012A_PurchaseOrdersInvoiceClosing</content>
+  <content>Report.R9510A_Salary</content>
+  <content>Report.R5020A_PartnersBalance</content>
+  <content>Report.R5022A_Expenses</content>
+  <content>Report.R502A_ProfitLosses</content>
+  <content>Report.R6020A_InventoryCost</content>
+  <content>Report.R4012A_StockReservation</content>
+  <content>Report.R2001A_Sales</content>
+  <content>Report.R1031B_ReceiptInvoicingMovements</content>
+  <content>Report.R9101S_InventoryResults</content>
+  <content>Report.R1011A_PuchaseOrdersShipment</content>
+  <content>Report.R2010A_SalesOrders</content>
+  <content>Report.R405A_StockAdjustments</content>
+  <content>Report.R3024B_SalesOrdersToBePaid</content>
+  <parentSubsystem>Subsystem.Reports</parentSubsystem>
+</mdclass:Subsystem>

@@ -447,6 +447,9 @@ Function GetChain()
 	
 	Chain.Insert("ChangeCurrencyRevaluationInvoiceByBasis", GetChainLink("ChangeCurrencyRevaluationInvoiceByBasisExecute"));
 	
+	Chain.Insert("ChangeAmountByNewAmountBalance", GetChainLink("ChangeAmountByNewAmountBalanceExecute"));
+	Chain.Insert("ChangeNewAmountBalanceByAmount", GetChainLink("ChangeNewAmountBalanceByAmountExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -2028,6 +2031,32 @@ EndFunction
 Function ChangeProfitLossCenterSenderByFixedAssetExecute(Options) Export
 	Result = DocFixedAssetTransferServer.GetFixedAssetLocation(Options.Date, Options.Company, Options.FixedAsset);
 	Return Result.ProfitLossCenter;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_AMOUNT_BY_NEW_AMOUNT_BALANCE
+
+Function ChangeAmountByNewAmountBalanceOptions() Export
+	Return GetChainLinkOptions("AmountBalance, NewAmountBalance");
+EndFunction
+
+Function ChangeAmountByNewAmountBalanceExecute(Options) Export	
+	Return ?(ValueIsFilled(Options.NewAmountBalance), Options.NewAmountBalance, 0)  
+		- ?(ValueIsFilled(Options.AmountBalance), Options.AmountBalance, 0)  ;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_NEW_AMOUNT_BALANCE_BY_AMOUNT
+
+Function ChangeNewAmountBalanceByAmountOptions() Export
+	Return GetChainLinkOptions("AmountBalance, Amount");
+EndFunction
+
+Function ChangeNewAmountBalanceByAmountExecute(Options) Export	
+	Return ?(ValueIsFilled(Options.Amount), Options.Amount, 0)  
+		+ ?(ValueIsFilled(Options.AmountBalance), Options.AmountBalance, 0)  ;
 EndFunction
 
 #EndRegion

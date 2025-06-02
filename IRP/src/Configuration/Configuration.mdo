@@ -235,6 +235,9 @@
   <commonPictures>CommonPicture.Unlock</commonPictures>
   <commonPictures>CommonPicture.Waiting</commonPictures>
   <commonPictures>CommonPicture.Work</commonPictures>
+  <commonPictures>CommonPicture.DocumentUnposted</commonPictures>
+  <commonPictures>CommonPicture.DocumentPosted</commonPictures>
+  <commonPictures>CommonPicture.DocumentDeleted</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -492,6 +495,8 @@
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseGroupEditingProperties</roles>
   <roles>Role.UseOutput</roles>
+  <roles>Role.Document_FixedAssetRevaluation</roles>
+  <roles>Role.StandartReports</roles>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -501,6 +506,7 @@
   <commonTemplates>CommonTemplate.HTMLTextField</commonTemplates>
   <commonTemplates>CommonTemplate.XMLPrettyPrint</commonTemplates>
   <filterCriteria>FilterCriterion.RelatedDocuments</filterCriteria>
+  <filterCriteria>FilterCriterion.AgreementDocuments</filterCriteria>
   <commonModules>CommonModule.AccountingClient</commonModules>
   <commonModules>CommonModule.AccountingClientServer</commonModules>
   <commonModules>CommonModule.AccountingServer</commonModules>
@@ -845,6 +851,8 @@
   <commonModules>CommonModule.UpdateManagerClient</commonModules>
   <commonModules>CommonModule.UpdateManagerInitialServer</commonModules>
   <commonModules>CommonModule.UpdateManagerReleaseServer</commonModules>
+  <commonModules>CommonModule.DocFixedAssetRevaluationClient</commonModules>
+  <commonModules>CommonModule.DocFixedAssetRevaluationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1351,6 +1359,7 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
+  <documents>Document.FixedAssetRevaluation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1474,17 +1483,49 @@
   <reports>Report.F0010_FixedAssetsTransferCost</reports>
   <reports>Report.F0011_InventoryBook</reports>
   <reports>Report.F0012_DepreciationStatement</reports>
+  <reports>Report.M1010A_PriceList</reports>
   <reports>Report.R1001_Purchases</reports>
+  <reports>Report.R1001A_Purchases</reports>
+  <reports>Report.R1010A_PurchaseOrders</reports>
+  <reports>Report.R1011A_PuchaseOrdersShipment</reports>
+  <reports>Report.R1012A_PurchaseOrdersInvoiceClosing</reports>
+  <reports>Report.R1031A_ReceiptInvoicingBalance</reports>
+  <reports>Report.R1031B_ReceiptInvoicingMovements</reports>
   <reports>Report.R1100_CustomersAging</reports>
   <reports>Report.R1200_VendorsAging</reports>
   <reports>Report.R2001_Sales</reports>
+  <reports>Report.R2001A_Sales</reports>
+  <reports>Report.R2010A_SalesOrders</reports>
+  <reports>Report.R2011A_SalesOrdersShipment</reports>
+  <reports>Report.R2012A_SalesOrdersInvoiceClosing</reports>
   <reports>Report.R3010_CashOnHand</reports>
+  <reports>Report.R3010A_CashOnHand</reports>
+  <reports>Report.R3011A_CashFlow</reports>
+  <reports>Report.R3021A_CashInTransit</reports>
+  <reports>Report.R3024B_SalesOrdersToBePaid</reports>
+  <reports>Report.R3027A_CashAdvance</reports>
+  <reports>Report.R4010A_StockBalance</reports>
+  <reports>Report.R4011B_FreeStockMovements</reports>
+  <reports>Report.R4012A_StockReservation</reports>
+  <reports>Report.R401A_FreeStocks</reports>
+  <reports>Report.R403A_GoodsInTransit</reports>
+  <reports>Report.R4050A_InventoryBalance</reports>
+  <reports>Report.R405A_StockAdjustments</reports>
+  <reports>Report.R5010A_ReconciliationStatement</reports>
   <reports>Report.R5020_PartnersBalance</reports>
   <reports>Report.R5020_ProfitLosses</reports>
+  <reports>Report.R5020A_PartnersBalance</reports>
+  <reports>Report.R5021A_Revenues</reports>
+  <reports>Report.R5022A_Expenses</reports>
+  <reports>Report.R502A_ProfitLosses</reports>
   <reports>Report.R6020_BatchBalance</reports>
+  <reports>Report.R6020A_InventoryCost</reports>
   <reports>Report.R6021_BatchBalanceSimple</reports>
+  <reports>Report.R6060A_CostOfGoodsSold</reports>
   <reports>Report.R7010_DetailingSupplies</reports>
   <reports>Report.R7030_ProductionPlanning</reports>
+  <reports>Report.R9101S_InventoryResults</reports>
+  <reports>Report.R9510A_Salary</reports>
   <reports>Report.S1001L_VendorsPrices</reports>
   <reports>Report.T0001_FilesAnalyser</reports>
   <dataProcessors>DataProcessor.AccountantAutomatedWorkplace</dataProcessors>
@@ -1621,6 +1662,7 @@
   <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
   <informationRegisters>InformationRegister.TranformedObjectsLink</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
+  <informationRegisters>InformationRegister.T9069S_AccountingMappingRecordersDescription</informationRegisters>
   <informationRegisters>InformationRegister.AppliedDatabaseUpdates</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>

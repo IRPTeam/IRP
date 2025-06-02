@@ -16411,6 +16411,118 @@ EndFunction
 
 #EndRegion
 
+#Region CALCULATIONS_LIST
+
+#Region CALCULATIONS_LIST_NEW_AMOUNT_BALANCE
+
+// Calculations.NewAmountBalance.OnChange
+Procedure CalculationsNewAmountBalanceOnChange(Parameters) Export
+	Binding = BindCalculationsNewAmountBalance(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Calculations.NewAmountBalance.Set
+Procedure SetCalculationsNewAmountBalance(Parameters, Results) Export
+	Binding = BindCalculationsNewAmountBalance(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Calculations.NewAmountBalance.Get
+Function GetCalculationsNewAmountBalance(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindCalculationsNewAmountBalance(Parameters).DataPath, _Key);
+EndFunction
+
+// Calculations.NewAmountBalance.Bind
+Function BindCalculationsNewAmountBalance(Parameters)
+	DataPath = "Calculations.NewAmountBalance";
+	Binding = New Structure();
+	Binding.Insert("FixedAssetRevaluation", "StepCalculationsChangeAmountByNewAmountBalance");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCalculationsNewAmountBalance");
+EndFunction
+
+// Calculations.ChangeAmountByNewAmountBalance.Step
+Procedure StepCalculationsChangeAmountByNewAmountBalance(Parameters, Chain) Export
+	Chain.ChangeAmountByNewAmountBalance.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAmountByNewAmountBalance.Setter = "SetCalculationsAmount";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeAmountByNewAmountBalanceOptions();
+		Options.AmountBalance    = GetCalculationsAmountBalance(Parameters, Row.Key);
+		Options.NewAmountBalance = GetCalculationsNewAmountBalance(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepCalculationsChangeAmountByNewAmountBalance";
+		Chain.ChangeAmountByNewAmountBalance.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region CALCULATIONS_LIST_AMOUNT
+
+// Calculations.Amount.OnChange
+Procedure CalculationsAmountOnChange(Parameters) Export
+	Binding = BindCalculationsAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Calculations.Amount.Set
+Procedure SetCalculationsAmount(Parameters, Results) Export
+	Binding = BindCalculationsAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Calculations.Amount.Get
+Function GetCalculationsAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindCalculationsAmount(Parameters).DataPath, _Key);
+EndFunction
+
+// Calculations.Amount.Bind
+Function BindCalculationsAmount(Parameters)
+	DataPath = "Calculations.Amount";
+	Binding = New Structure();
+	Binding.Insert("FixedAssetRevaluation", "StepCalculationsChangeNewAmountBalanceByAmount");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCalculationsAmount");
+EndFunction
+
+// Calculations.ChangeNewAmountBalanceByAmount.Step
+Procedure StepCalculationsChangeNewAmountBalanceByAmount(Parameters, Chain) Export
+	Chain.ChangeNewAmountBalanceByAmount.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeNewAmountBalanceByAmount.Setter = "SetCalculationsNewAmountBalance";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeNewAmountBalanceByAmountOptions();
+		Options.AmountBalance    = GetCalculationsAmountBalance(Parameters, Row.Key);
+		Options.Amount           = GetCalculationsAmount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepCalculationsChangeNewAmountBalanceByAmount";
+		Chain.ChangeNewAmountBalanceByAmount.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region CALCULATIONS_LIST_AMOUNT_BALANCE
+
+// Calculations.AmountBalance.Get
+Function GetCalculationsAmountBalance(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindCalculationsAmountBalance(Parameters).DataPath, _Key);
+EndFunction
+
+// Calculations.AmountBalance.Bind
+Function BindCalculationsAmountBalance(Parameters)
+	DataPath = "Calculations.AmountBalance";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCalculationsAmountBalance");
+EndFunction
+
+#EndRegion
+
+#EndRegion
+
 #Region SEND_DEBT_TYPE
 
 // SendDebtType.OnChange

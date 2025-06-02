@@ -110,7 +110,7 @@ Procedure TestOnServer()
 	//@skip-check property-return-type
 	Result = Catalogs.PrintFormTemplates.GetParameterValue(
 		ThisObject.FormulaText, Source, Catalogs.PrintFormTemplates.GetTemplateTableInfo(
-			FormData.TableData, Undefined, 0, ThisObject.TableName));
+			FormData.TableData, , , ThisObject.TableName));
 EndProcedure
 
 &AtClient

@@ -1013,6 +1013,12 @@ EndProcedure
 
 #Region FORM
 
+// On open.
+// 
+// Parameters:
+//  Object - FormDataStructure - Object
+//  Form - ClientApplicationForm - Form
+//  TableNames - String - Table names
 Procedure OnOpen(Object, Form, TableNames) Export
 	UpdateCacheBeforeChange(Object, Form);
 	For Each TableName In StrSplit(TableNames, ",") Do
@@ -2303,27 +2309,28 @@ Async Function ItemListSplitRow(Object, Form) Export
 	EndIf;
 
 	SerialTable = Object.SerialLotNumbers.FindRows(New Structure("Key", CurrentData.Key));
+		
 	If SerialTable.Count() > 0 Then
 		CurrentDataQuantity = CurrentData.Quantity;
-		For Each Row In SerialTable Do
-			If Row.Quantity <= CurrentDataQuantity Then
-				CurrentDataQuantity = CurrentDataQuantity - Row.Quantity;
-			ElsIf Row.Quantity > CurrentDataQuantity And CurrentDataQuantity > 0 Then
-				CurrentRowQuantity = Row.Quantity;
-				Row.Quantity = CurrentDataQuantity;
+		For Each SerialTableRow In SerialTable Do
+			If SerialTableRow.Quantity <= CurrentDataQuantity Then
+				CurrentDataQuantity = CurrentDataQuantity - SerialTableRow.Quantity;
+			ElsIf SerialTableRow.Quantity > CurrentDataQuantity And CurrentDataQuantity > 0 Then
+				CurrentRowQuantity = SerialTableRow.Quantity;
+				SerialTableRow.Quantity = CurrentDataQuantity;
 				
 				NewSerial = Object.SerialLotNumbers.Add();
-				FillPropertyValues(NewSerial, Row);
-				NewSerial.Quantity = CurrentRowQuantity - Row.Quantity;
+				FillPropertyValues(NewSerial, SerialTableRow);
+				NewSerial.Quantity = CurrentRowQuantity - SerialTableRow.Quantity;
 				NewSerial.Key = NewRow.Key;
 				CurrentDataQuantity = 0;
 				
 				If Object.Property("SourceOfOrigins") Then
 					SourceOfOriginsTable = 
-						Object.SourceOfOrigins.FindRows(New Structure("Key, SerialLotNumber", CurrentData.Key, Row.SerialLotNumber));
+						Object.SourceOfOrigins.FindRows(New Structure("Key, SerialLotNumber", CurrentData.Key, SerialTableRow.SerialLotNumber));
 				
 					For Each RowSoO In SourceOfOriginsTable Do
-						RowSoO.Quantity = Row.Quantity;
+						RowSoO.Quantity = SerialTableRow.Quantity;
 						
 						NewSoO = Object.SourceOfOrigins.Add();
 						FillPropertyValues(NewSoO, NewSerial);
@@ -2333,20 +2340,58 @@ Async Function ItemListSplitRow(Object, Form) Export
 				EndIf;
 				
 			Else
-				OldRowKey = Row.Key;
-				Row.Key = NewRow.Key;
+				OldRowKey = SerialTableRow.Key;
+				SerialTableRow.Key = NewRow.Key;
 				If Object.Property("SourceOfOrigins") Then
 					SourceOfOriginsTable = 
-						Object.SourceOfOrigins.FindRows(New Structure("Key, SerialLotNumber", OldRowKey, Row.SerialLotNumber));
+						Object.SourceOfOrigins.FindRows(New Structure("Key, SerialLotNumber", OldRowKey, SerialTableRow.SerialLotNumber));
 				
 					For Each RowSoO In SourceOfOriginsTable Do
-						FillPropertyValues(RowSoO, Row);
+						FillPropertyValues(RowSoO, SerialTableRow);
 					EndDo;
 			
 				EndIf;
 			
 			EndIf;			
 		EndDo;
+		
+	Else // SerialTable.Count() = 0	
+	
+		If Object.Property("SourceOfOrigins") Then
+			
+			ArrayOfKeys = New Array();
+			ArrayOfKeys.Add(New Structure("Key, Quantity", CurrentData.Key, CurrentData.Quantity));
+			ArrayOfKeys.Add(New Structure("Key, Quantity", NewRow.Key, NewRow.Quantity));
+			
+			SourceOfOriginsTable =Object.SourceOfOrigins.FindRows(
+				New Structure("Key, SerialLotNumber", CurrentData.Key, PredefinedValue("Catalog.SerialLotNumbers.EmptyRef")));
+			
+			CurrentSourceOfOrigins = Undefined;
+			If SourceOfOriginsTable.Count() > 0 Then
+				CurrentSourceOfOrigins = SourceOfOriginsTable[0].SourceOfOrigin;
+			EndIf;
+				
+			For Each ItemOfKeys In ArrayOfKeys Do
+				SourceOfOriginsTable =Object.SourceOfOrigins.FindRows(
+					New Structure("Key, SerialLotNumber", ItemOfKeys.Key, PredefinedValue("Catalog.SerialLotNumbers.EmptyRef")));
+				
+				If SourceOfOriginsTable.Count() > 0 Then
+					CurrentDataQuantity = ItemOfKeys.Quantity;
+					For Each SourceOfOriginsTableRow In SourceOfOriginsTable Do
+						If SourceOfOriginsTableRow.Quantity <= CurrentDataQuantity Then
+							CurrentDataQuantity = CurrentDataQuantity - SourceOfOriginsTableRow.Quantity;
+						ElsIf SourceOfOriginsTableRow.Quantity > CurrentDataQuantity And CurrentDataQuantity > 0 Then
+							CurrentRowQuantity = SourceOfOriginsTableRow.Quantity;
+							SourceOfOriginsTableRow.Quantity = CurrentDataQuantity;
+							SourceOfOriginsTableRow.SourceOfOrigin = CurrentSourceOfOrigins;
+							CurrentDataQuantity = 0;
+						Else
+							SourceOfOriginsTableRow.Key = NewRow.Key;
+						EndIf;			
+					EndDo;
+				EndIf;
+			EndDo;			
+		EndIf;
 	EndIf;
 			
 	RowIDInfoTable = Object.RowIDInfo.FindRows(New Structure("Key", CurrentData.Key));
@@ -3277,40 +3322,6 @@ EndProcedure
 
 #EndRegion
 
-#Region _CALCULATIONS
-
-Procedure CalculationsAfterDeleteRow(Object, Form) Export
-	DeleteRows(Object, Form, "Calculations", "CalculationsAfterDeleteRowFormNotify");
-EndProcedure
-
-Function CalculationsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
-	NewRow = AddOrCopyRow(Object, Form, "Calculations", Cancel, Clone, CurrentData,
-		"CalculationsOnAddRowFormNotify", "CalculationsOnCopyRowFormNotify");
-	Form.Items.Calculations.CurrentRow = NewRow.GetID();
-	If Form.Items.Calculations.CurrentRow <> Undefined Then
-		Form.Items.Calculations.ChangeRow();
-	EndIf;
-	Return NewRow;
-EndFunction
-
-Procedure CalculationsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
-	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-Procedure CalculationsOnAddRowFormNotify(Parameters) Export
-	Parameters.Form.Modified = True;
-EndProcedure
-
-Procedure CalculationsOnCopyRowFormNotify(Parameters) Export
-	Parameters.Form.Modified = True;
-EndProcedure
-
-Procedure CalculationsAfterDeleteRowFormNotify(Parameters) Export
-	Parameters.Form.Modified = True;
-EndProcedure
-
-#EndRegion
-
 #Region _TRANSACTIONS_LIST_COLUMNS
 
 // Transactions.Partner
@@ -3361,6 +3372,66 @@ Procedure TransactionsAmountOnChange(Object, Form, CurrentData = Undefined) Expo
 	Parameters = GetSimpleParameters(Object, Form, "Transactions", Rows);
 	ControllerClientServer_V2.TransactionsAmountOnChange(Parameters);
 EndProcedure
+
+#EndRegion
+
+#Region _CALCULATIONS
+
+Procedure CalculationsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "Calculations", "CalculationsAfterDeleteRowFormNotify");
+EndProcedure
+
+Function CalculationsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "Calculations", Cancel, Clone, CurrentData,
+		"CalculationsOnAddRowFormNotify", "CalculationsOnCopyRowFormNotify");
+	Form.Items.Calculations.CurrentRow = NewRow.GetID();
+	If Form.Items.Calculations.CurrentRow <> Undefined Then
+		Form.Items.Calculations.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure CalculationsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Procedure CalculationsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure CalculationsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure CalculationsAfterDeleteRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+#EndRegion
+
+#Region _CALCULATIONS_COLUMNS
+
+#Region _CALCULATIONS_AMOUNT
+
+// Calculations.Amount
+Procedure CalculationsAmountOnChange(Object, Form, TableName, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+	ControllerClientServer_V2.CalculationsAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region _CALCULATIONS_NEW_AMOUNT_BALANCE
+
+// Calculations.NewAmountBalance
+Procedure CalculationsNewAmountBalanceOnChange(Object, Form, TableName, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+	ControllerClientServer_V2.CalculationsNewAmountBalanceOnChange(Parameters);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 

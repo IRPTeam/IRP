@@ -86,7 +86,11 @@ EndFunction
 // Returns:
 //  String - User language code
 Function UserLanguageCode() Export
-	Return SessionParameters.LocalizationCode;
+	LocalizationCode = "en";
+	If Not IsBlankString(SessionParameters.LocalizationCode) Then
+		LocalizationCode = SessionParameters.LocalizationCode;
+	EndIf;	
+	Return LocalizationCode;
 EndFunction
 
 // Get session parameter.

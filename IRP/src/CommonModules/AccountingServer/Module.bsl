@@ -2657,6 +2657,7 @@ Function GetTableOfJEDocuments(ArrayOfBasisDocuments, ArrayOfLedgerTypes) Export
 	For Each Row In QueryTable Do
 		If ValueIsFilled(Row.JournalEntry) Then
 			JEDocObject = Row.JournalEntry.GetObject();
+			JEDocObject.DeletionMark = False;
 		Else
 			JEDocObject = Documents.JournalEntry.CreateDocument();
 		EndIf;

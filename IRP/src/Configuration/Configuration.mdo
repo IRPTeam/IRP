@@ -759,6 +759,7 @@
   <commonModules>CommonModule.FOServer</commonModules>
   <commonModules>CommonModule.GetItemInfo</commonModules>
   <commonModules>CommonModule.HardwareClient</commonModules>
+  <commonModules>CommonModule.HardwareClientServer</commonModules>
   <commonModules>CommonModule.HardwareServer</commonModules>
   <commonModules>CommonModule.IDInfoClient</commonModules>
   <commonModules>CommonModule.IDInfoServer</commonModules>

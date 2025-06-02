@@ -141,7 +141,7 @@ Function R2021B_CustomersTransactions_SI_SRFTA() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsSales
+		|	ItemList.IsSales AND (ItemList.IsCustomer OR ItemList.IsTradeAgent)
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Project,
@@ -202,7 +202,7 @@ Function R2021B_CustomersTransactions_SR() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsReturnFromCustomer
+		|	ItemList.IsReturnFromCustomer AND (ItemList.IsCustomer OR ItemLIst.IsTradeAgent)
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Project,

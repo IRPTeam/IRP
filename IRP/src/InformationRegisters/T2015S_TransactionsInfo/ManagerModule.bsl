@@ -594,7 +594,7 @@ Function T2015S_TransactionsInfo_PI_SRTC() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsPurchase
+		|	ItemList.IsPurchase AND (ItemList.IsVendor OR ItemList.IsConsignor)
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Company,
@@ -660,7 +660,7 @@ Function T2015S_TransactionsInfo_PR() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsReturnToVendor
+		|	ItemList.IsReturnToVendor AND (ItemList.IsVendor OR ItemList.IsConsignor)
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Company,
@@ -693,7 +693,7 @@ Function T2015S_TransactionsInfo_SI_SRFTA() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsSales
+		|	ItemList.IsSales AND (ItemList.IsCustomer OR ItemList.IsTradeAgent)
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Company,
@@ -726,7 +726,7 @@ Function T2015S_TransactionsInfo_SR() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsReturnFromCustomer
+		|	ItemList.IsReturnFromCustomer AND (ItemList.IsCustomer OR ItemList.IsTradeAgent)
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Company,

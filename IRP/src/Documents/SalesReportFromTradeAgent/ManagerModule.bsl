@@ -263,53 +263,56 @@ EndFunction
 
 Function ItemList()
 	Return "SELECT
-		   |	DocItemList.Ref.Company AS Company,
-		   |	DocItemList.Ref AS Invoice,
-		   |	DocItemList.ItemKey AS ItemKey,
-		   |	DocItemList.Key AS RowKey,
-		   |	DocItemList.Quantity AS UnitQuantity,
-		   |	DocItemList.QuantityInBaseUnit AS Quantity,
-		   |	DocItemList.TotalAmount AS Amount,
-		   |	DocItemList.Ref.Partner AS Partner,
-		   |	DocItemList.Ref.LegalName AS LegalName,
-		   |	CASE
-		   |		WHEN DocItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		   |		AND DocItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		   |			THEN DocItemList.Ref.Agreement.StandardAgreement
-		   |		ELSE DocItemList.Ref.Agreement
-		   |	END AS Agreement,
-		   |	DocItemList.Ref.Currency AS Currency,
-		   |	DocItemList.Unit AS Unit,
-		   |	DocItemList.Ref.Date AS Period,
-		   |	DocItemList.IsService AS IsService,
-		   |	DocItemList.ProfitLossCenter AS ProfitLossCenter,
-		   |	DocItemList.RevenueType AS RevenueType,
-		   |	DocItemList.AdditionalAnalytic AS AdditionalAnalytic,
-		   |	CASE
-		   |		WHEN DocItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			THEN DocItemList.Ref
-		   |		ELSE UNDEFINED
-		   |	END AS Basis,
-		   |	DocItemList.NetAmount AS NetAmount,
-		   |	DocItemList.Key,
-		   |	DocItemList.Ref.Branch AS Branch,
-		   |	DocItemList.Ref.LegalNameContract AS LegalNameContract,
-		   |	DocItemList.PriceType,
-		   |	DocItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
-		   |	DocItemList.VatRate AS VatRate,
-		   |	DocItemList.TaxAmount AS TaxAmount,
-		   |	VALUE(Catalog.Partners.EmptyRef) AS SalesPerson,
-		   |	0 AS OffersAmount,
-		   |	UNDEFINED AS Order,
-		   |	DocItemList.Project,
-		   |	TRUE AS IsSales,
-		   |	UNDEFINED AS SalesOrder,
-		   |	UNDEFINED AS SalesOrderSettlements
-		   |INTO ItemList
-		   |FROM
-		   |	Document.SalesReportFromTradeAgent.ItemList AS DocItemList
-		   |WHERE
-		   |	DocItemList.Ref = &Ref";
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref AS Invoice,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Key AS RowKey,
+	|	ItemList.Quantity AS UnitQuantity,
+	|	ItemList.QuantityInBaseUnit AS Quantity,
+	|	ItemList.TotalAmount AS Amount,
+	|	ItemList.Ref.Partner AS Partner,
+	|	ItemList.Ref.LegalName AS LegalName,
+	|	CASE
+	|		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+	|		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+	|			THEN ItemList.Ref.Agreement.StandardAgreement
+	|		ELSE ItemList.Ref.Agreement
+	|	END AS Agreement,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.Unit AS Unit,
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.IsService AS IsService,
+	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+	|	ItemList.RevenueType AS RevenueType,
+	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+	|	CASE
+	|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN ItemList.Ref
+	|		ELSE UNDEFINED
+	|	END AS Basis,
+	|	ItemList.NetAmount AS NetAmount,
+	|	ItemList.Key,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.LegalNameContract AS LegalNameContract,
+	|	ItemList.PriceType,
+	|	ItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
+	|	ItemList.VatRate AS VatRate,
+	|	ItemList.TaxAmount AS TaxAmount,
+	|	VALUE(Catalog.Partners.EmptyRef) AS SalesPerson,
+	|	0 AS OffersAmount,
+	|	UNDEFINED AS Order,
+	|	ItemList.Project,
+	|	TRUE AS IsSales,
+	|	UNDEFINED AS SalesOrder,
+	|	UNDEFINED AS SalesOrderSettlements,
+	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
+	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.TradeAgent) AS IsTradeAgent,
+	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
+	|INTO ItemList
+	|FROM
+	|	Document.SalesReportFromTradeAgent.ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()

@@ -931,17 +931,17 @@ EndProcedure
 #Region PROFIT_LOSS_CENTER
 
 &AtClient
-Procedure PaymentListProfitLossCenterNoSplitsOnChange(Item)
+Procedure PaymentListProfitLossCenterOnChange(Item)
 	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
 EndProcedure
 
 &AtClient
-Procedure PaymentListProfitLossCenterOnChange(Item)
+Procedure PaymentListProfitLossCenterNoSplitsOnChange(Item)
 	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
 	If LineAttribute <> Undefined Then
 		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
 	EndIf;
-	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");	
 EndProcedure
 
 #EndRegion
@@ -949,12 +949,12 @@ EndProcedure
 #Region CASH_FLOW_CENTER
 
 &AtClient
-Procedure PaymentListCashFlowCenterNoSplitsOnChange(Item)
+Procedure PaymentListCashFlowCenterOnChange(Item)
 	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
 EndProcedure
 
 &AtClient
-Procedure PaymentListCashFlowCenterOnChange(Item)
+Procedure PaymentListCashFlowCenterNoSplitsOnChange(Item)
 	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
 	If LineAttribute <> Undefined Then
 		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);

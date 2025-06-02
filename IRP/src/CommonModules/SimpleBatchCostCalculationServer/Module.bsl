@@ -143,7 +143,7 @@ Function UpdateOutgoingMovementsCost(Val Ref, Val CurrentMovements, Cancel, Batc
 		Return Undefined;
 	EndIf;
 	
-	If Not Sequences.SimpleBatch.BelongsTo(Ref) Then
+	If Not Metadata.Sequences.SimpleBatch.Documents.Contains(Ref.Metadata()) Then
 		Return Undefined;
 	EndIf;
 	
@@ -166,6 +166,11 @@ Function UpdateOutgoingMovementsCost(Val Ref, Val CurrentMovements, Cancel, Batc
 		EndIf;
 		
 		CostInfo = CostCalculations.Get(Movement.SimpleBatch); // See GetEmptyCalculationResult
+		
+		If CostInfo = Undefined Then
+			Continue;
+		EndIf;
+		
 		If CostInfo.TotalQuantity > Movement.Quantity Then
 			Movement.Amount = Movement.Quantity * CostInfo.AverageCost;
 			Sequences.SimpleBatch.SetBound(PointInTime, Filter);

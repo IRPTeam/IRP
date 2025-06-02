@@ -91,7 +91,7 @@ Procedure RestoreAllAtServer(SimpleBatchList = Undefined)
 		Cancel = False;
 		Posting_R6025B = SimpleBatchCostCalculationServer.UpdateOutgoingMovementsCost(Row.Recorder, CurrentMovement, Cancel, BatchForCheck, BatchWithErrors);
 
-		If Not Posting_R6025B = Undefined AND Not CommonFunctionsServer.TablesIsEqual(CurrentMovement, Posting_R6025B) Then
+		If Not Posting_R6025B = Undefined Then
 			Set.Load(Posting_R6025B);
 			Set.Write();
 		EndIf;

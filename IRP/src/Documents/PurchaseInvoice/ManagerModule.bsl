@@ -1791,7 +1791,6 @@ Function R6025B_SimpleBatch()
 	|WHERE
 	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
 	|	AND UseSimpleBatch.Value
-	|	AND ItemList.IsPurchaisePreliminaryStock
 	|GROUP BY
 	|	ItemList.Period,
 	|	ItemList.SimpleBatch,

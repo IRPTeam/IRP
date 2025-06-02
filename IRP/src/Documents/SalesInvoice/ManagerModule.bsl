@@ -1741,7 +1741,7 @@ Function GetAnalytics_VATIncoming(Parameters)
 	If Parameters.ObjectData.Agreement.Type = Enums.AgreementTypes.Other Then
 		AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
 	Else                           
-		AccountingAnalytics.Debit = Debit.AccountTransactionsCutomer;
+		AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
 	EndIf;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);

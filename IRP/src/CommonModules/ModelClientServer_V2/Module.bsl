@@ -753,7 +753,7 @@ Function ChangeCashAccountByCompanyOptions() Export
 EndFunction
 
 Function ChangeCashAccountByCompanyExecute(Options) Export
-	CashAccount = DocumentsServer.GetCashAccountByCompany(Options.Company, Options.Account, Options.AccountType);
+	CashAccount = DocumentsServer.GetCashAccountByCompany(Options.Company, Options.Account, Undefined);
 	Return CashAccount;
 EndFunction
 

@@ -24,6 +24,7 @@ Scenario: _028500 preparation (create document Sales return)
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
 		When Create catalog Partners objects
+		When Create OtherPartners objects		
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
 		When Create catalog Items objects
@@ -67,6 +68,9 @@ Scenario: _028500 preparation (create document Sales return)
 			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document SalesInvoice objects (Other)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(135).GetObject().Write(DocumentWriteMode.Posting);"    |		
 		When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -835,3 +839,39 @@ Scenario: _300512 check Use GR filling from store when create SR based on SI
 			| 'Boots'   | '36/18SD'    | 'Yes'                  |
 			| 'Boots'   | '37/18SD'    | 'Yes'                  |
 			| 'Dress'   | 'S/Yellow'   | 'Yes'                  |
+
+Scenario: _028515 create SR with partner Other
+	And I close all client application windows
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '135'       |
+		And I select current line in "List" table
+	* Create SR
+		And I click the button named "FormDocumentSalesReturnGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+	* check SR document	
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And form attributes have values:
+			| 'Name'                      | 'Value'                | 'HowToSearch' |
+			| 'Agreement'                 | "Other partner 1"      | ''            |
+			| 'Company'                   | "Main Company"         | ''            |
+			| 'Currency'                  | "TRY"                  | ''            |
+			| 'CurrencyTotalAmount'       | "TRY"                  | ''            |
+			| 'ItemListTotalNetAmount'    | "250,00"               | ''            |
+			| 'ItemListTotalOffersAmount' | "0,00"                 | ''            |
+			| 'ItemListTotalTaxAmount'    | "45,00"                | ''            |
+			| 'ItemListTotalTotalAmount'  | "295,00"               | ''            |
+			| 'LegalName'                 | "Other partner 1"      | ''            |
+			| 'Partner'                   | "Other partner 1"      | ''            |
+			| 'PriceIncludeTax'           | "No"                   | ''            |
+			| 'Store'                     | "Store 01"             | ''            |
+			| 'TransactionType'           | "Return from customer" | ''            |
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows				

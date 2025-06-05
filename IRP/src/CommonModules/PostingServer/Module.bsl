@@ -61,7 +61,7 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 		RegisteredRecordsArray.Add(Record.Value.RecordSet);
 	EndDo;
 	Parameters.Insert("RegisteredRecords", RegisteredRecordsArray);
-
+	Parameters.Module.PostingCheckAfterWrite(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
 	// Accounting MD5
 	If Not Cancel And Metadata.DefinedTypes.typeAccountingDocuments.Type.Types().Find(TypeOf(Parameters.Object.Ref)) <> Undefined Then
 		AccountingServer.UpdateAccountingRelevance(DocObject.Ref);	

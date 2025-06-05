@@ -257,6 +257,7 @@
   <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
   <sessionParameters>SessionParameter.RunBackgroundJobInDebugMode</sessionParameters>
   <sessionParameters>SessionParameter.Workstation</sessionParameters>
+  <sessionParameters>SessionParameter.ServerEquipments</sessionParameters>
   <roles>Role.AccountingReports</roles>
   <roles>Role.AccumulationRegisters_CashInTransit</roles>
   <roles>Role.AccumulationRegisters_DELETE_R8010B_TradeAgentInventory</roles>
@@ -744,7 +745,10 @@
   <commonModules>CommonModule.EquipmentAcquiringServer</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinter_CommonAPI</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinterAPIClient</commonModules>
+  <commonModules>CommonModule.EquipmentFiscalPrinterAPIClientServer</commonModules>
+  <commonModules>CommonModule.EquipmentFiscalPrinterAPIServer</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinterClient</commonModules>
+  <commonModules>CommonModule.EquipmentFiscalPrinterClientServer</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinterServer</commonModules>
   <commonModules>CommonModule.ExtensionServer</commonModules>
   <commonModules>CommonModule.ExternalCommandsClient</commonModules>

@@ -84,6 +84,7 @@
 // * EqError_003 - String - 
 // * EqError_004 - String - 
 // * EqError_005 - String - 
+// * EqFP_ShiftIsExpired - String - 
 // * EqFP_ShiftAlreadyOpened - String - 
 // * EqFP_ShiftIsNotOpened - String - 
 // * EqFP_ShiftAlreadyClosed - String - 
@@ -827,6 +828,7 @@ Function Strings(Lang) Export
 	Strings.Insert("EqError_004", NStr("en = 'Before install driver - it has to be loaded.'", Lang));
 	Strings.Insert("EqError_005", NStr("en = 'The equipment driver %1 has incorrect AddIn ID %2.'", Lang));
 	
+	Strings.Insert("EqFP_ShiftIsExpired", NStr("en = 'Shift has already expired.'", Lang));
 	Strings.Insert("EqFP_ShiftAlreadyOpened", NStr("en = 'Shift already opened.'", Lang));
 	Strings.Insert("EqFP_ShiftIsNotOpened", NStr("en = 'Shift is not opened.'", Lang));
 	Strings.Insert("EqFP_ShiftAlreadyClosed", NStr("en = 'Shift already closed.'", Lang));

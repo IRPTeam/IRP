@@ -68,7 +68,7 @@ Scenario: _028500 preparation (create document Sales return)
 			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);"    |
-		When Create document SalesInvoice objects (Other)
+		When Create document SalesInvoice objects (partner Other)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(135).GetObject().Write(DocumentWriteMode.Posting);"    |		
 		When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)

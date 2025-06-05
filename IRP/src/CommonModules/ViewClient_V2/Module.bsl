@@ -704,7 +704,7 @@ Procedure __tmp_BankCashPaymentReceipt_OnChainComplete(Parameters)
 	
 	// refill question TransactionType
 	If IsChangedProperty(Parameters, "TransactionType").IsChanged 
-		And Parameters.Object.PaymentList.Count() Then
+		And Parameters.Object.PaymentList.Count() And Not Parameters.Object.DetailsByRow Then
 		NotifyParameters = New Structure("Parameters", Parameters);
 		ShowQueryBox(New NotifyDescription("__tmp_BankCashPaymentReceipt_TransactionTypeOnUserChangeContinue", ThisObject, NotifyParameters), 
 					R().QuestionToUser_014, QuestionDialogMode.OKCancel);

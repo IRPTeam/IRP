@@ -318,6 +318,7 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 		If CurrentData.TotalAmount = 0 Then
 			ViewClient_V2.SetPaymentListTotalAmount(Object, Form, CurrentData, Result.Amount);
 		EndIf;
+		Form.FormUpdateFormAttributes("FromListToHeader");
 	EndIf;
 EndProcedure
 
@@ -495,11 +496,11 @@ EndProcedure
 
 #Region FINANCIAL_MOVEMENT_TYPE
 
-Procedure PaymentListMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+Procedure PaymentListMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, CurrentData = Undefined) Export
 	DocumentsClient.FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
-Procedure PaymentListMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+Procedure PaymentListMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing, CurrentData = Undefined) Export
 	DocumentsClient.FinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
 EndProcedure
 

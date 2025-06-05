@@ -310,6 +310,7 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 		If CurrentData.TotalAmount = 0 Then
 			ViewClient_V2.SetPaymentListTotalAmount(Object, Form, CurrentData, Result.Amount);
 		EndIf;
+		Form.FormUpdateFormAttributes("FromListToHeader");
 	EndIf;
 EndProcedure
 

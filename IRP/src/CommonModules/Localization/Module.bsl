@@ -1611,6 +1611,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Exc_013", NStr("en = 'Related document exists: %1'", Lang));
 	Strings.Insert("Exc_014", NStr("en = 'Wrong range'", Lang));
 	Strings.Insert("Exc_015", NStr("en = 'Overlapping ranges'", Lang));
+	Strings.Insert("Exc_016", NStr("en = 'Unsupported data format'", Lang));
 #EndRegion
 
 #Region Saas

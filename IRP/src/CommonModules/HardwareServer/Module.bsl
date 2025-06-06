@@ -182,8 +182,9 @@ EndFunction
 
 Procedure WriteLog(Hardware, Val Method, Val isRequest, Val Data, Val Result = False) Export
 	
-	FixTypesForWrite(Data);
-	
+	DataCopy = CopyForWrite(Data);
+	FixTypesForWrite(DataCopy);
+		
 	Reg = InformationRegisters.HardwareLog.CreateRecordManager();
 	Reg.Date = CurrentUniversalDateInMilliseconds();
 	Reg.Hardware = Hardware;
@@ -191,14 +192,50 @@ Procedure WriteLog(Hardware, Val Method, Val isRequest, Val Data, Val Result = F
 	Reg.User = SessionParameters.CurrentUser;
 	Reg.Method = Method;
 	Reg.Request = isRequest;
-	If TypeOf(Data) = Type("String") Then
-		Reg.Data = Data;
+	If TypeOf(DataCopy) = Type("String") Then
+		Reg.Data = DataCopy;
 	Else
-		Reg.Data = CommonFunctionsServer.SerializeJSON(Data);
+		Reg.Data = CommonFunctionsServer.SerializeJSON(DataCopy);
 	EndIf;
 	Reg.Result = Result;
-	Reg.Write(); 
+	Reg.Write();
+	
 EndProcedure
+
+// Save ref data.
+// 
+// Parameters:
+//  Data - Structure, String -
+// 
+// Returns:
+//  Structure, String
+Function CopyForWrite(Data)
+	
+	Copy = Data;
+	
+	If TypeOf(Data) = Type("Structure") Then
+		Copy = New Structure();
+		For Each DataKeyValue In Data Do
+			Copy.Insert(DataKeyValue.Key, CopyForWrite(DataKeyValue.Value));
+		EndDo;
+
+	ElsIf TypeOf(Data) = Type("Map") Then
+		Copy = New Map();
+		For Each DataKeyValue In Data Do
+			Copy.Insert(DataKeyValue.Key, CopyForWrite(DataKeyValue.Value));
+		EndDo;
+		
+	ElsIf TypeOf(Data) = Type("Array") Then
+		Copy = New Array();
+		For Each DataRow In Data Do
+			Copy.Add(CopyForWrite(DataRow));
+		EndDo;
+		
+	EndIf;
+	
+	Return Copy;
+	
+EndFunction
 
 Procedure FixTypesForWrite(Data) Export
 	

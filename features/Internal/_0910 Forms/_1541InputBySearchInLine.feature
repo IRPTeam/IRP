@@ -1780,7 +1780,7 @@ Scenario: _01540114 check item input by search in line by code in a document Ban
 		And I select from "Account" drop-down list by "5" string
 		Then the form attribute named "Account" became equal to "Bank account, USD"
 	* Partner
-		And in the table "PaymentList" I click the button named "PaymentListAdd"		
+		And I click the button named "PaymentListAdd"		
 		And I select "50" from "Partner" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner'      |

@@ -1406,7 +1406,7 @@ Scenario: _097750 Salary payment (Bank payment)
 		And I select from the drop-down list named "Branch" by "Distribution department" string
 		And I select from the drop-down list named "Account" by "Bank account, TRY" string
 		And I select "Salary payment" exact value from "Transaction type" drop-down list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Employee" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Alexander Orlov" from "Employee" drop-down list by string in "PaymentList" table
@@ -1423,7 +1423,7 @@ Scenario: _097750 Salary payment (Bank payment)
 		And I activate "Cash flow center" field in "PaymentList" table
 		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
 		And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Employee" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Anna Petrova" from "Employee" drop-down list by string in "PaymentList" table
@@ -1460,7 +1460,7 @@ Scenario: _097751 Salary payment (Cash payment)
 		And I select from the drop-down list named "Branch" by "Front office" string
 		And I select from the drop-down list named "CashAccount" by "Cash desk №4" string
 		And I select "Salary payment" exact value from "Transaction type" drop-down list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Employee" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Alexander Orlov" from "Employee" drop-down list by string in "PaymentList" table
@@ -1476,7 +1476,7 @@ Scenario: _097751 Salary payment (Cash payment)
 		And I select current line in "List" table
 		And I activate "Cash flow center" field in "PaymentList" table
 		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Employee" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Anna Petrova" from "Employee" drop-down list by string in "PaymentList" table
@@ -1511,7 +1511,7 @@ Scenario: _097752 Salary return (Bank receipt)
 		And I select from the drop-down list named "Branch" by "Distribution department" string
 		And I select from the drop-down list named "Account" by "Bank account, TRY" string
 		And I select "Salary return" exact value from "Transaction type" drop-down list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Employee" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Alexander Orlov" from "Employee" drop-down list by string in "PaymentList" table
@@ -1528,7 +1528,7 @@ Scenario: _097752 Salary return (Bank receipt)
 		And I activate "Cash flow center" field in "PaymentList" table
 		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
 		And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Employee" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Anna Petrova" from "Employee" drop-down list by string in "PaymentList" table
@@ -1564,7 +1564,7 @@ Scenario: _097753 Salary return (Cash receipt)
 		And I select from the drop-down list named "Branch" by "Front office" string
 		And I select from the drop-down list named "CashAccount" by "Cash desk №4" string
 		And I select "Salary return" exact value from "Transaction type" drop-down list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Employee" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Alexander Orlov" from "Employee" drop-down list by string in "PaymentList" table
@@ -1581,7 +1581,7 @@ Scenario: _097753 Salary return (Cash receipt)
 		And I activate "Cash flow center" field in "PaymentList" table
 		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
 		// And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Employee" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Anna Petrova" from "Employee" drop-down list by string in "PaymentList" table

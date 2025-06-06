@@ -878,7 +878,7 @@ Scenario: _090216 check tax in the BP (depend of transaction type)
 			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 	* Select partner
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -919,7 +919,7 @@ Scenario: _090217 check tax in the CP (depend of transaction type)
 			| 'Cash desk №4'    |
 		And I select current line in "List" table
 	* Select partner
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -960,7 +960,7 @@ Scenario: _090218 check tax in the CR (depend of transaction type)
 			| 'Cash desk №4'    |
 		And I select current line in "List" table
 	* Select partner
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1001,7 +1001,7 @@ Scenario: _090219 check tax in the BR (depend of transaction type)
 			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 	* Select partner
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1042,7 +1042,7 @@ Scenario: _090220 check tax in the CE (depend of transaction type)
 			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 	* Add expense
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table

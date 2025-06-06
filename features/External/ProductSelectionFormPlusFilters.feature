@@ -1156,7 +1156,7 @@ Scenario: check Description
 Scenario: check filter for Legal name contract (in BP, CP)
 	And I click the button named "FormCreate"
 	And I select from the drop-down list named "Company" by "Main Company" string
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
 	And I select "Company Ferron BP" from "Payee" drop-down list by string in "PaymentList" table
 	* Check list from
@@ -1193,7 +1193,7 @@ Scenario: check filter for Legal name contract (in BP, CP)
 Scenario: check filter for Legal name contract (in BR, CR)
 	And I click the button named "FormCreate"
 	And I select from the drop-down list named "Company" by "Main Company" string
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
 	And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
 	* Check list from
@@ -2053,7 +2053,7 @@ Scenario: check clone value in the documents (Profit loss center, Revenue type)
 
 Scenario: check clone value in the documents (Financial movement type, Cash flow center, Project)
 	* Add line and fill Financial movement type, Cash flow center, project
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Financial movement type" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Movement type 1" from "Financial movement type" drop-down list by string in "PaymentList" table
@@ -2088,7 +2088,7 @@ Scenario: check clone value in the documents (Financial movement type, Cash flow
 
 Scenario: check clone value in the documents (Financial movement type, Cash flow center, Project, Expense type)
 	* Add line and fill Financial movement type, Cash flow center, project
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Financial movement type" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Movement type 1" from "Financial movement type" drop-down list by string in "PaymentList" table

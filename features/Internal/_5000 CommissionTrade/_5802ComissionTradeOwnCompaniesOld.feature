@@ -985,7 +985,7 @@ Scenario: _05818 create Bank payment based on Sales report to consignors
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Delete line and fill Bank payment manually
 		And I delete all lines of "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"		
+		And I click the button named "PaymentListAdd"		
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -1056,7 +1056,7 @@ Scenario: _05819 create Cash payment based on Sales report to consignors
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Delete line and fill Cash payment manually
 		And I delete all lines of "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"		
+		And I click the button named "PaymentListAdd"		
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -1128,7 +1128,7 @@ Scenario: _05820 create Bank receipt based on Sales report from trade agent
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Delete line and fill Bank receipt manually
 		And I delete all lines of "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"		
+		And I click the button named "PaymentListAdd"		
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -1200,7 +1200,7 @@ Scenario: _05821 create Cash receipt based on Sales report from trade agent
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Delete line and fill Cash receipt manually
 		And I delete all lines of "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"		
+		And I click the button named "PaymentListAdd"		
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table

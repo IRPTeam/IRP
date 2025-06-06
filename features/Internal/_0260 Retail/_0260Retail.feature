@@ -764,7 +764,7 @@ Scenario: _0260137 return advance payment (cash)
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
 		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Retail customer" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Retail customer" attribute in "PaymentList" table
@@ -806,7 +806,7 @@ Scenario: _0260138 return advance payment (card)
 			| 'Description'          |
 			| 'Bank account, TRY'    |
 		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Retail customer" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Retail customer" attribute in "PaymentList" table

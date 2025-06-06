@@ -59,6 +59,16 @@ Procedure OnOpen(Cancel)
 EndProcedure
 
 &AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
+EndProcedure
+
+&AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure

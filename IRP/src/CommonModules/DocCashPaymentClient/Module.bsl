@@ -255,8 +255,8 @@ EndProcedure
 
 #Region BASIS_DOCUMENT
 
-Procedure PaymentListBasisDocumentOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListBasisDocumentOnChange(Object, Form, CurrentData);
+Procedure PaymentListBasisDocumentOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
+	ViewClient_V2.PaymentListBasisDocumentOnChange(Object, Form, CurrentData, FormAttributeUpdateDirection);
 EndProcedure
 
 Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, CurrentData = Undefined) Export

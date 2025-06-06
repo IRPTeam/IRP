@@ -105,7 +105,7 @@ Function GetFormAttributeMapping() Export
 	Map.Insert("PaymentList.Payee"                    , "PaymentListPayeeNoSplits");
 	Map.Insert("PaymentList.Agreement"                , "PaymentListAgreementNoSplits");
 	Map.Insert("PaymentList.LegalNameContract"        , "PaymentListLegalNameContractNoSplits");
-	Map.Insert("PaymentList.BasisDocument"            , "PaymentListLegalNameContractNoSplits");
+	Map.Insert("PaymentList.BasisDocument"            , "PaymentListBasisDocumentNoSplits");
 	Map.Insert("PaymentList.Project"                  , "PaymentListProjectNoSplits");
 	Map.Insert("PaymentList.Order"                    , "PaymentListOrderNoSplits");
 	Map.Insert("PaymentList.VatRate"                  , "PaymentListVatRateNoSplits");

@@ -26,29 +26,6 @@ Scenario: _175000 preparation (Bank payment simple form)
 	When set True value to the constant Use fixed assets
 	When Create catalog ExternalDataProc objects (test data base)
 	When Create information register UserSettings records (use simple forms for payment documents)
-* Add ExternalDataProc
-		* Discount
-				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-				And I go to line in "List" table
-						| 'Description'            |
-						| 'DocumentDiscount'       |
-				And I select current line in "List" table
-				And I select external file "$Path$/DataProcessor/DocumentDiscount.epf"
-				And I click the button named "FormAddExtDataProc"
-				And I input "" text in "Path to plugin for test" field
-				And I click "Save and close" button
-				And I wait "Plugins (create)" window closing in 5 seconds
-		* Contact info
-				Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-				And I go to line in "List" table
-						| 'Description'       |
-						| 'Address'           |
-				And I select current line in "List" table
-				And I select external file "$Path$/DataProcessor/InputAddress.epf"
-				And I click the button named "FormAddExtDataProc"
-				And I input "" text in "Path to plugin for test" field
-				And I click "Save and close" button
-				And I wait "Plugins (create)" window closing in 5 seconds
 	When Create catalog AddAttributeAndPropertySets objects (test data base)
 	When Create catalog AddAttributeAndPropertyValues objects (test data base)
 	When Create catalog IDInfoAddresses objects (test data base)

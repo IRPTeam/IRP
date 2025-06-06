@@ -4594,8 +4594,7 @@ Scenario: _029236 create PO - PI - SI (procurement method for Service)
 		And I input "08.05.2025 14:10:02" text in the field named "Date"
 		And I move to the next attribute
 		Then "Update item list info" window is opened
-		And I change checkbox named "Prices"
-		And I change checkbox named "PriceTypes"
+		And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
 		And I click the button named "FormOK"
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseInvoice029236$$" variable
@@ -4621,9 +4620,7 @@ Scenario: _029236 create PO - PI - SI (procurement method for Service)
 		And I input "11.05.2025 16:10:02" text in the field named "Date"
 		And I move to the next attribute
 		Then "Update item list info" window is opened
-		And I change checkbox named "Prices"
-		And I change checkbox named "PriceTypes"
-		And I click the button named "FormOK"
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice029236$$" variable
 		And I delete "$$SalesInvoice029236$$" variable
@@ -4692,8 +4689,7 @@ Scenario: _029238 create PO - PI - SI (procurement method for Service-purchase)
 		And I input "07.05.2025 12:32:45" text in the field named "Date"
 		And I move to the next attribute
 		Then "Update item list info" window is opened
-		And I change checkbox named "PriceTypes"
-		And I change checkbox named "Prices"
+		And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"		
 		And I click the button named "FormOK"
 		And I click the button named "FormPost"
 		And "ItemList" table became equal
@@ -4716,8 +4712,7 @@ Scenario: _029238 create PO - PI - SI (procurement method for Service-purchase)
 		And I input "10.05.2025 17:10:02" text in the field named "Date"
 		And I move to the next attribute
 		Then "Update item list info" window is opened
-		And I change checkbox named "Prices"
-		And I change checkbox named "PriceTypes"
+		And I remove checkbox "Do you want to replace filled price types with price type Basic Price Types?"		
 		And I click the button named "FormOK"
 		And I click the button named "FormPost"
 		And "ItemList" table became equal
@@ -4791,8 +4786,7 @@ Scenario: _029240 create PO - PI - SI (procurement method for Service-purchase/n
 		And I input "10.05.2025 10:32:45" text in the field named "Date"
 		And I move to the next attribute
 		Then "Update item list info" window is opened
-		And I change checkbox named "PriceTypes"
-		And I change checkbox named "Prices"
+		And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"	
 		And I click the button named "FormOK"
 		And I click the button named "FormPost"
 		And "ItemList" table became equal
@@ -4815,8 +4809,7 @@ Scenario: _029240 create PO - PI - SI (procurement method for Service-purchase/n
 		And I input "12.05.2025 15:10:05" text in the field named "Date"
 		And I move to the next attribute
 		Then "Update item list info" window is opened
-		And I change checkbox named "Prices"
-		And I change checkbox named "PriceTypes"
+		And I remove checkbox "Do you want to replace filled price types with price type Basic Price Types?"	
 		And I click the button named "FormOK"
 		And I click the button named "FormPost"
 		And "ItemList" table became equal

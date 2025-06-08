@@ -380,6 +380,29 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="53ba65dc-9e18-4459-9f29-73288f163b69">
+  <name>DetailsByRow</name>
+  <synonym>
+   <key>tr</key>
+   <value>Details by row</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Details by row</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Details by row</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="bf44b0ee-a0a1-4a4c-8523-3cea7817ea06">
   <name>DocumentForm</name>
   <synonym>
@@ -1195,12 +1218,6 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <choiceParameters>
-    <name>Filter.IsRevenue</name>
-    <value xsi:type="core:BooleanValue">
-     <value>true</value>
-    </value>
-   </choiceParameters>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>

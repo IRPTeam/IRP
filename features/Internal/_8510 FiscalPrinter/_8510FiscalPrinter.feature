@@ -1860,7 +1860,7 @@ Scenario: _0850028 check acquiring in BR
 			| 'Description'       |
 			| 'POS Terminal 2'    |
 		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |

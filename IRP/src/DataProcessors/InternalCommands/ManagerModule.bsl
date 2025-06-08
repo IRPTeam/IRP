@@ -502,6 +502,13 @@ Function CloneValueFromFirstRow_GetCommandDescription()
 	
 	CommandDescription.Targets = New FixedArray(Targets);
 	
+	CommandBarMap = New Map();
+	CommandBarMap.Insert("Document.BankPayment.Form.DocumentForm", "GroupPaymentListCommandBar");
+	CommandBarMap.Insert("Document.BankReceipt.Form.DocumentForm", "GroupPaymentListCommandBar");
+	CommandBarMap.Insert("Document.CashPayment.Form.DocumentForm", "GroupPaymentListCommandBar");
+	CommandBarMap.Insert("Document.CashReceipt.Form.DocumentForm", "GroupPaymentListCommandBar");
+	
+	CommandDescription.CommandBarMap = New FixedMap(CommandBarMap);
 	Return CommandDescription;
 	
 EndFunction

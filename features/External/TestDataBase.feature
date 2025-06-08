@@ -5784,3 +5784,11 @@ Scenario: Create chart of characteristic types SystemAttributes objects (test da
 		| 'e1cib/data/ChartOfCharacteristicTypes.SystemAttributes?refName=LegalName'         | 'False'        | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.Companies</Type>'          | 'Legal name'          | 'Legal name'          | 'Legal name'          | 'Legal name'          |
 		| 'e1cib/data/ChartOfCharacteristicTypes.SystemAttributes?refName=LegalNameContract' | 'False'        | '<Type xmlns:d2p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d2p1:CatalogRef.LegalNameContracts</Type>' | 'Legal name contract' | 'Legal name contract' | 'Legal name contract' | 'Legal name contract' |
 
+Scenario: Create information register UserSettings records (use simple forms for payment documents)
+
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup'                                                   | 'MetadataObject'       | 'AttributeName' | 'KindOfAttribute'                | 'Value' |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.BankPayment' | 'DetailsByRow'  | 'Enum.KindsOfAttributes.Regular' | 'True'  |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.BankReceipt' | 'DetailsByRow'  | 'Enum.KindsOfAttributes.Regular' | 'True'  |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.CashPayment' | 'DetailsByRow'  | 'Enum.KindsOfAttributes.Regular' | 'True'  |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.CashReceipt' | 'DetailsByRow'  | 'Enum.KindsOfAttributes.Regular' | 'True'  |

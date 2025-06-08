@@ -884,11 +884,11 @@
       </userVisible>
       <title>
        <key>tr</key>
-       <value>Command bar by row</value>
+       <value>Satır bazlı araç çubuğu</value>
       </title>
       <title>
        <key>ru</key>
-       <value>Command bar by row</value>
+       <value>Командная строка по строке</value>
       </title>
       <title>
        <key>en</key>
@@ -964,11 +964,11 @@
        <checkBoxType>Tumbler</checkBoxType>
        <editFormat>
         <key>tr</key>
-        <value>BF='As a list'; BT='No splits'</value>
+        <value>BF='Liste'; BT='Tek'</value>
        </editFormat>
        <editFormat>
         <key>ru</key>
-        <value>BF='As a list'; BT='No splits'</value>
+        <value>BF='Список'; BT='Форма'</value>
        </editFormat>
        <editFormat>
         <key>en</key>
@@ -1803,11 +1803,11 @@
       </userVisible>
       <title>
        <key>tr</key>
-       <value>By row left</value>
+       <value>Satır bazlı sol</value>
       </title>
       <title>
        <key>ru</key>
-       <value>By row left</value>
+       <value>По строке лево</value>
       </title>
       <title>
        <key>en</key>
@@ -2779,7 +2779,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Amounts</value>
+        <value>Суммы</value>
        </title>
        <title>
         <key>en</key>
@@ -2819,11 +2819,11 @@
       </userVisible>
       <title>
        <key>tr</key>
-       <value>By row right</value>
+       <value>Satır bazlı sağ</value>
       </title>
       <title>
        <key>ru</key>
-       <value>By row right</value>
+       <value>По строке право</value>
       </title>
       <title>
        <key>en</key>
@@ -2861,11 +2861,11 @@
      </userVisible>
      <title>
       <key>tr</key>
-      <value>Group by row main</value>
+      <value>Grup satır bazlı ana</value>
      </title>
      <title>
       <key>ru</key>
-      <value>Group by row main</value>
+      <value>Группа по строке основная</value>
      </title>
      <title>
       <key>en</key>
@@ -2905,11 +2905,11 @@
     </userVisible>
     <title>
      <key>tr</key>
-     <value>By row</value>
+     <value>Satır bazlı</value>
     </title>
     <title>
      <key>ru</key>
-     <value>By row</value>
+     <value>По строке</value>
     </title>
     <title>
      <key>en</key>
@@ -3076,11 +3076,11 @@
       </userVisible>
       <title>
        <key>tr</key>
-       <value>Group payment list command bar</value>
+       <value>Grup ödeme listesi araç çubuğu</value>
       </title>
       <title>
        <key>ru</key>
-       <value>Group payment list command bar</value>
+       <value>Группа список оплат командная строка</value>
       </title>
       <title>
        <key>en</key>
@@ -3157,11 +3157,11 @@
        <checkBoxType>Tumbler</checkBoxType>
        <editFormat>
         <key>tr</key>
-        <value>BF='As a list'; BT='No splits'</value>
+        <value>BF='Liste'; BT='Tek'</value>
        </editFormat>
        <editFormat>
         <key>ru</key>
-        <value>BF='As a list'; BT='No splits'</value>
+        <value>BF='Список'; BT='Форма'</value>
        </editFormat>
        <editFormat>
         <key>en</key>
@@ -4909,11 +4909,11 @@
     </userVisible>
     <title>
      <key>tr</key>
-     <value>By list</value>
+     <value>Liste bazlı</value>
     </title>
     <title>
      <key>ru</key>
-     <value>By list</value>
+     <value>По спискам</value>
     </title>
     <title>
      <key>en</key>

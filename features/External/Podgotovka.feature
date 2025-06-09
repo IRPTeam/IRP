@@ -1519,6 +1519,10 @@ Scenario: set True value to the constant
 			| 'Option'                                  | 'Use' |
 			| 'Use shipment and receipt planing orders' | 'Yes' |
 		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'           | 'Use' |
+			| 'Use simple batch' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
 	* Disable LinkedRowsIntegrity
@@ -1541,7 +1545,19 @@ Scenario: set True value to the constant Use salary
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window	
-		
+
+Scenario: set True value to the constant Use simple batch
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        |
+			| 'Use simple batch'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window	
+
+
+
 Scenario: set True value to the constant Use shipment and receipt planing orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened

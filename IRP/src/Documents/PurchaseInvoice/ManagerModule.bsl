@@ -601,6 +601,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(S1001L_VendorsPricesByItemKey());
 	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
 
@@ -718,6 +719,7 @@ Function ItemList()
 	|	OR ItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.CurrencyRevaluationCustomer)
 	|	OR ItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.CurrencyRevaluationVendor)) AS IsPurchase,
 	|	ItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) AS IsReceiptFromConsignor,
+	|	ItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.PurchaisePreliminaryStock) AS IsPurchaisePreliminaryStock,
 	|	ItemList.VatRate AS VatRate,
 	|	ItemList.Project AS Project,
 	|	ItemList.OtherPeriodExpenseType AS OtherPeriodExpenseType,
@@ -727,6 +729,7 @@ Function ItemList()
 	|		else false
 	|	end AS IsCurrencyRevaluation,
 	|	ISNULL(ItemList.Ref.CurrencyRevaluationInvoice.Ref, Undefined) AS CurrencyRevaluationInvoice,
+	|	ItemList.SimpleBatch AS SimpleBatch,
 	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
 	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Consignor) AS IsConsignor,
 	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
@@ -1770,6 +1773,28 @@ EndFunction
 
 Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_PI_WTI();
+EndFunction
+
+Function R6025B_SimpleBatch()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	SUM(ItemList.Amount) AS Amount
+	|INTO R6025B_SimpleBatch
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
+	|		ON TRUE
+	|WHERE
+	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	AND UseSimpleBatch.Value
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion

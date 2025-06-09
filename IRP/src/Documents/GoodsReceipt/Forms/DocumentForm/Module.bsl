@@ -80,6 +80,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	PartnerVisible = (Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer")
 		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase")
 		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReceiptFromConsignor")
+		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.PreliminaryStock")
 		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromTradeAgent"));
 		
 	Form.Items.LegalName.Enabled = PartnerVisible And ValueIsFilled(Object.Partner);

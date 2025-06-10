@@ -340,8 +340,10 @@ Function GetPartnerTypeByTransactionType(TransactionType, OnlyMainPartnerType = 
 	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent , "TradeAgent");
 	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor    , "Consignor");
 	
-	Map.Insert(Enums.GoodsReceiptTransactionTypes.Purchase             , "Vendor, Other");
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.Purchase             , "Vendor");
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.PreliminaryStock     , "Vendor");
 	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer   , "Customer, Other");
+
 	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor , "Consignor");
 	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent , "TradeAgent");
 	

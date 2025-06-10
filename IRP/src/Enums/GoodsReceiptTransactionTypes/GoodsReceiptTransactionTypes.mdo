@@ -47,4 +47,11 @@
       <value>Return from trade agent</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="ae554611-5d4f-4de1-ad7e-597675249d02">
+    <name>PreliminaryStock</name>
+    <synonym>
+      <key>en</key>
+      <value>Preliminary stock</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

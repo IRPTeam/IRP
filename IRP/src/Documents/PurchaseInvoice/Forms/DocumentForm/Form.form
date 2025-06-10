@@ -114,6 +114,7 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <horizontalStretch>true</horizontalStretch>
         <extendedTooltip>
           <name>GroupTitleCollapsedExtendedTooltip</name>
           <id>239</id>
@@ -243,6 +244,7 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <horizontalStretch>true</horizontalStretch>
         <extendedTooltip>
           <name>GroupTitleUncollapsedExtendedTooltip</name>
           <id>247</id>
@@ -272,6 +274,7 @@
       <userVisible>
         <common>true</common>
       </userVisible>
+      <horizontalStretch>true</horizontalStretch>
       <extendedTooltip>
         <name>GroupTitleDecorationsExtendedTooltip</name>
         <id>237</id>
@@ -3087,6 +3090,46 @@
           <extInfo xsi:type="form:ColumnGroupExtInfo">
             <showTitle>true</showTitle>
             <showInHeader>true</showInHeader>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ItemListBatch</name>
+          <id>1098</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.SimpleBatch</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ItemListBatchExtendedTooltip</name>
+            <id>1100</id>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListBatchContextMenu</name>
+            <id>1099</id>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
           </extInfo>
         </items>
         <autoCommandBar>

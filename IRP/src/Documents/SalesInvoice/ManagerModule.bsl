@@ -330,7 +330,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
 	QueryArray.Add(R5020B_PartnersBalance());
-	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());	
+	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
 
@@ -435,7 +436,8 @@ Function ItemList()
 		|	ISNULL(ItemList.Ref.CurrencyRevaluationInvoice.Ref, Undefined) AS CurrencyRevaluationInvoice,
 		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
 		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.TradeAgent) AS IsTradeAgent,
-		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
+		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
+		|   ItemList.SimpleBatch AS SimpleBatch
 		|INTO ItemList
 		|FROM
 		|	Document.SalesInvoice.ItemList AS ItemList
@@ -1589,7 +1591,29 @@ Function R5015B_OtherPartnersTransactions()
 		|	ItemList.Basis,
 		|	ItemList.Key";
 EndFunction
-
+	
+Function R6025B_SimpleBatch()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	0 AS Amount
+	|INTO R6025B_SimpleBatch
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
+	|		ON TRUE
+	|WHERE
+	|	NOT ItemList.IsService
+	|	AND NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	AND UseSimpleBatch.Value
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	VALUE(AccumulationRecordType.Expense)";
+EndFunction
 #EndRegion
 
 #Region AccessObject

@@ -99,6 +99,7 @@
   <registerRecords>AccumulationRegister.R4021B_StockTransferOrdersReceipt</registerRecords>
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
+  <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -489,6 +490,34 @@
       </synonym>
       <type>
         <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b2cb3a74-7f28-46ae-899e-b987cf6a3851">
+      <name>SimpleBatch</name>
+      <synonym>
+        <key>en</key>
+        <value>Simple batch</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SimpleBatch</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f7a5bbd9-7e58-4c04-91ae-6db09c52ea43">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

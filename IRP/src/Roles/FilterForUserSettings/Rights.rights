@@ -422,6 +422,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankReceipt.Attribute.DetailsByRow</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PurchaseOrder.Attribute.TransactionType</name>
 		<right>
 			<name>View</name>
@@ -777,6 +784,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankPayment.Attribute.DetailsByRow</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.MoneyTransfer.Attribute.SendCashFlowCenter</name>
 		<right>
 			<name>View</name>
@@ -929,6 +943,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashPayment.Attribute.DetailsByRow</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1718,6 +1739,13 @@
 	</object>
 	<object>
 		<name>Document.EmployeeFiring.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashReceipt.Attribute.DetailsByRow</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

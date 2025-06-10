@@ -1550,6 +1550,10 @@ Scenario: set True value to the constant
 			| 'Option'                                  | 'Use' |
 			| 'Use shipment and receipt planing orders' | 'Yes' |
 		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'           | 'Use' |
+			| 'Use simple batch' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
 	* Disable LinkedRowsIntegrity
@@ -1572,7 +1576,19 @@ Scenario: set True value to the constant Use salary
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window	
-		
+
+Scenario: set True value to the constant Use simple batch
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        |
+			| 'Use simple batch'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window	
+
+
+
 Scenario: set True value to the constant Use shipment and receipt planing orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
@@ -2131,7 +2147,7 @@ Scenario: check filter by transaction type in CR/BR
 		And I select current line in "List" table
 		And I select "Payment from customer" exact value from the drop-down list named "TransactionType"		
 	* Check filter for partner term (transaction type)
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
 			| 'Partner' | 'Payer'       | 'Partner term'     |
@@ -2152,7 +2168,7 @@ Scenario: check filter by transaction type in CR/BR
 			| 'Partner' | 'Payer'       | 'Partner term'            |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 	* Add second line and check partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
 			| 'Partner' | 'Payer'       | 'Partner term'            |
@@ -2165,7 +2181,7 @@ Scenario: check filter by transaction type in CR/BR
 			| 'Partner' | 'Payer'       | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
 			| 'Partner' | 'Payer'       | 'Partner term' |
@@ -2181,7 +2197,7 @@ Scenario: check filter by transaction type in CP/BP
 		And I select current line in "List" table
 		And I select "Payment to the vendor" exact value from the drop-down list named "TransactionType"		
 	* Check filter for partner term (transaction type)
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
 			| 'Partner' | 'Payee'       | 'Partner term'            |
@@ -2202,7 +2218,7 @@ Scenario: check filter by transaction type in CP/BP
 			| 'Partner' | 'Payee'       | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 	* Add second line and check partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
 			| 'Partner' | 'Payee'       | 'Partner term'     |
@@ -2215,7 +2231,7 @@ Scenario: check filter by transaction type in CP/BP
 			| 'Partner' | 'Payee'       | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
 			| 'Partner' | 'Payee'       | 'Partner term' |

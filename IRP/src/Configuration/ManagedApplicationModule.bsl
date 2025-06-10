@@ -64,6 +64,7 @@ Procedure BeforeStart(Cancel)
 	EndIf;
 
 	globalEquipments = HardwareClient.NewEquipments();
+	HardwareServer.SetNewEquipments();
 	
 	R(); // Init langs
 EndProcedure

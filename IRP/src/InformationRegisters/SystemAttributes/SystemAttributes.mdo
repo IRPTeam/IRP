@@ -75,7 +75,7 @@
     <type>
       <types>Number</types>
       <numberQualifiers>
-        <precision>1</precision>
+        <precision>10</precision>
       </numberQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>

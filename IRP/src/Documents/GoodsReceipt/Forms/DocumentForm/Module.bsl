@@ -58,6 +58,16 @@ Procedure AfterWrite(WriteParameters)
 EndProcedure
 
 &AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
+EndProcedure
+
+&AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
@@ -70,6 +80,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	PartnerVisible = (Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer")
 		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase")
 		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReceiptFromConsignor")
+		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.PreliminaryStock")
 		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromTradeAgent"));
 		
 	Form.Items.LegalName.Enabled = PartnerVisible And ValueIsFilled(Object.Partner);

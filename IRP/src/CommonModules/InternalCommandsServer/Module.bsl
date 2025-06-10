@@ -92,7 +92,18 @@ Procedure CreateCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo 
 			CommandRepresentation = ButtonRepresentation[Command.Representation]; // ButtonRepresentation
 			CommandForm.Representation = CommandRepresentation;
 			
-			CommandButton = Form.Items.Add(CommandName, Type("FormButton"), GetFormGroupByName(Form, Command.LocationGroup, TableName)); // FormButton
+			CommandParent = Undefined;
+			If Command.CommandBarMap <> Undefined Then
+				CommandBarName = Command.CommandBarMap.Get(Form.FormName);
+				If CommandBarName <> Undefined Then
+					CommandParent = Form.Items[CommandBarName];
+				EndIf;
+			EndIf;			
+			If CommandParent = Undefined Then
+				CommandParent = GetFormGroupByName(Form, Command.LocationGroup, TableName);
+			EndIf;
+			
+			CommandButton = Form.Items.Add(CommandName, Type("FormButton"), CommandParent); // FormButton
 			CommandButton.CommandName = CommandName;
 			CommandLocationInCommandBar = ButtonLocationInCommandBar[Command.LocationInCommandBar]; // ButtonLocationInCommandBar 
 			CommandButton.LocationInCommandBar = CommandLocationInCommandBar;
@@ -207,6 +218,7 @@ Function GetCommandDescription() Export
 	CommandDescription = New Structure;
 	
 	CommandDescription.Insert("Name", "");
+	CommandDescription.Insert("CommandBarMap", Undefined);
 	
 	CommandDescription.Insert("Title", "");
 	CommandDescription.Insert("TitleCheck", "");

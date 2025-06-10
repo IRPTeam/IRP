@@ -256,7 +256,8 @@ Function ItemList()
 		|	ItemList.QuantityInBaseUnit AS Quantity,
 		|	ItemList.Key,
 		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
-		|	ItemList.ExpenseType AS ExpenseType
+		|	ItemList.ExpenseType AS ExpenseType,
+		|	ItemList.SimpleBatch AS SimpleBatch
 		|INTO ItemList
 		|FROM
 		|	Document.StockAdjustmentAsWriteOff.ItemList AS ItemList
@@ -338,6 +339,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
 
@@ -607,6 +609,28 @@ Function R9010B_SourceOfOriginStock()
 		   |	ItemList.ItemKey,
 		   |	SourceOfOrigins.SourceOfOriginStock,
 		   |	SourceOfOrigins.SerialLotNumber";
+EndFunction
+
+Function R6025B_SimpleBatch()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	0 AS Amount
+	|INTO R6025B_SimpleBatch
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
+	|		ON TRUE
+	|WHERE
+	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	AND UseSimpleBatch.Value
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	VALUE(AccumulationRecordType.Expense)";
 EndFunction
 
 #EndRegion

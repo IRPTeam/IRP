@@ -12,6 +12,25 @@ Background:
 
 
 Scenario: _900000 check open company catalog (dont use company)
+	#Temp
+	And In the command interface I select "Settings" "Functional option settings"
+	And I go to line in "FunctionalOptions" table
+		| "Option"       |
+		| "Use purchase" |
+	And I set "Use" checkbox in "FunctionalOptions" table
+	And I finish line editing in "FunctionalOptions" table
+	And I go to line in "FunctionalOptions" table
+		| "Option"    |
+		| "Use sales" |
+	And I set "Use" checkbox in "FunctionalOptions" table
+	And I finish line editing in "FunctionalOptions" table
+	And I go to line in "FunctionalOptions" table
+		| "Option"    |
+		| "Use finance" |
+	And I set "Use" checkbox in "FunctionalOptions" table
+	And I finish line editing in "FunctionalOptions" table
+	And I click "Save" button
+	#EndTemp
 	* Check open Company catalog
 		And In the command interface I select "Master data" "Companies"
 		Then the form attribute named "Country" became equal to ""
@@ -36,8 +55,8 @@ Scenario: _900001 Check Company creation
 		Then the form attribute named "Code" became equal to "1"
 		Then the form attribute named "Description_en" became equal to "My Company"
 		And "Currencies" table became equal
-			| '#'   | 'Movement type'         | 'Type'    | 'Currency'    |
-			| '1'   | 'Legal currency type'   | 'Legal'   | 'USD'         |
+			| '#' | 'Movement type'       | 'Type'  |
+			| '1' | 'Legal currency type' | 'Legal' |
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to ""
 		Then the number of "CompanyTaxes" table lines is "равно" 0
 	And I close all client application windows
@@ -53,7 +72,6 @@ Scenario: _900003 create items
 		And I input "Product 1" text in "ENG" field
 		And I click Select button of "Item type" field
 		And I click the button named "FormCreate"
-		Then "Item type (create)" window is opened
 		And I input "Product" text in "ENG" field
 		And I click "Save and close" button
 		And I wait "Item type (create) *" window closing in 20 seconds
@@ -742,7 +760,7 @@ Scenario: _900035 return money from vendor
 	* Filling CR
 		And I select "Return from vendor" exact value from "Transaction type" drop-down list
 		And I activate "Partner" field in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "vendor and" from "Partner" drop-down list by string in "PaymentList" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table

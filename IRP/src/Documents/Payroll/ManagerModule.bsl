@@ -197,7 +197,7 @@ Function SalaryTaxList()
 		|	PayrollSalaryTaxList.Ref.Currency AS Currency,
 		|	PayrollSalaryTaxList.Ref.Partner AS Partner,
 		|	PayrollSalaryTaxList.Ref.LegalName AS LegalName,
-		|	PayrollSalaryTaxList.Ref.Agreement AS Agreement,
+		|	PayrollSalaryTaxList.Agreement AS Agreement,
 		|	PayrollSalaryTaxList.Ref.PaymentPeriod AS PaymentPeriod,
 		|	PayrollSalaryTaxList.CalculationType AS CalculationType,
 		|	PayrollSalaryTaxList.Employee AS Employee,
@@ -615,17 +615,26 @@ Function GetAnalytics_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransaction
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
 	// Credit
-	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-	                                                    Parameters.ObjectData.Partner,
-	                                                    Parameters.ObjectData.Agreement,
-	                                                    Parameters.ObjectData.Currency);
-	AdditonalAnalytics = New Structure();
-	AdditonalAnalytics.Insert("Partner"   ,Parameters.ObjectData.Partner);
-	AdditonalAnalytics.Insert("Agreement" ,Parameters.ObjectData.Agreement);
-	
-	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditonalAnalytics);
-	
+
+	If 	Parameters.RowData.TakeAccountFromTaxes = True Then
+		Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters,
+			New Structure("Tax, VatRate", Parameters.RowData.Tax));
+		AccountingAnalytics.Credit = Credit.OutgoingAccount;
+		AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics,
+			New Structure("Tax, VatRate", Parameters.RowData.Tax));			
+	Else
+		Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+		                                                    Parameters.ObjectData.Partner,
+		                                                    Parameters.RowData.Agreement,
+		                                                    Parameters.ObjectData.Currency);
+		AdditonalAnalytics = New Structure();
+		AdditonalAnalytics.Insert("Partner"   ,Parameters.ObjectData.Partner);
+		AdditonalAnalytics.Insert("Agreement" ,Parameters.RowData.Agreement);
+		
+		AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+		AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditonalAnalytics);
+	EndIf;
+
 	Return AccountingAnalytics;
 EndFunction
 
@@ -643,17 +652,25 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Tax
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
 	// Credit
-	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-	                                                    Parameters.ObjectData.Partner,
-	                                                    Parameters.ObjectData.Agreement,
-	                                                    Parameters.ObjectData.Currency);
-	AdditonalAnalytics = New Structure();
-	AdditonalAnalytics.Insert("Partner"   ,Parameters.ObjectData.Partner);
-	AdditonalAnalytics.Insert("Agreement" ,Parameters.ObjectData.Agreement);
+	If 	Parameters.RowData.TakeAccountFromTaxes = True Then
+		Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters,
+			New Structure("Tax, VatRate", Parameters.RowData.Tax));
+		AccountingAnalytics.Credit = Credit.OutgoingAccount;
+		AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics,
+			New Structure("Tax, VatRate", Parameters.RowData.Tax));			
+	Else
 	
-	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditonalAnalytics);
-	
+		Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+		                                                    Parameters.ObjectData.Partner,
+		                                                    Parameters.RowData.Agreement,
+		                                                    Parameters.ObjectData.Currency);
+		AdditonalAnalytics = New Structure();
+		AdditonalAnalytics.Insert("Partner"   ,Parameters.ObjectData.Partner);
+		AdditonalAnalytics.Insert("Agreement" ,Parameters.RowData.Agreement);
+		
+		AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+		AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditonalAnalytics);
+	EndIf;
 	Return AccountingAnalytics;
 EndFunction
 

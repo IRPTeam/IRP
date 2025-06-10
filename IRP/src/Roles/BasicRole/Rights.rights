@@ -11,6 +11,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseAccountingService</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.DataBaseStatus</name>
 		<right>
 			<name>Read</name>
@@ -135,7 +142,21 @@
 		</right>
 	</object>
 	<object>
+		<name>ChartOfCharacteristicTypes.SystemAttributes</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Constant.UseAddAttributesAndProperties</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseShipmentAndReceiptPlaningOrders</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -225,6 +246,28 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AuditLockHistory.Dimension.Document</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AppliedDatabaseUpdates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -386,6 +429,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.TransformationRules</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Constant.UseConsolidatedRetailSales</name>
 		<right>
 			<name>Read</name>
@@ -538,6 +588,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9051S_AccountingExtDimensions.Dimension.Key</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonAttribute.DocumentAmount</name>
 		<right>
 			<name>View</name>
@@ -554,9 +615,49 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AuditLock.StandardAttribute.Active</name>
 		<right>
 			<name>View</name>
-			<value>true</value>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AuditLock.StandardAttribute.LineNumber</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AuditLock.StandardAttribute.Recorder</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AuditLock.StandardAttribute.Period</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
 		</right>
 	</object>
 	<object>
@@ -628,6 +729,17 @@
 		</right>
 	</object>
 	<object>
+		<name>DataProcessor.UpdateDatabase</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Constant.UseNumberingRules</name>
 		<right>
 			<name>Read</name>
@@ -665,10 +777,6 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
 	</object>
 	<object>
 		<name>SessionParameter.IDUse</name>
@@ -700,6 +808,17 @@
 	</object>
 	<object>
 		<name>Catalog.Users.TabularSection.AddAttributes.Attribute.Value</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AuditLock.Dimension.Document</name>
 		<right>
 			<name>View</name>
 			<value>false</value>
@@ -775,7 +894,29 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.LastReleaseNumber</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Users.Attribute.Disable</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9050S_AccountingRowAnalytics.Dimension.Operation</name>
 		<right>
 			<name>View</name>
 			<value>false</value>
@@ -815,6 +956,17 @@
 		</right>
 	</object>
 	<object>
+		<name>SessionParameter.ServerEquipments</name>
+		<right>
+			<name>Get</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Set</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>SessionParameter.ConnectionSettings</name>
 		<right>
 			<name>Get</name>
@@ -838,9 +990,49 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9050S_AccountingRowAnalytics.StandardAttribute.Active</name>
 		<right>
 			<name>View</name>
-			<value>true</value>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9050S_AccountingRowAnalytics.StandardAttribute.LineNumber</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9050S_AccountingRowAnalytics.StandardAttribute.Recorder</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9050S_AccountingRowAnalytics.StandardAttribute.Period</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
 		</right>
 	</object>
 	<object>
@@ -852,6 +1044,17 @@
 	</object>
 	<object>
 		<name>Catalog.DataBaseStatus.Attribute.isProduction</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9050S_AccountingRowAnalytics.Dimension.IsFixed</name>
 		<right>
 			<name>View</name>
 			<value>false</value>
@@ -890,6 +1093,24 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.TranformedObjectsLink</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9050S_AccountingRowAnalytics.Dimension.AccountCredit</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Constant.DefaultPictureStorageVolume</name>
 		<right>
 			<name>Read</name>
@@ -915,6 +1136,24 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseObjectTransformation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9051S_AccountingExtDimensions.Dimension.UUID</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
 		</right>
 	</object>
 	<object>
@@ -1052,6 +1291,28 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9050S_AccountingRowAnalytics.Dimension.Key</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9050S_AccountingRowAnalytics.Dimension.LedgerType</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Constant.MaxUploadFileSize</name>
 		<right>
 			<name>Read</name>
@@ -1168,7 +1429,25 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9050S_AccountingRowAnalytics.Dimension.Document</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Constant.UseAdditionalSettings</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseVariableStore</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -1197,6 +1476,17 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9051S_AccountingExtDimensions.Dimension.ExtDimension</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
 		</right>
 	</object>
 	<object>
@@ -1273,9 +1563,49 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9051S_AccountingExtDimensions.StandardAttribute.Active</name>
 		<right>
 			<name>View</name>
-			<value>true</value>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9051S_AccountingExtDimensions.StandardAttribute.LineNumber</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9051S_AccountingExtDimensions.StandardAttribute.Recorder</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9051S_AccountingExtDimensions.StandardAttribute.Period</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
 		</right>
 	</object>
 	<object>
@@ -1357,6 +1687,24 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9050S_AccountingRowAnalytics.Dimension.UUID</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseELedger</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Constant.UseSalary</name>
 		<right>
 			<name>Read</name>
@@ -1393,10 +1741,28 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseMessaging</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>ExchangePlan.ED_ExchangePlan</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AuditLockHistory.Resource.Action</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
 		</right>
 	</object>
 	<object>
@@ -1439,6 +1805,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9051S_AccountingExtDimensions.Dimension.AnalyticType</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T1020S_Cache</name>
 		<right>
 			<name>Read</name>
@@ -1457,6 +1834,24 @@
 	</object>
 	<object>
 		<name>Constant.UseRetail</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9051S_AccountingExtDimensions.Dimension.Document</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseVariableItemKey</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -1504,9 +1899,49 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AuditLockHistory.StandardAttribute.Active</name>
 		<right>
 			<name>View</name>
-			<value>true</value>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AuditLockHistory.StandardAttribute.LineNumber</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AuditLockHistory.StandardAttribute.Recorder</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AuditLockHistory.StandardAttribute.Period</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
 		</right>
 	</object>
 	<object>
@@ -1529,6 +1964,17 @@
 		<right>
 			<name>Set</name>
 			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9051S_AccountingExtDimensions.Dimension.ExtDimensionType</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
 		</right>
 	</object>
 	<object>
@@ -1585,6 +2031,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.SystemAttributesSets</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonAttribute.ID</name>
 		<right>
 			<name>View</name>
@@ -1632,9 +2085,49 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9051S_AccountingExtDimensions.Dimension.LedgerType</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AuditLockHistory.Dimension.Date</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonForm.CheckPhoneNumber</name>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9051S_AccountingExtDimensions.Dimension.Operation</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseLegalName</name>
+		<right>
+			<name>Read</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -1654,6 +2147,17 @@
 		<right>
 			<name>Edit</name>
 			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9050S_AccountingRowAnalytics.Dimension.AccountDebit</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
 		</right>
 	</object>
 	<object>
@@ -1715,6 +2219,17 @@
 	</object>
 	<object>
 		<name>CommonForm.EditStores</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.SystemAttributes</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1820,6 +2335,17 @@
 		<right>
 			<name>Set</name>
 			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AuditLockHistory.Dimension.User</name>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>false</value>
 		</right>
 	</object>
 </Rights>

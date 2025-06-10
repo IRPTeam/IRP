@@ -46,11 +46,59 @@ Scenario: _0230000 preparation (Sales order closing)
 		When Create catalog Partners objects
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
+		When Create catalog AccessGroups objects
+		When Create catalog AccessProfiles objects
+		When Create catalog Users objects
 	* Create test SO
 		When Create document SO, SI, SC objects (SI before SC for check closing)
+		When Create document SO, SC, SI objects (for order closing)
+	* Repost
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Date'                |
+			| '10.04.2025 22:03:13' |
+		And I click the button named "FormPost"
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Date'                |
+			| '10.04.2025 22:04:36' |
+		And I click the button named "FormPost"
+
 		And I execute 1C:Enterprise script at server
 				| "Documents.SalesOrder.FindByNumber(132).GetObject().Write(DocumentWriteMode.Posting);"     |
-		
+	* User rights 
+		Given I open hyperlink 'e1cib/list/Catalog.AccessProfiles'
+		And I go to line in "List" table
+			| "Code" | "Description" |
+			| "6"    | "Run client"  |
+		And I select current line in "List" table	
+		And I go to line in "Roles" table
+			| "Configuration" | "Presentation" | "Use" |
+			| "IRP"           | "Full access"  | "No"  |
+		And I activate field named "RolesConfiguration" in "Roles" table
+		And I activate field named "RolesUse" in "Roles" table
+		And I change checkbox named "RolesUse" in "Roles" table
+		And I finish line editing in "Roles" table
+		And I click the button named "FormWrite"
+		And in the table "Roles" I click the button named "RolesUpdateRoles"
+		And I click the button named "FormWriteAndClose"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
+//		And In the command interface I select "Settings" "User access groups"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Run client'  |
+		And I select current line in "List" table
+		And I move to the tab named "GroupUsers"
+		And in the table "Users" I click the button named "UsersAdd"
+		And I click choice button of the attribute named "UsersUser" in "Users" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Admin"       |
+		And I click the button named "FormChoose"
+		And I click the button named "FormWriteAndClose"
+				
+				
 Scenario: _0230001 check preparation
 	When check preparation
 
@@ -118,7 +166,31 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 			| 'Number'                                |
 			| '$$NumberSalesOrderClosing0230001$$'    |
 		And I close all client application windows
-	
+	* Check ban on deleation of SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'   | 'Date'                   |
+			| '132'      | '09.02.2021 19:53:45'    |
+		And I click the button named "FormSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "Button0"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Related document exists: $$SalesOrderClosing0230001$$'|
+		And I close all client application windows		
+	* Check ban on unposting of SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'   | 'Date'                   |
+			| '132'      | '09.02.2021 19:53:45'    |
+		And I click the button named "FormUndoPosting"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Related document exists: $$SalesOrderClosing0230001$$'|
+		And I close all client application windows		
+
 
 Scenario: _0230002 create and check filling Sales order closing (SO partially shipped)
 	* Preparation
@@ -241,3 +313,59 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 		Then user message window does not contain messages
 		And I close all client application windows
 
+Scenario: _0230003 create Sales order closing and check for double records
+	And I close all client application windows
+	* Create Purchase order closing by CI User (Save)
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I click the button named "FormDocumentSalesOrderClosingGenerate"
+		And I click "Save" button
+		And I delete "$$NumberSalesOrderClosing0224002$$" variable
+		And I delete "$$SalesOrderClosing0224002$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrderClosing0224002$$"
+		And I save the window as "$$SalesOrderClosing02240022$$"		
+		And I close current test client session
+	* Create Purchase order closing by CI Test User (Post) 
+		And I connect "new" TestClient using "Admin" login and " " password
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"		
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I click the button named "FormDocumentSalesOrderClosingGenerate"
+		And I click "Post and close" button
+		And I close "new" TestClient
+	* Post Purchase order closing by CI User (Post)
+		And I connect "This Client" TestClient using "CI" login and "ci" password
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I go to line in "List" table
+			| "Number"                                    |
+			| "$$NumberSalesOrderClosing0224002$$"     |
+		And I select current line in "List" table
+		And I click "Post and close" button	
+		Then there are lines in TestClient message log
+			|'Order already closed'|
+	And I close all client application windows
+
+Scenario: _0230004 create Sales order closing (different ItemKey)
+	And I close all client application windows
+	* Create SOC
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Date'                |
+			| '10.04.2025 22:03:13' |
+		And I click the button named "FormDocumentSalesOrderClosingGenerate"
+		And I click "Save" button
+		And I delete "$$NumberSalesOrderClosing0230004$$" variable
+		And I delete "$$SalesOrderClosing0230004$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrderClosing0230004$$"
+		And I save the window as "$$SalesOrderClosing0230004$$"
+		And I click "Post" button
+	* Check
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "TransactionType" became equal to "Sales"	
+		Then the number of "ItemList" table lines is "равно" 0					
+	And I close all client application windows	

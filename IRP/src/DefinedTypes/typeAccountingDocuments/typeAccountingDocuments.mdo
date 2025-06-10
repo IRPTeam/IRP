@@ -39,5 +39,7 @@
     <types>DocumentRef.DepreciationCalculation</types>
     <types>DocumentRef.SalesInvoice</types>
     <types>DocumentRef.CashExpense</types>
+    <types>DocumentRef.WithholdingTaxInvoice</types>
+    <types>DocumentRef.FixedAssetRevaluation</types>
   </type>
 </mdclass:DefinedType>

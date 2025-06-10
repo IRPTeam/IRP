@@ -10,13 +10,12 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		Result = DocInventoryTransferServer.GetDataFromPI(CommandParameter);
 		AddDocumentRowsContinue(Result, New Structure);
 	Else
-		OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-			New NotifyDescription("AddDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+		RowIDInfoClient.OpenForm_AddLinkedDocumentRows(Undefined, ThisObject, FormParameters, "AddDocumentRowsContinue");
 	EndIf;
 EndProcedure
 	
 &AtClient
-Procedure AddDocumentRowsContinue(Result, AdditionalParameters) Export
+Procedure AddDocumentRowsContinue(Result, NotifyParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;

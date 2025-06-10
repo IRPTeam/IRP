@@ -5,6 +5,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocRetailSalesReceiptServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
 	Items.IsHaveJE.Visible = FOServer.IsUseAccounting();
+	SystemAttributesServer.OutputSystemAttributes(ThisObject, "Company");
 EndProcedure
 
 #EndRegion

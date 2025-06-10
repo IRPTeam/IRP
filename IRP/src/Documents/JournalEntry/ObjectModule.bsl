@@ -61,6 +61,14 @@ Procedure OnWrite(Cancel)
 	If Not WriteOnForm Then
 		ThisObject.RegisterRecords.Basic.Read();
 	EndIf;
+	
+	RecordsTable = ThisObject.RegisterRecords.Basic.Unload();
+	RecordsTable.Columns.Add("Order");
+	For Each Row In RecordsTable Do
+		Row.Order = Row.Operation.Order;
+	EndDo;
+	RecordsTable.Sort("Order");
+	ThisObject.RegisterRecords.Basic.Load(RecordsTable);
 			
 	For Each Record In ThisObject.RegisterRecords.Basic Do
 		Record.Company = ThisObject.Company;

@@ -1514,11 +1514,25 @@ Scenario: set True value to the constant
 			| 'Option'            | 'Use' |
 			| 'Use object access' | 'Yes' |
 		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                                  | 'Use' |
+			| 'Use shipment and receipt planing orders' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'           | 'Use' |
+			| 'Use simple batch' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
 	* Disable LinkedRowsIntegrity
 		And I execute 1C:Enterprise script at server
 			| "Constants.DisableLinkedRowsIntegrity.Set(True);"     |
+	* Fill default settings for system attributes
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.SystemAttributes"	
+		And I click "Fill default descriptions" button
+		Given I open hyperlink "e1cib/list/Catalog.SystemAttributesSets"	
+		And I click "Fill by default" button
 
 		
 		
@@ -1532,6 +1546,38 @@ Scenario: set True value to the constant Use salary
 		And I click "Save" button
 		And I close current window	
 
+Scenario: set True value to the constant Use simple batch
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        |
+			| 'Use simple batch'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window	
+
+
+
+Scenario: set True value to the constant Use shipment and receipt planing orders
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        |
+			| 'Use shipment and receipt planing orders'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+
+Scenario: set False value to the constant Use shipment and receipt planing orders
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        |
+			| 'Use fixed assets'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+
 Scenario: set True value to the constant Use fixed assets
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
@@ -1541,6 +1587,7 @@ Scenario: set True value to the constant Use fixed assets
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window	
+
 
 Scenario: set True value to the constant Use additional table control document
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
@@ -1657,6 +1704,10 @@ Scenario: set True value to the constant Use numbering rules
 Scenario: set False value to the constant DisableLinkedRowsIntegrity
 		And I execute 1C:Enterprise script at server
 				| "Constants.DisableLinkedRowsIntegrity.Set(False);"     |
+
+Scenario: set True value to the constant DisableLinkedRowsIntegrity
+		And I execute 1C:Enterprise script at server
+				| "Constants.DisableLinkedRowsIntegrity.Set(True);"     |
 
 Scenario: set True value to the constant SaasMode
 		And I execute 1C:Enterprise script at server
@@ -2065,7 +2116,7 @@ Scenario: check filter by transaction type in CR/BR
 		And I select current line in "List" table
 		And I select "Payment from customer" exact value from the drop-down list named "TransactionType"		
 	* Check filter for partner term (transaction type)
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
 			| 'Partner' | 'Payer'       | 'Partner term'     |
@@ -2086,7 +2137,7 @@ Scenario: check filter by transaction type in CR/BR
 			| 'Partner' | 'Payer'       | 'Partner term'            |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 	* Add second line and check partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
 			| 'Partner' | 'Payer'       | 'Partner term'            |
@@ -2099,7 +2150,7 @@ Scenario: check filter by transaction type in CR/BR
 			| 'Partner' | 'Payer'       | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
 			| 'Partner' | 'Payer'       | 'Partner term' |
@@ -2115,7 +2166,7 @@ Scenario: check filter by transaction type in CP/BP
 		And I select current line in "List" table
 		And I select "Payment to the vendor" exact value from the drop-down list named "TransactionType"		
 	* Check filter for partner term (transaction type)
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
 			| 'Partner' | 'Payee'       | 'Partner term'            |
@@ -2136,7 +2187,7 @@ Scenario: check filter by transaction type in CP/BP
 			| 'Partner' | 'Payee'       | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 	* Add second line and check partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
 			| 'Partner' | 'Payee'       | 'Partner term'     |
@@ -2149,7 +2200,7 @@ Scenario: check filter by transaction type in CP/BP
 			| 'Partner' | 'Payee'       | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
 			| 'Partner' | 'Payee'       | 'Partner term' |
@@ -2168,3 +2219,4 @@ Scenario: Create information register UserSettings records (DisableAutomaticCrea
 		And I check or create information register "UserSettings" records:
 		| 'UserOrGroup'                                                   | 'MetadataObject'                                                                                  | 'AttributeName'                                           | 'KindOfAttribute'                          | 'Value' |
 		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Catalogs.AllCatalogs.AdditionalSettings.DisableAutomaticCreationOfCompanyAndAgreementForPartner' | 'DisableAutomaticCreationOfCompanyAndAgreementForPartner' | 'Enum.KindsOfAttributes.AdditionalSetting' | 'False' |
+

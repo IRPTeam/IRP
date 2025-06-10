@@ -192,6 +192,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.AppliedDatabaseUpdates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.PricesByItems</name>
 		<right>
 			<name>Read</name>
@@ -628,6 +639,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.CreditLimits</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9530S_WorkDays</name>
 		<right>
 			<name>Read</name>
@@ -773,7 +795,25 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.ObjectsPrintTemplates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9065S_AccountingMappingExtDimensions</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.TranformedObjectsLink</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -799,6 +839,17 @@
 	</object>
 	<object>
 		<name>InformationRegister.IDInfo</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9069S_AccountingMappingRecordersDescription</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -1571,6 +1622,17 @@
 	</object>
 	<object>
 		<name>InformationRegister.UserSettings</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.SystemAttributes</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

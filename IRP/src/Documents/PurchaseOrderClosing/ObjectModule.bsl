@@ -57,3 +57,10 @@ Procedure OnCopy(CopiedObject)
 	ThisObject.PurchaseOrder   = Undefined;
 	ThisObject.TransactionType = Undefined;
 EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	If ValueIsFilled(DocOrderClosingServer.GetClosingByPurchaseOrder(ThisObject.PurchaseOrder, ThisObject.Ref)) Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_178);
+		Cancel = True;
+	EndIf;	
+EndProcedure

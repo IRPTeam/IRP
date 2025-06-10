@@ -135,6 +135,23 @@ Scenario: _041600 preparation (Purchase return)
 		| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server	
 		| "Documents.PurchaseReturn.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);"   |
+	* Load documents for register R6060 Cost of goods sold
+	When create document for register R6060 Cost of goods sold
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Write);"      |
+		| "Documents.SalesInvoice.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(2506).GetObject().Write(DocumentWriteMode.Write);"      |
+		| "Documents.PurchaseInvoice.FindByNumber(2506).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseReturn.FindByNumber(234).GetObject().Write(DocumentWriteMode.Write);"      |
+		| "Documents.PurchaseReturn.FindByNumber(234).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesReturn.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Write);"      |
+		| "Documents.SalesReturn.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.CalculationMovementCosts.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);"      |
+		| "Documents.CalculationMovementCosts.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 	And I close all client application windows
 
 Scenario: _0416001 check preparation
@@ -347,12 +364,12 @@ Scenario: _041611 check Purchase return movements by the Register  "R4010 Actual
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 231 dated 14.03.2021 18:53:34'   | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| 'Register  "R4010 Actual stocks"'                 | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    |
-			| ''                                                | 'Expense'       | '14.03.2021 18:53:34'   | '1'           | 'Store 02'     | '36/Yellow'   | ''                     |
+			| 'Purchase return 231 dated 14.03.2021 18:53:34'   | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                 | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     | ''                     |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                | 'Expense'       | '14.03.2021 18:53:34'   | '1'           | 'Store 02'     | '36/Yellow'   | ''                     | ''                     |
 	And I close all client application windows
 
 Scenario: _041612 check Purchase return movements by the Register  "R4010 Actual stocks" (SC - PR)
@@ -417,13 +434,13 @@ Scenario: _041615 check Purchase return with serial lot numbers movements by the
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 232 dated 14.03.2021 19:21:16'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                 | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                | 'Expense'       | '14.03.2021 19:21:16'   | '10'          | 'Store 02'     | 'S/Yellow'   | '0512'                 |
-			| ''                                                | 'Expense'       | '14.03.2021 19:21:16'   | '12'          | 'Store 02'     | '37/18SD'    | ''                     |
+			| 'Purchase return 232 dated 14.03.2021 19:21:16'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                 | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                | 'Expense'       | '14.03.2021 19:21:16'   | '10'          | 'Store 02'     | 'S/Yellow'   | '0512'                 | ''                     |
+			| ''                                                | 'Expense'       | '14.03.2021 19:21:16'   | '12'          | 'Store 02'     | '37/18SD'    | ''                     | ''                     |
 		And I close all client application windows
 		
 			
@@ -813,4 +830,18 @@ Scenario: _041631 check Purchase return movements by the Register  "Posted docum
 			| 'Register  "Posted documents registry"'         | ''                                              | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
 			| ''                                              | 'Document'                                      | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
 			| ''                                              | 'Purchase return 231 dated 14.03.2021 18:53:34' | '14.03.2021 18:53:34' | '231'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		
+
+Scenario: _041632 check Purchase return movements by the Register  "R6060 Cost of goods sold"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '234'    |
+	* Check movements by the Register "R6060 Cost of goods sold"
+		And I click "Registrations report info" button
+		And I select "R6060 Cost of goods sold" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 234 dated 07.05.2025 00:00:00' |
 	And I close all client application windows		

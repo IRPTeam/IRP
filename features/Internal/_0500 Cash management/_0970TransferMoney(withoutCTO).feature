@@ -65,7 +65,7 @@ Scenario: _0970002 create Bank payment (cash transfer)
 			| 'Description'             |
 			| 'Distribution department' |
 		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -123,7 +123,7 @@ Scenario: _0970004 create Bank receipt (cash transfer)
 			| 'Description'  |
 			| 'Front office' |
 		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -180,7 +180,7 @@ Scenario: _0970005 create Cash payment (cash transfer)
 			| 'Description'             |
 			| 'Distribution department' |
 		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -243,7 +243,7 @@ Scenario: _0970006 create Cash receipt (cash transfer)
 			| 'Description'  |
 			| 'Front office' |
 		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table

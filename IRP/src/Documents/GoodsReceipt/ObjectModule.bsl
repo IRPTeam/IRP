@@ -84,7 +84,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_GR(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey, Store");
+		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, Item, ItemKey, Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 	
@@ -95,6 +95,15 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		ElsIf ThisObject.TransactionType = Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor Then
 			ItemListTable = CommissionTradeServer.GetItemListTable(ThisObject);
 			CommissionTradeServer.FillCheckProcessing_ReceiptFromConsignor(Cancel, ItemListTable, ThisObject.TransactionType);
+		EndIf;
+	EndIf;
+	
+	If TransactionType = Enums.GoodsReceiptTransactionTypes.PreliminaryStock Then
+		VT = ItemList.Unload();
+		VT.GroupBy("PurchaseInvoice");
+		
+		If VT.Count() > 1 OR VT.Count() = 1 AND NOT VT[0].PurchaseInvoice.IsEmpty() Then
+			Raise "Change transaction type or clear purchase invoice. In preliminary type can not be filled purchase invoice";
 		EndIf;
 	EndIf;
 	

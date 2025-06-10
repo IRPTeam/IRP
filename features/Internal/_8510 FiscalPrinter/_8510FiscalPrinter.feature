@@ -1659,10 +1659,10 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I click "0" button
 		And I click "Cash (/)" button
 		And "Payments" table became equal
-			| 'Payment done'   | 'Payment type'   | 'Amount'   | 'RRNCode'     |
+			| 'Payment done'    | 'Payment type'   | 'Amount'   | 'RRNCode'     |
 			| '⚪'              | 'Card 04'        | '50,00'    | '$$RRN1$$'    |
 			| '⚪'              | 'Card 03'        | '40,00'    | '$$RRN2$$'    |
-			| ' '              | 'Cash'           | '10,00'    | ''            |
+			| ''                | 'Cash'           | '10,00'    | ''            |
 		And I go to line in "Payments" table
 			| 'Amount'   | 'Payment done'   | 'Payment type'   | 'RRNCode'     |
 			| '50,00'    | '⚪'              | 'Card 04'        | '$$RRN1$$'    |
@@ -1860,7 +1860,7 @@ Scenario: _0850028 check acquiring in BR
 			| 'Description'       |
 			| 'POS Terminal 2'    |
 		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -3049,7 +3049,7 @@ Scenario: _0260165 Return of a product paid for with a certificate
 		Then "Payment" window is opened
 		And "Payments" table became equal
 			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
-			| ' '            | 'Certificate'  | '500,00' | ''        |
+			| ''             | 'Certificate'  | '500,00' | ''        |
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
 			| 'Reference' |

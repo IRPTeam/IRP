@@ -44,11 +44,19 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.WithholdingTaxInvoice</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.PurchaseReturnOrder</metadata>
     <use>Use</use>
   </content>
   <content>
     <metadata>Document.RetailGoodsReceipt</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.FixedAssetRevaluation</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -177,6 +185,10 @@
   </content>
   <content>
     <metadata>Document.Unbundling</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ShipmentPlaningOrder</metadata>
     <use>Use</use>
   </content>
   <content>

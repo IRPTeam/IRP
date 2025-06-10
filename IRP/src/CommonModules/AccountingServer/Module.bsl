@@ -21,6 +21,8 @@ Function GetOperationsDefinition()
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.CurrencyExchange));
 	// Transaction type - Other partner
 	Map.Insert(AO.BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));		
+	Map.Insert(AO.BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues,
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));	
 	// Transaction type - Other expense
 	Map.Insert(AO.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand,
@@ -80,6 +82,8 @@ Function GetOperationsDefinition()
 	//  Transaction type - Other partner
 	Map.Insert(AO.CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand,
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));	
+	Map.Insert(AO.CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));		
 	//  Transaction type - Other partner
 	Map.Insert(AO.CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand,
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.SalaryPayment));	
@@ -308,6 +312,15 @@ Function GetOperationsDefinition()
 	
 	// Additional revenue allocation
 	Map.Insert(AO.AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory, New Structure("ByRow", True));
+	
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors, New Structure("ByRow", True));
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions, New Structure("ByRow", True));
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions, New Structure("ByRow", True));
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax, New Structure("ByRow", True));
+	
+	// Fixed asset revaluation
+	Map.Insert(AO.FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues, New Structure("ByRow", True));
+	Map.Insert(AO.FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow", True));
 	
 	Return Map;
 EndFunction
@@ -1177,6 +1190,13 @@ Function GetT9013S_AccountsTax(AccountParameters, TaxInfo) Export
 		TaxInfo.Tax, TaxInfo.VatRate);	
 EndFunction
 
+Function GetT9013S_AccountsWithholdingTax(AccountParameters, WithholdingTaxInfo) Export
+	Return AccountingServerReuse.GetT9013S_AccountsTax_Reuse(AccountParameters.Period,
+		AccountParameters.Company,
+		AccountParameters.LedgerTypeVariant,
+		WithholdingTaxInfo.Tax, WithholdingTaxInfo.WithholdingTaxRate);	
+EndFunction
+
 Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRate) Export
 	Query = New Query();
 	Query.Text = 
@@ -1864,7 +1884,15 @@ Function GetDocumentData(Object, TableRow, MainTableName)
 			TaxInfo.Insert("VatRate", TableRow.VatRate);
 			Result.RowData.Insert("TaxInfo", TaxInfo);
 		EndIf;
-				
+		
+		If CommonFunctionsClientServer.ObjectHasProperty(TableRow, "WithholdingTaxRate") Then
+			WithholdingTaxInfo = New Structure();
+			WithholdingTaxInfo.Insert("Key", TableRow.Key);
+			WithholdingTaxInfo.Insert("Tax", TaxesServer.GetWithholdingTaxRef());
+			WithholdingTaxInfo.Insert("WithholdingTaxRate", TableRow.WithholdingTaxRate);
+			Result.RowData.Insert("WithholdingTaxInfo", WithholdingTaxInfo);
+		EndIf;
+						
 	Else
 		Result.RowData.Insert("Key", "");
 	EndIf;
@@ -1925,27 +1953,48 @@ Procedure FillAccountingRowAnalytics(Parameters, Row = Undefined)
 	AnalyticRow.LedgerType = AnalyticData.LedgerType;
 	
 	AnalyticRow.AccountDebit = AnalyticData.Debit;
+	ClearAccountingExtDimensions(AnalyticData, 
+		AnalyticData.DebitExtDimensions, 
+		Parameters.AccountingExtDimensions,
+		Enums.AccountingAnalyticTypes.Debit);
 	FillAccountingExtDimensions(AnalyticData.DebitExtDimensions, Parameters.AccountingExtDimensions);
 	
 	AnalyticRow.AccountCredit = AnalyticData.Credit;
+	ClearAccountingExtDimensions(AnalyticData, 
+		AnalyticData.CreditExtDimensions, 
+		Parameters.AccountingExtDimensions,
+		Enums.AccountingAnalyticTypes.Credit);
 	FillAccountingExtDimensions(AnalyticData.CreditExtDimensions, Parameters.AccountingExtDimensions);
 EndProcedure
 
-Procedure FillAccountingExtDimensions(ArrayOfData, AccountingExtDimensions)
-	For Each ExtDim In ArrayOfData Do
+Procedure ClearAccountingExtDimensions(AnalyticData, ArrayOfData, AccountingExtDimensions, AnalyticType)
+	If ArrayOfData.Count() = 0 Then
 		Filter = New Structure();
-		If ValueIsFilled(ExtDim.Key) Then
-			Filter.Insert("Key" , ExtDim.Key);
-		EndIf;
-		Filter.Insert("AnalyticType" , ExtDim.AnalyticType);
-		Filter.Insert("Operation"    , ExtDim.Operation);
-		Filter.Insert("LedgerType"   , ExtDim.LedgerType);
+		Filter.Insert("AnalyticType" , AnalyticType);
+		Filter.Insert("Operation"    , AnalyticData.Operation);
+		Filter.Insert("LedgerType"   , AnalyticData.LedgerType);
 		AccountingExtDimensionRows = AccountingExtDimensions.FindRows(Filter);
 		For Each RowForDelete In AccountingExtDimensionRows Do
 			AccountingExtDimensions.Delete(RowForDelete);
 		EndDo;
-	EndDo;
-	
+	Else
+		For Each ExtDim In ArrayOfData Do
+			Filter = New Structure();
+			If ValueIsFilled(ExtDim.Key) Then
+				Filter.Insert("Key" , ExtDim.Key);
+			EndIf;
+			Filter.Insert("AnalyticType" , ExtDim.AnalyticType);
+			Filter.Insert("Operation"    , ExtDim.Operation);
+			Filter.Insert("LedgerType"   , ExtDim.LedgerType);
+			AccountingExtDimensionRows = AccountingExtDimensions.FindRows(Filter);
+			For Each RowForDelete In AccountingExtDimensionRows Do
+				AccountingExtDimensions.Delete(RowForDelete);
+			EndDo;
+		EndDo;		
+	EndIf;	
+EndProcedure
+
+Procedure FillAccountingExtDimensions(ArrayOfData, AccountingExtDimensions)
 	For Each ExtDim In ArrayOfData Do
 		NewRow = AccountingExtDimensions.Add();
 		NewRow.Key              = ExtDim.Key;
@@ -2608,6 +2657,7 @@ Function GetTableOfJEDocuments(ArrayOfBasisDocuments, ArrayOfLedgerTypes) Export
 	For Each Row In QueryTable Do
 		If ValueIsFilled(Row.JournalEntry) Then
 			JEDocObject = Row.JournalEntry.GetObject();
+			JEDocObject.DeletionMark = False;
 		Else
 			JEDocObject = Documents.JournalEntry.CreateDocument();
 		EndIf;
@@ -3766,8 +3816,7 @@ Procedure LoadAccountingOpeningEntry(IntegrationSettings, Date, RegisterName = "
 			Else
 				DeleteExternalAccountingOperation(IntegrationSettings, Data, ExternalRegister.LedgerType);
 			EndIf;
-		EndDo;
-		
+		EndDo;		
 	EndDo;
 EndProcedure
 
@@ -3930,9 +3979,12 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 		Else
 			DocObject = QueryTable[0].DocRef.GetObject();
 		EndIf;
-				
+		
 		FillPropertyValues(DocObject, QueryTable[0], , "Posted");
 		DocObject.Date = QueryTable[0].RecorderDate;
+		
+		RecorderPresentationStructure = RecorderPresentationStructure(Data.RecorderName, DocObject.Date, Data.RecorderNumber);
+		FillPropertyValues(DocObject, RecorderPresentationStructure, "Description_en, Description_ru, Description_tr");
 		
 		DocObject.Records.Clear();
 		DocObject.Errors.Clear();
@@ -4041,6 +4093,53 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 	ResultStructure.EAORef = DocObject.Ref;
 	
 	Return ResultStructure;
+EndFunction
+
+// Recorder presentation structure.
+// 
+// Parameters:
+//  RecorderMetaName - String
+// 
+// Returns:
+//  Structure - Recorder presentation structure:
+// * Description_en - String - 
+// * Description_ru - String - 
+// * Description_tr - String - 
+Function RecorderPresentationStructure(RecorderMetaName, RecorderDate, RecorderNumber) Export
+	AllDescriptionArray =  LocalizationServer.AllDescription();
+	Index = AllDescriptionArray.Find("Description_hash");
+	If Index <> Undefined Then
+		AllDescriptionArray.Delete(Index);
+	EndIf;	
+		
+	Structure = New Structure;
+	For Each Description In AllDescriptionArray Do
+		Structure.Insert(Description, "");		
+	EndDo;	
+	
+	Query = New Query;
+	Query.SetParameter("RecorderMetaName", RecorderMetaName);
+	Query.Text = "SELECT T9069S_AccountingMappingRecordersDescription.RecorderMetaName,";
+	StringsArray = New Array;
+	For Each Description In AllDescriptionArray Do
+		StringsArray.Add(StrTemplate("T9069S_AccountingMappingRecordersDescription.%1", Description));
+	EndDo;
+	Query.Text = Query.Text + StrConcat(StringsArray, ",");
+	Query.Text = Query.Text +  	
+		" FROM
+		|	InformationRegister.T9069S_AccountingMappingRecordersDescription AS T9069S_AccountingMappingRecordersDescription
+		|WHERE
+		|	T9069S_AccountingMappingRecordersDescription.RecorderMetaName = &RecorderMetaName";
+	
+	QueryResult = Query.Execute();
+	Selection = QueryResult.Select();
+	If Selection.Next() Then
+		For Each Description In AllDescriptionArray Do
+			LangCode = StrReplace(Description, "Description_", "");			
+			Structure[Description] = StrTemplate("%1 %2 %3 %4", Selection[Description], RecorderNumber, R(LangCode).DatePresentation, RecorderDate);		
+		EndDo;				
+	EndIf;	
+	Return Structure;
 EndFunction
 
 Procedure SetRates(DocObject, LedgerType, Data, IntegrationSettings)

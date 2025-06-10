@@ -236,7 +236,7 @@ Function R5020B_PartnersBalance_BP_CP() Export
 		|	0 AS CustomerAdvance,
 		|	0 AS VendorTransaction,
 		|	0 AS VendorAdvance,
-		|	PaymentList.Amount AS OtherTransaction,
+		|	PaymentList.Amount + PaymentList.TaxDiscountAmount AS OtherTransaction,
 		|	UNDEFINED AS AdvancesClosing,
 		|	PaymentList.Key
 		|FROM
@@ -469,7 +469,7 @@ Function R5020B_PartnersBalance_BR_CR() Export
 		|	PaymentList.IsOtherPartner";
 EndFunction
 
-Function R5020B_PartnersBalance_PI() Export
+Function R5020B_PartnersBalance_PI_WTI() Export
 	Return 
 		// Vendor transaction
 		"SELECT
@@ -494,7 +494,44 @@ Function R5020B_PartnersBalance_PI() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsPurchase
+		|	ItemList.IsPurchase AND ItemList.IsVendor
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Currency
+		|
+		|UNION ALL
+		|
+		// Other transaction
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Document,
+		|	ItemList.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	SUM(ItemList.Amount) AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing,
+		|	UNDEFINED AS Key
+		|
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsPurchase AND ItemList.IsOther
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Expense),
 		|	ItemList.Period,
@@ -1911,6 +1948,100 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|	UNDEFINED AS AdvancesClosing
 		|
 		|INTO R5020B_PartnersBalance
+		|FROM
+		|	SendAdvances AS SendAdvances
+		|WHERE
+		|	SendAdvances.IsSendAdvanceVendor
+		|	AND SendAdvances.IsDifferentPartners
+		|
+		|UNION ALL
+		|
+		// Other partner (send)
+		|SELECT
+		|	CASE
+		|		WHEN OtherPartnerSendTransactions.IsSendOtherPartnerReceivable
+		|			THEN VALUE(AccumulationRecordType.Expense)
+		|		WHEN OtherPartnerSendTransactions.IsSendOtherPartnerPayable
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|	END AS RecordType,
+		|	OtherPartnerSendTransactions.Period,
+		|	OtherPartnerSendTransactions.Key,
+		|	OtherPartnerSendTransactions.Company,
+		|	OtherPartnerSendTransactions.SendBranch AS Branch,
+		|	OtherPartnerSendTransactions.SendPartner AS Partner,
+		|	OtherPartnerSendTransactions.SendLegalName AS LegalName,
+		|	OtherPartnerSendTransactions.SendAgreement AS Agreement,
+		|	UNDEFINED AS Document,
+		|	OtherPartnerSendTransactions.SendCurrency AS Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,	
+		|	0 AS VendorAdvance,
+		|	OtherPartnerSendTransactions.SendAmount AS OtherTransaction,
+		|
+		|	UNDEFINED AS AdvancesClosing
+		|	
+		|FROM
+		|	OtherPartnerSendTransactions AS OtherPartnerSendTransactions
+		|WHERE TRUE
+		|
+		|UNION ALL
+		|
+		// Other partner (receive)
+		|SELECT
+		|	CASE
+		|		WHEN OtherPartnerReceiveTransactions.IsReceiveOtherPartnerReceivable
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|		WHEN OtherPartnerReceiveTransactions.IsReceiveOtherPartnerPayable
+		|			THEN VALUE(AccumulationRecordType.Expense)
+		|	END AS RecordType,
+		|	OtherPartnerReceiveTransactions.Period,
+		|	OtherPartnerReceiveTransactions.Key,
+		|	OtherPartnerReceiveTransactions.Company,
+		|	OtherPartnerReceiveTransactions.ReceiveBranch,
+		|	OtherPartnerReceiveTransactions.ReceivePartner,
+		|	OtherPartnerReceiveTransactions.ReceiveLegalName,
+		|	OtherPartnerReceiveTransactions.ReceiveAgreement,
+		|	UNDEFINED AS Document,
+		|	OtherPartnerReceiveTransactions.ReceiveCurrency,
+		|	
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,	
+		|	0 AS VendorAdvance,
+		|	OtherPartnerReceiveTransactions.ReceiveAmount AS OtherTransaction,
+		|
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	OtherPartnerReceiveTransactions AS OtherPartnerReceiveTransactions
+		|WHERE TRUE
+		|
+		|UNION ALL
+		|		
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	
+		|	SendAdvances.Period,
+		|	SendAdvances.Key,
+		|	SendAdvances.Company,
+		|	SendAdvances.SendBranch AS Branch,
+		|	SendAdvances.SendPartner AS Partner,
+		|	SendAdvances.SendLegalName AS LegalName,
+		|	SendAdvances.SendAgreement AS Agreement,
+		|	UNDEFINED AS Document,
+		|	SendAdvances.Currency,
+		|
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,	
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|
+		|	UNDEFINED AS AdvancesClosing
+		|
 		|FROM
 		|	SendAdvances AS SendAdvances
 		|WHERE

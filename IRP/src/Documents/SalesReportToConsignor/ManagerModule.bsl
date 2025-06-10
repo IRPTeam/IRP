@@ -139,7 +139,10 @@ Function ItemList()
 		   |	ItemList.Project,
 		   |	TRUE AS IsPurchase,
 		   |	UNDEFINED AS PurchaseOrder,
-		   |	UNDEFINED AS PurchaseOrderSettlements
+		   |	UNDEFINED AS PurchaseOrderSettlements,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Consignor) AS IsConsignor,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReportToConsignor.ItemList AS ItemList
@@ -163,11 +166,11 @@ Function GetQueryTextsMasterTables()
 EndFunction
 
 Function R1020B_AdvancesToVendors()
-	Return AccumulationRegisters.R1020B_AdvancesToVendors.R1020B_AdvancesToVendors_PI_PR_POC_SRTC();
+	Return AccumulationRegisters.R1020B_AdvancesToVendors.R1020B_AdvancesToVendors_PI_PR_POC_SRTC_WTI();
 EndFunction
 
 Function R1021B_VendorsTransactions()
-	Return AccumulationRegisters.R1021B_VendorsTransactions.R1021B_VendorsTransactions_PI_SRTC();
+	Return AccumulationRegisters.R1021B_VendorsTransactions.R1021B_VendorsTransactions_PI_SRTC_WTI();
 EndFunction
 
 Function R1040B_TaxesOutgoing()

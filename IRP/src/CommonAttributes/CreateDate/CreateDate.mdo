@@ -78,6 +78,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.PrintFormTemplates</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.SalesOrder</metadata>
     <use>Use</use>
   </content>
@@ -95,6 +99,10 @@
   </content>
   <content>
     <metadata>Catalog.PaymentSchedules</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.WithholdingTaxInvoice</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -127,6 +135,10 @@
   </content>
   <content>
     <metadata>Catalog.AddAttributeAndPropertySets</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.FixedAssetRevaluation</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -455,6 +467,10 @@
   </content>
   <content>
     <metadata>Document.Unbundling</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ShipmentPlaningOrder</metadata>
     <use>Use</use>
   </content>
   <content>

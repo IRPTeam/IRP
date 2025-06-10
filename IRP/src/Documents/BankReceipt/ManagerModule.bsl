@@ -68,7 +68,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 EndFunction
 
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+	OffsetOfAdvancesServer.CheckAdvanceBalance(Ref, Cancel, Parameters, "R1020B_AdvancesToVendors", AccumulationRecordType.Receipt);
 EndProcedure
 
 #EndRegion
@@ -147,6 +147,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(R9510B_SalaryPayment());
+	QueryArray.Add(PostingServer.Exists_R1020B_AdvancesToVendors());
 	Return QueryArray;
 EndFunction
 
@@ -1386,3 +1387,35 @@ EndFunction
 
 #EndRegion
 
+#Region SystemAttributes
+
+Function GetPredefinedSystemAttributes() Export
+	SystemAttributes = New Array(); // Array of ChartOfCharacteristicTypesRef.SystemAttributes
+	SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.Partner);
+	If GetFunctionalOption("UsePartnerTerms") = True Then
+		SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.PartnerTerm);
+	EndIf;
+	If GetFunctionalOption("UseLegalName") = True Then
+		SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.LegalName);
+	EndIf;
+	If GetFunctionalOption("UseLegalNameContract") = True Then
+		SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.LegalNameContract);
+	EndIf;
+	Return SystemAttributes;
+EndFunction
+
+Function GetSystemAttributeValues(Obj, SystemAttribute) Export
+	Values = New Array();
+	If SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.Partner Then
+		Values = Obj.PaymentList.Unload(, "Partner").UnloadColumn("Partner");
+	ElsIf SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.PartnerTerm Then
+		Values = Obj.PaymentList.Unload(, "Agreement").UnloadColumn("Agreement");
+	ElsIf SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.LegalName Then
+		Values = Obj.PaymentList.Unload(, "Payer").UnloadColumn("Payer");
+	ElsIf SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.LegalNameContract Then
+		Values = Obj.PaymentList.Unload(, "LegalNameContract").UnloadColumn("LegalNameContract");
+	EndIf;
+	Return Values;
+EndFunction
+
+#EndRegion

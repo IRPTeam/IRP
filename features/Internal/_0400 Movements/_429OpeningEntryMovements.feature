@@ -166,22 +166,22 @@ Scenario: _042901 check Opening entry movements by the Register  "R4010 Actual s
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 2 dated 07.09.2020 21:26:35'   | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| 'Document registrations records'              | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| 'Register  "R4010 Actual stocks"'             | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| ''                                            | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     |
-			| ''                                            | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    |
-			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '100'         | 'Store 01'     | '38/Yellow'   | ''                     |
-			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '100'         | 'Store 01'     | '36/Red'      | ''                     |
-			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '100'         | 'Store 02'     | 'L/Green'     | ''                     |
-			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '100'         | 'Store 02'     | '38/Yellow'   | ''                     |
-			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '100'         | 'Store 02'     | '36/Red'      | ''                     |
-			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '200'         | 'Store 02'     | '36/18SD'     | ''                     |
-			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '300'         | 'Store 01'     | '36/18SD'     | ''                     |
-			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '400'         | 'Store 01'     | 'XS/Blue'     | ''                     |
-			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '400'         | 'Store 02'     | 'S/Yellow'    | ''                     |
-			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '500'         | 'Store 01'     | 'XS/Blue'     | ''                     |
-			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '500'         | 'Store 01'     | 'L/Green'     | ''                     |
+			| 'Opening entry 2 dated 07.09.2020 21:26:35'   | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Document registrations records'              | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'             | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| ''                                            | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     | ''                     |
+			| ''                                            | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '100'         | 'Store 01'     | '38/Yellow'   | ''                     | ''                     |
+			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '100'         | 'Store 01'     | '36/Red'      | ''                     | ''                     |
+			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '100'         | 'Store 02'     | 'L/Green'     | ''                     | ''                     |
+			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '100'         | 'Store 02'     | '38/Yellow'   | ''                     | ''                     |
+			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '100'         | 'Store 02'     | '36/Red'      | ''                     | ''                     |
+			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '200'         | 'Store 02'     | '36/18SD'     | ''                     | ''                     |
+			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '300'         | 'Store 01'     | '36/18SD'     | ''                     | ''                     |
+			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '400'         | 'Store 01'     | 'XS/Blue'     | ''                     | ''                     |
+			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '400'         | 'Store 02'     | 'S/Yellow'    | ''                     | ''                     |
+			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '500'         | 'Store 01'     | 'XS/Blue'     | ''                     | ''                     |
+			| ''                                            | 'Receipt'       | '07.09.2020 21:26:35'   | '500'         | 'Store 01'     | 'L/Green'     | ''                     | ''                     |
 		And I close all client application windows
 
 Scenario: _042902 check Opening entry movements by the Register  "R4011 Free stocks"
@@ -265,16 +265,16 @@ Scenario: _042904 check Opening entry with serial lot numbers movements by the R
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 1 112 dated 20.05.2022 17:07:07'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                 | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                | 'Receipt'       | '20.05.2022 17:07:07'   | '5'           | 'Store 02'     | 'PZU'        | '8908899877'           |
-			| ''                                                | 'Receipt'       | '20.05.2022 17:07:07'   | '5'           | 'Store 02'     | 'PZU'        | '8908899879'           |
-			| ''                                                | 'Receipt'       | '20.05.2022 17:07:07'   | '5'           | 'Store 02'     | 'UNIQ'       | ''                     |
-			| ''                                                | 'Receipt'       | '20.05.2022 17:07:07'   | '5'           | 'Store 02'     | 'UNIQ'       | ''                     |
-			| ''                                                | 'Receipt'       | '20.05.2022 17:07:07'   | '10'          | 'Store 02'     | 'XL/Green'   | ''                     |
+			| 'Opening entry 1 112 dated 20.05.2022 17:07:07'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                 | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                | 'Receipt'       | '20.05.2022 17:07:07'   | '5'           | 'Store 02'     | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                                | 'Receipt'       | '20.05.2022 17:07:07'   | '5'           | 'Store 02'     | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                                | 'Receipt'       | '20.05.2022 17:07:07'   | '5'           | 'Store 02'     | 'UNIQ'       | ''                     | ''                     |
+			| ''                                                | 'Receipt'       | '20.05.2022 17:07:07'   | '5'           | 'Store 02'     | 'UNIQ'       | ''                     | ''                     |
+			| ''                                                | 'Receipt'       | '20.05.2022 17:07:07'   | '10'          | 'Store 02'     | 'XL/Green'   | ''                     | ''                     |
 		And I close all client application windows
 
 Scenario: _042905 check Opening entry movements by the Register  "R1020 Advances to vendors" 
@@ -512,17 +512,17 @@ Scenario: _042915 check Opening entry movements by the Register  "R4010 Actual s
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 14 dated 01.12.2022 12:41:27'   | ''              | ''                      | ''            | ''                    | ''           | ''                     |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''                    | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'              | ''              | ''                      | ''            | ''                    | ''           | ''                     |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'          | ''           | ''                     |
-			| ''                                             | ''              | ''                      | 'Quantity'    | 'Store'               | 'Item key'   | 'Serial lot number'    |
-			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '20'          | 'Trade agent store'   | 'PZU'        | '8908899879'           |
-			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '30'          | 'Trade agent store'   | 'XS/Blue'    | ''                     |
-			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '100'         | 'Trade agent store'   | 'UNIQ'       | ''                     |
-			| ''                                             | 'Expense'       | '01.12.2022 12:41:27'   | '20'          | 'Store 05'            | 'PZU'        | '8908899879'           |
-			| ''                                             | 'Expense'       | '01.12.2022 12:41:27'   | '30'          | 'Store 05'            | 'XS/Blue'    | ''                     |
-			| ''                                             | 'Expense'       | '01.12.2022 12:41:27'   | '100'         | 'Store 05'            | 'UNIQ'       | ''                     |
+			| 'Opening entry 14 dated 01.12.2022 12:41:27'   | ''              | ''                      | ''            | ''                    | ''           | ''                     | ''                     |
+			| 'Document registrations records'               | ''              | ''                      | ''            | ''                    | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'              | ''              | ''                      | ''            | ''                    | ''           | ''                     | ''                     |
+			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'          | ''           | ''                     | ''                     |
+			| ''                                             | ''              | ''                      | 'Quantity'    | 'Store'               | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '20'          | 'Trade agent store'   | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '30'          | 'Trade agent store'   | 'XS/Blue'    | ''                     | ''                     |
+			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '100'         | 'Trade agent store'   | 'UNIQ'       | ''                     | ''                     |
+			| ''                                             | 'Expense'       | '01.12.2022 12:41:27'   | '20'          | 'Store 05'            | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                             | 'Expense'       | '01.12.2022 12:41:27'   | '30'          | 'Store 05'            | 'XS/Blue'    | ''                     | ''                     |
+			| ''                                             | 'Expense'       | '01.12.2022 12:41:27'   | '100'         | 'Store 05'            | 'UNIQ'       | ''                     | ''                     |
 		And I close all client application windows
 
 Scenario: _042916 check Opening entry movements by the Register  "R4011 Free stocks" (shipment to trade agent)
@@ -632,13 +632,13 @@ Scenario: _042923 check Opening entry movements by the Register  "R4010 Actual s
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 15 dated 01.12.2022 12:41:39' | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Register  "R4010 Actual stocks"'            | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
-			| ''                                           | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '50'        | 'Store 08'   | 'M/Black'  | ''                  |
-			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '70'        | 'Store 08'   | 'UNIQ'     | ''                  |		
+			| 'Opening entry 15 dated 01.12.2022 12:41:39' | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| 'Register  "R4010 Actual stocks"'            | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  | ''                     |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' | 'Source of origin'     |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '50'        | 'Store 08'   | 'M/Black'  | ''                  | ''                     |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '70'        | 'Store 08'   | 'UNIQ'     | ''                  | ''                     |		
 		And I close all client application windows
 
 Scenario: _042924 check Opening entry movements by the Register  "R4011 Free stocks" (receipt from consignor)

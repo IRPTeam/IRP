@@ -137,7 +137,16 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create document RetailSalesReceipt objects (serial lor numbers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(1315).GetObject().Write(DocumentWriteMode.Posting);"    |
-
+		When create Retail document for register R6060 Cost of goods sold
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(329).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(1317).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(2209).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I close all client application windows
 
 Scenario: _0424001 check preparation
 	When check preparation
@@ -153,14 +162,14 @@ Scenario: _042401 check Retail sales receipt movements by the Register  "R4010 A
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| 'Document registrations records'                       | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| 'Register  "R4010 Actual stocks"'                      | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| ''                                                     | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     |
-			| ''                                                     | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    |
-			| ''                                                     | 'Expense'       | '15.03.2021 16:01:04'   | '1'           | 'Store 01'     | 'XS/Blue'     | ''                     |
-			| ''                                                     | 'Expense'       | '15.03.2021 16:01:04'   | '2'           | 'Store 01'     | '38/Yellow'   | ''                     |
-			| ''                                                     | 'Expense'       | '15.03.2021 16:01:04'   | '12'          | 'Store 01'     | '36/18SD'     | ''                     |
+			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04'   | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Document registrations records'                       | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                      | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| ''                                                     | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     | ''                     |
+			| ''                                                     | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                     | 'Expense'       | '15.03.2021 16:01:04'   | '1'           | 'Store 01'     | 'XS/Blue'     | ''                     | ''                     |
+			| ''                                                     | 'Expense'       | '15.03.2021 16:01:04'   | '2'           | 'Store 01'     | '38/Yellow'   | ''                     | ''                     |
+			| ''                                                     | 'Expense'       | '15.03.2021 16:01:04'   | '12'          | 'Store 01'     | '36/18SD'     | ''                     | ''                     |
 		And I close all client application windows
 
 Scenario: _042402 check Retail sales receipt movements by the Register  "R4011 Free stocks"
@@ -216,14 +225,14 @@ Scenario: _042404 check Retail sales receipt with serial lot number movements by
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 1 112 dated 24.05.2022 14:18:49'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                         | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                        | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                       | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                       | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                       | 'Expense'       | '24.05.2022 14:18:49'   | '5'           | 'Store 03'     | 'PZU'        | '8908899877'           |
-			| ''                                                       | 'Expense'       | '24.05.2022 14:18:49'   | '5'           | 'Store 03'     | 'PZU'        | '8908899879'           |
-			| ''                                                       | 'Expense'       | '24.05.2022 14:18:49'   | '10'          | 'Store 03'     | 'UNIQ'       | ''                     |
+			| 'Retail sales receipt 1 112 dated 24.05.2022 14:18:49'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                         | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                        | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                       | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                       | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                       | 'Expense'       | '24.05.2022 14:18:49'   | '5'           | 'Store 03'     | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                                       | 'Expense'       | '24.05.2022 14:18:49'   | '5'           | 'Store 03'     | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                                       | 'Expense'       | '24.05.2022 14:18:49'   | '10'          | 'Store 03'     | 'UNIQ'       | ''                     | ''                     |
 		And I close all client application windows
 
 Scenario: _042408 check Retail sales receipt movements by the Register  "R2021 Customer transactions"
@@ -435,14 +444,14 @@ Scenario: _042418 check Retail sales receipt movements by the Register  "R4010 A
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Register  "R4010 Actual stocks"'                      | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
-			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '1'         | 'Store 02'   | 'XL/Black' | ''                  |
-			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Store 02'   | 'UNIQ'     | ''                  |
-			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '4'         | 'Store 02'   | 'XL/Green' | ''                  |	
+			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| 'Register  "R4010 Actual stocks"'                      | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  | ''                     |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' | 'Source of origin'     |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '1'         | 'Store 02'   | 'XL/Black' | ''                  | ''                     |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Store 02'   | 'UNIQ'     | ''                  | ''                     |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '4'         | 'Store 02'   | 'XL/Green' | ''                  | ''                     |	
 		And I close all client application windows
 
 Scenario: _042419 check Retail sales receipt movements by the Register  "R4011 Free stocks" (consignor and own stocks) 
@@ -945,4 +954,28 @@ Scenario: _0424287 check Retail sales receipt movements by the Register  "Posted
 			| 'Register  "Posted documents registry"'              | ''                                                   | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
 			| ''                                                   | 'Document'                                           | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
 			| ''                                                   | 'Retail sales receipt 110 dated 29.12.2022 14:47:30' | '29.12.2022 14:47:30' | '110'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		
+
+Scenario: _0424288 check Retail sales receipt movements by the Register  "R6060 Cost of goods sold"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1 317'  |
+	* Check movements by the Register "R6060 Cost of goods sold"
+		And I click "Registrations report info" button
+		And I select "R6060 Cost of goods sold" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 1 317 dated 07.04.2025 00:00:00' | ''                    | ''             | ''                                                     | ''              | ''                        | ''         | ''                  | ''                 | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                                                       |
+			| 'Register  "R6060 Cost of goods sold !Manual edit"'    | ''                    | ''             | ''                                                     | ''              | ''                        | ''         | ''                  | ''                 | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                                                       |
+			| ''                                                     | 'Period'              | 'Company'      | 'Sales invoice'                                        | 'Item key'      | 'Currency movement type'  | 'Currency' | 'Serial lot number' | 'Source of origin' | 'Quantity' | 'Invoice amount' | 'Invoice tax amount' | 'Indirect cost amount' | 'Indirect cost tax amount' | 'Extra cost amount by ratio' | 'Extra cost tax amount by ratio' | 'Extra direct cost amount' | 'Extra direct cost tax amount' | 'Allocated cost amount' | 'Allocated cost tax amount' | 'Allocated revenue amount' | 'Allocated revenue tax amount' | 'Total amount' | 'Total net amount' | 'Total tax amount' | 'Calculation movement cost'                              |
+			| ''                                                     | '07.04.2025 00:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 00:00:00' | 'Router'        | 'Local currency'          | 'TRY'      | ''                  | ''                 | '1'        | '225,1'          | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                     | '07.04.2025 00:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 00:00:00' | 'Scarf + Dress' | 'Local currency'          | 'TRY'      | ''                  | ''                 | '10'       | '1 406,88'       | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                     | '07.04.2025 00:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 00:00:00' | 'Router'        | 'en description is empty' | 'TRY'      | ''                  | ''                 | '1'        | '225,1'          | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '225,1'        | '225,1'            | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                     | '07.04.2025 00:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 00:00:00' | 'Router'        | 'Local currency'          | 'TRY'      | ''                  | ''                 | '1'        | '225,1'          | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '225,1'        | '225,1'            | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                     | '07.04.2025 00:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 00:00:00' | 'Router'        | 'Reporting currency'      | 'USD'      | ''                  | ''                 | '1'        | '38,54'          | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '38,54'        | '38,54'            | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                     | '07.04.2025 00:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 00:00:00' | 'Scarf + Dress' | 'en description is empty' | 'TRY'      | ''                  | ''                 | '10'       | '1 406,88'       | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '1 406,88'     | '1 406,88'         | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                     | '07.04.2025 00:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 00:00:00' | 'Scarf + Dress' | 'Local currency'          | 'TRY'      | ''                  | ''                 | '10'       | '1 406,88'       | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '1 406,88'     | '1 406,88'         | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                     | '07.04.2025 00:00:00' | 'Main Company' | 'Retail sales receipt 1 317 dated 07.04.2025 00:00:00' | 'Scarf + Dress' | 'Reporting currency'      | 'USD'      | ''                  | ''                 | '10'       | '240,86'         | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '240,86'       | '240,86'           | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
 	And I close all client application windows		

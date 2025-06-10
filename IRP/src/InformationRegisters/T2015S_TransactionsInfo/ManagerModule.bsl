@@ -608,6 +608,39 @@ Function T2015S_TransactionsInfo_PI_SRTC() Export
 		|	ItemList.BasisDocument";
 EndFunction
 
+Function T2015S_TransactionsInfo_WTI() Export
+	Return 
+		"SELECT
+		|	ItemList.Period AS Date,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.Project,
+		|	UNDEFINED AS Order,
+		|	TRUE AS IsVendorTransaction,
+		|	ItemList.BasisDocument AS TransactionBasis,
+		|	SUM(ItemList.Amount) AS Amount,
+		|	TRUE AS IsDue
+		|INTO T2015S_TransactionsInfo
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsVendor
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.Project,
+		|	ItemList.BasisDocument";
+EndFunction
+
 Function T2015S_TransactionsInfo_PR() Export 
 	Return 
 		"SELECT

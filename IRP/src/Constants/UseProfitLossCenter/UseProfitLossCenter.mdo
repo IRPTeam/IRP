@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dc99a029-26e6-4804-b956-ed7c382f1d00">
+  <producedTypes>
+    <managerType typeId="2f9336e9-1d61-47e1-86d5-09e8fbf3c628" valueTypeId="e0051f77-62eb-44f1-8baf-256b0e227525"/>
+    <valueManagerType typeId="a8d89e53-d18f-4c57-88b5-83fbd25611b4" valueTypeId="283a1504-e0cc-4f69-8648-aacb8a535cda"/>
+    <valueKeyType typeId="2985eac0-8388-42cd-8605-81f2eece4988" valueTypeId="9bd12a5e-b02a-4bcb-a9e1-0a083ec687b5"/>
+  </producedTypes>
+  <name>UseProfitLossCenter</name>
+  <synonym>
+    <key>en</key>
+    <value>Use profit loss center</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

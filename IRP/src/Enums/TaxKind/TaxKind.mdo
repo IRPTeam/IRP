@@ -26,4 +26,11 @@
       <value>Salary</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="da993ea4-66a5-4a59-b6a2-1343ffd233a0">
+    <name>WithholdingTax</name>
+    <synonym>
+      <key>en</key>
+      <value>Withholding tax</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

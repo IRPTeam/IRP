@@ -283,7 +283,7 @@ Function GetSpecificationType(TableOfItems, AddInfo = Undefined) Export
 EndFunction
 
 Procedure SetDescriptionByTableOfItems(NewObject, TableOfItems, AddInfo = Undefined)
-	ArrayOfDescriptions = LocalizationReuse.AllDescription(AddInfo);
+	ArrayOfDescriptions = LocalizationReuse.AllDescription();
 
 	TableOfItemsCopy = TableOfItems.Copy();
 	TableOfItemsCopy.GroupBy("Item");
@@ -293,7 +293,7 @@ Procedure SetDescriptionByTableOfItems(NewObject, TableOfItems, AddInfo = Undefi
 		ArrayOfItemDescriptions = New Array();
 		For Each ItemRow In TableOfItemsCopy Do
 			ArrayOfItemDescriptions.Add(
-				LocalizationReuse.CatalogDescription(ItemRow.Item, LangCode, AddInfo));
+				LocalizationReuse.CatalogDescription(ItemRow.Item, LangCode));
 		EndDo;
 		NewObject[Desc] = StrConcat(ArrayOfItemDescriptions, "+");
 	EndDo;

@@ -20,7 +20,16 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	
 	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
 	ThisObject.DocumentNumber = DocumentsServer.GenerateDocumentNumber(ThisObject);
+	
 	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);
+	
+	If Not Ref.IsEmpty() 
+			And (DeletionMark 
+				OR WriteMode = DocumentWriteMode.UndoPosting 
+				OR Not Posted And Ref.Posted) 
+			And DocPurchaseOrderServer.CheckRelatedDocuments(Ref, True) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)
@@ -113,7 +122,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_PO(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey, Store");
+		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, Item, ItemKey, Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 

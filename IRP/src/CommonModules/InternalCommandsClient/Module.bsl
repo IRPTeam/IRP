@@ -22,7 +22,9 @@ Procedure RunCommandAction(Command, Form, MainAttribute, Targets, AddInfo = Unde
 	CommandName = CommandNameParts[CommandNameParts.UBound()];
 	
 	//@skip-check use-non-recommended-method
-	InternalCommandModule = GetForm("DataProcessor.InternalCommands.Form." + CommandName); // See DataProcessor.InternalCommands.Form.CommandTemplate
+	InternalCommandModule = 
+		GetForm("DataProcessor.InternalCommands.Form." + CommandName, 
+			New Structure("FullName", FullCommandName)); // See DataProcessor.InternalCommands.Form.CommandTemplate
 	
 	//@skip-check property-return-type
 	CommandDescription = InternalCommandModule.CommandDescription; // See InternalCommandsServer.GetCommandDescription

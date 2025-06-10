@@ -157,7 +157,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_SI(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey, Store");
+		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, Item, ItemKey, Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 
@@ -231,6 +231,10 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 					"Object.ItemList");
 			EndIf;
 		EndDo;
+	EndIf;
+	
+	If Not Cancel = True Then
+		CreditLimitsServer.CheckCreditLimitByPartner(ThisObject, ThisObject.Date, Cancel);
 	EndIf;
 EndProcedure
 

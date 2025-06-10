@@ -136,7 +136,7 @@
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
-  <descriptionLength>50</descriptionLength>
+  <descriptionLength>150</descriptionLength>
   <codeAllowedLength>Variable</codeAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
@@ -238,6 +238,21 @@
     <synonym>
       <key>en</key>
       <value>Inactive</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="bb7e1834-9777-4527-a129-815a9da23cc2">
+    <name>StockBalanceDetail</name>
+    <synonym>
+      <key>en</key>
+      <value>Stock balance detail</value>
     </synonym>
     <type>
       <types>Boolean</types>

@@ -54,7 +54,12 @@ Scenario: _0902000 preparation
 		When Create catalog TaxExemptionReasons objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Countries objects
-		When Create catalog BusinessUnits objects 
+		When Create catalog BusinessUnits objects
+		When create documents for WithholdingTaxInvoice (Tax calculation)
+		And I execute 1C:Enterprise script at server
+			| "Documents.WithholdingTaxInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashPayment.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"           |
+			| "Documents.CashPayment.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"           |
 	* Filling tax rates for Item key in the register
 		Given I open hyperlink "e1cib/list/InformationRegister.TaxSettings"
 		And I click the button named "FormCreate"
@@ -873,7 +878,7 @@ Scenario: _090216 check tax in the BP (depend of transaction type)
 			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 	* Select partner
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -914,7 +919,7 @@ Scenario: _090217 check tax in the CP (depend of transaction type)
 			| 'Cash desk №4'    |
 		And I select current line in "List" table
 	* Select partner
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -955,7 +960,7 @@ Scenario: _090218 check tax in the CR (depend of transaction type)
 			| 'Cash desk №4'    |
 		And I select current line in "List" table
 	* Select partner
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -996,7 +1001,7 @@ Scenario: _090219 check tax in the BR (depend of transaction type)
 			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 	* Select partner
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1037,7 +1042,7 @@ Scenario: _090220 check tax in the CE (depend of transaction type)
 			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 	* Add expense
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -1398,6 +1403,53 @@ Scenario: _090230 fill tax exemption reason in the Credit note
 			| 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, TRY' | '0%'  | 'Tax exeption reason 1 (0%, All countries)' |	
 		And I close all client application windows
 
+Scenario: _090231 check Withholding Tax calculation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP'    |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Service" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I input "Rent" text in "Item key" field of "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check Withholding Tax calculation
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Withholding tax rate" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "20% WT" exact value from "Withholding tax rate" drop-down list in "ItemList" table
+		And "ItemList" table became equal
+			| '#' | 'Item'    | 'Item key' | 'Quantity' | 'Unit' | 'Price type'              | 'Price'  | 'Dont calculate row' | 'Net amount' | 'VAT' | 'Tax amount' | 'Withholding tax rate' | 'Withholding tax amount' | 'Brutto amount' | 'Total amount' | 'Project' | 'Expense type' | 'Profit loss center' | 'Additional analytic' |
+			| '1' | 'Service' | 'Rent'     | '1,000'    | 'pcs'  | 'en description is empty' | '100,00' | 'No'                 | '100,00'     | '18%' | '15,25'      | '20% WT'               | '25,00'                  | '125,00'        | '100,00'       | ''        | ''             | ''                   | ''                    |		
+		* Change brutto amount
+			And I activate "Brutto amount" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "150,00" text in "Brutto amount" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+						
+				
+				
+				
+				
+
+
 Scenario: _090225 check tax deactivation
 	And I close all client application windows
 	* Deactivate tax
@@ -1442,3 +1494,14 @@ Scenario: _090225 check tax deactivation
 		And I select current line in "List" table
 		And the field named "ItemListTotalTaxAmount" does not exist on the form
 		And I close all client application windows
+
+Scenario: _090226 check connection to WithholdingTaxInvoice report "Related documents"
+	Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+	* Form report Related documents
+		And I go to line in "List" table
+		| 'Number' |
+		| '2'      |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And Delay 1
+	Then "* Related documents" window is opened
+	And I close all client application windows

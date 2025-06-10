@@ -20,4 +20,7 @@
   <content>Document.CalculationMovementCosts</content>
   <content>Report.F0010_FixedAssetsTransferCost</content>
   <content>Report.F0011_InventoryBook</content>
+  <content>Report.F0012_DepreciationStatement</content>
+  <content>Document.FixedAssetRevaluation</content>
+  <content>Document.DepreciationCalculation</content>
 </mdclass:FunctionalOption>

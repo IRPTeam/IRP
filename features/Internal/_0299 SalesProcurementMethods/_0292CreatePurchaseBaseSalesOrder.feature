@@ -61,6 +61,14 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 		| "Documents.SalesOrder.FindByNumber(502).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(503).GetObject().Write(DocumentWriteMode.Posting);"   |
+	When create document SalesOrder objects (procurement method for Service)
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(522).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.SalesOrder.FindByNumber(523).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.SalesOrder.FindByNumber(524).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.SalesOrder.FindByNumber(525).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.SalesOrder.FindByNumber(526).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.SalesOrder.FindByNumber(527).GetObject().Write(DocumentWriteMode.Posting);"   |
 
 Scenario: _0292001 check preparation
 	When check preparation
@@ -762,7 +770,7 @@ Scenario: _029205 check movements in the register TM1010B_RowIDMovements
 		| '$$ShipmentConfirmation029203$$'             | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'SC'        | '$$SalesInvoice029203$$'                     | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
 		| '$$ShipmentConfirmation029204$$'             | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'SI&SC'     | '$$GoodsReceipt0292021$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '5,000'      |
 		| '$$ShipmentConfirmation029204$$'             | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'SI'        | '$$ShipmentConfirmation029204$$'             | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '5,000'      |
-	Then the number of "List" table lines is "равно" "72"
+	Then the number of "List" table lines is "равно" "86"
 	And I close all client application windows
 	
 
@@ -4528,18 +4536,407 @@ Scenario: _029235 SO - PO - PI  - GR - SC - SI (selling from one store while pur
 		And I save the window as "$$SalesInvoice29212$$"
 		And I close all client application windows						
 
+Scenario: _029236 create PO - PI - SI (procurement method for Service)
+	And I close all client application windows
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '522'       |		
+	* Create PO
+		And I click the button named "FormDocumentPurchaseOrderGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I select from the drop-down list named "Partner" by "Ferron BP" string
+		And I select from the drop-down list named "Agreement" by "Vendor Ferron, TRY" string
+		Then "Update item list info" window is opened
+		And I click the button named "FormOK"
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Item'    | 'Item key' | 'Quantity'  | 'Price type'        | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase basis'                            | 'Sales order'                               | 'Internal supply request' | 'Cancel' | 'Cancel reason' | 'Detail' | 'Is variable item key' | 'Is variable store' |
+			| '1' | ''             | 'Shirt'   | '38/Black' | '1 000,000' | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'Store 01' | ''              | ''             | ''                   | 'Sales order 522 dated 01.05.2025 13:22:29' | 'Sales order 522 dated 01.05.2025 13:22:29' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+			| '2' | ''             | 'Service' | 'Rent'     | '1,000'     | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | ''         | ''              | ''             | ''                   | 'Sales order 522 dated 01.05.2025 13:22:29' | 'Sales order 522 dated 01.05.2025 13:22:29' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+		And I go to line in "ItemList" table
+			| 'Item'  |
+			| 'Shirt' |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| "Item"    |
+			| "Service" |
+		And I select current line in "ItemList" table
+		And I input "800,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to the tab named "GroupOther"
+		And I input "10.05.2025 10:15:00" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I change checkbox named "Prices"
+		And I change checkbox named "PriceTypes"
+		And I click the button named "FormOK"
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder029236$$" variable
+		And I delete "$$PurchaseOrder029236$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029236$$"
+		And I save the window as "$$PurchaseOrder029236$$"		
+	* Create PI
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I click the button named "FormOk"
+		And "ItemList" table became equal
+			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity'  | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Project' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'          | 'Sales order'                               | 'Internal supply request' | 'Use goods receipt' | 'Detail' | 'Additional analytic' | 'Other period expense type' |
+			| '1' | 'Shirt'   | '38/Black' | ''                   | ''                  | '1 000,000' | 'en description is empty' | 'pcs'  | '200,00' | '18%' | ''              | 'No'                 | '30 508,47'  | '169 491,53' | '200 000,00'   | 'Store 01' | ''        | ''              | ''             | ''                   | '$$PurchaseOrder029236$$' | 'Sales order 522 dated 01.05.2025 13:22:29' | ''                        | 'No'                | ''       | ''                    | ''                          |
+			| '2' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'     | 'en description is empty' | 'pcs'  | '800,00' | '18%' | ''              | 'No'                 | '122,03'     | '677,97'     | '800,00'       | ''         | ''        | ''              | ''             | ''                   | '$$PurchaseOrder029236$$' | 'Sales order 522 dated 01.05.2025 13:22:29' | ''                        | 'No'                | ''       | ''                    | ''                          |
+		And I move to the tab named "GroupOther"
+		And I move to the tab named "GroupMore"
+		And I input "08.05.2025 14:10:02" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
+		And I click the button named "FormOK"
+		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseInvoice029236$$" variable
+		And I delete "$$PurchaseInvoice029236$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029236$$"
+		And I save the window as "$$PurchaseInvoice029236$$"
+		And I click the button named "FormPostAndClose"
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '522'       |
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I click the button named "FormOk"
+		And "ItemList" table became equal
+			| '#' | 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Source of origins' | 'Quantity'  | 'Price type'              | 'Unit' | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order'                               | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+			| '1' | 'Trousers' | '38/Yellow' | ''                   | ''                  | '1 000,000' | 'Basic Price Types'       | 'pcs'  | '400,00'   | '18%' | ''              | 'No'                 | '61 016,95'  | '338 983,05' | '400 000,00'   | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | 'Sales order 522 dated 01.05.2025 13:22:29' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			| '2' | 'Service'  | 'Rent'      | ''                   | ''                  | '1,000'     | 'en description is empty' | 'pcs'  | '1 500,00' | '18%' | ''              | 'No'                 | '228,81'     | '1 271,19'   | '1 500,00'     | 'No'             | 'No'                        | ''         | ''        | ''              | 'Sales order 522 dated 01.05.2025 13:22:29' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			| '3' | 'Shirt'    | '38/Black'  | ''                   | ''                  | '1 000,000' | 'Basic Price Types'       | 'pcs'  | '350,00'   | '18%' | ''              | 'No'                 | '53 389,83'  | '296 610,17' | '350 000,00'   | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | 'Sales order 522 dated 01.05.2025 13:22:29' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			| '4' | 'Service'  | 'Rent'      | ''                   | ''                  | '1,000'     | 'en description is empty' | 'pcs'  | '1 000,00' | '18%' | ''              | 'No'                 | '152,54'     | '847,46'     | '1 000,00'     | 'No'             | 'No'                        | ''         | ''        | ''              | 'Sales order 522 dated 01.05.2025 13:22:29' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+		And I move to the tab named "GroupOther"
+		And I input "11.05.2025 16:10:02" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I click the button named "FormPost"
+		And I delete "$$NumberSalesInvoice029236$$" variable
+		And I delete "$$SalesInvoice029236$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029236$$"
+		And I save the window as "$$SalesInvoice029236$$"
+		And I click the button named "FormPostAndClose"
+	* Check
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '522'       |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And "DocumentsTree" table contains lines
+			| 'Presentation'                              | 'Amount'     |
+			| 'Sales order 522 dated 01.05.2025 13:22:29' | '752 500,00' |
+			| '$$PurchaseOrder029236$$'                   | '200 800,00' |
+			| '$$PurchaseInvoice029236$$'                 | '200 800,00' |
+			| '$$SalesInvoice029236$$'                    | '752 500,00' |
+	And I close all client application windows		
 
-						
-						
 
 
-		
-				
+Scenario: _029238 create PO - PI - SI (procurement method for Service-purchase)
+	And I close all client application windows
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '524'       |	
+	* Create PO		
+		And I click the button named "FormDocumentPurchaseOrderGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I select from the drop-down list named "Partner" by "Ferron BP" string
+		And I select from the drop-down list named "Agreement" by "Vendor Ferron, TRY" string
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I click the button named "FormOK"
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Item'    | 'Item key' | 'Quantity' | 'Price type'        | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase basis'                            | 'Sales order'                               | 'Internal supply request' | 'Cancel' | 'Cancel reason' | 'Detail' | 'Is variable item key' | 'Is variable store' |
+			| '1' | ''             | 'Service' | 'Rent'     | '1,000'    | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | ''      | ''              | ''             | ''                   | 'Sales order 524 dated 01.05.2025 13:24:17' | 'Sales order 524 dated 01.05.2025 13:24:17' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+		And I activate field named "ItemListPrice" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "700,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to the tab named "GroupOther"
+		And I input "02.05.2025 11:12:00" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I change checkbox named "Prices"
+		And I change checkbox named "PriceTypes"
+		And I click the button named "FormOK"
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder029238$$" variable
+		And I delete "$$PurchaseOrder029238$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029238$$"
+		And I save the window as "$$PurchaseOrder029238$$"
+	* Create PI
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I click the button named "FormOk"
+		And I move to the tab named "GroupOther"
+		And I move to the tab named "GroupMore"
+		And I input "07.05.2025 12:32:45" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"		
+		And I click the button named "FormOK"
+		And I click the button named "FormPost"
+		And "ItemList" table became equal
+			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Project' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'                              | 'Sales order'                               | 'Internal supply request' | 'Use goods receipt' | 'Detail' | 'Additional analytic' | 'Other period expense type' |
+			| '1' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '106,78'     | '593,22'     | '700,00'       | ''      | ''        | ''              | ''             | ''                   | 'Purchase order 19 dated 02.05.2025 11:12:00' | 'Sales order 524 dated 01.05.2025 13:24:17' | ''                        | 'No'                | ''       | ''                    | ''                          |
+		And I delete "$$NumberPurchaseInvoice029238$$" variable
+		And I delete "$$PurchaseInvoice029238$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029238$$"
+		And I save the window as "$$PurchaseInvoice029238$$"
+		And I click the button named "FormPostAndClose"
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '524'       |
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I click the button named "FormOk"
+		And I move to the tab named "GroupOther"
+		And I input "10.05.2025 17:10:02" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I remove checkbox "Do you want to replace filled price types with price type Basic Price Types?"		
+		And I click the button named "FormOK"
+		And I click the button named "FormPost"
+		And "ItemList" table became equal
+			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store' | 'Project' | 'Delivery date' | 'Sales order'                               | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+			| '1' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '1 000,00' | '18%' | ''              | 'No'                 | '152,54'     | '847,46'     | '1 000,00'     | 'No'             | 'No'                        | ''      | ''        | ''              | 'Sales order 524 dated 01.05.2025 13:24:17' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+		And I delete "$$NumberSalesInvoice029238$$" variable
+		And I delete "$$SalesInvoice029238$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029238$$"
+		And I save the window as "$$SalesInvoice029238$$"
+		And I click the button named "FormPostAndClose"	
+	* Check
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '524'       |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And "DocumentsTree" table contains lines
+			| 'Presentation'                              | 'Amount'   |
+			| 'Sales order 524 dated 01.05.2025 13:24:17' | '1 000,00' |
+			| '$$PurchaseOrder029238$$'                   | '700,00'   |
+			| '$$PurchaseInvoice029238$$'                 | '700,00'   |
+			| '$$SalesInvoice029238$$'                    | '1 000,00' |
+	And I close all client application windows		
 
 
-		
-				
+
+Scenario: _029240 create PO - PI - SI (procurement method for Service-purchase/no)
+	And I close all client application windows
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '525'       |	
+	* Create PO		
+		And I click the button named "FormDocumentPurchaseOrderGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I select from the drop-down list named "Partner" by "Ferron BP" string
+		And I select from the drop-down list named "Agreement" by "Vendor Ferron, TRY" string
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I click the button named "FormOK"
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Item'    | 'Item key' | 'Quantity' | 'Price type'        | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase basis'                            | 'Sales order'                               | 'Internal supply request' | 'Cancel' | 'Cancel reason' | 'Detail' | 'Is variable item key' | 'Is variable store' |
+			| '1' | ''             | 'Service' | 'Rent'     | '1,000'    | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | ''      | ''              | ''             | ''                   | 'Sales order 525 dated 02.05.2025 13:24:51' | 'Sales order 525 dated 02.05.2025 13:24:51' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+		And I input "700,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to the tab named "GroupOther"
+		And I input "02.05.2025 14:12:23" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I change checkbox named "Prices"
+		And I change checkbox named "PriceTypes"
+		And I click the button named "FormOK"
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I click the button named "FormPost"
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Item'    | 'Item key' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase basis'                            | 'Sales order'                               | 'Internal supply request' | 'Cancel' | 'Cancel reason' | 'Detail' | 'Is variable item key' | 'Is variable store' |
+			| '1' | ''             | 'Service' | 'Rent'     | '1,000'    | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '106,78'     | '593,22'     | '700,00'       | ''      | ''              | ''             | ''                   | 'Sales order 525 dated 02.05.2025 13:24:51' | 'Sales order 525 dated 02.05.2025 13:24:51' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+		And I delete "$$NumberPurchaseOrder029240$$" variable
+		And I delete "$$PurchaseOrder029240$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029240$$"
+		And I save the window as "$$PurchaseOrder029240$$"
+	* Create PI
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I click the button named "FormOk"
+		And I move to the tab named "GroupOther"
+		And I move to the tab named "GroupMore"
+		And I input "10.05.2025 10:32:45" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"	
+		And I click the button named "FormOK"
+		And I click the button named "FormPost"
+		And "ItemList" table became equal
+			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Project' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'          | 'Sales order'                               | 'Internal supply request' | 'Use goods receipt' | 'Detail' | 'Additional analytic' | 'Other period expense type' |
+			| '1' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '106,78'     | '593,22'     | '700,00'       | ''      | ''        | ''              | ''             | ''                   | '$$PurchaseOrder029240$$' | 'Sales order 525 dated 02.05.2025 13:24:51' | ''                        | 'No'                | ''       | ''                    | ''                          |
+		And I delete "$$NumberPurchaseInvoice029240$$" variable
+		And I delete "$$PurchaseInvoice029240$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029240$$"
+		And I save the window as "$$PurchaseInvoice029240$$"
+		And I click the button named "FormPostAndClose"
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '525'       |
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I click the button named "FormOk"
+		And I move to the tab named "GroupOther"
+		And I input "12.05.2025 15:10:05" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I remove checkbox "Do you want to replace filled price types with price type Basic Price Types?"	
+		And I click the button named "FormOK"
+		And I click the button named "FormPost"
+		And "ItemList" table became equal
+			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store' | 'Project' | 'Delivery date' | 'Sales order'                               | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+			| '1' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '1 500,00' | '18%' | ''              | 'No'                 | '228,81'     | '1 271,19'   | '1 500,00'     | 'No'             | 'No'                        | ''      | ''        | ''              | 'Sales order 525 dated 02.05.2025 13:24:51' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			| '2' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '1 000,00' | '18%' | ''              | 'No'                 | '152,54'     | '847,46'     | '1 000,00'     | 'No'             | 'No'                        | ''      | ''        | ''              | 'Sales order 525 dated 02.05.2025 13:24:51' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+		And I delete "$$NumberSalesInvoice029240$$" variable
+		And I delete "$$SalesInvoice029240$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029240$$"
+		And I save the window as "$$SalesInvoice029240$$"
+		And I click the button named "FormPostAndClose"	
+	* Check
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '525'       |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And "DocumentsTree" table contains lines
+			| 'Presentation'                              | 'Amount'   |
+			| 'Sales order 525 dated 02.05.2025 13:24:51' | '2 500,00' |
+			| '$$PurchaseOrder029240$$'                   | '700,00'   |
+			| '$$PurchaseInvoice029240$$'                 | '700,00'   |
+			| '$$SalesInvoice029240$$'                    | '2 500,00' |
+	And I close all client application windows		
+
+// Scenario: _029241 create PO - SI - PI (procurement method for Service-purchase/no)
+// 	And I close all client application windows
+// 	* Select SO
+// 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+// 		And I go to line in "List" table
+// 			| 'Number'    |
+// 			| '527'       |	
+// 	* Create PO		
+// 		And I click the button named "FormDocumentPurchaseOrderGenerate"
+// 		Then "Add linked document rows" window is opened
+// 		And I expand current line in "BasisesTree" table
+// 		And I click the button named "FormOk"
+// 		And I select from the drop-down list named "Partner" by "Ferron BP" string
+// 		And I select from the drop-down list named "Agreement" by "Vendor Ferron, TRY" string
+// 		And I move to the next attribute
+// 		Then "Update item list info" window is opened
+// 		And I click the button named "FormOK"
+// 		And "ItemList" table became equal
+// 			| '#' | 'Partner item' | 'Item'    | 'Item key' | 'Quantity' | 'Price type'        | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase basis'                            | 'Sales order'                               | 'Internal supply request' | 'Cancel' | 'Cancel reason' | 'Detail' | 'Is variable item key' | 'Is variable store' |
+// 			| '1' | ''             | 'Service' | 'Rent'     | '1,000'    | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | ''      | ''              | ''             | ''                   | 'Sales order 527 dated 03.05.2025 15:06:23' | 'Sales order 527 dated 03.05.2025 15:06:23' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+// 		And I activate field named "ItemListPrice" in "ItemList" table
+// 		And I select current line in "ItemList" table
+// 		And I input "700,00" text in the field named "ItemListPrice" of "ItemList" table
+// 		And I finish line editing in "ItemList" table
+// 		And I move to the tab named "GroupOther"
+// 		And I input "03.05.2025 16:12:23" text in the field named "Date"
+// 		And I move to the next attribute
+// 		Then "Update item list info" window is opened
+// 		And I change checkbox named "Prices"
+// 		And I change checkbox named "PriceTypes"
+// 		And I click the button named "FormOK"
+// 		And I select "Approved" exact value from the drop-down list named "Status"
+// 		And I click the button named "FormPost"
+// 		And "ItemList" table became equal
+// 			| '#' | 'Partner item' | 'Item'    | 'Item key' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase basis'                            | 'Sales order'                               | 'Internal supply request' | 'Cancel' | 'Cancel reason' | 'Detail' | 'Is variable item key' | 'Is variable store' |
+// 			| '1' | ''             | 'Service' | 'Rent'     | '1,000'    | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '106,78'     | '593,22'     | '700,00'       | ''      | ''              | ''             | ''                   | 'Sales order 527 dated 03.05.2025 15:06:23' | 'Sales order 527 dated 03.05.2025 15:06:23' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+// 		And I delete "$$NumberPurchaseOrder029241$$" variable
+// 		And I delete "$$PurchaseOrder029241$$" variable
+// 		And I save the value of "Number" field as "$$NumberPurchaseOrder029241$$"
+// 		And I save the window as "$$PurchaseOrder029241$$"
+// 		And I click the button named "FormPostAndClose"
+// 	* Create SI
+// 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+// 		And I go to line in "List" table
+// 			| 'Number'    |
+// 			| '527'       |
+// 		And I click the button named "FormDocumentSalesInvoiceGenerate"
+// 		Then "Add linked document rows" window is opened
+// 		And I click the button named "FormOk"
+// 		And I move to the tab named "GroupOther"
+// 		And I input "11.05.2025 14:40:02" text in the field named "Date"
+// 		And I move to the next attribute
+// 		Then "Update item list info" window is opened
+// 		And I change checkbox named "Prices"
+// 		And I change checkbox named "PriceTypes"
+// 		And I click the button named "FormOK"
+// 		And I click the button named "FormPost"
+// 		And "ItemList" table became equal
+// 			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store' | 'Project' | 'Delivery date' | 'Sales order'                               | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+// 			| '1' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '1 500,00' | '18%' | ''              | 'No'                 | '228,81'     | '1 271,19'   | '1 500,00'     | 'No'             | 'No'                        | ''      | ''        | ''              | 'Sales order 525 dated 02.05.2025 13:24:51' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+// 			| '2' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '1 000,00' | '18%' | ''              | 'No'                 | '152,54'     | '847,46'     | '1 000,00'     | 'No'             | 'No'                        | ''      | ''        | ''              | 'Sales order 525 dated 02.05.2025 13:24:51' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+// 		And I delete "$$NumberSalesInvoice029241$$" variable
+// 		And I delete "$$SalesInvoice029241$$" variable
+// 		And I save the value of "Number" field as "$$NumberSalesInvoice029241$$"
+// 		And I save the window as "$$SalesInvoice029241$$"
+// 		And I click the button named "FormPostAndClose"
+// 	* Create PI
+// 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+// 		And I go to line in "List" table
+// 			| 'Number'    |
+// 			| '527'       |
+// 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+// 		Then "Add linked document rows" window is opened
+// 		And I click the button named "FormOk"
+// 		And I move to the tab named "GroupOther"
+// 		And I move to the tab named "GroupMore"
+// 		And I input "08.05.2025 11:05:45" text in the field named "Date"
+// 		And I move to the next attribute
+// 		Then "Update item list info" window is opened
+// 		And I change checkbox named "PriceTypes"
+// 		And I change checkbox named "Prices"
+// 		And I click the button named "FormOK"
+// 		And I click the button named "FormPost"
+// 		And "ItemList" table became equal
+// 			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Project' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'          | 'Sales order'                               | 'Internal supply request' | 'Use goods receipt' | 'Detail' | 'Additional analytic' | 'Other period expense type' |
+// 			| '1' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '106,78'     | '593,22'     | '700,00'       | ''      | ''        | ''              | ''             | ''                   | '$$PurchaseOrder029241$$' | 'Sales order 527 dated 03.05.2025 15:06:23' | ''                        | 'No'                | ''       | ''                    | ''                          |
+// 		And I delete "$$NumberPurchaseInvoice029241$$" variable
+// 		And I delete "$$PurchaseInvoice029241$$" variable
+// 		And I save the value of "Number" field as "$$NumberPurchaseInvoice029241$$"
+// 		And I save the window as "$$PurchaseInvoice029241$$"
+// 		And I click the button named "FormPostAndClose"
+// 	* Check
+// 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+// 		And I go to line in "List" table
+// 			| 'Number'    |
+// 			| '527'       |
+// 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+// 		And "DocumentsTree" table contains lines
+// 			| 'Presentation'                              | 'Amount'   |
+// 			| 'Sales order 527 dated 03.05.2025 15:06:23' | '2 500,00' |
+// 			| '$$PurchaseOrder029241$$'                   | '700,00'   |
+// 			| '$$PurchaseInvoice029241$$'                 | '700,00'   |
+// 			| '$$SalesInvoice029241$$'                    | '2 500,00' |
+// 	And I close all client application windows		
 	
-		
-				
-

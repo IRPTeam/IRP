@@ -17,6 +17,10 @@ Procedure ChangeVsible(Form, Visible) Export
 	_arrayOfFormItems.Add("PaymentListTotalNetAmount");
 	_arrayOfFormItems.Add("PaymentListVATRate");
 	
+	_arrayOfFormItems.Add("PaymentListTaxAmountNoSplits");
+	_arrayOfFormItems.Add("PaymentListNetAmountNoSplits");
+	_arrayOfFormItems.Add("PaymentListVATRateNoSplits");
+	
 	_arrayOfFormItems.Add("TransactionsVatRate");
 	_arrayOfFormItems.Add("TransactionsNetAmount");
 	_arrayOfFormItems.Add("TransactionsTaxAmount");
@@ -44,6 +48,11 @@ Procedure LoadChoiceList(Form, ChoiceList) Export
 	LoadChoiceList_VatRate(Form, ChoiceList, "ItemListVATRate");
 	LoadChoiceList_VatRate(Form, ChoiceList, "PaymentListVATRate");
 	LoadChoiceList_VatRate(Form, ChoiceList, "TransactionsVATRate");
+	LoadChoiceList_VatRate(Form, ChoiceList, "PaymentListVATRateNoSplits");
+EndProcedure
+
+Procedure LoadChoiceList_WithholdingTax(Form, ChoiceList) Export
+	LoadChoiceList_VatRate(Form, ChoiceList, "ItemListWithholdingTaxRate");
 EndProcedure
 
 Procedure LoadChoiceList_VatRate(Form, ChoiceList, ItemName)

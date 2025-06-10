@@ -84,6 +84,7 @@
 // * EqError_003 - String - 
 // * EqError_004 - String - 
 // * EqError_005 - String - 
+// * EqFP_ShiftIsExpired - String - 
 // * EqFP_ShiftAlreadyOpened - String - 
 // * EqFP_ShiftIsNotOpened - String - 
 // * EqFP_ShiftAlreadyClosed - String - 
@@ -310,7 +311,9 @@
 // * Error_PartnerBalanceCheckfailed - String - 
 // * Error_145 - String - 
 // * Error_146 - String - 
-// * Error_147 - String - 
+// * Error_147 - String -
+// * Error_148 - String - 
+// * Error_181 - String -
 // * Error_FillTotalAmount - String - 
 // * MF_Error_001 - String - 
 // * MF_Error_002 - String - 
@@ -711,6 +714,10 @@ Function Strings(Lang) Export
 
 	Strings = New Structure();
 
+#Region SimpleBatch
+	Strings.Insert("SB_NotEnoughBatch", NStr("en = 'Not enough batch %1: On stock: %2; In document: %3.'", Lang));
+#EndRegion
+
 #Region Access
 	Strings.Insert("ACS_UnknownValueType", NStr("en = 'Can not create Access Key. Unknows value type.'", Lang));
 #EndRegion
@@ -825,6 +832,7 @@ Function Strings(Lang) Export
 	Strings.Insert("EqError_004", NStr("en = 'Before install driver - it has to be loaded.'", Lang));
 	Strings.Insert("EqError_005", NStr("en = 'The equipment driver %1 has incorrect AddIn ID %2.'", Lang));
 	
+	Strings.Insert("EqFP_ShiftIsExpired", NStr("en = 'Shift has already expired.'", Lang));
 	Strings.Insert("EqFP_ShiftAlreadyOpened", NStr("en = 'Shift already opened.'", Lang));
 	Strings.Insert("EqFP_ShiftIsNotOpened", NStr("en = 'Shift is not opened.'", Lang));
 	Strings.Insert("EqFP_ShiftAlreadyClosed", NStr("en = 'Shift already closed.'", Lang));
@@ -1086,7 +1094,7 @@ Function Strings(Lang) Export
 		"en = 'Cannot clear the ""%2"" check box. Documents ""%3"" from store %1 were already created.'", Lang));
 	
 	// %1 - sales order
-	Strings.Insert("Error_054", NStr("en = 'Cannot continue. The ""%1""document has an incorrect status.'", Lang));
+	Strings.Insert("Error_054", NStr("en = 'Cannot continue. The ""%1"" document has an incorrect status.'", Lang));
 
 	Strings.Insert("Error_055", NStr("en = 'There are no lines with a correct procurement method.'", Lang));
 
@@ -1375,6 +1383,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_175", NStr("en = 'Recorder URL is Empty'", Lang));
 	Strings.Insert("Error_176", NStr("en = 'Fill Integration Settings in ""Ledger Type""'", Lang));
 	Strings.Insert("Error_177", NStr("en = 'Lack of advances [%1] [%2] [%3]'", Lang));
+	Strings.Insert("Error_178", NStr("en = 'Order already closed'", Lang));
+	Strings.Insert("Error_179", NStr("en = 'Number [%1] is already used for [%2]'", Lang));
+	Strings.Insert("Error_180", NStr("en = 'Only system record allowed'", Lang));
+	Strings.Insert("Error_181", NStr("en = 'Attribute already on form. Remove duplicate from set: [%1]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -1600,6 +1612,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Exc_010", NStr("en = 'Unknown metadata type: %1'", Lang));
 	Strings.Insert("Exc_011", NStr("en = 'Unknown command name: %1'", Lang));
 	Strings.Insert("Exc_012", NStr("en = 'Save error! Changing ""%1"" is available only for user ""%2""'", Lang));
+	Strings.Insert("Exc_013", NStr("en = 'Related document exists: %1'", Lang));
+	Strings.Insert("Exc_014", NStr("en = 'Wrong range'", Lang));
+	Strings.Insert("Exc_015", NStr("en = 'Overlapping ranges'", Lang));
+	Strings.Insert("Exc_016", NStr("en = 'Unsupported data format'", Lang));
 #EndRegion
 
 #Region Saas
@@ -2027,11 +2043,17 @@ Strings.Insert("BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand",
 Strings.Insert("BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand",
 	NStr("en = 'BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)'", Lang));
 
+Strings.Insert("BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues",
+	NStr("en = 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'", Lang));
+
 Strings.Insert("CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder",
 	NStr("en = 'CashPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)'", Lang));
 
 Strings.Insert("CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand",
 	NStr("en = 'CashPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)'", Lang));
+
+Strings.Insert("CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues",
+	NStr("en = 'CashPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
 	NStr("en = 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)'", Lang));
@@ -2155,8 +2177,27 @@ Strings.Insert("AdditionalCostAllocation_DR_R4050B_StockInventory_CR_R5022T_Expe
 
 Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory",
 	NStr("en = 'AdditionalRevenueAllocation DR (R5021T_Revenues) CR (R4050B_StockInventory)'", Lang));
+
+Strings.Insert("WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
+	NStr("en = 'WithholdingTaxInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
+
+Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
+	NStr("en = 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'", Lang));
+
+Strings.Insert("WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
+	NStr("en = 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'", Lang));
+
+Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax",
+	NStr("en = 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R3040B_WithholdingTax)'", Lang));
+
+Strings.Insert("FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues",
+	NStr("en = 'FixedAssetRevaluation DR (R8510B BookValueOfFixedAsset) CR (R5021T Revenues)'", Lang));
+
+Strings.Insert("FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset",
+	NStr("en = 'FixedAssetRevaluation DR (R5022T Expenses) CR (R8510B BookValueOfFixedAsset)'", Lang));
+
 	
-Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External accounting operation exchange report'", Lang));	
+Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External accounting operation exchange report'", Lang));
 
 #EndRegion
 
@@ -2248,7 +2289,9 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	// %1 - Object presentation
 	// %2 - Document number
 	// %3 - Document date
-	Strings.Insert("DocPresentation", NStr("en = '%1 %2 dated %3'", Lang));	
+	Strings.Insert("DocPresentation", NStr("en = '%1 %2 dated %3'", Lang));
+	
+	Strings.Insert("DatePresentation", NStr("en = 'dated'", Lang));	
 #EndRegion
 
 #Region PeriodClosing
@@ -2291,5 +2334,30 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
     Strings.Insert("Issue_1", NStr("en = 'Issues were already created for all locations.'", Lang));
 	Strings.Insert("Issue_2", NStr("en = 'Create issue for locations: %1?'", Lang));
 #EndRegion
+
+#Region SytemAttributes
+	Strings.Insert("SystemAttribute_Store", NStr("en = 'Store'", Lang));
+	Strings.Insert("SystemAttribute_Partner", NStr("en = 'Partner'", Lang));
+	Strings.Insert("SystemAttribute_PartnerTerm", NStr("en = 'Partner term'", Lang));
+	Strings.Insert("SystemAttribute_LegalName", NStr("en = 'Legal name'", Lang));
+	Strings.Insert("SystemAttribute_LegalNameContract", NStr("en = 'Legal name contract'", Lang));
+#EndRegion
+
+#Region Updates
+	Strings.Insert("Update_001", NStr("en = 'Update Catalog.ItemType  '", Lang));
+	Strings.Insert("UpdateDesc_001", NStr("en = 'Covert attribute 
+		|DELETE_StockBalanceDetail to StockBalanceDetailSerialLotNumber'", Lang));		
+	
+	Strings.Insert("Update_002", NStr("en = 'Update system attributes'", Lang));
+	Strings.Insert("UpdateDesc_002", NStr("en = 'Updating predefined system attribute names'", Lang));
+	
+	Strings.Insert("Update_003", NStr("en = 'Update system attributes sets'", Lang));
+	Strings.Insert("UpdateDesc_003", NStr("en = 'Updating the predefined composition of system attribute sets'", Lang));
+	
+	Strings.Insert("Update_004", NStr("en = 'Update system attributes values'", Lang));
+	Strings.Insert("UpdateDesc_004", NStr("en = 'Update information register System Attributes using all old documents'", Lang));
+	
+#EndRegion
+
 	Return Strings;
 EndFunction

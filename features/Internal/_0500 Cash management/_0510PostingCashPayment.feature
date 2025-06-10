@@ -105,6 +105,10 @@ And I execute 1C:Enterprise script at server
 	| "Documents.PurchaseOrder.FindByNumber(235).GetObject().Write(DocumentWriteMode.Posting);"    |
 And I execute 1C:Enterprise script at server
 	| "Documents.PurchaseOrder.FindByNumber(236).GetObject().Write(DocumentWriteMode.Posting);"    |
+When create document WithholdingTaxInvoice objects (Cash payment)
+And I execute 1C:Enterprise script at server
+	| "Documents.WithholdingTaxInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
+	| "Documents.WithholdingTaxInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 
 Scenario: _0510011 check preparation
@@ -124,7 +128,7 @@ Scenario: _051001 create Cash payment based on Purchase invoice
 	And "PaymentList" table contains lines
 		| 'Partner'     | 'Payee'               | 'Partner term'         | 'Total amount'   | 'Basis document'               |
 		| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '137 000,00'     | '$$PurchaseInvoice018001$$'    |
-	And in the table "PaymentList" I click "Edit currencies" button
+	And I click the button named "EditCurrencies"
 	And "CurrenciesTable" table became equal
 		| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'       |
 		| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '23 454,40'    |
@@ -143,7 +147,7 @@ Scenario: _051001 create Cash payment based on Purchase invoice
 	And "PaymentList" table contains lines
 		| 'Partner'     | 'Payee'               | 'Partner term'         | 'Total amount'   | 'Basis document'               |
 		| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '137 000,00'     | '$$PurchaseInvoice018001$$'    |
-	And in the table "PaymentList" I click "Edit currencies" button
+	And I click the button named "EditCurrencies"
 	And "CurrenciesTable" table became equal
 		| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'       |
 		| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '23 454,40'    |
@@ -179,7 +183,7 @@ And I close all client application windows
 	And I select from the drop-down list named "Company" by "Main Company" string
 	And I select from "Cash account" drop-down list by "Cash desk №2" string
 	And I select from "Transaction type" drop-down list by "Payment from customer" string
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I select current line in "PaymentList" table
 	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
 	And I select "Company Ferron BP" from "Payee" drop-down list by string in "PaymentList" table
@@ -198,7 +202,7 @@ And I close all client application windows
 		| 'Partner'   | 'Partner term'       | 'Total amount' | 'Payee'             | 'Basis document'            |
 		| 'Ferron BP' | 'Vendor Ferron, TRY' | '5 000,00'     | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' |
 // * Add one more line with the same invoice and check amount
-// 	And in the table "PaymentList" I click the button named "PaymentListAdd"
+// 	And I click the button named "PaymentListAdd"
 // 	And I select current line in "PaymentList" table
 // 	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
 // 	And I select "Company Ferron BP" from "Payee" drop-down list by string in "PaymentList" table
@@ -237,7 +241,7 @@ Scenario: _0510011 create Cash payment (independently)
 			| Code    | Description      |
 			| TRY     | Turkish lira     |
 		And I click "Select" button
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	* Filling in a partner in a tabular part
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -312,7 +316,7 @@ Scenario: _0510011 create Cash payment (independently)
 			| Code    | Description         |
 			| USD     | American dollar     |
 		And I click "Select" button
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	* Filling in a partner in a tabular part
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -378,7 +382,7 @@ Scenario: _0510011 create Cash payment (independently)
 			| Code    | Description     |
 			| EUR     | Euro            |
 		And I click "Select" button
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	* Filling in a partner in a tabular part
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -435,7 +439,7 @@ Scenario: _0510012 check form for select basis document
 			| Description      |
 			| Cash desk №1     |
 		And I select current line in "List" table
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	* Filling in a partner in a tabular part
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -469,7 +473,7 @@ Scenario: _0510012 check form for select basis document
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -566,7 +570,7 @@ And I click the button named "FormCreate"
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "TransactionType" became equal to "Return to customer"
 * Filling in partner and legal name
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I click choice button of "Partner" attribute in "PaymentList" table
 	And I go to line in "List" table
 		| Description    |
@@ -639,7 +643,7 @@ And I select "Payment to the vendor" exact value from "Transaction type" drop-do
 	And form attribute named "Currency" is available
 	And form attribute named "Date" is available
 * And I check the display of the tabular part
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I click choice button of "Partner" attribute in "PaymentList" table
 	And I go to line in "List" table
 		| Description    |
@@ -664,7 +668,7 @@ And I select "Currency exchange" exact value from "Transaction type" drop-down l
 	And form attribute named "Currency" is available
 	And form attribute named "Date" is available
 * And I check the display of the tabular part
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I click choice button of "Partner" attribute in "PaymentList" table
 	And I go to line in "List" table
 		| Description     |
@@ -687,7 +691,7 @@ And I select "Cash transfer order" exact value from "Transaction type" drop-down
 	And form attribute named "Currency" is available
 	And form attribute named "Date" is available
 * And I check the display of the tabular part
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I input "100,00" text in "Total amount" field of "PaymentList" table
 	And I finish line editing in "PaymentList" table
 	If "PaymentList" table does not contain column named "Payee" Then
@@ -719,7 +723,7 @@ And I close all client application windows
 	And I select from the drop-down list named "Currency" by "Turkish lira" string
 * Check filter by Branch
 	* Without branch
-		And in the table "PaymentList" I click "Payment by documents" button
+		And I click "Payment by documents" button
 		And "Documents" table became equal
 			| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment' |
 			| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''        |
@@ -731,7 +735,7 @@ And I close all client application windows
 		And I move to "Other" tab
 		And I select from the drop-down list named "Branch" by "Front office" string
 		And I move to "Payments" tab
-		And in the table "PaymentList" I click "Payment by documents" button
+		And I click "Payment by documents" button
 		And "Documents" table became equal
 			| "Check" | "Document"                                       | "Partner" | "Partner term"                | "Legal name"    | "Order"                                        | "Amount" | "Payment" | "Legal name contract" | "Project" |
 			| "No"    | ""                                               | "DFC"     | "DFC Vendor by Partner terms" | "DFC"           | ""                                             | "670,00" | ""        | ""                    | ""        |
@@ -766,7 +770,7 @@ And I close all client application windows
 			| '2' | 'Maxim'   | 'Company Maxim' | 'Partner term Maxim' | ''                    | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | ''        | ''                                             | '100,00'       | ''                        | ''                 | ''                           |
 			| '3' | 'Maxim'   | 'Company Aldis' | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 118 dated 04.09.2023 13:46:08' | '900,00'       | ''                        | ''                 | ''                           |
 			| '4' | 'Maxim'   | 'Company Aldis' | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 119 dated 04.09.2023 13:50:07' | '900,00'       | ''                        | ''                 | ''                           |
-		And in the table "PaymentList" I click "Payment by documents" button
+		And I click "Payment by documents" button
 		And "Documents" table became equal
 			| "Check" | "Document" | "Partner" | "Partner term"                | "Legal name" | "Order" | "Amount" | "Payment" | "Legal name contract" | "Project" |
 			| "No"    | ""         | "DFC"     | "DFC Vendor by Partner terms" | "DFC"        | ""      | "670,00" | ""        | ""                    | ""        |		
@@ -775,7 +779,7 @@ And I close all client application windows
 		And I move to "Other" tab
 		And I input "" text in the field named "Branch"		
 		And I move to "Payments" tab
-		And in the table "PaymentList" I click "Payment by documents" button
+		And I click "Payment by documents" button
 	* Select lines and check allocation	
 		And I go to line in "Documents" table
 			| 'Amount'     | 'Document'                  |
@@ -856,7 +860,7 @@ And I close all client application windows
 	And I select from the drop-down list named "Company" by "Main Company" string
 	And I select from the drop-down list named "CashAccount" by "Cash desk №4" string
 * Filling payment list
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I select current line in "PaymentList" table
 	And I input "Tax authority" text in "Partner" field of "PaymentList" table
 	And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -864,6 +868,7 @@ And I close all client application windows
 	And I input "Movement type 1" text in "Financial movement type" field of "PaymentList" table
 	And I activate "Cash flow center" field in "PaymentList" table
 	And I select "Distribution department" from "Cash flow center" drop-down list by string in "PaymentList" table
+	And I select "Income tax" from "Partner term" drop-down list by string in "PaymentList" table
 	And I finish line editing in "PaymentList" table
 	And I click the button named "FormPost"
 * Check
@@ -872,7 +877,7 @@ And I close all client application windows
 	Then the form attribute named "Currency" became equal to "TRY"
 	And "PaymentList" table became equal
 		| '#' | 'Partner'       | 'Payee'         | 'Partner term' | 'Legal name contract' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        |
-		| '1' | 'Tax authority' | 'Tax authority' | 'Tax'          | ''                    | '100,00'       | 'Movement type 1'         | 'Distribution department' |		
+		| '1' | 'Tax authority' | 'Tax authority' | 'Income tax'   | ''                    | '100,00'       | 'Movement type 1'         | 'Distribution department' |		
 	And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
 	Then the form attribute named "TransactionType" became equal to "Other partner"
 	And I save the value of "Number" field as "NumberCashPayment053023"
@@ -992,3 +997,139 @@ And I close all client application windows
 // 			| "1" | "Ferron BP" | "Company Ferron BP" | "Basic Partner terms, TRY" | ""                    | "Purchase invoice 235 dated 08.08.2024 11:32:17" | ""        | ""      | "4 502,00"     | ""                        | ""                 | ""                           |
 // 	And I close all client application windows				
 
+Scenario: _051027 Prevent negative refund transactions in Cash payment
+	And I close all client application windows
+	* Open CP
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
+	* Filling main details
+		And I select "Return to customer" exact value from "Transaction type" drop-down list
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "CashAccount" by "Cash desk №3" string
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
+	* Filling payment list
+		And I click the button named "PaymentListAdd"
+		And I select current line in "PaymentList" table
+		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
+		And I activate "Partner term" field in "PaymentList" table
+		And I input "Basic Partner terms, TRY" text in "Partner term" field of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "1 000 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+	* Check
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [1 000 000]'|
+		And I close all client application windows
+
+Scenario: _051028 check one Cash payment in WithholdingTaxInvoice
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I select current line in "List" table
+	* create Cash payment
+		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
+		And I click Choice button of the field named "CashAccount"
+		And I go to line in "List" table
+			| "Description"  |
+			| "Cash desk №4" |
+		And I click the button named "FormChoose"
+		And I click choice button of the attribute named "PaymentListFinancialMovementType" in "PaymentList" table
+		And I go to line in "List" table
+			| "Description"     |
+			| "Movement type 1" |
+		And I click the button named "FormChoose"
+		And I activate field named "PaymentListCashFlowCenter" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListCashFlowCenter" in "PaymentList" table
+		Then "Business units" window is opened
+		And I go to line in "List" table
+			| "Description"  |
+			| "Front office" |
+		And I activate field named "Description" in "List" table
+		And I click the button named "FormChoose"
+		And I finish line editing in "PaymentList" table
+		And I move to the tab named "GroupOther"
+		And I input "05.05.2025 13:44:00" text in the field named "Date"
+		And I click the button named "FormWrite"
+	* Check
+		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "Date" became equal to "05.05.2025 13:44:00"
+		And "PaymentList" table became equal
+			| '#' | 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                      | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Withholding tax invoice 1 dated 01.05.2025 14:25:00' | ''        | ''      | '500,00'       | 'Movement type 1'         | 'Front office'     | ''                           |
+		
+		Then the form attribute named "PaymentListTotalNetAmount" became equal to "500"
+		Then the form attribute named "PaymentListTotalTaxAmount" became equal to "0"
+		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "500,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows		
+
+
+Scenario: _051028 check two Cash payments in WithholdingTaxInvoice
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |
+		And I select current line in "List" table
+	* create first Cash payment
+		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
+		And I select from the drop-down list named "CashAccount" by "Cash desk №4" string
+		And I input "150,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I select "Movement type 3" by string from the drop-down list named "PaymentListFinancialMovementType" in "PaymentList" table
+		And I select "Distribution department" by string from the drop-down list named "PaymentListCashFlowCenter" in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I move to the tab named "GroupOther"
+		And I input "05.05.2025 13:57:00" text in the field named "Date"
+		And I click the button named "FormWrite"
+	* check first Cash payment
+		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "Date" became equal to "05.05.2025 13:57:00"
+		And "PaymentList" table became equal
+			| '#' | 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                      | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        | 'Planning transaction basis' |
+			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Withholding tax invoice 2 dated 03.05.2025 12:25:23' | ''        | ''      | '150,00'       | 'Movement type 3'         | 'Distribution department' | ''                           |
+		
+		Then the form attribute named "PaymentListTotalNetAmount" became equal to "150"
+		Then the form attribute named "PaymentListTotalTaxAmount" became equal to "0"
+		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "150,00"		
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"			
+		And I click the button named "FormPostAndClose"
+	* create second Cash Payment
+		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
+		And I select from the drop-down list named "CashAccount" by "Cash desk №4" string
+		And the field named "PaymentListTotalAmount" in "PaymentList" table is equal to "150,00"
+		And I select "Movement type 3" by string from the drop-down list named "PaymentListFinancialMovementType" in "PaymentList" table
+		And I select "Distribution department" by string from the drop-down list named "PaymentListCashFlowCenter" in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I move to the tab named "GroupOther"
+		And I input "06.05.2025 14:20:00" text in the field named "Date"
+		And I click the button named "FormWrite"
+	* check second Cash Payment
+		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "Date" became equal to "06.05.2025 14:20:00"
+		And "PaymentList" table became equal
+			| '#' | 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                      | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        | 'Planning transaction basis' |
+			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Withholding tax invoice 2 dated 03.05.2025 12:25:23' | ''        | ''      | '150,00'       | 'Movement type 3'         | 'Distribution department' | ''                           |
+		
+		Then the form attribute named "PaymentListTotalNetAmount" became equal to "150"
+		Then the form attribute named "PaymentListTotalTaxAmount" became equal to "0"
+		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "150,00"
+		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows

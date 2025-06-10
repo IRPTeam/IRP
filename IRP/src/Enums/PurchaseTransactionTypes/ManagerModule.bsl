@@ -12,6 +12,10 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	ChoiceData = New ValueList();
 	ChoiceData.Add(Purchase);
 	ChoiceData.Add(ReceiptFromConsignor);
+	
+	If GetFunctionalOption("UseSimpleBatch") Then
+		ChoiceData.Add(PurchaisePreliminaryStock);
+	EndIf;
 		
 	If IsPurchaseInvoice Then
 		ChoiceData.Add(CurrencyRevaluationCustomer);

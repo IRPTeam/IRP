@@ -25,6 +25,17 @@
 		</right>
 	</object>
 	<object>
+		<name>DataProcessor.AccountantAutomatedWorkplace</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Subsystem.Accounting.Subsystem.LedgerTypes</name>
 		<right>
 			<name>View</name>

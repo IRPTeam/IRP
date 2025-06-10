@@ -100,56 +100,6 @@ EndProcedure
 
 #EndRegion
 
-#Region AGREEMENT
-
-Procedure AgreementOnChange(Object, Form, Item) Export
-	ViewClient_V2.AgreementOnChange(Object, Form, Form.MainTables);
-EndProcedure
-
-Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	AgreementType = PredefinedValue("Enum.AgreementTypes.Other");
-	
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementType, DataCompositionComparisonType.Equal));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
-	
-	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FormParameters.Insert("Partner"                     , Object.Partner);
-	OpenSettings.FormParameters.Insert("IncludeFilterByPartner"      , True);
-	OpenSettings.FormParameters.Insert("IncludePartnerSegments"      , True);
-	OpenSettings.FormParameters.Insert("EndOfUseDate", Object.Date);
-	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate" , True);
-	
-	OpenSettings.FillingData = New Structure();
-	OpenSettings.FillingData.Insert("Partner"   , Object.Partner);
-	OpenSettings.FillingData.Insert("LegalName" , Object.LegalName);
-	OpenSettings.FillingData.Insert("Company"   , Object.Company);
-	OpenSettings.FillingData.Insert("Type"      , AgreementType);
-
-	DocumentsClient.AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-EndProcedure
-
-Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	AgreementType = PredefinedValue("Enum.AgreementTypes.Other");
-	
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementType,ComparisonType.Equal));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"),ComparisonType.NotEqual));
-	AdditionalParameters = New Structure();
-	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate" , True);
-	AdditionalParameters.Insert("IncludeFilterByPartner"      , True);
-	AdditionalParameters.Insert("IncludePartnerSegments"      , True);
-	AdditionalParameters.Insert("EndOfUseDate"                , Object.Date);
-	AdditionalParameters.Insert("Partner"                     , Object.Partner);
-	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
-EndProcedure
-
-#EndRegion
-
 #Region PAYROLL_LISTS
 
 Procedure PayrollListsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
@@ -167,6 +117,66 @@ EndProcedure
 Procedure PayrollListsAfterDeleteRow(Object, Form, Item) Export
 	ViewClient_V2.PayrollListsAfterDeleteRow(Object, Form, Item.Name);
 EndProcedure
+
+#Region SALARY_TAX_LIST
+
+#Region SALARY_TAX_LIST_AGREEMENT
+
+Procedure SalaryTaxListAgreementOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	Return;
+EndProcedure
+
+Procedure SalaryTaxListAgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	CurrentData = Form.Items.SalaryTaxList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue("Enum.AgreementTypes.Other"), DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
+	
+	OpenSettings.FormParameters = New Structure();
+	OpenSettings.FormParameters.Insert("Partner"                     , Object.Partner);
+	OpenSettings.FormParameters.Insert("IncludeFilterByPartner"      , True);
+	OpenSettings.FormParameters.Insert("IncludePartnerSegments"      , True);
+	OpenSettings.FormParameters.Insert("EndOfUseDate"                , Object.Date);
+	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate" , True);
+	
+	OpenSettings.FillingData = New Structure();
+	OpenSettings.FillingData.Insert("Partner"   , Object.Partner);
+	OpenSettings.FillingData.Insert("LegalName" , Object.LegalName);
+	OpenSettings.FillingData.Insert("Company"   , Object.Company);
+	OpenSettings.FillingData.Insert("Type"      , PredefinedValue("Enum.AgreementTypes.Other"));
+
+	DocumentsClient.AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure SalaryTaxListAgreementEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	CurrentData = Form.Items.SalaryTaxList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue("Enum.AgreementTypes.Other"),ComparisonType.Equal));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"),ComparisonType.NotEqual));
+	AdditionalParameters = New Structure();
+	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate" , True);
+	AdditionalParameters.Insert("IncludeFilterByPartner"      , True);
+	AdditionalParameters.Insert("IncludePartnerSegments"      , True);
+	AdditionalParameters.Insert("EndOfUseDate"                , Object.Date);
+	AdditionalParameters.Insert("Partner"                     , Object.Partner);
+	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
 
 #Region ACCRUAL_LIST_COLUMNS
 

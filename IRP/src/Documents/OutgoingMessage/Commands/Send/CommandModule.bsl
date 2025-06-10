@@ -11,6 +11,7 @@
 Procedure CommandProcessing(MessageRef, CommandExecuteParameters)
 	MessagesServer.AddToMessagesQueue(MessageRef, True);
 	Notify("Sended", MessageRef);
+	NotifyChanged(MessageRef);
 EndProcedure
 
 #EndRegion

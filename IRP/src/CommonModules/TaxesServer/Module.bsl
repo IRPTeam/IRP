@@ -28,6 +28,31 @@ Function _GetVatRef() Export
 	Return _vat;
 EndFunction
 
+Function GetWithholdingTaxRef() Export
+	Return ServerReuse.GetWithholdingTaxRef();
+EndFunction
+
+Function _GetWithholdingTaxRef() Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 1
+	|	Taxes.Ref
+	|FROM
+	|	Catalog.Taxes AS Taxes
+	|WHERE
+	|	Taxes.Kind = VALUE(Enum.TaxKind.WithholdingTax)
+	|	AND NOT Taxes.DeletionMark";
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	_vat = Undefined;
+	If QuerySelection.Next() Then
+		_vat = QuerySelection.Ref;
+	EndIf;
+	Return _vat;
+EndFunction
+
+
+
 Function GetVatRateByPriority(Parameters) Export
 	
 	_vat = GetVatRef();
@@ -333,26 +358,7 @@ Function GetDocumentsWithTax() Export
 	For Each Document In Metadata.Documents Do
 		FindTaxInTabularSection(Document, "PaymentList"  , List);
 		FindTaxInTabularSection(Document, "ItemList"     , List);
-		FindTaxInTabularSection(Document, "Transactions" , List);
-		
-//		If Document.TabularSections.Find("PaymentList") <> Undefined Then
-//			For Each _column In Document.TabularSections.PaymentList.Attributes Do
-//				If Upper(_column.Name) = Upper("VatRate") Then
-//					List.Add(Document.Name, Document.Synonym);
-//					Break;
-//				EndIf;
-//			EndDo;					
-//		EndIf;
-//		
-//		If Document.TabularSections.Find("ItemList") <> Undefined Then
-//			For Each _column In Document.TabularSections.ItemList.Attributes Do
-//				If Upper(_column.Name) = Upper("VatRate") Then
-//					List.Add(Document.Name, Document.Synonym);
-//					Break;
-//				EndIf;
-//			EndDo;					
-//		EndIf;
-		
+		FindTaxInTabularSection(Document, "Transactions" , List);		
 	EndDo;
 	Return List;
 EndFunction

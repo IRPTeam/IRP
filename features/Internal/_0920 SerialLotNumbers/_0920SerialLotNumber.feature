@@ -3593,7 +3593,6 @@ Scenario: _092060 check serial lot number settings
 	* Add reg exp
 		And I move to "Serial lot number settings" tab
 		And I set checkbox "Use serial lot number"	
-		And I select "By item key" exact value from "Stock balance detail" drop-down list
 		And in the table "RegExpSerialLotNumbersRules" I click the button named "RegExpSerialLotNumbersRulesAdd"
 		And I input "^\d\d\d\w\/\d$" text in "Reg exp" field of "RegExpSerialLotNumbersRules" table
 		And I activate "Example" field in "RegExpSerialLotNumbersRules" table
@@ -4111,6 +4110,10 @@ Scenario: _092083 check serial lot numbers in the POS
 		And In the command interface I select "Retail" "Point of sale"
 		And I expand current line in "ItemsPickup" table
 	* Add items with serial lot numbers
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
+		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
 			| '(10001) Dress, XS/Blue'    |

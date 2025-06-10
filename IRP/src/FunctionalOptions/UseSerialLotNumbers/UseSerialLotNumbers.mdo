@@ -16,10 +16,11 @@
   <content>AccumulationRegister.R4014B_SerialLotNumber</content>
   <content>Catalog.ItemTypes.Attribute.UseSerialLotNumber</content>
   <content>Catalog.ItemTypes.TabularSection.RegExpSerialLotNumbersRules</content>
-  <content>Catalog.ItemTypes.Attribute.StockBalanceDetail</content>
   <content>DataProcessor.CreateSerialLotNumbers</content>
   <content>InformationRegister.T6060S_BatchCostAllocationInfo.Dimension.SerialLotNumber</content>
   <content>Document.AdditionalRevenueAllocation.TabularSection.AllocationResult.Attribute.SerialLotNumber</content>
   <content>Document.AdditionalCostAllocation.TabularSection.AllocationResult.Attribute.SerialLotNumber</content>
   <content>InformationRegister.T6070S_BatchRevenueAllocationInfo.Dimension.SerialLotNumber</content>
+  <content>Catalog.ItemTypes.Attribute.BatchBalanceDetailSerialLotNumber</content>
+  <content>Catalog.ItemTypes.Attribute.StockBalanceDetailSerialLotNumber</content>
 </mdclass:FunctionalOption>

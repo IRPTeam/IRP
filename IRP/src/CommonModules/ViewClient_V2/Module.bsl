@@ -233,8 +233,15 @@ Procedure OnChainComplete(Parameters) Export
 			TaxesClientServer.LoadChoiceList(Parameters.Form, Parameters.TaxChoiceList);
 		EndIf;
 	EndIf;
+	
 	If Parameters.TaxExemptionReasonVisible <> Undefined Then
 		TaxesClientServer.ChangeTaxExemptionReasonVisible(Parameters.Form, Parameters.TaxExemptionReasonVisible);
+	EndIf;
+
+	If Parameters.WithholdingTaxVisible <> Undefined Then
+		If Parameters.WithholdingTaxVisible = True Then
+			TaxesClientServer.LoadChoiceList_WithholdingTax(Parameters.Form, Parameters.WithholdingTaxChoiceList);
+		EndIf;
 	EndIf;
 	
 	If Parameters.PartnerChoiceList <> Undefined Then
@@ -243,6 +250,7 @@ Procedure OnChainComplete(Parameters) Export
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WithholdingTaxInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
@@ -317,6 +325,7 @@ Procedure OnChainComplete(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentPlaningOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt" Then
 		__tmp_GoodsShipmentReceipt_OnChainComplete(Parameters);
 		Return;
@@ -365,9 +374,6 @@ Function NeedCommitChangesItemListStoreOnUserChange(Parameters)
 				Break;
 			EndDo;
 						
-			If Row.Property("Store") And Not ValueIsFilled(Row.Store) And Not IsService Then
-				Return False; // clear ItemList.Store impossible
-			EndIf;
 		EndDo;
 	EndIf;
 	Return True;
@@ -698,7 +704,7 @@ Procedure __tmp_BankCashPaymentReceipt_OnChainComplete(Parameters)
 	
 	// refill question TransactionType
 	If IsChangedProperty(Parameters, "TransactionType").IsChanged 
-		And Parameters.Object.PaymentList.Count() Then
+		And Parameters.Object.PaymentList.Count() And Not Parameters.Object.DetailsByRow Then
 		NotifyParameters = New Structure("Parameters", Parameters);
 		ShowQueryBox(New NotifyDescription("__tmp_BankCashPaymentReceipt_TransactionTypeOnUserChangeContinue", ThisObject, NotifyParameters), 
 					R().QuestionToUser_014, QuestionDialogMode.OKCancel);
@@ -720,6 +726,9 @@ Procedure __tmp_BankCashPaymentReceipt_CommitChanges(Parameters)
 			For Each RowData In Parameters.ExtractedData.DataAgreementApArPostingDetail Do
 				If RowData.Key = RowPaymentList.Key Then
 					RowPaymentList.ApArPostingDetail = RowData.ApArPostingDetail;
+					If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Form, "PaymentListApArPostingDetailNoSplits") Then
+						Parameters.Form.PaymentListApArPostingDetailNoSplits = RowData.ApArPostingDetail;
+					EndIf;
 					Break;
 				EndIf;
 			EndDo;
@@ -1004,6 +1013,12 @@ EndProcedure
 
 #Region FORM
 
+// On open.
+// 
+// Parameters:
+//  Object - FormDataStructure - Object
+//  Form - ClientApplicationForm - Form
+//  TableNames - String - Table names
 Procedure OnOpen(Object, Form, TableNames) Export
 	UpdateCacheBeforeChange(Object, Form);
 	For Each TableName In StrSplit(TableNames, ",") Do
@@ -1025,8 +1040,12 @@ Procedure OnOpenFormNotify(Parameters) Export
 		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Parameters.Object);
 	EndIf;
 	
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
+		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentPlaningOrders");
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
 	EndIf;
 	
@@ -1048,6 +1067,8 @@ Procedure OnOpenFormNotify(Parameters) Export
 	If Parameters.Form.IsCopyingInteractive Then
 		SetDate(Parameters.Object, Parameters.Form, Parameters.TableName, CommonFunctionsServer.GetCurrentSessionDate());
 	EndIf;
+	
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
 	
 	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
 EndProcedure
@@ -2288,26 +2309,91 @@ Async Function ItemListSplitRow(Object, Form) Export
 	EndIf;
 
 	SerialTable = Object.SerialLotNumbers.FindRows(New Structure("Key", CurrentData.Key));
+		
 	If SerialTable.Count() > 0 Then
 		CurrentDataQuantity = CurrentData.Quantity;
-		For Each Row In SerialTable Do
-			If Row.Quantity <= CurrentDataQuantity Then
-				CurrentDataQuantity = CurrentDataQuantity - Row.Quantity;
-			ElsIf Row.Quantity > CurrentDataQuantity AND CurrentDataQuantity > 0 Then
-				CurrentRowQuantity = Row.Quantity;
-				Row.Quantity = CurrentDataQuantity;
+		For Each SerialTableRow In SerialTable Do
+			If SerialTableRow.Quantity <= CurrentDataQuantity Then
+				CurrentDataQuantity = CurrentDataQuantity - SerialTableRow.Quantity;
+			ElsIf SerialTableRow.Quantity > CurrentDataQuantity And CurrentDataQuantity > 0 Then
+				CurrentRowQuantity = SerialTableRow.Quantity;
+				SerialTableRow.Quantity = CurrentDataQuantity;
 				
 				NewSerial = Object.SerialLotNumbers.Add();
-				FillPropertyValues(NewSerial, Row);
-				NewSerial.Quantity = CurrentRowQuantity - Row.Quantity;
+				FillPropertyValues(NewSerial, SerialTableRow);
+				NewSerial.Quantity = CurrentRowQuantity - SerialTableRow.Quantity;
 				NewSerial.Key = NewRow.Key;
 				CurrentDataQuantity = 0;
+				
+				If Object.Property("SourceOfOrigins") Then
+					SourceOfOriginsTable = 
+						Object.SourceOfOrigins.FindRows(New Structure("Key, SerialLotNumber", CurrentData.Key, SerialTableRow.SerialLotNumber));
+				
+					For Each RowSoO In SourceOfOriginsTable Do
+						RowSoO.Quantity = SerialTableRow.Quantity;
+						
+						NewSoO = Object.SourceOfOrigins.Add();
+						FillPropertyValues(NewSoO, NewSerial);
+						NewSoO.SourceOfOrigin = RowSoO.SourceOfOrigin; 
+					EndDo;
+			
+				EndIf;
+				
 			Else
-				Row.Key = NewRow.Key;
-			EndIf;
+				OldRowKey = SerialTableRow.Key;
+				SerialTableRow.Key = NewRow.Key;
+				If Object.Property("SourceOfOrigins") Then
+					SourceOfOriginsTable = 
+						Object.SourceOfOrigins.FindRows(New Structure("Key, SerialLotNumber", OldRowKey, SerialTableRow.SerialLotNumber));
+				
+					For Each RowSoO In SourceOfOriginsTable Do
+						FillPropertyValues(RowSoO, SerialTableRow);
+					EndDo;
+			
+				EndIf;
+			
+			EndIf;			
 		EndDo;
-	EndIf;
+		
+	Else // SerialTable.Count() = 0	
 	
+		If Object.Property("SourceOfOrigins") Then
+			
+			ArrayOfKeys = New Array();
+			ArrayOfKeys.Add(New Structure("Key, Quantity", CurrentData.Key, CurrentData.Quantity));
+			ArrayOfKeys.Add(New Structure("Key, Quantity", NewRow.Key, NewRow.Quantity));
+			
+			SourceOfOriginsTable =Object.SourceOfOrigins.FindRows(
+				New Structure("Key, SerialLotNumber", CurrentData.Key, PredefinedValue("Catalog.SerialLotNumbers.EmptyRef")));
+			
+			CurrentSourceOfOrigins = Undefined;
+			If SourceOfOriginsTable.Count() > 0 Then
+				CurrentSourceOfOrigins = SourceOfOriginsTable[0].SourceOfOrigin;
+			EndIf;
+				
+			For Each ItemOfKeys In ArrayOfKeys Do
+				SourceOfOriginsTable =Object.SourceOfOrigins.FindRows(
+					New Structure("Key, SerialLotNumber", ItemOfKeys.Key, PredefinedValue("Catalog.SerialLotNumbers.EmptyRef")));
+				
+				If SourceOfOriginsTable.Count() > 0 Then
+					CurrentDataQuantity = ItemOfKeys.Quantity;
+					For Each SourceOfOriginsTableRow In SourceOfOriginsTable Do
+						If SourceOfOriginsTableRow.Quantity <= CurrentDataQuantity Then
+							CurrentDataQuantity = CurrentDataQuantity - SourceOfOriginsTableRow.Quantity;
+						ElsIf SourceOfOriginsTableRow.Quantity > CurrentDataQuantity And CurrentDataQuantity > 0 Then
+							CurrentRowQuantity = SourceOfOriginsTableRow.Quantity;
+							SourceOfOriginsTableRow.Quantity = CurrentDataQuantity;
+							SourceOfOriginsTableRow.SourceOfOrigin = CurrentSourceOfOrigins;
+							CurrentDataQuantity = 0;
+						Else
+							SourceOfOriginsTableRow.Key = NewRow.Key;
+						EndIf;			
+					EndDo;
+				EndIf;
+			EndDo;			
+		EndIf;
+	EndIf;
+			
 	RowIDInfoTable = Object.RowIDInfo.FindRows(New Structure("Key", CurrentData.Key));
 	If RowIDInfoTable.Count() > 0 Then
 		For Each Row In RowIDInfoTable Do
@@ -2328,6 +2414,7 @@ Async Function ItemListSplitRow(Object, Form) Export
 	EndIf;
 	
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
 	RowIDInfoClient.UpdateQuantity(Object, Form);
 	SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Object, Form);	
 	Return NewRow;
@@ -2637,6 +2724,39 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_BRUTTO_AMOUNT
+
+// ItemList.BruttoAmount
+Procedure ItemListBruttoAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListBruttoAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_WITHHOLDING_TAX_AMOUNT
+
+// ItemList.WithholdingTaxAmount
+Procedure ItemListWithholdingTaxAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListWithholdingTaxAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_WITHHOLDING_TAX_RATE
+
+// ItemList.WithholdingTaxRate
+Procedure ItemListWithholdingTaxRateOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListWithholdingTaxRateOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST_STORE
 
 // ItemList.Store
@@ -2706,6 +2826,7 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentPlaningOrder" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailShipmentConfirmation" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt"
@@ -2730,6 +2851,10 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentConfirmations") Then
 		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentConfirmations");
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentPlaningOrders") Then
+		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentPlaningOrders");
 	EndIf;
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "GoodsReceipts") Then
@@ -2897,14 +3022,21 @@ EndFunction
 
 Procedure PaymentListOnAddRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 Procedure PaymentListOnCopyRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 Procedure PaymentListAfterDeleteRow(Object, Form) Export
-	DeleteRows(Object, Form, "PaymentList");
+	DeleteRows(Object, Form, "PaymentList", "PaymentListAfterDeleteRowFormNotify");
+EndProcedure
+
+Procedure PaymentListAfterDeleteRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 Procedure PaymentListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
@@ -2919,24 +3051,52 @@ EndProcedure
 #Region _PAYMENT_LIST_COLUMNS
 
 // PaymentList.Partner
-Procedure PaymentListPartnerOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListPartnerOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListPartnerOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListPartnerNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
 // PaymentList.Agreement
-Procedure PaymentListAgreementOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListAgreementOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListAgreementOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListAgreementNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
+EndProcedure
+
 // PaymentList.LegalName
-Procedure PaymentListLegalNameOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListLegalNameOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListLegalNameOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetPaymentListLegalNameNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
+// PaymentList.FinancialMovementType
+Procedure PaymentListFinancialMovementTypeOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
+	ControllerClientServer_V2.PaymentListFinancialMovementTypeOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetPaymentListFinancialMovementTypeNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
 EndProcedure
 
 // PaymentList.Account
@@ -2947,26 +3107,33 @@ Procedure PaymentListAccountOnChange(Object, Form, CurrentData = Undefined) Expo
 EndProcedure
 
 // PaymentList.BasisDocument
-Procedure PaymentListBasisDocumentOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListBasisDocumentOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListBasisDocumentOnChange(Parameters);
 EndProcedure
 
 // PaymentList.BasisDocument.Set
-Procedure SetPaymentListBasisDocument(Object, Form, Row, Value) Export
+Procedure SetPaymentListBasisDocument(Object, Form, Row, Value, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Row.BasisDocument = Value;
 	Rows = GetRowsByCurrentData(Form, "PaymentList", Row);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
 	Parameters.Insert("IsProgramChange", True);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListBasisDocumentOnChange(Parameters);
 EndProcedure
 
 // PaymentList.PlanningTransactionBasis
-Procedure PaymentListPlanningTransactionBasisOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListPlanningTransactionBasisOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListPlanningTransactionBasisOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetPaymentListPlanningTransactionBasisNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
 EndProcedure
 
 // PaymentList.MoneyTransfer
@@ -3000,23 +3167,34 @@ Procedure PaymentListDontCalculateRowOnChange(Object, Form, CurrentData = Undefi
 EndProcedure
 
 // PaymentList.TaxAmount
-Procedure PaymentListTaxAmountOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListTaxAmountOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListTaxAmountOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListTaxAmountNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
 // PaymentList.NetAmount
-Procedure PaymentListNetAmountOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListNetAmountOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListNetAmountOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListNetAmountNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
 // PaymentList.TotalAmount
-Procedure PaymentListTotalAmountOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListTotalAmountOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListTotalAmountOnChange(Parameters);
 EndProcedure
 
@@ -3029,39 +3207,68 @@ Procedure SetPaymentListTotalAmount(Object, Form, Row, Value) Export
 	ControllerClientServer_V2.PaymentListTotalAmountOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListTotalAmountNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
 // PaymentList.Commission
-Procedure PaymentListCommissionOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListCommissionOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListCommissionOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListCommissionNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
 // PaymentList.PaymentType
-Procedure PaymentListPaymentTypeOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListPaymentTypeOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListPaymentTypeOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListPaymentTypeNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
 // PaymentList.BankTerm
-Procedure PaymentListBankTermOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListBankTermOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListBankTermOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListBankTermNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
 // PaymentList.CommissionPercent
-Procedure PaymentListCommissionPercentOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListCommissionPercentOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListCommissionPercentOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListCommissionPercentNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+EndProcedure
+
 // PaymentList.VatRate
-Procedure PaymentListVatRateOnChange(Object, Form, CurrentData = Undefined) Export
+Procedure PaymentListVatRateOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	Parameters.FormAttributeUpdateDirection = FormAttributeUpdateDirection;
 	ControllerClientServer_V2.PaymentListVatRateOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetPaymentListVatRateNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
 EndProcedure
 
 #EndRegion
@@ -3111,40 +3318,6 @@ EndProcedure
 
 Procedure TransactionsAfterDeleteRow(Object, Form) Export
 	DeleteRows(Object, Form, "Transactions");
-EndProcedure
-
-#EndRegion
-
-#Region _CALCULATIONS
-
-Procedure CalculationsAfterDeleteRow(Object, Form) Export
-	DeleteRows(Object, Form, "Calculations", "CalculationsAfterDeleteRowFormNotify");
-EndProcedure
-
-Function CalculationsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
-	NewRow = AddOrCopyRow(Object, Form, "Calculations", Cancel, Clone, CurrentData,
-		"CalculationsOnAddRowFormNotify", "CalculationsOnCopyRowFormNotify");
-	Form.Items.Calculations.CurrentRow = NewRow.GetID();
-	If Form.Items.Calculations.CurrentRow <> Undefined Then
-		Form.Items.Calculations.ChangeRow();
-	EndIf;
-	Return NewRow;
-EndFunction
-
-Procedure CalculationsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
-	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-Procedure CalculationsOnAddRowFormNotify(Parameters) Export
-	Parameters.Form.Modified = True;
-EndProcedure
-
-Procedure CalculationsOnCopyRowFormNotify(Parameters) Export
-	Parameters.Form.Modified = True;
-EndProcedure
-
-Procedure CalculationsAfterDeleteRowFormNotify(Parameters) Export
-	Parameters.Form.Modified = True;
 EndProcedure
 
 #EndRegion
@@ -3199,6 +3372,66 @@ Procedure TransactionsAmountOnChange(Object, Form, CurrentData = Undefined) Expo
 	Parameters = GetSimpleParameters(Object, Form, "Transactions", Rows);
 	ControllerClientServer_V2.TransactionsAmountOnChange(Parameters);
 EndProcedure
+
+#EndRegion
+
+#Region _CALCULATIONS
+
+Procedure CalculationsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "Calculations", "CalculationsAfterDeleteRowFormNotify");
+EndProcedure
+
+Function CalculationsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "Calculations", Cancel, Clone, CurrentData,
+		"CalculationsOnAddRowFormNotify", "CalculationsOnCopyRowFormNotify");
+	Form.Items.Calculations.CurrentRow = NewRow.GetID();
+	If Form.Items.Calculations.CurrentRow <> Undefined Then
+		Form.Items.Calculations.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure CalculationsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Procedure CalculationsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure CalculationsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure CalculationsAfterDeleteRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+#EndRegion
+
+#Region _CALCULATIONS_COLUMNS
+
+#Region _CALCULATIONS_AMOUNT
+
+// Calculations.Amount
+Procedure CalculationsAmountOnChange(Object, Form, TableName, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+	ControllerClientServer_V2.CalculationsAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region _CALCULATIONS_NEW_AMOUNT_BALANCE
+
+// Calculations.NewAmountBalance
+Procedure CalculationsNewAmountBalanceOnChange(Object, Form, TableName, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+	ControllerClientServer_V2.CalculationsNewAmountBalanceOnChange(Parameters);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 
@@ -3565,12 +3798,14 @@ Procedure OnSetStoreNotify(Parameters) Export
 	EndDo;
 	If StoreArray.Count() > 1 Then
 		Parameters.Form.Items.Store.InputHint = StrConcat(StoreArray, "; ");
+	ElsIf StoreArray.Count() = 1 Then
+		Parameters.Form.Store = StoreArray[0];
 	Else
 		Parameters.Form.Items.Store.InputHint = "";
 	EndIf;
 EndProcedure
 
-Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames) Export
+Procedure OnAddOrLinkUnlinkDocumentRows(Object, Form, TableNames) Export
 	For Each TableName In StrSplit(TableNames, ",") Do
 		FormParameters = GetFormParameters(Form);
 		ServerParameters = GetServerParameters(Object);
@@ -3590,12 +3825,21 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 			SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
 		EndIf;
 		
+		If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
+			SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Parameters.Object);
+			SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Parameters.Object);
+		EndIf;
+				
 		If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
 			ControlCodeStringsClient.UpdateState(Parameters.Object);
 		EndIf;
 					
-		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
+		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
+			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentPlaningOrders");
+		EndIf;
+		
+		If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn" Then
 			DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "ShipmentConfirmations");
 		EndIf;
 		
@@ -3783,6 +4027,25 @@ EndProcedure
 
 #EndRegion
 
+#Region DETAILS_BY_ROW
+
+Procedure DetailsByRowOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.DetailsByRowOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetDetailsByRowNotify(Parameters) Export
+	Parameters.Form.FormSetVisibilityAvailability();
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");	
+EndProcedure
+
+#EndRegion
+
 #Region FIXED_ASSETS
 
 Procedure FixedAssetOnChange(Object, Form, TableNames) Export
@@ -3950,9 +4213,11 @@ EndProcedure
 Procedure OnSetPartnerNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WithholdingTaxInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentPlaningOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReceiptCorrection"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"

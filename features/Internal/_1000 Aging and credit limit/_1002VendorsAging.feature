@@ -204,7 +204,7 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'     |
@@ -283,7 +283,7 @@ Scenario: _1002015 create Bank payment and check Aging register movements
 					| 'Bank account, TRY'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -510,7 +510,7 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 					| 'Bank account, TRY'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -543,7 +543,7 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 					| 'Cash desk №4'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -577,7 +577,7 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 					| 'Bank account, TRY'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -639,7 +639,7 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 					| 'Cash desk №4'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -854,7 +854,7 @@ Scenario: _1200057 create BP based on PO (Prepaid)
 	* Try select PO in BP
 		And I activate "Partner term" field in "PaymentList" table
 		And I delete a line in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table

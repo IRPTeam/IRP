@@ -168,7 +168,7 @@ Async Procedure WriteSettings(Command)
 	
 	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
 	Settings.ServiceCallback = New NotifyDescription("EndWriteSettings", ThisObject, Settings);
-	HardwareClient.SetParameter_End(, , Settings);
+	HardwareClient.SetParameter_End(True, Undefined, Settings);
 EndProcedure
 
 &AtClient

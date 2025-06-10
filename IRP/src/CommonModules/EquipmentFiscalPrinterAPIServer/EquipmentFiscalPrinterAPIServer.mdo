@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a721b3e8-f835-4bba-9677-fbf3cb45c866">
+  <name>EquipmentFiscalPrinterAPIServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Equipment fiscal printer API</value>
+  </synonym>
+  <server>true</server>
+  <externalConnection>true</externalConnection>
+</mdclass:CommonModule>

@@ -170,7 +170,7 @@ Scenario: check the legal name filter in the tabular part of the payment documen
 	# when selecting a partner, only its legal names should be available on the selection list
 	And I click the button named "FormCreate"
 	* Filling in partner info
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
@@ -196,7 +196,7 @@ Scenario: check the legal name filter in the tabular part of the payment receipt
 	And I click the button named "FormCreate"
 	And I select "Payment from customer" exact value from "Transaction type" drop-down list
 	* Filling in partner info
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"		
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
@@ -221,7 +221,7 @@ Scenario: check the partner filter in the tabular part of the payment documents.
 	# when selecting a legal name, only its partners should be available on the partner selection list
 	And I click the button named "FormCreate"
 	* Filling in legal name info
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Payee" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description          |
@@ -247,7 +247,7 @@ Scenario: check the partner filter in the tabular part of the payment receipt do
 	And I click the button named "FormCreate"
 	And I select "Payment from customer" exact value from "Transaction type" drop-down list
 	* Filling in legal name info
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Payer" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description          |
@@ -283,7 +283,7 @@ Scenario: check the filter on the basis documents in the payment documents
 			| Company Kalipso   | Kalipso    |
 		And I close current window
 	* Check the filter by basis documents for Kalipso
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -332,7 +332,7 @@ Scenario: check the filter on the basis documents in the documents of receipt of
 			| Legal name        | Partner    |
 			| Company Kalipso   | Kalipso    |
 	* Check the filter by basis documents for Kalipso
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
@@ -361,7 +361,7 @@ Scenario: check the filter on the basis documents in the documents of receipt of
 Scenario: check the choice of the type of document-basis in the documents of receipt of payment
 	And I click the button named "FormCreate"
 	* Check the choice of the type of document-basis
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		# temporarily
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table

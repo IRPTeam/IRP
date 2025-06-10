@@ -98,6 +98,15 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndIf;
 	
+	If TransactionType = Enums.GoodsReceiptTransactionTypes.PreliminaryStock Then
+		VT = ItemList.Unload();
+		VT.GroupBy("PurchaseInvoice");
+		
+		If VT.Count() > 1 OR VT.Count() = 1 AND NOT VT[0].PurchaseInvoice.IsEmpty() Then
+			Raise "Change transaction type or clear purchase invoice. In preliminary type can not be filled purchase invoice";
+		EndIf;
+	EndIf;
+	
 	If ValueIsFilled(ThisObject.Company) Then
 		Query = New Query;
 		Query.Text =

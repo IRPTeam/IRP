@@ -30,6 +30,16 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
+EndProcedure
+
 #EndRegion
 
 &AtClient

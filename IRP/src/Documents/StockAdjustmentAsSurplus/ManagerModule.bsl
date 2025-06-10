@@ -266,6 +266,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
 
@@ -296,7 +297,8 @@ Function ItemList()
 		|	ItemList.NetAmount AS NetAmount,
 		|	ItemList.TaxAmount AS TaxAmount,
 		|	ItemList.TotalAmount AS TotalAmount,
-		|	ItemList.Key
+		|	ItemList.Key,
+		|	ItemList.SimpleBatch AS SimpleBatch
 		|INTO ItemList
 		|FROM
 		|	Document.StockAdjustmentAsSurplus.ItemList AS ItemList
@@ -659,6 +661,28 @@ Function R9010B_SourceOfOriginStock()
 		   |	ItemList.ItemKey,
 		   |	SourceOfOrigins.SourceOfOriginStock,
 		   |	SourceOfOrigins.SerialLotNumber";
+EndFunction
+
+Function R6025B_SimpleBatch()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	SUM(ItemList.TotalAmount) AS Amount
+	|INTO R6025B_SimpleBatch
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
+	|		ON TRUE
+	|WHERE
+	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	AND UseSimpleBatch.Value
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion

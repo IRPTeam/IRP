@@ -125,7 +125,7 @@ Scenario: _2050001 preparation
 				| Bank account, TRY     |
 			And I select current line in "List" table
 			And I input begin of the current month date in "Date" field
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -163,7 +163,7 @@ Scenario: _2050001 preparation
 				| Bank account, TRY     |
 			And I select current line in "List" table
 			And I input begin of the current month date in "Date" field
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -205,7 +205,7 @@ Scenario: _2050001 preparation
 				| Cash desk №3     |
 			And I select current line in "List" table
 			And I input begin of the current month date in "Date" field
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -262,7 +262,7 @@ Scenario: _2050001 preparation
 				| Cash desk №3     |
 			And I select current line in "List" table
 			And I input begin of the current month date in "Date" field
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table

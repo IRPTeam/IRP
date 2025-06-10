@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -38,6 +39,100 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		AddAttributesCreateFormControl();
 	EndIf;
 EndProcedure
+
+&AtClient
+Procedure DetailsByRowOnChange(Item)
+	DocBankReceiptClient.DetailsByRowOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	AttributesMapping = GetFormAttributeMapping();
+	
+	If Direction = "FromListToHeader" Then
+		For Each Row In AttributesMapping Do
+			Form[Row.Value] = GetLineAttributeValue(Object, Form, Row.Key);
+		EndDo;	
+	ElsIf Direction = "FromHeaderToList" Then
+		For Each Row In AttributesMapping Do
+			SetLineAttributeValue(Object, Form, Row.Key, Form[Row.Value]);
+		EndDo;		
+	Else
+		Raise StrTemplate("Unsupported direction [%1]", Direction);
+	EndIf;
+EndProcedure
+
+&AtClientAtServerNoContext
+Function GetLineAttributeByNoSplitsAttribute(Object, Form, NoSplitsAttributeName)
+	AttributesMapping = GetFormAttributeMapping();
+	For Each Row In AttributesMapping Do
+		If Upper(Row.Value) = Upper(NoSplitsAttributeName) Then
+			Return Row.Key;
+		EndIf;
+	EndDo;
+	Return Undefined;
+Endfunction
+
+&AtClientAtServerNoContext
+Procedure SetLineAttributeValue(Object, Form, AttributeName, Value)
+	If Object.PaymentList.Count() = 1 Then
+		Object.PaymentList[0][StrSplit(AttributeName, ".")[1]] = Value;
+	EndIf;
+EndProcedure
+
+&AtClientAtServerNoContext
+Function GetLineAttributeValue(Object, Form, AttributeName)
+	If Object.PaymentList.Count() = 1 Then
+		Return Object.PaymentList[0][StrSplit(AttributeName, ".")[1]];
+	Else
+		Return Undefined;
+	EndIf;
+EndFunction
+
+&AtClientAtServerNoContext
+Function GetFormAttributeMapping() Export
+	Map = New Map();
+	Map.Insert("PaymentList.Employee"                         ,"PaymentListEmployeeNoSplits");
+	Map.Insert("PaymentList.PaymentPeriod"                    ,"PaymentListPaymentPeriodNoSplits");
+	Map.Insert("PaymentList.CalculationType"                  ,"PaymentListCalculationTypeNoSplits");
+	Map.Insert("PaymentList.RetailCustomer"                   ,"PaymentListRetailCustomerNoSplits");
+	Map.Insert("PaymentList.Partner"                          ,"PaymentListPartnerNoSplits");
+	Map.Insert("PaymentList.Payer"                            ,"PaymentListPayerNoSplits");
+	Map.Insert("PaymentList.Agreement"                        ,"PaymentListAgreementNoSplits");
+	Map.Insert("PaymentList.LegalNameContract"                ,"PaymentListLegalNameContractNoSplits");
+	Map.Insert("PaymentList.PaymentType"                      ,"PaymentListPaymentTypeNoSplits");
+	Map.Insert("PaymentList.PaymentTerminal"                  ,"PaymentListPaymentTerminalNoSplits");
+	Map.Insert("PaymentList.BankTerm"                         ,"PaymentListBankTermNoSplits");
+	Map.Insert("PaymentList.BasisDocument"                    ,"PaymentListBasisDocumentNoSplits");
+	Map.Insert("PaymentList.Project"                          ,"PaymentListProjectNoSplits");
+	Map.Insert("PaymentList.Order"                            ,"PaymentListOrderNoSplits");
+	Map.Insert("PaymentList.VatRate"                          ,"PaymentListVatRateNoSplits");
+	Map.Insert("PaymentList.NetAmount"                        ,"PaymentListNetAmountNoSplits");
+	Map.Insert("PaymentList.TaxAmount"                        ,"PaymentListTaxAmountNoSplits");
+	Map.Insert("PaymentList.TotalAmount"                      ,"PaymentListTotalAmountNoSplits");
+	Map.Insert("PaymentList.FinancialMovementType"            ,"PaymentListFinancialMovementTypeNoSplits");
+	Map.Insert("PaymentList.CashFlowCenter"                   ,"PaymentListCashFlowCenterNoSplits");
+	Map.Insert("PaymentList.SendingAccount"                   ,"PaymentListSendingAccountNoSplits");
+	Map.Insert("PaymentList.SendingBranch"                    ,"PaymentListSendingBranchNoSplits");
+	Map.Insert("PaymentList.RevenueType"                      ,"PaymentListRevenueTypeNoSplits");
+	Map.Insert("PaymentList.POSAccount"                       ,"PaymentListPOSAccountNoSplits");
+	Map.Insert("PaymentList.AmountExchange"                   ,"PaymentListAmountExchangeNoSplits");
+	Map.Insert("PaymentList.PlaningTransactionBasis"          ,"PaymentListPlaningTransactionBasisNoSplits");
+	Map.Insert("PaymentList.CommissionPercent"                ,"PaymentListCommissionPercentNoSplits");
+	Map.Insert("PaymentList.Commission"                       ,"PaymentListCommissionNoSplits");
+	Map.Insert("PaymentList.CommissionFinancialMovementType"  ,"PaymentListCommissionFinancialMovementTypeNoSplits");
+	Map.Insert("PaymentList.ProfitLossCenter"                 ,"PaymentListProfitLossCenterNoSplits");
+	Map.Insert("PaymentList.ExpenseType"                      ,"PaymentListExpenseTypeNoSplits");
+	Map.Insert("PaymentList.AdditionalAnalytic"               ,"PaymentListAdditionalAnalyticNoSplits");
+	Map.Insert("PaymentList.Branch"                           ,"PaymentListBranchNoSplits");
+	Map.Insert("PaymentList.ApArPostingDetail"                ,"PaymentListApArPostingDetailNoSplits");
+	Return Map;
+EndFunction
 
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
@@ -205,11 +300,24 @@ EndFunction
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
+	DetailsByRowEnabled = (Object.PaymentList.Count() <= 1);
+	Form.Items.DetailsByRow.Enabled          = DetailsByRowEnabled;
+	Form.Items.DetailsByRowNoSplits.Enabled  = DetailsByRowEnabled;
+	
+	Form.Items.GroupByRow.Visible    = Object.DetailsByRow;
+	Form.Items.GroupByList.Visible   = Not Object.DetailsByRow;
+		
+	AttributesMapping = GetFormAttributeMapping();
 	AttributesForChangeVisible = GetVisibleAttributesByTransactionType(Object.TransactionType);
 	For Each Attr In AttributesForChangeVisible.AllAttributes Do
-		ItemName = StrReplace(Attr, ".", "");
+		ItemName = TrimAll(StrReplace(Attr, ".", ""));
 		Visibility = (AttributesForChangeVisible.VisibleAttributes.Find(Attr) <> Undefined);
-		Form.Items[TrimAll(ItemName)].Visible = Visibility;
+		Form.Items[ItemName].Visible = Visibility;
+		
+		NoSplitsAttribute = AttributesMapping.Get(Attr);
+		If NoSplitsAttribute <> Undefined Then
+			Form.Items[NoSplitsAttribute].Visible = Visibility;
+		EndIf;
 	EndDo;
 
 	IsCurrencyExchange    = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
@@ -246,10 +354,16 @@ Procedure SetVisibilityAvailability(Object, Form)
 		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
 	EndIf;
 	Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+	Form.Items.PaymentListPlaningTransactionBasisNoSplits.TypeRestriction = New TypeDescription(ArrayTypes);
+	
+	Form.Items.PaymentListBasisDocumentNoSplits.ReadOnly = 
+		(Form.PaymentListApArPostingDetailNoSplits <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
 	
 	Form.Items.TransitAccount.ReadOnly = ValueIsFilled(Object.TransitAccount);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesNoSplits.Enabled = Not Form.ReadOnly;
 	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccountingNoSplits.Enabled = Not Form.ReadOnly;
 	Form.Items.PaymentListPaymentByDocuments.Enabled = Not Form.ReadOnly;
 
 	Form.Items.PaymentListPaymentByDocuments.Visible = IsPaymentFormCustomer;
@@ -260,6 +374,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ProfitCenter.Visible = IsCurrencyExchange;
 	
 	Form.Items.PaymentListBranch.Visible = IsSalaryReturn;
+	Form.Items.PaymentListBranchNoSplits.Visible = IsSalaryReturn;
 EndProcedure
 
 &AtClient
@@ -375,6 +490,222 @@ Procedure PaymentListAfterDeleteRow(Item)
 	DocBankReceiptClient.PaymentListAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
+#Region COMMISSION_FINANCIAL_MOVEMENT_TYPE
+
+&AtClient
+Procedure PaymentListCommissionFinancialMovementTypeOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListCommissionFinancialMovementTypeNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_TERMINAL
+
+&AtClient
+Procedure PaymentListPaymentTerminalOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListPaymentTerminalNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region RETAIL_CUSTOMER
+
+&AtClient
+Procedure PaymentListRetailCustomerOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListRetailCustomerNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region SENDING_BRANCH
+
+&AtClient
+Procedure PaymentListSendingBranchOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListSendingBranchNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region SENDING_ACCOUNT
+
+&AtClient
+Procedure PaymentListSendingAccountOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListSendingAccountNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region CALCULATION_TYPE
+
+&AtClient
+Procedure PaymentListCalculationTypeOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListCalculationTypeNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_PERIOD
+
+&AtClient
+Procedure PaymentListPaymentPeriodOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListPaymentPeriodNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region EMPLOYEE
+
+&AtClient
+Procedure PaymentListEmployeeOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListEmployeeNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region NET_AMOUNT
+
+&AtClient
+Procedure PaymentListNetAmountOnChange(Item)
+	DocBankReceiptClient.PaymentListNetAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListNetAmountNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	DocBankReceiptClient.PaymentListNetAmountOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region TAX_AMOUNT
+
+&AtClient
+Procedure PaymentListTaxAmountOnChange(Item)
+	DocBankReceiptClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListTaxAmountNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	DocBankReceiptClient.ItemListTaxAmountOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region TOTAL_AMOUNT
+
+&AtClient
+Procedure PaymentListTotalAmountOnChange(Item)
+	DocBankReceiptClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListTotalAmountNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	DocBankReceiptClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region VAT_RATE
+
+&AtClient
+Procedure PaymentListVatRateOnChange(Item) Export
+	DocBankReceiptClient.PaymentListVatRateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListVatRateNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	DocBankReceiptClient.PaymentListVatRateOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
 #Region PARTNER
 
 &AtClient
@@ -390,6 +721,25 @@ EndProcedure
 &AtClient
 Procedure PaymentListPartnerEditTextChange(Item, Text, StandardProcessing)
 	DocBankReceiptClient.PaymentListPartnerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListPartnerNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	DocBankReceiptClient.PaymentListPartnerOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+EndProcedure
+
+&AtClient
+Procedure PaymentListPartnerNoSplitsStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocBankReceiptClient.PaymentListPartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PaymentList[0]);
+EndProcedure
+
+&AtClient
+Procedure PaymentListPartnerNoSplitsEditTextChange(Item, Text, StandardProcessing)
+	DocBankReceiptClient.PaymentListPartnerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, Object.PaymentList[0]);
 EndProcedure
 
 #EndRegion
@@ -411,6 +761,25 @@ Procedure PaymentListPayerEditTextChange(Item, Text, StandardProcessing)
 	DocBankReceiptClient.PaymentListPayerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure PaymentListPayerNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	DocBankReceiptClient.PaymentListPayerOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+EndProcedure
+
+&AtClient
+Procedure PaymentListPayerNoSplitsStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocBankReceiptClient.PaymentListPayerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PaymentList[0]);
+EndProcedure
+
+&AtClient
+Procedure PaymentListPayerNoSplitsEditTextChange(Item, Text, StandardProcessing)
+	DocBankReceiptClient.PaymentListPayerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, Object.PaymentList[0]);
+EndProcedure
+
 #EndRegion
 
 #Region AGREEMENT
@@ -430,6 +799,355 @@ Procedure PaymentListAgreementEditTextChange(Item, Text, StandardProcessing)
 	DocBankReceiptClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure PaymentListAgreementNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	DocBankReceiptClient.PaymentListAgreementOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+EndProcedure
+
+&AtClient
+Procedure PaymentListAgreementNoSplitsStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocBankReceiptClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PaymentList[0]);
+EndProcedure
+
+&AtClient
+Procedure PaymentListAgreementNoSplitsEditTextChange(Item, Text, StandardProcessing)
+	DocBankReceiptClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing, Object.PaymentList[0]);
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME_CONTRACT
+
+&AtClient
+Procedure PaymentListLegalNameContractOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListLegalNameContractNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region COMMISSION
+
+&AtClient
+Procedure PaymentListCommissionOnChange(Item)
+	DocBankReceiptClient.PaymentListCommissionOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListCommissionNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	DocBankReceiptClient.PaymentListCommissionOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_TYPE
+
+&AtClient
+Procedure PaymentListPaymentTypeOnChange(Item)
+	DocBankReceiptClient.PaymentListPaymentTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListPaymentTypeNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	DocBankReceiptClient.PaymentListPaymentTypeOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region BANK_TERM
+
+&AtClient
+Procedure PaymentListBankTermOnChange(Item)
+	DocBankReceiptClient.PaymentListBankTermOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListBankTermNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	DocBankReceiptClient.PaymentListBankTermOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region COMMISSION_PERCENT
+
+&AtClient
+Procedure PaymentListCommissionPercentOnChange(Item)
+	DocBankReceiptClient.PaymentListCommissionPercentOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListCommissionPercentNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	DocBankReceiptClient.PaymentListCommissionPercentOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region ADDITIONAL_ANALYTIC
+
+&AtClient
+Procedure PaymentListAdditionalAnalyticOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListAdditionalAnalyticNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region PROFIT_LOSS_CENTER
+
+&AtClient
+Procedure PaymentListProfitLossCenterOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListProfitLossCenterNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");	
+EndProcedure
+
+#EndRegion
+
+#Region CASH_FLOW_CENTER
+
+&AtClient
+Procedure PaymentListCashFlowCenterOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListCashFlowCenterNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region _BRANCH
+
+&AtClient
+Procedure PaymentListBranchOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListBranchNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region PROJECT
+
+&AtClient
+Procedure PaymentListProjectOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListProjectNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region EXPENSE_TYPE
+
+&AtClient
+Procedure PaymentListExpenseTypeOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBankReceiptClient.PaymentListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
+	DocBankReceiptClient.PaymentListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListExpenseTypeNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+&AtClient
+Procedure PaymentListExpenseTypeNoSplitsStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocBankReceiptClient.PaymentListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PaymentList[0]);
+EndProcedure
+
+&AtClient
+Procedure PaymentListExpenseTypeNoSplitsEditTextChange(Item, Text, StandardProcessing)
+	DocBankReceiptClient.PaymentListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, Object.PaymentList[0]);
+EndProcedure
+
+#EndRegion
+
+#Region REVENUE_TYPE
+
+&AtClient
+Procedure PaymentListRevenueTypeOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListRevenueTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBankReceiptClient.PaymentListRevenueTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListRevenueTypeEditTextChange(Item, Text, StandardProcessing)
+	DocBankReceiptClient.PaymentListRevenueTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListRevenueTypeNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+&AtClient
+Procedure PaymentListRevenueTypeNoSplitsStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocBankReceiptClient.PaymentListRevenueTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PaymentList[0]);
+EndProcedure
+
+&AtClient
+Procedure PaymentListRevenueTypeNoSplitsEditTextChange(Item, Text, StandardProcessing)
+	DocBankReceiptClient.PaymentListRevenueTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, Object.PaymentList[0]);
+EndProcedure
+
+#EndRegion
+
+#Region FINANCIAL_MOVEMENT_TYPE
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBankReceiptClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocBankReceiptClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeNoSplitsStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocBankReceiptClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PaymentList[0]);
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeNoSplitsEditTextChange(Item, Text, StandardProcessing)
+	DocBankReceiptClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, Object.PaymentList[0]);
+EndProcedure
+
+#EndRegion
+
+#Region POS_ACCOUNT
+
+&AtClient
+Procedure PaymentListPOSAccountOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListPOSAccountNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region AMOUNT_EXCHANGE
+
+&AtClient
+Procedure PaymentListAmountExchangeOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListAmountExchangeNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
 #EndRegion
 
 #Region BASIS_DOCUMENT
@@ -442,6 +1160,20 @@ EndProcedure
 &AtClient
 Procedure PaymentListBasisDocumentStartChoice(Item, ChoiceData, StandardProcessing)
 	DocBankReceiptClient.PaymentListBasisDocumentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListBasisDocumentNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	DocBankReceiptClient.PaymentListBasisDocumentOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+EndProcedure
+
+&AtClient
+Procedure PaymentListBasisDocumentNoSplitsStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocBankReceiptClient.PaymentListBasisDocumentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PaymentList[0]);
 EndProcedure
 
 #EndRegion
@@ -458,113 +1190,46 @@ Procedure PaymentListPlaningTransactionBasisStartChoice(Item, ChoiceData, Standa
 	DocBankReceiptClient.TransactionBasisStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure PaymentListPlaningTransactionBasisNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	DocBankReceiptClient.PaymentListPlaningTransactionBasisOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+EndProcedure
+
+&AtClient
+Procedure PaymentListPlaningTransactionBasisNoSplitsStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocBankReceiptClient.TransactionBasisStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PaymentList[0]);
+EndProcedure
+
 #EndRegion
 
 #Region _ORDER
+
+&AtClient
+Procedure PaymentListOrderOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
 
 &AtClient
 Procedure PaymentListOrderStartChoice(Item, ChoiceData, StandardProcessing)
 	DocBankReceiptClient.PaymentListOrderStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
-#EndRegion
-
-#Region EXPENSE_TYPE
-
 &AtClient
-Procedure PaymentListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBankReceiptClient.PaymentListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+Procedure PaymentListOrderNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
 EndProcedure
 
 &AtClient
-Procedure PaymentListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
-	DocBankReceiptClient.PaymentListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region FINANCIAL_MOVEMENT_TYPE
-
-&AtClient
-Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBankReceiptClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocBankReceiptClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region NET_AMOUNT
-
-&AtClient
-Procedure PaymentListNetAmountOnChange(Item)
-	DocBankReceiptClient.PaymentListNetAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region TOTAL_AMOUNT
-
-&AtClient
-Procedure PaymentListTotalAmountOnChange(Item)
-	DocBankReceiptClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region TAX_AMOUNT
-
-&AtClient
-Procedure PaymentListTaxAmountOnChange(Item)
-	DocBankReceiptClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region VAT_RATE
-
-&AtClient
-Procedure PaymentListVatRateOnChange(Item) Export
-	DocBankReceiptClient.PaymentListVatRateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region COMMISSION
-
-&AtClient
-Procedure PaymentListCommissionOnChange(Item)
-	DocBankReceiptClient.PaymentListCommissionOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region PAYMENT_TYPE
-
-&AtClient
-Procedure PaymentListPaymentTypeOnChange(Item)
-	DocBankReceiptClient.PaymentListPaymentTypeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region BANK_TERM
-
-&AtClient
-Procedure PaymentListBankTermOnChange(Item)
-	DocBankReceiptClient.PaymentListBankTermOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region COMMISSION_PERCENT
-
-&AtClient
-Procedure PaymentListCommissionPercentOnChange(Item)
-	DocBankReceiptClient.PaymentListCommissionPercentOnChange(Object, ThisObject, Item);
+Procedure PaymentListOrderNoSplitsStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocBankReceiptClient.PaymentListOrderStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PaymentList[0]);
 EndProcedure
 
 #EndRegion
@@ -665,6 +1330,16 @@ Procedure EditCurrencies(Command)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
+	_EditCurrencies(CurrentData);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesNoSplits(Command)
+	_EditCurrencies(Object.PaymentList[0]);
+EndProcedure
+
+&AtClient
+Procedure _EditCurrencies(CurrentData)
 	FormParameters = CurrenciesClientServer.GetParameters_V8(Object, CurrentData);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
@@ -689,6 +1364,16 @@ Procedure EditAccounting(Command)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
+	_EditAccounting(CurrentData);
+EndProcedure
+
+&AtClient
+Procedure EditAccountingNoSplits(Command)
+	_EditAccounting(Object.PaymentList[0]);
+EndProcedure
+
+&AtClient
+Procedure _EditAccounting(CurrentData)
 	UpdateAccountingData();
 	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, "PaymentList");
 EndProcedure

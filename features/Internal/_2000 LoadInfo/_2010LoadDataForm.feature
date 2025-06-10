@@ -1206,7 +1206,7 @@ Scenario: _020147 load data in the Price list (by item key)
 		And I change "Load type" radio button value to "Item / Item key"
 		And in "Template" spreadsheet document I move to "R3C2" cell
 		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "35"
+		And in "Template" spreadsheet document I input text "36"
 		And in "Template" spreadsheet document I move to "R3C3" cell
 		And in "Template" spreadsheet document I double-click the current cell
 		And in "Template" spreadsheet document I input text "30"

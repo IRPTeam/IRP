@@ -165,6 +165,7 @@
   <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
@@ -847,6 +848,20 @@
       </synonym>
       <type>
         <types>CatalogRef.Projects</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e2d43981-316b-4165-8118-82476bc1f37f">
+      <name>SimpleBatch</name>
+      <synonym>
+        <key>en</key>
+        <value>Simple batch</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SimpleBatch</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

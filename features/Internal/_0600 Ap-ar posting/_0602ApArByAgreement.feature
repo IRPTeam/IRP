@@ -138,7 +138,7 @@ Scenario: _060203 create Cash receipt (partner term with Ar details by partner t
 				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'         |
@@ -194,7 +194,7 @@ Scenario: _0602031 create Bank receipt (partner term with Ar details by partner 
 				| 'Bank account, TRY'     |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'         |
@@ -329,7 +329,7 @@ Scenario: _060206 create Cash payment (partner term with Ap details by partner t
 				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'          |
@@ -387,7 +387,7 @@ Scenario: _060208 create Bank payment (partner term with Ap details by partner t
 				| 'Bank account, TRY'     |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'          |

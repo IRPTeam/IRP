@@ -132,7 +132,7 @@ Scenario: _060003 create Cash receipt with the type of settlements under standar
 				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'     |
@@ -176,7 +176,7 @@ Scenario: _0600031 create Bank receipt with the type of settlements under standa
 				| 'Bank account, TRY'     |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'     |
@@ -280,7 +280,7 @@ Scenario: _060006 create Cash payment with the type of settlements under standar
 				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'     |
@@ -337,7 +337,7 @@ Scenario: _060008 create Bank payment with the type of settlements under standar
 				| 'Bank account, TRY'     |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'     |

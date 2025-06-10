@@ -80,7 +80,7 @@ Scenario: _0960005 create Outgoing payment order (employee cash advance, from ba
 		And I select "Approved" exact value from the drop-down list named "Status"
 		And I select "Employee cash advance" exact value from "Transaction type" drop-down list
 	* Filling tabular part
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -135,7 +135,7 @@ Scenario: _0960006 create Outgoing payment order (employee cash advance, from ca
 		And I select "Approved" exact value from the drop-down list named "Status"
 		And I select "Employee cash advance" exact value from "Transaction type" drop-down list
 	* Filling tabular part
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -152,7 +152,7 @@ Scenario: _0960006 create Outgoing payment order (employee cash advance, from ca
 		And I activate "Amount" field in "PaymentList" table
 		And I input "1 000,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -370,7 +370,7 @@ Scenario: _0960018 create document Bank payment/Cash payment/Employee cash advan
 			And I select current line in "List" table
 			And I select "Employee cash advance" exact value from "Transaction type" drop-down list
 		* Filling tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I select current line in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
@@ -422,7 +422,7 @@ Scenario: _0960018 create document Bank payment/Cash payment/Employee cash advan
 			And I select current line in "List" table
 			And I select "Employee cash advance" exact value from "Transaction type" drop-down list
 		* Filling tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I select current line in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
@@ -470,7 +470,7 @@ Scenario: _0960018 create document Bank payment/Cash payment/Employee cash advan
 			And I select current line in "List" table	
 			Then the form attribute named "Agreement" became equal to "Alexander Orlov cash advance, USD"		
 		* Filling tabular part (TRY and USD)
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I select "Logistics department" from "Profit loss center" drop-down list by string in "PaymentList" table
 			And I activate "Expense type" field in "PaymentList" table
 			And I input "Expense" text in "Expense type" field of "PaymentList" table
@@ -479,7 +479,7 @@ Scenario: _0960018 create document Bank payment/Cash payment/Employee cash advan
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "120,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I activate "Profit loss center" field in "PaymentList" table
 			And I select "Logistics department" from "Profit loss center" drop-down list by string in "PaymentList" table
 			And I activate "Expense type" field in "PaymentList" table
@@ -489,7 +489,7 @@ Scenario: _0960018 create document Bank payment/Cash payment/Employee cash advan
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "20,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I activate "Profit loss center" field in "PaymentList" table
 			And I select "Logistics department" from "Profit loss center" drop-down list by string in "PaymentList" table
 			And I select "Delivery" from "Expense type" drop-down list by string in "PaymentList" table
@@ -498,7 +498,7 @@ Scenario: _0960018 create document Bank payment/Cash payment/Employee cash advan
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I activate "Profit loss center" field in "PaymentList" table
 			And I select "Logistics department" from "Profit loss center" drop-down list by string in "PaymentList" table
 			And I activate "Expense type" field in "PaymentList" table
@@ -540,7 +540,7 @@ Scenario: _0960019 create document Bank payment/Employee cash advance (purchase,
 			And I select current line in "List" table
 			And I select "Employee cash advance" exact value from "Transaction type" drop-down list
 		* Filling tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I select current line in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table

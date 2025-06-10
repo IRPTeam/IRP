@@ -29,15 +29,6 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 		
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	
-	//@skip-check bsl-legacy-check-expression-type
-	R6025B_SimpleBatchData = Parameters.PostingDataTables.Get(Metadata.AccumulationRegisters.R6025B_SimpleBatch);
-	If Not R6025B_SimpleBatchData = Undefined Then
-		OutgoingMovements = SimpleBatchCostCalculationServer.UpdateOutgoingMovementsCost(Parameters.Object.Ref, R6025B_SimpleBatchData.PrepareTable, Cancel, , , AddInfo);
-		If Not OutgoingMovements = Undefined Then
-			R6025B_SimpleBatchData.PrepareTable = OutgoingMovements;
-		EndIf;
-	EndIf;
-	
 	RegisteredRecords = RegisterRecords(Parameters);
 	If Parameters.Cancel Then
 		For Each Message In Parameters.Messages Do
@@ -65,6 +56,16 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	// Accounting MD5
 	If Not Cancel And Metadata.DefinedTypes.typeAccountingDocuments.Type.Types().Find(TypeOf(Parameters.Object.Ref)) <> Undefined Then
 		AccountingServer.UpdateAccountingRelevance(DocObject.Ref);	
+	EndIf;
+	
+	//@skip-check bsl-legacy-check-expression-type
+	R6025B_SimpleBatchData = Parameters.PostingDataTables.Get(Metadata.AccumulationRegisters.R6025B_SimpleBatch);
+	If GetFunctionalOption("UseSimpleBatch") And Not R6025B_SimpleBatchData = Undefined Then
+		OutgoingMovements = SimpleBatchCostCalculationServer.UpdateOutgoingMovementsCost(Parameters.Object.Ref, R6025B_SimpleBatchData.PrepareTable, Cancel, , , AddInfo);
+		If Not OutgoingMovements = Undefined Then
+			DocObject.RegisterRecords.R6025B_SimpleBatch.Load(OutgoingMovements);
+			DocObject.RegisterRecords.R6025B_SimpleBatch.Write();
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -219,8 +220,8 @@ Function RegisterRecords(Parameters)
 		EndIf;
 		
 		If Row.Value.Metadata = Metadata.AccumulationRegisters.R6020B_BatchBalance 
-			Or Row.Value.Metadata = AccumulationRegisters.R6060T_CostOfGoodsSold
-			Or Row.Value.Metadata = AccumulationRegisters.R6025B_SimpleBatch Then
+			Or Row.Value.Metadata = Metadata.AccumulationRegisters.R6060T_CostOfGoodsSold
+			Or Row.Value.Metadata = Metadata.AccumulationRegisters.R6025B_SimpleBatch Then
 				Continue; //Never rewrite
 		EndIf;
 		

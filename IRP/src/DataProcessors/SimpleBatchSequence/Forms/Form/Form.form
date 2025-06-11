@@ -454,7 +454,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Boundaries</value>
+    <value>Границы</value>
    </title>
    <title>
     <key>en</key>
@@ -466,7 +466,7 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Page boundaries</value>
+    <value>Границы страницы</value>
    </toolTip>
    <toolTip>
     <key>en</key>
@@ -761,7 +761,7 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Page records</value>
+    <value>Записи страницы</value>
    </toolTip>
    <toolTip>
     <key>en</key>
@@ -935,7 +935,7 @@ FROM
       </content>
       <content>
        <key>ru</key>
-       <value>Last document point presentation</value>
+       <value>Представление последней точки документа</value>
       </content>
       <content>
        <key>en</key>
@@ -955,7 +955,7 @@ FROM
       </content>
       <content>
        <key>ru</key>
-       <value>Current document point presentation</value>
+       <value>Представление текущей точки документа</value>
       </content>
       <content>
        <key>en</key>
@@ -975,7 +975,7 @@ FROM
       </content>
       <content>
        <key>ru</key>
-       <value>Is actual batch</value>
+       <value>Текущая партия</value>
       </content>
       <content>
        <key>en</key>
@@ -1044,7 +1044,7 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Restore selected</value>
+   <value>Вернуть выбранное</value>
   </title>
   <title>
    <key>en</key>
@@ -1069,7 +1069,7 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Restore all</value>
+   <value>Вернуть все</value>
   </title>
   <title>
    <key>en</key>

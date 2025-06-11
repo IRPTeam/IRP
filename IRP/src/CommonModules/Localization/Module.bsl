@@ -716,7 +716,7 @@ Function Strings(Lang) Export
 
 #Region SimpleBatch
 	Strings.Insert("SB_NotEnoughBatch", NStr("en='Not enough batch %1: On stock: %2; In document: %3.';
-		|ru='Not enough batch %1: On stock: %2; In document: %3.';
+		|ru='Недостаточно партии %1: На складе: %2; В документе: %3.';
 		|tr='Yetersiz parti %1: Stokta: %2; Evrakta: %3.'", Lang));
 #EndRegion
 
@@ -998,7 +998,7 @@ Function Strings(Lang) Export
 		|tr='Donanım %1 sürücüsü yanlış AddIn ID %2 bilgisine sahiptir.'", Lang));
 	
 	Strings.Insert("EqFP_ShiftIsExpired", NStr("en='Shift has already expired.';
-		|ru='Shift has already expired.';
+		|ru='Смена уже завершилась.';
 		|tr='Vardiya süresi doldu.'", Lang));
 	Strings.Insert("EqFP_ShiftAlreadyOpened", NStr("en='Shift already opened.';
 		|ru='Смена уже открыта.';
@@ -2581,7 +2581,7 @@ Function Strings(Lang) Export
 		|ru='Пересекающиеся диапазоны';
 		|tr='Çakışan aralıklar'", Lang));
 	Strings.Insert("Exc_016", NStr("en='Unsupported data format';
-		|ru='Unsupported data format';
+		|ru='Неподдерживаемый формат данных';
 		|tr='Desteklenmeyen veri biçimi'", Lang));
 #EndRegion
 

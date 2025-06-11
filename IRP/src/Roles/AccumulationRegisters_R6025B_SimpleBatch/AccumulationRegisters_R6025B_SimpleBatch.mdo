@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="af6e2994-8e8b-4fd7-9e9e-c52628453187">
+ <name>AccumulationRegisters_R6025B_SimpleBatch</name>
+ <synonym>
+  <key>tr</key>
+  <value>AccumulationRegisters R6025B Temel parti</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>AccumulationRegisters R6025B Simple batch</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters R6025B Simple batch</value>
+ </synonym>
+</mdclass:Role>

@@ -190,6 +190,7 @@
  <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+ <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
@@ -1180,6 +1181,28 @@
     <field>Document.PurchaseReturn.TabularSection.ItemList.Attribute.VatRate</field>
    </choiceParameterLinks>
    <createOnInput>Use</createOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="32833927-5e66-464d-ba7f-3b426d69461b">
+   <name>SimpleBatch</name>
+   <synonym>
+    <key>tr</key>
+    <value>Temel parti</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Simple batch</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Simple batch</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SimpleBatch</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>

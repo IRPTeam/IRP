@@ -105,6 +105,7 @@
  <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+ <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
@@ -633,6 +634,28 @@
    </synonym>
    <type>
     <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="b25982fb-4422-4a6b-b786-89aeeb2d0b8d">
+   <name>SimpleBatch</name>
+   <synonym>
+    <key>tr</key>
+    <value>Temel parti</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Simple batch</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Simple batch</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SimpleBatch</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

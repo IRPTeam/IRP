@@ -165,6 +165,20 @@
 		</right>
 	</object>
 	<object>
+		<name>AccumulationRegister.R6025B_SimpleBatch</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.TM1010B_RowIDMovements</name>
 		<right>
 			<name>Read</name>

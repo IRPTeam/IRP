@@ -264,6 +264,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(R4036B_IncomingStocksRequested());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
 
@@ -321,10 +322,13 @@ Function ItemList()
 		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS IsTransaction_ReturnFromCustomer,
 		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer) AS IsTransaction_InventoryTransfer,
 		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromTradeAgent) AS IsTransaction_ReturnFromTradeAgent,
+		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.PreliminaryStock) AS isPreliminaryStock,
 		   |	ItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
 		   |	ItemList.Ref.Branch AS Branch,
 		   |	ItemList.ProductionPlanning AS ProductionPlanning,
-		   |	ItemList.Key
+		   |	ItemList.Key,
+		   |	ItemList.SimpleBatch AS SimpleBatch,
+		   |	ItemList.Amount
 		   |INTO ItemList
 		   |FROM
 		   |	Document.GoodsReceipt.ItemList AS ItemList
@@ -928,6 +932,29 @@ Function T3010S_RowIDInfo()
 		   |		AND ItemList.Ref = &Ref
 		   |		AND RowIDInfo.Key = ItemList.Key
 		   |		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+Function R6025B_SimpleBatch()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	SUM(ItemList.Amount) AS Amount
+	|INTO R6025B_SimpleBatch
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
+	|		ON TRUE
+	|WHERE
+	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	AND UseSimpleBatch.Value
+	|	AND ItemList.isPreliminaryStock
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion

@@ -80,4 +80,19 @@
    <value>Currency revaluation vendor</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="c04fdb0d-cb42-424d-ad49-e99f0973c3e3">
+  <name>PurchaisePreliminaryStock</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ön stok satın al</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Purchaise preliminary stock</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Purchaise preliminary stock</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

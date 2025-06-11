@@ -337,6 +337,7 @@
  <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
  <sessionParameters>SessionParameter.RunBackgroundJobInDebugMode</sessionParameters>
  <sessionParameters>SessionParameter.Workstation</sessionParameters>
+ <sessionParameters>SessionParameter.ServerEquipments</sessionParameters>
  <roles>Role.AccountingReports</roles>
  <roles>Role.AccumulationRegisters_CashInTransit</roles>
  <roles>Role.AccumulationRegisters_DELETE_R8010B_TradeAgentInventory</roles>
@@ -413,6 +414,7 @@
  <roles>Role.AccumulationRegisters_R5022T_Expenses</roles>
  <roles>Role.AccumulationRegisters_R6010B_BatchWiseBalance</roles>
  <roles>Role.AccumulationRegisters_R6020B_BatchBalance</roles>
+ <roles>Role.AccumulationRegisters_R6025B_SimpleBatch</roles>
  <roles>Role.AccumulationRegisters_R6030T_BatchShortageOutgoing</roles>
  <roles>Role.AccumulationRegisters_R6040T_BatchShortageIncoming</roles>
  <roles>Role.AccumulationRegisters_R6050T_SalesBatches</roles>
@@ -482,6 +484,7 @@
  <roles>Role.Document_EmployeeTransfer</roles>
  <roles>Role.Document_EmployeeVacation</roles>
  <roles>Role.Document_ExternalAccountingOperation</roles>
+ <roles>Role.Document_FixedAssetRevaluation</roles>
  <roles>Role.Document_FixedAssetTransfer</roles>
  <roles>Role.Document_ForeignCurrencyRevaluation</roles>
  <roles>Role.Document_GoodsReceipt</roles>
@@ -552,6 +555,7 @@
  <roles>Role.RunThinClient</roles>
  <roles>Role.RunWebClient</roles>
  <roles>Role.SaveUserData</roles>
+ <roles>Role.StandartReports</roles>
  <roles>Role.Subsystem_Accounting</roles>
  <roles>Role.Subsystem_Incidents</roles>
  <roles>Role.Subsystem_Inventory</roles>
@@ -575,8 +579,6 @@
  <roles>Role.UseExternalReports</roles>
  <roles>Role.UseGroupEditingProperties</roles>
  <roles>Role.UseOutput</roles>
- <roles>Role.Document_FixedAssetRevaluation</roles>
- <roles>Role.StandartReports</roles>
  <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -824,7 +826,10 @@
  <commonModules>CommonModule.EquipmentAcquiringServer</commonModules>
  <commonModules>CommonModule.EquipmentFiscalPrinter_CommonAPI</commonModules>
  <commonModules>CommonModule.EquipmentFiscalPrinterAPIClient</commonModules>
+ <commonModules>CommonModule.EquipmentFiscalPrinterAPIClientServer</commonModules>
+ <commonModules>CommonModule.EquipmentFiscalPrinterAPIServer</commonModules>
  <commonModules>CommonModule.EquipmentFiscalPrinterClient</commonModules>
+ <commonModules>CommonModule.EquipmentFiscalPrinterClientServer</commonModules>
  <commonModules>CommonModule.EquipmentFiscalPrinterServer</commonModules>
  <commonModules>CommonModule.ExtensionServer</commonModules>
  <commonModules>CommonModule.ExternalCommandsClient</commonModules>
@@ -840,6 +845,7 @@
  <commonModules>CommonModule.FOServer</commonModules>
  <commonModules>CommonModule.GetItemInfo</commonModules>
  <commonModules>CommonModule.HardwareClient</commonModules>
+ <commonModules>CommonModule.HardwareClientServer</commonModules>
  <commonModules>CommonModule.HardwareServer</commonModules>
  <commonModules>CommonModule.IDInfoClient</commonModules>
  <commonModules>CommonModule.IDInfoServer</commonModules>
@@ -931,6 +937,7 @@
  <commonModules>CommonModule.UpdateManagerClient</commonModules>
  <commonModules>CommonModule.UpdateManagerInitialServer</commonModules>
  <commonModules>CommonModule.UpdateManagerReleaseServer</commonModules>
+ <commonModules>CommonModule.SimpleBatchCostCalculationServer</commonModules>
  <commonModules>CommonModule.DocFixedAssetRevaluationClient</commonModules>
  <commonModules>CommonModule.DocFixedAssetRevaluationServer</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
@@ -1061,6 +1068,7 @@
  <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
  <functionalOptions>FunctionalOption.UseShipmentAndReceiptPlaningOrders</functionalOptions>
  <functionalOptions>FunctionalOption.UseShipmentConfirmationAndGoodsReceipts</functionalOptions>
+ <functionalOptions>FunctionalOption.UseSimpleBatch</functionalOptions>
  <functionalOptions>FunctionalOption.UseSimpleMode</functionalOptions>
  <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
  <functionalOptions>FunctionalOption.UseSpecialOffers</functionalOptions>
@@ -1130,6 +1138,7 @@
  <constants>Constant.DefaultPictureStorageVolume</constants>
  <constants>Constant.DefaultSMSProvider</constants>
  <constants>Constant.DisableLinkedRowsIntegrity</constants>
+ <constants>Constant.LastReleaseNumber</constants>
  <constants>Constant.MaximumServerDifficultLevel</constants>
  <constants>Constant.MaxUploadFileSize</constants>
  <constants>Constant.SaasMode</constants>
@@ -1186,6 +1195,7 @@
  <constants>Constant.UseSerialLotNumbers</constants>
  <constants>Constant.UseShipmentAndReceiptPlaningOrders</constants>
  <constants>Constant.UseShipmentConfirmationAndGoodsReceipts</constants>
+ <constants>Constant.UseSimpleBatch</constants>
  <constants>Constant.UseSimpleMode</constants>
  <constants>Constant.UseSourceOfOrigin</constants>
  <constants>Constant.UseSpecialOffers</constants>
@@ -1194,7 +1204,6 @@
  <constants>Constant.UseVariableItemKey</constants>
  <constants>Constant.UseVariableStore</constants>
  <constants>Constant.UseWorkOrders</constants>
- <constants>Constant.LastReleaseNumber</constants>
  <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
  <commonForms>CommonForm.AttachFile</commonForms>
@@ -1324,6 +1333,7 @@
  <catalogs>Catalog.RowIDs</catalogs>
  <catalogs>Catalog.SalaryCalculationType</catalogs>
  <catalogs>Catalog.SerialLotNumbers</catalogs>
+ <catalogs>Catalog.SimpleBatch</catalogs>
  <catalogs>Catalog.SourceOfOrigins</catalogs>
  <catalogs>Catalog.SpecialOfferRules</catalogs>
  <catalogs>Catalog.SpecialOffers</catalogs>
@@ -1440,6 +1450,7 @@
  <documents>Document.WorkOrderClosing</documents>
  <documents>Document.WorkSheet</documents>
  <documents>Document.FixedAssetRevaluation</documents>
+ <sequences>Sequence.SimpleBatch</sequences>
  <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
  <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
  <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1640,6 +1651,7 @@
  <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
  <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
  <dataProcessors>DataProcessor.UpdateDatabase</dataProcessors>
+ <dataProcessors>DataProcessor.SimpleBatchSequence</dataProcessors>
  <informationRegisters>InformationRegister.AddProperties</informationRegisters>
  <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
  <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
@@ -1819,6 +1831,7 @@
  <accumulationRegisters>AccumulationRegister.R5022T_Expenses</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R6010B_BatchWiseBalance</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R6020B_BatchBalance</accumulationRegisters>
+ <accumulationRegisters>AccumulationRegister.R6025B_SimpleBatch</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R6030T_BatchShortageOutgoing</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R6040T_BatchShortageIncoming</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R6050T_SalesBatches</accumulationRegisters>

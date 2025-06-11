@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c1454720-dea5-441d-b786-8de8d02e3b4a">
+ <producedTypes>
+  <objectType typeId="e01debb9-1e1f-4312-9d23-62fd8113c479" valueTypeId="4d280846-cc06-44ab-9597-66b44edce149"/>
+  <managerType typeId="88af05f0-c6fb-4f52-b92f-d76fbd49b0ec" valueTypeId="8e7ded1f-a71a-4cc6-ad37-a2b716786471"/>
+ </producedTypes>
+ <name>SimpleBatchSequence</name>
+ <synonym>
+  <key>tr</key>
+  <value>Temel parti dizisi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Simple batch sequence</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Simple batch sequence</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.SimpleBatchSequence.Form.Form</defaultForm>
+ <forms uuid="156a88f1-cee5-4038-a352-588d372d2553">
+  <name>Form</name>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:DataProcessor>

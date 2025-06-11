@@ -84,6 +84,7 @@
 // * EqError_003 - String - 
 // * EqError_004 - String - 
 // * EqError_005 - String - 
+// * EqFP_ShiftIsExpired - String - 
 // * EqFP_ShiftAlreadyOpened - String - 
 // * EqFP_ShiftIsNotOpened - String - 
 // * EqFP_ShiftAlreadyClosed - String - 
@@ -713,6 +714,12 @@ Function Strings(Lang) Export
 
 	Strings = New Structure();
 
+#Region SimpleBatch
+	Strings.Insert("SB_NotEnoughBatch", NStr("en='Not enough batch %1: On stock: %2; In document: %3.';
+		|ru='Not enough batch %1: On stock: %2; In document: %3.';
+		|tr='Yetersiz parti %1: Stokta: %2; Evrakta: %3.'", Lang));
+#EndRegion
+
 #Region Access
 	Strings.Insert("ACS_UnknownValueType", NStr("en='Can not create Access Key. Unknows value type.';
 		|ru='Не удалось создать Ключ Доступа. Неизвестный тип значения';
@@ -990,6 +997,9 @@ Function Strings(Lang) Export
 		|ru='У драйвера оборудования %1 неправильный AddIn ID %2.';
 		|tr='Donanım %1 sürücüsü yanlış AddIn ID %2 bilgisine sahiptir.'", Lang));
 	
+	Strings.Insert("EqFP_ShiftIsExpired", NStr("en='Shift has already expired.';
+		|ru='Shift has already expired.';
+		|tr='Vardiya süresi doldu.'", Lang));
 	Strings.Insert("EqFP_ShiftAlreadyOpened", NStr("en='Shift already opened.';
 		|ru='Смена уже открыта.';
 		|tr='Vardya artık açılmış.'", Lang));
@@ -2570,6 +2580,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Exc_015", NStr("en='Overlapping ranges';
 		|ru='Пересекающиеся диапазоны';
 		|tr='Çakışan aralıklar'", Lang));
+	Strings.Insert("Exc_016", NStr("en='Unsupported data format';
+		|ru='Unsupported data format';
+		|tr='Desteklenmeyen veri biçimi'", Lang));
 #EndRegion
 
 #Region Saas

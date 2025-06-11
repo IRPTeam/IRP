@@ -120,6 +120,7 @@
  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
+ <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -927,6 +928,28 @@
    </synonym>
    <type>
     <types>DocumentRef.ShipmentPlaningOrder</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="08fc3b93-960d-40e7-be91-be26fa45a99d">
+   <name>SimpleBatch</name>
+   <synonym>
+    <key>tr</key>
+    <value>Temel parti</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Simple batch</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Simple batch</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SimpleBatch</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

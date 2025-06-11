@@ -915,7 +915,7 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 			Return CheckResult.IsOk;
 		Else
-			Raise StrTemplate("Unsupported register type [%1]", Parameters.Metadata);
+			Raise StrTemplate(R().Error_UnsupportedRegisterType, Parameters.Metadata);
 		EndIf;
 		
 	Else // Receipt
@@ -1265,7 +1265,7 @@ Function GetQueryTableByName(TableName, Parameters, RaiseExeption = False) Expor
 	VTSearch = Parameters.TempTablesManager.Tables.Find(TableName);
 	If VTSearch = Undefined Then
 		If RaiseExeption Then
-			Raise StrTemplate("Table [%1] not found in temp tables", TableName);
+			Raise StrTemplate(R().Error_TableNotFoundInTempTables, TableName);
 		Else
 			Return New ValueTable();
 		EndIf;

@@ -2502,5 +2502,73 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	
 #EndRegion
 
+#Region ErrorMessages
+	// Error messages for various modules
+	Strings.Insert("Error_RaiseOnCalculationError", NStr("en = 'Raise on calculation error'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSO", NStr("en = 'Not supported External link for [SO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSI", NStr("en = 'Not supported Internal link for [SI] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSI", NStr("en = 'Not supported External link for [SI] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSC", NStr("en = 'Not supported Internal link for [SC] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSC", NStr("en = 'Not supported External link for [SC] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSPO", NStr("en = 'Not supported Internal link for [SPO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSPO", NStr("en = 'Not supported External link for [SPO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRSC", NStr("en = 'Not supported Internal link for [RSC] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkRSC", NStr("en = 'Not supported External link for [RSC] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSRO", NStr("en = 'Not supported Internal link for [SRO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSRO", NStr("en = 'Not supported External link for [SRO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPO", NStr("en = 'Not supported Internal link for [PO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPO", NStr("en = 'Not supported External link for [PO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkGR", NStr("en = 'Not supported Internal link for [GR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkGR", NStr("en = 'Not supported External link for [GR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRGR", NStr("en = 'Not supported Internal link for [RGR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkRGR", NStr("en = 'Not supported External link for [RGR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPI", NStr("en = 'Not supported Internal link for [PI] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPI", NStr("en = 'Not supported External link for [PI] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkITO", NStr("en = 'Not supported Internal link for [ITO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkITO", NStr("en = 'Not supported External link for [ITO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkIT", NStr("en = 'Not supported Internal link for [IT] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkIT", NStr("en = 'Not supported External link for [IT] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkISR", NStr("en = 'Not supported External link for [ISR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPR", NStr("en = 'Not supported Internal link for [PR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPR", NStr("en = 'Not supported External link for [PR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSR", NStr("en = 'Not supported Internal link for [SR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSR", NStr("en = 'Not supported External link for [SR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPRO", NStr("en = 'Not supported Internal link for [PRO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPRO", NStr("en = 'Not supported External link for [PRO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRSR", NStr("en = 'Not supported Internal link for [RSR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkRSR", NStr("en = 'Not supported External link for [RSR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPRR", NStr("en = 'Not supported Internal link for [PRR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRRR", NStr("en = 'Not supported Internal link for [RRR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkStockAdjustmentAsSurplus", NStr("en = 'Not supported Internal link for [StockAdjustmentAsSurplus] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkStockAdjustmentAsWriteOff", NStr("en = 'Not supported Internal link for [StockAdjustmentAsWriteOff] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPhysicalInventory", NStr("en = 'Not supported External link for [PhysicalInventory] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkWO", NStr("en = 'Not supported Internal link for [WO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkWO", NStr("en = 'Not supported External link for [WO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkWS", NStr("en = 'Not supported Internal link for [WS] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSC2", NStr("en = 'Not supported External link for [SC] to [%1]'", Lang));
+	Strings.Insert("Error_GetSeparatorColumnsNotSupported", NStr("en = 'GetSeparatorColumns( %1 ) not supported'", Lang));
+	Strings.Insert("Error_FormElementNotFound", NStr("en = 'Not found form element: %1'", Lang));
+	Strings.Insert("Error_UnsupportedRegisterType", NStr("en = 'Unsupported register type [%1]'", Lang));
+	Strings.Insert("Error_TableNotFoundInTempTables", NStr("en = 'Table [%1] not found in temp tables'", Lang));
+	Strings.Insert("Error_DocumentAndAdvancesKeyNotFound", NStr("en = 'Not found rows in Table_DocumentAndAdvancesKey by uuid [%1]'", Lang));
+	Strings.Insert("Error_DocumentAndTransactionsKeyNotFound", NStr("en = 'Not found rows in Table_DocumentAndTransactionsKey by uuid [%1]'", Lang));
+	Strings.Insert("Error_UnknownAdvanceRegister", NStr("en = 'Unknown advance register [%1]'", Lang));
+	Strings.Insert("Error_UnknownTransactionRegister", NStr("en = 'Unknown transaction register [%1]'", Lang));
+	Strings.Insert("Error_PostingInfoNotFound", NStr("en = 'Not found [%1] in array of posting info'", Lang));
+	Strings.Insert("Error_AdvanceLessThanZero", NStr("en = 'Advance < 0 ADV_KEY[%1]'", Lang));
+	Strings.Insert("Error_FoundMoreThanOneCompany", NStr("en = 'Found more than one when option not: Companies (Legal name), UseCompanies'", Lang));
+	Strings.Insert("Error_FoundMoreThanOneItemKey", NStr("en = 'Found more than one when option not: ItemKey, UseItemKey'", Lang));
+	Strings.Insert("Error_UnsupportedCommandName", NStr("en = 'Unsupported command name[%1]'", Lang));
+	Strings.Insert("Error_UnsupportedBundleType", NStr("en = 'Unsupported bundle type [%1]'", Lang));
+	Strings.Insert("Error_NotHandledViewNotify", NStr("en = 'Not handled view notify [%1]'", Lang));
+	Strings.Insert("Error_KeyNotAllowedForDataPath", NStr("en = 'Key [%1] not allowed for data path [%2]'", Lang));
+	Strings.Insert("Error_RowNotFoundInTable", NStr("en = 'Not found row in table [%1] line [%2]'", Lang));
+	Strings.Insert("Error_RowNotFoundInSourceTableMap", NStr("en = 'Not found row in SourceTableMap [%1] [%2]'", Lang));
+	Strings.Insert("Error_WrongDataPathForReadOnlyProperty", NStr("en = 'Wrong data path for read only property [%1]'", Lang));
+	Strings.Insert("Error_UnknownRefType", NStr("en = 'Unknown ref type: %1'", Lang));
+	Strings.Insert("Error_StepsEnablerNotDefined", NStr("en = 'Steps enabler is not defined [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSC3", NStr("en = 'Not supported External link for [SC] to [%1]'", Lang));
+#EndRegion
+
 	Return Strings;
 EndFunction

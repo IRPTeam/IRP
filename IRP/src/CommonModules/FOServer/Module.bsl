@@ -278,7 +278,7 @@ Function GetDefault_LegalName(Parameters, Value = Undefined) Export
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
 		If QuerySelection.Count() > 1 Then
-                        Raise StrTemplate(R().FoundMoreThanOneWhenOptionNot, "Companies (Legal name)", "UseCompanies");
+                        Raise StrTemplate(R().Error_FoundMoreThanOneCompany);
 		EndIf;
 		Return New Structure("Ref, DeletionMark", QuerySelection.Ref, QuerySelection.DeletionMark);
 	EndIf;
@@ -303,7 +303,7 @@ Function GetDefault_ItemKey(Parameters, Value = Undefined) Export
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then 
 		If QuerySelection.Count() > 1 Then
-                        Raise StrTemplate(R().FoundMoreThanOneWhenOptionNot, "ItemKey", "UseItemKey");
+                        Raise StrTemplate(R().Error_FoundMoreThanOneItemKey);
 		EndIf;
 		Return New Structure("Ref, DeletionMark", QuerySelection.Ref, QuerySelection.DeletionMark);
 	EndIf;

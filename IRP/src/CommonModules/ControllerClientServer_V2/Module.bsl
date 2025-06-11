@@ -579,7 +579,7 @@ Procedure ExecuteCommandByName(Parameters, CommandName)
 	ElsIf CommandName = "CommandRecalculateByTotalAmount" Then
 		CommandRecalculateByTotalAmount(Parameters);
 	Else
-		Raise StrTemplate("Unsupported command name[%1]", CommandName);
+		Raise StrTemplate(R().Error_UnsupportedCommandName, CommandName);
 	EndIf;
 EndProcedure
 
@@ -5972,7 +5972,7 @@ Procedure StepCovertQuantityToQuantityInBaseUnit(Parameters, Chain, Type)
 	ElsIf Type = "ItemKeyBundle" Then
 		Options.Bundle = GetItemKeyBundle(Parameters);
 	Else
-		Raise StrTemplate("Unsupported bundle type [%1]", Type);
+		Raise StrTemplate(R().Error_UnsupportedBundleType, Type);
 	EndIf;
 	Options.Unit       = GetUnit(Parameters);
 	Options.Quantity   = GetQuantity(Parameters);
@@ -17111,7 +17111,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetPaymentListCommissionPercentNotify"        Then ViewClient_V2.OnSetPaymentListCommissionPercentNotify(Parameters);
 	
 	Else
-		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);
+		Raise StrTemplate(R().Error_NotHandledViewNotify, ViewNotify);
 	EndIf;
 EndProcedure	
 #ENDIF
@@ -17369,7 +17369,7 @@ Function GetProperty(Parameters, Cache, Source, DataPath, Key, ReadOnlyFromCache
 	// this is the header attribute, it is indicated without a dot, for example, Company
 	If Segments.Count() = 1 Then
 		If ValueIsFilled(Key) Then
-			Raise StrTemplate("Key [%1] not allowed for data path [%2]", Key, DataPath);
+			Raise StrTemplate(R().Error_KeyNotAllowedForDataPath, Key, DataPath);
 		EndIf;
 		If Cache.Property(DataPath) Then
 			Return Cache[DataPath];
@@ -17394,7 +17394,7 @@ Function GetProperty(Parameters, Cache, Source, DataPath, Key, ReadOnlyFromCache
 		If TypeOf(Key) = Type("Number") Then
 			RowsInNotChached = Parameters.Object[TableName].FindRows(New Structure("LineNumber", Key));
 			If RowsInNotChached.Count() = 0 Then
-				Raise StrTemplate("Not found row in table [%1] line [%2]", TableName, Key);
+				Raise StrTemplate(R().Error_RowNotFoundInTable, TableName, Key);
 			Else
 				RowByKey = RowsInNotChached[0];
 			EndIf;
@@ -17406,7 +17406,7 @@ Function GetProperty(Parameters, Cache, Source, DataPath, Key, ReadOnlyFromCache
 			
 			RowByKey = Parameters.SourceTableMap.Get(TableName + ":" + Key);
 			If RowByKey = Undefined Then
-				Raise StrTemplate("Not found row in SourceTableMap [%1] [%2]", TableName, Key);
+				Raise StrTemplate(R().Error_RowNotFoundInSourceTableMap, TableName, Key);
 			EndIf;
 			
 		EndIf;
@@ -17462,7 +17462,7 @@ Function SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache
 
 			EndIf;
 		Else
-			Raise StrTemplate("Wrong data path for read only property [%1]", DataPath);
+			Raise StrTemplate(R().Error_WrongDataPathForReadOnlyProperty, DataPath);
 		EndIf;
 	EndIf;
 	
@@ -17652,7 +17652,7 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters, BindName, 
 	StepsEnabler = MetadataBinding.Get(FullDataPath);
 	StepsEnabler = ?(StepsEnabler = Undefined, DefaulStepsEnabler, StepsEnabler);
 	If Not ValueIsFilled(StepsEnabler) Then
-		Raise StrTemplate("Steps enabler is not defined [%1]", DataPath);
+		Raise StrTemplate(R().Error_StepsEnablerNotDefined, DataPath);
 	EndIf;
 	
 	Result.FullDataPath = FullDataPath;

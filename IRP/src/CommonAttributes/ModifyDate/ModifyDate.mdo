@@ -110,6 +110,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>BusinessProcess.Execution</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.PurchaseReturnOrder</metadata>
     <use>Use</use>
   </content>
@@ -575,6 +579,10 @@
   </content>
   <content>
     <metadata>Catalog.SourceOfOrigins</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.ExecutionTemplates</metadata>
     <use>Use</use>
   </content>
   <content>

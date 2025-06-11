@@ -65,6 +65,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Task.ExecutorTask</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.MoneyTransfer</metadata>
     <use>Use</use>
   </content>
@@ -106,6 +110,10 @@
   </content>
   <content>
     <metadata>Catalog.FixedAssetsLedgerTypes</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>BusinessProcess.Execution</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -574,6 +582,10 @@
   </content>
   <content>
     <metadata>Catalog.SourceOfOrigins</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.ExecutionTemplates</metadata>
     <use>Use</use>
   </content>
   <content>

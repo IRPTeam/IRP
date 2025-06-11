@@ -20,7 +20,7 @@ EndProcedure
 // 
 // Parameters:
 //  Form - ClientApplicationForm - Form
-//  MainAttribute - FormAttribute, DynamicList - Main attribute
+//  MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main attribute
 //  ObjectFullName - String - Object full name
 //  FormType - EnumRef.FormTypes - Form type
 //  AddInfo - Undefined - Add info
@@ -128,7 +128,7 @@ EndProcedure
 // Parameters:
 //  FullCommandName - String - Full command
 //  Form - ClientApplicationForm - Form
-//  MainAttribute - FormAttribute, DynamicList - Main form attribute
+//  MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main form attribute
 //  Targets - AnyRef, Array of AnyRef - Command target
 //  AddInfo - Undefined -  Add info
 Procedure RunCommandAction(Val FullCommandName, Form, MainAttribute, Targets, AddInfo = Undefined) Export
@@ -293,7 +293,7 @@ EndFunction
 // 	CommandParameters - Structure - Command parameters:
 //  * CommandDescription - See InternalCommandsServer.GetCommandDescription
 //  * Form - ClientApplicationForm - Form
-//  * MainAttribute - FormAttribute, DynamicList - Main attribute
+//  * MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main attribute
 //  * ObjectFullName - String - Object full name
 //  * FormType - EnumRef.FormTypes - Form type
 //  Cancel - Boolean - Cancel 
@@ -310,7 +310,7 @@ EndProcedure
 //  * CommandButton - FormButton - Command button
 //  * CommandDescription - See InternalCommandsServer.GetCommandDescription
 //  * Form - ClientApplicationForm - Form
-//  * MainAttribute - FormAttribute, DynamicList - Main attribute
+//  * MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main attribute
 //  * ObjectFullName - String - Object full name
 //  * FormType - EnumRef.FormTypes - Form type
 //  AddInfo - Undefined - Add info

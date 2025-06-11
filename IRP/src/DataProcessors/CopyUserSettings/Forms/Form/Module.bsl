@@ -238,7 +238,7 @@ Function GetSettingsStorage(StorageName)
 		Return ReportsUserSettingsStorage;
 	ElsIf StorageName = "SystemSettingsStorage" Then
 		Return SystemSettingsStorage;
-	Else
-		Raise StrTemplate("Unsupported setting storage name [%1]", StorageName);
-	EndIf;
+        Else
+                Raise StrTemplate(R().UnsupportedSettingStorageName, StorageName);
+        EndIf;
 EndFunction

@@ -95,7 +95,7 @@ Function RepostingDocuments(Company, StartDate, EndDate, UpdateCurrenciesTable) 
 	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
-		Raise "Job aborted";
+             Raise R().JobAborted;
 	EndIf;
 	
 	Return Errors;
@@ -175,7 +175,7 @@ Function CalculationMovementCosts(Company, StartDate, EndDate, CalculationMode, 
 	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
-		Raise "Job aborted";
+            Raise R().JobAborted;
 	EndIf;
 	
 	Return Errors;
@@ -252,7 +252,7 @@ Function VendorsAdvancesClosing(Company, StartDate, EndDate, DontOffsetEmptyProj
 	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
-		Raise "Job aborted";
+            Raise R().JobAborted;
 	EndIf;
 	
 	Return Errors;
@@ -329,7 +329,7 @@ Function CustomersAdvancesClosing(Company, StartDate, EndDate, DontOffsetEmptyPr
 	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
-		Raise "Job aborted";
+            Raise R().JobAborted;
 	EndIf;
 	
 	Return Errors;
@@ -443,7 +443,7 @@ Function DepreciationCalculation_ByBranch(Company, StartDate, EndDate, Branch, P
 	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
-		Raise "Job aborted";
+            Raise R().JobAborted;
 	EndIf;
 	
 	Return Errors;
@@ -540,7 +540,7 @@ Function ForeignCurrencyRevaluation(Company, StartDate, EndDate, Analytics, Peri
 	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
-		Raise "Job aborted";
+            Raise R().JobAborted;
 	EndIf;
 	
 	Return Errors;

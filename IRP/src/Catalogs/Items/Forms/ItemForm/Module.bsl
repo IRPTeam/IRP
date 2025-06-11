@@ -317,7 +317,7 @@ Procedure FillDescriptionByTemplateAtClient(CommandName)
 	ElsIf StrStartsWith(CommandName, "CommandFillByTemplate_ForeignDescription") Then
 		FillDescriptionByTemplateAtServer("ForeignFullDescription", "ItemForeignFullDescriptionTemplate");
 	Else
-		Raise StrTemplate("Unknown command [%1]", CommandName);
+               Raise StrTemplate(R().ItemFormUnknownCommand, CommandName);
 	EndIf;		
 EndProcedure
 

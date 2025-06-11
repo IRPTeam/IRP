@@ -63,7 +63,7 @@ Procedure UpdateFormAttributes(Object, Form, Direction)
 			SetLineAttributeValue(Object, Form, Row.Key, Form[Row.Value]);
 		EndDo;		
 	Else
-		Raise StrTemplate("Unsupported direction [%1]", Direction);
+		Raise StrTemplate(R().UnsupportedDirection, Direction);
 	EndIf;
 EndProcedure
 

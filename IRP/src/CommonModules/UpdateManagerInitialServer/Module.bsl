@@ -71,7 +71,7 @@ Function RunUpdate_UpdateSystemAttributes(MethodName) Export
 	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
-		Raise "Job aborted";
+        Raise R().JobAborted;
 	EndIf;
 	
 	If Errors.Count() = 0 Then
@@ -132,7 +132,7 @@ Function RunUpdate_UpdateSystemAttributesSets(MethodName) Export
 	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
-		Raise "Job aborted";
+            Raise R().JobAborted;
 	EndIf;
 	
 	If Errors.Count() = 0 Then
@@ -243,7 +243,7 @@ Function RunUpdate_UpdateSystemAttributesValue(MethodName) Export
 	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
-		Raise "Job aborted";
+            Raise R().JobAborted;
 	EndIf;
 	
 	If Errors.Count() = 0 Then

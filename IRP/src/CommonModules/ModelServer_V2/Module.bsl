@@ -440,7 +440,7 @@ Function GetAgreementTypeByDebtType(DebtType) Export
 		Or DebtType = Enums.DebtTypes.EmployeeReceivable Then
 		Return  Enums.AgreementTypes.Other;
 	Else
-		Raise StrTemplate("Unknown AgreementType by DebtType [%1]", DebtType);
+                Raise StrTemplate(R().UnknownAgreementTypeByDebtType, DebtType);
 	EndIf;
 EndFunction	
 	

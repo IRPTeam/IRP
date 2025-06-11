@@ -329,8 +329,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
-	QueryArray.Add(R5020B_PartnersBalance());	
-	QueryArray.Add(R6025B_SimpleBatch());	
+	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());	
+	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
 
@@ -340,121 +341,124 @@ EndFunction
 
 Function ItemList()
 	Return 
-	"SELECT
-	|	RowIDInfo.Ref AS Ref,
-	|	RowIDInfo.Key AS Key,
-	|	MAX(RowIDInfo.RowID) AS RowID
-	|INTO TableRowIDInfo
-	|FROM
-	|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
-	|WHERE
-	|	RowIDInfo.Ref = &Ref
-	|GROUP BY
-	|	RowIDInfo.Ref,
-	|	RowIDInfo.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ShipmentConfirmations.Key AS Key
-	|INTO ShipmentConfirmations
-	|FROM
-	|	Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
-	|WHERE
-	|	ShipmentConfirmations.Ref = &Ref
-	|GROUP BY
-	|	ShipmentConfirmations.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ItemList.Ref.Company AS Company,
-	|	ItemList.Store AS Store,
-	|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
-	|	ItemList.Ref AS Invoice,
-	|	ItemList.ItemKey AS ItemKey,
-	|	ItemList.Quantity AS UnitQuantity,
-	|	ItemList.QuantityInBaseUnit AS Quantity,
-	|	ItemList.TotalAmount AS Amount,
-	|	ItemList.Ref.Partner AS Partner,
-	|	ItemList.Ref.LegalName AS LegalName,
-	|	CASE
-	|		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-	|		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-	|			THEN ItemList.Ref.Agreement.StandardAgreement
-	|		ELSE ItemList.Ref.Agreement
-	|	END AS Agreement,
-	|	ItemList.Ref.Currency AS Currency,
-	|	ItemList.Unit AS Unit,
-	|	ItemList.Ref.Date AS Period,
-	|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
-	|	ItemList.SalesOrder AS SalesOrder,
-	|	CASE
-	|		WHEN ItemList.Ref.Agreement.UseOrdersForSettlements
-	|			THEN ItemList.SalesOrder
-	|		ELSE UNDEFINED
-	|	END AS SalesOrderSettlements,
-	|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
-	|	TableRowIDInfo.RowID AS RowKey,
-	|	ItemList.DeliveryDate AS DeliveryDate,
-	|	ItemList.IsService AS IsService,
-	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
-	|	ItemList.RevenueType AS RevenueType,
-	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
-	|	CASE
-	|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-	|			THEN ItemList.Ref
-	|		ELSE UNDEFINED
-	|	END AS Basis,
-	|	ItemList.NetAmount AS NetAmount,
-	|	ItemList.OffersAmount AS OffersAmount,
-	|	ItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
-	|	ItemList.Key AS Key,
-	|	ItemList.Ref.Branch AS Branch,
-	|	ItemList.Ref.LegalNameContract AS LegalNameContract,
-	|	ItemList.PriceType AS PriceType,
-	|	ItemList.Price AS Price,
-	|	ItemList.SalesPerson AS SalesPerson,
-	|	(ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales)
-	|	OR ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.CurrencyRevaluationCustomer)
-	|	OR ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.CurrencyRevaluationVendor)) AS IsSales,
-	|	ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
-	|	ItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
-	|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
-	|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
-	|	ItemList.InventoryOrigin AS InventoryOrigin,
-	|	ItemList.VatRate AS VatRate,
-	|	ItemList.TaxAmount AS TaxAmount,
-	|	ItemList.Project AS Project,
-	|	ItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType,
-	|	case
-	|		when ItemList.ItemKey = ItemList.Ref.Company.CurrencyRevaluationItemKey
-	|			then true
-	|		else false
-	|	end AS IsCurrencyRevaluation,
-	|	ISNULL(ItemList.Ref.CurrencyRevaluationInvoice.Ref, Undefined) AS CurrencyRevaluationInvoice,
-	|	ItemList.SimpleBatch AS SimpleBatch
-	|INTO ItemList
-	|FROM
-	|	Document.SalesInvoice.ItemList AS ItemList
-	|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
-	|		ON ItemList.Key = ShipmentConfirmations.Key
-	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
-	|		ON ItemList.Key = TableRowIDInfo.Key
-	|WHERE
-	|	ItemList.Ref = &Ref
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	SalesInvoiceShipmentConfirmations.Key AS Key,
-	|	SalesInvoiceShipmentConfirmations.ShipmentConfirmation AS ShipmentConfirmation,
-	|	SalesInvoiceShipmentConfirmations.Quantity AS Quantity
-	|INTO ShipmentConfirmationsInfo
-	|FROM
-	|	Document.SalesInvoice.ShipmentConfirmations AS SalesInvoiceShipmentConfirmations
-	|WHERE
-	|	SalesInvoiceShipmentConfirmations.Ref = &Ref";
+		"SELECT
+		|	RowIDInfo.Ref AS Ref,
+		|	RowIDInfo.Key AS Key,
+		|	MAX(RowIDInfo.RowID) AS RowID
+		|INTO TableRowIDInfo
+		|FROM
+		|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|GROUP BY
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ShipmentConfirmations.Key AS Key
+		|INTO ShipmentConfirmations
+		|FROM
+		|	Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
+		|WHERE
+		|	ShipmentConfirmations.Ref = &Ref
+		|GROUP BY
+		|	ShipmentConfirmations.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Store AS Store,
+		|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
+		|	ItemList.Ref AS Invoice,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Quantity AS UnitQuantity,
+		|	ItemList.QuantityInBaseUnit AS Quantity,
+		|	ItemList.TotalAmount AS Amount,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.LegalName AS LegalName,
+		|	CASE
+		|		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN ItemList.Ref.Agreement.StandardAgreement
+		|		ELSE ItemList.Ref.Agreement
+		|	END AS Agreement,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Unit AS Unit,
+		|	ItemList.Ref.Date AS Period,
+		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
+		|	ItemList.SalesOrder AS SalesOrder,
+		|	CASE
+		|		WHEN ItemList.Ref.Agreement.UseOrdersForSettlements
+		|			THEN ItemList.SalesOrder
+		|		ELSE UNDEFINED
+		|	END AS SalesOrderSettlements,
+		|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
+		|	TableRowIDInfo.RowID AS RowKey,
+		|	ItemList.DeliveryDate AS DeliveryDate,
+		|	ItemList.IsService AS IsService,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	CASE
+		|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN ItemList.Ref
+		|		ELSE UNDEFINED
+		|	END AS Basis,
+		|	ItemList.NetAmount AS NetAmount,
+		|	ItemList.OffersAmount AS OffersAmount,
+		|	ItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
+		|	ItemList.Key AS Key,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract,
+		|	ItemList.PriceType AS PriceType,
+		|	ItemList.Price AS Price,
+		|	ItemList.SalesPerson AS SalesPerson,
+		|	(ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales)
+		|	OR ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.CurrencyRevaluationCustomer)
+		|	OR ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.CurrencyRevaluationVendor)) AS IsSales,
+		|	ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
+		|	ItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
+		|	ItemList.InventoryOrigin AS InventoryOrigin,
+		|	ItemList.VatRate AS VatRate,
+		|	ItemList.TaxAmount AS TaxAmount,
+		|	ItemList.Project AS Project,
+		|	ItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType,
+		|	case
+		|		when ItemList.ItemKey = ItemList.Ref.Company.CurrencyRevaluationItemKey
+		|			then true
+		|		else false
+		|	end AS IsCurrencyRevaluation,
+		|	ISNULL(ItemList.Ref.CurrencyRevaluationInvoice.Ref, Undefined) AS CurrencyRevaluationInvoice,
+		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
+		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.TradeAgent) AS IsTradeAgent,
+		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
+		|   ItemList.SimpleBatch AS SimpleBatch
+		|INTO ItemList
+		|FROM
+		|	Document.SalesInvoice.ItemList AS ItemList
+		|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
+		|		ON ItemList.Key = ShipmentConfirmations.Key
+		|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+		|		ON ItemList.Key = TableRowIDInfo.Key
+		|WHERE
+		|	ItemList.Ref = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ShipmentConfirmations.Key AS Key,
+		|	ShipmentConfirmations.ShipmentConfirmation AS ShipmentConfirmation,
+		|	ShipmentConfirmations.Quantity AS Quantity
+		|INTO ShipmentConfirmationsInfo
+		|FROM
+		|	Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
+		|WHERE
+		|	ShipmentConfirmations.Ref = &Ref";
 EndFunction
 
 Function ItemListLandedCost()
@@ -1555,8 +1559,40 @@ EndFunction
 Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_SI();
 EndFunction
+		 
+Function R5015B_OtherPartnersTransactions()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Agreement,
+		|	ItemList.Basis,
+		|	ItemList.Key,
+		|	SUM(ItemList.Amount) AS Amount
+		|INTO R5015B_OtherPartnersTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsOther
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Agreement,
+		|	ItemList.Basis,
+		|	ItemList.Key";
+EndFunction
 	
- Function R6025B_SimpleBatch()
+Function R6025B_SimpleBatch()
 	Return 
 	"SELECT
 	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
@@ -1694,8 +1730,11 @@ Function GetAnalytics_RevenueFromSales(Parameters)
 	                                                   Parameters.ObjectData.Partner, 
 	                                                   Parameters.ObjectData.Agreement,
 	                                                   Parameters.ObjectData.Currency);
-	                                                   
-	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
+	If Parameters.ObjectData.Agreement.Type = Enums.AgreementTypes.Other Then
+		AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
+	Else                           
+		AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
+	EndIf;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
@@ -1723,8 +1762,11 @@ Function GetAnalytics_VATIncoming(Parameters)
 	                                                   Parameters.ObjectData.Partner, 
 	                                                   Parameters.ObjectData.Agreement,
 	                                                   Parameters.ObjectData.Currency);
-	                                                   
-	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
+	If Parameters.ObjectData.Agreement.Type = Enums.AgreementTypes.Other Then
+		AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
+	Else                           
+		AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
+	EndIf;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);

@@ -249,7 +249,7 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|UNION ALL
 	|
 	|SELECT
-	|	""WithholdingTaxInvoice"",
+	|	&DocumentName,
 	|	VALUE(Enum.OutgoingPaymentTransactionTypes.OtherPartner),
 	|	R5015B_OtherPartnersTransactions.Company,
 	|	R5015B_OtherPartnersTransactions.Branch,
@@ -429,8 +429,39 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	QueryTable_StandardAgreements.Project,
 	|	QueryTable_StandardAgreements.Amount
 	|FROM
-	|	QueryTable_StandardAgreements AS QueryTable_StandardAgreements";
-
+	|	QueryTable_StandardAgreements AS QueryTable_StandardAgreements
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	&DocumentName,
+	|	VALUE(Enum.OutgoingPaymentTransactionTypes.OtherPartner),
+	|	R5015B_OtherPartnersTransactions.Company,
+	|	R5015B_OtherPartnersTransactions.Branch,
+	|	R5015B_OtherPartnersTransactions.Currency,
+	|	UNDEFINED,
+	|	R5015B_OtherPartnersTransactions.Partner,
+	|	R5015B_OtherPartnersTransactions.Agreement,
+	|	R5015B_OtherPartnersTransactions.LegalName,
+	|	UNDEFINED,
+	|	UNDEFINED,
+	|	R5015B_OtherPartnersTransactions.AmountBalance
+	|FROM
+	|	AccumulationRegister.R5015B_OtherPartnersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
+	|		(SELECT
+	|			tmp.Company,
+	|			tmp.Branch,
+	|			tmp.Currency,
+	|			tmp.Agreement,
+	|			tmp.Partner,
+	|			tmp.LegalName
+	|		FROM
+	|			Filter_ByAgreements AS tmp)
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+	|		R5015B_OtherPartnersTransactions
+	|WHERE
+	|	R5015B_OtherPartnersTransactions.AmountBalance > 0";
+	
 	Query.SetParameter("QueryTable_StandardAgreements", QueryTable_StandardAgreements);
 	Query.SetParameter("DocumentName", DocumentName);
 	QueryResult = Query.Execute();

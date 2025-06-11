@@ -32,6 +32,7 @@ Scenario: _022300 preparation
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
+		When Create OtherPartners objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
 		When Create catalog Countries objects
@@ -78,6 +79,11 @@ Scenario: _022300 preparation
 				| "Number"                                  |
 				| "$$NumberPurchaseReturnOrder022006$$"     |
 			When create PurchaseReturnOrder022006 based on PurchaseInvoice018001
+	* Partner Other
+		When Create document PurchaseInvoice objects (Other)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(40).GetObject().Write(DocumentWriteMode.Posting);"    |
+
 
 Scenario: _0223001 check preparation
 	When check preparation
@@ -540,4 +546,39 @@ Scenario: _300512 check Use GR filling from store when create PR based on PI
 			| 'Item'    | 'Item key'   | 'Use shipment confirmation'    |
 			| 'Dress'   | 'L/Green'    | 'Yes'                          |
 		And I close all client application windows
-		
+
+Scenario: _022311 create Purchase return with partner Other
+	And I close all client application windows
+	* Select PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '40'     |
+		And I select current line in "List" table
+	* Create PR
+		And I click the button named "FormDocumentPurchaseReturnGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+	* check PR document	
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And form attributes have values:
+			| 'Name'                      | 'Value'            | 'HowToSearch' |
+			| 'Agreement'                 | "Other partner 2"  | ''            |
+			| 'Company'                   | "Main Company"     | ''            |
+			| 'Currency'                  | "TRY"              | ''            |
+			| 'CurrencyTotalAmount'       | "TRY"              | ''            |
+			| 'ItemListTotalNetAmount'    | "150,00"           | ''            |
+			| 'ItemListTotalOffersAmount' | "0,00"             | ''            |
+			| 'ItemListTotalTaxAmount'    | "27,00"            | ''            |
+			| 'ItemListTotalTotalAmount'  | "177,00"           | ''            |
+			| 'LegalName'                 | "Other partner 2"  | ''            |
+			| 'Partner'                   | "Other partner 2"  | ''            |
+			| 'PriceIncludeTax'           | "No"               | ''            |
+			| 'Store'                     | "Store 01"         | ''            |
+			| 'TransactionType'           | "Return to vendor" | ''            |
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows

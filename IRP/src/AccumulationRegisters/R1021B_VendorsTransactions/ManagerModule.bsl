@@ -200,7 +200,7 @@ Function R1021B_VendorsTransactions_PR() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsReturnToVendor
+		|	ItemList.IsReturnToVendor AND (ItemList.IsVendor OR ItemList.IsConsignor)
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Company,

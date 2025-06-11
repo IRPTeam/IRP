@@ -22,6 +22,7 @@ Scenario: _041600 preparation (Purchase return)
 		When Create catalog Units objects
 		When Create catalog Items objects
 		When Create catalog Partners objects (trade agent and consignor)
+		When Create OtherPartners objects
 		When Create catalog Stores (trade agent)
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
@@ -128,6 +129,9 @@ Scenario: _041600 preparation (Purchase return)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseReturn.FindByNumber(11).GetObject().Write(DocumentWriteMode.Write);"     |
 		| "Documents.PurchaseReturn.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);"   |
+	When Create document PurchaseReturn objects (partner Other)
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseReturn.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I close all client application windows
 	* Load PI and PR comission trade 
 	When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
@@ -844,4 +848,275 @@ Scenario: _041632 check Purchase return movements by the Register  "R6060 Cost o
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
 			| 'Purchase return 234 dated 07.05.2025 00:00:00' |
-	And I close all client application windows		
+	And I close all client application windows
+
+Scenario: _041633 check Purchase return movements by the Register  "Posted documents registry" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                                            | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'       | ''                                            | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                            | 'Document'                                    | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                            | 'Purchase return 8 dated 04.06.2025 14:56:13' | '04.06.2025 14:56:13' | '8'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows
+
+Scenario: _041634 check Purchase return movements by the Register  "R1001 Purchases" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "R1001 Purchases"
+		And I click "Registrations report info" button
+		And I select "R1001 Purchases" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''             | ''       | ''                             | ''         | ''                                            | ''                  | ''                  | ''                                     | ''         | ''       | ''           | ''              | ''                     |
+			| 'Register  "R1001 Purchases"'                 | ''                    | ''             | ''       | ''                             | ''         | ''                                            | ''                  | ''                  | ''                                     | ''         | ''       | ''           | ''              | ''                     |
+			| ''                                            | 'Period'              | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Invoice'                                     | 'Item key'          | 'Serial lot number' | 'Row key'                              | 'Quantity' | 'Amount' | 'Net amount' | 'Offers amount' | 'Deferred calculation' |
+			| ''                                            | '04.06.2025 14:56:13' | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Purchase return 8 dated 04.06.2025 14:56:13' | 'Trousers/Trousers' | ''                  | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | '-5'       | '-177'   | '-150'       | ''              | 'No'                   |
+			| ''                                            | '04.06.2025 14:56:13' | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Purchase return 8 dated 04.06.2025 14:56:13' | 'Trousers/Trousers' | ''                  | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | '-5'       | '-30,3'  | '-25,68'     | ''              | 'No'                   |
+			| ''                                            | '04.06.2025 14:56:13' | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Purchase return 8 dated 04.06.2025 14:56:13' | 'Trousers/Trousers' | ''                  | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | '-5'       | '-177'   | '-150'       | ''              | 'No'                   |
+	And I close all client application windows
+
+Scenario: _041635 check Purchase return movements by the Register  "R1002 Purchase returns" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "R1002 Purchase returns"
+		And I click "Registrations report info" button
+		And I select "R1002 Purchase returns" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''             | ''       | ''                             | ''         | ''                                            | ''                  | ''                                     | ''              | ''         | ''       | ''           | ''                     |
+			| 'Register  "R1002 Purchase returns"'          | ''                    | ''             | ''       | ''                             | ''         | ''                                            | ''                  | ''                                     | ''              | ''         | ''       | ''           | ''                     |
+			| ''                                            | 'Period'              | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Invoice'                                     | 'Item key'          | 'Row key'                              | 'Return reason' | 'Quantity' | 'Amount' | 'Net amount' | 'Deferred calculation' |
+			| ''                                            | '04.06.2025 14:56:13' | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Purchase return 8 dated 04.06.2025 14:56:13' | 'Trousers/Trousers' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | ''              | '5'        | '177'    | '150'        | 'No'                   |
+			| ''                                            | '04.06.2025 14:56:13' | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Purchase return 8 dated 04.06.2025 14:56:13' | 'Trousers/Trousers' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | ''              | '5'        | '30,3'   | '25,68'      | 'No'                   |
+			| ''                                            | '04.06.2025 14:56:13' | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Purchase return 8 dated 04.06.2025 14:56:13' | 'Trousers/Trousers' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | ''              | '5'        | '177'    | '150'        | 'No'                   |
+	And I close all client application windows
+
+Scenario: _041636 check Purchase return movements by the Register  "R2040 Taxes incoming" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "R2040 Taxes incoming"
+		And I click "Registrations report info" button
+		And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| 'Register  "R2040 Taxes incoming"'            | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Amount' |
+			| ''                                            | '04.06.2025 14:56:13' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Return'       | 'Local currency'               | 'TRY'      | 'TRY'                  | '27'     |
+			| ''                                            | '04.06.2025 14:56:13' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Return'       | 'Reporting currency'           | 'USD'      | 'TRY'                  | '4,62'   |
+			| ''                                            | '04.06.2025 14:56:13' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Return'       | 'en description is empty'      | 'TRY'      | 'TRY'                  | '27'     |
+	And I close all client application windows
+
+Scenario: _041637 check Purchase return movements by the Register  "R4010 Actual stocks" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "R4010 Actual stocks"
+		And I click "Registrations report info" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''           | ''         | ''                  | ''                  | ''                 | ''         |
+			| 'Register  "R4010 Actual stocks"'             | ''                    | ''           | ''         | ''                  | ''                  | ''                 | ''         |
+			| ''                                            | 'Period'              | 'RecordType' | 'Store'    | 'Item key'          | 'Serial lot number' | 'Source of origin' | 'Quantity' |
+			| ''                                            | '04.06.2025 14:56:13' | 'Expense'    | 'Store 01' | 'Trousers/Trousers' | ''                  | ''                 | '5'        |
+	And I close all client application windows	
+
+Scenario: _041638 check Purchase return movements by the Register  "R4011 Free stocks" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "R4011 Free stocks"
+		And I click "Registrations report info" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''           | ''         | ''                  | ''         |
+			| 'Register  "R4011 Free stocks"'               | ''                    | ''           | ''         | ''                  | ''         |
+			| ''                                            | 'Period'              | 'RecordType' | 'Store'    | 'Item key'          | 'Quantity' |
+			| ''                                            | '04.06.2025 14:56:13' | 'Expense'    | 'Store 01' | 'Trousers/Trousers' | '5'        |
+	And I close all client application windows
+
+Scenario: _041639 check Purchase return movements by the Register  "R4050 Stock inventory" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "R4050 Stock inventory"
+		And I click "Registrations report info" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''           | ''             | ''         | ''                  | ''         |
+			| 'Register  "R4050 Stock inventory"'           | ''                    | ''           | ''             | ''         | ''                  | ''         |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key'          | 'Quantity' |
+			| ''                                            | '04.06.2025 14:56:13' | 'Expense'    | 'Main Company' | 'Store 01' | 'Trousers/Trousers' | '5'        |
+	And I close all client application windows
+
+Scenario: _041640 check Purchase return movements by the Register  "R5010 Reconciliation statement" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''           | ''             | ''       | ''         | ''                | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'  | ''                    | ''           | ''             | ''       | ''         | ''                | ''                    | ''       |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Currency' | 'Legal name'      | 'Legal name contract' | 'Amount' |
+			| ''                                            | '04.06.2025 14:56:13' | 'Expense'    | 'Main Company' | ''       | 'TRY'      | 'Other partner 2' | ''                    | '-177'   |
+	And I close all client application windows
+
+Scenario: _041641 check Purchase return movements by the Register  "R5015 Other partners transactions" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "R5015 Other partners transactions"
+		And I click "Registrations report info" button
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13'   | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                | ''      | ''       | ''                     |
+			| 'Register  "R5015 Other partners transactions"' | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                | ''      | ''       | ''                     |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'       | 'Basis' | 'Amount' | 'Deferred calculation' |
+			| ''                                              | '04.06.2025 14:56:13' | 'Expense'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''      | '-177'   | 'No'                   |
+			| ''                                              | '04.06.2025 14:56:13' | 'Expense'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''      | '-30,3'  | 'No'                   |
+			| ''                                              | '04.06.2025 14:56:13' | 'Expense'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''      | '-177'   | 'No'                   |
+	And I close all client application windows
+
+Scenario: _041642 check Purchase return movements by the Register  "R5020 Partners balance" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "R5020 Partners balance"
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''           | ''             | ''       | ''                | ''                | ''                | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'          | ''                    | ''           | ''             | ''       | ''                | ''                | ''                | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Partner'         | 'Legal name'      | 'Agreement'       | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                            | '04.06.2025 14:56:13' | 'Expense'    | 'Main Company' | ''       | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''         | 'TRY'      | 'Local currency'               | 'TRY'                  | '-177'   | ''                     | ''                 | ''                   | ''               | '-177'              | ''                 |
+			| ''                                            | '04.06.2025 14:56:13' | 'Expense'    | 'Main Company' | ''       | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | '-177'   | ''                     | ''                 | ''                   | ''               | '-177'              | ''                 |
+			| ''                                            | '04.06.2025 14:56:13' | 'Expense'    | 'Main Company' | ''       | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '-30,3'  | ''                     | ''                 | ''                   | ''               | '-30,3'             | ''                 |
+	And I close all client application windows
+
+Scenario: _041643 check Purchase return movements by the Register  "T1040 Accounting amounts" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "T1040 Accounting amounts"
+		And I click "Registrations report info" button
+		And I select "T1040 Accounting amounts" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''                                     | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
+			| 'Register  "T1040 Accounting amounts"'        | ''                    | ''                                     | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
+			| ''                                            | 'Period'              | 'Row key'                              | 'Operation'               | 'Multi currency movement type' | 'Currency' | 'Revaluated currency' | 'Dr currency' | 'Cr currency' | 'Amount' | 'Dr currency amount' | 'Cr currency amount' | 'Deferred calculation' | 'Advances closing' |
+			| ''                                            | '04.06.2025 14:56:13' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | ''            | ''            | '150'    | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 14:56:13' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | ''            | ''            | '25,68'  | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 14:56:13' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | 'en description is empty' | 'en description is empty'      | 'TRY'      | ''                    | ''            | ''            | '150'    | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 14:56:13' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | ''            | ''            | '27'     | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 14:56:13' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | ''            | ''            | '4,62'   | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 14:56:13' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | 'en description is empty' | 'en description is empty'      | 'TRY'      | ''                    | ''            | ''            | '27'     | ''                   | ''                   | 'No'                   | ''                 |
+	And I close all client application windows
+
+Scenario: _041644 check Purchase return movements by the Register  "T1050 Accounting quantities" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "T1050 Accounting quantities"
+		And I click "Registrations report info" button
+		And I select "T1050 Accounting quantities" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''                                     | ''                        | ''         |
+			| 'Register  "T1050 Accounting quantities"'     | ''                    | ''                                     | ''                        | ''         |
+			| ''                                            | 'Period'              | 'Row key'                              | 'Operation'               | 'Quantity' |
+			| ''                                            | '04.06.2025 14:56:13' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | 'en description is empty' | '5'        |
+	And I close all client application windows
+
+Scenario: _041645 check Purchase return movements by the Register  "T3010S Row ID info" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "T3010S Row ID info"
+		And I click "Registrations report info" button
+		And I select "T3010S Row ID info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                                     | ''                                     | ''          | ''      | ''                                     | ''                                     | ''      | ''         | ''     |
+			| 'Register  "T3010S Row ID info"'              | ''                                     | ''                                     | ''          | ''      | ''                                     | ''                                     | ''      | ''         | ''     |
+			| ''                                            | 'Key'                                  | 'Row ID'                               | 'Unique ID' | 'Basis' | 'Basis key'                            | 'Row ref'                              | 'Price' | 'Currency' | 'Unit' |
+			| ''                                            | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | '*'         | ''      | '                                    ' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | '30'    | 'TRY'      | 'pcs'  |
+	And I close all client application windows
+
+Scenario: _041646 check Purchase return movements by the Register  "T6020 Batch keys info" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "T6020 Batch keys info"
+		And I click "Registrations report info" button
+		And I select "T6020 Batch keys info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''             | ''       | ''         | ''                  | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''     | ''           | ''                       | ''                  | ''                 | ''                    | ''                          | ''            | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             |
+			| 'Register  "T6020 Batch keys info"'           | ''                    | ''             | ''       | ''         | ''                  | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''     | ''           | ''                       | ''                  | ''                 | ''                    | ''                          | ''            | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             |
+			| ''                                            | 'Period'              | 'Company'      | 'Branch' | 'Store'    | 'Item key'          | 'Direction' | 'Currency movement type' | 'Currency' | 'Batch document' | 'Sales invoice' | 'Row ID'                               | 'Profit loss center' | 'Expense type' | 'Work' | 'Work sheet' | 'DELETE batch consignor' | 'Serial lot number' | 'Source of origin' | 'Production document' | 'Purchase invoice document' | 'Fixed asset' | 'Quantity' | 'Invoice amount' | 'Invoice tax amount' | 'Indirect cost amount' | 'Indirect cost tax amount' | 'Extra cost amount by ratio' | 'Extra cost tax amount by ratio' | 'Extra direct cost amount' | 'Extra direct cost tax amount' | 'Allocated cost amount' | 'Allocated cost tax amount' | 'Allocated revenue amount' | 'Allocated revenue tax amount' |
+			| ''                                            | '04.06.2025 14:56:13' | 'Main Company' | ''       | 'Store 01' | 'Trousers/Trousers' | 'Expense'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''     | ''           | ''                       | ''                  | ''                 | ''                    | ''                          | ''            | '5'        | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             |
+	And I close all client application windows
+
+Scenario: _041647 check Purchase return movements by the Register  "TM1010T Row ID movements" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '8'      |
+	* Check movements by the Register "TM1010T Row ID movements"
+		And I click "Registrations report info" button
+		And I select "TM1010T Row ID movements" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''                                     | ''                                     | ''       | ''      | ''                                     | ''         |
+			| 'Register  "TM1010T Row ID movements"'        | ''                    | ''                                     | ''                                     | ''       | ''      | ''                                     | ''         |
+			| ''                                            | 'Period'              | 'Row ref'                              | 'Row ID'                               | 'Step'   | 'Basis' | 'Basis key'                            | 'Quantity' |
+			| ''                                            | '04.06.2025 14:56:13' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | 'a2f35342-3f97-4bf9-bebd-90a2a2fba06d' | 'PRO&PR' | ''      | '                                    ' | '-5'       |
+	And I close all client application windows			
+		

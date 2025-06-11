@@ -51,26 +51,19 @@ Procedure PartnerOnChange(Object, Form, Item) Export
 EndProcedure
 
 Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	//PartnerType = "Vendor";
-	
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
 	
 	OpenSettings.FormParameters = New Structure();
-	
-	//OpenSettings.FormParameters.Insert("Filter", New Structure(PartnerType, True));
 	OpenSettings.FormParameters.Insert("DocumentFilter", New Structure("Vendor, Other", True, True));
 	OpenSettings.FormParameters.Insert("FilterGroupType", "OrGroup");
 		
-	//OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(PartnerType, True, DataCompositionComparisonType.Equal));
-	//--
 	FilterGroup = DocumentsClientServer.CreateFilterGroup(DataCompositionFilterItemsGroupType.OrGroup);
 	FilterGroup.Items.Add(DocumentsClientServer.CreateFilterItem("Vendor", True, DataCompositionComparisonType.Equal));
 	FilterGroup.Items.Add(DocumentsClientServer.CreateFilterItem("Other", True, DataCompositionComparisonType.Equal));
 	OpenSettings.ArrayOfFilters.Add(FilterGroup);
 	
-	//OpenSettings.FillingData = New Structure(PartnerType, True);
 	OpenSettings.FillingData = New Structure("Vendor", True);
 	
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
@@ -82,11 +75,6 @@ Procedure PartnerTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(PartnerType, True, ComparisonType.Equal));
-	
-	//FilterGroup = DocumentsClientServer.CreateFilterGroup(DataCompositionFilterItemsGroupType.OrGroup);
-	//FilterGroup.Items.Add(DocumentsClientServer.CreateFilterItem("Vendor", True, DataCompositionComparisonType.Equal));
-	//FilterGroup.Items.Add(DocumentsClientServer.CreateFilterItem("Other", True, DataCompositionComparisonType.Equal));
-	//ArrayOfFilters.Add(FilterGroup);
 	
 	AdditionalParameters = New Structure();
 	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);

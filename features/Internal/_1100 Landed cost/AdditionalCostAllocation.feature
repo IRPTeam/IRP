@@ -69,6 +69,11 @@ Scenario: _041 test data
 		When Create information register PricesByProperties records (LC)
 		When Create information register TaxSettings records (LC)
 		When Create information register UserSettings records (LC)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
 	* Landed cost currency movement type for company
 		
 		Given I open hyperlink "e1cib/list/Catalog.Companies"

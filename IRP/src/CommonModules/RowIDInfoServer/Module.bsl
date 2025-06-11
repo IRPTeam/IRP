@@ -2159,7 +2159,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		ElsIf Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer Then
 			RowRefObject.TransactionTypeRGR = Source.TransactionType;		
 		Else
-			Raise StrTemplate("Unsapported transaction type [%1]", Source.TransactionType);
+                        Raise StrTemplate(R().UnsupportedTransactionType, Source.TransactionType);
 		EndIf;
 	EndIf;
 	
@@ -6691,7 +6691,7 @@ Function GetBasises(Ref, FilterValues) Export
 	ElsIf Is.WS Then
 		Return GetBasisesFor_WS(FilterValues);
 	Else
-		Raise StrTemplate("GetBasises() not support [%1]", Ref);
+                Raise StrTemplate(R().GetBasisesNotSupported, Ref);
 	EndIf;
 EndFunction
 
@@ -7274,7 +7274,7 @@ Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
 	ElsIf DocAliase = Aliases.WS Then
 		Return GetFieldsToLock_ExternalLink_WS(ExternalDocAliase, Aliases);		
 	Else
-		Raise StrTemplate("Not supported External link for [%1]", DocAliase);
+                Raise StrTemplate(R().UnsupportedExternalLink, DocAliase);
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -7452,7 +7452,7 @@ Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
 	ElsIf DocAliase = Aliases.WS Then
 		Return GetFieldsToLock_InternalLink_WS(InternalDocAliase, Aliases);
 	Else
-		Raise StrTemplate("Not supported Internal link for [%1]", DocAliase);
+                Raise StrTemplate(R().UnsupportedInternalLink, DocAliase);
 	EndIf;
 	Return Undefined;
 EndFunction

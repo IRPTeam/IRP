@@ -48,7 +48,7 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 		Parameters.Order_EmptyRef  = Documents.PurchaseOrder.EmptyRef();
 		
 	Else
-		Raise StrTemplate("Unsupported document type [%1]", Parameters.Object.Ref);
+		Raise StrTemplate(R().UnsupportedDocumentType, Parameters.Object.Ref);
 	EndIf;
 	
 	If Parameters = Undefined Then

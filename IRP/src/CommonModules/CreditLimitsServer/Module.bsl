@@ -37,7 +37,7 @@ Procedure CheckCreditLimitByPartner(ShipmentDoc, Date, Cancel) Export
 	 		Or DocumentType = Type("DocumentRef.ShipmentConfirmation") Then
 		DocumentData = GetShipmentAmount(ShipmentDoc);
 	Else
-		Raise StrTemplate("Unsupported document type [%1]", DocumentType);
+		Raise StrTemplate(R().UnsupportedDocumentType, DocumentType);
 	EndIf;
 	
 	LimitAmount = GetCreditLimits(ShipmentDoc.Ref, Date, DocumentData.Partner, DocumentData.CurrencyMovementType);

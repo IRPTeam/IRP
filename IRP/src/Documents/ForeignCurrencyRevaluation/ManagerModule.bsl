@@ -1638,12 +1638,12 @@ EndFunction
 
 // Expenses - Cash advance
 Function GetAnalytics_DR_R5022T_Expenses_CR_R3015B_CashAdvance(Parameters)
-	Raise "Not supported [DR_R5022T_Expenses_CR_R3015B_CashAdvance]";
+        Raise R().NotSupportedDRR5022TCashAdvance;
 EndFunction
 
 // Cash advance - Revenue
 Function GetAnalytics_DR_R3015B_CashAdvance_CR_R5021T_Revenues(Parameters)
-	Raise "Not supported [DR_R5022T_Expenses_CR_R3015B_CashAdvance]";
+        Raise R().NotSupportedDRR5022TCashAdvance;
 EndFunction
 
 // Expenses - Employee cash advance

@@ -508,7 +508,7 @@ Function ExtractValueByType(ExtDimensionType, ObjectData, RowData, ArrayOfTypes,
 				EndIf;
 			EndDo;
 		Else
-			Raise "Unsupported type of row data";
+                        Raise R().UnsupportedRowDataType;
 		EndIf;
 	EndIf;
 	
@@ -1923,8 +1923,8 @@ Procedure FillAccountingRowAnalytics(Parameters, Row = Undefined)
 	
 	AnalyticRows = Parameters.AccountingRowAnalytics.FindRows(Filter);
 	
-	If AnalyticRows.Count() > 1 Then
-		Raise StrTemplate("More than 1 analytic rows by filter: Key[%1] Operation[%2] LedgerType[%3]", Filter.Key, Filter.Operation, Filter.LedgerType);
+        If AnalyticRows.Count() > 1 Then
+                Raise StrTemplate(R().MoreThanOneAnalyticRowsFilter, Filter.Key, Filter.Operation, Filter.LedgerType);
 	ElsIf AnalyticRows.Count() = 1 Then
 		AnalyticRow = AnalyticRows[0];
 		If AnalyticRow.IsFixed And Not Parameters.IgnoreFixed Then
@@ -1944,9 +1944,9 @@ Procedure FillAccountingRowAnalytics(Parameters, Row = Undefined)
 	AnalyticParameters.Insert("MetadataName" , Parameters.MetadataName);
 	
 	AnalyticData = Documents[Parameters.MetadataName].GetAccountingAnalytics(AnalyticParameters);
-	If AnalyticData = Undefined Then
-		Raise StrTemplate("Document [%1] not supported accounting operation [%2]", 
-			Parameters.MetadataName, Parameters.Operation);
+        If AnalyticData = Undefined Then
+                Raise StrTemplate(R().DocumentAccountingOpNotSupported,
+                        Parameters.MetadataName, Parameters.Operation);
 	EndIf;
 		
 	AnalyticRow.Operation = AnalyticData.Operation;
@@ -3035,7 +3035,7 @@ Function GetCurrentAnalyticsRegisterRecords(Doc, RegisterName) Export
 		RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
 		SortColumns = "Document, Key, Operation, LedgerType, AnalyticType, ExtDimensionType, ExtDimension";
 	Else
-		Raise StrTemplate("Unsupported reister name [%1]", RegisterName);
+                Raise StrTemplate(R().UnsupportedRegisterName, RegisterName);
 	EndIf;
 	
 	RecordSet.Filter.Document.Set(Doc);
@@ -3348,7 +3348,7 @@ Function CheckDocumentArray(DocumentArray, CheckType, isJob)
 			ElsIf CheckType = "AccountingData" Then
 				RegisteredRecords = RegisterRecords_AccountingData(Doc);
 			Else
-				Raise StrTemplate("Unsupported check type [%1]", CheckType);
+                                Raise StrTemplate(R().UnsupportedCheckType, CheckType);
 			EndIf;
 			
 			If RegisteredRecords.Count() > 0 Then
@@ -3732,7 +3732,7 @@ Function RunJob(JobDataSettings)
 
 	For Each JobRow In _JobList Do
 		If Not JobRow.Status = Enums.JobStatus.Completed Then
-			Raise "One job is failed";
+                        Raise R().OneJobFailed;
 		EndIf; 
 	EndDo;     
 	
@@ -4356,8 +4356,8 @@ Procedure FindOrCreateAnalytic(IntegrationSettings, Source, Target, AnalyticType
 		
 		If (ValueIsFilled(_ExtDimensionRef) And ValueIsFilled(_ExtDimensionValue))
 			And Not ValueIsFilled(_ExtDimensionType) Then
-			Raise StrTemplate("Not defined ext. dimension type for [%1] [%2] [%3]",
-				_ExtDimensionRef, _ExternalBaseClass, _ExternalClass);
+                        Raise StrTemplate(R().ExtDimensionTypeNotDefined,
+                                _ExtDimensionRef, _ExternalBaseClass, _ExternalClass);
 		EndIf;
 		
 		If ValueIsFilled(_ExtDimensionValue) Then
@@ -4413,7 +4413,7 @@ Function FindOrCreateRefAnalytic(IntegrationSettings, ExternalRef, ExtDimensionT
 	EndIf;
 	
 	If Not InternalIsRef And Not ValueIsFilled(_ExtDimensionValue) Then
-		Raise StrTemplate("Not found value for external ref [%1]", ExternalRef);
+                Raise StrTemplate(R().ExternalRefValueNotFound, ExternalRef);
 	EndIf;
 			
 	NewRefData = FindOrCreateCatalogRef(_ExtDimensionValue, ExtDimensionType, NewObjData);
@@ -4465,7 +4465,7 @@ Function FindOrCreateEnumAnalytic(IntegrationSettings, ExternalValue, ExtDimensi
 	EndIf;
 	
 	If Not InternalIsRef And Not ValueIsFilled(_ExtDimensionValue) Then
-		Raise StrTemplate("Not found value for external value [%1]", _ExternalValue);
+                Raise StrTemplate(R().ExternalValueNotFound, _ExternalValue);
 	EndIf;
 	
 	NewRefData = FindOrCreateCatalogRef(_ExtDimensionValue, ExtDimensionType, NewObjData);
@@ -4499,9 +4499,9 @@ Function FindOrCreateCatalogRef(ExsistsRef, ExtDimensionType, NewObjData)
 			IsNewObject = True;
 			Obj = Catalogs[NewObjData.InternalClass].CreateItem();
 			Obj.SetNewCode();
-		Else
-			Raise "Create new analytics with Document type not supported";
-		EndIf;
+                Else
+                        Raise R().CreateNewAnalyticsNotSupported;
+                EndIf;
 	EndIf;
 
 	FillPropertyValues(Obj, NewObjData);

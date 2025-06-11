@@ -20,7 +20,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			ElsIf FilterValueType = Type("CatalogRef.LedgerTypes") Then
 				_LedgerTypeVariant = FilterItem.Value.LedgerTypeVariant;
 			Else
-				Raise StrTemplate("Unknown filter type [%1]", FilterValueType);
+                                Raise StrTemplate(R().UnknownFilterType, FilterValueType);
 			EndIf;
 			
 			ThisObject.LedgerTypeVariant = _LedgerTypeVariant;

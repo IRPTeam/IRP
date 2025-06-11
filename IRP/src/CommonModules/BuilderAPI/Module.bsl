@@ -363,7 +363,7 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 			
 			If CheckFilling Then
 				If Not Doc.CheckFilling() Then
-					Raise "Error on posting document";
+                                        Raise R().ErrorOnPostingDocument;
 				EndIf;
 			EndIf;
 			
@@ -411,7 +411,7 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 		If Object = Undefined Then
 			If CheckFilling Then
 				If Not Ctlg.CheckFilling() Then
-					Raise "Error on posting document";
+                                        Raise R().ErrorOnPostingDocument;
 				EndIf;
 			EndIf;
 			Ctlg.Write();
@@ -514,9 +514,9 @@ Function SetRowTaxRate(Wrapper, Row, Tax, TaxRate, TableName) Export
 		EndIf;
 	EndDo;
 	
-	If TaxInfo = Undefined Then
-		Raise "Tax not allowed for document, check tax settings";
-	EndIf;
+        If TaxInfo = Undefined Then
+                Raise R().TaxNotAllowedForDocument;
+        EndIf;
 	
 	//@skip-check property-return-type
 	Parameters.Rows[0].TaxRates[TaxInfo.Name] = TaxRate;

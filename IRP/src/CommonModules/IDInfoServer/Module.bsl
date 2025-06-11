@@ -255,7 +255,7 @@ Function GetIDInfoRefByUniqueID(UniqueID, AddInfo = Undefined) Export
 	If QuerySelection.Next() Then
 		Return QuerySelection.Ref;
 	Else
-		Raise StrTemplate("Not found IDInfo by name: %1", UniqueID);
+                Raise StrTemplate(R().IDInfoNotFoundByName, UniqueID);
 	EndIf;
 EndFunction
 

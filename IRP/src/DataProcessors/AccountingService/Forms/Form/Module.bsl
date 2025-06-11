@@ -854,13 +854,13 @@ Function GetInternalAccount(ExternalChartName, ExternalRef, RaiseExceptionIfNotF
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	If QuerySelection.Count() = 0 And RaiseExceptionIfNotFound Then
-		Raise StrTemplate("Not found internal account - Integration settings:[%1] Chart of accounts:[%2] Ref[%3]",
-		ThisObject.IntegrationSettings, ThisObject.ChartOfAccount, ExternalRef);
-	ElsIf QuerySelection.Count() > 1 Then
-		Raise StrTemplate("Found more than 1 internal account - Integration settings:[%1] Chart of accounts:[%2] Ref[%3]",
-		ThisObject.IntegrationSettings, ThisObject.ChartOfAccount, ExternalRef);
-	EndIf;
+        If QuerySelection.Count() = 0 And RaiseExceptionIfNotFound Then
+                Raise StrTemplate(R().InternalAccountNotFound,
+                ThisObject.IntegrationSettings, ThisObject.ChartOfAccount, ExternalRef);
+        ElsIf QuerySelection.Count() > 1 Then
+                Raise StrTemplate(R().InternalAccountMoreThanOne,
+                ThisObject.IntegrationSettings, ThisObject.ChartOfAccount, ExternalRef);
+        EndIf;
 	
 	QuerySelection.Next();
 	Return QuerySelection.InternalRef;
@@ -1649,9 +1649,9 @@ Function GetTypePresentationOfExtDimension(ExtDimRef)
 			ArrayOfResults.Add("Catalogs." + MetadataObj.Name);
 		ElsIf Metadata.Enums.Contains(MetadataObj) Then
 			ArrayOfResults.Add("Enums." + MetadataObj.Name);
-		Else
-			Raise StrTemplate("Unsupported analytic type [%1]", String(T));
-		EndIf;
+                Else
+                        Raise StrTemplate(R().UnsupportedAnalyticType, String(T));
+                EndIf;
 	EndDo;
 	Return ArrayOfResults;
 EndFunction

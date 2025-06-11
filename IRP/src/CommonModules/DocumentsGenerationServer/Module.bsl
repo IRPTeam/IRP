@@ -925,9 +925,9 @@ Function GetCurrencyRevaluationInvoiceInfo(InvoiceRef, TransactionRegisterName) 
 				FillingValues.TransactionType = Enums.PurchaseTransactionTypes.CurrencyRevaluationCustomer;
 			EndIf;
 			 
-		Else
-			Raise StrTemplate("Not suported invoice type [%1]", InvoiceRef);
-		EndIf;
+               Else
+                       Raise StrTemplate(R().InvoiceTypeNotSupported, InvoiceRef);
+               EndIf;
 		
 	EndIf;
 	

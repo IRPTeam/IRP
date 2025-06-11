@@ -60,11 +60,16 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	
 	//@skip-check bsl-legacy-check-expression-type
 	R6025B_SimpleBatchData = Parameters.PostingDataTables.Get(Metadata.AccumulationRegisters.R6025B_SimpleBatch);
-	If GetFunctionalOption("UseSimpleBatch") And Not R6025B_SimpleBatchData = Undefined Then
-		OutgoingMovements = SimpleBatchCostCalculationServer.UpdateOutgoingMovementsCost(Parameters.Object.Ref, R6025B_SimpleBatchData.PrepareTable, Cancel, , , AddInfo);
-		If Not OutgoingMovements = Undefined Then
-			DocObject.RegisterRecords.R6025B_SimpleBatch.Load(OutgoingMovements);
-			DocObject.RegisterRecords.R6025B_SimpleBatch.Write();
+	If GetFunctionalOption("UseSimpleBatch") Then
+		If Not R6025B_SimpleBatchData = Undefined Then
+			OutgoingMovements = SimpleBatchCostCalculationServer.UpdateOutgoingMovementsCost(Parameters.Object.Ref, R6025B_SimpleBatchData.PrepareTable, Cancel, , , AddInfo);
+			If Not OutgoingMovements = Undefined Then
+				DocObject.RegisterRecords.R6025B_SimpleBatch.Load(OutgoingMovements);
+				DocObject.RegisterRecords.R6025B_SimpleBatch.Write();
+			Else
+				DocObject.RegisterRecords.R6025B_SimpleBatch.Load(R6025B_SimpleBatchData.PrepareTable);
+				DocObject.RegisterRecords.R6025B_SimpleBatch.Write();
+			EndIf;
 		EndIf;
 	EndIf;
 EndProcedure

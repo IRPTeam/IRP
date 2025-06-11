@@ -1387,6 +1387,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_179", NStr("en = 'Number [%1] is already used for [%2]'", Lang));
 	Strings.Insert("Error_180", NStr("en = 'Only system record allowed'", Lang));
 	Strings.Insert("Error_181", NStr("en = 'Attribute already on form. Remove duplicate from set: [%1]'", Lang));
+	Strings.Insert("Error_182", NStr("en = 'Account [%1] [%2]. Lacking: %3 %2.'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	

@@ -1406,6 +1406,16 @@ Function Exists_R1020B_AdvancesToVendors() Export
 		|	R1020B_AdvancesToVendors.Recorder = &Ref";
 EndFunction
 
+Function Exists_R3010B_CashOnHand() Export
+	Return 
+		"SELECT *
+		|	INTO Exists_R3010B_CashOnHand
+		|FROM
+		|	AccumulationRegister.R3010B_CashOnHand AS R3010B_CashOnHand
+		|WHERE
+		|	R3010B_CashOnHand.Recorder = &Ref";
+EndFunction
+
 Function RegistersWithAdditionalDataFilling()
 	ArrayOfRegisters = New Array();
 	ArrayOfRegisters.Add(Metadata.AccumulationRegisters.R5020B_PartnersBalance);

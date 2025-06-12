@@ -860,6 +860,7 @@
   <commonModules>CommonModule.SimpleBatchCostCalculationServer</commonModules>
   <commonModules>CommonModule.DocFixedAssetRevaluationClient</commonModules>
   <commonModules>CommonModule.DocFixedAssetRevaluationServer</commonModules>
+  <commonModules>CommonModule.LoggerServerCall</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1009,6 +1010,7 @@
   <definedTypes>DefinedType.typeBasisDocumentSalesInvoice</definedTypes>
   <definedTypes>DefinedType.typeBatchDocuments</definedTypes>
   <definedTypes>DefinedType.typeCashAdvanceBasises</definedTypes>
+  <definedTypes>DefinedType.typeChatObject</definedTypes>
   <definedTypes>DefinedType.typeCurrencyRate</definedTypes>
   <definedTypes>DefinedType.typeDescription</definedTypes>
   <definedTypes>DefinedType.typeDescriptionsFillCheck</definedTypes>
@@ -1572,6 +1574,7 @@
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
   <dataProcessors>DataProcessor.UpdateDatabase</dataProcessors>
   <dataProcessors>DataProcessor.SimpleBatchSequence</dataProcessors>
+  <dataProcessors>DataProcessor.Chat</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
@@ -1676,6 +1679,8 @@
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.T9069S_AccountingMappingRecordersDescription</informationRegisters>
   <informationRegisters>InformationRegister.AppliedDatabaseUpdates</informationRegisters>
+  <informationRegisters>InformationRegister.Logger</informationRegisters>
+  <informationRegisters>InformationRegister.LoggerNotification</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>

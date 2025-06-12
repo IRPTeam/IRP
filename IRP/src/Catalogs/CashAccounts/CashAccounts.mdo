@@ -349,6 +349,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="18595574-f3b6-47bf-a3cd-5d3188ac339a">
+    <name>NegativeBalanceControl</name>
+    <synonym>
+      <key>en</key>
+      <value>Negative balance control</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="e4e2c63b-a0fc-494f-8196-b38a6ddb475c">
     <producedTypes>
       <objectType typeId="f17642bd-0685-4d6c-8cf9-1c8be00bb9b9" valueTypeId="6413d6f8-0579-45ce-9ca5-14ad0721fb28"/>

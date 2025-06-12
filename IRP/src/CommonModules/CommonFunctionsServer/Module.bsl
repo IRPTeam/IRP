@@ -1276,7 +1276,7 @@ Function RecalculateExpression(Params) Export
 				EndIf;
 			EndDo;
 		Else
-			Raise "Wrong External function type.";
+                        Raise R().WrongExternalFunctionType;
 		EndIf;
 		ResultInfo.Result = Result;
 	Except

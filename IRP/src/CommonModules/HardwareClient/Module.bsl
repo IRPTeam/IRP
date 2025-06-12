@@ -182,9 +182,9 @@ Async Function GetDriverObject(DriverInfo) Export
 	EndIf;
 	
 	If DriverInfo.UseIS Then
-		If Not GetAPIModule(DriverInfo.Hardware).Device_Open(DriverInfo, Undefined, "") Then // Boolean
-			Raise "Can not connect to hardware service."
-		EndIf;
+If Not GetAPIModule(DriverInfo.Hardware).Device_Open(DriverInfo, Undefined, "") Then // Boolean
+Raise R().CannotConnectHardwareService;
+EndIf;
 	Else
 		ObjectName = StrSplit(DriverInfo.AddInID, ".");
 		ObjectName.Add(ObjectName[1]);
@@ -193,12 +193,12 @@ Async Function GetDriverObject(DriverInfo) Export
 		Result = Await AttachAddInAsync(LinkOnDriver, ObjectName[1]);
 	
 		If Not Result Then
-			Raise "Can not attach AddIn " + DriverInfo.Driver;
+Raise StrTemplate(R().CannotAttachAddIn, DriverInfo.Driver);
 		EndIf;
 	
 		DriverObject = New (StrConcat(ObjectName, ".")); // Arbitrary
 		If DriverObject = Undefined Then
-			Raise "Can not connect driver";
+                    Raise R().CannotConnectDriver;
 		EndIf;
 	EndIf;
 	

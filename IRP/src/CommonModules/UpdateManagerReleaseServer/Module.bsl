@@ -64,7 +64,7 @@ Function RunUpdate_ItemType_StockBalanceDetail_SerialLotNumber(MethodName) Expor
 	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
-		Raise "Job aborted";
+               Raise R().JobAborted;
 	EndIf;
 	
 	If Errors.Count() = 0 Then

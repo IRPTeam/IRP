@@ -37,7 +37,7 @@ Procedure FillMovementsAtServer()
 		Try
 			QuerySchema.SetQueryText(StrConcat(TotalQueryArray, Chars.LF + Chars.LF + ";" + Chars.LF + Chars.LF));
 		Except
-			Raise StrTemplate("Document [%1], Error: " + Chars.LF + "%2", Document.Name, ErrorDescription());
+                        Raise StrTemplate(R().DocumentQueryError, Document.Name, ErrorDescription());
 		EndTry;
 		
 		For Each Batch In QuerySchema.QueryBatch Do

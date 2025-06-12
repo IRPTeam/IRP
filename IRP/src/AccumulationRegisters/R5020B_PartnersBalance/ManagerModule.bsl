@@ -645,7 +645,43 @@ Function R5020B_PartnersBalance_PR() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsReturnToVendor
+		|	ItemList.IsReturnToVendor AND (ItemList.IsVendor OR ItemList.IsConsignor)
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Currency,
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	VALUE(AccumulationRecordType.Expense)
+		|
+		|UNION ALL
+		|
+		// Other transaction
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Document,
+		|	ItemList.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	-SUM(ItemList.Amount) AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsReturnToVendor AND ItemList.IsOther
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Company,
@@ -744,7 +780,44 @@ Function R5020B_PartnersBalance_SI() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsSales
+		|	ItemList.IsSales AND ItemList.IsCustomer
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.Basis,
+		|	ItemList.Currency
+		|
+		|UNION ALL
+		|
+		// Other transaction
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.Basis AS Document,
+		|	ItemList.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	SUM(ItemList.Amount) AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing,
+		|	UNDEFINED AS Key
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsSales AND ItemList.IsOther
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Period,
@@ -843,7 +916,43 @@ Function R5020B_PartnersBalance_SR() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsReturnFromCustomer
+		|	ItemList.IsReturnFromCustomer AND (ItemList.IsCustomer OR ItemList.IsTradeAgent)
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Currency,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		// Other transaction
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Document,
+		|	ItemList.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	-SUM(ItemList.Amount) AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing
+		|
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsReturnFromCustomer AND ItemList.IsOther
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Company,

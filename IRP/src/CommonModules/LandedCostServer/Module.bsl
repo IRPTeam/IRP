@@ -1010,9 +1010,9 @@ Function GetBatchWiseBalance(CalculationSettings)
 					Continue;
 				EndIf;
 				ArrayOfTreeRows = Tree.Rows.FindRows(New Structure("Document", RowReturnedBatches.Document));
-				If Not ArrayOfTreeRows.Count() Then
-					Raise "Not found batch for sales return";
-				EndIf;
+                                If Not ArrayOfTreeRows.Count() Then
+                                        Raise R().BatchForSalesReturnNotFound;
+                                EndIf;
 				For Each ItemOfTreeRows In ArrayOfTreeRows Do
 					FillPropertyValues(ItemOfTreeRows.Rows.Add(), RowReturnedBatches);
 				EndDo;

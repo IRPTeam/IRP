@@ -71,7 +71,7 @@ Scenario: _028500 preparation (create document Sales return)
 		When Create document SalesInvoice objects (partner Other)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(135).GetObject().Write(DocumentWriteMode.Posting);"    |	
-		When Create document SalesInvoice objects (price calculation-currency)
+		When Create document SalesInvoice objects (price recalculation by currency rate)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(222).GetObject().Write(DocumentWriteMode.Posting);"    |	
 		When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)
@@ -879,7 +879,7 @@ Scenario: _028515 create SR with partner Other
 		And I click the button named "FormPostAndClose"
 	And I close all client application windows
 
-Scenario: _028516 check price calculation-currency in SR
+Scenario: _028516 check price recalculation by currency rate in SR
 	And I close all client application windows
 	* Select SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -906,7 +906,7 @@ Scenario: _028516 check price calculation-currency in SR
 			| 'Currency'                  | "USD"                      | ''            |
 			| 'CurrencyTotalAmount'       | "USD"                      | ''            |
 			| 'ItemListTotalNetAmount'    | "319,19"                   | ''            |
-			| 'ItemListTotalOffersAmount' | "0"                        | ''            |
+			| 'ItemListTotalOffersAmount' | "0,00"                     | ''            |
 			| 'ItemListTotalTaxAmount'    | "57,45"                    | ''            |
 			| 'ItemListTotalTotalAmount'  | "376,64"                   | ''            |
 			| 'LegalName'                 | "Company Adel"             | ''            |

@@ -84,7 +84,7 @@ Scenario: _022300 preparation
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(40).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Price Calculation in Currency
-		When Create document PurchaseInvoice objects (price calculation-currency)
+		When Create document PurchaseInvoice objects (price recalculation by currency rate)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(222).GetObject().Write(DocumentWriteMode.Posting);"    |
 
@@ -586,7 +586,7 @@ Scenario: _022311 create Purchase return with partner Other
 		And I click the button named "FormPostAndClose"
 	And I close all client application windows
 
-Scenario: _022312 check price calculation-currency in Purchase return
+Scenario: _022312 check price recalculation by currency rate in Purchase return
 	And I close all client application windows
 	* Select PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -612,10 +612,10 @@ Scenario: _022312 check price calculation-currency in Purchase return
 			| 'Company'                   | "Main Company"       | ''            |
 			| 'Currency'                  | "USD"                | ''            |
 			| 'CurrencyTotalAmount'       | "USD"                | ''            |
-			| 'ItemListTotalNetAmount'    | "101,7"              | ''            |
-			| 'ItemListTotalOffersAmount' | "0"                  | ''            |
-			| 'ItemListTotalTaxAmount'    | "18,3"               | ''            |
-			| 'ItemListTotalTotalAmount'  | "120"                | ''            |
+			| 'ItemListTotalNetAmount'    | "101,70"             | ''            |
+			| 'ItemListTotalOffersAmount' | "0,00"               | ''            |
+			| 'ItemListTotalTaxAmount'    | "18,30"              | ''            |
+			| 'ItemListTotalTotalAmount'  | "120,00"             | ''            |
 			| 'LegalName'                 | "Company Ferron BP"  | ''            |
 			| 'Partner'                   | "Ferron BP"          | ''            |
 			| 'PriceIncludeTax'           | "Yes"                | ''            |

@@ -2523,7 +2523,7 @@ Scenario: Create document SalesInvoice objects (linked)
 		| 'e1cib/data/Document.SalesInvoice?ref=b762b13668d0905011eb7da175520ed2' | 'e27a0375-c799-41d1-b235-ffc0a3cee19c' | ''                | ''               | 8          |
 
 
-Scenario: Create document SalesInvoice objects (price calculation-currency)
+Scenario: Create document SalesInvoice objects (price recalculation by currency rate)
 	// Catalog.RowIDs
 
 	And I check or create catalog "RowIDs" objects:

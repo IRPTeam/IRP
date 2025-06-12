@@ -195,12 +195,18 @@ Function Header()
 		|		DoRecordsReceive_T2014S_AdvancesInfo,
 		|	CASE
 		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceVendor)
-		|		OR Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer)
 		|			THEN CASE
 		|				WHEN tmp.SendIsReceivable
 		|					THEN VALUE(Enum.RecordType.Receipt)
 		|				WHEN tmp.SendIsPayable
 		|					THEN VALUE(Enum.RecordType.Expense)
+		|			END
+		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.AdvanceCustomer)
+		|			THEN CASE
+		|				WHEN tmp.SendIsReceivable
+		|					THEN VALUE(Enum.RecordType.Expense)
+		|				WHEN tmp.SendIsPayable
+		|					THEN VALUE(Enum.RecordType.Receipt)
 		|			END
 		|	END AS RecordsTypeReceive_T2014S_AdvancesInfo,
 		|	Doc.SendDebtType = VALUE(Enum.DebtTypes.TransactionVendor) AS DoRecordsSend_R1021B_VendorsTransactions,
@@ -244,12 +250,18 @@ Function Header()
 		|		DoRecordsReceive_T2015S_TransactionsInfo,
 		|	CASE
 		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionVendor)
-		|		OR Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer)
 		|			THEN CASE
 		|				WHEN tmp.SendIsReceivable
 		|					THEN VALUE(Enum.RecordType.Expense)
 		|				WHEN tmp.SendIsPayable
 		|					THEN VALUE(Enum.RecordType.Receipt)
+		|			END
+		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.TransactionCustomer)
+		|			THEN CASE
+		|				WHEN tmp.SendIsReceivable
+		|					THEN VALUE(Enum.RecordType.Receipt)
+		|				WHEN tmp.SendIsPayable
+		|					THEN VALUE(Enum.RecordType.Expense)
 		|			END
 		|	END AS RecordsTypeReceive_T2015S_TransactionsInfo,
 		|	NOT tmp.SendIsEmployee AS DoRecordsSend_R5010B_ReconciliationStatement,

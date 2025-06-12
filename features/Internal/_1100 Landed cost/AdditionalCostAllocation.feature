@@ -451,13 +451,15 @@ Scenario: _048 create additional cost allocation (documents, by quantity)
 		And in the table "CostDocuments" I click "Add" button
 		And I click choice button of "Document" attribute in "CostDocuments" table
 		And "List" table became equal
-			| 'Basis'                                              | 'Company'        | 'Amount'   | 'Currency'    |
-			| 'Purchase invoice 9 017 dated 05.06.2022 13:25:04'   | 'Main Company'   | '350'      | 'TRY'         |
-			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02'   | 'Main Company'   | '350'      | 'TRY'         |
-			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22'   | 'Main Company'   | '650'      | 'TRY'         |
-			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23'   | 'Main Company'   | '400'      | 'TRY'         |
-			| 'Purchase invoice 9 016 dated 09.06.2022 13:21:30'   | 'Main Company'   | '350'      | 'TRY'         |
-			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11'   | 'Main Company'   | '550'      | 'TRY'         |
+			| 'Basis'                                            | 'Company'      | 'Currency' | 'Amount' |
+			| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Main Company' | 'TRY'      | '30'     |
+			| 'Purchase invoice 9 017 dated 05.06.2022 13:25:04' | 'Main Company' | 'TRY'      | '350'    |
+			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | 'TRY'      | '350'    |
+			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | 'TRY'      | '650'    |
+			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Main Company' | 'TRY'      | '400'    |
+			| 'Purchase invoice 9 016 dated 09.06.2022 13:21:30' | 'Main Company' | 'TRY'      | '350'    |
+			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | 'TRY'      | '550'    |
+			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Main Company' | 'TRY'      | '50'     |
 		And I go to line in "List" table
 			| 'Basis'                                              | 'Company'        | 'Amount'   | 'Currency'    |
 			| 'Purchase invoice 9 016 dated 09.06.2022 13:21:30'   | 'Main Company'   | '350'      | 'TRY'         |
@@ -649,16 +651,23 @@ Scenario: _051 create additional cost allocation (row, by amount)
 			And in the table "CostRows" I click "Select costs" button
 			Then "Select cost rows" window is opened
 			And "CostRowsTree" table became equal
-				| 'Presentation'                                        | 'Use'                                                 | 'Amount'    | 'Currency'     |
-				| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02'    | 'Purchase invoice 9 018 dated 09.06.2022 13:56:02'    | '350,00'    | 'TRY'          |
-				| 'Service, Rent'                                       | 'No'                                                  | '150,00'    | 'TRY'          |
-				| 'Service, Internet'                                   | 'No'                                                  | '200,00'    | 'TRY'          |
-				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22'    | 'Purchase invoice 9 020 dated 09.06.2022 13:56:22'    | '650,00'    | 'TRY'          |
-				| 'Service, Rent'                                       | 'No'                                                  | '250,00'    | 'TRY'          |
-				| 'Service, Internet'                                   | 'No'                                                  | '400,00'    | 'TRY'          |
-				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11'    | 'Purchase invoice 9 019 dated 09.06.2022 13:56:11'    | '550,00'    | 'TRY'          |
-				| 'Service, Internet'                                   | 'No'                                                  | '400,00'    | 'TRY'          |
-				| 'Service, Rent'                                       | 'No'                                                  | '150,00'    | 'TRY'          |
+				| 'Presentation'                                     | 'Use'                                              | 'Amount' | 'Currency' |
+				| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | '30,00'  | 'TRY'      |
+				| 'Service, Tax'                                     | 'No'                                               | '30,00'  | 'TRY'      |
+				| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | '350,00' | 'TRY'      |
+				| 'Service, Rent'                                    | 'No'                                               | '150,00' | 'TRY'      |
+				| 'Service, Internet'                                | 'No'                                               | '200,00' | 'TRY'      |
+				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | '650,00' | 'TRY'      |
+				| 'Service, Rent'                                    | 'No'                                               | '250,00' | 'TRY'      |
+				| 'Service, Internet'                                | 'No'                                               | '400,00' | 'TRY'      |
+				| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | '400,00' | 'TRY'      |
+				| 'Service, Rent'                                    | 'No'                                               | '200,00' | 'TRY'      |
+				| 'Service, Internet'                                | 'No'                                               | '200,00' | 'TRY'      |
+				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | '550,00' | 'TRY'      |
+				| 'Service, Internet'                                | 'No'                                               | '400,00' | 'TRY'      |
+				| 'Service, Rent'                                    | 'No'                                               | '150,00' | 'TRY'      |
+				| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | '50,00'  | 'TRY'      |
+				| 'Service, Rent'                                    | 'No'                                               | '50,00'  | 'TRY'      |
 			And I go to line in "CostRowsTree" table
 				| 'Presentation'     | 'Use'    | 'Amount'    | 'Currency'     |
 				| 'Service, Rent'    | 'No'     | '250,00'    | 'TRY'          |
@@ -1458,7 +1467,7 @@ Scenario: _099 sales from one store, return to another store
 		And "Result" spreadsheet document contains "BathBalance_072_4" template lines by template	
 		And I close all client application windows		
 
-Scenario: _100 check Additional Cost Allocation (by row)
+Scenario: _100 check Additional Cost Allocation (by row, by amount)
 	And I close all client application windows
 	* Create Additional Cost Allocation		
 		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
@@ -1470,13 +1479,27 @@ Scenario: _100 check Additional Cost Allocation (by row)
 	* Add Additional Cost PI
 		And in the table "CostRows" I click the button named "CostRowsAdd"
 		Then "Select cost rows" window is opened
-		And I expand current line in "CostRowsTree" table
-		And I go to line in "CostRowsTree" table
-			| "Amount" | "Currency" | "Presentation"                                     | "Tax amount" | "Use"                                              |
-			| "30,00"  | "TRY"      | "Purchase invoice 9 051 dated 01.06.2025 15:13:13" | "5,40"       | "Purchase invoice 9 051 dated 01.06.2025 15:13:13" |
+		And "CostRowsTree" table became equal
+			| 'Use'                                              | 'Presentation'                                     | 'Expense type' | 'Profit loss center' | 'Currency' | 'Amount' | 'Tax amount' |
+			| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | ''             | ''                   | 'TRY'      | '30,00'  | '5,40'       |
+			| 'No'                                               | 'Service, Tax'                                     | 'Expense'      | 'Front office'       | 'TRY'      | '30,00'  | '5,40'       |
+			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | ''             | ''                   | 'TRY'      | '350,00' | '63,00'      |
+			| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '150,00' | '27,00'      |
+			| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '200,00' | '36,00'      |
+			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | ''             | ''                   | 'TRY'      | '650,00' | '117,00'     |
+			| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '250,00' | '45,00'      |
+			| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |
+			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |
+			| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '200,00' | '36,00'      |
+			| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '200,00' | '36,00'      |
+			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | ''             | ''                   | 'TRY'      | '550,00' | '99,00'      |
+			| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |
+			| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '150,00' | '27,00'      |
+			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | ''             | ''                   | 'TRY'      | '50,00'  | '9,00'       |
+			| 'No'                                               | 'Service, Rent'                                    | 'Expense'      | 'Front office'       | 'TRY'      | '50,00'  | '9,00'       |
 		And I go to line in "CostRowsTree" table
 			| "Amount" | "Currency" | "Expense type" | "Presentation" | "Profit loss center" | "Tax amount" | "Use" |
-			| "30,00"  | "TRY"      | "Expense"      | "Service, Tax" | "Front office"       | "5,40"       | "Yes" |
+			| "30,00"  | "TRY"      | "Expense"      | "Service, Tax" | "Front office"       | "5,40"       | "No"  |
 		And I change checkbox named "CostRowsTreeUse" in "CostRowsTree" table
 		And I finish line editing in "CostRowsTree" table
 		And I click the button named "FormOk"
@@ -1486,9 +1509,24 @@ Scenario: _100 check Additional Cost Allocation (by row)
 			| "30,00"  | "TRY"      | "Expense"      | "Service, Tax" | "Front office"       | "5,40"       |
 		And in the table "AllocationRows" I click the button named "AllocationRowsAdd"
 		Then "Select allocation rows" window is opened
-		And I go to line in "List" table
-			| "Document"                                         |
-			| "Purchase invoice 9 050 dated 01.06.2025 15:12:02" |
+		And "List" table became equal
+			| 'Document'                                         |
+			| 'Purchase invoice 1 dated 13.08.2021 16:48:58'     |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00'     |
+			| 'Purchase invoice 3 dated 13.08.2021 16:52:30'     |
+			| 'Purchase invoice 4 dated 13.08.2021 16:55:18'     |
+			| 'Purchase invoice 5 dated 15.08.2021 16:56:10'     |
+			| 'Purchase invoice 6 dated 15.08.2021 16:56:11'     |
+			| 'Purchase invoice 8 dated 17.08.2021 13:04:13'     |
+			| 'Purchase invoice 9 021 dated 01.12.2022 0:00:00'  |
+			| 'Purchase invoice 9 023 dated 01.03.2023 12:00:00' |
+			| 'Purchase invoice 9 028 dated 02.04.2023 12:04:41' |
+			| 'Purchase invoice 9 030 dated 02.04.2023 12:23:49' |
+			| 'Purchase invoice 9 050 dated 01.06.2025 15:12:02' |
+		And I go to the last line in "List" table
+//		And I go to line in "List" table
+//			| "Document"                                         |
+//			| "Purchase invoice 9 050 dated 01.06.2025 15:12:02" |
 		And in the table "List" I click the button named "ListSelectDocument"
 		And I go to line in "DocumentRows" table
 			| "Item"               | "Item key" | "Serial lot number" | "Store"    | "Use" |
@@ -1516,7 +1554,7 @@ Scenario: _100 check Additional Cost Allocation (by row)
 		And I click the button named "FormPostandClose"
 	And I close all client application windows		
 							
-Scenario: _101 check Additional Cost Allocation (by document)
+Scenario: _101 check Additional Cost Allocation (by document, by amount)
 	And I close all client application windows
 	* Create Additional Cost Allocation		
 		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
@@ -1529,17 +1567,40 @@ Scenario: _101 check Additional Cost Allocation (by document)
 		And in the table "CostDocuments" I click the button named "CostDocumentsAdd"
 		And I click choice button of the attribute named "CostDocumentsDocument" in "CostDocuments" table
 		Then "Select cost document" window is opened
+		And "List" table became equal
+			| 'Basis'                                            | 'Company'      | 'Currency' | 'Amount' | 'TaxAmount' |
+			| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Main Company' | 'TRY'      | '30'     | '5,4'       |
+			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | 'TRY'      | '350'    | '63'        |
+			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | 'TRY'      | '650'    | '117'       |
+			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Main Company' | 'TRY'      | '400'    | '72'        |
+			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | 'TRY'      | '550'    | '99'        |
+			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Main Company' | 'TRY'      | '50'     | '9'         |
 		And I go to line in "List" table
-			| "Amount" | "Basis"                                            | "Company"      | "Currency" | "TaxAmount" |
-			| "50"     | "Purchase invoice 9 052 dated 01.06.2025 15:13:29" | "Main Company" | "TRY"      | "9"         |
+			| 'Basis'                                            | 'Company'      | 'Currency' | 'Amount' | 'TaxAmount' |
+			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Main Company' | 'TRY'      | '50'     | '9'         |
 		And in the table "List" I click the button named "FormSelect"
 		And I finish line editing in "CostDocuments" table
 	* Add Goods PI	
 		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
 		And I click choice button of the attribute named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		And "List" table became equal
+			| 'Basis'                                            | 'Company'      |
+			| 'Purchase invoice 1 dated 13.08.2021 16:48:58'     | 'Main Company' |
+			| 'Purchase invoice 2 dated 14.08.2021 12:00:00'     | 'Main Company' |
+			| 'Purchase invoice 3 dated 13.08.2021 16:52:30'     | 'Main Company' |
+			| 'Purchase invoice 4 dated 13.08.2021 16:55:18'     | 'Main Company' |
+			| 'Purchase invoice 5 dated 15.08.2021 16:56:10'     | 'Main Company' |
+			| 'Purchase invoice 6 dated 15.08.2021 16:56:11'     | 'Main Company' |
+			| 'Purchase invoice 8 dated 17.08.2021 13:04:13'     | 'Main Company' |
+			| 'Purchase invoice 9 021 dated 01.12.2022 0:00:00'  | 'Main Company' |
+			| 'Purchase invoice 9 023 dated 01.03.2023 12:00:00' | 'Main Company' |
+			| 'Purchase invoice 9 028 dated 02.04.2023 12:04:41' | 'Main Company' |
+			| 'Purchase invoice 9 030 dated 02.04.2023 12:23:49' | 'Main Company' |
+			| 'Purchase invoice 9 050 dated 01.06.2025 15:12:02' | 'Main Company' |
+		And I activate field named "ListBasis" in "List" table
 		And I go to line in "List" table
 			| "Basis"                                            | "Company"      |
-			| "Purchase invoice 9 050 dated 01.06.2025 15:12:02" | "Main Company" |
+			| "Purchase invoice 9 050 dated 01.06.2025 15:12:02" | "Main Company" |
 		And in the table "List" I click the button named "FormSelect"
 		And I finish line editing in "AllocationDocuments" table
 	* Allocate Cost	

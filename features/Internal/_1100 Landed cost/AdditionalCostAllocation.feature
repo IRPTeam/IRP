@@ -75,7 +75,6 @@ Scenario: _041 test data
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
 	* Landed cost currency movement type for company
-		
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table
 			| 'Description'     |
@@ -115,6 +114,7 @@ Scenario: _041 test data
 		When Create document Bundling objects (LC)
 		When Create document GoodsReceipt objects (LC)
 		When Create document PurchaseInvoice objects (for AdditionalCostAllocation) (LC)
+		When create document Purchase Invoice objects (AdditionalCostAllocation) 
 		When Create document InventoryTransfer objects (LC)
 		When Create document OpeningEntry objects (LC)
 		When Create document PriceList objects (LC)
@@ -1458,4 +1458,98 @@ Scenario: _099 sales from one store, return to another store
 		And "Result" spreadsheet document contains "BathBalance_072_4" template lines by template	
 		And I close all client application windows		
 
-		
+Scenario: _100 check Additional Cost Allocation (by row)
+	And I close all client application windows
+	* Create Additional Cost Allocation		
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And I click the button named "FormCreate"
+	* Fill in main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select "By rows" exact value from the drop-down list named "AllocationMode"
+		And I select "By amount" exact value from the drop-down list named "AllocationMethod"
+	* Add Additional Cost PI
+		And in the table "CostRows" I click the button named "CostRowsAdd"
+		Then "Select cost rows" window is opened
+		And I expand current line in "CostRowsTree" table
+		And I go to line in "CostRowsTree" table
+			| "Amount" | "Currency" | "Presentation"                                     | "Tax amount" | "Use"                                              |
+			| "30,00"  | "TRY"      | "Purchase invoice 9 051 dated 01.06.2025 15:13:13" | "5,40"       | "Purchase invoice 9 051 dated 01.06.2025 15:13:13" |
+		And I go to line in "CostRowsTree" table
+			| "Amount" | "Currency" | "Expense type" | "Presentation" | "Profit loss center" | "Tax amount" | "Use" |
+			| "30,00"  | "TRY"      | "Expense"      | "Service, Tax" | "Front office"       | "5,40"       | "Yes" |
+		And I change checkbox named "CostRowsTreeUse" in "CostRowsTree" table
+		And I finish line editing in "CostRowsTree" table
+		And I click the button named "FormOk"
+	* Add Goods PI
+		And I go to line in "CostRows" table
+			| "Amount" | "Currency" | "Expense type" | "Presentation" | "Profit loss center" | "Tax amount" |
+			| "30,00"  | "TRY"      | "Expense"      | "Service, Tax" | "Front office"       | "5,40"       |
+		And in the table "AllocationRows" I click the button named "AllocationRowsAdd"
+		Then "Select allocation rows" window is opened
+		And I go to line in "List" table
+			| "Document"                                         |
+			| "Purchase invoice 9 050 dated 01.06.2025 15:12:02" |
+		And in the table "List" I click the button named "ListSelectDocument"
+		And I go to line in "DocumentRows" table
+			| "Item"               | "Item key" | "Serial lot number" | "Store"    | "Use" |
+			| "Product 3 with SLN" | "UNIQ"     | "09987897977891"    | "Store 02" | "No"  |
+		And I change checkbox named "DocumentRowsUse" in "DocumentRows" table
+		And I finish line editing in "DocumentRows" table
+		And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
+		And I click the button named "FormOk"
+		And "AllocationRows" table became equal
+			| 'Presentation'                                     | 'Store'    | 'Amount' | 'Tax amount' |
+			| 'Purchase invoice 9 050 dated 01.06.2025 15:12:02' | ''         | ''       | ''           |
+			| 'Product 3 with SLN, UNIQ, 09987897977891'         | 'Store 02' | ''       | ''           |
+	* Allocate Cost
+		And I click the button named "AllocationRowsAllocateCostAmount"
+		And "AllocationRows" table became equal
+			| 'Presentation'                                     | 'Store'    | 'Amount' | 'Tax amount' |
+			| 'Purchase invoice 9 050 dated 01.06.2025 15:12:02' | ''         | '30,00'  | '5,40'       |
+			| 'Product 3 with SLN, UNIQ, 09987897977891'         | 'Store 02' | '30,00'  | '5,40'       |
+		And I click the button named "FormPost"
+	* Result tab
+		And I move to the tab named "GroupResult"
+		And "AllocationResult" table became equal
+			| '#' | 'Expense purchase invoice'                         | 'Expense item' | 'Expense item key' | 'Purchase invoice'                                 | 'Item'               | 'Item key' | 'Serial lot number' | 'Store'    | 'Currency' | 'Amount' | 'Tax amount' | 'Expense type' | 'Profit loss center' |
+			| '1' | 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Service'      | 'Tax'              | 'Purchase invoice 9 050 dated 01.06.2025 15:12:02' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977891'    | 'Store 02' | 'TRY'      | '30,00'  | '5,40'       | 'Expense'      | 'Front office'       |
+		And I click the button named "FormPostandClose"
+	And I close all client application windows		
+							
+Scenario: _101 check Additional Cost Allocation (by document)
+	And I close all client application windows
+	* Create Additional Cost Allocation		
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And I click the button named "FormCreate"
+	* Fill in main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select "By documents" exact value from the drop-down list named "AllocationMode"
+		And I select "By amount" exact value from the drop-down list named "AllocationMethod"
+	* Add Additional Cost PI
+		And in the table "CostDocuments" I click the button named "CostDocumentsAdd"
+		And I click choice button of the attribute named "CostDocumentsDocument" in "CostDocuments" table
+		Then "Select cost document" window is opened
+		And I go to line in "List" table
+			| "Amount" | "Basis"                                            | "Company"      | "Currency" | "TaxAmount" |
+			| "50"     | "Purchase invoice 9 052 dated 01.06.2025 15:13:29" | "Main Company" | "TRY"      | "9"         |
+		And in the table "List" I click the button named "FormSelect"
+		And I finish line editing in "CostDocuments" table
+	* Add Goods PI	
+		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
+		And I click choice button of the attribute named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		And I go to line in "List" table
+			| "Basis"                                            | "Company"      |
+			| "Purchase invoice 9 050 dated 01.06.2025 15:12:02" | "Main Company" |
+		And in the table "List" I click the button named "FormSelect"
+		And I finish line editing in "AllocationDocuments" table
+	* Allocate Cost	
+		And I click the button named "FormPost"	
+	* Result tab
+		And I move to the tab named "GroupResult"
+		And "AllocationResult" table became equal
+			| '#' | 'Expense purchase invoice'                         | 'Expense item' | 'Expense item key' | 'Purchase invoice'                                 | 'Item'               | 'Item key' | 'Serial lot number' | 'Store'    | 'Currency' | 'Amount' | 'Tax amount' | 'Expense type' | 'Profit loss center' |
+			| '1' | 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Service'      | 'Rent'             | 'Purchase invoice 9 050 dated 01.06.2025 15:12:02' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977891'    | 'Store 02' | 'TRY'      | '19,23'  | '3,46'       | 'Expense'      | 'Front office'       |
+			| '2' | 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Service'      | 'Rent'             | 'Purchase invoice 9 050 dated 01.06.2025 15:12:02' | 'Product 6 with SLN' | 'PZU'      | '89088088989'       | 'Store 02' | 'TRY'      | '30,77'  | '5,54'       | 'Expense'      | 'Front office'       |
+		And I click the button named "FormPostandClose"
+	And I close all client application windows		
+										

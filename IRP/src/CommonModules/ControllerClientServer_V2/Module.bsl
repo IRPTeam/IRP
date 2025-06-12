@@ -3528,8 +3528,6 @@ Function GetBindingStructure_Partner(Parameters)
 	Result.Binding.Insert("SalesReturn",
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
-		
-	Result.Binding.Insert("Payroll", "StepChangeLegalNameByPartner");
 	
 	Result.Binding.Insert("TaxesOperation",
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
@@ -6649,6 +6647,135 @@ Function BindOffers(Parameters)
 	Binding = New Structure();
 	Return BindSteps("StepItemListCalculations_IsOffersChanged", DataPath, Binding, Parameters, "BindOffers");
 EndFunction
+
+#EndRegion
+
+#Region SALARY_TAX_LIST
+
+#Region SALARY_TAX_LIST_PARTNER
+
+// SalaryTaxList.Partner.OnChange
+Procedure SalaryTaxListPartnerOnChange(Parameters) Export
+	Binding = BindSalaryTaxListPartner(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// SalaryTaxList.Partner.Set
+Procedure SetSalaryTaxListPartner(Parameters, Results) Export
+	Binding = BindSalaryTaxListPartner(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// SalaryTaxList.Partner.Get
+Function GetSalaryTaxListPartner(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindSalaryTaxListPartner(Parameters).DataPath, _Key);
+EndFunction
+
+// SalaryTaxList.Partner.Bind
+Function BindSalaryTaxListPartner(Parameters)
+	DataPath = "SalaryTaxList.Partner";
+	Binding = New Structure();
+	Binding.Insert("Payroll",
+		"StepSalaryTaxListChangeLegalNameByPartner,
+		|StepSalaryTaxListChangeAgreementByPartner");
+		
+	Return BindSteps(Undefined, DataPath, Binding, Parameters, "BindSalaryTaxListPartner");
+EndFunction
+
+#EndRegion
+
+#Region SALARY_TAX_LIST_LEGAL_NAME
+
+// SalaryTaxList.LegalName.OnChange
+Procedure SalaryTaxListLegalNameOnChange(Parameters) Export
+	Binding = BindSalaryTaxListLegalName(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// SalaryTaxList.LegalName.Set
+Procedure SetSalaryTaxListLegalName(Parameters, Results) Export
+	Binding = BindSalaryTaxListLegalName(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// SalaryTaxList.LegalName.Get
+Function GetSalaryTaxListLegalName(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindSalaryTaxListLegalName(Parameters).DataPath , _Key);
+EndFunction
+
+// SalaryTaxList.LegalName.Bind
+Function BindSalaryTaxListLegalName(Parameters)
+	DataPath = "SalaryTaxList.LegalName";
+	Binding = New Structure();
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSalaryTaxListLegalName");
+EndFunction
+
+// SalaryTaxList.LegalName.ChangeLegalNameByPartner.Step
+Procedure StepSalaryTaxListChangeLegalNameByPartner(Parameters, Chain) Export
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeLegalNameByPartner.Setter = "SetSalaryTaxListLegalName";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+		Options.Partner   = GetSalaryTaxListPartner(Parameters, Row.Key);
+		Options.LegalName = GetSalaryTaxListLegalName(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepSalaryTaxListChangeLegalNameByPartner";
+		Chain.ChangeLegalNameByPartner.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region SALARY_TAX_LIST_AGREEMENT
+
+// SalaryTaxList.Agreement.OnChange
+Procedure SalaryTaxListAgreementOnChange(Parameters) Export
+	Binding = BindSalaryTaxListAgreement(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// SalaryTaxList.Agreement.Set
+Procedure SetSalaryTaxListAgreement(Parameters, Results) Export
+	Binding = BindSalaryTaxListAgreement(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// SalaryTaxList.Agreement.Get
+Function GetSalaryTaxListAgreement(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindSalaryTaxListAgreement(Parameters).DataPath , _Key);
+EndFunction
+
+// SalaryTaxList.Agreement.Bind
+Function BindSalaryTaxListAgreement(Parameters)
+	DataPath = "SalaryTaxList.Agreement";
+	Binding = New Structure();
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSalaryTaxListAgreement");
+EndFunction
+
+// SalaryTaxList.Agreement.ChangeAgreementByPartner.Step
+Procedure StepSalaryTaxListChangeAgreementByPartner(Parameters, Chain) Export
+	Chain.ChangeAgreementByPartner.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAgreementByPartner.Setter = "SetSalaryTaxListAgreement";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+		Options.Partner       = GetSalaryTaxListPartner(Parameters, Row.Key);
+		Options.Agreement     = GetSalaryTaxListAgreement(Parameters, Row.Key);
+		Options.CurrentDate   = GetDate(Parameters);
+		Options.Key = Row.Key;
+		Options.StepName = "StepSalaryTaxListChangeAgreementByPartner";
+		Chain.ChangeAgreementByPartner.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 

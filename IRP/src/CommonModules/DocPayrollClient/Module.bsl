@@ -50,56 +50,6 @@ EndProcedure
 
 #EndRegion
 
-#Region PARTNER
-
-Procedure PartnerOnChange(Object, Form, Item) Export
-	ViewClient_V2.PartnerOnChange(Object, Form, Form.MainTables);
-EndProcedure
-
-Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	PartnerType = "Other";
-	
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
-	
-	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FormParameters.Insert("Filter", New Structure(PartnerType, True));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(PartnerType, True, DataCompositionComparisonType.Equal));
-	OpenSettings.FillingData = New Structure(PartnerType, True);
-	
-	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-EndProcedure
-
-Procedure PartnerTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	PartnerType = "Other";
-	
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(PartnerType, True, ComparisonType.Equal));
-	
-	AdditionalParameters = New Structure();
-	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
-EndProcedure
-
-#EndRegion
-
-#Region LEGAL_NAME
-
-Procedure LegalNameOnChange(Object, Form, Item) Export
-	ViewClient_V2.LegalNameOnChange(Object, Form, Form.MainTables);
-EndProcedure
-
-Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	DocumentsClient.LegalNameStartChoice_PartnerFilter(Object, Form, Item, ChoiceData, StandardProcessing, Object.Partner);
-EndProcedure
-
-Procedure LegalNameTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	DocumentsClient.LegalNameTextChange_PartnerFilter(Object, Form, Item, Text, StandardProcessing, Object.Partner);
-EndProcedure
-
-#EndRegion
-
 #Region PAYROLL_LISTS
 
 Procedure PayrollListsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
@@ -120,10 +70,81 @@ EndProcedure
 
 #Region SALARY_TAX_LIST
 
+#Region SALARY_TAX_LIST_PARTNER
+
+Procedure SalaryTaxListPartnerOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.SalaryTaxListPartnerOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure SalaryTaxListPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Other", True, DataCompositionComparisonType.Equal));
+	OpenSettings.FormParameters = New Structure();
+	OpenSettings.FillingData = New Structure();
+	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure SalaryTaxListPartnerEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Other", True, ComparisonType.Equal));
+	AdditionalParameters = New Structure();
+	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
+#Region SALARY_TAX_LIST_LEGAL_NAME
+
+Procedure SalaryTaxListLegalNameOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.SalaryTaxListLegalNameOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure SalaryTaxListLegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	CurrentData = Form.Items.SalaryTaxList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(
+		DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(
+		DocumentsClientServer.CreateFilterItem("Partner", CurrentData.Partner, DataCompositionComparisonType.Equal));
+	OpenSettings.FormParameters = New Structure();
+	OpenSettings.FormParameters.Insert("Partner", CurrentData.Partner);
+	OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
+	OpenSettings.FillingData = New Structure("Partner", CurrentData.Partner);
+
+	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure SalaryTaxListLegalNameEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	CurrentData = Form.Items.SalaryTaxList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(
+		DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(
+		DocumentsClientServer.CreateFilterItem("Partner", CurrentData.Partner, ComparisonType.Equal));
+	AdditionalParameters = New Structure();
+	AdditionalParameters.Insert("Partner", CurrentData.Partner);
+	AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
 #Region SALARY_TAX_LIST_AGREEMENT
 
 Procedure SalaryTaxListAgreementOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	Return;
+	ViewClient_V2.SalaryTaxListAgreementOnChange(Object, Form, CurrentData);
 EndProcedure
 
 Procedure SalaryTaxListAgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -140,15 +161,15 @@ Procedure SalaryTaxListAgreementStartChoice(Object, Form, Item, ChoiceData, Stan
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
 	
 	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FormParameters.Insert("Partner"                     , Object.Partner);
+	OpenSettings.FormParameters.Insert("Partner"                     , CurrentData.Partner);
 	OpenSettings.FormParameters.Insert("IncludeFilterByPartner"      , True);
 	OpenSettings.FormParameters.Insert("IncludePartnerSegments"      , True);
 	OpenSettings.FormParameters.Insert("EndOfUseDate"                , Object.Date);
 	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate" , True);
 	
 	OpenSettings.FillingData = New Structure();
-	OpenSettings.FillingData.Insert("Partner"   , Object.Partner);
-	OpenSettings.FillingData.Insert("LegalName" , Object.LegalName);
+	OpenSettings.FillingData.Insert("Partner"   , CurrentData.Partner);
+	OpenSettings.FillingData.Insert("LegalName" , CurrentData.LegalName);
 	OpenSettings.FillingData.Insert("Company"   , Object.Company);
 	OpenSettings.FillingData.Insert("Type"      , PredefinedValue("Enum.AgreementTypes.Other"));
 
@@ -170,7 +191,7 @@ Procedure SalaryTaxListAgreementEditTextChange(Object, Form, Item, Text, Standar
 	AdditionalParameters.Insert("IncludeFilterByPartner"      , True);
 	AdditionalParameters.Insert("IncludePartnerSegments"      , True);
 	AdditionalParameters.Insert("EndOfUseDate"                , Object.Date);
-	AdditionalParameters.Insert("Partner"                     , Object.Partner);
+	AdditionalParameters.Insert("Partner"                     , CurrentData.Partner);
 	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
 EndProcedure
 

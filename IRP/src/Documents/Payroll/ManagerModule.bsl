@@ -195,8 +195,8 @@ Function SalaryTaxList()
 		|	PayrollSalaryTaxList.Ref.Company AS Company,
 		|	PayrollSalaryTaxList.Ref.Branch AS Branch,
 		|	PayrollSalaryTaxList.Ref.Currency AS Currency,
-		|	PayrollSalaryTaxList.Ref.Partner AS Partner,
-		|	PayrollSalaryTaxList.Ref.LegalName AS LegalName,
+		|	PayrollSalaryTaxList.Partner AS Partner,
+		|	PayrollSalaryTaxList.LegalName AS LegalName,
 		|	PayrollSalaryTaxList.Agreement AS Agreement,
 		|	PayrollSalaryTaxList.Ref.PaymentPeriod AS PaymentPeriod,
 		|	PayrollSalaryTaxList.CalculationType AS CalculationType,
@@ -624,11 +624,11 @@ Function GetAnalytics_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransaction
 			New Structure("Tax, VatRate", Parameters.RowData.Tax));			
 	Else
 		Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-		                                                    Parameters.ObjectData.Partner,
+		                                                    Parameters.RowData.Partner,
 		                                                    Parameters.RowData.Agreement,
 		                                                    Parameters.ObjectData.Currency);
 		AdditonalAnalytics = New Structure();
-		AdditonalAnalytics.Insert("Partner"   ,Parameters.ObjectData.Partner);
+		AdditonalAnalytics.Insert("Partner"   ,Parameters.RowData.Partner);
 		AdditonalAnalytics.Insert("Agreement" ,Parameters.RowData.Agreement);
 		
 		AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
@@ -661,11 +661,11 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Tax
 	Else
 	
 		Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-		                                                    Parameters.ObjectData.Partner,
+		                                                    Parameters.RowData.Partner,
 		                                                    Parameters.RowData.Agreement,
 		                                                    Parameters.ObjectData.Currency);
 		AdditonalAnalytics = New Structure();
-		AdditonalAnalytics.Insert("Partner"   ,Parameters.ObjectData.Partner);
+		AdditonalAnalytics.Insert("Partner"   ,Parameters.RowData.Partner);
 		AdditonalAnalytics.Insert("Agreement" ,Parameters.RowData.Agreement);
 		
 		AccountingAnalytics.Credit = Credit.AccountTransactionsOther;

@@ -3518,6 +3518,31 @@ EndProcedure
 
 #EndRegion
 
+#Region SALARY_TAX_LIST
+
+// SalaryTaxList.Partner
+Procedure SalaryTaxListPartnerOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "SalaryTaxList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "SalaryTaxList", Rows);
+	ControllerClientServer_V2.SalaryTaxListPartnerOnChange(Parameters);
+EndProcedure
+
+// SalaryTaxList.Agreement
+Procedure SalaryTaxListAgreementOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "SalaryTaxList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "SalaryTaxList", Rows);
+	ControllerClientServer_V2.SalaryTaxListAgreementOnChange(Parameters);
+EndProcedure
+
+// SalaryTaxList.LegalName
+Procedure SalaryTaxListLegalNameOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "SalaryTaxList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "SalaryTaxList", Rows);
+	ControllerClientServer_V2.SalaryTaxListLegalNameOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region COST_LIST
 
 Procedure CostListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
@@ -4230,8 +4255,7 @@ Procedure OnSetPartnerNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportFromTradeAgent"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "Payroll" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	

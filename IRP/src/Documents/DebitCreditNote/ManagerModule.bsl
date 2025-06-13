@@ -1174,42 +1174,27 @@ Function T1040T_AccountingAmounts()
 		|	Doc.SendCurrency AS Currency,
 		|	Doc.SendAmount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_R5020B_PartnersBalance) AS Operation,
-		|	CASE
-		|		WHEN Doc.SendDebtType IN (VALUE(enum.DebtTypes.TransactionVendor), VALUE(enum.DebtTypes.AdvanceCustomer),
-		|			VALUE(enum.DebtTypes.OtherPartnerPayable), VALUE(enum.DebtTypes.EmployeePayable))
-		|			THEN Doc.SendCurrency
-		|		WHEN Doc.ReceiveDebtType IN (VALUE(enum.DebtTypes.AdvanceVendor), VALUE(enum.DebtTypes.TransactionCustomer),
-		|			VALUE(enum.DebtTypes.OtherPartnerReceivable), VALUE(enum.DebtTypes.EmployeeReceivable))
-		|			THEN Doc.ReceiveCurrency
-		|		ELSE 0
-		|	END AS DrCurrency,
-		|	CASE
-		|		WHEN Doc.SendDebtType IN (VALUE(enum.DebtTypes.TransactionVendor), VALUE(enum.DebtTypes.AdvanceCustomer),
-		|			VALUE(enum.DebtTypes.OtherPartnerPayable), VALUE(enum.DebtTypes.EmployeePayable))
-		|			THEN Doc.SendAmount
-		|		WHEN Doc.ReceiveDebtType IN (VALUE(enum.DebtTypes.AdvanceVendor), VALUE(enum.DebtTypes.TransactionCustomer),
-		|			VALUE(enum.DebtTypes.OtherPartnerReceivable), VALUE(enum.DebtTypes.EmployeeReceivable))
-		|			THEN Doc.ReceiveAmount
-		|		ELSE 0
-		|	END AS DrCurrencyAmount,
-		|	CASE
-		|		WHEN Doc.SendDebtType IN (VALUE(enum.DebtTypes.AdvanceVendor), VALUE(enum.DebtTypes.TransactionCustomer),
-		|			VALUE(enum.DebtTypes.OtherPartnerReceivable), VALUE(enum.DebtTypes.EmployeeReceivable))
-		|			THEN Doc.SendCurrency
-		|		WHEN Doc.ReceiveDebtType IN (VALUE(enum.DebtTypes.TransactionVendor), VALUE(enum.DebtTypes.AdvanceCustomer),
-		|			VALUE(enum.DebtTypes.OtherPartnerPayable), VALUE(enum.DebtTypes.EmployeePayable))
-		|			THEN Doc.ReceiveCurrency
-		|		ELSE 0
-		|	END AS CrCurrency,
-		|	CASE
-		|		WHEN Doc.SendDebtType IN (VALUE(enum.DebtTypes.AdvanceVendor), VALUE(enum.DebtTypes.TransactionCustomer),
-		|			VALUE(enum.DebtTypes.OtherPartnerReceivable), VALUE(enum.DebtTypes.EmployeeReceivable))
-		|			THEN Doc.SendAmount
-		|		WHEN Doc.ReceiveDebtType IN (VALUE(enum.DebtTypes.TransactionVendor), VALUE(enum.DebtTypes.AdvanceCustomer),
-		|			VALUE(enum.DebtTypes.OtherPartnerPayable), VALUE(enum.DebtTypes.EmployeePayable))
-		|			THEN Doc.ReceiveAmount
-		|		ELSE 0
-		|	END AS CrCurrencyAmount,
+		|
+		|	case 
+		|	when Doc.SendDebtType in (&ArrayOfReceivable) then  Doc.ReceiveCurrency
+		|	when Doc.SendDebtType in (&ArrayOfPayable) then     Doc.SendCurrency
+		|	end as DrCurrency,
+		|
+		|	case 
+		|	when Doc.SendDebtType in (&ArrayOfReceivable) then Doc.ReceiveAmount
+		|	when Doc.SendDebtType in (&ArrayOfPayable) then    Doc.SendAmount
+		|	end as DrCurrencyAmount,
+		|
+		|	case 
+		|	when Doc.SendDebtType in (&ArrayOfReceivable) then Doc.SendCurrency
+		|	when Doc.SendDebtType in (&ArrayOfPayable) then    Doc.ReceiveCurrency
+		|	end as CrCurrency,
+		|
+		|	case 
+		|	when Doc.SendDebtType in (&ArrayOfReceivable) then Doc.SendAmount
+		|	when Doc.SendDebtType in (&ArrayOfPayable) then    Doc.ReceiveAmount
+		|	end as CrCurrencyAmount,
+		|		
 		|	UNDEFINED AS AdvancesClosing
 		|INTO T1040T_AccountingAmounts
 		|FROM

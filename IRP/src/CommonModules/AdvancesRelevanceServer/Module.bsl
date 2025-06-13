@@ -5,7 +5,7 @@ Procedure Clear(DocRef, Company, EndOfPeriod) Export
 	ElsIf TypeOf(DocRef) = Type("DocumentRef.CustomersAdvancesClosing") Then
 		RelevanceRegisterName = "T2017S_CustomersAdvancesRelevance";
 	Else
-		Raise StrTemplate("Unsupported document type [%1]", TypeOf(DocRef));
+		Raise StrTemplate(R().UnsupportedDocumentType, TypeOf(DocRef));
 	EndIf;
 	QueryText = GetQueryText_Clear();
 	QueryText = StrTemplate(QueryText, RelevanceRegisterName);
@@ -28,7 +28,7 @@ Procedure Restore(DocRef, Company, EndOfPeriod) Export
 		RelevanceRegisterName = "T2017S_CustomersAdvancesRelevance";
 		DocumentName = "CustomersAdvancesClosing";
 	Else
-		Raise StrTemplate("Unsupported document type [%1]", TypeOf(DocRef));
+		Raise StrTemplate(R().UnsupportedDocumentType, TypeOf(DocRef));
 	EndIf;
 	QueryText = GetQueryText_Restore();
 	QueryText = StrTemplate(QueryText, DocumentName);
@@ -51,7 +51,7 @@ Procedure Reset(DocRef, Company, BeginOfPeriod) Export
 		RelevanceRegisterName = "T2017S_CustomersAdvancesRelevance";
 		DocumentName = "CustomersAdvancesClosing";
 	Else
-		Raise StrTemplate("Unsupported document type [%1]", TypeOf(DocRef));
+		Raise StrTemplate(R().UnsupportedDocumentType, TypeOf(DocRef));
 	EndIf;
 	QueryText = GetQueryText_Reset();
 	QueryText = StrTemplate(QueryText, DocumentName);
@@ -78,7 +78,7 @@ Procedure SetBound_Advances(DocObject, Records, RegisterMetadata) Export
 		RelevanceRegisterName = "T2017S_CustomersAdvancesRelevance";
 		QueryText = StrTemplate(QueryText, "R2020B_AdvancesFromCustomers", FilterAttribute, RelevanceRegisterName);
 	Else
-		Raise StrTemplate("Unsupported register metadata [%1]", RegisterMetadata);
+		Raise StrTemplate(R().UnsupportedRegisterMetadata, RegisterMetadata);
 	EndIf;
 	RecordsCopy = CopyRecords(Records, RegisterMetadata, FilterAttribute, True);
 	Query = New Query();
@@ -104,7 +104,7 @@ Procedure SetBound_Transactions(DocObject, Records, RegisterMetadata) Export
 		RelevanceRegisterName = "T2017S_CustomersAdvancesRelevance";
 		QueryText = StrTemplate(QueryText, "R2021B_CustomersTransactions", FilterAttribute, RelevanceRegisterName);
 	Else
-		Raise StrTemplate("Unsupported register metadata [%1]", RegisterMetadata);
+		Raise StrTemplate(R().UnsupportedRegisterMetadata, RegisterMetadata);
 	EndIf;
 	RecordsCopy = CopyRecords(Records, RegisterMetadata, FilterAttribute, True);
 	Query = New Query();
@@ -130,7 +130,7 @@ Procedure SetBound_Aging(DocObject, Records, RegisterMetadata) Export
 		RelevanceRegisterName = "T2017S_CustomersAdvancesRelevance";
 		QueryText = StrTemplate(QueryText, "R5011B_CustomersAging", FilterAttribute, RelevanceRegisterName);
 	Else
-		Raise StrTemplate("Unsupported register metadata [%1]", RegisterMetadata);
+		Raise StrTemplate(R().UnsupportedRegisterMetadata, RegisterMetadata);
 	EndIf;
 	RecordsCopy = CopyRecords(Records, RegisterMetadata, FilterAttribute, False);
 	Query = New Query();
@@ -833,7 +833,7 @@ Function GetPointInTime(QueryParameters, RelevanceRegisterName)
 	If QuerySelection.Next() Then
 		Return QuerySelection.PointInTime;
 	Else
-		Raise "Can not get point in time";
+                Raise R().CannotGetPointInTime;
 	EndIf;
 EndFunction
 

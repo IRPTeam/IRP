@@ -211,7 +211,7 @@ Procedure CreateDocuments(Val StructureRow, CreateGoodsReceipt, CreateInventoryT
 			Data = RowIDInfoPrivileged.ExtractData(ResultTable, GoodsReceipt.Ref);
 			FillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(GoodsReceipt.Ref.Metadata(), Data);
 			If Not FillingValues.Count() Then
-				Raise "Converting Data to Filling values failed";
+         Raise R().ConvertingDataToFillingValuesFailed;
 			EndIf;
 			GoodsReceipt.Fill(FillingValues[0]);
 			GoodsReceipt.Write(DocumentWriteMode.Posting);		

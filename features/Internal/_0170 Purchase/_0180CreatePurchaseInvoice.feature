@@ -33,6 +33,7 @@ Scenario: _018000 preparation
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
+		When Create OtherPartners objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
 		When Create catalog Countries objects
@@ -1072,3 +1073,42 @@ Scenario: _018020 check Purchase price records
 				| '*'         | 'en description is empty'                       | '$PurchaseInvoice018020$' | 'High shoes box (8 pcs)' | '26,48'     | '250,00' | '31,25'       |
 				| 'Total'     | ''                                              | ''                        | ''                       | ''          | ''       | ''            |	
 		And I close all client application windows
+
+Scenario: _018019 create PI with partner Other
+	And I close all client application windows
+	* Create PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Filling main information
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| "Description"     |
+			| "Other partner 2" |
+		And I click the button named "FormChoose"
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Other partner 2'      |
+		And I click the button named "FormChoose"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Store" by "Store 01" string
+	* Add an Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Trousers" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "Trousers/Trousers" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I input "30,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		And I delete "$$PurchaseInvoice05$$" variable
+		And I delete "$$NumberPurchaseInvoice05$$" variable
+		And I save the window as "$$PurchaseInvoice05$$"
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice05$$"	
+		And I click the button named "FormPostAndClose"
+	* check creation
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And "List" table contains lines
+			| 'Number'                      |
+			| '$$NumberPurchaseInvoice05$$' |
+	And I close all client application windows			
+				

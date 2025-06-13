@@ -42,20 +42,35 @@ EndProcedure
 #Region ItemPartner
 
 Procedure PartnerStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, TransactionType) Export
-	PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(TransactionType);
+	PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(TransactionType, False);
+	
+	If PartnerType = Undefined Then
+		PartnerType = New Array();
+	EndIf;
 	
 	OpenSettings = GetOpenSettingsStructure();
-
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
 	
 	OpenSettings.FormParameters = New Structure();
+	OpenSettings.FormParameters.Insert("DocumentFilter", New Structure());
+	OpenSettings.FormParameters.Insert("FilterGroupType", "OrGroup");
 	
-	If ValueIsFilled(PartnerType) Then
-		OpenSettings.FormParameters.Insert("Filter", New Structure(PartnerType, True));
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(PartnerType, True, DataCompositionComparisonType.Equal));
-		OpenSettings.FillingData = New Structure(PartnerType, True);
-	EndIf;
+	FilterGroup = DocumentsClientServer.CreateFilterGroup(DataCompositionFilterItemsGroupType.OrGroup);
+	
+	Segments = StrSplit(PartnerType, ",");
+	For Each Segment In Segments Do
+		OpenSettings.FormParameters.DocumentFilter.Insert(TrimAll(Segment), True);
+		FilterGroup.Items.Add(DocumentsClientServer.CreateFilterItem(TrimAll(Segment), True, DataCompositionComparisonType.Equal));
+	EndDo;
+	
+	OpenSettings.ArrayOfFilters.Add(FilterGroup);
+	
+	//If ValueIsFilled(PartnerType) Then
+	//	OpenSettings.FormParameters.Insert("Filter", New Structure(PartnerType, True));
+	//	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(PartnerType, True, DataCompositionComparisonType.Equal));
+	//	OpenSettings.FillingData = New Structure(PartnerType, True);
+	//sEndIf;
 	
 	PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
@@ -214,13 +229,13 @@ Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceD
 		DateIsSet = False;
 	EndIf;
 	
-	AgreementType = ModelServer_V2.GetAgreementTypeByTransactionType(TransactionType);
+	AgreementTypes = ModelServer_V2.GetAgreementTypeByTransactionType(TransactionType, False);
 	
 	OpenSettings = GetOpenSettingsStructure();
 
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementType, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementTypes, DataCompositionComparisonType.InList));
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
 	
 	OpenSettings.FormParameters = New Structure();
@@ -238,7 +253,7 @@ Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceD
 	If CompanyIsSet Then
 		OpenSettings.FillingData.Insert("Company"   , Company);
 	EndIf;
-	OpenSettings.FillingData.Insert("Type"      , AgreementType);
+	OpenSettings.FillingData.Insert("Type"      , AgreementTypes[0]);
 
 	AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure

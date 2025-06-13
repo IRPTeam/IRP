@@ -58,9 +58,9 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 		AccountingServer.UpdateAccountingRelevance(DocObject.Ref);	
 	EndIf;
 	
-	//@skip-check bsl-legacy-check-expression-type
-	R6025B_SimpleBatchData = Parameters.PostingDataTables.Get(Metadata.AccumulationRegisters.R6025B_SimpleBatch);
 	If GetFunctionalOption("UseSimpleBatch") Then
+    //@skip-check bsl-legacy-check-expression-type
+	  R6025B_SimpleBatchData = Parameters.PostingDataTables.Get(Metadata.AccumulationRegisters.R6025B_SimpleBatch);
 		If Not R6025B_SimpleBatchData = Undefined Then
 			OutgoingMovements = SimpleBatchCostCalculationServer.UpdateOutgoingMovementsCost(Parameters.Object.Ref, R6025B_SimpleBatchData.PrepareTable, Cancel, , , AddInfo);
 			If Not OutgoingMovements = Undefined Then
@@ -921,7 +921,7 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 			Return CheckResult.IsOk;
 		Else
-			Raise StrTemplate("Unsupported register type [%1]", Parameters.Metadata);
+			Raise StrTemplate(R().Error_UnsupportedRegisterType, Parameters.Metadata);
 		EndIf;
 		
 	Else // Receipt
@@ -1271,7 +1271,7 @@ Function GetQueryTableByName(TableName, Parameters, RaiseExeption = False) Expor
 	VTSearch = Parameters.TempTablesManager.Tables.Find(TableName);
 	If VTSearch = Undefined Then
 		If RaiseExeption Then
-			Raise StrTemplate("Table [%1] not found in temp tables", TableName);
+			Raise StrTemplate(R().Error_TableNotFoundInTempTables, TableName);
 		Else
 			Return New ValueTable();
 		EndIf;
@@ -1410,6 +1410,16 @@ Function Exists_R1020B_AdvancesToVendors() Export
 		|	AccumulationRegister.R1020B_AdvancesToVendors AS R1020B_AdvancesToVendors
 		|WHERE
 		|	R1020B_AdvancesToVendors.Recorder = &Ref";
+EndFunction
+
+Function Exists_R3010B_CashOnHand() Export
+	Return 
+		"SELECT *
+		|	INTO Exists_R3010B_CashOnHand
+		|FROM
+		|	AccumulationRegister.R3010B_CashOnHand AS R3010B_CashOnHand
+		|WHERE
+		|	R3010B_CashOnHand.Recorder = &Ref";
 EndFunction
 
 Function RegistersWithAdditionalDataFilling()

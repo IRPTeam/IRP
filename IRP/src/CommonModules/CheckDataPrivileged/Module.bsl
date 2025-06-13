@@ -137,7 +137,7 @@ Function R4010B_ActualStocs_R4050B_StockInventory_IsFilled(Ref)
 	ElsIf RefType = Type("CatalogRef.ItemKeys") Then
 		Condition = "ItemKey";
 	Else
-		Raise StrTemplate("Unknown ref type: %1", RefType);
+		Raise StrTemplate(R().Error_UnknownRefType, RefType);
 	EndIf;
 	
 	Query.Text = StrTemplate(Query.Text, Condition);

@@ -43,6 +43,7 @@ Scenario: _040130 preparation (Sales invoice)
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
 		When Create catalog Partners objects
+		When Create OtherPartners objects
 		When Create catalog Companies objects (partners company)
 		When Create catalog Countries objects
 		When Create catalog LegalNameContracts objects
@@ -124,6 +125,9 @@ Scenario: _040130 preparation (Sales invoice)
 		When Create document SalesInvoice objects (comission trade, consignment)
 		When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
 		When Create document SalesInvoiceobjects (serial lot numbers sales)
+		When Create document SalesInvoice objects (partner Other)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(135).GetObject().Write(DocumentWriteMode.Posting);"    |		
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -1485,4 +1489,289 @@ Scenario: _0401352 check Sales invoice movements by the Register  "R6060 Cost of
 			| ''                                                  | '05.05.2025 12:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'en description is empty' | 'TRY'      | ''                  | ''                 | '80'       | '25 762,71'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '25 762,71'    | '25 762,71'        | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
 			| ''                                                  | '05.05.2025 12:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'Local currency'          | 'TRY'      | ''                  | ''                 | '80'       | '25 762,71'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '25 762,71'    | '25 762,71'        | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
 			| ''                                                  | '05.05.2025 12:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'Reporting currency'      | 'USD'      | ''                  | ''                 | '80'       | '4 410,58'       | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '4 410,58'     | '4 410,58'         | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+	And I close all client application windows
+
+Scenario: _0401353 check Sales invoice movements by the Register  "Posted documents registry" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                                            | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'       | ''                                            | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                            | 'Document'                                    | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                            | 'Sales invoice 135 dated 04.06.2025 13:43:50' | '04.06.2025 13:43:50' | '135'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		
+
+Scenario: _0401354 check Sales invoice movements by the Register  "R2001 Sales" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R2001 Sales"
+		And I click "Registrations report info" button
+		And I select "R2001 Sales" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''             | ''       | ''                             | ''         | ''                                            | ''                  | ''                  | ''                                     | ''             | ''         | ''       | ''           | ''              |
+			| 'Register  "R2001 Sales"'                     | ''                    | ''             | ''       | ''                             | ''         | ''                                            | ''                  | ''                  | ''                                     | ''             | ''         | ''       | ''           | ''              |
+			| ''                                            | 'Period'              | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Invoice'                                     | 'Item key'          | 'Serial lot number' | 'Row key'                              | 'Sales person' | 'Quantity' | 'Amount' | 'Net amount' | 'Offers amount' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Sales invoice 135 dated 04.06.2025 13:43:50' | 'Trousers/Trousers' | ''                  | '836c5b0d-1493-4299-8850-5258b504860f' | ''             | '10'       | '590'    | '500'        | ''              |
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Sales invoice 135 dated 04.06.2025 13:43:50' | 'Trousers/Trousers' | ''                  | '836c5b0d-1493-4299-8850-5258b504860f' | ''             | '10'       | '101,01' | '85,6'       | ''              |
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Sales invoice 135 dated 04.06.2025 13:43:50' | 'Trousers/Trousers' | ''                  | '836c5b0d-1493-4299-8850-5258b504860f' | ''             | '10'       | '590'    | '500'        | ''              |
+	And I close all client application windows
+
+Scenario: _0401355 check Sales invoice movements by the Register  "R2040 Taxes incoming" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R2040 Taxes incoming"
+		And I click "Registrations report info" button
+		And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| 'Register  "R2040 Taxes incoming"'            | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Amount' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '90'     |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '15,41'  |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '90'     |
+	And I close all client application windows
+
+Scenario: _0401356 check Sales invoice movements by the Register  "R4010 Actual stocks" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R4010 Actual stocks"
+		And I click "Registrations report info" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''         | ''                  | ''                  | ''                 | ''         |
+			| 'Register  "R4010 Actual stocks"'             | ''                    | ''           | ''         | ''                  | ''                  | ''                 | ''         |
+			| ''                                            | 'Period'              | 'RecordType' | 'Store'    | 'Item key'          | 'Serial lot number' | 'Source of origin' | 'Quantity' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Expense'    | 'Store 01' | 'Trousers/Trousers' | ''                  | ''                 | '10'       |
+	And I close all client application windows		
+
+Scenario: _0401357 check Sales invoice movements by the Register  "R4011 Free stocks" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R4011 Free stocks"
+		And I click "Registrations report info" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''         | ''                  | ''         |
+			| 'Register  "R4011 Free stocks"'               | ''                    | ''           | ''         | ''                  | ''         |
+			| ''                                            | 'Period'              | 'RecordType' | 'Store'    | 'Item key'          | 'Quantity' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Expense'    | 'Store 01' | 'Trousers/Trousers' | '10'       |
+	And I close all client application windows
+
+Scenario: _0401358 check Sales invoice movements by the Register  "R4050 Stock inventory" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R4050 Stock inventory"
+		And I click "Registrations report info" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''             | ''         | ''                  | ''         |
+			| 'Register  "R4050 Stock inventory"'           | ''                    | ''           | ''             | ''         | ''                  | ''         |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key'          | 'Quantity' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Expense'    | 'Main Company' | 'Store 01' | 'Trousers/Trousers' | '10'       |
+	And I close all client application windows
+
+Scenario: _0401359 check Sales invoice movements by the Register  "R5010 Reconciliation statement" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''             | ''       | ''         | ''                | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'  | ''                    | ''           | ''             | ''       | ''         | ''                | ''                    | ''       |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Currency' | 'Legal name'      | 'Legal name contract' | 'Amount' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'TRY'      | 'Other partner 1' | ''                    | '590'    |
+	And I close all client application windows
+
+Scenario: _0401360 check Sales invoice movements by the Register  "R5015 Other partners transactions" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R5015 Other partners transactions"
+		And I click "Registrations report info" button
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50'   | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                | ''      | ''       | ''                     |
+			| 'Register  "R5015 Other partners transactions"' | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                | ''      | ''       | ''                     |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'       | 'Basis' | 'Amount' | 'Deferred calculation' |
+			| ''                                              | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''      | '590'    | 'No'                   |
+			| ''                                              | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''      | '101,01' | 'No'                   |
+			| ''                                              | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''      | '590'    | 'No'                   |
+	And I close all client application windows
+
+Scenario: _0401361 check Sales invoice movements by the Register  "R5020 Partners balance" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R5020 Partners balance"
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''             | ''       | ''                | ''                | ''                | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'          | ''                    | ''           | ''             | ''       | ''                | ''                | ''                | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Partner'         | 'Legal name'      | 'Agreement'       | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'TRY'      | 'Local currency'               | 'TRY'                  | '590'    | ''                     | ''                 | ''                   | ''               | '590'               | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | '590'    | ''                     | ''                 | ''                   | ''               | '590'               | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '101,01' | ''                     | ''                 | ''                   | ''               | '101,01'            | ''                 |
+	And I close all client application windows
+
+Scenario: _0401362 check Sales invoice movements by the Register  "R5021 Revenues" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R5021 Revenues"
+		And I click "Registrations report info" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''             | ''       | ''                   | ''             | ''                  | ''         | ''                    | ''                             | ''        | ''       | ''                  |
+			| 'Register  "R5021 Revenues"'                  | ''                    | ''             | ''       | ''                   | ''             | ''                  | ''         | ''                    | ''                             | ''        | ''       | ''                  |
+			| ''                                            | 'Period'              | 'Company'      | 'Branch' | 'Profit loss center' | 'Revenue type' | 'Item key'          | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | ''                   | ''             | 'Trousers/Trousers' | 'TRY'      | ''                    | 'Local currency'               | ''        | '500'    | '590'               |
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | ''                   | ''             | 'Trousers/Trousers' | 'TRY'      | ''                    | 'en description is empty'      | ''        | '500'    | '590'               |
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | ''                   | ''             | 'Trousers/Trousers' | 'USD'      | ''                    | 'Reporting currency'           | ''        | '85,6'   | '101,01'            |
+	And I close all client application windows
+
+Scenario: _0401363 check Sales invoice movements by the Register  "T1040 Accounting amounts" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "T1040 Accounting amounts"
+		And I click "Registrations report info" button
+		And I select "T1040 Accounting amounts" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''                                     | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
+			| 'Register  "T1040 Accounting amounts"'        | ''                    | ''                                     | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
+			| ''                                            | 'Period'              | 'Row key'                              | 'Operation'               | 'Multi currency movement type' | 'Currency' | 'Revaluated currency' | 'Dr currency' | 'Cr currency' | 'Amount' | 'Dr currency amount' | 'Cr currency amount' | 'Deferred calculation' | 'Advances closing' |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | ''            | ''            | '500'    | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | ''            | ''            | '85,6'   | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | 'en description is empty'      | 'TRY'      | ''                    | ''            | ''            | '500'    | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | ''            | ''            | '90'     | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | ''            | ''            | '15,41'  | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | 'en description is empty'      | 'TRY'      | ''                    | ''            | ''            | '90'     | ''                   | ''                   | 'No'                   | ''                 |
+	And I close all client application windows
+
+Scenario: _0401364 check Sales invoice movements by the Register  "T1050 Accounting quantities" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "T1050 Accounting quantities"
+		And I click "Registrations report info" button
+		And I select "T1050 Accounting quantities" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''                                     | ''                        | ''         |
+			| 'Register  "T1050 Accounting quantities"'     | ''                    | ''                                     | ''                        | ''         |
+			| ''                                            | 'Period'              | 'Row key'                              | 'Operation'               | 'Quantity' |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | '10'       |
+	And I close all client application windows
+
+Scenario: _0401365 check Sales invoice movements by the Register  "T3010S Row ID info" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "T3010S Row ID info"
+		And I click "Registrations report info" button
+		And I select "T3010S Row ID info" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                                     | ''                                     | ''          | ''      | ''                                     | ''                                     | ''      | ''         | ''     |
+			| 'Register  "T3010S Row ID info"'              | ''                                     | ''                                     | ''          | ''      | ''                                     | ''                                     | ''      | ''         | ''     |
+			| ''                                            | 'Key'                                  | 'Row ID'                               | 'Unique ID' | 'Basis' | 'Basis key'                            | 'Row ref'                              | 'Price' | 'Currency' | 'Unit' |
+			| ''                                            | '836c5b0d-1493-4299-8850-5258b504860f' | '836c5b0d-1493-4299-8850-5258b504860f' | '*'         | ''      | '                                    ' | '836c5b0d-1493-4299-8850-5258b504860f' | '50'    | 'TRY'      | 'pcs'  |
+	And I close all client application windows
+
+Scenario: _0401366 check Sales invoice movements by the Register  "T6020 Batch keys info" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "T6020 Batch keys info"
+		And I click "Registrations report info" button
+		And I select "T6020 Batch keys info" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''             | ''       | ''         | ''                  | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''     | ''           | ''                       | ''                  | ''                 | ''                    | ''                          | ''            | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             |
+			| 'Register  "T6020 Batch keys info"'           | ''                    | ''             | ''       | ''         | ''                  | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''     | ''           | ''                       | ''                  | ''                 | ''                    | ''                          | ''            | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             |
+			| ''                                            | 'Period'              | 'Company'      | 'Branch' | 'Store'    | 'Item key'          | 'Direction' | 'Currency movement type' | 'Currency' | 'Batch document' | 'Sales invoice' | 'Row ID'                               | 'Profit loss center' | 'Expense type' | 'Work' | 'Work sheet' | 'DELETE batch consignor' | 'Serial lot number' | 'Source of origin' | 'Production document' | 'Purchase invoice document' | 'Fixed asset' | 'Quantity' | 'Invoice amount' | 'Invoice tax amount' | 'Indirect cost amount' | 'Indirect cost tax amount' | 'Extra cost amount by ratio' | 'Extra cost tax amount by ratio' | 'Extra direct cost amount' | 'Extra direct cost tax amount' | 'Allocated cost amount' | 'Allocated cost tax amount' | 'Allocated revenue amount' | 'Allocated revenue tax amount' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | 'Store 01' | 'Trousers/Trousers' | 'Expense'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''     | ''           | ''                       | ''                  | ''                 | ''                    | ''                          | ''            | '10'       | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             |
+	And I close all client application windows
+
+Scenario: _0401367 check Sales invoice movements by the Register  "TM1010T Row ID movements" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "TM1010T Row ID movements"
+		And I click "Registrations report info" button
+		And I select "TM1010T Row ID movements" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''                                     | ''                                     | ''       | ''                                            | ''                                     | ''         |
+			| 'Register  "TM1010T Row ID movements"'        | ''                    | ''                                     | ''                                     | ''       | ''                                            | ''                                     | ''         |
+			| ''                                            | 'Period'              | 'Row ref'                              | 'Row ID'                               | 'Step'   | 'Basis'                                       | 'Basis key'                            | 'Quantity' |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | '836c5b0d-1493-4299-8850-5258b504860f' | 'SRO&SR' | 'Sales invoice 135 dated 04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | '10'       |
 	And I close all client application windows		

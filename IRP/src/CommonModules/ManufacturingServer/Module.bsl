@@ -572,11 +572,11 @@ Procedure StoresFromRegBillOfMaterials(TableBillOfMaterials, TableForStores)
 		
 		RowsWithStores = QueryTable.FindRows(Filter);
 		
-		If RowsWithStores.Count() Then
-			Stores = RowsWithStores[0];
-		Else
-			Raise "RowsWithStores.Count() = 0";
-		EndIf;
+                If RowsWithStores.Count() Then
+                        Stores = RowsWithStores[0];
+                Else
+                        Raise R().RowsWithStoresEmpty;
+                EndIf;
 		
 		If Stores.NeedReleaseStore Then	
 			If ValueIsFilled(Stores.ReleaseStore) Then

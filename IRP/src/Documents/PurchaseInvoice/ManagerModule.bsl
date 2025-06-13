@@ -601,6 +601,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(S1001L_VendorsPricesByItemKey());
 	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
@@ -1775,6 +1776,38 @@ Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_PI_WTI();
 EndFunction
 
+Function R5015B_OtherPartnersTransactions()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Basis,
+		|	ItemList.Key,
+		|	SUM(ItemList.Amount) AS Amount
+		|INTO R5015B_OtherPartnersTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsOther
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Key";
+EndFunction
+
 Function R6025B_SimpleBatch()
 	Return 
 	"SELECT
@@ -1929,8 +1962,13 @@ Function GetAnalytics_ReceiptInventory(Parameters)
 	                                                    Parameters.ObjectData.Partner,
 	                                                    Parameters.ObjectData.Agreement,
 	                                                    Parameters.ObjectData.Currency);
-	                                                    
-	AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
+	                         
+	If Parameters.ObjectData.Agreement.Type = Enums.AgreementTypes.Other Then
+		AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+	Else                           
+		AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
+	EndIf;
+	
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 
 	Return AccountingAnalytics;
@@ -1970,8 +2008,12 @@ Function GetAnalytics_VATOutgoing(Parameters)
 	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 	                                                    Parameters.ObjectData.Partner,
 	                                                    Parameters.ObjectData.Agreement,
-	                                                    Parameters.ObjectData.Currency);	                                                    
-	AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
+	                                                    Parameters.ObjectData.Currency);
+	If Parameters.ObjectData.Agreement.Type = Enums.AgreementTypes.Other Then
+		AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+	Else                           
+		AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
+	EndIf;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 
 	Return AccountingAnalytics;

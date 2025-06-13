@@ -579,7 +579,7 @@ Procedure ExecuteCommandByName(Parameters, CommandName)
 	ElsIf CommandName = "CommandRecalculateByTotalAmount" Then
 		CommandRecalculateByTotalAmount(Parameters);
 	Else
-		Raise StrTemplate("Unsupported command name[%1]", CommandName);
+		Raise StrTemplate(R().Error_UnsupportedCommandName, CommandName);
 	EndIf;
 EndProcedure
 
@@ -5972,7 +5972,7 @@ Procedure StepCovertQuantityToQuantityInBaseUnit(Parameters, Chain, Type)
 	ElsIf Type = "ItemKeyBundle" Then
 		Options.Bundle = GetItemKeyBundle(Parameters);
 	Else
-		Raise StrTemplate("Unsupported bundle type [%1]", Type);
+		Raise StrTemplate(R().Error_UnsupportedBundleType, Type);
 	EndIf;
 	Options.Unit       = GetUnit(Parameters);
 	Options.Quantity   = GetQuantity(Parameters);
@@ -7074,7 +7074,7 @@ Procedure StepTransactionsCalculations(Parameters, Chain, WhoIsChanged);
 			Options.CalculateTaxAmountByNetAmount.Enable   = True;
 			Options.CalculateTotalAmountByNetAmount.Enable = True;
 		Else
-			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
 		
 		Options.AmountOptions.DontCalculateRow = False;
@@ -8582,7 +8582,7 @@ Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged);
 			Options.CalculateTaxAmountByNetAmount.Enable   = True;
 			Options.CalculateTotalAmountByNetAmount.Enable = True;
 		Else
-			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
 		
 		If StrSplit(Parameters.ObjectMetadataInfo.Tables.PaymentList.Columns, ",").Find("DontCalculateRow") <> Undefined Then
@@ -13839,7 +13839,7 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
 		Else
-			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
 		
 		Options.AmountOptions.DontCalculateRow = GetItemListDontCalculateRow(Parameters, Row.Key);
@@ -13918,7 +13918,7 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
 		Else
-			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
 		
 		Options.AmountOptions.DontCalculateRow = GetItemListDontCalculateRow(Parameters, Row.Key);
@@ -13979,7 +13979,7 @@ Procedure StepItemListCalculations_StockDocuments(Parameters, Chain, WhoIsChange
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
 		Else
-			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
 		
 		Options.AmountOptions.NetAmount        = GetItemListNetAmount(Parameters, Row.Key);
@@ -15145,7 +15145,7 @@ Procedure StepInventoryCalculations(Parameters, Chain, WhoIsChanged)
 		ElsIf WhoIsChanged = "IsAmountChanged" Then
 			Options.CalculatePrice.Enable = True;
 		Else
-			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
 		
 		Options.Amount   = GetInventoryAmount(Parameters, Row.Key);
@@ -15632,7 +15632,7 @@ Procedure StepReceiptFromConsignorCalculations(Parameters, Chain, WhoIsChanged)
 		ElsIf WhoIsChanged = "IsAmountChanged" Then
 			Options.CalculatePrice.Enable = True;
 		Else
-			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
 		
 		Options.Amount   = GetReceiptFromConsignorAmount(Parameters, Row.Key);
@@ -16889,7 +16889,7 @@ Procedure StepTaxesIncomingOutgoingCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateTaxAmountByNetAmount.Enable   = True;
 			Options.CalculateTotalAmountByNetAmount.Enable = True;
 		Else
-			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
 		
 		Options.AmountOptions.DontCalculateRow = False;
@@ -17111,7 +17111,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetPaymentListCommissionPercentNotify"        Then ViewClient_V2.OnSetPaymentListCommissionPercentNotify(Parameters);
 	
 	Else
-		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);
+		Raise StrTemplate(R().Error_NotHandledViewNotify, ViewNotify);
 	EndIf;
 EndProcedure	
 #ENDIF
@@ -17276,7 +17276,7 @@ Procedure MultiSetterObject(Parameters, Results, ResourceToBinding, ViewNotify =
 		ElsIf Segments.Count() = 2 Then // it is column of table
 			SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results, ViewNotify, Resource);
 		Else
-			Raise StrTemplate("Wrong data path [%1]", Binding.DataPath);
+			Raise StrTemplate(R().WrongDataPath, Binding.DataPath);
 		EndIf;
 	EndDo;
 EndProcedure
@@ -17369,7 +17369,7 @@ Function GetProperty(Parameters, Cache, Source, DataPath, Key, ReadOnlyFromCache
 	// this is the header attribute, it is indicated without a dot, for example, Company
 	If Segments.Count() = 1 Then
 		If ValueIsFilled(Key) Then
-			Raise StrTemplate("Key [%1] not allowed for data path [%2]", Key, DataPath);
+			Raise StrTemplate(R().Error_KeyNotAllowedForDataPath, Key, DataPath);
 		EndIf;
 		If Cache.Property(DataPath) Then
 			Return Cache[DataPath];
@@ -17394,7 +17394,7 @@ Function GetProperty(Parameters, Cache, Source, DataPath, Key, ReadOnlyFromCache
 		If TypeOf(Key) = Type("Number") Then
 			RowsInNotChached = Parameters.Object[TableName].FindRows(New Structure("LineNumber", Key));
 			If RowsInNotChached.Count() = 0 Then
-				Raise StrTemplate("Not found row in table [%1] line [%2]", TableName, Key);
+				Raise StrTemplate(R().Error_RowNotFoundInTable, TableName, Key);
 			Else
 				RowByKey = RowsInNotChached[0];
 			EndIf;
@@ -17406,14 +17406,14 @@ Function GetProperty(Parameters, Cache, Source, DataPath, Key, ReadOnlyFromCache
 			
 			RowByKey = Parameters.SourceTableMap.Get(TableName + ":" + Key);
 			If RowByKey = Undefined Then
-				Raise StrTemplate("Not found row in SourceTableMap [%1] [%2]", TableName, Key);
+				Raise StrTemplate(R().Error_RowNotFoundInSourceTableMap, TableName, Key);
 			EndIf;
 			
 		EndIf;
 		Return RowByKey[ColumnName];
 	Else
 		// there are no props with this path
-		Raise StrTemplate("Wrong data path [%1]", DataPath);
+		Raise StrTemplate(R().WrongDataPath, DataPath);
 	EndIf;
 EndFunction
 
@@ -17462,7 +17462,7 @@ Function SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache
 
 			EndIf;
 		Else
-			Raise StrTemplate("Wrong data path for read only property [%1]", DataPath);
+			Raise StrTemplate(R().Error_WrongDataPathForReadOnlyProperty, DataPath);
 		EndIf;
 	EndIf;
 	
@@ -17603,7 +17603,7 @@ Function SetProperty(Parameters, Cache, DataPath, _Key, _Value)
 		EndIf;
 	Else
 		// there are no props with this path
-		Raise StrTemplate("Wrong data path [%1]", DataPath);
+		Raise StrTemplate(R().WrongDataPath, DataPath);
 	EndIf;	
 	Return True;
 EndFunction
@@ -17652,7 +17652,7 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters, BindName, 
 	StepsEnabler = MetadataBinding.Get(FullDataPath);
 	StepsEnabler = ?(StepsEnabler = Undefined, DefaulStepsEnabler, StepsEnabler);
 	If Not ValueIsFilled(StepsEnabler) Then
-		Raise StrTemplate("Steps enabler is not defined [%1]", DataPath);
+		Raise StrTemplate(R().Error_StepsEnablerNotDefined, DataPath);
 	EndIf;
 	
 	Result.FullDataPath = FullDataPath;
@@ -17817,9 +17817,9 @@ Procedure SetReadOnlyProperties(Object, FillingData, ExcludedTabularSections = U
 EndProcedure
 
 Procedure LoaderTable(DataPath, Parameters, Result) Export
-	If Result.Count() <> 1 Then
-		Raise "load more than one table not implemented";
-	EndIf;
+        If Result.Count() <> 1 Then
+                Raise R().LoadMoreThanOneTableNotImplemented;
+        EndIf;
 	
 	SourceTable       = New ValueTable();
 	SourceTableBuffer = New ValueTable();
@@ -17829,9 +17829,9 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	ElsIf TypeOf(TempStorageData) = Type("Structure") Then
 		SourceTable = TempStorageData.SourceTable;
 		SourceTableBuffer = TempStorageData.SourceTableBuffer;
-	Else
-		Raise "not supported temp storage data type";
-	EndIf;
+        Else
+                Raise R().TempStorageTypeNotSupported;
+        EndIf;
 		
 	SourceTableExpanded = New ValueTable();;
 	If Parameters.SerialLotNumbersExists Then

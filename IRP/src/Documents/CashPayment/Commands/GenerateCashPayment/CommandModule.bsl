@@ -120,6 +120,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	ValueTable.Columns.Add("FinancialMovementType", New TypeDescription("CatalogRef.ExpenseAndRevenueTypes"));
 	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.PurchaseOrder"));
 	ValueTable.Columns.Add("Project", New TypeDescription("CatalogRef.Projects"));
+	ValueTable.Columns.Add("LegalNameContract", New TypeDescription("CatalogRef.LegalNameContracts"));
 	
 	For Each Table In ArrayOfTables Do
 		For Each Row In Table Do
@@ -167,6 +168,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			NewRow.Insert("FinancialMovementType"   , RowPaymentList.FinancialMovementType);
 			NewRow.Insert("Order"                   , RowPaymentList.Order);
 			NewRow.Insert("Project"                 , RowPaymentList.Project);
+			NewRow.Insert("LegalNameContract"       , RowPaymentList.LegalNameContract);
 			Result.PaymentList.Add(NewRow);
 		EndDo;
 		ArrayOfResults.Add(Result);

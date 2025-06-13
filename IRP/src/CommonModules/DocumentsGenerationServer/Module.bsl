@@ -186,6 +186,7 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	R1021B_VendorsTransactions.Order AS Order,
 	|	R1021B_VendorsTransactions.Project AS Project,
 	|	R1021B_VendorsTransactions.AmountBalance AS Amount
+	|INTO tmp
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, Basis IN
 	|		(SELECT
@@ -213,7 +214,8 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	PartnerTransactionsBalance.Project,
 	|	PartnerTransactionsBalance.AmountBalance
 	|FROM
-	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
+	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName)
+	|		IN
 	|		(SELECT
 	|			tmp.Company,
 	|			tmp.Branch,
@@ -262,7 +264,8 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	UNDEFINED,
 	|	-R5015B_OtherPartnersTransactions.AmountBalance
 	|FROM
-	|	AccumulationRegister.R5015B_OtherPartnersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
+	|	AccumulationRegister.R5015B_OtherPartnersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner,
+	|		LegalName) IN
 	|		(SELECT
 	|			tmp.Company,
 	|			tmp.Branch,
@@ -275,7 +278,26 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
 	|		R5015B_OtherPartnersTransactions
 	|WHERE
-	|	R5015B_OtherPartnersTransactions.AmountBalance < 0";
+	|	R5015B_OtherPartnersTransactions.AmountBalance < 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.BasedOn,
+	|	tmp.TransactionType,
+	|	tmp.Company,
+	|	tmp.Branch,
+	|	tmp.Currency,
+	|	tmp.BasisDocument,
+	|	tmp.Partner,
+	|	tmp.Agreement,
+	|	tmp.Payee,
+	|	tmp.Order,
+	|	tmp.Project,
+	|	tmp.Amount,
+	|	tmp.BasisDocument.LegalNameContract AS LegalNameContract
+	|FROM
+	|	tmp AS tmp";
 
 	Query.SetParameter("QueryTable_StandardAgreements", QueryTable_StandardAgreements);
 	Query.SetParameter("DocumentName", DocumentName);
@@ -371,6 +393,7 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	R2021B_CustomersTransactionsBalance.Order AS Order,
 	|	R2021B_CustomersTransactionsBalance.Project AS Project,
 	|	R2021B_CustomersTransactionsBalance.AmountBalance AS Amount
+	|INTO tmp
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, Basis IN
 	|		(SELECT
@@ -398,7 +421,8 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	R2021B_CustomersTransactionsBalance.Project,
 	|	R2021B_CustomersTransactionsBalance.AmountBalance
 	|FROM
-	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
+	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner,
+	|		LegalName) IN
 	|		(SELECT
 	|			tmp.Company,
 	|			tmp.Branch,
@@ -447,7 +471,8 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	UNDEFINED,
 	|	R5015B_OtherPartnersTransactions.AmountBalance
 	|FROM
-	|	AccumulationRegister.R5015B_OtherPartnersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
+	|	AccumulationRegister.R5015B_OtherPartnersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner,
+	|		LegalName) IN
 	|		(SELECT
 	|			tmp.Company,
 	|			tmp.Branch,
@@ -460,7 +485,26 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
 	|		R5015B_OtherPartnersTransactions
 	|WHERE
-	|	R5015B_OtherPartnersTransactions.AmountBalance > 0";
+	|	R5015B_OtherPartnersTransactions.AmountBalance > 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.BasedOn,
+	|	tmp.TransactionType,
+	|	tmp.Company,
+	|	tmp.Branch,
+	|	tmp.Currency,
+	|	tmp.BasisDocument,
+	|	tmp.Partner,
+	|	tmp.Agreement,
+	|	tmp.Payer,
+	|	tmp.Order,
+	|	tmp.Project,
+	|	tmp.Amount,
+	|	tmp.BasisDocument.LegalNameContract AS LegalNameContract
+	|FROM
+	|	tmp AS tmp";
 	
 	Query.SetParameter("QueryTable_StandardAgreements", QueryTable_StandardAgreements);
 	Query.SetParameter("DocumentName", DocumentName);

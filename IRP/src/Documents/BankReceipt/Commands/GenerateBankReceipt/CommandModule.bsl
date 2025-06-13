@@ -128,6 +128,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	ValueTable.Columns.Add("PaymentTerminal" , New TypeDescription("CatalogRef.PaymentTerminals"));
 	ValueTable.Columns.Add("BankTerm"        , New TypeDescription("CatalogRef.BankTerms"));
 	ValueTable.Columns.Add("Commission"      , New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
+	ValueTable.Columns.Add("LegalNameContract", New TypeDescription("CatalogRef.LegalNameContracts"));
 	
 	HasBankTerm = False;
 	UsersBankTerm = Undefined;
@@ -207,6 +208,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			NewRow.Insert("PaymentType"             , RowPaymentList.PaymentType);
 			NewRow.Insert("PaymentTerminal"         , RowPaymentList.PaymentTerminal);
 			NewRow.Insert("Commission"              , RowPaymentList.Commission);
+			NewRow.Insert("LegalNameContract"       , RowPaymentList.LegalNameContract);
 			
 			NewRow.Insert("BankTerm"                , RowPaymentList.BankTerm);
 			If Not HasBankTerm Then

@@ -44,7 +44,7 @@
 				<PictureSize>AutoSize</PictureSize>
 			</Properties>
 			<Events>
-				<Event name="BeforeStart"/>
+				<Event name="BeforeStart">StartBeforeStart</Event>
 			</Events>
 		</Start>
 		<ConnectionLine id="2">
@@ -342,7 +342,7 @@
 						<PortIndex>4</PortIndex>
 					</From>
 					<To>
-						<Item>Condition</Item>
+						<Item>CheckTasksCompleted</Item>
 						<PortIndex>2</PortIndex>
 					</To>
 				</Connect>

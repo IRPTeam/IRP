@@ -616,39 +616,6 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ExecutionStagesTasksStartTogether</name>
-          <id>63</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ExecutionStages.TasksStartTogether</segments>
-          </dataPath>
-          <extendedTooltip>
-            <name>ExecutionStagesTasksStartTogetherExtendedTooltip</name>
-            <id>65</id>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>ExecutionStagesTasksStartTogetherContextMenu</name>
-            <id>64</id>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>CheckBoxField</type>
-          <editMode>EnterOnInput</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-        </items>
-        <items xsi:type="form:FormField">
           <name>ExecutionStagesTasksResult</name>
           <id>146</id>
           <visible>true</visible>

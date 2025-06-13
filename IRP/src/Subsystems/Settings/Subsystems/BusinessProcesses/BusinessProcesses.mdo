@@ -20,5 +20,6 @@
   <content>Enum.TaskTypes</content>
   <content>InformationRegister.ExecutionResults</content>
   <content>Enum.TaskResults</content>
+  <content>InformationRegister.ExecutionProcessStatus</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

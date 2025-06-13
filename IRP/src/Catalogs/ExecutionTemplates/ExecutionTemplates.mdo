@@ -116,20 +116,6 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
-    <attributes uuid="7c22b1e9-bf27-4338-a9d3-832ed9e861c4">
-      <name>TasksStartTogether</name>
-      <synonym>
-        <key>en</key>
-        <value>Tasks start together</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
     <attributes uuid="30fe2beb-273e-488b-a48e-15996b65b883">
       <name>Description_en</name>
       <synonym>

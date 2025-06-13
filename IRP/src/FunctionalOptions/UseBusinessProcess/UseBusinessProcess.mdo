@@ -17,4 +17,5 @@
   <content>Enum.TaskTypes</content>
   <content>InformationRegister.ExecutionResults</content>
   <content>Enum.TaskResults</content>
+  <content>InformationRegister.ExecutionProcessStatus</content>
 </mdclass:FunctionalOption>

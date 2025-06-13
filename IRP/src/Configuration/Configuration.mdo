@@ -1685,6 +1685,7 @@
   <informationRegisters>InformationRegister.AppliedDatabaseUpdates</informationRegisters>
   <informationRegisters>InformationRegister.TaskExecutors</informationRegisters>
   <informationRegisters>InformationRegister.ExecutionResults</informationRegisters>
+  <informationRegisters>InformationRegister.ExecutionProcessStatus</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>

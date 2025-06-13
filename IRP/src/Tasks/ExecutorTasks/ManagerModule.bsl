@@ -6,7 +6,7 @@ EndProcedure
 
 Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
 	StandardProcessing = False;
-	Fields = Fields = New Array();
+	Fields = New Array();
 	For Each DescriptionName In LocalizationServer.AllDescription() Do
 		Fields.Add(DescriptionName);
 	EndDo;

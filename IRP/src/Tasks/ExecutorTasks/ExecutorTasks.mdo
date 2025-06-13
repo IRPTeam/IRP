@@ -103,6 +103,38 @@
   <currentPerformer>SessionParameter.CurrentUser</currentPerformer>
   <editType>InDialog</editType>
   <defaultObjectForm>Task.ExecutorTasks.Form.ItemForm</defaultObjectForm>
+  <attributes uuid="31d35137-351f-4664-ab13-fa0001bc1ef0">
+    <name>TaskID</name>
+    <synonym>
+      <key>en</key>
+      <value>Task ID</value>
+    </synonym>
+    <type>
+      <types>UUID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e87573de-2b60-45d6-ba98-27ab839b54a2">
+    <name>IterationNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Iteration number</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>5</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="fb794c54-4023-4b62-93b5-21ff604b612b">
     <name>Detailing</name>
     <synonym>
@@ -166,6 +198,20 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="3ac56b96-dfee-47fe-a36d-d6a4ef082bec">
+    <name>Canceled</name>
+    <synonym>
+      <key>en</key>
+      <value>Canceled</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <forms uuid="513d82d4-5088-403e-8052-333c67529f8b">
     <name>ItemForm</name>

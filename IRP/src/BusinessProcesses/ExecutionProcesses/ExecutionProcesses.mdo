@@ -149,21 +149,6 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="cdd80035-3389-4840-8d94-0e99a2d52434">
-    <name>CancellationDate</name>
-    <synonym>
-      <key>en</key>
-      <value>Cancellation date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
   <tabularSections uuid="13a6c763-d8fb-45bc-b081-bf29d9b0ec20">
     <producedTypes>
       <objectType typeId="b6952232-724f-4278-96c9-8d5dabb362dd" valueTypeId="8f663b23-5b68-4db9-930c-0e5bc8e6ab25"/>

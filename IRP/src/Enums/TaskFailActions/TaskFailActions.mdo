@@ -5,10 +5,10 @@
     <listType typeId="73a5a888-2ec0-45cd-afce-d4c747b7809a" valueTypeId="2fde13af-84c8-419a-afc0-081863a0b0d4"/>
     <managerType typeId="cf7ce3a5-215f-4339-bb8a-a6acd66e6c2b" valueTypeId="648e3a8a-c045-42e5-b3b9-794719b0fbad"/>
   </producedTypes>
-  <name>TasksFailActions</name>
+  <name>TaskFailActions</name>
   <synonym>
     <key>en</key>
-    <value>Tasks fail actions</value>
+    <value>Task fail actions</value>
   </synonym>
   <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>

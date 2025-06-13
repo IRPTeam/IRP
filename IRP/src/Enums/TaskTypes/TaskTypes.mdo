@@ -5,10 +5,10 @@
     <listType typeId="c792ed8a-a9d1-4461-8f98-31fea9c1c3b7" valueTypeId="f145568a-512e-4994-a9bd-8cf2b4f7ec6a"/>
     <managerType typeId="a91bd3ae-0c09-4ec6-8730-3043aa52e296" valueTypeId="7cce5d58-15da-4d90-bd82-1d6315eea39f"/>
   </producedTypes>
-  <name>ExecutorTaskTypes</name>
+  <name>TaskTypes</name>
   <synonym>
     <key>en</key>
-    <value>Executor task types</value>
+    <value>Task types</value>
   </synonym>
   <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>
@@ -27,10 +27,10 @@
     </synonym>
   </enumValues>
   <enumValues uuid="5c9b9f3e-2db3-479c-aef3-904ae5b0883a">
-    <name>Acquaintance</name>
+    <name>Confirmation</name>
     <synonym>
       <key>en</key>
-      <value>Acquaintance</value>
+      <value>Confirmation</value>
     </synonym>
   </enumValues>
 </mdclass:Enum>

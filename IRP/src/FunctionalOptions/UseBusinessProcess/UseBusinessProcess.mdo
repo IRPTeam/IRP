@@ -8,11 +8,13 @@
   <location>Constant.UseBusinessProcess</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Subsystem.Settings.Subsystem.BusinessProcesses</content>
-  <content>Task.ExecutorTask</content>
+  <content>Task.ExecutorTasks</content>
   <content>InformationRegister.TaskExecutors</content>
-  <content>BusinessProcess.Execution</content>
+  <content>BusinessProcess.ExecutionProcesses</content>
   <content>Catalog.ExecutionTemplates</content>
   <content>Enum.AutostartProcessTypes</content>
-  <content>Enum.TasksFailActions</content>
-  <content>Enum.ExecutorTaskTypes</content>
+  <content>Enum.TaskFailActions</content>
+  <content>Enum.TaskTypes</content>
+  <content>InformationRegister.ExecutionResults</content>
+  <content>Enum.TaskResults</content>
 </mdclass:FunctionalOption>

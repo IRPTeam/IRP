@@ -1481,8 +1481,9 @@
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.AutostartProcessTypes</enums>
-  <enums>Enum.TasksFailActions</enums>
-  <enums>Enum.ExecutorTaskTypes</enums>
+  <enums>Enum.TaskFailActions</enums>
+  <enums>Enum.TaskTypes</enums>
+  <enums>Enum.TaskResults</enums>
   <reports>Report.A0010_TrialBalance</reports>
   <reports>Report.A0011_TrialBalanceByAccount</reports>
   <reports>Report.A0012_AccountCard</reports>
@@ -1683,6 +1684,7 @@
   <informationRegisters>InformationRegister.T9069S_AccountingMappingRecordersDescription</informationRegisters>
   <informationRegisters>InformationRegister.AppliedDatabaseUpdates</informationRegisters>
   <informationRegisters>InformationRegister.TaskExecutors</informationRegisters>
+  <informationRegisters>InformationRegister.ExecutionResults</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>
@@ -1797,6 +1799,6 @@
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.SystemAttributes</chartsOfCharacteristicTypes>
   <chartsOfAccounts>ChartOfAccounts.Basic</chartsOfAccounts>
   <accountingRegisters>AccountingRegister.Basic</accountingRegisters>
-  <businessProcesses>BusinessProcess.Execution</businessProcesses>
-  <tasks>Task.ExecutorTask</tasks>
+  <businessProcesses>BusinessProcess.ExecutionProcesses</businessProcesses>
+  <tasks>Task.ExecutorTasks</tasks>
 </mdclass:Configuration>

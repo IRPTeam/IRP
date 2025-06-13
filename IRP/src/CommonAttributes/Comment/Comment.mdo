@@ -54,7 +54,7 @@
     <use>DontUse</use>
   </content>
   <content>
-    <metadata>Task.ExecutorTask</metadata>
+    <metadata>Task.ExecutorTasks</metadata>
     <use>Use</use>
   </content>
   <content>

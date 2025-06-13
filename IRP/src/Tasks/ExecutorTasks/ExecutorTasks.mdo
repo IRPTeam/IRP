@@ -7,13 +7,13 @@
     <listType typeId="9016a227-1a89-4372-9a7a-112fb1122938" valueTypeId="9abf6c8d-f133-4be7-8d46-445d76ff7a5c"/>
     <managerType typeId="d3384ef5-c5a7-4504-a1d4-ec899da9bb8d" valueTypeId="ff8caa07-e8d0-4753-9765-a15c617e6b70"/>
   </producedTypes>
-  <name>ExecutorTask</name>
+  <name>ExecutorTasks</name>
   <synonym>
     <key>en</key>
-    <value>Executor task</value>
+    <value>Executor tasks</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <inputByString>Task.ExecutorTask.StandardAttribute.Number</inputByString>
+  <inputByString>Task.ExecutorTasks.StandardAttribute.Number</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <standardAttributes>
     <dataHistory>Use</dataHistory>
@@ -99,10 +99,10 @@
   <autonumbering>true</autonumbering>
   <taskNumberAutoPrefix>DontUse</taskNumberAutoPrefix>
   <addressing>InformationRegister.TaskExecutors</addressing>
-  <mainAddressingAttribute>Task.ExecutorTask.AddressingAttribute.CurrentExecutor</mainAddressingAttribute>
+  <mainAddressingAttribute>Task.ExecutorTasks.AddressingAttribute.CurrentExecutor</mainAddressingAttribute>
   <currentPerformer>SessionParameter.CurrentUser</currentPerformer>
   <editType>InDialog</editType>
-  <defaultObjectForm>Task.ExecutorTask.Form.ItemForm</defaultObjectForm>
+  <defaultObjectForm>Task.ExecutorTasks.Form.ItemForm</defaultObjectForm>
   <attributes uuid="fb794c54-4023-4b62-93b5-21ff604b612b">
     <name>Detailing</name>
     <synonym>
@@ -167,49 +167,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <tabularSections uuid="c07240d3-4c33-446a-960f-efe8482d36f9">
-    <producedTypes>
-      <objectType typeId="c9a4375e-9466-4072-ba10-569eeff612f3" valueTypeId="8aa8d48e-6bfa-4365-8c82-2af776d161e7"/>
-      <rowType typeId="17bb8dfe-c83b-4965-ac7b-2a6789ba5031" valueTypeId="ae806136-3c61-4e67-9e46-c55cf6963eee"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="2d372dda-e619-482c-9bda-226c54d06674">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="424f6b8f-d89b-42c2-8ed5-b9b45c0907e6">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Task.ExecutorTask.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
   <forms uuid="513d82d4-5088-403e-8052-333c67529f8b">
     <name>ItemForm</name>
     <synonym>

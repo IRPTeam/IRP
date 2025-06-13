@@ -674,7 +674,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>TaskObject.ExecutorTask</types>
+      <types>TaskObject.ExecutorTasks</types>
     </valueType>
     <view>
       <common>true</common>

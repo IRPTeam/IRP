@@ -182,7 +182,7 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	R1021B_VendorsTransactions.Basis AS BasisDocument,
 	|	R1021B_VendorsTransactions.Partner,
 	|	R1021B_VendorsTransactions.Agreement,
-	|	R1021B_VendorsTransactions.LegalName AS Payee,
+	|	R1021B_VendorsTransactions.LegalName AS LegalName,
 	|	R1021B_VendorsTransactions.Order AS Order,
 	|	R1021B_VendorsTransactions.Project AS Project,
 	|	R1021B_VendorsTransactions.AmountBalance AS Amount
@@ -291,7 +291,7 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	tmp.BasisDocument,
 	|	tmp.Partner,
 	|	tmp.Agreement,
-	|	tmp.Payee,
+	|	tmp.LegalName,
 	|	tmp.Order,
 	|	tmp.Project,
 	|	tmp.Amount,
@@ -389,7 +389,7 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	R2021B_CustomersTransactionsBalance.Basis AS BasisDocument,
 	|	R2021B_CustomersTransactionsBalance.Partner,
 	|	R2021B_CustomersTransactionsBalance.Agreement,
-	|	R2021B_CustomersTransactionsBalance.LegalName AS Payer,
+	|	R2021B_CustomersTransactionsBalance.LegalName AS LegalName,
 	|	R2021B_CustomersTransactionsBalance.Order AS Order,
 	|	R2021B_CustomersTransactionsBalance.Project AS Project,
 	|	R2021B_CustomersTransactionsBalance.AmountBalance AS Amount
@@ -498,7 +498,7 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	tmp.BasisDocument,
 	|	tmp.Partner,
 	|	tmp.Agreement,
-	|	tmp.Payer,
+	|	tmp.LegalName,
 	|	tmp.Order,
 	|	tmp.Project,
 	|	tmp.Amount,
@@ -523,7 +523,7 @@ Function GetDocumentTable_PurchaseOrder_ForPayment(ArrayOfBasisDocuments, AddInf
 	|	R3025B_PurchaseOrdersToBePaid.Currency,
 	|	R3025B_PurchaseOrdersToBePaid.Partner,
 	|	R3025B_PurchaseOrdersToBePaid.Order.Agreement AS Agreement,
-	|	R3025B_PurchaseOrdersToBePaid.LegalName AS Payee,
+	|	R3025B_PurchaseOrdersToBePaid.LegalName AS LegalName,
 	|	R3025B_PurchaseOrdersToBePaid.Order,
 	|	R3025B_PurchaseOrdersToBePaid.AmountBalance AS Amount
 	|FROM
@@ -546,7 +546,7 @@ Function GetDocumentTable_SalesOrder_ToBePaid(ArrayOfBasisDocuments) Export
 	|	R3024B_SalesOrdersToBePaid.Currency,
 	|	R3024B_SalesOrdersToBePaid.Partner,
 	|	R3024B_SalesOrdersToBePaid.Order.Agreement AS Agreement,
-	|	R3024B_SalesOrdersToBePaid.LegalName AS Payer,
+	|	R3024B_SalesOrdersToBePaid.LegalName AS LegalName,
 	|	R3024B_SalesOrdersToBePaid.Order,
 	|	R3024B_SalesOrdersToBePaid.AmountBalance AS Amount
 	|FROM
@@ -673,7 +673,7 @@ Function GetDocumentTable_SalesReturn_ForPayment(ArrayOfBasisDocuments, AddInfo 
 	|	R2021B_CustomersTransactionsBalance.Basis AS BasisDocument,
 	|	R2021B_CustomersTransactionsBalance.Partner,
 	|	R2021B_CustomersTransactionsBalance.Agreement,
-	|	R2021B_CustomersTransactionsBalance.LegalName AS Payee,
+	|	R2021B_CustomersTransactionsBalance.LegalName AS LegalName,
 	|	R2021B_CustomersTransactionsBalance.Order AS Order,
 	|	R2021B_CustomersTransactionsBalance.Project AS Project,
 	|	-R2021B_CustomersTransactionsBalance.AmountBalance AS Amount
@@ -828,7 +828,7 @@ Function GetDocumentTable_PurchaseReturn_ForReceipt(ArrayOfBasisDocuments, AddIn
 	|	R1021B_VendorsTransactions.Basis AS BasisDocument,
 	|	R1021B_VendorsTransactions.Partner,
 	|	R1021B_VendorsTransactions.Agreement,
-	|	R1021B_VendorsTransactions.LegalName AS Payer,
+	|	R1021B_VendorsTransactions.LegalName AS LegalName,
 	|	R1021B_VendorsTransactions.Order AS Order,
 	|	R1021B_VendorsTransactions.Project AS Project,
 	|	-R1021B_VendorsTransactions.AmountBalance AS Amount

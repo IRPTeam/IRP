@@ -220,7 +220,7 @@ Function PaymentList()
 		|		ELSE PaymentList.Agreement
 		|	END AS Agreement,
 		|	PaymentList.Partner AS Partner,
-		|	PaymentList.Payer AS LegalName,
+		|	PaymentList.LegalName AS LegalName,
 		|	PaymentList.Ref.Date AS Period,
 		|	PaymentList.TotalAmount AS Amount,
 		|	PaymentList.AmountExchange AS AmountExchange,
@@ -358,7 +358,7 @@ Function CashInTransit()
 	|		ELSE BankReceiptPaymentList.Agreement
 	|	END AS Agreement,
 	|	BankReceiptPaymentList.Partner AS Partner,
-	|	BankReceiptPaymentList.Payer AS Payer,
+	|	BankReceiptPaymentList.LegalName AS LegalName,
 	|	BankReceiptPaymentList.Ref.Date AS Period,
 	|	BankReceiptPaymentList.TotalAmount AS Amount,
 	|	BankReceiptPaymentList.AmountExchange AS AmountExchange,
@@ -1433,7 +1433,7 @@ Function GetSystemAttributeValues(Obj, SystemAttribute) Export
 	ElsIf SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.PartnerTerm Then
 		Values = Obj.PaymentList.Unload(, "Agreement").UnloadColumn("Agreement");
 	ElsIf SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.LegalName Then
-		Values = Obj.PaymentList.Unload(, "Payer").UnloadColumn("Payer");
+		Values = Obj.PaymentList.Unload(, "LegalName").UnloadColumn("LegalName");
 	ElsIf SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.LegalNameContract Then
 		Values = Obj.PaymentList.Unload(, "LegalNameContract").UnloadColumn("LegalNameContract");
 	EndIf;

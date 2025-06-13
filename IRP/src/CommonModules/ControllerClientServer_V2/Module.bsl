@@ -380,10 +380,9 @@ Function GetEventHandlerMap(Parameters, DataPath, IsBuilder)
 	EventHandlerMap.Insert("TransactionType" , "SetTransactionType");
 	
 	// PaymentList
-	EventHandlerMap.Insert("PaymentList.Partner" , "SetPaymentListPartner");
-	EventHandlerMap.Insert("PaymentList.Payer"   , "SetPaymentListLegalName");
-	EventHandlerMap.Insert("PaymentList.Payee"   , "SetPaymentListLegalName");
-	EventHandlerMap.Insert("PaymentList.Account" , "SetPaymentListAccount");
+	EventHandlerMap.Insert("PaymentList.Partner"   , "SetPaymentListPartner");
+	EventHandlerMap.Insert("PaymentList.LegalName" , "SetPaymentListLegalName");
+	EventHandlerMap.Insert("PaymentList.Account"   , "SetPaymentListAccount");
 	
 	// ItemList
 	EventHandlerMap.Insert("ItemList.Item"               , "SetItemListItem");
@@ -1768,7 +1767,7 @@ EndFunction
 Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"                  , BindPaymentListPartner(Parameters));
-	ResourceToBinding.Insert("Payee"                    , BindPaymentListLegalName(Parameters));
+	ResourceToBinding.Insert("LegalName"                , BindPaymentListLegalName(Parameters));
 	ResourceToBinding.Insert("Agreement"                , BindPaymentListAgreement(Parameters));
 	ResourceToBinding.Insert("LegalNameContract"        , BindPaymentListLegalNameContract(Parameters));
 	ResourceToBinding.Insert("BasisDocument"            , BindPaymentListBasisDocument(Parameters));
@@ -1799,7 +1798,7 @@ EndProcedure
 Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"                  , BindPaymentListPartner(Parameters));
-	ResourceToBinding.Insert("Payer"                    , BindPaymentListLegalName(Parameters));
+	ResourceToBinding.Insert("LegalName"                , BindPaymentListLegalName(Parameters));
 	ResourceToBinding.Insert("Agreement"                , BindPaymentListAgreement(Parameters));
 	ResourceToBinding.Insert("LegalNameContract"        , BindPaymentListLegalNameContract(Parameters));
 	ResourceToBinding.Insert("BasisDocument"            , BindPaymentListBasisDocument(Parameters));
@@ -1834,7 +1833,7 @@ EndProcedure
 Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"                  , BindPaymentListPartner(Parameters));
-	ResourceToBinding.Insert("Payee"                    , BindPaymentListLegalName(Parameters));
+	ResourceToBinding.Insert("LegalName"                , BindPaymentListLegalName(Parameters));
 	ResourceToBinding.Insert("Agreement"                , BindPaymentListAgreement(Parameters));
 	ResourceToBinding.Insert("LegalNameContract"        , BindPaymentListLegalNameContract(Parameters));
 	ResourceToBinding.Insert("BasisDocument"            , BindPaymentListBasisDocument(Parameters));
@@ -1859,7 +1858,7 @@ EndProcedure
 Procedure MultiSetTransactionType_CashReceipt(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"                  , BindPaymentListPartner(Parameters));
-	ResourceToBinding.Insert("Payer"                    , BindPaymentListLegalName(Parameters));
+	ResourceToBinding.Insert("LegalName"                , BindPaymentListLegalName(Parameters));
 	ResourceToBinding.Insert("Agreement"                , BindPaymentListAgreement(Parameters));
 	ResourceToBinding.Insert("LegalNameContract"        , BindPaymentListLegalNameContract(Parameters));
 	ResourceToBinding.Insert("BasisDocument"            , BindPaymentListBasisDocument(Parameters));
@@ -1883,7 +1882,7 @@ Procedure MultiSetTransactionType_OutgoingPaymentOrder(Parameters, Results) Expo
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"            , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("PartnerBankAccount" , BindPaymentListPartnerBankAccount(Parameters));	
-	ResourceToBinding.Insert("Payee"              , BindPaymentListLegalName(Parameters));
+	ResourceToBinding.Insert("LegalName"          , BindPaymentListLegalName(Parameters));
 	ResourceToBinding.Insert("BasisDocument"      , BindPaymentListBasisDocument(Parameters));
 	
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
@@ -1923,7 +1922,7 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.TransactionType          = GetTransactionType(Parameters);
 		Options.TransitAccount           = GetTransitAccount(Parameters);
 		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
-		Options.Payee                    = GetPaymentListLegalName(Parameters, Row.Key);
+		Options.LegalName                = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Agreement                = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.LegalNameContract        = GetPaymentListLegalNameContract(Parameters, Row.Key);
 		Options.BasisDocument            = GetPaymentListBasisDocument(Parameters, Row.Key);
@@ -1965,7 +1964,7 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.TransitAccount           = GetTransitAccount(Parameters);
 		Options.CurrencyExchange         = GetCurrencyExchange(Parameters);
 		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
-		Options.Payer                    = GetPaymentListLegalName(Parameters, Row.Key);
+		Options.LegalName                = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Agreement                = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.LegalNameContract        = GetPaymentListLegalNameContract(Parameters, Row.Key);
 		Options.BasisDocument            = GetPaymentListBasisDocument(Parameters, Row.Key);
@@ -2012,7 +2011,7 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
 		Options.Agreement                = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.LegalNameContract        = GetPaymentListLegalNameContract(Parameters, Row.Key);
-		Options.Payee                    = GetPaymentListLegalName(Parameters, Row.Key);
+		Options.LegalName                = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
@@ -2044,7 +2043,7 @@ Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 		Options.TransactionType          = GetTransactionType(Parameters);
 		Options.CurrencyExchange         = GetCurrencyExchange(Parameters);
 		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
-		Options.Payer                    = GetPaymentListLegalName(Parameters, Row.Key);
+		Options.LegalName                = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Agreement                = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.LegalNameContract        = GetPaymentListLegalNameContract(Parameters, Row.Key);
 		Options.BasisDocument            = GetPaymentListBasisDocument(Parameters, Row.Key);
@@ -2078,7 +2077,7 @@ Procedure StepClearByTransactionTypeOutgoingPaymentOrder(Parameters, Chain) Expo
 		Options.TransactionType    = GetTransactionType(Parameters);
 		Options.Partner            = GetPaymentListPartner(Parameters, Row.Key);
 		Options.PartnerBankAccount = GetPaymentListPartnerBankAccount(Parameters, Row.Key);
-		Options.Payee              = GetPaymentListLegalName(Parameters, Row.Key);
+		Options.LegalName          = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.BasisDocument      = GetPaymentListBasisDocument(Parameters, Row.Key);
 		
 		Options.Key = Row.Key;
@@ -7576,13 +7575,7 @@ EndFunction
 
 // PaymentList.LegalName.Bind
 Function BindPaymentListLegalName(Parameters)
-	DataPath = New Map();
-	DataPath.Insert("IncomingPaymentOrder", "PaymentList.Payer");
-	DataPath.Insert("OutgoingPaymentOrder", "PaymentList.Payee");
-	DataPath.Insert("BankPayment"         , "PaymentList.Payee");
-	DataPath.Insert("BankReceipt"         , "PaymentList.Payer");
-	DataPath.Insert("CashPayment"         , "PaymentList.Payee");
-	DataPath.Insert("CashReceipt"         , "PaymentList.Payer");
+	DataPath = "PaymentList.LegalName";
 	
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "StepPaymentListChangePartnerByLegalName");

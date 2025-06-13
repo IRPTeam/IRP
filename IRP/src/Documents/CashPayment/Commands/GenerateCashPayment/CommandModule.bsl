@@ -114,7 +114,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	ValueTable.Columns.Add("Partner"         , New TypeDescription("CatalogRef.Partners"));
 	ValueTable.Columns.Add("Amount"          , New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
 	ValueTable.Columns.Add("NetAmount"       , New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
-	ValueTable.Columns.Add("Payee"           , New TypeDescription("CatalogRef.Companies"));
+	ValueTable.Columns.Add("LegalName"       , New TypeDescription("CatalogRef.Companies"));
 	ValueTable.Columns.Add("PlaningTransactionBasis",
 		New TypeDescription(Metadata.DefinedTypes.typePlaningTransactionBasises.Type));
 	ValueTable.Columns.Add("FinancialMovementType", New TypeDescription("CatalogRef.ExpenseAndRevenueTypes"));
@@ -161,7 +161,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			NewRow.Insert("BasisDocument"           , RowPaymentList.BasisDocument);
 			NewRow.Insert("Agreement"               , RowPaymentList.Agreement);
 			NewRow.Insert("Partner"                 , RowPaymentList.Partner);
-			NewRow.Insert("Payee"                   , RowPaymentList.Payee);
+			NewRow.Insert("LegalName"               , RowPaymentList.LegalName);
 			NewRow.Insert("TotalAmount"             , RowPaymentList.Amount);
 			NewRow.Insert("NetAmount"               , RowPaymentList.NetAmount);
 			NewRow.Insert("PlaningTransactionBasis" , RowPaymentList.PlaningTransactionBasis);
@@ -208,7 +208,7 @@ Function GetDocumentTable_OutgoingPaymentOrder(ArrayOfBasisDocuments)
 	|	R3035T_CashPlanningTurnovers.Account AS CashAccount,
 	|	R3035T_CashPlanningTurnovers.Currency AS Currency,
 	|	R3035T_CashPlanningTurnovers.Partner AS Partner,
-	|	R3035T_CashPlanningTurnovers.LegalName AS Payee,
+	|	R3035T_CashPlanningTurnovers.LegalName AS LegalName,
 	|	R3035T_CashPlanningTurnovers.AmountTurnover AS Amount,
 	|	R3035T_CashPlanningTurnovers.BasisDocument AS PlaningTransactionBasis
 	|FROM

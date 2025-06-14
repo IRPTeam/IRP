@@ -1513,7 +1513,7 @@ Scenario: _100 check Additional Cost Allocation (by row, by amount)
 			| 'Purchase invoice 5 dated 15.08.2021 16:56:10'     |
 			| 'Purchase invoice 6 dated 15.08.2021 16:56:11'     |
 			| 'Purchase invoice 8 dated 17.08.2021 13:04:13'     |
-			| 'Purchase invoice 9 021 dated 01.12.2022 0:00:00'  |
+			| 'Purchase invoice 9 021 dated 01.12.2022 00:00:00' |
 			| 'Purchase invoice 9 023 dated 01.03.2023 12:00:00' |
 			| 'Purchase invoice 9 028 dated 02.04.2023 12:04:41' |
 			| 'Purchase invoice 9 030 dated 02.04.2023 12:23:49' |
@@ -1564,6 +1564,7 @@ Scenario: _101 check Additional Cost Allocation (by document, by amount)
 		Then "Select cost document" window is opened
 		And "List" table became equal
 			| 'Basis'                                            | 'Company'      | 'Currency' | 'Amount' | 'TaxAmount' |
+			| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Main Company' | 'TRY'      | '30'     | '5,4        |
 			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | 'TRY'      | '350'    | '63'        |
 			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | 'TRY'      | '550'    | '99'        |
 			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Main Company' | 'TRY'      | '50'     | '9'         |

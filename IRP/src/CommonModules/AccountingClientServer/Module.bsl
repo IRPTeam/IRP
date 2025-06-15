@@ -71,7 +71,7 @@ Function GetParametersEditAccounting(Object,
 			ElsIf RowExtDimensions.AnalyticType = PredefinedValue("Enum.AccountingAnalyticTypes.Credit") Then
 				NewAnalyticRow.CreditExtDimensions.Add(NewExtDimension);
 			Else
-				Raise "Analytic type is not defined";
+                    Raise R().AnalyticTypeNotDefined;
 			EndIf;
 		EndDo;
 		Parameters.AccountingAnalytics.Add(NewAnalyticRow);

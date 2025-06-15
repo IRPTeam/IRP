@@ -1178,7 +1178,7 @@ Function GetAdvanceDocumentParameters(_Payments, AdvanceDirection)
 		DocumentParameters.Insert("BankDocumentTransactionType",
 			PredefinedValue("Enum.OutgoingPaymentTransactionTypes.RetailCustomerAdvance"));
 	Else
-		Raise "Wrong advance direction";
+          Raise R().WrongAdvanceDirection;
 	EndIf;
 
 	Return DocumentParameters;

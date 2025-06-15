@@ -961,7 +961,7 @@
       </items>
       <items xsi:type="form:Button">
        <name>EditAccountingNoSplits</name>
-       <id>457</id>
+       <id>814</id>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -969,7 +969,7 @@
        </userVisible>
        <extendedTooltip>
         <name>EditAccountingNoSplitsExtendedTooltip</name>
-        <id>458</id>
+        <id>815</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -8875,6 +8875,11 @@
   <picture xsi:type="core:PictureRef">
    <picture>StdPicture.ChartOfAccounts</picture>
   </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>EditAccountingNoSplits</name>
+   </handler>
+  </action>
   <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
   <representation>Picture</representation>
   <currentRowUse>Auto</currentRowUse>

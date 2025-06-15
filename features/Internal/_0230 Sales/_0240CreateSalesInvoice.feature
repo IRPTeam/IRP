@@ -35,6 +35,7 @@ Scenario: _024000 preparation (Sales invoice)
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
 		When Create catalog CashAccounts objects
+		When Create OtherPartners objects		
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
@@ -969,3 +970,40 @@ Scenario: _300505 check connection to Sales invoice report "Related documents"
 	Then "* Related documents" window is opened
 	And I close all client application windows
 
+Scenario: _024031 create SI with partner Other
+	And I close all client application windows
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling main info
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| "Description"     |
+			| "Other partner 1" |
+		And I click the button named "FormChoose"
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Other partner 1'      |				
+		And I click the button named "FormChoose"
+		And I select from the drop-down list named "Company" by "main company" string
+		And I select from the drop-down list named "Store" by "store 01" string
+	* Add an Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Trousers" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "Trousers/Trousers" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "50,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"	
+		And I delete "$$SalesInvoice01$$" variable
+		And I delete "$$NumberSalesInvoice01$$" variable
+		And I save the window as "$$SalesInvoice01$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice01$$"	
+		And I click the button named "FormPostAndClose"
+	* check creation
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And "List" table contains lines
+			| 'Number'                   |
+			| '$$NumberSalesInvoice01$$' |
+	And I close all client application windows

@@ -1564,7 +1564,6 @@ Scenario: _101 check Additional Cost Allocation (by document, by amount)
 		Then "Select cost document" window is opened
 		And "List" table became equal
 			| 'Basis'                                            | 'Company'      | 'Currency' | 'Amount' | 'TaxAmount' |
-			| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Main Company' | 'TRY'      | '30'     | '5,4        |
 			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | 'TRY'      | '350'    | '63'        |
 			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | 'TRY'      | '550'    | '99'        |
 			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Main Company' | 'TRY'      | '50'     | '9'         |

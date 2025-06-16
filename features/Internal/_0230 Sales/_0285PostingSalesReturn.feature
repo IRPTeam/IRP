@@ -868,7 +868,7 @@ Scenario: _028515 create SR with partner Other
 			| 'ItemListTotalOffersAmount' | "0,00"                 | ''            |
 			| 'ItemListTotalTaxAmount'    | "45,00"                | ''            |
 			| 'ItemListTotalTotalAmount'  | "295,00"               | ''            |
-			| 'Legal name'                 | "Other partner 1"      | ''            |
+			| 'LegalName'                 | "Other partner 1"      | ''            |
 			| 'Partner'                   | "Other partner 1"      | ''            |
 			| 'PriceIncludeTax'           | "No"                   | ''            |
 			| 'Store'                     | "Store 01"             | ''            |

@@ -1158,7 +1158,7 @@ Scenario: check filter for Legal name contract (in BP, CP)
 	And I select from the drop-down list named "Company" by "Main Company" string
 	And I click the button named "PaymentListAdd"
 	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
-	And I select "Company Ferron BP" from "Payee" drop-down list by string in "PaymentList" table
+	And I select "Company Ferron BP" from "Legal name" drop-down list by string in "PaymentList" table
 	* Check list from
 		And I activate "Legal name contract" field in "PaymentList" table
 		And I click choice button of "Legal name contract" attribute in "PaymentList" table
@@ -1195,7 +1195,7 @@ Scenario: check filter for Legal name contract (in BR, CR)
 	And I select from the drop-down list named "Company" by "Main Company" string
 	And I click the button named "PaymentListAdd"
 	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
-	And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
+	And I select "Company Ferron BP" from "Legal name" drop-down list by string in "PaymentList" table
 	* Check list from
 		And I activate "Legal name contract" field in "PaymentList" table
 		And I click choice button of "Legal name contract" attribute in "PaymentList" table

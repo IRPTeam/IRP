@@ -293,7 +293,7 @@ Scenario: _010010 check auto create Legal name and Company and Partner term
 				| 'Name'                            | 'Value'                   | 'HowToSearch' |
 				| 'ApArPostingDetail'               | "By agreements"           | ''            |
 				| 'Kind'                            | "Regular"                 | ''            |
-				| 'Legal name'                       | "Test partner 11"         | ''            |
+				| 'LegalName'                       | "Test partner 11"         | ''            |
 				| 'Partner'                         | "Test partner 11"         | ''            |
 				| 'PriceType'                       | "en description is empty" | ''            |
 			And I close "Partner term (create)" window

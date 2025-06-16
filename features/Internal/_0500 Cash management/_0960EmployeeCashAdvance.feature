@@ -624,4 +624,8 @@ Scenario: _0960019 create document Bank payment/Employee cash advance (purchase,
 				| '$$NumberECA0960019$$'   |
 			ANd I close all client application windows	
 						
-						
+Scenario: _0960020 check Partner Term by Partner filtering in Employee cash advance
+	And I close all client application windows
+		* Create Employee cash advance
+			Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
+			And I click "Create" button						

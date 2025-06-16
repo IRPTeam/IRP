@@ -33,4 +33,11 @@
       <value>Confirmed</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="41a92b5a-a21d-4c71-b3ac-fd89f3256f24">
+    <name>Canceled</name>
+    <synonym>
+      <key>en</key>
+      <value>Canceled</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

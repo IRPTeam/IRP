@@ -33,6 +33,21 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="b74d4945-b34d-4352-aec9-107a621fe934">
+    <name>CurrentTask</name>
+    <synonym>
+      <key>en</key>
+      <value>Current task</value>
+    </synonym>
+    <type>
+      <types>UUID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <resources uuid="e4ca5f73-f11f-4d77-99c5-f8f8227c2394">
     <name>IterationNumber</name>
     <synonym>

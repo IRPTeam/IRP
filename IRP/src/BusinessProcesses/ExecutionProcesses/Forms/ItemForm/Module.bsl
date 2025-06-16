@@ -20,6 +20,7 @@ EndProcedure
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	RefreshTaskAdressing();
+	ReadFlowchart();
 EndProcedure
 
 &AtClient
@@ -193,6 +194,19 @@ Procedure OnEditedMultilineTextEnd(Result, AddInfo) Export
 	Modified = True;
 	Object[AddInfo.TableName][AddInfo.TableIndex][AddInfo.ItemName] = Result;
 	
+EndProcedure
+
+&AtServer
+Procedure ReadFlowchart()
+	
+	If Object.Ref.IsEmpty() Then
+		Items.PageFlowchart.Visible = False;
+		Return;
+	EndIf;
+	
+	Items.PageFlowchart.Visible = True;
+	FlowchartDocument = BusinessProcesses.ExecutionProcesses.GetExecutionFlowchart(Object.Ref);
+
 EndProcedure
 
 #EndRegion

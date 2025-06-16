@@ -17,26 +17,36 @@ EndProcedure
 Procedure StartBeforeStart(RoutePoint, Cancel)
 	
 	CurrentStage = New UUID("00000000-0000-0000-0000-000000000000");
+	CurrentTask = New UUID("00000000-0000-0000-0000-000000000000");
+	
 	If ThisObject.ExecutionStages.Count() Then
 		CurrentStage = ThisObject.ExecutionStages[0].StageID;
+		CurrentTask = GetFirstTask(CurrentStage);
+		
 	ElsIf ThisObject.Ref.IsEmpty() Then
 		Return;
+		
 	EndIf;
 	
 	If ThisObject.Ref.IsEmpty() Then
 		Write();
 	EndIf;
 	
-	SaveNewStageStatus(CurrentStage);
+	SaveNewStageStatus(CurrentStage, CurrentTask);
 
 EndProcedure
 
 Procedure CompleteTasksBeforeCreateTasks(RoutePoint, TasksBeingFormed, StandardProcessing)
 	StandardProcessing = False;
 	
-	EmptyStage = New UUID("00000000-0000-0000-0000-000000000000");
-	StatusRecord = InformationRegisters.ExecutionProcessStatus.GetLast(, New Structure("ExecutionProcess", ThisObject.Ref));
-	If StatusRecord.CurrentStage = EmptyStage Then
+	EmptyUUID = New UUID("00000000-0000-0000-0000-000000000000");
+	StatusRecord = InformationRegisters.ExecutionProcessStatus.GetLast(, New Structure("ExecutionProcess", ThisObject.Ref)); // InformationRegisterRecordManager.ExecutionProcessStatus
+	If StatusRecord.CurrentStage = EmptyUUID Then
+		Return;
+	EndIf;
+	
+	StageRow = ThisObject.ExecutionStages.Find(StatusRecord.CurrentStage, "StageID");
+	If StageRow = Undefined Then
 		Return;
 	EndIf;
 	
@@ -45,29 +55,26 @@ Procedure CompleteTasksBeforeCreateTasks(RoutePoint, TasksBeingFormed, StandardP
 		Return;
 	EndIf;
 	
-	For Each TaskRow In TaskRows Do
-		NewTask = Tasks.ExecutorTasks.CreateTask();
-		
-		FillPropertyValues(NewTask, TaskRow);
-		NewTask.CurrentExecutor = TaskRow.Executor;
-		NewTask.ExecutionObject = ThisObject.ExecutionObject;
-		NewTask.Date = CommonFunctionsServer.GetCurrentSessionDate();
-		NewTask.BusinessProcess = ThisObject.Ref;
-		NewTask.RoutePoint = RoutePoint;
-		NewTask.IterationNumber = StatusRecord.IterationNumber;
-		
-		TasksBeingFormed.Add(NewTask);
-	EndDo;
+	If StageRow.TasksStartTogether Then
+		For Each TaskRow In TaskRows Do
+			CreateTask(TaskRow, RoutePoint, StatusRecord.IterationNumber, TasksBeingFormed);
+		EndDo;
+	Else
+		TaskRow = ThisObject.StagesTasks.Find(StatusRecord.CurrentTask, "TaskID");
+		If TaskRow <> Undefined Then
+			CreateTask(TaskRow, RoutePoint, StatusRecord.IterationNumber, TasksBeingFormed);
+		EndIf;
+	EndIf;
 	
 EndProcedure
 
-Procedure CheckTasksCompletedConditionCheck(RoutePoint, ToFinish)
+Procedure CheckTasksCompletedConditionCheck(RoutePoint, ProcessFinish)
 	
-	ToFinish = True;
+	ProcessFinish = True;
 	
-	EmptyStage = New UUID("00000000-0000-0000-0000-000000000000");
-	StatusRecord = InformationRegisters.ExecutionProcessStatus.GetLast(, New Structure("ExecutionProcess", ThisObject.Ref));
-	If StatusRecord.CurrentStage = EmptyStage Then
+	EmptyUUID = New UUID("00000000-0000-0000-0000-000000000000");
+	StatusRecord = InformationRegisters.ExecutionProcessStatus.GetLast(, New Structure("ExecutionProcess", ThisObject.Ref));  // InformationRegisterRecordManager.ExecutionProcessStatus
+	If StatusRecord.CurrentStage = EmptyUUID Then
 		Return;
 	EndIf;
 	
@@ -77,7 +84,11 @@ Procedure CheckTasksCompletedConditionCheck(RoutePoint, ToFinish)
 	EndIf;
 	
 	TaskIDs = New Array;
-	TaskRows = ThisObject.StagesTasks.FindRows(New Structure("StageID", StatusRecord.CurrentStage));
+	If StageRow.TasksStartTogether Then
+		TaskRows = ThisObject.StagesTasks.FindRows(New Structure("StageID", StatusRecord.CurrentStage));
+	Else
+		TaskRows = ThisObject.StagesTasks.FindRows(New Structure("StageID, TaskID", StatusRecord.CurrentStage, StatusRecord.CurrentTask));
+	EndIf;
 	For Each TaskRow In TaskRows Do
 		TaskIDs.Add(TaskRow.TaskID);
 	EndDo;
@@ -101,24 +112,44 @@ Procedure CheckTasksCompletedConditionCheck(RoutePoint, ToFinish)
 	
 	If TasksFailed Then
 		If StageRow.TasksFailAction = Enums.TaskFailActions.RestartStage Then
-			ToFinish = False;
-			SaveNewStageStatus(StatusRecord.CurrentStage);
+			ProcessFinish = False;
+			SaveNewStageStatus(StatusRecord.CurrentStage, GetFirstTask(StatusRecord.CurrentStage));
 		ElsIf StageRow.TasksFailAction = Enums.TaskFailActions.RestartProcess Then
-			ToFinish = False;
-			SaveNewStageStatus(ThisObject.ExecutionStages[0].StageID);
+			ProcessFinish = False;
+			SaveNewStageStatus(ThisObject.ExecutionStages[0].StageID, GetFirstTask(ThisObject.ExecutionStages[0].StageID));
 		Else
 			Canceled = True;
 			Return;
 		EndIf;
 		
-	ElsIf StageRow.LineNumber < ThisObject.ExecutionStages.Count() Then
-		NextStage = ThisObject.ExecutionStages[StageRow.LineNumber].StageID;
-		SaveNewStageStatus(NextStage);
-		ToFinish = False;
-		
 	EndIf;
 	
-	If Not TasksFailed And Not StageRow.TasksResult.IsEmpty() Then
+	StageFinish = True;
+	
+	If Not TasksFailed Then
+		If StageRow.TasksStartTogether Then
+			If StageRow.LineNumber < ThisObject.ExecutionStages.Count() Then
+				NextStage = ThisObject.ExecutionStages[StageRow.LineNumber].StageID;
+				SaveNewStageStatus(NextStage, EmptyUUID);
+				ProcessFinish = False;
+			EndIf;
+		Else
+			NextTask = GetNextTask(StatusRecord.CurrentStage, StatusRecord.CurrentTask);
+			If NextTask = EmptyUUID Then
+				If StageRow.LineNumber < ThisObject.ExecutionStages.Count() Then
+					NextStage = ThisObject.ExecutionStages[StageRow.LineNumber].StageID;
+					SaveNewStageStatus(NextStage, GetFirstTask(NextStage));
+					ProcessFinish = False;
+				EndIf;
+			Else
+				SaveNewStageStatus(StatusRecord.CurrentStage, NextTask);
+				StageFinish = False;
+				ProcessFinish = False;
+			EndIf;
+		EndIf;
+	EndIf;
+	
+	If StageFinish And Not TasksFailed And Not StageRow.TasksResult.IsEmpty() Then
 		SaveTasksResult(StageRow.TasksResult);
 	EndIf;
 	
@@ -140,6 +171,8 @@ Procedure CompletionOnComplete(RoutePoint, Cancel)
 	|		INNER JOIN BusinessProcess.ExecutionProcesses.StagesTasks AS StagesTasks
 	|		ON ExecutionProcessStatus.ExecutionProcess = StagesTasks.Ref
 	|		AND ExecutionProcessStatus.CurrentStage = StagesTasks.StageID
+	|		AND (ExecutionProcessStatus.CurrentTask = StagesTasks.TaskID
+	|		OR ExecutionProcessStatus.CurrentTask = &EmptyID)
 	|WHERE
 	|	ExecutionProcessStatus.ExecutionProcess = &ExecutionProcess
 	|;
@@ -157,6 +190,7 @@ Procedure CompletionOnComplete(RoutePoint, Cancel)
 	|	ExecutorTasks.Canceled = TRUE";
 	
 	Query.SetParameter("ExecutionProcess", ThisObject.Ref);
+	Query.SetParameter("EmptyID", New UUID("00000000-0000-0000-0000-000000000000"));
 	
 	QuerySelection = Query.Execute().Select();
 	If QuerySelection.Next() Then
@@ -167,7 +201,89 @@ EndProcedure
 
 #Region Private
 
-Function GetIterationNumber(StageID)
+// Get first task.
+// 
+// Parameters:
+//  CurrentStage - UUID - Current stage
+// 
+// Returns:
+//  UUID - Get first task
+Function GetFirstTask(CurrentStage)
+	
+	CurrentTask = New UUID("00000000-0000-0000-0000-000000000000");
+	
+	StageRow = ThisObject.ExecutionStages.Find(CurrentStage, "StageID");
+	If StageRow = Undefined OR StageRow.TasksStartTogether Then
+		Return CurrentTask;
+	EndIf;
+	
+	TaskRows = ThisObject.StagesTasks.FindRows(New Structure("StageID", CurrentStage));
+	If TaskRows.Count() > 0 Then
+		CurrentTask = TaskRows[0].TaskID;
+	EndIf;
+	
+	Return CurrentTask;
+	
+EndFunction
+
+Function GetNextTask(CurrentStage, CurrentTask)
+	
+	EmptyUUID = New UUID("00000000-0000-0000-0000-000000000000");
+	
+	TaskRows = ThisObject.StagesTasks.FindRows(New Structure("StageID", CurrentStage));
+	If TaskRows.Count() = 0 Then
+		Return EmptyUUID;
+	EndIf;
+	
+	TaskFound = False;
+	For Each TaskRow In TaskRows Do
+		
+		If TaskFound Then
+			Return TaskRow.TaskID;
+			
+		ElsIf TaskRow.TaskID = CurrentTask Then
+			TaskFound = True;
+			
+		EndIf;
+		
+	EndDo;
+	
+	Return EmptyUUID;
+	
+EndFunction
+
+// Create task.
+// 
+// Parameters:
+//  TaskRow - BusinessProcessTabularSectionRow.ExecutionProcesses.StagesTasks - Task row
+//  RoutePoint - BusinessProcessRoutePointRef.ExecutionProcesses - Route point
+//  IterationNumber - Number - Iteration number
+//  TasksBeingFormed - Structure, Array of Arbitrary - Tasks being formed
+Procedure CreateTask(TaskRow, RoutePoint, IterationNumber, TasksBeingFormed)
+	
+	NewTask = Tasks.ExecutorTasks.CreateTask();
+	FillPropertyValues(NewTask, TaskRow);
+	
+	NewTask.CurrentExecutor = TaskRow.Executor;
+	NewTask.ExecutionObject = ThisObject.ExecutionObject;
+	NewTask.Date = CommonFunctionsServer.GetCurrentSessionDate();
+	NewTask.BusinessProcess = ThisObject.Ref;
+	NewTask.RoutePoint = RoutePoint;
+	NewTask.IterationNumber = IterationNumber;
+	
+	TasksBeingFormed.Add(NewTask);
+	
+EndProcedure
+
+// Get iteration number.
+// 
+// Parameters:
+//  StageID - UUID - Stage ID
+//  TaskID - UUID - Task ID
+// 
+// Returns:
+//  Number - Get iteration number
+Function GetIterationNumber(StageID, TaskID)
 	
 	Query = New Query;
 	Query.Text =
@@ -180,11 +296,13 @@ Function GetIterationNumber(StageID)
 	|WHERE
 	|	ExecutionProcessStatus.ExecutionProcess = &ExecutionProcess
 	|	AND ExecutionProcessStatus.CurrentStage = &CurrentStage
+	|	AND ExecutionProcessStatus.CurrentTask = &CurrentTask
 	|GROUP BY
 	|	ExecutionProcessStatus.ExecutionProcess,
 	|	ExecutionProcessStatus.CurrentStage";
 	
 	Query.SetParameter("CurrentStage", StageID);
+	Query.SetParameter("CurrentTask", TaskID);
 	Query.SetParameter("ExecutionProcess", ThisObject.Ref);
 	
 	QuerySelection = Query.Execute().Select();
@@ -196,6 +314,10 @@ Function GetIterationNumber(StageID)
 	
 EndFunction
 
+// Save tasks result.
+// 
+// Parameters:
+//  TasksResult - EnumRef.TaskResults - Tasks result
 Procedure SaveTasksResult(TasksResult)
 	ResultRecord = InformationRegisters.ExecutionResults.CreateRecordManager();
 	ResultRecord.ExecutionObject = ThisObject.ExecutionObject;
@@ -205,11 +327,17 @@ Procedure SaveTasksResult(TasksResult)
 	ResultRecord.Write();
 EndProcedure
 
-Procedure SaveNewStageStatus(NewStage)
+// Save new stage status.
+// 
+// Parameters:
+//  NewStage - UUID - New stage
+//  NewTask - UUID - New task
+Procedure SaveNewStageStatus(NewStage, NewTask)
 	StatusRecord = InformationRegisters.ExecutionProcessStatus.CreateRecordManager();
 	StatusRecord.ExecutionProcess = ThisObject.Ref;
 	StatusRecord.CurrentStage = NewStage;
-	StatusRecord.IterationNumber = GetIterationNumber(NewStage);
+	StatusRecord.CurrentTask = NewTask;
+	StatusRecord.IterationNumber = GetIterationNumber(NewStage, NewTask);
 	StatusRecord.Period = CommonFunctionsServer.GetCurrentSessionDate();
 	StatusRecord.Write();
 EndProcedure

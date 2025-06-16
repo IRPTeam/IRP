@@ -172,6 +172,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="7bfbc8e2-5bd1-4dd0-af60-ecabbba7ca1a">
+      <name>TasksStartTogether</name>
+      <synonym>
+        <key>en</key>
+        <value>Tasks start together</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="cabe30da-35ae-4eba-b7c3-05ca002c2c31">
       <name>TasksResult</name>
       <synonym>

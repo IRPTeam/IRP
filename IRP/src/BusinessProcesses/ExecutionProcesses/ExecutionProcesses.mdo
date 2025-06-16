@@ -172,20 +172,6 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
-    <attributes uuid="9c03bca7-970b-4bcd-9926-fcbc43224a9d">
-      <name>TasksStartTogether</name>
-      <synonym>
-        <key>en</key>
-        <value>Tasks start together</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
     <attributes uuid="9f6c2009-2845-414c-b123-71972738cd8b">
       <name>Description_en</name>
       <synonym>
@@ -236,6 +222,20 @@
       </synonym>
       <type>
         <types>DefinedType.typeDescription</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9c03bca7-970b-4bcd-9926-fcbc43224a9d">
+      <name>TasksStartTogether</name>
+      <synonym>
+        <key>en</key>
+        <value>Tasks start together</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -472,4 +472,11 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <templates uuid="0e52e40f-a5e6-4425-8b7d-98f6f7cab9a5">
+    <name>Template</name>
+    <synonym>
+      <key>en</key>
+      <value>Template</value>
+    </synonym>
+  </templates>
 </mdclass:BusinessProcess>

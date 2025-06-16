@@ -254,7 +254,7 @@ Scenario: _0530011 create Bank payment (independently)
 				| Description     |
 				| Ferron BP       |
 			And I select current line in "List" table
-			And I click choice button of "Payee" attribute in "PaymentList" table
+			And I click choice button of "Legal name" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| Description           |
 				| Company Ferron BP     |
@@ -334,7 +334,7 @@ Scenario: _0530011 create Bank payment (independently)
 				| Description     |
 				| Ferron BP       |
 			And I select current line in "List" table
-			And I click choice button of "Payee" attribute in "PaymentList" table
+			And I click choice button of "Legal name" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| Description           |
 				| Company Ferron BP     |
@@ -405,7 +405,7 @@ Scenario: _0530011 create Bank payment (independently)
 				| Description     |
 				| Ferron BP       |
 			And I select current line in "List" table
-			And I click choice button of "Payee" attribute in "PaymentList" table
+			And I click choice button of "Legal name" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| Description           |
 				| Company Ferron BP     |
@@ -531,7 +531,7 @@ Scenario: _053013 check the display of details on the form Bank payment with the
 			| Kalipso        |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| '#'   | Partner   | Total amount   | Payee             | Basis document   | Planning transaction basis    |
+			| '#'   | Partner   | Total amount   | Legal name             | Basis document   | Planning transaction basis    |
 			| '1'   | Kalipso   | ''             | Company Kalipso   | ''               | ''                            |
 
 
@@ -556,7 +556,7 @@ Scenario: _053015 check the display of details on the form Bank payment with the
 		And I click the button named "PaymentListAdd"
 		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		If "PaymentList" table does not contain column named "Payee" Then
+		If "PaymentList" table does not contain column named "LegalName" Then
 		If "PaymentList" table does not contain column named "Partner" Then
 		And "PaymentList" table contains lines
 			| '#'   | 'Total amount'   | 'Planning transaction basis'    |
@@ -604,7 +604,7 @@ Scenario: _053019 try post Bank payment with empty amount
 			| Description |
 			| Kalipso     |
 		And I select current line in "List" table
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description     |
 			| Company Kalipso |
@@ -896,7 +896,7 @@ Scenario: _053026 create Bank payment based on PI (Partner term - TRY, document 
 		And I click "Ok" button
 		And I click "Save" button
 		And "PaymentList" table became equal
-			| "#" | "Partner"   | "Payee"             | "Partner term"             | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "#" | "Partner"   | "Legal name"             | "Partner term"             | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 			| "1" | "Ferron BP" | "Company Ferron BP" | "Vendor Ferron, TRY"       | ""                    | "Purchase invoice 235 dated 08.08.2024 11:32:17" | ""        | ""      | "4 502,00"     | ""                        | ""                 | ""                           |
 		And I close all client application windows		
 
@@ -933,7 +933,7 @@ Scenario: _053026 create Bank payment based on PI (Partner term - TRY, document 
 // 		And I click "Ok" button
 // 		And I click "Save" button
 // 		And "PaymentList" table became equal
-// 			| "#" | "Partner"   | "Payee"             | "Partner term"             | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+// 			| "#" | "Partner"   | "Legal name"             | "Partner term"             | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 // 			| "1" | "Ferron BP" | "Company Ferron BP" | "Vendor Ferron, TRY"       | ""                    | "Purchase invoice 235 dated 08.08.2024 11:32:17" | ""        | ""      | "4 502,00"     | ""                        | ""                 | ""                           |
 // 		And I close all client application windows	
 

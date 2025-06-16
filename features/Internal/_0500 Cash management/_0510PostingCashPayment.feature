@@ -249,7 +249,7 @@ Scenario: _0510011 create Cash payment (independently)
 			| Description     |
 			| Ferron BP       |
 		And I select current line in "List" table
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description           |
 			| Company Ferron BP     |
@@ -324,7 +324,7 @@ Scenario: _0510011 create Cash payment (independently)
 			| Description     |
 			| Ferron BP       |
 		And I select current line in "List" table
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description           |
 			| Company Ferron BP     |
@@ -390,7 +390,7 @@ Scenario: _0510011 create Cash payment (independently)
 			| Description     |
 			| Ferron BP       |
 		And I select current line in "List" table
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description           |
 			| Company Ferron BP     |
@@ -447,7 +447,7 @@ Scenario: _0510012 check form for select basis document
 			| Description     |
 			| Ferron BP       |
 		And I select current line in "List" table
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description           |
 			| Company Ferron BP     |
@@ -576,13 +576,13 @@ And I click the button named "FormCreate"
 		| Description    |
 		| Ferron BP      |
 	And I select current line in "List" table
-	And I click choice button of "Payee" attribute in "PaymentList" table
+	And I click choice button of "Legal name" attribute in "PaymentList" table
 	And "List" table contains lines
 		| Description          |
 		| Company Ferron BP    |
 	And I select current line in "List" table
 	And "PaymentList" table contains lines
-		| Partner     | Payee                |
+		| Partner     | Legal name                |
 		| Ferron BP   | Company Ferron BP    |
 When check the filter on the basis documents in the payment documents
 
@@ -650,7 +650,7 @@ And I select "Payment to the vendor" exact value from "Transaction type" drop-do
 		| Kalipso        |
 	And I select current line in "List" table
 	And "PaymentList" table contains lines
-	| #  | Partner  | Total Amount  | Payee            | Basis document  | Planning transaction basis   |
+	| #  | Partner  | Total Amount  | Legal name            | Basis document  | Planning transaction basis   |
 	| 1  | Kalipso  | ''            | Company Kalipso  | ''              | ''                           |
 
 
@@ -694,7 +694,7 @@ And I select "Cash transfer order" exact value from "Transaction type" drop-down
 	And I click the button named "PaymentListAdd"
 	And I input "100,00" text in "Total amount" field of "PaymentList" table
 	And I finish line editing in "PaymentList" table
-	If "PaymentList" table does not contain column named "Payee" Then
+	If "PaymentList" table does not contain column named "LegalName" Then
 	If "PaymentList" table does not contain column named "Partner" Then
 	And "PaymentList" table contains lines
 	| #  | 'Total amount'  | Planning transaction basis   |
@@ -928,7 +928,7 @@ And I close all client application windows
 // 		Then the form attribute named "Currency" became equal to "USD"
 // 		And I click "Save" button		
 // 		And "PaymentList" table became equal
-// 			| "#" | "Partner"   | "Payer"             | "Partner term"        | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+// 			| "#" | "Partner"   | "Legal name"             | "Partner term"        | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 // 			| "1" | "Ferron BP" | "Company Ferron BP" | "Vendor Ferron, USD"  | ""                    | "Purchase invoice 236 dated 08.08.2024 14:49:25" | ""        | ""      | "136,96"       | ""                        | ""                 | ""                           |
 // 	* Reselect PI
 // 		* From form select
@@ -936,12 +936,12 @@ And I close all client application windows
 // 			And I select current line in "PaymentList" table
 // 			And I click choice button of "Basis document" attribute in "PaymentList" table
 // 			And I go to line in "List" table
-// 				| "#" | "Partner"   | "Payer"             | "Partner term"        | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+// 				| "#" | "Partner"   | "Legal name"             | "Partner term"        | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 // 				| "1" | "Ferron BP" | "Company Ferron BP" | "Vendor Ferron, USD"  | ""                    | "Purchase invoice 236 dated 08.08.2024 14:49:25" | ""        | ""      | "136,96"       | ""                        | ""                 | ""                           |
 // 			And I select current line in "List" table
 // 			And I click "Save" button		
 // 			And "PaymentList" table became equal
-// 				| "#" | "Partner"   | "Payer"             | "Partner term"        | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+// 				| "#" | "Partner"   | "Legal name"             | "Partner term"        | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 // 				| "1" | "Ferron BP" | "Company Ferron BP" | "Vendor Ferron, USD"  | ""                    | "Purchase invoice 236 dated 08.08.2024 14:49:25" | ""        | ""      | "136,96"       | ""                        | ""                 | ""                           |
 // 		* From payment distribution
 // 			And I select current line in "PaymentList" table
@@ -954,7 +954,7 @@ And I close all client application windows
 // 			And I finish line editing in "Documents" table
 // 			And I click "Ok" button
 // 			And "PaymentList" table became equal
-// 				| "#" | "Partner"   | "Payer"             | "Partner term"        | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+// 				| "#" | "Partner"   | "Legal name"             | "Partner term"        | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 // 				| "1" | "Ferron BP" | "Company Ferron BP" | "Vendor Ferron, USD"  | ""                    | "Purchase invoice 236 dated 08.08.2024 14:49:25" | ""        | ""      | "136,96"       | ""                        | ""                 | ""                           |
 // 			And I click "Save" button
 // 	And I close all client application windows
@@ -993,7 +993,7 @@ And I close all client application windows
 // 		And I click "Ok" button
 // 		And I click "Save" button
 // 		And "PaymentList" table became equal
-// 			| "#" | "Partner"   | "Payer"             | "Partner term"             | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+// 			| "#" | "Partner"   | "Legal name"             | "Partner term"             | "Legal name contract" | "Basis document"                                 | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 // 			| "1" | "Ferron BP" | "Company Ferron BP" | "Basic Partner terms, TRY" | ""                    | "Purchase invoice 235 dated 08.08.2024 11:32:17" | ""        | ""      | "4 502,00"     | ""                        | ""                 | ""                           |
 // 	And I close all client application windows				
 

@@ -2269,7 +2269,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2281,13 +2281,13 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms
 		And I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
 			| Kalipso        |
 		And I select current line in "List" table
-		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description        |
 			| Company Kalipso    |
@@ -2329,13 +2329,13 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			| 'Given form with "Documents for incoming payment" header is opened in the active window'    |
 	* Check the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
 		And I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
 			| Nicoletta      |
 		And I select current line in "List" table
-		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description          |
 			| Company Nicoletta    |
@@ -2548,7 +2548,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2560,13 +2560,13 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms
 		And I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
 			| Kalipso        |
 		And I select current line in "List" table
-		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description        |
 			| Company Kalipso    |
@@ -2608,13 +2608,13 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 			| 'Given form with "Documents for incoming payment" header is opened in the active window'    |
 	* Check the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
 		And I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
 			| Nicoletta      |
 		And I select current line in "List" table
-		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description          |
 			| Company Nicoletta    |
@@ -2840,7 +2840,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -2852,13 +2852,13 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms (for vendor)
 		And I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
 			| Ferron BP      |
 		And I select current line in "List" table
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description          |
 			| Company Ferron BP    |
@@ -2899,13 +2899,13 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 			| 'Given form with "Documents for incoming payment" header is opened in the active window'    |
 	* Check the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
 		And I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
 			| Veritas        |
 		And I select current line in "List" table
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'         |
 			| 'Company Veritas '    |
@@ -3025,8 +3025,8 @@ Scenario: _0154112 total amount calculation in Cash payment
 			| 'Description'    |
 			| 'Ferron BP'      |
 		And I select current line in "List" table
-		And I activate "Payee" field in "PaymentList" table
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I activate "Legal name" field in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'          |
 			| 'Company Ferron BP'    |
@@ -3104,7 +3104,7 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I select current line in "List" table
 	* Check the choice of a partner in the tabular section and filling in the legal name if one
 		And I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -3116,7 +3116,7 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
 		And I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -3128,13 +3128,13 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms
 		And I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
 			| Ferron BP      |
 		And I select current line in "List" table
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description          |
 			| Company Ferron BP    |
@@ -3175,13 +3175,13 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 			| 'Given form with "Documents for incoming payment" header is opened in the active window'    |
 	* Check the unavailability of the choice of the base document when choosing Partner term with the Ap/ar  by Standard Partner term
 		And I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
 			| Veritas        |
 		And I select current line in "List" table
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'         |
 			| 'Company Veritas '    |
@@ -3301,8 +3301,8 @@ Scenario: _0154114 total amount calculation in Bank payment
 			| 'Description'    |
 			| 'Ferron BP'      |
 		And I select current line in "List" table
-		And I activate "Payee" field in "PaymentList" table
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I activate "Legal name" field in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'          |
 			| 'Company Ferron BP'    |
@@ -4120,7 +4120,7 @@ Scenario: _0154118 check the details cleaning on the form Cash receipt
 			| Code    |
 			| TRY     |
 		And I select current line in "List" table
-	* Fillin in Partner, Payer and Partner term
+	* Fillin in Partner, Legal name and Partner term
 		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -4178,7 +4178,7 @@ Scenario: _0154119 check the details cleaning on the form Cash payment when re-s
 			| TRY     |
 		And I select current line in "List" table
 		And I select "Return to customer" exact value from "Transaction type" drop-down list
-	* Fillin in Partner, Payer and Partner term
+	* Fillin in Partner, Legal name and Partner term
 		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -4234,7 +4234,7 @@ Scenario: _0154120 check the details cleaning on the form Bank receipt when re-s
 			| Code    |
 			| TRY     |
 		And I select current line in "List" table
-	* Fillin in Partner, Payer and Partner term
+	* Fillin in Partner, Legal name and Partner term
 		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -4295,7 +4295,7 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 			| TRY     |
 		And I select current line in "List" table
 		And I select "Return to customer" exact value from "Transaction type" drop-down list
-	* Fillin in Partner, Payer and Partner term
+	* Fillin in Partner, Legal name and Partner term
 		And I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -5008,7 +5008,7 @@ Scenario: _0154131 check currency form in  Bank Receipt
 			Then the form attribute named "Currency" became equal to "TRY"
 		* Check the choice of a partner in the tabular section and filling in the legal name if one
 			And I click the button named "PaymentListAdd"
-			And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+			And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'     |
@@ -5067,13 +5067,13 @@ Scenario: _0154131 check currency form in  Bank Receipt
 			And I close current window
 		* Check the standard currency rate when adding the next line
 			And I click the button named "PaymentListAdd"
-			And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
+			And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| Description     |
 				| Veritas         |
 			And I select current line in "List" table
-			And I click choice button of "Payer" attribute in "PaymentList" table
+			And I click choice button of "Legal name" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'          |
 				| 'Company Veritas '     |
@@ -5183,7 +5183,7 @@ Scenario: _0154132 check currency form in Incoming payment order
 				| Description     |
 				| Veritas         |
 			And I select current line in "List" table
-			And I click choice button of "Payer" attribute in "PaymentList" table
+			And I click choice button of "Legal name" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'          |
 				| 'Company Veritas '     |
@@ -5291,7 +5291,7 @@ Scenario: _0154133 check currency form in Outgoing payment order
 				| Description     |
 				| Veritas         |
 			And I select current line in "List" table
-			And I click choice button of "Payee" attribute in "PaymentList" table
+			And I click choice button of "Legal name" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'          |
 				| 'Company Veritas '     |

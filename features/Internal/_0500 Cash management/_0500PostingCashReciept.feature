@@ -257,7 +257,7 @@ Scenario: _0500011 create Cash receipt (independently)
 				| Description     |
 				| Ferron BP       |
 			And I select current line in "List" table
-			And I click choice button of "Payer" attribute in "PaymentList" table
+			And I click choice button of "Legal name" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| Description           |
 				| Company Ferron BP     |
@@ -333,7 +333,7 @@ Scenario: _0500011 create Cash receipt (independently)
 				| Description     |
 				| Ferron BP       |
 			And I select current line in "List" table
-			And I click choice button of "Payer" attribute in "PaymentList" table
+			And I click choice button of "Legal name" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| Description           |
 				| Company Ferron BP     |
@@ -402,7 +402,7 @@ Scenario: _0500011 create Cash receipt (independently)
 				| Description     |
 				| Ferron BP       |
 			And I select current line in "List" table
-			And I click choice button of "Payer" attribute in "PaymentList" table
+			And I click choice button of "Legal name" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| Description           |
 				| Company Ferron BP     |
@@ -470,7 +470,7 @@ Scenario: _0500012 check form for select basis document
 				| Description     |
 				| Ferron BP       |
 			And I select current line in "List" table
-			And I click choice button of "Payer" attribute in "PaymentList" table
+			And I click choice button of "Legal name" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| Description           |
 				| Company Ferron BP     |
@@ -641,8 +641,8 @@ Scenario: _050013 check the display of details on the form Cash receipt with the
 			| Kalipso        |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-		| #  | Partner  | Total amount  | Payer            | Basis document  | Planning transaction basis   |
-		| 1  | Kalipso  | ''            | Company Kalipso  | ''              | ''                           |
+		| '#'  | 'Partner'  | 'Total amount'| 'Legal name'       | 'Basis document'  | 'Planning transaction basis'   |
+		| '1'  | 'Kalipso'  | ''            | 'Company Kalipso'  | ''                | ''                           |
 
 
 
@@ -687,7 +687,7 @@ Scenario: _050015 check the display of details on the form Cash receipt with the
 		And I click the button named "PaymentListAdd"
 		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		If "PaymentList" table does not contain column named "Payer" Then
+		If "PaymentList" table does not contain column named "LegalName" Then
 		If "PaymentList" table does not contain column named "Partner" Then
 		And "PaymentList" table contains lines
 		| '#'  | 'Total amount'  | 'Planning transaction basis'   |
@@ -758,7 +758,7 @@ Scenario: _050017 check selection form (Payment by documents) in CR
 			And I click "Ok" button
 			And I finish line editing in "PaymentList" table
 			And "PaymentList" table became equal
-				| "#" | "Partner"         | "Payer"            | "Partner term"                  | "Legal name contract" | "Basis document"                             | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+				| "#" | "Partner"         | "Legal name"       | "Partner term"                  | "Legal name contract" | "Basis document"                             | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 				| "1" | "Partner Kalipso" | "Company Kalipso"  | "Partner Kalipso Customer"      | ""                    | ""                                           | ""        | ""      | "3 000,00"     | ""                        | ""                 | ""                           |
 				| "2" | "DFC"             | "DFC"              | "DFC Customer by Partner terms" | ""                    | ""                                           | ""        | ""      | "2 944,00"     | ""                        | ""                 | ""                           |
 				| "3" | "Lomaniti"        | "Company Lomaniti" | "Basic Partner terms, TRY"      | ""                    | "Sales invoice 14 dated 16.02.2021 12:14:54" | ""        | ""      | "12 400,00"    | ""                        | ""                 | ""                           |
@@ -938,7 +938,7 @@ Scenario: _050023 create Cash receipt based on SI (Partner term - USD, document 
 		Then the form attribute named "Currency" became equal to "USD"
 		And I click "Save" button		
 		And "PaymentList" table became equal
-			| "#" | "Partner"   | "Payer"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "#" | "Partner"   | "Legal name"        | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 			| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "171,20"       | ""                        | ""                 | ""                           |
 	* Reselect SI
 		* From form select
@@ -951,7 +951,7 @@ Scenario: _050023 create Cash receipt based on SI (Partner term - USD, document 
 			And I select current line in "List" table
 			And I click "Save" button		
 			And "PaymentList" table became equal
-				| "#" | "Partner"   | "Payer"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+				| "#" | "Partner"   | "Legal name"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 				| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "171,20"       | ""                        | ""                 | ""                           |
 		* From payment distribution
 			And I select current line in "PaymentList" table
@@ -964,7 +964,7 @@ Scenario: _050023 create Cash receipt based on SI (Partner term - USD, document 
 			And I finish line editing in "Documents" table
 			And I click "Ok" button
 			And "PaymentList" table became equal
-				| "#" | "Partner"   | "Payer"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+				| "#" | "Partner"   | "Legal name"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 				| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "171,20"       | ""                        | ""                 | ""                           |
 			And I click "Save" button
 	And I close all client application windows
@@ -990,7 +990,7 @@ Scenario: _050024 create Cash receipt based on SI (Partner term - TRY, document 
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I click "Save" button	
 		And "PaymentList" table became equal
-			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "#" | "Partner"  | "Legal name"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
 	* Reselect SI
 		And I select current line in "PaymentList" table
@@ -1003,7 +1003,7 @@ Scenario: _050024 create Cash receipt based on SI (Partner term - TRY, document 
 		And I click "Ok" button
 		And I click "Save" button
 		And "PaymentList" table became equal
-			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "#" | "Partner"  | "Legal name"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
 	And I close all client application windows				
 

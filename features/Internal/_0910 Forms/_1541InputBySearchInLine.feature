@@ -991,7 +991,7 @@ Scenario: _0154082 check company, store, item box input by search in line in a U
 		Then the form attribute named "ItemBundle" became equal to "Trousers"
 	And I close all client application windows
 
-Scenario: _0154083 check company, Cash accounts, transaction type, currency, partner, payee, Partner term input by search in line in a Cash payment (in english)
+Scenario: _0154083 check company, Cash accounts, transaction type, currency, partner, LegalName, Partner term input by search in line in a Cash payment (in english)
 	And I close all client application windows
 	* Open a creation form Cash payment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
@@ -1007,8 +1007,8 @@ Scenario: _0154083 check company, Cash accounts, transaction type, currency, par
 	* Partner input by search in line
 		And in the table "PaymentList" I click "Add" button
 		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
-	* Payee input by search in line
-		And I activate "Payee" field in "PaymentList" table
+	* LegalName input by search in line
+		And I activate "Legal name" field in "PaymentList" table
 		And I select "co" from "Legal name" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
 		And I activate "Partner term" field in "PaymentList" table
@@ -1025,7 +1025,7 @@ Scenario: _0154083 check company, Cash accounts, transaction type, currency, par
 	And I close all client application windows
 
 
-Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency, partner, payee, Partner term input by search in line in a Bank payment (in english)
+Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency, partner, LegalName, Partner term input by search in line in a Bank payment (in english)
 	And I close all client application windows
 	* Open a creation form Bank payment
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
@@ -1041,8 +1041,8 @@ Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency
 	* Partner input by search in line
 		And in the table "PaymentList" I click "Add" button
 		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
-	* Payee input by search in line
-		And I activate "Payee" field in "PaymentList" table
+	* LegalName input by search in line
+		And I activate "Legal name" field in "PaymentList" table
 		And I select "co" from "Legal name" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
 		And I activate "Partner term" field in "PaymentList" table
@@ -1058,7 +1058,7 @@ Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency
 		| 'Ferron BP'  | 'Company Ferron BP'  | 'Vendor Ferron, USD'   |
 	And I close all client application windows
 
-Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency, partner, payee, input by search in line in a Bank receipt (in english)
+Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency, partner, LegalName, input by search in line in a Bank receipt (in english)
 	And I close all client application windows
 	* Open a creation form Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
@@ -1074,8 +1074,8 @@ Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency
 	* Partner input by search in line
 		And in the table "PaymentList" I click "Add" button
 		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
-	* Payee input by search in line
-		And I activate "Payer" field in "PaymentList" table
+	* LegalName input by search in line
+		And I activate "Legal name" field in "PaymentList" table
 		And I select "co" from "Legal name" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
 		And I activate "Partner term" field in "PaymentList" table
@@ -1091,7 +1091,7 @@ Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency
 		| 'Ferron BP'  | 'Company Ferron BP'  | 'Ferron, USD'    |
 	And I close all client application windows
 
-Scenario: _0154086 check company, Cash accounts, transaction type, currency, partner, payee, input by search in line in a Cash receipt (in english)
+Scenario: _0154086 check company, Cash accounts, transaction type, currency, partner, LegalName, input by search in line in a Cash receipt (in english)
 	And I close all client application windows
 	* Open a creation form Cash receipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
@@ -1107,8 +1107,8 @@ Scenario: _0154086 check company, Cash accounts, transaction type, currency, par
 	* Partner input by search in line
 		And in the table "PaymentList" I click "Add" button
 		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
-	* Payee input by search in line
-		And I activate "Payer" field in "PaymentList" table
+	* LegalName input by search in line
+		And I activate "Legal name" field in "PaymentList" table
 		And I select "co" from "Legal name" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
 		And I activate "Partner term" field in "PaymentList" table
@@ -1324,7 +1324,7 @@ Scenario: _0154089 check company, account, currency input by search in line in I
 	* Filling the tabular part by searching the value by line
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
-		And I activate "Payer" field in "PaymentList" table
+		And I activate "Legal name" field in "PaymentList" table
 		And I select "Second Company F" from "Legal name" drop-down list by string in "PaymentList" table
 	* Filling check
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -1349,7 +1349,7 @@ Scenario: _0154090 check company, account, currency input by search in line in O
 	* Filling the tabular part by searching the value by line
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
-		And I activate "Payee" field in "PaymentList" table
+		And I activate "Legal name" field in "PaymentList" table
 		And I select "Second Company F" from "Legal name" drop-down list by string in "PaymentList" table
 	* Filling check
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -1785,7 +1785,7 @@ Scenario: _01540114 check item input by search in line by code in a document Ban
 		And "PaymentList" table contains lines
 			| 'Partner'      |
 			| 'Ferron BP'    |
-	* Payee
+	* LegalName
 		And I select "46" from "Legal name" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Legal name'                |

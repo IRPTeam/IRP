@@ -503,7 +503,7 @@
         </items>
         <items xsi:type="form:FormField">
           <name>Agreement</name>
-          <id>685</id>
+          <id>698</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -514,7 +514,7 @@
           </dataPath>
           <extendedTooltip>
             <name>AgreementExtendedTooltip</name>
-            <id>687</id>
+            <id>700</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -529,7 +529,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>AgreementContextMenu</name>
-            <id>686</id>
+            <id>699</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -544,12 +544,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>EditTextChange</event>
-              <name>AgreementEditTextChange</name>
+              <event>StartChoice</event>
+              <name>AgreementStartChoice</name>
             </handlers>
             <handlers>
-              <event>StartListChoice</event>
-              <name>AgreementStartChoice</name>
+              <event>EditTextChange</event>
+              <name>AgreementEditTextChange</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>

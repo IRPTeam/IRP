@@ -2042,7 +2042,7 @@ Scenario: _150087 check row separation in SI
 			| 'ItemListTotalNetAmount'   | "6 276,53"                 |
 			| 'ItemListTotalTaxAmount'   | "175,77"                   |
 			| 'ItemListTotalTotalAmount' | "6 452,30"                 |
-			| 'LegalName'                | "Company Lomaniti"         |
+			| 'Legal name'                | "Company Lomaniti"         |
 			| 'ManagerSegment'           | "Region 2"                 |
 			| 'Partner'                  | "Lomaniti"                 |
 			| 'PriceIncludeTax'          | "Yes"                      |
@@ -2104,7 +2104,7 @@ Scenario: _150087 check row separation in SI
 			| 'ItemListTotalNetAmount'   | "6 276,53"                 |
 			| 'ItemListTotalTaxAmount'   | "175,77"                   |
 			| 'ItemListTotalTotalAmount' | "6 452,30"                 |
-			| 'LegalName'                | "Company Lomaniti"         |
+			| 'Legal name'                | "Company Lomaniti"         |
 			| 'ManagerSegment'           | "Region 2"                 |
 			| 'Partner'                  | "Lomaniti"                 |
 			| 'PriceIncludeTax'          | "Yes"                      |

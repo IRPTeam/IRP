@@ -126,7 +126,7 @@ Scenario: _051001 create Cash payment based on Purchase invoice
 	Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 	Then the form attribute named "Currency" became equal to "TRY"
 	And "PaymentList" table contains lines
-		| 'Partner'     | 'LegalName'               | 'Partner term'         | 'Total amount'   | 'Basis document'               |
+		| 'Partner'     | 'Legal name'               | 'Partner term'         | 'Total amount'   | 'Basis document'               |
 		| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '137 000,00'     | '$$PurchaseInvoice018001$$'    |
 	And I click the button named "EditCurrencies"
 	And "CurrenciesTable" table became equal
@@ -145,7 +145,7 @@ Scenario: _051001 create Cash payment based on Purchase invoice
 	Then the form attribute named "CashAccount" became equal to "Cash desk №2"
 	Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 	And "PaymentList" table contains lines
-		| 'Partner'     | 'LegalName'               | 'Partner term'         | 'Total amount'   | 'Basis document'               |
+		| 'Partner'     | 'Legal name'               | 'Partner term'         | 'Total amount'   | 'Basis document'               |
 		| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '137 000,00'     | '$$PurchaseInvoice018001$$'    |
 	And I click the button named "EditCurrencies"
 	And "CurrenciesTable" table became equal
@@ -170,7 +170,7 @@ Scenario: _051001 create Cash payment based on Purchase invoice
 	And I input "20 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 	And I finish line editing in "PaymentList" table
 	And "PaymentList" table contains lines
-		| 'Partner'     | 'LegalName'               | 'Partner term'         | 'Total amount'   | 'Basis document'              |
+		| 'Partner'     | 'Legal name'               | 'Partner term'         | 'Total amount'   | 'Basis document'              |
 		| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '20 000,00'      | '$$PurchaseInvoice29604$$'    |
 And I close all client application windows
 
@@ -199,7 +199,7 @@ And I close all client application windows
 		| 'Main Company'   | '137 000,00'  | 'Company Ferron BP'   | 'Ferron BP'    |
 	And I click "Select" button
 	And "PaymentList" table contains lines
-		| 'Partner'   | 'Partner term'       | 'Total amount' | 'LegalName'             | 'Basis document'            |
+		| 'Partner'   | 'Partner term'       | 'Total amount' | 'Legal name'             | 'Basis document'            |
 		| 'Ferron BP' | 'Vendor Ferron, TRY' | '5 000,00'     | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' |
 // * Add one more line with the same invoice and check amount
 // 	And I click the button named "PaymentListAdd"
@@ -215,7 +215,7 @@ And I close all client application windows
 // 		| 'Main Company'   | '132 000,00' | 'Company Ferron BP'   | 'Ferron BP'    |
 // 	And I click "Select" button
 // 	And "PaymentList" table contains lines
-// 		| 'Partner'   | 'Partner term'       | 'Total amount' | 'LegalName'             | 'Basis document'            |
+// 		| 'Partner'   | 'Partner term'       | 'Total amount' | 'Legal name'             | 'Basis document'            |
 // 		| 'Ferron BP' | 'Vendor Ferron, TRY' | '5 000,00'     | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' |
 // 		| 'Ferron BP' | 'Vendor Ferron, TRY' | '132 000,00'   | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' |
 And I close all client application windows
@@ -498,7 +498,7 @@ Scenario: _0510012 check form for select basis document
 		And I input "{CurrentDate()}" text in the field named "Date"
 		And I move to "Payments" tab
 		And I go to line in "PaymentList" table
-			| '#'    | 'Partner'      | 'Partner term'          | 'LegalName'                 |
+			| '#'    | 'Partner'      | 'Partner term'          | 'Legal name'                 |
 			| '2'    | 'Ferron BP'    | 'Vendor Ferron, TRY'    | 'Company Ferron BP'     |
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
@@ -511,7 +511,7 @@ Scenario: _0510012 check form for select basis document
 		And I input "{CurrentDate() - 86401}" text in the field named "Date"
 		And I move to "Payments" tab
 		And I go to line in "PaymentList" table
-			| '#' | 'Partner'   | 'Partner term'       | 'LegalName'             |
+			| '#' | 'Partner'   | 'Partner term'       | 'Legal name'             |
 			| '2' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' |
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
@@ -605,7 +605,7 @@ And I close all client application windows
 	Then the form attribute named "TransactionType" became equal to "Return to customer"
 	Then the form attribute named "Currency" became equal to "TRY"
 	And "PaymentList" table became equal
-		| '#'   | 'Partner'     | 'LegalName'               | 'Partner term'               | 'Legal name contract'   | 'Basis document'                              | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
+		| '#'   | 'Partner'     | 'Legal name'               | 'Partner term'               | 'Legal name contract'   | 'Basis document'                              | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
 		| '1'   | 'Ferron BP'   | 'Company Ferron BP'   | 'Basic Partner terms, TRY'   | ''                      | 'Sales return 12 dated 27.01.2021 19:50:46'   | '500,00'         | ''                          | ''                              |
 	
 	Then the form attribute named "Branch" became equal to "Distribution department"
@@ -765,7 +765,7 @@ And I close all client application windows
 		And I click "Ok" button
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| '#' | 'Partner' | 'LegalName'         | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order'                                        | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '#' | 'Partner' | 'Legal name'         | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order'                                        | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
 			| '1' | 'Maxim'   | 'Company Maxim' | 'Partner term Maxim' | ''                    | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | ''        | ''                                             | '190,00'       | ''                        | ''                 | ''                           |
 			| '2' | 'Maxim'   | 'Company Maxim' | 'Partner term Maxim' | ''                    | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | ''        | ''                                             | '100,00'       | ''                        | ''                 | ''                           |
 			| '3' | 'Maxim'   | 'Company Aldis' | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 118 dated 04.09.2023 13:46:08' | '900,00'       | ''                        | ''                 | ''                           |
@@ -795,7 +795,7 @@ And I close all client application windows
 			| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '8 410,55'   |
 		And I click "Ok" button
 		And "PaymentList" table became equal
-			| 'Partner'   | 'LegalName'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order'                                        | 'Total amount' |
+			| 'Partner'   | 'Legal name'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order'                                        | 'Total amount' |
 			| 'Maxim'     | 'Company Maxim'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | ''        | ''                                             | '190,00'       |
 			| 'Maxim'     | 'Company Maxim'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | ''        | ''                                             | '100,00'       |
 			| 'Maxim'     | 'Company Aldis'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 118 dated 04.09.2023 13:46:08' | '900,00'       |
@@ -817,7 +817,7 @@ And I close all client application windows
 	And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 * Check amount (document balance)
 	And "PaymentList" table became equal
-		| '#' | 'Partner'   | 'LegalName'             | 'Partner term'       | 'Legal name contract' | 'Basis document'            | 'Project' | 'Order'                   | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+		| '#' | 'Partner'   | 'Legal name'             | 'Partner term'       | 'Legal name contract' | 'Basis document'            | 'Project' | 'Order'                   | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
 		| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$' | ''        | '$$PurchaseOrder017001$$' | '135 887,45'   | ''                        | ''                 | ''                           |
 And I close all client application windows
 
@@ -834,7 +834,7 @@ And I close all client application windows
 	And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 * Check amount (documents amount )
 	And "PaymentList" table became equal
-		| '#' | 'Partner' | 'LegalName' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+		| '#' | 'Partner' | 'Legal name' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
 		| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '670,00'       | ''                        | ''                 | ''                           |
 And I close all client application windows
 * Select one PI				
@@ -846,7 +846,7 @@ And I close all client application windows
 	And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 * Check amount (documents amount )
 	And "PaymentList" table became equal
-		| '#' | 'Partner' | 'LegalName' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+		| '#' | 'Partner' | 'Legal name' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
 		| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '670,00'       | ''                        | ''                 | ''                           |
 And I close all client application windows		
 
@@ -876,7 +876,7 @@ And I close all client application windows
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Currency" became equal to "TRY"
 	And "PaymentList" table became equal
-		| '#' | 'Partner'       | 'LegalName'         | 'Partner term' | 'Legal name contract' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        |
+		| '#' | 'Partner'       | 'Legal name'         | 'Partner term' | 'Legal name contract' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        |
 		| '1' | 'Tax authority' | 'Tax authority' | 'Income tax'   | ''                    | '100,00'       | 'Movement type 1'         | 'Distribution department' |		
 	And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
 	Then the form attribute named "TransactionType" became equal to "Other partner"
@@ -980,7 +980,7 @@ And I close all client application windows
 // 		Then the form attribute named "Currency" became equal to "USD"
 // 		And I click "Save" button	
 // 		And "PaymentList" table became equal
-// 			| '#' | 'Partner'   | 'LegalName'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+// 			| '#' | 'Partner'   | 'Legal name'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
 // 			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Purchase invoice 235 dated 08.08.2024 11:32:17' | ''        | ''      | '4 502,00'     | ''                        | ''                 | ''                           |	
 // 	* Reselect PI
 // 		And I select current line in "PaymentList" table
@@ -1062,7 +1062,7 @@ Scenario: _051028 check one Cash payment in WithholdingTaxInvoice
 		Then the form attribute named "Currency" became equal to "TRY"
 		Then the form attribute named "Date" became equal to "05.05.2025 13:44:00"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'   | 'LegalName'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                      | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '#' | 'Partner'   | 'Legal name'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                      | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
 			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Withholding tax invoice 1 dated 01.05.2025 14:25:00' | ''        | ''      | '500,00'       | 'Movement type 1'         | 'Front office'     | ''                           |
 		
 		Then the form attribute named "PaymentListTotalNetAmount" became equal to "500"
@@ -1098,7 +1098,7 @@ Scenario: _051028 check two Cash payments in WithholdingTaxInvoice
 		Then the form attribute named "Currency" became equal to "TRY"
 		Then the form attribute named "Date" became equal to "05.05.2025 13:57:00"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'   | 'LegalName'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                      | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        | 'Planning transaction basis' |
+			| '#' | 'Partner'   | 'Legal name'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                      | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        | 'Planning transaction basis' |
 			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Withholding tax invoice 2 dated 03.05.2025 12:25:23' | ''        | ''      | '150,00'       | 'Movement type 3'         | 'Distribution department' | ''                           |
 		
 		Then the form attribute named "PaymentListTotalNetAmount" became equal to "150"
@@ -1123,7 +1123,7 @@ Scenario: _051028 check two Cash payments in WithholdingTaxInvoice
 		Then the form attribute named "Currency" became equal to "TRY"
 		Then the form attribute named "Date" became equal to "06.05.2025 14:20:00"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'   | 'LegalName'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                      | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        | 'Planning transaction basis' |
+			| '#' | 'Partner'   | 'Legal name'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                      | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        | 'Planning transaction basis' |
 			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Withholding tax invoice 2 dated 03.05.2025 12:25:23' | ''        | ''      | '150,00'       | 'Movement type 3'         | 'Distribution department' | ''                           |
 		
 		Then the form attribute named "PaymentListTotalNetAmount" became equal to "150"

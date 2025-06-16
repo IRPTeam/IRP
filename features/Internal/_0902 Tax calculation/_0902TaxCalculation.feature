@@ -891,7 +891,7 @@ Scenario: _090216 check tax in the BP (depend of transaction type)
 	* Check tax rate
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner'     | 'LegalName'               | 'Tax amount'   | 'Total amount'   | 'VAT'   | 'Net amount'    |
+			| 'Partner'     | 'Legal name'               | 'Tax amount'   | 'Total amount'   | 'VAT'   | 'Net amount'    |
 			| 'Ferron BP'   | 'Company Ferron BP'   | '74,07'        | '1 000,00'       | '8%'    | '925,93'        |
 	* Change transaction type and check tax rate
 		And I select "Retail customer advance" exact value from "Transaction type" drop-down list
@@ -932,7 +932,7 @@ Scenario: _090217 check tax in the CP (depend of transaction type)
 	* Check tax rate
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner'     | 'LegalName'               | 'Tax amount'   | 'Total amount'   | 'VAT'   | 'Net amount'    |
+			| 'Partner'     | 'Legal name'               | 'Tax amount'   | 'Total amount'   | 'VAT'   | 'Net amount'    |
 			| 'Ferron BP'   | 'Company Ferron BP'   | '74,07'        | '1 000,00'       | '8%'    | '925,93'        |
 	* Change transaction type and check tax rate
 		And I select "Retail customer advance" exact value from "Transaction type" drop-down list
@@ -973,14 +973,14 @@ Scenario: _090218 check tax in the CR (depend of transaction type)
 	* Check tax rate
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner'     | 'LegalName'               | 'Tax amount'   | 'Total amount'   | 'VAT'   | 'Net amount'    |
+			| 'Partner'     | 'Legal name'               | 'Tax amount'   | 'Total amount'   | 'VAT'   | 'Net amount'    |
 			| 'Ferron BP'   | 'Company Ferron BP'   | '152,54'       | '1 000,00'       | '18%'   | '847,46'        |
 	* Change transaction type and check tax rate
 		And I select "Return from vendor" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table became equal
-			| 'Partner'     | 'LegalName'               | 'Tax amount'   | 'Total amount'   | 'VAT'    |
+			| 'Partner'     | 'Legal name'               | 'Tax amount'   | 'Total amount'   | 'VAT'    |
 			| 'Ferron BP'   | 'Company Ferron BP'   | ''             | '847,46'         | '0%'     |
 		And I close all client application windows						
 
@@ -1014,14 +1014,14 @@ Scenario: _090219 check tax in the BR (depend of transaction type)
 	* Check tax rate
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner'     | 'LegalName'               | 'Tax amount'   | 'Total amount'   | 'VAT'   | 'Net amount'    |
+			| 'Partner'     | 'Legal name'               | 'Tax amount'   | 'Total amount'   | 'VAT'   | 'Net amount'    |
 			| 'Ferron BP'   | 'Company Ferron BP'   | '152,54'       | '1 000,00'       | '18%'   | '847,46'        |
 	* Change transaction type and check tax rate
 		And I select "Return from vendor" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table became equal
-			| 'Partner'     | 'LegalName'               | 'Tax amount'   | 'Total amount'   | 'VAT'    |
+			| 'Partner'     | 'Legal name'               | 'Tax amount'   | 'Total amount'   | 'VAT'    |
 			| 'Ferron BP'   | 'Company Ferron BP'   | ''             | '847,46'         | '0%'     |
 		And I close all client application windows	
 

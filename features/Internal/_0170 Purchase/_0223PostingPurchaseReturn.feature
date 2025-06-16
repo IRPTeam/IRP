@@ -575,7 +575,7 @@ Scenario: _022311 create Purchase return with partner Other
 			| 'ItemListTotalOffersAmount' | "0,00"             | ''            |
 			| 'ItemListTotalTaxAmount'    | "27,00"            | ''            |
 			| 'ItemListTotalTotalAmount'  | "177,00"           | ''            |
-			| 'LegalName'                 | "Other partner 2"  | ''            |
+			| 'Legal name'                 | "Other partner 2"  | ''            |
 			| 'Partner'                   | "Other partner 2"  | ''            |
 			| 'PriceIncludeTax'           | "No"               | ''            |
 			| 'Store'                     | "Store 01"         | ''            |

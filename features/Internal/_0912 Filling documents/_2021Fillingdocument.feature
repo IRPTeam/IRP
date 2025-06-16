@@ -2264,7 +2264,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			| 'NDB'            |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Payer'          |
+			| 'Partner'   | 'LegalName'          |
 			| 'NDB'       | 'Company NDB'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
@@ -2276,7 +2276,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			| 'Nicoletta'      |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| 'Partner'     | 'Partner term'                                | 'Payer'                |
+			| 'Partner'     | 'Partner term'                                | 'LegalName'                |
 			| 'Nicoletta'   | 'Posting by Standard Partner term Customer'   | 'Company Nicoletta'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms
@@ -2320,7 +2320,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		And I click Clear button of "Partner term" field
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term'   | 'Total amount'   | 'Payer'             | 'Basis document'    |
+			| 'Partner'   | 'Partner term'   | 'Total amount'   | 'LegalName'             | 'Basis document'    |
 			| 'Kalipso'   | ''               | '11 000,00'      | 'Company Kalipso'   | ''                  |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
@@ -2352,7 +2352,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			| 'Given form with "Documents for incoming payment" header is opened in the active window'    |
 	* Check the currency form connection
 		And I go to line in "PaymentList" table
-			| 'Partner'   | 'Payer'              |
+			| 'Partner'   | 'LegalName'              |
 			| 'Kalipso'   | 'Company Kalipso'    |
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in "Total amount" field of "PaymentList" table
@@ -2364,7 +2364,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			| 'Reporting currency'   | 'Reporting'   | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '17,12'     |
 		And I close current window	
 		And I go to line in "PaymentList" table
-			| 'Partner'     | 'Payer'                |
+			| 'Partner'     | 'LegalName'                |
 			| 'Nicoletta'   | 'Company Nicoletta'    |
 		And I select current line in "PaymentList" table
 		And I input "200,00" text in "Total amount" field of "PaymentList" table
@@ -2381,7 +2381,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		And I input "01.11.2018  0:00:00" text in "Date" field
 		And I move to "Payments" tab
 		And I go to line in "PaymentList" table
-			| 'Partner'     | 'Payer'                |
+			| 'Partner'     | 'LegalName'                |
 			| 'Nicoletta'   | 'Company Nicoletta'    |
 		And I click the button named "EditCurrencies"
 		And "CurrenciesTable" table became equal
@@ -2391,7 +2391,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '200'       |
 		And I close current window	
 		And I go to line in "PaymentList" table
-			| 'Partner'   | 'Payer'              |
+			| 'Partner'   | 'LegalName'              |
 			| 'Kalipso'   | 'Company Kalipso'    |
 		And I click the button named "EditCurrencies"
 		And "CurrenciesTable" table became equal
@@ -2401,7 +2401,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		And I close current window	
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
-			| 'Partner'   | 'Payer'              |
+			| 'Partner'   | 'LegalName'              |
 			| 'Kalipso'   | 'Company Kalipso'    |
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
@@ -2489,7 +2489,7 @@ Scenario: _0154108 total amount calculation in Cash receipt
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 010,00"
 	* Copy line and check Total amount calculation
 		And I go to line in "PaymentList" table
-			| 'Total amount'   | 'Partner'   | 'Partner term'                       | 'Payer'              |
+			| 'Total amount'   | 'Partner'   | 'Partner term'                       | 'LegalName'              |
 			| '550,00'         | 'Kalipso'   | 'Basic Partner terms, without VAT'   | 'Company Kalipso'    |
 		And I activate "Partner term" field in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
@@ -2543,7 +2543,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 			| 'NDB'            |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Payer'          |
+			| 'Partner'   | 'LegalName'          |
 			| 'NDB'       | 'Company NDB'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
@@ -2555,7 +2555,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 			| 'Nicoletta'      |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| 'Partner'     | 'Partner term'                                | 'Payer'                |
+			| 'Partner'     | 'Partner term'                                | 'LegalName'                |
 			| 'Nicoletta'   | 'Posting by Standard Partner term Customer'   | 'Company Nicoletta'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms
@@ -2599,7 +2599,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 		And I click Clear button of "Partner term" field
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term'   | 'Total amount'   | 'Payer'             | 'Basis document'    |
+			| 'Partner'   | 'Partner term'   | 'Total amount'   | 'LegalName'             | 'Basis document'    |
 			| 'Kalipso'   | ''               | '11 000,00'      | 'Company Kalipso'   | ''                  |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
@@ -2631,19 +2631,19 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 			| 'Given form with "Documents for incoming payment" header is opened in the active window'    |
 	* Check the currency form connection
 		And I go to line in "PaymentList" table
-			| 'Partner'   | 'Payer'              |
+			| 'Partner'   | 'LegalName'              |
 			| 'Kalipso'   | 'Company Kalipso'    |
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
-			| 'Partner'     | 'Payer'                |
+			| 'Partner'     | 'LegalName'                |
 			| 'Nicoletta'   | 'Company Nicoletta'    |
 		And I select current line in "PaymentList" table
 		And I input "200,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
-			| 'Partner'   | 'Payer'              |
+			| 'Partner'   | 'LegalName'              |
 			| 'Kalipso'   | 'Company Kalipso'    |
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in "Total amount" field of "PaymentList" table
@@ -2655,7 +2655,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 			| 'Reporting currency'   | 'Reporting'   | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '17,12'     |
 		And I close current window	
 		And I go to line in "PaymentList" table
-			| 'Partner'     | 'Payer'                |
+			| 'Partner'     | 'LegalName'                |
 			| 'Nicoletta'   | 'Company Nicoletta'    |
 		And I select current line in "PaymentList" table
 		And I input "200,00" text in "Total amount" field of "PaymentList" table
@@ -2672,7 +2672,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 		And I input "01.11.2018  0:00:00" text in "Date" field
 		And I move to "Payments" tab
 		And I go to line in "PaymentList" table
-			| 'Partner'     | 'Payer'                |
+			| 'Partner'     | 'LegalName'                |
 			| 'Nicoletta'   | 'Company Nicoletta'    |
 		And I click the button named "EditCurrencies"
 		And "CurrenciesTable" table became equal
@@ -2682,7 +2682,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '200'       |
 		And I close current window	
 		And I go to line in "PaymentList" table
-			| 'Partner'   | 'Payer'              |
+			| 'Partner'   | 'LegalName'              |
 			| 'Kalipso'   | 'Company Kalipso'    |
 		And I click the button named "EditCurrencies"
 		And "CurrenciesTable" table became equal
@@ -2692,7 +2692,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 		And I close current window	
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
-			| 'Partner'   | 'Payer'              |
+			| 'Partner'   | 'LegalName'              |
 			| 'Kalipso'   | 'Company Kalipso'    |
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
@@ -2764,7 +2764,7 @@ Scenario: _0154110 total amount calculation in Bank receipt
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 010,00"
 	* Copy line and check Total amount calculation
 		And I go to line in "PaymentList" table
-			| 'Total amount'   | 'Partner'   | 'Partner term'                       | 'Payer'              |
+			| 'Total amount'   | 'Partner'   | 'Partner term'                       | 'LegalName'              |
 			| '550,00'         | 'Kalipso'   | 'Basic Partner terms, without VAT'   | 'Company Kalipso'    |
 		And I activate "Partner term" field in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
@@ -2835,7 +2835,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 			| 'NDB'            |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Payee'          |
+			| 'Partner'   | 'LegalName'          |
 			| 'NDB'       | 'Company NDB'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
@@ -2847,7 +2847,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 			| 'Veritas'        |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term'                                 | 'Payee'              |
+			| 'Partner'   | 'Partner term'                                 | 'LegalName'              |
 			| 'Veritas'   | 'Posting by Standard Partner term (Veritas)'   | 'Company Veritas'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms (for vendor)
@@ -2890,7 +2890,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		And I click Clear button of "Partner term" field
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'     | 'Partner term'   | 'Total amount'   | 'Payee'               | 'Basis document'    |
+			| 'Partner'     | 'Partner term'   | 'Total amount'   | 'LegalName'               | 'Basis document'    |
 			| 'Ferron BP'   | ''               | '13 000,00'      | 'Company Ferron BP'   | ''                  |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
@@ -2922,13 +2922,13 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 			| 'Given form with "Documents for incoming payment" header is opened in the active window'    |
 	* Check the currency form connection
 		And I go to line in "PaymentList" table
-			| 'Partner'     | 'Payee'                |
+			| 'Partner'     | 'LegalName'                |
 			| 'Ferron BP'   | 'Company Ferron BP'    |
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
-			| 'Partner'   | 'Payee'               |
+			| 'Partner'   | 'LegalName'               |
 			| 'Veritas'   | 'Company Veritas '    |
 		And I select current line in "PaymentList" table
 		And I input "200,00" text in "Total amount" field of "PaymentList" table
@@ -2977,7 +2977,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		And I close current window		
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
-			| 'Partner'     | 'Payee'                |
+			| 'Partner'     | 'LegalName'                |
 			| 'Ferron BP'   | 'Company Ferron BP'    |
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
@@ -3056,7 +3056,7 @@ Scenario: _0154112 total amount calculation in Cash payment
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "13 460,00"
 	* Copy line and check Total amount calculation
 		And I go to line in "PaymentList" table
-			| 'Total amount'   | 'Partner'     | 'Partner term'         | 'Payee'                |
+			| 'Total amount'   | 'Partner'     | 'Partner term'         | 'LegalName'                |
 			| '13 000,00'      | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Company Ferron BP'    |
 		And I activate "Partner term" field in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
@@ -3111,7 +3111,7 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 			| 'NDB'            |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Payee'          |
+			| 'Partner'   | 'LegalName'          |
 			| 'NDB'       | 'Company NDB'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check filling in partner term when adding a partner if the partner has only one
@@ -3123,7 +3123,7 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 			| 'Veritas'        |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term'                                 | 'Payee'              |
+			| 'Partner'   | 'Partner term'                                 | 'LegalName'              |
 			| 'Veritas'   | 'Posting by Standard Partner term (Veritas)'   | 'Company Veritas'    |
 		And in the table "PaymentList" I click "Delete" button
 	* Check the display to select only available partner terms
@@ -3166,7 +3166,7 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I click Clear button of "Partner term" field
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'     | 'Partner term'   | 'Total amount'   | 'Payee'               | 'Basis document'    |
+			| 'Partner'     | 'Partner term'   | 'Total amount'   | 'LegalName'               | 'Basis document'    |
 			| 'Ferron BP'   | ''               | '13 000,00'      | 'Company Ferron BP'   | ''                  |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
@@ -3198,13 +3198,13 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 			| 'Given form with "Documents for incoming payment" header is opened in the active window'    |
 	* Check the currency form connection
 		And I go to line in "PaymentList" table
-			| 'Partner'     | 'Payee'                |
+			| 'Partner'     | 'LegalName'                |
 			| 'Ferron BP'   | 'Company Ferron BP'    |
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
-			| 'Partner'   | 'Payee'               |
+			| 'Partner'   | 'LegalName'               |
 			| 'Veritas'   | 'Company Veritas '    |
 		And I select current line in "PaymentList" table
 		And I input "200,00" text in "Total amount" field of "PaymentList" table
@@ -3253,7 +3253,7 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I close current window
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
-			| 'Partner'     | 'Payee'                |
+			| 'Partner'     | 'LegalName'                |
 			| 'Ferron BP'   | 'Company Ferron BP'    |
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
@@ -3332,7 +3332,7 @@ Scenario: _0154114 total amount calculation in Bank payment
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "13 460,00"
 	* Copy line and check Total amount calculation
 		And I go to line in "PaymentList" table
-			| 'Total amount'   | 'Partner'     | 'Partner term'         | 'Payee'                |
+			| 'Total amount'   | 'Partner'     | 'Partner term'         | 'LegalName'                |
 			| '13 000,00'      | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Company Ferron BP'    |
 		And I activate "Partner term" field in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
@@ -4129,9 +4129,9 @@ Scenario: _0154118 check the details cleaning on the form Cash receipt
 			| Nicoletta      |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Partner term'                               | 'Payer'               |
+		| 'Partner'    | 'Partner term'                               | 'LegalName'               |
 		| 'Nicoletta'  | 'Posting by Standard Partner term Customer'  | 'Company Nicoletta'   |
-	* Check clearing fields 'Partner term' and 'Payer' when re-selecting the type of operation to Currency exchange
+	* Check clearing fields 'Partner term' and 'LegalName' when re-selecting the type of operation to Currency exchange
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -4142,7 +4142,7 @@ Scenario: _0154118 check the details cleaning on the form Cash receipt
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#' | 'Partner'   | 'Partner term'                              | 'Total amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
+		| '#' | 'Partner'   | 'Partner term'                              | 'Total amount' | 'LegalName' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | 'Nicoletta' | 'Posting by Standard Partner term Customer' | ''             | ''      | ''               | ''                           |
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
@@ -4152,7 +4152,7 @@ Scenario: _0154118 check the details cleaning on the form Cash receipt
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'Payer'  | 'Basis document'  | 'Planning transaction basis'   |
+		| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'LegalName'  | 'Basis document'  | 'Planning transaction basis'   |
 		| '1'  | ''         | ''              | ''              | ''       | ''                | ''                             |
 		And I close all client application windows
 
@@ -4187,9 +4187,9 @@ Scenario: _0154119 check the details cleaning on the form Cash payment when re-s
 			| Nicoletta      |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Partner term'                               | 'Payee'               |
+		| 'Partner'    | 'Partner term'                               | 'LegalName'               |
 		| 'Nicoletta'  | 'Posting by Standard Partner term Customer'  | 'Company Nicoletta'   |
-	* Check clearing fields 'Partner term' and 'Payee' when re-selecting the type of operation to Currency exchange
+	* Check clearing fields 'Partner term' and 'LegalName' when re-selecting the type of operation to Currency exchange
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -4200,7 +4200,7 @@ Scenario: _0154119 check the details cleaning on the form Cash payment when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#'  | 'Partner'    | 'Partner term'  | 'Total amount'  | 'Payee'  | 'Basis document'  | 'Planning transaction basis'   |
+		| '#'  | 'Partner'    | 'Partner term'  | 'Total amount'  | 'LegalName'  | 'Basis document'  | 'Planning transaction basis'   |
 		| '1'  | 'Nicoletta'  | ''              | ''              | ''       | ''                | ''                             |
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
@@ -4210,7 +4210,7 @@ Scenario: _0154119 check the details cleaning on the form Cash payment when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'Payee'  | 'Basis document'  | 'Planning transaction basis'   |
+		| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'LegalName'  | 'Basis document'  | 'Planning transaction basis'   |
 		| '1'  | ''         | ''              | ''              | ''       | ''                | ''                             |
 		And I close all client application windows
 
@@ -4243,9 +4243,9 @@ Scenario: _0154120 check the details cleaning on the form Bank receipt when re-s
 			| Nicoletta      |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| 'Partner'    | 'Partner term'                               | 'Payer'               |
+			| 'Partner'    | 'Partner term'                               | 'LegalName'               |
 			| 'Nicoletta'  | 'Posting by Standard Partner term Customer'  | 'Company Nicoletta'   |
-	* Check clearing fields 'Partner term' and 'Payer' when re-selecting the type of operation to Currency exchange
+	* Check clearing fields 'Partner term' and 'LegalName' when re-selecting the type of operation to Currency exchange
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -4258,7 +4258,7 @@ Scenario: _0154120 check the details cleaning on the form Bank receipt when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-			| '#'   | 'Partner'   | 'Partner term'   | 'Total amount'   | 'Payer'   | 'Basis document'   | 'Planning transaction basis'    |
+			| '#'   | 'Partner'   | 'Partner term'   | 'Total amount'   | 'LegalName'   | 'Basis document'   | 'Planning transaction basis'    |
 			| '1'   | ''          | ''               | ''               | ''        | ''                 | ''                              |
 		Then the form attribute named "TransitAccount" became equal to ""
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
@@ -4269,7 +4269,7 @@ Scenario: _0154120 check the details cleaning on the form Bank receipt when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-			| '#'   | 'Partner'   | 'Partner term'   | 'Total amount'   | 'Payer'   | 'Basis document'   | 'Planning transaction basis'    |
+			| '#'   | 'Partner'   | 'Partner term'   | 'Total amount'   | 'LegalName'   | 'Basis document'   | 'Planning transaction basis'    |
 			| '1'   | ''          | ''               | ''               | ''        | ''                 | ''                              |
 		And I close all client application windows
 
@@ -4304,9 +4304,9 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 			| Nicoletta      |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| 'Partner'    | 'Partner term'                               | 'Payee'               |
+			| 'Partner'    | 'Partner term'                               | 'LegalName'               |
 			| 'Nicoletta'  | 'Posting by Standard Partner term Customer'  | 'Company Nicoletta'   |
-	* Check clearing fields 'Partner term' and 'Payee' when re-selecting the type of operation to Currency exchange
+	* Check clearing fields 'Partner term' and 'LegalName' when re-selecting the type of operation to Currency exchange
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -4319,7 +4319,7 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-			| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'Payee'  | 'Basis document'  | 'Planning transaction basis'   |
+			| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'LegalName'  | 'Basis document'  | 'Planning transaction basis'   |
 			| '1'  | ''         | ''              | ''              | ''       | ''                | ''                             |
 		Then the form attribute named "TransitAccount" became equal to ""
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
@@ -4330,7 +4330,7 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-			| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'Payee'  | 'Basis document'  | 'Planning transaction basis'   |
+			| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'LegalName'  | 'Basis document'  | 'Planning transaction basis'   |
 			| '1'  | ''         | ''              | ''              | ''       | ''                | ''                             |
 		And I close all client application windows
 
@@ -5098,7 +5098,7 @@ Scenario: _0154131 check currency form in  Bank Receipt
 		# * Reverse rate display check
 		# 	Given double click at "reverse" picture
 		# 	And I go to line in "PaymentList" table
-		# 		| 'Partner term'                               | 'Amount' | 'Partner' | 'Payer'            |
+		# 		| 'Partner term'                               | 'Amount' | 'Partner' | 'LegalName'            |
 		# 		| 'Posting by Standard Partner term (Veritas)' | '200,00' | 'Veritas' | 'Company Veritas ' |
 		# 	And I activate "Partner term" field in "PaymentList" table
 		# 	And "CurrenciesPaymentList" table contains lines
@@ -5207,7 +5207,7 @@ Scenario: _0154132 check currency form in Incoming payment order
 		# * Reverse rate display check 
 		# 	Given double click at "reverse" picture
 		# 	And I go to line in "PaymentList" table
-		# 		| 'Amount' | 'Partner' | 'Payer'            |
+		# 		| 'Amount' | 'Partner' | 'LegalName'            |
 		# 		| '200,00' | 'Veritas' | 'Company Veritas ' |
 		# 	And "PaymentListCurrencies" table contains lines
 		# 		| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
@@ -5315,7 +5315,7 @@ Scenario: _0154133 check currency form in Outgoing payment order
 		# * Reverse rate display check 
 		# 	Given double click at "reverse" picture
 		# 	And I go to line in "PaymentList" table
-		# 		| 'Amount' | 'Partner' | 'Payer'            |
+		# 		| 'Amount' | 'Partner' | 'LegalName'            |
 		# 		| '200,00' | 'Veritas' | 'Company Veritas ' |
 		# 	And "PaymentListCurrencies" table contains lines
 		# 		| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
@@ -8989,7 +8989,7 @@ Scenario: _0154193 check auto filling partner term in the BR (filter by transact
 		And I select "Payment from customer by POS" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term'     |
+			| 'Partner' | 'LegalName'       | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
@@ -9013,7 +9013,7 @@ Scenario: _0154195 check auto filling partner term in the BP (filter by transact
 		And I select "Return to customer by POS" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term'     |
+			| 'Partner' | 'LegalName'       | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
@@ -9030,7 +9030,7 @@ Scenario: _0154196 check auto filling partner term in the BP (filter by transact
 		And I select "Payment from customer by POS" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term'     |
+			| 'Partner' | 'LegalName'       | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |

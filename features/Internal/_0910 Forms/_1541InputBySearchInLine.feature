@@ -1020,7 +1020,7 @@ Scenario: _0154083 check company, Cash accounts, transaction type, currency, par
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Payee'              | 'Partner term'         |
+		| 'Partner'    | 'LegalName'              | 'Partner term'         |
 		| 'Ferron BP'  | 'Company Ferron BP'  | 'Vendor Ferron, USD'   |
 	And I close all client application windows
 
@@ -1054,7 +1054,7 @@ Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Payee'              | 'Partner term'         |
+		| 'Partner'    | 'LegalName'              | 'Partner term'         |
 		| 'Ferron BP'  | 'Company Ferron BP'  | 'Vendor Ferron, USD'   |
 	And I close all client application windows
 
@@ -1087,7 +1087,7 @@ Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Payer'              | 'Partner term'   |
+		| 'Partner'    | 'LegalName'              | 'Partner term'   |
 		| 'Ferron BP'  | 'Company Ferron BP'  | 'Ferron, USD'    |
 	And I close all client application windows
 
@@ -1120,7 +1120,7 @@ Scenario: _0154086 check company, Cash accounts, transaction type, currency, par
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Payer'              | 'Partner term'   |
+		| 'Partner'    | 'LegalName'              | 'Partner term'   |
 		| 'Ferron BP'  | 'Company Ferron BP'  | 'Ferron, USD'    |
 	And I close all client application windows
 
@@ -1331,7 +1331,7 @@ Scenario: _0154089 check company, account, currency input by search in line in I
 		Then the form attribute named "Account" became equal to "Cash desk №2"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Payer'                      |
+		| 'Partner'    | 'LegalName'                      |
 		| 'Ferron BP'  | 'Second Company Ferron BP'   |
 		And I close all client application windows
 
@@ -1356,7 +1356,7 @@ Scenario: _0154090 check company, account, currency input by search in line in O
 		Then the form attribute named "Account" became equal to "Cash desk №2"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Payee'                      |
+		| 'Partner'    | 'LegalName'                      |
 		| 'Ferron BP'  | 'Second Company Ferron BP'   |
 		And I close all client application windows
 
@@ -1788,7 +1788,7 @@ Scenario: _01540114 check item input by search in line by code in a document Ban
 	* Payee
 		And I select "46" from "Payee" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Payee'                |
+			| 'LegalName'                |
 			| 'Company Ferron BP'    |
 	* Partner term
 		And I select "49" from "Partner term" drop-down list by string in "PaymentList" table

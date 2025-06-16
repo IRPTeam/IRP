@@ -2150,7 +2150,7 @@ Scenario: check filter by transaction type in CR/BR
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term'     |
+			| 'Partner' | 'LegalName'       | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 		And I select current line in "PaymentList" table
 		And I click choice button of the attribute named "PaymentListAgreement" in "PaymentList" table
@@ -2165,26 +2165,26 @@ Scenario: check filter by transaction type in CR/BR
 		And I select "Return from vendor" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term'            |
+			| 'Partner' | 'LegalName'       | 'Partner term'            |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 	* Add second line and check partner term
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term'            |
+			| 'Partner' | 'LegalName'       | 'Partner term'            |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 	* Select transaction type Other partner
 		And I select "Other partner" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term' |
+			| 'Partner' | 'LegalName'       | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term' |
+			| 'Partner' | 'LegalName'       | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
@@ -2200,7 +2200,7 @@ Scenario: check filter by transaction type in CP/BP
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term'            |
+			| 'Partner' | 'LegalName'       | 'Partner term'            |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 		And I select current line in "PaymentList" table
 		And I click choice button of the attribute named "PaymentListAgreement" in "PaymentList" table
@@ -2215,26 +2215,26 @@ Scenario: check filter by transaction type in CP/BP
 		And I select "Return to customer" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term'     |
+			| 'Partner' | 'LegalName'       | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 	* Add second line and check partner term
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term'     |
+			| 'Partner' | 'LegalName'       | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 	* Select transaction type Other partner
 		And I select "Other partner" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term' |
+			| 'Partner' | 'LegalName'       | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term' |
+			| 'Partner' | 'LegalName'       | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |

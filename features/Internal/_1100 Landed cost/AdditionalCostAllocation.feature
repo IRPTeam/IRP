@@ -1585,7 +1585,7 @@ Scenario: _101 check Additional Cost Allocation (by document, by amount)
 			| 'Purchase invoice 5 dated 15.08.2021 16:56:10'     | 'Main Company' |
 			| 'Purchase invoice 6 dated 15.08.2021 16:56:11'     | 'Main Company' |
 			| 'Purchase invoice 8 dated 17.08.2021 13:04:13'     | 'Main Company' |
-			| 'Purchase invoice 9 021 dated 01.12.2022 0:00:00'  | 'Main Company' |
+			| 'Purchase invoice 9 021 dated 01.12.2022 00:00:00' | 'Main Company' |
 			| 'Purchase invoice 9 023 dated 01.03.2023 12:00:00' | 'Main Company' |
 			| 'Purchase invoice 9 028 dated 02.04.2023 12:04:41' | 'Main Company' |
 			| 'Purchase invoice 9 030 dated 02.04.2023 12:23:49' | 'Main Company' |

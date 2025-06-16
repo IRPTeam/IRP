@@ -142,11 +142,14 @@ Function GetExecutionFlowchart(ProcessRef) Export
 				?(QuerySelection.TaskType = Enums.TaskTypes.Confirmation, Enums.TaskResults.Confirmed,
 					Enums.TaskResults.EmptyRef())))));
 			
-			If Not QuerySelection.Executed Then
+			If QuerySelection.Canceled Then
+				TaskArea.Area(1, 2, 1, 2).TextColor = WebColors.Red;
+			ElsIf Not QuerySelection.Executed Then
 				If QuerySelection.CurrentTask Then
 					TaskArea.Area(1, 2, 1, 2).TextColor = WebColors.Green;
 				Else
 					TaskArea.Area(1, 2, 1, 2).TextColor = WebColors.Gray;
+					TaskArea.Area(1, 2, 1, 2).Font = New Font(TaskArea.Area(1, 2, 1, 2).Font, , , , True); 
 				EndIf;
 			EndIf;
 			

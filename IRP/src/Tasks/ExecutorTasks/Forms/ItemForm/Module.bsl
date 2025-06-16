@@ -4,14 +4,10 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	FormNamesArray = StrSplit(ThisObject.FormName, ".");
-	CatalogFullName = FormNamesArray[0] + "." + FormNamesArray[1];
-	
-	ExternalCommandsServer.CreateCommands(ThisObject, CatalogFullName, Enums.FormTypes.ObjectForm);
-	InternalCommandsServer.CreateCommands(ThisObject, Object, CatalogFullName, Enums.FormTypes.ObjectForm);
-	
+	If Object.Ref.IsEmpty() Then
+		Cancel = True;
+	EndIf;
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	
 	SetVisible();
 EndProcedure
 
@@ -31,9 +27,7 @@ EndProcedure
 //  StandardProcessing - Boolean - Standard processing
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
-	If Object.Ref.IsEmpty() Then
-		LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
-	EndIf;
+	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -41,54 +35,21 @@ Procedure AcceptForExecution(Command)
 	AcceptForExecutionServer();
 EndProcedure
 
-#EndRegion
-
-#Region COMMANDS
-
-// Generated form command action by name.
-// 
-// Parameters:
-//  Command - FormCommand - Command
 &AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);
+Procedure Comleted(Command)
+	ComletedAtServer();
+	Close();
 EndProcedure
 
-// Generated form command action by name server.
-// 
-// Parameters:
-//  CommandName - String - Command name
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
-EndProcedure
-
-// Internal command action.
-// 
-// Parameters:
-//  Command - FormCommand - Command
 &AtClient
-Procedure InternalCommandAction(Command) Export
-	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
-EndProcedure
-
-// Internal command action with server context.
-// 
-// Parameters:
-//  Command - FormCommand - Command
-&AtClient
-Procedure InternalCommandActionWithServerContext(Command) Export
-	InternalCommandActionWithServerContextAtServer(Command.Name);
-EndProcedure
-
-// Internal command action with server context at server.
-// 
-// Parameters:
-//  CommandName - String - Command name
-&AtServer
-Procedure InternalCommandActionWithServerContextAtServer(CommandName)
-	InternalCommandsServer.RunCommandAction(CommandName, ThisObject, Object, Object.Ref);
+Procedure Canceled(Command)
+	If IsBlankString(Object.Comment) Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_149, "Object.Comment");
+		Return;
+	EndIf;
+	
+	ComletedAtServer(True);
+	Close();
 EndProcedure
 
 #EndRegion
@@ -103,7 +64,25 @@ Procedure SetVisible()
 	Items.Branch.Visible = Not Object.Branch.IsEmpty();
 	Items.ProfitLossCenter.Visible = Not Object.ProfitLossCenter.IsEmpty();
 	
-	ThisObject.Items.FormAcceptForExecution.Visible = Object.CurrentExecutor.IsEmpty();
+	Items.AcceptForExecution.Visible = Object.CurrentExecutor.IsEmpty();
+	
+	//@skip-check statement-type-change, property-return-type
+	If Object.TaskType = Enums.TaskTypes.Execution Then
+		Items.FormComleted.Title = R().Task_Result_Execution;
+		Items.FormCanceled.Title = R().Task_Result_Execution_Not;
+		
+	ElsIf Object.TaskType = Enums.TaskTypes.Verification Then
+		Items.FormComleted.Title = R().Task_Result_Verification;
+		Items.FormCanceled.Title = R().Task_Result_Verification_Not;
+		
+	ElsIf Object.TaskType = Enums.TaskTypes.Confirmation Then
+		Items.FormComleted.Title = R().Task_Result_Confirmation;
+		Items.FormCanceled.Title = R().Task_Result_Confirmation_Not;
+		
+	EndIf;
+	
+	Items.FormComleted.Enabled = Not Object.Executed;
+	Items.FormCanceled.Enabled = Not Object.Executed;
 	
 EndProcedure
 
@@ -115,6 +94,17 @@ Procedure AcceptForExecutionServer()
 	
 	Write();
 	
+EndProcedure
+
+&AtServer
+Procedure ComletedAtServer(Canceled = False)
+	
+	ServerObject = FormAttributeToValue("Object");
+	ServerObject.Canceled = Canceled;
+	ServerObject.ExecuteTask();
+	
+	ThisObject.Read();
+		
 EndProcedure
 
 #EndRegion

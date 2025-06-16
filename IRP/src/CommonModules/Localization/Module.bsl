@@ -2359,5 +2359,14 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	
 #EndRegion
 
+#Region Tasks
+    Strings.Insert("Task_Result_Execution", NStr("en = 'Done'", Lang));
+	Strings.Insert("Task_Result_Execution_Not", NStr("en = 'Not done'", Lang));
+    Strings.Insert("Task_Result_Verification", NStr("en = 'Success'", Lang));
+	Strings.Insert("Task_Result_Verification_Not", NStr("en = 'Failure'", Lang));
+    Strings.Insert("Task_Result_Confirmation", NStr("en = 'Confirmed'", Lang));
+	Strings.Insert("Task_Result_Confirmation_Not", NStr("en = 'Rejected'", Lang));
+#EndRegion
+
 	Return Strings;
 EndFunction

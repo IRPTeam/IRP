@@ -103,6 +103,7 @@
   <currentPerformer>SessionParameter.CurrentUser</currentPerformer>
   <editType>InDialog</editType>
   <defaultObjectForm>Task.ExecutorTasks.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Task.ExecutorTasks.Form.ListForm</defaultListForm>
   <attributes uuid="31d35137-351f-4664-ab13-fa0001bc1ef0">
     <name>TaskID</name>
     <synonym>
@@ -132,6 +133,20 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="dd956db2-fbe2-41c8-bb86-c02d567fc1b8">
+    <name>TaskType</name>
+    <synonym>
+      <key>en</key>
+      <value>Task type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.TaskTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -218,6 +233,15 @@
     <synonym>
       <key>en</key>
       <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="d2372d06-c778-499e-be9a-984e0a0cadab">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

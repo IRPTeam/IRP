@@ -89,7 +89,8 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	EndIf;
 	
 	If Not Cancel = True Then
-		If ThisObject.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase Then
+		If ThisObject.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase 
+			Or ThisObject.TransactionType = Enums.GoodsReceiptTransactionTypes.PreliminaryStock Then
 			ItemListTable = CommissionTradeServer.GetItemListTable(ThisObject);
 			CommissionTradeServer.FillCheckProcessing_Purchase(Cancel, ItemListTable, ThisObject.TransactionType);
 		ElsIf ThisObject.TransactionType = Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor Then

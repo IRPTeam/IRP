@@ -2,78 +2,21 @@
 // Simple batch average cost calculation server module.
 // This module implements weighted average cost calculation for SimpleBatch register (R6025B_SimpleBatch).
 
-// strict-types
+// @strict-types
 
 #Region PublicAPI
-
-// Calculate average cost for simple batch at specified period.
-// This function calculates weighted average cost based on quantity and amount from R6025B_SimpleBatch register.
-// 
-// Parameters:
-//  SimpleBatch - CatalogRef.SimpleBatch - Simple batch reference for cost calculation
-//  CalculationDate - Date - Date for which calculate average cost
-//  Company - CatalogRef.Companies - Company filter (optional)
-// 
-// Returns:
-//  Structure - Calculation result:
-//   * AverageCost - Number - Calculated average cost per unit
-//   * TotalQuantity - Number - Total quantity in stock  
-//   * TotalAmount - Number - Total amount in stock
-//   * IsCalculated - Boolean - True if calculation was successful
-Function CalculateAverageCost(SimpleBatch, CalculationDate, Company = Undefined) Export
-	
-	If Not ValueIsFilled(SimpleBatch) Then
-		Return GetEmptyCalculationResult();
-	EndIf;
-	
-	Query = New Query;
-	Query.Text = 
-		"SELECT
-		|	SimpleBatchTurnovers.SimpleBatch AS SimpleBatch,
-		|	SimpleBatchTurnovers.QuantityTurnover AS QuantityTurnover,
-		|	SimpleBatchTurnovers.AmountTurnover AS AmountTurnover
-		|FROM
-		|	AccumulationRegister.R6025B_SimpleBatch.Turnovers(
-		|			,
-		|			&EndDate,
-		|			,
-		|			SimpleBatch = &SimpleBatch) AS SimpleBatchTurnovers
-		|WHERE
-		|	SimpleBatchTurnovers.SimpleBatch = &SimpleBatch";
-	
-	Query.SetParameter("SimpleBatch", SimpleBatch);
-	Query.SetParameter("EndDate", CalculationDate);
-	
-	QueryResult = Query.Execute();
-	Selection = QueryResult.Select();
-	
-	Result = GetEmptyCalculationResult();
-	
-	If Selection.Next() Then
-		Result.TotalQuantity = Selection.QuantityTurnover;
-		Result.TotalAmount = Selection.AmountTurnover;
-		
-		If Result.TotalQuantity > 0 And Result.TotalAmount > 0 Then
-			Result.AverageCost = Result.TotalAmount / Result.TotalQuantity;
-			Result.IsCalculated = True;
-		EndIf;
-	EndIf;
-	
-	Return Result;
-	
-EndFunction
 
 // Calculate average cost for multiple simple batches at specified period.
 // This function is optimized for bulk calculations.
 // 
 // Parameters:
 //  SimpleBatchArray - Array of CatalogRef.SimpleBatch - Array of simple batch references
-//  CalculationDate - Date - Date for which calculate average cost
+//  CalculationDate - Date, Boundary - Date for which calculate average cost
 // 
 // Returns:
 //  Map - Calculation results:
 //   * Key - CatalogRef.SimpleBatch - Simple batch reference
-//   * Value - Structure - See CalculateAverageCost result
+//   * Value - See CalculateAverageCost
 Function CalculateAverageCostBulk(SimpleBatchArray, CalculationDate) Export
 	
 	Results = New Map;
@@ -82,22 +25,7 @@ Function CalculateAverageCostBulk(SimpleBatchArray, CalculationDate) Export
 		Return Results;
 	EndIf;
 	
-	Query = New Query;
-	Query.Text = 
-		"SELECT
-		|	SimpleBatchTurnovers.SimpleBatch AS SimpleBatch,
-		|	SimpleBatchTurnovers.QuantityBalance AS QuantityBalance,
-		|	SimpleBatchTurnovers.AmountBalance AS AmountBalance
-		|FROM
-		|	AccumulationRegister.R6025B_SimpleBatch.Balance(
-		|			&EndDate,
-		|			SimpleBatch IN (&SimpleBatchArray)) AS SimpleBatchTurnovers";
-	
-	Query.SetParameter("SimpleBatchArray", SimpleBatchArray);
-	Query.SetParameter("EndDate", CalculationDate);
-	
-	QueryResult = Query.Execute();
-	Selection = QueryResult.Select();
+	Selection = GetCurrentAmounts(SimpleBatchArray, CalculationDate);
 	
 	// Initialize empty results for all batches
 	For Each SimpleBatch In SimpleBatchArray Do
@@ -109,11 +37,18 @@ Function CalculateAverageCostBulk(SimpleBatchArray, CalculationDate) Export
 		Result = GetEmptyCalculationResult();
 		Result.TotalQuantity = Selection.QuantityBalance;
 		Result.TotalAmount = Selection.AmountBalance;
+		Result.FinalAmount = Selection.FinalAmountBalance;
+		Result.FinalQuantity = Selection.FinalQuantityBalance;
 		
 		If Result.TotalQuantity > 0 And Result.TotalAmount > 0 Then
 			Result.AverageCost = Result.TotalAmount / Result.TotalQuantity;
 		Else
 			Result.AverageCost = 0;
+		EndIf;
+		If Result.TotalQuantity > 0 And Result.FinalAmount > 0 AND Result.FinalQuantity > 0 Then
+			Result.FinalAverageCost = Result.FinalAmount / Result.FinalQuantity;
+		Else
+			Result.FinalAverageCost = 0;
 		EndIf;
 		
 		Results.Insert(Selection.SimpleBatch, Result);
@@ -123,15 +58,52 @@ Function CalculateAverageCostBulk(SimpleBatchArray, CalculationDate) Export
 	
 EndFunction
 
+// Get current amounts.
+// 
+// Parameters:
+//  SimpleBatchArray - Array of CatalogRef.SimpleBatch - Simple batch array
+//  CalculationDate - Date, Boundary - Calculation date
+// 
+// Returns:
+//  QueryResultSelection - Get current amounts:
+//  * SimpleBatch - CatalogRef.SimpleBatch
+//  * QuantityBalance - Number
+//  * AmountBalance - Number
+//  * FinalAmountBalance - Number
+//  * FinalQuantityBalance - Number
+Function GetCurrentAmounts(SimpleBatchArray, CalculationDate)
+	Query = New Query;
+	Query.Text = 
+		"SELECT
+		|	SimpleBatchTurnovers.SimpleBatch AS SimpleBatch,
+		|	SimpleBatchTurnovers.QuantityBalance AS QuantityBalance,
+		|	SimpleBatchTurnovers.AmountBalance AS AmountBalance,
+		|	SimpleBatchTurnovers.FinalAmountBalance AS FinalAmountBalance,
+		|	SimpleBatchTurnovers.FinalQuantityBalance AS FinalQuantityBalance
+		|FROM
+		|	AccumulationRegister.R6025B_SimpleBatch.Balance(
+		|			&EndDate,
+		|			SimpleBatch IN (&SimpleBatchArray)) AS SimpleBatchTurnovers";
+	
+	Query.SetParameter("SimpleBatchArray", SimpleBatchArray);
+	Query.SetParameter("EndDate", CalculationDate);
+	
+	Return Query.Execute().Select();
+EndFunction
+
 // Update cost for outgoing movements based on average cost calculation.
 // This procedure should be called during posting of documents with expense movements.
 // 
 // Parameters:
 //  Ref - DocumentRefDocumentName -
-//  CurrentMovements - ValueTable -
+//  CurrentMovements - ValueTable - :
+//  * SimpleBatch - CatalogRef.SimpleBatch
+//  * Quantity - Number 
+//  * Amount - Number 
+//  * FinalAmount - Number 
+//  Cancel - Boolean -
 //  BatchForCheck - Array Of CatalogRef.SimpleBatch -
 //  BatchWithErrors - Array Of CatalogRef.SimpleBatch -
-//  Cancel - Boolean -
 //  AddInfo - Structure - Additional information (optional)
 Function UpdateOutgoingMovementsCost(Val Ref, Val CurrentMovements, Cancel, BatchForCheck = Undefined, BatchWithErrors = Undefined, AddInfo = Undefined) Export
 	
@@ -151,7 +123,7 @@ Function UpdateOutgoingMovementsCost(Val Ref, Val CurrentMovements, Cancel, Batc
 	
 	// Calculate average costs for all simple batches
 	If BatchForCheck = Undefined Then
-		BatchForCheck = CurrentMovements.UnloadColumn("SimpleBatch");
+		BatchForCheck = CurrentMovements.UnloadColumn("SimpleBatch"); // Array Of CatalogRef.SimpleBatch
 	EndIf;
 	CostCalculations = CalculateAverageCostBulk(BatchForCheck, New Boundary(PointInTime, BoundaryType.Excluding));
 	
@@ -173,9 +145,11 @@ Function UpdateOutgoingMovementsCost(Val Ref, Val CurrentMovements, Cancel, Batc
 		
 		If CostInfo.TotalQuantity > Movement.Quantity Then
 			Movement.Amount = Movement.Quantity * CostInfo.AverageCost;
+			Movement.FinalAmount = Movement.Quantity * CostInfo.FinalAverageCost;
 			Sequences.SimpleBatch.SetBound(PointInTime, Filter);
 		ElsIf CostInfo.TotalQuantity = Movement.Quantity Then
 			Movement.Amount = CostInfo.TotalAmount;
+			Movement.FinalAmount = CostInfo.FinalAmount;
 			Sequences.SimpleBatch.SetBound(PointInTime, Filter);
 		Else
 			If Not BatchWithErrors = Undefined Then
@@ -200,14 +174,20 @@ EndFunction
 // Returns:
 //  Structure - Empty calculation result:
 //  * AverageCost - Number
+//  * FinalAverageCost - Number
 //  * TotalQuantity - Number
 //  * TotalAmount - Number
+//  * FinalQuantity - Number
+//  * FinalAmount - Number
 Function GetEmptyCalculationResult()
 	
 	Result = New Structure;
 	Result.Insert("AverageCost", 0);
+	Result.Insert("FinalAverageCost", 0);
 	Result.Insert("TotalQuantity", 0);
 	Result.Insert("TotalAmount", 0);
+	Result.Insert("FinalAmount", 0);
+	Result.Insert("FinalQuantity", 0);
 	
 	Return Result;
 	

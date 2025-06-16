@@ -1599,6 +1599,7 @@ Function R6025B_SimpleBatch()
 	|	ItemList.Period,
 	|	ItemList.SimpleBatch,
 	|	SUM(ItemList.Quantity) AS Quantity,
+	|	SUM(ItemList.Quantity) AS FinalQuantity,
 	|	0 AS Amount
 	|INTO R6025B_SimpleBatch
 	|FROM

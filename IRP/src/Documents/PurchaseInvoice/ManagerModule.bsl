@@ -749,7 +749,9 @@ Function ItemList()
 	|SELECT
 	|	GoodsReceipts.Key AS Key,
 	|	GoodsReceipts.GoodsReceipt AS GoodsReceipt,
-	|	GoodsReceipts.Quantity AS Quantity
+	|	GoodsReceipts.Quantity AS Quantity,
+	|	GoodsReceipts.QuantityInGoodsReceipt AS QuantityInGoodsReceipt,
+	|	GoodsReceipts.BasisKey AS BasisKey
 	|INTO GoodReceiptInfo
 	|FROM
 	|	Document.PurchaseInvoice.GoodsReceipts AS GoodsReceipts
@@ -1814,20 +1816,37 @@ Function R6025B_SimpleBatch()
 	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 	|	ItemList.Period,
 	|	ItemList.SimpleBatch,
-	|	SUM(ItemList.Quantity) AS Quantity,
-	|	SUM(ItemList.Amount) AS Amount
+	|	0 AS Amount,
+	|	SUM(CASE
+	|		WHEN GoodReceiptInfo.GoodsReceipt.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.PreliminaryStock)
+	|			THEN 0
+	|		ELSE ItemList.Quantity
+	|	END) AS Quantity,
+	|	SUM(ItemList.Quantity) AS FinalQuantity,
+	|	SUM(CASE
+	|		WHEN GoodReceiptInfo.GoodsReceipt.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.PreliminaryStock)
+	|			THEN ItemList.Amount -
+	|			GoodReceiptInfo.Quantity * (GoodsReceiptItemList.Amount / GoodsReceiptItemList.Quantity)  
+	|		ELSE ItemList.Amount
+	|	END) AS FinalAmount
 	|INTO R6025B_SimpleBatch
 	|FROM
 	|	ItemList AS ItemList
 	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
 	|		ON TRUE
+	|		LEFT JOIN GoodReceiptInfo AS GoodReceiptInfo
+	|			LEFT JOIN Document.GoodsReceipt.ItemList AS GoodsReceiptItemList
+	|			ON GoodReceiptInfo.BasisKey = GoodsReceiptItemList.Key
+	|			AND GoodReceiptInfo.GoodsReceipt = GoodsReceiptItemList.Ref
+	|		ON ItemList.Key = GoodReceiptInfo.Key
 	|WHERE
 	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
 	|	AND UseSimpleBatch.Value
 	|GROUP BY
 	|	ItemList.Period,
 	|	ItemList.SimpleBatch,
-	|	VALUE(AccumulationRecordType.Receipt)";
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	ItemList.Amount";
 EndFunction
 
 #EndRegion

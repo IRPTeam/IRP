@@ -1782,6 +1782,7 @@ EndFunction
 Function GetNextStep_GR(Source, ItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If (Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase
+			Or Source.TransactionType = Enums.GoodsReceiptTransactionTypes.PreliminaryStock
 			Or Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor) 
 		And Not ValueIsFilled(ItemList.PurchaseInvoice) Then
 		NextStep = Catalogs.MovementRules.PI;
@@ -2133,6 +2134,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		RowRefObject.LegalNameSales = Source.LegalName;
 	ElsIf Is.GR Then
 		If Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase
+			Or Source.TransactionType = Enums.GoodsReceiptTransactionTypes.PreliminaryStock
 			Or Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor Then
 			RowRefObject.PartnerPurchases         = Source.Partner;
 			RowRefObject.LegalNamePurchases       = Source.LegalName;
@@ -4710,6 +4712,7 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.ItemKey AS ItemKey,
 	|	TRUE AS UseGoodsReceipt,
 	|	case when ItemList.Ref.TransactionType = value(Enum.GoodsReceiptTransactionTypes.Purchase)
+	|			Or ItemList.Ref.TransactionType = value(Enum.GoodsReceiptTransactionTypes.PreliminaryStock)
 	|			then value(Enum.PurchaseTransactionTypes.Purchase)
 	|		when ItemList.Ref.TransactionType = value(Enum.GoodsReceiptTransactionTypes.ReceiptFromConsignor)
 	|			then value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)

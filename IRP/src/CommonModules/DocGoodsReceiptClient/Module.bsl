@@ -52,7 +52,8 @@ Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing)
 		DataCompositionComparisonType.NotEqual));
 	OpenSettings.FormParameters = New Structure();
 	FilterPartnerType = "";
-	If Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase") Then
+	If Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase")
+		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.PreliminaryStock") Then
 		FilterPartnerType = "Vendor";
 	ElsIf Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer") Then
 		FilterPartnerType = "Customer";
@@ -70,7 +71,8 @@ Procedure PartnerTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	FilterPartnerType = "";
-	If Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase") Then
+	If Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase")
+		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.PreliminaryStock") Then
 		FilterPartnerType = "Vendor";
 	ElsIf Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer") Then
 		FilterPartnerType = "Customer";

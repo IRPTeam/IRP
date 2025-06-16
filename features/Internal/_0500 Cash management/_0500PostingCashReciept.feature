@@ -867,7 +867,7 @@ Scenario: _050020 create Cash receipt with transaction type Other partner
 	* Filling payment list
 		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
-		And I input "Tax authority" text in "Partner" field of "PaymentList" table
+		And I select "Tax authority" exact value from the drop-down list named "PaymentListPartner" in "PaymentList" table		
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I activate "Financial movement type" field in "PaymentList" table
 		And I input "Movement type 1" text in "Financial movement type" field of "PaymentList" table

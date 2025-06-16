@@ -191,7 +191,7 @@ Scenario: _050002 check that the amount does not change when select basis docume
 		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
 		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
-		And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
+		And I select "Company Ferron BP" from "Legal name" drop-down list by string in "PaymentList" table
 		And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "5 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -210,13 +210,13 @@ Scenario: _050002 check that the amount does not change when select basis docume
 		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
 		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
-		And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
+		And I select "Company Ferron BP" from "Legal name" drop-down list by string in "PaymentList" table
 		And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I go to line in "List" table
-			| 'Company'        | 'Amount'      | 'Legal name'          | 'Partner'      |
+			| 'Company'        | 'Amount'     | 'Legal name'          | 'Partner'      |
 			| 'Main Company'   | '6 099,93'   | 'Company Ferron BP'   | 'Ferron BP'    |
 		And I click "Select" button
 		And "PaymentList" table contains lines

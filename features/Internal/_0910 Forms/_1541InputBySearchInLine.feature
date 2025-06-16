@@ -1009,7 +1009,7 @@ Scenario: _0154083 check company, Cash accounts, transaction type, currency, par
 		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
 	* Payee input by search in line
 		And I activate "Payee" field in "PaymentList" table
-		And I select "co" from "Payee" drop-down list by string in "PaymentList" table
+		And I select "co" from "Legal name" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
 		And I activate "Partner term" field in "PaymentList" table
 		And I select "usd" from "Partner term" drop-down list by string in "PaymentList" table
@@ -1043,7 +1043,7 @@ Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency
 		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
 	* Payee input by search in line
 		And I activate "Payee" field in "PaymentList" table
-		And I select "co" from "Payee" drop-down list by string in "PaymentList" table
+		And I select "co" from "Legal name" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
 		And I activate "Partner term" field in "PaymentList" table
 		And I select "usd" from "Partner term" drop-down list by string in "PaymentList" table
@@ -1076,7 +1076,7 @@ Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency
 		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
 	* Payee input by search in line
 		And I activate "Payer" field in "PaymentList" table
-		And I select "co" from "Payer" drop-down list by string in "PaymentList" table
+		And I select "co" from "Legal name" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
 		And I activate "Partner term" field in "PaymentList" table
 		And I select "usd" from "Partner term" drop-down list by string in "PaymentList" table
@@ -1109,7 +1109,7 @@ Scenario: _0154086 check company, Cash accounts, transaction type, currency, par
 		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
 	* Payee input by search in line
 		And I activate "Payer" field in "PaymentList" table
-		And I select "co" from "Payer" drop-down list by string in "PaymentList" table
+		And I select "co" from "Legal name" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
 		And I activate "Partner term" field in "PaymentList" table
 		And I select "usd" from "Partner term" drop-down list by string in "PaymentList" table
@@ -1325,7 +1325,7 @@ Scenario: _0154089 check company, account, currency input by search in line in I
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
 		And I activate "Payer" field in "PaymentList" table
-		And I select "Second Company F" from "Payer" drop-down list by string in "PaymentList" table
+		And I select "Second Company F" from "Legal name" drop-down list by string in "PaymentList" table
 	* Filling check
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to "Cash desk №2"
@@ -1350,7 +1350,7 @@ Scenario: _0154090 check company, account, currency input by search in line in O
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I select "fer" from "Partner" drop-down list by string in "PaymentList" table
 		And I activate "Payee" field in "PaymentList" table
-		And I select "Second Company F" from "Payee" drop-down list by string in "PaymentList" table
+		And I select "Second Company F" from "Legal name" drop-down list by string in "PaymentList" table
 	* Filling check
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to "Cash desk №2"
@@ -1786,7 +1786,7 @@ Scenario: _01540114 check item input by search in line by code in a document Ban
 			| 'Partner'      |
 			| 'Ferron BP'    |
 	* Payee
-		And I select "46" from "Payee" drop-down list by string in "PaymentList" table
+		And I select "46" from "Legal name" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Legal name'                |
 			| 'Company Ferron BP'    |

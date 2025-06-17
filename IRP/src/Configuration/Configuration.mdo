@@ -238,6 +238,7 @@
   <commonPictures>CommonPicture.DocumentUnposted</commonPictures>
   <commonPictures>CommonPicture.DocumentPosted</commonPictures>
   <commonPictures>CommonPicture.DocumentDeleted</commonPictures>
+  <commonPictures>CommonPicture.DownloadFile</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -1694,6 +1695,7 @@
   <informationRegisters>InformationRegister.ExecutionProcessStatus</informationRegisters>
   <informationRegisters>InformationRegister.Logger</informationRegisters>
   <informationRegisters>InformationRegister.LoggerNotification</informationRegisters>
+  <informationRegisters>InformationRegister.LoggerFiles</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>

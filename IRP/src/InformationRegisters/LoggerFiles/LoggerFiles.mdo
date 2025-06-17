@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f3a6b6d5-39d4-4ce1-995a-809f6f839283">
+  <producedTypes>
+    <selectionType typeId="d47b37fe-26f6-4d22-8e01-291aa4718c59" valueTypeId="9506068b-c9cd-4d40-9a0d-b5b68eaac9a0"/>
+    <listType typeId="c5b7ac78-3342-45a9-8067-186f2ed849c1" valueTypeId="b77e5396-5763-473a-b1f4-e78cd53d09aa"/>
+    <managerType typeId="ca6301de-c939-4a15-b825-3537c9cd5bfc" valueTypeId="53be3b77-06df-40d2-8d54-cf22bda9c889"/>
+    <recordSetType typeId="b645e906-a92f-45ae-935f-5f0c9494c57e" valueTypeId="16e974ff-0fb9-4d4e-b11a-4c0e00d6095a"/>
+    <recordKeyType typeId="89ddf72f-bc10-4d26-86fe-32d31801bc97" valueTypeId="b04a40fa-6594-467d-8c7f-303e33897099"/>
+    <recordType typeId="09e59ff3-1dbd-4c23-ad28-f4f0c8e0e046" valueTypeId="c4858c34-2e09-4294-baf4-20b7d66abe3a"/>
+    <recordManagerType typeId="3e1a56c2-a7c2-4d6b-bc39-4590ffa6fca9" valueTypeId="c571e23e-afbb-4929-a11d-848a594a3622"/>
+  </producedTypes>
+  <name>LoggerFiles</name>
+  <synonym>
+    <key>en</key>
+    <value>Logger files</value>
+  </synonym>
+  <editType>InDialog</editType>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="12dc877f-de71-49dd-8d09-c8e4f83bad55">
+    <name>File</name>
+    <synonym>
+      <key>en</key>
+      <value>File</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="448e5e56-350e-49f9-82c9-3155463c50b0">
+    <name>FileName</name>
+    <synonym>
+      <key>en</key>
+      <value>File name</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>100</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="b2242fc8-8f5b-470d-8e27-5ecf0c51aaab">
+    <name>FileSize</name>
+    <synonym>
+      <key>en</key>
+      <value>File size</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="df6f0865-4bf8-412e-9a9f-00d8c2087c42">
+    <name>Basis</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis</value>
+    </synonym>
+    <type>
+      <types>AnyRef</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <denyIncompleteValues>true</denyIncompleteValues>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <master>true</master>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="5830a2ac-bf64-40d1-8ccf-9ab747e59fe1">
+    <name>MessageID</name>
+    <synonym>
+      <key>en</key>
+      <value>Message ID</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>36</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="3c7e1718-cc6a-442f-b19e-e6cad2e73cee">
+    <name>FileID</name>
+    <synonym>
+      <key>en</key>
+      <value>File ID</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>36</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+</mdclass:InformationRegister>

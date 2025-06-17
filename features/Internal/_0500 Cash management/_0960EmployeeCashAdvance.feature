@@ -626,6 +626,44 @@ Scenario: _0960019 create document Bank payment/Employee cash advance (purchase,
 						
 Scenario: _0960020 check Partner Term by Partner filtering in Employee cash advance
 	And I close all client application windows
-		* Create Employee cash advance
-			Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
-			And I click "Create" button						
+	* Create Employee cash advance
+		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
+		And I click "Create" button
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Partner" by "Sofia Borisova" string
+		Then the form attribute named "Agreement" became equal to "Sofia Borisova cash advance, TRY"	
+	* Check		
+		And I click Choice button of the field named "Agreement"
+		And form attributes have values:
+			| 'Name'             | 'Value'        | 'HowToSearch' |
+			| 'FilterCompany'    | "Main Company" | ''            |
+			| 'FilterCompanyUse' | "Yes"          | ''            |			
+		And "List" table became equal
+			| 'Code' | 'Description'                      | 'Kind'    | 'Type'  | 'AP/AR posting detail' |
+			| '401'  | 'Sofia Borisova cash advance, TRY' | 'Regular' | 'Other' | 'By agreements'        |
+		And I close current window
+	* Change Partner
+		And I click Choice button of the field named "Partner"
+		And form attributes have values:
+			| 'Name'             | 'Value' | 'HowToSearch' |
+			| 'FilterConsignor'  | "No"    | ''            |
+			| 'FilterCustomer'   | "No"    | ''            |
+			| 'FilterEmployee'   | "Yes"   | ''            |
+			| 'FilterOther'      | "No"    | ''            |
+			| 'FilterTradeAgent' | "No"    | ''            |
+			| 'FilterVendor'     | "No"    | ''            |
+		And in "List" table in the form item addition named "ListSearchString" I enter the text "Alexander Orlov"
+		And I click the button named "FormChoose"
+		Then the form attribute named "Agreement" became equal to "Alexander Orlov cash advance, USD"
+	* Check	Partner term filter		
+		And I click Choice button of the field named "Agreement"
+		And form attributes have values:
+			| 'Name'             | 'Value'        | 'HowToSearch' |
+			| 'FilterCompany'    | "Main Company" | ''            |
+			| 'FilterCompanyUse' | "Yes"          | ''            |			
+		And "List" table became equal
+			| 'Code' | 'Description'                       | 'Kind'    | 'Type'  | 'AP/AR posting detail' |
+			| '400'  | 'Alexander Orlov cash advance, USD' | 'Regular' | 'Other' | 'By agreements'        |
+	And I close all client application windows					
+							

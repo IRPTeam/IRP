@@ -34,12 +34,10 @@
     <types>DocumentRef.ShipmentConfirmation</types>
     <types>DocumentRef.InternalSupplyRequest</types>
     <types>DocumentRef.Unbundling</types>
-    <types>DocumentRef.PriceList</types>
     <types>CatalogRef.EquipmentDrivers</types>
     <types>DocumentRef.PurchaseOrder</types>
     <types>DocumentRef.CashReceipt</types>
     <types>CatalogRef.Hardware</types>
-    <types>DocumentRef.OutgoingPaymentOrder</types>
     <types>CatalogRef.PartnersBankAccounts</types>
     <types>DocumentRef.OpeningEntry</types>
     <types>DocumentRef.RetailReturnReceipt</types>
@@ -79,5 +77,54 @@
     <types>CatalogRef.BusinessUnits</types>
     <types>DocumentRef.CashExpense</types>
     <types>DocumentRef.WithholdingTaxInvoice</types>
+    <types>DocumentRef.AdditionalAccrual</types>
+    <types>DocumentRef.AdditionalCostAllocation</types>
+    <types>DocumentRef.AdditionalDeduction</types>
+    <types>DocumentRef.AdditionalRevenueAllocation</types>
+    <types>DocumentRef.CalculationDeservedVacations</types>
+    <types>DocumentRef.CalculationMovementCosts</types>
+    <types>DocumentRef.ChequeBondTransaction</types>
+    <types>DocumentRef.ChequeBondTransactionItem</types>
+    <types>DocumentRef.CommissioningOfFixedAsset</types>
+    <types>DocumentRef.DebitCreditNote</types>
+    <types>DocumentRef.DepreciationCalculation</types>
+    <types>DocumentRef.DecommissioningOfFixedAsset</types>
+    <types>DocumentRef.ELedgerRegistry</types>
+    <types>DocumentRef.EmployeeCashAdvance</types>
+    <types>DocumentRef.EmployeeFiring</types>
+    <types>DocumentRef.EmployeeHiring</types>
+    <types>DocumentRef.EmployeeSickLeave</types>
+    <types>DocumentRef.EmployeeTransfer</types>
+    <types>DocumentRef.EmployeeVacation</types>
+    <types>DocumentRef.ExternalAccountingOperation</types>
+    <types>DocumentRef.ExpenseAccruals</types>
+    <types>DocumentRef.FixedAssetRevaluation</types>
+    <types>DocumentRef.FixedAssetTransfer</types>
+    <types>DocumentRef.ForeignCurrencyRevaluation</types>
+    <types>DocumentRef.JournalEntry</types>
+    <types>DocumentRef.ModernizationOfFixedAsset</types>
+    <types>DocumentRef.MoneyTransfer</types>
+    <types>DocumentRef.OutgoingPaymentOrder</types>
+    <types>DocumentRef.OutgoingMessage</types>
+    <types>DocumentRef.Payroll</types>
+    <types>DocumentRef.WorkOrderClosing</types>
+    <types>DocumentRef.WorkOrder</types>
+    <types>DocumentRef.VisitorCounter</types>
+    <types>DocumentRef.TimeSheet</types>
+    <types>DocumentRef.TaxesOperation</types>
+    <types>DocumentRef.StockCorrection</types>
+    <types>DocumentRef.ShipmentPlaningOrder</types>
+    <types>DocumentRef.SalesReportToConsignor</types>
+    <types>DocumentRef.SalesReportFromTradeAgent</types>
+    <types>DocumentRef.RevenueAccruals</types>
+    <types>DocumentRef.RetailShipmentConfirmation</types>
+    <types>DocumentRef.RetailReceiptCorrection</types>
+    <types>DocumentRef.RetailGoodsReceipt</types>
+    <types>DocumentRef.ProductionPlanningCorrection</types>
+    <types>DocumentRef.ProductionPlanningClosing</types>
+    <types>DocumentRef.ProductionPlanning</types>
+    <types>DocumentRef.ProductionCostsAllocation</types>
+    <types>DocumentRef.Production</types>
+    <types>DocumentRef.PriceList</types>
   </type>
 </mdclass:DefinedType>

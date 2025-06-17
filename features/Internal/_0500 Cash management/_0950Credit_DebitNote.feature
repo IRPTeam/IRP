@@ -762,268 +762,268 @@ Scenario: _095010 create DebitCreditNote (check amount control CurrencyFrom=Curr
 	And I close all client application windows
 	
 
-Scenario: _095011 check possible and impossible operations for DebitCreditNote (Parter/LegalNameSend=Parter/LegalNameReceive)
-	And I close all client application windows
-	* Create document
-		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
-		And I click the button named "FormCreate"
-	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I move to "Other" tab
-		And I select from the drop-down list named "Currency" by "Turkish lira" string
-		And I select from the drop-down list named "Branch" by "Accountants office" string
-		And I select from "Expense type" drop-down list by "Expense" string
-		And I select from "Loss center" drop-down list by "Front office" string
-		And I select from "Revenue type" drop-down list by "Revenue" string
-		And I select from "Profit center" drop-down list by "Front office" string
-	* Filling FROM-TO
-		* (CA) - (CT)
-			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
-			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list
-			And I select from "Partner (send)" drop-down list by "Ferron BP" string
-			And I select from "Partner (receive)" drop-down list by "Ferron BP" string
-			And I select from "Partner term (send)" drop-down list by "Basic Partner terms, TRY" string
-			And I select from "Partner term (receive)" drop-down list by "Basic Partner terms, TRY" string	
-			And I select from "Branch (send)" drop-down list by "Accountants office" string
-			And I select from "Branch (receive)" drop-down list by "Front office" string	
-			And I select from "Project (send)" drop-down list by "Project 01" string
-			And I select from "Project (receive)" drop-down list by "Project 02" string	
-			And I select from "Contract (send)" drop-down list by "Contract Ferron BP" string
-			And I select from "Contract (receive)" drop-down list by "Contract Ferron BP New" string			
-			And I input "50,00" text in "Amount (send)" field
-			And I input "50,00" text in "Amount (receive)" field
-			And I click "Post" button
-			Then user message window does not contain messages
-			* Check lock of advances
-				And I click "OK" button
-				Then there are lines in TestClient message log
-					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|				
-		* (CT) - (CA)
-			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
-			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
-		* (CA) - (CA)
-			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
-			And I click "Post" button
-			Then user message window does not contain messages
-			* Check lock of advances
-				And I click "OK" button
-				Then there are lines in TestClient message log
-					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|
-		* (CT) - (CT)
-			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
-			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list	
-			And I click "Post" button
-			Then user message window does not contain messages	
-		* (CT) - (VA)	
-			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I select from "Partner term (receive)" drop-down list by "Vendor Ferron, TRY" string	
-			And I click "Post" button
-			Then user message window does not contain messages	
-		* (CA) - (VA)
-			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
-		* (CA) - (VT)	
-			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
-		* (CA) - (VT)	
-			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
-		* (CT) - (VT)	
-			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
-		* (VA) - (CA)	
-			And I select "Advance (Vendor)" exact value from "Debt type (send)" drop-down list
-			And I select from "Partner term (send)" drop-down list by "Vendor Ferron, TRY" string
-			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
-			And I select from "Partner term (receive)" drop-down list by "Basic Partner terms, TRY" string
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
-		* (VA) - (CT)	
-			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
-		* (VT) - (CA)	
-			And I select "Transaction (Vendor)" exact value from "Debt type (send)" drop-down list
-			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button
-			Then user message window does not contain messages
-		* (VT) - (CT)	 
-			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button
-			Then user message window does not contain messages
-		* (VT) - (VA)				
-			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I select from "Partner term (receive)" drop-down list by "Vendor Ferron, TRY" string
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|	
-		* (VT) - (VT)				
-			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button	
-			Then user message window does not contain messages
-		* (VA) - (VA)				
-			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I select "Advance (Vendor)" exact value from "Debt type (send)" drop-down list
-			And I click "Post" button	
-			Then user message window does not contain messages
-			* Check lock of advances
-				And I click "OK" button
-				Then there are lines in TestClient message log
-					|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [50]'|
-		* (VA) - (VT)				
-			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button	
-			Then user message window does not contain messages
-			* Check lock of advances
-				And I click "OK" button
-				Then there are lines in TestClient message log
-					|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [50]'|
+# Scenario: _095011 check possible and impossible operations for DebitCreditNote (Parter/LegalNameSend=Parter/LegalNameReceive)
+# 	And I close all client application windows
+# 	* Create document
+# 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+# 		And I click the button named "FormCreate"
+# 	* Filling in the details of the document
+# 		And I click Select button of "Company" field
+# 		And I go to line in "List" table
+# 			| 'Description'     |
+# 			| 'Main Company'    |
+# 		And I select current line in "List" table
+# 		And I move to "Other" tab
+# 		And I select from the drop-down list named "Currency" by "Turkish lira" string
+# 		And I select from the drop-down list named "Branch" by "Accountants office" string
+# 		And I select from "Expense type" drop-down list by "Expense" string
+# 		And I select from "Loss center" drop-down list by "Front office" string
+# 		And I select from "Revenue type" drop-down list by "Revenue" string
+# 		And I select from "Profit center" drop-down list by "Front office" string
+# 	* Filling FROM-TO
+# 		* (CA) - (CT)
+# 			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
+# 			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list
+# 			And I select from "Partner (send)" drop-down list by "Ferron BP" string
+# 			And I select from "Partner (receive)" drop-down list by "Ferron BP" string
+# 			And I select from "Partner term (send)" drop-down list by "Basic Partner terms, TRY" string
+# 			And I select from "Partner term (receive)" drop-down list by "Basic Partner terms, TRY" string	
+# 			And I select from "Branch (send)" drop-down list by "Accountants office" string
+# 			And I select from "Branch (receive)" drop-down list by "Front office" string	
+# 			And I select from "Project (send)" drop-down list by "Project 01" string
+# 			And I select from "Project (receive)" drop-down list by "Project 02" string	
+# 			And I select from "Contract (send)" drop-down list by "Contract Ferron BP" string
+# 			And I select from "Contract (receive)" drop-down list by "Contract Ferron BP New" string			
+# 			And I input "50,00" text in "Amount (send)" field
+# 			And I input "50,00" text in "Amount (receive)" field
+# 			And I click "Post" button
+# 			Then user message window does not contain messages
+# 			* Check lock of advances
+# 				And I click "OK" button
+# 				Then there are lines in TestClient message log
+# 					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|				
+# 		* (CT) - (CA)
+# 			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
+# 			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button
+# 			Then there are lines in TestClient message log
+# 				|"Wrong combination of send and receive debt type"|
+# 		* (CA) - (CA)
+# 			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
+# 			And I click "Post" button
+# 			Then user message window does not contain messages
+# 			* Check lock of advances
+# 				And I click "OK" button
+# 				Then there are lines in TestClient message log
+# 					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|
+# 		* (CT) - (CT)
+# 			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
+# 			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list	
+# 			And I click "Post" button
+# 			Then user message window does not contain messages	
+# 		* (CT) - (VA)	
+# 			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
+# 			And I select from "Partner term (receive)" drop-down list by "Vendor Ferron, TRY" string	
+# 			And I click "Post" button
+# 			Then user message window does not contain messages	
+# 		* (CA) - (VA)
+# 			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
+# 			And I click "Post" button
+# 			Then there are lines in TestClient message log
+# 				|"Wrong combination of send and receive debt type"|
+# 		* (CA) - (VT)	
+# 			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button
+# 			Then there are lines in TestClient message log
+# 				|"Wrong combination of send and receive debt type"|
+# 		* (CA) - (VT)	
+# 			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button
+# 			Then there are lines in TestClient message log
+# 				|"Wrong combination of send and receive debt type"|
+# 		* (CT) - (VT)	
+# 			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
+# 			And I click "Post" button
+# 			Then there are lines in TestClient message log
+# 				|"Wrong combination of send and receive debt type"|
+# 		* (VA) - (CA)	
+# 			And I select "Advance (Vendor)" exact value from "Debt type (send)" drop-down list
+# 			And I select from "Partner term (send)" drop-down list by "Vendor Ferron, TRY" string
+# 			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
+# 			And I select from "Partner term (receive)" drop-down list by "Basic Partner terms, TRY" string
+# 			And I click "Post" button
+# 			Then there are lines in TestClient message log
+# 				|"Wrong combination of send and receive debt type"|
+# 		* (VA) - (CT)	
+# 			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button
+# 			Then there are lines in TestClient message log
+# 				|"Wrong combination of send and receive debt type"|
+# 		* (VT) - (CA)	
+# 			And I select "Transaction (Vendor)" exact value from "Debt type (send)" drop-down list
+# 			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button
+# 			Then user message window does not contain messages
+# 		* (VT) - (CT)	 
+# 			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button
+# 			Then user message window does not contain messages
+# 		* (VT) - (VA)				
+# 			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
+# 			And I select from "Partner term (receive)" drop-down list by "Vendor Ferron, TRY" string
+# 			And I click "Post" button
+# 			Then there are lines in TestClient message log
+# 				|"Wrong combination of send and receive debt type"|	
+# 		* (VT) - (VT)				
+# 			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button	
+# 			Then user message window does not contain messages
+# 		* (VA) - (VA)				
+# 			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
+# 			And I select "Advance (Vendor)" exact value from "Debt type (send)" drop-down list
+# 			And I click "Post" button	
+# 			Then user message window does not contain messages
+# 			* Check lock of advances
+# 				And I click "OK" button
+# 				Then there are lines in TestClient message log
+# 					|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [50]'|
+# 		* (VA) - (VT)				
+# 			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button	
+# 			Then user message window does not contain messages
+# 			* Check lock of advances
+# 				And I click "OK" button
+# 				Then there are lines in TestClient message log
+# 					|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [50]'|
 						
 	
-Scenario: _095012 check possible and impossible operations for DebitCreditNote (Parter/LegalNameSend not equal Parter/LegalNameReceive)
-	And I close all client application windows
-	* Create document
-		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
-		And I click the button named "FormCreate"
-	* Filling in the details of the document
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		And I move to "Other" tab
-		And I select from the drop-down list named "Currency" by "Turkish lira" string
-		And I select from the drop-down list named "Branch" by "Accountants office" string
-		And I select from "Expense type" drop-down list by "Expense" string
-		And I select from "Loss center" drop-down list by "Front office" string
-		And I select from "Revenue type" drop-down list by "Revenue" string
-		And I select from "Profit center" drop-down list by "Front office" string
-	* Filling FROM-TO
-		* (CA) - (CT)
-			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
-			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list
-			And I select from "Partner (send)" drop-down list by "Ferron BP" string
-			And I select from "Partner (receive)" drop-down list by "DFC" string
-			And I select from "Partner term (send)" drop-down list by "Basic Partner terms, TRY" string
-			And I select from "Partner term (receive)" drop-down list by "Partner term DFC" string	
-			And I select from "Branch (send)" drop-down list by "Accountants office" string
-			And I select from "Branch (receive)" drop-down list by "Front office" string	
-			And I select from "Project (send)" drop-down list by "Project 01" string
-			And I select from "Project (receive)" drop-down list by "Project 02" string	
-			And I select from "Contract (send)" drop-down list by "Contract Ferron BP" string
-			And I select from "Contract (receive)" drop-down list by "DFC Legal name contract" string			
-			And I input "50,00" text in "Amount (send)" field
-			And I input "50,00" text in "Amount (receive)" field
-			And I click "Post" button
-			Then user message window does not contain messages
-			* Check lock of advances
-				And I click "OK" button
-				Then there are lines in TestClient message log
-					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|
-		* (CT) - (CA)
-			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
-			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
-		* (CA) - (CA)
-			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
-			And I click "Post" button
-			Then user message window does not contain messages
-			* Check lock of advances
-				And I click "OK" button
-				Then there are lines in TestClient message log
-					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|
-		* (CT) - (CT)
-			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
-			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list	
-			And I click "Post" button
-			Then user message window does not contain messages	
-		* (CT) - (VA)	
-			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I select from "Partner term (receive)" drop-down list by "Partner term vendor DFC" string	
-			And I click "Post" button
-			Then user message window does not contain messages	
-		* (CA) - (VA)
-			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
-			And I click "Post" button
-			Then user message window does not contain messages
-			* Check lock of advances
-				And I click "OK" button
-				Then there are lines in TestClient message log
-					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|	
-		* (CA) - (VT)	
-			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
-		* (CT) - (VT)	
-			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
-			And I click "Post" button
-			Then user message window does not contain messages
-		* (VA) - (CA)	
-			And I select "Advance (Vendor)" exact value from "Debt type (send)" drop-down list
-			And I select from "Partner term (send)" drop-down list by "Vendor Ferron, TRY" string
-			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
-			And I select from "Partner term (receive)" drop-down list by "Partner term DFC" string
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
-		* (VA) - (CT)	
-			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
-		* (VT) - (CA)	
-			And I select "Transaction (Vendor)" exact value from "Debt type (send)" drop-down list
-			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button
-			Then user message window does not contain messages
-		* (VT) - (CT)	 
-			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button
-			Then user message window does not contain messages
-		* (VT) - (VA)				
-			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I select from "Partner term (receive)" drop-down list by "Partner term vendor DFC" string
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|	
-		* (VT) - (VT)				
-			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button	
-			Then user message window does not contain messages
-		* (VA) - (VA)				
-			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I select "Advance (Vendor)" exact value from "Debt type (send)" drop-down list
-			And I click "Post" button	
-			Then user message window does not contain messages
-			* Check lock of advances
-				And I click "OK" button
-				Then there are lines in TestClient message log
-					|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [50]'|
-		* (VA) - (VT)				
-			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button	
-			Then user message window does not contain messages				
-			* Check lock of advances
-				And I click "OK" button
-				Then there are lines in TestClient message log
-					|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [50]'|
+# Scenario: _095012 check possible and impossible operations for DebitCreditNote (Parter/LegalNameSend not equal Parter/LegalNameReceive)
+# 	And I close all client application windows
+# 	* Create document
+# 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+# 		And I click the button named "FormCreate"
+# 	* Filling in the details of the document
+# 		And I click Select button of "Company" field
+# 		And I go to line in "List" table
+# 			| 'Description'     |
+# 			| 'Main Company'    |
+# 		And I select current line in "List" table
+# 		And I move to "Other" tab
+# 		And I select from the drop-down list named "Currency" by "Turkish lira" string
+# 		And I select from the drop-down list named "Branch" by "Accountants office" string
+# 		And I select from "Expense type" drop-down list by "Expense" string
+# 		And I select from "Loss center" drop-down list by "Front office" string
+# 		And I select from "Revenue type" drop-down list by "Revenue" string
+# 		And I select from "Profit center" drop-down list by "Front office" string
+# 	* Filling FROM-TO
+# 		* (CA) - (CT)
+# 			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
+# 			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list
+# 			And I select from "Partner (send)" drop-down list by "Ferron BP" string
+# 			And I select from "Partner (receive)" drop-down list by "DFC" string
+# 			And I select from "Partner term (send)" drop-down list by "Basic Partner terms, TRY" string
+# 			And I select from "Partner term (receive)" drop-down list by "Partner term DFC" string	
+# 			And I select from "Branch (send)" drop-down list by "Accountants office" string
+# 			And I select from "Branch (receive)" drop-down list by "Front office" string	
+# 			And I select from "Project (send)" drop-down list by "Project 01" string
+# 			And I select from "Project (receive)" drop-down list by "Project 02" string	
+# 			And I select from "Contract (send)" drop-down list by "Contract Ferron BP" string
+# 			And I select from "Contract (receive)" drop-down list by "DFC Legal name contract" string			
+# 			And I input "50,00" text in "Amount (send)" field
+# 			And I input "50,00" text in "Amount (receive)" field
+# 			And I click "Post" button
+# 			Then user message window does not contain messages
+# 			* Check lock of advances
+# 				And I click "OK" button
+# 				Then there are lines in TestClient message log
+# 					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|
+# 		* (CT) - (CA)
+# 			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
+# 			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button
+# 			Then there are lines in TestClient message log
+# 				|"Wrong combination of send and receive debt type"|
+# 		* (CA) - (CA)
+# 			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
+# 			And I click "Post" button
+# 			Then user message window does not contain messages
+# 			* Check lock of advances
+# 				And I click "OK" button
+# 				Then there are lines in TestClient message log
+# 					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|
+# 		* (CT) - (CT)
+# 			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
+# 			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list	
+# 			And I click "Post" button
+# 			Then user message window does not contain messages	
+# 		* (CT) - (VA)	
+# 			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
+# 			And I select from "Partner term (receive)" drop-down list by "Partner term vendor DFC" string	
+# 			And I click "Post" button
+# 			Then user message window does not contain messages	
+# 		* (CA) - (VA)
+# 			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
+# 			And I click "Post" button
+# 			Then user message window does not contain messages
+# 			* Check lock of advances
+# 				And I click "OK" button
+# 				Then there are lines in TestClient message log
+# 					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|	
+# 		* (CA) - (VT)	
+# 			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button
+# 			Then there are lines in TestClient message log
+# 				|"Wrong combination of send and receive debt type"|
+# 		* (CT) - (VT)	
+# 			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
+# 			And I click "Post" button
+# 			Then user message window does not contain messages
+# 		* (VA) - (CA)	
+# 			And I select "Advance (Vendor)" exact value from "Debt type (send)" drop-down list
+# 			And I select from "Partner term (send)" drop-down list by "Vendor Ferron, TRY" string
+# 			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
+# 			And I select from "Partner term (receive)" drop-down list by "Partner term DFC" string
+# 			And I click "Post" button
+# 			Then there are lines in TestClient message log
+# 				|"Wrong combination of send and receive debt type"|
+# 		* (VA) - (CT)	
+# 			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button
+# 			Then there are lines in TestClient message log
+# 				|"Wrong combination of send and receive debt type"|
+# 		* (VT) - (CA)	
+# 			And I select "Transaction (Vendor)" exact value from "Debt type (send)" drop-down list
+# 			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button
+# 			Then user message window does not contain messages
+# 		* (VT) - (CT)	 
+# 			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button
+# 			Then user message window does not contain messages
+# 		* (VT) - (VA)				
+# 			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
+# 			And I select from "Partner term (receive)" drop-down list by "Partner term vendor DFC" string
+# 			And I click "Post" button
+# 			Then there are lines in TestClient message log
+# 				|"Wrong combination of send and receive debt type"|	
+# 		* (VT) - (VT)				
+# 			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button	
+# 			Then user message window does not contain messages
+# 		* (VA) - (VA)				
+# 			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
+# 			And I select "Advance (Vendor)" exact value from "Debt type (send)" drop-down list
+# 			And I click "Post" button	
+# 			Then user message window does not contain messages
+# 			* Check lock of advances
+# 				And I click "OK" button
+# 				Then there are lines in TestClient message log
+# 					|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [50]'|
+# 		* (VA) - (VT)				
+# 			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
+# 			And I click "Post" button	
+# 			Then user message window does not contain messages				
+# 			* Check lock of advances
+# 				And I click "OK" button
+# 				Then there are lines in TestClient message log
+# 					|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [50]'|

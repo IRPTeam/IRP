@@ -1718,6 +1718,27 @@ Procedure MergeTables(MasterTable, SourceTable, AddColumnFromSourceTable = "") E
 	EndDo;
 EndProcedure
 
+// Table to structure.
+// 
+// Parameters:
+//  Table - ValueTable - Table
+// 
+// Returns:
+//  Array Of Structure
+Function TableToStructure(Table) Export
+	Array = New Array; // Array Of Structure
+	
+	For Each Row In Table Do
+		Str = New Structure;
+		For Each Column In Table.Columns Do
+			Str.Insert(Column.Name, Row[Column.Name]);
+		EndDo;
+		Array.Add(Str);
+	EndDo;
+	
+	Return Array;
+EndFunction
+
 // Create table.
 // 
 // Parameters:

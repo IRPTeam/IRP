@@ -1181,12 +1181,12 @@ Scenario: check filter for Legal name contract (in BP, CP)
 			| 'Contract (Second Company)' |
 		And I select current line in "List" table
 		And "PaymentList" table became equal
-			| 'Partner'   | 'LegalName'             | 'Legal name contract'       |
+			| 'Partner'   | 'Legal name'        | 'Legal name contract'       |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Contract (Second Company)' |
 		And I finish line editing in "PaymentList" table
 		And I select from the drop-down list named "Company" by "main" string
 		And "PaymentList" table became equal
-			| 'Partner'   | 'LegalName'             | 'Legal name contract' |
+			| 'Partner'   | 'Legal name'        | 'Legal name contract' |
 			| 'Ferron BP' | 'Company Ferron BP' | ''                    |			
 		And I close all client application windows
 		
@@ -1218,12 +1218,12 @@ Scenario: check filter for Legal name contract (in BR, CR)
 			| 'Contract (Second Company)' |
 		And I select current line in "List" table
 		And "PaymentList" table became equal
-			| 'Partner'   | 'LegalName'             | 'Legal name contract'       |
+			| 'Partner'   | 'Legal name'        | 'Legal name contract'       |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Contract (Second Company)' |
 		And I finish line editing in "PaymentList" table
 		And I select from the drop-down list named "Company" by "main" string
 		And "PaymentList" table became equal
-			| 'Partner'   | 'LegalName'             | 'Legal name contract' |
+			| 'Partner'   | 'Legal name'        | 'Legal name contract' |
 			| 'Ferron BP' | 'Company Ferron BP' | ''                    |			
 		And I close all client application windows		
 

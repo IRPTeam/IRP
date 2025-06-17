@@ -233,10 +233,10 @@ Scenario: _998003 two write-offs at the same time
 	* Check
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R6025B_SimpleBatch"
 		And "List" table became equal
-			| 'Period'      | 'Recorder' | 'Line number' | 'Simple batch' | 'Quantity' | 'Amount' |
-			| '$$DatePI1$$' | '$$PI1$$'  | '1'           | 'P001'         | '3,000'    | '432,00' |
-			| '$$DateSI1$$' | '$$SI1$$'  | '1'           | 'P001'         | '2,000'    | '288,00' |
-			| '$$DateSI2$$' | '$$SI2$$'  | '1'           | 'P001'         | '1,000'    | '144,00' |
+			| 'Period'      | 'Recorder' | 'Line number' | 'Simple batch' | 'Quantity' | 'Amount' | 'Final amount' |
+			| '$$DatePI1$$' | '$$PI1$$'  | '1'           | 'P001'         | '3,000'    | ''       | '432,00'       |
+			| '$$DateSI1$$' | '$$SI1$$'  | '1'           | 'P001'         | '2,000'    | ''       | '288,00'       |
+			| '$$DateSI2$$' | '$$SI2$$'  | '1'           | 'P001'         | '1,000'    | ''       | '144,00'       |
 		Given I open hyperlink "e1cib/app/DataProcessor.SimpleBatchSequence"
 		And "List" table contains lines
 			| 'Is actual batch' | 'Period'      | 'Recorder' | 'Simple batch' | 'Current document point presentation' | 'Last document point presentation' |
@@ -267,12 +267,13 @@ Scenario: _998004 receipt and write-off at the same time
 		And I finish line editing in "ItemList" table
 		And I select from the drop-down list named "Branch" by "Business unit 2" string
 		And I click the button named "FormPost"
+		And Delay 2
 		And I delete "$$NumberPI2$$" variable
 		And I delete "$$PI2$$" variable
 		And I delete "$$DatePI2$$" variable
 		And I save the value of "Number" field as "$$NumberPI2$$"
 		And I save the window as "$$PI2$$"
-		And I save the value of the field named "Date" as  "$$DatePI2$$"
+		And I save the value of the field named "Date" as "$$DatePI2$$"
 		And I click the button named "FormPostAndClose"
 	* Create SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -310,14 +311,14 @@ Scenario: _998004 receipt and write-off at the same time
 	* Check
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R6025B_SimpleBatch"
 		And I go to line in "List" table
-			| "Amount" | "Recorder" | "Simple batch" |
-			| "540,00" | "$$PI2$$"  | "P002"         |	
+			| "Amount" | "Recorder" | "Simple batch" | "Final amount" |
+			| ""       | "$$PI2$$"  | "P002"         | "540,00"       |
 		And I activate field named "SimpleBatch" in "List" table
 		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 		And "List" table became equal
-			| 'Period'      | 'Recorder' | 'Line number' | 'Simple batch' | 'Quantity' | 'Amount' |
-			| '$$DatePI2$$' | '$$PI2$$'  | '1'           | 'P002'         | '3,000'    | '540,00' |
-			| '$$DateSI2$$' | '$$SI2$$'  | '1'           | 'P002'         | '2,000'    | '360,00' |
+			| 'Period'      | 'Recorder' | 'Line number' | 'Simple batch' | 'Quantity' | 'Final amount' | 'Amount' |
+			| '$$DatePI2$$' | '$$PI2$$'  | '1'           | 'P002'         | '3,000'    | '540,00'       | ''       |
+			| '$$DateSI3$$' | '$$SI3$$'  | '1'           | 'P002'         | '2,000'    | '360,00'       | ''       |
 		And I close all client application windows
 		Given I open hyperlink "e1cib/app/DataProcessor.SimpleBatchSequence"
 		And "List" table contains lines
@@ -1011,13 +1012,13 @@ Scenario: _998012 partial write-Off with fractional cost
 	* Check
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R6025B_SimpleBatch"
 		And I go to line in "List" table
-			| "Amount" | "Recorder" | "Simple batch" |
-			| "100,00" | "$$PI11$$" | "P011"         |
+			| "Final amount" | "Recorder" | "Simple batch" | "Amount" |
+			| "100,00"       | "$$PI11$$" | "P011"         | ""       |
 		And I activate field named "SimpleBatch" in "List" table
 		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 		And "List" table became equal
-			| 'Period'       | 'Recorder' | 'Line number' | 'Simple batch' | 'Quantity' | 'Amount' |
-			| '$$DatePI11$$' | '$$PI11$$' | '1'           | 'P011'         | '3,000'    | '100,00' |
-			| '$$DateSI11$$' | '$$SI11$$' | '1'           | 'P011'         | '2,000'    | '66,67'  |
-			| '$$DateSI12$$' | '$$SI12$$' | '1'           | 'P011'         | '1,000'    | '33,33'  |	
+			| 'Period'       | 'Recorder' | 'Line number' | 'Simple batch' | 'Quantity' | 'Final amount' | 'Amount' |
+			| '$$DatePI11$$' | '$$PI11$$' | '1'           | 'P011'         | '3,000'    | '100,00'       | ''       |
+			| '$$DateSI11$$' | '$$SI11$$' | '1'           | 'P011'         | '2,000'    | '66,67'        | ''       |
+			| '$$DateSI12$$' | '$$SI12$$' | '1'           | 'P011'         | '1,000'    | '33,33'        | ''       |
 		And I close all client application windows

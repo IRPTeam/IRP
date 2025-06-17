@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9314f8a7-435d-434f-aa6e-181a92b64898">
+<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9314f8a7-435d-434f-aa6e-181a92b64898">
   <producedTypes>
     <objectType typeId="db94dd0e-6f3e-497a-a3bf-93d3dcb5c076" valueTypeId="7616b255-6fe4-4986-b63b-3a11b7e3253f"/>
     <managerType typeId="dde77983-f624-4104-85a7-ba94b3642cc0" valueTypeId="ea402f9f-9496-4f80-93fd-ce04c82d4cfb"/>
@@ -34,10 +34,13 @@
       <key>en</key>
       <value>Chat</value>
     </synonym>
-    <group>FormNavigationPanelGoTo</group>
+    <group>FormCommandBarImportant</group>
     <commandParameterType>
       <types>DefinedType.typeChatObject</types>
     </commandParameterType>
-    <representation>Auto</representation>
+    <representation>Picture</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.Message</picture>
+    </picture>
   </commands>
 </mdclass:DataProcessor>

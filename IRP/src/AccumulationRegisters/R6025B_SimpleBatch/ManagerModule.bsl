@@ -12,6 +12,10 @@ EndFunction
 
 #EndRegion
 
+Procedure AdditionalDataFilling(MovementsValueTable) Export
+	Return;
+EndProcedure
+
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
 
 	If GetFunctionalOption("UseSimpleBatch") Then

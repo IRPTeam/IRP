@@ -1,4 +1,17 @@
 
+Procedure BeforeWrite(Cancel)
+	
+	If DataExchange.Load = True Then
+		Return;
+	EndIf;
+	
+	ThisObject.Author = SessionParameters.CurrentUser;
+	If ThisObject.Date = Date(1,1,1) Then
+		ThisObject.Date = CommonFunctionsServer.GetCurrentSessionDate();
+	EndIf;
+	
+EndProcedure
+
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	
 	If TypeOf(FillingData) = Type("CatalogRef.ExecutionTemplates") Then
@@ -15,6 +28,17 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure StartBeforeStart(RoutePoint, Cancel)
+
+	If ThisObject.ExecutionObject = Undefined Or ThisObject.ExecutionObject.IsEmpty() Then
+		Cancel = True;
+		Return;
+	EndIf;
+	
+	If ValueIsFilled(BusinessProcesses.ExecutionProcesses.FindStartedProcess(
+					ThisObject.ExecutionObject, ThisObject.Template)) Then
+		Cancel = True;
+		Return;
+	EndIf;
 	
 	CurrentStage = New UUID("00000000-0000-0000-0000-000000000000");
 	CurrentTask = New UUID("00000000-0000-0000-0000-000000000000");
@@ -101,10 +125,12 @@ Procedure CheckTasksCompletedConditionCheck(RoutePoint, ProcessFinish)
 	|	Task.ExecutorTasks AS ExecutorTasks
 	|WHERE
 	|	ExecutorTasks.TaskID IN (&TaskIDs)
+	|	AND ExecutorTasks.BusinessProcess = &BusinessProcess
 	|	AND ExecutorTasks.IterationNumber = &IterationNumber
 	|	AND ExecutorTasks.Canceled";
 	
 	Query.SetParameter("TaskIDs", TaskIDs);
+	Query.SetParameter("BusinessProcess", ThisObject.Ref);
 	Query.SetParameter("IterationNumber", StatusRecord.IterationNumber);
 	
 	QuerySelection = Query.Execute().Select();

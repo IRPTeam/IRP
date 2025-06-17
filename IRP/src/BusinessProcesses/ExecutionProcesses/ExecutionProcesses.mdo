@@ -82,6 +82,7 @@
   </objectPresentation>
   <editType>InDialog</editType>
   <defaultObjectForm>BusinessProcess.ExecutionProcesses.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>BusinessProcess.ExecutionProcesses.Form.ListForm</defaultListForm>
   <numberType>String</numberType>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
@@ -468,6 +469,15 @@
     <synonym>
       <key>en</key>
       <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="71a510f9-669d-4725-908b-65046cd3940d">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

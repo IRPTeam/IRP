@@ -161,3 +161,40 @@ Function GetExecutionFlowchart(ProcessRef) Export
 	Return Result;
 	
 EndFunction
+
+// Find started process.
+// 
+// Parameters:
+//  ExecutionObject - See BusinessProcess.ExecutionProcesses.ExecutionObject
+// 
+// Returns:
+//  BusinessProcessRef.ExecutionProcesses - Find started process
+Function FindStartedProcess(ExecutionObject, Template) Export
+	
+	Query = New Query;
+	Query.SetParameter("ExecutionObject", ExecutionObject);
+	Query.SetParameter("Template", Template);
+	Query.Text =
+	"SELECT
+	|	ExecutionProcesses.Ref,
+	|	ExecutionProcesses.Date AS Date
+	|FROM
+	|	BusinessProcess.ExecutionProcesses AS ExecutionProcesses
+	|WHERE
+	|	ExecutionProcesses.ExecutionObject = &ExecutionObject
+	|	AND ExecutionProcesses.Template = &Template
+	|	AND NOT ExecutionProcesses.DeletionMark
+	|	AND ExecutionProcesses.Started
+	|	AND NOT ExecutionProcesses.Completed
+	|
+	|ORDER BY
+	|	Date DESC";
+	
+	QuerySelection = Query.Execute().Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.Ref;
+	EndIf;
+	
+	Return BusinessProcesses.ExecutionProcesses.EmptyRef();
+	
+EndFunction

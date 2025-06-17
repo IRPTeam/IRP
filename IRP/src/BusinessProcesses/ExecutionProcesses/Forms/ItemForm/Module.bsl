@@ -6,12 +6,6 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	CreateDescriptionItems();
 	
-	FormNamesArray = StrSplit(ThisObject.FormName, ".");
-	CatalogFullName = FormNamesArray[0] + "." + FormNamesArray[1];
-	
-	ExternalCommandsServer.CreateCommands(ThisObject, CatalogFullName, Enums.FormTypes.ObjectForm);
-	InternalCommandsServer.CreateCommands(ThisObject, Object, CatalogFullName, Enums.FormTypes.ObjectForm);
-
 	If Not Object.Ref.IsEmpty() Then
 		ThisObject.ReadOnly = True;
 	EndIf;

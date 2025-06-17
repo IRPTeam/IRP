@@ -38,6 +38,7 @@ EndProcedure
 &AtClient
 Procedure Comleted(Command)
 	ComletedAtServer();
+	NotifyChanged(Type("TaskRef.ExecutorTasks"));
 	Close();
 EndProcedure
 
@@ -49,6 +50,7 @@ Procedure Canceled(Command)
 	EndIf;
 	
 	ComletedAtServer(True);
+	NotifyChanged(Type("TaskRef.ExecutorTasks"));
 	Close();
 EndProcedure
 
@@ -64,7 +66,8 @@ Procedure SetVisible()
 	Items.Branch.Visible = Not Object.Branch.IsEmpty();
 	Items.ProfitLossCenter.Visible = Not Object.ProfitLossCenter.IsEmpty();
 	
-	Items.AcceptForExecution.Visible = Object.CurrentExecutor.IsEmpty();
+	Items.AcceptForExecution.Visible = 
+		Not Object.Executed And Object.CurrentExecutor <> SessionParameters.CurrentUser;
 	
 	//@skip-check statement-type-change, property-return-type
 	If Object.TaskType = Enums.TaskTypes.Execution Then

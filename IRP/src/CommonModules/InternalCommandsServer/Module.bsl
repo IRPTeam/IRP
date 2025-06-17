@@ -263,6 +263,7 @@ EndFunction
 // * Name - String - 
 // * Title - String - 
 // * ToolTip - String - 
+// * Picture - String - 
 // * LocationGroup - String - 
 // * Type - String - 
 // * Representation - String - 
@@ -273,6 +274,7 @@ Function GetCommandGroupDescription() Export
 	CommandGroupDescription.Insert("Name", "");
 	CommandGroupDescription.Insert("Title", "");
 	CommandGroupDescription.Insert("ToolTip", "");
+	CommandGroupDescription.Insert("Picture", "");
 	
 	CommandGroupDescription.Insert("LocationGroup", "");
 	
@@ -386,6 +388,11 @@ Function GetFormGroupByName(Form, LocationGroup, TableName = "")
 	ElsIf GroupType = FormGroupType.Popup Then
 		ButtonRepresentationValue = ButtonRepresentation[CommandGroupDescription.Representation]; // ButtonRepresentation
 		FormGroup.Representation = ButtonRepresentationValue;
+	EndIf;
+	
+	If Not IsBlankString(CommandGroupDescription.Picture) Then
+		CommandPicture = PictureLib[CommandGroupDescription.Picture]; // Picture
+		FormGroup.Picture = CommandPicture;
 	EndIf;
 	
 	Return FormGroup;

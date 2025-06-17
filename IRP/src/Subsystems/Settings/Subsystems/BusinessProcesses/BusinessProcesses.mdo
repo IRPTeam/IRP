@@ -21,5 +21,7 @@
   <content>InformationRegister.ExecutionResults</content>
   <content>Enum.TaskResults</content>
   <content>InformationRegister.ExecutionProcessStatus</content>
+  <content>EventSubscription.OnWrite_ExecutionObject</content>
+  <content>EventSubscription.OnPosting_ExecutionObject</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

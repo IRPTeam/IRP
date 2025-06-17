@@ -38,7 +38,7 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 	DataKKTSettings.Info.CRS = ConsolidatedRetailSales;
 	If Not Await EquipmentFiscalPrinterAPIClient.GetDataKKT(CRS.FiscalPrinter, DataKKTSettings) Then
 		CommonFunctionsClientServer.ShowUsersMessage(DataKKTSettings.Info.Error);
-		Raise "Can not get data KKT";
+              Raise R().CannotGetDataKKT;
 	EndIf;
 
 	InputParameters = EquipmentFiscalPrinterAPIClient.InputParameters();
@@ -518,11 +518,11 @@ Async Function CheckKM(Hardware, RequestKM) Export
 		OR RequestKMSettings.In.RequestKM.MarkingCode = "VGVzdEZhbHNlU3RyaW5n" Then
 
 		GetProcessingKMResultSettings.Info.Approved = False;
-	ElsIf RequestKMSettings.In.RequestKM.MarkingCode = "RiseTestFalseString"
-		OR RequestKMSettings.In.RequestKM.MarkingCode = "UmlzZVRlc3RGYWxzZVN0cmluZw==" Then
-	
-		Raise "RiseTestFalseString";
-	EndIf;
+        ElsIf RequestKMSettings.In.RequestKM.MarkingCode = "RiseTestFalseString"
+                OR RequestKMSettings.In.RequestKM.MarkingCode = "UmlzZVRlc3RGYWxzZVN0cmluZw==" Then
+
+                Raise R().RiseTestFalseString;
+        EndIf;
 
 	Return GetProcessingKMResultSettings;
 EndFunction

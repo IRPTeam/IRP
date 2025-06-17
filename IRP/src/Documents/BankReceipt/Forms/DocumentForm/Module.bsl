@@ -63,7 +63,7 @@ Procedure UpdateFormAttributes(Object, Form, Direction)
 			SetLineAttributeValue(Object, Form, Row.Key, Form[Row.Value]);
 		EndDo;		
 	Else
-		Raise StrTemplate("Unsupported direction [%1]", Direction);
+		Raise StrTemplate(R().UnsupportedDirection, Direction);
 	EndIf;
 EndProcedure
 
@@ -102,7 +102,7 @@ Function GetFormAttributeMapping() Export
 	Map.Insert("PaymentList.CalculationType"                  ,"PaymentListCalculationTypeNoSplits");
 	Map.Insert("PaymentList.RetailCustomer"                   ,"PaymentListRetailCustomerNoSplits");
 	Map.Insert("PaymentList.Partner"                          ,"PaymentListPartnerNoSplits");
-	Map.Insert("PaymentList.Payer"                            ,"PaymentListPayerNoSplits");
+	Map.Insert("PaymentList.LegalName"                        ,"PaymentListLegalNameNoSplits");
 	Map.Insert("PaymentList.Agreement"                        ,"PaymentListAgreementNoSplits");
 	Map.Insert("PaymentList.LegalNameContract"                ,"PaymentListLegalNameContractNoSplits");
 	Map.Insert("PaymentList.PaymentType"                      ,"PaymentListPaymentTypeNoSplits");
@@ -147,7 +147,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.PlaningTransactionBasis,
 	|PaymentList.Agreement,
 	|PaymentList.LegalNameContract,
-	|PaymentList.Payer,
+	|PaymentList.LegalName,
 	|PaymentList.AmountExchange,
 	|PaymentList.POSAccount,
 	|PaymentList.Order,
@@ -220,7 +220,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.BasisDocument,
 		|PaymentList.Partner,
 		|PaymentList.Agreement,
-		|PaymentList.Payer,
+		|PaymentList.LegalName,
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.LegalNameContract";
 		If TransactionType = PaymentFromCustomer Then
@@ -248,7 +248,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.Agreement,
-		|PaymentList.Payer,
+		|PaymentList.LegalName,
 		|PaymentList.LegalNameContract,
 		|PaymentList.BasisDocument";
 	ElsIf TransactionType = TransferFromPOS Then
@@ -744,40 +744,40 @@ EndProcedure
 
 #EndRegion
 
-#Region PAYER
+#Region LEGAL_NAME
 
 &AtClient
-Procedure PaymentListPayerOnChange(Item)
-	DocBankReceiptClient.PaymentListPayerOnChange(Object, ThisObject, Item);
+Procedure PaymentListLegalNameOnChange(Item)
+	DocBankReceiptClient.PaymentListLegalNameOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBankReceiptClient.PaymentListPayerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+Procedure PaymentListLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBankReceiptClient.PaymentListLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayerEditTextChange(Item, Text, StandardProcessing)
-	DocBankReceiptClient.PaymentListPayerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+Procedure PaymentListLegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocBankReceiptClient.PaymentListLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayerNoSplitsOnChange(Item)
+Procedure PaymentListLegalNameNoSplitsOnChange(Item)
 	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
 	If LineAttribute <> Undefined Then
 		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
 	EndIf;
-	DocBankReceiptClient.PaymentListPayerOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+	DocBankReceiptClient.PaymentListLegalNameOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayerNoSplitsStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
-	DocBankReceiptClient.PaymentListPayerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PaymentList[0]);
+Procedure PaymentListLegalNameNoSplitsStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocBankReceiptClient.PaymentListLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PaymentList[0]);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayerNoSplitsEditTextChange(Item, Text, StandardProcessing)
-	DocBankReceiptClient.PaymentListPayerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, Object.PaymentList[0]);
+Procedure PaymentListLegalNameNoSplitsEditTextChange(Item, Text, StandardProcessing)
+	DocBankReceiptClient.PaymentListLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, Object.PaymentList[0]);
 EndProcedure
 
 #EndRegion

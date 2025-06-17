@@ -48,7 +48,7 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 		Parameters.Order_EmptyRef  = Documents.PurchaseOrder.EmptyRef();
 		
 	Else
-		Raise StrTemplate("Unsupported document type [%1]", Parameters.Object.Ref);
+		Raise StrTemplate(R().UnsupportedDocumentType, Parameters.Object.Ref);
 	EndIf;
 	
 	If Parameters = Undefined Then
@@ -193,7 +193,7 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 			
 			AdvanceRows = Table_DocumentAndAdvancesKey.FindRows(New Structure("AdvanceKeyUUID", QuerySelection.AdvanceKeyUUID));
 			If Not AdvanceRows.Count() Then
-				Raise StrTemplate("Not found rows in Table_DocumentAndAdvancesKey by uuid [%1]", QuerySelection.AdvanceKeyUUID);
+				Raise StrTemplate(R().Error_DocumentAndAdvancesKeyNotFound, QuerySelection.AdvanceKeyUUID);
 			ENdIf;
 			AdvanceRecordData = CreateAdvanceRecordData(Parameters, AdvanceRows[0]);
 			
@@ -230,7 +230,7 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 			
 			TransactionRows = Table_DocumentAndTransactionsKey.FindRows(New Structure("TransactionKeyUUID", QuerySelection.TransactionKeyUUID));
 			If Not TransactionRows.Count() Then
-				Raise StrTemplate("Not found rows in Table_DocumentAndTransactionsKey by uuid [%1]", QuerySelection.TransactionKeyUUID);
+				Raise StrTemplate(R().Error_DocumentAndTransactionsKeyNotFound, QuerySelection.TransactionKeyUUID);
 			ENdIf;
 			TransactionRecordData = CreateTransactionRecordData(Parameters, TransactionRows[0]);
 			
@@ -987,7 +987,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 				EndIf;	
 				
 			Else
-				Raise StrTemplate("Unknown advance register [%1]", Parameters.RegisterName_Advances);
+				Raise StrTemplate(R().Error_UnknownAdvanceRegister, Parameters.RegisterName_Advances);
 			EndIf;
 			
 			If UseKeyForCurrency Then
@@ -1069,7 +1069,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 			ElsIf Parameters.RegisterName_Transactions = Metadata.AccumulationRegisters.R1021B_VendorsTransactions.Name Then
 				NewRow_PartnersBalance_Transactions.VendorTransaction = NewRow_Transactions.Amount;
 			Else
-				Raise StrTemplate("Unknown transaction register [%1]", Parameters.RegisterName_Advances);
+				Raise StrTemplate(R().Error_UnknownTransactionRegister, Parameters.RegisterName_Advances);
 			EndIf;
 															
 			If UseKeyForCurrency Then
@@ -1290,7 +1290,7 @@ Function GetFromPostingInfo(ArrayOfPostingInfo, RecordSetType)
 			Return ItemOfPostingInfo;
 		EndIf;
 	EndDo;
-	Raise StrTemplate("Not found [%1] in array of posting info", RecordSetType);
+	Raise StrTemplate(R().Error_PostingInfoNotFound, RecordSetType);
 EndFunction
 
 Function ProjectsNotMatch(Parameters, AdvanceProject, TransactionProject)
@@ -1471,7 +1471,7 @@ Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOf
 	NeedWriteAdvances = False;
 	While QuerySelection.Next() Do
 		If QuerySelection.AdvanceAmount < 0 Then
-			Raise StrTemplate("Advance < 0 ADV_KEY[%1]", QuerySelection.AdvanceKey);
+			Raise StrTemplate(R().Error_AdvanceLessThanZero, QuerySelection.AdvanceKey);
 		EndIf;
 		
 		// Minus by advance with order

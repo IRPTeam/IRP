@@ -91,7 +91,7 @@ Scenario: _080001 create Incoming payment order
 			| Description    |
 			| Lomaniti       |
 		And I select current line in "List" table
-		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
 			| Description         |
@@ -202,7 +202,7 @@ Scenario: _080006 create Outgoing payment order
 			| Description    |
 			| Ferron BP      |
 		And I select current line in "List" table
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I activate "Description" field in "List" table
 		And I go to line in "List" table
 			| Description          |

@@ -536,6 +536,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
@@ -636,6 +637,9 @@ Function ItemList()
 		   |	ItemList.VatRate AS VatRate,
 		   |	ItemList.TaxAmount AS TaxAmount,
 		   |	ItemList.Project,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.TradeAgent) AS IsTradeAgent,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
 		   |	ItemList.SimpleBatch AS SimpleBatch
 		   |INTO ItemList
 		   |FROM
@@ -1297,6 +1301,38 @@ Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_SR();
 EndFunction
 
+Function R5015B_OtherPartnersTransactions()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Basis,
+		|	ItemList.Key,
+		|	-SUM(ItemList.Amount) AS Amount
+		|INTO R5015B_OtherPartnersTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsOther
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Key";
+EndFunction
+
 Function R6025B_SimpleBatch()
 	Return 
 	"SELECT
@@ -1459,8 +1495,11 @@ Function GetAnalytics_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions(Paramet
 	                                                   Parameters.ObjectData.Partner, 
 	                                                   Parameters.ObjectData.Agreement,
 	                                                   Parameters.ObjectData.Currency);
-	                                                   
-	AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;
+	If Parameters.ObjectData.Agreement.Type = Enums.AgreementTypes.Other Then
+		AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+	Else                           
+		AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;
+	EndIf;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
@@ -1482,8 +1521,11 @@ Function GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions(Pa
 	                                                   Parameters.ObjectData.Partner, 
 	                                                   Parameters.ObjectData.Agreement,
 	                                                   Parameters.ObjectData.Currency);
-	                                                   
-	AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;
+	If Parameters.ObjectData.Agreement.Type = Enums.AgreementTypes.Other Then
+		AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+	Else                           
+		AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;
+	EndIf;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);

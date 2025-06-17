@@ -263,7 +263,7 @@ Procedure UpdateLinkedObject(Source, Target, Rule, TransformationSettings)
 		//@skip-check invocation-parameter-type-intersect
 		Wrapper = BuilderAPI.Init(Object);
 	Else
-		Raise "Unsupported type " + Rule.TargetType.ObjectFullName;
+                Raise StrTemplate(R().UnsupportedType, Rule.TargetType.ObjectFullName);
 	EndIf;
 
 	UpdateTargetObject(Source, Rule, Wrapper, True);
@@ -295,8 +295,8 @@ Function CreateLinkedObject(Source, Rule, TransformationSettings)
 		Object = ObjectManager.CreateItem(); // CatalogObjectDocumentName
 		//@skip-check invocation-parameter-type-intersect
 		Wrapper = BuilderAPI.Init(Object);
-	Else
-		Raise "Unsupported type " + Rule.TargetType.ObjectFullName;
+        Else
+                Raise StrTemplate(R().UnsupportedType, Rule.TargetType.ObjectFullName);
 	EndIf;
 	
 	UpdateTargetObject(Source, Rule, Wrapper, False);
@@ -429,8 +429,8 @@ Procedure WriteTransformedObject(Rule, TransformationSettings, Object, Wrapper)
 		
 		Object.CheckFilling();
 		Object.Write();
-	Else
-		Raise "Unsupported type " + Rule.TargetType.ObjectFullName;
+        Else
+                Raise StrTemplate(R().UnsupportedType, Rule.TargetType.ObjectFullName);
 	EndIf;
 EndProcedure
 

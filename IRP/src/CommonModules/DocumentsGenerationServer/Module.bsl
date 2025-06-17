@@ -182,10 +182,11 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	R1021B_VendorsTransactions.Basis AS BasisDocument,
 	|	R1021B_VendorsTransactions.Partner,
 	|	R1021B_VendorsTransactions.Agreement,
-	|	R1021B_VendorsTransactions.LegalName AS Payee,
+	|	R1021B_VendorsTransactions.LegalName AS LegalName,
 	|	R1021B_VendorsTransactions.Order AS Order,
 	|	R1021B_VendorsTransactions.Project AS Project,
 	|	R1021B_VendorsTransactions.AmountBalance AS Amount
+	|INTO tmp
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, Basis IN
 	|		(SELECT
@@ -213,7 +214,8 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	PartnerTransactionsBalance.Project,
 	|	PartnerTransactionsBalance.AmountBalance
 	|FROM
-	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
+	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName)
+	|		IN
 	|		(SELECT
 	|			tmp.Company,
 	|			tmp.Branch,
@@ -249,7 +251,7 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|UNION ALL
 	|
 	|SELECT
-	|	""WithholdingTaxInvoice"",
+	|	&DocumentName,
 	|	VALUE(Enum.OutgoingPaymentTransactionTypes.OtherPartner),
 	|	R5015B_OtherPartnersTransactions.Company,
 	|	R5015B_OtherPartnersTransactions.Branch,
@@ -262,7 +264,8 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	UNDEFINED,
 	|	-R5015B_OtherPartnersTransactions.AmountBalance
 	|FROM
-	|	AccumulationRegister.R5015B_OtherPartnersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
+	|	AccumulationRegister.R5015B_OtherPartnersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner,
+	|		LegalName) IN
 	|		(SELECT
 	|			tmp.Company,
 	|			tmp.Branch,
@@ -275,7 +278,26 @@ Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, Doc
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
 	|		R5015B_OtherPartnersTransactions
 	|WHERE
-	|	R5015B_OtherPartnersTransactions.AmountBalance < 0";
+	|	R5015B_OtherPartnersTransactions.AmountBalance < 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.BasedOn,
+	|	tmp.TransactionType,
+	|	tmp.Company,
+	|	tmp.Branch,
+	|	tmp.Currency,
+	|	tmp.BasisDocument,
+	|	tmp.Partner,
+	|	tmp.Agreement,
+	|	tmp.LegalName,
+	|	tmp.Order,
+	|	tmp.Project,
+	|	tmp.Amount,
+	|	tmp.BasisDocument.LegalNameContract AS LegalNameContract
+	|FROM
+	|	tmp AS tmp";
 
 	Query.SetParameter("QueryTable_StandardAgreements", QueryTable_StandardAgreements);
 	Query.SetParameter("DocumentName", DocumentName);
@@ -367,10 +389,11 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	R2021B_CustomersTransactionsBalance.Basis AS BasisDocument,
 	|	R2021B_CustomersTransactionsBalance.Partner,
 	|	R2021B_CustomersTransactionsBalance.Agreement,
-	|	R2021B_CustomersTransactionsBalance.LegalName AS Payer,
+	|	R2021B_CustomersTransactionsBalance.LegalName AS LegalName,
 	|	R2021B_CustomersTransactionsBalance.Order AS Order,
 	|	R2021B_CustomersTransactionsBalance.Project AS Project,
 	|	R2021B_CustomersTransactionsBalance.AmountBalance AS Amount
+	|INTO tmp
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, Basis IN
 	|		(SELECT
@@ -398,7 +421,8 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	R2021B_CustomersTransactionsBalance.Project,
 	|	R2021B_CustomersTransactionsBalance.AmountBalance
 	|FROM
-	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner, LegalName) IN
+	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner,
+	|		LegalName) IN
 	|		(SELECT
 	|			tmp.Company,
 	|			tmp.Branch,
@@ -429,8 +453,59 @@ Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, Docume
 	|	QueryTable_StandardAgreements.Project,
 	|	QueryTable_StandardAgreements.Amount
 	|FROM
-	|	QueryTable_StandardAgreements AS QueryTable_StandardAgreements";
-
+	|	QueryTable_StandardAgreements AS QueryTable_StandardAgreements
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	&DocumentName,
+	|	VALUE(Enum.OutgoingPaymentTransactionTypes.OtherPartner),
+	|	R5015B_OtherPartnersTransactions.Company,
+	|	R5015B_OtherPartnersTransactions.Branch,
+	|	R5015B_OtherPartnersTransactions.Currency,
+	|	UNDEFINED,
+	|	R5015B_OtherPartnersTransactions.Partner,
+	|	R5015B_OtherPartnersTransactions.Agreement,
+	|	R5015B_OtherPartnersTransactions.LegalName,
+	|	UNDEFINED,
+	|	UNDEFINED,
+	|	R5015B_OtherPartnersTransactions.AmountBalance
+	|FROM
+	|	AccumulationRegister.R5015B_OtherPartnersTransactions.Balance(, (Company, Branch, Currency, Agreement, Partner,
+	|		LegalName) IN
+	|		(SELECT
+	|			tmp.Company,
+	|			tmp.Branch,
+	|			tmp.Currency,
+	|			tmp.Agreement,
+	|			tmp.Partner,
+	|			tmp.LegalName
+	|		FROM
+	|			Filter_ByAgreements AS tmp)
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+	|		R5015B_OtherPartnersTransactions
+	|WHERE
+	|	R5015B_OtherPartnersTransactions.AmountBalance > 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.BasedOn,
+	|	tmp.TransactionType,
+	|	tmp.Company,
+	|	tmp.Branch,
+	|	tmp.Currency,
+	|	tmp.BasisDocument,
+	|	tmp.Partner,
+	|	tmp.Agreement,
+	|	tmp.LegalName,
+	|	tmp.Order,
+	|	tmp.Project,
+	|	tmp.Amount,
+	|	tmp.BasisDocument.LegalNameContract AS LegalNameContract
+	|FROM
+	|	tmp AS tmp";
+	
 	Query.SetParameter("QueryTable_StandardAgreements", QueryTable_StandardAgreements);
 	Query.SetParameter("DocumentName", DocumentName);
 	QueryResult = Query.Execute();
@@ -448,7 +523,7 @@ Function GetDocumentTable_PurchaseOrder_ForPayment(ArrayOfBasisDocuments, AddInf
 	|	R3025B_PurchaseOrdersToBePaid.Currency,
 	|	R3025B_PurchaseOrdersToBePaid.Partner,
 	|	R3025B_PurchaseOrdersToBePaid.Order.Agreement AS Agreement,
-	|	R3025B_PurchaseOrdersToBePaid.LegalName AS Payee,
+	|	R3025B_PurchaseOrdersToBePaid.LegalName AS LegalName,
 	|	R3025B_PurchaseOrdersToBePaid.Order,
 	|	R3025B_PurchaseOrdersToBePaid.AmountBalance AS Amount
 	|FROM
@@ -471,7 +546,7 @@ Function GetDocumentTable_SalesOrder_ToBePaid(ArrayOfBasisDocuments) Export
 	|	R3024B_SalesOrdersToBePaid.Currency,
 	|	R3024B_SalesOrdersToBePaid.Partner,
 	|	R3024B_SalesOrdersToBePaid.Order.Agreement AS Agreement,
-	|	R3024B_SalesOrdersToBePaid.LegalName AS Payer,
+	|	R3024B_SalesOrdersToBePaid.LegalName AS LegalName,
 	|	R3024B_SalesOrdersToBePaid.Order,
 	|	R3024B_SalesOrdersToBePaid.AmountBalance AS Amount
 	|FROM
@@ -598,7 +673,7 @@ Function GetDocumentTable_SalesReturn_ForPayment(ArrayOfBasisDocuments, AddInfo 
 	|	R2021B_CustomersTransactionsBalance.Basis AS BasisDocument,
 	|	R2021B_CustomersTransactionsBalance.Partner,
 	|	R2021B_CustomersTransactionsBalance.Agreement,
-	|	R2021B_CustomersTransactionsBalance.LegalName AS Payee,
+	|	R2021B_CustomersTransactionsBalance.LegalName AS LegalName,
 	|	R2021B_CustomersTransactionsBalance.Order AS Order,
 	|	R2021B_CustomersTransactionsBalance.Project AS Project,
 	|	-R2021B_CustomersTransactionsBalance.AmountBalance AS Amount
@@ -753,7 +828,7 @@ Function GetDocumentTable_PurchaseReturn_ForReceipt(ArrayOfBasisDocuments, AddIn
 	|	R1021B_VendorsTransactions.Basis AS BasisDocument,
 	|	R1021B_VendorsTransactions.Partner,
 	|	R1021B_VendorsTransactions.Agreement,
-	|	R1021B_VendorsTransactions.LegalName AS Payer,
+	|	R1021B_VendorsTransactions.LegalName AS LegalName,
 	|	R1021B_VendorsTransactions.Order AS Order,
 	|	R1021B_VendorsTransactions.Project AS Project,
 	|	-R1021B_VendorsTransactions.AmountBalance AS Amount
@@ -925,9 +1000,9 @@ Function GetCurrencyRevaluationInvoiceInfo(InvoiceRef, TransactionRegisterName) 
 				FillingValues.TransactionType = Enums.PurchaseTransactionTypes.CurrencyRevaluationCustomer;
 			EndIf;
 			 
-		Else
-			Raise StrTemplate("Not suported invoice type [%1]", InvoiceRef);
-		EndIf;
+               Else
+                       Raise StrTemplate(R().InvoiceTypeNotSupported, InvoiceRef);
+               EndIf;
 		
 	EndIf;
 	

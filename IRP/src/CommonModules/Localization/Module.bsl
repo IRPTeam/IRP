@@ -27,9 +27,12 @@
 // * AddAttributeTagPathHasNotTwoPart - String - 
 // * SMS_SendIsOk - String - 
 // * SMS_SendIsError - String - 
-// * SMS_WaitUntilNextSend - String - 
-// * SMS_SMSCodeWrong - String - 
-// * ATC_001 - String - 
+// * SMS_WaitUntilNextSend - String -
+// * SMS_SMSCodeWrong - String -
+// * DefaultSMSProviderEmpty - String -
+// * SMSModuleNotFound - String -
+// * SMSMethodNotSupported - String -
+// * ATC_001 - String -
 // * ATC_NotSupported - String - 
 // * ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList - String - 
 // * ATC_ErrorNetAmountGreaterTotalAmount - String - 
@@ -709,13 +712,150 @@
 // * AuditLock_001 - String - 
 // * AuditLock_002 - String - 
 // * AuditLock_003 - String - 
-// * AuditLock_004 - String - 
+// * AuditLock_004 - String -
+// * TypeNotFound - String -
+// * CreateNewAnalyticsNotSupported - String -
+// * TaxNotAllowedForDocument - String -
+// * RiseTestFalseString - String -
+// * CorrectionDescriptionRequired - String -
+// * GoodsReceiptPreliminaryPurchaseInvoice - String -
+// * UndefinedTabularSection - String -
+// * RecordSetCountNotOne - String -
+// * UnsupportedMetadata - String -
+// * ItemListRowsCountNotOne - String -
+// * MainRowsCountNotOne - String -
+// * UnableReplaceRef - String -
+// * UnsupportedSettingStorageName - String -
+// * InternalAccountNotFound - String -
+// * InternalAccountMoreThanOne - String -
+// * UnsupportedAnalyticType - String -
+// * ItemFormUnknownCommand - String -
+// * LedgerLocalizationCodeNotFilled - String -
+// * LedgerAccountMainDrNotDefined - String -
+// * LedgerAccountSubDrNotDefined - String -
+// * LedgerAccountMainCrNotDefined - String -
+// * LedgerAccountSubCrNotDefined - String -
+// * InvoiceTypeNotSupported - String -
+// * FewRetailCustomerFound - String -
+// * UnsupportedUpdateStatus - String -
+// * DocumentQueryError - String -
+// * UnknownFilterType - String -
+// * FoundMoreThanOneWhenOptionNot - String -
+// * DescriptionFormulaOperandError - String -
+// * CacheRowsUndefined - String -
+// * CachePropertyNotFound - String -
+// * WrongListProperty - String -
+// * CachePropertyDeleteNotFound - String -
+// * WrongDatapathRemoveCache - String -
+// * UnknownAgreementTypeByDebtType - String -
+// * IDInfoNotFoundByName - String -
+// * MoreThanOneAnalyticRowsFilter - String -
+// * DocumentAccountingOpNotSupported - String -
+// * UnsupportedRegisterName - String -
+// * UnsupportedCheckType - String -
+// * ExtDimensionTypeNotDefined - String -
+// * ExternalRefValueNotFound - String -
+// * ExternalValueNotFound - String -
+// * UnsupportedTransactionType - String -
+// * GetBasisesNotSupported - String -
+// * UnsupportedExternalLink - String -
+// * UnsupportedInternalLink - String -
 Function Strings(Lang) Export
 
 	Strings = New Structure();
 
 #Region SimpleBatch
 	Strings.Insert("SB_NotEnoughBatch", NStr("en = 'Not enough batch %1: On stock: %2; In document: %3.'", Lang));
+#EndRegion
+
+#Region GenericErrors
+        Strings.Insert("JobAborted", NStr("en = 'Job aborted'", Lang));
+        Strings.Insert("CannotConnectDriver", NStr("en = 'Can not connect driver'", Lang));
+        Strings.Insert("CannotConnectHardwareService", NStr("en = 'Can not connect to hardware service.'", Lang));
+        Strings.Insert("CannotAttachAddIn", NStr("en = 'Can not attach AddIn %1'", Lang));
+        Strings.Insert("CannotGetDataKKT", NStr("en = 'Can not get data KKT'", Lang));
+        Strings.Insert("NotFoundOriginRowForClone", NStr("en = 'Not found origin row for clone'", Lang));
+        Strings.Insert("SerialOwnerNotItemKey", NStr("en = 'Serial lot number owner is not Item key'", Lang));
+        Strings.Insert("WrongAdvanceDirection", NStr("en = 'Wrong advance direction'", Lang));
+        Strings.Insert("UnknownTransactionType", NStr("en = 'Unknown transaction type'", Lang));
+        Strings.Insert("UnknownTransactionTypeT2015", NStr("en = 'Unknown transaction type in [T2015S_TransactionsInfo]'", Lang));
+        Strings.Insert("UnknownTransactionTypeTableT2014", NStr("en = 'Unknown transaction type in [Table_T2014S_AdvancesInfo]'", Lang));
+        Strings.Insert("NotSupportedDRR5022TCashAdvance", NStr("en = 'Not supported [DR_R5022T_Expenses_CR_R3015B_CashAdvance]'", Lang));
+        Strings.Insert("ErrorOnPostingDocument", NStr("en = 'Error on posting document'", Lang));
+        Strings.Insert("ConvertingDataToFillingValuesFailed", NStr("en = 'Converting Data to Filling values failed'", Lang));
+        Strings.Insert("AnalyticTypeNotDefined", NStr("en = 'Analytic type is not defined'", Lang));
+        Strings.Insert("PropertyBeforeChangeDataPathNoRows", NStr("en = 'PropertyBeforeChange.List.DataPath is set but rows is Undefined'", Lang));
+       Strings.Insert("OneJobFailed", NStr("en = 'One job is failed'", Lang));
+       Strings.Insert("UnsupportedUpdateStatus", NStr("en = 'Unsupported update status %1'", Lang));
+       Strings.Insert("DocumentQueryError", NStr("en = 'Document [%1], Error: %2'", Lang));
+       Strings.Insert("UnknownFilterType", NStr("en = 'Unknown filter type %1'", Lang));
+       Strings.Insert("FoundMoreThanOneWhenOptionNot", NStr("en = 'Found more than 1 %1 when option NOT %2'", Lang));
+       Strings.Insert("DescriptionFormulaOperandError", NStr("en = 'Can not eval description formula. error operand %1:%2'", Lang));
+       Strings.Insert("CacheRowsUndefined", NStr("en = 'Error read data from cache by data path %1 rows is Undefined'", Lang));
+       Strings.Insert("CachePropertyNotFound", NStr("en = 'Property by DataPath %1 not found in CacheBeforeChange'", Lang));
+       Strings.Insert("WrongListProperty", NStr("en = 'Wrong list property %1'", Lang));
+       Strings.Insert("CachePropertyDeleteNotFound", NStr("en = 'Not found property in cache for delete %1'", Lang));
+       Strings.Insert("WrongDatapathRemoveCache", NStr("en = 'Wrong datapath remove from cache %1'", Lang));
+       Strings.Insert("UnknownAgreementTypeByDebtType", NStr("en = 'Unknown AgreementType by DebtType %1'", Lang));
+       Strings.Insert("IDInfoNotFoundByName", NStr("en = 'Not found IDInfo by name %1'", Lang));
+       Strings.Insert("MoreThanOneAnalyticRowsFilter", NStr("en = 'More than 1 analytic rows by filter: Key[%1] Operation[%2] LedgerType[%3]'", Lang));
+       Strings.Insert("DocumentAccountingOpNotSupported", NStr("en = 'Document %1 not supported accounting operation %2'", Lang));
+       Strings.Insert("UnsupportedRegisterName", NStr("en = 'Unsupported register name %1'", Lang));
+       Strings.Insert("UnsupportedCheckType", NStr("en = 'Unsupported check type %1'", Lang));
+       Strings.Insert("ExtDimensionTypeNotDefined", NStr("en = 'Not defined ext. dimension type for %1 %2 %3'", Lang));
+       Strings.Insert("ExternalRefValueNotFound", NStr("en = 'Not found value for external ref %1'", Lang));
+       Strings.Insert("ExternalValueNotFound", NStr("en = 'Not found value for external value %1'", Lang));
+       Strings.Insert("UnsupportedTransactionType", NStr("en = 'Unsapported transaction type %1'", Lang));
+       Strings.Insert("GetBasisesNotSupported", NStr("en = 'GetBasises() not support %1'", Lang));
+       Strings.Insert("UnsupportedExternalLink", NStr("en = 'Not supported External link for %1'", Lang));
+       Strings.Insert("UnsupportedInternalLink", NStr("en = 'Not supported Internal link for %1'", Lang));
+       Strings.Insert("UnknownControlCodeStringType", NStr("en = 'Unknown ControlCodeStringType'", Lang));
+        Strings.Insert("CannotGetPointInTime", NStr("en = 'Can not get point in time'", Lang));
+        Strings.Insert("CannotFiscalizeCCSTypeNone", NStr("en = 'Can not fiscalize item with Control Code String Type as None. Select type in item, or switch off Control string'", Lang));
+        Strings.Insert("CannotFiscalizeCCSTypeEmpty", NStr("en = 'Can not fiscalize item while Control Code String Type is Empty. Select type in item, or switch off Control string'", Lang));
+        Strings.Insert("ControlStringCodeNotFilled", NStr("en = 'Control string code not filled. Row: %1'", Lang));
+        Strings.Insert("ControlStringCodeCountMismatch", NStr("en = 'Control string code count not the same as item quantity. Row: %1'", Lang));
+        Strings.Insert("ControlStringMultipleRowsNotSupported", NStr("en = 'Not suppoted send more then 1 control code by each row. Row: %1'", Lang));
+        Strings.Insert("WrongExternalFunctionType", NStr("en = 'Wrong External function type.'", Lang));
+        Strings.Insert("CurrencyInfoMoreThanOne", NStr("en = 'CurrencyInfo.Count() > 1'", Lang));
+        Strings.Insert("RowsWithStoresEmpty", NStr("en = 'RowsWithStores.Count() = 0'", Lang));
+        Strings.Insert("DefaultAgreementOnlyCustVendor", NStr("en = 'Get default agreement implement only for customer or vendor'", Lang));
+        Strings.Insert("BatchForSalesReturnNotFound", NStr("en = 'Not found batch for sales return'", Lang));
+        Strings.Insert("UnsupportedRowDataType", NStr("en = 'Unsupported type of row data'", Lang));
+        Strings.Insert("UnsupportedType", NStr("en = 'Unsupported type %1'", Lang));
+        Strings.Insert("LoadMoreThanOneTableNotImplemented", NStr("en = 'load more than one table not implemented'", Lang));
+        Strings.Insert("TempStorageTypeNotSupported", NStr("en = 'not supported temp storage data type'", Lang));
+        Strings.Insert("UnsupportedOperation", NStr("en = 'Unsupported operation %1'", Lang));
+        Strings.Insert("UnsupportedDirection", NStr("en = 'Unsupported direction %1'", Lang));
+        Strings.Insert("UnsupportedDocumentType", NStr("en = 'Unsupported document type %1'", Lang));
+        Strings.Insert("UnsupportedRegisterMetadata", NStr("en = 'Unsupported register metadata %1'", Lang));
+        Strings.Insert("UnsupportedWhoIsChanged", NStr("en = 'Unsupported [WhoIsChanged] = %1'", Lang));
+        Strings.Insert("WrongDataPath", NStr("en = 'Wrong data path %1'", Lang));
+
+        Strings.Insert("TypeNotFound", NStr("en = 'Type not found %1'", Lang));
+        Strings.Insert("CreateNewAnalyticsNotSupported", NStr("en = 'Create new analytics with Document type not supported'", Lang));
+        Strings.Insert("TaxNotAllowedForDocument", NStr("en = 'Tax not allowed for document, check tax settings'", Lang));
+        Strings.Insert("RiseTestFalseString", NStr("en = 'RiseTestFalseString'", Lang));
+        Strings.Insert("CorrectionDescriptionRequired", NStr("en = 'Correction description has to be filled.'", Lang));
+        Strings.Insert("GoodsReceiptPreliminaryPurchaseInvoice", NStr("en = 'Change transaction type or clear purchase invoice. In preliminary type can not be filled purchase invoice'", Lang));
+        Strings.Insert("UndefinedTabularSection", NStr("en = 'Undefined tabular section for : [%1] [%2]'", Lang));
+        Strings.Insert("RecordSetCountNotOne", NStr("en = 'RecordSet.Count() <> 1 [%1]'", Lang));
+        Strings.Insert("UnsupportedMetadata", NStr("en = 'Not supported metadata : [%1]'", Lang));
+        Strings.Insert("ItemListRowsCountNotOne", NStr("en = 'ItemListRows.Count() <> 1 :[%1] [%2]'", Lang));
+        Strings.Insert("MainRowsCountNotOne", NStr("en = 'MainRows.Count() <> 1 :[%1] [%2]'", Lang));
+        Strings.Insert("UnableReplaceRef", NStr("en = 'Unable replace ref [%1]'", Lang));
+        Strings.Insert("UnsupportedSettingStorageName", NStr("en = 'Unsupported setting storage name [%1]'", Lang));
+        Strings.Insert("InternalAccountNotFound", NStr("en = 'Not found internal account - Integration settings:[%1] Chart of accounts:[%2] Ref[%3]'", Lang));
+        Strings.Insert("InternalAccountMoreThanOne", NStr("en = 'Found more than 1 internal account - Integration settings:[%1] Chart of accounts:[%2] Ref[%3]'", Lang));
+       Strings.Insert("UnsupportedAnalyticType", NStr("en = 'Unsupported analytic type [%1]'", Lang));
+       Strings.Insert("ItemFormUnknownCommand", NStr("en = 'Unknown command %1'", Lang));
+       Strings.Insert("LedgerLocalizationCodeNotFilled", NStr("en = 'Ledger localization code not filled for ledger type %1'", Lang));
+       Strings.Insert("LedgerAccountMainDrNotDefined", NStr("en = 'Not defined Account main Dr %1 %2'", Lang));
+       Strings.Insert("LedgerAccountSubDrNotDefined", NStr("en = 'Not defined Account sub Dr %1 %2'", Lang));
+       Strings.Insert("LedgerAccountMainCrNotDefined", NStr("en = 'Not defined Account main Cr %1 %2'", Lang));
+       Strings.Insert("LedgerAccountSubCrNotDefined", NStr("en = 'Not defined Account sub Cr %1 %2'", Lang));
+       Strings.Insert("InvoiceTypeNotSupported", NStr("en = 'Not supported invoice type %1'", Lang));
+       Strings.Insert("FewRetailCustomerFound", NStr("en = 'Multiple retail customers found'", Lang));
 #EndRegion
 
 #Region Access
@@ -752,8 +892,11 @@ Function Strings(Lang) Export
 #Region SMS
 	Strings.Insert("SMS_SendIsOk", NStr("en = 'SMS sent successfully'", Lang));
 	Strings.Insert("SMS_SendIsError", NStr("en = 'Error while SMS send'", Lang));
-	Strings.Insert("SMS_WaitUntilNextSend", NStr("en = 'Wait until next send. %1 second'", Lang));
-	Strings.Insert("SMS_SMSCodeWrong", NStr("en = 'Not valid SMS code. Try again.'", Lang));
+        Strings.Insert("SMS_WaitUntilNextSend", NStr("en = 'Wait until next send. %1 second'", Lang));
+        Strings.Insert("SMS_SMSCodeWrong", NStr("en = 'Not valid SMS code. Try again.'", Lang));
+        Strings.Insert("DefaultSMSProviderEmpty", NStr("en = 'Fill constant default SMS provider.'", Lang));
+        Strings.Insert("SMSModuleNotFound", NStr("en = 'Can not find SMS module'", Lang));
+        Strings.Insert("SMSMethodNotSupported", NStr("en = 'Not supported method: %1'", Lang));
 #EndRegion
 
 #Region AdditionalTableControl
@@ -1387,6 +1530,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_179", NStr("en = 'Number [%1] is already used for [%2]'", Lang));
 	Strings.Insert("Error_180", NStr("en = 'Only system record allowed'", Lang));
 	Strings.Insert("Error_181", NStr("en = 'Attribute already on form. Remove duplicate from set: [%1]'", Lang));
+	Strings.Insert("Error_182", NStr("en = 'Account [%1] [%2]. Lacking: %3 %2.'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -2357,6 +2501,74 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("Update_004", NStr("en = 'Update system attributes values'", Lang));
 	Strings.Insert("UpdateDesc_004", NStr("en = 'Update information register System Attributes using all old documents'", Lang));
 	
+#EndRegion
+
+#Region ErrorMessages
+	// Error messages for various modules
+	Strings.Insert("Error_RaiseOnCalculationError", NStr("en = 'Raise on calculation error'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSO", NStr("en = 'Not supported External link for [SO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSI", NStr("en = 'Not supported Internal link for [SI] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSI", NStr("en = 'Not supported External link for [SI] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSC", NStr("en = 'Not supported Internal link for [SC] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSC", NStr("en = 'Not supported External link for [SC] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSPO", NStr("en = 'Not supported Internal link for [SPO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSPO", NStr("en = 'Not supported External link for [SPO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRSC", NStr("en = 'Not supported Internal link for [RSC] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkRSC", NStr("en = 'Not supported External link for [RSC] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSRO", NStr("en = 'Not supported Internal link for [SRO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSRO", NStr("en = 'Not supported External link for [SRO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPO", NStr("en = 'Not supported Internal link for [PO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPO", NStr("en = 'Not supported External link for [PO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkGR", NStr("en = 'Not supported Internal link for [GR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkGR", NStr("en = 'Not supported External link for [GR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRGR", NStr("en = 'Not supported Internal link for [RGR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkRGR", NStr("en = 'Not supported External link for [RGR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPI", NStr("en = 'Not supported Internal link for [PI] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPI", NStr("en = 'Not supported External link for [PI] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkITO", NStr("en = 'Not supported Internal link for [ITO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkITO", NStr("en = 'Not supported External link for [ITO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkIT", NStr("en = 'Not supported Internal link for [IT] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkIT", NStr("en = 'Not supported External link for [IT] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkISR", NStr("en = 'Not supported External link for [ISR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPR", NStr("en = 'Not supported Internal link for [PR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPR", NStr("en = 'Not supported External link for [PR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSR", NStr("en = 'Not supported Internal link for [SR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSR", NStr("en = 'Not supported External link for [SR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPRO", NStr("en = 'Not supported Internal link for [PRO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPRO", NStr("en = 'Not supported External link for [PRO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRSR", NStr("en = 'Not supported Internal link for [RSR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkRSR", NStr("en = 'Not supported External link for [RSR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPRR", NStr("en = 'Not supported Internal link for [PRR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRRR", NStr("en = 'Not supported Internal link for [RRR] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkStockAdjustmentAsSurplus", NStr("en = 'Not supported Internal link for [StockAdjustmentAsSurplus] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkStockAdjustmentAsWriteOff", NStr("en = 'Not supported Internal link for [StockAdjustmentAsWriteOff] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPhysicalInventory", NStr("en = 'Not supported External link for [PhysicalInventory] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkWO", NStr("en = 'Not supported Internal link for [WO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkWO", NStr("en = 'Not supported External link for [WO] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkWS", NStr("en = 'Not supported Internal link for [WS] to [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSC2", NStr("en = 'Not supported External link for [SC] to [%1]'", Lang));
+	Strings.Insert("Error_GetSeparatorColumnsNotSupported", NStr("en = 'GetSeparatorColumns( %1 ) not supported'", Lang));
+	Strings.Insert("Error_FormElementNotFound", NStr("en = 'Not found form element: %1'", Lang));
+	Strings.Insert("Error_UnsupportedRegisterType", NStr("en = 'Unsupported register type [%1]'", Lang));
+	Strings.Insert("Error_TableNotFoundInTempTables", NStr("en = 'Table [%1] not found in temp tables'", Lang));
+	Strings.Insert("Error_DocumentAndAdvancesKeyNotFound", NStr("en = 'Not found rows in Table_DocumentAndAdvancesKey by uuid [%1]'", Lang));
+	Strings.Insert("Error_DocumentAndTransactionsKeyNotFound", NStr("en = 'Not found rows in Table_DocumentAndTransactionsKey by uuid [%1]'", Lang));
+	Strings.Insert("Error_UnknownAdvanceRegister", NStr("en = 'Unknown advance register [%1]'", Lang));
+	Strings.Insert("Error_UnknownTransactionRegister", NStr("en = 'Unknown transaction register [%1]'", Lang));
+	Strings.Insert("Error_PostingInfoNotFound", NStr("en = 'Not found [%1] in array of posting info'", Lang));
+	Strings.Insert("Error_AdvanceLessThanZero", NStr("en = 'Advance < 0 ADV_KEY[%1]'", Lang));
+	Strings.Insert("Error_FoundMoreThanOneCompany", NStr("en = 'Found more than one when option not: Companies (Legal name), UseCompanies'", Lang));
+	Strings.Insert("Error_FoundMoreThanOneItemKey", NStr("en = 'Found more than one when option not: ItemKey, UseItemKey'", Lang));
+	Strings.Insert("Error_UnsupportedCommandName", NStr("en = 'Unsupported command name[%1]'", Lang));
+	Strings.Insert("Error_UnsupportedBundleType", NStr("en = 'Unsupported bundle type [%1]'", Lang));
+	Strings.Insert("Error_NotHandledViewNotify", NStr("en = 'Not handled view notify [%1]'", Lang));
+	Strings.Insert("Error_KeyNotAllowedForDataPath", NStr("en = 'Key [%1] not allowed for data path [%2]'", Lang));
+	Strings.Insert("Error_RowNotFoundInTable", NStr("en = 'Not found row in table [%1] line [%2]'", Lang));
+	Strings.Insert("Error_RowNotFoundInSourceTableMap", NStr("en = 'Not found row in SourceTableMap [%1] [%2]'", Lang));
+	Strings.Insert("Error_WrongDataPathForReadOnlyProperty", NStr("en = 'Wrong data path for read only property [%1]'", Lang));
+	Strings.Insert("Error_UnknownRefType", NStr("en = 'Unknown ref type: %1'", Lang));
+	Strings.Insert("Error_StepsEnablerNotDefined", NStr("en = 'Steps enabler is not defined [%1]'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSC3", NStr("en = 'Not supported External link for [SC] to [%1]'", Lang));
 #EndRegion
 
 #Region Tasks

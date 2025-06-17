@@ -29,15 +29,6 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 		
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	
-	//@skip-check bsl-legacy-check-expression-type
-	R6025B_SimpleBatchData = Parameters.PostingDataTables.Get(Metadata.AccumulationRegisters.R6025B_SimpleBatch);
-	If Not R6025B_SimpleBatchData = Undefined Then
-		OutgoingMovements = SimpleBatchCostCalculationServer.UpdateOutgoingMovementsCost(Parameters.Object.Ref, R6025B_SimpleBatchData.PrepareTable, Cancel, , , AddInfo);
-		If Not OutgoingMovements = Undefined Then
-			R6025B_SimpleBatchData.PrepareTable = OutgoingMovements;
-		EndIf;
-	EndIf;
-	
 	RegisteredRecords = RegisterRecords(Parameters);
 	If Parameters.Cancel Then
 		For Each Message In Parameters.Messages Do
@@ -65,6 +56,21 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	// Accounting MD5
 	If Not Cancel And Metadata.DefinedTypes.typeAccountingDocuments.Type.Types().Find(TypeOf(Parameters.Object.Ref)) <> Undefined Then
 		AccountingServer.UpdateAccountingRelevance(DocObject.Ref);	
+	EndIf;
+	
+	If GetFunctionalOption("UseSimpleBatch") Then
+    //@skip-check bsl-legacy-check-expression-type
+	  R6025B_SimpleBatchData = Parameters.PostingDataTables.Get(Metadata.AccumulationRegisters.R6025B_SimpleBatch);
+		If Not R6025B_SimpleBatchData = Undefined Then
+			OutgoingMovements = SimpleBatchCostCalculationServer.UpdateOutgoingMovementsCost(Parameters.Object.Ref, R6025B_SimpleBatchData.PrepareTable, Cancel, , , AddInfo);
+			If Not OutgoingMovements = Undefined Then
+				DocObject.RegisterRecords.R6025B_SimpleBatch.Load(OutgoingMovements);
+				DocObject.RegisterRecords.R6025B_SimpleBatch.Write();
+			Else
+				DocObject.RegisterRecords.R6025B_SimpleBatch.Load(R6025B_SimpleBatchData.PrepareTable);
+				DocObject.RegisterRecords.R6025B_SimpleBatch.Write();
+			EndIf;
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -219,8 +225,8 @@ Function RegisterRecords(Parameters)
 		EndIf;
 		
 		If Row.Value.Metadata = Metadata.AccumulationRegisters.R6020B_BatchBalance 
-			Or Row.Value.Metadata = AccumulationRegisters.R6060T_CostOfGoodsSold
-			Or Row.Value.Metadata = AccumulationRegisters.R6025B_SimpleBatch Then
+			Or Row.Value.Metadata = Metadata.AccumulationRegisters.R6060T_CostOfGoodsSold
+			Or Row.Value.Metadata = Metadata.AccumulationRegisters.R6025B_SimpleBatch Then
 				Continue; //Never rewrite
 		EndIf;
 		
@@ -915,7 +921,7 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 			Return CheckResult.IsOk;
 		Else
-			Raise StrTemplate("Unsupported register type [%1]", Parameters.Metadata);
+			Raise StrTemplate(R().Error_UnsupportedRegisterType, Parameters.Metadata);
 		EndIf;
 		
 	Else // Receipt
@@ -1265,7 +1271,7 @@ Function GetQueryTableByName(TableName, Parameters, RaiseExeption = False) Expor
 	VTSearch = Parameters.TempTablesManager.Tables.Find(TableName);
 	If VTSearch = Undefined Then
 		If RaiseExeption Then
-			Raise StrTemplate("Table [%1] not found in temp tables", TableName);
+			Raise StrTemplate(R().Error_TableNotFoundInTempTables, TableName);
 		Else
 			Return New ValueTable();
 		EndIf;
@@ -1404,6 +1410,16 @@ Function Exists_R1020B_AdvancesToVendors() Export
 		|	AccumulationRegister.R1020B_AdvancesToVendors AS R1020B_AdvancesToVendors
 		|WHERE
 		|	R1020B_AdvancesToVendors.Recorder = &Ref";
+EndFunction
+
+Function Exists_R3010B_CashOnHand() Export
+	Return 
+		"SELECT *
+		|	INTO Exists_R3010B_CashOnHand
+		|FROM
+		|	AccumulationRegister.R3010B_CashOnHand AS R3010B_CashOnHand
+		|WHERE
+		|	R3010B_CashOnHand.Recorder = &Ref";
 EndFunction
 
 Function RegistersWithAdditionalDataFilling()

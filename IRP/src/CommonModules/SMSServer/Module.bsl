@@ -15,16 +15,16 @@ Function SMS(DataStructure, Method, IntegarationSettings = Undefined) Export
 #Region CheckData
 	If Not ValueIsFilled(IntegarationSettings) Then
 		IntegarationSettings = Constants.DefaultSMSProvider.Get();
-		If IntegarationSettings.IsEmpty() Then
-			Raise "Fill constant default SMS provider";
-		EndIf;
+                If IntegarationSettings.IsEmpty() Then
+                        Raise R().DefaultSMSProviderEmpty;
+                EndIf;
 	EndIf;
 	
 	Module = GetModule(IntegarationSettings);
 	
-	If Module = Undefined Then
-		Raise "Can not find SMS module"
-	EndIf;
+        If Module = Undefined Then
+                Raise R().SMSModuleNotFound;
+        EndIf;
 #EndRegion
 	
 	ConnectionSettings = GetConnectionSettings(IntegarationSettings);
@@ -33,9 +33,9 @@ Function SMS(DataStructure, Method, IntegarationSettings = Undefined) Export
 		Return Module.SendSMS(ConnectionSettings, DataStructure);
 	ElsIf Method = "TestConnection" Then
 		Return Module.TestConnection(ConnectionSettings, DataStructure);
-	Else
-		Raise "Not supported method: " + Method;
-	EndIf;
+        Else
+                Raise StrTemplate(R().SMSMethodNotSupported, Method);
+        EndIf;
 	
 EndFunction
 

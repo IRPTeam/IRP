@@ -284,11 +284,11 @@ Async Function CheckKM(Hardware, RequestKM) Export
 		OR RequestKMSettings.In.RequestKM.MarkingCode = "VGVzdEZhbHNlU3RyaW5n" Then
 
 		GetProcessingKMResultSettings.Info.Approved = False;
-	ElsIf RequestKMSettings.In.RequestKM.MarkingCode = "RiseTestFalseString"
-		OR RequestKMSettings.In.RequestKM.MarkingCode = "UmlzZVRlc3RGYWxzZVN0cmluZw==" Then
-	
-		Raise "RiseTestFalseString";
-	EndIf;
+        ElsIf RequestKMSettings.In.RequestKM.MarkingCode = "RiseTestFalseString"
+                OR RequestKMSettings.In.RequestKM.MarkingCode = "UmlzZVRlc3RGYWxzZVN0cmluZw==" Then
+
+                Raise R().RiseTestFalseString;
+        EndIf;
 
 	Return GetProcessingKMResultSettings;
 EndFunction

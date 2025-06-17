@@ -3560,7 +3560,7 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 	Return GetChainLinkOptions("TransactionType,
 		|TransitAccount,
 		|Partner,
-		|Payee,
+		|LegalName,
 		|Agreement,
 		|LegalNameContract,
 		|BasisDocument,
@@ -3588,7 +3588,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("TransitAccount"           , Options.TransitAccount);
 	Result.Insert("Partner"                  , Options.Partner);
-	Result.Insert("Payee"                    , Options.Payee);
+	Result.Insert("LegalName"                , Options.LegalName);
 	Result.Insert("Agreement"                , Options.Agreement);
 	Result.Insert("LegalNameContract"        , Options.LegalNameContract);
 	Result.Insert("BasisDocument"            , Options.BasisDocument);
@@ -3642,7 +3642,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 		
 		StrByType = "
 		|Agreement,
-		|Payee,
+		|LegalName,
 		|LegalNameContract";
 					
 		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
@@ -3667,7 +3667,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_OtherPartner Then
 		StrByType = "
 		|Agreement,
-		|Payee,
+		|LegalName,
 		|LegalNameContract,
 		|Tax,
 		|TaxDiscountAmount,
@@ -3723,7 +3723,7 @@ Function ClearByTransactionTypeBankReceiptOptions() Export
 		|TransitAccount,
 		|CurrencyExchange,
 		|Partner,
-		|Payer,
+		|LegalName,
 		|Agreement,
 		|LegalNameContract,
 		|BasisDocument,
@@ -3755,7 +3755,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Result.Insert("TransitAccount"           , Options.TransitAccount);
 	Result.Insert("CurrencyExchange"         , Options.CurrencyExchange);
 	Result.Insert("Partner"                  , Options.Partner);
-	Result.Insert("Payer"                    , Options.Payer);
+	Result.Insert("LegalName"                , Options.LegalName);
 	Result.Insert("Agreement"                , Options.Agreement);
 	Result.Insert("LegalNameContract"        , Options.LegalNameContract);
 	Result.Insert("BasisDocument"            , Options.BasisDocument);
@@ -3827,7 +3827,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		
 		StrByType = "
 		|Agreement,
-		|Payer,
+		|LegalName,
 		|LegalNameContract";
 		
 		If Options.TransactionType = Incoming_PaymentFromCustomerByPOS Then
@@ -3858,7 +3858,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	ElsIf Options.TransactionType = Incoming_OtherPartner Then
 		StrByType = "
 		|Agreement,
-		|Payer,
+		|LegalName,
 		|LegalNameContract";
 		
 		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
@@ -3923,7 +3923,7 @@ Function ClearByTransactionTypeCashPaymentOptions() Export
 		|PlanningTransactionBasis,
 		|Agreement,
 		|LegalNameContract,
-		|Payee,
+		|LegalName,
 		|Order,
 		|RetailCustomer,
 		|Employee,
@@ -3946,7 +3946,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Result.Insert("PlanningTransactionBasis" , Options.PlanningTransactionBasis);
 	Result.Insert("Agreement"                , Options.Agreement);
 	Result.Insert("LegalNameContract"        , Options.LegalNameContract);
-	Result.Insert("Payee"                    , Options.Payee);
+	Result.Insert("LegalName"                , Options.LegalName);
 	Result.Insert("Order"                    , Options.Order);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("Employee"                 , Options.Employee);
@@ -3990,7 +3990,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_PaymentToVendor Or Options.TransactionType = Outgoing_ReturnToCustomer Then
 		StrByType = "
 		|Agreement,
-		|Payee,
+		|LegalName,
 		|LegalNameContract,
 		|Project";
 		
@@ -4003,7 +4003,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_OtherPartner Then
 		StrByType = "
 		|Agreement,
-		|Payee,
+		|LegalName,
 		|LegalNameContract,
 		|AdditionalAnalytic,
 		|Tax,
@@ -4048,7 +4048,7 @@ Function ClearByTransactionTypeCashReceiptOptions() Export
 		|PlanningTransactionBasis,
 		|Agreement,
 		|LegalNameContract,
-		|Payer,
+		|LegalName,
 		|AmountExchange,
 		|Order,
 		|MoneyTransfer,
@@ -4069,7 +4069,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Result.Insert("PlanningTransactionBasis" , Options.PlanningTransactionBasis);
 	Result.Insert("Agreement"                , Options.Agreement);
 	Result.Insert("LegalNameContract"        , Options.LegalNameContract);
-	Result.Insert("Payer"                    , Options.Payer);
+	Result.Insert("LegalName"                , Options.LegalName);
 	Result.Insert("AmountExchange"           , Options.AmountExchange);
 	Result.Insert("Order"                    , Options.Order);
 	Result.Insert("MoneyTransfer"            , Options.MoneyTransfer);
@@ -4109,7 +4109,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	ElsIf Options.TransactionType = Incoming_PaymentFromCustomer Or Options.TransactionType = Incoming_ReturnFromVendor Then
 		StrByType = "
 		|Agreement,
-		|Payer,
+		|LegalName,
 		|LegalNameContract,
 		|Project";
 		
@@ -4122,7 +4122,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	ElsIf Options.TransactionType = Incoming_OtherPartner Then
 		StrByType = "
 		|Agreement,
-		|Payer,
+		|LegalName,
 		|LegalNameContract";	
 		
 		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
@@ -4165,7 +4165,7 @@ Function ClearByTransactionTypeOutgoingPaymentOrderOptions() Export
 	Return GetChainLinkOptions("TransactionType,
 		|Partner,
 		|PartnerBankAccount,
-		|Payee,
+		|LegalName,
 		|BasisDocument");
 EndFunction
 
@@ -4173,7 +4173,7 @@ Function ClearByTransactionTypeOutgoingPaymentOrderExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("Partner"                  , Options.Partner);
 	Result.Insert("PartnerBankAccount"       , Options.PartnerBankAccount);
-	Result.Insert("Payee"                    , Options.Payee);
+	Result.Insert("LegalName"                , Options.LegalName);
 	Result.Insert("BasisDocument"            , Options.BasisDocument);
 
 	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
@@ -4188,7 +4188,7 @@ Function ClearByTransactionTypeOutgoingPaymentOrderExecute(Options) Export
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.PartnerBankAccount,
-		|PaymentList.Payee";
+		|PaymentList.LegalName";
 	EndIf;
 		
 	ArrayOfAttributes = New Array();

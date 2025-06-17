@@ -17,7 +17,7 @@
   <content>Document.OpeningEntry.Attribute.Company</content>
   <content>Document.StockAdjustmentAsSurplus.Attribute.Company</content>
   <content>Document.BankReceipt.Attribute.Company</content>
-  <content>Document.CashPayment.TabularSection.PaymentList.Attribute.Payee</content>
+  <content>Document.CashPayment.TabularSection.PaymentList.Attribute.LegalName</content>
   <content>Document.CashTransferOrder.Attribute.Company</content>
   <content>Document.StockAdjustmentAsWriteOff.Attribute.Company</content>
   <content>Document.CashExpense.Attribute.Company</content>
@@ -28,13 +28,13 @@
   <content>Document.PurchaseReturnOrder.Attribute.Company</content>
   <content>Document.CashRevenue.Attribute.Company</content>
   <content>Document.Unbundling.Attribute.Company</content>
-  <content>Document.BankPayment.TabularSection.PaymentList.Attribute.Payee</content>
+  <content>Document.BankPayment.TabularSection.PaymentList.Attribute.LegalName</content>
   <content>Document.IncomingPaymentOrder.Attribute.Company</content>
   <content>Document.SalesReturnOrder.Attribute.Company</content>
-  <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.Payer</content>
+  <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.LegalName</content>
   <content>Document.SalesReturn.Attribute.Company</content>
   <content>Document.CashPayment.Attribute.Company</content>
-  <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.Payer</content>
+  <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.LegalName</content>
   <content>Document.SalesInvoice.Attribute.Company</content>
   <content>Document.GoodsReceipt.Attribute.Company</content>
   <content>Document.CashReceipt.Attribute.Company</content>

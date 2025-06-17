@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3ab64313-b8d6-44d0-b098-ed207866a18b">
+  <producedTypes>
+    <objectType typeId="6fdd4c63-34b8-4c9f-b222-05c23c856883" valueTypeId="591d8578-808f-4c5c-a49e-44432075a608"/>
+    <managerType typeId="7ea8349a-8ee6-46c9-8266-a7253e9df49d" valueTypeId="360c4281-a767-4974-a080-7c7cfe08ba82"/>
+  </producedTypes>
+  <name>R6025_SimpleBatch</name>
+  <synonym>
+    <key>en</key>
+    <value>R6025 Simple batch</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <mainDataCompositionSchema>Report.R6025_SimpleBatch.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+  <templates uuid="1a801fb6-abed-4fb5-a21d-a4182b62cefe">
+    <name>MainDataCompositionSchema</name>
+    <synonym>
+      <key>en</key>
+      <value>Main data composition schema</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
+</mdclass:Report>

@@ -1541,6 +1541,7 @@
   <reports>Report.R9510A_Salary</reports>
   <reports>Report.S1001L_VendorsPrices</reports>
   <reports>Report.T0001_FilesAnalyser</reports>
+  <reports>Report.R6025_SimpleBatch</reports>
   <dataProcessors>DataProcessor.AccountantAutomatedWorkplace</dataProcessors>
   <dataProcessors>DataProcessor.AccountingService</dataProcessors>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>

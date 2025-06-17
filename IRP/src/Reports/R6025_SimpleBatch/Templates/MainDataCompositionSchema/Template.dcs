@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataSource>
+		<name>DataSource1</name>
+		<dataSourceType>Local</dataSourceType>
+	</dataSource>
+	<dataSet xsi:type="DataSetQuery">
+		<name>DataSet1</name>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>QuantityTurnover</dataPath>
+			<field>QuantityTurnover</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountExpense</dataPath>
+			<field>AmountExpense</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SimpleBatch</dataPath>
+			<field>SimpleBatch</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountTurnover</dataPath>
+			<field>AmountTurnover</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>QuantityOpeningBalance</dataPath>
+			<field>QuantityOpeningBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Quantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>QuantityReceipt</dataPath>
+			<field>QuantityReceipt</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>QuantityExpense</dataPath>
+			<field>QuantityExpense</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountReceipt</dataPath>
+			<field>AmountReceipt</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>QuantityClosingBalance</dataPath>
+			<field>QuantityClosingBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Quantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountOpeningBalance</dataPath>
+			<field>AmountOpeningBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Amount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountClosingBalance</dataPath>
+			<field>AmountClosingBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Amount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>FinalQuantityOpeningBalance</dataPath>
+			<field>FinalQuantityOpeningBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>FinalQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>FinalQuantityTurnover</dataPath>
+			<field>FinalQuantityTurnover</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>FinalQuantityReceipt</dataPath>
+			<field>FinalQuantityReceipt</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>FinalQuantityExpense</dataPath>
+			<field>FinalQuantityExpense</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>FinalAmountReceipt</dataPath>
+			<field>FinalAmountReceipt</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>FinalQuantityClosingBalance</dataPath>
+			<field>FinalQuantityClosingBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>FinalQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>FinalAmountOpeningBalance</dataPath>
+			<field>FinalAmountOpeningBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>FinalAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>FinalAmountTurnover</dataPath>
+			<field>FinalAmountTurnover</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>DiffAmountClosingBalance</dataPath>
+			<field>DiffAmountClosingBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>DiffAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>FinalAmountExpense</dataPath>
+			<field>FinalAmountExpense</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>FinalAmountClosingBalance</dataPath>
+			<field>FinalAmountClosingBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>FinalAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>DiffAmountOpeningBalance</dataPath>
+			<field>DiffAmountOpeningBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>DiffAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>DiffAmountTurnover</dataPath>
+			<field>DiffAmountTurnover</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>DiffAmountReceipt</dataPath>
+			<field>DiffAmountReceipt</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>DiffAmountExpense</dataPath>
+			<field>DiffAmountExpense</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Period</dataPath>
+			<field>Period</field>
+			<role>
+				<dcscom:periodNumber>2</dcscom:periodNumber>
+				<dcscom:periodType>Main</dcscom:periodType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Recorder</dataPath>
+			<field>Recorder</field>
+			<role>
+				<dcscom:periodNumber>1</dcscom:periodNumber>
+				<dcscom:periodType>Main</dcscom:periodType>
+			</role>
+		</field>
+		<dataSource>DataSource1</dataSource>
+		<query>SELECT
+	R6025B_SimpleBatchBalanceAndTurnovers.SimpleBatch AS SimpleBatch,
+	R6025B_SimpleBatchBalanceAndTurnovers.QuantityOpeningBalance AS QuantityOpeningBalance,
+	R6025B_SimpleBatchBalanceAndTurnovers.QuantityTurnover AS QuantityTurnover,
+	R6025B_SimpleBatchBalanceAndTurnovers.QuantityReceipt AS QuantityReceipt,
+	R6025B_SimpleBatchBalanceAndTurnovers.QuantityExpense AS QuantityExpense,
+	R6025B_SimpleBatchBalanceAndTurnovers.QuantityClosingBalance AS QuantityClosingBalance,
+	R6025B_SimpleBatchBalanceAndTurnovers.AmountOpeningBalance AS AmountOpeningBalance,
+	R6025B_SimpleBatchBalanceAndTurnovers.AmountTurnover AS AmountTurnover,
+	R6025B_SimpleBatchBalanceAndTurnovers.AmountReceipt AS AmountReceipt,
+	R6025B_SimpleBatchBalanceAndTurnovers.AmountExpense AS AmountExpense,
+	R6025B_SimpleBatchBalanceAndTurnovers.AmountClosingBalance AS AmountClosingBalance,
+	R6025B_SimpleBatchBalanceAndTurnovers.FinalQuantityOpeningBalance AS FinalQuantityOpeningBalance,
+	R6025B_SimpleBatchBalanceAndTurnovers.FinalQuantityTurnover AS FinalQuantityTurnover,
+	R6025B_SimpleBatchBalanceAndTurnovers.FinalQuantityReceipt AS FinalQuantityReceipt,
+	R6025B_SimpleBatchBalanceAndTurnovers.FinalQuantityExpense AS FinalQuantityExpense,
+	R6025B_SimpleBatchBalanceAndTurnovers.FinalQuantityClosingBalance AS FinalQuantityClosingBalance,
+	R6025B_SimpleBatchBalanceAndTurnovers.FinalAmountOpeningBalance AS FinalAmountOpeningBalance,
+	R6025B_SimpleBatchBalanceAndTurnovers.FinalAmountTurnover AS FinalAmountTurnover,
+	R6025B_SimpleBatchBalanceAndTurnovers.FinalAmountReceipt AS FinalAmountReceipt,
+	R6025B_SimpleBatchBalanceAndTurnovers.FinalAmountExpense AS FinalAmountExpense,
+	R6025B_SimpleBatchBalanceAndTurnovers.FinalAmountClosingBalance AS FinalAmountClosingBalance,
+	R6025B_SimpleBatchBalanceAndTurnovers.DiffAmountOpeningBalance AS DiffAmountOpeningBalance,
+	R6025B_SimpleBatchBalanceAndTurnovers.DiffAmountTurnover AS DiffAmountTurnover,
+	R6025B_SimpleBatchBalanceAndTurnovers.DiffAmountReceipt AS DiffAmountReceipt,
+	R6025B_SimpleBatchBalanceAndTurnovers.DiffAmountExpense AS DiffAmountExpense,
+	R6025B_SimpleBatchBalanceAndTurnovers.DiffAmountClosingBalance AS DiffAmountClosingBalance,
+	R6025B_SimpleBatchBalanceAndTurnovers.Period AS Period,
+	R6025B_SimpleBatchBalanceAndTurnovers.Recorder AS Recorder
+FROM
+	AccumulationRegister.R6025B_SimpleBatch.BalanceAndTurnovers(, , Recorder, , ) AS R6025B_SimpleBatchBalanceAndTurnovers</query>
+	</dataSet>
+	<totalField>
+		<dataPath>AmountClosingBalance</dataPath>
+		<expression>Sum(AmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>AmountExpense</dataPath>
+		<expression>Sum(AmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>AmountOpeningBalance</dataPath>
+		<expression>Sum(AmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>AmountReceipt</dataPath>
+		<expression>Sum(AmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>AmountTurnover</dataPath>
+		<expression>Sum(AmountTurnover)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>DiffAmountClosingBalance</dataPath>
+		<expression>Sum(DiffAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>DiffAmountExpense</dataPath>
+		<expression>Sum(DiffAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>DiffAmountOpeningBalance</dataPath>
+		<expression>Sum(DiffAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>DiffAmountReceipt</dataPath>
+		<expression>Sum(DiffAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>DiffAmountTurnover</dataPath>
+		<expression>Sum(DiffAmountTurnover)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>FinalAmountClosingBalance</dataPath>
+		<expression>Sum(FinalAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>FinalAmountExpense</dataPath>
+		<expression>Sum(FinalAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>FinalAmountOpeningBalance</dataPath>
+		<expression>Sum(FinalAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>FinalAmountReceipt</dataPath>
+		<expression>Sum(FinalAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>FinalAmountTurnover</dataPath>
+		<expression>Sum(FinalAmountTurnover)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>FinalQuantityClosingBalance</dataPath>
+		<expression>Sum(FinalQuantityClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>FinalQuantityExpense</dataPath>
+		<expression>Sum(FinalQuantityExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>FinalQuantityOpeningBalance</dataPath>
+		<expression>Sum(FinalQuantityOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>FinalQuantityReceipt</dataPath>
+		<expression>Sum(FinalQuantityReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>FinalQuantityTurnover</dataPath>
+		<expression>Sum(FinalQuantityTurnover)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>QuantityClosingBalance</dataPath>
+		<expression>Sum(QuantityClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>QuantityExpense</dataPath>
+		<expression>Sum(QuantityExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>QuantityOpeningBalance</dataPath>
+		<expression>Sum(QuantityOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>QuantityReceipt</dataPath>
+		<expression>Sum(QuantityReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>QuantityTurnover</dataPath>
+		<expression>Sum(QuantityTurnover)</expression>
+	</totalField>
+	<parameter>
+		<name>BeginOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Begin of period</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>false</useRestriction>
+	</parameter>
+	<parameter>
+		<name>EndOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>End of period</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>false</useRestriction>
+	</parameter>
+	<settingsVariant>
+		<dcsset:name>Default</dcsset:name>
+		<dcsset:presentation xsi:type="xs:string">Default</dcsset:presentation>
+		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
+			<dcsset:selection>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>QuantityOpeningBalance</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>QuantityReceipt</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>QuantityExpense</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>QuantityClosingBalance</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>AmountOpeningBalance</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>AmountReceipt</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>AmountExpense</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>AmountClosingBalance</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>FinalQuantityOpeningBalance</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>FinalQuantityReceipt</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>FinalQuantityExpense</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>FinalQuantityClosingBalance</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>FinalAmountOpeningBalance</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>FinalAmountReceipt</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>FinalAmountExpense</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>FinalAmountClosingBalance</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Period</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Recorder</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>SimpleBatch</dcsset:field>
+				</dcsset:item>
+			</dcsset:selection>
+			<dcsset:item xsi:type="dcsset:StructureItemGroup">
+				<dcsset:groupItems>
+					<dcsset:item xsi:type="dcsset:GroupItemField">
+						<dcsset:field>SimpleBatch</dcsset:field>
+						<dcsset:groupType>Items</dcsset:groupType>
+						<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+						<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+						<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+					</dcsset:item>
+				</dcsset:groupItems>
+				<dcsset:order>
+					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+				</dcsset:order>
+				<dcsset:selection>
+					<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+				</dcsset:selection>
+				<dcsset:item xsi:type="dcsset:StructureItemGroup">
+					<dcsset:groupItems>
+						<dcsset:item xsi:type="dcsset:GroupItemField">
+							<dcsset:field>Recorder</dcsset:field>
+							<dcsset:groupType>Items</dcsset:groupType>
+							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+						</dcsset:item>
+					</dcsset:groupItems>
+					<dcsset:order>
+						<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+					</dcsset:order>
+					<dcsset:selection>
+						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+					</dcsset:selection>
+				</dcsset:item>
+			</dcsset:item>
+		</dcsset:settings>
+	</settingsVariant>
+</DataCompositionSchema>

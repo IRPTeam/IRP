@@ -40,12 +40,12 @@ Function CalculateAverageCostBulk(SimpleBatchArray, CalculationDate) Export
 		Result.FinalAmount = Selection.FinalAmountBalance;
 		Result.FinalQuantity = Selection.FinalQuantityBalance;
 		
-		If Result.TotalQuantity > 0 And Result.TotalAmount > 0 Then
+		If Result.TotalQuantity > 0 Then
 			Result.AverageCost = Result.TotalAmount / Result.TotalQuantity;
 		Else
 			Result.AverageCost = 0;
 		EndIf;
-		If Result.TotalQuantity > 0 And Result.FinalAmount > 0 AND Result.FinalQuantity > 0 Then
+		If Result.FinalQuantity > 0 Then
 			Result.FinalAverageCost = Result.FinalAmount / Result.FinalQuantity;
 		Else
 			Result.FinalAverageCost = 0;
@@ -101,6 +101,7 @@ EndFunction
 //  * Quantity - Number 
 //  * Amount - Number 
 //  * FinalAmount - Number 
+//  * FinalQuantity - Number 
 //  Cancel - Boolean -
 //  BatchForCheck - Array Of CatalogRef.SimpleBatch -
 //  BatchWithErrors - Array Of CatalogRef.SimpleBatch -
@@ -129,6 +130,9 @@ Function UpdateOutgoingMovementsCost(Val Ref, Val CurrentMovements, Cancel, Batc
 	
 	// Update amounts in VT copy
 	OutgoingMovements = CurrentMovements.Copy();
+	
+	CalculatedBatchs = New Array; // Array Of Structure
+	
 	For Each Movement In OutgoingMovements Do
 		Filter = New Structure("SimpleBatch", Movement.SimpleBatch);
 		isValid = Sequences.SimpleBatch.Validate(PointInTime, Filter);
@@ -145,12 +149,8 @@ Function UpdateOutgoingMovementsCost(Val Ref, Val CurrentMovements, Cancel, Batc
 		
 		If CostInfo.TotalQuantity > Movement.Quantity Then
 			Movement.Amount = Movement.Quantity * CostInfo.AverageCost;
-			Movement.FinalAmount = Movement.Quantity * CostInfo.FinalAverageCost;
-			Sequences.SimpleBatch.SetBound(PointInTime, Filter);
 		ElsIf CostInfo.TotalQuantity = Movement.Quantity Then
 			Movement.Amount = CostInfo.TotalAmount;
-			Movement.FinalAmount = CostInfo.FinalAmount;
-			Sequences.SimpleBatch.SetBound(PointInTime, Filter);
 		Else
 			If Not BatchWithErrors = Undefined Then
 				BatchWithErrors.Add(Movement.SimpleBatch);				
@@ -158,7 +158,24 @@ Function UpdateOutgoingMovementsCost(Val Ref, Val CurrentMovements, Cancel, Batc
 			Cancel = True;
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().SB_NotEnoughBatch, Movement.SimpleBatch, CostInfo.TotalQuantity, Movement.Quantity));
 		EndIf;
+		
+		If CostInfo.FinalQuantity > Movement.Quantity Then
+			Movement.FinalAmount = Movement.Quantity * CostInfo.FinalAverageCost;
+		ElsIf CostInfo.FinalQuantity = Movement.Quantity Then
+			Movement.FinalAmount = CostInfo.FinalAmount;
+		Else
+			Movement.FinalAmount = CostInfo.FinalAmount;
+			Movement.FinalQuantity = CostInfo.FinalQuantity;
+		EndIf;
+		
+		CalculatedBatchs.Add(Filter);
 	EndDo;
+	
+	If Not Cancel Then
+		For Each BatchFilter In CalculatedBatchs Do
+			Sequences.SimpleBatch.SetBound(PointInTime, BatchFilter);
+		EndDo;
+	EndIf;
 	
 	// Update the register record set with calculated amounts
 	Return OutgoingMovements;

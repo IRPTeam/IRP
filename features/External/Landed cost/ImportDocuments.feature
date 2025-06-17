@@ -1832,7 +1832,7 @@ Scenario: Create information register UserSettings records (LC)
 		| 'e1cib/data/Catalog.UserGroups?ref=86ffd69b4676df1211ea9faead264fd3'  | 'Catalog.Partners'                       | 'Use_object_with_deletion_mark'  | 'Enum.KindsOfAttributes.Custom'   | 'No'                                                                      |
 
 
-Scenario: create document Purchase Invoice objects (AdditionalCostAllocation)
+Scenario: create document Purchase Invoice objects (AdditionalCostAllocation by serial numbers)
 
 	// Catalog.RowIDs
 

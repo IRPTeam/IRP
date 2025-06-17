@@ -114,7 +114,7 @@ Scenario: _041 test data
 		When Create document Bundling objects (LC)
 		When Create document GoodsReceipt objects (LC)
 		When Create document PurchaseInvoice objects (for AdditionalCostAllocation) (LC)
-		When create document Purchase Invoice objects (AdditionalCostAllocation) 
+		When create document Purchase Invoice objects (AdditionalCostAllocation by serial numbers) 
 		When Create document InventoryTransfer objects (LC)
 		When Create document OpeningEntry objects (LC)
 		When Create document PriceList objects (LC)
@@ -1466,7 +1466,7 @@ Scenario: _099 sales from one store, return to another store
 		And "Result" spreadsheet document contains "BathBalance_072_4" template lines by template	
 		And I close all client application windows		
 
-Scenario: _100 check Additional Cost Allocation (by row, by amount)
+Scenario: _100 check Additional Cost Allocation by serial numbers (by row, by amount)
 	And I close all client application windows
 	* Create Additional Cost Allocation		
 		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
@@ -1549,7 +1549,7 @@ Scenario: _100 check Additional Cost Allocation (by row, by amount)
 		And I click the button named "FormPostandClose"
 	And I close all client application windows		
 							
-Scenario: _101 check Additional Cost Allocation (by document, by amount)
+Scenario: _101 check Additional Cost Allocation by serial numbers (by document, by amount)
 	And I close all client application windows
 	* Create Additional Cost Allocation		
 		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"

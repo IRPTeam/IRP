@@ -84,7 +84,7 @@ Scenario: _022300 preparation
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(40).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Price Calculation in Currency
-		When Create document PurchaseInvoice objects (price recalculation by currency rate)
+		When Create document PurchaseInvoice objects (contract currency differs from the invoice currency)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(222).GetObject().Write(DocumentWriteMode.Posting);"    |
 
@@ -586,7 +586,7 @@ Scenario: _022311 create Purchase return with partner Other
 		And I click the button named "FormPostAndClose"
 	And I close all client application windows
 
-Scenario: _022312 check price recalculation by currency rate in Purchase return
+Scenario: _022312 check if the return price matches the invoice price (contract currency differs from the invoice currency)
 	And I close all client application windows
 	* Select PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"

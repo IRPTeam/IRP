@@ -669,7 +669,7 @@ Scenario: Create document PurchaseInvoice objects (Other)
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | '10acfb80-074a-4da7-b0ad-72a22bbf9819' | ''                | ''               | 10         |
 
 
-Scenario: Create document PurchaseInvoice objects (price recalculation by currency rate)
+Scenario: Create document PurchaseInvoice objects (contract currency differs from the invoice currency)
 	// Catalog.RowIDs
 
 	And I check or create catalog "RowIDs" objects:

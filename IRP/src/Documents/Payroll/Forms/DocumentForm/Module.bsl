@@ -67,8 +67,6 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
-	
 	Form.Items.EditCurrenciesAccrual.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesDeduction.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesCashAdvanceDeduction.Enabled = Not Form.ReadOnly;
@@ -168,44 +166,6 @@ EndProcedure
 	
 #EndRegion
 
-#Region PARTNER
-
-&AtClient
-Procedure PartnerOnChange(Item)
-	DocPayrollClient.PartnerOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPayrollClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
-	DocPayrollClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region LEGAL_NAME
-
-&AtClient
-Procedure LegalNameOnChange(Item)
-	DocPayrollClient.LegalNameOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPayrollClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
-	DocPayrollClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
 #Region SALARY_TAX_LIST
 
 &AtClient
@@ -228,6 +188,46 @@ Procedure SalaryTaxListAfterDeleteRow(Item)
 	DocPayrollClient.PayrollListsAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
+#Region SALARY_TAX_LIST_PARTNER
+
+&AtClient
+Procedure SalaryTaxListPartnerOnChange(Item)
+	DocPayrollClient.SalaryTaxListPartnerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListPartnerStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocPayrollClient.SalaryTaxListPartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListPartnerEditTextChange(Item, Text, StandardProcessing)
+	DocPayrollClient.SalaryTaxListPartnerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region SALARY_TAX_LIST_LEGAL_NAME
+
+&AtClient
+Procedure SalaryTaxListLegalNameOnChange(Item)
+	DocPayrollClient.SalaryTaxListLegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListLegalNameStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocPayrollClient.SalaryTaxListLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListLegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocPayrollClient.SalaryTaxListLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region SALARY_TAX_LIST_AGREEMENT
+
 &AtClient
 Procedure SalaryTaxListAgreementOnChange(Item)
 	DocPayrollClient.SalaryTaxListAgreementOnChange(Object, ThisObject, Item);
@@ -242,6 +242,8 @@ EndProcedure
 Procedure SalaryTaxListAgreementEditTextChange(Item, Text, StandardProcessing)
 	DocPayrollClient.SalaryTaxListAgreementEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
+
+#EndRegion
 
 #EndRegion
 

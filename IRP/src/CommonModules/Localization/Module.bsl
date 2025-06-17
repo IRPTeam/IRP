@@ -2501,6 +2501,9 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("Update_004", NStr("en = 'Update system attributes values'", Lang));
 	Strings.Insert("UpdateDesc_004", NStr("en = 'Update information register System Attributes using all old documents'", Lang));
 	
+	Strings.Insert("Update_005", NStr("en = 'Database Migration #IRP-680'", Lang));
+	Strings.Insert("UpdateDesc_005", NStr("en = 'Updating Document Payroll'", Lang));
+	
 #EndRegion
 
 #Region ErrorMessages

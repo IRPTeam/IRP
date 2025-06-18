@@ -224,6 +224,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.ExecutionResults</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.JobQueue.Resource.Result</name>
 		<right>
 			<name>Edit</name>
@@ -320,6 +331,17 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.ExecutionProcessStatus</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -867,6 +889,17 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.TaskExecutors</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
 		</right>
 		<right>
 			<name>View</name>

@@ -970,14 +970,14 @@ EndFunction
 Function ExecutionTemplates_GetCommandDescription(CommandName)
 	
 	NameParts = StrSplit(CommandName, "_");
-	TemplateCode = NameParts[1];
+	TemplateCode = Number(NameParts[1]);
 	TemplateRef = Catalogs.ExecutionTemplates.FindByCode(TemplateCode);
 	
 	SubMenus = "";
 	SubMenusArray = New Array; // Array of String
 	TemplateParentRef = TemplateRef.Parent;
 	While Not TemplateParentRef.IsEmpty() Do
-		SubMenusArray.Insert(0, "ExecutionTemplate_"+TemplateParentRef.Code);
+		SubMenusArray.Insert(0, "ExecutionTemplate_"+Format(TemplateParentRef.Code, "NG=;"));
 		TemplateParentRef = TemplateParentRef.Parent;
 	EndDo;
 	If SubMenusArray.Count() Then

@@ -520,10 +520,10 @@
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="23f9f79f-1723-4a6e-8c73-ff84d35fa348">
-      <name>Payer</name>
+      <name>LegalName</name>
       <synonym>
         <key>en</key>
-        <value>Payer</value>
+        <value>Legal name</value>
       </synonym>
       <type>
         <types>CatalogRef.Companies</types>
@@ -672,7 +672,7 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <choiceParameterLinks>
         <name>Filter.LegalName</name>
-        <field>Document.BankReceipt.TabularSection.PaymentList.Attribute.Payer</field>
+        <field>Document.BankReceipt.TabularSection.PaymentList.Attribute.LegalName</field>
       </choiceParameterLinks>
       <choiceParameterLinks>
         <name>Filter.Company</name>

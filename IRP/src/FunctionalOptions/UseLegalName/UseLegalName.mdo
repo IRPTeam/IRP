@@ -24,7 +24,7 @@
   <content>Document.GoodsReceipt.Attribute.LegalName</content>
   <content>Document.OpeningEntry.TabularSection.AccountReceivableByDocuments.Attribute.LegalName</content>
   <content>Document.OpeningEntry.TabularSection.AccountPayableOther.Attribute.LegalName</content>
-  <content>Document.Payroll.Attribute.LegalName</content>
+  <content>Document.Payroll.Attribute.DELETE_LegalName</content>
   <content>Document.WorkSheet.Attribute.LegalName</content>
   <content>Document.RetailSalesReceipt.Attribute.LegalName</content>
   <content>Document.ShipmentConfirmation.Attribute.LegalName</content>

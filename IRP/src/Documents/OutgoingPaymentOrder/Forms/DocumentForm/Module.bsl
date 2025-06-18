@@ -86,7 +86,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	StrAll = "
 	|PaymentList.Partner,
 	|PaymentList.PartnerBankAccount,
-	|PaymentList.Payee,
+	|PaymentList.LegalName,
 	|PaymentList.Basis";
 	
 	ArrayOfAllAttributes = New Array();
@@ -104,7 +104,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.PartnerBankAccount,
-		|PaymentList.Payee,
+		|PaymentList.LegalName,
 		|PaymentList.Basis";
 	EndIf;
 
@@ -233,21 +233,21 @@ EndProcedure
 
 #EndRegion
 
-#Region PAYEE
+#Region LEGAL_NAME
 
 &AtClient
-Procedure PaymentListPayeeOnChange(Item)
-	DocOutgoingPaymentOrderClient.PaymentListPayeeOnChange(Object, ThisObject, Item);
+Procedure PaymentListLegalNameOnChange(Item)
+	DocOutgoingPaymentOrderClient.PaymentListLegalNameOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayeeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocOutgoingPaymentOrderClient.PaymentListPayeeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+Procedure PaymentListLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocOutgoingPaymentOrderClient.PaymentListLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayeeEditTextChange(Item, Text, StandardProcessing)
-	DocOutgoingPaymentOrderClient.PaymentListPayeeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+Procedure PaymentListLegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocOutgoingPaymentOrderClient.PaymentListLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

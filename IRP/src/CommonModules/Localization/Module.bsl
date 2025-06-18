@@ -2502,6 +2502,9 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("Update_004", NStr("en = 'Update system attributes values'", Lang));
 	Strings.Insert("UpdateDesc_004", NStr("en = 'Update information register System Attributes using all old documents'", Lang));
 	
+	Strings.Insert("Update_005", NStr("en = 'Database Migration #IRP-680'", Lang));
+	Strings.Insert("UpdateDesc_005", NStr("en = 'Updating Document Payroll'", Lang));
+	
 #EndRegion
 
 #Region ErrorMessages
@@ -2570,6 +2573,15 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("Error_UnknownRefType", NStr("en = 'Unknown ref type: %1'", Lang));
 	Strings.Insert("Error_StepsEnablerNotDefined", NStr("en = 'Steps enabler is not defined [%1]'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkSC3", NStr("en = 'Not supported External link for [SC] to [%1]'", Lang));
+#EndRegion
+
+#Region Tasks
+    Strings.Insert("Task_Result_Execution", NStr("en = 'Done'", Lang));
+	Strings.Insert("Task_Result_Execution_Not", NStr("en = 'Not done'", Lang));
+    Strings.Insert("Task_Result_Verification", NStr("en = 'Success'", Lang));
+	Strings.Insert("Task_Result_Verification_Not", NStr("en = 'Failure'", Lang));
+    Strings.Insert("Task_Result_Confirmation", NStr("en = 'Confirmed'", Lang));
+	Strings.Insert("Task_Result_Confirmation_Not", NStr("en = 'Rejected'", Lang));
 #EndRegion
 
 	Return Strings;

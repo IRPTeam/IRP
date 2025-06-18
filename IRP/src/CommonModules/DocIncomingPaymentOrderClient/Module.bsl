@@ -118,11 +118,11 @@ Procedure PaymentListPartnerStartChoice(Object, Form, Item, ChoiceData, Standard
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
 		DataCompositionComparisonType.NotEqual));
 	OpenSettings.FormParameters = New Structure();
-	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then
-		OpenSettings.FormParameters.Insert("Company", Form.Items.PaymentList.CurrentData.Payer);
+	If ValueIsFilled(Form.Items.PaymentList.CurrentData.LegalName) Then
+		OpenSettings.FormParameters.Insert("Company", Form.Items.PaymentList.CurrentData.LegalName);
 		OpenSettings.FormParameters.Insert("FilterPartnersByCompanies", True);
 	EndIf;
-	OpenSettings.FillingData = New Structure("Company", Form.Items.PaymentList.CurrentData.Payer);
+	OpenSettings.FillingData = New Structure("Company", Form.Items.PaymentList.CurrentData.LegalName);
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -130,8 +130,8 @@ Procedure PaymentListPartnerEditTextChange(Object, Form, Item, Text, StandardPro
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	AdditionalParameters = New Structure();
-	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then
-		AdditionalParameters.Insert("Company", Form.Items.PaymentList.CurrentData.Payer);
+	If ValueIsFilled(Form.Items.PaymentList.CurrentData.LegalName) Then
+		AdditionalParameters.Insert("Company", Form.Items.PaymentList.CurrentData.LegalName);
 		AdditionalParameters.Insert("FilterPartnersByCompanies", True);
 	EndIf;
 	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
@@ -139,13 +139,13 @@ EndProcedure
 
 #EndRegion
 
-#Region PAYER
+#Region LEGAL_NAME
 
-Procedure PaymentListPayerOnChange(Object, Form, Item, CurrentData = Undefined) Export
+Procedure PaymentListLegalNameOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.PaymentListLegalNameOnChange(Object, Form, CurrentData);
 EndProcedure
 
-Procedure PaymentListPayerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+Procedure PaymentListLegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
@@ -159,7 +159,7 @@ Procedure PaymentListPayerStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
-Procedure PaymentListPayerEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+Procedure PaymentListLegalNameEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	AdditionalParameters = New Structure();

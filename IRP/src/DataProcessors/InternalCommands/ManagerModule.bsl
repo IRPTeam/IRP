@@ -23,6 +23,10 @@ Function GetAllCommandDescriptions() Export
 		Result.Add(GetCommandDescription(PrintTemplate_Name));
 	EndDo;
 	
+	For Each ExecutionTemplate_Name In ExecutionTemplates_GetCommandNames() Do
+		Result.Add(GetCommandDescription(ExecutionTemplate_Name));
+	EndDo;
+	
 	Return Result;
 	
 EndFunction
@@ -63,6 +67,9 @@ Function GetCommandDescription(CommandName) Export
 	ElsIf Right(CommandName, 14) = "_PrintTemplate" Then
 		Return PrintTemplates_GetCommandDescription(CommandName);
 	
+	ElsIf Right(CommandName, 18) = "_ExecutionTemplate" Then
+		Return ExecutionTemplates_GetCommandDescription(CommandName);
+	
 	EndIf;
 	
 	Raise StrTemplate(R().Exc_011, CommandName);
@@ -89,6 +96,10 @@ Function GetCommandGroupDescription(GroupName) Export
 	
 	If Right(CommandGroupDescription.Name, 8) = "_Submenu" Then
 		CommandGroupDescription.Type = "Popup";
+	EndIf;
+	
+	If Left(CommandGroupDescription.Name, 18) = "ExecutionTemplate_" Then
+		ExecutionTemplate_GroupDescription(CommandGroupDescription);
 	EndIf;
 	
 	Return CommandGroupDescription;
@@ -770,6 +781,7 @@ Procedure AuditLock_OnInitialization(CommandName, CommandParameters, Cancel, Add
 		
 		CommandPicture = PictureLib[CommandParameters.CommandDescription.Picture]; // Picture
 		NewColumn.HeaderPicture = CommandPicture; 
+		//@skip-check property-return-type
 		NewColumn.ValuesPicture = CommandPicture;
 		NewColumn.ToolTip = NStr("en = 'Audit lock'");
 		
@@ -917,6 +929,107 @@ Function PrintTemplates_GetCommandDescription(CommandName)
 	Return CommandDescription;
 	
 EndFunction
+
+#EndRegion
+
+#Region ExecutionTemplates
+
+// Execution templates get command names.
+// 
+// Returns:
+//  Array - Execution templates get command names
+Function ExecutionTemplates_GetCommandNames()
+	
+	Results = New Array; // Array of String
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT DISTINCT
+	|	ExecutionTemplates.Code AS Code
+	|FROM
+	|	Catalog.ExecutionTemplates AS ExecutionTemplates
+	|WHERE
+	|	NOT ExecutionTemplates.DeletionMark
+	|	AND NOT ExecutionTemplates.NotActive
+	|	AND ExecutionTemplates.ReadyToStartProcesses
+	|
+	|ORDER BY
+	|	Code";
+	
+	QuerySelection = Query.Execute().Select();
+	
+	While QuerySelection.Next() Do
+		//@skip-check invocation-parameter-type-intersect, property-return-type
+		Results.Add("ID_" + Format(QuerySelection.Code, "NG=;") + "_ExecutionTemplate");
+	EndDo;
+	
+	Return Results;
+	
+EndFunction
+
+Function ExecutionTemplates_GetCommandDescription(CommandName)
+	
+	NameParts = StrSplit(CommandName, "_");
+	TemplateCode = NameParts[1];
+	TemplateRef = Catalogs.ExecutionTemplates.FindByCode(TemplateCode);
+	
+	SubMenus = "";
+	SubMenusArray = New Array; // Array of String
+	TemplateParentRef = TemplateRef.Parent;
+	While Not TemplateParentRef.IsEmpty() Do
+		SubMenusArray.Insert(0, "ExecutionTemplate_"+TemplateParentRef.Code);
+		TemplateParentRef = TemplateParentRef.Parent;
+	EndDo;
+	If SubMenusArray.Count() Then
+		SubMenus = "." + StrConcat(SubMenusArray, ".");
+	EndIf;
+	
+	CommandDescription = InternalCommandsServer.GetCommandDescription();
+	
+	CommandDescription.Name = CommandName;
+	CommandDescription.Title = String(TemplateRef);
+	CommandDescription.ToolTip = String(TemplateRef);
+	CommandDescription.Picture = "BusinessProcessStart";
+	CommandDescription.EnableChecking = False;
+	
+	CommandDescription.Representation = "PictureAndText";
+	CommandDescription.LocationGroup = "CommandBar.ExecutionTemplate_" + SubMenus;
+	CommandDescription.LocationInCommandBar = "InCommandBarAndInAdditionalSubmenu"; // ButtonLocationInCommandBar.InCommandBarAndInAdditionalSubmenu
+	
+	CommandDescription.UsingObjectForm = True;
+	CommandDescription.UsingListForm = False;
+	CommandDescription.UsingChoiceForm = False;
+	
+	Targets = CommandDescription.Targets;
+	For Each ExecutionObjectRow In TemplateRef.ExecutionObjects Do
+		Targets.Add(ExecutionObjectRow.ObjectType.ObjectFullName);
+	EndDo;
+	CommandDescription.Targets = New FixedArray(Targets);
+	
+	Return CommandDescription;
+	
+EndFunction
+
+// Execution template group description.
+// 
+// Parameters:
+//  GroupDescription - See InternalCommandsServer.GetCommandGroupDescription 
+Procedure ExecutionTemplate_GroupDescription(GroupDescription)
+	
+	GroupCode = Mid(GroupDescription.Name, 19);
+	If GroupCode = "" Then
+		GroupDescription.Title = Metadata.BusinessProcesses.ExecutionProcesses.Synonym;
+		GroupDescription.Picture = "BusinessProcess";
+	Else
+		GroupRef = Catalogs.ExecutionTemplates.FindByCode(GroupCode);
+		GroupDescription.Title = String(GroupRef);
+		GroupDescription.Picture = "LevelDown";
+	EndIf;
+	
+	GroupDescription.ToolTip = GroupDescription.Title;
+	GroupDescription.Type = "Popup";
+	
+EndProcedure 
 
 #EndRegion
 

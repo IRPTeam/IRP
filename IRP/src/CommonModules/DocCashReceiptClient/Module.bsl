@@ -146,11 +146,11 @@ Procedure PaymentListPartnerStartChoice(Object, Form, Item, ChoiceData, Standard
 			CurrentData = Form.Items.PaymentList.CurrentData;
 		EndIf;
 		
-		If ValueIsFilled(CurrentData.Payer) Then
-			OpenSettings.FormParameters.Insert("Company", CurrentData.Payer);
+		If ValueIsFilled(CurrentData.LegalName) Then
+			OpenSettings.FormParameters.Insert("Company", CurrentData.LegalName);
 			OpenSettings.FormParameters.Insert("FilterPartnersByCompanies", True);
 		EndIf;
-		OpenSettings.FillingData.Insert("Company", CurrentData.Payer);
+		OpenSettings.FillingData.Insert("Company", CurrentData.LegalName);
 	EndIf;
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
@@ -171,8 +171,8 @@ Procedure PaymentListPartnerEditTextChange(Object, Form, Item, Text, StandardPro
 			CurrentData = Form.Items.PaymentList.CurrentData;
 		EndIf;
 		
-		If ValueIsFilled(CurrentData.Payer) Then
-			AdditionalParameters.Insert("Company", CurrentData.Payer);
+		If ValueIsFilled(CurrentData.LegalName) Then
+			AdditionalParameters.Insert("Company", CurrentData.LegalName);
 			AdditionalParameters.Insert("FilterPartnersByCompanies", True);
 		EndIf;
 	EndIf;
@@ -181,13 +181,13 @@ EndProcedure
 
 #EndRegion
 
-#Region PAYER
+#Region LEGAL_NAME
 
-Procedure PaymentListPayerOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
+Procedure PaymentListLegalNameOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
 	ViewClient_V2.PaymentListLegalNameOnChange(Object, Form, CurrentData, FormAttributeUpdateDirection);
 EndProcedure
 
-Procedure PaymentListPayerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, CurrentData = Undefined) Export
+Procedure PaymentListLegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, CurrentData = Undefined) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 
 	OpenSettings.ArrayOfFilters = New Array();
@@ -208,7 +208,7 @@ Procedure PaymentListPayerStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
-Procedure PaymentListPayerEditTextChange(Object, Form, Item, Text, StandardProcessing, CurrentData = Undefined) Export
+Procedure PaymentListLegalNameEditTextChange(Object, Form, Item, Text, StandardProcessing, CurrentData = Undefined) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	AdditionalParameters = New Structure();
@@ -240,7 +240,7 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 
 	Parameters = New Structure();
 	Parameters.Insert("Partner"  , CurrentData.Partner);
-	Parameters.Insert("LegalName", CurrentData.Payer);
+	Parameters.Insert("LegalName", CurrentData.LegalName);
 	Parameters.Insert("Company"  , Object.Company);
 
 	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, Object.TransactionType, Parameters);
@@ -283,8 +283,8 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	
 	Parameters = New Structure();
 	Parameters.Insert("Filter", New Structure());
-	If ValueIsFilled(CurrentData.Payer) Then
-		Parameters.Filter.Insert("LegalName", CurrentData.Payer);
+	If ValueIsFilled(CurrentData.LegalName) Then
+		Parameters.Filter.Insert("LegalName", CurrentData.LegalName);
 	EndIf;
 	Parameters.Filter.Insert("Company", Object.Company);
 
@@ -450,8 +450,8 @@ Procedure PaymentListOrderStartChoice(Object, Form, Item, ChoiceData, StandardPr
 
 	Parameters = New Structure();
 	Parameters.Insert("Filter", New Structure());
-	If ValueIsFilled(CurrentData.Payer) Then
-		Parameters.Filter.Insert("LegalName", CurrentData.Payer);
+	If ValueIsFilled(CurrentData.LegalName) Then
+		Parameters.Filter.Insert("LegalName", CurrentData.LegalName);
 	EndIf;
 	Parameters.Filter.Insert("Company", Object.Company);
 	Parameters.Filter.Insert("Type", Type("DocumentRef.SalesOrder"));

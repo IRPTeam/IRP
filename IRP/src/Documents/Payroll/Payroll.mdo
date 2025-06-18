@@ -196,10 +196,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="31737c6d-0c18-498c-b04a-53ddefd184ba">
-    <name>Partner</name>
+    <name>DELETE_Partner</name>
     <synonym>
       <key>en</key>
-      <value>Partner</value>
+      <value>DELETE partner</value>
     </synonym>
     <type>
       <types>CatalogRef.Partners</types>
@@ -212,10 +212,10 @@
     <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   </attributes>
   <attributes uuid="141c8f5c-9da9-4c22-ad8f-3c5f2f2fb678">
-    <name>LegalName</name>
+    <name>DELETE_LegalName</name>
     <synonym>
       <key>en</key>
-      <value>Legal name</value>
+      <value>DELETE legal name</value>
     </synonym>
     <type>
       <types>CatalogRef.Companies</types>
@@ -1065,6 +1065,36 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6c6d7562-08dc-4219-a159-8e2615614c2c">
+      <name>Partner</name>
+      <synonym>
+        <key>en</key>
+        <value>Partner</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3260ebf2-72c1-4a5e-b834-ddaa15ac075d">
+      <name>LegalName</name>
+      <synonym>
+        <key>en</key>
+        <value>Legal name</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>

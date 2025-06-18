@@ -654,6 +654,7 @@ Scenario: _0960020 check Partner Term by Partner filtering in Employee cash adva
 			| 'FilterTradeAgent' | "No"    | ''            |
 			| 'FilterVendor'     | "No"    | ''            |
 		And in "List" table in the form item addition named "ListSearchString" I enter the text "Alexander Orlov"
+		And I activate field named "Description" in "List" table
 		And I click the button named "FormChoose"
 		Then the form attribute named "Agreement" became equal to "Alexander Orlov cash advance, USD"
 	* Check	Partner term filter		

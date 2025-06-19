@@ -202,6 +202,18 @@ EndProcedure
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Parameters.Insert("RecordType", AccumulationRecordType.Receipt);
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	AccReg = AccumulationRegisters;
+
+	Current_R6080T_OtherPeriodsRevenues = PostingServer.GetQueryTableByName("R6070T_R6080T_OtherPeriodsRevenues", Parameters);
+	Exists_R6080T_OtherPeriodsRevenues  = PostingServer.GetQueryTableByName("Exists_R6080T_OtherPeriodsRevenues", Parameters);
+	
+	If Not Cancel 
+		And Not AccReg.R6080T_OtherPeriodsRevenues.CheckBalance(Ref, 
+			Current_R6080T_OtherPeriodsRevenues, 
+			Exists_R6080T_OtherPeriodsRevenues, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;	
 EndProcedure
 
 #EndRegion
@@ -236,6 +248,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6070S_BatchRevenueAllocationInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(PostingServer.Exists_R6080T_OtherPeriodsRevenues());
 	Return QueryArray;
 EndFunction
 

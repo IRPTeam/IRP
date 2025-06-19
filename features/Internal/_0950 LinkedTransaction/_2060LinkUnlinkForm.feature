@@ -5015,14 +5015,42 @@ Scenario: _2060041 check link/unlink form in the PO - PI (use variable item key,
 			| 'Phone A' | 'Blue'     | '5,000'    |
 			| 'Router'  | 'Router'   | '1,000'    |
 		And I close all client application windows
-		
 
-				
-
-				
-		
-				
-				
-				
-
-				
+Scenario: _2060042 check link/unlink in first posting (PO date later than PI)
+	And I close all client application windows
+	* Create PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+	* Fillling main info
+		And I select from the drop-down list named "Partner" by "Crystal" string
+		And I select from the drop-down list named "Agreement" by "Vendor, TRY" string		
+		And I select "Approved" exact value from the drop-down list named "Status"
+	* Adding Items		
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Boots" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "38/18SD" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "1 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Dress" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "M/White" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "100,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to the tab named "GroupOther"
+		And I input "10.06.2025 13:27:02" text in the field named "Date"				
+		And I click the button named "FormPost"
+	* Create PI
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I move to the tab named "GroupOther"
+		And I move to the tab named "GroupMore"
+		And I input "08.06.2025 16:22:10" text in the field named "Date"
+		And I click the button named "FormPost"
+	* Check
+		Then there are lines in TestClient message log
+			|'Wrong linked row [1]: Document date [08.06.2025 16:22:10] less than Basis date [10.06.2025 13:27:02]'|
+			|'Wrong linked row [2]: Document date [08.06.2025 16:22:10] less than Basis date [10.06.2025 13:27:02]'|
+	And I close all client application windows									
+	

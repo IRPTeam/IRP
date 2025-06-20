@@ -110,6 +110,7 @@ Scenario: _041 test data
 		When Create document Bundling objects (LC)
 		When Create document GoodsReceipt objects (LC)
 		When Create document PurchaseInvoice objects (for AdditionalCostAllocation) (LC)
+		When Create document PurchaseInvoice objects (prohibition of cost allocation for already allocated PI)
 		When Create document InventoryTransfer objects (LC)
 		When Create document OpeningEntry objects (LC)
 		When Create document PriceList objects (LC)
@@ -1453,4 +1454,127 @@ Scenario: _099 sales from one store, return to another store
 		And "Result" spreadsheet document contains "BathBalance_072_4" template lines by template	
 		And I close all client application windows		
 
-		
+Scenario: _102 check prohibition of cost allocation for already allocated PI (row, by amount)				
+	And I close all client application windows		
+	* Create Additional Cost Allocation
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And I click the button named "FormCreate"
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select "By rows" exact value from the drop-down list named "AllocationMode"
+		And I select "By amount" exact value from the drop-down list named "AllocationMethod"
+	* Add Expense PI
+		And in the table "CostRows" I click the button named "CostRowsAdd"
+		Then "Select cost rows" window is opened
+		And I expand current line in "CostRowsTree" table
+		And I go to line in "CostRowsTree" table
+			| "Amount" | "Currency" | "Presentation"                                     | "Tax amount" | "Use"                                              |
+			| "200,00" | "TRY"      | "Purchase invoice 8 022 dated 05.05.2025 14:32:41" | "36,00"      | "Purchase invoice 8 022 dated 05.05.2025 14:32:41" |
+		And I go to line in "CostRowsTree" table
+			| "Amount" | "Currency" | "Expense type" | "Presentation" | "Profit loss center" | "Tax amount" | "Use" |
+			| "200,00" | "TRY"      | "Expense"      | "Service, Tax" | "Front office"       | "36,00"      | "No"  |
+		And I change checkbox named "CostRowsTreeUse" in "CostRowsTree" table
+		And I finish line editing in "CostRowsTree" table
+		And I click the button named "FormOk"
+	* Add PI
+		And I go to line in "CostRows" table
+			| "Amount" | "Currency" | "Expense type" | "Presentation" | "Profit loss center" | "Tax amount" |
+			| "200,00" | "TRY"      | "Expense"      | "Service, Tax" | "Front office"       | "36,00"      |
+		And in the table "AllocationRows" I click the button named "AllocationRowsAdd"
+		Then "Select allocation rows" window is opened
+		And I go to line in "List" table
+			| "Document"                                         |
+			| "Purchase invoice 8 021 dated 02.05.2025 12:12:12" |
+		And in the table "List" I click the button named "ListSelectDocument"
+		And I change checkbox named "DocumentRowsUse" in "DocumentRows" table
+		And I finish line editing in "DocumentRows" table
+		And I go to line in "DocumentRows" table
+			| "Item"  | "Item key"  | "Store"    | "Use" |
+			| "Dress" | "Dress/A-8" | "Store 01" | "No"  |
+		And I change checkbox named "DocumentRowsUse" in "DocumentRows" table
+		And I finish line editing in "DocumentRows" table
+		And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
+		And I click the button named "FormOk"
+	* Allocate cost
+		And in the table "AllocationRows" I click the button named "AllocationRowsAllocateCostAmount"
+		And I move to the tab named "GroupOther"
+		And I input "07.05.2025 13:13:13" text in the field named "Date"
+		And I click the button named "FormPost"
+		And I move to the tab named "GroupResult"
+		And "AllocationResult" table became equal
+			| '#' | 'Expense purchase invoice'                         | 'Expense item' | 'Expense item key' | 'Purchase invoice'                                 | 'Item'     | 'Item key'          | 'Serial lot number' | 'Store'    | 'Currency' | 'Amount' | 'Tax amount' | 'Expense type' | 'Profit loss center' |
+			| '1' | 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Service'      | 'Tax'              | 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Trousers' | 'Trousers/Trousers' | ''                  | 'Store 01' | 'TRY'      | '90,91'  | '16,36'      | 'Expense'      | 'Front office'       |
+			| '2' | 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Service'      | 'Tax'              | 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Dress'    | 'Dress/A-8'         | ''                  | 'Store 01' | 'TRY'      | '109,09' | '19,64'      | 'Expense'      | 'Front office'       |
+		And I activate the field named "FormPostAndClose"
+	* Un-post Expense PI												
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '8 022'  |
+		And I select current line in "List" table
+		And I click the button named "FormUndoPosting"
+	* Check
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'By document [Purchase invoice 8 022 dated 05.05.2025 14:32:41]. Lacking: 200 TRY.'|
+	And I close all client application windows
+
+Scenario: _103 check prohibition of cost allocation for already allocated PI (documents, by amount)				
+	And I close all client application windows		
+	* Create Additional Cost Allocation
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And I click the button named "FormCreate"
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select "By documents" exact value from the drop-down list named "AllocationMode"
+		And I select "By amount" exact value from the drop-down list named "AllocationMethod"
+	* Add Expense PI
+		And in the table "CostDocuments" I click the button named "CostDocumentsAdd"
+		And I click choice button of the attribute named "CostDocumentsDocument" in "CostDocuments" table
+		And I go to line in "List" table
+			| "Amount" | "Basis"                                            | "Company"      | "Currency" | "TaxAmount" |
+			| "650"    | "Purchase invoice 8 023 dated 07.05.2025 10:29:51" | "Main Company" | "TRY"      | "117"       |
+		And in the table "List" I click the button named "FormSelect"
+	* Add PI
+		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
+		And I select current line in "AllocationDocuments" table
+		And I click choice button of the attribute named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		Then "Select allocation document" window is opened
+		And I go to line in "List" table
+			| "Basis"                                            | "Company"      |
+			| "Purchase invoice 8 021 dated 02.05.2025 12:12:12" | "Main Company" |
+		And I activate field named "ListBasis" in "List" table
+		And in the table "List" I click the button named "FormSelect"
+	* Allocate cost
+		And I move to the tab named "GroupOther"
+		And I input "08.05.2025 14:14:14" text in the field named "Date"
+		And I click the button named "FormPost"
+		And I move to the tab named "GroupResult"
+		And "AllocationResult" table became equal
+			| '#' | 'Expense purchase invoice'                         | 'Expense item' | 'Expense item key' | 'Purchase invoice'                                 | 'Item'     | 'Item key'          | 'Serial lot number' | 'Store'    | 'Currency' | 'Amount' | 'Tax amount' | 'Expense type' | 'Profit loss center' |
+			| '1' | 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Service'      | 'Rent'             | 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Trousers' | 'Trousers/Trousers' | ''                  | 'Store 01' | 'TRY'      | '227,27' | '40,91'      | 'Expense'      | 'Front office'       |
+			| '2' | 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Service'      | 'Rent'             | 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Dress'    | 'Dress/A-8'         | ''                  | 'Store 01' | 'TRY'      | '272,73' | '49,09'      | 'Expense'      | 'Front office'       |
+			| '3' | 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Service'      | 'Internet'         | 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Trousers' | 'Trousers/Trousers' | ''                  | 'Store 01' | 'TRY'      | '68,18'  | '12,27'      | 'Expense'      | 'Front office'       |
+			| '4' | 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Service'      | 'Internet'         | 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Dress'    | 'Dress/A-8'         | ''                  | 'Store 01' | 'TRY'      | '81,82'  | '14,73'      | 'Expense'      | 'Front office'       |
+		And I activate the field named "FormPostAndClose"
+	* Update price in Expense PI												
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '8 023'  |
+		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| "#" | "Dont calculate row" | "Expense type" | "Item"    | "Item key" | "Net amount" | "Other period expense type" | "Price"  | "Price type"              | "Profit loss center" | "Quantity" | "Tax amount" | "Total amount" | "Unit" | "Use goods receipt" | "VAT" |
+			| "2" | "No"                 | "Expense"      | "Service" | "Internet" | "150,00"     | "Items cost"                | "150,00" | "en description is empty" | "Front office"       | "1,000"    | "27,00"      | "177,00"       | "pcs"  | "No"                | "18%" |
+		And I activate field named "ItemListPrice" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+	* Check
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'By document [Purchase invoice 8 023 dated 07.05.2025 10:29:51]. Lacking: 50 TRY.'|
+	And I close all client application windows

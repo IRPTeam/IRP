@@ -90,10 +90,11 @@ Function GetChatNotify()
 		|	LoggerNotification.WaitForOpenRef,
 		|	LoggerNotification.RefOpened
 		|FROM
-		|	InformationRegister.LoggerNotification AS LoggerNotification";
+		|	InformationRegister.LoggerNotification AS LoggerNotification
+		|WHERE
+		|	LoggerNotification.Basis = &Basis";
 	
 	Query.SetParameter("Basis", Basis);
-	Query.SetParameter("CurrentUser", SessionParameters.CurrentUser);
 	Result = Query.Execute().Unload();
 	Return Result
 EndFunction
@@ -240,8 +241,5 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Function GetFilePresentation(FileName, FileSize)
-	Kb = Round(FileSize / 1024, 2);
-	Mb = Round(Kb / 1024, 2);
-	SizePresentation = ?(Mb < 1, String(Kb) + " Kb", String(Mb) + " Mb");
-	Return StrTemplate("%1 (%2)", FileName, SizePresentation);
+	Return StrTemplate("%1 (%2)", FileName, CommonFunctionsClientServer.GetSizePresentation(FileSize));
 EndFunction

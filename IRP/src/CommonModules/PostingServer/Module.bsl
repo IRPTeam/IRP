@@ -1434,12 +1434,13 @@ EndFunction
 
 Function Exists_R6080T_OtherPeriodsRevenues() Export
 	Return 
-		"SELECT *
-		|	INTO Exists_R3010B_R6080T_OtherPeriodsRevenues
+		"SELECT
+		|	*
+		|INTO Exists_R6080T_OtherPeriodsRevenues
 		|FROM
-		|	AccumulationRegister.R3010B_R6080T_OtherPeriodsRevenues AS R3010B_R6080T_OtherPeriodsRevenues
+		|	AccumulationRegister.R6080T_OtherPeriodsRevenues AS R6080T_OtherPeriodsRevenues
 		|WHERE
-		|	R3010B_R6080T_OtherPeriodsRevenues.Recorder = &Ref";
+		|	R6080T_OtherPeriodsRevenues.Recorder = &Ref";
 EndFunction
 
 Function RegistersWithAdditionalDataFilling()

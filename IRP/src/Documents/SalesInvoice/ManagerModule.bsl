@@ -263,7 +263,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		Cancel = True;
 	EndIf;
 	
-	Current_R6080T_OtherPeriodsRevenues = PostingServer.GetQueryTableByName("R6070T_R6080T_OtherPeriodsRevenues", Parameters);
+	Current_R6080T_OtherPeriodsRevenues = PostingServer.GetQueryTableByName("R6080T_OtherPeriodsRevenues", Parameters);
 	Exists_R6080T_OtherPeriodsRevenues  = PostingServer.GetQueryTableByName("Exists_R6080T_OtherPeriodsRevenues", Parameters);
 	
 	If Not Cancel 

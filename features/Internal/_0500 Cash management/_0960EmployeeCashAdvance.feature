@@ -653,7 +653,9 @@ Scenario: _0960020 check Partner Term by Partner filtering in Employee cash adva
 			| 'FilterOther'      | "No"    | ''            |
 			| 'FilterTradeAgent' | "No"    | ''            |
 			| 'FilterVendor'     | "No"    | ''            |
-		And in "List" table in the form item addition named "ListSearchString" I enter the text "Alexander Orlov"
+		And I go to line in "List" table
+			| 'Code' | 'Description'     |
+			| '54'   | 'Alexander Orlov' |			
 		And I click the button named "FormChoose"
 		Then the form attribute named "Agreement" became equal to "Alexander Orlov cash advance, USD"
 	* Check	Partner term filter		
@@ -665,5 +667,6 @@ Scenario: _0960020 check Partner Term by Partner filtering in Employee cash adva
 		And "List" table became equal
 			| 'Code' | 'Description'                       | 'Kind'    | 'Type'  | 'AP/AR posting detail' |
 			| '400'  | 'Alexander Orlov cash advance, USD' | 'Regular' | 'Other' | 'By agreements'        |
+		And I select current line in "List" table			
 	And I close all client application windows					
 							

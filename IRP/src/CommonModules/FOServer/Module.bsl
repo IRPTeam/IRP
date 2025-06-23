@@ -114,7 +114,7 @@ Function IsUseSimpleBatch() Export
 EndFunction
 
 Function IsUsePreliminary() Export
-	Return GetFunctionalOption("UseSimpleBatch");
+	Return GetFunctionalOption("UsePreliminary");
 EndFunction
 
 #EndRegion

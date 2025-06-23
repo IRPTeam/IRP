@@ -46,39 +46,11 @@ Procedure PartnerOnChange(Object, Form, Item) Export
 EndProcedure
 
 Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-		DataCompositionComparisonType.NotEqual));
-	OpenSettings.FormParameters = New Structure();
-	FilterPartnerType = "";
-	If Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase") Then
-		FilterPartnerType = "Vendor";
-	ElsIf Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer") Then
-		FilterPartnerType = "Customer";
-	EndIf;
-	If Not IsBlankString(FilterPartnerType) Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterPartnerType, True,
-			DataCompositionComparisonType.Equal));
-		OpenSettings.FormParameters.Insert("Filter", New Structure(FilterPartnerType, True));
-		OpenSettings.FillingData = New Structure(FilterPartnerType, True);
-	EndIf;
-	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	DocumentsClient.PartnerStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, Object.TransactionType);
 EndProcedure
 
 Procedure PartnerTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	FilterPartnerType = "";
-	If Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase") Then
-		FilterPartnerType = "Vendor";
-	ElsIf Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer") Then
-		FilterPartnerType = "Customer";
-	EndIf;
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterPartnerType, True, ComparisonType.Equal));
-	AdditionalParameters = New Structure();
-	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
-		AdditionalParameters);
+	DocumentsClient.PartnerTextChange_TransactionTypeFilter(Object, Form, Item, Text, StandardProcessing, Object.TransactionType);
 EndProcedure
 
 #EndRegion
@@ -286,7 +258,7 @@ EndProcedure
 #Region VAT_RATE
 
 Procedure ItemListVatRateOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListVatRateOnChange(Object, Form, CurrentData);
+	ViewClient_V2.ItemListVatRateOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion
@@ -294,7 +266,7 @@ EndProcedure
 #Region NET_AMOUNT
 
 Procedure ItemListNetAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListNetAmountOnChange(Object, Form, CurrentData);
+	ViewClient_V2.ItemListNetAmountOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion
@@ -302,7 +274,7 @@ EndProcedure
 #Region TAX_AMOUNT
 
 Procedure ItemListTaxAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListTaxAmountOnChange(Object, Form, CurrentData);
+	ViewClient_V2.ItemListTaxAmountOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion
@@ -310,7 +282,7 @@ EndProcedure
 #Region TOTAL_AMOUNT
 
 Procedure ItemListTotalAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.PaymentListTotalAmountOnChange(Object, Form, CurrentData);
+	ViewClient_V2.ItemListTotalAmountOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion

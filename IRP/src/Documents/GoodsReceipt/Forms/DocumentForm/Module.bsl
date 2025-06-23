@@ -18,6 +18,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -88,6 +89,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LegalName.Enabled = PartnerVisible And ValueIsFilled(Object.Partner);
 	Form.Items.Partner.Visible   = PartnerVisible;
 	Form.Items.LegalName.Visible = PartnerVisible;
+	
 	For Each Row In Object.ItemList Do
 		If ValueIsFilled(Row.ReceiptBasis) Then
 			Row.ReceiptBasisCurrency = ServiceSystemServer.GetCompositeObjectAttribute(Row.ReceiptBasis, "Currency");
@@ -117,6 +119,35 @@ Procedure SetVisibilityAvailability(Object, Form)
 	For Each Row In Form.Object.ItemList Do
 			Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
 	EndDo;
+	
+	IsPriliminary = (Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.PreliminaryStock"));
+	
+	PriliminaryFormItems = New Array();
+	PriliminaryFormItems.Add("ItemListTotalTotalAmount");
+	PriliminaryFormItems.Add("CurrencyTotalAmount");
+	PriliminaryFormItems.Add("ItemListPriceType");
+	PriliminaryFormItems.Add("ItemListPrice");
+	PriliminaryFormItems.Add("ItemListDontCalculateRow");
+	PriliminaryFormItems.Add("ItemListTotalAmount");
+	PriliminaryFormItems.Add("Currency");
+	PriliminaryFormItems.Add("PriceIncludeTax");
+	PriliminaryFormItems.Add("Agreement");
+	PriliminaryFormItems.Add("EditCurrencies");
+	
+	For Each ItemName In PriliminaryFormItems Do
+		Form.Items[ItemName].Visible = IsPriliminary;
+	EndDo;
+	
+	TaxsesFormItems = New Array();	
+	TaxsesFormItems.Add("ItemListTaxAmount");
+	TaxsesFormItems.Add("ItemListNetAmount");
+	TaxsesFormItems.Add("ItemListTotalTaxAmount");
+	TaxsesFormItems.Add("ItemListTotalNetAmount");
+	TaxsesFormItems.Add("ItemListVATRate");
+
+	For Each ItemName In TaxsesFormItems Do
+		Form.Items[ItemName].Visible = IsPriliminary And Form.IsTaxVsible;
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -132,6 +163,16 @@ EndProcedure
 &AtClient 
 Procedure _DetachIdleHandler() Export
 	DetachIdleHandler("_IdeHandler");
+EndProcedure
+
+&AtClient
+Procedure API_Callback(TableName, ArrayOfDataPaths) Export
+	API_CallbackAtServer(TableName, ArrayOfDataPaths);
+EndProcedure
+
+&AtServer
+Procedure API_CallbackAtServer(TableName, ArrayOfDataPaths)
+	ViewServer_V2.API_CallbackAtServer(Object, ThisObject, TableName, ArrayOfDataPaths);
 EndProcedure
 
 #EndRegion

@@ -392,7 +392,19 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
-	BatchKeysInfoSettings.Dimensions = "Period, RowID, Direction, Company, Branch, Store, ItemKey, Currency, CurrencyMovementType, SourceOfOrigin, SerialLotNumber";
+	BatchKeysInfoSettings.Dimensions = 
+		"Period, 
+		|RowID, 
+		|Direction, 
+		|Company, 
+		|Branch, 
+		|Store, 
+		|ItemKey, 
+		|Currency, 
+		|CurrencyMovementType, 
+		|SourceOfOrigin, 
+		|SerialLotNumber,
+		|IsPreliminary";
 	BatchKeysInfoSettings.Totals = "PreliminaryQuantity, PreliminaryAmount, PreliminaryTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
@@ -446,27 +458,31 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 
 	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
-		"Document.GoodsReceipt.ItemList");
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.GoodsReceipt.ItemList");
+	
+	R4035B_IncomingStocks = PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters);
+	Exists_R4035B_IncomingStocks = PostingServer.GetQueryTableByName("Exists_R4035B_IncomingStocks", Parameters);
+	
 	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4035B_IncomingStocks", Parameters), AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		R4035B_IncomingStocks, Exists_R4035B_IncomingStocks, AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
-
+	
+	R4036B_IncomingStocksRequested = PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters);
+	Exists_R4036B_IncomingStocksRequested = PostingServer.GetQueryTableByName("Exists_R4036B_IncomingStocksRequested", Parameters);
+	
 	If Not Cancel And Not AccReg.R4036B_IncomingStocksRequested.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters),
-		PostingServer.GetQueryTableByName("Exists_R4036B_IncomingStocksRequested", Parameters),
-		AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		R4036B_IncomingStocksRequested, Exists_R4036B_IncomingStocksRequested, AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 
+	R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters);
+	Exists_R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters);
+	
 	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4014B_SerialLotNumber", Parameters), AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+		R4014B_SerialLotNumber, Exists_R4014B_SerialLotNumber, AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
-
 EndProcedure
 
 Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -592,7 +608,14 @@ Function ItemList()
 		   |	ItemList.ProductionPlanning AS ProductionPlanning,
 		   |	ItemList.Key,
 		   |	ItemList.SimpleBatch AS SimpleBatch,
-		   |	ItemList.Amount
+		   |	ItemList.Amount,
+		   |	
+		   |	case when ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.PreliminaryStock) then
+		   |	ItemList.Ref.Currency else undefined end as Qurrency,
+		   |
+		   |	case when ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.PreliminaryStock) then
+		   |	ItemList.Price else 0 end as Price
+		   |
 		   |INTO ItemList
 		   |FROM
 		   |	Document.GoodsReceipt.ItemList AS ItemList
@@ -1251,7 +1274,7 @@ Function R4050B_StockInventory()
 		|	ItemList.Company,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
-		|	SUM(ItemList.Quantity) AS Quantity
+		|	SUM(ItemList.Quantity) AS PreliminaryQuantity
 		|INTO R4050B_StockInventory
 		|FROM
 		|	ItemList AS ItemList

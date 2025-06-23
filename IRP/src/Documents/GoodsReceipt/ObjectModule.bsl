@@ -3,10 +3,22 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
+	If ThisObject.TransactionType = Enums.GoodsReceiptTransactionTypes.PreliminaryStock Then
+		If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+			Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);	
+		EndIf;
+	Else
+		ThisObject.Currencies.Clear();
+	EndIf;
+
 	If TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer Then
 		Partner = Undefined;
 		LegalName = Undefined;
 	EndIf;
+	
+	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
 	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);
@@ -45,7 +57,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	If FOServer.IsUsePreliminary() Then
+	If ThisObject.TransactionType = Enums.GoodsReceiptTransactionTypes.PreliminaryStock Then
 		CheckedAttributes.Add("Partner");
 		CheckedAttributes.Add("Agreement");
 		CheckedAttributes.Add("Currency");

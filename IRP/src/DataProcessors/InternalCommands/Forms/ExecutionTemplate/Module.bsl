@@ -14,7 +14,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	TemplateName = StrReplace(Parameters.FullName, "InternalCommand_", "");
 	
 	NameParts = StrSplit(TemplateName, "_");
-	TemplateRef = Catalogs.ExecutionTemplates.FindByCode(NameParts[1]);
+	TemplateRef = Catalogs.ExecutionTemplates.FindByCode(Number(NameParts[1]));
 	
 	CommandDescription = DataProcessors.InternalCommands.GetCommandDescription(TemplateName);
 	

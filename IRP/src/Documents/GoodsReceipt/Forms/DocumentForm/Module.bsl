@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -76,6 +77,7 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 
 	PartnerVisible = (Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer")
 		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase")
@@ -187,6 +189,52 @@ EndProcedure
 &AtClient
 Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
 	DocGoodsReceiptClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT
+
+&AtClient
+Procedure AgreementOnChange(Item) Export
+	DocGoodsReceiptClient.AgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocGoodsReceiptClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
+	DocGoodsReceiptClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region _DATE
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocGoodsReceiptClient.AgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region CURRENCY
+
+&AtClient
+Procedure CurrencyOnChange(Item)
+	DocGoodsReceiptClient.AgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region PRICE_INCLUDE_TAX
+
+&AtClient
+Procedure PriceIncludeTaxOnChange(Item)
+	DocGoodsReceiptClient.AgreementOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -303,6 +351,69 @@ EndProcedure
 &AtClient
 Procedure ItemListStoreOnChange(Item)
 	DocGoodsReceiptClient.ItemListStoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region PRICE_TYPE
+
+&AtClient
+Procedure ItemListPriceTypeOnChange(Item)
+	DocGoodsReceiptClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region PRICE
+
+&AtClient
+Procedure ItemListPriceOnChange(Item)
+	DocGoodsReceiptClient.ItemListPriceOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region VAT_RATE
+
+&AtClient
+Procedure ItemListVatRateOnChange(Item) Export
+	DocGoodsReceiptClient.ItemListVatRateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region DONT_CALCULATE_ROW
+
+&AtClient
+Procedure ItemListDontCalculateRowOnChange(Item)
+	DocGoodsReceiptClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region NET_AMOUNT
+
+&AtClient
+Procedure ItemListNetAmountOnChange(Item)
+	DocGoodsReceiptClient.ItemListNetAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_AMOUNT
+
+&AtClient
+Procedure ItemListTaxAmountOnChange(Item)
+	DocGoodsReceiptClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TOTAL_AMOUNT
+
+&AtClient
+Procedure ItemListTotalAmountOnChange(Item)
+	DocGoodsReceiptClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -503,6 +614,16 @@ EndProcedure
 &AtClient
 Procedure OpenSerialLotNumbersTree(Command)
 	SerialLotNumberClient.OpenSerialLotNumbersTree(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EditCurrencies(Command)
+	FormParameters = CurrenciesClientServer.GetParameters_V3(Object);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 #EndRegion

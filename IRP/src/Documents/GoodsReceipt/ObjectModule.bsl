@@ -45,6 +45,13 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	If FOServer.IsUsePreliminary() Then
+		CheckedAttributes.Add("Partner");
+		CheckedAttributes.Add("Agreement");
+		CheckedAttributes.Add("Currency");
+		CheckedAttributes.Add("ItemList.TotalAmount");
+	EndIf;
+	
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
 		Cancel = True;
 	EndIf;

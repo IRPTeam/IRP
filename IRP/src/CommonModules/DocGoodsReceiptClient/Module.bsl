@@ -83,6 +83,22 @@ EndProcedure
 
 #EndRegion
 
+#Region AGREEMENT
+
+Procedure AgreementOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	ViewClient_V2.AgreementOnChange(Object, Form, "ItemList");
+EndProcedure
+
+Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, Object.TransactionType);
+EndProcedure
+
+Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DocumentsClient.AgreementTextChange_TransactionTypeFilter(Object, Form, Item, Text, StandardProcessing, Object.TransactionType);
+EndProcedure
+
+#EndRegion
+
 #Region LEGAL_NAME
 
 Procedure LegalNameOnChange(Object, Form, Item) Export
@@ -129,6 +145,30 @@ EndProcedure
 
 Procedure TransactionTypeOnChange(Object, Form, Item) Export
 	ViewClient_V2.TransactionTypeOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
+#Region PRICE_INCLUDE_TAX
+
+Procedure PriceIncludeTaxOnChange(Object, Form, Item) Export
+	ViewClient_V2.PriceIncludeTaxOnChange(Object, Form);
+EndProcedure
+
+#EndRegion
+
+#Region CURRENCY
+
+Procedure CurrencyOnChange(Object, Form, Item) Export
+	ViewClient_V2.CurrencyOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
+#Region _DATE
+
+Procedure DateOnChange(Object, Form, Item) Export
+	ViewClient_V2.DateOnChange(Object, Form, "ItemList");
 EndProcedure
 
 #EndRegion
@@ -203,6 +243,22 @@ EndProcedure
 
 #EndRegion
 
+#Region PRICE_TYPE
+
+Procedure ItemListPriceTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListPriceTypeOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region PRICE
+
+Procedure ItemListPriceOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListPriceOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
 #Region UNIT
 
 Procedure ItemListUnitOnChange(Object, Form, Item, CurrentData = Undefined) Export
@@ -215,6 +271,46 @@ EndProcedure
 
 Procedure ItemListStoreOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListStoreOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region DONT_CALCULATE_ROW
+
+Procedure ItemListDontCalculateRowOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListDontCalculateRowOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region VAT_RATE
+
+Procedure ItemListVatRateOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListVatRateOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region NET_AMOUNT
+
+Procedure ItemListNetAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListNetAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_AMOUNT
+
+Procedure ItemListTaxAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListTaxAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region TOTAL_AMOUNT
+
+Procedure ItemListTotalAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentListTotalAmountOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion

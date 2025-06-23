@@ -181,6 +181,35 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="a71b5590-ad36-4bd4-a337-77ecb80ccb23">
+    <name>PriceIncludeTax</name>
+    <synonym>
+      <key>en</key>
+      <value>Price includes tax</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="ec87b621-720b-491d-abbb-af25ad08252c">
+    <name>Agreement</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner term</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Agreements</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="0e3b12ea-d926-4049-81d4-8bcccb6e0acc">
     <name>DocumentForm</name>
     <synonym>
@@ -591,6 +620,48 @@
       </synonym>
       <type>
         <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="71666463-cd1f-479a-a4ed-eaac4d1d6c0c">
+      <name>Price</name>
+      <synonym>
+        <key>en</key>
+        <value>Price</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePrice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="504a7099-ce29-4966-9755-a864ebab41a2">
+      <name>PriceType</name>
+      <synonym>
+        <key>en</key>
+        <value>Price type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.PriceTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ab9281aa-f3d9-4eee-bdf2-579d2e4037d0">
+      <name>DontCalculateRow</name>
+      <synonym>
+        <key>en</key>
+        <value>Dont calculate row</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

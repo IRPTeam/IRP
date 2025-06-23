@@ -322,9 +322,17 @@ Procedure OnChainComplete(Parameters) Export
 		Return;
 	EndIf;
 	
+	If Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		If Parameters.FunctionalOptions.IsUsePreliminary Then
+			__tmp_CommonDocuments_OnChainComplete(Parameters, False);
+		Else
+			__tmp_GoodsShipmentReceipt_OnChainComplete(Parameters);
+		EndIf;
+		Return;
+	EndIf;
+	
 	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentPlaningOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt" Then
 		__tmp_GoodsShipmentReceipt_OnChainComplete(Parameters);

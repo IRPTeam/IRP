@@ -32,4 +32,9 @@
   <content>AccumulationRegister.R6020B_BatchBalance.Resource.PreliminaryTaxAmount</content>
   <content>AccumulationRegister.R6020B_BatchBalance.Resource.PreliminaryQuantity</content>
   <content>AccumulationRegister.R6020B_BatchBalance.Resource.PreliminaryAmount</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.PriceType</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.Price</content>
+  <content>Document.GoodsReceipt.Attribute.PriceIncludeTax</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.DontCalculateRow</content>
+  <content>Document.GoodsReceipt.Attribute.Agreement</content>
 </mdclass:FunctionalOption>

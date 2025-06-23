@@ -389,6 +389,7 @@
       <types>DocumentRef.ItemStockAdjustment</types>
       <types>DocumentRef.InventoryTransfer</types>
       <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.GoodsReceipt</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -578,6 +579,22 @@
     </synonym>
     <type>
       <types>CatalogRef.FixedAssets</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="d28e7064-5c38-493c-87dd-da3235f6a54b">
+    <name>IsPreliminary</name>
+    <synonym>
+      <key>en</key>
+      <value>Is preliminary</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

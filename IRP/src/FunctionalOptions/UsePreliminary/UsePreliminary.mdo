@@ -7,4 +7,26 @@
   </synonym>
   <location>Constant.UsePreliminary</location>
   <privilegedGetMode>true</privilegedGetMode>
+  <content>InformationRegister.T6090S_CompositeBatchesAmountValues.Resource.PreliminaryQuantity</content>
+  <content>InformationRegister.T6090S_CompositeBatchesAmountValues.Resource.PreliminaryAmount</content>
+  <content>InformationRegister.T6095S_WriteOffBatchesInfo.Resource.PreliminaryAmount</content>
+  <content>InformationRegister.T6020S_BatchKeysInfo.Resource.PreliminaryQuantity</content>
+  <content>InformationRegister.T6080S_ReallocatedBatchesAmountValues.Resource.PreliminaryQuantity</content>
+  <content>InformationRegister.T6040S_BundleAmountValues.Resource.PreliminaryTaxAmount</content>
+  <content>InformationRegister.T6080S_ReallocatedBatchesAmountValues.Resource.PreliminaryAmount</content>
+  <content>AccumulationRegister.R6010B_BatchWiseBalance.Resource.PreliminaryTaxAmount</content>
+  <content>InformationRegister.T6090S_CompositeBatchesAmountValues.Resource.PreliminaryTaxAmount</content>
+  <content>InformationRegister.T6020S_BatchKeysInfo.Resource.PreliminaryAmount</content>
+  <content>InformationRegister.T6095S_WriteOffBatchesInfo.Resource.PreliminaryTaxAmount</content>
+  <content>InformationRegister.T6040S_BundleAmountValues.Resource.PreliminaryAmount</content>
+  <content>AccumulationRegister.R6010B_BatchWiseBalance.Resource.PreliminaryAmount</content>
+  <content>AccumulationRegister.R6010B_BatchWiseBalance.Resource.PreliminaryQuantity</content>
+  <content>InformationRegister.T6020S_BatchKeysInfo.Resource.PreliminaryTaxAmount</content>
+  <content>InformationRegister.T6080S_ReallocatedBatchesAmountValues.Resource.PreliminaryTaxAmount</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.TaxAmount</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.NetAmount</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.VatRate</content>
+  <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.TotalAmount</content>
+  <content>Document.GoodsReceipt.Attribute.Currency</content>
+  <content>InformationRegister.T6020S_BatchKeysInfo.Dimension.IsPreliminary</content>
 </mdclass:FunctionalOption>

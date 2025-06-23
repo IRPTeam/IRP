@@ -98,7 +98,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndIf;
 	
-	If TransactionType = Enums.GoodsReceiptTransactionTypes.PreliminaryStock Then
+	If TransactionType = Enums.GoodsReceiptTransactionTypes.PreliminaryStock And FOServer.IsUseSimpleBatch() Then
 		VT = ItemList.Unload();
 		VT.GroupBy("PurchaseInvoice");
 		

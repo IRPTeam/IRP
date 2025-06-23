@@ -58,7 +58,7 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 		AccountingServer.UpdateAccountingRelevance(DocObject.Ref);	
 	EndIf;
 	
-	If GetFunctionalOption("UseSimpleBatch") Then
+	If FOServer.IsUseSimpleBatch() Then
     //@skip-check bsl-legacy-check-expression-type
 	  R6025B_SimpleBatchData = Parameters.PostingDataTables.Get(Metadata.AccumulationRegisters.R6025B_SimpleBatch);
 		If Not R6025B_SimpleBatchData = Undefined Then

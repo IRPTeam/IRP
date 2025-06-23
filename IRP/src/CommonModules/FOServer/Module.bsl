@@ -109,6 +109,14 @@ Function IsUseShipmentAndReceiptPlaningOrders() Export
 	Return GetFunctionalOption("UseShipmentAndReceiptPlaningOrders");
 EndFunction
 
+Function IsUseSimpleBatch() Export
+	Return GetFunctionalOption("UseSimpleBatch");
+EndFunction
+
+Function IsUsePreliminary() Export
+	Return GetFunctionalOption("UseSimpleBatch");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

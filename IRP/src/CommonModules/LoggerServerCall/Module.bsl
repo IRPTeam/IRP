@@ -8,14 +8,18 @@ EndFunction
 // Parameters:
 //  Basis - AnyRef - Basis
 //  Comment - String - Comment
+//  AttachedFiles - ValueLIst - Attached files
 //  Manual - Boolean - Manual
 //  NotifyUsers - Array Of CatalogRef.Users - Notify users
 //  NotifySettings - See GetNotifySettings
-Procedure AddLog(Basis, Comment, Manual = False, NotifyUsers = Undefined, NotifySettings = Undefined) Export
-	If IsBlankString(Comment) Then
+Procedure AddLog(Basis, Comment, AttachedFiles = Undefined, Manual = False, NotifyUsers = Undefined, NotifySettings = Undefined) Export
+	If Not (ValueIsFilled(Comment) Or (AttachedFiles <> Undefined And AttachedFiles.Count() > 0)) Then
 		Return;
 	EndIf;
 	SetPrivilegedMode(True);
+	
+	MessageID = String(New UUID());
+	
 	NewRecord = InformationRegisters.Logger.CreateRecordManager();
 	NewRecord.Basis = Basis;
 	NewRecord.Comment = Comment;
@@ -23,6 +27,7 @@ Procedure AddLog(Basis, Comment, Manual = False, NotifyUsers = Undefined, Notify
 	NewRecord.User = SessionParameters.CurrentUser;
 	NewRecord.TimeStamp = CurrentUniversalDateInMilliseconds();
 	NewRecord.Period = CurrentSessionDate();
+	NewRecord.MessageID = MessageID;
 	
 	NotifyID = String(New UUID);
 	If Not NotifyUsers = Undefined Then
@@ -44,6 +49,21 @@ Procedure AddLog(Basis, Comment, Manual = False, NotifyUsers = Undefined, Notify
 		EndDo;
 	EndIf;
 	
+	If Not AttachedFiles = Undefined Then
+		For Each File In AttachedFiles Do
+			BinaryData = GetFromTempStorage(File.Value.Address);
+			ValueStorage = New ValueStorage(BinaryData);
+			
+			NewFile = InformationRegisters.LoggerFiles.CreateRecordManager();
+			NewFile.Basis = Basis;
+			NewFile.MessageID = MessageID;
+			NewFile.FileID = String(New UUID());
+			NewFile.File = ValueStorage;
+			NewFile.FileName = File.Value.FileDescription.FileRef.Name;
+			NewFile.FileSize = File.Value.FileDescription.Size;
+			NewFile.Write();
+		EndDo;
+	EndIf;
 	SetPrivilegedMode(False);
 EndProcedure
 

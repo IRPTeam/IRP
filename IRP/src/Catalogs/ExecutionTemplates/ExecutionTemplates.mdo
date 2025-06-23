@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ce3d7f7f-3eb5-4c21-8fd7-f8694cba63db">
+  <producedTypes>
+    <objectType typeId="226ebe10-a7e6-4b7b-9965-6538acfa5741" valueTypeId="7e556502-8779-4bd6-b31a-7c456648b912"/>
+    <refType typeId="4dac62ea-6a00-4d56-a312-9e9f53286a48" valueTypeId="f6b76409-36fa-4262-99a8-e7c65d022ae7"/>
+    <selectionType typeId="8949daa1-e319-4608-a67a-8b6c4ef684af" valueTypeId="c6369ebf-387c-417c-bb5c-82cbb8f83a41"/>
+    <listType typeId="d779d3d2-97eb-4831-b666-2f979a5b9f4f" valueTypeId="5f7764a0-a9e5-42c0-944c-eb1ee2e3b8d3"/>
+    <managerType typeId="4e7a870b-db66-4bc2-8399-0da1af5a77c8" valueTypeId="c1ef1794-70b5-4869-8933-8df49dbde75d"/>
+  </producedTypes>
+  <name>ExecutionTemplates</name>
+  <synonym>
+    <key>en</key>
+    <value>Execution templates</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.ExecutionTemplates.StandardAttribute.Code</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Execution template</value>
+  </objectPresentation>
+  <hierarchical>true</hierarchical>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.ExecutionTemplates.Form.ItemForm</defaultObjectForm>
+  <defaultFolderForm>Catalog.ExecutionTemplates.Form.GroupForm</defaultFolderForm>
+  <defaultListForm>Catalog.ExecutionTemplates.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.ExecutionTemplates.Form.ChoiceForm</defaultChoiceForm>
+  <defaultFolderChoiceForm>Catalog.ExecutionTemplates.Form.GroupChoiceForm</defaultFolderChoiceForm>
+  <attributes uuid="3cbd632b-185c-4178-99e1-e8a66fa86f77">
+    <name>ReadyToStartProcesses</name>
+    <synonym>
+      <key>en</key>
+      <value>Ready to start processes</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <tabularSections uuid="a0d14ea6-7748-4c4d-afe8-0d1ae70914e1">
+    <producedTypes>
+      <objectType typeId="49db5aaf-87e2-4a3e-a016-79784a69eaee" valueTypeId="2c895889-52ac-454f-8e88-9b3e9f4c0cd6"/>
+      <rowType typeId="51319632-437f-4205-b286-67243f06b968" valueTypeId="b257fb59-de6c-487d-b9eb-0f015f6c901e"/>
+    </producedTypes>
+    <name>ExecutionObjects</name>
+    <synonym>
+      <key>en</key>
+      <value>Execution objects</value>
+    </synonym>
+    <attributes uuid="3263122d-29d2-4ea1-b7fc-db3937f64c72">
+      <name>ObjectType</name>
+      <synonym>
+        <key>en</key>
+        <value>Object type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ConfigurationMetadata</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a77478a4-5ba4-4a87-89b2-4bb5f2b55c48">
+      <name>AutostartProcesses</name>
+      <synonym>
+        <key>en</key>
+        <value>Autostart processes</value>
+      </synonym>
+      <type>
+        <types>EnumRef.AutostartProcessTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="6794637a-460b-466a-a554-99fef6573ad1">
+    <producedTypes>
+      <objectType typeId="d8350164-a399-43fe-8913-c7439994d6eb" valueTypeId="2e69bffb-c996-4250-8ecd-686a19e8e4a1"/>
+      <rowType typeId="b660d6f0-3f5f-40c5-b103-571dc2bc0279" valueTypeId="a72c7848-6e77-427b-8472-aa700df68bab"/>
+    </producedTypes>
+    <name>ExecutionStages</name>
+    <synonym>
+      <key>en</key>
+      <value>Execution stages</value>
+    </synonym>
+    <attributes uuid="f7b23aa6-af8b-4e04-9730-cfaa899dd1b8">
+      <name>StageID</name>
+      <synonym>
+        <key>en</key>
+        <value>Stage ID</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="30fe2beb-273e-488b-a48e-15996b65b883">
+      <name>Description_en</name>
+      <synonym>
+        <key>en</key>
+        <value>ENG</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeDescription</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c0902d11-c28d-4df8-95e0-19d8531c5af8">
+      <name>Description_hash</name>
+      <synonym>
+        <key>en</key>
+        <value>HASH</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeDescription</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2c719a07-8e72-4ac3-86f8-f680dc267a8d">
+      <name>Description_ru</name>
+      <synonym>
+        <key>en</key>
+        <value>RU</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeDescription</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b0889675-7350-491c-af0b-ac2bf8fd7b33">
+      <name>Description_tr</name>
+      <synonym>
+        <key>en</key>
+        <value>TR</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeDescription</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7bfbc8e2-5bd1-4dd0-af60-ecabbba7ca1a">
+      <name>TasksStartTogether</name>
+      <synonym>
+        <key>en</key>
+        <value>Tasks start together</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="cabe30da-35ae-4eba-b7c3-05ca002c2c31">
+      <name>TasksResult</name>
+      <synonym>
+        <key>en</key>
+        <value>Tasks result</value>
+      </synonym>
+      <type>
+        <types>EnumRef.TaskResults</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="70b66529-4ebf-4d4d-93ed-a67ab889f58c">
+      <name>TasksFailAction</name>
+      <synonym>
+        <key>en</key>
+        <value>Tasks fail action</value>
+      </synonym>
+      <type>
+        <types>EnumRef.TaskFailActions</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="2cd8b3ef-5f8c-468b-bac2-60e59558ce98">
+    <producedTypes>
+      <objectType typeId="23df4354-b849-4a7d-8657-8f6594254946" valueTypeId="1ef4bbc7-f65e-4feb-9b97-74bac82aea5a"/>
+      <rowType typeId="aa76c995-835b-4d97-b410-f549b4289978" valueTypeId="7ab9a7f1-02d9-49aa-9aa3-6c0c52e225dd"/>
+    </producedTypes>
+    <name>StagesTasks</name>
+    <synonym>
+      <key>en</key>
+      <value>Stages tasks</value>
+    </synonym>
+    <attributes uuid="f7f3444a-7de8-4db9-936c-f9bc79ff58ae">
+      <name>StageID</name>
+      <synonym>
+        <key>en</key>
+        <value>Stage ID</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="b7290602-7f35-4594-bf05-06928eccd4e1">
+      <name>TaskID</name>
+      <synonym>
+        <key>en</key>
+        <value>Task ID</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="469555a6-4058-4460-a683-5000d013e641">
+      <name>Description_en</name>
+      <synonym>
+        <key>en</key>
+        <value>ENG</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeDescription</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8de0704c-f785-472c-ab34-2b43c0fbdf22">
+      <name>Description_hash</name>
+      <synonym>
+        <key>en</key>
+        <value>HASH</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeDescription</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2e5a026f-3398-4c83-b82d-38b0b38a85c6">
+      <name>Description_ru</name>
+      <synonym>
+        <key>en</key>
+        <value>RU</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeDescription</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c8ad2e7d-ca0d-4d8a-99cd-7376308091d4">
+      <name>Description_tr</name>
+      <synonym>
+        <key>en</key>
+        <value>TR</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeDescription</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f88d2613-e32f-45fb-ae1a-5a89b857acd4">
+      <name>Executor</name>
+      <synonym>
+        <key>en</key>
+        <value>Executor</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Users</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="02282df2-2090-4eb7-a038-888f3968657c">
+      <name>UserGroup</name>
+      <synonym>
+        <key>en</key>
+        <value>User group</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.UserGroups</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a58a8470-8b4e-47c3-8edf-946cd7e7a926">
+      <name>Position</name>
+      <synonym>
+        <key>en</key>
+        <value>Position</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.EmployeePositions</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4076f2ee-c1c1-41e3-a4c9-4338080fbccb">
+      <name>Branch</name>
+      <synonym>
+        <key>en</key>
+        <value>Branch</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f5225dd0-dda9-4230-b2e7-b86410892b61">
+      <name>ProfitLossCenter</name>
+      <synonym>
+        <key>en</key>
+        <value>Profit loss center</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6ef4c344-72e5-40a3-9be8-116b1a9f11e6">
+      <name>Detailing</name>
+      <synonym>
+        <key>en</key>
+        <value>Detailing</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="276dd1b9-b3b3-42a6-94d5-fd2a34cd0520">
+      <name>TaskType</name>
+      <synonym>
+        <key>en</key>
+        <value>Task type</value>
+      </synonym>
+      <type>
+        <types>EnumRef.TaskTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="5d970430-5dbf-48eb-88fb-66f7d6391fb6">
+    <producedTypes>
+      <objectType typeId="a32d2392-307d-443f-bd73-9ad638372560" valueTypeId="a95dcaad-c7c2-4306-bce1-1948258916e3"/>
+      <rowType typeId="d86ab940-150c-4fa7-b951-9bfa81ff0dc5" valueTypeId="375df38c-d21a-4dd1-9260-a392aa5da2e3"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="e5a76d99-9102-4b79-8a6f-1deb89fe6e04">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="62d5b270-b327-4772-9491-ec91704e6f87">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Catalog.ExecutionTemplates.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="c50f7bbe-de47-4dbb-983c-afae8abe4e7f">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="afbe12ba-3747-4df6-98a8-47713dc5fcc6">
+    <name>AddressingForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Addressing form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="c7935af9-9f12-4f42-a53b-df5ef2804f7e">
+    <name>GroupForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="590192c2-a483-41d7-882e-ca96edba1013">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="aeaff5bf-065d-4503-995c-4bd4d6e1d087">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="0742faf5-04e4-4149-a1ab-c007b0ec0721">
+    <name>GroupChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

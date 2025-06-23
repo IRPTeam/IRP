@@ -1158,7 +1158,7 @@ Scenario: check filter for Legal name contract (in BP, CP)
 	And I select from the drop-down list named "Company" by "Main Company" string
 	And I click the button named "PaymentListAdd"
 	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
-	And I select "Company Ferron BP" from "Payee" drop-down list by string in "PaymentList" table
+	And I select "Company Ferron BP" from "Legal name" drop-down list by string in "PaymentList" table
 	* Check list from
 		And I activate "Legal name contract" field in "PaymentList" table
 		And I click choice button of "Legal name contract" attribute in "PaymentList" table
@@ -1181,12 +1181,12 @@ Scenario: check filter for Legal name contract (in BP, CP)
 			| 'Contract (Second Company)' |
 		And I select current line in "List" table
 		And "PaymentList" table became equal
-			| 'Partner'   | 'Payee'             | 'Legal name contract'       |
+			| 'Partner'   | 'Legal name'        | 'Legal name contract'       |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Contract (Second Company)' |
 		And I finish line editing in "PaymentList" table
 		And I select from the drop-down list named "Company" by "main" string
 		And "PaymentList" table became equal
-			| 'Partner'   | 'Payee'             | 'Legal name contract' |
+			| 'Partner'   | 'Legal name'        | 'Legal name contract' |
 			| 'Ferron BP' | 'Company Ferron BP' | ''                    |			
 		And I close all client application windows
 		
@@ -1195,7 +1195,7 @@ Scenario: check filter for Legal name contract (in BR, CR)
 	And I select from the drop-down list named "Company" by "Main Company" string
 	And I click the button named "PaymentListAdd"
 	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
-	And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
+	And I select "Company Ferron BP" from "Legal name" drop-down list by string in "PaymentList" table
 	* Check list from
 		And I activate "Legal name contract" field in "PaymentList" table
 		And I click choice button of "Legal name contract" attribute in "PaymentList" table
@@ -1218,12 +1218,12 @@ Scenario: check filter for Legal name contract (in BR, CR)
 			| 'Contract (Second Company)' |
 		And I select current line in "List" table
 		And "PaymentList" table became equal
-			| 'Partner'   | 'Payer'             | 'Legal name contract'       |
+			| 'Partner'   | 'Legal name'        | 'Legal name contract'       |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Contract (Second Company)' |
 		And I finish line editing in "PaymentList" table
 		And I select from the drop-down list named "Company" by "main" string
 		And "PaymentList" table became equal
-			| 'Partner'   | 'Payer'             | 'Legal name contract' |
+			| 'Partner'   | 'Legal name'        | 'Legal name contract' |
 			| 'Ferron BP' | 'Company Ferron BP' | ''                    |			
 		And I close all client application windows		
 

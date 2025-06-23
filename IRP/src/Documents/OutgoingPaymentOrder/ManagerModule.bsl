@@ -110,7 +110,7 @@ Function PaymentList()
 		   |	PaymentList.Ref.Company AS Company,
 		   |	PaymentList.Ref.Currency AS Currency,
 		   |	PaymentList.Basis,
-		   |	PaymentList.Payee AS LegalName,
+		   |	PaymentList.LegalName AS LegalName,
 		   |	PaymentList.Partner AS Partner,
 		   |	PaymentList.Basis.Agreement AS Agreement,
 		   |	PaymentList.Ref.Account AS Account,

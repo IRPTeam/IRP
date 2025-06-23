@@ -241,8 +241,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	OrderIsPresent         = CommonFunctionsClientServer.ObjectHasProperty(Row, "Order");
 	ProjectIsPresent       = CommonFunctionsClientServer.ObjectHasProperty(Row, "Project");
 	LegalNameContractIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "LegalNameContract");
-	PayeeIsPresent         = CommonFunctionsClientServer.ObjectHasProperty(Row, "Payee");
-	PayerIsPresent         = CommonFunctionsClientServer.ObjectHasProperty(Row, "Payer");
+	LegalNameIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "LegalName");
 	PartnerIsPresent       = CommonFunctionsClientServer.ObjectHasProperty(Row, "Partner");
 
 	// Cost list
@@ -387,18 +386,12 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 				PrepareValue(FillingValues.LegalNameContract, Row.Key));
 		EndIf;
 		
-		If FillingValues.Property("Payee") And PayeeIsPresent Then
-			ProcessedProperties.Add("Payee");
+		If FillingValues.Property("LegalName") And LegalNameIsPresent Then
+			ProcessedProperties.Add("LegalName");
 			ControllerClientServer_V2.SetPaymentListLegalName(Parameters, 
-				PrepareValue(FillingValues.Payee, Row.Key));
+				PrepareValue(FillingValues.LegalName, Row.Key));
 		EndIf;
-		
-		If FillingValues.Property("Payer") And PayerIsPresent Then
-			ProcessedProperties.Add("Payer");
-			ControllerClientServer_V2.SetPaymentListLegalName(Parameters, 
-				PrepareValue(FillingValues.Payer, Row.Key));
-		EndIf;
-		
+				
 		If FillingValues.Property("Partner") And PartnerIsPresent Then
 			ProcessedProperties.Add("Partner");
 			ControllerClientServer_V2.SetPaymentListPartner(Parameters, PrepareValue(FillingValues.Partner, Row.Key));

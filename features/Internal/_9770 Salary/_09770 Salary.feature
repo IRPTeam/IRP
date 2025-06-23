@@ -864,9 +864,6 @@ Scenario: _097716 create payroll
 		And I input "01.11.2023" text in "Begin date" field
 		And I input "30.11.2023" text in "End date" field
 		And in the table "AccrualList" I click the button named "FillAccrual"
-		And I select from the drop-down list named "Partner" by "Tax authority" string
-		And I move to the next attribute
-		Then the form attribute named "LegalName" became equal to "Tax authority"
 	* Check
 		And "AccrualList" table became equal
 			| '#' | 'Amount'   | 'Employee'        | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
@@ -887,6 +884,8 @@ Scenario: _097716 create payroll
 				| 'Description'                 |
 				| 'Social Insurance (Employee)' |
 			And I select current line in "List" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"			
 			And I select "Social insurance" from "Partner term" drop-down list by string in "SalaryTaxList" table			
 			And I activate field named "SalaryTaxListExpenseType" in "SalaryTaxList" table
 			And I select "Expense" by string from the drop-down list named "SalaryTaxListExpenseType" in "SalaryTaxList" table
@@ -907,6 +906,8 @@ Scenario: _097716 create payroll
 			And I select "Shop 01" by string from the drop-down list named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListAmount" in "SalaryTaxList" table
 			And I input "700,00" text in the field named "SalaryTaxListAmount" of "SalaryTaxList" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"
 			And I select "Income tax" from "Partner term" drop-down list by string in "SalaryTaxList" table
 			And I finish line editing in "SalaryTaxList" table
 			And in the table "SalaryTaxList" I click the button named "SalaryTaxListAdd"
@@ -914,6 +915,8 @@ Scenario: _097716 create payroll
 			And I select "Alexander Orlov" by string from the drop-down list named "SalaryTaxListEmployee" in "SalaryTaxList" table
 			And I activate "Tax" field in "SalaryTaxList" table
 			And I select "Single Social Contribution (Company)" from "Tax" drop-down list by string in "SalaryTaxList" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"
 			And I select "Tax" from "Partner term" drop-down list by string in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListExpenseType" in "SalaryTaxList" table
 			And I select "Expense" by string from the drop-down list named "SalaryTaxListExpenseType" in "SalaryTaxList" table
@@ -934,6 +937,8 @@ Scenario: _097716 create payroll
 				| 'Description'                 |
 				| 'Social Insurance (Employee)' |
 			And I select current line in "List" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"
 			And I select "Social insurance" from "Partner term" drop-down list by string in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListExpenseType" in "SalaryTaxList" table
 			And I select "Expense" by string from the drop-down list named "SalaryTaxListExpenseType" in "SalaryTaxList" table
@@ -942,11 +947,15 @@ Scenario: _097716 create payroll
 			And I activate field named "SalaryTaxListAmount" in "SalaryTaxList" table
 			And I select current line in "SalaryTaxList" table
 			And I input "700,00" text in the field named "SalaryTaxListAmount" of "SalaryTaxList" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"
 			And I select "Social insurance" from "Partner term" drop-down list by string in "SalaryTaxList" table
 			And I finish line editing in "SalaryTaxList" table
 			And in the table "SalaryTaxList" I click the button named "SalaryTaxListAdd"
 			And I activate field named "SalaryTaxListEmployee" in "SalaryTaxList" table
 			And I select "Anna Petrova" by string from the drop-down list named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"
 			And I activate "Tax" field in "SalaryTaxList" table
 			And I select "Income Tax (Emloyee)" from "Tax" drop-down list by string in "SalaryTaxList" table
 			And I select "Income tax" from "Partner term" drop-down list by string in "SalaryTaxList" table
@@ -968,17 +977,19 @@ Scenario: _097716 create payroll
 			And I select "Shop 01" by string from the drop-down list named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListAmount" in "SalaryTaxList" table
 			And I input "1 000,00" text in the field named "SalaryTaxListAmount" of "SalaryTaxList" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"
 			And I select "Tax" from "Partner term" drop-down list by string in "SalaryTaxList" table
 			And I finish line editing in "SalaryTaxList" table
 	* Check
 		And "SalaryTaxList" table became equal
-			| '#' | 'Employee'        | 'Tax'                                  | 'Tax payer' | 'Partner term'     | 'Expense type' | 'Profit loss center' | 'Amount'   |
-			| '1' | 'Alexander Orlov' | 'Social Insurance (Employee)'          | 'Employee'  | 'Social insurance' | 'Expense'      | 'Shop 01'            | '700,00'   |
-			| '2' | 'Alexander Orlov' | 'Income Tax (Emloyee)'                 | 'Employee'  | 'Income tax'       | 'Expense'      | 'Shop 01'            | '700,00'   |
-			| '3' | 'Alexander Orlov' | 'Single Social Contribution (Company)' | 'Company'   | 'Tax'              | 'Expense'      | 'Shop 01'            | '1 000,00' |
-			| '4' | 'Anna Petrova'    | 'Social Insurance (Employee)'          | 'Employee'  | 'Social insurance' | 'Expense'      | 'Shop 01'            | '700,00'   |
-			| '5' | 'Anna Petrova'    | 'Income Tax (Emloyee)'                 | 'Employee'  | 'Income tax'       | 'Expense'      | 'Shop 01'            | '700,00'   |
-			| '6' | 'Anna Petrova'    | 'Single Social Contribution (Company)' | 'Company'   | 'Tax'              | 'Expense'      | 'Shop 01'            | '1 000,00' |		
+			| '#' | 'Employee'        | 'Calculation type' | 'Tax'                                  | 'Tax payer' | 'Partner'       | 'Legal name'    | 'Partner term'     | 'Take account from taxes' | 'Expense type' | 'Profit loss center' | 'Amount'   |
+			| '1' | 'Alexander Orlov' | ''                 | 'Social Insurance (Employee)'          | 'Employee'  | 'Tax authority' | 'Tax authority' | 'Social insurance' | 'No'                      | 'Expense'      | 'Shop 01'            | '700,00'   |
+			| '2' | 'Alexander Orlov' | ''                 | 'Income Tax (Emloyee)'                 | 'Employee'  | 'Tax authority' | 'Tax authority' | 'Income tax'       | 'No'                      | 'Expense'      | 'Shop 01'            | '700,00'   |
+			| '3' | 'Alexander Orlov' | ''                 | 'Single Social Contribution (Company)' | 'Company'   | 'Tax authority' | 'Tax authority' | 'Tax'              | 'No'                      | 'Expense'      | 'Shop 01'            | '1 000,00' |
+			| '4' | 'Anna Petrova'    | ''                 | 'Social Insurance (Employee)'          | 'Employee'  | 'Tax authority' | 'Tax authority' | 'Social insurance' | 'No'                      | 'Expense'      | 'Shop 01'            | '700,00'   |
+			| '5' | 'Anna Petrova'    | ''                 | 'Income Tax (Emloyee)'                 | 'Employee'  | 'Tax authority' | 'Tax authority' | 'Income tax'       | 'No'                      | 'Expense'      | 'Shop 01'            | '700,00'   |
+			| '6' | 'Anna Petrova'    | ''                 | 'Single Social Contribution (Company)' | 'Company'   | 'Tax authority' | 'Tax authority' | 'Tax'              | 'No'                      | 'Expense'      | 'Shop 01'            | '1 000,00' |		
 	* Post
 		And I click "Post" button	
 		And I delete "$$NumberPayroll$$" variable

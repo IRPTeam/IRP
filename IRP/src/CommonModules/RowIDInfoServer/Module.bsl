@@ -13889,26 +13889,13 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	If Not LinkedRowsIntegrityIsEnable() Then
 		Return;
 	EndIf;
-	// check internal links
+	
+	TempTablesManager = New TempTablesManager();
+	
 	Query = New Query();
-	Query.TempTablesManager = New TempTablesManager();
-	Query.Text =
+	Query.TempTablesManager = TempTablesManager;
+	Query.Text = 
 	"SELECT
-	|	BasisesTable.RowID,
-	|	BasisesTable.RowRef,
-	|	BasisesTable.Basis,
-	|	BasisesTable.BasisKey,
-	|	BasisesTable.CurrentStep,
-	|	BasisesTable.ItemKey,
-	|	BasisesTable.Item,
-	|	BasisesTable.Store
-	|INTO BasisesTable
-	|FROM
-	|	&BasisesTable AS BasisesTable
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
 	|	RowIDInfo.Key,
 	|	RowIDInfo.RowID,
 	|	RowIDInfo.RowRef,
@@ -13929,7 +13916,74 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|	ItemList.Store
 	|INTO ItemList
 	|FROM
-	|	&ItemList AS ItemList
+	|	&ItemList AS ItemList";
+	Query.SetParameter("RowIDInfo", RowIDInfoTable);
+	Query.SetParameter("ItemList", ItemListTable);
+	Query.Execute();
+	
+	// check dates
+	Query = New Query();
+	Query.TempTablesManager = TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	RowIDInfo.Key AS Key,
+	|	RowIDInfo.Basis AS Basis,
+	|	RowIDInfo.Basis.Date AS BasisDate
+	|INTO tmp_RowID
+	|FROM
+	|	RowIDInfo AS RowIDInfo
+	|WHERE
+	|	NOT RowIDInfo.Basis.Ref IS NULL
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Key AS Key,
+	|	ItemList.LineNumber AS LineNumber,
+	|	&DocDate AS Date
+	|INTO tmp_ItemList
+	|FROM
+	|	ItemList AS ItemList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp_ItemList.LineNumber AS LineNumber,
+	|	tmp_RowID.Basis AS Basis,
+	|	tmp_ItemList.Date AS Date,
+	|	tmp_RowID.BasisDate AS BasisDate
+	|FROM
+	|	tmp_RowID AS tmp_RowID
+	|		INNER JOIN tmp_ItemList AS tmp_ItemList
+	|		ON tmp_ItemList.Key = tmp_RowID.Key
+	|		AND tmp_ItemList.Date <= tmp_RowID.BasisDate";
+	Query.SetParameter("DocDate", Object.Date); 
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	For Each Row In QueryTable Do
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_183, 
+			Row.LineNumber, Row.Date, Row.BasisDate),
+				"ItemList[" + Format((Row.LineNumber - 1), "NZ=0; NG=0;") + "].IsInternalLinked", Object);
+	EndDo;	
+	
+	// check internal links
+	Query = New Query();
+	Query.TempTablesManager = TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	BasisesTable.RowID,
+	|	BasisesTable.RowRef,
+	|	BasisesTable.Basis,
+	|	BasisesTable.BasisKey,
+	|	BasisesTable.CurrentStep,
+	|	BasisesTable.ItemKey,
+	|	BasisesTable.Item,
+	|	BasisesTable.Store
+	|INTO BasisesTable
+	|FROM
+	|	&BasisesTable AS BasisesTable
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -14016,8 +14070,6 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 
 	BasisesTable = GetBasises(Object.Ref, LinkedFilter);
 	Query.SetParameter("BasisesTable", BasisesTable);
-	Query.SetParameter("RowIDInfo", RowIDInfoTable);
-	Query.SetParameter("ItemList", ItemListTable);
 
 	Is = Is(Object);
 	If Is.RRR Or Is.SR Or Is.PO Or Is.PI Or Is.SC Or Is.SI Then

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="72897764-b547-429f-8f84-f717272beff3">
+  <producedTypes>
+    <selectionType typeId="ad306386-f65c-4ca6-af93-e7000f99332f" valueTypeId="d28bb779-4a56-4805-bca7-3ed5fa1d02ee"/>
+    <listType typeId="895d8695-7d3b-4c61-95fb-9af36f1ae587" valueTypeId="10dee061-d753-48e2-9733-d45da0007d7b"/>
+    <managerType typeId="72de8821-68ae-43c7-9283-98afb4c37e66" valueTypeId="173b1258-3012-41ce-9e48-b0c90f5443b7"/>
+    <recordSetType typeId="fb5bf3d0-53fb-4de4-be42-7068bde7b008" valueTypeId="555f60d3-c41e-46ed-9fbd-1e99e1f61ef5"/>
+    <recordKeyType typeId="148238ef-6567-409d-a27e-81d3ac64d4c1" valueTypeId="46778b5e-a592-4a97-8e8e-cf3efacde62b"/>
+    <recordType typeId="a74012d2-41f2-4ac7-82d1-d73468838ffb" valueTypeId="0ccbe988-1b70-48d3-a9ca-107b1d0fd6e4"/>
+    <recordManagerType typeId="3a84f1b6-6f9d-4060-8b43-8e2f3d7d2411" valueTypeId="444b7aad-baa8-41bc-8f91-d4a022043df0"/>
+  </producedTypes>
+  <name>TaskExecutors</name>
+  <synonym>
+    <key>en</key>
+    <value>Task executors</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <dimensions uuid="db31a8ac-20bc-4dae-b370-85a9ec79b042">
+    <name>Executor</name>
+    <synonym>
+      <key>en</key>
+      <value>Executor</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Users</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <denyIncompleteValues>true</denyIncompleteValues>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="6ea1b639-3753-4f3a-89a8-81a49560d10e">
+    <name>UserGroup</name>
+    <synonym>
+      <key>en</key>
+      <value>User group</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.UserGroups</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="9b08ce50-966b-41d7-822d-4d2cc5519753">
+    <name>Position</name>
+    <synonym>
+      <key>en</key>
+      <value>Position</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.EmployeePositions</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="cfa80f9b-5706-44f8-9124-96d20252de6e">
+    <name>Branch</name>
+    <synonym>
+      <key>en</key>
+      <value>Branch</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="1b432461-0126-4ac7-bead-47e21d1c40d1">
+    <name>ProfitLossCenter</name>
+    <synonym>
+      <key>en</key>
+      <value>Profit loss center</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+</mdclass:InformationRegister>

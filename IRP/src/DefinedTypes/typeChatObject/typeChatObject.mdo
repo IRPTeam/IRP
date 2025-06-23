@@ -10,5 +10,9 @@
   </synonym>
   <type>
     <types>DocumentRef.Issue</types>
+    <types>DocumentRef.SalesInvoice</types>
+    <types>DocumentRef.PurchaseInvoice</types>
+    <types>DocumentRef.StockAdjustmentAsSurplus</types>
+    <types>DocumentRef.StockAdjustmentAsWriteOff</types>
   </type>
 </mdclass:DefinedType>

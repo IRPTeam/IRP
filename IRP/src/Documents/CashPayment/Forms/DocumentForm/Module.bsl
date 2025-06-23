@@ -102,7 +102,7 @@ Function GetFormAttributeMapping() Export
 	Map.Insert("PaymentList.CalculationType"          , "PaymentListCalculationTypeNoSplits");
 	Map.Insert("PaymentList.RetailCustomer"           , "PaymentListRetailCustomerNoSplits");
 	Map.Insert("PaymentList.Partner"                  , "PaymentListPartnerNoSplits");
-	Map.Insert("PaymentList.Payee"                    , "PaymentListPayeeNoSplits");
+	Map.Insert("PaymentList.LegalName"                , "PaymentListLegalNameNoSplits");
 	Map.Insert("PaymentList.Agreement"                , "PaymentListAgreementNoSplits");
 	Map.Insert("PaymentList.LegalNameContract"        , "PaymentListLegalNameContractNoSplits");
 	Map.Insert("PaymentList.BasisDocument"            , "PaymentListBasisDocumentNoSplits");
@@ -138,7 +138,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.PlaningTransactionBasis,
 	|PaymentList.Agreement,
 	|PaymentList.LegalNameContract,
-	|PaymentList.Payee,
+	|PaymentList.LegalName,
 	|PaymentList.Order,
 	|PaymentList.RetailCustomer,
 	|PaymentList.Employee,
@@ -183,7 +183,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.BasisDocument,
 		|PaymentList.Partner,
 		|PaymentList.Agreement,
-		|PaymentList.Payee,
+		|PaymentList.LegalName,
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.LegalNameContract,
 		|PaymentList.Project";
@@ -194,7 +194,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.Agreement,
-		|PaymentList.Payee,
+		|PaymentList.LegalName,
 		|PaymentList.LegalNameContract,
 		|PaymentList.AdditionalAnalytic,
 		|PaymentList.Tax,
@@ -605,40 +605,40 @@ EndProcedure
 
 #EndRegion
 
-#Region PAYEE
+#Region LEGAL_NAME
 
 &AtClient
-Procedure PaymentListPayeeOnChange(Item)
-	DocCashPaymentClient.PaymentListPayeeOnChange(Object, ThisObject, Item);
+Procedure PaymentListLegalNameOnChange(Item)
+	DocCashPaymentClient.PaymentListLegalNameOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayeeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashPaymentClient.PaymentListPayeeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+Procedure PaymentListLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashPaymentClient.PaymentListLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayeeEditTextChange(Item, Text, StandardProcessing)
-	DocCashPaymentClient.PaymentListPayeeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+Procedure PaymentListLegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocCashPaymentClient.PaymentListLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayeeNoSplitsOnChange(Item)
+Procedure PaymentListLegalNameNoSplitsOnChange(Item)
 	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
 	If LineAttribute <> Undefined Then
 		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
 	EndIf;
-	DocCashPaymentClient.PaymentListPayeeOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
+	DocCashPaymentClient.PaymentListLegalNameOnChange(Object, ThisObject, Item, Object.PaymentList[0], "FromHeaderToList");
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayeeNoSplitsStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
-	DocCashPaymentClient.PaymentListPayeeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PaymentList[0]);
+Procedure PaymentListLegalNameNoSplitsStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocCashPaymentClient.PaymentListLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PaymentList[0]);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayeeNoSplitsEditTextChange(Item, Text, StandardProcessing)
-	DocCashPaymentClient.PaymentListPayeeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, Object.PaymentList[0]);
+Procedure PaymentListLegalNameNoSplitsEditTextChange(Item, Text, StandardProcessing)
+	DocCashPaymentClient.PaymentListLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, Object.PaymentList[0]);
 EndProcedure
 
 #EndRegion

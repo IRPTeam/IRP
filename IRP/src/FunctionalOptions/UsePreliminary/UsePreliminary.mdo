@@ -29,4 +29,7 @@
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.TotalAmount</content>
   <content>Document.GoodsReceipt.Attribute.Currency</content>
   <content>InformationRegister.T6020S_BatchKeysInfo.Dimension.IsPreliminary</content>
+  <content>AccumulationRegister.R6020B_BatchBalance.Resource.PreliminaryTaxAmount</content>
+  <content>AccumulationRegister.R6020B_BatchBalance.Resource.PreliminaryQuantity</content>
+  <content>AccumulationRegister.R6020B_BatchBalance.Resource.PreliminaryAmount</content>
 </mdclass:FunctionalOption>

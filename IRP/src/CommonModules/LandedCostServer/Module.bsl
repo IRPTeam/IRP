@@ -778,6 +778,10 @@ Function GetBatchWiseBalance(CalculationSettings)
 	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
 	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
 	
+	EmptyTable_BatchWiseBalance.Columns.Add("PreliminaryQuantity"       , RegMetadata.Resources.PreliminaryQuantity.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("PreliminaryAmount"         , RegMetadata.Resources.PreliminaryAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("PreliminaryTaxAmount"      , RegMetadata.Resources.PreliminaryTaxAmount.Type);
+	
 	Tables = New Structure();
 	Tables.Insert("DataForExpense"               , EmptyTable_BatchWiseBalance.CopyColumns());
 	Tables.Insert("DataForReceipt"               , EmptyTable_BatchWiseBalance.CopyColumns());
@@ -817,6 +821,9 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForBundleAmountValues.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
 	DataForBundleAmountValues.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
 	
+	DataForBundleAmountValues.Columns.Add("PreliminaryAmount"         , RegMetadata.Resources.PreliminaryAmount.Type);
+	DataForBundleAmountValues.Columns.Add("PreliminaryTaxAmount"      , RegMetadata.Resources.PreliminaryTaxAmount.Type);
+	
 	Tables.Insert("DataForBundleAmountValues", DataForBundleAmountValues);
 	
 	// DataForCompositeBatchesAmountValues
@@ -848,6 +855,10 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedRevenueAmount"     , RegMetadata.Resources.AllocatedRevenueAmount.Type);
 	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedRevenueTaxAmount"  , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
 	
+	DataForCompositeBatchesAmountValues.Columns.Add("PreliminaryQuantity"        , RegMetadata.Resources.PreliminaryQuantity.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("PreliminaryAmount"          , RegMetadata.Resources.PreliminaryAmount.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("PreliminaryTaxAmount"       , RegMetadata.Resources.PreliminaryTaxAmount.Type);
+	
 	Tables.Insert("DataForCompositeBatchesAmountValues", DataForCompositeBatchesAmountValues);
 	
 	// DataForReallocatedBatchesAmountValues
@@ -876,6 +887,10 @@ Function GetBatchWiseBalance(CalculationSettings)
 	
 	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
 	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
+	
+	DataForReallocatedBatchesAmountValues.Columns.Add("PreliminaryQuantity"       , RegMetadata.Resources.PreliminaryQuantity.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("PreliminaryAmount"         , RegMetadata.Resources.PreliminaryAmount.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("PreliminaryTaxAmount"      , RegMetadata.Resources.PreliminaryTaxAmount.Type);
 	
 	Tables.Insert("DataForReallocatedBatchesAmountValues", DataForReallocatedBatchesAmountValues);
 	
@@ -910,6 +925,9 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForWriteOffBatches.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
 	DataForWriteOffBatches.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
 	
+	DataForWriteOffBatches.Columns.Add("PreliminaryAmount"         , RegMetadata.Resources.PreliminaryAmount.Type);
+	DataForWriteOffBatches.Columns.Add("PreliminaryTaxAmount"      , RegMetadata.Resources.PreliminaryTaxAmount.Type);
+	
 	Tables.Insert("DataForWriteOffBatches", DataForWriteOffBatches);
 	
 	// DataForFixedAssets
@@ -941,6 +959,9 @@ Function GetBatchWiseBalance(CalculationSettings)
 	
 	DataForFixedAssets.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.Amount.Type);
 	DataForFixedAssets.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.Amount.Type);
+	
+	DataForFixedAssets.Columns.Add("PreliminaryAmount"         , RegMetadata.Resources.Amount.Type);
+	DataForFixedAssets.Columns.Add("PreliminaryTaxAmount"      , RegMetadata.Resources.Amount.Type);
 	
 	Tables.Insert("DataForFixedAssets", DataForFixedAssets);
 	
@@ -998,6 +1019,12 @@ Function GetBatchWiseBalance(CalculationSettings)
 	
 	TableOfReturnedBatches.Columns.Add("AllocatedRevenueAmountBalance"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
 	TableOfReturnedBatches.Columns.Add("AllocatedRevenueTaxAmountBalance" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
+	
+	TableOfReturnedBatches.Columns.Add("PreliminaryQuantity"              , RegMetadata.Resources.PreliminaryQuantity.Type);
+	TableOfReturnedBatches.Columns.Add("PreliminaryAmount"                , RegMetadata.Resources.PreliminaryAmount.Type);
+	TableOfReturnedBatches.Columns.Add("PreliminaryTaxAmount"             , RegMetadata.Resources.PreliminaryTaxAmount.Type);	
+	TableOfReturnedBatches.Columns.Add("PreliminaryAmountBalance"         , RegMetadata.Resources.PreliminaryAmount.Type);
+	TableOfReturnedBatches.Columns.Add("PreliminaryTaxAmountBalance"      , RegMetadata.Resources.PreliminaryTaxAmount.Type);
 	
 	tmp_manager = New TempTablesManager();
 	Tree = GetBatchTree(tmp_manager, CalculationSettings);

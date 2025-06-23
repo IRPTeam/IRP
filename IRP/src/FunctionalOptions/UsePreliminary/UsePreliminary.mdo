@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="53eeab3c-edfa-495e-a47e-7036180ffaa2">
+  <name>UsePreliminary</name>
+  <synonym>
+    <key>en</key>
+    <value>Use preliminary</value>
+  </synonym>
+  <location>Constant.UsePreliminary</location>
+  <privilegedGetMode>true</privilegedGetMode>
+</mdclass:FunctionalOption>

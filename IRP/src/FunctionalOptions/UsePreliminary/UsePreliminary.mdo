@@ -37,4 +37,5 @@
   <content>Document.GoodsReceipt.Attribute.PriceIncludeTax</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.DontCalculateRow</content>
   <content>Document.GoodsReceipt.Attribute.Agreement</content>
+  <content>AccumulationRegister.R4050B_StockInventory.Resource.PreliminaryQuantity</content>
 </mdclass:FunctionalOption>

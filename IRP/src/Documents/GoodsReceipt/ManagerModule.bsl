@@ -504,6 +504,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
+	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
@@ -527,6 +528,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R6025B_SimpleBatch());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
@@ -1220,23 +1222,47 @@ Function R6025B_SimpleBatch()
 EndFunction
 
 Function T6010S_BatchesInfo()
-	Return "SELECT
-		   |	*
-		   |INTO T6010S_BatchesInfo
-		   |FROM
-		   |	BatchesInfo
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	*
+		|INTO T6010S_BatchesInfo
+		|FROM
+		|	BatchesInfo
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function T6020S_BatchKeysInfo()
-	Return "SELECT
-		   |	*
-		   |INTO T6020S_BatchKeysInfo
-		   |FROM
-		   |	BatchKeysInfo
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	*
+		|INTO T6020S_BatchKeysInfo
+		|FROM
+		|	BatchKeysInfo
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R4050B_StockInventory()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.isPreliminaryStock
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey";
 EndFunction
 
 #EndRegion

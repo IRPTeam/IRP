@@ -549,7 +549,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	|PreliminaryAmount, 
 	|PreliminaryTaxAmount";
 	
-	QuantityResourceNames = "Quantity, PrelimnaryQuantity";
+	QuantityResourceNames = "Quantity, PreliminaryQuantity";
 	
 	// Bundle amount values
 	RecordSetT6040S = InformationRegisters.T6040S_BundleAmountValues.CreateRecordSet();

@@ -454,11 +454,13 @@ Scenario: _048 create additional cost allocation (documents, by quantity)
 		And "List" table became equal
 			| 'Basis'                                            | 'Company'      | 'Currency' | 'Amount' |
 			| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Main Company' | 'TRY'      | '30'     |
+			| 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Main Company' | 'TRY'      | '200'    |
 			| 'Purchase invoice 9 017 dated 05.06.2022 13:25:04' | 'Main Company' | 'TRY'      | '350'    |
 			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | 'TRY'      | '350'    |
 			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | 'TRY'      | '650'    |
 			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Main Company' | 'TRY'      | '400'    |
 			| 'Purchase invoice 9 016 dated 09.06.2022 13:21:30' | 'Main Company' | 'TRY'      | '350'    |
+			| 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Main Company' | 'TRY'      | '650'    |
 			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | 'TRY'      | '550'    |
 			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Main Company' | 'TRY'      | '50'     |
 		And I go to line in "List" table
@@ -490,10 +492,12 @@ Scenario: _048 create additional cost allocation (documents, by quantity)
 		And "List" table became equal
 			| 'Basis'                                            | 'Company'      | 'Currency' | 'Amount' |
 			| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Main Company' | 'TRY'      | '30'     |
+			| 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Main Company' | 'TRY'      | '200'    |
 			| 'Purchase invoice 9 017 dated 05.06.2022 13:25:04' | 'Main Company' | 'TRY'      | '350'    |
 			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | 'TRY'      | '350'    |
 			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | 'TRY'      | '650'    |
 			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Main Company' | 'TRY'      | '400'    |
+			| 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Main Company' | 'TRY'      | '650'    |
 			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | 'TRY'      | '550'    |
 			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Main Company' | 'TRY'      | '50'     |
 		And I go to line in "List" table
@@ -657,17 +661,22 @@ Scenario: _051 create additional cost allocation (row, by amount)
 				| 'Use'                                              | 'Presentation'                                     | 'Expense type' | 'Profit loss center' | 'Currency' | 'Amount' | 'Tax amount' |
 				| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | ''             | ''                   | 'TRY'      | '30,00'  | '5,40'       |
 				| 'No'                                               | 'Service, Tax'                                     | 'Expense'      | 'Front office'       | 'TRY'      | '30,00'  | '5,40'       |
+				| 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | ''             | ''                   | 'TRY'      | '200,00' | '36,00'      |
+				| 'No'                                               | 'Service, Tax'                                     | 'Expense'      | 'Front office'       | 'TRY'      | '200,00' | '36,00'      |
 				| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | ''             | ''                   | 'TRY'      | '350,00' | '63,00'      |
 				| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '150,00' | '27,00'      |
 				| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '200,00' | '36,00'      |
 				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | ''             | ''                   | 'TRY'      | '650,00' | '117,00'     |
 				| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '250,00' | '45,00'      |
 				| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |
+				| 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | ''             | ''                   | 'TRY'      | '650,00' | '117,00'     |
+				| 'No'                                               | 'Service, Rent'                                    | 'Expense'      | 'Front office'       | 'TRY'      | '500,00' | '90,00'      |
+				| 'No'                                               | 'Service, Internet'                                | 'Expense'      | 'Front office'       | 'TRY'      | '150,00' | '27,00'      |
 				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | ''             | ''                   | 'TRY'      | '550,00' | '99,00'      |
 				| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |
 				| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '150,00' | '27,00'      |
 				| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | ''             | ''                   | 'TRY'      | '50,00'  | '9,00'       |
-				| 'No'                                               | 'Service, Rent'                                    | 'Expense'      | 'Front office'       | 'TRY'      | '50,00'  | '9,00'       |
+				| 'No'                                               | 'Service, Rent'                                    | 'Expense'      | 'Front office'       | 'TRY'      | '50,00'  | '9,00'       |			
 			And I go to line in "CostRowsTree" table
 				| 'Presentation'     | 'Use'    | 'Amount'    | 'Currency'     |
 				| 'Service, Rent'    | 'No'     | '250,00'    | 'TRY'          |
@@ -1485,16 +1494,21 @@ Scenario: _100 check Additional Cost Allocation by serial numbers (by row, by am
 			| 'Use'                                              | 'Presentation'                                     | 'Expense type' | 'Profit loss center' | 'Currency' | 'Amount' | 'Tax amount' |
 			| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | ''             | ''                   | 'TRY'      | '30,00'  | '5,40'       |
 			| 'No'                                               | 'Service, Tax'                                     | 'Expense'      | 'Front office'       | 'TRY'      | '30,00'  | '5,40'       |
+			| 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | ''             | ''                   | 'TRY'      | '200,00' | '36,00'      |
+			| 'No'                                               | 'Service, Tax'                                     | 'Expense'      | 'Front office'       | 'TRY'      | '200,00' | '36,00'      |
 			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | ''             | ''                   | 'TRY'      | '350,00' | '63,00'      |
 			| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '150,00' | '27,00'      |
 			| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '200,00' | '36,00'      |
+			| 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | ''             | ''                   | 'TRY'      | '650,00' | '117,00'     |
+			| 'No'                                               | 'Service, Rent'                                    | 'Expense'      | 'Front office'       | 'TRY'      | '500,00' | '90,00'      |
+			| 'No'                                               | 'Service, Internet'                                | 'Expense'      | 'Front office'       | 'TRY'      | '150,00' | '27,00'      |
 			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | ''             | ''                   | 'TRY'      | '550,00' | '99,00'      |
 			| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |
 			| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '150,00' | '27,00'      |
 			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | ''             | ''                   | 'TRY'      | '50,00'  | '9,00'       |
 			| 'No'                                               | 'Service, Rent'                                    | 'Expense'      | 'Front office'       | 'TRY'      | '50,00'  | '9,00'       |
 			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |
-			| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |
+			| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |		
 		And I go to line in "CostRowsTree" table
 			| "Amount" | "Currency" | "Expense type" | "Presentation" | "Profit loss center" | "Tax amount" | "Use" |
 			| "30,00"  | "TRY"      | "Expense"      | "Service, Tax" | "Front office"       | "5,40"       | "No"  |
@@ -1521,10 +1535,11 @@ Scenario: _100 check Additional Cost Allocation by serial numbers (by row, by am
 			| 'Purchase invoice 9 028 dated 02.04.2023 12:04:41' |
 			| 'Purchase invoice 9 030 dated 02.04.2023 12:23:49' |
 			| 'Purchase invoice 9 050 dated 01.06.2025 15:12:02' |
-		And I go to the last line in "List" table
-//		And I go to line in "List" table
-//			| "Document"                                         |
-//			| "Purchase invoice 9 050 dated 01.06.2025 15:12:02" |
+			| 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' |
+		And I activate current test client window
+		And I go to line in "List" table
+			| "Document"                                         |
+			| "Purchase invoice 9 050 dated 01.06.2025 15:12:02" |	
 		And in the table "List" I click the button named "ListSelectDocument"
 		And I go to line in "DocumentRows" table
 			| "Item"               | "Item key" | "Serial lot number" | "Store"    | "Use" |
@@ -1569,10 +1584,12 @@ Scenario: _101 check Additional Cost Allocation by serial numbers (by document, 
 		Then "Select cost document" window is opened
 		And "List" table became equal
 			| 'Basis'                                            | 'Company'      | 'Currency' | 'Amount' | 'TaxAmount' |
+			| 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Main Company' | 'TRY'      | '200'    | '36'        |
 			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | 'TRY'      | '350'    | '63'        |
+			| 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Main Company' | 'TRY'      | '650'    | '117'       |
 			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | 'TRY'      | '550'    | '99'        |
 			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Main Company' | 'TRY'      | '50'     | '9'         |
-			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | 'TRY'      | '400'    | '72'        |
+			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | 'TRY'      | '400'    | '72'        |		
 		And I go to line in "List" table
 			| 'Basis'                                            | 'Company'      | 'Currency' | 'Amount' | 'TaxAmount' |
 			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Main Company' | 'TRY'      | '50'     | '9'         |
@@ -1595,6 +1612,7 @@ Scenario: _101 check Additional Cost Allocation by serial numbers (by document, 
 			| 'Purchase invoice 9 028 dated 02.04.2023 12:04:41' | 'Main Company' |
 			| 'Purchase invoice 9 030 dated 02.04.2023 12:23:49' | 'Main Company' |
 			| 'Purchase invoice 9 050 dated 01.06.2025 15:12:02' | 'Main Company' |
+			| 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Main Company' |
 		And I activate field named "ListBasis" in "List" table
 		And I go to line in "List" table
 			| "Basis"                                            | "Company"      |

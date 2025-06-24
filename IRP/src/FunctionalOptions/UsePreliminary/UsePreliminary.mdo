@@ -38,4 +38,13 @@
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.DontCalculateRow</content>
   <content>Document.GoodsReceipt.Attribute.Agreement</content>
   <content>AccumulationRegister.R4050B_StockInventory.Resource.PreliminaryQuantity</content>
+  <content>InformationRegister.T6020S_BatchKeysInfo.Dimension.PreliminaryDocument</content>
+  <content>AccumulationRegister.R6050T_SalesBatches.Resource.PreliminaryTaxAmount</content>
+  <content>AccumulationRegister.R6050T_SalesBatches.Resource.PreliminaryQuantity</content>
+  <content>InformationRegister.T6050S_ManualBundleAmountValues.Resource.PreliminaryAmount</content>
+  <content>InformationRegister.T6050S_ManualBundleAmountValues.Resource.PreliminaryTaxAmount</content>
+  <content>AccumulationRegister.R6060T_CostOfGoodsSold.Resource.PreliminaryTaxAmount</content>
+  <content>AccumulationRegister.R6060T_CostOfGoodsSold.Resource.PreliminaryAmount</content>
+  <content>AccumulationRegister.R6060T_CostOfGoodsSold.Resource.PreliminaryQuantity</content>
+  <content>AccumulationRegister.R6050T_SalesBatches.Resource.PreliminaryAmount</content>
 </mdclass:FunctionalOption>

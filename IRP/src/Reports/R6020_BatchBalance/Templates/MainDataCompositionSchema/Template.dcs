@@ -1390,6 +1390,288 @@
 				</dcscor:item>
 			</appearance>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.PreliminaryQuantityOpeningBalance</dataPath>
+			<field>PreliminaryQuantityOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_Preliminary</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.PreliminaryQuantityReceipt</dataPath>
+			<field>PreliminaryQuantityReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.PreliminaryQuantityExpense</dataPath>
+			<field>PreliminaryQuantityExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.PreliminaryQuantityClosingBalance</dataPath>
+			<field>PreliminaryQuantityClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_Preliminary</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.PreliminaryAmountOpeningBalance</dataPath>
+			<field>PreliminaryAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary (amount)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_PreliminaryAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.PreliminaryAmountReceipt</dataPath>
+			<field>PreliminaryAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary (amount)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.PreliminaryAmountExpense</dataPath>
+			<field>PreliminaryAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary (amount)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.PreliminaryAmountClosingBalance</dataPath>
+			<field>PreliminaryAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary (amount)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_PreliminaryAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.OpeningBalance.PreliminaryTaxAmountOpeningBalance</dataPath>
+			<field>PreliminaryTaxAmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary (tax amount)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_PreliminaryTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Receipt.PreliminaryTaxAmountReceipt</dataPath>
+			<field>PreliminaryTaxAmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary (tax amount)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.Expense.PreliminaryTaxAmountExpense</dataPath>
+			<field>PreliminaryTaxAmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary (tax amount)</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Resources.ClosingBalance.PreliminaryTaxAmountClosingBalance</dataPath>
+			<field>PreliminaryTaxAmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary (tax amount)</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>G_PreliminaryTaxAmount</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=3</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
 		<item xsi:type="DataSetQuery">
 			<name>BatchBalance</name>
 			<field xsi:type="DataSetFieldField">
@@ -2473,6 +2755,84 @@
 					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
 				</role>
 			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryQuantityOpeningBalance</dataPath>
+				<field>PreliminaryQuantityOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>PreliminaryQuantity</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryQuantityReceipt</dataPath>
+				<field>PreliminaryQuantityReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryQuantityExpense</dataPath>
+				<field>PreliminaryQuantityExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryQuantityClosingBalance</dataPath>
+				<field>PreliminaryQuantityClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>PreliminaryQuantity</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryAmountOpeningBalance</dataPath>
+				<field>PreliminaryAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>PreliminaryAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryAmountReceipt</dataPath>
+				<field>PreliminaryAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryAmountExpense</dataPath>
+				<field>PreliminaryAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryAmountClosingBalance</dataPath>
+				<field>PreliminaryAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>PreliminaryAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryTaxAmountOpeningBalance</dataPath>
+				<field>PreliminaryTaxAmountOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>PreliminaryTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryTaxAmountReceipt</dataPath>
+				<field>PreliminaryTaxAmountReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryTaxAmountExpense</dataPath>
+				<field>PreliminaryTaxAmountExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryTaxAmountClosingBalance</dataPath>
+				<field>PreliminaryTaxAmountClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>PreliminaryTaxAmount</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT ALLOWED
 	R6020B_BatchBalanceBalanceAndTurnovers.Company,
@@ -2551,6 +2911,22 @@
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountClosingBalance,
+// Preliminary quantity
+ R6020B_BatchBalanceBalanceAndTurnovers.PreliminaryQuantityOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.PreliminaryQuantityReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.PreliminaryQuantityExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.PreliminaryQuantityClosingBalance,
+// Preliminary amount
+R6020B_BatchBalanceBalanceAndTurnovers.PreliminaryAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.PreliminaryAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.PreliminaryAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.PreliminaryAmountClosingBalance,
+// Preliminary tax amount	
+R6020B_BatchBalanceBalanceAndTurnovers.PreliminaryTaxAmountOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.PreliminaryTaxAmountReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.PreliminaryTaxAmountExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.PreliminaryTaxAmountClosingBalance,
+	
 	CASE
 		WHEN R6020B_BatchBalanceBalanceAndTurnovers.Recorder = UNDEFINED
 			THEN NULL
@@ -2935,6 +3311,54 @@ WHERE
 		<dataPath>Resources.Receipt.QuantityReceipt</dataPath>
 		<expression>SUM(Resources.Receipt.QuantityReceipt)</expression>
 	</totalField>
+	<totalField>
+		<dataPath>Resources.ClosingBalance.PreliminaryAmountClosingBalance</dataPath>
+		<expression>Sum(Resources.ClosingBalance.PreliminaryAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.ClosingBalance.PreliminaryQuantityClosingBalance</dataPath>
+		<expression>Sum(Resources.ClosingBalance.PreliminaryQuantityClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.ClosingBalance.PreliminaryTaxAmountClosingBalance</dataPath>
+		<expression>Sum(Resources.ClosingBalance.PreliminaryTaxAmountClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Expense.PreliminaryAmountExpense</dataPath>
+		<expression>Sum(Resources.Expense.PreliminaryAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Expense.PreliminaryQuantityExpense</dataPath>
+		<expression>Sum(Resources.Expense.PreliminaryQuantityExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Expense.PreliminaryTaxAmountExpense</dataPath>
+		<expression>Sum(Resources.Expense.PreliminaryTaxAmountExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.OpeningBalance.PreliminaryAmountOpeningBalance</dataPath>
+		<expression>Sum(Resources.OpeningBalance.PreliminaryAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.OpeningBalance.PreliminaryQuantityOpeningBalance</dataPath>
+		<expression>Sum(Resources.OpeningBalance.PreliminaryQuantityOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.OpeningBalance.PreliminaryTaxAmountOpeningBalance</dataPath>
+		<expression>Sum(Resources.OpeningBalance.PreliminaryTaxAmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Receipt.PreliminaryAmountReceipt</dataPath>
+		<expression>Sum(Resources.Receipt.PreliminaryAmountReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Receipt.PreliminaryQuantityReceipt</dataPath>
+		<expression>Sum(Resources.Receipt.PreliminaryQuantityReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Resources.Receipt.PreliminaryTaxAmountReceipt</dataPath>
+		<expression>Sum(Resources.Receipt.PreliminaryTaxAmountReceipt)</expression>
+	</totalField>
 	<parameter>
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
@@ -3012,6 +3436,15 @@ WHERE
 						<dcsset:field>Resources.OpeningBalance.InvoiceTaxAmountOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.OpeningBalance.PreliminaryQuantityOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.OpeningBalance.PreliminaryAmountOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.OpeningBalance.PreliminaryTaxAmountOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Resources.OpeningBalance.IndirectCostAmountOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -3058,6 +3491,15 @@ WHERE
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Resources.Receipt.InvoiceTaxAmountReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Receipt.PreliminaryQuantityReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Receipt.PreliminaryAmountReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Receipt.PreliminaryTaxAmountReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Resources.Receipt.IndirectCostAmountReceipt</dcsset:field>
@@ -3108,6 +3550,15 @@ WHERE
 						<dcsset:field>Resources.Expense.InvoiceTaxAmountExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Expense.PreliminaryQuantityExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Expense.PreliminaryAmountExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.Expense.PreliminaryTaxAmountExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Resources.Expense.IndirectCostAmountExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -3154,6 +3605,15 @@ WHERE
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Resources.ClosingBalance.InvoiceTaxAmountClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.ClosingBalance.PreliminaryQuantityClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.ClosingBalance.PreliminaryAmountClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Resources.ClosingBalance.PreliminaryTaxAmountClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Resources.ClosingBalance.IndirectCostAmountClosingBalance</dcsset:field>

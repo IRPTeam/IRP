@@ -3378,6 +3378,7 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 		NewRowReceivedBatch.PreliminaryAmountBalance    = NewRow.PreliminaryAmount;
 		NewRowReceivedBatch.PreliminaryTaxAmountBalance = NewRow.PreliminaryTaxAmount;
 		
+		NewRowReceivedBatch.IsPreliminary = NewRow.IsPreliminary;
 		NewRowReceivedBatch.IsOpeningBalance = False;
 		NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
 
@@ -3640,7 +3641,7 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 		NewRowReceivedBatch.PreliminaryQuantityBalance  = NewRow.PreliminaryQuantity;
 		NewRowReceivedBatch.PreliminaryAmountBalance    = NewRow.PreliminaryAmount;
 		NewRowReceivedBatch.PreliminaryTaxAmountBalance = NewRow.PreliminaryTaxAmount;
-		
+		NewRowReceivedBatch.IsPreliminary = NewRow.IsPreliminary;
 		NewRowReceivedBatch.IsOpeningBalance = False;
 		NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
 	EndDo;

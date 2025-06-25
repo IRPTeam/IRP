@@ -2392,7 +2392,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					NewRow.Company   = Row.Company;
 					NewRow.Period    = Row.Date;
 					NewRow.Batch     = Row_Batch.Batch;
-					NewRow.Quantity  = ExpenseQuantity;
+					NewRow[BatchQuantityResourceName] = ExpenseQuantity;
 					
 					NewRow.InvoiceAmount    = ExpenseInvoiceAmount;
 					NewRow.InvoiceTaxAmount = ExpenseInvoiceTaxAmount;

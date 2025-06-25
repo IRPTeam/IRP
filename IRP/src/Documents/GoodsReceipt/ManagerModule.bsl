@@ -165,7 +165,6 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	Document.GoodsReceipt.RowIDInfo AS RowIDInfo
 	|WHERE
 	|	RowIDInfo.Ref = &Ref
-	|	and RowIDInfo.Ref.TransactionType = value(enum.GoodsReceiptTransactionTypes.PreliminaryStock)
 	|GROUP BY
 	|	RowIDInfo.Ref,
 	|	RowIDInfo.Key
@@ -190,7 +189,6 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	Document.GoodsReceipt.SourceOfOrigins AS SourceOfOrigins
 	|WHERE
 	|	SourceOfOrigins.Ref = &Ref
-	|	and SourceOfOrigins.Ref.TransactionType = value(enum.GoodsReceiptTransactionTypes.PreliminaryStock)
 	|GROUP BY
 	|	SourceOfOrigins.Key,
 	|	CASE
@@ -215,8 +213,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ItemList.Ref.Date AS Period,
 	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
 	|	ItemList.Key AS Key,
-	|	SUM(ItemList.NetAmount) AS Amount,
-	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.IsPreliminary AS IsPreliminary,
+	|	SUM(ItemList.PreliminaryAmount) AS PreliminaryAmount,
+	|	ItemList.Currency AS Currency,
 	|	RowIDInfo.RowID AS RowID
 	|INTO tmpItemList
 	|FROM
@@ -226,7 +225,6 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|		AND RowIDInfo.Ref = &Ref
 	|WHERE
 	|	ItemList.Ref = &Ref
-	|	and ItemList.Ref.TransactionType = value(enum.GoodsReceiptTransactionTypes.PreliminaryStock)
 	|GROUP BY
 	|	ItemList.ItemKey,
 	|	ItemList.Store,
@@ -234,7 +232,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ItemList.Ref.Company,
 	|	ItemList.Ref.Date,
 	|	ItemList.Key,
-	|	ItemList.Ref.Currency,
+	|	ItemList.IsPreliminary,
+	|	ItemList.Currency,
 	|	RowIDInfo.RowID,
 	|	VALUE(Enum.BatchDirection.Receipt)
 	|;
@@ -249,7 +248,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	tmpItemList.Period AS Period,
 	|	tmpItemList.Direction AS Direction,
 	|	tmpItemList.Key AS Key,
-	|	tmpItemList.Amount AS TotalAmount,
+//	|	tmpItemList.PreliminaryAmount AS PreliminaryAmount,
 	|	tmpItemList.Currency AS Currency,
 	|	tmpItemList.RowID AS RowID,
 	|	ISNULL(tmpSourceOfOrigins.Quantity, 0) AS QuantityBySourceOrigin,
@@ -260,16 +259,26 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	END AS Quantity,
 	|	CASE
 	|		WHEN tmpItemList.Quantity <> 0
-	|			THEN CASE
+	|			THEN 
+	|
+	|	case when tmpItemList.Quantity = ISNULL(tmpSourceOfOrigins.Quantity, 0) then
+	|		tmpItemList.PreliminaryAmount
+	|	else
+	//----------------------------------------------------------------------
+	|			CASE
 	|				WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
-	|					THEN tmpItemList.Amount / tmpItemList.Quantity * ISNULL(tmpSourceOfOrigins.Quantity, 0)
-	|				ELSE tmpItemList.Amount
+	|					THEN tmpItemList.PreliminaryAmount / tmpItemList.Quantity * ISNULL(tmpSourceOfOrigins.Quantity, 0)
+	|				ELSE tmpItemList.PreliminaryAmount
 	|			END
+	//-----------------------------------
+	|end
 	|		ELSE 0
-	|	END AS Amount,
+//	|	END AS Amount,
+	|	end as PreliminaryAmount,
+	|
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
 	|	ISNULL(tmpSourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
-	|	TRUE AS CreateBatch
+	|	tmpItemList.IsPreliminary AS IsPreliminary
 	|INTO BatchKeysInfo
 	|FROM
 	|	tmpItemList AS tmpItemList
@@ -282,20 +291,19 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	Taxes.Key,
 	|	Taxes.Ref.Company AS Company,
 	|	&Vat AS Tax,
-	|	Taxes.TaxAmount AS AmountTax
+	|	Taxes.PreliminaryTaxAmount AS PreliminaryTaxAmount
 	|INTO Taxes
 	|FROM
 	|	Document.GoodsReceipt.ItemList AS Taxes
 	|WHERE
 	|	Taxes.Ref = &Ref
-	|	and Taxes.Ref.TransactionType = value(enum.GoodsReceiptTransactionTypes.PreliminaryStock)
-	|	AND Taxes.TaxAmount <> 0
+	|	AND Taxes.PreliminaryTaxAmount <> 0
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	Taxes.Key,
-	|	SUM(Taxes.AmountTax) AS AmountTax
+	|	SUM(Taxes.PreliminaryTaxAmount) AS PreliminaryTaxAmount
 	|INTO TaxesAmounts
 	|FROM
 	|	Taxes AS Taxes
@@ -317,19 +325,20 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	BatchKeysInfo.Key,
-	|	case
-	|		when BatchKeysInfo.TotalQuantity <> 0
-	|			then (isnull(TaxesAmounts.AmountTax, 0) / BatchKeysInfo.TotalQuantity) * BatchKeysInfo.Quantity
-	|		else 0
-	|	end as PreliminaryTaxAmount,
-	|	BatchKeysInfo.Amount AS PreliminaryAmount,
+	|	CASE
+	|		WHEN BatchKeysInfo.TotalQuantity <> 0
+	|			THEN ISNULL(TaxesAmounts.PreliminaryTaxAmount, 0) / BatchKeysInfo.TotalQuantity * BatchKeysInfo.Quantity
+	|		ELSE 0
+	|	END AS PreliminaryTaxAmount,
+	|	BatchKeysInfo.PreliminaryAmount AS PreliminaryAmount,
 	|	BatchKeysInfo.Quantity AS PreliminaryQuantity,
-	|	TRUE AS IsPreliminary,
 	|	BatchKeysInfo.*
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
 	|		LEFT JOIN TaxesAmounts AS TaxesAmounts
 	|		ON BatchKeysInfo.Key = TaxesAmounts.Key
+	|WHERE
+	|	BatchKeysInfo.IsPreliminary
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -341,10 +350,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	Document.GoodsReceipt AS GoodsReceipt
 	|WHERE
 	|	GoodsReceipt.Ref = &Ref
-	|	and GoodsReceipt.Ref.TransactionType = value(enum.GoodsReceiptTransactionTypes.PreliminaryStock)
 	|	AND TRUE IN
 	|		(SELECT
-	|			CreateBatch
+	|			IsPreliminary
 	|		FROM
 	|			BatchKeysInfo)";
 	
@@ -610,11 +618,13 @@ Function ItemList()
 		   |	ItemList.SimpleBatch AS SimpleBatch,
 		   |	ItemList.Amount,
 		   |	
-		   |	case when ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.PreliminaryStock) then
-		   |	ItemList.Ref.Currency else undefined end as Qurrency,
+		   |	ItemList.IsPreliminary AS IsPreliminary
+		   |	
+//		   |	case when ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.PreliminaryStock) then
+//		   |	ItemList.Ref.Currency else undefined end as Currency,
 		   |
-		   |	case when ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.PreliminaryStock) then
-		   |	ItemList.Price else 0 end as Price
+//		   |	case when ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.PreliminaryStock) then
+//		   |	ItemList.Price else 0 end as Price
 		   |
 		   |INTO ItemList
 		   |FROM
@@ -1279,7 +1289,7 @@ Function R4050B_StockInventory()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.isPreliminaryStock
+		|	ItemList.IsPreliminary
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Period,

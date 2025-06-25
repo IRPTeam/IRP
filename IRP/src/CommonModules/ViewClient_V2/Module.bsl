@@ -323,8 +323,7 @@ Procedure OnChainComplete(Parameters) Export
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
-		If Parameters.FunctionalOptions.IsUsePreliminary 
-			And Parameters.Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.PreliminaryStock")  Then
+		If Parameters.FunctionalOptions.IsUsePreliminary Then
 			__tmp_CommonDocuments_OnChainComplete(Parameters, False);
 		Else
 			__tmp_GoodsShipmentReceipt_OnChainComplete(Parameters);

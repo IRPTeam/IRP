@@ -1142,7 +1142,7 @@ Function BindCommandRecalculationWhenBasedOn(Parameters)
 	Binding = New Structure();
 	Binding.Insert("SalesReportFromTradeAgent" , "StepItemListCalculations_IsRecalculationWhenBasedOn_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"    , "StepItemListCalculations_IsRecalculationWhenBasedOn_Without_SpecialOffers");
-	SafeBinding(Binding, "GoodsReceipt"        , "StepItemListCalculations_IsRecalculationWhenBasedOn_Without_SpecialOffers");
+//	SafeBinding(Binding, "GoodsReceipt"        , "StepItemListCalculations_IsRecalculationWhenBasedOn_Without_SpecialOffers");
 	
 	Binding.Insert("PurchaseInvoice"      , "StepItemListCalculations_IsRecalculationWhenBasedOn");
 	Binding.Insert("PurchaseOrder"        , "StepItemListCalculations_IsRecalculationWhenBasedOn");
@@ -2214,8 +2214,8 @@ Function BindCurrency(Parameters)
 	Binding.Insert("SalesReportToConsignor",
 		"StepItemListChangePriceByPriceType");
 	
-	SafeBinding(Binding, "GoodsReceipt",
-		"StepItemListChangePriceByPriceType");
+//	SafeBinding(Binding, "GoodsReceipt",
+//		"StepItemListChangePriceByPriceType");
 	
 	Binding.Insert("SalesReturnOrder",
 		"StepItemListChangePriceByPriceType");
@@ -2813,12 +2813,12 @@ Function BindDate(Parameters)
 		|StepChangeTaxVisible,
 		|StepItemListChangeVatRate_AgreementInHeader");
 	
-	SafeBinding(Binding, "GoodsReceipt",
-		"StepItemListChangePriceTypeByAgreement,
-		|StepItemListChangePriceByPriceType, 
-		|StepChangeAgreementByPartner_AgreementTypeIsTradeAgent, 
-		|StepChangeTaxVisible,
-		|StepItemListChangeVatRate_AgreementInHeader");
+	SafeBinding(Binding, "GoodsReceipt", "StepChangeTaxVisible");
+//		"StepItemListChangePriceTypeByAgreement,
+//		|StepItemListChangePriceByPriceType, 
+//		|StepChangeAgreementByPartner_AgreementTypeIsTradeAgent, 
+//		|StepChangeTaxVisible,
+//		|StepItemListChangeVatRate_AgreementInHeader");
 		
 	Binding.Insert("BankPayment",
 		"StepChangeTaxVisible, 
@@ -2998,8 +2998,8 @@ Function BindCompany(Parameters)
 	
 	SafeBinding(Binding, "GoodsReceipt",
 		"StepChangeTaxVisible,
-		|StepChangePartnerChoiceList,
-		|StepItemListChangeVatRate_AgreementInHeader");
+		|StepChangePartnerChoiceList");
+//		|StepItemListChangeVatRate_AgreementInHeader");
 	
 	Binding.Insert("SalesReturnOrder",
 		"StepChangeTaxVisible,
@@ -3477,9 +3477,8 @@ Function GetBindingStructure_Partner(Parameters)
 	Result.Binding.Insert("ShipmentConfirmation", "StepChangeLegalNameByPartner");
 	Result.Binding.Insert("ShipmentPlaningOrder", "StepChangeLegalNameByPartner");
 	
-	SafeBinding(Result.Binding,  "GoodsReceipt"        , 
-		"StepChangeLegalNameByPartner,
-		|StepChangeAgreementByPartner_AgreementTypeIsVendor");
+	SafeBinding(Result.Binding,  "GoodsReceipt", "StepChangeLegalNameByPartner");
+//		|StepChangeAgreementByPartner_AgreementTypeIsVendor");
 		
 	Result.Binding.Insert("RetailGoodsReceipt"  , "StepChangeLegalNameByPartner");
 	
@@ -5518,10 +5517,10 @@ Function GetBindingStructure_Agreement(Parameters)
 		|StepItemListChangeTradeAgentFeePercentByAgreement,
 		|StepChangeTradeAgentFeeTypeByAgreement");
 
-	SafeBinding(Result.Binding, "GoodsReceipt",
-		"StepChangeCompanyByAgreement,
-		|StepChangeCurrencyByAgreement,
-		|StepChangePriceIncludeTaxByAgreement");
+//	SafeBinding(Result.Binding, "GoodsReceipt",
+//		"StepChangeCompanyByAgreement,
+//		|StepChangeCurrencyByAgreement,
+//		|StepChangePriceIncludeTaxByAgreement");
 	
 	Result.Binding.Insert("TaxesOperation",
 		"StepChangeCompanyByAgreement,
@@ -5862,7 +5861,7 @@ Function BindPriceIncludeTax(Parameters)
 	
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsPriceIncludeTaxChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsPriceIncludeTaxChanged_Without_SpecialOffers");
-	SafeBinding(Binding, "GoodsReceipt"       , "StepItemListCalculations_IsPriceIncludeTaxChanged_Without_SpecialOffers");
+//	SafeBinding(Binding, "GoodsReceipt"       , "StepItemListCalculations_IsPriceIncludeTaxChanged_Without_SpecialOffers");
 	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_Withholding_Tax");
 	
 	Return BindSteps("StepItemListCalculations_IsPriceIncludeTaxChanged", DataPath, Binding, Parameters, "BindPriceIncludeTax");
@@ -11176,10 +11175,10 @@ Function GetBindingStructure_ItemListItemKey(Parameters)
 		
 	SafeBinding(Result.Binding, "GoodsReceipt",
 		"StepChangeUseSerialLotNumberByItemKey,
-		|StepItemListChangeUnitByItemKey,
-		|StepItemListChangePriceTypeByAgreement,
-		|StepItemListChangePriceByPriceType,
-		|StepItemListChangeVatRate_AgreementInHeader");
+		|StepItemListChangeUnitByItemKey");
+//		|StepItemListChangePriceTypeByAgreement,
+//		|StepItemListChangePriceByPriceType,
+//		|StepItemListChangeVatRate_AgreementInHeader");
 	
 	Result.Binding.Insert("RetailShipmentConfirmation",
 		"StepChangeUseSerialLotNumberByItemKey,
@@ -11722,9 +11721,8 @@ Function BindItemListUnit(Parameters)
 		"StepItemListCalculateQuantityInBaseUnit,
 		|StepItemListChangePriceByPriceType");
 	
-	SafeBinding(Binding, "GoodsReceipt", 
-		"StepItemListCalculateQuantityInBaseUnit,
-		|StepItemListChangePriceByPriceType");
+	SafeBinding(Binding, "GoodsReceipt", "StepItemListCalculateQuantityInBaseUnit");
+//		|StepItemListChangePriceByPriceType");
 	
 	Binding.Insert("RetailSalesReceipt", 
 		"StepItemListCalculateQuantityInBaseUnit,
@@ -12380,7 +12378,7 @@ Function BindItemListPrice(Parameters)
 		
 		Binding.Insert("SalesReportFromTradeAgent" , "StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");	
 		Binding.Insert("SalesReportToConsignor"    , "StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");
-		SafeBinding(Binding, "GoodsReceipt"        , "StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");	
+//		SafeBinding(Binding, "GoodsReceipt"        , "StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");	
 	Else
 		Binding.Insert("SalesOrder",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
@@ -12422,9 +12420,9 @@ Function BindItemListPrice(Parameters)
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
 			|StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");
 	
-		SafeBinding(Binding, "GoodsReceipt",
-			"StepItemListChangePriceTypeAsManual_IsUserChange,
-			|StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");
+//		SafeBinding(Binding, "GoodsReceipt",
+//			"StepItemListChangePriceTypeAsManual_IsUserChange,
+//			|StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");
 	
 		Binding.Insert("RetailReturnReceipt",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
@@ -12507,7 +12505,7 @@ Function BindItemListDontCalculateRow(Parameters)
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
 	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_IsPriceChanged_Withholding_Tax");
-	SafeBinding(Binding, "GoodsReceipt"             , "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
+//	SafeBinding(Binding, "GoodsReceipt"             , "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
 	
 	Return BindSteps("StepItemListCalculations_IsDontCalculateRowChanged", DataPath, Binding, Parameters, "BindItemListDontCalculateRow");
 EndFunction
@@ -12551,7 +12549,7 @@ Function BindItemListVatRate(Parameters)
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_Withholding_Tax");
-	SafeBinding(Binding, "GoodsReceipt"             , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
+//	SafeBinding(Binding, "GoodsReceipt"             , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	Binding.Insert("StockAdjustmentAsSurplus" , "StepItemListCalculations_IsVatRateChanged_StockDocuments");
 	
 	Return BindSteps("StepItemListCalculations_IsVatRateChanged", DataPath, Binding, Parameters, "BindItemListVatRate");
@@ -12935,8 +12933,8 @@ Function BindItemListQuantityInBaseUnit(Parameters)
 	Binding.Insert("SalesReportToConsignor",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOffers");
 	
-	SafeBinding(Binding, "GoodsReceipt",
-		"StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOffers");
+//	SafeBinding(Binding, "GoodsReceipt",
+//		"StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOffers");
 	
 	Binding.Insert("RetailReturnReceipt",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
@@ -13387,8 +13385,8 @@ Function BindItemListTaxAmount(Parameters)
 	Binding.Insert("SalesReportToConsignor", 
 		"StepItemListCalculations_IsTaxAmountChanged_Without_SpecialOffers");
 	
-	SafeBinding(Binding, "GoodsReceipt", 
-		"StepItemListCalculations_IsTaxAmountChanged_Without_SpecialOffers");
+//	SafeBinding(Binding, "GoodsReceipt", 
+//		"StepItemListCalculations_IsTaxAmountChanged_Without_SpecialOffers");
 	
 	Binding.Insert("RetailReturnReceipt", 
 		"StepItemListCalculations_IsTaxAmountChanged");
@@ -13556,9 +13554,9 @@ Function BindItemListTotalAmount(Parameters)
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
 		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
 	
-	SafeBinding(Binding, "GoodsReceipt",
-		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
+//	SafeBinding(Binding, "GoodsReceipt",
+//		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
+//		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
 	
 	Binding.Insert("RetailReturnReceipt",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,

@@ -3,15 +3,11 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
-	If ThisObject.TransactionType = Enums.GoodsReceiptTransactionTypes.PreliminaryStock Then
-		If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
-			Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
-			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
-			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);	
-		EndIf;
-	Else
-		ThisObject.Currencies.Clear();
-	EndIf;
+	For Each Row In ThisObject.ItemList Do
+		Parameters = CurrenciesClientServer.GetParameters_GR_Preliminary(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
 
 	If TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer Then
 		Partner = Undefined;
@@ -57,13 +53,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	If ThisObject.TransactionType = Enums.GoodsReceiptTransactionTypes.PreliminaryStock Then
-		CheckedAttributes.Add("Partner");
-		CheckedAttributes.Add("Agreement");
-		CheckedAttributes.Add("Currency");
-		CheckedAttributes.Add("ItemList.TotalAmount");
-	EndIf;
-	
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
 		Cancel = True;
 	EndIf;

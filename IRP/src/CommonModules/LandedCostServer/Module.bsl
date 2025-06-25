@@ -995,6 +995,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 	TableOfReturnedBatches.Columns.Add("PreliminaryTaxAmount"             , RegMetadata.Resources.PreliminaryTaxAmount.Type);	
 	TableOfReturnedBatches.Columns.Add("PreliminaryAmountBalance"         , RegMetadata.Resources.PreliminaryAmount.Type);
 	TableOfReturnedBatches.Columns.Add("PreliminaryTaxAmountBalance"      , RegMetadata.Resources.PreliminaryTaxAmount.Type);
+	TableOfReturnedBatches.Columns.Add("IsPreliminary"                    , New TypeDescription("Boolean"));
 	
 	tmp_manager = New TempTablesManager();
 	Tree = GetBatchTree(tmp_manager, CalculationSettings);
@@ -2098,7 +2099,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 								
 					BatchQuantityResourceName = "Quantity";
 					BatchQuantityResourceNameBalance = "QuantityBalance";
-					If BatchBySales.IsPriliminary Then
+					If BatchBySales.IsPreliminary Then
 						BatchQuantityResourceName = "PreliminaryQuantity";
 						BatchQuantityResourceNameBalance = "PreliminaryQuantityBalance";
 					EndIf;
@@ -2142,19 +2143,21 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					_BatchBySales_Document = BatchBySales.Document;
 					_BatchBySales_Company  = BatchBySales.Company;
 					_BatchBySales_Batch    = BatchBySales.Batch;
+					_BatchBySales_IsPreliminary = BatchBySales.IsPreliminary;
 					
 					// determine batch when returned by another company
 					If ValueIsFilled(Row.Batch) And Row.Company <> _BatchBySales_Company Then
 						_BatchBySales_Document = Row.Batch.Document;
 						_BatchBySales_Company  = Row.Company;
-						_BatchBySales_Batch    = Row.Batch;
+						_BatchBySales_Batch    = Row.Batch; 
 					EndIf;
 					
 					If Not IsReturnFromTradeAgent(Row.Document) Then
 						
 						// Table of returned batches
 						NewRow_ReturnedBatches = TableOfReturnedBatches.Add();
-						NewRow_ReturnedBatches.IsOpeningBalance = False;
+						NewRow_ReturnedBatches.IsOpeningBalance = False; 
+						NewRow_ReturnedBatches.IsPreliminary = _BatchBySales_IsPreliminary;
 						NewRow_ReturnedBatches.Skip             = True;
 						NewRow_ReturnedBatches.Priority         = 0;
 						NewRow_ReturnedBatches.BatchKey         = Row.BatchKey;
@@ -2205,6 +2208,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					
 						NewRow_DataForReceipt.Company   = _BatchBySales_Company;
 						NewRow_DataForReceipt.Batch     = _BatchBySales_Batch;
+						NewRow_DataForReceipt.IsPreliminary = _BatchBySales_IsPreliminary;
 					
 						NewRow_DataForReceipt.BatchKey  = Row.BatchKey;
 						NewRow_DataForReceipt.Document  = Row.Document;
@@ -2486,6 +2490,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	TableOfNewReceivedBatches.Columns.Add("PreliminaryAmountBalance");
 	TableOfNewReceivedBatches.Columns.Add("PreliminaryTaxAmountBalance");
 	
+	TableOfNewReceivedBatches.Columns.Add("IsPreliminary");
 	TableOfNewReceivedBatches.Columns.Add("IsOpeningBalance");
 	TableOfNewReceivedBatches.Columns.Add("Direction");
 	TableOfNewReceivedBatches.Columns.Add("ReturnRow");
@@ -2563,6 +2568,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRowReceivedBatch.PreliminaryAmountBalance    = Row.PreliminaryAmount;
 			NewRowReceivedBatch.PreliminaryTaxAmountBalance = Row.PreliminaryTaxAmount;
 			
+			NewRowReceivedBatch.IsPreliminary = Row.IsPreliminary;
 			NewRowReceivedBatch.IsOpeningBalance = False;
 			NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
 			NewRowReceivedBatch.ReturnRow = Row;
@@ -2877,6 +2883,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRowReceivedBatch.PreliminaryAmountBalance    = NewRow.PreliminaryAmount;
 			NewRowReceivedBatch.PreliminaryTaxAmountBalance = NewRow.PreliminaryTaxAmount;
 			
+			NewRowReceivedBatch.IsPreliminary = False;
 			NewRowReceivedBatch.IsOpeningBalance = False;
 			NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
 		EndDo;
@@ -3104,6 +3111,7 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 				NewRowReceivedBatch.PreliminaryAmountBalance         = Row_Expense.PreliminaryAmount;
 				NewRowReceivedBatch.PreliminaryTaxAmountBalance      = Row_Expense.PreliminaryTaxAmount;
 				
+				NewRowReceivedBatch.IsPreliminary = Row_Expense.IsPreliminary;
 				NewRowReceivedBatch.IsOpeningBalance = False;
 				NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
 				
@@ -3690,7 +3698,8 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|
 	|	DataForSalesBatches.PreliminaryQuantity AS PreliminaryQuantity,
 	|	DataForSalesBatches.PreliminaryAmount AS PreliminaryAmount,
-	|	DataForSalesBatches.PreliminaryTaxAmount AS PreliminaryTaxAmount
+	|	DataForSalesBatches.PreliminaryTaxAmount AS PreliminaryTaxAmount,
+	|	DataForSalesBatches.IsPreliminary
 	|
 	|INTO DataForSalesBatches
 	|FROM
@@ -3724,7 +3733,8 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|
 	|	R6050T_SalesBatchesTurnovers.PreliminaryQuantityTurnover AS PreliminaryQuantity,
 	|	R6050T_SalesBatchesTurnovers.PreliminaryAmountTurnover AS PreliminaryAmount,
-	|	R6050T_SalesBatchesTurnovers.PreliminaryTaxAmountTurnover AS PreliminaryTaxAmount
+	|	R6050T_SalesBatchesTurnovers.PreliminaryTaxAmountTurnover AS PreliminaryTaxAmount,
+	| 	case when R6050T_SalesBatchesTurnovers.PreliminaryQuantityTurnover <> 0 then true else false end as IsPreliminary
 	|
 	|INTO SalesBatches
 	|FROM
@@ -3762,7 +3772,8 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	DataForSalesBatches.PreliminaryAmount AS PreliminaryAmount,
 	|	DataForSalesBatches.PreliminaryTaxAmount AS PreliminaryTaxAmount,
 	|
-	|	DataForSalesBatches.Date AS Date
+	|	DataForSalesBatches.Date AS Date,
+	|   DataForSalesBatches.IsPreliminary
 	|INTO AllData
 	|FROM
 	|	DataForSalesBatches AS DataForSalesBatches
@@ -3801,7 +3812,8 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	SalesBatches.PreliminaryAmount,
 	|	SalesBatches.PreliminaryTaxAmount,
 	|
-	|	SalesBatches.Date
+	|	SalesBatches.Date,
+	|   SalesBatches.IsPreliminary
 	|FROM
 	|	SalesBatches AS SalesBatches
 	|;
@@ -3836,7 +3848,8 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|
 	|	AllData.Batch.Document AS Document,
 	|	AllData.Date AS Date,
-	|	AllData.Batch.Company AS Company
+	|	AllData.Batch.Company AS Company,
+	|   AllData.IsPreliminary AS IsPreliminary
 	|FROM
 	|	AllData AS AllData
 	|GROUP BY
@@ -3845,7 +3858,8 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	AllData.SalesInvoice,
 	|	AllData.Batch.Document,
 	|	AllData.Date,
-	|	AllData.Batch.Company
+	|	AllData.Batch.Company,
+	|	AllData.IsPreliminary
 	|ORDER BY
 	|	Date";
 	Query.SetParameter("SalesInvoice"             , SalesInvoice);
@@ -3915,5 +3929,4 @@ Function GetBatchKeyDetailPresentation(BatchKey)
 		BatchKey, BatchKey_Code, BatchKey_ItemKey_Code, BatchKey_Store);
 	
 	Return BatchKeyPresentation;
-EndFunction			
-
+EndFunction

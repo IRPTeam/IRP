@@ -121,7 +121,6 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 			New Structure("RowID, BasisRowID, ItemKey, SerialLotNumber", 
 			Row.RowID, Row.BasisRowID, Row.ItemKey, Row.SerialLotNumber));
 		
-		
 		If TypeOf(Row.Basis) = Type("DocumentRef.PurchaseInvoice") Then
 			If CurrencyTable.Count() Then
 				BatchCostAllocationInfoByBasis.FillValues(CurrencyTable[0].Key, "Key");
@@ -203,6 +202,19 @@ EndProcedure
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Parameters.Insert("RecordType", AccumulationRecordType.Receipt);
+	
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	AccReg = AccumulationRegisters;
+
+	Current_R6070T_OtherPeriodsExpenses = PostingServer.GetQueryTableByName("R6070T_OtherPeriodsExpenses", Parameters);
+	Exists_R6070T_OtherPeriodsExpenses  = PostingServer.GetQueryTableByName("Exists_R6070T_OtherPeriodsExpenses", Parameters);
+	
+	If Not Cancel 
+		And Not AccReg.R6070T_OtherPeriodsExpenses.CheckBalance(Ref, 
+			Current_R6070T_OtherPeriodsExpenses, 
+			Exists_R6070T_OtherPeriodsExpenses, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -237,6 +249,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6060S_BatchCostAllocationInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(PostingServer.Exists_R6070T_OtherPeriodsExpenses());
 	Return QueryArray;
 EndFunction
 

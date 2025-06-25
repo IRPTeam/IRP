@@ -359,6 +359,12 @@ Scenario: 963027 try post AdditionalCostAllocation (LimitedAccess)
 
 Scenario: 963028 try post AdditionalRevenueAllocation (LimitedAccess)
 	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number'  | 'Date'                 |
+		| '74'      | '30.10.2023 11:20:01'  |
+	And I select current line in "List" table
+	And I click "Post and close" button
 	Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |

@@ -1613,7 +1613,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED
-//	|	UNDEFINED
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance.Balance(ENDOFPERIOD(&EndPeriod, DAY), (BatchKey, Batch.Company) IN
 	|		(SELECT
@@ -1849,146 +1848,16 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			If IsNotMultiDirectionDocument(Document) // is not transfer, produce, bundling or unbundling
 				And Not ValueIsFilled(Row.SalesInvoice) // is not return by sales invoice
 				And TypeOf(Document) <> Type("DocumentRef.BatchReallocateIncoming") // is not receipt by btach reallocation
-				
 				// sales invoice with transaction type "shipment to trade agent" is multi direction document
 				And Not IsShipmentToTradeAgent(Document) Then
-				
-				// receipt without price and amount, stock adjustment surplus and sales return
-				If Row.InvoiceAmount = 0 AND Row.Company.LandedCostFillEmptyAmount 
-					AND (TypeOf(Document) = Type("DocumentRef.StockAdjustmentAsSurplus")
-					OR TypeOf(Document) = Type("DocumentRef.SalesReturn")) Then
-						Price = GetPriceForEmptyAmountFromDataForReceipt(Row.BatchKey.ItemKey, Row.Date, Tables.DataForReceipt);
-						
-						If Price = 0 Then
-							Price = GetPriceForEmptyAmountFromBatchBalance(Row.BatchKey.ItemKey, Row.Date);
-						EndIf;
-						
-						If Price = 0 AND Not Row.Company.LandedCostPriceTypeForEmptyAmount.isEmpty() Then
-							PriceSettings = New Structure();
-							PriceSettings.Insert("ItemKey"   , Row.BatchKey.ItemKey);
-							PriceSettings.Insert("Period"    ,  Row.Date);
-							PriceSettings.Insert("PriceType" ,  Row.Company.LandedCostPriceTypeForEmptyAmount);
-							PriceSettings.Insert("Unit"      ,  GetItemInfo.GetInfoByItemsKey(Row.BatchKey.ItemKey)[0].Unit);
-							Price = GetItemInfo.ItemPriceInfo(PriceSettings).Price;
-						EndIf;
-						
-						Row.InvoiceAmount        = Price * Row.Quantity;
-						Row.InvoiceAmountBalance = Price * Row.Quantity;
-						
-						NewRow.InvoiceAmount = Price * Row.Quantity;
-				EndIf; // fill empty amount
-				
-				FillPropertyValues(Tables.DataForReceipt.Add(), NewRow);
-				
+					ReceiptInventory(Row, NewRow, Document, Tables);
 			EndIf;
 			
 			// return from customer (sales return)
 			If ValueIsFilled(Row.SalesInvoice) Then // return by sales invoice
-
-				TableOfBatchBySales = GetSalesBatches(Row.SalesInvoice, Tables.DataForSalesBatches, Row.BatchKey);
-				
-				NeedReceipt = Row.Quantity; // how many returned (quantity or priliminary quantity)
-
-				For Each BatchBySales In TableOfBatchBySales Do
-					If NeedReceipt = 0 Then
-						Break;
-					EndIf;
-								
-					BatchQuantityResourceName = "Quantity";
-					BatchQuantityResourceNameBalance = "QuantityBalance";
-					If BatchBySales.IsPreliminary Then
-						BatchQuantityResourceName = "PreliminaryQuantity";
-						BatchQuantityResourceNameBalance = "PreliminaryQuantityBalance";
-					EndIf;
-																			
-					ReceiptQuantity = Min(NeedReceipt, BatchBySales[BatchQuantityResourceName]); // how many can receipt (quantity or priliminary quantity)
-					
-					ReceiptAmounts = New Structure();
-					For Each Res In AmountResources() Do
-						ReceiptAmounts.Insert(Res, CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, Res));
-					EndDo;
-					
-					BatchBySales[BatchQuantityResourceName]  = BatchBySales[BatchQuantityResourceName] - ReceiptQuantity;
-					
-					For Each Res In AmountResources() Do
-						BatchBySales[Res] = BatchBySales[Res] - ReceiptAmounts[Res];
-					EndDo;
-					
-					NeedReceipt = NeedReceipt - ReceiptQuantity;
-					
-					_BatchBySales_Document = BatchBySales.Document;
-					_BatchBySales_Company  = BatchBySales.Company;
-					_BatchBySales_Batch    = BatchBySales.Batch;
-					_BatchBySales_IsPreliminary = BatchBySales.IsPreliminary;
-					
-					// determine batch when returned by another company
-					If ValueIsFilled(Row.Batch) And Row.Company <> _BatchBySales_Company Then
-						_BatchBySales_Document = Row.Batch.Document;
-						_BatchBySales_Company  = Row.Company;
-						_BatchBySales_Batch    = Row.Batch; 
-					EndIf;
-					
-					If Not IsReturnFromTradeAgent(Row.Document) Then
-						
-						// Table of returned batches
-						NewRow_ReturnedBatches = TableOfReturnedBatches.Add();
-						NewRow_ReturnedBatches.IsOpeningBalance = False; 
-						NewRow_ReturnedBatches.IsPreliminary    = _BatchBySales_IsPreliminary;
-						NewRow_ReturnedBatches.Skip             = True;
-						NewRow_ReturnedBatches.Priority         = 0;
-						NewRow_ReturnedBatches.BatchKey         = Row.BatchKey;
-						
-						NewRow_ReturnedBatches[BatchQuantityResourceName] = ReceiptQuantity;
-
-						For Each Res In AmountResources() Do
-							NewRow_ReturnedBatches[Res] = ReceiptAmounts[Res];
-						EndDo;
-						
-						NewRow_ReturnedBatches.Document  = _BatchBySales_Document;
-						NewRow_ReturnedBatches.Company   = _BatchBySales_Company;
-						NewRow_ReturnedBatches.Batch     = _BatchBySales_Batch;
-						NewRow_ReturnedBatches.Date      = Row.Date;
-						NewRow_ReturnedBatches.Direction = Enums.BatchDirection.Receipt;
-						
-						NewRow_ReturnedBatches[BatchQuantityResourceNameBalance]  = ReceiptQuantity;
-						
-						For Each Res In AmountResources() Do
-							NewRow_ReturnedBatches[Res + "Balance"] = ReceiptAmounts[Res];
-						EndDo;
-						
-						// Data for receipt
-						NewRow_DataForReceipt = Tables.DataForReceipt.Add();
-						NewRow_DataForReceipt.Company   = _BatchBySales_Company;
-						NewRow_DataForReceipt.Batch     = _BatchBySales_Batch;
-						NewRow_DataForReceipt.BatchKey  = Row.BatchKey;
-						NewRow_DataForReceipt.Document  = Row.Document;
-						NewRow_DataForReceipt.Period    = Row.Date;
-						NewRow_DataForReceipt.IsPreliminary = _BatchBySales_IsPreliminary;
-						
-						NewRow_DataForReceipt[BatchQuantityResourceName] = ReceiptQuantity;
-						
-						For Each Res In AmountResources() Do
-							NewRow_DataForReceipt[Res] = ReceiptAmounts[Res];
-						EndDo;
-					EndIf;
-				EndDo; // return by sales invoice
-
-				If NeedReceipt <> 0 Then
-					// Can not receipt Batch key by sales return: %1 , Quantity: %2 , Doc: %3
-					Msg = StrTemplate(R().LC_Error_001, GetBatchKeyDetailPresentation(Row.BatchKey), NeedReceipt, Row.Document);
-					CommonFunctionsClientServer.ShowUsersMessage(Msg);
-					If CalculationSettings.RaiseOnCalculationError Then
-						Raise Msg;
-					EndIf;
-					NewRow = Tables.DataForBatchShortageIncoming.Add();
-					NewRow.BatchKey = Row.BatchKey;
-					NewRow.Document = Row.Document;
-					NewRow.Company  = Row.Company;
-					NewRow.Period   = Row.Date;
-					NewRow.Quantity = NeedReceipt;
-				EndIf;
+				ReceiptBySalesReturn(Row, Tables, TableOfReturnedBatches, CalculationSettings);
 			EndIf;
-			
+		
 		Else //Expense
 
 			NeedExpense = Row.Quantity;
@@ -2885,6 +2754,139 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 	EndDo;
 	
 	RemoveFullyExpensedRows(Rows);
+EndProcedure
+
+Procedure ReceiptInventory(Row, NewRow, Document, Tables)
+	// receipt without price and amount, stock adjustment surplus and sales return
+	If Row.InvoiceAmount = 0 AND Row.Company.LandedCostFillEmptyAmount 
+		AND (TypeOf(Document) = Type("DocumentRef.StockAdjustmentAsSurplus")
+		OR TypeOf(Document) = Type("DocumentRef.SalesReturn")) Then
+			Price = GetPriceForEmptyAmountFromDataForReceipt(Row.BatchKey.ItemKey, Row.Date, Tables.DataForReceipt);
+			
+			If Price = 0 Then
+				Price = GetPriceForEmptyAmountFromBatchBalance(Row.BatchKey.ItemKey, Row.Date);
+			EndIf;
+			
+			If Price = 0 AND Not Row.Company.LandedCostPriceTypeForEmptyAmount.isEmpty() Then
+				PriceSettings = New Structure();
+				PriceSettings.Insert("ItemKey"   , Row.BatchKey.ItemKey);
+				PriceSettings.Insert("Period"    ,  Row.Date);
+				PriceSettings.Insert("PriceType" ,  Row.Company.LandedCostPriceTypeForEmptyAmount);
+				PriceSettings.Insert("Unit"      ,  GetItemInfo.GetInfoByItemsKey(Row.BatchKey.ItemKey)[0].Unit);
+				Price = GetItemInfo.ItemPriceInfo(PriceSettings).Price;
+			EndIf;
+			
+			Row.InvoiceAmount        = Price * Row.Quantity;
+			Row.InvoiceAmountBalance = Price * Row.Quantity;
+			
+			NewRow.InvoiceAmount = Price * Row.Quantity;
+	EndIf; // fill empty amount
+	
+	FillPropertyValues(Tables.DataForReceipt.Add(), NewRow);			
+EndProcedure
+
+Procedure ReceiptBySalesReturn(Row, Tables, TableOfReturnedBatches, CalculationSettings)
+	TableOfBatchBySales = GetSalesBatches(Row.SalesInvoice, Tables.DataForSalesBatches, Row.BatchKey);
+	NeedReceipt = Row.Quantity; // how many returned (quantity or priliminary quantity)
+
+	For Each BatchBySales In TableOfBatchBySales Do
+		If NeedReceipt = 0 Then
+			Break;
+		EndIf;
+								
+		BatchQuantityResourceName = "Quantity";
+		BatchQuantityResourceNameBalance = "QuantityBalance";
+		If BatchBySales.IsPreliminary Then
+			BatchQuantityResourceName = "PreliminaryQuantity";
+			BatchQuantityResourceNameBalance = "PreliminaryQuantityBalance";
+		EndIf;
+																
+		ReceiptQuantity = Min(NeedReceipt, BatchBySales[BatchQuantityResourceName]); // how many can receipt (quantity or priliminary quantity)
+		
+		ReceiptAmounts = New Structure();
+		For Each Res In AmountResources() Do
+			ReceiptAmounts.Insert(Res, CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, Res));
+		EndDo;
+		
+		BatchBySales[BatchQuantityResourceName]  = BatchBySales[BatchQuantityResourceName] - ReceiptQuantity;
+		
+		For Each Res In AmountResources() Do
+			BatchBySales[Res] = BatchBySales[Res] - ReceiptAmounts[Res];
+		EndDo;
+		
+		NeedReceipt = NeedReceipt - ReceiptQuantity;
+		
+		_BatchBySales_Document = BatchBySales.Document;
+		_BatchBySales_Company  = BatchBySales.Company;
+		_BatchBySales_Batch    = BatchBySales.Batch;
+		_BatchBySales_IsPreliminary = BatchBySales.IsPreliminary;
+		
+		// determine batch when returned by another company
+		If ValueIsFilled(Row.Batch) And Row.Company <> _BatchBySales_Company Then
+			_BatchBySales_Document = Row.Batch.Document;
+			_BatchBySales_Company  = Row.Company;
+			_BatchBySales_Batch    = Row.Batch; 
+		EndIf;
+			
+		If Not IsReturnFromTradeAgent(Row.Document) Then
+			
+			// Table of returned batches
+			NewRow_ReturnedBatches = TableOfReturnedBatches.Add();
+			NewRow_ReturnedBatches.IsOpeningBalance = False; 
+			NewRow_ReturnedBatches.IsPreliminary    = _BatchBySales_IsPreliminary;
+			NewRow_ReturnedBatches.Skip             = True;
+			NewRow_ReturnedBatches.Priority         = 0;
+			NewRow_ReturnedBatches.BatchKey         = Row.BatchKey;
+			
+			NewRow_ReturnedBatches[BatchQuantityResourceName] = ReceiptQuantity;
+
+			For Each Res In AmountResources() Do
+				NewRow_ReturnedBatches[Res] = ReceiptAmounts[Res];
+			EndDo;
+			
+			NewRow_ReturnedBatches.Document  = _BatchBySales_Document;
+			NewRow_ReturnedBatches.Company   = _BatchBySales_Company;
+			NewRow_ReturnedBatches.Batch     = _BatchBySales_Batch;
+			NewRow_ReturnedBatches.Date      = Row.Date;
+			NewRow_ReturnedBatches.Direction = Enums.BatchDirection.Receipt;
+			
+			NewRow_ReturnedBatches[BatchQuantityResourceNameBalance]  = ReceiptQuantity;
+			
+			For Each Res In AmountResources() Do
+				NewRow_ReturnedBatches[Res + "Balance"] = ReceiptAmounts[Res];
+			EndDo;
+			
+			// Data for receipt
+			NewRow_DataForReceipt = Tables.DataForReceipt.Add();
+			NewRow_DataForReceipt.Company   = _BatchBySales_Company;
+			NewRow_DataForReceipt.Batch     = _BatchBySales_Batch;
+			NewRow_DataForReceipt.BatchKey  = Row.BatchKey;
+			NewRow_DataForReceipt.Document  = Row.Document;
+			NewRow_DataForReceipt.Period    = Row.Date;
+			NewRow_DataForReceipt.IsPreliminary = _BatchBySales_IsPreliminary;
+			
+			NewRow_DataForReceipt[BatchQuantityResourceName] = ReceiptQuantity;
+			
+			For Each Res In AmountResources() Do
+				NewRow_DataForReceipt[Res] = ReceiptAmounts[Res];
+			EndDo;
+		EndIf;
+	EndDo; // return by sales invoice
+
+	If NeedReceipt <> 0 Then
+		// Can not receipt Batch key by sales return: %1 , Quantity: %2 , Doc: %3
+		Msg = StrTemplate(R().LC_Error_001, GetBatchKeyDetailPresentation(Row.BatchKey), NeedReceipt, Row.Document);
+		CommonFunctionsClientServer.ShowUsersMessage(Msg);
+		If CalculationSettings.RaiseOnCalculationError Then
+			Raise Msg;
+		EndIf;
+		NewRow = Tables.DataForBatchShortageIncoming.Add();
+		NewRow.BatchKey = Row.BatchKey;
+		NewRow.Document = Row.Document;
+		NewRow.Company  = Row.Company;
+		NewRow.Period   = Row.Date;
+		NewRow.Quantity = NeedReceipt;
+	EndIf;
 EndProcedure
 
 Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)

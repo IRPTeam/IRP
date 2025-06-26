@@ -156,6 +156,25 @@ EndFunction
 
 #EndRegion
 
+Function AmountResources()
+	Resources = New Array();
+	Resources.Add("InvoiceAmount");
+	Resources.Add("InvoiceTaxAmount");
+	Resources.Add("IndirectCostAmount");
+	Resources.Add("IndirectCostTaxAmount");
+	Resources.Add("ExtraCostAmountByRatio");
+	Resources.Add("ExtraCostTaxAmountByRatio");
+	Resources.Add("ExtraDirectCostAmount");
+	Resources.Add("ExtraDirectCostTaxAmount");
+	Resources.Add("AllocatedCostAmount");
+	Resources.Add("AllocatedCostTaxAmount");
+	Resources.Add("AllocatedRevenueAmount");
+	Resources.Add("AllocatedRevenueTaxAmount");
+	Resources.Add("PreliminaryAmount");
+	Resources.Add("PreliminaryTaxAmount");
+	Return Resources;
+EndFunction
+
 Procedure Posting_BatchWiseBalance(CalculationSettings, AddInfo = Undefined) Export
 	LocksStorage = New Array();
 	If Not TransactionActive() Then
@@ -533,22 +552,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 
 	RecordSetR6050T.Write();
 	
-	AmountResourceNames = 
-	"InvoiceAmount, 
-	|InvoiceTaxAmount, 
-	|ExtraCostAmountByRatio, 
-	|ExtraCostTaxAmountByRatio,
-	|ExtraDirectCostAmount, 
-	|ExtraDirectCostTaxAmount,
-	|IndirectCostAmount, 
-	|IndirectCostTaxAmount,
-	|AllocatedCostAmount, 
-	|AllocatedCostTaxAmount, 
-	|AllocatedRevenueAmount, 
-	|AllocatedRevenueTaxAmount,
-	|PreliminaryAmount, 
-	|PreliminaryTaxAmount";
-	
+	AmountResourceNames = StrConcat(AmountResources(), ",");
 	QuantityResourceNames = "Quantity, PreliminaryQuantity";
 	
 	// Bundle amount values
@@ -722,35 +726,19 @@ Function GetBatchWiseBalance(CalculationSettings)
 	// EmptyTable_BatchWiseBalance
 	RegMetadata = Metadata.AccumulationRegisters.R6010B_BatchWiseBalance;
 	EmptyTable_BatchWiseBalance = New ValueTable();
-	EmptyTable_BatchWiseBalance.Columns.Add("Batch"     , New TypeDescription("CatalogRef.Batches"));
-	EmptyTable_BatchWiseBalance.Columns.Add("BatchKey"  , New TypeDescription("CatalogRef.BatchKeys"));
-	EmptyTable_BatchWiseBalance.Columns.Add("Document"  , GetBatchDocumentsTypes());
-	EmptyTable_BatchWiseBalance.Columns.Add("Company"   , New TypeDescription("CatalogRef.Companies"));
-	EmptyTable_BatchWiseBalance.Columns.Add("Period"    , RegMetadata.StandardAttributes.Period.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("Quantity"  , RegMetadata.Resources.Quantity.Type);
-
-	EmptyTable_BatchWiseBalance.Columns.Add("InvoiceAmount"             , RegMetadata.Resources.InvoiceAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("InvoiceTaxAmount"          , RegMetadata.Resources.InvoiceTaxAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("Batch"         , New TypeDescription("CatalogRef.Batches"));
+	EmptyTable_BatchWiseBalance.Columns.Add("BatchKey"      , New TypeDescription("CatalogRef.BatchKeys"));
+	EmptyTable_BatchWiseBalance.Columns.Add("Document"      , GetBatchDocumentsTypes());
+	EmptyTable_BatchWiseBalance.Columns.Add("Company"       , New TypeDescription("CatalogRef.Companies"));
+	EmptyTable_BatchWiseBalance.Columns.Add("Period"        , RegMetadata.StandardAttributes.Period.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("IsPreliminary" , New TypeDescription("Boolean"));
 	
-	EmptyTable_BatchWiseBalance.Columns.Add("IndirectCostAmount"        , RegMetadata.Resources.IndirectCostAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("IndirectCostTaxAmount"     , RegMetadata.Resources.IndirectCostTaxAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("Quantity", RegMetadata.Resources.Quantity.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("PreliminaryQuantity", RegMetadata.Resources.PreliminaryQuantity.Type);
 	
-	EmptyTable_BatchWiseBalance.Columns.Add("ExtraCostAmountByRatio"    , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("ExtraCostTaxAmountByRatio" , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
-	
-	EmptyTable_BatchWiseBalance.Columns.Add("ExtraDirectCostAmount"     , RegMetadata.Resources.ExtraDirectCostAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("ExtraDirectCostTaxAmount"  , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
-	
-	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedCostAmount"       , RegMetadata.Resources.AllocatedCostAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedCostTaxAmount"    , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
-	
-	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
-	
-	EmptyTable_BatchWiseBalance.Columns.Add("PreliminaryQuantity"       , RegMetadata.Resources.PreliminaryQuantity.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("PreliminaryAmount"         , RegMetadata.Resources.PreliminaryAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("PreliminaryTaxAmount"      , RegMetadata.Resources.PreliminaryTaxAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("IsPreliminary"             , New TypeDescription("Boolean"));
+	For Each Res In AmountResources() Do
+		EmptyTable_BatchWiseBalance.Columns.Add(Res, Metadata.DefinedTypes.typeAmount.Type);
+	EndDo;
 	
 	Tables = New Structure();
 	Tables.Insert("DataForExpense"               , EmptyTable_BatchWiseBalance.CopyColumns());
@@ -773,27 +761,9 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForBundleAmountValues.Columns.Add("BatchKey"       , RegMetadata.Dimensions.BatchKey.Type);
 	DataForBundleAmountValues.Columns.Add("BatchKeyBundle" , RegMetadata.Dimensions.BatchKeyBundle.Type);
 	
-	DataForBundleAmountValues.Columns.Add("InvoiceAmount"             , RegMetadata.Resources.InvoiceAmount.Type);
-	DataForBundleAmountValues.Columns.Add("InvoiceTaxAmount"          , RegMetadata.Resources.InvoiceTaxAmount.Type);
-
-	DataForBundleAmountValues.Columns.Add("IndirectCostAmount"        , RegMetadata.Resources.IndirectCostAmount.Type);
-	DataForBundleAmountValues.Columns.Add("IndirectCostTaxAmount"     , RegMetadata.Resources.IndirectCostTaxAmount.Type);
-	
-	DataForBundleAmountValues.Columns.Add("ExtraCostAmountByRatio"    , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
-	DataForBundleAmountValues.Columns.Add("ExtraCostTaxAmountByRatio" , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
-	
-	DataForBundleAmountValues.Columns.Add("ExtraDirectCostAmount"     , RegMetadata.Resources.ExtraDirectCostAmount.Type);
-	DataForBundleAmountValues.Columns.Add("ExtraDirectCostTaxAmount"  , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
-		
-	DataForBundleAmountValues.Columns.Add("AllocatedCostAmount"       , RegMetadata.Resources.AllocatedCostAmount.Type);
-	DataForBundleAmountValues.Columns.Add("AllocatedCostTaxAmount"    , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
-	
-	DataForBundleAmountValues.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	DataForBundleAmountValues.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
-	
-	DataForBundleAmountValues.Columns.Add("PreliminaryAmount"         , RegMetadata.Resources.PreliminaryAmount.Type);
-	DataForBundleAmountValues.Columns.Add("PreliminaryTaxAmount"      , RegMetadata.Resources.PreliminaryTaxAmount.Type);
-	
+	For Each Res In AmountResources() Do
+		DataForBundleAmountValues.Columns.Add(Res, Metadata.DefinedTypes.typeAmount.Type);
+	EndDo;
 	Tables.Insert("DataForBundleAmountValues", DataForBundleAmountValues);
 	
 	// DataForCompositeBatchesAmountValues
@@ -805,30 +775,13 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForCompositeBatchesAmountValues.Columns.Add("BatchKey"          , RegMetadata.Dimensions.BatchKey.Type);
 	DataForCompositeBatchesAmountValues.Columns.Add("BatchComposite"    , RegMetadata.Dimensions.BatchComposite.Type);
 	DataForCompositeBatchesAmountValues.Columns.Add("BatchKeyComposite" , RegMetadata.Dimensions.BatchKeyComposite.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("Quantity"          , RegMetadata.Resources.Quantity.Type);
 	
-	DataForCompositeBatchesAmountValues.Columns.Add("InvoiceAmount"              , RegMetadata.Resources.InvoiceAmount.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("InvoiceTaxAmount"           , RegMetadata.Resources.InvoiceTaxAmount.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("Quantity", RegMetadata.Resources.Quantity.Type);
+	DataForCompositeBatchesAmountValues.Columns.Add("PreliminaryQuantity", RegMetadata.Resources.PreliminaryQuantity.Type);
 	
-	DataForCompositeBatchesAmountValues.Columns.Add("IndirectCostAmount"         , RegMetadata.Resources.IndirectCostAmount.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("IndirectCostTaxAmount"      , RegMetadata.Resources.IndirectCostTaxAmount.Type);
-	
-	DataForCompositeBatchesAmountValues.Columns.Add("ExtraCostAmountByRatio"     , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("ExtraCostTaxAmountByRatio"  , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
-	
-	DataForCompositeBatchesAmountValues.Columns.Add("ExtraDirectCostAmount"      , RegMetadata.Resources.ExtraDirectCostAmount.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("ExtraDirectCostTaxAmount"   , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
-	
-	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedCostAmount"        , RegMetadata.Resources.AllocatedCostAmount.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedCostTaxAmount"     , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
-	
-	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedRevenueAmount"     , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("AllocatedRevenueTaxAmount"  , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
-	
-	DataForCompositeBatchesAmountValues.Columns.Add("PreliminaryQuantity"        , RegMetadata.Resources.PreliminaryQuantity.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("PreliminaryAmount"          , RegMetadata.Resources.PreliminaryAmount.Type);
-	DataForCompositeBatchesAmountValues.Columns.Add("PreliminaryTaxAmount"       , RegMetadata.Resources.PreliminaryTaxAmount.Type);
-	
+	For Each Res In AmountResources() Do
+		DataForCompositeBatchesAmountValues.Columns.Add(Res, Metadata.DefinedTypes.typeAmount.Type);
+	EndDo;
 	Tables.Insert("DataForCompositeBatchesAmountValues", DataForCompositeBatchesAmountValues);
 	
 	// DataForReallocatedBatchesAmountValues
@@ -838,30 +791,13 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForReallocatedBatchesAmountValues.Columns.Add("OutgoingDocument" , RegMetadata.Dimensions.OutgoingDocument.Type);
 	DataForReallocatedBatchesAmountValues.Columns.Add("IncomingDocument" , RegMetadata.Dimensions.IncomingDocument.Type);
 	DataForReallocatedBatchesAmountValues.Columns.Add("BatchKey"         , RegMetadata.Dimensions.BatchKey.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("Quantity"         , RegMetadata.Resources.Quantity.Type);
 	
-	DataForReallocatedBatchesAmountValues.Columns.Add("InvoiceAmount"             , RegMetadata.Resources.InvoiceAmount.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("InvoiceTaxAmount"          , RegMetadata.Resources.InvoiceTaxAmount.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("Quantity", RegMetadata.Resources.Quantity.Type);
+	DataForReallocatedBatchesAmountValues.Columns.Add("PreliminaryQuantity", RegMetadata.Resources.PreliminaryQuantity.Type);
 	
-	DataForReallocatedBatchesAmountValues.Columns.Add("IndirectCostAmount"        , RegMetadata.Resources.IndirectCostAmount.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("IndirectCostTaxAmount"     , RegMetadata.Resources.IndirectCostTaxAmount.Type);
-	
-	DataForReallocatedBatchesAmountValues.Columns.Add("ExtraCostAmountByRatio"    , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("ExtraCostTaxAmountByRatio" , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
-	
-	DataForReallocatedBatchesAmountValues.Columns.Add("ExtraDirectCostAmount"     , RegMetadata.Resources.ExtraDirectCostAmount.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("ExtraDirectCostTaxAmount"  , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
-	
-	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedCostAmount"       , RegMetadata.Resources.AllocatedCostAmount.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedCostTaxAmount"    , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
-	
-	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
-	
-	DataForReallocatedBatchesAmountValues.Columns.Add("PreliminaryQuantity"       , RegMetadata.Resources.PreliminaryQuantity.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("PreliminaryAmount"         , RegMetadata.Resources.PreliminaryAmount.Type);
-	DataForReallocatedBatchesAmountValues.Columns.Add("PreliminaryTaxAmount"      , RegMetadata.Resources.PreliminaryTaxAmount.Type);
-	
+	For Each Res In AmountResources() Do
+		DataForReallocatedBatchesAmountValues.Columns.Add(Res, Metadata.DefinedTypes.typeAmount.Type);
+	EndDo;	
 	Tables.Insert("DataForReallocatedBatchesAmountValues", DataForReallocatedBatchesAmountValues);
 	
 	// DataForWriteOffBatches
@@ -877,27 +813,9 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForWriteOffBatches.Columns.Add("Currency"         , RegMetadata.Dimensions.Currency.Type);
 	DataForWriteOffBatches.Columns.Add("RowID"            , RegMetadata.Dimensions.RowID.Type);
 	
-	DataForWriteOffBatches.Columns.Add("InvoiceAmount"             , RegMetadata.Resources.InvoiceAmount.Type);
-	DataForWriteOffBatches.Columns.Add("InvoiceTaxAmount"          , RegMetadata.Resources.InvoiceTaxAmount.Type);
-	
-	DataForWriteOffBatches.Columns.Add("IndirectCostAmount"        , RegMetadata.Resources.IndirectCostAmount.Type);
-	DataForWriteOffBatches.Columns.Add("IndirectCostTaxAmount"     , RegMetadata.Resources.IndirectCostTaxAmount.Type);
-	
-	DataForWriteOffBatches.Columns.Add("ExtraCostAmountByRatio"    , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
-	DataForWriteOffBatches.Columns.Add("ExtraCostTaxAmountByRatio" , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
-	
-	DataForWriteOffBatches.Columns.Add("ExtraDirectCostAmount"     , RegMetadata.Resources.ExtraDirectCostAmount.Type);
-	DataForWriteOffBatches.Columns.Add("ExtraDirectCostTaxAmount"  , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
-	
-	DataForWriteOffBatches.Columns.Add("AllocatedCostAmount"       , RegMetadata.Resources.AllocatedCostAmount.Type);
-	DataForWriteOffBatches.Columns.Add("AllocatedCostTaxAmount"    , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
-	
-	DataForWriteOffBatches.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	DataForWriteOffBatches.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
-	
-	DataForWriteOffBatches.Columns.Add("PreliminaryAmount"         , RegMetadata.Resources.PreliminaryAmount.Type);
-	DataForWriteOffBatches.Columns.Add("PreliminaryTaxAmount"      , RegMetadata.Resources.PreliminaryTaxAmount.Type);
-	
+	For Each Res In AmountResources() Do
+		DataForWriteOffBatches.Columns.Add(Res, Metadata.DefinedTypes.typeAmount.Type);
+	EndDo;	
 	Tables.Insert("DataForWriteOffBatches", DataForWriteOffBatches);
 	
 	// DataForFixedAssets
@@ -912,27 +830,9 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForFixedAssets.Columns.Add("LedgerType"       , RegMetadata.Dimensions.LedgerType.Type);
 	DataForFixedAssets.Columns.Add("Schedule"         , RegMetadata.Dimensions.Schedule.Type);
 	
-	DataForFixedAssets.Columns.Add("InvoiceAmount"             , RegMetadata.Resources.Amount.Type);
-	DataForFixedAssets.Columns.Add("InvoiceTaxAmount"          , RegMetadata.Resources.Amount.Type);
-	
-	DataForFixedAssets.Columns.Add("IndirectCostAmount"        , RegMetadata.Resources.Amount.Type);
-	DataForFixedAssets.Columns.Add("IndirectCostTaxAmount"     , RegMetadata.Resources.Amount.Type);
-	
-	DataForFixedAssets.Columns.Add("ExtraCostAmountByRatio"    , RegMetadata.Resources.Amount.Type);
-	DataForFixedAssets.Columns.Add("ExtraCostTaxAmountByRatio" , RegMetadata.Resources.Amount.Type);
-	
-	DataForFixedAssets.Columns.Add("ExtraDirectCostAmount"     , RegMetadata.Resources.Amount.Type);
-	DataForFixedAssets.Columns.Add("ExtraDirectCostTaxAmount"  , RegMetadata.Resources.Amount.Type);
-	
-	DataForFixedAssets.Columns.Add("AllocatedCostAmount"       , RegMetadata.Resources.Amount.Type);
-	DataForFixedAssets.Columns.Add("AllocatedCostTaxAmount"    , RegMetadata.Resources.Amount.Type);
-	
-	DataForFixedAssets.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.Amount.Type);
-	DataForFixedAssets.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.Amount.Type);
-	
-	DataForFixedAssets.Columns.Add("PreliminaryAmount"         , RegMetadata.Resources.Amount.Type);
-	DataForFixedAssets.Columns.Add("PreliminaryTaxAmount"      , RegMetadata.Resources.Amount.Type);
-	
+	For Each Res In AmountResources() Do
+		DataForFixedAssets.Columns.Add(Res, Metadata.DefinedTypes.typeAmount.Type);
+	EndDo;		
 	Tables.Insert("DataForFixedAssets", DataForFixedAssets);
 	
 	//TableOfReturnedBatches
@@ -948,54 +848,21 @@ Function GetBatchWiseBalance(CalculationSettings)
 	TableOfReturnedBatches.Columns.Add("Skip"             , New TypeDescription("Boolean"));
 	TableOfReturnedBatches.Columns.Add("Priority"         , New TypeDescription("Number"));
 	TableOfReturnedBatches.Columns.Add("BatchKey"         , New TypeDescription("CatalogRef.BatchKeys"));
-	TableOfReturnedBatches.Columns.Add("Quantity"         , RegMetadata.Resources.Quantity.Type);
-	
 	TableOfReturnedBatches.Columns.Add("BatchDocument"    , RegMetadata.Dimensions.BatchDocument.Type);
 	TableOfReturnedBatches.Columns.Add("SalesInvoice"     , RegMetadata.Dimensions.SalesInvoice.Type); 
 	TableOfReturnedBatches.Columns.Add("AlreadyReceived"  , New TypeDescription("Boolean"));
+	TableOfReturnedBatches.Columns.Add("IsPreliminary"    , New TypeDescription("Boolean"));
 	
-	TableOfReturnedBatches.Columns.Add("InvoiceAmount"              , RegMetadata.Resources.InvoiceAmount.Type);
-	TableOfReturnedBatches.Columns.Add("InvoiceTaxAmount"           , RegMetadata.Resources.InvoiceTaxAmount.Type);
+	TableOfReturnedBatches.Columns.Add("Quantity", RegMetadata.Resources.Quantity.Type);
+	TableOfReturnedBatches.Columns.Add("PreliminaryQuantity", RegMetadata.Resources.PreliminaryQuantity.Type);
 	
-	TableOfReturnedBatches.Columns.Add("IndirectCostAmount"         , RegMetadata.Resources.IndirectCostAmount.Type);
-	TableOfReturnedBatches.Columns.Add("IndirectCostTaxAmount"      , RegMetadata.Resources.IndirectCostTaxAmount.Type);
+	For Each Res In AmountResources() Do
+		TableOfReturnedBatches.Columns.Add(Res, Metadata.DefinedTypes.typeAmount.Type);
+	EndDo;		
 	
-	TableOfReturnedBatches.Columns.Add("ExtraCostAmountByRatio"     , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
-	TableOfReturnedBatches.Columns.Add("ExtraCostTaxAmountByRatio"  , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
-	
-	TableOfReturnedBatches.Columns.Add("ExtraDirectCostAmount"      , RegMetadata.Resources.ExtraDirectCostAmount.Type);
-	TableOfReturnedBatches.Columns.Add("ExtraDirectCostTaxAmount"   , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
-	
-	TableOfReturnedBatches.Columns.Add("AllocatedCostAmount"        , RegMetadata.Resources.AllocatedCostAmount.Type);
-	TableOfReturnedBatches.Columns.Add("AllocatedCostTaxAmount"     , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
-	
-	TableOfReturnedBatches.Columns.Add("AllocatedRevenueAmount"     , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	TableOfReturnedBatches.Columns.Add("AllocatedRevenueTaxAmount"  , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
-	
-	TableOfReturnedBatches.Columns.Add("InvoiceAmountBalance"             , RegMetadata.Resources.InvoiceAmount.Type);
-	TableOfReturnedBatches.Columns.Add("InvoiceTaxAmountBalance"          , RegMetadata.Resources.InvoiceTaxAmount.Type);
-	
-	TableOfReturnedBatches.Columns.Add("IndirectCostAmountBalance"        , RegMetadata.Resources.IndirectCostAmount.Type);
-	TableOfReturnedBatches.Columns.Add("IndirectCostTaxAmountBalance"     , RegMetadata.Resources.IndirectCostTaxAmount.Type);
-	
-	TableOfReturnedBatches.Columns.Add("ExtraCostAmountByRatioBalance"    , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
-	TableOfReturnedBatches.Columns.Add("ExtraCostTaxAmountByRatioBalance" , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
-	
-	TableOfReturnedBatches.Columns.Add("ExtraDirectCostAmountBalance"     , RegMetadata.Resources.ExtraDirectCostAmount.Type);
-	TableOfReturnedBatches.Columns.Add("ExtraDirectCostTaxAmountBalance"  , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
-	
-	TableOfReturnedBatches.Columns.Add("AllocatedCostAmountBalance"       , RegMetadata.Resources.AllocatedCostAmount.Type);
-	TableOfReturnedBatches.Columns.Add("AllocatedCostTaxAmountBalance"    , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
-	
-	TableOfReturnedBatches.Columns.Add("AllocatedRevenueAmountBalance"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	TableOfReturnedBatches.Columns.Add("AllocatedRevenueTaxAmountBalance" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
-	
-	TableOfReturnedBatches.Columns.Add("PreliminaryQuantity"              , RegMetadata.Resources.PreliminaryQuantity.Type);
-	TableOfReturnedBatches.Columns.Add("PreliminaryAmount"                , RegMetadata.Resources.PreliminaryAmount.Type);
-	TableOfReturnedBatches.Columns.Add("PreliminaryTaxAmount"             , RegMetadata.Resources.PreliminaryTaxAmount.Type);	
-	TableOfReturnedBatches.Columns.Add("PreliminaryAmountBalance"         , RegMetadata.Resources.PreliminaryAmount.Type);
-	TableOfReturnedBatches.Columns.Add("PreliminaryTaxAmountBalance"      , RegMetadata.Resources.PreliminaryTaxAmount.Type);
-	TableOfReturnedBatches.Columns.Add("IsPreliminary"                    , New TypeDescription("Boolean"));
+	For Each Res In AmountResources() Do
+		TableOfReturnedBatches.Columns.Add(Res + "Balance", Metadata.DefinedTypes.typeAmount.Type);
+	EndDo;		
 	
 	tmp_manager = New TempTablesManager();
 	Tree = GetBatchTree(tmp_manager, CalculationSettings);
@@ -1985,13 +1852,9 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	TableOfReturnedBatches.Clear();
 
 	DataForExpense = EmptyTable_BatchWiseBalance.CopyColumns();
-	DataForReceipt = EmptyTable_BatchWiseBalance.CopyColumns();
-
 	DataForExpense.Columns.Add("ItemLinkID");
-//	DataForExpense.Columns.Add("IsPreliminary");
-	
+	DataForReceipt = EmptyTable_BatchWiseBalance.CopyColumns();
 	DataForReceipt.Columns.Add("ItemLinkID");
-//	DataForReceipt.Columns.Add("IsPreliminary");
 	
 	For Each Row In Rows Do
 		If Row.Skip Then
@@ -2005,31 +1868,15 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRow.Document  = Row.Document;
 			NewRow.Company   = Row.Company;
 			NewRow.Period    = Row.Date;
-			NewRow.Quantity  = Row.Quantity;
-			
-			NewRow.InvoiceAmount    = Row.InvoiceAmount;
-			NewRow.InvoiceTaxAmount = Row.InvoiceTaxAmount;
-			
-			NewRow.IndirectCostAmount   = Row.IndirectCostAmount;
-			NewRow.IndirectCostTaxAmount   = Row.IndirectCostTaxAmount;
-			
-			NewRow.ExtraCostAmountByRatio = Row.ExtraCostAmountByRatio;
-			NewRow.ExtraCostTaxAmountByRatio = Row.ExtraCostTaxAmountByRatio;
-			
-			NewRow.ExtraDirectCostAmount = Row.ExtraDirectCostAmount;
-			NewRow.ExtraDirectCostTaxAmount = Row.ExtraDirectCostTaxAmount;
-			
-			NewRow.AllocatedCostAmount       = Row.AllocatedCostAmount;
-			NewRow.AllocatedCostTaxAmount    = Row.AllocatedCostTaxAmount;
-			
-			NewRow.AllocatedRevenueAmount    = Row.AllocatedRevenueAmount;
-			NewRow.AllocatedRevenueTaxAmount = Row.AllocatedRevenueTaxAmount;
-			
-			NewRow.PreliminaryQuantity  = Row.PreliminaryQuantity;
-			NewRow.PreliminaryAmount    = Row.PreliminaryAmount;
-			NewRow.PreliminaryTaxAmount = Row.PreliminaryTaxAmount;
 			
 			NewRow.ItemLinkID = Row.ItemLinkID;
+			
+			NewRow.Quantity  = Row.Quantity;
+			NewRow.PreliminaryQuantity  = Row.PreliminaryQuantity;
+			
+			For Each Res In AmountResources() Do
+				NewRow[Res] = Row[Res];
+			EndDo;
 			
 			// simple receipt	
 			If IsNotMultiDirectionDocument(Document) // is not transfer, produce, bundling or unbundling
@@ -2089,37 +1936,16 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 																			
 					ReceiptQuantity = Min(NeedReceipt, BatchBySales[BatchQuantityResourceName]); // how many can receipt (quantity or priliminary quantity)
 					
-					ReceiptInvoiceAmount             = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "InvoiceAmount");
-					ReceiptInvoiceTaxAmount          = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "InvoiceTaxAmount");
-					ReceiptIndirectCostAmount        = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "IndirectCostAmount");
-					ReceiptIndirectCostTaxAmount     = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "IndirectCostTaxAmount");
-					ReceiptExtraCostAmountByRatio    = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "ExtraCostAmountByRatio");
-					ReceiptExtraCostTaxAmountByRatio = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "ExtraCostTaxAmountByRatio");
-					ReceiptExtraDirectCostAmount     = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "ExtraDirectCostAmount");
-					ReceiptExtraDirectCostTaxAmount  = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "ExtraDirectCostTaxAmount");
-					ReceiptAllocatedCostAmount       = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "AllocatedCostAmount");
-					ReceiptAllocatedCostTaxAmount    = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "AllocatedCostTaxAmount");
-					ReceiptAllocatedRevenueAmount    = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "AllocatedRevenueAmount");
-					ReceiptAllocatedRevenueTaxAmount = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "AllocatedRevenueTaxAmount");
-					ReceiptPreliminaryAmount         = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "PreliminaryAmount");
-					ReceiptPreliminaryTaxAmount      = CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, "PreliminaryTaxAmount");
+					ReceiptAmounts = New Structure();
+					For Each Res In AmountResources() Do
+						ReceiptAmounts.Insert(Res, CalculateReceiptAmountBySalesReturn(ReceiptQuantity, BatchBySales, BatchQuantityResourceName, Res));
+					EndDo;
 					
 					BatchBySales[BatchQuantityResourceName]  = BatchBySales[BatchQuantityResourceName] - ReceiptQuantity;
 					
-					BatchBySales.InvoiceAmount              = BatchBySales.InvoiceAmount             - ReceiptInvoiceAmount;
-					BatchBySales.InvoiceTaxAmount           = BatchBySales.InvoiceTaxAmount          - ReceiptInvoiceTaxAmount;
-					BatchBySales.IndirectCostAmount         = BatchBySales.IndirectCostAmount        - ReceiptIndirectCostAmount;
-					BatchBySales.IndirectCostTaxAmount      = BatchBySales.IndirectCostTaxAmount     - ReceiptIndirectCostTaxAmount;
-					BatchBySales.ExtraCostAmountByRatio     = BatchBySales.ExtraCostAmountByRatio    - ReceiptExtraCostAmountByRatio;
-					BatchBySales.ExtraCostTaxAmountByRatio  = BatchBySales.ExtraCostTaxAmountByRatio - ReceiptExtraCostTaxAmountByRatio;
-					BatchBySales.ExtraDirectCostAmount      = BatchBySales.ExtraDirectCostAmount     - ReceiptExtraDirectCostAmount;
-					BatchBySales.ExtraDirectCostTaxAmount   = BatchBySales.ExtraDirectCostTaxAmount  - ReceiptExtraDirectCostTaxAmount;
-					BatchBySales.AllocatedCostAmount        = BatchBySales.AllocatedCostAmount       - ReceiptAllocatedCostAmount;
-					BatchBySales.AllocatedCostTaxAmount     = BatchBySales.AllocatedCostTaxAmount    - ReceiptAllocatedCostTaxAmount;
-					BatchBySales.AllocatedRevenueAmount     = BatchBySales.AllocatedRevenueAmount    - ReceiptAllocatedRevenueAmount;
-					BatchBySales.AllocatedRevenueTaxAmount  = BatchBySales.AllocatedRevenueTaxAmount - ReceiptAllocatedRevenueTaxAmount;
-					BatchBySales.PreliminaryAmount          = BatchBySales.PreliminaryAmount         - ReceiptPreliminaryAmount;
-					BatchBySales.PreliminaryTaxAmount       = BatchBySales.PreliminaryTaxAmount      - ReceiptPreliminaryTaxAmount;
+					For Each Res In AmountResources() Do
+						BatchBySales[Res] = BatchBySales[Res] - ReceiptAmounts[Res];
+					EndDo;
 					
 					NeedReceipt = NeedReceipt - ReceiptQuantity;
 					
@@ -2140,27 +1966,16 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 						// Table of returned batches
 						NewRow_ReturnedBatches = TableOfReturnedBatches.Add();
 						NewRow_ReturnedBatches.IsOpeningBalance = False; 
-						NewRow_ReturnedBatches.IsPreliminary = _BatchBySales_IsPreliminary;
+						NewRow_ReturnedBatches.IsPreliminary    = _BatchBySales_IsPreliminary;
 						NewRow_ReturnedBatches.Skip             = True;
 						NewRow_ReturnedBatches.Priority         = 0;
 						NewRow_ReturnedBatches.BatchKey         = Row.BatchKey;
 						
 						NewRow_ReturnedBatches[BatchQuantityResourceName] = ReceiptQuantity;
 
-						NewRow_ReturnedBatches.InvoiceAmount             = ReceiptInvoiceAmount;
-						NewRow_ReturnedBatches.InvoiceTaxAmount          = ReceiptInvoiceTaxAmount;
-						NewRow_ReturnedBatches.IndirectCostAmount        = ReceiptIndirectCostAmount;
-						NewRow_ReturnedBatches.IndirectCostTaxAmount     = ReceiptIndirectCostTaxAmount;
-						NewRow_ReturnedBatches.ExtraCostAmountByRatio    = ReceiptExtraCostAmountByRatio;
-						NewRow_ReturnedBatches.ExtraCostTaxAmountByRatio = ReceiptExtraCostTaxAmountByRatio;
-						NewRow_ReturnedBatches.ExtraDirectCostAmount     = ReceiptExtraDirectCostAmount;
-						NewRow_ReturnedBatches.ExtraDirectCostTaxAmount  = ReceiptExtraDirectCostTaxAmount;
-						NewRow_ReturnedBatches.AllocatedCostAmount       = ReceiptAllocatedCostAmount;
-						NewRow_ReturnedBatches.AllocatedCostTaxAmount    = ReceiptAllocatedCostTaxAmount;
-						NewRow_ReturnedBatches.AllocatedRevenueAmount    = ReceiptAllocatedRevenueAmount;
-						NewRow_ReturnedBatches.AllocatedRevenueTaxAmount = ReceiptAllocatedRevenueTaxAmount;
-						NewRow_ReturnedBatches.PreliminaryAmount         = ReceiptPreliminaryAmount;
-						NewRow_ReturnedBatches.PreliminaryTaxAmount      = ReceiptPreliminaryTaxAmount;
+						For Each Res In AmountResources() Do
+							NewRow_ReturnedBatches[Res] = ReceiptAmounts[Res];
+						EndDo;
 						
 						NewRow_ReturnedBatches.Document  = _BatchBySales_Document;
 						NewRow_ReturnedBatches.Company   = _BatchBySales_Company;
@@ -2170,49 +1985,24 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 						
 						NewRow_ReturnedBatches[BatchQuantityResourceNameBalance]  = ReceiptQuantity;
 						
-						NewRow_ReturnedBatches.InvoiceAmountBalance             = ReceiptInvoiceAmount;
-						NewRow_ReturnedBatches.InvoiceTaxAmountBalance          = ReceiptInvoiceTaxAmount;
-						NewRow_ReturnedBatches.IndirectCostAmountBalance        = ReceiptIndirectCostAmount;
-						NewRow_ReturnedBatches.IndirectCostTaxAmountBalance     = ReceiptIndirectCostTaxAmount;
-						NewRow_ReturnedBatches.ExtraCostAmountByRatioBalance    = ReceiptExtraCostAmountByRatio;
-						NewRow_ReturnedBatches.ExtraCostTaxAmountByRatioBalance = ReceiptExtraCostTaxAmountByRatio;
-						NewRow_ReturnedBatches.ExtraDirectCostAmountBalance     = ReceiptExtraDirectCostAmount;
-						NewRow_ReturnedBatches.ExtraDirectCostTaxAmountBalance  = ReceiptExtraDirectCostTaxAmount;
-						NewRow_ReturnedBatches.AllocatedCostAmountBalance       = ReceiptAllocatedCostAmount;
-						NewRow_ReturnedBatches.AllocatedCostTaxAmountBalance    = ReceiptAllocatedCostTaxAmount;
-						NewRow_ReturnedBatches.AllocatedRevenueAmountBalance    = ReceiptAllocatedRevenueAmount;
-						NewRow_ReturnedBatches.AllocatedRevenueTaxAmountBalance = ReceiptAllocatedRevenueTaxAmount;
-						NewRow_ReturnedBatches.PreliminaryAmountBalance         = ReceiptPreliminaryAmount;
-						NewRow_ReturnedBatches.PreliminaryTaxAmountBalance      = ReceiptPreliminaryTaxAmount;
-
+						For Each Res In AmountResources() Do
+							NewRow_ReturnedBatches[Res + "Balance"] = ReceiptAmounts[Res];
+						EndDo;
+						
 						// Data for receipt
-					
 						NewRow_DataForReceipt = Tables.DataForReceipt.Add();
-					
 						NewRow_DataForReceipt.Company   = _BatchBySales_Company;
 						NewRow_DataForReceipt.Batch     = _BatchBySales_Batch;
-						NewRow_DataForReceipt.IsPreliminary = _BatchBySales_IsPreliminary;
-					
 						NewRow_DataForReceipt.BatchKey  = Row.BatchKey;
 						NewRow_DataForReceipt.Document  = Row.Document;
 						NewRow_DataForReceipt.Period    = Row.Date;
+						NewRow_DataForReceipt.IsPreliminary = _BatchBySales_IsPreliminary;
+						
 						NewRow_DataForReceipt[BatchQuantityResourceName] = ReceiptQuantity;
-
-						NewRow_DataForReceipt.InvoiceAmount             = ReceiptInvoiceAmount;
-						NewRow_DataForReceipt.InvoiceTaxAmount          = ReceiptInvoiceTaxAmount;
-						NewRow_DataForReceipt.IndirectCostAmount        = ReceiptIndirectCostAmount;
-						NewRow_DataForReceipt.IndirectCostTaxAmount     = ReceiptIndirectCostTaxAmount;
-						NewRow_DataForReceipt.ExtraCostAmountByRatio    = ReceiptExtraCostAmountByRatio;
-						NewRow_DataForReceipt.ExtraCostTaxAmountByRatio = ReceiptExtraCostTaxAmountByRatio;
-						NewRow_DataForReceipt.ExtraDirectCostAmount     = ReceiptExtraDirectCostAmount;
-						NewRow_DataForReceipt.ExtraDirectCostTaxAmount  = ReceiptExtraDirectCostTaxAmount;
-						NewRow_DataForReceipt.AllocatedCostAmount       = ReceiptAllocatedCostAmount;
-						NewRow_DataForReceipt.AllocatedCostTaxAmount    = ReceiptAllocatedCostTaxAmount;
-						NewRow_DataForReceipt.AllocatedRevenueAmount    = ReceiptAllocatedRevenueAmount;
-						NewRow_DataForReceipt.AllocatedRevenueTaxAmount = ReceiptAllocatedRevenueTaxAmount;
-						NewRow_DataForReceipt.PreliminaryAmount         = ReceiptPreliminaryAmount;
-						NewRow_DataForReceipt.PreliminaryTaxAmount      = ReceiptPreliminaryTaxAmount;
-
+						
+						For Each Res In AmountResources() Do
+							NewRow_DataForReceipt[Res] = ReceiptAmounts[Res];
+						EndDo;
 					EndIf;
 				EndDo; // return by sales invoice
 
@@ -2286,42 +2076,21 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				EndIf;
 								
 				ExpenseQuantity = Min(NeedExpense, Row_Batch[BatchQuantityResourceNameBalance]);
-
-				ExpenseInvoiceAmount             = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "InvoiceAmountBalance");
-				ExpenseInvoiceTaxAmount          = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "InvoiceTaxAmountBalance");
-				ExpenseIndirectCostAmount        = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "IndirectCostAmountBalance");
-				ExpenseIndirectCostTaxAmount     = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "IndirectCostTaxAmountBalance");
-				ExpenseExtraCostAmountByRatio    = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "ExtraCostAmountByRatioBalance");
-				ExpenseExtraCostTaxAmountByRatio = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "ExtraCostTaxAmountByRatioBalance");
-				ExpenseExtraDirectCostAmount     = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "ExtraDirectCostAmountBalance");
-				ExpenseExtraDirectCostTaxAmount  = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "ExtraDirectCostTaxAmountBalance");
-				ExpenseAllocatedCostAmount       = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "AllocatedCostAmountBalance");
-				ExpenseAllocatedCostTaxAmount    = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "AllocatedCostTaxAmountBalance");
-				ExpenseAllocatedRevenueAmount    = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "AllocatedRevenueAmountBalance");
-				ExpenseAllocatedRevenueTaxAmount = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "AllocatedRevenueTaxAmountBalance");
-				ExpensePreliminaryAmount         = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "PreliminaryAmountBalance");
-				ExpensePreliminaryTaxAmount      = CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, "PreliminaryTaxAmountBalance");
+				
+				ExpenseAmounts = New Structure();
+				For Each Res In AmountResources() Do
+					ExpenseAmounts.Insert(Res, CalculateExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, Res + "Balance"));
+				EndDo;
 				
 				Row_Batch[BatchQuantityResourceNameBalance] = Row_Batch[BatchQuantityResourceNameBalance] - ExpenseQuantity;
 				
-				Row_Batch.InvoiceAmountBalance             = Row_Batch.InvoiceAmountBalance             - ExpenseInvoiceAmount;
-				Row_Batch.InvoiceTaxAmountBalance          = Row_Batch.InvoiceTaxAmountBalance          - ExpenseInvoiceTaxAmount;
-				Row_Batch.IndirectCostAmountBalance        = Row_Batch.IndirectCostAmountBalance        - ExpenseIndirectCostAmount;
-				Row_Batch.IndirectCostTaxAmountBalance     = Row_Batch.IndirectCostTaxAmountBalance     - ExpenseIndirectCostTaxAmount;
-				Row_Batch.ExtraCostAmountByRatioBalance    = Row_Batch.ExtraCostAmountByRatioBalance    - ExpenseExtraCostAmountByRatio;
-				Row_Batch.ExtraCostTaxAmountByRatioBalance = Row_Batch.ExtraCostTaxAmountByRatioBalance - ExpenseExtraCostTaxAmountByRatio;
-				Row_Batch.ExtraDirectCostAmountBalance     = Row_Batch.ExtraDirectCostAmountBalance     - ExpenseExtraDirectCostAmount;
-				Row_Batch.ExtraDirectCostTaxAmountBalance  = Row_Batch.ExtraDirectCostTaxAmountBalance  - ExpenseExtraDirectCostTaxAmount;
-				Row_Batch.AllocatedCostAmountBalance       = Row_Batch.AllocatedCostAmountBalance       - ExpenseAllocatedCostAmount;
-				Row_Batch.AllocatedCostTaxAmountBalance    = Row_Batch.AllocatedCostTaxAmountBalance    - ExpenseAllocatedCostTaxAmount;
-				Row_Batch.AllocatedRevenueAmountBalance    = Row_Batch.AllocatedRevenueAmountBalance    - ExpenseAllocatedRevenueAmount;
-				Row_Batch.AllocatedRevenueTaxAmountBalance = Row_Batch.AllocatedRevenueTaxAmountBalance - ExpenseAllocatedRevenueTaxAmount;
-				Row_Batch.PreliminaryAmountBalance         = Row_Batch.PreliminaryAmountBalance         - ExpensePreliminaryAmount;
-				Row_Batch.PreliminaryTaxAmountBalance      = Row_Batch.PreliminaryTaxAmountBalance      - ExpensePreliminaryTaxAmount;
-				
+				For Each Res In AmountResources() Do
+					Row_Batch[Res + "Balance"] = Row_Batch[Res + "Balance"] - ExpenseAmounts[Res];
+				EndDo;	
+								
 				NeedExpense = NeedExpense - ExpenseQuantity;
 
-				If ExpenseQuantity <> 0 Or ExpenseInvoiceAmount <> 0 Or ExpensePreliminaryAmount Then
+				If ExpenseQuantity <> 0 Or ExpenseAmounts.InvoiceAmount <> 0 Or ExpenseAmounts.PreliminaryAmount Then
 					NewRow = Tables.DataForExpense.Add();
 					NewRow.BatchKey  = Row.BatchKey;
 					NewRow.Document  = Row.Document;
@@ -2332,21 +2101,10 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					
 					NewRow[BatchQuantityResourceName] = ExpenseQuantity;
 					
-					NewRow.InvoiceAmount             = ExpenseInvoiceAmount;
-					NewRow.InvoiceTaxAmount          = ExpenseInvoiceTaxAmount;
-					NewRow.IndirectCostAmount        = ExpenseIndirectCostAmount;
-					NewRow.IndirectCostTaxAmount     = ExpenseIndirectCostTaxAmount;
-					NewRow.ExtraCostAmountByRatio    = ExpenseExtraCostAmountByRatio;
-					NewRow.ExtraCostTaxAmountByRatio = ExpenseExtraCostTaxAmountByRatio;
-					NewRow.ExtraDirectCostAmount     = ExpenseExtraDirectCostAmount;
-					NewRow.ExtraDirectCostTaxAmount  = ExpenseExtraDirectCostTaxAmount;
-					NewRow.AllocatedCostAmount       = ExpenseAllocatedCostAmount;
-					NewRow.AllocatedCostTaxAmount    = ExpenseAllocatedCostTaxAmount;
-					NewRow.AllocatedRevenueAmount    = ExpenseAllocatedRevenueAmount;
-					NewRow.AllocatedRevenueTaxAmount = ExpenseAllocatedRevenueTaxAmount;
-					NewRow.PreliminaryAmount         = ExpensePreliminaryAmount;
-					NewRow.PreliminaryTaxAmount      = ExpensePreliminaryTaxAmount;
-					
+					For Each Res In AmountResources() Do
+						NewRow[Res] = ExpenseAmounts[Res];
+					EndDo;
+							
 					NewRow_DataForExpense = DataForExpense.Add();
 					FillPropertyValues(NewRow_DataForExpense, NewRow);
 					NewRow_DataForExpense.ItemLinkID = Row.ItemLinkID;
@@ -2425,59 +2183,25 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	TableOfNewReceivedBatches.Columns.Add("Document");
 	TableOfNewReceivedBatches.Columns.Add("Company");
 	TableOfNewReceivedBatches.Columns.Add("Date");
-	TableOfNewReceivedBatches.Columns.Add("Quantity");
-	
-	TableOfNewReceivedBatches.Columns.Add("InvoiceAmount");
-	TableOfNewReceivedBatches.Columns.Add("InvoiceTaxAmount");
-	
-	TableOfNewReceivedBatches.Columns.Add("IndirectCostAmount");
-	TableOfNewReceivedBatches.Columns.Add("IndirectCostTaxAmount");
-	
-	TableOfNewReceivedBatches.Columns.Add("ExtraCostAmountByRatio");
-	TableOfNewReceivedBatches.Columns.Add("ExtraCostTaxAmountByRatio");
-	
-	TableOfNewReceivedBatches.Columns.Add("ExtraDirectCostAmount");
-	TableOfNewReceivedBatches.Columns.Add("ExtraDirectCostTaxAmount");
-	
-	TableOfNewReceivedBatches.Columns.Add("AllocatedCostAmount");
-	TableOfNewReceivedBatches.Columns.Add("AllocatedCostTaxAmount");
-	
-	TableOfNewReceivedBatches.Columns.Add("AllocatedRevenueAmount");
-	TableOfNewReceivedBatches.Columns.Add("AllocatedRevenueTaxAmount");
-	
-	TableOfNewReceivedBatches.Columns.Add("PreliminaryQuantity");
-	TableOfNewReceivedBatches.Columns.Add("PreliminaryAmount");
-	TableOfNewReceivedBatches.Columns.Add("PreliminaryTaxAmount");
-	
-	TableOfNewReceivedBatches.Columns.Add("QuantityBalance");
-	
-	TableOfNewReceivedBatches.Columns.Add("InvoiceAmountBalance");
-	TableOfNewReceivedBatches.Columns.Add("InvoiceTaxAmountBalance");
-	
-	TableOfNewReceivedBatches.Columns.Add("IndirectCostAmountBalance");
-	TableOfNewReceivedBatches.Columns.Add("IndirectCostTaxAmountBalance");
-	
-	TableOfNewReceivedBatches.Columns.Add("ExtraCostAmountByRatioBalance");
-	TableOfNewReceivedBatches.Columns.Add("ExtraCostTaxAmountByRatioBalance");
-	
-	TableOfNewReceivedBatches.Columns.Add("ExtraDirectCostAmountBalance");
-	TableOfNewReceivedBatches.Columns.Add("ExtraDirectCostTaxAmountBalance");
-	
-	TableOfNewReceivedBatches.Columns.Add("AllocatedCostAmountBalance");
-	TableOfNewReceivedBatches.Columns.Add("AllocatedCostTaxAmountBalance");
-	
-	TableOfNewReceivedBatches.Columns.Add("AllocatedRevenueAmountBalance");
-	TableOfNewReceivedBatches.Columns.Add("AllocatedRevenueTaxAmountBalance");
-
-	TableOfNewReceivedBatches.Columns.Add("PreliminaryQuantityBalance");
-	TableOfNewReceivedBatches.Columns.Add("PreliminaryAmountBalance");
-	TableOfNewReceivedBatches.Columns.Add("PreliminaryTaxAmountBalance");
-	
 	TableOfNewReceivedBatches.Columns.Add("IsPreliminary");
 	TableOfNewReceivedBatches.Columns.Add("IsOpeningBalance");
 	TableOfNewReceivedBatches.Columns.Add("Direction");
 	TableOfNewReceivedBatches.Columns.Add("ReturnRow");
 	
+	TableOfNewReceivedBatches.Columns.Add("Quantity");
+	TableOfNewReceivedBatches.Columns.Add("PreliminaryQuantity");
+	
+	For Each Res In AmountResources() Do
+		TableOfNewReceivedBatches.Columns.Add(Res);
+	EndDo;
+			
+	TableOfNewReceivedBatches.Columns.Add("QuantityBalance");
+	TableOfNewReceivedBatches.Columns.Add("PreliminaryQuantityBalance");
+	
+	For Each Res In AmountResources() Do
+		TableOfNewReceivedBatches.Columns.Add(Res + "Balance");
+	EndDo;
+		
 	If IsTransferDocument(Document) Or IsShipmentToTradeAgent(Document) Then
 		
 		CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches, CalculationSettings);
@@ -2503,58 +2227,24 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRowReceivedBatch.Document         = Row.Document;
 			NewRowReceivedBatch.Company          = Row.Company;
 			NewRowReceivedBatch.Date             = Row.Date;
-			NewRowReceivedBatch.Quantity         = Row.Quantity;
-
-			NewRowReceivedBatch.InvoiceAmount           = Row.InvoiceAmount;
-			NewRowReceivedBatch.InvoiceTaxAmount        = Row.InvoiceTaxAmount;
-
-			NewRowReceivedBatch.IndirectCostAmount   = Row.IndirectCostAmount;
-			NewRowReceivedBatch.IndirectCostTaxAmount   = Row.IndirectCostTaxAmount;
-			
-			NewRowReceivedBatch.ExtraCostAmountByRatio  = Row.ExtraCostAmountByRatio;
-			NewRowReceivedBatch.ExtraCostTaxAmountByRatio  = Row.ExtraCostTaxAmountByRatio;
-			
-			NewRowReceivedBatch.ExtraDirectCostAmount  = Row.ExtraDirectCostAmount;
-			NewRowReceivedBatch.ExtraDirectCostTaxAmount  = Row.ExtraDirectCostTaxAmount;
-			
-			NewRowReceivedBatch.AllocatedCostAmount       = Row.AllocatedCostAmount;
-			NewRowReceivedBatch.AllocatedCostTaxAmount    = Row.AllocatedCostTaxAmount;
-			
-			NewRowReceivedBatch.AllocatedRevenueAmount    = Row.AllocatedRevenueAmount;
-			NewRowReceivedBatch.AllocatedRevenueTaxAmount = Row.AllocatedRevenueTaxAmount;
-			
-			NewRowReceivedBatch.PreliminaryQuantity  = Row.PreliminaryQuantity;
-			NewRowReceivedBatch.PreliminaryAmount    = Row.PreliminaryAmount;
-			NewRowReceivedBatch.PreliminaryTaxAmount = Row.PreliminaryTaxAmount;
-			
-			NewRowReceivedBatch.QuantityBalance  = Row.Quantity;
-			
-			NewRowReceivedBatch.InvoiceAmountBalance    = Row.InvoiceAmount;
-			NewRowReceivedBatch.InvoiceTaxAmountBalance = Row.InvoiceTaxAmount;
-			
-			NewRowReceivedBatch.IndirectCostAmountBalance  = Row.IndirectCostAmount;
-			NewRowReceivedBatch.IndirectCostTaxAmountBalance  = Row.IndirectCostTaxAmount;
-			
-			NewRowReceivedBatch.ExtraCostAmountByRatioBalance = Row.ExtraCostAmountByRatio;
-			NewRowReceivedBatch.ExtraCostTaxAmountByRatioBalance = Row.ExtraCostTaxAmountByRatio;
-			
-			NewRowReceivedBatch.ExtraDirectCostAmountBalance = Row.ExtraDirectCostAmount;
-			NewRowReceivedBatch.ExtraDirectCostTaxAmountBalance = Row.ExtraDirectCostTaxAmount;
-			
-			NewRowReceivedBatch.AllocatedCostAmountBalance       = Row.AllocatedCostAmount;
-			NewRowReceivedBatch.AllocatedCostTaxAmountBalance    = Row.AllocatedCostTaxAmount;
-			
-			NewRowReceivedBatch.AllocatedRevenueAmountBalance    = Row.AllocatedRevenueAmount;
-			NewRowReceivedBatch.AllocatedRevenueTaxAmountBalance = Row.AllocatedRevenueTaxAmount;
-			
-			NewRowReceivedBatch.PreliminaryQuantityBalance  = Row.PreliminaryQuantity;
-			NewRowReceivedBatch.PreliminaryAmountBalance    = Row.PreliminaryAmount;
-			NewRowReceivedBatch.PreliminaryTaxAmountBalance = Row.PreliminaryTaxAmount;
-			
-			NewRowReceivedBatch.IsPreliminary = Row.IsPreliminary;
+			NewRowReceivedBatch.IsPreliminary    = Row.IsPreliminary;
 			NewRowReceivedBatch.IsOpeningBalance = False;
 			NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
-			NewRowReceivedBatch.ReturnRow = Row;
+			NewRowReceivedBatch.ReturnRow        = Row;
+			
+			NewRowReceivedBatch.Quantity = Row.Quantity;
+			NewRowReceivedBatch.PreliminaryQuantity  = Row.PreliminaryQuantity;
+			
+			For Each Res In AmountResources() Do
+				NewRowReceivedBatch[Res] = Row[Res];
+			EndDo;
+						
+			NewRowReceivedBatch.QuantityBalance  = Row.Quantity;
+			NewRowReceivedBatch.PreliminaryQuantityBalance  = Row.PreliminaryQuantity;
+			
+			For Each Res In AmountResources() Do
+				NewRowReceivedBatch[Res + "Balance"] = Row[Res];
+			EndDo;						
 		EndDo;
 	
 		For Each Row In TableOfNewReceivedBatches Do 
@@ -2595,220 +2285,66 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			
 			FilteredRows = Tables.DataForReallocatedBatchesAmountValues.FindRows(Filter);
 			
-			ReallocatedInvoiceAmount    = 0;
-			ReallocatedInvoiceTaxAmount = 0;
-			
-			ReallocatedIndirectCostAmount  = 0;
-			ReallocatedIndirectCostTaxAmount  = 0;
-			
-			ReallocatedExtraCostAmountByRatio = 0;
-			ReallocatedExtraCostTaxAmountByRatio = 0;
-			
-			ReallocatedExtraDirectCostAmount = 0;
-			ReallocatedExtraDirectCostTaxAmount = 0;
-
-			ReallocatedAllocatedCostAmount       = 0;
-			ReallocatedAllocatedCostTaxAmount    = 0;
-
-			ReallocatedAllocatedRevenueAmount    = 0;
-			ReallocatedAllocatedRevenueTaxAmount = 0;
-			
-			ReallocatedPreliminaryAmount    = 0;
-			ReallocatedPreliminaryTaxAmount = 0;
+			ReallocatedAmounts = New Structure();
+			For Each Res In AmountResources() Do
+				ReallocatedAmounts.Insert(Res, 0);
+			EndDo;
 			
 			ReallocatedQuantity  = 0;
 			ReallocatedPreliminaryQuantity  = 0;
 			
 			If FilteredRows.Count() Then
 				For Each FilteredRow In FilteredRows Do
-					ReallocatedInvoiceAmount    = ReallocatedInvoiceAmount    + FilteredRow.InvoiceAmount;
-					ReallocatedInvoiceTaxAmount = ReallocatedInvoiceTaxAmount + FilteredRow.InvoiceTaxAmount;
-					
-					ReallocatedIndirectCostAmount  = ReallocatedIndirectCostAmount  + FilteredRow.IndirectCostAmount;
-					ReallocatedIndirectCostTaxAmount  = ReallocatedIndirectCostTaxAmount  + FilteredRow.IndirectCostTaxAmount;
-					
-					ReallocatedExtraCostAmountByRatio = ReallocatedExtraCostAmountByRatio + FilteredRow.ExtraCostAmountByRatio;
-					ReallocatedExtraCostTaxAmountByRatio = ReallocatedExtraCostTaxAmountByRatio + FilteredRow.ExtraCostTaxAmountByRatio;
-					
-					ReallocatedExtraDirectCostAmount = ReallocatedExtraDirectCostAmount + FilteredRow.ExtraDirectCostAmount;
-					ReallocatedExtraDirectCostTaxAmount = ReallocatedExtraDirectCostTaxAmount + FilteredRow.ExtraDirectCostTaxAmount;
-					
-					ReallocatedAllocatedCostAmount       = ReallocatedAllocatedCostAmount       + FilteredRow.AllocatedCostAmount;
-					ReallocatedAllocatedCostTaxAmount    = ReallocatedAllocatedCostTaxAmount    + FilteredRow.AllocatedCostTaxAmount;
-					
-					ReallocatedAllocatedRevenueAmount    = ReallocatedAllocatedRevenueAmount    + FilteredRow.AllocatedRevenueAmount;
-					ReallocatedAllocatedRevenueTaxAmount = ReallocatedAllocatedRevenueTaxAmount + FilteredRow.AllocatedRevenueTaxAmount;
-
-					ReallocatedPreliminaryAmount    = ReallocatedPreliminaryAmount    + FilteredRow.PreliminaryAmount;
-					ReallocatedPreliminaryTaxAmount = ReallocatedPreliminaryTaxAmount + FilteredRow.PreliminaryTaxAmount;
-					
+					For Each Res In AmountResources() Do
+						ReallocatedAmounts[Res] = ReallocatedAmounts[Res] + FilteredRow[Res];
+					EndDo;
+										
 					ReallocatedQuantity  = ReallocatedQuantity  + FilteredRow.Quantity;
 					ReallocatedPreliminaryQuantity  = ReallocatedPreliminaryQuantity  + FilteredRow.PreliminaryQuantity;
 				EndDo;
 			Else
 				QuerySelection = GetReallocatedBatchesAmount(Filter);
 				If QuerySelection.Next() Then
-					ReallocatedInvoiceAmount    = QuerySelection.InvoiceAmount;
-					ReallocatedInvoiceTaxAmount = QuerySelection.InvoiceTaxAmount;
-					
-					ReallocatedIndirectCostAmount  = QuerySelection.IndirectCostAmount;
-					ReallocatedIndirectCostTaxAmount  = QuerySelection.IndirectCostTaxAmount;
-					
-					ReallocatedExtraCostAmountByRatio = QuerySelection.ExtraCostAmountByRatio;
-					ReallocatedExtraCostTaxAmountByRatio = QuerySelection.ExtraCostTaxAmountByRatio;
-					
-					ReallocatedExtraDirectCostAmount = QuerySelection.ExtraDirectCostAmount;
-					ReallocatedExtraDirectCostTaxAmount = QuerySelection.ExtraDirectCostTaxAmount;
-					
-					ReallocatedAllocatedCostAmount       = QuerySelection.AllocatedCostAmount;
-					ReallocatedAllocatedCostTaxAmount    = QuerySelection.AllocatedCostTaxAmount;
-
-					ReallocatedAllocatedRevenueAmount    = QuerySelection.AllocatedRevenueAmount;
-					ReallocatedAllocatedRevenueTaxAmount = QuerySelection.AllocatedRevenueTaxAmount;
-					
-					ReallocatedPreliminaryAmount    = QuerySelection.PreliminaryAmount;
-					ReallocatedPreliminaryTaxAmount = QuerySelection.PreliminaryTaxAmount;
+					For Each Res In AmountResources() Do
+						ReallocatedAmounts[Res] = QuerySelection[Res];
+					EndDo;
 					
 					ReallocatedQuantity  = QuerySelection.Quantity;
 					ReallocatedPreliminaryQuantity  = QuerySelection.PreliminaryQuantity;
 				EndIf;
 			EndIf;
 			
-			// inventory quantiry
+			// inventory quantity
 			If NewRow.Quantity = ReallocatedQuantity Then
-				NewRow.InvoiceAmount    = ReallocatedInvoiceAmount;
-				NewRow.InvoiceTaxAmount = ReallocatedInvoiceTaxAmount;
-				
-				NewRow.IndirectCostAmount  = ReallocatedIndirectCostAmount;
-				NewRow.IndirectCostTaxAmount  = ReallocatedIndirectCostTaxAmount;
-				
-				NewRow.ExtraCostAmountByRatio = ReallocatedExtraCostAmountByRatio;
-				NewRow.ExtraCostTaxAmountByRatio = ReallocatedExtraCostTaxAmountByRatio;
-				
-				NewRow.ExtraDirectCostAmount = ReallocatedExtraDirectCostAmount;
-				NewRow.ExtraDirectCostTaxAmount = ReallocatedExtraDirectCostTaxAmount;
-				
-				NewRow.AllocatedCostAmount       = ReallocatedAllocatedCostAmount;
-				NewRow.AllocatedCostTaxAmount    = ReallocatedAllocatedCostTaxAmount;
-			
-				NewRow.AllocatedRevenueAmount    = ReallocatedAllocatedRevenueAmount;
-				NewRow.AllocatedRevenueTaxAmount = ReallocatedAllocatedRevenueTaxAmount;
-				
-				NewRow.PreliminaryAmount    = ReallocatedPreliminaryAmount;
-				NewRow.PreliminaryTaxAmount = ReallocatedPreliminaryTaxAmount;
-				
+				For Each Res In AmountResources() Do
+					NewRow[Res] = ReallocatedAmounts[Res];
+				EndDo;				
 			Else
 				If ReallocatedQuantity <> 0 Then
-					NewRow.InvoiceAmount = NewRow.Quantity * (ReallocatedInvoiceAmount / ReallocatedQuantity);
-					NewRow.InvoiceTaxAmount = NewRow.Quantity * (ReallocatedInvoiceTaxAmount / ReallocatedQuantity);
-					
-					NewRow.IndirectCostAmount  = NewRow.Quantity * (ReallocatedIndirectCostAmount  / ReallocatedQuantity);
-					NewRow.IndirectCostTaxAmount  = NewRow.Quantity * (ReallocatedIndirectCostTaxAmount  / ReallocatedQuantity);
-					
-					NewRow.ExtraCostAmountByRatio = NewRow.Quantity * (ReallocatedExtraCostAmountByRatio / ReallocatedQuantity);
-					NewRow.ExtraCostTaxAmountByRatio = NewRow.Quantity * (ReallocatedExtraCostTaxAmountByRatio / ReallocatedQuantity);
-					
-					NewRow.ExtraDirectCostAmount = NewRow.Quantity * (ReallocatedExtraDirectCostAmount / ReallocatedQuantity);
-					NewRow.ExtraDirectCostTaxAmount = NewRow.Quantity * (ReallocatedExtraDirectCostTaxAmount / ReallocatedQuantity);
-										
-					NewRow.AllocatedCostAmount       = NewRow.Quantity * (ReallocatedAllocatedCostAmount       / ReallocatedQuantity);
-					NewRow.AllocatedCostTaxAmount    = NewRow.Quantity * (ReallocatedAllocatedCostTaxAmount    / ReallocatedQuantity);
-					
-					NewRow.AllocatedRevenueAmount    = NewRow.Quantity * (ReallocatedAllocatedRevenueAmount    / ReallocatedQuantity);
-					NewRow.AllocatedRevenueTaxAmount = NewRow.Quantity * (ReallocatedAllocatedRevenueTaxAmount / ReallocatedQuantity);
-					
-					NewRow.PreliminaryAmount    = NewRow.Quantity * (ReallocatedPreliminaryAmount    / ReallocatedQuantity);
-					NewRow.PreliminaryTaxAmount = NewRow.Quantity * (ReallocatedPreliminaryTaxAmount / ReallocatedQuantity);
-										
+					For Each Res In AmountResources() Do
+						NewRow[Res] = NewRow.Quantity * (ReallocatedAmounts[Res] / ReallocatedQuantity);
+					EndDo;					
 				Else
-					NewRow.InvoiceAmount = 0;
-					NewRow.InvoiceTaxAmount = 0;
-					
-					NewRow.IndirectCostAmount  = 0;
-					NewRow.IndirectCostTaxAmount  = 0;
-					
-					NewRow.ExtraCostAmountByRatio = 0;
-					NewRow.ExtraCostTaxAmountByRatio = 0;
-					
-					NewRow.ExtraDirectCostAmount = 0;
-					NewRow.ExtraDirectCostTaxAmount = 0;
-					
-					NewRow.AllocatedCostAmount       = 0;
-					NewRow.AllocatedCostTaxAmount    = 0;
-					
-					NewRow.AllocatedRevenueAmount    = 0;
-					NewRow.AllocatedRevenueTaxAmount = 0;
-					
-					NewRow.PreliminaryAmount    = 0;
-					NewRow.PreliminaryTaxAmount = 0;					
+					For Each Res In AmountResources() Do
+						NewRow[Res] = 0;
+					EndDo;					
 				EndIf;
 			EndIf;
 
 			// preliminary quantity
 			If NewRow.PreliminaryQuantity = ReallocatedQuantity Then
-				NewRow.InvoiceAmount    = ReallocatedInvoiceAmount;
-				NewRow.InvoiceTaxAmount = ReallocatedInvoiceTaxAmount;
-				
-				NewRow.IndirectCostAmount  = ReallocatedIndirectCostAmount;
-				NewRow.IndirectCostTaxAmount  = ReallocatedIndirectCostTaxAmount;
-				
-				NewRow.ExtraCostAmountByRatio = ReallocatedExtraCostAmountByRatio;
-				NewRow.ExtraCostTaxAmountByRatio = ReallocatedExtraCostTaxAmountByRatio;
-				
-				NewRow.ExtraDirectCostAmount = ReallocatedExtraDirectCostAmount;
-				NewRow.ExtraDirectCostTaxAmount = ReallocatedExtraDirectCostTaxAmount;
-				
-				NewRow.AllocatedCostAmount       = ReallocatedAllocatedCostAmount;
-				NewRow.AllocatedCostTaxAmount    = ReallocatedAllocatedCostTaxAmount;
-			
-				NewRow.AllocatedRevenueAmount    = ReallocatedAllocatedRevenueAmount;
-				NewRow.AllocatedRevenueTaxAmount = ReallocatedAllocatedRevenueTaxAmount;
-				
-				NewRow.PreliminaryAmount    = ReallocatedPreliminaryAmount;
-				NewRow.PreliminaryTaxAmount = ReallocatedPreliminaryTaxAmount;				
+				For Each Res In AmountResources() Do
+					NewRow[Res] = ReallocatedAmounts[Res];
+				EndDo;				
 			Else
 				If ReallocatedQuantity <> 0 Then
-					NewRow.InvoiceAmount = NewRow.PreliminaryQuantity * (ReallocatedInvoiceAmount / ReallocatedQuantity);
-					NewRow.InvoiceTaxAmount = NewRow.PreliminaryQuantity * (ReallocatedInvoiceTaxAmount / ReallocatedQuantity);
-					
-					NewRow.IndirectCostAmount  = NewRow.PreliminaryQuantity * (ReallocatedIndirectCostAmount  / ReallocatedQuantity);
-					NewRow.IndirectCostTaxAmount  = NewRow.PreliminaryQuantity * (ReallocatedIndirectCostTaxAmount  / ReallocatedQuantity);
-					
-					NewRow.ExtraCostAmountByRatio = NewRow.PreliminaryQuantity * (ReallocatedExtraCostAmountByRatio / ReallocatedQuantity);
-					NewRow.ExtraCostTaxAmountByRatio = NewRow.PreliminaryQuantity * (ReallocatedExtraCostTaxAmountByRatio / ReallocatedQuantity);
-					
-					NewRow.ExtraDirectCostAmount = NewRow.PreliminaryQuantity * (ReallocatedExtraDirectCostAmount / ReallocatedQuantity);
-					NewRow.ExtraDirectCostTaxAmount = NewRow.PreliminaryQuantity * (ReallocatedExtraDirectCostTaxAmount / ReallocatedQuantity);
-										
-					NewRow.AllocatedCostAmount       = NewRow.PreliminaryQuantity * (ReallocatedAllocatedCostAmount       / ReallocatedQuantity);
-					NewRow.AllocatedCostTaxAmount    = NewRow.PreliminaryQuantity * (ReallocatedAllocatedCostTaxAmount    / ReallocatedQuantity);
-					
-					NewRow.AllocatedRevenueAmount    = NewRow.PreliminaryQuantity * (ReallocatedAllocatedRevenueAmount    / ReallocatedQuantity);
-					NewRow.AllocatedRevenueTaxAmount = NewRow.PreliminaryQuantity * (ReallocatedAllocatedRevenueTaxAmount / ReallocatedQuantity);
-
-					NewRow.PreliminaryAmount    = NewRow.PreliminaryQuantity * (ReallocatedPreliminaryAmount    / ReallocatedQuantity);
-					NewRow.PreliminaryTaxAmount = NewRow.PreliminaryQuantity * (ReallocatedPreliminaryTaxAmount / ReallocatedQuantity);				
+					For Each Res In AmountResources() Do
+						NewRow[Res] = NewRow.PreliminaryQuantity * (ReallocatedAmounts[Res] / ReallocatedQuantity);
+					EndDo;
 				Else
-					NewRow.InvoiceAmount = 0;
-					NewRow.InvoiceTaxAmount = 0;
-					
-					NewRow.IndirectCostAmount  = 0;
-					NewRow.IndirectCostTaxAmount  = 0;
-					
-					NewRow.ExtraCostAmountByRatio = 0;
-					NewRow.ExtraCostTaxAmountByRatio = 0;
-					
-					NewRow.ExtraDirectCostAmount = 0;
-					NewRow.ExtraDirectCostTaxAmount = 0;
-					
-					NewRow.AllocatedCostAmount       = 0;
-					NewRow.AllocatedCostTaxAmount    = 0;
-					
-					NewRow.AllocatedRevenueAmount    = 0;
-					NewRow.AllocatedRevenueTaxAmount = 0;
-					
-					NewRow.PreliminaryAmount    = 0;
-					NewRow.PreliminaryTaxAmount = 0;					
+					For Each Res In AmountResources() Do
+						NewRow[Res] = 0;
+					EndDo;
 				EndIf;
 			EndIf;
 
@@ -2818,57 +2354,23 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRowReceivedBatch.Document         = NewRow.Document;
 			NewRowReceivedBatch.Company          = NewRow.Company;
 			NewRowReceivedBatch.Date             = NewRow.Period;
-			NewRowReceivedBatch.Quantity         = NewRow.Quantity;
-			
-			NewRowReceivedBatch.InvoiceAmount           = NewRow.InvoiceAmount;
-			NewRowReceivedBatch.InvoiceTaxAmount        = NewRow.InvoiceTaxAmount;
-			
-			NewRowReceivedBatch.IndirectCostAmount   = NewRow.IndirectCostAmount;
-			NewRowReceivedBatch.IndirectCostTaxAmount   = NewRow.IndirectCostTaxAmount;
-			
-			NewRowReceivedBatch.ExtraCostAmountByRatio  = NewRow.ExtraCostAmountByRatio;
-			NewRowReceivedBatch.ExtraCostTaxAmountByRatio  = NewRow.ExtraCostTaxAmountByRatio;
-			
-			NewRowReceivedBatch.ExtraDirectCostAmount  = NewRow.ExtraDirectCostAmount;
-			NewRowReceivedBatch.ExtraDirectCostTaxAmount  = NewRow.ExtraDirectCostTaxAmount;
-			
-			NewRowReceivedBatch.AllocatedCostAmount       = NewRow.AllocatedCostAmount;
-			NewRowReceivedBatch.AllocatedCostTaxAmount    = NewRow.AllocatedCostTaxAmount;
-			
-			NewRowReceivedBatch.AllocatedRevenueAmount    = NewRow.AllocatedRevenueAmount;
-			NewRowReceivedBatch.AllocatedRevenueTaxAmount = NewRow.AllocatedRevenueTaxAmount;
-			
-			NewRowReceivedBatch.PreliminaryQuantity  = NewRow.PreliminaryQuantity;
-			NewRowReceivedBatch.PreliminaryAmount    = NewRow.PreliminaryAmount;
-			NewRowReceivedBatch.PreliminaryTaxAmount = NewRow.PreliminaryTaxAmount;
-			
-			NewRowReceivedBatch.QuantityBalance  = NewRow.Quantity;
-			
-			NewRowReceivedBatch.InvoiceAmountBalance    = NewRow.InvoiceAmount;
-			NewRowReceivedBatch.InvoiceTaxAmountBalance = NewRow.InvoiceTaxAmount;
-			
-			NewRowReceivedBatch.IndirectCostAmountBalance  = NewRow.IndirectCostAmount;
-			NewRowReceivedBatch.IndirectCostTaxAmountBalance  = NewRow.IndirectCostTaxAmount;
-			
-			NewRowReceivedBatch.ExtraCostAmountByRatioBalance = NewRow.ExtraCostAmountByRatio;
-			NewRowReceivedBatch.ExtraCostTaxAmountByRatioBalance = NewRow.ExtraCostTaxAmountByRatio;
-			
-			NewRowReceivedBatch.ExtraDirectCostAmountBalance = NewRow.ExtraDirectCostAmount;
-			NewRowReceivedBatch.ExtraDirectCostTaxAmountBalance = NewRow.ExtraDirectCostTaxAmount;
-			
-			NewRowReceivedBatch.AllocatedCostAmountBalance       = NewRow.AllocatedCostAmount;
-			NewRowReceivedBatch.AllocatedCostTaxAmountBalance    = NewRow.AllocatedCostTaxAmount;
-			
-			NewRowReceivedBatch.AllocatedRevenueAmountBalance    = NewRow.AllocatedRevenueAmount;
-			NewRowReceivedBatch.AllocatedRevenueTaxAmountBalance = NewRow.AllocatedRevenueTaxAmount;
-			
-			NewRowReceivedBatch.PreliminaryQuantityBalance  = NewRow.PreliminaryQuantity;
-			NewRowReceivedBatch.PreliminaryAmountBalance    = NewRow.PreliminaryAmount;
-			NewRowReceivedBatch.PreliminaryTaxAmountBalance = NewRow.PreliminaryTaxAmount;
-			
-			NewRowReceivedBatch.IsPreliminary = False;
+			NewRowReceivedBatch.IsPreliminary    = NewRow.IsPreliminary;
 			NewRowReceivedBatch.IsOpeningBalance = False;
 			NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
+			
+			NewRowReceivedBatch.Quantity            = NewRow.Quantity;
+			NewRowReceivedBatch.PreliminaryQuantity = NewRow.PreliminaryQuantity;
+			
+			For Each Res In AmountResources() Do
+				NewRowReceivedBatch[Res] = NewRow[Res];
+			EndDo;
+				
+			NewRowReceivedBatch.QuantityBalance  = NewRow.Quantity;
+			NewRowReceivedBatch.PreliminaryQuantityBalance  = NewRow.PreliminaryQuantity;
+			
+			For Each Res In AmountResources() Do
+				NewRowReceivedBatch[Res + "Balance"] = NewRow[Res];
+			EndDo;				
 		EndDo;
 
 		For Each Row In TableOfNewReceivedBatches Do
@@ -2883,33 +2385,26 @@ Function GetReallocatedBatchesAmount(Filter)
 	Query = New Query();
 	Query.Text =
 	"SELECT
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.InvoiceAmount), 0) AS InvoiceAmount,
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.InvoiceTaxAmount), 0) AS InvoiceTaxAmount,
-	|
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.IndirectCostAmount), 0) AS IndirectCostAmount,
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.IndirectCostTaxAmount), 0) AS IndirectCostTaxAmount,
-	|
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.ExtraCostAmountByRatio), 0) AS ExtraCostAmountByRatio,
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.ExtraCostTaxAmountByRatio), 0) AS ExtraCostTaxAmountByRatio,
-	|
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.ExtraDirectCostAmount), 0) AS ExtraDirectCostAmount,
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.ExtraDirectCostTaxAmount), 0) AS ExtraDirectCostTaxAmount,
-	|
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.AllocatedCostAmount), 0) AS AllocatedCostAmount,
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.AllocatedCostTaxAmount), 0) AS AllocatedCostTaxAmount,
-	|
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.AllocatedRevenueAmount), 0) AS AllocatedRevenueAmount,
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.AllocatedRevenueTaxAmount), 0) AS AllocatedRevenueTaxAmount,
-	|
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.PreliminaryAmount), 0) AS PreliminaryAmount,
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.PreliminaryTaxAmount), 0) AS PreliminaryTaxAmount,
-	|	
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.Quantity), 0) AS Quantity,
-	|	ISNULL(SUM(T6080S_ReallocatedBatchesAmountValuesSliceLast.PreliminaryQuantity), 0) AS PreliminaryQuantity
+	|	ISNULL(SUM(Reg.InvoiceAmount), 0) AS InvoiceAmount,
+	|	ISNULL(SUM(Reg.InvoiceTaxAmount), 0) AS InvoiceTaxAmount,
+	|	ISNULL(SUM(Reg.IndirectCostAmount), 0) AS IndirectCostAmount,
+	|	ISNULL(SUM(Reg.IndirectCostTaxAmount), 0) AS IndirectCostTaxAmount,
+	|	ISNULL(SUM(Reg.ExtraCostAmountByRatio), 0) AS ExtraCostAmountByRatio,
+	|	ISNULL(SUM(Reg.ExtraCostTaxAmountByRatio), 0) AS ExtraCostTaxAmountByRatio,
+	|	ISNULL(SUM(Reg.ExtraDirectCostAmount), 0) AS ExtraDirectCostAmount,
+	|	ISNULL(SUM(Reg.ExtraDirectCostTaxAmount), 0) AS ExtraDirectCostTaxAmount,
+	|	ISNULL(SUM(Reg.AllocatedCostAmount), 0) AS AllocatedCostAmount,
+	|	ISNULL(SUM(Reg.AllocatedCostTaxAmount), 0) AS AllocatedCostTaxAmount,
+	|	ISNULL(SUM(Reg.AllocatedRevenueAmount), 0) AS AllocatedRevenueAmount,
+	|	ISNULL(SUM(Reg.AllocatedRevenueTaxAmount), 0) AS AllocatedRevenueTaxAmount,
+	|	ISNULL(SUM(Reg.PreliminaryAmount), 0) AS PreliminaryAmount,
+	|	ISNULL(SUM(Reg.PreliminaryTaxAmount), 0) AS PreliminaryTaxAmount,
+	|	ISNULL(SUM(Reg.Quantity), 0) AS Quantity,
+	|	ISNULL(SUM(Reg.PreliminaryQuantity), 0) AS PreliminaryQuantity
 	|FROM
 	|	InformationRegister.T6080S_ReallocatedBatchesAmountValues.SliceLast(, OutgoingDocument = &OutgoingDocument
 	|	AND IncomingDocument = &IncomingDocument
-	|	AND BatchKey = &BatchKey) AS T6080S_ReallocatedBatchesAmountValuesSliceLast";
+	|	AND BatchKey = &BatchKey) AS Reg";
 	Query.SetParameter("BatchKey", Filter.BatchKey);
 	Query.SetParameter("IncomingDocument", Filter.IncomingDocument);
 	Query.SetParameter("OutgoingDocument", Filter.OutgoingDocument);
@@ -3039,65 +2534,31 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 				
 				NewRow[BatchQuantityResourceName]  = Row_Expense[BatchQuantityResourceName];
 				
-				NewRow.InvoiceAmount             = Row_Expense.InvoiceAmount;
-				NewRow.InvoiceTaxAmount          = Row_Expense.InvoiceTaxAmount;
-				NewRow.IndirectCostAmount        = Row_Expense.IndirectCostAmount;
-				NewRow.IndirectCostTaxAmount     = Row_Expense.IndirectCostTaxAmount;
-				NewRow.ExtraCostAmountByRatio    = Row_Expense.ExtraCostAmountByRatio;
-				NewRow.ExtraCostTaxAmountByRatio = Row_Expense.ExtraCostTaxAmountByRatio;
-				NewRow.ExtraDirectCostAmount     = Row_Expense.ExtraDirectCostAmount;
-				NewRow.ExtraDirectCostTaxAmount  = Row_Expense.ExtraDirectCostTaxAmount;
-				NewRow.AllocatedCostAmount       = Row_Expense.AllocatedCostAmount;
-				NewRow.AllocatedCostTaxAmount    = Row_Expense.AllocatedCostTaxAmount;
-				NewRow.AllocatedRevenueAmount    = Row_Expense.AllocatedRevenueAmount;
-				NewRow.AllocatedRevenueTaxAmount = Row_Expense.AllocatedRevenueTaxAmount;
-				NewRow.PreliminaryAmount         = Row_Expense.PreliminaryAmount;
-				NewRow.PreliminaryTaxAmount      = Row_Expense.PreliminaryTaxAmount;
-
+				For Each Res In AmountResources() Do
+					NewRow[Res] = Row_Expense[Res];
+				EndDo;
+				
 				NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
 				NewRowReceivedBatch.Batch            = Row_Expense.Batch;
 				NewRowReceivedBatch.BatchKey         = Row.BatchKey;
 				NewRowReceivedBatch.Document         = Row.Document;
 				NewRowReceivedBatch.Company          = Row.Company;
 				NewRowReceivedBatch.Date             = Row.Date;
-				
-				NewRowReceivedBatch[BatchQuantityResourceName] = Row_Expense[BatchQuantityResourceName];
-				NewRowReceivedBatch[BatchQuantityResourceNameBalance] = Row_Expense[BatchQuantityResourceName];
-				
-				NewRowReceivedBatch.InvoiceAmount                    = Row_Expense.InvoiceAmount;
-				NewRowReceivedBatch.InvoiceTaxAmount                 = Row_Expense.InvoiceTaxAmount;
-				NewRowReceivedBatch.IndirectCostAmount               = Row_Expense.IndirectCostAmount;
-				NewRowReceivedBatch.IndirectCostTaxAmount            = Row_Expense.IndirectCostTaxAmount;
-				NewRowReceivedBatch.ExtraCostAmountByRatio           = Row_Expense.ExtraCostAmountByRatio;
-				NewRowReceivedBatch.ExtraCostTaxAmountByRatio        = Row_Expense.ExtraCostTaxAmountByRatio;
-				NewRowReceivedBatch.ExtraDirectCostAmount            = Row_Expense.ExtraDirectCostAmount;
-				NewRowReceivedBatch.ExtraDirectCostTaxAmount         = Row_Expense.ExtraDirectCostTaxAmount;
-				NewRowReceivedBatch.AllocatedCostAmount              = Row_Expense.AllocatedCostAmount;
-				NewRowReceivedBatch.AllocatedCostTaxAmount           = Row_Expense.AllocatedCostTaxAmount;
-				NewRowReceivedBatch.AllocatedRevenueAmount           = Row_Expense.AllocatedRevenueAmount;
-				NewRowReceivedBatch.AllocatedRevenueTaxAmount        = Row_Expense.AllocatedRevenueTaxAmount;
-				NewRowReceivedBatch.PreliminaryAmount                = Row_Expense.PreliminaryAmount;
-				NewRowReceivedBatch.PreliminaryTaxAmount             = Row_Expense.PreliminaryTaxAmount;
-				
-				NewRowReceivedBatch.InvoiceAmountBalance             = Row_Expense.InvoiceAmount;
-				NewRowReceivedBatch.InvoiceTaxAmountBalance          = Row_Expense.InvoiceTaxAmount;
-				NewRowReceivedBatch.IndirectCostAmountBalance        = Row_Expense.IndirectCostAmount;
-				NewRowReceivedBatch.IndirectCostTaxAmountBalance     = Row_Expense.IndirectCostTaxAmount;
-				NewRowReceivedBatch.ExtraCostAmountByRatioBalance    = Row_Expense.ExtraCostAmountByRatio;
-				NewRowReceivedBatch.ExtraCostTaxAmountByRatioBalance = Row_Expense.ExtraCostTaxAmountByRatio;
-				NewRowReceivedBatch.ExtraDirectCostAmountBalance     = Row_Expense.ExtraDirectCostAmount;
-				NewRowReceivedBatch.ExtraDirectCostTaxAmountBalance  = Row_Expense.ExtraDirectCostTaxAmount;
-				NewRowReceivedBatch.AllocatedCostAmountBalance       = Row_Expense.AllocatedCostAmount;
-				NewRowReceivedBatch.AllocatedCostTaxAmountBalance    = Row_Expense.AllocatedCostTaxAmount;
-				NewRowReceivedBatch.AllocatedRevenueAmountBalance    = Row_Expense.AllocatedRevenueAmount;
-				NewRowReceivedBatch.AllocatedRevenueTaxAmountBalance = Row_Expense.AllocatedRevenueTaxAmount;
-				NewRowReceivedBatch.PreliminaryAmountBalance         = Row_Expense.PreliminaryAmount;
-				NewRowReceivedBatch.PreliminaryTaxAmountBalance      = Row_Expense.PreliminaryTaxAmount;
-				
-				NewRowReceivedBatch.IsPreliminary = Row_Expense.IsPreliminary;
+				NewRowReceivedBatch.IsPreliminary    = Row_Expense.IsPreliminary;
 				NewRowReceivedBatch.IsOpeningBalance = False;
 				NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
+		
+				NewRowReceivedBatch[BatchQuantityResourceName] = Row_Expense[BatchQuantityResourceName];
 				
+				For Each Res In AmountResources() Do
+					NewRowReceivedBatch[Res] = Row_Expense[Res];
+				EndDo;
+					
+				NewRowReceivedBatch[BatchQuantityResourceNameBalance] = Row_Expense[BatchQuantityResourceName];
+				
+				For Each Res In AmountResources() Do
+					NewRowReceivedBatch[Res + "Balance"] = Row_Expense[Res];
+				EndDo;				
 			EndDo;
 			If NeedReceipt <> 0 Then
 				// Can not receipt Batch key
@@ -3127,28 +2588,12 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 	For Each Row_Receipt In DataForReceipt Do
 		NewRow = Tables.DataForReceipt.Add();
 		FillPropertyValues(NewRow, Row_Receipt);
-
-		TotalExpenseInvoiceAmount    = DataForExpense.Total("InvoiceAmount");
-		TotalExpenseInvoiceTaxAmount = DataForExpense.Total("InvoiceTaxAmount");
 		
-		TotalExpenseIndirectCostAmount  = DataForExpense.Total("IndirectCostAmount");
-		TotalExpenseIndirectCostTaxAmount  = DataForExpense.Total("IndirectCostTaxAmount");
-		
-		TotalExpenseExtraCostAmountByRatio = DataForExpense.Total("ExtraCostAmountByRatio");
-		TotalExpenseExtraCostTaxAmountByRatio = DataForExpense.Total("ExtraCostTaxAmountByRatio");
-		
-		TotalExpenseExtraDirectCostAmount = DataForExpense.Total("ExtraDirectCostAmount");
-		TotalExpenseExtraDirectCostTaxAmount = DataForExpense.Total("ExtraDirectCostTaxAmount");
-		
-		TotalExpenseAllocatedCostAmount       = DataForExpense.Total("AllocatedCostAmount");
-		TotalExpenseAllocatedCostTaxAmount    = DataForExpense.Total("AllocatedCostTaxAmount");
-		
-		TotalExpenseAllocatedRevenueAmount    = DataForExpense.Total("AllocatedRevenueAmount");
-		TotalExpenseAllocatedRevenueTaxAmount = DataForExpense.Total("AllocatedRevenueTaxAmount");
-				
-		TotalExpensePreliminaryAmount    = DataForExpense.Total("PreliminaryAmount");
-		TotalExpensePreliminaryTaxAmount = DataForExpense.Total("PreliminaryTaxAmount");
-				
+		TotalExpenseAmounts = New Structure();
+		For Each Res In AmountResources() Do
+			TotalExpenseAmounts.Insert(Res, DataForExpense.Total(Res));
+		EndDo;
+						
 		For Each Row_Expense In DataForExpense Do
 			
 			If ValueIsFilled(Row_Receipt.ItemLinkID) Then
@@ -3157,26 +2602,9 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 				EndIf;
 			EndIf;
 			
-			NewRow.InvoiceAmount    = NewRow.InvoiceAmount    + Row_Expense.InvoiceAmount;
-			NewRow.InvoiceTaxAmount = NewRow.InvoiceTaxAmount + Row_Expense.InvoiceTaxAmount;
-			
-			NewRow.IndirectCostAmount  = NewRow.IndirectCostAmount  + Row_Expense.IndirectCostAmount;
-			NewRow.IndirectCostTaxAmount  = NewRow.IndirectCostTaxAmount  + Row_Expense.IndirectCostTaxAmount;
-			
-			NewRow.ExtraCostAmountByRatio = NewRow.ExtraCostAmountByRatio + Row_Expense.ExtraCostAmountByRatio;
-			NewRow.ExtraCostTaxAmountByRatio = NewRow.ExtraCostTaxAmountByRatio + Row_Expense.ExtraCostTaxAmountByRatio;
-			
-			NewRow.ExtraDirectCostAmount = NewRow.ExtraDirectCostAmount + Row_Expense.ExtraDirectCostAmount;
-			NewRow.ExtraDirectCostTaxAmount = NewRow.ExtraDirectCostTaxAmount + Row_Expense.ExtraDirectCostTaxAmount;
-			
-			NewRow.AllocatedCostAmount       = NewRow.AllocatedCostAmount       + Row_Expense.AllocatedCostAmount;
-			NewRow.AllocatedCostTaxAmount    = NewRow.AllocatedCostTaxAmount    + Row_Expense.AllocatedCostTaxAmount;
-			
-			NewRow.AllocatedRevenueAmount    = NewRow.AllocatedRevenueAmount    + Row_Expense.AllocatedRevenueAmount;
-			NewRow.AllocatedRevenueTaxAmount = NewRow.AllocatedRevenueTaxAmount + Row_Expense.AllocatedRevenueTaxAmount;
-			
-			NewRow.PreliminaryAmount    = NewRow.PreliminaryAmount    + Row_Expense.PreliminaryAmount;
-			NewRow.PreliminaryTaxAmount = NewRow.PreliminaryTaxAmount + Row_Expense.PreliminaryTaxAmount;
+			For Each Res In AmountResources() Do
+				NewRow[Res] = NewRow[Res] + Row_Expense[Res];
+			EndDo;
 			
 			If TypeOf(Row_Expense.Document) = Type("DocumentRef.Bundling") Then
 				NewRowBundleAmountValues = Tables.DataForBundleAmountValues.Add();
@@ -3185,77 +2613,12 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 				NewRowBundleAmountValues.Company        = Row_Expense.Company;
 				NewRowBundleAmountValues.Period         = Row_Expense.Period;
 				NewRowBundleAmountValues.BatchKeyBundle = Row_Receipt.BatchKey;
-								
-				// InvoiceAmount
-				If TotalExpenseInvoiceAmount <> 0 And Row_Expense.InvoiceAmount <> 0 Then
-					NewRowBundleAmountValues.InvoiceAmount = Row_Expense.InvoiceAmount / (TotalExpenseInvoiceAmount / 100);
-				EndIf;
 				
-				// InvoiceTaxAmount
-				If TotalExpenseInvoiceTaxAmount <> 0 And Row_Expense.InvoiceTaxAmount <> 0 Then
-					NewRowBundleAmountValues.InvoiceTaxAmount = Row_Expense.InvoiceTaxAmount / (TotalExpenseInvoiceTaxAmount / 100);
-				EndIf;
-				
-				// IndirectCostAmount
-				If TotalExpenseIndirectCostAmount <> 0 And Row_Expense.IndirectCostAmount <> 0 Then
-					NewRowBundleAmountValues.IndirectCostAmount = Row_Expense.IndirectCostAmount / (TotalExpenseIndirectCostAmount / 100);
-				EndIf;
-				
-				// IndirectCostTaxAmount
-				If TotalExpenseIndirectCostTaxAmount <> 0 And Row_Expense.IndirectCostTaxAmount <> 0 Then
-					NewRowBundleAmountValues.IndirectCostTaxAmount = Row_Expense.IndirectCostTaxAmount / (TotalExpenseIndirectCostTaxAmount / 100);
-				EndIf;
-				
-				// ExtraCostAmountByRatio
-				If TotalExpenseExtraCostAmountByRatio <> 0 And Row_Expense.ExtraCostAmountByRatio <> 0 Then
-					NewRowBundleAmountValues.ExtraCostAmountByRatio = Row_Expense.ExtraCostAmountByRatio / (TotalExpenseExtraCostAmountByRatio / 100);
-				EndIf;
-				
-				// ExtraCostTaxAmountByRatio
-				If TotalExpenseExtraCostTaxAmountByRatio <> 0 And Row_Expense.ExtraCostTaxAmountByRatio <> 0 Then
-					NewRowBundleAmountValues.ExtraCostTaxAmountByRatio = Row_Expense.ExtraCostTaxAmountByRatio / (TotalExpenseExtraCostTaxAmountByRatio / 100);
-				EndIf;
-				
-				// ExtraDirectCostAmount
-				If TotalExpenseExtraDirectCostAmount <> 0 And Row_Expense.ExtraDirectCostAmount <> 0 Then
-					NewRowBundleAmountValues.ExtraDirectCostAmount = Row_Expense.ExtraDirectCostAmount / (TotalExpenseExtraDirectCostAmount / 100);
-				EndIf;
-				
-				// ExtraDirectCostTaxAmount
-				If TotalExpenseExtraDirectCostTaxAmount <> 0 And Row_Expense.ExtraDirectCostTaxAmount <> 0 Then
-					NewRowBundleAmountValues.ExtraDirectCostTaxAmount = Row_Expense.ExtraDirectCostTaxAmount / (TotalExpenseExtraDirectCostTaxAmount / 100);
-				EndIf;
-								
-				// AllocatedCostAmount
-				If TotalExpenseAllocatedCostAmount <> 0 And Row_Expense.AllocatedCostAmount <> 0 Then
-					NewRowBundleAmountValues.AllocatedCostAmount = Row_Expense.AllocatedCostAmount / (TotalExpenseAllocatedCostAmount / 100);
-				EndIf;
-				
-				// AllocatedCostTaxAmount
-				If TotalExpenseAllocatedCostTaxAmount <> 0 And Row_Expense.AllocatedCostTaxAmount <> 0 Then
-					NewRowBundleAmountValues.AllocatedCostTaxAmount = Row_Expense.AllocatedCostTaxAmount / (TotalExpenseAllocatedCostTaxAmount / 100);
-				EndIf;
-								
-				// AllocatedRevenueAmount
-				If TotalExpenseAllocatedRevenueAmount <> 0 And Row_Expense.AllocatedRevenueAmount <> 0 Then
-					NewRowBundleAmountValues.AllocatedRevenueAmount = Row_Expense.AllocatedRevenueAmount / (TotalExpenseAllocatedRevenueAmount / 100);
-				EndIf;
-				
-				// AllocatedRevenueTaxAmount
-				If TotalExpenseAllocatedRevenueTaxAmount <> 0 And Row_Expense.AllocatedRevenueTaxAmount <> 0 Then
-					NewRowBundleAmountValues.AllocatedRevenueTaxAmount = Row_Expense.AllocatedRevenueTaxAmount / (TotalExpenseAllocatedRevenueTaxAmount / 100);
-				EndIf;
-				
-				// PreliminaryAmount
-				If TotalExpensePreliminaryAmount <> 0 And Row_Expense.PreliminaryAmount <> 0 Then
-					NewRowBundleAmountValues.PreliminaryAmount = Row_Expense.PreliminaryAmount / (TotalExpensePreliminaryAmount / 100);
-				EndIf;
-				
-				// PreliminaryTaxAmount
-				If TotalExpensePreliminaryTaxAmount <> 0 And Row_Expense.PreliminaryTaxAmount <> 0 Then
-					NewRowBundleAmountValues.PreliminaryTaxAmount = Row_Expense.PreliminaryTaxAmount / (TotalExpensePreliminaryTaxAmount / 100);
-				EndIf;
-				
+				For Each Res In AmountResources() Do
+					If TotalExpenseAmounts[Res] <> 0 And Row_Expense[Res] <> 0 Then
+						NewRowBundleAmountValues[Res] = Row_Expense[Res] / (TotalExpenseAmounts[Res] / 100);
+					EndIf;
+				EndDo;				
 			Else
 				NewRowCompositeBatchesAmountValues = Tables.DataForCompositeBatchesAmountValues.Add();
 				NewRowCompositeBatchesAmountValues.Batch     = Row_Expense.Batch;
@@ -3264,35 +2627,19 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 				NewRowCompositeBatchesAmountValues.Period    = Row_Expense.Period;
 				NewRowCompositeBatchesAmountValues.BatchComposite    = Row_Receipt.Batch;
 				NewRowCompositeBatchesAmountValues.BatchKeyComposite = Row_Receipt.BatchKey;
-				NewRowCompositeBatchesAmountValues.InvoiceAmount    = Row_Expense.InvoiceAmount;
-				NewRowCompositeBatchesAmountValues.InvoiceTaxAmount = Row_Expense.InvoiceTaxAmount; 
 				
-				NewRowCompositeBatchesAmountValues.IndirectCostAmount  = Row_Expense.IndirectCostAmount;
-				NewRowCompositeBatchesAmountValues.IndirectCostTaxAmount  = Row_Expense.IndirectCostTaxAmount;
-				
-				NewRowCompositeBatchesAmountValues.ExtraCostAmountByRatio = Row_Expense.ExtraCostAmountByRatio;
-				NewRowCompositeBatchesAmountValues.ExtraCostTaxAmountByRatio = Row_Expense.ExtraCostTaxAmountByRatio;
-				
-				NewRowCompositeBatchesAmountValues.ExtraDirectCostAmount = Row_Expense.ExtraDirectCostAmount;
-				NewRowCompositeBatchesAmountValues.ExtraDirectCostTaxAmount = Row_Expense.ExtraDirectCostTaxAmount;
-				
-				NewRowCompositeBatchesAmountValues.AllocatedCostAmount       = Row_Expense.AllocatedCostAmount;
-				NewRowCompositeBatchesAmountValues.AllocatedCostTaxAmount    = Row_Expense.AllocatedCostTaxAmount;
-				
-				NewRowCompositeBatchesAmountValues.AllocatedRevenueAmount    = Row_Expense.AllocatedRevenueAmount;
-				NewRowCompositeBatchesAmountValues.AllocatedRevenueTaxAmount = Row_Expense.AllocatedRevenueTaxAmount;
-				
-				NewRowCompositeBatchesAmountValues.PreliminaryAmount    = Row_Expense.PreliminaryAmount;
-				NewRowCompositeBatchesAmountValues.PreliminaryTaxAmount = Row_Expense.PreliminaryTaxAmount;
-				
-				NewRowCompositeBatchesAmountValues.Quantity  = Row_Expense.Quantity;
+				NewRowCompositeBatchesAmountValues.Quantity             = Row_Expense.Quantity;
 				NewRowCompositeBatchesAmountValues.PreliminaryQuantity  = Row_Expense.PreliminaryQuantity;
+				
+				For Each Res In AmountResources() Do	
+					NewRowCompositeBatchesAmountValues[Res] = Row_Expense[Res];
+				EndDo;				
 			EndIf;
 		EndDo; // DataForExpense
 
 		If TypeOf(Row_Receipt.Document) = Type("DocumentRef.Production") Then
 
-			NewRow.ExtraDirectCostAmount    = NewRow.ExtraDirectCostAmount + Row_Receipt.Document.ExtraDirectCostAmount;
+			NewRow.ExtraDirectCostAmount    = NewRow.ExtraDirectCostAmount    + Row_Receipt.Document.ExtraDirectCostAmount;
 			NewRow.ExtraDirectCostTaxAmount = NewRow.ExtraDirectCostTaxAmount + Row_Receipt.Document.ExtraDirectCostTaxAmount;
 			
 			_ExtraCostAmountByRatio = Row_Receipt.Document.ExtraCostAmountByRatio;
@@ -3322,7 +2669,7 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 
                 NewRow.ExtraCostTaxAmountByRatio = (_totalTaxAmount / 100 * _ExtraCostTaxAmountByRatio) + NewRow.ExtraCostTaxAmountByRatio;
 			EndIf;	
-		EndIf;
+		EndIf; // Document type is Production
 		
 		NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
 		NewRowReceivedBatch.Batch            = NewRow.Batch;
@@ -3330,58 +2677,23 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 		NewRowReceivedBatch.Document         = NewRow.Document;
 		NewRowReceivedBatch.Company          = NewRow.Company;
 		NewRowReceivedBatch.Date             = NewRow.Period;
-		NewRowReceivedBatch.Quantity         = NewRow.Quantity;
-		
-		NewRowReceivedBatch.InvoiceAmount           = NewRow.InvoiceAmount;
-		NewRowReceivedBatch.InvoiceTaxAmount        = NewRow.InvoiceTaxAmount;
-		
-		NewRowReceivedBatch.IndirectCostAmount   = NewRow.IndirectCostAmount;
-		NewRowReceivedBatch.IndirectCostTaxAmount   = NewRow.IndirectCostTaxAmount;
-		
-		NewRowReceivedBatch.ExtraCostAmountByRatio  = NewRow.ExtraCostAmountByRatio;
-		NewRowReceivedBatch.ExtraCostTaxAmountByRatio  = NewRow.ExtraCostTaxAmountByRatio;
-		
-		NewRowReceivedBatch.ExtraDirectCostAmount  = NewRow.ExtraDirectCostAmount;
-		NewRowReceivedBatch.ExtraDirectCostTaxAmount  = NewRow.ExtraDirectCostTaxAmount;
-		
-		NewRowReceivedBatch.AllocatedCostAmount       = NewRow.AllocatedCostAmount;
-		NewRowReceivedBatch.AllocatedCostTaxAmount    = NewRow.AllocatedCostTaxAmount;
-
-		NewRowReceivedBatch.AllocatedRevenueAmount    = NewRow.AllocatedRevenueAmount;
-		NewRowReceivedBatch.AllocatedRevenueTaxAmount = NewRow.AllocatedRevenueTaxAmount;
-		
-		NewRowReceivedBatch.PreliminaryQuantity  = NewRow.PreliminaryQuantity;
-		NewRowReceivedBatch.PreliminaryAmount    = NewRow.PreliminaryAmount;
-		NewRowReceivedBatch.PreliminaryTaxAmount = NewRow.PreliminaryTaxAmount;
-		
-		NewRowReceivedBatch.QuantityBalance  = NewRow.Quantity;
-		
-		NewRowReceivedBatch.InvoiceAmountBalance    = NewRow.InvoiceAmount;
-		NewRowReceivedBatch.InvoiceTaxAmountBalance = NewRow.InvoiceTaxAmount;
-		
-		NewRowReceivedBatch.IndirectCostAmountBalance  = NewRow.IndirectCostAmount;
-		NewRowReceivedBatch.IndirectCostTaxAmountBalance  = NewRow.IndirectCostTaxAmount;
-		
-		NewRowReceivedBatch.ExtraCostAmountByRatioBalance = NewRow.ExtraCostAmountByRatio;
-		NewRowReceivedBatch.ExtraCostTaxAmountByRatioBalance = NewRow.ExtraCostTaxAmountByRatio;
-		
-		NewRowReceivedBatch.ExtraDirectCostAmountBalance = NewRow.ExtraDirectCostAmount;
-		NewRowReceivedBatch.ExtraDirectCostTaxAmountBalance = NewRow.ExtraDirectCostTaxAmount;
-		
-		NewRowReceivedBatch.AllocatedCostAmountBalance       = NewRow.AllocatedCostAmount;
-		NewRowReceivedBatch.AllocatedCostTaxAmountBalance    = NewRow.AllocatedCostTaxAmount;
-		
-		NewRowReceivedBatch.AllocatedRevenueAmountBalance    = NewRow.AllocatedRevenueAmount;
-		NewRowReceivedBatch.AllocatedRevenueTaxAmountBalance = NewRow.AllocatedRevenueTaxAmount;
-		
-		NewRowReceivedBatch.PreliminaryQuantityBalance  = NewRow.PreliminaryQuantity;
-		NewRowReceivedBatch.PreliminaryAmountBalance    = NewRow.PreliminaryAmount;
-		NewRowReceivedBatch.PreliminaryTaxAmountBalance = NewRow.PreliminaryTaxAmount;
-		
-		NewRowReceivedBatch.IsPreliminary = NewRow.IsPreliminary;
+		NewRowReceivedBatch.IsPreliminary    = NewRow.IsPreliminary;
 		NewRowReceivedBatch.IsOpeningBalance = False;
 		NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
-
+		
+		NewRowReceivedBatch.Quantity            = NewRow.Quantity;
+		NewRowReceivedBatch.PreliminaryQuantity = NewRow.PreliminaryQuantity;
+		
+		For Each Res In AmountResources() Do
+			NewRowReceivedBatch[Res] = NewRow[Res];
+		EndDo;	
+		
+		NewRowReceivedBatch.QuantityBalance            = NewRow.Quantity;
+		NewRowReceivedBatch.PreliminaryQuantityBalance = NewRow.PreliminaryQuantity;
+		
+		For Each Res In AmountResources() Do
+			NewRowReceivedBatch[Res + "Balance"] = NewRow[Res];
+		EndDo;	
 	EndDo; // DataForReceipt
 
 	ArrayForDelete = New Array();
@@ -3423,25 +2735,18 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 			|	DataForBundleAmountValues.BatchKeyBundle AS BatchKeyBundle,
 			|	DataForBundleAmountValues.InvoiceAmount AS InvoiceAmount,
 			|	DataForBundleAmountValues.InvoiceTaxAmount AS InvoiceTaxAmount,
-			|
 			|	DataForBundleAmountValues.IndirectCostAmount AS IndirectCostAmount,
 			|	DataForBundleAmountValues.IndirectCostTaxAmount AS IndirectCostTaxAmount,
-			|
 			|	DataForBundleAmountValues.ExtraCostAmountByRatio AS ExtraCostAmountByRatio,
 			|	DataForBundleAmountValues.ExtraCostTaxAmountByRatio AS ExtraCostTaxAmountByRatio,
-			|
 			|	DataForBundleAmountValues.ExtraDirectCostAmount AS ExtraDirectCostAmount,
 			|	DataForBundleAmountValues.ExtraDirectCostTaxAmount AS ExtraDirectCostTaxAmount,
-			|
 			|	DataForBundleAmountValues.AllocatedCostAmount AS AllocatedCostAmount,
 			|	DataForBundleAmountValues.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
-			|
 			|	DataForBundleAmountValues.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 			|	DataForBundleAmountValues.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
-			|
 			|	DataForBundleAmountValues.PreliminaryAmount AS PreliminaryAmount,
 			|	DataForBundleAmountValues.PreliminaryTaxAmount AS PreliminaryTaxAmount
-			|
 			|INTO DataForBundleAmountValues
 			|FROM
 			|	&DataForBundleAmountValues AS DataForBundleAmountValues
@@ -3454,25 +2759,18 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 			|	DataForBundleAmountValues.BatchKeyBundle AS BatchKeyBundle,
 			|	DataForBundleAmountValues.InvoiceAmount AS InvoiceAmount,
 			|	DataForBundleAmountValues.InvoiceTaxAmount AS InvoiceTaxAmount,
-			|
 			|	DataForBundleAmountValues.IndirectCostAmount AS IndirectCostAmount,
 			|	DataForBundleAmountValues.IndirectCostTaxAmount AS IndirectCostTaxAmount,
-			|
 			|	DataForBundleAmountValues.ExtraCostAmountByRatio AS ExtraCostAmountByRatio,
 			|	DataForBundleAmountValues.ExtraCostTaxAmountByRatio AS ExtraCostTaxAmountByRatio,
-			|
 			|	DataForBundleAmountValues.ExtraDirectCostAmount AS ExtraDirectCostAmount,
 			|	DataForBundleAmountValues.ExtraDirectCostTaxAmount AS ExtraDirectCostTaxAmount,
-			|
 			|	DataForBundleAmountValues.AllocatedCostAmount AS AllocatedCostAmount,
 			|	DataForBundleAmountValues.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
-			|
 			|	DataForBundleAmountValues.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 			|	DataForBundleAmountValues.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
-			|
 			|	DataForBundleAmountValues.PreliminaryAmount AS PreliminaryAmount,
 			|	DataForBundleAmountValues.PreliminaryTaxAmount AS PreliminaryTaxAmount
-			|
 			|FROM
 			|	DataForBundleAmountValues AS DataForBundleAmountValues
 			|WHERE
@@ -3488,25 +2786,18 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 			|	T6040S_BundleAmountValues.BatchKeyBundle,
 			|	T6040S_BundleAmountValues.InvoiceAmount,
 			|	T6040S_BundleAmountValues.InvoiceTaxAmount,
-			|
 			|	T6040S_BundleAmountValues.IndirectCostAmount,
 			|	T6040S_BundleAmountValues.IndirectCostTaxAmount,
-			|
 			|	T6040S_BundleAmountValues.ExtraCostAmountByRatio,
 			|	T6040S_BundleAmountValues.ExtraCostTaxAmountByRatio,
-			|
 			|	T6040S_BundleAmountValues.ExtraDirectCostAmount,
 			|	T6040S_BundleAmountValues.ExtraDirectCostTaxAmount,
-			|
 			|	T6040S_BundleAmountValues.AllocatedCostAmount,
 			|	T6040S_BundleAmountValues.AllocatedCostTaxAmount,
-			|
 			|	T6040S_BundleAmountValues.AllocatedRevenueAmount,
 			|	T6040S_BundleAmountValues.AllocatedRevenueTaxAmount,
-			|
 			|	T6040S_BundleAmountValues.PreliminaryAmount,
 			|	T6040S_BundleAmountValues.PreliminaryTaxAmount
-			|
 			|FROM
 			|	InformationRegister.T6040S_BundleAmountValues AS T6040S_BundleAmountValues
 			|WHERE
@@ -3522,25 +2813,18 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 			|	BatchKeys_Bundle.Ref,
 			|	T6050S_ManualBundleAmountValues.InvoiceAmount,
 			|	T6050S_ManualBundleAmountValues.InvoiceTaxAmount,
-			|
 			|	T6050S_ManualBundleAmountValues.IndirectCostAmount,
 			|	T6050S_ManualBundleAmountValues.IndirectCostTaxAmount,
-			|
 			|	T6050S_ManualBundleAmountValues.ExtraCostAmountByRatio,
 			|	T6050S_ManualBundleAmountValues.ExtraCostTaxAmountByRatio,
-			|
 			|	T6050S_ManualBundleAmountValues.ExtraDirectCostAmount,
 			|	T6050S_ManualBundleAmountValues.ExtraDirectCostTaxAmount,
-			|
 			|	T6050S_ManualBundleAmountValues.AllocatedCostAmount,
 			|	T6050S_ManualBundleAmountValues.AllocatedCostTaxAmount,
-			|
 			|	T6050S_ManualBundleAmountValues.AllocatedRevenueAmount,
 			|	T6050S_ManualBundleAmountValues.AllocatedRevenueTaxAmount,
-			|
 			|	T6050S_ManualBundleAmountValues.PreliminaryAmount,
 			|	T6050S_ManualBundleAmountValues.PreliminaryTaxAmount
-			|
 			|FROM
 			|	InformationRegister.T6050S_ManualBundleAmountValues AS T6050S_ManualBundleAmountValues
 			|		INNER JOIN Catalog.BatchKeys AS BatchKeys
@@ -3565,26 +2849,9 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 
 			QuerySelection = Query.Execute().Select();
 			While QuerySelection.Next() Do
-				NewRow.InvoiceAmount = NewRow.InvoiceAmount + (Row_Expense.InvoiceAmount / 100 * QuerySelection.InvoiceAmount);
-				NewRow.InvoiceTaxAmount = NewRow.InvoiceTaxAmount + (Row_Expense.InvoiceTaxAmount / 100 * QuerySelection.InvoiceTaxAmount);
-				
-				NewRow.IndirectCostAmount  = NewRow.IndirectCostAmount  + (Row_Expense.IndirectCostAmount  / 100 * QuerySelection.IndirectCostAmount);
-				NewRow.IndirectCostTaxAmount  = NewRow.IndirectCostTaxAmount  + (Row_Expense.IndirectCostTaxAmount  / 100 * QuerySelection.IndirectCostTaxAmount);
-				
-				NewRow.ExtraCostAmountByRatio = NewRow.ExtraCostAmountByRatio + (Row_Expense.ExtraCostAmountByRatio / 100 * QuerySelection.ExtraCostAmountByRatio);
-				NewRow.ExtraCostTaxAmountByRatio = NewRow.ExtraCostTaxAmountByRatio + (Row_Expense.ExtraCostTaxAmountByRatio / 100 * QuerySelection.ExtraCostTaxAmountByRatio);
-				
-				NewRow.ExtraDirectCostAmount = NewRow.ExtraDirectCostAmount + (Row_Expense.ExtraDirectCostAmount / 100 * QuerySelection.ExtraDirectCostAmount);
-				NewRow.ExtraDirectCostTaxAmount = NewRow.ExtraDirectCostTaxAmount + (Row_Expense.ExtraDirectCostTaxAmount / 100 * QuerySelection.ExtraDirectCostTaxAmount);
-				
-				NewRow.AllocatedCostAmount       = NewRow.AllocatedCostAmount       + (Row_Expense.AllocatedCostAmount       / 100 * QuerySelection.AllocatedCostAmount);
-				NewRow.AllocatedCostTaxAmount    = NewRow.AllocatedCostTaxAmount    + (Row_Expense.AllocatedCostTaxAmount    / 100 * QuerySelection.AllocatedCostTaxAmount);
-				
-				NewRow.AllocatedRevenueAmount    = NewRow.AllocatedRevenueAmount    + (Row_Expense.AllocatedRevenueAmount    / 100 * QuerySelection.AllocatedRevenueAmount);
-				NewRow.AllocatedRevenueTaxAmount = NewRow.AllocatedRevenueTaxAmount + (Row_Expense.AllocatedRevenueTaxAmount / 100 * QuerySelection.AllocatedRevenueTaxAmount);
-			
-				NewRow.PreliminaryAmount    = NewRow.PreliminaryAmount    + (Row_Expense.PreliminaryAmount    / 100 * QuerySelection.PreliminaryAmount);
-				NewRow.PreliminaryTaxAmount = NewRow.PreliminaryTaxAmount + (Row_Expense.PreliminaryTaxAmount / 100 * QuerySelection.PreliminaryTaxAmount);
+				For Each Res In AmountResources() Do
+					NewRow[Res] = NewRow[Res] + (Row_Expense[Res] / 100 * QuerySelection[Res]);
+				EndDo;
 			EndDo;
 		EndDo;
 
@@ -3594,56 +2861,23 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 		NewRowReceivedBatch.Document         = NewRow.Document;
 		NewRowReceivedBatch.Company          = NewRow.Company;
 		NewRowReceivedBatch.Date             = NewRow.Period;
-		NewRowReceivedBatch.Quantity         = NewRow.Quantity;
-		
-		NewRowReceivedBatch.InvoiceAmount           = NewRow.InvoiceAmount;
-		NewRowReceivedBatch.InvoiceTaxAmount        = NewRow.InvoiceTaxAmount;
-		
-		NewRowReceivedBatch.IndirectCostAmount   = NewRow.IndirectCostAmount;
-		NewRowReceivedBatch.IndirectCostTaxAmount   = NewRow.IndirectCostTaxAmount;
-		
-		NewRowReceivedBatch.ExtraCostAmountByRatio  = NewRow.ExtraCostAmountByRatio;
-		NewRowReceivedBatch.ExtraCostTaxAmountByRatio  = NewRow.ExtraCostTaxAmountByRatio;
-		
-		NewRowReceivedBatch.ExtraDirectCostAmount  = NewRow.ExtraDirectCostAmount;
-		NewRowReceivedBatch.ExtraDirectCostTaxAmount  = NewRow.ExtraDirectCostTaxAmount;
-		
-		NewRowReceivedBatch.AllocatedCostAmount       = NewRow.AllocatedCostAmount;
-		NewRowReceivedBatch.AllocatedCostTaxAmount    = NewRow.AllocatedCostTaxAmount;
-		
-		NewRowReceivedBatch.AllocatedRevenueAmount    = NewRow.AllocatedRevenueAmount;
-		NewRowReceivedBatch.AllocatedRevenueTaxAmount = NewRow.AllocatedRevenueTaxAmount;
-		
-		NewRowReceivedBatch.PreliminaryQuantity  = NewRow.PreliminaryQuantity;
-		NewRowReceivedBatch.PreliminaryAmount    = NewRow.PreliminaryAmount;
-		NewRowReceivedBatch.PreliminaryTaxAmount = NewRow.PreliminaryTaxAmount;
-		
-		NewRowReceivedBatch.QuantityBalance  = NewRow.Quantity;
-		
-		NewRowReceivedBatch.InvoiceAmountBalance    = NewRow.InvoiceAmount;
-		NewRowReceivedBatch.InvoiceTaxAmountBalance = NewRow.InvoiceTaxAmount;
-		
-		NewRowReceivedBatch.IndirectCostAmountBalance  = NewRow.IndirectCostAmount;
-		NewRowReceivedBatch.IndirectCostTaxAmountBalance  = NewRow.IndirectCostTaxAmount;
-		
-		NewRowReceivedBatch.ExtraCostAmountByRatioBalance = NewRow.ExtraCostAmountByRatio;
-		NewRowReceivedBatch.ExtraCostTaxAmountByRatioBalance = NewRow.ExtraCostTaxAmountByRatio;
-		
-		NewRowReceivedBatch.ExtraDirectCostAmountBalance = NewRow.ExtraDirectCostAmount;
-		NewRowReceivedBatch.ExtraDirectCostTaxAmountBalance = NewRow.ExtraDirectCostTaxAmount;
-				
-		NewRowReceivedBatch.AllocatedCostAmountBalance       = NewRow.AllocatedCostAmount;
-		NewRowReceivedBatch.AllocatedCostTaxAmountBalance    = NewRow.AllocatedCostTaxAmount;
-		
-		NewRowReceivedBatch.AllocatedRevenueAmountBalance    = NewRow.AllocatedRevenueAmount;
-		NewRowReceivedBatch.AllocatedRevenueTaxAmountBalance = NewRow.AllocatedRevenueTaxAmount;
-		
-		NewRowReceivedBatch.PreliminaryQuantityBalance  = NewRow.PreliminaryQuantity;
-		NewRowReceivedBatch.PreliminaryAmountBalance    = NewRow.PreliminaryAmount;
-		NewRowReceivedBatch.PreliminaryTaxAmountBalance = NewRow.PreliminaryTaxAmount;
-		NewRowReceivedBatch.IsPreliminary = NewRow.IsPreliminary;
+		NewRowReceivedBatch.IsPreliminary    = NewRow.IsPreliminary;
 		NewRowReceivedBatch.IsOpeningBalance = False;
 		NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
+		
+		NewRowReceivedBatch.Quantity            = NewRow.Quantity;
+		NewRowReceivedBatch.PreliminaryQuantity = NewRow.PreliminaryQuantity;
+				
+		For Each Res In AmountResources() Do
+			NewRowReceivedBatch[Res] = NewRow[Res];
+		EndDo;
+		
+		NewRowReceivedBatch.QuantityBalance             = NewRow.Quantity;
+		NewRowReceivedBatch.PreliminaryQuantityBalance  = NewRow.PreliminaryQuantity;
+		
+		For Each Res In AmountResources() Do
+			NewRowReceivedBatch[Res + "Balance"] = NewRow[Res];
+		EndDo;
 	EndDo;
 
 	For Each Row In TableOfNewReceivedBatches Do
@@ -3664,27 +2898,20 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	DataForSalesBatches.Quantity AS Quantity,
 	|	DataForSalesBatches.InvoiceAmount AS InvoiceAmount,
 	|	DataForSalesBatches.InvoiceTaxAmount AS InvoiceTaxAmount,
-	|
 	|	DataForSalesBatches.IndirectCostAmount AS IndirectCostAmount,
 	|	DataForSalesBatches.IndirectCostTaxAmount AS IndirectCostTaxAmount,
-	|
 	|	DataForSalesBatches.ExtraCostAmountByRatio AS ExtraCostAmountByRatio,
 	|	DataForSalesBatches.ExtraCostTaxAmountByRatio AS ExtraCostTaxAmountByRatio,
-	|
 	|	DataForSalesBatches.ExtraDirectCostAmount AS ExtraDirectCostAmount,
 	|	DataForSalesBatches.ExtraDirectCostTaxAmount AS ExtraDirectCostTaxAmount,
-	|
 	|	DataForSalesBatches.AllocatedCostAmount AS AllocatedCostAmount,
 	|	DataForSalesBatches.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
-	|
 	|	DataForSalesBatches.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	DataForSalesBatches.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
-	|
 	|	DataForSalesBatches.PreliminaryQuantity AS PreliminaryQuantity,
 	|	DataForSalesBatches.PreliminaryAmount AS PreliminaryAmount,
 	|	DataForSalesBatches.PreliminaryTaxAmount AS PreliminaryTaxAmount,
 	|	DataForSalesBatches.IsPreliminary
-	|
 	|INTO DataForSalesBatches
 	|FROM
 	|	&DataForSalesBatches AS DataForSalesBatches
@@ -3699,30 +2926,27 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	R6050T_SalesBatchesTurnovers.QuantityTurnover AS Quantity,
 	|	R6050T_SalesBatchesTurnovers.InvoiceAmountTurnover AS InvoiceAmount,
 	|	R6050T_SalesBatchesTurnovers.InvoiceTaxAmountTurnover AS InvoiceTaxAmount,
-	|
 	|	R6050T_SalesBatchesTurnovers.IndirectCostAmountTurnover AS IndirectCostAmount,
 	|	R6050T_SalesBatchesTurnovers.IndirectCostTaxAmountTurnover AS IndirectCostTaxAmount,
-	|
 	|	R6050T_SalesBatchesTurnovers.ExtraCostAmountByRatioTurnover AS ExtraCostAmountByRatio,
 	|	R6050T_SalesBatchesTurnovers.ExtraCostTaxAmountByRatioTurnover AS ExtraCostTaxAmountByRatio,
-	|
 	|	R6050T_SalesBatchesTurnovers.ExtraDirectCostAmountTurnover AS ExtraDirectCostAmount,
 	|	R6050T_SalesBatchesTurnovers.ExtraDirectCostTaxAmountTurnover AS ExtraDirectCostTaxAmount,
-	|
 	|	R6050T_SalesBatchesTurnovers.AllocatedCostAmountTurnover AS AllocatedCostAmount,
 	|	R6050T_SalesBatchesTurnovers.AllocatedCostTaxAmountTurnover AS AllocatedCostTaxAmount,
-	|
 	|	R6050T_SalesBatchesTurnovers.AllocatedRevenueAmountTurnover AS AllocatedRevenueAmount,
 	|	R6050T_SalesBatchesTurnovers.AllocatedRevenueTaxAmountTurnover AS AllocatedRevenueTaxAmount,
-	|
 	|	R6050T_SalesBatchesTurnovers.PreliminaryQuantityTurnover AS PreliminaryQuantity,
 	|	R6050T_SalesBatchesTurnovers.PreliminaryAmountTurnover AS PreliminaryAmount,
 	|	R6050T_SalesBatchesTurnovers.PreliminaryTaxAmountTurnover AS PreliminaryTaxAmount,
-	| 	case when R6050T_SalesBatchesTurnovers.PreliminaryQuantityTurnover <> 0 then true else false end as IsPreliminary
-	|
+	|	CASE
+	|		WHEN R6050T_SalesBatchesTurnovers.PreliminaryQuantityTurnover <> 0
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS IsPreliminary
 	|INTO SalesBatches
 	|FROM
-	|	AccumulationRegister.R6050T_SalesBatches.Turnovers(, , Record, SalesInvoice = &SalesInvoice
+	|	AccumulationRegister.R6050T_SalesBatches.Turnovers(,, Record, SalesInvoice = &SalesInvoice
 	|	AND BatchKey.ItemKey = &BatchKey_ItemKey
 	|	AND BatchKey.SerialLotNumber = &BatchKey_SerialLotNumber
 	|	AND BatchKey.SourceOfOrigin = &BatchKey_SourceOfOrigin) AS R6050T_SalesBatchesTurnovers
@@ -3736,28 +2960,21 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	DataForSalesBatches.Quantity AS Quantity,
 	|	DataForSalesBatches.InvoiceAmount AS InvoiceAmount,
 	|	DataForSalesBatches.InvoiceTaxAmount AS InvoiceTaxAmount,
-	|
 	|	DataForSalesBatches.IndirectCostAmount AS IndirectCostAmount,
 	|	DataForSalesBatches.IndirectCostTaxAmount AS IndirectCostTaxAmount,
-	|
 	|	DataForSalesBatches.ExtraCostAmountByRatio AS ExtraCostAmountByRatio,
 	|	DataForSalesBatches.ExtraCostTaxAmountByRatio AS ExtraCostTaxAmountByRatio,
-	|
 	|	DataForSalesBatches.ExtraDirectCostAmount AS ExtraDirectCostAmount,
 	|	DataForSalesBatches.ExtraDirectCostTaxAmount AS ExtraDirectCostTaxAmount,
-	|
 	|	DataForSalesBatches.AllocatedCostAmount AS AllocatedCostAmount,
 	|	DataForSalesBatches.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
-	|
 	|	DataForSalesBatches.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	DataForSalesBatches.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
-	|
 	|	DataForSalesBatches.PreliminaryQuantity AS PreliminaryQuantity,
 	|	DataForSalesBatches.PreliminaryAmount AS PreliminaryAmount,
 	|	DataForSalesBatches.PreliminaryTaxAmount AS PreliminaryTaxAmount,
-	|
 	|	DataForSalesBatches.Date AS Date,
-	|   DataForSalesBatches.IsPreliminary
+	|	DataForSalesBatches.IsPreliminary
 	|INTO AllData
 	|FROM
 	|	DataForSalesBatches AS DataForSalesBatches
@@ -3776,28 +2993,21 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	SalesBatches.Quantity,
 	|	SalesBatches.InvoiceAmount,
 	|	SalesBatches.InvoiceTaxAmount,
-	|
 	|	SalesBatches.IndirectCostAmount,
 	|	SalesBatches.IndirectCostTaxAmount,
-	|
 	|	SalesBatches.ExtraCostAmountByRatio,
 	|	SalesBatches.ExtraCostTaxAmountByRatio,
-	|
 	|	SalesBatches.ExtraDirectCostAmount,
 	|	SalesBatches.ExtraDirectCostTaxAmount,
-	|
 	|	SalesBatches.AllocatedCostAmount,
 	|	SalesBatches.AllocatedCostTaxAmount,
-	|
 	|	SalesBatches.AllocatedRevenueAmount,
 	|	SalesBatches.AllocatedRevenueTaxAmount,
-	|
 	|	SalesBatches.PreliminaryQuantity,
 	|	SalesBatches.PreliminaryAmount,
 	|	SalesBatches.PreliminaryTaxAmount,
-	|
 	|	SalesBatches.Date,
-	|   SalesBatches.IsPreliminary
+	|	SalesBatches.IsPreliminary
 	|FROM
 	|	SalesBatches AS SalesBatches
 	|;
@@ -3810,30 +3020,23 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	SUM(AllData.Quantity) AS Quantity,
 	|	SUM(AllData.InvoiceAmount) AS InvoiceAmount,
 	|	SUM(AllData.InvoiceTaxAmount) AS InvoiceTaxAmount,
-	|
 	|	SUM(AllData.IndirectCostAmount) AS IndirectCostAmount,
 	|	SUM(AllData.IndirectCostTaxAmount) AS IndirectCostTaxAmount,
-	|
 	|	SUM(AllData.ExtraCostAmountByRatio) AS ExtraCostAmountByRatio,
 	|	SUM(AllData.ExtraCostTaxAmountByRatio) AS ExtraCostTaxAmountByRatio,
-	|
 	|	SUM(AllData.ExtraDirectCostAmount) AS ExtraDirectCostAmount,
 	|	SUM(AllData.ExtraDirectCostTaxAmount) AS ExtraDirectCostTaxAmount,
-	|
 	|	SUM(AllData.AllocatedCostAmount) AS AllocatedCostAmount,
 	|	SUM(AllData.AllocatedCostTaxAmount) AS AllocatedCostTaxAmount,
-	|
 	|	SUM(AllData.AllocatedRevenueAmount) AS AllocatedRevenueAmount,
 	|	SUM(AllData.AllocatedRevenueTaxAmount) AS AllocatedRevenueTaxAmount,
-	|
 	|	SUM(AllData.PreliminaryQuantity) AS PreliminaryQuantity,
 	|	SUM(AllData.PreliminaryAmount) AS PreliminaryAmount,
 	|	SUM(AllData.PreliminaryTaxAmount) AS PreliminaryTaxAmount,
-	|
 	|	AllData.Batch.Document AS Document,
 	|	AllData.Date AS Date,
 	|	AllData.Batch.Company AS Company,
-	|   AllData.IsPreliminary AS IsPreliminary
+	|	AllData.IsPreliminary AS IsPreliminary
 	|FROM
 	|	AllData AS AllData
 	|GROUP BY
@@ -3844,6 +3047,7 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	|	AllData.Date,
 	|	AllData.Batch.Company,
 	|	AllData.IsPreliminary
+	|
 	|ORDER BY
 	|	Date";
 	Query.SetParameter("SalesInvoice"             , SalesInvoice);

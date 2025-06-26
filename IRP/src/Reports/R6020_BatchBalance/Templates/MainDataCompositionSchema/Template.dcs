@@ -3436,12 +3436,15 @@ WHERE
 						<dcsset:field>Resources.OpeningBalance.InvoiceTaxAmountOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
 						<dcsset:field>Resources.OpeningBalance.PreliminaryQuantityOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
 						<dcsset:field>Resources.OpeningBalance.PreliminaryAmountOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
 						<dcsset:field>Resources.OpeningBalance.PreliminaryTaxAmountOpeningBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -3493,12 +3496,15 @@ WHERE
 						<dcsset:field>Resources.Receipt.InvoiceTaxAmountReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
 						<dcsset:field>Resources.Receipt.PreliminaryQuantityReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
 						<dcsset:field>Resources.Receipt.PreliminaryAmountReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
 						<dcsset:field>Resources.Receipt.PreliminaryTaxAmountReceipt</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -3550,12 +3556,15 @@ WHERE
 						<dcsset:field>Resources.Expense.InvoiceTaxAmountExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
 						<dcsset:field>Resources.Expense.PreliminaryQuantityExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
 						<dcsset:field>Resources.Expense.PreliminaryAmountExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
 						<dcsset:field>Resources.Expense.PreliminaryTaxAmountExpense</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -3607,12 +3616,15 @@ WHERE
 						<dcsset:field>Resources.ClosingBalance.InvoiceTaxAmountClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
 						<dcsset:field>Resources.ClosingBalance.PreliminaryQuantityClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
 						<dcsset:field>Resources.ClosingBalance.PreliminaryAmountClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
 						<dcsset:field>Resources.ClosingBalance.PreliminaryTaxAmountClosingBalance</dcsset:field>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">

@@ -28,7 +28,6 @@
   <content>AccumulationRegister.R6020B_BatchBalance.Resource.PreliminaryQuantity</content>
   <content>AccumulationRegister.R6020B_BatchBalance.Resource.PreliminaryAmount</content>
   <content>AccumulationRegister.R4050B_StockInventory.Resource.PreliminaryQuantity</content>
-  <content>InformationRegister.T6020S_BatchKeysInfo.Dimension.PreliminaryDocument</content>
   <content>AccumulationRegister.R6050T_SalesBatches.Resource.PreliminaryTaxAmount</content>
   <content>AccumulationRegister.R6050T_SalesBatches.Resource.PreliminaryQuantity</content>
   <content>InformationRegister.T6050S_ManualBundleAmountValues.Resource.PreliminaryAmount</content>

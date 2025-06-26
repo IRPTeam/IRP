@@ -83,7 +83,6 @@ Procedure SetVisibilityAvailability(Object, Form)
 	PartnerVisible = (Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer")
 		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase")
 		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReceiptFromConsignor")
-//		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.PreliminaryStock")
 		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromTradeAgent"));
 		
 	Form.Items.LegalName.Enabled = PartnerVisible And ValueIsFilled(Object.Partner);
@@ -118,36 +117,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	ClosedRowKeys = DocOrderClosingServer.GetIsClosedPurchaseOrderInItemList(ArrayOfOrders);
 	For Each Row In Form.Object.ItemList Do
 			Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
-	EndDo;
-	
-//	IsPriliminary = (Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.PreliminaryStock"));
-	
-//	PriliminaryFormItems = New Array();
-//	PriliminaryFormItems.Add("ItemListTotalTotalAmount");
-//	PriliminaryFormItems.Add("CurrencyTotalAmount");
-//	PriliminaryFormItems.Add("ItemListPriceType");
-//	PriliminaryFormItems.Add("ItemListPrice");
-//	PriliminaryFormItems.Add("ItemListDontCalculateRow");
-//	PriliminaryFormItems.Add("ItemListTotalAmount");
-//	PriliminaryFormItems.Add("Currency");
-//	PriliminaryFormItems.Add("PriceIncludeTax");
-//	PriliminaryFormItems.Add("Agreement");
-//	PriliminaryFormItems.Add("EditCurrencies");
-//	
-//	For Each ItemName In PriliminaryFormItems Do
-//		Form.Items[ItemName].Visible = IsPriliminary;
-//	EndDo;
-//	
-//	TaxsesFormItems = New Array();	
-//	TaxsesFormItems.Add("ItemListTaxAmount");
-//	TaxsesFormItems.Add("ItemListNetAmount");
-//	TaxsesFormItems.Add("ItemListTotalTaxAmount");
-//	TaxsesFormItems.Add("ItemListTotalNetAmount");
-//	TaxsesFormItems.Add("ItemListVATRate");
-//
-//	For Each ItemName In TaxsesFormItems Do
-//		Form.Items[ItemName].Visible = IsPriliminary And Form.IsTaxVsible;
-//	EndDo;
+	EndDo;	
 EndProcedure
 
 &AtClient
@@ -234,51 +204,14 @@ EndProcedure
 
 #EndRegion
 
-//#Region AGREEMENT
-//
-//&AtClient
-//Procedure AgreementOnChange(Item) Export
-//	DocGoodsReceiptClient.AgreementOnChange(Object, ThisObject, Item);
-//EndProcedure
-//
-//&AtClient
-//Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
-//	DocGoodsReceiptClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-//EndProcedure
-//
-//&AtClient
-//Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
-//	DocGoodsReceiptClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-//EndProcedure
-//
-//#EndRegion
-
 #Region _DATE
 
 &AtClient
 Procedure DateOnChange(Item)
-	DocGoodsReceiptClient.AgreementOnChange(Object, ThisObject, Item);
+	DocGoodsReceiptClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
-
-//#Region CURRENCY
-//
-//&AtClient
-//Procedure CurrencyOnChange(Item)
-//	DocGoodsReceiptClient.AgreementOnChange(Object, ThisObject, Item);
-//EndProcedure
-//
-//#EndRegion
-
-//#Region PRICE_INCLUDE_TAX
-//
-//&AtClient
-//Procedure PriceIncludeTaxOnChange(Item)
-//	DocGoodsReceiptClient.AgreementOnChange(Object, ThisObject, Item);
-//EndProcedure
-//
-//#EndRegion
 
 #Region STORE
 
@@ -395,69 +328,6 @@ Procedure ItemListStoreOnChange(Item)
 EndProcedure
 
 #EndRegion
-
-//#Region PRICE_TYPE
-//
-//&AtClient
-//Procedure ItemListPriceTypeOnChange(Item)
-//	DocGoodsReceiptClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
-//EndProcedure
-//
-//#EndRegion
-
-//#Region PRICE
-//
-//&AtClient
-//Procedure ItemListPriceOnChange(Item)
-//	DocGoodsReceiptClient.ItemListPriceOnChange(Object, ThisObject, Item);
-//EndProcedure
-//
-//#EndRegion
-
-//#Region VAT_RATE
-//
-//&AtClient
-//Procedure ItemListVatRateOnChange(Item) Export
-//	DocGoodsReceiptClient.ItemListVatRateOnChange(Object, ThisObject, Item);
-//EndProcedure
-//
-//#EndRegion
-
-//#Region DONT_CALCULATE_ROW
-//
-//&AtClient
-//Procedure ItemListDontCalculateRowOnChange(Item)
-//	DocGoodsReceiptClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
-//EndProcedure
-//
-//#EndRegion
-
-//#Region NET_AMOUNT
-//
-//&AtClient
-//Procedure ItemListNetAmountOnChange(Item)
-//	DocGoodsReceiptClient.ItemListNetAmountOnChange(Object, ThisObject, Item);
-//EndProcedure
-//
-//#EndRegion
-//
-//#Region TAX_AMOUNT
-//
-//&AtClient
-//Procedure ItemListTaxAmountOnChange(Item)
-//	DocGoodsReceiptClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
-//EndProcedure
-//
-//#EndRegion
-//
-//#Region TOTAL_AMOUNT
-//
-//&AtClient
-//Procedure ItemListTotalAmountOnChange(Item)
-//	DocGoodsReceiptClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
-//EndProcedure
-//
-//#EndRegion
 
 #Region SERIAL_LOT_NUMBERS
 
@@ -670,13 +540,6 @@ Procedure EditCurrencies(Command)
 	NotifyParameters.Insert("Form"  , ThisObject);
 	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
-
-//	FormParameters = CurrenciesClientServer.GetParameters_V3(Object);
-//	NotifyParameters = New Structure();
-//	NotifyParameters.Insert("Object", Object);
-//	NotifyParameters.Insert("Form"  , ThisObject);
-//	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
-//	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 #EndRegion

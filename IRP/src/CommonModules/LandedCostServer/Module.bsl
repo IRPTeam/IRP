@@ -910,7 +910,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	SUM(T6020S_BatchKeysInfo.PreliminaryTaxAmount) AS PreliminaryTaxAmount,
 	|	SUM(T6020S_BatchKeysInfo.PreliminaryQuantity) AS PreliminaryQuantity,
 	|	T6020S_BatchKeysInfo.IsPreliminary AS IsPreliminary,
-	|	T6020S_BatchKeysInfo.PreliminaryDocument AS PreliminaryDocument,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.ProductionCostsAllocation
 	|			THEN T6020S_BatchKeysInfo.ProductionDocument
@@ -944,35 +943,35 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	T6020S_BatchKeysInfo.SalesInvoice AS SalesInvoice,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
 	|			THEN T6020S_BatchKeysInfo.ProfitLossCenter
 	|		ELSE UNDEFINED
 	|	END AS ProfitLossCenter,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
 	|			THEN T6020S_BatchKeysInfo.ExpenseType
 	|		ELSE UNDEFINED
 	|	END AS ExpenseType,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
 	|			THEN T6020S_BatchKeysInfo.RowID
 	|		ELSE UNDEFINED
 	|	END AS RowID,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
 	|			THEN T6020S_BatchKeysInfo.Branch
 	|		ELSE UNDEFINED
 	|	END AS Branch,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
 	|			THEN T6020S_BatchKeysInfo.Currency
 	|		ELSE UNDEFINED
 	|	END AS Currency,
@@ -992,14 +991,12 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|WHERE
 	|	T6020S_BatchKeysInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
 	|	AND CASE
-	|			WHEN &FilterByCompany
-	|				THEN T6020S_BatchKeysInfo.Company = &Company
-	|			ELSE TRUE
-	|		END
-	|
+	|		WHEN &FilterByCompany
+	|			THEN T6020S_BatchKeysInfo.Company = &Company
+	|		ELSE TRUE
+	|	END
 	|GROUP BY
 	|	T6020S_BatchKeysInfo.IsPreliminary,
-	|	T6020S_BatchKeysInfo.PreliminaryDocument,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.ProductionCostsAllocation
 	|			THEN T6020S_BatchKeysInfo.ProductionDocument
@@ -1024,35 +1021,35 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	T6020S_BatchKeysInfo.SalesInvoice,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
 	|			THEN T6020S_BatchKeysInfo.ProfitLossCenter
 	|		ELSE UNDEFINED
 	|	END,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
 	|			THEN T6020S_BatchKeysInfo.ExpenseType
 	|		ELSE UNDEFINED
 	|	END,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
 	|			THEN T6020S_BatchKeysInfo.RowID
 	|		ELSE UNDEFINED
 	|	END,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
 	|			THEN T6020S_BatchKeysInfo.Branch
 	|		ELSE UNDEFINED
 	|	END,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
 	|			THEN T6020S_BatchKeysInfo.Currency
 	|		ELSE UNDEFINED
 	|	END,
@@ -1106,7 +1103,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		ON ReallocateDocuments.Ref = BatchKeyRegister.Document
 	|WHERE
 	|	BatchKeyRegister.Document IS NULL
-	|
 	|GROUP BY
 	|	ReallocateDocuments.Ref
 	|;
@@ -1130,7 +1126,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	SUM(T6020S_BatchKeysInfo.PreliminaryAmount) AS PreliminaryAmount,
 	|	SUM(T6020S_BatchKeysInfo.PreliminaryTaxAmount) AS PreliminaryTaxAmount,
 	|	T6020S_BatchKeysInfo.IsPreliminary AS IsPreliminary,
-	|	T6020S_BatchKeysInfo.PreliminaryDocument AS PreliminaryDocument,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.ProductionCostsAllocation
 	|			THEN T6020S_BatchKeysInfo.ProductionDocument
@@ -1164,35 +1159,35 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	T6020S_BatchKeysInfo.SalesInvoice AS SalesInvoice,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
 	|			THEN T6020S_BatchKeysInfo.ProfitLossCenter
 	|		ELSE UNDEFINED
 	|	END AS ProfitLossCenter,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
 	|			THEN T6020S_BatchKeysInfo.ExpenseType
 	|		ELSE UNDEFINED
 	|	END AS ExpenseType,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
 	|			THEN T6020S_BatchKeysInfo.RowID
 	|		ELSE UNDEFINED
 	|	END AS RowID,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
 	|			THEN T6020S_BatchKeysInfo.Branch
 	|		ELSE UNDEFINED
 	|	END AS Branch,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
 	|			THEN T6020S_BatchKeysInfo.Currency
 	|		ELSE UNDEFINED
 	|	END AS Currency,
@@ -1211,10 +1206,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	ReallocateDocumentOutPeriod AS ReallocateDocumentOutPeriod
 	|		INNER JOIN InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
 	|		ON ReallocateDocumentOutPeriod.Ref = T6020S_BatchKeysInfo.Recorder
-	|
 	|GROUP BY
 	|	T6020S_BatchKeysInfo.IsPreliminary,
-	|	T6020S_BatchKeysInfo.PreliminaryDocument,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.ProductionCostsAllocation
 	|			THEN T6020S_BatchKeysInfo.ProductionDocument
@@ -1239,35 +1232,35 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	T6020S_BatchKeysInfo.SalesInvoice,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
 	|			THEN T6020S_BatchKeysInfo.ProfitLossCenter
 	|		ELSE UNDEFINED
 	|	END,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
 	|			THEN T6020S_BatchKeysInfo.ExpenseType
 	|		ELSE UNDEFINED
 	|	END,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
 	|			THEN T6020S_BatchKeysInfo.RowID
 	|		ELSE UNDEFINED
 	|	END,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.CommissioningOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.ModernizationOfFixedAsset
 	|			THEN T6020S_BatchKeysInfo.Branch
 	|		ELSE UNDEFINED
 	|	END,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
-	|				OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
 	|			THEN T6020S_BatchKeysInfo.Currency
 	|		ELSE UNDEFINED
 	|	END,
@@ -1311,7 +1304,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegister.PreliminaryTaxAmount AS PreliminaryTaxAmount,
 	|	BatchKeysRegister.PreliminaryQuantity AS PreliminaryQuantity,
 	|	BatchKeysRegister.IsPreliminary AS IsPreliminary,
-	|	BatchKeysRegister.PreliminaryDocument AS PreliminaryDocument,
 	|	BatchKeysRegister.Document AS Document,
 	|	BatchKeysRegister.PointInTime AS PointInTime,
 	|	BatchKeysRegister.Date AS Date,
@@ -1354,7 +1346,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegisterOutPeriod.PreliminaryTaxAmount,
 	|	BatchKeysRegisterOutPeriod.PreliminaryQuantity,
 	|	BatchKeysRegisterOutPeriod.IsPreliminary,
-	|	BatchKeysRegisterOutPeriod.PreliminaryDocument,
 	|	BatchKeysRegisterOutPeriod.Document,
 	|	BatchKeysRegisterOutPeriod.PointInTime,
 	|	BatchKeysRegisterOutPeriod.Date,
@@ -1397,7 +1388,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	SUM(BatchKeysInfo.PreliminaryTaxAmount) AS PreliminaryTaxAmount,
 	|	SUM(BatchKeysInfo.PreliminaryQuantity) AS PreliminaryQuantity,
 	|	BatchKeysInfo.IsPreliminary AS IsPreliminary,
-	|	BatchKeysInfo.PreliminaryDocument AS PreliminaryDocument,
 	|	BatchKeysInfo.Document AS Document,
 	|	BatchKeysInfo.PointInTime AS PointInTime,
 	|	BatchKeysInfo.Date AS Date,
@@ -1416,15 +1406,13 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
 	|		INNER JOIN Catalog.BatchKeys AS BatchKeys
-	|		ON (BatchKeys.ItemKey = BatchKeysInfo.ItemKey)
-	|			AND (BatchKeys.Store = BatchKeysInfo.Store)
-	|			AND (BatchKeys.SerialLotNumber = BatchKeysInfo.SerialLotNumber)
-	|			AND (BatchKeys.SourceOfOrigin = BatchKeysInfo.SourceOfOrigin)
-	|			AND (NOT BatchKeys.DeletionMark)
-	|
+	|		ON BatchKeys.ItemKey = BatchKeysInfo.ItemKey
+	|		AND BatchKeys.Store = BatchKeysInfo.Store
+	|		AND BatchKeys.SerialLotNumber = BatchKeysInfo.SerialLotNumber
+	|		AND BatchKeys.SourceOfOrigin = BatchKeysInfo.SourceOfOrigin
+	|		AND NOT BatchKeys.DeletionMark
 	|GROUP BY
 	|	BatchKeysInfo.IsPreliminary,
-	|	BatchKeysInfo.PreliminaryDocument,
 	|	BatchKeys.Ref,
 	|	BatchKeysInfo.Document,
 	|	BatchKeysInfo.Date,
@@ -1471,97 +1459,82 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	ISNULL(Batches.Ref, VALUE(Catalog.Batches.EmptyRef)) AS Batch,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.Quantity
 	|	END AS QuantityBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.InvoiceAmount
 	|	END AS InvoiceAmountBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.InvoiceTaxAmount
 	|	END AS InvoiceTaxAmountBalance,
+	|	BatchKeys.PreliminaryQuantity AS PreliminaryQuantityBalance,
+	|	BatchKeys.PreliminaryAmount AS PreliminaryAmountBalance,
+	|	BatchKeys.PreliminaryTaxAmount AS PreliminaryTaxAmountBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.PreliminaryDocument.Date IS NULL
-	|			THEN 0
-	|		ELSE BatchKeys.PreliminaryQuantity
-	|	END AS PreliminaryQuantityBalance,
-	|	CASE
-	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.PreliminaryDocument.Date IS NULL
-	|			THEN 0
-	|		ELSE BatchKeys.PreliminaryAmount
-	|	END AS PreliminaryAmountBalance,
-	|	CASE
-	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.PreliminaryDocument.Date IS NULL
-	|			THEN 0
-	|		ELSE BatchKeys.PreliminaryTaxAmount
-	|	END AS PreliminaryTaxAmountBalance,
-	|	CASE
-	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.ExtraCostAmountByRatio
 	|	END AS ExtraCostAmountByRatioBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.ExtraCostTaxAmountByRatio
 	|	END AS ExtraCostTaxAmountByRatioBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.ExtraDirectCostAmount
 	|	END AS ExtraDirectCostAmountBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.ExtraDirectCostTaxAmount
 	|	END AS ExtraDirectCostTaxAmountBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.IndirectCostAmount
 	|	END AS IndirectCostAmountBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.IndirectCostTaxAmount
 	|	END AS IndirectCostTaxAmountBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.AllocatedCostAmount
 	|	END AS AllocatedCostAmountBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.AllocatedCostTaxAmount
 	|	END AS AllocatedCostTaxAmountBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.AllocatedRevenueAmount
 	|	END AS AllocatedRevenueAmountBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
-	|				OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.AllocatedRevenueTaxAmount
 	|	END AS AllocatedRevenueTaxAmountBalance,
@@ -1573,16 +1546,15 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeys.Branch AS Branch,
 	|	BatchKeys.Currency AS Currency,
 	|	BatchKeys.ItemLinkID AS ItemLinkID,
-	|	BatchKeys.FixedAsset AS FixedAsset,
-	|	BatchKeys.PreliminaryDocument AS PreliminaryDocument
+	|	BatchKeys.FixedAsset AS FixedAsset
 	|INTO AllData
 	|FROM
 	|	BatchKeys AS BatchKeys
 	|		LEFT JOIN Catalog.Batches AS Batches
-	|		ON (Batches.Document = BatchKeys.Document)
-	|			AND (Batches.Company = BatchKeys.Company)
-	|			AND (Batches.Date = BatchKeys.Date)
-	|			AND (NOT Batches.DeletionMark)
+	|		ON Batches.Document = BatchKeys.Document
+	|		AND Batches.Company = BatchKeys.Company
+	|		AND Batches.Date = BatchKeys.Date
+	|		AND NOT Batches.DeletionMark
 	|
 	|UNION ALL
 	|
@@ -1619,6 +1591,9 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	R6010B_BatchWiseBalance.QuantityBalance,
 	|	R6010B_BatchWiseBalance.InvoiceAmountBalance,
 	|	R6010B_BatchWiseBalance.InvoiceTaxAmountBalance,
+	|	R6010B_BatchWiseBalance.PreliminaryQuantityBalance,
+	|	R6010B_BatchWiseBalance.PreliminaryAmountBalance,
+	|	R6010B_BatchWiseBalance.PreliminaryTaxAmountBalance,
 	|	R6010B_BatchWiseBalance.ExtraCostAmountByRatioBalance,
 	|	R6010B_BatchWiseBalance.ExtraCostTaxAmountByRatioBalance,
 	|	R6010B_BatchWiseBalance.ExtraDirectCostAmountBalance,
@@ -1629,10 +1604,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	R6010B_BatchWiseBalance.AllocatedCostTaxAmountBalance,
 	|	R6010B_BatchWiseBalance.AllocatedRevenueAmountBalance,
 	|	R6010B_BatchWiseBalance.AllocatedRevenueTaxAmountBalance,
-	|	R6010B_BatchWiseBalance.PreliminaryQuantityBalance,
-	|	R6010B_BatchWiseBalance.PreliminaryAmountBalance,
-	|	R6010B_BatchWiseBalance.PreliminaryTaxAmountBalance,
-	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED,
@@ -1642,15 +1613,14 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED
+//	|	UNDEFINED
 	|FROM
-	|	AccumulationRegister.R6010B_BatchWiseBalance.Balance(
-	|			ENDOFPERIOD(&EndPeriod, DAY),
-	|			(BatchKey, Batch.Company) IN
-	|				(SELECT
-	|					BatchKeys.BatchKey,
-	|					BatchKeys.Company
-	|				FROM
-	|					BatchKeys AS BatchKeys)) AS R6010B_BatchWiseBalance
+	|	AccumulationRegister.R6010B_BatchWiseBalance.Balance(ENDOFPERIOD(&EndPeriod, DAY), (BatchKey, Batch.Company) IN
+	|		(SELECT
+	|			BatchKeys.BatchKey,
+	|			BatchKeys.Company
+	|		FROM
+	|			BatchKeys AS BatchKeys)) AS R6010B_BatchWiseBalance
 	|;
 	|
 	////////////////////////////////////////////////////////////////////////////////
@@ -1696,7 +1666,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	SUM(AllData.PreliminaryAmountBalance) AS PreliminaryAmountBalance,
 	|	SUM(AllData.PreliminaryTaxAmountBalance) AS PreliminaryTaxAmountBalance,
 	|	AllData.IsPreliminary AS IsPreliminary,
-	|	AllData.PreliminaryDocument AS PreliminaryDocument,
 	|	AllData.BatchDocument AS BatchDocument,
 	|	AllData.SalesInvoice AS SalesInvoice,
 	|	AllData.ProfitLossCenter AS ProfitLossCenter,
@@ -1709,7 +1678,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|INTO AllDataGrouped
 	|FROM
 	|	AllData AS AllData
-	|
 	|GROUP BY
 	|	AllData.IsOpeningBalance,
 	|	AllData.BatchKey,
@@ -1721,7 +1689,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.Batch,
 	|	AllData.BatchDocument,
 	|	AllData.IsPreliminary,
-	|	AllData.PreliminaryDocument,
 	|	AllData.SalesInvoice,
 	|	AllData.ProfitLossCenter,
 	|	AllData.ExpenseType,
@@ -1774,7 +1741,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.PreliminaryAmountBalance AS PreliminaryAmountBalance,
 	|	AllDataGrouped.PreliminaryTaxAmountBalance AS PreliminaryTaxAmountBalance,
 	|	AllDataGrouped.IsPreliminary AS IsPreliminary,
-	|	AllDataGrouped.PreliminaryDocument AS PreliminaryDocument,
 	|	AllDataGrouped.BatchDocument AS BatchDocument,
 	|	AllDataGrouped.SalesInvoice AS SalesInvoice,
 	|	AllDataGrouped.ProfitLossCenter AS ProfitLossCenter,
@@ -1791,7 +1757,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|
 	|ORDER BY
 	|	AllDataGrouped.PointInTime
-	|TOTALS BY
+	|TOTALS
+	|BY
 	|	Document";
 
 	Query.SetParameter("FilterByCompany"           , ValueIsFilled(CalculationSettings.Company));
@@ -2045,29 +2012,59 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			FIlter.Insert("Direction", Enums.BatchDirection.Receipt);
 
 			FilteredRows = Tree.Rows.FindRows(Filter, True);
-						
-			For Each Row_Batch In FilteredRows Do
-
-				If Row_Batch.Date > Row.Date Then
+			
+			TableOrdering = New ValueTable();
+			TableOrdering.Columns.Add("BatchDate");
+			TableOrdering.Columns.Add("IsPreliminary");
+			TableOrdering.Columns.Add("TreeRow");
+			// for debugging
+			TableOrdering.Columns.Add("Quantity");
+			TableOrdering.Columns.Add("QuantityBalance");			
+			TableOrdering.Columns.Add("PreliminaryQuantity");
+			TableOrdering.Columns.Add("PreliminaryQuantityBalance");
+			
+			For Each FilteredRow In FilteredRows Do
+				If FilteredRow.Date > Row.Date Then
 					Break;
 				EndIf;
 
-				If Row_Batch.QuantityBalance = 0 And Row_Batch.PreliminaryQuantityBalance = 0 Then
+				If FilteredRow.QuantityBalance = 0 And FilteredRow.PreliminaryQuantityBalance = 0 Then
 					Continue;
 				EndIf;
+				
+				If FilteredRow.Company <> Row.Company Then
+					Continue;
+				EndIf;
+
+				If Not ValueIsFilled(FilteredRow.Batch) Then
+					Continue;
+				EndIf;
+				
+				NewRow = TableOrdering.Add();
+				NewRow.BatchDate     = FilteredRow.Date;
+				NewRow.IsPreliminary = FilteredRow.IsPreliminary;
+				NewRow.TreeRow       = FilteredRow;
+				// for debugging
+				NewRow.Quantity                   = FilteredRow.Quantity;
+				NewRow.QuantityBalance            = FilteredRow.QuantityBalance;
+				NewRow.PreliminaryQuantity        = FilteredRow.PreliminaryQuantity;
+				NewRow.PreliminaryQuantityBalance = FilteredRow.PreliminaryQuantityBalance;
+			EndDo;
+			// inventory stock quantity first
+			TableOrdering.Sort("IsPreliminary, BatchDate");
+			
+			FilteredRows.Clear();
+			
+			For Each RowOrdering In TableOrdering Do
+				FilteredRows.Add(RowOrdering.TreeRow);
+			EndDo;
+					
+			For Each Row_Batch In FilteredRows Do
 								
 				If NeedExpense = 0 Then
 					Continue;
 				EndIf;
 
-				If Row_Batch.Company <> Row.Company Then
-					Continue;
-				EndIf;
-
-				If Not ValueIsFilled(Row_Batch.Batch) Then
-					Continue;
-				EndIf;
-				
 				BatchQuantityResourceName = "Quantity";
 				BatchQuantityResourceNameBalance = "QuantityBalance";
 				If Row_Batch.IsPreliminary Then
@@ -2188,18 +2185,21 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	TableOfNewReceivedBatches.Columns.Add("Direction");
 	TableOfNewReceivedBatches.Columns.Add("ReturnRow");
 	
-	TableOfNewReceivedBatches.Columns.Add("Quantity");
-	TableOfNewReceivedBatches.Columns.Add("PreliminaryQuantity");
+	TypeQuantity = Metadata.DefinedTypes.typeQuantity.Type;
+	TypeAmount = Metadata.DefinedTypes.typeAmount.Type;
+	
+	TableOfNewReceivedBatches.Columns.Add("Quantity", TypeQuantity);
+	TableOfNewReceivedBatches.Columns.Add("PreliminaryQuantity", TypeQuantity);
 	
 	For Each Res In AmountResources() Do
-		TableOfNewReceivedBatches.Columns.Add(Res);
+		TableOfNewReceivedBatches.Columns.Add(Res, TypeAmount);
 	EndDo;
 			
-	TableOfNewReceivedBatches.Columns.Add("QuantityBalance");
-	TableOfNewReceivedBatches.Columns.Add("PreliminaryQuantityBalance");
+	TableOfNewReceivedBatches.Columns.Add("QuantityBalance", TypeQuantity);
+	TableOfNewReceivedBatches.Columns.Add("PreliminaryQuantityBalance", TypeQuantity);
 	
 	For Each Res In AmountResources() Do
-		TableOfNewReceivedBatches.Columns.Add(Res + "Balance");
+		TableOfNewReceivedBatches.Columns.Add(Res + "Balance", TypeAmount);
 	EndDo;
 		
 	If IsTransferDocument(Document) Or IsShipmentToTradeAgent(Document) Then

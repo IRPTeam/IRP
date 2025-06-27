@@ -867,19 +867,34 @@ Function GetBatchWiseBalance(CalculationSettings)
 	tmp_manager = New TempTablesManager();
 	Tree = GetBatchTree(tmp_manager, CalculationSettings);
 	
+	//
+	TableOfTransferedPreliminary = EmptyTable_BatchWiseBalance.CopyColumns();
+	For Each Res In AmountResources() Do
+		TableOfTransferedPreliminary.Columns.Add(Res + "Balance", Metadata.DefinedTypes.typeQuantity.Type);
+	EndDo;
+	
 	For Each Row In Tree.Rows Do
-		CalculateBatch(Row.Document, Row.Rows, Tables, Tree, TableOfReturnedBatches, EmptyTable_BatchWiseBalance, CalculationSettings);
+		CalculateBatch(Row.Document, Row.Rows, Tables, Tree, TableOfReturnedBatches, TableOfTransferedPreliminary, EmptyTable_BatchWiseBalance, CalculationSettings);
 		If TableOfReturnedBatches.Count() Then
 			For Each RowReturnedBatches In TableOfReturnedBatches Do  
 				If RowReturnedBatches.AlreadyReceived = True Then
 					Continue;
 				EndIf;
 				ArrayOfTreeRows = Tree.Rows.FindRows(New Structure("Document", RowReturnedBatches.Document));
-                                If Not ArrayOfTreeRows.Count() Then
-                                        Raise R().BatchForSalesReturnNotFound;
-                                EndIf;
+                If Not ArrayOfTreeRows.Count() Then
+                	Raise R().BatchForSalesReturnNotFound;
+                EndIf;
 				For Each ItemOfTreeRows In ArrayOfTreeRows Do
 					FillPropertyValues(ItemOfTreeRows.Rows.Add(), RowReturnedBatches);
+				EndDo;
+			EndDo;
+			Row.Rows.Sort("Date");
+		EndIf;
+		If TableOfTransferedPreliminary.Count() Then
+			For Each __Row In TableOfTransferedPreliminary Do  
+				ArrayOfTreeRows = Tree.Rows.FindRows(New Structure("Document", __Row.Document));
+				For Each ItemOfTreeRows In ArrayOfTreeRows Do
+					FillPropertyValues(ItemOfTreeRows.Rows.Add(), __Row);
 				EndDo;
 			EndDo;
 			Row.Rows.Sort("Date");
@@ -1844,8 +1859,9 @@ Function GetSalesBatchDocument(ArrayOfReturnedSalesInvoices)
 	Return TableOfReturnedBatches
 EndFunction
 
-Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, EmptyTable_BatchWiseBalance, CalculationSettings)
+Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, TableOfTransferedPreliminary, EmptyTable_BatchWiseBalance, CalculationSettings)
 	TableOfReturnedBatches.Clear();
+	TableOfTransferedPreliminary.Clear();
 
 	DataForExpense = EmptyTable_BatchWiseBalance.CopyColumns();
 	DataForExpense.Columns.Add("ItemLinkID");
@@ -2035,19 +2051,28 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 								FillPropertyValues(DataForExpense.Add(), NewRow);
 								
 							// receive inventory batch
-//								NewRow = Tables.DataForReceipt.Add();
-//								NewRow.BatchKey  = Row_Batch.BatchKey;
-//								NewRow.Document  = Row.Document;
-//								NewRow.Company   = Row.Company;
-//								NewRow.Period    = Row.Date;
-//								NewRow.Batch     = Row_Batch.Batch;
-//								NewRow.IsPreliminary = Row.IsPreliminary;
-//								
-//								For Each Res In AmountResources() Do
-//									NewRow[Res] = ExpenseAmounts[Res];
-//								EndDo;
-//							
+								NewRow = Tables.DataForReceipt.Add();
+								NewRow.BatchKey  = Row_Batch.BatchKey;
+								NewRow.Document  = Row.Document;
+								NewRow.Company   = Row.Company;
+								NewRow.Period    = Row.Date;
+								NewRow.Batch     = Row_Batch.Batch;
+								NewRow.IsPreliminary = Row.IsPreliminary;
+								
+								Row.QuantityBalance = ExpenseQuantity;
+						
+								For Each Res In AmountResources() Do
+									Row[Res + "Balance"] = Row[Res + "Balance"] - ExpenseAmounts[Res];
+								EndDo;
+								
+								NewRow.Quantity = ExpenseQuantity;
+								
+								For Each Res In AmountResources() Do
+									NewRow[Res] = ExpenseAmounts[Res];
+								EndDo;
+								
 //								FillPropertyValues(DataForReceipt.Add(), NewRow);
+								FillPropertyValues(TableOfTransferedPreliminary.Add(), NewRow);
 							
 							EndIf;
 												

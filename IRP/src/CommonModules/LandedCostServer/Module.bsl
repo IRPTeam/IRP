@@ -495,6 +495,15 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSetR6010B = AccumulationRegisters.R6010B_BatchWiseBalance.CreateRecordSet();
 	RecordSetR6010B.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 
+	AmountResourceNames = StrConcat(AmountResources(), ",");
+	QuantityResourceNames = "Quantity, PreliminaryQuantity";
+
+	BatchWiseBalanceTables.DataForReceipt.GroupBy("Batch, BatchKey, Company, Document, Period",
+		AmountResourceNames +","+ QuantityResourceNames);
+
+	BatchWiseBalanceTables.DataForExpense.GroupBy("Batch, BatchKey, Company, Document, Period",
+		AmountResourceNames +","+ QuantityResourceNames);
+
 	// Batch wise balance
 	For Each Row In BatchWiseBalanceTables.DataForReceipt Do
 		NewRecordReceipt = RecordSetR6010B.Add();
@@ -551,9 +560,6 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	EndDo;
 
 	RecordSetR6050T.Write();
-	
-	AmountResourceNames = StrConcat(AmountResources(), ",");
-	QuantityResourceNames = "Quantity, PreliminaryQuantity";
 	
 	// Bundle amount values
 	RecordSetT6040S = InformationRegisters.T6040S_BundleAmountValues.CreateRecordSet();

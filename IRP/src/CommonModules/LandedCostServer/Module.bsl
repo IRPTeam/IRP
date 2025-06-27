@@ -1931,13 +1931,23 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				For Each __Row1 In TablePreliminaryDocuments Do
 					For Each __Row2 In TablePreliminaryBatchKeys Do
 				//------------------------------------------------------------------------------------------------------
-				
-					Filter = New Structure();
-					FIlter.Insert("Document", __Row1.PreliminaryDocument);
-					Filter.Insert("BatchKey", __Row2.BatchKey);
-					FIlter.Insert("Direction", Enums.BatchDirection.Receipt);
 					
-					FilteredRows = Tree.Rows.FindRows(Filter, True);
+					FilteredRows = New Array();
+					For Each __Row3 In Tree.Rows Do
+						For Each __Row4 In __Row3.Rows Do
+							If __Row4.Batch.Document = __Row1.PreliminaryDocument
+								And __Row4.BatchKey = __Row2.BatchKey Then
+								FilteredRows.Add(__Row4);
+							EndIf;
+						EndDo;
+					EndDo;
+					
+//					Filter = New Structure();
+//					FIlter.Insert("Document", __Row1.PreliminaryDocument);
+//					Filter.Insert("BatchKey", __Row2.BatchKey);
+//					FIlter.Insert("Direction", Enums.BatchDirection.Receipt);
+					
+//					FilteredRows = Tree.Rows.FindRows(Filter, True);
 					
 					For Each Row_Batch In FilteredRows Do
 									
@@ -1980,7 +1990,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 						If ExpenseQuantity <> 0 Or ExpenseAmounts.PreliminaryAmount Then
 							// expense for preliminary batch
 							NewRow = Tables.DataForExpense.Add();
-							NewRow.BatchKey  = __Row2.BatchKey;
+							NewRow.BatchKey  = Row_Batch.BatchKey;
 							NewRow.Document  = Row.Document;
 							NewRow.Company   = Row.Company;
 							NewRow.Period    = Row.Date;
@@ -1992,12 +2002,57 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 							For Each Res In AmountResources() Do
 								NewRow[Res] = ExpenseAmounts[Res];
 							EndDo;
-									
-							NewRow_DataForExpense = DataForExpense.Add();
-							FillPropertyValues(NewRow_DataForExpense, NewRow);
-	//						NewRow_DataForExpense.ItemLinkID = Row.ItemLinkID;						
+							
+							FillPropertyValues(DataForExpense.Add(), NewRow);
+	
+							If Row_Batch.BatchKey <> Row.BatchKey Then 
+							// expense inventory batch
+								NewRow = Tables.DataForExpense.Add();
+								NewRow.BatchKey  = Row.BatchKey;
+								NewRow.Document  = Row.Document;
+								NewRow.Company   = Row.Company;
+								NewRow.Period    = Row.Date;
+								NewRow.Batch     = Row.Batch;
+								NewRow.IsPreliminary = Row.IsPreliminary;
+																		
+								ExpenseAmounts = New Structure();
+								For Each Res In AmountResources() Do
+									ExpenseAmounts.Insert(Res, CalculateExpenseAmount(ExpenseQuantity, Row, "QuantityBalance", Res + "Balance"));
+								EndDo;
+						
+								Row.QuantityBalance = Row.QuantityBalance - ExpenseQuantity;
+						
+								For Each Res In AmountResources() Do
+									Row[Res + "Balance"] = Row[Res + "Balance"] - ExpenseAmounts[Res];
+								EndDo;
+								
+								NewRow.Quantity = ExpenseQuantity;
+								
+								For Each Res In AmountResources() Do
+									NewRow[Res] = ExpenseAmounts[Res];
+								EndDo;
+							
+								FillPropertyValues(DataForExpense.Add(), NewRow);
+								
+							// receive inventory batch
+//								NewRow = Tables.DataForReceipt.Add();
+//								NewRow.BatchKey  = Row_Batch.BatchKey;
+//								NewRow.Document  = Row.Document;
+//								NewRow.Company   = Row.Company;
+//								NewRow.Period    = Row.Date;
+//								NewRow.Batch     = Row_Batch.Batch;
+//								NewRow.IsPreliminary = Row.IsPreliminary;
+//								
+//								For Each Res In AmountResources() Do
+//									NewRow[Res] = ExpenseAmounts[Res];
+//								EndDo;
+//							
+//								FillPropertyValues(DataForReceipt.Add(), NewRow);
+							
+							EndIf;
+												
 						EndIf;
-
+						
 					EndDo; // Filtered rows
 				EndDo; // preliminary batch keys
 			EndDo; // preliminary documants
@@ -2306,7 +2361,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 		RemoveFullyExpensedRows(Rows);
 		
 	ElsIf TypeOf(Document) = Type("DocumentRef.BatchReallocateIncoming") Then
-
+	//==========================================================================
 		For Each Row_Receipt In DataForReceipt Do
 			NewRow = Tables.DataForReceipt.Add();
 			FillPropertyValues(NewRow, Row_Receipt);
@@ -2317,7 +2372,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			Filter.Insert("OutgoingDocument", Document.Outgoing);
 			
 			FilteredRows = Tables.DataForReallocatedBatchesAmountValues.FindRows(Filter);
-			
+				
 			ReallocatedAmounts = New Structure();
 			For Each Res In AmountResources() Do
 				ReallocatedAmounts.Insert(Res, 0);
@@ -2325,59 +2380,44 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			
 			ReallocatedQuantity  = 0;
 			ReallocatedPreliminaryQuantity  = 0;
-			
+	
 			If FilteredRows.Count() Then
 				For Each FilteredRow In FilteredRows Do
 					For Each Res In AmountResources() Do
 						ReallocatedAmounts[Res] = ReallocatedAmounts[Res] + FilteredRow[Res];
 					EndDo;
-										
-					ReallocatedQuantity  = ReallocatedQuantity  + FilteredRow.Quantity;
-					ReallocatedPreliminaryQuantity  = ReallocatedPreliminaryQuantity  + FilteredRow.PreliminaryQuantity;
+					
+					ReallocatedQuantity = ReallocatedQuantity + FilteredRow.Quantity;
+					ReallocatedPreliminaryQuantity = ReallocatedPreliminaryQuantity + FilteredRow.PreliminaryQuantity;	
 				EndDo;
 			Else
 				QuerySelection = GetReallocatedBatchesAmount(Filter);
 				If QuerySelection.Next() Then
 					For Each Res In AmountResources() Do
-						ReallocatedAmounts[Res] = QuerySelection[Res];
-					EndDo;
-					
-					ReallocatedQuantity  = QuerySelection.Quantity;
-					ReallocatedPreliminaryQuantity  = QuerySelection.PreliminaryQuantity;
-				EndIf;
-			EndIf;
-			
-			// inventory quantity
-			If NewRow.Quantity = ReallocatedQuantity Then
-				For Each Res In AmountResources() Do
-					NewRow[Res] = ReallocatedAmounts[Res];
-				EndDo;				
-			Else
-				If ReallocatedQuantity <> 0 Then
-					For Each Res In AmountResources() Do
-						NewRow[Res] = NewRow.Quantity * (ReallocatedAmounts[Res] / ReallocatedQuantity);
+						ReallocatedAmounts[Res] = ReallocatedAmounts[Res] + QuerySelection[Res];
 					EndDo;					
-				Else
-					For Each Res In AmountResources() Do
-						NewRow[Res] = 0;
-					EndDo;					
+					ReallocatedQuantity = ReallocatedQuantity + QuerySelection.Quantity;
+					ReallocatedPreliminaryQuantity = ReallocatedPreliminaryQuantity + QuerySelection.PreliminaryQuantity;
 				EndIf;
 			EndIf;
 
-			// preliminary quantity
-			If NewRow.PreliminaryQuantity = ReallocatedQuantity Then
+			If NewRow.Quantity = ReallocatedQuantity Then
 				For Each Res In AmountResources() Do
 					NewRow[Res] = ReallocatedAmounts[Res];
-				EndDo;				
+				EndDo;					
 			Else
 				If ReallocatedQuantity <> 0 Then
 					For Each Res In AmountResources() Do
-						NewRow[Res] = NewRow.PreliminaryQuantity * (ReallocatedAmounts[Res] / ReallocatedQuantity);
+						If StrStartsWith(Res, "Preliminary") Then
+							NewRow[Res] = NewRow.PreliminaryQuantity * (ReallocatedAmounts[Res] / ReallocatedPreliminaryQuantity);
+						Else							
+							NewRow[Res] = NewRow.Quantity * (ReallocatedAmounts[Res] / ReallocatedQuantity);
+						EndIf;
 					EndDo;
 				Else
 					For Each Res In AmountResources() Do
 						NewRow[Res] = 0;
-					EndDo;
+					EndDo;				
 				EndIf;
 			EndIf;
 
@@ -2386,26 +2426,23 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			NewRowReceivedBatch.BatchKey         = NewRow.BatchKey;
 			NewRowReceivedBatch.Document         = NewRow.Document;
 			NewRowReceivedBatch.Company          = NewRow.Company;
-			NewRowReceivedBatch.Date             = NewRow.Period;
+			NewRowReceivedBatch.Date             = NewRow.Period; 			
 			NewRowReceivedBatch.IsPreliminary    = NewRow.IsPreliminary;
 			NewRowReceivedBatch.IsOpeningBalance = False;
 			NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
 			
-			NewRowReceivedBatch.Quantity            = NewRow.Quantity;
+			NewRowReceivedBatch.Quantity         = NewRow.Quantity;
+			NewRowReceivedBatch.QuantityBalance  = NewRow.Quantity;	
+			
 			NewRowReceivedBatch.PreliminaryQuantity = NewRow.PreliminaryQuantity;
+			NewRowReceivedBatch.PreliminaryQuantityBalance = NewRow.PreliminaryQuantity;
 			
 			For Each Res In AmountResources() Do
 				NewRowReceivedBatch[Res] = NewRow[Res];
-			EndDo;
-				
-			NewRowReceivedBatch.QuantityBalance  = NewRow.Quantity;
-			NewRowReceivedBatch.PreliminaryQuantityBalance  = NewRow.PreliminaryQuantity;
-			
-			For Each Res In AmountResources() Do
 				NewRowReceivedBatch[Res + "Balance"] = NewRow[Res];
-			EndDo;				
+			EndDo;
 		EndDo;
-
+	//=================================================================================
 		For Each Row In TableOfNewReceivedBatches Do
 			FillPropertyValues(Rows.Add(), Row);
 		EndDo;

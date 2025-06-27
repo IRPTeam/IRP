@@ -961,6 +961,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			THEN T6020S_BatchKeysInfo.RowID
 	|		ELSE UNDEFINED
 	|	END AS RowID,
+	|
+	|	case when T6020S_BatchKeysInfo.Recorder REFS Document.GoodsReceipt
+	|		or T6020S_BatchKeysInfo.Recorder REFS Document.PurchaseInvoice then T6020S_BatchKeysInfo.RowID
+	|		else undefined end as PreliminaryID,
+	|
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
@@ -996,6 +1001,12 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		ELSE TRUE
 	|	END
 	|GROUP BY
+	|
+	|	case when T6020S_BatchKeysInfo.Recorder REFS Document.GoodsReceipt
+	|		or T6020S_BatchKeysInfo.Recorder REFS Document.PurchaseInvoice then T6020S_BatchKeysInfo.RowID
+	|		else undefined end,
+
+	|
 	|	T6020S_BatchKeysInfo.IsPreliminary,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.ProductionCostsAllocation
@@ -1177,6 +1188,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			THEN T6020S_BatchKeysInfo.RowID
 	|		ELSE UNDEFINED
 	|	END AS RowID,
+	|
+	|case when T6020S_BatchKeysInfo.Recorder REFS Document.GoodsReceipt or T6020S_BatchKeysInfo.Recorder REFS Document.PurchaseInvoice then
+	|T6020S_BatchKeysInfo.RowID else undefined end as PreliminaryID,
+	|
+	|
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder REFS Document.WorkSheet
@@ -1207,6 +1223,10 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		INNER JOIN InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
 	|		ON ReallocateDocumentOutPeriod.Ref = T6020S_BatchKeysInfo.Recorder
 	|GROUP BY
+	|
+	|	case when T6020S_BatchKeysInfo.Recorder REFS Document.GoodsReceipt or T6020S_BatchKeysInfo.Recorder REFS Document.PurchaseInvoice then
+	|T6020S_BatchKeysInfo.RowID else undefined end,
+	|
 	|	T6020S_BatchKeysInfo.IsPreliminary,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.Recorder REFS Document.ProductionCostsAllocation
@@ -1314,6 +1334,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegister.ProfitLossCenter AS ProfitLossCenter,
 	|	BatchKeysRegister.ExpenseType AS ExpenseType,
 	|	BatchKeysRegister.RowID AS RowID,
+	|	BatchKeysRegister.PreliminaryID AS PreliminaryID,
 	|	BatchKeysRegister.Branch AS Branch,
 	|	BatchKeysRegister.Currency AS Currency,
 	|	BatchKeysRegister.ItemLinkID AS ItemLinkID,
@@ -1356,6 +1377,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegisterOutPeriod.ProfitLossCenter,
 	|	BatchKeysRegisterOutPeriod.ExpenseType,
 	|	BatchKeysRegisterOutPeriod.RowID,
+	|	BatchKeysRegisterOutPeriod.PreliminaryID,
 	|	BatchKeysRegisterOutPeriod.Branch,
 	|	BatchKeysRegisterOutPeriod.Currency,
 	|	BatchKeysRegisterOutPeriod.ItemLinkID,
@@ -1398,6 +1420,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysInfo.ProfitLossCenter AS ProfitLossCenter,
 	|	BatchKeysInfo.ExpenseType AS ExpenseType,
 	|	BatchKeysInfo.RowID AS RowID,
+	|	BatchKeysInfo.PreliminaryID AS PreliminaryID,
 	|	BatchKeysInfo.Branch AS Branch,
 	|	BatchKeysInfo.Currency AS Currency,
 	|	BatchKeysInfo.ItemLinkID AS ItemLinkID,
@@ -1410,6 +1433,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		AND BatchKeys.Store = BatchKeysInfo.Store
 	|		AND BatchKeys.SerialLotNumber = BatchKeysInfo.SerialLotNumber
 	|		AND BatchKeys.SourceOfOrigin = BatchKeysInfo.SourceOfOrigin
+//	|		AND BatchKeys.PreliminaryID = BatchKeysInfo.PreliminaryID
 	|		AND NOT BatchKeys.DeletionMark
 	|GROUP BY
 	|	BatchKeysInfo.IsPreliminary,
@@ -1424,6 +1448,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysInfo.ProfitLossCenter,
 	|	BatchKeysInfo.ExpenseType,
 	|	BatchKeysInfo.RowID,
+	|	BatchKeysInfo.PreliminaryID,
 	|	BatchKeysInfo.Branch,
 	|	BatchKeysInfo.Currency,
 	|	BatchKeysInfo.ItemLinkID,
@@ -1543,6 +1568,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeys.ProfitLossCenter AS ProfitLossCenter,
 	|	BatchKeys.ExpenseType AS ExpenseType,
 	|	BatchKeys.RowID AS RowID,
+	|	BatchKeys.PreliminaryID AS PreliminaryID,
 	|	BatchKeys.Branch AS Branch,
 	|	BatchKeys.Currency AS Currency,
 	|	BatchKeys.ItemLinkID AS ItemLinkID,
@@ -1609,6 +1635,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED,
+	|	UNDEFINED, // PreliminaryID
 	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED,
@@ -1670,6 +1697,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.ProfitLossCenter AS ProfitLossCenter,
 	|	AllData.ExpenseType AS ExpenseType,
 	|	AllData.RowID AS RowID,
+	|	AllData.PreliminaryID AS PreliminaryID,
 	|	AllData.Branch AS Branch,
 	|	AllData.Currency AS Currency,
 	|	AllData.ItemLinkID AS ItemLinkID,
@@ -1692,6 +1720,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.ProfitLossCenter,
 	|	AllData.ExpenseType,
 	|	AllData.RowID,
+	|	AllData.PreliminaryID,
 	|	AllData.Branch,
 	|	AllData.Currency,
 	|	AllData.ItemLinkID,
@@ -1745,6 +1774,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.ProfitLossCenter AS ProfitLossCenter,
 	|	AllDataGrouped.ExpenseType AS ExpenseType,
 	|	AllDataGrouped.RowID AS RowID,
+	|	AllDataGrouped.PreliminaryID AS PreliminaryID,
 	|	AllDataGrouped.Branch AS Branch,
 	|	AllDataGrouped.Currency AS Currency,
 	|	AllDataGrouped.ItemLinkID AS ItemLinkID,
@@ -1857,7 +1887,141 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			If ValueIsFilled(Row.SalesInvoice) Then // return by sales invoice
 				ReceiptBySalesReturn(Row, Tables, TableOfReturnedBatches, CalculationSettings);
 			EndIf;
+			
+			// receipt preliminary
+			If TypeOf(Document) = Type("DocumentRef.PurchaseInvoice") And ValueIsFilled(Row.PreliminaryID) Then
+				Query = New Query();
+				Query.Text = 
+				"SELECT
+				|	T6020S_BatchKeysInfo.Recorder AS PreliminaryDocument
+				|FROM
+				|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
+				|WHERE
+				|	T6020S_BatchKeysInfo.IsPreliminary
+				|	AND T6020S_BatchKeysInfo.RowID = &PreliminaryID
+				|GROUP BY
+				|	T6020S_BatchKeysInfo.Recorder,
+				|	T6020S_BatchKeysInfo.Period
+				|
+				|ORDER BY
+				|	T6020S_BatchKeysInfo.Period
+				|;
+				|
+				|////////////////////////////////////////////////////////////////////////////////
+				|SELECT
+				|	BatchKeys.Ref AS BatchKey
+				|FROM
+				|	Catalog.BatchKeys AS BatchKeys
+				|WHERE
+				|		BatchKeys.ItemKey = &ItemKey
+				|		AND BatchKeys.SerialLotNumber = &SerialLotNumber
+				|		AND BatchKeys.SourceOfOrigin = &SourceOfOrigin
+				|	AND NOT BatchKeys.DeletionMark";
+				Query.SetParameter("PreliminaryID", Row.PreliminaryID);
+				Query.SetParameter("ItemKey", Row.BatchKey.ItemKey);
+				Query.SetParameter("SerialLotNumber", Row.BatchKey.SerialLotNumber);
+				Query.SetParameter("SourceOfOrigin", Row.BatchKey.SourceOfOrigin);
+				QueryResults = Query.ExecuteBatch();
+				TablePreliminaryDocuments = QueryResults[0].Unload();
+				TablePreliminaryBatchKeys = QueryResults[1].Unload();
+				
+				NeedExpense = Row.Quantity;
+				
+				// expense preliminary ballance
+				For Each __Row1 In TablePreliminaryDocuments Do
+					For Each __Row2 In TablePreliminaryBatchKeys Do
+				//------------------------------------------------------------------------------------------------------
+				
+					Filter = New Structure();
+					FIlter.Insert("Document", __Row1.PreliminaryDocument);
+					Filter.Insert("BatchKey", __Row2.BatchKey);
+					FIlter.Insert("Direction", Enums.BatchDirection.Receipt);
+					
+					FilteredRows = Tree.Rows.FindRows(Filter, True);
+					
+					For Each Row_Batch In FilteredRows Do
+									
+						If NeedExpense = 0 Then
+							Continue;
+						EndIf;
+						
+						If Row_Batch.Date > Row.Date Then
+							Break;
+						EndIf;
 		
+						If Row_Batch.PreliminaryQuantityBalance = 0 Then
+							Continue;
+						EndIf;
+						
+						If Row_Batch.Company <> Row.Company Then
+							Continue;
+						EndIf;
+		
+						If Not ValueIsFilled(Row_Batch.Batch) Then
+							Continue;
+						EndIf;
+					
+						// how many preliminary will be expense	
+						ExpenseQuantity = Min(NeedExpense, Row_Batch.PreliminaryQuantityBalance);
+					
+						ExpenseAmounts = New Structure();
+						For Each Res In AmountResources() Do
+							ExpenseAmounts.Insert(Res, CalculateExpenseAmount(ExpenseQuantity, Row_Batch, "PreliminaryQuantityBalance", Res + "Balance"));
+						EndDo;
+						
+						Row_Batch.PreliminaryQuantityBalance = Row_Batch.PreliminaryQuantityBalance - ExpenseQuantity;
+						
+						For Each Res In AmountResources() Do
+							Row_Batch[Res + "Balance"] = Row_Batch[Res + "Balance"] - ExpenseAmounts[Res];
+						EndDo;	
+										
+						NeedExpense = NeedExpense - ExpenseQuantity;
+					
+						If ExpenseQuantity <> 0 Or ExpenseAmounts.PreliminaryAmount Then
+							// expense for preliminary batch
+							NewRow = Tables.DataForExpense.Add();
+							NewRow.BatchKey  = __Row2.BatchKey;
+							NewRow.Document  = Row.Document;
+							NewRow.Company   = Row.Company;
+							NewRow.Period    = Row.Date;
+							NewRow.Batch     = Row_Batch.Batch;
+							NewRow.IsPreliminary = Row_Batch.IsPreliminary;
+							
+							NewRow.PreliminaryQuantity = ExpenseQuantity;
+							
+							For Each Res In AmountResources() Do
+								NewRow[Res] = ExpenseAmounts[Res];
+							EndDo;
+									
+							NewRow_DataForExpense = DataForExpense.Add();
+							FillPropertyValues(NewRow_DataForExpense, NewRow);
+	//						NewRow_DataForExpense.ItemLinkID = Row.ItemLinkID;						
+						EndIf;
+
+					EndDo; // Filtered rows
+				EndDo; // preliminary batch keys
+			EndDo; // preliminary documants
+			
+//				If NeedExpense <> 0 Then
+//					// Can not expense Batch key: %1 , Quantity: %2 , Doc: %3'
+//					Msg = StrTemplate(R().LC_Error_002, GetBatchKeyDetailPresentation(Row.BatchKey), NeedExpense, Row.Document);
+//					CommonFunctionsClientServer.ShowUsersMessage(Msg);
+//					If CalculationSettings.RaiseOnCalculationError Then
+//						Raise Msg;
+//					EndIf;
+//					
+//					NewRow = Tables.DataForBatchShortageOutgoing.Add();
+//					NewRow.BatchKey = Row.BatchKey;
+//					NewRow.Document = Row.Document;
+//					NewRow.Company  = Row.Company;
+//					NewRow.Period   = Row.Date;
+//					NewRow.Quantity = NeedExpense;
+//				EndIf;
+//					
+				//------------------------------------------------------------------------------------------------------
+				
+			EndIf; // Prelimiary
+				
 		Else //Expense
 
 			NeedExpense = Row.Quantity;
@@ -1887,10 +2051,10 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			TableOrdering.Columns.Add("IsPreliminary");
 			TableOrdering.Columns.Add("TreeRow");
 			// for debugging
-			TableOrdering.Columns.Add("Quantity");
-			TableOrdering.Columns.Add("QuantityBalance");			
-			TableOrdering.Columns.Add("PreliminaryQuantity");
-			TableOrdering.Columns.Add("PreliminaryQuantityBalance");
+//			TableOrdering.Columns.Add("Quantity");
+//			TableOrdering.Columns.Add("QuantityBalance");			
+//			TableOrdering.Columns.Add("PreliminaryQuantity");
+//			TableOrdering.Columns.Add("PreliminaryQuantityBalance");
 			
 			For Each FilteredRow In FilteredRows Do
 				If FilteredRow.Date > Row.Date Then
@@ -1914,10 +2078,10 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				NewRow.IsPreliminary = FilteredRow.IsPreliminary;
 				NewRow.TreeRow       = FilteredRow;
 				// for debugging
-				NewRow.Quantity                   = FilteredRow.Quantity;
-				NewRow.QuantityBalance            = FilteredRow.QuantityBalance;
-				NewRow.PreliminaryQuantity        = FilteredRow.PreliminaryQuantity;
-				NewRow.PreliminaryQuantityBalance = FilteredRow.PreliminaryQuantityBalance;
+//				NewRow.Quantity                   = FilteredRow.Quantity;
+//				NewRow.QuantityBalance            = FilteredRow.QuantityBalance;
+//				NewRow.PreliminaryQuantity        = FilteredRow.PreliminaryQuantity;
+//				NewRow.PreliminaryQuantityBalance = FilteredRow.PreliminaryQuantityBalance;
 			EndDo;
 			// inventory stock quantity first
 			TableOrdering.Sort("IsPreliminary, BatchDate");
@@ -2039,7 +2203,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				NewRow.Quantity = NeedExpense;
 			EndIf;
 			
-		EndIf;
+		EndIf; // receipt or expense
 	EndDo; // main loop for each Row in Rows
 	
 	// Bundling, Unbundling, Transfer, Produce

@@ -758,25 +758,13 @@ Function GetBatchWiseBalance(CalculationSettings)
 	EmptyTable_BatchWiseBalance.Columns.Add("Document"  , GetBatchDocumentsTypes());
 	EmptyTable_BatchWiseBalance.Columns.Add("Company"   , New TypeDescription("CatalogRef.Companies"));
 	EmptyTable_BatchWiseBalance.Columns.Add("Period"    , RegMetadata.StandardAttributes.Period.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("Quantity"  , RegMetadata.Resources.Quantity.Type);
-
-	EmptyTable_BatchWiseBalance.Columns.Add("InvoiceAmount"             , RegMetadata.Resources.InvoiceAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("InvoiceTaxAmount"          , RegMetadata.Resources.InvoiceTaxAmount.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("IsPreliminary" , New TypeDescription("Boolean"));
+	EmptyTable_BatchWiseBalance.Columns.Add("Quantity", RegMetadata.Resources.Quantity.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("PreliminaryQuantity", RegMetadata.Resources.Quantity.Type);
 	
-	EmptyTable_BatchWiseBalance.Columns.Add("IndirectCostAmount"        , RegMetadata.Resources.IndirectCostAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("IndirectCostTaxAmount"     , RegMetadata.Resources.IndirectCostTaxAmount.Type);
-	
-	EmptyTable_BatchWiseBalance.Columns.Add("ExtraCostAmountByRatio"    , RegMetadata.Resources.ExtraCostAmountByRatio.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("ExtraCostTaxAmountByRatio" , RegMetadata.Resources.ExtraCostTaxAmountByRatio.Type);
-	
-	EmptyTable_BatchWiseBalance.Columns.Add("ExtraDirectCostAmount"     , RegMetadata.Resources.ExtraDirectCostAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("ExtraDirectCostTaxAmount"  , RegMetadata.Resources.ExtraDirectCostTaxAmount.Type);
-	
-	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedCostAmount"       , RegMetadata.Resources.AllocatedCostAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedCostTaxAmount"    , RegMetadata.Resources.AllocatedCostTaxAmount.Type);
-	
-	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedRevenueAmount"    , RegMetadata.Resources.AllocatedRevenueAmount.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("AllocatedRevenueTaxAmount" , RegMetadata.Resources.AllocatedRevenueTaxAmount.Type);
+	For Each Res In AmountResources() Do
+		EmptyTable_BatchWiseBalance.Columns.Add(Res, Metadata.DefinedTypes.typeAmount.Type);
+	EndDo;
 	
 	Tables = New Structure();
 	Tables.Insert("DataForExpense"               , EmptyTable_BatchWiseBalance.CopyColumns());

@@ -2790,8 +2790,8 @@ Procedure AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, Source, Dat
 
 	Row.Quantity = Source.Quantity;
 	Row.QuantityBalance = Source.Quantity;
-	Row.PreliminaryQuantity = Source.Quantity;
-	Row.PreliminaryQuantityBalance = Source.Quantity;
+	Row.PreliminaryQuantity = Source.PreliminaryQuantity;
+	Row.PreliminaryQuantityBalance = Source.PreliminaryQuantity;
 
 	For Each Res In AmountResources() Do
 		Row[Res] = Source[Res];

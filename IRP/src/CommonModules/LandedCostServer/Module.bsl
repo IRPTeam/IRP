@@ -2106,7 +2106,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			
 			ReallocatedAmounts = New Structure();
 			For Each Res In AmountResources() Do 
-				ReallocatedAmounts[Res] = 0;
+				ReallocatedAmounts.Insert(Res, 0);
 			EndDo;
 	
 			QtyName = ?(Row_Receipt.IsPreliminary, "Preliminary", "") + "Quantity";

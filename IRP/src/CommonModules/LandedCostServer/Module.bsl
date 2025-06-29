@@ -442,7 +442,11 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	Catalogs.BatchKeys.Create_BatchKeys(CalculationSettings);
 
 	BatchWiseBalanceTables = GetBatchWiseBalance(CalculationSettings);
-
+	
+	// for grouping value tables
+	_AmountResources = StrConcat(AmountResources(), ",");
+	_QuantityResources = "Quantity, PreliminaryQuantity";
+	
 	RecordSetR6010B = AccumulationRegisters.R6010B_BatchWiseBalance.CreateRecordSet();
 	RecordSetR6010B.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 
@@ -507,13 +511,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSetT6040S = InformationRegisters.T6040S_BundleAmountValues.CreateRecordSet();
 	RecordSetT6040S.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 	BatchWiseBalanceTables.DataForBundleAmountValues.GroupBy(
-	"Company, Period, Batch, BatchKey, BatchKeyBundle",
-	"InvoiceAmount, InvoiceTaxAmount, 
-	|ExtraCostAmountByRatio, ExtraCostTaxAmountByRatio,
-	|ExtraDirectCostAmount, ExtraDirectCostTaxAmount,
-	|IndirectCostAmount, IndirectCostTaxAmount,
-	|AllocatedCostAmount, AllocatedCostTaxAmount, 
-	|AllocatedRevenueAmount, AllocatedRevenueTaxAmount");
+	"Company, Period, Batch, BatchKey, BatchKeyBundle", _AmountResources);
 
 	For Each Row In BatchWiseBalanceTables.DataForBundleAmountValues Do
 		NewRecordT6040S = RecordSetT6040S.Add();
@@ -528,14 +526,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSetT6090S = InformationRegisters.T6090S_CompositeBatchesAmountValues.CreateRecordSet();
 	RecordSetT6090S.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 	BatchWiseBalanceTables.DataForCompositeBatchesAmountValues.GroupBy(
-	"Company, Period, Batch, BatchKey, BatchComposite, BatchKeyComposite",
-	"InvoiceAmount, InvoiceTaxAmount, 
-	|ExtraCostAmountByRatio, ExtraCostTaxAmountByRatio,
-	|ExtraDirectCostAmount, ExtraDirectCostTaxAmount,
-	|IndirectCostAmount, IndirectCostTaxAmount,
-	|Quantity, 
-	|AllocatedCostAmount, AllocatedCostTaxAmount, 
-	|AllocatedRevenueAmount, AllocatedRevenueTaxAmount");
+	"Company, Period, Batch, BatchKey, BatchComposite, BatchKeyComposite", _AmountResources + "," + _QuantityResources);
 
 	For Each Row In BatchWiseBalanceTables.DataForCompositeBatchesAmountValues Do
 		NewRecordT6090S = RecordSetT6090S.Add();
@@ -550,14 +541,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSetT6080S = InformationRegisters.T6080S_ReallocatedBatchesAmountValues.CreateRecordSet();
 	RecordSetT6080S.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 	BatchWiseBalanceTables.DataForReallocatedBatchesAmountValues.GroupBy(
-	"Period, OutgoingDocument, IncomingDocument, BatchKey",
-	"InvoiceAmount, InvoiceTaxAmount, 
-	|ExtraCostAmountByRatio, ExtraCostTaxAmountByRatio,
-	|ExtraDirectCostAmount, ExtraDirectCostTaxAmount,
-	|IndirectCostAmount, IndirectCostTaxAmount,
-	|Quantity, 
-	|AllocatedCostAmount, AllocatedCostTaxAmount, 
-	|AllocatedRevenueAmount, AllocatedRevenueTaxAmount");
+	"Period, OutgoingDocument, IncomingDocument, BatchKey", _AmountResources + "," + _QuantityResources);
 
 	For Each Row In BatchWiseBalanceTables.DataForReallocatedBatchesAmountValues Do
 		NewRecordT6080S = RecordSetT6080S.Add();
@@ -572,13 +556,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSet = InformationRegisters.T6095S_WriteOffBatchesInfo.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 	BatchWiseBalanceTables.DataForWriteOffBatches.GroupBy(
-	"Period, Document, Company, Branch, ProfitLossCenter, ExpenseType, ItemKey, Currency, RowID",
-	"InvoiceAmount, InvoiceTaxAmount, 
-	|ExtraCostAmountByRatio, ExtraCostTaxAmountByRatio,
-	|ExtraDirectCostAmount, ExtraDirectCostTaxAmount,
-	|IndirectCostAmount, IndirectCostTaxAmount,
-	|AllocatedCostAmount, AllocatedCostTaxAmount, 
-	|AllocatedRevenueAmount, AllocatedRevenueTaxAmount");
+	"Period, Document, Company, Branch, ProfitLossCenter, ExpenseType, ItemKey, Currency, RowID", _AmountResources);
 
 	For Each Row In BatchWiseBalanceTables.DataForWriteOffBatches Do
 		NewRecord = RecordSet.Add();
@@ -607,7 +585,8 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 			+ Row.ExtraCostAmountByRatio
 			+ Row.ExtraDirectCostAmount
 			+ Row.AllocatedCostAmount
-			+ Row.AllocatedRevenueAmount;
+			+ Row.AllocatedRevenueAmount
+			+ Row.PreliminaryAmount;
 		
 		Row.Currency = _Currency;
 		
@@ -1587,17 +1566,17 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	R6010B_BatchWiseBalance.AllocatedCostTaxAmountBalance,
 	|	R6010B_BatchWiseBalance.AllocatedRevenueAmountBalance,
 	|	R6010B_BatchWiseBalance.AllocatedRevenueTaxAmountBalance,
-	|	UNDEFINED,
-	|	UNDEFINED,
-	|	UNDEFINED,
-	|	UNDEFINED,
-	|	UNDEFINED,
-	|	UNDEFINED,
-	|	UNDEFINED,
-	|	UNDEFINED,
-	|	UNDEFINED,
-	|	FALSE,
-	|	UNDEFINED
+	|	UNDEFINED, // BatchDocument
+	|	UNDEFINED, // SalesInvoice
+	|	UNDEFINED, // ProfitLossCenter
+	|	UNDEFINED, // ExpenseType
+	|	UNDEFINED, // RowID
+	|	UNDEFINED, // Branch
+	|	UNDEFINED, // Currency
+	|	UNDEFINED, // ItemLinkID
+	|	UNDEFINED, // FixedAsset
+	|	R6010B_BatchWiseBalance.PreliminaryQuantityBalance > 0, // IsPreliminary
+	|	UNDEFINED // PreliminaryID
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance.Balance(ENDOFPERIOD(&EndPeriod, DAY), (BatchKey, Batch.Company) IN
 	|		(SELECT
@@ -1739,13 +1718,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.PreliminaryID AS PreliminaryID,
 	|	FALSE AS Skip,
 	|	0 AS Priority
-	// |	FALSE AS IsPreliminary,
-	// |	undefined AS PreliminaryID,
-	// |	0 AS PreliminaryQuantity,
-	// |	0 AS PreliminaryAmount,
-	// |	0 AS PreliminaryAmountBalance,
-	// |	0 AS PreliminaryTaxAmount,
-	// |	0 AS PreliminaryTaxAmountBalance
 	|FROM
 	|	AllDataGrouped AS AllDataGrouped
 	|
@@ -1784,7 +1756,10 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 			EndIf;
 		EndDo;
 	EndDo;
+
+	// restore returned batches 
 	TableOfReturnedBatches = GetSalesBatchDocument(ArrayOfReturnedSalesInvoices);
+	
 	For Each ReturnedBatch In TableOfReturnedBatches Do
 		If Not Tree.Rows.FindRows(New Structure("Document", ReturnedBatch.BatchDocument)).Count() Then
 			Tree.Rows.Add().Document = ReturnedBatch.BatchDocument;
@@ -1986,29 +1961,9 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			FIlter.Insert("Direction", Enums.BatchDirection.Receipt);
 
 			FilteredRows = Tree.Rows.FindRows(Filter, True);
-			
-			// sorting batches by date and preliminary status
-			TableOrdering = New ValueTable();
-			TableOrdering.Columns.Add("BatchDate");
-			TableOrdering.Columns.Add("IsPreliminary");
-			TableOrdering.Columns.Add("TreeRow");
-			
-			For Each FilteredRow In FilteredRows Do
-				NewRow = TableOrdering.Add();
-				NewRow.BatchDate     = FilteredRow.Date;
-				NewRow.IsPreliminary = FilteredRow.IsPreliminary;
-				NewRow.TreeRow       = FilteredRow;
-			EndDo;
-			// inventory first, preliminary second
-			TableOrdering.Sort("IsPreliminary, BatchDate");
-			
-			FilteredRows.Clear();
-			
-			For Each RowOrdering In TableOrdering Do
-				FilteredRows.Add(RowOrdering.TreeRow);
-			EndDo;
-	
-			For Each Row_Batch In FilteredRows Do
+			SortedTreeRows = SortByPriliminaryPriority(FilteredRows, Row.Date);
+
+			For Each Row_Batch In SortedTreeRows Do
 
 				 If Row_Batch.Date > Row.Date Then
 					 Break;
@@ -2049,6 +2004,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					NewRow.Company   = Row.Company;
 					NewRow.Batch     = Row_Batch.Batch;
 					NewRow.BatchKey  = Row.BatchKey;
+					NewRow.IsPreliminary = Row_Batch.IsPreliminary;
 
 					NewRow[QtyName]  = ExpenseQuantity;
 					
@@ -2167,7 +2123,6 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	
 	ElsIf TypeOf(Document) = Type("DocumentRef.SalesReturn") Or TypeOf(Document) = Type("DocumentRef.RetailReturnReceipt") Then
 		For Each Row_Return In TableOfReturnedBatches Do
-//			AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, Row_Return, Row_Return.Date, Row_Return.Batch, Row_Return);
 			Row_nrb = TableOfNewReceivedBatches.Add();
 			Row_nrb.Date = Row_Return.Date;
 			Row_nrb.ReturnRow = Row_Return;
@@ -2263,8 +2218,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				Else // Reallocated_Qty = 0
 					NewRow[Res] = 0;
 				EndIf;
-			EndDo;
-//			AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, NewRow, NewRow.Period, NewRow.Batch);			
+			EndDo;			
 			Row_nrb = TableOfNewReceivedBatches.Add();
 			Row_nrb.Date = NewRow.Period;
 			Row_nrb.Batch = NewRow.Batch;
@@ -2302,8 +2256,7 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 			Continue;
 		EndIf;
 
-		QtyName = ?(Row.IsPreliminary, "Preliminary", "") + "Quantity";
-		NeedReceipt = Row[QtyName];
+		NeedReceipt = Row.Quantity;
 		
 		For Each Row_Expense In DataForExpense Do
 			If NeedReceipt = 0 Then
@@ -2321,6 +2274,8 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 			If Row.BatchKey.SourceOfOrigin <> Row_Expense.BatchKey.SourceOfOrigin Then
 				Continue;
 			EndIf;
+			
+			QtyName = ?(Row_Expense.IsPreliminary, "Preliminary", "") + "Quantity";
 				
 			NeedReceipt = NeedReceipt - Row_Expense[QtyName];
 
@@ -2337,7 +2292,7 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 			For Each Res In AmountResources() Do
 				NewRow[Res] = Row_Expense[Res];
 			EndDo;
-//			AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, Row, Row.Date, Row_Expense.Batch);
+
 			Row_nrb = TableOfNewReceivedBatches.Add();
 			Row_nrb.Date = Row.Date;
 			Row_nrb.Batch = Row_Expense.Batch;
@@ -2988,31 +2943,6 @@ Function GetPriceForEmptyAmountFromBatchBalance(ItemKey, Period)
 	EndIf;
 EndFunction
 
-//Procedure AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, Source, Date, Batch, ReturnRow = Undefined)
-//	Row = TableOfNewReceivedBatches.Add();
-//	Row.Date = Date;
-//	Row.ReturnRow = ReturnRow;
-//	Row.Batch = Batch;
-//
-//	Row.Document = Source.Document;
-//	Row.Company = Source.Company;
-//	Row.BatchKey = Source.BatchKey;
-//	Row.IsPreliminary = Source.IsPreliminary;
-//
-//	Row.IsOpeningBalance = False;
-//	Row.Direction = Enums.BatchDirection.Receipt;
-//
-//	Row.Quantity = Source.Quantity;
-//	Row.QuantityBalance = Source.Quantity;
-//	Row.PreliminaryQuantity = Source.PreliminaryQuantity;
-//	Row.PreliminaryQuantityBalance = Source.PreliminaryQuantity;
-//
-//	For Each Res In AmountResources() Do
-//		Row[Res] = Source[Res];
-//		Row[Res + "Balance"] = Source[Res];
-//	EndDo;	
-//EndProcedure	
-
 Procedure RemoveRowsWithEmptyAmountBalance(RowsCollection)
 	ArrayForDelete = New Array();
 	For Each Row In RowsCollection Do
@@ -3037,4 +2967,46 @@ Function AmountProportionByQuantity(Quantity, Row_Batch, AmountColumnName, Quant
 		EndIf;
 	EndIf;
 	Return AmountResult;
+EndFunction
+
+Function SortByPriliminaryPriority(TreeRows, EndDate)
+	// sorting batches by date and preliminary status
+	SortedTreeRows = New Array();
+	
+	TableSorted = New ValueTable();
+	TableSorted.Columns.Add("BatchDate");
+	TableSorted.Columns.Add("IsPreliminary");
+	TableSorted.Columns.Add("TreeRow");
+	
+	IsPresent_Preliminary = False;
+
+	For Each TreeRow In TreeRows Do		
+		If TypeOf(TreeRow.IsPreliminary) <> Type("Boolean") Then 
+			Raise "IsPreliminary not Boolean";
+		EndIf;
+		
+		If ValueIsFilled(EndDate) And TreeRow.Date > EndDate Then // outdated batch
+			Continue;
+		EndIf;
+		
+		If TreeRow.IsPreliminary Then
+			IsPresent_Preliminary = True;
+		EndIf;
+		
+		RowTableSorted = TableSorted.Add();
+		RowTableSorted.BatchDate     = TreeRow.Date;
+		RowTableSorted.IsPreliminary = TreeRow.IsPreliminary;
+		RowTableSorted.TreeRow       = TreeRow;
+	EndDo;
+	
+	// inventory first, preliminary second
+	If IsPresent_Preliminary Then
+		TableSorted.Sort("IsPreliminary, BatchDate");
+	EndIf;
+
+	For Each RowTableSorted In TableSorted Do
+		SortedTreeRows.Add(RowTableSorted.TreeRow);
+	EndDo;	
+
+	Return SortedTreeRows;		
 EndFunction

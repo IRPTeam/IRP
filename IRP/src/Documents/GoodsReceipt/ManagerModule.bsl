@@ -248,9 +248,11 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	tmpItemList.Period AS Period,
 	|	tmpItemList.Direction AS Direction,
 	|	tmpItemList.Key AS Key,
-//	|	tmpItemList.PreliminaryAmount AS PreliminaryAmount,
 	|	tmpItemList.Currency AS Currency,
 	|	tmpItemList.RowID AS RowID,
+	|
+	|	case when tmpItemList.IsPreliminary then tmpItemList.RowID else undefined end as PreliminaryID,
+	|
 	|	ISNULL(tmpSourceOfOrigins.Quantity, 0) AS QuantityBySourceOrigin,
 	|	CASE
 	|		WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
@@ -264,16 +266,13 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	case when tmpItemList.Quantity = ISNULL(tmpSourceOfOrigins.Quantity, 0) then
 	|		tmpItemList.PreliminaryAmount
 	|	else
-	//----------------------------------------------------------------------
 	|			CASE
 	|				WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
 	|					THEN tmpItemList.PreliminaryAmount / tmpItemList.Quantity * ISNULL(tmpSourceOfOrigins.Quantity, 0)
 	|				ELSE tmpItemList.PreliminaryAmount
 	|			END
-	//-----------------------------------
 	|end
 	|		ELSE 0
-//	|	END AS Amount,
 	|	end as PreliminaryAmount,
 	|
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
@@ -412,6 +411,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 		|CurrencyMovementType, 
 		|SourceOfOrigin, 
 		|SerialLotNumber,
+		|PreliminaryID,
 		|IsPreliminary";
 	BatchKeysInfoSettings.Totals = "PreliminaryQuantity, PreliminaryAmount, PreliminaryTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;

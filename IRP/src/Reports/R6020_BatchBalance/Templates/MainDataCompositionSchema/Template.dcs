@@ -3042,6 +3042,45 @@ ORDER BY
 					<dcscom:dimension>true</dcscom:dimension>
 				</role>
 			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryQuantityReceipt</dataPath>
+				<field>PreliminaryQuantityReceipt</field>
+				<title xsi:type="v8:LocalStringType">
+					<v8:item>
+						<v8:lang>en</v8:lang>
+						<v8:content>Preliminary quantity receipt</v8:content>
+					</v8:item>
+				</title>
+				<role>
+					<dcscom:dimension>true</dcscom:dimension>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryAmountReceipt</dataPath>
+				<field>PreliminaryAmountReceipt</field>
+				<title xsi:type="v8:LocalStringType">
+					<v8:item>
+						<v8:lang>en</v8:lang>
+						<v8:content>Preliminary amount receipt</v8:content>
+					</v8:item>
+				</title>
+				<role>
+					<dcscom:dimension>true</dcscom:dimension>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>PreliminaryQuantityExpense</dataPath>
+				<field>PreliminaryQuantityExpense</field>
+				<title xsi:type="v8:LocalStringType">
+					<v8:item>
+						<v8:lang>en</v8:lang>
+						<v8:content>Preliminary quantity expense</v8:content>
+					</v8:item>
+				</title>
+				<role>
+					<dcscom:dimension>true</dcscom:dimension>
+				</role>
+			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT ALLOWED
 	T6020S_BatchKeysInfo.Company AS Company,
@@ -3055,14 +3094,29 @@ ORDER BY
 	END AS QuantityReceipt,
 	CASE
 		WHEN T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Receipt)
+			THEN T6020S_BatchKeysInfo.PreliminaryQuantity
+		ELSE 0
+	END AS PreliminaryQuantityReceipt,
+	CASE
+		WHEN T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Receipt)
 			THEN T6020S_BatchKeysInfo.InvoiceAmount
 		ELSE 0
 	END AS InvoiceAmountReceipt,
+	CASE
+		WHEN T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Receipt)
+			THEN T6020S_BatchKeysInfo.PreliminaryAmount
+		ELSE 0
+	END AS PreliminaryAmountReceipt,
 	CASE
 		WHEN T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Expense)
 			THEN T6020S_BatchKeysInfo.Quantity
 		ELSE 0
 	END AS QuantityExpense,
+	CASE
+		WHEN T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Expense)
+			THEN T6020S_BatchKeysInfo.PreliminaryQuantity
+		ELSE 0
+	END AS PreliminaryQuantityExpense,
 	case
 		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
 			then T6020S_BatchKeysInfo.ProductionDocument

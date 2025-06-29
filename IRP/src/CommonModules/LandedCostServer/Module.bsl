@@ -850,11 +850,14 @@ EndFunction
 Function GetBatchTree(TempTablesManager, CalculationSettings)
 	Query = New Query();
 	Query.TempTablesManager = TempTablesManager;
-	Query.Text =
+	Query.Text =	
 	"SELECT
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
+	|	SUM(T6020S_BatchKeysInfo.PreliminaryQuantity) AS PreliminaryQuantity,
 	|	SUM(T6020S_BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
 	|	SUM(T6020S_BatchKeysInfo.InvoiceTaxAmount) AS InvoiceTaxAmount,
+	|	SUM(T6020S_BatchKeysInfo.PreliminaryAmount) AS PreliminaryAmount,
+	|   SUM(T6020S_BatchKeysInfo.PreliminaryTaxAmount) AS PreliminaryTaxAmount,
 	|	SUM(T6020S_BatchKeysInfo.ExtraCostAmountByRatio) AS ExtraCostAmountByRatio,
 	|	SUM(T6020S_BatchKeysInfo.ExtraCostTaxAmountByRatio) AS ExtraCostTaxAmountByRatio,
 	|	SUM(T6020S_BatchKeysInfo.ExtraDirectCostAmount) AS ExtraDirectCostAmount,
@@ -939,7 +942,14 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	T6020S_BatchKeysInfo.FixedAsset AS FixedAsset,
 	|	T6020S_BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
 	|	T6020S_BatchKeysInfo.SourceOfOrigin AS SourceOfOrigin,
-	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
+	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey,
+	|	T6020S_BatchKeysInfo.IsPreliminary AS IsPreliminary,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.PurchaseInvoice
+	|			OR T6020S_BatchKeysInfo.Recorder refs Document.GoodsReceipt
+	|				then T6020S_BatchKeysInfo.PreliminaryID
+	|			else undefined
+	|		end as PreliminaryID 
 	|INTO BatchKeysRegister
 	|FROM
 	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
@@ -1025,7 +1035,14 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	T6020S_BatchKeysInfo.FixedAsset,
 	|	T6020S_BatchKeysInfo.SerialLotNumber,
 	|	T6020S_BatchKeysInfo.SourceOfOrigin,
-	|	T6020S_BatchKeysInfo.ItemKey
+	|	T6020S_BatchKeysInfo.ItemKey,
+	|	T6020S_BatchKeysInfo.IsPreliminary,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.PurchaseInvoice
+	|			OR T6020S_BatchKeysInfo.Recorder refs Document.GoodsReceipt
+	|				then T6020S_BatchKeysInfo.PreliminaryID
+	|			else undefined
+	|		end
 	|;
 	|
 	////////////////////////////////////////////////////////////////////////////////
@@ -1064,8 +1081,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
+	|	SUM(T6020S_BatchKeysInfo.PreliminaryQuantity) AS PreliminaryQuantity,
 	|	SUM(T6020S_BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
 	|	SUM(T6020S_BatchKeysInfo.InvoiceTaxAmount) AS InvoiceTaxAmount,
+	|	SUM(T6020S_BatchKeysInfo.PreliminaryAmount) AS PreliminaryAmount,
+	|	SUM(T6020S_BatchKeysInfo.PreliminaryTaxAmount) AS PreliminaryTaxAmount,
 	|	SUM(T6020S_BatchKeysInfo.ExtraCostAmountByRatio) AS ExtraCostAmountByRatio,
 	|	SUM(T6020S_BatchKeysInfo.ExtraCostTaxAmountByRatio) AS ExtraCostTaxAmountByRatio,
 	|	SUM(T6020S_BatchKeysInfo.ExtraDirectCostAmount) AS ExtraDirectCostAmount,
@@ -1150,7 +1170,14 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	T6020S_BatchKeysInfo.FixedAsset AS FixedAsset,
 	|	T6020S_BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
 	|	T6020S_BatchKeysInfo.SourceOfOrigin AS SourceOfOrigin,
-	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
+	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey,
+	|	T6020S_BatchKeysInfo.IsPreliminary AS IsPreliminary,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.PurchaseInvoice
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.GoodsReceipt
+	|			then T6020S_BatchKeysInfo.PreliminaryID
+	|		else undefined
+	|	end AS PreliminaryID
 	|INTO BatchKeysRegisterOutPeriod
 	|FROM
 	|	ReallocateDocumentOutPeriod AS ReallocateDocumentOutPeriod
@@ -1231,14 +1258,24 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	T6020S_BatchKeysInfo.FixedAsset,
 	|	T6020S_BatchKeysInfo.SerialLotNumber,
 	|	T6020S_BatchKeysInfo.SourceOfOrigin,
-	|	T6020S_BatchKeysInfo.ItemKey
+	|	T6020S_BatchKeysInfo.ItemKey,
+	|	T6020S_BatchKeysInfo.IsPreliminary,
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.PurchaseInvoice
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.GoodsReceipt
+	|			then T6020S_BatchKeysInfo.PreliminaryID
+	|		else undefined
+	|	end
 	|;
 	|
 	////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	BatchKeysRegister.Quantity AS Quantity,
+	|	BatchKeysRegister.PreliminaryQuantity AS PreliminaryQuantity,
 	|	BatchKeysRegister.InvoiceAmount AS InvoiceAmount,
 	|	BatchKeysRegister.InvoiceTaxAmount AS InvoiceTaxAmount,
+	|	BatchKeysRegister.PreliminaryAmount AS PreliminaryAmount,
+	|	BatchKeysRegister.PreliminaryTaxAmount AS PreliminaryTaxAmount,
 	|	BatchKeysRegister.ExtraCostAmountByRatio AS ExtraCostAmountByRatio,
 	|	BatchKeysRegister.ExtraCostTaxAmountByRatio AS ExtraCostTaxAmountByRatio,
 	|	BatchKeysRegister.ExtraDirectCostAmount AS ExtraDirectCostAmount,
@@ -1266,7 +1303,9 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegister.FixedAsset AS FixedAsset,
 	|	BatchKeysRegister.SerialLotNumber AS SerialLotNumber,
 	|	BatchKeysRegister.SourceOfOrigin AS SourceOfOrigin,
-	|	BatchKeysRegister.ItemKey AS ItemKey
+	|	BatchKeysRegister.ItemKey AS ItemKey,
+	|	BatchKeysRegister.IsPreliminary AS IsPreliminary,
+	|	BatchKeysRegister.PreliminaryID AS PreliminaryID
 	|INTO BatchKeysInfo
 	|FROM
 	|	BatchKeysRegister AS BatchKeysRegister
@@ -1275,8 +1314,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|
 	|SELECT
 	|	BatchKeysRegisterOutPeriod.Quantity,
+	|	BatchKeysRegisterOutPeriod.PreliminaryQuantity AS PreliminaryQuantity,
 	|	BatchKeysRegisterOutPeriod.InvoiceAmount,
 	|	BatchKeysRegisterOutPeriod.InvoiceTaxAmount,
+	|	BatchKeysRegisterOutPeriod.PreliminaryAmount AS PreliminaryAmount,
+	|	BatchKeysRegisterOutPeriod.PreliminaryTaxAmount AS PreliminaryTaxAmount,
 	|	BatchKeysRegisterOutPeriod.ExtraCostAmountByRatio,
 	|	BatchKeysRegisterOutPeriod.ExtraCostTaxAmountByRatio,
 	|	BatchKeysRegisterOutPeriod.ExtraDirectCostAmount,
@@ -1304,7 +1346,9 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegisterOutPeriod.FixedAsset,
 	|	BatchKeysRegisterOutPeriod.SerialLotNumber,
 	|	BatchKeysRegisterOutPeriod.SourceOfOrigin,
-	|	BatchKeysRegisterOutPeriod.ItemKey
+	|	BatchKeysRegisterOutPeriod.ItemKey,
+	|	BatchKeysRegisterOutPeriod.IsPreliminary AS IsPreliminary,
+	|	BatchKeysRegisterOutPeriod.PreliminaryID AS PreliminaryID
 	|FROM
 	|	BatchKeysRegisterOutPeriod AS BatchKeysRegisterOutPeriod
 	|;
@@ -1313,8 +1357,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|SELECT
 	|	BatchKeys.Ref AS BatchKey,
 	|	SUM(BatchKeysInfo.Quantity) AS Quantity,
+	|	SUM(BatchKeysInfo.PreliminaryQuantity) AS PreliminaryQuantity,
 	|	SUM(BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
 	|	SUM(BatchKeysInfo.InvoiceTaxAmount) AS InvoiceTaxAmount,
+	|	SUM(BatchKeysInfo.PreliminaryAmount) AS PreliminaryAmount,
+	|	SUM(BatchKeysInfo.PreliminaryTaxAmount) AS PreliminaryTaxAmount,
 	|	SUM(BatchKeysInfo.ExtraCostAmountByRatio) AS ExtraCostAmountByRatio,
 	|	SUM(BatchKeysInfo.ExtraCostTaxAmountByRatio) AS ExtraCostTaxAmountByRatio,
 	|	SUM(BatchKeysInfo.ExtraDirectCostAmount) AS ExtraDirectCostAmount,
@@ -1338,7 +1385,9 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysInfo.Branch AS Branch,
 	|	BatchKeysInfo.Currency AS Currency,
 	|	BatchKeysInfo.ItemLinkID AS ItemLinkID,
-	|	BatchKeysInfo.FixedAsset AS FixedAsset
+	|	BatchKeysInfo.FixedAsset AS FixedAsset,
+	|	BatchKeysInfo.IsPreliminary AS IsPreliminary,
+	|	BatchKeysInfo.PreliminaryID AS PreliminaryID
 	|INTO BatchKeys
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -1363,7 +1412,9 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysInfo.Branch,
 	|	BatchKeysInfo.Currency,
 	|	BatchKeysInfo.ItemLinkID,
-	|	BatchKeysInfo.FixedAsset
+	|	BatchKeysInfo.FixedAsset,
+	|	BatchKeysInfo.IsPreliminary,
+	|	BatchKeysInfo.PreliminaryID
 	|;
 	|
 	////////////////////////////////////////////////////////////////////////////////
@@ -1371,8 +1422,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	FALSE AS IsOpeningBalance,
 	|	BatchKeys.BatchKey AS BatchKey,
 	|	BatchKeys.Quantity AS Quantity,
+	|	BatchKeys.PreliminaryQuantity AS PreliminaryQuantity,
 	|	BatchKeys.InvoiceAmount AS InvoiceAmount,
 	|	BatchKeys.InvoiceTaxAmount AS InvoiceTaxAmount,
+	|	BatchKeys.PreliminaryAmount AS PreliminaryAmount,
+	|	BatchKeys.PreliminaryTaxAmount AS PreliminaryTaxAmount,
 	|	BatchKeys.ExtraCostAmountByRatio AS ExtraCostAmountByRatio,
 	|	BatchKeys.ExtraCostTaxAmountByRatio AS ExtraCostTaxAmountByRatio,
 	|	BatchKeys.ExtraDirectCostAmount AS ExtraDirectCostAmount,
@@ -1395,6 +1449,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			THEN 0
 	|		ELSE BatchKeys.Quantity
 	|	END AS QuantityBalance,
+	|	case when Batches.Ref is null or not BatchKeys.SalesInvoice.Date is null then 0 else BatchKeys.PreliminaryQuantity end as PreliminaryQuantityBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
 	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
@@ -1407,6 +1462,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			THEN 0
 	|		ELSE BatchKeys.InvoiceTaxAmount
 	|	END AS InvoiceTaxAmountBalance,
+	|	case when Batches.Ref is null or not BatchKeys.SalesInvoice.Date is null then 0 else BatchKeys.PreliminaryAmount end as PreliminaryAmountBalance,
+	|	case when Batches.Ref is null or not BatchKeys.SalesInvoice.Date is null then 0 else BatchKeys.PreliminaryTaxAmount end as PreliminaryTaxAmountBalance,
 	|	CASE
 	|		WHEN Batches.Ref IS NULL
 	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
@@ -1475,7 +1532,9 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeys.Branch AS Branch,
 	|	BatchKeys.Currency AS Currency,
 	|	BatchKeys.ItemLinkID AS ItemLinkID,
-	|	BatchKeys.FixedAsset AS FixedAsset
+	|	BatchKeys.FixedAsset AS FixedAsset,
+	|	BatchKeys.IsPreliminary AS IsPreliminary,
+	|	BatchKeys.PreliminaryID AS PreliminaryID
 	|INTO AllData
 	|FROM
 	|	BatchKeys AS BatchKeys
@@ -1503,6 +1562,9 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	0,
 	|	0,
 	|	0,
+	|	0,
+	|	0,
+	|	0,
 	|	R6010B_BatchWiseBalance.Batch.Document,
 	|	R6010B_BatchWiseBalance.Batch.Document.PointInTime,
 	|	R6010B_BatchWiseBalance.Batch.Date,
@@ -1510,8 +1572,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	VALUE(Enum.BatchDirection.Receipt),
 	|	R6010B_BatchWiseBalance.Batch,
 	|	R6010B_BatchWiseBalance.QuantityBalance,
+	|	R6010B_BatchWiseBalance.PreliminaryQuantityBalance,
 	|	R6010B_BatchWiseBalance.InvoiceAmountBalance,
 	|	R6010B_BatchWiseBalance.InvoiceTaxAmountBalance,
+	|	R6010B_BatchWiseBalance.PreliminaryAmountBalance,
+	|	R6010B_BatchWiseBalance.PreliminaryTaxAmountBalance,
 	|	R6010B_BatchWiseBalance.ExtraCostAmountByRatioBalance,
 	|	R6010B_BatchWiseBalance.ExtraCostTaxAmountByRatioBalance,
 	|	R6010B_BatchWiseBalance.ExtraDirectCostAmountBalance,
@@ -1530,6 +1595,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED,
+	|	UNDEFINED,
+	|	FALSE,
 	|	UNDEFINED
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance.Balance(ENDOFPERIOD(&EndPeriod, DAY), (BatchKey, Batch.Company) IN
@@ -1545,8 +1612,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.IsOpeningBalance AS IsOpeningBalance,
 	|	AllData.BatchKey AS BatchKey,
 	|	SUM(AllData.Quantity) AS Quantity,
+	|	SUM(AllData.PreliminaryQuantity) AS PreliminaryQuantity,
 	|	SUM(AllData.InvoiceAmount) AS InvoiceAmount,
 	|	SUM(AllData.InvoiceTaxAmount) AS InvoiceTaxAmount,
+	|	SUM(AllData.PreliminaryAmount) AS PreliminaryAmount,
+	|	SUM(AllData.PreliminaryTaxAmount) AS PreliminaryTaxAmount,
 	|	SUM(AllData.IndirectCostAmount) AS IndirectCostAmount,
 	|	SUM(AllData.IndirectCostTaxAmount) AS IndirectCostTaxAmount,
 	|	SUM(AllData.ExtraCostAmountByRatio) AS ExtraCostAmountByRatio,
@@ -1564,8 +1634,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.Direction AS Direction,
 	|	AllData.Batch AS Batch,
 	|	SUM(AllData.QuantityBalance) AS QuantityBalance,
+	|	SUM(AllData.PreliminaryQuantityBalance) AS PreliminaryQuantityBalance,
 	|	SUM(AllData.InvoiceAmountBalance) AS InvoiceAmountBalance,
 	|	SUM(AllData.InvoiceTaxAmountBalance) AS InvoiceTaxAmountBalance,
+	|	SUM(AllData.PreliminaryAmountBalance) AS PreliminaryAmountBalance,
+	|	SUM(AllData.PreliminaryTaxAmountBalance) AS PreliminaryTaxAmountBalance,
 	|	SUM(AllData.IndirectCostAmountBalance) AS IndirectCostAmountBalance,
 	|	SUM(AllData.IndirectCostTaxAmountBalance) AS IndirectCostTaxAmountBalance,
 	|	SUM(AllData.ExtraCostAmountByRatioBalance) AS ExtraCostAmountByRatioBalance,
@@ -1584,7 +1657,9 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.Branch AS Branch,
 	|	AllData.Currency AS Currency,
 	|	AllData.ItemLinkID AS ItemLinkID,
-	|	AllData.FixedAsset AS FixedAsset
+	|	AllData.FixedAsset AS FixedAsset,
+	|	AllData.IsPreliminary AS IsPreliminary,
+	|	AllData.PreliminaryID AS PreliminaryID
 	|INTO AllDataGrouped
 	|FROM
 	|	AllData AS AllData
@@ -1605,7 +1680,9 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.Branch,
 	|	AllData.Currency,
 	|	AllData.ItemLinkID,
-	|	AllData.FixedAsset
+	|	AllData.FixedAsset,
+	|	AllData.IsPreliminary,
+	|	AllData.PreliminaryID
 	|;
 	|
 	////////////////////////////////////////////////////////////////////////////////
@@ -1613,8 +1690,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.IsOpeningBalance AS IsOpeningBalance,
 	|	AllDataGrouped.BatchKey AS BatchKey,
 	|	AllDataGrouped.Quantity AS Quantity,
+	|	AllDataGrouped.PreliminaryQuantity AS PreliminaryQuantity,
 	|	AllDataGrouped.InvoiceAmount AS InvoiceAmount,
 	|	AllDataGrouped.InvoiceTaxAmount AS InvoiceTaxAmount,
+	|	AllDataGrouped.PreliminaryAmount AS PreliminaryAmount,
+	|	AllDataGrouped.PreliminaryTaxAmount AS PreliminaryTaxAmount,
 	|	AllDataGrouped.IndirectCostAmount AS IndirectCostAmount,
 	|	AllDataGrouped.IndirectCostTaxAmount AS IndirectCostTaxAmount,
 	|	AllDataGrouped.ExtraCostAmountByRatio AS ExtraCostAmountByRatio,
@@ -1631,8 +1711,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.Direction AS Direction,
 	|	AllDataGrouped.Batch AS Batch,
 	|	AllDataGrouped.QuantityBalance AS QuantityBalance,
+	|	AllDataGrouped.PreliminaryQuantityBalance AS PreliminaryQuantityBalance,
 	|	AllDataGrouped.InvoiceAmountBalance AS InvoiceAmountBalance,
 	|	AllDataGrouped.InvoiceTaxAmountBalance AS InvoiceTaxAmountBalance,
+	|	AllDataGrouped.PreliminaryAmountBalance AS PreliminaryAmountBalance,
+	|	AllDataGrouped.PreliminaryTaxAmountBalance AS PreliminaryTaxAmountBalance,
 	|	AllDataGrouped.IndirectCostAmountBalance AS IndirectCostAmountBalance,
 	|	AllDataGrouped.IndirectCostTaxAmountBalance AS IndirectCostTaxAmountBalance,
 	|	AllDataGrouped.ExtraCostAmountByRatioBalance AS ExtraCostAmountByRatioBalance,
@@ -1652,15 +1735,17 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.Currency AS Currency,
 	|	AllDataGrouped.ItemLinkID AS ItemLinkID,
 	|	AllDataGrouped.FixedAsset AS FixedAsset,
+	|	AllDataGrouped.IsPreliminary AS IsPreliminary,
+	|	AllDataGrouped.PreliminaryID AS PreliminaryID,
 	|	FALSE AS Skip,
-	|	0 AS Priority,
-	|	FALSE AS IsPreliminary,
-	|	undefined AS PreliminaryID,
-	|	0 AS PreliminaryQuantity,
-	|	0 AS PreliminaryAmount,
-	|	0 AS PreliminaryAmountBalance,
-	|	0 AS PreliminaryTaxAmount,
-	|	0 AS PreliminaryTaxAmountBalance
+	|	0 AS Priority
+	// |	FALSE AS IsPreliminary,
+	// |	undefined AS PreliminaryID,
+	// |	0 AS PreliminaryQuantity,
+	// |	0 AS PreliminaryAmount,
+	// |	0 AS PreliminaryAmountBalance,
+	// |	0 AS PreliminaryTaxAmount,
+	// |	0 AS PreliminaryTaxAmountBalance
 	|FROM
 	|	AllDataGrouped AS AllDataGrouped
 	|
@@ -1901,14 +1986,35 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			FIlter.Insert("Direction", Enums.BatchDirection.Receipt);
 
 			FilteredRows = Tree.Rows.FindRows(Filter, True);
-						
+			
+			// sorting batches by date and preliminary status
+			TableOrdering = New ValueTable();
+			TableOrdering.Columns.Add("BatchDate");
+			TableOrdering.Columns.Add("IsPreliminary");
+			TableOrdering.Columns.Add("TreeRow");
+			
+			For Each FilteredRow In FilteredRows Do
+				NewRow = TableOrdering.Add();
+				NewRow.BatchDate     = FilteredRow.Date;
+				NewRow.IsPreliminary = FilteredRow.IsPreliminary;
+				NewRow.TreeRow       = FilteredRow;
+			EndDo;
+			// inventory first, preliminary second
+			TableOrdering.Sort("IsPreliminary, BatchDate");
+			
+			FilteredRows.Clear();
+			
+			For Each RowOrdering In TableOrdering Do
+				FilteredRows.Add(RowOrdering.TreeRow);
+			EndDo;
+	
 			For Each Row_Batch In FilteredRows Do
 
-				If Row_Batch.Date > Row.Date Then
-					Break;
+				 If Row_Batch.Date > Row.Date Then
+					 Break;
 				EndIf;
 
-				If Row_Batch.QuantityBalance = 0 Then
+				If Row_Batch.QuantityBalance = 0 And Row_Batch.PreliminaryQuantityBalance = 0 Then
 					Continue;
 				EndIf;
 

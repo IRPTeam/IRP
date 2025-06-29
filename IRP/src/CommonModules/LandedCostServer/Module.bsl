@@ -2062,7 +2062,29 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	ElsIf TypeOf(Document) = Type("DocumentRef.SalesReturn") Or TypeOf(Document) = Type("DocumentRef.RetailReturnReceipt") Then
 		
 		For Each Row_Return In TableOfReturnedBatches Do
-			AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, Row_Return, Row_Return.Date, Row_Return.Batch, Row_Return);
+//			AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, Row_Return, Row_Return.Date, Row_Return.Batch, Row_Return);
+			Row_nrb = TableOfNewReceivedBatches.Add();
+			Row_nrb.Date = Row_Return.Date;
+			Row_nrb.ReturnRow = Row_Return;
+			Row_nrb.Batch = Row_return.Batch;
+
+			Row_nrb.Document = Row_return.Document;
+			Row_nrb.Company = Row_return.Company;
+			Row_nrb.BatchKey = Row_return.BatchKey;
+			Row_nrb.IsPreliminary = Row_return.IsPreliminary;
+
+			Row_nrb.IsOpeningBalance = False;
+			Row_nrb.Direction = Enums.BatchDirection.Receipt;
+
+			Row_nrb.Quantity = Row_return.Quantity;
+			Row_nrb.QuantityBalance = Row_return.Quantity;
+			Row_nrb.PreliminaryQuantity = Row_return.PreliminaryQuantity;
+			Row_nrb.PreliminaryQuantityBalance = Row_return.PreliminaryQuantity;
+
+			For Each Res In AmountResources() Do
+				Row_nrb[Res] = Row_return[Res];
+				Row_nrb[Res + "Balance"] = Row_return[Res];
+			EndDo;	
 		EndDo;
 	
 		For Each Row_ReceiveBatch In TableOfNewReceivedBatches Do 
@@ -2137,7 +2159,29 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					NewRow[Res] = 0;
 				EndIf;
 			EndDo;
-			AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, NewRow, NewRow.Period, NewRow.Batch);
+//			AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, NewRow, NewRow.Period, NewRow.Batch);			
+			Row_nrb = TableOfNewReceivedBatches.Add();
+			Row_nrb.Date = NewRow.Period;
+			Row_nrb.Batch = NewRow.Batch;
+
+			Row_nrb.Document = NewRow.Document;
+			Row_nrb.Company = NewRow.Company;
+			Row_nrb.BatchKey = NewRow.BatchKey;
+			Row_nrb.IsPreliminary = NewRow.IsPreliminary;
+
+			Row_nrb.IsOpeningBalance = False;
+			Row_nrb.Direction = Enums.BatchDirection.Receipt;
+
+			Row_nrb.Quantity = NewRow.Quantity;
+			Row_nrb.QuantityBalance = NewRow.Quantity;
+			Row_nrb.PreliminaryQuantity = NewRow.PreliminaryQuantity;
+			Row_nrb.PreliminaryQuantityBalance = NewRow.PreliminaryQuantity;
+
+			For Each Res In AmountResources() Do
+				Row_nrb[Res] = NewRow[Res];
+				Row_nrb[Res + "Balance"] = NewRow[Res];
+			EndDo;	
+			
 		EndDo;
 
 		For Each Row In TableOfNewReceivedBatches Do
@@ -2188,7 +2232,29 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 			For Each Res In AmountResources() Do
 				NewRow[Res] = Row_Expense[Res];
 			EndDo;
-			AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, Row, Row.Date, Row_Expense.Batch);
+//			AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, Row, Row.Date, Row_Expense.Batch);
+			Row_nrb = TableOfNewReceivedBatches.Add();
+			Row_nrb.Date = Row.Date;
+			Row_nrb.Batch = Row_Expense.Batch;
+
+			Row_nrb.Document = Row.Document;
+			Row_nrb.Company = Row.Company;
+			Row_nrb.BatchKey = Row.BatchKey;
+			Row_nrb.IsPreliminary = Row_Expense.IsPreliminary;
+
+			Row_nrb.IsOpeningBalance = False;
+			Row_nrb.Direction = Enums.BatchDirection.Receipt;
+
+			Row_nrb.Quantity = Row_Expense.Quantity;
+			Row_nrb.QuantityBalance = Row_Expense.Quantity;
+			Row_nrb.PreliminaryQuantity = Row_Expense.PreliminaryQuantity;
+			Row_nrb.PreliminaryQuantityBalance = Row_Expense.PreliminaryQuantity;
+
+			For Each Res In AmountResources() Do
+				Row_nrb[Res] = Row_Expense[Res];
+				Row_nrb[Res + "Balance"] = Row_Expense[Res];
+			EndDo;	
+			
 		EndDo; // DataForExpense
 
 		If NeedReceipt <> 0 Then
@@ -2301,7 +2367,29 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
                 NewRow.ExtraCostTaxAmountByRatio = (_totalTaxAmount / 100 * _ExtraCostTaxAmountByRatio) + NewRow.ExtraCostTaxAmountByRatio;
 			EndIf;	
 		EndIf;
-		AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, NewRow, NewRow.Period, NewRow.Batch);
+//		AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, NewRow, NewRow.Period, NewRow.Batch);
+		Row_nrb = TableOfNewReceivedBatches.Add();
+		Row_nrb.Date = NewRow.Period;
+		Row_nrb.Batch = NewRow.Batch;
+
+		Row_nrb.Document = NewRow.Document;
+		Row_nrb.Company = NewRow.Company;
+		Row_nrb.BatchKey = NewRow.BatchKey;
+		Row_nrb.IsPreliminary = NewRow.IsPreliminary;
+
+		Row_nrb.IsOpeningBalance = False;
+		Row_nrb.Direction = Enums.BatchDirection.Receipt;
+
+		Row_nrb.Quantity = NewRow.Quantity;
+		Row_nrb.QuantityBalance = NewRow.Quantity;
+		Row_nrb.PreliminaryQuantity = NewRow.PreliminaryQuantity;
+		Row_nrb.PreliminaryQuantityBalance = NewRow.PreliminaryQuantity;
+
+		For Each Res In AmountResources() Do
+			Row_nrb[Res] = NewRow[Res];
+			Row_nrb[Res + "Balance"] = NewRow[Res];
+		EndDo;	
+		
 	EndDo; // DataForReceipt
 
 	ArrayForDelete = New Array();
@@ -2342,7 +2430,28 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 				EndDo;
 			EndDo;
 		EndDo;
-		AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, NewRow, NewRow.Period, NewRow.Batch);
+//		AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, NewRow, NewRow.Period, NewRow.Batch);
+		Row_nrb = TableOfNewReceivedBatches.Add();
+		Row_nrb.Date = NewRow.Period;
+		Row_nrb.Batch = NewRow.Batch;
+
+		Row_nrb.Document = NewRow.Document;
+		Row_nrb.Company = NewRow.Company;
+		Row_nrb.BatchKey = NewRow.BatchKey;
+		Row_nrb.IsPreliminary = NewRow.IsPreliminary;
+
+		Row_nrb.IsOpeningBalance = False;
+		Row_nrb.Direction = Enums.BatchDirection.Receipt;
+
+		Row_nrb.Quantity = NewRow.Quantity;
+		Row_nrb.QuantityBalance = NewRow.Quantity;
+		Row_nrb.PreliminaryQuantity = NewRow.PreliminaryQuantity;
+		Row_nrb.PreliminaryQuantityBalance = NewRow.PreliminaryQuantity;
+
+		For Each Res In AmountResources() Do
+			Row_nrb[Res] = NewRow[Res];
+			Row_nrb[Res + "Balance"] = NewRow[Res];
+		EndDo;
 	EndDo;
 
 	For Each Row In TableOfNewReceivedBatches Do
@@ -2774,30 +2883,30 @@ Function GetPriceForEmptyAmountFromBatchBalance(ItemKey, Period)
 	EndIf;
 EndFunction
 
-Procedure AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, Source, Date, Batch, ReturnRow = Undefined)
-	Row = TableOfNewReceivedBatches.Add();
-	Row.Date = Date;
-	Row.ReturnRow = ReturnRow;
-	Row.Batch = Batch;
-
-	Row.Document = Source.Document;
-	Row.Company = Source.Company;
-	Row.BatchKey = Source.BatchKey;
-	Row.IsPreliminary = Source.IsPreliminary;
-
-	Row.IsOpeningBalance = False;
-	Row.Direction = Enums.BatchDirection.Receipt;
-
-	Row.Quantity = Source.Quantity;
-	Row.QuantityBalance = Source.Quantity;
-	Row.PreliminaryQuantity = Source.PreliminaryQuantity;
-	Row.PreliminaryQuantityBalance = Source.PreliminaryQuantity;
-
-	For Each Res In AmountResources() Do
-		Row[Res] = Source[Res];
-		Row[Res + "Balance"] = Source[Res];
-	EndDo;	
-EndProcedure	
+//Procedure AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, Source, Date, Batch, ReturnRow = Undefined)
+//	Row = TableOfNewReceivedBatches.Add();
+//	Row.Date = Date;
+//	Row.ReturnRow = ReturnRow;
+//	Row.Batch = Batch;
+//
+//	Row.Document = Source.Document;
+//	Row.Company = Source.Company;
+//	Row.BatchKey = Source.BatchKey;
+//	Row.IsPreliminary = Source.IsPreliminary;
+//
+//	Row.IsOpeningBalance = False;
+//	Row.Direction = Enums.BatchDirection.Receipt;
+//
+//	Row.Quantity = Source.Quantity;
+//	Row.QuantityBalance = Source.Quantity;
+//	Row.PreliminaryQuantity = Source.PreliminaryQuantity;
+//	Row.PreliminaryQuantityBalance = Source.PreliminaryQuantity;
+//
+//	For Each Res In AmountResources() Do
+//		Row[Res] = Source[Res];
+//		Row[Res + "Balance"] = Source[Res];
+//	EndDo;	
+//EndProcedure	
 
 Procedure RemoveRowsWithEmptyAmountBalance(RowsCollection)
 	ArrayForDelete = New Array();

@@ -2060,7 +2060,6 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 		CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches);
 	
 	ElsIf TypeOf(Document) = Type("DocumentRef.SalesReturn") Or TypeOf(Document) = Type("DocumentRef.RetailReturnReceipt") Then
-		
 		For Each Row_Return In TableOfReturnedBatches Do
 //			AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, Row_Return, Row_Return.Date, Row_Return.Batch, Row_Return);
 			Row_nrb = TableOfNewReceivedBatches.Add();
@@ -2109,7 +2108,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				Continue;
 			EndIf;
 		    Row_ReceiveBatch.ReturnRow.AlreadyReceived = True;
-			FillPropertyValues(Rows.Add(), Row);
+			FillPropertyValues(Rows.Add(), Row_ReceiveBatch);
 		EndDo;
 		RemoveRowsWithEmptyAmountBalance(Rows);
 		

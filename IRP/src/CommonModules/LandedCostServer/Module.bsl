@@ -927,7 +927,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.PurchaseInvoice
 	|			OR T6020S_BatchKeysInfo.Recorder refs Document.GoodsReceipt
 	|				then T6020S_BatchKeysInfo.PreliminaryID
-	|			else undefined
+	|			else """"
 	|		end as PreliminaryID 
 	|INTO BatchKeysRegister
 	|FROM
@@ -1020,7 +1020,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.PurchaseInvoice
 	|			OR T6020S_BatchKeysInfo.Recorder refs Document.GoodsReceipt
 	|				then T6020S_BatchKeysInfo.PreliminaryID
-	|			else undefined
+	|			else """"
 	|		end
 	|;
 	|
@@ -1155,7 +1155,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.PurchaseInvoice
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.GoodsReceipt
 	|			then T6020S_BatchKeysInfo.PreliminaryID
-	|		else undefined
+	|		else """"
 	|	end AS PreliminaryID
 	|INTO BatchKeysRegisterOutPeriod
 	|FROM
@@ -1243,7 +1243,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.PurchaseInvoice
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.GoodsReceipt
 	|			then T6020S_BatchKeysInfo.PreliminaryID
-	|		else undefined
+	|		else """"
 	|	end
 	|;
 	|
@@ -1576,7 +1576,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	UNDEFINED, // ItemLinkID
 	|	UNDEFINED, // FixedAsset
 	|	R6010B_BatchWiseBalance.PreliminaryQuantityBalance > 0, // IsPreliminary
-	|	UNDEFINED // PreliminaryID
+	|	"""" // PreliminaryID
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance.Balance(ENDOFPERIOD(&EndPeriod, DAY), (BatchKey, Batch.Company) IN
 	|		(SELECT
@@ -2427,7 +2427,7 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
                 NewRow.ExtraCostTaxAmountByRatio = (_totalTaxAmount / 100 * _ExtraCostTaxAmountByRatio) + NewRow.ExtraCostTaxAmountByRatio;
 			EndIf;	
 		EndIf;
-//		AddTo_TableOfNewReceivedBatches(TableOfNewReceivedBatches, NewRow, NewRow.Period, NewRow.Batch);
+
 		Row_nrb = TableOfNewReceivedBatches.Add();
 		Row_nrb.Date = NewRow.Period;
 		Row_nrb.Batch = NewRow.Batch;

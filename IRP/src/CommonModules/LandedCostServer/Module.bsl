@@ -2058,7 +2058,11 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, T
 							ActuallyPreliminaryBatchesWithBalance.Add(PreliminaryBatchesWithBalance[0]);
 						Else // more than 1
 							For Each ItemOfPreliminaryBatchesWithBalance In PreliminaryBatchesWithBalance Do
-								If ItemOfPreliminaryBatchesWithBalance.IsOpeningBalance Then
+								If (ItemOfPreliminaryBatchesWithBalance.IsOpeningBalance = True
+									And ItemOfPreliminaryBatchesWithBalance.IsOutPeriodPreliminaryReceipt = False)
+									Or (ItemOfPreliminaryBatchesWithBalance.IsOpeningBalance = False
+										And ItemOfPreliminaryBatchesWithBalance.IsOutPeriodPreliminaryReceipt = Undefined) Then
+									
 									ActuallyPreliminaryBatchesWithBalance.Add(ItemOfPreliminaryBatchesWithBalance);
 								EndIf;
 							EndDo;

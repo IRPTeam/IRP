@@ -1044,7 +1044,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			else """"
 	|		end
 	|;
-	//----------------------------------------------------------------------------------------
 	|
 	|select
 	|	T6020S_BatchKeysInfo.Recorder as Ref,
@@ -1073,10 +1072,6 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	and T6020S_BatchKeysInfo.IsPreliminary
 	|	and T6020S_BatchKeysInfo.PreliminaryID = ClosingPreliminaryDocuments.PreliminaryID
 	|;
-	|
-	//----------------------------------------------------------------------------------------
-	|
-	|
 	|
 	////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -1978,6 +1973,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, T
 						NewRow_ReturnedBatches.Date             = Row.Date;
 						NewRow_ReturnedBatches.Direction        = Enums.BatchDirection.Receipt;
 						NewRow_ReturnedBatches.IsOpeningBalance = False;
+						NewRow_ReturnedBatches.IsOutPeriodPreliminaryReceipt = False;
 						NewRow_ReturnedBatches.Skip             = True;
 						NewRow_ReturnedBatches.Priority         = 0;
 						NewRow_ReturnedBatches.BatchKey         = Row.BatchKey;
@@ -2061,7 +2057,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, T
 								If (ItemOfPreliminaryBatchesWithBalance.IsOpeningBalance = True
 									And ItemOfPreliminaryBatchesWithBalance.IsOutPeriodPreliminaryReceipt = False)
 									Or (ItemOfPreliminaryBatchesWithBalance.IsOpeningBalance = False
-										And ItemOfPreliminaryBatchesWithBalance.IsOutPeriodPreliminaryReceipt = Undefined) Then
+										And ItemOfPreliminaryBatchesWithBalance.IsOutPeriodPreliminaryReceipt = False) Then
 									
 									ActuallyPreliminaryBatchesWithBalance.Add(ItemOfPreliminaryBatchesWithBalance);
 								EndIf;
@@ -2342,6 +2338,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, T
 	TableOfNewReceivedBatches.Columns.Add("Company");
 	TableOfNewReceivedBatches.Columns.Add("Date");
 	TableOfNewReceivedBatches.Columns.Add("IsOpeningBalance");
+	TableOfNewReceivedBatches.Columns.Add("IsOutPeriodPreliminaryReceipt");
 	TableOfNewReceivedBatches.Columns.Add("Direction");
 	TableOfNewReceivedBatches.Columns.Add("ReturnRow");
 	TableOfNewReceivedBatches.Columns.Add("IsPreliminary");
@@ -2386,6 +2383,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, T
 			Row_nrb.IsPreliminary = Row_return.IsPreliminary;
 
 			Row_nrb.IsOpeningBalance = False;
+			Row_nrb.IsOutPeriodPreliminaryReceipt = False;
 			Row_nrb.Direction = Enums.BatchDirection.Receipt;
 
 			Row_nrb.Quantity = Row_return.Quantity;
@@ -2481,6 +2479,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, T
 			Row_nrb.IsPreliminary = NewRow.IsPreliminary;
 
 			Row_nrb.IsOpeningBalance = False;
+			Row_nrb.IsOutPeriodPreliminaryReceipt = False;
 			Row_nrb.Direction = Enums.BatchDirection.Receipt;
 
 			Row_nrb.Quantity = NewRow.Quantity;
@@ -2555,6 +2554,7 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 			Row_nrb.IsPreliminary = Row_Expense.IsPreliminary;
 
 			Row_nrb.IsOpeningBalance = False;
+			Row_nrb.IsOutPeriodPreliminaryReceipt = False;
 			Row_nrb.Direction = Enums.BatchDirection.Receipt;
 
 			Row_nrb.Quantity = Row_Expense.Quantity;
@@ -2690,6 +2690,7 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 		Row_nrb.IsPreliminary = NewRow.IsPreliminary;
 
 		Row_nrb.IsOpeningBalance = False;
+		Row_nrb.IsOutPeriodPreliminaryReceipt = False;
 		Row_nrb.Direction = Enums.BatchDirection.Receipt;
 
 		Row_nrb.Quantity = NewRow.Quantity;
@@ -2753,6 +2754,7 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 		Row_nrb.IsPreliminary = NewRow.IsPreliminary;
 
 		Row_nrb.IsOpeningBalance = False;
+		Row_nrb.IsOutPeriodPreliminaryReceipt = False;
 		Row_nrb.Direction = Enums.BatchDirection.Receipt;
 
 		Row_nrb.Quantity = NewRow.Quantity;

@@ -218,13 +218,13 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'             | ''             | ''                            | ''           | ''           | ''                    | ''              | ''          | ''            |
-		| 'Document registrations records'     | ''             | ''                            | ''           | ''           | ''                    | ''              | ''          | ''            |
-		| 'Register  "R4050 Stock inventory"'  | ''             | ''                            | ''           | ''           | ''                    | ''              | ''          | ''            |
-		| ''                                   | 'Record type'  | 'Period'                      | 'Resources'  | ''           | ''                    | 'Dimensions'    | ''          | ''            |
-		| ''                                   | ''             | ''                            | 'Quantity'   | 'Quantity'   | 'Preliminary quantity'| 'Company'       | 'Store'     | 'Item key'    |
-		| ''                                   | 'Expense'      | '$$DateSalesInvoice029901$$'  | '31'         | '31'         | ''                    | 'Main Company'  | 'Store 01'  | '38/Yellow'   |
-		| ''                                   | 'Expense'      | '$$DateSalesInvoice029901$$'  | '40'         | '40'         | ''                    | 'Main Company'  | 'Store 01'  | '38/Black'    |
+		| '$$SalesInvoice029901$$'             | ''             | ''                            | ''           | ''                    | ''              | ''          | ''            |
+		| 'Document registrations records'     | ''             | ''                            | ''           | ''                    | ''              | ''          | ''            |
+		| 'Register  "R4050 Stock inventory"'  | ''             | ''                            | ''           | ''                    | ''              | ''          | ''            |
+		| ''                                   | 'Record type'  | 'Period'                      | 'Resources'  | ''                    | 'Dimensions'    | ''          | ''            |
+		| ''                                   | ''             | ''                            | 'Quantity'   | 'Preliminary quantity'| 'Company'       | 'Store'     | 'Item key'    |
+		| ''                                   | 'Expense'      | '$$DateSalesInvoice029901$$'  | '31'         | ''                    | 'Main Company'  | 'Store 01'  | '38/Yellow'   |
+		| ''                                   | 'Expense'      | '$$DateSalesInvoice029901$$'  | '40'         | ''                    | 'Main Company'  | 'Store 01'  | '38/Black'    |
 
 	* Check SI movements (Register  "Register  "R2001 Sales")
 		And I select "R2001 Sales" exact value from "Register" drop-down list

@@ -802,11 +802,18 @@ Function GetBatchWiseBalance(CalculationSettings)
 		TableOfReturnedBatches.Columns.Add(Res + "Balance", Metadata.DefinedTypes.typeAmount.Type);
 	EndDo;
 
+	TableOfTransferedPreliminary = EmptyTable_BatchWiseBalance.CopyColumns();
+	For Each Res In AmountResources() Do
+		TableOfTransferedPreliminary.Columns.Add(Res + "Balance", Metadata.DefinedTypes.typeQuantity.Type);
+	EndDo;
+
 	tmp_manager = New TempTablesManager();
 	Tree = GetBatchTree(tmp_manager, CalculationSettings);
 	
 	For Each Row In Tree.Rows Do
-		CalculateBatch(Row.Document, Row.Rows, Tables, Tree, TableOfReturnedBatches, EmptyTable_BatchWiseBalance, CalculationSettings);
+		CalculateBatch(Row.Document, Row.Rows, Tables, Tree, TableOfReturnedBatches, TableOfTransferedPreliminary, EmptyTable_BatchWiseBalance, CalculationSettings);
+		
+		// returned batches
 		If TableOfReturnedBatches.Count() Then
 			For Each RowReturnedBatches In TableOfReturnedBatches Do  
 				If RowReturnedBatches.AlreadyReceived = True Then
@@ -822,6 +829,18 @@ Function GetBatchWiseBalance(CalculationSettings)
 			EndDo;
 			Row.Rows.Sort("Date");
 		EndIf;
+
+		// write of preliminary batches, when get purchase invoice
+		If TableOfTransferedPreliminary.Count() Then
+			For Each RowTransferedPreliminaryBatches In TableOfTransferedPreliminary Do  
+				ArrayOfTreeRows = Tree.Rows.FindRows(New Structure("Document", RowTransferedPreliminaryBatches.Document));
+				For Each ItemOfTreeRows In ArrayOfTreeRows Do
+					FillPropertyValues(ItemOfTreeRows.Rows.Add(), RowTransferedPreliminaryBatches);
+				EndDo;
+			EndDo;
+			Row.Rows.Sort("Date");
+		EndIf; 
+
 	EndDo;
 	Return Tables;
 EndFunction
@@ -1784,7 +1803,7 @@ Function GetSalesBatchDocument(ArrayOfReturnedSalesInvoices)
 	Return TableOfReturnedBatches
 EndFunction
 
-Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, EmptyTable_BatchWiseBalance, CalculationSettings)
+Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, TableOfTransferedPreliminary, EmptyTable_BatchWiseBalance, CalculationSettings)
 	TableOfReturnedBatches.Clear();
 
 	DataForExpense = EmptyTable_BatchWiseBalance.CopyColumns();
@@ -1921,8 +1940,8 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 						EndDo;	
 
 					EndIf;
-				EndDo; // return by sales invoice
-
+				EndDo;
+				
 				If NeedReceipt <> 0 Then
 					// Can not receipt Batch key by sales return: %1 , Quantity: %2 , Doc: %3
 					Msg = StrTemplate(R().LC_Error_001, GetBatchKeyDetailPresentation(Row.BatchKey), NeedReceipt, Row.Document);
@@ -1937,7 +1956,151 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					NewRow_ShortageIncoming.Period   = Row.Date;
 					NewRow_ShortageIncoming.Quantity = NeedReceipt;
 				EndIf;
-			EndIf;
+			EndIf; // return by sales invoice
+			
+			// receipt preliminary
+			If TypeOf(Document) = Type("DocumentRef.PurchaseInvoice") And ValueIsFilled(Row.PreliminaryID) Then
+				PreliminaryData = GetPreliminaryBatches(Row.PreliminaryID, 
+					Row.BatchKey.ItemKey, Row.BatchKey.SerialLotNumber, Row.BatchKey.SourceOfOrigin);
+				
+				NeedExpense = Row.Quantity;
+			
+				// expense preliminary ballance
+				For Each RowPreliminaryDocument In PreliminaryData.Documents Do
+					For Each RowPreliminaryBatchKey In PreliminaryData.BatchKeys Do
+				
+						PreliminaryBatchesWithBalance = New Array();
+						For Each TreeRow_Level1 In Tree.Rows Do
+							For Each TreeRow_Level2 In TreeRow_Level1.Rows Do
+								If TreeRow_Level2.Batch.Document = RowPreliminaryDocument.PreliminaryDocument
+									And TreeRow_Level2.BatchKey = RowPreliminaryBatchKey.BatchKey Then
+									PreliminaryBatchesWithBalance.Add(TreeRow_Level2);
+								EndIf;
+							EndDo;
+						EndDo;
+											
+						For Each Row_Batch In PreliminaryBatchesWithBalance Do
+									
+							If NeedExpense = 0 Then
+								Continue;
+							EndIf;
+							
+							If Row_Batch.Date > Row.Date Then
+								Break;
+							EndIf;
+			
+							If Row_Batch.PreliminaryQuantityBalance = 0 Then
+								Continue;
+							EndIf;
+							
+							If Row_Batch.Company <> Row.Company Then
+								Continue; // batch reallocate not supported
+							EndIf;
+			
+							If Not ValueIsFilled(Row_Batch.Batch) Then
+								Continue;
+							EndIf;
+						
+							// how many preliminary will be expense	
+							ExpenseQuantity = Min(NeedExpense, Row_Batch.PreliminaryQuantityBalance);
+						
+							ExpenseAmounts = New Structure();
+							For Each Res In AmountResources() Do
+								ExpenseAmounts.Insert(Res, 
+									CalculatePreliminaryExpenseAmount(ExpenseQuantity, Row_Batch, "PreliminaryQuantityBalance", Res + "Balance"));
+							EndDo;
+							
+							Row_Batch.PreliminaryQuantityBalance = Row_Batch.PreliminaryQuantityBalance - ExpenseQuantity;
+							
+							For Each Res In AmountResources() Do
+								Row_Batch[Res + "Balance"] = Row_Batch[Res + "Balance"] - ExpenseAmounts[Res];
+							EndDo;	
+											
+							NeedExpense = NeedExpense - ExpenseQuantity;
+						
+							If Not (ExpenseQuantity <> 0 Or ExpenseAmounts.PreliminaryAmount <> 0) Then
+								Continue; // preliminary balance is 0
+							EndIf;
+							
+							// expense for preliminary batch
+							NewRow = Tables.DataForExpense.Add();
+							NewRow.BatchKey  = Row_Batch.BatchKey;
+							NewRow.Document  = Row.Document;
+							NewRow.Company   = Row.Company;
+							NewRow.Period    = Row.Date;
+							NewRow.Batch     = Row_Batch.Batch;
+							NewRow.IsPreliminary = Row_Batch.IsPreliminary;
+							
+							NewRow.PreliminaryQuantity = ExpenseQuantity;
+							
+							For Each Res In AmountResources() Do
+								NewRow[Res] = ExpenseAmounts[Res];
+							EndDo;
+							
+							FillPropertyValues(DataForExpense.Add(), NewRow);
+	
+							If Row_Batch.BatchKey = Row.BatchKey Then
+								Continue;
+							EndIf;
+							
+							// expense for inventory batch, when preliminary batch is transfer to other store
+							NewRow = Tables.DataForExpense.Add();
+							NewRow.BatchKey  = Row.BatchKey;
+							NewRow.Document  = Row.Document;
+							NewRow.Company   = Row.Company;
+							NewRow.Period    = Row.Date;
+							NewRow.Batch     = Row.Batch;
+							NewRow.IsPreliminary = Row.IsPreliminary;
+																	
+							ExpenseAmounts = New Structure();
+							For Each Res In AmountResources() Do
+								ExpenseAmounts.Insert(Res, 
+									CalculatePreliminaryExpenseAmount(ExpenseQuantity, Row, "QuantityBalance", Res + "Balance"));
+							EndDo;
+					
+							Row.QuantityBalance = Row.QuantityBalance - ExpenseQuantity;
+					
+							For Each Res In AmountResources() Do
+								Row[Res + "Balance"] = Row[Res + "Balance"] - ExpenseAmounts[Res];
+							EndDo;
+							
+							NewRow.Quantity = ExpenseQuantity;
+							
+							For Each Res In AmountResources() Do
+								NewRow[Res] = ExpenseAmounts[Res];
+							EndDo;
+						
+							FillPropertyValues(DataForExpense.Add(), NewRow);
+							
+							// receive inventory batch for other store, when preliminary batch is transfer to other store
+							NewRow = Tables.DataForReceipt.Add();
+							NewRow.BatchKey  = Row_Batch.BatchKey;
+							NewRow.Document  = Row.Document;
+							NewRow.Company   = Row.Company;
+							NewRow.Period    = Row.Date;
+							NewRow.Batch     = Row_Batch.Batch;
+							NewRow.IsPreliminary = Row.IsPreliminary;
+							
+							Row.QuantityBalance = ExpenseQuantity;
+					
+							For Each Res In AmountResources() Do
+								Row[Res + "Balance"] = Row[Res + "Balance"] - ExpenseAmounts[Res];
+							EndDo;
+							
+							NewRow.Quantity = ExpenseQuantity;
+							
+							For Each Res In AmountResources() Do
+								NewRow[Res] = ExpenseAmounts[Res];
+							EndDo;
+							
+							FillPropertyValues(DataForReceipt.Add(), NewRow);
+							FillPropertyValues(TableOfTransferedPreliminary.Add(), NewRow);
+							
+						EndDo; // PreliminaryBatchesWithBalance
+					EndDo; // preliminary batch keys
+				EndDo; // preliminary documents
+			EndIf; // Prelimiary
+		
 		Else //Expense
 
 			NeedExpense = Row.Quantity;
@@ -2521,6 +2684,45 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 	RemoveRowsWithEmptyAmountBalance(Rows);
 EndProcedure
 
+Function GetPreliminaryBatches(PreliminaryID, ItemKey, SerialLotNumber, SourceOfOrigin)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	T6020S_BatchKeysInfo.Recorder AS PreliminaryDocument
+	|FROM
+	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
+	|WHERE
+	|	T6020S_BatchKeysInfo.IsPreliminary
+	|	AND T6020S_BatchKeysInfo.RowID = &PreliminaryID
+	|GROUP BY
+	|	T6020S_BatchKeysInfo.Recorder,
+	|	T6020S_BatchKeysInfo.Period
+	|
+	|ORDER BY
+	|	T6020S_BatchKeysInfo.Period
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	BatchKeys.Ref AS BatchKey
+	|FROM
+	|	Catalog.BatchKeys AS BatchKeys
+	|WHERE
+	|		BatchKeys.ItemKey = &ItemKey
+	|		AND BatchKeys.SerialLotNumber = &SerialLotNumber
+	|		AND BatchKeys.SourceOfOrigin = &SourceOfOrigin
+	|	AND NOT BatchKeys.DeletionMark";
+	Query.SetParameter("PreliminaryID", PreliminaryID);
+	Query.SetParameter("ItemKey", ItemKey);
+	Query.SetParameter("SerialLotNumber", SerialLotNumber);
+	Query.SetParameter("SourceOfOrigin", SourceOfOrigin);
+	QueryResults = Query.ExecuteBatch();
+	TablePreliminaryDocuments = QueryResults[0].Unload();
+	TablePreliminaryBatchKeys = QueryResults[1].Unload();
+	Return New Structure("Documents, BatchKeys", 
+		TablePreliminaryDocuments, TablePreliminaryBatchKeys);
+EndFunction			
+
 Function GetBundleAmountValues(DataForBundleAmountValues, Row_Receipt, Row_Expense)
 	Query = New Query();
 	Query.Text =
@@ -2955,6 +3157,18 @@ Procedure RemoveRowsWithEmptyAmountBalance(RowsCollection)
 		RowsCollection.Delete(Row);
 	EndDo;
 EndProcedure
+
+Function CalculatePreliminaryExpenseAmount(ExpenseQuantity, Row_Batch, BatchQuantityResourceNameBalance, AmountColumnName)
+	ExpenseAmount = 0;
+	If Row_Batch[BatchQuantityResourceNameBalance] - ExpenseQuantity = 0 Then
+		ExpenseAmount = Row_Batch[AmountColumnName];
+	Else
+		If Row_Batch[BatchQuantityResourceNameBalance] <> 0 Then
+			ExpenseAmount = Round((Row_Batch[AmountColumnName] / Row_Batch[BatchQuantityResourceNameBalance]) * ExpenseQuantity, 2);
+		EndIf;
+	EndIf;
+	Return ExpenseAmount;
+EndFunction			
 
 Function AmountProportionByQuantity(Quantity, Row_Batch, AmountColumnName, QuantityColumnName)
 	QtyName = ?(Row_Batch.IsPreliminary, "Preliminary", "") + QuantityColumnName;

@@ -2443,6 +2443,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ItemList.IsPreliminary</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListIsPreliminaryOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListIsPreliminaryExtendedTooltip</name>
             <id>536</id>

@@ -786,6 +786,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 	TableOfReturnedBatches.Columns.Add("Batch"            , New TypeDescription("CatalogRef.Batches"));
 	TableOfReturnedBatches.Columns.Add("QuantityBalance"  , RegMetadata.Resources.Quantity.Type);
 	TableOfReturnedBatches.Columns.Add("IsOpeningBalance" , New TypeDescription("Boolean"));
+	TableOfReturnedBatches.Columns.Add("IsOutPeriodPreliminaryReceipt" , New TypeDescription("Boolean"));
 	TableOfReturnedBatches.Columns.Add("Skip"             , New TypeDescription("Boolean"));
 	TableOfReturnedBatches.Columns.Add("Priority"         , New TypeDescription("Number"));
 	TableOfReturnedBatches.Columns.Add("BatchKey"         , New TypeDescription("CatalogRef.BatchKeys"));

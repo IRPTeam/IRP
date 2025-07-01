@@ -848,7 +848,8 @@ EndFunction
 Function GetBatchTree(TempTablesManager, CalculationSettings)
 	Query = New Query();
 	Query.TempTablesManager = TempTablesManager;
-	Query.Text =	
+	Query.Text =
+		
 	"SELECT
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
 	|	SUM(T6020S_BatchKeysInfo.PreliminaryQuantity) AS PreliminaryQuantity,
@@ -866,6 +867,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	sum(T6020S_BatchKeysInfo.AllocatedCostTaxAmount) AS AllocatedCostTaxAmount,
 	|	sum(T6020S_BatchKeysInfo.AllocatedRevenueAmount) AS AllocatedRevenueAmount,
 	|	sum(T6020S_BatchKeysInfo.AllocatedRevenueTaxAmount) AS AllocatedRevenueTaxAmount,
+	|	false as IsOutPeriodPreliminaryReceipt,
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
 	|			then T6020S_BatchKeysInfo.ProductionDocument
@@ -1042,6 +1044,39 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			else """"
 	|		end
 	|;
+	//----------------------------------------------------------------------------------------
+	|
+	|select
+	|	T6020S_BatchKeysInfo.Recorder as Ref,
+	|	T6020S_BatchKeysInfo.PreliminaryID as PreliminaryID
+	|into ClosingPreliminaryDocuments
+	|from
+	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
+	|where
+	|	T6020S_BatchKeysInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	|	AND CASE
+	|		WHEN &FilterByCompany
+	|			THEN T6020S_BatchKeysInfo.Company = &Company
+	|		ELSE TRUE
+	|	END
+	|	and T6020S_BatchKeysInfo.Recorder refs Document.PurchaseInvoice
+	|	and T6020S_BatchKeysInfo.PreliminaryID <> """"
+	|;	
+	|
+	|select
+	|	T6020S_BatchKeysInfo.Recorder as Ref
+	|into ReceivePreliminaryDocuments
+	|from 
+	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
+	|	inner join ClosingPreliminaryDocuments as ClosingPreliminaryDocuments
+	|	on T6020S_BatchKeysInfo.Recorder refs Document.GoodsReceipt
+	|	and T6020S_BatchKeysInfo.IsPreliminary
+	|	and T6020S_BatchKeysInfo.PreliminaryID = ClosingPreliminaryDocuments.PreliminaryID
+	|;
+	|
+	//----------------------------------------------------------------------------------------
+	|
+	|
 	|
 	////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -1064,8 +1099,9 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|
 	////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	ReallocateDocuments.Ref AS Ref
-	|INTO ReallocateDocumentOutPeriod
+	|	ReallocateDocuments.Ref AS Ref,
+	|	false as IsOutPeriodPreliminaryReceipt
+	|INTO DocumentsOutPeriod
 	|FROM
 	|	ReallocateDocuments AS ReallocateDocuments
 	|		LEFT JOIN BatchKeysRegister AS BatchKeyRegister
@@ -1074,6 +1110,22 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeyRegister.Document IS NULL
 	|GROUP BY
 	|	ReallocateDocuments.Ref
+	|
+	|union all
+	|
+	|select
+	|	ReceivePreliminaryDocuments.Ref as Ref,
+	|	true as IsOutPeriodPreliminaryReceipt
+	|from 
+	|	ReceivePreliminaryDocuments as ReceivePreliminaryDocuments
+	|	left join BatchKeysRegister AS BatchKeyRegister
+	|	on ReceivePreliminaryDocuments.Ref = BatchKeyRegister.Document
+	|where 
+	|	BatchKeyRegister.Document is null
+	|group by
+	|	ReceivePreliminaryDocuments.Ref
+	|
+	|
 	|;
 	|
 	////////////////////////////////////////////////////////////////////////////////
@@ -1094,6 +1146,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	sum(T6020S_BatchKeysInfo.AllocatedCostTaxAmount) AS AllocatedCostTaxAmount,
 	|	sum(T6020S_BatchKeysInfo.AllocatedRevenueAmount) AS AllocatedRevenueAmount,
 	|	sum(T6020S_BatchKeysInfo.AllocatedRevenueTaxAmount) AS AllocatedRevenueTaxAmount,
+	|	DocumentsOutPeriod.IsOutPeriodPreliminaryReceipt,
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
 	|			then T6020S_BatchKeysInfo.ProductionDocument
@@ -1178,10 +1231,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	end AS PreliminaryID
 	|INTO BatchKeysRegisterOutPeriod
 	|FROM
-	|	ReallocateDocumentOutPeriod AS ReallocateDocumentOutPeriod
+	|	DocumentsOutPeriod AS DocumentsOutPeriod
 	|		INNER JOIN InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
-	|		ON ReallocateDocumentOutPeriod.Ref = T6020S_BatchKeysInfo.Recorder
+	|		ON DocumentsOutPeriod.Ref = T6020S_BatchKeysInfo.Recorder
 	|GROUP BY
+	|	DocumentsOutPeriod.IsOutPeriodPreliminaryReceipt,
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
 	|			then T6020S_BatchKeysInfo.ProductionDocument
@@ -1284,6 +1338,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegister.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
 	|	BatchKeysRegister.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	BatchKeysRegister.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
+	|	BatchKeysRegister.IsOutPeriodPreliminaryReceipt as IsOutPeriodPreliminaryReceipt,
 	|	BatchKeysRegister.Document AS Document,
 	|	BatchKeysRegister.PointInTime AS PointInTime,
 	|	BatchKeysRegister.Date AS Date,
@@ -1327,6 +1382,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegisterOutPeriod.AllocatedCostTaxAmount,
 	|	BatchKeysRegisterOutPeriod.AllocatedRevenueAmount,
 	|	BatchKeysRegisterOutPeriod.AllocatedRevenueTaxAmount,
+	|	BatchKeysRegisterOutPeriod.IsOutPeriodPreliminaryReceipt as IsOutPeriodPreliminaryReceipt,
 	|	BatchKeysRegisterOutPeriod.Document,
 	|	BatchKeysRegisterOutPeriod.PointInTime,
 	|	BatchKeysRegisterOutPeriod.Date,
@@ -1370,6 +1426,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	SUM(BatchKeysInfo.AllocatedCostTaxAmount) AS AllocatedCostTaxAmount,
 	|	SUM(BatchKeysInfo.AllocatedRevenueAmount) AS AllocatedRevenueAmount,
 	|	SUM(BatchKeysInfo.AllocatedRevenueTaxAmount) AS AllocatedRevenueTaxAmount,
+	|	BatchKeysInfo.IsOutPeriodPreliminaryReceipt as IsOutPeriodPreliminaryReceipt,
 	|	BatchKeysInfo.Document AS Document,
 	|	BatchKeysInfo.PointInTime AS PointInTime,
 	|	BatchKeysInfo.Date AS Date,
@@ -1397,6 +1454,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		AND (NOT BatchKeys.DeletionMark)
 	|GROUP BY
 	|	BatchKeys.Ref,
+	|	BatchKeysInfo.IsOutPeriodPreliminaryReceipt,
 	|	BatchKeysInfo.Document,
 	|	BatchKeysInfo.Date,
 	|	BatchKeysInfo.PointInTime,
@@ -1435,6 +1493,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeys.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
 	|	BatchKeys.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	BatchKeys.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
+	|	BatchKeys.IsOutPeriodPreliminaryReceipt as IsOutPeriodPreliminaryReceipt,
 	|	BatchKeys.Document AS Document,
 	|	BatchKeys.PointInTime AS PointInTime,
 	|	BatchKeys.Date AS Date,
@@ -1563,6 +1622,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	0,
 	|	0,
 	|	0,
+	|	false, // IsOutPeriodPreliminaryReceipt
 	|	R6010B_BatchWiseBalance.Batch.Document,
 	|	R6010B_BatchWiseBalance.Batch.Document.PointInTime,
 	|	R6010B_BatchWiseBalance.Batch.Date,
@@ -1625,6 +1685,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	SUM(AllData.AllocatedCostTaxAmount) AS AllocatedCostTaxAmount,
 	|	SUM(AllData.AllocatedRevenueAmount) AS AllocatedRevenueAmount,
 	|	SUM(AllData.AllocatedRevenueTaxAmount) AS AllocatedRevenueTaxAmount,
+	|	AllData.IsOutPeriodPreliminaryReceipt as IsOutPeriodPreliminaryReceipt,
 	|	AllData.Document AS Document,
 	|	AllData.Document.PointInTime AS PointInTime,
 	|	AllData.Date AS Date,
@@ -1664,6 +1725,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|GROUP BY
 	|	AllData.IsOpeningBalance,
 	|	AllData.BatchKey,
+	|	AllData.IsOutPeriodPreliminaryReceipt,
 	|	AllData.Document,
 	|	AllData.Document.PointInTime,
 	|	AllData.Date,
@@ -1703,6 +1765,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
 	|	AllDataGrouped.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	AllDataGrouped.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
+	|	AllDataGrouped.IsOutPeriodPreliminaryReceipt as IsOutPeriodPreliminaryReceipt,
 	|	AllDataGrouped.Document AS Document,
 	|	AllDataGrouped.Date AS Date,
 	|	AllDataGrouped.Company AS Company,
@@ -1757,9 +1820,11 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	QueryDrop = New Query();
 	QueryDrop.TempTablesManager = TempTablesManager;
 	QueryDrop.Text =
-	"DROP BatchKeysRegister;
+	"DROP ClosingPreliminaryDocuments;
+	|DROP ReceivePreliminaryDocuments;
+	|DROP BatchKeysRegister;
 	|DROP ReallocateDocuments;
-	|DROP ReallocateDocumentOutPeriod;
+	|DROP DocumentsOutPeriod;
 	|DROP BatchKeysRegisterOutPeriod;
 	|DROP BatchKeysInfo;
 	|DROP BatchKeys;
@@ -1816,6 +1881,11 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, T
 		If Row.Skip Then
 			Continue;
 		EndIf;
+		
+		If Row.IsOutPeriodPreliminaryReceipt Then
+			Continue;
+		EndIf;
+
 		If Row.Direction = Enums.BatchDirection.Receipt And Not Row.IsOpeningBalance Then
 
 			NewRow_DataForReceipt = DataForReceipt.Add();
@@ -1978,8 +2048,23 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, T
 								EndIf;
 							EndDo;
 						EndDo;
-											
-						For Each Row_Batch In PreliminaryBatchesWithBalance Do
+						
+						// batches with balance preliminary quantity (not sales and not write-off)
+						ActuallyPreliminaryBatchesWithBalance = New Array();
+						
+						If PreliminaryBatchesWithBalance.Count() = 0 Then
+							// batch is fully sales or write-off
+						ElsIf PreliminaryBatchesWithBalance.Count() = 1 Then
+							ActuallyPreliminaryBatchesWithBalance.Add(PreliminaryBatchesWithBalance[0]);
+						Else // more than 1
+							For Each ItemOfPreliminaryBatchesWithBalance In PreliminaryBatchesWithBalance Do
+								If ItemOfPreliminaryBatchesWithBalance.IsOpeningBalance Then
+									ActuallyPreliminaryBatchesWithBalance.Add(ItemOfPreliminaryBatchesWithBalance);
+								EndIf;
+							EndDo;
+						EndIf;
+						
+						For Each Row_Batch In ActuallyPreliminaryBatchesWithBalance Do
 									
 							If NeedExpense = 0 Then
 								Continue;

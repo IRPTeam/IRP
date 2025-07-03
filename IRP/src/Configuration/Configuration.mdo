@@ -863,6 +863,7 @@
   <commonModules>CommonModule.DocFixedAssetRevaluationServer</commonModules>
   <commonModules>CommonModule.BusinessProcessesServer</commonModules>
   <commonModules>CommonModule.LoggerServerCall</commonModules>
+  <commonModules>CommonModule.LandedCostServer2</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>

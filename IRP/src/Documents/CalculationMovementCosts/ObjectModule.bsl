@@ -15,7 +15,7 @@ Procedure Posting(Cancel, PostingMode)
 	CalculationSettings.Insert("EndPeriod"                  , ThisObject.EndDate);
 	CalculationSettings.Insert("RaiseOnCalculationError"    , ThisObject.RaiseOnCalculationError);
 	
-	LandedCostServer.Posting_BatchWiseBalance(CalculationSettings);
+	LandedCostServer2.Posting_BatchWiseBalance(CalculationSettings);
 	For Each Records In ThisObject.RegisterRecords Do
 		Records.Read();
 	EndDo;
@@ -28,7 +28,7 @@ Procedure UndoPosting(Cancel)
 	AccumulationRegisters.R8510B_BookValueOfFixedAsset.BookValueOfFixedAsset_Clear(ThisObject.Ref, Cancel);
 		
 	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Reset(ThisObject.Company, ThisObject.BeginDate);
-	LandedCostServer.ReleaseBatchReallocateDocuments(ThisObject.Ref);
+	LandedCostServer2.ReleaseBatchReallocateDocuments(ThisObject.Ref);
 EndProcedure
 
 // Fill check processing.

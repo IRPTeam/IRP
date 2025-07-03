@@ -124,6 +124,10 @@ Function IsReallocateIncomingDocument(Document)
 	Return TypeOf(Document) = Type("DocumentRef.BatchReallocateIncoming");
 EndFunction
 
+Function IsInvoiceByPreliminary(Document, BatchRow)
+	Return TypeOf(Document) = Type("DocumentRef.PurchaseInvoice") And ValueIsFilled(BatchRow.PreliminaryID);
+EndFunction
+
 // all documents who can movie batches
 Function GetArrayOfBatchDocumentTypes()
 	ArrayOfTypes = New Array();
@@ -832,7 +836,9 @@ Procedure CalculateBatch(Document, BatchRows, Tables, CalculationSettings)
 		Calculate_DecompositeDocument(Document, BatchRows, Tables, CalculationSettings);
 	Else
 		For Each BatchRow In BatchRows Do
-			If IsSimpleReceipt(Document, BatchRow) Or IsReturnWithoutSalesInvoice(Document, BatchRow) Then
+			If IsInvoiceByPreliminary(Document, BatchRow) Then
+				Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, CalculationSettings);
+			ElsIf IsSimpleReceipt(Document, BatchRow) Or IsReturnWithoutSalesInvoice(Document, BatchRow) Then
 				Calculate_SimpleReceipt(Document, BatchRow, Tables, CalculationSettings);
 			ElsIf IsReturnBySalesInvoice(Document, BatchRow) Then
 				Calculate_ReturnBySalesInvoice(Document, BatchRow, Tables, CalculationSettings);
@@ -866,9 +872,7 @@ Procedure Calculate_SimpleReceipt(Document, BatchRow, Tables, CalculationSetting
 			Price = GetItemInfo.ItemPriceInfo(PriceSettings).Price;
 		EndIf;
 		
-		BatchRow.InvoiceAmount        = Price * BatchRow.Quantity;
-		BatchRow.InvoiceAmountBalance = Price * BatchRow.Quantity;
-						
+		BatchRow.InvoiceAmount        = Price * BatchRow.Quantity;				
 	EndIf; // fill empty amount
 	
 	NewReceipt = Tables.DataForReceipt.Add();
@@ -884,6 +888,131 @@ Procedure Calculate_SimpleReceipt(Document, BatchRow, Tables, CalculationSetting
 	For Each Res In AmountResources() Do
 		NewReceipt[Res] = BatchRow[Res]; 
 	EndDo;
+	WriteBatchWiseBalance(Tables, CalculationSettings);
+EndProcedure
+
+Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, CalculationSettings)
+	// receipt inventoty
+	NewReceipt = Tables.DataForReceipt.Add();
+	NewReceipt.Batch     = BatchRow.Batch;
+	NewReceipt.BatchKey  = BatchRow.BatchKey;
+	NewReceipt.Document  = Document;
+	NewReceipt.Company   = BatchRow.Company;
+	NewReceipt.Period    = BatchRow.Date;
+
+	NewReceipt.Quantity  = BatchRow.Quantity;
+	NewReceipt.PreliminaryQuantity  = BatchRow.PreliminaryQuantity;
+	
+	For Each Res In AmountResources() Do
+		NewReceipt[Res] = BatchRow[Res]; 
+	EndDo;
+	
+	// find all balances by preliminary batch in all stores
+	PreliminaryInfo = GetPreliminaryBatches(BatchRow.PreliminaryID, 
+		BatchRow.BatchKey.ItemKey, 
+		BatchRow.BatchKey.SerialLotNumber, 
+		BatchRow.BatchKey.SourceOfOrigin); 
+	
+	ArrayOf_Balance_BatchRows = New Array();
+	
+	For Each _r1 In PreliminaryInfo.Documents Do
+		For Each _r2 In PreliminaryInfo.BatchKeys Do
+			Balance_BatchRows = GetBatchesWithBalance(BatchRow.Company, _r2.BatchKey, Document.Date, _r1.PreliminaryDocument);
+			For Each _r3 In Balance_BatchRows Do
+				If Not ValueIsFilled(_r3.PreliminaryQuantity) Then
+					Continue; // only balances with preliminary quantity
+				EndIf;
+				ArrayOf_Balance_BatchRows.Add(_r3);
+			EndDo;		
+		EndDo;
+	EndDo;
+	
+	NeedExpense = BatchRow.Quantity;
+	
+	ArrayOfExpenses_OtherBatchKey = New Array(); // expense for other batch keys
+//	TotalExpenseQuantity = 0;
+	
+	For Each Balance_Batch In ArrayOf_Balance_BatchRows Do
+		If NeedExpense = 0 Then
+			Break;
+		EndIf;
+		ExpenseQuantity = Min(NeedExpense, Balance_Batch.PreliminaryQuantity);
+		
+		If Not ValueIsFilled(ExpenseQuantity) Then
+			Continue;
+		EndIf;
+		
+//		If Balance_Batch.BatchKey <> BatchRow.BatchKey Then
+			ArrayOfExpenses_OtherBatchKey.Add(New Structure("Batch, BatchKey, ExpenseQuantity", 
+				Balance_Batch.Batch, Balance_Batch.BatchKey, ExpenseQuantity));
+//		EndIf;
+//		TotalExpenseQuantity = TotalExpenseQuantity + ExpenseQuantity;
+		
+		NeedExpense = NeedExpense - ExpenseQuantity;
+		
+		ExpenseAmounts = New Structure();
+		For Each Res In AmountResources() Do
+			ExpenseAmounts.Insert(Res, AmountProportionByQuantity(ExpenseQuantity, Balance_Batch, Res, "PreliminaryQuantity"));
+			Balance_Batch[Res] = Balance_Batch[Res] - ExpenseAmounts[Res];
+		EndDo;
+		Balance_Batch.PreliminaryQuantity = Balance_Batch.PreliminaryQuantity - ExpenseQuantity;
+		
+		NewExpense = Tables.DataForExpense.Add();
+		NewExpense.Batch     = Balance_Batch.Batch;
+		NewExpense.BatchKey  = Balance_Batch.BatchKey;
+		NewExpense.Document  = Document;
+		NewExpense.Company   = BatchRow.Company;
+		NewExpense.Period    = BatchRow.Date;
+
+		NewExpense.PreliminaryQuantity = ExpenseQuantity;
+		For Each Res In AmountResources() Do
+			NewExpense[Res] = ExpenseAmounts[Res]; 
+		EndDo;
+	EndDo;
+	return;
+	
+	For Each Preliminary_Batch In ArrayOfExpenses_OtherBatchKey Do
+		ExpenseQuantity = Preliminary_Batch.ExpenseQuantity;
+		
+//	If TotalExpenseQuantity <> 0 Then
+		// expense inventory by current batch key
+		NewExpense = Tables.DataForExpense.Add();
+		NewExpense.Batch     = BatchRow.Batch;
+		NewExpense.BatchKey  = BatchRow.BatchKey;
+		NewExpense.Document  = Document;
+		NewExpense.Company   = BatchRow.Company;
+		NewExpense.Period    = BatchRow.Date;
+		
+		NewExpense.Quantity  = ExpenseQuantity;
+		
+		ExpenseAmounts = New Structure();
+		For Each Res In AmountResources() Do
+			ExpenseAmounts.Insert(Res, AmountProportionByQuantity(ExpenseQuantity, BatchRow, Res, "Quantity"));
+			BatchRow[Res] = BatchRow[Res] - ExpenseAmounts[Res];
+		EndDo;
+		
+		For Each Res In AmountResources() Do
+			NewExpense[Res] = ExpenseAmounts[Res]; 
+		EndDo;
+//	EndIf;
+	
+		If Preliminary_Batch.BatchKey <> BatchRow.BatchKey Then 
+		// receipt inventory to other batch key
+		NewReceipt = Tables.DataForReceipt.Add();
+		NewReceipt.Batch     = BatchRow.Batch;
+		NewReceipt.BatchKey  = Preliminary_Batch.BatchKey;
+		NewReceipt.Document  = Document;
+		NewReceipt.Company   = BatchRow.Company;
+		NewReceipt.Period    = BatchRow.Date;
+
+		NewReceipt.Quantity  = ExpenseQuantity;
+	
+		For Each Res In AmountResources() Do
+			NewReceipt[Res] = ExpenseAmounts[Res]; 
+		EndDo;
+		EndIf;
+	EndDo;
+	
 	WriteBatchWiseBalance(Tables, CalculationSettings);
 EndProcedure
 
@@ -1488,7 +1617,7 @@ Procedure Calculate_ReallocateIncomingDocument(Document, BatchRow, Tables, Calcu
 	WriteBatchWiseBalance(Tables, CalculationSettings);
 EndProcedure
 
-Function GetBatchesWithBalance(Company, BatchKey, Period)
+Function GetBatchesWithBalance(Company, BatchKey, Period, BatchDocument = Undefined)
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -1519,7 +1648,12 @@ Function GetBatchesWithBalance(Company, BatchKey, Period)
 	|INTO tmp
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance.Balance(ENDOFPERIOD(&EndPeriod, DAY), BatchKey = &BatchKey
-	|	AND Batch.Company = &Company) AS BatchWiseBalance
+	|	AND Batch.Company = &Company
+	|	AND CASE
+	|		WHEN &Filter_BatchDocument
+	|			THEN Batch.Document = &BatchDocument
+	|		ELSE TRUE
+	|	END) AS BatchWiseBalance
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -1535,6 +1669,8 @@ Function GetBatchesWithBalance(Company, BatchKey, Period)
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("BatchKey", BatchKey);
 	Query.SetParameter("EndPeriod", Period);
+	Query.SetParameter("Filter_BatchDocument", ValueIsFilled(BatchDocument));
+	Query.SetParameter("BatchDocument", BatchDocument);
 
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();

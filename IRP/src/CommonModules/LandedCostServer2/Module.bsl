@@ -500,7 +500,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSetR6010B.Clear();
 	RecordSetR6010B.Write();
 
-	BatchWiseBalanceTables = GetBatchWiseBalance(CalculationSettings);
+	Tables = GetBatchWiseBalance(CalculationSettings);
 	
 	// for grouping value tables
 	_AmountResources = StrConcat(AmountResources(), ",");
@@ -510,14 +510,14 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSetR6010B.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 
 	// Batch wise balance
-	For Each Row In BatchWiseBalanceTables.DataForReceipt Do
+	For Each Row In Tables.DataForReceipt Do
 	 	NewRecordReceipt = RecordSetR6010B.Add();
 	 	FillPropertyValues(NewRecordReceipt, Row);
 	 	NewRecordReceipt.Period = Row.Period;
 	 	NewRecordReceipt.RecordType = AccumulationRecordType.Receipt;
 	 	NewRecordReceipt.Recorder = CalculationSettings.CalculationMovementCostRef;
 	EndDo;
-	For Each Row In BatchWiseBalanceTables.DataForExpense Do
+	For Each Row In Tables.DataForExpense Do
 	 	NewRecordR6010B = RecordSetR6010B.Add();
 	 	FillPropertyValues(NewRecordR6010B, Row);
 	 	NewRecordR6010B.Period = Row.Period;
@@ -531,7 +531,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSetR6030T = AccumulationRegisters.R6030T_BatchShortageOutgoing.CreateRecordSet();
 	RecordSetR6030T.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 
-	For Each Row In BatchWiseBalanceTables.DataForBatchShortageOutgoing Do
+	For Each Row In Tables.DataForBatchShortageOutgoing Do
 		NewRecordR6030T = RecordSetR6030T.Add();
 		FillPropertyValues(NewRecordR6030T, Row);
 		NewRecordR6030T.Period = Row.Period;
@@ -544,7 +544,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSetR6040T = AccumulationRegisters.R6040T_BatchShortageIncoming.CreateRecordSet();
 	RecordSetR6040T.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 
-	For Each Row In BatchWiseBalanceTables.DataForBatchShortageIncoming Do
+	For Each Row In Tables.DataForBatchShortageIncoming Do
 		NewRecordR6040T = RecordSetR6040T.Add();
 		FillPropertyValues(NewRecordR6040T, Row);
 		NewRecordR6040T.Period = Row.Period;
@@ -557,7 +557,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSetR6050T = AccumulationRegisters.R6050T_SalesBatches.CreateRecordSet();
 	RecordSetR6050T.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 
-	For Each Row In BatchWiseBalanceTables.DataForSalesBatches Do
+	For Each Row In Tables.DataForSalesBatches Do
 		NewRecordR6050T = RecordSetR6050T.Add();
 		FillPropertyValues(NewRecordR6050T, Row);
 		NewRecordR6050T.Period = Row.Period;
@@ -569,10 +569,10 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	// Bundle amount values
 	RecordSetT6040S = InformationRegisters.T6040S_BundleAmountValues.CreateRecordSet();
 	RecordSetT6040S.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
-	BatchWiseBalanceTables.DataForBundleAmountValues.GroupBy(
+	Tables.DataForBundleAmountValues.GroupBy(
 	"Company, Period, Batch, BatchKey, BatchKeyBundle", _AmountResources);
 
-	For Each Row In BatchWiseBalanceTables.DataForBundleAmountValues Do
+	For Each Row In Tables.DataForBundleAmountValues Do
 		NewRecordT6040S = RecordSetT6040S.Add();
 		FillPropertyValues(NewRecordT6040S, Row);
 		NewRecordT6040S.Period = Row.Period;
@@ -584,10 +584,10 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	// Composite amount values
 	RecordSetT6090S = InformationRegisters.T6090S_CompositeBatchesAmountValues.CreateRecordSet();
 	RecordSetT6090S.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
-	BatchWiseBalanceTables.DataForCompositeBatchesAmountValues.GroupBy(
+	Tables.DataForCompositeBatchesAmountValues.GroupBy(
 	"Company, Period, Batch, BatchKey, BatchComposite, BatchKeyComposite", _AmountResources + "," + _QuantityResources);
 
-	For Each Row In BatchWiseBalanceTables.DataForCompositeBatchesAmountValues Do
+	For Each Row In Tables.DataForCompositeBatchesAmountValues Do
 		NewRecordT6090S = RecordSetT6090S.Add();
 		FillPropertyValues(NewRecordT6090S, Row);
 		NewRecordT6090S.Period = Row.Period;
@@ -599,10 +599,10 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	// Reallocated amount values
 	RecordSetT6080S = InformationRegisters.T6080S_ReallocatedBatchesAmountValues.CreateRecordSet();
 	RecordSetT6080S.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
-	BatchWiseBalanceTables.DataForReallocatedBatchesAmountValues.GroupBy(
+	Tables.DataForReallocatedBatchesAmountValues.GroupBy(
 	"Period, OutgoingDocument, IncomingDocument, BatchKey", _AmountResources + "," + _QuantityResources);
 
-	For Each Row In BatchWiseBalanceTables.DataForReallocatedBatchesAmountValues Do
+	For Each Row In Tables.DataForReallocatedBatchesAmountValues Do
 		NewRecordT6080S = RecordSetT6080S.Add();
 		FillPropertyValues(NewRecordT6080S, Row);
 		NewRecordT6080S.Period = Row.Period;
@@ -614,10 +614,24 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	// Write-off batches
 	RecordSet = InformationRegisters.T6095S_WriteOffBatchesInfo.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
-	BatchWiseBalanceTables.DataForWriteOffBatches.GroupBy(
+	Tables.DataForWriteOffBatches.GroupBy(
 	"Period, Document, Company, Branch, ProfitLossCenter, ExpenseType, ItemKey, Currency, RowID", _AmountResources);
+	
+	For Each Row In Tables.DataForWriteOffBatches Do
+		NewRecord = RecordSet.Add();
+		FillPropertyValues(NewRecord, Row);
+		NewRecord.Period = Row.Period;
+		NewRecord.Recorder = CalculationSettings.CalculationMovementCostRef;
+	EndDo;
 
-	For Each Row In BatchWiseBalanceTables.DataForWriteOffBatches Do
+	RecordSet.Write();
+	
+	// Stock inventory info
+	RecordSet = InformationRegisters.T4050_StockInventoryInfo.CreateRecordSet();
+	RecordSet.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
+	Tables.DataForStockInventory.GroupBy("Period, Document, Company, Store, ItemKey, Direction", _QuantityResources);
+
+	For Each Row In Tables.DataForStockInventory Do
 		NewRecord = RecordSet.Add();
 		FillPropertyValues(NewRecord, Row);
 		NewRecord.Period = Row.Period;
@@ -630,7 +644,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	RecordSet = InformationRegisters.T8510S_FixedAssetsInfo.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 	
-	_DataForFixedAssets = BatchWiseBalanceTables.DataForFixedAssets.Copy();
+	_DataForFixedAssets = Tables.DataForFixedAssets.Copy();
 	_DataForFixedAssets.Columns.Add("Amount");
 	_DataForFixedAssets.Columns.Add("Currency");
 	
@@ -694,6 +708,9 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	
 	// Cost of fixed asset
 	AccumulationRegisters.R8515T_CostOfFixedAsset.CostOfFixedAsset_LoadRecords(CalculationSettings.CalculationMovementCostRef);
+	
+	// Stock inventory
+	AccumulationRegisters.R4050B_StockInventory.StockInventory_LoadRecords(CalculationSettings.CalculationMovementCostRef);
 	
 	// Relevance
 	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Clear(CalculationSettings.Company, CalculationSettings.EndPeriod);
@@ -817,6 +834,20 @@ Function GetBatchWiseBalance(CalculationSettings)
 	EndDo;
 
 	Tables.Insert("DataForFixedAssets", DataForFixedAssets);
+	
+	// Stock inventory
+	RegMetadata = Metadata.InformationRegisters.T4050_StockInventoryInfo;
+	DataForStockInventory = New ValueTable();
+	DataForStockInventory.Columns.Add("Period"   , RegMetadata.StandardAttributes.Period.Type);
+	DataForStockInventory.Columns.Add("Document" , RegMetadata.Dimensions.Document.Type);
+	DataForStockInventory.Columns.Add("Company"  , RegMetadata.Dimensions.Company.Type);
+	DataForStockInventory.Columns.Add("Store"    , RegMetadata.Dimensions.Store.Type);
+	DataForStockInventory.Columns.Add("ItemKey"  , RegMetadata.Dimensions.ItemKey.Type);
+	DataForStockInventory.Columns.Add("Direction", RegMetadata.Dimensions.Direction.Type);	
+	DataForStockInventory.Columns.Add("Quantity" , RegMetadata.Resources.Quantity.Type);
+	DataForStockInventory.Columns.Add("PreliminaryQuantity", RegMetadata.Resources.PreliminaryQuantity.Type);
+	
+	Tables.Insert("DataForStockInventory", DataForStockInventory);
 	
 	tmp_manager = New TempTablesManager();
 	Tree = GetBatchTree(tmp_manager, CalculationSettings);
@@ -967,6 +998,17 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 		NewExpense.PreliminaryQuantity  = ExpenseQuantity;
 		NewExpense.PreliminaryAmount    = ExpenseAmounts.PreliminaryAmount;
 		NewExpense.PreliminaryTaxAmount = ExpenseAmounts.PreliminaryTaxAmount;
+		
+		// stock inventory
+		NewStockExpense = Tables.DataForStockInventory.Add();
+		NewStockExpense.Direction = Enums.BatchDirection.Expense;
+		NewStockExpense.Document  = Document;
+		NewStockExpense.Period  = BatchRow.Date;
+		NewStockExpense.Company = BatchRow.Company;
+		NewStockExpense.Store   = Balance_Batch.BatchKey.Store;
+		NewStockExpense.ItemKey = Balance_Batch.BatchKey.ItemKey;
+		NewStockExpense.PreliminaryQuantity = ExpenseQuantity;
+		
 	EndDo;
 	
 	For Each Transfer_Batch In ArrayOfTransferedBatchKeys Do

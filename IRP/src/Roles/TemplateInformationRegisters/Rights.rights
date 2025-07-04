@@ -1486,6 +1486,20 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T4050_StockInventoryInfo</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9012S_AccountsPartner</name>
 		<right>
 			<name>Read</name>

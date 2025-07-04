@@ -1,11 +1,6 @@
 
-// @strict-types
-
 Procedure Posting(Cancel, PostingMode)
-	AccumulationRegisters.R6020B_BatchBalance.BatchBalance_Clear(ThisObject.Ref, Cancel);
-	AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_Clear(ThisObject.Ref, Cancel);
-	AccumulationRegisters.R5022T_Expenses.Expenses_Clear(ThisObject.Ref, Cancel);
-	AccumulationRegisters.R8510B_BookValueOfFixedAsset.BookValueOfFixedAsset_Clear(ThisObject.Ref, Cancel);
+	ClearSelfRecords(Cancel);
 		
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("CalculationMovementCostRef" , ThisObject.Ref);
@@ -15,27 +10,27 @@ Procedure Posting(Cancel, PostingMode)
 	CalculationSettings.Insert("EndPeriod"                  , ThisObject.EndDate);
 	CalculationSettings.Insert("RaiseOnCalculationError"    , ThisObject.RaiseOnCalculationError);
 	
-	LandedCostServer.Posting_BatchWiseBalance(CalculationSettings);
+	LandedCostServer2.Posting_BatchWiseBalance(CalculationSettings);
 	For Each Records In ThisObject.RegisterRecords Do
 		Records.Read();
 	EndDo;
 EndProcedure
 
 Procedure UndoPosting(Cancel)
+	ClearSelfRecords(Cancel);
+			
+	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Reset(ThisObject.Company, ThisObject.BeginDate);
+	LandedCostServer2.ReleaseBatchReallocateDocuments(ThisObject.Ref);
+EndProcedure
+
+Procedure ClearSelfRecords(Cancel)
 	AccumulationRegisters.R6020B_BatchBalance.BatchBalance_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R5022T_Expenses.Expenses_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R8510B_BookValueOfFixedAsset.BookValueOfFixedAsset_Clear(ThisObject.Ref, Cancel);
-		
-	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Reset(ThisObject.Company, ThisObject.BeginDate);
-	LandedCostServer.ReleaseBatchReallocateDocuments(ThisObject.Ref);
+	AccumulationRegisters.R4050B_StockInventory.StockInventory_Clear(ThisObject.Ref, Cancel);
 EndProcedure
 
-// Fill check processing.
-// 
-// Parameters:
-//  Cancel - Boolean - Cancel
-//  CheckedAttributes - Array of String - Checked attributes
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not ThisObject.CalculationMode = Enums.CalculationMode.LandedCostBatchReallocate Then
 		CheckedAttributes.Add("Company");

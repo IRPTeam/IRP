@@ -376,6 +376,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|		else 0
 	|	end as InvoiceTaxAmount,
 	|	BatchKeysInfo.Amount AS InvoiceAmount,
+	|	""00000000-0000-0000-0000-000000000000"" AS PreliminaryID,
 	|	BatchKeysInfo.*
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -405,7 +406,26 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	QueryResults = Query.ExecuteBatch();
 	BatchKeysInfo = QueryResults[6].Unload();
 	BatchesInfo   = QueryResults[7].Unload();
-
+	
+	For Each BatchKeyRow In BatchKeysInfo Do
+		ArrayOfRows = Ref.RowIDInfo.FindRows(New Structure("RowID", BatchKeyRow.RowID));
+		For Each ItemOfArray In ArrayOfRows Do
+			If Not ValueIsFilled(ItemOfArray.Basis) 
+				Or TypeOf(ItemOfArray.Basis) <> Type("DocumentRef.GoodsReceipt") Then
+				Continue;
+			EndIf;
+			ArrayOfRows2 = ItemOfArray.Basis.ItemList.FindRows(New Structure("Key", ItemOfArray.BasisKey));
+			For Each ItemOfArray2 In ArrayOfRows2 Do
+				If ItemOfArray2.IsPreliminary Then
+					BatchKeyRow.PreliminaryID = BatchKeyRow.RowID;
+				EndIf;
+			EndDo;
+		EndDo;
+		If BatchKeyRow.PreliminaryID = "00000000-0000-0000-0000-000000000000" Then
+			BatchKeyRow.PreliminaryID = "";
+		EndIf;
+	EndDo;
+			
 	CurrencyTable = Ref.Currencies.UnloadColumns();
 	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
 
@@ -442,7 +462,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
-	BatchKeysInfoSettings.Dimensions = "Period, RowID, Direction, Company, Branch, Store, ItemKey, Currency, CurrencyMovementType, SourceOfOrigin, SerialLotNumber";
+	BatchKeysInfoSettings.Dimensions = 
+	"Period, RowID, Direction, Company, Branch, Store, ItemKey, Currency, CurrencyMovementType, SourceOfOrigin, SerialLotNumber, PreliminaryID";
 	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
@@ -1488,25 +1509,59 @@ Function R4033B_GoodsReceiptSchedule()
 EndFunction
 
 Function R4050B_StockInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO R4050B_StockInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND ItemList.IsPurchase
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS Quantity,
+		|	0 AS PreliminaryQuantity,
+		|	Undefined as CalculationMovementCost
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsPurchase
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	CASE
+		|		WHEN T4050_StockInventoryInfo.Direction = VALUE(enum.BatchDirection.Expense)
+		|			THEN VALUE(AccumulationRecordType.Expense)
+		|		ELSE VALUE(AccumulationRecordType.Receipt)
+		|	END,
+		|	T4050_StockInventoryInfo.Period,
+		|	T4050_StockInventoryInfo.Company,
+		|	T4050_StockInventoryInfo.Store,
+		|	T4050_StockInventoryInfo.ItemKey,
+		|	SUM(T4050_StockInventoryInfo.Quantity),
+		|	SUM(T4050_StockInventoryInfo.PreliminaryQuantity),
+		|	T4050_StockInventoryInfo.Recorder
+		|FROM
+		|	InformationRegister.T4050_StockInventoryInfo AS T4050_StockInventoryInfo
+		|WHERE
+		|	T4050_StockInventoryInfo.Document = &Ref
+		|GROUP BY
+		|	CASE
+		|		WHEN T4050_StockInventoryInfo.Direction = VALUE(enum.BatchDirection.Expense)
+		|			THEN VALUE(AccumulationRecordType.Expense)
+		|		ELSE VALUE(AccumulationRecordType.Receipt)
+		|	END,
+		|	T4050_StockInventoryInfo.Period,
+		|	T4050_StockInventoryInfo.Company,
+		|	T4050_StockInventoryInfo.Store,
+		|	T4050_StockInventoryInfo.ItemKey,
+		|	T4050_StockInventoryInfo.Recorder";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

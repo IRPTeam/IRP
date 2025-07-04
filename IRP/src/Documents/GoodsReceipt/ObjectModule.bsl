@@ -110,9 +110,9 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		VT = ItemList.Unload();
 		VT.GroupBy("PurchaseInvoice");
 		
-                If VT.Count() > 1 OR VT.Count() = 1 AND NOT VT[0].PurchaseInvoice.IsEmpty() Then
-                        Raise R().GoodsReceiptPreliminaryPurchaseInvoice;
-                EndIf;
+        If VT.Count() > 1 OR VT.Count() = 1 AND NOT VT[0].PurchaseInvoice.IsEmpty() Then
+                Raise R().GoodsReceiptPreliminaryPurchaseInvoice;
+        EndIf;
 	EndIf;
 	
 	If ValueIsFilled(ThisObject.Company) Then
@@ -169,4 +169,16 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			EndIf;
 		EndDo;
 	EndIf;
+	
+	For Each Row In ThisObject.ItemList Do
+		If Row.IsPreliminary 
+			And Not ValueIsFilled(Row.Currency) 
+			And (ValueIsFilled(Row.PreliminaryAmount) Or ValueIsFilled(Row.PreliminaryTaxAmount)) Then
+				
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_184, 
+				"Object.ItemList[" + (Row.LineNumber - 1) + "].Currency", 
+				"Object.ItemList");
+		EndIf;
+	EndDo;
 EndProcedure

@@ -184,6 +184,8 @@ Function GetIgnored_Fields()
 	Array.Add("*.T6010S_BatchesInfo.*");
 	
 	// excludes
+	Array.Add("*.R4050B_StockInventory.PreliminaryQuantity");
+	
 	Array.Add("Payroll.R5021T_Revenues.ItemKey");
 	Array.Add("Payroll.R5021T_Revenues.AdditionalAnalytic");
 	Array.Add("Payroll.R5021T_Revenues.Project");
@@ -645,6 +647,9 @@ Function GetIgnored_Fields()
 	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.AllocatedCostTaxAmount");
 	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.AllocatedRevenueAmount");
 	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.AllocatedRevenueTaxAmount");
+	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.PreliminaryQuantity");
+	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.PreliminaryAmount");
+	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.PreliminaryTaxAmount");
 
 	Array.Add("WorkSheet.R5022T_Expenses.AmountCost");
 

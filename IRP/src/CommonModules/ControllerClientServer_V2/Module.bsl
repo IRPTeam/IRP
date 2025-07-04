@@ -11176,9 +11176,6 @@ Function GetBindingStructure_ItemListItemKey(Parameters)
 	SafeBinding(Result.Binding, "GoodsReceipt",
 		"StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey");
-//		|StepItemListChangePriceTypeByAgreement,
-//		|StepItemListChangePriceByPriceType,
-//		|StepItemListChangeVatRate_AgreementInHeader");
 	
 	Result.Binding.Insert("RetailShipmentConfirmation",
 		"StepChangeUseSerialLotNumberByItemKey,
@@ -11381,7 +11378,10 @@ Function GetBindingStructure_ItemListItemKey(Parameters)
 			|StepClearSerialLotNumberByItemKey,
 			|StepClearBarcodeByItemKey");
 		
-	Result.Binding.Insert("ItemStockAdjustment" , "StepItemListChangeUnitByItemKey");
+	Result.Binding.Insert("ItemStockAdjustment", 
+			"StepItemListChangeUnitByItemKey,
+			|StepItemListCalculateQuantityInBaseUnit");
+			
 	Result.Binding.Insert("Bundling"            , "StepItemListChangeUnitByItemKey");
 	Result.Binding.Insert("Unbundling"          , "StepItemListChangeUnitByItemKey");
 	
@@ -11722,7 +11722,6 @@ Function BindItemListUnit(Parameters)
 		|StepItemListChangePriceByPriceType");
 	
 	SafeBinding(Binding, "GoodsReceipt", "StepItemListCalculateQuantityInBaseUnit");
-//		|StepItemListChangePriceByPriceType");
 	
 	Binding.Insert("RetailSalesReceipt", 
 		"StepItemListCalculateQuantityInBaseUnit,

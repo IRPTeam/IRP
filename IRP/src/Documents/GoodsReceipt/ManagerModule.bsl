@@ -1284,7 +1284,8 @@ Function R4050B_StockInventory()
 		|	ItemList.Company,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
-		|	SUM(ItemList.Quantity) AS PreliminaryQuantity
+		|	SUM(ItemList.Quantity) AS PreliminaryQuantity,
+		|	0 AS Quantity
 		|INTO R4050B_StockInventory
 		|FROM
 		|	ItemList AS ItemList

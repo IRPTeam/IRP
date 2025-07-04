@@ -863,6 +863,7 @@
   <commonModules>CommonModule.DocFixedAssetRevaluationServer</commonModules>
   <commonModules>CommonModule.BusinessProcessesServer</commonModules>
   <commonModules>CommonModule.LoggerServerCall</commonModules>
+  <commonModules>CommonModule.LandedCostServer2</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1698,6 +1699,7 @@
   <informationRegisters>InformationRegister.Logger</informationRegisters>
   <informationRegisters>InformationRegister.LoggerNotification</informationRegisters>
   <informationRegisters>InformationRegister.LoggerFiles</informationRegisters>
+  <informationRegisters>InformationRegister.T4050_StockInventoryInfo</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>

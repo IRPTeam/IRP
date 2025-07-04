@@ -1532,6 +1532,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_181", NStr("en = 'Attribute already on form. Remove duplicate from set: [%1]'", Lang));
 	Strings.Insert("Error_182", NStr("en = 'Account [%1] [%2]. Lacking: %3 %2.'", Lang));
 	Strings.Insert("Error_183", NStr("en = 'Wrong linked row [%1]: Document date [%2] less than Basis date [%3]'", Lang));
+	Strings.Insert("Error_184", NStr("en = 'Currency is a required field.'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	

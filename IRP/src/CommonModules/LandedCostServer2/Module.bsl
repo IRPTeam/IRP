@@ -1155,6 +1155,7 @@ Function GetUrecoverExpenses(Period, BatchDocument, BatchKey)
 EndFunction
 
 Procedure Calculate_ReturnBySalesInvoice(Document, BatchRow, Tables, CalculationSettings)
+	
 	Sales_BatchRows = GetSalesBatches(BatchRow.SalesInvoice, Tables.DataForSalesBatches, BatchRow.BatchKey);
 	NeedReceipt = BatchRow.Quantity; // how many returned (quantity)
 
@@ -1188,7 +1189,7 @@ Procedure Calculate_ReturnBySalesInvoice(Document, BatchRow, Tables, Calculation
 
 		NewReceipt = Tables.DataForReceipt.Add();
 		NewReceipt.Batch     = _Sales_Batch_Batch;
-		NewReceipt.BatchKey  = Sales_Batch.BatchKey;
+		NewReceipt.BatchKey  = BatchRow.BatchKey;
 		NewReceipt.Document  = Document;
 		NewReceipt.Company   = _Sales_Batch_Company;
 		NewReceipt.Period    = BatchRow.Date;

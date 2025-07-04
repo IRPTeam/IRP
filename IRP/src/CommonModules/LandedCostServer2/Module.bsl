@@ -714,6 +714,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 	EmptyTable_BatchWiseBalance.Columns.Add("PreliminaryQuantity", RegMetadata.Resources.Quantity.Type);
 	EmptyTable_BatchWiseBalance.Columns.Add("IsShortageOutgoing", New TypeDescription("Boolean"));
 	EmptyTable_BatchWiseBalance.Columns.Add("IsShortageIncoming", New TypeDescription("Boolean"));
+	EmptyTable_BatchWiseBalance.Columns.Add("IsUnrecoverExpense", New TypeDescription("Boolean"));
 		
 	For Each Res In AmountResources() Do
 		EmptyTable_BatchWiseBalance.Columns.Add(Res, Metadata.DefinedTypes.typeAmount.Type);
@@ -822,6 +823,7 @@ Function GetBatchWiseBalance(CalculationSettings)
 		
 	For Each Row In Tree.Rows Do	
 		CalculateBatch(Row.Document, Row.Rows, Tables, CalculationSettings);
+		WriteBatchWiseBalance(Tables, CalculationSettings);
 	EndDo;
 
 	Return Tables;
@@ -888,7 +890,6 @@ Procedure Calculate_SimpleReceipt(Document, BatchRow, Tables, CalculationSetting
 	For Each Res In AmountResources() Do
 		NewReceipt[Res] = BatchRow[Res]; 
 	EndDo;
-	WriteBatchWiseBalance(Tables, CalculationSettings);
 EndProcedure
 
 Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, CalculationSettings)
@@ -929,8 +930,7 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 	
 	NeedExpense = BatchRow.Quantity;
 	
-	ArrayOfExpenses_OtherBatchKey = New Array(); // expense for other batch keys
-//	TotalExpenseQuantity = 0;
+	ArrayOfTransferedBatchKeys = New Array();
 	
 	For Each Balance_Batch In ArrayOf_Balance_BatchRows Do
 		If NeedExpense = 0 Then
@@ -942,11 +942,10 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 			Continue;
 		EndIf;
 		
-//		If Balance_Batch.BatchKey <> BatchRow.BatchKey Then
-			ArrayOfExpenses_OtherBatchKey.Add(New Structure("Batch, BatchKey, ExpenseQuantity", 
+		If Balance_Batch.BatchKey <> BatchRow.BatchKey Then
+			ArrayOfTransferedBatchKeys.Add(New Structure("Batch, BatchKey, ExpenseQuantity", 
 				Balance_Batch.Batch, Balance_Batch.BatchKey, ExpenseQuantity));
-//		EndIf;
-//		TotalExpenseQuantity = TotalExpenseQuantity + ExpenseQuantity;
+		EndIf;
 		
 		NeedExpense = NeedExpense - ExpenseQuantity;
 		
@@ -957,6 +956,7 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 		EndDo;
 		Balance_Batch.PreliminaryQuantity = Balance_Batch.PreliminaryQuantity - ExpenseQuantity;
 		
+		// expense balance by preliminary batch (mirror stock inventory)
 		NewExpense = Tables.DataForExpense.Add();
 		NewExpense.Batch     = Balance_Batch.Batch;
 		NewExpense.BatchKey  = Balance_Batch.BatchKey;
@@ -964,18 +964,15 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 		NewExpense.Company   = BatchRow.Company;
 		NewExpense.Period    = BatchRow.Date;
 
-		NewExpense.PreliminaryQuantity = ExpenseQuantity;
-		For Each Res In AmountResources() Do
-			NewExpense[Res] = ExpenseAmounts[Res]; 
-		EndDo;
+		NewExpense.PreliminaryQuantity  = ExpenseQuantity;
+		NewExpense.PreliminaryAmount    = ExpenseAmounts.PreliminaryAmount;
+		NewExpense.PreliminaryTaxAmount = ExpenseAmounts.PreliminaryTaxAmount;
 	EndDo;
-	return;
 	
-	For Each Preliminary_Batch In ArrayOfExpenses_OtherBatchKey Do
-		ExpenseQuantity = Preliminary_Batch.ExpenseQuantity;
+	For Each Transfer_Batch In ArrayOfTransferedBatchKeys Do
+		ExpenseQuantity = Transfer_Batch.ExpenseQuantity;
 		
-//	If TotalExpenseQuantity <> 0 Then
-		// expense inventory by current batch key
+		// expense inventory by current batch key (mirror stock inventory)
 		NewExpense = Tables.DataForExpense.Add();
 		NewExpense.Batch     = BatchRow.Batch;
 		NewExpense.BatchKey  = BatchRow.BatchKey;
@@ -988,19 +985,16 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 		ExpenseAmounts = New Structure();
 		For Each Res In AmountResources() Do
 			ExpenseAmounts.Insert(Res, AmountProportionByQuantity(ExpenseQuantity, BatchRow, Res, "Quantity"));
-			BatchRow[Res] = BatchRow[Res] - ExpenseAmounts[Res];
 		EndDo;
 		
 		For Each Res In AmountResources() Do
 			NewExpense[Res] = ExpenseAmounts[Res]; 
 		EndDo;
-//	EndIf;
-	
-		If Preliminary_Batch.BatchKey <> BatchRow.BatchKey Then 
-		// receipt inventory to other batch key
+		
+		// receipt inventory to other batch key (mirror stock inventory)
 		NewReceipt = Tables.DataForReceipt.Add();
 		NewReceipt.Batch     = BatchRow.Batch;
-		NewReceipt.BatchKey  = Preliminary_Batch.BatchKey;
+		NewReceipt.BatchKey  = Transfer_Batch.BatchKey;
 		NewReceipt.Document  = Document;
 		NewReceipt.Company   = BatchRow.Company;
 		NewReceipt.Period    = BatchRow.Date;
@@ -1010,11 +1004,108 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 		For Each Res In AmountResources() Do
 			NewReceipt[Res] = ExpenseAmounts[Res]; 
 		EndDo;
-		EndIf;
 	EndDo;
 	
 	WriteBatchWiseBalance(Tables, CalculationSettings);
+	
+	// ammount correction
+	For Each _r1 In PreliminaryInfo.Documents Do
+		For Each _r2 In PreliminaryInfo.BatchKeys Do
+			UnrecoverExpenses = GetUrecoverExpenses(BatchRow.Date, _r1.PreliminaryDocument, _r2.BatchKey);
+			For Each UnrecoverExpense In UnrecoverExpenses Do
+				CorrectionInvoiceAmounts(Document, UnrecoverExpense, BatchRow, "InvoiceAmount", "PreliminaryAmount", Tables);
+				CorrectionInvoiceAmounts(Document, UnrecoverExpense, BatchRow, "InvoiceTaxAmount", "PreliminaryTaxAmount", Tables);					
+			EndDo;
+		EndDo;
+	EndDo;
 EndProcedure
+
+Procedure CorrectionInvoiceAmounts(Document, UnrecoverExpense, BatchRow, ResourceName, PreliminaryResourceName, Tables)
+	// calculate real quantity
+	RealAmount = 0;
+	If UnrecoverExpense.PreliminaryQuantity = BatchRow.Quantity Then
+		RealAmount = BatchRow[ResourceName];
+	Else
+		If BatchRow.Quantity <> 0 Then
+			RealAmount = Round((BatchRow[ResourceName] / BatchRow.Quantity) * UnrecoverExpense.PreliminaryQuantity, 2); 
+		EndIf;
+	EndIf;
+				
+	// compare real amounts and preliminary amounts
+	PreliminaryAmount = UnrecoverExpense[PreliminaryResourceName] + UnrecoverExpense[ResourceName];
+				
+	TableName = "";
+	If RealAmount > PreliminaryAmount Then
+		TableName = "DataForReceipt";
+		CorrectionAmount = RealAmount - PreliminaryAmount; // P&L expense
+	ElsIf RealAmount < PreliminaryAmount Then
+		TableName = "DataForExpense";
+		CorrectionAmount = PreliminaryAmount - RealAmount; // P&L revenue
+	EndIf;
+					
+	NewCorrection = Tables[TableName].Add();
+	NewCorrection.Batch     = UnrecoverExpense.Batch;
+	NewCorrection.BatchKey  = UnrecoverExpense.BatchKey;
+	NewCorrection.Document  = Document;
+	NewCorrection.Company   = BatchRow.Company;
+	NewCorrection.Period    = BatchRow.Date;
+	
+	NewCorrection.IsUnrecoverExpense = True;
+	
+	NewCorrection.Quantity = 0;
+	NewCorrection.PreliminaryQuantity = 0;
+				
+	NewCorrection[ResourceName] = CorrectionAmount;
+EndProcedure
+
+Function GetUrecoverExpenses(Period, BatchDocument, BatchKey)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Reg.Batch,
+	|	Reg.BatchKey,
+	|	SUM(Reg.Quantity) AS Quantity,
+	|	SUM(Reg.PreliminaryQuantity) AS PreliminaryQuantity,
+	|
+	|	SUM(case when Reg.Document REFS Document.PurchaseInvoice then
+	|			case when Reg.RecordType = value(AccumulationRecordType.Receipt) 
+	|			then Reg.InvoiceAmount else - Reg.InvoiceAmount end
+	|		else Reg.InvoiceAmount end) AS InvoiceAmount,
+	|
+	|	SUM(case when Reg.Document REFS Document.PurchaseInvoice then
+	|			case when Reg.RecordType = value(AccumulationRecordType.Receipt)
+	|			then Reg.InvoiceTaxAmount else - Reg.InvoiceTaxAmount end
+	|		else Reg.InvoiceTaxAmount end) AS InvoiceTaxAmount,
+	|	
+	|	SUM(case when Reg.Document REFS Document.PurchaseInvoice then
+	|			case when Reg.RecordType = value(AccumulationRecordType.Receipt)
+	|			then Reg.PreliminaryAmount else - Reg.PreliminaryAmount end
+	|		else Reg.PreliminaryAmount end) AS PreliminaryAmount,
+	|
+	|	SUM(case when Reg.Document REFS Document.PurchaseInvoice then
+	|			case when Reg.RecordType = value(AccumulationRecordType.Receipt)
+	|			then Reg.PreliminaryTaxAmount else - Reg.PreliminaryTaxAmount end
+	|		else Reg.PreliminaryTaxAmount end) AS PreliminaryTaxAmount
+	|FROM
+	|	AccumulationRegister.R6010B_BatchWiseBalance AS Reg
+	|WHERE
+	|	Reg.BatchKey = &BatchKey
+	|	and Reg.Batch.Document = &BatchDocument
+	|	and Reg.IsUnrecoverExpense
+	|	and Reg.Period <= &Period
+	|GROUP BY
+	|	Reg.Batch,
+	|	Reg.BatchKey
+	|
+	|ORDER BY
+	|	Reg.Batch.Date";
+	Query.SetParameter("BatchDocument", BatchDocument);
+	Query.SetParameter("BatchKey", BatchKey);
+	Query.SetParameter("Period", Period);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
 
 Procedure Calculate_ReturnBySalesInvoice(Document, BatchRow, Tables, CalculationSettings)
 	Sales_BatchRows = GetSalesBatches(BatchRow.SalesInvoice, Tables.DataForSalesBatches, BatchRow.BatchKey);
@@ -1077,8 +1168,6 @@ Procedure Calculate_ReturnBySalesInvoice(Document, BatchRow, Tables, Calculation
 		_nr.Period   = BatchRow.Date;
 		_nr.Quantity = NeedReceipt;
 	EndIf;
-
-	WriteBatchWiseBalance(Tables, CalculationSettings);
 EndProcedure
 
 Procedure Calculate_SimpleExpense(Document, BatchRow, Tables, CalculationSettings)
@@ -1121,14 +1210,14 @@ Procedure Calculate_SimpleExpense(Document, BatchRow, Tables, CalculationSetting
 			NewExpense[Res] = ExpenseAmounts[Res]; 
 		EndDo;
 
-		WriteBatchWiseBalance(Tables, CalculationSettings);
-
 			// sales batches
 		If TypeOf(Document) = Type("DocumentRef.SalesInvoice") 
 			Or TypeOf(Document) = Type("DocumentRef.RetailSalesReceipt") Then
 			_new = Tables.DataForSalesBatches.Add();
 			FillPropertyValues(_new, NewExpense);
 			_new.SalesInvoice = Document;
+			
+			NewExpense.IsUnrecoverExpense = True;
 		EndIf;
 					
 			// reallocated batches
@@ -1137,6 +1226,8 @@ Procedure Calculate_SimpleExpense(Document, BatchRow, Tables, CalculationSetting
 			FillPropertyValues(_new, NewExpense);
 			_new.OutgoingDocument = Document;
 			_new.IncomingDocument = Document.Incoming;
+			
+			NewExpense.IsUnrecoverExpense = True;
 		EndIf;
 				
 			// write-off batches
@@ -1149,6 +1240,8 @@ Procedure Calculate_SimpleExpense(Document, BatchRow, Tables, CalculationSetting
 			_new.Branch           = BatchRow.Branch;
 			_new.Currency         = BatchRow.Currency;
 			_new.RowID            = BatchRow.RowID;
+			
+			NewExpense.IsUnrecoverExpense = True;
 		EndIf;	
 					
 			// fixed asset
@@ -1158,7 +1251,9 @@ Procedure Calculate_SimpleExpense(Document, BatchRow, Tables, CalculationSetting
 			FillPropertyValues(_new, NewExpense);
 			_new.FixedAsset       = BatchRow.FixedAsset;						
 			_new.Branch           = BatchRow.Branch;						
-			_new.ProfitLossCenter = BatchRow.ProfitLossCenter;						
+			_new.ProfitLossCenter = BatchRow.ProfitLossCenter;
+			
+			NewExpense.IsUnrecoverExpense = True;						
 		EndIf;	
 
 	EndDo; // For Each Balance_Batch In BatchesWithBalance
@@ -1246,9 +1341,6 @@ Procedure Calculate_TransferDocument(Document, BatchRows, Tables, CalculationSet
 			NewReceipt = Tables.DataForReceipt.Add();
 			FillPropertyValues(NewReceipt, NewExpense);
 			NewReceipt.BatchKey  = Transfer_Batch.Receiver.BatchKey;
-			
-			WriteBatchWiseBalance(Tables, CalculationSettings);
-
 		EndDo; // For Each Balance_Batch In BatchesWithBalance
 		
 		If NeedExpense <> 0 Then
@@ -1265,7 +1357,6 @@ Procedure Calculate_TransferDocument(Document, BatchRows, Tables, CalculationSet
 			_new.Period   = Transfer_Batch.Sender.Date;
 			_new.Quantity = NeedExpense;
 			
-			//=======================
 			// Can not receipt Batch key: %1 , Quantity: %2 , Doc: %3'
 			Msg = StrTemplate(R().LC_Error_003, GetBatchKeyDetailPresentation(Transfer_Batch.Receiver.BatchKey), NeedExpense, Document);
 			CommonFunctionsClientServer.ShowUsersMessage(Msg);
@@ -1435,8 +1526,6 @@ Procedure Calculate_CompositeDocument(Document, BatchRows, Tables, CalculationSe
 			EndIf;
 		EndIf;
 	EndDo; // For Each Receipt_Batch In Receipt_BatchRows
-
-	WriteBatchWiseBalance(Tables, CalculationSettings);
 EndProcedure
 
 Procedure Calculate_DecompositeDocument(Document, BatchRows, Tables, CalculationSettings)
@@ -1557,8 +1646,6 @@ Procedure Calculate_DecompositeDocument(Document, BatchRows, Tables, Calculation
 	For Each _r In CreatedReceipts Do
 		_r.IsShortageOutgoing = IsShortageOutgoing;
 	EndDo;
-	
-	WriteBatchWiseBalance(Tables, CalculationSettings);
 EndProcedure
 
 Procedure Calculate_ReallocateIncomingDocument(Document, BatchRow, Tables, CalculationSettings)
@@ -1614,7 +1701,36 @@ Procedure Calculate_ReallocateIncomingDocument(Document, BatchRow, Tables, Calcu
 			NewReceipt[Res] = 0;
 		EndIf;
 	EndDo;
-	WriteBatchWiseBalance(Tables, CalculationSettings);
+EndProcedure
+
+Procedure WriteBatchWiseBalance(Tables, CalculationSettings)
+	RecordSet = AccumulationRegisters.R6010B_BatchWiseBalance.CreateRecordSet();
+	RecordSet.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
+	RecordSet.Clear();
+	
+	For Each Row In Tables.DataForReceipt Do
+		If Row.IsShortageOutgoing Then
+			Continue;
+		EndIf;
+		NewRecordReceipt = RecordSet.Add();
+		FillPropertyValues(NewRecordReceipt, Row);
+		NewRecordReceipt.Period = Row.Period;
+		NewRecordReceipt.RecordType = AccumulationRecordType.Receipt;
+		NewRecordReceipt.Recorder = CalculationSettings.CalculationMovementCostRef;
+	EndDo;
+
+	For Each Row In Tables.DataForExpense Do
+		If Row.IsShortageOutgoing Then
+			Continue;
+		EndIf;
+		NewRecordR6010B = RecordSet.Add();
+		FillPropertyValues(NewRecordR6010B, Row);
+		NewRecordR6010B.Period = Row.Period;
+		NewRecordR6010B.RecordType = AccumulationRecordType.Expense;
+		NewRecordR6010B.Recorder = CalculationSettings.CalculationMovementCostRef;
+	EndDo;
+	
+	RecordSet.Write();
 EndProcedure
 
 Function GetBatchesWithBalance(Company, BatchKey, Period, BatchDocument = Undefined)
@@ -1676,36 +1792,6 @@ Function GetBatchesWithBalance(Company, BatchKey, Period, BatchDocument = Undefi
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
 EndFunction
-
-Procedure WriteBatchWiseBalance(Tables, CalculationSettings)
-	RecordSet = AccumulationRegisters.R6010B_BatchWiseBalance.CreateRecordSet();
-	RecordSet.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
-	RecordSet.Clear();
-	
-	For Each Row In Tables.DataForReceipt Do
-		If Row.IsShortageOutgoing Then
-			Continue;
-		EndIf;
-		NewRecordReceipt = RecordSet.Add();
-		FillPropertyValues(NewRecordReceipt, Row);
-		NewRecordReceipt.Period = Row.Period;
-		NewRecordReceipt.RecordType = AccumulationRecordType.Receipt;
-		NewRecordReceipt.Recorder = CalculationSettings.CalculationMovementCostRef;
-	EndDo;
-
-	For Each Row In Tables.DataForExpense Do
-		If Row.IsShortageOutgoing Then
-			Continue;
-		EndIf;
-		NewRecordR6010B = RecordSet.Add();
-		FillPropertyValues(NewRecordR6010B, Row);
-		NewRecordR6010B.Period = Row.Period;
-		NewRecordR6010B.RecordType = AccumulationRecordType.Expense;
-		NewRecordR6010B.Recorder = CalculationSettings.CalculationMovementCostRef;
-	EndDo;
-	
-	RecordSet.Write();
-EndProcedure
 
 Function GetBatchTree(TempTablesManager, CalculationSettings)
 	Query = New Query();

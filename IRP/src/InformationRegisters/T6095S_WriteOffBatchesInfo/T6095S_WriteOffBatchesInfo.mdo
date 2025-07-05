@@ -224,6 +224,36 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="dc664c06-a221-42a9-8669-441faf9426e2">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="e874a67e-a51e-4e87-9f29-e65c28112d7c">
+    <name>PreliminaryQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Preliminary quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="88ba6ef1-2488-4e52-854f-a2218a29a1a6">
     <name>Company</name>
     <synonym>
@@ -264,6 +294,9 @@
       <types>DocumentRef.StockAdjustmentAsWriteOff</types>
       <types>DocumentRef.WorkSheet</types>
       <types>DocumentRef.DecommissioningOfFixedAsset</types>
+      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.RetailSalesReceipt</types>
+      <types>DocumentRef.PurchaseInvoice</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -336,6 +369,70 @@
     </synonym>
     <type>
       <types>DefinedType.typeRowID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="5027fcd6-ff68-4284-aa61-68e3f321cd8d">
+    <name>Batch</name>
+    <synonym>
+      <key>en</key>
+      <value>Batch</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Batches</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="f465c8a6-3032-4cb0-86cd-359c54484a51">
+    <name>BatchKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Batch key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BatchKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="344609f0-0330-4d03-83b2-13b3c280b730">
+    <name>AmountCorrectionType</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount correction type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.AmountCorrectionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="15516961-6ee7-4749-84e5-23d581675424">
+    <name>CorrectionExpenseRevenueType</name>
+    <synonym>
+      <key>en</key>
+      <value>Correction expense/revenue type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExpenseAndRevenueTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -35,43 +35,72 @@ Procedure Expenses_LoadRecords(CalculationMovementCostRef) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	T6095S_WriteOffBatchesInfo.Period AS Period,
-	|	T6095S_WriteOffBatchesInfo.Recorder AS CalculationMovementCosts,
-	|	T6095S_WriteOffBatchesInfo.Document AS Document,
-	|	T6095S_WriteOffBatchesInfo.Company AS Company,
-	|	T6095S_WriteOffBatchesInfo.Branch AS Branch,
-	|	T6095S_WriteOffBatchesInfo.ProfitLossCenter AS ProfitLossCenter,
-	|	T6095S_WriteOffBatchesInfo.ExpenseType AS ExpenseType,
-	|	T6095S_WriteOffBatchesInfo.ItemKey AS ItemKey,
-	|	T6095S_WriteOffBatchesInfo.Currency AS Currency,
-	|	T6095S_WriteOffBatchesInfo.RowID AS Key,
+	|	Reg.Period AS Period,
+	|	Reg.Recorder AS CalculationMovementCosts,
+	|	Reg.Document AS Document,
+	|	Reg.Company AS Company,
+	|	Reg.Branch AS Branch,
+	|	Reg.ProfitLossCenter AS ProfitLossCenter,
+	|	Reg.ExpenseType AS ExpenseType,
+	|	Reg.ItemKey AS ItemKey,
+	|	Reg.Currency AS Currency,
+	|	Reg.RowID AS Key,
 	|
-	|	T6095S_WriteOffBatchesInfo.InvoiceAmount
-	|	+T6095S_WriteOffBatchesInfo.IndirectCostAmount
-	|	+T6095S_WriteOffBatchesInfo.ExtraCostAmountByRatio
-	|	+T6095S_WriteOffBatchesInfo.ExtraDirectCostAmount
-	|	+T6095S_WriteOffBatchesInfo.AllocatedCostAmount
-	|	-T6095S_WriteOffBatchesInfo.AllocatedRevenueAmount AS Amount,
-	|
-	|	T6095S_WriteOffBatchesInfo.InvoiceAmount
-	|	+T6095S_WriteOffBatchesInfo.InvoiceTaxAmount
-	|	+T6095S_WriteOffBatchesInfo.IndirectCostAmount
-	|	+T6095S_WriteOffBatchesInfo.IndirectCostTaxAmount
-	|	+T6095S_WriteOffBatchesInfo.ExtraCostAmountByRatio
-	|	+T6095S_WriteOffBatchesInfo.ExtraCostTaxAmountByRatio
-	|	+T6095S_WriteOffBatchesInfo.ExtraDirectCostAmount
-	|	+T6095S_WriteOffBatchesInfo.ExtraDirectCostTaxAmount
-	|	+T6095S_WriteOffBatchesInfo.AllocatedCostAmount
-	|	+T6095S_WriteOffBatchesInfo.AllocatedCostTaxAmount
-	|	-T6095S_WriteOffBatchesInfo.AllocatedRevenueAmount
-	|	-T6095S_WriteOffBatchesInfo.AllocatedRevenueTaxAmount AS AmountWithTaxes
+	|	Reg.InvoiceAmount 
+	|	+ Reg.PreliminaryAmount 
+	|	+ Reg.IndirectCostAmount 
+	|	+ Reg.ExtraCostAmountByRatio 
+	|	+ Reg.ExtraDirectCostAmount 
+	|	+ Reg.AllocatedCostAmount 
+	|	- Reg.AllocatedRevenueAmount AS Amount,
+	|	
+	|	Reg.InvoiceAmount 
+	|	+ Reg.PreliminaryAmount 
+	|	+ Reg.InvoiceTaxAmount 
+	|	+ Reg.PreliminaryTaxAmount 
+	|	+ Reg.IndirectCostAmount
+	|	+ Reg.IndirectCostTaxAmount 
+	|	+ Reg.ExtraCostAmountByRatio 
+	|	+ Reg.ExtraCostTaxAmountByRatio 
+	|	+ Reg.ExtraDirectCostAmount
+	|	+ Reg.ExtraDirectCostTaxAmount 
+	|	+ Reg.AllocatedCostAmount 
+	|	+ Reg.AllocatedCostTaxAmount 
+	|	- Reg.AllocatedRevenueAmount 
+	|	- Reg.AllocatedRevenueTaxAmount AS AmountWithTaxes
+	|into expenses
 	|FROM
-	|	InformationRegister.T6095S_WriteOffBatchesInfo AS T6095S_WriteOffBatchesInfo
+	|	InformationRegister.T6095S_WriteOffBatchesInfo AS Reg
 	|WHERE
-	|	T6095S_WriteOffBatchesInfo.Recorder = &Recorder
-	|TOTALS
-	|BY
-	|	Document";
+	|	Reg.Recorder = &Recorder
+	|	AND Reg.AmountCorrectionType = VALUE(enum.AmountCorrectionTypes.EmptyRef)
+	|
+	|union all
+	|
+	|SELECT
+	|	Reg.Period,
+	|	Reg.Recorder,
+	|	Reg.Document,
+	|	Reg.Company,
+	|	Reg.Branch,
+	|	Reg.ProfitLossCenter,
+	|	Reg.CorrectionExpenseRevenueType,
+	|	Reg.ItemKey,
+	|	Reg.Currency,
+	|	"""",  //|	Reg.RowID,
+	|
+	|	Reg.InvoiceAmount,
+	|	
+	|	Reg.InvoiceAmount 
+	|	+ Reg.InvoiceTaxAmount
+	|
+	|FROM
+	|	InformationRegister.T6095S_WriteOffBatchesInfo AS Reg
+	|WHERE
+	|	Reg.Recorder = &Recorder
+	|	AND Reg.AmountCorrectionType = VALUE(enum.AmountCorrectionTypes.Expense)
+	|;
+	|select * from expenses totals by Document";
 
 	Query.SetParameter("Recorder", CalculationMovementCostRef);
 	QueryResult = Query.Execute();

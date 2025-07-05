@@ -260,6 +260,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ItemList.Store AS Store,
 	|	ItemList.Ref.Branch AS Branch,
 	|	ItemList.Ref.Company AS Company,
+	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	SUM(ItemList.QuantityInBaseUnit) AS Quantity,
 	|	ItemList.Ref.Date AS Period,
 	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
@@ -282,6 +283,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|GROUP BY
 	|	ItemList.ItemKey,
 	|	ItemList.Store,
+	|	ItemList.ProfitLossCenter,
 	|	ItemList.Ref.Branch,
 	|	ItemList.Ref.Company,
 	|	ItemList.Ref.Date,
@@ -298,6 +300,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	tmpItemList.Store AS Store,
 	|	tmpItemList.Branch AS Branch,
 	|	tmpItemList.Company AS Company,
+	|	tmpItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	tmpItemList.Quantity AS TotalQuantity,
 	|	tmpItemList.Period AS Period,
 	|	tmpItemList.Direction AS Direction,
@@ -377,6 +380,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	end as InvoiceTaxAmount,
 	|	BatchKeysInfo.Amount AS InvoiceAmount,
 	|	""00000000-0000-0000-0000-000000000000"" AS PreliminaryID,
+//	|	""00000000-0000-0000-0000-000000000000"" AS PreliminaryKey,
 	|	BatchKeysInfo.*
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -418,12 +422,18 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 			For Each ItemOfArray2 In ArrayOfRows2 Do
 				If ItemOfArray2.IsPreliminary Then
 					BatchKeyRow.PreliminaryID = BatchKeyRow.RowID;
+//					BatchKeyRow.PreliminaryKey = ItemOfArray.Key;					
 				EndIf;
 			EndDo;
 		EndDo;
+		
 		If BatchKeyRow.PreliminaryID = "00000000-0000-0000-0000-000000000000" Then
 			BatchKeyRow.PreliminaryID = "";
 		EndIf;
+		
+//		If BatchKeyRow.PreliminaryKey = "00000000-0000-0000-0000-000000000000" Then
+//			BatchKeyRow.PreliminaryKey = "";
+//		EndIf;
 	EndDo;
 			
 	CurrencyTable = Ref.Currencies.UnloadColumns();
@@ -463,7 +473,20 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
 	BatchKeysInfoSettings.Dimensions = 
-	"Period, RowID, Direction, Company, Branch, Store, ItemKey, Currency, CurrencyMovementType, SourceOfOrigin, SerialLotNumber, PreliminaryID";
+		"Period, 
+		|RowID, 
+		|Direction, 
+		|Company, 
+		|Branch,
+		|ProfitLossCenter, 
+		|Store, 
+		|ItemKey, 
+		|Currency, 
+		|CurrencyMovementType, 
+		|SourceOfOrigin, 
+		|SerialLotNumber, 
+		|PreliminaryID";
+//		|PreliminaryKey";
 	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
@@ -1640,17 +1663,42 @@ Function R1022B_VendorsPaymentPlanning()
 EndFunction
 
 Function R5022T_Expenses()
-	Return "SELECT
-		   |	*,
-		   |	ItemList.NetAmount AS Amount,
-		   |	ItemList.Amount AS AmountWithTaxes
-		   |INTO R5022T_Expenses
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsService
-		   |	AND ItemList.OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.EmptyRef)
-		   |	AND ItemList.IsPurchase";
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.ProfitLossCenter,
+		|	ItemList.ExpenseType,
+		|	ItemList.ItemKey,
+		|	ItemList.Currency,
+		|	ItemList.NetAmount AS Amount,
+		|	ItemList.Amount AS AmountWithTaxes,
+		|	undefined as CalculationMovementCost
+		|INTO R5022T_Expenses
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsService
+		|	AND ItemList.OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.EmptyRef)
+		|	AND ItemList.IsPurchase
+		|union all
+		|select
+		|	T6095S_WriteOffBatchesInfo.Period,
+		|	T6095S_WriteOffBatchesInfo.Company,
+		|	T6095S_WriteOffBatchesInfo.Branch,
+		|	T6095S_WriteOffBatchesInfo.ProfitLossCenter,
+		|	T6095S_WriteOffBatchesInfo.CorrectionExpenseRevenueType,
+		|	T6095S_WriteOffBatchesInfo.ItemKey,
+		|	T6095S_WriteOffBatchesInfo.Currency,
+		|	T6095S_WriteOffBatchesInfo.InvoiceAmount,
+		|	T6095S_WriteOffBatchesInfo.InvoiceAmount + T6095S_WriteOffBatchesInfo.InvoiceTaxAmount,
+		|	T6095S_WriteOffBatchesInfo.Recorder as CalculationMovementCost
+		|from 
+		|	InformationRegister.T6095S_WriteOffBatchesInfo as T6095S_WriteOffBatchesInfo
+		|where
+		|	T6095S_WriteOffBatchesInfo.Document = &Ref
+		|	and T6095S_WriteOffBatchesInfo.AmountCorrectionType = value(enum.AmountCorrectionTypes.Expense)";
 EndFunction
 
 Function T3010S_RowIDInfo()

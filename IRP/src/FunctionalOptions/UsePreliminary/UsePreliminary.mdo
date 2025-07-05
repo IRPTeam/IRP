@@ -42,4 +42,13 @@
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.PreliminaryAmount</content>
   <content>InformationRegister.T4050_StockInventoryInfo</content>
   <content>AccumulationRegister.R4050B_StockInventory.Attribute.CalculationMovementCost</content>
+  <content>InformationRegister.T6095S_WriteOffBatchesInfo.Dimension.BatchKey</content>
+  <content>InformationRegister.T6095S_WriteOffBatchesInfo.Dimension.AmountCorrectionType</content>
+  <content>InformationRegister.T6095S_WriteOffBatchesInfo.Dimension.CorrectionExpenseRevenueType</content>
+  <content>InformationRegister.T6095S_WriteOffBatchesInfo.Resource.Quantity</content>
+  <content>InformationRegister.T6095S_WriteOffBatchesInfo.Dimension.Batch</content>
+  <content>Enum.AmountCorrectionTypes</content>
+  <content>Catalog.Companies.Attribute.LandedCostAmountCorrectionExpenseType</content>
+  <content>Catalog.Companies.Attribute.LandedCostAmountCorrectionRevenueType</content>
+  <content>InformationRegister.T6095S_WriteOffBatchesInfo.Resource.PreliminaryQuantity</content>
 </mdclass:FunctionalOption>

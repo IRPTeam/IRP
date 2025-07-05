@@ -313,20 +313,6 @@
     <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="9b6a06b7-ec7d-4cf2-98a0-7058a1ff332c">
-    <name>IsUnrecoverExpense</name>
-    <synonym>
-      <key>en</key>
-      <value>Is unrecover expense</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
   <dimensions uuid="ddb64408-94e1-4c99-bba0-f3650bdf9a29">
     <name>Batch</name>
     <synonym>

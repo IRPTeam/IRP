@@ -45,6 +45,7 @@ Procedure Expenses_LoadRecords(CalculationMovementCostRef) Export
 	|	T6095S_WriteOffBatchesInfo.ItemKey AS ItemKey,
 	|	T6095S_WriteOffBatchesInfo.Currency AS Currency,
 	|	T6095S_WriteOffBatchesInfo.RowID AS Key,
+	|
 	|	T6095S_WriteOffBatchesInfo.InvoiceAmount
 	|	+T6095S_WriteOffBatchesInfo.IndirectCostAmount
 	|	+T6095S_WriteOffBatchesInfo.ExtraCostAmountByRatio

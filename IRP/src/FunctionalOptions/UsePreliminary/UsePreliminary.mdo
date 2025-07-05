@@ -40,4 +40,6 @@
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.PreliminaryTaxAmount</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.IsPreliminary</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.PreliminaryAmount</content>
+  <content>InformationRegister.T4050_StockInventoryInfo</content>
+  <content>AccumulationRegister.R4050B_StockInventory.Attribute.CalculationMovementCost</content>
 </mdclass:FunctionalOption>

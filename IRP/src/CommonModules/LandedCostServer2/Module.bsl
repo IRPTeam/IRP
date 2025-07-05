@@ -1000,12 +1000,11 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 		NewExpense.Document  = Document;
 		NewExpense.Company   = BatchRow.Company;
 		NewExpense.Period    = BatchRow.Date;
-
 		NewExpense.PreliminaryQuantity  = ExpenseQuantity;
 		NewExpense.PreliminaryAmount    = ExpenseAmounts.PreliminaryAmount;
 		NewExpense.PreliminaryTaxAmount = ExpenseAmounts.PreliminaryTaxAmount;
 		
-		// stock inventory
+		// stock inventory (expense preliminary)
 		NewStockExpense = Tables.DataForStockInventory.Add();
 		NewStockExpense.Direction = Enums.BatchDirection.Expense;
 		NewStockExpense.Document  = Document;
@@ -1062,17 +1061,33 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 		For Each _r2 In PreliminaryInfo.BatchKeys Do
 			UnrecoverExpenses = GetUrecoverExpenses(BatchRow.Date, _r1.PreliminaryDocument, _r2.BatchKey);
 			For Each UnrecoverExpense In UnrecoverExpenses Do
-				CorrectionInvoiceAmounts(Document, UnrecoverExpense, BatchRow, "InvoiceAmount", "PreliminaryAmount", Tables);
-				CorrectionInvoiceAmounts(Document, UnrecoverExpense, BatchRow, "InvoiceTaxAmount", "PreliminaryTaxAmount", Tables);					
-			
-				//--
+				AmountCorrection = CorrectionInvoiceAmounts(UnrecoverExpense, BatchRow, "InvoiceAmount", "PreliminaryAmount");
+				AmountTaxCorrection = CorrectionInvoiceAmounts(UnrecoverExpense, BatchRow, "InvoiceTaxAmount", "PreliminaryTaxAmount");					
+				
+				// correction invoice amount and tax amount
+				If AmountCorrection <> 0 Then
+					NewReceipt = Tables.DataForReceipt.Add();
+					NewReceipt.Batch     = UnrecoverExpense.Batch;
+					NewReceipt.BatchKey  = UnrecoverExpense.BatchKey;
+					NewReceipt.Document  = Document;
+					NewReceipt.Company   = BatchRow.Company;
+					NewReceipt.Period    = BatchRow.Date;
+					NewReceipt.IsUnrecoverExpense = True;
+					NewReceipt.Quantity = 0;
+					NewReceipt.PreliminaryQuantity = 0;
+					NewReceipt.InvoiceAmount = AmountCorrection;
+					NewReceipt.InvoiceTaxAmount = AmountTaxCorrection;
+					NewExpense = Tables.DataForExpense.Add();
+					FillPropertyValues(NewExpense, NewReceipt);
+				EndIf;
+								
+				// expense inventory quantity
 				NewExpense = Tables.DataForExpense.Add();
 				NewExpense.Batch     = BatchRow.Batch;
 				NewExpense.BatchKey  = BatchRow.BatchKey;
 				NewExpense.Document  = Document;
 				NewExpense.Company   = BatchRow.Company;
-				NewExpense.Period    = BatchRow.Date;
-		
+				NewExpense.Period    = BatchRow.Date;		
 				NewExpense.Quantity  = UnrecoverExpense.PreliminaryQuantity;
 		
 				ExpenseAmounts = New Structure();
@@ -1083,14 +1098,30 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 				For Each Res In AmountResources() Do
 					NewExpense[Res] = ExpenseAmounts[Res]; 
 				EndDo;
-				//--
+				
+				// stock inventory (expense preliminary)
+				NewStockExpense = Tables.DataForStockInventory.Add();
+				NewStockExpense.Direction = Enums.BatchDirection.Expense;
+				NewStockExpense.Document  = Document;
+				NewStockExpense.Period  = BatchRow.Date;
+				NewStockExpense.Company = BatchRow.Company;
+				NewStockExpense.Store   = BatchRow.BatchKey.Store;
+				NewStockExpense.ItemKey = BatchRow.BatchKey.ItemKey;
+				NewStockExpense.PreliminaryQuantity = UnrecoverExpense.PreliminaryQuantity;
+				
+				// expense or revenue
+				If AmountCorrection > 0 Then // P&L expense
+				
+				ElsIf AmountCorrection < 0 Then // P&L revenue
+				
+				EndIf;
 				
 			EndDo;
 		EndDo;
 	EndDo; // ammoint correction
 EndProcedure
 
-Procedure CorrectionInvoiceAmounts(Document, UnrecoverExpense, BatchRow, ResourceName, PreliminaryResourceName, Tables)
+Function CorrectionInvoiceAmounts(UnrecoverExpense, BatchRow, ResourceName, PreliminaryResourceName)
 	// calculate real quantity
 	RealAmount = 0;
 	If UnrecoverExpense.PreliminaryQuantity = BatchRow.Quantity Then
@@ -1103,39 +1134,9 @@ Procedure CorrectionInvoiceAmounts(Document, UnrecoverExpense, BatchRow, Resourc
 				
 	// compare real amounts and preliminary amounts
 	PreliminaryAmount = UnrecoverExpense[PreliminaryResourceName] + UnrecoverExpense[ResourceName];
-				
-//	TableName = "";
-//	If RealAmount > PreliminaryAmount Then
-//		TableName = "DataForReceipt";
-		CorrectionAmount = RealAmount - PreliminaryAmount; // P&L expense (write to registed as +)
-//	ElsIf RealAmount < PreliminaryAmount Then
-//		TableName = "DataForExpense";
-//		CorrectionAmount = PreliminaryAmount - RealAmount; // P&L revenue (write to register as -)
-//	EndIf;
-
-					
-	NewReceipt = Tables.DataForReceipt.Add();
-	NewReceipt.Batch     = UnrecoverExpense.Batch;
-	NewReceipt.BatchKey  = UnrecoverExpense.BatchKey;
-	NewReceipt.Document  = Document;
-	NewReceipt.Company   = BatchRow.Company;
-	NewReceipt.Period    = BatchRow.Date;
-	NewReceipt.IsUnrecoverExpense = True;
-	NewReceipt.Quantity = 0;
-	NewReceipt.PreliminaryQuantity = 0;
-	NewReceipt[ResourceName] = CorrectionAmount;
-	
-	NewExpense = Tables.DataForExpense.Add();
-	NewExpense.Batch     = UnrecoverExpense.Batch;
-	NewExpense.BatchKey  = UnrecoverExpense.BatchKey;
-	NewExpense.Document  = Document;
-	NewExpense.Company   = BatchRow.Company;
-	NewExpense.Period    = BatchRow.Date;
-	NewExpense.IsUnrecoverExpense = True;
-	NewExpense.Quantity = 0;
-	NewExpense.PreliminaryQuantity = 0;
-	NewExpense[ResourceName] = CorrectionAmount;
-EndProcedure
+	CorrectionAmount = RealAmount - PreliminaryAmount;
+	Return CorrectionAmount;					
+EndFunction
 
 Function GetUrecoverExpenses(Period, BatchDocument, BatchKey)
 	Query = New Query();

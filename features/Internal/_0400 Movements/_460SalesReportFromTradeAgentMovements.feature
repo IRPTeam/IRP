@@ -184,14 +184,14 @@ Scenario: _046004 check Sales report from trade agent movements by the Register 
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales report from trade agent 1 dated 03.11.2022 10:53:35'   | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            |
-			| 'Document registrations records'                              | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            |
-			| 'Register  "R4050 Stock inventory"'                           | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            |
-			| ''                                                            | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''                    | ''            |
-			| ''                                                            | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'               | 'Item key'    |
-			| ''                                                            | 'Expense'       | '03.11.2022 10:53:35'   | '1'           | ''                    | 'Main Company'   | 'Trade agent store'   | 'PZU'         |
-			| ''                                                            | 'Expense'       | '03.11.2022 10:53:35'   | '2'           | ''                    | 'Main Company'   | 'Trade agent store'   | 'XS/Blue'     |
-			| ''                                                            | 'Expense'       | '03.11.2022 10:53:35'   | '2'           | ''                    | 'Main Company'   | 'Trade agent store'   | 'UNIQ'        |
+			| 'Sales report from trade agent 1 dated 03.11.2022 10:53:35'   | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                         |
+			| 'Document registrations records'                              | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                         |
+			| 'Register  "R4050 Stock inventory"'                           | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                         |
+			| ''                                                            | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''                    | ''            |'Attributes'                |
+			| ''                                                            | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'               | 'Item key'    |'Calculation movement cost' |
+			| ''                                                            | 'Expense'       | '03.11.2022 10:53:35'   | '1'           | ''                    | 'Main Company'   | 'Trade agent store'   | 'PZU'         | ''                         |
+			| ''                                                            | 'Expense'       | '03.11.2022 10:53:35'   | '2'           | ''                    | 'Main Company'   | 'Trade agent store'   | 'XS/Blue'     | ''                         |
+			| ''                                                            | 'Expense'       | '03.11.2022 10:53:35'   | '2'           | ''                    | 'Main Company'   | 'Trade agent store'   | 'UNIQ'        | ''                         |
 		And I close all client application windows
 
 Scenario: _046005 check Sales report from trade agent movements by the Register  "R5010 Reconciliation statement"

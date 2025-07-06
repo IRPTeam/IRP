@@ -268,13 +268,13 @@ Scenario: _041606 check Purchase return movements by the Register  "R4050 Stock 
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 231 dated 14.03.2021 18:53:34'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''             |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''                    | ''               | ''           | ''             |
-			| 'Register  "R4050 Stock inventory"'               | ''              | ''                      | ''            | ''                    | ''               | ''           | ''             |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''             |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'     |
-			| ''                                                | 'Expense'       | '14.03.2021 18:53:34'   | '1'           | ''                    | 'Main Company'   | 'Store 02'   | '36/Yellow'    |
-			| ''                                                | 'Expense'       | '14.03.2021 18:53:34'   | '5'           | ''                    | 'Main Company'   | 'Store 02'   | 'S/Yellow'     |
+			| 'Purchase return 231 dated 14.03.2021 18:53:34'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''             | ''                         |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''                    | ''               | ''           | ''             | ''                         |
+			| 'Register  "R4050 Stock inventory"'               | ''              | ''                      | ''            | ''                    | ''               | ''           | ''             | ''                         |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''             |'Attributes'                |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'     |'Calculation movement cost' |
+			| ''                                                | 'Expense'       | '14.03.2021 18:53:34'   | '1'           | ''                    | 'Main Company'   | 'Store 02'   | '36/Yellow'    | ''                         |
+			| ''                                                | 'Expense'       | '14.03.2021 18:53:34'   | '5'           | ''                    | 'Main Company'   | 'Store 02'   | 'S/Yellow'     | ''                         |
 	And I close all client application windows
 
 Scenario: _041607 check Purchase return movements by the Register  "R2040 Taxes incoming"
@@ -969,10 +969,10 @@ Scenario: _041639 check Purchase return movements by the Register  "R4050 Stock 
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     |
-			| 'Register  "R4050 Stock inventory"'           | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     |
-			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key'          | 'Quantity' | 'Preliminary quantity' |
-			| ''                                            | '04.06.2025 14:56:13' | 'Expense'    | 'Main Company' | 'Store 01' | 'Trousers/Trousers' | '5'        | ''                     |
+			| 'Purchase return 8 dated 04.06.2025 14:56:13' | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'           | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     | ''                        |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key'          | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                            | '04.06.2025 14:56:13' | 'Expense'    | 'Main Company' | 'Store 01' | 'Trousers/Trousers' | '5'        | ''                     | ''                        |
 	And I close all client application windows
 
 Scenario: _041640 check Purchase return movements by the Register  "R5010 Reconciliation statement" (partner Other)

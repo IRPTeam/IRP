@@ -1367,7 +1367,11 @@ Procedure Calculate_SimpleExpense(Document, BatchRow, Tables, CalculationSetting
 			_new.Quantity            = NewExpense.Quantity;
 			_new.PreliminaryQuantity = NewExpense.PreliminaryQuantity;
 			
-			_new.ExpenseType      = BatchRow.ExpenseType;
+			If TypeOf(Document) = Type("DocumentRef.SalesInvoice") Then
+				_new.ExpenseType = BatchRow.Company.LandedCostExpenseType;
+			Else
+				_new.ExpenseType = BatchRow.ExpenseType;
+			EndIf;
 			_new.ProfitLossCenter = BatchRow.ProfitLossCenter;
 			_new.Branch           = BatchRow.Branch;
 			_new.Currency         = BatchRow.Currency;
@@ -2100,6 +2104,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.SalesInvoice
 	|	    or (T6020S_BatchKeysInfo.Recorder refs Document.PurchaseInvoice 
 	|			and T6020S_BatchKeysInfo.PreliminaryID <> """")
 	|			then T6020S_BatchKeysInfo.ProfitLossCenter
@@ -2204,6 +2209,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.SalesInvoice
 	|	    or (T6020S_BatchKeysInfo.Recorder refs Document.PurchaseInvoice 
 	|			and T6020S_BatchKeysInfo.PreliminaryID <> """")
 	|			then T6020S_BatchKeysInfo.ProfitLossCenter

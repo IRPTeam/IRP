@@ -1675,6 +1675,8 @@ Function R5022T_Expenses()
 		|	ItemList.Currency,
 		|	ItemList.NetAmount AS Amount,
 		|	ItemList.Amount AS AmountWithTaxes,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	ItemList.Project AS Project,
 		|	undefined as CalculationMovementCost
 		|INTO R5022T_Expenses
 		|FROM
@@ -1694,6 +1696,8 @@ Function R5022T_Expenses()
 		|	T6095S_WriteOffBatchesInfo.Currency,
 		|	T6095S_WriteOffBatchesInfo.InvoiceAmount,
 		|	T6095S_WriteOffBatchesInfo.InvoiceAmount + T6095S_WriteOffBatchesInfo.InvoiceTaxAmount,
+		|	undefined,
+		|	undefined,
 		|	T6095S_WriteOffBatchesInfo.Recorder as CalculationMovementCost
 		|from 
 		|	InformationRegister.T6095S_WriteOffBatchesInfo as T6095S_WriteOffBatchesInfo

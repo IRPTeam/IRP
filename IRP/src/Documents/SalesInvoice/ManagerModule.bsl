@@ -1430,6 +1430,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Store,
 		|	ItemList.Branch,
 		|	ItemList.Company,
+		|	ItemList.ProfitLossCenter,
 		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorBatches,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Period,
@@ -1448,6 +1449,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.TradeAgentStore,
 		|	ItemList.Branch,
 		|	ItemList.Company,
+		|	ItemList.ProfitLossCenter,
 		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorBatches,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Period,
@@ -1466,6 +1468,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.Store,
 		|	BatchKeysInfo_1.Branch,
 		|	BatchKeysInfo_1.Company,
+		|	BatchKeysInfo_1.ProfitLossCenter,
 		|	CASE
 		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
 		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
@@ -1488,6 +1491,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_2.TradeAgentStore,
 		|	BatchKeysInfo_2.Branch,
 		|	BatchKeysInfo_2.Company,
+		|	BatchKeysInfo_2.ProfitLossCenter,
 		|	CASE
 		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
 		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
@@ -1509,6 +1513,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo.Store,
 		|	BatchKeysInfo.Branch,
 		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.ProfitLossCenter,
 		|	SUM(ISNULL(BatchKeysInfo.Quantity, 0)) AS Quantity,
 		|	BatchKeysInfo.Period,
 		|	BatchKeysInfo.Direction,
@@ -1524,6 +1529,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo.Store,
 		|	BatchKeysInfo.Branch,
 		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.ProfitLossCenter,
 		|	BatchKeysInfo.Period,
 		|	BatchKeysInfo.Direction,
 		|	BatchKeysInfo.SourceOfOrigin,

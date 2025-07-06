@@ -334,13 +334,13 @@ Scenario: _041305 check Sales return movements by the Register  "R4050 Stock inv
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 101 dated 12.03.2021 08:44:18'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            |
-			| 'Register  "R4050 Stock inventory"'            | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''            |
-			| ''                                             | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'    |
-			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '1'           | ''                    | 'Main Company'   | 'Store 02'   | 'XS/Blue'     |
-			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '2'           | ''                    | 'Main Company'   | 'Store 02'   | '36/Red'      |
+			| 'Sales return 101 dated 12.03.2021 08:44:18'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
+			| 'Document registrations records'               | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
+			| 'Register  "R4050 Stock inventory"'            | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
+			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''            |'Attributes'                |
+			| ''                                             | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'    |'Calculation movement cost' |
+			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '1'           | ''                    | 'Main Company'   | 'Store 02'   | 'XS/Blue'     | ''                         |
+			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '2'           | ''                    | 'Main Company'   | 'Store 02'   | '36/Red'      | ''                         |
 	And I close all client application windows
 
 
@@ -975,13 +975,13 @@ Scenario: _041331 check Sales return movements by the Register  "R4050 Stock inv
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 192 dated 02.11.2022 10:53:27' | ''                    | ''           | ''             | ''                  | ''         | ''         | ''                     |
-			| 'Register  "R4050 Stock inventory"'          | ''                    | ''           | ''             | ''                  | ''         | ''         | ''                     |
-			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Store'             | 'Item key' | 'Quantity' | 'Preliminary quantity' |
-			| ''                                           | '02.11.2022 10:53:27' | 'Receipt'    | 'Main Company' | 'Store 01'          | 'XS/Blue'  | '1'        | ''                     |
-			| ''                                           | '02.11.2022 10:53:27' | 'Receipt'    | 'Main Company' | 'Store 01'          | 'PZU'      | '4'        | ''                     |
-			| ''                                           | '02.11.2022 10:53:27' | 'Expense'    | 'Main Company' | 'Trade agent store' | 'XS/Blue'  | '1'        | ''                     |
-			| ''                                           | '02.11.2022 10:53:27' | 'Expense'    | 'Main Company' | 'Trade agent store' | 'PZU'      | '4'        | ''                     |	
+			| 'Sales return 192 dated 02.11.2022 10:53:27' | ''                    | ''           | ''             | ''                  | ''         | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'          | ''                    | ''           | ''             | ''                  | ''         | ''         | ''                     | ''                        |
+			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Store'             | 'Item key' | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                           | '02.11.2022 10:53:27' | 'Receipt'    | 'Main Company' | 'Store 01'          | 'XS/Blue'  | '1'        | ''                     | ''                        |
+			| ''                                           | '02.11.2022 10:53:27' | 'Receipt'    | 'Main Company' | 'Store 01'          | 'PZU'      | '4'        | ''                     | ''                        |
+			| ''                                           | '02.11.2022 10:53:27' | 'Expense'    | 'Main Company' | 'Trade agent store' | 'XS/Blue'  | '1'        | ''                     | ''                        |
+			| ''                                           | '02.11.2022 10:53:27' | 'Expense'    | 'Main Company' | 'Trade agent store' | 'PZU'      | '4'        | ''                     | ''                        |	
 		And I close all client application windows	
 	
 
@@ -1081,10 +1081,10 @@ Scenario: _041340 check Sales return movements by the Register  "R4050 Stock inv
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 193 dated 05.11.2022 00:00:01' | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     |
-			| 'Register  "R4050 Stock inventory"'          | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     |
-			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' | 'Preliminary quantity' |
-			| ''                                           | '05.11.2022 00:00:01' | 'Receipt'    | 'Main Company' | 'Store 01' | 'XS/Blue'  | '1'        |	''                     |	
+			| 'Sales return 193 dated 05.11.2022 00:00:01' | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'          | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     | ''                        |
+			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                           | '05.11.2022 00:00:01' | 'Receipt'    | 'Main Company' | 'Store 01' | 'XS/Blue'  | '1'        |	''                     | ''                        |	
 		And I close all client application windows	
 
 Scenario: _041341 check Sales return movements by the Register  "Posted documents registry"
@@ -1255,10 +1255,10 @@ Scenario: _041349 check Sales return movements by the Register  "R4050 Stock inv
 		And Delay 10
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     |
-			| 'Register  "R4050 Stock inventory"'         | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     |
-			| ''                                          | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key'          | 'Quantity' | 'Preliminary quantity' |
-			| ''                                          | '04.06.2025 14:29:56' | 'Receipt'    | 'Main Company' | 'Store 01' | 'Trousers/Trousers' | '5'        | ''                     |
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'         | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     | ''                        |
+			| ''                                          | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key'          | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                          | '04.06.2025 14:29:56' | 'Receipt'    | 'Main Company' | 'Store 01' | 'Trousers/Trousers' | '5'        | ''                     | ''                        |
 	And I close all client application windows
 
 Scenario: _041350 check Sales return movements by the Register  "R5010 Reconciliation statement" (partner Other)

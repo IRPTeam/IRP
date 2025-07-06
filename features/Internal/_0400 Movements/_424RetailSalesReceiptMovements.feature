@@ -388,14 +388,14 @@ Scenario: _042414 check Retail sales receipt movements by the Register  "R4050 S
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | ''            | ''                    | ''          | ''                    | ''             | ''         | ''          |
-			| 'Document registrations records'                     | ''            | ''                    | ''          | ''                    | ''             | ''         | ''          |
-			| 'Register  "R4050 Stock inventory"'                  | ''            | ''                    | ''          | ''                    | ''             | ''         | ''          |
-			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | ''                    | 'Dimensions'   | ''         | ''          |
-			| ''                                                   | ''            | ''                    | 'Quantity'  | 'Preliminary quantity'| 'Company'      | 'Store'    | 'Item key'  |
-			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '1'         | ''                    | 'Main Company' | 'Store 03' | 'XS/Blue'   |
-			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '2'         | ''                    | 'Main Company' | 'Store 03' | '38/Yellow' |
-			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '12'        | ''                    | 'Main Company' | 'Store 03' | '36/18SD'   |		
+			| 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | ''            | ''                    | ''          | ''                     | ''             | ''         | ''          | ''                          | ''                         |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''                     | ''             | ''         | ''          | ''                          | ''                         |
+			| 'Register  "R4050 Stock inventory"'                  | ''            | ''                    | ''          | ''                     | ''             | ''         | ''          | ''                          | ''                         |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | ''                     | 'Dimensions'   | ''         | ''          | 'Attributes'                |'Attributes'                |
+			| ''                                                   | ''            | ''                    | 'Quantity'  | 'Preliminary quantity' | 'Company'      | 'Store'    | 'Item key'  | 'Calculation movement cost' |'Calculation movement cost' |
+			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '1'         | ''                     | 'Main Company' | 'Store 03' | 'XS/Blue'   | ''                          | ''                         |
+			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '2'         | ''                     | 'Main Company' | 'Store 03' | '38/Yellow' | ''                          | ''                         |
+			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '12'        | ''                     | 'Main Company' | 'Store 03' | '36/18SD'   | ''                          | ''                         |
 		And I close all client application windows
 
 Scenario: _042415 check Retail sales receipt movements by the Register  "R2050 Retail sales" (consignor and own stocks) 

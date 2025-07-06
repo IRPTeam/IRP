@@ -27,6 +27,7 @@ Procedure ClearSelfRecords(Cancel)
 	AccumulationRegisters.R6020B_BatchBalance.BatchBalance_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R5022T_Expenses.Expenses_Clear(ThisObject.Ref, Cancel);
+	AccumulationRegisters.R5021T_Revenues.Revenues_Clear(ThisObject.Ref, Cancel);	
 	AccumulationRegisters.R8510B_BookValueOfFixedAsset.BookValueOfFixedAsset_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R4050B_StockInventory.StockInventory_Clear(ThisObject.Ref, Cancel);
 EndProcedure

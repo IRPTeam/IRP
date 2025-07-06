@@ -634,6 +634,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R6070T_OtherPeriodsExpenses());
 	QueryArray.Add(R8015T_ConsignorPrices());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
@@ -1699,6 +1700,27 @@ Function R5022T_Expenses()
 		|where
 		|	T6095S_WriteOffBatchesInfo.Document = &Ref
 		|	and T6095S_WriteOffBatchesInfo.AmountCorrectionType = value(enum.AmountCorrectionTypes.Expense)";
+EndFunction
+
+Function R5021T_Revenues()
+	Return
+		"select
+		|	T6095S_WriteOffBatchesInfo.Period,
+		|	T6095S_WriteOffBatchesInfo.Company,
+		|	T6095S_WriteOffBatchesInfo.Branch,
+		|	T6095S_WriteOffBatchesInfo.ProfitLossCenter,
+		|	T6095S_WriteOffBatchesInfo.CorrectionExpenseRevenueType as ExpenseType,
+		|	T6095S_WriteOffBatchesInfo.ItemKey,
+		|	T6095S_WriteOffBatchesInfo.Currency,
+		|	-T6095S_WriteOffBatchesInfo.InvoiceAmount as Amount,
+		|	-(T6095S_WriteOffBatchesInfo.InvoiceAmount + T6095S_WriteOffBatchesInfo.InvoiceTaxAmount) as AmountWithTaxes,
+		|	T6095S_WriteOffBatchesInfo.Recorder as CalculationMovementCost
+		|into R5021T_Revenues
+		|from 
+		|	InformationRegister.T6095S_WriteOffBatchesInfo as T6095S_WriteOffBatchesInfo
+		|where
+		|	T6095S_WriteOffBatchesInfo.Document = &Ref
+		|	and T6095S_WriteOffBatchesInfo.AmountCorrectionType = value(enum.AmountCorrectionTypes.Revenue)";
 EndFunction
 
 Function T3010S_RowIDInfo()

@@ -713,6 +713,9 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	// Expenses
 	AccumulationRegisters.R5022T_Expenses.Expenses_LoadRecords(CalculationSettings.CalculationMovementCostRef);
 	
+	// Revenues
+	AccumulationRegisters.R5021T_Revenues.Revenues_LoadRecords(CalculationSettings.CalculationMovementCostRef);
+	
 	// Book value of fixed assets
 	AccumulationRegisters.R8510B_BookValueOfFixedAsset.BookValueOfFixedAsset_LoadRecords(CalculationSettings.CalculationMovementCostRef);
 	
@@ -1083,7 +1086,7 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 				AmountTaxCorrection = CorrectionInvoiceAmounts(UnrecoverExpense, BatchRow, "InvoiceTaxAmount", "PreliminaryTaxAmount");					
 				
 				// correction invoice amount and tax amount
-				If AmountCorrection <> 0 Then
+				If AmountCorrection <> 0 or AmountTaxCorrection <> 0 Then
 					
 					_Company = NewReceipt.Batch.Company;
 					
@@ -1101,30 +1104,53 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 					NewExpense = Tables.DataForExpense.Add();
 					FillPropertyValues(NewExpense, NewReceipt);
 					
-					_new = Tables.DataForWriteOffBatches.Add();
-					FillPropertyValues(_new, NewReceipt);
-					_new.Batch               = NewReceipt.Batch;
-					_new.BatchKey            = NewReceipt.BatchKey;
-					_new.ItemKey             = NewReceipt.BatchKey.ItemKey;
-					_new.Quantity            = 0;
-					_new.PreliminaryQuantity = 0;
-					_new.InvoiceAmount    = AmountCorrection;
-					_new.InvoiceTaxAmount = AmountTaxCorrection;
+					If AmountCorrection <> 0 Then
+						_new = Tables.DataForWriteOffBatches.Add();
+						FillPropertyValues(_new, NewReceipt);
+						_new.Batch               = NewReceipt.Batch;
+						_new.BatchKey            = NewReceipt.BatchKey;
+						_new.ItemKey             = NewReceipt.BatchKey.ItemKey;
+						_new.InvoiceAmount    = AmountCorrection;
+						_new.InvoiceTaxAmount = 0;
 					
-					If AmountCorrection > 0 Then 
-						// P&L expense
-						_new.AmountCorrectionType = Enums.AmountCorrectionTypes.Expense;
-						_new.CorrectionExpenseRevenueType = _Company.LandedCostAmountCorrectionExpenseType;
-					Else 
-						// P&L revenue
-						_new.AmountCorrectionType = Enums.AmountCorrectionTypes.Revenue;
-						_new.CorrectionExpenseRevenueType = _Company.LandedCostAmountCorrectionRevenueType;
+						If AmountCorrection > 0 Then 
+							// P&L expense
+							_new.AmountCorrectionType = Enums.AmountCorrectionTypes.Expense;
+							_new.CorrectionExpenseRevenueType = _Company.LandedCostAmountCorrectionExpenseType;
+						Else 
+							// P&L revenue
+							_new.AmountCorrectionType = Enums.AmountCorrectionTypes.Revenue;
+							_new.CorrectionExpenseRevenueType = _Company.LandedCostAmountCorrectionRevenueType;
+						EndIf;
+						_new.ProfitLossCenter = BatchRow.ProfitLossCenter;
+						_new.Branch           = BatchRow.Branch;
+						_new.Currency         = _Company.LandedCostCurrencyMovementType.Currency;
+//						_new.RowID            = BatchRow.RowID;
 					EndIf;
-//					_new.ExpenseType      = BatchRow.ExpenseType;
-					_new.ProfitLossCenter = BatchRow.ProfitLossCenter;
-					_new.Branch           = BatchRow.Branch;
-					_new.Currency         = _Company.LandedCostCurrencyMovementType.Currency;
-//					_new.RowID            = BatchRow.RowID;
+					
+					If AmountTaxCorrection <> 0 Then
+						_new = Tables.DataForWriteOffBatches.Add();
+						FillPropertyValues(_new, NewReceipt);
+						_new.Batch               = NewReceipt.Batch;
+						_new.BatchKey            = NewReceipt.BatchKey;
+						_new.ItemKey             = NewReceipt.BatchKey.ItemKey;
+						_new.InvoiceAmount = 0;
+						_new.InvoiceTaxAmount = AmountTaxCorrection;
+					
+						If AmountTaxCorrection > 0 Then 
+							// P&L expense
+							_new.AmountCorrectionType = Enums.AmountCorrectionTypes.Expense;
+							_new.CorrectionExpenseRevenueType = _Company.LandedCostAmountCorrectionExpenseType;
+						Else 
+							// P&L revenue
+							_new.AmountCorrectionType = Enums.AmountCorrectionTypes.Revenue;
+							_new.CorrectionExpenseRevenueType = _Company.LandedCostAmountCorrectionRevenueType;
+						EndIf;
+						_new.ProfitLossCenter = BatchRow.ProfitLossCenter;
+						_new.Branch           = BatchRow.Branch;
+						_new.Currency         = _Company.LandedCostCurrencyMovementType.Currency;
+//						_new.RowID            = BatchRow.RowID;
+					EndIf;
 					
 				EndIf;
 								
@@ -1155,13 +1181,6 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 				NewStockExpense.Store   = BatchRow.BatchKey.Store;
 				NewStockExpense.ItemKey = BatchRow.BatchKey.ItemKey;
 				NewStockExpense.PreliminaryQuantity = UnrecoverExpense.PreliminaryQuantity;
-				
-				// expense or revenue
-				If AmountCorrection > 0 Then // P&L expense
-				
-				ElsIf AmountCorrection < 0 Then // P&L revenue
-				
-				EndIf;
 				
 			EndDo;
 		EndDo;
@@ -1945,6 +1964,14 @@ Procedure WriteWriteoffBatches(Tables, CalculationSettings)
 	RecordSet = InformationRegisters.T6095S_WriteOffBatchesInfo.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 	RecordSet.Clear();
+	
+	_AmountResources = StrConcat(AmountResources(), ",");
+	_QuantityResources = "Quantity, PreliminaryQuantity";
+	
+	Tables.DataForWriteOffBatches.GroupBy(
+	"Period, Document, Company, Branch, ProfitLossCenter, ExpenseType, ItemKey, Currency, RowID, Batch, BatchKey,
+	|AmountCorrectionType, CorrectionExpenseRevenueType", 
+		_AmountResources + "," + _QuantityResources);
 	
 	For Each Row In Tables.DataForWriteOffBatches Do
 		NewRecord = RecordSet.Add();

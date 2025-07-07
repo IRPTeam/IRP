@@ -1526,7 +1526,9 @@ Procedure Calculate_CompositeDocument(Document, BatchRows, Tables, CalculationSe
 	For Each Res In AmountResources() Do
 		TotalExpenseAmounts.Insert(Res, 0);
 	EndDo;
-
+	
+	ArrayOf_BundleAmountValues = New Array();
+	
 	For Each Expense_Batch In Expense_BatchRows Do
 		Balance_BatchRows = GetBatchesWithBalance(Expense_Batch.Company, Expense_Batch.BatchKey, Document.Date);
 	
@@ -1568,18 +1570,17 @@ Procedure Calculate_CompositeDocument(Document, BatchRows, Tables, CalculationSe
 				NewExpense[Res] = ExpenseAmounts[Res]; 
 			EndDo;
 			
-			If IsCompositeDocument_Bundling(Document) Then 
-				_nr = Tables.DataForBundleAmountValues.Add();
-				_nr.Period   = Expense_Batch.Date;
-				_nr.Batch    = Balance_Batch.Batch;
-				_nr.BatchKey = Balance_Batch.BatchKey;
-				_nr.Company  = Expense_Batch.Company;
-				_nr.BatchKeyBundle = Receipt_BatchRows[0].BatchKey;
+			If IsCompositeDocument_Bundling(Document) Then
+				_nr = New Structure();
+				_nr.Insert("Period",   Expense_Batch.Date);
+				_nr.Insert("Batch",    Balance_Batch.Batch);
+				_nr.Insert("BatchKey", Balance_Batch.BatchKey);
+				_nr.Insert("Company",  Expense_Batch.Company);
+				_nr.Insert("BatchKeyBundle", Receipt_BatchRows[0].BatchKey);
 				For Each Res In AmountResources() Do
-					If TotalExpenseAmounts[Res] <> 0 And ExpenseAmounts[Res] <> 0 Then
-						_nr[Res] = ExpenseAmounts[Res] / (TotalExpenseAmounts[Res] / 100);
-					EndIf;
+					_nr.Insert(Res, ExpenseAmounts[Res]);
 				EndDo;
+				ArrayOf_BundleAmountValues.Add(_nr);				
 			Else
 				_nr = Tables.DataForCompositeBatchesAmountValues.Add();
 				_nr.Period   = Expense_Batch.Date;
@@ -1610,7 +1611,21 @@ Procedure Calculate_CompositeDocument(Document, BatchRows, Tables, CalculationSe
 			_new.Quantity = NeedExpense;
 		EndIf;
 	EndDo; // For Each Expense_Row In Expense_BatchRows
-
+	
+	For Each _r In ArrayOf_BundleAmountValues Do
+		_nr = Tables.DataForBundleAmountValues.Add();
+		_nr.Period = _r.Period;
+		_nr.Batch = _r.Batch;
+		_nr.BatchKey = _r.BatchKey;
+		_nr.Company = _r.Company;
+		_nr.BatchKeyBundle = _r.BatchKeyBundle;
+		For Each Res In AmountResources() Do
+			If TotalExpenseAmounts[Res] <> 0 And _r[Res] <> 0 Then
+				_nr[Res] = _r[Res] / (TotalExpenseAmounts[Res] / 100);
+			EndIf;
+		EndDo;
+	EndDo;
+	
 	For Each Receipt_Batch In Receipt_BatchRows Do
 		NewReceipt = Tables.DataForReceipt.Add();
 		NewReceipt.Batch     = Receipt_Batch.Batch;

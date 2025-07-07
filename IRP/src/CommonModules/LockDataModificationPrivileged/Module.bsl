@@ -7,14 +7,30 @@ Procedure BeforeWrite_DocumentsLockDataModification(Source, Cancel, WriteMode, P
 EndProcedure
 
 Procedure BeforeWrite_CatalogsLockDataModification(Source, Cancel) Export
+	If Source.Metadata() = Metadata.Catalogs.Batches Then
+		Return;
+	EndIf;
+	
+	If Source.Metadata() = Metadata.Catalogs.BatchKeys Then
+		Return;
+	EndIf;
+	
 	CheckLockData(Source, Cancel, Source.IsNew());
 EndProcedure
 
 Procedure BeforeWrite_InformationRegistersLockDataModification(Source, Cancel, Replacing) Export
+	If Source.Metadata() = Metadata.InformationRegisters.T6095S_WriteOffBatchesInfo Then
+		Return;
+	EndIf;
+	
 	CheckLockData(Source, Cancel);
 EndProcedure
 
 Procedure BeforeWrite_AccumulationRegistersLockDataModification(Source, Cancel, Replacing) Export
+	If Source.Metadata() = Metadata.AccumulationRegisters.R6010B_BatchWiseBalance Then
+		Return;
+	EndIf;
+	
 	CheckLockData(Source, Cancel);
 EndProcedure
 

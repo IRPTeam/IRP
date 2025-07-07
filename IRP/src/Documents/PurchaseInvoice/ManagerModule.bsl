@@ -1716,6 +1716,9 @@ Function R5021T_Revenues()
 		|	T6095S_WriteOffBatchesInfo.CorrectionExpenseRevenueType as ExpenseType,
 		|	T6095S_WriteOffBatchesInfo.ItemKey,
 		|	T6095S_WriteOffBatchesInfo.Currency,
+		|	undefined as RevenueType,
+		|	undefined as AdditionalAnalytic,
+		|	undefined as Project,
 		|	-T6095S_WriteOffBatchesInfo.InvoiceAmount as Amount,
 		|	-(T6095S_WriteOffBatchesInfo.InvoiceAmount + T6095S_WriteOffBatchesInfo.InvoiceTaxAmount) as AmountWithTaxes,
 		|	T6095S_WriteOffBatchesInfo.Recorder as CalculationMovementCost

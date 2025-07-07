@@ -1367,7 +1367,8 @@ Procedure Calculate_SimpleExpense(Document, BatchRow, Tables, CalculationSetting
 			_new.Quantity            = NewExpense.Quantity;
 			_new.PreliminaryQuantity = NewExpense.PreliminaryQuantity;
 			
-			If TypeOf(Document) = Type("DocumentRef.SalesInvoice") Then
+			If TypeOf(Document) = Type("DocumentRef.SalesInvoice")
+				Or TypeOf(Document) = Type("DocumentRef.RetailSalesReceipt") Then
 				_new.ExpenseType = BatchRow.Company.LandedCostExpenseType;
 			Else
 				_new.ExpenseType = BatchRow.ExpenseType;
@@ -1936,6 +1937,7 @@ EndProcedure
 
 Procedure WriteBatchWiseBalance(Tables, CalculationSettings)
 	RecordSet = AccumulationRegisters.R6010B_BatchWiseBalance.CreateRecordSet();
+	RecordSet.DataExchange.Load = True;
 	RecordSet.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 	RecordSet.Clear();
 	
@@ -1966,6 +1968,7 @@ EndProcedure
 
 Procedure WriteWriteoffBatches(Tables, CalculationSettings)
 	RecordSet = InformationRegisters.T6095S_WriteOffBatchesInfo.CreateRecordSet();
+	RecordSet.DataExchange.Load = True;
 	RecordSet.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 	RecordSet.Clear();
 	
@@ -2105,6 +2108,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.SalesInvoice
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.RetailSalesReceipt
 	|	    or (T6020S_BatchKeysInfo.Recorder refs Document.PurchaseInvoice 
 	|			and T6020S_BatchKeysInfo.PreliminaryID <> """")
 	|			then T6020S_BatchKeysInfo.ProfitLossCenter
@@ -2135,6 +2139,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.SalesInvoice
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.RetailSalesReceipt
 	|			then T6020S_BatchKeysInfo.Currency
 	|		else undefined
 	|	end AS Currency,
@@ -2210,6 +2216,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.CommissioningOfFixedAsset
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.ModernizationOfFixedAsset
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.SalesInvoice
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.RetailSalesReceipt
 	|	    or (T6020S_BatchKeysInfo.Recorder refs Document.PurchaseInvoice 
 	|			and T6020S_BatchKeysInfo.PreliminaryID <> """")
 	|			then T6020S_BatchKeysInfo.ProfitLossCenter
@@ -2240,6 +2247,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case
 	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff
 	|		OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.SalesInvoice
+	|		OR T6020S_BatchKeysInfo.Recorder refs Document.RetailSalesReceipt
 	|			then T6020S_BatchKeysInfo.Currency
 	|		else undefined
 	|	end,

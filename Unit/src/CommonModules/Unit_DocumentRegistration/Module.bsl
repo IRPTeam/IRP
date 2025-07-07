@@ -366,6 +366,11 @@ Function GetIgnored_Fields()
 	Array.Add("RetailSalesReceipt.R4014B_SerialLotNumber.*");
 	Array.Add("RetailSalesReceipt.R4032B_GoodsInTransitOutgoing.*");
 	Array.Add("RetailSalesReceipt.R5021T_Revenues.*");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.FixedAsset");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.LedgerType");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.AdditionalAnalytic");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.Project");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.AmountCost");
 
 	Array.Add("SalesInvoice.R2005T_SalesSpecialOffers.*");
 	Array.Add("SalesInvoice.R2011B_SalesOrdersShipment.*");
@@ -374,6 +379,11 @@ Function GetIgnored_Fields()
 	Array.Add("SalesInvoice.R4034B_GoodsShipmentSchedule.*");
 	Array.Add("SalesInvoice.R5021T_Revenues.*");
 	Array.Add("SalesInvoice.R6080T_OtherPeriodsRevenues.*");
+	Array.Add("SalesInvoice.R5022T_Expenses.FixedAsset");
+	Array.Add("SalesInvoice.R5022T_Expenses.LedgerType");
+	Array.Add("SalesInvoice.R5022T_Expenses.AdditionalAnalytic");
+	Array.Add("SalesInvoice.R5022T_Expenses.Project");
+	Array.Add("SalesInvoice.R5022T_Expenses.AmountCost");
 
 	Array.Add("SalesOrder.R2010T_SalesOrders.*");
 	Array.Add("SalesOrder.R2011B_SalesOrdersShipment.*");

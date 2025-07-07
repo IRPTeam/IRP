@@ -275,6 +275,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Report.R2010A_SalesOrdersExecution</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Report.R1031B_ReceiptInvoicingMovements</name>
 		<right>
 			<name>Use</name>

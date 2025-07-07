@@ -450,6 +450,8 @@ Function GetChain()
 	Chain.Insert("ChangeAmountByNewAmountBalance", GetChainLink("ChangeAmountByNewAmountBalanceExecute"));
 	Chain.Insert("ChangeNewAmountBalanceByAmount", GetChainLink("ChangeNewAmountBalanceByAmountExecute"));
 	
+	Chain.Insert("ChangePreliminaryDataByBasis"  , GetChainLink("ChangePreliminaryDataByBasisExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -2057,6 +2059,38 @@ EndFunction
 Function ChangeNewAmountBalanceByAmountExecute(Options) Export	
 	Return ?(ValueIsFilled(Options.Amount), Options.Amount, 0)  
 		+ ?(ValueIsFilled(Options.AmountBalance), Options.AmountBalance, 0)  ;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PRELIMINARY_DATA_BY_BASIS
+
+Function ChangePreliminaryDataByBasisOptions() Export
+	Return GetChainLinkOptions("IsPreliminary, QuantityInBaseUnit, RowIDInfo, Ref");
+EndFunction
+
+Function ChangePreliminaryDataByBasisExecute(Options) Export	
+	Result = New Structure();
+	Result.Insert("Amount"    , 0);
+	Result.Insert("AmountTax" , 0);
+	Result.Insert("Currency"  , Undefined);
+	
+	If Options.IsPreliminary = False Then
+		Return Result;
+	EndIf;
+
+	For Each Row In Options.RowIDInfo Do
+		BasisAmounts = ModelServer_V2.GetAmountsFromPO(Row.Basis, Row.BasisKey);
+		If Not ValueIsFilled(BasisAmounts.QuantityInBaseUnit) Then
+			Return Result;
+		EndIf;
+		
+		Result.Currency = BasisAmounts.Currency;
+		Result.Amount = (BasisAmounts.Amount / BasisAmounts.QuantityInBaseUnit) * Options.QuantityInBaseUnit;
+		Result.AmountTax = (BasisAmounts.AmountTax / BasisAmounts.QuantityInBaseUnit) * Options.QuantityInBaseUnit;
+	EndDo;
+
+	Return Result;
 EndFunction
 
 #EndRegion

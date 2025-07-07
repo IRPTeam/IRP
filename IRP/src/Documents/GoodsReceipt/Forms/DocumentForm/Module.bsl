@@ -115,17 +115,18 @@ Procedure SetVisibilityAvailability(Object, Form)
 		EndIf;
 	EndDo;
 	ClosedRowKeys = DocOrderClosingServer.GetIsClosedPurchaseOrderInItemList(ArrayOfOrders);
-	IsPresentPreliminary = False;
-	For Each Row In Form.Object.ItemList Do
-		Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
-		If Row.IsPreliminary Then
-			IsPresentPreliminary = True;
-		EndIf;
-	EndDo;
 	
-	Form.Items.ItemListCurrency.Visible = IsPresentPreliminary;
-	Form.Items.ItemListPreliminaryAmount.Visible = IsPresentPreliminary;	
-	Form.Items.ItemListPreliminaryTaxAmount.Visible = IsPresentPreliminary;
+//	IsPresentPreliminary = False;
+//	For Each Row In Form.Object.ItemList Do
+//		Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
+//		If Row.IsPreliminary Then
+//			IsPresentPreliminary = True;
+//		EndIf;
+//	EndDo;
+//	
+//	Form.Items.ItemListCurrency.Visible = IsPresentPreliminary;
+//	Form.Items.ItemListPreliminaryAmount.Visible = IsPresentPreliminary;	
+//	Form.Items.ItemListPreliminaryTaxAmount.Visible = IsPresentPreliminary;
 EndProcedure
 
 &AtClient
@@ -367,16 +368,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListIsPreliminaryOnChange(Item)
-	CurrentData = Items.ItemList.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	If Not CurrentData.IsPreliminary Then
-		CurrentData.PreliminaryAmount = 0;
-		CurrentData.PreliminaryTaxAmount = 0;
-		CurrentData.Currency = Undefined;
-	EndIf;
-	SetVisibilityAvailability(Object, ThisObject);
+	DocGoodsReceiptClient.ItemListIsPreliminaryOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

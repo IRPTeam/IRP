@@ -55,22 +55,6 @@ EndProcedure
 
 #EndRegion
 
-//#Region AGREEMENT
-//
-//Procedure AgreementOnChange(Object, Form, Item, AddInfo = Undefined) Export
-//	ViewClient_V2.AgreementOnChange(Object, Form, "ItemList");
-//EndProcedure
-//
-//Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-//	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, Object.TransactionType);
-//EndProcedure
-//
-//Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Export
-//	DocumentsClient.AgreementTextChange_TransactionTypeFilter(Object, Form, Item, Text, StandardProcessing, Object.TransactionType);
-//EndProcedure
-//
-//#EndRegion
-
 #Region LEGAL_NAME
 
 Procedure LegalNameOnChange(Object, Form, Item) Export
@@ -120,22 +104,6 @@ Procedure TransactionTypeOnChange(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
-
-//#Region PRICE_INCLUDE_TAX
-//
-//Procedure PriceIncludeTaxOnChange(Object, Form, Item) Export
-//	ViewClient_V2.PriceIncludeTaxOnChange(Object, Form);
-//EndProcedure
-//
-//#EndRegion
-//
-//#Region CURRENCY
-//
-//Procedure CurrencyOnChange(Object, Form, Item) Export
-//	ViewClient_V2.CurrencyOnChange(Object, Form, "ItemList");
-//EndProcedure
-//
-//#EndRegion
 
 #Region _DATE
 
@@ -215,22 +183,6 @@ EndProcedure
 
 #EndRegion
 
-//#Region PRICE_TYPE
-//
-//Procedure ItemListPriceTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export
-//	ViewClient_V2.ItemListPriceTypeOnChange(Object, Form, CurrentData);
-//EndProcedure
-//
-//#EndRegion
-
-//#Region PRICE
-//
-//Procedure ItemListPriceOnChange(Object, Form, Item, CurrentData = Undefined) Export
-//	ViewClient_V2.ItemListPriceOnChange(Object, Form, CurrentData);
-//EndProcedure
-//
-//#EndRegion
-
 #Region UNIT
 
 Procedure ItemListUnitOnChange(Object, Form, Item, CurrentData = Undefined) Export
@@ -247,45 +199,13 @@ EndProcedure
 
 #EndRegion
 
-//#Region DONT_CALCULATE_ROW
-//
-//Procedure ItemListDontCalculateRowOnChange(Object, Form, Item, CurrentData = Undefined) Export
-//	ViewClient_V2.ItemListDontCalculateRowOnChange(Object, Form, CurrentData);
-//EndProcedure
-//
-//#EndRegion
+#Region IS_PRELIMINARY
 
-//#Region VAT_RATE
-//
-//Procedure ItemListVatRateOnChange(Object, Form, Item, CurrentData = Undefined) Export
-//	ViewClient_V2.ItemListVatRateOnChange(Object, Form, CurrentData);
-//EndProcedure
-//
-//#EndRegion
+Procedure ItemListIsPreliminaryOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListIsPreliminaryChange(Object, Form, CurrentData);
+EndProcedure
 
-//#Region NET_AMOUNT
-//
-//Procedure ItemListNetAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
-//	ViewClient_V2.ItemListNetAmountOnChange(Object, Form, CurrentData);
-//EndProcedure
-//
-//#EndRegion
-//
-//#Region TAX_AMOUNT
-//
-//Procedure ItemListTaxAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
-//	ViewClient_V2.ItemListTaxAmountOnChange(Object, Form, CurrentData);
-//EndProcedure
-//
-//#EndRegion
-//
-//#Region TOTAL_AMOUNT
-//
-//Procedure ItemListTotalAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
-//	ViewClient_V2.ItemListTotalAmountOnChange(Object, Form, CurrentData);
-//EndProcedure
-//
-//#EndRegion
+#EndRegion
 
 #EndRegion
 

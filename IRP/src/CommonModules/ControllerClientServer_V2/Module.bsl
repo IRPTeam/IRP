@@ -604,6 +604,7 @@ Function GetAllBindings(Parameters)
 	BindingMap.Insert("ItemList.ItemKey"  , BindItemListItemKey(Parameters));
 	BindingMap.Insert("ItemList.Unit"     , BindItemListUnit(Parameters));
 	BindingMap.Insert("ItemList.Quantity" , BindItemListQuantity(Parameters));
+	BindingMap.Insert("ItemList.IsPreliminary" , BindItemListIsPreliminary(Parameters));
 	
 	BindingMap.Insert("Materials.Item"     , BindMaterialsItem(Parameters));
 	BindingMap.Insert("Materials.ItemKey"  , BindMaterialsItemKey(Parameters));
@@ -14449,6 +14450,90 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_IS_PRELIMINARY
+
+// ItemList.IsPreliminary.OnChange
+Procedure ItemListIsPreliminary(Parameters) Export
+	AddViewNotify("OnSetItemListIsPreliminary", Parameters);
+	Binding = BindItemListIsPreliminary(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+Procedure SetPreliminaryData(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Amount"    , BindItemListPreliminaryAmount(Parameters));
+	ResourceToBinding.Insert("AmountTax" , BindItemListPreliminaryTaxAmount(Parameters));
+	ResourceToBinding.Insert("Currency"  , BindItemListCurrency(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// ItemList.IsPreliminary.Get
+Function GetItemListIsPreliminary(Parameters, _Key)
+	Binding = BindItemListIsPreliminary(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.IsPreliminary.Bind
+Function BindItemListIsPreliminary(Parameters)
+	DataPath = "ItemList.IsPreliminary";
+	Binding = New Structure();	
+	Return BindSteps("StepChangePreliminaryDataByBasis", DataPath, Binding, Parameters, "BindItemListIsPreliminary");
+EndFunction
+
+// ItemList.ChangePreliminaryDataByBasis.Step
+Procedure StepChangePreliminaryDataByBasis(Parameters, Chain) Export
+	Chain.ChangePreliminaryDataByBasis.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePreliminaryDataByBasis.Setter = "SetPreliminaryData";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangePreliminaryDataByBasisOptions();
+		Options.IsPreliminary = GetItemListIsPreliminary(Parameters, Row.Key);
+		Options.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.Ref      = Parameters.Object.Ref;
+		Options.RowIDInfo= Row.RowIDInfo;
+		Options.Key      = Row.Key;
+		Options.StepName = "StepChangePreliminaryDataByBasis";
+		Chain.ChangePreliminaryDataByBasis.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_PRELIMINARY_AMOUNT
+
+// ItemList.PreliminaryAmount.Bind
+Function BindItemListPreliminaryAmount(Parameters)
+	DataPath = "ItemList.PreliminaryAmount";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListPreliminaryAmount");
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_PRELIMINARY_TAX_AMOUNT
+
+// ItemList.PreliminaryTaxAmount.Bind
+Function BindItemListPreliminaryTaxAmount(Parameters)
+	DataPath = "ItemList.PreliminaryTaxAmount";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListPreliminaryTaxAmount");
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_CURRENCY
+
+// ItemList.Currency.Bind
+Function BindItemListCurrency(Parameters)
+	DataPath = "ItemList.Currency";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListCurrency");
+EndFunction
+
+#EndRegion
+
 #EndRegion
 
 #Region PAYMENTS
@@ -17278,6 +17363,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "PaymentListAfterDeleteRowFormNotify"            Then ViewClient_V2.PaymentListAfterDeleteRowFormNotify(Parameters);
 	ElsIf ViewNotify = "OnSetPaymentListCommissionNotify"               Then ViewClient_V2.OnSetPaymentListCommissionNotify(Parameters);
 	ElsIf ViewNotify = "OnSetPaymentListCommissionPercentNotify"        Then ViewClient_V2.OnSetPaymentListCommissionPercentNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemListIsPreliminary" Then ViewClient_V2.OnSetItemListIsPreliminary(Parameters);
 	
 	Else
 		Raise StrTemplate(R().Error_NotHandledViewNotify, ViewNotify);

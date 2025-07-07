@@ -1222,11 +1222,6 @@ Function SearchByItemAndItemKeysDescriptions_WithKey(GetItemAndItemKeysInputTabl
 	|			ELSE MainData.ItemKey = Images.ItemKey
 	|		END";
 	
-	DescriptionLocal = "Description_" + LocalizationReuse.GetLocalizationCode();
-	If Not DescriptionLocal = "Description_en" Then
-		Query.Text = StrReplace(Query.Text, "Description_en", DescriptionLocal);
-	EndIf;
-	
 	Query.SetParameter("ItemAndItemKeysDescriptions", GetItemAndItemKeysInputTable);
 	QueryExecution = Query.Execute();
 	QueryUnload = QueryExecution.Unload();
@@ -1283,10 +1278,7 @@ Function SearchItemByString(ItemString) Export
 	|	NOT Items.DeletionMark
 	|	AND Items.Description_en = &Item";
 	
-	DescriptionLocal = "Description_" + LocalizationReuse.GetLocalizationCode();
-	If Not DescriptionLocal = "Description_en" Then
-		Query.Text = StrReplace(Query.Text, "Description_en", DescriptionLocal);
-	EndIf;
+	LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "Items");
 	
 	Return Query.Execute().Unload().UnloadColumn(0);
 	
@@ -1349,10 +1341,7 @@ Function SearchItemKeyByString(ItemKeyString, ItemRef) Export
 	|	&Item = VALUE(Catalog.Items.EmptyRef)
 	|	OR tmpRefs.Ref.Item = &Item";
 	
-	DescriptionLocal = "Description_" + LocalizationReuse.GetLocalizationCode();
-	If Not DescriptionLocal = "Description_en" Then
-		Query.Text = StrReplace(Query.Text, "Description_en", DescriptionLocal);
-	EndIf;
+	LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "ItemKeys");
 	
 	Return Query.Execute().Unload().UnloadColumn(0);
 	

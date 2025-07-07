@@ -73,7 +73,7 @@ Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
 	If ValueIsFilled(Data.Basis) Then
 		StandardProcessing = False;
 		If TypeOf(Data.Basis) = Type("DocumentRef.ExternalAccountingOperation") Then
-			PresentationBasis = Data.Basis["Description_" + LocalizationReuse.UserLanguageCode()];
+			PresentationBasis = Data.Basis["Description_" + LocalizationReuse.GetLocalizationCode()];
 			If IsBlankString(PresentationBasis) Then
 				Presentation = ""+R().AccountingJE_prefix_01 + Data.Basis.RecorderPresentation;
 			Else

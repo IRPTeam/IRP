@@ -245,7 +245,7 @@ Function GetDataLocalizations() Export
 	InterfaceLocalizations = GetInterfaceLocalizations();
 	LocalizationsMap = New Map;
 	For Each Lang In InterfaceLocalizations Do
-		LocalizationsMap.Insert(Lang.LanguageCode, Lang.Synonym);
+		LocalizationsMap.Insert(Lang.LanguageCode, Lang);
 	EndDo;
 	
 	For Each CommonAttribute In Metadata.CommonAttributes Do

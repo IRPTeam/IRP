@@ -1259,7 +1259,9 @@ Function GetAnalytics_Revenue(Parameters)
 		                                                      Parameters.RowData.ProfitLossCenter);
 		                                               
 	AccountingAnalytics.Credit = Credit.AccountRevenue;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("RevenueType", Parameters.RowData.RevenueType);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	Return AccountingAnalytics;
 EndFunction

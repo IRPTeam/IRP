@@ -18,7 +18,7 @@
 // * DataLang - String -
 Function InitPrintParam(Ref, Val LayoutLang = Undefined, Val DataLang = Undefined) Export
 	If LayoutLang = Undefined Then
-		LayoutLang = LocalizationReuse.GetLocalizationCode();
+		LayoutLang = LocalizationReuse.GetInterfaceLocalizationCode();
 	EndIf;
 	If DataLang = Undefined Then
 		DataLang = LocalizationReuse.GetLocalizationCode();

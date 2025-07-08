@@ -545,7 +545,9 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Current_R4035B_IncomingStocks = PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters);
 	Exists_R4035B_IncomingStocks  = PostingServer.GetQueryTableByName("Exists_R4035B_IncomingStocks", Parameters);
 	
-	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+
+	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, 
+		LineNumberAndItemKeyFromItemList,
 		Current_R4035B_IncomingStocks, 
 		Exists_R4035B_IncomingStocks, 
 		AccumulationRecordType.Expense, Unposting, AddInfo) Then
@@ -555,7 +557,9 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Current_R4036B_IncomingStocksRequested = PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters);
 	Exists_R4036B_IncomingStocksRequested  = PostingServer.GetQueryTableByName("Exists_R4036B_IncomingStocksRequested", Parameters);
 	
-	If Not Cancel And Not AccReg.R4036B_IncomingStocksRequested.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+	
+	If Not Cancel And Not AccReg.R4036B_IncomingStocksRequested.CheckBalance(Ref, 
+		LineNumberAndItemKeyFromItemList,
 		Current_R4036B_IncomingStocksRequested,
 		Exists_R4036B_IncomingStocksRequested,
 		AccumulationRecordType.Expense, Unposting, AddInfo) Then
@@ -564,11 +568,21 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	
 	Current_R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters);
 	Exists_R4014B_SerialLotNumber  = PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters);
-	
-	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+		
+	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, 
+		LineNumberAndItemKeyFromItemList,
 		Current_R4014B_SerialLotNumber, 
 		Exists_R4014B_SerialLotNumber, 
 		AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
+	
+	Current_R6070T_OtherPeriodsExpenses = PostingServer.GetQueryTableByName("R6070T_OtherPeriodsExpenses", Parameters);
+	Exists_R6070T_OtherPeriodsExpenses  = PostingServer.GetQueryTableByName("Exists_R6070T_OtherPeriodsExpenses", Parameters);
+	
+	If Not Cancel And Not AccReg.R6070T_OtherPeriodsExpenses.CheckBalance(Ref, 
+			Current_R6070T_OtherPeriodsExpenses, 
+			Exists_R6070T_OtherPeriodsExpenses, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
@@ -616,6 +630,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(Exists_R4036B_IncomingStocksRequested());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
+	QueryArray.Add(PostingServer.Exists_R6070T_OtherPeriodsExpenses());
 	Return QueryArray;
 EndFunction
 

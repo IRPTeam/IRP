@@ -340,8 +340,8 @@ Function GetPartnerTypeByTransactionType(TransactionType, OnlyMainPartnerType = 
 	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent , "TradeAgent");
 	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor    , "Consignor");
 	
-	Map.Insert(Enums.GoodsReceiptTransactionTypes.Purchase             , "Vendor");
-	Map.Insert(Enums.GoodsReceiptTransactionTypes.PreliminaryStock     , "Vendor");
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.Purchase             , "Vendor, Other");
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.PreliminaryStock     , "Vendor, Other");
 	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer   , "Customer, Other");
 
 	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor , "Consignor");
@@ -486,3 +486,36 @@ Function GetPaymentTypesByBankTerm(BankTerm) Export
 	ArrayOfRefs = QueryResult.Unload().UnloadColumn("Ref");
 	Return ArrayOfRefs;
 EndFunction
+
+Function GetAmountsFromPO(Ref, Key) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 1
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.NetAmount AS Amount,
+	|	ItemList.TaxAmount AS AmountTax,
+	|	ItemList.QuantityInBaseUnit
+	|FROM
+	|	Document.PurchaseOrder.ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref
+	|	AND ItemList.Key = &Key";
+	Query.SetParameter("Ref", Ref);
+	Query.SetParameter("Key", Key);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	Result = New Structure();
+	Result.Insert("Currency", Undefined);
+	Result.Insert("Amount", 0);
+	Result.Insert("AmountTax", 0);
+	Result.Insert("QuantityInBaseUnit", 0);
+	
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+	EndIf;
+	
+	Return Result;
+EndFunction	
+	

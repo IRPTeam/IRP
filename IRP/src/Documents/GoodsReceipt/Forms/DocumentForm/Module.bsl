@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -17,6 +18,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -76,16 +78,17 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 
 	PartnerVisible = (Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer")
 		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase")
 		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReceiptFromConsignor")
-		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.PreliminaryStock")
 		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromTradeAgent"));
 		
 	Form.Items.LegalName.Enabled = PartnerVisible And ValueIsFilled(Object.Partner);
 	Form.Items.Partner.Visible   = PartnerVisible;
 	Form.Items.LegalName.Visible = PartnerVisible;
+	
 	For Each Row In Object.ItemList Do
 		If ValueIsFilled(Row.ReceiptBasis) Then
 			Row.ReceiptBasisCurrency = ServiceSystemServer.GetCompositeObjectAttribute(Row.ReceiptBasis, "Currency");
@@ -112,9 +115,18 @@ Procedure SetVisibilityAvailability(Object, Form)
 		EndIf;
 	EndDo;
 	ClosedRowKeys = DocOrderClosingServer.GetIsClosedPurchaseOrderInItemList(ArrayOfOrders);
-	For Each Row In Form.Object.ItemList Do
-			Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
-	EndDo;
+	
+//	IsPresentPreliminary = False;
+//	For Each Row In Form.Object.ItemList Do
+//		Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
+//		If Row.IsPreliminary Then
+//			IsPresentPreliminary = True;
+//		EndIf;
+//	EndDo;
+//	
+//	Form.Items.ItemListCurrency.Visible = IsPresentPreliminary;
+//	Form.Items.ItemListPreliminaryAmount.Visible = IsPresentPreliminary;	
+//	Form.Items.ItemListPreliminaryTaxAmount.Visible = IsPresentPreliminary;
 EndProcedure
 
 &AtClient
@@ -130,6 +142,16 @@ EndProcedure
 &AtClient 
 Procedure _DetachIdleHandler() Export
 	DetachIdleHandler("_IdeHandler");
+EndProcedure
+
+&AtClient
+Procedure API_Callback(TableName, ArrayOfDataPaths) Export
+	API_CallbackAtServer(TableName, ArrayOfDataPaths);
+EndProcedure
+
+&AtServer
+Procedure API_CallbackAtServer(TableName, ArrayOfDataPaths)
+	ViewServer_V2.API_CallbackAtServer(Object, ThisObject, TableName, ArrayOfDataPaths);
 EndProcedure
 
 #EndRegion
@@ -187,6 +209,15 @@ EndProcedure
 &AtClient
 Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
 	DocGoodsReceiptClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region _DATE
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocGoodsReceiptClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -334,6 +365,11 @@ Procedure ItemListSourceOfOriginsPresentationClearing(Item, StandardProcessing)
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure ItemListIsPreliminaryOnChange(Item)
+	DocGoodsReceiptClient.ItemListIsPreliminaryOnChange(Object, ThisObject, Item);
+EndProcedure
 
 #EndRegion
 
@@ -503,6 +539,21 @@ EndProcedure
 &AtClient
 Procedure OpenSerialLotNumbersTree(Command)
 	SerialLotNumberClient.OpenSerialLotNumbersTree(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EditCurrencies(Command)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	FormParameters = CurrenciesClientServer.GetParameters_GR_Preliminary(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 #EndRegion

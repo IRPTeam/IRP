@@ -184,6 +184,8 @@ Function GetIgnored_Fields()
 	Array.Add("*.T6010S_BatchesInfo.*");
 	
 	// excludes
+	Array.Add("*.R4050B_StockInventory.PreliminaryQuantity");
+	
 	Array.Add("Payroll.R5021T_Revenues.ItemKey");
 	Array.Add("Payroll.R5021T_Revenues.AdditionalAnalytic");
 	Array.Add("Payroll.R5021T_Revenues.Project");
@@ -364,6 +366,11 @@ Function GetIgnored_Fields()
 	Array.Add("RetailSalesReceipt.R4014B_SerialLotNumber.*");
 	Array.Add("RetailSalesReceipt.R4032B_GoodsInTransitOutgoing.*");
 	Array.Add("RetailSalesReceipt.R5021T_Revenues.*");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.FixedAsset");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.LedgerType");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.AdditionalAnalytic");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.Project");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.AmountCost");
 
 	Array.Add("SalesInvoice.R2005T_SalesSpecialOffers.*");
 	Array.Add("SalesInvoice.R2011B_SalesOrdersShipment.*");
@@ -372,6 +379,11 @@ Function GetIgnored_Fields()
 	Array.Add("SalesInvoice.R4034B_GoodsShipmentSchedule.*");
 	Array.Add("SalesInvoice.R5021T_Revenues.*");
 	Array.Add("SalesInvoice.R6080T_OtherPeriodsRevenues.*");
+	Array.Add("SalesInvoice.R5022T_Expenses.FixedAsset");
+	Array.Add("SalesInvoice.R5022T_Expenses.LedgerType");
+	Array.Add("SalesInvoice.R5022T_Expenses.AdditionalAnalytic");
+	Array.Add("SalesInvoice.R5022T_Expenses.Project");
+	Array.Add("SalesInvoice.R5022T_Expenses.AmountCost");
 
 	Array.Add("SalesOrder.R2010T_SalesOrders.*");
 	Array.Add("SalesOrder.R2011B_SalesOrdersShipment.*");
@@ -645,6 +657,9 @@ Function GetIgnored_Fields()
 	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.AllocatedCostTaxAmount");
 	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.AllocatedRevenueAmount");
 	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.AllocatedRevenueTaxAmount");
+	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.PreliminaryQuantity");
+	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.PreliminaryAmount");
+	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.PreliminaryTaxAmount");
 
 	Array.Add("WorkSheet.R5022T_Expenses.AmountCost");
 

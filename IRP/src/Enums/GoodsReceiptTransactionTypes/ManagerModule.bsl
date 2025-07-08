@@ -5,7 +5,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	ChoiceData.Add(InventoryTransfer);
 	ChoiceData.Add(Purchase);
 	ChoiceData.Add(ReturnFromCustomer);
-	If GetFunctionalOption("UseSimpleBatch") Then
+	If FOServer.IsUseSimpleBatch() Then
 		ChoiceData.Add(PreliminaryStock);
 	EndIf;
 	

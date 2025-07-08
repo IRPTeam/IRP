@@ -187,6 +187,12 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
 		"Document.StockAdjustmentAsWriteOff.ItemList");
 
+	Current_R4050B_StockInventory = PostingServer.GetQueryTableByName("R4050B_StockInventory", Parameters);
+	Exists_R4050B_StockInventory  = PostingServer.GetQueryTableByName("Exists_R4050B_StockInventory", Parameters);
+	
+	Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory);
+	Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory);
+	
 	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
@@ -220,10 +226,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -235,6 +237,26 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
+	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(R6025B_SimpleBatch());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return 
@@ -326,22 +348,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
-	QueryArray.Add(R5022T_Expenses());
-	QueryArray.Add(R9010B_SourceOfOriginStock());
-	QueryArray.Add(T3010S_RowIDInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
-	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
-	QueryArray.Add(R6025B_SimpleBatch());
-	Return QueryArray;
-EndFunction
 
 Function R4032B_GoodsInTransitOutgoing()
 	Return 
@@ -545,40 +551,45 @@ Function T6020S_BatchKeysInfo()
 EndFunction
 
 Function R5022T_Expenses()
-	Return "SELECT
-		   |	WriteOffBatchesInfo.Period,
-		   |	WriteOffBatchesInfo.Company,
-		   |	WriteOffBatchesInfo.Branch,
-		   |	WriteOffBatchesInfo.ProfitLossCenter,
-		   |	WriteOffBatchesInfo.ExpenseType,
-		   |	WriteOffBatchesInfo.ItemKey,
-		   |	WriteOffBatchesInfo.Currency,
-		   |	WriteOffBatchesInfo.RowID AS Key,
-		   |	WriteOffBatchesInfo.Recorder AS CalculationMovementCost,
-		   |	WriteOffBatchesInfo.InvoiceAmount
-		   |	+WriteOffBatchesInfo.IndirectCostAmount
-	       |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
-	       |	+WriteOffBatchesInfo.ExtraDirectCostAmount
-	       |	+WriteOffBatchesInfo.AllocatedCostAmount
-	       |	-WriteOffBatchesInfo.AllocatedRevenueAmount AS Amount,
-	       |
-	       |	WriteOffBatchesInfo.InvoiceAmount
-	       |	+WriteOffBatchesInfo.InvoiceTaxAmount
-	       |	+WriteOffBatchesInfo.IndirectCostAmount
-	       |	+WriteOffBatchesInfo.IndirectCostTaxAmount
-	       |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
-	       |	+WriteOffBatchesInfo.ExtraCostTaxAmountByRatio
-	       |	+WriteOffBatchesInfo.ExtraDirectCostAmount
-	       |	+WriteOffBatchesInfo.ExtraDirectCostTaxAmount
-	       |	+WriteOffBatchesInfo.AllocatedCostAmount
-	       |	+WriteOffBatchesInfo.AllocatedCostTaxAmount
-	       |	-WriteOffBatchesInfo.AllocatedRevenueAmount
-	       |	-WriteOffBatchesInfo.AllocatedRevenueTaxAmount AS AmountWithTaxes
-		   |INTO R5022T_Expenses
-		   |FROM
-		   |	InformationRegister.T6095S_WriteOffBatchesInfo AS WriteOffBatchesInfo
-		   |WHERE
-		   |	WriteOffBatchesInfo.Document = &Ref";
+	Return 
+		"SELECT
+		|	WriteOffBatchesInfo.Period,
+		|	WriteOffBatchesInfo.Company,
+		|	WriteOffBatchesInfo.Branch,
+		|	WriteOffBatchesInfo.ProfitLossCenter,
+		|	WriteOffBatchesInfo.ExpenseType,
+		|	WriteOffBatchesInfo.ItemKey,
+		|	WriteOffBatchesInfo.Currency,
+		|	WriteOffBatchesInfo.RowID AS Key,
+		|	WriteOffBatchesInfo.Recorder AS CalculationMovementCost,
+		|
+		|	WriteOffBatchesInfo.InvoiceAmount
+		|	+WriteOffBatchesInfo.PreliminaryAmount
+		|	+WriteOffBatchesInfo.IndirectCostAmount
+	    |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
+	    |	+WriteOffBatchesInfo.ExtraDirectCostAmount
+	    |	+WriteOffBatchesInfo.AllocatedCostAmount
+	    |	-WriteOffBatchesInfo.AllocatedRevenueAmount AS Amount,
+	    |
+	    |	WriteOffBatchesInfo.InvoiceAmount
+	    |	+WriteOffBatchesInfo.PreliminaryAmount
+	    |	+WriteOffBatchesInfo.InvoiceTaxAmount
+	    |	+WriteOffBatchesInfo.PreliminaryTaxAmount
+	    |	+WriteOffBatchesInfo.IndirectCostAmount
+	    |	+WriteOffBatchesInfo.IndirectCostTaxAmount
+	    |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
+	    |	+WriteOffBatchesInfo.ExtraCostTaxAmountByRatio
+	    |	+WriteOffBatchesInfo.ExtraDirectCostAmount
+	    |	+WriteOffBatchesInfo.ExtraDirectCostTaxAmount
+	    |	+WriteOffBatchesInfo.AllocatedCostAmount
+	    |	+WriteOffBatchesInfo.AllocatedCostTaxAmount
+	    |	-WriteOffBatchesInfo.AllocatedRevenueAmount
+	    |	-WriteOffBatchesInfo.AllocatedRevenueTaxAmount AS AmountWithTaxes
+		|INTO R5022T_Expenses
+		|FROM
+		|	InformationRegister.T6095S_WriteOffBatchesInfo AS WriteOffBatchesInfo
+		|WHERE
+		|	WriteOffBatchesInfo.Document = &Ref";
 EndFunction
 
 Function R9010B_SourceOfOriginStock()

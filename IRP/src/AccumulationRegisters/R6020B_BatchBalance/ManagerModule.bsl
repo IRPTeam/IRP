@@ -37,6 +37,7 @@ Function BatchBalance_CollectRecords(DocObject) Export
 	|	R6010B_BatchWiseBalance.Period AS Period,
 	|	R6010B_BatchWiseBalance.RecordType AS RecordType,
 	|	R6010B_BatchWiseBalance.Quantity AS Quantity,
+	|	R6010B_BatchWiseBalance.PreliminaryQuantity AS PreliminaryQuantity,
 	|	R6010B_BatchWiseBalance.Batch AS Batch,
 	|	R6010B_BatchWiseBalance.BatchKey AS BatchKey,
 	|	R6010B_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
@@ -122,7 +123,10 @@ Function BatchBalance_CollectRecords(DocObject) Export
 	|	R6010B_BatchWiseBalance.AllocatedCostTaxAmount AS AllocatedCostTaxAmount,
 	|
 	|	R6010B_BatchWiseBalance.AllocatedRevenueAmount AS AllocatedRevenueAmount,
-	|	R6010B_BatchWiseBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount
+	|	R6010B_BatchWiseBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
+	|
+	|	R6010B_BatchWiseBalance.PreliminaryAmount AS PreliminaryAmount,
+	|	R6010B_BatchWiseBalance.PreliminaryTaxAmount AS PreliminaryTaxAmount
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|WHERE
@@ -134,6 +138,7 @@ Function BatchBalance_CollectRecords(DocObject) Export
 	|	R6030T_BatchShortageOutgoing.Period,
 	|	VALUE(AccumulationRecordType.Expense),
 	|	R6030T_BatchShortageOutgoing.Quantity,
+	|	0,
 	|	VALUE(Enum.BatchType.BatchShortageOutgoing),
 	|	R6030T_BatchShortageOutgoing.BatchKey,
 	|	R6030T_BatchShortageOutgoing.BatchKey.ItemKey,
@@ -157,6 +162,8 @@ Function BatchBalance_CollectRecords(DocObject) Export
 	|	0,
 	|	0,
 	|	0,
+	|	0,
+	|	0,
 	|	0
 	|FROM
 	|	AccumulationRegister.R6030T_BatchShortageOutgoing AS R6030T_BatchShortageOutgoing
@@ -169,6 +176,7 @@ Function BatchBalance_CollectRecords(DocObject) Export
 	|	R6040T_BatchShortageIncoming.Period,
 	|	VALUE(AccumulationRecordType.Receipt),
 	|	R6040T_BatchShortageIncoming.Quantity,
+	|	0,
 	|	VALUE(Enum.BatchType.BatchShortageIncoming),
 	|	R6040T_BatchShortageIncoming.BatchKey,
 	|	R6040T_BatchShortageIncoming.BatchKey.ItemKey,
@@ -181,6 +189,8 @@ Function BatchBalance_CollectRecords(DocObject) Export
 	|	R6040T_BatchShortageIncoming.BatchKey.SerialLotNumber,
 	|	R6040T_BatchShortageIncoming.BatchKey.SourceOfOrigin,
 	|	R6040T_BatchShortageIncoming.Recorder,
+	|	0,
+	|	0,
 	|	0,
 	|	0,
 	|	0,
@@ -243,6 +253,7 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	R6010B_BatchWiseBalance.RecordType AS RecordType,
 	|	R6010B_BatchWiseBalance.Document AS Document,
 	|	R6010B_BatchWiseBalance.Quantity AS Quantity,
+	|	R6010B_BatchWiseBalance.PreliminaryQuantity AS PreliminaryQuantity,
 	|	R6010B_BatchWiseBalance.InvoiceAmount AS InvoiceAmount,
 	|	R6010B_BatchWiseBalance.InvoiceTaxAmount AS InvoiceTaxAmount,
 	|
@@ -260,6 +271,10 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|
 	|	R6010B_BatchWiseBalance.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	R6010B_BatchWiseBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
+	|
+	|	R6010B_BatchWiseBalance.PreliminaryAmount AS PreliminaryAmount,
+	|	R6010B_BatchWiseBalance.PreliminaryTaxAmount AS PreliminaryTaxAmount,
+	|
 	|	R6010B_BatchWiseBalance.Batch AS Batch,
 	|	R6010B_BatchWiseBalance.BatchKey AS BatchKey,
 	|	R6010B_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
@@ -357,6 +372,9 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	0,
 	|	0,
 	|	0,
+	|	0,
+	|	0,
+	|	0,
 	|	VALUE(Enum.BatchType.BatchShortageOutgoing),
 	|	R6030T_BatchShortageOutgoing.BatchKey,
 	|	R6030T_BatchShortageOutgoing.BatchKey.ItemKey,
@@ -393,6 +411,9 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	0,
 	|	0,
 	|	0,
+	|	0,
+	|	0,
+	|	0,
 	|	VALUE(Enum.BatchType.BatchShortageIncoming),
 	|	R6040T_BatchShortageIncoming.BatchKey,
 	|	R6040T_BatchShortageIncoming.BatchKey.ItemKey,
@@ -417,6 +438,7 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchBalance.RecordType AS RecordType,
 	|	BatchBalance.Document AS Document,
 	|	BatchBalance.Quantity AS Quantity,
+	|	BatchBalance.PreliminaryQuantity AS PreliminaryQuantity,
 	|	BatchBalance.InvoiceAmount AS InvoiceAmount,
 	|	BatchBalance.InvoiceTaxAmount AS InvoiceTaxAmount,
 	|
@@ -434,6 +456,10 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|
 	|	BatchBalance.AllocatedRevenueAmount AS AllocatedRevenueAmount,
 	|	BatchBalance.AllocatedRevenueTaxAmount AS AllocatedRevenueTaxAmount,
+	|
+	|	BatchBalance.PreliminaryAmount AS PreliminaryAmount,
+	|	BatchBalance.PreliminaryTaxAmount AS PreliminaryTaxAmount,
+	|
 	|	BatchBalance.Batch AS Batch,
 	|	BatchBalance.BatchKey AS BatchKey,
 	|	BatchBalance.ItemKey AS ItemKey,

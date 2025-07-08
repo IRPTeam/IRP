@@ -1271,10 +1271,16 @@ Function ChangeCompanyByAgreementOptions() Export
 EndFunction
 
 Function ChangeCompanyByAgreementExecute(Options) Export
+	If ValueIsFilled(Options.CurrentCompany) Then
+		Return Options.CurrentCompany;
+	EndIf;
+	
 	If Not ValueIsFilled(Options.Agreement) Then
 		Return Options.CurrentCompany;
 	EndIf;
+	
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+	
 	If ValueIsFilled(AgreementInfo.Company) Then
 		Return AgreementInfo.Company;
 	EndIf;

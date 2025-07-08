@@ -47,27 +47,16 @@ Function AllDescription(AddInfo = Undefined) Export
 	Return LocalizationServer.AllDescription(AddInfo);
 EndFunction
 
-// Use multi language.
+// Use multi language for data.
 // 
 // Parameters:
 //  MetadataFullName - String - Metadata full name
 //  AddInfo - Undefined, Structure - Add info
 // 
 // Returns:
-//  Boolean - Use multi language
+//  Boolean - Use multi language for data
 Function UseMultiLanguage(Val MetadataFullName, AddInfo = Undefined) Export
 	Return LocalizationServer.UseMultiLanguage(MetadataFullName, , AddInfo);
-EndFunction
-
-// Get localization code.
-// 
-// Parameters:
-//  AddInfo - Undefined, Structure - Add info
-// 
-// Returns:
-//  String - Get localization code
-Function GetLocalizationCode(AddInfo = Undefined) Export
-	Return LocalizationServer.GetLocalizationCode(AddInfo);
 EndFunction
 
 // Fields list for descriptions.
@@ -81,16 +70,34 @@ Function FieldsListForDescriptions(Val SourceType) Export
 	Return LocalizationServer.FieldsListForDescriptions(String(SourceType));
 EndFunction
 
-// User language code.
+// Get localization code.
+// 
+// Parameters:
+//  AddInfo - Undefined, Structure - Add info
+// 
+// Returns:
+//  String - Get localization code
+Function GetLocalizationCode(AddInfo = Undefined) Export
+	Return LocalizationServer.GetLocalizationCode(AddInfo);
+EndFunction
+
+// Get interface localization code.
+// 
+// Parameters:
+//  AddInfo - Undefined, Structure - Add info
+// 
+// Returns:
+//  String - Get interface localization code
+Function GetInterfaceLocalizationCode(AddInfo = Undefined) Export
+	Return LocalizationServer.GetInterfaceLocalizationCode(AddInfo);
+EndFunction
+
+// NOTUSE. User language code.
 // 
 // Returns:
 //  String - User language code
 Function UserLanguageCode() Export
-	LocalizationCode = "en";
-	If Not IsBlankString(SessionParameters.LocalizationCode) Then
-		LocalizationCode = SessionParameters.LocalizationCode;
-	EndIf;	
-	Return LocalizationCode;
+	Return GetLocalizationCode();
 EndFunction
 
 // Get session parameter.
@@ -201,4 +208,59 @@ Function ISO639() Export
 	Str.Insert("id", "ind");
 	Str.Insert("fa", "per");
 	Return Str;
-EndFunction 
+EndFunction
+
+// Get interface localizations.
+// 
+// Returns:
+//  Array of Structure:
+// 	* LanguageCode - String - Language code
+// 	* Synonym - String - Language synonym
+Function GetInterfaceLocalizations() Export
+	
+	InterfaceLocalizations = New Array; // Array of Structure
+	
+	Languages = MetadataLanguages();
+	For Each LangKeyValue In Languages Do
+		Language = New Structure;
+		Language.Insert("LanguageCode", Lower(LangKeyValue.Key));
+		Language.Insert("Synonym", LangKeyValue.Value);
+		InterfaceLocalizations.Add(Language);
+	EndDo;
+	
+	Return InterfaceLocalizations;
+	
+EndFunction
+
+// Get data localizations.
+// 
+// Returns:
+//  Array of Structure:
+// 	* LanguageCode - String - Language code
+// 	* Synonym - String - Language synonym
+Function GetDataLocalizations() Export
+	
+	DataLocalizations = New Array; // Array of Structure
+	
+	InterfaceLocalizations = GetInterfaceLocalizations();
+	LocalizationsMap = New Map;
+	For Each Lang In InterfaceLocalizations Do
+		LocalizationsMap.Insert(Lang.LanguageCode, Lang);
+	EndDo;
+	
+	For Each CommonAttribute In Metadata.CommonAttributes Do
+		If StrStartsWith(CommonAttribute.Name, "Description_") Then
+			LanguageCode = Lower(StrReplace(CommonAttribute.Name, "Description_", ""));
+			Lang = LocalizationsMap.Get(LanguageCode);
+			If Lang <> Undefined Then
+				Language = New Structure;
+				Language.Insert("LanguageCode", Lang.LanguageCode);
+				Language.Insert("Synonym", Lang.Synonym);
+				DataLocalizations.Add(Language);
+			EndIf;
+		EndIf;
+	EndDo;
+	
+	Return DataLocalizations;
+	
+EndFunction

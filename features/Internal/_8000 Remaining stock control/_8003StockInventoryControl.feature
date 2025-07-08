@@ -153,8 +153,8 @@ Scenario:_8003002 check stock inventory control for RetailSalesReceipt
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 5 . Required: 6 . Lacking: 1 .'|
-				|'Line No. [2] [Product 7 with SLN (new row) PZU] R4050 Stock inventory remaining: 8 . Required: 10 . Lacking: 2 .'|
+				|'Line No. [1] [Bag ODS] Stock inventory remaining: 5 . Required: 6 . Lacking: 1 .'|
+				|'Line No. [2] [Product 7 with SLN (new row) PZU] Stock inventory remaining: 8 . Required: 10 . Lacking: 2 .'|
 		* Change quantity and check control
 			And I go to line in "ItemList" table
 				| "Item" | "Item key" |
@@ -228,7 +228,7 @@ Scenario:_8003002 check stock inventory control for RetailSalesReceipt
 			And I click "Post" button
 			And I click the button named "OK"			
 			Then there are lines in TestClient message log
-				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 0 . Required: 1 . Lacking: 1 .'|
+				|'Line No. [1] [Bag ODS] Stock inventory remaining: 0 . Required: 1 . Lacking: 1 .'|
 			And I close current window
 			Then "1C:Enterprise" window is opened
 			And I click "No" button
@@ -291,8 +291,8 @@ Scenario:_8003003 check stock inventory control for SI
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 5 . Required: 6 . Lacking: 1 .'|
-				|'Line No. [2] [Product 7 with SLN (new row) PZU] R4050 Stock inventory remaining: 8 . Required: 10 . Lacking: 2 .'|
+				|'Line No. [1] [Bag ODS] Stock inventory remaining: 5 . Required: 6 . Lacking: 1 .'|
+				|'Line No. [2] [Product 7 with SLN (new row) PZU] Stock inventory remaining: 8 . Required: 10 . Lacking: 2 .'|
 		* Change quantity and check control
 			And I go to line in "ItemList" table
 				| "Item" | "Item key" |
@@ -377,8 +377,8 @@ Scenario:_8003004 check stock inventory control for PR
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 5 . Required: 6 . Lacking: 1 .'|
-				|'Line No. [2] [Product 7 with SLN (new row) PZU] R4050 Stock inventory remaining: 8 . Required: 10 . Lacking: 2 .'|
+				|'Line No. [1] [Bag ODS] Stock inventory remaining: 5 . Required: 6 . Lacking: 1 .'|
+				|'Line No. [2] [Product 7 with SLN (new row) PZU] Stock inventory remaining: 8 . Required: 10 . Lacking: 2 .'|
 		* Change quantity and check control
 			And I go to line in "ItemList" table
 				| "Item" | "Item key" |
@@ -465,8 +465,8 @@ Scenario:_8003005 check stock inventory control for Stock adjustment as write of
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 5 . Required: 6 . Lacking: 1 .'|
-				|'Line No. [2] [Product 7 with SLN (new row) PZU] R4050 Stock inventory remaining: 8 . Required: 10 . Lacking: 2 .'|
+				|'Line No. [1] [Bag ODS] Stock inventory remaining: 5 . Required: 6 . Lacking: 1 .'|
+				|'Line No. [2] [Product 7 with SLN (new row) PZU] Stock inventory remaining: 8 . Required: 10 . Lacking: 2 .'|
 		* Change quantity and check control
 			And I go to line in "ItemList" table
 				| "Item" | "Item key" |
@@ -546,8 +546,8 @@ Scenario:_8003006 check stock inventory control for IT
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 5 . Required: 6 . Lacking: 1 .'|
-				|'Line No. [2] [Product 7 with SLN (new row) PZU] R4050 Stock inventory remaining: 8 . Required: 10 . Lacking: 2 .'|
+				|'Line No. [1] [Bag ODS] Stock inventory remaining: 5 . Required: 6 . Lacking: 1 .'|
+				|'Line No. [2] [Product 7 with SLN (new row) PZU] Stock inventory remaining: 8 . Required: 10 . Lacking: 2 .'|
 		* Change quantity and check control
 			And I go to line in "ItemList" table
 				| "Item" | "Item key" |
@@ -637,8 +637,8 @@ Scenario:_8003006 check stock inventory control for IT
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 4 . Required: 0 . Lacking: 4 .'|
-				|'Line No. [2] [Product 7 with SLN (new row) PZU] R4050 Stock inventory remaining: 4 . Required: 0 . Lacking: 4 .'|											
+				|'Line No. [1] [Bag ODS] Stock inventory remaining: 4 . Required: 0 . Lacking: 4 .'|
+				|'Line No. [2] [Product 7 with SLN (new row) PZU] Stock inventory remaining: 4 . Required: 0 . Lacking: 4 .'|											
 		And I close all client application windows
 
 Scenario:_8003010 try unpost PI that make a plus on the store
@@ -693,8 +693,8 @@ Scenario:_8003010 try unpost PI that make a plus on the store
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 5 . Required: 0 . Lacking: 5 .'|
-				|'Line No. [2] [Product 7 with SLN (new row) PZU] R4050 Stock inventory remaining: 8 . Required: 0 . Lacking: 8 .'|
+				|'Line No. [1] [Bag ODS] Stock inventory remaining: 5 . Required: 0 . Lacking: 5 .'|
+				|'Line No. [2] [Product 7 with SLN (new row) PZU] Stock inventory remaining: 8 . Required: 0 . Lacking: 8 .'|
 		And I close all client application windows
 
 Scenario:_8003011 try unpost RetailReturnReceipt that make a plus on the store
@@ -770,8 +770,8 @@ Scenario:_8003011 try unpost RetailReturnReceipt that make a plus on the store
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 5 . Required: 0 . Lacking: 5 .'|
-				|'Line No. [2] [Product 7 with SLN (new row) PZU] R4050 Stock inventory remaining: 8 . Required: 0 . Lacking: 8 .'|
+				|'Line No. [1] [Bag ODS] Stock inventory remaining: 5 . Required: 0 . Lacking: 5 .'|
+				|'Line No. [2] [Product 7 with SLN (new row) PZU] Stock inventory remaining: 8 . Required: 0 . Lacking: 8 .'|
 		And I close all client application windows	
 									
 
@@ -845,8 +845,8 @@ Scenario:_8003012 try unpost SalesReturn that make a plus on the store
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 5 . Required: 0 . Lacking: 5 .'|
-				|'Line No. [2] [Product 7 with SLN (new row) PZU] R4050 Stock inventory remaining: 8 . Required: 0 . Lacking: 8 .'|
+				|'Line No. [1] [Bag ODS] Stock inventory remaining: 5 . Required: 0 . Lacking: 5 .'|
+				|'Line No. [2] [Product 7 with SLN (new row) PZU] Stock inventory remaining: 8 . Required: 0 . Lacking: 8 .'|
 		And I close all client application windows	
 
 Scenario:_8003013 try unpost StockAdjustmentAsSurplus that make a plus on the store
@@ -917,8 +917,8 @@ Scenario:_8003013 try unpost StockAdjustmentAsSurplus that make a plus on the st
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 5 . Required: 0 . Lacking: 5 .'|
-				|'Line No. [2] [Product 7 with SLN (new row) PZU] R4050 Stock inventory remaining: 8 . Required: 0 . Lacking: 8 .'|
+				|'Line No. [1] [Bag ODS] Stock inventory remaining: 5 . Required: 0 . Lacking: 5 .'|
+				|'Line No. [2] [Product 7 with SLN (new row) PZU] Stock inventory remaining: 8 . Required: 0 . Lacking: 8 .'|
 		And I close all client application windows	
 
 
@@ -975,6 +975,6 @@ Scenario:_8003014 try unpost OpeningEntry that make a plus on the store
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
-				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 5 . Required: 0 . Lacking: 5 .'|
-				|'Line No. [2] [Product 7 with SLN (new row) PZU] R4050 Stock inventory remaining: 8 . Required: 0 . Lacking: 8 .'|
+				|'Line No. [1] [Bag ODS] Stock inventory remaining: 5 . Required: 0 . Lacking: 5 .'|
+				|'Line No. [2] [Product 7 with SLN (new row) PZU] Stock inventory remaining: 8 . Required: 0 . Lacking: 8 .'|
 		And I close all client application windows		

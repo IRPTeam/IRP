@@ -380,7 +380,6 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	end as InvoiceTaxAmount,
 	|	BatchKeysInfo.Amount AS InvoiceAmount,
 	|	""00000000-0000-0000-0000-000000000000"" AS PreliminaryID,
-//	|	""00000000-0000-0000-0000-000000000000"" AS PreliminaryKey,
 	|	BatchKeysInfo.*
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -421,19 +420,14 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 			ArrayOfRows2 = ItemOfArray.Basis.ItemList.FindRows(New Structure("Key", ItemOfArray.BasisKey));
 			For Each ItemOfArray2 In ArrayOfRows2 Do
 				If ItemOfArray2.IsPreliminary Then
-					BatchKeyRow.PreliminaryID = BatchKeyRow.RowID;
-//					BatchKeyRow.PreliminaryKey = ItemOfArray.Key;					
+					BatchKeyRow.PreliminaryID = BatchKeyRow.RowID;					
 				EndIf;
 			EndDo;
 		EndDo;
 		
 		If BatchKeyRow.PreliminaryID = "00000000-0000-0000-0000-000000000000" Then
 			BatchKeyRow.PreliminaryID = "";
-		EndIf;
-		
-//		If BatchKeyRow.PreliminaryKey = "00000000-0000-0000-0000-000000000000" Then
-//			BatchKeyRow.PreliminaryKey = "";
-//		EndIf;
+		EndIf;		
 	EndDo;
 			
 	CurrencyTable = Ref.Currencies.UnloadColumns();
@@ -486,7 +480,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 		|SourceOfOrigin, 
 		|SerialLotNumber, 
 		|PreliminaryID";
-//		|PreliminaryKey";
+
 	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
@@ -536,28 +530,45 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
-
+	
+	Current_R4050B_StockInventory = PostingServer.GetQueryTableByName("R4050B_StockInventory", Parameters);
+	Exists_R4050B_StockInventory  = PostingServer.GetQueryTableByName("Exists_R4050B_StockInventory", Parameters);
+	
+	Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory);
+	Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory);
+	
 	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
 		"Document.PurchaseInvoice.ItemList");
 
+	Current_R4035B_IncomingStocks = PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters);
+	Exists_R4035B_IncomingStocks  = PostingServer.GetQueryTableByName("Exists_R4035B_IncomingStocks", Parameters);
+	
 	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4035B_IncomingStocks", Parameters), AccumulationRecordType.Expense, Unposting, AddInfo) Then
-		Cancel = True;
-	EndIf;
-
-	If Not Cancel And Not AccReg.R4036B_IncomingStocksRequested.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters),
-		PostingServer.GetQueryTableByName("Exists_R4036B_IncomingStocksRequested", Parameters),
+		Current_R4035B_IncomingStocks, 
+		Exists_R4035B_IncomingStocks, 
 		AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 
+	Current_R4036B_IncomingStocksRequested = PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters);
+	Exists_R4036B_IncomingStocksRequested  = PostingServer.GetQueryTableByName("Exists_R4036B_IncomingStocksRequested", Parameters);
+	
+	If Not Cancel And Not AccReg.R4036B_IncomingStocksRequested.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+		Current_R4036B_IncomingStocksRequested,
+		Exists_R4036B_IncomingStocksRequested,
+		AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
+	
+	Current_R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters);
+	Exists_R4014B_SerialLotNumber  = PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters);
+	
 	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4014B_SerialLotNumber", Parameters), AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+		Current_R4014B_SerialLotNumber, 
+		Exists_R4014B_SerialLotNumber, 
+		AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure

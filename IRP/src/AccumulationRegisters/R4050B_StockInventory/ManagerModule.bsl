@@ -108,16 +108,66 @@ Procedure AdditionalDataFilling(MovementsValueTable) Export
 	Return;	
 EndProcedure
 
+Function GetLockFieldNames() Export
+	Return "Company, Store, ItemKey";
+EndFunction
+
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
 
-	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4050B_StockInventory") Then
+	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4050B_StockInventory", True) Then
 		Return True;
 	EndIf;
+	
+	Query = New Query();
+	Query.TempTablesManager = PostingServer.PrepareRecordsTables(GetLockFieldNames(), "ItemKey", ItemList_InDocument,
+		Records_InDocument, Records_Exists, Unposting, AddInfo);
+	Query.Text =
+	"SELECT
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey,
+	|	RegisterBalance.Company,
+	|	RegisterBalance.Store,
+	|	RegisterBalance.ItemKey,
+	|	RegisterBalance.QuantityBalance 
+	|		+ RegisterBalance.PreliminaryQuantityBalance AS QuantityBalance,
+	|	ItemList.Quantity,
+	|	- (RegisterBalance.QuantityBalance 
+	|		+ RegisterBalance.PreliminaryQuantityBalance) AS LackOfBalance,
+	|	ItemList.LineNumber AS LineNumber,
+	|	&Unposting AS Unposting
+	|FROM
+	|	ItemList AS ItemList
+	|		INNER JOIN AccumulationRegister.R4050B_StockInventory.Balance(, (Company, Store, ItemKey) IN
+	|			(SELECT
+	|				ItemList.Company,
+	|				ItemList.Store,
+	|				ItemList.ItemKey
+	|				
+	|			FROM
+	|				ItemList AS ItemList)) AS RegisterBalance
+	|		ON RegisterBalance.Company = ItemList.Company
+	|		AND RegisterBalance.Store = ItemList.Store
+	|		AND RegisterBalance.ItemKey = ItemList.ItemKey
+	|		
+	|WHERE
+	|	(RegisterBalance.QuantityBalance
+	|		+ RegisterBalance.PreliminaryQuantityBalance) < 0
+	|ORDER BY
+	|	LineNumber";
+	Query.SetParameter("Unposting", Unposting);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
 
-	Tables = New Structure();
-	Tables.Insert("ItemList_InDocument", ItemList_InDocument);
-	Tables.Insert("Records_InDocument", Records_InDocument);
-	Tables.Insert("Records_Exists", Records_Exists);
-
-	Return PostingServer.CheckBalance_R4050B_StockInventory(Ref, Tables, RecordType, Unposting, AddInfo);
+	Error = False;
+	If QueryTable.Count() Then
+		Error = True;
+		ErrorParameters = New Structure();
+		ErrorParameters.Insert("GroupColumns", "Company, Store, ItemKey, Item, LackOfBalance");
+		ErrorParameters.Insert("SumColumns", "Quantity");
+		ErrorParameters.Insert("FilterColumns", "Company, Store, ItemKey, Item, LackOfBalance");
+		ErrorParameters.Insert("Operation", "Stock inventory");
+		ErrorParameters.Insert("RecordType", RecordType);
+		PostingServer.ShowPostingErrorMessage(QueryTable, ErrorParameters, AddInfo);
+	EndIf;
+	Return Not Error;	
 EndFunction

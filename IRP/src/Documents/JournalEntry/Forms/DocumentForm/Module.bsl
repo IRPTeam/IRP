@@ -38,6 +38,7 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	DocJournalEntryClient.OnOpen(Object, ThisObject, Cancel);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -66,6 +67,40 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ELedgerRegistry.Visible = IsUseELedger;
 	Form.Items.SequentalNumber.Visible = IsUseELedger;
 	Form.AccountingEntries.Clear();
+	
+#IF Client THEN
+	ArrayOfRowInfo = New Array();
+	For Each Row In Object.RegisterRecords.Basic Do
+		RowInfo = New Structure();
+		RowInfo.Insert("DrInfo", New Structure());
+		RowInfo.Insert("CrInfo", New Structure());
+			
+		RowInfo.DrInfo.Insert("Account", Row.AccountDr);
+		RowInfo.DrInfo.Insert("IsCurrency", False);
+		
+		RowInfo.CrInfo.Insert("Account", Row.AccountCr);
+		RowInfo.CrInfo.Insert("IsCurrency", False);
+		
+		ArrayOfRowInfo.Add(RowInfo);
+	EndDo;
+	
+	GetRowInfoAtServer(ArrayOfRowInfo);
+	
+	index = 0;
+	For Each Row In ArrayOfRowInfo Do
+		RecordRow = Object.RegisterRecords.Basic[index];
+		RecordRow.DrIsCurrency = Row.DrInfo.IsCurrency;
+		If Not Row.DrInfo.IsCurrency Then
+			RecordRow.CurrencyDr = Undefined;
+		EndIf;
+		
+		RecordRow.CrIsCurrency = Row.CrInfo.IsCurrency;
+		If Not Row.CrInfo.IsCurrency Then
+			RecordRow.CurrencyCr = Undefined;
+		EndIf;
+		index = index + 1;
+	EndDo;
+#ENDIF
 	
 	For Each Row In Object.RegisterRecords.Basic Do
 		DrRow = Form.AccountingEntries.Add();
@@ -117,6 +152,18 @@ EndProcedure
 &AtClient 
 Procedure _DetachIdleHandler() Export
 	DetachIdleHandler("_IdeHandler");
+EndProcedure
+
+&AtServerNoContext
+Procedure GetRowInfoAtServer(ArrayOfRowInfo)
+	For Each Row In ArrayOfRowInfo Do
+		If ValueIsFilled(Row.DrInfo.Account) Then
+			Row.DrInfo.IsCurrency = Row.DrInfo.Account.Currency;
+		EndIf;
+		If ValueIsFilled(Row.CrInfo.Account) Then
+			Row.CrInfo.IsCurrency = Row.CrInfo.Account.Currency;
+		EndIf;
+	EndDo;
 EndProcedure
 
 #EndRegion
@@ -199,15 +246,20 @@ Procedure UserDefinedOnChange(Item)
 EndProcedure
 
 #EndRegion
+&AtClient
+Procedure RegisterRecordsAccountCrOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure RegisterRecordsAccountDrOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
 
 &AtClient
 Procedure RegisterRecordsOnStartEdit(Item, NewRow, Clone)
-	If NewRow Then
-		CurrentData = Items.RegisterRecords.CurrentData;
-		If CurrentData <> Undefined Then
-			CurrentData.Period = Object.Date;
-		EndIf;
-	EndIf;
+	Return;
 EndProcedure
 
 #Region GroupTitleDecorations

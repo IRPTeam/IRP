@@ -12,8 +12,12 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		ThisObject.Date = ThisObject.Basis.Date;
 		If CommonFunctionsClientServer.ObjectHasProperty(ThisObject.Basis, "Branch") Then
 			ThisObject.Branch = ThisObject.Basis.Branch;
-		EndIf;
+		EndIf;		
 	EndIf;
+	
+	For Each Row In ThisObject.RegisterRecords.Basic Do 
+		Row.Period = ThisObject.Date;
+	EndDo;
 	
 	If Not ThisObject.DeletionMark And Not ThisObject.UserDefined Then
 		ThisObject.RegisterRecords.Basic.Clear();
@@ -115,11 +119,6 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	
 	Index = 0;
 	For Each Row In ThisObject.RegisterRecords.Basic Do 
-		If Not ValueIsFilled(Row.Period) Then
-			Cancel = True;
-			CommonFunctionsClientServer.ShowUsersMessage(R().AccountingError_04, "RegisterRecords.Basic["+ Index +"].Period", ThisObject);
-		EndIf;
-		
 		If Not ValueIsFilled(Row.AccountDr) Then
 			If Not (ValueIsFilled(Row.AccountCr) And Row.AccountCr.OffBalance) Then
 				Cancel = True;

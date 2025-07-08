@@ -2379,6 +2379,12 @@ Function GetAccountingData(Parameters)
 	|				Amounts.CrCurrency
 	|			else
 	|				Amounts.Currency end end as CrCurrency,
+	|	
+	|	case when not (&IsRevaluationCurrency Or &IsDebitCreditNoteDifference)
+	|				and Amounts.DrCurrencyAmount = 0 then true else false end as DrCurrencyAmountIsEmpty,
+	|
+	|	case when not (&IsRevaluationCurrency Or &IsDebitCreditNoteDifference)
+	|				and Amounts.CrCurrencyAmount = 0 then true else false end as CrCurrencyAmountIsEmpty,
 	|
 	|
 	|	SUM(case 
@@ -2429,7 +2435,13 @@ Function GetAccountingData(Parameters)
 	|			case when not Amounts.CrCurrency.ref is null then
 	|				Amounts.CrCurrency
 	|			else
-	|				Amounts.Currency end end
+	|				Amounts.Currency end end,
+	|
+	|	case when not (&IsRevaluationCurrency Or &IsDebitCreditNoteDifference)
+	|				and Amounts.DrCurrencyAmount = 0 then true else false end,
+	|
+	|	case when not (&IsRevaluationCurrency Or &IsDebitCreditNoteDifference)
+	|				and Amounts.CrCurrencyAmount = 0 then true else false end
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -2492,10 +2504,25 @@ Function GetAccountingData(Parameters)
 	// Currency amount
 	QuerySelection = QueryResults[0].Select();
 	If QuerySelection.Next() Then
-		Result.CurrencyDr       = QuerySelection.DrCurrency;
-		Result.CurrencyAmountDr = QuerySelection.DrCurrencyAmount;
-		Result.CurrencyCr       = QuerySelection.CrCurrency;
-		Result.CurrencyAmountCr = QuerySelection.CrCurrencyAmount;
+		Result.CurrencyDr = QuerySelection.DrCurrency;
+		If ValueIsFilled(QuerySelection.DrCurrency) 
+			And Parameters.CurrencyMovementType.Currency <> QuerySelection.DrCurrency
+			And QuerySelection.DrCurrencyAmountIsEmpty Then
+				Result.CurrencyAmountDr = 
+					GetCurrencyAmount(Parameters.Recorder, Parameters.Operation, QuerySelection.DrCurrency, RowKey);
+		Else
+			Result.CurrencyAmountDr = QuerySelection.DrCurrencyAmount;
+		EndIf;
+		
+		Result.CurrencyCr = QuerySelection.CrCurrency;
+		If ValueIsFilled(QuerySelection.CrCurrency) 
+			And Parameters.CurrencyMovementType.Currency <> QuerySelection.CrCurrency
+			And QuerySelection.CrCurrencyAmountIsEmpty Then
+				Result.CurrencyAmountCr = 
+					GetCurrencyAmount(Parameters.Recorder, Parameters.Operation, QuerySelection.CrCurrency, RowKey);
+		Else
+			Result.CurrencyAmountCr = QuerySelection.CrCurrencyAmount;
+		EndIf;
 	EndIf;
 	
 	// Amount
@@ -2512,6 +2539,36 @@ Function GetAccountingData(Parameters)
 	EndIf;
 	
 	Return Result;	
+EndFunction
+
+Function GetCurrencyAmount(Recorder, Operation, Currency, RowKey)
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 1
+	|	Amounts.Amount
+	|FROM
+	|	AccumulationRegister.T1040T_AccountingAmounts AS Amounts
+	|WHERE
+	|	Amounts.Recorder = &Recorder
+	|	AND Amounts.Operation = &Operation
+	|	AND Amounts.Currency = &Currency
+	|	AND case
+	|		when &FilterByRowKey
+	|			then Amounts.RowKey = &RowKey
+	|		else True
+	|	end";
+	Query.SetParameter("Recorder"       , Recorder);
+	Query.SetParameter("Currency"       , Currency);
+	Query.SetParameter("Operation"      , Operation);
+	Query.SetParameter("FilterByRowKey" , ValueIsFilled(RowKey));
+	Query.SetParameter("RowKey"         , RowKey);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.Amount;
+	EndIf;
+	Return 0;
 EndFunction
 
 #Region Event_Handlers

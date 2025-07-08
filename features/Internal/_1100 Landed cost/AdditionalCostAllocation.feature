@@ -1421,9 +1421,14 @@ Scenario: _098 allocation of the additional cost (tax) (item is already sold)
 		And I select current line in "List" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
 		Then "Select period" window is opened
-		And I input "01.04.2023" text in the field named "DateBegin"
+		And I input "01.03.2023" text in the field named "DateBegin"
 		And I input "05.04.2023" text in the field named "DateEnd"
-		And I click the button named "Select"		
+		And I click the button named "Select"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
+		And I go to line in "List" table
+			| "Item"  | "Item key" |
+			| "Boots" | "37/18SD"  |
+		And I select current line in "List" table
 		And I click "Generate" button
 	* Check landed cost
 		And "Result" spreadsheet document contains "BathBalance_072_3" template lines by template	

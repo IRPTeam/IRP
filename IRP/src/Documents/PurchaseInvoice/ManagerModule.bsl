@@ -539,13 +539,11 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	
 	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
-		"Document.PurchaseInvoice.ItemList");
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.PurchaseInvoice.ItemList");
 
 	Current_R4035B_IncomingStocks = PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters);
 	Exists_R4035B_IncomingStocks  = PostingServer.GetQueryTableByName("Exists_R4035B_IncomingStocks", Parameters);
 	
-
 	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, 
 		LineNumberAndItemKeyFromItemList,
 		Current_R4035B_IncomingStocks, 
@@ -556,7 +554,6 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 
 	Current_R4036B_IncomingStocksRequested = PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters);
 	Exists_R4036B_IncomingStocksRequested  = PostingServer.GetQueryTableByName("Exists_R4036B_IncomingStocksRequested", Parameters);
-	
 	
 	If Not Cancel And Not AccReg.R4036B_IncomingStocksRequested.CheckBalance(Ref, 
 		LineNumberAndItemKeyFromItemList,

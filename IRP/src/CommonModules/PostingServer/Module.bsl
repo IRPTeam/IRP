@@ -1424,6 +1424,27 @@ Function Exists_R3010B_CashOnHand() Export
 		|	R3010B_CashOnHand.Recorder = &Ref";
 EndFunction
 
+Function Exists_R6070T_OtherPeriodsExpenses() Export
+	Return 
+		"SELECT *
+		|	INTO Exists_R6070T_OtherPeriodsExpenses
+		|FROM
+		|	AccumulationRegister.R6070T_OtherPeriodsExpenses AS R6070T_OtherPeriodsExpenses
+		|WHERE
+		|	R6070T_OtherPeriodsExpenses.Recorder = &Ref";
+EndFunction
+
+Function Exists_R6080T_OtherPeriodsRevenues() Export
+	Return 
+		"SELECT
+		|	*
+		|INTO Exists_R6080T_OtherPeriodsRevenues
+		|FROM
+		|	AccumulationRegister.R6080T_OtherPeriodsRevenues AS R6080T_OtherPeriodsRevenues
+		|WHERE
+		|	R6080T_OtherPeriodsRevenues.Recorder = &Ref";
+EndFunction
+
 Function RegistersWithAdditionalDataFilling()
 	ArrayOfRegisters = New Array();
 	ArrayOfRegisters.Add(Metadata.AccumulationRegisters.R5020B_PartnersBalance);

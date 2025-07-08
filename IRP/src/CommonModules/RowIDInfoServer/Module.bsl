@@ -13960,7 +13960,7 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	
 	For Each Row In QueryTable Do
 		Cancel = True;
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_183, 
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_185, 
 			Row.LineNumber, Row.Date, Row.BasisDate),
 				"ItemList[" + Format((Row.LineNumber - 1), "NZ=0; NG=0;") + "].IsInternalLinked", Object);
 	EndDo;	

@@ -1524,6 +1524,7 @@
   <reports>Report.R2001_Sales</reports>
   <reports>Report.R2001A_Sales</reports>
   <reports>Report.R2010A_SalesOrders</reports>
+  <reports>Report.R2010A_SalesOrdersExecution</reports>
   <reports>Report.R2011A_SalesOrdersShipment</reports>
   <reports>Report.R2012A_SalesOrdersInvoiceClosing</reports>
   <reports>Report.R3010_CashOnHand</reports>

@@ -40,5 +40,6 @@
   <content>Report.R2010A_SalesOrders</content>
   <content>Report.R405A_StockAdjustments</content>
   <content>Report.R3024B_SalesOrdersToBePaid</content>
+  <content>Report.R2010A_SalesOrdersExecution</content>
   <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

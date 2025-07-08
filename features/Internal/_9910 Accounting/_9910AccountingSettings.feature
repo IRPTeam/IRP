@@ -1126,12 +1126,12 @@ Scenario: _0991015 check load charts of accounts (correct data)
 	* Check
 		And "List" table contains lines
 			| 'Code'                   | 'Order'    | 'Description'         | 'Type' | 'Ext. Dim 2'       | 'Q.'  | 'Ext. Dim 3'          | 'C.'  | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
-			| '90878699'               | '90878699' | 'Test assets account' | 'A'    | 'Item key (turn.)' | 'Yes' | 'Fixed asset (turn.)' | 'No'  | 'LTV with account charts code mask' | 'Item'       | 'No'          |
-			| '908990'                 | '908990'   | 'Test group'          | 'P'    | ''                 | 'No'  | ''                    | 'Yes' | 'LTV with account charts code mask' | 'Partner'    | 'No'          |
+			| '90878699'               | '90878699' | 'Test assets account' | 'A'    | 'Item key (turn.)' | 'Yes' | 'Legal name (turn.)'  | 'No'  | 'LTV with account charts code mask' | 'Item'       | 'No'          |
+			| '908990'                 | '908990'   | 'Test group'          | 'P'    | ''                 | 'No'  | ''                    | 'Yes' | 'LTV with account charts code mask' | 'Partner'    | 'No'          |		
 		* Liabilities account
 			And I go to line in "List" table
 				| 'C.' | 'Code'      | 'Description'              | 'Ext. Dim 1' | 'Ext. Dim 2'       | 'Ext. Dim 3'          | 'Ledger type variant'               | 'Off-balance' | 'Order'     | 'Q.'  | 'Type' |
-				| 'No' | '10878699'  | 'Test liabilities account' | 'Item'       | 'Item key (turn.)' | 'Fixed asset (turn.)' | 'LTV with account charts code mask' | 'No'          | '10878699'  | 'Yes' | 'P'    |
+				| 'No' | '10878699'  | 'Test liabilities account' | 'Item'       | 'Item key (turn.)' | 'Legal name (turn.)'  | 'LTV with account charts code mask' | 'No'          | '10878699'  | 'Yes' | 'P'    |
 			And I select current line in "List" table
 			And the editing text of form attribute named "Code" became equal to "108.78.699"
 			Then the form attribute named "Currency" became equal to "No"
@@ -1140,7 +1140,7 @@ Scenario: _0991015 check load charts of accounts (correct data)
 				| 'Extra dimension type' | 'Currency' | 'Turnovers only' | 'Quantity' | 'Amount' |
 				| 'Item'                 | 'Yes'      | 'No'             | 'No'       | 'Yes'    |
 				| 'Item key'             | 'No'       | 'Yes'            | 'Yes'      | 'No'     |
-				| 'Fixed asset'          | 'No'       | 'Yes'            | 'No'       | 'No'     |
+				| 'Legal name'           | 'No'       | 'Yes'            | 'No'       | 'No'     |
 			
 			Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 			Then the form attribute named "NotUsedForRecords" became equal to "No"
@@ -1154,7 +1154,7 @@ Scenario: _0991015 check load charts of accounts (correct data)
 		* Assets account
 			And I go to line in "List" table
 				| 'C.' | 'Code'     | 'Description'         | 'Ext. Dim 1' | 'Ext. Dim 2'       | 'Ext. Dim 3'          | 'Ledger type variant'               | 'Off-balance' | 'Order'    | 'Q.'  | 'Type' |
-				| 'No' | '90878699' | 'Test assets account' | 'Item'       | 'Item key (turn.)' | 'Fixed asset (turn.)' | 'LTV with account charts code mask' | 'No'          | '90878699' | 'Yes' | 'A'    |
+				| 'No' | '90878699' | 'Test assets account' | 'Item'       | 'Item key (turn.)' | 'Legal name (turn.)'  | 'LTV with account charts code mask' | 'No'          | '90878699' | 'Yes' | 'A'    |
 			And I select current line in "List" table
 			And the editing text of form attribute named "Code" became equal to "908.78.699"
 			Then the form attribute named "Currency" became equal to "No"
@@ -1163,7 +1163,7 @@ Scenario: _0991015 check load charts of accounts (correct data)
 				| 'Extra dimension type' | 'Currency' | 'Turnovers only' | 'Quantity' | 'Amount' |
 				| 'Item'                 | 'Yes'      | 'No'             | 'No'       | 'Yes'    |
 				| 'Item key'             | 'No'       | 'Yes'            | 'Yes'      | 'No'     |
-				| 'Fixed asset'          | 'No'       | 'Yes'            | 'No'       | 'No'     |
+				| 'Legal name'           | 'No'       | 'Yes'            | 'No'       | 'No'     |
 			
 			Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 			Then the form attribute named "NotUsedForRecords" became equal to "No"

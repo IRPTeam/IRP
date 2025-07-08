@@ -1,7 +1,7 @@
 
 Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
 	StandardProcessing = False;
-	Presentation = String(Data["Description_" + LocalizationReuse.UserLanguageCode()]);
+	Presentation = String(Data["Description_" + LocalizationReuse.GetLocalizationCode()]);
 EndProcedure
 
 Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
@@ -107,7 +107,9 @@ Function GetExecutionFlowchart(ProcessRef) Export
 	Query.SetParameter("Ref", ProcessRef);
 	Query.SetParameter("EmptyID", New UUID("00000000-0000-0000-0000-000000000000"));
 	
-	Query.Text = StrReplace(Query.Text, "Description_en", "Description_" + LocalizationReuse.UserLanguageCode());
+	LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "Stages");
+	LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "Tasks");
+	
 	QuerySelection = Query.Execute().Select();
 	
 	CurrentStage = Undefined;

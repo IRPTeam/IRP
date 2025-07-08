@@ -114,6 +114,7 @@ Scenario: _041 test data
 		When Create document Bundling objects (LC)
 		When Create document GoodsReceipt objects (LC)
 		When Create document PurchaseInvoice objects (for AdditionalCostAllocation) (LC)
+		When Create document PurchaseInvoice objects (prohibition of cost allocation for already allocated PI)
 		When create document Purchase Invoice objects (AdditionalCostAllocation by serial numbers) 
 		When Create document InventoryTransfer objects (LC)
 		When Create document OpeningEntry objects (LC)
@@ -453,11 +454,13 @@ Scenario: _048 create additional cost allocation (documents, by quantity)
 		And "List" table became equal
 			| 'Basis'                                            | 'Company'      | 'Currency' | 'Amount' |
 			| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Main Company' | 'TRY'      | '30'     |
+			| 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Main Company' | 'TRY'      | '200'    |
 			| 'Purchase invoice 9 017 dated 05.06.2022 13:25:04' | 'Main Company' | 'TRY'      | '350'    |
 			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | 'TRY'      | '350'    |
 			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | 'TRY'      | '650'    |
 			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Main Company' | 'TRY'      | '400'    |
 			| 'Purchase invoice 9 016 dated 09.06.2022 13:21:30' | 'Main Company' | 'TRY'      | '350'    |
+			| 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Main Company' | 'TRY'      | '650'    |
 			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | 'TRY'      | '550'    |
 			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Main Company' | 'TRY'      | '50'     |
 		And I go to line in "List" table
@@ -489,10 +492,12 @@ Scenario: _048 create additional cost allocation (documents, by quantity)
 		And "List" table became equal
 			| 'Basis'                                            | 'Company'      | 'Currency' | 'Amount' |
 			| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Main Company' | 'TRY'      | '30'     |
+			| 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Main Company' | 'TRY'      | '200'    |
 			| 'Purchase invoice 9 017 dated 05.06.2022 13:25:04' | 'Main Company' | 'TRY'      | '350'    |
 			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | 'TRY'      | '350'    |
 			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | 'TRY'      | '650'    |
 			| 'Purchase invoice 9 015 dated 01.06.2022 13:20:23' | 'Main Company' | 'TRY'      | '400'    |
+			| 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Main Company' | 'TRY'      | '650'    |
 			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | 'TRY'      | '550'    |
 			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Main Company' | 'TRY'      | '50'     |
 		And I go to line in "List" table
@@ -656,17 +661,22 @@ Scenario: _051 create additional cost allocation (row, by amount)
 				| 'Use'                                              | 'Presentation'                                     | 'Expense type' | 'Profit loss center' | 'Currency' | 'Amount' | 'Tax amount' |
 				| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | ''             | ''                   | 'TRY'      | '30,00'  | '5,40'       |
 				| 'No'                                               | 'Service, Tax'                                     | 'Expense'      | 'Front office'       | 'TRY'      | '30,00'  | '5,40'       |
+				| 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | ''             | ''                   | 'TRY'      | '200,00' | '36,00'      |
+				| 'No'                                               | 'Service, Tax'                                     | 'Expense'      | 'Front office'       | 'TRY'      | '200,00' | '36,00'      |
 				| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | ''             | ''                   | 'TRY'      | '350,00' | '63,00'      |
 				| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '150,00' | '27,00'      |
 				| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '200,00' | '36,00'      |
 				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | ''             | ''                   | 'TRY'      | '650,00' | '117,00'     |
 				| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '250,00' | '45,00'      |
 				| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |
+				| 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | ''             | ''                   | 'TRY'      | '650,00' | '117,00'     |
+				| 'No'                                               | 'Service, Rent'                                    | 'Expense'      | 'Front office'       | 'TRY'      | '500,00' | '90,00'      |
+				| 'No'                                               | 'Service, Internet'                                | 'Expense'      | 'Front office'       | 'TRY'      | '150,00' | '27,00'      |
 				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | ''             | ''                   | 'TRY'      | '550,00' | '99,00'      |
 				| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |
 				| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '150,00' | '27,00'      |
 				| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | ''             | ''                   | 'TRY'      | '50,00'  | '9,00'       |
-				| 'No'                                               | 'Service, Rent'                                    | 'Expense'      | 'Front office'       | 'TRY'      | '50,00'  | '9,00'       |
+				| 'No'                                               | 'Service, Rent'                                    | 'Expense'      | 'Front office'       | 'TRY'      | '50,00'  | '9,00'       |			
 			And I go to line in "CostRowsTree" table
 				| 'Presentation'     | 'Use'    | 'Amount'    | 'Currency'     |
 				| 'Service, Rent'    | 'No'     | '250,00'    | 'TRY'          |
@@ -1471,6 +1481,8 @@ Scenario: _099 sales from one store, return to another store
 		And "Result" spreadsheet document contains "BathBalance_072_4" template lines by template	
 		And I close all client application windows		
 
+
+
 Scenario: _100 check Additional Cost Allocation by serial numbers (by row, by amount)
 	And I close all client application windows
 	* Create Additional Cost Allocation		
@@ -1487,16 +1499,21 @@ Scenario: _100 check Additional Cost Allocation by serial numbers (by row, by am
 			| 'Use'                                              | 'Presentation'                                     | 'Expense type' | 'Profit loss center' | 'Currency' | 'Amount' | 'Tax amount' |
 			| 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | ''             | ''                   | 'TRY'      | '30,00'  | '5,40'       |
 			| 'No'                                               | 'Service, Tax'                                     | 'Expense'      | 'Front office'       | 'TRY'      | '30,00'  | '5,40'       |
+			| 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | ''             | ''                   | 'TRY'      | '200,00' | '36,00'      |
+			| 'No'                                               | 'Service, Tax'                                     | 'Expense'      | 'Front office'       | 'TRY'      | '200,00' | '36,00'      |
 			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | ''             | ''                   | 'TRY'      | '350,00' | '63,00'      |
 			| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '150,00' | '27,00'      |
 			| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '200,00' | '36,00'      |
+			| 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | ''             | ''                   | 'TRY'      | '650,00' | '117,00'     |
+			| 'No'                                               | 'Service, Rent'                                    | 'Expense'      | 'Front office'       | 'TRY'      | '500,00' | '90,00'      |
+			| 'No'                                               | 'Service, Internet'                                | 'Expense'      | 'Front office'       | 'TRY'      | '150,00' | '27,00'      |
 			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | ''             | ''                   | 'TRY'      | '550,00' | '99,00'      |
 			| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |
 			| 'No'                                               | 'Service, Rent'                                    | ''             | ''                   | 'TRY'      | '150,00' | '27,00'      |
 			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | ''             | ''                   | 'TRY'      | '50,00'  | '9,00'       |
 			| 'No'                                               | 'Service, Rent'                                    | 'Expense'      | 'Front office'       | 'TRY'      | '50,00'  | '9,00'       |
 			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |
-			| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |
+			| 'No'                                               | 'Service, Internet'                                | ''             | ''                   | 'TRY'      | '400,00' | '72,00'      |		
 		And I go to line in "CostRowsTree" table
 			| "Amount" | "Currency" | "Expense type" | "Presentation" | "Profit loss center" | "Tax amount" | "Use" |
 			| "30,00"  | "TRY"      | "Expense"      | "Service, Tax" | "Front office"       | "5,40"       | "No"  |
@@ -1523,10 +1540,11 @@ Scenario: _100 check Additional Cost Allocation by serial numbers (by row, by am
 			| 'Purchase invoice 9 028 dated 02.04.2023 12:04:41' |
 			| 'Purchase invoice 9 030 dated 02.04.2023 12:23:49' |
 			| 'Purchase invoice 9 050 dated 01.06.2025 15:12:02' |
-		And I go to the last line in "List" table
-//		And I go to line in "List" table
-//			| "Document"                                         |
-//			| "Purchase invoice 9 050 dated 01.06.2025 15:12:02" |
+			| 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' |
+		And I activate current test client window
+		And I go to line in "List" table
+			| "Document"                                         |
+			| "Purchase invoice 9 050 dated 01.06.2025 15:12:02" |	
 		And in the table "List" I click the button named "ListSelectDocument"
 		And I go to line in "DocumentRows" table
 			| "Item"               | "Item key" | "Serial lot number" | "Store"    | "Use" |
@@ -1552,8 +1570,10 @@ Scenario: _100 check Additional Cost Allocation by serial numbers (by row, by am
 			| '#' | 'Expense purchase invoice'                         | 'Expense item' | 'Expense item key' | 'Purchase invoice'                                 | 'Item'               | 'Item key' | 'Serial lot number' | 'Store'    | 'Currency' | 'Amount' | 'Tax amount' | 'Expense type' | 'Profit loss center' |
 			| '1' | 'Purchase invoice 9 051 dated 01.06.2025 15:13:13' | 'Service'      | 'Tax'              | 'Purchase invoice 9 050 dated 01.06.2025 15:12:02' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977891'    | 'Store 02' | 'TRY'      | '30,00'  | '5,40'       | 'Expense'      | 'Front office'       |
 		And I click the button named "FormPostandClose"
-	And I close all client application windows		
-							
+	And I close all client application windows
+
+
+		
 Scenario: _101 check Additional Cost Allocation by serial numbers (by document, by amount)
 	And I close all client application windows
 	* Create Additional Cost Allocation		
@@ -1569,10 +1589,12 @@ Scenario: _101 check Additional Cost Allocation by serial numbers (by document, 
 		Then "Select cost document" window is opened
 		And "List" table became equal
 			| 'Basis'                                            | 'Company'      | 'Currency' | 'Amount' | 'TaxAmount' |
+			| 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Main Company' | 'TRY'      | '200'    | '36'        |
 			| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Main Company' | 'TRY'      | '350'    | '63'        |
+			| 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Main Company' | 'TRY'      | '650'    | '117'       |
 			| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Main Company' | 'TRY'      | '550'    | '99'        |
 			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Main Company' | 'TRY'      | '50'     | '9'         |
-			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | 'TRY'      | '400'    | '72'        |
+			| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Main Company' | 'TRY'      | '400'    | '72'        |		
 		And I go to line in "List" table
 			| 'Basis'                                            | 'Company'      | 'Currency' | 'Amount' | 'TaxAmount' |
 			| 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Main Company' | 'TRY'      | '50'     | '9'         |
@@ -1595,6 +1617,7 @@ Scenario: _101 check Additional Cost Allocation by serial numbers (by document, 
 			| 'Purchase invoice 9 028 dated 02.04.2023 12:04:41' | 'Main Company' |
 			| 'Purchase invoice 9 030 dated 02.04.2023 12:23:49' | 'Main Company' |
 			| 'Purchase invoice 9 050 dated 01.06.2025 15:12:02' | 'Main Company' |
+			| 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Main Company' |
 		And I activate field named "ListBasis" in "List" table
 		And I go to line in "List" table
 			| "Basis"                                            | "Company"      |
@@ -1611,4 +1634,133 @@ Scenario: _101 check Additional Cost Allocation by serial numbers (by document, 
 			| '2' | 'Purchase invoice 9 052 dated 01.06.2025 15:13:29' | 'Service'      | 'Rent'             | 'Purchase invoice 9 050 dated 01.06.2025 15:12:02' | 'Product 6 with SLN' | 'PZU'      | '89088088989'       | 'Store 02' | 'TRY'      | '30,77'  | '5,54'       | 'Expense'      | 'Front office'       |
 		And I click the button named "FormPostandClose"
 	And I close all client application windows		
-										
+
+
+
+Scenario: _102 check prohibition of cost allocation for already allocated PI (row, by amount)				
+	And I close all client application windows		
+	* Create Additional Cost Allocation
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And I click the button named "FormCreate"
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select "By rows" exact value from the drop-down list named "AllocationMode"
+		And I select "By amount" exact value from the drop-down list named "AllocationMethod"
+	* Add Expense PI
+		And in the table "CostRows" I click the button named "CostRowsAdd"
+		Then "Select cost rows" window is opened
+		And I expand current line in "CostRowsTree" table
+		And I go to line in "CostRowsTree" table
+			| "Amount" | "Currency" | "Presentation"                                     | "Tax amount" | "Use"                                              |
+			| "200,00" | "TRY"      | "Purchase invoice 8 022 dated 05.05.2025 14:32:41" | "36,00"      | "Purchase invoice 8 022 dated 05.05.2025 14:32:41" |
+		And I go to line in "CostRowsTree" table
+			| "Amount" | "Currency" | "Expense type" | "Presentation" | "Profit loss center" | "Tax amount" | "Use" |
+			| "200,00" | "TRY"      | "Expense"      | "Service, Tax" | "Front office"       | "36,00"      | "No"  |
+		And I change checkbox named "CostRowsTreeUse" in "CostRowsTree" table
+		And I finish line editing in "CostRowsTree" table
+		And I click the button named "FormOk"
+	* Add PI
+		And I go to line in "CostRows" table
+			| "Amount" | "Currency" | "Expense type" | "Presentation" | "Profit loss center" | "Tax amount" |
+			| "200,00" | "TRY"      | "Expense"      | "Service, Tax" | "Front office"       | "36,00"      |
+		And in the table "AllocationRows" I click the button named "AllocationRowsAdd"
+		Then "Select allocation rows" window is opened
+		And I go to line in "List" table
+			| "Document"                                         |
+			| "Purchase invoice 8 021 dated 02.05.2025 12:12:12" |
+		And in the table "List" I click the button named "ListSelectDocument"
+		And I change checkbox named "DocumentRowsUse" in "DocumentRows" table
+		And I finish line editing in "DocumentRows" table
+		And I go to line in "DocumentRows" table
+			| "Item"  | "Item key"  | "Store"    | "Use" |
+			| "Dress" | "Dress/A-8" | "Store 01" | "No"  |
+		And I change checkbox named "DocumentRowsUse" in "DocumentRows" table
+		And I finish line editing in "DocumentRows" table
+		And in the table "DocumentRows" I click the button named "DocumentRowsEditorOk"
+		And I click the button named "FormOk"
+	* Allocate cost
+		And in the table "AllocationRows" I click the button named "AllocationRowsAllocateCostAmount"
+		And I move to the tab named "GroupOther"
+		And I input "07.05.2025 13:13:13" text in the field named "Date"
+		And I click the button named "FormPost"
+		And I move to the tab named "GroupResult"
+		And "AllocationResult" table became equal
+			| '#' | 'Expense purchase invoice'                         | 'Expense item' | 'Expense item key' | 'Purchase invoice'                                 | 'Item'     | 'Item key'          | 'Serial lot number' | 'Store'    | 'Currency' | 'Amount' | 'Tax amount' | 'Expense type' | 'Profit loss center' |
+			| '1' | 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Service'      | 'Tax'              | 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Trousers' | 'Trousers/Trousers' | ''                  | 'Store 01' | 'TRY'      | '90,91'  | '16,36'      | 'Expense'      | 'Front office'       |
+			| '2' | 'Purchase invoice 8 022 dated 05.05.2025 14:32:41' | 'Service'      | 'Tax'              | 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Dress'    | 'Dress/A-8'         | ''                  | 'Store 01' | 'TRY'      | '109,09' | '19,64'      | 'Expense'      | 'Front office'       |
+		And I activate the field named "FormPostAndClose"
+	* Un-post Expense PI												
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '8 022'  |
+		And I select current line in "List" table
+		And I click the button named "FormUndoPosting"
+	* Check
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'By document [Purchase invoice 8 022 dated 05.05.2025 14:32:41]. Lacking: 200 TRY.'|
+	And I close all client application windows
+
+
+
+Scenario: _103 check prohibition of cost allocation for already allocated PI (documents, by amount)				
+	And I close all client application windows		
+	* Create Additional Cost Allocation
+		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+		And I click the button named "FormCreate"
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select "By documents" exact value from the drop-down list named "AllocationMode"
+		And I select "By amount" exact value from the drop-down list named "AllocationMethod"
+	* Add Expense PI
+		And in the table "CostDocuments" I click the button named "CostDocumentsAdd"
+		And I click choice button of the attribute named "CostDocumentsDocument" in "CostDocuments" table
+		And I go to line in "List" table
+			| "Amount" | "Basis"                                            | "Company"      | "Currency" | "TaxAmount" |
+			| "650"    | "Purchase invoice 8 023 dated 07.05.2025 10:29:51" | "Main Company" | "TRY"      | "117"       |
+		And in the table "List" I click the button named "FormSelect"
+	* Add PI
+		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
+		And I select current line in "AllocationDocuments" table
+		And I click choice button of the attribute named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		Then "Select allocation document" window is opened
+		And I go to line in "List" table
+			| "Basis"                                            | "Company"      |
+			| "Purchase invoice 8 021 dated 02.05.2025 12:12:12" | "Main Company" |
+		And I activate field named "ListBasis" in "List" table
+		And in the table "List" I click the button named "FormSelect"
+	* Allocate cost
+		And I move to the tab named "GroupOther"
+		And I input "08.05.2025 14:14:14" text in the field named "Date"
+		And I click the button named "FormPost"
+		And I move to the tab named "GroupResult"
+		And "AllocationResult" table became equal
+			| '#' | 'Expense purchase invoice'                         | 'Expense item' | 'Expense item key' | 'Purchase invoice'                                 | 'Item'     | 'Item key'          | 'Serial lot number' | 'Store'    | 'Currency' | 'Amount' | 'Tax amount' | 'Expense type' | 'Profit loss center' |
+			| '1' | 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Service'      | 'Rent'             | 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Trousers' | 'Trousers/Trousers' | ''                  | 'Store 01' | 'TRY'      | '227,27' | '40,91'      | 'Expense'      | 'Front office'       |
+			| '2' | 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Service'      | 'Rent'             | 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Dress'    | 'Dress/A-8'         | ''                  | 'Store 01' | 'TRY'      | '272,73' | '49,09'      | 'Expense'      | 'Front office'       |
+			| '3' | 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Service'      | 'Internet'         | 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Trousers' | 'Trousers/Trousers' | ''                  | 'Store 01' | 'TRY'      | '68,18'  | '12,27'      | 'Expense'      | 'Front office'       |
+			| '4' | 'Purchase invoice 8 023 dated 07.05.2025 10:29:51' | 'Service'      | 'Internet'         | 'Purchase invoice 8 021 dated 02.05.2025 12:12:12' | 'Dress'    | 'Dress/A-8'         | ''                  | 'Store 01' | 'TRY'      | '81,82'  | '14,73'      | 'Expense'      | 'Front office'       |
+		And I activate the field named "FormPostAndClose"
+	* Update price in Expense PI												
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '8 023'  |
+		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| "#" | "Dont calculate row" | "Expense type" | "Item"    | "Item key" | "Net amount" | "Other period expense type" | "Price"  | "Price type"              | "Profit loss center" | "Quantity" | "Tax amount" | "Total amount" | "Unit" | "Use goods receipt" | "VAT" |
+			| "2" | "No"                 | "Expense"      | "Service" | "Internet" | "150,00"     | "Items cost"                | "150,00" | "en description is empty" | "Front office"       | "1,000"    | "27,00"      | "177,00"       | "pcs"  | "No"                | "18%" |
+		And I activate field named "ItemListPrice" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+	* Check
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'By document [Purchase invoice 8 023 dated 07.05.2025 10:29:51]. Lacking: 50 TRY.'|
+	And I close all client application windows
+

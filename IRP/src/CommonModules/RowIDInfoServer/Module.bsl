@@ -7461,7 +7461,7 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 	Table_ItemList = New ValueTable();
 	Table_ItemList.Columns.Add("FieldName");
 	Table_ItemList.Columns.Add("LinkedDoc");
-	
+		
 	Table_Header = New ValueTable();
 	Table_Header.Columns.Add("FieldName");
 	Table_Header.Columns.Add("LinkedDoc");
@@ -7575,6 +7575,166 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 	If Is.WS Then
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.WS, DocAliases.WO);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.WS, DocAliases.SI);
+	EndIf;
+	
+	Return Tables;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly(Ref)
+	Table_ItemList = New ValueTable();
+	Table_ItemList.Columns.Add("FieldName");
+	Table_ItemList.Columns.Add("LinkedDoc");
+		
+	Table_Header = New ValueTable();
+	Table_Header.Columns.Add("FieldName");
+	Table_Header.Columns.Add("LinkedDoc");
+	
+	Tables = New Structure("Header, ItemList", Table_Header, Table_ItemList);
+	
+	Is = Is(Ref);
+	
+	If Is.SO Then
+		Fields = GetFieldsToLock_AlwaysReadonly_SO();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.SI Then
+		Fields = GetFieldsToLock_AlwaysReadonly_SI();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.SC Then
+		Fields = GetFieldsToLock_AlwaysReadonly_SC();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.SPO Then
+		Fields = GetFieldsToLock_AlwaysReadonly_SPO();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.RSC Then
+		Fields = GetFieldsToLock_AlwaysReadonly_RSC();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;	
+	
+	If Is.PO Then
+		Fields = GetFieldsToLock_AlwaysReadonly_PO();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.PI Then
+		Fields = GetFieldsToLock_AlwaysReadonly_PI();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.GR Then
+		Fields = GetFieldsToLock_AlwaysReadonly_GR();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.RGR Then
+		Fields = GetFieldsToLock_AlwaysReadonly_RGR();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.ITO Then
+		Fields = GetFieldsToLock_AlwaysReadonly_ITO();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.IT Then
+		Fields = GetFieldsToLock_AlwaysReadonly_IT();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.StockAdjustmentAsSurplus Then
+		Fields = GetFieldsToLock_AlwaysReadonly_StockAdjustmentAsSurplus();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.StockAdjustmentAsWriteOff Then
+		Fields = GetFieldsToLock_AlwaysReadonly_StockAdjustmentAsWriteOff();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.PhysicalInventory Then
+		Fields = GetFieldsToLock_AlwaysReadonly_PhysicalInventory();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.PR Then
+		Fields = GetFieldsToLock_AlwaysReadonly_PR();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.PRO Then
+		Fields = GetFieldsToLock_AlwaysReadonly_PRO();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.SR Then 
+		Fields = GetFieldsToLock_AlwaysReadonly_SR();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.SRO Then
+		Fields = GetFieldsToLock_AlwaysReadonly_SRO();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.RSR Then 
+		Fields = GetFieldsToLock_AlwaysReadonly_RSR();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.RRR Then 
+		Fields = GetFieldsToLock_AlwaysReadonly_RRR();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.PRR Then
+		Fields = GetFieldsToLock_AlwaysReadonly_PRR();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.WO Then
+		Fields = GetFieldsToLock_AlwaysReadonly_WO();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.WS Then
+		Fields = GetFieldsToLock_AlwaysReadonly_WS();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
+	EndIf;
+	
+	If Is.ISR Then
+		Fields = GetFieldsToLock_AlwaysReadonly_ISR();
+		AddArrayToFieldsTable(Tables.Header  , Fields.Header  , Undefined);
+		AddArrayToFieldsTable(Tables.ItemList, Fields.ItemList, Undefined);
 	EndIf;
 	
 	Return Tables;
@@ -7711,6 +7871,11 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkSO, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_SO()
+	Result = New Structure("Header, ItemList");
 	Return Result;
 EndFunction
 
@@ -8550,10 +8715,10 @@ Function GetFieldsToLock_InternalLink_SI(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.SO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, SalesOrder, WorkOrder";
+		Result.ItemList = "Item, ItemKey, Store";
 	ElsIf InternalDocAliase = Aliases.SC Or InternalDocAliase = Aliases.WS Or InternalDocAliase = Aliases.SPO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, UseWorkSheet, SalesOrder, WorkOrder";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, UseWorkSheet";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkSI, InternalDocAliase);
 	EndIf;
@@ -8564,7 +8729,7 @@ Function GetFieldsToLock_ExternalLink_SI(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SC Or ExternalDocAliase = Aliases.WS Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, UseWorkSheet, SalesOrder, WorkOrder";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, UseWorkSheet";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -8576,7 +8741,7 @@ Function GetFieldsToLock_ExternalLink_SI(ExternalDocAliase, Aliases)
 	
 	ElsIf ExternalDocAliase = Aliases.SRO Or ExternalDocAliase = Aliases.SR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
+		Result.ItemList = "Item, ItemKey, Store";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company              , Company,
 							  |Branch               , Branch,
@@ -8591,6 +8756,12 @@ Function GetFieldsToLock_ExternalLink_SI(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkSI, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_SI()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "SalesOrder, WorkOrder";
 	Return Result;
 EndFunction
 
@@ -8885,20 +9056,18 @@ Function GetFieldsToLock_InternalLink_SC(InternalDocAliase, Aliases)
 		Or InternalDocAliase = Aliases.IT
 		Or InternalDocAliase = Aliases.ITO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, ShipmentPlaningOrder, SalesInvoice, InventoryTransferOrder,
-			|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
+		Result.ItemList = "Item, ItemKey, Store";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkSC, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
-
+ 
 Function GetFieldsToLock_ExternalLink_SC(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SI Then 
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
-			|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
+		Result.ItemList = "Item, ItemKey, Store";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -8909,8 +9078,7 @@ Function GetFieldsToLock_ExternalLink_SC(ExternalDocAliase, Aliases)
 							  |Store             , ItemList.Store";
 	ElsIf ExternalDocAliase = Aliases.PR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
-			|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
+		Result.ItemList = "Item, ItemKey, Store";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company            , Company,
 							  |Branch             , Branch,
@@ -8923,6 +9091,13 @@ Function GetFieldsToLock_ExternalLink_SC(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkSC3, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_SC()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "ShipmentBasis, SalesOrder, ShipmentPlaningOrder, SalesInvoice, 
+		|InventoryTransferOrder, InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
 	Return Result;
 EndFunction
 
@@ -9121,7 +9296,7 @@ Function GetFieldsToLock_ExternalLink_SPO(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SI Then 
 		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder";
+		Result.ItemList = "Item, ItemKey, Store";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -9132,7 +9307,7 @@ Function GetFieldsToLock_ExternalLink_SPO(ExternalDocAliase, Aliases)
 							  
 	ElsIf ExternalDocAliase = Aliases.SC Then 
 		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder";
+		Result.ItemList = "Item, ItemKey, Store";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -9143,6 +9318,12 @@ Function GetFieldsToLock_ExternalLink_SPO(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkSPO, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_SPO()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "ShipmentBasis, SalesOrder";
 	Return Result;
 EndFunction
 
@@ -9323,7 +9504,7 @@ Function GetFieldsToLock_InternalLink_RSC(InternalDocAliase, Aliases)
 		Or InternalDocAliase = Aliases.RGR Then
 
 		Result.Header   = "Company, Store, RetailCustomer, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
+		Result.ItemList = "Item, ItemKey, Store";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkRSC, InternalDocAliase);
 	EndIf;
@@ -9334,7 +9515,7 @@ Function GetFieldsToLock_ExternalLink_RSC(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.RSR Or ExternalDocAliase = Aliases.RGR Then 
 		Result.Header   = "Company, Store, RetailCustomer, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
+		Result.ItemList = "Item, ItemKey, Store";
 		
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
@@ -9345,6 +9526,12 @@ Function GetFieldsToLock_ExternalLink_RSC(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkRSC, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_RSC()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "SalesOrder";
 	Return Result;
 EndFunction
 
@@ -9509,7 +9696,7 @@ Function GetFieldsToLock_InternalLink_SRO(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.SI Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, SalesInvoice";
+		Result.ItemList = "Item, ItemKey, Store";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkSRO, InternalDocAliase);
 	EndIf;
@@ -9535,6 +9722,12 @@ Function GetFieldsToLock_ExternalLink_SRO(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkSRO, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_SRO()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "SalesInvoice";
 	Return Result;
 EndFunction
 
@@ -9649,10 +9842,10 @@ Function GetFieldsToLock_InternalLink_PO(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.ISR Then
 		Result.Header   = "Company, Branch, Store";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseBasis, SalesOrder, InternalSupplyRequest";
+		Result.ItemList = "Item, ItemKey, Store";
 	ElsIf InternalDocAliase = Aliases.SO Then
 		Result.Header   = "Company, Branch";
-		Result.ItemList = "Item, ItemKey, PurchaseBasis, SalesOrder, InternalSupplyRequest";
+		Result.ItemList = "Item, ItemKey";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkPO, InternalDocAliase);
 	EndIf;
@@ -9663,7 +9856,7 @@ Function GetFieldsToLock_ExternalLink_PO(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.PI Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, Cancel, CancelReason, PurchaseBasis, SalesOrder, InternalSupplyRequest";
+		Result.ItemList = "Item, ItemKey, Store, Cancel, CancelReason";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company                  , Company,
 							  |Branch                   , Branch,
@@ -9678,7 +9871,7 @@ Function GetFieldsToLock_ExternalLink_PO(ExternalDocAliase, Aliases)
 	
 	ElsIf ExternalDocAliase = Aliases.GR Then
 		Result.Header       = "Company, Branch, Store, Partner, LegalName, Status, TransactionType";
-		Result.ItemList     = "Item, ItemKey, Store, Cancel, CancelReason, PurchaseBasis, SalesOrder, InternalSupplyRequest";
+		Result.ItemList     = "Item, ItemKey, Store, Cancel, CancelReason";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company            , Company,
 							  |Branch             , Branch,
@@ -9690,6 +9883,12 @@ Function GetFieldsToLock_ExternalLink_PO(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkPO, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_PO()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "PurchaseBasis, SalesOrder, InternalSupplyRequest";
 	Return Result;
 EndFunction
 
@@ -9907,14 +10106,10 @@ Function GetFieldsToLock_InternalLink_GR(InternalDocAliase, Aliases)
 		Or InternalDocAliase = Aliases.SRO
 		Or InternalDocAliase = Aliases.ITO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, ReceiptBasis, SalesOrder, PurchaseOrder, PurchaseInvoice, 
-			|InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
-			|InventoryTransfer, SalesInvoice";
+		Result.ItemList = "Item, ItemKey, Store";
 	ElsIf InternalDocAliase = Aliases.IT Then
 		Result.Header   = "Company, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, ReceiptBasis, SalesOrder, PurchaseOrder, PurchaseInvoice, 
-			|InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
-			|InventoryTransfer, SalesInvoice";		
+		Result.ItemList = "Item, ItemKey, Store";		
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkGR, InternalDocAliase);
 	EndIf;
@@ -9925,9 +10120,7 @@ Function GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.PI Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, ReceiptBasis, SalesOrder, PurchaseInvoice, 
-			|PurchaseOrder, InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
-			|InventoryTransfer, SalesInvoice";
+		Result.ItemList = "Item, ItemKey, Store";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company        , Company,
 						  |Branch             , Branch,
@@ -9938,9 +10131,7 @@ Function GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases)
 						  |Store              , ItemList.Store";
 	ElsIf ExternalDocAliase = Aliases.SR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, ReceiptBasis, SalesOrder, PurchaseInvoice, 
-			|PurchaseOrder, InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
-			|InventoryTransfer, SalesInvoice";
+		Result.ItemList = "Item, ItemKey, Store";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "CompanyReturn       , Company,
 						  |BranchReturn            , Branch,
@@ -9952,6 +10143,14 @@ Function GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkGR, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_GR()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "ReceiptBasis, SalesOrder, PurchaseOrder, PurchaseInvoice, 
+			|InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
+			|InventoryTransfer, SalesInvoice";
 	Return Result;
 EndFunction
 
@@ -10206,14 +10405,11 @@ EndFunction
 Function GetFieldsToLock_InternalLink_RGR(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.RSC Then 
-
 		Result.Header   = "Company, Store, RetailCustomer, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
-		
+		Result.ItemList = "Item, ItemKey, Store";
 	ElsIf InternalDocAliase = Aliases.RSR Then 
-
 		Result.Header   = "Company, Partner, LegalName, RetailCustomer, TransactionType";
-		Result.ItemList = "Item, ItemKey, RetailSalesReceipt";		
+		Result.ItemList = "Item, ItemKey";		
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkRGR, InternalDocAliase);
 	EndIf;
@@ -10224,7 +10420,7 @@ Function GetFieldsToLock_ExternalLink_RGR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.RSC Then 
 		Result.Header   = "Company, Store, RetailCustomer, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
+		Result.ItemList = "Item, ItemKey, Store";
 		
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
@@ -10246,6 +10442,12 @@ Function GetFieldsToLock_ExternalLink_RGR(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkRGR, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_RGR()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "SalesOrder, RetailSalesReceipt";
 	Return Result;
 EndFunction
 
@@ -10336,16 +10538,16 @@ Function GetFieldsToLock_InternalLink_PI(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.PO Then
 		Result.Header   = "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+		Result.ItemList = "Item, ItemKey, Store";
 	ElsIf InternalDocAliase = Aliases.GR Then
 		Result.Header   = "Company, Branch, Partner, LegalName, Store, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+		Result.ItemList = "Item, ItemKey, Store";
 	ElsIf InternalDocAliase = Aliases.SO Then
 		Result.Header   = "Company, Branch";
-		Result.ItemList = "Item, ItemKey, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+		Result.ItemList = "Item, ItemKey";
 	ElsIf InternalDocAliase = Aliases.ISR Then
 		Result.Header   = "Company, Branch, Store";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+		Result.ItemList = "Item, ItemKey, Store";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkPI, InternalDocAliase);
 	EndIf;
@@ -10356,7 +10558,7 @@ Function GetFieldsToLock_ExternalLink_PI(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.GR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, UseGoodsReceipt, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+		Result.ItemList = "Item, ItemKey, Store, UseGoodsReceipt";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company            , Company,
 							  |Branch             , Branch,
@@ -10368,7 +10570,7 @@ Function GetFieldsToLock_ExternalLink_PI(ExternalDocAliase, Aliases)
 	
 	ElsIf ExternalDocAliase = Aliases.PRO Or ExternalDocAliase = Aliases.PR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+		Result.ItemList = "Item, ItemKey, Store";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company                  , Company,
 							  |Branch                   , Branch,
@@ -10383,6 +10585,12 @@ Function GetFieldsToLock_ExternalLink_PI(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkPI, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_PI()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "PurchaseOrder, SalesOrder, InternalSupplyRequest";
 	Return Result;
 EndFunction
 
@@ -10654,7 +10862,7 @@ Function GetFieldsToLock_InternalLink_ITO(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.ISR Then
 		Result.Header   = "Company, Branch, StoreReceiver";
-		Result.ItemList = "Item, ItemKey, InternalSupplyRequest, PurchaseOrder";
+		Result.ItemList = "Item, ItemKey";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkITO, InternalDocAliase);
 	EndIf;
@@ -10665,7 +10873,7 @@ Function GetFieldsToLock_ExternalLink_ITO(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.IT Then
 		Result.Header   = "Company, Branch, StoreReceiver, StoreSender, Status";
-		Result.ItemList = "Item, ItemKey, InternalSupplyRequest, PurchaseOrder";
+		Result.ItemList = "Item, ItemKey";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company          , Company,
 							  |Branch           , Branch,
@@ -10675,6 +10883,12 @@ Function GetFieldsToLock_ExternalLink_ITO(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkITO, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_ITO()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "InternalSupplyRequest, PurchaseOrder";
 	Return Result;
 EndFunction
 
@@ -10779,7 +10993,7 @@ Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SC Then
 		Result.Header   = "Company, Branch, StoreSender, UseShipmentConfirmation";
-		Result.ItemList = "Item, ItemKey, InventoryTransferOrder, SalesOrder";
+		Result.ItemList = "Item, ItemKey";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -10788,7 +11002,7 @@ Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
 							  |ItemKey           , ItemList.ItemKey";
 	ElsIf ExternalDocAliase = Aliases.GR Then
 		Result.Header   = "Company, StoreReceiver, UseGoodsReceipt";
-		Result.ItemList = "Item, ItemKey, InventoryTransferOrder, SalesOrder";
+		Result.ItemList = "Item, ItemKey";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |StoreReceiver     , StoreReceiver,
@@ -10798,6 +11012,12 @@ Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkIT, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_IT()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "InventoryTransferOrder, SalesOrder";
 	Return Result;
 EndFunction
 
@@ -10970,6 +11190,12 @@ Function GetFieldsToLock_ExternalLink_ISR(ExternalDocAliase, Aliases)
 	Return Result;
 EndFunction
 
+Function GetFieldsToLock_AlwaysReadonly_ISR()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "";
+	Return Result;
+EndFunction
+
 Procedure ApplyFilterSet_ISR_ForITO_ForPO_ForPI(Query)
 	Query.Text =
 	"SELECT
@@ -11050,13 +11276,13 @@ Function GetFieldsToLock_InternalLink_PR(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.PI Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseInvoice, PurchaseReturnOrder";
+		Result.ItemList = "Item, ItemKey, Store";
 	ElsIf InternalDocAliase = Aliases.PRO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseInvoice, PurchaseReturnOrder";
+		Result.ItemList = "Item, ItemKey, Store";
 	ElsIf InternalDocAliase = Aliases.SC Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, PurchaseReturnOrder";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkPR, InternalDocAliase);
 	EndIf;
@@ -11067,7 +11293,7 @@ Function GetFieldsToLock_ExternalLink_PR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SC Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, PurchaseReturnOrder";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company            , Company,
 							  |Branch             , Branch,
@@ -11080,6 +11306,12 @@ Function GetFieldsToLock_ExternalLink_PR(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkPR, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_PR()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "PurchaseInvoice, PurchaseReturnOrder";
 	Return Result;
 EndFunction
 
@@ -11179,13 +11411,13 @@ Function GetFieldsToLock_InternalLink_SR(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.SI Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, SalesInvoice, SalesReturnOrder";
+		Result.ItemList = "Item, ItemKey, Store";
 	ElsIf InternalDocAliase = Aliases.SRO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, SalesInvoice, SalesReturnOrder";
+		Result.ItemList = "Item, ItemKey, Store";
 	ElsIf InternalDocAliase = Aliases.GR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, UseGoodsReceipt, SalesReturnOrder";
+		Result.ItemList = "Item, ItemKey, Store, UseGoodsReceipt";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkSR, InternalDocAliase);
 	EndIf;
@@ -11196,7 +11428,7 @@ Function GetFieldsToLock_ExternalLink_SR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.GR Then
 		Result.Header       = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList     = "Item, ItemKey, Store, UseGoodsReceipt, SalesReturnOrder";
+		Result.ItemList     = "Item, ItemKey, Store, UseGoodsReceipt";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -11208,6 +11440,12 @@ Function GetFieldsToLock_ExternalLink_SR(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkSR, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_SR()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "SalesInvoice, SalesReturnOrder";
 	Return Result;
 EndFunction
 
@@ -11307,7 +11545,7 @@ Function GetFieldsToLock_InternalLink_PRO(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.PI Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseInvoice";
+		Result.ItemList = "Item, ItemKey, Store";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkPRO, InternalDocAliase);
 	EndIf;
@@ -11318,7 +11556,7 @@ Function GetFieldsToLock_ExternalLink_PRO(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.PR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
-		Result.ItemList = "Item, ItemKey, Store, Cancel, PurchaseInvoice";
+		Result.ItemList = "Item, ItemKey, Store, Cancel";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company                  , Company,
 							  |Branch                   , Branch,
@@ -11334,6 +11572,12 @@ Function GetFieldsToLock_ExternalLink_PRO(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkPRO, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_PRO()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "PurchaseInvoice";
 	Return Result;
 EndFunction
 
@@ -11493,6 +11737,11 @@ Function GetFieldsToLock_ExternalLink_RSR(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkRSR, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_RSR()
+	Result = New Structure("Header, ItemList");
 	Return Result;
 EndFunction
 
@@ -11666,6 +11915,11 @@ Function GetFieldsToLock_InternalLink_PRR(InternalDocAliase, Aliases)
 	Return Result;
 EndFunction
 
+Function GetFieldsToLock_AlwaysReadonly_PRR()
+	Result = New Structure("Header, ItemList");
+	Return Result;
+EndFunction
+
 #EndRegion
 
 #Region Document_RRR
@@ -11675,13 +11929,19 @@ Function GetFieldsToLock_InternalLink_RRR(InternalDocAliase, Aliases)
 	If InternalDocAliase = Aliases.RSR Then
 		Result.Header   = "Company, Store, Partner, LegalName, Agreement, RetailCustomer, Currency, 
 			|PriceIncludeTax, UsePartnerTransactions";
-		Result.ItemList = "Item, ItemKey, Store, RetailSalesReceipt";
+		Result.ItemList = "Item, ItemKey, Store";
 	ElsIf InternalDocAliase = Aliases.RGR Then
 		Result.Header   = "Company, Store, Partner, LegalName, RetailCustomer";
 		Result.ItemList = "Item, ItemKey, Store";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkRRR, InternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_RRR()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "RetailSalesReceipt";
 	Return Result;
 EndFunction
 
@@ -11693,10 +11953,16 @@ Function GetFieldsToLock_InternalLink_StockAdjustmentAsSurplus(InternalDocAliase
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.PhysicalInventory Then
 		Result.Header   = "Store";
-		Result.ItemList = "Item, ItemKey, BasisDocument, PhysicalInventory";
+		Result.ItemList = "Item, ItemKey";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkStockAdjustmentAsSurplus, InternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_StockAdjustmentAsSurplus()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "PhysicalInventory, BasisDocument";
 	Return Result;
 EndFunction
 
@@ -11712,6 +11978,12 @@ Function GetFieldsToLock_InternalLink_StockAdjustmentAsWriteOff(InternalDocAlias
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkStockAdjustmentAsWriteOff, InternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_StockAdjustmentAsWriteOff()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "PhysicalInventory, BasisDocument";
 	Return Result;
 EndFunction
 
@@ -11731,6 +12003,11 @@ Function GetFieldsToLock_ExternalLink_PhysicalInventory(ExternalDocAliase, Alias
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkPhysicalInventory, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_PhysicalInventory()
+	Result = New Structure("Header, ItemList");
 	Return Result;
 EndFunction
 
@@ -11804,7 +12081,7 @@ Function GetFieldsToLock_InternalLink_WO(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.SO Then
 		Result.Header   = "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
-		Result.ItemList = "Item, ItemKey, SalesOrder";
+		Result.ItemList = "Item, ItemKey";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkWO, InternalDocAliase);
 	EndIf;
@@ -11842,6 +12119,12 @@ Function GetFieldsToLock_ExternalLink_WO(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkWO, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_WO()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "SalesOrder";
 	Return Result;
 EndFunction
 
@@ -12038,7 +12321,7 @@ Function GetFieldsToLock_InternalLink_WS(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.WO Or InternalDocAliase = Aliases.SI Then
 		Result.Header   = "Company, Branch, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, SalesOrder, SalesInvoice, WorkOrder";
+		Result.ItemList = "Item, ItemKey";
 	Else
 		Raise StrTemplate(R().Error_UnsupportedInternalLinkWS, InternalDocAliase);
 	EndIf;
@@ -12049,7 +12332,7 @@ Function GetFieldsToLock_ExternalLink_WS(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SI Then 
 		Result.Header   = "Company, Branch, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, SalesOrder, WorkOrder";
+		Result.ItemList = "Item, ItemKey";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -12060,6 +12343,12 @@ Function GetFieldsToLock_ExternalLink_WS(ExternalDocAliase, Aliases)
 	Else
 		Raise StrTemplate(R().Error_UnsupportedExternalLinkSC3, ExternalDocAliase);
 	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_AlwaysReadonly_WS()
+	Result = New Structure("Header, ItemList");
+	Result.ItemList = "SalesOrder, SalesInvoice, WorkOrder";
 	Return Result;
 EndFunction
 
@@ -14316,6 +14605,7 @@ Procedure SetAppearance(Object, Form) Export
 	AddAppearance_Header(Object, Form, FieldsToLock.All);
 	AddAppearance_ItemList(Object, Form, FieldsToLock.Internal, "InternalLinks");
 	AddAppearance_ItemList(Object, Form, FieldsToLock.External, "ExternalLinks");	
+	AddAppearance_ItemList(Object, Form, FieldsToLock.AlwaysReadonly, Undefined);	
 EndProcedure
 
 Procedure ClearAppearance_ItemList(Object, Form) Export
@@ -14402,41 +14692,42 @@ Procedure AddAppearance_ItemList(Object, Form, FieldsToLock, Condition)
 		Element.Presentation = "FieldsToLock";
 		Element.Fields.Items.Add().Field = New DataCompositionField(FieldName);
 		
-		If TrimAll(Upper(Row.FieldName)) = Upper("ItemKey") And Condition = "InternalLinks" Then
-			FilterGroup = Element.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
-			FilterGroup.GroupType = DataCompositionFilterItemsGroupType.AndGroup;
+		If Condition <> Undefined Then
+			If TrimAll(Upper(Row.FieldName)) = Upper("ItemKey") And Condition = "InternalLinks" Then
+				FilterGroup = Element.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
+				FilterGroup.GroupType = DataCompositionFilterItemsGroupType.AndGroup;
+				
+				Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
+				Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);
+				Filter.ComparisonType = DataCompositionComparisonType.Contains;
+				Filter.RightValue = Row.LinkedDoc;
+				
+				Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
+				Filter.LeftValue = New DataCompositionField("Object.ItemList.IsUnlockItemKey");
+				Filter.ComparisonType = DataCompositionComparisonType.Equal;
+				Filter.RightValue = False;
 			
-			Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
-			Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);
-			Filter.ComparisonType = DataCompositionComparisonType.Contains;
-			Filter.RightValue = Row.LinkedDoc;
-			
-			Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
-			Filter.LeftValue = New DataCompositionField("Object.ItemList.IsUnlockItemKey");
-			Filter.ComparisonType = DataCompositionComparisonType.Equal;
-			Filter.RightValue = False;
-		
-		ElsIf TrimAll(Upper(Row.FieldName)) = Upper("Store") And Condition = "InternalLinks" Then
-			FilterGroup = Element.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
-			FilterGroup.GroupType = DataCompositionFilterItemsGroupType.AndGroup;
-			
-			Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
-			Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);
-			Filter.ComparisonType = DataCompositionComparisonType.Contains;
-			Filter.RightValue = Row.LinkedDoc;
-			
-			Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
-			Filter.LeftValue = New DataCompositionField("Object.ItemList.IsUnlockStore");
-			Filter.ComparisonType = DataCompositionComparisonType.Equal;
-			Filter.RightValue = False;
-					
-		Else
-			Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
-			Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);
-			Filter.ComparisonType = DataCompositionComparisonType.Contains;
-			Filter.RightValue = Row.LinkedDoc;
+			ElsIf TrimAll(Upper(Row.FieldName)) = Upper("Store") And Condition = "InternalLinks" Then
+				FilterGroup = Element.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
+				FilterGroup.GroupType = DataCompositionFilterItemsGroupType.AndGroup;
+				
+				Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
+				Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);
+				Filter.ComparisonType = DataCompositionComparisonType.Contains;
+				Filter.RightValue = Row.LinkedDoc;
+				
+				Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
+				Filter.LeftValue = New DataCompositionField("Object.ItemList.IsUnlockStore");
+				Filter.ComparisonType = DataCompositionComparisonType.Equal;
+				Filter.RightValue = False;
+						
+			Else
+				Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
+				Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);
+				Filter.ComparisonType = DataCompositionComparisonType.Contains;
+				Filter.RightValue = Row.LinkedDoc;
+			EndIf;
 		EndIf;
-		
 		Element.Appearance.SetParameterValue("BackColor", WebColors.AliceBlue);
 		Element.Appearance.SetParameterValue("ReadOnly", True);
 	EndDo;
@@ -14449,27 +14740,41 @@ EndProcedure
 Function GetFieldsToLock(Object, Form)
 	FieldsToLock_ExternalLinkedDocs = New Structure("Header, ItemList", New Array(), New Array());
 	FieldsToLock_InternalLinkedDocs = New Structure("Header, ItemList", New Array(), New Array());
-	FieldsToLock_All                = New Structure("Header, ItemList", New Array(), New Array());
+	FieldsToLock_AlwaysReadonly     = New Structure("Header, ItemList", New Array(), New Array());
+	FieldsToLock_All = New Structure("Header, ItemList", New Array(), New Array());
 	
 	If ValueIsFilled(Object.Ref) Then
 		FieldsToLock_ExternalLinkedDocs = GetFieldsToLock_ExternalLinkedDocs(Object.Ref, Form.ExternalLinkedDocs.UnloadValues());
 	EndIf;
 		
 	FieldsToLock_InternalLinkedDocs = GetFieldsToLock_InternalLinkedDocs(Object.Ref, Form.InternalLinkedDocs.UnloadValues());
+	FieldsToLock_AlwaysReadonly = GetFieldsToLock_AlwaysReadonly(Object.Ref);
 	
 	AllFields_Header = New ValueTable();
 	AllFields_Header.Columns.Add("FieldName");
+	
 	For Each Row In FieldsToLock_ExternalLinkedDocs.Header Do
 		AllFields_Header.Add().FieldName = Row.FieldName;
 	EndDo;
+	
 	For Each Row In FieldsToLock_InternalLinkedDocs.Header Do
 		AllFields_Header.Add().FieldName = Row.FieldName;
 	EndDo;
+	
+	For Each Row In FieldsToLock_AlwaysReadonly.Header Do
+		AllFields_Header.Add().FieldName = Row.FieldName;
+	EndDo;
+	
 	AllFields_Header.GroupBy("FieldName");
 	FieldsToLock_All.Header = AllFields_Header.UnloadColumn("FieldName");
 	
-	Return New Structure("External, Internal, All", 
-		FieldsToLock_ExternalLinkedDocs, FieldsToLock_InternalLinkedDocs, FieldsToLock_All);
+	Result = New Structure();
+	Result.Insert("External"       , FieldsToLock_ExternalLinkedDocs);
+	Result.Insert("Internal"       , FieldsToLock_InternalLinkedDocs);
+	Result.Insert("AlwaysReadonly" , FieldsToLock_AlwaysReadonly);
+	Result.Insert("All"            , FieldsToLock_All);
+	
+	Return Result;
 EndFunction
 
 Procedure FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliase, ExternalDocAliase)

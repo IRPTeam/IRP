@@ -116,7 +116,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(R5020B_PartnersBalance());
-	QueryArray.Add(R3040B_WithholdingTax());
 	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	Return QueryArray;
 EndFunction
@@ -171,7 +170,11 @@ Function ItemList()
 		|	ItemList.Project AS Project,
 		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
 		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Consignor) AS IsConsignor,
-		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
+		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
+		|	ItemList.Ref.TaxPartner as TaxPartner,
+		|	ItemList.Ref.TaxLegalName as TaxLegalName,
+		|	ItemList.Ref.TaxAgreement as TaxAgreement,
+		|	ItemList.Ref.TaxLegalNameContract as TaxLegalNameContract
 		|INTO ItemList
 		|FROM
 		|	Document.WithholdingTaxInvoice.ItemList AS ItemList
@@ -231,31 +234,6 @@ Function R1040B_TaxesOutgoing()
 		|	VALUE(Enum.InvoiceType.Invoice)";
 EndFunction
 
-Function R3040B_WithholdingTax()
-	Return 
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Branch,
-		|	ItemList.Currency,
-		|	&WithholdingTax AS Tax,
-		|	ItemList.WithholdingTaxRate AS TaxRate,
-		|	SUM(ItemList.WithholdingTaxAmount) AS Amount
-		|INTO R3040B_WithholdingTax
-		|FROM
-		|	ItemList AS ItemLIst
-		|WHERE
-		|	ItemList.WithholdingTaxAmount <> 0
-		|GROUP BY
-		|	VALUE(AccumulationRecordType.Receipt),
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Branch,
-		|	ItemList.Currency,
-		|	ItemList.WithholdingTaxRate";
-EndFunction
-
 Function R5010B_ReconciliationStatement()
 	Return 
 		"SELECT
@@ -277,6 +255,31 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.LegalNameContract,
+		|	ItemList.Currency,
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Expense)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.TaxLegalName,
+		|	ItemList.TaxLegalNameContract,
+		|	ItemList.Currency,
+		|	SUM(ItemList.WithholdingTaxAmount),
+		|	ItemList.Period
+		|
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.WithholdingTaxAmount <> 0
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.TaxLegalName,
+		|	ItemList.TaxLegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period,
 		|	VALUE(AccumulationRecordType.Expense)";
@@ -340,6 +343,37 @@ Function R5015B_OtherPartnersTransactions()
 		|	ItemList.Currency,
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
+		|	ItemList.Key
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.TaxPartner,
+		|	ItemList.TaxLegalName,
+		|	ItemList.Currency,
+		|	ItemList.TaxAgreement,
+		|	ItemList.BasisDocument AS Basis,
+		|	ItemList.Key,
+		|	SUM(ItemList.WithholdingTaxAmount) AS Amount
+		|
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.WithholdingTaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.TaxPartner,
+		|	ItemList.TaxLegalName,
+		|	ItemList.Currency,
+		|	ItemList.TaxAgreement,
+		|	ItemList.BasisDocument,
 		|	ItemList.Key";
 EndFunction
 
@@ -371,6 +405,8 @@ Function T1040T_AccountingAmounts()
 		|	ItemList.Period,
 		|	ItemList.Key AS RowKey,
 		|	ItemList.Currency,
+		|	undefined as DrCurrency,
+		|	undefined as CrCurrency,
 		|	ItemList.NetAmount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
@@ -386,6 +422,8 @@ Function T1040T_AccountingAmounts()
 		|	ItemList.Period,
 		|	ItemList.Key AS RowKey,
 		|	ItemList.Currency,
+		|	undefined,
+		|	undefined,
 		|	ItemList.TaxAmount,
 		|	VALUE(Catalog.AccountingOperations.WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions),
 		|	UNDEFINED
@@ -399,9 +437,11 @@ Function T1040T_AccountingAmounts()
 		|SELECT
 		|	ItemList.Period,
 		|	ItemList.Key AS RowKey,
-		|	ItemList.Currency,
+		|	ItemList.TaxAgreement.CurrencyMovementType.Currency,
+		|	undefined,
+		|	ItemList.TaxAgreement.CurrencyMovementType.Currency,
 		|	ItemList.WithholdingTaxAmount,
-		|	VALUE(Catalog.AccountingOperations.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax),
+		|	VALUE(Catalog.AccountingOperations.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions),
 		|	UNDEFINED
 		|FROM
 		|	ItemList as ItemList
@@ -414,6 +454,8 @@ Function T1040T_AccountingAmounts()
 		|	T2010S_OffsetOfAdvances.Period,
 		|	T2010S_OffsetOfAdvances.Key AS RowKey,
 		|	T2010S_OffsetOfAdvances.Currency,
+		|	undefined,
+		|	undefined,
 		|	T2010S_OffsetOfAdvances.Amount,
 		|	VALUE(Catalog.AccountingOperations.WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors),
 		|	T2010S_OffsetOfAdvances.Recorder
@@ -436,11 +478,11 @@ Function GetAccountingAnalytics(Parameters) Export
 	ElsIf Parameters.Operation = Operations.WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions Then
 		
 		Return GetAnalytics_VATOutgoing(Parameters); // Taxes outgoing - Vendors transactions
-
-	ElsIf Parameters.Operation = Operations.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax Then
 		
-		Return GetAnalytics_WithholdingTax(Parameters); // Expenses - Withholding tax
+	ElsIf Parameters.Operation = Operations.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions Then
 		
+		Return GetAnalytics_WithholdingTax(Parameters); // Expenses - Other partners transaction
+	
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -472,30 +514,14 @@ Function GetAnalytics_Expenses(Parameters)
 	Else
 		AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
 	EndIf;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
-
-	Return AccountingAnalytics;
-EndFunction
-
-// Expenses - Withholding tax
-Function GetAnalytics_WithholdingTax(Parameters)
-	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
-	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-
-	// Debit
-	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
-	                                                          Parameters.RowData.ExpenseType,
-	                                                          Parameters.RowData.ProfitLossCenter);
 	
-	AccountingAnalytics.Debit = Debit.AccountExpense;
 	AdditionalAnalytics = New Structure;
-	AdditionalAnalytics.Insert("Item", Parameters.RowData.ItemKey.Item);
-	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	AdditionalAnalytics.Insert("Partner"          , Parameters.ObjectData.Partner);
+	AdditionalAnalytics.Insert("Agreement"        , Parameters.ObjectData.Agreement);
+	AdditionalAnalytics.Insert("LegalName"        , Parameters.ObjectData.LegalName);
+	AdditionalAnalytics.Insert("LegalNameContract", Parameters.ObjectData.LegalNameContract);
 	
-	// Credit
-	Credit = AccountingServer.GetT9013S_AccountsWithholdingTax(AccountParameters, Parameters.RowData.WithholdingTaxInfo);
-	AccountingAnalytics.Credit = Credit.IncomingAccount;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.WithholdingTaxInfo);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 
 	Return AccountingAnalytics;
 EndFunction
@@ -505,6 +531,12 @@ Function GetAnalytics_OffsetOfAdvances(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
+	AdditionalAnalytics = New Structure;
+	AdditionalAnalytics.Insert("Partner"          , Parameters.ObjectData.Partner);
+	AdditionalAnalytics.Insert("Agreement"        , Parameters.ObjectData.Agreement);
+	AdditionalAnalytics.Insert("LegalName"        , Parameters.ObjectData.LegalName);
+	AdditionalAnalytics.Insert("LegalNameContract", Parameters.ObjectData.LegalNameContract);
+	
 	// Debit
 	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 														  Parameters.ObjectData.Partner,
@@ -515,11 +547,11 @@ Function GetAnalytics_OffsetOfAdvances(Parameters)
 	Else
 		AccountingAnalytics.Debit = Accounts.AccountTransactionsVendor;
 	EndIf;
-	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
 	AccountingAnalytics.Credit = Accounts.AccountAdvancesVendor;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 
 	Return AccountingAnalytics;
 EndFunction
@@ -544,7 +576,47 @@ Function GetAnalytics_VATOutgoing(Parameters)
 	Else	                                                    
 		AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
 	EndIf;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	AdditionalAnalytics = New Structure;
+	AdditionalAnalytics.Insert("Partner"          , Parameters.ObjectData.Partner);
+	AdditionalAnalytics.Insert("Agreement"        , Parameters.ObjectData.Agreement);
+	AdditionalAnalytics.Insert("LegalName"        , Parameters.ObjectData.LegalName);
+	AdditionalAnalytics.Insert("LegalNameContract", Parameters.ObjectData.LegalNameContract);
+	
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses - Other partner (Withholding tax)
+Function GetAnalytics_WithholdingTax(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.RowData.ExpenseType,
+	                                                          Parameters.RowData.ProfitLossCenter);
+	
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	AdditionalAnalytics = New Structure;
+	AdditionalAnalytics.Insert("Item", Parameters.RowData.ItemKey.Item);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.ObjectData.TaxPartner,
+	                                                    Parameters.ObjectData.TaxAgreement,
+	                                                    Parameters.ObjectData.TaxAgreement.CurrencyMovementType.Currency);
+	AdditionalAnalytics = New Structure;
+	AdditionalAnalytics.Insert("Company"          , Parameters.ObjectData.Company);
+	AdditionalAnalytics.Insert("Partner"          , Parameters.ObjectData.TaxPartner);
+	AdditionalAnalytics.Insert("Agreement"        , Parameters.ObjectData.TaxAgreement);
+	AdditionalAnalytics.Insert("LegalName"        , Parameters.ObjectData.TaxLegalName);
+	AdditionalAnalytics.Insert("LegalNameContract", Parameters.ObjectData.TaxLegalNameContract);
+	
+	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 
 	Return AccountingAnalytics;
 EndFunction
@@ -562,9 +634,11 @@ Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, Addition
 	AO = Catalogs.AccountingOperations;
 	If (Parameters.Operation = AO.WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
 		Or Parameters.Operation = AO.WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions
-		Or Parameters.Operation = AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax
-		Or Parameters.Operation = AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions)
+		Or Parameters.Operation = AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions
+		Or Parameters.Operation = AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions)
+		
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Companies")) <> Undefined Then
+			
 		Return Parameters.ObjectData.LegalName;
 	EndIf;
 	Return Value;

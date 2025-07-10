@@ -59,5 +59,16 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	Return;
+	IsFilled_WithholdingTaxAmount = False;
+	For Each Row In ThisObject.ItemList Do
+		If ValueIsFilled(Row.WithholdingTaxAmount) Then
+			IsFilled_WithholdingTaxAmount = True;
+			Break;
+		EndIf;
+	EndDo;
+	If IsFilled_WithholdingTaxAmount Then
+		CheckedAttributes.Add("TaxPartner");
+		CheckedAttributes.Add("TaxAgreement");
+		CheckedAttributes.Add("TaxLegalName");
+	EndIf;
 EndProcedure

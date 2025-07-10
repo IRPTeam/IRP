@@ -316,7 +316,7 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors, New Structure("ByRow", True));
 	Map.Insert(AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions, New Structure("ByRow", True));
 	Map.Insert(AO.WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions, New Structure("ByRow", True));
-	Map.Insert(AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax, New Structure("ByRow", True));
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions, New Structure("ByRow", True));
 	
 	// Fixed asset revaluation
 	Map.Insert(AO.FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues, New Structure("ByRow", True));
@@ -1188,13 +1188,6 @@ Function GetT9013S_AccountsTax(AccountParameters, TaxInfo) Export
 		AccountParameters.Company,
 		AccountParameters.LedgerTypeVariant,
 		TaxInfo.Tax, TaxInfo.VatRate);	
-EndFunction
-
-Function GetT9013S_AccountsWithholdingTax(AccountParameters, WithholdingTaxInfo) Export
-	Return AccountingServerReuse.GetT9013S_AccountsTax_Reuse(AccountParameters.Period,
-		AccountParameters.Company,
-		AccountParameters.LedgerTypeVariant,
-		WithholdingTaxInfo.Tax, WithholdingTaxInfo.WithholdingTaxRate);	
 EndFunction
 
 Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRate) Export

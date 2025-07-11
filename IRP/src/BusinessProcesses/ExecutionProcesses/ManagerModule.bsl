@@ -1,7 +1,7 @@
 
 Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
 	StandardProcessing = False;
-	Presentation = StrTemplate("%1 (%2)", String(Data["Description_" + LocalizationReuse.UserLanguageCode()]), Data.Number);
+	Presentation = StrTemplate("%1 (%2)", String(Data["Description_" + LocalizationReuse.GetLocalizationCode()]), Data.Number);
 EndProcedure
 
 Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
@@ -90,7 +90,8 @@ Function GetExecutionFlowchart(ProcessRef) Export
 	|	StageLineNumber,
 	|	TaskLineNumber";
 	
-	Query.Text = StrReplace(Query.Text, "Description_en", "Description_" + LocalizationReuse.UserLanguageCode());
+	LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "Stages");
+	LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "Tasks");
 	
 	StageSelection = Query.Execute().Select(QueryResultIteration.ByGroups);
 	

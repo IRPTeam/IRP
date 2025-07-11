@@ -123,7 +123,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.IsReposting = False;
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
-	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);	
+	Calculate_BatchKeysInfo(Ref, Parameters, AddInfo);
 	Return Tables;
 EndFunction
 
@@ -150,6 +151,284 @@ EndFunction
 
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
+EndProcedure
+
+Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
+	Query = New Query;
+	Query.Text =
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO tmpRowIDInfo
+	|FROM
+	|	Document.GoodsReceipt.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SourceOfOrigins.Key AS Key,
+	|	CASE
+	|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+	|			THEN SourceOfOrigins.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END AS SerialLotNumber,
+	|	CASE
+	|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+	|			THEN SourceOfOrigins.SourceOfOrigin
+	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+	|	END AS SourceOfOrigin,
+	|	SUM(SourceOfOrigins.Quantity) AS Quantity
+	|INTO tmpSourceOfOrigins
+	|FROM
+	|	Document.GoodsReceipt.SourceOfOrigins AS SourceOfOrigins
+	|WHERE
+	|	SourceOfOrigins.Ref = &Ref
+	|GROUP BY
+	|	SourceOfOrigins.Key,
+	|	CASE
+	|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+	|			THEN SourceOfOrigins.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END,
+	|	CASE
+	|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+	|			THEN SourceOfOrigins.SourceOfOrigin
+	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+	|	END
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Store AS Store,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.Company AS Company,
+	|	SUM(ItemList.QuantityInBaseUnit) AS Quantity,
+	|	ItemList.Ref.Date AS Period,
+	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+	|	ItemList.Key AS Key,
+	|	ItemList.IsPreliminary AS IsPreliminary,
+	|	SUM(ItemList.PreliminaryAmount) AS PreliminaryAmount,
+	|	ItemList.Currency AS Currency,
+	|	RowIDInfo.RowID AS RowID
+	|INTO tmpItemList
+	|FROM
+	|	Document.GoodsReceipt.ItemList AS ItemList
+	|		INNER JOIN tmpRowIDInfo AS RowIDInfo
+	|		ON ItemList.Key = RowIDInfo.Key
+	|		AND RowIDInfo.Ref = &Ref
+	|WHERE
+	|	ItemList.Ref = &Ref
+	|GROUP BY
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	ItemList.Ref.Branch,
+	|	ItemList.Ref.Company,
+	|	ItemList.Ref.Date,
+	|	ItemList.Key,
+	|	ItemList.IsPreliminary,
+	|	ItemList.Currency,
+	|	RowIDInfo.RowID,
+	|	VALUE(Enum.BatchDirection.Receipt)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpItemList.ItemKey AS ItemKey,
+	|	tmpItemList.Store AS Store,
+	|	tmpItemList.Branch AS Branch,
+	|	tmpItemList.Company AS Company,
+	|	tmpItemList.Quantity AS TotalQuantity,
+	|	tmpItemList.Period AS Period,
+	|	tmpItemList.Direction AS Direction,
+	|	tmpItemList.Key AS Key,
+	|	tmpItemList.Currency AS Currency,
+	|	tmpItemList.RowID AS RowID,
+	|
+	|	case when tmpItemList.IsPreliminary then tmpItemList.RowID else undefined end as PreliminaryID,
+	|
+	|	ISNULL(tmpSourceOfOrigins.Quantity, 0) AS QuantityBySourceOrigin,
+	|	CASE
+	|		WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
+	|			THEN ISNULL(tmpSourceOfOrigins.Quantity, 0)
+	|		ELSE tmpItemList.Quantity
+	|	END AS Quantity,
+	|	CASE
+	|		WHEN tmpItemList.Quantity <> 0
+	|			THEN 
+	|
+	|	case when tmpItemList.Quantity = ISNULL(tmpSourceOfOrigins.Quantity, 0) then
+	|		tmpItemList.PreliminaryAmount
+	|	else
+	|			CASE
+	|				WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
+	|					THEN tmpItemList.PreliminaryAmount / tmpItemList.Quantity * ISNULL(tmpSourceOfOrigins.Quantity, 0)
+	|				ELSE tmpItemList.PreliminaryAmount
+	|			END
+	|end
+	|		ELSE 0
+	|	end as PreliminaryAmount,
+	|
+	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
+	|	ISNULL(tmpSourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
+	|	tmpItemList.IsPreliminary AS IsPreliminary
+	|INTO BatchKeysInfo
+	|FROM
+	|	tmpItemList AS tmpItemList
+	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
+	|		ON tmpItemList.Key = tmpSourceOfOrigins.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Taxes.Key,
+	|	Taxes.Ref.Company AS Company,
+	|	&Vat AS Tax,
+	|	Taxes.PreliminaryTaxAmount AS PreliminaryTaxAmount
+	|INTO Taxes
+	|FROM
+	|	Document.GoodsReceipt.ItemList AS Taxes
+	|WHERE
+	|	Taxes.Ref = &Ref
+	|	AND Taxes.PreliminaryTaxAmount <> 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Taxes.Key,
+	|	SUM(Taxes.PreliminaryTaxAmount) AS PreliminaryTaxAmount
+	|INTO TaxesAmounts
+	|FROM
+	|	Taxes AS Taxes
+	|		INNER JOIN InformationRegister.Taxes.SliceLast(&Period, (Company, Tax) IN
+	|			(SELECT
+	|				Taxes.Company,
+	|				Taxes.Tax
+	|			FROM
+	|				Taxes AS Taxes)) AS TaxesSliceLast
+	|		ON TaxesSliceLast.Company = Taxes.Company
+	|		AND TaxesSliceLast.Tax = Taxes.Tax
+	|WHERE
+	|	TaxesSliceLast.Use
+	|	AND TaxesSliceLast.IncludeToLandedCost
+	|GROUP BY
+	|	Taxes.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	BatchKeysInfo.Key,
+	|	CASE
+	|		WHEN BatchKeysInfo.TotalQuantity <> 0
+	|			THEN ISNULL(TaxesAmounts.PreliminaryTaxAmount, 0) / BatchKeysInfo.TotalQuantity * BatchKeysInfo.Quantity
+	|		ELSE 0
+	|	END AS PreliminaryTaxAmount,
+	|	BatchKeysInfo.PreliminaryAmount AS PreliminaryAmount,
+	|	BatchKeysInfo.Quantity AS PreliminaryQuantity,
+	|	BatchKeysInfo.*
+	|FROM
+	|	BatchKeysInfo AS BatchKeysInfo
+	|		LEFT JOIN TaxesAmounts AS TaxesAmounts
+	|		ON BatchKeysInfo.Key = TaxesAmounts.Key
+	|WHERE
+	|	BatchKeysInfo.IsPreliminary
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	GoodsReceipt.Ref AS Document,
+	|	GoodsReceipt.Company AS Company,
+	|	GoodsReceipt.Ref.Date AS Period
+	|FROM
+	|	Document.GoodsReceipt AS GoodsReceipt
+	|WHERE
+	|	GoodsReceipt.Ref = &Ref
+	|	AND TRUE IN
+	|		(SELECT
+	|			IsPreliminary
+	|		FROM
+	|			BatchKeysInfo)";
+	
+	Query.SetParameter("Ref", Ref);
+	Query.SetParameter("Period", Ref.Date);
+	Query.SetParameter("Vat", TaxesServer.GetVatRef());
+
+	QueryResults = Query.ExecuteBatch();
+	BatchKeysInfo = QueryResults[6].Unload();
+	BatchesInfo   = QueryResults[7].Unload();
+
+	CurrencyTable = Ref.Currencies.UnloadColumns();
+	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
+
+	ArrayOfFixedRates = New Array;
+	For Each Row In Ref.Currencies Do
+		If Row.IsFixed Then
+			FixedRates = New Structure("Key, CurrencyFrom, MovementType, Rate, ReverseRate, Multiplicity");
+			FillPropertyValues(FixedRates, Row);
+			ArrayOfFixedRates.Add(FixedRates);
+		EndIf;
+	EndDo;
+	
+	AddedKeys = New Array();
+	For Each Row In BatchKeysInfo Do
+		If AddedKeys.Find(Row.Key) <> Undefined Then
+			Continue;
+		EndIf;
+		AddedKeys.Add(Row.Key);
+		CurrencyParameters = CurrenciesServer.GetNewCurrencyRowParameters();
+		CurrencyParameters.RowKey   = Row.Key;
+		CurrencyParameters.Currency = Row.Currency;
+		CurrencyParameters.Ref      = Ref;
+		CurrenciesServer.AddRowToCurrencyTable(CurrencyParameters, Ref.Date, CurrencyTable, CurrencyMovementType, ArrayOfFixedRates);
+	EndDo;
+
+	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
+	PostingServer.SetPostingDataTable(Parameters.PostingDataTables, Parameters, T6020S_BatchKeysInfo.Name, BatchKeysInfo);
+	Parameters.PostingDataTables[T6020S_BatchKeysInfo].WriteInTransaction = Parameters.IsReposting;
+	
+	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
+	
+	BatchKeysInfo_DataTable = Parameters.PostingDataTables[T6020S_BatchKeysInfo].PrepareTable;
+	
+	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
+	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
+	BatchKeysInfoSettings.Dimensions = 
+		"Period, 
+		|RowID, 
+		|Direction, 
+		|Company, 
+		|Branch, 
+		|Store, 
+		|ItemKey, 
+		|Currency, 
+		|CurrencyMovementType, 
+		|SourceOfOrigin, 
+		|SerialLotNumber,
+		|PreliminaryID,
+		|IsPreliminary";
+	BatchKeysInfoSettings.Totals = "PreliminaryQuantity, PreliminaryAmount, PreliminaryTaxAmount";
+	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
+	
+	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
+	
+	Query = New Query;
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	BatchesInfo.*
+	|INTO BatchesInfo
+	|FROM
+	|	&BatchesInfo AS BatchesInfo";
+	
+	Query.SetParameter("BatchesInfo", BatchesInfo);
+ 	Query.Execute();
 EndProcedure
 
 #EndRegion
@@ -185,29 +464,39 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 
+	Current_R4050B_StockInventory = PostingServer.GetQueryTableByName("R4050B_StockInventory", Parameters);
+	Exists_R4050B_StockInventory  = PostingServer.GetQueryTableByName("Exists_R4050B_StockInventory", Parameters);
+	
+	Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory);
+	Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory);
+	
 	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
-		"Document.GoodsReceipt.ItemList");
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.GoodsReceipt.ItemList");
+	
+	R4035B_IncomingStocks = PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters);
+	Exists_R4035B_IncomingStocks = PostingServer.GetQueryTableByName("Exists_R4035B_IncomingStocks", Parameters);
+	
 	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4035B_IncomingStocks", Parameters), AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		R4035B_IncomingStocks, Exists_R4035B_IncomingStocks, AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
-
+	
+	R4036B_IncomingStocksRequested = PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters);
+	Exists_R4036B_IncomingStocksRequested = PostingServer.GetQueryTableByName("Exists_R4036B_IncomingStocksRequested", Parameters);
+	
 	If Not Cancel And Not AccReg.R4036B_IncomingStocksRequested.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters),
-		PostingServer.GetQueryTableByName("Exists_R4036B_IncomingStocksRequested", Parameters),
-		AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		R4036B_IncomingStocksRequested, Exists_R4036B_IncomingStocksRequested, AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 
+	R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters);
+	Exists_R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters);
+	
 	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4014B_SerialLotNumber", Parameters), AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+		R4014B_SerialLotNumber, Exists_R4014B_SerialLotNumber, AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
-
 EndProcedure
 
 Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -229,6 +518,7 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("IsUseSimpleBatch", FOServer.IsUseSimpleBatch());
 	Return StrParams;
 EndFunction
 
@@ -244,6 +534,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
+	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
@@ -265,6 +556,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4036B_IncomingStocksRequested());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(R6025B_SimpleBatch());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
@@ -328,7 +622,16 @@ Function ItemList()
 		   |	ItemList.ProductionPlanning AS ProductionPlanning,
 		   |	ItemList.Key,
 		   |	ItemList.SimpleBatch AS SimpleBatch,
-		   |	ItemList.Amount
+		   |	ItemList.Amount,
+		   |	
+		   |	ItemList.IsPreliminary AS IsPreliminary
+		   |	
+//		   |	case when ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.PreliminaryStock) then
+//		   |	ItemList.Ref.Currency else undefined end as Currency,
+		   |
+//		   |	case when ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.PreliminaryStock) then
+//		   |	ItemList.Price else 0 end as Price
+		   |
 		   |INTO ItemList
 		   |FROM
 		   |	Document.GoodsReceipt.ItemList AS ItemList
@@ -949,12 +1252,57 @@ Function R6025B_SimpleBatch()
 	|		ON TRUE
 	|WHERE
 	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
-	|	AND UseSimpleBatch.Value
+	|	AND &IsUseSimpleBatch
 	|	AND ItemList.isPreliminaryStock
 	|GROUP BY
 	|	ItemList.Period,
 	|	ItemList.SimpleBatch,
 	|	VALUE(AccumulationRecordType.Receipt)";
+EndFunction
+
+Function T6010S_BatchesInfo()
+	Return 
+		"SELECT
+		|	*
+		|INTO T6010S_BatchesInfo
+		|FROM
+		|	BatchesInfo
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return 
+		"SELECT
+		|	*
+		|INTO T6020S_BatchKeysInfo
+		|FROM
+		|	BatchKeysInfo
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R4050B_StockInventory()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS PreliminaryQuantity,
+		|	0 AS Quantity
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsPreliminary
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey";
 EndFunction
 
 #EndRegion

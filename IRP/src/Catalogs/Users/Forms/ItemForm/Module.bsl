@@ -97,9 +97,16 @@ EndProcedure
 &AtServer
 Procedure FillExistsLangs()
 
-	For Each Lang In Metadata.Languages Do
+	InterfaceLocalizations = LocalizationReuse.GetInterfaceLocalizations();
+	For Each Lang In InterfaceLocalizations Do
+		//@skip-check typed-value-adding-to-untyped-collection
+		Items.InterfaceLocalizationCode.ChoiceList.Add(Lang.LanguageCode, Lang.Synonym);
+	EndDo;
+	
+	DataLocalizations = LocalizationReuse.GetDataLocalizations();
+	For Each Lang In DataLocalizations Do
+		//@skip-check typed-value-adding-to-untyped-collection
 		Items.LocalizationCode.ChoiceList.Add(Lower(Lang.LanguageCode), Lang.Synonym);
-		Items.InterfaceLocalizationCode.ChoiceList.Add(Lower(Lang.LanguageCode), Lang.Synonym);
 	EndDo;
 
 EndProcedure

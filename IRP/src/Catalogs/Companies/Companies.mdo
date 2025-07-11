@@ -554,6 +554,48 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="00b99394-e153-4143-a4a9-63ba58742650">
+    <name>LandedCostAmountCorrectionExpenseType</name>
+    <synonym>
+      <key>en</key>
+      <value>Expense type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExpenseAndRevenueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.IsExpense</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="0cf87d7e-7d8f-4527-a091-4102aca3dc61">
+    <name>LandedCostAmountCorrectionRevenueType</name>
+    <synonym>
+      <key>en</key>
+      <value>Revenue type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExpenseAndRevenueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.IsRevenue</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="1cef8184-c8f4-4ae0-b558-76db940b1ce5">
     <producedTypes>
       <objectType typeId="e9c801b9-6993-4bc6-9c66-a808cd465688" valueTypeId="ef76d03a-c4a6-4068-9bd0-e3f4f8ae223d"/>

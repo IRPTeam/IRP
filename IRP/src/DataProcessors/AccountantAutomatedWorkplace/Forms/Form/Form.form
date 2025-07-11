@@ -3053,6 +3053,7 @@ GROUP BY
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
     <extInfo xsi:type="form:SpreadsheetDocumentExtInfo"/>
   </attributes>
   <attributes>
@@ -3209,6 +3210,7 @@ GROUP BY
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
     <settingsSavedData xsi:type="form:DataPath">
       <segments>LedgerType</segments>
     </settingsSavedData>
@@ -3435,6 +3437,7 @@ GROUP BY
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseBusinessProcess</functionalOptions>
   </attributes>
   <attributes>
     <name>FilesCount</name>
@@ -3594,6 +3597,7 @@ GROUP BY
         <name>RefreshJE</name>
       </handler>
     </action>
+    <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
     <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
@@ -3615,6 +3619,7 @@ GROUP BY
         <name>OpenJE</name>
       </handler>
     </action>
+    <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
     <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>

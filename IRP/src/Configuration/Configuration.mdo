@@ -864,6 +864,7 @@
   <commonModules>CommonModule.DocFixedAssetRevaluationServer</commonModules>
   <commonModules>CommonModule.BusinessProcessesServer</commonModules>
   <commonModules>CommonModule.LoggerServerCall</commonModules>
+  <commonModules>CommonModule.LandedCostServer2</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1004,6 +1005,7 @@
   <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseBusinessProcess</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePreliminary</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1133,6 +1135,7 @@
   <constants>Constant.UseVariableStore</constants>
   <constants>Constant.UseWorkOrders</constants>
   <constants>Constant.UseBusinessProcess</constants>
+  <constants>Constant.UsePreliminary</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
@@ -1491,6 +1494,7 @@
   <enums>Enum.TaskFailActions</enums>
   <enums>Enum.TaskTypes</enums>
   <enums>Enum.TaskResults</enums>
+  <enums>Enum.AmountCorrectionTypes</enums>
   <reports>Report.A0010_TrialBalance</reports>
   <reports>Report.A0011_TrialBalanceByAccount</reports>
   <reports>Report.A0012_AccountCard</reports>
@@ -1521,6 +1525,7 @@
   <reports>Report.R2001_Sales</reports>
   <reports>Report.R2001A_Sales</reports>
   <reports>Report.R2010A_SalesOrders</reports>
+  <reports>Report.R2010A_SalesOrdersExecution</reports>
   <reports>Report.R2011A_SalesOrdersShipment</reports>
   <reports>Report.R2012A_SalesOrdersInvoiceClosing</reports>
   <reports>Report.R3010_CashOnHand</reports>
@@ -1697,6 +1702,7 @@
   <informationRegisters>InformationRegister.Logger</informationRegisters>
   <informationRegisters>InformationRegister.LoggerNotification</informationRegisters>
   <informationRegisters>InformationRegister.LoggerFiles</informationRegisters>
+  <informationRegisters>InformationRegister.T4050_StockInventoryInfo</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>

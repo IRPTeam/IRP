@@ -1,7 +1,7 @@
 
 Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
 	StandardProcessing = False;
-	Presentation = StrTemplate("%1 (%2)", String(Data["Description_" + LocalizationReuse.UserLanguageCode()]), Data.Number);
+	Presentation = StrTemplate("%1 (%2)", String(Data["Description_" + LocalizationReuse.GetLocalizationCode()]), Data.Number);
 EndProcedure
 
 Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)

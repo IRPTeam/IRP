@@ -497,6 +497,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
   </attributes>
   <attributes>
     <name>Filter_DocumentType</name>
@@ -565,6 +566,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseBusinessProcess</functionalOptions>
   </attributes>
   <attributes>
     <name>Panel_GroupReport</name>
@@ -582,6 +584,7 @@
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
   </attributes>
   <attributes>
     <name>Panel_GroupFiles</name>

@@ -148,6 +148,7 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|		ON RegisterBalance.Company = ItemList.Company
 	|		AND RegisterBalance.Store = ItemList.Store
 	|		AND RegisterBalance.ItemKey = ItemList.ItemKey
+	|		AND ItemList.Store.NegativeStockControl
 	|		
 	|WHERE
 	|	(RegisterBalance.QuantityBalance

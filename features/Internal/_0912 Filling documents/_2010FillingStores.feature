@@ -493,8 +493,8 @@ Scenario: _201006 check filling in Store field in the Goods receipt
 			| 'Store 03'       |
 			And I select current line in "List" table
 			* Info message
-				Then "1C:Enterprise" window is opened
-				And I click "Yes" button
+				Then "Update item list info" window is opened
+				And I click "OK" button				
 			And "ItemList" table contains lines
 			| 'Item'       | 'Quantity'   | 'Item key'    | 'Unit'   | 'Store'       |
 			| 'Trousers'   | '2,000'      | '38/Yellow'   | 'pcs'    | 'Store 03'    |

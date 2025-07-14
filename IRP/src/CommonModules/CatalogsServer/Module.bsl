@@ -39,7 +39,7 @@ EndProcedure
 // 
 // Parameters:
 //  Form - ClientApplicationForm - Form
-//  MainAttribute - FormAttribute -
+//  MainAttribute - FormDataStructure, FormAttribute -
 //  Cancel - Boolean - Cancel
 //  StandardProcessing - Boolean - Standard processing
 Procedure OnCreateAtServerObject(Form, MainAttribute, Cancel, StandardProcessing) Export

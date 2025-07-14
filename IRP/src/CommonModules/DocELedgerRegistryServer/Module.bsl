@@ -65,9 +65,9 @@ EndProcedure
 //  TextDocument - Create CSV
 Function CreateCSV(DocRef) Export
 	LocalizationCode = DocRef.LedgerType.ELedgerLocalizationCode;
-	If Not ValueIsFilled(LocalizationCode) Then
-		Raise StrTemplate("Not filled localization code for ledger type [%1]", DocRef.LedgerType);
-	EndIf;
+       If Not ValueIsFilled(LocalizationCode) Then
+               Raise StrTemplate(R().LedgerLocalizationCodeNotFilled, DocRef.LedgerType);
+       EndIf;
 	
 	csv = New TextDocument();
 	
@@ -258,9 +258,9 @@ Function CreateRecords(LineNumber, JERef, BasisLongDescription, LocalizationCode
 		If ValueIsFilled(AccountMainDr) Then
 			ValuesDr.Add(String(AccountMainDr.Code));
 			ValuesDr.Add(AccountMainDr["Description_" + LocalizationCode]);
-		Else
-			Raise StrTemplate("Not defined Account main Dr [%1] [%2]", JERef, Record.AccountDr.Code);
-		EndIf;
+               Else
+                       Raise StrTemplate(R().LedgerAccountMainDrNotDefined, JERef, Record.AccountDr.Code);
+               EndIf;
 		
 		AccountSubDr = GetSubAccount(Record, "AccountDr");
 		If ValueIsFilled(AccountSubDr) Then
@@ -275,9 +275,9 @@ Function CreateRecords(LineNumber, JERef, BasisLongDescription, LocalizationCode
 				
 				ValuesDr.Add(StrConcat(ArraySubDr));
 			EndIf;
-		Else
-			Raise StrTemplate("Not defined Account sub Dr [%1] [%2]", JERef, Record.AccountDr.Code);
-		EndIf;
+               Else
+                       Raise StrTemplate(R().LedgerAccountSubDrNotDefined, JERef, Record.AccountDr.Code);
+               EndIf;
 		
 		ValuesDr.Add(Format(Record.Amount, "NFD=2; NDS=.; NG=;"));
 		ValuesDr.Add("D");
@@ -308,9 +308,9 @@ Function CreateRecords(LineNumber, JERef, BasisLongDescription, LocalizationCode
 		If ValueIsFilled(AccountMainCr) Then
 			ValuesCr.Add(String(AccountMainCr.Code));
 			ValuesCr.Add(AccountMainCr["Description_" + LocalizationCode]);
-		Else
-			Raise StrTemplate("Not defined Account main Cr [%1] [%2]", JERef, Record.AccountCr.Code);
-		EndIf;
+               Else
+                       Raise StrTemplate(R().LedgerAccountMainCrNotDefined, JERef, Record.AccountCr.Code);
+               EndIf;
 		
 		If ValueIsFilled(AccountSubCr) Then
 			ValuesCr.Add(AccountSubCr["Description_" + LocalizationCode]);
@@ -323,9 +323,9 @@ Function CreateRecords(LineNumber, JERef, BasisLongDescription, LocalizationCode
 				
 				ValuesCr.Add(StrConcat(ArraySubCr)); 
 			EndIf;
-		Else
-			Raise StrTemplate("Not defined Account sub Cr [%1] [%2]", JERef, Record.AccountCr.Code);
-		EndIf;
+               Else
+                       Raise StrTemplate(R().LedgerAccountSubCrNotDefined, JERef, Record.AccountCr.Code);
+               EndIf;
 		
 		ValuesCr.Add(Format(Record.Amount, "NFD=2; NDS=.; NG=;"));
 		ValuesCr.Add("C");

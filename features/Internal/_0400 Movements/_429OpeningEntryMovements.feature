@@ -583,17 +583,17 @@ Scenario: _042918 check Opening entry movements by the Register  "R4050 Stock in
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 14 dated 01.12.2022 12:41:27'   | ''              | ''                      | ''            | ''               | ''                    | ''            |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''               | ''                    | ''            |
-			| 'Register  "R4050 Stock inventory"'            | ''              | ''                      | ''            | ''               | ''                    | ''            |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                    | ''            |
-			| ''                                             | ''              | ''                      | 'Quantity'    | 'Company'        | 'Store'               | 'Item key'    |
-			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '20'          | 'Main Company'   | 'Trade agent store'   | 'PZU'         |
-			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '30'          | 'Main Company'   | 'Trade agent store'   | 'XS/Blue'     |
-			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '100'         | 'Main Company'   | 'Trade agent store'   | 'UNIQ'        |
-			| ''                                             | 'Expense'       | '01.12.2022 12:41:27'   | '20'          | 'Main Company'   | 'Store 05'            | 'PZU'         |
-			| ''                                             | 'Expense'       | '01.12.2022 12:41:27'   | '30'          | 'Main Company'   | 'Store 05'            | 'XS/Blue'     |
-			| ''                                             | 'Expense'       | '01.12.2022 12:41:27'   | '100'         | 'Main Company'   | 'Store 05'            | 'UNIQ'        |
+			| 'Opening entry 14 dated 01.12.2022 12:41:27'   | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                         |
+			| 'Document registrations records'               | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                         |
+			| 'Register  "R4050 Stock inventory"'            | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                         |
+			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''                    | ''            |'Attributes'                |
+			| ''                                             | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'               | 'Item key'    |'Calculation movement cost' |
+			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '20'          | ''                    | 'Main Company'   | 'Trade agent store'   | 'PZU'         | ''                         |
+			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '30'          | ''                    | 'Main Company'   | 'Trade agent store'   | 'XS/Blue'     | ''                         |
+			| ''                                             | 'Receipt'       | '01.12.2022 12:41:27'   | '100'         | ''                    | 'Main Company'   | 'Trade agent store'   | 'UNIQ'        | ''                         |
+			| ''                                             | 'Expense'       | '01.12.2022 12:41:27'   | '20'          | ''                    | 'Main Company'   | 'Store 05'            | 'PZU'         | ''                         |
+			| ''                                             | 'Expense'       | '01.12.2022 12:41:27'   | '30'          | ''                    | 'Main Company'   | 'Store 05'            | 'XS/Blue'     | ''                         |
+			| ''                                             | 'Expense'       | '01.12.2022 12:41:27'   | '100'         | ''                    | 'Main Company'   | 'Store 05'            | 'UNIQ'        | ''                         |
 		And I close all client application windows
 
 

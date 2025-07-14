@@ -24,6 +24,7 @@ Scenario: _028500 preparation (create document Sales return)
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
 		When Create catalog Partners objects
+		When Create OtherPartners objects		
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
 		When Create catalog Items objects
@@ -67,6 +68,12 @@ Scenario: _028500 preparation (create document Sales return)
 			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document SalesInvoice objects (partner Other)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(135).GetObject().Write(DocumentWriteMode.Posting);"    |	
+		When Create document SalesInvoice objects (contract currency differs from the invoice currency)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(222).GetObject().Write(DocumentWriteMode.Posting);"    |	
 		When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -835,3 +842,82 @@ Scenario: _300512 check Use GR filling from store when create SR based on SI
 			| 'Boots'   | '36/18SD'    | 'Yes'                  |
 			| 'Boots'   | '37/18SD'    | 'Yes'                  |
 			| 'Dress'   | 'S/Yellow'   | 'Yes'                  |
+
+Scenario: _028515 create SR with partner Other
+	And I close all client application windows
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '135'       |
+		And I select current line in "List" table
+	* Create SR
+		And I click the button named "FormDocumentSalesReturnGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+	* check SR document	
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And form attributes have values:
+			| 'Name'                      | 'Value'                | 'HowToSearch' |
+			| 'Agreement'                 | "Other partner 1"      | ''            |
+			| 'Company'                   | "Main Company"         | ''            |
+			| 'Currency'                  | "TRY"                  | ''            |
+			| 'CurrencyTotalAmount'       | "TRY"                  | ''            |
+			| 'ItemListTotalNetAmount'    | "250,00"               | ''            |
+			| 'ItemListTotalOffersAmount' | "0,00"                 | ''            |
+			| 'ItemListTotalTaxAmount'    | "45,00"                | ''            |
+			| 'ItemListTotalTotalAmount'  | "295,00"               | ''            |
+			| 'LegalName'                 | "Other partner 1"      | ''            |
+			| 'Partner'                   | "Other partner 1"      | ''            |
+			| 'PriceIncludeTax'           | "No"                   | ''            |
+			| 'Store'                     | "Store 01"             | ''            |
+			| 'TransactionType'           | "Return from customer" | ''            |
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows
+
+Scenario: _028516 check if the return price matches the invoice price (contract currency differs from the invoice currency)
+	And I close all client application windows
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '222'       |
+		And I select current line in "List" table
+	* Create SR
+		And I click the button named "FormDocumentSalesReturnGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I go to line in "ItemList" table
+			| "#" | "Item"  | "Item key" |
+			| "2" | "Boots" | "36/18SD"  |
+		And I select current line in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* check SR document	
+		And form attributes have values:
+			| 'Name'                      | 'Value'                    | 'HowToSearch' |
+			| 'Agreement'                 | "Basic Partner terms, TRY" | ''            |
+			| 'Company'                   | "Main Company"             | ''            |
+			| 'Currency'                  | "USD"                      | ''            |
+			| 'CurrencyTotalAmount'       | "USD"                      | ''            |
+			| 'ItemListTotalNetAmount'    | "319,19"                   | ''            |
+			| 'ItemListTotalOffersAmount' | "0,00"                     | ''            |
+			| 'ItemListTotalTaxAmount'    | "57,45"                    | ''            |
+			| 'ItemListTotalTotalAmount'  | "376,64"                   | ''            |
+			| 'LegalName'                 | "Company Adel"             | ''            |
+			| 'Partner'                   | "Crystal"                  | ''            |
+			| 'PriceIncludeTax'           | "Yes"                      | ''            |
+			| 'Store'                     | "Store 01"                 | ''            |
+			| 'TransactionType'           | "Return from customer"     | ''            |
+		And "ItemList" table became equal
+			| '#' | 'Item'     | 'Item key'  | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Source of origins' | 'Return reason' | 'Sales invoice' | 'Quantity' | 'Price'  | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Project' | 'Store'    | 'Sales return order' | 'Revenue type' | 'VAT' | 'Offers amount' | 'Landed cost' | 'Landed cost tax' | 'Sales person' |
+			| '1' | 'Trousers' | '36/Yellow' | ''                   | 'No'                 | '20,89'      | 'pcs'  | ''                   | ''                  | ''              | '*'             | '2,000'    | '68,48'  | '116,07'     | 'No'                | '136,96'       | ''                    | ''        | 'Store 01' | ''                   | ''             | '18%' | ''              | ''            | ''                | ''             |
+			| '2' | 'Boots'    | '36/18SD'   | ''                   | 'No'                 | '36,56'      | 'pcs'  | ''                   | ''                  | ''              | '*'             | '2,000'    | '119,84' | '203,12'     | 'No'                | '239,68'       | ''                    | ''        | 'Store 01' | ''                   | ''             | '18%' | ''              | ''            | ''                | ''             |
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows
+				

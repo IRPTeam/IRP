@@ -3,10 +3,18 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
+	For Each Row In ThisObject.ItemList Do
+		Parameters = CurrenciesClientServer.GetParameters_GR_Preliminary(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+
 	If TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer Then
 		Partner = Undefined;
 		LegalName = Undefined;
 	EndIf;
+	
+	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
 	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);
@@ -98,13 +106,13 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndIf;
 	
-	If TransactionType = Enums.GoodsReceiptTransactionTypes.PreliminaryStock Then
+	If TransactionType = Enums.GoodsReceiptTransactionTypes.PreliminaryStock And FOServer.IsUseSimpleBatch() Then
 		VT = ItemList.Unload();
 		VT.GroupBy("PurchaseInvoice");
 		
-		If VT.Count() > 1 OR VT.Count() = 1 AND NOT VT[0].PurchaseInvoice.IsEmpty() Then
-			Raise "Change transaction type or clear purchase invoice. In preliminary type can not be filled purchase invoice";
-		EndIf;
+        If VT.Count() > 1 OR VT.Count() = 1 AND NOT VT[0].PurchaseInvoice.IsEmpty() Then
+                Raise R().GoodsReceiptPreliminaryPurchaseInvoice;
+        EndIf;
 	EndIf;
 	
 	If ValueIsFilled(ThisObject.Company) Then
@@ -161,4 +169,16 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			EndIf;
 		EndDo;
 	EndIf;
+	
+	For Each Row In ThisObject.ItemList Do
+		If Row.IsPreliminary 
+			And Not ValueIsFilled(Row.Currency) 
+			And (ValueIsFilled(Row.PreliminaryAmount) Or ValueIsFilled(Row.PreliminaryTaxAmount)) Then
+				
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_184, 
+				"Object.ItemList[" + (Row.LineNumber - 1) + "].Currency", 
+				"Object.ItemList");
+		EndIf;
+	EndDo;
 EndProcedure

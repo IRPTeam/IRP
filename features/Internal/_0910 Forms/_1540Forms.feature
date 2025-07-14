@@ -1393,6 +1393,7 @@ Scenario: _012026 check Partners selection form (SO)
 	* Create partner
 		And I click the button named "FormCreate"
 		And I input "Test Partner" text in "ENG" field
+		And I set checkbox named "Customer"	
 		And I click "Save and close" button
 		And I wait "Partner (create) *" window closing in 20 seconds
 	* Check current position in list

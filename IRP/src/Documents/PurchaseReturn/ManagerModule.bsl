@@ -216,6 +216,12 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
 		"Document.PurchaseReturn.ItemList");
 
+	Current_R4050B_StockInventory = PostingServer.GetQueryTableByName("R4050B_StockInventory", Parameters);
+	Exists_R4050B_StockInventory  = PostingServer.GetQueryTableByName("Exists_R4050B_StockInventory", Parameters);
+	
+	Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory);
+	Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory);
+	
 	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
@@ -288,6 +294,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
@@ -897,6 +904,38 @@ Function T6020S_BatchKeysInfo()
 		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))";
 EndFunction
 
+Function R5015B_OtherPartnersTransactions()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Basis,
+		|	ItemList.Key,
+		|	-SUM(ItemList.Amount) AS Amount
+		|INTO R5015B_OtherPartnersTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsOther
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Key";
+EndFunction
+
 Function R6025B_SimpleBatch()
 	Return 
 	"SELECT
@@ -1051,12 +1090,15 @@ Function GetAnalytics_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory(Par
 	                                                      Parameters.ObjectData.Currency);
 
 	// Debit
-	AccountingAnalytics.Debit = Debit.AccountTransactionsVendor;
+	If Parameters.ObjectData.Agreement.Type = Enums.AgreementTypes.Other Then
+		AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
+	Else                           
+		AccountingAnalytics.Debit = Debit.AccountTransactionsVendor;
+	EndIf;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
-	
-	
+		
 	// Credit
 	Credit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
 	AccountingAnalytics.Credit = Credit.Account;
@@ -1074,8 +1116,11 @@ Function GetAnalytics_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming(Para
 	                                                      Parameters.ObjectData.Partner, 
 	                                                      Parameters.ObjectData.Agreement,
 	                                                      Parameters.ObjectData.Currency);
-	
-	AccountingAnalytics.Debit = Debit.AccountTransactionsVendor;
+	If Parameters.ObjectData.Agreement.Type = Enums.AgreementTypes.Other Then
+		AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
+	Else                           
+		AccountingAnalytics.Debit = Debit.AccountTransactionsVendor;
+	EndIf;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);

@@ -42,7 +42,7 @@ Function OpenShift(ConsolidatedRetailSales) Export
 	DataKKTSettings.Info.CRS = ConsolidatedRetailSales;
 	If Not EquipmentFiscalPrinterAPIServer.GetDataKKT(CRS.FiscalPrinter, DataKKTSettings) Then
 		CommonFunctionsClientServer.ShowUsersMessage(DataKKTSettings.Info.Error);
-		Raise "Can not get data KKT";
+              Raise R().CannotGetDataKKT;
 	EndIf;
 
 	InputParameters = EquipmentFiscalPrinterAPIClientServer.InputParameters();
@@ -464,11 +464,11 @@ Function CheckKM(Hardware, RequestKM) Export
 		OR RequestKMSettings.In.RequestKM.MarkingCode = "VGVzdEZhbHNlU3RyaW5n" Then
 
 		ProcessingKMResultSettings.Info.Approved = False;
-	ElsIf RequestKMSettings.In.RequestKM.MarkingCode = "RiseTestFalseString"
-		OR RequestKMSettings.In.RequestKM.MarkingCode = "UmlzZVRlc3RGYWxzZVN0cmluZw==" Then
-	
-		Raise "RiseTestFalseString";
-	EndIf;
+        ElsIf RequestKMSettings.In.RequestKM.MarkingCode = "RiseTestFalseString"
+                OR RequestKMSettings.In.RequestKM.MarkingCode = "UmlzZVRlc3RGYWxzZVN0cmluZw==" Then
+
+                Raise R().RiseTestFalseString;
+        EndIf;
 
 	Return ProcessingKMResultSettings;
 EndFunction
@@ -531,9 +531,9 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 			CheckPackage.Parameters.CorrectionData.Number = "0";
 		EndIf;
 		
-		If IsBlankString(CheckPackage.Parameters.CorrectionData.Description) Then
-			Raise "CorrectionDescription has to be filled.";
-		EndIf;
+                If IsBlankString(CheckPackage.Parameters.CorrectionData.Description) Then
+                        Raise R().CorrectionDescriptionRequired;
+                EndIf;
 		
 	Else
 		CheckPackage.Parameters.CorrectionData = New Structure();
@@ -636,14 +636,14 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 	ElsIf SourceData.TransactionType = Enums.IncomingPaymentTransactionType.RetailCustomerAdvance Then
 		CheckPackage.Parameters.OperationType = 1;
 	Else
-		Raise "Unknown transaction type";
+            Raise R().UnknownTransactionType;
 	EndIf;
 
 	PaymentListData = SourceData.PaymentList.Unload();
 	PaymentListData.GroupBy("RetailCustomer");
-	If PaymentListData.Count() > 1 Then
-		Raise("A few retail customer found!");
-	EndIf;
+       If PaymentListData.Count() > 1 Then
+               Raise R().FewRetailCustomerFound;
+       EndIf;
 	RetailCustomer = PaymentListData[0].RetailCustomer;
 	If Not RetailCustomer.IsEmpty() Then
 
@@ -1017,26 +1017,26 @@ EndProcedure
 
 Procedure FillControlString(CCSRows, ItemRow, FiscalStringData)
 	If CCSRows.Count() = 0 Then
-		Raise "Control string code not filled. Row: " + ItemRow.LineNumber;
+                Raise StrTemplate(R().ControlStringCodeNotFilled, ItemRow.LineNumber);
 	ElsIf Not CCSRows.Count() = ItemRow.Quantity Then
-		Raise "Control string code count not the same as item quantity. Row: " + ItemRow.LineNumber;
+                Raise StrTemplate(R().ControlStringCodeCountMismatch, ItemRow.LineNumber);
 	ElsIf CCSRows.Count() > 1 Then // TODO: Fix this
-		Raise "Not suppoted send more then 1 control code by each row. Row: " + ItemRow.LineNumber;
+                Raise StrTemplate(R().ControlStringMultipleRowsNotSupported, ItemRow.LineNumber);
 	ElsIf CCSRows[0].NotCheck And CCSRows[0].ControlCodeStringType = Enums.ControlCodeStringType.MarkingCode Then
 		// Not check and not send
 		FiscalStringData.CalculationSubject = 1;
 	Else
 		CodeString = CCSRows[0].CodeString;
 		If CCSRows[0].ControlCodeStringType = Enums.ControlCodeStringType.None Then
-			Raise "Can not fiscalize item with Control Code String Type as None. Select type in item, or switch off Control string";
+                        Raise R().CannotFiscalizeCCSTypeNone;
 		ElsIf CCSRows[0].ControlCodeStringType.IsEmpty() Then
-			Raise "Can not fiscalize item while Control Code String Type is Empty. Select type in item, or switch off Control string";
+                        Raise R().CannotFiscalizeCCSTypeEmpty;
 		ElsIf CCSRows[0].ControlCodeStringType = Enums.ControlCodeStringType.MarkingCode Then
 			FiscalStringData.MarkingCode = ControlCodeStringServer.GetMarkingCodeString(CodeString);
 		ElsIf CCSRows[0].ControlCodeStringType = Enums.ControlCodeStringType.GoodCodeData Then
 			FiscalStringData.GoodCodeData.Insert(CCSRows[0].Prefix, CodeString);
 		Else
-			Raise "Unknown ControlCodeStringType";
+                        Raise R().UnknownControlCodeStringType;
 		EndIf;
 		FiscalStringData.CalculationSubject = 33;	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 	EndIf;

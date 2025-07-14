@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b073c126-4199-4b12-82cd-86bb966e0cab">
+  <producedTypes>
+    <containerType typeId="33b278fa-913e-4667-b82e-a02b16c7339f" valueTypeId="5885d612-5edc-4290-84b7-188a4a4902ab"/>
+  </producedTypes>
+  <name>typeChatObject</name>
+  <synonym>
+    <key>en</key>
+    <value>Type chat object</value>
+  </synonym>
+  <type>
+    <types>DocumentRef.Issue</types>
+    <types>DocumentRef.SalesInvoice</types>
+    <types>DocumentRef.PurchaseInvoice</types>
+    <types>DocumentRef.StockAdjustmentAsSurplus</types>
+    <types>DocumentRef.StockAdjustmentAsWriteOff</types>
+  </type>
+</mdclass:DefinedType>

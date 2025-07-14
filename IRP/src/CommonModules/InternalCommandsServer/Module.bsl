@@ -20,7 +20,7 @@ EndProcedure
 // 
 // Parameters:
 //  Form - ClientApplicationForm - Form
-//  MainAttribute - FormAttribute, DynamicList - Main attribute
+//  MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main attribute
 //  ObjectFullName - String - Object full name
 //  FormType - EnumRef.FormTypes - Form type
 //  AddInfo - Undefined - Add info
@@ -128,7 +128,7 @@ EndProcedure
 // Parameters:
 //  FullCommandName - String - Full command
 //  Form - ClientApplicationForm - Form
-//  MainAttribute - FormAttribute, DynamicList - Main form attribute
+//  MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main form attribute
 //  Targets - AnyRef, Array of AnyRef - Command target
 //  AddInfo - Undefined -  Add info
 Procedure RunCommandAction(Val FullCommandName, Form, MainAttribute, Targets, AddInfo = Undefined) Export
@@ -263,6 +263,7 @@ EndFunction
 // * Name - String - 
 // * Title - String - 
 // * ToolTip - String - 
+// * Picture - String - 
 // * LocationGroup - String - 
 // * Type - String - 
 // * Representation - String - 
@@ -273,6 +274,7 @@ Function GetCommandGroupDescription() Export
 	CommandGroupDescription.Insert("Name", "");
 	CommandGroupDescription.Insert("Title", "");
 	CommandGroupDescription.Insert("ToolTip", "");
+	CommandGroupDescription.Insert("Picture", "");
 	
 	CommandGroupDescription.Insert("LocationGroup", "");
 	
@@ -293,7 +295,7 @@ EndFunction
 // 	CommandParameters - Structure - Command parameters:
 //  * CommandDescription - See InternalCommandsServer.GetCommandDescription
 //  * Form - ClientApplicationForm - Form
-//  * MainAttribute - FormAttribute, DynamicList - Main attribute
+//  * MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main attribute
 //  * ObjectFullName - String - Object full name
 //  * FormType - EnumRef.FormTypes - Form type
 //  Cancel - Boolean - Cancel 
@@ -310,7 +312,7 @@ EndProcedure
 //  * CommandButton - FormButton - Command button
 //  * CommandDescription - See InternalCommandsServer.GetCommandDescription
 //  * Form - ClientApplicationForm - Form
-//  * MainAttribute - FormAttribute, DynamicList - Main attribute
+//  * MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main attribute
 //  * ObjectFullName - String - Object full name
 //  * FormType - EnumRef.FormTypes - Form type
 //  AddInfo - Undefined - Add info
@@ -386,6 +388,11 @@ Function GetFormGroupByName(Form, LocationGroup, TableName = "")
 	ElsIf GroupType = FormGroupType.Popup Then
 		ButtonRepresentationValue = ButtonRepresentation[CommandGroupDescription.Representation]; // ButtonRepresentation
 		FormGroup.Representation = ButtonRepresentationValue;
+	EndIf;
+	
+	If Not IsBlankString(CommandGroupDescription.Picture) Then
+		CommandPicture = PictureLib[CommandGroupDescription.Picture]; // Picture
+		FormGroup.Picture = CommandPicture;
 	EndIf;
 	
 	Return FormGroup;

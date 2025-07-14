@@ -224,6 +224,45 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="3175f374-321f-42d7-9b3e-a9645d0dae80">
+    <name>PreliminaryQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Preliminary quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="e3c10c14-8df5-4b6d-a9c0-fb0e71a46c99">
+    <name>PreliminaryAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Preliminary amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="f95280d0-8857-42e8-a1e8-264674bc9c23">
+    <name>PreliminaryTaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Preliminary tax amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <attributes uuid="828b931a-610f-45d5-a460-f22bae3a326d">
     <name>CalculationMovementCost</name>
     <synonym>

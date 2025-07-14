@@ -182,21 +182,21 @@ EndProcedure
 
 #EndRegion
 
-#Region PAYER
+#Region LEGAL_NAME
 
 &AtClient
-Procedure PaymentListPayerOnChange(Item)
-	DocIncomingPaymentOrderClient.PaymentListPayerOnChange(Object, ThisObject, Item);
+Procedure PaymentListLegalNameOnChange(Item)
+	DocIncomingPaymentOrderClient.PaymentListLegalNameOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocIncomingPaymentOrderClient.PaymentListPayerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+Procedure PaymentListLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocIncomingPaymentOrderClient.PaymentListLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayerEditTextChange(Item, Text, StandardProcessing)
-	DocIncomingPaymentOrderClient.PaymentListPayerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+Procedure PaymentListLegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocIncomingPaymentOrderClient.PaymentListLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

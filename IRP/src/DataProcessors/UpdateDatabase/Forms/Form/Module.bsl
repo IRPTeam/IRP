@@ -178,9 +178,10 @@ Function GetUpdateIcon(UpdateInfo)
 		Return 2;
 	ElsIf UpdateInfo.Status = "InProgress" Then
 		Return 3;
-	Else
-		Raise StrTemplate("<Get icon> Unsupported update status [%1]", UpdateInfo.Status);
-	EndIf;
+       Else
+               // %UnsupportedUpdateStatus
+               Raise StrTemplate(R().UnsupportedUpdateStatus, UpdateInfo.Status);
+       EndIf;
 EndFunction
 
 &AtClientAtServerNoContext
@@ -193,9 +194,10 @@ Function GetUpdateColor(UpdateInfo)
 		Return WebColors.PaleGreen;
 	ElsIf UpdateInfo.Status = "InProgress" Then
 		Return WebColors.LightSkyBlue;
-	Else
-		Raise StrTemplate("<Get color> Unsupported update status [%1]", UpdateInfo.Status);
-	EndIf;
+       Else
+               // %UnsupportedUpdateStatus
+               Raise StrTemplate(R().UnsupportedUpdateStatus, UpdateInfo.Status);
+       EndIf;
 EndFunction
 
 &AtClientAtServerNoContext

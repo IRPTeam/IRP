@@ -66,7 +66,7 @@ Procedure FetchFromCacheBeforeChange(FormParameters, Rows)
 		EndIf;
 		If ValueIsFilled(FormParameters.PropertyBeforeChange.List.DataPath) Then
 			If Rows = Undefined Then
-				Raise "PropertyBeforeChange.List.DataPath is set but rows is Undefined";
+                                Raise R().PropertyBeforeChangeDataPathNoRows;
 			EndIf;
 			FormParameters.PropertyBeforeChange.List.Value = 
 				GetCacheBeforeChange(CacheBeforeChange.CacheList, FormParameters.PropertyBeforeChange.List.DataPath, Rows);
@@ -78,7 +78,7 @@ Function GetCacheBeforeChange(Cache, DataPath, Rows = Undefined)
 	Segments = StrSplit(DataPath, ".");
 	If Segments.Count() = 2 Then
 		If Rows = Undefined Then
-			Raise StrTemplate("Error read data from cache by data path [%1] rows is Undefined", DataPath);
+                        Raise StrTemplate(R().CacheRowsUndefined, DataPath);
 		EndIf;
 		TableName  = Segments[0];
 		ColumnName = Segments[1];
@@ -101,13 +101,13 @@ Function GetCacheBeforeChange(Cache, DataPath, Rows = Undefined)
 		Return Result;
 	ElsIf Segments.Count() = 1 Then
 		If Not Cache.Property(DataPath) Then
-			Raise StrTemplate("Property by DataPath [%1] not found in CacheBeforeChange", DataPath);
+                        Raise StrTemplate(R().CachePropertyNotFound, DataPath);
 		EndIf;
 		// value in attribute before it was changed
 		ValueBeforeChange = Cache[DataPath];
 		Return New Structure("DataPath, ValueBeforeChange", DataPath, ValueBeforeChange);
-	Else
-		Raise StrTemplate("Wrong property data path [%1]", DataPath);
+                Else
+                        Raise StrTemplate(R().WrongDataPath, DataPath);
 	EndIf;
 EndFunction
 
@@ -127,9 +127,9 @@ Procedure UpdateCacheBeforeChange(Object, Form)
 	ListProperties = StrSplit(GetListPropertyNamesBeforeChange(), ",");
 	For Each ListProperty In ListProperties Do
 		Segments = StrSplit(ListProperty, ".");
-		If Segments.Count() <> 2 Then
-			Raise StrTemplate("Wrong list property [%1]", ListProperty);
-		EndIf;
+                If Segments.Count() <> 2 Then
+                        Raise StrTemplate(R().WrongListProperty, ListProperty);
+                EndIf;
 		TableName  = TrimAll(Segments[0]);
 		ColumnName = TrimAll(Segments[1]);
 		
@@ -322,9 +322,17 @@ Procedure OnChainComplete(Parameters) Export
 		Return;
 	EndIf;
 	
+	If Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		If Parameters.FunctionalOptions.IsUsePreliminary Then
+			__tmp_CommonDocuments_OnChainComplete(Parameters, False);
+		Else
+			__tmp_GoodsShipmentReceipt_OnChainComplete(Parameters);
+		EndIf;
+		Return;
+	EndIf;
+	
 	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentPlaningOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt" Then
 		__tmp_GoodsShipmentReceipt_OnChainComplete(Parameters);
@@ -877,13 +885,13 @@ Procedure RemoveFromCache(DataPaths, Parameters, RaiseException = True)
 				If Not RaiseException Then
 					Return;
 				EndIf;
-				Raise StrTemplate("Not found property in cache for delete [%1]", DataPath);
+                                Raise StrTemplate(R().CachePropertyDeleteNotFound, DataPath);
 			EndIf;
 			For Each Row In Parameters.Cache[TableName] Do
 				Row.Delete(ColumnName);
 			EndDo;
 		Else
-			Raise StrTemplate("Wrong datapath remove from cache [%1]", DataPath);
+                        Raise StrTemplate(R().WrongDatapathRemoveCache, DataPath);
 		EndIf;
 	EndDo;
 EndProcedure
@@ -908,7 +916,7 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 	If Clone Then // Copy()
 		OriginRows = GetRowsByCurrentData(Form, TableName, OriginRow);
 		If Not OriginRows.Count() Then
-			Raise "Not found origin row for clone";
+                     Raise R().NotFoundOriginRowForClone;
 		EndIf;
 		NewRow.Key = String(New UUID());
 		
@@ -973,7 +981,7 @@ Function AddOrCopyRowSimpleTable(Object, Form, TableName, Cancel, Clone, OriginR
 	If Clone Then // Copy()
 		OriginRows = GetRowsByCurrentData(Form, TableName, OriginRow);
 		If Not OriginRows.Count() Then
-			Raise "Not found origin row for clone";
+                     Raise R().NotFoundOriginRowForClone;
 		EndIf;
 		NewRow.Key = String(New UUID());
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
@@ -2977,6 +2985,22 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_IS_PRELIMINARY
+
+// ItemList.IsPreliminary
+Procedure ItemListIsPreliminaryChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListIsPreliminary(Parameters);
+EndProcedure
+
+Procedure OnSetItemListIsPreliminary(Parameters) Export
+	Parameters.Form.Modified = True;
+	Parameters.Form.FormSetVisibilityAvailability();
+EndProcedure
+
+#EndRegion
+
 Procedure OnSetCalculationsNotify(Parameters) Export
 	UpdateTotalAmounts(Parameters);
 EndProcedure
@@ -3515,6 +3539,31 @@ Procedure OnSetPayrollListsAmountNotify(Parameters) Export
 EndProcedure
 
 #EndRegion
+
+#EndRegion
+
+#Region SALARY_TAX_LIST
+
+// SalaryTaxList.Partner
+Procedure SalaryTaxListPartnerOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "SalaryTaxList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "SalaryTaxList", Rows);
+	ControllerClientServer_V2.SalaryTaxListPartnerOnChange(Parameters);
+EndProcedure
+
+// SalaryTaxList.Agreement
+Procedure SalaryTaxListAgreementOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "SalaryTaxList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "SalaryTaxList", Rows);
+	ControllerClientServer_V2.SalaryTaxListAgreementOnChange(Parameters);
+EndProcedure
+
+// SalaryTaxList.LegalName
+Procedure SalaryTaxListLegalNameOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "SalaryTaxList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "SalaryTaxList", Rows);
+	ControllerClientServer_V2.SalaryTaxListLegalNameOnChange(Parameters);
+EndProcedure
 
 #EndRegion
 
@@ -4230,8 +4279,7 @@ Procedure OnSetPartnerNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportFromTradeAgent"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "Payroll" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	

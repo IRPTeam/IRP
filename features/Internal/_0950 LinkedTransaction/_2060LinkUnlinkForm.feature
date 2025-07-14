@@ -4704,8 +4704,8 @@ Scenario: _2060036 check link/unlink form in the PO - GR - PI (use variable stor
 			| Description |
 			| Store 05    |
 		And I select current line in "List" table
-		If "1C:Enterprise" window is opened Then
-			And I click "Yes" button		
+		If "Update item list info" window is opened Then
+			And I click "OK" button		
 	// EndTemp
 		And "ItemList" table became equal
 			| '#' | 'Internal links' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key' | 'Use serial lot number' | 'Serial lot numbers' | 'Store'    | 'Quantity' | 'Unit'           | 'Receipt basis'                                  | 'Currency' | 'Is closed order' | 'Purchase order'                                 | 'Purchase invoice' |
@@ -4777,8 +4777,8 @@ Scenario: _2060036 check link/unlink form in the PO - GR - PI (use variable stor
 			| Description |
 			| Store 05    |
 		And I select current line in "List" table
-		If "1C:Enterprise" window is opened Then
-			And I click "Yes" button
+		If "Update item list info" window is opened Then
+			And I click "OK" button	
 		// EndTemp
 		And "ItemList" table became equal
 			| '#' | 'Internal links' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key' | 'Use serial lot number' | 'Serial lot numbers' | 'Store'    | 'Quantity' | 'Unit'           | 'Receipt basis'                                  | 'Currency' | 'Is closed order' | 'Purchase order'                                 | 'Purchase invoice' |
@@ -5015,14 +5015,145 @@ Scenario: _2060041 check link/unlink form in the PO - PI (use variable item key,
 			| 'Phone A' | 'Blue'     | '5,000'    |
 			| 'Router'  | 'Router'   | '1,000'    |
 		And I close all client application windows
-		
 
-				
+Scenario: _2060042 check link/unlink in first posting (PO date later than PI)
+	And I close all client application windows
+	* Create PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+	* Fillling main info
+		And I select from the drop-down list named "Partner" by "Crystal" string
+		And I select from the drop-down list named "Agreement" by "Vendor, TRY" string		
+		And I select "Approved" exact value from the drop-down list named "Status"
+	* Adding Items		
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Boots" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "38/18SD" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "1 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Dress" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "M/White" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "100,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to the tab named "GroupOther"
+		And I input "10.06.2025 13:27:02" text in the field named "Date"				
+		And I click the button named "FormPost"
+		And I delete "$$PurchaseOrder01$$" variable
+		And I delete "$$NumberPurchaseOrder0101$$" variable
+		And I save the window as "$$PurchaseOrder01$$"
+		And I save the value of "Number" field as "$$NumberPurchaseOrder01$$"
+	* Create PI
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I move to the tab named "GroupOther"
+		And I move to the tab named "GroupMore"
+		And I input "08.06.2025 16:22:10" text in the field named "Date"
+		And I click the button named "FormPost"
+	* Check
+		Then there are lines in TestClient message log
+			|'Wrong linked row [1]: Document date [08.06.2025 16:22:10] less than Basis date [10.06.2025 13:27:02]'|
+			|'Wrong linked row [2]: Document date [08.06.2025 16:22:10] less than Basis date [10.06.2025 13:27:02]'|
+	And I close all client application windows									
 
-				
-		
-				
-				
-				
+Scenario: _2060043 check link/unlink in first posting (PI date later than PO)
+	And I close all client application windows
+	* Select PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'                    |
+			| '$$NumberPurchaseOrder01$$' |
+		And I select current line in "List" table
+	* Change PO date later than PI
+		And I move to the tab named "GroupOther"
+		And I input "06.06.2025 11:22:11" text in the field named "Date"
+		And I click the button named "FormPost"			
+	* Create PI
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I move to the tab named "GroupOther"
+		And I move to the tab named "GroupMore"
+		And I input "08.06.2025 16:22:10" text in the field named "Date"
+		And I click the button named "FormPost"
+	* Check
+		Then user message window does not contain messages
+		And I delete "$$PurchaseInvoice01$$" variable
+		And I delete "$$NumberPurchaseInvoice01$$" variable
+		And I save the window as "$$PurchaseInvoice01$$"
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice01$$"
+	And I close all client application windows
 
-				
+Scenario: _2060044 check link/unlink in first posting (SO date later than SI)
+	And I close all client application windows
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+	* Fillling main info
+		And I select from the drop-down list named "Partner" by "Crystal" string
+		And I select from the drop-down list named "Agreement" by "Basic Partner terms, TRY" string		
+//		And I select "Approved" exact value from the drop-down list named "Status"
+	* Adding Items		
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Boots" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "38/18SD" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "1 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Dress" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "M/White" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "100,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to the tab named "GroupOther"
+		And I input "10.06.2025 13:27:02" text in the field named "Date"				
+		And I click the button named "FormPost"
+		And I delete "$$SalesOrder01$$" variable
+		And I delete "$$NumberSalesOrder01$$" variable
+		And I save the window as "$$SalesOrder01$$"
+		And I save the value of "Number" field as "$$NumberSalesOrder01$$"
+	* Create SI
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I move to the tab named "GroupOther"
+		And I move to the tab named "GroupMore"
+		And I input "08.06.2025 16:22:10" text in the field named "Date"
+		And I click the button named "FormPost"
+	* Check
+		Then there are lines in TestClient message log
+			|'Wrong linked row [1]: Document date [08.06.2025 16:22:10] less than Basis date [10.06.2025 13:27:02]'|
+			|'Wrong linked row [2]: Document date [08.06.2025 16:22:10] less than Basis date [10.06.2025 13:27:02]'|
+	And I close all client application windows									
+
+Scenario: _2060045 check link/unlink in first posting (SI date later than SO)
+	And I close all client application windows
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'                 |
+			| '$$NumberSalesOrder01$$' |
+		And I select current line in "List" table
+	* Change SO date later than PI
+		And I move to the tab named "GroupOther"
+		And I input "06.06.2025 11:22:11" text in the field named "Date"
+		And I click the button named "FormPost"			
+	* Create SI
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I move to the tab named "GroupOther"
+		And I move to the tab named "GroupMore"
+		And I input "08.06.2025 16:22:10" text in the field named "Date"
+		And I click the button named "FormPost"
+	* Check
+		Then user message window does not contain messages
+		And I delete "$$SalesInvoice01$$" variable
+		And I delete "$$NumberSalesInvoice01$$" variable
+		And I save the window as "$$SalesInvoice01$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice01$$"
+	And I close all client application windows	

@@ -745,9 +745,9 @@ Function ItemUnitInfo(ItemKeyOrItem) Export
 			If ValueIsFilled(ItemKeyOrItem.Item) Then
 				Return New Structure("Unit", ItemKeyOrItem.Item.Unit);
 			EndIf;
-		Else
-			Raise "Unsupported type";
-		EndIf;
+                Else
+                        Raise StrTemplate(R().UnsupportedType, TypeOf(ItemKeyOrItem));
+                EndIf;
 	EndIf;
 	Return New Structure("Unit", Undefined);
 EndFunction
@@ -1222,11 +1222,6 @@ Function SearchByItemAndItemKeysDescriptions_WithKey(GetItemAndItemKeysInputTabl
 	|			ELSE MainData.ItemKey = Images.ItemKey
 	|		END";
 	
-	DescriptionLocal = "Description_" + LocalizationReuse.GetLocalizationCode();
-	If Not DescriptionLocal = "Description_en" Then
-		Query.Text = StrReplace(Query.Text, "Description_en", DescriptionLocal);
-	EndIf;
-	
 	Query.SetParameter("ItemAndItemKeysDescriptions", GetItemAndItemKeysInputTable);
 	QueryExecution = Query.Execute();
 	QueryUnload = QueryExecution.Unload();
@@ -1283,10 +1278,7 @@ Function SearchItemByString(ItemString) Export
 	|	NOT Items.DeletionMark
 	|	AND Items.Description_en = &Item";
 	
-	DescriptionLocal = "Description_" + LocalizationReuse.GetLocalizationCode();
-	If Not DescriptionLocal = "Description_en" Then
-		Query.Text = StrReplace(Query.Text, "Description_en", DescriptionLocal);
-	EndIf;
+	LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "Items");
 	
 	Return Query.Execute().Unload().UnloadColumn(0);
 	
@@ -1349,10 +1341,7 @@ Function SearchItemKeyByString(ItemKeyString, ItemRef) Export
 	|	&Item = VALUE(Catalog.Items.EmptyRef)
 	|	OR tmpRefs.Ref.Item = &Item";
 	
-	DescriptionLocal = "Description_" + LocalizationReuse.GetLocalizationCode();
-	If Not DescriptionLocal = "Description_en" Then
-		Query.Text = StrReplace(Query.Text, "Description_en", DescriptionLocal);
-	EndIf;
+	LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "ItemKeys");
 	
 	Return Query.Execute().Unload().UnloadColumn(0);
 	
@@ -2062,7 +2051,7 @@ Function ParseDescriptionFormula(Val ObjectOrRef, Val Template)
 				_Metadata = OperandValue.Ref.Metadata();
 				MetadataFullName = _Metadata.FullName();
 			Else
-				Raise StrTemplate("Can not eval description formula. error operand [%1]:[%2]", OperandName, AttributeName);				
+                                Raise StrTemplate(R().DescriptionFormulaOperandError, OperandName, AttributeName);
 			КонецЕсли;
 			
 			If CommonFunctionsClientServer.ObjectHasProperty(_Metadata.Attributes, AttributeName)
@@ -2078,7 +2067,7 @@ Function ParseDescriptionFormula(Val ObjectOrRef, Val Template)
 			Else
 				AddAttribute = ChartsOfCharacteristicTypes.AddAttributeAndProperty.FindByAttribute("UniqueID", AttributeName);
 				If Not ValueIsFilled(AddAttribute) Then
-					Raise StrTemplate("Can not eval description formula. error operand [%1]:[%2]", OperandName, AttributeName);
+                                        Raise StrTemplate(R().DescriptionFormulaOperandError, OperandName, AttributeName);
 				EndIf;
 				
 				If AttributeCounter > 0 Or CommonFunctionsServer.IsRef(TypeOf(OperandValue)) Then

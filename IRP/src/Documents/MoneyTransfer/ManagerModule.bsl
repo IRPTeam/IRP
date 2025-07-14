@@ -42,27 +42,47 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 EndFunction
 
 Procedure PostingCheckAfterWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
 #EndRegion
 
-#Region UNDOPOSTING
+#Region Undoposting
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return Undefined;
+	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return Undefined;
+	DataMapWithLockFields = New Map;
+	Return DataMapWithLockFields;
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return;
+	Parameters.Insert("Unposting", True);
+	CheckAfterWrite(Ref, Cancel, Parameters, AddInfo);
+EndProcedure
+
+#EndRegion
+
+#Region CheckAfterWrite
+
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	AccReg = AccumulationRegisters;
+
+	Current_R3010B_CashOnHand = PostingServer.GetQueryTableByName("R3010B_CashOnHand", Parameters);
+	Exists_R3010B_CashOnHand  = PostingServer.GetQueryTableByName("Exists_R3010B_CashOnHand", Parameters);
+	
+	If Not Cancel 
+		And Not AccReg.R3010B_CashOnHand.CheckBalance(Ref, Current_R3010B_CashOnHand, Exists_R3010B_CashOnHand, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -88,6 +108,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(MoneySender());
 	QueryArray.Add(MoneyReceiver());
 	QueryArray.Add(MoneyTransit());
+	QueryArray.Add(PostingServer.Exists_R3010B_CashOnHand());
 	Return QueryArray;
 EndFunction
 

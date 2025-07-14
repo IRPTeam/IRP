@@ -30,6 +30,10 @@ Procedure ChangeVsible(Form, Visible) Export
 			Form.Items[_item].Visible = Visible;
 		EndIf;
 	EndDo;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Form, "IsTaxVsible") Then
+		Form.IsTaxVsible = Visible;
+	EndIf;
 EndProcedure
 
 Procedure ChangeTaxExemptionReasonVisible(Form, Visible) Export

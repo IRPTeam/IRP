@@ -1126,12 +1126,12 @@ Scenario: _0991015 check load charts of accounts (correct data)
 	* Check
 		And "List" table contains lines
 			| 'Code'                   | 'Order'    | 'Description'         | 'Type' | 'Ext. Dim 2'       | 'Q.'  | 'Ext. Dim 3'          | 'C.'  | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
-			| '90878699'               | '90878699' | 'Test assets account' | 'A'    | 'Item key (turn.)' | 'Yes' | 'Fixed asset (turn.)' | 'No'  | 'LTV with account charts code mask' | 'Item'       | 'No'          |
-			| '908990'                 | '908990'   | 'Test group'          | 'P'    | ''                 | 'No'  | ''                    | 'Yes' | 'LTV with account charts code mask' | 'Partner'    | 'No'          |
+			| '90878699'               | '90878699' | 'Test assets account' | 'A'    | 'Item key (turn.)' | 'Yes' | 'Legal name (turn.)'  | 'No'  | 'LTV with account charts code mask' | 'Item'       | 'No'          |
+			| '908990'                 | '908990'   | 'Test group'          | 'P'    | ''                 | 'No'  | ''                    | 'Yes' | 'LTV with account charts code mask' | 'Partner'    | 'No'          |		
 		* Liabilities account
 			And I go to line in "List" table
 				| 'C.' | 'Code'      | 'Description'              | 'Ext. Dim 1' | 'Ext. Dim 2'       | 'Ext. Dim 3'          | 'Ledger type variant'               | 'Off-balance' | 'Order'     | 'Q.'  | 'Type' |
-				| 'No' | '10878699'  | 'Test liabilities account' | 'Item'       | 'Item key (turn.)' | 'Fixed asset (turn.)' | 'LTV with account charts code mask' | 'No'          | '10878699'  | 'Yes' | 'P'    |
+				| 'No' | '10878699'  | 'Test liabilities account' | 'Item'       | 'Item key (turn.)' | 'Legal name (turn.)'  | 'LTV with account charts code mask' | 'No'          | '10878699'  | 'Yes' | 'P'    |
 			And I select current line in "List" table
 			And the editing text of form attribute named "Code" became equal to "108.78.699"
 			Then the form attribute named "Currency" became equal to "No"
@@ -1140,7 +1140,7 @@ Scenario: _0991015 check load charts of accounts (correct data)
 				| 'Extra dimension type' | 'Currency' | 'Turnovers only' | 'Quantity' | 'Amount' |
 				| 'Item'                 | 'Yes'      | 'No'             | 'No'       | 'Yes'    |
 				| 'Item key'             | 'No'       | 'Yes'            | 'Yes'      | 'No'     |
-				| 'Fixed asset'          | 'No'       | 'Yes'            | 'No'       | 'No'     |
+				| 'Legal name'           | 'No'       | 'Yes'            | 'No'       | 'No'     |
 			
 			Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 			Then the form attribute named "NotUsedForRecords" became equal to "No"
@@ -1154,7 +1154,7 @@ Scenario: _0991015 check load charts of accounts (correct data)
 		* Assets account
 			And I go to line in "List" table
 				| 'C.' | 'Code'     | 'Description'         | 'Ext. Dim 1' | 'Ext. Dim 2'       | 'Ext. Dim 3'          | 'Ledger type variant'               | 'Off-balance' | 'Order'    | 'Q.'  | 'Type' |
-				| 'No' | '90878699' | 'Test assets account' | 'Item'       | 'Item key (turn.)' | 'Fixed asset (turn.)' | 'LTV with account charts code mask' | 'No'          | '90878699' | 'Yes' | 'A'    |
+				| 'No' | '90878699' | 'Test assets account' | 'Item'       | 'Item key (turn.)' | 'Legal name (turn.)'  | 'LTV with account charts code mask' | 'No'          | '90878699' | 'Yes' | 'A'    |
 			And I select current line in "List" table
 			And the editing text of form attribute named "Code" became equal to "908.78.699"
 			Then the form attribute named "Currency" became equal to "No"
@@ -1163,7 +1163,7 @@ Scenario: _0991015 check load charts of accounts (correct data)
 				| 'Extra dimension type' | 'Currency' | 'Turnovers only' | 'Quantity' | 'Amount' |
 				| 'Item'                 | 'Yes'      | 'No'             | 'No'       | 'Yes'    |
 				| 'Item key'             | 'No'       | 'Yes'            | 'Yes'      | 'No'     |
-				| 'Fixed asset'          | 'No'       | 'Yes'            | 'No'       | 'No'     |
+				| 'Legal name'           | 'No'       | 'Yes'            | 'No'       | 'No'     |
 			
 			Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"
 			Then the form attribute named "NotUsedForRecords" became equal to "No"
@@ -2167,16 +2167,16 @@ Scenario: _0991070 check Bank receipt accounting movements (Payment from custome
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account'           | 'Company'                                     | 'Business unit'   | 'Partner'                     | 'Credit' | 'Partner term'                                | 'Operation'                                                                                         |
-			| '3250'  | 'Bank account, TRY'           | 'Client 2'                                    | 'Business unit 1' | 'Customer 2 (2 partner term)' | '4010'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
-			| '5202'  | 'Customer 2 (2 partner term)' | 'Individual partner term 1 (by partner term)' | 'Business unit 1' | 'Customer 2 (2 partner term)' | '4010'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |		
+			| 'Debit' | 'Cash/Bank account'           | 'Business unit'   | 'Partner'                     | ' '               | 'Credit' | 'Partner term'                                | 'Operation'                                                                                         |
+			| '3250'  | 'Bank account, TRY'           | 'Business unit 1' | 'Customer 2 (2 partner term)' | ''                | '4010'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
+			| '5202'  | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Customer 2 (2 partner term)' | 'Business unit 1' | '4010'   | 'Individual partner term 1 (by partner term)' | 'BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'   | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Operation'                                                                                         | 'Extra dimension2 Cr'                         | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '24.02.2023 10:49:55' | '3250'       | '1' | '1 000,00' | ''              | 'Yes'      | 'TRY'             | 'Bank account, TRY' | '1 000'        | 'Client 2'            | ''                | 'Business unit 1'     | 'TRY'            | '4010'       | 'Customer 2 (2 partner term)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' | 'Individual partner term 1 (by partner term)' | '1 000'         | 'Business unit 1'     |	
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Extra dimension2 Cr'                         | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                                                         |
+			| '24.02.2023 10:49:55' | '1' | 'Yes'      | '3250'       | 'Bank account, TRY' | 'Business unit 1'     | ''                    | 'TRY'            | '1 000'        | ''              | '4010'       | 'Customer 2 (2 partner term)' | 'Individual partner term 1 (by partner term)' | 'Business unit 1'     | 'TRY'             | '1 000'         | ''                | '1 000,00' | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |		
 	And I close all client application windows
 
 Scenario: _0991071 check Bank payment accounting movements (Payment to the vendor)
@@ -2191,16 +2191,16 @@ Scenario: _0991071 check Bank payment accounting movements (Payment to the vendo
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
-			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
-			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '4020.2' | 'Vendor 2 (1 partner term)' | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |	
+			| 'Debit' | 'Partner'                   | 'Business unit'              | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | ' '               | 'Operation'                                                                                   |
+			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1'            | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | ''                | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '5201'  | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '4020.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'           | 'Debit amount' | 'Extra dimension2 Dr'        | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                                                                   | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '24.02.2023 10:51:48' | '5201'       | '1' | '700,00' | ''              | 'Yes'      | 'TRY'             | 'Vendor 2 (1 partner term)' | '700'          | 'Partner term with vendor 2' | ''                | 'Business unit 1'     | 'TRY'            | '3250'       | 'Bank account, TRY' | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' | 'Vendor 2'            | '700'           | 'Business unit 1'     |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'           | 'Extra dimension2 Dr'        | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                   |
+			| '24.02.2023 10:51:48' | '1' | 'Yes'      | '5201'       | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Business unit 1'     | 'TRY'            | '700'          | ''              | '3250'       | 'Bank account, TRY' | 'Business unit 1'     | ''                    | 'TRY'             | '700'           | ''                | '700,00' | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |		
 	And I close all client application windows
 
 				
@@ -2216,16 +2216,16 @@ Scenario: _0991072 check Bank payment accounting movements (Payment to the vendo
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
-			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Vendor 2'                   | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
-			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '4020.2' | 'Vendor 2 (1 partner term)' | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |	
+			| 'Debit' | 'Partner'                   | 'Business unit'              | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | ' '               | 'Operation'                                                                                   |
+			| '5201'  | 'Vendor 2 (1 partner term)' | 'Business unit 1'            | 'Partner term with vendor 2' | '3250'   | 'Bank account, TRY'         | ''                | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '5201'  | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Partner term with vendor 2' | '4020.2' | 'Vendor 2 (1 partner term)' | 'Business unit 1' | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'           | 'Debit amount' | 'Extra dimension2 Dr'        | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                                                                   | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '24.02.2023 10:51:48' | '5201'       | '1' | '700,00' | ''              | 'Yes'      | 'TRY'             | 'Vendor 2 (1 partner term)' | '700'          | 'Partner term with vendor 2' | ''                | 'Business unit 1'     | 'TRY'            | '3250'       | 'Bank account, TRY' | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' | 'Vendor 2'            | '700'           | 'Business unit 1'     |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'           | 'Extra dimension2 Dr'        | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                   |
+			| '24.02.2023 10:51:48' | '1' | 'Yes'      | '5201'       | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' | 'Business unit 1'     | 'TRY'            | '700'          | ''              | '3250'       | 'Bank account, TRY' | 'Business unit 1'     | ''                    | 'TRY'             | '700'           | ''                | '700,00' | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |		
 	And I close all client application windows	
 
 Scenario: _0991073 check Bank payment accounting movements (Cash transfer order)
@@ -2240,8 +2240,8 @@ Scenario: _0991073 check Bank payment accounting movements (Cash transfer order)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Company' | 'Partner' | 'Business unit' | 'Credit' | 'Operation'                                                                            |
-			| '3221'  | 'Bank account, TRY' | ''        | ''        | ''              | '3250'   | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)' |	
+			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' ' | 'Credit' | 'Operation'                                                                            |
+			| '3221'  | 'Bank account, TRY' | ''        | ''              | ''  | '3250'   | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2263,8 +2263,8 @@ Scenario: _0991074 check Bank receipt accounting movements (Cash transfer order)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Company' | 'Business unit' | 'Partner' | 'Credit' | 'Operation'                                                                            |
-			| '3250'  | 'Bank account, TRY' | ''        | ''              | ''        | '3221'   | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)' |	
+			| 'Debit' | 'Cash/Bank account' | 'Business unit' | 'Partner' | ' ' | 'Credit' | 'Operation'                                                                            |
+			| '3250'  | 'Bank account, TRY' | ''              | ''        | ''  | '3221'   | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2286,8 +2286,8 @@ Scenario: _0991075 check Bank payment accounting movements (Currency exchange)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Company' | 'Partner' | 'Business unit' | 'Credit' | 'Operation'                                                                                |
-			| '3221'  | 'Bank account, TRY' | ''        | ''        | ''              | '3250'   | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)' |	
+			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' ' | 'Credit' | 'Operation'                                                                                |
+			| '3221'  | 'Bank account, TRY' | ''        | ''              | ''  | '3250'   | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2310,18 +2310,18 @@ Scenario: _0991076 check Bank receipt accounting movements (Currency exchange)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Company'       | 'Partner' | 'Business unit' | 'Credit' | ' ' | 'Operation'                                                                                |
-			| '3221'  | 'Transit, TRY'      | 'Own company 2' | ''        | ''              | '9100'   | ''  | 'BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                               |
-			| '420.5' | ''                  | 'Own company 2' | ''        | 'Transit, TRY'  | '3221'   | ''  | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                               |
-			| '3250'  | 'Bank account, TRY' | ''              | ''        | 'Transit, TRY'  | '3221'   | ''  | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)' |		
+			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit' | ' ' | 'Credit' | 'Legal name'    | 'Operation'                                                                                |
+			| '3221'  | 'Transit, TRY'      | ''        | ''              | ''  | '9100'   | 'Own company 2' | 'BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                               |
+			| '420.5' | ''                  | ''        | 'Transit, TRY'  | ''  | '3221'   | ''              | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                               |
+			| '3250'  | 'Bank account, TRY' | ''        | 'Transit, TRY'  | ''  | '3221'   | ''              | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
-		And "RegisterRecords" table contains lines
-			| 'Period'              | 'Account Dr' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'   | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                                | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '25.02.2023 12:00:00' | '420.5'      | '17,97'    | ''              | 'Yes'      | 'TRY'             | ''                  | '17,97'        | ''                    | ''                | ''                    | 'TRY'            | '3221'       | 'Transit, TRY'     | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                               | 'Own company 2'       | '17,97'         | ''                    |
-			| '25.02.2023 12:00:00' | '3250'       | '1 082,03' | ''              | 'Yes'      | 'EUR'             | 'Bank account, TRY' | '54'           | ''                    | ''                | ''                    | 'EUR'            | '3221'       | 'Transit, TRY'     | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)' | ''                    | '54'            | ''                    |
+		And "RegisterRecords" table became equal
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                                                |
+			| '25.02.2023 12:00:00' | '1' | 'Yes'      | '420.5'      | ''                  | ''                    | ''                    | 'TRY'            | '17,97'        | ''              | '3221'       | 'Transit, TRY'     | ''                    | ''                    | 'TRY'             | '17,97'         | ''                | '17,97'    | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                               |
+			| '25.02.2023 12:00:00' | '2' | 'Yes'      | '3250'       | 'Bank account, TRY' | ''                    | ''                    | 'EUR'            | '54'           | ''              | '3221'       | 'Transit, TRY'     | ''                    | ''                    | 'EUR'             | '54'            | ''                | '1 082,03' | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)' |		
 		Then the number of "RegisterRecords" table lines is "равно" "2"
 	And I close all client application windows			
 
@@ -2338,16 +2338,16 @@ Scenario: _0991077 check Bank payment accounting movements (Return to customer)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                      | 'Business unit'   | 'Company'                                                 | 'Partner term'                                            | 'Credit' | 'Cash/Bank account'            | 'Operation'                                                                                         |
-			| '4010'  | 'Customer 1 (3 partner terms)' | 'Business unit 1' | 'Client 1'                                                | 'Partner term with customer (by document + credit limit)' | '3250'   | 'Bank account, TRY'            | 'BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)' |
-			| '4010'  | 'Customer 1 (3 partner terms)' | 'Business unit 1' | 'Partner term with customer (by document + credit limit)' | 'Partner term with customer (by document + credit limit)' | '5202'   | 'Customer 1 (3 partner terms)' | 'BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |
+			| 'Debit' | 'Partner'                      | 'Business unit'                                           | 'Partner term'                                            | 'Credit' | 'Cash/Bank account'            | ' '               | 'Operation'                                                                                         |
+			| '4010'  | 'Customer 1 (3 partner terms)' | 'Business unit 1'                                         | 'Partner term with customer (by document + credit limit)' | '3250'   | 'Bank account, TRY'            | ''                | 'BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)' |
+			| '4010'  | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Partner term with customer (by document + credit limit)' | '5202'   | 'Customer 1 (3 partner terms)' | 'Business unit 1' | 'BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                   |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'              | 'Debit amount' | 'Extra dimension2 Dr'                                     | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                                                                         | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '11.08.2023 12:00:00' | '4010'       | '1' | '100,00' | ''              | 'Yes'      | 'TRY'             | 'Customer 1 (3 partner terms)' | '100'          | 'Partner term with customer (by document + credit limit)' | ''                | 'Business unit 1'     | 'TRY'            | '3250'       | 'Bank account, TRY' | 'BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)' | 'Client 1'            | '100'           | 'Business unit 1'     |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'              | 'Extra dimension2 Dr'                                     | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                         |
+			| '11.08.2023 12:00:00' | '1' | 'Yes'      | '4010'       | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Business unit 1'     | 'TRY'            | '100'          | ''              | '3250'       | 'Bank account, TRY' | 'Business unit 1'     | ''                    | 'TRY'             | '100'           | ''                | '100,00' | 'BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)' |		
 	And I close all client application windows
 
 Scenario: _0991078 check Bank receipt accounting movements (Return from vendor)
@@ -2362,16 +2362,17 @@ Scenario: _0991078 check Bank receipt accounting movements (Return from vendor)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit'  | 'Cash/Bank account'   | 'Company'                                                | 'Business unit' | 'Partner'             | 'Credit' | 'Partner term'                                           | 'Operation'                                                                                   |
-			| '3250'   | 'Bank account, TRY'   | 'Client and vendor'                                      | ''              | 'Customer and vendor' | '4020.2' | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
-			| '4020.2' | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | ''              | 'Customer and vendor' | '5201'   | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                   |	
+			| 'Debit'  | 'Cash/Bank account'   | 'Business unit' | 'Partner'             | ' ' | 'Credit' | 'Partner term'                                           | 'Operation'                                                                                   |
+			| '3250'   | 'Bank account, TRY'   | ''              | 'Customer and vendor' | ''  | '4020.2' | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
+			| '4020.2' | 'Customer and vendor' | ''              | 'Customer and vendor' | ''  | '5201'   | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                   |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
-		And "RegisterRecords" table contains lines
-			| 'Period'              | 'Account Dr' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'     | 'Debit amount' | 'Extra dimension2 Dr'                                    | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'    | 'Operation'                                                                                   | 'Extra dimension2 Cr'                                    | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '05.12.2023 10:00:00' | '3250'       | '50,00'  | ''              | 'Yes'      | 'TRY'             | 'Bank account, TRY'   | '50'           | 'Client and vendor'                                      | ''                | ''                    | 'TRY'            | '4020.2'     | 'Customer and vendor' | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' | 'Partner term with vendor (advance payment by document)' | '50'            | ''                    |
+		And "RegisterRecords" table became equal
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'     | 'Extra dimension2 Dr'                                    | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'    | 'Extra dimension2 Cr'                                    | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                   |
+			| '05.12.2023 10:00:00' | '1' | 'Yes'      | '3250'       | 'Bank account, TRY'   | ''                                                       | ''                    | 'TRY'            | '50'           | ''              | '4020.2'     | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'             | '50'            | ''                | '50,00'  | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
+			| '05.12.2023 10:00:00' | '2' | 'Yes'      | '4020.2'     | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'            | '50'           | ''              | '5201'       | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'             | '50'            | ''                | '50,00'  | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                   |		
 		Then the number of "RegisterRecords" table lines is "равно" "2"
 	And I close all client application windows
 
@@ -2387,15 +2388,15 @@ Scenario: _0991079 check Bank receipt accounting movements (Other partner)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| "Debit" | "Cash/Bank account" | "Company"       | "Business unit" | "Partner"       | "Credit" | "Operation"                                                                |
-			| "3250"  | "Bank account, TRY" | "Other partner" | ""              | "Other partner" | "9200"   | "BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)" |	
+			| 'Debit' | 'Cash/Bank account' | 'Business unit' | 'Partner'       | ' ' | 'Credit' | 'Legal name'    | 'Operation'                                                                |
+			| '3250'  | 'Bank account, TRY' | ''              | 'Other partner' | ''  | '9200'   | 'Other partner' | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'   | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '11.01.2024 10:00:00' | '3250'       | '1' | '490,00' | ''              | 'Yes'      | 'TRY'             | 'Bank account, TRY' | '490'          | 'Other partner'       | ''                | ''                    | 'TRY'            | '9200'       | ''                 | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' | 'Other partner'       | '490'           | 'Other partner'       |
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                |
+			| '11.01.2024 10:00:00' | '1' | 'Yes'      | '3250'       | 'Bank account, TRY' | ''                    | ''                    | 'TRY'            | '490'          | ''              | '9200'       | ''                 | 'Other partner'       | 'Other partner'       | 'TRY'             | '490'           | ''                | '490,00' | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' |		
 	And I close all client application windows
 
 Scenario: _0991081 check Bank receipt accounting movements (Other income)
@@ -2410,15 +2411,15 @@ Scenario: _0991081 check Bank receipt accounting movements (Other income)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Company' | 'Business unit'   | 'Credit' | ' ' | 'Operation'                                              |
-			| '3250'  | 'Bank account, TRY' | ''        | 'Business unit 3' | '9100'   | ''  | 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)' |	
+			| 'Debit' | 'Cash/Bank account' | 'Business unit'   | ' ' | 'Credit' | 'Legal name' | 'Operation'                                              |
+			| '3250'  | 'Bank account, TRY' | 'Business unit 3' | ''  | '9100'   | ''           | 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'   | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                              | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '03.02.2024 12:00:00' | '3250'       | '1' | '490,00' | ''              | 'Yes'      | 'TRY'             | 'Bank account, TRY' | '490'          | ''                    | ''                | 'Business unit 3'     | 'TRY'            | '9100'       | 'Business unit 3'  | 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)' | ''                    | '490'           | ''                    |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                              |
+			| '03.02.2024 12:00:00' | '1' | 'Yes'      | '3250'       | 'Bank account, TRY' | 'Business unit 3'     | ''                    | 'TRY'            | '490'          | ''              | '9100'       | 'Business unit 3'  | ''                    | ''                    | 'TRY'             | '490'           | ''                | '490,00' | 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)' |		
 	And I close all client application windows
 
 
@@ -2434,16 +2435,16 @@ Scenario: _0991082 check Bank payment accounting movements (Other partners)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Business unit' | 'Company'       | 'Partner'       | 'Credit' | 'Cash/Bank account' | 'Operation'                                                                |
-			| '9200'  | ''              | 'Other partner' | 'Other partner' | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
-			| '9200'  | ''              | 'Other partner' | 'Other partner' | '9100'   | ''                  | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |		
+			| 'Debit' | 'Business unit' | 'Partner'       | 'Legal name'    | 'Credit' | 'Cash/Bank account' | ' ' | 'Operation'                                                                |
+			| '9200'  | ''              | 'Other partner' | 'Other partner' | '3250'   | 'Bank account, TRY' | ''  | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
+			| '9200'  | 'Other partner' | 'Other partner' | 'Other partner' | '9100'   | ''                  | ''  | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                                                | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '22.03.2024 10:51:11' | '9200'       | '1' | '9,80'   | ''              | 'Yes'      | 'TRY'             | ''                | '9,8'          | 'Other partner'       | ''                | 'Other partner'       | 'TRY'            | '3250'       | 'Bank account, TRY' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' | 'Other partner'       | '9,8'           | ''                    |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                |
+			| '22.03.2024 10:51:11' | '1' | 'Yes'      | '9200'       | ''                | 'Other partner'       | 'Other partner'       | 'TRY'            | '9,8'          | ''              | '3250'       | 'Bank account, TRY' | ''                    | ''                    | 'TRY'             | '9,8'           | ''                | '9,80'   | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |		
 	And I close all client application windows
 
 
@@ -2459,15 +2460,15 @@ Scenario: _0991083 check Bank payment accounting movements (Other expense)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Company' | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
-			| '420.2' | ''        | 'Business unit 3' | ''        | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |	
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | ' ' | 'Operation'                                               |
+			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | ''  | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                               | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '18.04.2024 12:27:16' | '420.2'      | '1' | '10,00'  | ''              | 'Yes'      | 'TRY'             | ''                | '10'           | 'Business unit 3'     | ''                | 'Other expence'       | 'TRY'            | '3250'       | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' | ''                    | '10'            | 'Business unit 3'     |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                               |
+			| '18.04.2024 12:27:16' | '1' | 'Yes'      | '420.2'      | ''                | 'Business unit 3'     | 'Other expence'       | 'TRY'            | '10'           | ''              | '3250'       | 'Bank account, TRY' | 'Business unit 3'     | ''                    | 'TRY'             | '10'            | ''                | '10,00'  | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |		
 	And I close all client application windows
 
 
@@ -2483,8 +2484,8 @@ Scenario: _0991084 check Bank payment accounting movements (Salary)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Company' | 'Business unit' | 'Operation'                                                    |
-			| '5401'  | ''  | '3250'   | 'Bank account, TRY' | ''        | ''              | 'BankPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)' |	
+			| 'Debit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Business unit' | 'Operation'                                                    |
+			| '5401'  | ''  | '3250'   | 'Bank account, TRY' | ''              | 'BankPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2508,8 +2509,8 @@ Scenario: _0991085 check Bank payment accounting movements (Employee cash advanc
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit'  | 'Partner'    | 'Business unit' | 'Company' | ' ' | 'Credit' | 'Cash/Bank account' | 'Operation'                                                          |
-			| '4020.1' | 'Employee 1' | ''              | ''        | ''  | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)' |	
+			| 'Debit'  | 'Partner'    | 'Business unit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Operation'                                                          |
+			| '4020.1' | 'Employee 1' | ''              |''   | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)' |	
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2532,15 +2533,15 @@ Scenario: _0991086 check Bank payment accounting movements (Other expense)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Company' | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
-			| '420.2' | ''        | 'Business unit 3' | ''        | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |	
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
+			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |	
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                               | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '18.04.2024 12:27:16' | '420.2'      | '1' | '10,00'  | ''              | 'Yes'      | 'TRY'             | ''                | '10'           | 'Business unit 3'     | ''                | 'Other expence'       | 'TRY'            | '3250'       | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' | ''                    | '10'            | 'Business unit 3'     |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                               |
+			| '18.04.2024 12:27:16' | '1' | 'Yes'      | '420.2'      | ''                | 'Business unit 3'     | 'Other expence'       | 'TRY'            | '10'           | ''              | '3250'       | 'Bank account, TRY' | 'Business unit 3'     | ''                    | 'TRY'             | '10'            | ''                | '10,00'  | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |		
 	And I close all client application windows
 
 
@@ -2556,15 +2557,15 @@ Scenario: _0991087 check Bank payment accounting movements (Salary)
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Company' | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
-			| '420.2' | ''        | 'Business unit 3' | ''        | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |	
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
+			| '420.2' | ''        | 'Business unit 3' | 'Other expence'            | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |	
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                               | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '18.04.2024 12:27:16' | '420.2'      | '1' | '10,00'  | ''              | 'Yes'      | 'TRY'             | ''                | '10'           | 'Business unit 3'     | ''                | 'Other expence'       | 'TRY'            | '3250'       | 'Bank account, TRY' | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' | ''                    | '10'            | 'Business unit 3'     |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                               |
+			| '18.04.2024 12:27:16' | '1' | 'Yes'      | '420.2'      | ''                | 'Business unit 3'     | 'Other expence'       | 'TRY'            | '10'           | ''              | '3250'       | 'Bank account, TRY' | 'Business unit 3'     | ''                    | 'TRY'             | '10'            | ''                | '10,00'  | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |		
 	And I close all client application windows
 
 Scenario: _0991080 check Purchase invoice accounting movements
@@ -2741,12 +2742,12 @@ Scenario: _0991096 check Purchase return accounting movements (service and produ
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button	
-		And "RegisterRecords" table contains lines
-			| "Period"              | "Account Dr" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit" | "Debit amount" | "Extra dimension2 Dr"                                    | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"   | "Operation"                                                                 | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
-			| "20.03.2024 11:28:01" | "5201"       | "33,33"  | ""              | "Yes"      | "TRY"             | "Vendor 6"        | "33,33"        | "Partner term with vendor (advance payment by document)" | ""                | ""                    | "TRY"            | "5303"       | ""                   | "PurchaseReturn DR (R1021B_VendorsTransactions) CR (R2040B_TaxesIncoming)"  | ""                    | "33,33"         | ""                    |
-			| "20.03.2024 11:28:01" | "5201"       | "8,33"   | ""              | "Yes"      | "TRY"             | "Vendor 6"        | "8,33"         | "Partner term with vendor (advance payment by document)" | ""                | "Business unit 2"     | "TRY"            | "5303"       | ""                   | "PurchaseReturn DR (R1021B_VendorsTransactions) CR (R2040B_TaxesIncoming)"  | ""                    | "8,33"          | ""                    |
-			| "20.03.2024 11:28:01" | "5201"       | "166,67" | ""              | "Yes"      | "TRY"             | "Vendor 6"        | "166,67"       | "Partner term with vendor (advance payment by document)" | "1"               | ""                    | "TRY"            | "3540"       | "Item with item key" | "PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)" | "S/Color 1"           | "166,67"        | ""                    |
-			| "20.03.2024 11:28:01" | "5201"       | "41,67"  | ""              | "Yes"      | "TRY"             | "Vendor 6"        | "41,67"        | "Partner term with vendor (advance payment by document)" | ""                | "Business unit 2"     | "TRY"            | "3250"       | ""                   | "PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)" | "Own company 2"       | "41,67"         | "Business unit 2"     |
+		And "RegisterRecords" table became equal
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr'                                    | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'   | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                 |
+			| '20.03.2024 11:28:01' | '1' | 'Yes'      | '5201'       | 'Vendor 6'        | 'Partner term with vendor (advance payment by document)' | 'Business unit 2'     | 'TRY'            | '41,67'        | ''              | '3250'       | ''                   | 'Business unit 2'     | ''                    | 'TRY'             | '41,67'         | ''                | '41,67'  | 'PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)' |
+			| '20.03.2024 11:28:01' | '2' | 'Yes'      | '5201'       | 'Vendor 6'        | 'Partner term with vendor (advance payment by document)' | 'Business unit 2'     | 'TRY'            | '8,33'         | ''              | '5303'       | ''                   | ''                    | ''                    | 'TRY'             | '8,33'          | ''                | '8,33'   | 'PurchaseReturn DR (R1021B_VendorsTransactions) CR (R2040B_TaxesIncoming)'  |
+			| '20.03.2024 11:28:01' | '3' | 'Yes'      | '5201'       | 'Vendor 6'        | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'            | '166,67'       | ''              | '3540'       | 'Item with item key' | 'S/Color 1'           | ''                    | 'TRY'             | '166,67'        | '1'               | '166,67' | 'PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)' |
+			| '20.03.2024 11:28:01' | '4' | 'Yes'      | '5201'       | 'Vendor 6'        | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'            | '33,33'        | ''              | '5303'       | ''                   | ''                    | ''                    | 'TRY'             | '33,33'         | ''                | '33,33'  | 'PurchaseReturn DR (R1021B_VendorsTransactions) CR (R2040B_TaxesIncoming)'  |		
 		Then the number of "RegisterRecords" table lines is "равно" "4"
 	And I close all client application windows
 
@@ -2762,16 +2763,16 @@ Scenario: _0991100 check Cash payment accounting movements
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Company'                    | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | 'Operation'                                                                                   |
-			| '5201'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Vendor 1'                   | 'Partner term with vendor 1' | '3240'   | 'Cash, TRY'                 | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
-			| '5201'  | 'Business unit 1'           | 'Business unit 1' | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '4020.2' | 'Vendor 1 (1 partner term)' | 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |
+			| 'Debit' | 'Partner'                    | 'Business unit'   | 'Partner term'               | 'Credit' | 'Cash/Bank account'         | ' '               | 'Operation'                                                                                   |
+			| '5201'  | 'Vendor 1 (1 partner term)'  | 'Business unit 1' | 'Partner term with vendor 1' | '3240'   | 'Cash, TRY'                 | ''                | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |
+			| '5201'  | 'Partner term with vendor 1' | 'Business unit 1' | 'Partner term with vendor 1' | '4020.2' | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'CashPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                   |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'           | 'Debit amount' | 'Extra dimension2 Dr'        | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                                   | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr'       |
-			| '24.02.2023 10:50:30' | '5201'       | '1' | '500,00' | ''              | 'Yes'      | 'TRY'             | 'Vendor 1 (1 partner term)' | '500'          | 'Partner term with vendor 1' | ''                | 'Business unit 1'     | 'TRY'            | '3240'       | 'Cash, TRY'        | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' | 'Vendor 1'            | '500'           | 'Vendor 1 (1 partner term)' |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'           | 'Extra dimension2 Dr'        | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr'       | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                   |
+			| '24.02.2023 10:50:30' | '1' | 'Yes'      | '5201'       | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Business unit 1'     | 'TRY'            | '500'          | ''              | '3240'       | 'Cash, TRY'        | 'Vendor 1 (1 partner term)' | ''                    | 'TRY'             | '500'           | ''                | '500,00' | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)' |		
 	And I close all client application windows	
 						
 Scenario: _0991110 check Cash receipt accounting movements
@@ -2786,17 +2787,17 @@ Scenario: _0991110 check Cash receipt accounting movements
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account'            | 'Company'                                                 | 'Partner'                      | 'Business unit'   | 'Credit' | 'Partner term'                                            | 'Operation'                                                                                         |
-			| '3240'  | 'Cash, TRY'                    | 'Client 1'                                                | 'Customer 1 (3 partner terms)' | 'Business unit 1' | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
-			| '5202'  | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Customer 1 (3 partner terms)' | 'Business unit 1' | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |	
+			| 'Debit' | 'Cash/Bank account'            | 'Partner'                      | 'Business unit'   | ' '               | 'Credit' | 'Partner term'                                            | 'Operation'                                                                                         |
+			| '3240'  | 'Cash, TRY'                    | 'Customer 1 (3 partner terms)' | 'Business unit 1' | ''                | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
+			| '5202'  | 'Customer 1 (3 partner terms)' | 'Customer 1 (3 partner terms)' | 'Business unit 1' | 'Business unit 1' | '4010'   | 'Partner term with customer (by document + credit limit)' | 'CashReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                   |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr'          | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'             | 'Operation'                                                                                         | 'Extra dimension2 Cr'                                     | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '10.03.2023 00:00:00' | '3240'       | '1' | '950,00' | ''              | 'Yes'      | 'TRY'             | 'Cash, TRY'       | '950'          | 'Client 1'            | ''                | 'Customer 1 (3 partner terms)' | 'TRY'            | '4010'       | 'Customer 1 (3 partner terms)' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' | 'Partner term with customer (by document + credit limit)' | '950'           | 'Business unit 1'     |
-			| '10.03.2023 00:00:00' | '3240'       | '2' | '400,00' | ''              | 'Yes'      | 'TRY'             | 'Cash, TRY'       | '400'          | 'Client 2'            | ''                | 'Customer 2 (2 partner term)'  | 'TRY'            | '4010'       | 'Customer 2 (2 partner term)'  | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' | 'Individual partner term 1 (by partner term)'             | '400'           | 'Business unit 1'     |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr'          | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'             | 'Extra dimension2 Cr'                                     | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                         |
+			| '10.03.2023 00:00:00' | '1' | 'Yes'      | '3240'       | 'Cash, TRY'       | 'Customer 1 (3 partner terms)' | ''                    | 'TRY'            | '950'          | ''              | '4010'       | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Business unit 1'     | 'TRY'             | '950'           | ''                | '950,00' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |
+			| '10.03.2023 00:00:00' | '2' | 'Yes'      | '3240'       | 'Cash, TRY'       | 'Customer 2 (2 partner term)'  | ''                    | 'TRY'            | '400'          | ''              | '4010'       | 'Customer 2 (2 partner term)'  | 'Individual partner term 1 (by partner term)'             | 'Business unit 1'     | 'TRY'             | '400'           | ''                | '400,00' | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)' |		
 	And I close all client application windows
 
 Scenario: _0991120 check Cash expense accounting movements
@@ -2811,15 +2812,15 @@ Scenario: _0991120 check Cash expense accounting movements
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner' | 'Business unit'   | 'Company'       | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | 'Operation'                                               |
-			| '420.2' | ''        | 'Business unit 1' | 'Own company 2' | 'Other expence'            | '3240'   | 'Cash, TRY'         | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | 'Cash/Bank account' | ' ' | 'Operation'                                               |
+			| '420.2' | ''        | 'Business unit 1' | 'Other expence'            | '3240'   | 'Cash, TRY'         | ''  | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                               | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '24.02.2023 10:52:43' | '420.2'      | '1' | '180,00' | ''              | 'Yes'      | 'TRY'             | ''                | '180'          | 'Business unit 1'     | ''                | 'Other expence'       | 'TRY'            | '3240'       | 'Cash, TRY'        | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' | 'Own company 2'       | '180'           | ''                    |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                               |
+			| '24.02.2023 10:52:43' | '1' | 'Yes'      | '420.2'      | ''                | 'Business unit 1'     | 'Other expence'       | 'TRY'            | '180'          | ''              | '3240'       | 'Cash, TRY'        | ''                    | ''                    | 'TRY'             | '180'           | ''                | '180,00' | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)' |		
 	And I close all client application windows
 
 Scenario: _0991130 check Cash revenue accounting movements
@@ -2834,15 +2835,15 @@ Scenario: _0991130 check Cash revenue accounting movements
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Company'       | 'Partner' | 'Business unit'   | 'Credit' | ' ' | 'Operation'                                              |
-			| '3240'  | 'Cash, TRY'         | 'Own company 2' | ''        | 'Business unit 1' | '9100'   | ''  | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' |	
+			| 'Debit' | 'Cash/Bank account' | 'Partner' | 'Business unit'   | ' ' | 'Credit' | 'Legal name'    | 'Operation'                                              |
+			| '3240'  | 'Cash, TRY'         | ''        | 'Business unit 1' | ''  | '9100'   | 'Own company 2' | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                              | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '24.02.2023 10:53:15' | '3240'       | '1' | '12,00'  | ''              | 'Yes'      | 'TRY'             | 'Cash, TRY'       | '12'           | 'Own company 2'       | ''                | ''                    | 'TRY'            | '9100'       | 'Business unit 1'  | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' | 'Own company 2'       | '12'            | ''                    |			
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                              |
+			| '24.02.2023 10:53:15' | '1' | 'Yes'      | '3240'       | 'Cash, TRY'       | ''                    | ''                    | 'TRY'            | '12'           | ''              | '9100'       | 'Business unit 1'  | 'Own company 2'       | ''                    | 'TRY'             | '12'            | ''                | '12,00'  | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)' |		
 	And I close all client application windows
 
 Scenario: _0991140 check Debit note accounting movements (Vendor)
@@ -2857,16 +2858,16 @@ Scenario: _0991140 check Debit note accounting movements (Vendor)
 	* Check accounting movements
 		And in the table "Transactions" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'                   | 'Business unit'             | 'Company'                    | 'Partner term'               | 'Credit' | ' '               | 'Operation'                                                               |
-			| '5201'  | 'Vendor 1 (1 partner term)' | 'Business unit 1'           | 'Vendor 1'                   | 'Partner term with vendor 1' | '9100'   | ''                | 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)'           |
+			| 'Debit' | 'Partner'                   | 'Business unit'             | 'Partner term'               | 'Legal name'                 | 'Credit' | ' '               | 'Operation'                                                               |
+			| '5201'  | 'Vendor 1 (1 partner term)' | 'Business unit 1'           | 'Partner term with vendor 1' | 'Vendor 1'                   | '9100'   | ''                | 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)'           |
 			| '5201'  | 'Vendor 1 (1 partner term)' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '4020.2' | 'Business unit 1' | 'DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'           | 'Debit amount' | 'Extra dimension2 Dr'        | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                     | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '24.02.2023 11:03:25' | '5201'       | '1' | '25,00'  | ''              | 'Yes'      | 'TRY'             | 'Vendor 1 (1 partner term)' | '25'           | 'Partner term with vendor 1' | ''                | 'Business unit 1'     | 'TRY'            | '9100'       | 'Business unit 1'  | 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)' | 'Vendor 1'            | '25'            | ''                    |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'           | 'Extra dimension2 Dr'        | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                     |
+			| '24.02.2023 11:03:25' | '1' | 'Yes'      | '5201'       | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Business unit 1'     | 'TRY'            | '25'           | ''              | '9100'       | 'Business unit 1'  | 'Vendor 1'            | ''                    | 'TRY'             | '25'            | ''                | '25,00'  | 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)' |		
 	And I close all client application windows
 
 Scenario: _0991141 check Debit note accounting movements (Customer)
@@ -2898,8 +2899,8 @@ Scenario: _0991142 check Debit note accounting movements (Other)
 	* Check accounting movements
 		And in the table "Transactions" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Business unit'   | 'Company'         | 'Partner'        | 'Credit' | 'Operation'                                                           |
-			| '9200'  | 'Business unit 3' | 'Other partner 2' | 'Other partner 2'| '9100'   | 'DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)' |		
+			| 'Debit' | 'Business unit'   | 'Partner'         | 'Legal name'      | 'Credit' | ' ' | 'Operation'                                                           |
+			| '9200'  | 'Business unit 3' | 'Other partner 2' | 'Other partner 2' | '9100'   | ''  | 'DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2969,15 +2970,15 @@ Scenario: _0991147 check Credit note accounting movements (Other)
 	* Check accounting movements
 		And in the table "Transactions" I click "Edit accounting" button		
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'       | 'Business unit'   | 'Company'       | 'Expense and revenue type' | 'Credit' | 'Partner'       | 'Operation'                                                             |
-			| '420.2' | 'Other partner' | 'Business unit 1' | 'Other partner' | 'Other expence'            | '9200'   | 'Other partner' | 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' |
+			| 'Debit' | 'Partner'       | 'Business unit'   | 'Expense and revenue type' | 'Legal name'    | 'Credit' | 'Operation'                                                             |
+			| '420.2' | 'Other partner' | 'Business unit 1' | 'Other expence'            | 'Other partner' | '9200'   | 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '21.03.2024 12:00:00' | '420.2'      | '1' | '100,00' | ''              | 'Yes'      | 'TRY'             | 'Other partner'   | '100'          | 'Business unit 1'     | ''                | 'Other expence'       | 'TRY'            | '9200'       | 'Business unit 1'  | 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' | 'Other partner'       | '100'           | 'Other partner'       |
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                             |
+			| '21.03.2024 12:00:00' | '1' | 'Yes'      | '420.2'      | 'Other partner'   | 'Business unit 1'     | 'Other expence'       | 'TRY'            | '100'          | ''              | '9200'       | 'Business unit 1'  | 'Other partner'       | 'Other partner'       | 'TRY'             | '100'           | ''                | '100,00' | 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' |		
 	And I close all client application windows
 
 Scenario: _0991150 check Retail sales receipt accounting movements
@@ -3185,8 +3186,8 @@ Scenario: _0991174 check Revenue accruals accounting movements (without basis)
 	* Check accounting movements
 		And in the table "CostList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | ' ' | 'Credit' | 'Business unit'   | 'Company'       | 'Operation'                                                             |
-			| '980.1' | ''  | '9100'   | 'Business unit 1' | 'Own company 2' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |	
+			| 'Debit' | ' ' | 'Credit' | 'Business unit'   | 'Legal name'    | 'Operation'                                                             |
+			| '980.1' | ''  | '9100'   | 'Business unit 1' | 'Own company 2' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3208,7 +3209,7 @@ Scenario: _0991175 check Revenue accruals accounting movements (basis - Revenue 
 	* Check accounting movements
 		And in the table "CostList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Business unit'   | 'Company'       | ' ' | 'Credit' | 'Operation'                                                             |
+			| 'Debit' | 'Business unit'   | 'Legal name'    | ' ' | 'Credit' | 'Operation'                                                             |
 			| '9100'  | 'Business unit 1' | 'Own company 2' | ''  | '980.1'  | 'RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)' |		
 		And I close current window
 	* Check JE
@@ -3231,7 +3232,7 @@ Scenario: _0991176 check Revenue accruals accounting movements (basis - Revenue 
 	* Check accounting movements
 		And in the table "CostList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | ' ' | 'Credit' | 'Business unit'   | 'Company'       | 'Operation'                                                             |
+			| 'Debit' | ' ' | 'Credit' | 'Business unit'   | 'Legal name'    | 'Operation'                                                             |
 			| '980.1' | ''  | '9100'   | 'Business unit 1' | 'Own company 2' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |		
 		And I close current window
 	* Check JE
@@ -3257,8 +3258,8 @@ Scenario: _0991177 check Revenue accruals accounting movements (basis - Sales in
 	* Check accounting movements
 		And in the table "CostList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | ' ' | 'Credit' | 'Business unit' | 'Company'       | 'Operation'                                                             |
-			| '980.1' | ''  | '9100'   | ''              | 'Own company 2' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |
+			| 'Debit' | ' ' | 'Credit' | 'Business unit' | 'Legal name'    | 'Operation'                                                             |
+			| '980.1' | ''  | '9100'   | ''              | 'Own company 2' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3282,21 +3283,21 @@ Scenario: _0991190 check Money transfer accounting movements (Currency exchange)
 	* Check accounting movements
 		And I click the button named "EditAccounting"
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Company'       | 'Business unit'   | 'Credit' | 'Operation'                                                      |
-			| '3250'  | 'Bank account, TRY' | 'Own company 2' | 'Business unit 3' | '3250'   | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3010B_CashOnHand)'    |
-			| '3221'  | 'Bank account, TRY' | 'Own company 2' | 'Business unit 3' | '3250'   | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)' |
-			| '3250'  | 'Transit, TRY'      | 'Own company 2' | ''                | '3221'   | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)' |
-			| '3221'  | 'Business unit 3'   | 'Own company 2' | ''                | '9101'   | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R5021T_Revenues)'   |
-			| '420.5' | 'Transit, TRY'      | 'Own company 2' | ''                | '3221'   | 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'   |		
+			| 'Debit' | 'Cash/Bank account' | 'Business unit'   | ' ' | 'Credit' | 'Operation'                                                      |
+			| '3250'  | 'Bank account, TRY' | 'Business unit 3' | ''  | '3250'   | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3010B_CashOnHand)'    |
+			| '3221'  | 'Bank account, TRY' | 'Business unit 3' | ''  | '3250'   | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)' |
+			| '3250'  | 'Transit, TRY'      | ''                | ''  | '3221'   | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)' |
+			| '3221'  | 'Business unit 3'   | 'Own company 2'   | ''  | '9101'   | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R5021T_Revenues)'   |
+			| '420.5' | 'Transit, TRY'      | ''                | ''  | '3221'   | 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'   |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'   | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                                      | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '10.02.2023 12:00:00' | '3221'       | '1 000,00' | ''              | 'Yes'      | 'TRY'             | 'Transit, TRY'      | '1 000'        | 'Own company 2'       | ''                | ''                    | 'TRY'            | '3250'       | 'Bank account, TRY' | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)' | 'Own company 2'       | '1 000'         | 'Business unit 3'     |
-			| '10.02.2023 12:00:00' | '3250'       | '1 011,57' | ''              | 'Yes'      | 'EUR'             | 'Bank account, EUR' | '50'           | 'Own company 2'       | ''                | 'Business unit 3'     | 'EUR'            | '3221'       | 'Transit, TRY'      | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)' | 'Own company 2'       | '50'            | ''                    |
-			| '10.02.2023 12:00:00' | '3221'       | '11,57'    | ''              | 'Yes'      | 'TRY'             | 'Transit, TRY'      | '11,57'        | 'Own company 2'       | ''                | ''                    | 'TRY'            | '9101'       | 'Business unit 3'   | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R5021T_Revenues)'   | 'Own company 2'       | '11,57'         | ''                    |
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                      |
+			| '10.02.2023 12:00:00' | '1' | 'Yes'      | '3221'       | 'Transit, TRY'      | ''                    | ''                    | 'TRY'            | '1 000'        | ''              | '3250'       | 'Bank account, TRY' | 'Business unit 3'     | ''                    | 'TRY'             | '1 000'         | ''                | '1 000,00' | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)' |
+			| '10.02.2023 12:00:00' | '2' | 'Yes'      | '3250'       | 'Bank account, EUR' | 'Business unit 3'     | ''                    | 'EUR'            | '50'           | ''              | '3221'       | 'Transit, TRY'      | ''                    | ''                    | 'EUR'             | '50'            | ''                | '1 011,57' | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)' |
+			| '10.02.2023 12:00:00' | '3' | 'Yes'      | '3221'       | 'Transit, TRY'      | ''                    | ''                    | 'TRY'            | '11,57'        | ''              | '9101'       | 'Business unit 3'   | 'Own company 2'       | ''                    | 'TRY'             | '11,57'         | ''                | '11,57'    | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R5021T_Revenues)'   |		
 		Then the number of "RegisterRecords" table lines is "равно" "3"
 	And I close all client application windows
 
@@ -3313,18 +3314,18 @@ Scenario: _0991195 check Payroll accounting movements (acruals, deductions, taxe
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'   | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'    | 'Operation'                                                                         |
-			| '31.01.2023 12:00:00' | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '2 745,27'     | ''              | '5301'       | 'Income Tax (Emloyee)'        | ''                    | ''                    | 'TRY'             | '2 745,27'      | ''                | '2 745,27'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
-			| '31.01.2023 12:00:00' | 'Yes'      | '420.3'      | 'Employee 1'      | 'Business unit 2'     | 'Expence and revenue 1' | 'TRY'            | '-100'         | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '-100'          | ''                | '-100,00'   | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)' |
-			| '31.01.2023 12:00:00' | 'Yes'      | '420.3'      | 'Employee 2'      | 'Business unit 2'     | 'Salary (expense)'      | 'TRY'            | '3 272,73'     | ''              | '9200'       | 'Business unit 2'             | 'Own company 2'       | 'Tax authority'       | 'TRY'             | '3 272,73'      | ''                | '3 272,73'  | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'        |
-			| '31.01.2023 12:00:00' | 'Yes'      | '420.3'      | 'Employee 2'      | 'Business unit 2'     | 'Expence and revenue 1' | 'TRY'            | '-100'         | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '-100'          | ''                | '-100,00'   | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)' |
-			| '31.01.2023 12:00:00' | 'Yes'      | '420.2'      | 'Employee 2'      | 'Business unit 2'     | 'Other expence'         | 'TRY'            | '16 363,64'    | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '16 363,64'     | ''                | '16 363,64' | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  |
-			| '31.01.2023 12:00:00' | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '1 830,18'     | ''              | '5301'       | 'Social Insurance (Employee)' | ''                    | ''                    | 'TRY'             | '1 830,18'      | ''                | '1 830,18'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
-			| '31.01.2023 12:00:00' | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '2 454,55'     | ''              | '5301'       | 'Income Tax (Emloyee)'        | ''                    | ''                    | 'TRY'             | '2 454,55'      | ''                | '2 454,55'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
-			| '31.01.2023 12:00:00' | 'Yes'      | '420.2'      | 'Employee 1'      | 'Business unit 2'     | 'Other expence'         | 'TRY'            | '19 090,91'    | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '19 090,91'     | ''                | '19 090,91' | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  |
-			| '31.01.2023 12:00:00' | 'Yes'      | '420.3'      | 'Employee 1'      | 'Business unit 2'     | 'Salary (expense)'      | 'TRY'            | '3 660,36'     | ''              | '9200'       | 'Business unit 2'             | 'Own company 2'       | 'Tax authority'       | 'TRY'             | '3 660,36'      | ''                | '3 660,36'  | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'        |
-			| '31.01.2023 12:00:00' | 'Yes'      | '420.3'      | 'Employee 1'      | 'Business unit 2'     | 'Expence and revenue 1' | 'TRY'            | '120'          | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '120'           | ''                | '120,00'    | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  |
-			| '31.01.2023 12:00:00' | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '1 636,36'     | ''              | '5301'       | 'Social Insurance (Employee)' | ''                    | ''                    | 'TRY'             | '1 636,36'      | ''                | '1 636,36'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
+			| 'Period'              | '#'  | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'   | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'    | 'Operation'                                                                         |
+			| '31.01.2023 12:00:00' | '1'  | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '2 745,27'     | ''              | '5301'       | 'Income Tax (Emloyee)'        | ''                    | ''                    | 'TRY'             | '2 745,27'      | ''                | '2 745,27'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
+			| '31.01.2023 12:00:00' | '2'  | 'Yes'      | '420.3'      | 'Employee 1'      | 'Business unit 2'     | 'Expence and revenue 1' | 'TRY'            | '-100'         | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '-100'          | ''                | '-100,00'   | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)' |
+			| '31.01.2023 12:00:00' | '3'  | 'Yes'      | '420.3'      | 'Employee 2'      | 'Business unit 2'     | 'Salary (expense)'      | 'TRY'            | '3 272,73'     | ''              | '9200'       | 'Business unit 2'             | 'Tax authority'       | 'Tax authority'       | 'TRY'             | '3 272,73'      | ''                | '3 272,73'  | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'        |
+			| '31.01.2023 12:00:00' | '4'  | 'Yes'      | '420.3'      | 'Employee 2'      | 'Business unit 2'     | 'Expence and revenue 1' | 'TRY'            | '-100'         | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '-100'          | ''                | '-100,00'   | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)' |
+			| '31.01.2023 12:00:00' | '5'  | 'Yes'      | '420.2'      | 'Employee 2'      | 'Business unit 2'     | 'Other expence'         | 'TRY'            | '16 363,64'    | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '16 363,64'     | ''                | '16 363,64' | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  |
+			| '31.01.2023 12:00:00' | '6'  | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '1 830,18'     | ''              | '5301'       | 'Social Insurance (Employee)' | ''                    | ''                    | 'TRY'             | '1 830,18'      | ''                | '1 830,18'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
+			| '31.01.2023 12:00:00' | '7'  | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '2 454,55'     | ''              | '5301'       | 'Income Tax (Emloyee)'        | ''                    | ''                    | 'TRY'             | '2 454,55'      | ''                | '2 454,55'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
+			| '31.01.2023 12:00:00' | '8'  | 'Yes'      | '420.2'      | 'Employee 1'      | 'Business unit 2'     | 'Other expence'         | 'TRY'            | '19 090,91'    | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '19 090,91'     | ''                | '19 090,91' | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  |
+			| '31.01.2023 12:00:00' | '9'  | 'Yes'      | '420.3'      | 'Employee 1'      | 'Business unit 2'     | 'Salary (expense)'      | 'TRY'            | '3 660,36'     | ''              | '9200'       | 'Business unit 2'             | 'Tax authority'       | 'Tax authority'       | 'TRY'             | '3 660,36'      | ''                | '3 660,36'  | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'        |
+			| '31.01.2023 12:00:00' | '10' | 'Yes'      | '420.3'      | 'Employee 1'      | 'Business unit 2'     | 'Expence and revenue 1' | 'TRY'            | '120'          | ''              | '5401'       | ''                            | ''                    | ''                    | 'TRY'             | '120'           | ''                | '120,00'    | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  |
+			| '31.01.2023 12:00:00' | '11' | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '1 636,36'     | ''              | '5301'       | 'Social Insurance (Employee)' | ''                    | ''                    | 'TRY'             | '1 636,36'      | ''                | '1 636,36'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |		
 		Then the number of "RegisterRecords" table lines is "равно" "11"
 	And I close all client application windows
 
@@ -3347,19 +3348,19 @@ Scenario: _0991196 check Payroll accounting movements (cash advance deduction)
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
-		And "RegisterRecords" table contains lines
-			| "Period"              | "Account Dr" | "Amount"    | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit" | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr"   | "Debit currency" | "Account Cr" | "Ext. Dim. Credit" | "Operation"                                                                         | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
-			| "30.04.2024 10:36:50" | "420.3"      | "3 600,00"  | ""              | "Yes"      | "TRY"             | "Employee 2"      | "3 600"        | "Business unit 2"     | ""                | "Salary (expense)"      | "TRY"            | "9200"       | "Business unit 2"  | "Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)"        | "Own company 2"       | "3 600"         | "Tax authority"       |
-			| "30.04.2024 10:36:50" | "420.3"      | "4 100,00"  | ""              | "Yes"      | "TRY"             | "Employee 1"      | "4 100"        | "Business unit 2"     | ""                | "Salary (expense)"      | "TRY"            | "9200"       | "Business unit 2"  | "Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)"        | "Own company 2"       | "4 100"         | "Tax authority"       |
-			| "30.04.2024 10:36:50" | "420.2"      | "19 475,00" | ""              | "Yes"      | "TRY"             | "Employee 1"      | "19 475"       | "Business unit 2"     | ""                | "Other expence"         | "TRY"            | "5401"       | ""                 | "Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)"                  | ""                    | "19 475"        | ""                    |
-			| "30.04.2024 10:36:50" | "420.2"      | "18 000,00" | ""              | "Yes"      | "TRY"             | "Employee 2"      | "18 000"       | "Business unit 2"     | ""                | "Other expence"         | "TRY"            | "5401"       | ""                 | "Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)"                  | ""                    | "18 000"        | ""                    |
-			| "30.04.2024 10:36:50" | "420.3"      | "-100,00"   | ""              | "Yes"      | "TRY"             | "Employee 1"      | "-100"         | "Business unit 2"     | ""                | "Expence and revenue 1" | "TRY"            | "5401"       | ""                 | "Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)" | ""                    | "-100"          | ""                    |
-			| "30.04.2024 10:36:50" | "420.3"      | "-100,00"   | ""              | "Yes"      | "TRY"             | "Employee 2"      | "-100"         | "Business unit 2"     | ""                | "Expence and revenue 1" | "TRY"            | "5401"       | ""                 | "Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)" | ""                    | "-100"          | ""                    |
-			| "30.04.2024 10:36:50" | "5401"       | "50,00"     | ""              | "Yes"      | "TRY"             | ""                | "50"           | ""                    | ""                | ""                      | "TRY"            | "4020.1"     | "Employee 1"       | "Payroll DR (R9510B_SalaryPayment) CR (R3027B_EmployeeCashAdvance)"                 | ""                    | "50"            | ""                    |
-			| "30.04.2024 10:36:50" | "5401"       | "3 100,00"  | ""              | "Yes"      | "TRY"             | ""                | "3 100"        | ""                    | ""                | ""                      | "TRY"            | "9200"       | ""                 | "Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)"   | "Own company 2"       | "3 100"         | "Tax authority"       |
-			| "30.04.2024 10:36:50" | "5401"       | "2 050,00"  | ""              | "Yes"      | "TRY"             | ""                | "2 050"        | ""                    | ""                | ""                      | "TRY"            | "9200"       | ""                 | "Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)"   | "Own company 2"       | "2 050"         | "Tax authority"       |
-			| "30.04.2024 10:36:50" | "5401"       | "2 400,00"  | ""              | "Yes"      | "TRY"             | ""                | "2 400"        | ""                    | ""                | ""                      | "TRY"            | "9200"       | ""                 | "Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)"   | "Own company 2"       | "2 400"         | "Tax authority"       |
-			| "30.04.2024 10:36:50" | "5401"       | "1 600,00"  | ""              | "Yes"      | "TRY"             | ""                | "1 600"        | ""                    | ""                | ""                      | "TRY"            | "9200"       | ""                 | "Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)"   | "Own company 2"       | "1 600"         | "Tax authority"       |
+		And "RegisterRecords" table became equal
+			| 'Period'              | '#'  | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'   | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'    | 'Operation'                                                                         |
+			| '30.04.2024 10:36:50' | '1'  | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '3 100'        | ''              | '9200'       | ''                 | 'Tax authority'       | 'Tax authority'       | 'TRY'             | '3 100'         | ''                | '3 100,00'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
+			| '30.04.2024 10:36:50' | '2'  | 'Yes'      | '420.3'      | 'Employee 1'      | 'Business unit 2'     | 'Expence and revenue 1' | 'TRY'            | '-100'         | ''              | '5401'       | ''                 | ''                    | ''                    | 'TRY'             | '-100'          | ''                | '-100,00'   | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)' |
+			| '30.04.2024 10:36:50' | '3'  | 'Yes'      | '420.2'      | 'Employee 1'      | 'Business unit 2'     | 'Other expence'         | 'TRY'            | '19 475'       | ''              | '5401'       | ''                 | ''                    | ''                    | 'TRY'             | '19 475'        | ''                | '19 475,00' | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  |
+			| '30.04.2024 10:36:50' | '4'  | 'Yes'      | '420.3'      | 'Employee 2'      | 'Business unit 2'     | 'Salary (expense)'      | 'TRY'            | '3 600'        | ''              | '9200'       | 'Business unit 2'  | 'Tax authority'       | 'Tax authority'       | 'TRY'             | '3 600'         | ''                | '3 600,00'  | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'        |
+			| '30.04.2024 10:36:50' | '5'  | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '50'           | ''              | '4020.1'     | 'Employee 1'       | ''                    | ''                    | 'TRY'             | '50'            | ''                | '50,00'     | 'Payroll DR (R9510B_SalaryPayment) CR (R3027B_EmployeeCashAdvance)'                 |
+			| '30.04.2024 10:36:50' | '6'  | 'Yes'      | '420.3'      | 'Employee 2'      | 'Business unit 2'     | 'Expence and revenue 1' | 'TRY'            | '-100'         | ''              | '5401'       | ''                 | ''                    | ''                    | 'TRY'             | '-100'          | ''                | '-100,00'   | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)' |
+			| '30.04.2024 10:36:50' | '7'  | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '2 050'        | ''              | '9200'       | ''                 | 'Tax authority'       | 'Tax authority'       | 'TRY'             | '2 050'         | ''                | '2 050,00'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
+			| '30.04.2024 10:36:50' | '8'  | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '2 400'        | ''              | '9200'       | ''                 | 'Tax authority'       | 'Tax authority'       | 'TRY'             | '2 400'         | ''                | '2 400,00'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |
+			| '30.04.2024 10:36:50' | '9'  | 'Yes'      | '420.3'      | 'Employee 1'      | 'Business unit 2'     | 'Salary (expense)'      | 'TRY'            | '4 100'        | ''              | '9200'       | 'Business unit 2'  | 'Tax authority'       | 'Tax authority'       | 'TRY'             | '4 100'         | ''                | '4 100,00'  | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'        |
+			| '30.04.2024 10:36:50' | '10' | 'Yes'      | '420.2'      | 'Employee 2'      | 'Business unit 2'     | 'Other expence'         | 'TRY'            | '18 000'       | ''              | '5401'       | ''                 | ''                    | ''                    | 'TRY'             | '18 000'        | ''                | '18 000,00' | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  |
+			| '30.04.2024 10:36:50' | '11' | 'Yes'      | '5401'       | ''                | ''                    | ''                      | 'TRY'            | '1 600'        | ''              | '9200'       | ''                 | 'Tax authority'       | 'Tax authority'       | 'TRY'             | '1 600'         | ''                | '1 600,00'  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   |		
 		Then the number of "RegisterRecords" table lines is "равно" "11"
 		And I close all client application windows
 
@@ -3857,18 +3858,18 @@ Scenario: _0991228 check Bank payment accounting movements (Other partner, tax w
 	* Check accounting movements
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Tax type'                    | 'Business unit' | 'Company'       | ' ' | 'Credit' | 'Cash/Bank account' | 'Operation'                                                                |
-			| '5301'  | 'Social Insurance (Employee)' | ''              | 'Tax authority' | ''  | '3250'   | 'Bank account, TRY' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
-			| '5301'  | 'Social Insurance (Employee)' | ''              | 'Tax authority' | ''  | '9100'   | ''                  | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |		
+			| 'Debit' | ' ' | 'Credit' | 'Cash/Bank account' | 'Business unit' | 'Operation'                                                                |
+			| '5301'  | ''  | '3250'   | 'Bank account, TRY' | ''              | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
+			| '5301'  | ''  | '9100'   | ''                  | 'Tax authority' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'             | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                                |
-			| '22.04.2025 17:39:44' | '1' | 'Yes'      | '5301'       | 'Social Insurance (Employee)' | ''                    | ''                    | 'TRY'            | '3 400'        | ''              | '3250'       | 'Bank account, TRY' | 'Tax authority'       | ''                    | 'TRY'             | '3 400'         | ''                | '3 400,00' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
-			| '22.04.2025 17:39:44' | '2' | 'Yes'      | '5301'       | 'Social Insurance (Employee)' | ''                    | ''                    | 'TRY'            | '66,54'        | ''              | '9100'       | ''                  | 'Tax authority'       | ''                    | 'TRY'             | '66,54'         | ''                | '66,54'    | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |
-			| '22.04.2025 17:39:44' | '3' | 'Yes'      | '5402'       | ''                            | ''                    | ''                    | 'TRY'            | '6 933,09'     | ''              | '3250'       | 'Bank account, TRY' | 'Tax authority'       | ''                    | 'TRY'             | '6 933,09'      | ''                | '6 933,09' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |		
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                                |
+			| '22.04.2025 17:39:44' | '1' | 'Yes'      | '5301'       | ''                | ''                    | ''                    | 'TRY'            | '3 400'        | ''              | '3250'       | 'Bank account, TRY' | ''                    | ''                    | 'TRY'             | '3 400'         | ''                | '3 400,00' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |
+			| '22.04.2025 17:39:44' | '2' | 'Yes'      | '5301'       | ''                | ''                    | ''                    | 'TRY'            | '66,54'        | ''              | '9100'       | ''                  | 'Tax authority'       | ''                    | 'TRY'             | '66,54'         | ''                | '66,54'    | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'   |
+			| '22.04.2025 17:39:44' | '3' | 'Yes'      | '5402'       | ''                | ''                    | ''                    | 'TRY'            | '6 933,09'     | ''              | '3250'       | 'Bank account, TRY' | ''                    | ''                    | 'TRY'             | '6 933,09'      | ''                | '6 933,09' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' |		
 	And I close all client application windows
 
 
@@ -3995,11 +3996,11 @@ Scenario: _0991211 edit accounting manualy (document without tabular part)
 	* Create JE
 		And I click "Journal entry" button
 		And I click "Save" button
-		And "RegisterRecords" table contains lines
-			| "Period"              | "Account Dr" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"   | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr"     | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"  | "Operation"                                                      | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
-			| "11.03.2023 14:34:06" | "3250"       | "1 921,27" | ""              | "Yes"      | "USD"             | "Bank account, USD" | "102"          | "Own company 2"       | ""                | "Business unit 3"         | "USD"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)" | "Own company 2"       | "102"           | ""                    |
-			| "11.03.2023 14:34:06" | "3221"       | "2 003,76" | ""              | "Yes"      | "EUR"             | "Transit, TRY"      | "100"          | "Own company 2"       | ""                | ""                        | "EUR"            | "3250"       | "Bank account, EUR" | "MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)" | "Own company 2"       | "100"           | "Business unit 3"     |
-			| "11.03.2023 14:34:06" | "420.5"      | "82,49"    | ""              | "Yes"      | "TRY"             | ""                  | "82,49"        | "Business unit 3"     | ""                | "Foreign exchange losses" | "TRY"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)"   | "Own company 2"       | "82,49"         | ""                    |
+		And "RegisterRecords" table became equal
+			| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'     | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                      |
+			| '11.03.2023 14:34:06' | '1' | 'Yes'      | '3221'       | 'Transit, TRY'      | ''                    | ''                        | 'EUR'            | '100'          | ''              | '3250'       | 'Bank account, EUR' | 'Business unit 3'     | ''                    | 'EUR'             | '100'           | ''                | '2 003,76' | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)' |
+			| '11.03.2023 14:34:06' | '2' | 'Yes'      | '3250'       | 'Bank account, USD' | 'Business unit 3'     | ''                        | 'USD'            | '102'          | ''              | '3221'       | 'Transit, TRY'      | ''                    | ''                    | 'USD'             | '102'           | ''                | '1 921,27' | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)' |
+			| '11.03.2023 14:34:06' | '3' | 'Yes'      | '420.5'      | ''                  | 'Business unit 3'     | 'Foreign exchange losses' | 'TRY'            | '82,49'        | ''              | '3221'       | 'Transit, TRY'      | ''                    | ''                    | 'TRY'             | '82,49'         | ''                | '82,49'    | 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'   |		
 	* Edit accounting in document
 		When in opened panel I select "Money transfer 2 dated 11.03.2023 14:34:06"
 		* First
@@ -4014,11 +4015,11 @@ Scenario: _0991211 edit accounting manualy (document without tabular part)
 			And I click "Post" button
 			When in opened panel I select "JE Money transfer 2 dated 11.03.2023 14:34:06"
 			And I click "Save" button
-			And "RegisterRecords" table contains lines
-				| "Period"              | "Account Dr" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"   | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr"     | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"  | "Operation"                                                      | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
-				| "11.03.2023 14:34:06" | "3240"       | "1 921,27" | ""              | "Yes"      | "USD"             | "Bank account, USD" | "102"          | "Own company 2"       | ""                | ""                        | "USD"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)" | "Own company 2"       | "102"           | ""                    |
-				| "11.03.2023 14:34:06" | "3221"       | "2 003,76" | ""              | "Yes"      | "EUR"             | "Transit, TRY"      | "100"          | "Own company 2"       | ""                | ""                        | "EUR"            | "3250"       | "Bank account, EUR" | "MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)" | "Own company 2"       | "100"           | "Business unit 3"     |
-				| "11.03.2023 14:34:06" | "420.5"      | "82,49"    | ""              | "Yes"      | "TRY"             | ""                  | "82,49"        | "Business unit 3"     | ""                | "Foreign exchange losses" | "TRY"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)"   | "Own company 2"       | "82,49"         | ""                    |
+			And "RegisterRecords" table became equal
+				| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'     | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                      |
+				| '11.03.2023 14:34:06' | '1' | 'Yes'      | '3221'       | 'Transit, TRY'      | ''                    | ''                        | 'EUR'            | '100'          | ''              | '3250'       | 'Bank account, EUR' | 'Business unit 3'     | ''                    | 'EUR'             | '100'           | ''                | '2 003,76' | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)' |
+				| '11.03.2023 14:34:06' | '2' | 'Yes'      | '3240'       | 'Bank account, USD' | ''                    | ''                        | 'USD'            | '102'          | ''              | '3221'       | 'Transit, TRY'      | ''                    | ''                    | 'USD'             | '102'           | ''                | '1 921,27' | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)' |
+				| '11.03.2023 14:34:06' | '3' | 'Yes'      | '420.5'      | ''                  | 'Business unit 3'     | 'Foreign exchange losses' | 'TRY'            | '82,49'        | ''              | '3221'       | 'Transit, TRY'      | ''                    | ''                    | 'TRY'             | '82,49'         | ''                | '82,49'    | 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'   |			
 		* Second
 			When in opened panel I select "Money transfer 2 dated 11.03.2023 14:34:06"	
 			And I click the button named "EditAccounting"	
@@ -4033,11 +4034,11 @@ Scenario: _0991211 edit accounting manualy (document without tabular part)
 			And I click "Post" button
 			When in opened panel I select "JE Money transfer 2 dated 11.03.2023 14:34:06"
 			And I click "Save" button
-			And "RegisterRecords" table contains lines
-				| "Period"              | "Account Dr" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"   | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr"     | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"  | "Operation"                                                      | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
-				| "11.03.2023 14:34:06" | "3240"       | "1 921,27" | ""              | "Yes"      | "USD"             | "Bank account, USD" | "102"          | "Own company 2"       | ""                | ""                        | "USD"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)" | "Own company 2"       | "102"           | ""                    |
-				| "11.03.2023 14:34:06" | "3260"       | "2 003,76" | ""              | "Yes"      | "EUR"             | ""                  | "100"          | "Own company 2"       | ""                | ""                        | "EUR"            | "3250"       | "Bank account, EUR" | "MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)" | "Own company 2"       | "100"           | "Business unit 3"     |
-				| "11.03.2023 14:34:06" | "420.5"      | "82,49"    | ""              | "Yes"      | "TRY"             | ""                  | "82,49"        | "Business unit 3"     | ""                | "Foreign exchange losses" | "TRY"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)"   | "Own company 2"       | "82,49"         | ""                    |
+			And "RegisterRecords" table became equal
+				| 'Period'              | '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'     | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                      |
+				| '11.03.2023 14:34:06' | '1' | 'Yes'      | '3260'       | ''                  | ''                    | ''                        | 'EUR'            | '100'          | ''              | '3250'       | 'Bank account, EUR' | 'Business unit 3'     | ''                    | 'EUR'             | '100'           | ''                | '2 003,76' | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)' |
+				| '11.03.2023 14:34:06' | '2' | 'Yes'      | '3240'       | 'Bank account, USD' | ''                    | ''                        | 'USD'            | '102'          | ''              | '3221'       | 'Transit, TRY'      | ''                    | ''                    | 'USD'             | '102'           | ''                | '1 921,27' | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)' |
+				| '11.03.2023 14:34:06' | '3' | 'Yes'      | '420.5'      | ''                  | 'Business unit 3'     | 'Foreign exchange losses' | 'TRY'            | '82,49'        | ''              | '3221'       | 'Transit, TRY'      | ''                    | ''                    | 'TRY'             | '82,49'         | ''                | '82,49'    | 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'   |			
 		* Reset	
 			When in opened panel I select "Money transfer 2 dated 11.03.2023 14:34:06"
 			And I click the button named "EditAccounting"	
@@ -4046,11 +4047,11 @@ Scenario: _0991211 edit accounting manualy (document without tabular part)
 			And I click "Post" button
 			When in opened panel I select "JE Money transfer 2 dated 11.03.2023 14:34:06"
 			And I click "Save" button
-			And "RegisterRecords" table contains lines
-				| "Period"              | "Account Dr" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"   | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr"     | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"  | "Operation"                                                      | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
-				| "11.03.2023 14:34:06" | "3250"       | "1 921,27" | ""              | "Yes"      | "USD"             | "Bank account, USD" | "102"          | "Own company 2"       | ""                | "Business unit 3"         | "USD"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)" | "Own company 2"       | "102"           | ""                    |
-				| "11.03.2023 14:34:06" | "3221"       | "2 003,76" | ""              | "Yes"      | "EUR"             | "Transit, TRY"      | "100"          | "Own company 2"       | ""                | ""                        | "EUR"            | "3250"       | "Bank account, EUR" | "MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)" | "Own company 2"       | "100"           | "Business unit 3"     |
-				| "11.03.2023 14:34:06" | "420.5"      | "82,49"    | ""              | "Yes"      | "TRY"             | ""                  | "82,49"        | "Business unit 3"     | ""                | "Foreign exchange losses" | "TRY"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)"   | "Own company 2"       | "82,49"         | ""                    |
+			And "RegisterRecords" table became equal
+				| 'Period'              | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr'     | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                      |
+				| '11.03.2023 14:34:06' | 'Yes'      | '3221'       | 'Transit, TRY'      | ''                    | ''                        | 'EUR'            | '100'          | ''              | '3250'       | 'Bank account, EUR' | 'Business unit 3'     | ''                    | 'EUR'             | '100'           | ''                | '2 003,76' | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)' |
+				| '11.03.2023 14:34:06' | 'Yes'      | '3250'       | 'Bank account, USD' | 'Business unit 3'     | ''                        | 'USD'            | '102'          | ''              | '3221'       | 'Transit, TRY'      | ''                    | ''                    | 'USD'             | '102'           | ''                | '1 921,27' | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)' |
+				| '11.03.2023 14:34:06' | 'Yes'      | '420.5'      | ''                  | 'Business unit 3'     | 'Foreign exchange losses' | 'TRY'            | '82,49'        | ''              | '3221'       | 'Transit, TRY'      | ''                    | ''                    | 'TRY'             | '82,49'         | ''                | '82,49'    | 'MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)'   |
 		And I close all client application windows
 					
 

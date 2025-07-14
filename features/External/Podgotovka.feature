@@ -637,6 +637,72 @@ Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001
 	And I click the button named "FormPostAndClose"
 	And I close current window
 
+Scenario: Create document PurchaseInvoice objects (Other)
+	// Catalog.RowIDs
+
+	And I check or create catalog "RowIDs" objects:
+		| 'Ref'                                                            | 'DeletionMark' | 'Description'                          | 'AgreementPurchases'                                                 | 'AgreementSales' | 'Basis'                                                                    | 'Branch' | 'BranchReturn' | 'Company'                                                           | 'CompanyReturn' | 'CurrencyPurchases'                                                  | 'CurrencySales' | 'Hash'                                 | 'ItemKey'                                                          | 'LegalNamePurchases'                                                | 'LegalNameSales' | 'PartnerPurchases'                                                 | 'PartnerSales' | 'PriceIncludeTaxPurchases' | 'PriceIncludeTaxSales' | 'ProcurementMethod' | 'Requester' | 'RowID'                                | 'Store'                                                          | 'StoreReturn' | 'StoreReceiver' | 'StoreSender' | 'TransactionType' | 'TransactionTypeGR'                          | 'TransactionTypeSC' | 'TransactionTypeSales' | 'TransactionTypePurchases'               | 'TransactionTypeSR' | 'TransactionTypePR'                                  | 'Unit'                                                          | 'RetailCustomer' | 'TransactionTypeGRReturn' | 'TransactionTypeSCReturn'                                  | 'TransactionTypeRSC' | 'TransactionTypeRGR' | 'StoreSales' | 'StorePurchases' | 'Item'                                                          | 'IsVariableItemKey' | 'IsFixedItemKey' | 'IsVariableStore' | 'IsFixedStore' | 'NotActive' |
+		| 'e1cib/data/Catalog.RowIDs?ref=b85cf83b00f96e9211f041387a2b5139' | 'False'        | '10acfb80-074a-4da7-b0ad-72a22bbf9819' | 'e1cib/data/Catalog.Agreements?ref=b79ea93fec1998ed11ee09140139bba5' | ''               | 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | ''       | ''             | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''              | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | ''              | '38B2B1BB-A64A-2CEF-F9BB-BBEC797A9F44' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf11c9f09fc9f' | 'e1cib/data/Catalog.Companies?ref=b79ea93fec1998ed11ee09140139bba4' | ''               | 'e1cib/data/Catalog.Partners?ref=b79ea93fec1998ed11ee09140139bba3' | ''             | 'False'                    | 'False'                | ''                  | ''          | '10acfb80-074a-4da7-b0ad-72a22bbf9819' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | ''            | ''              | ''            | ''                | 'Enum.GoodsReceiptTransactionTypes.Purchase' | ''                  | ''                     | 'Enum.PurchaseTransactionTypes.Purchase' | ''                  | 'Enum.PurchaseReturnTransactionTypes.ReturnToVendor' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''               | ''                        | 'Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor' | ''                   | ''                   | ''           | ''               | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f4' | 'False'             | 'False'          | 'False'           | 'False'        | 'False'     |
+
+	// Document.PurchaseInvoice
+
+	And I check or create document "PurchaseInvoice" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Agreement'                                                          | 'Company'                                                           | 'Currency'                                                           | 'DocDate'            | 'DocNumber' | 'LegalName'                                                         | 'Partner'                                                          | 'PriceIncludeTax' | 'LegalNameContract' | 'TransactionType'                        | 'RecordPurchasePrices' | 'StoreDistributedPurchase' | 'CurrencyRevaluationInvoice' | 'Author'                                                        | 'Branch' | 'Comment' | 'CreateDate'          | 'DocumentAmount' | 'DocumentNumber' | 'Editor'                                                        | 'LocalNetAmount' | 'LocalRate' | 'LocalTaxAmount' | 'LocalTotalAmount' | 'ManualMovementsEdit' | 'ModifyDate'          | 'NumeratorRules' | 'SourceNodeID' | 'UniqueID' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | 'False'        | 40       | '04.06.2025 14:45:12' | 'True'   | 'e1cib/data/Catalog.Agreements?ref=b79ea93fec1998ed11ee09140139bba5' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '01.01.0001 0:00:00' | ''          | 'e1cib/data/Catalog.Companies?ref=b79ea93fec1998ed11ee09140139bba4' | 'e1cib/data/Catalog.Partners?ref=b79ea93fec1998ed11ee09140139bba3' | 'False'           | ''                  | 'Enum.PurchaseTransactionTypes.Purchase' | 'False'                | 'False'                    | ''                           | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''        | '04.06.2025 14:45:12' | 354              | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 300              | 1           | 54               | 354                | 'False'               | '04.06.2025 14:45:13' | ''               | ''             | ''         |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                      | 'Key'                                  | 'Item'                                                          | 'ItemKey'                                                          | 'Store'                                                          | 'PurchaseOrder' | 'Unit'                                                          | 'Quantity' | 'Price' | 'PriceType'                                             | 'TaxAmount' | 'TotalAmount' | 'NetAmount' | 'OffersAmount' | 'ProfitLossCenter' | 'ExpenseType' | 'DeliveryDate'       | 'SalesOrder' | 'Detail' | 'AdditionalAnalytic' | 'DontCalculateRow' | 'QuantityInBaseUnit' | 'UseGoodsReceipt' | 'InternalSupplyRequest' | 'DELETE_IsAdditionalItemCost' | 'OtherPeriodExpenseType' | 'UseSerialLotNumber' | 'IsService' | 'QuantityIsFixed' | 'VatRate'                                                          | 'Project' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | '10acfb80-074a-4da7-b0ad-72a22bbf9819' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f4' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf11c9f09fc9f' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | ''              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 10         | 30      | 'e1cib/data/Catalog.PriceTypes?refName=ManualPriceType' | 54          | 354           | 300         |                | ''                 | ''            | '01.01.0001 0:00:00' | ''           | ''       | ''                   | 'False'            | 10                   | 'False'           | ''                      | 'False'                       | ''                       | 'False'              | 'False'     | 'False'           | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' | ''        |
+
+	And I refill object tabular section "Currencies":
+		| 'Ref'                                                                      | 'Key'                                  | 'CurrencyFrom'                                                       | 'Rate' | 'ReverseRate' | 'ShowReverseRate' | 'Multiplicity' | 'MovementType'                                                                                    | 'Amount' | 'IsFixed' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 1      | 1             | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 354      | 'False'   |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 1      | 1             | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d' | 354      | 'False'   |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 0.1712 | 5.841121      | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' | 60.6     | 'False'   |
+
+	And I refill object tabular section "RowIDInfo":
+		| 'Ref'                                                                      | 'Key'                                  | 'RowID'                                | 'Quantity' | 'Basis' | 'CurrentStep' | 'NextStep' | 'RowRef'                                                         | 'BasisKey'                             |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | '10acfb80-074a-4da7-b0ad-72a22bbf9819' | '10acfb80-074a-4da7-b0ad-72a22bbf9819' | 10         | ''      | ''            | ''         | 'e1cib/data/Catalog.RowIDs?ref=b85cf83b00f96e9211f041387a2b5139' | '                                    ' |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | '10acfb80-074a-4da7-b0ad-72a22bbf9819' | ''                | ''               | 10         |
+
+
+Scenario: Create document PurchaseInvoice objects (contract currency differs from the invoice currency)
+	// Catalog.RowIDs
+
+	And I check or create catalog "RowIDs" objects:
+		| 'Ref'                                                            | 'DeletionMark' | 'Description'                          | 'AgreementPurchases'                                                 | 'AgreementSales' | 'Basis'                                                                    | 'Branch' | 'BranchReturn' | 'Company'                                                           | 'CompanyReturn' | 'CurrencyPurchases'                                                  | 'CurrencySales' | 'Hash'                                 | 'ItemKey'                                                          | 'LegalNamePurchases'                                                | 'LegalNameSales' | 'PartnerPurchases'                                                 | 'PartnerSales' | 'PriceIncludeTaxPurchases' | 'PriceIncludeTaxSales' | 'ProcurementMethod' | 'Requester' | 'RowID'                                | 'Store'                                                          | 'StoreReturn' | 'StoreReceiver' | 'StoreSender' | 'TransactionType' | 'TransactionTypeGR'                          | 'TransactionTypeSC' | 'TransactionTypeSales' | 'TransactionTypePurchases'               | 'TransactionTypeSR' | 'TransactionTypePR'                                  | 'Unit'                                                          | 'RetailCustomer' | 'TransactionTypeGRReturn' | 'TransactionTypeSCReturn'                                  | 'TransactionTypeRSC' | 'TransactionTypeRGR' | 'StoreSales' | 'StorePurchases' | 'Item'                                                          | 'IsVariableItemKey' | 'IsFixedItemKey' | 'IsVariableStore' | 'IsFixedStore' | 'NotActive' |
+		| 'e1cib/data/Catalog.RowIDs?ref=b85de730704fc69511f046e984b51db6' | 'False'        | '8ef58f62-35f6-44f7-8a1e-c8bed4a4e37c' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb77' | ''               | 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | ''       | ''             | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''              | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | ''              | 'E8694267-02B3-09CD-DBAA-AA08D20A4812' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c600' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | ''               | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | ''             | 'True'                     | 'False'                | ''                  | ''          | '8ef58f62-35f6-44f7-8a1e-c8bed4a4e37c' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | ''            | ''              | ''            | ''                | 'Enum.GoodsReceiptTransactionTypes.Purchase' | ''                  | ''                     | 'Enum.PurchaseTransactionTypes.Purchase' | ''                  | 'Enum.PurchaseReturnTransactionTypes.ReturnToVendor' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''               | ''                        | 'Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor' | ''                   | ''                   | ''           | ''               | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f4' | 'False'             | 'False'          | 'False'           | 'False'        | 'False'     |
+		| 'e1cib/data/Catalog.RowIDs?ref=b85de730704fc69511f046e984b51db7' | 'False'        | '401df558-9dd2-4f01-ab96-237cf0977cf5' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb77' | ''               | 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | ''       | ''             | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''              | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | ''              | 'CACEC3C6-D145-D898-861B-B8C087BDF518' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c604' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | ''               | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | ''             | 'True'                     | 'False'                | ''                  | ''          | '401df558-9dd2-4f01-ab96-237cf0977cf5' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | ''            | ''              | ''            | ''                | 'Enum.GoodsReceiptTransactionTypes.Purchase' | ''                  | ''                     | 'Enum.PurchaseTransactionTypes.Purchase' | ''                  | 'Enum.PurchaseReturnTransactionTypes.ReturnToVendor' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''               | ''                        | 'Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor' | ''                   | ''                   | ''           | ''               | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6' | 'False'             | 'False'          | 'False'           | 'False'        | 'False'     |
+
+	// Document.PurchaseInvoice
+
+	And I check or create document "PurchaseInvoice" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Agreement'                                                          | 'Company'                                                           | 'Currency'                                                           | 'DocDate'            | 'DocNumber' | 'LegalName'                                                         | 'Partner'                                                          | 'PriceIncludeTax' | 'LegalNameContract' | 'TransactionType'                        | 'RecordPurchasePrices' | 'StoreDistributedPurchase' | 'CurrencyRevaluationInvoice' | 'Author'                                                        | 'Branch' | 'Comment' | 'CreateDate'          | 'DocumentAmount' | 'DocumentNumber' | 'Editor'                                                        | 'LocalNetAmount' | 'LocalRate' | 'LocalTaxAmount' | 'LocalTotalAmount' | 'ManualMovementsEdit' | 'ModifyDate'          | 'NumeratorRules' | 'SourceNodeID' | 'UniqueID' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | 'False'        | 222      | '11.06.2025 12:12:12' | 'True'   | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb77' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | '01.01.0001 0:00:00' | ''          | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'True'            | ''                  | 'Enum.PurchaseTransactionTypes.Purchase' | 'True'                 | 'False'                    | ''                           | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''        | '11.06.2025 20:28:49' | 160              | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 763.09           | 5.6275      | 137.31           | 900.4              | 'False'               | '11.06.2025 20:28:51' | ''               | ''             | ''         |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                      | 'Key'                                  | 'Item'                                                          | 'ItemKey'                                                          | 'Store'                                                          | 'PurchaseOrder' | 'Unit'                                                          | 'Quantity' | 'Price' | 'PriceType'                                             | 'TaxAmount' | 'TotalAmount' | 'NetAmount' | 'OffersAmount' | 'ProfitLossCenter' | 'ExpenseType' | 'DeliveryDate'       | 'SalesOrder' | 'Detail' | 'AdditionalAnalytic' | 'DontCalculateRow' | 'QuantityInBaseUnit' | 'UseGoodsReceipt' | 'InternalSupplyRequest' | 'DELETE_IsAdditionalItemCost' | 'OtherPeriodExpenseType' | 'UseSerialLotNumber' | 'IsService' | 'QuantityIsFixed' | 'VatRate'                                                          | 'Project' | 'SimpleBatch' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '8ef58f62-35f6-44f7-8a1e-c8bed4a4e37c' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f4' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c600' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | ''              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 2          | 40      | 'e1cib/data/Catalog.PriceTypes?refName=ManualPriceType' | 12.2        | 80            | 67.8        |                | ''                 | ''            | '01.01.0001 0:00:00' | ''           | ''       | ''                   | 'False'            | 2                    | 'True'            | ''                      | 'False'                       | ''                       | 'False'              | 'False'     | 'False'           | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' | ''        | ''            |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '401df558-9dd2-4f01-ab96-237cf0977cf5' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c604' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | ''              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 4          | 20      | 'e1cib/data/Catalog.PriceTypes?refName=ManualPriceType' | 12.2        | 80            | 67.8        |                | ''                 | ''            | '01.01.0001 0:00:00' | ''           | ''       | ''                   | 'False'            | 4                    | 'True'            | ''                      | 'False'                       | ''                       | 'False'              | 'False'     | 'False'           | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' | ''        | ''            |
+
+	And I refill object tabular section "Currencies":
+		| 'Ref'                                                                      | 'Key'                                  | 'CurrencyFrom'                                                       | 'Rate' | 'ReverseRate' | 'ShowReverseRate' | 'Multiplicity' | 'MovementType'                                                                                    | 'Amount' | 'IsFixed' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | 5.6275 | 0.177699      | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 900.4    | 'False'   |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | 5.6275 | 0.177699      | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d' | 900.4    | 'False'   |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | 1      | 1             | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' | 160      | 'False'   |
+
+	And I refill object tabular section "RowIDInfo":
+		| 'Ref'                                                                      | 'Key'                                  | 'RowID'                                | 'Quantity' | 'Basis' | 'CurrentStep' | 'NextStep'                                    | 'RowRef'                                                         | 'BasisKey'                             |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '8ef58f62-35f6-44f7-8a1e-c8bed4a4e37c' | '8ef58f62-35f6-44f7-8a1e-c8bed4a4e37c' | 2          | ''      | ''            | 'e1cib/data/Catalog.MovementRules?refName=GR' | 'e1cib/data/Catalog.RowIDs?ref=b85de730704fc69511f046e984b51db6' | '                                    ' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '401df558-9dd2-4f01-ab96-237cf0977cf5' | '401df558-9dd2-4f01-ab96-237cf0977cf5' | 4          | ''      | ''            | 'e1cib/data/Catalog.MovementRules?refName=GR' | 'e1cib/data/Catalog.RowIDs?ref=b85de730704fc69511f046e984b51db7' | '                                    ' |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '8ef58f62-35f6-44f7-8a1e-c8bed4a4e37c' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '401df558-9dd2-4f01-ab96-237cf0977cf5' | ''                | ''               | 4          |
 
 
 Scenario: create InventoryTransferOrder020001
@@ -2119,7 +2185,7 @@ Scenario: check filter by transaction type in CR/BR
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term'     |
+			| 'Partner' | 'Legal name'  | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 		And I select current line in "PaymentList" table
 		And I click choice button of the attribute named "PaymentListAgreement" in "PaymentList" table
@@ -2134,26 +2200,26 @@ Scenario: check filter by transaction type in CR/BR
 		And I select "Return from vendor" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term'            |
+			| 'Partner' | 'Legal name'  | 'Partner term'            |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 	* Add second line and check partner term
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term'            |
+			| 'Partner' | 'Legal name'  | 'Partner term'            |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 	* Select transaction type Other partner
 		And I select "Other partner" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term' |
+			| 'Partner' | 'Legal name'  | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term' |
+			| 'Partner' | 'Legal name'  | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
@@ -2169,7 +2235,7 @@ Scenario: check filter by transaction type in CP/BP
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term'            |
+			| 'Partner' | 'Legal name'  | 'Partner term'            |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 		And I select current line in "PaymentList" table
 		And I click choice button of the attribute named "PaymentListAgreement" in "PaymentList" table
@@ -2184,26 +2250,26 @@ Scenario: check filter by transaction type in CP/BP
 		And I select "Return to customer" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term'     |
+			| 'Partner' | 'Legal name'  | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 	* Add second line and check partner term
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term'     |
+			| 'Partner' | 'Legal name'  | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 	* Select transaction type Other partner
 		And I select "Other partner" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term' |
+			| 'Partner' | 'Legal name'  | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term' |
+			| 'Partner' | 'Legal name'  | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |

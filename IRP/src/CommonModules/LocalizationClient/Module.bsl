@@ -32,6 +32,30 @@ Procedure DescriptionOpening(Object, Form, Item, StandardProcessing, Description
 
 EndProcedure
 
+// Description in table opening.
+// 
+// Parameters:
+//  TableRow -  FormDataCollectionItem - Table row
+//  Form - ClientApplicationForm - Form
+//  Item - FormField - Item
+//  StandardProcessing - Boolean - Standard processing
+Procedure DescriptionInTableOpening(TableRow, Form, Item, StandardProcessing) Export
+	StandardProcessing = False;
+	OpenArgs = New Structure("Values", New Structure());
+	For Each Attribute In LocalizationReuse.AllDescription() Do
+		OpenArgs.Values.Insert(Attribute, TableRow[Attribute]);
+	EndDo;
+
+	AdditionalParameters = New Structure();
+	AdditionalParameters.Insert("Object", TableRow);
+	AdditionalParameters.Insert("Form", Form);
+
+	//@skip-check invocation-parameter-type-intersect
+	OpenForm("CommonForm.EditDescriptions", OpenArgs, Form, , , , New NotifyDescription("DescriptionEditEnd",
+		ThisObject, AdditionalParameters));
+
+EndProcedure
+
 // Description edit end.
 // 
 // Parameters:

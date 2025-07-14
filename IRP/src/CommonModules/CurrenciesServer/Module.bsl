@@ -239,6 +239,8 @@ Function GetArrayOfResourceNames()
 	ArrayOfRecourceNames.Add("AllocatedCostTaxAmount");
 	ArrayOfRecourceNames.Add("AllocatedRevenueAmount");
 	ArrayOfRecourceNames.Add("AllocatedRevenueTaxAmount");
+	ArrayOfRecourceNames.Add("PreliminaryAmount");
+	ArrayOfRecourceNames.Add("PreliminaryTaxAmount");
 	
 	Return ArrayOfRecourceNames;
 EndFunction
@@ -452,6 +454,18 @@ Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurre
 	|			THEN 0
 	|		ELSE (RecordSet.AllocatedRevenueTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
 	|	END, &RoundDigitCapacity) AS AllocatedRevenueTaxAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.PreliminaryAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS PreliminaryAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.PreliminaryTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS PreliminaryTaxAmount,
 	|	CurrencyTable.MovementType.DeferredCalculation AS DeferredCalculation,
 	|	CurrencyTable.MovementType.Currency AS Currency
 	|FROM
@@ -507,6 +521,8 @@ Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurre
 	|	ROUND(RecordSet.AllocatedCostTaxAmount, &RoundDigitCapacity) AS AllocatedCostTaxAmount,
 	|	ROUND(RecordSet.AllocatedRevenueAmount, &RoundDigitCapacity) AS AllocatedRevenueAmount,
 	|	ROUND(RecordSet.AllocatedRevenueTaxAmount, &RoundDigitCapacity) AS AllocatedRevenueTaxAmount,
+	|	ROUND(RecordSet.PreliminaryAmount, &RoundDigitCapacity) AS PreliminaryAmount,
+	|	ROUND(RecordSet.PreliminaryTaxAmount, &RoundDigitCapacity) AS PreliminaryTaxAmount,
 	|	FALSE,
 	|	RecordSet.Currency
 	|FROM
@@ -1062,7 +1078,7 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 			PrepereTable = PartnerBalanceTables.R1021B_VendorsTransactions;
 			MainTableName = "R1021B_VendorsTransactions";
 		Else
-			Raise "Unknown transaction type in [T2015S_TransactionsInfo]";
+                        Raise R().UnknownTransactionTypeT2015;
 		EndIf;
 		
 		If Not PrepereTable.Count() Then
@@ -1071,7 +1087,7 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 		
 		RegisterRows = PrepereTable.FindRows(Filter);	
 		If RegisterRows.Count() = 0 Then
-			Raise StrTemplate("Not forund TRANSACTION CURRENCY in [%1]", MainTableName);
+                        Raise StrTemplate(R().TransactionCurrencyNotFound, MainTableName);
 		EndIf;
 		
 		RegMetadata = Metadata.AccumulationRegisters[MainTableName];  
@@ -1120,7 +1136,7 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 			PrepereTable = PartnerBalanceTables.R1020B_AdvancesToVendors;
 			MainTableName = "R1020B_AdvancesToVendors";
 		Else
-			Raise "Unknown transaction type in [Table_T2014S_AdvancesInfo]";
+                        Raise R().UnknownTransactionTypeTableT2014;
 		EndIf;
 		
 		If Not PrepereTable.Count() Then
@@ -1128,8 +1144,8 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 		EndIf;
 		
 		RegisterRows = PrepereTable.FindRows(Filter);	
-		If RegisterRows.Count() = 0 Then
-			Raise StrTemplate("Not forund TRANSACTION CURRENCY in [%1]", MainTableName);
+                If RegisterRows.Count() = 0 Then
+                        Raise StrTemplate(R().TransactionCurrencyNotFound, MainTableName);
 		EndIf;
 		
 		RegMetadata = Metadata.AccumulationRegisters[MainTableName];
@@ -1394,7 +1410,7 @@ Procedure ReplaceAmountInTransactionCurrency(TempTablesManager, RecordType, Tran
 			Filter.Insert("RecordType", RecordType);
 			TransitIncomingRows = TransitIncoming.FindRows(Filter);
 			If TransitIncomingRows.Count() <> 1 Then
-				Raise StrTemplate("Found [%1] rows in transit incoming", TransitIncomingRows.Count());
+                        Raise StrTemplate(R().TransitIncomingRowsCount, TransitIncomingRows.Count());
 			EndIf;
 			
 			TransitIncomingRows[0].Amount = Row.Amount;
@@ -1769,9 +1785,9 @@ Procedure RevaluateCurrency(_TempTablesManager, ArrayOfRegisterNames, CurrencyRa
 				CurrencyRatesFilter.Insert("Source"       , OtherCurrencyRow.Source);
 
 				CurrencyInfo = CurrencyRates.FindRows(CurrencyRatesFilter);
-				If CurrencyInfo.Count() > 1 Then
-					Raise "CurrencyInfo.Count() > 1"; // some thing is wrong
-				EndIf;
+                                If CurrencyInfo.Count() > 1 Then
+                                        Raise R().CurrencyInfoMoreThanOne; // some thing is wrong
+                                EndIf;
 
 				If Not CurrencyInfo.Count() Then
 					Continue; // currency rate not set
@@ -2230,9 +2246,9 @@ Procedure CurrencyRevaluationInvoice(Ref, Parameters, TransactionRegisterName, A
 		TransactionTable = Tables.R1021B_VendorsTransactions;
 		ExcludePostingDataTable(Parameters, Metadata.AccumulationRegisters.R1021B_VendorsTransactions);
 		
-	Else
-		Raise StrTemplate("Unsupported Currency revaluation invoice type [%1]", CurrencyRevaluationInvoiceType);
-	EndIf;
+                Else
+                        Raise StrTemplate(R().InvoiceTypeNotSupported, CurrencyRevaluationInvoiceType);
+                EndIf;
 	
 	If TransactionTable.Columns.Find("RecordType") = Undefined Then
 		TransactionTable.Columns.Add("RecordType");

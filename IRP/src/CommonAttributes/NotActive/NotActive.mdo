@@ -333,6 +333,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.ExecutionTemplates</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.ChequeBonds</metadata>
     <use>Use</use>
   </content>

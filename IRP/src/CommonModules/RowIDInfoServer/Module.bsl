@@ -2159,7 +2159,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		ElsIf Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer Then
 			RowRefObject.TransactionTypeRGR = Source.TransactionType;		
 		Else
-			Raise StrTemplate("Unsapported transaction type [%1]", Source.TransactionType);
+                        Raise StrTemplate(R().UnsupportedTransactionType, Source.TransactionType);
 		EndIf;
 	EndIf;
 	
@@ -6691,7 +6691,7 @@ Function GetBasises(Ref, FilterValues) Export
 	ElsIf Is.WS Then
 		Return GetBasisesFor_WS(FilterValues);
 	Else
-		Raise StrTemplate("GetBasises() not support [%1]", Ref);
+                Raise StrTemplate(R().GetBasisesNotSupported, Ref);
 	EndIf;
 EndFunction
 
@@ -7274,7 +7274,7 @@ Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
 	ElsIf DocAliase = Aliases.WS Then
 		Return GetFieldsToLock_ExternalLink_WS(ExternalDocAliase, Aliases);		
 	Else
-		Raise StrTemplate("Not supported External link for [%1]", DocAliase);
+                Raise StrTemplate(R().UnsupportedExternalLink, DocAliase);
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -7452,7 +7452,7 @@ Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
 	ElsIf DocAliase = Aliases.WS Then
 		Return GetFieldsToLock_InternalLink_WS(InternalDocAliase, Aliases);
 	Else
-		Raise StrTemplate("Not supported Internal link for [%1]", DocAliase);
+                Raise StrTemplate(R().UnsupportedInternalLink, DocAliase);
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -7709,7 +7709,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 							  |ItemKey            , ItemList.ItemKey";
 	
 	Else
-		Raise StrTemplate("Not supported External link for [SO] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkSO, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -8555,7 +8555,7 @@ Function GetFieldsToLock_InternalLink_SI(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, UseWorkSheet, SalesOrder, WorkOrder";
 	Else
-		Raise StrTemplate("Not supported Internal link for [SI] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkSI, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -8589,7 +8589,7 @@ Function GetFieldsToLock_ExternalLink_SI(ExternalDocAliase, Aliases)
 							  |ItemKey              , ItemList.ItemKey,
 							  |Store                , ItemList.Store";
 	Else
-		Raise StrTemplate("Not supported External link for [SI] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkSI, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -8888,7 +8888,7 @@ Function GetFieldsToLock_InternalLink_SC(InternalDocAliase, Aliases)
 		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, ShipmentPlaningOrder, SalesInvoice, InventoryTransferOrder,
 			|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
 	Else
-		Raise StrTemplate("Not supported Internal link for [SC] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkSC, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -8921,7 +8921,7 @@ Function GetFieldsToLock_ExternalLink_SC(ExternalDocAliase, Aliases)
 							  |Store              , ItemList.Store";
 	
 	Else
-		Raise StrTemplate("Not supported External link for [SC] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkSC3, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -9112,7 +9112,7 @@ Function GetFieldsToLock_InternalLink_SPO(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Store, Partner, LegalName";
 		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder";
 	Else
-		Raise StrTemplate("Not supported Internal link for [SPO] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkSPO, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -9141,7 +9141,7 @@ Function GetFieldsToLock_ExternalLink_SPO(ExternalDocAliase, Aliases)
 							  |ItemKey           , ItemList.ItemKey,
 							  |Store             , ItemList.Store";
 	Else
-		Raise StrTemplate("Not supported External link for [SPO] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkSPO, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -9325,7 +9325,7 @@ Function GetFieldsToLock_InternalLink_RSC(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Store, RetailCustomer, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
 	Else
-		Raise StrTemplate("Not supported Internal link for [RSC] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkRSC, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -9343,7 +9343,7 @@ Function GetFieldsToLock_ExternalLink_RSC(ExternalDocAliase, Aliases)
 							  |Store             , ItemList.Store";
 	
 	Else
-		Raise StrTemplate("Not supported External link for [RSC] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkRSC, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -9511,7 +9511,7 @@ Function GetFieldsToLock_InternalLink_SRO(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, SalesInvoice";
 	Else
-		Raise StrTemplate("Not supported Internal link for [SRO] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkSRO, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -9533,7 +9533,7 @@ Function GetFieldsToLock_ExternalLink_SRO(ExternalDocAliase, Aliases)
 							  |ItemKey              , ItemList.ItemKey,
 							  |Store                , ItemList.Store";
 	Else
-		Raise StrTemplate("Not supported External link for [SRO] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkSRO, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -9654,7 +9654,7 @@ Function GetFieldsToLock_InternalLink_PO(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch";
 		Result.ItemList = "Item, ItemKey, PurchaseBasis, SalesOrder, InternalSupplyRequest";
 	Else
-		Raise StrTemplate("Not supported Internal link for [PO] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkPO, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -9688,7 +9688,7 @@ Function GetFieldsToLock_ExternalLink_PO(ExternalDocAliase, Aliases)
 							  |ItemKey            , ItemList.ItemKey,
 							  |Store              , ItemList.Store";
 	Else
-		Raise StrTemplate("Not supported External link for [PO] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkPO, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -9916,7 +9916,7 @@ Function GetFieldsToLock_InternalLink_GR(InternalDocAliase, Aliases)
 			|InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
 			|InventoryTransfer, SalesInvoice";		
 	Else
-		Raise StrTemplate("Not supported Internal link for [GR] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkGR, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -9950,7 +9950,7 @@ Function GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases)
 						  |ItemKey           , ItemList.ItemKey,
 						  |StoreReturn       , ItemList.Store";
 	Else
-		Raise StrTemplate("Not supported External link for [GR] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkGR, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -10215,7 +10215,7 @@ Function GetFieldsToLock_InternalLink_RGR(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Partner, LegalName, RetailCustomer, TransactionType";
 		Result.ItemList = "Item, ItemKey, RetailSalesReceipt";		
 	Else
-		Raise StrTemplate("Not supported Internal link for [RGR] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkRGR, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -10244,7 +10244,7 @@ Function GetFieldsToLock_ExternalLink_RGR(ExternalDocAliase, Aliases)
 							  |ItemKey           , ItemList.ItemKey,
 							  |Store             , ItemList.Store";
 	Else
-		Raise StrTemplate("Not supported External link for [RGR] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkRGR, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -10347,7 +10347,7 @@ Function GetFieldsToLock_InternalLink_PI(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Store";
 		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
 	Else
-		Raise StrTemplate("Not supported Internal link for [PI] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkPI, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -10381,7 +10381,7 @@ Function GetFieldsToLock_ExternalLink_PI(ExternalDocAliase, Aliases)
 							  |ItemKey                  , ItemList.ItemKey,
 							  |Store                    , ItemList.Store";
 	Else
-		Raise StrTemplate("Not supported External link for [PI] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkPI, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -10656,7 +10656,7 @@ Function GetFieldsToLock_InternalLink_ITO(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, StoreReceiver";
 		Result.ItemList = "Item, ItemKey, InternalSupplyRequest, PurchaseOrder";
 	Else
-		Raise StrTemplate("Not supported Internal link for [ITO] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkITO, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -10673,7 +10673,7 @@ Function GetFieldsToLock_ExternalLink_ITO(ExternalDocAliase, Aliases)
 							  |StoreReceiver    , StoreReceiver,
 							  |ItemKey          , ItemList.ItemKey";
 	Else
-		Raise StrTemplate("Not supported External link for [ITO] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkITO, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -10770,7 +10770,7 @@ Function GetFieldsToLock_InternalLink_IT(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, StoreSender, StoreReceiver";
 		Result.ItemList = "Item, ItemKey, InventoryTransferOrder, SalesOrder";
 	Else
-		Raise StrTemplate("Not supported Internal link for [IT] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkIT, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -10796,7 +10796,7 @@ Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
 							  |ItemKey           , ItemList.ItemKey";
 	
 	Else
-		Raise StrTemplate("Not supported External link for [IT] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkIT, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -10965,7 +10965,7 @@ Function GetFieldsToLock_ExternalLink_ISR(ExternalDocAliase, Aliases)
 							  |Store             , Store,
 							  |ItemKey           , ItemList.ItemKey";
 	Else
-		Raise StrTemplate("Not supported External link for [ISR] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkISR, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11058,7 +11058,7 @@ Function GetFieldsToLock_InternalLink_PR(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, PurchaseReturnOrder";
 	Else
-		Raise StrTemplate("Not supported Internal link for [PR] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkPR, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11078,7 +11078,7 @@ Function GetFieldsToLock_ExternalLink_PR(ExternalDocAliase, Aliases)
 							  |Store              , ItemList.Store";
 	
 	Else
-		Raise StrTemplate("Not supported External link for [PR] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkPR, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11187,7 +11187,7 @@ Function GetFieldsToLock_InternalLink_SR(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, UseGoodsReceipt, SalesReturnOrder";
 	Else
-		Raise StrTemplate("Not supported Internal link for [SR] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkSR, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11206,7 +11206,7 @@ Function GetFieldsToLock_ExternalLink_SR(ExternalDocAliase, Aliases)
 							  |ItemKey           , ItemList.ItemKey,
 							  |Store             , ItemList.Store";
 	Else
-		Raise StrTemplate("Not supported External link for [SR] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkSR, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11309,7 +11309,7 @@ Function GetFieldsToLock_InternalLink_PRO(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, PurchaseInvoice";
 	Else
-		Raise StrTemplate("Not supported Internal link for [PRO] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkPRO, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11332,7 +11332,7 @@ Function GetFieldsToLock_ExternalLink_PRO(ExternalDocAliase, Aliases)
 							  |Store                    , ItemList.Store";
 	
 	Else
-		Raise StrTemplate("Not supported External link for [PRO] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkPRO, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11454,7 +11454,7 @@ Function GetFieldsToLock_InternalLink_RSR(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Store, RetailCustomer";
 		Result.ItemList = "Item, ItemKey, Store";		
 	Else
-		Raise StrTemplate("Not supported Internal link for [RSR] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkRSR, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11491,7 +11491,7 @@ Function GetFieldsToLock_ExternalLink_RSR(ExternalDocAliase, Aliases)
 							  |ItemKey          , ItemList.ItemKey,
 							  |Store            , ItemList.Store";			
 	Else
-		Raise StrTemplate("Not supported External link for [RSR] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkRSR, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11661,7 +11661,7 @@ Function GetFieldsToLock_InternalLink_PRR(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Requester";
 		Result.ItemList = "Item, ItemKey, Store";
 	Else
-		Raise StrTemplate("Not supported Internal link for [PRR] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkPRR, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11680,7 +11680,7 @@ Function GetFieldsToLock_InternalLink_RRR(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Store, Partner, LegalName, RetailCustomer";
 		Result.ItemList = "Item, ItemKey, Store";
 	Else
-		Raise StrTemplate("Not supported Internal link for [RRR] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkRRR, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11695,7 +11695,7 @@ Function GetFieldsToLock_InternalLink_StockAdjustmentAsSurplus(InternalDocAliase
 		Result.Header   = "Store";
 		Result.ItemList = "Item, ItemKey, BasisDocument, PhysicalInventory";
 	Else
-		Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsSurplus] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkStockAdjustmentAsSurplus, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11710,7 +11710,7 @@ Function GetFieldsToLock_InternalLink_StockAdjustmentAsWriteOff(InternalDocAlias
 		Result.Header   = "Store";
 		Result.ItemList = "Item, ItemKey, BasisDocument, PhysicalInventory";
 	Else
-		Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsWriteOff] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkStockAdjustmentAsWriteOff, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11729,7 +11729,7 @@ Function GetFieldsToLock_ExternalLink_PhysicalInventory(ExternalDocAliase, Alias
 		Result.RowRefFilter = "Store   , Store,
 							  |ItemKey , ItemList.ItemKey";
 	Else
-		Raise StrTemplate("Not supported External link for [PhysicalInventory] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkPhysicalInventory, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11806,7 +11806,7 @@ Function GetFieldsToLock_InternalLink_WO(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 		Result.ItemList = "Item, ItemKey, SalesOrder";
 	Else
-		Raise StrTemplate("Not supported Internal link for [WO] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkWO, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -11840,7 +11840,7 @@ Function GetFieldsToLock_ExternalLink_WO(ExternalDocAliase, Aliases)
 							  |ItemKey              , ItemList.ItemKey";
 	
 	Else
-		Raise StrTemplate("Not supported External link for [WO] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkWO, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -12040,7 +12040,7 @@ Function GetFieldsToLock_InternalLink_WS(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Partner, LegalName";
 		Result.ItemList = "Item, ItemKey, SalesOrder, SalesInvoice, WorkOrder";
 	Else
-		Raise StrTemplate("Not supported Internal link for [WS] to [%1]", InternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedInternalLinkWS, InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -12058,7 +12058,7 @@ Function GetFieldsToLock_ExternalLink_WS(ExternalDocAliase, Aliases)
 							  |TransactionTypeSales, ,
 							  |ItemKey           , ItemList.ItemKey";
 	Else
-		Raise StrTemplate("Not supported External link for [SC] to [%1]", ExternalDocAliase);
+		Raise StrTemplate(R().Error_UnsupportedExternalLinkSC3, ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -12781,7 +12781,7 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False, Ref = Und
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentPlaningOrder Then
 		Return "Company, Branch, Partner, LegalName";
 	Else
-		Raise StrTemplate("GetSeparatorColumns( %1 ) not supported", String(DocReceiverMetadata));
+		Raise StrTemplate(R().Error_GetSeparatorColumnsNotSupported, String(DocReceiverMetadata));
 	EndIf;
 EndFunction
 
@@ -13886,26 +13886,13 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	If Not LinkedRowsIntegrityIsEnable() Then
 		Return;
 	EndIf;
-	// check internal links
+	
+	TempTablesManager = New TempTablesManager();
+	
 	Query = New Query();
-	Query.TempTablesManager = New TempTablesManager();
-	Query.Text =
+	Query.TempTablesManager = TempTablesManager;
+	Query.Text = 
 	"SELECT
-	|	BasisesTable.RowID,
-	|	BasisesTable.RowRef,
-	|	BasisesTable.Basis,
-	|	BasisesTable.BasisKey,
-	|	BasisesTable.CurrentStep,
-	|	BasisesTable.ItemKey,
-	|	BasisesTable.Item,
-	|	BasisesTable.Store
-	|INTO BasisesTable
-	|FROM
-	|	&BasisesTable AS BasisesTable
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
 	|	RowIDInfo.Key,
 	|	RowIDInfo.RowID,
 	|	RowIDInfo.RowRef,
@@ -13926,7 +13913,74 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|	ItemList.Store
 	|INTO ItemList
 	|FROM
-	|	&ItemList AS ItemList
+	|	&ItemList AS ItemList";
+	Query.SetParameter("RowIDInfo", RowIDInfoTable);
+	Query.SetParameter("ItemList", ItemListTable);
+	Query.Execute();
+	
+	// check dates
+	Query = New Query();
+	Query.TempTablesManager = TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	RowIDInfo.Key AS Key,
+	|	RowIDInfo.Basis AS Basis,
+	|	RowIDInfo.Basis.Date AS BasisDate
+	|INTO tmp_RowID
+	|FROM
+	|	RowIDInfo AS RowIDInfo
+	|WHERE
+	|	NOT RowIDInfo.Basis.Ref IS NULL
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Key AS Key,
+	|	ItemList.LineNumber AS LineNumber,
+	|	&DocDate AS Date
+	|INTO tmp_ItemList
+	|FROM
+	|	ItemList AS ItemList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp_ItemList.LineNumber AS LineNumber,
+	|	tmp_RowID.Basis AS Basis,
+	|	tmp_ItemList.Date AS Date,
+	|	tmp_RowID.BasisDate AS BasisDate
+	|FROM
+	|	tmp_RowID AS tmp_RowID
+	|		INNER JOIN tmp_ItemList AS tmp_ItemList
+	|		ON tmp_ItemList.Key = tmp_RowID.Key
+	|		AND tmp_ItemList.Date <= tmp_RowID.BasisDate";
+	Query.SetParameter("DocDate", Object.Date); 
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	For Each Row In QueryTable Do
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_185, 
+			Row.LineNumber, Row.Date, Row.BasisDate),
+				"ItemList[" + Format((Row.LineNumber - 1), "NZ=0; NG=0;") + "].IsInternalLinked", Object);
+	EndDo;	
+	
+	// check internal links
+	Query = New Query();
+	Query.TempTablesManager = TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	BasisesTable.RowID,
+	|	BasisesTable.RowRef,
+	|	BasisesTable.Basis,
+	|	BasisesTable.BasisKey,
+	|	BasisesTable.CurrentStep,
+	|	BasisesTable.ItemKey,
+	|	BasisesTable.Item,
+	|	BasisesTable.Store
+	|INTO BasisesTable
+	|FROM
+	|	&BasisesTable AS BasisesTable
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -14013,8 +14067,6 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 
 	BasisesTable = GetBasises(Object.Ref, LinkedFilter);
 	Query.SetParameter("BasisesTable", BasisesTable);
-	Query.SetParameter("RowIDInfo", RowIDInfoTable);
-	Query.SetParameter("ItemList", ItemListTable);
 
 	Is = Is(Object);
 	If Is.RRR Or Is.SR Or Is.PO Or Is.PI Or Is.SC Or Is.SI Then
@@ -14289,7 +14341,7 @@ Procedure ClearAppearance_Header(Object, Form) Export
 				FormElement.ReadOnly = False;
 			EndIf;
 		Else
-			Raise StrTemplate("Not found form element: %1", FieldName);
+			Raise StrTemplate(R().Error_FormElementNotFound, FieldName);
 		EndIf;
 	EndDo;
 	Form.LockedFields.Clear();
@@ -14329,7 +14381,7 @@ Procedure AddAppearance_Header(Object, Form, FieldsToLock)
 			EndIf;
 			Form.LockedFields.Add(FieldName);
 		Else
-			Raise StrTemplate("Not found form element: %1", FieldName);
+			Raise StrTemplate(R().Error_FormElementNotFound, FieldName);
 		EndIf;
 	EndDo;
 		
@@ -14343,7 +14395,7 @@ Procedure AddAppearance_ItemList(Object, Form, FieldsToLock, Condition)
 		FieldName = "ItemList" + Row.FieldName;
 		FormElement = Form.Items.Find(FieldName);
 		If FormElement = Undefined Then
-			Raise StrTemplate("Not found form element: %1", FieldName);
+			Raise StrTemplate(R().Error_FormElementNotFound, FieldName);
 		EndIf;
 		
 		Element = Form.ConditionalAppearance.Items.Add();

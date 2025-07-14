@@ -109,6 +109,14 @@ Function IsUseShipmentAndReceiptPlaningOrders() Export
 	Return GetFunctionalOption("UseShipmentAndReceiptPlaningOrders");
 EndFunction
 
+Function IsUseSimpleBatch() Export
+	Return GetFunctionalOption("UseSimpleBatch");
+EndFunction
+
+Function IsUsePreliminary() Export
+	Return GetFunctionalOption("UsePreliminary");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export
@@ -278,7 +286,7 @@ Function GetDefault_LegalName(Parameters, Value = Undefined) Export
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
 		If QuerySelection.Count() > 1 Then
-			Raise StrTemplate("Found more than 1 [%1] when option NOT [%2]", "Companies (Legal name)", "UseCompanies");
+                        Raise StrTemplate(R().Error_FoundMoreThanOneCompany);
 		EndIf;
 		Return New Structure("Ref, DeletionMark", QuerySelection.Ref, QuerySelection.DeletionMark);
 	EndIf;
@@ -303,7 +311,7 @@ Function GetDefault_ItemKey(Parameters, Value = Undefined) Export
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then 
 		If QuerySelection.Count() > 1 Then
-			Raise StrTemplate("Found more than 1 [%1] when option NOT [%2]", "ItemKey", "UseItemKey");
+                        Raise StrTemplate(R().Error_FoundMoreThanOneItemKey);
 		EndIf;
 		Return New Structure("Ref, DeletionMark", QuerySelection.Ref, QuerySelection.DeletionMark);
 	EndIf;
@@ -371,7 +379,7 @@ Function CreateDefault_AgreementByType(Partner, AgreementType, Value)
 		DefaultDescriptionKey = "Default_003";
 		DefaultPriceType = GetDefault_PriceType_Vendor();
 	Else
-		Raise "Get default agreement implement only for customer or vendor";
+                Raise R().DefaultAgreementOnlyCustVendor;
 	EndIf;
 	
 	DefaultLegalNameData = GetDefault_LegalName(Parameters);

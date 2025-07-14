@@ -229,14 +229,14 @@ Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing)
 	ElsIf SourceType = Type("CatalogManager.PriceKeys") Then
 		Presentation = LocalizationReuse.CatalogDescriptionWithAddAttributes(Data.Ref);
 		If IsBlankString(Presentation) Then
-			Presentation = StrTemplate(R().Error_005, LocalizationReuse.UserLanguageCode());
+			Presentation = StrTemplate(R().Error_005, LocalizationReuse.GetInterfaceLocalizationCode());
 		EndIf;
 	ElsIf Data.Property("Description") Then
 		Presentation = String(Data.Description);
 	ElsIf Data.Property("FullDescription") And ValueIsFilled(Data.FullDescription) Then
 		Presentation = String(Data.FullDescription);
 	Else
-		Presentation = String(Data["Description_" + LocalizationReuse.UserLanguageCode()]);
+		Presentation = String(Data["Description_" + LocalizationReuse.GetLocalizationCode()]);
 		If Presentation = "" Then
 			For Each KeyData In Data Do
 				If KeyData.Value = "" Then
@@ -247,7 +247,7 @@ Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing)
 			EndDo;
 
 			If Presentation = "" Then
-				Presentation = StrTemplate(R().Error_002, LocalizationReuse.UserLanguageCode());
+				Presentation = StrTemplate(R().Error_002, LocalizationReuse.GetInterfaceLocalizationCode());
 			EndIf;
 		EndIf;
 	EndIf;

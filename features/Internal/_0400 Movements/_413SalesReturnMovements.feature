@@ -26,6 +26,7 @@ Scenario: _041300 preparation (Sales return)
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
+		When Create OtherPartners objects
 		When Create catalog Partners objects (trade agent and consignor)
 		When Create catalog Stores (trade agent)
 		When Create catalog Items objects
@@ -169,6 +170,9 @@ Scenario: _041300 preparation (Sales return)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.SalesReturn.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document SalesReturn objects (partner Other)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"    |
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
 			| 'Number'    |
@@ -330,13 +334,13 @@ Scenario: _041305 check Sales return movements by the Register  "R4050 Stock inv
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 101 dated 12.03.2021 08:44:18'   | ''              | ''                      | ''            | ''               | ''           | ''            |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''               | ''           | ''            |
-			| 'Register  "R4050 Stock inventory"'            | ''              | ''                      | ''            | ''               | ''           | ''            |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''           | ''            |
-			| ''                                             | ''              | ''                      | 'Quantity'    | 'Company'        | 'Store'      | 'Item key'    |
-			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '1'           | 'Main Company'   | 'Store 02'   | 'XS/Blue'     |
-			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '2'           | 'Main Company'   | 'Store 02'   | '36/Red'      |
+			| 'Sales return 101 dated 12.03.2021 08:44:18'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
+			| 'Document registrations records'               | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
+			| 'Register  "R4050 Stock inventory"'            | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
+			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''            |'Attributes'                |
+			| ''                                             | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'    |'Calculation movement cost' |
+			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '1'           | ''                    | 'Main Company'   | 'Store 02'   | 'XS/Blue'     | ''                         |
+			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '2'           | ''                    | 'Main Company'   | 'Store 02'   | '36/Red'      | ''                         |
 	And I close all client application windows
 
 
@@ -416,20 +420,20 @@ Scenario: _041309 check Sales return movements by the Register  "R5021 Revenues"
 		And I select "R5021 Revenues" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''                    | ''          | ''                  | ''             | ''                        | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''           |
-			| 'Document registrations records'             | ''                    | ''          | ''                  | ''             | ''                        | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''           |
-			| 'Register  "R5021 Revenues"'                 | ''                    | ''          | ''                  | ''             | ''                        | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''           |
-			| ''                                           | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''                        | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''           |
-			| ''                                           | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'                  | 'Profit loss center'      | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project'    |
-			| ''                                           | '12.03.2021 08:44:18' | '-563,56'   | '-665'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'TRY'      | ''                    | 'Local currency'               | 'Project 01' |
-			| ''                                           | '12.03.2021 08:44:18' | '-563,56'   | '-665'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'TRY'      | ''                    | 'en description is empty'      | 'Project 01' |
-			| ''                                           | '12.03.2021 08:44:18' | '-418,64'   | '-494'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'Local currency'               | 'Project 01' |
-			| ''                                           | '12.03.2021 08:44:18' | '-418,64'   | '-494'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'en description is empty'      | 'Project 01' |
-			| ''                                           | '12.03.2021 08:44:18' | '-96,48'    | '-113,85'           | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'USD'      | ''                    | 'Reporting currency'           | 'Project 01' |
-			| ''                                           | '12.03.2021 08:44:18' | '-80,51'    | '-95'               | 'Main Company' | 'Distribution department' | 'Front office'            | 'Revenue'      | 'Internet' | 'TRY'      | ''                    | 'Local currency'               | 'Project 01' |
-			| ''                                           | '12.03.2021 08:44:18' | '-80,51'    | '-95'               | 'Main Company' | 'Distribution department' | 'Front office'            | 'Revenue'      | 'Internet' | 'TRY'      | ''                    | 'en description is empty'      | 'Project 01' |
-			| ''                                           | '12.03.2021 08:44:18' | '-71,67'    | '-84,57'            | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'USD'      | ''                    | 'Reporting currency'           | 'Project 01' |
-			| ''                                           | '12.03.2021 08:44:18' | '-13,78'    | '-16,26'            | 'Main Company' | 'Distribution department' | 'Front office'            | 'Revenue'      | 'Internet' | 'USD'      | ''                    | 'Reporting currency'           | 'Project 01' |
+			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''                    | ''          | ''                  | ''             | ''                        | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''           | ''                          |
+			| 'Document registrations records'             | ''                    | ''          | ''                  | ''             | ''                        | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''           | ''                          |
+			| 'Register  "R5021 Revenues"'                 | ''                    | ''          | ''                  | ''             | ''                        | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''           | ''                          |
+			| ''                                           | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''                        | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''           | 'Attributes'                |
+			| ''                                           | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'                  | 'Profit loss center'      | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project'    | 'Calculation movement cost' |
+			| ''                                           | '12.03.2021 08:44:18' | '-563,56'   | '-665'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'TRY'      | ''                    | 'Local currency'               | 'Project 01' | ''                          |
+			| ''                                           | '12.03.2021 08:44:18' | '-563,56'   | '-665'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'TRY'      | ''                    | 'en description is empty'      | 'Project 01' | ''                          |
+			| ''                                           | '12.03.2021 08:44:18' | '-418,64'   | '-494'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'Local currency'               | 'Project 01' | ''                          |
+			| ''                                           | '12.03.2021 08:44:18' | '-418,64'   | '-494'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'en description is empty'      | 'Project 01' | ''                          |
+			| ''                                           | '12.03.2021 08:44:18' | '-96,48'    | '-113,85'           | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'USD'      | ''                    | 'Reporting currency'           | 'Project 01' | ''                          |
+			| ''                                           | '12.03.2021 08:44:18' | '-80,51'    | '-95'               | 'Main Company' | 'Distribution department' | 'Front office'            | 'Revenue'      | 'Internet' | 'TRY'      | ''                    | 'Local currency'               | 'Project 01' | ''                          |
+			| ''                                           | '12.03.2021 08:44:18' | '-80,51'    | '-95'               | 'Main Company' | 'Distribution department' | 'Front office'            | 'Revenue'      | 'Internet' | 'TRY'      | ''                    | 'en description is empty'      | 'Project 01' | ''                          |
+			| ''                                           | '12.03.2021 08:44:18' | '-71,67'    | '-84,57'            | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'USD'      | ''                    | 'Reporting currency'           | 'Project 01' | ''                          |
+			| ''                                           | '12.03.2021 08:44:18' | '-13,78'    | '-16,26'            | 'Main Company' | 'Distribution department' | 'Front office'            | 'Revenue'      | 'Internet' | 'USD'      | ''                    | 'Reporting currency'           | 'Project 01' | ''                          |
 	And I close all client application windows
 
 
@@ -971,13 +975,13 @@ Scenario: _041331 check Sales return movements by the Register  "R4050 Stock inv
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 192 dated 02.11.2022 10:53:27' | ''                    | ''           | ''             | ''                  | ''         | ''         |
-			| 'Register  "R4050 Stock inventory"'          | ''                    | ''           | ''             | ''                  | ''         | ''         |
-			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Store'             | 'Item key' | 'Quantity' |
-			| ''                                           | '02.11.2022 10:53:27' | 'Receipt'    | 'Main Company' | 'Store 01'          | 'XS/Blue'  | '1'        |
-			| ''                                           | '02.11.2022 10:53:27' | 'Receipt'    | 'Main Company' | 'Store 01'          | 'PZU'      | '4'        |
-			| ''                                           | '02.11.2022 10:53:27' | 'Expense'    | 'Main Company' | 'Trade agent store' | 'XS/Blue'  | '1'        |
-			| ''                                           | '02.11.2022 10:53:27' | 'Expense'    | 'Main Company' | 'Trade agent store' | 'PZU'      | '4'        |	
+			| 'Sales return 192 dated 02.11.2022 10:53:27' | ''                    | ''           | ''             | ''                  | ''         | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'          | ''                    | ''           | ''             | ''                  | ''         | ''         | ''                     | ''                        |
+			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Store'             | 'Item key' | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                           | '02.11.2022 10:53:27' | 'Receipt'    | 'Main Company' | 'Store 01'          | 'XS/Blue'  | '1'        | ''                     | ''                        |
+			| ''                                           | '02.11.2022 10:53:27' | 'Receipt'    | 'Main Company' | 'Store 01'          | 'PZU'      | '4'        | ''                     | ''                        |
+			| ''                                           | '02.11.2022 10:53:27' | 'Expense'    | 'Main Company' | 'Trade agent store' | 'XS/Blue'  | '1'        | ''                     | ''                        |
+			| ''                                           | '02.11.2022 10:53:27' | 'Expense'    | 'Main Company' | 'Trade agent store' | 'PZU'      | '4'        | ''                     | ''                        |	
 		And I close all client application windows	
 	
 
@@ -1077,10 +1081,10 @@ Scenario: _041340 check Sales return movements by the Register  "R4050 Stock inv
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 193 dated 05.11.2022 00:00:01' | ''                    | ''           | ''             | ''         | ''         | ''         |
-			| 'Register  "R4050 Stock inventory"'          | ''                    | ''           | ''             | ''         | ''         | ''         |
-			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' |
-			| ''                                           | '05.11.2022 00:00:01' | 'Receipt'    | 'Main Company' | 'Store 01' | 'XS/Blue'  | '1'        |		
+			| 'Sales return 193 dated 05.11.2022 00:00:01' | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'          | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     | ''                        |
+			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                           | '05.11.2022 00:00:01' | 'Receipt'    | 'Main Company' | 'Store 01' | 'XS/Blue'  | '1'        |	''                     | ''                        |	
 		And I close all client application windows	
 
 Scenario: _041341 check Sales return movements by the Register  "Posted documents registry"
@@ -1112,15 +1116,320 @@ Scenario: _041342 check Sales return movements by the Register  "R6060 Cost of g
 		And Delay 10
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 1 114 dated 12.05.2025 00:00:00'      | ''                    | ''             | ''                                              | ''         | ''                        | ''         | ''                  | ''                 | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                                                       |
-			| 'Register  "R6060 Cost of goods sold !Manual edit"' | ''                    | ''             | ''                                              | ''         | ''                        | ''         | ''                  | ''                 | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                                                       |
-			| ''                                                  | 'Period'              | 'Company'      | 'Sales invoice'                                 | 'Item key' | 'Currency movement type'  | 'Currency' | 'Serial lot number' | 'Source of origin' | 'Quantity' | 'Invoice amount' | 'Invoice tax amount' | 'Indirect cost amount' | 'Indirect cost tax amount' | 'Extra cost amount by ratio' | 'Extra cost tax amount by ratio' | 'Extra direct cost amount' | 'Extra direct cost tax amount' | 'Allocated cost amount' | 'Allocated cost tax amount' | 'Allocated revenue amount' | 'Allocated revenue tax amount' | 'Total amount' | 'Total net amount' | 'Total tax amount' | 'Calculation movement cost'                              |
-			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/Brown'  | 'Local currency'          | 'TRY'      | ''                  | ''                 | '-50'      | '-14 830,51'     | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
-			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'Local currency'          | 'TRY'      | ''                  | ''                 | '-30'      | '-9 661,02'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
-			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/Brown'  | 'en description is empty' | 'TRY'      | ''                  | ''                 | '-50'      | '-14 830,51'     | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-14 830,51'   | '-14 830,51'       | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
-			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/Brown'  | 'Local currency'          | 'TRY'      | ''                  | ''                 | '-50'      | '-14 830,51'     | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-14 830,51'   | '-14 830,51'       | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
-			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/Brown'  | 'Reporting currency'      | 'USD'      | ''                  | ''                 | '-50'      | '-2 538,98'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-2 538,98'    | '-2 538,98'        | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
-			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'en description is empty' | 'TRY'      | ''                  | ''                 | '-30'      | '-9 661,02'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-9 661,02'    | '-9 661,02'        | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
-			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'Local currency'          | 'TRY'      | ''                  | ''                 | '-30'      | '-9 661,02'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-9 661,02'    | '-9 661,02'        | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
-			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'Reporting currency'      | 'USD'      | ''                  | ''                 | '-30'      | '-1 653,97'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-1 653,97'    | '-1 653,97'        | ''                 | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
-	And I close all client application windows		
+			| 'Sales return 1 114 dated 12.05.2025 00:00:00'      | ''                    | ''             | ''                                              | ''         | ''                        | ''         | ''                  | ''                 | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                     | ''                     | ''                         | ''                                                       |
+			| 'Register  "R6060 Cost of goods sold !Manual edit"' | ''                    | ''             | ''                                              | ''         | ''                        | ''         | ''                  | ''                 | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                     | ''                     | ''                         | ''                                                       |
+			| ''                                                  | 'Period'              | 'Company'      | 'Sales invoice'                                 | 'Item key' | 'Currency movement type'  | 'Currency' | 'Serial lot number' | 'Source of origin' | 'Quantity' | 'Invoice amount' | 'Invoice tax amount' | 'Indirect cost amount' | 'Indirect cost tax amount' | 'Extra cost amount by ratio' | 'Extra cost tax amount by ratio' | 'Extra direct cost amount' | 'Extra direct cost tax amount' | 'Allocated cost amount' | 'Allocated cost tax amount' | 'Allocated revenue amount' | 'Allocated revenue tax amount' | 'Total amount' | 'Total net amount' | 'Total tax amount' | 'Preliminary quantity' | 'Preliminary amount'   | 'Preliminary tax amount'   | 'Calculation movement cost'                              |
+			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/Brown'  | 'Local currency'          | 'TRY'      | ''                  | ''                 | '-50'      | '-14 830,51'     | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'Local currency'          | 'TRY'      | ''                  | ''                 | '-30'      | '-9 661,02'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/Brown'  | 'en description is empty' | 'TRY'      | ''                  | ''                 | '-50'      | '-14 830,51'     | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-14 830,51'   | '-14 830,51'       | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/Brown'  | 'Local currency'          | 'TRY'      | ''                  | ''                 | '-50'      | '-14 830,51'     | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-14 830,51'   | '-14 830,51'       | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/Brown'  | 'Reporting currency'      | 'USD'      | ''                  | ''                 | '-50'      | '-2 538,98'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-2 538,98'    | '-2 538,98'        | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'en description is empty' | 'TRY'      | ''                  | ''                 | '-30'      | '-9 661,02'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-9 661,02'    | '-9 661,02'        | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'Local currency'          | 'TRY'      | ''                  | ''                 | '-30'      | '-9 661,02'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-9 661,02'    | '-9 661,02'        | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '12.05.2025 00:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'Reporting currency'      | 'USD'      | ''                  | ''                 | '-30'      | '-1 653,97'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '-1 653,97'    | '-1 653,97'        | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+	And I close all client application windows
+
+Scenario: _041343 check Sales return movements by the Register  "Posted documents registry" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                                          | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'     | ''                                          | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                          | 'Document'                                  | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                          | 'Sales return 10 dated 04.06.2025 14:29:56' | '04.06.2025 14:29:56' | '10'     | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows
+
+Scenario: _041344 check Sales return movements by the Register  "R1040 Taxes outgoing" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "R1040 Taxes outgoing"
+		And I click "Registrations report info" button
+		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| 'Register  "R1040 Taxes outgoing"'          | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| ''                                          | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Amount' |
+			| ''                                          | '04.06.2025 14:29:56' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Return'       | 'Local currency'               | 'TRY'      | 'TRY'                  | '45'     |
+			| ''                                          | '04.06.2025 14:29:56' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Return'       | 'Reporting currency'           | 'USD'      | 'TRY'                  | '7,7'    |
+			| ''                                          | '04.06.2025 14:29:56' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Return'       | 'en description is empty'      | 'TRY'      | 'TRY'                  | '45'     |
+	And I close all client application windows
+
+Scenario: _041345 check Sales return movements by the Register  "R2001 Sales" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "R2001 Sales"
+		And I click "Registrations report info" button
+		And I select "R2001 Sales" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''             | ''       | ''                             | ''         | ''                                          | ''                  | ''                  | ''                                     | ''             | ''         | ''       | ''           | ''              |
+			| 'Register  "R2001 Sales"'                   | ''                    | ''             | ''       | ''                             | ''         | ''                                          | ''                  | ''                  | ''                                     | ''             | ''         | ''       | ''           | ''              |
+			| ''                                          | 'Period'              | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Invoice'                                   | 'Item key'          | 'Serial lot number' | 'Row key'                              | 'Sales person' | 'Quantity' | 'Amount' | 'Net amount' | 'Offers amount' |
+			| ''                                          | '04.06.2025 14:29:56' | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Sales return 10 dated 04.06.2025 14:29:56' | 'Trousers/Trousers' | ''                  | '836c5b0d-1493-4299-8850-5258b504860f' | ''             | '-5'       | '-295'   | '-250'       | ''              |
+			| ''                                          | '04.06.2025 14:29:56' | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Sales return 10 dated 04.06.2025 14:29:56' | 'Trousers/Trousers' | ''                  | '836c5b0d-1493-4299-8850-5258b504860f' | ''             | '-5'       | '-50,5'  | '-42,8'      | ''              |
+			| ''                                          | '04.06.2025 14:29:56' | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Sales return 10 dated 04.06.2025 14:29:56' | 'Trousers/Trousers' | ''                  | '836c5b0d-1493-4299-8850-5258b504860f' | ''             | '-5'       | '-295'   | '-250'       | ''              |
+	And I close all client application windows
+
+Scenario: _041346 check Sales return movements by the Register  "R2002 Sales returns" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "R2002 Sales returns"
+		And I click "Registrations report info" button
+		And I select "R2002 Sales returns" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''             | ''       | ''                             | ''         | ''                                          | ''                  | ''                  | ''                                     | ''              | ''             | ''         | ''       | ''           | ''                     |
+			| 'Register  "R2002 Sales returns"'           | ''                    | ''             | ''       | ''                             | ''         | ''                                          | ''                  | ''                  | ''                                     | ''              | ''             | ''         | ''       | ''           | ''                     |
+			| ''                                          | 'Period'              | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Invoice'                                   | 'Item key'          | 'Serial lot number' | 'Row key'                              | 'Return reason' | 'Sales person' | 'Quantity' | 'Amount' | 'Net amount' | 'Deferred calculation' |
+			| ''                                          | '04.06.2025 14:29:56' | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Sales return 10 dated 04.06.2025 14:29:56' | 'Trousers/Trousers' | ''                  | '836c5b0d-1493-4299-8850-5258b504860f' | ''              | ''             | '-5'       | '-295'   | '-250'       | 'No'                   |
+			| ''                                          | '04.06.2025 14:29:56' | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Sales return 10 dated 04.06.2025 14:29:56' | 'Trousers/Trousers' | ''                  | '836c5b0d-1493-4299-8850-5258b504860f' | ''              | ''             | '-5'       | '-50,5'  | '-42,8'      | 'No'                   |
+			| ''                                          | '04.06.2025 14:29:56' | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Sales return 10 dated 04.06.2025 14:29:56' | 'Trousers/Trousers' | ''                  | '836c5b0d-1493-4299-8850-5258b504860f' | ''              | ''             | '-5'       | '-295'   | '-250'       | 'No'                   |
+	And I close all client application windows
+
+Scenario: _041347 check Sales return movements by the Register  "R4010 Actual stocks" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "R4010 Actual stocks"
+		And I click "Registrations report info" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''           | ''         | ''                  | ''                  | ''                 | ''         |
+			| 'Register  "R4010 Actual stocks"'           | ''                    | ''           | ''         | ''                  | ''                  | ''                 | ''         |
+			| ''                                          | 'Period'              | 'RecordType' | 'Store'    | 'Item key'          | 'Serial lot number' | 'Source of origin' | 'Quantity' |
+			| ''                                          | '04.06.2025 14:29:56' | 'Receipt'    | 'Store 01' | 'Trousers/Trousers' | ''                  | ''                 | '5'        |
+	And I close all client application windows
+
+Scenario: _041348 check Sales return movements by the Register  "R4011 Free stocks" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "R4011 Free stocks"
+		And I click "Registrations report info" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''           | ''         | ''                  | ''         |
+			| 'Register  "R4011 Free stocks"'             | ''                    | ''           | ''         | ''                  | ''         |
+			| ''                                          | 'Period'              | 'RecordType' | 'Store'    | 'Item key'          | 'Quantity' |
+			| ''                                          | '04.06.2025 14:29:56' | 'Receipt'    | 'Store 01' | 'Trousers/Trousers' | '5'        |
+		And I close all client application windows
+
+Scenario: _041349 check Sales return movements by the Register  "R4050 Stock inventory" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "R4050 Stock inventory"
+		And I click "Registrations report info" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'         | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     | ''                        |
+			| ''                                          | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key'          | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                          | '04.06.2025 14:29:56' | 'Receipt'    | 'Main Company' | 'Store 01' | 'Trousers/Trousers' | '5'        | ''                     | ''                        |
+	And I close all client application windows
+
+Scenario: _041350 check Sales return movements by the Register  "R5010 Reconciliation statement" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56'  | ''                    | ''           | ''             | ''       | ''         | ''                | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"' | ''                    | ''           | ''             | ''       | ''         | ''                | ''                    | ''       |
+			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Currency' | 'Legal name'      | 'Legal name contract' | 'Amount' |
+			| ''                                           | '04.06.2025 14:29:56' | 'Receipt'    | 'Main Company' | ''       | 'TRY'      | 'Other partner 1' | ''                    | '-295'   |
+	And I close all client application windows
+
+Scenario: _041351 check Sales return movements by the Register  "R5015 Other partners transactions" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "R5015 Other partners transactions"
+		And I click "Registrations report info" button
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56'     | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                | ''      | ''       | ''                     |
+			| 'Register  "R5015 Other partners transactions"' | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                | ''      | ''       | ''                     |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'       | 'Basis' | 'Amount' | 'Deferred calculation' |
+			| ''                                              | '04.06.2025 14:29:56' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''      | '-295'   | 'No'                   |
+			| ''                                              | '04.06.2025 14:29:56' | 'Receipt'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''      | '-50,5'  | 'No'                   |
+			| ''                                              | '04.06.2025 14:29:56' | 'Receipt'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''      | '-295'   | 'No'                   |
+	And I close all client application windows
+
+Scenario: _041352 check Sales return movements by the Register  "R5020 Partners balance" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "R5020 Partners balance"
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''           | ''             | ''       | ''                | ''                | ''                | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'        | ''                    | ''           | ''             | ''       | ''                | ''                | ''                | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                          | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Partner'         | 'Legal name'      | 'Agreement'       | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                          | '04.06.2025 14:29:56' | 'Receipt'    | 'Main Company' | ''       | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'TRY'      | 'Local currency'               | 'TRY'                  | '-295'   | ''                     | ''                 | ''                   | ''               | '-295'              | ''                 |
+			| ''                                          | '04.06.2025 14:29:56' | 'Receipt'    | 'Main Company' | ''       | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | '-295'   | ''                     | ''                 | ''                   | ''               | '-295'              | ''                 |
+			| ''                                          | '04.06.2025 14:29:56' | 'Receipt'    | 'Main Company' | ''       | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '-50,5'  | ''                     | ''                 | ''                   | ''               | '-50,5'             | ''                 |
+	And I close all client application windows
+
+Scenario: _041353 check Sales return movements by the Register  "R5021 Revenues" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "R5021 Revenues"
+		And I click "Registrations report info" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''             | ''       | ''                   | ''             | ''                  | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                        |
+			| 'Register  "R5021 Revenues"'                | ''                    | ''             | ''       | ''                   | ''             | ''                  | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                        |
+			| ''                                          | 'Period'              | 'Company'      | 'Branch' | 'Profit loss center' | 'Revenue type' | 'Item key'          | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' |'Calculation movement cost'|
+			| ''                                          | '04.06.2025 14:29:56' | 'Main Company' | ''       | ''                   | ''             | 'Trousers/Trousers' | 'TRY'      | ''                    | 'Local currency'               | ''        | '-250'   | '-295'              | ''                        |
+			| ''                                          | '04.06.2025 14:29:56' | 'Main Company' | ''       | ''                   | ''             | 'Trousers/Trousers' | 'TRY'      | ''                    | 'en description is empty'      | ''        | '-250'   | '-295'              | ''                        |
+			| ''                                          | '04.06.2025 14:29:56' | 'Main Company' | ''       | ''                   | ''             | 'Trousers/Trousers' | 'USD'      | ''                    | 'Reporting currency'           | ''        | '-42,8'  | '-50,5'             | ''                        |
+	And I close all client application windows
+
+Scenario: _041354 check Sales return movements by the Register  "T1040 Accounting amounts" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "T1040 Accounting amounts"
+		And I click "Registrations report info" button
+		And I select "T1040 Accounting amounts" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''                                     | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
+			| 'Register  "T1040 Accounting amounts"'      | ''                    | ''                                     | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
+			| ''                                          | 'Period'              | 'Row key'                              | 'Operation'               | 'Multi currency movement type' | 'Currency' | 'Revaluated currency' | 'Dr currency' | 'Cr currency' | 'Amount' | 'Dr currency amount' | 'Cr currency amount' | 'Deferred calculation' | 'Advances closing' |
+			| ''                                          | '04.06.2025 14:29:56' | '179127e5-f72d-4d4d-b114-531e5e503531' | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | ''            | ''            | '250'    | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                          | '04.06.2025 14:29:56' | '179127e5-f72d-4d4d-b114-531e5e503531' | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | ''            | ''            | '42,8'   | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                          | '04.06.2025 14:29:56' | '179127e5-f72d-4d4d-b114-531e5e503531' | 'en description is empty' | 'en description is empty'      | 'TRY'      | ''                    | ''            | ''            | '250'    | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                          | '04.06.2025 14:29:56' | '179127e5-f72d-4d4d-b114-531e5e503531' | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | ''            | ''            | '45'     | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                          | '04.06.2025 14:29:56' | '179127e5-f72d-4d4d-b114-531e5e503531' | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | ''            | ''            | '7,7'    | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                          | '04.06.2025 14:29:56' | '179127e5-f72d-4d4d-b114-531e5e503531' | 'en description is empty' | 'en description is empty'      | 'TRY'      | ''                    | ''            | ''            | '45'     | ''                   | ''                   | 'No'                   | ''                 |
+	And I close all client application windows
+
+Scenario: _041355 check Sales return movements by the Register  "T1050 Accounting quantities" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "T1050 Accounting quantities"
+		And I click "Registrations report info" button
+		And I select "T1050 Accounting quantities" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''                                     | ''                        | ''         |
+			| 'Register  "T1050 Accounting quantities"'   | ''                    | ''                                     | ''                        | ''         |
+			| ''                                          | 'Period'              | 'Row key'                              | 'Operation'               | 'Quantity' |
+			| ''                                          | '04.06.2025 14:29:56' | '179127e5-f72d-4d4d-b114-531e5e503531' | 'en description is empty' | '5'        |
+	And I close all client application windows
+
+Scenario: _041356 check Sales return movements by the Register  "T3010S Row ID info" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "T3010S Row ID info"
+		And I click "Registrations report info" button
+		And I select "T3010S Row ID info" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                                     | ''                                     | ''          | ''      | ''                                     | ''                                     | ''      | ''         | ''     |
+			| 'Register  "T3010S Row ID info"'            | ''                                     | ''                                     | ''          | ''      | ''                                     | ''                                     | ''      | ''         | ''     |
+			| ''                                          | 'Key'                                  | 'Row ID'                               | 'Unique ID' | 'Basis' | 'Basis key'                            | 'Row ref'                              | 'Price' | 'Currency' | 'Unit' |
+			| ''                                          | '179127e5-f72d-4d4d-b114-531e5e503531' | '836c5b0d-1493-4299-8850-5258b504860f' | '*'         | ''      | '836c5b0d-1493-4299-8850-5258b504860f' | '836c5b0d-1493-4299-8850-5258b504860f' | '50'    | 'TRY'      | 'pcs'  |
+	And I close all client application windows
+
+Scenario: _041357 check Sales return movements by the Register  "T6010 Batches info" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "T6010 Batches info"
+		And I click "Registrations report info" button
+		And I select "T6010 Batches info" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''             | ''                                          |
+			| 'Register  "T6010 Batches info"'            | ''                    | ''             | ''                                          |
+			| ''                                          | 'Period'              | 'Company'      | 'Document'                                  |
+			| ''                                          | '04.06.2025 14:29:56' | 'Main Company' | 'Sales return 10 dated 04.06.2025 14:29:56' |
+	And I close all client application windows	
+
+Scenario: _041358 check Sales return movements by the Register  "TM1010T Row ID movements" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "TM1010T Row ID movements"
+		And I click "Registrations report info" button
+		And I select "TM1010T Row ID movements" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 10 dated 04.06.2025 14:29:56' | ''                    | ''                                     | ''                                     | ''       | ''      | ''                                     | ''         |
+			| 'Register  "TM1010T Row ID movements"'      | ''                    | ''                                     | ''                                     | ''       | ''      | ''                                     | ''         |
+			| ''                                          | 'Period'              | 'Row ref'                              | 'Row ID'                               | 'Step'   | 'Basis' | 'Basis key'                            | 'Quantity' |
+			| ''                                          | '04.06.2025 14:29:56' | '836c5b0d-1493-4299-8850-5258b504860f' | '836c5b0d-1493-4299-8850-5258b504860f' | 'SRO&SR' | ''      | '836c5b0d-1493-4299-8850-5258b504860f' | '-5'       |
+	And I close all client application windows

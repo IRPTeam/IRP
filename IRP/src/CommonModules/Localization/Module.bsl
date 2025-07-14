@@ -1533,6 +1533,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_182", NStr("en = 'Account [%1] [%2]. Lacking: %3 %2.'", Lang));
 	Strings.Insert("Error_183", NStr("en = 'By document [%1]. Lacking: %3 %2.'", Lang));
 	Strings.Insert("Error_184", NStr("en = 'Wrong linked row [%1]: Document date [%2] less than Basis date [%3]'", Lang));
+	Strings.Insert("Error_185", NStr("en = 'Document date [%1] greater than date [%2] in [%3]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	

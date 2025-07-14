@@ -14254,6 +14254,32 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 				"ItemList[" + Format((Row.LineNumber - 1), "NZ=0; NG=0;") + "].IsInternalLinked", Object);
 	EndDo;	
 	
+	// check children document dates
+	If ValueIsFilled(Object.Ref) Then
+		Query = New Query();
+		Query.Text = 
+		"SELECT DISTINCT
+		|	&DocDate AS Date,
+		|	T3010S_RowIDInfo.Recorder.Date AS DateOther,
+		|	T3010S_RowIDInfo.Recorder
+		|FROM
+		|	InformationRegister.T3010S_RowIDInfo AS T3010S_RowIDInfo
+		|WHERE
+		|	T3010S_RowIDInfo.Basis = &Basis
+		|	AND T3010S_RowIDInfo.Recorder.Date < &DocDate";
+		Query.SetParameter("DocDate", Object.Date); 
+		Query.SetParameter("Basis", Object.Ref); 		
+		QueryResult = Query.Execute();
+		QueryTable = QueryResult.Unload();
+	
+		For Each Row In QueryTable Do
+			Cancel = True;
+			//Document date [%1] greater than date [%2] in [%3]
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_185, 
+				Row.Date, Row.DateOther, Row.Recorder), "Date", Object);
+		EndDo;
+	EndIf;
+	
 	// check internal links
 	Query = New Query();
 	Query.TempTablesManager = TempTablesManager;

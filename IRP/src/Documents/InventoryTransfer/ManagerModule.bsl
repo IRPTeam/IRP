@@ -183,36 +183,38 @@ Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = U
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
-		"Document.InventoryTransfer.ItemList");
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.InventoryTransfer.ItemList");
 
 	If Not Unposting Then
 		// is posting
-		FreeStocksTable   =  PostingServer.GetQueryTableByName("R4011B_FreeStocks", Parameters, True);
-		ActualStocksTable =  PostingServer.GetQueryTableByName("R4010B_ActualStocks", Parameters, True);
-		R4014B_SerialLotNumber =  PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters, True);
-
-		Exists_FreeStocksTable   =  PostingServer.GetQueryTableByName("Exists_R4011B_FreeStocks", Parameters, True);
-		Exists_ActualStocksTable =  PostingServer.GetQueryTableByName("Exists_R4010B_ActualStocks", Parameters, True);
-		Exists_R4014B_SerialLotNumber =  PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters,
-			True);
-
+		Current_FreeStocksTable        =  PostingServer.GetQueryTableByName("R4011B_FreeStocks"      , Parameters, True);
+		Current_ActualStocksTable      =  PostingServer.GetQueryTableByName("R4010B_ActualStocks"    , Parameters, True);
+		Current_R4014B_SerialLotNumber =  PostingServer.GetQueryTableByName("R4014B_SerialLotNumber" , Parameters, True);
+		Current_R4050B_StockInventory  =  PostingServer.GetQueryTableByName("R4050B_StockInventory"  , Parameters, True);
+		
+		Exists_FreeStocksTable        =  PostingServer.GetQueryTableByName("Exists_R4011B_FreeStocks"      , Parameters, True);
+		Exists_ActualStocksTable      =  PostingServer.GetQueryTableByName("Exists_R4010B_ActualStocks"    , Parameters, True);
+		Exists_R4014B_SerialLotNumber =  PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber" , Parameters, True);
+		Exists_R4050B_StockInventory  = PostingServer.GetQueryTableByName("Exists_R4050B_StockInventory"   , Parameters, True);
+		
 		// Expense
 
 		Filter = New Structure("RecordType", AccumulationRecordType.Expense);
 
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks", FreeStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks", ActualStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(
-			Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(
-			Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks"          , Current_FreeStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks"        , Current_ActualStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks"   , Exists_FreeStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks" , Exists_ActualStocksTable.Copy(Filter));
 
 		Parameters.Insert("RecordType", Filter.RecordType);
+		Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory.Copy(Filter));
+		Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory.Copy(Filter));
+		
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.InventoryTransfer.ItemList", AddInfo);
 
 		If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-			R4014B_SerialLotNumber.Copy(Filter), Exists_R4014B_SerialLotNumber.Copy(Filter),
+			Current_R4014B_SerialLotNumber.Copy(Filter), 
+			Exists_R4014B_SerialLotNumber.Copy(Filter),
 			AccumulationRecordType.Expense, Unposting, AddInfo) Then
 			Cancel = True;
 		EndIf;
@@ -221,23 +223,30 @@ Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = U
 
 		Filter = New Structure("RecordType", AccumulationRecordType.Receipt);
 
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks", FreeStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks", ActualStocksTable.Copy(Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(
-			Filter));
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(
-			Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks"          , Current_FreeStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks"        , Current_ActualStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks"   , Exists_FreeStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks" , Exists_ActualStocksTable.Copy(Filter));
 
 		Parameters.Insert("RecordType", Filter.RecordType);
+		Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory.Copy(Filter));
+		Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory.Copy(Filter));
+	
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.InventoryTransfer.ItemList", AddInfo);
 
 		If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-			R4014B_SerialLotNumber.Copy(Filter), Exists_R4014B_SerialLotNumber.Copy(Filter),
+			Current_R4014B_SerialLotNumber.Copy(Filter), 
+			Exists_R4014B_SerialLotNumber.Copy(Filter),
 			AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 			Cancel = True;
 		EndIf;
 	Else
 		// is unposting
+		Current_R4050B_StockInventory  =  PostingServer.GetQueryTableByName("R4050B_StockInventory"  , Parameters, True);
+		Exists_R4050B_StockInventory  = PostingServer.GetQueryTableByName("Exists_R4050B_StockInventory"   , Parameters, True);
+		Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory);
+		Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory);
+		
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.InventoryTransfer.ItemList", AddInfo);
 	EndIf;
 EndProcedure

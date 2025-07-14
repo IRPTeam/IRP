@@ -4704,8 +4704,8 @@ Scenario: _2060036 check link/unlink form in the PO - GR - PI (use variable stor
 			| Description |
 			| Store 05    |
 		And I select current line in "List" table
-		If "1C:Enterprise" window is opened Then
-			And I click "Yes" button		
+		If "Update item list info" window is opened Then
+			And I click "OK" button		
 	// EndTemp
 		And "ItemList" table became equal
 			| '#' | 'Internal links' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key' | 'Use serial lot number' | 'Serial lot numbers' | 'Store'    | 'Quantity' | 'Unit'           | 'Receipt basis'                                  | 'Currency' | 'Is closed order' | 'Purchase order'                                 | 'Purchase invoice' |
@@ -4777,8 +4777,8 @@ Scenario: _2060036 check link/unlink form in the PO - GR - PI (use variable stor
 			| Description |
 			| Store 05    |
 		And I select current line in "List" table
-		If "1C:Enterprise" window is opened Then
-			And I click "Yes" button
+		If "Update item list info" window is opened Then
+			And I click "OK" button	
 		// EndTemp
 		And "ItemList" table became equal
 			| '#' | 'Internal links' | 'Is unlock item key' | 'Is unlock store' | 'Item'                         | 'Item key' | 'Use serial lot number' | 'Serial lot numbers' | 'Store'    | 'Quantity' | 'Unit'           | 'Receipt basis'                                  | 'Currency' | 'Is closed order' | 'Purchase order'                                 | 'Purchase invoice' |

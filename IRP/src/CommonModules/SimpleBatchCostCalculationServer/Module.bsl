@@ -135,7 +135,7 @@ EndFunction
 //  AddInfo - Structure - Additional information (optional)
 Function UpdateOutgoingMovementsCost(Val Ref, Val CurrentMovements, Cancel, BatchForCheck = Undefined, BatchWithErrors = Undefined, AddInfo = Undefined) Export
 	
-	If Not GetFunctionalOption("UseSimpleBatch") Then
+	If Not FOServer.IsUseSimpleBatch() Then
 		Return Undefined;
 	EndIf;
 	

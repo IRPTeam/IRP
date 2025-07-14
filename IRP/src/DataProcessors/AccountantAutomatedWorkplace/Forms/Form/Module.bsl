@@ -572,39 +572,40 @@ Procedure FillDocumentTypeList(Settings=Undefined)
 	Query = New Query;
 	Query.Text =
 	"SELECT DISTINCT
-	|	VALUETYPE(BasicTurnovers.Recorder.Basis) AS RecorderType
+	|	VALUETYPE(Document) AS DocumentType
 	|FROM
-	|	AccountingRegister.Basic.Turnovers(&Begin, &End, Recorder,,, TRUE
-	|	AND Company = &Company
-	|	AND LedgerType = &LedgerType,,) AS BasicTurnovers
+	|	InformationRegister.PostedDocumentsRegistry
+	|		LEFT JOIN Document.JournalEntry AS JournalEntry
+	|		ON Document = JournalEntry.Basis
+	|		AND NOT JournalEntry.DeletionMark
 	|WHERE
-	|	NOT BasicTurnovers.Recorder.Basis IS NULL
-	|	AND BasicTurnovers.Recorder.Basis <> UNDEFINED";
+	|	Document.Date BETWEEN &StartDate AND &EndDate
+	|	AND JournalEntry.Company = &Company
+	|	AND JournalEntry.LedgerType = &LedgerType";
 	
-	If PeriodFilter.StartDate = Date(1,1,1) Then
-		Query.Text = StrReplace(Query.Text, "&Begin", "");
+	If Period.EndDate > Date(1,1,1) Then
+		Query.SetParameter("StartDate", PeriodFilter.StartDate);
+		Query.SetParameter("EndDate", PeriodFilter.EndDate);
+	ElsIf Period.StartDate > Date(1,1,1) Then
+		Query.SetParameter("StartDate", PeriodFilter.StartDate);
+		Query.Text = StrReplace(Query.Text, "Document.Date BETWEEN &StartDate AND &EndDate", "Document.Date >= &StartDate");
 	Else
-		Query.SetParameter("Begin", PeriodFilter.StartDate);
+		Query.Text = StrReplace(Query.Text, "Document.Date BETWEEN &StartDate AND &EndDate", "TRUE");
 	EndIf;
-	If PeriodFilter.EndDate = Date(1,1,1) Then
-		Query.Text = StrReplace(Query.Text, "&End", "");
-	Else	
-		Query.SetParameter("End", PeriodFilter.EndDate);
-	EndIf;
-	If CompanyFilter.IsEmpty() Then
-		Query.Text = StrReplace(Query.Text, "Company = &Company", "True");
-	Else	
+	If Not Company.IsEmpty() Then
 		Query.SetParameter("Company", CompanyFilter);
+	Else
+		Query.Text = StrReplace(Query.Text, "JournalEntry.Company = &Company", "TRUE");
 	EndIf;
-	If LedgerTypeFilter.IsEmpty() Then
-		Query.Text = StrReplace(Query.Text, "LedgerType = &LedgerType", "True");
-	Else	
+	If Not LedgerType.IsEmpty() Then
 		Query.SetParameter("LedgerType", LedgerTypeFilter);
+	Else
+ 		Query.Text = StrReplace(Query.Text, "JournalEntry.LedgerType = &LedgerType", "TRUE");
 	EndIf;
 	
 	QuerySelection = Query.Execute().Select();
 	While QuerySelection.Next() Do
-		DocMetadata = Metadata.FindByType(QuerySelection.RecorderType);
+		DocMetadata = Metadata.FindByType(QuerySelection.DocumentType);
 		Items.DocumentType.ChoiceList.Add(DocMetadata.Name, DocMetadata.Synonym);
 	EndDo;
 	Items.DocumentType.ChoiceList.SortByPresentation();

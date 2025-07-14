@@ -2804,30 +2804,13 @@ Scenario: Create information register UserSettings records (negative cash contro
 
 
 Scenario: Create information register UserSettings records (stock inventory control)
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                     | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                           |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b8619a264068135a11f05becea873dfa' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R4050B_StockInventory' | ''                 | ''               | ''               | 'CheckBalance_R4050B_StockInventory' |
 	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
 	And I check or create information register "UserSettings" records:
-		| 'UserOrGroup' | 'MetadataObject'                       | 'AttributeName'                      | 'KindOfAttribute'               | 'Value' |
-		| '$$IdCI$$'    | 'Document.Bundling'                    | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.OpeningEntry'                | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.PhysicalInventory'           | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.PurchaseInvoice'             | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.PurchaseReturn'              | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.RetailReturnReceipt'         | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.RetailSalesReceipt'          | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.SalesInvoice'                | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.StockAdjustmentAsSurplus'    | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.StockAdjustmentAsWriteOff'   | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.Unbundling'                  | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.InventoryTransfer'           | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.SalesReturn'                 | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.WorkSheet'                   | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.Production'                  | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.SalesReportFromTradeAgent'   | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.CommissioningOfFixedAsset'   | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.DecommissioningOfFixedAsset' | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.ModernizationOfFixedAsset'   | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.BatchReallocateIncoming'     | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
-		| '$$IdCI$$'    | 'Document.BatchReallocateOutgoing'     | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                      | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
 
 
 Scenario: Create catalog PartnersBankAccounts objects

@@ -214,6 +214,45 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="a6f8fa42-5f16-4580-bc00-0daa6d2816b7">
+    <name>PreliminaryQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Preliminary quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="76077024-9a6e-406c-bd20-9f17b3f255e6">
+    <name>PreliminaryAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Preliminary amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="a77b173b-88d2-4087-9436-f9336c0cb65f">
+    <name>PreliminaryTaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Preliminary tax amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <dimensions uuid="05621708-6413-4a3b-bac7-a42925c6ffdb">
     <name>Company</name>
     <synonym>
@@ -350,6 +389,7 @@
       <types>DocumentRef.ItemStockAdjustment</types>
       <types>DocumentRef.InventoryTransfer</types>
       <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.GoodsReceipt</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -386,6 +426,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -539,6 +580,42 @@
     </synonym>
     <type>
       <types>CatalogRef.FixedAssets</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="d28e7064-5c38-493c-87dd-da3235f6a54b">
+    <name>IsPreliminary</name>
+    <synonym>
+      <key>en</key>
+      <value>Is preliminary</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="1bb99c82-6456-466f-ac06-1fa2e8e4403b">
+    <name>PreliminaryID</name>
+    <synonym>
+      <key>en</key>
+      <value>Preliminary ID</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>36</length>
+      </stringQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

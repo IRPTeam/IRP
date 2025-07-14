@@ -154,19 +154,19 @@ Scenario: _0402301 check Inventory transfer movements by the Register  "R4050 St
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | ''              | ''         | ''            | ''               | ''           | ''             |
-			| 'Document registrations records'                    | ''              | ''         | ''            | ''               | ''           | ''             |
-			| 'Register  "R4050 Stock inventory"'                 | ''              | ''         | ''            | ''               | ''           | ''             |
-			| ''                                                  | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'     | ''           | ''             |
-			| ''                                                  | ''              | ''         | 'Quantity'    | 'Company'        | 'Store'      | 'Item key'     |
-			| ''                                                  | 'Receipt'       | '*'        | '2'           | 'Main Company'   | 'Store 03'   | '36/Yellow'    |
-			| ''                                                  | 'Receipt'       | '*'        | '10'          | 'Main Company'   | 'Store 03'   | 'S/Yellow'     |
-			| ''                                                  | 'Receipt'       | '*'        | '10'          | 'Main Company'   | 'Store 03'   | 'XS/Blue'      |
-			| ''                                                  | 'Receipt'       | '*'        | '15'          | 'Main Company'   | 'Store 03'   | '36/Red'       |
-			| ''                                                  | 'Expense'       | '*'        | '2'           | 'Main Company'   | 'Store 02'   | '36/Yellow'    |
-			| ''                                                  | 'Expense'       | '*'        | '10'          | 'Main Company'   | 'Store 02'   | 'S/Yellow'     |
-			| ''                                                  | 'Expense'       | '*'        | '10'          | 'Main Company'   | 'Store 02'   | 'XS/Blue'      |
-			| ''                                                  | 'Expense'       | '*'        | '15'          | 'Main Company'   | 'Store 02'   | '36/Red'       |
+			| 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | ''              | ''         | ''            | ''                    | ''               | ''           | ''             | ''                         |
+			| 'Document registrations records'                    | ''              | ''         | ''            | ''                    | ''               | ''           | ''             | ''                         |
+			| 'Register  "R4050 Stock inventory"'                 | ''              | ''         | ''            | ''                    | ''               | ''           | ''             | ''                         |
+			| ''                                                  | 'Record type'   | 'Period'   | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''             |'Attributes'                |
+			| ''                                                  | ''              | ''         | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'     |'Calculation movement cost' |
+			| ''                                                  | 'Receipt'       | '*'        | '2'           | ''                    | 'Main Company'   | 'Store 03'   | '36/Yellow'    | ''                         |
+			| ''                                                  | 'Receipt'       | '*'        | '10'          | ''                    | 'Main Company'   | 'Store 03'   | 'S/Yellow'     | ''                         |
+			| ''                                                  | 'Receipt'       | '*'        | '10'          | ''                    | 'Main Company'   | 'Store 03'   | 'XS/Blue'      | ''                         |
+			| ''                                                  | 'Receipt'       | '*'        | '15'          | ''                    | 'Main Company'   | 'Store 03'   | '36/Red'       | ''                         |
+			| ''                                                  | 'Expense'       | '*'        | '2'           | ''                    | 'Main Company'   | 'Store 02'   | '36/Yellow'    | ''                         |
+			| ''                                                  | 'Expense'       | '*'        | '10'          | ''                    | 'Main Company'   | 'Store 02'   | 'S/Yellow'     | ''                         |
+			| ''                                                  | 'Expense'       | '*'        | '10'          | ''                    | 'Main Company'   | 'Store 02'   | 'XS/Blue'      | ''                         |
+			| ''                                                  | 'Expense'       | '*'        | '15'          | ''                    | 'Main Company'   | 'Store 02'   | '36/Red'       | ''                         |
 		And I close all client application windows
 
 Scenario: _0402303 check Inventory transfer movements by the Register  "R4010 Actual stocks" (Use SC and Use GR)
@@ -596,11 +596,11 @@ Scenario: _0402433 check Inventory transfer movements by the Register  "R4050 St
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''                    | ''           | ''             | ''         | ''         | ''         |
-			| 'Register  "R4050 Stock inventory"'                | ''                    | ''           | ''             | ''         | ''         | ''         |
-			| ''                                                 | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' |
-			| ''                                                 | '04.11.2022 17:58:35' | 'Receipt'    | 'Main Company' | 'Store 01' | 'S/Yellow' | '2'        |
-			| ''                                                 | '04.11.2022 17:58:35' | 'Expense'    | 'Main Company' | 'Store 02' | 'S/Yellow' | '2'        |	
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'                | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     | ''                        |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                                 | '04.11.2022 17:58:35' | 'Receipt'    | 'Main Company' | 'Store 01' | 'S/Yellow' | '2'        | ''                     | ''                        |
+			| ''                                                 | '04.11.2022 17:58:35' | 'Expense'    | 'Main Company' | 'Store 02' | 'S/Yellow' | '2'        | ''                     | ''                        |
 		And I close all client application windows
 
 Scenario: _0402434 check Inventory transfer movements by the Register  "R4050 Stock inventory" (transfer commission products)
@@ -615,11 +615,11 @@ Scenario: _0402434 check Inventory transfer movements by the Register  "R4050 St
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''                    | ''           | ''             | ''         | ''         | ''         |
-			| 'Register  "R4050 Stock inventory"'                | ''                    | ''           | ''             | ''         | ''         | ''         |
-			| ''                                                 | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' |
-			| ''                                                 | '04.11.2022 17:58:35' | 'Receipt'    | 'Main Company' | 'Store 01' | 'S/Yellow' | '2'        |
-			| ''                                                 | '04.11.2022 17:58:35' | 'Expense'    | 'Main Company' | 'Store 02' | 'S/Yellow' | '2'        |	
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'                | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     | ''                        |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                                 | '04.11.2022 17:58:35' | 'Receipt'    | 'Main Company' | 'Store 01' | 'S/Yellow' | '2'        | ''                     | ''                        |
+			| ''                                                 | '04.11.2022 17:58:35' | 'Expense'    | 'Main Company' | 'Store 02' | 'S/Yellow' | '2'        | ''                     | ''                        |
 		And I close all client application windows
 
 Scenario: _0402435 check absence Inventory transfer movements by the Register  "R4032 Goods in transit (outgoing)" (Store distributed purchase=False)

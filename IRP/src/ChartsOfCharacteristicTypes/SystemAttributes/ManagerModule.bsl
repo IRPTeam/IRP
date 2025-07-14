@@ -6,12 +6,8 @@ EndProcedure
 
 Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
 	StandardProcessing = False;
-	InterfaceLocalizationCode = LocalizationReuse.GetSessionParameter("InterfaceLocalizationCode");
-	UserLangPresentation = Data.Ref["Description_" + InterfaceLocalizationCode];
-	
-	Presentation = ?(ValueIsFilled(UserLangPresentation),
-		UserLangPresentation,
-		Data.Ref.Description_en);
+	InterfaceLocalizationCode = LocalizationReuse.GetInterfaceLocalizationCode();
+	Presentation = LocalizationServer.RefDescription(Data.Ref, InterfaceLocalizationCode);
 EndProcedure
 
 Procedure UpdatePredefinedNames(PredefinedDataName) Export

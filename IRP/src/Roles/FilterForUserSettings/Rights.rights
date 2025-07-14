@@ -1881,6 +1881,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.GoodsReceipt.TabularSection.ItemList.Attribute.IsPreliminary</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.RetailSalesReceipt.Attribute.Partner</name>
 		<right>
 			<name>View</name>

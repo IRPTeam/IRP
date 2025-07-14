@@ -239,6 +239,8 @@ Function GetArrayOfResourceNames()
 	ArrayOfRecourceNames.Add("AllocatedCostTaxAmount");
 	ArrayOfRecourceNames.Add("AllocatedRevenueAmount");
 	ArrayOfRecourceNames.Add("AllocatedRevenueTaxAmount");
+	ArrayOfRecourceNames.Add("PreliminaryAmount");
+	ArrayOfRecourceNames.Add("PreliminaryTaxAmount");
 	
 	Return ArrayOfRecourceNames;
 EndFunction
@@ -452,6 +454,18 @@ Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurre
 	|			THEN 0
 	|		ELSE (RecordSet.AllocatedRevenueTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
 	|	END, &RoundDigitCapacity) AS AllocatedRevenueTaxAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.PreliminaryAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS PreliminaryAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.PreliminaryTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS PreliminaryTaxAmount,
 	|	CurrencyTable.MovementType.DeferredCalculation AS DeferredCalculation,
 	|	CurrencyTable.MovementType.Currency AS Currency
 	|FROM
@@ -507,6 +521,8 @@ Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurre
 	|	ROUND(RecordSet.AllocatedCostTaxAmount, &RoundDigitCapacity) AS AllocatedCostTaxAmount,
 	|	ROUND(RecordSet.AllocatedRevenueAmount, &RoundDigitCapacity) AS AllocatedRevenueAmount,
 	|	ROUND(RecordSet.AllocatedRevenueTaxAmount, &RoundDigitCapacity) AS AllocatedRevenueTaxAmount,
+	|	ROUND(RecordSet.PreliminaryAmount, &RoundDigitCapacity) AS PreliminaryAmount,
+	|	ROUND(RecordSet.PreliminaryTaxAmount, &RoundDigitCapacity) AS PreliminaryTaxAmount,
 	|	FALSE,
 	|	RecordSet.Currency
 	|FROM

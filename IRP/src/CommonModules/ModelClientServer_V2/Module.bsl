@@ -1272,7 +1272,7 @@ EndFunction
 
 Function ChangeCompanyByAgreementExecute(Options) Export
 	IsLinkedDocument = False;
-	If Options.Object.Property("RowIDInfo") Then
+	If CommonFunctionsClientServer.ObjectHasProperty(Options.Object, "RowIDInfo") Then
 		For Each Row In Options.Object.RowIDInfo Do
 			If ValueIsFilled(Row.Basis) Then
 				IsLinkedDocument = True;

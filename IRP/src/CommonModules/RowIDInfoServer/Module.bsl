@@ -14275,7 +14275,7 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 		For Each Row In QueryTable Do
 			Cancel = True;
 			//Document date [%1] greater than date [%2] in [%3]
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_185, 
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_186, 
 				Row.Date, Row.DateOther, Row.Recorder), "Date", Object);
 		EndDo;
 	EndIf;

@@ -1085,7 +1085,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R3040B_WithholdingTax</name>
+		<name>AccumulationRegister.DELETE_R3040B_WithholdingTax</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

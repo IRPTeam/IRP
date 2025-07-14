@@ -305,7 +305,7 @@
   <roles>Role.AccumulationRegisters_R3026B_SalesOrdersCustomerAdvance</roles>
   <roles>Role.AccumulationRegisters_R3027B_EmployeeCashAdvance</roles>
   <roles>Role.AccumulationRegisters_R3035T_CashPlanning</roles>
-  <roles>Role.AccumulationRegisters_R3040B_WithholdingTax</roles>
+  <roles>Role.DELETE_AccumulationRegisters_R3040B_WithholdingTax</roles>
   <roles>Role.AccumulationRegisters_R3050T_PosCashBalances</roles>
   <roles>Role.AccumulationRegisters_R4010B_ActualStocks</roles>
   <roles>Role.AccumulationRegisters_R4011B_FreeStocks</roles>
@@ -1748,7 +1748,7 @@
   <accumulationRegisters>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3027B_EmployeeCashAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3035T_CashPlanning</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3040B_WithholdingTax</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.DELETE_R3040B_WithholdingTax</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3050T_PosCashBalances</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4010B_ActualStocks</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4011B_FreeStocks</accumulationRegisters>

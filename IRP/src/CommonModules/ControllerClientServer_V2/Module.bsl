@@ -3479,7 +3479,6 @@ Function GetBindingStructure_Partner(Parameters)
 	Result.Binding.Insert("ShipmentPlaningOrder", "StepChangeLegalNameByPartner");
 	
 	SafeBinding(Result.Binding,  "GoodsReceipt", "StepChangeLegalNameByPartner");
-//		|StepChangeAgreementByPartner_AgreementTypeIsVendor");
 		
 	Result.Binding.Insert("RetailGoodsReceipt"  , "StepChangeLegalNameByPartner");
 	
@@ -3612,6 +3611,40 @@ Procedure StepChangePartnerByRetailCustomerAndTransactionType(Parameters, Chain)
 	Options.StepName = "StepChangePartnerByRetailCustomerAndTransactionType";
 	Chain.ChangePartnerByRetailCustomerAndTransactionType.Options.Add(Options);
 EndProcedure
+
+#EndRegion
+
+#Region TAX_PARTNER
+
+// TaxPartner.OnChange
+Procedure TaxPartnerOnChange(Parameters) Export
+	AddViewNotify("OnSetTaxPartnerNotify", Parameters);
+	Binding = BindTaxPartner(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TaxPartner.Set
+Procedure SetTaxPartner(Parameters, Results) Export
+	Binding = BindTaxPartner(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetTaxPartnerNotify");
+EndProcedure
+
+// TaxPartner.Get
+Function GetTaxPartner(Parameters)
+	Return GetPropertyObject(Parameters, BindTaxPartner(Parameters).DataPath);
+EndFunction
+
+// TaxPartner.Bind
+Function BindTaxPartner(Parameters)
+	DataPath = "TaxPartner";
+	Binding = New Structure();
+	
+	Binding.Insert("WithholdingTaxInvoice", 
+		"StepChangeTaxAgreementByTaxPartner,
+		|StepChangeTaxLegalNameByTaxPartner");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindTaxPartner");
+EndFunction
 
 #EndRegion
 
@@ -4345,6 +4378,48 @@ Procedure StepChangeLegalNameByRetailCustomerAndTransactionType(Parameters, Chai
 	Options.TransactionType = GetTransactionType(Parameters);
 	Options.StepName = "StepChangeLegalNameByRetailCustomerAndTransactionType";
 	Chain.ChangeLegalNameByRetailCustomerAndTransactionType.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_LEGAL_NAME
+
+// TaxLegalName.OnChange
+Procedure TaxLegalNameOnChange(Parameters) Export
+	Binding = BindTaxLegalName(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TaxLegalName.Set
+Procedure SetTaxLegalName(Parameters, Results) Export
+	Binding = BindTaxLegalName(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// TaxLegalName.Get
+Function GetTaxLegalName(Parameters)
+	Return GetPropertyObject(Parameters, BindTaxPartner(Parameters).DataPath);
+EndFunction
+
+// TaxLegalName.Bind
+Function BindTaxLegalName(Parameters)
+	DataPath = "TaxLegalName";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindTaxLegalName");
+EndFunction
+
+// TaxLegalName.ChangeTaxLegalNameByTaxPartner.Step
+Procedure StepChangeTaxLegalNameByTaxPartner(Parameters, Chain) Export
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeLegalNameByPartner.Setter = "SetTaxLegalName";
+	Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+	Options.Partner   = GetTaxPartner(Parameters);
+	Options.LegalName = GetTaxLegalName(Parameters);
+	Options.StepName = "StepChangeTaxLegalNameByTaxPartner";
+	Chain.ChangeLegalNameByPartner.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -5606,6 +5681,50 @@ Procedure StepChangeAgreementByRetailCustomer(Parameters, Chain) Export
 	Options.RetailCustomer = GetRetailCustomer(Parameters);
 	Options.StepName = "StepChangeAgreementByRetailCustomer";
 	Chain.ChangeAgreementByRetailCustomer.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_AGREEMENT
+
+// TaxAgreement.OnChange
+Procedure TaxAgreementOnChange(Parameters) Export
+	Binding = BindTaxAgreement(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TaxAgreement.Set
+Procedure SetTaxAgreement(Parameters, Results) Export
+	Binding = BindTaxAgreement(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// TaxAgreement.Get
+Function GetTaxAgreement(Parameters)
+	Return GetPropertyObject(Parameters, BindTaxPartner(Parameters).DataPath);
+EndFunction
+
+// TaxAgreement.Bind
+Function BindTaxAgreement(Parameters)
+	DataPath = "TaxAgreement";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindTaxAgreement");
+EndFunction
+
+// TaxAgreement.ChangeTaxAgreementByTaxPartner.Step
+Procedure StepChangeTaxAgreementByTaxPartner(Parameters, Chain) Export
+	Chain.ChangeAgreementByPartner.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAgreementByPartner.Setter = "SetTaxAgreement";
+	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+	Options.Partner       = GetTaxPartner(Parameters);
+	Options.Agreement     = GetTAxAgreement(Parameters);
+	Options.CurrentDate   = GetDate(Parameters);
+	Options.AgreementType = PredefinedValue("Enum.AgreementTypes.Other");
+	Options.StepName = "StepChangeTaxAgreementByTaxPartner";
+	Chain.ChangeAgreementByPartner.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -17364,6 +17483,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetPaymentListCommissionNotify"               Then ViewClient_V2.OnSetPaymentListCommissionNotify(Parameters);
 	ElsIf ViewNotify = "OnSetPaymentListCommissionPercentNotify"        Then ViewClient_V2.OnSetPaymentListCommissionPercentNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListIsPreliminary" Then ViewClient_V2.OnSetItemListIsPreliminary(Parameters);
+	ElsIf ViewNotify = "OnSetTaxPartnerNotify" Then ViewClient_V2.OnSetTaxPartnerNotify(Parameters);
 	
 	Else
 		Raise StrTemplate(R().Error_NotHandledViewNotify, ViewNotify);

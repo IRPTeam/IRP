@@ -4288,6 +4288,20 @@ EndProcedure
 
 #EndRegion
 
+#Region TAX_PARTNER
+
+Procedure TaxPartnerOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.TaxPartnerOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetTaxPartnerNotify(Parameters) Export
+	Parameters.Form.FormSetVisibilityAvailability();
+EndProcedure
+#EndRegion
+
 #Region PARTNER_TRADE_AGENT
 
 Procedure PartnerTradeAgentOnChange(Object, Form, TableNames) Export
@@ -4408,6 +4422,17 @@ EndProcedure
 
 Procedure OnSetLegalNameNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_LEGAL_NAME
+
+Procedure TaxLegalNameOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.TaxLegalNameOnChange(Parameters);
+	EndDo;
 EndProcedure
 
 #EndRegion
@@ -4559,6 +4584,17 @@ EndProcedure
 
 Procedure OnSetAgreementNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_AGREEMENT
+
+Procedure TaxAgreementOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.TaxAgreementOnChange(Parameters);
+	EndDo;
 EndProcedure
 
 #EndRegion

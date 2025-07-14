@@ -545,6 +545,43 @@ Function R5020B_PartnersBalance_PI_WTI() Export
 		|
 		|UNION ALL
 		|
+		// Other transaction (Tax)
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.TaxPartner,
+		|	ItemList.TaxLegalName,
+		|	ItemList.TaxAgreement,
+		|	ItemList.BasisDocument AS Document,
+		|	ItemList.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	SUM(ItemList.WithholdingTaxAmount) AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing,
+		|	UNDEFINED AS Key
+		|
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.WithholdingTaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.TaxPartner,
+		|	ItemList.TaxLegalName,
+		|	ItemList.TaxAgreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Currency
+		|
+		|UNION ALL
+		|
 		// Vendor advance (offset)
 		|SELECT
 		|	CASE

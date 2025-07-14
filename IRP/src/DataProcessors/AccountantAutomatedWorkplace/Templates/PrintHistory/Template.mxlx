@@ -33,9 +33,14 @@
 			<code>HASH</code>
 			<description>HASH</description>
 		</languageInfo>
+		<languageInfo>
+			<id>en_EN</id>
+			<code>EnglishSDR</code>
+			<description>English SDR</description>
+		</languageInfo>
 	</languageSettings>
 	<columns>
-		<size>3</size>
+		<size>4</size>
 		<columnsItem>
 			<index>0</index>
 			<column>
@@ -50,6 +55,12 @@
 		</columnsItem>
 		<columnsItem>
 			<index>2</index>
+			<column>
+				<formatIndex>2</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>3</index>
 			<column>
 				<formatIndex>2</formatIndex>
 			</column>
@@ -92,15 +103,24 @@
 				</c>
 			</c>
 			<c>
-				<i>2</i>
 				<c>
 					<f>5</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>6</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Value</v8:content>
+							<v8:content>Value (before / after)</v8:content>
 						</v8:item>
 					</tl>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>5</f>
 				</c>
 			</c>
 		</row>
@@ -110,15 +130,25 @@
 		<row>
 			<c>
 				<c>
-					<f>6</f>
+					<f>7</f>
 					<parameter>Name</parameter>
 				</c>
 			</c>
 			<c>
-				<i>2</i>
 				<c>
-					<f>7</f>
-					<parameter>Value</parameter>
+					<f>5</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>8</f>
+					<parameter>ValueBefore</parameter>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>9</f>
+					<parameter>ValueAfter</parameter>
 				</c>
 			</c>
 		</row>
@@ -134,7 +164,7 @@
 		<row>
 			<c>
 				<c>
-					<f>8</f>
+					<f>10</f>
 					<parameter>TableName</parameter>
 				</c>
 			</c>
@@ -145,7 +175,7 @@
 		<row>
 			<c>
 				<c>
-					<f>9</f>
+					<f>6</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -156,7 +186,7 @@
 			</c>
 			<c>
 				<c>
-					<f>10</f>
+					<f>11</f>
 					<parameter>FieldName</parameter>
 				</c>
 			</c>
@@ -167,20 +197,26 @@
 		<row>
 			<c>
 				<c>
-					<f>7</f>
+					<f>12</f>
 					<parameter>Number</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>7</f>
-					<parameter>FieldValue</parameter>
+					<f>8</f>
+					<parameter>ValueBefore</parameter>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>13</f>
+					<parameter>ValueAfter</parameter>
 				</c>
 			</c>
 		</row>
 	</rowsItem>
 	<templateMode>true</templateMode>
-	<defaultFormatIndex>11</defaultFormatIndex>
+	<defaultFormatIndex>14</defaultFormatIndex>
 	<height>8</height>
 	<vgRows>8</vgRows>
 	<merge>
@@ -189,8 +225,18 @@
 		<w>1</w>
 	</merge>
 	<merge>
+		<r>2</r>
+		<c>2</c>
+		<w>1</w>
+	</merge>
+	<merge>
 		<r>3</r>
 		<c>0</c>
+		<w>1</w>
+	</merge>
+	<merge>
+		<r>6</r>
+		<c>1</c>
 		<w>1</w>
 	</merge>
 	<namedItem xsi:type="NamedItemCells">
@@ -220,7 +266,7 @@
 			<beginRow>6</beginRow>
 			<endRow>6</endRow>
 			<beginColumn>1</beginColumn>
-			<endColumn>1</endColumn>
+			<endColumn>2</endColumn>
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
@@ -230,7 +276,7 @@
 			<beginRow>7</beginRow>
 			<endRow>7</endRow>
 			<beginColumn>1</beginColumn>
-			<endColumn>1</endColumn>
+			<endColumn>2</endColumn>
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
@@ -266,13 +312,21 @@
 	<line width="1" gap="false">
 		<v8ui:style xsi:type="v8ui:SpreadsheetDocumentCellLineType">Solid</v8ui:style>
 	</line>
+	<line width="1" gap="false">
+		<v8ui:style xsi:type="v8ui:SpreadsheetDocumentCellLineType">Dotted</v8ui:style>
+	</line>
+	<line width="1" gap="false">
+		<v8ui:style xsi:type="v8ui:SpreadsheetDocumentCellLineType">None</v8ui:style>
+	</line>
 	<font faceName="Arial" height="14" bold="false" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 	<font faceName="Arial" height="8" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
+	<font faceName="Arial" height="8" bold="false" italic="true" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 	<format>
 		<width>42</width>
 	</format>
 	<format>
-		<width>240</width>
+		<width>160</width>
+		<widthWeightFactor>1</widthWeightFactor>
 	</format>
 	<format>
 		<font>0</font>
@@ -284,16 +338,35 @@
 		<width>240</width>
 	</format>
 	<format>
+		<border>0</border>
+	</format>
+	<format>
 		<font>1</font>
 		<border>0</border>
+		<horizontalAlignment>Center</horizontalAlignment>
 	</format>
 	<format>
 		<border>0</border>
 		<width>240</width>
+		<textPlacement>Wrap</textPlacement>
 		<fillType>Parameter</fillType>
 	</format>
 	<format>
-		<border>0</border>
+		<font>2</font>
+		<leftBorder>0</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>1</rightBorder>
+		<bottomBorder>0</bottomBorder>
+		<textPlacement>Wrap</textPlacement>
+		<fillType>Parameter</fillType>
+	</format>
+	<format>
+		<leftBorder>2</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>0</rightBorder>
+		<bottomBorder>0</bottomBorder>
+		<width>240</width>
+		<textPlacement>Wrap</textPlacement>
 		<fillType>Parameter</fillType>
 	</format>
 	<format>
@@ -305,11 +378,20 @@
 		<font>1</font>
 		<border>0</border>
 		<horizontalAlignment>Center</horizontalAlignment>
+		<fillType>Parameter</fillType>
 	</format>
 	<format>
-		<font>1</font>
 		<border>0</border>
-		<horizontalAlignment>Center</horizontalAlignment>
+		<fillType>Parameter</fillType>
+	</format>
+	<format>
+		<leftBorder>2</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>0</rightBorder>
+		<bottomBorder>0</bottomBorder>
+		<width>160</width>
+		<widthWeightFactor>1</widthWeightFactor>
+		<textPlacement>Wrap</textPlacement>
 		<fillType>Parameter</fillType>
 	</format>
 	<format>

@@ -587,55 +587,56 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT DISTINCT
-	ExecutorTasks.Ref,
-	ExecutorTasks.DeletionMark,
-	ExecutorTasks.Number,
-	ExecutorTasks.Date,
-	ExecutorTasks.BusinessProcess,
-	ExecutorTasks.RoutePoint,
-	ExecutorTasks.Executed,
-	ExecutorTasks.TaskID,
-	ExecutorTasks.IterationNumber,
-	ExecutorTasks.TaskType,
-	ExecutorTasks.ExecutionObject,
-	ExecutorTasks.ExecutionDate,
-	ExecutorTasks.AcceptetionForExecutionDate,
-	ExecutorTasks.Canceled,
-	ExecutorTasks.CurrentExecutor,
-	ExecutorTasks.UserGroup,
-	ExecutorTasks.Position,
-	ExecutorTasks.Branch,
-	ExecutorTasks.ProfitLossCenter,
-	ExecutorTasks.Comment,
-	ExecutorTasks.Author,
+	ExecutorTasks.Ref AS Ref,
+	ExecutorTasks.DeletionMark AS DeletionMark,
+	ExecutorTasks.Number AS Number,
+	ExecutorTasks.Date AS Date,
+	ExecutorTasks.BusinessProcess AS BusinessProcess,
+	ExecutorTasks.RoutePoint AS RoutePoint,
+	ExecutorTasks.Executed AS Executed,
+	ExecutorTasks.TaskID AS TaskID,
+	ExecutorTasks.IterationNumber AS IterationNumber,
+	ExecutorTasks.TaskType AS TaskType,
+	ExecutorTasks.ExecutionObject AS ExecutionObject,
+	ExecutorTasks.ExecutionDate AS ExecutionDate,
+	ExecutorTasks.AcceptetionForExecutionDate AS AcceptetionForExecutionDate,
+	ExecutorTasks.Canceled AS Canceled,
+	ExecutorTasks.CurrentExecutor AS CurrentExecutor,
+	ExecutorTasks.UserGroup AS UserGroup,
+	ExecutorTasks.Position AS Position,
+	ExecutorTasks.Branch AS Branch,
+	ExecutorTasks.ProfitLossCenter AS ProfitLossCenter,
+	ExecutorTasks.Comment AS Comment,
+	ExecutorTasks.Author AS Author,
 	ExecutorTasks.Description_en AS Description
 FROM
 	Task.ExecutorTasks AS ExecutorTasks
 		LEFT JOIN (SELECT
-			TaskExecutors.Executor,
-			TaskExecutors.UserGroup,
-			TaskExecutors.Position,
-			TaskExecutors.Branch,
-			TaskExecutors.ProfitLossCenter
+			TaskExecutors.Executor AS Executor,
+			TaskExecutors.UserGroup AS UserGroup,
+			TaskExecutors.Position AS Position,
+			TaskExecutors.Branch AS Branch,
+			TaskExecutors.ProfitLossCenter AS ProfitLossCenter
 		FROM
 			InformationRegister.TaskExecutors AS TaskExecutors
 		WHERE
 			TaskExecutors.Executor = &amp;CurrentUser) AS Addressing
-		ON ExecutorTasks.CurrentExecutor = VALUE(Catalog.Users.EmptyRef)
-		AND (ExecutorTasks.UserGroup = Addressing.UserGroup
-		OR ExecutorTasks.UserGroup = VALUE(Catalog.UserGroups.EmptyRef))
-		AND (ExecutorTasks.Position = Addressing.Position
-		OR ExecutorTasks.Position = VALUE(Catalog.EmployeePositions.EmptyRef))
-		AND (ExecutorTasks.Branch = Addressing.Branch
-		OR ExecutorTasks.Branch = VALUE(Catalog.BusinessUnits.EmptyRef))
-		AND (ExecutorTasks.ProfitLossCenter = Addressing.ProfitLossCenter
-		OR ExecutorTasks.ProfitLossCenter = VALUE(Catalog.BusinessUnits.EmptyRef))
+		ON (ExecutorTasks.CurrentExecutor = VALUE(Catalog.Users.EmptyRef))
+			AND (ExecutorTasks.UserGroup = Addressing.UserGroup
+				OR ExecutorTasks.UserGroup = VALUE(Catalog.UserGroups.EmptyRef))
+			AND (ExecutorTasks.Position = Addressing.Position
+				OR ExecutorTasks.Position = VALUE(Catalog.EmployeePositions.EmptyRef))
+			AND (ExecutorTasks.Branch = Addressing.Branch
+				OR ExecutorTasks.Branch = VALUE(Catalog.BusinessUnits.EmptyRef))
+			AND (ExecutorTasks.ProfitLossCenter = Addressing.ProfitLossCenter
+				OR ExecutorTasks.ProfitLossCenter = VALUE(Catalog.BusinessUnits.EmptyRef))
 WHERE
 	(NOT ExecutorTasks.Executed
-	OR &amp;ShowExecuted)
+			OR &amp;ShowExecuted)
 	AND (ExecutorTasks.CurrentExecutor = &amp;CurrentUser
-	OR NOT Addressing.Executor IS NULL
-	OR &amp;ShowAllTasks)</queryText>
+			OR NOT Addressing.Executor IS NULL
+			OR &amp;ShowAllTasks)
+	AND NOT ExecutorTasks.DeletionMark</queryText>
       <mainTable>Task.ExecutorTasks</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
@@ -762,6 +763,10 @@ WHERE
         <dataPath>Description_ru</dataPath>
         <field>Description_ru</field>
       </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AutoExecute</dataPath>
+        <field>AutoExecute</field>
+      </fields>
       <parameters>
         <name>ShowExecuted</name>
         <title>
@@ -775,6 +780,7 @@ WHERE
         <valueType>
           <types>Boolean</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
@@ -790,6 +796,7 @@ WHERE
         <valueType>
           <types>CatalogRef.Users</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
@@ -805,6 +812,7 @@ WHERE
         <valueType>
           <types>Boolean</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
     </extInfo>

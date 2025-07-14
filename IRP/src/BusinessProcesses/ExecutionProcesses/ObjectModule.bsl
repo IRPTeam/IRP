@@ -64,7 +64,7 @@ Procedure CompleteTasksBeforeCreateTasks(RoutePoint, TasksBeingFormed, StandardP
 	StandardProcessing = False;
 	
 	EmptyUUID = New UUID("00000000-0000-0000-0000-000000000000");
-	StatusRecord = InformationRegisters.ExecutionProcessStatus.GetLast(, New Structure("ExecutionProcess", ThisObject.Ref)); // InformationRegisterRecordManager.ExecutionProcessStatus
+	StatusRecord = InformationRegisters.ExecutionProcessStatus.GetLastStatus(ThisObject.Ref);
 	If StatusRecord.CurrentStage = EmptyUUID Then
 		Return;
 	EndIf;
@@ -81,12 +81,14 @@ Procedure CompleteTasksBeforeCreateTasks(RoutePoint, TasksBeingFormed, StandardP
 	
 	If StageRow.TasksStartTogether Then
 		For Each TaskRow In TaskRows Do
-			CreateTask(TaskRow, RoutePoint, StatusRecord.IterationNumber, TasksBeingFormed);
+			CreateTask(TasksBeingFormed, TaskRow, RoutePoint, StatusRecord.IterationNumber, False, 
+				(TaskRow.AutoExecuteOnStartup And StatusRecord.IterationNumber = 1));
 		EndDo;
 	Else
 		TaskRow = ThisObject.StagesTasks.Find(StatusRecord.CurrentTask, "TaskID");
 		If TaskRow <> Undefined Then
-			CreateTask(TaskRow, RoutePoint, StatusRecord.IterationNumber, TasksBeingFormed);
+			CreateTask(TasksBeingFormed, TaskRow, RoutePoint, StatusRecord.IterationNumber, 
+				(TaskRow.AutoExecuteOnStartup And StatusRecord.IterationNumber = 1), False);
 		EndIf;
 	EndIf;
 	
@@ -97,7 +99,7 @@ Procedure CheckTasksCompletedConditionCheck(RoutePoint, ProcessFinish)
 	ProcessFinish = True;
 	
 	EmptyUUID = New UUID("00000000-0000-0000-0000-000000000000");
-	StatusRecord = InformationRegisters.ExecutionProcessStatus.GetLast(, New Structure("ExecutionProcess", ThisObject.Ref));  // InformationRegisterRecordManager.ExecutionProcessStatus
+	StatusRecord = InformationRegisters.ExecutionProcessStatus.GetLastStatus(ThisObject.Ref);
 	If StatusRecord.CurrentStage = EmptyUUID Then
 		Return;
 	EndIf;
@@ -118,6 +120,10 @@ Procedure CheckTasksCompletedConditionCheck(RoutePoint, ProcessFinish)
 	EndDo;
 	
 	Query = New Query;
+	Query.SetParameter("TaskIDs", TaskIDs);
+	Query.SetParameter("BusinessProcess", ThisObject.Ref);
+	Query.SetParameter("IterationNumber", StatusRecord.IterationNumber);
+	
 	Query.Text =
 	"SELECT
 	|	ExecutorTasks.Ref
@@ -127,14 +133,38 @@ Procedure CheckTasksCompletedConditionCheck(RoutePoint, ProcessFinish)
 	|	ExecutorTasks.TaskID IN (&TaskIDs)
 	|	AND ExecutorTasks.BusinessProcess = &BusinessProcess
 	|	AND ExecutorTasks.IterationNumber = &IterationNumber
+	|	AND ExecutorTasks.Executed
 	|	AND ExecutorTasks.Canceled";
-	
-	Query.SetParameter("TaskIDs", TaskIDs);
-	Query.SetParameter("BusinessProcess", ThisObject.Ref);
-	Query.SetParameter("IterationNumber", StatusRecord.IterationNumber);
 	
 	QuerySelection = Query.Execute().Select();
 	TasksFailed = QuerySelection.Next();
+	
+	If StageRow.TasksStartTogether Then
+		Query.Text =
+		"SELECT
+		|	ExecutorTasks.Ref AS Ref
+		|FROM
+		|	Task.ExecutorTasks AS ExecutorTasks
+		|WHERE
+		|	ExecutorTasks.TaskID IN(&TaskIDs)
+		|	AND ExecutorTasks.BusinessProcess = &BusinessProcess
+		|	AND ExecutorTasks.IterationNumber = &IterationNumber
+		|	AND NOT ExecutorTasks.Executed
+		|	AND NOT ExecutorTasks.DeletionMark";
+		QuerySelection = Query.Execute().Select();
+		If QuerySelection.Count() > 0 Then
+			If TasksFailed Then
+				While QuerySelection.Next() Do
+					TaskObj = QuerySelection.Ref.GetObject();
+					TaskObj.DeletionMark = True;
+					TaskObj.Write();
+				EndDo;
+			Else
+				ProcessFinish = False;
+				Return;
+			EndIf;
+		EndIf;
+	EndIf;
 	
 	If TasksFailed Then
 		If StageRow.TasksFailAction = Enums.TaskFailActions.RestartStage Then
@@ -147,7 +177,6 @@ Procedure CheckTasksCompletedConditionCheck(RoutePoint, ProcessFinish)
 			Canceled = True;
 			Return;
 		EndIf;
-		
 	EndIf;
 	
 	StageFinish = True;
@@ -156,7 +185,7 @@ Procedure CheckTasksCompletedConditionCheck(RoutePoint, ProcessFinish)
 		If StageRow.TasksStartTogether Then
 			If StageRow.LineNumber < ThisObject.ExecutionStages.Count() Then
 				NextStage = ThisObject.ExecutionStages[StageRow.LineNumber].StageID;
-				SaveNewStageStatus(NextStage, EmptyUUID);
+				SaveNewStageStatus(NextStage, GetFirstTask(NextStage));
 				ProcessFinish = False;
 			EndIf;
 		Else
@@ -185,38 +214,42 @@ Procedure CompletionOnComplete(RoutePoint, Cancel)
 	
 	CompletionDate = CommonFunctionsServer.GetCurrentSessionDate();
 	
+	StatusRecord = InformationRegisters.ExecutionProcessStatus.GetLastStatus(ThisObject.Ref);
+	
 	Query = New Query;
+	Query.SetParameter("ExecutionProcess", ThisObject.Ref);
+	Query.SetParameter("IterationNumber", StatusRecord.IterationNumber);
+	Query.SetParameter("CurrentStage", StatusRecord.CurrentStage);
+	Query.SetParameter("CurrentTask", StatusRecord.CurrentTask);
+	Query.SetParameter("AllTasks", Not ValueIsFilled(StatusRecord.CurrentTask));
+	
 	Query.Text =
 	"SELECT
-	|	ExecutionProcessStatus.ExecutionProcess,
-	|	ExecutionProcessStatus.IterationNumber,
-	|	StagesTasks.TaskID
+	|	&ExecutionProcess AS ExecutionProcess,
+	|	&IterationNumber AS IterationNumber,
+	|	StagesTasks.TaskID AS TaskID
 	|INTO tmpData
 	|FROM
-	|	InformationRegister.ExecutionProcessStatus.SliceLast AS ExecutionProcessStatus
-	|		INNER JOIN BusinessProcess.ExecutionProcesses.StagesTasks AS StagesTasks
-	|		ON ExecutionProcessStatus.ExecutionProcess = StagesTasks.Ref
-	|		AND ExecutionProcessStatus.CurrentStage = StagesTasks.StageID
-	|		AND (ExecutionProcessStatus.CurrentTask = StagesTasks.TaskID
-	|		OR ExecutionProcessStatus.CurrentTask = &EmptyID)
+	|	BusinessProcess.ExecutionProcesses.StagesTasks AS StagesTasks
 	|WHERE
-	|	ExecutionProcessStatus.ExecutionProcess = &ExecutionProcess
+	|	StagesTasks.Ref = &ExecutionProcess
+	|	AND StagesTasks.StageID = &CurrentStage
+	|	AND (StagesTasks.TaskID = &CurrentTask
+	|	OR &AllTasks)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	ExecutorTasks.Ref
+	|	ExecutorTasks.Ref AS Ref
 	|FROM
 	|	tmpData AS tmpData
 	|		INNER JOIN Task.ExecutorTasks AS ExecutorTasks
-	|		ON tmpData.ExecutionProcess = ExecutorTasks.BusinessProcess
-	|		AND tmpData.IterationNumber = ExecutorTasks.IterationNumber
-	|		AND tmpData.TaskID = ExecutorTasks.TaskID
+	|		ON tmpData.TaskID = ExecutorTasks.TaskID
 	|WHERE
-	|	ExecutorTasks.Canceled = TRUE";
-	
-	Query.SetParameter("ExecutionProcess", ThisObject.Ref);
-	Query.SetParameter("EmptyID", New UUID("00000000-0000-0000-0000-000000000000"));
+	|	ExecutorTasks.Canceled = TRUE
+	|	AND ExecutorTasks.BusinessProcess = &ExecutionProcess
+	|	AND ExecutorTasks.IterationNumber = &IterationNumber
+	|	AND NOT ExecutorTasks.DeletionMark";
 	
 	QuerySelection = Query.Execute().Select();
 	If QuerySelection.Next() Then
@@ -284,8 +317,9 @@ EndFunction
 //  TaskRow - BusinessProcessTabularSectionRow.ExecutionProcesses.StagesTasks - Task row
 //  RoutePoint - BusinessProcessRoutePointRef.ExecutionProcesses - Route point
 //  IterationNumber - Number - Iteration number
+//  AutoExecute - Boolean - Auto execute
 //  TasksBeingFormed - Structure, Array of Arbitrary - Tasks being formed
-Procedure CreateTask(TaskRow, RoutePoint, IterationNumber, TasksBeingFormed)
+Procedure CreateTask(TasksBeingFormed, TaskRow, RoutePoint, IterationNumber, AutoExecute, Executed)
 	
 	NewTask = Tasks.ExecutorTasks.CreateTask();
 	FillPropertyValues(NewTask, TaskRow);
@@ -296,6 +330,8 @@ Procedure CreateTask(TaskRow, RoutePoint, IterationNumber, TasksBeingFormed)
 	NewTask.BusinessProcess = ThisObject.Ref;
 	NewTask.RoutePoint = RoutePoint;
 	NewTask.IterationNumber = IterationNumber;
+	NewTask.AutoExecute = AutoExecute;
+	NewTask.Executed = Executed;
 	
 	TasksBeingFormed.Add(NewTask);
 	
@@ -360,6 +396,7 @@ EndProcedure
 //  NewTask - UUID - New task
 Procedure SaveNewStageStatus(NewStage, NewTask)
 	StatusRecord = InformationRegisters.ExecutionProcessStatus.CreateRecordManager();
+	StatusRecord.StatusTime = CurrentUniversalDateInMilliseconds();
 	StatusRecord.ExecutionProcess = ThisObject.Ref;
 	StatusRecord.CurrentStage = NewStage;
 	StatusRecord.CurrentTask = NewTask;

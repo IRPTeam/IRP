@@ -463,6 +463,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="66b2e957-a8f3-46b6-b4b6-235e50270c2f">
+      <name>AutoExecuteOnStartup</name>
+      <synonym>
+        <key>en</key>
+        <value>Auto-execute</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <forms uuid="d1bab740-fb0c-4ee5-bffa-159ea8c976d1">
     <name>ItemForm</name>

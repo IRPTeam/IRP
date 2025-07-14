@@ -558,10 +558,56 @@
           <extInfo xsi:type="form:ImageFieldExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
-            <horizontalStretch>true</horizontalStretch>
             <verticalStretch>true</verticalStretch>
             <valuesPicture xsi:type="core:PictureRef">
               <picture>StdPicture.UserWithAuthentication</picture>
+            </valuesPicture>
+            <border xsi:type="core:BorderDef">
+              <style>Single</style>
+              <width>1</width>
+            </border>
+            <fileDragMode>AsFileRef</fileDragMode>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>DocumentListTaskIcon</name>
+          <id>224</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>DocumentList.TaskIcon</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>DocumentListTaskIconExtendedTooltip</name>
+            <id>226</id>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>DocumentListTaskIconContextMenu</name>
+            <id>225</id>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>PictureField</type>
+          <editMode>Enter</editMode>
+          <headerPicture xsi:type="core:PictureRef">
+            <picture>StdPicture.Task</picture>
+          </headerPicture>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:ImageFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <verticalStretch>true</verticalStretch>
+            <valuesPicture xsi:type="core:PictureRef">
+              <picture>CommonPicture.IconCollection10_Tasks</picture>
             </valuesPicture>
             <border xsi:type="core:BorderDef">
               <style>Single</style>
@@ -1738,6 +1784,9 @@
           <extInfo xsi:type="form:PageGroupExtInfo">
             <group>HorizontalIfPossible</group>
             <showTitle>true</showTitle>
+            <titleDataPath xsi:type="form:DataPath">
+              <segments>FilesCount</segments>
+            </titleDataPath>
           </extInfo>
         </items>
         <items xsi:type="form:FormGroup">
@@ -2079,6 +2128,9 @@
           <extInfo xsi:type="form:PageGroupExtInfo">
             <group>Vertical</group>
             <showTitle>true</showTitle>
+            <titleDataPath xsi:type="form:DataPath">
+              <segments>ChatCount</segments>
+            </titleDataPath>
           </extInfo>
         </items>
         <items xsi:type="form:FormGroup">
@@ -2447,6 +2499,9 @@
           <extInfo xsi:type="form:PageGroupExtInfo">
             <group>Vertical</group>
             <showTitle>true</showTitle>
+            <titleDataPath xsi:type="form:DataPath">
+              <segments>HistoryCount</segments>
+            </titleDataPath>
           </extInfo>
         </items>
         <visible>true</visible>
@@ -2688,19 +2743,34 @@
     </notDefaultUseAlwaysAttributes>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
-	Registry.Document,
-	Registry.Date,
-	Registry.Number,
-	JournalEntry.Company,
-	JournalEntry.LedgerType,
-	Registry.CreateDate,
-	Registry.ModifyDate,
-	Registry.Author,
-	Registry.Editor,
+	Registry.Document AS Document,
+	Registry.Date AS Date,
+	Registry.Number AS Number,
+	JournalEntry.Company AS Company,
+	JournalEntry.LedgerType AS LedgerType,
+	Registry.CreateDate AS CreateDate,
+	Registry.ModifyDate AS ModifyDate,
+	Registry.Author AS Author,
+	Registry.Editor AS Editor,
 	MAX(NOT AuditLock.Document IS NULL) AS Locked,
 	MAX(AttachedFiles.File IS NULL) AS FileNotExist,
 	COUNT(DISTINCT AttachedFiles.File) AS Files,
-	MAX(ISNULL(JournalEntry.Ref, UNDEFINED)) AS JournalEntry
+	MAX(ISNULL(JournalEntry.Ref, UNDEFINED)) AS JournalEntry,
+	MAX(NOT DocTasks.ExecutionObject IS NULL) AS hasTasks,
+	ISNULL(DocTasks.MyTask, FALSE) AS isMyTask,
+	ISNULL(DocTasks.RepeatTask, FALSE) AS isRepeatTask,
+	CASE
+		WHEN MAX(ISNULL(DocTasks.RepeatTask, FALSE))
+				AND MAX(ISNULL(DocTasks.MyTask, FALSE))
+			THEN 3
+		WHEN MAX(ISNULL(DocTasks.MyTask, FALSE))
+			THEN 0
+		WHEN MAX(NOT DocTasks.ExecutionObject IS NULL)
+			THEN 2
+		WHEN MAX(NOT ExecutedTasks.ExecutionObject IS NULL)
+			THEN 1
+		ELSE -1
+	END AS TaskIcon
 FROM
 	InformationRegister.PostedDocumentsRegistry AS Registry
 		LEFT JOIN InformationRegister.AttachedFiles AS AttachedFiles
@@ -2709,37 +2779,38 @@ FROM
 		ON Registry.Document = AuditLock.Document
 		LEFT JOIN Document.JournalEntry AS JournalEntry
 		ON Registry.Document = JournalEntry.Basis
-		AND NOT JournalEntry.DeletionMark
-		LEFT JOIN (SELECT DISTINCT
-			ExecutorTasks.ExecutionObject,
-			ExecutorTasks.CurrentExecutor = &amp;CurrentUser
-			OR NOT Addressing.Executor IS NULL AS MyTask
+			AND (NOT JournalEntry.DeletionMark)
+		LEFT JOIN (SELECT
+			ExecutorTasks.ExecutionObject AS ExecutionObject,
+			MAX(ExecutorTasks.CurrentExecutor = &amp;CurrentUser
+					OR NOT TasksByExecutive.Ref IS NULL) AS MyTask,
+			MAX(NOT OldTasks.Ref IS NULL) AS RepeatTask
 		FROM
 			Task.ExecutorTasks AS ExecutorTasks
-				LEFT JOIN (SELECT
-					TaskExecutors.Executor,
-					TaskExecutors.UserGroup,
-					TaskExecutors.Position,
-					TaskExecutors.Branch,
-					TaskExecutors.ProfitLossCenter
-				FROM
-					InformationRegister.TaskExecutors AS TaskExecutors
-				WHERE
-					TaskExecutors.Executor = &amp;CurrentUser) AS Addressing
-				ON ExecutorTasks.CurrentExecutor = VALUE(Catalog.Users.EmptyRef)
-				AND (ExecutorTasks.UserGroup = Addressing.UserGroup
-				OR ExecutorTasks.UserGroup = VALUE(Catalog.UserGroups.EmptyRef))
-				AND (ExecutorTasks.Position = Addressing.Position
-				OR ExecutorTasks.Position = VALUE(Catalog.EmployeePositions.EmptyRef))
-				AND (ExecutorTasks.Branch = Addressing.Branch
-				OR ExecutorTasks.Branch = VALUE(Catalog.BusinessUnits.EmptyRef))
-				AND (ExecutorTasks.ProfitLossCenter = Addressing.ProfitLossCenter
-				OR ExecutorTasks.ProfitLossCenter = VALUE(Catalog.BusinessUnits.EmptyRef))
+				LEFT JOIN Task.ExecutorTasks AS OldTasks
+				ON ExecutorTasks.ExecutionObject = OldTasks.ExecutionObject
+					AND ExecutorTasks.CurrentExecutor = OldTasks.CurrentExecutor
+					AND ExecutorTasks.Ref &lt;> OldTasks.Ref
+					AND (NOT OldTasks.DeletionMark)
+				LEFT JOIN Task.ExecutorTasks.TasksByExecutive(&amp;CurrentUser, ) AS TasksByExecutive
+				ON ExecutorTasks.Ref = TasksByExecutive.Ref
 		WHERE
-			NOT ExecutorTasks.Executed) AS DocTasks
+			NOT ExecutorTasks.Executed
+		
+		GROUP BY
+			ExecutorTasks.ExecutionObject) AS DocTasks
 		ON Registry.Document = DocTasks.ExecutionObject
+		LEFT JOIN (SELECT DISTINCT
+			ExecutorTasks.ExecutionObject AS ExecutionObject
+		FROM
+			Task.ExecutorTasks AS ExecutorTasks
+		WHERE
+			NOT ExecutorTasks.DeletionMark
+			AND ExecutorTasks.Executed) AS ExecutedTasks
+		ON Registry.Document = ExecutedTasks.ExecutionObject
 WHERE
 	FALSE
+
 GROUP BY
 	Registry.Document,
 	Registry.Date,
@@ -2749,23 +2820,97 @@ GROUP BY
 	Registry.Author,
 	Registry.Editor,
 	JournalEntry.Company,
-	JournalEntry.LedgerType</queryText>
+	JournalEntry.LedgerType,
+	ISNULL(DocTasks.MyTask, FALSE),
+	ISNULL(DocTasks.RepeatTask, FALSE)</queryText>
       <mainTable>InformationRegister.PostedDocumentsRegistry</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Files</dataPath>
+        <field>Files</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Files</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ManualMovementsEdit</dataPath>
+        <field>ManualMovementsEdit</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>RepeatTask</dataPath>
+        <field>RepeatTask</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Repeat task</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Document</dataPath>
         <field>Document</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>hasTasks</dataPath>
+        <field>hasTasks</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Has tasks</value>
+            </content>
+          </localValue>
+        </title>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Date</dataPath>
         <field>Date</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>isMyTask</dataPath>
+        <field>isMyTask</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Is my task</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>JournalEntry</dataPath>
+        <field>JournalEntry</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Journal entry</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Number</dataPath>
         <field>Number</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Company</dataPath>
+        <field>Company</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>LedgerType</dataPath>
+        <field>LedgerType</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>CreateDate</dataPath>
@@ -2776,12 +2921,12 @@ GROUP BY
         <field>ModifyDate</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Author</dataPath>
-        <field>Author</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Editor</dataPath>
         <field>Editor</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Author</dataPath>
+        <field>Author</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Locked</dataPath>
@@ -2791,18 +2936,6 @@ GROUP BY
             <content>
               <key>en</key>
               <value>Locked</value>
-            </content>
-          </localValue>
-        </title>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Files</dataPath>
-        <field>Files</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Files</value>
             </content>
           </localValue>
         </title>
@@ -2820,40 +2953,32 @@ GROUP BY
         </title>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>JournalEntry</dataPath>
-        <field>JournalEntry</field>
+        <dataPath>isRepeatTask</dataPath>
+        <field>isRepeatTask</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Is repeat task</value>
+            </content>
+          </localValue>
+        </title>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Company</dataPath>
-        <field>Company</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>LedgerType</dataPath>
-        <field>LedgerType</field>
+        <dataPath>TaskIcon</dataPath>
+        <field>TaskIcon</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Task icon</value>
+            </content>
+          </localValue>
+        </title>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>ExecutionObject</dataPath>
         <field>ExecutionObject</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Executor</dataPath>
-        <field>Executor</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>UserGroup</dataPath>
-        <field>UserGroup</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Position</dataPath>
-        <field>Position</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Branch</dataPath>
-        <field>Branch</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ProfitLossCenter</dataPath>
-        <field>ProfitLossCenter</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>MyTask</dataPath>
@@ -2876,10 +3001,6 @@ GROUP BY
         <field>Active</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ManualMovementsEdit</dataPath>
-        <field>ManualMovementsEdit</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Recorder</dataPath>
         <field>Recorder</field>
       </fields>
@@ -2898,6 +3019,21 @@ GROUP BY
         </valueType>
         <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>Performer</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Performer</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.Users</types>
+        </valueType>
+        <values xsi:type="core:UndefinedValue"/>
       </parameters>
     </extInfo>
   </attributes>
@@ -3245,6 +3381,23 @@ GROUP BY
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>IsImportant</name>
+      <title>
+        <key>en</key>
+        <value>Is important</value>
+      </title>
+      <id>32</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>HistoryReport</name>
@@ -3285,6 +3438,83 @@ GROUP BY
       <common>true</common>
     </edit>
     <functionalOptions>FunctionalOption.UseBusinessProcess</functionalOptions>
+  </attributes>
+  <attributes>
+    <name>FilesCount</name>
+    <title>
+      <key>en</key>
+      <value>Files count</value>
+    </title>
+    <id>29</id>
+    <valueType>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>ChatCount</name>
+    <title>
+      <key>en</key>
+      <value>Chat count</value>
+    </title>
+    <id>30</id>
+    <valueType>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>HistoryCount</name>
+    <title>
+      <key>en</key>
+      <value>History count</value>
+    </title>
+    <id>31</id>
+    <valueType>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>ShowExchangeError</name>
+    <title>
+      <key>en</key>
+      <value>Show exchange error</value>
+    </title>
+    <id>33</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
   </attributes>
   <formCommands>
     <name>FindDocuments</name>

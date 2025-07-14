@@ -24,7 +24,7 @@ EndProcedure
 
 #EndRegion
 
-#Region Commands
+#Region FormCommandsEventHandlers
 
 &AtClient
 Procedure FindDocuments(Command)
@@ -169,6 +169,7 @@ EndProcedure
 
 &AtServer
 Procedure SetVisible()
+	
 	VisibleSettings = DataProcessors.AccountantAutomatedWorkplace.GetSettings();
 
 	Items.LedgerType.Visible = VisibleSettings.Filter_LedgerType;
@@ -181,6 +182,9 @@ Procedure SetVisible()
 	Items.GroupFiles.Visible = VisibleSettings.Panel_GroupFiles;
 	Items.GroupChat.Visible = VisibleSettings.Panel_GroupChat;
 	Items.GroupHistory.Visible = VisibleSettings.Panel_GroupHistory;
+	
+	Items.DocumentListTaskIcon.Visible = VisibleSettings.Filter_TasksType;
+	
 EndProcedure
 
 &AtServer
@@ -214,7 +218,7 @@ Procedure SetListFilterAtServer()
 	If TasksType = 1 Then
 		DynamicListAPI.AddFilter(QuerySchemaAPI, "Not DocTasks.ExecutionObject IS NULL");
 	ElsIf TasksType = 2 Then
-		DynamicListAPI.AddFilter(QuerySchemaAPI, "Not DocTasks.ExecutionObject IS NULL And DocTasks.MyTask = TRUE");
+		DynamicListAPI.AddFilter(QuerySchemaAPI, "DocTasks.MyTask = TRUE");
 	EndIf;
 	
 	DynamicListAPI.Set(QuerySchemaAPI);
@@ -324,6 +328,7 @@ EndProcedure
 Procedure RefreshFilesAtServer(DocumentRef)
 	
 	FileTable.Clear();
+	FilesCount = 0;
 	
 	Items.PagesFiles.CurrentPage = Items.FirstPage;
 	
@@ -375,6 +380,7 @@ Procedure RefreshFilesAtServer(DocumentRef)
 			FileRecord.isPDF = False;
 		EndIf;
 	EndDo;
+	FilesCount = FileTable.Count();
 	
 	If FileTable.Count() = 0 Then
 		Items.NoFileLabel.Visible = True;
@@ -417,6 +423,7 @@ Procedure RefreshHistoryAtServer(DocumentRef)
 	
 	HistoryVersionTable.Clear();
 	HistoryReport.Clear();
+	HistoryCount = 0;
 	
 	If Not ValueIsFilled(DocumentRef) Then
 		Return;
@@ -425,13 +432,17 @@ Procedure RefreshHistoryAtServer(DocumentRef)
 	DataHistory.UpdateHistory();
 	HistoryTable = DataHistory.SelectVersions(New Structure("Data", DocumentRef),, "VersionNumber");
 	For Each HistoryRow In HistoryTable Do
-		FillPropertyValues(HistoryVersionTable.Add(), HistoryRow);
+		NewVersion = HistoryVersionTable.Add();
+		FillPropertyValues(NewVersion, HistoryRow);
 	EndDo;
+	HistoryCount = HistoryVersionTable.Count();
 	
 EndProcedure
 
 &AtServer
 Procedure RefreshChatAtServer(DocumentRef)
+	
+	ChatCount = 0;
 	
 	Query = New Query;
 	Query.SetParameter("Basis", DocumentRef);
@@ -456,6 +467,7 @@ Procedure RefreshChatAtServer(DocumentRef)
 	|	Logger.TimeStamp";
 	ChatMessages = Query.Execute().Unload();	
 	Data = CommonFunctionsServer.TableToStructure(ChatMessages);
+	ChatCount = Data.Count();
 	
 	Query.Text =
 	"SELECT
@@ -704,8 +716,10 @@ EndFunction
 Procedure ReadVersionDifference(VersionNumber)
 	HistoryReport.Clear();
 	
-	Attributes = New Structure;
 	Tables = New Structure;
+	Attributes = New Structure;
+	
+	AttributeNames = Catalogs.ConfigurationMetadata.GetAttributeNamesByObject(CurrentDocument);
 	
 	VersionDifference = DataHistory.GetVersionDifferences(CurrentDocument, VersionNumber);
 	For Each VersionDifferenceItem In VersionDifference Do
@@ -721,25 +735,40 @@ Procedure ReadVersionDifference(VersionNumber)
 	If Attributes.Count() Then
 	    HistoryReport.Put(Template.GetArea("AttributeHeader"));
 		For Each AttributKeyValue In Attributes Do
+			AttributeName = AttributeNames.Attributes.Get(AttributKeyValue.Key);
+			If AttributeName = Undefined or AttributeName = "" Then
+				AttributeName = AttributKeyValue.Key;
+			EndIf;
+			
+			AttributeValueNew = AttributKeyValue.Value.ValueAfterChange;
 			If TypeOf(AttributKeyValue.Value.ValueAfterChange) = Type("FixedStructure") Then
-				RowValue = Undefined;
+				AttributeValueNew = Undefined;
 				If AttributKeyValue.Value.ValueAfterChange.Property("Presentation") Then
-					RowValue = AttributKeyValue.Value.ValueAfterChange.Presentation;
+					AttributeValueNew = AttributKeyValue.Value.ValueAfterChange.Presentation;
 				ElsIf AttributKeyValue.Value.ValueAfterChange.Property("Ref") Then
-					RowValue = AttributKeyValue.Value.ValueAfterChange.Ref;
+					AttributeValueNew = AttributKeyValue.Value.ValueAfterChange.Ref;
 				EndIf;
-				If RowValue <> Undefined Then
-					Row = Template.GetArea("AttributeRow");
-					Row.Parameters.Name = AttributKeyValue.Key;
-					Row.Parameters.Value = RowValue;
-					HistoryReport.Put(Row);
+			EndIf;
+			
+			If AttributKeyValue.Value.Property("ValueBeforeChange") Then
+				AttributeValueOld = AttributKeyValue.Value.ValueBeforeChange;
+				If TypeOf(AttributKeyValue.Value.ValueBeforeChange) = Type("FixedStructure") Then
+					AttributeValueOld = Undefined;
+					If AttributKeyValue.Value.ValueBeforeChange.Property("Presentation") Then
+						AttributeValueOld = AttributKeyValue.Value.ValueBeforeChange.Presentation;
+					ElsIf AttributKeyValue.Value.ValueBeforeChange.Property("Ref") Then
+						AttributeValueOld = AttributKeyValue.Value.ValueBeforeChange.Ref;
+					EndIf;
 				EndIf;
 			Else
-				Row = Template.GetArea("AttributeRow");
-				Row.Parameters.Name = AttributKeyValue.Key;
-				Row.Parameters.Value = AttributKeyValue.Value.ValueAfterChange;
-				HistoryReport.Put(Row);
+				AttributeValueOld = Undefined;
 			EndIf;
+			
+			Row = Template.GetArea("AttributeRow");
+			Row.Parameters.Name = AttributeName;
+			Row.Parameters.ValueBefore = AttributeValueOld;
+			Row.Parameters.ValueAfter = AttributeValueNew;
+			HistoryReport.Put(Row);
 		EndDo;
 	EndIf;
 	
@@ -748,15 +777,29 @@ Procedure ReadVersionDifference(VersionNumber)
 			Continue;
 		EndIf;
 		
+		TableAttributeNames = AttributeNames.Tables.Get(TableKeyValue.Key);
+		
+		If TableAttributeNames = Undefined Then
+			TableAttributeNames = New Structure("Synonym, Attributes", "", New Map);
+		EndIf;
+		TableName = TableAttributeNames.Synonym;
+		If TableName = "" Then
+			TableName = TableKeyValue.Key;
+		EndIf;
+		
 		TableHeader = Template.GetArea("TableHeader");
-		TableHeader.Parameters.TableName = TableKeyValue.Key;
+		TableHeader.Parameters.TableName = TableName;
 		HistoryReport.Put(TableHeader);
 		
 		TableHeader = New SpreadsheetDocument;
 		TableHeader.Put(Template.GetArea("NumberHeader"));
 		For Each FieldKeyValue In TableKeyValue.Value[0].Fields Do
+			AttributeName = TableAttributeNames.Attributes.Get(FieldKeyValue.Key);
+			If AttributeName = Undefined or AttributeName = "" Then
+				AttributeName = FieldKeyValue.Key;
+			EndIf;
 			FieldHeader = Template.GetArea("FieldHeader");
-			FieldHeader.Parameters.FieldName = FieldKeyValue.Key;
+			FieldHeader.Parameters.FieldName = AttributeName;
 			TableHeader.Join(FieldHeader);
 		EndDo;
 		HistoryReport.Put(TableHeader);
@@ -768,6 +811,7 @@ Procedure ReadVersionDifference(VersionNumber)
 			NumberRow.Parameters.Number = TableRecord.LineNumberAfterVersionChange;
 			TableRow.Put(NumberRow);
 			For Each FieldKeyValue In TableRecord.Fields Do
+				FieldValueOld = Undefined;
 				FieldValue = FieldKeyValue.Value;
 				If TypeOf(FieldValue) = Type("FixedStructure") Then
 					If FieldValue.Property("Presentation") Then
@@ -775,7 +819,8 @@ Procedure ReadVersionDifference(VersionNumber)
 					ElsIf FieldValue.Property("Ref") Then
 						FieldValue = FieldValue.Ref;
 					ElsIf FieldValue.Property("ValueAfterChange") Then
-						FieldValue = FieldValue.ValueAfterChange;
+						FieldValuesAll = FieldValue;
+						FieldValue = FieldValuesAll.ValueAfterChange;
 						If TypeOf(FieldValue) = Type("FixedStructure") Then
 							If FieldValue.Property("Presentation") Then
 								FieldValue = FieldValue.Presentation;
@@ -783,16 +828,33 @@ Procedure ReadVersionDifference(VersionNumber)
 								FieldValue = FieldValue.Ref;
 							EndIf;
 						EndIf;
+						If FieldValuesAll.Property("ValueBeforeChange") Then
+							FieldValueOld = FieldValuesAll.ValueBeforeChange;
+							If TypeOf(FieldValueOld) = Type("FixedStructure") Then
+								If FieldValueOld.Property("Presentation") Then
+									FieldValueOld = FieldValueOld.Presentation;
+								ElsIf FieldValueOld.Property("Ref") Then
+									FieldValueOld = FieldValueOld.Ref;
+								EndIf;
+							EndIf;
+						EndIf;
 					EndIf;
 				EndIf;
 				
 				FieldRow = Template.GetArea("FieldRow");
-				FieldRow.Parameters.FieldValue = FieldValue;
+				FieldRow.Parameters.ValueBefore = FieldValueOld;
+				FieldRow.Parameters.ValueAfter = FieldValue;
 				TableRow.Join(FieldRow);
 			EndDo;
 			
 			HistoryReport.Put(TableRow);
 		EndDo;
+	EndDo;
+	
+	For ColumnNumber = 5 to HistoryReport.TableWidth Do
+		If HistoryReport.Area(1, ColumnNumber).ColumnWidth < 20 Then
+			HistoryReport.Area(1, ColumnNumber).ColumnWidth = 20;
+		EndIf;
 	EndDo;
 	
 EndProcedure

@@ -62,6 +62,9 @@
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.OpeningEntry.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.OpeningEntry.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.OpeningEntry.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
   <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>

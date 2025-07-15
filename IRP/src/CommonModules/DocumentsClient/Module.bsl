@@ -298,7 +298,11 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	EndIf;
 
 	SetCurrentRow(Object, Form, Item, OpenSettings.FormParameters, "Agreement");
-
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "Company") Then
+		OpenSettings.FormParameters.Insert("CompanyIsReadOnly", Form.Items.Company.ReadOnly);
+	EndIf;
+	
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 

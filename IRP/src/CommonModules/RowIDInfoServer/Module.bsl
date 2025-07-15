@@ -11311,7 +11311,7 @@ EndFunction
 
 Function GetFieldsToLock_AlwaysReadonly_PR()
 	Result = New Structure("Header, ItemList");
-	Result.ItemList = "PurchaseInvoice, PurchaseReturnOrder";
+	Result.ItemList = "PurchaseReturnOrder";
 	Return Result;
 EndFunction
 
@@ -11445,7 +11445,7 @@ EndFunction
 
 Function GetFieldsToLock_AlwaysReadonly_SR()
 	Result = New Structure("Header, ItemList");
-	Result.ItemList = "SalesInvoice, SalesReturnOrder";
+	Result.ItemList = "SalesReturnOrder";
 	Return Result;
 EndFunction
 
@@ -11941,7 +11941,6 @@ EndFunction
 
 Function GetFieldsToLock_AlwaysReadonly_RRR()
 	Result = New Structure("Header, ItemList");
-	Result.ItemList = "RetailSalesReceipt";
 	Return Result;
 EndFunction
 

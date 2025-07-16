@@ -3141,6 +3141,7 @@ Procedure StepChangeCompanyByAgreement(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeCompanyByAgreementOptions();
 	Options.Agreement      = GetAgreement(Parameters);
 	Options.CurrentCompany = GetCompany(Parameters);
+	Options.Object = Parameters.Object;
 	Options.StepName = "StepChangeCompanyByAgreement";
 	Chain.ChangeCompanyByAgreement.Options.Add(Options);
 EndProcedure

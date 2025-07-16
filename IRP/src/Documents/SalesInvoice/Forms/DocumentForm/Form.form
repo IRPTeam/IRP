@@ -2721,7 +2721,7 @@
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListSalesOrder</name>
-          <id>240</id>
+          <id>1537</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -2732,7 +2732,7 @@
           </dataPath>
           <extendedTooltip>
             <name>ItemListSalesOrderExtendedTooltip</name>
-            <id>242</id>
+            <id>1539</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2747,7 +2747,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>ItemListSalesOrderContextMenu</name>
-            <id>241</id>
+            <id>1538</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2764,7 +2764,6 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
-            <choiceButton>false</choiceButton>
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>

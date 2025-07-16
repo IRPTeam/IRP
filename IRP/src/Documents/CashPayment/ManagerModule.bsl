@@ -257,7 +257,8 @@ Function PaymentList()
 		|	PaymentList.TaxDiscountAmount,
 		|	PaymentList.RevenueType,
 		|	PaymentList.AdditionalAnalytic,
-		|	PaymentList.ProfitLossCenter
+		|	PaymentList.ProfitLossCenter,
+		|	PaymentList.Agreement.CurrencyMovementType.Currency as AgreementCurrency
 		|INTO PaymentList
 		|FROM
 		|	Document.CashPayment.PaymentList AS PaymentList
@@ -733,6 +734,8 @@ Function T1040T_AccountingAmounts()
 		|	PaymentList.Key AS RowKey,
 		|	PaymentList.Key AS Key,
 		|	PaymentList.Currency,
+		|	undefined as DrCurrency,
+		|	undefined as CrCurrency,
 		|	PaymentList.Amount,
 		|	VALUE(Catalog.AccountingOperations.CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
@@ -750,6 +753,8 @@ Function T1040T_AccountingAmounts()
 		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Currency,
+		|	undefined,
+		|	undefined,
 		|	OffsetOfAdvances.Amount,
 		|	VALUE(Catalog.AccountingOperations.CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors),
 		|	OffsetOfAdvances.Recorder
@@ -767,6 +772,8 @@ Function T1040T_AccountingAmounts()
 		|	PaymentList.Key AS RowKey,
 		|	PaymentList.Key AS Key,
 		|	PaymentList.Currency,
+		|	undefined,
+		|	undefined,
 		|	PaymentList.Amount,
 		|	VALUE(Catalog.AccountingOperations.CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
@@ -783,6 +790,8 @@ Function T1040T_AccountingAmounts()
 		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Currency,
+		|	undefined,
+		|	undefined,
 		|	OffsetOfAdvances.Amount,
 		|	VALUE(Catalog.AccountingOperations.CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers),
 		|	OffsetOfAdvances.Recorder
@@ -800,6 +809,8 @@ Function T1040T_AccountingAmounts()
 		|	PaymentList.Key AS RowKey,
 		|	PaymentList.Key AS Key,
 		|	PaymentList.Currency,
+		|	undefined,
+		|	undefined,
 		|	PaymentList.Amount,
 		|	VALUE(Catalog.AccountingOperations.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
@@ -816,6 +827,8 @@ Function T1040T_AccountingAmounts()
 		|	PaymentList.Key AS RowKey,
 		|	PaymentList.Key AS Key,
 		|	PaymentList.Currency,
+		|	undefined,
+		|	undefined,
 		|	PaymentList.Amount,
 		|	VALUE(Catalog.AccountingOperations.CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
@@ -832,6 +845,8 @@ Function T1040T_AccountingAmounts()
 		|	PaymentList.Key AS RowKey,
 		|	PaymentList.Key AS Key,
 		|	PaymentList.Currency,
+		|	undefined,
+		|	undefined,
 		|	PaymentList.TaxDiscountAmount,
 		|	VALUE(Catalog.AccountingOperations.CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
@@ -848,6 +863,8 @@ Function T1040T_AccountingAmounts()
 		|	PaymentList.Key AS RowKey,
 		|	PaymentList.Key AS Key,
 		|	PaymentList.Currency,
+		|	undefined,
+		|	undefined,
 		|	PaymentList.Amount,
 		|	VALUE(Catalog.AccountingOperations.CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
@@ -864,6 +881,8 @@ Function T1040T_AccountingAmounts()
 		|	PaymentList.Key AS RowKey,
 		|	PaymentList.Key AS Key,
 		|	PaymentList.Currency,
+		|	PaymentList.AgreementCurrency,
+		|	undefined,
 		|	PaymentList.Amount,
 		|	VALUE(Catalog.AccountingOperations.CashPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand) AS Operation,
 		|	UNDEFINED AS AdvancesClosing

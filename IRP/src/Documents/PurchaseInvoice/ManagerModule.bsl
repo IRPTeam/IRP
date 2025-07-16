@@ -544,7 +544,6 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Current_R4035B_IncomingStocks = PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters);
 	Exists_R4035B_IncomingStocks  = PostingServer.GetQueryTableByName("Exists_R4035B_IncomingStocks", Parameters);
 	
-
 	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, 
 		LineNumberAndItemKeyFromItemList,
 		Current_R4035B_IncomingStocks, 

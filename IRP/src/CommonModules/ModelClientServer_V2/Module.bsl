@@ -1269,14 +1269,30 @@ EndFunction
 #Region CHANGE_COMPANY_BY_AGREEMENT
 
 Function ChangeCompanyByAgreementOptions() Export
-	Return GetChainLinkOptions("Agreement, CurrentCompany");
+	Return GetChainLinkOptions("Agreement, CurrentCompany, Object");
 EndFunction
 
 Function ChangeCompanyByAgreementExecute(Options) Export
+	IsLinkedDocument = False;
+	If CommonFunctionsClientServer.ObjectHasProperty(Options.Object, "RowIDInfo") Then
+		For Each Row In Options.Object.RowIDInfo Do
+			If ValueIsFilled(Row.Basis) Then
+				IsLinkedDocument = True;
+				Break;
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	If ValueIsFilled(Options.CurrentCompany) And IsLinkedDocument Then
+		Return Options.CurrentCompany;
+	EndIf;
+	
 	If Not ValueIsFilled(Options.Agreement) Then
 		Return Options.CurrentCompany;
 	EndIf;
+	
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+	
 	If ValueIsFilled(AgreementInfo.Company) Then
 		Return AgreementInfo.Company;
 	EndIf;

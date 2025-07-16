@@ -451,21 +451,36 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
-		"Document.SalesReturn.ItemList");
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.SalesReturn.ItemList");
 
+	Current_R4050B_StockInventory = PostingServer.GetQueryTableByName("R4050B_StockInventory", Parameters);
+	Exists_R4050B_StockInventory  = PostingServer.GetQueryTableByName("Exists_R4050B_StockInventory", Parameters);
+	
+	Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory);
+	Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory);
+	
 	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
-	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4014B_SerialLotNumber", Parameters), AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+	Current_R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters);
+	Exists_R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters);
+	
+	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, 
+		LineNumberAndItemKeyFromItemList,
+		Current_R4014B_SerialLotNumber, 
+		Exists_R4014B_SerialLotNumber, 
+		AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
-
+	
+	Current_R2001T_Sales = PostingServer.GetQueryTableByName("R2001T_Sales", Parameters);
+	Exists_R2001T_Sales = PostingServer.GetQueryTableByName("Exists_R2001T_Sales", Parameters);
+	
 	If Not Cancel And Ref.TransactionType = Enums.SalesReturnTransactionTypes.ReturnFromCustomer
-		And Not AccReg.R2001T_Sales.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R2001T_Sales", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R2001T_Sales", Parameters), AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		And Not AccReg.R2001T_Sales.CheckBalance(Ref, 
+			LineNumberAndItemKeyFromItemList,
+			Current_R2001T_Sales, 
+			Exists_R2001T_Sales, 
+			AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure

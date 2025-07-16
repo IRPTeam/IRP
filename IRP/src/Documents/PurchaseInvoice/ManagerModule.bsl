@@ -544,7 +544,6 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Current_R4035B_IncomingStocks = PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters);
 	Exists_R4035B_IncomingStocks  = PostingServer.GetQueryTableByName("Exists_R4035B_IncomingStocks", Parameters);
 	
-
 	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, 
 		LineNumberAndItemKeyFromItemList,
 		Current_R4035B_IncomingStocks, 
@@ -802,7 +801,12 @@ Function ItemList()
 	|	ItemList.SimpleBatch AS SimpleBatch,
 	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
 	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Consignor) AS IsConsignor,
-	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
+	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
+	|
+	|	undefined as TaxPartner,
+	|	undefined as TaxLegalName,
+	|	undefined as TaxAgreement,
+	|	0 as WithholdingTaxAmount
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS ItemList

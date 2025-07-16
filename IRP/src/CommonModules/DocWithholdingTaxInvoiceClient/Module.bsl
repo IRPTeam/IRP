@@ -82,6 +82,43 @@ EndProcedure
 
 #EndRegion
 
+#Region TAX_PARTNER
+
+Procedure TaxPartnerOnChange(Object, Form, Item) Export
+	ViewClient_V2.TaxPartnerOnChange(Object, Form, "ItemList");
+EndProcedure
+
+Procedure TaxPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	
+	OpenSettings.FormParameters = New Structure();
+	OpenSettings.FormParameters.Insert("DocumentFilter", New Structure("Other", True));
+	OpenSettings.FormParameters.Insert("FilterGroupType", "OrGroup");
+		
+	FilterGroup = DocumentsClientServer.CreateFilterGroup(DataCompositionFilterItemsGroupType.OrGroup);
+	FilterGroup.Items.Add(DocumentsClientServer.CreateFilterItem("Other", True, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(FilterGroup);
+	
+	OpenSettings.FillingData = New Structure("Other", True);
+	
+	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure TaxPartnerTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	PartnerType = "Other";
+	
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(PartnerType, True, ComparisonType.Equal));
+	
+	AdditionalParameters = New Structure();
+	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
 #Region LEGAL_NAME
 
 Procedure LegalNameOnChange(Object, Form, Item) Export
@@ -108,6 +145,40 @@ Procedure LegalNameTextChange(Object, Form, Item, Text, StandardProcessing) Expo
 	AdditionalParameters = New Structure();
 	If ValueIsFilled(Object.Partner) Then
 		AdditionalParameters.Insert("Partner", Object.Partner);
+		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
+	EndIf;
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_LEGAL_NAME
+
+Procedure TaxLegalNameOnChange(Object, Form, Item) Export
+	ViewClient_V2.TaxLegalNameOnChange(Object, Form, "ItemList");
+EndProcedure
+
+Procedure TaxLegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.FormParameters = New Structure();
+	If ValueIsFilled(Object.TaxPartner) Then
+		OpenSettings.FormParameters.Insert("Partner", Object.TaxPartner);
+		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
+	EndIf;
+	OpenSettings.FillingData = New Structure("Partner", Object.TaxPartner);
+	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure TaxLegalNameTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	AdditionalParameters = New Structure();
+	If ValueIsFilled(Object.Partner) Then
+		AdditionalParameters.Insert("Partner", Object.TaxPartner);
 		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
 	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
@@ -165,6 +236,54 @@ EndProcedure
 
 #EndRegion
 
+#Region TAX_AGREEMENT
+
+Procedure TaxAgreementOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	ViewClient_V2.TaxAgreementOnChange(Object, Form, "ItemList");
+EndProcedure
+
+Procedure TaxAgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
+	ArrayOfAgreementTypes = New Array();
+	ArrayOfAgreementTypes.Add(PredefinedValue("Enum.AgreementTypes.Other"));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", ArrayOfAgreementTypes, DataCompositionComparisonType.InList));
+	
+	OpenSettings.FormParameters = New Structure();
+	OpenSettings.FormParameters.Insert("Partner"                     , Object.TaxPartner);
+	OpenSettings.FormParameters.Insert("IncludeFilterByPartner"      , True);
+	OpenSettings.FormParameters.Insert("IncludePartnerSegments"      , True);
+	OpenSettings.FormParameters.Insert("EndOfUseDate"                , Object.Date);
+	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate" , True);
+	
+	OpenSettings.FillingData = New Structure();
+	OpenSettings.FillingData.Insert("Partner"   , Object.TaxPartner);
+	OpenSettings.FillingData.Insert("LegalName" , Object.TaxLegalName);
+	OpenSettings.FillingData.Insert("Company"   , Object.Company);
+	OpenSettings.FillingData.Insert("Type"      , PredefinedValue("Enum.AgreementTypes.Vendor"));
+
+	DocumentsClient.AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure TaxAgreementTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue("Enum.AgreementTypes.Other"),ComparisonType.Equal));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"),ComparisonType.NotEqual));
+	AdditionalParameters = New Structure();
+	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate" , True);
+	AdditionalParameters.Insert("IncludeFilterByPartner"      , True);
+	AdditionalParameters.Insert("IncludePartnerSegments"      , True);
+	AdditionalParameters.Insert("EndOfUseDate"                , Object.Date);
+	AdditionalParameters.Insert("Partner"                     , Object.TaxPartner);
+	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
 #Region CURRENCY
 
 Procedure CurrencyOnChange(Object, Form, Item) Export
@@ -177,6 +296,14 @@ EndProcedure
 
 Procedure LegalNameContractOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_LEGAL_NAME_CONTRACT
+
+Procedure TaxLegalNameContractOnChange(Object, Form, Item) Export
+	Return;
 EndProcedure
 
 #EndRegion
@@ -326,14 +453,6 @@ EndProcedure
 
 Procedure ItemListTaxAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListTaxAmountOnChange(Object, Form, CurrentData);
-EndProcedure
-
-#EndRegion
-
-#Region NET_AMOUNT
-
-Procedure ItemListNetAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
-	ViewClient_V2.ItemListNetAmountOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion

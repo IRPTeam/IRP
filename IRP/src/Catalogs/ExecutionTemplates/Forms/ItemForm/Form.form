@@ -257,9 +257,6 @@
         <showInFooter>true</showInFooter>
         <extInfo xsi:type="form:LabelFieldExtInfo">
           <autoMaxHeight>true</autoMaxHeight>
-          <border xsi:type="core:BorderDef">
-            <width>1</width>
-          </border>
         </extInfo>
       </items>
       <visible>true</visible>
@@ -535,6 +532,7 @@
         <enableStartDrag>true</enableStartDrag>
         <enableDrag>true</enableDrag>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -850,6 +848,7 @@
         <enableStartDrag>true</enableStartDrag>
         <enableDrag>true</enableDrag>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <items xsi:type="form:Table">
         <name>StagesTasks</name>
@@ -1027,6 +1026,39 @@
             <textEdit>true</textEdit>
           </extInfo>
         </items>
+        <items xsi:type="form:FormField">
+          <name>StagesTasksAutoExecuteOnStartup</name>
+          <id>152</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.StagesTasks.AutoExecuteOnStartup</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>StagesTasksAutoExecuteOnStartupExtendedTooltip</name>
+            <id>154</id>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>StagesTasksAutoExecuteOnStartupContextMenu</name>
+            <id>153</id>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>CheckBoxField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+        </items>
         <autoCommandBar>
           <name>StagesTasksCommandBar</name>
           <id>85</id>
@@ -1144,6 +1176,7 @@
         <enableStartDrag>true</enableStartDrag>
         <enableDrag>true</enableDrag>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1205,12 +1238,12 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <saveWindowSettings>true</saveWindowSettings>
@@ -1266,12 +1299,12 @@
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
-      <event>BeforeWriteAtServer</event>
-      <name>BeforeWriteAtServer</name>
-    </handlers>
-    <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

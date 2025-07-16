@@ -1534,6 +1534,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_183", NStr("en = 'By document [%1]. Lacking: %3 %2.'", Lang));
 	Strings.Insert("Error_184", NStr("en = 'Currency is a required field.'", Lang));
 	Strings.Insert("Error_185", NStr("en = 'Wrong linked row [%1]: Document date [%2] less than Basis date [%3]'", Lang));
+	Strings.Insert("Error_186", NStr("en = 'Document date [%1] greater than date [%2] in [%3]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -2334,15 +2335,14 @@ Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransa
 Strings.Insert("WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
 	NStr("en = 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'", Lang));
 
-Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax",
-	NStr("en = 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R3040B_WithholdingTax)'", Lang));
+Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions",
+	NStr("en = 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'", Lang));
 
 Strings.Insert("FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues",
 	NStr("en = 'FixedAssetRevaluation DR (R8510B BookValueOfFixedAsset) CR (R5021T Revenues)'", Lang));
 
 Strings.Insert("FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset",
 	NStr("en = 'FixedAssetRevaluation DR (R5022T Expenses) CR (R8510B BookValueOfFixedAsset)'", Lang));
-
 	
 Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External accounting operation exchange report'", Lang));
 

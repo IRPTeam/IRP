@@ -364,8 +364,12 @@ Scenario: _2066006 check locking tab in the PI with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Purchase order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Purchase order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Sales order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -380,8 +384,12 @@ Scenario: _2066006 check locking tab in the PI with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Internal supply request
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -396,8 +404,12 @@ Scenario: _2066006 check locking tab in the PI with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Internal supply request" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Internal supply request" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		And I close all client application windows
 
 
@@ -486,8 +498,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Receipt basis" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Receipt basis" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Purchase order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -502,8 +518,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Purchase order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Purchase order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Purchase invoice
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -518,8 +538,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Purchase invoice" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Purchase invoice" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Sales order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -534,8 +558,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Sales invoice
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -550,8 +578,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales invoice" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales invoice" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Inventory transfer order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -566,8 +598,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Inventory transfer order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Inventory transfer order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Inventory transfer
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -582,8 +618,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Inventory transfer" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Inventory transfer" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Internal supply request
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -598,8 +638,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Internal supply request" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Internal supply request" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Sales return
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -614,8 +658,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales return" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales return" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Sales return order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -630,8 +678,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales return order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales return order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		And I close all client application windows
 		
 
@@ -1132,8 +1184,12 @@ Scenario: _2066031 check locking tab in the PRO with linked documents (one sessi
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
-			And I click choice button of "Purchase invoice" attribute in "ItemList" table			
+			When I Check the steps for Exception
+				| 'And I click choice button of "Purchase invoice" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
+			And I click choice button of "Purchase invoice" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		And I close all client application windows
 	
 
@@ -1225,8 +1281,12 @@ Scenario: _2066032 check locking tab in the PR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Purchase invoice" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Purchase invoice" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Purchase return order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -1241,8 +1301,12 @@ Scenario: _2066032 check locking tab in the PR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Purchase return order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Purchase return order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		And I close all client application windows
 	
 

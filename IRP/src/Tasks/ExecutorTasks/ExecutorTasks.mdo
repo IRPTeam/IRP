@@ -115,6 +115,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="e87573de-2b60-45d6-ba98-27ab839b54a2">
@@ -147,6 +148,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -227,6 +229,21 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="aeef31f3-5e83-40cf-bc67-558d2e7bb2f3">
+    <name>AutoExecute</name>
+    <synonym>
+      <key>en</key>
+      <value>Auto-execute</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
   </attributes>
   <forms uuid="513d82d4-5088-403e-8052-333c67529f8b">
     <name>ItemForm</name>

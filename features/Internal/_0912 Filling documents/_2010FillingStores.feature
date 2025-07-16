@@ -265,6 +265,7 @@ Scenario: _201003 check filling in Store field in the document Purchase order
 			| 'Shirt'   | '36/Red'     | '1,000'      | 'Store 03'    |
 	* Re-selecting a partner term with an empty store and check filling in the store from user settings
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"		
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -344,6 +345,7 @@ Scenario: _201004 check filling in Store field in the document Purchase invoice
 			| 'Shirt'   | '36/Red'     | '1,000'      | 'Store 02'    |
 	* Re-selecting a partner term with an empty store and check filling in the store from user settings
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |

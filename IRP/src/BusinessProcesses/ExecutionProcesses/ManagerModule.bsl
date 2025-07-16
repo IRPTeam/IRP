@@ -1,12 +1,13 @@
 
 Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
 	StandardProcessing = False;
-	Presentation = String(Data["Description_" + LocalizationReuse.GetLocalizationCode()]);
+	Presentation = StrTemplate("%1 (%2)", String(Data["Description_" + LocalizationReuse.GetLocalizationCode()]), Data.Number);
 EndProcedure
 
 Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
 	StandardProcessing = False;
 	Fields = New Array();
+	Fields.Add("Number");
 	For Each DescriptionName In LocalizationServer.AllDescription() Do
 		Fields.Add(DescriptionName);
 	EndDo;
@@ -32,7 +33,11 @@ Function GetExecutionFlowchart(ProcessRef) Export
 	
 	Result.Put(HeaderArea);
 	
+	StatusRecord = InformationRegisters.ExecutionProcessStatus.GetLastStatus(ProcessRef);
+	
 	Query = New Query;
+	Query.SetParameter("Ref", ProcessRef);
+	
 	Query.Text =
 	"SELECT
 	|	Stages.StageID AS StageID,
@@ -54,110 +59,100 @@ Function GetExecutionFlowchart(ProcessRef) Export
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	tmpProcess.StageID,
+	|	tmpProcess.StageID AS StageID,
 	|	tmpProcess.TaskID,
-	|	MAX(ExecutorTasks.IterationNumber) AS IterationNumber
-	|INTO tmpTasks
-	|FROM
-	|	tmpProcess AS tmpProcess
-	|		INNER JOIN Task.ExecutorTasks AS ExecutorTasks
-	|		ON tmpProcess.TaskID = ExecutorTasks.TaskID
-	|		AND ExecutorTasks.BusinessProcess = &Ref
-	|GROUP BY
-	|	tmpProcess.StageID,
-	|	tmpProcess.TaskID
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmpProcess.StageID,
 	|	tmpProcess.StageLineNumber AS StageLineNumber,
-	|	tmpProcess.StageDescription,
-	|	tmpProcess.TaskID,
+	|	tmpProcess.StageDescription AS StageDescription,
 	|	tmpProcess.TaskLineNumber AS TaskLineNumber,
-	|	tmpProcess.TaskDescription,
+	|	tmpProcess.TaskDescription AS TaskDescription,
 	|	tmpProcess.TaskType,
-	|	ExecutorTasks.Ref AS TaskRef,
-	|	ExecutorTasks.CurrentExecutor,
+	|	ISNULL(ExecutorTasks.Ref, VALUE(Task.ExecutorTasks.EmptyRef)) AS TaskRef,
+	|	ISNULL(ExecutorTasks.IterationNumber, 0) AS IterationNumber,
+	|	ISNULL(ExecutorTasks.CurrentExecutor, VALUE(Catalog.Users.EmptyRef)) AS CurrentExecutor,
 	|	ISNULL(ExecutorTasks.ExecutionDate, DATETIME(1, 1, 1)) AS ExecutionDate,
 	|	ISNULL(ExecutorTasks.Executed, FALSE) AS Executed,
 	|	ISNULL(ExecutorTasks.Canceled, FALSE) AS Canceled,
-	|	ISNULL(ExecutorTasks.Comment, """") AS Comment,
-	|	NOT ExecutionProcessStatusSliceLast.ExecutionProcess IS NULL AS CurrentTask
+	|	ISNULL(ExecutorTasks.Comment, """") AS Comment
 	|FROM
 	|	tmpProcess AS tmpProcess
-	|		LEFT JOIN tmpTasks AS tmpTasks
-	|			LEFT JOIN Task.ExecutorTasks AS ExecutorTasks
-	|			ON tmpTasks.TaskID = ExecutorTasks.TaskID
-	|			AND tmpTasks.IterationNumber = ExecutorTasks.IterationNumber
-	|			AND ExecutorTasks.BusinessProcess = &Ref
-	|			LEFT JOIN InformationRegister.ExecutionProcessStatus.SliceLast AS ExecutionProcessStatusSliceLast
-	|			ON tmpTasks.StageID = ExecutionProcessStatusSliceLast.CurrentStage
-	|			AND tmpTasks.IterationNumber = ExecutionProcessStatusSliceLast.IterationNumber
-	|			AND ExecutionProcessStatusSliceLast.ExecutionProcess = &Ref
-	|			AND (ExecutionProcessStatusSliceLast.CurrentTask = tmpTasks.TaskID
-	|			OR ExecutionProcessStatusSliceLast.CurrentTask = &EmptyID)
-	|		ON tmpProcess.StageID = tmpTasks.StageID
-	|		AND tmpProcess.TaskID = tmpTasks.TaskID
+	|		LEFT JOIN Task.ExecutorTasks AS ExecutorTasks
+	|		ON tmpProcess.TaskID = ExecutorTasks.TaskID
+	|		AND ExecutorTasks.BusinessProcess = &Ref
 	|
 	|ORDER BY
 	|	StageLineNumber,
+	|	TaskLineNumber,
+	|	IterationNumber
+	|TOTALS
+	|	MAX(StageDescription) AS StageDescription,
+	|	MAX(TaskDescription) AS TaskDescription
+	|BY
+	|	StageLineNumber,
 	|	TaskLineNumber";
-	
-	Query.SetParameter("Ref", ProcessRef);
-	Query.SetParameter("EmptyID", New UUID("00000000-0000-0000-0000-000000000000"));
 	
 	LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "Stages");
 	LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "Tasks");
 	
-	QuerySelection = Query.Execute().Select();
+	StageSelection = Query.Execute().Select(QueryResultIteration.ByGroups);
 	
-	CurrentStage = Undefined;
-	TaskNumber = 0; 
-	While QuerySelection.Next() Do
-		If QuerySelection.StageID <> CurrentStage Then
-			TaskNumber = 0;
-			CurrentStage = QuerySelection.StageID;
-			
-			StageArea = Template.GetArea("Stage");
-			StageArea.Parameters.Number = QuerySelection.StageLineNumber;
-			StageArea.Parameters.StageName = QuerySelection.StageDescription;
-			Result.Put(StageArea);
-		EndIf;
+	While StageSelection.Next() Do
+		StageArea = Template.GetArea("Stage");
+		StageArea.Parameters.Number = StageSelection.StageLineNumber;
+		StageArea.Parameters.StageName = StageSelection.StageDescription;
+		Result.Put(StageArea);
 
-		If QuerySelection.TaskLineNumber > 0 Then
+		TaskNumber = 0;
+		TaskSelection = StageSelection.Select(QueryResultIteration.ByGroups);
+		While TaskSelection.Next() Do
 			TaskNumber = TaskNumber + 1;
-			
 			TaskArea = Template.GetArea("Task");
-			TaskArea.Parameters.Number = StrTemplate("%1.%2", QuerySelection.StageLineNumber, TaskNumber);
-			TaskArea.Parameters.TaskName = QuerySelection.TaskDescription;
-			TaskArea.Parameters.Executor = QuerySelection.CurrentExecutor;
-			TaskArea.Parameters.Comment = QuerySelection.Comment;
-			TaskArea.Parameters.Date = 
-				?(QuerySelection.ExecutionDate=Date(1,1,1), "", Format(QuerySelection.ExecutionDate, "DF='dd.MM.yyyy hh:mm';"));
+			TaskArea.Parameters.Number = StrTemplate("%1.%2", TaskSelection.StageLineNumber, TaskNumber);
+			TaskArea.Parameters.TaskName = TaskSelection.TaskDescription;
 			
-			TaskArea.Parameters.Result = 
-				?(QuerySelection.Canceled, Enums.TaskResults.Canceled, 
-				?(Not QuerySelection.Executed, Enums.TaskResults.EmptyRef(), 
-				?(QuerySelection.TaskType = Enums.TaskTypes.Execution, Enums.TaskResults.Executed,
-				?(QuerySelection.TaskType = Enums.TaskTypes.Verification, Enums.TaskResults.Verified,
-				?(QuerySelection.TaskType = Enums.TaskTypes.Confirmation, Enums.TaskResults.Confirmed,
-					Enums.TaskResults.EmptyRef())))));
-			
-			If QuerySelection.Canceled Then
-				TaskArea.Area(1, 2, 1, 2).TextColor = WebColors.Red;
-			ElsIf Not QuerySelection.Executed Then
-				If QuerySelection.CurrentTask Then
-					TaskArea.Area(1, 2, 1, 2).TextColor = WebColors.Green;
-				Else
-					TaskArea.Area(1, 2, 1, 2).TextColor = WebColors.Gray;
-					TaskArea.Area(1, 2, 1, 2).Font = New Font(TaskArea.Area(1, 2, 1, 2).Font, , , , True); 
-				EndIf;
+			If TaskSelection.StageID = StatusRecord.CurrentStage
+					AND (TaskSelection.TaskID = StatusRecord.CurrentTask
+						OR Not ValueIsFilled(StatusRecord.CurrentTask)) Then
+				TaskArea.Area(1, 1, 1, 2).TextColor = WebColors.Green;
 			EndIf;
 			
 			Result.Put(TaskArea);
-		EndIf;
-
+			
+			ExecutorSelection = TaskSelection.Select();
+			While ExecutorSelection.Next() Do
+			
+				ExecutorArea = Template.GetArea("Executor");
+				ExecutorArea.Parameters.Number = StrTemplate("%1.%2.%3", 
+					ExecutorSelection.StageLineNumber, TaskNumber, ExecutorSelection.IterationNumber);
+				ExecutorArea.Parameters.ExecutorName = ExecutorSelection.CurrentExecutor;
+				ExecutorArea.Parameters.Comment = ExecutorSelection.Comment;
+				ExecutorArea.Parameters.Date = 
+					?(ExecutorSelection.ExecutionDate = Date(1,1,1), "", 
+						Format(ExecutorSelection.ExecutionDate, "DF='dd.MM.yyyy hh:mm';"));
+				
+				ExecutorArea.Parameters.Result = 
+					?(ExecutorSelection.Canceled, Enums.TaskResults.Canceled, 
+					?(Not ExecutorSelection.Executed, Enums.TaskResults.EmptyRef(), 
+					?(ExecutorSelection.TaskType = Enums.TaskTypes.Execution, Enums.TaskResults.Executed,
+					?(ExecutorSelection.TaskType = Enums.TaskTypes.Verification, Enums.TaskResults.Verified,
+					?(ExecutorSelection.TaskType = Enums.TaskTypes.Confirmation, Enums.TaskResults.Confirmed,
+						Enums.TaskResults.EmptyRef())))));
+			
+				If ExecutorSelection.Canceled Then
+					ExecutorArea.Area(1, 1, 1, 2).TextColor = WebColors.Red;
+				ElsIf Not ExecutorSelection.Executed Then
+					If ExecutorSelection.StageID = StatusRecord.CurrentStage
+							AND (ExecutorSelection.TaskID = StatusRecord.CurrentTask
+								OR Not ValueIsFilled(StatusRecord.CurrentTask)) Then
+						ExecutorArea.Area(1, 1, 1, 2).TextColor = WebColors.Green;
+					Else
+						ExecutorArea.Area(1, 1, 1, 2).TextColor = WebColors.Gray;
+						ExecutorArea.Area(1, 1, 1, 2).Font = New Font(ExecutorArea.Area(1, 2, 1, 2).Font, , , , True); 
+					EndIf;
+				EndIf;
+			
+				Result.Put(ExecutorArea);
+			EndDo;
+		EndDo;
 	EndDo;
 	
 	Return Result;

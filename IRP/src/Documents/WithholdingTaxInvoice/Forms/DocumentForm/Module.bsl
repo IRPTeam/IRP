@@ -86,6 +86,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 
+	Form.Items.TaxLegalName.Enabled = ValueIsFilled(Object.TaxPartner);
+	
 	_QuantityIsFixed = False;
 	For Each Row In Object.ItemList Do
 		If Row.QuantityIsFixed Then
@@ -162,6 +164,25 @@ EndProcedure
 
 #EndRegion
 
+#Region TAX_PARTNER
+
+&AtClient
+Procedure TaxPartnerOnChange(Item)
+	DocWithholdingTaxInvoiceClient.TaxPartnerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TaxPartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocWithholdingTaxInvoiceClient.TaxPartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure TaxPartnerEditTextChange(Item, Text, StandardProcessing)
+	DocWithholdingTaxInvoiceClient.TaxPartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #Region LEGAL_NAME
 
 &AtClient
@@ -177,6 +198,25 @@ EndProcedure
 &AtClient
 Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
 	DocWithholdingTaxInvoiceClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_LEGAL_NAME
+
+&AtClient
+Procedure TaxLegalNameOnChange(Item)
+	DocWithholdingTaxInvoiceClient.TaxLegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TaxLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocWithholdingTaxInvoiceClient.TaxLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure TaxLegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocWithholdingTaxInvoiceClient.TaxLegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -200,6 +240,25 @@ EndProcedure
 
 #EndRegion
 
+#Region TAX_AGREEMENT
+
+&AtClient
+Procedure TaxAgreementOnChange(Item)
+	DocWithholdingTaxInvoiceClient.TaxAgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TaxAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocWithholdingTaxInvoiceClient.TaxAgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure TaxAgreementEditTextChange(Item, Text, StandardProcessing)
+	DocWithholdingTaxInvoiceClient.TaxAgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #Region CURRENCY
 
 &AtClient
@@ -214,6 +273,15 @@ EndProcedure
 &AtClient
 Procedure LegalNameContractOnChange(Item)
 	DocWithholdingTaxInvoiceClient.LegalNameContractOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_LEGAL_NAME_CONTRACT
+
+&AtClient
+Procedure TaxLegalNameContractOnChange(Item)
+	DocWithholdingTaxInvoiceClient.TaxLegalNameContractOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -375,15 +443,6 @@ EndProcedure
 &AtClient
 Procedure ItemListTaxAmountOnChange(Item)
 	DocWithholdingTaxInvoiceClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region NET_AMOUNT
-
-&AtClient
-Procedure ItemListNetAmountOnChange(Item)
-	DocWithholdingTaxInvoiceClient.ItemListNetAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

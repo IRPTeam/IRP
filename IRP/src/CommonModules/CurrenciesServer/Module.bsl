@@ -166,7 +166,6 @@ Function IsUseLegalMovementType(RegMetadata)
 	Registers = New Array();
 	Registers.Add(Reg.R2040B_TaxesIncoming);
 	Registers.Add(Reg.R1040B_TaxesOutgoing);
-	Registers.Add(Reg.R3040B_WithholdingTax);
 	
 	If Registers.Find(RegMetadata) = Undefined Then
 		Return False;

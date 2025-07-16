@@ -23,5 +23,6 @@
   <content>InformationRegister.ExecutionProcessStatus</content>
   <content>EventSubscription.OnWrite_ExecutionObject</content>
   <content>EventSubscription.OnPosting_ExecutionObject</content>
+  <content>CommonPicture.IconCollection10_Tasks</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

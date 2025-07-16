@@ -272,7 +272,7 @@ Function GetCalculations(Ref, Date, Company, Branch, FixedAsset = Undefined) Exp
 	|	CostFixedAsset.AmountTurnover AS AmountTurnover,
 	|	StartingDates.StartDate AS StartDate,
 	|	DATEADD(StartingDates.StartDate, MONTH, T.Schedule.UsefulLife) AS FinishDate,
-	|	DATEDIFF(BEGINOFPERIOD(&DocDate, MONTH), DATEADD(StartingDates.StartDate, MONTH, T.Schedule.UsefulLife + 1), MONTH) AS BalanceUsefulLife,
+	|	DATEDIFF(BEGINOFPERIOD(&DocDate, MONTH), DATEADD(StartingDates.StartDate, MONTH, T.Schedule.UsefulLife), MONTH) AS BalanceUsefulLife,
 	|	T.Schedule.UsefulLife AS UsefulLife,
 	|	T.Schedule.Rate AS Rate,
 	|	T.LedgerType.ExpenseType AS ExpenseType,
@@ -332,7 +332,7 @@ Function GetCalculations(Ref, Date, Company, Branch, FixedAsset = Undefined) Exp
 		Row.Key = New UUID();
 		
 		// last month
-		If EndOfMonth(Row.FinishDate) = EndOfMonth(Date) Then
+		If EndOfMonth(Row.FinishDate) = EndOfMonth(EndOfMonth(Date) + 1) Then
 			Row.Amount = Row.AmountBalance;
 			Continue;
 		EndIf;

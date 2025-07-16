@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5581a729-b981-4992-9f7f-41626ba153b3">
+  <producedTypes>
+    <objectType typeId="df073d39-6281-44c8-a7c6-7906fbbac7ee" valueTypeId="cc27cdce-bc84-4f33-bff0-8ad272976cfb"/>
+    <managerType typeId="39718b60-e06e-4b10-81dd-cae12b111d27" valueTypeId="7616b4fa-296e-46e6-a192-00c7b0dc59cb"/>
+  </producedTypes>
+  <name>R8510B_BookValueOfFixedAsset</name>
+  <synonym>
+    <key>en</key>
+    <value>Book value of fixed asset</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <mainDataCompositionSchema>Report.R8510B_BookValueOfFixedAsset.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+  <templates uuid="8829cffa-542e-4e42-9088-e757b5fa72f8">
+    <name>MainDataCompositionSchema</name>
+    <synonym>
+      <key>en</key>
+      <value>Main data composition schema</value>
+    </synonym>
+    <templateType>DataCompositionSchema</templateType>
+  </templates>
+</mdclass:Report>

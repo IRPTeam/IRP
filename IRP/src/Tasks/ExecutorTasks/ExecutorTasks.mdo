@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Task xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="0ed4b0b7-4819-4eb6-82e9-9f401b165447">
+ <producedTypes>
+  <objectType typeId="4f96510c-7c31-499d-bbcf-d2ca836f8148" valueTypeId="d0c41305-f4ef-4d1b-aa77-e5fdeffe74d7"/>
+  <refType typeId="51f8006c-add1-4d6d-8084-fd05a4c8d5dc" valueTypeId="b3a0ff6e-b3e6-4a7c-90a7-1617281bad4c"/>
+  <selectionType typeId="884e4372-6f25-4004-9807-7286bcb80485" valueTypeId="392b10e7-0014-485e-a4b0-7db7b73231f9"/>
+  <listType typeId="9016a227-1a89-4372-9a7a-112fb1122938" valueTypeId="9abf6c8d-f133-4be7-8d46-445d76ff7a5c"/>
+  <managerType typeId="d3384ef5-c5a7-4504-a1d4-ec899da9bb8d" valueTypeId="ff8caa07-e8d0-4753-9765-a15c617e6b70"/>
+ </producedTypes>
+ <name>ExecutorTasks</name>
+ <synonym>
+  <key>tr</key>
+  <value>Executor tasks</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Executor tasks</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Executor tasks</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Task.ExecutorTasks.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Executed</name>
+  <synonym>
+   <key>tr</key>
+   <value>Yürütüldü</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Executed</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Executed</value>
+  </synonym>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Description</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>RoutePoint</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>BusinessProcess</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Date</name>
+  <synonym>
+   <key>tr</key>
+   <value>Oluşturma tarihi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата создания</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Creation date</value>
+  </synonym>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Number</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Executor task</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Executor task</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Executor task</value>
+ </objectPresentation>
+ <numberType>String</numberType>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <taskNumberAutoPrefix>DontUse</taskNumberAutoPrefix>
+ <addressing>InformationRegister.TaskExecutors</addressing>
+ <mainAddressingAttribute>Task.ExecutorTasks.AddressingAttribute.CurrentExecutor</mainAddressingAttribute>
+ <currentPerformer>SessionParameter.CurrentUser</currentPerformer>
+ <editType>InDialog</editType>
+ <defaultObjectForm>Task.ExecutorTasks.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Task.ExecutorTasks.Form.ListForm</defaultListForm>
+ <attributes uuid="31d35137-351f-4664-ab13-fa0001bc1ef0">
+  <name>TaskID</name>
+  <synonym>
+   <key>tr</key>
+   <value>Task ID</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Task ID</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Task ID</value>
+  </synonym>
+  <type>
+   <types>UUID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e87573de-2b60-45d6-ba98-27ab839b54a2">
+  <name>IterationNumber</name>
+  <synonym>
+   <key>tr</key>
+   <value>Yineleme sayısı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Iteration number</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Iteration number</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>5</precision>
+    <nonNegative>true</nonNegative>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="dd956db2-fbe2-41c8-bb86-c02d567fc1b8">
+  <name>TaskType</name>
+  <synonym>
+   <key>tr</key>
+   <value>Görev tür</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Task type</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Task type</value>
+  </synonym>
+  <type>
+   <types>EnumRef.TaskTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="fb794c54-4023-4b62-93b5-21ff604b612b">
+  <name>Detailing</name>
+  <synonym>
+   <key>tr</key>
+   <value>Detailing</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Detailing</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Detailing</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="cf5cc5e1-9c59-4893-ab8a-2c224cd59dae">
+  <name>ExecutionObject</name>
+  <synonym>
+   <key>tr</key>
+   <value>Execution object</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Execution object</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Execution object</value>
+  </synonym>
+  <type>
+   <types>DocumentRef</types>
+   <types>CatalogRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="df7821de-c294-49de-808e-8a5fb1459969">
+  <name>ExecutionDate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Gerçekleştirme</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Исполнение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Execution</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="28b3d2b9-dec9-4bf8-a31b-a2ad255d627e">
+  <name>AcceptetionForExecutionDate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Acceptetion</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Acceptetion</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Acceptetion</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3ac56b96-dfee-47fe-a36d-d6a4ef082bec">
+  <name>Canceled</name>
+  <synonym>
+   <key>tr</key>
+   <value>İptal edildi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отменен</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Canceled</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <attributes uuid="aeef31f3-5e83-40cf-bc67-558d2e7bb2f3">
+  <name>AutoExecute</name>
+  <synonym>
+   <key>tr</key>
+   <value>Auto-execute</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Auto-execute</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Auto-execute</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="513d82d4-5088-403e-8052-333c67529f8b">
+  <name>ItemForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Öğe formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="d2372d06-c778-499e-be9a-984e0a0cadab">
+  <name>ListForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <addressingAttributes uuid="76df2495-c72a-4906-8f08-7946bb8f7bfa">
+  <name>CurrentExecutor</name>
+  <synonym>
+   <key>tr</key>
+   <value>Current executor</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Current executor</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Current executor</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Users</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <addressingDimension>InformationRegister.TaskExecutors.Dimension.Executor</addressingDimension>
+  <fullTextSearch>Use</fullTextSearch>
+ </addressingAttributes>
+ <addressingAttributes uuid="3310a9eb-9db3-48e1-aa49-da92c9bb35d1">
+  <name>UserGroup</name>
+  <synonym>
+   <key>tr</key>
+   <value>Kullanıcı grubu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Группа пользователей</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>User group</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.UserGroups</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <addressingDimension>InformationRegister.TaskExecutors.Dimension.UserGroup</addressingDimension>
+  <fullTextSearch>Use</fullTextSearch>
+ </addressingAttributes>
+ <addressingAttributes uuid="d5269c0c-29da-4ef5-9d28-9c5d1f1c7035">
+  <name>Position</name>
+  <synonym>
+   <key>tr</key>
+   <value>Pozisyon</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Должность</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Position</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.EmployeePositions</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <addressingDimension>InformationRegister.TaskExecutors.Dimension.Position</addressingDimension>
+  <fullTextSearch>Use</fullTextSearch>
+ </addressingAttributes>
+ <addressingAttributes uuid="2f7b4990-0fe9-487e-bd3a-ef04af2da85d">
+  <name>Branch</name>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <addressingDimension>InformationRegister.TaskExecutors.Dimension.Branch</addressingDimension>
+  <fullTextSearch>Use</fullTextSearch>
+ </addressingAttributes>
+ <addressingAttributes uuid="724c24bc-1305-4bbe-898b-e4748b9b7db1">
+  <name>ProfitLossCenter</name>
+  <synonym>
+   <key>tr</key>
+   <value>Kar/Zarar merkezi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Центр прибылей/убытков</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Profit loss center</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <addressingDimension>InformationRegister.TaskExecutors.Dimension.ProfitLossCenter</addressingDimension>
+  <fullTextSearch>Use</fullTextSearch>
+ </addressingAttributes>
+</mdclass:Task>

@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataSource>
+		<name>DataSource1</name>
+		<dataSourceType>Local</dataSourceType>
+	</dataSource>
+	<dataSet xsi:type="DataSetQuery">
+		<name>DataSet1</name>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Company</dataPath>
+			<field>Company</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SalesPerson</dataPath>
+			<field>SalesPerson</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Branch</dataPath>
+			<field>Branch</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>CurrencyMovementType</dataPath>
+			<field>CurrencyMovementType</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Currency</dataPath>
+			<field>Currency</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ShippedQuantity</dataPath>
+			<field>ShippedQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Sevk adedi</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>В расходном ордере</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Shipped quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ItemKey</dataPath>
+			<field>ItemKey</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Order</dataPath>
+			<field>Order</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>RowKey</dataPath>
+			<field>RowKey</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ProcurementMethod</dataPath>
+			<field>ProcurementMethod</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>CancelReason</dataPath>
+			<field>CancelReason</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Item</dataPath>
+			<field>Item</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Malzeme</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Номенклатура</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Item</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OrderQuantity</dataPath>
+			<field>OrderQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Order quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Order quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Order quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OrderAmount</dataPath>
+			<field>OrderAmount</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Sipariş tutarı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Order amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Order amount</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>InvoicedQuantity</dataPath>
+			<field>InvoicedQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Miktar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество в ЭСФ</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoiced quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>InvoicedAmount</dataPath>
+			<field>InvoicedAmount</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Invoiced amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Invoiced amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoiced amount</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>CanceledQuantity</dataPath>
+			<field>CanceledQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>İptal edilen miktar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Canceled quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Canceled quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>CanceledAmount</dataPath>
+			<field>CanceledAmount</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Canceled amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Canceled amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Canceled amount</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<dataSource>DataSource1</dataSource>
+		<query>SELECT ALLOWED
+	SalesOrderTurnovers.Company AS Company,
+	SalesOrderTurnovers.Branch AS Branch,
+	SalesOrderTurnovers.Order AS SalesOrder,
+	SalesOrderTurnovers.ItemKey AS ItemKey,
+	SUM(SalesOrderTurnovers.QuantityTurnover) AS OrderQuantity,
+	SUM(SalesOrderTurnovers.AmountTurnover) AS OrderAmount
+INTO tempSalesOrders
+FROM
+	AccumulationRegister.R2010T_SalesOrders.Turnovers(, , Recorder, CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS SalesOrderTurnovers
+WHERE
+	SalesOrderTurnovers.Recorder REFS Document.SalesOrder
+
+GROUP BY
+	SalesOrderTurnovers.Order,
+	SalesOrderTurnovers.ItemKey,
+	SalesOrderTurnovers.Company,
+	SalesOrderTurnovers.Branch
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT ALLOWED
+	CanceledSalesOrders.Order AS Order,
+	CanceledSalesOrders.ItemKey AS ItemKey,
+	SUM(CanceledSalesOrders.QuantityTurnover) AS CanceledQuantity,
+	SUM(CanceledSalesOrders.AmountTurnover) AS CanceledAmount
+INTO tempCanceled
+FROM
+	AccumulationRegister.R2014T_CanceledSalesOrders.Turnovers(, , , CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS CanceledSalesOrders
+		INNER JOIN tempSalesOrders AS tempSalesOrders
+		ON CanceledSalesOrders.Order = tempSalesOrders.SalesOrder
+			AND CanceledSalesOrders.ItemKey = tempSalesOrders.ItemKey
+
+GROUP BY
+	CanceledSalesOrders.Order,
+	CanceledSalesOrders.ItemKey
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT ALLOWED
+	R2011B_SalesOrdersShipmentTurnovers.Order AS Order,
+	R2011B_SalesOrdersShipmentTurnovers.ItemKey AS ItemKey,
+	SUM(R2011B_SalesOrdersShipmentTurnovers.QuantityExpense) AS ShippedQuantity
+INTO tempShipment
+FROM
+	AccumulationRegister.R2011B_SalesOrdersShipment.Turnovers(, , , ) AS R2011B_SalesOrdersShipmentTurnovers
+		INNER JOIN tempSalesOrders AS tempSalesOrders
+		ON R2011B_SalesOrdersShipmentTurnovers.Order = tempSalesOrders.SalesOrder
+			AND R2011B_SalesOrdersShipmentTurnovers.ItemKey = tempSalesOrders.ItemKey
+
+GROUP BY
+	R2011B_SalesOrdersShipmentTurnovers.Order,
+	R2011B_SalesOrdersShipmentTurnovers.ItemKey
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT ALLOWED
+	R2012B_SalesOrdersInvoiceClosingTurnovers.Order AS Order,
+	R2012B_SalesOrdersInvoiceClosingTurnovers.ItemKey AS ItemKey,
+	SUM(R2012B_SalesOrdersInvoiceClosingTurnovers.QuantityExpense) AS InvoicedQuantity,
+	SUM(R2012B_SalesOrdersInvoiceClosingTurnovers.AmountExpense) AS InvoicedAmount
+INTO tempInvoiced
+FROM
+	AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Turnovers(, , , ) AS R2012B_SalesOrdersInvoiceClosingTurnovers
+		INNER JOIN tempSalesOrders AS tempSalesOrders
+		ON R2012B_SalesOrdersInvoiceClosingTurnovers.Order = tempSalesOrders.SalesOrder
+			AND R2012B_SalesOrdersInvoiceClosingTurnovers.ItemKey = tempSalesOrders.ItemKey
+
+GROUP BY
+	R2012B_SalesOrdersInvoiceClosingTurnovers.Order,
+	R2012B_SalesOrdersInvoiceClosingTurnovers.ItemKey
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT ALLOWED
+	tempSalesOrders.Company AS Company,
+	tempSalesOrders.Branch AS Branch,
+	tempSalesOrders.SalesOrder AS Order,
+	tempSalesOrders.ItemKey.Item AS Item,
+	tempSalesOrders.ItemKey AS ItemKey,
+	tempSalesOrders.OrderQuantity AS OrderQuantity,
+	tempSalesOrders.OrderAmount AS OrderAmount,
+	ISNULL(tempShipment.ShippedQuantity, 0) AS ShippedQuantity,
+	ISNULL(tempInvoiced.InvoicedQuantity, 0) AS InvoicedQuantity,
+	ISNULL(tempInvoiced.InvoicedAmount, 0) AS InvoicedAmount,
+	ISNULL(tempCanceled.CanceledQuantity, 0) AS CanceledQuantity,
+	ISNULL(tempCanceled.CanceledAmount, 0) AS CanceledAmount
+FROM
+	tempSalesOrders AS tempSalesOrders
+		LEFT JOIN tempShipment AS tempShipment
+		ON tempSalesOrders.SalesOrder = tempShipment.Order
+			AND tempSalesOrders.ItemKey = tempShipment.ItemKey
+		LEFT JOIN tempCanceled AS tempCanceled
+		ON tempSalesOrders.SalesOrder = tempCanceled.Order
+			AND tempSalesOrders.ItemKey = tempCanceled.ItemKey
+		LEFT JOIN tempInvoiced AS tempInvoiced
+		ON tempSalesOrders.SalesOrder = tempInvoiced.Order
+			AND tempSalesOrders.ItemKey = tempInvoiced.ItemKey</query>
+	</dataSet>
+	<totalField>
+		<dataPath>OrderQuantity</dataPath>
+		<expression>Sum(OrderQuantity)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OrderAmount</dataPath>
+		<expression>Sum(OrderAmount)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>InvoicedQuantity</dataPath>
+		<expression>Sum(InvoicedQuantity)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>InvoicedAmount</dataPath>
+		<expression>Sum(InvoicedAmount)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>CanceledQuantity</dataPath>
+		<expression>Sum(CanceledQuantity)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>CanceledAmount</dataPath>
+		<expression>Sum(CanceledAmount)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ShippedQuantity</dataPath>
+		<expression>Sum(ShippedQuantity)</expression>
+	</totalField>
+	<parameter>
+		<name>BeginOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem başı</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Начало периода</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Begin of period</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>true</useRestriction>
+		<expression>&amp;ReportPeriod.StartDate</expression>
+		<availableAsField>false</availableAsField>
+	</parameter>
+	<parameter>
+		<name>EndOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem sonu</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Конец периода</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>End of period</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>true</useRestriction>
+		<expression>&amp;ReportPeriod.EndDate</expression>
+		<availableAsField>false</availableAsField>
+	</parameter>
+	<parameter>
+		<name>ReportPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Rapor dönemi</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Период отчета</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Report period</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>v8:StandardPeriod</v8:Type>
+		</valueType>
+		<value xsi:type="v8:StandardPeriod">
+			<v8:variant xsi:type="v8:StandardPeriodVariant">ThisMonth</v8:variant>
+		</value>
+		<useRestriction>false</useRestriction>
+	</parameter>
+	<settingsVariant>
+		<dcsset:name>Default</dcsset:name>
+		<dcsset:presentation xsi:type="xs:string">Default</dcsset:presentation>
+		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
+			<dcsset:selection>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:use>false</dcsset:use>
+					<dcsset:field>Company</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:use>false</dcsset:use>
+					<dcsset:field>Branch</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Order</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Item</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>ItemKey</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>OrderQuantity</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:use>false</dcsset:use>
+					<dcsset:field>OrderAmount</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>ShippedQuantity</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>InvoicedQuantity</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:use>false</dcsset:use>
+					<dcsset:field>InvoicedAmount</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>CanceledQuantity</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:use>false</dcsset:use>
+					<dcsset:field>CanceledAmount</dcsset:field>
+				</dcsset:item>
+			</dcsset:selection>
+			<dcsset:dataParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>ReportPeriod</dcscor:parameter>
+					<dcscor:value xsi:type="v8:StandardPeriod">
+						<v8:variant xsi:type="v8:StandardPeriodVariant">ThisMonth</v8:variant>
+					</dcscor:value>
+					<dcsset:userSettingID>07c6df5c-7dd1-4e4a-8043-3343f00da972</dcsset:userSettingID>
+				</dcscor:item>
+			</dcsset:dataParameters>
+			<dcsset:outputParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>AppearanceTemplate</dcscor:parameter>
+					<dcscor:value xsi:type="xs:string">Sea</dcscor:value>
+				</dcscor:item>
+			</dcsset:outputParameters>
+			<dcsset:item xsi:type="dcsset:StructureItemGroup">
+				<dcsset:groupItems>
+					<dcsset:item xsi:type="dcsset:GroupItemField">
+						<dcsset:field>Order</dcsset:field>
+						<dcsset:groupType>Items</dcsset:groupType>
+						<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+						<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+						<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+					</dcsset:item>
+				</dcsset:groupItems>
+				<dcsset:order>
+					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+				</dcsset:order>
+				<dcsset:selection>
+					<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+				</dcsset:selection>
+				<dcsset:item xsi:type="dcsset:StructureItemGroup">
+					<dcsset:order>
+						<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+					</dcsset:order>
+					<dcsset:selection>
+						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+					</dcsset:selection>
+				</dcsset:item>
+			</dcsset:item>
+		</dcsset:settings>
+	</settingsVariant>
+</DataCompositionSchema>

@@ -317,15 +317,19 @@ Function Header()
 		|					THEN VALUE(AccumulationRecordType.Receipt)
 		|			END
 		|	END AS RecordsTypeReceive_R5015B_OtherPartnersTransactions,
-		|	Doc.SendDebtType IN (VALUE(Enum.DebtTypes.OtherPartnerReceivable), VALUE(Enum.DebtTypes.OtherPartnerPayable)) AS
+		|
+		|	Doc.SendDebtType IN (VALUE(Enum.DebtTypes.EmployeeReceivable), VALUE(Enum.DebtTypes.EmployeePayable)) AS
 		|		DoRecordsSend_R3027B_EmployeeCashAdvance,
+		|
 		|	CASE
 		|		WHEN Doc.SendDebtType = VALUE(Enum.DebtTypes.EmployeeReceivable)
 		|		OR Doc.SendDebtType = VALUE(Enum.DebtTypes.EmployeePayable)
 		|			THEN VALUE(AccumulationRecordType.Expense)
 		|	END AS RecordsTypeSend_R3027B_EmployeeCashAdvance,
-		|	Doc.ReceiveDebtType IN (VALUE(Enum.DebtTypes.OtherPartnerReceivable), VALUE(Enum.DebtTypes.OtherPartnerPayable)) AS
+		|
+		|	Doc.ReceiveDebtType IN (VALUE(Enum.DebtTypes.EmployeeReceivable), VALUE(Enum.DebtTypes.EmployeePayable)) AS
 		|		DoRecordsReceive_R3027B_EmployeeCashAdvance,
+		|
 		|	CASE
 		|		WHEN Doc.ReceiveDebtType = VALUE(Enum.DebtTypes.EmployeeReceivable)
 		|			THEN CASE

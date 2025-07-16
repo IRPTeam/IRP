@@ -17,6 +17,7 @@ Function GetServerParameters(Object) Export
 	StepEnableFlags.Insert("PriceChanged_AfterQuestionToUser", False);
 	
 	Result.Insert("StepEnableFlags", StepEnableFlags);
+	Result.Insert("FunctionalOptions", New Structure("IsUsePreliminary", FOServer.IsUsePreliminary()));
 	Return Result;
 EndFunction
 
@@ -233,6 +234,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters.Insert("BackgroundJobTitle", R().BgJ_Title_001);
 	
 	Parameters.Insert("FormAttributeUpdateDirection", FormParameters.FormAttributeUpdateDirection);
+	Parameters.Insert("FunctionalOptions", ServerParameters.FunctionalOptions);
 	Return Parameters;
 EndFunction
 
@@ -380,10 +382,9 @@ Function GetEventHandlerMap(Parameters, DataPath, IsBuilder)
 	EventHandlerMap.Insert("TransactionType" , "SetTransactionType");
 	
 	// PaymentList
-	EventHandlerMap.Insert("PaymentList.Partner" , "SetPaymentListPartner");
-	EventHandlerMap.Insert("PaymentList.Payer"   , "SetPaymentListLegalName");
-	EventHandlerMap.Insert("PaymentList.Payee"   , "SetPaymentListLegalName");
-	EventHandlerMap.Insert("PaymentList.Account" , "SetPaymentListAccount");
+	EventHandlerMap.Insert("PaymentList.Partner"   , "SetPaymentListPartner");
+	EventHandlerMap.Insert("PaymentList.LegalName" , "SetPaymentListLegalName");
+	EventHandlerMap.Insert("PaymentList.Account"   , "SetPaymentListAccount");
 	
 	// ItemList
 	EventHandlerMap.Insert("ItemList.Item"               , "SetItemListItem");
@@ -603,6 +604,7 @@ Function GetAllBindings(Parameters)
 	BindingMap.Insert("ItemList.ItemKey"  , BindItemListItemKey(Parameters));
 	BindingMap.Insert("ItemList.Unit"     , BindItemListUnit(Parameters));
 	BindingMap.Insert("ItemList.Quantity" , BindItemListQuantity(Parameters));
+	BindingMap.Insert("ItemList.IsPreliminary" , BindItemListIsPreliminary(Parameters));
 	
 	BindingMap.Insert("Materials.Item"     , BindMaterialsItem(Parameters));
 	BindingMap.Insert("Materials.ItemKey"  , BindMaterialsItemKey(Parameters));
@@ -833,6 +835,7 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("CreditNote" , "StepChangeTaxVisible, StepChangeTaxExemptionReasonVisible");
 	
 	Binding.Insert("StockAdjustmentAsSurplus" , "StepChangeTaxVisible");
+	SafeBinding(Binding, "GoodsReceipt" , "StepChangeTaxVisible");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindFormOnOpen");
 EndFunction
@@ -949,7 +952,7 @@ Function BindListOnDelete(Parameters)
 	Binding.Insert("ShipmentConfirmation"       , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("ShipmentPlaningOrder"       , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("RetailShipmentConfirmation" , "StepChangeStoreInHeaderByStoresInList");
-	Binding.Insert("GoodsReceipt"               , "StepChangeStoreInHeaderByStoresInList");
+	SafeBinding(Binding, "GoodsReceipt"         , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("RetailGoodsReceipt"         , "StepChangeStoreInHeaderByStoresInList");
 	
 	Binding.Insert("SalesOrder",
@@ -1140,7 +1143,8 @@ Function BindCommandRecalculationWhenBasedOn(Parameters)
 	Binding = New Structure();
 	Binding.Insert("SalesReportFromTradeAgent" , "StepItemListCalculations_IsRecalculationWhenBasedOn_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"    , "StepItemListCalculations_IsRecalculationWhenBasedOn_Without_SpecialOffers");
-
+//	SafeBinding(Binding, "GoodsReceipt"        , "StepItemListCalculations_IsRecalculationWhenBasedOn_Without_SpecialOffers");
+	
 	Binding.Insert("PurchaseInvoice"      , "StepItemListCalculations_IsRecalculationWhenBasedOn");
 	Binding.Insert("PurchaseOrder"        , "StepItemListCalculations_IsRecalculationWhenBasedOn");
 	Binding.Insert("PurchaseReturn"       , "StepItemListCalculations_IsRecalculationWhenBasedOn");
@@ -1682,7 +1686,7 @@ Function GetBindingStructure_TransactionType(Parameters)
 		"StepClearByTransactionTypeOutgoingPaymentOrder");
 	
 	Result.Binding.Insert("ShipmentConfirmation"  , "StepChangePartnerByTransactionType");
-	Result.Binding.Insert("GoodsReceipt"          , "StepChangePartnerByTransactionType");
+	SafeBinding(Result.Binding,  "GoodsReceipt"   , "StepChangePartnerByTransactionType");
 	
 	Result.Binding.Insert("RetailShipmentConfirmation", 
 		"StepChangeCourierByTransactionType");
@@ -1768,7 +1772,7 @@ EndFunction
 Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"                  , BindPaymentListPartner(Parameters));
-	ResourceToBinding.Insert("Payee"                    , BindPaymentListLegalName(Parameters));
+	ResourceToBinding.Insert("LegalName"                , BindPaymentListLegalName(Parameters));
 	ResourceToBinding.Insert("Agreement"                , BindPaymentListAgreement(Parameters));
 	ResourceToBinding.Insert("LegalNameContract"        , BindPaymentListLegalNameContract(Parameters));
 	ResourceToBinding.Insert("BasisDocument"            , BindPaymentListBasisDocument(Parameters));
@@ -1799,7 +1803,7 @@ EndProcedure
 Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"                  , BindPaymentListPartner(Parameters));
-	ResourceToBinding.Insert("Payer"                    , BindPaymentListLegalName(Parameters));
+	ResourceToBinding.Insert("LegalName"                , BindPaymentListLegalName(Parameters));
 	ResourceToBinding.Insert("Agreement"                , BindPaymentListAgreement(Parameters));
 	ResourceToBinding.Insert("LegalNameContract"        , BindPaymentListLegalNameContract(Parameters));
 	ResourceToBinding.Insert("BasisDocument"            , BindPaymentListBasisDocument(Parameters));
@@ -1834,7 +1838,7 @@ EndProcedure
 Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"                  , BindPaymentListPartner(Parameters));
-	ResourceToBinding.Insert("Payee"                    , BindPaymentListLegalName(Parameters));
+	ResourceToBinding.Insert("LegalName"                , BindPaymentListLegalName(Parameters));
 	ResourceToBinding.Insert("Agreement"                , BindPaymentListAgreement(Parameters));
 	ResourceToBinding.Insert("LegalNameContract"        , BindPaymentListLegalNameContract(Parameters));
 	ResourceToBinding.Insert("BasisDocument"            , BindPaymentListBasisDocument(Parameters));
@@ -1859,7 +1863,7 @@ EndProcedure
 Procedure MultiSetTransactionType_CashReceipt(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"                  , BindPaymentListPartner(Parameters));
-	ResourceToBinding.Insert("Payer"                    , BindPaymentListLegalName(Parameters));
+	ResourceToBinding.Insert("LegalName"                , BindPaymentListLegalName(Parameters));
 	ResourceToBinding.Insert("Agreement"                , BindPaymentListAgreement(Parameters));
 	ResourceToBinding.Insert("LegalNameContract"        , BindPaymentListLegalNameContract(Parameters));
 	ResourceToBinding.Insert("BasisDocument"            , BindPaymentListBasisDocument(Parameters));
@@ -1883,7 +1887,7 @@ Procedure MultiSetTransactionType_OutgoingPaymentOrder(Parameters, Results) Expo
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Partner"            , BindPaymentListPartner(Parameters));
 	ResourceToBinding.Insert("PartnerBankAccount" , BindPaymentListPartnerBankAccount(Parameters));	
-	ResourceToBinding.Insert("Payee"              , BindPaymentListLegalName(Parameters));
+	ResourceToBinding.Insert("LegalName"          , BindPaymentListLegalName(Parameters));
 	ResourceToBinding.Insert("BasisDocument"      , BindPaymentListBasisDocument(Parameters));
 	
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
@@ -1923,7 +1927,7 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.TransactionType          = GetTransactionType(Parameters);
 		Options.TransitAccount           = GetTransitAccount(Parameters);
 		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
-		Options.Payee                    = GetPaymentListLegalName(Parameters, Row.Key);
+		Options.LegalName                = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Agreement                = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.LegalNameContract        = GetPaymentListLegalNameContract(Parameters, Row.Key);
 		Options.BasisDocument            = GetPaymentListBasisDocument(Parameters, Row.Key);
@@ -1965,7 +1969,7 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.TransitAccount           = GetTransitAccount(Parameters);
 		Options.CurrencyExchange         = GetCurrencyExchange(Parameters);
 		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
-		Options.Payer                    = GetPaymentListLegalName(Parameters, Row.Key);
+		Options.LegalName                = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Agreement                = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.LegalNameContract        = GetPaymentListLegalNameContract(Parameters, Row.Key);
 		Options.BasisDocument            = GetPaymentListBasisDocument(Parameters, Row.Key);
@@ -2012,7 +2016,7 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.PlanningTransactionBasis = GetPaymentListPlanningTransactionBasis(Parameters, Row.Key);
 		Options.Agreement                = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.LegalNameContract        = GetPaymentListLegalNameContract(Parameters, Row.Key);
-		Options.Payee                    = GetPaymentListLegalName(Parameters, Row.Key);
+		Options.LegalName                = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
@@ -2044,7 +2048,7 @@ Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 		Options.TransactionType          = GetTransactionType(Parameters);
 		Options.CurrencyExchange         = GetCurrencyExchange(Parameters);
 		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
-		Options.Payer                    = GetPaymentListLegalName(Parameters, Row.Key);
+		Options.LegalName                = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Agreement                = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.LegalNameContract        = GetPaymentListLegalNameContract(Parameters, Row.Key);
 		Options.BasisDocument            = GetPaymentListBasisDocument(Parameters, Row.Key);
@@ -2078,7 +2082,7 @@ Procedure StepClearByTransactionTypeOutgoingPaymentOrder(Parameters, Chain) Expo
 		Options.TransactionType    = GetTransactionType(Parameters);
 		Options.Partner            = GetPaymentListPartner(Parameters, Row.Key);
 		Options.PartnerBankAccount = GetPaymentListPartnerBankAccount(Parameters, Row.Key);
-		Options.Payee              = GetPaymentListLegalName(Parameters, Row.Key);
+		Options.LegalName          = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.BasisDocument      = GetPaymentListBasisDocument(Parameters, Row.Key);
 		
 		Options.Key = Row.Key;
@@ -2210,6 +2214,9 @@ Function BindCurrency(Parameters)
 	
 	Binding.Insert("SalesReportToConsignor",
 		"StepItemListChangePriceByPriceType");
+	
+//	SafeBinding(Binding, "GoodsReceipt",
+//		"StepItemListChangePriceByPriceType");
 	
 	Binding.Insert("SalesReturnOrder",
 		"StepItemListChangePriceByPriceType");
@@ -2806,6 +2813,13 @@ Function BindDate(Parameters)
 		|StepChangeAgreementByPartner_AgreementTypeIsConsignor, 
 		|StepChangeTaxVisible,
 		|StepItemListChangeVatRate_AgreementInHeader");
+	
+	SafeBinding(Binding, "GoodsReceipt", "StepChangeTaxVisible");
+//		"StepItemListChangePriceTypeByAgreement,
+//		|StepItemListChangePriceByPriceType, 
+//		|StepChangeAgreementByPartner_AgreementTypeIsTradeAgent, 
+//		|StepChangeTaxVisible,
+//		|StepItemListChangeVatRate_AgreementInHeader");
 		
 	Binding.Insert("BankPayment",
 		"StepChangeTaxVisible, 
@@ -2983,6 +2997,11 @@ Function BindCompany(Parameters)
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
 	
+	SafeBinding(Binding, "GoodsReceipt",
+		"StepChangeTaxVisible,
+		|StepChangePartnerChoiceList");
+//		|StepItemListChangeVatRate_AgreementInHeader");
+	
 	Binding.Insert("SalesReturnOrder",
 		"StepChangeTaxVisible,
 		|StepChangePartnerChoiceList,
@@ -3122,6 +3141,7 @@ Procedure StepChangeCompanyByAgreement(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeCompanyByAgreementOptions();
 	Options.Agreement      = GetAgreement(Parameters);
 	Options.CurrentCompany = GetCompany(Parameters);
+	Options.Object = Parameters.Object;
 	Options.StepName = "StepChangeCompanyByAgreement";
 	Chain.ChangeCompanyByAgreement.Options.Add(Options);
 EndProcedure
@@ -3458,7 +3478,9 @@ Function GetBindingStructure_Partner(Parameters)
 	
 	Result.Binding.Insert("ShipmentConfirmation", "StepChangeLegalNameByPartner");
 	Result.Binding.Insert("ShipmentPlaningOrder", "StepChangeLegalNameByPartner");
-	Result.Binding.Insert("GoodsReceipt"        , "StepChangeLegalNameByPartner");
+	
+	SafeBinding(Result.Binding,  "GoodsReceipt", "StepChangeLegalNameByPartner");
+		
 	Result.Binding.Insert("RetailGoodsReceipt"  , "StepChangeLegalNameByPartner");
 	
 	Result.Binding.Insert("SalesOrder",
@@ -3528,8 +3550,6 @@ Function GetBindingStructure_Partner(Parameters)
 	Result.Binding.Insert("SalesReturn",
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
-		
-	Result.Binding.Insert("Payroll", "StepChangeLegalNameByPartner");
 	
 	Result.Binding.Insert("TaxesOperation",
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
@@ -3592,6 +3612,40 @@ Procedure StepChangePartnerByRetailCustomerAndTransactionType(Parameters, Chain)
 	Options.StepName = "StepChangePartnerByRetailCustomerAndTransactionType";
 	Chain.ChangePartnerByRetailCustomerAndTransactionType.Options.Add(Options);
 EndProcedure
+
+#EndRegion
+
+#Region TAX_PARTNER
+
+// TaxPartner.OnChange
+Procedure TaxPartnerOnChange(Parameters) Export
+	AddViewNotify("OnSetTaxPartnerNotify", Parameters);
+	Binding = BindTaxPartner(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TaxPartner.Set
+Procedure SetTaxPartner(Parameters, Results) Export
+	Binding = BindTaxPartner(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetTaxPartnerNotify");
+EndProcedure
+
+// TaxPartner.Get
+Function GetTaxPartner(Parameters)
+	Return GetPropertyObject(Parameters, BindTaxPartner(Parameters).DataPath);
+EndFunction
+
+// TaxPartner.Bind
+Function BindTaxPartner(Parameters)
+	DataPath = "TaxPartner";
+	Binding = New Structure();
+	
+	Binding.Insert("WithholdingTaxInvoice", 
+		"StepChangeTaxAgreementByTaxPartner,
+		|StepChangeTaxLegalNameByTaxPartner");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindTaxPartner");
+EndFunction
 
 #EndRegion
 
@@ -4329,6 +4383,48 @@ EndProcedure
 
 #EndRegion
 
+#Region TAX_LEGAL_NAME
+
+// TaxLegalName.OnChange
+Procedure TaxLegalNameOnChange(Parameters) Export
+	Binding = BindTaxLegalName(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TaxLegalName.Set
+Procedure SetTaxLegalName(Parameters, Results) Export
+	Binding = BindTaxLegalName(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// TaxLegalName.Get
+Function GetTaxLegalName(Parameters)
+	Return GetPropertyObject(Parameters, BindTaxPartner(Parameters).DataPath);
+EndFunction
+
+// TaxLegalName.Bind
+Function BindTaxLegalName(Parameters)
+	DataPath = "TaxLegalName";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindTaxLegalName");
+EndFunction
+
+// TaxLegalName.ChangeTaxLegalNameByTaxPartner.Step
+Procedure StepChangeTaxLegalNameByTaxPartner(Parameters, Chain) Export
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeLegalNameByPartner.Setter = "SetTaxLegalName";
+	Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+	Options.Partner   = GetTaxPartner(Parameters);
+	Options.LegalName = GetTaxLegalName(Parameters);
+	Options.StepName = "StepChangeTaxLegalNameByTaxPartner";
+	Chain.ChangeLegalNameByPartner.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
 #Region LEGAL_NAME_TRADE_AGENT
 
 // LegalNameTradeAgent.OnChange
@@ -4951,7 +5047,7 @@ Function BindDefaultStore(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation" , "StepDefaultStoreInHeader_WithoutAgreement");
 	Binding.Insert("ShipmentPlaningOrder" , "StepDefaultStoreInHeader_WithoutAgreement");
-	Binding.Insert("GoodsReceipt"         , "StepDefaultStoreInHeader_WithoutAgreement");
+	SafeBinding(Binding,  "GoodsReceipt"  , "StepDefaultStoreInHeader_WithoutAgreement");
 	
 	Binding.Insert("RetailShipmentConfirmation" , "StepDefaultStoreInHeader_WithoutAgreement");
 	Binding.Insert("RetailGoodsReceipt"         , "StepDefaultStoreInHeader_WithoutAgreement");
@@ -4977,7 +5073,7 @@ Function BindEmptyStore(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "StepEmptyStoreInHeader_WithoutAgreement");
 	Binding.Insert("ShipmentPlaningOrder", "StepEmptyStoreInHeader_WithoutAgreement");
-	Binding.Insert("GoodsReceipt"        , "StepEmptyStoreInHeader_WithoutAgreement");
+	SafeBinding(Binding, "GoodsReceipt"  , "StepEmptyStoreInHeader_WithoutAgreement");
 	
 	Binding.Insert("RetailShipmentConfirmation", "StepEmptyStoreInHeader_WithoutAgreement");
 	Binding.Insert("RetailGoodsReceipt"        , "StepEmptyStoreInHeader_WithoutAgreement");
@@ -5497,6 +5593,11 @@ Function GetBindingStructure_Agreement(Parameters)
 		|StepChangePriceIncludeTaxByAgreement,
 		|StepItemListChangeTradeAgentFeePercentByAgreement,
 		|StepChangeTradeAgentFeeTypeByAgreement");
+
+//	SafeBinding(Result.Binding, "GoodsReceipt",
+//		"StepChangeCompanyByAgreement,
+//		|StepChangeCurrencyByAgreement,
+//		|StepChangePriceIncludeTaxByAgreement");
 	
 	Result.Binding.Insert("TaxesOperation",
 		"StepChangeCompanyByAgreement,
@@ -5581,6 +5682,50 @@ Procedure StepChangeAgreementByRetailCustomer(Parameters, Chain) Export
 	Options.RetailCustomer = GetRetailCustomer(Parameters);
 	Options.StepName = "StepChangeAgreementByRetailCustomer";
 	Chain.ChangeAgreementByRetailCustomer.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_AGREEMENT
+
+// TaxAgreement.OnChange
+Procedure TaxAgreementOnChange(Parameters) Export
+	Binding = BindTaxAgreement(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TaxAgreement.Set
+Procedure SetTaxAgreement(Parameters, Results) Export
+	Binding = BindTaxAgreement(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// TaxAgreement.Get
+Function GetTaxAgreement(Parameters)
+	Return GetPropertyObject(Parameters, BindTaxPartner(Parameters).DataPath);
+EndFunction
+
+// TaxAgreement.Bind
+Function BindTaxAgreement(Parameters)
+	DataPath = "TaxAgreement";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindTaxAgreement");
+EndFunction
+
+// TaxAgreement.ChangeTaxAgreementByTaxPartner.Step
+Procedure StepChangeTaxAgreementByTaxPartner(Parameters, Chain) Export
+	Chain.ChangeAgreementByPartner.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAgreementByPartner.Setter = "SetTaxAgreement";
+	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+	Options.Partner       = GetTaxPartner(Parameters);
+	Options.Agreement     = GetTAxAgreement(Parameters);
+	Options.CurrentDate   = GetDate(Parameters);
+	Options.AgreementType = PredefinedValue("Enum.AgreementTypes.Other");
+	Options.StepName = "StepChangeTaxAgreementByTaxPartner";
+	Chain.ChangeAgreementByPartner.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -5837,6 +5982,7 @@ Function BindPriceIncludeTax(Parameters)
 	
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsPriceIncludeTaxChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsPriceIncludeTaxChanged_Without_SpecialOffers");
+//	SafeBinding(Binding, "GoodsReceipt"       , "StepItemListCalculations_IsPriceIncludeTaxChanged_Without_SpecialOffers");
 	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_Withholding_Tax");
 	
 	Return BindSteps("StepItemListCalculations_IsPriceIncludeTaxChanged", DataPath, Binding, Parameters, "BindPriceIncludeTax");
@@ -6649,6 +6795,135 @@ Function BindOffers(Parameters)
 	Binding = New Structure();
 	Return BindSteps("StepItemListCalculations_IsOffersChanged", DataPath, Binding, Parameters, "BindOffers");
 EndFunction
+
+#EndRegion
+
+#Region SALARY_TAX_LIST
+
+#Region SALARY_TAX_LIST_PARTNER
+
+// SalaryTaxList.Partner.OnChange
+Procedure SalaryTaxListPartnerOnChange(Parameters) Export
+	Binding = BindSalaryTaxListPartner(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// SalaryTaxList.Partner.Set
+Procedure SetSalaryTaxListPartner(Parameters, Results) Export
+	Binding = BindSalaryTaxListPartner(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// SalaryTaxList.Partner.Get
+Function GetSalaryTaxListPartner(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindSalaryTaxListPartner(Parameters).DataPath, _Key);
+EndFunction
+
+// SalaryTaxList.Partner.Bind
+Function BindSalaryTaxListPartner(Parameters)
+	DataPath = "SalaryTaxList.Partner";
+	Binding = New Structure();
+	Binding.Insert("Payroll",
+		"StepSalaryTaxListChangeLegalNameByPartner,
+		|StepSalaryTaxListChangeAgreementByPartner");
+		
+	Return BindSteps(Undefined, DataPath, Binding, Parameters, "BindSalaryTaxListPartner");
+EndFunction
+
+#EndRegion
+
+#Region SALARY_TAX_LIST_LEGAL_NAME
+
+// SalaryTaxList.LegalName.OnChange
+Procedure SalaryTaxListLegalNameOnChange(Parameters) Export
+	Binding = BindSalaryTaxListLegalName(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// SalaryTaxList.LegalName.Set
+Procedure SetSalaryTaxListLegalName(Parameters, Results) Export
+	Binding = BindSalaryTaxListLegalName(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// SalaryTaxList.LegalName.Get
+Function GetSalaryTaxListLegalName(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindSalaryTaxListLegalName(Parameters).DataPath , _Key);
+EndFunction
+
+// SalaryTaxList.LegalName.Bind
+Function BindSalaryTaxListLegalName(Parameters)
+	DataPath = "SalaryTaxList.LegalName";
+	Binding = New Structure();
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSalaryTaxListLegalName");
+EndFunction
+
+// SalaryTaxList.LegalName.ChangeLegalNameByPartner.Step
+Procedure StepSalaryTaxListChangeLegalNameByPartner(Parameters, Chain) Export
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeLegalNameByPartner.Setter = "SetSalaryTaxListLegalName";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+		Options.Partner   = GetSalaryTaxListPartner(Parameters, Row.Key);
+		Options.LegalName = GetSalaryTaxListLegalName(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepSalaryTaxListChangeLegalNameByPartner";
+		Chain.ChangeLegalNameByPartner.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region SALARY_TAX_LIST_AGREEMENT
+
+// SalaryTaxList.Agreement.OnChange
+Procedure SalaryTaxListAgreementOnChange(Parameters) Export
+	Binding = BindSalaryTaxListAgreement(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// SalaryTaxList.Agreement.Set
+Procedure SetSalaryTaxListAgreement(Parameters, Results) Export
+	Binding = BindSalaryTaxListAgreement(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// SalaryTaxList.Agreement.Get
+Function GetSalaryTaxListAgreement(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindSalaryTaxListAgreement(Parameters).DataPath , _Key);
+EndFunction
+
+// SalaryTaxList.Agreement.Bind
+Function BindSalaryTaxListAgreement(Parameters)
+	DataPath = "SalaryTaxList.Agreement";
+	Binding = New Structure();
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSalaryTaxListAgreement");
+EndFunction
+
+// SalaryTaxList.Agreement.ChangeAgreementByPartner.Step
+Procedure StepSalaryTaxListChangeAgreementByPartner(Parameters, Chain) Export
+	Chain.ChangeAgreementByPartner.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeAgreementByPartner.Setter = "SetSalaryTaxListAgreement";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+		Options.Partner       = GetSalaryTaxListPartner(Parameters, Row.Key);
+		Options.Agreement     = GetSalaryTaxListAgreement(Parameters, Row.Key);
+		Options.CurrentDate   = GetDate(Parameters);
+		Options.Key = Row.Key;
+		Options.StepName = "StepSalaryTaxListChangeAgreementByPartner";
+		Chain.ChangeAgreementByPartner.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 
@@ -7576,13 +7851,7 @@ EndFunction
 
 // PaymentList.LegalName.Bind
 Function BindPaymentListLegalName(Parameters)
-	DataPath = New Map();
-	DataPath.Insert("IncomingPaymentOrder", "PaymentList.Payer");
-	DataPath.Insert("OutgoingPaymentOrder", "PaymentList.Payee");
-	DataPath.Insert("BankPayment"         , "PaymentList.Payee");
-	DataPath.Insert("BankReceipt"         , "PaymentList.Payer");
-	DataPath.Insert("CashPayment"         , "PaymentList.Payee");
-	DataPath.Insert("CashReceipt"         , "PaymentList.Payer");
+	DataPath = "PaymentList.LegalName";
 	
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "StepPaymentListChangePartnerByLegalName");
@@ -10917,43 +11186,43 @@ Function GetBindingStructure_ItemListItem(Parameters)
 	Result = New Structure("Binding, DataPath, ExtensionPrefix", New Structure(), Undefined, "");
 	Result.DataPath = "ItemList.Item";
 	
-	Result.Binding.Insert("ShipmentConfirmation"      , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("ShipmentPlaningOrder"      , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("GoodsReceipt"              , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("RetailShipmentConfirmation"      , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("RetailGoodsReceipt"              , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("StockAdjustmentAsSurplus"  , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("StockAdjustmentAsWriteOff" , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("CommissioningOfFixedAsset" , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("ModernizationOfFixedAsset" , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("ShipmentConfirmation"        , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("ShipmentPlaningOrder"        , "StepItemListChangeItemKeyByItem");
+	SafeBinding(Result.Binding, "GoodsReceipt"          , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("RetailShipmentConfirmation"  , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("RetailGoodsReceipt"          , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("StockAdjustmentAsSurplus"    , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("StockAdjustmentAsWriteOff"   , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("CommissioningOfFixedAsset"   , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("ModernizationOfFixedAsset"   , "StepItemListChangeItemKeyByItem");
 	Result.Binding.Insert("DecommissioningOfFixedAsset" , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("SalesOrder"                , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("WorkOrder"                 , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("WorkSheet"                 , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("SalesInvoice"              , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("RetailSalesReceipt"        , "StepItemListChangeItemKeyByItem,StepChangeisControlCodeStringByItem");
-	Result.Binding.Insert("RetailReceiptCorrection"        , "StepItemListChangeItemKeyByItem,StepChangeisControlCodeStringByItem");
-	Result.Binding.Insert("PurchaseOrder"             , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("PurchaseInvoice"           , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("WithholdingTaxInvoice"     , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("RetailReturnReceipt"       , "StepItemListChangeItemKeyByItem,StepChangeisControlCodeStringByItem");
-	Result.Binding.Insert("PurchaseReturnOrder"       , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("PurchaseReturn"            , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("SalesReturnOrder"          , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("SalesReturn"               , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("InternalSupplyRequest"     , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("InventoryTransfer"         , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("InventoryTransferOrder"    , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("PhysicalInventory"         , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("PhysicalCountByLocation"   , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("ItemStockAdjustment"       , "StepItemListChangeItemKeyByItem, 
-												 |StepItemListChangeItemKeyWriteOffByItem");
-	Result.Binding.Insert("Bundling"                  , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("Unbundling"                , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("SalesOrder"                  , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("WorkOrder"                   , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("WorkSheet"                   , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("SalesInvoice"                , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("RetailSalesReceipt"          , "StepItemListChangeItemKeyByItem,StepChangeisControlCodeStringByItem");
+	Result.Binding.Insert("RetailReceiptCorrection"     , "StepItemListChangeItemKeyByItem,StepChangeisControlCodeStringByItem");
+	Result.Binding.Insert("PurchaseOrder"               , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("PurchaseInvoice"             , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("WithholdingTaxInvoice"       , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("RetailReturnReceipt"         , "StepItemListChangeItemKeyByItem,StepChangeisControlCodeStringByItem");
+	Result.Binding.Insert("PurchaseReturnOrder"         , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("PurchaseReturn"              , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("SalesReturnOrder"            , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("SalesReturn"                 , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("InternalSupplyRequest"       , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("InventoryTransfer"           , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("InventoryTransferOrder"      , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("PhysicalInventory"           , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("PhysicalCountByLocation"     , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("ItemStockAdjustment"         , "StepItemListChangeItemKeyByItem, 
+												          |StepItemListChangeItemKeyWriteOffByItem");
+	Result.Binding.Insert("Bundling"                    , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("Unbundling"                  , "StepItemListChangeItemKeyByItem");
 	
-	Result.Binding.Insert("SalesReportFromTradeAgent" , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("SalesReportToConsignor"    , "StepItemListChangeItemKeyByItem");
-	Result.Binding.Insert("StockCorrection"           , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("SalesReportFromTradeAgent"   , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("SalesReportToConsignor"      , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("StockCorrection"             , "StepItemListChangeItemKeyByItem");
 	
 	Return Result;
 EndFunction
@@ -11025,7 +11294,7 @@ Function GetBindingStructure_ItemListItemKey(Parameters)
 		"StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey");
 		
-	Result.Binding.Insert("GoodsReceipt",
+	SafeBinding(Result.Binding, "GoodsReceipt",
 		"StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey");
 	
@@ -11230,7 +11499,10 @@ Function GetBindingStructure_ItemListItemKey(Parameters)
 			|StepClearSerialLotNumberByItemKey,
 			|StepClearBarcodeByItemKey");
 		
-	Result.Binding.Insert("ItemStockAdjustment" , "StepItemListChangeUnitByItemKey");
+	Result.Binding.Insert("ItemStockAdjustment", 
+			"StepItemListChangeUnitByItemKey,
+			|StepItemListCalculateQuantityInBaseUnit");
+			
 	Result.Binding.Insert("Bundling"            , "StepItemListChangeUnitByItemKey");
 	Result.Binding.Insert("Unbundling"          , "StepItemListChangeUnitByItemKey");
 	
@@ -11570,6 +11842,8 @@ Function BindItemListUnit(Parameters)
 		"StepItemListCalculateQuantityInBaseUnit,
 		|StepItemListChangePriceByPriceType");
 	
+	SafeBinding(Binding, "GoodsReceipt", "StepItemListCalculateQuantityInBaseUnit");
+	
 	Binding.Insert("RetailSalesReceipt", 
 		"StepItemListCalculateQuantityInBaseUnit,
 		|StepItemListChangePriceByPriceType");
@@ -11732,7 +12006,7 @@ Function BindDefaultItemListStore(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "StepItemListDefaultStoreInList_WithoutAgreement");
 	Binding.Insert("ShipmentPlaningOrder", "StepItemListDefaultStoreInList_WithoutAgreement");
-	Binding.Insert("GoodsReceipt"        , "StepItemListDefaultStoreInList_WithoutAgreement");
+	SafeBinding(Binding, "GoodsReceipt"  , "StepItemListDefaultStoreInList_WithoutAgreement");
 	
 	Binding.Insert("RetailShipmentConfirmation", "StepItemListDefaultStoreInList_WithoutAgreement");
 	Binding.Insert("RetailGoodsReceipt"        , "StepItemListDefaultStoreInList_WithoutAgreement");
@@ -11762,7 +12036,7 @@ Function BindItemListStore(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation"      , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("ShipmentPlaningOrder"      , "StepChangeStoreInHeaderByStoresInList");
-	Binding.Insert("GoodsReceipt"              , "StepChangeStoreInHeaderByStoresInList");
+	SafeBinding(Binding, "GoodsReceipt"        , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("CommissioningOfFixedAsset" , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("ModernizationOfFixedAsset" , "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("DecommissioningOfFixedAsset" , "StepChangeStoreInHeaderByStoresInList");
@@ -12223,7 +12497,8 @@ Function BindItemListPrice(Parameters)
 		Binding.Insert("SalesReturn"          , "StepItemListCalculations_IsPriceChanged");	
 		
 		Binding.Insert("SalesReportFromTradeAgent" , "StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");	
-		Binding.Insert("SalesReportToConsignor"    , "StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");	
+		Binding.Insert("SalesReportToConsignor"    , "StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");
+//		SafeBinding(Binding, "GoodsReceipt"        , "StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");	
 	Else
 		Binding.Insert("SalesOrder",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
@@ -12264,6 +12539,10 @@ Function BindItemListPrice(Parameters)
 		Binding.Insert("SalesReportToConsignor",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
 			|StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");
+	
+//		SafeBinding(Binding, "GoodsReceipt",
+//			"StepItemListChangePriceTypeAsManual_IsUserChange,
+//			|StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");
 	
 		Binding.Insert("RetailReturnReceipt",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
@@ -12346,6 +12625,7 @@ Function BindItemListDontCalculateRow(Parameters)
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
 	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_IsPriceChanged_Withholding_Tax");
+//	SafeBinding(Binding, "GoodsReceipt"             , "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
 	
 	Return BindSteps("StepItemListCalculations_IsDontCalculateRowChanged", DataPath, Binding, Parameters, "BindItemListDontCalculateRow");
 EndFunction
@@ -12389,8 +12669,8 @@ Function BindItemListVatRate(Parameters)
 	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
 	Binding.Insert("WithholdingTaxInvoice"    , "StepItemListCalculations_Withholding_Tax");
-	
-	Binding.Insert("StockAdjustmentAsSurplus", "StepItemListCalculations_IsVatRateChanged_StockDocuments");
+//	SafeBinding(Binding, "GoodsReceipt"             , "StepItemListCalculations_IsVatRateChanged_Without_SpecialOffers");
+	Binding.Insert("StockAdjustmentAsSurplus" , "StepItemListCalculations_IsVatRateChanged_StockDocuments");
 	
 	Return BindSteps("StepItemListCalculations_IsVatRateChanged", DataPath, Binding, Parameters, "BindItemListVatRate");
 EndFunction
@@ -12772,6 +13052,9 @@ Function BindItemListQuantityInBaseUnit(Parameters)
 	
 	Binding.Insert("SalesReportToConsignor",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOffers");
+	
+//	SafeBinding(Binding, "GoodsReceipt",
+//		"StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOffers");
 	
 	Binding.Insert("RetailReturnReceipt",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
@@ -13222,6 +13505,9 @@ Function BindItemListTaxAmount(Parameters)
 	Binding.Insert("SalesReportToConsignor", 
 		"StepItemListCalculations_IsTaxAmountChanged_Without_SpecialOffers");
 	
+//	SafeBinding(Binding, "GoodsReceipt", 
+//		"StepItemListCalculations_IsTaxAmountChanged_Without_SpecialOffers");
+	
 	Binding.Insert("RetailReturnReceipt", 
 		"StepItemListCalculations_IsTaxAmountChanged");
 	
@@ -13387,6 +13673,10 @@ Function BindItemListTotalAmount(Parameters)
 	Binding.Insert("SalesReportToConsignor",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
 		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
+	
+//	SafeBinding(Binding, "GoodsReceipt",
+//		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
+//		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
 	
 	Binding.Insert("RetailReturnReceipt",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
@@ -14277,6 +14567,90 @@ Procedure StepItemListDefaultIsVariableStoreInList(Parameters, Chain) Export
 	Options.Key = NewRow.Key;
 	Chain.DefaultIsVariableStoreInList.Options.Add(Options);
 EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_IS_PRELIMINARY
+
+// ItemList.IsPreliminary.OnChange
+Procedure ItemListIsPreliminary(Parameters) Export
+	AddViewNotify("OnSetItemListIsPreliminary", Parameters);
+	Binding = BindItemListIsPreliminary(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+Procedure SetPreliminaryData(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Amount"    , BindItemListPreliminaryAmount(Parameters));
+	ResourceToBinding.Insert("AmountTax" , BindItemListPreliminaryTaxAmount(Parameters));
+	ResourceToBinding.Insert("Currency"  , BindItemListCurrency(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// ItemList.IsPreliminary.Get
+Function GetItemListIsPreliminary(Parameters, _Key)
+	Binding = BindItemListIsPreliminary(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.IsPreliminary.Bind
+Function BindItemListIsPreliminary(Parameters)
+	DataPath = "ItemList.IsPreliminary";
+	Binding = New Structure();	
+	Return BindSteps("StepChangePreliminaryDataByBasis", DataPath, Binding, Parameters, "BindItemListIsPreliminary");
+EndFunction
+
+// ItemList.ChangePreliminaryDataByBasis.Step
+Procedure StepChangePreliminaryDataByBasis(Parameters, Chain) Export
+	Chain.ChangePreliminaryDataByBasis.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePreliminaryDataByBasis.Setter = "SetPreliminaryData";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangePreliminaryDataByBasisOptions();
+		Options.IsPreliminary = GetItemListIsPreliminary(Parameters, Row.Key);
+		Options.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.Ref      = Parameters.Object.Ref;
+		Options.RowIDInfo= Row.RowIDInfo;
+		Options.Key      = Row.Key;
+		Options.StepName = "StepChangePreliminaryDataByBasis";
+		Chain.ChangePreliminaryDataByBasis.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_PRELIMINARY_AMOUNT
+
+// ItemList.PreliminaryAmount.Bind
+Function BindItemListPreliminaryAmount(Parameters)
+	DataPath = "ItemList.PreliminaryAmount";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListPreliminaryAmount");
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_PRELIMINARY_TAX_AMOUNT
+
+// ItemList.PreliminaryTaxAmount.Bind
+Function BindItemListPreliminaryTaxAmount(Parameters)
+	DataPath = "ItemList.PreliminaryTaxAmount";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListPreliminaryTaxAmount");
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_CURRENCY
+
+// ItemList.Currency.Bind
+Function BindItemListCurrency(Parameters)
+	DataPath = "ItemList.Currency";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListCurrency");
+EndFunction
 
 #EndRegion
 
@@ -17109,6 +17483,8 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "PaymentListAfterDeleteRowFormNotify"            Then ViewClient_V2.PaymentListAfterDeleteRowFormNotify(Parameters);
 	ElsIf ViewNotify = "OnSetPaymentListCommissionNotify"               Then ViewClient_V2.OnSetPaymentListCommissionNotify(Parameters);
 	ElsIf ViewNotify = "OnSetPaymentListCommissionPercentNotify"        Then ViewClient_V2.OnSetPaymentListCommissionPercentNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemListIsPreliminary" Then ViewClient_V2.OnSetItemListIsPreliminary(Parameters);
+	ElsIf ViewNotify = "OnSetTaxPartnerNotify" Then ViewClient_V2.OnSetTaxPartnerNotify(Parameters);
 	
 	Else
 		Raise StrTemplate(R().Error_NotHandledViewNotify, ViewNotify);
@@ -17610,6 +17986,13 @@ EndFunction
 
 Procedure BindVoid(Parameters, Chain) Export
 	Return;
+EndProcedure
+
+Procedure SafeBinding(Binding, Target, Steps)
+	If Binding.Property(Target) Then
+		Raise StrTemplate("Binding for target [%1] alredy exists", Target);
+	EndIf;
+	Binding.Insert(Target, Steps);
 EndProcedure
 
 Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters, BindName, ExtensionPrefix = "")

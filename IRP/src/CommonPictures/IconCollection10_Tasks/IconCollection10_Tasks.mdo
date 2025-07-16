@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6582d145-8d67-4f5c-9e43-764f5411c304">
+ <name>IconCollection10_Tasks</name>
+ <synonym>
+  <key>tr</key>
+  <value>Icon collection10 (tasks)</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Icon collection10 (tasks)</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Icon collection10 (tasks)</value>
+ </synonym>
+ <transparentPixel>
+  <x>30</x>
+  <y>9</y>
+ </transparentPixel>
+</mdclass:CommonPicture>

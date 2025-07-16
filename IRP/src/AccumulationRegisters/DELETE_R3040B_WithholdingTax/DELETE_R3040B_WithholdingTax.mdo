@@ -8,18 +8,18 @@
   <recordKeyType typeId="20ab550d-2930-4937-bc7d-4122692adbef" valueTypeId="1ff0fb47-4371-4298-80e5-99d1c610deef"/>
   <recordType typeId="408828d2-84f6-4468-97af-8514a07f2e75" valueTypeId="96d08e89-1b99-40ba-becb-e8d83dc33e02"/>
  </producedTypes>
- <name>R3040B_WithholdingTax</name>
+ <name>DELETE_R3040B_WithholdingTax</name>
  <synonym>
   <key>tr</key>
-  <value>R3040 Stopaj</value>
+  <value>DELETE_R3040 Withholding tax</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>R3040 Удерживаемый подоходный налог</value>
+  <value>DELETE_R3040 Withholding tax</value>
  </synonym>
  <synonym>
   <key>en</key>
-  <value>R3040 Withholding tax</value>
+  <value>DELETE_R3040 Withholding tax</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>

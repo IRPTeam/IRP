@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="fc2be658-7288-40c9-9591-3116ec655d19">
+ <producedTypes>
+  <managerType typeId="cb0b6fb9-0e0e-478d-aed5-a16e4ea84e4d" valueTypeId="3552a566-93ef-4d16-a98f-e0d9dcc00f9b"/>
+  <valueManagerType typeId="e150e72d-656f-46ed-8815-459c62842f90" valueTypeId="bf1ff5f5-bea8-45ac-bb6c-c7c937e08f76"/>
+  <valueKeyType typeId="06db6c68-1bbf-404c-84f8-6d5fccd60ec7" valueTypeId="ae57d52d-8333-49d0-9e6c-707df976a5f5"/>
+ </producedTypes>
+ <name>UsePreliminary</name>
+ <synonym>
+  <key>tr</key>
+  <value>Use preliminary</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Use preliminary</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use preliminary</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

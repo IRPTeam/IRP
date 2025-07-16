@@ -187,6 +187,60 @@
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>TableName</name>
+  <title>
+   <key>tr</key>
+   <value>Tablo ismi</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Наименование таблицы</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Table name</value>
+  </title>
+  <id>3</id>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>TableIndex</name>
+  <title>
+   <key>tr</key>
+   <value>Table index</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Table index</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Table index</value>
+  </title>
+  <id>4</id>
+  <valueType>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+   </numberQualifiers>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>OK</name>
   <title>
@@ -244,6 +298,22 @@
    <stringQualifiers/>
   </valueType>
   <keyParameter>true</keyParameter>
+ </parameters>
+ <parameters>
+  <name>TableName</name>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+ </parameters>
+ <parameters>
+  <name>TableIndex</name>
+  <valueType>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+   </numberQualifiers>
+  </valueType>
  </parameters>
  <commandInterface>
   <navigationPanel/>

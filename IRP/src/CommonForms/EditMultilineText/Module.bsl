@@ -13,10 +13,16 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	Text.SetText(FormOwner.Object[ItemName]);
+	If IsBlankString(TableName) Then
+		Text.SetText(FormOwner.Object[ItemName]);
+	Else
+		Text.SetText(FormOwner.Object[TableName][TableIndex][ItemName]);
+	EndIf;
 EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ItemName = Parameters.ItemName;
+	TableName = Parameters.TableName;
+	TableIndex = Parameters.TableIndex;
 EndProcedure

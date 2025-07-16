@@ -229,7 +229,7 @@ Scenario: _0432006 check DebitCreditNote movements by the register  "R5020 Partn
 			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Main Company' | 'Front office' | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | 'Basic Partner terms, TRY' | 'Sales invoice 116 dated 19.02.2024 19:49:32' | 'USD'      | 'Reporting currency'           | 'TRY'                  | '85,6'   | '85,6'                 | ''                 | ''                   | ''               | ''                  | ''                 |		
 	And I close all client application windows
 
-Scenario: _0432007 check DebitCreditNote absence movements by the register  "R5010 Reconciliation statement" (same partner)
+Scenario: _0432007 check DebitCreditNote movements by the register  "R5010 Reconciliation statement" (same partner)
 	And I close all client application windows
 	* Select DebitCreditNote
 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
@@ -240,8 +240,12 @@ Scenario: _0432007 check DebitCreditNote absence movements by the register  "R50
 		And I click "Registrations report info" button
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R5010 Reconciliation statement"'    |
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 2 dated 20.02.2024 13:27:56' | ''                    | ''           | ''             | ''             | ''         | ''                                   | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'    | ''                    | ''           | ''             | ''             | ''         | ''                                   | ''                    | ''       |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'                         | 'Legal name contract' | 'Amount' |
+			| ''                                              | '20.02.2024 13:27:56' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor and Customer (by documents)' | ''                    | '500'    |
+			| ''                                              | '20.02.2024 13:27:56' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor and Customer (by documents)' | ''                    | '500'    |		
 	And I close all client application windows
 
 #

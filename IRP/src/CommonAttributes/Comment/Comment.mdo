@@ -62,6 +62,10 @@
   <use>DontUse</use>
  </content>
  <content>
+  <metadata>Task.ExecutorTasks</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.MoneyTransfer</metadata>
   <use>Use</use>
  </content>
@@ -79,6 +83,10 @@
  </content>
  <content>
   <metadata>Document.WithholdingTaxInvoice</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>BusinessProcess.ExecutionProcesses</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -327,6 +335,10 @@
  </content>
  <content>
   <metadata>Document.IncomingPaymentOrder</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ExecutionTemplates</metadata>
   <use>Use</use>
  </content>
  <content>

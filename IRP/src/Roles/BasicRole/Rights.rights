@@ -149,6 +149,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Task.ExecutorTasks</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Execute</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Constant.UseAddAttributesAndProperties</name>
 		<right>
 			<name>Read</name>
@@ -257,6 +276,25 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>BusinessProcess.ExecutionProcesses</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Start</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -662,6 +700,13 @@
 	</object>
 	<object>
 		<name>Constant.UseItemKey</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseBusinessProcess</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

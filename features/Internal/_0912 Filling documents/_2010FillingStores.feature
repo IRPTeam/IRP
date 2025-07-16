@@ -265,6 +265,7 @@ Scenario: _201003 check filling in Store field in the document Purchase order
 			| 'Shirt'   | '36/Red'     | '1,000'      | 'Store 03'    |
 	* Re-selecting a partner term with an empty store and check filling in the store from user settings
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"		
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -344,6 +345,7 @@ Scenario: _201004 check filling in Store field in the document Purchase invoice
 			| 'Shirt'   | '36/Red'     | '1,000'      | 'Store 02'    |
 	* Re-selecting a partner term with an empty store and check filling in the store from user settings
 		And I click Select button of "Partner term" field
+		And I remove checkbox named "FilterCompanyUse"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -493,8 +495,8 @@ Scenario: _201006 check filling in Store field in the Goods receipt
 			| 'Store 03'       |
 			And I select current line in "List" table
 			* Info message
-				Then "1C:Enterprise" window is opened
-				And I click "Yes" button
+				Then "Update item list info" window is opened
+				And I click "OK" button				
 			And "ItemList" table contains lines
 			| 'Item'       | 'Quantity'   | 'Item key'    | 'Unit'   | 'Store'       |
 			| 'Trousers'   | '2,000'      | '38/Yellow'   | 'pcs'    | 'Store 03'    |

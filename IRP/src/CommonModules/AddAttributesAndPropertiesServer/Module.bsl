@@ -18,7 +18,7 @@ EndProcedure
 // Parameters:
 //  Form - See Catalog.ItemKeys.Form.ItemForm
 //  Cancel - Boolean - Cancel
-//  CurrentObject - CatalogObject.ItemKeys - Current object
+//  CurrentObject - CatalogObject, DocumentObject, BusinessProcessObject, TaskObject - Current object
 //  WriteParameters - Structure - Write parameters
 //  Prefix - String -
 //  AddInfo - Undefined - Add info

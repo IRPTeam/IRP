@@ -1,4 +1,15 @@
 
+Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
+	StandardProcessing = False;
+	Fields.Add("Ref");	
+EndProcedure
+
+Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
+	StandardProcessing = False;
+	InterfaceLocalizationCode = LocalizationReuse.GetInterfaceLocalizationCode();
+	Presentation = LocalizationServer.RefDescription(Data.Ref, InterfaceLocalizationCode);
+EndProcedure
+
 Procedure UpdatePredefinedNames(PredefinedDataName) Export
 
 	SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes[PredefinedDataName].GetObject();
@@ -17,3 +28,4 @@ Procedure UpdatePredefinedNames(PredefinedDataName) Export
 	EndIf;
 	
 EndProcedure
+

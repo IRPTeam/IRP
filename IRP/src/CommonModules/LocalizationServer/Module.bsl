@@ -73,8 +73,10 @@ EndFunction
 // Returns:
 //  String - Catalog description
 Function CatalogDescription(Val Ref, Val LangCode = "", AddInfo = Undefined) Export
-	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.GetLocalizationCode());
 	Presentation = "";
+	
+	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.GetLocalizationCode());
+	
 	TypeOfRef = TypeOf(Ref);
 	If TypeOfRef = Type("String") Or TypeOfRef = Type("Date") Or TypeOfRef = Type("Number") Then
 		Presentation = String(Ref);
@@ -89,6 +91,7 @@ Function CatalogDescription(Val Ref, Val LangCode = "", AddInfo = Undefined) Exp
 	EndIf;
 
 	Return Presentation;
+	
 EndFunction
 
 // Catalog description with additional attributes.
@@ -103,7 +106,9 @@ EndFunction
 Function CatalogDescriptionWithAddAttributes(Val Ref, Val LangCode = "", AddInfo = Undefined) Export
 
 	Presentation = "";
-	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.UserLanguageCode());
+	
+	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.GetLocalizationCode());
+	
 	UsersL = New Array(); // Array Of String
 	For Each AddAttribute In Ref.AddAttributes Do
 		If StrSplit(Ref.Metadata().FullName(), ".")[0] = "Catalog" Then
@@ -123,7 +128,45 @@ Function CatalogDescriptionWithAddAttributes(Val Ref, Val LangCode = "", AddInfo
 			Presentation = CatalogDescription(Ref.Item, LangCode, AddInfo);
 		EndIf;
 	EndIf;
+	
 	Return Presentation;
+EndFunction
+
+// Ref description.
+// 
+// Parameters:
+//  Ref - AnyRef - Ref
+//  LangCode - String - Lang code
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  String - Ref description
+Function RefDescription(Val Ref, Val LangCode = "", AddInfo = Undefined) Export
+	
+	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.GetLocalizationCode());
+	
+	TypeOfRef = TypeOf(Ref);
+	If TypeOfRef = Type("String") Or TypeOfRef = Type("Date") Or TypeOfRef = Type("Number") Then
+		Return String(Ref);
+	EndIf;
+	
+	If Not UseMultiLanguage(Ref.Metadata().FullName(), "", AddInfo) Then
+		Return String(Ref);
+	EndIf;
+	
+	Presentation = "";
+	If UseMultiLanguage(Ref.Metadata().FullName(), LangCode, AddInfo) Then
+		Presentation = String(Ref["Description_" + LangCode]);
+	Else
+		Return String(Ref["Description_en"]);
+	EndIf;
+	
+	If IsBlankString(Presentation) Then
+		Presentation = String(Ref["Description_en"]);
+	EndIf;
+
+	Return Presentation;
+	
 EndFunction
 
 // All description.
@@ -143,7 +186,7 @@ Function AllDescription(AddInfo = Undefined) Export
 	Return Array;
 EndFunction
 
-// Use multi language.
+// Use multi language for data.
 // 
 // Parameters:
 //  MetadataFullName - String - Metadata full name
@@ -153,11 +196,11 @@ EndFunction
 // Returns:
 //  Boolean - Use multi language
 Function UseMultiLanguage(Val MetadataFullName, Val LangCode = "", AddInfo = Undefined) Export
-	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.UserLanguageCode());
+	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.GetLocalizationCode());
+	
 	MetadataFullName = StrReplace(MetadataFullName, "Manager.", ".");
-	MetadataObject = Metadata.FindByFullName(MetadataFullName);
+	MetadataObject = Metadata.FindByFullName(MetadataFullName); // MetadataObject
 	DescriptionAttr = Metadata.CommonAttributes["Description_" + LangCode];
-	//@skip-check invocation-parameter-type-intersect
 	Content = DescriptionAttr.Content.Find(MetadataObject);
 
 	If Not Content = Undefined Then
@@ -179,7 +222,26 @@ EndFunction
 // Returns:
 //  String - Get localization code
 Function GetLocalizationCode(AddInfo = Undefined) Export
-	Return TrimAll(SessionParameters.LocalizationCode);
+	LangCode = "en";
+	If Not IsBlankString(SessionParameters.LocalizationCode) Then
+		LangCode = TrimAll(SessionParameters.LocalizationCode);
+	EndIf;	
+	Return LangCode;
+EndFunction
+
+// Get interface localization code.
+// 
+// Parameters:
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  String - Get interface localization code
+Function GetInterfaceLocalizationCode(AddInfo = Undefined) Export
+	LangCode = "en";
+	If Not IsBlankString(SessionParameters.InterfaceLocalizationCode) Then
+		LangCode = TrimAll(SessionParameters.InterfaceLocalizationCode);
+	EndIf;	
+	Return LangCode;
 EndFunction
 
 // Fields list for descriptions.

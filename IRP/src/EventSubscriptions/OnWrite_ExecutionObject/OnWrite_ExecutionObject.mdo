@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c9b9845a-140b-4b7f-a49d-321882254533">
+ <name>OnWrite_ExecutionObject</name>
+ <synonym>
+  <key>tr</key>
+  <value>On write execution object</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>On write execution object</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>On write execution object</value>
+ </synonym>
+ <source>
+  <types>CatalogObject</types>
+  <types>DocumentObject</types>
+ </source>
+ <event>OnWrite</event>
+ <handler>CommonModule.BusinessProcessesServer.OnWrite_ExecutionObjectOnWrite</handler>
+</mdclass:EventSubscription>

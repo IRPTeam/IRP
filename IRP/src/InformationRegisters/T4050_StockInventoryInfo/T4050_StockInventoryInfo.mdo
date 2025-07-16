@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="bfd98406-2bb3-47f5-9cef-edb3c34b9a5a">
+ <producedTypes>
+  <selectionType typeId="5843e0c2-84fd-4a41-8aab-cc95a79485c0" valueTypeId="d3317705-627c-46ff-972f-0945fe5f5998"/>
+  <listType typeId="75cb00fa-57be-487e-a34c-406c204ad324" valueTypeId="d0cf4c1f-d3d0-4773-82b7-2d2ec46b3533"/>
+  <managerType typeId="ef146c09-5749-4c1e-97cd-7ed949566a54" valueTypeId="1ef1ff3d-72ce-4395-841d-fa861d20f736"/>
+  <recordSetType typeId="fcb8e5a0-6bb6-445a-bfe5-f747c84b8bcd" valueTypeId="fd26bb91-792d-4013-802c-c4431160bfde"/>
+  <recordKeyType typeId="8a6aa0de-0e82-4e30-af62-981567049538" valueTypeId="d811af22-a81f-4746-8249-36fd417c5256"/>
+  <recordType typeId="ee523fa6-77b3-4e56-9c8a-5343aed19f27" valueTypeId="c51fc1d3-0881-4c16-9ab0-7f22c538ac0d"/>
+  <recordManagerType typeId="92b137d9-ac81-421c-a1fc-efe2e80545bc" valueTypeId="530a610d-fd12-4eee-b17b-0f482c56cdf9"/>
+ </producedTypes>
+ <name>T4050_StockInventoryInfo</name>
+ <synonym>
+  <key>tr</key>
+  <value>T4050 Stock inventory info</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>T4050 Stock inventory info</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>T4050 Stock inventory info</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="4ab62d28-db9b-4e14-a00d-a677fee474c4">
+  <name>Quantity</name>
+  <synonym>
+   <key>tr</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Количество</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="a5a30a4d-fbff-4321-abc2-787ef828c93d">
+  <name>PreliminaryQuantity</name>
+  <synonym>
+   <key>tr</key>
+   <value>Preliminary quantity</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Preliminary quantity</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Preliminary quantity</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="55ad8185-ab0e-4c40-9564-bb5d9087d926">
+  <name>Document</name>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Документ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="735a8091-33c0-4454-a850-4a6beac9a224">
+  <name>Company</name>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="b2a75c6a-f436-4854-890e-9b7f64a50bd0">
+  <name>Store</name>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="a2de976a-26b0-4f5d-b374-e408a5069e1d">
+  <name>ItemKey</name>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="9c11a9c0-7713-420f-9f02-065f96d23fc2">
+  <name>Direction</name>
+  <synonym>
+   <key>tr</key>
+   <value>Yön</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Направление</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Direction</value>
+  </synonym>
+  <type>
+   <types>EnumRef.BatchDirection</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+</mdclass:InformationRegister>

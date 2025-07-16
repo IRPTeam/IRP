@@ -1176,11 +1176,11 @@
      <value>164</value>
     </code>
    </content>
-   <content id="d928a0b7-63f6-475a-ba64-ce4ce9156d38">
-    <name>WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax</name>
+   <content id="d86f4345-33f7-4ae0-8cb0-2f0b990687f6">
+    <name>WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions</name>
     <description/>
     <code xsi:type="core:NumberValue">
-     <value>165</value>
+     <value>171</value>
     </code>
    </content>
   </items>

@@ -228,8 +228,7 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
-		"Document.SalesInvoice.ItemList");
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.SalesInvoice.ItemList");
 
 	If Not Unposting And Ref.Agreement.UseCreditLimit Then
 		CreditLimitsServer.CheckCreditLimit(Ref, Cancel);
@@ -239,19 +238,45 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		Return;
 	EndIf;
 
+	Current_R4050B_StockInventory = PostingServer.GetQueryTableByName("R4050B_StockInventory", Parameters);
+	Exists_R4050B_StockInventory  = PostingServer.GetQueryTableByName("Exists_R4050B_StockInventory", Parameters);
+	
+	Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory);
+	Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory);
+	
 	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
-	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4014B_SerialLotNumber", Parameters), AccumulationRecordType.Expense, Unposting, AddInfo) Then
+	R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters);
+	Exists_R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters);
+	
+	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, 
+		LineNumberAndItemKeyFromItemList,
+		R4014B_SerialLotNumber,
+		Exists_R4014B_SerialLotNumber, 
+		AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 
-	If Not Cancel And Not AccReg.R2001T_Sales.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R2001T_Sales", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R2001T_Sales", Parameters), AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+	R2001T_Sales = PostingServer.GetQueryTableByName("R2001T_Sales", Parameters);
+	Exists_R2001T_Sales = PostingServer.GetQueryTableByName("Exists_R2001T_Sales", Parameters);
+	
+	If Not Cancel And Not AccReg.R2001T_Sales.CheckBalance(Ref, 
+		LineNumberAndItemKeyFromItemList,
+		R2001T_Sales, 
+		Exists_R2001T_Sales, 
+		AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
+	
+	Current_R6080T_OtherPeriodsRevenues = PostingServer.GetQueryTableByName("R6080T_OtherPeriodsRevenues", Parameters);
+	Exists_R6080T_OtherPeriodsRevenues  = PostingServer.GetQueryTableByName("Exists_R6080T_OtherPeriodsRevenues", Parameters);
+	
+	If Not Cancel 
+		And Not AccReg.R6080T_OtherPeriodsRevenues.CheckBalance(Ref, 
+			Current_R6080T_OtherPeriodsRevenues, 
+			Exists_R6080T_OtherPeriodsRevenues, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;	
 EndProcedure
 
 Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -274,6 +299,11 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	_LandedCostCurrency = Undefined;
+	If ValueIsFilled(Ref.Company.LandedCostCurrencyMovementType) Then
+		_LandedCostCurrency = Ref.Company.LandedCostCurrencyMovementType.Currency;
+	EndIf;
+	StrParams.Insert("LandedCostCurrency", _LandedCostCurrency);	
 	If ValueIsFilled(Ref) Then
 		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
 	Else
@@ -296,6 +326,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	QueryArray.Add(PostingServer.Exists_R2001T_Sales());
 	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
+	QueryArray.Add(PostingServer.Exists_R6080T_OtherPeriodsRevenues());
 	Return QueryArray;
 EndFunction
 
@@ -321,6 +352,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(R6080T_OtherPeriodsRevenues());
 	QueryArray.Add(R8014T_ConsignorSales());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
@@ -1365,6 +1397,48 @@ Function R5021T_Revenues()
 	|	AND ItemList.OtherPeriodRevenueType = VALUE(ENUM.OtherPeriodRevenueType.EmptyRef)";
 EndFunction
 
+Function R5022T_Expenses()
+	Return 
+		"SELECT
+		|	WriteOffBatchesInfo.Period,
+		|	WriteOffBatchesInfo.Company,
+		|	WriteOffBatchesInfo.Branch,
+		|	WriteOffBatchesInfo.ProfitLossCenter,
+		|	WriteOffBatchesInfo.ExpenseType,
+		|	WriteOffBatchesInfo.ItemKey,
+		|	WriteOffBatchesInfo.Currency,
+		|	WriteOffBatchesInfo.RowID AS Key,
+		|	WriteOffBatchesInfo.Recorder AS CalculationMovementCost,
+		|
+		|	WriteOffBatchesInfo.InvoiceAmount
+		|	+WriteOffBatchesInfo.PreliminaryAmount
+		|	+WriteOffBatchesInfo.IndirectCostAmount
+	    |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
+	    |	+WriteOffBatchesInfo.ExtraDirectCostAmount
+	    |	+WriteOffBatchesInfo.AllocatedCostAmount
+	    |	-WriteOffBatchesInfo.AllocatedRevenueAmount AS Amount,
+	    |
+	    |	WriteOffBatchesInfo.InvoiceAmount
+	    |	+WriteOffBatchesInfo.PreliminaryAmount
+	    |	+WriteOffBatchesInfo.InvoiceTaxAmount
+	    |	+WriteOffBatchesInfo.PreliminaryTaxAmount
+	    |	+WriteOffBatchesInfo.IndirectCostAmount
+	    |	+WriteOffBatchesInfo.IndirectCostTaxAmount
+	    |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
+	    |	+WriteOffBatchesInfo.ExtraCostTaxAmountByRatio
+	    |	+WriteOffBatchesInfo.ExtraDirectCostAmount
+	    |	+WriteOffBatchesInfo.ExtraDirectCostTaxAmount
+	    |	+WriteOffBatchesInfo.AllocatedCostAmount
+	    |	+WriteOffBatchesInfo.AllocatedCostTaxAmount
+	    |	-WriteOffBatchesInfo.AllocatedRevenueAmount
+	    |	-WriteOffBatchesInfo.AllocatedRevenueTaxAmount AS AmountWithTaxes
+		|INTO R5022T_Expenses
+		|FROM
+		|	InformationRegister.T6095S_WriteOffBatchesInfo AS WriteOffBatchesInfo
+		|WHERE
+		|	WriteOffBatchesInfo.Document = &Ref";
+EndFunction
+
 Function T3010S_RowIDInfo()
 	Return "SELECT
 		   |	RowIDInfo.RowRef AS RowRef,
@@ -1430,6 +1504,8 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Store,
 		|	ItemList.Branch,
 		|	ItemList.Company,
+		|	ItemList.ProfitLossCenter,
+		|	&LandedCostCurrency AS Currency,
 		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorBatches,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Period,
@@ -1448,6 +1524,8 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.TradeAgentStore,
 		|	ItemList.Branch,
 		|	ItemList.Company,
+		|	ItemList.ProfitLossCenter,
+		|	&LandedCostCurrency AS Currency,
 		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorBatches,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Period,
@@ -1466,6 +1544,8 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.Store,
 		|	BatchKeysInfo_1.Branch,
 		|	BatchKeysInfo_1.Company,
+		|	BatchKeysInfo_1.ProfitLossCenter,
+		|	BatchKeysInfo_1.Currency,
 		|	CASE
 		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
 		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
@@ -1488,6 +1568,8 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_2.TradeAgentStore,
 		|	BatchKeysInfo_2.Branch,
 		|	BatchKeysInfo_2.Company,
+		|	BatchKeysInfo_2.ProfitLossCenter,
+		|	BatchKeysInfo_2.Currency,
 		|	CASE
 		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
 		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
@@ -1509,6 +1591,8 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo.Store,
 		|	BatchKeysInfo.Branch,
 		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.ProfitLossCenter,
+		|	BatchKeysInfo.Currency,
 		|	SUM(ISNULL(BatchKeysInfo.Quantity, 0)) AS Quantity,
 		|	BatchKeysInfo.Period,
 		|	BatchKeysInfo.Direction,
@@ -1524,6 +1608,8 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo.Store,
 		|	BatchKeysInfo.Branch,
 		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.ProfitLossCenter,
+		|	BatchKeysInfo.Currency,
 		|	BatchKeysInfo.Period,
 		|	BatchKeysInfo.Direction,
 		|	BatchKeysInfo.SourceOfOrigin,

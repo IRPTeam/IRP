@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3e50c40d-d9bb-456a-9e4a-ad4c09597d40">
+ <producedTypes>
+  <managerType typeId="2d0ecbb7-11f2-43b5-b003-9be6cc884153" valueTypeId="3dda5f3f-b7be-4fac-92cb-387e5d92c2ba"/>
+  <valueManagerType typeId="0bc9cafb-fc63-453c-bdef-a6626e30121b" valueTypeId="aa46113b-231e-432a-b022-057da855da03"/>
+  <valueKeyType typeId="da5a784d-6484-406b-9106-0aa160aa18bc" valueTypeId="2c9e8e6f-1b49-440e-8db3-289312223c4e"/>
+ </producedTypes>
+ <name>UseBusinessProcess</name>
+ <synonym>
+  <key>tr</key>
+  <value>Use business process</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Use business process</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use business process</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

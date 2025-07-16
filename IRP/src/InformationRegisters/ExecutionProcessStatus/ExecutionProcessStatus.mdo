@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="33613570-2051-40f3-b04c-e07710036d7d">
+ <producedTypes>
+  <selectionType typeId="be95e24c-b7b9-41dc-8af8-652fc9b8088a" valueTypeId="c79da4e7-f8db-49fd-bb2b-db0337348af7"/>
+  <listType typeId="dd4ee8ff-67cd-4bb3-8449-8ee634cf3bc1" valueTypeId="4ed967a7-babe-4067-981a-7108d05d2e53"/>
+  <managerType typeId="50034925-1f2d-4edc-806c-bc4838db5e7c" valueTypeId="107c0fa5-74cb-4c3b-92cf-ddb4246a76f1"/>
+  <recordSetType typeId="19d993aa-27e6-4291-8f67-63d0e6067e20" valueTypeId="0141dd5c-e19b-41e3-8412-b0311ff848d7"/>
+  <recordKeyType typeId="b7343a98-8b0e-4e52-8768-5992466cfd54" valueTypeId="b615802f-22f6-4b94-ac6f-692c8861f2bf"/>
+  <recordType typeId="146fa770-a96f-41db-a4fa-e9625e3557d3" valueTypeId="fcb32d46-7cad-4195-bdd2-4f5aff59a951"/>
+  <recordManagerType typeId="cc0b4cde-142c-498d-8feb-15d4e887179b" valueTypeId="2aaf911e-9717-41d9-b110-abd6358a950c"/>
+ </producedTypes>
+ <name>ExecutionProcessStatus</name>
+ <synonym>
+  <key>tr</key>
+  <value>Execution process status</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Execution process status</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Execution process status</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="2f912733-008c-49f9-bc17-78fd6b4e76d0">
+  <name>CurrentStage</name>
+  <synonym>
+   <key>tr</key>
+   <value>Mevcut aşama</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Current stage</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Current stage</value>
+  </synonym>
+  <type>
+   <types>UUID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="b74d4945-b34d-4352-aec9-107a621fe934">
+  <name>CurrentTask</name>
+  <synonym>
+   <key>tr</key>
+   <value>Current task</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Current task</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Current task</value>
+  </synonym>
+  <type>
+   <types>UUID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="e4ca5f73-f11f-4d77-99c5-f8f8227c2394">
+  <name>IterationNumber</name>
+  <synonym>
+   <key>tr</key>
+   <value>Yineleme sayısı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Iteration number</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Iteration number</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>5</precision>
+    <nonNegative>true</nonNegative>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="215faa98-9456-4f5b-b9cd-4e44a53adcf2">
+  <name>ExecutionProcess</name>
+  <synonym>
+   <key>tr</key>
+   <value>Execution process</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Execution process</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Execution process</value>
+  </synonym>
+  <type>
+   <types>BusinessProcessRef.ExecutionProcesses</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="f9f6b351-ed93-457c-b7e0-b65da115b720">
+  <name>StatusTime</name>
+  <synonym>
+   <key>tr</key>
+   <value>Status time</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Status time</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Status time</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>20</precision>
+    <nonNegative>true</nonNegative>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+</mdclass:InformationRegister>

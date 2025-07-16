@@ -13,7 +13,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	ChoiceData.Add(Purchase);
 	ChoiceData.Add(ReceiptFromConsignor);
 	
-	If GetFunctionalOption("UseSimpleBatch") Then
+	If FOServer.IsUseSimpleBatch() Then
 		ChoiceData.Add(PurchaisePreliminaryStock);
 	EndIf;
 		

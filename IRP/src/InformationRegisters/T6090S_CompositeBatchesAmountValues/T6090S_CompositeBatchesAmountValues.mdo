@@ -326,6 +326,69 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
+ <resources uuid="dfdc3269-51fe-4996-8b7f-af0bea136c2e">
+  <name>PreliminaryQuantity</name>
+  <synonym>
+   <key>tr</key>
+   <value>Preliminary quantity</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Preliminary quantity</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Preliminary quantity</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="068d9191-17df-43b9-a4cf-85e4dfd9bab1">
+  <name>PreliminaryAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Preliminary amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Preliminary amount</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Preliminary amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="d6145818-3f97-440f-b0ba-b03e660518ca">
+  <name>PreliminaryTaxAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Preliminary tax amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Preliminary tax amount</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Preliminary tax amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
  <dimensions uuid="d5a9f86c-7983-4e38-b28e-10d344581d62">
   <name>Company</name>
   <synonym>

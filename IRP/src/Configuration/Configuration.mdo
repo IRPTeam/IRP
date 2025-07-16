@@ -259,6 +259,7 @@
  <commonPictures>CommonPicture.IconCollection7</commonPictures>
  <commonPictures>CommonPicture.IconCollection8</commonPictures>
  <commonPictures>CommonPicture.IconCollection9</commonPictures>
+ <commonPictures>CommonPicture.IconCollection10_Tasks</commonPictures>
  <commonPictures>CommonPicture.Iconoir_Add</commonPictures>
  <commonPictures>CommonPicture.Iconoir_AddPhoto</commonPictures>
  <commonPictures>CommonPicture.Iconoir_AddVideo</commonPictures>
@@ -318,6 +319,7 @@
  <commonPictures>CommonPicture.DocumentUnposted</commonPictures>
  <commonPictures>CommonPicture.DocumentPosted</commonPictures>
  <commonPictures>CommonPicture.DocumentDeleted</commonPictures>
+ <commonPictures>CommonPicture.DownloadFile</commonPictures>
  <sessionParameters>SessionParameter.Buffer</sessionParameters>
  <sessionParameters>SessionParameter.ClientType</sessionParameters>
  <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -383,7 +385,7 @@
  <roles>Role.AccumulationRegisters_R3026B_SalesOrdersCustomerAdvance</roles>
  <roles>Role.AccumulationRegisters_R3027B_EmployeeCashAdvance</roles>
  <roles>Role.AccumulationRegisters_R3035T_CashPlanning</roles>
- <roles>Role.AccumulationRegisters_R3040B_WithholdingTax</roles>
+ <roles>Role.DELETE_AccumulationRegisters_R3040B_WithholdingTax</roles>
  <roles>Role.AccumulationRegisters_R3050T_PosCashBalances</roles>
  <roles>Role.AccumulationRegisters_R4010B_ActualStocks</roles>
  <roles>Role.AccumulationRegisters_R4011B_FreeStocks</roles>
@@ -940,7 +942,9 @@
  <commonModules>CommonModule.SimpleBatchCostCalculationServer</commonModules>
  <commonModules>CommonModule.DocFixedAssetRevaluationClient</commonModules>
  <commonModules>CommonModule.DocFixedAssetRevaluationServer</commonModules>
+ <commonModules>CommonModule.BusinessProcessesServer</commonModules>
  <commonModules>CommonModule.LoggerServerCall</commonModules>
+ <commonModules>CommonModule.LandedCostServer2</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
  <commonAttributes>CommonAttribute.Branch</commonAttributes>
  <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1010,6 +1014,8 @@
  <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetDocumentPresentationFields</eventSubscriptions>
  <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetCatalogPresentation</eventSubscriptions>
  <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetDocumentPresentation</eventSubscriptions>
+ <eventSubscriptions>EventSubscription.OnWrite_ExecutionObject</eventSubscriptions>
+ <eventSubscriptions>EventSubscription.OnPosting_ExecutionObject</eventSubscriptions>
  <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
  <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
  <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
@@ -1078,6 +1084,8 @@
  <functionalOptions>FunctionalOption.UseVariableItemKey</functionalOptions>
  <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
  <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
+ <functionalOptions>FunctionalOption.UseBusinessProcess</functionalOptions>
+ <functionalOptions>FunctionalOption.UsePreliminary</functionalOptions>
  <definedTypes>DefinedType.typeAccessDocument</definedTypes>
  <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
  <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1206,6 +1214,8 @@
  <constants>Constant.UseVariableItemKey</constants>
  <constants>Constant.UseVariableStore</constants>
  <constants>Constant.UseWorkOrders</constants>
+ <constants>Constant.UseBusinessProcess</constants>
+ <constants>Constant.UsePreliminary</constants>
  <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
  <commonForms>CommonForm.AttachFile</commonForms>
@@ -1355,6 +1365,7 @@
  <catalogs>Catalog.Vehicles</catalogs>
  <catalogs>Catalog.VehicleTypes</catalogs>
  <catalogs>Catalog.Workstations</catalogs>
+ <catalogs>Catalog.ExecutionTemplates</catalogs>
  <documents>Document.AdditionalAccrual</documents>
  <documents>Document.AdditionalCostAllocation</documents>
  <documents>Document.AdditionalDeduction</documents>
@@ -1559,6 +1570,11 @@
  <enums>Enum.TradeAgentFeeTypes</enums>
  <enums>Enum.TypeEquipment</enums>
  <enums>Enum.TypeExternalObject</enums>
+ <enums>Enum.AutostartProcessTypes</enums>
+ <enums>Enum.TaskFailActions</enums>
+ <enums>Enum.TaskTypes</enums>
+ <enums>Enum.TaskResults</enums>
+ <enums>Enum.AmountCorrectionTypes</enums>
  <reports>Report.A0010_TrialBalance</reports>
  <reports>Report.A0011_TrialBalanceByAccount</reports>
  <reports>Report.A0012_AccountCard</reports>
@@ -1589,6 +1605,7 @@
  <reports>Report.R2001_Sales</reports>
  <reports>Report.R2001A_Sales</reports>
  <reports>Report.R2010A_SalesOrders</reports>
+ <reports>Report.R2010A_SalesOrdersExecution</reports>
  <reports>Report.R2011A_SalesOrdersShipment</reports>
  <reports>Report.R2012A_SalesOrdersInvoiceClosing</reports>
  <reports>Report.R3010_CashOnHand</reports>
@@ -1621,6 +1638,7 @@
  <reports>Report.R9510A_Salary</reports>
  <reports>Report.S1001L_VendorsPrices</reports>
  <reports>Report.T0001_FilesAnalyser</reports>
+ <reports>Report.R6070_OtherPeriodsExpenses</reports>
  <dataProcessors>DataProcessor.AccountantAutomatedWorkplace</dataProcessors>
  <dataProcessors>DataProcessor.AccountingService</dataProcessors>
  <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
@@ -1759,8 +1777,13 @@
  <informationRegisters>InformationRegister.UserSettings</informationRegisters>
  <informationRegisters>InformationRegister.T9069S_AccountingMappingRecordersDescription</informationRegisters>
  <informationRegisters>InformationRegister.AppliedDatabaseUpdates</informationRegisters>
+ <informationRegisters>InformationRegister.TaskExecutors</informationRegisters>
+ <informationRegisters>InformationRegister.ExecutionResults</informationRegisters>
+ <informationRegisters>InformationRegister.ExecutionProcessStatus</informationRegisters>
  <informationRegisters>InformationRegister.Logger</informationRegisters>
  <informationRegisters>InformationRegister.LoggerNotification</informationRegisters>
+ <informationRegisters>InformationRegister.LoggerFiles</informationRegisters>
+ <informationRegisters>InformationRegister.T4050_StockInventoryInfo</informationRegisters>
  <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>
@@ -1805,7 +1828,7 @@
  <accumulationRegisters>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R3027B_EmployeeCashAdvance</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R3035T_CashPlanning</accumulationRegisters>
- <accumulationRegisters>AccumulationRegister.R3040B_WithholdingTax</accumulationRegisters>
+ <accumulationRegisters>AccumulationRegister.DELETE_R3040B_WithholdingTax</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R3050T_PosCashBalances</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R4010B_ActualStocks</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R4011B_FreeStocks</accumulationRegisters>
@@ -1875,4 +1898,6 @@
  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.SystemAttributes</chartsOfCharacteristicTypes>
  <chartsOfAccounts>ChartOfAccounts.Basic</chartsOfAccounts>
  <accountingRegisters>AccountingRegister.Basic</accountingRegisters>
+ <businessProcesses>BusinessProcess.ExecutionProcesses</businessProcesses>
+ <tasks>Task.ExecutorTasks</tasks>
 </mdclass:Configuration>

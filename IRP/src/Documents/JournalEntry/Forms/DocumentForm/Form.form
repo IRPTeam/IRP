@@ -954,73 +954,125 @@
     <items xsi:type="form:FormGroup">
      <name>RegisterRecordsGroupPeriod</name>
      <id>142</id>
-     <items xsi:type="form:FormField">
-      <name>RegisterRecordsPeriod</name>
-      <id>85</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-       <segments>Object.RegisterRecords.Basic.Period</segments>
-      </dataPath>
-      <extendedTooltip>
-       <name>RegisterRecordsPeriodExtendedTooltip</name>
-       <id>87</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <type>Label</type>
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-       </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-       <name>RegisterRecordsPeriodContextMenu</name>
-       <id>86</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <wrap>true</wrap>
-       <chooseType>true</chooseType>
-       <typeDomainEnabled>true</typeDomainEnabled>
-       <textEdit>true</textEdit>
-      </extInfo>
-     </items>
      <items xsi:type="form:FormGroup">
       <name>GroupActive</name>
       <id>144</id>
-      <items xsi:type="form:FormField">
-       <name>RegisterRecordsLineNumber</name>
-       <id>76</id>
+      <items xsi:type="form:FormGroup">
+       <name>RegisterRecordsGroupLineNumber</name>
+       <id>287</id>
+       <items xsi:type="form:FormField">
+        <name>RegisterRecordsLineNumber</name>
+        <id>76</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+         <segments>Object.RegisterRecords.Basic.LineNumber</segments>
+        </dataPath>
+        <extendedTooltip>
+         <name>RegisterRecordsLineNumberExtendedTooltip</name>
+         <id>78</id>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <type>Label</type>
+         <autoMaxWidth>true</autoMaxWidth>
+         <autoMaxHeight>true</autoMaxHeight>
+         <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+         </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+         <name>RegisterRecordsLineNumberContextMenu</name>
+         <id>77</id>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <autoFill>true</autoFill>
+        </contextMenu>
+        <type>InputField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:InputFieldExtInfo">
+         <autoMaxWidth>true</autoMaxWidth>
+         <autoMaxHeight>true</autoMaxHeight>
+         <wrap>true</wrap>
+         <chooseType>true</chooseType>
+         <typeDomainEnabled>true</typeDomainEnabled>
+         <textEdit>true</textEdit>
+        </extInfo>
+       </items>
+       <items xsi:type="form:FormField">
+        <name>RegisterRecordsActive</name>
+        <id>82</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+         <segments>Object.RegisterRecords.Basic.Active</segments>
+        </dataPath>
+        <extendedTooltip>
+         <name>RegisterRecordsActiveExtendedTooltip</name>
+         <id>84</id>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <type>Label</type>
+         <autoMaxWidth>true</autoMaxWidth>
+         <autoMaxHeight>true</autoMaxHeight>
+         <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+         </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+         <name>RegisterRecordsActiveContextMenu</name>
+         <id>83</id>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <autoFill>true</autoFill>
+        </contextMenu>
+        <type>CheckBoxField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+       </items>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
         <common>true</common>
        </userVisible>
-       <dataPath xsi:type="form:DataPath">
-        <segments>Object.RegisterRecords.Basic.LineNumber</segments>
-       </dataPath>
+       <title>
+        <key>tr</key>
+        <value>Register records group line number</value>
+       </title>
+       <title>
+        <key>ru</key>
+        <value>Register records group line number</value>
+       </title>
+       <title>
+        <key>en</key>
+        <value>Register records group line number</value>
+       </title>
        <extendedTooltip>
-        <name>RegisterRecordsLineNumberExtendedTooltip</name>
-        <id>78</id>
+        <name>RegisterRecordsGroupLineNumberExtendedTooltip</name>
+        <id>288</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -1033,72 +1085,11 @@
          <horizontalAlign>Left</horizontalAlign>
         </extInfo>
        </extendedTooltip>
-       <contextMenu>
-        <name>RegisterRecordsLineNumberContextMenu</name>
-        <id>77</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-       </contextMenu>
-       <type>InputField</type>
-       <editMode>Enter</editMode>
-       <showInHeader>true</showInHeader>
-       <headerHorizontalAlign>Left</headerHorizontalAlign>
-       <showInFooter>true</showInFooter>
-       <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
+       <type>ColumnGroup</type>
+       <extInfo xsi:type="form:ColumnGroupExtInfo">
+        <group>Vertical</group>
+        <showTitle>true</showTitle>
        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
-       <name>RegisterRecordsActive</name>
-       <id>82</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <dataPath xsi:type="form:DataPath">
-        <segments>Object.RegisterRecords.Basic.Active</segments>
-       </dataPath>
-       <extendedTooltip>
-        <name>RegisterRecordsActiveExtendedTooltip</name>
-        <id>84</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-         <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-       </extendedTooltip>
-       <contextMenu>
-        <name>RegisterRecordsActiveContextMenu</name>
-        <id>83</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-       </contextMenu>
-       <type>CheckBoxField</type>
-       <editMode>Enter</editMode>
-       <showInHeader>true</showInHeader>
-       <headerHorizontalAlign>Left</headerHorizontalAlign>
-       <showInFooter>true</showInFooter>
-       <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
       </items>
       <items xsi:type="form:FormGroup">
        <name>GroupIsFixed</name>
@@ -1333,6 +1324,10 @@
      <dataPath xsi:type="form:DataPath">
       <segments>Object.RegisterRecords.Basic.AccountDr</segments>
      </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>RegisterRecordsAccountDrOnChange</name>
+     </handlers>
      <extendedTooltip>
       <name>RegisterRecordsAccountDrExtendedTooltip</name>
       <id>90</id>
@@ -1822,6 +1817,10 @@
      <dataPath xsi:type="form:DataPath">
       <segments>Object.RegisterRecords.Basic.AccountCr</segments>
      </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>RegisterRecordsAccountCrOnChange</name>
+     </handlers>
      <extendedTooltip>
       <name>RegisterRecordsAccountCrExtendedTooltip</name>
       <id>93</id>
@@ -4395,6 +4394,61 @@
      <numberQualifiers>
       <precision>10</precision>
      </numberQualifiers>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+   </columns>
+  </additionalColumns>
+  <additionalColumns>
+   <tablePath xsi:type="form:DataPath">
+    <segments>Object.RegisterRecords.Basic</segments>
+   </tablePath>
+   <columns>
+    <name>DrIsCurrency</name>
+    <title>
+     <key>tr</key>
+     <value>Dr is currency</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Dr is currency</value>
+    </title>
+    <title>
+     <key>en</key>
+     <value>Dr is currency</value>
+    </title>
+    <id>16</id>
+    <valueType>
+     <types>Boolean</types>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+   </columns>
+   <columns>
+    <name>CrIsCurrency</name>
+    <title>
+     <key>tr</key>
+     <value>Cr is currency</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Cr is currency</value>
+    </title>
+    <title>
+     <key>en</key>
+     <value>Cr is currency</value>
+    </title>
+    <id>17</id>
+    <valueType>
+     <types>Boolean</types>
     </valueType>
     <view>
      <common>true</common>

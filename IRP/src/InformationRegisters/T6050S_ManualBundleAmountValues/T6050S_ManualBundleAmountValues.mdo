@@ -303,6 +303,48 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
+ <resources uuid="c6bcb335-301e-4f3a-bbc2-50008f62ad47">
+  <name>PreliminaryAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Preliminary amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Preliminary amount</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Preliminary amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="03680e12-7a1f-4f19-a3ab-5a2451a260c0">
+  <name>PreliminaryTaxAmount</name>
+  <synonym>
+   <key>tr</key>
+   <value>Preliminary tax amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Preliminary tax amount</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Preliminary tax amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
  <dimensions uuid="4c1a7f53-6465-4ad8-95f6-9e4872b1cfdf">
   <name>Company</name>
   <synonym>

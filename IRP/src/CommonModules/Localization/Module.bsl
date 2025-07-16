@@ -2396,6 +2396,18 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_182", NStr("en='Account [%1] [%2]. Lacking: %3 %2.';
 		|ru='Касса/банк [%1] [%2]. Не хватает: %3 %2.';
 		|tr='Account [%1] [%2]. Lacking: %3 %2.'", Lang));
+	Strings.Insert("Error_183", NStr("en='By document [%1]. Lacking: %3 %2.';
+		|ru='By document [%1]. Lacking: %3 %2.';
+		|tr='By document [%1]. Lacking: %3 %2.'", Lang));
+	Strings.Insert("Error_184", NStr("en='Currency is a required field.';
+		|ru='Currency is a required field.';
+		|tr='Currency is a required field.'", Lang));
+	Strings.Insert("Error_185", NStr("en='Wrong linked row [%1]: Document date [%2] less than Basis date [%3]';
+		|ru='Wrong linked row [%1]: Document date [%2] less than Basis date [%3]';
+		|tr='Wrong linked row [%1]: Document date [%2] less than Basis date [%3]'", Lang));
+	Strings.Insert("Error_186", NStr("en='Document date [%1] greater than date [%2] in [%3]';
+		|ru='Document date [%1] greater than date [%2] in [%3]';
+		|tr='Document date [%1] greater than date [%2] in [%3]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -3962,10 +3974,10 @@ Strings.Insert("WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsT
 		|ru='WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)';
 		|tr='SerbestMeslekMakbuzu DR (R1040B_VergiÇıkan) CR (R1021B_TedarikçiKayıtları)'", Lang));
 
-Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R3040B_WithholdingTax",
-	NStr("en='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R3040B_WithholdingTax)';
-		|ru='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R3040B_WithholdingTax)';
-		|tr='SerbestMeslekMakbuzu DR (R5022T_Giderler) CR (R3040B_Stopaj)'", Lang));
+Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions",
+	NStr("en='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)';
+		|ru='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)';
+		|tr='WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'", Lang));
 
 Strings.Insert("FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues",
 	NStr("en='FixedAssetRevaluation DR (R8510B BookValueOfFixedAsset) CR (R5021T Revenues)';
@@ -3976,7 +3988,6 @@ Strings.Insert("FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFi
 	NStr("en='FixedAssetRevaluation DR (R5022T Expenses) CR (R8510B BookValueOfFixedAsset)';
 		|ru='Переоценка основных средств Дт (R5022T Expenses) Кт (R8510B BookValueOfFixedAsset)';
 		|tr='Sabit Varlık Yeniden Değerlemesi Borç (R5022T Giderleri) Alacak (R8510B Sabit Varlığın Defter Değeri)'", Lang));
-
 	
 Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External accounting operation exchange report';
 	|ru='Отчет по обменам внешних бухгалтерских операци';
@@ -4344,6 +4355,13 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 		|ru='Обновить регистр сведений Системные реквизиты используя все старые документы';
 		|tr='Tüm eski belgeleri kullanarak bilgi kayıt sistemi niteliklerini güncelle'", Lang));
 	
+	Strings.Insert("Update_005", NStr("en='Database Migration #IRP-680';
+		|ru='Database Migration #IRP-680';
+		|tr='Database Migration #IRP-680'", Lang));
+	Strings.Insert("UpdateDesc_005", NStr("en='Updating Document Payroll';
+		|ru='Updating Document Payroll';
+		|tr='Updating Document Payroll'", Lang));
+	
 #EndRegion
 
 #Region ErrorMessages
@@ -4540,6 +4558,27 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 	Strings.Insert("Error_UnsupportedExternalLinkSC3", NStr("en='Not supported External link for [SC] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [SC] в [%1]';
 		|tr='Not supported External link for [SC] to [%1]'", Lang));
+#EndRegion
+
+#Region Tasks
+    Strings.Insert("Task_Result_Execution", NStr("en='Done';
+		|ru='Завершено';
+		|tr='Tamamlandı'", Lang));
+	Strings.Insert("Task_Result_Execution_Not", NStr("en='Not done';
+		|ru='Not done';
+		|tr='Not done'", Lang));
+    Strings.Insert("Task_Result_Verification", NStr("en='Success';
+		|ru='Успешно';
+		|tr='Başarılı'", Lang));
+	Strings.Insert("Task_Result_Verification_Not", NStr("en='Failure';
+		|ru='Failure';
+		|tr='Başarısız'", Lang));
+    Strings.Insert("Task_Result_Confirmation", NStr("en='Confirmed';
+    	|ru='Подтверждено';
+    	|tr='Onaylandı'", Lang));
+	Strings.Insert("Task_Result_Confirmation_Not", NStr("en='Rejected';
+		|ru='Отклонен';
+		|tr='Reddedildi'", Lang));
 #EndRegion
 
 	Return Strings;

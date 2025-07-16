@@ -260,6 +260,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ItemList.Store AS Store,
 	|	ItemList.Ref.Branch AS Branch,
 	|	ItemList.Ref.Company AS Company,
+	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	SUM(ItemList.QuantityInBaseUnit) AS Quantity,
 	|	ItemList.Ref.Date AS Period,
 	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
@@ -282,6 +283,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|GROUP BY
 	|	ItemList.ItemKey,
 	|	ItemList.Store,
+	|	ItemList.ProfitLossCenter,
 	|	ItemList.Ref.Branch,
 	|	ItemList.Ref.Company,
 	|	ItemList.Ref.Date,
@@ -298,6 +300,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	tmpItemList.Store AS Store,
 	|	tmpItemList.Branch AS Branch,
 	|	tmpItemList.Company AS Company,
+	|	tmpItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	tmpItemList.Quantity AS TotalQuantity,
 	|	tmpItemList.Period AS Period,
 	|	tmpItemList.Direction AS Direction,
@@ -376,6 +379,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|		else 0
 	|	end as InvoiceTaxAmount,
 	|	BatchKeysInfo.Amount AS InvoiceAmount,
+	|	""00000000-0000-0000-0000-000000000000"" AS PreliminaryID,
 	|	BatchKeysInfo.*
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -405,7 +409,27 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	QueryResults = Query.ExecuteBatch();
 	BatchKeysInfo = QueryResults[6].Unload();
 	BatchesInfo   = QueryResults[7].Unload();
-
+	
+	For Each BatchKeyRow In BatchKeysInfo Do
+		ArrayOfRows = Ref.RowIDInfo.FindRows(New Structure("RowID", BatchKeyRow.RowID));
+		For Each ItemOfArray In ArrayOfRows Do
+			If Not ValueIsFilled(ItemOfArray.Basis) 
+				Or TypeOf(ItemOfArray.Basis) <> Type("DocumentRef.GoodsReceipt") Then
+				Continue;
+			EndIf;
+			ArrayOfRows2 = ItemOfArray.Basis.ItemList.FindRows(New Structure("Key", ItemOfArray.BasisKey));
+			For Each ItemOfArray2 In ArrayOfRows2 Do
+				If ItemOfArray2.IsPreliminary Then
+					BatchKeyRow.PreliminaryID = BatchKeyRow.RowID;					
+				EndIf;
+			EndDo;
+		EndDo;
+		
+		If BatchKeyRow.PreliminaryID = "00000000-0000-0000-0000-000000000000" Then
+			BatchKeyRow.PreliminaryID = "";
+		EndIf;		
+	EndDo;
+			
 	CurrencyTable = Ref.Currencies.UnloadColumns();
 	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
 
@@ -442,7 +466,21 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
-	BatchKeysInfoSettings.Dimensions = "Period, RowID, Direction, Company, Branch, Store, ItemKey, Currency, CurrencyMovementType, SourceOfOrigin, SerialLotNumber";
+	BatchKeysInfoSettings.Dimensions = 
+		"Period, 
+		|RowID, 
+		|Direction, 
+		|Company, 
+		|Branch,
+		|ProfitLossCenter, 
+		|Store, 
+		|ItemKey, 
+		|Currency, 
+		|CurrencyMovementType, 
+		|SourceOfOrigin, 
+		|SerialLotNumber, 
+		|PreliminaryID";
+
 	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
@@ -492,28 +530,56 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
-
+	
+	Current_R4050B_StockInventory = PostingServer.GetQueryTableByName("R4050B_StockInventory", Parameters);
+	Exists_R4050B_StockInventory  = PostingServer.GetQueryTableByName("Exists_R4050B_StockInventory", Parameters);
+	
+	Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory);
+	Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory);
+	
 	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
-		"Document.PurchaseInvoice.ItemList");
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.PurchaseInvoice.ItemList");
 
-	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4035B_IncomingStocks", Parameters), AccumulationRecordType.Expense, Unposting, AddInfo) Then
-		Cancel = True;
-	EndIf;
-
-	If Not Cancel And Not AccReg.R4036B_IncomingStocksRequested.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters),
-		PostingServer.GetQueryTableByName("Exists_R4036B_IncomingStocksRequested", Parameters),
+	Current_R4035B_IncomingStocks = PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters);
+	Exists_R4035B_IncomingStocks  = PostingServer.GetQueryTableByName("Exists_R4035B_IncomingStocks", Parameters);
+	
+	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, 
+		LineNumberAndItemKeyFromItemList,
+		Current_R4035B_IncomingStocks, 
+		Exists_R4035B_IncomingStocks, 
 		AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 
-	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4014B_SerialLotNumber", Parameters), AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+	Current_R4036B_IncomingStocksRequested = PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters);
+	Exists_R4036B_IncomingStocksRequested  = PostingServer.GetQueryTableByName("Exists_R4036B_IncomingStocksRequested", Parameters);
+	
+	If Not Cancel And Not AccReg.R4036B_IncomingStocksRequested.CheckBalance(Ref, 
+		LineNumberAndItemKeyFromItemList,
+		Current_R4036B_IncomingStocksRequested,
+		Exists_R4036B_IncomingStocksRequested,
+		AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
+	
+	Current_R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters);
+	Exists_R4014B_SerialLotNumber  = PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters);
+		
+	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, 
+		LineNumberAndItemKeyFromItemList,
+		Current_R4014B_SerialLotNumber, 
+		Exists_R4014B_SerialLotNumber, 
+		AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
+	
+	Current_R6070T_OtherPeriodsExpenses = PostingServer.GetQueryTableByName("R6070T_OtherPeriodsExpenses", Parameters);
+	Exists_R6070T_OtherPeriodsExpenses  = PostingServer.GetQueryTableByName("Exists_R6070T_OtherPeriodsExpenses", Parameters);
+	
+	If Not Cancel And Not AccReg.R6070T_OtherPeriodsExpenses.CheckBalance(Ref, 
+			Current_R6070T_OtherPeriodsExpenses, 
+			Exists_R6070T_OtherPeriodsExpenses, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
@@ -561,6 +627,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(Exists_R4036B_IncomingStocksRequested());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
+	QueryArray.Add(PostingServer.Exists_R6070T_OtherPeriodsExpenses());
 	Return QueryArray;
 EndFunction
 
@@ -590,6 +657,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R6070T_OtherPeriodsExpenses());
 	QueryArray.Add(R8015T_ConsignorPrices());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
@@ -733,7 +801,12 @@ Function ItemList()
 	|	ItemList.SimpleBatch AS SimpleBatch,
 	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
 	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Consignor) AS IsConsignor,
-	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
+	|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
+	|
+	|	undefined as TaxPartner,
+	|	undefined as TaxLegalName,
+	|	undefined as TaxAgreement,
+	|	0 as WithholdingTaxAmount
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS ItemList
@@ -1488,25 +1561,59 @@ Function R4033B_GoodsReceiptSchedule()
 EndFunction
 
 Function R4050B_StockInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO R4050B_StockInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND ItemList.IsPurchase
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS Quantity,
+		|	0 AS PreliminaryQuantity,
+		|	Undefined as CalculationMovementCost
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsPurchase
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	CASE
+		|		WHEN T4050_StockInventoryInfo.Direction = VALUE(enum.BatchDirection.Expense)
+		|			THEN VALUE(AccumulationRecordType.Expense)
+		|		ELSE VALUE(AccumulationRecordType.Receipt)
+		|	END,
+		|	T4050_StockInventoryInfo.Period,
+		|	T4050_StockInventoryInfo.Company,
+		|	T4050_StockInventoryInfo.Store,
+		|	T4050_StockInventoryInfo.ItemKey,
+		|	SUM(T4050_StockInventoryInfo.Quantity),
+		|	SUM(T4050_StockInventoryInfo.PreliminaryQuantity),
+		|	T4050_StockInventoryInfo.Recorder
+		|FROM
+		|	InformationRegister.T4050_StockInventoryInfo AS T4050_StockInventoryInfo
+		|WHERE
+		|	T4050_StockInventoryInfo.Document = &Ref
+		|GROUP BY
+		|	CASE
+		|		WHEN T4050_StockInventoryInfo.Direction = VALUE(enum.BatchDirection.Expense)
+		|			THEN VALUE(AccumulationRecordType.Expense)
+		|		ELSE VALUE(AccumulationRecordType.Receipt)
+		|	END,
+		|	T4050_StockInventoryInfo.Period,
+		|	T4050_StockInventoryInfo.Company,
+		|	T4050_StockInventoryInfo.Store,
+		|	T4050_StockInventoryInfo.ItemKey,
+		|	T4050_StockInventoryInfo.Recorder";
 EndFunction
 
 Function R5010B_ReconciliationStatement()
@@ -1585,17 +1692,70 @@ Function R1022B_VendorsPaymentPlanning()
 EndFunction
 
 Function R5022T_Expenses()
-	Return "SELECT
-		   |	*,
-		   |	ItemList.NetAmount AS Amount,
-		   |	ItemList.Amount AS AmountWithTaxes
-		   |INTO R5022T_Expenses
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsService
-		   |	AND ItemList.OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.EmptyRef)
-		   |	AND ItemList.IsPurchase";
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.ProfitLossCenter,
+		|	ItemList.ExpenseType,
+		|	ItemList.ItemKey,
+		|	ItemList.Currency,
+		|	ItemList.NetAmount AS Amount,
+		|	ItemList.Amount AS AmountWithTaxes,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	ItemList.Project AS Project,
+		|	undefined as CalculationMovementCost
+		|INTO R5022T_Expenses
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsService
+		|	AND ItemList.OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.EmptyRef)
+		|	AND ItemList.IsPurchase
+		|union all
+		|select
+		|	T6095S_WriteOffBatchesInfo.Period,
+		|	T6095S_WriteOffBatchesInfo.Company,
+		|	T6095S_WriteOffBatchesInfo.Branch,
+		|	T6095S_WriteOffBatchesInfo.ProfitLossCenter,
+		|	T6095S_WriteOffBatchesInfo.CorrectionExpenseRevenueType,
+		|	T6095S_WriteOffBatchesInfo.ItemKey,
+		|	T6095S_WriteOffBatchesInfo.Currency,
+		|	T6095S_WriteOffBatchesInfo.InvoiceAmount,
+		|	T6095S_WriteOffBatchesInfo.InvoiceAmount + T6095S_WriteOffBatchesInfo.InvoiceTaxAmount,
+		|	undefined,
+		|	undefined,
+		|	T6095S_WriteOffBatchesInfo.Recorder as CalculationMovementCost
+		|from 
+		|	InformationRegister.T6095S_WriteOffBatchesInfo as T6095S_WriteOffBatchesInfo
+		|where
+		|	T6095S_WriteOffBatchesInfo.Document = &Ref
+		|	and T6095S_WriteOffBatchesInfo.AmountCorrectionType = value(enum.AmountCorrectionTypes.Expense)";
+EndFunction
+
+Function R5021T_Revenues()
+	Return
+		"select
+		|	T6095S_WriteOffBatchesInfo.Period,
+		|	T6095S_WriteOffBatchesInfo.Company,
+		|	T6095S_WriteOffBatchesInfo.Branch,
+		|	T6095S_WriteOffBatchesInfo.ProfitLossCenter,
+		|	T6095S_WriteOffBatchesInfo.CorrectionExpenseRevenueType as ExpenseType,
+		|	T6095S_WriteOffBatchesInfo.ItemKey,
+		|	T6095S_WriteOffBatchesInfo.Currency,
+		|	undefined as RevenueType,
+		|	undefined as AdditionalAnalytic,
+		|	undefined as Project,
+		|	-T6095S_WriteOffBatchesInfo.InvoiceAmount as Amount,
+		|	-(T6095S_WriteOffBatchesInfo.InvoiceAmount + T6095S_WriteOffBatchesInfo.InvoiceTaxAmount) as AmountWithTaxes,
+		|	T6095S_WriteOffBatchesInfo.Recorder as CalculationMovementCost
+		|into R5021T_Revenues
+		|from 
+		|	InformationRegister.T6095S_WriteOffBatchesInfo as T6095S_WriteOffBatchesInfo
+		|where
+		|	T6095S_WriteOffBatchesInfo.Document = &Ref
+		|	and T6095S_WriteOffBatchesInfo.AmountCorrectionType = value(enum.AmountCorrectionTypes.Revenue)";
 EndFunction
 
 Function T3010S_RowIDInfo()

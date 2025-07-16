@@ -203,8 +203,7 @@ Function CalculateRows()
 		
 		ResultRow.Insert("TotalAmount",   Row.Payment);
 		ResultRow.Insert("BasisDocument", Row.Document);
-		ResultRow.Insert("Payee", Row.LegalName);
-		ResultRow.Insert("Payer", Row.LegalName);
+		ResultRow.Insert("LegalName", Row.LegalName);
 		
 		Result.Add(ResultRow);
 		

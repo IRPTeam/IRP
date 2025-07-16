@@ -3214,6 +3214,293 @@
      <textEdit>true</textEdit>
     </extInfo>
    </items>
+   <items xsi:type="form:FormGroup">
+    <name>GroupTaxAuthority</name>
+    <id>1101</id>
+    <items xsi:type="form:FormField">
+     <name>TaxPartner</name>
+     <id>1112</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.TaxPartner</segments>
+     </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>TaxPartnerOnChange</name>
+     </handlers>
+     <extendedTooltip>
+      <name>TaxPartnerExtendedTooltip</name>
+      <id>1114</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>TaxPartnerContextMenu</name>
+      <id>1113</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <handlers>
+       <event>EditTextChange</event>
+       <name>TaxPartnerEditTextChange</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>TaxPartnerStartChoice</name>
+      </handlers>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>TaxLegalName</name>
+     <id>1106</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.TaxLegalName</segments>
+     </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>TaxLegalNameOnChange</name>
+     </handlers>
+     <extendedTooltip>
+      <name>TaxLegalNameExtendedTooltip</name>
+      <id>1108</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>TaxLegalNameContextMenu</name>
+      <id>1107</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <handlers>
+       <event>EditTextChange</event>
+       <name>TaxLegalNameEditTextChange</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>TaxLegalNameStartChoice</name>
+      </handlers>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>TaxAgreement</name>
+     <id>1103</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.TaxAgreement</segments>
+     </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>TaxAgreementOnChange</name>
+     </handlers>
+     <extendedTooltip>
+      <name>TaxAgreementExtendedTooltip</name>
+      <id>1105</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>TaxAgreementContextMenu</name>
+      <id>1104</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <handlers>
+       <event>EditTextChange</event>
+       <name>TaxAgreementEditTextChange</name>
+      </handlers>
+      <handlers>
+       <event>StartChoice</event>
+       <name>TaxAgreementStartChoice</name>
+      </handlers>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>TaxLegalNameContract</name>
+     <id>1109</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.TaxLegalNameContract</segments>
+     </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>TaxLegalNameContractOnChange</name>
+     </handlers>
+     <extendedTooltip>
+      <name>TaxLegalNameContractExtendedTooltip</name>
+      <id>1111</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>TaxLegalNameContractContextMenu</name>
+      <id>1110</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <title>
+     <key>tr</key>
+     <value>Vergi dairesi</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Налоговая инспекция</value>
+    </title>
+    <title>
+     <key>en</key>
+     <value>Tax authority</value>
+    </title>
+    <extendedTooltip>
+     <name>GroupTaxAuthorityExtendedTooltip</name>
+     <id>1102</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <type>UsualGroup</type>
+    <extInfo xsi:type="form:UsualGroupExtInfo">
+     <group>Vertical</group>
+     <behavior>Auto</behavior>
+     <representation>WeakSeparation</representation>
+     <showLeftMargin>true</showLeftMargin>
+     <united>true</united>
+     <showTitle>true</showTitle>
+     <throughAlign>Auto</throughAlign>
+     <currentRowUse>Auto</currentRowUse>
+    </extInfo>
+   </items>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>

@@ -231,8 +231,12 @@ Scenario: _2067006 check locking tab in the ITO with linked documents (one sessi
 			And I go to line in "ItemList" table
 				| 'Item'    | 'Item key'     |
 				| 'Bag'     | 'PZU'          |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Internal supply request" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Internal supply request" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Purchase order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -247,8 +251,12 @@ Scenario: _2067006 check locking tab in the ITO with linked documents (one sessi
 			And I go to line in "ItemList" table
 				| 'Item'    | 'Item key'     |
 				| 'Bag'     | 'PZU'          |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Purchase order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Purchase order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 			And I click "Post and close" button
 			Then user message window does not contain messages			
 		And I close all client application windows
@@ -327,8 +335,12 @@ Scenario: _2067007 check locking tab in the IT with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'    | 'Item key'     |
 				| 'Bag'     | 'PZU'          |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Inventory transfer order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Inventory transfer order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 			And I click "Post and close" button
 			Then user message window does not contain messages			
 		And I close all client application windows

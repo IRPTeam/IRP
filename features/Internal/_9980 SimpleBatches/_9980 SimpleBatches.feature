@@ -317,7 +317,7 @@ Scenario: _998004 receipt and write-off at the same time
 		And "List" table became equal
 			| 'Period'      | 'Recorder' | 'Line number' | 'Simple batch' | 'Quantity' | 'Amount' |
 			| '$$DatePI2$$' | '$$PI2$$'  | '1'           | 'P002'         | '3,000'    | '540,00' |
-			| '$$DateSI2$$' | '$$SI2$$'  | '1'           | 'P002'         | '2,000'    | '360,00' |
+			| '$$DateSI3$$' | '$$SI3$$'  | '1'           | 'P002'         | '2,000'    | '360,00' |
 		And I close all client application windows
 		Given I open hyperlink "e1cib/app/DataProcessor.SimpleBatchSequence"
 		And "List" table contains lines

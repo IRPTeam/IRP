@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="862928ec-f9b4-41a8-8f2f-87c860bf3a26">
+ <name>BusinessProcessesServer</name>
+ <synonym>
+  <key>tr</key>
+  <value>Business processes server</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Business processes server</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Business processes server</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

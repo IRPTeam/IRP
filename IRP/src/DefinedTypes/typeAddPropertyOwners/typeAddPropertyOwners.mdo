@@ -69,6 +69,7 @@
   <types>DocumentRef.PurchaseReturnOrder</types>
   <types>CatalogRef.PriceTypes</types>
   <types>DocumentRef.ExpenseAccruals</types>
+  <types>CatalogRef.ExecutionTemplates</types>
   <types>CatalogRef.DepreciationSchedules</types>
   <types>DocumentRef.Labeling</types>
   <types>DocumentRef.ConsolidatedRetailSales</types>
@@ -105,6 +106,7 @@
   <types>CatalogRef.LedgerTypeVariants</types>
   <types>DocumentRef.SalesReturn</types>
   <types>DocumentRef.CashRevenue</types>
+  <types>CatalogRef.ObjectLocations</types>
   <types>CatalogRef.FileStoragesInfo</types>
   <types>DocumentRef.CashStatement</types>
   <types>DocumentRef.PhysicalCountByLocation</types>
@@ -117,6 +119,7 @@
   <types>DocumentRef.StockAdjustmentAsWriteOff</types>
   <types>CatalogRef.PartnerItems</types>
   <types>DocumentRef.EmployeeHiring</types>
+  <types>DocumentRef.WithholdingTaxInvoice</types>
   <types>DocumentRef.Bundling</types>
   <types>CatalogRef.AccrualAndDeductionTypes</types>
   <types>DocumentRef.RetailSalesReceipt</types>
@@ -131,12 +134,14 @@
   <types>CatalogRef.BankTerms</types>
   <types>CatalogRef.SerialLotNumbers</types>
   <types>CatalogRef.Agreements</types>
+  <types>DocumentRef.ELedgerRegistry</types>
   <types>CatalogRef.Projects</types>
   <types>DocumentRef.SalesReportToConsignor</types>
   <types>CatalogRef.Taxes</types>
   <types>DocumentRef.Production</types>
   <types>DocumentRef.ItemStockAdjustment</types>
   <types>CatalogRef.RetailCustomers</types>
+  <types>DocumentRef.ShipmentPlaningOrder</types>
   <types>CatalogRef.Countries</types>
   <types>DocumentRef.DecommissioningOfFixedAsset</types>
   <types>CatalogRef.Addresses</types>
@@ -151,6 +156,7 @@
   <types>CatalogRef.PriceKeys</types>
   <types>DocumentRef.JournalEntry</types>
   <types>CatalogRef.Specifications</types>
+  <types>DocumentRef.FixedAssetRevaluation</types>
   <types>DocumentRef.ProductionPlanningCorrection</types>
   <types>CatalogRef.ExternalDataProc</types>
   <types>CatalogRef.Stores</types>
@@ -169,15 +175,10 @@
   <types>DocumentRef.SalesInvoice</types>
   <types>CatalogRef.ChequeBonds</types>
   <types>DocumentRef.ProductionPlanningClosing</types>
+  <types>DocumentRef.StockCorrection</types>
   <types>CatalogRef.BusinessUnits</types>
   <types>DocumentRef.RetailGoodsReceipt</types>
   <types>DocumentRef.CashExpense</types>
   <types>CatalogRef.FixedAssetsLedgerTypes</types>
-  <types>DocumentRef.ELedgerRegistry</types>
-  <types>DocumentRef.StockCorrection</types>
-  <types>CatalogRef.ObjectLocations</types>
-  <types>DocumentRef.ShipmentPlaningOrder</types>
-  <types>DocumentRef.WithholdingTaxInvoice</types>
-  <types>DocumentRef.FixedAssetRevaluation</types>
  </type>
 </mdclass:DefinedType>

@@ -4621,6 +4621,7 @@ Scenario: _029236 create PO - PI - SI (procurement method for Service)
 		And I move to the next attribute
 		Then "Update item list info" window is opened
 		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I click "OK" button		
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice029236$$" variable
 		And I delete "$$SalesInvoice029236$$" variable

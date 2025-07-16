@@ -192,6 +192,7 @@ EndProcedure
 Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, TransactionType, Parameters = Undefined) Export
 	CompanyIsSet = True;
 	DateIsSet    = True;
+	LegalNameIsSet = True;
 	If Parameters <> Undefined Then
 		If Parameters.Property("Company") Then
 			Company = Parameters.Company;
@@ -218,8 +219,14 @@ Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceD
 			CompanyIsSet = False;
 		EndIf;
 		
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, "LegalName") Then
+			LegalName = Object.LegalName;
+		Else
+			LegalName = Undefined;
+			LegalNameIsSet = False;
+		EndIf;
+		
 		Partner   = Object.Partner;
-		LegalName = Object.LegalName;
 	EndIf;
 
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Date") Then
@@ -249,7 +256,9 @@ Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceD
 	
 	OpenSettings.FillingData = New Structure();
 	OpenSettings.FillingData.Insert("Partner"   , Partner);
-	OpenSettings.FillingData.Insert("LegalName" , LegalName);
+	If LegalNameIsSet Then
+		OpenSettings.FillingData.Insert("LegalName" , LegalName);
+	EndIf;
 	If CompanyIsSet Then
 		OpenSettings.FillingData.Insert("Company"   , Company);
 	EndIf;
@@ -289,7 +298,11 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	EndIf;
 
 	SetCurrentRow(Object, Form, Item, OpenSettings.FormParameters, "Agreement");
-
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "Company") Then
+		OpenSettings.FormParameters.Insert("CompanyIsReadOnly", Form.Items.Company.ReadOnly);
+	EndIf;
+	
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 

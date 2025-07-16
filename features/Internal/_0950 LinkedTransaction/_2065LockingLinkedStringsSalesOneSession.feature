@@ -485,6 +485,9 @@ Scenario: _2065006 check locking tab in the SI with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales order" attribute in "ItemList" table
 			And I close current window
 		And I close all client application windows
@@ -575,8 +578,12 @@ Scenario: _2065007 check locking tab in the SC with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Shipment basis" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Shipment basis" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button	
 		* Sales order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -591,8 +598,12 @@ Scenario: _2065007 check locking tab in the SC with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Sales invoice
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -607,8 +618,12 @@ Scenario: _2065007 check locking tab in the SC with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales invoice" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales invoice" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		And I close all client application windows
 
 
@@ -1547,8 +1562,12 @@ Scenario: _2065032 check locking tab in the SR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales invoice" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales invoice" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Sales return order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -1563,8 +1582,12 @@ Scenario: _2065032 check locking tab in the SR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales return order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales return order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		And I close all client application windows
 	
 

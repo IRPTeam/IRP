@@ -1357,7 +1357,7 @@
         </extInfo>
        </items>
        <items xsi:type="form:FormField">
-        <name>PaymentListPayerNoSplits</name>
+        <name>PaymentListLegalNameNoSplits</name>
         <id>518</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1365,14 +1365,14 @@
          <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-         <segments>PaymentListPayerNoSplits</segments>
+         <segments>PaymentListLegalNameNoSplits</segments>
         </dataPath>
         <handlers>
          <event>OnChange</event>
-         <name>PaymentListPayerNoSplitsOnChange</name>
+         <name>PaymentListLegalNameNoSplitsOnChange</name>
         </handlers>
         <extendedTooltip>
-         <name>PaymentListPayerNoSplitsExtendedTooltip</name>
+         <name>PaymentListLegalNameNoSplitsExtendedTooltip</name>
          <id>520</id>
          <visible>true</visible>
          <enabled>true</enabled>
@@ -1387,7 +1387,7 @@
          </extInfo>
         </extendedTooltip>
         <contextMenu>
-         <name>PaymentListPayerNoSplitsContextMenu</name>
+         <name>PaymentListLegalNameNoSplitsContextMenu</name>
          <id>519</id>
          <visible>true</visible>
          <enabled>true</enabled>
@@ -1404,11 +1404,11 @@
         <extInfo xsi:type="form:InputFieldExtInfo">
          <handlers>
           <event>EditTextChange</event>
-          <name>PaymentListPayerNoSplitsEditTextChange</name>
+          <name>PaymentListLegalNameNoSplitsEditTextChange</name>
          </handlers>
          <handlers>
           <event>StartChoice</event>
-          <name>PaymentListPayerNoSplitsStartChoice</name>
+          <name>PaymentListLegalNameNoSplitsStartChoice</name>
          </handlers>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -1541,7 +1541,7 @@
          <choiceParameterLinks>
           <name>Filter.LegalName</name>
           <datapath xsi:type="form:DataPath">
-           <segments>PaymentListPayerNoSplits</segments>
+           <segments>PaymentListLegalNameNoSplits</segments>
           </datapath>
          </choiceParameterLinks>
         </extInfo>
@@ -3460,7 +3460,7 @@
       </extInfo>
      </items>
      <items xsi:type="form:FormField">
-      <name>PaymentListPayer</name>
+      <name>PaymentListLegalName</name>
       <id>76</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -3468,14 +3468,14 @@
        <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-       <segments>Object.PaymentList.Payer</segments>
+       <segments>Object.PaymentList.LegalName</segments>
       </dataPath>
       <handlers>
        <event>OnChange</event>
-       <name>PaymentListPayerOnChange</name>
+       <name>PaymentListLegalNameOnChange</name>
       </handlers>
       <extendedTooltip>
-       <name>PaymentListPayerExtendedTooltip</name>
+       <name>PaymentListLegalNameExtendedTooltip</name>
        <id>78</id>
        <visible>true</visible>
        <enabled>true</enabled>
@@ -3490,7 +3490,7 @@
        </extInfo>
       </extendedTooltip>
       <contextMenu>
-       <name>PaymentListPayerContextMenu</name>
+       <name>PaymentListLegalNameContextMenu</name>
        <id>77</id>
        <visible>true</visible>
        <enabled>true</enabled>
@@ -3507,11 +3507,11 @@
       <extInfo xsi:type="form:InputFieldExtInfo">
        <handlers>
         <event>EditTextChange</event>
-        <name>PaymentListPayerEditTextChange</name>
+        <name>PaymentListLegalNameEditTextChange</name>
        </handlers>
        <handlers>
         <event>StartChoice</event>
-        <name>PaymentListPayerStartChoice</name>
+        <name>PaymentListLegalNameStartChoice</name>
        </handlers>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -5878,18 +5878,18 @@
   </additionalColumns>
  </attributes>
  <attributes>
-  <name>CurrentPayer</name>
+  <name>CurrentLegalName</name>
   <title>
    <key>tr</key>
-   <value>Ödeyen</value>
+   <value>Current Legal name</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Текущий плательщик</value>
+   <value>Current Legal name</value>
   </title>
   <title>
    <key>en</key>
-   <value>Current payer</value>
+   <value>Current Legal name</value>
   </title>
   <id>2</id>
   <valueType>
@@ -6184,10 +6184,10 @@
   <functionalOptions>FunctionalOption.UsePartnerTerms</functionalOptions>
  </attributes>
  <attributes>
-  <name>PaymentListPayerNoSplits</name>
+  <name>PaymentListLegalNameNoSplits</name>
   <title>
    <key>tr</key>
-   <value>Ödeyen</value>
+   <value>Fatura hesabı</value>
   </title>
   <title>
    <key>ru</key>
@@ -6195,7 +6195,7 @@
   </title>
   <title>
    <key>en</key>
-   <value>Payer</value>
+   <value>Legal name</value>
   </title>
   <id>18</id>
   <valueType>

@@ -626,10 +626,10 @@
    <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="9ba9b566-6640-456f-9802-62b25dcba5a7">
-   <name>Payee</name>
+   <name>LegalName</name>
    <synonym>
     <key>tr</key>
-    <value>Ödenen</value>
+    <value>Fatura hesabı</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -637,7 +637,7 @@
    </synonym>
    <synonym>
     <key>en</key>
-    <value>Payee</value>
+    <value>Legal name</value>
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>
@@ -822,7 +822,7 @@
    <maxValue xsi:type="core:UndefinedValue"/>
    <choiceParameterLinks>
     <name>Filter.LegalName</name>
-    <field>Document.BankPayment.TabularSection.PaymentList.Attribute.Payee</field>
+    <field>Document.BankPayment.TabularSection.PaymentList.Attribute.LegalName</field>
    </choiceParameterLinks>
    <choiceParameterLinks>
     <name>Filter.Company</name>

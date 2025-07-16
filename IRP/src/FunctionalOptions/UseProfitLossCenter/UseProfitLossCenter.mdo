@@ -80,4 +80,5 @@
  <content>Document.AdditionalRevenueAllocation.TabularSection.RevenueList.Attribute.ProfitLossCenter</content>
  <content>Document.EmployeeTransfer.Attribute.FromProfitLossCenter</content>
  <content>Catalog.BusinessUnits</content>
+ <content>InformationRegister.TaskExecutors.Dimension.ProfitLossCenter</content>
 </mdclass:FunctionalOption>

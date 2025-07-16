@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="485361bc-71da-4389-84e0-db2f5e40f773">
+ <producedTypes>
+  <objectType typeId="07c97618-7daa-4b9b-b39a-b3d97f56caa9" valueTypeId="0b32a1e3-9ebc-44f6-b313-b6b58beafa5d"/>
+  <managerType typeId="4e99689c-c8da-4e1c-aa69-7bc95f598a0d" valueTypeId="399f004c-ae0f-4620-9a8a-e320dd7d3027"/>
+ </producedTypes>
+ <name>R6070_OtherPeriodsExpenses</name>
+ <synonym>
+  <key>tr</key>
+  <value>R6070 Diğer dönemlere ait giderler</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R6070 Расходы других периодов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R6070 Other periods expenses</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R6070_OtherPeriodsExpenses.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="e8f587bc-3d1e-43d6-abcf-bf860f56454a">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

@@ -244,7 +244,7 @@ Scenario: _0230002 create and check filling Purchase order closing (PO partially
 			And I click "Ok" button
 			And I select current line in "ItemList" table
 			And I activate "Item" field in "ItemList" table
-			And I select "Boots" exact value from "Item" drop-down list in "ItemList" table
+			And I select "Boots" from "Item" drop-down list by string in "ItemList" table
 			Then user message window does not contain messages
 			And I finish line editing in "ItemList" table
 		* Close
@@ -274,7 +274,7 @@ Scenario: _0230002 create and check filling Purchase order closing (PO partially
 			And I click "Ok" button
 			And I select current line in "ItemList" table
 			And I activate "Item" field in "ItemList" table
-			And I select "Boots" exact value from "Item" drop-down list in "ItemList" table
+			And I select "Boots" from "Item" drop-down list by string in "ItemList" table
 			Then user message window does not contain messages
 			And I finish line editing in "ItemList" table
 		* Close GR

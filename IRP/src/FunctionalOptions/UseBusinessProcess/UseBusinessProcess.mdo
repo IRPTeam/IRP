@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="db0999a3-e902-4307-a6b1-fbaf652a05a0">
+ <name>UseBusinessProcess</name>
+ <synonym>
+  <key>tr</key>
+  <value>Use business process</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Use business process</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use business process</value>
+ </synonym>
+ <location>Constant.UseBusinessProcess</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Subsystem.Settings.Subsystem.BusinessProcesses</content>
+ <content>Task.ExecutorTasks</content>
+ <content>InformationRegister.TaskExecutors</content>
+ <content>BusinessProcess.ExecutionProcesses</content>
+ <content>Catalog.ExecutionTemplates</content>
+ <content>Enum.AutostartProcessTypes</content>
+ <content>Enum.TaskFailActions</content>
+ <content>Enum.TaskTypes</content>
+ <content>InformationRegister.ExecutionResults</content>
+ <content>Enum.TaskResults</content>
+ <content>InformationRegister.ExecutionProcessStatus</content>
+</mdclass:FunctionalOption>

@@ -1033,7 +1033,7 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
-     <name>PaymentListPayee</name>
+     <name>PaymentListLegalName</name>
      <id>38</id>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1041,14 +1041,14 @@
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.PaymentList.Payee</segments>
+      <segments>Object.PaymentList.LegalName</segments>
      </dataPath>
      <handlers>
       <event>OnChange</event>
-      <name>PaymentListPayeeOnChange</name>
+      <name>PaymentListLegalNameOnChange</name>
      </handlers>
      <extendedTooltip>
-      <name>PaymentListPayeeExtendedTooltip</name>
+      <name>PaymentListLegalNameExtendedTooltip</name>
       <id>40</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1063,7 +1063,7 @@
       </extInfo>
      </extendedTooltip>
      <contextMenu>
-      <name>PaymentListPayeeContextMenu</name>
+      <name>PaymentListLegalNameContextMenu</name>
       <id>39</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1080,11 +1080,11 @@
      <extInfo xsi:type="form:InputFieldExtInfo">
       <handlers>
        <event>EditTextChange</event>
-       <name>PaymentListPayeeEditTextChange</name>
+       <name>PaymentListLegalNameEditTextChange</name>
       </handlers>
       <handlers>
        <event>StartChoice</event>
-       <name>PaymentListPayeeStartChoice</name>
+       <name>PaymentListLegalNameStartChoice</name>
       </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>

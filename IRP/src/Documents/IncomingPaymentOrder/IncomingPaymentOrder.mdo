@@ -387,10 +387,10 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="eaeb01d8-364c-4d2a-8565-601f41aa29d8">
-   <name>Payer</name>
+   <name>LegalName</name>
    <synonym>
     <key>tr</key>
-    <value>Ödeyen</value>
+    <value>Fatura hesabı</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -398,7 +398,7 @@
    </synonym>
    <synonym>
     <key>en</key>
-    <value>Payer</value>
+    <value>Legal name</value>
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>

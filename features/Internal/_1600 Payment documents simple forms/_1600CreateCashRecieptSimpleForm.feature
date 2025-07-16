@@ -571,7 +571,7 @@ Scenario: _160001 create Cash receipt based on Sales invoice - Payment from cust
 			| 'PaymentListBasisDocumentNoSplits' | "Sales invoice 5 dated 10.05.2023 12:00:00"               | '' |
 			| 'PaymentListNetAmountNoSplits'     | "1 400"                                                   | '' |
 			| 'PaymentListPartnerNoSplits'       | "Customer 1 (3 partner terms)"                            | '' |
-			| 'PaymentListPayerNoSplits'         | "Client 1"                                                | '' |
+			| 'PaymentListLegalNameNoSplits'     | "Client 1"                                                | '' |
 			| 'PaymentListTotalNetAmount'        | "1 400"                                                   | '' |
 			| 'PaymentListTotalTotalAmount'      | "1 400,00"                                                | '' |
 			| 'TransactionType'                  | "Payment from customer"                                   | '' |		
@@ -639,7 +639,7 @@ Scenario: _160002 create Cash receipt based on Purchase return - Return from ven
 			| 'PaymentListBasisDocumentNoSplits' | "Purchase return 3 dated 10.12.2023 12:00:00" | '' |
 			| 'PaymentListNetAmountNoSplits'     | "200"                                         | '' |
 			| 'PaymentListPartnerNoSplits'       | "Vendor 3 (1 partner term)"                   | '' |
-			| 'PaymentListPayerNoSplits'         | "Vendor 3"                                    | '' |
+			| 'PaymentListLegalNameNoSplits'     | "Vendor 3"                                    | '' |
 			| 'PaymentListTotalNetAmount'        | "200"                                         | '' |
 			| 'PaymentListTotalTotalAmount'      | "200,00"                                      | '' |
 			| 'TransactionType'                  | "Return from vendor"                          | '' |
@@ -794,7 +794,7 @@ Scenario: _1600013 create Cash receipt - Other partner (simple form)
 			| "Tax authority"  |
 		And I select current line in "List" table
 		And I select from the drop-down list named "PaymentListPartnerNoSplits" by "Tax authority" string
-		Then the form attribute named "PaymentListPayerNoSplits" became equal to "Tax authority"		
+		Then the form attribute named "PaymentListLegalNameNoSplits" became equal to "Tax authority"		
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
 			| "Description"         |
@@ -814,7 +814,7 @@ Scenario: _1600013 create Cash receipt - Other partner (simple form)
 		Then the form attribute named "PaymentListAgreementNoSplits" became equal to "Income Tax Employee"
 		Then the form attribute named "PaymentListCashFlowCenterNoSplits" became equal to "Business unit 1"
 		Then the form attribute named "PaymentListPartnerNoSplits" became equal to "Tax authority"
-		Then the form attribute named "PaymentListPayerNoSplits" became equal to "Tax authority"
+		Then the form attribute named "PaymentListLegalNameNoSplits" became equal to "Tax authority"
 		And the editing text of form attribute named "PaymentListTotalAmountNoSplits" became equal to "100,00"
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
 		Then the form attribute named "TransactionType" became equal to "Other partner"

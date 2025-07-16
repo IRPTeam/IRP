@@ -322,9 +322,17 @@ Procedure OnChainComplete(Parameters) Export
 		Return;
 	EndIf;
 	
+	If Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		If Parameters.FunctionalOptions.IsUsePreliminary Then
+			__tmp_CommonDocuments_OnChainComplete(Parameters, False);
+		Else
+			__tmp_GoodsShipmentReceipt_OnChainComplete(Parameters);
+		EndIf;
+		Return;
+	EndIf;
+	
 	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentPlaningOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt" Then
 		__tmp_GoodsShipmentReceipt_OnChainComplete(Parameters);
@@ -2977,6 +2985,22 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_IS_PRELIMINARY
+
+// ItemList.IsPreliminary
+Procedure ItemListIsPreliminaryChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListIsPreliminary(Parameters);
+EndProcedure
+
+Procedure OnSetItemListIsPreliminary(Parameters) Export
+	Parameters.Form.Modified = True;
+	Parameters.Form.FormSetVisibilityAvailability();
+EndProcedure
+
+#EndRegion
+
 Procedure OnSetCalculationsNotify(Parameters) Export
 	UpdateTotalAmounts(Parameters);
 EndProcedure
@@ -3515,6 +3539,31 @@ Procedure OnSetPayrollListsAmountNotify(Parameters) Export
 EndProcedure
 
 #EndRegion
+
+#EndRegion
+
+#Region SALARY_TAX_LIST
+
+// SalaryTaxList.Partner
+Procedure SalaryTaxListPartnerOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "SalaryTaxList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "SalaryTaxList", Rows);
+	ControllerClientServer_V2.SalaryTaxListPartnerOnChange(Parameters);
+EndProcedure
+
+// SalaryTaxList.Agreement
+Procedure SalaryTaxListAgreementOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "SalaryTaxList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "SalaryTaxList", Rows);
+	ControllerClientServer_V2.SalaryTaxListAgreementOnChange(Parameters);
+EndProcedure
+
+// SalaryTaxList.LegalName
+Procedure SalaryTaxListLegalNameOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "SalaryTaxList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "SalaryTaxList", Rows);
+	ControllerClientServer_V2.SalaryTaxListLegalNameOnChange(Parameters);
+EndProcedure
 
 #EndRegion
 
@@ -4230,14 +4279,27 @@ Procedure OnSetPartnerNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportFromTradeAgent"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "Payroll" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 
+#EndRegion
+
+#Region TAX_PARTNER
+
+Procedure TaxPartnerOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.TaxPartnerOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetTaxPartnerNotify(Parameters) Export
+	Parameters.Form.FormSetVisibilityAvailability();
+EndProcedure
 #EndRegion
 
 #Region PARTNER_TRADE_AGENT
@@ -4360,6 +4422,17 @@ EndProcedure
 
 Procedure OnSetLegalNameNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_LEGAL_NAME
+
+Procedure TaxLegalNameOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.TaxLegalNameOnChange(Parameters);
+	EndDo;
 EndProcedure
 
 #EndRegion
@@ -4511,6 +4584,17 @@ EndProcedure
 
 Procedure OnSetAgreementNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region TAX_AGREEMENT
+
+Procedure TaxAgreementOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.TaxAgreementOnChange(Parameters);
+	EndDo;
 EndProcedure
 
 #EndRegion

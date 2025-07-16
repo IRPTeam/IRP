@@ -411,16 +411,16 @@
    </choiceParameterLinks>
    <choiceParameterLinks>
     <name>Filter.LegalEntity</name>
-    <field>Document.OutgoingPaymentOrder.TabularSection.PaymentList.Attribute.Payee</field>
+    <field>Document.OutgoingPaymentOrder.TabularSection.PaymentList.Attribute.LegalName</field>
    </choiceParameterLinks>
    <createOnInput>Use</createOnInput>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="6a667dd2-72f0-4213-8913-8134ed024078">
-   <name>Payee</name>
+   <name>LegalName</name>
    <synonym>
     <key>tr</key>
-    <value>Ödenen</value>
+    <value>Fatura hesabı</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -428,7 +428,7 @@
    </synonym>
    <synonym>
     <key>en</key>
-    <value>Payee</value>
+    <value>Legal name</value>
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>

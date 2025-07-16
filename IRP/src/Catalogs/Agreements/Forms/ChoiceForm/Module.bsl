@@ -10,6 +10,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			ThisObject.FilterCompanyUse = True;
 			SetCompanyFilter();
 		EndIf;
+		If Parameters.Property("CompanyIsReadOnly") And Parameters.CompanyIsReadOnly Then
+			Items.FilterCompany.ReadOnly = True;
+			Items.FilterCompanyUse.ReadOnly = True;
+		EndIf;
 	EndIf;
 EndProcedure
 

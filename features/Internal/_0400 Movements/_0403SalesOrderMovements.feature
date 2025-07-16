@@ -466,7 +466,7 @@ Scenario: _0401573 Sales order clear posting/mark for deletion + check posting s
 			| 'Number'    |
 			| '1'         |
 		And I select current line in "List" table
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Then the field named "DecorationGroupTitleCollapsedLabel" value contains "Status: Approved   Posting status: Deleted   " text

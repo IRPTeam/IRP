@@ -276,7 +276,7 @@ Scenario: _2070007 delete SO with linked strings (several sessions)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(1055).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Try unpost SO
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Then "1C:Enterprise" window is opened

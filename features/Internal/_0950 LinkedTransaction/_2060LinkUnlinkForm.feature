@@ -4924,7 +4924,7 @@ Scenario: _2060040 check link/unlink form in the SO - SI (use variable item key,
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 	* Delete SI and check fillings items in the new SI
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		When in opened panel I select "$$SalesOrder2060040$$"	
@@ -5004,7 +5004,7 @@ Scenario: _2060041 check link/unlink form in the PO - PI (use variable item key,
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 	* Delete PI and check fillings items in the new SI
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		When in opened panel I select "$$PurchaseOrder2060041$$"	

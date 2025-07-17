@@ -335,11 +335,6 @@ Scenario: _9800020 create depreciation calculation
 		And "Calculations" table became equal
 			| '#' | 'Fixed asset'      | 'Profit loss center'   | 'Ledger type'                          | 'Schedule'                  | 'Calculation method' | 'Currency' | 'Expense type' | 'Amount balance' | 'Amount' |
 			| '1' | 'Computer Servers' | 'Logistics department' | 'Computer Hardware (with deprecation)' | 'Straight line (36 months)' | 'Straight line'      | 'TRY'      | 'Expense'      | '5 000,00'       | '138,89' |
-		* Change amount
-			And I activate "Amount" field in "Calculations" table
-			And I select current line in "Calculations" table
-			And I input "277,78" text in "Amount" field of "Calculations" table
-			And I finish line editing in "Calculations" table
 		And I click "Post" button
 	* Check
 		And I delete "$$NumberDepreciationCalculation1$$" variable
@@ -350,7 +345,7 @@ Scenario: _9800020 create depreciation calculation
 		And "List" table contains lines
 			| 'Number'                             |
 			| '$$NumberDepreciationCalculation1$$' |
-	* Fill deprecation calculation for third month
+	* Fill deprecation calculation for second month
 		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
 		And I click "Create" button
 		And I input "31.03.2024 00:00:00" text in the field named "Date"
@@ -363,7 +358,7 @@ Scenario: _9800020 create depreciation calculation
 		And in the table "Calculations" I click "Fill calculations" button
 		And "Calculations" table became equal
 			| '#' | 'Fixed asset'      | 'Profit loss center'   | 'Ledger type'                               | 'Schedule'                      | 'Calculation method' | 'Currency' | 'Expense type' | 'Amount balance' | 'Amount'   |
-			| '1' | 'Computer Servers' | 'Logistics department' | 'Computer Hardware (with deprecation)'      | 'Straight line (36 months)'     | 'Straight line'      | 'TRY'      | 'Expense'      | '4 722,22'       | '138,89'   |
+			| '1' | 'Computer Servers' | 'Logistics department' | 'Computer Hardware (with deprecation)'      | 'Straight line (36 months)'     | 'Straight line'      | 'TRY'      | 'Expense'      | '4 861,11'       | '138,89'   |
 			| '2' | 'Office Furniture' | 'Logistics department' | 'Furniture and Fixtures (with deprecation)' | 'Declining balance (60 months)' | 'Declining balance'  | 'TRY'      | 'Expense'      | '7 000,00'       | '1 166,67' |
 		And I click "Post" button
 	* Check
@@ -400,10 +395,13 @@ Scenario: _9800022 manual filling Depreciation calculation
 		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
 		And I click "Create" button
 		And I click Choice button of the field named "Date"
-		And I input "30.05.2024 00:00:00" text in the field named "Date"
+		And I input "30.04.2024 00:00:00" text in the field named "Date"
 		And I move to the next attribute
 		And I select from the drop-down list named "Company" by "Main Company" string	
-		And I select from the drop-down list named "Branch" by "Front office" string	
+		And I select from the drop-down list named "Branch" by "Front office" string
+		And I click the hyperlink named "Comment"
+		And I input "manual correct" text in the field named "Text"
+		And I click "OK" button		
 	* Add fixed assets
 		And I move to "Calculations" tab
 		And in the table "Calculations" I click the button named "CalculationsAdd"
@@ -418,7 +416,7 @@ Scenario: _9800022 manual filling Depreciation calculation
 	* Check filling
 		And "Calculations" table became equal
 			| "Amount" | "Fixed asset"      | "Profit loss center"   | "Ledger type"                          | "Schedule"                  | "Expense type" | "Calculation method" | "Currency" | "Amount balance" |
-			| "138,89" | "Computer Servers" | "Logistics department" | "Computer Hardware (with deprecation)" | "Straight line (36 months)" | "Expense"      | "Straight line"      | "TRY"      | "4 583,33"       |
+			| "138,89" | "Computer Servers" | "Logistics department" | "Computer Hardware (with deprecation)" | "Straight line (36 months)" | "Expense"      | "Straight line"      | "TRY"      | "4 722,22"       |
 	* Change amount
 		And I select current line in "Calculations" table
 		And I input "500,00" text in "Amount" field of "Calculations" table
@@ -428,7 +426,7 @@ Scenario: _9800022 manual filling Depreciation calculation
 		Then user message window does not contain messages
 		And "Calculations" table became equal
 			| "#" | "Amount" | "Fixed asset"      | "Profit loss center"   | "Ledger type"                          | "Schedule"                  | "Expense type" | "Calculation method" | "Currency" | "Amount balance" |
-			| "1" | "500,00" | "Computer Servers" | "Logistics department" | "Computer Hardware (with deprecation)" | "Straight line (36 months)" | "Expense"      | "Straight line"      | "TRY"      | "4 583,33"       |
+			| "1" | "500,00" | "Computer Servers" | "Logistics department" | "Computer Hardware (with deprecation)" | "Straight line (36 months)" | "Expense"      | "Straight line"      | "TRY"      | "4 722,22"       |
 	And I close all client application windows
 	
 Scenario: _9800030 create Fixed Assets Transfer
@@ -744,7 +742,7 @@ Scenario: _9800036 check FixedAssetRevaluation (price rised)
 	* Filling main info
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I move to the tab named "GroupOther"
-		And I input "01.05.2024 12:12:12" text in the field named "Date"
+		And I input "01.04.2024 12:12:12" text in the field named "Date"
 		And I move to the tab named "GroupMore"
 		And I select from the drop-down list named "Branch" by "Front office" string
 		And I move to the tab named "GroupCalculations"

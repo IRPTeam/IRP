@@ -14,6 +14,87 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	
+	AccMetadata = Metadata.AccumulationRegisters.R5011B_CustomersAging;
+	PaymentTerms = New ValueTable();
+	PaymentTerms.Columns.Add("DocRef", AccMetadata.StandardAttributes.Recorder.Type);
+	PaymentTerms.Columns.Add("PaymentDate", AccMetadata.StandardAttributes.Period.Type);
+	PaymentTerms.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
+	For Each Row In Ref.Transactions Do
+		If Row.Agreement.Type <> Enums.AgreementTypes.Customer Then
+			Continue;
+		EndIf;
+		
+		If Not ValueIsFilled(Row.BasisDocument) Then
+			Continue;
+		EndIf;
+		
+		Query = New Query();
+		
+		DocMetadata = Row.BasisDocument.Metadata();
+		
+		If DocMetadata.TabularSections.Find("PaymentTerms") <> Undefined Then
+			Query.Text = 
+			"SELECT
+			|	PaymentTerms.Ref AS DocRef,
+			|	MAX(PaymentTerms.Date) AS PaymentDate
+			|FROM
+			|	Document.%1.PaymentTerms AS PaymentTerms
+			|WHERE
+			|	PaymentTerms.Ref = &DocRef
+			|GROUP BY
+			|	PaymentTerms.Ref";
+			Query.Text = StrTemplate(Query.Text, DocMetadata.Name);
+		ElsIf DocMetadata.TabularSections.Find("CustomersPaymentTerms") <> Undefined Then
+			Query.Text = 
+			"SELECT
+			|	PaymentTerms.Ref AS DocRef,
+			|	MAX(PaymentTerms.Date) AS PaymentDate
+			|FROM
+			|	Document.OpeningEntry.CustomersPaymentTerms AS PaymentTerms
+			|		LEFT JOIN Document.OpeningEntry.AccountReceivableByDocuments AS AR
+			|		ON PaymentTerms.Key = AR.Key
+			|		AND PaymentTerms.Ref = AR.Ref
+			|		AND AR.Ref = &DocRef
+			|		AND AR.Partner = &Partner
+			|		AND AR.Agreement = &Agreement
+			|WHERE
+			|	PaymentTerms.Ref = &DocRef
+			|	AND AR.Partner = &Partner
+			|	AND AR.Agreement = &Agreement
+			|GROUP BY
+			|	PaymentTerms.Ref";
+		Else
+			Continue;
+		EndIf;
+		
+		Query.SetParameter("DocRef", Row.BasisDocument);
+		Query.SetParameter("Partner", Row.Partner);
+		Query.SetParameter("Agreement", Row.Agreement);
+		
+		QueryResult = Query.Execute();
+		QuerySelection = QueryResult.Select();
+		
+		While QuerySelection.Next() Do
+			NewRow = PaymentTerms.Add();
+			NewRow.DocRef = QuerySelection.DocRef;
+			NewRow.PaymentDate = QuerySelection.PaymentDate;
+			NewRow.Key = Row.Key;
+		EndDo;
+	EndDo;
+	
+	Query = New Query;
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	PaymentTerms.*
+	|INTO PaymentTerms
+	|FROM
+	|	&PaymentTerms AS PaymentTerms";
+	
+	Query.SetParameter("PaymentTerms", PaymentTerms);
+ 	Query.Execute();
+	
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	
 	Return Tables;
@@ -57,7 +138,7 @@ EndProcedure
 #Region Undoposting
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return Undefined;
+	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -137,6 +218,11 @@ Function Transactions()
 		|			END
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
+		|
+		| 	case when Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|	then Transactions.BasisDocument else undefined
+		|	end AS AgingBasisDocument,
+		|
 		|	case
 		|		when Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
 		|			Then Transactions.Agreement

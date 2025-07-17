@@ -105,25 +105,19 @@ Function R5011B_CustomersAging_DebitNote() Export
 		|	Transactions.Currency AS Currency,
 		|	Transactions.Agreement AS Agreement,
 		|	Transactions.Partner AS Partner,
-		|	Transactions.Ref AS Invoice,
-		|	Transactions.Period AS PaymentDate,
-		|	SUM(Transactions.Amount) AS Amount,
+		|	PaymentTerms.DocRef AS Invoice,
+		|	PaymentTerms.PaymentDate AS PaymentDate,
+		|	Transactions.Amount AS Amount,
 		|	UNDEFINED AS AgingClosing
 		|INTO R5011B_CustomersAging
 		|FROM
 		|	Transactions AS Transactions
-		|WHERE
-		|	Transactions.IsCustomer
-		|	AND Transactions.IsPostingDetail_ByDocuments
-		|GROUP BY
-		|	Transactions.Period,
-		|	Transactions.Ref,
-		|	Transactions.Agreement,
-		|	Transactions.Company,
-		|	Transactions.Branch,
-		|	Transactions.Currency,
-		|	Transactions.Partner,
-		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|inner join PaymentTerms as PaymentTerms on
+		|	PaymentTerms.DocRef = Transactions.AgingBasisDocument
+		|	and PaymentTerms.Key = Transactions.Key
+		|	and Transactions.IsCustomer
+		|	and Transactions.IsPostingDetail_ByDocuments
 		|
 		|UNION ALL
 		|

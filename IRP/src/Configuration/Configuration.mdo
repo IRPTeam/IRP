@@ -1559,6 +1559,7 @@
   <reports>Report.S1001L_VendorsPrices</reports>
   <reports>Report.T0001_FilesAnalyser</reports>
   <reports>Report.R6070_OtherPeriodsExpenses</reports>
+  <reports>Report.R8510B_BookValueOfFixedAsset</reports>
   <dataProcessors>DataProcessor.AccountantAutomatedWorkplace</dataProcessors>
   <dataProcessors>DataProcessor.AccountingService</dataProcessors>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>

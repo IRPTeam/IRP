@@ -1991,7 +1991,7 @@ Scenario: _0850025 print receipt from sales return (cash)
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
 	* Try Print receipt (RRR with deletion mark)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button	
 		And I click "Print receipt" button	
@@ -2003,7 +2003,7 @@ Scenario: _0850025 print receipt from sales return (cash)
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
 	* Check Print receipt (RRR posted, status Canceled)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click the button named "FormPost"	
@@ -2233,7 +2233,7 @@ Scenario: _0260150 check print cash in from Cash receipt form
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"'    |
 	* Try Print cash in (CR with deletion mark)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button	
 		And I click "Print cash in" button	
@@ -2245,7 +2245,7 @@ Scenario: _0260150 check print cash in from Cash receipt form
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"'    |
 	* Check Print cash in (CR posted)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click the button named "FormPost"	
@@ -2329,7 +2329,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"'    |
 	* Try Print cash out (MT with deletion mark)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button	
 		And I click "Print cash out" button	
@@ -2341,7 +2341,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"'    |
 	* Check Print cash out (MT posted)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click the button named "FormPost"	
@@ -2783,7 +2783,7 @@ Scenario: _0260159 check marking code without check code string
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
 	* Try Print receipt (RSR with deletion mark)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button	
 		And I click "Print receipt" button	
@@ -2795,7 +2795,7 @@ Scenario: _0260159 check marking code without check code string
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
 	* Check Print receipt (RSR posted, status Canceled)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click the button named "FormPost"	
@@ -4631,7 +4631,7 @@ Scenario: _0260191 check session open and close from CRS
 	* Try open session (CRS with deletion mark)
 		And I select from the drop-down list named "Status" by "new" string
 		And I click the button named "FormPost"
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click "Open session" button
@@ -4642,7 +4642,7 @@ Scenario: _0260191 check session open and close from CRS
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"			
 	* Try open session (CRS without deletion mark, status new)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click the button named "FormPost"

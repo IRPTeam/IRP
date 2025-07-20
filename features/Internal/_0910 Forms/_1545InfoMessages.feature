@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 
@@ -1421,5 +1421,5 @@ Scenario: __015457 message when trying to create Price list without unit
 	And I input "" text in the field named "ItemListUnit" of "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I click "Post" button
-	Then I wait that in user messages the 'The "Unit" is required on line 1 of the "Item list" list.' substring will appear in 10 seconds
+	Then I wait that in user messages the '"Unit" is required in row 1 of the "Item list" list.' substring will appear in 10 seconds
 	And I close all client application windows

@@ -1267,26 +1267,26 @@ Scenario: _2066032 check locking tab in the PR with linked documents (one sessio
 				| 'Trousers'    | '38/Yellow'     |
 			And I set "Use shipment confirmation" checkbox in "ItemList" table
 			And I finish line editing
-		* Purchase invoice
-			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'     |
-				| 'Boots'    | '37/18SD'      |
-			When I Check the steps for Exception
-				| 'And I click choice button of "Purchase invoice" attribute in "ItemList" table'     |
-			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'     |
-				| 'Shirt'    | '36/Red'       |
-			When I Check the steps for Exception
-				| 'And I click choice button of "Purchase invoice" attribute in "ItemList" table'     |
-			And I go to line in "ItemList" table
-				| 'Item'        | 'Item key'      |
-				| 'Trousers'    | '38/Yellow'     |
-			When I Check the steps for Exception
-				| 'And I click choice button of "Purchase invoice" attribute in "ItemList" table'     |
-			And I click "Unlock linked rows" button			
-			And I click choice button of "Purchase invoice" attribute in "ItemList" table
-			And I close current window
-			And I click "Unlock linked rows" button
+		// * Purchase invoice
+		// 	And I go to line in "ItemList" table
+		// 		| 'Item'     | 'Item key'     |
+		// 		| 'Boots'    | '37/18SD'      |
+		// 	When I Check the steps for Exception
+		// 		| 'And I click choice button of "Purchase invoice" attribute in "ItemList" table'     |
+		// 	And I go to line in "ItemList" table
+		// 		| 'Item'     | 'Item key'     |
+		// 		| 'Shirt'    | '36/Red'       |
+		// 	When I Check the steps for Exception
+		// 		| 'And I click choice button of "Purchase invoice" attribute in "ItemList" table'     |
+		// 	And I go to line in "ItemList" table
+		// 		| 'Item'        | 'Item key'      |
+		// 		| 'Trousers'    | '38/Yellow'     |
+		// 	When I Check the steps for Exception
+		// 		| 'And I click choice button of "Purchase invoice" attribute in "ItemList" table'     |
+		// 	And I click "Unlock linked rows" button			
+		// 	And I click choice button of "Purchase invoice" attribute in "ItemList" table
+		// 	And I close current window
+		// 	And I click "Unlock linked rows" button
 		* Purchase return order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |

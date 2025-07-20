@@ -27,7 +27,7 @@ Procedure DescriptionOpening(Object, Form, Item, StandardProcessing, Description
 	AdditionalParameters.Insert("Form", Form);
 
 	//@skip-check invocation-parameter-type-intersect
-	OpenForm("CommonForm.EditDescriptions", OpenArgs, Form, , , , New NotifyDescription("DescriptionEditEnd",
+	OpenForm("CommonForm.EditDescriptions", OpenArgs, Form, , , , New CallbackDescription("DescriptionEditEnd",
 		ThisObject, AdditionalParameters));
 
 EndProcedure
@@ -51,7 +51,7 @@ Procedure DescriptionInTableOpening(TableRow, Form, Item, StandardProcessing) Ex
 	AdditionalParameters.Insert("Form", Form);
 
 	//@skip-check invocation-parameter-type-intersect
-	OpenForm("CommonForm.EditDescriptions", OpenArgs, Form, , , , New NotifyDescription("DescriptionEditEnd",
+	OpenForm("CommonForm.EditDescriptions", OpenArgs, Form, , , , New CallbackDescription("DescriptionEditEnd",
 		ThisObject, AdditionalParameters));
 
 EndProcedure

@@ -944,8 +944,8 @@ Procedure AttachOther(Command)
 	
 	Structure = GetOtherAttachmentSettings(CurrentDocStructure);
 	
-	NotifyDescription = New NotifyDescription("AfterOtherAttachmentInput", ThisObject, Structure);
-	ShowInputString(NotifyDescription, "", R().InfoMessage_037, , True);
+	CallbackDescription = New CallbackDescription("AfterOtherAttachmentInput", ThisObject, Structure);
+	ShowInputString(CallbackDescription, "", R().InfoMessage_037, , True);
 	
 EndProcedure
 

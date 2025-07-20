@@ -42,7 +42,7 @@ EndProcedure
 
 &AtClient
 Procedure SaveAs(Command)
-	Notify = New NotifyDescription("SaveAsEnd", ThisObject);
+	Notify = New CallbackDescription("SaveAsEnd", ThisObject);
 	ShowInputString(Notify, "", R().SuggestionToUser_4, 128);
 EndProcedure
 
@@ -60,13 +60,13 @@ EndProcedure
 Procedure SaveSettingAtClient()
 	CurrentData = Items.OptionsList.CurrentData;
 	If CurrentData = Undefined Then
-		Notify = New NotifyDescription("SaveAsEnd", ThisObject);
+		Notify = New CallbackDescription("SaveAsEnd", ThisObject);
 		ShowInputString(Notify, "", R().SuggestionToUser_3, 150);
 	Else
 		If CurrentData.Author = SessionParametersServer.GetSessionParameter("CurrentUser") Then
 			OptionDescriptionParameters = New Structure();
 			OptionDescriptionParameters.Insert("ReportOption", CurrentData.ReportOption);
-			OptionDescription = New NotifyDescription("OverwriteQuestionEnd", ThisObject, OptionDescriptionParameters);
+			OptionDescription = New CallbackDescription("OverwriteQuestionEnd", ThisObject, OptionDescriptionParameters);
 			QueryText = R().QuestionToUser_020;
 			QueryButtons = QuestionDialogMode.YesNo;
 			ShowQueryBox(OptionDescription, QueryText, QueryButtons);
@@ -75,7 +75,7 @@ Procedure SaveSettingAtClient()
 			AdditionalParameters = New Structure;
 			AdditionalParameters.Insert("Description", OptionDescription);
 			AdditionalParameters.Insert("Author", CurrentData.Author);
-			Notify = New NotifyDescription("SaveAsEnd", ThisObject, AdditionalParameters);
+			Notify = New CallbackDescription("SaveAsEnd", ThisObject, AdditionalParameters);
 			ShowInputString(Notify, OptionDescription, R().SuggestionToUser_3, 150);
 		EndIf;
 	EndIf;
@@ -104,7 +104,7 @@ Procedure SaveChosenSetting(Val OptionDescription, Val ReportOption = Undefined)
 	If ThisObject.SetShare Then
 		NotifyParameters = New Structure();
 		NotifyParameters.Insert("OptionKey", OptionKey);
-		Notify = New NotifyDescription("ShareEnd", ThisObject, NotifyParameters);
+		Notify = New CallbackDescription("ShareEnd", ThisObject, NotifyParameters);
 		Users = GetShareReducers(OptionKey);
 		UsersValueList = New ValueList();
 		UsersValueList.LoadValues(Users);

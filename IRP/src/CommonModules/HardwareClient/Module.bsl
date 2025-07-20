@@ -14,10 +14,10 @@ Procedure BeginGetDriver(NotifyOnClose, DriverInfo) Export
 	ObjectName.Add(ObjectName[1]);
 	Params = New Structure("ProgID, NotifyOnClose, EquipmentDriver", StrConcat(ObjectName, "."), NotifyOnClose,
 		DriverInfo.Driver);
-	NotifyDescription = New CallbackDescription("BeginAttachingAddIn_End", ThisObject, Params);
+	CallbackDescription = New CallbackDescription("BeginAttachingAddIn_End", ThisObject, Params);
 
 	LinkOnDriver = GetURL(DriverInfo.Driver, "Driver");
-	BeginAttachingAddIn(NotifyDescription, LinkOnDriver, ObjectName[1]);
+	BeginAttachingAddIn(CallbackDescription, LinkOnDriver, ObjectName[1]);
 EndProcedure
 
 // Begin attaching add in end.

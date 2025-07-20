@@ -75,7 +75,7 @@ Procedure PropertiesTableValueStartChoice(Item, ChoiceData, StandardProcessing)
 		OpenForm("DataProcessor.ObjectPropertyEditor.Form.EditMultilineText", 
 				New Structure("ExternalText", CurrentFieldValue), 
 				ThisObject, , , ,
-				New NotifyDescription("OnEditedMultilineTextEnd", 
+				New CallbackDescription("OnEditedMultilineTextEnd", 
 					ThisObject, 
 					New Structure("SelectedRows", SelectedRows)),
 				FormWindowOpeningMode.LockOwnerWindow);

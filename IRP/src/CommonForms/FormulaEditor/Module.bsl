@@ -132,7 +132,7 @@ EndProcedure
 Procedure OperatorsDragEnd(Item, DragParameters, StandardProcessing)
 	If Item.CurrentData.Operator = "Format(,)" Then
 		Wizard = New FormatStringWizard();
-		Wizard.Show(New NotifyDescription("InsertOperatorToFormulaDragEnd", 
+		Wizard.Show(New CallbackDescription("InsertOperatorToFormulaDragEnd", 
 			ThisObject, New Structure("Wizard",Wizard)));
 	EndIf;
 EndProcedure
@@ -215,7 +215,7 @@ EndProcedure
 Procedure InsertOperatorToFormula()
 	If Items.Operators.CurrentData.Operator = "Format(,)" Then
 		Wizard = New FormatStringWizard();
-		Wizard.Show(New NotifyDescription("InsertOperatorToFormulaEnd", 
+		Wizard.Show(New CallbackDescription("InsertOperatorToFormulaEnd", 
 			ThisObject, New Structure("Wizard",Wizard)));
         Return;
 	Else

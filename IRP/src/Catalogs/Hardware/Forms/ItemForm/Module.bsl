@@ -154,7 +154,7 @@ Async Procedure ReloadSettings(Command)
 	If ValueIsFilled(Parameters.Key) And Not Object.Ref.IsEmpty() And Not Object.Driver.IsEmpty() Then
 		DriverParameter.Clear();
 		Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
-		Settings.Callback = New NotifyDescription("FillDriverParameters_End", ThisObject);
+		Settings.Callback = New CallbackDescription("FillDriverParameters_End", ThisObject);
 		HardwareClient.FillDriverParameters(Settings);
 	EndIf;
 EndProcedure
@@ -167,7 +167,7 @@ Async Procedure WriteSettings(Command)
 	EndIf;
 	
 	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
-	Settings.ServiceCallback = New NotifyDescription("EndWriteSettings", ThisObject, Settings);
+	Settings.ServiceCallback = New CallbackDescription("EndWriteSettings", ThisObject, Settings);
 	HardwareClient.SetParameter_End(True, Undefined, Settings);
 EndProcedure
 
@@ -190,7 +190,7 @@ Async Procedure Test(Command)
 	EndIf;
 	
 	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
-	Settings.Callback = New NotifyDescription("EndTestDevice", ThisObject, Settings);
+	Settings.Callback = New CallbackDescription("EndTestDevice", ThisObject, Settings);
 	Settings.AdditionalCommand = "CheckHealth";
 	
 	HardwareClient.TestDevice(Settings);

@@ -3,7 +3,7 @@ Procedure EditMultilineText(Form, Item, StandardProcessing) Export
 	StandardProcessing = False;
 
 	OpenForm("CommonForm.EditMultilineText", New Structure("ItemName", Item.Name), Form, , , ,
-		New NotifyDescription("OnEditedMultilineTextEnd", ThisObject, New Structure("Form, ItemName", Form, Item.Name)),
+		New CallbackDescription("OnEditedMultilineTextEnd", ThisObject, New Structure("Form, ItemName", Form, Item.Name)),
 		FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 

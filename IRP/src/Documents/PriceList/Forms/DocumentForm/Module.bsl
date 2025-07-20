@@ -310,8 +310,8 @@ Procedure FillByRules(Command)
 	Info = AddDataProcServer.AddDataProcInfo(ExternalDataProc);
 	Info.Insert("Settings", PutSettingsToTempStorage(Object.PriceType));
 	CallMethodAddDataProc(Info);
-	NotifyDescription = New NotifyDescription("OpenFormProcEnd", ThisObject);
-	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription);
+	CallbackDescription = New CallbackDescription("OpenFormProcEnd", ThisObject);
+	AddDataProcClient.OpenFormAddDataProc(Info, CallbackDescription);
 EndProcedure
 
 &AtClient

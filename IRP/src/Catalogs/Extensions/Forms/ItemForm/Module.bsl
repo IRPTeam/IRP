@@ -20,16 +20,16 @@ EndProcedure
 &AtClient
 Procedure AddFile(Command)
 	PutFilesDialogParameters = New PutFilesDialogParameters(, , "(*.cfe)|*.cfe");
-	EndCall			= New NotifyDescription("AddFileEndCall", ThisObject);
-	ProgressCall    = New NotifyDescription("AddFileProgressCall", ThisObject);
-	BeforeStartCall = New NotifyDescription("AddFileBeforeStartCall", ThisObject);
+	EndCall			= New CallbackDescription("AddFileEndCall", ThisObject);
+	ProgressCall    = New CallbackDescription("AddFileProgressCall", ThisObject);
+	BeforeStartCall = New CallbackDescription("AddFileBeforeStartCall", ThisObject);
 	BeginPutFileToServer(EndCall, ProgressCall, BeforeStartCall, , PutFilesDialogParameters, ThisObject.UUID);
 EndProcedure
 
 &AtClient
 Procedure SaveFile(Command)
 	If Parameters.Key.IsEmpty() Then
-		QuestionToUserNotify = New NotifyDescription("SaveFileNewObjectContinue", ThisObject);
+		QuestionToUserNotify = New CallbackDescription("SaveFileNewObjectContinue", ThisObject);
 		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 		Return;
 	EndIf;

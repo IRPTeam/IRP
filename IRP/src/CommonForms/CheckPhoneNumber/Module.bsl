@@ -68,7 +68,7 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	If IntegrationSettings.IsEmpty() Then
-		ExecuteNotifyProcessing(OnCloseNotifyDescription, CloseOK());
+		ExecuteNotifyProcessing(OnCloseCallbackDescription, CloseOK());
 	EndIf;
 EndProcedure
 

@@ -54,7 +54,7 @@ Procedure SourceOfOriginsSourceOfOriginCreating(Item, StandardProcessing)
 	FormParameters.Insert("Item"        , ThisObject.Item);
 	FormParameters.Insert("ItemKey"     , ThisObject.ItemKey);
 	FormParameters.Insert("Description" , Item.EditText);
-	OpenForm("Catalog.SourceOfOrigins.ObjectForm", FormParameters, ThisObject, , , , New NotifyDescription("AfterCreateNewSourceOfOrigin", ThisObject));	
+	OpenForm("Catalog.SourceOfOrigins.ObjectForm", FormParameters, ThisObject, , , , New CallbackDescription("AfterCreateNewSourceOfOrigin", ThisObject));	
 EndProcedure
 
 &AtClient

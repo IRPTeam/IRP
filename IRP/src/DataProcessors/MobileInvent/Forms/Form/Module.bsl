@@ -29,7 +29,7 @@ EndProcedure
 &AtClient
 Procedure InputBarcode(Command)
 	Barcode = 0;
-	ShowInputNumber(New NotifyDescription("AddBarcodeAfterEnd", ThisObject), Barcode, R().SuggestionToUser_2);
+	ShowInputNumber(New CallbackDescription("AddBarcodeAfterEnd", ThisObject), Barcode, R().SuggestionToUser_2);
 EndProcedure
 
 &AtClient
@@ -242,7 +242,7 @@ Procedure StartEditQuantity(Val RowSelected, AutoMode = False)
 	Structure.Insert("Quantity", ItemListRow.PhysCount);
 	Structure.Insert("RowID", RowSelected);
 	Structure.Insert("AutoMode", AutoMode);
-	NotifyOnClosing = New NotifyDescription("OnEditQuantityEnd", ThisObject);
+	NotifyOnClosing = New CallbackDescription("OnEditQuantityEnd", ThisObject);
 	OpenForm("DataProcessor.MobileInvent.Form.RowForm", Structure, ThisObject, , , , NotifyOnClosing);
 EndProcedure
 
@@ -264,14 +264,14 @@ Procedure CompleteLocation()
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_011);
 		SaveAndUpdateDocument();
 	Else
-		NotifyDescription = New NotifyDescription("InputQuantityEnd", ThisObject);
+		CallbackDescription = New CallbackDescription("InputQuantityEnd", ThisObject);
 		If Not SecondTryToInputQuantity Then
 			Write();
 			Text = R().QuestionToUser_018;
 		Else
 			Text = R().InfoMessage_009;
 		EndIf;
-		ShowInputNumber(NotifyDescription, "", Text);
+		ShowInputNumber(CallbackDescription, "", Text);
 	EndIf;
 EndProcedure
 

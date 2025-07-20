@@ -229,7 +229,7 @@ Procedure CalendarSelection(Item, SelectedDate)
 	
 	OpenForm("Document.TimeSheet.Form.EditCalendarDay", 
 		OpeningParameters, ThisObject, , , , 
-		New NotifyDescription("EditCalendarDayEnd", ThisObject), 
+		New CallbackDescription("EditCalendarDayEnd", ThisObject), 
 		FormWindowOpeningMode.LockOwnerWindow);
 	
 EndProcedure
@@ -377,7 +377,7 @@ Procedure WorkersBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	OpeningParameters.Insert("Employees" , Employees);
 	
 	NotifyParameters = New Structure();
-	Notify = New NotifyDescription("AddEmployeeEnd", ThisObject, NotifyParameters);
+	Notify = New CallbackDescription("AddEmployeeEnd", ThisObject, NotifyParameters);
 	
 	OpenForm("Document.TimeSheet.Form.AddEmployee", OpeningParameters, 
 	ThisObject, , , , 

@@ -47,8 +47,8 @@ Procedure ExternalDataProcSettings(Command)
 	Info.Insert("Settings", ThisObject.AddressResult);
 	CallMethodAddDataProc(Info);
 
-	NotifyDescription = New NotifyDescription("OpenFormProcSettingsEnd", ThisObject);
-	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "Settings");
+	CallbackDescription = New CallbackDescription("OpenFormProcSettingsEnd", ThisObject);
+	AddDataProcClient.OpenFormAddDataProc(Info, CallbackDescription, "Settings");
 EndProcedure
 
 &AtServer

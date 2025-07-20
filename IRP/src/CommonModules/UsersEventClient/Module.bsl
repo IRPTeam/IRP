@@ -9,7 +9,7 @@ Procedure OpenChangePasswordForm() Export
 	OpenForm("Catalog.Users.Form.InputPassword", 
 		New Structure("Password", ""), 
 		ThisObject, , , , 
-		New NotifyDescription("CloseChangePasswordForm", ThisObject));
+		New CallbackDescription("CloseChangePasswordForm", ThisObject));
 	
 EndProcedure
 

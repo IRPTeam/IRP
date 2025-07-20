@@ -723,10 +723,10 @@ Async Procedure OpenScanForm(Object, Form, Module) Export
 	NotifyParameters = New Structure;
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
-	NotifyDescription = New NotifyDescription("OpenScanFormEnd", ThisObject, NotifyParameters);
+	CallbackDescription = New CallbackDescription("OpenScanFormEnd", ThisObject, NotifyParameters);
 	OpenFormParameters = New Structure;
 	OpenFormParameters.Insert("Basis", Object.Ref);
-	OpenForm("DataProcessor.ScanBarcode.Form.Form", OpenFormParameters, Form, , , , NotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("DataProcessor.ScanBarcode.Form.Form", OpenFormParameters, Form, , , , CallbackDescription, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 Procedure OpenScanFormEnd(Result, AdditionalParameters) Export
@@ -1233,7 +1233,7 @@ Procedure OpenLinkedDocuments(Object, Form, TableName, DocumentColumnName, Quant
 	AdditionalParameters.Insert("Form"      , Form);
 	AdditionalParameters.Insert("TableName" , TableName);
 	
-	Notify = New NotifyDescription("LinkedDocumentsEnd", ThisObject, AdditionalParameters);
+	Notify = New CallbackDescription("LinkedDocumentsEnd", ThisObject, AdditionalParameters);
 	OpenForm("CommonForm.LinkedDocuments", FormParameters, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1369,11 +1369,11 @@ Procedure OpenPickupItems(Object, Form) Export
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
 	NotifyParameters.Insert("Filter" , New Structure("DisableIfIsService", False));
-	NotifyDescription = New NotifyDescription("PickupItemsEnd", ThisObject, NotifyParameters);
+	CallbackDescription = New CallbackDescription("PickupItemsEnd", ThisObject, NotifyParameters);
 	OpenFormParameters = PickupItemsParameters(Object, Form);
 	OpenFormParameters.Insert("AssociatedTableName", "ItemList");
 	OpenFormParameters.Insert("Object", Object);
-	OpenForm("CommonForm.PickUpItems", OpenFormParameters, Form, , , , NotifyDescription);
+	OpenForm("CommonForm.PickUpItems", OpenFormParameters, Form, , , , CallbackDescription);
 EndProcedure
 
 Function PickupItemsParameters(Object, Form)

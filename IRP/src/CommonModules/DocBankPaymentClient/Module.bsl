@@ -319,7 +319,7 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	NotifyParameters = New Structure("Object, Form", Object, Form);
 	NotifyParameters.Insert("CurrentData", CurrentData);
 	
-	Notify = New NotifyDescription("PaymentListBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
+	Notify = New CallbackDescription("PaymentListBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
 	Parameters.Insert("Notify", Notify);
 	Parameters.Insert("TableName", "DocumentsForOutgoingPayment");
 	Parameters.Insert("OpeningEntryTableName1", "AccountPayableByDocuments");
@@ -432,7 +432,7 @@ Procedure PaymentListOrderStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	NotifyParameters = New Structure("Object, Form", Object, Form);
 	NotifyParameters.Insert("CurrentData", CurrentData);
 	
-	Notify = New NotifyDescription("PaymentListOrderStartChoiceEnd", ThisObject, NotifyParameters);
+	Notify = New CallbackDescription("PaymentListOrderStartChoiceEnd", ThisObject, NotifyParameters);
 	Parameters.Insert("Notify"    , Notify);
 	Parameters.Insert("TableName" , "DocumentsForOutgoingPayment");	
 	Parameters.Insert("Ref"       , Object.Ref);

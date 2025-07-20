@@ -33,8 +33,8 @@ Procedure SetSettings(Command)
 	Info.Insert("Country", CurrentRow.Country);
 	CallMethodAddDataProc(Info);
 
-	NotifyDescription = New NotifyDescription("OpenFormAddDataProcEnd", ThisObject);
-	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "Settings");
+	CallbackDescription = New CallbackDescription("OpenFormAddDataProcEnd", ThisObject);
+	AddDataProcClient.OpenFormAddDataProc(Info, CallbackDescription, "Settings");
 EndProcedure
 
 &AtServerNoContext

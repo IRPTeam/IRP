@@ -476,7 +476,7 @@ EndProcedure
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	If Object.SaveScannedBarcode And Not ValueIsFilled(Object.Ref) Then
-		QuestionToUserNotify = New NotifyDescription("SaveAndSearch", ThisObject, Barcode);
+		QuestionToUserNotify = New CallbackDescription("SaveAndSearch", ThisObject, Barcode);
 		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 		Return;
 	EndIf;

@@ -6,7 +6,7 @@ Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProces
 		Return;
 	EndIf;
 
-	Notify = New NotifyDescription("OnFinishEditSourceOfOrigins", ThisObject, New Structure("Object, Form", Object, Form));
+	Notify = New CallbackDescription("OnFinishEditSourceOfOrigins", ThisObject, New Structure("Object, Form", Object, Form));
 	OpeningParameters = New Structure();
 	OpeningParameters.Insert("Item"    , CurrentData.Item);
 	OpeningParameters.Insert("ItemKey" , CurrentData.ItemKey);

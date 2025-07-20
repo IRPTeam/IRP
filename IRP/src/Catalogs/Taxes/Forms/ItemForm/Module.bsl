@@ -104,7 +104,7 @@ Procedure SetTransactionTypes(Command)
 	OpenParameters = New Structure();
 	OpenParameters.Insert("DocumentName", CurrentData.DocumentName);
 	OpenParameters.Insert("TransactionTypes", ArrayOfAllTransactionTypes);
-	Notify = new NotifyDescription("ChoiceTransactionTypesEnd", ThisObject);
+	Notify = new CallbackDescription("ChoiceTransactionTypesEnd", ThisObject);
 	OpenForm("Catalog.Taxes.Form.ChoiceTransactionTypes", OpenParameters, ThisObject, , , , Notify,
 		FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure

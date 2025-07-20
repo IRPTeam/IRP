@@ -1143,7 +1143,7 @@ Procedure EditCurrenciesAccountBalance(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1157,7 +1157,7 @@ Procedure EditCurrenciesFixedAssets(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1171,7 +1171,7 @@ Procedure EditCurrenciesCashInTransit(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure
 
@@ -1185,7 +1185,7 @@ Procedure EditCurrenciesEmployeeCashAdvance(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1199,7 +1199,7 @@ Procedure EditCurrenciesAdvanceFromRetailCustomers(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1213,7 +1213,7 @@ Procedure EditCurrenciesSalaryPayment(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1227,7 +1227,7 @@ Procedure EditCurrenciesAdvanceFromCustomers(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1241,7 +1241,7 @@ Procedure EditCurrenciesAdvanceToSuppliers(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1255,7 +1255,7 @@ Procedure EditCurrenciesAccountReceivableByAgreements(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1269,7 +1269,7 @@ Procedure EditCurrenciesAccountReceivableByDocuments(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1283,7 +1283,7 @@ Procedure EditCurrenciesAccountReceivableOther(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure
 
@@ -1297,7 +1297,7 @@ Procedure EditCurrenciesAccountPayableByAgreements(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1311,7 +1311,7 @@ Procedure EditCurrenciesAccountPayableByDocuments(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1325,7 +1325,7 @@ Procedure EditCurrenciesAccountPayableOther(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure
 
@@ -1339,7 +1339,7 @@ Procedure EditCurrenciesReceiptFromConsignor(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1353,7 +1353,7 @@ Procedure EditCurrenciesTaxesIncoming(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1367,7 +1367,7 @@ Procedure EditCurrenciesTaxesOutgoing(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 

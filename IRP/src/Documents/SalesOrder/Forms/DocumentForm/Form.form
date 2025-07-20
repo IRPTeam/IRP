@@ -1183,7 +1183,7 @@
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListIsUnlockItemKey</name>
-          <id>971</id>
+          <id>987</id>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -1203,7 +1203,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>ItemListIsUnlockItemKeyContextMenu</name>
-            <id>972</id>
+            <id>988</id>
             <autoFill>true</autoFill>
           </contextMenu>
           <type>CheckBoxField</type>

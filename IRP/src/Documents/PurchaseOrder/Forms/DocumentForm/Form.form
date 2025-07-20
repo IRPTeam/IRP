@@ -4054,7 +4054,7 @@
         </items>
         <items xsi:type="form:FormGroup">
           <name>GroupNumerator</name>
-          <id>754</id>
+          <id>770</id>
           <items xsi:type="form:FormField">
             <name>DocumentNumber</name>
             <id>748</id>
@@ -4132,7 +4132,7 @@
           </title>
           <extendedTooltip>
             <name>GroupNumeratorExtendedTooltip</name>
-            <id>755</id>
+            <id>771</id>
             <type>Label</type>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>

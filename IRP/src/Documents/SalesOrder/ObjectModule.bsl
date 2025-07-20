@@ -173,6 +173,3 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		Date = Undefined;
 	EndIf;
 EndProcedure
-
-Procedure OnCopy(CopiedObject)
-EndProcedure

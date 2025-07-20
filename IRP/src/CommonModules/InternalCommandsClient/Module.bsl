@@ -5,7 +5,7 @@
 // Run command action.
 // 
 // Parameters:
-//  Command - FormCommand - Command
+//  Command - FormCommand, CommandBarButton - Command
 //  Form - ClientApplicationForm - Form
 //  MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main form attribute
 //  Targets - AnyRef, Array of AnyRef - Command target

@@ -239,7 +239,6 @@ Function R6080T_OtherPeriodsRevenues()
 	|WHERE
 	|	TRUE";
 
-
 EndFunction
 
 #EndRegion
@@ -313,7 +312,6 @@ EndProcedure
 #EndRegion
 
 #Region AccessObject
-
 
 // Get access key.
 // 

@@ -121,6 +121,6 @@ EndProcedure
 Procedure VerifyAtServer()
 	DCSTemplate = IDInfoServer.GetDCSTemplate(ThisObject.Ref.PredefinedDataName);
 	Settings = ThisObject.SettingsComposer.GetSettings();
-	Result = IDInfoServer.GetRefsByCondition(DCSTemplate, Settings);
+	Result = AddAttributesAndPropertiesServer.GetRefsByCondition(DCSTemplate, Settings);
 	ThisObject.ResultTable.Load(Result);
 EndProcedure

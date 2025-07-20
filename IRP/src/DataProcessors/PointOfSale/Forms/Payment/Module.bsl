@@ -293,7 +293,7 @@ Async Procedure Enter(Command)
 
 	FormCanBeClosed = True;
 	Items.Enter.Enabled = False;
-	ExecuteNotifyProcessing(OnCloseCallbackDescription, ReturnValue);
+	RunCallback(CallbackDescriptionOnClose, ReturnValue);
 EndProcedure
 
 &AtClient

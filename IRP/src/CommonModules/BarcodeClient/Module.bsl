@@ -84,7 +84,7 @@ Procedure SearchByBarcode(Barcode, Settings) Export
 #If MobileClient Then
 		Settings.MobileBarcodeModule.ScanBarcodeEndMobile(Barcode, True, "", Settings);
 #Else
-		ExecuteNotifyProcessing(CallbackDescription, Barcode);
+		RunCallback(CallbackDescription, Barcode);
 #EndIf
 	EndIf;
 EndProcedure
@@ -182,7 +182,7 @@ Function ProcessBarcodes(Barcodes, Settings)
 
 	//@skip-warning
 	CallbackDescription = New CallbackDescription("SearchByBarcodeEnd", ReturnCallToModule, Settings);
-	ExecuteNotifyProcessing(CallbackDescription, Settings.Result);
+	RunCallback(CallbackDescription, Settings.Result);
 	If Settings.Result.FoundedItems.Count() Then
 		ReturnResult = True;
 	EndIf;

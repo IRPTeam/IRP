@@ -32,14 +32,14 @@
     <types>DocumentRef.SalesReturn</types>
     <types>DocumentRef.CashRevenue</types>
     <types>DocumentRef.ModernizationOfFixedAsset</types>
+    <types>DocumentRef.WithholdingTaxInvoice</types>
     <types>DocumentRef.RetailSalesReceipt</types>
     <types>DocumentRef.DecommissioningOfFixedAsset</types>
     <types>DocumentRef.RevenueAccruals</types>
+    <types>DocumentRef.FixedAssetRevaluation</types>
     <types>DocumentRef.ForeignCurrencyRevaluation</types>
     <types>DocumentRef.DepreciationCalculation</types>
     <types>DocumentRef.SalesInvoice</types>
     <types>DocumentRef.CashExpense</types>
-    <types>DocumentRef.WithholdingTaxInvoice</types>
-    <types>DocumentRef.FixedAssetRevaluation</types>
   </type>
 </mdclass:DefinedType>

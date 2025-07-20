@@ -56,10 +56,10 @@
       <types>DocumentRef.ItemStockAdjustment</types>
       <types>DocumentRef.DecommissioningOfFixedAsset</types>
       <types>DocumentRef.InventoryTransfer</types>
+      <types>DocumentRef.GoodsReceipt</types>
       <types>DocumentRef.BatchReallocateIncoming</types>
       <types>DocumentRef.BatchReallocateOutgoing</types>
       <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.GoodsReceipt</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

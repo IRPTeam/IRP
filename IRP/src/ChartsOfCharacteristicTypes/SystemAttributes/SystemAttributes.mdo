@@ -31,40 +31,30 @@
   <predefined>
     <items id="d93915eb-3c72-427e-9b5d-fd8b04beed3c">
       <name>Store</name>
-      <description></description>
-      <code></code>
       <type>
         <types>CatalogRef.Stores</types>
       </type>
     </items>
     <items id="8040f5d5-f2be-4356-a670-2140c759ac70">
       <name>Partner</name>
-      <description></description>
-      <code></code>
       <type>
         <types>CatalogRef.Partners</types>
       </type>
     </items>
     <items id="a18b16cb-9374-461e-89dd-43b7a2a8e6ad">
       <name>PartnerTerm</name>
-      <description></description>
-      <code></code>
       <type>
         <types>CatalogRef.Agreements</types>
       </type>
     </items>
     <items id="1c35ce2d-a5b3-403c-935d-77cc5a89aa24">
       <name>LegalName</name>
-      <description></description>
-      <code></code>
       <type>
         <types>CatalogRef.Companies</types>
       </type>
     </items>
     <items id="e69564a3-2abe-414e-8961-fffe8bc69018">
       <name>LegalNameContract</name>
-      <description></description>
-      <code></code>
       <type>
         <types>CatalogRef.LegalNameContracts</types>
       </type>

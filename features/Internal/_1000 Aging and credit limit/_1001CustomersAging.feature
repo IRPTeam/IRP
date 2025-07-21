@@ -499,7 +499,7 @@ Scenario: _1000020 create Credit note and check Aging register movements
 	And I close all client application windows
 			
 
-Scenario: _1000030 create Debit note and check Aging register movements
+Scenario: _1000030 create Debit note and check Aging register movements (with basis document)
 	* Create document
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
@@ -528,6 +528,17 @@ Scenario: _1000030 create Debit note and check Aging register movements
 		And I select current line in "List" table
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "50,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Basis document" attribute in "Transactions" table
+		Then "Select data type" window is opened
+		And I go to line in "" table
+			| ""              |
+			| "Sales invoice" |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| "Amount" | "Company"      | "Currency" | "Legal name"      | "Partner" |
+			| "550,00" | "Main Company" | "TRY"      | "Company Kalipso" | "Kalipso" |
+		And I select current line in "List" table	
 		And I finish line editing in "Transactions" table
 	* Check movements
 		And I click the button named "FormPost"
@@ -539,12 +550,12 @@ Scenario: _1000030 create Debit note and check Aging register movements
 		And I select "R5011 Customers aging" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$DebitNote1000030$$'                | ''              | ''                           | ''            | ''               | ''         | ''           | ''                                   | ''          | ''                       | ''               | ''                 |
-			| 'Document registrations records'      | ''              | ''                           | ''            | ''               | ''         | ''           | ''                                   | ''          | ''                       | ''               | ''                 |
-			| 'Register  "R5011 Customers aging"'   | ''              | ''                           | ''            | ''               | ''         | ''           | ''                                   | ''          | ''                       | ''               | ''                 |
-			| ''                                    | 'Record type'   | 'Period'                     | 'Resources'   | 'Dimensions'     | ''         | ''           | ''                                   | ''          | ''                       | ''               | 'Attributes'       |
-			| ''                                    | ''              | ''                           | 'Amount'      | 'Company'        | 'Branch'   | 'Currency'   | 'Agreement'                          | 'Partner'   | 'Invoice'                | 'Payment date'   | 'Aging closing'    |
-			| ''                                    | 'Receipt'       | '$$DebitNoteDate1000030$$'   | '50'          | 'Main Company'   | ''         | 'TRY'        | 'Basic Partner terms, without VAT'   | 'Kalipso'   | '$$DebitNote1000030$$'   | '*'              | ''                 |
+			| '$$DebitNote1000030$$'              | ''            | ''                         | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                       | ''             | ''              |
+			| 'Document registrations records'    | ''            | ''                         | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                       | ''             | ''              |
+			| 'Register  "R5011 Customers aging"' | ''            | ''                         | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                       | ''             | ''              |
+			| ''                                  | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''       | ''         | ''                                 | ''        | ''                       | ''             | 'Attributes'    |
+			| ''                                  | ''            | ''                         | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                | 'Payment date' | 'Aging closing' |
+			| ''                                  | 'Receipt'     | '$$DebitNoteDate1000030$$' | '50'        | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$' | '*'            | ''              |
 		And I close all client application windows
 	* Post customers advance closing document
 		Given I open hyperlink 'e1cib/list/Document.CustomersAdvancesClosing'
@@ -566,7 +577,7 @@ Scenario: _1000030 create Debit note and check Aging register movements
 			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '250,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
 			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '200,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
 			| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
-			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$DebitNote1000030$$'    | '*'                                       | ''                             |
+			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                             |
 		Then the number of "List" table lines is "равно" "7"
 	And I close all client application windows
 				

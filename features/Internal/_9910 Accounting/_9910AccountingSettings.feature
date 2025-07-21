@@ -2147,6 +2147,9 @@ Scenario: _0991059 create journal entry for two PI
 		And I set "Use" checkbox in "JournalEntries" table
 		And I finish line editing in "JournalEntries" table
 		And I click "Ok" button	
+		Then " [Jobs: 1]: Background multi job" window is opened
+		And I click "Update statuses" button
+		And Delay 3
 	* Check journal entry
 		Given I open hyperlink "e1cib/list/Document.JournalEntry"
 		And "List" table contains lines

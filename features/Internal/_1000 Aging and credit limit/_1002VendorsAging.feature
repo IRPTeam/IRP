@@ -379,6 +379,18 @@ Scenario: _1002020 create Credit note and check Aging register movements
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
+		And I activate "Basis document" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Basis document" attribute in "Transactions" table
+		Then "Select data type" window is opened
+		And I go to line in "" table
+			| ""                 |
+			| "Purchase invoice" |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| "Amount"   | "Company"      | "Currency" | "Legal name"        | "Number" | "Partner"   |
+			| "4 000,00" | "Main Company" | "TRY"      | "Company Ferron BP" | "2"      | "Ferron BP" |
+		And I select current line in "List" table	
 		And I click the button named "FormPost"
 		And I delete "$$CreditNote1002020$$" variable
 		And I delete "$$CreditNoteDate1002020$$" variable
@@ -389,12 +401,12 @@ Scenario: _1002020 create Credit note and check Aging register movements
 			And I select "R5012 Vendors aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			Then "ResultTable" spreadsheet document is equal
-				| '$$CreditNote1002020$$'              | ''               | ''                             | ''             | ''                | ''          | ''            | ''                      | ''             | ''                         | ''                | ''                  |
-				| 'Document registrations records'     | ''               | ''                             | ''             | ''                | ''          | ''            | ''                      | ''             | ''                         | ''                | ''                  |
-				| 'Register  "R5012 Vendors aging"'    | ''               | ''                             | ''             | ''                | ''          | ''            | ''                      | ''             | ''                         | ''                | ''                  |
-				| ''                                   | 'Record type'    | 'Period'                       | 'Resources'    | 'Dimensions'      | ''          | ''            | ''                      | ''             | ''                         | ''                | 'Attributes'        |
-				| ''                                   | ''               | ''                             | 'Amount'       | 'Company'         | 'Branch'    | 'Currency'    | 'Agreement'             | 'Partner'      | 'Invoice'                  | 'Payment date'    | 'Aging closing'     |
-				| ''                                   | 'Receipt'        | '$$CreditNoteDate1002020$$'    | '100'          | 'Main Company'    | ''          | 'TRY'         | 'Vendor Ferron, TRY'    | 'Ferron BP'    | '$$CreditNote1002020$$'    | '*'               | ''                  |
+				| '$$CreditNote1002020$$'           | ''            | ''                          | ''          | ''             | ''       | ''         | ''                   | ''          | ''                          | ''             | ''              |
+				| 'Document registrations records'  | ''            | ''                          | ''          | ''             | ''       | ''         | ''                   | ''          | ''                          | ''             | ''              |
+				| 'Register  "R5012 Vendors aging"' | ''            | ''                          | ''          | ''             | ''       | ''         | ''                   | ''          | ''                          | ''             | ''              |
+				| ''                                | 'Record type' | 'Period'                    | 'Resources' | 'Dimensions'   | ''       | ''         | ''                   | ''          | ''                          | ''             | 'Attributes'    |
+				| ''                                | ''            | ''                          | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Agreement'          | 'Partner'   | 'Invoice'                   | 'Payment date' | 'Aging closing' |
+				| ''                                | 'Receipt'     | '$$CreditNoteDate1002020$$' | '100'       | 'Main Company' | ''       | 'TRY'      | 'Vendor Ferron, TRY' | 'Ferron BP' | '$$PurchaseInvoiceAging$$'  | '*'            | ''              |
 			And I close all client application windows
 		* Post Vendors advance closing document
 			Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
@@ -409,12 +421,12 @@ Scenario: _1002020 create Credit note and check Aging register movements
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
 			And "List" table contains lines
-				| 'Period'                           | 'Recorder'                     | 'Currency'    | 'Company'         | 'Branch'    | 'Partner'      | 'Amount'      | 'Agreement'             | 'Invoice'                      | 'Payment date'                                | 'Aging closing'                   |
-				| '$$DatePurchaseInvoiceAging1$$'    | '$$PurchaseInvoiceAging1$$'    | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '4 000,00'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging1$$'    | '*'                                           | ''                                |
-				| '*'                                | '$$PurchaseInvoiceAging$$'     | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '4 000,00'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging$$'     | '$$DatePaymentTermsPurchaseInvoiceAging$$'    | ''                                |
-				| '$$DateCashPayment1002009$$'       | '$$CashPayment1002009$$'       | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '4 000,00'    | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging1$$'    | '*'                                           | 'Vendors advances closing 4*'     |
-				| '$$DateBankPayment1002015$$'       | '$$BankPayment1002015$$'       | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '200,00'      | 'Vendor Ferron, TRY'    | '$$PurchaseInvoiceAging$$'     | '$$DatePaymentTermsPurchaseInvoiceAging$$'    | 'Vendors advances closing 4*'     |
-				| '$$CreditNoteDate1002020$$'        | '$$CreditNote1002020$$'        | 'TRY'         | 'Main Company'    | ''          | 'Ferron BP'    | '100,00'      | 'Vendor Ferron, TRY'    | '$$CreditNote1002020$$'        | '*'                                           | ''                                |
+				| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Branch' | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'               |
+				| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                            |
+				| '*'                             | '$$PurchaseInvoiceAging$$'  | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                            |
+				| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4*' |
+				| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4*' |
+				| '$$CreditNoteDate1002020$$'     | '$$CreditNote1002020$$'     | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                            |
 			Then the number of "List" table lines is "равно" "5"
 	And I close all client application windows
 			
@@ -482,13 +494,13 @@ Scenario: _1020030 create Debit note and check Aging register movements
 	* Check movements
 		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
 		And "List" table contains lines
-			| 'Period'                          | 'Recorder'                    | 'Currency'   | 'Company'        | 'Branch'   | 'Partner'     | 'Amount'     | 'Agreement'            | 'Invoice'                     | 'Payment date'                               | 'Aging closing'                  |
-			| '$$DatePurchaseInvoiceAging1$$'   | '$$PurchaseInvoiceAging1$$'   | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '4 000,00'   | 'Vendor Ferron, TRY'   | '$$PurchaseInvoiceAging1$$'   | '*'                                          | ''                               |
-			| '*'                               | '$$PurchaseInvoiceAging$$'    | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '4 000,00'   | 'Vendor Ferron, TRY'   | '$$PurchaseInvoiceAging$$'    | '$$DatePaymentTermsPurchaseInvoiceAging$$'   | ''                               |
-			| '$$DateCashPayment1002009$$'      | '$$CashPayment1002009$$'      | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '4 000,00'   | 'Vendor Ferron, TRY'   | '$$PurchaseInvoiceAging1$$'   | '*'                                          | 'Vendors advances closing 4*'    |
-			| '$$DateBankPayment1002015$$'      | '$$BankPayment1002015$$'      | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '200,00'     | 'Vendor Ferron, TRY'   | '$$PurchaseInvoiceAging$$'    | '$$DatePaymentTermsPurchaseInvoiceAging$$'   | 'Vendors advances closing 4*'    |
-			| '$$CreditNoteDate1002020$$'       | '$$CreditNote1002020$$'       | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '100,00'     | 'Vendor Ferron, TRY'   | '$$CreditNote1002020$$'       | '*'                                          | ''                               |
-			| '$$DebitNoteDate1000030$$'        | '$$DebitNote1020030$$'        | 'TRY'        | 'Main Company'   | ''         | 'Ferron BP'   | '50,00'      | 'Vendor Ferron, TRY'   | '$$PurchaseInvoiceAging$$'    | '*'                                          | 'Vendors advances closing 4*'    |
+			| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Branch' | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'               |
+			| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                            |
+			| '*'                             | '$$PurchaseInvoiceAging$$'  | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                            |
+			| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4*' |
+			| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4*' |
+			| '$$CreditNoteDate1002020$$'     | '$$CreditNote1002020$$'     | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | ''                            |
+			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1020030$$'      | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '50,00'    | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | 'Vendors advances closing 4*' |
 		Then the number of "List" table lines is "равно" "6"
 	And I close all client application windows
 				

@@ -116,17 +116,17 @@ Procedure SetVisibilityAvailability(Object, Form)
 	EndDo;
 	ClosedRowKeys = DocOrderClosingServer.GetIsClosedPurchaseOrderInItemList(ArrayOfOrders);
 	
-//	IsPresentPreliminary = False;
-//	For Each Row In Form.Object.ItemList Do
-//		Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
-//		If Row.IsPreliminary Then
-//			IsPresentPreliminary = True;
-//		EndIf;
-//	EndDo;
-//	
-//	Form.Items.ItemListCurrency.Visible = IsPresentPreliminary;
-//	Form.Items.ItemListPreliminaryAmount.Visible = IsPresentPreliminary;	
-//	Form.Items.ItemListPreliminaryTaxAmount.Visible = IsPresentPreliminary;
+	IsPresentPreliminary = False;
+	For Each Row In Form.Object.ItemList Do
+		Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
+		If Row.IsPreliminary Then
+			IsPresentPreliminary = True;
+		EndIf;
+	EndDo;
+	
+	Form.Items.ItemListCurrency.Visible = IsPresentPreliminary;
+	Form.Items.ItemListPreliminaryAmount.Visible = IsPresentPreliminary;	
+	Form.Items.ItemListPreliminaryTaxAmount.Visible = IsPresentPreliminary;
 EndProcedure
 
 &AtClient

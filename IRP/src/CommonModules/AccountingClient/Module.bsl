@@ -150,7 +150,8 @@ Procedure SelectLedgerType_MultipleDocuments(Result, AdditionalParameters) Expor
 		Return;
 	EndIf;
 	
-	AccountingServer.CreateJE_ByArrayRefs(AdditionalParameters.ArrayOfDocuments, Result.ArrayOfLedgerTypes);
+	JobSettingsArray = AccountingServer.GetJobsForCreateJE(AdditionalParameters.ArrayOfDocuments, Result.ArrayOfLedgerTypes);
+	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, AdditionalParameters.FormOwner);
 EndProcedure
 
 Procedure AddExtDimensionRow(Object, Form, AnalyticRow, AnalyticType, ExtDimType, ExtDim)

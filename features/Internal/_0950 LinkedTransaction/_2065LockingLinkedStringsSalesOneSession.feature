@@ -1515,17 +1515,12 @@ Scenario: _2065032 check locking tab in the SR with linked documents (one sessio
 				| 'Trousers'    | '38/Yellow'     |
 			And I click choice button of "Store" attribute in "ItemList" table
 			And I close current window
-		* Use SC
-			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'     |
-				| 'Boots'    | '37/18SD'      |
-			// When I Check the steps for Exception
-			// 	|'And I remove "Use shipment confirmation" checkbox in "ItemList" table'|			
+		* Use GR		
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
 				| 'Shirt'    | '36/Red'       |
 			// When I Check the steps for Exception
-			// 	|'And I remove "Use shipment confirmation" checkbox in "ItemList" table'|
+			// 	|'And I remove "Use goods receipt" checkbox in "ItemList" table'|
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
@@ -1548,26 +1543,29 @@ Scenario: _2065032 check locking tab in the SR with linked documents (one sessio
 				| 'Boots'    | '37/18SD'      |
 			And I activate "Quantity" field in "ItemList" table
 			And I input "2,000" text in "Quantity" field of "ItemList" table			
-		// * Sales invoice
-		// 	And I go to line in "ItemList" table
-		// 		| 'Item'     | 'Item key'     |
-		// 		| 'Boots'    | '37/18SD'      |
-		// 	When I Check the steps for Exception
-		// 		| 'And I click choice button of "Sales invoice" attribute in "ItemList" table'     |
-		// 	And I go to line in "ItemList" table
-		// 		| 'Item'     | 'Item key'     |
-		// 		| 'Shirt'    | '36/Red'       |
-		// 	When I Check the steps for Exception
-		// 		| 'And I click choice button of "Sales invoice" attribute in "ItemList" table'     |
-		// 	And I go to line in "ItemList" table
-		// 		| 'Item'        | 'Item key'      |
-		// 		| 'Trousers'    | '38/Yellow'     |
-		// 	When I Check the steps for Exception
-		// 		| 'And I click choice button of "Sales invoice" attribute in "ItemList" table'     |
-		// 	And I click "Unlock linked rows" button			
-		// 	And I click choice button of "Sales invoice" attribute in "ItemList" table
-		// 	And I close current window
-		// 	And I click "Unlock linked rows" button
+		* Sales invoice
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'     |
+				| 'Boots'    | '37/18SD'      |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales invoice" attribute in "ItemList" table'     |
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'     |
+				| 'Shirt'    | '36/Red'       |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales invoice" attribute in "ItemList" table'     |
+			And I go to line in "ItemList" table
+				| 'Item'        | 'Item key'      |
+				| 'Trousers'    | '38/Yellow'     |
+			And I click choice button of "Sales invoice" attribute in "ItemList" table
+			And I close current window
+			And I click "Unlock linked rows" button
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'     |
+				| 'Shirt'    | '36/Red'       |			
+			And I click choice button of "Sales invoice" attribute in "ItemList" table
+			And I close current window
+			And I click "Unlock linked rows" button
 		* Sales return order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |

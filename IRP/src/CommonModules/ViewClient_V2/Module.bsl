@@ -471,7 +471,7 @@ Procedure __tmp_CommonDocuments_OnChainComplete(Parameters, IsRetail)
 	
 	If QuestionsParameters.Count() Then
 		NotifyParameters = New Structure("Parameters, ChangedPoints", Parameters, ChangedPoints);
-		Notify = New NotifyDescription("QuestionsOnUserChangeContinue", ThisObject, NotifyParameters);
+		Notify = New CallbackDescription("QuestionsOnUserChangeContinue", ThisObject, NotifyParameters);
 		OpenForm("CommonForm.UpdateItemListInfo",
 			New Structure("QuestionsParameters", QuestionsParameters), 
 			Parameters.Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
@@ -497,7 +497,7 @@ Procedure __tmp_MoneyTransfer_OnChainComplete(Parameters)
 			Or IsChangedProperty(Parameters, "Receiver").IsChanged) Then
 	
 			NotifyParameters = New Structure("Parameters", Parameters);
-			ShowQueryBox(New NotifyDescription("__tmp_MoneyTransfer_CompanyOnUserChangeContinue", ThisObject, NotifyParameters), 
+			ShowQueryBox(New CallbackDescription("__tmp_MoneyTransfer_CompanyOnUserChangeContinue", ThisObject, NotifyParameters), 
 					R().QuestionToUser_015, QuestionDialogMode.OKCancel);
 		Else
 			__tmp_MoneyTransfer_CommitChanges(Parameters);
@@ -518,7 +518,7 @@ Procedure __tmp_MoneyTransfer_OnChainComplete(Parameters)
 			Or IsChangedProperty(Parameters, "ReceiveAmount").IsChanged) Then
 	
 			NotifyParameters = New Structure("Parameters", Parameters);
-			ShowQueryBox(New NotifyDescription("__tmp_MoneyTransfer_CashTransferOrderOnUserChangeContinue", ThisObject, NotifyParameters), 
+			ShowQueryBox(New CallbackDescription("__tmp_MoneyTransfer_CashTransferOrderOnUserChangeContinue", ThisObject, NotifyParameters), 
 					R().QuestionToUser_023, QuestionDialogMode.OKCancel);
 		Else
 			__tmp_MoneyTransfer_CommitChanges(Parameters);
@@ -564,7 +564,7 @@ Procedure __tmp_ProductionPlanning_OnChainComplete(Parameters)
 		If ChangedPropertyInfo.IsChanged And ValueIsFilled(ChangedPropertyInfo.OldValue) Then	
 			
 			NotifyParameters = New Structure("Parameters", Parameters);
-			ShowQueryBox(New NotifyDescription("__tmp_ProductionPlanning_BusinessUnitOrDateOnUserChangeContinue", ThisObject, NotifyParameters), 
+			ShowQueryBox(New CallbackDescription("__tmp_ProductionPlanning_BusinessUnitOrDateOnUserChangeContinue", ThisObject, NotifyParameters), 
 					R().QuestionToUser_024, QuestionDialogMode.YesNo);
 		Else
 			__tmp_ProductionPlanning_CommitChanges(Parameters);
@@ -601,7 +601,7 @@ Procedure __tmp_CashTransferOrder_OnChainComplete(Parameters)
 			Or IsChangedProperty(Parameters, "Receiver").IsChanged) Then
 	
 			NotifyParameters = New Structure("Parameters", Parameters);
-			ShowQueryBox(New NotifyDescription("__tmp_CashTransferOrder_CompanyOnUserChangeContinue", ThisObject, NotifyParameters), 
+			ShowQueryBox(New CallbackDescription("__tmp_CashTransferOrder_CompanyOnUserChangeContinue", ThisObject, NotifyParameters), 
 					R().QuestionToUser_015, QuestionDialogMode.OKCancel);
 		Else
 			__tmp_CashTransferOrder_CommitChanges(Parameters);
@@ -638,7 +638,7 @@ Procedure __tmp_CashExpenseRevenue_OnChainComplete(Parameters)
 		If IsChangedProperty(Parameters, "PaymentList.Currency").IsChanged 
 			And Parameters.Object.PaymentList.Count() Then
 			NotifyParameters = New Structure("Parameters", Parameters);
-			ShowQueryBox(New NotifyDescription("__tmp_CashExpenseRevenue_AccountOnUserChangeContinue", ThisObject, NotifyParameters), 
+			ShowQueryBox(New CallbackDescription("__tmp_CashExpenseRevenue_AccountOnUserChangeContinue", ThisObject, NotifyParameters), 
 			R().QuestionToUser_006, QuestionDialogMode.YesNo);
 		Else
 			__tmp_CashExpenseRevenue_CommitChanges(Parameters);
@@ -649,7 +649,7 @@ Procedure __tmp_CashExpenseRevenue_OnChainComplete(Parameters)
 		If IsChangedProperty(Parameters, "PaymentList.VatRate").IsChanged 
 			And Parameters.Object.PaymentList.Count() Then
 			NotifyParameters = New Structure("Parameters", Parameters);
-			ShowQueryBox(New NotifyDescription("__tmp_CashExpenseRevenue_DateOnUserChangeContinue", ThisObject, NotifyParameters), 
+			ShowQueryBox(New CallbackDescription("__tmp_CashExpenseRevenue_DateOnUserChangeContinue", ThisObject, NotifyParameters), 
 			R().QuestionToUser_025, QuestionDialogMode.YesNo);
 		Else
 			__tmp_CashExpenseRevenue_CommitChanges(Parameters);
@@ -663,7 +663,7 @@ Procedure __tmp_CashExpenseRevenue_OnChainComplete(Parameters)
 			QuestionsParameters.Add(New Structure("Action, QuestionText", "TaxRates", R().QuestionToUser_031));
 			
 			NotifyParameters = New Structure("Parameters, ChangedPoints", Parameters, ChangedPoints);
-			Notify = New NotifyDescription("QuestionsOnUserChangeContinue", ThisObject, NotifyParameters);
+			Notify = New CallbackDescription("QuestionsOnUserChangeContinue", ThisObject, NotifyParameters);
 			OpenForm("CommonForm.UpdateItemListInfo",
 			New Structure("QuestionsParameters", QuestionsParameters), 
 			Parameters.Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
@@ -714,7 +714,7 @@ Procedure __tmp_BankCashPaymentReceipt_OnChainComplete(Parameters)
 	If IsChangedProperty(Parameters, "TransactionType").IsChanged 
 		And Parameters.Object.PaymentList.Count() And Not Parameters.Object.DetailsByRow Then
 		NotifyParameters = New Structure("Parameters", Parameters);
-		ShowQueryBox(New NotifyDescription("__tmp_BankCashPaymentReceipt_TransactionTypeOnUserChangeContinue", ThisObject, NotifyParameters), 
+		ShowQueryBox(New CallbackDescription("__tmp_BankCashPaymentReceipt_TransactionTypeOnUserChangeContinue", ThisObject, NotifyParameters), 
 					R().QuestionToUser_014, QuestionDialogMode.OKCancel);
 	Else
 		__tmp_BankCashPaymentReceipt_CommitChanges(Parameters);
@@ -766,7 +766,7 @@ Procedure __tmp_GoodsShipmentReceipt_OnChainComplete(Parameters)
 	If NeedQueryStoreOnUserChange(Parameters) Then
 		// refill question ItemList.Store
 		NotifyParameters = New Structure("Parameters", Parameters);
-		ShowQueryBox(New NotifyDescription("__tmp_GoodsShipmentReceipt_StoreOnUserChangeContinue", ThisObject, NotifyParameters), 
+		ShowQueryBox(New CallbackDescription("__tmp_GoodsShipmentReceipt_StoreOnUserChangeContinue", ThisObject, NotifyParameters), 
 					R().QuestionToUser_005, QuestionDialogMode.YesNoCancel);
 	Else
 		__tmp_GoodsShipmentReceipt_CommitChanges(Parameters);

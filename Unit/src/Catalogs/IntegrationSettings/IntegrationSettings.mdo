@@ -18,6 +18,7 @@
     </synonym>
     <extension xsi:type="mdclassExtension:BasicFeatureExtension">
       <synonym>Extended</synonym>
+      <choiceForm>Extended</choiceForm>
     </extension>
     <type>
       <types>Boolean</types>

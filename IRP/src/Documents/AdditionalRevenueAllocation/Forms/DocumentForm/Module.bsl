@@ -202,7 +202,7 @@ EndProcedure
 &AtClient
 Procedure RevenueDocumentsDocumentStartChoice(Item, ChoiceData, StandardProcessing)
 	StandardProcessing = False;
-	Notify = New NotifyDescription("RevenueDocumentsDocumentStartChoiceEnd", ThisObject);
+	Notify = New CallbackDescription("RevenueDocumentsDocumentStartChoiceEnd", ThisObject);
 	FormParameters = New Structure();
 	FormParameters.Insert("Company" , Object.Company);
 	FormParameters.Insert("Ref"     , Object.Ref);
@@ -316,7 +316,7 @@ Procedure AllocationRowsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Para
 		Return;
 	EndIf;
 	
-	Notify = New NotifyDescription("AllocationRowsBeforeAddRowEnd", ThisObject);
+	Notify = New CallbackDescription("AllocationRowsBeforeAddRowEnd", ThisObject);
 	FormParameters = New Structure();
 	FormParameters.Insert("Company" , Object.Company);
 	FormParameters.Insert("BasisRowID", CurrentData.RowID);
@@ -400,7 +400,7 @@ EndProcedure
 &AtClient
 Procedure RevenueRowsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	Cancel = True;
-	Notify = New NotifyDescription("RevenueRowsBeforeAddRowEnd", ThisObject);
+	Notify = New CallbackDescription("RevenueRowsBeforeAddRowEnd", ThisObject);
 	FormParameters = New Structure();
 	FormParameters.Insert("Company" , Object.Company);
 	FormParameters.Insert("Ref"     , Object.Ref);
@@ -791,7 +791,7 @@ EndProcedure
 &AtClient
 Procedure AllocationDocumentsDocumentStartChoice(Item, ChoiceData, StandardProcessing)
 	StandardProcessing = False;
-	Notify = New NotifyDescription("AllocationDocumentsDocumentStartChoiceEnd", ThisObject);
+	Notify = New CallbackDescription("AllocationDocumentsDocumentStartChoiceEnd", ThisObject);
 	FormParameters = New Structure();
 	FormParameters.Insert("Company" , Object.Company);
 

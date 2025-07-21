@@ -94,7 +94,6 @@ Procedure CreateIssueHandler()
 		IssueRef = Issue;
 	EndIf;          
 	
-	
 	IsError = False;
 	Str = PictureViewerClient.RefInfo();
 	Str.Ref = IssueRef;
@@ -185,7 +184,6 @@ Procedure GetCoordinates()
 	#IF NOT MobileClient THEN
 		Return;
 	#ENDIF
-	
 	
 	MaxDistance = 1; // km
 	

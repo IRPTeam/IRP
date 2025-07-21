@@ -2003,6 +2003,7 @@ EndFunction
 Function R8510B_BookValueOfFixedAsset()
 	Return
 		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	OpeningEntryFixedAssets.Ref.Date AS Period,
 		|	OpeningEntryFixedAssets.Ref.Company,
 		|	OpeningEntryFixedAssets.FixedAsset,
@@ -2011,38 +2012,36 @@ Function R8510B_BookValueOfFixedAsset()
 		|	OpeningEntryFixedAssets.ProfitLossCenter AS ProfitLossCenter,
 		|	OpeningEntryFixedAssets.LedgerType,
 		|	OpeningEntryFixedAssets.CommissioningDate,
-		|	OpeningEntryFixedAssets.OriginalAmount,
-		|	OpeningEntryFixedAssets.BalanceAmount,
+		|	OpeningEntryFixedAssets.OriginalAmount AS Amount,
 		|	OpeningEntryFixedAssets.Currency,
+		|	OpeningEntryFixedAssets.Schedule,
 		|	OpeningEntryFixedAssets.Key
-		|INTO tmp
+		|INTO R8510B_BookValueOfFixedAsset
 		|FROM
 		|	Document.OpeningEntry.FixedAssets AS OpeningEntryFixedAssets
 		|WHERE
 		|	OpeningEntryFixedAssets.Ref = &Ref
-		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	tmp.Period,
-		|	tmp.Company,
-		|	tmp.Branch,
-		|	tmp.ProfitLossCenter,
-		|	tmp.FixedAsset,
-		|	tmp.LedgerType,
-		|	tmp.Currency,
-		|	tmp.Key,
-		|	tmp.BalanceAmount AS Amount,
-		|	FixedAssetsDepreciationInfo.Schedule AS Schedule
-		|INTO R8510B_BookValueOfFixedAsset
+		|union all
+		|
+		|select
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OpeningEntryFixedAssets.Ref.Date AS Period,
+		|	OpeningEntryFixedAssets.Ref.Company,
+		|	OpeningEntryFixedAssets.FixedAsset,
+		|	OpeningEntryFixedAssets.ResponsiblePerson,
+		|	OpeningEntryFixedAssets.Ref.Branch AS Branch,
+		|	OpeningEntryFixedAssets.ProfitLossCenter AS ProfitLossCenter,
+		|	OpeningEntryFixedAssets.LedgerType,
+		|	OpeningEntryFixedAssets.CommissioningDate,
+		|	OpeningEntryFixedAssets.OriginalAmount - OpeningEntryFixedAssets.BalanceAmount AS Amount,
+		|	OpeningEntryFixedAssets.Currency,
+		|	OpeningEntryFixedAssets.Schedule,
+		|	OpeningEntryFixedAssets.Key
 		|FROM
-		|	tmp AS tmp
-		|		LEFT JOIN Catalog.FixedAssets.DepreciationInfo AS FixedAssetsDepreciationInfo
-		|		ON FixedAssetsDepreciationInfo.Ref = tmp.FixedAsset
-		|		AND FixedAssetsDepreciationInfo.LedgerType = tmp.LedgerType
+		|	Document.OpeningEntry.FixedAssets AS OpeningEntryFixedAssets
 		|WHERE
-		|	FixedAssetsDepreciationInfo.LedgerType.CalculateDepreciation"
+		|	OpeningEntryFixedAssets.Ref = &Ref";
 EndFunction
 
 Function R5020B_PartnersBalance()

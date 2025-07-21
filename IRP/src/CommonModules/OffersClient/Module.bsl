@@ -1,7 +1,7 @@
 Procedure OpenFormPickupSpecialOffers_ForDocument(Object, Form, NotifyEditFinish, AddInfo = Undefined) Export
 	OpenFormArgs = OffersClientServer.GetOpenFormArgsPickupSpecialOffers_ForDocument(Object);
-	NotifyDescription = New NotifyDescription(NotifyEditFinish, Form, AddInfo);
-	OpenForm("CommonForm.PickupSpecialOffers", New Structure("Info", OpenFormArgs), , , , , NotifyDescription,
+	CallbackDescription = New CallbackDescription(NotifyEditFinish, Form, AddInfo);
+	OpenForm("CommonForm.PickupSpecialOffers", New Structure("Info", OpenFormArgs), , , , , CallbackDescription,
 			 FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
@@ -19,7 +19,7 @@ EndProcedure
 Procedure OpenFormPickupSpecialOffers_ForRow(Object, CurrentRow, Form, NotifyEditFinish, AddInfo = Undefined) Export
 	OpenFormArgs = GetOpenFormArgsPickupSpecialOffers_ForRow(Object, CurrentRow);
 	OpenForm("CommonForm.PickupSpecialOffers", New Structure("Info", OpenFormArgs), Form, , , ,
-		New NotifyDescription(NotifyEditFinish, Form, AddInfo), FormWindowOpeningMode.LockWholeInterface);
+		New CallbackDescription(NotifyEditFinish, Form, AddInfo), FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 Function GetOpenFormArgsPickupSpecialOffers_ForRow(Object, CurrentRow) Export

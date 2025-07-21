@@ -124,6 +124,7 @@ Function Calculations()
 		|	Calculations.Key AS Key,
 		|	Calculations.ExpenseType AS ExpenseType,
 		|	Calculations.RevenueType AS RevenueType,
+		|	Calculations.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency,
 		|	Calculations.*
 		|INTO Calculations
 		|FROM
@@ -144,6 +145,7 @@ Function R8510B_BookValueOfFixedAsset()
 		|			THEN VALUE(AccumulationRecordType.Expense)
 		|		ElSE VALUE(AccumulationRecordType.Receipt)
 		|	END AS RecordType,
+		|	&Date AS Period,
 		|	Calculations.Company,
 		|	Calculations.Branch,
 		|	Calculations.ProfitLossCenter,
@@ -151,13 +153,30 @@ Function R8510B_BookValueOfFixedAsset()
 		|	Calculations.LedgerType,
 		|	Calculations.Schedule,
 		|	Calculations.Amount,
-		|	&Date AS Period,
-		|	Calculations.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency
+		|	Calculations.Currency
 		|INTO R8510B_BookValueOfFixedAsset
 		|FROM
 		|	Calculations
 		|WHERE
-		|	TRUE";
+		|	TRUE
+		|
+		|union all
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	&Date,
+		|	Calculations.Company,
+		|	Calculations.Branch,
+		|	Calculations.ProfitLossCenter,
+		|	Calculations.FixedAsset,
+		|	Calculations.LedgerType,
+		|	Calculations.Schedule,
+		|	Calculations.DepreciationAmount,
+		|	Calculations.Currency
+		|FROM
+		|	Calculations
+		|WHERE
+		|	Calculations.DepreciationAmount <> 0";
 EndFunction
 
 Function R5022T_Expenses()

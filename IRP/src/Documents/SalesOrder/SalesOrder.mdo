@@ -100,6 +100,7 @@
   <registerRecords>AccumulationRegister.R2022B_CustomersPaymentPlanning</registerRecords>
   <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R9610T_ShipmentPlaning</registerRecords>
   <registerRecords>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</registerRecords>
   <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
@@ -113,7 +114,6 @@
   <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
   <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
-  <registerRecords>AccumulationRegister.R9610T_ShipmentPlaning</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

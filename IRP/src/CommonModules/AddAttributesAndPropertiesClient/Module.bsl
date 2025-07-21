@@ -14,7 +14,7 @@ Procedure SetRequiredAtAllSets(Object, Form, Command) Export
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
-	Notify = New NotifyDescription("SetRequiredAtAllSetsEnd", ThisObject, NotifyParameters);
+	Notify = New CallbackDescription("SetRequiredAtAllSetsEnd", ThisObject, NotifyParameters);
 	ShowInputValue(Notify, False, R().SuggestionToUser_1, Types);
 EndProcedure
 

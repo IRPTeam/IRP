@@ -335,7 +335,7 @@ Procedure ChequeBondsBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
 	
 	NotifyParameters = New Structure("Object, Form", Object, Form);
-	Notify = New NotifyDescription("ChequeBondsBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
+	Notify = New CallbackDescription("ChequeBondsBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
 	Parameters.Insert("Notify", Notify);
 	
 	IsPartnerCheque = ServiceSystemServer.GetObjectAttribute(CurrentData.Cheque, "Type")
@@ -419,7 +419,7 @@ Procedure ChequeBondsOrderStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
 	
 	NotifyParameters = New Structure("Object, Form", Object, Form);
-	Notify = New NotifyDescription("ChequeBondsOrderStartChoiceEnd", ThisObject, NotifyParameters);
+	Notify = New CallbackDescription("ChequeBondsOrderStartChoiceEnd", ThisObject, NotifyParameters);
 	Parameters.Insert("Notify"    , Notify);
 	
 	If IsPartnerCheque Then

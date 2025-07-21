@@ -9,7 +9,7 @@ EndProcedure
 
 &AtClient
 Procedure Load(Command)
-	_notify = New NotifyDescription("OnLoadContinue", ThisObject);
+	_notify = New CallbackDescription("OnLoadContinue", ThisObject);
 	OpenForm("DataProcessor.ReplaceSerialLotNumber.Form.LoadSerialLotNumbers", , ThisObject, , , , _notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 

@@ -67,24 +67,24 @@ EndFunction
 //  Settings - See GetBarcodeSettings
 Procedure SearchByBarcode(Barcode, Settings) Export
 
-	NotifyDescription = New NotifyDescription("InputBarcodeEnd", BarcodeClient, Settings);
+	CallbackDescription = New CallbackDescription("InputBarcodeEnd", BarcodeClient, Settings);
 	//@skip-warning
-	NotifyScan = New NotifyDescription("ScanBarcodeEndMobile", Settings.MobileBarcodeModule, Settings);
+	NotifyScan = New CallbackDescription("ScanBarcodeEndMobile", Settings.MobileBarcodeModule, Settings);
 	If IsBlankString(Barcode) Then
 		DescriptionField = R().SuggestionToUser_2; // String
 #If MobileClient Then
 		If MultimediaTools.BarcodeScanningSupported() Then
-			NotifyScanCancel = New NotifyDescription("InputBarcodeCancel", BarcodeClient, Settings);
+			NotifyScanCancel = New CallbackDescription("InputBarcodeCancel", BarcodeClient, Settings);
 			MultimediaTools.ShowBarcodeScanning(DescriptionField, NotifyScan, NotifyScanCancel, BarcodeType.All);
 		EndIf;
 #Else
-		OpenForm("CommonForm.InputBarcode", , , , , , NotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+		OpenForm("CommonForm.InputBarcode", , , , , , CallbackDescription, FormWindowOpeningMode.LockOwnerWindow);
 #EndIf
 	Else
 #If MobileClient Then
 		Settings.MobileBarcodeModule.ScanBarcodeEndMobile(Barcode, True, "", Settings);
 #Else
-		ExecuteNotifyProcessing(NotifyDescription, Barcode);
+		RunCallback(CallbackDescription, Barcode);
 #EndIf
 	EndIf;
 EndProcedure
@@ -181,8 +181,8 @@ Function ProcessBarcodes(Barcodes, Settings)
 	Settings.Result.Barcodes = BarcodeResult.Barcodes;
 
 	//@skip-warning
-	NotifyDescription = New NotifyDescription("SearchByBarcodeEnd", ReturnCallToModule, Settings);
-	ExecuteNotifyProcessing(NotifyDescription, Settings.Result);
+	CallbackDescription = New CallbackDescription("SearchByBarcodeEnd", ReturnCallToModule, Settings);
+	RunCallback(CallbackDescription, Settings.Result);
 	If Settings.Result.FoundedItems.Count() Then
 		ReturnResult = True;
 	EndIf;

@@ -9,7 +9,7 @@
 //  Form - ClientApplicationForm - Form
 Procedure CopyToClipboard(Object, Form) Export
 	//@skip-check wrong-string-literal-content
-	Notify = New NotifyDescription("CopyToClipboardAfterSetSettings", Form);
+	Notify = New CallbackDescription("CopyToClipboardAfterSetSettings", Form);
 	OpenSettings = New Structure;
 	If Not Object = Undefined Then
 		//@skip-check unknown-method-property
@@ -60,7 +60,7 @@ EndProcedure
 //  Form - ClientApplicationForm - Form
 Procedure PasteFromClipboard(Object, Form) Export
 	//@skip-check wrong-string-literal-content
-	Notify = New NotifyDescription("PasteFromClipboardAfterSetSettings", Form);
+	Notify = New CallbackDescription("PasteFromClipboardAfterSetSettings", Form);
 	OpenSettings = New Structure;
 	If Not Object = Undefined Then
 		//@skip-check unknown-method-property

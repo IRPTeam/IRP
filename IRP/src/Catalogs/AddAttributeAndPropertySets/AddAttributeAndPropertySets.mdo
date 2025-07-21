@@ -990,21 +990,18 @@
     </items>
     <items id="832a212e-a431-490b-9e6d-639c4a3c8123">
       <name>Document_WithholdingTaxInvoice</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>163</value>
       </code>
     </items>
     <items id="0c98a16a-9478-4dec-84c6-3b3d08514189">
       <name>Document_FixedAssetRevaluation</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>164</value>
       </code>
     </items>
     <items id="bf5f1977-f021-4c7d-99d2-0ec5ebefa12b">
       <name>Catalog_ExecutionTemplates</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>165</value>
       </code>

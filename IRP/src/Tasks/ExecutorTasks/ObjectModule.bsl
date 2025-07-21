@@ -18,6 +18,9 @@ Procedure OnWrite(Cancel)
 EndProcedure
 
 Procedure BeforeWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
 	
 	If Executed Then
 		If CurrentExecutor.IsEmpty() Then

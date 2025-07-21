@@ -293,7 +293,7 @@ Async Procedure Enter(Command)
 
 	FormCanBeClosed = True;
 	Items.Enter.Enabled = False;
-	ExecuteNotifyProcessing(OnCloseNotifyDescription, ReturnValue);
+	RunCallback(CallbackDescriptionOnClose, ReturnValue);
 EndProcedure
 
 &AtClient
@@ -419,7 +419,7 @@ Procedure OpenPaymentForm(PaymentTypesTable, PaymentType, CertStatus = Undefined
 	If PaymentTypesTable.Count() > 1 Then
 		NotifyParameters = New Structure();
 		NotifyParameters.Insert("CertStatus", CertStatus);
-		NotifyDescription = New NotifyDescription("FillPayments", ThisObject, NotifyParameters);
+		CallbackDescription = New CallbackDescription("FillPayments", ThisObject, NotifyParameters);
 		PayButtons = New Array();
 		For Each CollectionItem In PaymentTypesTable Do
 			ButtonSettings = POSClient.ButtonSettings();
@@ -431,7 +431,7 @@ Procedure OpenPaymentForm(PaymentTypesTable, PaymentType, CertStatus = Undefined
 		OpeningFormParameters = New Structure();
 		OpeningFormParameters.Insert("PayButtons", PayButtons);
 		OpenForm("DataProcessor.PointOfSale.Form.PaymentTypes", OpeningFormParameters, ThisObject, UUID, , ,
-			NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+			CallbackDescription, FormWindowOpeningMode.LockWholeInterface);
 	Else
 		ButtonSettings = POSClient.ButtonSettings();
 
@@ -890,7 +890,7 @@ Procedure Payment_CancelPaymentByPaymentCardManual(Command)
 		Return;
 	EndIf;
 	
-	Notify = New NotifyDescription(
+	Notify = New CallbackDescription(
 		"Payment_CancelPaymentByPaymentCardManual_End", ThisObject, PaymentRow);
 	OpenForm(
 		"DataProcessor.PointOfSale.Form.CancellationConfirmation",
@@ -943,7 +943,7 @@ Async Procedure Payment_RevertLastPaymentManual(Command)
 		Return;
 	EndIf;
 	
-	Notify = New NotifyDescription(
+	Notify = New CallbackDescription(
 		"Payment_RevertLastPaymentManual_End", ThisObject, PaymentRow);
 	OpenForm(
 		"DataProcessor.PointOfSale.Form.CancellationConfirmation",

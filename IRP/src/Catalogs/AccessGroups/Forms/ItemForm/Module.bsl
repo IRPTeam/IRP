@@ -32,7 +32,7 @@ EndProcedure
 
 &AtClient
 Procedure CopySettings(Command)
-	NotifyOnClose = New NotifyDescription("CopySettingsAfterSelect", ThisObject);
+	NotifyOnClose = New CallbackDescription("CopySettingsAfterSelect", ThisObject);
 	OpenForm("Catalog.AccessGroups.ChoiceForm", , , , , , NotifyOnClose);
 EndProcedure
 

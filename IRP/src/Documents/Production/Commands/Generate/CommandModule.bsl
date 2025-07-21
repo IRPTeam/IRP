@@ -2,7 +2,7 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	OpeningParameters = GetChoiceProductionParameters(CommandParameter);
-	Notify = New NotifyDescription("ChoiceProductionContinue", ThisObject);
+	Notify = New CallbackDescription("ChoiceProductionContinue", ThisObject);
 	OpenForm("Document.Production.Form.ChoiceProductionForm"
 	,OpeningParameters, CommandExecuteParameters.Source, New UUID()
 	,,,Notify,FormWindowOpeningMode.LockOwnerWindow);

@@ -227,6 +227,3 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndDo;
 	EndIf;
 EndProcedure
-
-Procedure OnCopy(CopiedObject)
-EndProcedure

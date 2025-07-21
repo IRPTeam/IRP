@@ -33,7 +33,6 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		ImageMap.Insert(Loc.Key, ImageArray);
 	EndDo;
 	
-	
 	Spreadsheet = New SpreadsheetDocument;
 	Print(Spreadsheet, CommandParameter, Images, ImageMap);
 

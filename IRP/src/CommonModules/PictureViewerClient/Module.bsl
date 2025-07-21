@@ -268,7 +268,7 @@ Procedure HTMLEvent(Form, Object, Val Data, AddInfo = Undefined) Export
 	If Data.value = "add_picture" Then
 		Upload(Form, Object);
 	ElsIf Data.value = "addImagesFromGallery" Then
-		NotifyOnClose = New NotifyDescription("AddPictureFromGallery", ThisObject, New Structure("Object, Form",
+		NotifyOnClose = New CallbackDescription("AddPictureFromGallery", ThisObject, New Structure("Object, Form",
 			Object, Form));
 		OpenForm("CommonForm.PictureGalleryForm", , ThisObject, , , , NotifyOnClose);
 	ElsIf Data.value = "update_slider" Then

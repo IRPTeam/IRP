@@ -853,7 +853,7 @@ Procedure EditCurrencies(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -937,7 +937,7 @@ Procedure ItemListControlCodeStringStateClick(SerialLotNumberForCheck = Undefine
 	//@skip-check unknown-method-property
 	Params.Insert("LineNumber", CurrentData.LineNumber);
 	Params.Insert("isReturn", False);
-	Notify = New NotifyDescription("ItemListControlCodeStringStateOpeningEnd", ThisObject, Params);
+	Notify = New CallbackDescription("ItemListControlCodeStringStateOpeningEnd", ThisObject, Params);
 	
 	OpenForm("CommonForm.CodeStringCheck", Params, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure

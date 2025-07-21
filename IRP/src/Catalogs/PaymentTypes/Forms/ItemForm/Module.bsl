@@ -83,7 +83,7 @@ EndProcedure
 Procedure IconClick(Item, StandardProcessing)
 	StandardProcessing = False;
 	If Object.isIconSet Then
-		Notify = New NotifyDescription("IconOnClickEnd", ThisObject);
+		Notify = New CallbackDescription("IconOnClickEnd", ThisObject);
 		QueryText = R().QuestionToUser_016;
 		QueryButtons = New ValueList();
 		QueryButtons.Add("Change", R().Form_017);
@@ -105,7 +105,7 @@ EndProcedure
 &AtClient
 Procedure AskForChangeIcon()
 	Var OpenFileDialog;
-	Notify = New NotifyDescription("SelectFileEnd", ThisObject);
+	Notify = New CallbackDescription("SelectFileEnd", ThisObject);
 	OpenFileDialog = New FileDialog(FileDialogMode.Open);
 	OpenFileDialog.Multiselect = False;
 	OpenFileDialog.Title = R().S_026;

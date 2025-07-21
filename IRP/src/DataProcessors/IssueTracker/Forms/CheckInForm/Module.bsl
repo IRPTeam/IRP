@@ -216,7 +216,6 @@ Function GetCoordinates()
 		Return True;
 	#ENDIF
 	
-	
 	MaxDistance = 1; // km
 	
 	Coordinates = MobileSubsystem.GetCoordinates();

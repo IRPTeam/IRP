@@ -205,7 +205,7 @@ EndProcedure
 &AtClient
 Procedure EditItemTemplate(TemplateName)
 //	If ThisObject.Modified Then
-//		ShowQueryBox(New NotifyDescription("EditItemTemplateEnd", ThisObject, New Structure("TemplateName", TemplateName)), 
+//		ShowQueryBox(New CallbackDescription("EditItemTemplateEnd", ThisObject, New Structure("TemplateName", TemplateName)), 
 //			R().QuestionToUser_001, QuestionDialogMode.OKCancel);
 //	Else
 		EditItemTemplateAtClient(TemplateName);
@@ -230,7 +230,7 @@ Procedure EditItemTemplateAtClient(AttributeName)
 	TemplateName = ?(isItemKey, "ItemKeyTemplate", "ItemTemplate");
 	SourceName = ?(isItemKey, "ItemKey", "Item");
 	
-	Notify = New NotifyDescription("OnFinishEditItemTemplate", ThisObject, New Structure("TemplateName", AttributeName));
+	Notify = New CallbackDescription("OnFinishEditItemTemplate", ThisObject, New Structure("TemplateName", AttributeName));
 	FormParameters = New Structure();
 	FormParameters.Insert("Formula", Object[AttributeName]);
 	FormParameters.Insert("SourceName"    , SourceName);

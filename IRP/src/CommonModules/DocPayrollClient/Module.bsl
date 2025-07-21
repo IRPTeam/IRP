@@ -234,7 +234,7 @@ Procedure ChoiceByAccrual(Object, Form) Export
 	EndDo;
 	OpenParameters.Insert("ArrayOfEmployee", ArrayOfEmployee);
 	
-	Notify = New NotifyDescription("ChoiceByAccrualEnd", ThisObject,New Structure("Object, Form", Object, Form));
+	Notify = New CallbackDescription("ChoiceByAccrualEnd", ThisObject,New Structure("Object, Form", Object, Form));
 	OpenForm("Document.Payroll.Form.ChoiceByAccrualForm", OpenParameters, Form, New UUID(), , , 
 		Notify, FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure

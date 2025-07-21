@@ -412,8 +412,8 @@ Procedure SetProcurementMethods(Object, Form, Command) Export
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
-	NotifyDescription = New NotifyDescription("PickupProcurementEnd", ThisObject, NotifyParameters);
-	OpenForm("Enum.ProcurementMethods.ChoiceForm", , Form, , , , NotifyDescription);
+	CallbackDescription = New CallbackDescription("PickupProcurementEnd", ThisObject, NotifyParameters);
+	OpenForm("Enum.ProcurementMethods.ChoiceForm", , Form, , , , CallbackDescription);
 EndProcedure
 
 Procedure PickupProcurementEnd(Result, AdditionalParameters) Export

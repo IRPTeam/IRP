@@ -357,7 +357,7 @@ Procedure SetRegExpValue(Type, FindElement)
 		FindElement.RegExp = "(" + FindElement.RegExp + ")";
 		OpenParameter =  New Structure("PartRow", FindElement);
 		OpenForm("Catalog.ExternalFunctions.ChoiceForm", , , , , , 
-			New NotifyDescription("SetExternalFunction", ThisObject, OpenParameter), 
+			New CallbackDescription("SetExternalFunction", ThisObject, OpenParameter), 
 			FormWindowOpeningMode.LockOwnerWindow);
 	Else
 		FindElement.RegExp = ".*";

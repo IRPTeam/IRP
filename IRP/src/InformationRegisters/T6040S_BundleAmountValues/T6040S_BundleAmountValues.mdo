@@ -211,6 +211,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <resources uuid="08bcd7e0-3d2f-452b-853b-90f9f90c3390">
     <name>PreliminaryTaxAmount</name>
@@ -224,6 +225,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <dimensions uuid="b5414687-a55e-4562-9eef-20a45047bd5d">
     <name>Company</name>

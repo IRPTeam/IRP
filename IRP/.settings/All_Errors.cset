@@ -76,10 +76,10 @@
     "module-structure-event-regions": {
       "enabled": false
     },
-    "right-update-database-configuration": {
+    "right-start-thick-client": {
       "enabled": false
     },
-    "right-start-thick-client": {
+    "right-update-database-configuration": {
       "enabled": false
     },
     "right-all-functions-mode": {
@@ -162,11 +162,11 @@
         "excludeTopMdObjectNamePattern": "R()"
       }
     },
-    "rollback-transaction": {
-      "enabled": true
-    },
     "module-structure-form-event-regions": {
       "enabled": false
+    },
+    "rollback-transaction": {
+      "enabled": true
     },
     "query-in-loop": {
       "enabled": false

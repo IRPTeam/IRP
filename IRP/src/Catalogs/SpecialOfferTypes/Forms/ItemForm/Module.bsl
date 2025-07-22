@@ -56,8 +56,8 @@ Procedure SetSettings(Command)
 	Info.Insert("Settings", AddressResult);
 	CallMethodAddDataProc(Info);
 
-	NotifyDescription = New NotifyDescription("OpenFormAddDataProcEnd", ThisObject);
-	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, ?(Object.GroupTypes, "GroupTypeForm",
+	CallbackDescription = New CallbackDescription("OpenFormAddDataProcEnd", ThisObject);
+	AddDataProcClient.OpenFormAddDataProc(Info, CallbackDescription, ?(Object.GroupTypes, "GroupTypeForm",
 		"ElementTypeForm"));
 EndProcedure
 

@@ -8,7 +8,7 @@
  <name>TaskFailActions</name>
  <synonym>
   <key>tr</key>
-  <value>Task fail actions</value>
+  <value>Görev başarısızlığı eylemleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -24,7 +24,7 @@
   <name>RestartProcess</name>
   <synonym>
    <key>tr</key>
-   <value>Restart process</value>
+   <value>Yeniden başlatma işlemi</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -39,7 +39,7 @@
   <name>RestartStage</name>
   <synonym>
    <key>tr</key>
-   <value>Restart stage</value>
+   <value>Yeniden başlatma aşaması</value>
   </synonym>
   <synonym>
    <key>ru</key>

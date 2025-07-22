@@ -12,7 +12,7 @@
  <name>TaskExecutors</name>
  <synonym>
   <key>tr</key>
-  <value>Task executors</value>
+  <value>Görev sorumluları</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -29,7 +29,7 @@
   <name>Executor</name>
   <synonym>
    <key>tr</key>
-   <value>Executor</value>
+   <value>Sorumlu</value>
   </synonym>
   <synonym>
    <key>ru</key>

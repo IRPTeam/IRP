@@ -271,7 +271,7 @@
   <name>DELETE_Partner</name>
   <synonym>
    <key>tr</key>
-   <value>DELETE ortak</value>
+   <value>DELETE Cari hesap</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -295,7 +295,7 @@
   <name>DELETE_LegalName</name>
   <synonym>
    <key>tr</key>
-   <value>DELETE legal name</value>
+   <value>SİLİNECEK Fatura hesabı</value>
   </synonym>
   <synonym>
    <key>ru</key>

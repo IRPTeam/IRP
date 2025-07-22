@@ -23,11 +23,6 @@
   <extendedTooltip>
    <name>AvailableVariablesExtendedTooltip</name>
    <id>12</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -38,11 +33,6 @@
   <contextMenu>
    <name>AvailableVariablesContextMenu</name>
    <id>11</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <type>Label</type>
@@ -67,11 +57,6 @@
   <extendedTooltip>
    <name>CodeTextExtendedTooltip</name>
    <id>7</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -82,11 +67,6 @@
   <contextMenu>
    <name>CodeTextContextMenu</name>
    <id>6</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <type>TextDocumentField</type>
@@ -117,11 +97,6 @@
    <extendedTooltip>
     <name>FormRunCodeExtendedTooltip</name>
     <id>2</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -148,11 +123,6 @@
    <extendedTooltip>
     <name>FormCloseExtendedTooltip</name>
     <id>4</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -167,11 +137,6 @@
    <placementArea>UserCmds</placementArea>
    <representationInContextMenu>Auto</representationInContextMenu>
   </items>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
  </autoCommandBar>
  <handlers>

@@ -23,11 +23,6 @@
   <extendedTooltip>
    <name>SearchExtendedTooltip</name>
    <id>32</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -38,11 +33,6 @@
   <contextMenu>
    <name>SearchContextMenu</name>
    <id>31</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <source>FunctionalOptions</source>
@@ -76,11 +66,6 @@
    <extendedTooltip>
     <name>FunctionalOptionsOptionPresentationExtendedTooltip</name>
     <id>29</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -91,11 +76,6 @@
    <contextMenu>
     <name>FunctionalOptionsOptionPresentationContextMenu</name>
     <id>28</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -127,11 +107,6 @@
    <extendedTooltip>
     <name>FunctionalOptionsUseExtendedTooltip</name>
     <id>19</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -142,11 +117,6 @@
    <contextMenu>
     <name>FunctionalOptionsUseContextMenu</name>
     <id>18</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>CheckBoxField</type>
@@ -159,11 +129,6 @@
   <autoCommandBar>
    <name>FunctionalOptionsCommandBar</name>
    <id>2</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
@@ -175,21 +140,11 @@
    <name>FunctionalOptionsBeforeDeleteRow</name>
   </handlers>
   <searchStringAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>FunctionalOptionsSearchString</name>
    <id>5</id>
    <extendedTooltip>
     <name>FunctionalOptionsSearchStringExtendedTooltip</name>
     <id>7</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -200,11 +155,6 @@
    <contextMenu>
     <name>FunctionalOptionsSearchStringContextMenu</name>
     <id>6</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <source>FunctionalOptions</source>
@@ -213,21 +163,11 @@
    </extInfo>
   </searchStringAddition>
   <viewStatusAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>FunctionalOptionsViewStatus</name>
    <id>11</id>
    <extendedTooltip>
     <name>FunctionalOptionsViewStatusExtendedTooltip</name>
     <id>13</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -238,11 +178,6 @@
    <contextMenu>
     <name>FunctionalOptionsViewStatusContextMenu</name>
     <id>12</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>ViewStatusAddition</type>
@@ -252,21 +187,11 @@
    </extInfo>
   </viewStatusAddition>
   <searchControlAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>FunctionalOptionsSearchControl</name>
    <id>8</id>
    <extendedTooltip>
     <name>FunctionalOptionsSearchControlExtendedTooltip</name>
     <id>10</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -277,11 +202,6 @@
    <contextMenu>
     <name>FunctionalOptionsSearchControlContextMenu</name>
     <id>9</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>SearchControlAddition</type>
@@ -293,11 +213,6 @@
   <extendedTooltip>
    <name>FunctionalOptionsExtendedTooltip</name>
    <id>4</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -308,11 +223,6 @@
   <contextMenu>
    <name>FunctionalOptionsContextMenu</name>
    <id>3</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
   </contextMenu>
   <changeRowSet>true</changeRowSet>
   <changeRowOrder>true</changeRowOrder>
@@ -348,11 +258,6 @@
    <extendedTooltip>
     <name>FormSaveExtendedTooltip</name>
     <id>21</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -379,11 +284,6 @@
    <extendedTooltip>
     <name>FormCancelExtendedTooltip</name>
     <id>23</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -409,11 +309,6 @@
    <extendedTooltip>
     <name>FormCheckAllExtendedTooltip</name>
     <id>34</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -439,11 +334,6 @@
    <extendedTooltip>
     <name>FormUncheckAllExtendedTooltip</name>
     <id>36</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -469,11 +359,6 @@
    <extendedTooltip>
     <name>FormUpdateDefaultsExtendedTooltip</name>
     <id>38</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -499,11 +384,6 @@
    <extendedTooltip>
     <name>FormUpdateAllUserSettingsExtendedTooltip</name>
     <id>40</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -518,11 +398,6 @@
    <placementArea>UserCmds</placementArea>
    <representationInContextMenu>Auto</representationInContextMenu>
   </items>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
   <autoFill>true</autoFill>
  </autoCommandBar>

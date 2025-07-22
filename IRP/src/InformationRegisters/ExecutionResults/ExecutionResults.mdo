@@ -12,7 +12,7 @@
  <name>ExecutionResults</name>
  <synonym>
   <key>tr</key>
-  <value>Execution results</value>
+  <value>İşlem sonuçları</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -53,7 +53,7 @@
   <name>ExecutionObject</name>
   <synonym>
    <key>tr</key>
-   <value>Execution object</value>
+   <value>İşlem nesnesi</value>
   </synonym>
   <synonym>
    <key>ru</key>

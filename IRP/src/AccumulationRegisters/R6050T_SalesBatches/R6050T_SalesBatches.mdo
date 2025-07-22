@@ -365,7 +365,7 @@
   <name>PreliminaryQuantity</name>
   <synonym>
    <key>tr</key>
-   <value>Preliminary quantity</value>
+   <value>Ön miktar</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -386,7 +386,7 @@
   <name>PreliminaryAmount</name>
   <synonym>
    <key>tr</key>
-   <value>Preliminary amount</value>
+   <value>Ön tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -407,7 +407,7 @@
   <name>PreliminaryTaxAmount</name>
   <synonym>
    <key>tr</key>
-   <value>Preliminary tax amount</value>
+   <value>Ön vergi tutarı</value>
   </synonym>
   <synonym>
    <key>ru</key>

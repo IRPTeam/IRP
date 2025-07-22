@@ -60,10 +60,10 @@ EndFunction // GetUserConnectionProperty()
 Function ReturningUserProperties(UserConnectionProperty)
 
 	Success = False;
-	CheckTime = CurrentDate();
+	CheckTime = CommonFunctionsServer.GetCurrentSessionDate();
 	
 	While Not Success Do
-		If CurrentDate() - CheckTime > 25 Then // limit the waiting time in seconds
+		If CommonFunctionsServer.GetCurrentSessionDate() - CheckTime > 25 Then // limit the waiting time in seconds
 			Break;
 		EndIf; 
 		

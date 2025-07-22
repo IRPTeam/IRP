@@ -495,7 +495,6 @@ Function GetAnalytics_DR_R5021T_Revenues_CR_R4050B_StockInventory(Parameters)
 	AdditionalAnalytics.Insert("Item", Parameters.RowData.Item);
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
-	
 	Return AccountingAnalytics;
 EndFunction
 

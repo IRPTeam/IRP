@@ -76,10 +76,6 @@
 			</title>
 			<appearance>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">15</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
@@ -95,6 +91,10 @@
 							<v8:content>NFD=2</v8:content>
 						</v8:item>
 					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">15</dcscor:value>
 				</dcscor:item>
 			</appearance>
 		</field>
@@ -436,6 +436,7 @@ WHERE
 		<valueType>
 			<v8:Type xmlns:d4p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d4p1:CatalogRef.Companies</v8:Type>
 		</valueType>
+		<value xsi:nil="true"/>
 		<useRestriction>false</useRestriction>
 		<inputParameters>
 			<dcscor:item>
@@ -473,6 +474,7 @@ WHERE
 				<v8:DateFractions>DateTime</v8:DateFractions>
 			</v8:DateQualifiers>
 		</valueType>
+		<value xsi:nil="true"/>
 		<useRestriction>false</useRestriction>
 		<expression>&amp;Period.EndDate</expression>
 		<availableAsField>false</availableAsField>
@@ -499,6 +501,7 @@ WHERE
 				<v8:DateFractions>DateTime</v8:DateFractions>
 			</v8:DateQualifiers>
 		</valueType>
+		<value xsi:nil="true"/>
 		<useRestriction>false</useRestriction>
 		<expression>&amp;Period.StartDate</expression>
 		<availableAsField>false</availableAsField>
@@ -622,6 +625,7 @@ WHERE
 			<dcsset:dataParameters>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 					<dcscor:parameter>Company</dcscor:parameter>
+					<dcscor:value xsi:nil="true"/>
 					<dcsset:userSettingID>13b301da-01ec-46c1-9d94-b74f80906660</dcsset:userSettingID>
 				</dcscor:item>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">

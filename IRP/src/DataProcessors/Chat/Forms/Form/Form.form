@@ -17,11 +17,6 @@
    <extendedTooltip>
     <name>BasisExtendedTooltip</name>
     <id>39</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -32,11 +27,6 @@
    <contextMenu>
     <name>BasisContextMenu</name>
     <id>38</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -65,11 +55,6 @@
    <extendedTooltip>
     <name>UpdateExtendedTooltip</name>
     <id>72</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -105,11 +90,6 @@
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
    <id>36</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -142,11 +122,6 @@
   <extendedTooltip>
    <name>ChatExtendedTooltip</name>
    <id>75</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -157,11 +132,6 @@
   <contextMenu>
    <name>ChatContextMenu</name>
    <id>74</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <type>HTMLDocumentField</type>
@@ -210,11 +180,6 @@
     <extendedTooltip>
      <name>AttachedFilesExtendedTooltip</name>
      <id>80</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -225,11 +190,6 @@
     <contextMenu>
      <name>AttachedFilesContextMenu</name>
      <id>79</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -269,11 +229,6 @@
     <extendedTooltip>
      <name>NewMessageExtendedTooltip</name>
      <id>44</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -284,11 +239,6 @@
     <contextMenu>
      <name>NewMessageContextMenu</name>
      <id>43</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -315,7 +265,7 @@
    </userVisible>
    <title>
     <key>tr</key>
-    <value>Group message</value>
+    <value>Grup mesajı</value>
    </title>
    <title>
     <key>ru</key>
@@ -328,11 +278,6 @@
    <extendedTooltip>
     <name>GroupMessageExtendedTooltip</name>
     <id>82</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -361,11 +306,6 @@
    <extendedTooltip>
     <name>AttachFilesExtendedTooltip</name>
     <id>77</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -392,11 +332,6 @@
    <extendedTooltip>
     <name>SendMessageExtendedTooltip</name>
     <id>48</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -436,11 +371,6 @@
   <extendedTooltip>
    <name>GroupBottomExtendedTooltip</name>
    <id>46</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -462,11 +392,6 @@
  <autoCommandBar>
   <name>FormCommandBar</name>
   <id>-1</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
  </autoCommandBar>
  <handlers>

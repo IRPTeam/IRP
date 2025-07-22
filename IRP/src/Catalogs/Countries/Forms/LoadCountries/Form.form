@@ -15,11 +15,6 @@
    <extendedTooltip>
     <name>FormCreateSelectedExtendedTooltip</name>
     <id>39</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -62,11 +57,6 @@
     <extendedTooltip>
      <name>LoadingImageExtendedTooltip</name>
      <id>30</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -77,11 +67,6 @@
     <contextMenu>
      <name>LoadingImageContextMenu</name>
      <id>29</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <width>2</width>
@@ -119,11 +104,6 @@
     <extendedTooltip>
      <name>DecorationLoadingExtendedTooltip</name>
      <id>33</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -134,11 +114,6 @@
     <contextMenu>
      <name>DecorationLoadingContextMenu</name>
      <id>32</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>Label</type>
@@ -169,11 +144,6 @@
    <extendedTooltip>
     <name>GroupLoadingExtendedTooltip</name>
     <id>27</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -215,11 +185,6 @@
    <extendedTooltip>
     <name>CommandBarMainExtendedTooltip</name>
     <id>35</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -253,11 +218,6 @@
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
    <id>37</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -313,11 +273,6 @@
    <extendedTooltip>
     <name>CountryListExistsExtendedTooltip</name>
     <id>16</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -328,11 +283,6 @@
    <contextMenu>
     <name>CountryListExistsContextMenu</name>
     <id>15</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>CheckBoxField</type>
@@ -357,11 +307,6 @@
    <extendedTooltip>
     <name>CountryListCodeExtendedTooltip</name>
     <id>22</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -372,11 +317,6 @@
    <contextMenu>
     <name>CountryListCodeContextMenu</name>
     <id>21</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -407,11 +347,6 @@
    <extendedTooltip>
     <name>CountryListUserLangDescriptionExtendedTooltip</name>
     <id>42</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -422,11 +357,6 @@
    <contextMenu>
     <name>CountryListUserLangDescriptionContextMenu</name>
     <id>41</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -457,11 +387,6 @@
    <extendedTooltip>
     <name>CountryListDescriptionExtendedTooltip</name>
     <id>25</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -472,11 +397,6 @@
    <contextMenu>
     <name>CountryListDescriptionContextMenu</name>
     <id>24</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -496,30 +416,15 @@
   <autoCommandBar>
    <name>CountryListCommandBar</name>
    <id>2</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <horizontalAlign>Left</horizontalAlign>
    <autoFill>true</autoFill>
   </autoCommandBar>
   <searchStringAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>CountryListSearchString</name>
    <id>5</id>
    <extendedTooltip>
     <name>CountryListSearchStringExtendedTooltip</name>
     <id>7</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -530,11 +435,6 @@
    <contextMenu>
     <name>CountryListSearchStringContextMenu</name>
     <id>6</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <source>CountryList</source>
@@ -543,21 +443,11 @@
    </extInfo>
   </searchStringAddition>
   <viewStatusAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>CountryListViewStatus</name>
    <id>11</id>
    <extendedTooltip>
     <name>CountryListViewStatusExtendedTooltip</name>
     <id>13</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -568,11 +458,6 @@
    <contextMenu>
     <name>CountryListViewStatusContextMenu</name>
     <id>12</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>ViewStatusAddition</type>
@@ -582,21 +467,11 @@
    </extInfo>
   </viewStatusAddition>
   <searchControlAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>CountryListSearchControl</name>
    <id>8</id>
    <extendedTooltip>
     <name>CountryListSearchControlExtendedTooltip</name>
     <id>10</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -607,11 +482,6 @@
    <contextMenu>
     <name>CountryListSearchControlContextMenu</name>
     <id>9</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>SearchControlAddition</type>
@@ -623,11 +493,6 @@
   <extendedTooltip>
    <name>CountryListExtendedTooltip</name>
    <id>4</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -638,11 +503,6 @@
   <contextMenu>
    <name>CountryListContextMenu</name>
    <id>3</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <readOnly>true</readOnly>
@@ -669,11 +529,6 @@
  <autoCommandBar>
   <name>FormCommandBar</name>
   <id>-1</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
  </autoCommandBar>
  <handlers>

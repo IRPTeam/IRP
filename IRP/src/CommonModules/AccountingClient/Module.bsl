@@ -8,7 +8,7 @@ Procedure OpenFormEditAccounting(Object, Form, CurrentData, TableName) Export
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , Form);
-	Notify = New NotifyDescription("EditAccounting", ThisObject, NotifyParameters);
+	Notify = New CallbackDescription("EditAccounting", ThisObject, NotifyParameters);
 	OpenForm("CommonForm.EditAccounting", FormParameters, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -18,7 +18,7 @@ Procedure OpenFormSelectLedgerType(FormOwner, BasisRef, ArrayOfJournalEntries) E
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("FormOwner" , FormOwner);
 	NotifyParameters.Insert("BasisRef"  , BasisRef);
-	Notify = New NotifyDescription("SelectLedgerType", ThisObject, NotifyParameters);
+	Notify = New CallbackDescription("SelectLedgerType", ThisObject, NotifyParameters);
 	OpenForm("Document.JournalEntry.Form.SelectLedgerType", FormParameters, FormOwner, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -30,7 +30,7 @@ Procedure OpenFormSelectLedgerType_MultipleDocuments(FormOwner, ArrayOfDocuments
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("FormOwner" , FormOwner);
 	NotifyParameters.Insert("ArrayOfDocuments"  , ArrayOfDocuments);
-	Notify = New NotifyDescription("SelectLedgerType_MultipleDocuments", ThisObject, NotifyParameters);
+	Notify = New CallbackDescription("SelectLedgerType_MultipleDocuments", ThisObject, NotifyParameters);
 	OpenForm("Document.JournalEntry.Form.SelectLedgerType", FormParameters, FormOwner, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -150,7 +150,8 @@ Procedure SelectLedgerType_MultipleDocuments(Result, AdditionalParameters) Expor
 		Return;
 	EndIf;
 	
-	AccountingServer.CreateJE_ByArrayRefs(AdditionalParameters.ArrayOfDocuments, Result.ArrayOfLedgerTypes);
+	JobSettingsArray = AccountingServer.GetJobsForCreateJE(AdditionalParameters.ArrayOfDocuments, Result.ArrayOfLedgerTypes);
+	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, AdditionalParameters.FormOwner);
 EndProcedure
 
 Procedure AddExtDimensionRow(Object, Form, AnalyticRow, AnalyticType, ExtDimType, ExtDim)

@@ -11,7 +11,7 @@
  <name>ExecutionProcesses</name>
  <synonym>
   <key>tr</key>
-  <value>Execution processes</value>
+  <value>Görev süreçleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -94,7 +94,7 @@
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
   <key>tr</key>
-  <value>Execution process</value>
+  <value>İşlem süreci</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
@@ -140,7 +140,7 @@
   <name>ExecutionObject</name>
   <synonym>
    <key>tr</key>
-   <value>Execution object</value>
+   <value>İşlem nesnesi</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -214,7 +214,7 @@
   <name>ExecutionStages</name>
   <synonym>
    <key>tr</key>
-   <value>Execution stages</value>
+   <value>Uygulama aşamaları</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -337,7 +337,7 @@
    <name>TasksStartTogether</name>
    <synonym>
     <key>tr</key>
-    <value>Tasks start together</value>
+    <value>Görevler birlikte başlar</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -359,7 +359,7 @@
    <name>TasksResult</name>
    <synonym>
     <key>tr</key>
-    <value>Tasks result</value>
+    <value>Görev sonucu</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -381,7 +381,7 @@
    <name>TasksFailAction</name>
    <synonym>
     <key>tr</key>
-    <value>Tasks fail action</value>
+    <value>Başarısız Görevler eylemi</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -408,7 +408,7 @@
   <name>StagesTasks</name>
   <synonym>
    <key>tr</key>
-   <value>Stages tasks</value>
+   <value>Aşamalı görevler</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -552,7 +552,7 @@
    <name>Executor</name>
    <synonym>
     <key>tr</key>
-    <value>Executor</value>
+    <value>Sorumlu</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -662,7 +662,7 @@
    <name>Detailing</name>
    <synonym>
     <key>tr</key>
-    <value>Detailing</value>
+    <value>Detaylandırma</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -707,7 +707,7 @@
    <name>AutoExecuteOnStartup</name>
    <synonym>
     <key>tr</key>
-    <value>Auto-execute</value>
+    <value>Otomatik yürütme</value>
    </synonym>
    <synonym>
     <key>ru</key>

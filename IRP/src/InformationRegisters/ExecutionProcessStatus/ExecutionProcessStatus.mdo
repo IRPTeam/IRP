@@ -12,7 +12,7 @@
  <name>ExecutionProcessStatus</name>
  <synonym>
   <key>tr</key>
-  <value>Execution process status</value>
+  <value>İşlem süreci durumu</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -53,7 +53,7 @@
   <name>CurrentTask</name>
   <synonym>
    <key>tr</key>
-   <value>Current task</value>
+   <value>Mevcut görev</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -103,7 +103,7 @@
   <name>ExecutionProcess</name>
   <synonym>
    <key>tr</key>
-   <value>Execution process</value>
+   <value>İşlem süreci</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -127,7 +127,7 @@
   <name>StatusTime</name>
   <synonym>
    <key>tr</key>
-   <value>Status time</value>
+   <value>Durum zamanı</value>
   </synonym>
   <synonym>
    <key>ru</key>

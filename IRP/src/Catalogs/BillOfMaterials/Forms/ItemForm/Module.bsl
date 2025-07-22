@@ -232,7 +232,7 @@ EndFunction
 &AtClient
 Procedure SetAsDefault(Command)
 	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
-		Notify = New NotifyDescription("SetAsDefaultContinue", ThisObject);
+		Notify = New CallbackDescription("SetAsDefaultContinue", ThisObject);
 		ShowQueryBox(Notify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 	Else
 		SetAsDefaultAtServer();

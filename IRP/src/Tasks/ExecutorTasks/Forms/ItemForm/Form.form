@@ -133,7 +133,7 @@
   </userVisible>
   <title>
    <key>tr</key>
-   <value>Group dates</value>
+   <value>Grup tarihleri</value>
   </title>
   <title>
    <key>ru</key>
@@ -289,11 +289,6 @@
   <extendedTooltip>
    <name>GroupDescriptionsExtendedTooltip</name>
    <id>47</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -386,7 +381,7 @@
   </userVisible>
   <title>
    <key>tr</key>
-   <value>Group executor</value>
+   <value>Grup sorumlusu</value>
   </title>
   <title>
    <key>ru</key>
@@ -940,7 +935,7 @@
   <name>AcceptForExecution</name>
   <title>
    <key>tr</key>
-   <value>Accept for execution</value>
+   <value>Görevi kabul et</value>
   </title>
   <title>
    <key>ru</key>
@@ -994,7 +989,7 @@
   <name>Comleted</name>
   <title>
    <key>tr</key>
-   <value>Comleted</value>
+   <value>Tamamlandı</value>
   </title>
   <title>
    <key>ru</key>

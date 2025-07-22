@@ -18,11 +18,6 @@
   <extendedTooltip>
    <name>LedgerTypeExtendedTooltip</name>
    <id>64</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -33,11 +28,6 @@
   <contextMenu>
    <name>LedgerTypeContextMenu</name>
    <id>63</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <type>RadioButtonField</type>
@@ -79,11 +69,6 @@
     <extendedTooltip>
      <name>AccountingAnalyticsIsFixedExtendedTooltip</name>
      <id>87</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -94,11 +79,6 @@
     <contextMenu>
      <name>AccountingAnalyticsIsFixedContextMenu</name>
      <id>86</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>PictureField</type>
@@ -114,6 +94,10 @@
      <valuesPicture xsi:type="core:PictureRef">
       <picture>CommonPicture.IconCollection7</picture>
      </valuesPicture>
+     <border xsi:type="core:BorderDef">
+      <style>Single</style>
+      <width>1</width>
+     </border>
      <fileDragMode>AsFileRef</fileDragMode>
     </extInfo>
    </items>
@@ -132,11 +116,6 @@
     <extendedTooltip>
      <name>AccountingAnalyticsIsByRowExtendedTooltip</name>
      <id>117</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -147,11 +126,6 @@
     <contextMenu>
      <name>AccountingAnalyticsIsByRowContextMenu</name>
      <id>116</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>PictureField</type>
@@ -167,6 +141,10 @@
      <valuesPicture xsi:type="core:PictureRef">
       <picture>CommonPicture.IconCollection4</picture>
      </valuesPicture>
+     <border xsi:type="core:BorderDef">
+      <style>Single</style>
+      <width>1</width>
+     </border>
      <fileDragMode>AsFileRef</fileDragMode>
     </extInfo>
    </items>
@@ -190,11 +168,6 @@
    <extendedTooltip>
     <name>AccountingAnalyticsGroupIconsExtendedTooltip</name>
     <id>122</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -226,11 +199,6 @@
    <extendedTooltip>
     <name>AccountingAnalyticsAccountDebitExtendedTooltip</name>
     <id>16</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -241,11 +209,6 @@
    <contextMenu>
     <name>AccountingAnalyticsAccountDebitContextMenu</name>
     <id>15</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -287,11 +250,6 @@
     <extendedTooltip>
      <name>AccountingAnalyticsExtDimensionDr1ExtendedTooltip</name>
      <id>28</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -302,11 +260,6 @@
     <contextMenu>
      <name>AccountingAnalyticsExtDimensionDr1ContextMenu</name>
      <id>27</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -348,11 +301,6 @@
     <extendedTooltip>
      <name>AccountingAnalyticsExtDimensionDr2ExtendedTooltip</name>
      <id>31</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -363,11 +311,6 @@
     <contextMenu>
      <name>AccountingAnalyticsExtDimensionDr2ContextMenu</name>
      <id>30</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -409,11 +352,6 @@
     <extendedTooltip>
      <name>AccountingAnalyticsExtDimensionDr3ExtendedTooltip</name>
      <id>34</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -424,11 +362,6 @@
     <contextMenu>
      <name>AccountingAnalyticsExtDimensionDr3ContextMenu</name>
      <id>33</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -476,11 +409,6 @@
    <extendedTooltip>
     <name>GroupDebitExtDimensionsExtendedTooltip</name>
     <id>66</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -512,11 +440,6 @@
    <extendedTooltip>
     <name>AccountingAnalyticsAccountCreditExtendedTooltip</name>
     <id>37</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -527,11 +450,6 @@
    <contextMenu>
     <name>AccountingAnalyticsAccountCreditContextMenu</name>
     <id>36</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -573,11 +491,6 @@
     <extendedTooltip>
      <name>AccountingAnalyticsExtDimensionCr1ExtendedTooltip</name>
      <id>49</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -588,11 +501,6 @@
     <contextMenu>
      <name>AccountingAnalyticsExtDimensionCr1ContextMenu</name>
      <id>48</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -634,11 +542,6 @@
     <extendedTooltip>
      <name>AccountingAnalyticsExtDimensionCr2ExtendedTooltip</name>
      <id>52</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -649,11 +552,6 @@
     <contextMenu>
      <name>AccountingAnalyticsExtDimensionCr2ContextMenu</name>
      <id>51</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -695,11 +593,6 @@
     <extendedTooltip>
      <name>AccountingAnalyticsExtDimensionCr3ExtendedTooltip</name>
      <id>55</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -710,11 +603,6 @@
     <contextMenu>
      <name>AccountingAnalyticsExtDimensionCr3ContextMenu</name>
      <id>54</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -762,11 +650,6 @@
    <extendedTooltip>
     <name>GroupCreditExtDimensionsExtendedTooltip</name>
     <id>70</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -794,11 +677,6 @@
    <extendedTooltip>
     <name>AccountingAnalyticsOperationExtendedTooltip</name>
     <id>82</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -809,11 +687,6 @@
    <contextMenu>
     <name>AccountingAnalyticsOperationContextMenu</name>
     <id>81</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -834,11 +707,6 @@
   <autoCommandBar>
    <name>AccountingAnalyticsCommandBar</name>
    <id>2</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
@@ -858,21 +726,11 @@
    <name>AccountingAnalyticsOnChange</name>
   </handlers>
   <searchStringAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>AccountingAnalyticsSearchString</name>
    <id>5</id>
    <extendedTooltip>
     <name>AccountingAnalyticsSearchStringExtendedTooltip</name>
     <id>7</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -883,11 +741,6 @@
    <contextMenu>
     <name>AccountingAnalyticsSearchStringContextMenu</name>
     <id>6</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <source>AccountingAnalytics</source>
@@ -896,21 +749,11 @@
    </extInfo>
   </searchStringAddition>
   <viewStatusAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>AccountingAnalyticsViewStatus</name>
    <id>11</id>
    <extendedTooltip>
     <name>AccountingAnalyticsViewStatusExtendedTooltip</name>
     <id>13</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -921,11 +764,6 @@
    <contextMenu>
     <name>AccountingAnalyticsViewStatusContextMenu</name>
     <id>12</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>ViewStatusAddition</type>
@@ -935,21 +773,11 @@
    </extInfo>
   </viewStatusAddition>
   <searchControlAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>AccountingAnalyticsSearchControl</name>
    <id>8</id>
    <extendedTooltip>
     <name>AccountingAnalyticsSearchControlExtendedTooltip</name>
     <id>10</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -960,11 +788,6 @@
    <contextMenu>
     <name>AccountingAnalyticsSearchControlContextMenu</name>
     <id>9</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>SearchControlAddition</type>
@@ -976,11 +799,6 @@
   <extendedTooltip>
    <name>AccountingAnalyticsExtendedTooltip</name>
    <id>4</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -991,11 +809,6 @@
   <contextMenu>
    <name>AccountingAnalyticsContextMenu</name>
    <id>3</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <changeRowSet>true</changeRowSet>
@@ -1032,11 +845,6 @@
    <extendedTooltip>
     <name>FormOkExtendedTooltip</name>
     <id>77</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -1063,11 +871,6 @@
    <extendedTooltip>
     <name>FormCancelExtendedTooltip</name>
     <id>79</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -1093,11 +896,6 @@
    <extendedTooltip>
     <name>FormRefreshExtendedTooltip</name>
     <id>124</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -1112,11 +910,6 @@
    <placementArea>UserCmds</placementArea>
    <representationInContextMenu>Auto</representationInContextMenu>
   </items>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
  </autoCommandBar>
  <handlers>

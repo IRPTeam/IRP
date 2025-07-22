@@ -11276,7 +11276,7 @@ Function GetFieldsToLock_InternalLink_PR(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.PI Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseInvoice";
 	ElsIf InternalDocAliase = Aliases.PRO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store";
@@ -11411,7 +11411,7 @@ Function GetFieldsToLock_InternalLink_SR(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.SI Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, SalesInvoice";
 	ElsIf InternalDocAliase = Aliases.SRO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store";
@@ -11929,7 +11929,7 @@ Function GetFieldsToLock_InternalLink_RRR(InternalDocAliase, Aliases)
 	If InternalDocAliase = Aliases.RSR Then
 		Result.Header   = "Company, Store, Partner, LegalName, Agreement, RetailCustomer, Currency, 
 			|PriceIncludeTax, UsePartnerTransactions";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, RetailSalesReceipt";
 	ElsIf InternalDocAliase = Aliases.RGR Then
 		Result.Header   = "Company, Store, Partner, LegalName, RetailCustomer";
 		Result.ItemList = "Item, ItemKey, Store";

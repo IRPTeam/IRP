@@ -157,7 +157,7 @@ Procedure ContentSegmentBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Para
 	FormParameters = New Structure("FillingValues", FillingValues);
 	
 	OpenForm("InformationRegister.ItemSegments.RecordForm", FormParameters,,,,, 
-		New NotifyDescription("AddRowFinish", ThisObject));
+		New CallbackDescription("AddRowFinish", ThisObject));
 EndProcedure
 
 &AtClient

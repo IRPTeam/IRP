@@ -681,8 +681,7 @@ Scenario: _2990013 check the question of saving Physical inventory before creati
 		And I click "Fill expected count" button
 	* Check message output
 		And I click "Physical count by location" button
-		Then the form attribute named "Message" became equal to
-		| 'To run the "Physical count by location" command, you must save your work. Click OK to save and continue, or click Cancel to return.'   |
+		Then the form attribute named "Message" became equal to "To run the \"Physical count by location\" command, you must save your work. Click OK to save and continue, or click Cancel to return. "
 	And I close all client application windows
 
 
@@ -822,7 +821,7 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 			| 'Reference'           | 'Status'     | 'Count rows'   | 'Phys. count'    |
 			| 'Location count 1*'   | 'Prepared'   | ''             | ''               |
 			| 'Location count 2*'   | 'Prepared'   | ''             | ''               |
-			| 'Location count 3*'   | 'Prepared'   | '5'            | '222,000'        |
+			| 'Location count 3*'   | 'Prepared'   | '5'            | '222'            |
 		Then the number of "PhysicalCountByLocationList" table lines is "равно" 3
 		And I close all client application windows
 
@@ -1037,10 +1036,10 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 			| '$$NumberPhysicalInventory3$$'    |
 		And I select current line in "List" table
 		And "PhysicalCountByLocationList" table contains lines
-			| 'Reference'           | 'Status'     | 'Count rows'   | 'Phys. count'    |
-			| 'Location count 1*'   | 'Prepared'   | '4'            | '6,000'          |
-			| 'Location count 2*'   | 'Prepared'   | '*'            | '*'              |
-			| 'Location count 3*'   | 'Prepared'   | '5'            | '222,000'        |
+			| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
+			| 'Location count 1*' | 'Prepared' | '4'          | '6'           |
+			| 'Location count 2*' | 'Prepared' | '*'          | '*'           |
+			| 'Location count 3*' | 'Prepared' | '5'          | '222'         |
 		Then the number of "PhysicalCountByLocationList" table lines is "равно" 3
 		And "ItemList" table became equal
 			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
@@ -1065,10 +1064,10 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I select "Done" exact value from the drop-down list named "Status"
 		And I click "Save and close" button
 		And "PhysicalCountByLocationList" table contains lines
-			| 'Reference'           | 'Status'     | 'Count rows'   | 'Phys. count'    |
-			| 'Location count 1*'   | 'Done'       | '4'            | '6,000'          |
-			| 'Location count 2*'   | 'Prepared'   | '*'            | '*'              |
-			| 'Location count 3*'   | 'Prepared'   | '5'            | '222,000'        |
+			| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
+			| 'Location count 1*' | 'Done'     | '4'          | '6'           |
+			| 'Location count 2*' | 'Prepared' | '*'          | '*'           |
+			| 'Location count 3*' | 'Prepared' | '5'          | '222'         |
 		And I move to "Items" tab
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal
@@ -1114,7 +1113,7 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I move to "Physical count by location" tab
 		And I go to the first line in "PhysicalCountByLocationList" table
 		And I select current line in "PhysicalCountByLocationList" table
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I close "Location count * dated *" window
@@ -1135,7 +1134,7 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I move to "Physical count by location" tab
 		And I go to the first line in "PhysicalCountByLocationList" table
 		And I select current line in "PhysicalCountByLocationList" table
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Then "Location count * dated *" window is opened

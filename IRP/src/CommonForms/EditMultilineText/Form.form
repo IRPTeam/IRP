@@ -15,11 +15,6 @@
   <extendedTooltip>
    <name>TextExtendedTooltip</name>
    <id>13</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -30,11 +25,6 @@
   <contextMenu>
    <name>TextContextMenu</name>
    <id>12</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <type>TextDocumentField</type>
@@ -66,11 +56,6 @@
    <extendedTooltip>
     <name>FormOKExtendedTooltip</name>
     <id>5</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -94,11 +79,6 @@
    <extendedTooltip>
     <name>FormVoiceNarratorExtendedTooltip</name>
     <id>7</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -112,11 +92,6 @@
    <autoMaxHeight>true</autoMaxHeight>
    <placementArea>UserCmds</placementArea>
   </items>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
  </autoCommandBar>
  <handlers>
@@ -217,7 +192,7 @@
   <name>TableIndex</name>
   <title>
    <key>tr</key>
-   <value>Table index</value>
+   <value>Tablo dizini</value>
   </title>
   <title>
    <key>ru</key>

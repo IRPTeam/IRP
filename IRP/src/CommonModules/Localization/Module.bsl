@@ -1,5 +1,6 @@
 // @strict-types
 
+
 // Strings.
 // 
 // Parameters:
@@ -7,6 +8,93 @@
 // 
 // Returns:
 //  Structure - Strings:
+// * SB_NotEnoughBatch - String - 
+// * JobAborted - String - 
+// * CannotConnectDriver - String - 
+// * CannotConnectHardwareService - String - 
+// * CannotAttachAddIn - String - 
+// * CannotGetDataKKT - String - 
+// * NotFoundOriginRowForClone - String - 
+// * SerialOwnerNotItemKey - String - 
+// * WrongAdvanceDirection - String - 
+// * UnknownTransactionType - String - 
+// * UnknownTransactionTypeT2015 - String - 
+// * UnknownTransactionTypeTableT2014 - String - 
+// * NotSupportedDRR5022TCashAdvance - String - 
+// * ErrorOnPostingDocument - String - 
+// * ConvertingDataToFillingValuesFailed - String - 
+// * AnalyticTypeNotDefined - String - 
+// * PropertyBeforeChangeDataPathNoRows - String - 
+// * OneJobFailed - String - 
+// * UnsupportedUpdateStatus - String - 
+// * DocumentQueryError - String - 
+// * UnknownFilterType - String - 
+// * FoundMoreThanOneWhenOptionNot - String - 
+// * DescriptionFormulaOperandError - String - 
+// * CacheRowsUndefined - String - 
+// * CachePropertyNotFound - String - 
+// * WrongListProperty - String - 
+// * CachePropertyDeleteNotFound - String - 
+// * WrongDatapathRemoveCache - String - 
+// * UnknownAgreementTypeByDebtType - String - 
+// * IDInfoNotFoundByName - String - 
+// * MoreThanOneAnalyticRowsFilter - String - 
+// * DocumentAccountingOpNotSupported - String - 
+// * UnsupportedRegisterName - String - 
+// * UnsupportedCheckType - String - 
+// * ExtDimensionTypeNotDefined - String - 
+// * ExternalRefValueNotFound - String - 
+// * ExternalValueNotFound - String - 
+// * UnsupportedTransactionType - String - 
+// * GetBasisesNotSupported - String - 
+// * UnsupportedExternalLink - String - 
+// * UnsupportedInternalLink - String - 
+// * UnknownControlCodeStringType - String - 
+// * CannotGetPointInTime - String - 
+// * CannotFiscalizeCCSTypeNone - String - 
+// * CannotFiscalizeCCSTypeEmpty - String - 
+// * ControlStringCodeNotFilled - String - 
+// * ControlStringCodeCountMismatch - String - 
+// * ControlStringMultipleRowsNotSupported - String - 
+// * WrongExternalFunctionType - String - 
+// * CurrencyInfoMoreThanOne - String - 
+// * RowsWithStoresEmpty - String - 
+// * DefaultAgreementOnlyCustVendor - String - 
+// * BatchForSalesReturnNotFound - String - 
+// * UnsupportedRowDataType - String - 
+// * UnsupportedType - String - 
+// * LoadMoreThanOneTableNotImplemented - String - 
+// * TempStorageTypeNotSupported - String - 
+// * UnsupportedOperation - String - 
+// * UnsupportedDirection - String - 
+// * UnsupportedDocumentType - String - 
+// * UnsupportedRegisterMetadata - String - 
+// * UnsupportedWhoIsChanged - String - 
+// * WrongDataPath - String - 
+// * TypeNotFound - String - 
+// * CreateNewAnalyticsNotSupported - String - 
+// * TaxNotAllowedForDocument - String - 
+// * RiseTestFalseString - String - 
+// * CorrectionDescriptionRequired - String - 
+// * GoodsReceiptPreliminaryPurchaseInvoice - String - 
+// * UndefinedTabularSection - String - 
+// * RecordSetCountNotOne - String - 
+// * UnsupportedMetadata - String - 
+// * ItemListRowsCountNotOne - String - 
+// * MainRowsCountNotOne - String - 
+// * UnableReplaceRef - String - 
+// * UnsupportedSettingStorageName - String - 
+// * InternalAccountNotFound - String - 
+// * InternalAccountMoreThanOne - String - 
+// * UnsupportedAnalyticType - String - 
+// * ItemFormUnknownCommand - String - 
+// * LedgerLocalizationCodeNotFilled - String - 
+// * LedgerAccountMainDrNotDefined - String - 
+// * LedgerAccountSubDrNotDefined - String - 
+// * LedgerAccountMainCrNotDefined - String - 
+// * LedgerAccountSubCrNotDefined - String - 
+// * InvoiceTypeNotSupported - String - 
+// * FewRetailCustomerFound - String - 
 // * ACS_UnknownValueType - String - 
 // * CERT_OnlyProdOrCert - String - 
 // * CERT_CertAlreadyUsed - String - 
@@ -27,12 +115,12 @@
 // * AddAttributeTagPathHasNotTwoPart - String - 
 // * SMS_SendIsOk - String - 
 // * SMS_SendIsError - String - 
-// * SMS_WaitUntilNextSend - String -
-// * SMS_SMSCodeWrong - String -
-// * DefaultSMSProviderEmpty - String -
-// * SMSModuleNotFound - String -
-// * SMSMethodNotSupported - String -
-// * ATC_001 - String -
+// * SMS_WaitUntilNextSend - String - 
+// * SMS_SMSCodeWrong - String - 
+// * DefaultSMSProviderEmpty - String - 
+// * SMSModuleNotFound - String - 
+// * SMSMethodNotSupported - String - 
+// * ATC_001 - String - 
 // * ATC_NotSupported - String - 
 // * ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList - String - 
 // * ATC_ErrorNetAmountGreaterTotalAmount - String - 
@@ -68,6 +156,10 @@
 // * ATC_FIX_ErrorNotFilledSalesTransactionType - String - 
 // * ATC_FIX_ErrorNotFilledSalesReturnTransactionType - String - 
 // * ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType - String - 
+// * ATC_ErrorAddAttributesIsUnknowAttribute - String - 
+// * ATC_FIX_ErrorAddAttributesIsUnknowAttribute - String - 
+// * ATC_ErrorAddAttributesNotSetTag - String - 
+// * ATC_FIX_ErrorAddAttributesNotSetTag - String - 
 // * Eq_001 - String - 
 // * Eq_002 - String - 
 // * Eq_003 - String - 
@@ -182,6 +274,10 @@
 // * Form_037 - String - 
 // * Form_038 - String - 
 // * Form_039 - String - 
+// * Form_040 - String - 
+// * Form_041 - String - 
+// * Form_042 - String - 
+// * Form_043 - String - 
 // * Error_002 - String - 
 // * Error_003 - String - 
 // * Error_004 - String - 
@@ -314,9 +410,46 @@
 // * Error_PartnerBalanceCheckfailed - String - 
 // * Error_145 - String - 
 // * Error_146 - String - 
-// * Error_147 - String -
+// * Error_147 - String - 
 // * Error_148 - String - 
-// * Error_181 - String -
+// * Error_149 - String - 
+// * Error_150 - String - 
+// * Error_151 - String - 
+// * Error_152 - String - 
+// * Error_153 - String - 
+// * Error_154 - String - 
+// * Error_155 - String - 
+// * Error_156 - String - 
+// * Error_157 - String - 
+// * Error_158 - String - 
+// * Error_159 - String - 
+// * Error_160 - String - 
+// * Error_161 - String - 
+// * Error_162 - String - 
+// * Error_163 - String - 
+// * Error_164 - String - 
+// * Error_165 - String - 
+// * Error_166 - String - 
+// * Error_167 - String - 
+// * Error_168 - String - 
+// * Error_169 - String - 
+// * Error_170 - String - 
+// * Error_171 - String - 
+// * Error_172 - String - 
+// * Error_173 - String - 
+// * Error_174 - String - 
+// * Error_175 - String - 
+// * Error_176 - String - 
+// * Error_177 - String - 
+// * Error_178 - String - 
+// * Error_179 - String - 
+// * Error_180 - String - 
+// * Error_181 - String - 
+// * Error_182 - String - 
+// * Error_183 - String - 
+// * Error_184 - String - 
+// * Error_185 - String - 
+// * Error_186 - String - 
 // * Error_FillTotalAmount - String - 
 // * MF_Error_001 - String - 
 // * MF_Error_002 - String - 
@@ -380,6 +513,7 @@
 // * InfoMessage_038 - String - 
 // * InfoMessage_039 - String - 
 // * InfoMessage_040 - String - 
+// * InfoMessage_041 - String - 
 // * InfoMessage_WriteObject - String - 
 // * InfoMessage_Payment - String - 
 // * InfoMessage_PaymentReturn - String - 
@@ -424,6 +558,9 @@
 // * QuestionToUser_028 - String - 
 // * QuestionToUser_029 - String - 
 // * QuestionToUser_030 - String - 
+// * QuestionToUser_031 - String - 
+// * QuestionToUser_032 - String - 
+// * QuestionToUser_033 - String - 
 // * SuggestionToUser_1 - String - 
 // * SuggestionToUser_2 - String - 
 // * SuggestionToUser_3 - String - 
@@ -453,6 +590,10 @@
 // * Exc_010 - String - 
 // * Exc_011 - String - 
 // * Exc_012 - String - 
+// * Exc_013 - String - 
+// * Exc_014 - String - 
+// * Exc_015 - String - 
+// * Exc_016 - String - 
 // * Saas_001 - String - 
 // * Saas_002 - String - 
 // * Saas_003 - String - 
@@ -513,6 +654,13 @@
 // * Add_Setiings_010 - String - 
 // * Add_Setiings_011 - String - 
 // * Add_Setiings_012 - String - 
+// * Add_Settings_013 - String - 
+// * Add_Settings_014 - String - 
+// * Add_Settings_015 - String - 
+// * Add_Settings_016 - String - 
+// * Add_Settings_017 - String - 
+// * Add_Settings_018 - String - 
+// * Add_Settings_019 - String - 
 // * Mob_001 - String - 
 // * CP_001 - String - 
 // * CP_002 - String - 
@@ -520,6 +668,7 @@
 // * CP_004 - String - 
 // * CP_005 - String - 
 // * CP_006 - String - 
+// * CP_007 - String - 
 // * LDT_Button_Title - String - 
 // * LDT_Button_ToolTip - String - 
 // * LDT_FailReading - String - 
@@ -564,7 +713,7 @@
 // * RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory - String - 
 // * SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory - String - 
 // * SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues - String - 
-// * SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming - String - 
+// * SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming - String - 
 // * SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers - String - 
 // * ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues - String - 
@@ -572,12 +721,16 @@
 // * ForeignCurrencyRevaluation_DR_R3010B_CashOnHand_CR_R5021T_Revenues - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions - String - 
 // * ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming - String - 
+// * ForeignCurrencyRevaluation_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment - String - 
 // * ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors - String - 
 // * ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions - String - 
 // * ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing - String - 
+// * ForeignCurrencyRevaluation_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance - String - 
 // * ForeignCurrencyRevaluation_DR_R3015B_CashAdvance_CR_R5021T_Revenues - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance - String - 
@@ -598,11 +751,15 @@
 // * DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues - String - 
 // * DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions - String - 
 // * DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues - String - 
+// * DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming - String - 
+// * DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming - String - 
 // * CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions - String - 
 // * CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions - String - 
 // * CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors - String - 
 // * CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions - String - 
 // * CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions - String - 
+// * CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions - String - 
+// * CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions - String - 
 // * MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand - String - 
 // * MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit - String - 
 // * MoneyTransfer_DR_R3021B_CashInTransit_CR_R3010B_CashOnHand - String - 
@@ -630,16 +787,20 @@
 // * BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand - String - 
 // * BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand - String - 
 // * BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand - String - 
+// * BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues - String - 
 // * CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder - String - 
 // * CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand - String - 
+// * CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues - String - 
 // * BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder - String - 
 // * BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange - String - 
 // * BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues - String - 
 // * BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit - String - 
 // * BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions - String - 
 // * BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues - String - 
+// * BankReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment - String - 
 // * CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder - String - 
 // * CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions - String - 
+// * CashReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment - String - 
 // * Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual - String - 
 // * Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes - String - 
 // * Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes - String - 
@@ -649,19 +810,35 @@
 // * DebitCreditNote_R5020B_PartnersBalance - String - 
 // * DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset - String - 
 // * DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset - String - 
+// * DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues - String - 
+// * DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance - String - 
 // * ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses - String - 
 // * RevenueAccruals_DR_R6080T_OtherPeriodsRevenues_CR_R5021T_Revenues - String - 
 // * ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses - String - 
 // * RevenueAccruals_DR_R5021T_Revenues_CR_R6080T_OtherPeriodsRevenues - String - 
 // * EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance - String - 
 // * EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance - String - 
+// * EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance - String - 
 // * SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers - String - 
 // * SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions - String - 
-// * SalesReturn_DR_R5021T_Revenues_CR_R1040B_TaxesOutgoing - String - 
+// * SalesReturn_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions - String - 
 // * SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory - String - 
 // * PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions - String - 
 // * PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory - String - 
-// * PurchaseReturn_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions - String - 
+// * PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming - String - 
+// * TaxesOperation_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing - String - 
+// * TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions - String - 
+// * TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing - String - 
+// * ExternalAccountingOperation - String - 
+// * AdditionalCostAllocation_DR_R4050B_StockInventory_CR_R5022T_Expenses - String - 
+// * AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory - String - 
+// * WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors - String - 
+// * WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions - String - 
+// * WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions - String - 
+// * WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions - String - 
+// * FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues - String - 
+// * FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset - String - 
+// * ExternalAccountingOperationExchangeReport - String - 
 // * InternalCommands_SetNotActive - String - 
 // * InternalCommands_SetNotActive_Check - String - 
 // * InternalCommands_ShowNotActive - String - 
@@ -712,54 +889,129 @@
 // * AuditLock_001 - String - 
 // * AuditLock_002 - String - 
 // * AuditLock_003 - String - 
-// * AuditLock_004 - String -
-// * TypeNotFound - String -
-// * CreateNewAnalyticsNotSupported - String -
-// * TaxNotAllowedForDocument - String -
-// * RiseTestFalseString - String -
-// * CorrectionDescriptionRequired - String -
-// * GoodsReceiptPreliminaryPurchaseInvoice - String -
-// * UndefinedTabularSection - String -
-// * RecordSetCountNotOne - String -
-// * UnsupportedMetadata - String -
-// * ItemListRowsCountNotOne - String -
-// * MainRowsCountNotOne - String -
-// * UnableReplaceRef - String -
-// * UnsupportedSettingStorageName - String -
-// * InternalAccountNotFound - String -
-// * InternalAccountMoreThanOne - String -
-// * UnsupportedAnalyticType - String -
-// * ItemFormUnknownCommand - String -
-// * LedgerLocalizationCodeNotFilled - String -
-// * LedgerAccountMainDrNotDefined - String -
-// * LedgerAccountSubDrNotDefined - String -
-// * LedgerAccountMainCrNotDefined - String -
-// * LedgerAccountSubCrNotDefined - String -
-// * InvoiceTypeNotSupported - String -
-// * FewRetailCustomerFound - String -
-// * UnsupportedUpdateStatus - String -
-// * DocumentQueryError - String -
-// * UnknownFilterType - String -
-// * FoundMoreThanOneWhenOptionNot - String -
-// * DescriptionFormulaOperandError - String -
-// * CacheRowsUndefined - String -
-// * CachePropertyNotFound - String -
-// * WrongListProperty - String -
-// * CachePropertyDeleteNotFound - String -
-// * WrongDatapathRemoveCache - String -
-// * UnknownAgreementTypeByDebtType - String -
-// * IDInfoNotFoundByName - String -
-// * MoreThanOneAnalyticRowsFilter - String -
-// * DocumentAccountingOpNotSupported - String -
-// * UnsupportedRegisterName - String -
-// * UnsupportedCheckType - String -
-// * ExtDimensionTypeNotDefined - String -
-// * ExternalRefValueNotFound - String -
-// * ExternalValueNotFound - String -
-// * UnsupportedTransactionType - String -
-// * GetBasisesNotSupported - String -
-// * UnsupportedExternalLink - String -
-// * UnsupportedInternalLink - String -
+// * AuditLock_004 - String - 
+// * AuditLock_005 - String - 
+// * AuditLock_006 - String - 
+// * DocStatus_Name - String - 
+// * DocStatus_New - String - 
+// * DocStatus_Posted - String - 
+// * DocStatus_NotPosted - String - 
+// * DocStatus_Deleted - String - 
+// * DocPresentation - String - 
+// * DatePresentation - String - 
+// * PeriodClosing_Step1 - String - 
+// * PeriodClosing_Step2 - String - 
+// * PeriodClosing_Step3 - String - 
+// * PeriodClosing_Step4 - String - 
+// * PeriodClosing_Step5 - String - 
+// * PeriodClosing_Step6 - String - 
+// * PeriodClosing_Step7 - String - 
+// * PeriodClosing_Step8 - String - 
+// * PeriodClosing_Error1 - String - 
+// * PeriodClosing_Error2 - String - 
+// * PeriodClosing_Error3 - String - 
+// * PeriodClosing_Error4 - String - 
+// * PeriodClosing_Error5 - String - 
+// * PeriodClosing_Error6 - String - 
+// * SettingsStorage1 - String - 
+// * SettingsStorage2 - String - 
+// * SettingsStorage3 - String - 
+// * SettingsStorage4 - String - 
+// * SettingsStorage5 - String - 
+// * SettingsStorage6 - String - 
+// * Mobile_1 - String - 
+// * Mobile_2 - String - 
+// * Mobile_3 - String - 
+// * Mobile_4 - String - 
+// * Mobile_5 - String - 
+// * Mobile_6 - String - 
+// * Issue_1 - String - 
+// * Issue_2 - String - 
+// * SystemAttribute_Store - String - 
+// * SystemAttribute_Partner - String - 
+// * SystemAttribute_PartnerTerm - String - 
+// * SystemAttribute_LegalName - String - 
+// * SystemAttribute_LegalNameContract - String - 
+// * Update_001 - String - 
+// * UpdateDesc_001 - String - 
+// * Update_002 - String - 
+// * UpdateDesc_002 - String - 
+// * Update_003 - String - 
+// * UpdateDesc_003 - String - 
+// * Update_004 - String - 
+// * UpdateDesc_004 - String - 
+// * Update_005 - String - 
+// * UpdateDesc_005 - String - 
+// * Error_RaiseOnCalculationError - String - 
+// * Error_UnsupportedExternalLinkSO - String - 
+// * Error_UnsupportedInternalLinkSI - String - 
+// * Error_UnsupportedExternalLinkSI - String - 
+// * Error_UnsupportedInternalLinkSC - String - 
+// * Error_UnsupportedExternalLinkSC - String - 
+// * Error_UnsupportedInternalLinkSPO - String - 
+// * Error_UnsupportedExternalLinkSPO - String - 
+// * Error_UnsupportedInternalLinkRSC - String - 
+// * Error_UnsupportedExternalLinkRSC - String - 
+// * Error_UnsupportedInternalLinkSRO - String - 
+// * Error_UnsupportedExternalLinkSRO - String - 
+// * Error_UnsupportedInternalLinkPO - String - 
+// * Error_UnsupportedExternalLinkPO - String - 
+// * Error_UnsupportedInternalLinkGR - String - 
+// * Error_UnsupportedExternalLinkGR - String - 
+// * Error_UnsupportedInternalLinkRGR - String - 
+// * Error_UnsupportedExternalLinkRGR - String - 
+// * Error_UnsupportedInternalLinkPI - String - 
+// * Error_UnsupportedExternalLinkPI - String - 
+// * Error_UnsupportedInternalLinkITO - String - 
+// * Error_UnsupportedExternalLinkITO - String - 
+// * Error_UnsupportedInternalLinkIT - String - 
+// * Error_UnsupportedExternalLinkIT - String - 
+// * Error_UnsupportedExternalLinkISR - String - 
+// * Error_UnsupportedInternalLinkPR - String - 
+// * Error_UnsupportedExternalLinkPR - String - 
+// * Error_UnsupportedInternalLinkSR - String - 
+// * Error_UnsupportedExternalLinkSR - String - 
+// * Error_UnsupportedInternalLinkPRO - String - 
+// * Error_UnsupportedExternalLinkPRO - String - 
+// * Error_UnsupportedInternalLinkRSR - String - 
+// * Error_UnsupportedExternalLinkRSR - String - 
+// * Error_UnsupportedInternalLinkPRR - String - 
+// * Error_UnsupportedInternalLinkRRR - String - 
+// * Error_UnsupportedInternalLinkStockAdjustmentAsSurplus - String - 
+// * Error_UnsupportedInternalLinkStockAdjustmentAsWriteOff - String - 
+// * Error_UnsupportedExternalLinkPhysicalInventory - String - 
+// * Error_UnsupportedInternalLinkWO - String - 
+// * Error_UnsupportedExternalLinkWO - String - 
+// * Error_UnsupportedInternalLinkWS - String - 
+// * Error_UnsupportedExternalLinkSC2 - String - 
+// * Error_GetSeparatorColumnsNotSupported - String - 
+// * Error_FormElementNotFound - String - 
+// * Error_UnsupportedRegisterType - String - 
+// * Error_TableNotFoundInTempTables - String - 
+// * Error_DocumentAndAdvancesKeyNotFound - String - 
+// * Error_DocumentAndTransactionsKeyNotFound - String - 
+// * Error_UnknownAdvanceRegister - String - 
+// * Error_UnknownTransactionRegister - String - 
+// * Error_PostingInfoNotFound - String - 
+// * Error_AdvanceLessThanZero - String - 
+// * Error_FoundMoreThanOneCompany - String - 
+// * Error_FoundMoreThanOneItemKey - String - 
+// * Error_UnsupportedCommandName - String - 
+// * Error_UnsupportedBundleType - String - 
+// * Error_NotHandledViewNotify - String - 
+// * Error_KeyNotAllowedForDataPath - String - 
+// * Error_RowNotFoundInTable - String - 
+// * Error_RowNotFoundInSourceTableMap - String - 
+// * Error_WrongDataPathForReadOnlyProperty - String - 
+// * Error_UnknownRefType - String - 
+// * Error_StepsEnablerNotDefined - String - 
+// * Error_UnsupportedExternalLinkSC3 - String - 
+// * Task_Result_Execution - String - 
+// * Task_Result_Execution_Not - String - 
+// * Task_Result_Verification - String - 
+// * Task_Result_Verification_Not - String - 
+// * Task_Result_Confirmation - String - 
+// * Task_Result_Confirmation_Not - String - 
 Function Strings(Lang) Export
 
 	Strings = New Structure();
@@ -773,263 +1025,263 @@ Function Strings(Lang) Export
 #Region GenericErrors
         Strings.Insert("JobAborted", NStr("en='Job aborted';
         	|ru='Регламентное задание прервано';
-        	|tr='Job aborted'", Lang));
+        	|tr='İşlem iptal edildi'", Lang));
         Strings.Insert("CannotConnectDriver", NStr("en='Can not connect driver';
         	|ru='Не получается подключить драйвер';
-        	|tr='Can not connect driver'", Lang));
+        	|tr='Driver bağlanılamıyor'", Lang));
         Strings.Insert("CannotConnectHardwareService", NStr("en='Can not connect to hardware service.';
         	|ru='Не получается подключиться к сервису оборудования.';
-        	|tr='Can not connect to hardware service.'", Lang));
+        	|tr='Donanım servisine bağlanılamıyor.'", Lang));
         Strings.Insert("CannotAttachAddIn", NStr("en='Can not attach AddIn %1';
         	|ru='Не получается подкрепить AddIn %1';
-        	|tr='Can not attach AddIn %1'", Lang));
+        	|tr='%1 Eklentisi eklenemiyor'", Lang));
         Strings.Insert("CannotGetDataKKT", NStr("en='Can not get data KKT';
         	|ru='Не получается получить данные ККМ';
-        	|tr='Can not get data KKT'", Lang));
+        	|tr='Yazar kasadan veri alınamıyor'", Lang));
         Strings.Insert("NotFoundOriginRowForClone", NStr("en='Not found origin row for clone';
         	|ru='Не найден источник происхождения для клонирования';
-        	|tr='Not found origin row for clone'", Lang));
+        	|tr='Klon için orijinal satır bulunamadı'", Lang));
         Strings.Insert("SerialOwnerNotItemKey", NStr("en='Serial lot number owner is not Item key';
         	|ru='Владелец серийного номера не характеристика';
-        	|tr='Serial lot number owner is not Item key'", Lang));
+        	|tr='Seri lot numarası sahibi Ürün anahtarı değil'", Lang));
         Strings.Insert("WrongAdvanceDirection", NStr("en='Wrong advance direction';
         	|ru='Неправильное направление аванса';
-        	|tr='Wrong advance direction'", Lang));
+        	|tr='Yanlış avans yönü'", Lang));
         Strings.Insert("UnknownTransactionType", NStr("en='Unknown transaction type';
         	|ru='Неизвестный вид операции';
-        	|tr='Unknown transaction type'", Lang));
+        	|tr='Bilinmeyen işlem türü'", Lang));
         Strings.Insert("UnknownTransactionTypeT2015", NStr("en='Unknown transaction type in [T2015S_TransactionsInfo]';
         	|ru='Неизвестный вид операции в [T2015S_TransactionsInfo]';
-        	|tr='Unknown transaction type in [T2015S_TransactionsInfo]'", Lang));
+        	|tr='[T2015S_TransactionsInfo] içinde bilinmeyen işlem türü'", Lang));
         Strings.Insert("UnknownTransactionTypeTableT2014", NStr("en='Unknown transaction type in [Table_T2014S_AdvancesInfo]';
         	|ru='Неизвестный вид операции в [Table_T2014S_AdvancesInfo]';
-        	|tr='Unknown transaction type in [Table_T2014S_AdvancesInfo]'", Lang));
+        	|tr='[Table_T2014S_AdvancesInfo] tablosunda bilinmeyen işlem türü'", Lang));
         Strings.Insert("NotSupportedDRR5022TCashAdvance", NStr("en='Not supported [DR_R5022T_Expenses_CR_R3015B_CashAdvance]';
         	|ru='Не поддерживаемый [DR_R5022T_Expenses_CR_R3015B_CashAdvance]';
-        	|tr='Not supported [DR_R5022T_Expenses_CR_R3015B_CashAdvance]'", Lang));
+        	|tr='Desteklenmiyor [DR_R5022T_Expenses_CR_R3015B_CashAdvance]'", Lang));
         Strings.Insert("ErrorOnPostingDocument", NStr("en='Error on posting document';
         	|ru='Ошибка проведения документа';
-        	|tr='Error on posting document'", Lang));
+        	|tr='Belge kaydederken hata oluştu'", Lang));
         Strings.Insert("ConvertingDataToFillingValuesFailed", NStr("en='Converting Data to Filling values failed';
         	|ru='Неполучилось преобразовать дату в заполняемые значения';
-        	|tr='Converting Data to Filling values failed'", Lang));
+        	|tr='Verilerin Doldurma değerlerine dönüştürülmesi başarısız oldu'", Lang));
         Strings.Insert("AnalyticTypeNotDefined", NStr("en='Analytic type is not defined';
         	|ru='Тип аналитики не определен';
-        	|tr='Analytic type is not defined'", Lang));
+        	|tr='Analitik tür tanımlanmamış'", Lang));
         Strings.Insert("PropertyBeforeChangeDataPathNoRows", NStr("en='PropertyBeforeChange.List.DataPath is set but rows is Undefined';
         	|ru='PropertyBeforeChange.List.DataPath установлено но строки неопределены';
-        	|tr='PropertyBeforeChange.List.DataPath is set but rows is Undefined'", Lang));
+        	|tr='PropertyBeforeChange.List.DataPath ayarlandı ancak satırlar tanımsız'", Lang));
        Strings.Insert("OneJobFailed", NStr("en='One job is failed';
        	|ru='Одно регламентое задание отработало с ошибкой';
-       	|tr='One job is failed'", Lang));
+       	|tr='Bir iş başarısız oldu'", Lang));
        Strings.Insert("UnsupportedUpdateStatus", NStr("en='Unsupported update status %1';
        	|ru='Неподдерживаемый статус обновления %1';
-       	|tr='Unsupported update status %1'", Lang));
+       	|tr='Desteklenmeyen güncelleme durumu %1'", Lang));
        Strings.Insert("DocumentQueryError", NStr("en='Document [%1], Error: %2';
        	|ru='Документ [%1], Ошибка: %2';
-       	|tr='Document [%1], Error: %2'", Lang));
+       	|tr='Belge [%1], Hata: %2'", Lang));
        Strings.Insert("UnknownFilterType", NStr("en='Unknown filter type %1';
        	|ru='Неизвестный тип отбора %1';
-       	|tr='Unknown filter type %1'", Lang));
+       	|tr='Bilinmeyen filtre türü %1'", Lang));
        Strings.Insert("FoundMoreThanOneWhenOptionNot", NStr("en='Found more than 1 %1 when option NOT %2';
        	|ru='Найдено больше 1 %1 когда условие НЕТ %2';
-       	|tr='Found more than 1 %1 when option NOT %2'", Lang));
+       	|tr='Seçenek %2 olmadığında %1''den fazla bulundu'", Lang));
        Strings.Insert("DescriptionFormulaOperandError", NStr("en='Can not eval description formula. error operand %1:%2';
        	|ru='Не получается преобразовать формула наименовения. Операнд ошибки %1:%2';
-       	|tr='Can not eval description formula. error operand %1:%2'", Lang));
+       	|tr='Açıklama formülü değerlendirilemiyor. Hata işleneni %1:%2'", Lang));
        Strings.Insert("CacheRowsUndefined", NStr("en='Error read data from cache by data path %1 rows is Undefined';
        	|ru='Ошибка чтения данных из кеша по пути %1 строка неопределена';
-       	|tr='Error read data from cache by data path %1 rows is Undefined'", Lang));
+       	|tr='%1 veri yolu satırları tarafından önbellekten veri okunurken hata oluştu. Tanımsız'", Lang));
        Strings.Insert("CachePropertyNotFound", NStr("en='Property by DataPath %1 not found in CacheBeforeChange';
        	|ru='Свойство по данных пути %1 не найдено в CacheBeforeChange';
-       	|tr='Property by DataPath %1 not found in CacheBeforeChange'", Lang));
+       	|tr='DataPath %1''e ait özellik CacheBeforeChange''de bulunamadı'", Lang));
        Strings.Insert("WrongListProperty", NStr("en='Wrong list property %1';
        	|ru='Неправильный список свойства %1';
-       	|tr='Wrong list property %1'", Lang));
+       	|tr='Yanlış liste özelliği %1'", Lang));
        Strings.Insert("CachePropertyDeleteNotFound", NStr("en='Not found property in cache for delete %1';
        	|ru='Не найдено свойство для удаления из кеша %1';
-       	|tr='Not found property in cache for delete %1'", Lang));
+       	|tr='%1 silme işlemi için önbellekte özellik bulunamadı'", Lang));
        Strings.Insert("WrongDatapathRemoveCache", NStr("en='Wrong datapath remove from cache %1';
        	|ru='Неправильное путь данных удаления из кеша %1';
-       	|tr='Wrong datapath remove from cache %1'", Lang));
+       	|tr='%1 önbelleğinden yanlış veri yolu kaldırıldı'", Lang));
        Strings.Insert("UnknownAgreementTypeByDebtType", NStr("en='Unknown AgreementType by DebtType %1';
        	|ru='Неизвестный тип соглашения для вида задолженности %1';
-       	|tr='Unknown AgreementType by DebtType %1'", Lang));
+       	|tr='Bilinmeyen Sözleşme Türü Borç Türüne Göre %1'", Lang));
        Strings.Insert("IDInfoNotFoundByName", NStr("en='Not found IDInfo by name %1';
        	|ru='Не найдена контактная информация по имени %1';
-       	|tr='Not found IDInfo by name %1'", Lang));
+       	|tr='%1 adına ait IDInfo bulunamadı'", Lang));
        Strings.Insert("MoreThanOneAnalyticRowsFilter", NStr("en='More than 1 analytic rows by filter: Key[%1] Operation[%2] LedgerType[%3]';
        	|ru='Больше одной аналитики строк для отбора: Ключ [%1] Операция [%2] Тип учета [%3]';
-       	|tr='More than 1 analytic rows by filter: Key[%1] Operation[%2] LedgerType[%3]'", Lang));
+       	|tr='Filtreye göre 1''den fazla analitik satır: Anahtar[%1] İşlem[%2] Defter Türü[%3]'", Lang));
        Strings.Insert("DocumentAccountingOpNotSupported", NStr("en='Document %1 not supported accounting operation %2';
        	|ru='Документ %1 не поддерживается бухгалтерской операцией %2';
-       	|tr='Document %1 not supported accounting operation %2'", Lang));
+       	|tr='Belge %1, %2 muhasebe işlemini desteklemiyor'", Lang));
        Strings.Insert("UnsupportedRegisterName", NStr("en='Unsupported register name %1';
        	|ru='Неподдерживаемое имя регистра %1';
-       	|tr='Unsupported register name %1'", Lang));
+       	|tr='Desteklenmeyen kayıt adı %1'", Lang));
        Strings.Insert("UnsupportedCheckType", NStr("en='Unsupported check type %1';
        	|ru='Неподдерживаемый вид проверки %1';
-       	|tr='Unsupported check type %1'", Lang));
+       	|tr='Desteklenmeyen kontrol türü %1'", Lang));
        Strings.Insert("ExtDimensionTypeNotDefined", NStr("en='Not defined ext. dimension type for %1 %2 %3';
        	|ru='Не определен тип внешнего субконто для %1 %2 %3';
-       	|tr='Not defined ext. dimension type for %1 %2 %3'", Lang));
+       	|tr='%1 %2 %3 için tanımlanmamış dış boyut türü'", Lang));
        Strings.Insert("ExternalRefValueNotFound", NStr("en='Not found value for external ref %1';
        	|ru='Не найдено значение для внешней ссылки %1';
-       	|tr='Not found value for external ref %1'", Lang));
+       	|tr='%1 harici referansı için değer bulunamadı'", Lang));
        Strings.Insert("ExternalValueNotFound", NStr("en='Not found value for external value %1';
        	|ru='Не найдено значение для внешнего значения %1';
-       	|tr='Not found value for external value %1'", Lang));
+       	|tr='%1 harici değeri için değer bulunamadı'", Lang));
        Strings.Insert("UnsupportedTransactionType", NStr("en='Unsapported transaction type %1';
        	|ru='Неподдерживаемый вид опурации %1';
-       	|tr='Unsapported transaction type %1'", Lang));
+       	|tr='Desteklenmeyen işlem türü %1'", Lang));
        Strings.Insert("GetBasisesNotSupported", NStr("en='GetBasises() not support %1';
        	|ru='GetBasises() не поддерживается %1';
-       	|tr='GetBasises() not support %1'", Lang));
+       	|tr='GetBasises() %1''i desteklemiyor'", Lang));
        Strings.Insert("UnsupportedExternalLink", NStr("en='Not supported External link for %1';
        	|ru='Не поддерживаемая Внешняя ссылка для %1';
-       	|tr='Not supported External link for %1'", Lang));
+       	|tr='%1 için harici bağlantı desteklenmiyor'", Lang));
        Strings.Insert("UnsupportedInternalLink", NStr("en='Not supported Internal link for %1';
        	|ru='Не поддерживаемая Внутреняя ссылка для %1';
-       	|tr='Not supported Internal link for %1'", Lang));
+       	|tr='%1 için Dahili bağlantı desteklenmiyor'", Lang));
        Strings.Insert("UnknownControlCodeStringType", NStr("en='Unknown ControlCodeStringType';
        	|ru='Неизвестный тип маркировки';
-       	|tr='Unknown ControlCodeStringType'", Lang));
+       	|tr='Bilinmeyen ControlCodeStringType'", Lang));
         Strings.Insert("CannotGetPointInTime", NStr("en='Can not get point in time';
         	|ru='Не получается получить отметку времени';
-        	|tr='Can not get point in time'", Lang));
+        	|tr='Zaman noktasından bilgi alınamıyor'", Lang));
         Strings.Insert("CannotFiscalizeCCSTypeNone", NStr("en='Can not fiscalize item with Control Code String Type as None. Select type in item, or switch off Control string';
         	|ru='Не получается фискализировать номенклатуру с неопределенным значением типа контрольного кода маркировки. Укажите тип маркировки или отключите учет маркированного товара у номенклатуры.';
-        	|tr='Can not fiscalize item with Control Code String Type as None. Select type in item, or switch off Control string'", Lang));
+        	|tr='Kontrol Kodu Dizesi Türü Yok olan öğe malileştirilemiyor. Öğedeki türü seçin veya Kontrol dizgisini kapatın.'", Lang));
         Strings.Insert("CannotFiscalizeCCSTypeEmpty", NStr("en='Can not fiscalize item while Control Code String Type is Empty. Select type in item, or switch off Control string';
         	|ru='Не получается фискализировать номенклатуру с пустым значением типа контрольного кода маркировки. Укажите тип маркировки или отключите учет маркированного товара у номенклатуры.';
-        	|tr='Can not fiscalize item while Control Code String Type is Empty. Select type in item, or switch off Control string'", Lang));
+        	|tr='Kontrol Kodu Dizesi Türü Boşken öğe malileştirilemez. Öğedeki türü seçin veya Kontrol dizgesini kapatın.'", Lang));
         Strings.Insert("ControlStringCodeNotFilled", NStr("en='Control string code not filled. Row: %1';
         	|ru='Код маркировки не заполнен. Строка: %1';
-        	|tr='Control string code not filled. Row: %1'", Lang));
+        	|tr='Kontrol dizesi kodu doldurulmadı. Satır: %1'", Lang));
         Strings.Insert("ControlStringCodeCountMismatch", NStr("en='Control string code count not the same as item quantity. Row: %1';
         	|ru='Количество маркировок расходится с количеством товаров. Строка: %1';
-        	|tr='Control string code count not the same as item quantity. Row: %1'", Lang));
+        	|tr='Kontrol dizesi kod sayısı, ürün miktarıyla aynı değil. Satır: %1'", Lang));
         Strings.Insert("ControlStringMultipleRowsNotSupported", NStr("en='Not suppoted send more then 1 control code by each row. Row: %1';
         	|ru='Не поддерживается отправка более одного кода маркировки для каждой строки. Строка: %1';
-        	|tr='Not suppoted send more then 1 control code by each row. Row: %1'", Lang));
+        	|tr='Her satıra 1''den fazla kontrol kodu gönderilmesi desteklenmiyor. Satır: %1'", Lang));
         Strings.Insert("WrongExternalFunctionType", NStr("en='Wrong External function type.';
         	|ru='Неправильный тип внешних функций.';
-        	|tr='Wrong External function type.'", Lang));
+        	|tr='Yanlış Harici fonksiyon tipi.'", Lang));
         Strings.Insert("CurrencyInfoMoreThanOne", NStr("en='CurrencyInfo.Count() > 1';
         	|ru='Количество информации по валютам > 1';
-        	|tr='CurrencyInfo.Count() > 1'", Lang));
+        	|tr='Para BirimiBilgisi.Sayısı() > 1'", Lang));
         Strings.Insert("RowsWithStoresEmpty", NStr("en='RowsWithStores.Count() = 0';
         	|ru='RowsWithStores.Count() = 0';
         	|tr='RowsWithStores.Count() = 0'", Lang));
         Strings.Insert("DefaultAgreementOnlyCustVendor", NStr("en='Get default agreement implement only for customer or vendor';
         	|ru='Получить соглашение по умолчанию применимо только для покупателей и поставщиков';
-        	|tr='Get default agreement implement only for customer or vendor'", Lang));
+        	|tr='Varsayılan sözleşmenin yalnızca müşteri veya satıcı için uygulanmasını sağlayın'", Lang));
         Strings.Insert("BatchForSalesReturnNotFound", NStr("en='Not found batch for sales return';
         	|ru='Не найдена партия для возврата от покупателя';
-        	|tr='Not found batch for sales return'", Lang));
+        	|tr='Satış iadesi için parti bulunamadı'", Lang));
         Strings.Insert("UnsupportedRowDataType", NStr("en='Unsupported type of row data';
         	|ru='Неподдерживаемый тип данных строки';
-        	|tr='Unsupported type of row data'", Lang));
+        	|tr='Desteklenmeyen satır verisi türü'", Lang));
         Strings.Insert("UnsupportedType", NStr("en='Unsupported type %1';
         	|ru='Неподдерживаемый тип %1';
-        	|tr='Unsupported type %1'", Lang));
+        	|tr='Desteklenmeyen tür %1'", Lang));
         Strings.Insert("LoadMoreThanOneTableNotImplemented", NStr("en='load more than one table not implemented';
         	|ru='загрузка больше одной таблицы не применяема';
-        	|tr='load more than one table not implemented'", Lang));
+        	|tr='birden fazla tablo yükleme uygulanmadı'", Lang));
         Strings.Insert("TempStorageTypeNotSupported", NStr("en='not supported temp storage data type';
         	|ru='не поддерживаемое временное хранилизе для типы данных';
-        	|tr='not supported temp storage data type'", Lang));
+        	|tr='desteklenmeyen geçici depolama veri türü'", Lang));
         Strings.Insert("UnsupportedOperation", NStr("en='Unsupported operation %1';
         	|ru='Неподдерживаемая операция %1';
-        	|tr='Unsupported operation %1'", Lang));
+        	|tr='Desteklenmeyen işlem %1'", Lang));
         Strings.Insert("UnsupportedDirection", NStr("en='Unsupported direction %1';
         	|ru='Неподдерживаемое направление %1';
-        	|tr='Unsupported direction %1'", Lang));
+        	|tr='Desteklenmeyen yön %1'", Lang));
         Strings.Insert("UnsupportedDocumentType", NStr("en='Unsupported document type %1';
         	|ru='Неподдерживаемый тип документа %1';
-        	|tr='Unsupported document type %1'", Lang));
+        	|tr='Desteklenmeyen belge türü %1'", Lang));
         Strings.Insert("UnsupportedRegisterMetadata", NStr("en='Unsupported register metadata %1';
         	|ru='Неподдерживаемые метаданные регистра %1';
-        	|tr='Unsupported register metadata %1'", Lang));
+        	|tr='Desteklenmeyen kayıt meta verisi %1'", Lang));
         Strings.Insert("UnsupportedWhoIsChanged", NStr("en='Unsupported [WhoIsChanged] = %1';
         	|ru='Неподдерживаемый [WhoIsChanged] = %1';
-        	|tr='Unsupported [WhoIsChanged] = %1'", Lang));
+        	|tr='Desteklenmiyor [WhoIsChanged] = %1'", Lang));
         Strings.Insert("WrongDataPath", NStr("en='Wrong data path %1';
         	|ru='Неправильный путь данных %1';
-        	|tr='Wrong data path %1'", Lang));
+        	|tr='Yanlış veri yolu %1'", Lang));
 
         Strings.Insert("TypeNotFound", NStr("en='Type not found %1';
         	|ru='Тип не найден %1';
-        	|tr='Type not found %1'", Lang));
+        	|tr='Tür bulunamadı %1'", Lang));
         Strings.Insert("CreateNewAnalyticsNotSupported", NStr("en='Create new analytics with Document type not supported';
         	|ru='Создание новых аналитик с типом документа не поддерживается';
-        	|tr='Create new analytics with Document type not supported'", Lang));
+        	|tr='Belge türü desteklenmiyorken yeni analizler oluşturun'", Lang));
         Strings.Insert("TaxNotAllowedForDocument", NStr("en='Tax not allowed for document, check tax settings';
         	|ru='Налог не разрешен для документа, проверьте настройки налогов';
-        	|tr='Tax not allowed for document, check tax settings'", Lang));
+        	|tr='Belge için vergiye izin verilmiyor, vergi ayarlarını kontrol edin'", Lang));
         Strings.Insert("RiseTestFalseString", NStr("en='RiseTestFalseString';
         	|ru='RiseTestFalseString';
         	|tr='RiseTestFalseString'", Lang));
         Strings.Insert("CorrectionDescriptionRequired", NStr("en='Correction description has to be filled.';
         	|ru='Наименование корректировки должно быть заполнено.';
-        	|tr='Correction description has to be filled.'", Lang));
+        	|tr='Düzeltme açıklamasının doldurulması gerekmektedir.'", Lang));
         Strings.Insert("GoodsReceiptPreliminaryPurchaseInvoice", NStr("en='Change transaction type or clear purchase invoice. In preliminary type can not be filled purchase invoice';
         	|ru='Необходимо изменить вид оперцаии или очистить поступление товаров. В виде операции предварительных остатко не может быть заполнено поступление товаров.';
-        	|tr='Change transaction type or clear purchase invoice. In preliminary type can not be filled purchase invoice'", Lang));
+        	|tr='İşlem türünü değiştirin veya satın alma faturasını temizleyin. Ön türde satın alma faturası doldurulamaz.'", Lang));
         Strings.Insert("UndefinedTabularSection", NStr("en='Undefined tabular section for : [%1] [%2]';
         	|ru='Неопределена табличная часть для : [%1] [%2]';
-        	|tr='Undefined tabular section for : [%1] [%2]'", Lang));
+        	|tr='[%1] [%2] için tanımsız tablo bölümü'", Lang));
         Strings.Insert("RecordSetCountNotOne", NStr("en='RecordSet.Count() <> 1 [%1]';
         	|ru='RecordSet.Count() <> 1 [%1]';
-        	|tr='RecordSet.Count() <> 1 [%1]'", Lang));
+        	|tr='KayıtKümesi.Sayısı() <> 1 [%1]'", Lang));
         Strings.Insert("UnsupportedMetadata", NStr("en='Not supported metadata : [%1]';
         	|ru='Не поддерживаемые метаданные : [%1]';
-        	|tr='Not supported metadata : [%1]'", Lang));
+        	|tr='Desteklenmeyen meta veri: [%1]'", Lang));
         Strings.Insert("ItemListRowsCountNotOne", NStr("en='ItemListRows.Count() <> 1 :[%1] [%2]';
         	|ru='ItemListRows.Count() <> 1 :[%1] [%2]';
-        	|tr='ItemListRows.Count() <> 1 :[%1] [%2]'", Lang));
+        	|tr='ÖğeListesiSatırları.Sayısı() <> 1 :[%1] [%2]'", Lang));
         Strings.Insert("MainRowsCountNotOne", NStr("en='MainRows.Count() <> 1 :[%1] [%2]';
         	|ru='MainRows.Count() <> 1 :[%1] [%2]';
-        	|tr='MainRows.Count() <> 1 :[%1] [%2]'", Lang));
+        	|tr='AnaSatırlar.Sayısı() <> 1 :[%1] [%2]'", Lang));
         Strings.Insert("UnableReplaceRef", NStr("en='Unable replace ref [%1]';
         	|ru='Не получилось заменить ссылку [%1]';
-        	|tr='Unable replace ref [%1]'", Lang));
+        	|tr='Referans [%1] değiştirilemiyor'", Lang));
         Strings.Insert("UnsupportedSettingStorageName", NStr("en='Unsupported setting storage name [%1]';
         	|ru='Неподдерживаемое имя хранилища настроек [%1]';
-        	|tr='Unsupported setting storage name [%1]'", Lang));
+        	|tr='Desteklenmeyen ayar depolama adı [%1]'", Lang));
         Strings.Insert("InternalAccountNotFound", NStr("en='Not found internal account - Integration settings:[%1] Chart of accounts:[%2] Ref[%3]';
         	|ru='Не найден внутренний счет учета - Настройки интеграции:[%1] План счетов:[%2] Ref[%3]';
-        	|tr='Not found internal account - Integration settings:[%1] Chart of accounts:[%2] Ref[%3]'", Lang));
+        	|tr='Dahili hesap bulunamadı - Entegrasyon ayarları:[%1] Hesap planı:[%2] Referans[%3]'", Lang));
         Strings.Insert("InternalAccountMoreThanOne", NStr("en='Found more than 1 internal account - Integration settings:[%1] Chart of accounts:[%2] Ref[%3]';
         	|ru='Найдено больше 1 внутреннего счета - Настройки интеграции:[%1] План счетов:[%2] Ref[%3]';
-        	|tr='Found more than 1 internal account - Integration settings:[%1] Chart of accounts:[%2] Ref[%3]'", Lang));
+        	|tr='1''den fazla dahili hesap bulundu - Entegrasyon ayarları:[%1] Hesap planı:[%2] Referans[%3]'", Lang));
        Strings.Insert("UnsupportedAnalyticType", NStr("en='Unsupported analytic type [%1]';
        	|ru='Неподдерживаемый тип аналитики [%1]';
-       	|tr='Unsupported analytic type [%1]'", Lang));
+       	|tr='Desteklenmeyen analitik türü [%1]'", Lang));
        Strings.Insert("ItemFormUnknownCommand", NStr("en='Unknown command %1';
        	|ru='Неизвестная команда %1';
-       	|tr='Unknown command %1'", Lang));
+       	|tr='Bilinmeyen komut %1'", Lang));
        Strings.Insert("LedgerLocalizationCodeNotFilled", NStr("en='Ledger localization code not filled for ledger type %1';
        	|ru='Код локализации типа учета не заполнен для типа учета %1';
-       	|tr='Ledger localization code not filled for ledger type %1'", Lang));
+       	|tr='%1 muhasebe türü için muhasebe yerelleştirme kodu doldurulmadı'", Lang));
        Strings.Insert("LedgerAccountMainDrNotDefined", NStr("en='Not defined Account main Dr %1 %2';
        	|ru='Не определен основной Счет учета Дт %1 %2';
-       	|tr='Not defined Account main Dr %1 %2'", Lang));
+       	|tr='Tanımlanmamış Hesap ana Borç %1 %2'", Lang));
        Strings.Insert("LedgerAccountSubDrNotDefined", NStr("en='Not defined Account sub Dr %1 %2';
        	|ru='Не определен подчиненный Счет учета Дт %1 %2';
-       	|tr='Not defined Account sub Dr %1 %2'", Lang));
+       	|tr='Tanımlanmamış Hesap alt Borç %1 %2'", Lang));
        Strings.Insert("LedgerAccountMainCrNotDefined", NStr("en='Not defined Account main Cr %1 %2';
        	|ru='Не определен основной Счет учета Кт %1 %2';
-       	|tr='Not defined Account main Cr %1 %2'", Lang));
+       	|tr='Tanımlanmamış Hesap ana Alacak %1 %2'", Lang));
        Strings.Insert("LedgerAccountSubCrNotDefined", NStr("en='Not defined Account sub Cr %1 %2';
        	|ru='Не определен подчиненный Счет учета Кт %1 %2';
-       	|tr='Not defined Account sub Cr %1 %2'", Lang));
+       	|tr='Tanımlanmamış Hesap alt Alacak %1 %2'", Lang));
        Strings.Insert("InvoiceTypeNotSupported", NStr("en='Not supported invoice type %1';
        	|ru='Not supported invoice type %1';
-       	|tr='Not supported invoice type %1'", Lang));
+       	|tr='%1 fatura türü desteklenmiyor'", Lang));
        Strings.Insert("FewRetailCustomerFound", NStr("en='Multiple retail customers found';
        	|ru='Найдено больше одного розничного покупателя';
-       	|tr='Multiple retail customers found'", Lang));
+       	|tr='Birden fazla perakende müşterisi bulundu'", Lang));
 #EndRegion
 
 #Region Access
@@ -1114,13 +1366,13 @@ Function Strings(Lang) Export
         	|tr='Geçersiz SMS kodu. Tekrar deneyin.'", Lang));
         Strings.Insert("DefaultSMSProviderEmpty", NStr("en='Fill constant default SMS provider.';
         	|ru='Заполнить значение по умолчанию константа SMS провайдера.';
-        	|tr='Fill constant default SMS provider.'", Lang));
+        	|tr='Sabit varsayılan SMS sağlayıcısını doldurun.'", Lang));
         Strings.Insert("SMSModuleNotFound", NStr("en='Can not find SMS module';
         	|ru='Модуль СМС не найден';
-        	|tr='Can not find SMS module'", Lang));
+        	|tr='SMS modülü bulunamadı'", Lang));
         Strings.Insert("SMSMethodNotSupported", NStr("en='Not supported method: %1';
         	|ru='Не поддерживаемый метод: %1';
-        	|tr='Not supported method: %1'", Lang));
+        	|tr='Desteklenmeyen yöntem: %1'", Lang));
 #EndRegion
 
 #Region AdditionalTableControl
@@ -2395,19 +2647,19 @@ Function Strings(Lang) Export
 		|tr='Öznitelik zaten formda mevcut. Tekrarlayan kaldırın: [%1]'", Lang));
 	Strings.Insert("Error_182", NStr("en='Account [%1] [%2]. Lacking: %3 %2.';
 		|ru='Касса/банк [%1] [%2]. Не хватает: %3 %2.';
-		|tr='Account [%1] [%2]. Lacking: %3 %2.'", Lang));
+		|tr='Hesap [%1] [%2]. Eksik: %3 %2.'", Lang));
 	Strings.Insert("Error_183", NStr("en='By document [%1]. Lacking: %3 %2.';
 		|ru='By document [%1]. Lacking: %3 %2.';
-		|tr='By document [%1]. Lacking: %3 %2.'", Lang));
+		|tr='Belgeye göre [%1]. Eksik: %3 %2.'", Lang));
 	Strings.Insert("Error_184", NStr("en='Currency is a required field.';
 		|ru='Currency is a required field.';
-		|tr='Currency is a required field.'", Lang));
+		|tr='Para birimi zorunlu bir alandır.'", Lang));
 	Strings.Insert("Error_185", NStr("en='Wrong linked row [%1]: Document date [%2] less than Basis date [%3]';
 		|ru='Wrong linked row [%1]: Document date [%2] less than Basis date [%3]';
-		|tr='Wrong linked row [%1]: Document date [%2] less than Basis date [%3]'", Lang));
+		|tr='Yanlış bağlantılı satır [%1]: Belge tarihi [%2], Temel tarihten [%3] küçük'", Lang));
 	Strings.Insert("Error_186", NStr("en='Document date [%1] greater than date [%2] in [%3]';
 		|ru='Document date [%1] greater than date [%2] in [%3]';
-		|tr='Document date [%1] greater than date [%2] in [%3]'", Lang));
+		|tr='Belge tarihi [%1], [%3] içindeki [%2] tarihinden büyük'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -4360,7 +4612,7 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 		|tr='Database Migration #IRP-680'", Lang));
 	Strings.Insert("UpdateDesc_005", NStr("en='Updating Document Payroll';
 		|ru='Updating Document Payroll';
-		|tr='Updating Document Payroll'", Lang));
+		|tr='Bordro Belgesini Güncellemesi'", Lang));
 	
 #EndRegion
 
@@ -4371,193 +4623,193 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 		|tr='Hata çıktıkça işlemeyi kes'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkSO", NStr("en='Not supported External link for [SO] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [SO] в [%1]';
-		|tr='Not supported External link for [SO] to [%1]'", Lang));
+		|tr='[SO] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkSI", NStr("en='Not supported Internal link for [SI] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [SI] в [%1]';
-		|tr='Not supported Internal link for [SI] to [%1]'", Lang));
+		|tr='[SI] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkSI", NStr("en='Not supported External link for [SI] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [SI] в [%1]';
-		|tr='Not supported External link for [SI] to [%1]'", Lang));
+		|tr='[SI] ile [%1] arasındaki harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkSC", NStr("en='Not supported Internal link for [SC] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [SC] в [%1]';
-		|tr='Not supported Internal link for [SC] to [%1]'", Lang));
+		|tr='[SC] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkSC", NStr("en='Not supported External link for [SC] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [SC] в [%1]';
-		|tr='Not supported External link for [SC] to [%1]'", Lang));
+		|tr='[SC] ile [%1] arasındaki harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkSPO", NStr("en='Not supported Internal link for [SPO] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [SPO] в [%1]';
-		|tr='Not supported Internal link for [SPO] to [%1]'", Lang));
+		|tr='[SPO] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkSPO", NStr("en='Not supported External link for [SPO] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [SPO] в [%1]';
-		|tr='Not supported External link for [SPO] to [%1]'", Lang));
+		|tr='[SPO] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkRSC", NStr("en='Not supported Internal link for [RSC] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [RSC] в [%1]';
-		|tr='Not supported Internal link for [RSC] to [%1]'", Lang));
+		|tr='[RSC] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkRSC", NStr("en='Not supported External link for [RSC] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [RSC] в [%1]';
-		|tr='Not supported External link for [RSC] to [%1]'", Lang));
+		|tr='[RSC] için [%1] harici bağlantısı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkSRO", NStr("en='Not supported Internal link for [SRO] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [SRO] в [%1]';
-		|tr='Not supported Internal link for [SRO] to [%1]'", Lang));
+		|tr='[SRO] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkSRO", NStr("en='Not supported External link for [SRO] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [SRO] в [%1]';
-		|tr='Not supported External link for [SRO] to [%1]'", Lang));
+		|tr='[SRO] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkPO", NStr("en='Not supported Internal link for [PO] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [PO] в [%1]';
-		|tr='Not supported Internal link for [PO] to [%1]'", Lang));
+		|tr='[PO] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkPO", NStr("en='Not supported External link for [PO] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [PO] в [%1]';
-		|tr='Not supported External link for [PO] to [%1]'", Lang));
+		|tr='[PO] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkGR", NStr("en='Not supported Internal link for [GR] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [GR] в [%1]';
-		|tr='Not supported Internal link for [GR] to [%1]'", Lang));
+		|tr='[GR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkGR", NStr("en='Not supported External link for [GR] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [GR] в [%1]';
-		|tr='Not supported External link for [GR] to [%1]'", Lang));
+		|tr='[GR] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkRGR", NStr("en='Not supported Internal link for [RGR] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для[RGR] в [%1]';
-		|tr='Not supported Internal link for [RGR] to [%1]'", Lang));
+		|tr='[RGR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkRGR", NStr("en='Not supported External link for [RGR] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [RGR] в [%1]';
-		|tr='Not supported External link for [RGR] to [%1]'", Lang));
+		|tr='[RGR] için [%1] harici bağlantısı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkPI", NStr("en='Not supported Internal link for [PI] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [PI] в [%1]';
-		|tr='Not supported Internal link for [PI] to [%1]'", Lang));
+		|tr='[PI] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkPI", NStr("en='Not supported External link for [PI] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [PI] в [%1]';
-		|tr='Not supported External link for [PI] to [%1]'", Lang));
+		|tr='[PI] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkITO", NStr("en='Not supported Internal link for [ITO] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [ITO] в [%1]';
-		|tr='Not supported Internal link for [ITO] to [%1]'", Lang));
+		|tr='[ITO] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkITO", NStr("en='Not supported External link for [ITO] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [ITO] в [%1]';
-		|tr='Not supported External link for [ITO] to [%1]'", Lang));
+		|tr='[ITO] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkIT", NStr("en='Not supported Internal link for [IT] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [IT] в [%1]';
-		|tr='Not supported Internal link for [IT] to [%1]'", Lang));
+		|tr='[IT] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkIT", NStr("en='Not supported External link for [IT] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [IT] в [%1]';
-		|tr='Not supported External link for [IT] to [%1]'", Lang));
+		|tr='[IT] ile [%1] arasındaki harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkISR", NStr("en='Not supported External link for [ISR] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [ISR] в [%1]';
-		|tr='Not supported External link for [ISR] to [%1]'", Lang));
+		|tr='[ISR] için [%1] harici bağlantısı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkPR", NStr("en='Not supported Internal link for [PR] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [PR] в [%1]';
-		|tr='Not supported Internal link for [PR] to [%1]'", Lang));
+		|tr='[PR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkPR", NStr("en='Not supported External link for [PR] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [PR] в [%1]';
-		|tr='Not supported External link for [PR] to [%1]'", Lang));
+		|tr='[PR] için [%1] harici bağlantısı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkSR", NStr("en='Not supported Internal link for [SR] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [SR] в [%1]';
-		|tr='Not supported Internal link for [SR] to [%1]'", Lang));
+		|tr='[SR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkSR", NStr("en='Not supported External link for [SR] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [SR] в [%1]';
-		|tr='Not supported External link for [SR] to [%1]'", Lang));
+		|tr='[SR] ile [%1] arasındaki harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkPRO", NStr("en='Not supported Internal link for [PRO] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [PRO] в [%1]';
-		|tr='Not supported Internal link for [PRO] to [%1]'", Lang));
+		|tr='[PRO] için [%1]''e yönelik Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkPRO", NStr("en='Not supported External link for [PRO] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [PRO] в [%1]';
-		|tr='Not supported External link for [PRO] to [%1]'", Lang));
+		|tr='[PRO] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkRSR", NStr("en='Not supported Internal link for [RSR] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [RSR] в [%1]';
-		|tr='Not supported Internal link for [RSR] to [%1]'", Lang));
+		|tr='[RSR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkRSR", NStr("en='Not supported External link for [RSR] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [RSR] в [%1]';
-		|tr='Not supported External link for [RSR] to [%1]'", Lang));
+		|tr='[RSR] için [%1] harici bağlantısı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkPRR", NStr("en='Not supported Internal link for [PRR] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [PRR] в [%1]';
-		|tr='Not supported Internal link for [PRR] to [%1]'", Lang));
+		|tr='[PRR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkRRR", NStr("en='Not supported Internal link for [RRR] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [RRR] в [%1]';
-		|tr='Not supported Internal link for [RRR] to [%1]'", Lang));
+		|tr='[RRR] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkStockAdjustmentAsSurplus", NStr("en='Not supported Internal link for [StockAdjustmentAsSurplus] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [StockAdjustmentAsSurplus] в [%1]';
-		|tr='Not supported Internal link for [StockAdjustmentAsSurplus] to [%1]'", Lang));
+		|tr='[StockAdjustmentAsSurplus] için [%1]''e dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkStockAdjustmentAsWriteOff", NStr("en='Not supported Internal link for [StockAdjustmentAsWriteOff] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [StockAdjustmentAsWriteOff] в [%1]';
-		|tr='Not supported Internal link for [StockAdjustmentAsWriteOff] to [%1]'", Lang));
+		|tr='[StockAdjustmentAsWriteOff] için [%1]''e dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkPhysicalInventory", NStr("en='Not supported External link for [PhysicalInventory] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [PhysicalInventory] в [%1]';
-		|tr='Not supported External link for [PhysicalInventory] to [%1]'", Lang));
+		|tr='[PhysicalInventory] için [%1]''e harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkWO", NStr("en='Not supported Internal link for [WO] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [WO] в [%1]';
-		|tr='Not supported Internal link for [WO] to [%1]'", Lang));
+		|tr='[WO] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkWO", NStr("en='Not supported External link for [WO] to [%1]';
 		|ru='Not supported External link for [WO] to [%1]';
-		|tr='Not supported External link for [WO] to [%1]'", Lang));
+		|tr='[WO] için [%1] harici bağlantısı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedInternalLinkWS", NStr("en='Not supported Internal link for [WS] to [%1]';
 		|ru='Не поддерживаемая Внутреняя ссылка для [WS] в [%1]';
-		|tr='Not supported Internal link for [WS] to [%1]'", Lang));
+		|tr='[WS] ile [%1] arasındaki Dahili bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkSC2", NStr("en='Not supported External link for [SC] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [SC] в [%1]';
-		|tr='Not supported External link for [SC] to [%1]'", Lang));
+		|tr='[SC] ile [%1] arasındaki harici bağlantı desteklenmiyor'", Lang));
 	Strings.Insert("Error_GetSeparatorColumnsNotSupported", NStr("en='GetSeparatorColumns( %1 ) not supported';
 		|ru='GetSeparatorColumns( %1 ) не поддерживается';
-		|tr='GetSeparatorColumns( %1 ) not supported'", Lang));
+		|tr='GetSeparatorColumns( %1 ) desteklenmiyor'", Lang));
 	Strings.Insert("Error_FormElementNotFound", NStr("en='Not found form element: %1';
 		|ru='Не найден элемент формы: %1';
-		|tr='Not found form element: %1'", Lang));
+		|tr='Form öğesi bulunamadı: %1'", Lang));
 	Strings.Insert("Error_UnsupportedRegisterType", NStr("en='Unsupported register type [%1]';
 		|ru='Неподдерживаемый тип регистра [%1]';
-		|tr='Unsupported register type [%1]'", Lang));
+		|tr='Desteklenmeyen kayıt türü [%1]'", Lang));
 	Strings.Insert("Error_TableNotFoundInTempTables", NStr("en='Table [%1] not found in temp tables';
 		|ru='Таблица [%1] не найдена во временных таблицах';
-		|tr='Table [%1] not found in temp tables'", Lang));
+		|tr='Tablo [%1] geçici tablolarda bulunamadı'", Lang));
 	Strings.Insert("Error_DocumentAndAdvancesKeyNotFound", NStr("en='Not found rows in Table_DocumentAndAdvancesKey by uuid [%1]';
 		|ru='Не найдены строки в Table_DocumentAndAdvancesKey по uuid [%1]';
-		|tr='Not found rows in Table_DocumentAndAdvancesKey by uuid [%1]'", Lang));
+		|tr='Table_DocumentAndAdvancesKey''de uuid [%1] tarafından satır bulunamadı'", Lang));
 	Strings.Insert("Error_DocumentAndTransactionsKeyNotFound", NStr("en='Not found rows in Table_DocumentAndTransactionsKey by uuid [%1]';
 		|ru='Не найдены строки в Table_DocumentAndTransactionsKey по uuid [%1]';
-		|tr='Not found rows in Table_DocumentAndTransactionsKey by uuid [%1]'", Lang));
+		|tr='Table_DocumentAndTransactionsKey''de uuid [%1] tarafından belirtilen satır bulunamadı'", Lang));
 	Strings.Insert("Error_UnknownAdvanceRegister", NStr("en='Unknown advance register [%1]';
 		|ru='Неизвестный регистр авансов [%1]';
-		|tr='Unknown advance register [%1]'", Lang));
+		|tr='Bilinmeyen avans kayıt [%1]'", Lang));
 	Strings.Insert("Error_UnknownTransactionRegister", NStr("en='Unknown transaction register [%1]';
 		|ru='Неизвестный регистр взаиморасчетов [%1]';
-		|tr='Unknown transaction register [%1]'", Lang));
+		|tr='Bilinmeyen işlem kaydı [%1]'", Lang));
 	Strings.Insert("Error_PostingInfoNotFound", NStr("en='Not found [%1] in array of posting info';
 		|ru='Не найден [%1] в массиве для данных проведения';
-		|tr='Not found [%1] in array of posting info'", Lang));
+		|tr='Gönderi bilgisi dizisinde [%1] bulunamadı'", Lang));
 	Strings.Insert("Error_AdvanceLessThanZero", NStr("en='Advance < 0 ADV_KEY[%1]';
 		|ru='Аванс < 0 ADV_KEY[%1]';
-		|tr='Advance < 0 ADV_KEY[%1]'", Lang));
+		|tr='Avans < 0 ADV_KEY[%1]'", Lang));
 	Strings.Insert("Error_FoundMoreThanOneCompany", NStr("en='Found more than one when option not: Companies (Legal name), UseCompanies';
 		|ru='Найдено больше одного где условие нет: Организации (Контрагент), Использовать Организации';
-		|tr='Found more than one when option not: Companies (Legal name), UseCompanies'", Lang));
+		|tr='Seçenek olmadığında birden fazla bulundu: Şirketler (Yasal ad), UseCompanies'", Lang));
 	Strings.Insert("Error_FoundMoreThanOneItemKey", NStr("en='Found more than one when option not: ItemKey, UseItemKey';
 		|ru='Найдено больше одного условия нет: Характеристика, Использовать характеристику';
-		|tr='Found more than one when option not: ItemKey, UseItemKey'", Lang));
+		|tr='Seçenek belirtilmediğinde birden fazla bulundu: ItemKey, UseItemKey'", Lang));
 	Strings.Insert("Error_UnsupportedCommandName", NStr("en='Unsupported command name[%1]';
 		|ru='Неподдерживаемое имя команды [%1]';
-		|tr='Unsupported command name[%1]'", Lang));
+		|tr='Desteklenmeyen komut adı[%1]'", Lang));
 	Strings.Insert("Error_UnsupportedBundleType", NStr("en='Unsupported bundle type [%1]';
 		|ru='Неподдерживаемый тип бандла [%1]';
-		|tr='Unsupported bundle type [%1]'", Lang));
+		|tr='Desteklenmeyen paket türü [%1]'", Lang));
 	Strings.Insert("Error_NotHandledViewNotify", NStr("en='Not handled view notify [%1]';
 		|ru='Не поддерживаемый предпросмотрт уведомления [%1]';
-		|tr='Not handled view notify [%1]'", Lang));
+		|tr='İşlenmemiş görünüm bildirimi [%1]'", Lang));
 	Strings.Insert("Error_KeyNotAllowedForDataPath", NStr("en='Key [%1] not allowed for data path [%2]';
 		|ru='Ключь [%1] не разрешен для пути данных [%2]';
-		|tr='Key [%1] not allowed for data path [%2]'", Lang));
+		|tr='[%1] anahtarına [%2] veri yolu için izin verilmiyor'", Lang));
 	Strings.Insert("Error_RowNotFoundInTable", NStr("en='Not found row in table [%1] line [%2]';
 		|ru='Не найдена строка в таблице [%1] строка [%2]';
-		|tr='Not found row in table [%1] line [%2]'", Lang));
+		|tr='Tablo [%1] satırında [%2] satır bulunamadı'", Lang));
 	Strings.Insert("Error_RowNotFoundInSourceTableMap", NStr("en='Not found row in SourceTableMap [%1] [%2]';
 		|ru='Не найдено значение в SourceTableMap [%1] [%2]';
-		|tr='Not found row in SourceTableMap [%1] [%2]'", Lang));
+		|tr='SourceTableMap''te [%1] [%2] satır bulunamadı'", Lang));
 	Strings.Insert("Error_WrongDataPathForReadOnlyProperty", NStr("en='Wrong data path for read only property [%1]';
 		|ru='Неправильный путь данных свойства только для прочтения [%1]';
-		|tr='Wrong data path for read only property [%1]'", Lang));
+		|tr='Salt okunur özellik [%1] için yanlış veri yolu'", Lang));
 	Strings.Insert("Error_UnknownRefType", NStr("en='Unknown ref type: %1';
 		|ru='Неизвестный тип ссылки: %1';
-		|tr='Unknown ref type: %1'", Lang));
+		|tr='Bilinmeyen referans türü: %1'", Lang));
 	Strings.Insert("Error_StepsEnablerNotDefined", NStr("en='Steps enabler is not defined [%1]';
 		|ru='Активатор шагов не определен [%1]';
-		|tr='Steps enabler is not defined [%1]'", Lang));
+		|tr='Adım etkinleştiricisi tanımlanmadı [%1]'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkSC3", NStr("en='Not supported External link for [SC] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [SC] в [%1]';
-		|tr='Not supported External link for [SC] to [%1]'", Lang));
+		|tr='[SC] ile [%1] arasındaki harici bağlantı desteklenmiyor'", Lang));
 #EndRegion
 
 #Region Tasks
@@ -4566,7 +4818,7 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 		|tr='Tamamlandı'", Lang));
 	Strings.Insert("Task_Result_Execution_Not", NStr("en='Not done';
 		|ru='Not done';
-		|tr='Not done'", Lang));
+		|tr='Yapılmadı'", Lang));
     Strings.Insert("Task_Result_Verification", NStr("en='Success';
 		|ru='Успешно';
 		|tr='Başarılı'", Lang));

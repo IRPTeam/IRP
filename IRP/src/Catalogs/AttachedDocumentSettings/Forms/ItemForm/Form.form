@@ -14,11 +14,6 @@
   <extendedTooltip>
    <name>CodeExtendedTooltip</name>
    <id>3</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -29,11 +24,6 @@
   <contextMenu>
    <name>CodeContextMenu</name>
    <id>2</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <type>InputField</type>
@@ -64,11 +54,6 @@
   <extendedTooltip>
    <name>DescriptionExtendedTooltip</name>
    <id>6</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -79,11 +64,6 @@
   <contextMenu>
    <name>DescriptionContextMenu</name>
    <id>5</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <type>InputField</type>
@@ -118,11 +98,6 @@
   <extendedTooltip>
    <name>FileStorageVolumeExtendedTooltip</name>
    <id>9</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -133,11 +108,6 @@
   <contextMenu>
    <name>FileStorageVolumeContextMenu</name>
    <id>8</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <type>InputField</type>
@@ -180,11 +150,6 @@
    <extendedTooltip>
     <name>FileSettingsLineNumberExtendedTooltip</name>
     <id>25</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -195,11 +160,6 @@
    <contextMenu>
     <name>FileSettingsLineNumberContextMenu</name>
     <id>24</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>LabelField</type>
@@ -229,11 +189,6 @@
     <extendedTooltip>
      <name>FileSettingsFilePresentionExtendedTooltip</name>
      <id>28</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -244,11 +199,6 @@
     <contextMenu>
      <name>FileSettingsFilePresentionContextMenu</name>
      <id>27</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -291,11 +241,6 @@
     <extendedTooltip>
      <name>FileSettingsFileTooltipsExtendedTooltip</name>
      <id>31</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -306,11 +251,6 @@
     <contextMenu>
      <name>FileSettingsFileTooltipsContextMenu</name>
      <id>30</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -336,11 +276,6 @@
    <extendedTooltip>
     <name>FileSettingsDescriptionExtendedTooltip</name>
     <id>48</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -371,11 +306,6 @@
     <extendedTooltip>
      <name>FileSettingsFileTemplateExtendedTooltip</name>
      <id>34</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -386,11 +316,6 @@
     <contextMenu>
      <name>FileSettingsFileTemplateContextMenu</name>
      <id>33</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -434,11 +359,6 @@
     <extendedTooltip>
      <name>FileSettingsNamingFormatExtendedTooltip</name>
      <id>37</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -449,11 +369,6 @@
     <contextMenu>
      <name>FileSettingsNamingFormatContextMenu</name>
      <id>36</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -478,11 +393,6 @@
    <extendedTooltip>
     <name>FileSettingsNamingExtendedTooltip</name>
     <id>50</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -510,11 +420,6 @@
    <extendedTooltip>
     <name>FileSettingsRequiredExtendedTooltip</name>
     <id>40</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -525,11 +430,6 @@
    <contextMenu>
     <name>FileSettingsRequiredContextMenu</name>
     <id>39</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>CheckBoxField</type>
@@ -556,11 +456,6 @@
     <extendedTooltip>
      <name>FileSettingsMaximumFileSizeExtendedTooltip</name>
      <id>43</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -571,11 +466,6 @@
     <contextMenu>
      <name>FileSettingsMaximumFileSizeContextMenu</name>
      <id>42</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -606,11 +496,6 @@
     <extendedTooltip>
      <name>FileSettingsFileFormatExtendedTooltip</name>
      <id>46</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -621,11 +506,6 @@
     <contextMenu>
      <name>FileSettingsFileFormatContextMenu</name>
      <id>45</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -650,11 +530,6 @@
    <extendedTooltip>
     <name>FileSettingsSizeFormatExtendedTooltip</name>
     <id>52</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -671,30 +546,15 @@
   <autoCommandBar>
    <name>FileSettingsCommandBar</name>
    <id>12</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <horizontalAlign>Left</horizontalAlign>
    <autoFill>true</autoFill>
   </autoCommandBar>
   <searchStringAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>FileSettingsSearchString</name>
    <id>14</id>
    <extendedTooltip>
     <name>FileSettingsSearchStringExtendedTooltip</name>
     <id>16</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -705,11 +565,6 @@
    <contextMenu>
     <name>FileSettingsSearchStringContextMenu</name>
     <id>15</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <source>FileSettings</source>
@@ -718,21 +573,11 @@
    </extInfo>
   </searchStringAddition>
   <viewStatusAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>FileSettingsViewStatus</name>
    <id>17</id>
    <extendedTooltip>
     <name>FileSettingsViewStatusExtendedTooltip</name>
     <id>19</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -743,11 +588,6 @@
    <contextMenu>
     <name>FileSettingsViewStatusContextMenu</name>
     <id>18</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>ViewStatusAddition</type>
@@ -757,21 +597,11 @@
    </extInfo>
   </viewStatusAddition>
   <searchControlAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>FileSettingsSearchControl</name>
    <id>20</id>
    <extendedTooltip>
     <name>FileSettingsSearchControlExtendedTooltip</name>
     <id>22</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -782,11 +612,6 @@
    <contextMenu>
     <name>FileSettingsSearchControlContextMenu</name>
     <id>21</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>SearchControlAddition</type>
@@ -798,11 +623,6 @@
   <extendedTooltip>
    <name>FileSettingsExtendedTooltip</name>
    <id>13</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -813,11 +633,6 @@
   <contextMenu>
    <name>FileSettingsContextMenu</name>
    <id>11</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <changeRowSet>true</changeRowSet>
@@ -846,11 +661,6 @@
  <autoCommandBar>
   <name>FormCommandBar</name>
   <id>-1</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
   <autoFill>true</autoFill>
  </autoCommandBar>

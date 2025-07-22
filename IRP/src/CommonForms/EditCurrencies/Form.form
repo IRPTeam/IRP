@@ -25,11 +25,6 @@
    <extendedTooltip>
     <name>CurrenciesTableKeyExtendedTooltip</name>
     <id>65</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -40,11 +35,6 @@
    <contextMenu>
     <name>CurrenciesTableKeyContextMenu</name>
     <id>64</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -76,11 +66,6 @@
    <extendedTooltip>
     <name>CurrenciesTableIsFixedExtendedTooltip</name>
     <id>62</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -91,11 +76,6 @@
    <contextMenu>
     <name>CurrenciesTableIsFixedContextMenu</name>
     <id>61</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>PictureField</type>
@@ -111,6 +91,10 @@
     <valuesPicture xsi:type="core:PictureRef">
      <picture>StdPicture.Change</picture>
     </valuesPicture>
+    <border xsi:type="core:BorderDef">
+     <style>Single</style>
+     <width>1</width>
+    </border>
     <fileDragMode>AsFileRef</fileDragMode>
    </extInfo>
   </items>
@@ -129,11 +113,6 @@
    <extendedTooltip>
     <name>CurrenciesTableMovementTypeExtendedTooltip</name>
     <id>38</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -144,11 +123,6 @@
    <contextMenu>
     <name>CurrenciesTableMovementTypeContextMenu</name>
     <id>37</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -181,11 +155,6 @@
    <extendedTooltip>
     <name>CurrenciesTableMovementTypeTypeExtendedTooltip</name>
     <id>44</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -196,11 +165,6 @@
    <contextMenu>
     <name>CurrenciesTableMovementTypeTypeContextMenu</name>
     <id>43</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -244,11 +208,6 @@
    <extendedTooltip>
     <name>CurrenciesTableCurrencyFromExtendedTooltip</name>
     <id>23</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -259,11 +218,6 @@
    <contextMenu>
     <name>CurrenciesTableCurrencyFromContextMenu</name>
     <id>22</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -308,11 +262,6 @@
    <extendedTooltip>
     <name>CurrenciesTableMovementTypeCurrencyExtendedTooltip</name>
     <id>47</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -323,11 +272,6 @@
    <contextMenu>
     <name>CurrenciesTableMovementTypeCurrencyContextMenu</name>
     <id>46</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -361,11 +305,6 @@
    <extendedTooltip>
     <name>CurrenciesTableShowReverseRateExtendedTooltip</name>
     <id>32</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -376,11 +315,6 @@
    <contextMenu>
     <name>CurrenciesTableShowReverseRateContextMenu</name>
     <id>31</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>PictureField</type>
@@ -396,6 +330,10 @@
     <valuesPicture xsi:type="core:PictureRef">
      <picture>CommonPicture.CurrencyRateDirection</picture>
     </valuesPicture>
+    <border xsi:type="core:BorderDef">
+     <style>Single</style>
+     <width>1</width>
+    </border>
     <fileDragMode>AsFileRef</fileDragMode>
    </extInfo>
   </items>
@@ -429,11 +367,6 @@
    <extendedTooltip>
     <name>CurrenciesTableRatePresentationExtendedTooltip</name>
     <id>50</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -444,11 +377,6 @@
    <contextMenu>
     <name>CurrenciesTableRatePresentationContextMenu</name>
     <id>49</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -483,11 +411,6 @@
    <extendedTooltip>
     <name>CurrenciesTableMultiplicityExtendedTooltip</name>
     <id>35</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -498,11 +421,6 @@
    <contextMenu>
     <name>CurrenciesTableMultiplicityContextMenu</name>
     <id>34</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -537,11 +455,6 @@
    <extendedTooltip>
     <name>CurrenciesTableAmountExtendedTooltip</name>
     <id>41</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -552,11 +465,6 @@
    <contextMenu>
     <name>CurrenciesTableAmountContextMenu</name>
     <id>40</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -576,11 +484,6 @@
   <autoCommandBar>
    <name>CurrenciesTableCommandBar</name>
    <id>6</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
@@ -596,21 +499,11 @@
    <name>CurrenciesTableBeforeDeleteRow</name>
   </handlers>
   <searchStringAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>CurrenciesTableSearchString</name>
    <id>9</id>
    <extendedTooltip>
     <name>CurrenciesTableSearchStringExtendedTooltip</name>
     <id>11</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -621,11 +514,6 @@
    <contextMenu>
     <name>CurrenciesTableSearchStringContextMenu</name>
     <id>10</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <source>CurrenciesTable</source>
@@ -634,21 +522,11 @@
    </extInfo>
   </searchStringAddition>
   <viewStatusAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>CurrenciesTableViewStatus</name>
    <id>15</id>
    <extendedTooltip>
     <name>CurrenciesTableViewStatusExtendedTooltip</name>
     <id>17</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -659,11 +537,6 @@
    <contextMenu>
     <name>CurrenciesTableViewStatusContextMenu</name>
     <id>16</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>ViewStatusAddition</type>
@@ -673,21 +546,11 @@
    </extInfo>
   </viewStatusAddition>
   <searchControlAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>CurrenciesTableSearchControl</name>
    <id>12</id>
    <extendedTooltip>
     <name>CurrenciesTableSearchControlExtendedTooltip</name>
     <id>14</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -698,11 +561,6 @@
    <contextMenu>
     <name>CurrenciesTableSearchControlContextMenu</name>
     <id>13</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>SearchControlAddition</type>
@@ -714,11 +572,6 @@
   <extendedTooltip>
    <name>CurrenciesTableExtendedTooltip</name>
    <id>8</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -729,11 +582,6 @@
   <contextMenu>
    <name>CurrenciesTableContextMenu</name>
    <id>7</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <changeRowSet>true</changeRowSet>
@@ -769,11 +617,6 @@
    <extendedTooltip>
     <name>FormOkExtendedTooltip</name>
     <id>2</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -800,11 +643,6 @@
    <extendedTooltip>
     <name>FormCancelExtendedTooltip</name>
     <id>4</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -830,11 +668,6 @@
    <extendedTooltip>
     <name>FormUpdateExtendedTooltip</name>
     <id>71</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -860,11 +693,6 @@
    <extendedTooltip>
     <name>FormShowRowKeyExtendedTooltip</name>
     <id>67</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -891,11 +719,6 @@
    <extendedTooltip>
     <name>FormCurrencyRatesExtendedTooltip</name>
     <id>69</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -910,11 +733,6 @@
    <placementArea>UserCmds</placementArea>
    <representationInContextMenu>Auto</representationInContextMenu>
   </items>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
   <autoFill>true</autoFill>
  </autoCommandBar>

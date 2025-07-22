@@ -20,11 +20,6 @@
     <extendedTooltip>
      <name>CodeExtendedTooltip</name>
      <id>8</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -35,11 +30,6 @@
     <contextMenu>
      <name>CodeContextMenu</name>
      <id>7</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -71,11 +61,6 @@
     <extendedTooltip>
      <name>FlagExtendedTooltip</name>
      <id>46</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -86,11 +71,6 @@
     <contextMenu>
      <name>FlagContextMenu</name>
      <id>45</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>PictureField</type>
@@ -101,6 +81,10 @@
     <extInfo xsi:type="form:ImageFieldExtInfo">
      <width>3</width>
      <height>1</height>
+     <border xsi:type="core:BorderDef">
+      <style>Single</style>
+      <width>1</width>
+     </border>
      <borderColor xsi:type="core:ColorRef">
       <color>Style.FormBackColor</color>
      </borderColor>
@@ -127,11 +111,6 @@
    <extendedTooltip>
     <name>GroupFlagExtendedTooltip</name>
     <id>48</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -157,11 +136,6 @@
   <extendedTooltip>
    <name>GroupDescriptionsExtendedTooltip</name>
    <id>5</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -192,11 +166,6 @@
   <extendedTooltip>
    <name>CurrencyExtendedTooltip</name>
    <id>3</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -207,11 +176,6 @@
   <contextMenu>
    <name>CurrencyContextMenu</name>
    <id>2</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <type>InputField</type>
@@ -245,11 +209,6 @@
    <extendedTooltip>
     <name>AlphaCode2ExtendedTooltip</name>
     <id>26</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -260,11 +219,6 @@
    <contextMenu>
     <name>AlphaCode2ContextMenu</name>
     <id>25</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -295,11 +249,6 @@
    <extendedTooltip>
     <name>AlphaCode3ExtendedTooltip</name>
     <id>29</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -310,11 +259,6 @@
    <contextMenu>
     <name>AlphaCode3ContextMenu</name>
     <id>28</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -342,11 +286,6 @@
    <extendedTooltip>
     <name>ICAOCodeExtendedTooltip</name>
     <id>32</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -357,11 +296,6 @@
    <contextMenu>
     <name>ICAOCodeContextMenu</name>
     <id>31</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -389,11 +323,6 @@
    <extendedTooltip>
     <name>PassportCodeExtendedTooltip</name>
     <id>35</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -404,11 +333,6 @@
    <contextMenu>
     <name>PassportCodeContextMenu</name>
     <id>34</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -439,11 +363,6 @@
    <extendedTooltip>
     <name>PhonePrefixExtendedTooltip</name>
     <id>38</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -454,11 +373,6 @@
    <contextMenu>
     <name>PhonePrefixContextMenu</name>
     <id>37</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -495,11 +409,6 @@
   <extendedTooltip>
    <name>GroupCountryPropertyExtendedTooltip</name>
    <id>40</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -521,11 +430,6 @@
  <autoCommandBar>
   <name>FormCommandBar</name>
   <id>-1</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
   <autoFill>true</autoFill>
  </autoCommandBar>

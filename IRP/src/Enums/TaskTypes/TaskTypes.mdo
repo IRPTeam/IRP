@@ -8,7 +8,7 @@
  <name>TaskTypes</name>
  <synonym>
   <key>tr</key>
-  <value>Task types</value>
+  <value>Görev türleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -39,7 +39,7 @@
   <name>Verification</name>
   <synonym>
    <key>tr</key>
-   <value>Verification</value>
+   <value>Doğrulama</value>
   </synonym>
   <synonym>
    <key>ru</key>

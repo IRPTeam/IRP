@@ -2284,7 +2284,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Başlangıc</v8:content>
+					<v8:content>Ön</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -2326,7 +2326,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Başlangıc</v8:content>
+					<v8:content>Ön</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -2363,7 +2363,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Başlangıc</v8:content>
+					<v8:content>Ön</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -2400,7 +2400,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Başlangıc</v8:content>
+					<v8:content>Ön</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -2442,7 +2442,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Preliminary (amount)</v8:content>
+					<v8:content>Ön (tutar)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -2484,7 +2484,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Preliminary (amount)</v8:content>
+					<v8:content>Ön (tutar)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -2521,7 +2521,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Preliminary (amount)</v8:content>
+					<v8:content>Ön (tutar)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -2558,7 +2558,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Preliminary (amount)</v8:content>
+					<v8:content>Ön (tutar)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -2600,7 +2600,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Preliminary (tax amount)</v8:content>
+					<v8:content>Ön (vergi tutarı)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -2642,7 +2642,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Preliminary (tax amount)</v8:content>
+					<v8:content>Ön (vergi tutarı)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -2679,7 +2679,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Preliminary (tax amount)</v8:content>
+					<v8:content>Ön (vergi tutarı)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -2716,7 +2716,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Preliminary (tax amount)</v8:content>
+					<v8:content>Ön (vergi tutarı)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -4200,7 +4200,7 @@ ORDER BY
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>tr</v8:lang>
-						<v8:content>Preliminary quantity receipt</v8:content>
+						<v8:content>Ön miktar gelen</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
@@ -4221,7 +4221,7 @@ ORDER BY
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>tr</v8:lang>
-						<v8:content>Preliminary amount receipt</v8:content>
+						<v8:content>Ön tutar gelen</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
@@ -4242,7 +4242,7 @@ ORDER BY
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>tr</v8:lang>
-						<v8:content>Preliminary quantity expense</v8:content>
+						<v8:content>Ön miktar çıkan</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>

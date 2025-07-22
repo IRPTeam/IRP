@@ -170,11 +170,6 @@
     <extendedTooltip>
      <name>GroupDescriptionsExtendedTooltip</name>
      <id>135</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -557,7 +552,7 @@
    </userVisible>
    <title>
     <key>tr</key>
-    <value>Execution objects</value>
+    <value>Yürütme nesneleri</value>
    </title>
    <title>
     <key>ru</key>
@@ -1209,7 +1204,7 @@
    </userVisible>
    <title>
     <key>tr</key>
-    <value>Stages and Tasks</value>
+    <value>Aşamalar ve Görevler</value>
    </title>
    <title>
     <key>ru</key>

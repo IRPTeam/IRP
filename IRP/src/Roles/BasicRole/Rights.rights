@@ -155,6 +155,10 @@
 			<value>true</value>
 		</right>
 		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
@@ -282,6 +286,10 @@
 		<name>BusinessProcess.ExecutionProcesses</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -2322,10 +2330,6 @@
 		<right>
 			<name>MainWindowModeKiosk</name>
 			<value>true</value>
-		</right>
-		<right>
-			<name>AnalyticsSystemClient</name>
-			<value>false</value>
 		</right>
 		<right>
 			<name>ExclusiveModeTerminationAtSessionStart</name>

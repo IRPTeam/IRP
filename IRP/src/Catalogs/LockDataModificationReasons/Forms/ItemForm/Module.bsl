@@ -131,7 +131,7 @@ Procedure RuleListTypeStartChoice(Item, ChoiceData, StandardProcessing)
 		InitialValue = CurrentList.FindByValue(CurrentType);
 	EndIf;
 	
-	ListNotify = New NotifyDescription("ChooseTypeEnd", ThisObject);
+	ListNotify = New CallbackDescription("ChooseTypeEnd", ThisObject);
 	If InitialValue = Undefined Then
 		ShowChooseFromList(ListNotify, CurrentList, Item);
 	Else

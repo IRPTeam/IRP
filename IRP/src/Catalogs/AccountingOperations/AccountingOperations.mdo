@@ -236,7 +236,6 @@
    </content>
    <content id="80212b76-adc0-441a-99b2-9d96f5f337a6">
     <name>BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>166</value>
     </code>
@@ -591,7 +590,6 @@
    </content>
    <content id="30db4c4c-e21f-476f-8464-3d27efc5f3da">
     <name>CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>167</value>
     </code>
@@ -1150,35 +1148,30 @@
   </items>
   <items id="5a60e2ec-066c-4841-b3c0-25ae68709fd4">
    <name>Document_WithholdingTaxInvoice</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>161</value>
    </code>
    <isFolder>true</isFolder>
    <content id="120ebe4b-8523-4036-9c1d-a639234b616c">
     <name>WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>162</value>
     </code>
    </content>
    <content id="102a2f02-f68a-4098-8d1a-dfc3785c40f9">
     <name>WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>163</value>
     </code>
    </content>
    <content id="2bbb9f18-3789-4de8-9376-b26f5aad0a1a">
     <name>WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>164</value>
     </code>
    </content>
    <content id="d86f4345-33f7-4ae0-8cb0-2f0b990687f6">
     <name>WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>171</value>
     </code>
@@ -1186,21 +1179,18 @@
   </items>
   <items id="6e94a935-a622-4259-9851-305f2640a3d0">
    <name>Document_FixedAssetRevaluation</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>168</value>
    </code>
    <isFolder>true</isFolder>
    <content id="ffe7e9b8-469f-4433-ab6d-baf472ee2c5a">
     <name>FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>169</value>
     </code>
    </content>
    <content id="42be3b68-b882-4b3e-9b5a-cb84a9a2fe13">
     <name>FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>170</value>
     </code>

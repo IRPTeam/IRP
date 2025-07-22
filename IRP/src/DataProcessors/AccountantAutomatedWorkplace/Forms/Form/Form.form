@@ -32,11 +32,6 @@
    <contextMenu>
     <name>PeriodContextMenu</name>
     <id>4</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -177,11 +172,6 @@
    <contextMenu>
     <name>DocumentTypeContextMenu</name>
     <id>7</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -244,11 +234,6 @@
    <contextMenu>
     <name>LockTypeContextMenu</name>
     <id>10</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -345,11 +330,6 @@
    <contextMenu>
     <name>FilesTypeContextMenu</name>
     <id>13</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -481,7 +461,7 @@
     <choiceList>
      <presentation>
       <key>tr</key>
-      <value>All open tasks</value>
+      <value>Tüm açık görevler</value>
      </presentation>
      <presentation>
       <key>ru</key>
@@ -498,7 +478,7 @@
     <choiceList>
      <presentation>
       <key>tr</key>
-      <value>Only my tasks</value>
+      <value>Sadece benim görevlerim</value>
      </presentation>
      <presentation>
       <key>ru</key>
@@ -629,11 +609,6 @@
      <contextMenu>
       <name>DocumentListLockedContextMenu</name>
       <id>110</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>PictureField</type>
@@ -728,11 +703,6 @@
      <contextMenu>
       <name>DocumentListDocumentContextMenu</name>
       <id>89</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
@@ -809,11 +779,6 @@
      <contextMenu>
       <name>DocumentListFilesContextMenu</name>
       <id>116</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
@@ -853,11 +818,6 @@
      <contextMenu>
       <name>DocumentListDateContextMenu</name>
       <id>92</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
@@ -896,11 +856,6 @@
      <contextMenu>
       <name>DocumentListNumberContextMenu</name>
       <id>95</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
@@ -939,11 +894,6 @@
      <contextMenu>
       <name>DocumentListAuthorContextMenu</name>
       <id>104</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
@@ -982,11 +932,6 @@
      <contextMenu>
       <name>DocumentListCreateDateContextMenu</name>
       <id>98</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
@@ -1025,11 +970,6 @@
      <contextMenu>
       <name>DocumentListEditorContextMenu</name>
       <id>107</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
@@ -1068,11 +1008,6 @@
      <contextMenu>
       <name>DocumentListModifyDateContextMenu</name>
       <id>101</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
@@ -1111,11 +1046,6 @@
      <contextMenu>
       <name>DocumentListJournalEntryContextMenu</name>
       <id>146</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
@@ -1266,11 +1196,6 @@
       </extendedTooltip>
       <extInfo xsi:type="form:ButtonGroupExtInfo"/>
      </items>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <horizontalAlign>Left</horizontalAlign>
      <autoFill>true</autoFill>
     </autoCommandBar>
@@ -1279,11 +1204,6 @@
      <name>DocumentListOnActivateRow</name>
     </handlers>
     <searchStringAddition>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <name>DocumentListSearchString</name>
      <id>79</id>
      <extendedTooltip>
@@ -1299,11 +1219,6 @@
      <contextMenu>
       <name>DocumentListSearchStringContextMenu</name>
       <id>80</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <source>DocumentList</source>
@@ -1312,11 +1227,6 @@
      </extInfo>
     </searchStringAddition>
     <viewStatusAddition>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <name>DocumentListViewStatus</name>
      <id>85</id>
      <extendedTooltip>
@@ -1332,11 +1242,6 @@
      <contextMenu>
       <name>DocumentListViewStatusContextMenu</name>
       <id>86</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
@@ -1346,11 +1251,6 @@
      </extInfo>
     </viewStatusAddition>
     <searchControlAddition>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <name>DocumentListSearchControl</name>
      <id>82</id>
      <extendedTooltip>
@@ -1366,11 +1266,6 @@
      <contextMenu>
       <name>DocumentListSearchControlContextMenu</name>
       <id>83</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
@@ -1392,11 +1287,6 @@
     <contextMenu>
      <name>DocumentListContextMenu</name>
      <id>77</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <representation>HierarchicalList</representation>
@@ -1586,11 +1476,6 @@
       <contextMenu>
        <name>AccountingReportContextMenu</name>
        <id>64</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <autoFill>true</autoFill>
       </contextMenu>
       <type>SpreadsheetDocumentField</type>
@@ -1688,11 +1573,6 @@
         <contextMenu>
          <name>NoFileLabelContextMenu</name>
          <id>73</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>Label</type>
@@ -1732,11 +1612,6 @@
         <contextMenu>
          <name>PDFPreviewContextMenu</name>
          <id>133</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>PDFDocumentField</type>
@@ -1766,11 +1641,6 @@
           <contextMenu>
            <name>PDFPreviewViewStatusContextMenu</name>
            <id>136</id>
-           <visible>true</visible>
-           <enabled>true</enabled>
-           <userVisible>
-            <common>true</common>
-           </userVisible>
            <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
@@ -1811,11 +1681,6 @@
         <contextMenu>
          <name>ImagePreviewContextMenu</name>
          <id>141</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>PictureField</type>
@@ -1959,11 +1824,6 @@
       <extendedTooltip>
        <name>ChatExtendedTooltip</name>
        <id>173</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <type>Label</type>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -1974,11 +1834,6 @@
       <contextMenu>
        <name>ChatContextMenu</name>
        <id>172</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <autoFill>true</autoFill>
       </contextMenu>
       <type>HTMLDocumentField</type>
@@ -2023,11 +1878,6 @@
         <extendedTooltip>
          <name>NewMessageExtendedTooltip</name>
          <id>178</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -2038,11 +1888,6 @@
         <contextMenu>
          <name>NewMessageContextMenu</name>
          <id>177</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>InputField</type>
@@ -2081,11 +1926,6 @@
         <extendedTooltip>
          <name>ChatAttachedFilesExtendedTooltip</name>
          <id>185</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -2096,11 +1936,6 @@
         <contextMenu>
          <name>ChatAttachedFilesContextMenu</name>
          <id>184</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>InputField</type>
@@ -2130,7 +1965,7 @@
        </userVisible>
        <title>
         <key>tr</key>
-        <value>Group message</value>
+        <value>Grup mesajı</value>
        </title>
        <title>
         <key>ru</key>
@@ -2143,11 +1978,6 @@
        <extendedTooltip>
         <name>GroupMessageExtendedTooltip</name>
         <id>182</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <type>Label</type>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -2176,11 +2006,6 @@
        <extendedTooltip>
         <name>AttachFilesExtendedTooltip</name>
         <id>190</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <type>Label</type>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -2207,11 +2032,6 @@
        <extendedTooltip>
         <name>SendMessageExtendedTooltip</name>
         <id>180</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <type>Label</type>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -2237,7 +2057,7 @@
       </userVisible>
       <title>
        <key>tr</key>
-       <value>Group chat send</value>
+       <value>Grup sohbeti gönder</value>
       </title>
       <title>
        <key>ru</key>
@@ -2288,7 +2108,7 @@
      </title>
      <toolTip>
       <key>tr</key>
-      <value>Group chat</value>
+      <value>Grup sohbeti</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
@@ -2818,11 +2638,6 @@
  <autoCommandBar>
   <name>FormCommandBar</name>
   <id>-1</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
  </autoCommandBar>
  <handlers>
@@ -3123,7 +2938,7 @@ GROUP BY
      <localValue>
       <content>
        <key>tr</key>
-       <value>Repeat task</value>
+       <value>Görevi tekrarla</value>
       </content>
       <content>
        <key>ru</key>
@@ -3147,7 +2962,7 @@ GROUP BY
      <localValue>
       <content>
        <key>tr</key>
-       <value>Has tasks</value>
+       <value>Görevleri var</value>
       </content>
       <content>
        <key>ru</key>
@@ -3171,7 +2986,7 @@ GROUP BY
      <localValue>
       <content>
        <key>tr</key>
-       <value>Is my task</value>
+       <value>Benim görevim</value>
       </content>
       <content>
        <key>ru</key>
@@ -3279,7 +3094,7 @@ GROUP BY
      <localValue>
       <content>
        <key>tr</key>
-       <value>Is repeat task</value>
+       <value>Tekrar görevi</value>
       </content>
       <content>
        <key>ru</key>
@@ -3299,7 +3114,7 @@ GROUP BY
      <localValue>
       <content>
        <key>tr</key>
-       <value>Task icon</value>
+       <value>Görev simgesi</value>
       </content>
       <content>
        <key>ru</key>
@@ -3323,7 +3138,7 @@ GROUP BY
      <localValue>
       <content>
        <key>tr</key>
-       <value>My task</value>
+       <value>Benim görevim</value>
       </content>
       <content>
        <key>ru</key>
@@ -3378,7 +3193,7 @@ GROUP BY
      <localValue>
       <content>
        <key>tr</key>
-       <value>Performer</value>
+       <value>Uygulayıcı</value>
       </content>
       <content>
        <key>ru</key>
@@ -3739,7 +3554,7 @@ GROUP BY
   <name>ChatAttachedFiles</name>
   <title>
    <key>tr</key>
-   <value>Chat attached files</value>
+   <value>Sohbet ekli dosyalar</value>
   </title>
   <title>
    <key>ru</key>
@@ -3767,7 +3582,7 @@ GROUP BY
   <name>HistoryVersionTable</name>
   <title>
    <key>tr</key>
-   <value>History version table</value>
+   <value>Geçmiş sürüm tablosu</value>
   </title>
   <title>
    <key>ru</key>
@@ -3871,7 +3686,7 @@ GROUP BY
    <name>DataChangeType</name>
    <title>
     <key>tr</key>
-    <value>Data change type</value>
+    <value>Veri değişikliği türü</value>
    </title>
    <title>
     <key>ru</key>
@@ -3897,7 +3712,7 @@ GROUP BY
    <name>IsImportant</name>
    <title>
     <key>tr</key>
-    <value>Is important</value>
+    <value>Önemlidir</value>
    </title>
    <title>
     <key>ru</key>
@@ -3923,7 +3738,7 @@ GROUP BY
   <name>HistoryReport</name>
   <title>
    <key>tr</key>
-   <value>History report</value>
+   <value>Tarih raporu</value>
   </title>
   <title>
    <key>ru</key>
@@ -3979,7 +3794,7 @@ GROUP BY
   <name>FilesCount</name>
   <title>
    <key>tr</key>
-   <value>Files count</value>
+   <value>Dosya sayısı</value>
   </title>
   <title>
    <key>ru</key>
@@ -4007,7 +3822,7 @@ GROUP BY
   <name>ChatCount</name>
   <title>
    <key>tr</key>
-   <value>Chat count</value>
+   <value>Sohbet sayısı</value>
   </title>
   <title>
    <key>ru</key>
@@ -4035,7 +3850,7 @@ GROUP BY
   <name>HistoryCount</name>
   <title>
    <key>tr</key>
-   <value>History count</value>
+   <value>Tarih sayımı</value>
   </title>
   <title>
    <key>ru</key>
@@ -4063,7 +3878,7 @@ GROUP BY
   <name>ShowExchangeError</name>
   <title>
    <key>tr</key>
-   <value>Show exchange error</value>
+   <value>Veri alışveriş hatasını göster</value>
   </title>
   <title>
    <key>ru</key>
@@ -4235,7 +4050,7 @@ GROUP BY
   <name>OpenSettings</name>
   <title>
    <key>tr</key>
-   <value>Open settings</value>
+   <value>Ayarları aç</value>
   </title>
   <title>
    <key>ru</key>
@@ -4248,7 +4063,7 @@ GROUP BY
   <id>6</id>
   <toolTip>
    <key>tr</key>
-   <value>Open settings</value>
+   <value>Ayarları aç</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
@@ -4302,7 +4117,7 @@ GROUP BY
   <name>AttachChatFiles</name>
   <title>
    <key>tr</key>
-   <value>Attach chat files</value>
+   <value>Sohbet dosyalarını ekle</value>
   </title>
   <title>
    <key>ru</key>

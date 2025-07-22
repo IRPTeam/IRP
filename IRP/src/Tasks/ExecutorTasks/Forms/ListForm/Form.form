@@ -789,7 +789,7 @@ WHERE
      <localValue>
       <content>
        <key>tr</key>
-       <value>Show executed</value>
+       <value>Gerçekleştirileni göster</value>
       </content>
       <content>
        <key>ru</key>
@@ -837,7 +837,7 @@ WHERE
      <localValue>
       <content>
        <key>tr</key>
-       <value>Show all tasks</value>
+       <value>Tüm görevleri göster</value>
       </content>
       <content>
        <key>ru</key>
@@ -861,7 +861,7 @@ WHERE
   <name>ShowAllTasks</name>
   <title>
    <key>tr</key>
-   <value>Show all tasks</value>
+   <value>Tüm görevleri göster</value>
   </title>
   <title>
    <key>ru</key>
@@ -886,7 +886,7 @@ WHERE
   <name>ShowExecuted</name>
   <title>
    <key>tr</key>
-   <value>Show executed</value>
+   <value>Gerçekleştirileni göster</value>
   </title>
   <title>
    <key>ru</key>

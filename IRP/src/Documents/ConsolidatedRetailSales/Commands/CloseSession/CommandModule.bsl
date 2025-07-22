@@ -20,11 +20,11 @@ Async Procedure CommandProcessing(ConsolidatedRetailSales, CommandExecuteParamet
 	FormParameters.Insert("AutoCreateMoneyTransfer", False);
 	FormParameters.Insert("ConsolidatedRetailSales", ConsolidatedRetailSales);
 
-	NotifyDescription = New NotifyDescription("CloseSessionFinish", ThisObject);
+	CallbackDescription = New CallbackDescription("CloseSessionFinish", ThisObject);
 
 	OpenForm(
 		"DataProcessor.PointOfSale.Form.SessionClosing",
-		FormParameters, ThisObject, , , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+		FormParameters, ThisObject, , , , CallbackDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 &AtClient

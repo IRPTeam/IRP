@@ -2,7 +2,7 @@
 &AtClient
 Procedure EditUUID(Command)
 	FormParams = New Structure("TextUUID", String(Record.ExternalRef));
-	Notify = New NotifyDescription("OnEditUUID", ThisObject);
+	Notify = New CallbackDescription("OnEditUUID", ThisObject);
 	OpenForm("CommonForm.EditUUID", FormParams, ThisObject,,,, Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 

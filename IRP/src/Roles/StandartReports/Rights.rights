@@ -191,6 +191,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Report.R8510B_BookValueOfFixedAsset</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Report.R3011A_CashFlow</name>
 		<right>
 			<name>Use</name>

@@ -66,7 +66,7 @@ EndProcedure
 Procedure LoadFile(Command)
 	
 	BeginPutFileToServer(
-		New NotifyDescription("AfterPutFileToServer", ThisObject), , , , 
+		New CallbackDescription("AfterPutFileToServer", ThisObject), , , , 
 		New PutFilesDialogParameters(), 
 		ThisObject.UUID);
 	
@@ -81,7 +81,7 @@ Procedure AddCommand(Command)
 
 	TextCommand = Items[Command.Name].Title;
 	If StrFind(TextCommand, "?") Then
-		ShowInputString(New NotifyDescription("AfterInputString", ThisObject, TextCommand), "");
+		ShowInputString(New CallbackDescription("AfterInputString", ThisObject, TextCommand), "");
 		Return;
 	EndIf;
 

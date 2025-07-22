@@ -225,7 +225,7 @@ Function GetCalculations(Ref, Date, Company, Branch, FixedAsset = Undefined) Exp
 	|INTO LocationFixedAssets
 	|FROM
 	|	InformationRegister.T8515S_FixedAssetsLocation.SliceLast(
-	|			&StartDate,
+	|			&DocDate,
 	|			(Company, Branch, FixedAsset, ProfitLossCenter) IN
 	|				(SELECT
 	|					ActiveFixedAssets.Company,
@@ -271,7 +271,8 @@ Function GetCalculations(Ref, Date, Company, Branch, FixedAsset = Undefined) Exp
 	|	ActiveFixedAssets.AmountBalance AS AmountBalance,
 	|	CostFixedAsset.AmountTurnover AS AmountTurnover,
 	|	StartingDates.StartDate AS StartDate,
-	|	DATEADD(StartingDates.StartDate, MONTH, T.Schedule.UsefulLife - 1) AS FinishDate,
+	|	DATEADD(StartingDates.StartDate, MONTH, T.Schedule.UsefulLife) AS FinishDate,
+	|	DATEDIFF(BEGINOFPERIOD(&DocDate, MONTH), DATEADD(StartingDates.StartDate, MONTH, T.Schedule.UsefulLife), MONTH) AS BalanceUsefulLife,
 	|	T.Schedule.UsefulLife AS UsefulLife,
 	|	T.Schedule.Rate AS Rate,
 	|	T.LedgerType.ExpenseType AS ExpenseType,
@@ -289,7 +290,7 @@ Function GetCalculations(Ref, Date, Company, Branch, FixedAsset = Undefined) Exp
 	|		INNER JOIN StartingDates AS StartingDates
 	|		ON (StartingDates.Company = T.Company)
 	|			AND (StartingDates.FixedAsset = T.FixedAsset)
-	|			AND (StartingDates.StartDate < &StartDate)
+	|			AND (StartingDates.StartDate < &DocDate)
 	|		INNER JOIN LocationFixedAssets AS LocationFixedAssets
 	|		ON (LocationFixedAssets.Company = T.Company)
 	|			AND (LocationFixedAssets.Branch = T.Branch)
@@ -311,7 +312,7 @@ Function GetCalculations(Ref, Date, Company, Branch, FixedAsset = Undefined) Exp
 	Else
 		Query.SetParameter("Period", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
 	EndIf;
-	Query.SetParameter("StartDate" , Date);
+	Query.SetParameter("DocDate" , Date);
 	Query.SetParameter("Company"   , Company);
 	Query.SetParameter("Branch"    , Branch); 
 	Query.SetParameter("Currency"  , CurrenciesServer.GetLandedCostCurrency(Company)); 
@@ -331,7 +332,7 @@ Function GetCalculations(Ref, Date, Company, Branch, FixedAsset = Undefined) Exp
 		Row.Key = New UUID();
 		
 		// last month
-		If EndOfMonth(Row.FinishDate) = EndOfMonth(Date) Then
+		If EndOfMonth(Row.FinishDate) = EndOfMonth(EndOfMonth(Date) + 1) Then
 			Row.Amount = Row.AmountBalance;
 			Continue;
 		EndIf;
@@ -339,8 +340,9 @@ Function GetCalculations(Ref, Date, Company, Branch, FixedAsset = Undefined) Exp
 		Amount = 0;
 		
 		// Straight line
-		If Row.CalculationMethod = Enums.DepreciationMethods.StraightLine Then
-			Amount = Row.AmountTurnover / Row.UsefulLife;	
+		If Row.CalculationMethod = Enums.DepreciationMethods.StraightLine
+			And Row.BalanceUsefulLife <> 0 Then
+			Amount = Row.AmountBalance / Row.BalanceUsefulLife;	
 		EndIf;
 		
 		// Declining balance

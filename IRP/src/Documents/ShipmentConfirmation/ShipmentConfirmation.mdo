@@ -105,6 +105,7 @@
  <defaultListForm>Document.ShipmentConfirmation.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Document.ShipmentConfirmation.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
+ <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
@@ -120,7 +121,6 @@
  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
- <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1488,9 +1488,9 @@
   <commandParameterType>
    <types>DocumentRef.PurchaseReturn</types>
    <types>DocumentRef.SalesOrder</types>
+   <types>DocumentRef.ShipmentPlaningOrder</types>
    <types>DocumentRef.InventoryTransfer</types>
    <types>DocumentRef.SalesInvoice</types>
-   <types>DocumentRef.ShipmentPlaningOrder</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
   <representation>Auto</representation>

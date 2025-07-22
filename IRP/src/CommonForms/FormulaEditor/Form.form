@@ -18,11 +18,6 @@
    <autoCommandBar>
     <name>SettingsComposerCommandBar</name>
     <id>2</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <horizontalAlign>Left</horizontalAlign>
    </autoCommandBar>
    <handlers>
@@ -34,21 +29,11 @@
     <name>SettingsComposerDragStart</name>
    </handlers>
    <searchStringAddition>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <name>SettingsComposerSearchString</name>
     <id>5</id>
     <extendedTooltip>
      <name>SettingsComposerSearchStringExtendedTooltip</name>
      <id>7</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -59,11 +44,6 @@
     <contextMenu>
      <name>SettingsComposerSearchStringContextMenu</name>
      <id>6</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <source>SettingsComposer</source>
@@ -72,21 +52,11 @@
     </extInfo>
    </searchStringAddition>
    <viewStatusAddition>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <name>SettingsComposerViewStatus</name>
     <id>11</id>
     <extendedTooltip>
      <name>SettingsComposerViewStatusExtendedTooltip</name>
      <id>13</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -97,11 +67,6 @@
     <contextMenu>
      <name>SettingsComposerViewStatusContextMenu</name>
      <id>12</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>ViewStatusAddition</type>
@@ -111,21 +76,11 @@
     </extInfo>
    </viewStatusAddition>
    <searchControlAddition>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <name>SettingsComposerSearchControl</name>
     <id>8</id>
     <extendedTooltip>
      <name>SettingsComposerSearchControlExtendedTooltip</name>
      <id>10</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -136,11 +91,6 @@
     <contextMenu>
      <name>SettingsComposerSearchControlContextMenu</name>
      <id>9</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>SearchControlAddition</type>
@@ -152,11 +102,6 @@
    <extendedTooltip>
     <name>SettingsComposerExtendedTooltip</name>
     <id>4</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -167,11 +112,6 @@
    <contextMenu>
     <name>SettingsComposerContextMenu</name>
     <id>3</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <autoFill>true</autoFill>
@@ -221,11 +161,6 @@
     <extendedTooltip>
      <name>OperatorsDescriptionExtendedTooltip</name>
      <id>29</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -236,11 +171,6 @@
     <contextMenu>
      <name>OperatorsDescriptionContextMenu</name>
      <id>28</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -270,11 +200,6 @@
     <extendedTooltip>
      <name>OperatorsOperatorExtendedTooltip</name>
      <id>32</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -285,11 +210,6 @@
     <contextMenu>
      <name>OperatorsOperatorContextMenu</name>
      <id>31</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -319,11 +239,6 @@
     <extendedTooltip>
      <name>OperatorsShiftExtendedTooltip</name>
      <id>35</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -334,11 +249,6 @@
     <contextMenu>
      <name>OperatorsShiftContextMenu</name>
      <id>34</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -358,11 +268,6 @@
    <autoCommandBar>
     <name>OperatorsCommandBar</name>
     <id>15</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <horizontalAlign>Left</horizontalAlign>
    </autoCommandBar>
    <handlers>
@@ -378,21 +283,11 @@
     <name>OperatorsDragEnd</name>
    </handlers>
    <searchStringAddition>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <name>OperatorsSearchString</name>
     <id>18</id>
     <extendedTooltip>
      <name>OperatorsSearchStringExtendedTooltip</name>
      <id>20</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -403,11 +298,6 @@
     <contextMenu>
      <name>OperatorsSearchStringContextMenu</name>
      <id>19</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <source>Operators</source>
@@ -416,21 +306,11 @@
     </extInfo>
    </searchStringAddition>
    <viewStatusAddition>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <name>OperatorsViewStatus</name>
     <id>24</id>
     <extendedTooltip>
      <name>OperatorsViewStatusExtendedTooltip</name>
      <id>26</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -441,11 +321,6 @@
     <contextMenu>
      <name>OperatorsViewStatusContextMenu</name>
      <id>25</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>ViewStatusAddition</type>
@@ -455,21 +330,11 @@
     </extInfo>
    </viewStatusAddition>
    <searchControlAddition>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <name>OperatorsSearchControl</name>
     <id>21</id>
     <extendedTooltip>
      <name>OperatorsSearchControlExtendedTooltip</name>
      <id>23</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -480,11 +345,6 @@
     <contextMenu>
      <name>OperatorsSearchControlContextMenu</name>
      <id>22</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>SearchControlAddition</type>
@@ -496,11 +356,6 @@
    <extendedTooltip>
     <name>OperatorsExtendedTooltip</name>
     <id>17</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -511,11 +366,6 @@
    <contextMenu>
     <name>OperatorsContextMenu</name>
     <id>16</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <representation>Tree</representation>
@@ -557,11 +407,6 @@
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
    <id>43</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -594,11 +439,6 @@
   <extendedTooltip>
    <name>FormulaExtendedTooltip</name>
    <id>38</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -609,11 +449,6 @@
   <contextMenu>
    <name>FormulaContextMenu</name>
    <id>37</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <type>TextDocumentField</type>
@@ -644,11 +479,6 @@
    <extendedTooltip>
     <name>FormOkExtendedTooltip</name>
     <id>45</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -675,11 +505,6 @@
    <extendedTooltip>
     <name>FormCheckExtendedTooltip</name>
     <id>47</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -694,11 +519,6 @@
    <placementArea>UserCmds</placementArea>
    <representationInContextMenu>Auto</representationInContextMenu>
   </items>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
   <autoFill>true</autoFill>
  </autoCommandBar>

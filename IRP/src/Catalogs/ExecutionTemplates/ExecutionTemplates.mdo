@@ -57,7 +57,7 @@
   <name>ReadyToStartProcesses</name>
   <synonym>
    <key>tr</key>
-   <value>Ready to start processes</value>
+   <value>İşlemlere başlamaya hazır</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -84,7 +84,7 @@
   <name>ExecutionObjects</name>
   <synonym>
    <key>tr</key>
-   <value>Execution objects</value>
+   <value>Görevler nesneleri</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -121,7 +121,7 @@
    <name>AutostartProcesses</name>
    <synonym>
     <key>tr</key>
-    <value>Autostart processes</value>
+    <value>Otomatik başlatma işlemleri</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -148,7 +148,7 @@
   <name>ExecutionStages</name>
   <synonym>
    <key>tr</key>
-   <value>Execution stages</value>
+   <value>Uygulama aşamaları</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -271,7 +271,7 @@
    <name>TasksStartTogether</name>
    <synonym>
     <key>tr</key>
-    <value>Tasks start together</value>
+    <value>Görevler birlikte başlar</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -293,7 +293,7 @@
    <name>TasksResult</name>
    <synonym>
     <key>tr</key>
-    <value>Tasks result</value>
+    <value>Görev sonucu</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -315,7 +315,7 @@
    <name>TasksFailAction</name>
    <synonym>
     <key>tr</key>
-    <value>Tasks fail action</value>
+    <value>Başarısız Görevler eylemi</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -342,7 +342,7 @@
   <name>StagesTasks</name>
   <synonym>
    <key>tr</key>
-   <value>Stages tasks</value>
+   <value>Aşamalı görevler</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -486,7 +486,7 @@
    <name>Executor</name>
    <synonym>
     <key>tr</key>
-    <value>Executor</value>
+    <value>Sorumlu</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -596,7 +596,7 @@
    <name>Detailing</name>
    <synonym>
     <key>tr</key>
-    <value>Detailing</value>
+    <value>Detaylandırma</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -641,7 +641,7 @@
    <name>AutoExecuteOnStartup</name>
    <synonym>
     <key>tr</key>
-    <value>Auto-execute</value>
+    <value>Otomatik yürütme</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -748,7 +748,7 @@
   <name>AddressingForm</name>
   <synonym>
    <key>tr</key>
-   <value>Addressing form</value>
+   <value>Adres formu</value>
   </synonym>
   <synonym>
    <key>ru</key>

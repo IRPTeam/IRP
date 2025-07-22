@@ -10,7 +10,7 @@
  <name>ExecutorTasks</name>
  <synonym>
   <key>tr</key>
-  <value>Executor tasks</value>
+  <value>Sorumlu görevleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -114,7 +114,7 @@
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
   <key>tr</key>
-  <value>Executor task</value>
+  <value>Sorumlu görevi</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
@@ -212,7 +212,7 @@
   <name>Detailing</name>
   <synonym>
    <key>tr</key>
-   <value>Detailing</value>
+   <value>Detaylandırma</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -236,7 +236,7 @@
   <name>ExecutionObject</name>
   <synonym>
    <key>tr</key>
-   <value>Execution object</value>
+   <value>İşlem nesnesi</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -284,7 +284,7 @@
   <name>AcceptetionForExecutionDate</name>
   <synonym>
    <key>tr</key>
-   <value>Acceptetion</value>
+   <value>Kabul edildi</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -330,7 +330,7 @@
   <name>AutoExecute</name>
   <synonym>
    <key>tr</key>
-   <value>Auto-execute</value>
+   <value>Otomatik yürütme</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -387,7 +387,7 @@
   <name>CurrentExecutor</name>
   <synonym>
    <key>tr</key>
-   <value>Current executor</value>
+   <value>Mevcut sorumlu</value>
   </synonym>
   <synonym>
    <key>ru</key>

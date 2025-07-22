@@ -3,7 +3,7 @@
 Procedure DescriptionStartChoice(Item, ChoiceData, StandardProcessing)
 	
 	StandardProcessing = False;
-	CallbackDescription = New NotifyDescription("AfterDocTypeSelect", ThisObject, New Structure);
+	CallbackDescription = New CallbackDescription("AfterDocTypeSelect", ThisObject, New Structure);
 	OpenForm(
 		"Catalog.AttachedDocumentSettings.Form.FormChoiseDocsName", 
 		,

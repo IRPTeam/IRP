@@ -64,9 +64,9 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 
 		CallMethodAddDataProc(Info);
 
-		NotifyDescription = New NotifyDescription("InputManualValueForOfferEnd", ThisObject);
+		CallbackDescription = New CallbackDescription("InputManualValueForOfferEnd", ThisObject);
 
-		AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "InputManualValue");
+		AddDataProcClient.OpenFormAddDataProc(Info, CallbackDescription, "InputManualValue");
 	EndIf;
 
 	If Field.Name <> "OffersSelect" And OfferHaveManualInputValue(thisString.Offer) 
@@ -83,9 +83,9 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 		
 		CallMethodAddDataProc(Info);
 
-		NotifyDescription = New NotifyDescription("InputManualValueForOfferEnd", ThisObject);
+		CallbackDescription = New CallbackDescription("InputManualValueForOfferEnd", ThisObject);
 
-		AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "InputManualValue");
+		AddDataProcClient.OpenFormAddDataProc(Info, CallbackDescription, "InputManualValue");
 
 	EndIf;
 

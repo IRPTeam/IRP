@@ -364,7 +364,7 @@
   <name>PreliminaryQuantity</name>
   <synonym>
    <key>tr</key>
-   <value>Preliminary quantity</value>
+   <value>Ön miktar</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -385,7 +385,7 @@
   <name>PreliminaryAmount</name>
   <synonym>
    <key>tr</key>
-   <value>Preliminary amount</value>
+   <value>Ön tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -406,7 +406,7 @@
   <name>PreliminaryTaxAmount</name>
   <synonym>
    <key>tr</key>
-   <value>Preliminary tax amount</value>
+   <value>Ön vergi tutarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -457,10 +457,10 @@
    <types>DocumentRef.ItemStockAdjustment</types>
    <types>DocumentRef.DecommissioningOfFixedAsset</types>
    <types>DocumentRef.InventoryTransfer</types>
+   <types>DocumentRef.GoodsReceipt</types>
    <types>DocumentRef.BatchReallocateIncoming</types>
    <types>DocumentRef.BatchReallocateOutgoing</types>
    <types>DocumentRef.SalesInvoice</types>
-   <types>DocumentRef.GoodsReceipt</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

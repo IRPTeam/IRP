@@ -187,7 +187,7 @@ EndProcedure
 &AtServer
 Procedure SetReadOnly()
 	
-	ThisForm.ReadOnly = True;
+	ThisObject.ReadOnly = True;
 	
 	Items.Recipients.ReadOnly = True;
 	Items.CopyRecipients.ReadOnly = True;

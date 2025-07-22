@@ -91,7 +91,7 @@ EndProcedure
 
 &AtClient
 Procedure CreateNewItemKey(Command)
-	NotifyDescription = New NotifyDescription("CreateNewItemsFinish", ThisObject);
+	CallbackDescription = New CallbackDescription("CreateNewItemsFinish", ThisObject);
 	OpenParameters = New Structure();
 	OpenParameters.Insert("Item", ThisObject.Item);
 	OpenParameters.Insert("SelectedFilters", New Array());
@@ -102,7 +102,7 @@ Procedure CreateNewItemKey(Command)
 		EndIf;
 	EndDo;
 
-	OpenForm("Catalog.ItemKeys.Form.ItemForm", OpenParameters, ThisObject, New UUID(), , , NotifyDescription,
+	OpenForm("Catalog.ItemKeys.Form.ItemForm", OpenParameters, ThisObject, New UUID(), , , CallbackDescription,
 		FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 

@@ -268,7 +268,7 @@ Procedure OpenForm_LinkUnlinkDocumentRows(Object, Form, FormParameters,
 	NotifyParameters.Insert("Form", ThisObject);
 	
 	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
-		New NotifyDescription(ProcedureName, Form, NotifyParameters), 
+		New CallbackDescription(ProcedureName, Form, NotifyParameters), 
 			FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure
 
@@ -279,7 +279,7 @@ Procedure OpenForm_AddLinkedDocumentRows(Object, Form, FormParameters,
 	NotifyParameters.Insert("Form", ThisObject);
 	
 	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-		New NotifyDescription(ProcedureName, Form, NotifyParameters), 
+		New CallbackDescription(ProcedureName, Form, NotifyParameters), 
 			FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 

@@ -313,6 +313,7 @@ FROM
     <valueType>
      <types>CatalogRef.Agreements</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
    </parameters>
   </extInfo>
  </attributes>

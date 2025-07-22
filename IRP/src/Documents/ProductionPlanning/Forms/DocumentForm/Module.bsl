@@ -326,7 +326,7 @@ Procedure EditStores(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditStoresContinue", ManufacturingClient, NotifyParameters);
+	Notify = New CallbackDescription("EditStoresContinue", ManufacturingClient, NotifyParameters);
 	OpenForm("CommonForm.EditStores", FormParameters, ThisObject, , , , Notify , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 

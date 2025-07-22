@@ -390,11 +390,11 @@ Procedure PickupCheques(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Form"   , ThisObject);
 	NotifyParameters.Insert("Object" , Object);
-	NotifyDescription = New NotifyDescription("FillChequesContinue", ThisObject, NotifyParameters);
+	CallbackDescription = New CallbackDescription("FillChequesContinue", ThisObject, NotifyParameters);
 	
 	OpenForm("Catalog.ChequeBonds.Form.PickUpForm", 
 		FormParameters, ThisObject, , , , 
-		NotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+		CallbackDescription, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient
@@ -427,7 +427,7 @@ Procedure EditCurrencies(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 

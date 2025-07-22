@@ -123,6 +123,7 @@
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
  <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
@@ -154,7 +155,6 @@
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
- <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

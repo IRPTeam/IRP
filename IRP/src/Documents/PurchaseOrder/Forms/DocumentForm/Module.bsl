@@ -816,7 +816,7 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, NotifyParameters) Export
 			"Stores", StrTemplate(R().QuestionToUser_009, String(NewStoreValue))));
 		
 		NotifyParameters = New Structure("Result, ChangedPoints", Result, ChangedPoints);
-		Notify = New NotifyDescription("QuestionsOnUserChangeContinue", ThisObject, NotifyParameters);
+		Notify = New CallbackDescription("QuestionsOnUserChangeContinue", ThisObject, NotifyParameters);
 		OpenForm("CommonForm.UpdateItemListInfo",
 			New Structure("QuestionsParameters", QuestionsParameters), 
 			ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
@@ -890,7 +890,7 @@ Procedure EditCurrencies(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 

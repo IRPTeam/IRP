@@ -125,7 +125,7 @@ EndProcedure
 Procedure SetPassword(Command)
 	OpenArgs = New Structure();
 	OpenArgs.Insert("Password", Password);
-	OpenForm("Catalog.Users.Form.InputPassword", OpenArgs, ThisObject, , , , New NotifyDescription("SetPasswordFinish",
+	OpenForm("Catalog.Users.Form.InputPassword", OpenArgs, ThisObject, , , , New CallbackDescription("SetPasswordFinish",
 		ThisObject));
 EndProcedure
 
@@ -147,7 +147,7 @@ EndProcedure
 &AtClient
 Procedure Settings(Command)
 	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
-		Notify = New NotifyDescription("EditUserSettingsProceed", ThisObject);
+		Notify = New CallbackDescription("EditUserSettingsProceed", ThisObject);
 		//@skip-check property-return-type
 		//@skip-check invocation-parameter-type-intersect
 		ShowQueryBox(Notify, R().QuestionToUser_001, QuestionDialogMode.YesNo);

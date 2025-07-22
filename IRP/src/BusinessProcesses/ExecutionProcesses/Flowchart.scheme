@@ -142,7 +142,7 @@
 				<Title>
 					<v8:item>
 						<v8:lang>tr</v8:lang>
-						<v8:content>Check completed tasks</v8:content>
+						<v8:content>Tamamlanan görevleri kontrol edin</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
@@ -302,7 +302,7 @@
 				<Title>
 					<v8:item>
 						<v8:lang>tr</v8:lang>
-						<v8:content>Complete tasks</v8:content>
+						<v8:content>Görevleri tamamla</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>

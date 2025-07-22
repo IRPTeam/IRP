@@ -207,7 +207,7 @@
    </title>
    <toolTip>
     <key>tr</key>
-    <value>Group filters</value>
+    <value>Grup filtreleri</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
@@ -398,7 +398,7 @@
    </title>
    <toolTip>
     <key>tr</key>
-    <value>Group panels</value>
+    <value>Grup panelleri</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
@@ -438,7 +438,7 @@
   </userVisible>
   <title>
    <key>tr</key>
-   <value>Group right left</value>
+   <value>Grup sağ sol</value>
   </title>
   <title>
    <key>ru</key>
@@ -450,7 +450,7 @@
   </title>
   <toolTip>
    <key>tr</key>
-   <value>Group right left</value>
+   <value>Grup sağ sol</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
@@ -592,7 +592,7 @@
   <name>Filter_LockType</name>
   <title>
    <key>tr</key>
-   <value>Lock type</value>
+   <value>Kilit tipi</value>
   </title>
   <title>
    <key>ru</key>
@@ -642,7 +642,7 @@
   <name>Filter_TasksType</name>
   <title>
    <key>tr</key>
-   <value>Tasks type</value>
+   <value>Görev türü</value>
   </title>
   <title>
    <key>ru</key>

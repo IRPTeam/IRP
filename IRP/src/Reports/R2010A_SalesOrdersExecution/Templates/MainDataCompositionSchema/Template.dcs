@@ -100,7 +100,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Order quantity</v8:content>
+					<v8:content>Sipariş adedi</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -154,7 +154,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Invoiced amount</v8:content>
+					<v8:content>Faturalanan tutar</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -190,7 +190,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Canceled amount</v8:content>
+					<v8:content>İptal edilen tutar</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>

@@ -141,7 +141,7 @@ Procedure PropertiesTableValueStartChoice(Item, ChoiceData, StandardProcessing)
 		OpenForm("DataProcessor.ObjectPropertyEditor.Form.EditMultilineText", 
 				New Structure("ExternalText", CurrentFieldValue), 
 				ThisObject, , , ,
-				New NotifyDescription("OnEditedMultilineTextEnd", 
+				New CallbackDescription("OnEditedMultilineTextEnd", 
 					ThisObject, 
 					New Structure("SelectedRows, FieldName", SelectedRows, FieldName)),
 				FormWindowOpeningMode.LockOwnerWindow);
@@ -188,7 +188,7 @@ Procedure FieldSettings(Command)
 	OpenForm("DataProcessor.ObjectPropertyEditor.Form.FieldSettings", 
 		FormParameters, 
 		ThisObject, , , ,
-		New NotifyDescription("FieldSettingsEnd", ThisObject),
+		New CallbackDescription("FieldSettingsEnd", ThisObject),
 		FormWindowOpeningMode.LockOwnerWindow);
 		
 EndProcedure
@@ -305,7 +305,7 @@ Procedure CopyThisRowValueToMarkedRows(Command)
 		New Structure("RowData", RowDescription), 
 		ThisObject, 
 		UUID, , ,
-		New NotifyDescription("CopyThisRowValueToMarkedRowsEnd", ThisObject), 
+		New CallbackDescription("CopyThisRowValueToMarkedRowsEnd", ThisObject), 
 		FormWindowOpeningMode.LockWholeInterface);
 	
 EndProcedure
@@ -354,7 +354,7 @@ Procedure FilterFromQuery(Command)
 		Return;
 	#EndIf
 		
-	QueryWizard.Show(New NotifyDescription("QueryWizardClose", ThisObject));
+	QueryWizard.Show(New CallbackDescription("QueryWizardClose", ThisObject));
 EndProcedure
 
 &AtClient
@@ -368,7 +368,7 @@ EndProcedure
 
 #EndRegion
 
-#Region NotifyDescriptions
+#Region CallbackDescriptions
 
 // On edited multiline text end.
 // 
@@ -716,7 +716,7 @@ Procedure SettingNewValueForRows(SelectedRows)
 		OpenForm("DataProcessor.ObjectPropertyEditor.Form.EditMultilineText", 
 			New Structure("ExternalText", CurrentRowValue), 
 			ThisObject, , , ,
-			New NotifyDescription("OnEditedMultilineTextEnd", 
+			New CallbackDescription("OnEditedMultilineTextEnd", 
 				ThisObject, 
 				New Structure("SelectedRows, FieldName", SelectedRows, Field)),
 			FormWindowOpeningMode.LockOwnerWindow);
@@ -725,7 +725,7 @@ Procedure SettingNewValueForRows(SelectedRows)
 		OpenForm("DataProcessor.ObjectPropertyEditor.Form.EditValueList", 
 			New Structure("List, ItemType", CurrentRowValue, ClearType), 
 			ThisObject, , , ,
-			New NotifyDescription("SetValueForSelectedRowsEnd", 
+			New CallbackDescription("SetValueForSelectedRowsEnd", 
 				ThisObject, 
 				New Structure("SelectedRows, FieldName", SelectedRows, Field)),
 			FormWindowOpeningMode.LockOwnerWindow);
@@ -737,14 +737,14 @@ Procedure SettingNewValueForRows(SelectedRows)
 		OpenForm(FieldDescription.ValueChoiceForm, 
 			OpenFormParameters, 
 			ThisObject, , , ,
-			New NotifyDescription("SetValueForSelectedRowsEnd", 
+			New CallbackDescription("SetValueForSelectedRowsEnd", 
 				ThisObject, 
 				New Structure("FieldName, SelectedRows", Field, SelectedRows)), 
 			FormWindowOpeningMode.LockOwnerWindow);
 			
 	Else
 		ShowInputValue(
-			New NotifyDescription("SetValueForSelectedRowsEnd", 
+			New CallbackDescription("SetValueForSelectedRowsEnd", 
 				ThisObject, 
 				New Structure("FieldName, SelectedRows", Field, SelectedRows)), 
 			CurrentRowValue, 

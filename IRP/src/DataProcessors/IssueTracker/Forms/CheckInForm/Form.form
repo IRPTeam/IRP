@@ -21,11 +21,6 @@
     <extendedTooltip>
      <name>IssueExtendedTooltip</name>
      <id>3</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -36,11 +31,6 @@
     <contextMenu>
      <name>IssueContextMenu</name>
      <id>2</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -77,11 +67,6 @@
     <extendedTooltip>
      <name>IssueLocationExtendedTooltip</name>
      <id>6</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -92,11 +77,6 @@
     <contextMenu>
      <name>IssueLocationContextMenu</name>
      <id>5</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -130,11 +110,6 @@
     <extendedTooltip>
      <name>IssueIssueTypeExtendedTooltip</name>
      <id>9</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -145,11 +120,6 @@
     <contextMenu>
      <name>IssueIssueTypeContextMenu</name>
      <id>8</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -182,11 +152,6 @@
     <extendedTooltip>
      <name>IssueDueDateExtendedTooltip</name>
      <id>152</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -197,11 +162,6 @@
     <contextMenu>
      <name>IssueDueDateContextMenu</name>
      <id>151</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -233,11 +193,6 @@
     <extendedTooltip>
      <name>IssueIssueDetailsExtendedTooltip</name>
      <id>37</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -248,11 +203,6 @@
     <contextMenu>
      <name>IssueIssueDetailsContextMenu</name>
      <id>36</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -323,11 +273,6 @@
        <extendedTooltip>
         <name>AttachedFilesPreviewPictureExtendedTooltip</name>
         <id>34</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <type>Label</type>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -338,11 +283,6 @@
        <contextMenu>
         <name>AttachedFilesPreviewPictureContextMenu</name>
         <id>33</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <autoFill>true</autoFill>
        </contextMenu>
        <type>PictureField</type>
@@ -358,6 +298,10 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <pictureSize>Proportionally</pictureSize>
+        <border xsi:type="core:BorderDef">
+         <style>Single</style>
+         <width>1</width>
+        </border>
         <fileDragMode>AsFileRef</fileDragMode>
        </extInfo>
       </items>
@@ -375,11 +319,6 @@
        <extendedTooltip>
         <name>AttachedFilesRefExtendedTooltip</name>
         <id>31</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <type>Label</type>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -390,11 +329,6 @@
        <contextMenu>
         <name>AttachedFilesRefContextMenu</name>
         <id>30</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <autoFill>true</autoFill>
        </contextMenu>
        <type>LabelField</type>
@@ -410,11 +344,6 @@
       <autoCommandBar>
        <name>AttachedFilesCommandBar</name>
        <id>15</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <horizontalAlign>Left</horizontalAlign>
        <autoFill>true</autoFill>
       </autoCommandBar>
@@ -423,21 +352,11 @@
        <name>AttachedFilesSelection</name>
       </handlers>
       <searchStringAddition>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <name>AttachedFilesSearchString</name>
        <id>17</id>
        <extendedTooltip>
         <name>AttachedFilesSearchStringExtendedTooltip</name>
         <id>19</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <type>Label</type>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -448,11 +367,6 @@
        <contextMenu>
         <name>AttachedFilesSearchStringContextMenu</name>
         <id>18</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <autoFill>true</autoFill>
        </contextMenu>
        <source>AttachedFiles</source>
@@ -461,21 +375,11 @@
        </extInfo>
       </searchStringAddition>
       <viewStatusAddition>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <name>AttachedFilesViewStatus</name>
        <id>20</id>
        <extendedTooltip>
         <name>AttachedFilesViewStatusExtendedTooltip</name>
         <id>22</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <type>Label</type>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -486,11 +390,6 @@
        <contextMenu>
         <name>AttachedFilesViewStatusContextMenu</name>
         <id>21</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <autoFill>true</autoFill>
        </contextMenu>
        <type>ViewStatusAddition</type>
@@ -500,21 +399,11 @@
        </extInfo>
       </viewStatusAddition>
       <searchControlAddition>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <name>AttachedFilesSearchControl</name>
        <id>23</id>
        <extendedTooltip>
         <name>AttachedFilesSearchControlExtendedTooltip</name>
         <id>25</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <type>Label</type>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -525,11 +414,6 @@
        <contextMenu>
         <name>AttachedFilesSearchControlContextMenu</name>
         <id>24</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <autoFill>true</autoFill>
        </contextMenu>
        <type>SearchControlAddition</type>
@@ -541,11 +425,6 @@
       <extendedTooltip>
        <name>AttachedFilesExtendedTooltip</name>
        <id>16</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <type>Label</type>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -556,11 +435,6 @@
       <contextMenu>
        <name>AttachedFilesContextMenu</name>
        <id>14</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <autoFill>true</autoFill>
       </contextMenu>
       <changeRowSet>true</changeRowSet>
@@ -632,11 +506,6 @@
      <extendedTooltip>
       <name>PageAttachIssueExtendedTooltip</name>
       <id>126</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -682,11 +551,6 @@
     <extendedTooltip>
      <name>PagesAttachIssueExtendedTooltip</name>
      <id>124</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -731,11 +595,6 @@
    <extendedTooltip>
     <name>PageInfoExtendedTooltip</name>
     <id>43</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -770,11 +629,6 @@
     <extendedTooltip>
      <name>WorkOrderExtendedTooltip</name>
      <id>48</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -785,11 +639,6 @@
     <contextMenu>
      <name>WorkOrderContextMenu</name>
      <id>47</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -838,11 +687,6 @@
     <extendedTooltip>
      <name>WorkSheetExtendedTooltip</name>
      <id>51</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -853,11 +697,6 @@
     <contextMenu>
      <name>WorkSheetContextMenu</name>
      <id>50</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -905,11 +744,6 @@
      <extendedTooltip>
       <name>JobStartedExtendedTooltip</name>
       <id>54</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -920,11 +754,6 @@
      <contextMenu>
       <name>JobStartedContextMenu</name>
       <id>53</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
@@ -957,11 +786,6 @@
      <extendedTooltip>
       <name>JobFinishedExtendedTooltip</name>
       <id>57</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -972,11 +796,6 @@
      <contextMenu>
       <name>JobFinishedContextMenu</name>
       <id>56</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
@@ -1009,11 +828,6 @@
      <extendedTooltip>
       <name>JobDescriptionExtendedTooltip</name>
       <id>60</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -1024,11 +838,6 @@
      <contextMenu>
       <name>JobDescriptionContextMenu</name>
       <id>59</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
@@ -1111,11 +920,6 @@
         <extendedTooltip>
          <name>AttachedFilesWorkSheetPreviewPictureExtendedTooltip</name>
          <id>146</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -1126,11 +930,6 @@
         <contextMenu>
          <name>AttachedFilesWorkSheetPreviewPictureContextMenu</name>
          <id>145</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>PictureField</type>
@@ -1166,11 +965,6 @@
         <extendedTooltip>
          <name>AttachedFilesWorkSheetRefExtendedTooltip</name>
          <id>149</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -1181,11 +975,6 @@
         <contextMenu>
          <name>AttachedFilesWorkSheetRefContextMenu</name>
          <id>148</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>LabelField</type>
@@ -1201,11 +990,6 @@
        <autoCommandBar>
         <name>AttachedFilesWorkSheetCommandBar</name>
         <id>133</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <horizontalAlign>Left</horizontalAlign>
         <autoFill>true</autoFill>
        </autoCommandBar>
@@ -1214,21 +998,11 @@
         <name>AttachedFilesSelection</name>
        </handlers>
        <searchStringAddition>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <name>AttachedFilesWorkSheetSearchString</name>
         <id>135</id>
         <extendedTooltip>
          <name>AttachedFilesWorkSheetSearchStringExtendedTooltip</name>
          <id>137</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -1239,11 +1013,6 @@
         <contextMenu>
          <name>AttachedFilesWorkSheetSearchStringContextMenu</name>
          <id>136</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <source>AttachedFilesWorkSheet</source>
@@ -1252,21 +1021,11 @@
         </extInfo>
        </searchStringAddition>
        <viewStatusAddition>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <name>AttachedFilesWorkSheetViewStatus</name>
         <id>138</id>
         <extendedTooltip>
          <name>AttachedFilesWorkSheetViewStatusExtendedTooltip</name>
          <id>140</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -1277,11 +1036,6 @@
         <contextMenu>
          <name>AttachedFilesWorkSheetViewStatusContextMenu</name>
          <id>139</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>ViewStatusAddition</type>
@@ -1291,21 +1045,11 @@
         </extInfo>
        </viewStatusAddition>
        <searchControlAddition>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <name>AttachedFilesWorkSheetSearchControl</name>
         <id>141</id>
         <extendedTooltip>
          <name>AttachedFilesWorkSheetSearchControlExtendedTooltip</name>
          <id>143</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -1316,11 +1060,6 @@
         <contextMenu>
          <name>AttachedFilesWorkSheetSearchControlContextMenu</name>
          <id>142</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>SearchControlAddition</type>
@@ -1332,11 +1071,6 @@
        <extendedTooltip>
         <name>AttachedFilesWorkSheetExtendedTooltip</name>
         <id>134</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <type>Label</type>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -1347,11 +1081,6 @@
        <contextMenu>
         <name>AttachedFilesWorkSheetContextMenu</name>
         <id>132</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <autoFill>true</autoFill>
        </contextMenu>
        <changeRowSet>true</changeRowSet>
@@ -1423,11 +1152,6 @@
       <extendedTooltip>
        <name>PageAttachWorkSheetExtendedTooltip</name>
        <id>130</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <type>Label</type>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -1473,11 +1197,6 @@
      <extendedTooltip>
       <name>PagesAttachWorkSheetExtendedTooltip</name>
       <id>128</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -1504,11 +1223,6 @@
       <extendedTooltip>
        <name>AddPhotoExtendedTooltip</name>
        <id>64</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <type>Label</type>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -1537,11 +1251,6 @@
       <extendedTooltip>
        <name>DecorationSpaceExtendedTooltip</name>
        <id>67</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <type>Label</type>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -1552,11 +1261,6 @@
       <contextMenu>
        <name>DecorationSpaceContextMenu</name>
        <id>66</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <autoFill>true</autoFill>
       </contextMenu>
       <type>Label</type>
@@ -1577,11 +1281,6 @@
       <extendedTooltip>
        <name>AddAttachmentsExtendedTooltip</name>
        <id>69</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <type>Label</type>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -1613,11 +1312,6 @@
       <extendedTooltip>
        <name>DecorationSpace1ExtendedTooltip</name>
        <id>72</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <type>Label</type>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -1628,11 +1322,6 @@
       <contextMenu>
        <name>DecorationSpace1ContextMenu</name>
        <id>71</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <autoFill>true</autoFill>
       </contextMenu>
       <type>Label</type>
@@ -1653,11 +1342,6 @@
       <extendedTooltip>
        <name>AddVideoExtendedTooltip</name>
        <id>74</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <type>Label</type>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -1707,11 +1391,6 @@
      <extendedTooltip>
       <name>GroupButtonAttachmentExtendedTooltip</name>
       <id>62</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -1781,11 +1460,6 @@
         <extendedTooltip>
          <name>AttachedListImageExtendedTooltip</name>
          <id>103</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -1796,11 +1470,6 @@
         <contextMenu>
          <name>AttachedListImageContextMenu</name>
          <id>102</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>PictureField</type>
@@ -1836,11 +1505,6 @@
         <extendedTooltip>
          <name>AttachedListNameExtendedTooltip</name>
          <id>94</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -1851,11 +1515,6 @@
         <contextMenu>
          <name>AttachedListNameContextMenu</name>
          <id>93</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>InputField</type>
@@ -1887,11 +1546,6 @@
         <extendedTooltip>
          <name>AttachedListExtensionExtendedTooltip</name>
          <id>97</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -1902,11 +1556,6 @@
         <contextMenu>
          <name>AttachedListExtensionContextMenu</name>
          <id>96</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>InputField</type>
@@ -1939,11 +1588,6 @@
         <extendedTooltip>
          <name>AttachedListUploadStatusExtendedTooltip</name>
          <id>100</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -1954,11 +1598,6 @@
         <contextMenu>
          <name>AttachedListUploadStatusContextMenu</name>
          <id>99</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>PictureField</type>
@@ -1971,17 +1610,16 @@
          <autoMaxHeight>true</autoMaxHeight>
          <horizontalStretch>true</horizontalStretch>
          <verticalStretch>true</verticalStretch>
+         <border xsi:type="core:BorderDef">
+          <style>Single</style>
+          <width>1</width>
+         </border>
          <fileDragMode>AsFileRef</fileDragMode>
         </extInfo>
        </items>
        <autoCommandBar>
         <name>AttachedListCommandBar</name>
         <id>81</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <horizontalAlign>Left</horizontalAlign>
        </autoCommandBar>
        <handlers>
@@ -1993,21 +1631,11 @@
         <name>AttachedListOnActivateRow</name>
        </handlers>
        <searchStringAddition>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <name>AttachedListSearchString</name>
         <id>83</id>
         <extendedTooltip>
          <name>AttachedListSearchStringExtendedTooltip</name>
          <id>85</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -2018,11 +1646,6 @@
         <contextMenu>
          <name>AttachedListSearchStringContextMenu</name>
          <id>84</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <source>AttachedList</source>
@@ -2031,21 +1654,11 @@
         </extInfo>
        </searchStringAddition>
        <viewStatusAddition>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <name>AttachedListViewStatus</name>
         <id>86</id>
         <extendedTooltip>
          <name>AttachedListViewStatusExtendedTooltip</name>
          <id>88</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -2056,11 +1669,6 @@
         <contextMenu>
          <name>AttachedListViewStatusContextMenu</name>
          <id>87</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>ViewStatusAddition</type>
@@ -2070,21 +1678,11 @@
         </extInfo>
        </viewStatusAddition>
        <searchControlAddition>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <name>AttachedListSearchControl</name>
         <id>89</id>
         <extendedTooltip>
          <name>AttachedListSearchControlExtendedTooltip</name>
          <id>91</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <type>Label</type>
          <autoMaxWidth>true</autoMaxWidth>
          <autoMaxHeight>true</autoMaxHeight>
@@ -2095,11 +1693,6 @@
         <contextMenu>
          <name>AttachedListSearchControlContextMenu</name>
          <id>90</id>
-         <visible>true</visible>
-         <enabled>true</enabled>
-         <userVisible>
-          <common>true</common>
-         </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
         <type>SearchControlAddition</type>
@@ -2111,11 +1704,6 @@
        <extendedTooltip>
         <name>AttachedListExtendedTooltip</name>
         <id>82</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <type>Label</type>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -2126,11 +1714,6 @@
        <contextMenu>
         <name>AttachedListContextMenu</name>
         <id>80</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
         <autoFill>true</autoFill>
        </contextMenu>
        <changeRowSet>true</changeRowSet>
@@ -2190,11 +1773,6 @@
       <extendedTooltip>
        <name>PageAttachmentListExtendedTooltip</name>
        <id>78</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
        <type>Label</type>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
@@ -2240,11 +1818,6 @@
      <extendedTooltip>
       <name>PagesAttachmentListExtendedTooltip</name>
       <id>76</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -2268,11 +1841,6 @@
      <extendedTooltip>
       <name>FinishJobExtendedTooltip</name>
       <id>108</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -2333,11 +1901,6 @@
     <extendedTooltip>
      <name>GroupJobStartedExtendedTooltip</name>
      <id>110</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -2369,11 +1932,6 @@
      <extendedTooltip>
       <name>StartJobExtendedTooltip</name>
       <id>39</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -2435,11 +1993,6 @@
     <extendedTooltip>
      <name>GroupJobNotStartedExtendedTooltip</name>
      <id>112</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -2486,11 +2039,6 @@ Update coordinates for continue</value>
      <extendedTooltip>
       <name>DecorationErrorUpdateGPSExtendedTooltip</name>
       <id>120</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -2501,11 +2049,6 @@ Update coordinates for continue</value>
      <contextMenu>
       <name>DecorationErrorUpdateGPSContextMenu</name>
       <id>119</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>Label</type>
@@ -2527,11 +2070,6 @@ Update coordinates for continue</value>
      <extendedTooltip>
       <name>UpdateCoordinatesExtendedTooltip</name>
       <id>122</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -2568,11 +2106,6 @@ Update coordinates for continue</value>
     <extendedTooltip>
      <name>GroupErrorCoordinatesExtendedTooltip</name>
      <id>114</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
      <type>Label</type>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -2623,11 +2156,6 @@ Update coordinates for continue</value>
    <extendedTooltip>
     <name>PageCheckInExtendedTooltip</name>
     <id>45</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -2676,11 +2204,6 @@ Update coordinates for continue</value>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
    <id>41</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -2697,11 +2220,6 @@ Update coordinates for continue</value>
  <autoCommandBar>
   <name>FormCommandBar</name>
   <id>-1</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
   <autoFill>true</autoFill>
  </autoCommandBar>

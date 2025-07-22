@@ -52,5 +52,3 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	EndIf;
 EndProcedure
 
-Procedure OnCopy(CopiedObject)
-EndProcedure

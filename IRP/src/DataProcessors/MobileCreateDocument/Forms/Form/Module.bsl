@@ -59,7 +59,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			If Row.UseSerialLotNumber And Not ValueIsFilled(Row.SerialLotNumber) Then
 				MobileSubsystem.Play(Sound.NeedSerialLot);
 			EndIf;
-			NotifyOnClosing = New NotifyDescription("OnEditQuantityEnd", ThisObject);
+			NotifyOnClosing = New CallbackDescription("OnEditQuantityEnd", ThisObject);
 			FormParameters = New Structure("FillingData, UseSerialLot", Row, Row.UseSerialLotNumber);
 			OpenForm("DataProcessor.MobileCreateDocument.Form.RowForm", FormParameters, ThisObject, , , , NotifyOnClosing);
 		Else
@@ -114,7 +114,7 @@ Procedure ItemListOnChange(Item) Export
 		Return;
 	EndIf;
 	
-	NotifyOnClosing = New NotifyDescription("OnEditQuantityEnd", ThisObject);
+	NotifyOnClosing = New CallbackDescription("OnEditQuantityEnd", ThisObject);
 	FormParameters = New Structure("FillingData, UseSerialLot", CurrentRow, CurrentRow.UseSerialLotNumber);
 	OpenForm("DataProcessor.MobileCreateDocument.Form.RowForm", FormParameters, ThisObject, , , , NotifyOnClosing);
 EndProcedure

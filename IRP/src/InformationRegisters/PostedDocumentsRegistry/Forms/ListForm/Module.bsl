@@ -19,7 +19,7 @@ Procedure DocumentTypeStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProc
 	EndDo;
 	FormParameters = New Structure("DocumentNames", ArrayOfDocumentNames);
 	
-	Notify = New NotifyDescription("ChoiceDocumentTypeEnd", ThisObject);
+	Notify = New CallbackDescription("ChoiceDocumentTypeEnd", ThisObject);
 	
 	OpenForm("InformationRegister.PostedDocumentsRegistry.Form.ChoiceDocumentType",FormParameters, 
 		ThisObject, , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);	

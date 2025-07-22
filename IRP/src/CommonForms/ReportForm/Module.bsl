@@ -117,7 +117,7 @@ Procedure ResultDetailProcessing(Item, Details, StandardProcessing, AdditionalPa
 	
 	NotifyParameters = New Structure("Details, DetailsInfo, ReportName", Details, DetailsInfo, _ReportName);
 	
-	Notify = New NotifyDescription("DoDetailProcess", ThisObject, NotifyParameters);
+	Notify = New CallbackDescription("DoDetailProcess", ThisObject, NotifyParameters);
 	DetailsProcess.ShowActionChoice(Notify, Details, StandardActions, DetailsInfo.AdditionalDetailsActions.MenuList);
 EndProcedure
 

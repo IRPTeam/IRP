@@ -31,4 +31,5 @@
  <content>Report.F0011_InventoryBook</content>
  <content>Report.F0012_DepreciationStatement</content>
  <content>Document.FixedAssetRevaluation</content>
+ <content>Report.R8510B_BookValueOfFixedAsset</content>
 </mdclass:Subsystem>

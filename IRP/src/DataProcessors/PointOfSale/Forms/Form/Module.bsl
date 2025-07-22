@@ -194,11 +194,11 @@ Procedure CloseSession(Command)
 		, CommonFunctionsServer.GetRefAttribute(Object.Workstation, "AutoCreateMoneyTransferAtSessionClosing"));
 	FormParameters.Insert("ConsolidatedRetailSales", Object.ConsolidatedRetailSales);
 
-	NotifyDescription = New NotifyDescription("CloseSessionFinish", ThisObject);
+	CallbackDescription = New CallbackDescription("CloseSessionFinish", ThisObject);
 
 	OpenForm(
 		"DataProcessor.PointOfSale.Form.SessionClosing",
-		FormParameters, ThisObject, UUID, , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+		FormParameters, ThisObject, UUID, , , CallbackDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 &AtClient
@@ -539,7 +539,7 @@ EndProcedure
 Procedure ChangeRollbackRight(Command)
 	If Not Items.ChangeRollbackRight.Check Then
 		OpenForm("DataProcessor.PointOfSale.Form.ChangeRight", , ThisObject, , , ,
-			New NotifyDescription("ChangeRightEnd", ThisObject ) , FormWindowOpeningMode.LockOwnerWindow);
+			New CallbackDescription("ChangeRightEnd", ThisObject ) , FormWindowOpeningMode.LockOwnerWindow);
 	Else
 		Items.ChangeRollbackRight.Check = False;
 		ThisObject.KeepRights = False;
@@ -576,7 +576,7 @@ Procedure qPayment(Command)
 		Return;
 	EndIf;
 
-	OpenFormNotifyDescription = New NotifyDescription("PaymentFormClose", ThisObject);
+	OpenFormCallbackDescription = New CallbackDescription("PaymentFormClose", ThisObject);
 	ObjectParameters = New Structure();
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("Branch", Object.Branch);
@@ -589,7 +589,7 @@ Procedure qPayment(Command)
 	ObjectParameters.Insert("Discount", Object.ItemList.Total("OffersAmount"));
 	ObjectParameters.Insert("ConsolidatedRetailSales", ConsolidatedRetailSales);
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
-		OpenFormNotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+		OpenFormCallbackDescription, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtServer
@@ -651,7 +651,7 @@ Procedure Advance(Command)
 		Return;
 	EndIf;
 
-	OpenFormNotifyDescription = New NotifyDescription("AdvanceFormClose", ThisObject);
+	OpenFormCallbackDescription = New CallbackDescription("AdvanceFormClose", ThisObject);
 	ObjectParameters = New Structure();
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("Branch", Object.Branch);
@@ -662,7 +662,7 @@ Procedure Advance(Command)
 	ObjectParameters.Insert("Company", Object.Company);
 	ObjectParameters.Insert("ConsolidatedRetailSales", ConsolidatedRetailSales);
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
-		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+		OpenFormCallbackDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 &AtClient
@@ -814,7 +814,7 @@ Procedure ItemListControlCodeStringStateClick(SerialLotNumberForCheck = Undefine
 	//@skip-check unknown-method-property
 	Params.Insert("LineNumber", CurrentData.LineNumber);
 	Params.Insert("isReturn", isReturn);
-	Notify = New NotifyDescription("ItemListControlCodeStringStateOpeningEnd", ThisObject, Params);
+	Notify = New CallbackDescription("ItemListControlCodeStringStateOpeningEnd", ThisObject, Params);
 
 	OpenForm("CommonForm.CodeStringCheck", Params, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
@@ -1562,7 +1562,7 @@ Procedure CashInListSelection(Item, RowSelected, Field, StandardProcessing)
 		"Document.CashReceipt.ObjectForm",
 		New Structure("FillingValues", FillingData), ,
 		New UUID(), , ,
-		New NotifyDescription("CreateCashInFinish", ThisObject),
+		New CallbackDescription("CreateCashInFinish", ThisObject),
 		FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
@@ -1649,7 +1649,7 @@ Procedure CreateCashOut(Command, AutoCreateMoneyTransfer = False)
 	OpenForm("DataProcessor.PointOfSale.Form.CashOut",
 			OpenFormParameters, ,
 			UUID, , ,
-			New NotifyDescription("CreateCashOutFinish", ThisObject),
+			New CallbackDescription("CreateCashOutFinish", ThisObject),
 			FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
@@ -1768,9 +1768,9 @@ Procedure FindRetailBasis(RowID)
 		FormParameters.Insert("ItemKey", CurrentRow.ItemKey);
 	EndIf;
 
-	NotifyDescription = New NotifyDescription("FindRetailBasisFinish", ThisObject, RowID);
+	CallbackDescription = New CallbackDescription("FindRetailBasisFinish", ThisObject, RowID);
 	OpenForm("CommonForm.SelectionRetailBasisForReturn",
-		FormParameters, ThisObject, UUID, , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+		FormParameters, ThisObject, UUID, , , CallbackDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 &AtClient
@@ -2177,10 +2177,10 @@ EndProcedure
 
 &AtClient
 Procedure SelectBasisDocument(Command)
-	OpenFormNotifyDescription = New NotifyDescription("SelectBasisDocumentClose", ThisObject);
+	OpenFormCallbackDescription = New CallbackDescription("SelectBasisDocumentClose", ThisObject);
 	FormParameters = New Structure();
 	FormParameters.Insert("RetailCustomer", Object.RetailCustomer);
-	OpenForm("DataProcessor.PointOfSale.Form.SelectBasisDocument", FormParameters, ThisObject, , , , OpenFormNotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("DataProcessor.PointOfSale.Form.SelectBasisDocument", FormParameters, ThisObject, , , , OpenFormCallbackDescription, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 // Select basis document close.
@@ -2361,7 +2361,7 @@ Procedure OpenPostponedReceipt(Command)
 		Return;
 	EndIf;	
 	
-	Notification = New NotifyDescription("SelectPostponedReceiptNotify", ThisObject);
+	Notification = New CallbackDescription("SelectPostponedReceiptNotify", ThisObject);
 	OpenForm("DataProcessor.PointOfSale.Form.SelectPostponedReceipt", 
 		New Structure("Branch", Object.Branch), , , , , 
 		Notification, FormWindowOpeningMode.LockWholeInterface);

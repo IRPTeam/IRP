@@ -797,7 +797,7 @@
    <name>IsPreliminary</name>
    <synonym>
     <key>tr</key>
-    <value>Is prelim.</value>
+    <value>Ön değerdir</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -819,7 +819,7 @@
    <name>PreliminaryAmount</name>
    <synonym>
     <key>tr</key>
-    <value>Amount (prelim.)</value>
+    <value>Tutar (ön)</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -841,7 +841,7 @@
    <name>PreliminaryTaxAmount</name>
    <synonym>
     <key>tr</key>
-    <value>Tax amount (prelim.)</value>
+    <value>Vergi tutarı (ön)</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -863,7 +863,7 @@
    <name>Currency</name>
    <synonym>
     <key>tr</key>
-    <value>Currency (prelim.)</value>
+    <value>Döviz (ön)</value>
    </synonym>
    <synonym>
     <key>ru</key>

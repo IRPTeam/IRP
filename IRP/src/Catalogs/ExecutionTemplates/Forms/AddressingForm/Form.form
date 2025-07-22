@@ -250,7 +250,7 @@
   <name>Executor</name>
   <title>
    <key>tr</key>
-   <value>Executor</value>
+   <value>Sorumlu</value>
   </title>
   <title>
    <key>ru</key>
@@ -402,7 +402,7 @@
   <name>TableRow</name>
   <title>
    <key>tr</key>
-   <value>Table row</value>
+   <value>Tablo satırı</value>
   </title>
   <title>
    <key>ru</key>

@@ -198,6 +198,7 @@
    <types>DocumentRef.ModernizationOfFixedAsset</types>
    <types>DocumentRef.StockAdjustmentAsWriteOff</types>
    <types>DocumentRef.EmployeeHiring</types>
+   <types>DocumentRef.WithholdingTaxInvoice</types>
    <types>DocumentRef.Bundling</types>
    <types>DocumentRef.RetailSalesReceipt</types>
    <types>DocumentRef.RetailReceiptCorrection</types>
@@ -207,12 +208,14 @@
    <types>DocumentRef.SalesReportToConsignor</types>
    <types>DocumentRef.Production</types>
    <types>DocumentRef.ItemStockAdjustment</types>
+   <types>DocumentRef.ShipmentPlaningOrder</types>
    <types>DocumentRef.DecommissioningOfFixedAsset</types>
    <types>DocumentRef.InventoryTransferOrder</types>
    <types>DocumentRef.PurchaseOrderClosing</types>
    <types>DocumentRef.RevenueAccruals</types>
    <types>DocumentRef.SalesOrderClosing</types>
    <types>DocumentRef.JournalEntry</types>
+   <types>DocumentRef.FixedAssetRevaluation</types>
    <types>DocumentRef.ProductionPlanningCorrection</types>
    <types>DocumentRef.InventoryTransfer</types>
    <types>DocumentRef.EmployeeFiring</types>
@@ -222,9 +225,6 @@
    <types>DocumentRef.ProductionPlanningClosing</types>
    <types>DocumentRef.RetailGoodsReceipt</types>
    <types>DocumentRef.CashExpense</types>
-   <types>DocumentRef.ShipmentPlaningOrder</types>
-   <types>DocumentRef.WithholdingTaxInvoice</types>
-   <types>DocumentRef.FixedAssetRevaluation</types>
   </commandParameterType>
   <representation>Auto</representation>
  </commands>

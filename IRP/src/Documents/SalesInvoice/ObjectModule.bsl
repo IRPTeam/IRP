@@ -237,7 +237,3 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		CreditLimitsServer.CheckCreditLimitByPartner(ThisObject, ThisObject.Date, Cancel);
 	EndIf;
 EndProcedure
-
-Procedure OnCopy(CopiedObject)
-EndProcedure
-

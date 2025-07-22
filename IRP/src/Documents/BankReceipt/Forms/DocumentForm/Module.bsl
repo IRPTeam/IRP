@@ -1344,7 +1344,7 @@ Procedure _EditCurrencies(CurrentData)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1414,7 +1414,7 @@ Procedure PaymentByDocuments(Command)
 			FormParameters.SelectedPositionWithoutDocuments.Add(PositionStructure);	
 		EndIf;
 	EndDo;
-	Notify = New NotifyDescription("PaymentByDocumentSelectionEnd", ThisObject);		
+	Notify = New CallbackDescription("PaymentByDocumentSelectionEnd", ThisObject);		
 	OpenForm("CommonForm.PaymentDistribution", FormParameters, ThisObject,,,,Notify, FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure
 
@@ -1462,7 +1462,7 @@ Procedure PayByCard(Command)
 	Settings.Amount = Object.DocumentAmount;
 	Settings.Hardware = Hardware;
 	
-	NotifyOnClose = New NotifyDescription("PayByCardEnd", ThisObject);
+	NotifyOnClose = New CallbackDescription("PayByCardEnd", ThisObject);
 	
 	OpenForm("CommonForm.PaymentByAcquiring", New Structure("OpenSettings", Settings), ThisObject, , , , NotifyOnClose, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure

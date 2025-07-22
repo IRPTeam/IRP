@@ -8,7 +8,7 @@
  <name>AutostartProcessTypes</name>
  <synonym>
   <key>tr</key>
-  <value>Autostart process types</value>
+  <value>Otomatik başlatma işlem türleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -39,7 +39,7 @@
   <name>WhenCreating</name>
   <synonym>
    <key>tr</key>
-   <value>When creating</value>
+   <value>Oluştururken</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -54,7 +54,7 @@
   <name>WhenPosting</name>
   <synonym>
    <key>tr</key>
-   <value>When posting</value>
+   <value>Kaydederken</value>
   </synonym>
   <synonym>
    <key>ru</key>

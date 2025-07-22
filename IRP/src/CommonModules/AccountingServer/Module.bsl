@@ -2728,6 +2728,99 @@ Procedure CreateJE_ByArrayRefs(ArrayOfBasisDocuments, ArrayOfLedgerTypes) Export
 	EndDo;	
 EndProcedure
 
+Function GetJobsForCreateJE(ArrayOfBasisDocuments, ArrayOfLedgerTypes) Export
+	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
+	JobDataSettings.ProcedurePath = "AccountingServer.CreateJE_BackgroundJob";
+						
+	DocsInPack = 100;
+	StreamArray = New Array;
+	Pack = 1;
+	TotalDocs = ArrayOfBasisDocuments.Count();
+	For Each Doc In ArrayOfBasisDocuments Do
+		StreamArray.Add(Doc);
+	 	
+	 	If StreamArray.Count() = DocsInPack Then
+	 		JobSettings = BackgroundJobAPIServer.JobSettings();
+			JobSettings.ProcedureParams.Add(StreamArray);
+			JobSettings.ProcedureParams.Add(ArrayOfLedgerTypes);
+			JobSettings.Description = "Create JE: " + Pack + " * (" + DocsInPack + ") / " + TotalDocs;
+			JobDataSettings.JobSettings.Add(JobSettings);
+			
+			StreamArray = New Array;
+	 		Pack = Pack + 1;
+	 	EndIf;
+	EndDo;
+	If StreamArray.Count() > 0 Then
+		JobSettings = BackgroundJobAPIServer.JobSettings();
+		JobSettings.ProcedureParams.Add(StreamArray);
+		JobSettings.ProcedureParams.Add(ArrayOfLedgerTypes);
+		JobSettings.Description = "Create JE: " + Pack + " * (" + StreamArray.Count() + ") / " + TotalDocs;
+		JobDataSettings.JobSettings.Add(JobSettings);
+ 	EndIf;
+
+	Return JobDataSettings;
+EndFunction
+
+Function CreateJE_BackgroundJob(ArrayOfBasisDocuments, ArrayOfLedgerTypes) Export
+	
+	TableOfJEDocuments = GetTableOfJEDocuments(ArrayOfBasisDocuments, ArrayOfLedgerTypes);
+	
+	Errors = New Array();
+	
+	If TableOfJEDocuments.Count() = 0 Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Empty doc list: " + TableOfJEDocuments.Count();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+		Return Errors;
+	EndIf;
+
+	Msg = BackgroundJobAPIServer.NotifySettings();
+	Msg.Log = "Start create JE: " + TableOfJEDocuments.Count();
+	BackgroundJobAPIServer.NotifyStream(Msg);
+	
+	Count = 0; 
+	LastPercentLogged = 0;
+	StartDate = CurrentUniversalDateInMilliseconds();
+	
+	For Each Row In TableOfJEDocuments Do
+		Try
+			CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "WriteOnForm", True);
+			Row.JEDocument.Write(DocumentWriteMode.Write);
+		Except
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			Msg.Log = "Error: " + String(Row.JEDocument) + ":" + Chars.LF + ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			BackgroundJobAPIServer.NotifyStream(Msg);
+			
+			Result = New Structure;
+			Result.Insert("Ref", Row.JEDocument);
+			Result.Insert("Error", Msg.Log);
+			Errors.Add(Result);
+		EndTry;
+		
+		Count = Count + 1;
+		
+		Percent = 100 * Count / TableOfJEDocuments.Count();
+		If (Percent - LastPercentLogged >= 1) Then  
+			LastPercentLogged = Int(Percent);
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
+			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			Msg.Percent = Percent;
+			BackgroundJobAPIServer.NotifyStream(Msg);
+		EndIf;
+
+	EndDo;
+	
+	Msg = BackgroundJobAPIServer.NotifySettings();
+	Msg.End = True;
+	Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+	BackgroundJobAPIServer.NotifyStream(Msg);
+	
+	Return Errors;
+EndFunction
+
 #EndRegion
 
 #Region OperationFilters

@@ -5,7 +5,7 @@ Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProces
 		Return;
 	EndIf;
 	
-	Notify = New NotifyDescription("OnFinishEditSerialLotNumbers", ThisObject, 
+	Notify = New CallbackDescription("OnFinishEditSerialLotNumbers", ThisObject, 
 		New Structure("Object, Form, AddInfo", Object, Form, AddInfo));
 	OpeningParameters = New Structure();
 	OpeningParameters.Insert("Item"            , CurrentData.Item);
@@ -37,7 +37,7 @@ Procedure StartChoiceSingle(Object, Form, Item, ChoiceData, StandardProcessing, 
 		Return;
 	EndIf;
 
-	Notify = New NotifyDescription("OnFinishEditSerialLotNumbersSingle", ThisObject, 
+	Notify = New CallbackDescription("OnFinishEditSerialLotNumbersSingle", ThisObject, 
 		New Structure("Object, Form, AddInfo", Object, Form, AddInfo));
 	OpeningParameters = New Structure();
 	OpeningParameters.Insert("Item", CurrentData.Item);

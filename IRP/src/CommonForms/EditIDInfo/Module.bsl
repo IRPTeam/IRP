@@ -59,7 +59,7 @@ Procedure IDInfoBeforeRowChange(Item, Cancel)
 		OpenFormArgs = New Structure();
 		OpenFormArgs.Insert("ArrayOfCountry", ArrayOfCountry);
 
-		Notify = New NotifyDescription("StartEditIDInfo", ThisObject, Args);
+		Notify = New CallbackDescription("StartEditIDInfo", ThisObject, Args);
 		OpenForm("ChartOfCharacteristicTypes.IDInfoTypes.Form.SelectCountryForm", OpenFormArgs, ThisObject, , , ,
 			Notify);
 	ElsIf ArrayOfCountry.Count() = 1 Then
@@ -88,7 +88,7 @@ Procedure StartEditIDInfo(Result, Parameters) Export
 	Parameters.Insert("Country", Result.Country);
 
 	CallMethodAddDataProc(OpenFormArgs);
-	Notify = New NotifyDescription("EndEditIDInfo", ThisObject, Parameters);
+	Notify = New CallbackDescription("EndEditIDInfo", ThisObject, Parameters);
 
 	AddDataProcClient.OpenFormAddDataProc(OpenFormArgs, Notify, "Form");
 EndProcedure

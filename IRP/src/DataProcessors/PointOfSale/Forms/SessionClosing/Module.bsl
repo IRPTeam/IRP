@@ -193,7 +193,7 @@ EndProcedure
 Procedure EditDoc(Command)
 	CurrentRow = Items.ListOfWarningDocuments.CurrentRow;
 	
-	Notify = New NotifyDescription("EditDocFinish", ThisObject);
+	Notify = New CallbackDescription("EditDocFinish", ThisObject);
 	If TypeOf(CurrentRow) = Type("DocumentRef.RetailSalesReceipt") Then
 		OpenForm("Document.RetailSalesReceipt.Form.DocumentForm", 
 			New Structure("Key", CurrentRow), 

@@ -558,6 +558,7 @@ Procedure SetCurrentPageAtClient()
 	
 EndProcedure
 
+&AtServer
 Procedure FillDocumentTypeList(Settings=Undefined)
 	
 	Items.DocumentType.ChoiceList.Clear();	

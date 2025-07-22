@@ -103,10 +103,10 @@
  <defaultChoiceForm>Document.ShipmentPlaningOrder.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
- <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
- <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.R9610T_ShipmentPlaning</registerRecords>
+ <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

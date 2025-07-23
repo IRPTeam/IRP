@@ -245,6 +245,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4022B_StockTransferOrdersShipment());
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(R4031B_GoodsInTransitIncoming());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(R6025B_SimpleBatch());
@@ -304,7 +305,9 @@ Function ItemList()
 		   |	ItemList.Ref.Branch AS Branch,
 		   |	ItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
 		   |	ItemList.Key,
-		   |	ItemList.SimpleBatch AS SimpleBatch
+		   |	ItemList.SimpleBatch AS SimpleBatch,
+		   |	ItemList.GoodsReceipt AS GoodsReceipt,
+		   |	not ItemList.GoodsReceipt.Ref is null GoodsReceiptExists
 		   |INTO ItemList
 		   |FROM
 		   |	Document.ShipmentConfirmation.ItemList AS ItemList
@@ -549,38 +552,53 @@ Function R2031B_ShipmentInvoicing()
 EndFunction
 
 Function R1031B_ReceiptInvoicing()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.ShipmentConfirmation AS Basis,
-		   |	ItemList.Quantity AS Quantity,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Period,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Store
-		   |INTO R1031B_ReceiptInvoicing
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.PurchaseReturnExists
-		   |	AND ItemList.IsTransaction_ReturnToVendor
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.PurchaseReturn,
-		   |	ItemList.Quantity,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Period,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Store
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.PurchaseReturnExists
-		   |	AND ItemList.IsTransaction_ReturnToVendor";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.ShipmentConfirmation AS Basis,
+		|	ItemList.Quantity AS Quantity,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|INTO R1031B_ReceiptInvoicing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.PurchaseReturnExists
+		|	AND ItemList.IsTransaction_ReturnToVendor
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.PurchaseReturn,
+		|	ItemList.Quantity,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.PurchaseReturnExists
+		|	AND ItemList.IsTransaction_ReturnToVendor
+		|
+		|union all
+		|
+		|select
+		|	value(AccumulationRecordType.Expense),
+		|	ItemList.GoodsReceipt,
+		|	ItemList.Quantity,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	ItemList.Store
+		|from ItemList as ItemList
+		|where ItemList.GoodsReceiptExists";
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -888,25 +906,47 @@ Function R4012B_StockReservation()
 EndFunction
 
 Function R4032B_GoodsInTransitOutgoing()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |CASE
-		   |	When (ItemList.IsTransaction_Sales OR ItemList.IsTransaction_ShipmentToTradeAgent) AND ItemList.SalesInvoiceExists Then
-		   |		ItemList.SalesInvoice
-		   |	When ItemList.IsTransaction_InventoryTransfer AND ItemList.InventoryTransferExists Then
-		   |		ItemList.InventoryTransfer
-		   |	When ItemList.IsTransaction_ReturnToVendor AND ItemList.PurchaseReturnExists Then
-		   |		ItemList.PurchaseReturn
-		   |ELSE
-		   |		ItemList.ShipmentConfirmation
-		   |END AS Basis,
-		   |	*
-		   |INTO R4032B_GoodsInTransitOutgoing
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Quantity,
+		|	CASE
+		|		When (ItemList.IsTransaction_Sales
+		|		OR ItemList.IsTransaction_ShipmentToTradeAgent)
+		|		AND ItemList.SalesInvoiceExists
+		|			Then ItemList.SalesInvoice
+		|		When ItemList.IsTransaction_InventoryTransfer
+		|		AND ItemList.InventoryTransferExists
+		|			Then ItemList.InventoryTransfer
+		|		When ItemList.IsTransaction_ReturnToVendor
+		|		AND ItemList.PurchaseReturnExists
+		|			Then ItemList.PurchaseReturn
+		|		ELSE ItemList.ShipmentConfirmation
+		|	END AS Basis
+		|INTO R4032B_GoodsInTransitOutgoing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction
 
+Function R4031B_GoodsInTransitIncoming()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Quantity,
+		|	ItemList.GoodsReceipt AS Basis
+		|INTO R4031B_GoodsInTransitIncoming
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.GoodsReceiptExists";
 EndFunction
 
 Function R4014B_SerialLotNumber()

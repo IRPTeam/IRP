@@ -2876,7 +2876,9 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		then value(Enum.ShipmentConfirmationTransactionTypes.Sales)
 	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.ShipmentToTradeAgent)
 	|		then value(Enum.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent)
+	|	end as TransactionTypeSC,
 	|		
+	|	case
 	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.RetailSales)
 	|		then ItemList.Ref.ShipmentMode
 	|
@@ -3036,7 +3038,7 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		then value(Enum.ShipmentConfirmationTransactionTypes.Sales)
 	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.ShipmentToTradeAgent)
 	|		then value(Enum.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent)
-	|	end as TransactionType,
+	|	end as TransactionTypeSC,
 	|
 	|	case 
 	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.Sales)
@@ -3360,7 +3362,7 @@ Function ExtractData_FromSPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
 	|	value(Enum.SalesTransactionTypes.Sales) as TransactionTypeSales,
-	|	value(Enum.ShipmentConfirmationTransactionTypes.Sales) as TransactionType,
+	|	value(Enum.ShipmentConfirmationTransactionTypes.Sales) as TransactionTypeSC,
 	|	0 AS Quantity,
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
@@ -4469,7 +4471,7 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		then value(Enum.GoodsReceiptTransactionTypes.Purchase)
 	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
 	|		then value(Enum.GoodsReceiptTransactionTypes.ReceiptFromConsignor)
-	|	end as TransactionType,
+	|	end as TransactionTypeGR,
 	|	
 	|	ItemList.Ref.TransactionType AS TransactionTypePurchases,
 	|
@@ -4572,7 +4574,7 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		then value(Enum.GoodsReceiptTransactionTypes.Purchase)
 	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
 	|		then value(Enum.GoodsReceiptTransactionTypes.ReceiptFromConsignor)
-	|	end as TransactionType,
+	|	end as TransactionTypeGR,
 	|
 	|	case 
 	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.Purchase)
@@ -5339,7 +5341,8 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref AS ShipmentBasis,
 	|	ItemList.Ref AS ReceiptBasis,
 	|	ItemList.Ref.%1 AS Store,
-	|	%2 AS TransactionType,
+	|	&TransactionType_SC AS TransactionTypeSC,
+	|	&TransactionType_GR AS TransactionTypeGR,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
 	|	0 AS Quantity,
@@ -5380,16 +5383,19 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	SerialLotNumbers.SerialLotNumber";
 	
 	StoreName = "UNDEFINED";
-	TransactionType = "UNDEFINED";
+	TransactionType_SC = "UNDEFINED";
+	TransactionType_GR = "UNDEFINED";
 	If Is(DataReceiver).SC Then
 		StoreName = "StoreSender";
-		TransactionType = "VALUE(Enum.ShipmentConfirmationTransactionTypes.InventoryTransfer)";
+		TransactionType_SC = "VALUE(Enum.ShipmentConfirmationTransactionTypes.InventoryTransfer)";
 	ElsIf Is(DataReceiver).GR Then
 		StoreName = "StoreReceiver";
-		TransactionType = "VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer)";
+		TransactionType_GR = "VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer)";
 	EndIf;
-	Query.Text = StrTemplate(Query.Text, StoreName, TransactionType);
-
+	Query.Text = StrTemplate(Query.Text, StoreName);
+	Query.SetParameter("TransactionType_SC", TransactionType_SC);
+	Query.SetParameter("TransactionType_GR", TransactionType_GR);
+		
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
@@ -5556,7 +5562,7 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|			then value(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor)
 	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor)
 	|			then value(Enum.ShipmentConfirmationTransactionTypes.ReturnToConsignor)
-	|	end as TransactionType,
+	|	end as TransactionTypeSC,
 	|
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
@@ -5757,7 +5763,7 @@ Function ExtractData_FromSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|			then value(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer)
 	|		when ItemList.Ref.TransactionType = value(Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent)
 	|			then value(Enum.GoodsReceiptTransactionTypes.ReturnFromTradeAgent)
-	|	end as TransactionType,
+	|	end as TransactionTypeGR,
 	|
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
@@ -13485,9 +13491,9 @@ EndFunction
 
 Procedure ReplaceAliasToAttributeName(FillingValues, Alias, AttributeName)
 	If FillingValues.Property(Alias) Then
-		PropertyValue = FillingValues[Alias];
+		AliasValue = FillingValues[Alias];
 		FillingValues.Delete(Alias);
-		FillingValues.Insert(AttributeName, PropertyValue);
+		FillingValues.Insert(AttributeName, AliasValue);
 	EndIf;
 EndProcedure
 

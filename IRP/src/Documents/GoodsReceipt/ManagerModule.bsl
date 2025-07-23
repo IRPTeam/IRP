@@ -1176,7 +1176,8 @@ Function R4032B_GoodsInTransitOutgoing()
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	ItemList.Quantity,
-		|	ItemList.ShipmentConfirmation AS Basis
+		|	ItemList.ShipmentConfirmation AS Basis,
+		|	undefined as SerialLotNumber
 		|INTO R4032B_GoodsInTransitOutgoing
 		|FROM
 		|	ItemList AS ItemList

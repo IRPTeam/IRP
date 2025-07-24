@@ -6743,6 +6743,7 @@ Function GetBasisesFor_SI(FilterValues)
 	StepArray.Add(Catalogs.MovementRules.SI_SC_SPO);
 	StepArray.Add(Catalogs.MovementRules.SI_WO_WS);
 	StepArray.Add(Catalogs.MovementRules.SI_WS);
+	StepArray.Add(Catalogs.MovementRules.SI_GR);
 
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.SO_ForSI = True;
@@ -6819,6 +6820,7 @@ Function GetBasisesFor_PI(FilterValues)
 	StepArray.Add(Catalogs.MovementRules.PI_GR);
 	StepArray.Add(Catalogs.MovementRules.PO_PI);
 	StepArray.Add(Catalogs.MovementRules.ITO_PO_PI);
+	StepArray.Add(Catalogs.MovementRules.PI_SC);
 
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.PO_ForPI = True;

@@ -118,6 +118,16 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 		Return True;
 	EndIf;
 	
+	ArrayForDelete = New Array();
+	For Each Row In Records_InDocument Do
+		If ValueIsFilled(Row.CalculationMovementCost) Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemForDelete In ArrayForDelete Do
+		Records_InDocument.Delete(ItemForDelete);
+	EndDo;
+	
 	Query = New Query();
 	Query.TempTablesManager = PostingServer.PrepareRecordsTables(GetLockFieldNames(), "ItemKey", ItemList_InDocument,
 		Records_InDocument, Records_Exists, Unposting, AddInfo);

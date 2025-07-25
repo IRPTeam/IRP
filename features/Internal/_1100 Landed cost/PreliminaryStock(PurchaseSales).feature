@@ -467,9 +467,81 @@ Scenario: _997006 check case GR-PI-GR-SI-SI-PI (with preliminary)
 		And I close all client application windows
 	
 		
-	
-		
-						
-
-
-
+Scenario: _997007 check case GR-IT-IT-SI-PI (with preliminary)	
+	And I close all client application windows
+	* Post GR and IT
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(177).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Check preliminary cost
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(171).GetObject().Write(DocumentWriteMode.Posting);"    |
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I activate field named "OptionsListReportOption" in "OptionsList" table
+		And I select current line in "OptionsList" table
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		Then "Select period" window is opened
+		And I input "01.07.2025" text in the field named "DateBegin"
+		And I input "30.07.2025" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
+		And I go to line in "List" table
+			| "Item"                                             | "Item key"  |
+			| "Item 2 with serial lot number and good code data" | "S/Color 2" |
+		And I select current line in "List" table
+		And I click the button named "FormGenerate"
+		And "Result" spreadsheet document contains "Preliminary_041" template lines by template
+		And I close all client application windows	
+	* Post SI (from two stores)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(177).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Check preliminary cost
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(171).GetObject().Write(DocumentWriteMode.Posting);"    |
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I activate field named "OptionsListReportOption" in "OptionsList" table
+		And I select current line in "OptionsList" table
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		Then "Select period" window is opened
+		And I input "01.07.2025" text in the field named "DateBegin"
+		And I input "30.07.2025" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
+		And I go to line in "List" table
+			| "Item"                                             | "Item key"  |
+			| "Item 2 with serial lot number and good code data" | "S/Color 2" |
+		And I select current line in "List" table
+		And I click the button named "FormGenerate"
+		And "Result" spreadsheet document contains "Preliminary_042" template lines by template
+		And I close all client application windows					
+	* Post PI
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(176).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Check preliminary cost
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(171).GetObject().Write(DocumentWriteMode.Posting);"    |
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I activate field named "OptionsListReportOption" in "OptionsList" table
+		And I select current line in "OptionsList" table
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		Then "Select period" window is opened
+		And I input "01.07.2025" text in the field named "DateBegin"
+		And I input "30.07.2025" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
+		And I go to line in "List" table
+			| "Item"                                             | "Item key"  |
+			| "Item 2 with serial lot number and good code data" | "S/Color 2" |
+		And I select current line in "List" table
+		And I click the button named "FormGenerate"
+		And "Result" spreadsheet document contains "Preliminary_043" template lines by template
+		And I close all client application windows

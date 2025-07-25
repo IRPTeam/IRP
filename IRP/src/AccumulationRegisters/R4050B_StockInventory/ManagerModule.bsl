@@ -120,7 +120,8 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	
 	ArrayForDelete = New Array();
 	For Each Row In Records_InDocument Do
-		If ValueIsFilled(Row.CalculationMovementCost) Then
+		If CommonFunctionsClientServer.ObjectHasProperty(Row, "CalculationMovementCost") 
+			And ValueIsFilled(Row.CalculationMovementCost) Then
 			ArrayForDelete.Add(Row);
 		EndIf;
 	EndDo;

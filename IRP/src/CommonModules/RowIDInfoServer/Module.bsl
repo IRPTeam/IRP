@@ -2001,6 +2001,10 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		RowRefObject.BranchReturn  = Source.Branch;		
 	ElsIf Is.GR And Source.TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer Then
 		FillPropertyValues(RowRefObject, Source, , "Branch");
+	ElsIf Is.GR And Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer Then
+	    FillPropertyValues(RowRefObject, Source, , "Company, Branch");
+		RowRefObject.CompanyReturn = Source.Company;
+		RowRefObject.BranchReturn  = Source.Branch;
 	Else
 		FillPropertyValues(RowRefObject, Source);
 	EndIf;

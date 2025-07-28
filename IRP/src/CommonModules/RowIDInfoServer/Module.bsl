@@ -2001,6 +2001,10 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		RowRefObject.BranchReturn  = Source.Branch;		
 	ElsIf Is.GR And Source.TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer Then
 		FillPropertyValues(RowRefObject, Source, , "Branch");
+	ElsIf Is.GR And Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer Then
+	    FillPropertyValues(RowRefObject, Source, , "Company, Branch");
+		RowRefObject.CompanyReturn = Source.Company;
+		RowRefObject.BranchReturn  = Source.Branch;
 	Else
 		FillPropertyValues(RowRefObject, Source);
 	EndIf;
@@ -5383,14 +5387,14 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	SerialLotNumbers.SerialLotNumber";
 	
 	StoreName = "UNDEFINED";
-	TransactionType_SC = "UNDEFINED";
-	TransactionType_GR = "UNDEFINED";
+	TransactionType_SC = Undefined;
+	TransactionType_GR = Undefined;
 	If Is(DataReceiver).SC Then
 		StoreName = "StoreSender";
-		TransactionType_SC = "VALUE(Enum.ShipmentConfirmationTransactionTypes.InventoryTransfer)";
+		TransactionType_SC = Enums.ShipmentConfirmationTransactionTypes.InventoryTransfer;
 	ElsIf Is(DataReceiver).GR Then
 		StoreName = "StoreReceiver";
-		TransactionType_GR = "VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer)";
+		TransactionType_GR = Enums.GoodsReceiptTransactionTypes.InventoryTransfer;
 	EndIf;
 	Query.Text = StrTemplate(Query.Text, StoreName);
 	Query.SetParameter("TransactionType_SC", TransactionType_SC);

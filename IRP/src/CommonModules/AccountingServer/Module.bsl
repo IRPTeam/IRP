@@ -1290,6 +1290,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	Query.Text = 
 	"SELECT
 	|	Table.AccountExpense,
+	|	Table.AccountExpenseReturn,
 	|	1 AS Priority
 	|INTO AccountsExpense
 	|FROM
@@ -1303,6 +1304,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|
 	|SELECT
 	|	Table.AccountExpense,
+	|	Table.AccountExpenseReturn,
 	|	2
 	|FROM
 	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
@@ -1315,6 +1317,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|
 	|SELECT
 	|	Table.AccountExpense,
+	|	Table.AccountExpenseReturn,
 	|	3
 	|FROM
 	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
@@ -1327,6 +1330,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|
 	|SELECT
 	|	Table.AccountExpense,
+	|	Table.AccountExpenseReturn,
 	|	4
 	|FROM
 	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
@@ -1388,6 +1392,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|//2//////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	Table.AccountRevenue,
+	|	Table.AccountRevenueReturn,
 	|	1 AS Priority
 	|INTO AccountsRevenue
 	|FROM
@@ -1401,6 +1406,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|
 	|SELECT
 	|	Table.AccountRevenue,
+	|	Table.AccountRevenueReturn,
 	|	2
 	|FROM
 	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
@@ -1413,6 +1419,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|
 	|SELECT
 	|	Table.AccountRevenue,
+	|	Table.AccountRevenueReturn,
 	|	3
 	|FROM
 	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
@@ -1425,6 +1432,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|
 	|SELECT
 	|	Table.AccountRevenue,
+	|	Table.AccountRevenueReturn,
 	|	4
 	|FROM
 	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
@@ -1486,6 +1494,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|//4//////////////////////////////////////////////////////////////////////////////
 	|SELECT TOP 1
 	|	Table.AccountExpense,
+	|	Table.AccountExpenseReturn,
 	|	Table.Priority AS Priority
 	|FROM
 	|	AccountsExpense AS Table
@@ -1506,6 +1515,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|//6///////////////
 	|SELECT TOP 1
 	|	Table.AccountRevenue,
+	|	Table.AccountRevenueReturn,
 	|	Table.Priority AS Priority
 	|FROM
 	|	AccountsRevenue AS Table
@@ -1524,7 +1534,6 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|ORDER BY
 	|	Priority";
 	
-	
 	Query.SetParameter("Period"  , Period);
 	Query.SetParameter("Company" , Company);
 	Query.SetParameter("LedgerTypeVariant" , LedgerTypeVariant);
@@ -1534,14 +1543,17 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	QueryResults = Query.ExecuteBatch();
 	
 	Result = New Structure();
-	Result.Insert("AccountExpense", Undefined);
-	Result.Insert("AccountOtherPeriodsExpense", Undefined);
-	Result.Insert("AccountRevenue", Undefined);
-	Result.Insert("AccountOtherPeriodsRevenue", Undefined);
+	Result.Insert("AccountExpense"             , Undefined);
+	Result.Insert("AccountExpenseReturn"       , Undefined);
+	Result.Insert("AccountOtherPeriodsExpense" , Undefined);
+	Result.Insert("AccountRevenue"             , Undefined);
+	Result.Insert("AccountRevenueReturn"       , Undefined);
+	Result.Insert("AccountOtherPeriodsRevenue" , Undefined);
 	
 	QuerySelection_Expense = QueryResults[4].Select();
 	If QuerySelection_Expense.Next() Then
 		Result.AccountExpense = QuerySelection_Expense.AccountExpense;
+		Result.AccountExpenseReturn = QuerySelection_Expense.AccountExpenseReturn;
 	EndIf;
 	
 	QuerySelection_OtherPeriodsExpense = QueryResults[5].Select();
@@ -1552,6 +1564,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	QuerySelection_Revenue = QueryResults[6].Select();
 	If QuerySelection_Revenue.Next() Then
 		Result.AccountRevenue = QuerySelection_Revenue.AccountRevenue;
+		Result.AccountRevenueReturn = QuerySelection_Revenue.AccountRevenueReturn;
 	EndIf;
 	
 	QuerySelection_OtherPeriodsRevenue = QueryResults[7].Select();

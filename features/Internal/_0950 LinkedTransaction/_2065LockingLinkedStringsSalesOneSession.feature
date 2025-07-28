@@ -924,7 +924,7 @@ Scenario: _2065012 change quantity in the linked string in the SI, SI after SC, 
 		And I click "Post" button
 		Then there are lines in TestClient message log
 			| 'In line 2 quantity by Shipment confirmation 36 dated 23.09.2021 10:20:59 11 greater than 10'    |
-	* Change quantity (more then SC, SC exist)
+	* Change quantity (less then SC, SC exist)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
 			| 'Shirt'   | '36/Red'     | '11,000'      |

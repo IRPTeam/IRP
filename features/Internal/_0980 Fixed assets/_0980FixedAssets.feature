@@ -803,7 +803,7 @@ Scenario: _9800037 check FixedAssetRevaluation (price dropped)
 		And in the table "Calculations" I click the button named "CalculationsFillCalculations"
 		And "Calculations" table became equal
 			| '#' | 'Fixed asset'                         | 'Profit loss center' | 'Ledger type'                                | 'Schedule'                      | 'Calculation method' | 'Currency' | 'Expense type' | 'Amount balance' | 'Amount' |
-			| '1' | 'Manufacturing Equipment (Forklift)'  | 'Front office'       | 'Machinery and Equipment (with deprecation)' | 'Straight line (48 months)'     | 'Straight line'      | 'TRY'      | 'Expense'      | '2 254,24'       | '10,42'  |
+			| '1' | 'Manufacturing Equipment (Forklift)'  | 'Front office'       | 'Machinery and Equipment (with deprecation)' | 'Straight line (48 months)'     | 'Straight line'      | 'TRY'      | 'Expense'      | '2 254,24'       | '46,96'  |
 			| '2' | 'Office Furniture (Table)'            | 'Accountants office' | 'Furniture and Fixtures (with deprecation)'  | 'Declining balance (60 months)' | 'Declining balance'  | 'TRY'      | 'Expense'      | '850,00'         | '141,67' |
 			| '3' | 'Manufacturing Equipment (Generator)' | 'Front office'       | 'Machinery and Equipment (with deprecation)' | 'Straight line (48 months)'     | 'Straight line'      | 'TRY'      | 'Expense'      | '850,00'         | '17,71'  |
 		And I click the button named "FormPostAndClose"	

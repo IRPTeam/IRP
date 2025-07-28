@@ -1044,10 +1044,13 @@ Function GetAccountingAnalytics(Parameters) Export
 	AO = Catalogs.AccountingOperations;
 	
 	If Parameters.Operation = AO.PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions Then
+		// vendor transaction - vendor advance
 		Return GetAnalytics_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions(Parameters);
 	ElsIf Parameters.Operation = AO.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory Then
+		// vendor transaction - stock invntory
 		Return GetAnalytics_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory(Parameters);
 	ElsIf Parameters.Operation = AO.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming Then
+		// vendor transaction - tax incoming
 		Return GetAnalytics_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming(Parameters);
 	EndIf;
 	

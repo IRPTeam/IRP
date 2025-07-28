@@ -1456,12 +1456,16 @@ Function GetAccountingAnalytics(Parameters) Export
 	AO = Catalogs.AccountingOperations;
 
 	If Parameters.Operation = AO.SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers Then
-		Return GetAnalytics_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers(Parameters);
+		// customer transaction - customer advance
+		Return GetAnalytics_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers(Parameters); 
 	ElsIf Parameters.Operation = AO.SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions Then
+		// revenue - customer transaction
 		Return GetAnalytics_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions(Parameters);
 	ElsIf Parameters.Operation = AO.SalesReturn_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions Then
+		// tax outgoing - customer transaction
 		Return GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions(Parameters);
 	ElsIf Parameters.Operation = AO.SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory Then
+		// expenses - stock inventory
 		Return GetAnalytics_DR_R5022T_Expenses_CR_R4050B_StockInventory(Parameters);
 	EndIf;
 
@@ -1502,7 +1506,7 @@ Function GetAnalytics_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions(Paramet
 	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
 	                                                           Parameters.RowData.RevenueType,
 	                                                           Parameters.RowData.ProfitLossCenter);
-	AccountingAnalytics.Debit = Debit.AccountRevenue;
+	AccountingAnalytics.Debit = Debit.AccountRevenueReturn;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
 	// Credit

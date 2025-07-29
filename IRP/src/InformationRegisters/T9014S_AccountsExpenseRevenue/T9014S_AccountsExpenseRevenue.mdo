@@ -151,11 +151,11 @@
   <name>AccountExpenseReturn</name>
   <synonym>
    <key>tr</key>
-   <value>Account (expense return)</value>
+   <value>Hesap (gider iadesi)</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Account (expense return)</value>
+   <value>Счет (возврат расходов)</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -178,11 +178,11 @@
   <name>AccountRevenueReturn</name>
   <synonym>
    <key>tr</key>
-   <value>Account (revenue return)</value>
+   <value>Hesap (gelir iadesi)</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Account (revenue return)</value>
+   <value>Счет (возврат доходов)</value>
   </synonym>
   <synonym>
    <key>en</key>

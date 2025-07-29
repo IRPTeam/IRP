@@ -320,7 +320,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Group starting</value>
+     <value>Групповое начало</value>
     </title>
     <title>
      <key>en</key>
@@ -435,7 +435,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Group completing</value>
+     <value>Групповое завершение</value>
     </title>
     <title>
      <key>en</key>
@@ -513,7 +513,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Group cancellation</value>
+     <value>Групповая отмена</value>
     </title>
     <title>
      <key>en</key>
@@ -1278,7 +1278,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Stages and Tasks</value>
+    <value>Этапы и задачи</value>
    </title>
    <title>
     <key>en</key>
@@ -1369,7 +1369,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Flowchart</value>
+    <value>Блок-схема</value>
    </title>
    <title>
     <key>en</key>
@@ -1476,7 +1476,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Addressing</value>
+     <value>Обращение</value>
     </title>
     <title>
      <key>en</key>
@@ -1504,7 +1504,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Flowchart document</value>
+   <value>Документ блок-схемы</value>
   </title>
   <title>
    <key>en</key>

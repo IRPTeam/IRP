@@ -448,7 +448,7 @@
      </presentation>
      <presentation>
       <key>ru</key>
-      <value>No filter</value>
+      <value>Отключить отбор</value>
      </presentation>
      <presentation>
       <key>en</key>
@@ -465,7 +465,7 @@
      </presentation>
      <presentation>
       <key>ru</key>
-      <value>All open tasks</value>
+      <value>Все открытые задачи</value>
      </presentation>
      <presentation>
       <key>en</key>
@@ -482,7 +482,7 @@
      </presentation>
      <presentation>
       <key>ru</key>
-      <value>Only my tasks</value>
+      <value>Только мои задачи</value>
      </presentation>
      <presentation>
       <key>en</key>
@@ -2061,7 +2061,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Group chat send</value>
+       <value>Отправить в Групповой чат</value>
       </title>
       <title>
        <key>en</key>
@@ -2112,7 +2112,7 @@
      </toolTip>
      <toolTip>
       <key>ru</key>
-      <value>Group chat</value>
+      <value>Групповой чат</value>
      </toolTip>
      <toolTip>
       <key>en</key>
@@ -2942,7 +2942,7 @@ GROUP BY
       </content>
       <content>
        <key>ru</key>
-       <value>Repeat task</value>
+       <value>Повторить задачу</value>
       </content>
       <content>
        <key>en</key>
@@ -2966,7 +2966,7 @@ GROUP BY
       </content>
       <content>
        <key>ru</key>
-       <value>Has tasks</value>
+       <value>Имеет задачи</value>
       </content>
       <content>
        <key>en</key>
@@ -2990,7 +2990,7 @@ GROUP BY
       </content>
       <content>
        <key>ru</key>
-       <value>Is my task</value>
+       <value>Моя задача</value>
       </content>
       <content>
        <key>en</key>
@@ -3098,7 +3098,7 @@ GROUP BY
       </content>
       <content>
        <key>ru</key>
-       <value>Is repeat task</value>
+       <value>Повторная задача</value>
       </content>
       <content>
        <key>en</key>
@@ -3118,7 +3118,7 @@ GROUP BY
       </content>
       <content>
        <key>ru</key>
-       <value>Task icon</value>
+       <value>Значок задачи</value>
       </content>
       <content>
        <key>en</key>
@@ -3142,7 +3142,7 @@ GROUP BY
       </content>
       <content>
        <key>ru</key>
-       <value>My task</value>
+       <value>Моя задача</value>
       </content>
       <content>
        <key>en</key>
@@ -3197,7 +3197,7 @@ GROUP BY
       </content>
       <content>
        <key>ru</key>
-       <value>Performer</value>
+       <value>Исполнитель</value>
       </content>
       <content>
        <key>en</key>
@@ -3558,7 +3558,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Chat attached files</value>
+   <value>Прикрепленные файлы чата</value>
   </title>
   <title>
    <key>en</key>
@@ -3586,7 +3586,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>History version table</value>
+   <value>Таблица версий истории</value>
   </title>
   <title>
    <key>en</key>
@@ -3610,7 +3610,7 @@ GROUP BY
    </title>
    <title>
     <key>ru</key>
-    <value>Version number</value>
+    <value>Номер версии</value>
    </title>
    <title>
     <key>en</key>
@@ -3690,7 +3690,7 @@ GROUP BY
    </title>
    <title>
     <key>ru</key>
-    <value>Data change type</value>
+    <value>Тип изменения данных</value>
    </title>
    <title>
     <key>en</key>
@@ -3716,7 +3716,7 @@ GROUP BY
    </title>
    <title>
     <key>ru</key>
-    <value>Is important</value>
+    <value>Важно</value>
    </title>
    <title>
     <key>en</key>
@@ -3742,7 +3742,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>History report</value>
+   <value>Хронолонический отчет</value>
   </title>
   <title>
    <key>en</key>
@@ -3768,7 +3768,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Tasks</value>
+   <value>Задачи</value>
   </title>
   <title>
    <key>en</key>
@@ -3798,7 +3798,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Files count</value>
+   <value>Количество файлов</value>
   </title>
   <title>
    <key>en</key>
@@ -3826,7 +3826,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Chat count</value>
+   <value>Количество чатов</value>
   </title>
   <title>
    <key>en</key>
@@ -3854,7 +3854,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>History count</value>
+   <value>История подсчета</value>
   </title>
   <title>
    <key>en</key>
@@ -3882,7 +3882,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Show exchange error</value>
+   <value>Показать ошибку обмена</value>
   </title>
   <title>
    <key>en</key>
@@ -4054,7 +4054,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Open settings</value>
+   <value>Открыть настройки</value>
   </title>
   <title>
    <key>en</key>
@@ -4067,7 +4067,7 @@ GROUP BY
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Open settings</value>
+   <value>Открыть настройки</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -4121,7 +4121,7 @@ GROUP BY
   </title>
   <title>
    <key>ru</key>
-   <value>Attach chat files</value>
+   <value>Прикрепить файлы чата</value>
   </title>
   <title>
    <key>en</key>

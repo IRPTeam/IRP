@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Execution process status</value>
+  <value>Статус процесса исполнения</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -34,7 +34,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Current stage</value>
+   <value>Текущая стадия</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -57,7 +57,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Current task</value>
+   <value>Текущая задача</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -80,7 +80,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Iteration number</value>
+   <value>Номер итерации</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -107,7 +107,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Execution process</value>
+   <value>Процесс исполнения</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -131,7 +131,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Status time</value>
+   <value>Время статуса</value>
   </synonym>
   <synonym>
    <key>en</key>

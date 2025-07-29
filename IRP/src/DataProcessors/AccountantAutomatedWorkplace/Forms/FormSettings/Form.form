@@ -211,7 +211,7 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Group filters</value>
+    <value>Групповые фильтры</value>
    </toolTip>
    <toolTip>
     <key>en</key>
@@ -390,7 +390,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Panels</value>
+    <value>Панели</value>
    </title>
    <title>
     <key>en</key>
@@ -402,7 +402,7 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Group panels</value>
+    <value>Групповые панели</value>
    </toolTip>
    <toolTip>
     <key>en</key>
@@ -442,7 +442,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Group right left</value>
+   <value>Группа справа налево</value>
   </title>
   <title>
    <key>en</key>
@@ -454,7 +454,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Group right left</value>
+   <value>Группа справа налево</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -596,7 +596,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Lock type</value>
+   <value>Тип блокировки</value>
   </title>
   <title>
    <key>en</key>
@@ -646,7 +646,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Tasks type</value>
+   <value>Типы задач</value>
   </title>
   <title>
    <key>en</key>

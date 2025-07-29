@@ -2649,16 +2649,16 @@ Function Strings(Lang) Export
 		|ru='Касса/банк [%1] [%2]. Не хватает: %3 %2.';
 		|tr='Hesap [%1] [%2]. Eksik: %3 %2.'", Lang));
 	Strings.Insert("Error_183", NStr("en='By document [%1]. Lacking: %3 %2.';
-		|ru='By document [%1]. Lacking: %3 %2.';
+		|ru='По документу [%1]. Отсутствует: %3 %2.';
 		|tr='Belgeye göre [%1]. Eksik: %3 %2.'", Lang));
 	Strings.Insert("Error_184", NStr("en='Currency is a required field.';
-		|ru='Currency is a required field.';
+		|ru='Поле «Валюта» обязательно для заполнения.';
 		|tr='Para birimi zorunlu bir alandır.'", Lang));
 	Strings.Insert("Error_185", NStr("en='Wrong linked row [%1]: Document date [%2] less than Basis date [%3]';
-		|ru='Wrong linked row [%1]: Document date [%2] less than Basis date [%3]';
+		|ru='Неправильно связанная строка [%1]: Дата документа [%2] меньше базовой даты [%3]';
 		|tr='Yanlış bağlantılı satır [%1]: Belge tarihi [%2], Temel tarihten [%3] küçük'", Lang));
 	Strings.Insert("Error_186", NStr("en='Document date [%1] greater than date [%2] in [%3]';
-		|ru='Document date [%1] greater than date [%2] in [%3]';
+		|ru='Дата документа [%1] больше даты [%2] в [%3]';
 		|tr='Belge tarihi [%1], [%3] içindeki [%2] tarihinden büyük'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
@@ -4608,10 +4608,10 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 		|tr='Tüm eski belgeleri kullanarak bilgi kayıt sistemi niteliklerini güncelle'", Lang));
 	
 	Strings.Insert("Update_005", NStr("en='Database Migration #IRP-680';
-		|ru='Database Migration #IRP-680';
+		|ru='Миграция базы данных #IRP-680';
 		|tr='Database Migration #IRP-680'", Lang));
 	Strings.Insert("UpdateDesc_005", NStr("en='Updating Document Payroll';
-		|ru='Updating Document Payroll';
+		|ru='Обновление документа «Заработная плата»';
 		|tr='Bordro Belgesini Güncellemesi'", Lang));
 	
 #EndRegion
@@ -4817,16 +4817,16 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 		|ru='Завершено';
 		|tr='Tamamlandı'", Lang));
 	Strings.Insert("Task_Result_Execution_Not", NStr("en='Not done';
-		|ru='Not done';
+		|ru='Не выполнен';
 		|tr='Yapılmadı'", Lang));
     Strings.Insert("Task_Result_Verification", NStr("en='Success';
 		|ru='Успешно';
 		|tr='Başarılı'", Lang));
 	Strings.Insert("Task_Result_Verification_Not", NStr("en='Failure';
-		|ru='Failure';
+		|ru='Сбой';
 		|tr='Başarısız'", Lang));
     Strings.Insert("Task_Result_Confirmation", NStr("en='Confirmed';
-    	|ru='Подтверждено';
+    	|ru='Подтвержден';
     	|tr='Onaylandı'", Lang));
 	Strings.Insert("Task_Result_Confirmation_Not", NStr("en='Rejected';
 		|ru='Отклонен';

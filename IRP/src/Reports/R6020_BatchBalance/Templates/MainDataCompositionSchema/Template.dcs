@@ -2288,7 +2288,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Preliminary</v8:content>
+					<v8:content>Предварительный</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -2330,7 +2330,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Preliminary</v8:content>
+					<v8:content>Предварительный</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -2367,7 +2367,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Preliminary</v8:content>
+					<v8:content>Предварительный</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -2404,7 +2404,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Preliminary</v8:content>
+					<v8:content>Предварительный</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -2446,7 +2446,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Preliminary (amount)</v8:content>
+					<v8:content>Предварительный (сумма)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -2488,7 +2488,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Preliminary (amount)</v8:content>
+					<v8:content>Предварительный (сумма)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -2525,7 +2525,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Preliminary (amount)</v8:content>
+					<v8:content>Предварительный (сумма)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -2562,7 +2562,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Preliminary (amount)</v8:content>
+					<v8:content>Предварительный (сумма)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -2604,7 +2604,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Preliminary (tax amount)</v8:content>
+					<v8:content>Предварительный (сумма налога)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -2646,7 +2646,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Preliminary (tax amount)</v8:content>
+					<v8:content>Предварительный (сумма налога)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -2683,7 +2683,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Preliminary (tax amount)</v8:content>
+					<v8:content>Предварительный (сумма налога)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -2720,7 +2720,7 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Preliminary (tax amount)</v8:content>
+					<v8:content>Предварительный (сумма налога)</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>en</v8:lang>
@@ -4204,7 +4204,7 @@ ORDER BY
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
-						<v8:content>Preliminary quantity receipt</v8:content>
+						<v8:content>Предварительное количество приход</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>en</v8:lang>
@@ -4225,7 +4225,7 @@ ORDER BY
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
-						<v8:content>Preliminary amount receipt</v8:content>
+						<v8:content>Предварительная сумма приход</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>en</v8:lang>
@@ -4246,7 +4246,7 @@ ORDER BY
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
-						<v8:content>Preliminary quantity expense</v8:content>
+						<v8:content>Предварительное количество расход</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>en</v8:lang>

@@ -12,7 +12,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Task fail actions</value>
+  <value>Действия при сбое задачи</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -28,7 +28,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Restart process</value>
+   <value>Перезапустить процесс</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -43,7 +43,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Restart stage</value>
+   <value>Стадия перезапуска</value>
   </synonym>
   <synonym>
    <key>en</key>

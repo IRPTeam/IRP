@@ -884,7 +884,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Register records group line number</value>
+        <value>Номер строки группы записей регистра</value>
        </title>
        <title>
         <key>en</key>
@@ -3564,7 +3564,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Dr is currency</value>
+     <value>Дт валюта</value>
     </title>
     <title>
      <key>en</key>
@@ -3589,7 +3589,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Cr is currency</value>
+     <value>Кт валюта</value>
     </title>
     <title>
      <key>en</key>

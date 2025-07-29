@@ -12,7 +12,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Task results</value>
+  <value>Результаты задачи</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -28,7 +28,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Executed</value>
+   <value>Выполнен</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -43,7 +43,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Verified</value>
+   <value>Проверен</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -58,7 +58,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Подтверждено</value>
+   <value>Подтвержден</value>
   </synonym>
   <synonym>
    <key>en</key>

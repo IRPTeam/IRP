@@ -793,7 +793,7 @@ WHERE
       </content>
       <content>
        <key>ru</key>
-       <value>Show executed</value>
+       <value>Показать выполненные</value>
       </content>
       <content>
        <key>en</key>
@@ -841,7 +841,7 @@ WHERE
       </content>
       <content>
        <key>ru</key>
-       <value>Show all tasks</value>
+       <value>Показать все задачи</value>
       </content>
       <content>
        <key>en</key>
@@ -865,7 +865,7 @@ WHERE
   </title>
   <title>
    <key>ru</key>
-   <value>Show all tasks</value>
+   <value>Показать все задачи</value>
   </title>
   <title>
    <key>en</key>
@@ -890,7 +890,7 @@ WHERE
   </title>
   <title>
    <key>ru</key>
-   <value>Show executed</value>
+   <value>Показать выполненные</value>
   </title>
   <title>
    <key>en</key>

@@ -368,7 +368,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Preliminary quantity</value>
+   <value>Предварительное количество</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -389,7 +389,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Preliminary amount</value>
+   <value>Предварительная сумма</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -410,7 +410,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Preliminary tax amount</value>
+   <value>Предварительная сумма налога</value>
   </synonym>
   <synonym>
    <key>en</key>

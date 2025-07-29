@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Executor tasks</value>
+  <value>Задачи исполнителя</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Executed</value>
+   <value>Выполнен</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -118,7 +118,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Executor task</value>
+  <value>Задача исполнителя</value>
  </objectPresentation>
  <objectPresentation>
   <key>en</key>
@@ -144,7 +144,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Task ID</value>
+   <value>Идентификатор задачи</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -166,7 +166,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Iteration number</value>
+   <value>Номер итерации</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -193,7 +193,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Task type</value>
+   <value>Тип задачи</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -216,7 +216,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Detailing</value>
+   <value>Детализация</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -240,7 +240,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Execution object</value>
+   <value>Объект исполнения</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -288,7 +288,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Acceptetion</value>
+   <value>Принятие</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -334,7 +334,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Auto-execute</value>
+   <value>Автоматическое выполнение</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -391,7 +391,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Current executor</value>
+   <value>Текущий исполнитель</value>
   </synonym>
   <synonym>
    <key>en</key>

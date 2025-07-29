@@ -105,7 +105,7 @@
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
-						<v8:content>Completion</v8:content>
+						<v8:content>Выполнение</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>en</v8:lang>
@@ -146,7 +146,7 @@
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
-						<v8:content>Check completed tasks</v8:content>
+						<v8:content>Проверить выполненные задачи</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>en</v8:lang>
@@ -189,7 +189,7 @@
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
-						<v8:content>No</v8:content>
+						<v8:content>Нет</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>en</v8:lang>
@@ -244,7 +244,7 @@
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
-						<v8:content>Yes</v8:content>
+						<v8:content>Да</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>en</v8:lang>
@@ -306,7 +306,7 @@
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
-						<v8:content>Complete tasks</v8:content>
+						<v8:content>Выполненные задачи</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>en</v8:lang>

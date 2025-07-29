@@ -304,7 +304,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Create by template</value>
+    <value>Создать по шаблону</value>
    </title>
    <title>
     <key>en</key>
@@ -398,7 +398,7 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Check balance: R4050 Stock inventory</value>
+   <value>Проверить баланс: R4050 Остаток на складе</value>
   </title>
   <title>
    <key>en</key>

@@ -801,7 +801,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Is prelim.</value>
+    <value>Является предв.</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -823,7 +823,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Amount (prelim.)</value>
+    <value>Сумма (предв.)</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -845,7 +845,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Tax amount (prelim.)</value>
+    <value>Сумма налога (предв.)</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -867,7 +867,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Currency (prelim.)</value>
+    <value>Валюта (предв.)</value>
    </synonym>
    <synonym>
     <key>en</key>

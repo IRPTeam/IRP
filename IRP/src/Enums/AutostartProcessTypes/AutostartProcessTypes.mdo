@@ -12,7 +12,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Autostart process types</value>
+  <value>Типы процессов автозапуска</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -28,7 +28,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Not used</value>
+   <value>Не используется</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -43,7 +43,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>When creating</value>
+   <value>При создании</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -58,7 +58,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>When posting</value>
+   <value>При проведении</value>
   </synonym>
   <synonym>
    <key>en</key>

@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Execution processes</value>
+  <value>Процессы исполнения</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -98,7 +98,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Execution process</value>
+  <value>Процесс исполнения</value>
  </objectPresentation>
  <objectPresentation>
   <key>en</key>
@@ -144,7 +144,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Execution object</value>
+   <value>Объект исполнения</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -168,7 +168,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Completion date</value>
+   <value>Дата выполнения</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -218,7 +218,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Execution stages</value>
+   <value>Этапы исполнения</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -232,7 +232,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Stage ID</value>
+    <value>Идентификатор этапа</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -341,7 +341,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Tasks start together</value>
+    <value>Задачи начинаются вместе</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -363,7 +363,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Tasks result</value>
+    <value>Результат задач</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -385,7 +385,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Tasks fail action</value>
+    <value>Задачи не выполняются</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -412,7 +412,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Stages tasks</value>
+   <value>Этапы задач</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -426,7 +426,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Stage ID</value>
+    <value>Идентификатор этапа</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -447,7 +447,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Task ID</value>
+    <value>Идентификатор задачи</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -556,7 +556,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Executor</value>
+    <value>Исполнитель</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -666,7 +666,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Detailing</value>
+    <value>Детализация</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -689,7 +689,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Task type</value>
+    <value>Тип задачи</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -711,7 +711,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Auto-execute</value>
+    <value>Автоматическое выполнение</value>
    </synonym>
    <synonym>
     <key>en</key>

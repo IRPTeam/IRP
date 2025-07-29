@@ -275,7 +275,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>DELETE партнер</value>
+   <value>УДАЛИТЬ Партнера</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -299,7 +299,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>DELETE legal name</value>
+   <value>УДАЛИТЬ Контрагента</value>
   </synonym>
   <synonym>
    <key>en</key>

@@ -55,6 +55,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	
 	If Not Record.Expense Then
 		CurrentObject.AccountExpense = Undefined;
+		CurrentObject.AccountExpenseReturn = Undefined;
 	EndIf;
 	
 	If Not Record.OtherPeriodsExpense Then
@@ -63,6 +64,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	
 	If Not Record.Revenue Then
 		CurrentObject.AccountRevenue = Undefined;
+		CurrentObject.AccountRevenueReturn = Undefined;
 	EndIf;
 	
 	If Not Record.OtherPeriodsRevenue Then
@@ -76,8 +78,10 @@ Procedure SetVisible()
 	Items.ProfitLossCenter.Visible = (ThisObject.RecordType = "ProfitLossCenter" Or ThisObject.RecordType = "ExpenseRevenueAndProfitLossCenter");
 
 	Items.AccountExpense.Visible = Record.Expense;
+	Items.AccountExpenseReturn.Visible = Record.Expense;
 	Items.AccountOtherPeriodsExpense.Visible = Record.OtherPeriodsExpense;
 	Items.AccountRevenue.Visible = Record.Revenue;
+	Items.AccountRevenueReturn.Visible = Record.Revenue;
 	Items.AccountOtherPeriodsRevenue.Visible = Record.OtherPeriodsRevenue;
 EndProcedure
 

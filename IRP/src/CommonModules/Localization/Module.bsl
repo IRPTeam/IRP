@@ -1277,7 +1277,7 @@ Function Strings(Lang) Export
        	|ru='Не определен подчиненный Счет учета Кт %1 %2';
        	|tr='Tanımlanmamış Hesap alt Alacak %1 %2'", Lang));
        Strings.Insert("InvoiceTypeNotSupported", NStr("en='Not supported invoice type %1';
-       	|ru='Not supported invoice type %1';
+       	|ru='Не поддерживаемый вид инвойса %1';
        	|tr='%1 fatura türü desteklenmiyor'", Lang));
        Strings.Insert("FewRetailCustomerFound", NStr("en='Multiple retail customers found';
        	|ru='Найдено больше одного розничного покупателя';

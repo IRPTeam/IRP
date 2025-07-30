@@ -1744,7 +1744,7 @@ Function GetNextStep_SC(Source, ItemList, Row)
 		And Not ValueIsFilled(ItemList.SalesInvoice) Then
 		NextStep = Catalogs.MovementRules.SI;
 	ElsIf Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales Then
-		If ValueIsFilled(ItemList.SalesOrder) Then
+		If ValueIsFilled(Row.Basis) And TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt") Then
 			NextStep = Catalogs.MovementRules.SI;
 		Else
 			NextStep = Catalogs.MovementRules.SI_GR;

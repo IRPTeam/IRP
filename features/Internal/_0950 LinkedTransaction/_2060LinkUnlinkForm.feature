@@ -3364,13 +3364,13 @@ Scenario: _2060030 check link/unlink form in the SO - SC - SI (use variable item
 		And I click "Ok" button
 		And I click "Save" button		
 		And "RowIDInfo" table became equal
-			| '#' | 'Quantity' | 'Basis'                                       | 'Current step' | 'Next step' |
-			| '1' | '5,000'    | 'Sales order 3 056 dated 07.02.2025 08:36:23' | 'SI&SC'        | 'SI'        |
-			| '2' | '1,000'    | 'Sales order 3 056 dated 07.02.2025 08:36:23' | 'SI&SC'        | 'SI'        |
-			| '3' | '11,000'   | 'Sales order 3 056 dated 07.02.2025 08:36:23' | 'SI&SC'        | 'SI'        |
-			| '4' | '36,000'   | 'Sales order 3 056 dated 07.02.2025 08:36:23' | 'SI&SC'        | 'SI'        |
-			| '5' | '10,000'   | 'Sales order 3 056 dated 07.02.2025 08:36:23' | 'SI&SC'        | 'SI'        |
-			| '6' | '1,000'    | 'Sales order 3 056 dated 07.02.2025 08:36:23' | 'SI&SC'        | 'SI'        |
+			| '#' | 'Quantity' | 'Basis'                                       | 'Current step' | 'Next step'    |
+			| '1' | '5,000'    | 'Sales order 3 056 dated 07.02.2025 08:36:23' | 'SI&SC'        | 'SI&GR'        |
+			| '2' | '1,000'    | 'Sales order 3 056 dated 07.02.2025 08:36:23' | 'SI&SC'        | 'SI&GR'        |
+			| '3' | '11,000'   | 'Sales order 3 056 dated 07.02.2025 08:36:23' | 'SI&SC'        | 'SI&GR'        |
+			| '4' | '36,000'   | 'Sales order 3 056 dated 07.02.2025 08:36:23' | 'SI&SC'        | 'SI&GR'        |
+			| '5' | '10,000'   | 'Sales order 3 056 dated 07.02.2025 08:36:23' | 'SI&SC'        | 'SI&GR'        |
+			| '6' | '1,000'    | 'Sales order 3 056 dated 07.02.2025 08:36:23' | 'SI&SC'        | 'SI&GR'        |
 		Then the number of "RowIDInfo" table lines is "равно" "6"
 	* Try change line (Use variable item key = False)
 		And I go to line in "ItemList" table
@@ -3864,12 +3864,12 @@ Scenario: _2060032 check link/unlink form in the PO - GR - PI (use variable item
 		And I click "Ok" button
 		And I click "Save" button		
 		And "RowIDInfo" table became equal
-			| '#' | 'Quantity' | 'Basis'                                          | 'Current step' | 'Next step' |
-			| '1' | '1,000'    | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'PI&GR'        | 'PI'        |
-			| '2' | '11,000'   | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'PI&GR'        | 'PI'        |
-			| '3' | '36,000'   | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'PI&GR'        | 'PI'        |
-			| '4' | '10,000'   | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'PI&GR'        | 'PI'        |
-			| '5' | '1,000'    | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'PI&GR'        | 'PI'        |
+			| '#' | 'Quantity' | 'Basis'                                          | 'Current step' | 'Next step'    |
+			| '1' | '1,000'    | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'PI&GR'        | 'PI&SC'        |
+			| '2' | '11,000'   | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'PI&GR'        | 'PI&SC'        |
+			| '3' | '36,000'   | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'PI&GR'        | 'PI&SC'        |
+			| '4' | '10,000'   | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'PI&GR'        | 'PI&SC'        |
+			| '5' | '1,000'    | 'Purchase order 3 056 dated 07.02.2025 08:33:05' | 'PI&GR'        | 'PI&SC'        |
 		Then the number of "RowIDInfo" table lines is "равно" "5"
 	* Try change line (Use variable item key = False)
 		And I go to line in "ItemList" table
@@ -4307,12 +4307,12 @@ Scenario: _2060034 check link/unlink form in the SO - SC - SI (use variable stor
 		And I click "Post" button	
 		And "RowIDInfo" table became equal
 			| '#' | 'Quantity' | 'Basis'                                       | 'Current step' | 'Next step' |
-			| '1' | '5,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI'          |
-			| '2' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI'        |
-			| '3' | '11,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI'        |
-			| '4' | '36,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI'        |
-			| '5' | '10,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI'        |
-			| '6' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI'        |
+			| '1' | '5,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI&GR'          |
+			| '2' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI&GR'        |
+			| '3' | '11,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI&GR'        |
+			| '4' | '36,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI&GR'        |
+			| '5' | '10,000'   | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI&GR'        |
+			| '6' | '1,000'    | 'Sales order 3 057 dated 07.03.2025 12:46:54' | 'SI&SC'        | 'SI&GR'        |
 		Then the number of "RowIDInfo" table lines is "равно" "6"	
 		// Temp
 		And I click Select button of "Store" field
@@ -4765,11 +4765,11 @@ Scenario: _2060036 check link/unlink form in the PO - GR - PI (use variable stor
 		And I click "Post" button	
 		And "RowIDInfo" table became equal
 			| '#' | 'Quantity' | 'Basis'                                          | 'Current step' | 'Next step' |
-			| '1' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI'        |
-			| '2' | '11,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI'        |
-			| '3' | '36,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI'        |
-			| '4' | '10,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI'        |
-			| '5' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI'        |
+			| '1' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI&SC'        |
+			| '2' | '11,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI&SC'        |
+			| '3' | '36,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI&SC'        |
+			| '4' | '10,000'   | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI&SC'        |
+			| '5' | '1,000'    | 'Purchase order 3 057 dated 07.03.2025 12:45:28' | 'PI&GR'        | 'PI&SC'        |
 		Then the number of "RowIDInfo" table lines is "равно" "5"	
 		// Temp
 		And I click Select button of "Store" field

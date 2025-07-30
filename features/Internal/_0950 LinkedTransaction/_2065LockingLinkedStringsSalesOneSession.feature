@@ -151,8 +151,8 @@ Scenario: _20650011 Info linked documents row
 	* Show row key
 		And I click "Show row key" button
 		And "ResultsTable" table became equal
-			| 'Item'    | 'Item key'   | 'Store'      | 'Key'   | 'Basis'                                                | 'Basis unit'   | 'Current step'   | 'Row ref'   | 'Parent basis'   | 'Row ID'   | 'Basis key'   | 'Unit'    |
-			| 'Shirt'   | '36/Red'     | 'Store 02'   | '*'     | 'Shipment confirmation 36 dated 23.09.2021 10:20:59'   | 'pcs'          | 'SI'             | '*'         | ''               | '*'        | '*'           | ''        |
+			| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                              | 'Basis unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' | 'Unit' |
+			| 'Shirt' | '36/Red'   | 'Store 02' | '*'   | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'pcs'        | 'SI&GR'        | '*'       | ''             | '*'      | '*'         | ''     |
 	* Try Delete row
 		And I go to line in "BasisesTree" table
 			| 'Quantity'   | 'Row presentation'    |
@@ -163,7 +163,7 @@ Scenario: _20650011 Info linked documents row
 			| 'Row presentation'                                   | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Basis'                                              | 'Key'                                  | 'Row ID'                               | 'Basis key'                            | 'Current step' |
 			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | '                                    ' | '                                    ' | '                                    ' | ''             |
 			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '                                    ' | '                                    ' | '                                    ' | ''             |
-			| 'Shirt (36/Red)'                                     | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI'           |
+			| 'Shirt (36/Red)'                                     | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI&GR'        |
 	* Try copy row
 		And I go to line in "BasisesTree" table
 			| 'Quantity'   | 'Row presentation'    |
@@ -174,7 +174,7 @@ Scenario: _20650011 Info linked documents row
 			| 'Row presentation'                                   | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Basis'                                              | 'Key'                                  | 'Row ID'                               | 'Basis key'                            | 'Current step' |
 			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | '                                    ' | '                                    ' | '                                    ' | ''             |
 			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '                                    ' | '                                    ' | '                                    ' | ''             |
-			| 'Shirt (36/Red)'                                     | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI'           |
+			| 'Shirt (36/Red)'                                     | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI&GR'        |
 		And I close all client application windows
 				
 						
@@ -924,7 +924,7 @@ Scenario: _2065012 change quantity in the linked string in the SI, SI after SC, 
 		And I click "Post" button
 		Then there are lines in TestClient message log
 			| 'In line 2 quantity by Shipment confirmation 36 dated 23.09.2021 10:20:59 11 greater than 10'    |
-	* Change quantity (more then SC, SC exist)
+	* Change quantity (less then SC, SC exist)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
 			| 'Shirt'   | '36/Red'     | '11,000'      |

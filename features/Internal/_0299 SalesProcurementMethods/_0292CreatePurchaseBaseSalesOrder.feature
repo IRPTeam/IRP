@@ -529,9 +529,9 @@ Scenario: _029202 create PI and GR based on PO that based on SO
 			And I close current window		
 			And I click "Show row key" button
 			And "RowIDInfo" table contains lines
-				| '#'    | 'Key'    | 'Basis'                      | 'Row ID'                                  | 'Next step'    | 'Quantity'    | 'Basis key'                      | 'Current step'    | 'Row ref'                                  |
-				| '1'    | '*'      | '$$GoodsReceipt0292022$$'    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'    | ''             | '1,000'       | '$$Rov1GoodsReceipt0292022$$'    | 'PI&SC'           | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'     |
-				| '2'    | '*'      | '$$GoodsReceipt0292022$$'    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'    | ''             | '20,000'      | '$$Rov2GoodsReceipt0292022$$'    | 'PI&SC'           | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'     |
+				| '#' | 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                   | 'Current step' | 'Row ref'                              |
+				| '1' | '*'   | '$$GoodsReceipt0292022$$' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | ''          | '1,000'    | '$$Rov1GoodsReceipt0292022$$' | 'PI'           | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' |
+				| '2' | '*'   | '$$GoodsReceipt0292022$$' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | ''          | '20,000'   | '$$Rov2GoodsReceipt0292022$$' | 'PI'           | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice0292022$$" variable
 			And I delete "$$PurchaseInvoice0292022$$" variable
@@ -659,7 +659,7 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 		Then the number of "ItemList" table lines is "равно" "1"
 		And "RowIDInfo" table contains lines
 			| '#'   | 'Key'                                  | 'Basis'                     | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                     | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '$$Rov1ShipmentConfirmation029204$$'   | '$$GoodsReceipt0292021$$'   | '4a003d08-12af-4c34-98d5-5cdeb84616de'   | 'SI&GR'       | '5,000'      | '$$Rov3GoodsReceipt0292021$$'   | 'SI&SC'          | '4a003d08-12af-4c34-98d5-5cdeb84616de'    |
+			| '1'   | '$$Rov1ShipmentConfirmation029204$$'   | '$$GoodsReceipt0292021$$'   | '4a003d08-12af-4c34-98d5-5cdeb84616de'   | 'SI'          | '5,000'      | '$$Rov3GoodsReceipt0292021$$'   | 'SI&SC'          | '4a003d08-12af-4c34-98d5-5cdeb84616de'    |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I delete "$$NumberShipmentConfirmation029204$$" variable
 		And I delete "$$ShipmentConfirmation029204$$" variable
@@ -690,7 +690,7 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 		And I close current window
 		And "RowIDInfo" table became equal
 			| '#'   | 'Key'                          | 'Basis'                            | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                            | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '$$Rov1SalesInvoice029204$$'   | '$$ShipmentConfirmation029204$$'   | '4a003d08-12af-4c34-98d5-5cdeb84616de'   | ''            | '5,000'      | '$$Rov1ShipmentConfirmation029204$$'   | 'SI&GR'             | '4a003d08-12af-4c34-98d5-5cdeb84616de'    |
+			| '1'   | '$$Rov1SalesInvoice029204$$'   | '$$ShipmentConfirmation029204$$'   | '4a003d08-12af-4c34-98d5-5cdeb84616de'   | ''            | '5,000'      | '$$Rov1ShipmentConfirmation029204$$'   | 'SI'             | '4a003d08-12af-4c34-98d5-5cdeb84616de'    |
 		And I close all client application windows
 
 // rewrite when the scheme is worked out
@@ -757,19 +757,19 @@ Scenario: _029205 check movements in the register TM1010B_RowIDMovements
 		| '$$GoodsReceipt0292021$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '4,000'    |
 		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
 		| '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
-		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&SC'    | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
-		| '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI&SC'    | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI'       | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI'       | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
 		| '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'SI&SC'    | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
 		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'SI&SC'    | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
-		| '$$PurchaseInvoice0292022$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&SC'    | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
-		| '$$PurchaseInvoice0292022$$'                | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI&SC'    | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$PurchaseInvoice0292022$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI'       | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$PurchaseInvoice0292022$$'                | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI'       | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
 		| '$$SalesInvoice029203$$'                    | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI&WO&WS' | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | '2,000'    |
 		| '$$SalesInvoice029203$$'                    | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'SI&SC'    | '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
 		| '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SI&SC'    | '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
 		| '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SC'       | '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
 		| '$$ShipmentConfirmation029203$$'            | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SC'       | '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
 		| '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '5,000'    |
-		| '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI&GR'    | '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '5,000'    |
+		| '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI'       | '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '5,000'    |
 	Then the number of "List" table lines is "равно" "93"
 	And I close all client application windows
 	

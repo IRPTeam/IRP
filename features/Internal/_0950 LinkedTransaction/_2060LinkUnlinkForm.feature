@@ -77,15 +77,15 @@ Scenario: _2060001 preparation
 		| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document PO, GR, SO, SC objects (return GR-SC, SC-GR)
 	And I execute 1C:Enterprise script at server
-		| "Documents.PurchaseOrder.FindByNumber(4060).GetObject().Write(DocumentWriteMode.Write);"   |
+		| "Documents.PurchaseOrder.FindByNumber(4060).GetObject().Write(DocumentWriteMode.Posting);;"   |
 	And I execute 1C:Enterprise script at server
-		| "Documents.SalesOrder.FindByNumber(4060).GetObject().Write(DocumentWriteMode.Write);"   |
+		| "Documents.SalesOrder.FindByNumber(4060).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
-		| "Documents.ShipmentConfirmation.FindByNumber(4060).GetObject().Write(DocumentWriteMode.Write);"   |
-		| "Documents.ShipmentConfirmation.FindByNumber(4061).GetObject().Write(DocumentWriteMode.Write);"   |
+		| "Documents.ShipmentConfirmation.FindByNumber(4060).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.ShipmentConfirmation.FindByNumber(4061).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
-		| "Documents.GoodsReceipt.FindByNumber(4060).GetObject().Write(DocumentWriteMode.Write);"   |
-		| "Documents.GoodsReceipt.FindByNumber(4061).GetObject().Write(DocumentWriteMode.Write);"   |
+		| "Documents.GoodsReceipt.FindByNumber(4059).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.GoodsReceipt.FindByNumber(4060).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Save PI numbers
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -1784,6 +1784,7 @@ Scenario: _2060013 check link/unlink form in the SC (return based on GR)
 			| "2" | "1,000"    | "Product 7 with SLN (new row) (ODS) (9009100)" | "Store 03" | "pcs"  |
 		And I set checkbox "Linked documents"
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I remove checkbox "Use reverse basises tree"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation'                             | 'Unit' |
 			| ''         | ''      | '1,000'    | 'Product 7 with SLN (new row) (ODS) (9009100)' | 'pcs'  |

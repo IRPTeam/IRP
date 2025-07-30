@@ -1744,7 +1744,11 @@ Function GetNextStep_SC(Source, ItemList, Row)
 		And Not ValueIsFilled(ItemList.SalesInvoice) Then
 		NextStep = Catalogs.MovementRules.SI;
 	ElsIf Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales Then
-		NextStep = Catalogs.MovementRules.SI_GR;
+		If ValueIsFilled(ItemList.SalesOrder) Then
+			NextStep = Catalogs.MovementRules.SI;
+		Else
+			NextStep = Catalogs.MovementRules.SI_GR;
+		EndIf;
 	ElsIf (Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor
 			Or Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor)
 	 	And Not ValueIsFilled(ItemList.PurchaseReturn) Then
@@ -1786,7 +1790,11 @@ Function GetNextStep_GR(Source, ItemList, Row)
 		And Not ValueIsFilled(ItemList.PurchaseInvoice) Then
 		NextStep = Catalogs.MovementRules.PI;
 	ElsIf Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase Then
-		NextStep = Catalogs.MovementRules.PI_SC;	
+		If ValueIsFilled(ItemList.SalesOrder) Then
+			NextStep = Catalogs.MovementRules.PI;
+		Else
+			NextStep = Catalogs.MovementRules.PI_SC;	
+		EndIf;
 	ElsIf (Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer
 	 		Or Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent)
 		And Not ValueIsFilled(ItemList.SalesReturn) Then
@@ -2066,7 +2074,11 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 			RowRefObject.TransactionTypeGRReturn = Source.TransactionType;
 		ElsIf Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase Then
 			RowRefObject.TransactionTypeGR = Source.TransactionType;
-			RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
+			If ValueIsFilled(RowItemList.SalesOrder) Then
+				RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.Sales;
+			Else
+				RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
+			EndIf;
 		Else
 			RowRefObject.TransactionTypeGR = Source.TransactionType;
 		EndIf;

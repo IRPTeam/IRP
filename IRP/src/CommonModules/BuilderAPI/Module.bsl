@@ -323,13 +323,14 @@ EndFunction
 //  PostingMode - DocumentPostingMode - Posting mode
 //  Object - DocumentObjectDocumentName - Update current object
 //  CheckFilling - Boolean - 
+// 	Hook - String -
 // 
 // Returns:
 //  Structure - Write:
 // * Context - See CreateWrapper
 // * Ref - DocumentRefDocumentName, CatalogRefCatalogName -
 // * Object - DocumentObjectDocumentName, CatalogObjectCatalogName - If set Object at parameter then returned updated object
-Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object = Undefined, CheckFilling = False) Export
+Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object = Undefined, CheckFilling = False, Hook = Undefined) Export
 	ObjMetadata = Wrapper.Object.Ref.Metadata(); // MetadataObjectCatalog, MetadataObjectDocument 
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
@@ -363,18 +364,30 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 			
 			If CheckFilling Then
 				If Not Doc.CheckFilling() Then
-                                        Raise R().ErrorOnPostingDocument;
+                	Raise R().ErrorOnPostingDocument;
 				EndIf;
 			EndIf;
 			
-			Doc.Write(
-				?(
-					WriteMode = Undefined, 
-					?(Doc.Posted, DocumentWriteMode.Posting, DocumentWriteMode.Write), 
-					WriteMode
-				),
-				?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode)
-			);
+			_PostingMode = PostingMode;
+			If _PostingMode = Undefined Then
+				_PostingMode = DocumentPostingMode.Regular;
+			EndIf;
+			
+			_WriteMode = WriteMode;
+			If _WriteMode = Undefined Then
+				If Doc.Posted Then
+					_WriteMode = DocumentWriteMode.Posting;
+				Else
+					_WriteMode = DocumentWriteMode.Write;
+				EndIf;
+			EndIf;
+			
+			If Hook <> Undefined Then
+				//@skip-check server-execution-safe-mode
+				Execute(Hook + "(Doc)");
+			EndIf;
+			
+			Doc.Write( _WriteMode, _PostingMode);
 			Wrapper.Object.Ref = Doc.Ref;
 		Else
 			Result.Insert("Object", Doc);

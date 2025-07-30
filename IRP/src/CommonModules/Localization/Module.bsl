@@ -2607,6 +2607,7 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en = 'Show only active items'", Lang));
 	Strings.Insert("InternalCommands_ShowNumerator", NStr("en = 'Show numerator'", Lang));
 	Strings.Insert("InternalCommands_ShowNumerator_Check", NStr("en = 'Hide numerator'", Lang));
+	Strings.Insert("InternalCommands_EditQuantity", NStr("en = 'Edit quantity'", Lang));
 #EndRegion
 	
 #Region FormulaEditor

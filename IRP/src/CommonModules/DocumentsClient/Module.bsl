@@ -1147,7 +1147,8 @@ Function GetFormItemNames()
 				|CalculationsKey,
 				|RecordsKey, ItemListIsClosedOrder,
 				|AllocationResultKey, AllocationResultRowID, AllocationResultBasisRowID,
-				|ItemListIsUnlockItemKey, ItemListIsUnlockStore";
+				|ItemListIsUnlockItemKey, ItemListIsUnlockStore,
+				|SelectedRowKey, Childrens";
 	Return ItemNames;
 EndFunction	
 

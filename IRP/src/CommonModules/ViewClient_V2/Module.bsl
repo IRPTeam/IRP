@@ -2854,7 +2854,7 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder" Then
 		
-		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
+		RowIDInfoClientServer.UpdateQuantity(Parameters.Object);
 	EndIf;
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentConfirmations") Then

@@ -7827,7 +7827,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status,
 			|ItemListSetProcurementMethods, TransactionType";
 				
-		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company              , Company,
 							  |Branch               , Branch,
@@ -7845,7 +7845,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 		Result.Header   = "Company, Store, RetailCustomer, Currency, PriceIncludeTax, Status,
 			|ItemListSetProcurementMethods, TransactionType";
 				
-		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company              , Company,
 							  |RetailCustomer       , RetailCustomer,
@@ -7858,7 +7858,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 		
 	ElsIf ExternalDocAliase = Aliases.PRR Then
 		Result.Header   = "Company, Branch, Store, Status, ItemListSetProcurementMethods";
-		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -7869,7 +7869,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 	ElsIf ExternalDocAliase = Aliases.SC Then
 		Result.Header       = "Company, Branch, Store, Partner, LegalName, Status, ItemListSetProcurementMethods, TransactionType";
 		
-		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -7883,7 +7883,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 	ElsIf ExternalDocAliase = Aliases.SPO Then
 		Result.Header       = "Company, Branch, Store, Partner, LegalName, Status, ItemListSetProcurementMethods, TransactionType";
 		
-		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -7897,7 +7897,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 	ElsIf ExternalDocAliase = Aliases.RSC Then
 		Result.Header       = "Company, ShipmentMode, Store, Partner, LegalName, Status, ItemListSetProcurementMethods, TransactionType, RetailCustomer";
 		
-		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |RetailCustomer    , RetailCustomer,
@@ -7908,7 +7908,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 		
 	ElsIf ExternalDocAliase = Aliases.PO Or ExternalDocAliase = Aliases.PI Then
 		Result.Header   = "Company, Branch, Status, ItemListSetProcurementMethods";
-		Result.ItemList = "Item, ItemKey, ProcurementMethod, Cancel, CancelReason";
+		Result.ItemList = "Item, ItemKey, ProcurementMethod, Cancel, CancelReason, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -7919,7 +7919,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status,
 			|ItemListSetProcurementMethods, TransactionType";
 			
-		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company              , Company,
 							  |Branch               , Branch,
@@ -7936,7 +7936,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 	ElsIf ExternalDocAliase = Aliases.WS Then
 		Result.Header       = "Company, Branch, Store, Partner, LegalName, Status, ItemListSetProcurementMethods, TransactionType";
 		
-		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company            , Company,
 							  |Branch             , Branch,
@@ -8808,7 +8808,7 @@ Function GetFieldsToLock_ExternalLink_SI(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SC Or ExternalDocAliase = Aliases.WS Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, UseWorkSheet";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, UseWorkSheet, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -8820,7 +8820,7 @@ Function GetFieldsToLock_ExternalLink_SI(ExternalDocAliase, Aliases)
 	
 	ElsIf ExternalDocAliase = Aliases.SRO Or ExternalDocAliase = Aliases.SR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company              , Company,
 							  |Branch               , Branch,
@@ -9147,7 +9147,7 @@ Function GetFieldsToLock_ExternalLink_SC(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SI Then 
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -9158,7 +9158,7 @@ Function GetFieldsToLock_ExternalLink_SC(ExternalDocAliase, Aliases)
 							  |Store             , ItemList.Store";
 	ElsIf ExternalDocAliase = Aliases.PR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company            , Company,
 							  |Branch             , Branch,
@@ -9169,7 +9169,7 @@ Function GetFieldsToLock_ExternalLink_SC(ExternalDocAliase, Aliases)
 							  |Store              , ItemList.Store";
 	ElsIf ExternalDocAliase = Aliases.GR Then 
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -9466,7 +9466,7 @@ Function GetFieldsToLock_ExternalLink_SPO(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SI Then 
 		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -9477,7 +9477,7 @@ Function GetFieldsToLock_ExternalLink_SPO(ExternalDocAliase, Aliases)
 							  
 	ElsIf ExternalDocAliase = Aliases.SC Then 
 		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -9685,7 +9685,7 @@ Function GetFieldsToLock_ExternalLink_RSC(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.RSR Or ExternalDocAliase = Aliases.RGR Then 
 		Result.Header   = "Company, Store, RetailCustomer, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit";
 		
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
@@ -9877,7 +9877,7 @@ Function GetFieldsToLock_ExternalLink_SRO(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, Cancel, CancelReason";
+		Result.ItemList = "Item, ItemKey, Store, Cancel, CancelReason, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company              , Company,
 							  |Branch               , Branch,
@@ -10026,7 +10026,7 @@ Function GetFieldsToLock_ExternalLink_PO(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.PI Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, Cancel, CancelReason";
+		Result.ItemList = "Item, ItemKey, Store, Cancel, CancelReason, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company                  , Company,
 							  |Branch                   , Branch,
@@ -10041,7 +10041,7 @@ Function GetFieldsToLock_ExternalLink_PO(ExternalDocAliase, Aliases)
 	
 	ElsIf ExternalDocAliase = Aliases.GR Then
 		Result.Header       = "Company, Branch, Store, Partner, LegalName, Status, TransactionType";
-		Result.ItemList     = "Item, ItemKey, Store, Cancel, CancelReason";
+		Result.ItemList     = "Item, ItemKey, Store, Cancel, CancelReason, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company            , Company,
 							  |Branch             , Branch,
@@ -10291,7 +10291,7 @@ Function GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.PI Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company        , Company,
 						  |Branch             , Branch,
@@ -10302,7 +10302,7 @@ Function GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases)
 						  |Store              , ItemList.Store";
 	ElsIf ExternalDocAliase = Aliases.SR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "CompanyReturn       , Company,
 						  |BranchReturn            , Branch,
@@ -10313,7 +10313,7 @@ Function GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases)
 						  |StoreReturn       , ItemList.Store";
 	ElsIf ExternalDocAliase = Aliases.SC Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = 
 		                  "Company            , Company,
@@ -10683,7 +10683,7 @@ Function GetFieldsToLock_ExternalLink_RGR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.RSC Then 
 		Result.Header   = "Company, Store, RetailCustomer, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit";
 		
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
@@ -10692,7 +10692,7 @@ Function GetFieldsToLock_ExternalLink_RGR(ExternalDocAliase, Aliases)
 							  |Store             , ItemList.Store";
 	ElsIf ExternalDocAliase = Aliases.RRR Then 
 		Result.Header   = "Company, Branch, Store, RetailCustomer, TransactionType, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit";
 		
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "CompanyReturn     , Company,
@@ -10821,7 +10821,7 @@ Function GetFieldsToLock_ExternalLink_PI(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.GR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, UseGoodsReceipt";
+		Result.ItemList = "Item, ItemKey, Store, UseGoodsReceipt, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company            , Company,
 							  |Branch             , Branch,
@@ -10833,7 +10833,7 @@ Function GetFieldsToLock_ExternalLink_PI(ExternalDocAliase, Aliases)
 	
 	ElsIf ExternalDocAliase = Aliases.PRO Or ExternalDocAliase = Aliases.PR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company                  , Company,
 							  |Branch                   , Branch,
@@ -11136,7 +11136,7 @@ Function GetFieldsToLock_ExternalLink_ITO(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.IT Then
 		Result.Header   = "Company, Branch, StoreReceiver, StoreSender, Status";
-		Result.ItemList = "Item, ItemKey";
+		Result.ItemList = "Item, ItemKey, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company          , Company,
 							  |Branch           , Branch,
@@ -11256,7 +11256,7 @@ Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SC Then
 		Result.Header   = "Company, Branch, StoreSender, UseShipmentConfirmation";
-		Result.ItemList = "Item, ItemKey";
+		Result.ItemList = "Item, ItemKey, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -11441,7 +11441,7 @@ Function GetFieldsToLock_ExternalLink_ISR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.ITO Or ExternalDocAliase = Aliases.PI Or ExternalDocAliase = Aliases.PO Then
 		Result.Header   = "Company, Branch, Store";
-		Result.ItemList = "Item, ItemKey";
+		Result.ItemList = "Item, ItemKey, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -11556,7 +11556,7 @@ Function GetFieldsToLock_ExternalLink_PR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SC Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company            , Company,
 							  |Branch             , Branch,
@@ -11691,7 +11691,7 @@ Function GetFieldsToLock_ExternalLink_SR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.GR Then
 		Result.Header       = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList     = "Item, ItemKey, Store, UseGoodsReceipt";
+		Result.ItemList     = "Item, ItemKey, Store, UseGoodsReceipt, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -11819,7 +11819,7 @@ Function GetFieldsToLock_ExternalLink_PRO(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.PR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
-		Result.ItemList = "Item, ItemKey, Store, Cancel";
+		Result.ItemList = "Item, ItemKey, Store, Cancel, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company                  , Company,
 							  |Branch                   , Branch,
@@ -11971,7 +11971,7 @@ Function GetFieldsToLock_ExternalLink_RSR(ExternalDocAliase, Aliases)
 	If ExternalDocAliase = Aliases.RRR Then
 		Result.Header   = "Company, Store, Partner, LegalName, Agreement, RetailCustomer, Currency, 
 			|PriceIncludeTax, UsePartnerTransactions";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company          , Company,
 							  |PartnerSales     , Partner,
@@ -11980,7 +11980,7 @@ Function GetFieldsToLock_ExternalLink_RSR(ExternalDocAliase, Aliases)
 							  |Store            , ItemList.Store";
 	ElsIf ExternalDocAliase = Aliases.RSC Then
 		Result.Header   = "Company, Store, RetailCustomer";
-		Result.ItemList = "Item, ItemKey, Store";
+		Result.ItemList = "Item, ItemKey, Store, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company          , Company,
 							  |RetailCustomer   , RetailCustomer,
@@ -11989,7 +11989,7 @@ Function GetFieldsToLock_ExternalLink_RSR(ExternalDocAliase, Aliases)
 							  
 	ElsIf ExternalDocAliase = Aliases.RGR Then
 		Result.Header   = "Company, Partner, LegalName, RetailCustomer";
-		Result.ItemList = "Item, ItemKey";
+		Result.ItemList = "Item, ItemKey, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company          , Company,
 							  |RetailCustomer   , RetailCustomer,	
@@ -12258,7 +12258,7 @@ Function GetFieldsToLock_ExternalLink_PhysicalInventory(ExternalDocAliase, Alias
 	If ExternalDocAliase = Aliases.StockAdjustmentAsSurplus 
 		Or ExternalDocAliase = Aliases.StockAdjustmentAsWriteOff Then
 		Result.Header   = "Store, Status, FillExpCount, UpdatePhysCount";
-		Result.ItemList = "Item, ItemKey";
+		Result.ItemList = "Item, ItemKey, PhysCount, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Store   , Store,
 							  |ItemKey , ItemList.ItemKey";
@@ -12355,7 +12355,7 @@ Function GetFieldsToLock_ExternalLink_WO(ExternalDocAliase, Aliases)
 	If ExternalDocAliase = Aliases.WS Then
 		Result.Header   = "Company, Branch, Partner, LegalName, Status";
 
-		Result.ItemList = "Item, ItemKey";
+		Result.ItemList = "Item, ItemKey, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company              , Company,
 							  |Branch               , Branch,
@@ -12366,7 +12366,7 @@ Function GetFieldsToLock_ExternalLink_WO(ExternalDocAliase, Aliases)
 	
 	ElsIf ExternalDocAliase = Aliases.SI Then
 		Result.Header   = "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
-		Result.ItemList = "Item, ItemKey";
+		Result.ItemList = "Item, ItemKey, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company              , Company,
 							  |Branch               , Branch,
@@ -12594,7 +12594,7 @@ Function GetFieldsToLock_ExternalLink_WS(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SI Then 
 		Result.Header   = "Company, Branch, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey";
+		Result.ItemList = "Item, ItemKey, Quantity, Unit";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -14157,9 +14157,25 @@ Function GetBasisesInfo(Basis, BasisKey, RowID, ErrorInfo = Undefined) Export
 	Return BasisInfo;
 EndFunction
 
-Procedure CreateChildrenTree(Basis, BasisKey, RowID, ChildrenTreeRows) Export
+Function CreateChildrenTree2(Basis, BasisKey, RowID, ChildrenTreeRows) Export
+	ArrayOfChildren = New Array();
+	CreateChildrenTree(Basis, BasisKey, RowID, ChildrenTreeRows, ArrayOfChildren);
+	Return ArrayOfChildren;
+EndFunction
+
+Procedure CreateChildrenTree(Basis, BasisKey, RowID, ChildrenTreeRows, ArrayOfChildren = Undefined) Export
 	ArrayOfChildrenInfo = GetChildrenInfo(Basis, BasisKey, RowID);
 	For Each ChildrenInfo In ArrayOfChildrenInfo Do
+		
+		If ArrayOfChildren <> Undefined Then
+			ChildrenItem = New Structure();
+			ChildrenItem.Insert("BasisKey" , ChildrenInfo.BasisKey);
+			ChildrenItem.Insert("Children" , ChildrenInfo.Children);
+			ChildrenItem.Insert("RowID"    , ChildrenInfo.RowID);
+			ChildrenItem.Insert("RowRef"   , ChildrenInfo.RowRef);
+			ArrayOfChildren.Add(ChildrenItem);
+		EndIf;
+		
 		NewChildrenTreeRow = ChildrenTreeRows.Add();
 		NewChildrenTreeRow.Picture = 1;
 		NewChildrenTreeRow.RowPresentation = String(ChildrenInfo.Children);
@@ -14174,7 +14190,7 @@ Procedure CreateChildrenTree(Basis, BasisKey, RowID, ChildrenTreeRows) Export
 			_ChildrenTreeRow = NewChildrenTreeRow.GetItems();
 		EndIf;
 			
-		CreateChildrenTree(ChildrenInfo.Children, ChildrenInfo.BasisKey, ChildrenInfo.RowID, _ChildrenTreeRow);
+		CreateChildrenTree(ChildrenInfo.Children, ChildrenInfo.BasisKey, ChildrenInfo.RowID, _ChildrenTreeRow, ArrayOfChildren);
 	EndDo;
 EndProcedure
 
@@ -14205,6 +14221,44 @@ Function GetChildrenInfo(Basis, BasisKey, RowID) Export
 		ArrayOfChildrenInfo.Add(ChildrenInfo);
 	EndDo;
 	Return ArrayOfChildrenInfo;
+EndFunction
+
+Function EditQuantity(Ref, SelectedRowKey, Quantity, Unit, ArrayOfChildrens) Export
+	HaveErrors = False;
+	BeginTransaction();
+	Try
+		Doc = BuilderAPI.Initialize(Ref);
+		BuilderAPI.SetRowProperty(Doc, SelectedRowKey, "Quantity", Quantity, "ItemList");
+		BuilderAPI.SetRowProperty(Doc, SelectedRowKey, "Unit", Unit, "ItemList");	
+		BuilderAPI.Write(Doc,,,,,"RowIDInfoClientServer.UpdateQuantity");
+		
+		ChildtrenTable = New ValueTable();
+		ChildtrenTable.Columns.Add("DocRef");
+		ChildtrenTable.Columns.Add("DocDate");
+		
+		For Each ChildrenItem In ArrayOfChildrens Do
+			NewRow = ChildtrenTable.Add();
+			NewRow.DocRef = ChildrenItem;
+			NewRow.DocDate = ChildrenItem.Date;
+		EndDo;
+		
+		ChildtrenTable.Sort("DocDate");
+		
+		For Each Row In ChildtrenTable Do
+			DocObject = Row.DocRef.GetObject();
+			If DocObject.Posted Then
+				DocObject.Write(DocumentWriteMode.Posting);
+			EndIf;
+		EndDo;
+		
+		CommitTransaction();
+		
+	Except
+		RollbackTransaction();
+		CommonFunctionsClientServer.ShowUsersMessage(ErrorDescription());
+		HaveErrors = True;
+	EndTry;	
+	Return HaveErrors;
 EndFunction
 
 Function GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling = Undefined) Export

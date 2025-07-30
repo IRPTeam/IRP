@@ -2064,7 +2064,9 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 			RowRefObject.TransactionTypeSCReturn = Source.TransactionType;
 		ElsIf Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales Then
 			RowRefObject.TransactionTypeSC = Source.TransactionType;
-			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
+			If Not (ValueIsFilled(Row.Basis) And TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt")) Then
+				RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
+			EndIf;
 		Else
 			RowRefObject.TransactionTypeSC = Source.TransactionType;
 		EndIf;

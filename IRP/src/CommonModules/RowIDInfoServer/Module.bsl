@@ -1034,12 +1034,15 @@ Procedure FillRowID_SC(Source, Cancel)
 			For Each Row In IDInfoRowsTable Do
 				NewRow = Source.RowIDInfo.Add();
 				FillPropertyValues(NewRow, Row);
-				NewRow.NextStep = GetNextStep_SC(Source, RowItemList, NewRow);
 				If ValueIsFilled(Row.Basis) Then
 					BalanceQuantity = GetBalanceQuantity(Source, Row);
 					NewRow.Quantity = Min(BalanceQuantity, RowItemList.QuantityInBaseUnit);
+					If BalanceQuantity <> RowItemList.QuantityInBaseUnit Then
+						NewRow.NextStep = GetNextStep_SC(Source, RowItemList, NewRow);
+					EndIf;
 				Else
 					NewRow.Quantity = RowItemList.QuantityInBaseUnit;
+					NewRow.NextStep = GetNextStep_SC(Source, RowItemList, NewRow);
 				EndIf;
 				TotalQuantity = TotalQuantity + NewRow.Quantity;
 			EndDo;

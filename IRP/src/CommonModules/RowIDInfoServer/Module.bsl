@@ -1034,15 +1034,12 @@ Procedure FillRowID_SC(Source, Cancel)
 			For Each Row In IDInfoRowsTable Do
 				NewRow = Source.RowIDInfo.Add();
 				FillPropertyValues(NewRow, Row);
+				NewRow.NextStep = GetNextStep_SC(Source, RowItemList, NewRow);
 				If ValueIsFilled(Row.Basis) Then
 					BalanceQuantity = GetBalanceQuantity(Source, Row);
 					NewRow.Quantity = Min(BalanceQuantity, RowItemList.QuantityInBaseUnit);
-					If BalanceQuantity <> RowItemList.QuantityInBaseUnit Then
-						NewRow.NextStep = GetNextStep_SC(Source, RowItemList, NewRow);
-					EndIf;
 				Else
 					NewRow.Quantity = RowItemList.QuantityInBaseUnit;
-					NewRow.NextStep = GetNextStep_SC(Source, RowItemList, NewRow);
 				EndIf;
 				TotalQuantity = TotalQuantity + NewRow.Quantity;
 			EndDo;
@@ -1748,7 +1745,9 @@ Function GetNextStep_SC(Source, ItemList, Row)
 		NextStep = Catalogs.MovementRules.SI;
 	ElsIf Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales Then
 		If ValueIsFilled(Row.Basis) And TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt") Then
-			NextStep = Catalogs.MovementRules.SI;
+			NextStep = Catalogs.MovementRules.SI;   
+		ElsIf ValueIsFilled(ItemList.SalesInvoice) Then
+			// nothing	
 		Else
 			NextStep = Catalogs.MovementRules.SI_GR;
 		EndIf;

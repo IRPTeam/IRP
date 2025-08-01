@@ -1209,7 +1209,7 @@ Procedure FillRowID_PI(Source, Cancel)
 			If RowItemList.UseGoodsReceipt Then 
 				ArrayForDelete = New Array();
 				For Each Row In Source.RowIDInfo Do
-					If ProcessedRows.Find(Row) = Undefined Then
+					If ProcessedRows.Find(Row) = Undefined And IDInfoRows.Find(Row) <> Undefined  Then
 						ArrayForDelete.Add(Row);
 					EndIf;
 				EndDo;

@@ -1185,19 +1185,39 @@ Procedure FillRowID_PI(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		ProcessedRows = New Array();
+		
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
 			FillRowID(Row, RowItemList);
 			Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
 		Else
+			
 			For Each Row In IDInfoRows Do
 				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
 					Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
+					ProcessedRows.Add(Row);
+					If RowItemList.UseGoodsReceipt Then
+						break;
+					EndIf;
 					Continue;
 				EndIf;
 				FillRowID(Row, RowItemList);
 				Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
 			EndDo;
+			
+			If RowItemList.UseGoodsReceipt Then 
+				ArrayForDelete = New Array();
+				For Each Row In Source.RowIDInfo Do
+					If ProcessedRows.Find(Row) = Undefined Then
+						ArrayForDelete.Add(Row);
+					EndIf;
+				EndDo;
+				For Each ItemDelete In ArrayForDelete Do
+					Source.RowIDInfo.Delete(ItemDelete);
+				EndDo;
+			EndIf;
+			
 		EndIf;
 	EndDo;
 
@@ -1220,6 +1240,16 @@ Procedure FillRowID_PI(Source, Cancel)
 		NewRow.CurrentStep = Undefined;
 		NewRow.NextStep    = Catalogs.MovementRules.SI_SC;
 		NewRow.Quantity    = Row.Value;
+	EndDo;
+	
+	ArrayForDelete = New Array();
+	For Each Row In Source.RowIDInfo Do
+		If Not ValueIsFilled(Row.CurrentStep) And Not ValueIsFilled(Row.NextStep) Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemDelete In ArrayForDelete Do
+		Source.RowIDInfo.Delete(ItemDelete);
 	EndDo;
 EndProcedure
 
@@ -1792,7 +1822,9 @@ Function GetNextStep_GR(Source, ItemList, Row)
 		And Not ValueIsFilled(ItemList.PurchaseInvoice) Then
 		NextStep = Catalogs.MovementRules.PI;
 	ElsIf Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase Then
-		If ValueIsFilled(ItemList.SalesOrder) Then
+		If ValueIsFilled(ItemList.PurchaseInvoice) Then
+			// nothing
+		ElsIf ValueIsFilled(ItemList.SalesOrder) Then
 			NextStep = Catalogs.MovementRules.PI;
 		Else
 			NextStep = Catalogs.MovementRules.PI_SC;	

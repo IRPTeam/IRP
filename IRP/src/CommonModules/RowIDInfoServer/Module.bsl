@@ -1227,6 +1227,9 @@ Procedure FillRowID_PI(Source, Cancel)
 		
 	// Sales rows
 	For Each Item In ArraySalesRows Do
+		If Source.GoodsReceipts.FindRows(New Structure("Key", Item.ItemListRow.Key)).Count() <> 0 Then
+			Continue;
+		EndIf;
 		NewRowID = Source.RowIDInfo.Add();
 		FillPropertyValues(NewRowID, Item.Row);
 		NewRowID.CurrentStep = Undefined;

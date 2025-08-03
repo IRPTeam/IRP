@@ -2,11 +2,11 @@
 
 #Region Public
 
-// Palce holder.
+// Place holder.
 // 
 // Returns:
-//  String - Palce holder
-Function PalceHolder() Export
+//  String - Place holder
+Function PlaceHolder() Export
 	Return "Stored in secure storage";
 EndFunction
 
@@ -31,7 +31,7 @@ EndProcedure
 //  Value - Arbitrary - Value to store
 Procedure Add(Owner, Key, Value) Export
 	
-	If Value = PalceHolder() Then
+	If Value = PlaceHolder() Then
 		Return;
 	EndIf;
 	

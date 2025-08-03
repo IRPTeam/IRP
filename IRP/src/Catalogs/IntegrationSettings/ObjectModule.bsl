@@ -26,7 +26,7 @@ Procedure UpdateSecureStorage()
 				SetPrivilegedMode(True);
 				SecureDataStorage.Add(ThisObject.Ref, Row.Key, Row.Value);
 				SetPrivilegedMode(False);
-				Row.Value = SecureDataStorage.PalceHolder();
+				Row.Value = SecureDataStorage.PlaceHolder();
 			EndIf;
 		EndDo;
 		For Each Row In ThisObject.ConnectionSettingTest Do
@@ -34,7 +34,7 @@ Procedure UpdateSecureStorage()
 				SetPrivilegedMode(True);
 				SecureDataStorage.Add(ThisObject.Ref, "Test_" + Row.Key, Row.Value);
 				SetPrivilegedMode(False);
-				Row.Value = SecureDataStorage.PalceHolder();
+				Row.Value = SecureDataStorage.PlaceHolder();
 			EndIf;
 		EndDo;
 	EndIf;

@@ -2423,7 +2423,7 @@ Async Function ItemListSplitRow(Object, Form) Export
 	
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
 	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
-	RowIDInfoClient.UpdateQuantity(Object, Form);
+	RowIDInfoClientServer.UpdateQuantity(Object);
 	SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Object, Form);	
 	Return NewRow;
 EndFunction

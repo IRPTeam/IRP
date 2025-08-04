@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @LoadInfo
@@ -146,7 +146,7 @@ Scenario: _020000 preparation (Loadinfo)
 				| 'Description'     |
 				| 'Bank UA'         |
 			And I select current line in "List" table
-			And in the table "ConnectionSetting" I click "Test" button
+			And I click "Test" button
 			// Given Recent TestClient message contains "Received response from bank.gov.ua:443 Status code: 200" string			
 			And Delay 80
 		And I close all client application windows

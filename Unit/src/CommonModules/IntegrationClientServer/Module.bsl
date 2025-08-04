@@ -2,8 +2,8 @@
 #Region Public
 
 &Around("SendRequestClientServer")
-Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint, AddInfo)
-	
+Function Unit_SendRequestClientServer(ConnectionSettingData, ResourceParameters, RequestParameters, RequestBody, EndPoint, AddInfo)
+	ConnectionSetting = ConnectionSettingData.Value;
 	isNeedingToSaveExchange = CommonFunctionsServer.GetRefAttribute(ConnectionSetting.IntegrationSettingsRef, "Unit_SaveExchangeHistory");
 	
 	If isNeedingToSaveExchange Then 

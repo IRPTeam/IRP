@@ -1236,6 +1236,16 @@ Procedure FillRowID_PI(Source, Cancel)
 		NewRowID.NextStep    = Catalogs.MovementRules.SI_SC;
 		NewRowID.Quantity    = Item.ItemListRow.QuantityInBaseUnit;
 	EndDo;
+	
+	For Each RowItemList In Source.ItemList Do
+		Filter = New Structure();
+		Filter.Insert("Key", RowItemList.Key);
+		IDInfoRows = Source.RowIDInfo.FindRows(Filter);
+		If IDInfoRows.Count() = 0 Then
+			NewRowID = Source.RowIDInfo.Add();
+			FillRowID(NewRowID, RowItemList);
+		EndIf;
+	EndDo;
 EndProcedure
 
 Procedure FillRowID_GR(Source, Cancel)

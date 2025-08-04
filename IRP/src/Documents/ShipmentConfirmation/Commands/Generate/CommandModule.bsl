@@ -1,8 +1,9 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter", New Structure("Basises, Ref", CommandParameter, PredefinedValue(
-		"Document.ShipmentConfirmation.EmptyRef")));
+	FormParameters.Insert("Filter", 
+		New Structure("Basises, Ref", CommandParameter, 
+		PredefinedValue("Document.ShipmentConfirmation.EmptyRef")));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo());
 	FormParameters.Insert("SetAllCheckedOnOpen", True);
 	RowIDInfoClient.OpenForm_AddLinkedDocumentRows(Undefined, ThisObject, FormParameters, "AddDocumentRowsContinue");

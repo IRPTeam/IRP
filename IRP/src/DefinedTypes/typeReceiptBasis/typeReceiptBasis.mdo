@@ -10,6 +10,7 @@
   </synonym>
   <type>
     <types>DocumentRef.PurchaseInvoice</types>
+    <types>DocumentRef.ShipmentConfirmation</types>
     <types>DocumentRef.Unbundling</types>
     <types>DocumentRef.PurchaseOrder</types>
     <types>DocumentRef.SalesReturn</types>

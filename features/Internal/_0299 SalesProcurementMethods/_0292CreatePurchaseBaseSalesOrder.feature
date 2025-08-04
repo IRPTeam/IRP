@@ -529,9 +529,9 @@ Scenario: _029202 create PI and GR based on PO that based on SO
 			And I close current window		
 			And I click "Show row key" button
 			And "RowIDInfo" table contains lines
-				| '#'    | 'Key'    | 'Basis'                      | 'Row ID'                                  | 'Next step'    | 'Quantity'    | 'Basis key'                      | 'Current step'    | 'Row ref'                                  |
-				| '1'    | '*'      | '$$GoodsReceipt0292022$$'    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'    | ''             | '1,000'       | '$$Rov1GoodsReceipt0292022$$'    | 'PI'              | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'     |
-				| '2'    | '*'      | '$$GoodsReceipt0292022$$'    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'    | ''             | '20,000'      | '$$Rov2GoodsReceipt0292022$$'    | 'PI'              | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'     |
+				| '#' | 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                   | 'Current step' | 'Row ref'                              |
+				| '1' | '*'   | '$$GoodsReceipt0292022$$' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | ''          | '1,000'    | '$$Rov1GoodsReceipt0292022$$' | 'PI'           | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' |
+				| '2' | '*'   | '$$GoodsReceipt0292022$$' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | ''          | '20,000'   | '$$Rov2GoodsReceipt0292022$$' | 'PI'           | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice0292022$$" variable
 			And I delete "$$PurchaseInvoice0292022$$" variable
@@ -698,78 +698,78 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 Scenario: _029205 check movements in the register TM1010B_RowIDMovements
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TM1010B_RowIDMovements"
 	And "List" table contains lines
-		| 'Recorder'                                   | 'Row ID'                                | 'Step'      | 'Basis'                                      | 'Row ref'                               | 'Quantity'   |
-		| 'Sales order 501 dated 30.03.2021 11:56:21'  | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PO&PI'     | 'Sales order 501 dated 30.03.2021 11:56:21'  | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '5,000'      |
-		| 'Sales order 501 dated 30.03.2021 11:56:21'  | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'PO&PI'     | 'Sales order 501 dated 30.03.2021 11:56:21'  | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '2,000'      |
-		| 'Sales order 501 dated 30.03.2021 11:56:21'  | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7'  | 'SI&WO&WS'  | 'Sales order 501 dated 30.03.2021 11:56:21'  | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7'  | '1,000'      |
-		| 'Sales order 501 dated 30.03.2021 11:56:21'  | '2e0968f4-d293-4faa-abe0-d25c849e9c32'  | 'SI&SC'     | 'Sales order 501 dated 30.03.2021 11:56:21'  | '2e0968f4-d293-4faa-abe0-d25c849e9c32'  | '5,000'      |
-		| 'Sales order 501 dated 30.03.2021 11:56:21'  | '2659612d-158f-49a2-bbf4-46c70f05eb9d'  | 'SI&SC'     | 'Sales order 501 dated 30.03.2021 11:56:21'  | '2659612d-158f-49a2-bbf4-46c70f05eb9d'  | '10,000'     |
-		| 'Sales order 502 dated 30.03.2021 11:56:28'  | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | 'PO&PI'     | 'Sales order 502 dated 30.03.2021 11:56:28'  | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | '8,000'      |
-		| 'Sales order 502 dated 30.03.2021 11:56:28'  | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'PO&PI'     | 'Sales order 502 dated 30.03.2021 11:56:28'  | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| 'Sales order 502 dated 30.03.2021 11:56:28'  | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'PO&PI'     | 'Sales order 502 dated 30.03.2021 11:56:28'  | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '8,000'      |
-		| 'Sales order 502 dated 30.03.2021 11:56:28'  | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7'  | 'SI&WO&WS'  | 'Sales order 502 dated 30.03.2021 11:56:28'  | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7'  | '2,000'      |
-		| 'Sales order 503 dated 30.03.2021 11:57:06'  | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'PO&PI'     | 'Sales order 503 dated 30.03.2021 11:57:06'  | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| 'Sales order 503 dated 30.03.2021 11:57:06'  | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'PO&PI'     | 'Sales order 503 dated 30.03.2021 11:57:06'  | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| 'Sales order 503 dated 30.03.2021 11:57:06'  | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'PO&PI'     | 'Sales order 503 dated 30.03.2021 11:57:06'  | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '10,000'     |
-		| '$$PurchaseOrder029201$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PO&PI'     | 'Sales order 501 dated 30.03.2021 11:56:21'  | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '5,000'      |
-		| '$$PurchaseOrder029201$$'                    | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | 'PO&PI'     | 'Sales order 502 dated 30.03.2021 11:56:28'  | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | '8,000'      |
-		| '$$PurchaseOrder029201$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'PO&PI'     | 'Sales order 501 dated 30.03.2021 11:56:21'  | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '2,000'      |
-		| '$$PurchaseOrder029201$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'PO&PI'     | 'Sales order 502 dated 30.03.2021 11:56:28'  | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$PurchaseOrder029201$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'PO&PI'     | 'Sales order 502 dated 30.03.2021 11:56:28'  | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '8,000'      |
-		| '$$PurchaseOrder029201$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'PO&PI'     | 'Sales order 503 dated 30.03.2021 11:57:06'  | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| '$$PurchaseOrder029201$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'PO&PI'     | 'Sales order 503 dated 30.03.2021 11:57:06'  | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| '$$PurchaseOrder029201$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'PO&PI'     | 'Sales order 503 dated 30.03.2021 11:57:06'  | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '10,000'     |
-		| '$$PurchaseOrder029201$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '5,000'      |
-		| '$$PurchaseOrder029201$$'                    | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | '8,000'      |
-		| '$$PurchaseOrder029201$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '2,000'      |
-		| '$$PurchaseOrder029201$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$PurchaseOrder029201$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '15,000'     |
-		| '$$PurchaseOrder029201$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| '$$PurchaseOrder029201$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| '$$PurchaseOrder029201$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '20,000'     |
-		| '$$PurchaseOrder029201$$'                    | '$$Rov9PurchaseOrder029201$$'           | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '$$Rov9PurchaseOrder029201$$'           | '40,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '4,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | '8,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '2,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '15,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '$$Rov9PurchaseOrder029201$$'           | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '$$Rov9PurchaseOrder029201$$'           | '40,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '4,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '3,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '15,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '$$Rov9PurchaseOrder029201$$'           | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '$$Rov9PurchaseOrder029201$$'           | '40,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'SI&SC'     | '$$PurchaseInvoice0292021$$'                 | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | 'SI&SC'     | '$$PurchaseInvoice0292021$$'                 | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | '8,000'      |
-		| '$$GoodsReceipt0292021$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '4,000'      |
-		| '$$GoodsReceipt0292021$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '3,000'      |
-		| '$$GoodsReceipt0292021$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '15,000'     |
-		| '$$GoodsReceipt0292021$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| '$$GoodsReceipt0292021$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| '$$GoodsReceipt0292021$$'                    | '$$Rov9PurchaseOrder029201$$'           | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '$$Rov9PurchaseOrder029201$$'           | '40,000'     |
-		| '$$GoodsReceipt0292021$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'SI&SC'     | '$$GoodsReceipt0292021$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| '$$GoodsReceipt0292021$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'SI&SC'     | '$$GoodsReceipt0292021$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| '$$GoodsReceipt0292021$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'SI&SC'     | '$$GoodsReceipt0292021$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '15,000'     |
-		| '$$GoodsReceipt0292021$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'SI&SC'     | '$$GoodsReceipt0292021$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '3,000'      |
-		| '$$GoodsReceipt0292021$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'SI&SC'     | '$$GoodsReceipt0292021$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '4,000'      |
-		| '$$GoodsReceipt0292022$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '1,000'      |
-		| '$$GoodsReceipt0292022$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '20,000'     |
-		| '$$GoodsReceipt0292022$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PI'        | '$$GoodsReceipt0292022$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '1,000'      |
-		| '$$GoodsReceipt0292022$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'PI'        | '$$GoodsReceipt0292022$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '20,000'     |
-		| '$$GoodsReceipt0292022$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'SI&SC'     | '$$GoodsReceipt0292022$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '20,000'     |
-		| '$$GoodsReceipt0292022$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'SI&SC'     | '$$GoodsReceipt0292022$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '1,000'      |
-		| '$$PurchaseInvoice0292022$$'                 | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PI'        | '$$GoodsReceipt0292022$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '1,000'      |
-		| '$$PurchaseInvoice0292022$$'                 | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'PI'        | '$$GoodsReceipt0292022$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '20,000'     |
-		| '$$SalesInvoice029203$$'                     | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7'  | 'SI&WO&WS'  | 'Sales order 502 dated 30.03.2021 11:56:28'  | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7'  | '2,000'      |
-		| '$$SalesInvoice029203$$'                     | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | 'SI&SC'     | '$$PurchaseInvoice0292021$$'                 | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | '8,000'      |
-		| '$$SalesInvoice029203$$'                     | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'SI&SC'     | '$$PurchaseInvoice0292021$$'                 | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$SalesInvoice029203$$'                     | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'SC'        | '$$SalesInvoice029203$$'                     | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$ShipmentConfirmation029203$$'             | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'SC'        | '$$SalesInvoice029203$$'                     | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$ShipmentConfirmation029204$$'             | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'SI&SC'     | '$$GoodsReceipt0292021$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '5,000'      |
-		| '$$ShipmentConfirmation029204$$'             | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'SI'        | '$$ShipmentConfirmation029204$$'             | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '5,000'      |
+		| 'Recorder'                                  | 'Row ID'                               | 'Step'     | 'Basis'                                     | 'Row ref'                              | 'Quantity' |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PO&PI'    | 'Sales order 501 dated 30.03.2021 11:56:21' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '5,000'    |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PO&PI'    | 'Sales order 501 dated 30.03.2021 11:56:21' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '2,000'    |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7' | 'SI&WO&WS' | 'Sales order 501 dated 30.03.2021 11:56:21' | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7' | '1,000'    |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | '2e0968f4-d293-4faa-abe0-d25c849e9c32' | 'SI&SC'    | 'Sales order 501 dated 30.03.2021 11:56:21' | '2e0968f4-d293-4faa-abe0-d25c849e9c32' | '5,000'    |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | '2659612d-158f-49a2-bbf4-46c70f05eb9d' | 'SI&SC'    | 'Sales order 501 dated 30.03.2021 11:56:21' | '2659612d-158f-49a2-bbf4-46c70f05eb9d' | '10,000'   |
+		| 'Sales order 502 dated 30.03.2021 11:56:28' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PO&PI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| 'Sales order 502 dated 30.03.2021 11:56:28' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PO&PI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| 'Sales order 502 dated 30.03.2021 11:56:28' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PO&PI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '8,000'    |
+		| 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI&WO&WS' | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | '2,000'    |
+		| 'Sales order 503 dated 30.03.2021 11:57:06' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PO&PI'    | 'Sales order 503 dated 30.03.2021 11:57:06' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| 'Sales order 503 dated 30.03.2021 11:57:06' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PO&PI'    | 'Sales order 503 dated 30.03.2021 11:57:06' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| 'Sales order 503 dated 30.03.2021 11:57:06' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PO&PI'    | 'Sales order 503 dated 30.03.2021 11:57:06' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '10,000'   |
+		| '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PO&PI'    | 'Sales order 501 dated 30.03.2021 11:56:21' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '5,000'    |
+		| '$$PurchaseOrder029201$$'                   | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PO&PI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$PurchaseOrder029201$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PO&PI'    | 'Sales order 501 dated 30.03.2021 11:56:21' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '2,000'    |
+		| '$$PurchaseOrder029201$$'                   | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PO&PI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$PurchaseOrder029201$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PO&PI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '8,000'    |
+		| '$$PurchaseOrder029201$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PO&PI'    | 'Sales order 503 dated 30.03.2021 11:57:06' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$PurchaseOrder029201$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PO&PI'    | 'Sales order 503 dated 30.03.2021 11:57:06' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$PurchaseOrder029201$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PO&PI'    | 'Sales order 503 dated 30.03.2021 11:57:06' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '10,000'   |
+		| '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '5,000'    |
+		| '$$PurchaseOrder029201$$'                   | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$PurchaseOrder029201$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '2,000'    |
+		| '$$PurchaseOrder029201$$'                   | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$PurchaseOrder029201$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$PurchaseOrder029201$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$PurchaseOrder029201$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$PurchaseOrder029201$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$PurchaseOrder029201$$'                   | '$$Rov9PurchaseOrder029201$$'          | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '$$Rov9PurchaseOrder029201$$'          | '40,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '4,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '2,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '$$Rov9PurchaseOrder029201$$'          | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '$$Rov9PurchaseOrder029201$$'          | '40,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '4,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '3,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '$$Rov9PurchaseOrder029201$$'          | 'GR'       | '$$PurchaseInvoice0292021$$'                | '$$Rov9PurchaseOrder029201$$'          | '40,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SI&SC'    | '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'SI&SC'    | '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '4,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '3,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '$$Rov9PurchaseOrder029201$$'          | 'GR'       | '$$PurchaseInvoice0292021$$'                | '$$Rov9PurchaseOrder029201$$'          | '40,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '3,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '4,000'    |
+		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI'       | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI'       | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'SI&SC'    | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'SI&SC'    | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$PurchaseInvoice0292022$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI'       | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$PurchaseInvoice0292022$$'                | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI'       | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$SalesInvoice029203$$'                    | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI&WO&WS' | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | '2,000'    |
+		| '$$SalesInvoice029203$$'                    | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'SI&SC'    | '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SI&SC'    | '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SC'       | '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$ShipmentConfirmation029203$$'            | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SC'       | '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '5,000'    |
+		| '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI'       | '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '5,000'    |
 	Then the number of "List" table lines is "равно" "86"
 	And I close all client application windows
 	

@@ -821,7 +821,7 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 			| 'Reference'           | 'Status'     | 'Count rows'   | 'Phys. count'    |
 			| 'Location count 1*'   | 'Prepared'   | ''             | ''               |
 			| 'Location count 2*'   | 'Prepared'   | ''             | ''               |
-			| 'Location count 3*'   | 'Prepared'   | '5'            | '222'            |
+			| 'Location count 3*'   | 'Prepared'   | '5'            | '222,000'        |
 		Then the number of "PhysicalCountByLocationList" table lines is "равно" 3
 		And I close all client application windows
 
@@ -1037,9 +1037,9 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I select current line in "List" table
 		And "PhysicalCountByLocationList" table contains lines
 			| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
-			| 'Location count 1*' | 'Prepared' | '4'          | '6'           |
+			| 'Location count 1*' | 'Prepared' | '4'          | '6,000'       |
 			| 'Location count 2*' | 'Prepared' | '*'          | '*'           |
-			| 'Location count 3*' | 'Prepared' | '5'          | '222'         |
+			| 'Location count 3*' | 'Prepared' | '5'          | '222,000'     |
 		Then the number of "PhysicalCountByLocationList" table lines is "равно" 3
 		And "ItemList" table became equal
 			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
@@ -1065,9 +1065,9 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I click "Save and close" button
 		And "PhysicalCountByLocationList" table contains lines
 			| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
-			| 'Location count 1*' | 'Done'     | '4'          | '6'           |
+			| 'Location count 1*' | 'Done'     | '4'          | '6,000'       |
 			| 'Location count 2*' | 'Prepared' | '*'          | '*'           |
-			| 'Location count 3*' | 'Prepared' | '5'          | '222'         |
+			| 'Location count 3*' | 'Prepared' | '5'          | '222,000'     |
 		And I move to "Items" tab
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal

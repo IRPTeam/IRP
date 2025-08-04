@@ -399,10 +399,10 @@ Scenario: _024004 create SI using form link/unlink
 		And I click "Show row key" button
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-		| '#'  | 'Basis'                                               | 'Next step'  | 'Quantity'  | 'Current step'   |
-		| '1'  | 'Sales order 15 dated 01.02.2021 19:50:45'            | ''           | '10,000'    | 'SI&SC'          |
-		| '2'  | 'Shipment confirmation 17 dated 25.02.2021 16:28:54'  | ''           | '10,000'    | 'SI'             |
-		| '3'  | 'Shipment confirmation 15 dated 25.02.2021 14:13:30'  | ''           | '7,000'     | 'SI'             |
+		| '#' | 'Basis'                                              | 'Next step' | 'Quantity' | 'Current step' |
+		| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000'   | 'SI&SC'        |
+		| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000'   | 'SI&GR'        |
+		| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'    | 'SI&GR'        |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
 		And I click the button named "LinkUnlinkBasisDocuments"
@@ -420,7 +420,7 @@ Scenario: _024004 create SI using form link/unlink
 		And "RowIDInfo" table contains lines
 			| '#'   | 'Basis'                                                | 'Next step'   | 'Quantity'   | 'Current step'    |
 			| '1'   | 'Sales order 15 dated 01.02.2021 19:50:45'             | 'SC'          | '10,000'     | 'SI&SC'           |
-			| '2'   | 'Shipment confirmation 17 dated 25.02.2021 16:28:54'   | ''            | '10,000'     | 'SI'              |
+			| '2'   | 'Shipment confirmation 17 dated 25.02.2021 16:28:54'   | ''            | '10,000'     | 'SI&GR'           |
 			| '3'   | ''                                                     | 'SC'          | '7,000'      | ''                |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
@@ -440,10 +440,10 @@ Scenario: _024004 create SI using form link/unlink
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
-			| '#'   | 'Basis'                                                | 'Next step'   | 'Quantity'   | 'Current step'    |
-			| '1'   | 'Sales order 15 dated 01.02.2021 19:50:45'             | ''            | '10,000'     | 'SI&SC'           |
-			| '2'   | 'Shipment confirmation 17 dated 25.02.2021 16:28:54'   | ''            | '10,000'     | 'SI'              |
-			| '3'   | 'Shipment confirmation 15 dated 25.02.2021 14:13:30'   | ''            | '7,000'      | 'SI'              |
+			| '#' | 'Basis'                                              | 'Next step' | 'Quantity' | 'Current step' |
+			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000'   | 'SI&SC'        |
+			| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000'   | 'SI&GR'        |
+			| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'    | 'SI&GR'        |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key'   | 'Sales order'                                 |
@@ -478,10 +478,10 @@ Scenario: _024004 create SI using form link/unlink
 			| 'box Dress (8 pcs)'    |
 		And I select current line in "List" table
 		And "RowIDInfo" table contains lines
-			| 'Basis'                                                | 'Next step'   | 'Quantity'   | 'Current step'    |
-			| 'Sales order 15 dated 01.02.2021 19:50:45'             | ''            | '80,000'     | 'SI&SC'           |
-			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54'   | ''            | '10,000'     | 'SI'              |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30'   | ''            | '7,000'      | 'SI'              |
+			| 'Basis'                                              | 'Next step' | 'Quantity' | 'Current step' |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '80,000'   | 'SI&SC'        |
+			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000'   | 'SI&GR'        |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'    | 'SI&GR'        |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I click "Save" button
 		And I click the button named "FormUndoPosting"		
@@ -594,15 +594,15 @@ Scenario: _024006 create SI based on 2 SO with SC
 		And I select current line in "List" table
 		And I click "Show row key" button
 		And "RowIDInfo" table became equal
-			| 'Basis'                                                | 'Next step'   | 'Quantity'   | 'Current step'    |
-			| 'Sales order 3 dated 27.01.2021 19:50:45'              | ''            | '5,000'      | 'SI&SC'           |
-			| 'Sales order 3 dated 27.01.2021 19:50:45'              | ''            | '1,000'      | 'SI&WO&WS'        |
-			| 'Sales order 15 dated 01.02.2021 19:50:45'             | ''            | '1,000'      | 'SI&WO&WS'        |
-			| 'Sales order 15 dated 01.02.2021 19:50:45'             | ''            | '10,000'     | 'SI&SC'           |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30'   | ''            | '1,000'      | 'SI'              |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30'   | ''            | '7,000'      | 'SI'              |
-			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14'   | ''            | '3,000'      | 'SI'              |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30'   | ''            | '16,000'     | 'SI'              |
+			| 'Basis'                                              | 'Next step' | 'Quantity' | 'Current step' |
+			| 'Sales order 3 dated 27.01.2021 19:50:45'            | ''          | '5,000'    | 'SI&SC'        |
+			| 'Sales order 3 dated 27.01.2021 19:50:45'            | ''          | '1,000'    | 'SI&WO&WS'     |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '1,000'    | 'SI&WO&WS'     |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000'   | 'SI&SC'        |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '1,000'    | 'SI&GR'        |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'    | 'SI&GR'        |
+			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''          | '3,000'    | 'SI&GR'        |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '16,000'   | 'SI&GR'        |
 		And I close all client application windows
 
 Scenario: _024007 create SI based on SC	without SO
@@ -831,9 +831,9 @@ Scenario: _024029 create SI based on SC with two same items (link items)
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| 'Key'   | 'Basis'                                                   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '*'     | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31'   | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'   | ''            | '10,000'     | '6c91e0f0-6936-4c02-8827-a74810daf826'   | 'SI'             | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'    |
-			| '*'     | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31'   | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'   | ''            | '9,000'      | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010'   | 'SI'             | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'    |
+			| 'Key' | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '10,000'   | '6c91e0f0-6936-4c02-8827-a74810daf826' | 'SI&GR'        | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
+			| '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '9,000'    | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010' | 'SI&GR'        | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
 		And I close all client application windows
 
 Scenario: _024030 create SI based on SC with two same items (add linked document rows)
@@ -894,10 +894,10 @@ Scenario: _024030 create SI based on SC with two same items (add linked document
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| '#'   | 'Key'   | 'Basis'                                                   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '*'     | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31'   | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'   | ''            | '10,000'     | '6c91e0f0-6936-4c02-8827-a74810daf826'   | 'SI'             | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'    |
-			| '2'   | '*'     | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31'   | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'   | ''            | '9,000'      | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010'   | 'SI'             | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'    |
-			| '3'   | '*'     | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31'   | '2d14e136-93bc-4968-b1a9-89e56be271cf'   | ''            | '5,000'      | 'c2843939-e765-4207-81cf-1143a5137357'   | 'SI'             | '2d14e136-93bc-4968-b1a9-89e56be271cf'    |
+			| '#' | 'Key' | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '10,000'   | '6c91e0f0-6936-4c02-8827-a74810daf826' | 'SI&GR'        | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
+			| '2' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '9,000'    | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010' | 'SI&GR'        | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
+			| '3' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '2d14e136-93bc-4968-b1a9-89e56be271cf' | ''          | '5,000'    | 'c2843939-e765-4207-81cf-1143a5137357' | 'SI&GR'        | '2d14e136-93bc-4968-b1a9-89e56be271cf' |
 		And I click the button named "FormPost"
 		And I delete "$$SalesInvoice024030$$" variable
 		And I delete "$$NumberSalesInvoice024030$$" variable

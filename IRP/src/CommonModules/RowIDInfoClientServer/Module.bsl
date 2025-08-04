@@ -31,6 +31,12 @@ Function GetLinkedDocumentsFilter_SC(Object) Export
 	Filter.Insert("LegalNamePurchases" , Object.LegalName);
 	Filter.Insert("TransactionType"    , Object.TransactionType);
 	Filter.Insert("ProcurementMethod"  , PredefinedValue("Enum.ProcurementMethods.Purchase"));
+	
+	Filter.Insert("TransactionTypeSC"  , Object.TransactionType);
+	Filter.Insert("TransactionTypeGR"  , PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase"));
+	Filter.Insert("PartnerPurchases"   , Object.Partner);
+	Filter.Insert("LegalNamePurchases" , Object.LegalName);
+	
 	Filter.Insert("Ref"                , Object.Ref);
 	Return Filter;
 EndFunction
@@ -123,6 +129,12 @@ Function GetLinkedDocumentsFilter_GR(Object) Export
 	Filter.Insert("PartnerSales"       , Object.Partner);
 	Filter.Insert("LegalNameSales"     , Object.LegalName);
 	Filter.Insert("TransactionType"    , Object.TransactionType);
+	
+	Filter.Insert("TransactionTypeGR"  , Object.TransactionType);
+	Filter.Insert("TransactionTypeSC"  , PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales"));
+	Filter.Insert("PartnerSales"       , Object.Partner);
+	Filter.Insert("LegalNameSales"     , Object.LegalName);
+	
 	Filter.Insert("Ref"                , Object.Ref);
 	Return Filter;
 EndFunction

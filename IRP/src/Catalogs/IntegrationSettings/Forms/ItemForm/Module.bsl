@@ -100,7 +100,7 @@ EndProcedure
 
 &AtServer
 Procedure FillByDefaultAtServer()
-	ConnectionSetting = GetConnectionSetting();
+	ConnectionSetting = IntegrationServer.ConnectionSettingTemplate(Object.IntegrationType, Object);;
 	For Each Str In ConnectionSetting Do
 		
 		If Str.Key = "IntegrationSettingsRef" Then

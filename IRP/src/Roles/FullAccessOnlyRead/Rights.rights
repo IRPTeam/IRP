@@ -2607,6 +2607,9 @@
 		<right>
 			<name>Read</name>
 			<value>true</value>
+			<restrictionByCondition>
+				<condition>WHERE FALSE</condition>
+			</restrictionByCondition>
 		</right>
 		<right>
 			<name>View</name>
@@ -14053,6 +14056,13 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.SecureDataStorage</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>

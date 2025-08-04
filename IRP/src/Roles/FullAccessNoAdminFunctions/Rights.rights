@@ -2656,7 +2656,10 @@
 		<name>InformationRegister.SecureDataStorage</name>
 		<right>
 			<name>Read</name>
-			<value>false</value>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>WHERE FALSE</condition>
+			</restrictionByCondition>
 		</right>
 		<right>
 			<name>Update</name>

@@ -75,6 +75,17 @@ Scenario: _2060001 preparation
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Write);"   |
 		| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document PO, GR, SO, SC objects (return GR-SC, SC-GR)
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseOrder.FindByNumber(4060).GetObject().Write(DocumentWriteMode.Posting);;"   |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(4060).GetObject().Write(DocumentWriteMode.Posting);"   |
+	And I execute 1C:Enterprise script at server
+		| "Documents.ShipmentConfirmation.FindByNumber(4060).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.ShipmentConfirmation.FindByNumber(4061).GetObject().Write(DocumentWriteMode.Posting);"   |
+	And I execute 1C:Enterprise script at server
+		| "Documents.GoodsReceipt.FindByNumber(4059).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.GoodsReceipt.FindByNumber(4060).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Save PI numbers
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -1485,7 +1496,7 @@ Scenario: _2060008 check link/unlink form in the PRO
 		And I close all client application windows
 
 
-Scenario: _2060008 check link/unlink form in the PR
+Scenario: _2060009 check link/unlink form in the PR
 	* Open form for create PR
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
@@ -1696,6 +1707,253 @@ Scenario: _2060010 select items from basis documents in the SI
 		Then the number of "BasisesTree" table lines is "равно" "9"
 		And I close all client application windows
 
+
+Scenario: _2060013 check link/unlink form in the SC (return based on GR)
+	* Open form for create SC
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I select "Return to vendor" exact value from "Transaction type" drop-down list
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 03    |
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Crystal'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Adel'     |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table		
+	* Select items from basis documents
+		And I click "Add basis documents" button
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| ''         | ''      | '3,000'    | 'Bag (PZU)'        | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation'                   | 'Unit' | 'Use' |
+			| ''         | ''      | '1,000'    | 'Product 7 with SLN (new row) (ODS)' | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
+		And I click "Save" button		
+	* Check RowIDInfo
+		And "RowIDInfo" table contains lines
+			| '#' | 'Row ID'                               | 'Quantity' | 'Basis key'                            | 'Basis'                                         | 'Current step' | 'Next step' | 'Row ref'                              |
+			| '1' | '5bc6f1ec-b447-4648-94d4-ce89b96cf42c' | '3,000'    | '5bc6f1ec-b447-4648-94d4-ce89b96cf42c' | 'Goods receipt 4 059 dated 30.07.2025 15:07:10' | 'PI&SC'        | ''          | '5bc6f1ec-b447-4648-94d4-ce89b96cf42c' |
+			| '2' | 'dffe32d0-2a52-45f8-a48e-fc0df4aad1ef' | '1,000'    | 'dffe32d0-2a52-45f8-a48e-fc0df4aad1ef' | 'Goods receipt 4 059 dated 30.07.2025 15:07:10' | 'PI&SC'        | ''          | 'dffe32d0-2a52-45f8-a48e-fc0df4aad1ef' |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
+	* Unlink line
+		And I click "Link unlink basis documents" button		
+		Then "Link / unlink document row" window is opened
+		And I set checkbox "Linked documents"
+		And I go to line in "ItemListRows" table
+			| "#" | "Quantity" | "Row presentation"                             | "Store"    | "Unit" |
+			| "2" | "1,000"    | "Product 7 with SLN (new row) (ODS) (9009100)" | "Store 03" | "pcs"  |
+		And in the table "ResultsTree" I click the button named "Unlink"
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'                         | 'Quantity' | 'Unit' | 'Shipment basis'                                | 'Item key' |
+			| 'Bag'                          | '3,000'    | 'pcs'  | 'Goods receipt 4 059 dated 30.07.2025 15:07:10' | 'PZU'      |
+			| 'Product 7 with SLN (new row)' | '1,000'    | 'pcs'  | ''                                              | 'ODS'      |
+	* Link line
+		And I click "Link unlink basis documents" button
+		And I go to line in "ItemListRows" table
+			| "#" | "Quantity" | "Row presentation"                             | "Store"    | "Unit" |
+			| "2" | "1,000"    | "Product 7 with SLN (new row) (ODS) (9009100)" | "Store 03" | "pcs"  |
+		And I set checkbox "Linked documents"
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I remove checkbox "Use reverse basises tree"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation'                             | 'Unit' |
+			| ''         | ''      | '1,000'    | 'Product 7 with SLN (new row) (ODS) (9009100)' | 'pcs'  |
+		And I click "Link" button
+		And I click "Ok" button
+		And I click "Save" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Row ID'                               | 'Quantity' | 'Basis key'                            | 'Basis'                                         | 'Current step' | 'Next step' | 'Row ref'                              |
+			| '1' | '5bc6f1ec-b447-4648-94d4-ce89b96cf42c' | '3,000'    | '5bc6f1ec-b447-4648-94d4-ce89b96cf42c' | 'Goods receipt 4 059 dated 30.07.2025 15:07:10' | 'PI&SC'        | ''          | '5bc6f1ec-b447-4648-94d4-ce89b96cf42c' |
+			| '2' | 'dffe32d0-2a52-45f8-a48e-fc0df4aad1ef' | '1,000'    | 'dffe32d0-2a52-45f8-a48e-fc0df4aad1ef' | 'Goods receipt 4 059 dated 30.07.2025 15:07:10' | 'PI&SC'        | ''          | 'dffe32d0-2a52-45f8-a48e-fc0df4aad1ef' |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
+		And "ItemList" table contains lines
+			| 'Item'                         | 'Quantity' | 'Unit' | 'Shipment basis'                                | 'Item key' |
+			| 'Bag'                          | '3,000'    | 'pcs'  | 'Goods receipt 4 059 dated 30.07.2025 15:07:10' | 'PZU'      |
+			| 'Product 7 with SLN (new row)' | '1,000'    | 'pcs'  | 'Goods receipt 4 059 dated 30.07.2025 15:07:10' | 'ODS'      |
+	* Delete string, add it again
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Bag'   | 'PZU'      | '3,000'    | 'Store 03' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click "Add basis documents" button
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| ''         | ''      | '3,000'    | 'Bag (PZU)'        | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'                         | 'Quantity' | 'Unit' | 'Shipment basis'                                | 'Item key' |
+			| 'Bag'                          | '3,000'    | 'pcs'  | 'Goods receipt 4 059 dated 30.07.2025 15:07:10' | 'PZU'      |
+			| 'Product 7 with SLN (new row)' | '1,000'    | 'pcs'  | 'Goods receipt 4 059 dated 30.07.2025 15:07:10' | 'ODS'      |
+	* Unlink all lines
+		And I click "Link unlink basis documents" button
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I go to line in "ItemListRows" table
+			| 'Quantity' | 'Row presentation'                             | 'Store'    | 'Unit' |
+			| '1,000'    | 'Product 7 with SLN (new row) (ODS) (9009100)' | 'Store 03' | 'pcs'  |
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                              | 'Quantity' | 'Unit' | 'Price' | 'Currency' |
+			| 'Goods receipt 4 059 dated 30.07.2025 15:07:10' | ''         | ''     | ''      | ''         |
+			| 'Product 7 with SLN (new row) (ODS) (9009100)'  | '1,000'    | 'pcs'  | ''      | ''         |		
+		And I click "Ok" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button				
+		And I close all client application windows
+
+Scenario: _2060014 check link/unlink form in the GR (return based on SC)
+	* Open form for create GR
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I select "Return from customer" exact value from "Transaction type" drop-down list
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 03    |
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Crystal'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Adel'     |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table		
+	* Select items from basis documents
+		And I click "Add basis documents" button
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| ''         | ''      | '3,000'    | 'Bag (PZU)'        | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation'                   | 'Unit' | 'Use' |
+			| ''         | ''      | '1,000'    | 'Product 7 with SLN (new row) (ODS)' | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button	
+		And I click "Save" button		
+	* Check RowIDInfo
+		And "RowIDInfo" table contains lines
+			| '#' | 'Quantity' | 'Basis'                                                 | 'Current step' | 'Next step' |
+			| '1' | '3,000'    | 'Shipment confirmation 4 060 dated 30.07.2025 15:10:45' | 'SI&GR'        | ''          |
+			| '2' | '1,000'    | 'Shipment confirmation 4 060 dated 30.07.2025 15:10:45' | 'SI&GR'        | ''          |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
+	* Unlink line
+		And I click "Link unlink basis documents" button		
+		Then "Link / unlink document row" window is opened
+		And I set checkbox "Linked documents"
+		And I go to line in "ItemListRows" table
+			| "#" | "Quantity" | "Row presentation"                             | "Store"    | "Unit" |
+			| "2" | "1,000"    | "Product 7 with SLN (new row) (ODS) (9009100)" | "Store 03" | "pcs"  |
+		And in the table "ResultsTree" I click the button named "Unlink"
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'                         | 'Quantity' | 'Unit' | 'Receipt basis'                                         | 'Item key' |
+			| 'Bag'                          | '3,000'    | 'pcs'  | 'Shipment confirmation 4 060 dated 30.07.2025 15:10:45' | 'PZU'      |
+			| 'Product 7 with SLN (new row)' | '1,000'    | 'pcs'  | ''                                                      | 'ODS'      |
+	* Link line
+		And I click "Link unlink basis documents" button
+		And I go to line in "ItemListRows" table
+			| "#" | "Quantity" | "Row presentation"                             | "Store"    | "Unit" |
+			| "2" | "1,000"    | "Product 7 with SLN (new row) (ODS) (9009100)" | "Store 03" | "pcs"  |
+		And I set checkbox "Linked documents"
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation'                             | 'Unit' |
+			| ''         | ''      | '1,000'    | 'Product 7 with SLN (new row) (ODS) (9009100)' | 'pcs'  |
+		And I click "Link" button
+		And I click "Ok" button
+		And I click "Save" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Quantity' | 'Basis'                                                 | 'Current step' | 'Next step' |
+			| '1' | '3,000'    | 'Shipment confirmation 4 060 dated 30.07.2025 15:10:45' | 'SI&GR'        | ''          |
+			| '2' | '1,000'    | 'Shipment confirmation 4 060 dated 30.07.2025 15:10:45' | 'SI&GR'        | ''          |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
+		And "ItemList" table contains lines
+			| 'Item'                         | 'Quantity' | 'Unit' | 'Receipt basis'                                         | 'Item key' |
+			| 'Bag'                          | '3,000'    | 'pcs'  | 'Shipment confirmation 4 060 dated 30.07.2025 15:10:45' | 'PZU'      |
+			| 'Product 7 with SLN (new row)' | '1,000'    | 'pcs'  | 'Shipment confirmation 4 060 dated 30.07.2025 15:10:45' | 'ODS'      |
+	* Delete string, add it again
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Bag'   | 'PZU'      | '3,000'    | 'Store 03' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click "Add basis documents" button
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| ''         | ''      | '3,000'    | 'Bag (PZU)'        | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'                         | 'Quantity' | 'Unit' | 'Receipt basis'                                         | 'Item key' |
+			| 'Bag'                          | '3,000'    | 'pcs'  | 'Shipment confirmation 4 060 dated 30.07.2025 15:10:45' | 'PZU'      |
+			| 'Product 7 with SLN (new row)' | '1,000'    | 'pcs'  | 'Shipment confirmation 4 060 dated 30.07.2025 15:10:45' | 'ODS'      |
+	* Unlink all lines
+		And I click "Link unlink basis documents" button
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I go to line in "ItemListRows" table
+			| 'Quantity' | 'Row presentation'                             | 'Store'    | 'Unit' |
+			| '1,000'    | 'Product 7 with SLN (new row) (ODS) (9009100)' | 'Store 03' | 'pcs'  |
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                                      | 'Quantity' | 'Unit' | 'Price' | 'Currency' |
+			| 'Shipment confirmation 4 060 dated 30.07.2025 15:10:45' | ''         | ''     | ''      | ''         |
+			| 'Product 7 with SLN (new row) (ODS) (9009100)'          | '1,000'    | 'pcs'  | ''      | ''         |
+		And I click "Ok" button
+		And in the table "ItemList" I click "Edit quantity in base unit" button				
+		And I close all client application windows
+
+
 Scenario: _2060015 check form select items from basis documents in the SI
 	* Open form for create SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -1792,7 +2050,7 @@ Scenario: _2060015 check form select items from basis documents in the SI
 			| 'Dress (S/Yellow)'                                    | 'Yes' | '100,000'  | 'pcs'  | ''       | ''         |
 		And I close all client application windows
 
-Scenario: _2060015 check price in the SI when link document with different price
+Scenario: _2060027 check price in the SI when link document with different price
 	* Open form for create SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -4856,6 +5114,11 @@ Scenario: _2060036 check link/unlink form in the PO - GR - PI (use variable stor
 		And I save the window as "$$PurchaseInvoice2060037$$"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice2060037$$"
 		And I close all client application windows
+
+
+
+
+
 
 Scenario: _2060040 check link/unlink form in the SO - SI (use variable item key, delete previous document)
 	And I close all client application windows

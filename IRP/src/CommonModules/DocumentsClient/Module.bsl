@@ -1047,7 +1047,13 @@ Procedure ExpenseAndRevenueTypeStartChoice(Object, Form, Item, ChoiceData, Stand
 	Else
 		OpenSettings.FormParameters.Insert("FillingData", OpenSettings.FillingData);
 	EndIf;
-
+	
+	If StrFind(Upper(Item.Name), Upper("RevenueType")) > 0 Then
+		SetCurrentRow(Object, Form, Item, OpenSettings.FormParameters, "RevenueType");
+	ElsIf StrFind(Upper(Item.Name), Upper("ExpenseType")) > 0 Then
+		SetCurrentRow(Object, Form, Item, OpenSettings.FormParameters, "ExpenseType");
+	EndIf;
+	
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 

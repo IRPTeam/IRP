@@ -1181,45 +1181,70 @@ Procedure FillRowID_PO(Source, Cancel)
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_PI(Source, Cancel)
-	For Each RowItemList In Source.ItemList Do
-		Row = Undefined;
-		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
-		If IDInfoRows.Count() = 0 Then
-			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
-			Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
-		Else
-			For Each Row In IDInfoRows Do
-				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
-					Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
-					Continue;
-				EndIf;
-				FillRowID(Row, RowItemList);
-				Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
-			EndDo;
-		EndIf;
-	EndDo;
-
-	NewRows = New Map();
-
+Procedure FillRowID_PI(Source, Cancel)  
+	ArrayOwnRows = New Array();
+	ArraySalesRows = New Array();
+	
 	For Each Row In Source.RowIDInfo Do
-		If Not ValueIsFilled(Row.CurrentStep) Then
+		If Not ValueIsFilled(Row.Basis) Or Not ValueIsFilled(Row.CurrentStep) Then
+			ArrayOwnRows.Add(Row);
 			Continue;
 		EndIf;
-		For Each RowItemList In Source.ItemList.FindRows(New Structure("Key", Row.Key)) Do
-			If ValueIsFilled(RowItemList.SalesOrder) And Not RowItemList.UseGoodsReceipt Then
-				NewRows.Insert(Row, RowItemList.QuantityInBaseUnit);
-			EndIf;
-		EndDo;
+		
+		Filter = New Structure();
+		Filter.Insert("Key", Row.Key);
+		ItemListRows = Source.ItemList.FindRows(Filter);
+		If ItemListRows.Count() <> 1 Then
+			Raise StrTemplate("Not found key [%1] in Item list [%2]", Row.Key, Source);
+		EndIf;
+		
+		Row.NextStep = GetNextStep_PI(Source, ItemListRows[0], Row);
+		
+		If Not ValueIsFilled(Row.NextStep) And ValueIsFilled(Row.Basis) And Is(Row.RowRef.Basis).SO Then
+			ArraySalesRows.Add(New Structure("Row, ItemListRow", Row, ItemListRows[0]));
+		EndIf;
 	EndDo;
-
-	For Each Row In NewRows Do
-		NewRow = Source.RowIDInfo.Add();
-		FillPropertyValues(NewRow, Row.Key);
-		NewRow.CurrentStep = Undefined;
-		NewRow.NextStep    = Catalogs.MovementRules.SI_SC;
-		NewRow.Quantity    = Row.Value;
+	
+	// Own rows
+	For Each Item In ArrayOwnRows Do
+		Source.RowIDInfo.Delete(Item);
+	EndDo;
+	
+	For Each RowItemList In Source.ItemList Do
+		Filter = New Structure();
+		Filter.Insert("Key", RowItemList.Key);
+		
+		IDInfoRows = Source.RowIDInfo.FindRows(Filter);
+		
+		If IDInfoRows.Count() > 0 Or Not RowItemList.UseGoodsReceipt Then
+			Continue;
+		EndIf;
+		
+		NewRowID = Source.RowIDInfo.Add();
+		FillRowID(NewRowID, RowItemList);
+		NewRowID.NextStep = GetNextStep_PI(Source, RowItemList, NewRowID);
+	EndDo;
+		
+	// Sales rows
+	For Each Item In ArraySalesRows Do
+		If Source.GoodsReceipts.FindRows(New Structure("Key", Item.ItemListRow.Key)).Count() <> 0 Then
+			Continue;
+		EndIf;
+		NewRowID = Source.RowIDInfo.Add();
+		FillPropertyValues(NewRowID, Item.Row);
+		NewRowID.CurrentStep = Undefined;
+		NewRowID.NextStep    = Catalogs.MovementRules.SI_SC;
+		NewRowID.Quantity    = Item.ItemListRow.QuantityInBaseUnit;
+	EndDo;
+	
+	For Each RowItemList In Source.ItemList Do
+		Filter = New Structure();
+		Filter.Insert("Key", RowItemList.Key);
+		IDInfoRows = Source.RowIDInfo.FindRows(Filter);
+		If IDInfoRows.Count() = 0 Then
+			NewRowID = Source.RowIDInfo.Add();
+			FillRowID(NewRowID, RowItemList);
+		EndIf;
 	EndDo;
 EndProcedure
 
@@ -1745,7 +1770,9 @@ Function GetNextStep_SC(Source, ItemList, Row)
 		NextStep = Catalogs.MovementRules.SI;
 	ElsIf Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales Then
 		If ValueIsFilled(Row.Basis) And TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt") Then
-			NextStep = Catalogs.MovementRules.SI;
+			NextStep = Catalogs.MovementRules.SI;   
+		ElsIf ValueIsFilled(ItemList.SalesInvoice) Then
+			// nothing	
 		Else
 			NextStep = Catalogs.MovementRules.SI_GR;
 		EndIf;
@@ -1790,7 +1817,9 @@ Function GetNextStep_GR(Source, ItemList, Row)
 		And Not ValueIsFilled(ItemList.PurchaseInvoice) Then
 		NextStep = Catalogs.MovementRules.PI;
 	ElsIf Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase Then
-		If ValueIsFilled(ItemList.SalesOrder) Then
+		If ValueIsFilled(ItemList.PurchaseInvoice) Then
+			// nothing
+		ElsIf ValueIsFilled(ItemList.SalesOrder) Then
 			NextStep = Catalogs.MovementRules.PI;
 		Else
 			NextStep = Catalogs.MovementRules.PI_SC;	
@@ -2064,7 +2093,9 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 			RowRefObject.TransactionTypeSCReturn = Source.TransactionType;
 		ElsIf Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales Then
 			RowRefObject.TransactionTypeSC = Source.TransactionType;
-			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
+			If Not (ValueIsFilled(Row.Basis) And TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt")) Then
+				RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
+			EndIf;
 		Else
 			RowRefObject.TransactionTypeSC = Source.TransactionType;
 		EndIf;

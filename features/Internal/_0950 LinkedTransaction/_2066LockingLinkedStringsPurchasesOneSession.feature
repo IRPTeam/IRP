@@ -781,7 +781,7 @@ Scenario: _2066011 change quantity in the linked string in the PI, GR after PI, 
 	* Change quantity (less then GR, GR exist)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
-			| 'Boots'   | '37/18SD'    | '2,000'       |
+			| 'Boots'   | '37/18SD'    | '27,000'      |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
@@ -804,7 +804,7 @@ Scenario: _2066011 change quantity in the linked string in the PI, GR after PI, 
 			| 'Boots'   | '37/18SD'    | '1,000'       |
 		And I activate "Quantity" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "27,000" text in "Quantity" field of "ItemList" table
+		And I input "28,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 		Then user message window does not contain messages
@@ -961,7 +961,7 @@ Scenario: _2066021 unpost GR with linked strings (one session)
 		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
-			| 'Line No. [3] [Boots 37/18SD] RowID movements remaining: 12 . Required: 0 . Lacking: 12 .'    |
+			| 'Line No. [3] [Boots 37/18SD] RowID movements remaining: 9 . Required: 0 . Lacking: 9 .'    |
 			| 'Line No. [2] [Shirt 36/Red] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'     |
 	And I close all client application windows		
 				
@@ -1047,7 +1047,7 @@ Scenario: _2066025 delete GR with linked strings (one session)
 		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
-			| 'Line No. [3] [Boots 37/18SD] RowID movements remaining: 12 . Required: 0 . Lacking: 12 .'    |
+			| 'Line No. [3] [Boots 37/18SD] RowID movements remaining: 9 . Required: 0 . Lacking: 9 .'    |
 			| 'Line No. [2] [Shirt 36/Red] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'     |
 	And I close all client application windows
 

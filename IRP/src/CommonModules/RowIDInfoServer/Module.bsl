@@ -14261,7 +14261,7 @@ Function EditQuantity(Ref, SelectedRowKey, Quantity, Unit, ArrayOfChildrens) Exp
 		Doc = BuilderAPI.Initialize(Ref);
 		BuilderAPI.SetRowProperty(Doc, SelectedRowKey, "Quantity", Quantity, "ItemList");
 		BuilderAPI.SetRowProperty(Doc, SelectedRowKey, "Unit", Unit, "ItemList");	
-		BuilderAPI.Write(Doc,,,,,"RowIDInfoClientServer.UpdateQuantity");
+		BuilderAPI.Write(Doc,,,,True,"RowIDInfoClientServer.UpdateQuantity");
 		
 		ChildtrenTable = New ValueTable();
 		ChildtrenTable.Columns.Add("DocRef");

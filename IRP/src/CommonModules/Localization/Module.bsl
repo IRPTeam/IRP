@@ -1608,7 +1608,7 @@ Function Strings(Lang) Export
 	// %3 - Red/38 
 	// %4 - 8 
 	// %5 - 10
-	Strings.Insert("Error_081", NStr("en = 'In line %1 quantity by %2-%3 %4 less than quantity %5'",
+	Strings.Insert("Error_081", NStr("en = 'In line %1 quantity by %2-%3 %4 greater than quantity %5'",
 		Lang));
 	
 	// %1 - 1 

@@ -1063,6 +1063,11 @@ Function EditQuantity_GetCommandDescription()
 	Targets = CommandDescription.Targets;
 	
 	For Each Doc In Metadata.Documents Do
+		If Doc = Metadata.Documents.PhysicalInventory
+			Or Doc = Metadata.Documents.RetailSalesReceipt
+			Or Doc = Metadata.Documents.RetailReturnReceipt Then
+				Continue;
+		EndIf;
 		If Doc.TabularSections.Find("RowIDInfo") <> Undefined  Then
 			Targets.Add(Doc.FullName());
 		EndIf;

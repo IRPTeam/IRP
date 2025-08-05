@@ -1260,7 +1260,7 @@ Procedure LinkedDocumentsEnd(Result, AdditionalParameters) Export
 		EndDo;
 	EndDo;
 	
-	RowIDInfoClient.UpdateQuantity(Object, Form);
+	RowIDInfoClientServer.UpdateQuantity(Object);
 EndProcedure
 
 Procedure UpdateQuantityByTradeDocuments(Object, TableName) Export

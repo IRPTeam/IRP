@@ -14278,6 +14278,9 @@ Function EditQuantity(Ref, SelectedRowKey, Quantity, Unit, ArrayOfChildrens) Exp
 		For Each Row In ChildtrenTable Do
 			DocObject = Row.DocRef.GetObject();
 			If DocObject.Posted Then
+				If Not DocObject.CheckFilling() Then
+                	Raise R().ErrorOnPostingDocument;
+				EndIf;
 				DocObject.Write(DocumentWriteMode.Posting);
 			EndIf;
 		EndDo;

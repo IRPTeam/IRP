@@ -942,7 +942,7 @@ Scenario: _2065012 change quantity in the linked string in the SI, SI after SC, 
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		Then there are lines in TestClient message log
-			| 'In line 2 quantity by Shirt-36/Red 11 greater than quantity 10'    |
+			| 'In line 2 quantity by Shipment confirmation 36 dated 23.09.2021 10:20:59 11 greater than 10'    |
 		And I close current window
 	* Change quantity (less then SC, SC exist)
 		And I go to line in "ItemList" table

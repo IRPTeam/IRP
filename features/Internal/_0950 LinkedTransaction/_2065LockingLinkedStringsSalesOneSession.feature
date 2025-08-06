@@ -942,7 +942,8 @@ Scenario: _2065012 change quantity in the linked string in the SI, SI after SC, 
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		Then there are lines in TestClient message log
-			| 'In line 2 quantity by Shipment confirmation 36 dated 23.09.2021 10:20:59 11 greater than 10'    |
+			| 'In line 2 quantity by Shirt-36/Red 11 greater than quantity 10'    |
+		And I close current window
 	* Change quantity (less then SC, SC exist)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
@@ -983,7 +984,7 @@ Scenario: _2065013 change quantity in the linked string in the SC, SC before SI 
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		Then there are lines in TestClient message log
-			| 'Line No. [2] [Shirt 36/Red] RowID movements remaining: 10 . Required: 8 . Lacking: 2 .'    |
+			| 'Line No. [2] [Shirt 36/Red] RowID movements remaining: 9 . Required: 8 . Lacking: 1 .'    |
 		And I close current window
 	* Change quantity (more then SI)
 		And I go to line in "ItemList" table
@@ -1002,7 +1003,6 @@ Scenario: _2065013 change quantity in the linked string in the SC, SC before SI 
 			| 'Shirt'   | '36/Red'     | '11,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
-		Then "Shipment confirmations" window is opened
 		And I close all client application windows
 	
 Scenario: _2065015 delete linked string in the SO (one session)

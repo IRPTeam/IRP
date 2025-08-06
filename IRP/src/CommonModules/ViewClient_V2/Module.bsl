@@ -2858,15 +2858,15 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	EndIf;
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentConfirmations") Then
-		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentConfirmations");
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentConfirmations");
 	EndIf;
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentPlaningOrders") Then
-		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentPlaningOrders");
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentPlaningOrders");
 	EndIf;
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "GoodsReceipts") Then
-		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "GoodsReceipts");
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(Parameters.Object, "GoodsReceipts");
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"

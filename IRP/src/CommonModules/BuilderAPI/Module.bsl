@@ -362,6 +362,11 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 		
 		If Object = Undefined Then
 			
+			If Hook <> Undefined Then
+				//@skip-check server-execution-safe-mode
+				Execute(Hook + "(Doc)");
+			EndIf;
+			
 			If CheckFilling Then
 				If Not Doc.CheckFilling() Then
                 	Raise R().ErrorOnPostingDocument;
@@ -380,11 +385,6 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 				Else
 					_WriteMode = DocumentWriteMode.Write;
 				EndIf;
-			EndIf;
-			
-			If Hook <> Undefined Then
-				//@skip-check server-execution-safe-mode
-				Execute(Hook + "(Doc)");
 			EndIf;
 			
 			Doc.Write( _WriteMode, _PostingMode);

@@ -1263,16 +1263,6 @@ Procedure LinkedDocumentsEnd(Result, AdditionalParameters) Export
 	RowIDInfoClientServer.UpdateQuantity(Object);
 EndProcedure
 
-Procedure UpdateQuantityByTradeDocuments(Object, TableName) Export
-	For Each Row In Object.ItemList Do
-		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
-
-		If ArrayOfDocuments.Count() = 1 And ArrayOfDocuments[0].Quantity <> Row.QuantityInBaseUnit Then
-			ArrayOfDocuments[0].Quantity = Row.QuantityInBaseUnit;
-		EndIf;
-	EndDo;
-EndProcedure
-
 Procedure SetLockedRowsForItemListByTradeDocuments(Object, Form, TableName) Export
 	For Each Row In Object.ItemList Do
 		Row.LockedRow = Object[TableName].FindRows(New Structure("Key", Row.Key)).Count() > 0;

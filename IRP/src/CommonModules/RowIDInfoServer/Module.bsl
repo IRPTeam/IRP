@@ -14261,7 +14261,7 @@ Function EditQuantity(Ref, SelectedRowKey, Quantity, Unit, ArrayOfChildrens) Exp
 		Doc = BuilderAPI.Initialize(Ref);
 		BuilderAPI.SetRowProperty(Doc, SelectedRowKey, "Quantity", Quantity, "ItemList");
 		BuilderAPI.SetRowProperty(Doc, SelectedRowKey, "Unit", Unit, "ItemList");	
-		BuilderAPI.Write(Doc,,,,True,"RowIDInfoClientServer.UpdateQuantity");
+		BuilderAPI.Write(Doc,,,,True,"RowIDInfoServer.EditQuantityBeforeWrite");
 		
 		ChildtrenTable = New ValueTable();
 		ChildtrenTable.Columns.Add("DocRef");
@@ -14289,11 +14289,27 @@ Function EditQuantity(Ref, SelectedRowKey, Quantity, Unit, ArrayOfChildrens) Exp
 		
 	Except
 		RollbackTransaction();
-		CommonFunctionsClientServer.ShowUsersMessage(ErrorDescription());
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_187, Ref));
 		HaveErrors = True;
 	EndTry;	
 	Return HaveErrors;
 EndFunction
+
+Procedure EditQuantityBeforeWrite(DocObject) Export
+	RowIDInfoClientServer.UpdateQuantity(DocObject);
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(DocObject, "ShipmentConfirmations") Then
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(DocObject, "ShipmentConfirmations");
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(DocObject, "ShipmentPlaningOrders") Then
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(DocObject, "ShipmentPlaningOrders");
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(DocObject, "GoodsReceipts") Then
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(DocObject, "GoodsReceipts");
+	EndIf;
+EndProcedure
 
 Function GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling = Undefined) Export
 	Return ServerReuse.GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling);

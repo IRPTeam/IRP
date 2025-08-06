@@ -86,7 +86,6 @@ Scenario: _040115 preparation (Purchase order)
 			| "Documents.PurchaseOrder.FindByNumber(1326).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(1326).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
 	# * Check query for Purchase order movements
 	# 	Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"
 	# 	And in the table "Info" I click "Fill movements" button

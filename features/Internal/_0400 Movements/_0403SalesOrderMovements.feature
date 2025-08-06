@@ -90,6 +90,11 @@ Scenario: _040148 preparation (sales order movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.SalesOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document SO, SC (check movements when change quantity)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1326).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1326).GetObject().Write(DocumentWriteMode.Posting);"    |
 		
 	# * Check query for sales order movements
 	# 	Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"
@@ -606,7 +611,7 @@ Scenario: _0401577 check sales order movements by the Register "Posted documents
 			| ''                                        | 'Sales order 1 dated 27.01.2021 19:50:45' | '27.01.2021 19:50:45' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
 	And I close all client application windows
 
-Scenario: _0401578 check Ssales order and Shipment confirmation movements by the Register  "R4012 Stock Reservation" when change quantity
+Scenario: _0401578 check Sales order and Shipment confirmation movements by the Register  "R4012 Stock Reservation" when change quantity
 	And I close all client application windows
 	* Check movements by the Register "R4012 Stock Reservation" for SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"

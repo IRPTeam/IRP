@@ -325,3 +325,48 @@ Procedure FillVisibleFields(BasisesTree, VisibleFields) Export
 	EndDo;
 EndProcedure
 
+Procedure UpdateQuantity(Object) Export
+	TabularSectionName = "";
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "ShipmentConfirmations") Then
+		TabularSectionName = "ShipmentConfirmations";
+	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Object, "GoodsReceipts") Then
+		TabularSectionName = "GoodsReceipts";
+	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Object, "WorkSheets") Then
+		TabularSectionName = "WorkSheets";
+	EndIf;
+	
+	For Each RowItemList In Object.ItemList Do
+		
+		IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 1 Then
+			If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then
+				IDInfoRows[0].Quantity = ?(RowItemList.Difference < 0, -RowItemList.Difference, RowItemList.Difference);
+			Else
+				IDInfoRows[0].Quantity = RowItemList.QuantityInBaseUnit;
+			EndIf;
+		Else
+			If Not ValueIsFilled(TabularSectionName) Then
+				If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then
+					For Each IDInfoRow In IDInfoRows Do
+						IDInfoRow.Quantity = ?(RowItemList.Difference < 0, -RowItemList.Difference,
+							RowItemList.Difference);
+					EndDo;
+				Else
+					For Each IDInfoRow In IDInfoRows Do
+						IDInfoRow.Quantity = RowItemList.QuantityInBaseUnit;
+					EndDo;
+				EndIf;
+			Else
+				For Each Row In Object[TabularSectionName] Do
+					If Row.Key <> RowItemList.Key Then
+						Continue;
+					EndIf;
+					IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key, BasisKey", Row.Key, Row.BasisKey));
+					If IDInfoRows.Count() = 1 Then
+						IDInfoRows[0].Quantity = Row.Quantity;
+					EndIf;
+				EndDo;
+			EndIf;
+		EndIf;
+	EndDo;	
+EndProcedure

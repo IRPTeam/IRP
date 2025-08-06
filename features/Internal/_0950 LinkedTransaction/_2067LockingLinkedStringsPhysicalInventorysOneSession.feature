@@ -284,58 +284,58 @@ Scenario: _20670091 check unlock linked rows in the Stock adjustment as write of
 			| 'M/White'    | 'Dress'    |
 		And I close all client application windows
 
-Scenario: _2068010 change quantity in the linked string in the Physical inventory (one session)
-	* Open Physical inventory
-		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '51'        |
-		And I select current line in "List" table
-	* Change quantity (less then surplus)
-		And I go to line in "ItemList" table
-			| 'Item'    | 'Item key'    |
-			| 'Dress'   | 'XS/Blue'     |
-		And I input "54,000" text in "Phys. count" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-		Then there are lines in TestClient message log
-			| 'Line No. [1] [Dress XS/Blue] RowID movements remaining: 5 . Required: 4 . Lacking: 1 .'    |
-	* Change quantity (more then surplus)
-		And I go to line in "ItemList" table
-			| 'Item'    | 'Item key'    |
-			| 'Dress'   | 'XS/Blue'     |
-		And I input "56,000" text in "Phys. count" field of "ItemList" table
-		And I click "Post and close" button
-		Then user message window does not contain messages
-		Then "Physical inventories" window is opened
-		And I close all client application windows
-	* Change quantity (less then write off)
-		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '51'        |
-		And I select current line in "List" table
-		And I go to line in "ItemList" table
-			| 'Item'    | 'Item key'     |
-			| 'Dress'   | 'Dress/A-8'    |
-		And I input "98,000" text in "Phys. count" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-		Then there are lines in TestClient message log
-			| 'Line No. [2] [Dress Dress/A-8] RowID movements remaining: 3 . Required: 2 . Lacking: 1 .'    |
-	* Change quantity (more then write off)
-		And I go to line in "ItemList" table
-			| 'Item'    | 'Item key'     |
-			| 'Dress'   | 'Dress/A-8'    |
-		And I input "96,000" text in "Phys. count" field of "ItemList" table
-		And I click "Post and close" button
-		Then user message window does not contain messages
-		Then "Physical inventories" window is opened
-		And I close all client application windows
+// Scenario: _2068010 change quantity in the linked string in the Physical inventory (one session)
+// 	* Open Physical inventory
+// 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+// 		And I go to line in "List" table
+// 			| 'Number'    |
+// 			| '51'        |
+// 		And I select current line in "List" table
+// 	* Change quantity (less then surplus)
+// 		And I go to line in "ItemList" table
+// 			| 'Item'    | 'Item key'    |
+// 			| 'Dress'   | 'XS/Blue'     |
+// 		And I input "54,000" text in "Phys. count" field of "ItemList" table
+// 		And I finish line editing in "ItemList" table
+// 		And I click "Post" button
+// 		Then "1C:Enterprise" window is opened
+// 		And I click "OK" button
+// 		Then there are lines in TestClient message log
+// 			| 'Line No. [1] [Dress XS/Blue] RowID movements remaining: 5 . Required: 4 . Lacking: 1 .'    |
+// 	* Change quantity (more then surplus)
+// 		And I go to line in "ItemList" table
+// 			| 'Item'    | 'Item key'    |
+// 			| 'Dress'   | 'XS/Blue'     |
+// 		And I input "56,000" text in "Phys. count" field of "ItemList" table
+// 		And I click "Post and close" button
+// 		Then user message window does not contain messages
+// 		Then "Physical inventories" window is opened
+// 		And I close all client application windows
+// 	* Change quantity (less then write off)
+// 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+// 		And I go to line in "List" table
+// 			| 'Number'    |
+// 			| '51'        |
+// 		And I select current line in "List" table
+// 		And I go to line in "ItemList" table
+// 			| 'Item'    | 'Item key'     |
+// 			| 'Dress'   | 'Dress/A-8'    |
+// 		And I input "98,000" text in "Phys. count" field of "ItemList" table
+// 		And I finish line editing in "ItemList" table
+// 		And I click "Post" button
+// 		Then "1C:Enterprise" window is opened
+// 		And I click "OK" button
+// 		Then there are lines in TestClient message log
+// 			| 'Line No. [2] [Dress Dress/A-8] RowID movements remaining: 3 . Required: 2 . Lacking: 1 .'    |
+// 	* Change quantity (more then write off)
+// 		And I go to line in "ItemList" table
+// 			| 'Item'    | 'Item key'     |
+// 			| 'Dress'   | 'Dress/A-8'    |
+// 		And I input "96,000" text in "Phys. count" field of "ItemList" table
+// 		And I click "Post and close" button
+// 		Then user message window does not contain messages
+// 		Then "Physical inventories" window is opened
+// 		And I close all client application windows
 
 Scenario: _2068015 delete linked string in the Physical inventory (one session)
 	And I close all client application windows

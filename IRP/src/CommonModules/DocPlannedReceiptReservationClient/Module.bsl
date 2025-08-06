@@ -56,7 +56,7 @@ EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
 	DocumentsClient.FillRowIDInItemList(Object);
-	RowIDInfoClient.UpdateQuantity(Object, Form);
+	RowIDInfoClientServer.UpdateQuantity(Object);
 EndProcedure
 
 Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export

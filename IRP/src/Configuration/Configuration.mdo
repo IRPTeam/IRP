@@ -1179,6 +1179,7 @@
   <commonForms>CommonForm.SerialLotNumbersTree</commonForms>
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
+  <commonForms>CommonForm.EditQuantity</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessKey</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>

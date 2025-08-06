@@ -1153,7 +1153,8 @@ Function GetFormItemNames()
 				|CalculationsKey,
 				|RecordsKey, ItemListIsClosedOrder,
 				|AllocationResultKey, AllocationResultRowID, AllocationResultBasisRowID,
-				|ItemListIsUnlockItemKey, ItemListIsUnlockStore";
+				|ItemListIsUnlockItemKey, ItemListIsUnlockStore,
+				|SelectedRowKey, Childrens";
 	Return ItemNames;
 EndFunction	
 
@@ -1259,17 +1260,7 @@ Procedure LinkedDocumentsEnd(Result, AdditionalParameters) Export
 		EndDo;
 	EndDo;
 	
-	RowIDInfoClient.UpdateQuantity(Object, Form);
-EndProcedure
-
-Procedure UpdateQuantityByTradeDocuments(Object, TableName) Export
-	For Each Row In Object.ItemList Do
-		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
-
-		If ArrayOfDocuments.Count() = 1 And ArrayOfDocuments[0].Quantity <> Row.QuantityInBaseUnit Then
-			ArrayOfDocuments[0].Quantity = Row.QuantityInBaseUnit;
-		EndIf;
-	EndDo;
+	RowIDInfoClientServer.UpdateQuantity(Object);
 EndProcedure
 
 Procedure SetLockedRowsForItemListByTradeDocuments(Object, Form, TableName) Export

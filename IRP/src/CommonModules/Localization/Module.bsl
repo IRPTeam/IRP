@@ -1608,7 +1608,7 @@ Function Strings(Lang) Export
 	// %3 - Red/38 
 	// %4 - 8 
 	// %5 - 10
-	Strings.Insert("Error_081", NStr("en = 'In line %1 quantity by %2-%3 %4 less than quantity %5'",
+	Strings.Insert("Error_081", NStr("en = 'In line %1 quantity by %2-%3 %4 greater than quantity %5'",
 		Lang));
 	
 	// %1 - 1 
@@ -1787,6 +1787,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_184", NStr("en = 'Currency is a required field.'", Lang));
 	Strings.Insert("Error_185", NStr("en = 'Wrong linked row [%1]: Document date [%2] less than Basis date [%3]'", Lang));
 	Strings.Insert("Error_186", NStr("en = 'Document date [%1] greater than date [%2] in [%3]'", Lang));
+	Strings.Insert("Error_187", NStr("en = 'Error chage quantity for [%1]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -2607,6 +2608,7 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en = 'Show only active items'", Lang));
 	Strings.Insert("InternalCommands_ShowNumerator", NStr("en = 'Show numerator'", Lang));
 	Strings.Insert("InternalCommands_ShowNumerator_Check", NStr("en = 'Hide numerator'", Lang));
+	Strings.Insert("InternalCommands_EditQuantity", NStr("en = 'Edit quantity'", Lang));
 #EndRegion
 	
 #Region FormulaEditor

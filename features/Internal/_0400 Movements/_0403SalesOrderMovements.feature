@@ -90,6 +90,11 @@ Scenario: _040148 preparation (sales order movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.SalesOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document SO, SC (check movements when change quantity)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1326).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1326).GetObject().Write(DocumentWriteMode.Posting);"    |
 		
 	# * Check query for sales order movements
 	# 	Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"
@@ -604,4 +609,86 @@ Scenario: _0401577 check sales order movements by the Register "Posted documents
 			| 'Register  "Posted documents registry"'   | ''                                        | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
 			| ''                                        | 'Document'                                | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
 			| ''                                        | 'Sales order 1 dated 27.01.2021 19:50:45' | '27.01.2021 19:50:45' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows
+
+Scenario: _0401578 check Sales order and Shipment confirmation movements by the Register  "R4012 Stock Reservation" when change quantity
+	And I close all client application windows
+	* Check movements by the Register "R4012 Stock Reservation" for SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 326'  |
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order 1 326 dated 06.08.2025 12:15:16' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'         | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                            | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                            | '06.08.2025 12:15:16' | 'Receipt'    | 'Store 01' | 'XS/Red'   | 'Sales order 1 326 dated 06.08.2025 12:15:16' | '10'       |		
+		And I close all client application windows
+	* Check movements by the Register "R4012 Stock Reservation" for SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 326'  |
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Shipment confirmation 1 326 dated 06.08.2025 12:15:58' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'                   | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                                      | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                                      | '06.08.2025 12:15:58' | 'Expense'    | 'Store 01' | 'XS/Red'   | 'Sales order 1 326 dated 06.08.2025 12:15:16' | '10'       |		
+	* Change quantity in SC and check movements
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 326'  |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "12,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Shipment confirmation 1 326 dated 06.08.2025 12:15:58' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'                   | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                                      | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                                      | '06.08.2025 12:15:58' | 'Expense'    | 'Store 01' | 'XS/Red'   | 'Sales order 1 326 dated 06.08.2025 12:15:16' | '10'       |				
+	* Change quantity in SO and check movements for SO and SC
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 326'  |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I click "Edit quantity" button
+		And I input "12,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Post" button
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order 1 326 dated 06.08.2025 12:15:16' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'         | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                            | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                            | '06.08.2025 12:15:16' | 'Receipt'    | 'Store 01' | 'XS/Red'   | 'Sales order 1 326 dated 06.08.2025 12:15:16' | '12'       |		
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 326'  |
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Shipment confirmation 1 326 dated 06.08.2025 12:15:58' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'                   | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                                      | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                                      | '06.08.2025 12:15:58' | 'Expense'    | 'Store 01' | 'XS/Red'   | 'Sales order 1 326 dated 06.08.2025 12:15:16' | '12'       |		
 	And I close all client application windows

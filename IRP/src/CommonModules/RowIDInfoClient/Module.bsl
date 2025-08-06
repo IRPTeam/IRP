@@ -12,52 +12,6 @@ Procedure DeleteRows(Object, Form) Export
 	EndIf;
 EndProcedure
 
-Procedure UpdateQuantity(Object, Form) Export
-	TabularSectionName = "";
-	If Object.Property("ShipmentConfirmations") Then
-		TabularSectionName = "ShipmentConfirmations";
-	ElsIf Object.Property("GoodsReceipts") Then
-		TabularSectionName = "GoodsReceipts";
-	ElsIf Object.Property("WorkSheets") Then
-		TabularSectionName = "WorkSheets";
-	EndIf;
-	
-	For Each RowItemList In Object.ItemList Do
-		
-		IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
-		If IDInfoRows.Count() = 1 Then
-			If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then
-				IDInfoRows[0].Quantity = ?(RowItemList.Difference < 0, -RowItemList.Difference, RowItemList.Difference);
-			Else
-				IDInfoRows[0].Quantity = RowItemList.QuantityInBaseUnit;
-			EndIf;
-		Else
-			If Not ValueIsFilled(TabularSectionName) Then
-				If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then
-					For Each IDInfoRow In IDInfoRows Do
-						IDInfoRow.Quantity = ?(RowItemList.Difference < 0, -RowItemList.Difference,
-							RowItemList.Difference);
-					EndDo;
-				Else
-					For Each IDInfoRow In IDInfoRows Do
-						IDInfoRow.Quantity = RowItemList.QuantityInBaseUnit;
-					EndDo;
-				EndIf;
-			Else
-				For Each Row In Object[TabularSectionName] Do
-					If Row.Key <> RowItemList.Key Then
-						Continue;
-					EndIf;
-					IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key, BasisKey", Row.Key, Row.BasisKey));
-					If IDInfoRows.Count() = 1 Then
-						IDInfoRows[0].Quantity = Row.Quantity;
-					EndIf;
-				EndDo;
-			EndIf;
-		EndIf;
-	EndDo;	
-EndProcedure
-
 Function GetSelectedRowInfo(CurrentData, ArrayOfFilterExcludeFields = Undefined) Export
 	Result = New Structure("SelectedRow, FilterBySelectedRow", Undefined, Undefined);
 	If CurrentData = Undefined Then
@@ -283,3 +237,13 @@ Procedure OpenForm_AddLinkedDocumentRows(Object, Form, FormParameters,
 			FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
+Procedure OpenForm_EditQuantity(Object, Form) Export
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData <> Undefined Then
+		FormParameters = New Structure();
+		FormParameters.Insert("SelectedRowInfo", GetSelectedRowInfo(CurrentData));
+		FormParameters.Insert("TablesInfo"     , GetTablesInfo(Object, CurrentData.Key));
+		FormParameters.Insert("Ref"            , Object.Ref);
+		OpenForm("CommonForm.EditQuantity", FormParameters, Form, , , , , FormWindowOpeningMode.LockOwnerWindow);
+	EndIf;
+EndProcedure

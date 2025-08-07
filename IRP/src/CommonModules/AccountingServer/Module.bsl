@@ -508,7 +508,7 @@ Function ExtractValueByType(ExtDimensionType, ObjectData, RowData, ArrayOfTypes,
 				EndIf;
 			EndDo;
 		Else
-                        Raise R().UnsupportedRowDataType;
+			Raise R().UnsupportedRowDataType;
 		EndIf;
 	EndIf;
 	
@@ -662,7 +662,8 @@ Function __GetAccountingOperationsByLedgerType(Ref, Period, DocTransactionType, 
 	|	InformationRegister.LedgerTypeOperations.SliceLast(&Period, LedgerType = &LedgerType
 	|	AND AccountingOperation.Parent = &AccountingOperationGroup) AS LedgerTypeOperationsSliceLast
 	|WHERE
-	|	LedgerTypeOperationsSliceLast.Use";
+	|	LedgerTypeOperationsSliceLast.Use
+	|	AND NOT LedgerTypeOperationsSliceLast.AccountingOperation.DeletionMark";
 	Query.SetParameter("Period", Period);
 	Query.SetParameter("LedgerType", LedgerType);
 	Query.SetParameter("AccountingOperationGroup", AccountingOperationGroup);
@@ -1950,9 +1951,8 @@ Procedure FillAccountingRowAnalytics(Parameters, Row = Undefined)
 	AnalyticParameters.Insert("MetadataName" , Parameters.MetadataName);
 	
 	AnalyticData = Documents[Parameters.MetadataName].GetAccountingAnalytics(AnalyticParameters);
-        If AnalyticData = Undefined Then
-                Raise StrTemplate(R().DocumentAccountingOpNotSupported,
-                        Parameters.MetadataName, Parameters.Operation);
+	If AnalyticData = Undefined Then
+		Raise StrTemplate(R().DocumentAccountingOpNotSupported, Parameters.MetadataName, Parameters.Operation);
 	EndIf;
 		
 	AnalyticRow.Operation = AnalyticData.Operation;

@@ -3,7 +3,13 @@
 
 &Around("SendRequestClientServer")
 Function Unit_SendRequestClientServer(ConnectionSettingData, ResourceParameters, RequestParameters, RequestBody, EndPoint, AddInfo)
-	ConnectionSetting = ConnectionSettingData.Value;
+	
+	If TypeOf(ConnectionSettingData) = Type("Structure") And ConnectionSettingData.Property("Value") Then
+		ConnectionSetting = ConnectionSettingData.Value;
+	Else
+		ConnectionSetting = ConnectionSettingData;		 
+	EndIf;
+	
 	isNeedingToSaveExchange = CommonFunctionsServer.GetRefAttribute(ConnectionSetting.IntegrationSettingsRef, "Unit_SaveExchangeHistory");
 	
 	If isNeedingToSaveExchange Then 

@@ -28,6 +28,11 @@ Procedure FillTree()
 		NewRow.Name = MetaRow.Key;
 
 		For Each ObRow In Metadata[MetaRow.Key] Do
+			
+			If ObRow = Metadata.InformationRegisters.SecureDataStorage Then
+				Continue;
+			EndIf;
+			
 			AddRow = NewRow.GetItems().Add();
 			AddRow.Name = ObRow.Name;
 			
@@ -68,7 +73,7 @@ Procedure SaveSettingsAtServer()
 				DataHistorySet.Use = MetaRow.Use;
 
 				DataHistory.SetSettings(Metadata[Row.Name][MetaRow.Name], DataHistorySet);
-			Else
+			Else				
 				DataHistory.SetSettings(Metadata[Row.Name][MetaRow.Name], Undefined);
 			EndIf;
 

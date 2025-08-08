@@ -312,6 +312,15 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="27b91f77-9a78-4ec2-8b31-131d61c8cdea">
+    <name>ItemListAdditionalInfo</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list additional info</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <tabularSections uuid="1102a58b-c8c2-438b-9bae-05fd419df297">
     <producedTypes>
       <objectType typeId="514d49de-949d-4271-80da-4b1005a1d064" valueTypeId="7a3ea28c-99ba-48eb-a0c9-fe0a3b956fa2"/>

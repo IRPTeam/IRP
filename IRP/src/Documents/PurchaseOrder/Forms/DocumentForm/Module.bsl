@@ -6,6 +6,7 @@ Procedure OnReadAtServer(CurrentObject)
 	DocPurchaseOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	ThisObject.ClosingOrder = DocOrderClosingServer.GetClosingByPurchaseOrder(Object.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
+	FillAdditionalInfoInRows();
 EndProcedure
 
 &AtServer
@@ -321,6 +322,11 @@ EndProcedure
 
 &AtClient
 Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	If Field.Name = "ItemListAdditionalInfo" Then
+		StandardProcessing = False;
+		OpenAdditionalInfoInput();
+		Return;
+	EndIf;
 	DocPurchaseOrderClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
@@ -494,25 +500,74 @@ EndProcedure
 
 #EndRegion
 
-#Region EXPENSE_TYPE
-
-&AtClient
-Procedure ItemListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPurchaseOrderClient.ItemListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
-	DocPurchaseOrderClient.ItemListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
 #Region CANCEL
 
 &AtClient
 Procedure ItemListCancelOnChange(Item)
 	DocPurchaseOrderClient.ItemListCancelOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region AdditionalInfo
+
+&AtServer
+Procedure FillAdditionalInfoInRows()
+	For Each ItemListRow In Object.ItemList Do
+		AdditionalInfoArr = New Array;
+		If Not ItemListRow.ExpenseType.IsEmpty() Then
+			AdditionalInfoArr.Add(ItemListRow.ExpenseType);
+		EndIf;
+		If Not ItemListRow.ProfitLossCenter.IsEmpty() Then
+			AdditionalInfoArr.Add(ItemListRow.ProfitLossCenter);
+		EndIf;
+		If Not IsBlankString(ItemListRow.Detail) Then
+			AdditionalInfoArr.Add(ItemListRow.Detail);
+		EndIf;
+		AdditionalInfoStr = StrConcat(AdditionalInfoArr, "; ");
+		If IsBlankString(AdditionalInfoStr) Then
+			AdditionalInfoStr = "<...>";
+		EndIf;
+		ItemListRow.AdditionalInfo = AdditionalInfoStr;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure ItemListAdditionalInfoChoiceProcessing(Item, ValueSelected, AdditionalData, ChoiceByAdding, StandardProcessing)
+	OpenAdditionalInfoInput();
+EndProcedure
+
+&AtClient
+Procedure OpenAdditionalInfoInput()
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	RowParameters = New Structure();
+	RowParameters.Insert("ProfitLossCenter", CurrentData.ProfitLossCenter);
+	RowParameters.Insert("ExpenseType", CurrentData.ExpenseType);
+	RowParameters.Insert("Detail", CurrentData.Detail);
+	RowParameters.Insert("ReadOnly", Not ClosingOrder.IsEmpty());
+	
+	OpenForm("Document.PurchaseOrder.Form.ItemListAdditionalInfo", 
+		RowParameters, ThisObject, , , , 
+		New CallbackDescription("AdditionalInfoClose", ThisObject, CurrentData.GetID()), 
+		FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure AdditionalInfoClose(Result, CurrentRowID) Export
+	
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	CurrentData = Object.ItemList.FindByID(CurrentRowID);
+	FillPropertyValues(CurrentData, Result);
+	
+	FillAdditionalInfoInRows();
+	
 EndProcedure
 
 #EndRegion

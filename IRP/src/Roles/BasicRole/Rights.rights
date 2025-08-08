@@ -2045,6 +2045,16 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.SecureDataStorage</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>WHERE FALSE</condition>
+			</restrictionByCondition>
+		</right>
+	</object>
+	<object>
 		<name>CommonAttribute.Description_en</name>
 		<right>
 			<name>View</name>

@@ -448,6 +448,11 @@ Function InformationRegisters() Export
 	ArrayOfErrors = New Array();
 	
 	For Each MetaObj In Metadata.InformationRegisters Do
+		
+		If MetaObj = Metadata.InformationRegisters.SecureDataStorage Then
+			Continue;
+		EndIf;
+		
 		Try
 			InformationRegisters[MetaObj.Name].GetAccessKey();
 		Except

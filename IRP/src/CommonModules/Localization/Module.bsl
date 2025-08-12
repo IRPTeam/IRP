@@ -2840,5 +2840,10 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("Task_Result_Confirmation_Not", NStr("en = 'Rejected'", Lang));
 #EndRegion
 
+#Region SecureStorage
+	Strings.Insert("SecureStorage_CanStoreOnlyStructure", NStr("en = 'It can be stored only Structure type'", Lang));
+	
+#EndRegion
+
 	Return Strings;
 EndFunction

@@ -609,6 +609,7 @@ Function GetAnalytics_WithholdingTax(Parameters)
 	                                                    Parameters.ObjectData.TaxAgreement,
 	                                                    Parameters.ObjectData.TaxAgreement.CurrencyMovementType.Currency);
 	AdditionalAnalytics = New Structure;
+	AdditionalAnalytics.Insert("WithholdingTax", TaxesServer.GetWithholdingTaxRef());
 	AdditionalAnalytics.Insert("Company"          , Parameters.ObjectData.Company);
 	AdditionalAnalytics.Insert("Partner"          , Parameters.ObjectData.TaxPartner);
 	AdditionalAnalytics.Insert("Agreement"        , Parameters.ObjectData.TaxAgreement);

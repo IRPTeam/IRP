@@ -217,7 +217,7 @@ EndFunction
 // Send test message.
 // 
 // Parameters:
-//  ConnectionSetting - See IntegrationServer.ConnectionSettingTemplate
+//  ConnectionSetting - See IntegrationServer.ConnectionSetting
 Procedure SendTestMessage(ConnectionSetting) Export
 
 	MessageDescription = GetMessageDescription();
@@ -225,9 +225,9 @@ Procedure SendTestMessage(ConnectionSetting) Export
 	MessageDescription.Subject = "Test";
 	MessageDescription.Texts.Add("<h1> Test </h1>");
 	//@skip-check property-return-type, invocation-parameter-type-intersect
-	MessageDescription.To.Add(ConnectionSetting.eMailForTest);
+	MessageDescription.To.Add(ConnectionSetting.Value.eMailForTest);
 	
-	Answer = SendMessage(MessageDescription, ConnectionSetting);
+	Answer = SendMessage(MessageDescription, ConnectionSetting.Value);
 	
 	If IsBlankString(Answer) Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().S_028);

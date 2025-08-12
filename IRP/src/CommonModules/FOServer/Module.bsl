@@ -25,6 +25,10 @@ Function IsUseCompanies() Export
 	Return GetFunctionalOption("UseCompanies");
 EndFunction
 
+Function IsUseLegalName() Export
+	Return GetFunctionalOption("UseLegalName");
+EndFunction
+
 Function IsUsePartnersHierarchy() Export
 	Return GetFunctionalOption("UsePartnersHierarchy");
 EndFunction
@@ -269,7 +273,7 @@ Function GetDefault_Store(Value = Undefined, IsUpdateDefaults = False) Export
 EndFunction
 
 Function GetDefault_LegalName(Parameters, Value = Undefined) Export
-	If IsUseCompanies() Then
+	If IsUseLegalName() Then
 		Return Value;
 	EndIf;
 	Query = New Query();
@@ -286,7 +290,7 @@ Function GetDefault_LegalName(Parameters, Value = Undefined) Export
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
 		If QuerySelection.Count() > 1 Then
-                        Raise StrTemplate(R().Error_FoundMoreThanOneCompany);
+			Raise StrTemplate(R().Error_FoundMoreThanOneCompany);
 		EndIf;
 		Return New Structure("Ref, DeletionMark", QuerySelection.Ref, QuerySelection.DeletionMark);
 	EndIf;
@@ -404,7 +408,7 @@ Function CreateDefault_AgreementByType(Partner, AgreementType, Value)
 EndFunction	
 
 Function CreateDefault_LegalName(Parameters, Value = Undefined) Export
-	If IsUseCompanies() Then
+	If IsUseLegalName() Then
 		Return Value;
 	EndIf;
 		

@@ -1048,7 +1048,7 @@ Procedure FillRowID_SC(Source, Cancel)
 					NewRow = Source.RowIDInfo.Add();
 					FillPropertyValues(NewRow, Row);
 					NewRow.CurrentStep = Undefined;
-					NewRow.NextStep = Catalogs.MovementRules.SI;
+					NewRow.NextStep = Catalogs.MovementRules.SI_GR;
 					NewRow.Quantity = RowItemList.QuantityInBaseUnit - TotalQuantity;
 				EndDo;
 			EndIf;
@@ -1289,7 +1289,7 @@ Procedure FillRowID_GR(Source, Cancel)
 					NewRow = Source.RowIDInfo.Add();
 					FillPropertyValues(NewRow, Row);
 					NewRow.CurrentStep = Undefined;
-					NewRow.NextStep = Catalogs.MovementRules.PI;
+					NewRow.NextStep = Catalogs.MovementRules.PI_SC;
 					NewRow.Quantity = RowItemList.QuantityInBaseUnit - TotalQuantity;
 				EndDo;
 			EndIf;

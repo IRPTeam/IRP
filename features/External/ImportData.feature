@@ -3664,6 +3664,32 @@ Scenario: Create catalog AccessGroups and AccessProfiles objects (audit lock)
 		| 'e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0638' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b327099a' |
 
 
+Scenario: Create catalog AccessGroups and AccessProfiles objects (safe storage)
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create catalog "AccessProfiles" objects:
+		| 'Ref'                                                                    | 'DeletionMark' | 'Code' | 'Author'                                                        | 'Description_en'       | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e8af6b9' | 'False'        | 22     | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Safe storage + admin' | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '10.10.2024 10:35:40' | '10.10.2024 10:35:40' | 'False'     |
+		
+	And I refill object tabular section "Roles":
+		| 'Ref'                                                                    | 'Role'                          | 'Configuration' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e8af6b9' | 'AdminAccessToSecureStorage'    | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e8af6b9' | 'FullAccess'                    | 'IRP'           |
+		
+	And I check or create catalog "AccessGroups" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'OnlyRegisters' | 'Author'                                                        | 'Description_en'       | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0643' | 'False'        | 11     | 'False'         | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Safe storage + admin' | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '10.10.2024 10:43:25' | '10.10.2024 10:55:56' | 'False'     |
+
+	And I refill object tabular section "Profiles":
+		| 'Ref'                                                                  | 'Profile'                                                                |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0643' | 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e8af6b9' |
+
+	And I refill object tabular section "Users":
+		| 'Ref'                                                                  | 'User'     |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0643' | '$$IdCI$$' |
+	Given I open hyperlink "e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0643"
+	And I click "Save and close" button
+	
+	
 Scenario: Create catalog Files and information register "AttachedFiles" records
 
 	And I check or create catalog "Files" objects:

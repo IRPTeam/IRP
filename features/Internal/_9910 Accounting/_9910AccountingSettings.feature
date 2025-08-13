@@ -2405,7 +2405,7 @@ Scenario: _0991079 check Bank receipt accounting movements (Other partner)
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr' | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                |
-			| '1' | 'Yes'      | '3250'       | 'Bank account, TRY' | ''                    | ''                    | 'TRY'            | '490'          | ''              | '9200'       | ''                 | 'Other partner'       | ''                    | 'TRY'             | '490'           | ''                | '490,00' | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' |
+			| '1' | 'Yes'      | '3250'       | 'Bank account, TRY' | ''                    | ''                    | 'TRY'            | '490'          | ''              | '9200'       | 'Other partner'    | 'Other partner'       | ''                    | 'TRY'             | '490'           | ''                | '490,00' | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' |
 	And I close all client application windows
 
 Scenario: _0991081 check Bank receipt accounting movements (Other income)

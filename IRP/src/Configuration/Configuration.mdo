@@ -867,6 +867,8 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.DashboardClient</commonModules>
+  <commonModules>CommonModule.DashboardServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1597,6 +1599,7 @@
   <dataProcessors>DataProcessor.UpdateDatabase</dataProcessors>
   <dataProcessors>DataProcessor.SimpleBatchSequence</dataProcessors>
   <dataProcessors>DataProcessor.Chat</dataProcessors>
+  <dataProcessors>DataProcessor.ManagerDashboard</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AppliedDatabaseUpdates</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
@@ -1709,6 +1712,7 @@
   <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
   <informationRegisters>InformationRegister.TranformedObjectsLink</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
+  <informationRegisters>InformationRegister.DashboardSettings</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>

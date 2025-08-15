@@ -8,7 +8,6 @@
   <location>Constant.UsePurchase</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Subsystem.PurchaseAP</content>
-  <content>Catalog.Items</content>
   <content>Document.GoodsReceipt</content>
   <content>Document.PurchaseOrder</content>
   <content>Report.R1001_Purchases</content>

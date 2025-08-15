@@ -570,6 +570,7 @@
   <commonModules>CommonModule.CurrenciesClientServer</commonModules>
   <commonModules>CommonModule.CurrenciesServer</commonModules>
   <commonModules>CommonModule.DataVersioningServer</commonModules>
+  <commonModules>CommonModule.DefaultDataServer</commonModules>
   <commonModules>CommonModule.DocAdditionalAccrualClient</commonModules>
   <commonModules>CommonModule.DocAdditionalAccrualServer</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>

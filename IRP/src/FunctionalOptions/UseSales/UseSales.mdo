@@ -8,7 +8,6 @@
   <location>Constant.UseSales</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>CommonCommand.OpenCustomerAgreements</content>
-  <content>Catalog.Items</content>
   <content>CommonCommand.OpenPartnersCustomer</content>
   <content>Catalog.SpecialOfferTypes</content>
   <content>Catalog.PartnersBankAccounts</content>

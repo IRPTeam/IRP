@@ -8,6 +8,7 @@ Function Tests() Export
 	TestList.Add("GetItemInfo_GetPackageDimensions");
 	TestList.Add("CommonFunctionsClientServer_isBase64Value");
 	TestList.Add("SystemAttributesSets_CheckModules");
+	TestList.Add("FunctionsOptions_Checks");
 	Return TestList;
 EndFunction
 
@@ -433,6 +434,37 @@ Function SystemAttributesSets_CheckModules() Export
 	If ArrayOfErrors.Count() Then
 		Unit_Service.assertFalse("Check System Attributes settings: " + Chars.LF +
 			StrConcat(ArrayOfErrors, Chars.LF));
+	EndIf;
+
+	Return Undefined;
+
+EndFunction
+
+Function FunctionsOptions_Checks() Export
+
+	ArrayOfErrors = New Array(); // Array of String
+	
+	FunctionalOptionsList = FOServer.GetFOList();
+	For Each FOItem In FunctionalOptionsList Do
+		MethodName = "Is" + FOItem;
+		Try
+			FOServer.GetFunctionalOptionValue(FOItem);
+		Except
+			ArrayOfErrors.Add("Not found method: " + MethodName);
+		EndTry;
+	EndDo;
+	
+	FOGroups = FOServer.GetFOGroups();
+	For Each GroupKeyValue In FOGroups Do
+		GroupName = GroupKeyValue.Key;
+		If FOServer.GetFOGroupSynonym(GroupName) = "" Then
+			ArrayOfErrors.Add("Not found Synonim for group: " + GroupName);
+		EndIf;
+	EndDo;
+	
+	If ArrayOfErrors.Count() Then
+		Unit_Service.assertFalse(
+			"Check FOServer methods: " + Chars.LF + StrConcat(ArrayOfErrors, Chars.LF));
 	EndIf;
 
 	Return Undefined;

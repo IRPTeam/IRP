@@ -14,7 +14,6 @@
   <content>Document.ChequeBondTransaction</content>
   <content>Catalog.ChequeBonds</content>
   <content>Document.CreditNote</content>
-  <content>Catalog.Currencies</content>
   <content>Document.ExpenseAccruals</content>
   <content>Document.CashPayment</content>
   <content>Document.CashRevenue</content>
@@ -49,7 +48,6 @@
   <content>Document.VendorsAdvancesClosing</content>
   <content>Report.R3010_CashOnHand</content>
   <content>Report.R5020_PartnersBalance</content>
-  <content>Catalog.Partners</content>
   <content>Report.R1100_CustomersAging</content>
   <content>Report.R5020_ProfitLosses</content>
 </mdclass:FunctionalOption>

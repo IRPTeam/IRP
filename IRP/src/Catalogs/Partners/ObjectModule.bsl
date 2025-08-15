@@ -17,8 +17,8 @@ Procedure OnWrite(Cancel)
 		AgreementTypes.Add(Enums.AgreementTypes.Vendor);
 	EndIf;
 	Parameters = New Structure("Partner, AgreementTypes", ThisObject, AgreementTypes);
-	FOServer.CreateDefault_LegalName(Parameters);
-	FOServer.CreateDefault_Agreement(Parameters);
+	DefaultDataServer.CreateDefault_LegalName(Parameters);
+	DefaultDataServer.CreateDefault_Agreement(Parameters);
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

@@ -1788,6 +1788,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_185", NStr("en = 'Wrong linked row [%1]: Document date [%2] less than Basis date [%3]'", Lang));
 	Strings.Insert("Error_186", NStr("en = 'Document date [%1] greater than date [%2] in [%3]'", Lang));
 	Strings.Insert("Error_187", NStr("en = 'Error chage quantity for [%1]'", Lang));
+	Strings.Insert("Error_188", NStr("en = 'Section with name [%1] already exists'", Lang));
+	Strings.Insert("Error_189", NStr("en = 'Ext. dimension number is required field'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	

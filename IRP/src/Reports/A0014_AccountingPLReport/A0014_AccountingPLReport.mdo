@@ -7,7 +7,7 @@
   <name>A0014_AccountingPLReport</name>
   <synonym>
     <key>en</key>
-    <value>P&amp;L report</value>
+    <value>P&amp;L Report</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <defaultForm>Report.A0014_AccountingPLReport.Form.ReportForm</defaultForm>

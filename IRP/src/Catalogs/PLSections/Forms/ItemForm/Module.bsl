@@ -8,10 +8,6 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	If Parameters.Key.IsEmpty() Then
-		If ValueIsFilled(Object.Parent) Then
-			Object.LedgerType = Object.Parent.LedgerType;
-			Object.LedgerTypeVariant = Object.Parent.LedgerTypeVariant;
-		EndIf;
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;	
 EndProcedure
@@ -27,57 +23,36 @@ Procedure DescriptionOpening(Item, StandardProcessing) Export
 EndProcedure
 
 &AtClient
-Procedure LedgerTypeOnChange(Item)
-	LedgerTypeOnChangeAtServer();
-EndProcedure
-
-&AtServer
-Procedure LedgerTypeOnChangeAtServer()
-	If ValueIsFilled(Object.LedgerType) Then
-		Object.LedgerTypeVariant = Object.LedgerType.LedgerTypeVariant;
-	Else
-		Object.LedgerTypeVariant = Undefined;
+Procedure AccountsAccountOnChange(Item)
+	CurrentData = Items.Accounts.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
 	EndIf;
+	
+	ExtDimNumber = 1;
+	For Each ExtDimension In CurrentData.Account.ExtDimensionTypes Do
+		If ExtDimension.ExtDimensionType.ValueType.Types()
+			.Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
+				CurrentData.ExtDimensionNumber = ExtDimNumber;
+				Break;
+		EndIf;
+		ExtDimNumber = ExtDimNumber + 1;
+	EndDo;
 EndProcedure
 
 &AtClient
-Procedure ParentOnChange(Item)
-	ParentOnChangeAtServer()
-EndProcedure
-
-&AtServer
-Procedure ParentOnChangeAtServer()
-	If ValueIsFilled(Object.Parent) Then
-		Object.LedgerType = Object.Parent.LedgerType;
-	Else
-		Object.LedgerType = Undefined;
-	EndIf;
-	LedgerTypeOnChangeAtServer();
+Procedure SectionTypeOnChange(Item)
 	SetVisibilityAvailability(Object, ThisObject);
+	If Object.SectionType = PredefinedValue("Enum.PLSectionTypes.Calculation") Then
+		Object.Accounts.Clear();
+	Else
+		Object.Expression = "";
+	EndIf;
 EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	IsParrentFilled = ValueIsFilled(Object.Parent);
-	Form.Items.LedgerType.ReadOnly = IsParrentFilled;
-	Form.Items.LedgerTypeVariant.ReadOnly = IsParrentFilled;
+	IsDataSelectionType = (Object.SectionType = PredefinedValue("Enum.PLSectionTypes.DataSelection"));
+	Form.Items.PageDataFilter.Visible = IsDataSelectionType;
+	Form.Items.PageExpression.Visible = Not IsDataSelectionType;
 EndProcedure
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

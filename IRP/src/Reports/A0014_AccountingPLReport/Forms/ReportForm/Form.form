@@ -76,19 +76,19 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>Variant</name>
-    <id>17</id>
+    <name>LedgerType</name>
+    <id>20</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Variant</segments>
+      <segments>LedgerType</segments>
     </dataPath>
     <extendedTooltip>
-      <name>VariantExtendedTooltip</name>
-      <id>19</id>
+      <name>LedgerTypeExtendedTooltip</name>
+      <id>22</id>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -97,8 +97,8 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>VariantContextMenu</name>
-      <id>18</id>
+      <name>LedgerTypeContextMenu</name>
+      <id>21</id>
       <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
@@ -286,14 +286,14 @@
     </edit>
   </attributes>
   <attributes>
-    <name>Variant</name>
+    <name>LedgerType</name>
     <title>
       <key>en</key>
-      <value>Variant</value>
+      <value>Ledger type</value>
     </title>
-    <id>6</id>
+    <id>7</id>
     <valueType>
-      <types>CatalogRef.PLSections</types>
+      <types>CatalogRef.LedgerTypes</types>
     </valueType>
     <view>
       <common>true</common>

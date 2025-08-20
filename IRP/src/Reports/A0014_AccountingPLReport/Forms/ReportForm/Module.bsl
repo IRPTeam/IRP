@@ -6,10 +6,6 @@ EndProcedure
 
 &AtServer
 Procedure GenerateAtServer()
-	Template = Reports.A0014_AccountingPLReport.GetTemplate("Template");
-		
-	ThisObject.DocResult.Clear();
-	
 	DataSelectionSections = GetSections(Enums.PLSectionTypes.DataSelection);
 	
 	Query = New Query();
@@ -71,7 +67,10 @@ Procedure GenerateAtServer()
 	EndDo;
 	
 	// output
-	
+	ThisObject.DocResult.Clear();
+	Template = Reports.A0014_AccountingPLReport.GetTemplate("Template");
+	Template.Parameters.Fill(Section);
+	ThisObject.DocResult.Put(Template);
 EndProcedure
 
 &AtServer
@@ -109,8 +108,8 @@ Function GetQueryText(AccountsRow, QueryNumber)
 	|	END) AS Amount,
 	|	&SectionName AS SectionName
 	|FROM
-	|	AccountingRegister.Basic.BalanceAndTurnovers(BEGINOFPERIOD(&StartDate, DAY), ENDOFPERIOD(&EndDate, DAY),,,
-	|		Account = &Account,, Company = &Company
+	|	AccountingRegister.Basic.BalanceAndTurnovers(BEGINOFPERIOD(&StartDate, DAY), ENDOFPERIOD(&EndDate, DAY),,, Account
+	|		IN HIERARCHY (&Account),, Company = &Company
 	|	AND LedgerType = &LedgerType
 	|	AND CASE
 	|		WHEN &ExtDimensionFilter

@@ -36,10 +36,13 @@ Procedure GenerateAtServer()
 	EndDo;
 	
 	Query.Text = StrConcat(ArrayOfQueryBatches, Chars.LF + " UNION ALL " + Chars.LF);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	QueryTable.GroupBy("SectionName", "Amount");
-	
+	If ValueIsFilled(Query.Text) Then
+		QueryResult = Query.Execute();
+		QueryTable = QueryResult.Unload();
+		QueryTable.GroupBy("SectionName", "Amount");
+	Else
+		QueryTable = New ValueTable();
+	EndIf;
 	Section = New Structure();
 	For Each Row In QueryTable Do
 		Section.Insert(Row.SectionName, Row.Amount);

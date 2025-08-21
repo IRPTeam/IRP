@@ -28,17 +28,20 @@ Procedure AccountsAccountOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+	CurrentData.ExtDimensionNumber = GetExtDimensionNumber(CurrentData.Account);
+EndProcedure
+
+&AtServer
+Function GetExtDimensionNumber(Account)
 	ExtDimNumber = 1;
-	For Each ExtDimension In CurrentData.Account.ExtDimensionTypes Do
+	For Each ExtDimension In Account.ExtDimensionTypes Do
 		If ExtDimension.ExtDimensionType.ValueType.Types()
 			.Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
-				CurrentData.ExtDimensionNumber = ExtDimNumber;
-				Break;
+				Return ExtDimNumber;
 		EndIf;
 		ExtDimNumber = ExtDimNumber + 1;
 	EndDo;
-EndProcedure
+EndFunction	
 
 &AtClient
 Procedure SectionTypeOnChange(Item)

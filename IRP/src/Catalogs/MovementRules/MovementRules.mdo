@@ -322,6 +322,20 @@
     <value>34</value>
    </code>
   </items>
+  <items id="0b8e3086-47d2-4053-8ffc-ac6584bf7c73">
+   <name>PI_SC</name>
+   <description>PI&amp;SC</description>
+   <code xsi:type="core:StringValue">
+    <value>35</value>
+   </code>
+  </items>
+  <items id="e7c6a3d7-f73d-41a9-a846-5b04c69f8676">
+   <name>SI_GR</name>
+   <description>SI&amp;GR</description>
+   <code xsi:type="core:StringValue">
+    <value>36</value>
+   </code>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

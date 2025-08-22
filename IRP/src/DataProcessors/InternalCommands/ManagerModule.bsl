@@ -18,6 +18,7 @@ Function GetAllCommandDescriptions() Export
 	Result.Add(GetCommandDescription("LoadDataFromTable"));
 	Result.Add(GetCommandDescription("AuditLock"));
 	Result.Add(GetCommandDescription("OpenVendorPrices"));
+	Result.Add(GetCommandDescription("EditQuantity"));
 	
 	For Each PrintTemplate_Name In PrintTemplates_GetCommandNames() Do
 		Result.Add(GetCommandDescription(PrintTemplate_Name));
@@ -63,6 +64,9 @@ Function GetCommandDescription(CommandName) Export
 	
 	ElsIf CommandName = "OpenVendorPrices" Then	
 		Return OpenVendorPrices_GetCommandDescription();
+	
+	ElsIf CommandName = "EditQuantity" Then	
+		Return EditQuantity_GetCommandDescription();
 	
 	ElsIf Right(CommandName, 14) = "_PrintTemplate" Then
 		Return PrintTemplates_GetCommandDescription(CommandName);
@@ -1032,6 +1036,50 @@ Procedure ExecutionTemplate_GroupDescription(GroupDescription)
 	GroupDescription.Type = "Popup";
 	
 EndProcedure 
+
+#EndRegion
+
+
+#Region ShowNumerator
+
+// Show not active get command description.
+// 
+// Returns:
+//  See InternalCommandsServer.GetCommandDescription
+Function EditQuantity_GetCommandDescription()
+	
+	CommandDescription = InternalCommandsServer.GetCommandDescription();
+	
+	CommandDescription.Name = "EditQuantity";
+	//@skip-check statement-type-change, property-return-type
+	CommandDescription.Title = R().InternalCommands_EditQuantity;
+	CommandDescription.ToolTip = CommandDescription.Title;
+	CommandDescription.Picture = "Resource";
+	
+	CommandDescription.LocationGroup = "CommandBar.Tools";
+	CommandDescription.LocationInCommandBar = "InAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
+	CommandDescription.ModifiesStoredData = False;
+		
+	CommandDescription.UsingObjectForm = True;
+	
+	Targets = CommandDescription.Targets;
+	
+	For Each Doc In Metadata.Documents Do
+		If Doc = Metadata.Documents.PhysicalInventory
+			Or Doc = Metadata.Documents.RetailSalesReceipt
+			Or Doc = Metadata.Documents.RetailReturnReceipt Then
+				Continue;
+		EndIf;
+		If Doc.TabularSections.Find("RowIDInfo") <> Undefined  Then
+			Targets.Add(Doc.FullName());
+		EndIf;
+	EndDo;
+	
+	CommandDescription.Targets = New FixedArray(Targets);
+	
+	Return CommandDescription;
+	
+EndFunction
 
 #EndRegion
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bbeb8bd0-d007-4912-922c-95fbf3fc5609">
+ <name>AdminAccessToSecureStorage</name>
+ <synonym>
+  <key>tr</key>
+  <value>Admin access to secure storage</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Админ доступ к безопасному хранилищу данных</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Admin access to secure storage</value>
+ </synonym>
+</mdclass:Role>

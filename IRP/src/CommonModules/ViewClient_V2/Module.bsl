@@ -2423,7 +2423,7 @@ Async Function ItemListSplitRow(Object, Form) Export
 	
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
 	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
-	RowIDInfoClient.UpdateQuantity(Object, Form);
+	RowIDInfoClientServer.UpdateQuantity(Object);
 	SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Object, Form);	
 	Return NewRow;
 EndFunction
@@ -2854,19 +2854,19 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder" Then
 		
-		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
+		RowIDInfoClientServer.UpdateQuantity(Parameters.Object);
 	EndIf;
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentConfirmations") Then
-		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentConfirmations");
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentConfirmations");
 	EndIf;
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentPlaningOrders") Then
-		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentPlaningOrders");
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentPlaningOrders");
 	EndIf;
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "GoodsReceipts") Then
-		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "GoodsReceipts");
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(Parameters.Object, "GoodsReceipts");
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"

@@ -1585,5 +1585,51 @@ Scenario: _012044 clone value in the CashExpense
 	* Check clone value
 		When check clone value in the documents (Financial movement type, Cash flow center, Project, Expense type)
 
+Scenario: _012046 selected item positioning in Revenue/Expense selection form (SI -revenue)
+	And I close all client application windows
+	* Open Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+		And in the table "ItemList" I click "Add" button
+		And I activate "Revenue type" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Revenue type" attribute in "ItemList" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Software"    |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+	* Check
+		And I select current line in "ItemList" table
+		And I click choice button of "Revenue type" attribute in "ItemList" table
+		And the current line of "List" table is equal to
+			| "Description" |
+			| "Software"    |
+	And I close all client application windows
+
+Scenario: _012047 selected item positioning in Revenue/Expense selection form (PI -expense)
+	And I close all client application windows
+	* Open Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click "Create" button
+		And in the table "ItemList" I click "Add" button
+		And I activate "Expense type" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Expense type" attribute in "ItemList" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Software"    |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+	* Check
+		And I select current line in "ItemList" table
+		And I click choice button of "Expense type" attribute in "ItemList" table
+		And the current line of "List" table is equal to
+			| "Description" |
+			| "Software"    |
+	And I close all client application windows
+	
+
+				
 Scenario: _999999 close TestClient session
 	And I close TestClient session

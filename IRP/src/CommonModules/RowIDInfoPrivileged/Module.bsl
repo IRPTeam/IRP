@@ -31,6 +31,10 @@ Procedure CreateChildrenTree(Ref, Key, RowID, TreeRows) Export
 	RowIDInfoServer.CreateChildrenTree(Ref, Key, RowID, TreeRows);
 EndProcedure
 
+Function CreateChildrenTree2(Ref, Key, RowID, TreeRows) Export
+	Return RowIDInfoServer.CreateChildrenTree2(Ref, Key, RowID, TreeRows);
+EndFunction
+
 Procedure FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable) Export
 	RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 EndProcedure
@@ -50,3 +54,7 @@ EndProcedure
 Procedure UndoPosting_RowIDUndoPosting(Object, Cancel) Export
 	RowIDInfoServer.UndoPosting_RowIDUndoPosting(Object, Cancel);
 EndProcedure
+
+Function EditQuantity(Ref, SelectedRowKey, Quantity, Unit, ArrayOfChildrens) Export
+	Return RowIDInfoServer.EditQuantity(Ref, SelectedRowKey, Quantity, Unit, ArrayOfChildrens);
+EndFunction

@@ -310,3 +310,13 @@ Function GetHiddenTables() Export
 	Return HiddenTables;
 	
 EndFunction
+
+Procedure UpdateQuantityByTradeDocuments(Object, TableName) Export
+	For Each Row In Object.ItemList Do
+		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
+
+		If ArrayOfDocuments.Count() = 1 And ArrayOfDocuments[0].Quantity <> Row.QuantityInBaseUnit Then
+			ArrayOfDocuments[0].Quantity = Row.QuantityInBaseUnit;
+		EndIf;
+	EndDo;
+EndProcedure

@@ -2264,9 +2264,9 @@ Function Strings(Lang) Export
 	// %3 - Red/38 
 	// %4 - 8 
 	// %5 - 10
-	Strings.Insert("Error_081", NStr("en='In line %1 quantity by %2-%3 %4 less than quantity %5';
-		|ru='В строке %1 количество товара %2-%3 %4 меньше чем количество %5';
-		|tr='%1 satırda %2-%3 %4 miktarı %5 miktarından daha küçüktür'",
+	Strings.Insert("Error_081", NStr("en='In line %1 quantity by %2-%3 %4 greater than quantity %5';
+		|ru='In line %1 quantity by %2-%3 %4 greater than quantity %5';
+		|tr='In line %1 quantity by %2-%3 %4 greater than quantity %5'",
 		Lang));
 	
 	// %1 - 1 
@@ -2660,6 +2660,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_186", NStr("en='Document date [%1] greater than date [%2] in [%3]';
 		|ru='Дата документа [%1] больше даты [%2] в [%3]';
 		|tr='Belge tarihi [%1], [%3] içindeki [%2] tarihinden büyük'", Lang));
+	Strings.Insert("Error_187", NStr("en='Error chage quantity for [%1]';
+		|ru='Error chage quantity for [%1]';
+		|tr='Error chage quantity for [%1]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -4266,6 +4269,9 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 	Strings.Insert("InternalCommands_ShowNumerator_Check", NStr("en='Hide numerator';
 		|ru='Скрыть нумератор';
 		|tr='Numaratör gizle'", Lang));
+	Strings.Insert("InternalCommands_EditQuantity", NStr("en='Edit quantity';
+		|ru='Ввод количества';
+		|tr='Miktar düzeltme'", Lang));
 #EndRegion
 	
 #Region FormulaEditor
@@ -4831,6 +4837,13 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 	Strings.Insert("Task_Result_Confirmation_Not", NStr("en='Rejected';
 		|ru='Отклонен';
 		|tr='Reddedildi'", Lang));
+#EndRegion
+
+#Region SecureStorage
+	Strings.Insert("SecureStorage_CanStoreOnlyStructure", NStr("en='It can be stored only Structure type';
+		|ru='It can be stored only Structure type';
+		|tr='It can be stored only Structure type'", Lang));
+	
 #EndRegion
 
 	Return Strings;

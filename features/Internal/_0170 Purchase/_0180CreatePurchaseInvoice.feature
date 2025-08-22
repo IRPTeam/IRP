@@ -835,9 +835,9 @@ Scenario: _018017 create PI based on GR with two same items (link items)
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab	
 		And "RowIDInfo" table became equal
-			| 'Key'   | 'Basis'                                           | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'   | ''            | '10,000'     | '17c1c453-6971-467e-96a5-baadd8496c38'   | 'PI'             | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'    |
-			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'   | ''            | '9,000'      | '5848e9dc-c303-4dfe-afef-4b2853214cac'   | 'PI'             | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'    |
+			| 'Key'   | 'Basis'                                           | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'      | 'Row ref'                                 |
+			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'   | ''            | '10,000'     | '17c1c453-6971-467e-96a5-baadd8496c38'   | 'PI&SC'             | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'    |
+			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'   | ''            | '9,000'      | '5848e9dc-c303-4dfe-afef-4b2853214cac'   | 'PI&SC'             | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'    |
 		And I close all client application windows
 		
 		
@@ -903,11 +903,11 @@ Scenario: _018018 create PI based on GR with two same items (add linked document
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab	
 		And "RowIDInfo" table became equal
-			| 'Key'   | 'Basis'                                           | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'   | ''            | '10,000'     | '17c1c453-6971-467e-96a5-baadd8496c38'   | 'PI'             | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'    |
-			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'   | ''            | '9,000'      | '5848e9dc-c303-4dfe-afef-4b2853214cac'   | 'PI'             | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'    |
-			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | 'f5b7bbaf-7525-4d01-a472-687190c70d35'   | ''            | '5,000'      | '6ff368ba-803b-4c49-a03a-9d0f4a05e5bf'   | 'PI'             | 'f5b7bbaf-7525-4d01-a472-687190c70d35'    |
-			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | 'f5b7bbaf-7525-4d01-a472-687190c70d35'   | ''            | '5,000'      | '5dff43f5-e537-4fae-a925-7fd7a77a4aae'   | 'PI'             | 'f5b7bbaf-7525-4d01-a472-687190c70d35'    |
+			| 'Key' | 'Basis'                                         | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' | ''          | '10,000'   | '17c1c453-6971-467e-96a5-baadd8496c38' | 'PI&SC'        | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' | ''          | '9,000'    | '5848e9dc-c303-4dfe-afef-4b2853214cac' | 'PI&SC'        | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | 'f5b7bbaf-7525-4d01-a472-687190c70d35' | ''          | '5,000'    | '6ff368ba-803b-4c49-a03a-9d0f4a05e5bf' | 'PI&SC'        | 'f5b7bbaf-7525-4d01-a472-687190c70d35' |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | 'f5b7bbaf-7525-4d01-a472-687190c70d35' | ''          | '5,000'    | '5dff43f5-e537-4fae-a925-7fd7a77a4aae' | 'PI&SC'        | 'f5b7bbaf-7525-4d01-a472-687190c70d35' |
 		And I close all client application windows
 		
 

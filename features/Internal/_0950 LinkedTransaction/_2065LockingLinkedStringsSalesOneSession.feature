@@ -151,8 +151,8 @@ Scenario: _20650011 Info linked documents row
 	* Show row key
 		And I click "Show row key" button
 		And "ResultsTable" table became equal
-			| 'Item'    | 'Item key'   | 'Store'      | 'Key'   | 'Basis'                                                | 'Basis unit'   | 'Current step'   | 'Row ref'   | 'Parent basis'   | 'Row ID'   | 'Basis key'   | 'Unit'    |
-			| 'Shirt'   | '36/Red'     | 'Store 02'   | '*'     | 'Shipment confirmation 36 dated 23.09.2021 10:20:59'   | 'pcs'          | 'SI'             | '*'         | ''               | '*'        | '*'           | ''        |
+			| 'Item'  | 'Item key' | 'Store'    | 'Key' | 'Basis'                                              | 'Basis unit' | 'Current step' | 'Row ref' | 'Parent basis' | 'Row ID' | 'Basis key' | 'Unit' |
+			| 'Shirt' | '36/Red'   | 'Store 02' | '*'   | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'pcs'        | 'SI&GR'        | '*'       | ''             | '*'      | '*'         | ''     |
 	* Try Delete row
 		And I go to line in "BasisesTree" table
 			| 'Quantity'   | 'Row presentation'    |
@@ -163,7 +163,7 @@ Scenario: _20650011 Info linked documents row
 			| 'Row presentation'                                   | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Basis'                                              | 'Key'                                  | 'Row ID'                               | 'Basis key'                            | 'Current step' |
 			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | '                                    ' | '                                    ' | '                                    ' | ''             |
 			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '                                    ' | '                                    ' | '                                    ' | ''             |
-			| 'Shirt (36/Red)'                                     | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI'           |
+			| 'Shirt (36/Red)'                                     | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI&GR'        |
 	* Try copy row
 		And I go to line in "BasisesTree" table
 			| 'Quantity'   | 'Row presentation'    |
@@ -174,7 +174,7 @@ Scenario: _20650011 Info linked documents row
 			| 'Row presentation'                                   | 'Quantity' | 'Unit' | 'Price'  | 'Row ref' | 'Currency' | 'Basis unit' | 'Basis'                                              | 'Key'                                  | 'Row ID'                               | 'Basis key'                            | 'Current step' |
 			| 'Sales order 35 dated 23.09.2021 10:19:43'           | ''         | ''     | ''       | ''        | ''         | ''           | 'Sales order 35 dated 23.09.2021 10:19:43'           | '                                    ' | '                                    ' | '                                    ' | ''             |
 			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | ''         | ''     | ''       | ''        | ''         | ''           | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '                                    ' | '                                    ' | '                                    ' | ''             |
-			| 'Shirt (36/Red)'                                     | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI'           |
+			| 'Shirt (36/Red)'                                     | '10,000'   | 'pcs'  | '350,00' | '*'       | 'TRY'      | 'pcs'        | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | '*'                                    | '*'                                    | '*'                                    | 'SI&GR'        |
 		And I close all client application windows
 				
 						
@@ -839,7 +839,7 @@ Scenario: 20650093 check unlock linked rows in the WO
 			| 'Installation'   | 'Installation'    |
 		And I close all client application windows	
 
-Scenario: _2065010 change quantity in the linked string in the SO (one session)
+Scenario: _2065010 try to change quantity in the linked string in the SO (one session)
 	* Open SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -850,23 +850,30 @@ Scenario: _2065010 change quantity in the linked string in the SO (one session)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Procurement method'   | 'Quantity'    |
 			| 'Shirt'   | '36/Red'     | 'No reserve'           | '10,000'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "9,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button	
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And Delay 2
+		And I select current line in "BasisesTree" table
+		And I input "9,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [3] [Shirt 36/Red] RowID movements remaining: 10 . Required: 9 . Lacking: 1 .'    |
+		And I close current window
 	* Change quantity (more then SI)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Procurement method'   | 'Quantity'    |
-			| 'Shirt'   | '36/Red'     | 'No reserve'           | '9,000'       |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "11,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+			| 'Shirt'   | '36/Red'     | 'No reserve'           | '10,000'      |
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I input "11,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Procurement method'   | 'Quantity'    |
+			| 'Shirt'   | '36/Red'     | 'No reserve'           | '11,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Sales orders" window is opened
@@ -884,23 +891,32 @@ Scenario: _2065011 change quantity in the linked string in the SI, SC after SI, 
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
 			| 'Boots'   | '37/18SD'    | '2,000'       |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "1,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" | "Unit"           |
+			| "2,000"    | "Boots (37/18SD)"  | "Boots (12 pcs)" |		
+		And I input "1,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [1] [Boots 37/18SD] RowID movements remaining: 24 . Required: 12 . Lacking: 12 .'    |
+		And I close current window
 	* Change quantity (more then SC, SC exist)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
-			| 'Boots'   | '37/18SD'    | '1,000'       |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "3,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+			| 'Boots'   | '37/18SD'    | '2,000'       |
+		And I click "Edit quantity" button
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" | "Unit"           |
+			| "2,000"    | "Boots (37/18SD)"  | "Boots (12 pcs)" |
+		And I activate "Quantity" field in "BasisesTree" table
+		And I input "3,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Boots'   | '37/18SD'    | '3,000'       |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Sales invoices" window is opened
@@ -917,21 +933,32 @@ Scenario: _2065012 change quantity in the linked string in the SI, SI after SC, 
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
 			| 'Shirt'   | '36/Red'     | '10,000'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "11,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Post" button
+		And I click "Edit quantity" button
+		And I go to line in "BasisesTree" table
+			| "Quantity"  | "Row presentation"  | 
+			| "10,000"    | "Shirt (36/Red)"    |
+		And I activate "Quantity" field in "BasisesTree" table
+		And I input "11,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'In line 2 quantity by Shipment confirmation 36 dated 23.09.2021 10:20:59 11 greater than 10'    |
-	* Change quantity (more then SC, SC exist)
+		And I close current window
+	* Change quantity (less then SC, SC exist)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
-			| 'Shirt'   | '36/Red'     | '11,000'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "9,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+			| 'Shirt'   | '36/Red'     | '10,000'      |
+		And I click "Edit quantity" button
+		And I go to line in "BasisesTree" table
+			| "Quantity"  | "Row presentation"  | 
+			| "10,000"    | "Shirt (36/Red)"    |
+		And I activate "Quantity" field in "BasisesTree" table
+		And I input "9,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'   |
+			| 'Shirt'   | '36/Red'     | '9,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Sales invoices" window is opened
@@ -948,26 +975,34 @@ Scenario: _2065013 change quantity in the linked string in the SC, SC before SI 
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
 			| 'Shirt'   | '36/Red'     | '10,000'      |
-		And I select current line in "ItemList" table
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "8,000" text in "Quantity" field of "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And I go to line in "BasisesTree" table
+			| "Quantity"  | "Row presentation"  | 
+			| "10,000"    | "Shirt (36/Red)"    |
+		And I activate "Quantity" field in "BasisesTree" table
+		And I input "8,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [2] [Shirt 36/Red] RowID movements remaining: 9 . Required: 8 . Lacking: 1 .'    |
+		And I close current window
 	* Change quantity (more then SI)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
-			| 'Shirt'   | '36/Red'     | '8,000'       |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "11,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+			| 'Shirt'   | '36/Red'     | '10,000'       |
+		And I click "Edit quantity" button
+		And I go to line in "BasisesTree" table
+			| "Quantity"  | "Row presentation"  | 
+			| "10,000"    | "Shirt (36/Red)"    |
+		And I activate "Quantity" field in "BasisesTree" table
+		And I input "11,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'   |
+			| 'Shirt'   | '36/Red'     | '11,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
-		Then "Shipment confirmations" window is opened
 		And I close all client application windows
 	
 Scenario: _2065015 delete linked string in the SO (one session)
@@ -1721,21 +1756,32 @@ Scenario: _2065039 change quantity in the linked string in the SRO (one session)
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
 		And I select current line in "ItemList" table
-		And I activate "Quantity" field in "ItemList" table
-		And I input "5,000" text in "Quantity" field of "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation"  | 
+			| "8,000"    | "Shirt (36/Red)"    |
+		And I activate "Quantity" field in "BasisesTree" table
+		And I input "5,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [1] [Shirt 36/Red] RowID movements remaining: 6 . Required: 5 . Lacking: 1 .'    |
+		And I close current window
 	* Change quantity (more then SR)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "7,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+		And I click "Edit quantity" button
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation"  | 
+			| "8,000"    | "Shirt (36/Red)"    |
+		And I activate "Quantity" field in "BasisesTree" table
+		And I input "7,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'   |
+			| 'Shirt'   | '36/Red'     | '7,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Sales return orders" window is opened
@@ -1753,26 +1799,32 @@ Scenario: _2065040 change quantity in the linked string in the SR (one session)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I select current line in "ItemList" table
-		And I activate "Quantity" field in "ItemList" table
-		And I input "5,000" text in "Quantity" field of "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'       | 'Item key'     |
-			| 'Trousers'   | '38/Yellow'    |
-		And I input "50,000" text in "Landed cost" field of "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation"  | 
+			| "6,000"    | "Shirt (36/Red)"    |
+		And I activate "Quantity" field in "BasisesTree" table
+		And I input "5,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [1] [Shirt 36/Red] RowID movements remaining: 6 . Required: 5 . Lacking: 1 .'    |
+		And I close current window
 	* Change quantity (more then GR)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "7,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+		And I click "Edit quantity" button
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation"  | 
+			| "6,000"    | "Shirt (36/Red)"    |
+		And I activate "Quantity" field in "BasisesTree" table
+		And I input "7,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'   |
+			| 'Shirt'   | '36/Red'     | '7,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Sales returns" window is opened

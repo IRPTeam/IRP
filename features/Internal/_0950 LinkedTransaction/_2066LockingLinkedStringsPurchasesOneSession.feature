@@ -748,23 +748,30 @@ Scenario: _2066010 change quantity in the linked string in the PO (one session)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
 			| 'Shirt'   | '36/Red'     | '11,000'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "9,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And Delay 2
+		And I select current line in "BasisesTree" table
+		And I input "9,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [3] [Shirt 36/Red] RowID movements remaining: 10 . Required: 9 . Lacking: 1 .'    |
+		And I close current window
 	* Change quantity (more then PI)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
-			| 'Shirt'   | '36/Red'     | '9,000'       |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "11,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+			| 'Shirt'   | '36/Red'     | '11,000'      |
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I input "12,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Shirt'   | '36/Red'     | '12,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Purchase orders" window is opened
@@ -781,31 +788,46 @@ Scenario: _2066011 change quantity in the linked string in the PI, GR after PI, 
 	* Change quantity (less then GR, GR exist)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
-			| 'Boots'   | '37/18SD'    | '2,000'       |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "1,000" text in "Quantity" field of "ItemList" table
-		And I activate "Unit" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
+			| 'Boots'   | '37/18SD'    | '27,000'      |
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And Delay 2
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" | "Unit"           |
+			| "2,250"    | "Boots (37/18SD)"  | "Boots (12 pcs)" |
+		And I input "1,000" text in "Quantity" field of "BasisesTree" table
+		And I click choice button of "Unit" attribute in "BasisesTree" table
 		And I go to line in "List" table
 			| 'Description'    |
 			| 'pcs'            |
-		And I select current line in "List" table	
-		And I finish line editing in "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I select current line in "List" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [1] [Boots 37/18SD] RowID movements remaining: 12 . Required: 1 . Lacking: 11 .'    |
+		And I close current window
 	* Change quantity (more then GR, GR exist)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
-			| 'Boots'   | '37/18SD'    | '1,000'       |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "27,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+			| 'Boots'   | '37/18SD'    | '27,000'      |
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" | "Unit"           |
+			| "2,250"    | "Boots (37/18SD)"  | "Boots (12 pcs)" |
+		And I input "28,000" text in "Quantity" field of "BasisesTree" table
+		And I click choice button of "Unit" attribute in "BasisesTree" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'pcs'            |
+		And I select current line in "List" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Boots'   | '37/18SD'    | '28,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Purchase invoices" window is opened
@@ -823,23 +845,34 @@ Scenario: _2066013 change quantity in the linked string in the GR, GR before PI 
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
 			| 'Shirt'   | '36/Red'     | '10,000'      |
-		And I select current line in "ItemList" table
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "8,000" text in "Quantity" field of "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And Delay 2
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "10,000"   | "Shirt (36/Red)"   |
+		And I input "8,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [2] [Shirt 36/Red] RowID movements remaining: 10 . Required: 8 . Lacking: 2 .'    |
+		And I close current window
 	* Change quantity (more then PI)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
-			| 'Shirt'   | '36/Red'     | '8,000'       |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "11,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+			| 'Shirt'   | '36/Red'     | '10,000'      |
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "10,000"   | "Shirt (36/Red)"   |
+		And I input "11,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Boots'   | '37/18SD'    | '9,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Goods receipts" window is opened
@@ -961,7 +994,7 @@ Scenario: _2066021 unpost GR with linked strings (one session)
 		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
-			| 'Line No. [3] [Boots 37/18SD] RowID movements remaining: 12 . Required: 0 . Lacking: 12 .'    |
+			| 'Line No. [3] [Boots 37/18SD] RowID movements remaining: 9 . Required: 0 . Lacking: 9 .'    |
 			| 'Line No. [2] [Shirt 36/Red] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'     |
 	And I close all client application windows		
 				
@@ -1047,7 +1080,7 @@ Scenario: _2066025 delete GR with linked strings (one session)
 		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
-			| 'Line No. [3] [Boots 37/18SD] RowID movements remaining: 12 . Required: 0 . Lacking: 12 .'    |
+			| 'Line No. [3] [Boots 37/18SD] RowID movements remaining: 9 . Required: 0 . Lacking: 9 .'    |
 			| 'Line No. [2] [Shirt 36/Red] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'     |
 	And I close all client application windows
 
@@ -1444,22 +1477,34 @@ Scenario: _2066039 change quantity in the linked string in the PRO (one session)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I select current line in "ItemList" table
-		And I activate "Quantity" field in "ItemList" table
-		And I input "5,000" text in "Quantity" field of "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "7,000"    | "Shirt (36/Red)"   |
+		And I input "5,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [1] [Shirt 36/Red] RowID movements remaining: 7 . Required: 5 . Lacking: 2 .'    |
+		And I close current window
 	* Change quantity (more then PR)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "8,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "7,000"    | "Shirt (36/Red)"   |
+		And I input "8,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Shirt'   | '36/Red'     | '8,000'       |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Purchase return orders" window is opened
@@ -1479,20 +1524,34 @@ Scenario: _2066040 change quantity in the linked string in the PR (one session)
 			| 'Shirt'   | '36/Red'      |
 		And I select current line in "ItemList" table
 		And I activate "Quantity" field in "ItemList" table
-		And I input "5,000" text in "Quantity" field of "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "7,000"    | "Shirt (36/Red)"   |
+		And I input "5,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [1] [Shirt 36/Red] RowID movements remaining: 7 . Required: 5 . Lacking: 2 .'    |
+		And I close current window
 	* Change quantity (more then SC)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "8,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "7,000"    | "Shirt (36/Red)"   |
+		And I input "8,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Shirt'   | '36/Red'     | '8,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Purchase returns" window is opened

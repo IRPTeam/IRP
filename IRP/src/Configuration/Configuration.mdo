@@ -385,7 +385,6 @@
  <roles>Role.AccumulationRegisters_R3026B_SalesOrdersCustomerAdvance</roles>
  <roles>Role.AccumulationRegisters_R3027B_EmployeeCashAdvance</roles>
  <roles>Role.AccumulationRegisters_R3035T_CashPlanning</roles>
- <roles>Role.DELETE_AccumulationRegisters_R3040B_WithholdingTax</roles>
  <roles>Role.AccumulationRegisters_R3050T_PosCashBalances</roles>
  <roles>Role.AccumulationRegisters_R4010B_ActualStocks</roles>
  <roles>Role.AccumulationRegisters_R4011B_FreeStocks</roles>
@@ -446,12 +445,14 @@
  <roles>Role.AccumulationRegisters_TM1010T_RowIDMovements</roles>
  <roles>Role.AccumulationRegisters_TM1020B_AdvancesKey</roles>
  <roles>Role.AccumulationRegisters_TM1030B_TransactionsKey</roles>
+ <roles>Role.AdminAccessToSecureStorage</roles>
  <roles>Role.AttachedFilesDelete</roles>
  <roles>Role.AuditLockSet</roles>
  <roles>Role.AuditLockUnset</roles>
  <roles>Role.BasicRole</roles>
  <roles>Role.Catalog_Files</roles>
  <roles>Role.CreateOrModifyUsers</roles>
+ <roles>Role.DELETE_AccumulationRegisters_R3040B_WithholdingTax</roles>
  <roles>Role.Document_AdditionalAccrual</roles>
  <roles>Role.Document_AdditionalCostAllocation</roles>
  <roles>Role.Document_AdditionalDeduction</roles>
@@ -611,6 +612,7 @@
  <commonModules>CommonModule.BarcodeServer</commonModules>
  <commonModules>CommonModule.BuilderAPI</commonModules>
  <commonModules>CommonModule.BuilderServer_V2</commonModules>
+ <commonModules>CommonModule.BusinessProcessesServer</commonModules>
  <commonModules>CommonModule.CalculationServer</commonModules>
  <commonModules>CommonModule.CatAgreementsServer</commonModules>
  <commonModules>CommonModule.CatalogsServer</commonModules>
@@ -705,6 +707,8 @@
  <commonModules>CommonModule.DocExpenseRevenueAccrualsClient</commonModules>
  <commonModules>CommonModule.DocExpenseRevenueAccrualsServer</commonModules>
  <commonModules>CommonModule.DocExternalAccountingOperationServer</commonModules>
+ <commonModules>CommonModule.DocFixedAssetRevaluationClient</commonModules>
+ <commonModules>CommonModule.DocFixedAssetRevaluationServer</commonModules>
  <commonModules>CommonModule.DocFixedAssetTransferClient</commonModules>
  <commonModules>CommonModule.DocFixedAssetTransferServer</commonModules>
  <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
@@ -862,6 +866,7 @@
  <commonModules>CommonModule.JorDocumentsClientServer</commonModules>
  <commonModules>CommonModule.JorDocumentsServer</commonModules>
  <commonModules>CommonModule.LandedCostServer</commonModules>
+ <commonModules>CommonModule.LandedCostServer2</commonModules>
  <commonModules>CommonModule.Localization</commonModules>
  <commonModules>CommonModule.LocalizationClient</commonModules>
  <commonModules>CommonModule.LocalizationClientServer</commonModules>
@@ -871,6 +876,7 @@
  <commonModules>CommonModule.LockDataModificationPrivileged</commonModules>
  <commonModules>CommonModule.LockDataModificationReuse</commonModules>
  <commonModules>CommonModule.Log</commonModules>
+ <commonModules>CommonModule.LoggerServerCall</commonModules>
  <commonModules>CommonModule.ManufacturingClient</commonModules>
  <commonModules>CommonModule.ManufacturingServer</commonModules>
  <commonModules>CommonModule.MessagesServer</commonModules>
@@ -907,6 +913,7 @@
  <commonModules>CommonModule.SalaryPrivileged</commonModules>
  <commonModules>CommonModule.SalaryServer</commonModules>
  <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>
+ <commonModules>CommonModule.SecureDataStorage</commonModules>
  <commonModules>CommonModule.SerialLotNumberClient</commonModules>
  <commonModules>CommonModule.SerialLotNumberClientServer</commonModules>
  <commonModules>CommonModule.SerialLotNumbersServer</commonModules>
@@ -914,6 +921,7 @@
  <commonModules>CommonModule.ServiceSystemClient</commonModules>
  <commonModules>CommonModule.ServiceSystemServer</commonModules>
  <commonModules>CommonModule.SessionParametersServer</commonModules>
+ <commonModules>CommonModule.SimpleBatchCostCalculationServer</commonModules>
  <commonModules>CommonModule.SMSServer</commonModules>
  <commonModules>CommonModule.SourceOfOriginClient</commonModules>
  <commonModules>CommonModule.SourceOfOriginClientServer</commonModules>
@@ -926,6 +934,10 @@
  <commonModules>CommonModule.UniqueID</commonModules>
  <commonModules>CommonModule.UniqueIDReuse</commonModules>
  <commonModules>CommonModule.UniversalPrintServer</commonModules>
+ <commonModules>CommonModule.UpdateManagerClient</commonModules>
+ <commonModules>CommonModule.UpdateManagerInitialServer</commonModules>
+ <commonModules>CommonModule.UpdateManagerReleaseServer</commonModules>
+ <commonModules>CommonModule.UpdateManagerServer</commonModules>
  <commonModules>CommonModule.UserSettingsClientServer</commonModules>
  <commonModules>CommonModule.UserSettingsServer</commonModules>
  <commonModules>CommonModule.UserSettingsServerReuse</commonModules>
@@ -935,16 +947,6 @@
  <commonModules>CommonModule.ViewServer_V2</commonModules>
  <commonModules>CommonModule.WorkstationClient</commonModules>
  <commonModules>CommonModule.WorkstationServer</commonModules>
- <commonModules>CommonModule.UpdateManagerServer</commonModules>
- <commonModules>CommonModule.UpdateManagerClient</commonModules>
- <commonModules>CommonModule.UpdateManagerInitialServer</commonModules>
- <commonModules>CommonModule.UpdateManagerReleaseServer</commonModules>
- <commonModules>CommonModule.SimpleBatchCostCalculationServer</commonModules>
- <commonModules>CommonModule.DocFixedAssetRevaluationClient</commonModules>
- <commonModules>CommonModule.DocFixedAssetRevaluationServer</commonModules>
- <commonModules>CommonModule.BusinessProcessesServer</commonModules>
- <commonModules>CommonModule.LoggerServerCall</commonModules>
- <commonModules>CommonModule.LandedCostServer2</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
  <commonAttributes>CommonAttribute.Branch</commonAttributes>
  <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1259,6 +1261,7 @@
  <commonForms>CommonForm.SerialLotNumbersTree</commonForms>
  <commonForms>CommonForm.ShareToUsers</commonForms>
  <commonForms>CommonForm.UpdateItemListInfo</commonForms>
+ <commonForms>CommonForm.EditQuantity</commonForms>
  <catalogs>Catalog.AccessGroups</catalogs>
  <catalogs>Catalog.AccessKey</catalogs>
  <catalogs>Catalog.AccessProfiles</catalogs>
@@ -1294,6 +1297,7 @@
  <catalogs>Catalog.EmployeePositions</catalogs>
  <catalogs>Catalog.EmployeeSchedule</catalogs>
  <catalogs>Catalog.EquipmentDrivers</catalogs>
+ <catalogs>Catalog.ExecutionTemplates</catalogs>
  <catalogs>Catalog.ExpenseAndRevenueTypes</catalogs>
  <catalogs>Catalog.ExtDimensions</catalogs>
  <catalogs>Catalog.Extensions</catalogs>
@@ -1365,7 +1369,6 @@
  <catalogs>Catalog.Vehicles</catalogs>
  <catalogs>Catalog.VehicleTypes</catalogs>
  <catalogs>Catalog.Workstations</catalogs>
- <catalogs>Catalog.ExecutionTemplates</catalogs>
  <documents>Document.AdditionalAccrual</documents>
  <documents>Document.AdditionalCostAllocation</documents>
  <documents>Document.AdditionalDeduction</documents>
@@ -1675,6 +1678,7 @@
  <dataProcessors>DataProcessor.SimpleBatchSequence</dataProcessors>
  <dataProcessors>DataProcessor.Chat</dataProcessors>
  <informationRegisters>InformationRegister.AddProperties</informationRegisters>
+ <informationRegisters>InformationRegister.AppliedDatabaseUpdates</informationRegisters>
  <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
  <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
  <informationRegisters>InformationRegister.AuditLock</informationRegisters>
@@ -1695,6 +1699,8 @@
  <informationRegisters>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</informationRegisters>
  <informationRegisters>InformationRegister.DELETE_T8010S_ConsignorBatches</informationRegisters>
  <informationRegisters>InformationRegister.DocumentFiscalStatus</informationRegisters>
+ <informationRegisters>InformationRegister.ExecutionProcessStatus</informationRegisters>
+ <informationRegisters>InformationRegister.ExecutionResults</informationRegisters>
  <informationRegisters>InformationRegister.ExpenseRevenueTypeSettings</informationRegisters>
  <informationRegisters>InformationRegister.ExternalCommands</informationRegisters>
  <informationRegisters>InformationRegister.FilePartsForUpload</informationRegisters>
@@ -1705,6 +1711,9 @@
  <informationRegisters>InformationRegister.JobQueue</informationRegisters>
  <informationRegisters>InformationRegister.LedgerTypeOperations</informationRegisters>
  <informationRegisters>InformationRegister.LockDataModificationRules</informationRegisters>
+ <informationRegisters>InformationRegister.Logger</informationRegisters>
+ <informationRegisters>InformationRegister.LoggerFiles</informationRegisters>
+ <informationRegisters>InformationRegister.LoggerNotification</informationRegisters>
  <informationRegisters>InformationRegister.MessagesQueueToSend</informationRegisters>
  <informationRegisters>InformationRegister.NumeratorCounters</informationRegisters>
  <informationRegisters>InformationRegister.ObjectsPrintTemplates</informationRegisters>
@@ -1717,6 +1726,7 @@
  <informationRegisters>InformationRegister.RemainingItemsInfo</informationRegisters>
  <informationRegisters>InformationRegister.RetailWorkers</informationRegisters>
  <informationRegisters>InformationRegister.S1001L_VendorsPricesByItemKey</informationRegisters>
+ <informationRegisters>InformationRegister.SecureDataStorage</informationRegisters>
  <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
  <informationRegisters>InformationRegister.SystemAttributes</informationRegisters>
  <informationRegisters>InformationRegister.T1010S_ScannedBarcode</informationRegisters>
@@ -1728,6 +1738,7 @@
  <informationRegisters>InformationRegister.T2016S_VendorsAdvancesRelevance</informationRegisters>
  <informationRegisters>InformationRegister.T2017S_CustomersAdvancesRelevance</informationRegisters>
  <informationRegisters>InformationRegister.T3010S_RowIDInfo</informationRegisters>
+ <informationRegisters>InformationRegister.T4050_StockInventoryInfo</informationRegisters>
  <informationRegisters>InformationRegister.T6010S_BatchesInfo</informationRegisters>
  <informationRegisters>InformationRegister.T6020S_BatchKeysInfo</informationRegisters>
  <informationRegisters>InformationRegister.T6030S_BatchRelevance</informationRegisters>
@@ -1761,6 +1772,7 @@
  <informationRegisters>InformationRegister.T9066S_AccountingMappingExtDimensionRefValues</informationRegisters>
  <informationRegisters>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</informationRegisters>
  <informationRegisters>InformationRegister.T9068S_AccountingMappingAccountsMatching</informationRegisters>
+ <informationRegisters>InformationRegister.T9069S_AccountingMappingRecordersDescription</informationRegisters>
  <informationRegisters>InformationRegister.T9070S_ELedgerDetailComments</informationRegisters>
  <informationRegisters>InformationRegister.T9100A_ObjectAccessMap</informationRegisters>
  <informationRegisters>InformationRegister.T9101A_ObjectAccessRegisters</informationRegisters>
@@ -1771,20 +1783,12 @@
  <informationRegisters>InformationRegister.T9540S_EmployeeVacations</informationRegisters>
  <informationRegisters>InformationRegister.T9545S_VacationDaysLimits</informationRegisters>
  <informationRegisters>InformationRegister.T9550S_EmployeeSickLeave</informationRegisters>
+ <informationRegisters>InformationRegister.TaskExecutors</informationRegisters>
  <informationRegisters>InformationRegister.Taxes</informationRegisters>
  <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
  <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
  <informationRegisters>InformationRegister.TranformedObjectsLink</informationRegisters>
  <informationRegisters>InformationRegister.UserSettings</informationRegisters>
- <informationRegisters>InformationRegister.T9069S_AccountingMappingRecordersDescription</informationRegisters>
- <informationRegisters>InformationRegister.AppliedDatabaseUpdates</informationRegisters>
- <informationRegisters>InformationRegister.TaskExecutors</informationRegisters>
- <informationRegisters>InformationRegister.ExecutionResults</informationRegisters>
- <informationRegisters>InformationRegister.ExecutionProcessStatus</informationRegisters>
- <informationRegisters>InformationRegister.Logger</informationRegisters>
- <informationRegisters>InformationRegister.LoggerNotification</informationRegisters>
- <informationRegisters>InformationRegister.LoggerFiles</informationRegisters>
- <informationRegisters>InformationRegister.T4050_StockInventoryInfo</informationRegisters>
  <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>

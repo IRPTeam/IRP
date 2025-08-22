@@ -433,23 +433,32 @@ Scenario: _2067013 change quantity in the linked string in the ISR (one session)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I select current line in "ItemList" table
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "8,000" text in "Quantity" field of "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "10,000"   | "Shirt (36/Red)"   |
+		And I input "8,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [4] [Shirt 36/Red] RowID movements remaining: 10 . Required: 8 . Lacking: 2 .'    |
+		And I close current window
 	* Change quantity (more then ITO)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "11,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "10,000"    | "Shirt (36/Red)"   |
+		And I input "11,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Shirt'   | '36/Red'     | '11,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Internal supply requests" window is opened
@@ -466,23 +475,32 @@ Scenario: _2067014 change quantity in the linked string in the ITO (one session)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I select current line in "ItemList" table
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "7,000" text in "Quantity" field of "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "10,000"   | "Shirt (36/Red)"   |
+		And I input "7,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [4] [Shirt 36/Red] RowID movements remaining: 8 . Required: 7 . Lacking: 1 .'    |
+		And I close current window
 	* Change quantity (more then IT)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "11,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "10,000"   | "Shirt (36/Red)"   |
+		And I input "11,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Shirt'   | '36/Red'     | '11,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Inventory transfer orders" window is opened
@@ -501,23 +519,32 @@ Scenario: _2067015 change quantity in the linked string in the IT (one session)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I select current line in "ItemList" table
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "7,000" text in "Quantity" field of "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "8,000"    | "Shirt (36/Red)"   |
+		And I input "7,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [3] [Shirt 36/Red] RowID movements remaining: 8 . Required: 7 . Lacking: 1 .'    |
+		And I close current window
 	* Change quantity (more then SC,GR)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "11,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "8,000"    | "Shirt (36/Red)"   |
+		And I input "11,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Shirt'   | '36/Red'     | '11,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Inventory transfers" window is opened

@@ -10,11 +10,23 @@ Function GetIntegrationSettings(IntegrationSettingName, AddInfo = Undefined) Exp
 
 	CustomizedSetting = New Structure();
 	SettingsSource = IntegrationSettingsRef.ConnectionSetting;
-	If Not ServiceSystemServer.isProduction() Then
+	isProduction = ServiceSystemServer.isProduction();
+	If Not isProduction Then
 		SettingsSource = IntegrationSettingsRef.ConnectionSettingTest;
-	EndIf; 		  
+	EndIf; 		
+	StoreInSecureStorage = IntegrationSettingsRef.StoreInSecureStorage;
 	For Each Str In SettingsSource Do
-		If ValueIsFilled(Str.Value) Then
+		If StoreInSecureStorage And Str.Hide Then
+			SetPrivilegedMode(True);
+			If isProduction Then
+				Value = SecureDataStorage.GetKey(IntegrationSettingsRef, Str.Key);
+			Else
+				Value = SecureDataStorage.GetKey(IntegrationSettingsRef, "Test_" + Str.Key);
+			EndIf;
+			SetPrivilegedMode(False);
+			
+			CustomizedSetting.Insert(Str.Key, Value);
+		Else
 			CustomizedSetting.Insert(Str.Key, Str.Value);
 		EndIf;
 	EndDo;

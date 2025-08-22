@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="553ad387-c7f1-4ed9-bd8d-738c46d74d30">
+ <name>EditQuantity</name>
+ <synonym>
+  <key>tr</key>
+  <value>Miktar düzeltme</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Ввод количества</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Edit quantity</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
+</mdclass:CommonForm>

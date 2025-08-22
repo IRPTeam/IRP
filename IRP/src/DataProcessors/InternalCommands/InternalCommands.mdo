@@ -223,4 +223,21 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <forms uuid="e1785ae8-e4fc-414a-a88e-005766fafd9a">
+  <name>EditQuantity</name>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar düzeltme</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ввод количества</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Edit quantity</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

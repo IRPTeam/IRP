@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="26d97800-f3a2-486c-bd0d-11917c5fc06b">
+  <producedTypes>
+    <objectType typeId="b993c102-4048-49f9-bfc0-5d8cfcfc8374" valueTypeId="46109f47-875a-419c-9ce0-54605500905c"/>
+    <refType typeId="a8f4dc7e-1497-4009-b1f6-6df50194e2bf" valueTypeId="6f1215ba-7ce0-462c-b07b-7b79967816af"/>
+    <selectionType typeId="d65bb705-70e2-439f-8768-e249f7c7cd85" valueTypeId="147630d4-2d70-4929-92b3-2338be788c49"/>
+    <listType typeId="f1bc7ae7-4634-4ce6-b075-3f06c063f55a" valueTypeId="f8f83333-093a-4e1c-bba4-ad1bd97a35ab"/>
+    <managerType typeId="8ad29e4d-e04a-4cad-84e7-f5b2d7006357" valueTypeId="52bf577c-500b-4e52-86e3-b3ca82f653fc"/>
+  </producedTypes>
+  <name>PLSections</name>
+  <synonym>
+    <key>en</key>
+    <value>P&amp;L Sections</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>P&amp;L Section</value>
+  </objectPresentation>
+  <hierarchyType>HierarchyOfItems</hierarchyType>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.PLSections.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.PLSections.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.PLSections.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="e07a498c-80b6-494c-a497-15062d33244a">
+    <name>SectionType</name>
+    <synonym>
+      <key>en</key>
+      <value>Section type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.PLSectionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="28705193-43f7-47fb-a3ba-724298101819">
+    <name>Order</name>
+    <synonym>
+      <key>en</key>
+      <value>Order</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>3</precision>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="ac12289c-b0ae-4c35-b8e9-7b25f619551b">
+    <name>Expression</name>
+    <synonym>
+      <key>en</key>
+      <value>Expression</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>250</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="dc64beb9-1331-41b4-a4cf-08d3f741c0ba">
+    <name>SectionName</name>
+    <synonym>
+      <key>en</key>
+      <value>Section name</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>20</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <tabularSections uuid="b8bf2072-fdd0-46f4-9fe3-25769a8fd916">
+    <producedTypes>
+      <objectType typeId="efaa9df2-c1ab-41fb-87a0-c5279986f27a" valueTypeId="ab8f6394-a3dc-425f-bed5-78edf95d0090"/>
+      <rowType typeId="8da70510-1c55-44d7-a86e-7bcc7a7b153c" valueTypeId="2d0988b3-e9b4-4c05-b2c2-a4825abb9617"/>
+    </producedTypes>
+    <name>Accounts</name>
+    <synonym>
+      <key>en</key>
+      <value>Accounts</value>
+    </synonym>
+    <attributes uuid="82f26f76-2776-48cc-aef8-2e0bff67c8ae">
+      <name>Account</name>
+      <synonym>
+        <key>en</key>
+        <value>Account</value>
+      </synonym>
+      <type>
+        <types>ChartOfAccountsRef.Basic</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="44670ec4-32ab-4d63-8466-e2bcc2663ab8">
+      <name>TurnoversType</name>
+      <synonym>
+        <key>en</key>
+        <value>Turnovers type</value>
+      </synonym>
+      <type>
+        <types>EnumRef.AccountingAnalyticTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="06227a9a-90d5-4326-a84b-62f159b7b6da">
+      <name>ExtDimensionNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension number</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>3</precision>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ee66c128-d002-42a9-838c-668a607a5f6b">
+      <name>ExtDimensionValue</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension value</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="d5f890e9-6547-4ad6-95a5-5e8e9e14fe2d">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="9046da4f-34a8-4da4-9e5f-fcd49778d356">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="8195b46f-4802-40a5-b34c-0a054d423fdc">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

@@ -43,4 +43,6 @@
  <content>Catalog.ExtDimensions</content>
  <content>DataProcessor.AccountantAutomatedWorkplace</content>
  <content>InformationRegister.T9016S_AccountsEmployee</content>
+ <content>Catalog.PLSections</content>
+ <content>Report.A0014_AccountingPLReport</content>
 </mdclass:FunctionalOption>

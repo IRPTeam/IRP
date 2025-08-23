@@ -2265,7 +2265,7 @@ Function Strings(Lang) Export
 	// %4 - 8 
 	// %5 - 10
 	Strings.Insert("Error_081", NStr("en='In line %1 quantity by %2-%3 %4 greater than quantity %5';
-		|ru='In line %1 quantity by %2-%3 %4 greater than quantity %5';
+		|ru='В строке %1 количество %2-%3 %4 больше чем количество %5';
 		|tr='In line %1 quantity by %2-%3 %4 greater than quantity %5'",
 		Lang));
 	
@@ -2661,8 +2661,14 @@ Function Strings(Lang) Export
 		|ru='Дата документа [%1] больше даты [%2] в [%3]';
 		|tr='Belge tarihi [%1], [%3] içindeki [%2] tarihinden büyük'", Lang));
 	Strings.Insert("Error_187", NStr("en='Error chage quantity for [%1]';
-		|ru='Error chage quantity for [%1]';
+		|ru='Ошибка изменения количества на [%1]';
 		|tr='Error chage quantity for [%1]'", Lang));
+	Strings.Insert("Error_188", NStr("en='Section with name [%1] already exists';
+		|ru='Аналитика с наименовением [%1] уже существует';
+		|tr='Section with name [%1] already exists'", Lang));
+	Strings.Insert("Error_189", NStr("en='Ext. dimension number is required field';
+		|ru='Субконто это обязательное поле';
+		|tr='Ext. dimension number is required field'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -4841,7 +4847,7 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 
 #Region SecureStorage
 	Strings.Insert("SecureStorage_CanStoreOnlyStructure", NStr("en='It can be stored only Structure type';
-		|ru='It can be stored only Structure type';
+		|ru='Только тип Структура может храниться';
 		|tr='It can be stored only Structure type'", Lang));
 	
 #EndRegion

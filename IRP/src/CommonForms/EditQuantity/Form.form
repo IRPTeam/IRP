@@ -2699,7 +2699,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Selected row key</value>
+   <value>Выбрать ключ строки</value>
   </title>
   <title>
    <key>en</key>
@@ -2725,7 +2725,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Childrens</value>
+   <value>Подчиненные</value>
   </title>
   <title>
    <key>en</key>
@@ -2749,7 +2749,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Children</value>
+    <value>Подчиненный</value>
    </title>
    <title>
     <key>en</key>

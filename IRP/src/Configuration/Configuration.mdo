@@ -1369,6 +1369,7 @@
  <catalogs>Catalog.Vehicles</catalogs>
  <catalogs>Catalog.VehicleTypes</catalogs>
  <catalogs>Catalog.Workstations</catalogs>
+ <catalogs>Catalog.PLSections</catalogs>
  <documents>Document.AdditionalAccrual</documents>
  <documents>Document.AdditionalCostAllocation</documents>
  <documents>Document.AdditionalDeduction</documents>
@@ -1578,6 +1579,7 @@
  <enums>Enum.TaskTypes</enums>
  <enums>Enum.TaskResults</enums>
  <enums>Enum.AmountCorrectionTypes</enums>
+ <enums>Enum.PLSectionTypes</enums>
  <reports>Report.A0010_TrialBalance</reports>
  <reports>Report.A0011_TrialBalanceByAccount</reports>
  <reports>Report.A0012_AccountCard</reports>
@@ -1643,6 +1645,7 @@
  <reports>Report.T0001_FilesAnalyser</reports>
  <reports>Report.R6070_OtherPeriodsExpenses</reports>
  <reports>Report.R8510B_BookValueOfFixedAsset</reports>
+ <reports>Report.A0014_AccountingPLReport</reports>
  <dataProcessors>DataProcessor.AccountantAutomatedWorkplace</dataProcessors>
  <dataProcessors>DataProcessor.AccountingService</dataProcessors>
  <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>

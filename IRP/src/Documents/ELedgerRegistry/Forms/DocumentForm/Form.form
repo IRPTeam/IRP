@@ -1694,7 +1694,7 @@ WHERE
       </content>
       <content>
        <key>ru</key>
-       <value>Тип учета</value>
+       <value>Ledger type</value>
       </content>
       <content>
        <key>en</key>

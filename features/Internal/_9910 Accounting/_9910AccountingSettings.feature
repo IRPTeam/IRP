@@ -177,7 +177,8 @@ Scenario: _099100 preparation
 		When Create information register T9012S_AccountsPartner records (Basic LTV) (test data base)
 		When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 		When Create information register T9016S_AccountsEmployee records (test data base)
-		When Create information register T9015S_AccountsFixedAsset records (test data base)		
+		When Create information register T9015S_AccountsFixedAsset records (test data base)
+		When Create catalog PLSections objects		
 	* Default files storage
 		And In the command interface I select "Settings" "Edit constants"
 		And I click Select button of "Default files storage volume" field
@@ -4297,6 +4298,58 @@ Scenario: _0991230 check accountant automated workplace
 		And I move to "16466.png" tab
 	And I close all client application windows
 	
+				
+Scenario: _0991250 check PL report
+	And I close all client application windows
+	* Settings for report
+		Given I open hyperlink "e1cib/list/Catalog.PLSections"
+		And I click "Create" button
+		And in the table "Accounts" I click the button named "AccountsAdd"
+		And I select "420.3" from "Account" drop-down list by string in "Accounts" table
+		And I select "Debit" exact value from "Turnovers type" drop-down list in "Accounts" table
+		And I input "6" text in the field named "Order"
+		And I input "Operating Expenses" text in "ENG" field
+		And I input "OPEX_SELL" text in "Section name" field
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Code' | 'Description'               | 'Section type'   | 'Section name' | 'Order' |
+			| '6'    | 'Operating Expenses'        | 'Data selection' | 'OPEX_SELL'    | '6'     |					
+	* Open PL report
+		Given I open hyperlink "e1cib/app/Report.A0014_AccountingPLReport"
+	* Filters
+		Then "P&L Report" window is opened
+		And I select from the drop-down list named "Company" by "Own company 2" string
+		And I select from "Ledger type" drop-down list by "Basic LTV" string
+		And I click Choice button of the field named "Period"
+		And I input "01.01.2023" text in the field named "DateBegin"
+		And I input "20.08.2025" text in the field named "DateEnd"
+		And I click the button named "Select"
+		Then "P&L Report" window is opened
+		And I click the button named "Generate"
+	* Check report
+		Then "DocResult" spreadsheet document is equal
+			| 'Gross Sales'                             | '4 845,23'  |
+			| 'Sales Returns & Discounts'               | '166,66'    |
+			| 'Net Sales'                               | '4 678,57'  |
+			| 'Cost of Goods Sold (COGS)'               | '450,00'    |
+			| 'Gross Profit'                            | '4 228,57'  |
+			| 'Selling & Distribution Expenses'         | '14 357,26' |
+			| 'Marketing Expenses'                      | ''          |
+			| 'General & Administrative Expenses'       | ''          |
+			| 'Research & Development (R&D)'            | ''          |
+			| 'Other Operating Income / Expenses (Net)' | ''          |
+			| 'EBITDA'                                  | ''          |
+			| 'Depreciation & Amortization'             | ''          |
+			| 'EBIT (Operating Profit)'                 | ''          |
+			| 'Financial Income / Expenses (Net)'       | ''          |
+			| 'Profit Before Tax (EBT)'                 | ''          |
+			| 'Income Tax'                              | ''          |
+			| 'Net Profit'                              | ''          |
+			| 'Unmapped GL Accounts'                    | ''          |
+	And I close all client application windows
+	
+		
+				
 				
 				
 				

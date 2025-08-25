@@ -1,5 +1,10 @@
 
 Function CheckBalance(Ref, CurrentRecords, ExistsRecords, Unposting, AddInfo = Undefined) Export
+	
+	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R6070T_OtherPeriodsExpenses", True) Then
+		Return True;
+	EndIf;
+	
 	Query = New Query();
 	Query.TempTablesManager = New TempTablesManager();
 	Query.Text = 

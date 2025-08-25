@@ -312,7 +312,6 @@
             <items xsi:type="form:Button">
               <name>SalesWidgetsSales_AverageBill</name>
               <id>32</id>
-              <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
@@ -337,7 +336,6 @@
             <items xsi:type="form:Button">
               <name>SalesWidgetsSales_SalerReturnPercentage</name>
               <id>34</id>
-              <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
@@ -851,7 +849,6 @@
             <items xsi:type="form:Button">
               <name>PurchasesWidgetsPurchases_StockBalance</name>
               <id>70</id>
-              <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>

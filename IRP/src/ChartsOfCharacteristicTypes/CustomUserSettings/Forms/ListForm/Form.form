@@ -629,7 +629,7 @@ FROM
     <name>Template_R4010B_ActualStocks</name>
     <title>
       <key>en</key>
-      <value>Check balance: R4010 Cctual stocks</value>
+      <value>Check balance: R4010 Actual stocks</value>
     </title>
     <id>3</id>
     <use>

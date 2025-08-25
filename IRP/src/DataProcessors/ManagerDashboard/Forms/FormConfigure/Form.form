@@ -183,7 +183,6 @@
         <items xsi:type="form:FormField">
           <name>SalesWidgetsID</name>
           <id>108</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -225,7 +224,6 @@
         <items xsi:type="form:FormField">
           <name>SalesWidgetsJson</name>
           <id>111</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -267,7 +265,6 @@
         <items xsi:type="form:FormField">
           <name>SalesWidgetsIndicatorName</name>
           <id>114</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -700,7 +697,6 @@
         <items xsi:type="form:FormField">
           <name>PurchasesWidgetsID</name>
           <id>117</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -742,7 +738,6 @@
         <items xsi:type="form:FormField">
           <name>PurchasesWidgetsJson</name>
           <id>120</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -784,7 +779,6 @@
         <items xsi:type="form:FormField">
           <name>PurchasesWidgetsIndicatorName</name>
           <id>123</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -1192,7 +1186,6 @@
         <items xsi:type="form:FormField">
           <name>MoneyWidgetsID</name>
           <id>126</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -1234,7 +1227,6 @@
         <items xsi:type="form:FormField">
           <name>MoneyWidgetsJson</name>
           <id>129</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -1276,7 +1268,6 @@
         <items xsi:type="form:FormField">
           <name>MoneyWidgetsIndicatorName</name>
           <id>132</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>

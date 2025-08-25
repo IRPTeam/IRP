@@ -1,47 +1,47 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing) 
-	ThisObject.Title = Parameters.Title; 
+	ThisObject.Title         = Parameters.Title; 
 	ThisObject.IndicatorName = Parameters.IndicatorName;
 	
-	ThisObject.Options_Icon = Parameters.Options.Icon;
-	ThisObject.Options_Color = Parameters.Options.Color;
-	ThisObject.Options_DetailsType = Parameters.Options.DetailsType;
-	ThisObject.Options_ModalTitle = Parameters.Options.ModalTitle;
-	ThisObject.Options_ModalIcon = Parameters.Options.ModalIcon;
-	ThisObject.Options_Width = Parameters.Options.Width;
+	ThisObject.Options_Icon               = Parameters.Options.Icon;
+	ThisObject.Options_Color              = Parameters.Options.Color;
+	ThisObject.Options_DetailsType        = Parameters.Options.DetailsType;
+	ThisObject.Options_ModalTitle         = Parameters.Options.ModalTitle;
+	ThisObject.Options_ModalIcon          = Parameters.Options.ModalIcon;
+	ThisObject.Options_Width              = Parameters.Options.Width;
 	ThisObject.Options_TimeLineDateFormat = Parameters.Options.TimeLineDateFormat;
 	
 	ThisObject.ChartOptions_ShowPoint = Parameters.ChartOptions.ShowPoint;
 	
 	If Parameters.Settings <> Undefined Then
-		ThisObject.WidgetType = Parameters.Settings.WidgetType;
-		ThisObject.WidgetName = Parameters.Settings.WidgetName;
-		ThisObject.WidgetID = Parameters.Settings.WidgetID;
+		ThisObject.WidgetType = ReadSettingsAtSettings(Parameters.Settings, "WidgetType" , ThisObject.WidgetType);
+		ThisObject.WidgetName = ReadSettingsAtSettings(Parameters.Settings, "WidgetName" , ThisObject.WidgetName);
+		ThisObject.WidgetID   = ReadSettingsAtSettings(Parameters.Settings, "WidgetID"   , ThisObject.WidgetID);
 	
-		ThisObject.ChartType          = Parameters.Settings.ChartType;
-		ThisObject.Period             = Parameters.Settings.Period;
-		ThisObject.LastPeriodType     = Parameters.Settings.LastPeriodType;
-		ThisObject.LastPeriodCount    = Parameters.Settings.LastPeriodCount;
-		ThisObject.Periodicity        = Parameters.Settings.Periodicity;
-		ThisObject.ComparePeriodCount = Parameters.Settings.ComparePeriodCount; 
+		ThisObject.ChartType          = ReadSettingsAtSettings(Parameters.Settings, "ChartType"          , ThisObject.ChartType);
+		ThisObject.Period             = ReadSettingsAtSettings(Parameters.Settings, "Period"             , ThisObject.Period);
+		ThisObject.LastPeriodType     = ReadSettingsAtSettings(Parameters.Settings, "LastPeriodType"     , ThisObject.LastPeriodType);
+		ThisObject.LastPeriodCount    = ReadSettingsAtSettings(Parameters.Settings, "LastPeriodCount"    , ThisObject.LastPeriodCount);
+		ThisObject.Periodicity        = ReadSettingsAtSettings(Parameters.Settings, "Periodicity"        , ThisObject.Periodicity);
+		ThisObject.ComparePeriodCount = ReadSettingsAtSettings(Parameters.Settings, "ComparePeriodCount" , ThisObject.ComparePeriodCount); 
 		
-		For Each Seria In Parameters.Settings.Series Do
+		For Each Seria In ReadSettingsAtSettings(Parameters.Settings,"Series", New Array()) Do
 			NewSeria = ThisObject.Series.Add();
 			For Each KeyValue In Seria Do
 				NewSeria[KeyValue.Key] = KeyValue.Value;
 			EndDo;
 		EndDo;
 		
-		ThisObject.Options_Icon        = Parameters.Settings.Options.Icon;
-		ThisObject.Options_Color       = Parameters.Settings.Options.Color;
-		ThisObject.Options_DetailsType = Parameters.Settings.Options.DetailsType;
-		ThisObject.Options_ModalTitle  = Parameters.Settings.Options.ModalTitle;
-		ThisObject.Options_ModalIcon   = Parameters.Settings.Options.ModalIcon; 
-		ThisObject.Options_Width       = Parameters.Settings.Options.Width;
-		ThisObject.Options_TimeLineDateFormat = Parameters.Settings.Options.TimeLineDateFormat;
+		ThisObject.Options_Icon        = ReadSettingsAtSettings(Parameters.Settings.Options, "Icon"        , ThisObject.Options_Icon);
+		ThisObject.Options_Color       = ReadSettingsAtSettings(Parameters.Settings.Options, "Color"       , ThisObject.Options_Color);
+		ThisObject.Options_DetailsType = ReadSettingsAtSettings(Parameters.Settings.Options, "DetailsType" , ThisObject.Options_DetailsType);
+		ThisObject.Options_ModalTitle  = ReadSettingsAtSettings(Parameters.Settings.Options, "ModalTitle"  , ThisObject.Options_ModalTitle);
+		ThisObject.Options_ModalIcon   = ReadSettingsAtSettings(Parameters.Settings.Options, "ModalIcon"   , ThisObject.Options_ModalIcon); 
+		ThisObject.Options_Width       = ReadSettingsAtSettings(Parameters.Settings.Options, "Width"       , ThisObject.Options_Width);
+		ThisObject.Options_TimeLineDateFormat = ReadSettingsAtSettings(Parameters.Settings.Options, "TimeLineDateFormat", ThisObject.Options_TimeLineDateFormat);
 	
-		ThisObject.ChartOptions_ShowPoint = Parameters.Settings.ChartOptions.ShowPoint;
+		ThisObject.ChartOptions_ShowPoint = ReadSettingsAtSettings(Parameters.Settings.ChartOptions, "ShowPoint", ThisObject.ChartOptions_ShowPoint);
 	EndIf;
 	
 	If Not ValueIsFilled(ThisObject.WidgetID) Then
@@ -55,7 +55,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AllParameters = New Array();
 	AllParameters.Add("Company");
 	AllParameters.Add("Branch");
+	AllParameters.Add("Account");
+	AllParameters.Add("DebtType");
+	AllParameters.Add("Currency");
 	AllParameters.Add("CurrencyMovementType");
+	AllParameters.Add("FinancialMovementType");
 	AllParameters.Add("Store");
 	
 	For Each ParameterName In AllParameters Do
@@ -121,6 +125,14 @@ Function GetSettingsAtServer()
 		Settings.Series.Add(NewSeria);
 	EndDo;   
 	Return Settings;
+EndFunction
+
+&AtServer
+Function ReadSettingsAtSettings(Settings, SettingName, DefaultValue)
+	If Settings.Property(SettingName) Then
+		Return Settings[SettingName];
+	EndIf;
+	Return DefaultValue;
 EndFunction
 
 &AtClientAtServerNoContext

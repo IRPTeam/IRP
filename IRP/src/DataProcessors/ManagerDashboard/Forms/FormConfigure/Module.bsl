@@ -129,11 +129,7 @@ EndProcedure
 
 &AtClient
 Procedure CreateNewWidget(Command)
-	If Upper(Command.Name) = Upper("Sales_SalesAmount") Then 
-		DashboardClient.OpenFormWidgetSettings(Object, ThisObject, "SalesAmount")
-	Else
-		Raise StrTemplate("Not implemanted [%1]", Command.Name);
-	EndIf;
+	DashboardClient.OpenFormWidgetSettings(Object, ThisObject, Command.Name);
 EndProcedure
 
 &AtClient
@@ -146,6 +142,16 @@ Procedure OnCloseWidgetSettings(Result, Params) Export
 	
 	IndicatorMap = New Map();
 	IndicatorMap.Insert("SalesAmount", "SalesWidgets");
+	
+	IndicatorMap.Insert("Money_ApAr", "MoneyWidgets");
+	IndicatorMap.Insert("Money_CashBalance", "MoneyWidgets");
+	IndicatorMap.Insert("Money_PaymentsFromClients", "MoneyWidgets");
+	IndicatorMap.Insert("Money_PaymentsToSuppliers", "MoneyWidgets");
+	IndicatorMap.Insert("Purchases_StockBalance", "PurchasesWidgets");
+	IndicatorMap.Insert("Purchases_VolumeOfPurchases", "PurchasesWidgets");
+	IndicatorMap.Insert("Sales_AverageBill", "SalesWidgets");
+	IndicatorMap.Insert("Sales_SalerReturnPercentage", "SalesWidgets");
+	IndicatorMap.Insert("Sales_SalesAmount", "SalesWidgets");
 	
 	Filter = New Structure();
 	Filter.Insert("ID", Result.WidgetID);

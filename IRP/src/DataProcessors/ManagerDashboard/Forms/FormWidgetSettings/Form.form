@@ -733,6 +733,167 @@
                 </extInfo>
               </items>
               <items xsi:type="form:FormField">
+                <name>SeriesBranch</name>
+                <id>66</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <dataPath xsi:type="form:DataPath">
+                  <segments>Series.Branch</segments>
+                </dataPath>
+                <extendedTooltip>
+                  <name>SeriesBranchExtendedTooltip</name>
+                  <id>68</id>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <contextMenu>
+                  <name>SeriesBranchContextMenu</name>
+                  <id>67</id>
+                  <autoFill>true</autoFill>
+                </contextMenu>
+                <type>InputField</type>
+                <editMode>EnterOnInput</editMode>
+                <showInHeader>true</showInHeader>
+                <headerHorizontalAlign>Left</headerHorizontalAlign>
+                <showInFooter>true</showInFooter>
+                <extInfo xsi:type="form:InputFieldExtInfo">
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <wrap>true</wrap>
+                  <extendedEditMultipleValues>true</extendedEditMultipleValues>
+                  <chooseType>true</chooseType>
+                  <typeDomainEnabled>true</typeDomainEnabled>
+                  <textEdit>true</textEdit>
+                </extInfo>
+              </items>
+              <items xsi:type="form:FormField">
+                <name>SeriesAccount</name>
+                <id>143</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <dataPath xsi:type="form:DataPath">
+                  <segments>Series.Account</segments>
+                </dataPath>
+                <extendedTooltip>
+                  <name>SeriesAccountExtendedTooltip</name>
+                  <id>145</id>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <contextMenu>
+                  <name>SeriesAccountContextMenu</name>
+                  <id>144</id>
+                  <autoFill>true</autoFill>
+                </contextMenu>
+                <type>InputField</type>
+                <editMode>Enter</editMode>
+                <showInHeader>true</showInHeader>
+                <headerHorizontalAlign>Left</headerHorizontalAlign>
+                <showInFooter>true</showInFooter>
+                <extInfo xsi:type="form:InputFieldExtInfo">
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <wrap>true</wrap>
+                  <chooseType>true</chooseType>
+                  <typeDomainEnabled>true</typeDomainEnabled>
+                  <textEdit>true</textEdit>
+                </extInfo>
+              </items>
+              <items xsi:type="form:FormField">
+                <name>SeriesDebtType</name>
+                <id>146</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <dataPath xsi:type="form:DataPath">
+                  <segments>Series.DebtType</segments>
+                </dataPath>
+                <extendedTooltip>
+                  <name>SeriesDebtTypeExtendedTooltip</name>
+                  <id>148</id>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <contextMenu>
+                  <name>SeriesDebtTypeContextMenu</name>
+                  <id>147</id>
+                  <autoFill>true</autoFill>
+                </contextMenu>
+                <type>InputField</type>
+                <editMode>Enter</editMode>
+                <showInHeader>true</showInHeader>
+                <headerHorizontalAlign>Left</headerHorizontalAlign>
+                <showInFooter>true</showInFooter>
+                <extInfo xsi:type="form:InputFieldExtInfo">
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <wrap>true</wrap>
+                  <chooseType>true</chooseType>
+                  <typeDomainEnabled>true</typeDomainEnabled>
+                  <textEdit>true</textEdit>
+                </extInfo>
+              </items>
+              <items xsi:type="form:FormField">
+                <name>SeriesFinancialMovementType</name>
+                <id>140</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <dataPath xsi:type="form:DataPath">
+                  <segments>Series.FinancialMovementType</segments>
+                </dataPath>
+                <extendedTooltip>
+                  <name>SeriesFinancialMovementTypeExtendedTooltip</name>
+                  <id>142</id>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <contextMenu>
+                  <name>SeriesFinancialMovementTypeContextMenu</name>
+                  <id>141</id>
+                  <autoFill>true</autoFill>
+                </contextMenu>
+                <type>InputField</type>
+                <editMode>Enter</editMode>
+                <showInHeader>true</showInHeader>
+                <headerHorizontalAlign>Left</headerHorizontalAlign>
+                <showInFooter>true</showInFooter>
+                <extInfo xsi:type="form:InputFieldExtInfo">
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <wrap>true</wrap>
+                  <chooseType>true</chooseType>
+                  <typeDomainEnabled>true</typeDomainEnabled>
+                  <textEdit>true</textEdit>
+                </extInfo>
+              </items>
+              <items xsi:type="form:FormField">
                 <name>SeriesCurrencyMovementType</name>
                 <id>63</id>
                 <visible>true</visible>
@@ -774,19 +935,19 @@
                 </extInfo>
               </items>
               <items xsi:type="form:FormField">
-                <name>SeriesBranch</name>
-                <id>66</id>
+                <name>SeriesCurrency</name>
+                <id>137</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
                   <common>true</common>
                 </userVisible>
                 <dataPath xsi:type="form:DataPath">
-                  <segments>Series.Branch</segments>
+                  <segments>Series.Currency</segments>
                 </dataPath>
                 <extendedTooltip>
-                  <name>SeriesBranchExtendedTooltip</name>
-                  <id>68</id>
+                  <name>SeriesCurrencyExtendedTooltip</name>
+                  <id>139</id>
                   <type>Label</type>
                   <autoMaxWidth>true</autoMaxWidth>
                   <autoMaxHeight>true</autoMaxHeight>
@@ -795,12 +956,12 @@
                   </extInfo>
                 </extendedTooltip>
                 <contextMenu>
-                  <name>SeriesBranchContextMenu</name>
-                  <id>67</id>
+                  <name>SeriesCurrencyContextMenu</name>
+                  <id>138</id>
                   <autoFill>true</autoFill>
                 </contextMenu>
                 <type>InputField</type>
-                <editMode>EnterOnInput</editMode>
+                <editMode>Enter</editMode>
                 <showInHeader>true</showInHeader>
                 <headerHorizontalAlign>Left</headerHorizontalAlign>
                 <showInFooter>true</showInFooter>
@@ -808,7 +969,6 @@
                   <autoMaxWidth>true</autoMaxWidth>
                   <autoMaxHeight>true</autoMaxHeight>
                   <wrap>true</wrap>
-                  <extendedEditMultipleValues>true</extendedEditMultipleValues>
                   <chooseType>true</chooseType>
                   <typeDomainEnabled>true</typeDomainEnabled>
                   <textEdit>true</textEdit>
@@ -1701,7 +1861,6 @@
               <textEdit>true</textEdit>
             </extInfo>
           </items>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -2132,6 +2291,74 @@
       <id>5</id>
       <valueType>
         <types>CatalogRef.Stores</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Currency</name>
+      <title>
+        <key>en</key>
+        <value>Currency</value>
+      </title>
+      <id>23</id>
+      <valueType>
+        <types>CatalogRef.Currencies</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>FinancialMovementType</name>
+      <title>
+        <key>en</key>
+        <value>Financial movement type</value>
+      </title>
+      <id>24</id>
+      <valueType>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Account</name>
+      <title>
+        <key>en</key>
+        <value>Account</value>
+      </title>
+      <id>25</id>
+      <valueType>
+        <types>CatalogRef.CashAccounts</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>DebtType</name>
+      <title>
+        <key>en</key>
+        <value>Debt type</value>
+      </title>
+      <id>26</id>
+      <valueType>
+        <types>EnumRef.AccountingAnalyticTypes</types>
       </valueType>
       <view>
         <common>true</common>

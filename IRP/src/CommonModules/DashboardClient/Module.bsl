@@ -9,15 +9,84 @@ Procedure OpenFormWidgetSettings(Object, Form, IndicatorName, Json = Undefined, 
 		FormParameters.Settings = CommonFunctionsServer.DeserializeJSONUseXDTO(Json);
 	EndIf;
 		
-	If Upper(IndicatorName) = Upper("SalesAmount") Then
-		FormParameters.Title = "Sales amount";
+	If Upper(IndicatorName) = Upper("Sales_SalesAmount") Then
+		FormParameters.Title = R().Dashboard_01;
 		FormParameters.Options.Icon = "cart-check";
 		FormParameters.Options.Color = "green";
 		FormParameters.Options.DetailsType = "modal";
 		
 		FormParameters.AvailableParameters.Add("Company");
 		FormParameters.AvailableParameters.Add("Branch");
-		FormParameters.AvailableParameters.Add("CurrencyMovementType");
+		FormParameters.AvailableParameters.Add("Currency");
+
+	ElsIf Upper(IndicatorName) = Upper("Sales_AverageBill") Then
+		FormParameters.Title = R().Dashboard_02;
+		Raise "Not implemented";
+	ElsIf Upper(IndicatorName) = Upper("Sales_SalerReturnPercentage") Then
+		FormParameters.Title = R().Dashboard_03;
+		Raise "Not implemented";
+	ElsIf Upper(IndicatorName) = Upper("Money_CashBalance") Then
+		FormParameters.Title = R().Dashboard_04;
+		
+		FormParameters.Options.Icon = "cash-coin";
+		FormParameters.Options.Color = "blue";
+		FormParameters.Options.DetailsType = "modal";
+		
+		FormParameters.AvailableParameters.Add("Company");
+		FormParameters.AvailableParameters.Add("Branch");
+		FormParameters.AvailableParameters.Add("Account");
+		FormParameters.AvailableParameters.Add("Currency");
+		
+	ElsIf Upper(IndicatorName) = Upper("Money_PaymentsFromClients") Then
+		FormParameters.Title = R().Dashboard_05;
+		
+		FormParameters.Options.Icon = "calendar-plus";
+		FormParameters.Options.Color = "green";
+		FormParameters.Options.DetailsType = "modal";
+		
+		FormParameters.AvailableParameters.Add("Company");
+		FormParameters.AvailableParameters.Add("Branch");
+		FormParameters.AvailableParameters.Add("FinancialMovementType");
+		FormParameters.AvailableParameters.Add("Currency");
+		
+	ElsIf Upper(IndicatorName) = Upper("Money_PaymentsToSuppliers") Then
+		FormParameters.Title = R().Dashboard_06;
+		
+		FormParameters.Options.Icon = "calendar-minus";
+		FormParameters.Options.Color = "red";
+		FormParameters.Options.DetailsType = "modal";
+		
+		FormParameters.AvailableParameters.Add("Company");
+		FormParameters.AvailableParameters.Add("Branch");
+		FormParameters.AvailableParameters.Add("FinancialMovementType");
+		FormParameters.AvailableParameters.Add("Currency");
+		
+	ElsIf Upper(IndicatorName) = Upper("Money_ApAr") Then
+		FormParameters.Title = R().Dashboard_07;
+		
+		FormParameters.Options.Icon = "briefcase";
+		FormParameters.Options.Color = "orange";
+		FormParameters.Options.DetailsType = "modal";
+		
+		FormParameters.AvailableParameters.Add("Company");
+		FormParameters.AvailableParameters.Add("Branch");
+		FormParameters.AvailableParameters.Add("DebtType");
+		FormParameters.AvailableParameters.Add("Currency");
+		
+	ElsIf Upper(IndicatorName) = Upper("Purchases_StockBalance") Then
+		FormParameters.Title = R().Dashboard_08;
+		Raise "Not implemented";
+	ElsIf Upper(IndicatorName) = Upper("Purchases_VolumeOfPurchases") Then
+		FormParameters.Title = R().Dashboard_09;
+
+		FormParameters.Options.Icon = "box-seam";
+		FormParameters.Options.Color = "blue";
+		FormParameters.Options.DetailsType = "modal";
+		
+		FormParameters.AvailableParameters.Add("Company");
+		FormParameters.AvailableParameters.Add("Branch");
+		FormParameters.AvailableParameters.Add("Currency");
+		
 	Else
 		Raise StrTemplate("Not implemented [%1]", IndicatorName);
 	EndIf;    

@@ -567,6 +567,29 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.PLSections</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeletePredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveSetDeletionMarkPredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMarkPredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CalculationDeservedVacations</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -742,17 +765,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.A0012_AccountCard</name>
-		<right>
-			<name>Use</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.FileStoragesInfo</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -917,17 +929,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.A0010_TrialBalance</name>
-		<right>
-			<name>Use</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.FillingTemplates</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -1007,17 +1008,6 @@
 		</right>
 		<right>
 			<name>InteractiveDeleteMarkedPredefinedData</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Report.A0011_TrialBalanceByAccount</name>
-		<right>
-			<name>Use</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>View</name>
 			<value>false</value>
 		</right>
 	</object>
@@ -2630,6 +2620,18 @@
 			<name>InteractiveDeletePredefinedData</name>
 			<value>false</value>
 		</right>
+		<right>
+			<name>InteractiveSetDeletionMarkPredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMarkPredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
 	</object>
 	<object>
 		<name>Catalog.ChequeBonds</name>
@@ -3354,18 +3356,39 @@
 			<value>false</value>
 		</right>
 		<right>
+			<name>ExclusiveMode</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>ActiveUsers</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>EventLog</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>ExternalConnection</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Automation</name>
+			<value>false</value>
+		</right>
+		<right>
 			<name>ConfigurationExtensionsAdministration</name>
 			<value>false</value>
 		</right>
-	</object>
-	<object>
-		<name>Report.A0013_AccountAnalysis</name>
 		<right>
-			<name>Use</name>
+			<name>InteractiveOpenExtDataProcessors</name>
 			<value>false</value>
 		</right>
 		<right>
-			<name>View</name>
+			<name>InteractiveOpenExtReports</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>Output</name>
 			<value>false</value>
 		</right>
 	</object>

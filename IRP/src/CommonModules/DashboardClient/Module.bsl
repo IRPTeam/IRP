@@ -116,6 +116,7 @@ Function GetSettingsFomParameters()
 	FormParameters.Options.Insert("Width", "col-md-3");
 	
 	FormParameters.ChartOptions.Insert("ShowPoint", True);
+	FormParameters.ChartOptions.Insert("ValueDivider", 1);
 	
 	Return FormParameters;
 EndFunction

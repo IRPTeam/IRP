@@ -220,6 +220,12 @@ Procedure CreateWidget(Root, Settings)
 			_result = DashboardServer.GetValue_Sales_SalesAmount(_Period, IndicatorParameters, _Settings, Undefined, Undefined);
 		EndIf;
 		
+		If _Settings.ChartOptions.Property("ValueDivider") And ValueIsFilled(_Settings.ChartOptions.ValueDivider) Then
+			For i = 0 To _result.Series.Count() - 1 Do
+				_result.Series[i] = Round(_result.Series[i] / _Settings.ChartOptions.ValueDivider, 0);
+			EndDo;
+		EndIf;
+			
 		_value = _result.Series[0];
 		_details = _result.Details;
 		
@@ -281,8 +287,14 @@ Procedure CreateWidget(Root, Settings)
 			ElsIf _Settings.IndicatorName = "Sales_SalesAmount" Then
 				_result = DashboardServer.GetValue_Sales_SalesAmount(_Period, IndicatorParameters, _Settings, LabelsData, SeriaData);
 			EndIf;
-				
+					
 			If _result <> Undefined Then
+				If _Settings.ChartOptions.Property("ValueDivider") And ValueIsFilled(_Settings.ChartOptions.ValueDivider) Then
+					For i = 0 To _result.Series.Count() - 1 Do
+						_result.Series[i] = Round(_result.Series[i] / _Settings.ChartOptions.ValueDivider, 0);
+					EndDo;
+				EndIf;
+			
 				If _Settings.ChartType = "Pie" Then
 					If _result.Series.Count() > 0 Then
 						Chart.data.series.Add(_result.Series[0]);

@@ -13,6 +13,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Options_TimeLineDateFormat = Parameters.Options.TimeLineDateFormat;
 	
 	ThisObject.ChartOptions_ShowPoint = Parameters.ChartOptions.ShowPoint;
+	ThisObject.ChartOptions_ValueDivider = Parameters.ChartOptions.ValueDivider;
 	
 	If Parameters.Settings <> Undefined Then
 		ThisObject.WidgetType = ReadSettingsAtSettings(Parameters.Settings, "WidgetType" , ThisObject.WidgetType);
@@ -42,6 +43,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.Options_TimeLineDateFormat = ReadSettingsAtSettings(Parameters.Settings.Options, "TimeLineDateFormat", ThisObject.Options_TimeLineDateFormat);
 	
 		ThisObject.ChartOptions_ShowPoint = ReadSettingsAtSettings(Parameters.Settings.ChartOptions, "ShowPoint", ThisObject.ChartOptions_ShowPoint);
+		ThisObject.ChartOptions_ValueDivider = ReadSettingsAtSettings(Parameters.Settings.ChartOptions, "ValueDivider", ThisObject.ChartOptions_ValueDivider);
 	EndIf;
 	
 	If Not ValueIsFilled(ThisObject.WidgetID) Then
@@ -115,6 +117,7 @@ Function GetSettingsAtServer()
 	
 	Settings.Insert("ChartOptions", New Structure());
 	Settings.ChartOptions.Insert("ShowPoint", ThisObject.ChartOptions_ShowPoint);
+	Settings.ChartOptions.Insert("ValueDivider", ThisObject.ChartOptions_ValueDivider);
 	
 	Settings.Insert("Series", New Array());
 	For Each Seria In ThisObject.Series Do
@@ -229,6 +232,21 @@ Procedure SetVisible(Object, Form)
 	Form.Items.Options_Width.ChoiceList.Clear();
 	For Each ListItem In Width_List Do
 		Form.Items.Options_Width.ChoiceList.Add(ListItem.Value, ListItem.Presentation);
+	EndDo;  
+	
+	// Value divider
+	ValueDevider_List = New ValueList();
+	ValueDevider_List.Add(1, "1");
+	ValueDevider_List.Add(10, "10");
+	ValueDevider_List.Add(100, "100");
+	ValueDevider_List.Add(1000, "1000");
+	ValueDevider_List.Add(10000, "10 000");
+	ValueDevider_List.Add(100000, "100 000");
+	ValueDevider_List.Add(1000000, "1000 000");
+	
+	Form.Items.ChartOptions_ValueDivider.ChoiceList.Clear();
+	For Each ListItem In ValueDevider_List Do
+		Form.Items.ChartOptions_ValueDivider.ChoiceList.Add(ListItem.Value, ListItem.Presentation);
 	EndDo;  
 	
 	// Chart type

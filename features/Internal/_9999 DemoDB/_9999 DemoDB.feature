@@ -239,6 +239,24 @@ Scenario: _999901 filling in demo data base
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
 	When set False value to the constant DisableLinkedRowsIntegrity
+	* Change password for CI
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'CI'          |
+		And I select current line in "List" table
+		And I click "Set password" button
+		And I input "#KeyPDemo#" text in "Password" field
+		And I input "#KeyPDemo#" text in "Confirm password" field
+		And I click "Ok" button
+	* Change data base status
+		Given I open hyperlink "e1cib/list/Catalog.DataBaseStatus"
+		And I go to line in "List" table
+			| 'is Product server'  |
+			| 'Yes'                |	
+		And I select current line in "List" table
+		And I remove checkbox "is Product server"
+		And I click "Save and close" button	
 	And I close all client application windows
 
 

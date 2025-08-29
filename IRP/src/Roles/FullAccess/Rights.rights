@@ -2620,6 +2620,18 @@
 			<name>InteractiveDeletePredefinedData</name>
 			<value>false</value>
 		</right>
+		<right>
+			<name>InteractiveSetDeletionMarkPredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMarkPredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
 	</object>
 	<object>
 		<name>Catalog.ChequeBonds</name>

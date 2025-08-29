@@ -1142,42 +1142,51 @@ Scenario: Create catalog Taxes objects(DemoDB)
 Scenario: Create catalog AccessGroups objects(DemoDB)
 
 	And I check or create catalog "AccessGroups" objects:
-		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'OnlyRegisters' | 'Author'                                                        | 'CreateDate'          | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Editor'                                                        | 'ModifyDate'          | 'NotActive' | 'SourceNodeID' |
-		| 'e1cib/data/Catalog.AccessGroups?ref=b762b13668d0905011eb766bf96b2778' | 'False'        | 1      | 'False'         | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '30.05.2025 14:19:16' | 'Only read'      | ''                 | 'Только чтение'  | 'Sadece okuma'   | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '30.05.2025 14:19:16' | 'False'     | ''             |
-		| 'e1cib/data/Catalog.AccessGroups?ref=b762b13668d0905011eb766bf96b277a' | 'False'        | 2      | 'False'         | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '30.05.2025 14:19:16' | 'Admin'          | ''                 | 'Админ'          | 'Admin'          | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '21.08.2025 13:03:53' | 'False'     | ''             |
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'OnlyRegisters' | 'Author'                                                        | 'CreateDate'          | 'Description_en'                | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Editor'                                                        | 'ModifyDate'          | 'NotActive' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b762b13668d0905011eb766bf96b2778' | 'False'        | 1      | 'False'         | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.08.2025 21:14:13' | 'Only read'                     | ''                 | 'Только чтение'  | 'Sadece okuma'   | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.08.2025 21:14:13' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b762b13668d0905011eb766bf96b277a' | 'False'        | 2      | 'False'         | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.08.2025 21:14:13' | 'Admin'                         | ''                 | 'Админ'          | 'Admin'          | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '28.08.2025 14:58:32' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b862c48d219d3a0511f08405e0598ed7' | 'False'        | 3      | 'False'         | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '28.08.2025 14:58:03' | 'Admin without admin functions' | ''                 | ''               | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '28.08.2025 14:58:20' | 'False'     | ''             |
 
 	And I refill object tabular section "Profiles":
 		| 'Ref'                                                                  | 'Profile'                                                                |
 		| 'e1cib/data/Catalog.AccessGroups?ref=b762b13668d0905011eb766bf96b2778' | 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2776' |
 		| 'e1cib/data/Catalog.AccessGroups?ref=b762b13668d0905011eb766bf96b277a' | 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b862c48d219d3a0511f08405e0598ed7' | 'e1cib/data/Catalog.AccessProfiles?ref=b862c48d219d3a0511f08405e0598ed6' |
 
 	And I refill object tabular section "Users":
 		| 'Ref'                                                                  | 'User'                                                          |
 		| 'e1cib/data/Catalog.AccessGroups?ref=b762b13668d0905011eb766bf96b2778' | ''                                                              |
 		| 'e1cib/data/Catalog.AccessGroups?ref=b762b13668d0905011eb766bf96b277a' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' |
-		| 'e1cib/data/Catalog.AccessGroups?ref=b762b13668d0905011eb766bf96b277a' | 'e1cib/data/Catalog.Users?ref=b862c48d219d3a0511f07e74b2b28d34' |
-		| 'e1cib/data/Catalog.AccessGroups?ref=b762b13668d0905011eb766bf96b277a' | 'e1cib/data/Catalog.Users?ref=b862c48d219d3a0511f07e74b2b28d35' |
-		| 'e1cib/data/Catalog.AccessGroups?ref=b762b13668d0905011eb766bf96b277a' | 'e1cib/data/Catalog.Users?ref=b862c48d219d3a0511f07e7547b54964' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b862c48d219d3a0511f08405e0598ed7' | 'e1cib/data/Catalog.Users?ref=b862c48d219d3a0511f07e7547b54964' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b862c48d219d3a0511f08405e0598ed7' | 'e1cib/data/Catalog.Users?ref=b862c48d219d3a0511f07e74b2b28d35' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b862c48d219d3a0511f08405e0598ed7' | 'e1cib/data/Catalog.Users?ref=b862c48d219d3a0511f07e74b2b28d34' |
+
 
 Scenario: Create catalog AccessProfiles objects(DemoDB)
 
 	And I check or create catalog "AccessProfiles" objects:
-		| 'Ref'                                                                    | 'DeletionMark' | 'Code' | 'Author'                                                        | 'CreateDate'          | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Editor'                                                        | 'ModifyDate'          | 'NotActive' | 'SourceNodeID' |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2776' | 'False'        | 1      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '30.05.2025 14:19:16' | 'Only read'      | ''                 | 'Только чтение'  | 'Sadece okuma'   | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '30.05.2025 14:19:16' | 'False'     | ''             |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'False'        | 2      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '30.05.2025 14:19:16' | 'Admin'          | ''                 | 'Полные права'   | 'Admin'          | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '30.05.2025 14:19:16' | 'False'     | ''             |
+		| 'Ref'                                                                    | 'DeletionMark' | 'Code' | 'Author'                                                        | 'CreateDate'          | 'Description_en'                | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Editor'                                                        | 'ModifyDate'          | 'NotActive' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2776' | 'False'        | 1      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.08.2025 21:14:13' | 'Only read'                     | ''                 | 'Только чтение'  | 'Sadece okuma'   | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.08.2025 21:14:13' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'False'        | 2      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.08.2025 21:14:13' | 'Admin'                         | ''                 | 'Полные права'   | 'Admin'          | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.08.2025 21:14:13' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b862c48d219d3a0511f08405e0598ed6' | 'False'        | 3      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '28.08.2025 14:57:42' | 'Admin without admin functions' | ''                 | 'Полные права'   | 'Admin'          | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.08.2025 21:14:13' | 'False'     | ''             |
 
 	And I refill object tabular section "Roles":
-		| 'Ref'                                                                    | 'Role'                | 'Configuration' |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2776' | 'BasicRole'           | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2776' | 'FullAccessOnlyRead'  | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'BasicRole'           | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'CreateOrModifyUsers' | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'FullAccess'          | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'RunThinClient'       | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'RunWebClient'        | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'SaveUserData'        | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'UseExternalReports'  | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'UseOutput'           | 'IRP'           |
+		| 'Ref'                                                                    | 'Role'                       | 'Configuration' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2776' | 'BasicRole'                  | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2776' | 'FullAccessOnlyRead'         | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'BasicRole'                  | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'CreateOrModifyUsers'        | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'FullAccess'                 | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'RunThinClient'              | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'RunWebClient'               | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'SaveUserData'               | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'UseExternalReports'         | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b762b13668d0905011eb766bf96b2779' | 'UseOutput'                  | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b862c48d219d3a0511f08405e0598ed6' | 'BasicRole'                  | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b862c48d219d3a0511f08405e0598ed6' | 'FullAccessNoAdminFunctions' | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b862c48d219d3a0511f08405e0598ed6' | 'RunThinClient'              | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b862c48d219d3a0511f08405e0598ed6' | 'RunWebClient'               | 'IRP'           |
+
 
 Scenario: Create catalog UserGroups objects(DemoDB)
 
@@ -1192,7 +1201,7 @@ Scenario: Create catalog Users objects(DemoDB)
 		| '$$IdCI$$'                                                      | 'False'        | 1      | 'CI'          | 'd8339fad-aa7c-4c28-9755-547bc50e2083' | ''        | 'en'               | 'True'       | ''          | 'en'                        | ''                 | 'False'   | 'False'                     | 'Europe/Kiev' | ''       | ''      | ''       | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '21.08.2025 12:53:15' | 'CI'             | ''                 | ''               | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '21.08.2025 13:03:26' | 'False'     | ''             |
 		| 'e1cib/data/Catalog.Users?ref=b862c48d219d3a0511f07e74b2b28d34' | 'False'        | 2      | 'Admin_RU'    | '0277e72a-cc43-4f01-9afc-1d5c4157c066' | ''        | 'ru'               | 'True'       | ''          | 'ru'                        | ''                 | 'False'   | 'False'                     | 'Europe/Kiev' | ''       | ''      | ''       | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '21.08.2025 12:53:33' | 'Admin_RU'       | ''                 | ''               | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '21.08.2025 12:53:15' | 'False'     | ''             |
 		| 'e1cib/data/Catalog.Users?ref=b862c48d219d3a0511f07e74b2b28d35' | 'False'        | 3      | 'Admin_TR'    | '92d8f839-cafd-4aab-9df6-1919881963e6' | ''        | 'tr'               | 'True'       | ''          | 'tr'                        | ''                 | 'False'   | 'False'                     | 'Europe/Kiev' | ''       | ''      | ''       | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '21.08.2025 12:53:50' | 'Admin_TR'       | ''                 | ''               | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '21.08.2025 12:53:15' | 'False'     | ''             |
-		| 'e1cib/data/Catalog.Users?ref=b862c48d219d3a0511f07e7547b54964' | 'False'        | 4      | 'Admin_EN'    | '5c82c58d-95ef-471d-a92c-fdac8569feee' | ''        | 'tr'               | 'True'       | ''          | 'tr'                        | ''                 | 'False'   | 'False'                     | 'Europe/Kiev' | ''       | ''      | ''       | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '21.08.2025 13:03:40' | 'Admin_EN'       | ''                 | ''               | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '21.08.2025 12:53:15' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.Users?ref=b862c48d219d3a0511f07e7547b54964' | 'False'        | 4      | 'Admin_EN'    | '5c82c58d-95ef-471d-a92c-fdac8569feee' | ''        | 'en'               | 'True'       | ''          | 'en'                        | ''                 | 'False'   | 'False'                     | 'Europe/Kiev' | ''       | ''      | ''       | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '21.08.2025 13:03:40' | 'Admin_EN'       | ''                 | ''               | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '21.08.2025 12:53:15' | 'False'     | ''             |
 
 Scenario: Create document AdditionalCostAllocation objects(DemoDB)
 

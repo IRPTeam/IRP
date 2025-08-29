@@ -1338,6 +1338,7 @@
  <catalogs>Catalog.PaymentTerminals</catalogs>
  <catalogs>Catalog.PaymentTypes</catalogs>
  <catalogs>Catalog.PlanningPeriods</catalogs>
+ <catalogs>Catalog.PLSections</catalogs>
  <catalogs>Catalog.PriceKeys</catalogs>
  <catalogs>Catalog.PriceTypes</catalogs>
  <catalogs>Catalog.PrintFormTemplates</catalogs>
@@ -1369,7 +1370,6 @@
  <catalogs>Catalog.Vehicles</catalogs>
  <catalogs>Catalog.VehicleTypes</catalogs>
  <catalogs>Catalog.Workstations</catalogs>
- <catalogs>Catalog.PLSections</catalogs>
  <documents>Document.AdditionalAccrual</documents>
  <documents>Document.AdditionalCostAllocation</documents>
  <documents>Document.AdditionalDeduction</documents>
@@ -1479,8 +1479,10 @@
  <enums>Enum.AgreementTypes</enums>
  <enums>Enum.AllocationMethod</enums>
  <enums>Enum.AllocationMode</enums>
+ <enums>Enum.AmountCorrectionTypes</enums>
  <enums>Enum.ApArPostingDetail</enums>
  <enums>Enum.AuditLockActions</enums>
+ <enums>Enum.AutostartProcessTypes</enums>
  <enums>Enum.BankTermTypes</enums>
  <enums>Enum.BatchDirection</enums>
  <enums>Enum.BatchType</enums>
@@ -1540,6 +1542,7 @@
  <enums>Enum.PaymentTypes</enums>
  <enums>Enum.PayrollTypes</enums>
  <enums>Enum.PhysicalCountByLocationTransactionType</enums>
+ <enums>Enum.PLSectionTypes</enums>
  <enums>Enum.PriceAssignment</enums>
  <enums>Enum.PriceListTypes</enums>
  <enums>Enum.PrintFormTypes</enums>
@@ -1567,6 +1570,9 @@
  <enums>Enum.SpecialOfferTypes</enums>
  <enums>Enum.SpecificationType</enums>
  <enums>Enum.SystemClientType</enums>
+ <enums>Enum.TaskFailActions</enums>
+ <enums>Enum.TaskResults</enums>
+ <enums>Enum.TaskTypes</enums>
  <enums>Enum.TaxesOperationTransactionType</enums>
  <enums>Enum.TaxKind</enums>
  <enums>Enum.TaxPayers</enums>
@@ -1574,16 +1580,11 @@
  <enums>Enum.TradeAgentFeeTypes</enums>
  <enums>Enum.TypeEquipment</enums>
  <enums>Enum.TypeExternalObject</enums>
- <enums>Enum.AutostartProcessTypes</enums>
- <enums>Enum.TaskFailActions</enums>
- <enums>Enum.TaskTypes</enums>
- <enums>Enum.TaskResults</enums>
- <enums>Enum.AmountCorrectionTypes</enums>
- <enums>Enum.PLSectionTypes</enums>
  <reports>Report.A0010_TrialBalance</reports>
  <reports>Report.A0011_TrialBalanceByAccount</reports>
  <reports>Report.A0012_AccountCard</reports>
  <reports>Report.A0013_AccountAnalysis</reports>
+ <reports>Report.A0014_AccountingPLReport</reports>
  <reports>Report.A1010_PartnersBalance</reports>
  <reports>Report.D0010_ItemsInfo</reports>
  <reports>Report.D0011_PriceInfo</reports>
@@ -1637,15 +1638,14 @@
  <reports>Report.R6020A_InventoryCost</reports>
  <reports>Report.R6021_BatchBalanceSimple</reports>
  <reports>Report.R6060A_CostOfGoodsSold</reports>
+ <reports>Report.R6070_OtherPeriodsExpenses</reports>
  <reports>Report.R7010_DetailingSupplies</reports>
  <reports>Report.R7030_ProductionPlanning</reports>
+ <reports>Report.R8510B_BookValueOfFixedAsset</reports>
  <reports>Report.R9101S_InventoryResults</reports>
  <reports>Report.R9510A_Salary</reports>
  <reports>Report.S1001L_VendorsPrices</reports>
  <reports>Report.T0001_FilesAnalyser</reports>
- <reports>Report.R6070_OtherPeriodsExpenses</reports>
- <reports>Report.R8510B_BookValueOfFixedAsset</reports>
- <reports>Report.A0014_AccountingPLReport</reports>
  <dataProcessors>DataProcessor.AccountantAutomatedWorkplace</dataProcessors>
  <dataProcessors>DataProcessor.AccountingService</dataProcessors>
  <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>

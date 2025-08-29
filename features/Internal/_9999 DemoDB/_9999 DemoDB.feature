@@ -249,6 +249,7 @@ Scenario: _999901 filling in demo data base
 		And I input "#KeyPDemo#" text in "Password" field
 		And I input "#KeyPDemo#" text in "Confirm password" field
 		And I click "Ok" button
+		And I click "Save and close" button	
 	* Change data base status
 		Given I open hyperlink "e1cib/list/Catalog.DataBaseStatus"
 		And I go to line in "List" table

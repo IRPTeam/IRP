@@ -2813,6 +2813,106 @@ Scenario: Create information register UserSettings records (stock inventory cont
 		| '$$IdCI$$'    | ''               | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
 
 
+Scenario: Create information register UserSettings records (R3010B_CashOnHand control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                 | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                       |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b05d' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R3010B_CashOnHand' | ''                 | ''               | ''               | 'CheckBalance_R3010B_CashOnHand' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                  | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R3010B_CashOnHand' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+
+Scenario: Create information register UserSettings records (R4010B_ActualStocks control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                   | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                         |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b05b' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R4010B_ActualStocks' | ''                 | ''               | ''               | 'CheckBalance_R4010B_ActualStocks' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                    | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R4011B_FreeStocks control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                 | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                       |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b05e' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R4011B_FreeStocks' | ''                 | ''               | ''               | 'CheckBalance_R4011B_FreeStocks' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                  | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R4014B_SerialLotNumber control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                      | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                            |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b05f' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R4014B_SerialLotNumber' | ''                 | ''               | ''               | 'CheckBalance_R4014B_SerialLotNumber' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                       | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R4014B_SerialLotNumber' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R4035B_IncomingStocks control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                     | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                           |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b060' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R4035B_IncomingStocks' | ''                 | ''               | ''               | 'CheckBalance_R4035B_IncomingStocks' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                      | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R4035B_IncomingStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R4036B_IncomingStocksRequested control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                              | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                                    |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b061' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R4036B_IncomingStocksRequested' | ''                 | ''               | ''               | 'CheckBalance_R4036B_IncomingStocksRequested' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                               | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R4036B_IncomingStocksRequested' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R4037B_PlannedReceiptReservationRequests control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                                        | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                                              |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b062' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R4037B_PlannedReceiptReservationRequests' | ''                 | ''               | ''               | 'CheckBalance_R4037B_PlannedReceiptReservationRequests' |
+	
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                                         | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R4037B_PlannedReceiptReservationRequests' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R6070T_OtherPeriodsExpenses control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                           | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                                 |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b063' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R6070T_OtherPeriodsExpenses' | ''                 | ''               | ''               | 'CheckBalance_R6070T_OtherPeriodsExpenses' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                            | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R6070T_OtherPeriodsExpenses' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R6080T_OtherPeriodsRevenues control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                           | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                                 |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b064' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R6080T_OtherPeriodsRevenues' | ''                 | ''               | ''               | 'CheckBalance_R6080T_OtherPeriodsRevenues' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                            | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R6080T_OtherPeriodsRevenues' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
 Scenario: Create catalog PartnersBankAccounts objects
 
 	And I check or create catalog "PartnersBankAccounts" objects:
@@ -2822,8 +2922,6 @@ Scenario: Create catalog PartnersBankAccounts objects
 
 
 Scenario: Create Document discount
-
-
 
 	And I check or create catalog "SpecialOfferTypes" objects:
 		| 'Ref'                                                                        | 'DeletionMark'  | 'Code'  | 'Settings'      | 'ExternalDataProc'  | 'TermsOfDiscountCalculation'  | 'GroupTypes'  | 'Description_en'    | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |

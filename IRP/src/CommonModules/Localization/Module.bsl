@@ -2844,7 +2844,19 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 
 #Region SecureStorage
 	Strings.Insert("SecureStorage_CanStoreOnlyStructure", NStr("en = 'It can be stored only Structure type'", Lang));
-	
+#EndRegion
+
+#Region Dashboard
+	Strings.Insert("Dashboard_01", NStr("en = 'Sales amount'", Lang));
+	Strings.Insert("Dashboard_02", NStr("en = 'Average bill'", Lang));
+	Strings.Insert("Dashboard_03", NStr("en = 'Sales return percentage'", Lang));	
+	Strings.Insert("Dashboard_04", NStr("en = 'Cash Balance'", Lang));
+	Strings.Insert("Dashboard_05", NStr("en = 'Payments from clients'", Lang));
+	Strings.Insert("Dashboard_06", NStr("en = 'Payments to suppliers'", Lang));
+	Strings.Insert("Dashboard_07", NStr("en = 'AP/AR Balance'", Lang));
+	Strings.Insert("Dashboard_08", NStr("en = 'Stock Balance'", Lang));
+	Strings.Insert("Dashboard_09", NStr("en = 'Volume of purchases'", Lang));
+
 #EndRegion
 
 	Return Strings;

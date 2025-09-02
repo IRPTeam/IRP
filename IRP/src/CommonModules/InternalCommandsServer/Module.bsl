@@ -34,6 +34,9 @@ Procedure CreateCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo 
 	
 	CommandArray = New Array; // Array of See GetCommandDescription
 	For Each ContentItem In SessionParameters.InternalCommands Do // See GetCommandDescription
+		If Not CheckByFunctionalOptions(ContentItem) Then
+			Continue;
+		EndIf;
 		If FormType = Enums.FormTypes.ObjectForm And Not ContentItem.UsingObjectForm Then
 			Continue;
 		ElsIf FormType = Enums.FormTypes.ListForm And Not ContentItem.UsingListForm Then
@@ -203,6 +206,7 @@ EndProcedure
 // * ForTables - Boolean - 
 // * ForContextMenu - Boolean - 
 // * SpecificTables - String - 
+// * CommandBarMap - Map, Undefined -
 // * ServerContextRequired - Boolean - 
 // * HasActionInitialization - Boolean - 
 // * HasActionOnCommandCreate - Boolean - 
@@ -213,12 +217,12 @@ EndProcedure
 // * UsingChoiceForm - Boolean - 
 // * Targets - Array of String
 //           - FixedArray of String 
+// * FunctionalOptions - FixedArray of String 
 Function GetCommandDescription() Export
 	
 	CommandDescription = New Structure;
 	
 	CommandDescription.Insert("Name", "");
-	CommandDescription.Insert("CommandBarMap", Undefined);
 	
 	CommandDescription.Insert("Title", "");
 	CommandDescription.Insert("TitleCheck", "");
@@ -237,6 +241,7 @@ Function GetCommandDescription() Export
 	CommandDescription.Insert("ForTables", False);
 	CommandDescription.Insert("ForContextMenu", False);
 	CommandDescription.Insert("SpecificTables", "");
+	CommandDescription.Insert("CommandBarMap", Undefined);
 	
 	CommandDescription.Insert("ServerContextRequired", False);
 	
@@ -251,6 +256,9 @@ Function GetCommandDescription() Export
 	
 	Targets = New Array; // Array of String (Object.Metadata.FullName())
 	CommandDescription.Insert("Targets", Targets);
+	
+	FunctionalOptions = New Array; // Array of String
+	CommandDescription.Insert("FunctionalOptions", New FixedArray(FunctionalOptions));
 	
 	Return CommandDescription;
 	
@@ -397,6 +405,30 @@ Function GetFormGroupByName(Form, LocationGroup, TableName = "")
 	
 	Return FormGroup;
 	
+EndFunction
+
+// Check by functional options.
+// 
+// Parameters:
+//  CommandItem - See GetCommandDescription
+// 
+// Returns:
+//  Boolean - Check by functional options
+Function CheckByFunctionalOptions(CommandItem)
+	
+	If CommandItem.FunctionalOptions.Count() = 0 Then
+		Return True;
+	EndIf;
+	
+	SetSafeMode(True);
+	
+	Result = False;
+	For Each NameFO In CommandItem.FunctionalOptions Do
+		CheckMethod = StrTemplate("FOServer.Is%1()", NameFO);
+		Result = Result Or Eval(CheckMethod);
+	EndDo;
+
+	Return Result;
 EndFunction
 
 #EndRegion

@@ -14,10 +14,9 @@ Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Expo
 		RecordType, AddInfo);
 EndFunction
 
-Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting,
-	AddInfo = Undefined) Export
+Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
 
-	If Not PostingServer.CheckingBalanceIsRequired(Ref, "R4036B_IncomingStocksRequested") Then
+	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4036B_IncomingStocksRequested", True) Then
 		Return True;
 	EndIf;
 

@@ -1,10 +1,10 @@
 ﻿#language: en
 @tree
 @Positive
-@StockControl
+@NegativeBalanceControlByRegisters
 
 
-Feature: check remaining stock control
+Feature: actual and free stock control
 
 Variables:
 import "Variables.feature"
@@ -14,7 +14,7 @@ Background:
 
 
 	
-Scenario:_800000 preparation (remaining stock control)
+Scenario:_880000 preparation (actual and free stock control)
 	When set True value to the constant
 	* Load info
 		When Create catalog CancelReturnReasons objects
@@ -62,7 +62,8 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create catalog BillOfMaterials objects
 		When Create information register Taxes records (VAT)	
 	* Stock remaining settings
-		When Create information register UserSettings records (remaining stock control)
+		When Create information register UserSettings records (R4010B_ActualStocks control)
+		When Create information register UserSettings records (R4011B_FreeStocks control)
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		If "List" table does not contain lines Then
 				| "Number"                             |
@@ -160,12 +161,12 @@ Scenario:_800000 preparation (remaining stock control)
 	* Workstation
 		When create Workstation
 
-Scenario:_8000001 check preparation
+Scenario:_8800001 check preparation (actual and free stock control)
 	When check preparation 
 
 // expense documents
 
-Scenario:_800005 check remaining stock control in the Sales order
+Scenario:_880005 check remaining stock control in the Sales order
 		* Create SO (SI before SC, procurement - Stock)
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
 			And I click the button named "FormCreate"
@@ -325,7 +326,7 @@ Scenario:_800005 check remaining stock control in the Sales order
 			And I click the button named "FormUndoPosting"
 			Then user message window does not contain messages
 
-Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
+Scenario:_880008 check remaining stock control in the Sales invoice (without SO)
 		And I close all client application windows
 		* Create SI 
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -457,7 +458,7 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 		And I close all client application windows
 
 
-Scenario:_800009 check remaining stock control serial lot numbers in the Sales invoice (without SO and SC)
+Scenario:_880009 check remaining stock control serial lot numbers in the Sales invoice (without SO and SC)
 		And I close all client application windows
 		* Create SI 
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -664,7 +665,7 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 
 
 
-Scenario:_800011 check remaining stock control in the Retail sales receipt					
+Scenario:_880011 check remaining stock control in the Retail sales receipt					
 			And I close all client application windows
 		* Create Retail sales receipt
 			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -823,7 +824,7 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 		And I close all client application windows
 
 
-Scenario:_800012 check remaining stock control serial lot numbers in the Retail sales receipt					
+Scenario:_880012 check remaining stock control serial lot numbers in the Retail sales receipt					
 	And I close all client application windows
 		* Create Retail sales receipt
 			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -940,7 +941,7 @@ Scenario:_800012 check remaining stock control serial lot numbers in the Retail 
 		And I close all client application windows
 
 
-Scenario:_800014 check remaining stock control in the Bundling					
+Scenario:_880014 check remaining stock control in the Bundling					
 	And I close all client application windows
 		* Create Bundling
 			Given I open hyperlink "e1cib/list/Document.Bundling"
@@ -1076,7 +1077,7 @@ Scenario:_800014 check remaining stock control in the Bundling
 			Then user message window does not contain messages
 		And I close all client application windows
 		
-Scenario:_800017 check remaining stock control in the Stock adjustment as write off		
+Scenario:_880017 check remaining stock control in the Stock adjustment as write off		
 		And I close all client application windows
 		* Create Stock adjustment as write off
 			Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
@@ -1239,7 +1240,7 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			Then user message window does not contain messages
 		And I close all client application windows
 
-Scenario:_800018 check remaining stock control serial lot number in the Stock adjustment as write off		
+Scenario:_880018 check remaining stock control serial lot number in the Stock adjustment as write off		
 		And I close all client application windows
 		* Create Stock adjustment as write off
 			Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
@@ -1348,7 +1349,7 @@ Scenario:_800018 check remaining stock control serial lot number in the Stock ad
 		And I close all client application windows	
 								
 
-Scenario:_800020 check remaining stock control in the Purchase return				
+Scenario:_880020 check remaining stock control in the Purchase return				
 		And I close all client application windows
 		* Create Purchase return (without Purchase return order)
 			Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
@@ -1451,7 +1452,7 @@ Scenario:_800020 check remaining stock control in the Purchase return
 			Then user message window does not contain messages
 		And I close all client application windows										
 
-Scenario:_800021 check remaining stock control in the Purchase return				
+Scenario:_880021 check remaining stock control in the Purchase return				
 	And I close all client application windows
 	* Create Purchase return (without Purchase return order)
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
@@ -1559,7 +1560,7 @@ Scenario:_800021 check remaining stock control in the Purchase return
 		And I close all client application windows
 
 
-Scenario:_800022 check remaining stock control in the shipment confirmation			
+Scenario:_880022 check remaining stock control in the shipment confirmation			
 		And I close all client application windows
 		* Create Shipment confirmation
 			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -1673,7 +1674,7 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 		And I close all client application windows
 
 
-Scenario:_800023 check remaining stock control serial lot number in the shipment confirmation			
+Scenario:_880023 check remaining stock control serial lot number in the shipment confirmation			
 	And I close all client application windows
 	* Create Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
@@ -1777,7 +1778,7 @@ Scenario:_800023 check remaining stock control serial lot number in the shipment
 // incoming documents
 
 	
-Scenario:_800032 check remaining stock control when unpost/change Unbundling
+Scenario:_880032 check remaining stock control when unpost/change Unbundling
 	* Post Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
@@ -1931,7 +1932,7 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 		And I close all client application windows
 		
 
-Scenario:_800036 check remaining stock control when unpost/change Sales return
+Scenario:_880036 check remaining stock control when unpost/change Sales return
 	And I close all client application windows
 	* Try unpost (balances written off by SI)
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
@@ -1991,7 +1992,7 @@ Scenario:_800036 check remaining stock control when unpost/change Sales return
 		And I close all client application windows
 
 
-Scenario:_800040 check remaining stock control when unpost/change Stock adjustment as surplus
+Scenario:_880040 check remaining stock control when unpost/change Stock adjustment as surplus
 	* Try unpost Stock adjustment as surplus (balances written off by SI)
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I go to line in "List" table
@@ -2065,7 +2066,7 @@ Scenario:_800040 check remaining stock control when unpost/change Stock adjustme
 		And I close all client application windows
 	
 
-Scenario:_800042 check remaining stock control when post Physical inventory
+Scenario:_880042 check remaining stock control when post Physical inventory
 	And I close all client application windows
 	* Try to post Physical inventory (no balance to write off)
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
@@ -2104,7 +2105,7 @@ Scenario:_800042 check remaining stock control when post Physical inventory
 		And I close all client application windows
 		
 	
-Scenario:_800043 check remaining stock control when unpost Physical inventory
+Scenario:_880043 check remaining stock control when unpost Physical inventory
 	* Try unpost Physical inventory (balances written off by SI)
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I go to line in "List" table
@@ -2164,7 +2165,7 @@ Scenario:_800043 check remaining stock control when unpost Physical inventory
 
 
 
-Scenario:_800044 check remaining stock control when unpost/change Retail return receipt
+Scenario:_880044 check remaining stock control when unpost/change Retail return receipt
 	And I close all client application windows
 	* Try unpost (balances written off by SI)
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
@@ -2243,7 +2244,7 @@ Scenario:_800044 check remaining stock control when unpost/change Retail return 
 		And I close all client application windows
 
 
-Scenario:_800046 check remaining stock control when post/change Inventory transfer order
+Scenario:_880046 check remaining stock control when post/change Inventory transfer order
 	And I close all client application windows
 	* Try to post Inventory transfer order (no balance to write off), status Approved
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
@@ -2354,7 +2355,7 @@ Scenario:_800046 check remaining stock control when post/change Inventory transf
 		Then user message window does not contain messages
 		And I close all client application windows
 		
-Scenario:_800048 check remaining stock control when unpost/change Inventory transfer		
+Scenario:_880048 check remaining stock control when unpost/change Inventory transfer		
 	And I close all client application windows
 	* Try unpost (balances written off by SI)
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
@@ -2417,7 +2418,7 @@ Scenario:_800048 check remaining stock control when unpost/change Inventory tran
 		
 		
 
-Scenario:_800050 check remaining stock control when unpost/change Opening entry
+Scenario:_880050 check remaining stock control when unpost/change Opening entry
 	* Trying to unpost Opening entry 
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I go to line in "List" table
@@ -2489,7 +2490,7 @@ Scenario:_800050 check remaining stock control when unpost/change Opening entry
 		Then user message window does not contain messages
 		And I close all client application windows
 
-Scenario:_800051 check remaining stock control in the Work Sheet
+Scenario:_880051 check remaining stock control in the Work Sheet
 	And I close all client application windows
 	* Create WS
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
@@ -2556,7 +2557,7 @@ Scenario:_800051 check remaining stock control in the Work Sheet
 		And I finish line editing in "Materials" table
 						
 
-Scenario:_800051 check remaining stock control in the Work Sheet
+Scenario:_880051 check remaining stock control in the Work Sheet
 	And I close all client application windows
 	* Create WS
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
@@ -2635,7 +2636,7 @@ Scenario:_800051 check remaining stock control in the Work Sheet
 		And I close all client application windows
 				
 
-Scenario:_800052 check remaining stock control in the Work Order
+Scenario:_880052 check remaining stock control in the Work Order
 	And I close all client application windows
 	* Create WO
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
@@ -2719,7 +2720,7 @@ Scenario:_800052 check remaining stock control in the Work Order
 		And I close all client application windows
 
 
-Scenario:_800055 check remaining stock control when unpost/change Sales order closing
+Scenario:_880055 check remaining stock control when unpost/change Sales order closing
 		And I close all client application windows
 	* Trying to unpost 
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
@@ -2734,7 +2735,7 @@ Scenario:_800055 check remaining stock control when unpost/change Sales order cl
 		Then I wait that in user messages the "Line No. [2] [Bag ODS] R4011 Free stocks remaining: 20 . Required: 0 . Lacking: 20 ." substring will appear in 10 seconds
 		And I close all client application windows
 
-Scenario:_800056 check remaining stock control when unpost/change Goods receipt
+Scenario:_880056 check remaining stock control when unpost/change Goods receipt
 	* Try unpost (balances written off by SI)
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
@@ -2787,7 +2788,7 @@ Scenario:_800056 check remaining stock control when unpost/change Goods receipt
 		Then user message window does not contain messages
 		And I close all client application windows
 
-Scenario:_800060 check remaining stock control serial lot number when unpost incoming documents
+Scenario:_880060 check remaining stock control serial lot number when unpost incoming documents
 	* Preparation
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -2861,7 +2862,7 @@ Scenario:_800060 check remaining stock control serial lot number when unpost inc
 		And I close all client application windows
 
 
-Scenario:_800062 checkmark removal control Stock balance detail in the Serial lot number
+Scenario:_880062 checkmark removal control Stock balance detail in the Serial lot number
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
 	And I go to line in "List" table
@@ -2873,7 +2874,7 @@ Scenario:_800062 checkmark removal control Stock balance detail in the Serial lo
 	Then I wait that in user messages the "[Stock balance detail] cannot be changed, has posted documents" substring will appear in 10 seconds
 	And I close all client application windows
 
-Scenario:_800063 try to set mark Batch balance details in the Serial lot number that used in the documents
+Scenario:_880063 try to set mark Batch balance details in the Serial lot number that used in the documents
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
 	And I go to line in "List" table
@@ -2886,7 +2887,7 @@ Scenario:_800063 try to set mark Batch balance details in the Serial lot number 
 	And I close all client application windows
 	
 
-Scenario:_800070 check stock control in the Stock adjustment as surplus
+Scenario:_880070 check stock control in the Stock adjustment as surplus
 	And I close all client application windows
 	* Preparation
 		And I execute 1C:Enterprise script at server
@@ -2923,7 +2924,7 @@ Scenario:_800070 check stock control in the Stock adjustment as surplus
 		And I close all client application windows
 				
 
-Scenario:_800080 set/remove checkbox Negative stock control from store and check posting document (Negative stock)
+Scenario:_880080 set/remove checkbox Negative stock control from store and check posting document (Negative stock)
 	* Remove checkbox
 		Given I open hyperlink "e1cib/list/Catalog.Stores"
 		And I go to line in "List" table
@@ -2997,7 +2998,7 @@ Scenario:_800080 set/remove checkbox Negative stock control from store and check
 
 
 
-Scenario:_800082 check of FreeStock balance control without date limitation
+Scenario:_880082 check of FreeStock balance control without date limitation
 	And I close all client application windows
 	* Create SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -3083,7 +3084,7 @@ Scenario:_800082 check of FreeStock balance control without date limitation
 		And I close all client application windows
 		
 						
-Scenario:_800083 check stock control in the IT (Store sender does not use stock control, Store receiver Use)
+Scenario:_880083 check stock control in the IT (Store sender does not use stock control, Store receiver Use)
 	And I close all client application windows
 	* Preparation
 		Given I open hyperlink "e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93"	
@@ -3222,7 +3223,7 @@ Scenario:_800083 check stock control in the IT (Store sender does not use stock 
 		Then user message window does not contain messages
 		And I close all client application windows
 
-Scenario:_800085 check stock control in the Production (store with and without stock control for materials)
+Scenario:_880085 check stock control in the Production (store with and without stock control for materials)
 	And I close all client application windows
 	* Select Production document
 		Given I open hyperlink "e1cib/data/Document.Production?ref=b7af813f69b829cc11ee83a2de45fa2d"

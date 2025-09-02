@@ -14,13 +14,12 @@ Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Expo
 		AddInfo);
 EndFunction
 
-Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting,
-	AddInfo = Undefined) Export
+Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
 
-	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4035B_IncomingStocks") Then
+	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4035B_IncomingStocks", True) Then
 		Return True;
 	EndIf;
-
+	
 	Query = New Query();
 	Query.TempTablesManager = PostingServer.PrepareRecordsTables(GetLockFieldNames(), "ItemKey", ItemList_InDocument,
 		Records_InDocument, Records_Exists, Unposting, AddInfo);

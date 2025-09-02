@@ -21,12 +21,16 @@
     </orderFragments>
     <orderFragments>
       <group>NavigationPanelOrdinary</group>
-      <commands>Document.CashExpense.StandardCommand.OpenList</commands>
-      <commands>Document.CashRevenue.StandardCommand.OpenList</commands>
       <commands>Document.DebitNote.StandardCommand.OpenList</commands>
       <commands>Document.CreditNote.StandardCommand.OpenList</commands>
+      <commands>Document.DebitCreditNote.StandardCommand.OpenList</commands>
+      <commands>Document.ForeignCurrencyRevaluation.StandardCommand.OpenList</commands>
+      <commands>Document.EmployeeCashAdvance.StandardCommand.OpenList</commands>
       <commands>Document.CustomersAdvancesClosing.StandardCommand.OpenList</commands>
       <commands>Document.VendorsAdvancesClosing.StandardCommand.OpenList</commands>
+      <commands>Document.CashExpense.StandardCommand.OpenList</commands>
+      <commands>Document.CashRevenue.StandardCommand.OpenList</commands>
+      <commands>Document.TaxesOperation.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
 </cmi:CommandInterface>

@@ -11,6 +11,22 @@
       <group>NavigationPanelImportant</group>
       <commands>Catalog.CashAccounts.StandardCommand.OpenList</commands>
     </orderFragments>
+    <orderFragments>
+      <group>ActionsPanelReports</group>
+      <commands>Report.R3010A_CashOnHand.StandardCommand.Open</commands>
+      <commands>Report.R3011A_CashFlow.StandardCommand.Open</commands>
+      <commands>Report.R3021A_CashInTransit.StandardCommand.Open</commands>
+      <commands>Report.R3027A_CashAdvance.StandardCommand.Open</commands>
+      <commands>Report.R5021A_Revenues.StandardCommand.Open</commands>
+      <commands>Report.R5022A_Expenses.StandardCommand.Open</commands>
+      <commands>Report.R502A_ProfitLosses.StandardCommand.Open</commands>
+      <commands>Report.R6020_BatchBalance.StandardCommand.Open</commands>
+      <commands>Report.R6060A_CostOfGoodsSold.StandardCommand.Open</commands>
+      <commands>Report.R5020A_PartnersBalance.StandardCommand.Open</commands>
+      <commands>Report.R5010A_ReconciliationStatement.StandardCommand.Open</commands>
+      <commands>Report.R1100_CustomersAging.StandardCommand.Open</commands>
+      <commands>Report.R1200_VendorsAging.StandardCommand.Open</commands>
+    </orderFragments>
   </commandsOrder>
   <subsystemsOrder>
     <subsystems>Subsystem.Treasury.Subsystem.Bank</subsystems>

@@ -30,7 +30,6 @@
   <content>Report.S1001L_VendorsPrices</content>
   <content>Catalog.LegalNameContracts</content>
   <content>Document.PurchaseInvoice</content>
-  <content>Subsystem.Reports.Subsystem.Purchase</content>
   <content>AccumulationRegister.R5012B_VendorsAging</content>
   <content>AccumulationRegister.R5020B_PartnersBalance</content>
   <content>AccumulationRegister.R1005T_PurchaseSpecialOffers</content>
@@ -44,5 +43,4 @@
   <content>AccumulationRegister.R1020B_AdvancesToVendors</content>
   <content>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</content>
   <content>AccumulationRegister.R1011B_PurchaseOrdersReceipt</content>
-  <content>Subsystem.MasterData.Subsystem.PurchaseAndSales</content>
 </mdclass:FunctionalOption>

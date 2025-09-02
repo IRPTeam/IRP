@@ -1345,10 +1345,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_001", NStr("en = 'New page'", Lang));
 	Strings.Insert("Form_002", NStr("en = 'Delete'", Lang));
 	Strings.Insert("Form_003", NStr("en = 'Quantity'", Lang));
-	Strings.Insert("Form_004", NStr("en = 'Customers terms'", Lang));
+	Strings.Insert("Form_004", NStr("en = 'Customer terms'", Lang));
 	Strings.Insert("Form_005", NStr("en = 'Customers'", Lang));
 	Strings.Insert("Form_006", NStr("en = 'Vendors'", Lang));
-	Strings.Insert("Form_007", NStr("en = 'Vendors terms'", Lang));
+	Strings.Insert("Form_007", NStr("en = 'Vendor terms'", Lang));
 	Strings.Insert("Form_008", NStr("en = 'User'", Lang));
 	Strings.Insert("Form_009", NStr("en = 'User group'", Lang));
 	Strings.Insert("Form_013", NStr("en = 'Date'", Lang));

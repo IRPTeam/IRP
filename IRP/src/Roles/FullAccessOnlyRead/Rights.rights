@@ -192,13 +192,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.MasterData.Subsystem.PurchaseAndSales</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.Inventory.Subsystem.Transfers</name>
 		<right>
 			<name>View</name>
@@ -2979,13 +2972,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Reports.Subsystem.Accounting</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>AccumulationRegister.R1001T_Purchases</name>
 		<right>
 			<name>Read</name>
@@ -3281,13 +3267,6 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.PurchaseAP.Subsystem.Pricing</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -4482,13 +4461,6 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Reports.Subsystem.Retail</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -7833,13 +7805,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Reports.Subsystem.Finance</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.Reports.Subsystem.Inventory</name>
 		<right>
 			<name>View</name>
@@ -9813,13 +9778,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Reports.Subsystem.Manufacturing</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.T3010S_RowIDInfo.Resource.Price</name>
 		<right>
 			<name>Edit</name>
@@ -10163,13 +10121,6 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Reports.Subsystem.Purchase</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -16908,13 +16859,6 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Reports.Subsystem.Sales</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
 		</right>
 	</object>
 	<object>

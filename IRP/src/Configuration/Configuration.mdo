@@ -1062,6 +1062,7 @@
   <commonCommands>CommonCommand.OpenPartnersVendor</commonCommands>
   <commonCommands>CommonCommand.OpenVendorAgreements</commonCommands>
   <commonCommands>CommonCommand.UpdateAllUserRoles</commonCommands>
+  <commonCommands>CommonCommand.OpenRetailSalesOrders</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <commandGroups>CommandGroup.Fiscalization</commandGroups>

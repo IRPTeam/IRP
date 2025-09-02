@@ -357,6 +357,10 @@ Function ShowNumerator_GetCommandDescription()
 	EndDo;
 	CommandDescription.Targets = New FixedArray(Targets);
 	
+	FunctionalOptions = New Array; // Array of String
+	FunctionalOptions.Add(Metadata.FunctionalOptions.UseNumberingRules.Name);
+	CommandDescription.FunctionalOptions = New FixedArray(FunctionalOptions);
+	
 	Return CommandDescription;
 	
 EndFunction

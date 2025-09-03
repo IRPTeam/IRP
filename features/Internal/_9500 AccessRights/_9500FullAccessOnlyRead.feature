@@ -696,7 +696,7 @@ Scenario: 950037 check role Full access only read (Item segments)
 
 Scenario: 950038 check role Full access only read (Customers partner terms)
 		And I close all client application windows
-		And In the command interface I select "Sales - A/R" "Customers partner terms"	
+		And In the command interface I select "Sales - A/R" "Customer terms"	
 		And I go to line in "List" table
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
@@ -708,7 +708,7 @@ Scenario: 950038 check role Full access only read (Customers partner terms)
 	
 Scenario: 950040 check role Full access only read (Vendors partner terms)
 		And I close all client application windows
-		And In the command interface I select "Purchase  - A/P" "Vendors partner terms"
+		And In the command interface I select "Purchase  - A/P" "Vendor terms"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, EUR'    |

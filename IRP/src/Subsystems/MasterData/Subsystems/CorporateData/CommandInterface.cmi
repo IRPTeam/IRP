@@ -3,7 +3,7 @@
   <commandsOrder>
     <orderFragments>
       <group>NavigationPanelOrdinary</group>
-      <commands>Catalog.Companies.StandardCommand.OpenList</commands>
+      <commands>CommonCommand.OpenCompanies</commands>
       <commands>Catalog.Stores.StandardCommand.OpenList</commands>
       <commands>Catalog.Incoterms.StandardCommand.OpenList</commands>
       <commands>Catalog.CancelReturnReasons.StandardCommand.OpenList</commands>

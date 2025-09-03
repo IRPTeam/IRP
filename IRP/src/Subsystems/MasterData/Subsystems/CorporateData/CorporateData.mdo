@@ -7,10 +7,10 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.Companies</content>
   <content>Catalog.Stores</content>
   <content>Catalog.Incoterms</content>
   <content>Catalog.CancelReturnReasons</content>
   <content>Catalog.PrintInfo</content>
+  <content>CommonCommand.OpenCompanies</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

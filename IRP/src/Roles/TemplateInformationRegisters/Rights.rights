@@ -1790,6 +1790,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.DashboardSettings</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9011S_AccountsCashAccount</name>
 		<right>
 			<name>Read</name>

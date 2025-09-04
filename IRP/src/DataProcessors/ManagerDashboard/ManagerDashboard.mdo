@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5b0cfdb0-353a-4a9c-b86f-199ecd4cd9b4">
+  <producedTypes>
+    <objectType typeId="15a1a9c6-3abb-41d8-bf7d-b53d6f16997f" valueTypeId="d6845880-90f5-48f7-9bbe-6e3f6c46ff3c"/>
+    <managerType typeId="213557e7-5df3-4c28-a2fe-90e735a17358" valueTypeId="a0bf0d98-81f4-41a1-9825-084233505490"/>
+  </producedTypes>
+  <name>ManagerDashboard</name>
+  <synonym>
+    <key>en</key>
+    <value>Manager dashboard</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.ManagerDashboard.Form.Form</defaultForm>
+  <forms uuid="e7351bcf-3ed8-4c62-9523-c4ffd3ec63d6">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="b15ac5b3-0569-4232-aec6-9a3cf89c0cf3">
+    <name>FormConfigure</name>
+    <synonym>
+      <key>en</key>
+      <value>Form configure</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="3f949a51-6861-4530-a540-6f11e4f7e8bf">
+    <name>FormWidgetSettings</name>
+    <synonym>
+      <key>en</key>
+      <value>Widget settings</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <templates uuid="abc69167-c47f-4007-8f23-e8888f132700">
+    <name>Template</name>
+    <synonym>
+      <key>en</key>
+      <value>Template</value>
+    </synonym>
+    <templateType>TextDocument</templateType>
+  </templates>
+</mdclass:DataProcessor>

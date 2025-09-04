@@ -4155,6 +4155,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Subsystem.MasterData.Subsystem.PriceManagment</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.ItemSegments</name>
 		<right>
 			<name>Read</name>
@@ -7229,6 +7236,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Subsystem.MasterData.Subsystem.Partners</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonForm.PictureViewerFormHTML</name>
 		<right>
 			<name>View</name>
@@ -7363,6 +7377,13 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.MasterData.Subsystem.Other</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -8104,6 +8125,13 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.MasterData.Subsystem.CorporateData</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>

@@ -40,6 +40,10 @@ Function IsCompositeDocument_ItemStockAdjustment(Document)
 	Return TypeOf(Document) = Type("DocumentRef.ItemStockAdjustment");
 EndFunction
 
+Function IsCompositeDocument_StockCorrection(Document)
+	Return TypeOf(Document) = Type("DocumentRef.StockCorrection");
+EndFunction
+
 Function GetArrayOfDecompositeDocument()
 	ArrayOfTypes = New Array();
 	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
@@ -60,6 +64,7 @@ Function GetArrayOfMultiDirectionDocument()
 	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
 	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
 	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
+	ArrayOfTypes.Add(Type("DocumentRef.StockCorrection"));
 	ArrayOfTypes.Add(Type("DocumentRef.Production"));
 	Return ArrayOfTypes;
 EndFunction
@@ -137,6 +142,7 @@ Function GetArrayOfBatchDocumentTypes()
 	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
 	ArrayOfTypes.Add(Type("DocumentRef.InventoryTransfer"));
 	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
+	ArrayOfTypes.Add(Type("DocumentRef.StockCorrection"));
 	ArrayOfTypes.Add(Type("DocumentRef.OpeningEntry"));
 	ArrayOfTypes.Add(Type("DocumentRef.PurchaseInvoice"));
 	ArrayOfTypes.Add(Type("DocumentRef.PurchaseReturn"));
@@ -902,7 +908,10 @@ Procedure CalculateBatch(Document, BatchRows, Tables, CalculationSettings)
 			ElsIf IsReallocateIncomingDocument(Document) Then
 				Calculate_ReallocateIncomingDocument(Document, BatchRow, Tables, CalculationSettings);
 			ElsIf IsCompositeDocument_ItemStockAdjustment(Document) Then
-				Calculate_ItemStockAdjustment(Document, BatchRow, BatchRows, Tables, CalculationSettings);
+				Calculate_ItemStockAdjustment(Document, BatchRow, BatchRows, Tables, CalculationSettings);				
+			ElsIf IsCompositeDocument_StockCorrection(Document) Then
+				Calculate_StockCorrection(Document, BatchRow, BatchRows, Tables, CalculationSettings);
+				
 			// sales, write-off, reallocate outgoing
 			ElsIf BatchRow.Direction = Enums.BatchDirection.Expense Then
 				Calculate_SimpleExpense(Document, BatchRow, Tables, CalculationSettings);
@@ -1775,6 +1784,103 @@ Procedure Calculate_ItemStockAdjustment(Document, BatchRow, BatchRows, Tables, C
 	EndDo; // For Each Transfer_Batch In Transfer_BatchRows
 EndProcedure
 
+Procedure Calculate_StockCorrection(Document, BatchRow, BatchRows, Tables, CalculationSettings)
+	If BatchRow.Direction = Enums.BatchDirection.Receipt Then
+		Return; // receipt wiil be processed when get expense
+	EndIf;
+	
+	Adj_BatchRows = New ValueTable();
+	Adj_BatchRows.Columns.Add("Writeoff");
+	Adj_BatchRows.Columns.Add("Surplus");
+	
+	For Each _r1 In BatchRows Do
+		If _r1.Direction = Enums.BatchDirection.Receipt 
+			And _r1.StockCorrectionID = BatchRow.StockCorrectionID Then
+
+			_nr = Adj_BatchRows.Add();
+			_nr.Writeoff = BatchRow;
+			_nr.Surplus = _r1;
+			
+			Break; // only one surplus for one writeoff
+		EndIf;
+	EndDo;
+
+	For Each Adj_Batch In Adj_BatchRows Do
+
+		Balance_BatchRows = GetBatchesWithBalance(Adj_Batch.Writeoff.Company, Adj_Batch.Writeoff.BatchKey, Document.Date);
+	
+		NeedExpense = Adj_Batch.Writeoff.Quantity;
+
+		For Each Balance_Batch In Balance_BatchRows Do
+			If NeedExpense = 0 Then
+				Break;
+			EndIf;
+
+			QtyName = ?(Not ValueIsFilled(Balance_Batch.Quantity), "Preliminary", "") + "Quantity";
+			ExpenseQuantity = Min(NeedExpense, Balance_Batch[QtyName]);
+
+			If Not ValueIsFilled(ExpenseQuantity) Then
+				Continue;
+			EndIf;
+
+			NeedExpense = NeedExpense - ExpenseQuantity;
+
+			ExpenseAmounts = New Structure();
+			For Each Res In AmountResources() Do
+				ExpenseAmounts.Insert(Res, AmountProportionByQuantity(ExpenseQuantity, Balance_Batch, Res, QtyName));
+				Balance_Batch[Res] = Balance_Batch[Res] - ExpenseAmounts[Res];
+			EndDo;
+			Balance_Batch[QtyName] = Balance_Batch[QtyName] - ExpenseQuantity;
+
+			// expense from writeoff
+			NewExpense = Tables.DataForExpense.Add();
+			NewExpense.Batch     = Balance_Batch.Batch;
+			NewExpense.BatchKey  = Adj_Batch.Writeoff.BatchKey;
+			NewExpense.Document  = Document;
+			NewExpense.Company   = Adj_Batch.Writeoff.Company;
+			NewExpense.Period    = Adj_Batch.Writeoff.Date;
+
+			NewExpense[QtyName] = ExpenseQuantity;
+			For Each Res In AmountResources() Do
+				NewExpense[Res] = ExpenseAmounts[Res]; 
+			EndDo;
+
+			// receipt to surpluss
+			NewReceipt = Tables.DataForReceipt.Add();
+			FillPropertyValues(NewReceipt, NewExpense);
+			NewReceipt.BatchKey  = Adj_Batch.Surplus.BatchKey;
+		EndDo; // For Each Balance_Batch In BatchesWithBalance
+		
+		If NeedExpense <> 0 Then
+			// Can not expense Batch key: %1 , Quantity: %2 , Doc: %3'
+			Msg = StrTemplate(R().LC_Error_002, GetBatchKeyDetailPresentation(Adj_Batch.Writeoff.BatchKey), NeedExpense, Document);
+			CommonFunctionsClientServer.ShowUsersMessage(Msg);
+			If CalculationSettings.RaiseOnCalculationError Then
+				Raise Msg;
+			EndIf;
+			_new = Tables.DataForBatchShortageOutgoing.Add();
+			_new.BatchKey = Adj_Batch.Writeoff.BatchKey;
+			_new.Document = Document;
+			_new.Company  = Adj_Batch.Writeoff.Company;
+			_new.Period   = Adj_Batch.Writeoff.Date;
+			_new.Quantity = NeedExpense;
+			
+			// Can not receipt Batch key: %1 , Quantity: %2 , Doc: %3'
+			Msg = StrTemplate(R().LC_Error_003, GetBatchKeyDetailPresentation(Adj_Batch.Surplus.BatchKey), NeedExpense, Document);
+			CommonFunctionsClientServer.ShowUsersMessage(Msg);
+			If CalculationSettings.RaiseOnCalculationError Then
+				Raise Msg;
+			EndIf;
+			_new = Tables.DataForBatchShortageIncoming.Add();
+			_new.BatchKey = Adj_Batch.Surplus.BatchKey;
+			_new.Document = Document;
+			_new.Company  = Adj_Batch.Surplus.Company;
+			_new.Period   = Adj_Batch.Surplus.Date;
+			_new.Quantity = NeedExpense;
+		EndIf;		
+	EndDo; // For Each Transfer_Batch In Transfer_BatchRows
+EndProcedure
+
 Procedure Calculate_DecompositeDocument(Document, BatchRows, Tables, CalculationSettings)
 	Expense_BatchRows = New Array();
 	Receipt_BatchRows = New Array();
@@ -2165,6 +2271,13 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			then T6020S_BatchKeysInfo.RowID
 	|		else undefined
 	|	end as ItemStockAdjustmentID,
+	|
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockCorrection
+	|			then T6020S_BatchKeysInfo.RowID
+	|		else undefined
+	|	end as StockCorrectionID,
+	|
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.FixedAsset AS FixedAsset,
 	|	T6020S_BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
@@ -2272,6 +2385,13 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|			then T6020S_BatchKeysInfo.RowID
 	|		else undefined
 	|	end,
+	|
+	|	case
+	|		when T6020S_BatchKeysInfo.Recorder refs Document.StockCorrection
+	|			then T6020S_BatchKeysInfo.RowID
+	|		else undefined
+	|	end,
+	|
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.FixedAsset,
 	|	T6020S_BatchKeysInfo.SerialLotNumber,
@@ -2321,6 +2441,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegister.Branch AS Branch,
 	|	BatchKeysRegister.Currency AS Currency,
 	|	BatchKeysRegister.ItemStockAdjustmentID AS ItemStockAdjustmentID,
+	|	BatchKeysRegister.StockCorrectionID AS StockCorrectionID,
 	|	BatchKeysRegister.Store AS Store,
 	|	BatchKeysRegister.FixedAsset AS FixedAsset,
 	|	BatchKeysRegister.SerialLotNumber AS SerialLotNumber,
@@ -2362,6 +2483,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysInfo.ExpenseType AS ExpenseType,
 	|	BatchKeysInfo.RowID AS RowID,
 	|	BatchKeysInfo.ItemStockAdjustmentID AS ItemStockAdjustmentID,
+	|	BatchKeysInfo.StockCorrectionID AS StockCorrectionID,
 	|	BatchKeysInfo.Branch AS Branch,
 	|	BatchKeysInfo.Currency AS Currency,
 	|	BatchKeysInfo.FixedAsset AS FixedAsset,
@@ -2389,6 +2511,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysInfo.ExpenseType,
 	|	BatchKeysInfo.RowID,
 	|	BatchKeysInfo.ItemStockAdjustmentID,
+	|	BatchKeysInfo.StockCorrectionID,
 	|	BatchKeysInfo.Branch,
 	|	BatchKeysInfo.Currency,
 	|	BatchKeysInfo.FixedAsset,
@@ -2427,6 +2550,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeys.ExpenseType AS ExpenseType,
 	|	BatchKeys.RowID AS RowID,
 	|	BatchKeys.ItemStockAdjustmentID AS ItemStockAdjustmentID,
+	|	BatchKeys.StockCorrectionID AS StockCorrectionID,
 	|	BatchKeys.Branch AS Branch,
 	|	BatchKeys.Currency AS Currency,
 	|	BatchKeys.FixedAsset AS FixedAsset,
@@ -2474,6 +2598,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.ExpenseType AS ExpenseType,
 	|	AllData.RowID AS RowID,
 	|	AllData.ItemStockAdjustmentID AS ItemStockAdjustmentID,
+	|	AllData.StockCorrectionID AS StockCorrectionID,
 	|	AllData.Branch AS Branch,
 	|	AllData.Currency AS Currency,
 	|	AllData.FixedAsset AS FixedAsset,
@@ -2496,6 +2621,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.ExpenseType,
 	|	AllData.RowID,
 	|	AllData.ItemStockAdjustmentID,
+	|	AllData.StockCorrectionID,
 	|	AllData.Branch,
 	|	AllData.Currency,
 	|	AllData.FixedAsset,
@@ -2533,6 +2659,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.ExpenseType AS ExpenseType,
 	|	AllDataGrouped.RowID AS RowID,
 	|	AllDataGrouped.ItemStockAdjustmentID AS ItemStockAdjustmentID,
+	|	AllDataGrouped.StockCorrectionID AS StockCorrectionID,
 	|	AllDataGrouped.Branch AS Branch,
 	|	AllDataGrouped.Currency AS Currency,
 	|	AllDataGrouped.FixedAsset AS FixedAsset,

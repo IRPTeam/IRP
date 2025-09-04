@@ -1600,6 +1600,125 @@ Scenario: set True value to the constant
 		Given I open hyperlink "e1cib/list/Catalog.SystemAttributesSets"	
 		And I click "Fill by default" button
 
+Scenario: set True value to the constant (DemoDB)
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		And I click "Check all" button
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                       | 'Use'    |
+			| 'Use lock data modification'   | 'Yes'    |
+		And I activate "Use" field in "FunctionalOptions" table
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                          | 'Use'    |
+			| 'Use consolidated retail sales'   | 'Yes'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                                 | 'Use'    |
+			| 'Use job queue for external functions'   | 'Yes'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'               | 'Use'    |
+			| 'Use all functional'   | 'Yes'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'           | 'Use'    |
+			| 'Use accounting'   | 'Yes'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                   | 'Use'    |
+			| 'Use commission trading'   | 'Yes'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                                | 'Use' |
+			| 'Use additional table control document' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'          | 'Use' |
+			| 'Use simple mode' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'            | 'Use' |
+			| 'Use object access' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                                  | 'Use' |
+			| 'Use shipment and receipt planing orders' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'          | 'Use' |
+			| 'Use preliminary' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'          | 'Use' |
+			| 'Use work orders' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                  | 'Use' |
+			| 'Use price by properties' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                          | 'Use' |
+			| 'Use planned receipt reservation' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        | 'Use' |
+			| 'Use Incidents' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                 | 'Use' |
+			| 'Use accounting service' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'           | 'Use' |
+			| 'Use cheque bonds' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'      | 'Use' |
+			| 'Use eLedger' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'            | 'Use' |
+			| 'Use delivery date' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'            | 'Use' |
+			| 'Use manufacturing' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'           | 'Use' |
+			| 'Use fixed assets' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+	* Disable LinkedRowsIntegrity
+		And I execute 1C:Enterprise script at server
+			| "Constants.DisableLinkedRowsIntegrity.Set(True);"     |
+	* Fill default settings for system attributes
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.SystemAttributes"	
+		And I click "Fill default descriptions" button
+		Given I open hyperlink "e1cib/list/Catalog.SystemAttributesSets"	
+		And I click "Fill by default" button
 		
 		
 Scenario: set True value to the constant Use salary

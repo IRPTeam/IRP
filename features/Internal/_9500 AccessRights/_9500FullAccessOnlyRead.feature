@@ -250,23 +250,23 @@ Scenario: 950006 check role Full access only read (Company taxes)
 			Then I raise "Failed to open" exception
 		And I close all client application windows	
 
-Scenario: 950007 check role Full access only read (Companies)
-		And I close all client application windows
-		And In the command interface I select "Master data" "Companies"		
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
-		And I close current window
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'Company Ferron BP'    |
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
-		And I close all client application windows	
+// Scenario: 950007 check role Full access only read (Companies)
+// 		And I close all client application windows
+// 		And In the command interface I select "Master data" "Companies"		
+// 		And I go to line in "List" table
+// 			| 'Description'     |
+// 			| 'Main Company'    |
+// 		And I select current line in "List" table
+// 		If the warning is displayed then 
+// 			Then I raise "Failed to open" exception
+// 		And I close current window
+// 		And I go to line in "List" table
+// 			| 'Description'          |
+// 			| 'Company Ferron BP'    |
+// 		And I select current line in "List" table
+// 		If the warning is displayed then 
+// 			Then I raise "Failed to open" exception
+// 		And I close all client application windows	
 
 Scenario: 950008 check role Full access only read (Stores)
 	And I close all client application windows

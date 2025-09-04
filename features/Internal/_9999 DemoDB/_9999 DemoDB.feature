@@ -14,11 +14,7 @@ Background:
 
 
 Scenario: _999901 filling in demo data base
-	When set True value to the constant
-	When set True value to the constant Use manufacturing
-	When set True value to the constant Use salary
-	When set True value to the constant Use retail orders
-	When set True value to the constant Use fixed assets
+	When set True value to the constant(DemoDB)
 	When Create catalog ExternalDataProc objects
 	* Add ExternalDataProc
 		* Discount
@@ -35,12 +31,18 @@ Scenario: _999901 filling in demo data base
 	When Create catalog AddAttributeAndPropertySets objects (DemoDB)
 	When Create catalog AddAttributeAndPropertyValues objects (DemoDB)
 	When Create catalog RowIDs objects(DemoDB)
+	When Create catalog CancelReturnReasons objects(DemoDB)
 	When Create catalog BusinessUnits objects(DemoDB)
 	When Create catalog CashAccounts objects(DemoDB)
+	When Create document CashStatement objects(DemoDB)
 	When Create catalog Companies objects(DemoDB)
 	When Create catalog ConfigurationMetadata objects(DemoDB)
 	When Create catalog Countries objects(DemoDB)
 	When Create catalog Currencies objects(DemoDB)
+	When Create catalog PaymentTerminals objects(DemoDB)
+	When Create catalog BankTerms objects(DemoDB)
+	When Create catalog Workstations objects(DemoDB)
+	When Create information register BranchBankTerms records(DemoDB)
 	When Create catalog ExpenseAndRevenueTypes objects(DemoDB)
 	When Create catalog IntegrationSettings objects(DemoDB)
 	When Create catalog ItemKeys objects(DemoDB)
@@ -105,6 +107,7 @@ Scenario: _999901 filling in demo data base
 	When Create document CreditNote objects(DemoDB)
 	When Create document DebitNote objects(DemoDB)
 	When Create document GoodsReceipt objects(DemoDB)
+	When Create document EmployeeCashAdvance objects(DemoDB)
 	When Create document InventoryTransfer objects(DemoDB)
 	When Create document CalculationMovementCosts objects(DemoDB)
 	When Create document PhysicalInventory objects(DemoDB)
@@ -117,6 +120,9 @@ Scenario: _999901 filling in demo data base
 	When Create document ShipmentConfirmation objects(DemoDB)
 	When Create document StockAdjustmentAsSurplus objects(DemoDB)
 	When Create document StockAdjustmentAsWriteOff objects(DemoDB)
+	When Create document CashStatement objects(DemoDB)
+	When Create document SalesReturn objects(DemoDB)
+	When Create document PurchaseReturn objects(DemoDB)
 	When Create chart of characteristic types AddAttributeAndProperty objects(DemoDB)
 	When Create chart of characteristic types CurrencyMovementType objects(DemoDB)
 	When Create information register CurrencyRates records(DemoDB)
@@ -218,6 +224,16 @@ Scenario: _999901 filling in demo data base
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
+	* Posting SalesReturn
+			Given I open hyperlink "e1cib/list/Document.SalesReturn"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And Delay "3"
+	* Posting PurchaseReturn
+			Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And Delay "3"
 	* Posting PriceList
 			Given I open hyperlink "e1cib/list/Document.PriceList"
 			Then I select all lines of "List" table
@@ -238,6 +254,16 @@ Scenario: _999901 filling in demo data base
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
+	* Posting CashStatement
+			Given I open hyperlink "e1cib/list/Document.CashStatement"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+	 		And Delay "3"
+	* Posting EmployeeCashAdvance
+			Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+	 		And Delay "3"
 	When set False value to the constant DisableLinkedRowsIntegrity
 	* Change password for CI
 		Given I open hyperlink "e1cib/list/Catalog.Users"

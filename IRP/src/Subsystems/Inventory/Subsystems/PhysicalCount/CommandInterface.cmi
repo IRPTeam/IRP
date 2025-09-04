@@ -24,6 +24,8 @@
       <commands>Document.PhysicalCountByLocation.StandardCommand.OpenList</commands>
       <commands>Document.StockAdjustmentAsSurplus.StandardCommand.OpenList</commands>
       <commands>Document.StockAdjustmentAsWriteOff.StandardCommand.OpenList</commands>
+      <commands>Document.StockCorrection.StandardCommand.OpenList</commands>
+      <commands>Document.ItemStockAdjustment.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
 </cmi:CommandInterface>

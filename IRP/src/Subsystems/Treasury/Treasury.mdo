@@ -11,6 +11,19 @@
     <picture>CommonPicture.Finance</picture>
   </picture>
   <content>Catalog.CashAccounts</content>
+  <content>Report.R3010A_CashOnHand</content>
+  <content>Report.R3011A_CashFlow</content>
+  <content>Report.R3021A_CashInTransit</content>
+  <content>Report.R3027A_CashAdvance</content>
+  <content>Report.R5021A_Revenues</content>
+  <content>Report.R5022A_Expenses</content>
+  <content>Report.R502A_ProfitLosses</content>
+  <content>Report.R6020_BatchBalance</content>
+  <content>Report.R6060A_CostOfGoodsSold</content>
+  <content>Report.R5020A_PartnersBalance</content>
+  <content>Report.R5010A_ReconciliationStatement</content>
+  <content>Report.R1100_CustomersAging</content>
+  <content>Report.R1200_VendorsAging</content>
   <subsystems>Bank</subsystems>
   <subsystems>Cash</subsystems>
   <subsystems>Transfer</subsystems>

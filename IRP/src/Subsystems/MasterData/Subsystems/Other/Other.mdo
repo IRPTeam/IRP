@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="738d210d-e406-4db7-8d8f-85ebe5b73f0f">
+  <name>Other</name>
+  <synonym>
+    <key>en</key>
+    <value>Other</value>
+  </synonym>
+  <includeHelpInContents>true</includeHelpInContents>
+  <includeInCommandInterface>true</includeInCommandInterface>
+  <content>Catalog.Cities</content>
+  <content>Catalog.Countries</content>
+  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
+</mdclass:Subsystem>

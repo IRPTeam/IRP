@@ -3,7 +3,7 @@
   <name>OpenCustomerAgreements</name>
   <synonym>
     <key>en</key>
-    <value>Customers partner terms</value>
+    <value>Customer terms</value>
   </synonym>
   <group>NavigationPanelImportant</group>
   <commandParameterType/>

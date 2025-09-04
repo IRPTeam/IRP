@@ -8,7 +8,6 @@
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Catalog.ItemTypes</content>
-  <content>Catalog.Items</content>
   <content>Catalog.ItemSegments</content>
   <content>Catalog.Units</content>
   <content>InformationRegister.Barcodes</content>
@@ -20,7 +19,6 @@
   <content>CommonPicture.BarcodePicture</content>
   <content>CommonPicture.QRPicture</content>
   <content>Catalog.PrintTemplates</content>
-  <content>Document.ItemStockAdjustment</content>
   <content>Catalog.PartnerItems</content>
   <content>Catalog.SerialLotNumbers</content>
   <content>Catalog.SourceOfOrigins</content>

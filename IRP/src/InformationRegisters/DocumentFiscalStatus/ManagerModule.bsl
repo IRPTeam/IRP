@@ -20,6 +20,7 @@ Procedure SetStatus(Document, Status, FiscalResponse, DataPresentation = "") Exp
 	If TypeOf(FiscalResponse) = Type("Structure") Then
 		If FiscalResponse.Property("Out") And FiscalResponse.Out.Property("DocumentOutputParameters") And TypeOf(FiscalResponse.Out.DocumentOutputParameters) = Type("Structure") Then
 			NewRecord.CheckNumber = Format(FiscalResponse.Out.DocumentOutputParameters.CheckNumber, "NG=");
+			NewRecord.ShiftNumber = Format(FiscalResponse.Out.DocumentOutputParameters.ShiftNumber, "NG=");
 		EndIf;
 	EndIf;
 	NewRecord.Write(True);
@@ -36,6 +37,7 @@ EndProcedure
 // * FiscalResponse - String -
 // * DataPresentation - String -
 // * CheckNumber - String -
+// * ShiftNumber - String -
 // * IsPrinted - Boolean -
 Function GetStatusData(Document) Export
 	StatusData = New Structure();
@@ -43,12 +45,14 @@ Function GetStatusData(Document) Export
 	StatusData.Insert("FiscalResponse", "");
 	StatusData.Insert("DataPresentation", "");
 	StatusData.Insert("CheckNumber", 0);
+	StatusData.Insert("ShiftNumber", 0);
 	StatusData.Insert("IsPrinted", False);
 	Query = New Query;
 	Query.Text = "SELECT
 	|	DocumentFiscalStatus.Status,
 	|	DocumentFiscalStatus.FiscalResponse,
 	|	DocumentFiscalStatus.DataPresentation,
+	|	DocumentFiscalStatus.ShiftNumber,
 	|	DocumentFiscalStatus.CheckNumber
 	|FROM
 	|	InformationRegister.DocumentFiscalStatus AS DocumentFiscalStatus

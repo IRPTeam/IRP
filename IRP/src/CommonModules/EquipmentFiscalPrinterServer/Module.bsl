@@ -278,6 +278,7 @@ Function PrintCheckCopy(ConsolidatedRetailSales, DataSource) Export
 	EndIf;
 
 	PrintCheckCopySettings.In.CheckNumber = StatusData.CheckNumber;
+	PrintCheckCopySettings.In.ShiftNumber = StatusData.ShiftNumber;
 	EquipmentFiscalPrinterAPIServer.PrintCheckCopy(CRS.FiscalPrinter, PrintCheckCopySettings);
 
 	Return PrintCheckCopySettings;

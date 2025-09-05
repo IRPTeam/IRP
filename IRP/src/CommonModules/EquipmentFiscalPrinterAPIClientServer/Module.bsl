@@ -325,6 +325,7 @@ EndFunction
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** CheckNumber - String - Fiscal check number
+// ** ShiftNumber - String - Shift number
 // * InOut - Structure -
 // * Out - Structure:
 Function GetPrintCheckCopySettings() Export
@@ -338,6 +339,7 @@ Function GetPrintCheckCopySettings() Export
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("CheckNumber", "");
+	Str.In.Insert("ShiftNumber", "");
 
     Str.Insert("InOut", New Structure);
 

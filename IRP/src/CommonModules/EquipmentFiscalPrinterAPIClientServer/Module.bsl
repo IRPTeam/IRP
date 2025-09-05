@@ -816,6 +816,7 @@ EndFunction
 // *** Description - String - Description of the correction
 // *** Date - Date - Date of the corrected transaction
 // *** Number - String - Number of the tax authority's prescription
+// *** FiscalResponse - String - Fiscal response
 // ** TaxationSystem - Number - Taxation system code
 // ** CustomerDetail - Structure - Customer (client) details:
 // *** Info - String - Name of the organization or surname, name, patronymic (if available)
@@ -876,6 +877,7 @@ Function CheckPackage() Export
     CorrectionData.Insert("Description", "");
     CorrectionData.Insert("Date", Date(1, 1, 1));
     CorrectionData.Insert("Number", "");
+    CorrectionData.Insert("FiscalResponse", "");
     Str.Parameters.Insert("CorrectionData", CorrectionData);
 
     CustomerDetail = New Structure;

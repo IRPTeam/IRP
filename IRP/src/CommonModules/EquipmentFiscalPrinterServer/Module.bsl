@@ -532,9 +532,12 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 			CheckPackage.Parameters.CorrectionData.Number = "0";
 		EndIf;
 		
-                If IsBlankString(CheckPackage.Parameters.CorrectionData.Description) Then
-                        Raise R().CorrectionDescriptionRequired;
-                EndIf;
+		FiscalStatus = InformationRegisters.DocumentFiscalStatus.GetStatusData(DocumentWithCorrectionInfo);
+		CheckPackage.Parameters.CorrectionData.FiscalResponse = FiscalStatus.FiscalResponse; 
+		
+		If IsBlankString(CheckPackage.Parameters.CorrectionData.Description) Then
+			Raise R().CorrectionDescriptionRequired;
+		EndIf;
 		
 	Else
 		CheckPackage.Parameters.CorrectionData = New Structure();
@@ -671,18 +674,7 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 		FiscalStringData.PaymentMethod = 3;
 		FiscalStringData.PriceWithDiscount = Item.TotalAmount;
 		
-		If ValueIsFilled(Item.VatRate) Then
-			If Item.VatRate.NoRate Then
-				FiscalStringData.VATRate = "none";
-				FiscalStringData.VATAmount = 0;
-			Else
-				FiscalStringData.VATRate = Format(Item.VatRate.Rate, "NZ=0; NG=0;");
-				FiscalStringData.VATAmount = Item.TaxAmount;
-			EndIf;
-		Else
-			FiscalStringData.VATRate = "none";
-			FiscalStringData.VATAmount = 0;
-		EndIf;
+		FillVatRate(Item, FiscalStringData);
 		
 		CheckPackage.Positions.FiscalStrings.Add(FiscalStringData);
 	EndDo;

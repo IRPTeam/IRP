@@ -283,6 +283,16 @@ EndProcedure
 #EndRegion
 
 &AtClient
+Procedure ReceiveBasisDocumentStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocDebitCreditNoteClient.ReceiveBasisDocumentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure SendBasisDocumentStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocDebitCreditNoteClient.SendBasisDocumentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
 Procedure CurrencyOnChange(Item)
 	DocDebitCreditNoteClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure

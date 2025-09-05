@@ -290,53 +290,34 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 		CurrentData = Form.Items.PaymentList.CurrentData;
 	EndIf;
 
-	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance") Then
-		Parameters = New Structure();
-		Parameters.Insert("Filter", New Structure());
-		Parameters.Filter.Insert("Partner", CurrentData.Partner);
-		Parameters.Filter.Insert("DeletionMark", False);
-		OpenForm("Document.EmployeeCashAdvance.ChoiceForm", Parameters, Item);
-		Return;
-	EndIf;
-	
-	Parameters = New Structure();
-	Parameters.Insert("Filter", New Structure());
-	If ValueIsFilled(CurrentData.LegalName) Then
-		Parameters.Filter.Insert("LegalName", CurrentData.LegalName);
-	EndIf;
-	Parameters.Filter.Insert("Company", Object.Company);
-
-	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
-	
-	NotifyParameters = New Structure("Object, Form", Object, Form);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
 	NotifyParameters.Insert("CurrentData", CurrentData);
 	
 	Notify = New CallbackDescription("PaymentListBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
-	Parameters.Insert("Notify", Notify);
-	Parameters.Insert("TableName", "DocumentsForIncomingPayment");
-	Parameters.Insert("OpeningEntryTableName1", "AccountPayableByDocuments");
-	Parameters.Insert("OpeningEntryTableName2", "AccountReceivableByDocuments");
-	Parameters.Insert("DebitNoteTableName", "Transactions");
-	Parameters.Insert("RetailSalesReceiptTableName", "Document.RetailSalesReceipt");	
-	Parameters.Insert("Ref", Object.Ref);
-	Parameters.Insert("IsReturnTransactionType", 
-		Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor"));
-	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
+	FormParameters = New Structure();
+	FormParameters.Insert("Company", Object.Company);
+	FormParameters.Insert("Partner", CurrentData.Partner);
+	FormParameters.Insert("Ref", Object.Ref);
+	FormParameters.Insert("Document", CurrentData.BasisDocument);
+		
+	OpenForm("CommonForm.ChoiceTransactionBasis", FormParameters, Form,,,,Notify,FormWindowOpeningMode.LockOwnerWindow); 
 EndProcedure
 
-Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) Export
+Procedure PaymentListBasisDocumentStartChoiceEnd(Result, NotifyParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	Form = AdditionalParameters.Form;
-	Object = AdditionalParameters.Object;
-	CurrentData = AdditionalParameters.CurrentData;
+	Form = NotifyParameters.Form;
+	Object = NotifyParameters.Object;
+	CurrentData = NotifyParameters.CurrentData;
 	If CurrentData <> Undefined Then
 		ViewClient_V2.SetPaymentListBasisDocument(Object, Form, CurrentData, Result.BasisDocument);
-		If CurrentData.TotalAmount = 0 Then
-			ViewClient_V2.SetPaymentListTotalAmount(Object, Form, CurrentData, Result.Amount);
-		EndIf;
-		Form.FormUpdateFormAttributes("FromListToHeader");
+		//If CurrentData.TotalAmount = 0 Then
+		//	ViewClient_V2.SetPaymentListTotalAmount(Object, Form, CurrentData, Result.Amount);
+		//EndIf;
+		Form.FormUpdateFormAttributes("FromListToHeader"); 
 	EndIf;
 EndProcedure
 
@@ -421,31 +402,20 @@ Procedure PaymentListOrderStartChoice(Object, Form, Item, ChoiceData, StandardPr
 		CurrentData = Form.Items.PaymentList.CurrentData;
 	EndIf;
 
-	Parameters = New Structure();
-	Parameters.Insert("Filter", New Structure());
-	If ValueIsFilled(CurrentData.LegalName) Then
-		Parameters.Filter.Insert("LegalName", CurrentData.LegalName);
-	EndIf;
-	Parameters.Filter.Insert("Company", Object.Company);
-	Parameters.Filter.Insert("Type", Type("DocumentRef.SalesOrder"));
-	
-	If ValueIsFilled(CurrentData.BasisDocument) 
-		And TypeOf(CurrentData.BasisDocument) = Type("DocumentRef.SalesInvoice") Then
-		Parameters.Filter.Insert("RefInList",
-		DocumentsServer.GetArrayOfSalesOrdersBySalesInvoice(CurrentData.BasisDocument));
-	EndIf;
-	
-	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
-	
-	NotifyParameters = New Structure("Object, Form", Object, Form);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
 	NotifyParameters.Insert("CurrentData", CurrentData);
 	
 	Notify = New CallbackDescription("PaymentListOrderStartChoiceEnd", ThisObject, NotifyParameters);
-	Parameters.Insert("Notify"    , Notify);
-	Parameters.Insert("TableName" , "DocumentsForIncomingPayment");	
-	Parameters.Insert("Ref"       , Object.Ref);
-	Parameters.Insert("IsReturnTransactionType", False);
-	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
+	FormParameters = New Structure();
+	FormParameters.Insert("Company", Object.Company);
+	FormParameters.Insert("Partner", CurrentData.Partner);
+	FormParameters.Insert("Ref", Object.Ref);
+	FormParameters.Insert("IsOrder", True);
+	FormParameters.Insert("Document", CurrentData.Order);
+		
+	OpenForm("CommonForm.ChoiceTransactionBasis", FormParameters, Form,,,,Notify,FormWindowOpeningMode.LockOwnerWindow); 
 EndProcedure
 
 Procedure PaymentListOrderStartChoiceEnd(Result, AdditionalParameters) Export
@@ -457,11 +427,7 @@ Procedure PaymentListOrderStartChoiceEnd(Result, AdditionalParameters) Export
 	Object = AdditionalParameters.Object;
 	CurrentData = AdditionalParameters.CurrentData;
 	If CurrentData <> Undefined Then
-		
 		ViewClient_V2.SetPaymentListOrder(Object, Form, CurrentData, Result.BasisDocument);
-		If Not ValueIsFilled(CurrentData.BasisDocument) Then
-			ViewClient_V2.SetPaymentListTotalAmount(Object, Form, CurrentData, Result.Amount);
-		EndIf;
 	EndIf;
 EndProcedure
 

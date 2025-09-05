@@ -279,4 +279,52 @@ Procedure ReceiveAmountOnChange(Object, Form, Item) Export
 	ViewClient_V2.ReceiveAmountOnChange(Object, Form);
 EndProcedure
 
+Procedure ReceiveBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
+	
+	Notify = New CallbackDescription("ReceiveBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
+	FormParameters = New Structure();
+	FormParameters.Insert("Company", Object.Company);
+	FormParameters.Insert("Partner", Object.ReceivePartner);
+	FormParameters.Insert("Ref", Object.Ref);
+	FormParameters.Insert("IsReceiver", True);
+	FormParameters.Insert("Document", Object.ReceiveBasisDocument);
+		
+	OpenForm("CommonForm.ChoiceTransactionBasis", FormParameters, Form,,,,Notify,FormWindowOpeningMode.LockOwnerWindow); 
+EndProcedure
 
+Procedure ReceiveBasisDocumentStartChoiceEnd(Result, NotifyParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	Object = NotifyParameters.Object;
+	Object.ReceiveBasisDocument = Result.BasisDocument;
+EndProcedure
+
+Procedure SendBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
+	
+	Notify = New CallbackDescription("SendBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
+	FormParameters = New Structure();
+	FormParameters.Insert("Company", Object.Company);
+	FormParameters.Insert("Partner", Object.ReceivePartner);
+	FormParameters.Insert("Ref", Object.Ref);
+	FormParameters.Insert("IsSender", True);
+	FormParameters.Insert("Document", Object.SendBasisDocument);
+		
+	OpenForm("CommonForm.ChoiceTransactionBasis", FormParameters, Form,,,,Notify,FormWindowOpeningMode.LockOwnerWindow); 
+EndProcedure
+
+Procedure SendBasisDocumentStartChoiceEnd(Result, NotifyParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	Object = NotifyParameters.Object;
+	Object.ReceiveBasisDocument = Result.BasisDocument;
+EndProcedure

@@ -788,6 +788,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.Transactions.BasisDocument</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>TransactionsBasisDocumentOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>TransactionsBasisDocumentExtendedTooltip</name>
             <id>312</id>
@@ -809,6 +813,10 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>TransactionsBasisDocumentStartChoice</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>

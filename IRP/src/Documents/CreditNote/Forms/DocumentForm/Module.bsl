@@ -177,6 +177,20 @@ EndProcedure
 
 #EndRegion
 
+#Region BASIS_DOCUMENT
+
+&AtClient
+Procedure TransactionsBasisDocumentOnChange(Item)
+	DocCreditDebitNoteClient.TransactionsListBasisDocumentOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TransactionsBasisDocumentStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocCreditDebitNoteClient.TransactionsListBasisDocumentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #Region EXPENSE_TYPE
 
 &AtClient

@@ -36,6 +36,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		And ConsolidatedRetailSales = RetailBasis.ConsolidatedRetailSales Then
 		ReturnInTheSameConsolidateSales = True;
 	EndIf;
+	
+	If Not ConsolidatedRetailSales.IsEmpty() Then
+		FiscalPrinter = CommonFunctionsServer.GetRefAttribute(ThisObject.ConsolidatedRetailSales, "FiscalPrinter");
+	EndIf;
 
 	Items.PaymentsRRNCode.Visible = isReturn;
 
@@ -238,7 +242,12 @@ Procedure PaymentsOnActivateRow(Item)
 
 	CurrentData.Edited = False;
 	CurrentData.AmountString = GetAmountString(CurrentData.Amount);
+	
 	Items.GroupPaymentByAcquiring.Visible = Not CurrentData.Hardware.isEmpty();
+	If Not FiscalPrinter.IsEmpty() And CurrentData.Hardware = FiscalPrinter 
+			And CurrentData.PaymentInFiscalPrinterMode Then
+		Items.GroupPaymentByAcquiring.Visible = False;
+	EndIf;
 
 	Items.Payment_PayByPaymentCard.Enabled = Not CurrentData.PaymentDone;
 
@@ -255,7 +264,7 @@ Procedure PaymentsOnActivateRow(Item)
 	EndIf;
 
 	Items.Payment_RevertLastPayment.Enabled = Not IsBlankString(CurrentData.RRNCodeCurrentOperation);
-
+	
 EndProcedure
 
 #EndRegion
@@ -272,6 +281,7 @@ Async Procedure Enter(Command)
 	For Each PaymentRow In Payments Do
 		If Not PaymentRow.Hardware.IsEmpty()
 			And PaymentRow.Amount > 0
+			And Not PaymentRow.PaymentInFiscalPrinterMode
 			And Not PaymentRow.PaymentDone Then
 				CommonFunctionsClientServer.ShowUsersMessage(R().EqAc_NotAllPaymentDone);
 				Return;
@@ -359,9 +369,12 @@ EndProcedure
 
 &AtClient
 Async Procedure ReconnectFiscalPrinter(Command)
-	Hardware = CommonFunctionsServer.GetRefAttribute(ThisObject.ConsolidatedRetailSales, "FiscalPrinter");
-	HardwareClient.DisconnectHardware(Hardware);
-	ConnectResult = Await HardwareClient.ConnectHardware(Hardware);
+	If FiscalPrinter.IsEmpty() Then
+		Return;
+	EndIf;
+	
+	HardwareClient.DisconnectHardware(FiscalPrinter);
+	ConnectResult = Await HardwareClient.ConnectHardware(FiscalPrinter);
 	If Not ConnectResult.Result Then
 		CommonFunctionsClientServer.ShowUsersMessage(ConnectResult.ErrorDescription);
 	Else
@@ -732,6 +745,10 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 		Settings = EquipmentAcquiringServer.GetAcquiringHardwareSettings();
 		Settings.Account = Row.Account;
 		Row.Hardware = EquipmentAcquiringServer.GetAcquiringHardware(Settings);
+		If Not Row.Hardware.IsEmpty() Then
+			Row.PaymentInFiscalPrinterMode = 
+				CommonFunctionsServer.GetRefAttribute(Row.Hardware, "PaymentInFiscalPrinterMode");
+		EndIf;
 	EndIf;
 
 	Items.Payments.CurrentRow = Row.GetID();

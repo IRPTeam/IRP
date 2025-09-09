@@ -779,7 +779,8 @@ EndFunction
 //  Ref - DocumentRef.RetailSalesReceipt, DocumentRef.ConsolidatedRetailSales -
 //  InputParameters - See EquipmentFiscalPrinterAPIClient.InputParameters
 Procedure FillInputParameters(Ref, InputParameters) Export
-	InputParameters.CashierName = Ref.Author.Partner.Description_ru;
+	//InputParameters.CashierName = Ref.Author.Partner.Description_ru;
+	InputParameters.CashierName = LocalizationServer.RefDescription(Ref.Author.Partner);
 
 	If IsBlankString(InputParameters.CashierName) Then
 		//@skip-check property-return-type

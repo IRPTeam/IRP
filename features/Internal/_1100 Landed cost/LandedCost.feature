@@ -2571,7 +2571,7 @@ Scenario: _035 check landed cost stock correction (source of origin)
 			| 'Description'    |
 			| 'Store 03'       |
 		And I select current line in "List" table
-		And I click Select button of "Item key" field
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| "Item"               | "Item key" |
 			| "Product 3 with SLN" | "UNIQ"     |

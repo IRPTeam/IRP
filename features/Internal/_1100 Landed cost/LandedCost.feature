@@ -44,6 +44,7 @@ Scenario: _001 test data
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create catalog ItemTypes objects (LC)
 		When Create catalog Units objects (LC)
+		When Create catalog Countries objects
 		When Create catalog Items objects (LC)
 		When Create catalog CurrencyMovementSets objects (LC)
 		When Create catalog ObjectStatuses objects (LC)
@@ -77,6 +78,7 @@ Scenario: _001 test data
 		When Create information register UserSettings records (LC)
 		When create items for work order (LC)
 		When Create catalog BillOfMaterials objects (LC)
+		When Create catalog SourceOfOrigins objects (LC)
 		And Delay 5
 	* Landed cost currency movement type for company
 		
@@ -2540,3 +2542,40 @@ Scenario: _032 check landed cost SR and RRR with the same items in different lin
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_073_2" template lines by template
 		And I close all client application windows				
+	
+Scenario: _035 check landed cost stock correction (source of origin)
+	And I close all client application windows
+	* Load documents stock correction (source of origin)
+		When Data preparation for stock correction CalculationMovementCosts (LC)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9014).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockCorrection.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockCorrection.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockCorrection.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Check movement cost calculation
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I go to line in "OptionsList" table
+			| 'Report option'    |
+			| 'With SOO'             |
+		And I click "Load setting" button
+		And I click "Generate" button	
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Store 03'       |
+		And I select current line in "List" table
+		And I click Select button of "Item key" field
+		And I go to line in "List" table
+			| "Item"               | "Item key" |
+			| "Product 3 with SLN" | "UNIQ"     |
+		And I select current line in "List" table	
+		And I click "Generate" button
+		And "Result" spreadsheet document contains "BathBalance_035_2" template lines by template
+		And I close all client application windows

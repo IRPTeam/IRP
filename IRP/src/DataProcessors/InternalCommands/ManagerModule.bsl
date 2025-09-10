@@ -337,8 +337,8 @@ Function ShowNumerator_GetCommandDescription()
 	//@skip-check statement-type-change, property-return-type
 	CommandDescription.TitleCheck = R().InternalCommands_ShowNumerator_Check;
 	CommandDescription.ToolTip = CommandDescription.Title;
-	CommandDescription.Picture = "ShowPassword";
-	CommandDescription.PictureCheck = "HidePassword";
+	CommandDescription.Picture = "ShowNumeratore";
+	CommandDescription.PictureCheck = "HideNumeratore";
 	CommandDescription.EnableChecking = True;
 	
 	CommandDescription.LocationGroup = "CommandBar.Tools";
@@ -595,7 +595,7 @@ Function LoadDataFromTable_GetCommandDescription()
 	CommandDescription.Name = "LoadDataFromTable";
 	CommandDescription.Title = R().LDT_Button_Title;
 	CommandDescription.ToolTip = R().LDT_Button_ToolTip; 
-	CommandDescription.Picture = "SpreadsheetShowGrid";
+	CommandDescription.Picture = "LoadDataFromTable";
 	CommandDescription.Representation = "Picture";
 	
 	CommandDescription.ForTables = True;

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ecbab4df-b3ff-41cb-a1a8-e2804945b0e1">
+  <name>PatmentStatusHeader</name>
+  <synonym>
+    <key>en</key>
+    <value>Patment status header</value>
+  </synonym>
+</mdclass:CommonPicture>

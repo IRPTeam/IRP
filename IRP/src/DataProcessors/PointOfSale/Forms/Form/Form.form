@@ -649,7 +649,7 @@
                         </titleBackColor>
                         <showInHeader>true</showInHeader>
                         <headerPicture xsi:type="core:PictureRef">
-                          <picture>CommonPicture.Purchase</picture>
+                          <picture>CommonPicture.AddItem</picture>
                         </headerPicture>
                         <fixingInTable>Left</fixingInTable>
                       </extInfo>
@@ -994,7 +994,7 @@
                       <editMode>Enter</editMode>
                       <showInHeader>true</showInHeader>
                       <headerPicture xsi:type="core:PictureRef">
-                        <picture>CommonPicture.Price</picture>
+                        <picture>CommonPicture.PriceGrey</picture>
                       </headerPicture>
                       <headerHorizontalAlign>Center</headerHorizontalAlign>
                       <showInFooter>true</showInFooter>
@@ -7039,7 +7039,7 @@ person</value>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>CommonPicture.CashOk</picture>
+      <picture>CommonPicture.CashOut</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>

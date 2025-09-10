@@ -240,6 +240,22 @@
   <commonPictures>CommonPicture.DocumentPosted</commonPictures>
   <commonPictures>CommonPicture.DocumentDeleted</commonPictures>
   <commonPictures>CommonPicture.DownloadFile</commonPictures>
+  <commonPictures>CommonPicture.AddBasisDocument</commonPictures>
+  <commonPictures>CommonPicture.EditQuantityInBaseUnit</commonPictures>
+  <commonPictures>CommonPicture.LinkUnlinkBasisDocument</commonPictures>
+  <commonPictures>CommonPicture.AttachFiles</commonPictures>
+  <commonPictures>CommonPicture.Chat</commonPictures>
+  <commonPictures>CommonPicture.EditAccounting</commonPictures>
+  <commonPictures>CommonPicture.AddItem</commonPictures>
+  <commonPictures>CommonPicture.SerialLotBlack</commonPictures>
+  <commonPictures>CommonPicture.CashOut</commonPictures>
+  <commonPictures>CommonPicture.PatmentStatusHeader</commonPictures>
+  <commonPictures>CommonPicture.LoadDataFromTable</commonPictures>
+  <commonPictures>CommonPicture.ShowNumeratore</commonPictures>
+  <commonPictures>CommonPicture.PriceGrey</commonPictures>
+  <commonPictures>CommonPicture.ConnectionTreeGreen</commonPictures>
+  <commonPictures>CommonPicture.DontCalculateRow</commonPictures>
+  <commonPictures>CommonPicture.HideNumeratore</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -1063,9 +1079,9 @@
   <commonCommands>CommonCommand.OpenPartnersCustomer</commonCommands>
   <commonCommands>CommonCommand.OpenPartnersEmployee</commonCommands>
   <commonCommands>CommonCommand.OpenPartnersVendor</commonCommands>
+  <commonCommands>CommonCommand.OpenRetailSalesOrders</commonCommands>
   <commonCommands>CommonCommand.OpenVendorAgreements</commonCommands>
   <commonCommands>CommonCommand.UpdateAllUserRoles</commonCommands>
-  <commonCommands>CommonCommand.OpenRetailSalesOrders</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <commandGroups>CommandGroup.Fiscalization</commandGroups>

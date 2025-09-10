@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="97f0894c-5669-4659-ad2d-9d1ce86de60b">
-  <name>Purchase</name>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cdcb6ef7-af28-4c9c-a135-25ce676006d3">
+  <name>SalesAR</name>
   <synonym>
     <key>en</key>
-    <value>Purchase</value>
+    <value>Sales - A/R</value>
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Report.D1001_Purchases</content>
-  <content>Report.R1001_Purchases</content>
   <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

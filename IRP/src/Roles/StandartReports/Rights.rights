@@ -213,13 +213,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Reports.Subsystem.StandartReports</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Report.R5022A_Expenses</name>
 		<right>
 			<name>Use</name>

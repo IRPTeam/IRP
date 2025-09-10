@@ -16,8 +16,14 @@
   <content>CommonCommand.OpenCustomerAgreements</content>
   <content>Catalog.LegalNameContracts</content>
   <content>Catalog.PartnerItems</content>
-  <content>Catalog.PartnersBankAccounts</content>
-  <content>Document.CustomersAdvancesClosing</content>
+  <content>Report.R2001A_Sales</content>
+  <content>Report.R2010A_SalesOrders</content>
+  <content>Report.R2010A_SalesOrdersExecution</content>
+  <content>Report.R2011A_SalesOrdersShipment</content>
+  <content>Report.R2012A_SalesOrdersInvoiceClosing</content>
+  <content>Report.R401A_FreeStocks</content>
+  <content>Report.M1010A_PriceList</content>
+  <content>Report.R5020A_PartnersBalance</content>
   <subsystems>Pricing</subsystems>
   <subsystems>WorkOrders</subsystems>
   <subsystems>Sales</subsystems>

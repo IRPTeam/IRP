@@ -61,6 +61,7 @@
       <types>DocumentRef.BatchReallocateIncoming</types>
       <types>DocumentRef.BatchReallocateOutgoing</types>
       <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.StockCorrection</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

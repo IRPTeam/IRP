@@ -1,6 +1,5 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
-
 	ArrayOfFilters = New Array();
 	FormParameters = New Structure();
 	FillingData = New Structure();

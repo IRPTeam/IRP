@@ -6,5 +6,4 @@
     <content>Extended</content>
     <commandInterface>Extended</commandInterface>
   </extension>
-  <content>Report.REP_Barcodes</content>
 </mdclass:Subsystem>

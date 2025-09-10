@@ -7194,7 +7194,7 @@ document</value>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.QueryWizardCreateTempTableDescription</picture>
+      <picture>CommonPicture.AddBasisDocument</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
@@ -7215,7 +7215,7 @@ document</value>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.QueryWizardTempTableDescription</picture>
+      <picture>CommonPicture.LinkUnlinkBasisDocument</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>

@@ -1457,6 +1457,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="95ca2eca-17a3-4652-a547-5a5cf5fb52d0">
+      <name>PaymentInFiscalPrinterMode</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment in fiscal printer mode</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="ea9bc598-0402-4151-a107-c0f62aef9194">
     <producedTypes>

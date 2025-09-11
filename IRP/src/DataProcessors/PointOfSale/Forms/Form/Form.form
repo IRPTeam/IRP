@@ -3103,6 +3103,9 @@
               </extendedTooltip>
               <type>Page</type>
               <extInfo xsi:type="form:PageGroupExtInfo">
+                <picture xsi:type="core:PictureRef">
+                  <picture>CommonPicture.CashOk</picture>
+                </picture>
                 <group>Vertical</group>
                 <verticalSpacing>Single</verticalSpacing>
                 <showTitle>true</showTitle>
@@ -3446,7 +3449,7 @@
               <type>Page</type>
               <extInfo xsi:type="form:PageGroupExtInfo">
                 <picture xsi:type="core:PictureRef">
-                  <picture>CommonPicture.Purchase</picture>
+                  <picture>CommonPicture.AddItem</picture>
                 </picture>
                 <group>Vertical</group>
                 <showTitle>true</showTitle>

@@ -30,7 +30,7 @@ Scenario: _999901 filling in demo data base
 			And I wait "Plugins (create)" window closing in 5 seconds
 	When Create catalog AddAttributeAndPropertySets objects (DemoDB)
 	When Create catalog AddAttributeAndPropertyValues objects (DemoDB)
-	// When Create catalog RowIDs objects(DemoDB)
+	When Create catalog RowIDs objects(DemoDB)
 	When Create catalog CancelReturnReasons objects(DemoDB)
 	When Create catalog BusinessUnits objects(DemoDB)
 	When Create catalog CashAccounts objects(DemoDB)
@@ -200,7 +200,6 @@ Scenario: _999901 filling in demo data base
 			| "Documents.ShipmentConfirmation.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturn.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
-
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
@@ -213,9 +212,6 @@ Scenario: _999901 filling in demo data base
 			| "Documents.SalesInvoice.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"    |
-	
-		
-
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
@@ -228,14 +224,12 @@ Scenario: _999901 filling in demo data base
 			| "Documents.ShipmentConfirmation.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"    |
-
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"    |
-
 	* Posting Purchase order
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			Then I select all lines of "List" table

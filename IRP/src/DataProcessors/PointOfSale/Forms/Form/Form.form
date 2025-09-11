@@ -649,7 +649,7 @@
                         </titleBackColor>
                         <showInHeader>true</showInHeader>
                         <headerPicture xsi:type="core:PictureRef">
-                          <picture>CommonPicture.Purchase</picture>
+                          <picture>CommonPicture.AddItem</picture>
                         </headerPicture>
                         <fixingInTable>Left</fixingInTable>
                       </extInfo>
@@ -695,7 +695,7 @@
                       <editMode>Enter</editMode>
                       <showInHeader>true</showInHeader>
                       <headerPicture xsi:type="core:PictureRef">
-                        <picture>CommonPicture.SerialNumber</picture>
+                        <picture>CommonPicture.SerialLotBlack</picture>
                       </headerPicture>
                       <headerHorizontalAlign>Left</headerHorizontalAlign>
                       <showInFooter>true</showInFooter>
@@ -994,7 +994,7 @@
                       <editMode>Enter</editMode>
                       <showInHeader>true</showInHeader>
                       <headerPicture xsi:type="core:PictureRef">
-                        <picture>CommonPicture.Price</picture>
+                        <picture>CommonPicture.PriceGrey</picture>
                       </headerPicture>
                       <headerHorizontalAlign>Center</headerHorizontalAlign>
                       <showInFooter>true</showInFooter>
@@ -1307,6 +1307,7 @@
                       <name>ItemListOnChange</name>
                     </handlers>
                     <searchStringAddition>
+                      <enabled>false</enabled>
                       <name>ItemListSearchString</name>
                       <id>610</id>
                       <extendedTooltip>
@@ -1330,6 +1331,7 @@
                       </extInfo>
                     </searchStringAddition>
                     <viewStatusAddition>
+                      <enabled>false</enabled>
                       <name>ItemListViewStatus</name>
                       <id>613</id>
                       <extendedTooltip>
@@ -1355,6 +1357,7 @@
                       </extInfo>
                     </viewStatusAddition>
                     <searchControlAddition>
+                      <enabled>false</enabled>
                       <name>ItemListSearchControl</name>
                       <id>616</id>
                       <extendedTooltip>
@@ -1650,6 +1653,7 @@
               <name>HTMLDate</name>
               <id>956</id>
               <visible>true</visible>
+              <enabled>false</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
@@ -2971,6 +2975,7 @@
                   <horizontalAlign>Left</horizontalAlign>
                 </autoCommandBar>
                 <searchStringAddition>
+                  <enabled>false</enabled>
                   <name>BasisPaymentsSearchString</name>
                   <id>1186</id>
                   <extendedTooltip>
@@ -2994,6 +2999,7 @@
                   </extInfo>
                 </searchStringAddition>
                 <viewStatusAddition>
+                  <enabled>false</enabled>
                   <name>BasisPaymentsViewStatus</name>
                   <id>1192</id>
                   <extendedTooltip>
@@ -3018,6 +3024,7 @@
                   </extInfo>
                 </viewStatusAddition>
                 <searchControlAddition>
+                  <enabled>false</enabled>
                   <name>BasisPaymentsSearchControl</name>
                   <id>1189</id>
                   <extendedTooltip>
@@ -3096,6 +3103,9 @@
               </extendedTooltip>
               <type>Page</type>
               <extInfo xsi:type="form:PageGroupExtInfo">
+                <picture xsi:type="core:PictureRef">
+                  <picture>CommonPicture.CashOk</picture>
+                </picture>
                 <group>Vertical</group>
                 <verticalSpacing>Single</verticalSpacing>
                 <showTitle>true</showTitle>
@@ -3256,6 +3266,7 @@
                   <name>ItemsPickupOnActivateRow</name>
                 </handlers>
                 <searchStringAddition>
+                  <enabled>false</enabled>
                   <name>ItemsPickupSearchString</name>
                   <id>669</id>
                   <extendedTooltip>
@@ -3286,6 +3297,7 @@
                   </extInfo>
                 </searchStringAddition>
                 <viewStatusAddition>
+                  <enabled>false</enabled>
                   <name>ItemsPickupViewStatus</name>
                   <id>672</id>
                   <extendedTooltip>
@@ -3311,6 +3323,7 @@
                   </extInfo>
                 </viewStatusAddition>
                 <searchControlAddition>
+                  <enabled>false</enabled>
                   <name>ItemsPickupSearchControl</name>
                   <id>675</id>
                   <extendedTooltip>
@@ -3436,7 +3449,7 @@
               <type>Page</type>
               <extInfo xsi:type="form:PageGroupExtInfo">
                 <picture xsi:type="core:PictureRef">
-                  <picture>CommonPicture.Purchase</picture>
+                  <picture>CommonPicture.AddItem</picture>
                 </picture>
                 <group>Vertical</group>
                 <showTitle>true</showTitle>
@@ -4108,6 +4121,7 @@
                   <autoFill>true</autoFill>
                 </autoCommandBar>
                 <searchStringAddition>
+                  <enabled>false</enabled>
                   <name>SpecialOffersSearchString</name>
                   <id>1281</id>
                   <extendedTooltip>
@@ -4131,6 +4145,7 @@
                   </extInfo>
                 </searchStringAddition>
                 <viewStatusAddition>
+                  <enabled>false</enabled>
                   <name>SpecialOffersViewStatus</name>
                   <id>1287</id>
                   <extendedTooltip>
@@ -4155,6 +4170,7 @@
                   </extInfo>
                 </viewStatusAddition>
                 <searchControlAddition>
+                  <enabled>false</enabled>
                   <name>SpecialOffersSearchControl</name>
                   <id>1284</id>
                   <extendedTooltip>
@@ -4878,6 +4894,7 @@
         <name>WorkstationCashAccount</name>
         <id>1167</id>
         <visible>true</visible>
+        <enabled>false</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
@@ -5134,6 +5151,7 @@
           <name>CashInListSelection</name>
         </handlers>
         <searchStringAddition>
+          <enabled>false</enabled>
           <name>CashInListSearchString</name>
           <id>1095</id>
           <extendedTooltip>
@@ -5157,6 +5175,7 @@
           </extInfo>
         </searchStringAddition>
         <viewStatusAddition>
+          <enabled>false</enabled>
           <name>CashInListViewStatus</name>
           <id>1101</id>
           <extendedTooltip>
@@ -5181,6 +5200,7 @@
           </extInfo>
         </viewStatusAddition>
         <searchControlAddition>
+          <enabled>false</enabled>
           <name>CashInListSearchControl</name>
           <id>1098</id>
           <extendedTooltip>
@@ -7039,7 +7059,7 @@ person</value>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>CommonPicture.CashOk</picture>
+      <picture>CommonPicture.CashOut</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
@@ -7194,7 +7214,7 @@ document</value>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.QueryWizardCreateTempTableDescription</picture>
+      <picture>CommonPicture.AddBasisDocument</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
@@ -7215,7 +7235,7 @@ document</value>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.QueryWizardTempTableDescription</picture>
+      <picture>CommonPicture.LinkUnlinkBasisDocument</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>

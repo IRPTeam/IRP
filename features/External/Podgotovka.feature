@@ -1709,6 +1709,21 @@ Scenario: set True value to the constant (DemoDB)
 			| 'Use fixed assets' | 'Yes' |
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'           | 'Use' |
+			| 'Use simple batch' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'            | 'Use' |
+			| 'Use partner items' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'       | 'Use' |
+			| 'Use bundling' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
 	* Disable LinkedRowsIntegrity

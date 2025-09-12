@@ -3,15 +3,15 @@
  <name>OpenCustomerAgreements</name>
  <synonym>
   <key>tr</key>
-  <value>Müşteri sözleşmesi</value>
+  <value>Customer terms</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Соглашения с клиентами</value>
+  <value>Customer terms</value>
  </synonym>
  <synonym>
   <key>en</key>
-  <value>Customers partner terms</value>
+  <value>Customer terms</value>
  </synonym>
  <group>NavigationPanelImportant</group>
  <commandParameterType/>

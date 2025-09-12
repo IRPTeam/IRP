@@ -2813,6 +2813,106 @@ Scenario: Create information register UserSettings records (stock inventory cont
 		| '$$IdCI$$'    | ''               | 'CheckBalance_R4050B_StockInventory' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
 
 
+Scenario: Create information register UserSettings records (R3010B_CashOnHand control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                 | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                       |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b05d' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R3010B_CashOnHand' | ''                 | ''               | ''               | 'CheckBalance_R3010B_CashOnHand' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                  | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R3010B_CashOnHand' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+
+Scenario: Create information register UserSettings records (R4010B_ActualStocks control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                   | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                         |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b05b' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R4010B_ActualStocks' | ''                 | ''               | ''               | 'CheckBalance_R4010B_ActualStocks' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                    | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R4010B_ActualStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R4011B_FreeStocks control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                 | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                       |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b05e' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R4011B_FreeStocks' | ''                 | ''               | ''               | 'CheckBalance_R4011B_FreeStocks' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                  | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R4011B_FreeStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R4014B_SerialLotNumber control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                      | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                            |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b05f' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R4014B_SerialLotNumber' | ''                 | ''               | ''               | 'CheckBalance_R4014B_SerialLotNumber' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                       | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R4014B_SerialLotNumber' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R4035B_IncomingStocks control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                     | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                           |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b060' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R4035B_IncomingStocks' | ''                 | ''               | ''               | 'CheckBalance_R4035B_IncomingStocks' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                      | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R4035B_IncomingStocks' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R4036B_IncomingStocksRequested control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                              | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                                    |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b061' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R4036B_IncomingStocksRequested' | ''                 | ''               | ''               | 'CheckBalance_R4036B_IncomingStocksRequested' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                               | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R4036B_IncomingStocksRequested' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R4037B_PlannedReceiptReservationRequests control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                                        | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                                              |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b062' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R4037B_PlannedReceiptReservationRequests' | ''                 | ''               | ''               | 'CheckBalance_R4037B_PlannedReceiptReservationRequests' |
+	
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                                         | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R4037B_PlannedReceiptReservationRequests' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R6070T_OtherPeriodsExpenses control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                           | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                                 |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b063' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R6070T_OtherPeriodsExpenses' | ''                 | ''               | ''               | 'CheckBalance_R6070T_OtherPeriodsExpenses' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                            | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R6070T_OtherPeriodsExpenses' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
+Scenario: Create information register UserSettings records (R6080T_OtherPeriodsRevenues control)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'ValueType'               | 'IsCommon' | 'Description_en'                           | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                                 |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b862c48d219d3a0511f08716b326b064' | 'False'        | '<Type>xs:boolean</Type>' | 'True'     | 'CheckBalance_R6080T_OtherPeriodsRevenues' | ''                 | ''               | ''               | 'CheckBalance_R6080T_OtherPeriodsRevenues' |
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup' | 'MetadataObject' | 'AttributeName'                            | 'KindOfAttribute'               | 'Value' |
+		| '$$IdCI$$'    | ''               | 'CheckBalance_R6080T_OtherPeriodsRevenues' | 'Enum.KindsOfAttributes.Custom' | 'True'  |
+
 Scenario: Create catalog PartnersBankAccounts objects
 
 	And I check or create catalog "PartnersBankAccounts" objects:
@@ -2822,8 +2922,6 @@ Scenario: Create catalog PartnersBankAccounts objects
 
 
 Scenario: Create Document discount
-
-
 
 	And I check or create catalog "SpecialOfferTypes" objects:
 		| 'Ref'                                                                        | 'DeletionMark'  | 'Code'  | 'Settings'      | 'ExternalDataProc'  | 'TermsOfDiscountCalculation'  | 'GroupTypes'  | 'Description_en'    | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
@@ -4377,3 +4475,70 @@ Scenario: Data preparation for negative cash control in cash accounts
 		| 'e1cib/data/Document.CashReceipt?ref=b85de730704fc69511f04698472e90dc' | 'b106df70-e191-43fb-b10b-ce16b2e51592' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' |        |               | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf128cde918b2' |          | 'False'   |
 		| 'e1cib/data/Document.CashReceipt?ref=b85de730704fc69511f04698472e90dc' | 'b106df70-e191-43fb-b10b-ce16b2e51592' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' |        |               | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf128cde918b3' |          | 'False'   |
 
+Scenario: Create catalog SourceOfOrigins objects (LC)
+
+	And I check or create catalog "SourceOfOrigins" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Code' | 'Description'                                   | 'CustomProductID' | 'CustomDeclarationID' | 'CountryOfOrigin'                                                   | 'SourceOfOriginOwner'                                               | 'BatchBalanceDetail' | 'Inactive' | 'StockBalanceDetail' | 'Author'                                                        | 'CreateDate'          | 'Editor'                                                        | 'ModifyDate'          | 'NotActive' | 'SourceNodeID' |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d014207909' | 'False'        | ''       | 'False'    | 11     | 'Source of origin 4'                            | '9000990'         | '8900090'             | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b'  | 'False'              | 'False'    | 'False'              | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 14:56:46' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 15:09:56' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d01420790a' | 'False'        | ''       | 'False'    | 12     | 'Source of origin without batch balance detail' | '78899'           | '90099'               | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1854' | 'e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd519fda7206f'     | 'True'               | 'False'    | 'False'              | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 14:56:46' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 15:01:30' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d014207919' | 'False'        | ''       | 'False'    | 13     | 'Source of origin 5'                            | '9000991'         | '8900091'             | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b'  | 'True'               | 'False'    | 'False'              | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 14:56:46' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 15:25:58' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d014207920' | 'False'        | ''       | 'False'    | 14     | 'Source of origin 6'                            | '9000992'         | '8900092'             | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb49ef' | 'True'               | 'False'    | 'False'              | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 14:56:46' | ''                                                              | '01.01.0001 00:00:00' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed7f756a377c12' | 'False'        | ''       | 'False'    | 15     | 'Source of origin 8'                            | ''                | ''                    | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1854' | 'e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd519fda7206f'     | 'True'               | 'False'    | 'False'              | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 14:56:46' | ''                                                              | '01.01.0001 00:00:00' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed7f8d992046f4' | 'False'        | ''       | 'False'    | 16     | 'Source of origin 9'                            | ''                | ''                    | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'False'              | 'False'    | 'False'              | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 14:56:46' | ''                                                              | '01.01.0001 00:00:00' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed7f8d992046f5' | 'False'        | ''       | 'False'    | 17     | 'Source of origin 10'                           | ''                | ''                    | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'True'               | 'False'    | 'False'              | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 14:56:46' | ''                                                              | '01.01.0001 00:00:00' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed7faeea16b1dc' | 'False'        | ''       | 'False'    | 18     | 'Source of origin 11'                           | ''                | ''                    | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.Items?ref=b78db8d3fd6dff8b11ed7f8d992048ee'     | 'True'               | 'False'    | 'False'              | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 14:56:46' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 15:01:01' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b863f36b9743187911f08d755187715f' | 'False'        | ''       | 'False'    | 19     | 'Source of origin 15'                           | ''                | ''                    | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b'  | 'False'              | 'False'    | 'False'              | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 15:28:56' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 15:29:40' | 'False'     | ''             |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b863f36b9743187911f08d7551877160' | 'False'        | ''       | 'False'    | 20     | 'Source of origin 16'                           | ''                | ''                    | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b'  | 'True'               | 'False'    | 'False'              | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 15:29:26' | ''                                                              | '01.01.0001 00:00:00' | 'False'     | ''             |
+
+
+Scenario: Data preparation for stock correction CalculationMovementCosts (LC)
+
+	// Document.PurchaseInvoice
+
+	And I check or create document "PurchaseInvoice" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Agreement'                                                          | 'Company'                                                           | 'Currency'                                                           | 'DocDate'             | 'DocNumber' | 'LegalName'                                                         | 'Partner'                                                          | 'PriceIncludeTax' | 'LegalNameContract' | 'TransactionType'                        | 'RecordPurchasePrices' | 'StoreDistributedPurchase' | 'CurrencyRevaluationInvoice' | 'Author'                                                        | 'Branch' | 'Comment' | 'CreateDate'          | 'DocumentAmount' | 'DocumentNumber' | 'Editor'                                                        | 'LocalNetAmount' | 'LocalRate' | 'LocalTaxAmount' | 'LocalTotalAmount' | 'ManualMovementsEdit' | 'ModifyDate'          | 'NumeratorRules' | 'SourceNodeID' | 'UniqueID' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b863f36b9743187911f08d7551877157' | 'False'        | 9014     | '08.12.2022 12:00:00' | 'False'  | 'e1cib/data/Catalog.Agreements?ref=86ffd69b4676df1211ea9f6b40c62c59' | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588' | '01.01.0001 00:00:00' | ''          | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f693615184a' | 'e1cib/data/Catalog.Partners?ref=86ffd69b4676df1211ea9f643f742c24' | 'True'            | ''                  | 'Enum.PurchaseTransactionTypes.Purchase' | 'False'                | 'False'                    | ''                           | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''        | '09.09.2025 15:05:47' | 911              | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 911              | 1           |                  | 911                | 'False'               | '09.09.2025 15:27:00' | ''               | ''             | ''         |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                      | 'Key'                                  | 'Item'                                                          | 'ItemKey'                                                          | 'Store'                                                          | 'PurchaseOrder' | 'Unit'                                                          | 'Quantity' | 'Price' | 'PriceType'                                             | 'TaxAmount' | 'TotalAmount' | 'NetAmount' | 'OffersAmount' | 'ProfitLossCenter' | 'ExpenseType' | 'DeliveryDate'        | 'SalesOrder' | 'Detail' | 'AdditionalAnalytic' | 'DontCalculateRow' | 'QuantityInBaseUnit' | 'UseGoodsReceipt' | 'InternalSupplyRequest' | 'DELETE_IsAdditionalItemCost' | 'OtherPeriodExpenseType' | 'UseSerialLotNumber' | 'IsService' | 'QuantityIsFixed' | 'VatRate' | 'Project' | 'SimpleBatch' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b863f36b9743187911f08d7551877157' | '84a0d568-785d-490f-a7cd-a956cedaa9df' | 'e1cib/data/Catalog.Items?ref=b781cf3f5e36b25611ecd69f89585358' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'e1cib/data/Catalog.Stores?ref=86ffd69b4676df1211ea9f65021727e7' | ''              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 9          | 101.22  | 'e1cib/data/Catalog.PriceTypes?refName=ManualPriceType' |             | 911           | 911         |                | ''                 | ''            | '01.01.0001 00:00:00' | ''           | ''       | ''                   | 'False'            | 9                    | 'True'            | ''                      | 'False'                       | ''                       | 'True'               | 'False'     | 'False'           | ''        | ''        | ''            |
+
+	And I refill object tabular section "Currencies":
+		| 'Ref'                                                                      | 'Key'                                  | 'CurrencyFrom'                                                       | 'Rate' | 'ReverseRate' | 'ShowReverseRate' | 'Multiplicity' | 'MovementType'                                                                                    | 'Amount' | 'IsFixed' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b863f36b9743187911f08d7551877157' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588' | 1      | 1             | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63bb72626a' | 911      | 'False'   |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b863f36b9743187911f08d7551877157' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588' | 1      | 1             | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63a205948e' | 911      | 'False'   |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b863f36b9743187911f08d7551877157' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=86ffd69b4676df1211ea9f63629ef588' | 0.1712 | 5.841121      | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=86ffd69b4676df1211ea9f63aa133490' | 155.96   | 'False'   |
+
+	And I refill object tabular section "SerialLotNumbers":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber'                                                          | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b863f36b9743187911f08d7551877157' | '84a0d568-785d-490f-a7cd-a956cedaa9df' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | 9          |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin'                                                          | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b863f36b9743187911f08d7551877157' | '84a0d568-785d-490f-a7cd-a956cedaa9df' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d014207909' | 9          |
+
+	// Document.StockCorrection
+
+	And I check or create document "StockCorrection" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Store'                                                          | 'Author'                                                        | 'Branch' | 'Comment' | 'CreateDate'          | 'DocumentNumber' | 'Editor'                                                        | 'ManualMovementsEdit' | 'ModifyDate'          | 'NumeratorRules' | 'SourceNodeID' |
+		| 'e1cib/data/Document.StockCorrection?ref=b863f36b9743187911f08d755187715c' | 'False'        | 1        | '09.12.2022 16:00:00' | 'False'  | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | 'e1cib/data/Catalog.Stores?ref=86ffd69b4676df1211ea9f65021727e7' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''        | '09.09.2025 15:22:18' | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'False'               | '09.09.2025 15:26:03' | ''               | ''             |
+		| 'e1cib/data/Document.StockCorrection?ref=b863f36b9743187911f08d7551877161' | 'False'        | 2        | '09.12.2022 18:00:00' | 'False'  | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | 'e1cib/data/Catalog.Stores?ref=86ffd69b4676df1211ea9f65021727e7' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''        | '09.09.2025 15:30:09' | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'False'               | '09.09.2025 15:30:33' | ''               | ''             |
+		| 'e1cib/data/Document.StockCorrection?ref=b863f36b9743187911f08d7551877163' | 'False'        | 3        | '09.12.2022 19:00:00' | 'False'  | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | 'e1cib/data/Catalog.Stores?ref=86ffd69b4676df1211ea9f65021727e7' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''        | '09.09.2025 15:31:18' | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'False'               | '09.09.2025 15:30:33' | ''               | ''             |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                      | 'Key'                                  | 'Item'                                                          | 'ItemKey'                                                          | 'Unit'                                                          | 'Quantity' | 'QuantityInBaseUnit' | 'UseSerialLotNumber' | 'QuantityIsFixed' | 'SourceOfOriginFrom'                                                      | 'SourceOfOriginTo'                                                        |
+		| 'e1cib/data/Document.StockCorrection?ref=b863f36b9743187911f08d755187715c' | '33746e6c-7436-465a-a281-a5de3a7dd9de' | 'e1cib/data/Catalog.Items?ref=b781cf3f5e36b25611ecd69f89585358' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 3          | 3                    | 'True'               | 'False'           | 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d014207909' | 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d014207919' |
+		| 'e1cib/data/Document.StockCorrection?ref=b863f36b9743187911f08d7551877161' | '3bcec17c-780f-422d-bdb2-640dc9226a59' | 'e1cib/data/Catalog.Items?ref=b781cf3f5e36b25611ecd69f89585358' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 2          | 2                    | 'True'               | 'False'           | 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d014207919' | 'e1cib/data/Catalog.SourceOfOrigins?ref=b863f36b9743187911f08d755187715f' |
+		| 'e1cib/data/Document.StockCorrection?ref=b863f36b9743187911f08d7551877163' | 'c41e0908-e3c3-4a08-a8b7-b3919987064c' | 'e1cib/data/Catalog.Items?ref=b781cf3f5e36b25611ecd69f89585358' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 1          | 1                    | 'True'               | 'False'           | 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d014207919' | 'e1cib/data/Catalog.SourceOfOrigins?ref=b863f36b9743187911f08d7551877160' |
+
+	// Document.CalculationMovementCosts
+
+	And I check or create document "CalculationMovementCosts" objects:
+		| 'Ref'                                                                               | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'BeginDate'           | 'EndDate'             | 'CalculationMode'                 | 'RaiseOnCalculationError' | 'Author'                                                        | 'Comment' | 'CreateDate'          | 'Editor'                                                        | 'ManualMovementsEdit' | 'ModifyDate'          | 'SourceNodeID' | 'UniqueID' |
+		| 'e1cib/data/Document.CalculationMovementCosts?ref=b863f36b9743187911f08d7551877158' | 'False'        | 14       | '09.12.2022 23:59:59' | 'False'  | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | '08.12.2022 00:00:00' | '09.12.2022 00:00:00' | 'Enum.CalculationMode.LandedCost' | 'False'                   | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''        | '09.09.2025 15:06:31' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'False'               | '09.09.2025 15:31:22' | ''             | ''         |
+
+	// ReportOptions
+	And I check or create catalog "ReportOptions" objects:
+		| 'Ref'                                                                   | 'DeletionMark' | 'Code'                                 | 'Description' | 'ObjectKey'                 | 'Option'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 'Author'                                                        | 'CreateDate'          | 'Editor'                                                        | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.ReportOptions?ref=b863f36b9743187911f08d7551877166' | 'False'        | '2b03ff16-5270-4740-98e8-85c48347ebea' | 'With SOO'    | 'Report.R6020_BatchBalance' | 'ValueStorage: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' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 15:39:07' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.09.2025 15:39:07' | 'False'     |
+	

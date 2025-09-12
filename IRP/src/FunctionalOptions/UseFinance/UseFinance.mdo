@@ -15,7 +15,6 @@
  </synonym>
  <location>Constant.UseFinance</location>
  <privilegedGetMode>true</privilegedGetMode>
- <content>Subsystem.Reports.Subsystem.Finance</content>
  <content>Subsystem.MasterData.Subsystem.Finance</content>
  <content>Subsystem.Treasury</content>
  <content>Catalog.BankTerms</content>

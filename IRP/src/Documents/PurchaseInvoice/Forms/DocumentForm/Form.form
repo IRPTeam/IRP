@@ -1786,7 +1786,7 @@
      <editMode>Enter</editMode>
      <showInHeader>true</showInHeader>
      <headerPicture xsi:type="core:PictureRef">
-      <picture>StdPicture.SpreadsheetReadOnly</picture>
+      <picture>CommonPicture.DontCalculateRow</picture>
      </headerPicture>
      <headerHorizontalAlign>Center</headerHorizontalAlign>
      <showInFooter>true</showInFooter>
@@ -7360,7 +7360,7 @@
    <common>true</common>
   </use>
   <picture xsi:type="core:PictureRef">
-   <picture>StdPicture.QueryWizardTempTableDescription</picture>
+   <picture>CommonPicture.LinkUnlinkBasisDocument</picture>
   </picture>
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>
@@ -7401,7 +7401,7 @@
    <common>true</common>
   </use>
   <picture xsi:type="core:PictureRef">
-   <picture>StdPicture.QueryWizardCreateTempTableDescription</picture>
+   <picture>CommonPicture.AddBasisDocument</picture>
   </picture>
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>
@@ -7580,7 +7580,7 @@
    <common>true</common>
   </use>
   <picture xsi:type="core:PictureRef">
-   <picture>StdPicture.ChartOfAccounts</picture>
+   <picture>CommonPicture.EditAccounting</picture>
   </picture>
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>
@@ -7647,7 +7647,7 @@
    <common>true</common>
   </use>
   <picture xsi:type="core:PictureRef">
-   <picture>StdPicture.Calculator</picture>
+   <picture>CommonPicture.EditQuantityInBaseUnit</picture>
   </picture>
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>

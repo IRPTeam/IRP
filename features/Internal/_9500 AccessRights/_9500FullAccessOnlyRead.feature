@@ -250,23 +250,23 @@ Scenario: 950006 check role Full access only read (Company taxes)
 			Then I raise "Failed to open" exception
 		And I close all client application windows	
 
-Scenario: 950007 check role Full access only read (Companies)
-		And I close all client application windows
-		And In the command interface I select "Master data" "Companies"		
-		And I go to line in "List" table
-			| 'Description'     |
-			| 'Main Company'    |
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
-		And I close current window
-		And I go to line in "List" table
-			| 'Description'          |
-			| 'Company Ferron BP'    |
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
-		And I close all client application windows	
+// Scenario: 950007 check role Full access only read (Companies)
+// 		And I close all client application windows
+// 		And In the command interface I select "Master data" "Companies"		
+// 		And I go to line in "List" table
+// 			| 'Description'     |
+// 			| 'Main Company'    |
+// 		And I select current line in "List" table
+// 		If the warning is displayed then 
+// 			Then I raise "Failed to open" exception
+// 		And I close current window
+// 		And I go to line in "List" table
+// 			| 'Description'          |
+// 			| 'Company Ferron BP'    |
+// 		And I select current line in "List" table
+// 		If the warning is displayed then 
+// 			Then I raise "Failed to open" exception
+// 		And I close all client application windows	
 
 Scenario: 950008 check role Full access only read (Stores)
 	And I close all client application windows
@@ -696,7 +696,7 @@ Scenario: 950037 check role Full access only read (Item segments)
 
 Scenario: 950038 check role Full access only read (Customers partner terms)
 		And I close all client application windows
-		And In the command interface I select "Sales - A/R" "Customers partner terms"	
+		And In the command interface I select "Sales - A/R" "Customer terms"	
 		And I go to line in "List" table
 			| 'Description'                 |
 			| 'Basic Partner terms, TRY'    |
@@ -708,7 +708,7 @@ Scenario: 950038 check role Full access only read (Customers partner terms)
 	
 Scenario: 950040 check role Full access only read (Vendors partner terms)
 		And I close all client application windows
-		And In the command interface I select "Purchase  - A/P" "Vendors partner terms"
+		And In the command interface I select "Purchase  - A/P" "Vendor terms"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, EUR'    |

@@ -542,6 +542,7 @@
       <strikeout>false</strikeout>
      </titleFont>
      <visible>true</visible>
+     <enabled>false</enabled>
      <userVisible>
       <common>true</common>
      </userVisible>
@@ -591,6 +592,7 @@
       <strikeout>false</strikeout>
      </titleFont>
      <visible>true</visible>
+     <enabled>false</enabled>
      <userVisible>
       <common>true</common>
      </userVisible>
@@ -1405,6 +1407,7 @@
       <strikeout>false</strikeout>
      </titleFont>
      <visible>true</visible>
+     <enabled>false</enabled>
      <userVisible>
       <common>true</common>
      </userVisible>
@@ -1454,6 +1457,7 @@
       <strikeout>false</strikeout>
      </titleFont>
      <visible>true</visible>
+     <enabled>false</enabled>
      <userVisible>
       <common>true</common>
      </userVisible>
@@ -1668,6 +1672,7 @@
         <key>en</key>
         <value>Loyality points</value>
        </title>
+       <enabled>false</enabled>
        <userVisible>
         <common>true</common>
        </userVisible>

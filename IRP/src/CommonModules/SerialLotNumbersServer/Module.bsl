@@ -648,7 +648,7 @@ Procedure CreateCommands(Form, ObjectMetadata, FormType) Export
 	If Form.Commands.Find("OpenSerialLotNumbersTree") = Undefined Then
 		CommandForm = Form.Commands.Add("OpenSerialLotNumbersTree");
 		CommandForm.Representation = ButtonRepresentation.Picture;
-		CommandForm.Picture = PictureLib.ListViewModeTree;
+		CommandForm.Picture = PictureLib.ConnectionTreeGreen;
 		CommandForm.Action = "OpenSerialLotNumbersTree";
 		R().Property("OpenSLNTree_Button_Title",   CommandForm.Title);
 		R().Property("OpenSLNTree_Button_ToolTip", CommandForm.ToolTip);

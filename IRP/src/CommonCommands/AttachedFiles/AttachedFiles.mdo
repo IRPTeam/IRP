@@ -31,6 +31,6 @@
   <value>Attached files</value>
  </toolTip>
  <picture xsi:type="core:PictureRef">
-  <picture>StdPicture.Attach</picture>
+  <picture>CommonPicture.AttachFiles</picture>
  </picture>
 </mdclass:CommonCommand>

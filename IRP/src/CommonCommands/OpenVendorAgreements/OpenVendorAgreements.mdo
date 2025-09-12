@@ -3,15 +3,15 @@
  <name>OpenVendorAgreements</name>
  <synonym>
   <key>tr</key>
-  <value>Sözleşmeler</value>
+  <value>Vendor terms</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Соглашения</value>
+  <value>Vendor terms</value>
  </synonym>
  <synonym>
   <key>en</key>
-  <value>Vendors partner terms</value>
+  <value>Vendor terms</value>
  </synonym>
  <group>NavigationPanelImportant</group>
  <commandParameterType/>

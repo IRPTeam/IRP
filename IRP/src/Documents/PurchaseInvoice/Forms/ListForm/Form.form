@@ -144,7 +144,7 @@
    <editMode>Enter</editMode>
    <showInHeader>true</showInHeader>
    <headerPicture xsi:type="core:PictureRef">
-    <picture>CommonPicture.CashOk</picture>
+    <picture>CommonPicture.PatmentStatusHeader</picture>
    </headerPicture>
    <headerHorizontalAlign>Left</headerHorizontalAlign>
    <extInfo xsi:type="form:ImageFieldExtInfo">

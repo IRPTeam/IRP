@@ -1195,7 +1195,7 @@
      <editMode>Enter</editMode>
      <showInHeader>true</showInHeader>
      <headerPicture xsi:type="core:PictureRef">
-      <picture>StdPicture.SpreadsheetReadOnly</picture>
+      <picture>CommonPicture.DontCalculateRow</picture>
      </headerPicture>
      <headerHorizontalAlign>Left</headerHorizontalAlign>
      <showInFooter>true</showInFooter>
@@ -2911,7 +2911,7 @@
    <common>true</common>
   </use>
   <picture xsi:type="core:PictureRef">
-   <picture>StdPicture.ChartOfAccounts</picture>
+   <picture>CommonPicture.EditAccounting</picture>
   </picture>
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>

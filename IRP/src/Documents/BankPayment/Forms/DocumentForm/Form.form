@@ -6887,7 +6887,7 @@
    <common>true</common>
   </use>
   <picture xsi:type="core:PictureRef">
-   <picture>StdPicture.ChartOfAccounts</picture>
+   <picture>CommonPicture.EditAccounting</picture>
   </picture>
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>
@@ -7097,7 +7097,7 @@
    <common>true</common>
   </use>
   <picture xsi:type="core:PictureRef">
-   <picture>StdPicture.ChartOfAccounts</picture>
+   <picture>CommonPicture.EditAccounting</picture>
   </picture>
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>

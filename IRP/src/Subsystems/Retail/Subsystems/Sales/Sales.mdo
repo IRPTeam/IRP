@@ -19,6 +19,6 @@
  <content>Document.RetailReturnReceipt</content>
  <content>Document.RetailSalesReceipt</content>
  <content>Document.RetailReceiptCorrection</content>
- <content>Document.SalesOrder</content>
+ <content>CommonCommand.OpenRetailSalesOrders</content>
  <parentSubsystem>Subsystem.Retail</parentSubsystem>
 </mdclass:Subsystem>

@@ -26,11 +26,15 @@
  <content>Catalog.Items</content>
  <content>Catalog.Agreements</content>
  <content>CommonCommand.OpenVendorAgreements</content>
- <content>Catalog.PartnersBankAccounts</content>
  <content>Catalog.LegalNameContracts</content>
  <content>Catalog.PartnerItems</content>
- <content>Document.VendorsAdvancesClosing</content>
- <subsystems>Pricing</subsystems>
+ <content>Report.R1001A_Purchases</content>
+ <content>Report.R1010A_PurchaseOrders</content>
+ <content>Report.R1011A_PuchaseOrdersShipment</content>
+ <content>Report.R1012A_PurchaseOrdersInvoiceClosing</content>
+ <content>Report.R5020A_PartnersBalance</content>
+ <content>Report.R1031A_ReceiptInvoicingBalance</content>
+ <content>Report.R1031B_ReceiptInvoicingMovements</content>
  <subsystems>Purchase</subsystems>
  <subsystems>PurchaseReturn</subsystems>
 </mdclass:Subsystem>

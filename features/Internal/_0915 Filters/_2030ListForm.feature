@@ -62,7 +62,7 @@ Scenario: _0203001 check filters in the partner term catalog
 	* Filter check according to partner term with customers in the sales section
 		* Open list form
 			When in sections panel I select "Sales - A/R"
-			And in functions panel I select "Customers partner terms"
+			And in functions panel I select "Customer terms"
 		* Filter check
 			And "List" table does not contain lines
 			| 'Description'           |
@@ -73,7 +73,7 @@ Scenario: _0203001 check filters in the partner term catalog
 	* Filter check according to partner term with vendors in the purchase section
 		* Open list form
 			When in sections panel I select "Purchase  - A/P"
-			And in functions panel I select "Vendors partner terms"
+			And in functions panel I select "Vendor terms"
 		* Filter check
 			And "List" table contains lines
 			| 'Description'           |

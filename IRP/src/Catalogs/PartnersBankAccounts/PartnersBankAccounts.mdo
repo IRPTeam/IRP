@@ -356,4 +356,24 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <commands uuid="a9f27bd6-1f13-4ae3-93e6-785035fda9d9">
+  <name>OpenPartnersBankAccountsList</name>
+  <synonym>
+   <key>tr</key>
+   <value>Partner bank accounts</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Partner bank accounts</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner bank accounts</value>
+  </synonym>
+  <group>FormNavigationPanelGoTo</group>
+  <commandParameterType>
+   <types>CatalogRef.Partners</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Catalog>

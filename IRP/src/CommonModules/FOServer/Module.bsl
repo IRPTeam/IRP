@@ -121,6 +121,10 @@ Function IsUsePreliminary() Export
 	Return GetFunctionalOption("UsePreliminary");
 EndFunction
 
+Function IsUseNumberingRules() Export
+	Return GetFunctionalOption("UseNumberingRules");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

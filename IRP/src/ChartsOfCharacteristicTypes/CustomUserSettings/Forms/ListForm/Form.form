@@ -293,6 +293,231 @@
     <placementArea>UserCmds</placementArea>
     <representationInContextMenu>Auto</representationInContextMenu>
    </items>
+   <items xsi:type="form:Button">
+    <name>FormTemplate_R3010B_CashOnHand</name>
+    <id>26</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>FormTemplate_R3010B_CashOnHandExtendedTooltip</name>
+     <id>27</id>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.Template_R3010B_CashOnHand</commandName>
+    <representation>Auto</representation>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
+   <items xsi:type="form:Button">
+    <name>FormTemplate_R4010B_ActualStocks</name>
+    <id>28</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>FormTemplate_R4010B_ActualStocksExtendedTooltip</name>
+     <id>29</id>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.Template_R4010B_ActualStocks</commandName>
+    <representation>Auto</representation>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
+   <items xsi:type="form:Button">
+    <name>FormTemplate_R4011B_FreeStocks</name>
+    <id>30</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>FormTemplate_R4011B_FreeStocksExtendedTooltip</name>
+     <id>31</id>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.Template_R4011B_FreeStocks</commandName>
+    <representation>Auto</representation>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
+   <items xsi:type="form:Button">
+    <name>FormTemplate_R4014B_SerialLotNumber</name>
+    <id>32</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>FormTemplate_R4014B_SerialLotNumberExtendedTooltip</name>
+     <id>33</id>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.Template_R4014B_SerialLotNumber</commandName>
+    <representation>Auto</representation>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
+   <items xsi:type="form:Button">
+    <name>FormTemplate_R4035B_IncomingStocks</name>
+    <id>34</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>FormTemplate_R4035B_IncomingStocksExtendedTooltip</name>
+     <id>35</id>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.Template_R4035B_IncomingStocks</commandName>
+    <representation>Auto</representation>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
+   <items xsi:type="form:Button">
+    <name>FormTemplate_R4036B_IncomingStocksRequested</name>
+    <id>36</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>FormTemplate_R4036B_IncomingStocksRequestedExtendedTooltip</name>
+     <id>37</id>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.Template_R4036B_IncomingStocksRequested</commandName>
+    <representation>Auto</representation>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
+   <items xsi:type="form:Button">
+    <name>FormTemplate_R4037B_PlannedReceiptReservationRequests</name>
+    <id>38</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>FormTemplate_R4037B_PlannedReceiptReservationRequestsExtendedTooltip</name>
+     <id>39</id>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.Template_R4037B_PlannedReceiptReservationRequests</commandName>
+    <representation>Auto</representation>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
+   <items xsi:type="form:Button">
+    <name>FormTemplate_R6070T_OtherPeriodsExpenses</name>
+    <id>40</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>FormTemplate_R6070T_OtherPeriodsExpensesExtendedTooltip</name>
+     <id>41</id>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.Template_R6070T_OtherPeriodsExpenses</commandName>
+    <representation>Auto</representation>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
+   <items xsi:type="form:Button">
+    <name>FormTemplate_R6080T_OtherPeriodsRevenues</name>
+    <id>42</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>FormTemplate_R6080T_OtherPeriodsRevenuesExtendedTooltip</name>
+     <id>43</id>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.Template_R6080T_OtherPeriodsRevenues</commandName>
+    <representation>Auto</representation>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
@@ -411,6 +636,231 @@ FROM
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>
     <name>Template_R4050B_StockInventory</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>Template_R3010B_CashOnHand</name>
+  <title>
+   <key>tr</key>
+   <value>Check balance: R3010 Cash on hand</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Check balance: R3010 Cash on hand</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Check balance: R3010 Cash on hand</value>
+  </title>
+  <id>2</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>Template_R3010B_CashOnHand</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>Template_R4010B_ActualStocks</name>
+  <title>
+   <key>tr</key>
+   <value>Check balance: R4010 Actual stocks</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Check balance: R4010 Actual stocks</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Check balance: R4010 Actual stocks</value>
+  </title>
+  <id>3</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>Template_R4010B_ActualStocks</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>Template_R4011B_FreeStocks</name>
+  <title>
+   <key>tr</key>
+   <value>Check balance: R4011 Free stocks</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Check balance: R4011 Free stocks</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Check balance: R4011 Free stocks</value>
+  </title>
+  <id>4</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>Template_R4011B_FreeStocks</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>Template_R4014B_SerialLotNumber</name>
+  <title>
+   <key>tr</key>
+   <value>Check balance: R4014 Serial lot number</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Check balance: R4014 Serial lot number</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Check balance: R4014 Serial lot number</value>
+  </title>
+  <id>5</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>Template_R4014B_SerialLotNumber</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>Template_R4035B_IncomingStocks</name>
+  <title>
+   <key>tr</key>
+   <value>Check balance: R4035 Incoming stocks</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Check balance: R4035 Incoming stocks</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Check balance: R4035 Incoming stocks</value>
+  </title>
+  <id>6</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>Template_R4035B_IncomingStocks</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>Template_R4036B_IncomingStocksRequested</name>
+  <title>
+   <key>tr</key>
+   <value>Check balance: R4036 Incoming stocks requested</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Check balance: R4036 Incoming stocks requested</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Check balance: R4036 Incoming stocks requested</value>
+  </title>
+  <id>7</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>Template_R4036B_IncomingStocksRequested</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>Template_R4037B_PlannedReceiptReservationRequests</name>
+  <title>
+   <key>tr</key>
+   <value>Check balance: R4037 Planned receipt</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Check balance: R4037 Planned receipt</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Check balance: R4037 Planned receipt</value>
+  </title>
+  <id>8</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>Template_R4037B_PlannedReceiptReservationRequests</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>Template_R6070T_OtherPeriodsExpenses</name>
+  <title>
+   <key>tr</key>
+   <value>Check balance: R6070 Other periods expenses</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Check balance: R6070 Other periods expenses</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Check balance: R6070 Other periods expenses</value>
+  </title>
+  <id>10</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>Template_R6070T_OtherPeriodsExpenses</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>Template_R6080T_OtherPeriodsRevenues</name>
+  <title>
+   <key>tr</key>
+   <value>Check balance: R6080 Other periods revenues</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Check balance: R6080 Other periods revenues</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Check balance: R6080 Other periods revenues</value>
+  </title>
+  <id>11</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>Template_R6080T_OtherPeriodsRevenues</name>
    </handler>
   </action>
   <currentRowUse>Auto</currentRowUse>

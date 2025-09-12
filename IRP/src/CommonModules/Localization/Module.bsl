@@ -1825,18 +1825,18 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_003", NStr("en='Quantity';
 		|ru='Количество';
 		|tr='Miktar'", Lang));
-	Strings.Insert("Form_004", NStr("en='Customers terms';
-		|ru='Соглашения с клиентами';
-		|tr='Müşteri anlaşmaları'", Lang));
+	Strings.Insert("Form_004", NStr("en='Customer terms';
+		|ru='Customer terms';
+		|tr='Customer terms'", Lang));
 	Strings.Insert("Form_005", NStr("en='Customers';
 		|ru='Клиенты';
 		|tr='Müşteriler'", Lang));
 	Strings.Insert("Form_006", NStr("en='Vendors';
 		|ru='Поставщики';
 		|tr='Tedarikçiler'", Lang));
-	Strings.Insert("Form_007", NStr("en='Vendors terms';
-		|ru='Соглашения с поставщиками';
-		|tr='Tedarikçi anlaşması'", Lang));
+	Strings.Insert("Form_007", NStr("en='Vendor terms';
+		|ru='Vendor terms';
+		|tr='Vendor terms'", Lang));
 	Strings.Insert("Form_008", NStr("en='User';
 		|ru='Пользователь';
 		|tr='Kullanıcı'", Lang));
@@ -4849,7 +4849,37 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 	Strings.Insert("SecureStorage_CanStoreOnlyStructure", NStr("en='It can be stored only Structure type';
 		|ru='Только тип Структура может храниться';
 		|tr='It can be stored only Structure type'", Lang));
-	
+#EndRegion
+
+#Region Dashboard
+	Strings.Insert("Dashboard_01", NStr("en='Sales amount';
+		|ru='Сумма продаж';
+		|tr='Tutar'", Lang));
+	Strings.Insert("Dashboard_02", NStr("en='Average bill';
+		|ru='Average bill';
+		|tr='Average bill'", Lang));
+	Strings.Insert("Dashboard_03", NStr("en='Sales return percentage';
+		|ru='Sales return percentage';
+		|tr='Sales return percentage'", Lang));	
+	Strings.Insert("Dashboard_04", NStr("en='Cash Balance';
+		|ru='Cash Balance';
+		|tr='Cash Balance'", Lang));
+	Strings.Insert("Dashboard_05", NStr("en='Payments from clients';
+		|ru='Payments from clients';
+		|tr='Payments from clients'", Lang));
+	Strings.Insert("Dashboard_06", NStr("en='Payments to suppliers';
+		|ru='Payments to suppliers';
+		|tr='Payments to suppliers'", Lang));
+	Strings.Insert("Dashboard_07", NStr("en='AP/AR Balance';
+		|ru='AP/AR Balance';
+		|tr='AP/AR Balance'", Lang));
+	Strings.Insert("Dashboard_08", NStr("en='Stock Balance';
+		|ru='Stock Balance';
+		|tr='Stock Balance'", Lang));
+	Strings.Insert("Dashboard_09", NStr("en='Volume of purchases';
+		|ru='Volume of purchases';
+		|tr='Volume of purchases'", Lang));
+
 #EndRegion
 
 	Return Strings;

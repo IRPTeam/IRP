@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b854b36c-da92-41dc-9cf3-93516ac6d332">
+ <name>AddItem</name>
+ <synonym>
+  <key>tr</key>
+  <value>Yeni öğe</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Add item</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Add item</value>
+ </synonym>
+</mdclass:CommonPicture>

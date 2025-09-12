@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3dd5df2a-a2dc-4a7d-ab73-316b9ec4b305">
+ <name>PurchaseAP</name>
+ <synonym>
+  <key>tr</key>
+  <value>Alımlar</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Закупки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Purchase  - A/P</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <parentSubsystem>Subsystem.Reports</parentSubsystem>
+</mdclass:Subsystem>

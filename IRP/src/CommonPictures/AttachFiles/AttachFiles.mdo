@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0c4b138b-fcc5-424b-8ebe-d7439488b1c5">
+ <name>AttachFiles</name>
+ <synonym>
+  <key>tr</key>
+  <value>Dosya ekle</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Прикрепить файл</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Attach files</value>
+ </synonym>
+</mdclass:CommonPicture>

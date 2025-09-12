@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f9815b59-7bda-4707-95a8-3c4679f64516">
+ <producedTypes>
+  <selectionType typeId="1e4d3946-86bf-4a69-9d6b-deb1d18f4b5f" valueTypeId="55cb9a84-4b6d-4515-83f7-6ff11bfc2415"/>
+  <listType typeId="4528f24a-f93e-4d18-8800-509c988bf251" valueTypeId="cfeb7a77-1d7b-49e7-af0f-98d8e8e092b4"/>
+  <managerType typeId="452e87af-5342-4ded-8038-621995a32da3" valueTypeId="30e00f93-9361-4d2b-9b4c-43176b438493"/>
+  <recordSetType typeId="a7212890-f731-49a4-98aa-934a1bf4b1dd" valueTypeId="7ced79bc-3d8f-46c3-8021-344a7f79b545"/>
+  <recordKeyType typeId="a7803c74-e374-4453-bc62-98db9b0e9f15" valueTypeId="74cf1e37-edcf-4cd7-ba72-7e743913f55c"/>
+  <recordType typeId="dd2e417d-0a6e-42f4-baf5-fa36e8a84e80" valueTypeId="c8cb7e77-90fd-4502-a227-dcba17a7efe0"/>
+  <recordManagerType typeId="da0c3cc6-f3e7-4edc-af78-0638e07ad8fc" valueTypeId="8e3ceb4f-8146-40bd-bde8-3e6a58da6399"/>
+ </producedTypes>
+ <name>DashboardSettings</name>
+ <synonym>
+  <key>tr</key>
+  <value>Dashboard settings</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Dashboard settings</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Dashboard settings</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.DashboardSettings.Form.RecordForm</defaultRecordForm>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="db96fce0-250a-48a5-889a-8497c9754292">
+  <name>Settings</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ayarlar</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Настройки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Settings</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="2100bc1a-9211-4a15-b3a9-fb611aac1a75">
+  <name>User</name>
+  <synonym>
+   <key>tr</key>
+   <value>Kullanıcı</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Пользователь</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>User</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.UserGroups</types>
+   <types>CatalogRef.Users</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="9929c0c7-a4f8-4668-a16d-b97c305db623">
+  <name>RecordForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма записи</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Record form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:InformationRegister>

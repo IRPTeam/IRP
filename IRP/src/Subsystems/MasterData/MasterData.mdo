@@ -22,12 +22,8 @@
  <content>CommonCommand.IDInfo</content>
  <content>CommonForm.EditIDInfo</content>
  <content>DataProcessor.GroupPhotoUploading</content>
- <content>Catalog.PrintInfo</content>
  <content>Report.T0001_FilesAnalyser</content>
  <content>DataProcessor.DownloadAttachedFiles</content>
- <content>Catalog.Countries</content>
- <content>Catalog.Cities</content>
- <subsystems>PurchaseAndSales</subsystems>
  <subsystems>Finance</subsystems>
  <subsystems>OpeningEntry</subsystems>
  <subsystems>Items</subsystems>
@@ -35,4 +31,8 @@
  <subsystems>Retail</subsystems>
  <subsystems>Production</subsystems>
  <subsystems>AdditionalControl</subsystems>
+ <subsystems>Partners</subsystems>
+ <subsystems>CorporateData</subsystems>
+ <subsystems>PriceManagment</subsystems>
+ <subsystems>Other</subsystems>
 </mdclass:Subsystem>

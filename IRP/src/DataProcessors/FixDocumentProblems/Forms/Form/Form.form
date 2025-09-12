@@ -627,7 +627,7 @@
        <autoMaxHeight>true</autoMaxHeight>
        <placementArea>UserCmds</placementArea>
        <picture xsi:type="core:PictureRef">
-        <picture>StdPicture.ChartOfAccounts</picture>
+        <picture>CommonPicture.EditAccounting</picture>
        </picture>
        <representationInContextMenu>Auto</representationInContextMenu>
       </items>

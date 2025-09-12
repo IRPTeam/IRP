@@ -20,5 +20,6 @@
  <content>Document.StockAdjustmentAsSurplus</content>
  <content>Document.StockAdjustmentAsWriteOff</content>
  <content>Document.StockCorrection</content>
+ <content>Document.ItemStockAdjustment</content>
  <parentSubsystem>Subsystem.Inventory</parentSubsystem>
 </mdclass:Subsystem>

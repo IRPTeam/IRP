@@ -4,7 +4,11 @@ Function GetLockFieldNames() Export
 EndFunction
 
 Function CheckBalance(Ref, CurrentRecords, ExistsRecords, Unposting, AddInfo = Undefined) Export
-
+	
+	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R3010B_CashOnHand", True) Then
+		Return True;
+	EndIf;
+	
 	Query = New Query();
 	Query.TempTablesManager = New TempTablesManager();
 	Query.Text = 

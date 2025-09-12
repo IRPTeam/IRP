@@ -27,7 +27,6 @@
  <content>Catalog.PriceTypes</content>
  <content>Subsystem.SalesAR</content>
  <content>Catalog.LegalNameContracts</content>
- <content>Subsystem.Reports.Subsystem.Sales</content>
  <content>Document.SalesOrder</content>
  <content>Report.R1100_CustomersAging</content>
  <content>Document.SalesReturnOrder</content>
@@ -60,5 +59,4 @@
  <content>AccumulationRegister.R5011B_CustomersAging</content>
  <content>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</content>
  <content>AccumulationRegister.R2005T_SalesSpecialOffers</content>
- <content>Subsystem.MasterData.Subsystem.PurchaseAndSales</content>
 </mdclass:FunctionalOption>

@@ -57,7 +57,7 @@ EndProcedure
 &AtClient
 Procedure Settings(Command)
 	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
-		Notify = New NotifyDescription("EditUserSettingsProceed", ThisObject);
+		Notify = New CallbackDescription("EditUserSettingsProceed", ThisObject);
 		ShowQueryBox(Notify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 	Else
 		EditUserSettingsProceed(DialogReturnCode.Yes);

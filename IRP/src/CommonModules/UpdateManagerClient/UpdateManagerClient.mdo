@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7f8841ac-8d98-4ab7-aafc-bda58aa1a530">
+ <name>UpdateManagerClient</name>
+ <synonym>
+  <key>en</key>
+  <value>C82275AC-A7C0-7BF6-6966-6196BA43C38C</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

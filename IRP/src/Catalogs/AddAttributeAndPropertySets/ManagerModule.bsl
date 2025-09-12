@@ -59,6 +59,13 @@ Function GetExtensionAttributesListByObjectMetadata(ObjectMetadata, Ref) Export
 	For Each Attribute In ObjectMetadata.Attributes Do
 		AttributeNames.Add(Attribute.Name);
 	EndDo;
+	
+	For Each Attribute In Metadata.CommonAttributes Do
+		If CommonFunctionsServer.isCommonAttributeUseForMetadata(Attribute.Name, ObjectMetadata) Then
+			AttributeNames.Add(Attribute.Name);
+		EndIf;
+	EndDo;
+	
 	Query = New Query();
 	Query.Text = 
 	"SELECT

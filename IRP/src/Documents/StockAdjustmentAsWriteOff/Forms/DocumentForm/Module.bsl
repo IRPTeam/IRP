@@ -18,6 +18,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -56,6 +57,16 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	DocStockAdjustmentAsWriteOffClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
 EndProcedure
 
 &AtClient
@@ -405,7 +416,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -439,8 +450,7 @@ Procedure LinkUnlinkBasisDocuments(Command)
 	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_StockAdjustmentAsWriteOff(Object));
 	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
-	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+	RowIDInfoClient.OpenForm_LinkUnlinkDocumentRows(Object, ThisObject, FormParameters);
 EndProcedure
 
 &AtClient
@@ -448,12 +458,7 @@ Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
 	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_StockAdjustmentAsWriteOff(Object));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form", ThisObject);
-	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters), 
-			FormWindowOpeningMode.LockOwnerWindow);
+	RowIDInfoClient.OpenForm_AddLinkedDocumentRows(Object, ThisObject, FormParameters);
 EndProcedure
 
 &AtClient
@@ -462,26 +467,23 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, NotifyParameters) Export
 		Return;
 	EndIf;
 	ThisObject.Modified = True;
-	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
-	If ExtractedData <> Undefined Then
-		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
-	EndIf;	
-	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
-	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(Object, ThisObject, "ItemList");
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
-Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
-	ExtractedData = Undefined;
+Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
-		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
+		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
-		ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
+	Else
+		Raise StrTemplate(R().UnsupportedOperation, Result.Operation);
 	EndIf;
+	ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
 	LockLinkedRows();
-	Return ExtractedData;
-EndFunction
+EndProcedure
 
 &AtServer
 Procedure LockLinkedRows()
@@ -516,7 +518,7 @@ Procedure EditCurrencies(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -529,6 +531,20 @@ EndProcedure
 &AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure
 
 #EndRegion

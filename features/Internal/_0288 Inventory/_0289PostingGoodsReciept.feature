@@ -26,6 +26,7 @@ Scenario: _028900 preparation (Goods receipt)
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
 		When Create catalog Items objects
+		When Create catalog BusinessUnits objects
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
 		When Create chart of characteristic types AddAttributeAndProperty objects
@@ -514,8 +515,8 @@ Scenario: _028931 check link/unlink form in the GR (Sales return)
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| '#'   | 'Item'         | 'Item key'   | 'Store'      | 'Quantity'   | 'Unit'                     | 'Receipt basis'                                | 'Purchase invoice'   | 'Currency'   | 'Sales return order'   | 'Purchase order'   | 'Inventory transfer order'   | 'Sales return'                                  |
-			| '1'   | 'High shoes'   | '39/19SD'    | 'Store 03'   | '10,000'     | 'High shoes box (8 pcs)'   | 'Sales return 351 dated 24.03.2021 14:04:08'   | ''                   | ''           | ''                     | ''                 | ''                           | 'Sales return 351 dated 24.03.2021 14:04:08'    |
-			| '2'   | 'Bag'          | 'ODS'        | 'Store 03'   | '20,000'     | 'pcs'                      | 'Sales return 351 dated 24.03.2021 14:04:08'   | ''                   | ''           | ''                     | ''                 | ''                           | 'Sales return 351 dated 24.03.2021 14:04:08'    |
+			| '1'   | 'High shoes'   | '39/19SD'    | 'Store 03'   | '10,000'     | 'High shoes box (8 pcs)'   | 'Sales return 351 dated 24.03.2021 14:04:08'   | ''                   | 'TRY'        | ''                     | ''                 | ''                           | 'Sales return 351 dated 24.03.2021 14:04:08'    |
+			| '2'   | 'Bag'          | 'ODS'        | 'Store 03'   | '20,000'     | 'pcs'                      | 'Sales return 351 dated 24.03.2021 14:04:08'   | ''                   | 'TRY'        | ''                     | ''                 | ''                           | 'Sales return 351 dated 24.03.2021 14:04:08'    |
 	* Unlink line and link it again
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
@@ -528,9 +529,9 @@ Scenario: _028931 check link/unlink form in the GR (Sales return)
 		And I click "Unlink" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| '#'   | 'Item'         | 'Item key'   | 'Store'      | 'Quantity'   | 'Unit'                     | 'Receipt basis'                                | 'Purchase invoice'   | 'Currency'   | 'Sales return order'   | 'Purchase order'   | 'Inventory transfer order'   | 'Sales return'                                  |
-			| '1'   | 'High shoes'   | '39/19SD'    | 'Store 03'   | '10,000'     | 'High shoes box (8 pcs)'   | 'Sales return 351 dated 24.03.2021 14:04:08'   | ''                   | ''           | ''                     | ''                 | ''                           | 'Sales return 351 dated 24.03.2021 14:04:08'    |
-			| '2'   | 'Bag'          | 'ODS'        | 'Store 03'   | '20,000'     | 'pcs'                      | ''                                             | ''                   | ''           | ''                     | ''                 | ''                           | ''                                              |
+			| '#' | 'Item'       | 'Item key' | 'Store'    | 'Quantity' | 'Unit'                   | 'Receipt basis'                              | 'Purchase invoice' | 'Currency' | 'Sales return order' | 'Purchase order' | 'Inventory transfer order' | 'Sales return'                               |
+			| '1' | 'High shoes' | '39/19SD'  | 'Store 03' | '10,000'   | 'High shoes box (8 pcs)' | 'Sales return 351 dated 24.03.2021 14:04:08' | ''                 | 'TRY'      | ''                   | ''               | ''                         | 'Sales return 351 dated 24.03.2021 14:04:08' |
+			| '2' | 'Bag'        | 'ODS'      | 'Store 03' | '20,000'   | 'pcs'                    | ''                                           | ''                 | ''         | ''                   | ''               | ''                         | ''                                           |
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#'   | 'Quantity'   | 'Row presentation'   | 'Store'      | 'Unit'    |
@@ -545,9 +546,9 @@ Scenario: _028931 check link/unlink form in the GR (Sales return)
 		And I click "Link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| '#'   | 'Item'         | 'Item key'   | 'Store'      | 'Quantity'   | 'Unit'                     | 'Receipt basis'                                | 'Purchase invoice'   | 'Currency'   | 'Sales return order'   | 'Purchase order'   | 'Inventory transfer order'   | 'Sales return'                                  |
-			| '1'   | 'High shoes'   | '39/19SD'    | 'Store 03'   | '10,000'     | 'High shoes box (8 pcs)'   | 'Sales return 351 dated 24.03.2021 14:04:08'   | ''                   | ''           | ''                     | ''                 | ''                           | 'Sales return 351 dated 24.03.2021 14:04:08'    |
-			| '2'   | 'Bag'          | 'ODS'        | 'Store 03'   | '20,000'     | 'pcs'                      | 'Sales return 351 dated 24.03.2021 14:04:08'   | ''                   | ''           | ''                     | ''                 | ''                           | 'Sales return 351 dated 24.03.2021 14:04:08'    |
+			| '#' | 'Item'       | 'Item key' | 'Store'    | 'Quantity' | 'Unit'                   | 'Receipt basis'                              | 'Purchase invoice' | 'Currency' | 'Sales return order' | 'Purchase order' | 'Inventory transfer order' | 'Sales return'                               |
+			| '1' | 'High shoes' | '39/19SD'  | 'Store 03' | '10,000'   | 'High shoes box (8 pcs)' | 'Sales return 351 dated 24.03.2021 14:04:08' | ''                 | 'TRY'      | ''                   | ''               | ''                         | 'Sales return 351 dated 24.03.2021 14:04:08' |
+			| '2' | 'Bag'        | 'ODS'      | 'Store 03' | '20,000'   | 'pcs'                    | 'Sales return 351 dated 24.03.2021 14:04:08' | ''                 | 'TRY'      | ''                   | ''               | ''                         | 'Sales return 351 dated 24.03.2021 14:04:08' |
 		And I close all client application windows
 		
 Scenario: _028932 cancel line in the PO and create GR

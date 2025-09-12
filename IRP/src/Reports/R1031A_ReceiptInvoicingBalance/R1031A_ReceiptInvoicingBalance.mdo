@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2506f924-cea4-41aa-a741-181674fe64fe">
+ <producedTypes>
+  <objectType typeId="8ce1c582-b6eb-4aac-85c2-df87429e59fa" valueTypeId="02fe8c19-22f5-4821-b153-768890862a72"/>
+  <managerType typeId="a78ff575-ee8b-40f3-acda-5d3d3fecc6ef" valueTypeId="47a42eb2-ff0c-4ada-a1d3-b6993c27345e"/>
+ </producedTypes>
+ <name>R1031A_ReceiptInvoicingBalance</name>
+ <synonym>
+  <key>en</key>
+  <value>1AA38248-9BB3-B2E0-092E-E4AD91711CB4</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R1031A_ReceiptInvoicingBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="f3b7c3e6-0047-4234-af24-6aff0878429f">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>en</key>
+   <value>6B486D75-05B2-2ECC-C2DE-E7A7CDF097F2</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

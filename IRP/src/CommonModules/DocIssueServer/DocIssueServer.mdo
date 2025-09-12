@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="09b8b850-6e12-4cdf-a42d-a29cb00e2725">
+ <name>DocIssueServer</name>
+ <synonym>
+  <key>en</key>
+  <value>B428B8FA-FFEF-A60A-A1F9-90F2E98BAF18</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+</mdclass:CommonModule>

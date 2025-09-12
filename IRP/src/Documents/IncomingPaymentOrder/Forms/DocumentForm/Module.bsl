@@ -17,6 +17,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -35,6 +36,16 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
 EndProcedure
 
 &AtClient
@@ -171,21 +182,21 @@ EndProcedure
 
 #EndRegion
 
-#Region PAYER
+#Region LEGAL_NAME
 
 &AtClient
-Procedure PaymentListPayerOnChange(Item)
-	DocIncomingPaymentOrderClient.PaymentListPayerOnChange(Object, ThisObject, Item);
+Procedure PaymentListLegalNameOnChange(Item)
+	DocIncomingPaymentOrderClient.PaymentListLegalNameOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocIncomingPaymentOrderClient.PaymentListPayerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+Procedure PaymentListLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocIncomingPaymentOrderClient.PaymentListLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure PaymentListPayerEditTextChange(Item, Text, StandardProcessing)
-	DocIncomingPaymentOrderClient.PaymentListPayerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+Procedure PaymentListLegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocIncomingPaymentOrderClient.PaymentListLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -302,7 +313,7 @@ Procedure EditCurrencies(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -314,6 +325,20 @@ EndProcedure
 &AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure
 
 #EndRegion

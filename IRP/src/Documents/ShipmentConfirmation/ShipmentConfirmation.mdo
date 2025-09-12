@@ -44,8 +44,23 @@
   <objectField>Document.ShipmentConfirmation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.ShipmentConfirmation.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.ShipmentConfirmation.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.ShipmentConfirmation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.ShipmentConfirmation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.SystemAttributesSets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.SystemAttributesSets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.SystemAttributesSets.Document_ShipmentConfirmation</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.SystemAttributes</characteristicValues>
+  <objectField>InformationRegister.SystemAttributes.Dimension.Object</objectField>
+  <typeField>InformationRegister.SystemAttributes.Dimension.Property</typeField>
+  <valueField>InformationRegister.SystemAttributes.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -66,19 +81,23 @@
  <defaultListForm>Document.ShipmentConfirmation.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Document.ShipmentConfirmation.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
+ <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.R4022B_StockTransferOrdersShipment</registerRecords>
  <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
  <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
+ <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -590,6 +609,48 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="dbac8d30-ccd4-4467-8fac-2dff3e08ddc4">
+   <name>ShipmentPlaningOrder</name>
+   <synonym>
+    <key>en</key>
+    <value>CC9EB891-FE25-8530-0613-3CA39A5DC855</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.ShipmentPlaningOrder</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="08a8c0de-a1b9-40ab-90a7-35c616efcc36">
+   <name>GoodsReceipt</name>
+   <synonym>
+    <key>en</key>
+    <value>7C4ACB93-2F91-5F0D-D732-2F4F44A3F83D</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.GoodsReceipt</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="08fc3b93-960d-40e7-be91-be26fa45a99d">
+   <name>SimpleBatch</name>
+   <synonym>
+    <key>en</key>
+    <value>048EF8B1-86C0-8255-5603-30F59D0427CA</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SimpleBatch</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="cb82e4d6-7eb8-4d89-9ecb-61f7c9fd8643">
   <producedTypes>
@@ -813,6 +874,98 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
+ <tabularSections uuid="afa76736-6347-4730-b229-7f4736fd3df6">
+  <producedTypes>
+   <objectType typeId="b158d785-402f-43d0-abb1-67a5e4e282a8" valueTypeId="a995b070-3221-46d0-9d1c-453c49455792"/>
+   <rowType typeId="0e360a2c-806c-4e70-8dec-d8a9b1f0b2b7" valueTypeId="ccdf5cea-7ada-4beb-b710-2017a8b63704"/>
+  </producedTypes>
+  <name>TrailerList</name>
+  <synonym>
+   <key>en</key>
+   <value>E1663FF4-D663-9D89-9A7A-A272002DB2C0</value>
+  </synonym>
+  <attributes uuid="13de9d50-28a6-49ef-8ff4-cb0f3fb4ecbd">
+   <name>Trailer</name>
+   <synonym>
+    <key>en</key>
+    <value>DAB8EA91-06B7-6A95-5713-3E6C179010C6</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Vehicles</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <createOnInput>Use</createOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="b4fa147b-b043-4f52-95fb-8b827d24990a">
+  <producedTypes>
+   <objectType typeId="c1fbd667-6ca7-491d-8a5d-b4e28ec6120d" valueTypeId="3c9f2469-8def-4b44-aa61-d1c4caeace94"/>
+   <rowType typeId="b478ae8f-8548-4737-89b3-0b0b39994457" valueTypeId="f812b537-a30c-4cfe-9303-a6deb2e210a8"/>
+  </producedTypes>
+  <name>SourceOfOrigins</name>
+  <synonym>
+   <key>en</key>
+   <value>318F9E87-CB00-9B5B-B8B8-823322770928</value>
+  </synonym>
+  <attributes uuid="8e73e951-6f33-4655-8ce5-f5018519931d">
+   <name>Key</name>
+   <synonym>
+    <key>en</key>
+    <value>122DE228-A33D-F006-67B5-5FF56F6D36D9</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="7d5a97d9-c3fc-42d9-95e2-36e7631efc38">
+   <name>SerialLotNumber</name>
+   <synonym>
+    <key>en</key>
+    <value>31617236-1768-C570-0F8B-BFC9770EC11C</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SerialLotNumbers</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="0f5d6f22-3d02-47d5-85b7-f8904a487cfe">
+   <name>SourceOfOrigin</name>
+   <synonym>
+    <key>en</key>
+    <value>B027F06E-4EB8-28A6-6DCA-AE97E9868CCF</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SourceOfOrigins</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="b98a8f61-432d-450d-9acb-0fa34942a4b9">
+   <name>Quantity</name>
+   <synonym>
+    <key>en</key>
+    <value>4986F888-41D0-33CD-DF8D-D961F49FF7B1</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
  <templates uuid="f464c3b4-b4dd-4cc5-94ef-11f99bb1b154">
   <name>ShipmentConfirmationPrint</name>
   <synonym>
@@ -830,7 +983,9 @@
   <commandParameterType>
    <types>DocumentRef.PurchaseReturn</types>
    <types>DocumentRef.SalesOrder</types>
+   <types>DocumentRef.ShipmentPlaningOrder</types>
    <types>DocumentRef.InventoryTransfer</types>
+   <types>DocumentRef.GoodsReceipt</types>
    <types>DocumentRef.SalesInvoice</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>

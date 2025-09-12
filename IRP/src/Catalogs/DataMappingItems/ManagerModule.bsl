@@ -54,6 +54,14 @@ Function GetOrCreateMappingItem(CreationStructure, AddInfo = Undefined) Export
 	Return NewItem.Ref;
 EndFunction
 
+// Get mapping item.
+// 
+// Parameters:
+//  CreationStructure - See GetCreationStructure
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  CatalogRef.DataMappingItems - Get mapping item
 Function GetMappingItem(CreationStructure, AddInfo = Undefined) Export
 
 	Query = New Query();
@@ -66,6 +74,11 @@ Function GetMappingItem(CreationStructure, AddInfo = Undefined) Export
 	|	DataMappingItems.Parent = &Parent
 	|	AND DataMappingItems.SimpleValue = &SimpleValue
 	|	AND DataMappingItems.TypeValue = &TypeValue";
+	
+	Query.Text = Query.Text + CreationStructure.AdditionalConditions.ConditionString;
+	For Each KeyAndValue In CreationStructure.AdditionalConditions.AddParametersStructure Do
+		Query.SetParameter(KeyAndValue.Key, KeyAndValue.Value);
+	EndDo;	
 
 	Query.SetParameter("Parent", CreationStructure.TopLevel);
 	Query.SetParameter("SimpleValue", CreationStructure.Value);
@@ -80,11 +93,40 @@ Function GetMappingItem(CreationStructure, AddInfo = Undefined) Export
 	Return EmptyRef();
 EndFunction
 
+// Get creation structure.
+// 
+// Parameters:
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Structure - Get creation structure:
+// * Value - String 
+// * Type - String 
+// * TopLevel - CatalogRef.DataMappingItems 
+// * Ref - Undefined 
+// * AdditionalConditions - See GetAdditionalConditionsStructure
 Function GetCreationStructure(AddInfo = Undefined) Export
 	CreationStructure = New Structure();
 	CreationStructure.Insert("Value", "");
 	CreationStructure.Insert("Type", "");
 	CreationStructure.Insert("TopLevel", EmptyRef());
 	CreationStructure.Insert("Ref", Undefined);
+	CreationStructure.Insert("AdditionalConditions", GetAdditionalConditionsStructure());
 	Return CreationStructure;
 EndFunction
+
+// Get additional conditions structure.
+// 
+// Returns:
+//  Structure - Get additional conditions structure:
+// * ConditionString - String - 
+// * AddParametersStructure - Structure - 
+Function GetAdditionalConditionsStructure()
+	AdditionalConditionsStructure = New Structure;
+	AdditionalConditionsStructure.Insert("ConditionString", "");
+	AdditionalConditionsStructure.Insert("AddParametersStructure", New Structure);
+	
+	Return AdditionalConditionsStructure;
+EndFunction
+
+	

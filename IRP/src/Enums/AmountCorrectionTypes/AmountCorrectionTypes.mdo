@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1e96e608-c07d-440c-8818-a33597ba74cb">
+ <producedTypes>
+  <refType typeId="b779230b-438c-4aa3-b7fe-1a26f624c047" valueTypeId="aa8fcbb2-c32f-46d3-904c-63ceee5fd309"/>
+  <listType typeId="53b86490-7c38-44de-8126-f8c3a89343a3" valueTypeId="b4d205ad-314d-4846-b953-47b3eb2b87cb"/>
+  <managerType typeId="5beb8b39-e960-4070-b0c3-46ecc7c2fc46" valueTypeId="483737e3-f63e-4ddc-8410-72e0bbfd4435"/>
+ </producedTypes>
+ <name>AmountCorrectionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>1198A110-5EB7-2F7E-E9E0-0F2562FF0D07</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="a30a71e3-07b5-4475-ab17-8941a841da10">
+  <name>Expense</name>
+  <synonym>
+   <key>en</key>
+   <value>89A744F8-0DBF-6D5E-E850-0737200E17AD</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="fb6a93a2-7cb0-4e3a-899b-a43d41d2c736">
+  <name>Revenue</name>
+  <synonym>
+   <key>en</key>
+   <value>F7178174-9E28-A536-68EE-E351CC13C244</value>
+  </synonym>
+ </enumValues>
+</mdclass:Enum>

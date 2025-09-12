@@ -184,10 +184,10 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.SalesOrderClosing.ItemList", AddInfo);
 EndProcedure
 
@@ -505,6 +505,24 @@ Function GetAccessKey(Obj) Export
 	StoreList.GroupBy("Store");
 	AccessKeyMap.Insert("Store", StoreList.UnloadColumn("Store"));
 	Return AccessKeyMap;
+EndFunction
+
+#EndRegion
+
+#Region SystemAttributes
+
+Function GetPredefinedSystemAttributes() Export
+	SystemAttributes = New Array(); // Array of ChartOfCharacteristicTypesRef.SystemAttributes
+	SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.Store);
+	Return SystemAttributes;
+EndFunction
+
+Function GetSystemAttributeValues(Obj, SystemAttribute) Export
+	Values = New Array();
+	If SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.Store Then
+		Values = Obj.ItemList.Unload(, "Store").UnloadColumn("Store");
+	EndIf;
+	Return Values;
 EndFunction
 
 #EndRegion

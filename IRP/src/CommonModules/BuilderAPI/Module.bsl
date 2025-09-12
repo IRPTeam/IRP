@@ -103,7 +103,7 @@ EndFunction
 
 #Region ForServer
 
-// Initialize for server.
+// Deprecated. Initialize for server.
 // 
 // Parameters:
 //  Doc - String, DocumentRefDocumentName - Document name ex. SalesOrder, or Document ref
@@ -122,7 +122,9 @@ Function Initialize(Doc = Undefined, InitialData = Undefined, FillingData = Unde
 		If TypeOf(Doc) = Type("String") Then
 			DocMetadata = Metadata.Documents[Doc];
 			DocObject = Documents[DocMetadata.Name].CreateDocument();
+			
 			DocObject.Fill(FillingData);
+			FillingData = Undefined;
 		Else
 			DocMetadata = Doc.Metadata();
 			If Doc.IsEmpty() Then
@@ -136,37 +138,60 @@ Function Initialize(Doc = Undefined, InitialData = Undefined, FillingData = Unde
 		DocObject = DocInfo.DocObject;
 	EndIf;
 	
+	Wrapper = Init(DocObject, InitialData, FillingData, DefaultTable);
+	Return Wrapper
+EndFunction
+
+// Init.
+// 
+// Parameters:
+//  Object - DocumentObjectDocumentName, CatalogObjectCatalogName - Ref object
+//  InitialData - Structure, Undefined - Initial data
+//  FillingData - Structure, Undefined - Filling data
+//  DefaultTable - String, Undefined - Default table
+// 
+// Returns:
+//  See CreateWrapper
+Function Init(Object, InitialData = Undefined, FillingData = Undefined, DefaultTable = Undefined) Export
+	
+	RefObject = Object;
+	
+	If Not FillingData = Undefined Then
+		RefObject.Fill(FillingData);
+	EndIf;
+	
+	RefMetadata = RefObject.Metadata();
 	Wrapper = CreateWrapper(DefaultTable);
 	
-	For Each Attr In DocMetadata.StandardAttributes Do
-		FillAttrInfo(Wrapper, DocObject, Attr);
+	For Each Attr In RefMetadata.StandardAttributes Do
+		FillAttrInfo(Wrapper, RefObject, Attr);
 	EndDo;
-	For Each Attr In DocMetadata.Attributes Do
-		FillAttrInfo(Wrapper, DocObject, Attr);
+	For Each Attr In RefMetadata.Attributes Do
+		FillAttrInfo(Wrapper, RefObject, Attr);
 	EndDo;
 	For Each Attr In Metadata.CommonAttributes Do
-		If CommonFunctionsServer.isCommonAttributeUseForMetadata(Attr.Name, DocMetadata) Then
-			FillAttrInfo(Wrapper, DocObject, Attr);
+		If CommonFunctionsServer.isCommonAttributeUseForMetadata(Attr.Name, RefMetadata) Then
+			FillAttrInfo(Wrapper, RefObject, Attr);
 		EndIf;
 	EndDo;
-	For Each Table In DocMetadata.TabularSections Do
+	For Each Table In RefMetadata.TabularSections Do
 		Wrapper.Object.Insert(Table.Name, New ValueTable());
 		Wrapper.Tables.Insert(Table.Name, New Structure("_TableName_", Table.Name));
 		For Each Column In Table.StandardAttributes Do // StandardAttributeDescriptions
 			//@skip-check invocation-parameter-type-intersect
-			FillColumnInfo(Wrapper, DocObject, Table, Column);
+			FillColumnInfo(Wrapper, RefObject, Table, Column);
 		EndDo;
 		For Each Column In Table.Attributes Do
-			FillColumnInfo(Wrapper, DocObject, Table, Column);
+			FillColumnInfo(Wrapper, RefObject, Table, Column);
 		EndDo;
 		
-		For Each Row In DocObject[Table.Name] Do // ValueTableRow
+		For Each Row In RefObject[Table.Name] Do // ValueTableRow
 			//@skip-check dynamic-access-method-not-found
 			FillPropertyValues(Wrapper.Object[Table.Name].Add(), Row);
 		EndDo;
 	EndDo;
 	
-	If InitialData <> Undefined Then
+	If Not InitialData = Undefined Then
 		FillInitData(Wrapper, InitialData);
 	EndIf;
 	Return Wrapper
@@ -298,13 +323,14 @@ EndFunction
 //  PostingMode - DocumentPostingMode - Posting mode
 //  Object - DocumentObjectDocumentName - Update current object
 //  CheckFilling - Boolean - 
+// 	Hook - String -
 // 
 // Returns:
 //  Structure - Write:
 // * Context - See CreateWrapper
 // * Ref - DocumentRefDocumentName, CatalogRefCatalogName -
 // * Object - DocumentObjectDocumentName, CatalogObjectCatalogName - If set Object at parameter then returned updated object
-Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object = Undefined, CheckFilling = False) Export
+Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object = Undefined, CheckFilling = False, Hook = Undefined) Export
 	ObjMetadata = Wrapper.Object.Ref.Metadata(); // MetadataObjectCatalog, MetadataObjectDocument 
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
@@ -328,23 +354,40 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 			LoadTable = Wrapper.Object[Table.Name]; // ValueTable
 			DocTable.Load(LoadTable);
 		EndDo;
+		If Wrapper.Object.Property("AdditionalProperties") Then
+			For Each KeyValue In Wrapper.Object.AdditionalProperties Do
+				Doc.AdditionalProperties.Insert(KeyValue.Key, KeyValue.Value);
+			EndDo;
+		EndIf;
 		
 		If Object = Undefined Then
 			
+			If Hook <> Undefined Then
+				//@skip-check server-execution-safe-mode
+				Execute(Hook + "(Doc)");
+			EndIf;
+			
 			If CheckFilling Then
 				If Not Doc.CheckFilling() Then
-					Raise "Error on posting document";
+                	Raise R().ErrorOnPostingDocument;
 				EndIf;
 			EndIf;
 			
-			Doc.Write(
-				?(
-					WriteMode = Undefined, 
-					?(Doc.Posted, DocumentWriteMode.Posting, DocumentWriteMode.Write), 
-					WriteMode
-				),
-				?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode)
-			);
+			_PostingMode = PostingMode;
+			If _PostingMode = Undefined Then
+				_PostingMode = DocumentPostingMode.Regular;
+			EndIf;
+			
+			_WriteMode = WriteMode;
+			If _WriteMode = Undefined Then
+				If Doc.Posted Then
+					_WriteMode = DocumentWriteMode.Posting;
+				Else
+					_WriteMode = DocumentWriteMode.Write;
+				EndIf;
+			EndIf;
+			
+			Doc.Write( _WriteMode, _PostingMode);
 			Wrapper.Object.Ref = Doc.Ref;
 		Else
 			Result.Insert("Object", Doc);
@@ -372,10 +415,16 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 			CtlgTable.Load(LoadTable);
 		EndDo;
 		
+		If Wrapper.Object.Property("AdditionalProperties") Then
+			For Each KeyValue In Wrapper.Object.AdditionalProperties Do
+				Doc.AdditionalProperties.Insert(KeyValue.Key, KeyValue.Value);
+			EndDo;
+		EndIf;
+				
 		If Object = Undefined Then
 			If CheckFilling Then
 				If Not Ctlg.CheckFilling() Then
-					Raise "Error on posting document";
+                                        Raise R().ErrorOnPostingDocument;
 				EndIf;
 			EndIf;
 			Ctlg.Write();
@@ -399,16 +448,24 @@ EndFunction
 //  Wrapper - See CreateWrapper
 //  TableName - String - Table name
 //  ReturnRowKey - Boolean -
+//  RowKey - String -
 // 
 // Returns:
 //  ValueTableRow, String
-Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False) Export
+Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False, RowKey = "") Export
 	If TableName = Undefined Then
 		TableName = Wrapper.DefaultTable;
 	EndIf;
 	WrapperTable = Wrapper.Object[TableName]; // See Document.SalesInvoice.ItemList
 	NewRow = WrapperTable.Add();
-	NewRow.Key = String(New UUID());
+	KeyFieldExists = CommonFunctionsClientServer.ObjectHasProperty(NewRow, "Key");
+	If KeyFieldExists Then
+		If IsBlankString(RowKey) Then
+			NewRow.Key = String(New UUID());
+		Else
+			NewRow.Key = RowKey;
+		EndIf;
+	EndIf;
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
 	ServerParameters.TableName = TableName;
 	Rows = New Array(); // Array Of DocumentTabularSectionRow.SalesInvoice.ItemList
@@ -416,11 +473,19 @@ Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False) Export
 	ServerParameters.Rows = Rows;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
 	ControllerClientServer_V2.AddNewRow(TableName, Parameters);
-	NewRow = WrapperTable.FindRows(New Structure("Key", NewRow.Key))[0];
-	If ReturnRowKey Then
-		Return NewRow.Key;
+	If KeyFieldExists Then
+		NewRow = WrapperTable.FindRows(New Structure("Key", NewRow.Key))[0];
+		If ReturnRowKey Then
+			Return NewRow.Key;
+		Else
+			Return NewRow;
+		EndIf;
 	Else
-		Return NewRow;
+		If ReturnRowKey Then
+			Return "";
+		Else
+			Return WrapperTable[WrapperTable.Count() - 1];
+		EndIf;
 	EndIf;
 EndFunction
 
@@ -462,9 +527,9 @@ Function SetRowTaxRate(Wrapper, Row, Tax, TaxRate, TableName) Export
 		EndIf;
 	EndDo;
 	
-	If TaxInfo = Undefined Then
-		Raise "Tax not allowed for document, check tax settings";
-	EndIf;
+        If TaxInfo = Undefined Then
+                Raise R().TaxNotAllowedForDocument;
+        EndIf;
 	
 	//@skip-check property-return-type
 	Parameters.Rows[0].TaxRates[TaxInfo.Name] = TaxRate;
@@ -546,6 +611,7 @@ EndFunction
 //  Structure - Create wrapper:
 // * Object - Structure:
 // 	** Ref - DocumentRefDocumentName -
+//  ** AdditionalProperties - Structure
 // * Attr - Structure:
 // 	** Key - String - Attribute name
 // 	** Value - Arbitrary - Attribute value
@@ -558,6 +624,7 @@ Function CreateWrapper(DefaultTable = Undefined) Export
 	Wrapper.Insert("Attr"    , New Structure());
 	Wrapper.Insert("Tables" , New Structure());
 	Wrapper.Insert("DefaultTable" , DefaultTable);
+	Wrapper.Object.Insert("AdditionalProperties" , New Structure);
 	Return Wrapper
 EndFunction
 

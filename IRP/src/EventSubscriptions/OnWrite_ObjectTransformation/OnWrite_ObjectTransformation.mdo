@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="aa22058b-29db-42c2-a759-e9ec74fbb755">
+ <name>OnWrite_ObjectTransformation</name>
+ <synonym>
+  <key>en</key>
+  <value>356E7FE1-EA05-2BB8-8433-32B9FB8622E8</value>
+ </synonym>
+ <source>
+  <types>CatalogObject</types>
+  <types>DocumentObject</types>
+ </source>
+ <event>OnWrite</event>
+ <handler>CommonModule.TransformObjects.OnWrite_ObjectTransformation</handler>
+</mdclass:EventSubscription>

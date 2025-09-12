@@ -74,6 +74,16 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	EndIf;
 EndProcedure
 
+&AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
+EndProcedure
+
 #EndRegion
 
 #Region FormHeaderItemsEventHandlers
@@ -300,8 +310,8 @@ Procedure FillByRules(Command)
 	Info = AddDataProcServer.AddDataProcInfo(ExternalDataProc);
 	Info.Insert("Settings", PutSettingsToTempStorage(Object.PriceType));
 	CallMethodAddDataProc(Info);
-	NotifyDescription = New NotifyDescription("OpenFormProcEnd", ThisObject);
-	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription);
+	CallbackDescription = New CallbackDescription("OpenFormProcEnd", ThisObject);
+	AddDataProcClient.OpenFormAddDataProc(Info, CallbackDescription);
 EndProcedure
 
 &AtClient
@@ -700,6 +710,20 @@ EndProcedure
 &AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure
 
 #EndRegion

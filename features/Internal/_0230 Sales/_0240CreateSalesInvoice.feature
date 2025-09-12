@@ -34,6 +34,8 @@ Scenario: _024000 preparation (Sales invoice)
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
+		When Create catalog CashAccounts objects
+		When Create OtherPartners objects		
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
@@ -311,7 +313,7 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
@@ -397,10 +399,10 @@ Scenario: _024004 create SI using form link/unlink
 		And I click "Show row key" button
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-		| '#'  | 'Basis'                                               | 'Next step'  | 'Quantity'  | 'Current step'   |
-		| '1'  | 'Sales order 15 dated 01.02.2021 19:50:45'            | ''           | '10,000'    | 'SI&SC'          |
-		| '2'  | 'Shipment confirmation 17 dated 25.02.2021 16:28:54'  | ''           | '10,000'    | 'SI'             |
-		| '3'  | 'Shipment confirmation 15 dated 25.02.2021 14:13:30'  | ''           | '7,000'     | 'SI'             |
+		| '#' | 'Basis'                                              | 'Next step' | 'Quantity' | 'Current step' |
+		| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000'   | 'SI&SC'        |
+		| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000'   | 'SI&GR'        |
+		| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'    | 'SI&GR'        |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
 		And I click the button named "LinkUnlinkBasisDocuments"
@@ -418,7 +420,7 @@ Scenario: _024004 create SI using form link/unlink
 		And "RowIDInfo" table contains lines
 			| '#'   | 'Basis'                                                | 'Next step'   | 'Quantity'   | 'Current step'    |
 			| '1'   | 'Sales order 15 dated 01.02.2021 19:50:45'             | 'SC'          | '10,000'     | 'SI&SC'           |
-			| '2'   | 'Shipment confirmation 17 dated 25.02.2021 16:28:54'   | ''            | '10,000'     | 'SI'              |
+			| '2'   | 'Shipment confirmation 17 dated 25.02.2021 16:28:54'   | ''            | '10,000'     | 'SI&GR'           |
 			| '3'   | ''                                                     | 'SC'          | '7,000'      | ''                |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
@@ -438,10 +440,10 @@ Scenario: _024004 create SI using form link/unlink
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
-			| '#'   | 'Basis'                                                | 'Next step'   | 'Quantity'   | 'Current step'    |
-			| '1'   | 'Sales order 15 dated 01.02.2021 19:50:45'             | ''            | '10,000'     | 'SI&SC'           |
-			| '2'   | 'Shipment confirmation 17 dated 25.02.2021 16:28:54'   | ''            | '10,000'     | 'SI'              |
-			| '3'   | 'Shipment confirmation 15 dated 25.02.2021 14:13:30'   | ''            | '7,000'      | 'SI'              |
+			| '#' | 'Basis'                                              | 'Next step' | 'Quantity' | 'Current step' |
+			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000'   | 'SI&SC'        |
+			| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000'   | 'SI&GR'        |
+			| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'    | 'SI&GR'        |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key'   | 'Sales order'                                 |
@@ -476,13 +478,13 @@ Scenario: _024004 create SI using form link/unlink
 			| 'box Dress (8 pcs)'    |
 		And I select current line in "List" table
 		And "RowIDInfo" table contains lines
-			| 'Basis'                                                | 'Next step'   | 'Quantity'   | 'Current step'    |
-			| 'Sales order 15 dated 01.02.2021 19:50:45'             | ''            | '80,000'     | 'SI&SC'           |
-			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54'   | ''            | '10,000'     | 'SI'              |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30'   | ''            | '7,000'      | 'SI'              |
+			| 'Basis'                                              | 'Next step' | 'Quantity' | 'Current step' |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '80,000'   | 'SI&SC'        |
+			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000'   | 'SI&GR'        |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'    | 'SI&GR'        |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I click "Save" button
-		And I click "Cancel posting" button		
+		And I click the button named "FormUndoPosting"		
 		And I close all client application windows
 
 
@@ -517,12 +519,14 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+		And Delay 5
 		And "ItemList" table contains lines
 			| '#'   | 'Profit loss center'        | 'Price type'                | 'Item'      | 'Item key'   | 'Dont calculate row'   | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Additional analytic'   | 'Store'      | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'                                | 'Revenue type'   | 'Sales person'       |
 			| '1'   | 'Front office'              | 'en description is empty'   | 'Service'   | 'Internet'   | 'No'                   | ''                     | '1,000'      | 'pcs'    | '14,49'        | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                      | ''           | '27.01.2021'      | 'No'                          | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
 			| '2'   | 'Distribution department'   | 'Basic Price Types'         | 'Dress'     | 'XS/Blue'    | 'No'                   | ''                     | '1,000'      | 'pcs'    | '75,36'        | '520,00'   | '18%'   | '26,00'           | '418,64'       | '494,00'         | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Anna Petrova'       |
 			| '3'   | 'Distribution department'   | 'Basic Price Types'         | 'Shirt'     | '36/Red'     | 'No'                   | ''                     | '10,000'     | 'pcs'    | '507,20'       | '350,00'   | '18%'   | '175,00'          | '2 817,80'     | '3 325,00'       | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
-			| '4'   | 'Distribution department'   | 'en description is empty'   | 'Dress'     | 'XS/Blue'    | 'No'                   | ''                     | '2,000'      | 'pcs'    | '152,54'       | '500,00'   | '18%'   | ''                | '847,46'       | '1 000,00'       | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
+			| '4'   | 'Distribution department'   | 'en description is empty'   | 'Dress'     | 'XS/Blue'    | 'No'                   | ''                     | '2,000'      | 'pcs'    | '152,54'       | '500,00'   | '18%'   | ''                | '847,46'       | '1 000,00'       | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |		
 		Then the number of "ItemList" table lines is "равно" "4"
 		And I close current window
 	* Create SI for all items from SO
@@ -590,15 +594,15 @@ Scenario: _024006 create SI based on 2 SO with SC
 		And I select current line in "List" table
 		And I click "Show row key" button
 		And "RowIDInfo" table became equal
-			| 'Basis'                                                | 'Next step'   | 'Quantity'   | 'Current step'    |
-			| 'Sales order 3 dated 27.01.2021 19:50:45'              | ''            | '5,000'      | 'SI&SC'           |
-			| 'Sales order 3 dated 27.01.2021 19:50:45'              | ''            | '1,000'      | 'SI&WO&WS'        |
-			| 'Sales order 15 dated 01.02.2021 19:50:45'             | ''            | '1,000'      | 'SI&WO&WS'        |
-			| 'Sales order 15 dated 01.02.2021 19:50:45'             | ''            | '10,000'     | 'SI&SC'           |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30'   | ''            | '1,000'      | 'SI'              |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30'   | ''            | '7,000'      | 'SI'              |
-			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14'   | ''            | '3,000'      | 'SI'              |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30'   | ''            | '16,000'     | 'SI'              |
+			| 'Basis'                                              | 'Next step' | 'Quantity' | 'Current step' |
+			| 'Sales order 3 dated 27.01.2021 19:50:45'            | ''          | '5,000'    | 'SI&SC'        |
+			| 'Sales order 3 dated 27.01.2021 19:50:45'            | ''          | '1,000'    | 'SI&WO&WS'     |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '1,000'    | 'SI&WO&WS'     |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000'   | 'SI&SC'        |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '1,000'    | 'SI&GR'        |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'    | 'SI&GR'        |
+			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''          | '3,000'    | 'SI&GR'        |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '16,000'   | 'SI&GR'        |
 		And I close all client application windows
 
 Scenario: _024007 create SI based on SC	without SO
@@ -827,9 +831,9 @@ Scenario: _024029 create SI based on SC with two same items (link items)
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| 'Key'   | 'Basis'                                                   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '*'     | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31'   | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'   | ''            | '10,000'     | '6c91e0f0-6936-4c02-8827-a74810daf826'   | 'SI'             | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'    |
-			| '*'     | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31'   | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'   | ''            | '9,000'      | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010'   | 'SI'             | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'    |
+			| 'Key' | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '10,000'   | '6c91e0f0-6936-4c02-8827-a74810daf826' | 'SI&GR'        | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
+			| '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '9,000'    | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010' | 'SI&GR'        | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
 		And I close all client application windows
 
 Scenario: _024030 create SI based on SC with two same items (add linked document rows)
@@ -890,10 +894,10 @@ Scenario: _024030 create SI based on SC with two same items (add linked document
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table became equal
-			| '#'   | 'Key'   | 'Basis'                                                   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '1'   | '*'     | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31'   | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'   | ''            | '10,000'     | '6c91e0f0-6936-4c02-8827-a74810daf826'   | 'SI'             | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'    |
-			| '2'   | '*'     | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31'   | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'   | ''            | '9,000'      | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010'   | 'SI'             | '5c5bf772-9ed5-470c-889a-79c10b8c1fef'    |
-			| '3'   | '*'     | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31'   | '2d14e136-93bc-4968-b1a9-89e56be271cf'   | ''            | '5,000'      | 'c2843939-e765-4207-81cf-1143a5137357'   | 'SI'             | '2d14e136-93bc-4968-b1a9-89e56be271cf'    |
+			| '#' | 'Key' | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '10,000'   | '6c91e0f0-6936-4c02-8827-a74810daf826' | 'SI&GR'        | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
+			| '2' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '9,000'    | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010' | 'SI&GR'        | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
+			| '3' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '2d14e136-93bc-4968-b1a9-89e56be271cf' | ''          | '5,000'    | 'c2843939-e765-4207-81cf-1143a5137357' | 'SI&GR'        | '2d14e136-93bc-4968-b1a9-89e56be271cf' |
 		And I click the button named "FormPost"
 		And I delete "$$SalesInvoice024030$$" variable
 		And I delete "$$NumberSalesInvoice024030$$" variable
@@ -923,7 +927,37 @@ Scenario: _024030 create SI based on SC with two same items (add linked document
 			| 'And I activate "Inventory origin" field in "ItemList" table'    |
 		And I close all client application windows
 		
-					
+Scenario: _024030 filling in Account field in the SI
+	And I close all client application windows
+	* Open SI and fill main details
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Ferron BP'      |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Basic Partner terms, without VAT'   |
+		And I select current line in "List" table
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select current line in "ItemList" table
+		And I select "scarf" from "Item" drop-down list by string in "ItemList" table
+		And I input "10,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Fill Account for payment
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| "Currency" | "Description"       |
+			| "TRY"      | "Bank account, TRY" |
+		And I select current line in "List" table
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+		And I select from the drop-down list named "Account" by "Bank account, TRY" string
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+	And I close all client application windows					
 
 Scenario: _300505 check connection to Sales invoice report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -936,3 +970,40 @@ Scenario: _300505 check connection to Sales invoice report "Related documents"
 	Then "* Related documents" window is opened
 	And I close all client application windows
 
+Scenario: _024031 create SI with partner Other
+	And I close all client application windows
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling main info
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| "Description"     |
+			| "Other partner 1" |
+		And I click the button named "FormChoose"
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Other partner 1'      |				
+		And I click the button named "FormChoose"
+		And I select from the drop-down list named "Company" by "main company" string
+		And I select from the drop-down list named "Store" by "store 01" string
+	* Add an Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Trousers" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "Trousers/Trousers" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "50,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"	
+		And I delete "$$SalesInvoice01$$" variable
+		And I delete "$$NumberSalesInvoice01$$" variable
+		And I save the window as "$$SalesInvoice01$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice01$$"	
+		And I click the button named "FormPostAndClose"
+	* check creation
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And "List" table contains lines
+			| 'Number'                   |
+			| '$$NumberSalesInvoice01$$' |
+	And I close all client application windows

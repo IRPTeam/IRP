@@ -23,6 +23,7 @@ Background:
 	
 Scenario:  _052001 preparation (Bank receipt)
 	When set True value to the constant
+	When set True value to the constant Use Salary
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -131,14 +132,14 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
-			| 'Partner'     | 'Partner term'               | 'Total amount'   | 'Payer'               | 'Basis document'           | 'Planning transaction basis'    |
-			| 'Ferron BP'   | 'Basic Partner terms, TRY'   | '4 250,00'       | 'Company Ferron BP'   | '$$SalesInvoice024001$$'   | ''                              |
-		And in the table "PaymentList" I click "Edit currencies" button
+			| 'Partner'     | 'Partner term'               | 'Total amount'   | 'Legal name'               | 'Basis document'           | 'Planning transaction basis'    |
+			| 'Ferron BP'   | 'Basic Partner terms, TRY'   | '3 687,25'       | 'Company Ferron BP'   | '$$SalesInvoice024001$$'   | ''                              |
+		And I click the button named "EditCurrencies"
 		And "CurrenciesTable" table became equal
-			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'    |
-			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '727,60'    |
-			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '4 250'     |
-			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '4 250'     |
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount'   |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,171200' | '631,26'   |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'        | '3 687,25' |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'        | '3 687,25' |
 		And I close current window		
 	* Check account selection and saving 
 		And I click Select button of "Account" field
@@ -150,16 +151,16 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Account" became equal to "Bank account, USD"
 		And "PaymentList" table contains lines
-			| 'Partner'     | 'Partner term'               | 'Total amount'   | 'Payer'               | 'Basis document'           | 'Planning transaction basis'    |
-			| 'Ferron BP'   | 'Basic Partner terms, TRY'   | '4 250,00'       | 'Company Ferron BP'   | '$$SalesInvoice024001$$'   | ''                              |
-		And in the table "PaymentList" I click "Edit currencies" button
+			| 'Partner'     | 'Partner term'               | 'Total amount'   | 'Legal name'               | 'Basis document'           | 'Planning transaction basis'    |
+			| 'Ferron BP'   | 'Basic Partner terms, TRY'   | '3 687,25'       | 'Company Ferron BP'   | '$$SalesInvoice024001$$'   | ''                              |
+		And I click the button named "EditCurrencies"
 		And "CurrenciesTable" table became equal
-			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'       | 'Amount'       |
-			| 'Local currency'       | 'Legal'          | 'TRY'   | 'USD'    | '1'              | '5,627500'   | '23 916,88'    |
-			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'USD'    | '1'              | '1'          | '4 250'        |
-			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'USD'    | '1'              | '5,627500'   | '23 916,88'    |
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount'    |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'USD'  | '1'            | '5,627500' | '20 750,00' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'USD'  | '1'            | '1'        | '3 687,25'  |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'USD'  | '1'            | '5,627500' | '20 750,00' |
 		And I close current window	
-		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "4 250,00"
+		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "3 687,25"
 	* Change of Partner term and basis document
 		And I select current line in "PaymentList" table
 		And I activate "Partner term" field in "PaymentList" table
@@ -184,7 +185,7 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 		And I input "20 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Payer'               | 'Basis document'            |
+			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Legal name'               | 'Basis document'            |
 			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '20 000,00'      | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
 	And I close all client application windows
 
@@ -196,10 +197,10 @@ Scenario: _052002 check that the amount does not change when select basis docume
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I select from "Account" drop-down list by "Bank account, TRY" string
 		And I select from "Transaction type" drop-down list by "Payment from customer" string
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
 		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
-		And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
+		And I select "Company Ferron BP" from "Legal name" drop-down list by string in "PaymentList" table
 		And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "5 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -212,13 +213,13 @@ Scenario: _052002 check that the amount does not change when select basis docume
 			| 'Main Company'   | '11 099,93'   | 'Company Ferron BP'   | 'Ferron BP'    |
 		And I click "Select" button
 		And "PaymentList" table contains lines
-			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Payer'               | 'Basis document'            |
+			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Legal name'               | 'Basis document'            |
 			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '5 000,00'       | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
 	* Add one more line with the same invoice and check amount
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
 		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
-		And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
+		And I select "Company Ferron BP" from "Legal name" drop-down list by string in "PaymentList" table
 		And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
@@ -228,7 +229,7 @@ Scenario: _052002 check that the amount does not change when select basis docume
 			| 'Main Company'   | '6 099,93'   | 'Company Ferron BP'   | 'Ferron BP'    |
 		And I click "Select" button
 		And "PaymentList" table contains lines
-			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Payer'               | 'Basis document'            |
+			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Legal name'               | 'Basis document'            |
 			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '5 000,00'       | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
 			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '6 099,93'       | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
 	And I close all client application windows
@@ -255,7 +256,7 @@ Scenario: _052001 create Bank receipt (independently)
 				| Description           |
 				| Bank account, TRY     |
 			And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -263,7 +264,7 @@ Scenario: _052001 create Bank receipt (independently)
 				| Description     |
 				| Ferron BP       |
 			And I select current line in "List" table
-			And I click choice button of "Payer" attribute in "PaymentList" table
+			And I click choice button of "Legal name" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| Description           |
 				| Company Ferron BP     |
@@ -282,12 +283,12 @@ Scenario: _052001 create Bank receipt (independently)
 			# temporarily
 			And I go to line in "List" table
 				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
-				| '4 250,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
+				| '3 687,25'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I click "Select" button
 			And I click choice button of "Order" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
-				| '4 250,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
+				| '3 687,25'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
@@ -334,7 +335,7 @@ Scenario: _052001 create Bank receipt (independently)
 				| Description           |
 				| Bank account, USD     |
 			And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -342,7 +343,7 @@ Scenario: _052001 create Bank receipt (independently)
 				| Description     |
 				| Ferron BP       |
 			And I select current line in "List" table
-			And I click choice button of "Payer" attribute in "PaymentList" table
+			And I click choice button of "Legal name" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| Description           |
 				| Company Ferron BP     |
@@ -362,12 +363,12 @@ Scenario: _052001 create Bank receipt (independently)
 			# temporarily
 			And I go to line in "List" table
 				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
-				| '4 150,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
+				| '3 587,25'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I click "Select" button
 			And I click choice button of "Order" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
-				| '4 150,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
+				| '3 587,25'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
@@ -406,7 +407,7 @@ Scenario: _052001 create Bank receipt (independently)
 				| Description           |
 				| Bank account, EUR     |
 			And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -414,7 +415,7 @@ Scenario: _052001 create Bank receipt (independently)
 				| Description     |
 				| Ferron BP       |
 			And I select current line in "List" table
-			And I click choice button of "Payer" attribute in "PaymentList" table
+			And I click choice button of "Legal name" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| Description           |
 				| Company Ferron BP     |
@@ -500,13 +501,13 @@ Scenario: _052009 create Bank receipt based on Purchase return
 		And I select current line in "List" table
 		And I click "Bank receipt" button
 	* Check creation
-		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Company: Main Company   Currency: TRY   Transaction type: Return from vendor   "
+		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Company: Main Company   Currency: TRY   Transaction type: Return from vendor   Posting status: New   "
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "TransactionType" became equal to "Return from vendor"
 		Then the form attribute named "Currency" became equal to "TRY"
 		Then the form attribute named "CurrencyExchange" became equal to ""
 		And "PaymentList" table became equal
-			| '#'   | 'Partner'     | 'Payer'               | 'Partner term'         | 'Legal name contract'   | 'Basis document'                                  | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
+			| '#'   | 'Partner'     | 'Legal name'               | 'Partner term'         | 'Legal name contract'   | 'Basis document'                                  | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
 			| '1'   | 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | ''                      | 'Purchase return 351 dated 24.03.2021 16:08:15'   | '5 710,00'       | ''                          | ''                              |
 		
 		Then the form attribute named "Branch" became equal to ""
@@ -534,21 +535,21 @@ Scenario: _052013 check the display of details on the form Bank receipt with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
 		And form attribute named "TransitAccount" is unavailable
 		And form attribute named "CurrencyExchange" is unavailable
 	* And I check the display of the tabular part
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
 			| Kalipso        |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| '#'   | Partner   | Total amount   | Payer             | Basis document   | Planning transaction basis    |
+			| '#'   | Partner   | Total amount   | Legal name        | Basis document   | Planning transaction basis    |
 			| '1'   | Kalipso   | ''             | Company Kalipso   | ''               | ''                            |
 
 
@@ -560,13 +561,13 @@ Scenario: _052014 check the display of details on the form Bank receipt with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Currency exchange"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
 		And form attribute named "TransitAccount" is available
 	* And I check the display of the tabular part
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "2 000,00" text in "Amount exchange" field of "PaymentList" table
@@ -584,16 +585,16 @@ Scenario: _052015 check the display of details on the form Bank receipt with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Cash transfer order"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
 		And form attribute named "TransitAccount" is unavailable
 	* And I check the display of the tabular part
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		If "PaymentList" table does not contain column named "Payer" Then
+		If "PaymentList" table does not contain column named "LegalName" Then
 		If "PaymentList" table does not contain column named "Partner" Then
 		And "PaymentList" table contains lines
 			| '#'   | 'Total amount'   | 'Planning transaction basis'    |
@@ -882,7 +883,7 @@ Scenario: _052019 try post Bank receipt with empty amount
 			| Description           |
 			| Bank account, TRY     |
 		And I select current line in "List" table
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	* Filling in partners in a tabular part
 		And I activate "Partner" field in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -890,7 +891,7 @@ Scenario: _052019 try post Bank receipt with empty amount
 			| Description |
 			| Kalipso     |
 		And I select current line in "List" table
-		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description     |
 			| Company Kalipso |
@@ -911,51 +912,63 @@ Scenario: _052020 check selection form (Payment by documents) in BR
 		And I select from "Transaction type" drop-down list by "Payment from customer" string
 	* Check filter by Branch
 		* Without branch
-			And in the table "PaymentList" I click "Payment by documents" button
+			And I click "Payment by documents" button
 			And "Documents" table became equal
 				| 'Document'                                   | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                                   | 'Project' | 'Amount'    | 'Payment' |
 				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 6 dated 04.09.2023 13:03:16' | ''        | '2 600,00'  | ''        |
 				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 7 dated 04.09.2023 13:03:26' | ''        | '2 600,00'  | ''        |
-				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '4 150,00'  | ''        |
+				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '3 024,50'  | ''        |
 				| '$$SalesInvoice024008$$'                     | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$'                    | ''        | '11 099,93' | ''        |
 			And I close current window
 		* With branch
 			And I move to "Other" tab
 			And I select from the drop-down list named "Branch" by "Distribution department" string
 			And I move to "Payments" tab
-			And in the table "PaymentList" I click "Payment by documents" button
+			And I click "Payment by documents" button
 			And "Documents" table became equal
-				| 'Document'                                   | 'Partner'  | 'Partner term'             | 'Legal name'       | 'Legal name contract' | 'Order' | 'Project' | 'Amount'    | 'Payment' |
-				| 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Company Lomaniti' | ''                    | ''      | ''        | '12 400,00' | ''        |
-				| 'Sales invoice 15 dated 12.04.2021 12:00:01' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Company Lomaniti' | ''                    | ''      | ''        | '20 000,00' | ''        |
+				| "Check" | "Document"                                   | "Partner"         | "Partner term"                  | "Legal name"       | "Order" | "Amount"    | "Payment" | "Legal name contract" | "Project" |
+				| "No"    | ""                                           | "Partner Kalipso" | "Partner Kalipso Customer"      | "Company Kalipso"  | ""      | "3 000,00"  | ""        | ""                    | ""        |
+				| "No"    | ""                                           | "DFC"             | "DFC Customer by Partner terms" | "DFC"              | ""      | "2 944,00"  | ""        | ""                    | ""        |
+				| "No"    | "Sales invoice 14 dated 16.02.2021 12:14:54" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "12 400,00" | ""        | ""                    | ""        |
+				| "No"    | "Sales invoice 15 dated 12.04.2021 12:00:01" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "20 000,00" | ""        | ""                    | ""        |
+				| "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29"| "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "19 268,56" | ""        | ""                    | ""        |								
 	* Allocation check	(one partner)
 		And I input "10 000,00" text in the field named "Amount"
 		And I click the button named "Calculate"
 		And "Documents" table became equal
-			| 'Document'                                   | 'Partner'  | 'Partner term'             | 'Legal name'       | 'Legal name contract' | 'Order' | 'Project' | 'Amount'    | 'Payment'   |
-			| 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Company Lomaniti' | ''                    | ''      | ''        | '12 400,00' | '10 000,00' |
-			| 'Sales invoice 15 dated 12.04.2021 12:00:01' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Company Lomaniti' | ''                    | ''      | ''        | '20 000,00' | ''          |
+			| "Check" | "Document"                                   | "Partner"         | "Partner term"                  | "Legal name"       | "Order" | "Amount"    | "Payment"  | "Legal name contract" | "Project" |
+			| "No"    | ""                                           | "Partner Kalipso" | "Partner Kalipso Customer"      | "Company Kalipso"  | ""      | "3 000,00"  | "3 000,00" | ""                    | ""        |
+			| "No"    | ""                                           | "DFC"             | "DFC Customer by Partner terms" | "DFC"              | ""      | "2 944,00"  | "2 944,00" | ""                    | ""        |
+			| "No"    | "Sales invoice 14 dated 16.02.2021 12:14:54" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "12 400,00" | "4 056,00" | ""                    | ""        |
+			| "No"    | "Sales invoice 15 dated 12.04.2021 12:00:01" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "20 000,00" | ""         | ""                    | ""        |	
+			| "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29"| "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "19 268,56" | ""         | ""                    | ""        |	
 		* Amount more then invoice sum
-			And I input "35 000,00" text in the field named "Amount"
+			And I input "75 000,00" text in the field named "Amount"
 			And I click the button named "Calculate"
 			And "Documents" table became equal
-				| 'Document'                                   | 'Partner'  | 'Partner term'             | 'Legal name'       | 'Legal name contract' | 'Order' | 'Project' | 'Amount'    | 'Payment'   |
-				| 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Company Lomaniti' | ''                    | ''      | ''        | '12 400,00' | '12 400,00' |
-				| 'Sales invoice 15 dated 12.04.2021 12:00:01' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Company Lomaniti' | ''                    | ''      | ''        | '20 000,00' | '20 000,00' |
+				| "Check" | "Document"                                    | "Partner"         | "Partner term"                  | "Legal name"       | "Order" | "Amount"    | "Payment"   | "Legal name contract" | "Project" |
+				| "No"    | ""                                            | "Partner Kalipso" | "Partner Kalipso Customer"      | "Company Kalipso"  | ""      | "3 000,00"  | "3 000,00"  | ""                    | ""        |
+				| "No"    | ""                                            | "DFC"             | "DFC Customer by Partner terms" | "DFC"              | ""      | "2 944,00"  | "2 944,00"  | ""                    | ""        |
+				| "No"    | "Sales invoice 14 dated 16.02.2021 12:14:54"  | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "12 400,00" | "12 400,00" | ""                    | ""        |
+				| "No"    | "Sales invoice 15 dated 12.04.2021 12:00:01"  | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "20 000,00" | "20 000,00" | ""                    | ""        |
+				| "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "19 268,56" | "19 268,56" | ""                    | ""        |
 			And I click "Ok" button
 			And I finish line editing in "PaymentList" table
 			And "PaymentList" table became equal
-				| '#' | 'Partner'  | 'Payer'            | 'Partner term'             | 'Legal name contract' | 'Basis document'                             | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
-				| '1' | 'Lomaniti' | 'Company Lomaniti' | 'Basic Partner terms, TRY' | ''                    | 'Sales invoice 14 dated 16.02.2021 12:14:54' | ''        | ''      | '12 400,00'    | ''                        | ''                 | ''                           |
-				| '2' | 'Lomaniti' | 'Company Lomaniti' | 'Basic Partner terms, TRY' | ''                    | 'Sales invoice 15 dated 12.04.2021 12:00:01' | ''        | ''      | '20 000,00'    | ''                        | ''                 | ''                           |
-			And in the table "PaymentList" I click "Payment by documents" button
+				| '#' | 'Partner'         | 'Legal name'            | 'Partner term'                  | 'Legal name contract' | 'Basis document'                              | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+				| '1' | 'Partner Kalipso' | 'Company Kalipso'  | 'Partner Kalipso Customer'      | ''                    | ''                                            | ''        | ''      | '3 000,00'     | ''                        | ''                 | ''                           |
+				| '2' | 'DFC'             | 'DFC'              | 'DFC Customer by Partner terms' | ''                    | ''                                            | ''        | ''      | '2 944,00'     | ''                        | ''                 | ''                           |
+				| '3' | 'Lomaniti'        | 'Company Lomaniti' | 'Basic Partner terms, TRY'      | ''                    | 'Sales invoice 14 dated 16.02.2021 12:14:54'  | ''        | ''      | '12 400,00'    | ''                        | ''                 | ''                           |
+				| '4' | 'Lomaniti'        | 'Company Lomaniti' | 'Basic Partner terms, TRY'      | ''                    | 'Sales invoice 15 dated 12.04.2021 12:00:01'  | ''        | ''      | '20 000,00'    | ''                        | ''                 | ''                           |
+				| '5' | 'Lomaniti'        | 'Company Lomaniti' | 'Basic Partner terms, TRY'      | ''                    | 'Sales invoice 235 dated 08.08.2024 11:04:29' | ''        | ''      | '19 268,56'    | ''                        | ''                 | ''                           |			
+			And I click "Payment by documents" button
 			Then the number of "Documents" table lines is "равно" "0"
 	* Allocation check	(two partners)
 			And I close current window	
 			And I move to "Other" tab
 			And I input "" text in the field named "Branch"		
 			And I move to "Payments" tab
-			And in the table "PaymentList" I click "Payment by documents" button
+			And I click "Payment by documents" button
 		* Select lines and check allocation	
 			And I go to line in "Documents" table
 				| 'Amount'   | 'Document'                                   | 'Legal name'    | 'Order'                                   | 'Partner' | 'Partner term'             |
@@ -967,25 +980,28 @@ Scenario: _052020 check selection form (Payment by documents) in BR
 				| 'Document'                                   | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                                   | 'Project' | 'Amount'    | 'Payment'  |
 				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 6 dated 04.09.2023 13:03:16' | ''        | '2 600,00'  | '2 600,00' |
 				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 7 dated 04.09.2023 13:03:26' | ''        | '2 600,00'  | '1 400,00' |
-				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '4 150,00'  | ''         |
+				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '3 024,50'  | ''         |
 				| '$$SalesInvoice024008$$'                     | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$'                    | ''        | '11 099,93' | ''         |
 		* Check fifo allocation
-			Then "Payment by documents" window is opened
+			Then "Payment distribution" window is opened
 			And I select from the drop-down list named "FilterPartner" by "Ferron BP" string
 			And I input "5 000,00" text in the field named "Amount"
 			And I click the button named "Calculate"
 			Then the form attribute named "FilterPartner" became equal to "Ferron BP"
 			And "Documents" table became equal
 				| 'Document'               | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                | 'Project' | 'Amount'    | 'Payment'  |
-				| '$$SalesInvoice024001$$' | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$' | ''        | '4 150,00'  | '4 150,00' |
-				| '$$SalesInvoice024008$$' | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$' | ''        | '11 099,93' | '850,00'   |
+				| '$$SalesInvoice024001$$' | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$' | ''        | '3 024,50'  | '3 024,50' |
+				| '$$SalesInvoice024008$$' | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$' | ''        | '11 099,93' | '1 975,50' |
 			And I click "Ok" button
 			And "PaymentList" table became equal
-				| '#' | 'Partner'   | 'Payer'             | 'Partner term'                     | 'Legal name contract' | 'Basis document'                             | 'Project' | 'Order'                | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
-				| '1' | 'Lomaniti'  | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 14 dated 16.02.2021 12:14:54' | ''        | ''                     | '12 400,00'    | ''                        | ''                 | ''                           |
-				| '2' | 'Lomaniti'  | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 15 dated 12.04.2021 12:00:01' | ''        | ''                     | '20 000,00'    | ''                        | ''                 | ''                           |
-				| '3' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY'         | ''                    | '$$SalesInvoice024001$$'                     | ''        | '$$SalesOrder023001$$' | '4 150,00'     | ''                        | ''                 | ''                           |
-				| '4' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | ''                    | '$$SalesInvoice024008$$'                     | ''        | '$$SalesOrder023005$$' | '850,00'       | ''                        | ''                 | ''                           |
+				| '#' | 'Partner'         | 'Legal name'             | 'Partner term'                     | 'Legal name contract' | 'Basis document'                              | 'Project' | 'Order'                | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+				| "1" | "Partner Kalipso" | "Company Kalipso"   | "Partner Kalipso Customer"         | ""                    | ""                                            | ""        | ""                     | "3 000,00"     | ""                        | ""                 | ""                           |
+				| "2" | "DFC"             | "DFC"               | "DFC Customer by Partner terms"    | ""                    | ""                                            | ""        | ""                     | "2 944,00"     | ""                        | ""                 | ""                           |
+				| '3' | 'Lomaniti'        | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 14 dated 16.02.2021 12:14:54'  | ''        | ''                     | '12 400,00'    | ''                        | ''                 | ''                           |
+				| '4' | 'Lomaniti'        | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 15 dated 12.04.2021 12:00:01'  | ''        | ''                     | '20 000,00'    | ''                        | ''                 | ''                           |
+				| '5' | 'Lomaniti'        | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 235 dated 08.08.2024 11:04:29' | ''        | ''                     | '19 268,56'    | ''                        | ''                 | ''                           |
+				| '6' | 'Ferron BP'       | 'Company Ferron BP' | 'Basic Partner terms, TRY'         | ''                    | '$$SalesInvoice024001$$'                      | ''        | '$$SalesOrder023001$$' | '3 024,50'     | ''                        | ''                 | ''                           |
+				| '7' | 'Ferron BP'       | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | ''                    | '$$SalesInvoice024008$$'                      | ''        | '$$SalesOrder023005$$' | '1 975,50'     | ''                        | ''                 | ''                           |
 		And I close all client application windows				
 				
 	
@@ -1002,7 +1018,7 @@ Scenario: _052021 check amount when create BR based on SI (partner term - by par
 		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 	* Check amount (documents amount )
 		And "PaymentList" table became equal
-			| '#' | 'Partner'         | 'Payer'           | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '#' | 'Partner'         | 'Legal name'           | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
 			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '3 000,00'     | ''                        | ''                 | ''                           |
 	And I close all client application windows
 	* Select one SI				
@@ -1014,8 +1030,8 @@ Scenario: _052021 check amount when create BR based on SI (partner term - by par
 		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 	* Check amount (documents amount )
 		And "PaymentList" table became equal
-			| '#' | 'Partner'         | 'Payer'           | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
-			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '1 000,00'     | ''                        | ''                 | ''                           |
+			| '#' | 'Partner'         | 'Legal name'           | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '3 000,00'     | ''                        | ''                 | ''                           |
 	And I close all client application windows				
 
 Scenario: _052022 create Bank receipt with transaction type Other income
@@ -1028,7 +1044,7 @@ Scenario: _052022 create Bank receipt with transaction type Other income
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I select from the drop-down list named "Account" by "Bank account, TRY" string
 	* Filling payment list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -1068,14 +1084,16 @@ Scenario: _052023 create Bank receipt with transaction type Other partner
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I select from the drop-down list named "Account" by "Bank account, TRY" string
 	* Filling payment list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
-		And I input "Tax authority" text in "Partner" field of "PaymentList" table
+		And I select "Tax authority" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I activate "Financial movement type" field in "PaymentList" table
 		And I input "Movement type 1" text in "Financial movement type" field of "PaymentList" table
 		And I activate "Cash flow center" field in "PaymentList" table
 		And I select "Distribution department" from "Cash flow center" drop-down list by string in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I select "Income tax" from "Partner term" drop-down list by string in "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 	* Check
@@ -1083,8 +1101,8 @@ Scenario: _052023 create Bank receipt with transaction type Other partner
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal
-			| '#' | 'Partner'       | 'Payer'         | 'Partner term' | 'Legal name contract' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        |
-			| '1' | 'Tax authority' | 'Tax authority' | 'Tax'          | ''                    | '100,00'       | 'Movement type 1'         | 'Distribution department' |		
+			| '#' | 'Partner'       | 'Legal name'         | 'Partner term' | 'Legal name contract' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        |
+			| '1' | 'Tax authority' | 'Tax authority' | 'Income tax'   | ''                    | '100,00'       | 'Movement type 1'         | 'Distribution department' |
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
 		Then the form attribute named "TransactionType" became equal to "Other partner"
 		And I save the value of "Number" field as "NumberBankReceipt052023"
@@ -1093,3 +1111,208 @@ Scenario: _052023 create Bank receipt with transaction type Other partner
 			And "List" table contains lines
 				| 'Number'                        |
 				| '$NumberBankReceipt052023$'     |
+
+// Scenario: _052024 create Bank receipt based on SO (Partner term - TRY, document USD)	
+// 	And I close all client application windows
+// 	* Select SO
+// 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+// 		And I go to line in "List" table
+// 			| 'Number' |
+// 			| '235'    |
+// 	* Create BR
+// 		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+// 		And I click Select button of "Account" field
+// 		And I go to line in "List" table
+// 			| "Currency" | "Description"       |
+// 			| "TRY"      | "Bank account, TRY" |
+// 		And I select current line in "List" table
+// 	* Check filling
+// 		Then the form attribute named "Account" became equal to "Cash desk №4"
+// 		Then the form attribute named "Company" became equal to "Main Company"
+// 		Then the form attribute named "Currency" became equal to "TRY"
+// 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		
+Scenario: _052026 create Bank receipt based on SI (Partner term - USD, document TRY)	
+	And I close all client application windows
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '236'    |
+	* Create first BR
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| "Description"       |
+			| "Bank account, USD" |
+		And I select current line in "List" table
+	* Check filling
+		Then the form attribute named "Account" became equal to "Bank account, USD"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "USD"
+		And I click "Save" button		
+		And "PaymentList" table became equal
+			| "#" | "Partner"   | "Legal name"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "171,20"       | ""                        | ""                 | ""                           |
+	* Reselect SI
+		* From form select
+			And I activate "Basis document" field in "PaymentList" table
+			And I select current line in "PaymentList" table
+			And I click choice button of "Basis document" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| "Amount" | "Company"      | "Currency" | "Document"                                    | "Legal name"        | "Partner"   | "Partner term" |
+				| "171,20" | "Main Company" | "USD"      | "Sales invoice 236 dated 08.08.2024 11:20:30" | "Company Ferron BP" | "Ferron BP" | "Ferron, USD"  |
+			And I select current line in "List" table
+			And I click "Save" button		
+			And "PaymentList" table became equal
+				| "#" | "Partner"   | "Legal name"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+				| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "171,20"       | ""                        | ""                 | ""                           |
+		* From payment distribution
+			And I select current line in "PaymentList" table
+			And I delete a line in "PaymentList" table
+			And I click "Payment by documents" button
+			And I go to line in "Documents" table
+				| "Amount" | "Document"                                    |
+				| "171,20" | "Sales invoice 236 dated 08.08.2024 11:20:30" |
+			And I set "Check" checkbox in "Documents" table
+			And I finish line editing in "Documents" table
+			And I click "Ok" button
+			And "PaymentList" table became equal
+				| "#" | "Partner"   | "Legal name"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+				| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "171,20"       | ""                        | ""                 | ""                           |
+		* Change amount and Post BR
+			And I select current line in "PaymentList" table
+			And I input "150,00" text in "Total amount" field of "PaymentList" table
+			And I finish line editing in "PaymentList" table
+			And I click "Post" button
+		* Create second BR
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+			And I go to line in "List" table
+				| 'Number' |
+				| '236'    |			
+			And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+			And I click Select button of "Account" field
+			And I go to line in "List" table
+				| "Description"       |
+				| "Bank account, USD" |
+			And I select current line in "List" table
+		* Check amount
+			And "PaymentList" table became equal
+				| "#" | "Partner"   | "Legal name"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+				| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "21,20"        | ""                        | ""                 | ""                           |
+			And I click "Post" button			
+	And I close all client application windows
+
+
+Scenario: _050027 create Bank receipt based on SI (Partner term - TRY, document USD)
+	And I close all client application windows
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '235'    |
+	* Create CR
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| "Currency" | "Description"       |
+			| "TRY"      | "Bank account, TRY" |
+		And I select current line in "List" table
+	* Check filling	
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I click "Save" button	
+		And "PaymentList" table became equal
+			| "#" | "Partner"  | "Legal name"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
+	* Reselect SI
+		And I select current line in "PaymentList" table
+		And I delete a line in "PaymentList" table
+		And I click "Payment by documents" button
+		And I go to line in "Documents" table
+			| "Amount"    | "Check" | "Document"                                    | "Legal name"       | "Partner"  | "Partner term"             |
+			| "19 268,56" | "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29" | "Company Lomaniti" | "Lomaniti" | "Basic Partner terms, TRY" |
+		And I set "Check" checkbox in "Documents" table
+		And I click "Ok" button
+		And I click "Save" button
+		And "PaymentList" table became equal
+			| "#" | "Partner"  | "Legal name"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
+	And I close all client application windows			
+
+Scenario: _052028 checking display Branch column depending on the transactin type in the BR
+		And I close all client application windows
+		* Open BR
+			Given I open hyperlink "e1cib/list/Document.BankReceipt"
+			And I click the button named "FormCreate"	
+		* Payment from customer
+			And I select "Payment from customer" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |				
+		* Return from vendor
+			And I select "Return from vendor" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Retail customer advance
+			And I select "Retail customer advance" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Employee cash advance
+			And I select "Employee cash advance" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Other partner
+			And I select "Other partner" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Currency exchange
+			And I select "Currency exchange" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Cash transfer order
+			And I select "Cash transfer order" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Payment from customer by POS
+			And I select "Payment from customer by POS" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |
+		* Receipt by cheque
+			And I select "Receipt by cheque" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Other income
+			And I select "Other income" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Salary return
+			And I select "Salary return" exact value from "Transaction type" drop-down list			
+			And I activate field named "PaymentListBranch" in "PaymentList" table	
+
+Scenario: _052029 Prevent negative refund transactions in Bank receipt
+	And I close all client application windows
+	* Open BR
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+	* Filling main details
+		And I select "Return from vendor" exact value from "Transaction type" drop-down list
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Account" by "Bank account, TRY" string
+	* Filling payment list
+		And I click the button named "PaymentListAdd"
+		And I select current line in "PaymentList" table
+		And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
+		And I activate "Partner term" field in "PaymentList" table
+		And I input "Vendor Ferron, TRY" text in "Partner term" field of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "1 000 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+	* Check
+		And I click "Post" button
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then there are lines in TestClient message log
+			|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [1 000 000]'|
+		And I close all client application windows

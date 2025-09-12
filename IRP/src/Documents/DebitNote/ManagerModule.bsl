@@ -14,6 +14,87 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	
+	AccMetadata = Metadata.AccumulationRegisters.R5011B_CustomersAging;
+	PaymentTerms = New ValueTable();
+	PaymentTerms.Columns.Add("DocRef", AccMetadata.StandardAttributes.Recorder.Type);
+	PaymentTerms.Columns.Add("PaymentDate", AccMetadata.StandardAttributes.Period.Type);
+	PaymentTerms.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
+	For Each Row In Ref.Transactions Do
+		If Row.Agreement.Type <> Enums.AgreementTypes.Customer Then
+			Continue;
+		EndIf;
+		
+		If Not ValueIsFilled(Row.BasisDocument) Then
+			Continue;
+		EndIf;
+		
+		Query = New Query();
+		
+		DocMetadata = Row.BasisDocument.Metadata();
+		
+		If DocMetadata.TabularSections.Find("PaymentTerms") <> Undefined Then
+			Query.Text = 
+			"SELECT
+			|	PaymentTerms.Ref AS DocRef,
+			|	MAX(PaymentTerms.Date) AS PaymentDate
+			|FROM
+			|	Document.%1.PaymentTerms AS PaymentTerms
+			|WHERE
+			|	PaymentTerms.Ref = &DocRef
+			|GROUP BY
+			|	PaymentTerms.Ref";
+			Query.Text = StrTemplate(Query.Text, DocMetadata.Name);
+		ElsIf DocMetadata.TabularSections.Find("CustomersPaymentTerms") <> Undefined Then
+			Query.Text = 
+			"SELECT
+			|	PaymentTerms.Ref AS DocRef,
+			|	MAX(PaymentTerms.Date) AS PaymentDate
+			|FROM
+			|	Document.OpeningEntry.CustomersPaymentTerms AS PaymentTerms
+			|		LEFT JOIN Document.OpeningEntry.AccountReceivableByDocuments AS AR
+			|		ON PaymentTerms.Key = AR.Key
+			|		AND PaymentTerms.Ref = AR.Ref
+			|		AND AR.Ref = &DocRef
+			|		AND AR.Partner = &Partner
+			|		AND AR.Agreement = &Agreement
+			|WHERE
+			|	PaymentTerms.Ref = &DocRef
+			|	AND AR.Partner = &Partner
+			|	AND AR.Agreement = &Agreement
+			|GROUP BY
+			|	PaymentTerms.Ref";
+		Else
+			Continue;
+		EndIf;
+		
+		Query.SetParameter("DocRef", Row.BasisDocument);
+		Query.SetParameter("Partner", Row.Partner);
+		Query.SetParameter("Agreement", Row.Agreement);
+		
+		QueryResult = Query.Execute();
+		QuerySelection = QueryResult.Select();
+		
+		While QuerySelection.Next() Do
+			NewRow = PaymentTerms.Add();
+			NewRow.DocRef = QuerySelection.DocRef;
+			NewRow.PaymentDate = QuerySelection.PaymentDate;
+			NewRow.Key = Row.Key;
+		EndDo;
+	EndDo;
+	
+	Query = New Query;
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	PaymentTerms.*
+	|INTO PaymentTerms
+	|FROM
+	|	&PaymentTerms AS PaymentTerms";
+	
+	Query.SetParameter("PaymentTerms", PaymentTerms);
+ 	Query.Execute();
+	
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	
 	Return Tables;
@@ -57,7 +138,7 @@ EndProcedure
 #Region Undoposting
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	Return Undefined;
+	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
 EndFunction
 
 Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -137,6 +218,11 @@ Function Transactions()
 		|			END
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
+		|
+		| 	case when Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|	then Transactions.BasisDocument else undefined
+		|	end AS AgingBasisDocument,
+		|
 		|	case
 		|		when Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
 		|			Then Transactions.Agreement
@@ -184,6 +270,7 @@ Function R5021T_Revenues()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		   |	Transactions.Amount AS AmountWithTaxes,
+		   |	Transactions.NetAmount AS Amount,
 		   |	*
 		   |INTO R5021T_Revenues
 		   |FROM
@@ -281,7 +368,7 @@ Function R2040B_TaxesIncoming()
 		|	Transactions.Currency,
 		|	&Vat AS Tax,
 		|	Transactions.VatRate AS TaxRate,
-		|	Transactions.TaxAmount AS Amount,
+		|	SUM(Transactions.TaxAmount) AS Amount,
 		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType
 		|INTO R2040B_TaxesIncoming
 		|FROM
@@ -289,6 +376,15 @@ Function R2040B_TaxesIncoming()
 		|WHERE
 		|	Transactions.IsCustomer
 		|	AND Transactions.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.VatRate,
+		|	VALUE(Enum.InvoiceType.Invoice)
 		|
 		|UNION ALL
 		|
@@ -301,13 +397,22 @@ Function R2040B_TaxesIncoming()
 		|	Transactions.Currency,
 		|	&Vat AS Tax,
 		|	Transactions.VatRate AS TaxRate,
-		|	Transactions.TaxAmount AS Amount,
+		|	SUM(Transactions.TaxAmount),
 		|	VALUE(Enum.InvoiceType.Return) AS InvoiceType
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
 		|	Transactions.IsVendor
-		|	AND Transactions.TaxAmount <> 0";
+		|	AND Transactions.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.VatRate,
+		|	VALUE(Enum.InvoiceType.Return)";
 EndFunction
 
 #EndRegion
@@ -339,7 +444,7 @@ Function T1040T_AccountingAmounts()
 		|	Transactions.Key AS RowKey,
 		|	Transactions.Key AS Key,
 		|	Transactions.Currency,
-		|	Transactions.Amount,
+		|	Transactions.NetAmount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|INTO T1040T_AccountingAmounts
@@ -347,6 +452,23 @@ Function T1040T_AccountingAmounts()
 		|	Transactions AS Transactions
 		|WHERE
 		|	Transactions.IsVendor
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Transactions.Period,
+		|	Transactions.Key AS RowKey,
+		|	Transactions.Key AS Key,
+		|	Transactions.Currency,
+		|	Transactions.TaxAmount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsVendor
+		|	AND Transactions.TaxAmount <> 0
 		|
 		|UNION ALL
 		|
@@ -371,13 +493,30 @@ Function T1040T_AccountingAmounts()
 		|	Transactions.Key,
 		|	Transactions.Key,
 		|	Transactions.Currency,
-		|	Transactions.Amount AS Amount,
+		|	Transactions.NetAmount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues),
 		|	UNDEFINED
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
 		|	Transactions.IsCustomer
+		|
+		|UNION ALL
+		|	
+		|SELECT
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Key,
+		|	Transactions.Currency,
+		|	Transactions.TaxAmount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming),
+		|	UNDEFINED
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsCustomer
+		| AND Transactions.TaxAmount <> 0
+
 		|
 		|UNION ALL
 		|
@@ -424,13 +563,17 @@ Function GetAccountingAnalytics(Parameters) Export
 		Return GetAnalytics_OffsetOfAdvancesCustomer(Parameters); // Advances from customers - Customers transactions
 	ElsIf Parameters.Operation = AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues Then
 		Return GetAnalytics_OtherPartnerRevenues(Parameters); // OtherPartner - Revenues
+	ElsIf Parameters.Operation = AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming Then
+		Return GetAnalytics_VendorTransactionTaxIncoming(Parameters); // Vendors transactions - Tax incoming
+	ElsIf Parameters.Operation = AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming Then
+		Return GetAnalytics_CustomerTransactionTaxesIncoming(Parameters); // Vendors transactions - Tax incoming
 	EndIf;
 	Return Undefined;
 EndFunction
 
 #Region Accounting_Analytics
 
-// Vendors advances - Revenues
+// Vendors transaction - Revenues
 Function GetAnalytics_VendorTransactionRevenues(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
@@ -450,6 +593,31 @@ Function GetAnalytics_VendorTransactionRevenues(Parameters)
 	AccountingAnalytics.Credit = Credit.AccountRevenue;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	
+	Return AccountingAnalytics;
+EndFunction
+
+// Vendors advances - Tax incoming
+Function GetAnalytics_VendorTransactionTaxIncoming(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                   Parameters.RowData.Partner, 
+	                                                   Parameters.RowData.Agreement,
+	                                                   Parameters.RowData.Currency);
+	AccountingAnalytics.Debit = Debit.AccountTransactionsVendor;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
+	If Parameters.RowData.Agreement.Type = Enums.AgreementTypes.Vendor Then
+		AccountingAnalytics.Credit = Credit.IncomingAccountReturn;
+	Else
+		AccountingAnalytics.Credit = Credit.IncomingAccount;
+	EndIf;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
+		
 	Return AccountingAnalytics;
 EndFunction
 
@@ -491,6 +659,31 @@ Function GetAnalytics_CustomerTransactionRevenues(Parameters)
 	AccountingAnalytics.Credit = Credit.AccountRevenue;
 	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Customer transactions - Taxes incoming
+Function GetAnalytics_CustomerTransactionTaxesIncoming(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                   Parameters.RowData.Partner, 
+	                                                   Parameters.RowData.Agreement,
+	                                                   Parameters.RowData.Currency);
+	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
+	If Parameters.RowData.Agreement.Type = Enums.AgreementTypes.Customer Then
+		AccountingAnalytics.Credit = Credit.IncomingAccount;
+	Else
+		AccountingAnalytics.Credit = Credit.IncomingAccountReturn;
+	EndIf;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
 	
 	Return AccountingAnalytics;
 EndFunction
@@ -539,14 +732,47 @@ Function GetAnalytics_OtherPartnerRevenues(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
 #EndRegion
+
+#EndRegion
+
+#Region SystemAttributes
+
+Function GetPredefinedSystemAttributes() Export
+	SystemAttributes = New Array(); // Array of ChartOfCharacteristicTypesRef.SystemAttributes
+	SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.Partner);
+	If GetFunctionalOption("UsePartnerTerms") = True Then
+		SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.PartnerTerm);
+	EndIf;
+	If GetFunctionalOption("UseLegalName") = True Then
+		SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.LegalName);
+	EndIf;
+	If GetFunctionalOption("UseLegalNameContract") = True Then
+		SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.LegalNameContract);
+	EndIf;
+	Return SystemAttributes;
+EndFunction
+
+Function GetSystemAttributeValues(Obj, SystemAttribute) Export
+	Values = New Array();
+	If SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.Partner Then
+		Values = Obj.Transactions.Unload(, "Partner").UnloadColumn("Partner");
+	ElsIf SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.PartnerTerm Then
+		Values = Obj.Transactions.Unload(, "Agreement").UnloadColumn("Agreement");
+	ElsIf SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.LegalName Then
+		Values = Obj.Transactions.Unload(, "LegalName").UnloadColumn("LegalName");
+	ElsIf SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.LegalNameContract Then
+		Values = Obj.Transactions.Unload(, "LegalNameContract").UnloadColumn("LegalNameContract");
+	EndIf;
+	Return Values;
+EndFunction
 
 #EndRegion

@@ -112,7 +112,7 @@ Scenario: _090401 create Sales invoice for several Sales order with different le
 	Then the form attribute named "Partner" became equal to "Ferron BP"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-	Then the form attribute named "Description" became equal to "Click to enter description"
+	Then the form attribute named "Comment" became equal to "Click to enter comment"
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And Delay 5
@@ -288,7 +288,7 @@ Scenario: _090403 create Sales invoice for several Sales order with different pa
 	Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-	Then the form attribute named "Description" became equal to "Click to enter description"
+	Then the form attribute named "Comment" became equal to "Click to enter comment"
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And Delay 5
@@ -403,7 +403,7 @@ Scenario: _090404 create Sales invoice for several Sales order with different pa
 	Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-	Then the form attribute named "Description" became equal to "Click to enter description"
+	Then the form attribute named "Comment" became equal to "Click to enter comment"
 	Then the form attribute named "Company" became equal to "Main Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And Delay 5
@@ -620,7 +620,7 @@ Scenario: _090406 create Sales invoice for several Sales order with different ow
 	Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 	Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 	Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-	Then the form attribute named "Description" became equal to "Click to enter description"
+	Then the form attribute named "Comment" became equal to "Click to enter comment"
 	Then the form attribute named "Company" became equal to "Second Company"
 	Then the form attribute named "Store" became equal to "Store 02"
 	And Delay 5
@@ -1021,6 +1021,5 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			| ''                                          | ''              | ''                              | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'     | 'Agreement'                  | 'Basis'                     | 'Order'                  | 'Project'   | 'Deferred calculation'   | 'Customers advances closing'    |
 			| ''                                          | 'Receipt'       | '$$DateSalesInvoice0904083$$'   | '5 718,08'    | 'Main Company'   | ''         | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | '$$SalesInvoice0904083$$'   | '$$SalesOrder090408$$'   | ''          | 'No'                     | ''                              |
 			| ''                                          | 'Receipt'       | '$$DateSalesInvoice0904083$$'   | '33 400'      | 'Main Company'   | ''         | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | '$$SalesInvoice0904083$$'   | '$$SalesOrder090408$$'   | ''          | 'No'                     | ''                              |
-			| ''                                          | 'Receipt'       | '$$DateSalesInvoice0904083$$'   | '33 400'      | 'Main Company'   | ''         | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | '$$SalesInvoice0904083$$'   | '$$SalesOrder090408$$'   | ''          | 'No'                     | ''                              |
 			| ''                                          | 'Receipt'       | '$$DateSalesInvoice0904083$$'   | '33 400'      | 'Main Company'   | ''         | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | '$$SalesInvoice0904083$$'   | '$$SalesOrder090408$$'   | ''          | 'No'                     | ''                              |
 		And I close all client application windows

@@ -55,7 +55,7 @@ Function R1021B_VendorsTransactions_BP_CP() Export
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Currency,
-		|	OffsetOfAdvances.TransactionAgreement,
+		|	OffsetOfAdvances.Agreement,
 		|	OffsetOfAdvances.TransactionProject,
 		|	OffsetOfAdvances.TransactionDocument,
 		|	OffsetOfAdvances.TransactionOrder,
@@ -106,7 +106,7 @@ Function R1021B_VendorsTransactions_BR_CR() Export
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Currency,
-		|	OffsetOfAdvances.TransactionAgreement,
+		|	OffsetOfAdvances.Agreement,
 		|	OffsetOfAdvances.TransactionProject,
 		|	OffsetOfAdvances.TransactionDocument,
 		|	OffsetOfAdvances.Key,
@@ -119,7 +119,7 @@ Function R1021B_VendorsTransactions_BR_CR() Export
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
 EndFunction
 
-Function R1021B_VendorsTransactions_PI_SRTC() Export 
+Function R1021B_VendorsTransactions_PI_SRTC_WTI() Export 
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -139,7 +139,7 @@ Function R1021B_VendorsTransactions_PI_SRTC() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsPurchase
+		|	ItemList.IsPurchase AND (ItemList.IsVendor OR ItemList.IsConsignor)
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
@@ -167,7 +167,7 @@ Function R1021B_VendorsTransactions_PI_SRTC() Export
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
-		|	OffsetOfAdvances.TransactionAgreement,
+		|	OffsetOfAdvances.Agreement,
 		|	OffsetOfAdvances.TransactionProject,
 		|	OffsetOfAdvances.TransactionDocument,
 		|	OffsetOfAdvances.TransactionOrder,
@@ -200,7 +200,7 @@ Function R1021B_VendorsTransactions_PR() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsReturnToVendor
+		|	ItemList.IsReturnToVendor AND (ItemList.IsVendor OR ItemList.IsConsignor)
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Company,
@@ -227,7 +227,7 @@ Function R1021B_VendorsTransactions_PR() Export
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
-		|	OffsetOfAdvances.TransactionAgreement,
+		|	OffsetOfAdvances.Agreement,
 		|	OffsetOfAdvances.TransactionProject,
 		|	OffsetOfAdvances.TransactionDocument,
 		|	OffsetOfAdvances.Key,
@@ -254,7 +254,7 @@ Function R1021B_VendorsTransactions_POC() Export
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Currency,
-		|	OffsetOfAdvances.TransactionAgreement AS Agreement,
+		|	OffsetOfAdvances.Agreement AS Agreement,
 		|	OffsetOfAdvances.TransactionProject AS Project,
 		|	OffsetOfAdvances.TransactionDocument AS Basis,
 		|	OffsetOfAdvances.TransactionOrder AS Order,
@@ -306,7 +306,7 @@ Function R1021B_VendorsTransactions_ECA() Export
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Currency,
-		|	OffsetOfAdvances.TransactionAgreement,
+		|	OffsetOfAdvances.Agreement,
 		|	OffsetOfAdvances.TransactionProject,
 		|	OffsetOfAdvances.TransactionDocument,
 		|	OffsetOfAdvances.TransactionOrder,
@@ -357,7 +357,7 @@ Function R1021B_VendorsTransactions_DebitNote() Export
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Currency,
-		|	OffsetOfAdvances.TransactionAgreement AS Agreement,
+		|	OffsetOfAdvances.Agreement AS Agreement,
 		|	OffsetOfAdvances.TransactionProject AS Project,
 		|	OffsetOfAdvances.TransactionDocument AS Basis,
 		|	OffsetOfAdvances.TransactionOrder AS Order,
@@ -408,130 +408,11 @@ Function R1021B_VendorsTransactions_CreditNote() Export
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
-		|	OffsetOfAdvances.TransactionAgreement,
+		|	OffsetOfAdvances.Agreement,
 		|	OffsetOfAdvances.TransactionProject,
 		|	OffsetOfAdvances.TransactionDocument,
 		|	UNDEFINED,
 		|	OffsetOfAdvances.Key,
-		|	OffsetOfAdvances.Amount,
-		|	OffsetOfAdvances.Recorder
-		|FROM
-		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		|WHERE
-		|	OffsetOfAdvances.Document = &Ref
-		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
-EndFunction
-
-Function R1021B_VendorsTransactions_DebitCreditNote() Export
-	
-//IsSendAdvanceCustomer
-//IsSendAdvanceVendor
-//
-//IsSendTransactionCustomer
-//IsSendTransactionVendor
-//
-//IsReceiveAdvanceCustomer
-//IsReceiveAdvanceVendor
-//
-//IsReceiveTransactionCustomer
-//IsReceiveTransactionVendor
-
-//3. Vendor transactions (VT) - Customer advances (CA) - minus - plus
-//4. Vendor transactions (VT) - Customer transactions (CT) - minus - minus
-//16. Vendor transactions (VT) - Vendor transactions (VT) (CT)- minus - plus
-//
-//3. Vendor transactions (VT) - Customer advances (CA) - minus - plus
-//4. Vendor transactions (VT) - Customer transactions (CT) - minus - minus
-//16. Vendor transactions (VT) - Vendor transactions (VT) - minus - plus
-//16. Vendor transactions (VT) - Vendor transactions (VT) (CT)- minus - plus
-//16. Vendor transactions (VT) - Vendor transactions (VT) - minus - plus
-
-	Return
-		"SELECT
-		|case when Doc.PartnersIsEqual then
-		|	case
-		|		when Doc.IsReceiveAdvanceCustomer
-		|			OR Doc.IsReceiveTransactionCustomer
-		|			OR Doc.IsReceiveTransactionVendor
-		|       then VALUE(AccumulationRecordType.Expense)
-		|		else VALUE(AccumulationRecordType.Receipt) end
-		|else
-		|   case
-		|		when  Doc.IsReceiveAdvanceCustomer
-		|             OR Doc.IsReceiveTransactionCustomer
-		|             OR Doc.IsReceiveTransactionVendor
-		|		then VALUE(AccumulationRecordType.Expense)
-		|		else VALUE(AccumulationRecordType.Receipt) end
-		|end as RecordType,
-		|
-		|	Doc.Period,
-		|	Doc.Company,
-		|	Doc.SendBranch AS Branch,
-		|	Doc.Currency,
-		|	Doc.SendLegalName AS LegalName,
-		|	Doc.SendPartner AS Partner,
-		|	Doc.SendAgreement AS Agreement,
-		|	Doc.SendProject AS Project,
-		|	Doc.SendBasisDocument AS Basis,
-		|	Doc.SendOrderSettlements AS Order,
-		|	Doc.Amount,
-		|	UNDEFINED AS VendorsAdvancesClosing
-		|INTO R1021B_VendorsTransactions
-		|FROM
-		|	SendTransactions AS Doc
-		|WHERE
-		|	Doc.SendIsVendorTransaction
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|case when Doc.PartnersIsEqual then
-		|	case
-		|		when Doc.IsSendTransactionVendor 
-		|       then VALUE(AccumulationRecordType.Receipt)
-		|		else VALUE(AccumulationRecordType.Expense) end
-		|else
-		|   case
-		|		when  Doc.IsSendTransactionVendor 
-		|		then VALUE(AccumulationRecordType.Receipt)
-		|		else VALUE(AccumulationRecordType.Expense) end
-		|end as RecordType,
-		|
-		|	Doc.Period,
-		|	Doc.Company,
-		|	Doc.ReceiveBranch,
-		|	Doc.Currency,
-		|	Doc.ReceiveLegalName,
-		|	Doc.ReceivePartner,
-		|	Doc.ReceiveAgreement,
-		|	Doc.ReceiveProject,
-		|	Doc.ReceiveBasisDocument,
-		|	Doc.ReceiveOrderSettlements,
-		|	Doc.Amount,
-		|	UNDEFINED
-		|FROM
-		|	ReceiveTransactions AS Doc
-		|WHERE
-		|	Doc.SendIsVendorTransaction
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	CASE
-		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
-		|			THEN VALUE(AccumulationRecordType.Receipt)
-		|		ELSE VALUE(AccumulationRecordType.Expense)
-		|	END,
-		|	OffsetOfAdvances.Period,
-		|	OffsetOfAdvances.Company,
-		|	OffsetOfAdvances.Branch,
-		|	OffsetOfAdvances.Currency,
-		|	OffsetOfAdvances.LegalName,
-		|	OffsetOfAdvances.Partner,
-		|	OffsetOfAdvances.TransactionAgreement,
-		|	OffsetOfAdvances.TransactionProject,
-		|	OffsetOfAdvances.TransactionDocument,
-		|	OffsetOfAdvances.TransactionOrder,
 		|	OffsetOfAdvances.Amount,
 		|	OffsetOfAdvances.Recorder
 		|FROM
@@ -619,7 +500,7 @@ Function R1021B_VendorsTransactions_Cheque() Export
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Currency,
-		|	OffsetOfAdvances.TransactionAgreement,
+		|	OffsetOfAdvances.Agreement,
 		|	OffsetOfAdvances.TransactionDocument,
 		|	OffsetOfAdvances.TransactionOrder,
 		|	OffsetOfAdvances.Amount,

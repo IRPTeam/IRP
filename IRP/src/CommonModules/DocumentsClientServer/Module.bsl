@@ -21,11 +21,26 @@ Function GetGroupItemsArray(Object, Form)
 		If Form.Items.Find(Attr.Value) <> Undefined And Not Form.Items[Attr.Value].Visible Then
 			Continue;
 		EndIf;
+		MetadataOwner = ?(TypeOf(Object) = Type("FormDataStructure"), Object.Ref, Object);
+		If Not CommonFunctionsServer.isOjectAttributeAvailableByCurrentFunctionalOptions(MetadataOwner, Attr.Value) Then
+			Continue;
+		EndIf;
 		ItemStructure = New Structure();
 		ItemStructure.Insert("Title", Attr.Presentation);
 		ItemStructure.Insert("Value", ?(Not ValueIsFilled(Object[Attr.Value]), "", String(Object[Attr.Value])));
 		ItemsArray.Add(ItemStructure);
 	EndDo;
+
+	ItemStructure = New Structure();
+	ItemStructure.Insert("Title", R().DocStatus_Name + ":" + Chars.NBSp);
+	ItemStructure.Insert("Value", 
+		?(Object.Ref.IsEmpty(), R().DocStatus_New, 
+			?(Object.DeletionMark, R().DocStatus_Deleted, 
+				?(Object.Posted, R().DocStatus_Posted, R().DocStatus_NotPosted)
+			)
+		)
+	);
+	ItemsArray.Add(ItemStructure);
 
 	Return ItemsArray;
 EndFunction
@@ -36,6 +51,7 @@ Procedure ChangeTitleGroupTitle(Object, Form, Settings = Undefined) Export
 	If SessionParameters.isMobile Then
 		Return;
 	EndIf;
+	DocumentsServer.SetDocumentState(Object, Form);
 #ElsIf MobileClient Then
 	Return;
 #EndIf
@@ -144,7 +160,6 @@ Procedure ChangeTitleGroupTitle(Object, Form, Settings = Undefined) Export
 
 EndProcedure
 
-// TODO: Delete parameter Object
 Procedure ChangeTitleCollapse(Object = Undefined, Form, TitleVisible = True) Export
 
 #If Server Then
@@ -167,11 +182,20 @@ EndProcedure
 
 Function CreateFilterItem(FieldName, Value = Undefined, ComparisonTypeValue = Undefined, DataCompositionComparisonTypeValue = Undefined) Export
 	FilterStructure = New Structure();
+	FilterStructure.Insert("FilterType", "Item");
 	FilterStructure.Insert("FieldName", FieldName);
 	FilterStructure.Insert("Value", Value);
 	FilterStructure.Insert("ComparisonType", ComparisonTypeValue);
 	FilterStructure.Insert("DataCompositionComparisonType", DataCompositionComparisonTypeValue);
 	Return FilterStructure;
+EndFunction
+
+Function CreateFilterGroup(GroupType) Export
+	FilterGroupStructure = New Structure();
+	FilterGroupStructure.Insert("FilterType", "Group");
+	FilterGroupStructure.Insert("GroupType", GroupType);
+	FilterGroupStructure.Insert("Items", New Array());
+	Return FilterGroupStructure;
 EndFunction
 
 #EndRegion
@@ -191,7 +215,9 @@ EndProcedure
 Function FindRowInArrayOfStructures(ArrayOfStructures, KeyNames, 
                                     Value1 = Undefined, 
                                     Value2 = Undefined, 
-                                    Value3 = Undefined) Export
+                                    Value3 = Undefined, 
+                                    Value4 = Undefined, 
+                                    Value5 = Undefined) Export
 	ArrayOfKeys = StrSplit(KeyNames, ",");
 	EqualRow = Undefined;
 	For Each Row In ArrayOfStructures Do
@@ -215,6 +241,20 @@ Function FindRowInArrayOfStructures(ArrayOfStructures, KeyNames,
 			
 			If KeyNumber = 3 And Value3 <> Undefined Then
 				If Row[TrimAll(KeyName)] <> Value3 Then
+					RowIsEqual = False;
+					Break;
+				EndIf;
+			EndIf;
+			
+			If KeyNumber = 4 And Value4 <> Undefined Then
+				If Row[TrimAll(KeyName)] <> Value4 Then
+					RowIsEqual = False;
+					Break;
+				EndIf;
+			EndIf;
+			
+			If KeyNumber = 5 And Value5 <> Undefined Then
+				If Row[TrimAll(KeyName)] <> Value5 Then
 					RowIsEqual = False;
 					Break;
 				EndIf;
@@ -270,3 +310,13 @@ Function GetHiddenTables() Export
 	Return HiddenTables;
 	
 EndFunction
+
+Procedure UpdateQuantityByTradeDocuments(Object, TableName) Export
+	For Each Row In Object.ItemList Do
+		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
+
+		If ArrayOfDocuments.Count() = 1 And ArrayOfDocuments[0].Quantity <> Row.QuantityInBaseUnit Then
+			ArrayOfDocuments[0].Quantity = Row.QuantityInBaseUnit;
+		EndIf;
+	EndDo;
+EndProcedure

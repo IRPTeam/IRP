@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="46578b96-644b-4d12-816b-c7c1f38caa35">
+ <producedTypes>
+  <objectType typeId="232242fb-0a1c-41d6-9af6-c1a29e77c7de" valueTypeId="cea228d6-b698-4c14-905b-309fecd7e15d"/>
+  <managerType typeId="a81c8c96-651e-4ec2-ba61-f057ef40fd65" valueTypeId="0b2c5699-33d1-4e93-8163-2e7e8c2dde07"/>
+ </producedTypes>
+ <name>R4050A_InventoryBalance</name>
+ <synonym>
+  <key>en</key>
+  <value>7CA3B58A-F650-3D15-58E4-4E6CD957CF90</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R4050A_InventoryBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="68d62dff-523e-4634-b735-ada043600e42">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>en</key>
+   <value>28302DA0-CA75-C1AA-AD36-6372858FDC8A</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

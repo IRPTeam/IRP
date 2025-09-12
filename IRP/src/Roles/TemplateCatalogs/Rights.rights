@@ -149,6 +149,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.PrintFormTemplates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.LegalNameContracts</name>
 		<right>
 			<name>Read</name>
@@ -194,6 +209,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.SimpleBatch</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.PaymentSchedules</name>
 		<right>
 			<name>Read</name>
@@ -224,7 +254,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.LegalName</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.LegalName</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -246,7 +276,22 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.TransactionsKeys</name>
+		<name>Catalog.DELETE_TransactionsKeys</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.PLSections</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -336,7 +381,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys</name>
+		<name>Catalog.TransformationRules</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -351,63 +396,78 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.PredefinedDataName</name>
+		<name>Catalog.DELETE_AdvancesKeys</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.PredefinedDataName</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.Predefined</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.Predefined</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.Ref</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.Ref</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.DeletionMark</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.DeletionMark</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.IsFolder</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.IsFolder</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.Owner</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.Owner</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.Parent</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.Parent</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.Description</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.Description</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.Code</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.Code</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -444,7 +504,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.Order</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.Order</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -514,14 +574,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.Partner</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.Partner</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.Company</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.Company</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -573,7 +633,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.IsCustomerAdvance</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.IsCustomerAdvance</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -715,6 +775,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.ObjectLocations</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Incoterms.TabularSection.AddAttributes</name>
 		<right>
 			<name>Edit</name>
@@ -827,6 +902,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.IssueTypes</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Extensions</name>
 		<right>
 			<name>Read</name>
@@ -860,7 +950,37 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.TaxExemptionReasons</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.AccessProfiles</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.ExtDimensions</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -995,7 +1115,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.Currency</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.Currency</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1018,6 +1138,21 @@
 	</object>
 	<object>
 		<name>Catalog.PrintInfo</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.Cities</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -1122,6 +1257,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.NumeratorBasicRules</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.BusinessUnits</name>
 		<right>
 			<name>Read</name>
@@ -1207,14 +1357,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.Branch</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.Branch</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.IsVendorAdvance</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.IsVendorAdvance</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1344,6 +1494,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.ExecutionTemplates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.ChequeBonds</name>
 		<right>
 			<name>Read</name>
@@ -1390,6 +1555,21 @@
 	</object>
 	<object>
 		<name>Catalog.LedgerTypeVariants</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.SystemAttributesSets</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -1558,6 +1738,21 @@
 	</object>
 	<object>
 		<name>Catalog.UserGroups</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.NumeratorGroups</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

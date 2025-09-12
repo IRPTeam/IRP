@@ -19,6 +19,7 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -45,16 +46,38 @@ Procedure NotificationProcessing(EventName, Parameter, Source) Export
 EndProcedure
 
 &AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
+EndProcedure
+
+&AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)		
-	Form.Items.SendLegalName.Enabled    = ValueIsFilled(Object.SendPartner);
-	Form.Items.ReceiveLegalName.Enabled = ValueIsFilled(Object.ReceivePartner);
+	IsSendEmployee = (Object.SendDebtType = PredefinedValue("Enum.DebtTypes.EmployeePayable")
+		Or Object.SendDebtType = PredefinedValue("Enum.DebtTypes.EmployeeReceivable"));
 	
-	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	IsReceiveEmployee = (Object.ReceiveDebtType = PredefinedValue("Enum.DebtTypes.EmployeePayable")
+		Or Object.ReceiveDebtType = PredefinedValue("Enum.DebtTypes.EmployeeReceivable"));
+		
+	Form.Items.SendLegalName.Enabled    = ValueIsFilled(Object.SendPartner) And Not IsSendEmployee;
+	Form.Items.ReceiveLegalName.Enabled = ValueIsFilled(Object.ReceivePartner) And Not IsReceiveEmployee;
+	
+	Form.Items.SendLegalNameContract.Enabled     = Not IsSendEmployee;
+	Form.Items.SendOrder.Enabled                 = Not IsSendEmployee;
+	Form.Items.ReceiveLegalNameContract.Enabled  = Not IsReceiveEmployee;
+	Form.Items.ReceiveOrder.Enabled              = Not IsReceiveEmployee;
+	
+	Form.Items.EditCurrenciesSender.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesReceiver.Enabled = Not Form.ReadOnly;
 	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 	
 	IsEnabled_SendBasisDocument = True;
@@ -123,15 +146,6 @@ EndProcedure
 &AtClient
 Procedure DateOnChange(Item) Export
 	DocDebitCreditNoteClient.DateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region CURRENCY
-
-&AtClient
-Procedure CurrencyOnChange(Item)
-	DocDebitCreditNoteClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -258,7 +272,7 @@ EndProcedure
 
 &AtClient
 Procedure ReceiveLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-	DocDebitCreditNoteClient.ReceivePartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocDebitCreditNoteClient.ReceiveLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -267,6 +281,31 @@ Procedure ReceiveLegalNameEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure CurrencyOnChange(Item)
+	DocDebitCreditNoteClient.CurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure SendCurrencyOnChange(Item)
+	DocDebitCreditNoteClient.SendCurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ReceiveCurrencyOnChange(Item)
+	DocDebitCreditNoteClient.ReceiveCurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure SendAmountOnChange(Item)
+	DocDebitCreditNoteClient.SendAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ReceiveAmountOnChange(Item)
+	DocDebitCreditNoteClient.ReceiveAmountOnChange(Object, ThisObject, Item);
+EndProcedure
 
 #Region SERVICE
 
@@ -363,12 +402,24 @@ Procedure ShowHiddenTables(Command)
 EndProcedure
 
 &AtClient
-Procedure EditCurrencies(Command)
-	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, "", Object.Currency, Object.Amount);
+Procedure EditCurrenciesSender(Command)
+	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, Object.SendUUID, Object.SendCurrency,
+		Object.SendAmount, Object.SendAgreement);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesReceiver(Command)
+	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, Object.ReceiveUUID, Object.ReceiveCurrency,
+		Object.ReceiveAmount, Object.ReceiveAgreement);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -387,6 +438,20 @@ Procedure UpdateAccountingData()
 		                                          _AccountingExtDimensions, Undefined);
 	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
 	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
+EndProcedure
+
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure
 
 #EndRegion

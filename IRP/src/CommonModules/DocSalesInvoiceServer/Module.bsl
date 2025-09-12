@@ -39,6 +39,7 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray.Add("LegalName");
 	AttributesArray.Add("Agreement");
 	AttributesArray.Add("LegalNameContract");
+	AttributesArray.Add("Account");
 	If FOServer.IsUseCommissionTrading() Then
 		AttributesArray.Add("TransactionType");
 	EndIf;

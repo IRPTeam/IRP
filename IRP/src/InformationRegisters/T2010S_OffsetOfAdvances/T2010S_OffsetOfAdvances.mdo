@@ -187,6 +187,22 @@
   <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
+ <dimensions uuid="20279581-f8a5-47d3-9c10-1224d01ccb93">
+  <name>Agreement</name>
+  <synonym>
+   <key>en</key>
+   <value>2ECF64F9-3113-2C60-07AD-DC0C12A9ED2C</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
  <dimensions uuid="1f291bd8-0fc6-4a10-98be-3bb772217fa2">
   <name>TransactionDocument</name>
   <synonym>
@@ -213,10 +229,10 @@
   <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="04a290af-cfb5-45e1-8fd9-08be47d9cfe7">
-  <name>TransactionAgreement</name>
+  <name>DELETE_TransactionAgreement</name>
   <synonym>
    <key>en</key>
-   <value>590821A7-4ABE-7831-1D18-80895A02F825</value>
+   <value>AB6BB013-8B4B-296D-D18E-EEAACB491E6C</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -229,29 +245,13 @@
   <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="b53264a9-69c4-4a83-b2f7-7319e4ee9e45">
-  <name>AdvanceAgreement</name>
+  <name>DELETE_AdvanceAgreement</name>
   <synonym>
    <key>en</key>
-   <value>68B3806B-A4E1-B749-95C7-7195B6F6C5E4</value>
+   <value>200890CF-03CE-34F3-3A8F-F7E32731B1F0</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <mainFilter>true</mainFilter>
- </dimensions>
- <dimensions uuid="7e2d9dbe-98ac-471d-b752-1c79271194f3">
-  <name>Key</name>
-  <synonym>
-   <key>en</key>
-   <value>24299C46-D524-57DA-ACDD-D38BF395FF79</value>
-  </synonym>
-  <type>
-   <types>DefinedType.typeRowID</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -295,13 +295,13 @@
   <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="b06f054e-bcde-4dd4-b381-17d097f81fcf">
-  <name>FromAdvanceKey</name>
+  <name>DELETE_FromAdvanceKey</name>
   <synonym>
    <key>en</key>
-   <value>92FEA96F-7DEE-94DD-D048-8CA80EC97514</value>
+   <value>7BAEAFC5-5701-609F-F4B9-94FFC6BE1870</value>
   </synonym>
   <type>
-   <types>CatalogRef.AdvancesKeys</types>
+   <types>CatalogRef.DELETE_AdvancesKeys</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -312,13 +312,13 @@
   <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="7fb1c431-084c-4edc-997a-a07ce584ca1a">
-  <name>ToTransactionKey</name>
+  <name>DELETE_ToTransactionKey</name>
   <synonym>
    <key>en</key>
-   <value>FAED8752-2E8D-DAED-D3A9-980DF738FC9C</value>
+   <value>5C90594E-F525-048F-F084-46C5CA3C0683</value>
   </synonym>
   <type>
-   <types>CatalogRef.TransactionsKeys</types>
+   <types>CatalogRef.DELETE_TransactionsKeys</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -328,13 +328,13 @@
   <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="5e04fa1e-d021-467f-87a2-15ad74adb5cf">
-  <name>FromTransactionKey</name>
+  <name>DELETE_FromTransactionKey</name>
   <synonym>
    <key>en</key>
-   <value>DD036175-BD16-7F92-280E-E8C4EC713855</value>
+   <value>E695B12C-1FB7-F78F-F9F4-486E76DD41A4</value>
   </synonym>
   <type>
-   <types>CatalogRef.TransactionsKeys</types>
+   <types>CatalogRef.DELETE_TransactionsKeys</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -344,13 +344,13 @@
   <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="ba5e9085-eed4-4658-b4e4-4244f1835fff">
-  <name>ToAdvanceKey</name>
+  <name>DELETE_ToAdvanceKey</name>
   <synonym>
    <key>en</key>
-   <value>5A0C43CE-018B-1C6A-A7CE-EAB1F04CC70D</value>
+   <value>F7608561-3036-F4B0-00BC-C73C49B48976</value>
   </synonym>
   <type>
-   <types>CatalogRef.AdvancesKeys</types>
+   <types>CatalogRef.DELETE_AdvancesKeys</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -383,6 +383,22 @@
   </synonym>
   <type>
    <types>CatalogRef.Projects</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="7e2d9dbe-98ac-471d-b752-1c79271194f3">
+  <name>Key</name>
+  <synonym>
+   <key>en</key>
+   <value>24299C46-D524-57DA-ACDD-D38BF395FF79</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

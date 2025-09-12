@@ -44,7 +44,7 @@
   <objectField>Document.InternalSupplyRequest.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.InternalSupplyRequest.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.InternalSupplyRequest.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.InternalSupplyRequest.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.InternalSupplyRequest.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -68,6 +68,8 @@
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

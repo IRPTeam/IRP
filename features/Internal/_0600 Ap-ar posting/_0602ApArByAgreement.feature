@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @StandartAgreement
@@ -113,7 +113,6 @@ Scenario: _060202 create Sales invoice with Ar details by Partner terms and chec
 				| ''                                           | ''               | ''          | 'Amount'       | 'Company'         | 'Branch'    | 'Multi currency movement type'    | 'Currency'    | 'Transaction currency'    | 'Legal name'         | 'Partner'            | 'Agreement'                   | 'Basis'    | 'Order'    | 'Project'  | 'Deferred calculation'    | 'Customers advances closing'     |
 				| ''                                           | 'Receipt'        | '*'         | '1 883,2'      | 'Main Company'    | '*'         | 'Reporting currency'              | 'USD'         | 'TRY'                     | 'Company Kalipso'    | 'Partner Kalipso'    | 'Partner Kalipso Customer'    | ''         | ''         | ''         | 'No'                      | ''                               |
 				| ''                                           | 'Receipt'        | '*'         | '11 000'       | 'Main Company'    | '*'         | 'Local currency'                  | 'TRY'         | 'TRY'                     | 'Company Kalipso'    | 'Partner Kalipso'    | 'Partner Kalipso Customer'    | ''         | ''         | ''         | 'No'                      | ''                               |
-				| ''                                           | 'Receipt'        | '*'         | '11 000'       | 'Main Company'    | '*'         | 'TRY'                             | 'TRY'         | 'TRY'                     | 'Company Kalipso'    | 'Partner Kalipso'    | 'Partner Kalipso Customer'    | ''         | ''         | ''         | 'No'                      | ''                               |
 				| ''                                           | 'Receipt'        | '*'         | '11 000'       | 'Main Company'    | '*'         | 'en description is empty'         | 'TRY'         | 'TRY'                     | 'Company Kalipso'    | 'Partner Kalipso'    | 'Partner Kalipso Customer'    | ''         | ''         | ''         | 'No'                      | ''                               |
 	And I close all client application windows
 
@@ -139,7 +138,7 @@ Scenario: _060203 create Cash receipt (partner term with Ar details by partner t
 				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'         |
@@ -175,7 +174,6 @@ Scenario: _060203 create Cash receipt (partner term with Ar details by partner t
 			| ''                                          | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'        | 'Partner'           | 'Agreement'                  | 'Basis'   | 'Order'   | 'Project' | 'Deferred calculation'   | 'Customers advances closing'    |
 			| ''                                          | 'Expense'       | '*'        | '1 883,2'     | 'Main Company'   | '*'        | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | ''        | 'No'                     | ''                              |
 			| ''                                          | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | ''        | 'No'                     | ''                              |
-			| ''                                          | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | ''        | 'No'                     | ''                              |
 			| ''                                          | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | ''        | 'No'                     | ''                              |
 		And I close all client application windows
 
@@ -196,7 +194,7 @@ Scenario: _0602031 create Bank receipt (partner term with Ar details by partner 
 				| 'Bank account, TRY'     |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'         |
@@ -232,7 +230,6 @@ Scenario: _0602031 create Bank receipt (partner term with Ar details by partner 
 			| ''                                          | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'        | 'Partner'           | 'Agreement'                  | 'Basis'   | 'Order'   | 'Project' | 'Deferred calculation'   | 'Customers advances closing'    |
 			| ''                                          | 'Expense'       | '*'        | '1 883,2'     | 'Main Company'   | '*'        | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | ''        | 'No'                     | ''                              |
 			| ''                                          | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | ''        | 'No'                     | ''                              |
-			| ''                                          | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | ''        | 'No'                     | ''                              |
 			| ''                                          | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Kalipso'   | 'Partner Kalipso'   | 'Partner Kalipso Customer'   | ''        | ''        | ''        | 'No'                     | ''                              |
 		And I close all client application windows
 
@@ -307,7 +304,6 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 			| ''                                         | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'            | 'Agreement'         | 'Basis'   | 'Order'   | 'Project' | 'Deferred calculation'   | 'Vendors advances closing'    |
 			| ''                                         | 'Receipt'       | '*'        | '1 883,2'     | 'Main Company'   | '*'        | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | ''        | 'No'                     | ''                            |
 			| ''                                         | 'Receipt'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | ''        | 'No'                     | ''                            |
-			| ''                                         | 'Receipt'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | ''        | 'No'                     | ''                            |
 			| ''                                         | 'Receipt'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | ''        | 'No'                     | ''                            |
 		And I close all client application windows
 	
@@ -333,7 +329,7 @@ Scenario: _060206 create Cash payment (partner term with Ap details by partner t
 				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'          |
@@ -368,7 +364,6 @@ Scenario: _060206 create Cash payment (partner term with Ap details by partner t
 			| ''                                         | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'            | 'Agreement'         | 'Basis'   | 'Order'   | 'Project' | 'Deferred calculation'   | 'Vendors advances closing'    |
 			| ''                                         | 'Expense'       | '*'        | '1 883,2'     | 'Main Company'   | '*'        | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | ''        | 'No'                     | ''                            |
 			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | ''        | 'No'                     | ''                            |
-			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | ''        | 'No'                     | ''                            |
 			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | ''        | 'No'                     | ''                            |
 
 		And I close all client application windows
@@ -392,7 +387,7 @@ Scenario: _060208 create Bank payment (partner term with Ap details by partner t
 				| 'Bank account, TRY'     |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'          |
@@ -427,6 +422,5 @@ Scenario: _060208 create Bank payment (partner term with Ap details by partner t
 			| ''                                         | ''              | ''         | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'            | 'Agreement'         | 'Basis'   | 'Order'   | 'Project' | 'Deferred calculation'   | 'Vendors advances closing'    |
 			| ''                                         | 'Expense'       | '*'        | '1 883,2'     | 'Main Company'   | '*'        | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | ''        | 'No'                     | ''                            |
 			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | ''        | 'No'                     | ''                            |
-			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | ''        | 'No'                     | ''                            |
 			| ''                                         | 'Expense'       | '*'        | '11 000'      | 'Main Company'   | '*'        | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Partner Ferron 1'   | 'Vendor Ferron 1'   | ''        | ''        | ''        | 'No'                     | ''                            |
 		And I close all client application windows

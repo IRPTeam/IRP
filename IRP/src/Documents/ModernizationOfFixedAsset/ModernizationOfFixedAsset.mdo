@@ -39,6 +39,21 @@
   <typeField>Document.ModernizationOfFixedAsset.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.ModernizationOfFixedAsset.TabularSection.AddAttributes.Attribute.Value</valueField>
  </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.SystemAttributesSets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.SystemAttributesSets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.SystemAttributesSets.Document_ModernizationOfFixedAsset</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.SystemAttributes</characteristicValues>
+  <objectField>InformationRegister.SystemAttributes.Dimension.Object</objectField>
+  <typeField>InformationRegister.SystemAttributes.Dimension.Property</typeField>
+  <valueField>InformationRegister.SystemAttributes.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
@@ -62,15 +77,16 @@
  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
  <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+ <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
  <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
  <registerRecords>AccumulationRegister.R8515T_CostOfFixedAsset</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
- <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
- <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
+ <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

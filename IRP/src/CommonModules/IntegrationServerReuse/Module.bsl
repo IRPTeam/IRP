@@ -10,11 +10,23 @@ Function GetIntegrationSettings(IntegrationSettingName, AddInfo = Undefined) Exp
 
 	CustomizedSetting = New Structure();
 	SettingsSource = IntegrationSettingsRef.ConnectionSetting;
-	If Not ServiceSystemServer.isProduction() Then
+	isProduction = ServiceSystemServer.isProduction();
+	If Not isProduction Then
 		SettingsSource = IntegrationSettingsRef.ConnectionSettingTest;
-	EndIf; 		  
+	EndIf; 		
+	StoreInSecureStorage = IntegrationSettingsRef.StoreInSecureStorage;
 	For Each Str In SettingsSource Do
-		If ValueIsFilled(Str.Value) Then
+		If StoreInSecureStorage And Str.Hide Then
+			SetPrivilegedMode(True);
+			If isProduction Then
+				Value = SecureDataStorage.GetKey(IntegrationSettingsRef, Str.Key);
+			Else
+				Value = SecureDataStorage.GetKey(IntegrationSettingsRef, "Test_" + Str.Key);
+			EndIf;
+			SetPrivilegedMode(False);
+			
+			CustomizedSetting.Insert(Str.Key, Value);
+		Else
 			CustomizedSetting.Insert(Str.Key, Str.Value);
 		EndIf;
 	EndDo;
@@ -33,7 +45,7 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, Object = Undefin
 	ElsIf IntegrationType = Enums.IntegrationType.Email Then
 		ConnectionSetting.Insert("SMTPServerAddress", "smtp.gmail.com");
 		ConnectionSetting.Insert("SMTPPort", 465);
-		ConnectionSetting.Insert("SMTPUser", "username");
+		ConnectionSetting.Insert("SMTPUser", "");
 		ConnectionSetting.Insert("SMTPPassword", "");
 		ConnectionSetting.Insert("SMTPUseSSL", True);
 		ConnectionSetting.Insert("POP3BeforeSMTP", False);
@@ -69,6 +81,8 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, Object = Undefin
 		ConnectionSetting.Insert("TimeOut", 60);
 		ConnectionSetting.Insert("SecureConnection", True);
 		ConnectionSetting.Insert("UseOSAuthentication", False);
+		ConnectionSetting.Insert("TimeOut", 60);
+		ConnectionSetting.Insert("ServerSideConnection", False);
 	EndIf;
 	Return ConnectionSetting;
 EndFunction

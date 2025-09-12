@@ -115,7 +115,8 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 	|	Obj.Ref.LegalName AS LegalName,
 	|	Obj.Ref.Agreement AS Agreement,
 	|	Obj.Ref.DocumentAmount AS DocumentAmount,
-	|	Obj.Ref.Currency AS Currency
+	|	Obj.Ref.Agreement.CurrencyMovementType.Currency AS Currency,
+	|	Obj.Ref.Currency AS DocCurrency
 	|INTO Doc
 	|FROM
 	|	DocumentJournal.%1 AS Obj
@@ -134,6 +135,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		|	CustomersTransactions.LegalName,
 		|	CustomersTransactions.Agreement,
 		|	CustomersTransactions.Amount,
+		|	CustomersTransactions.Agreement.CurrencyMovementType.Currency,
 		|	CustomersTransactions.Currency
 		|FROM
 		|	AccumulationRegister.R2021B_CustomersTransactions AS CustomersTransactions
@@ -153,6 +155,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		|	MAX(OpeningEntry.LegalName),
 		|	MAX(OpeningEntry.Agreement),
 		|	SUM(OpeningEntry.Amount),
+		|	MAX(OpeningEntry.Agreement.CurrencyMovementType.Currency),
 		|	MAX(OpeningEntry.Currency)
 		|FROM
 		|Document.OpeningEntry.%1 AS OpeningEntry
@@ -174,6 +177,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		|	MAX(OpeningEntry.LegalName),
 		|	MAX(OpeningEntry.Agreement),
 		|	SUM(OpeningEntry.Amount),
+		|	MAX(OpeningEntry.Agreement.CurrencyMovementType.Currency),
 		|	MAX(OpeningEntry.Currency)
 		|FROM
 		|Document.OpeningEntry.%1 AS OpeningEntry
@@ -195,6 +199,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		|	MAX(DebitNote.LegalName),
 		|	MAX(DebitNote.Agreement),
 		|	SUM(DebitNote.Amount),
+		|	MAX(DebitNote.Agreement.CurrencyMovementType.Currency),
 		|	MAX(DebitNote.Currency)
 		|FROM
 		|Document.DebitNote.%1 AS DebitNote
@@ -216,6 +221,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		|	MAX(CreditNote.LegalName),
 		|	MAX(CreditNote.Agreement),
 		|	SUM(CreditNote.Amount),
+		|	MAX(CreditNote.Agreement.CurrencyMovementType.Currency),
 		|	MAX(CreditNote.Currency)
 		|FROM
 		|Document.CreditNote.%1 AS CreditNote
@@ -490,7 +496,7 @@ Function GetDocWithBalanceQueryText()
 	|			Doc.Company,
 	|			Doc.Partner,
 	|			Doc.LegalName,
-	|			Doc.Currency
+	|			Doc.DocCurrency
 	|		FROM
 	|			Doc AS Doc)) AS PurchaseOrdersToBePaid
 	|WHERE
@@ -513,7 +519,7 @@ Function GetDocWithBalanceQueryText()
 	|			Doc.Company,
 	|			Doc.Partner,
 	|			Doc.LegalName,
-	|			Doc.Currency
+	|			Doc.DocCurrency
 	|		FROM
 	|			Doc AS Doc)) AS SalesOrdersToBePaid
 	|WHERE

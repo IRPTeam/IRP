@@ -71,4 +71,18 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
+ <dimensions uuid="b94093f4-4a36-4fdd-befc-a8f0507b55e3">
+  <name>SourceOfOrigin</name>
+  <synonym>
+   <key>en</key>
+   <value>9F076AD5-0652-8284-4556-682C666ED29C</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SourceOfOrigins</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e13059f4-b5ee-4fc9-8784-fc80d68d7e4a">
+ <producedTypes>
+  <selectionType typeId="76801ae8-f43d-4ab6-acbf-aab7f3908878" valueTypeId="b2b91ea6-3a94-4b38-9291-e53f860b43bb"/>
+  <listType typeId="3d26283a-bdd3-41ab-b525-a3faaebfc9df" valueTypeId="49e4f542-9633-401e-bf52-d74dbdf3a27e"/>
+  <managerType typeId="a26aaee6-2f20-480f-8b7d-dfdd63678050" valueTypeId="87bcbce6-bdcb-45a6-b77a-dcf6e2b3b0c9"/>
+  <recordSetType typeId="0bf11a90-b903-4e65-9d30-78ed5f889cae" valueTypeId="e2dc76e3-e80d-4e7c-8b41-e5304cdd4fbf"/>
+  <recordKeyType typeId="92aa43bd-0160-4a1b-8ab6-43b9bf3a1fea" valueTypeId="f2f7b24e-c022-4d7e-bb94-834263ab6e39"/>
+  <recordType typeId="cd29de9e-c2e1-49ed-8e62-4ded4d5a2c35" valueTypeId="3d7d98c1-b1dc-460e-b831-a6fa1140b582"/>
+  <recordManagerType typeId="45ee5f0b-c0a1-4489-864a-123ebfb694bc" valueTypeId="6e5910e9-fa72-4447-b932-2bd5d8772b38"/>
+ </producedTypes>
+ <name>Logger</name>
+ <synonym>
+  <key>en</key>
+  <value>632D32E7-F6AC-E338-850F-FFF8DBB2C0CD</value>
+ </synonym>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.Logger.Form.RecordForm</defaultRecordForm>
+ <defaultListForm>InformationRegister.Logger.Form.ListForm</defaultListForm>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Active</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>LineNumber</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Recorder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Period</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>6A15E1A8-E117-3120-0854-4A1B434D1880</value>
+ </recordPresentation>
+ <resources uuid="cc79c796-6bd6-4aec-9317-f93c3640686a">
+  <name>Comment</name>
+  <synonym>
+   <key>en</key>
+   <value>75A20913-2245-0D95-56BA-AF4A5D1731B2</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <multiLine>true</multiLine>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="d0ddf24e-9d5d-4796-b5a7-6d29ee32c937">
+  <name>ManualComment</name>
+  <synonym>
+   <key>en</key>
+   <value>DCB2B89E-C22A-C1EE-EF6C-C7A2DC58EF80</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="88e2baad-0231-45af-a5ea-d8ba648487a5">
+  <name>NotifyID</name>
+  <synonym>
+   <key>en</key>
+   <value>8EDACD27-1015-D4D7-74BE-E3F175545E38</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>36</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="548c663c-315b-4ee2-98e4-e9dfdff87172">
+  <name>MessageID</name>
+  <synonym>
+   <key>en</key>
+   <value>E18A1253-5858-FD41-1473-31580F4DE60D</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>36</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="81093f23-19c8-4e0a-9457-3ebe059121d0">
+  <name>Basis</name>
+  <synonym>
+   <key>en</key>
+   <value>64AABD5A-1013-6823-3663-386C62268CBA</value>
+  </synonym>
+  <type>
+   <types>AnyRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="bcb5ab6a-a386-45c6-a7f2-3cc775e772c3">
+  <name>User</name>
+  <synonym>
+   <key>en</key>
+   <value>1C093957-0383-DF9F-F7AE-E5896C73122F</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Users</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="e37cfdd8-9a52-4523-848e-308fc1302357">
+  <name>TimeStamp</name>
+  <synonym>
+   <key>en</key>
+   <value>8B2EF3EE-55DA-0C53-33BF-F3C4D2A135E4</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>20</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="639ee427-de85-4cc9-9a41-26fb8bb18a41">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>30975D99-2EAA-978C-C7A5-5CDAB0E0EF56</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="66486fa0-8041-4f5c-92cc-dd09096429d6">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>60CDCC27-C7F6-6A51-14E8-88B445BE729B</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:InformationRegister>

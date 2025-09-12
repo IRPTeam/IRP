@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="4a29b674-4708-4901-a65d-21d3f5971ecf">
+ <producedTypes>
+  <managerType typeId="5509c561-61e8-4ec6-8ada-99e55ae8e0de" valueTypeId="7bc7dad6-f3ea-4015-a52a-176c4967f23c"/>
+  <valueManagerType typeId="a6aa1876-87d3-43a5-9f02-a5ac15bbcb26" valueTypeId="da155d72-85cc-4af5-9772-3a76d4b80276"/>
+  <valueKeyType typeId="2eaf005a-9dfe-4585-833d-fea6954e0453" valueTypeId="bc86378e-6402-4c2c-a685-37ae943415b5"/>
+ </producedTypes>
+ <name>UseDashboard</name>
+ <synonym>
+  <key>en</key>
+  <value>39DC3CFC-F9BE-E238-8268-8848A38F4BAF</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

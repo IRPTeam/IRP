@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="39eae89e-a638-4995-93e7-86e3613229b8">
+ <producedTypes>
+  <objectType typeId="00379388-746f-4eea-939e-c2b4113548bb" valueTypeId="bfb1a32a-606f-4a7d-aa1d-98226f57d69e"/>
+  <managerType typeId="0507ea48-55c6-459a-ac63-8a0c4dfa7e97" valueTypeId="49b20785-81f6-4df5-ab0a-6050075f18b4"/>
+ </producedTypes>
+ <name>R3027A_CashAdvance</name>
+ <synonym>
+  <key>en</key>
+  <value>78F47DFC-B93A-1343-351B-BDFFB869E738</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R3027A_CashAdvance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="2a355629-ffa2-4173-82ca-9422c8836987">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>en</key>
+   <value>21733299-E498-4EEE-EF64-4489A9401B13</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

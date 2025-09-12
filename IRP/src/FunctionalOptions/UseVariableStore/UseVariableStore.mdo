@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ae4468e9-41f1-4724-9778-18beae96b6fc">
+ <name>UseVariableStore</name>
+ <synonym>
+  <key>en</key>
+  <value>16C7B34B-BBDD-0ADE-E2D6-65AB5FF4F3D9</value>
+ </synonym>
+ <location>Constant.UseVariableStore</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.IsVariableStore</content>
+ <content>Catalog.RowIDs.Attribute.IsVariableStore</content>
+ <content>Catalog.Companies.Attribute.UseVariableStoreInOrders</content>
+ <content>Document.SalesOrder.TabularSection.ItemList.Attribute.IsVariableStore</content>
+ <content>Catalog.RowIDs.Attribute.IsFixedStore</content>
+</mdclass:FunctionalOption>

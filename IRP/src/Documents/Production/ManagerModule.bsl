@@ -177,10 +177,10 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
 		// is posting
 		FreeStocksTable   =  PostingServer.GetQueryTableByName("R4011B_FreeStocks", Parameters, True);
@@ -268,6 +268,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(R4035B_IncomingStocks_Exists());
+	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
@@ -275,6 +276,7 @@ Function Materials()
 	Return "SELECT
 		   |	ProductionMaterials.Ref.Date AS Period,
 		   |	ProductionMaterials.Ref.Company AS Company,
+		   |	ProductionMaterials.Ref.Branch AS Branch,
 		   |	ProductionMaterials.Ref.TransactionType = VALUE(Enum.ProductionTransactionTypes.Produce) AS IsProduce,
 		   |	ProductionMaterials.Ref.BillOfMaterials AS BillOfMaterials,
 		   |	ProductionMaterials.Ref.ProductionPlanning AS ProductionPlanning,
@@ -305,6 +307,7 @@ Function Header()
 		   |	Production.TransactionType = VALUE(Enum.ProductionTransactionTypes.Produce) AS IsProduce,
 		   |	Production.DurationOfProduction AS Duration,
 		   |	Production.Company,
+		   |	Production.Branch,
 		   |	Production.BusinessUnit,
 		   |	Production.BillOfMaterials,
 		   |	Production.ProductionPlanning.PlanningPeriod AS PlanningPeriod,
@@ -689,6 +692,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction,
 		   |	Header.MainProductionFinishedDate AS Period,
 		   |	Header.Company,
+		   |	Header.Branch,
 		   |	Header.StoreProduction AS Store,
 		   |	Header.ItemKey,
 		   |	SUM(Header.Quantity) AS Quantity
@@ -702,6 +706,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Receipt),
 		   |	Header.MainProductionFinishedDate,
 		   |	Header.Company,
+		   |	Header.Branch,
 		   |	Header.StoreProduction,
 		   |	Header.ItemKey
 		   |
@@ -711,6 +716,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Expense),
 		   |	Materials.MainProductionFinishedDate AS Period,
 		   |	Materials.Company,
+		   |	Materials.Branch,
 		   |	Materials.Store,
 		   |	Materials.ItemKey,
 		   |	SUM(Materials.Quantity) AS Quantity
@@ -724,6 +730,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Expense),
 		   |	Materials.MainProductionFinishedDate,
 		   |	Materials.Company,
+		   |	Materials.Branch,
 		   |	Materials.Store,
 		   |	Materials.ItemKey";
 EndFunction

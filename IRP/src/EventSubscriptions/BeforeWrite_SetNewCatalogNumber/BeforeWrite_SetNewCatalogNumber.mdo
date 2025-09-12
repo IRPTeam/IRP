@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4d501973-e010-40ee-ae22-4136653c3c2a">
+ <name>BeforeWrite_SetNewCatalogNumber</name>
+ <synonym>
+  <key>en</key>
+  <value>FEC22105-3194-F3D7-7EDB-B2D71007C85B</value>
+ </synonym>
+ <source>
+  <types>CatalogObject</types>
+ </source>
+ <event>BeforeWrite</event>
+ <handler>CommonModule.NumberingRulesServer.SetNewCatalogNumberBeforeWrite</handler>
+</mdclass:EventSubscription>

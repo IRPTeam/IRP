@@ -103,7 +103,7 @@ Procedure CreateSchedule(Command)
 	OpeningParameters.Insert("EndDate", ThisObject.Period.EndDate);
 	
 	OpenForm("InformationRegister.T9530S_WorkDays.Form.CreateSchedule", 
-		OpeningParameters, ThisObject, , , , New NotifyDescription("UpdateFormEnd", ThisObject) 
+		OpeningParameters, ThisObject, , , , New CallbackDescription("UpdateFormEnd", ThisObject) 
 		,FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -115,7 +115,7 @@ Procedure CopySchedule(Command)
 	OpeningParameters.Insert("EndDate", ThisObject.Period.EndDate);
 	
 	OpenForm("InformationRegister.T9530S_WorkDays.Form.CopySchedule", 
-		OpeningParameters, ThisObject, , , , New NotifyDescription("UpdateFormEnd", ThisObject)
+		OpeningParameters, ThisObject, , , , New CallbackDescription("UpdateFormEnd", ThisObject)
 		,FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure
 
@@ -140,7 +140,7 @@ Procedure CalendarSelection(Item, SelectedDate)
 	EndIf;
 	
 	OpenForm("InformationRegister.T9530S_WorkDays.RecordForm",
-		OpeningParameters, ThisObject, , , , New NotifyDescription("UpdateFormEnd", ThisObject)
+		OpeningParameters, ThisObject, , , , New CallbackDescription("UpdateFormEnd", ThisObject)
 		,FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure
 

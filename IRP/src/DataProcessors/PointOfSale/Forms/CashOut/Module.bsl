@@ -80,7 +80,7 @@ Function CreateMoneyTransferAtServer()
 	
 	NewDocument = Documents.MoneyTransfer.CreateDocument();
 	NewDocument.Fill(FillingData);
-	NewDocument.Description = ThisObject.Description;
+	NewDocument.Comment = ThisObject.Comment;
 	
 	Try
 		NewDocument.Write(DocumentWriteMode.Posting);

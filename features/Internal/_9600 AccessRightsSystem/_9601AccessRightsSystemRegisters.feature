@@ -1439,7 +1439,7 @@ Scenario: 962180 LimitedAccessRegisters - AccumulationRegisters R2001T Sales, Do
 	Then the number of "List" table lines is "равно" "7"
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And "List" table does not contain lines
-		| 'Description'                                                                                                                                                         |
+		| 'Comment'                                                                                                                                                         |
 		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store access deny'                                                    |
 		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Only read access&Store access deny'                             |
 		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                        |
@@ -1470,7 +1470,7 @@ Scenario: 962181 LimitedAccessRegisters - AccumulationRegisters R2001T Sales, Co
 	Then the number of "List" table lines is "равно" "5"
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And "List" table does not contain lines
-		| 'Description'                                                                                                                                                         |
+		| 'Comment'                                                                                                                                                         |
 		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store access deny'                                                    |
 		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Only read access&Store access deny'                             |
 		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company access deny;Store: Store Read and Write Access&Store access deny'                        |

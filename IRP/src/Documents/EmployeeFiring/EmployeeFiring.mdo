@@ -44,7 +44,7 @@
   <objectField>Document.EmployeeFiring.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.EmployeeFiring.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.EmployeeFiring.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.EmployeeFiring.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.EmployeeFiring.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -67,6 +67,8 @@
  <defaultChoiceForm>Document.EmployeeFiring.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>InformationRegister.T9510S_Staffing</registerRecords>
+ <registerRecords>AccumulationRegister.R9541T_VacationUsage</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

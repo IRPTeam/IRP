@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7800f3d6-51c3-48d4-8b67-5750080a8af2">
+ <name>UpdateManagerServer</name>
+ <synonym>
+  <key>en</key>
+  <value>6F88CBD2-9F84-4760-0EFE-ECA8B1FC5070</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
+</mdclass:CommonModule>

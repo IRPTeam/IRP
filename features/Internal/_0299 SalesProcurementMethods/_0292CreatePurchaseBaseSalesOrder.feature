@@ -34,8 +34,8 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
-		When  Create catalog Partners objects (Lomaniti)
-		When  Create catalog Partners objects (Ferron BP)
+		When Create catalog Partners objects (Lomaniti)
+		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
 		When Create catalog Countries objects
 		When Create information register PartnerSegments records
@@ -49,6 +49,11 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create information register Taxes records (VAT)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
 	When Create document SalesOrder objects (check SalesOrderProcurement)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(501).GetObject().Write(DocumentWriteMode.Posting);"   |
@@ -56,6 +61,14 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 		| "Documents.SalesOrder.FindByNumber(502).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(503).GetObject().Write(DocumentWriteMode.Posting);"   |
+	When create document SalesOrder objects (procurement method for Service)
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(522).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.SalesOrder.FindByNumber(523).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.SalesOrder.FindByNumber(524).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.SalesOrder.FindByNumber(525).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.SalesOrder.FindByNumber(526).GetObject().Write(DocumentWriteMode.Posting);"   |
+		| "Documents.SalesOrder.FindByNumber(527).GetObject().Write(DocumentWriteMode.Posting);"   |
 
 Scenario: _0292001 check preparation
 	When check preparation
@@ -516,9 +529,9 @@ Scenario: _029202 create PI and GR based on PO that based on SO
 			And I close current window		
 			And I click "Show row key" button
 			And "RowIDInfo" table contains lines
-				| '#'    | 'Key'    | 'Basis'                      | 'Row ID'                                  | 'Next step'    | 'Quantity'    | 'Basis key'                      | 'Current step'    | 'Row ref'                                  |
-				| '1'    | '*'      | '$$GoodsReceipt0292022$$'    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'    | ''             | '1,000'       | '$$Rov1GoodsReceipt0292022$$'    | 'PI'              | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'     |
-				| '2'    | '*'      | '$$GoodsReceipt0292022$$'    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'    | ''             | '20,000'      | '$$Rov2GoodsReceipt0292022$$'    | 'PI'              | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'     |
+				| '#' | 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                   | 'Current step' | 'Row ref'                              |
+				| '1' | '*'   | '$$GoodsReceipt0292022$$' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | ''          | '1,000'    | '$$Rov1GoodsReceipt0292022$$' | 'PI'           | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' |
+				| '2' | '*'   | '$$GoodsReceipt0292022$$' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | ''          | '20,000'   | '$$Rov2GoodsReceipt0292022$$' | 'PI'           | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice0292022$$" variable
 			And I delete "$$PurchaseInvoice0292022$$" variable
@@ -685,79 +698,79 @@ Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
 Scenario: _029205 check movements in the register TM1010B_RowIDMovements
 	Given I open hyperlink "e1cib/list/AccumulationRegister.TM1010B_RowIDMovements"
 	And "List" table contains lines
-		| 'Recorder'                                   | 'Row ID'                                | 'Step'      | 'Basis'                                      | 'Row ref'                               | 'Quantity'   |
-		| 'Sales order 501 dated 30.03.2021 11:56:21'  | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PO&PI'     | 'Sales order 501 dated 30.03.2021 11:56:21'  | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '5,000'      |
-		| 'Sales order 501 dated 30.03.2021 11:56:21'  | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'PO&PI'     | 'Sales order 501 dated 30.03.2021 11:56:21'  | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '2,000'      |
-		| 'Sales order 501 dated 30.03.2021 11:56:21'  | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7'  | 'SI&WO&WS'  | 'Sales order 501 dated 30.03.2021 11:56:21'  | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7'  | '1,000'      |
-		| 'Sales order 501 dated 30.03.2021 11:56:21'  | '2e0968f4-d293-4faa-abe0-d25c849e9c32'  | 'SI&SC'     | 'Sales order 501 dated 30.03.2021 11:56:21'  | '2e0968f4-d293-4faa-abe0-d25c849e9c32'  | '5,000'      |
-		| 'Sales order 501 dated 30.03.2021 11:56:21'  | '2659612d-158f-49a2-bbf4-46c70f05eb9d'  | 'SI&SC'     | 'Sales order 501 dated 30.03.2021 11:56:21'  | '2659612d-158f-49a2-bbf4-46c70f05eb9d'  | '10,000'     |
-		| 'Sales order 502 dated 30.03.2021 11:56:28'  | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | 'PO&PI'     | 'Sales order 502 dated 30.03.2021 11:56:28'  | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | '8,000'      |
-		| 'Sales order 502 dated 30.03.2021 11:56:28'  | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'PO&PI'     | 'Sales order 502 dated 30.03.2021 11:56:28'  | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| 'Sales order 502 dated 30.03.2021 11:56:28'  | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'PO&PI'     | 'Sales order 502 dated 30.03.2021 11:56:28'  | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '8,000'      |
-		| 'Sales order 502 dated 30.03.2021 11:56:28'  | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7'  | 'SI&WO&WS'  | 'Sales order 502 dated 30.03.2021 11:56:28'  | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7'  | '2,000'      |
-		| 'Sales order 503 dated 30.03.2021 11:57:06'  | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'PO&PI'     | 'Sales order 503 dated 30.03.2021 11:57:06'  | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| 'Sales order 503 dated 30.03.2021 11:57:06'  | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'PO&PI'     | 'Sales order 503 dated 30.03.2021 11:57:06'  | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| 'Sales order 503 dated 30.03.2021 11:57:06'  | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'PO&PI'     | 'Sales order 503 dated 30.03.2021 11:57:06'  | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '10,000'     |
-		| '$$PurchaseOrder029201$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PO&PI'     | 'Sales order 501 dated 30.03.2021 11:56:21'  | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '5,000'      |
-		| '$$PurchaseOrder029201$$'                    | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | 'PO&PI'     | 'Sales order 502 dated 30.03.2021 11:56:28'  | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | '8,000'      |
-		| '$$PurchaseOrder029201$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'PO&PI'     | 'Sales order 501 dated 30.03.2021 11:56:21'  | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '2,000'      |
-		| '$$PurchaseOrder029201$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'PO&PI'     | 'Sales order 502 dated 30.03.2021 11:56:28'  | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$PurchaseOrder029201$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'PO&PI'     | 'Sales order 502 dated 30.03.2021 11:56:28'  | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '8,000'      |
-		| '$$PurchaseOrder029201$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'PO&PI'     | 'Sales order 503 dated 30.03.2021 11:57:06'  | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| '$$PurchaseOrder029201$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'PO&PI'     | 'Sales order 503 dated 30.03.2021 11:57:06'  | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| '$$PurchaseOrder029201$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'PO&PI'     | 'Sales order 503 dated 30.03.2021 11:57:06'  | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '10,000'     |
-		| '$$PurchaseOrder029201$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '5,000'      |
-		| '$$PurchaseOrder029201$$'                    | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | '8,000'      |
-		| '$$PurchaseOrder029201$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '2,000'      |
-		| '$$PurchaseOrder029201$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$PurchaseOrder029201$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '15,000'     |
-		| '$$PurchaseOrder029201$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| '$$PurchaseOrder029201$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| '$$PurchaseOrder029201$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '20,000'     |
-		| '$$PurchaseOrder029201$$'                    | '$$Rov9PurchaseOrder029201$$'           | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '$$Rov9PurchaseOrder029201$$'           | '40,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '4,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | '8,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '2,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '15,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '$$Rov9PurchaseOrder029201$$'           | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '$$Rov9PurchaseOrder029201$$'           | '40,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '4,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '3,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '15,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| '$$PurchaseInvoice0292021$$'                 | '$$Rov9PurchaseOrder029201$$'           | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '$$Rov9PurchaseOrder029201$$'           | '40,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'SI&SC'     | '$$PurchaseInvoice0292021$$'                 | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$PurchaseInvoice0292021$$'                 | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | 'SI&SC'     | '$$PurchaseInvoice0292021$$'                 | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | '8,000'      |
-		| '$$GoodsReceipt0292021$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '4,000'      |
-		| '$$GoodsReceipt0292021$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '3,000'      |
-		| '$$GoodsReceipt0292021$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '15,000'     |
-		| '$$GoodsReceipt0292021$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| '$$GoodsReceipt0292021$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| '$$GoodsReceipt0292021$$'                    | '$$Rov9PurchaseOrder029201$$'           | 'GR'        | '$$PurchaseInvoice0292021$$'                 | '$$Rov9PurchaseOrder029201$$'           | '40,000'     |
-		| '$$GoodsReceipt0292021$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | 'SI&SC'     | '$$GoodsReceipt0292021$$'                    | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf'  | '5,000'      |
-		| '$$GoodsReceipt0292021$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | 'SI&SC'     | '$$GoodsReceipt0292021$$'                    | '323ed282-6c37-4443-b3b5-6abd5531e1b7'  | '10,000'     |
-		| '$$GoodsReceipt0292021$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'SI&SC'     | '$$GoodsReceipt0292021$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '15,000'     |
-		| '$$GoodsReceipt0292021$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | 'SI&SC'     | '$$GoodsReceipt0292021$$'                    | '3cddf099-4bbf-4c9c-807a-bb2388f83e42'  | '3,000'      |
-		| '$$GoodsReceipt0292021$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'SI&SC'     | '$$GoodsReceipt0292021$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '4,000'      |
-		| '$$GoodsReceipt0292022$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '1,000'      |
-		| '$$GoodsReceipt0292022$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'PI&GR'     | '$$PurchaseOrder029201$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '20,000'     |
-		| '$$GoodsReceipt0292022$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PI'        | '$$GoodsReceipt0292022$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '1,000'      |
-		| '$$GoodsReceipt0292022$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'PI'        | '$$GoodsReceipt0292022$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '20,000'     |
-		| '$$GoodsReceipt0292022$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'SI&SC'     | '$$GoodsReceipt0292022$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '20,000'     |
-		| '$$GoodsReceipt0292022$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'SI&SC'     | '$$GoodsReceipt0292022$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '1,000'      |
-		| '$$PurchaseInvoice0292022$$'                 | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | 'PI'        | '$$GoodsReceipt0292022$$'                    | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0'  | '1,000'      |
-		| '$$PurchaseInvoice0292022$$'                 | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | 'PI'        | '$$GoodsReceipt0292022$$'                    | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28'  | '20,000'     |
-		| '$$SalesInvoice029203$$'                     | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7'  | 'SI&WO&WS'  | 'Sales order 502 dated 30.03.2021 11:56:28'  | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7'  | '2,000'      |
-		| '$$SalesInvoice029203$$'                     | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | 'SI&SC'     | '$$PurchaseInvoice0292021$$'                 | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91'  | '8,000'      |
-		| '$$SalesInvoice029203$$'                     | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'SI&SC'     | '$$PurchaseInvoice0292021$$'                 | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$SalesInvoice029203$$'                     | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'SC'        | '$$SalesInvoice029203$$'                     | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$ShipmentConfirmation029203$$'             | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | 'SC'        | '$$SalesInvoice029203$$'                     | '647c0486-7e3c-49c1-aca2-7ffcc3246b18'  | '11,000'     |
-		| '$$ShipmentConfirmation029204$$'             | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'SI&SC'     | '$$GoodsReceipt0292021$$'                    | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '5,000'      |
-		| '$$ShipmentConfirmation029204$$'             | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | 'SI'        | '$$ShipmentConfirmation029204$$'             | '4a003d08-12af-4c34-98d5-5cdeb84616de'  | '5,000'      |
-	Then the number of "List" table lines is "равно" "72"
+		| 'Recorder'                                  | 'Row ID'                               | 'Step'     | 'Basis'                                     | 'Row ref'                              | 'Quantity' |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PO&PI'    | 'Sales order 501 dated 30.03.2021 11:56:21' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '5,000'    |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PO&PI'    | 'Sales order 501 dated 30.03.2021 11:56:21' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '2,000'    |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7' | 'SI&WO&WS' | 'Sales order 501 dated 30.03.2021 11:56:21' | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7' | '1,000'    |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | '2e0968f4-d293-4faa-abe0-d25c849e9c32' | 'SI&SC'    | 'Sales order 501 dated 30.03.2021 11:56:21' | '2e0968f4-d293-4faa-abe0-d25c849e9c32' | '5,000'    |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | '2659612d-158f-49a2-bbf4-46c70f05eb9d' | 'SI&SC'    | 'Sales order 501 dated 30.03.2021 11:56:21' | '2659612d-158f-49a2-bbf4-46c70f05eb9d' | '10,000'   |
+		| 'Sales order 502 dated 30.03.2021 11:56:28' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PO&PI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| 'Sales order 502 dated 30.03.2021 11:56:28' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PO&PI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| 'Sales order 502 dated 30.03.2021 11:56:28' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PO&PI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '8,000'    |
+		| 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI&WO&WS' | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | '2,000'    |
+		| 'Sales order 503 dated 30.03.2021 11:57:06' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PO&PI'    | 'Sales order 503 dated 30.03.2021 11:57:06' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| 'Sales order 503 dated 30.03.2021 11:57:06' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PO&PI'    | 'Sales order 503 dated 30.03.2021 11:57:06' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| 'Sales order 503 dated 30.03.2021 11:57:06' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PO&PI'    | 'Sales order 503 dated 30.03.2021 11:57:06' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '10,000'   |
+		| '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PO&PI'    | 'Sales order 501 dated 30.03.2021 11:56:21' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '5,000'    |
+		| '$$PurchaseOrder029201$$'                   | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PO&PI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$PurchaseOrder029201$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PO&PI'    | 'Sales order 501 dated 30.03.2021 11:56:21' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '2,000'    |
+		| '$$PurchaseOrder029201$$'                   | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PO&PI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$PurchaseOrder029201$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PO&PI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '8,000'    |
+		| '$$PurchaseOrder029201$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PO&PI'    | 'Sales order 503 dated 30.03.2021 11:57:06' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$PurchaseOrder029201$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PO&PI'    | 'Sales order 503 dated 30.03.2021 11:57:06' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$PurchaseOrder029201$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PO&PI'    | 'Sales order 503 dated 30.03.2021 11:57:06' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '10,000'   |
+		| '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '5,000'    |
+		| '$$PurchaseOrder029201$$'                   | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$PurchaseOrder029201$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '2,000'    |
+		| '$$PurchaseOrder029201$$'                   | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$PurchaseOrder029201$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$PurchaseOrder029201$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$PurchaseOrder029201$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$PurchaseOrder029201$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$PurchaseOrder029201$$'                   | '$$Rov9PurchaseOrder029201$$'          | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '$$Rov9PurchaseOrder029201$$'          | '40,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '4,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '2,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '$$Rov9PurchaseOrder029201$$'          | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '$$Rov9PurchaseOrder029201$$'          | '40,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '4,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '3,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '$$Rov9PurchaseOrder029201$$'          | 'GR'       | '$$PurchaseInvoice0292021$$'                | '$$Rov9PurchaseOrder029201$$'          | '40,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SI&SC'    | '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'SI&SC'    | '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '4,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '3,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'GR'       | '$$PurchaseInvoice0292021$$'                | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '$$Rov9PurchaseOrder029201$$'          | 'GR'       | '$$PurchaseInvoice0292021$$'                | '$$Rov9PurchaseOrder029201$$'          | '40,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '3,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '4,000'    |
+		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI&GR'    | '$$PurchaseOrder029201$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI'       | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI'       | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'SI&SC'    | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'SI&SC'    | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$PurchaseInvoice0292022$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI'       | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$PurchaseInvoice0292022$$'                | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI'       | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$SalesInvoice029203$$'                    | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI&WO&WS' | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | '2,000'    |
+		| '$$SalesInvoice029203$$'                    | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'SI&SC'    | '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SI&SC'    | '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SC'       | '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$ShipmentConfirmation029203$$'            | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SC'       | '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI&SC'    | '$$GoodsReceipt0292021$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '5,000'    |
+		| '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI'       | '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '5,000'    |
+	Then the number of "List" table lines is "равно" "86"
 	And I close all client application windows
 	
 
@@ -2737,18 +2750,2194 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 # 		And I save the value of "Number" field as "$$NumberShipmentConfirmation029214$$"
 # 		And I save the window as "$$ShipmentConfirmation029214$$"
 # 		And I close current window
-# 		And I close all client application windows				
-						
-						
+# 		And I close all client application windows	
 
-
+Scenario: _029228 SO - PO - GR - SC - PI - SI (selling from one store while purchasing for another)
+	And I close all client application windows
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '502'       |
+		And in the table "List" I click "Copy" button
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button
+		And I click "Post" button
+		And I delete "$$NumberSalesOrder029228$$" variable
+		And I delete "$$SalesOrder029228$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrder029228$$"
+		And I save the window as "$$SalesOrder029228$$"
+	* Create PO
+		And I click "Purchase order" button
+		And I click "Ok" button
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Ferron BP'      |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And I select from the drop-down list named "Store" by "Store 02" string
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key'  | 'Item'     | 'Sales order'          | 'Store'    |
+			| '38/Yellow' | 'Trousers' | '$$SalesOrder029228$$' | 'Store 02' |
+			| '38/Black'  | 'Shirt'    | '$$SalesOrder029228$$' | 'Store 02' |
+			| 'M/White'   | 'Dress'    | '$$SalesOrder029228$$' | 'Store 02' |
+	* Unlink and link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'    |
+			| '38/Yellow'   | 'Trousers'   | ''               |
+			| '38/Black'    | 'Shirt'      | ''               |
+			| 'M/White'     | 'Dress'      | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And Delay 2
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button		
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
+			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029228$$'   | '$$SalesOrder029228$$'    |
+			| '38/Black'    | 'Shirt'      | '$$SalesOrder029228$$'   | '$$SalesOrder029228$$'    |
+			| 'M/White'     | 'Dress'      | '$$SalesOrder029228$$'   | '$$SalesOrder029228$$'    |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseOrder029228$$" variable
+		And I delete "$$PurchaseOrder029228$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029228$$"
+		And I save the window as "$$PurchaseOrder029228$$"
+	* Create GR
+		And I click "Goods receipt" button
+		And I click "Ok" button
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Purchase order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029228$$' | '$$PurchaseOrder029228$$' | 'Store 02' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029228$$' | '$$PurchaseOrder029228$$' | 'Store 02' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029228$$' | '$$PurchaseOrder029228$$' | 'Store 02' |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             | 'Store'    |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029228$$'   | '$$PurchaseOrder029228$$'    | 'Store 02' |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029228$$'   | '$$PurchaseOrder029228$$'    | 'Store 02' |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029228$$'   | '$$PurchaseOrder029228$$'    | 'Store 02' |
+		And I click "Post" button
+		And I delete "$$NumberGoodsReceipt029228$$" variable
+		And I delete "$$GoodsReceipt029228$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt029228$$"
+		And I save the window as "$$GoodsReceipt029228$$"
+		And I close all client application windows
+	* Create SC
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$$NumberSalesOrder029228$$'    |
+		And I click "Shipment confirmation" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'          | 'Store'    |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029228$$'   | '$$SalesOrder029228$$'    | 'Store 01' |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029228$$'   | '$$SalesOrder029228$$'    | 'Store 01' |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029228$$'   | '$$SalesOrder029228$$'    | 'Store 01' |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Shipment basis'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'          | 'Store'    |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029228$$'   | '$$SalesOrder029228$$'    | 'Store 01' |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029228$$'   | '$$SalesOrder029228$$'    | 'Store 01' |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029228$$'   | '$$SalesOrder029228$$'    | 'Store 01' |
+		And I click "Post" button
+		And I delete "$$NumberShipmentConfirmation029228$$" variable
+		And I delete "$$ShipmentConfirmation029228$$" variable
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation029228$$"
+		And I save the window as "$$ShipmentConfirmation29228$$"
+		And I close current window
+	* Create PI	
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'                          |
+			| '$$NumberGoodsReceipt029228$$'    |
+		And I click "Purchase invoice" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Total amount'   | 'Additional analytic'   | 'Internal supply request'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Expense type'   | 'Purchase order'            | 'Detail'   | 'Sales order'            | 'Net amount'   | 'Use goods receipt'    |
+			| 'Trousers'   | '38/Yellow'   | ''                     | 'No'                   | '122,03'       | 'pcs'    | ''                     | ''                    | '100,00'   | '18%'   | ''                | '800,00'         | ''                      | ''                          | 'Store 02'   | '8,000'      | ''                            | ''               | '$$PurchaseOrder029228$$'   | ''         | '$$SalesOrder029228$$'   | '677,97'       | 'Yes'                  |
+			| 'Shirt'      | '38/Black'    | ''                     | 'No'                   | '335,59'       | 'pcs'    | ''                     | ''                    | '200,00'   | '18%'   | ''                | '2 200,00'       | ''                      | ''                          | 'Store 02'   | '11,000'     | ''                            | ''               | '$$PurchaseOrder029228$$'   | ''         | '$$SalesOrder029228$$'   | '1 864,41'     | 'Yes'                  |
+			| 'Dress'      | 'M/White'     | ''                     | 'No'                   | '366,10'       | 'pcs'    | ''                     | ''                    | '300,00'   | '18%'   | ''                | '2 400,00'       | ''                      | ''                          | 'Store 02'   | '8,000'      | ''                            | ''               | '$$PurchaseOrder029228$$'   | ''         | '$$SalesOrder029228$$'   | '2 033,90'     | 'Yes'                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Purchase order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029228$$' | '$$PurchaseOrder029228$$' | 'Store 02' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029228$$' | '$$PurchaseOrder029228$$' | 'Store 02' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029228$$' | '$$PurchaseOrder029228$$' | 'Store 02' |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseInvoice029228$$" variable
+		And I delete "$$PurchaseInvoice029228$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029228$$"
+		And I save the window as "$$PurchaseInvoice29228$$"
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'                                  |
+			| '$$NumberShipmentConfirmation029228$$'    |
+		And I click "Sales invoice" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| '#'   | 'Price type'          | 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Net amount'   | 'Total amount'   | 'Store'      | 'Use shipment confirmation'   | 'Sales order'             |
+			| '1'   | 'Basic Price Types'   | 'Trousers'   | '38/Yellow'   | 'No'                   | '488,14'       | 'pcs'    | '8,000'      | '400,00'   | '18%'   | '2 711,86'     | '3 200,00'       | 'Store 01'   | 'Yes'                         | '$$SalesOrder029228$$'    |
+			| '2'   | 'Basic Price Types'   | 'Shirt'      | '38/Black'    | 'No'                   | '587,29'       | 'pcs'    | '11,000'     | '350,00'   | '18%'   | '3 262,71'     | '3 850,00'       | 'Store 01'   | 'Yes'                         | '$$SalesOrder029228$$'    |
+			| '3'   | 'Basic Price Types'   | 'Dress'      | 'M/White'     | 'No'                   | '634,58'       | 'pcs'    | '8,000'      | '520,00'   | '18%'   | '3 525,42'     | '4 160,00'       | 'Store 01'   | 'Yes'                         | '$$SalesOrder029228$$'    |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'    |
+			| 'Trousers'   | '38/Yellow'   | ''               |
+			| 'Shirt'      | '38/Black'    | ''               |
+			| 'Dress'      | 'M/White'     | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'             |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029228$$'    |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029228$$'    |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029228$$'    |
+		And I click "Post" button
+		And I delete "$$NumberSalesInvoice029228$$" variable
+		And I delete "$$SalesInvoice029228$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029228$$"
+		And I save the window as "$$SalesInvoice29228$$"
+		And I close all client application windows
 		
 				
+Scenario: _029229 SO - PO - GR - PI - SC - SI (selling from one store while purchasing for another)
+	And I close all client application windows
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '502'       |
+		And in the table "List" I click "Copy" button
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button
+		And I click "Post" button
+		And I delete "$$NumberSalesOrder029229$$" variable
+		And I delete "$$SalesOrder029229$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrder029229$$"
+		And I save the window as "$$SalesOrder029229$$"
+	* Create PO
+		And I click "Purchase order" button
+		And I click "Ok" button
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Ferron BP'      |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And I select from the drop-down list named "Store" by "Store 02" string
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'             | 'Store'             |
+			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029229$$'    | 'Store 02'          |
+			| '38/Black'    | 'Shirt'      | '$$SalesOrder029229$$'    | 'Store 02'          |
+			| 'M/White'     | 'Dress'      | '$$SalesOrder029229$$'    | 'Store 02'          |
+	* Unlink and link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'    |
+			| '38/Yellow'   | 'Trousers'   | ''               |
+			| '38/Black'    | 'Shirt'      | ''               |
+			| 'M/White'     | 'Dress'      | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And Delay 2
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
+			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029229$$'   | '$$SalesOrder029229$$'    |
+			| '38/Black'    | 'Shirt'      | '$$SalesOrder029229$$'   | '$$SalesOrder029229$$'    |
+			| 'M/White'     | 'Dress'      | '$$SalesOrder029229$$'   | '$$SalesOrder029229$$'    |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseOrder029229$$" variable
+		And I delete "$$PurchaseOrder029229$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029229$$"
+		And I save the window as "$$PurchaseOrder029229$$"
+	* Create GR
+		And I click "Goods receipt" button
+		And I click "Ok" button
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             | 'Store'             |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029229$$'   | '$$PurchaseOrder029229$$'    | 'Store 02'          |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029229$$'   | '$$PurchaseOrder029229$$'    | 'Store 02'          |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029229$$'   | '$$PurchaseOrder029229$$'    | 'Store 02'          |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             | 'Store'             |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029229$$'   | '$$PurchaseOrder029229$$'    | 'Store 02'          |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029229$$'   | '$$PurchaseOrder029229$$'    | 'Store 02'          |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029229$$'   | '$$PurchaseOrder029229$$'    | 'Store 02'          |
+		And I click "Post" button
+		And I delete "$$NumberGoodsReceipt029229$$" variable
+		And I delete "$$GoodsReceipt029229$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt029229$$"
+		And I save the window as "$$GoodsReceipt029229$$"
+		And I close all client application windows
+	* Create PI	
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'                          |
+			| '$$NumberGoodsReceipt029229$$'    |
+		And I click "Purchase invoice" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Total amount'   | 'Additional analytic'   | 'Internal supply request'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Expense type'   | 'Purchase order'            | 'Detail'   | 'Sales order'            | 'Net amount'   | 'Use goods receipt'    |
+			| 'Trousers'   | '38/Yellow'   | ''                     | 'No'                   | '122,03'       | 'pcs'    | ''                     | ''                    | '100,00'   | '18%'   | ''                | '800,00'         | ''                      | ''                          | 'Store 02'   | '8,000'      | ''                            | ''               | '$$PurchaseOrder029229$$'   | ''         | '$$SalesOrder029229$$'   | '677,97'       | 'Yes'                  |
+			| 'Shirt'      | '38/Black'    | ''                     | 'No'                   | '335,59'       | 'pcs'    | ''                     | ''                    | '200,00'   | '18%'   | ''                | '2 200,00'       | ''                      | ''                          | 'Store 02'   | '11,000'     | ''                            | ''               | '$$PurchaseOrder029229$$'   | ''         | '$$SalesOrder029229$$'   | '1 864,41'     | 'Yes'                  |
+			| 'Dress'      | 'M/White'     | ''                     | 'No'                   | '366,10'       | 'pcs'    | ''                     | ''                    | '300,00'   | '18%'   | ''                | '2 400,00'       | ''                      | ''                          | 'Store 02'   | '8,000'      | ''                            | ''               | '$$PurchaseOrder029229$$'   | ''         | '$$SalesOrder029229$$'   | '2 033,90'     | 'Yes'                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Purchase order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029229$$' | '$$PurchaseOrder029229$$' | 'Store 02' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029229$$' | '$$PurchaseOrder029229$$' | 'Store 02' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029229$$' | '$$PurchaseOrder029229$$' | 'Store 02' |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseInvoice029229$$" variable
+		And I delete "$$PurchaseInvoice029229$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029229$$"
+		And I save the window as "$$PurchaseInvoice029229$$"
+	* Create SC
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$$NumberSalesOrder029229$$'    |
+		And I click "Shipment confirmation" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Shipment basis'       | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029229$$' | '$$SalesOrder029229$$' | 'Store 01' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029229$$' | '$$SalesOrder029229$$' | 'Store 01' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029229$$' | '$$SalesOrder029229$$' | 'Store 01' |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Shipment basis'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'          | 'Store'    |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029229$$'   | '$$SalesOrder029229$$'    | 'Store 01' |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029229$$'   | '$$SalesOrder029229$$'    | 'Store 01' |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029229$$'   | '$$SalesOrder029229$$'    | 'Store 01' |
+		And I click "Post" button
+		And I delete "$$NumberShipmentConfirmation029229$$" variable
+		And I delete "$$ShipmentConfirmation029229$$" variable
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation029229$$"
+		And I save the window as "$$ShipmentConfirmation029229$$"
+		And I close current window
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'                                  |
+			| '$$NumberShipmentConfirmation029229$$'    |
+		And I click "Sales invoice" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| '#'   | 'Price type'          | 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Net amount'   | 'Total amount'   | 'Store'      | 'Use shipment confirmation'   | 'Sales order'             |
+			| '1'   | 'Basic Price Types'   | 'Trousers'   | '38/Yellow'   | 'No'                   | '488,14'       | 'pcs'    | '8,000'      | '400,00'   | '18%'   | '2 711,86'     | '3 200,00'       | 'Store 01'   | 'Yes'                         | '$$SalesOrder029229$$'    |
+			| '2'   | 'Basic Price Types'   | 'Shirt'      | '38/Black'    | 'No'                   | '587,29'       | 'pcs'    | '11,000'     | '350,00'   | '18%'   | '3 262,71'     | '3 850,00'       | 'Store 01'   | 'Yes'                         | '$$SalesOrder029229$$'    |
+			| '3'   | 'Basic Price Types'   | 'Dress'      | 'M/White'     | 'No'                   | '634,58'       | 'pcs'    | '8,000'      | '520,00'   | '18%'   | '3 525,42'     | '4 160,00'       | 'Store 01'   | 'Yes'                         | '$$SalesOrder029229$$'    |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'    |
+			| 'Trousers'   | '38/Yellow'   | ''               |
+			| 'Shirt'      | '38/Black'    | ''               |
+			| 'Dress'      | 'M/White'     | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029229$$' | 'Store 01' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029229$$' | 'Store 01' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029229$$' | 'Store 01' |
+		And I click "Post" button
+		And I delete "$$NumberSalesInvoice029229$$" variable
+		And I delete "$$SalesInvoice029229$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029229$$"
+		And I save the window as "$$SalesInvoice29229$$"
+		And I close all client application windows			
+			
+				
 
+Scenario: _029230 SO - PO - PI - SI (selling from one store while purchasing for another)
+	And I close all client application windows
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '502'       |
+		And in the table "List" I click "Copy" button
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button
+		And I click "Post" button
+		And I delete "$$NumberSalesOrder029230$$" variable
+		And I delete "$$SalesOrder029230$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrder029230$$"
+		And I save the window as "$$SalesOrder029230$$"
+	* Create PO
+		And I click "Purchase order" button
+		And I click "Ok" button
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Ferron BP'      |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And I select from the drop-down list named "Store" by "Store 02" string
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key'  | 'Item'     | 'Sales order'          | 'Store'    |
+			| '38/Yellow' | 'Trousers' | '$$SalesOrder029230$$' | 'Store 02' |
+			| '38/Black'  | 'Shirt'    | '$$SalesOrder029230$$' | 'Store 02' |
+			| 'M/White'   | 'Dress'    | '$$SalesOrder029230$$' | 'Store 02' |
+		* Unlink and link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'    |
+			| '38/Yellow'   | 'Trousers'   | ''               |
+			| '38/Black'    | 'Shirt'      | ''               |
+			| 'M/White'     | 'Dress'      | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And Delay 2
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
+			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029230$$'   | '$$SalesOrder029230$$'    |
+			| '38/Black'    | 'Shirt'      | '$$SalesOrder029230$$'   | '$$SalesOrder029230$$'    |
+			| 'M/White'     | 'Dress'      | '$$SalesOrder029230$$'   | '$$SalesOrder029230$$'    |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseOrder029230$$" variable
+		And I delete "$$PurchaseOrder029230$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029230$$"
+		And I save the window as "$$PurchaseOrder029230$$"
+	* Create PI	
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder029230$$'    |
+		And I click "Purchase invoice" button
+		And I click "Ok" button
+		And for each line of "ItemList" table I do
+			And I remove "Use goods receipt" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table		
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Price'  | 'VAT' | 'Total amount' | 'Store'    | 'Quantity' | 'Use goods receipt' | 'Purchase order'          | 'Sales order'          | 'Net amount' |
+			| 'Trousers' | '38/Yellow' | 'No'                 | '122,03'     | 'pcs'  | '100,00' | '18%' | '800,00'       | 'Store 02' | '8,000'    | 'No'                | '$$PurchaseOrder029230$$' | '$$SalesOrder029230$$' | '677,97'     |
+			| 'Shirt'    | '38/Black'  | 'No'                 | '335,59'     | 'pcs'  | '200,00' | '18%' | '2 200,00'     | 'Store 02' | '11,000'   | 'No'                | '$$PurchaseOrder029230$$' | '$$SalesOrder029230$$' | '1 864,41'   |
+			| 'Dress'    | 'M/White'   | 'No'                 | '366,10'     | 'pcs'  | '300,00' | '18%' | '2 400,00'     | 'Store 02' | '8,000'    | 'No'                | '$$PurchaseOrder029230$$' | '$$SalesOrder029230$$' | '2 033,90'   |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And Delay 2
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Purchase order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029230$$' | '$$PurchaseOrder029230$$' | 'Store 02' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029230$$' | '$$PurchaseOrder029230$$' | 'Store 02' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029230$$' | '$$PurchaseOrder029230$$' | 'Store 02' |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseInvoice029230$$" variable
+		And I delete "$$PurchaseInvoice029230$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029230$$"
+		And I save the window as "$$PurchaseInvoice029230$$"
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$$NumberSalesOrder029230$$'    |
+		And I click "Sales invoice" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Price type'          | 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Net amount'   | 'Total amount'   | 'Store'      | 'Sales order'             |
+			| 'Basic Price Types'   | 'Trousers'   | '38/Yellow'   | 'No'                   | '488,14'       | 'pcs'    | '8,000'      | '400,00'   | '18%'   | '2 711,86'     | '3 200,00'       | 'Store 01'   | '$$SalesOrder029230$$'    |
+			| 'Basic Price Types'   | 'Shirt'      | '38/Black'    | 'No'                   | '587,29'       | 'pcs'    | '11,000'     | '350,00'   | '18%'   | '3 262,71'     | '3 850,00'       | 'Store 01'   | '$$SalesOrder029230$$'    |
+			| 'Basic Price Types'   | 'Dress'      | 'M/White'     | 'No'                   | '634,58'       | 'pcs'    | '8,000'      | '520,00'   | '18%'   | '3 525,42'     | '4 160,00'       | 'Store 01'   | '$$SalesOrder029230$$'    |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'    |
+			| 'Trousers'   | '38/Yellow'   | ''               |
+			| 'Shirt'      | '38/Black'    | ''               |
+			| 'Dress'      | 'M/White'     | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029230$$' | 'Store 01' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029230$$' | 'Store 01' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029230$$' | 'Store 01' |
+		And I click "Post" button
+		And I delete "$$NumberSalesInvoice029230$$" variable
+		And I delete "$$SalesInvoice029230$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029230$$"
+		And I save the window as "$$SalesInvoice029230$$"
+		And I close all client application windows
 
-		
+Scenario: _029231 SO - PO - PI - SI - SC (selling from one store while purchasing for another)
+	And I close all client application windows
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '502'       |
+		And in the table "List" I click "Copy" button
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button
+		And I click "Post" button
+		And I delete "$$NumberSalesOrder029231$$" variable
+		And I delete "$$SalesOrder029231$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrder029231$$"
+		And I save the window as "$$SalesOrder029231$$"
+	* Create PO
+		And I click "Purchase order" button
+		And I click "Ok" button
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Ferron BP'      |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And I select from the drop-down list named "Store" by "Store 02" string
+		Then "Update item list info" window is opened
+		And I click "OK" button	
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key'  | 'Item'     | 'Sales order'          | 'Store'    |
+			| '38/Yellow' | 'Trousers' | '$$SalesOrder029231$$' | 'Store 02' |
+			| '38/Black'  | 'Shirt'    | '$$SalesOrder029231$$' | 'Store 02' |
+			| 'M/White'   | 'Dress'    | '$$SalesOrder029231$$' | 'Store 02' |
+		* Unlink and link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'    |
+			| '38/Yellow'   | 'Trousers'   | ''               |
+			| '38/Black'    | 'Shirt'      | ''               |
+			| 'M/White'     | 'Dress'      | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And Delay 2
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
+			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029231$$'   | '$$SalesOrder029231$$'    |
+			| '38/Black'    | 'Shirt'      | '$$SalesOrder029231$$'   | '$$SalesOrder029231$$'    |
+			| 'M/White'     | 'Dress'      | '$$SalesOrder029231$$'   | '$$SalesOrder029231$$'    |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseOrder029231$$" variable
+		And I delete "$$PurchaseOrder029231$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029231$$"
+		And I save the window as "$$PurchaseOrder029231$$"
+	* Create PI	
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder029231$$'    |
+		And I click "Purchase invoice" button
+		And I click "Ok" button	
+		And for each line of "ItemList" table I do
+			And I remove "Use goods receipt" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table	
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Price'  | 'VAT' | 'Total amount' | 'Store'    | 'Quantity' | 'Use goods receipt' | 'Purchase order'          | 'Sales order'          | 'Net amount' |
+			| 'Trousers' | '38/Yellow' | 'No'                 | '122,03'     | 'pcs'  | '100,00' | '18%' | '800,00'       | 'Store 02' | '8,000'    | 'No'                | '$$PurchaseOrder029231$$' | '$$SalesOrder029231$$' | '677,97'     |
+			| 'Shirt'    | '38/Black'  | 'No'                 | '335,59'     | 'pcs'  | '200,00' | '18%' | '2 200,00'     | 'Store 02' | '11,000'   | 'No'                | '$$PurchaseOrder029231$$' | '$$SalesOrder029231$$' | '1 864,41'   |
+			| 'Dress'    | 'M/White'   | 'No'                 | '366,10'     | 'pcs'  | '300,00' | '18%' | '2 400,00'     | 'Store 02' | '8,000'    | 'No'                | '$$PurchaseOrder029231$$' | '$$SalesOrder029231$$' | '2 033,90'   |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Purchase order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029231$$' | '$$PurchaseOrder029231$$' | 'Store 02' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029231$$' | '$$PurchaseOrder029231$$' | 'Store 02' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029231$$' | '$$PurchaseOrder029231$$' | 'Store 02' |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseInvoice029231$$" variable
+		And I delete "$$PurchaseInvoice029231$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029231$$"
+		And I save the window as "$$PurchaseInvoice029231$$"
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$$NumberSalesOrder029231$$'    |
+		And I click "Sales invoice" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Price type'          | 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Net amount'   | 'Total amount'   | 'Store'      | 'Sales order'             |
+			| 'Basic Price Types'   | 'Trousers'   | '38/Yellow'   | 'No'                   | '488,14'       | 'pcs'    | '8,000'      | '400,00'   | '18%'   | '2 711,86'     | '3 200,00'       | 'Store 01'   | '$$SalesOrder029231$$'    |
+			| 'Basic Price Types'   | 'Shirt'      | '38/Black'    | 'No'                   | '587,29'       | 'pcs'    | '11,000'     | '350,00'   | '18%'   | '3 262,71'     | '3 850,00'       | 'Store 01'   | '$$SalesOrder029231$$'    |
+			| 'Basic Price Types'   | 'Dress'      | 'M/White'     | 'No'                   | '634,58'       | 'pcs'    | '8,000'      | '520,00'   | '18%'   | '3 525,42'     | '4 160,00'       | 'Store 01'   | '$$SalesOrder029231$$'    |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'    |
+			| 'Trousers'   | '38/Yellow'   | ''               |
+			| 'Shirt'      | '38/Black'    | ''               |
+			| 'Dress'      | 'M/White'     | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029231$$' | 'Store 01' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029231$$' | 'Store 01' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029231$$' | 'Store 01' |
+		And for each line of "ItemList" table I do
+			And I set "Use shipment confirmation" checkbox in "ItemList" table		
+		And I click "Post" button
+		And I delete "$$NumberSalesInvoice029231$$" variable
+		And I delete "$$SalesInvoice029231$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029231$$"
+		And I save the window as "$$SalesInvoice029231$$"
+	* Create SC
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'                          |
+			| '$$NumberSalesInvoice029231$$'    |
+		And I click "Shipment confirmation" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Shipment basis'         | 'Sales invoice'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029231$$' | '$$SalesInvoice029231$$' | '$$SalesInvoice029231$$' | 'Store 01' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029231$$' | '$$SalesInvoice029231$$' | '$$SalesInvoice029231$$' | 'Store 01' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029231$$' | '$$SalesInvoice029231$$' | '$$SalesInvoice029231$$' | 'Store 01' |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Shipment basis'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Shipment basis'         | 'Sales invoice'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029231$$' | '$$SalesInvoice029231$$' | '$$SalesInvoice029231$$' | 'Store 01' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029231$$' | '$$SalesInvoice029231$$' | '$$SalesInvoice029231$$' | 'Store 01' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029231$$' | '$$SalesInvoice029231$$' | '$$SalesInvoice029231$$' | 'Store 01' |
+		And I click "Post" button
+		And I delete "$$NumberShipmentConfirmation029231$$" variable
+		And I delete "$$ShipmentConfirmation029231$$" variable
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation029231$$"
+		And I save the window as "$$ShipmentConfirmation029231$$"
+		And I close current window
+		And I close all client application windows						
+
+Scenario: _029232 SO - PO - PI - GR - SI (selling from one store while purchasing for another)
+	And I close all client application windows
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '502'       |
+		And in the table "List" I click "Copy" button
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button
+		And I click "Post" button
+		And I delete "$$NumberSalesOrder029232$$" variable
+		And I delete "$$SalesOrder029232$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrder029232$$"
+		And I save the window as "$$SalesOrder029232$$"
+	* Create PO
+		And I click "Purchase order" button
+		And I click "Ok" button
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Ferron BP'      |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And I select from the drop-down list named "Store" by "Store 02" string
+		Then "Update item list info" window is opened
+		And I click "OK" button	
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key'  | 'Item'     | 'Sales order'          | 'Store'    |
+			| '38/Yellow' | 'Trousers' | '$$SalesOrder029232$$' | 'Store 02' |
+			| '38/Black'  | 'Shirt'    | '$$SalesOrder029232$$' | 'Store 02' |
+			| 'M/White'   | 'Dress'    | '$$SalesOrder029232$$' | 'Store 02' |
+		* Unlink and link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'    |
+			| '38/Yellow'   | 'Trousers'   | ''               |
+			| '38/Black'    | 'Shirt'      | ''               |
+			| 'M/White'     | 'Dress'      | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          | 'Store'    |
+			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029232$$'   | '$$SalesOrder029232$$'    | 'Store 02' |
+			| '38/Black'    | 'Shirt'      | '$$SalesOrder029232$$'   | '$$SalesOrder029232$$'    | 'Store 02' |
+			| 'M/White'     | 'Dress'      | '$$SalesOrder029232$$'   | '$$SalesOrder029232$$'    | 'Store 02' |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseOrder029232$$" variable
+		And I delete "$$PurchaseOrder029232$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029232$$"
+		And I save the window as "$$PurchaseOrder029232$$"
+	* Create PI	
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder029232$$'    |
+		And I click "Purchase invoice" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
+			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 02'   | '8,000'      | ''                            | '$$PurchaseOrder029232$$'   | '$$SalesOrder029232$$'   | '677,97'        |
+			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 02'   | '11,000'     | ''                            | '$$PurchaseOrder029232$$'   | '$$SalesOrder029232$$'   | '1 864,41'      |
+			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 02'   | '8,000'      | ''                            | '$$PurchaseOrder029232$$'   | '$$SalesOrder029232$$'   | '2 033,90'      |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Purchase order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029232$$' | '$$PurchaseOrder029232$$' | 'Store 02' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029232$$' | '$$PurchaseOrder029232$$' | 'Store 02' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029232$$' | '$$PurchaseOrder029232$$' | 'Store 02' |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseInvoice029232$$" variable
+		And I delete "$$PurchaseInvoice029232$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029232$$"
+		And I save the window as "$$PurchaseInvoice029232$$"
+	* Create GR
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'                             |
+			| '$$NumberPurchaseInvoice029232$$'    |
+		And I click "Goods receipt" button
+		And I click "Ok" button
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Purchase order'          | 'Receipt basis'             | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029232$$' | '$$PurchaseOrder029232$$' | '$$PurchaseInvoice029232$$' | 'Store 02' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029232$$' | '$$PurchaseOrder029232$$' | '$$PurchaseInvoice029232$$' | 'Store 02' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029232$$' | '$$PurchaseOrder029232$$' | '$$PurchaseInvoice029232$$' | 'Store 02' |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'   | 'Receipt basis'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                 | ''                 |
+			| 'Shirt'      | '38/Black'    | ''              | ''                 | ''                 |
+			| 'Dress'      | 'M/White'     | ''              | ''                 | ''                 |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'            | 'Receipt basis'                | 'Store'    |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029232$$'   | '$$PurchaseOrder029232$$'   | '$$PurchaseInvoice029232$$'    | 'Store 02' |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029232$$'   | '$$PurchaseOrder029232$$'   | '$$PurchaseInvoice029232$$'    | 'Store 02' |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029232$$'   | '$$PurchaseOrder029232$$'   | '$$PurchaseInvoice029232$$'    | 'Store 02' |
+		And I click "Post" button
+		And I delete "$$NumberGoodsReceipt029232$$" variable
+		And I delete "$$GoodsReceipt029232$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt029232$$"
+		And I save the window as "$$GoodsReceipt029232$$"
+		And I close all client application windows
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$$NumberSalesOrder029232$$'    |
+		And I click "Sales invoice" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Price type'          | 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Net amount'   | 'Total amount'   | 'Store'      | 'Sales order'             |
+			| 'Basic Price Types'   | 'Trousers'   | '38/Yellow'   | 'No'                   | '488,14'       | 'pcs'    | '8,000'      | '400,00'   | '18%'   | '2 711,86'     | '3 200,00'       | 'Store 01'   | '$$SalesOrder029232$$'    |
+			| 'Basic Price Types'   | 'Shirt'      | '38/Black'    | 'No'                   | '587,29'       | 'pcs'    | '11,000'     | '350,00'   | '18%'   | '3 262,71'     | '3 850,00'       | 'Store 01'   | '$$SalesOrder029232$$'    |
+			| 'Basic Price Types'   | 'Dress'      | 'M/White'     | 'No'                   | '634,58'       | 'pcs'    | '8,000'      | '520,00'   | '18%'   | '3 525,42'     | '4 160,00'       | 'Store 01'   | '$$SalesOrder029232$$'    |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'    |
+			| 'Trousers'   | '38/Yellow'   | ''               |
+			| 'Shirt'      | '38/Black'    | ''               |
+			| 'Dress'      | 'M/White'     | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029232$$' | 'Store 01' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029232$$' | 'Store 01' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029232$$' | 'Store 01' |
+		And I click "Post" button
+		And I delete "$$NumberSalesInvoice029232$$" variable
+		And I delete "$$SalesInvoice029232$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029232$$"
+		And I save the window as "$$SalesInvoice029232$$"
+		And I close all client application windows		
 				
 	
-		
-				
+Scenario: _029233 SO - PO - PI - SC - SI (selling from one store while purchasing for another)
+	And I close all client application windows
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '502'       |
+		And in the table "List" I click "Copy" button
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button
+		And I click "Post" button
+		And I delete "$$NumberSalesOrder029233$$" variable
+		And I delete "$$SalesOrder029233$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrder029233$$"
+		And I save the window as "$$SalesOrder029233$$"
+	* Create PO
+		And I click "Purchase order" button
+		And I click "Ok" button
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Ferron BP'      |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And I select from the drop-down list named "Store" by "Store 02" string
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key'  | 'Item'     | 'Sales order'          | 'Store'    |
+			| '38/Yellow' | 'Trousers' | '$$SalesOrder029233$$' | 'Store 02' |
+			| '38/Black'  | 'Shirt'    | '$$SalesOrder029233$$' | 'Store 02' |
+			| 'M/White'   | 'Dress'    | '$$SalesOrder029233$$' | 'Store 02' |
+		* Unlink and link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'    |
+			| '38/Yellow'   | 'Trousers'   | ''               |
+			| '38/Black'    | 'Shirt'      | ''               |
+			| 'M/White'     | 'Dress'      | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
+		And "ItemList" table contains lines
+			| 'Item key'  | 'Item'     | 'Sales order'          | 'Purchase basis'       | 'Store'    |
+			| '38/Yellow' | 'Trousers' | '$$SalesOrder029233$$' | '$$SalesOrder029233$$' | 'Store 02' |
+			| '38/Black'  | 'Shirt'    | '$$SalesOrder029233$$' | '$$SalesOrder029233$$' | 'Store 02' |
+			| 'M/White'   | 'Dress'    | '$$SalesOrder029233$$' | '$$SalesOrder029233$$' | 'Store 02' |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseOrder029233$$" variable
+		And I delete "$$PurchaseOrder029233$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029233$$"
+		And I save the window as "$$PurchaseOrder029233$$"
+	* Create PI	
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder029233$$'    |
+		And I click "Purchase invoice" button
+		And I click "Ok" button
+		And for each line of "ItemList" table I do
+			And I remove "Use goods receipt" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table	
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
+			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 02'   | '8,000'      | ''                            | '$$PurchaseOrder029233$$'   | '$$SalesOrder029233$$'   | '677,97'        |
+			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 02'   | '11,000'     | ''                            | '$$PurchaseOrder029233$$'   | '$$SalesOrder029233$$'   | '1 864,41'      |
+			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 02'   | '8,000'      | ''                            | '$$PurchaseOrder029233$$'   | '$$SalesOrder029233$$'   | '2 033,90'      |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Purchase order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029233$$' | '$$PurchaseOrder029233$$' | 'Store 02' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029233$$' | '$$PurchaseOrder029233$$' | 'Store 02' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029233$$' | '$$PurchaseOrder029233$$' | 'Store 02' |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseInvoice029233$$" variable
+		And I delete "$$PurchaseInvoice029233$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029233$$"
+		And I save the window as "$$PurchaseInvoice029233$$"
+	* Create SC
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$$NumberSalesOrder029233$$'    |
+		And I click "Shipment confirmation" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Shipment basis'       | 'Sales invoice' | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029233$$' | '$$SalesOrder029233$$' | ''              | 'Store 01' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029233$$' | '$$SalesOrder029233$$' | ''              | 'Store 01' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029233$$' | '$$SalesOrder029233$$' | ''              | 'Store 01' |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Shipment basis'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Shipment basis'       | 'Sales invoice' | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029233$$' | '$$SalesOrder029233$$' | ''              | 'Store 01' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029233$$' | '$$SalesOrder029233$$' | ''              | 'Store 01' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029233$$' | '$$SalesOrder029233$$' | ''              | 'Store 01' |
+		And I click "Post" button
+		And I delete "$$NumberShipmentConfirmation029233$$" variable
+		And I delete "$$ShipmentConfirmation029233$$" variable
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation029233$$"
+		And I save the window as "$$ShipmentConfirmation029233$$"
+		And I close current window
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'                                  |
+			| '$$NumberShipmentConfirmation029233$$'    |
+		And I click "Sales invoice" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Price type'          | 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Net amount'   | 'Total amount'   | 'Store'      | 'Sales order'             |
+			| 'Basic Price Types'   | 'Trousers'   | '38/Yellow'   | 'No'                   | '488,14'       | 'pcs'    | '8,000'      | '400,00'   | '18%'   | '2 711,86'     | '3 200,00'       | 'Store 01'   | '$$SalesOrder029233$$'    |
+			| 'Basic Price Types'   | 'Shirt'      | '38/Black'    | 'No'                   | '587,29'       | 'pcs'    | '11,000'     | '350,00'   | '18%'   | '3 262,71'     | '3 850,00'       | 'Store 01'   | '$$SalesOrder029233$$'    |
+			| 'Basic Price Types'   | 'Dress'      | 'M/White'     | 'No'                   | '634,58'       | 'pcs'    | '8,000'      | '520,00'   | '18%'   | '3 525,42'     | '4 160,00'       | 'Store 01'   | '$$SalesOrder029233$$'    |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'    |
+			| 'Trousers'   | '38/Yellow'   | ''               |
+			| 'Shirt'      | '38/Black'    | ''               |
+			| 'Dress'      | 'M/White'     | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029233$$' | 'Store 01' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029233$$' | 'Store 01' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029233$$' | 'Store 01' |
+		And I click "Post" button
+		And I delete "$$NumberSalesInvoice029233$$" variable
+		And I delete "$$SalesInvoice029233$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029233$$"
+		And I save the window as "$$SalesInvoice029233$$"
+		And I close all client application windows	
 
+Scenario: _029234 SO - PO - PI  - GR - SI - SC (selling from one store while purchasing for another)
+	And I close all client application windows
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '502'       |
+		And in the table "List" I click "Copy" button
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button
+		And I click "Post" button
+		And I delete "$$NumberSalesOrder029234$$" variable
+		And I delete "$$SalesOrder029234$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrder029234$$"
+		And I save the window as "$$SalesOrder029234$$"
+	* Create PO
+		And I click "Purchase order" button
+		And I click "Ok" button
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Ferron BP'      |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And I select from the drop-down list named "Store" by "Store 02" string
+		Then "Update item list info" window is opened
+		And I click "OK" button	
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'             | 'Store'    |
+			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029234$$'    | 'Store 02' |
+			| '38/Black'    | 'Shirt'      | '$$SalesOrder029234$$'    | 'Store 02' |
+			| 'M/White'     | 'Dress'      | '$$SalesOrder029234$$'    | 'Store 02' |
+		* Unlink and link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'    |
+			| '38/Yellow'   | 'Trousers'   | ''               |
+			| '38/Black'    | 'Shirt'      | ''               |
+			| 'M/White'     | 'Dress'      | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
+		And "ItemList" table contains lines
+			| 'Item key'  | 'Item'     | 'Sales order'          | 'Purchase basis'       | 'Store'    |
+			| '38/Yellow' | 'Trousers' | '$$SalesOrder029234$$' | '$$SalesOrder029234$$' | 'Store 02' |
+			| '38/Black'  | 'Shirt'    | '$$SalesOrder029234$$' | '$$SalesOrder029234$$' | 'Store 02' |
+			| 'M/White'   | 'Dress'    | '$$SalesOrder029234$$' | '$$SalesOrder029234$$' | 'Store 02' |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseOrder029234$$" variable
+		And I delete "$$PurchaseOrder029234$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029234$$"
+		And I save the window as "$$PurchaseOrder029234$$"
+	* Create PI	
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder029234$$'    |
+		And I click "Purchase invoice" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
+			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 02'   | '8,000'      | ''                            | '$$PurchaseOrder029234$$'   | '$$SalesOrder029234$$'   | '677,97'        |
+			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 02'   | '11,000'     | ''                            | '$$PurchaseOrder029234$$'   | '$$SalesOrder029234$$'   | '1 864,41'      |
+			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 02'   | '8,000'      | ''                            | '$$PurchaseOrder029234$$'   | '$$SalesOrder029234$$'   | '2 033,90'      |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'             |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029234$$'   | '$$PurchaseOrder029234$$'    |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029234$$'   | '$$PurchaseOrder029234$$'    |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029234$$'   | '$$PurchaseOrder029234$$'    |
+		And for each line of "ItemList" table I do
+			And I set "Use goods receipt" checkbox in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseInvoice029234$$" variable
+		And I delete "$$PurchaseInvoice029234$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029234$$"
+		And I save the window as "$$PurchaseInvoice029234$$"
+	* Create GR
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'                             |
+			| '$$NumberPurchaseInvoice029234$$'    |
+		And I click "Goods receipt" button
+		And I click "Ok" button
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'            | 'Receipt basis'                |'Store'   |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029234$$'   | '$$PurchaseOrder029234$$'   | '$$PurchaseInvoice029234$$'    |'Store 02'|
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029234$$'   | '$$PurchaseOrder029234$$'   | '$$PurchaseInvoice029234$$'    |'Store 02'|
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029234$$'   | '$$PurchaseOrder029234$$'   | '$$PurchaseInvoice029234$$'    |'Store 02'|
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'   | 'Receipt basis'    |'Store'   |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                 | ''                 |'Store 02'|
+			| 'Shirt'      | '38/Black'    | ''              | ''                 | ''                 |'Store 02'|
+			| 'Dress'      | 'M/White'     | ''              | ''                 | ''                 |'Store 02'|
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'            | 'Receipt basis'                |'Store'   |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029234$$'   | '$$PurchaseOrder029234$$'   | '$$PurchaseInvoice029234$$'    |'Store 02'|
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029234$$'   | '$$PurchaseOrder029234$$'   | '$$PurchaseInvoice029234$$'    |'Store 02'|
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029234$$'   | '$$PurchaseOrder029234$$'   | '$$PurchaseInvoice029234$$'    |'Store 02'|
+		And I click "Post" button
+		And I delete "$$NumberGoodsReceipt029234$$" variable
+		And I delete "$$GoodsReceipt029234$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt029234$$"
+		And I save the window as "$$GoodsReceipt029234$$"
+		And I close all client application windows
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$$NumberSalesOrder029234$$'    |
+		And I click "Sales invoice" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Price type'          | 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Net amount'   | 'Total amount'   | 'Store'      | 'Sales order'             |
+			| 'Basic Price Types'   | 'Trousers'   | '38/Yellow'   | 'No'                   | '488,14'       | 'pcs'    | '8,000'      | '400,00'   | '18%'   | '2 711,86'     | '3 200,00'       | 'Store 01'   | '$$SalesOrder029234$$'    |
+			| 'Basic Price Types'   | 'Shirt'      | '38/Black'    | 'No'                   | '587,29'       | 'pcs'    | '11,000'     | '350,00'   | '18%'   | '3 262,71'     | '3 850,00'       | 'Store 01'   | '$$SalesOrder029234$$'    |
+			| 'Basic Price Types'   | 'Dress'      | 'M/White'     | 'No'                   | '634,58'       | 'pcs'    | '8,000'      | '520,00'   | '18%'   | '3 525,42'     | '4 160,00'       | 'Store 01'   | '$$SalesOrder029234$$'    |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'    |
+			| 'Trousers'   | '38/Yellow'   | ''               |
+			| 'Shirt'      | '38/Black'    | ''               |
+			| 'Dress'      | 'M/White'     | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'             |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029234$$'    |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029234$$'    |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029234$$'    |
+		And for each line of "ItemList" table I do
+			And I set "Use shipment confirmation" checkbox in "ItemList" table		
+		And I click "Post" button
+		And I delete "$$NumberSalesInvoice029234$$" variable
+		And I delete "$$SalesInvoice029234$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029234$$"
+		And I save the window as "$$SalesInvoice029234$$"
+	* Create SC
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'                          |
+			| '$$NumberSalesInvoice029234$$'    |
+		And I click "Shipment confirmation" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'           | 'Sales invoice'             |'Store'   |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029234$$'   | '$$SalesInvoice029234$$'   | '$$SalesInvoice029234$$'    |'Store 01'|
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029234$$'   | '$$SalesInvoice029234$$'   | '$$SalesInvoice029234$$'    |'Store 01'|
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029234$$'   | '$$SalesInvoice029234$$'   | '$$SalesInvoice029234$$'    |'Store 01'|
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Shipment basis'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'           | 'Sales invoice'             |'Store'   |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029234$$'   | '$$SalesInvoice029234$$'   | '$$SalesInvoice029234$$'    |'Store 01'|
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029234$$'   | '$$SalesInvoice029234$$'   | '$$SalesInvoice029234$$'    |'Store 01'|
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029234$$'   | '$$SalesInvoice029234$$'   | '$$SalesInvoice029234$$'    |'Store 01'|
+		And I click "Post" button
+		And I delete "$$NumberShipmentConfirmation029234$$" variable
+		And I delete "$$ShipmentConfirmation029234$$" variable
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation029234$$"
+		And I save the window as "$$ShipmentConfirmation029234$$"
+		And I close current window
+		And I close all client application windows	
+			
+Scenario: _029235 SO - PO - PI  - GR - SC - SI (selling from one store while purchasing for another)
+	And I close all client application windows
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '502'       |
+		And in the table "List" I click "Copy" button
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button
+		And I click "Post" button
+		And I delete "$$NumberSalesOrder029235$$" variable
+		And I delete "$$SalesOrder029235$$" variable
+		And I save the value of "Number" field as "$$NumberSalesOrder029235$$"
+		And I save the window as "$$SalesOrder029235$$"
+	* Create PO
+		And I click "Purchase order" button
+		And I click "Ok" button
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Ferron BP'      |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Vendor Ferron, TRY'    |
+		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And I select from the drop-down list named "Store" by "Store 02" string
+		Then "Update item list info" window is opened
+		And I click "OK" button	
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item key'  | 'Item'     | 'Sales order'          | 'Store'    |
+			| '38/Yellow' | 'Trousers' | '$$SalesOrder029235$$' | 'Store 02' |
+			| '38/Black'  | 'Shirt'    | '$$SalesOrder029235$$' | 'Store 02' |
+			| 'M/White'   | 'Dress'    | '$$SalesOrder029235$$' | 'Store 02' |
+		* Unlink and link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'    |
+			| '38/Yellow'   | 'Trousers'   | ''               |
+			| '38/Black'    | 'Shirt'      | ''               |
+			| 'M/White'     | 'Dress'      | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
+		And "ItemList" table contains lines
+			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          | 'Store'    |
+			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029235$$'   | '$$SalesOrder029235$$'    | 'Store 02' |
+			| '38/Black'    | 'Shirt'      | '$$SalesOrder029235$$'   | '$$SalesOrder029235$$'    | 'Store 02' |
+			| 'M/White'     | 'Dress'      | '$$SalesOrder029235$$'   | '$$SalesOrder029235$$'    | 'Store 02' |
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseOrder029235$$" variable
+		And I delete "$$PurchaseOrder029235$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029235$$"
+		And I save the window as "$$PurchaseOrder029235$$"
+	* Create PI	
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberPurchaseOrder029235$$'    |
+		And I click "Purchase invoice" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
+			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 02'   | '8,000'      | ''                            | '$$PurchaseOrder029235$$'   | '$$SalesOrder029235$$'   | '677,97'        |
+			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 02'   | '11,000'     | ''                            | '$$PurchaseOrder029235$$'   | '$$SalesOrder029235$$'   | '1 864,41'      |
+			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 02'   | '8,000'      | ''                            | '$$PurchaseOrder029235$$'   | '$$SalesOrder029235$$'   | '2 033,90'      |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Purchase order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029235$$' | '$$PurchaseOrder029235$$' | 'Store 02' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029235$$' | '$$PurchaseOrder029235$$' | 'Store 02' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029235$$' | '$$PurchaseOrder029235$$' | 'Store 02' |
+		And for each line of "ItemList" table I do
+			And I set "Use goods receipt" checkbox in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'       | 'Item key'     |
+			| 'Trousers'   | '38/Yellow'    |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Shirt'   | '38/Black'    |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'M/White'     |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberPurchaseInvoice029235$$" variable
+		And I delete "$$PurchaseInvoice029235$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029235$$"
+		And I save the window as "$$PurchaseInvoice029235$$"
+	* Create GR
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'                             |
+			| '$$NumberPurchaseInvoice029235$$'    |
+		And I click "Goods receipt" button
+		And I click "Ok" button
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'            | 'Receipt basis'                | 'Store'    |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029235$$'   | '$$PurchaseOrder029235$$'   | '$$PurchaseInvoice029235$$'    | 'Store 02' |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029235$$'   | '$$PurchaseOrder029235$$'   | '$$PurchaseInvoice029235$$'    | 'Store 02' |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029235$$'   | '$$PurchaseOrder029235$$'   | '$$PurchaseInvoice029235$$'    | 'Store 02' |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'   | 'Receipt basis'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                 | ''                 |
+			| 'Shirt'      | '38/Black'    | ''              | ''                 | ''                 |
+			| 'Dress'      | 'M/White'     | ''              | ''                 | ''                 |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Purchase order'            | 'Receipt basis'                | 'Store'    |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029235$$'   | '$$PurchaseOrder029235$$'   | '$$PurchaseInvoice029235$$'    | 'Store 02' |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029235$$'   | '$$PurchaseOrder029235$$'   | '$$PurchaseInvoice029235$$'    | 'Store 02' |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029235$$'   | '$$PurchaseOrder029235$$'   | '$$PurchaseInvoice029235$$'    | 'Store 02' |
+		And I click "Post" button
+		And I delete "$$NumberGoodsReceipt029235$$" variable
+		And I delete "$$GoodsReceipt029235$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt029235$$"
+		And I save the window as "$$GoodsReceipt029235$$"
+		And I close all client application windows
+	* Create SC
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'                        |
+			| '$$NumberSalesOrder029235$$'    |
+		And I click "Shipment confirmation" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'          | 'Store'    |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029235$$'   | '$$SalesOrder029235$$'    | 'Store 01' |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029235$$'   | '$$SalesOrder029235$$'    | 'Store 01' |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029235$$'   | '$$SalesOrder029235$$'    | 'Store 01' |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Shipment basis'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'            | 'Shipment basis'          | 'Store'    |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029235$$'   | '$$SalesOrder029235$$'    | 'Store 01' |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029235$$'   | '$$SalesOrder029235$$'    | 'Store 01' |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029235$$'   | '$$SalesOrder029235$$'    | 'Store 01' |
+		And I click "Post" button
+		And I delete "$$NumberShipmentConfirmation029235$$" variable
+		And I delete "$$ShipmentConfirmation029235$$" variable
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation029235$$"
+		And I save the window as "$$ShipmentConfirmation029235$$"
+		And I close current window
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'                                  |
+			| '$$NumberShipmentConfirmation029235$$'    |
+		And I click "Sales invoice" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| '#'   | 'Price type'          | 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Net amount'   | 'Total amount'   | 'Store'      | 'Use shipment confirmation'   | 'Sales order'             |
+			| '1'   | 'Basic Price Types'   | 'Trousers'   | '38/Yellow'   | 'No'                   | '488,14'       | 'pcs'    | '8,000'      | '400,00'   | '18%'   | '2 711,86'     | '3 200,00'       | 'Store 01'   | 'Yes'                         | '$$SalesOrder029235$$'    |
+			| '2'   | 'Basic Price Types'   | 'Shirt'      | '38/Black'    | 'No'                   | '587,29'       | 'pcs'    | '11,000'     | '350,00'   | '18%'   | '3 262,71'     | '3 850,00'       | 'Store 01'   | 'Yes'                         | '$$SalesOrder029235$$'    |
+			| '3'   | 'Basic Price Types'   | 'Dress'      | 'M/White'     | 'No'                   | '634,58'       | 'pcs'    | '8,000'      | '520,00'   | '18%'   | '3 525,42'     | '4 160,00'       | 'Store 01'   | 'Yes'                         | '$$SalesOrder029235$$'    |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'    |
+			| 'Trousers'   | '38/Yellow'   | ''               |
+			| 'Shirt'      | '38/Black'    | ''               |
+			| 'Dress'      | 'M/White'     | ''               |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'             | 'Store'    |
+			| 'Trousers'   | '38/Yellow'   | '$$SalesOrder029235$$'    | 'Store 01' |
+			| 'Shirt'      | '38/Black'    | '$$SalesOrder029235$$'    | 'Store 01' |
+			| 'Dress'      | 'M/White'     | '$$SalesOrder029235$$'    | 'Store 01' |
+		And I click "Post" button
+		And I delete "$$NumberSalesInvoice029235$$" variable
+		And I delete "$$SalesInvoice029235$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029235$$"
+		And I save the window as "$$SalesInvoice29212$$"
+		And I close all client application windows						
+
+Scenario: _029236 create PO - PI - SI (procurement method for Service)
+	And I close all client application windows
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '522'       |		
+	* Create PO
+		And I click the button named "FormDocumentPurchaseOrderGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I select from the drop-down list named "Partner" by "Ferron BP" string
+		And I select from the drop-down list named "Agreement" by "Vendor Ferron, TRY" string
+		Then "Update item list info" window is opened
+		And I click the button named "FormOK"
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Item'    | 'Item key' | 'Quantity'  | 'Price type'        | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase basis'                            | 'Sales order'                               | 'Internal supply request' | 'Cancel' | 'Cancel reason' | 'Detail' | 'Is variable item key' | 'Is variable store' |
+			| '1' | ''             | 'Shirt'   | '38/Black' | '1 000,000' | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'Store 01' | ''              | ''             | ''                   | 'Sales order 522 dated 01.05.2025 13:22:29' | 'Sales order 522 dated 01.05.2025 13:22:29' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+			| '2' | ''             | 'Service' | 'Rent'     | '1,000'     | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | ''         | ''              | ''             | ''                   | 'Sales order 522 dated 01.05.2025 13:22:29' | 'Sales order 522 dated 01.05.2025 13:22:29' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+		And I go to line in "ItemList" table
+			| 'Item'  |
+			| 'Shirt' |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| "Item"    |
+			| "Service" |
+		And I select current line in "ItemList" table
+		And I input "800,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to the tab named "GroupOther"
+		And I input "10.05.2025 10:15:00" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I change checkbox named "Prices"
+		And I change checkbox named "PriceTypes"
+		And I click the button named "FormOK"
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder029236$$" variable
+		And I delete "$$PurchaseOrder029236$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029236$$"
+		And I save the window as "$$PurchaseOrder029236$$"		
+	* Create PI
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I click the button named "FormOk"
+		And "ItemList" table became equal
+			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity'  | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Project' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'          | 'Sales order'                               | 'Internal supply request' | 'Use goods receipt' | 'Detail' | 'Additional analytic' | 'Other period expense type' |
+			| '1' | 'Shirt'   | '38/Black' | ''                   | ''                  | '1 000,000' | 'en description is empty' | 'pcs'  | '200,00' | '18%' | ''              | 'No'                 | '30 508,47'  | '169 491,53' | '200 000,00'   | 'Store 01' | ''        | ''              | ''             | ''                   | '$$PurchaseOrder029236$$' | 'Sales order 522 dated 01.05.2025 13:22:29' | ''                        | 'No'                | ''       | ''                    | ''                          |
+			| '2' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'     | 'en description is empty' | 'pcs'  | '800,00' | '18%' | ''              | 'No'                 | '122,03'     | '677,97'     | '800,00'       | ''         | ''        | ''              | ''             | ''                   | '$$PurchaseOrder029236$$' | 'Sales order 522 dated 01.05.2025 13:22:29' | ''                        | 'No'                | ''       | ''                    | ''                          |
+		And I move to the tab named "GroupOther"
+		And I move to the tab named "GroupMore"
+		And I input "08.05.2025 14:10:02" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
+		And I click the button named "FormOK"
+		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseInvoice029236$$" variable
+		And I delete "$$PurchaseInvoice029236$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029236$$"
+		And I save the window as "$$PurchaseInvoice029236$$"
+		And I click the button named "FormPostAndClose"
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '522'       |
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I click the button named "FormOk"
+		And "ItemList" table became equal
+			| '#' | 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Source of origins' | 'Quantity'  | 'Price type'              | 'Unit' | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order'                               | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+			| '1' | 'Trousers' | '38/Yellow' | ''                   | ''                  | '1 000,000' | 'Basic Price Types'       | 'pcs'  | '400,00'   | '18%' | ''              | 'No'                 | '61 016,95'  | '338 983,05' | '400 000,00'   | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | 'Sales order 522 dated 01.05.2025 13:22:29' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			| '2' | 'Service'  | 'Rent'      | ''                   | ''                  | '1,000'     | 'en description is empty' | 'pcs'  | '1 500,00' | '18%' | ''              | 'No'                 | '228,81'     | '1 271,19'   | '1 500,00'     | 'No'             | 'No'                        | ''         | ''        | ''              | 'Sales order 522 dated 01.05.2025 13:22:29' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			| '3' | 'Shirt'    | '38/Black'  | ''                   | ''                  | '1 000,000' | 'Basic Price Types'       | 'pcs'  | '350,00'   | '18%' | ''              | 'No'                 | '53 389,83'  | '296 610,17' | '350 000,00'   | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | 'Sales order 522 dated 01.05.2025 13:22:29' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			| '4' | 'Service'  | 'Rent'      | ''                   | ''                  | '1,000'     | 'en description is empty' | 'pcs'  | '1 000,00' | '18%' | ''              | 'No'                 | '152,54'     | '847,46'     | '1 000,00'     | 'No'             | 'No'                        | ''         | ''        | ''              | 'Sales order 522 dated 01.05.2025 13:22:29' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+		And I move to the tab named "GroupOther"
+		And I input "11.05.2025 16:10:02" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I click "OK" button		
+		And I click the button named "FormPost"
+		And I delete "$$NumberSalesInvoice029236$$" variable
+		And I delete "$$SalesInvoice029236$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029236$$"
+		And I save the window as "$$SalesInvoice029236$$"
+		And I click the button named "FormPostAndClose"
+	* Check
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '522'       |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And "DocumentsTree" table contains lines
+			| 'Presentation'                              | 'Amount'     |
+			| 'Sales order 522 dated 01.05.2025 13:22:29' | '752 500,00' |
+			| '$$PurchaseOrder029236$$'                   | '200 800,00' |
+			| '$$PurchaseInvoice029236$$'                 | '200 800,00' |
+			| '$$SalesInvoice029236$$'                    | '752 500,00' |
+	And I close all client application windows		
+
+
+
+Scenario: _029238 create PO - PI - SI (procurement method for Service-purchase)
+	And I close all client application windows
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '524'       |	
+	* Create PO		
+		And I click the button named "FormDocumentPurchaseOrderGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I select from the drop-down list named "Partner" by "Ferron BP" string
+		And I select from the drop-down list named "Agreement" by "Vendor Ferron, TRY" string
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I click the button named "FormOK"
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Item'    | 'Item key' | 'Quantity' | 'Price type'        | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase basis'                            | 'Sales order'                               | 'Internal supply request' | 'Cancel' | 'Cancel reason' | 'Detail' | 'Is variable item key' | 'Is variable store' |
+			| '1' | ''             | 'Service' | 'Rent'     | '1,000'    | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | ''      | ''              | ''             | ''                   | 'Sales order 524 dated 01.05.2025 13:24:17' | 'Sales order 524 dated 01.05.2025 13:24:17' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+		And I activate field named "ItemListPrice" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "700,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to the tab named "GroupOther"
+		And I input "02.05.2025 11:12:00" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I change checkbox named "Prices"
+		And I change checkbox named "PriceTypes"
+		And I click the button named "FormOK"
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder029238$$" variable
+		And I delete "$$PurchaseOrder029238$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029238$$"
+		And I save the window as "$$PurchaseOrder029238$$"
+	* Create PI
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I click the button named "FormOk"
+		And I move to the tab named "GroupOther"
+		And I move to the tab named "GroupMore"
+		And I input "07.05.2025 12:32:45" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"		
+		And I click the button named "FormOK"
+		And I click the button named "FormPost"
+		And "ItemList" table became equal
+			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Project' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'                              | 'Sales order'                               | 'Internal supply request' | 'Use goods receipt' | 'Detail' | 'Additional analytic' | 'Other period expense type' |
+			| '1' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '106,78'     | '593,22'     | '700,00'       | ''      | ''        | ''              | ''             | ''                   | 'Purchase order 19 dated 02.05.2025 11:12:00' | 'Sales order 524 dated 01.05.2025 13:24:17' | ''                        | 'No'                | ''       | ''                    | ''                          |
+		And I delete "$$NumberPurchaseInvoice029238$$" variable
+		And I delete "$$PurchaseInvoice029238$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029238$$"
+		And I save the window as "$$PurchaseInvoice029238$$"
+		And I click the button named "FormPostAndClose"
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '524'       |
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I click the button named "FormOk"
+		And I move to the tab named "GroupOther"
+		And I input "10.05.2025 17:10:02" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I remove checkbox "Do you want to replace filled price types with price type Basic Price Types?"		
+		And I click the button named "FormOK"
+		And I click the button named "FormPost"
+		And "ItemList" table became equal
+			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store' | 'Project' | 'Delivery date' | 'Sales order'                               | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+			| '1' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '1 000,00' | '18%' | ''              | 'No'                 | '152,54'     | '847,46'     | '1 000,00'     | 'No'             | 'No'                        | ''      | ''        | ''              | 'Sales order 524 dated 01.05.2025 13:24:17' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+		And I delete "$$NumberSalesInvoice029238$$" variable
+		And I delete "$$SalesInvoice029238$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029238$$"
+		And I save the window as "$$SalesInvoice029238$$"
+		And I click the button named "FormPostAndClose"	
+	* Check
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '524'       |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And "DocumentsTree" table contains lines
+			| 'Presentation'                              | 'Amount'   |
+			| 'Sales order 524 dated 01.05.2025 13:24:17' | '1 000,00' |
+			| '$$PurchaseOrder029238$$'                   | '700,00'   |
+			| '$$PurchaseInvoice029238$$'                 | '700,00'   |
+			| '$$SalesInvoice029238$$'                    | '1 000,00' |
+	And I close all client application windows		
+
+
+
+Scenario: _029240 create PO - PI - SI (procurement method for Service-purchase/no)
+	And I close all client application windows
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '525'       |	
+	* Create PO		
+		And I click the button named "FormDocumentPurchaseOrderGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I select from the drop-down list named "Partner" by "Ferron BP" string
+		And I select from the drop-down list named "Agreement" by "Vendor Ferron, TRY" string
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I click the button named "FormOK"
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Item'    | 'Item key' | 'Quantity' | 'Price type'        | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase basis'                            | 'Sales order'                               | 'Internal supply request' | 'Cancel' | 'Cancel reason' | 'Detail' | 'Is variable item key' | 'Is variable store' |
+			| '1' | ''             | 'Service' | 'Rent'     | '1,000'    | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | ''      | ''              | ''             | ''                   | 'Sales order 525 dated 02.05.2025 13:24:51' | 'Sales order 525 dated 02.05.2025 13:24:51' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+		And I input "700,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to the tab named "GroupOther"
+		And I input "02.05.2025 14:12:23" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I change checkbox named "Prices"
+		And I change checkbox named "PriceTypes"
+		And I click the button named "FormOK"
+		And I select "Approved" exact value from the drop-down list named "Status"
+		And I click the button named "FormPost"
+		And "ItemList" table became equal
+			| '#' | 'Partner item' | 'Item'    | 'Item key' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase basis'                            | 'Sales order'                               | 'Internal supply request' | 'Cancel' | 'Cancel reason' | 'Detail' | 'Is variable item key' | 'Is variable store' |
+			| '1' | ''             | 'Service' | 'Rent'     | '1,000'    | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '106,78'     | '593,22'     | '700,00'       | ''      | ''              | ''             | ''                   | 'Sales order 525 dated 02.05.2025 13:24:51' | 'Sales order 525 dated 02.05.2025 13:24:51' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+		And I delete "$$NumberPurchaseOrder029240$$" variable
+		And I delete "$$PurchaseOrder029240$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029240$$"
+		And I save the window as "$$PurchaseOrder029240$$"
+	* Create PI
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I click the button named "FormOk"
+		And I move to the tab named "GroupOther"
+		And I move to the tab named "GroupMore"
+		And I input "10.05.2025 10:32:45" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"	
+		And I click the button named "FormOK"
+		And I click the button named "FormPost"
+		And "ItemList" table became equal
+			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Project' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'          | 'Sales order'                               | 'Internal supply request' | 'Use goods receipt' | 'Detail' | 'Additional analytic' | 'Other period expense type' |
+			| '1' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '106,78'     | '593,22'     | '700,00'       | ''      | ''        | ''              | ''             | ''                   | '$$PurchaseOrder029240$$' | 'Sales order 525 dated 02.05.2025 13:24:51' | ''                        | 'No'                | ''       | ''                    | ''                          |
+		And I delete "$$NumberPurchaseInvoice029240$$" variable
+		And I delete "$$PurchaseInvoice029240$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice029240$$"
+		And I save the window as "$$PurchaseInvoice029240$$"
+		And I click the button named "FormPostAndClose"
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '525'       |
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I click the button named "FormOk"
+		And I move to the tab named "GroupOther"
+		And I input "12.05.2025 15:10:05" text in the field named "Date"
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I remove checkbox "Do you want to replace filled price types with price type Basic Price Types?"	
+		And I click the button named "FormOK"
+		And I click the button named "FormPost"
+		And "ItemList" table became equal
+			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store' | 'Project' | 'Delivery date' | 'Sales order'                               | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+			| '1' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '1 500,00' | '18%' | ''              | 'No'                 | '228,81'     | '1 271,19'   | '1 500,00'     | 'No'             | 'No'                        | ''      | ''        | ''              | 'Sales order 525 dated 02.05.2025 13:24:51' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			| '2' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '1 000,00' | '18%' | ''              | 'No'                 | '152,54'     | '847,46'     | '1 000,00'     | 'No'             | 'No'                        | ''      | ''        | ''              | 'Sales order 525 dated 02.05.2025 13:24:51' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+		And I delete "$$NumberSalesInvoice029240$$" variable
+		And I delete "$$SalesInvoice029240$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029240$$"
+		And I save the window as "$$SalesInvoice029240$$"
+		And I click the button named "FormPostAndClose"	
+	* Check
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '525'       |
+		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+		And "DocumentsTree" table contains lines
+			| 'Presentation'                              | 'Amount'   |
+			| 'Sales order 525 dated 02.05.2025 13:24:51' | '2 500,00' |
+			| '$$PurchaseOrder029240$$'                   | '700,00'   |
+			| '$$PurchaseInvoice029240$$'                 | '700,00'   |
+			| '$$SalesInvoice029240$$'                    | '2 500,00' |
+	And I close all client application windows		
+
+// Scenario: _029241 create PO - SI - PI (procurement method for Service-purchase/no)
+// 	And I close all client application windows
+// 	* Select SO
+// 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+// 		And I go to line in "List" table
+// 			| 'Number'    |
+// 			| '527'       |	
+// 	* Create PO		
+// 		And I click the button named "FormDocumentPurchaseOrderGenerate"
+// 		Then "Add linked document rows" window is opened
+// 		And I expand current line in "BasisesTree" table
+// 		And I click the button named "FormOk"
+// 		And I select from the drop-down list named "Partner" by "Ferron BP" string
+// 		And I select from the drop-down list named "Agreement" by "Vendor Ferron, TRY" string
+// 		And I move to the next attribute
+// 		Then "Update item list info" window is opened
+// 		And I click the button named "FormOK"
+// 		And "ItemList" table became equal
+// 			| '#' | 'Partner item' | 'Item'    | 'Item key' | 'Quantity' | 'Price type'        | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase basis'                            | 'Sales order'                               | 'Internal supply request' | 'Cancel' | 'Cancel reason' | 'Detail' | 'Is variable item key' | 'Is variable store' |
+// 			| '1' | ''             | 'Service' | 'Rent'     | '1,000'    | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | ''      | ''              | ''             | ''                   | 'Sales order 527 dated 03.05.2025 15:06:23' | 'Sales order 527 dated 03.05.2025 15:06:23' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+// 		And I activate field named "ItemListPrice" in "ItemList" table
+// 		And I select current line in "ItemList" table
+// 		And I input "700,00" text in the field named "ItemListPrice" of "ItemList" table
+// 		And I finish line editing in "ItemList" table
+// 		And I move to the tab named "GroupOther"
+// 		And I input "03.05.2025 16:12:23" text in the field named "Date"
+// 		And I move to the next attribute
+// 		Then "Update item list info" window is opened
+// 		And I change checkbox named "Prices"
+// 		And I change checkbox named "PriceTypes"
+// 		And I click the button named "FormOK"
+// 		And I select "Approved" exact value from the drop-down list named "Status"
+// 		And I click the button named "FormPost"
+// 		And "ItemList" table became equal
+// 			| '#' | 'Partner item' | 'Item'    | 'Item key' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase basis'                            | 'Sales order'                               | 'Internal supply request' | 'Cancel' | 'Cancel reason' | 'Detail' | 'Is variable item key' | 'Is variable store' |
+// 			| '1' | ''             | 'Service' | 'Rent'     | '1,000'    | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '106,78'     | '593,22'     | '700,00'       | ''      | ''              | ''             | ''                   | 'Sales order 527 dated 03.05.2025 15:06:23' | 'Sales order 527 dated 03.05.2025 15:06:23' | ''                        | 'No'     | ''              | ''       | 'No'                   | 'No'                |
+// 		And I delete "$$NumberPurchaseOrder029241$$" variable
+// 		And I delete "$$PurchaseOrder029241$$" variable
+// 		And I save the value of "Number" field as "$$NumberPurchaseOrder029241$$"
+// 		And I save the window as "$$PurchaseOrder029241$$"
+// 		And I click the button named "FormPostAndClose"
+// 	* Create SI
+// 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+// 		And I go to line in "List" table
+// 			| 'Number'    |
+// 			| '527'       |
+// 		And I click the button named "FormDocumentSalesInvoiceGenerate"
+// 		Then "Add linked document rows" window is opened
+// 		And I click the button named "FormOk"
+// 		And I move to the tab named "GroupOther"
+// 		And I input "11.05.2025 14:40:02" text in the field named "Date"
+// 		And I move to the next attribute
+// 		Then "Update item list info" window is opened
+// 		And I change checkbox named "Prices"
+// 		And I change checkbox named "PriceTypes"
+// 		And I click the button named "FormOK"
+// 		And I click the button named "FormPost"
+// 		And "ItemList" table became equal
+// 			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'    | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store' | 'Project' | 'Delivery date' | 'Sales order'                               | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+// 			| '1' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '1 500,00' | '18%' | ''              | 'No'                 | '228,81'     | '1 271,19'   | '1 500,00'     | 'No'             | 'No'                        | ''      | ''        | ''              | 'Sales order 525 dated 02.05.2025 13:24:51' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+// 			| '2' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '1 000,00' | '18%' | ''              | 'No'                 | '152,54'     | '847,46'     | '1 000,00'     | 'No'             | 'No'                        | ''      | ''        | ''              | 'Sales order 525 dated 02.05.2025 13:24:51' | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+// 		And I delete "$$NumberSalesInvoice029241$$" variable
+// 		And I delete "$$SalesInvoice029241$$" variable
+// 		And I save the value of "Number" field as "$$NumberSalesInvoice029241$$"
+// 		And I save the window as "$$SalesInvoice029241$$"
+// 		And I click the button named "FormPostAndClose"
+// 	* Create PI
+// 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+// 		And I go to line in "List" table
+// 			| 'Number'    |
+// 			| '527'       |
+// 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+// 		Then "Add linked document rows" window is opened
+// 		And I click the button named "FormOk"
+// 		And I move to the tab named "GroupOther"
+// 		And I move to the tab named "GroupMore"
+// 		And I input "08.05.2025 11:05:45" text in the field named "Date"
+// 		And I move to the next attribute
+// 		Then "Update item list info" window is opened
+// 		And I change checkbox named "PriceTypes"
+// 		And I change checkbox named "Prices"
+// 		And I click the button named "FormOK"
+// 		And I click the button named "FormPost"
+// 		And "ItemList" table became equal
+// 			| '#' | 'Item'    | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price type'              | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store' | 'Project' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order'          | 'Sales order'                               | 'Internal supply request' | 'Use goods receipt' | 'Detail' | 'Additional analytic' | 'Other period expense type' |
+// 			| '1' | 'Service' | 'Rent'     | ''                   | ''                  | '1,000'    | 'en description is empty' | 'pcs'  | '700,00' | '18%' | ''              | 'No'                 | '106,78'     | '593,22'     | '700,00'       | ''      | ''        | ''              | ''             | ''                   | '$$PurchaseOrder029241$$' | 'Sales order 527 dated 03.05.2025 15:06:23' | ''                        | 'No'                | ''       | ''                    | ''                          |
+// 		And I delete "$$NumberPurchaseInvoice029241$$" variable
+// 		And I delete "$$PurchaseInvoice029241$$" variable
+// 		And I save the value of "Number" field as "$$NumberPurchaseInvoice029241$$"
+// 		And I save the window as "$$PurchaseInvoice029241$$"
+// 		And I click the button named "FormPostAndClose"
+// 	* Check
+// 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+// 		And I go to line in "List" table
+// 			| 'Number'    |
+// 			| '527'       |
+// 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
+// 		And "DocumentsTree" table contains lines
+// 			| 'Presentation'                              | 'Amount'   |
+// 			| 'Sales order 527 dated 03.05.2025 15:06:23' | '2 500,00' |
+// 			| '$$PurchaseOrder029241$$'                   | '700,00'   |
+// 			| '$$PurchaseInvoice029241$$'                 | '700,00'   |
+// 			| '$$SalesInvoice029241$$'                    | '2 500,00' |
+// 	And I close all client application windows		
+	

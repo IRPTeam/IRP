@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="24260b56-393a-4cdb-9c4d-f93f641303fb">
+ <producedTypes>
+  <objectType typeId="85f740de-6534-4328-af75-5dbadb936904" valueTypeId="a16feb99-8273-4d4a-ad25-6c80713d2e95"/>
+  <managerType typeId="23ac3a5c-b795-483f-a975-72224814ab30" valueTypeId="497c942c-ae05-4850-a338-9afad737cbc3"/>
+ </producedTypes>
+ <name>R405A_StockAdjustments</name>
+ <synonym>
+  <key>en</key>
+  <value>F3FD93E6-81DD-8E74-4D15-5C90C66CCFB3</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R405A_StockAdjustments.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="584dd398-909d-45d9-96f7-f1159493200f">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>en</key>
+   <value>93FB4467-948D-C837-79BC-C4BEF2E0FF44</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

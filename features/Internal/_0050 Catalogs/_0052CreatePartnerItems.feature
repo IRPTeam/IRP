@@ -77,10 +77,47 @@ Scenario: _005210 filling in the "Partner Items" catalog
 		Then the form attribute named "Description_en" became equal to "Dress XS/Blue Ferron"
 		And I close all client application windows
 		
-		
-				
-		
-				
-		
-				
-
+Scenario: _005211 check hierarchical in the catalog PartnerItems	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.PartnerItems"	
+	* Create Group 01
+		And I click the button named "FormCreateFolder"
+		And I input "Group 01" text in "ENG" field
+		And I click "Save and close" button
+	* Create Group 02
+		And I click the button named "FormCreateFolder"
+		And I input "Group 02" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Group 02 tr" text in "TR" field
+		And I click "Ok" button
+		And I click Choice button of the field named "Parent"
+		And I go to line in "List" table
+			| "Description" |
+			| "Group 01"    |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Check 
+		And "List" table became equal
+			| 'Description' |
+			| 'Group 01'    |
+			| 'Group 02'    |
+	* Create element in Group
+		And I click "Create" button
+		And I input "Test element" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Test element tr" text in "TR" field
+		And I click "Ok" button
+		And I click Choice button of the field named "Parent"
+		And I expand current line in "List" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Group 02"    |
+		And I click the button named "FormChoose"
+		And I select from the drop-down list named "Partner" by "Ferron BP" string
+		And I select from the drop-down list named "Item" by "Dress" string
+		And I select from "Item key" drop-down list by "M/Brown" string		
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Description'  |
+			| 'Group 01'     |
+			| 'Test element' |

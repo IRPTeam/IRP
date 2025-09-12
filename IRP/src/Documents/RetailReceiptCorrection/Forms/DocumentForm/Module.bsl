@@ -18,6 +18,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -64,6 +65,16 @@ EndProcedure
 &AtServer
 Procedure API_CallbackAtServer(TableName, ArrayOfDataPaths)
 	ViewServer_V2.API_CallbackAtServer(Object, ThisObject, TableName, ArrayOfDataPaths);
+EndProcedure
+
+&AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
 EndProcedure
 
 &AtClient
@@ -730,7 +741,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -762,7 +773,7 @@ Procedure EditCurrencies(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -777,12 +788,26 @@ Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	NumberingRulesServer.SetSourceNewNumber(Object);
+EndProcedure
+
 #EndRegion
 
 #Region CONTROL_STRINGS
 
 &AtClient
-Procedure ItemListControlCodeStringStateClick() Export
+Procedure ItemListControlCodeStringStateClick(SerialLotNumberForCheck = Undefined) Export
 	
 	CurrentData = Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
@@ -793,15 +818,25 @@ Procedure ItemListControlCodeStringStateClick() Export
 		Return;
 	EndIf;
 	
+	// for checking we take the latest series
+	If SerialLotNumberForCheck = Undefined Then
+		SerialLotNumberForCheck = PredefinedValue("Catalog.SerialLotNumbers.EmptyRef");
+		SerialNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", CurrentData.Key));
+		If SerialNumbers.Count() Then
+			SerialLotNumberForCheck = SerialNumbers[SerialNumbers.UBound()].SerialLotNumber; 
+		EndIf;
+	EndIf;
+
 	Params = New Structure;
 	Params.Insert("Hardware", CommonFunctionsServer.GetRefAttribute(Object.ConsolidatedRetailSales, "FiscalPrinter"));
 	Params.Insert("RowKey", CurrentData.Key);
 	Params.Insert("Item", CurrentData.Item);
 	Params.Insert("ItemKey", CurrentData.ItemKey);
+	Params.Insert("SerialLotNumber", SerialLotNumberForCheck);
 	//@skip-check unknown-method-property
 	Params.Insert("LineNumber", CurrentData.LineNumber);
 	Params.Insert("isReturn", False);
-	Notify = New NotifyDescription("ItemListControlCodeStringStateOpeningEnd", ThisObject, Params);
+	Notify = New CallbackDescription("ItemListControlCodeStringStateOpeningEnd", ThisObject, Params);
 	
 	OpenForm("CommonForm.CodeStringCheck", Params, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
@@ -820,7 +855,8 @@ Procedure ItemListControlCodeStringStateOpeningEnd(Result, AddInfo) Export
 	ControlCodeStringsClient.ClearAllByRow(Object, Array);
 	If Result.WithoutScan Then
 		CurrentRow = Object.ItemList.FindByID(Items.ItemList.CurrentRow);
-		CurrentRow.isControlCodeString = False;
+		ControlCodeStringsRows = Object.ControlCodeStrings.FindRows(New Structure("Key", CurrentRow.Key));
+		CurrentRow.isControlCodeString = (ControlCodeStringsRows.Count() > 0);
 	Else
 		For Each Row In Result.Scaned Do
 			FillPropertyValues(Object.ControlCodeStrings.Add(), Row);

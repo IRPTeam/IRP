@@ -180,7 +180,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
 		"Document.GoodsReceipt.ItemList");
@@ -192,7 +192,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	EndIf;
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.GoodsReceipt.ItemList", AddInfo);
 EndProcedure
 
@@ -214,10 +214,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -229,6 +225,20 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(T3010S_RowIDInfo());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return 
@@ -349,16 +359,6 @@ EndFunction
 
 #Region Posting_MainTables
 
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
-	QueryArray.Add(T3010S_RowIDInfo());
-	Return QueryArray;
-EndFunction
-
 Function R4010B_ActualStocks()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -426,6 +426,7 @@ Function R4032B_GoodsInTransitOutgoing()
 		   |	ItemList.Store,
 		   |	ItemList.ItemKey,
 		   |	ShipmentConfirmations.ShipmentConfirmation AS Basis,
+		   |	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
 		   |	-ShipmentConfirmations.Quantity AS Quantity
 		   |INTO R4032B_GoodsInTransitOutgoing
 		   |FROM
@@ -473,6 +474,24 @@ Function GetAccessKey(Obj) Export
 	StoreList.GroupBy("Store");
 	AccessKeyMap.Insert("Store", StoreList.UnloadColumn("Store"));
 	Return AccessKeyMap;
+EndFunction
+
+#EndRegion
+
+#Region SystemAttributes
+
+Function GetPredefinedSystemAttributes() Export
+	SystemAttributes = New Array(); // Array of ChartOfCharacteristicTypesRef.SystemAttributes
+	SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.Store);
+	Return SystemAttributes;
+EndFunction
+
+Function GetSystemAttributeValues(Obj, SystemAttribute) Export
+	Values = New Array();
+	If SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.Store Then
+		Values = Obj.ItemList.Unload(, "Store").UnloadColumn("Store");
+	EndIf;
+	Return Values;
 EndFunction
 
 #EndRegion

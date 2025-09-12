@@ -1,3 +1,4 @@
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
@@ -6,8 +7,8 @@ EndProcedure
 
 &AtClient
 Procedure Integrations(Command)
-	NotifyDescription = New NotifyDescription("SelectIntegrationEnd", ThisObject);
-	OpenForm("Catalog.Currencies.Form.SelectIntegration", , ThisObject, , , , NotifyDescription);
+	CallbackDescription = New CallbackDescription("SelectIntegrationEnd", ThisObject);
+	OpenForm("Catalog.Currencies.Form.SelectIntegration", , ThisObject, , , , CallbackDescription);
 EndProcedure
 
 &AtClient
@@ -36,6 +37,11 @@ EndFunction
 &AtServerNoContext
 Procedure CallMethodAddDataProc(Info)
 	AddDataProcServer.CallMethodAddDataProc(Info);
+EndProcedure
+
+&AtClient
+Procedure LoadCurrency(Command)
+	OpenForm("Catalog.Currencies.Form.LoadCurrencies");
 EndProcedure
 
 #Region COMMANDS

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cdcb6ef7-af28-4c9c-a135-25ce676006d3">
+ <name>SalesAR</name>
+ <synonym>
+  <key>en</key>
+  <value>3E45D0C3-FD0C-9469-9675-513545C9A608</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <parentSubsystem>Subsystem.Reports</parentSubsystem>
+</mdclass:Subsystem>

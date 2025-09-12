@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="44f669c6-bf41-4b84-bc57-5d2cf256b6a7">
+ <name>EquipmentFiscalPrinterAPIClientServer</name>
+ <synonym>
+  <key>en</key>
+  <value>DDDA9D6E-D6D2-1C19-99DC-C1096FD5BC08</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

@@ -99,6 +99,54 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="3d76805a-d007-41e0-b8d6-832db4e6ea3f">
+  <name>SourceLedgerType</name>
+  <synonym>
+   <key>en</key>
+   <value>1F963976-C84A-0D8D-D8EA-A9B20A656C1E</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="a5894c6a-c5c4-4993-9e62-8c110e8236ea">
+  <name>IntegrationSettings</name>
+  <synonym>
+   <key>en</key>
+   <value>2D0A7A9B-1AE3-C8EB-B2B4-40F737CF7DF4</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.IntegrationSettings</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ef9dacfc-f7ab-4157-8be3-f8be5d6fdd6a">
+  <name>ELedgerLocalizationCode</name>
+  <synonym>
+   <key>en</key>
+   <value>A80B8967-605E-0528-8918-8BB633F2346F</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>5</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="fa18f0c6-27fa-4ba6-811d-503fac6d71ca">
   <producedTypes>
    <objectType typeId="63f39028-ae9c-447a-a56c-275894c0a2d2" valueTypeId="adff4ad1-b7f5-4ef7-9727-828d12d7ec03"/>

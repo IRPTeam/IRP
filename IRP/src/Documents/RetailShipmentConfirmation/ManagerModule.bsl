@@ -172,7 +172,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
 		"Document.ShipmentConfirmation.ItemList");
@@ -186,7 +186,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.ShipmentConfirmation.ItemList", AddInfo);
 EndProcedure
@@ -379,6 +379,11 @@ Function R4010B_ActualStocks()
 		|			THEN SerialLotNumbers.SerialLotNumber
 		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
 		|	END AS SerialLotNumber,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end AS SourceOfOrigin,
 		|	SUM(CASE
 		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
 		|			THEN ItemList.Quantity
@@ -389,6 +394,9 @@ Function R4010B_ActualStocks()
 		|	ItemList AS ItemList
 		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
 		|		ON ItemList.Key = SerialLotNumbers.Key
+		|		left join SourceOfOrigins AS SourceOfOrigins
+		|		on ItemList.Key = SourceOfOrigins.Key
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
 		|WHERE
 		|	TRUE
 		|GROUP BY
@@ -396,6 +404,11 @@ Function R4010B_ActualStocks()
 		|	ItemList.Period,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end,
 		|	CASE
 		|		WHEN SerialLotNumbers.StockBalanceDetail
 		|			THEN SerialLotNumbers.SerialLotNumber
@@ -583,6 +596,7 @@ Function R4032B_GoodsInTransitOutgoing()
 		|	END AS Basis,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey AS ItemKey,
+		|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
 		|	ItemList.Quantity AS Quantity
 		|INTO R4032B_GoodsInTransitOutgoing
 		|FROM
@@ -649,6 +663,24 @@ Function GetAccessKey(Obj) Export
 	StoreList.GroupBy("Store");
 	AccessKeyMap.Insert("Store", StoreList.UnloadColumn("Store"));
 	Return AccessKeyMap;
+EndFunction
+
+#EndRegion
+
+#Region SystemAttributes
+
+Function GetPredefinedSystemAttributes() Export
+	SystemAttributes = New Array(); // Array of ChartOfCharacteristicTypesRef.SystemAttributes
+	SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.Store);
+	Return SystemAttributes;
+EndFunction
+
+Function GetSystemAttributeValues(Obj, SystemAttribute) Export
+	Values = New Array();
+	If SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.Store Then
+		Values = Obj.ItemList.Unload(, "Store").UnloadColumn("Store");
+	EndIf;
+	Return Values;
 EndFunction
 
 #EndRegion

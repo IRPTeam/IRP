@@ -21,6 +21,8 @@ Function GetOperationsDefinition()
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.CurrencyExchange));
 	// Transaction type - Other partner
 	Map.Insert(AO.BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));		
+	Map.Insert(AO.BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues,
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));	
 	// Transaction type - Other expense
 	Map.Insert(AO.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand,
@@ -59,6 +61,9 @@ Function GetOperationsDefinition()
 	// Transaction type - Other income
 	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues,
 		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherIncome));
+	// Transaction type - salary return
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.SalaryReturn));
 
 	// Cash payment
 	//  Transaction type - Payment to vendor
@@ -77,6 +82,8 @@ Function GetOperationsDefinition()
 	//  Transaction type - Other partner
 	Map.Insert(AO.CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand,
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));	
+	Map.Insert(AO.CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));		
 	//  Transaction type - Other partner
 	Map.Insert(AO.CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand,
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.SalaryPayment));	
@@ -100,7 +107,10 @@ Function GetOperationsDefinition()
 		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.CashTransferOrder));	
 	//  Transaction type - Other partner
 	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions,
-		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherPartner));
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherPartner));	
+	//  Transaction type - Salary return
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.SalaryReturn));
 	
 	// Cash expense
 	Map.Insert(AO.CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow", True));
@@ -114,6 +124,8 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming , New Structure("ByRow", True));
 		
 	// Credit note
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
@@ -121,30 +133,40 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
 				
 	// Purchase invoice
+	ArrayOfPurchaseInvoiceTransactionTypes = New Array();
+	ArrayOfPurchaseInvoiceTransactionTypes.Add(Enums.PurchaseTransactionTypes.Purchase);
+	ArrayOfPurchaseInvoiceTransactionTypes.Add(Enums.PurchaseTransactionTypes.CurrencyRevaluationCustomer);
+	ArrayOfPurchaseInvoiceTransactionTypes.Add(Enums.PurchaseTransactionTypes.CurrencyRevaluationVendor);
 	// receipt inventory
 	Map.Insert(AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions, 
-		New Structure("ByRow, TransactionType", True, Enums.PurchaseTransactionTypes.Purchase));
+		New Structure("ByRow, TransactionType", True, ArrayOfPurchaseInvoiceTransactionTypes));
 	// offset of advabces
 	Map.Insert(AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors,
-		New Structure("ByRow, TransactionType", False, Enums.PurchaseTransactionTypes.Purchase));
+		New Structure("ByRow, TransactionType", False, ArrayOfPurchaseInvoiceTransactionTypes));
 	
 	Map.Insert(AO.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions,
-		New Structure("ByRow, TransactionType", True, Enums.PurchaseTransactionTypes.Purchase));
+		New Structure("ByRow, TransactionType", True, ArrayOfPurchaseInvoiceTransactionTypes));
 	
 	// Sales invoice
+	ArrayOfSalesInvoiceTransactionTypes = New Array();
+	ArrayOfSalesInvoiceTransactionTypes.Add(Enums.SalesTransactionTypes.Sales);
+	ArrayOfSalesInvoiceTransactionTypes.Add(Enums.SalesTransactionTypes.CurrencyRevaluationCustomer);
+	ArrayOfSalesInvoiceTransactionTypes.Add(Enums.SalesTransactionTypes.CurrencyRevaluationVendor);
 	// sales inventory
 	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues,
-		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
+		New Structure("ByRow, TransactionType", True, ArrayOfSalesInvoiceTransactionTypes));
 	// offset of advances
 	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions,
-		New Structure("ByRow, TransactionType", False, Enums.SalesTransactionTypes.Sales));
+		New Structure("ByRow, TransactionType", False, ArrayOfSalesInvoiceTransactionTypes));
 	
 	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming,
-		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
+		New Structure("ByRow, TransactionType", True, ArrayOfSalesInvoiceTransactionTypes));
 	Map.Insert(AO.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory,
-		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
+		New Structure("ByRow, TransactionType", True, ArrayOfSalesInvoiceTransactionTypes));
 	
 	// Retail sales receipt
 	Map.Insert(AO.RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory , New Structure("ByRow", True));
@@ -221,6 +243,8 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.DebitCreditNote_R5020B_PartnersBalance, New Structure("ByRow", False));
 	Map.Insert(AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset, New Structure("ByRow", False));
 	Map.Insert(AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset, New Structure("ByRow", False));
+	Map.Insert(AO.DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues, New Structure("ByRow", False));
+	Map.Insert(AO.DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance, New Structure("ByRow", False));
 	
 	ArrayOfAccrualsTransactionTypes = New Array();
 	ArrayOfAccrualsTransactionTypes.Add(Enums.AccrualsTransactionType.Accrual);
@@ -237,6 +261,7 @@ Function GetOperationsDefinition()
 	// Employee cash advance
 	Map.Insert(AO.EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow", True));
 	Map.Insert(AO.EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow", True));
+	Map.Insert(AO.EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow", True));
 	
 	// Sales return
 	Map.Insert(AO.SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers, 
@@ -278,7 +303,73 @@ Function GetOperationsDefinition()
 		
 	Map.Insert(AO.TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing, 
 		New Structure("ByRow, TransactionType", True, ArrayOfTaxesOperationTransactionTypes_Payment));
+	
+	// External accounting operation
+	Map.Insert(AO.ExternalAccountingOperation, New Structure("ByRow", True));
+	
+	// Additional cost allocation
+	Map.Insert(AO.AdditionalCostAllocation_DR_R4050B_StockInventory_CR_R5022T_Expenses, New Structure("ByRow", True));
+	
+	// Additional revenue allocation
+	Map.Insert(AO.AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory, New Structure("ByRow", True));
+	
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors, New Structure("ByRow", True));
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions, New Structure("ByRow", True));
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions, New Structure("ByRow", True));
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions, New Structure("ByRow", True));
+	
+	// Fixed asset revaluation
+	Map.Insert(AO.FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues, New Structure("ByRow", True));
+	Map.Insert(AO.FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow", True));
+	
+	Return Map;
+EndFunction
+
+Function GetMappingOperationsToPartnerBalance() Export
+	AO = Catalogs.AccountingOperations;
+	
+	Map = New Map();
+	
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "CustomerTransaction", "CR"), 
+			New Structure("ResourceName, AccountType", "CustomerAdvance", "CR")));
 		
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "VendorTransaction", "CR"), 
+			New Structure("ResourceName, AccountType", "VendorAdvance", "CR")));
+
+	Map.Insert(AO.BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "CustomerTransaction", "DR"), 
+			New Structure("ResourceName, AccountType", "CustomerAdvance", "DR")));
+			
+	Map.Insert(AO.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "VendorTransaction", "DR"), 
+			New Structure("ResourceName, AccountType", "VendorAdvance", "DR")));
+
+	Map.Insert(AO.CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "CustomerTransaction", "DR"), 
+			New Structure("ResourceName, AccountType", "CustomerAdvance", "DR")));
+
+	Map.Insert(AO.CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "VendorTransaction", "DR"), 
+			New Structure("ResourceName, AccountType", "VendorAdvance", "DR")));
+	
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "CustomerTransaction", "CR"), 
+			New Structure("ResourceName, AccountType", "CustomerAdvance", "CR")));
+	
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "VendorTransaction", "CR"), 
+			New Structure("ResourceName, AccountType", "VendorAdvance", "CR")));
+	
 	Return Map;
 EndFunction
 
@@ -335,45 +426,70 @@ EndFunction
 
 Procedure SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsValues = Undefined) Export
 	If ValueIsFilled(AccountingAnalytics.Debit) Then
+		Number = 1;
 		For Each ExtDim In AccountingAnalytics.Debit.ExtDimensionTypes Do
 			ExtDimension = New Structure("ExtDimensionType, ExtDimension");
 			ExtDimension.ExtDimensionType  = ExtDim.ExtDimensionType;
 			ArrayOfTypes = ExtDim.ExtDimensionType.ValueType.Types();
-			ExtDimValue = ExtractValueByType(Parameters.ObjectData, Parameters.RowData, ArrayOfTypes, AdditionalAnalyticsValues);
-			ExtDimValue = Documents[Parameters.MetadataName].GetHintDebitExtDimension(Parameters, ExtDim.ExtDimensionType, ExtDimValue);
+			ExtDimValue = ExtractValueByType(ExtDim.ExtDimensionType, Parameters.ObjectData, Parameters.RowData, ArrayOfTypes, AdditionalAnalyticsValues);
+			ExtDimValue = Documents[Parameters.MetadataName].GetHintDebitExtDimension(Parameters, 
+																					  ExtDim.ExtDimensionType, 
+																					  ExtDimValue,
+																					  AdditionalAnalyticsValues,
+																					  Number);
 			ExtDimension.ExtDimension = ExtDimValue;
 			ExtDimension.Insert("Key"          , ?(Parameters.RowData = Undefined, "", Parameters.RowData.Key));
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Debit);
 			ExtDimension.Insert("Operation"    , Parameters.Operation);
 			ExtDimension.Insert("LedgerType"   , Parameters.LedgerType);
 			AccountingAnalytics.DebitExtDimensions.Add(ExtDimension);
+			Number = Number + 1;
 		EndDo;
 	EndIf;
 EndProcedure
 
 Procedure SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsValues = Undefined) Export
 	If ValueIsFilled(AccountingAnalytics.Credit) Then
+		Number = 1;
 		For Each ExtDim In AccountingAnalytics.Credit.ExtDimensionTypes Do
 			ExtDimension = New Structure("ExtDimensionType, ExtDimension");
 			ExtDimension.ExtDimensionType  = ExtDim.ExtDimensionType;
 			ArrayOfTypes = ExtDim.ExtDimensionType.ValueType.Types();
-			ExtDimValue = ExtractValueByType(Parameters.ObjectData, Parameters.RowData, ArrayOfTypes, AdditionalAnalyticsValues);
-			ExtDimValue = Documents[Parameters.MetadataName].GetHintCreditExtDimension(Parameters, ExtDim.ExtDimensionType, ExtDimValue);
+			ExtDimValue = ExtractValueByType(ExtDim.ExtDimensionType, Parameters.ObjectData, Parameters.RowData, ArrayOfTypes, AdditionalAnalyticsValues);
+			ExtDimValue = Documents[Parameters.MetadataName].GetHintCreditExtDimension(Parameters, 
+																					   ExtDim.ExtDimensionType, 
+																					   ExtDimValue,
+																					   AdditionalAnalyticsValues,
+																					   Number);
 			ExtDimension.ExtDimension = ExtDimValue;
 			ExtDimension.Insert("Key"          , ?(Parameters.RowData = Undefined, "", Parameters.RowData.Key));
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Credit);
 			ExtDimension.Insert("Operation"    , Parameters.Operation);
 			ExtDimension.Insert("LedgerType"   , Parameters.LedgerType);
 			AccountingAnalytics.CreditExtDimensions.Add(ExtDimension);
+			Number = Number + 1;
 		EndDo;
 	EndIf;
 EndProcedure
 
-Function ExtractValueByType(ObjectData, RowData, ArrayOfTypes, AdditionalAnalyticsValues)
+Function ExtractValueByType(ExtDimensionType, ObjectData, RowData, ArrayOfTypes, AdditionalAnalyticsValues)
 	If AdditionalAnalyticsValues <> Undefined Then
 		For Each KeyValue In AdditionalAnalyticsValues Do
-			If ArrayOfTypes.Find(TypeOf(AdditionalAnalyticsValues[KeyValue.Key])) <> Undefined Then
-				Return AdditionalAnalyticsValues[KeyValue.Key];
+			
+			Value = AdditionalAnalyticsValues[KeyValue.Key];
+			ValueType = TypeOf(Value);
+			
+			If ArrayOfTypes.Find(ValueType) <> Undefined Then
+				
+				If ValueType = Type("CatalogRef.ExtDimensions") Then
+					
+					If ValueIsFilled(Value) And Value.Owner = ExtDimensionType Then
+						Return Value;
+					EndIf;
+					
+				Else	
+					Return Value;
+				EndIf;
 			EndIf;
 		EndDo;	
 	EndIf;
@@ -392,7 +508,7 @@ Function ExtractValueByType(ObjectData, RowData, ArrayOfTypes, AdditionalAnalyti
 				EndIf;
 			EndDo;
 		Else
-			Raise "Unsupported type of row data";
+			Raise R().UnsupportedRowDataType;
 		EndIf;
 	EndIf;
 	
@@ -413,7 +529,10 @@ Function GetDataByAccountingAnalytics(BasisRef, AnalyticRow) Export
 	Parameters.Insert("CurrencyMovementType", AnalyticRow.LedgerType.CurrencyMovementType);
 	Parameters.Insert("IsCurrencyRevaluation", 
 		TypeOf(BasisRef) = Type("DocumentRef.ForeignCurrencyRevaluation"));
-		
+	Parameters.Insert("IsDebitCreditNoteDifference", 
+		AnalyticRow.Operation = Catalogs.AccountingOperations.DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues
+		Or AnalyticRow.Operation = Catalogs.AccountingOperations.DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance);
+			
 	Data = GetAccountingData(Parameters);
 	
 	Result = GetAccountingDataResult();
@@ -461,6 +580,7 @@ Function GetLedgerTypesByCompany(Ref, Date, Company) Export
 	If Not ValueIsFilled(Company) Then
 		Return New Array();
 	EndIf;
+	
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -475,11 +595,64 @@ Function GetLedgerTypesByCompany(Ref, Date, Company) Export
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	ArrayOfLedgerTypes = QueryTable.UnloadColumn("LedgerType");
+	
+	If TypeOf(Ref) = Type("DocumentRef.ExternalAccountingOperation") Then
+		Array = New Array();
+		If ArrayOfLedgerTypes.Find(Ref.LedgerType) <> Undefined Then
+			Array.Add(Ref.LedgerType);
+		EndIf;
+		MatchingLedgerTypes = GetMatchingLedgerTypes(Ref.LedgerType);
+		
+		For Each MatchingLedgerType In MatchingLedgerTypes Do
+			If ArrayOfLedgerTypes.Find(MatchingLedgerType) <> Undefined Then
+				Array.Add(MatchingLedgerType);
+			EndIf;
+		EndDo;
+		
+		Return Array;
+	EndIf;
+	
 	Return ArrayOfLedgerTypes;
 EndFunction
 
+Function GetMatchingLedgerTypes(LedgerType)
+	Return AccountingServerReuse.GetMatchingLedgerTypes(LedgerType);
+EndFunction
+
+Function __GetMatchingLedgerTypes(LedgerType) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT DISTINCT
+	|	Reg.TargetLedgerType AS LedgerType
+	|FROM
+	|	InformationRegister.T9068S_AccountingMappingAccountsMatching AS Reg
+	|WHERE
+	|	Reg.SourceLedgerType = &LedgerType";
+	
+	Query.SetParameter("LedgerType", LedgerType);
+	QueryResult = Query.Execute();
+	
+	QueryTable = QueryResult.Unload();
+	
+	Return QueryTable.UnloadColumn("LedgerType");
+EndFunction
+
 Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName)
-	MetadataName = Object.Ref.Metadata().Name;
+	
+	DocTransactionType = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TransactionType") Then
+		DocTransactionType = Object.TransactionType;
+	EndIf;
+	
+	Return AccountingServerReuse.GetAccountingOperationsByLedgerType(Object.Ref, 
+	                                                                 Period,
+	                                                                 DocTransactionType,
+	                                                                 LedgerType,
+	                                                                 MainTableName);
+EndFunction
+
+Function __GetAccountingOperationsByLedgerType(Ref, Period, DocTransactionType, LedgerType, MainTableName) Export
+	MetadataName = Ref.Metadata().Name;
 	AccountingOperationGroup = Catalogs.AccountingOperations["Document_" + MetadataName];
 	Query = New Query();
 	Query.Text =
@@ -489,7 +662,8 @@ Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTab
 	|	InformationRegister.LedgerTypeOperations.SliceLast(&Period, LedgerType = &LedgerType
 	|	AND AccountingOperation.Parent = &AccountingOperationGroup) AS LedgerTypeOperationsSliceLast
 	|WHERE
-	|	LedgerTypeOperationsSliceLast.Use";
+	|	LedgerTypeOperationsSliceLast.Use
+	|	AND NOT LedgerTypeOperationsSliceLast.AccountingOperation.DeletionMark";
 	Query.SetParameter("Period", Period);
 	Query.SetParameter("LedgerType", LedgerType);
 	Query.SetParameter("AccountingOperationGroup", AccountingOperationGroup);
@@ -499,11 +673,6 @@ Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTab
 	ArrayOfAccountingOperations = New Array();
 	
 	OperationsDefinition = GetOperationsDefinition();
-	
-	DocTransactionType = Undefined;
-	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TransactionType") Then
-		DocTransactionType = Object.TransactionType;
-	EndIf;
 	
 	While QuerySelection.Next() Do
 		Def = OperationsDefinition.Get(QuerySelection.AccountingOperation);
@@ -1122,6 +1291,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	Query.Text = 
 	"SELECT
 	|	Table.AccountExpense,
+	|	Table.AccountExpenseReturn,
 	|	1 AS Priority
 	|INTO AccountsExpense
 	|FROM
@@ -1135,6 +1305,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|
 	|SELECT
 	|	Table.AccountExpense,
+	|	Table.AccountExpenseReturn,
 	|	2
 	|FROM
 	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
@@ -1147,6 +1318,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|
 	|SELECT
 	|	Table.AccountExpense,
+	|	Table.AccountExpenseReturn,
 	|	3
 	|FROM
 	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
@@ -1159,6 +1331,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|
 	|SELECT
 	|	Table.AccountExpense,
+	|	Table.AccountExpenseReturn,
 	|	4
 	|FROM
 	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
@@ -1220,6 +1393,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|//2//////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	Table.AccountRevenue,
+	|	Table.AccountRevenueReturn,
 	|	1 AS Priority
 	|INTO AccountsRevenue
 	|FROM
@@ -1233,6 +1407,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|
 	|SELECT
 	|	Table.AccountRevenue,
+	|	Table.AccountRevenueReturn,
 	|	2
 	|FROM
 	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
@@ -1245,6 +1420,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|
 	|SELECT
 	|	Table.AccountRevenue,
+	|	Table.AccountRevenueReturn,
 	|	3
 	|FROM
 	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
@@ -1257,6 +1433,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|
 	|SELECT
 	|	Table.AccountRevenue,
+	|	Table.AccountRevenueReturn,
 	|	4
 	|FROM
 	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
@@ -1318,6 +1495,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|//4//////////////////////////////////////////////////////////////////////////////
 	|SELECT TOP 1
 	|	Table.AccountExpense,
+	|	Table.AccountExpenseReturn,
 	|	Table.Priority AS Priority
 	|FROM
 	|	AccountsExpense AS Table
@@ -1338,6 +1516,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|//6///////////////
 	|SELECT TOP 1
 	|	Table.AccountRevenue,
+	|	Table.AccountRevenueReturn,
 	|	Table.Priority AS Priority
 	|FROM
 	|	AccountsRevenue AS Table
@@ -1356,7 +1535,6 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|ORDER BY
 	|	Priority";
 	
-	
 	Query.SetParameter("Period"  , Period);
 	Query.SetParameter("Company" , Company);
 	Query.SetParameter("LedgerTypeVariant" , LedgerTypeVariant);
@@ -1366,14 +1544,17 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	QueryResults = Query.ExecuteBatch();
 	
 	Result = New Structure();
-	Result.Insert("AccountExpense", Undefined);
-	Result.Insert("AccountOtherPeriodsExpense", Undefined);
-	Result.Insert("AccountRevenue", Undefined);
-	Result.Insert("AccountOtherPeriodsRevenue", Undefined);
+	Result.Insert("AccountExpense"             , Undefined);
+	Result.Insert("AccountExpenseReturn"       , Undefined);
+	Result.Insert("AccountOtherPeriodsExpense" , Undefined);
+	Result.Insert("AccountRevenue"             , Undefined);
+	Result.Insert("AccountRevenueReturn"       , Undefined);
+	Result.Insert("AccountOtherPeriodsRevenue" , Undefined);
 	
 	QuerySelection_Expense = QueryResults[4].Select();
 	If QuerySelection_Expense.Next() Then
 		Result.AccountExpense = QuerySelection_Expense.AccountExpense;
+		Result.AccountExpenseReturn = QuerySelection_Expense.AccountExpenseReturn;
 	EndIf;
 	
 	QuerySelection_OtherPeriodsExpense = QueryResults[5].Select();
@@ -1384,6 +1565,7 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	QuerySelection_Revenue = QueryResults[6].Select();
 	If QuerySelection_Revenue.Next() Then
 		Result.AccountRevenue = QuerySelection_Revenue.AccountRevenue;
+		Result.AccountRevenueReturn = QuerySelection_Revenue.AccountRevenueReturn;
 	EndIf;
 	
 	QuerySelection_OtherPeriodsRevenue = QueryResults[7].Select();
@@ -1561,6 +1743,11 @@ Procedure UpdateAccountingTables(Object,
 			Continue;
 		EndIf;
 				
+		If IsNotUsedOperation(Operation.OperationInfo.Operation, ObjectData, Undefined) Then
+			AddNotUsedOperation(ArrayOfNotUsedOperations, Operation.OperationInfo.Operation, Undefined);
+			Continue;
+		EndIf;
+		 
 		Parameters = New Structure();
 		Parameters.Insert("Object"        , Object);
 		Parameters.Insert("Operation"     , Operation.OperationInfo.Operation);
@@ -1576,7 +1763,7 @@ Procedure UpdateAccountingTables(Object,
 		FillAccountingRowAnalytics(Parameters);
 	EndDo;
 		
-	If MainTableName = Undefined Then
+	If MainTableName = Undefined Then // reques table
 		For Each Operation In OperationsByLedgerType Do
 			If Not Operation.OperationInfo.RequestTable Then
 				Continue;
@@ -1649,11 +1836,15 @@ Function IsNotUsedOperation(Operation, ObjectData, RowData)
 	ElsIf DocMetadata = Metadata.Documents.CreditNote Then
 		Return IsNotUsedOperation_CreditNote(Operation, ObjectData, RowData);
 	ElsIf DocMetadata = Metadata.Documents.DebitNote Then
-		Return IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData);
+		Return IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData);		
+	ElsIf DocMetadata = Metadata.Documents.DebitCreditNote Then
+		Return IsNotUsedOperation_DebitCreditNote(Operation, ObjectData, RowData);
 	ElsIf DocMetadata = Metadata.Documents.TaxesOperation Then
 		Return IsNotUsedOperation_TaxesOperation(Operation, ObjectData, RowData);				
 	ElsIf DocMetadata = Metadata.Documents.Payroll Then
 		Return IsNotUsedOperation_Payroll(Operation, ObjectData, RowData);
+	ElsIf DocMetadata = Metadata.Documents.EmployeeCashAdvance Then
+		Return IsNotUsedOperation_EmployeeCashAdvance(Operation, ObjectData, RowData);		
 	EndIf;
 	
 	Return False; // is used operation
@@ -1700,7 +1891,15 @@ Function GetDocumentData(Object, TableRow, MainTableName)
 			TaxInfo.Insert("VatRate", TableRow.VatRate);
 			Result.RowData.Insert("TaxInfo", TaxInfo);
 		EndIf;
-				
+		
+		If CommonFunctionsClientServer.ObjectHasProperty(TableRow, "WithholdingTaxRate") Then
+			WithholdingTaxInfo = New Structure();
+			WithholdingTaxInfo.Insert("Key", TableRow.Key);
+			WithholdingTaxInfo.Insert("Tax", TaxesServer.GetWithholdingTaxRef());
+			WithholdingTaxInfo.Insert("WithholdingTaxRate", TableRow.WithholdingTaxRate);
+			Result.RowData.Insert("WithholdingTaxInfo", WithholdingTaxInfo);
+		EndIf;
+						
 	Else
 		Result.RowData.Insert("Key", "");
 	EndIf;
@@ -1731,8 +1930,8 @@ Procedure FillAccountingRowAnalytics(Parameters, Row = Undefined)
 	
 	AnalyticRows = Parameters.AccountingRowAnalytics.FindRows(Filter);
 	
-	If AnalyticRows.Count() > 1 Then
-		Raise StrTemplate("More than 1 analytic rows by filter: Key[%1] Operation[%2] LedgerType[%3]", Filter.Key, Filter.Operation, Filter.LedgerType);
+        If AnalyticRows.Count() > 1 Then
+                Raise StrTemplate(R().MoreThanOneAnalyticRowsFilter, Filter.Key, Filter.Operation, Filter.LedgerType);
 	ElsIf AnalyticRows.Count() = 1 Then
 		AnalyticRow = AnalyticRows[0];
 		If AnalyticRow.IsFixed And Not Parameters.IgnoreFixed Then
@@ -1753,35 +1952,55 @@ Procedure FillAccountingRowAnalytics(Parameters, Row = Undefined)
 	
 	AnalyticData = Documents[Parameters.MetadataName].GetAccountingAnalytics(AnalyticParameters);
 	If AnalyticData = Undefined Then
-		Raise StrTemplate("Document [%1] not supported accounting operation [%2]", 
-			Parameters.MetadataName, Parameters.Operation);
+		Raise StrTemplate(R().DocumentAccountingOpNotSupported, Parameters.MetadataName, Parameters.Operation);
 	EndIf;
 		
 	AnalyticRow.Operation = AnalyticData.Operation;
 	AnalyticRow.LedgerType = AnalyticData.LedgerType;
 	
 	AnalyticRow.AccountDebit = AnalyticData.Debit;
+	ClearAccountingExtDimensions(AnalyticData, 
+		AnalyticData.DebitExtDimensions, 
+		Parameters.AccountingExtDimensions,
+		Enums.AccountingAnalyticTypes.Debit);
 	FillAccountingExtDimensions(AnalyticData.DebitExtDimensions, Parameters.AccountingExtDimensions);
 	
 	AnalyticRow.AccountCredit = AnalyticData.Credit;
+	ClearAccountingExtDimensions(AnalyticData, 
+		AnalyticData.CreditExtDimensions, 
+		Parameters.AccountingExtDimensions,
+		Enums.AccountingAnalyticTypes.Credit);
 	FillAccountingExtDimensions(AnalyticData.CreditExtDimensions, Parameters.AccountingExtDimensions);
 EndProcedure
 
-Procedure FillAccountingExtDimensions(ArrayOfData, AccountingExtDimensions)
-	For Each ExtDim In ArrayOfData Do
+Procedure ClearAccountingExtDimensions(AnalyticData, ArrayOfData, AccountingExtDimensions, AnalyticType)
+	If ArrayOfData.Count() = 0 Then
 		Filter = New Structure();
-		If ValueIsFilled(ExtDim.Key) Then
-			Filter.Insert("Key" , ExtDim.Key);
-		EndIf;
-		Filter.Insert("AnalyticType" , ExtDim.AnalyticType);
-		Filter.Insert("Operation"    , ExtDim.Operation);
-		Filter.Insert("LedgerType"   , ExtDim.LedgerType);
+		Filter.Insert("AnalyticType" , AnalyticType);
+		Filter.Insert("Operation"    , AnalyticData.Operation);
+		Filter.Insert("LedgerType"   , AnalyticData.LedgerType);
 		AccountingExtDimensionRows = AccountingExtDimensions.FindRows(Filter);
 		For Each RowForDelete In AccountingExtDimensionRows Do
 			AccountingExtDimensions.Delete(RowForDelete);
 		EndDo;
-	EndDo;
-	
+	Else
+		For Each ExtDim In ArrayOfData Do
+			Filter = New Structure();
+			If ValueIsFilled(ExtDim.Key) Then
+				Filter.Insert("Key" , ExtDim.Key);
+			EndIf;
+			Filter.Insert("AnalyticType" , ExtDim.AnalyticType);
+			Filter.Insert("Operation"    , ExtDim.Operation);
+			Filter.Insert("LedgerType"   , ExtDim.LedgerType);
+			AccountingExtDimensionRows = AccountingExtDimensions.FindRows(Filter);
+			For Each RowForDelete In AccountingExtDimensionRows Do
+				AccountingExtDimensions.Delete(RowForDelete);
+			EndDo;
+		EndDo;		
+	EndIf;	
+EndProcedure
+
+Procedure FillAccountingExtDimensions(ArrayOfData, AccountingExtDimensions)
 	For Each ExtDim In ArrayOfData Do
 		NewRow = AccountingExtDimensions.Add();
 		NewRow.Key              = ExtDim.Key;
@@ -1828,7 +2047,9 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 		EndIf;
 		
 		If Not ValueIsFilled(MainTableName) Then
-			ArrayForDelete.Add(Row);
+			If Not Row.IsFixed Then
+				ArrayForDelete.Add(Row);
+			EndIf;
 		Else		
 			If Not ValueIsFilled(Row.Key) Then
 				Continue;
@@ -1846,6 +2067,12 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 	// AccountingExtDimensions
 	ArrayForDelete.Clear();
 	For Each Row In AccountingExtDimensions Do
+		_IsFixed = False;
+		_Filter = New Structure("Key, Operation, LedgerType", Row.Key, Row.Operation, Row.LedgerType);
+		_Rows = AccountingRowAnalytics.FindRows(_Filter);
+		If _Rows.Count() Then
+			_IsFixed = _Rows[0].IsFixed;
+		EndIf;
 		
 		If LedgerTypes.Find(Row.LedgerType) = Undefined Then
 			ArrayForDelete.Add(Row);
@@ -1874,7 +2101,9 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 		EndIf;
 		
 		If Not ValueIsFilled(MainTableName) Then
-			ArrayForDelete.Add(Row);
+			If Not _IsFixed Then
+				ArrayForDelete.Add(Row);
+			EndIf;
 		Else	
 			If Not ValueIsFilled(Row.Key) Then
 				Continue;
@@ -2139,8 +2368,51 @@ Function GetAccountingData(Parameters)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	case when &IsRevaluationCurrency then Amounts.RevaluatedCurrency else Amounts.Currency end as Currency,
-	|	SUM(case when &IsRevaluationCurrency then 0 else Amounts.Amount end) AS Amount
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.DrCurrency.ref is null then
+	|				Amounts.DrCurrency
+	|			else
+	|				Amounts.Currency end end as DrCurrency,
+	|
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.CrCurrency.ref is null then
+	|				Amounts.CrCurrency
+	|			else
+	|				Amounts.Currency end end as CrCurrency,
+	|	
+	|	case when not (&IsRevaluationCurrency Or &IsDebitCreditNoteDifference)
+	|				and Amounts.DrCurrencyAmount = 0 then true else false end as DrCurrencyAmountIsEmpty,
+	|
+	|	case when not (&IsRevaluationCurrency Or &IsDebitCreditNoteDifference)
+	|				and Amounts.CrCurrencyAmount = 0 then true else false end as CrCurrencyAmountIsEmpty,
+	|
+	|
+	|	SUM(case 
+	|			when &IsRevaluationCurrency Or &IsDebitCreditNoteDifference then 
+	|			0 
+	|			else
+	|				case when Amounts.DrCurrencyAmount <> 0 then
+	|					Amounts.DrCurrencyAmount
+	|				else
+	|					Amounts.Amount end end) AS DrCurrencyAmount,
+	|
+	|	SUM(case 
+	|			when &IsRevaluationCurrency Or &IsDebitCreditNoteDifference then 
+	|			0 
+	|			else
+	|				case when Amounts.CrCurrencyAmount <> 0 then
+	|					Amounts.CrCurrencyAmount
+	|				else
+	|					Amounts.Amount end end) AS CrCurrencyAmount
+	|
+	|
+	|
 	|FROM
 	|	AccumulationRegister.T1040T_AccountingAmounts AS Amounts
 	|WHERE
@@ -2153,7 +2425,29 @@ Function GetAccountingData(Parameters)
 	|		else True
 	|	end
 	|GROUP BY
-	|	case when &IsRevaluationCurrency then Amounts.RevaluatedCurrency else Amounts.Currency end
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.DrCurrency.ref is null then
+	|				Amounts.DrCurrency
+	|			else
+	|				Amounts.Currency end end,
+	|
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.CrCurrency.ref is null then
+	|				Amounts.CrCurrency
+	|			else
+	|				Amounts.Currency end end,
+	|
+	|	case when not (&IsRevaluationCurrency Or &IsDebitCreditNoteDifference)
+	|				and Amounts.DrCurrencyAmount = 0 then true else false end,
+	|
+	|	case when not (&IsRevaluationCurrency Or &IsDebitCreditNoteDifference)
+	|				and Amounts.CrCurrencyAmount = 0 then true else false end
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -2199,6 +2493,7 @@ Function GetAccountingData(Parameters)
 	Query.SetParameter("Operation"            , Parameters.Operation);
 	Query.SetParameter("FilterByRowKey"       , ValueIsFilled(RowKey));
 	Query.SetParameter("RowKey"           	  , RowKey);
+	Query.SetParameter("IsDebitCreditNoteDifference", Parameters.IsDebitCreditNoteDifference);
 	
 	If Parameters.IsCurrencyRevaluation Then
 		Query.SetParameter("RevaluationCurrency", Parameters.CurrencyMovementType);
@@ -2207,7 +2502,7 @@ Function GetAccountingData(Parameters)
 		Query.SetParameter("RevaluationCurrency", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 		Query.SetParameter("IsRevaluationCurrency", False);
 	EndIf;
-	
+		
 	QueryResults = Query.ExecuteBatch();
 	
 	Result = GetAccountingDataResult();
@@ -2215,10 +2510,25 @@ Function GetAccountingData(Parameters)
 	// Currency amount
 	QuerySelection = QueryResults[0].Select();
 	If QuerySelection.Next() Then
-		Result.CurrencyDr       = QuerySelection.Currency;
-		Result.CurrencyAmountDr = QuerySelection.Amount;
-		Result.CurrencyCr       = QuerySelection.Currency;
-		Result.CurrencyAmountCr = QuerySelection.Amount;
+		Result.CurrencyDr = QuerySelection.DrCurrency;
+		If ValueIsFilled(QuerySelection.DrCurrency) 
+			And Parameters.CurrencyMovementType.Currency <> QuerySelection.DrCurrency
+			And QuerySelection.DrCurrencyAmountIsEmpty Then
+				Result.CurrencyAmountDr = 
+					GetCurrencyAmount(Parameters.Recorder, Parameters.Operation, QuerySelection.DrCurrency, RowKey);
+		Else
+			Result.CurrencyAmountDr = QuerySelection.DrCurrencyAmount;
+		EndIf;
+		
+		Result.CurrencyCr = QuerySelection.CrCurrency;
+		If ValueIsFilled(QuerySelection.CrCurrency) 
+			And Parameters.CurrencyMovementType.Currency <> QuerySelection.CrCurrency
+			And QuerySelection.CrCurrencyAmountIsEmpty Then
+				Result.CurrencyAmountCr = 
+					GetCurrencyAmount(Parameters.Recorder, Parameters.Operation, QuerySelection.CrCurrency, RowKey);
+		Else
+			Result.CurrencyAmountCr = QuerySelection.CrCurrencyAmount;
+		EndIf;
 	EndIf;
 	
 	// Amount
@@ -2235,6 +2545,36 @@ Function GetAccountingData(Parameters)
 	EndIf;
 	
 	Return Result;	
+EndFunction
+
+Function GetCurrencyAmount(Recorder, Operation, Currency, RowKey)
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 1
+	|	Amounts.Amount
+	|FROM
+	|	AccumulationRegister.T1040T_AccountingAmounts AS Amounts
+	|WHERE
+	|	Amounts.Recorder = &Recorder
+	|	AND Amounts.Operation = &Operation
+	|	AND Amounts.Currency = &Currency
+	|	AND case
+	|		when &FilterByRowKey
+	|			then Amounts.RowKey = &RowKey
+	|		else True
+	|	end";
+	Query.SetParameter("Recorder"       , Recorder);
+	Query.SetParameter("Currency"       , Currency);
+	Query.SetParameter("Operation"      , Operation);
+	Query.SetParameter("FilterByRowKey" , ValueIsFilled(RowKey));
+	Query.SetParameter("RowKey"         , RowKey);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.Amount;
+	EndIf;
+	Return 0;
 EndFunction
 
 #Region Event_Handlers
@@ -2350,7 +2690,6 @@ Function GetTableOfJEDocuments(ArrayOfBasisDocuments, ArrayOfLedgerTypes) Export
 	|	Documents AS Documents
 	|		LEFT JOIN Document.JournalEntry AS JournalEntry
 	|		ON Documents.Document = JournalEntry.Basis
-	|		AND NOT JournalEntry.DeletionMark
 	|		AND JournalEntry.LedgerType = Documents.LedgerType";
 
 	DocumentTable = New ValueTable();
@@ -2381,6 +2720,7 @@ Function GetTableOfJEDocuments(ArrayOfBasisDocuments, ArrayOfLedgerTypes) Export
 	For Each Row In QueryTable Do
 		If ValueIsFilled(Row.JournalEntry) Then
 			JEDocObject = Row.JournalEntry.GetObject();
+			JEDocObject.DeletionMark = False;
 		Else
 			JEDocObject = Documents.JournalEntry.CreateDocument();
 		EndIf;
@@ -2400,6 +2740,99 @@ Procedure CreateJE_ByArrayRefs(ArrayOfBasisDocuments, ArrayOfLedgerTypes) Export
 		Row.JEDocument.Write(DocumentWriteMode.Write);
 	EndDo;	
 EndProcedure
+
+Function GetJobsForCreateJE(ArrayOfBasisDocuments, ArrayOfLedgerTypes) Export
+	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
+	JobDataSettings.ProcedurePath = "AccountingServer.CreateJE_BackgroundJob";
+						
+	DocsInPack = 100;
+	StreamArray = New Array;
+	Pack = 1;
+	TotalDocs = ArrayOfBasisDocuments.Count();
+	For Each Doc In ArrayOfBasisDocuments Do
+		StreamArray.Add(Doc);
+	 	
+	 	If StreamArray.Count() = DocsInPack Then
+	 		JobSettings = BackgroundJobAPIServer.JobSettings();
+			JobSettings.ProcedureParams.Add(StreamArray);
+			JobSettings.ProcedureParams.Add(ArrayOfLedgerTypes);
+			JobSettings.Description = "Create JE: " + Pack + " * (" + DocsInPack + ") / " + TotalDocs;
+			JobDataSettings.JobSettings.Add(JobSettings);
+			
+			StreamArray = New Array;
+	 		Pack = Pack + 1;
+	 	EndIf;
+	EndDo;
+	If StreamArray.Count() > 0 Then
+		JobSettings = BackgroundJobAPIServer.JobSettings();
+		JobSettings.ProcedureParams.Add(StreamArray);
+		JobSettings.ProcedureParams.Add(ArrayOfLedgerTypes);
+		JobSettings.Description = "Create JE: " + Pack + " * (" + StreamArray.Count() + ") / " + TotalDocs;
+		JobDataSettings.JobSettings.Add(JobSettings);
+ 	EndIf;
+
+	Return JobDataSettings;
+EndFunction
+
+Function CreateJE_BackgroundJob(ArrayOfBasisDocuments, ArrayOfLedgerTypes) Export
+	
+	TableOfJEDocuments = GetTableOfJEDocuments(ArrayOfBasisDocuments, ArrayOfLedgerTypes);
+	
+	Errors = New Array();
+	
+	If TableOfJEDocuments.Count() = 0 Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Empty doc list: " + TableOfJEDocuments.Count();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+		Return Errors;
+	EndIf;
+
+	Msg = BackgroundJobAPIServer.NotifySettings();
+	Msg.Log = "Start create JE: " + TableOfJEDocuments.Count();
+	BackgroundJobAPIServer.NotifyStream(Msg);
+	
+	Count = 0; 
+	LastPercentLogged = 0;
+	StartDate = CurrentUniversalDateInMilliseconds();
+	
+	For Each Row In TableOfJEDocuments Do
+		Try
+			CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "WriteOnForm", True);
+			Row.JEDocument.Write(DocumentWriteMode.Write);
+		Except
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			Msg.Log = "Error: " + String(Row.JEDocument) + ":" + Chars.LF + ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			BackgroundJobAPIServer.NotifyStream(Msg);
+			
+			Result = New Structure;
+			Result.Insert("Ref", Row.JEDocument);
+			Result.Insert("Error", Msg.Log);
+			Errors.Add(Result);
+		EndTry;
+		
+		Count = Count + 1;
+		
+		Percent = 100 * Count / TableOfJEDocuments.Count();
+		If (Percent - LastPercentLogged >= 1) Then  
+			LastPercentLogged = Int(Percent);
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
+			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			Msg.Percent = Percent;
+			BackgroundJobAPIServer.NotifyStream(Msg);
+		EndIf;
+
+	EndDo;
+	
+	Msg = BackgroundJobAPIServer.NotifySettings();
+	Msg.End = True;
+	Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+	BackgroundJobAPIServer.NotifyStream(Msg);
+	
+	Return Errors;
+EndFunction
 
 #EndRegion
 
@@ -2449,6 +2882,10 @@ Function IsNotUsedOperation_CreditNote(Operation, ObjectData, RowData)
 		Return False;
 	ElsIf IsOther And Operation = AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions Then
 		Return False;
+	ElsIf IsVendor And Operation = AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
+	ElsIf IsCustomer And Operation = AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
 	EndIf;
 	Return True;
 EndFunction
@@ -2477,8 +2914,32 @@ Function IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData)
 		Return False;
 	ElsIf IsOther And Operation = AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues Then
 		Return False;
+	ElsIf IsVendor And Operation = AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
+	ElsIf IsCustomer And Operation = AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
 	EndIf;
 	Return True;
+EndFunction
+
+Function IsNotUsedOperation_DebitCreditNote(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	
+	If Operation = AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset Then
+		If ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer 
+			Or ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer Then
+			Return False;
+		EndIf;
+		Return True;
+	ElsIf Operation = AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset Then
+		If ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor
+			Or ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor Then
+			Return False;
+		EndIf;
+		Return True;	
+	EndIf;
+	
+	Return False;
 EndFunction
 
 Function IsNotUsedOperation_TaxesOperation(Operation, ObjectData, RowData)
@@ -2529,6 +2990,27 @@ Function IsNotUsedOperation_Payroll(Operation, ObjectData, RowData)
 		EndIf;
 	EndIf;
 	Return False;
+EndFunction
+
+Function IsNotUsedOperation_EmployeeCashAdvance(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	If RowData = Undefined Then
+		Return True;
+	EndIf;
+	If Operation = AO.EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance Then
+		If Not ValueIsFilled(RowData.Invoice) Then
+			Return False;
+		EndIf;
+	ElsIf Operation = AO.EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance Then
+		If Not ValueIsFilled(RowData.Invoice) Then
+			Return False;
+		EndIf;
+	ElsIf Operation = AO.EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance Then
+		If ValueIsFilled(RowData.Invoice) Then
+			Return False;
+		EndIf;
+	EndIf;	
+	Return True;
 EndFunction
 
 #EndRegion
@@ -2669,18 +3151,38 @@ Function CreateAccountingDataTable() Export
 	Return DataTable;
 EndFunction
 
-Procedure SortAccountingDataTable(DataTable)
-	ArrayOfColumns = New Array();
-	For Each Column In DataTable.Columns Do
-		If StrStartsWith(Column.Name, "Ext") Then
-			Continue;
+Function SortAccountingAnalyticRows(_AccountingRowAnalytics, BasisDoc) Export
+	If ValueIsFilled(BasisDoc) Then
+		MainTable = AccountingClientServer.GetDocumentMainTable(BasisDoc);	
+		If ValueIsFilled(MainTable) And BasisDoc[MainTable].Count()
+			And CommonFunctionsClientServer.ObjectHasProperty(BasisDoc[MainTable][0], "Key") Then
+		
+			_AccountingRowAnalytics.Columns.Add("_tmp_order_1");
+			_AccountingRowAnalytics.Columns.Add("_tmp_order_2");
+			
+			For Each AnalyticRow In _AccountingRowAnalytics Do
+				AnalyticRow._tmp_order_2 = AnalyticRow.Operation.Order;
+			EndDo;
+			
+			For Each BasisRow In BasisDoc[MainTable] Do
+				If Not ValueIsFilled(BasisRow.Key) Then
+					Continue;
+				EndIf;
+				
+				AnalyticRows = _AccountingRowAnalytics.FindRows(New Structure("Key", BasisRow.Key));
+				
+				For Each AnalyticRow In AnalyticRows Do
+					AnalyticRow._tmp_order_1 = BasisRow.LineNumber;
+				EndDo;
+				
+			EndDo;
+			
+			_AccountingRowAnalytics.Sort("_tmp_order_1, _tmp_order_2");
+				
 		EndIf;
-		ArrayOfColumns.Add(TrimAll(Column.Name));
-	EndDo;
+	EndIf;	
+EndFunction	
 	
-	DataTable.Sort(StrConcat(ArrayOfColumns, ","));
-EndProcedure
-
 Function GetCurrentAnalyticsRegisterRecords(Doc, RegisterName) Export
 	If Upper(RegisterName) = Upper(Metadata.InformationRegisters.T9050S_AccountingRowAnalytics.FullName()) Then
 		RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
@@ -2689,7 +3191,7 @@ Function GetCurrentAnalyticsRegisterRecords(Doc, RegisterName) Export
 		RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
 		SortColumns = "Document, Key, Operation, LedgerType, AnalyticType, ExtDimensionType, ExtDimension";
 	Else
-		Raise StrTemplate("Unsupported reister name [%1]", RegisterName);
+                Raise StrTemplate(R().UnsupportedRegisterName, RegisterName);
 	EndIf;
 	
 	RecordSet.Filter.Document.Set(Doc);
@@ -2733,12 +3235,24 @@ Function RegisterRecords_AccountingAnalytics(Doc)
 	Old_AccountingExtDimensions.Sort(SortColumns_AccountingExtDimensions);
 	New_AccountingExtDimensions.Sort(SortColumns_AccountingExtDimensions);
 	
+	For Each Row In Old_AccountingExtDimensions Do
+		If Not ValueIsFilled(Row.ExtDimension) Then
+			Row.ExtDimension = Undefined;
+		EndIf;
+	EndDo;
+	
+	For Each Row In New_AccountingExtDimensions Do
+		If Not ValueIsFilled(Row.ExtDimension) Then
+			Row.ExtDimension = Undefined;
+		EndIf;
+	EndDo;
+	
 	RegisterRecords = New Map();
-	If Not CommonFunctionsServer.TablesIsEqual(Old_AccountingRowAnalytics, New_AccountingRowAnalytics, IgnoredColumns) Then
+	If Not CommonFunctionsServer.TablesIsEqual(Old_AccountingRowAnalytics, New_AccountingRowAnalytics, IgnoredColumns, True) Then
 		RegisterRecords.Insert(RecordSet_T9050S.Metadata(), New_AccountingRowAnalytics);	
 	EndIf;
 	
-	If Not CommonFunctionsServer.TablesIsEqual(Old_AccountingExtDimensions, New_AccountingExtDimensions, IgnoredColumns) Then
+	If Not CommonFunctionsServer.TablesIsEqual(Old_AccountingExtDimensions, New_AccountingExtDimensions, IgnoredColumns, True) Then
 		RegisterRecords.Insert(RecordSet_T9051S.Metadata(), New_AccountingExtDimensions);	
 	EndIf;
 	
@@ -2809,7 +3323,7 @@ Function GetCurrentDataRegisterRecords(BasisDoc, RegisterName) Export
 			
 		EndDo;
 	EndDo;
-	SortAccountingDataTable(DataTable);
+
 	Return DataTable;
 EndFunction
 
@@ -2818,96 +3332,104 @@ Function GetNewDataRegisterRecords(BasisDoc, AccountingRowAnalytics, AccountingE
 	
 	AvailableLedgerTypes = GetLedgerTypesByCompany(BasisDoc, BasisDoc.Date, BasisDoc.Company);
 	
+	Errors = New Array();
+	
 	For Each LedgerType In AvailableLedgerTypes Do
-	For Each Row In AccountingRowAnalytics Do
-		If LedgerType <> Row.LedgerType Then
-			Continue;
-		EndIf;
-		
-		DataByAnalytics = GetDataByAccountingAnalytics(BasisDoc, Row);
-		
-		If Not ValueIsFilled(DataByAnalytics.Amount) Then
-			Continue;
-		EndIf;
-		
-		If Not ValueIsFilled(Row.AccountDebit) Then
-			Raise StrTemplate("Debit is empty [%1] [%2]", Row.Operation, Row.Key);
-		EndIf;
-		
-		If Not ValueIsFilled(Row.AccountCredit) Then
-			Raise StrTemplate("Credit is empty [%1] [%2]", Row.Operation, Row.Key);
-		EndIf;
-				
-		Record = DataTable.Add();
-		Record.Period     = BasisDoc.Date;
-		Record.Company    = BasisDoc.Company;
-		Record.LedgerType = Row.LedgerType;
-		Record.Operation  = Row.Operation;
-		Record.IsFixed    = Row.IsFixed;
-		Record.IsByRow    = ValueIsFilled(Row.Key);
-		Record.Key        = Row.Key;
-		
-		Filter = New Structure();
-		Filter.Insert("Key"          , Row.Key);
-		Filter.Insert("Operation"    , Row.Operation);
-		Filter.Insert("LedgerType"   , Row.LedgerType);
-		Filter.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.EmptyRef());
-		
-		// Debit analytics
-		Record.AccountDr = Row.AccountDebit;
-		
-		Filter.AnalyticType = Enums.AccountingAnalyticTypes.Debit;
-		AccountingExtDimDr = AccountingExtDimensions.FindRows(Filter);
-		
-		Record.ExtDimDrType1 = GetExtDimType_ByNumber(1, Record.AccountDr);
-		Record.ExtDimDrType2 = GetExtDimType_ByNumber(2, Record.AccountDr);
-		Record.ExtDimDrType3 = GetExtDimType_ByNumber(3, Record.AccountDr);
-		
-		Record.ExtDimDrValue1 = GetExtDimValue_ByType(Record.ExtDimDrType1, AccountingExtDimDr);
-		Record.ExtDimDrValue2 = GetExtDimValue_ByType(Record.ExtDimDrType2, AccountingExtDimDr);
-		Record.ExtDimDrValue3 = GetExtDimValue_ByType(Record.ExtDimDrType3, AccountingExtDimDr);
-		
-		// Credit analytics
-		Record.AccountCr = Row.AccountCredit;
-		
-		Filter.AnalyticType = Enums.AccountingAnalyticTypes.Credit;
-		AccountingExtDimCr = AccountingExtDimensions.FindRows(Filter);
-		
-		Record.ExtDimCrType1 = GetExtDimType_ByNumber(1, Record.AccountCr);
-		Record.ExtDimCrType2 = GetExtDimType_ByNumber(2, Record.AccountCr);
-		Record.ExtDimCrType3 = GetExtDimType_ByNumber(3, Record.AccountCr);
-		
-		Record.ExtDimCrValue1 = GetExtDimValue_ByType(Record.ExtDimCrType1, AccountingExtDimCr);
-		Record.ExtDimCrValue2 = GetExtDimValue_ByType(Record.ExtDimCrType2, AccountingExtDimCr);
-		Record.ExtDimCrValue3 = GetExtDimValue_ByType(Record.ExtDimCrType3, AccountingExtDimCr);
-				
-		// Debit currency
-		If Row.AccountDebit.Currency Then
-			Record.CurrencyDr       = DataByAnalytics.CurrencyDr;
-			Record.CurrencyAmountDr = DataByAnalytics.CurrencyAmountDr;
-		EndIf;
-		
-		// Credit currency
-		If Row.AccountCredit.Currency Then
-			Record.CurrencyCr       = DataByAnalytics.CurrencyCr;
-			Record.CurrencyAmountCr = DataByAnalytics.CurrencyAmountCr;
-		EndIf;
-		
-		// Debit quantity
-		If Row.AccountDebit.Quantity Then
-			Record.QuantityDr = DataByAnalytics.QuantityDr;
-		EndIf;
-		
-		// Credit quantity
-		If Row.AccountCredit.Quantity Then
-			Record.QuantityCr = DataByAnalytics.QuantityCr;
-		EndIf;
-		
-		Record.Amount = DataByAnalytics.Amount;
+		For Each Row In AccountingRowAnalytics Do
+			If LedgerType <> Row.LedgerType Then
+				Continue;
+			EndIf;
+			
+			DataByAnalytics = GetDataByAccountingAnalytics(BasisDoc, Row);
+			
+			If Not ValueIsFilled(DataByAnalytics.Amount) Then
+				Continue;
+			EndIf;
+			
+			If Not ValueIsFilled(Row.AccountDebit) Then
+				If Not (ValueIsFilled(Row.AccountCredit) And Row.AccountCredit.OffBalance) Then
+					Errors.Add(StrTemplate(R().Error_153, Row.Operation, TrimAll(Row.Key)));
+					Continue;
+				EndIf;
+			EndIf;
+			
+			If Not ValueIsFilled(Row.AccountCredit) Then
+				If Not (ValueIsFilled(Row.AccountDebit) And Row.AccountDebit.OffBalance) Then
+					Errors.Add(StrTemplate(R().Error_154, Row.Operation, TrimAll(Row.Key)));
+					Continue;
+				EndIf;
+			EndIf;
+					
+			Record = DataTable.Add();
+			Record.Period     = BasisDoc.Date;
+			Record.Company    = BasisDoc.Company;
+			Record.LedgerType = Row.LedgerType;
+			Record.Operation  = Row.Operation;
+			Record.IsFixed    = Row.IsFixed;
+			Record.IsByRow    = ValueIsFilled(Row.Key);
+			Record.Key        = Row.Key;
+			
+			Filter = New Structure();
+			Filter.Insert("Key"          , Row.Key);
+			Filter.Insert("Operation"    , Row.Operation);
+			Filter.Insert("LedgerType"   , Row.LedgerType);
+			Filter.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.EmptyRef());
+			
+			// Debit analytics
+			Record.AccountDr = Row.AccountDebit;
+			
+			Filter.AnalyticType = Enums.AccountingAnalyticTypes.Debit;
+			AccountingExtDimDr = AccountingExtDimensions.FindRows(Filter);
+			
+			Record.ExtDimDrType1 = GetExtDimType_ByNumber(1, Record.AccountDr);
+			Record.ExtDimDrType2 = GetExtDimType_ByNumber(2, Record.AccountDr);
+			Record.ExtDimDrType3 = GetExtDimType_ByNumber(3, Record.AccountDr);
+			
+			Record.ExtDimDrValue1 = GetExtDimValue_ByType(Record.ExtDimDrType1, AccountingExtDimDr);
+			Record.ExtDimDrValue2 = GetExtDimValue_ByType(Record.ExtDimDrType2, AccountingExtDimDr);
+			Record.ExtDimDrValue3 = GetExtDimValue_ByType(Record.ExtDimDrType3, AccountingExtDimDr);
+			
+			// Credit analytics
+			Record.AccountCr = Row.AccountCredit;
+			
+			Filter.AnalyticType = Enums.AccountingAnalyticTypes.Credit;
+			AccountingExtDimCr = AccountingExtDimensions.FindRows(Filter);
+			
+			Record.ExtDimCrType1 = GetExtDimType_ByNumber(1, Record.AccountCr);
+			Record.ExtDimCrType2 = GetExtDimType_ByNumber(2, Record.AccountCr);
+			Record.ExtDimCrType3 = GetExtDimType_ByNumber(3, Record.AccountCr);
+			
+			Record.ExtDimCrValue1 = GetExtDimValue_ByType(Record.ExtDimCrType1, AccountingExtDimCr);
+			Record.ExtDimCrValue2 = GetExtDimValue_ByType(Record.ExtDimCrType2, AccountingExtDimCr);
+			Record.ExtDimCrValue3 = GetExtDimValue_ByType(Record.ExtDimCrType3, AccountingExtDimCr);
+					
+			// Debit currency
+			If Row.AccountDebit.Currency Then
+				Record.CurrencyDr       = DataByAnalytics.CurrencyDr;
+				Record.CurrencyAmountDr = DataByAnalytics.CurrencyAmountDr;
+			EndIf;
+			
+			// Credit currency
+			If Row.AccountCredit.Currency Then
+				Record.CurrencyCr       = DataByAnalytics.CurrencyCr;
+				Record.CurrencyAmountCr = DataByAnalytics.CurrencyAmountCr;
+			EndIf;
+			
+			// Debit quantity
+			If Row.AccountDebit.Quantity Then
+				Record.QuantityDr = DataByAnalytics.QuantityDr;
+			EndIf;
+			
+			// Credit quantity
+			If Row.AccountCredit.Quantity Then
+				Record.QuantityCr = DataByAnalytics.QuantityCr;
+			EndIf;
+			
+			Record.Amount = DataByAnalytics.Amount;
+		EndDo;
 	EndDo;
-	EndDo;
-	SortAccountingDataTable(DataTable);
-	Return DataTable;
+	
+	Return New Structure("DataTable, Errors", DataTable, Errors);
 EndFunction
 
 Function RegisterRecords_AccountingData(BasisDoc)	
@@ -2916,20 +3438,28 @@ Function RegisterRecords_AccountingData(BasisDoc)
 	RecordSet.Read();
 	_AccountingRowAnalytics = RecordSet.Unload();
 	
+	SortAccountingAnalyticRows(_AccountingRowAnalytics, BasisDoc);
+	
 	RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
 	RecordSet.Filter.Document.Set(BasisDoc);
 	RecordSet.Read();
 	_AccountingExtDimensions = RecordSet.Unload();
 	
-	NewRecords_DataTable = GetNewDataRegisterRecords(BasisDoc, _AccountingRowAnalytics, _AccountingExtDimensions);	
+	NewRecords = GetNewDataRegisterRecords(BasisDoc, _AccountingRowAnalytics, _AccountingExtDimensions);	
 	
 	OldRecords_DataTable = GetCurrentDataRegisterRecords(BasisDoc, "");
+	
+	RecordSet = InformationRegisters.T9052S_AccountingRelevance.CreateRecordSet();
+	RecordSet.Filter.Document.Set(BasisDoc);
+	RecordSet.Read();
+	IsRelevance = (RecordSet.Count() > 0);
 	
 	IgnoredColumns = "LineNumber,PointInTime";
 	
 	RegisterRecords = New Map();
-	If Not CommonFunctionsServer.TablesIsEqual(OldRecords_DataTable, NewRecords_DataTable, IgnoredColumns) Then
-		RegisterRecords.Insert(AccountingRegisters.Basic.CreateRecordSet().Metadata(), NewRecords_DataTable);	
+	If Not CommonFunctionsServer.TablesIsEqual(OldRecords_DataTable, NewRecords.DataTable, IgnoredColumns)
+		Or Not IsRelevance Then
+		RegisterRecords.Insert(AccountingRegisters.Basic.CreateRecordSet().Metadata(), NewRecords.DataTable);	
 	EndIf;
 	Return RegisterRecords;		
 EndFunction
@@ -2974,7 +3504,7 @@ Function CheckDocumentArray(DocumentArray, CheckType, isJob)
 			ElsIf CheckType = "AccountingData" Then
 				RegisteredRecords = RegisterRecords_AccountingData(Doc);
 			Else
-				Raise StrTemplate("Unsupported check type [%1]", CheckType);
+                                Raise StrTemplate(R().UnsupportedCheckType, CheckType);
 			EndIf;
 			
 			If RegisteredRecords.Count() > 0 Then
@@ -3056,13 +3586,250 @@ Function GetExcludeDocumentTypes_AccountingTranslation() Export
 	Return Array;
 EndFunction
 
+Procedure UpdateAccountingRelevance(DocRef, Action = "", LedgerType = Undefined, CountErrors = 0) Export
+	If Not ValueIsFilled(LedgerType) Then
+		LedgerTypes = GetLedgerTypesByCompany(DocRef, DocRef.Date, DocRef.Company);
+	Else
+		LedgerTypes = New Array();
+		LedgerTypes.Add(LedgerType);
+	EndIf;
+	
+	If LedgerTypes.Count() = 0 Then
+		Return;
+	EndIf;
+	
+	IsProcessed = (Action = "Processed");
+	IsCancelProcessed = (Action = "CancelProcessed");
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	*
+	|FROM
+	|	AccumulationRegister.T1040T_AccountingAmounts AS T1040T_AccountingAmounts
+	|WHERE
+	|	T1040T_AccountingAmounts.Recorder = &DocRef
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	*
+	|FROM
+	|	AccumulationRegister.T1050T_AccountingQuantities AS T1050T_AccountingQuantities
+	|WHERE
+	|	T1050T_AccountingQuantities.Recorder = &DocRef
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	*
+	|FROM
+	|	InformationRegister.T9050S_AccountingRowAnalytics AS T9050S_AccountingRowAnalytics
+	|WHERE
+	|	T9050S_AccountingRowAnalytics.Document = &DocRef
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	*
+	|FROM
+	|	InformationRegister.T9051S_AccountingExtDimensions AS T9051S_AccountingExtDimensions
+	|WHERE
+	|	T9051S_AccountingExtDimensions.Document = &DocRef
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	T9052S_AccountingRelevance.LedgerType,
+	|	T9052S_AccountingRelevance.CurrentMD5,
+	|	T9052S_AccountingRelevance.ProcessedMD5
+	|FROM
+	|	InformationRegister.T9052S_AccountingRelevance AS T9052S_AccountingRelevance
+	|WHERE
+	|	T9052S_AccountingRelevance.Document = &DocRef
+	|	AND CASE
+	|		WHEN &Filter_LedgerType
+	|			THEN T9052S_AccountingRelevance.LedgerType = &LedgerType
+	|		ELSE TRUE
+	|	END";
+	
+	Query.SetParameter("DocRef"            , DocRef);
+	Query.SetParameter("Filter_LedgerType" , ValueIsFilled(LedgerType));
+	Query.SetParameter("LedgerType"        , LedgerType);
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	Tables = New Structure();
+	Tables.Insert("T1040T_AccountingAmounts"       , QueryResults[0].Unload());
+	Tables.Insert("T1050T_AccountingQuantities"    , QueryResults[1].Unload());
+	Tables.Insert("T9050S_AccountingRowAnalytics"  , QueryResults[2].Unload());
+	Tables.Insert("T9051S_AccountingExtDimensions" , QueryResults[3].Unload());
+	
+	For Each KeyValue In Tables Do
+		For Each Column In StrSplit("Recorder, LineNumber, PointInTime, UUID", ",") Do
+			CommonFunctionsServer.DeleteColumn(Tables[KeyValue.Key], TrimAll(Column));
+		EndDo;
+		
+		ArrayOfAllColumns = New Array();
+		For Each Column In Tables[KeyValue.Key].Columns Do
+			ArrayOfAllColumns.Add(Column.Name);
+		EndDo;
+		
+		Tables[KeyValue.Key].Sort(StrConcat(ArrayOfAllColumns, ","));
+	EndDo;
+	
+	NewMD5 = CommonFunctionsServer.GetMD5(Tables, , True);
+	
+	QuerySelection = QueryResults[4].Select();
+		
+	For Each LedgerType In LedgerTypes Do
+		CurrentMD5 = Undefined;
+		ProcessedMD5 = Undefined;
+		
+		QuerySelection.Reset();
+		If QuerySelection.FindNext(New Structure("LedgerType", LedgerType)) Then
+			CurrentMD5   = QuerySelection.CurrentMD5;
+			ProcessedMD5 = QuerySelection.ProcessedMD5;	
+		EndIf;
+		
+		If Not IsProcessed And Not IsCancelProcessed And CurrentMD5 = NewMD5 Then
+			Continue;
+		EndIf;
+		
+		RecordSet = InformationRegisters.T9052S_AccountingRelevance.CreateRecordSet();
+		RecordSet.Filter.Document.Set(DocRef);
+		RecordSet.Filter.LedgerType.Set(LedgerType);
+		
+		Record = RecordSet.Add();
+		Record.Document    = DocRef;
+		Record.LedgerType  = LedgerType;
+		Record.CountErrors = CountErrors;
+		
+		If DocRef.Posted Then
+			Record.CurrentMD5 = NewMD5;
+		Else
+			Record.CurrentMD5 = Undefined;
+		EndIf;
+		
+		If IsProcessed Then
+			Record.ProcessedMD5 = NewMD5;
+		ElsIf IsCancelProcessed Then
+			Record.ProcessedMD5 = Undefined;
+		Else
+			Record.ProcessedMD5 = ProcessedMD5;
+		EndIf;
+		
+		RecordSet.Write();
+	EndDo;	
+EndProcedure
+
+Procedure ClearAccountingRelevance(DocRef) Export
+	RecordSet = InformationRegisters.T9052S_AccountingRelevance.CreateRecordSet();
+	RecordSet.Filter.Document.Set(DocRef);
+	RecordSet.Read();		
+		
+	For Each Record In RecordSet Do
+		Record.CurrentMD5	= Undefined;
+	EndDo;
+		
+	RecordSet.Write();
+EndProcedure
+
+Function GetDocumentList(Settings) Export
+	QueryTemplate =
+		"SELECT DISTINCT
+		|	Doc.Ref AS Ref,
+		|	Doc.Date AS Date,
+		|	VALUETYPE(Doc.Ref) AS DocumentType
+		|%2
+		|FROM
+		|	Document.%1 AS Doc
+		|		LEFT JOIN InformationRegister.T9052S_AccountingRelevance AS Reg
+		|		ON (Doc.Ref = (CAST(Reg.Document AS Document.%1)))
+		|		LEFT JOIN Document.JournalEntry AS JE
+		|		ON (Doc.Ref = (CAST(JE.Basis AS Document.%1)) AND NOT JE.DeletionMark)
+		|WHERE
+		|
+		|case when Doc.Posted Then
+		|
+		|	ISNULL(Reg.CurrentMD5, """") = """"
+		|	OR ISNULL(Reg.CurrentMD5, """") <> ISNULL(Reg.ProcessedMD5, """") 
+		|	OR ISNULL(Reg.CountErrors, 0) <> 0
+		|	OR JE.Ref IS NULL
+		|
+		|else
+		|
+		|	ISNULL(Reg.CurrentMD5, """") <> """"
+		|	OR ISNULL(Reg.ProcessedMD5, """") <> """"
+		|	OR Reg.CurrentMD5 IS NULL
+		|	OR Reg.ProcessedMD5 IS NULL
+		|
+		|end
+		|";
+		
+	ArrayOfTemplates = New Array();
+	
+	
+	For Each DocMetadata In Metadata.Documents Do
+		DocType = Type("DocumentRef." + DocMetadata.Name);	
+				
+		If Metadata.DefinedTypes.typeAccountingDocuments.Type.Types().Find(DocType) = Undefined Then
+			Continue;
+		EndIf;
+		ArrayOfTemplates.Add(StrTemplate(QueryTemplate, DocMetadata.Name, 
+			?(ArrayOfTemplates.Count() = 0, "INTO AllDocuments", "")));
+	EndDo;
+	
+	Query = New Query();
+	Query.Text = StrConcat(ArrayOfTemplates, Chars.LF + "UNION ALL" + Chars.LF) +	"
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AllDocuments.Date AS Date,
+	|	AllDocuments.Ref,
+	|	AllDocuments.DocumentType,
+	|	CASE
+	|		WHEN AllDocuments.Ref.Posted
+	|			THEN 0
+	|		WHEN AllDocuments.Ref.DeletionMark
+	|			THEN 1
+	|		ELSE 2
+	|	END AS Picture
+	|FROM
+	|	AllDocuments AS AllDocuments
+	|WHERE
+	|	
+	|	CASE WHEN &Filter_StartDate THEN AllDocuments.Ref.Date >= BEGINOFPERIOD(&StartDate, DAY) ELSE TRUE END
+	| AND 	CASE WHEN &Filter_EndDate THEN AllDocuments.Ref.Date <= ENDOFPERIOD(&EndDate, DAY) ELSE TRUE END
+	|	AND CASE WHEN &Filter_Company THEN AllDocuments.Ref.Company IN (&CompanyList) ELSE TRUE END
+	|ORDER BY
+	|	AllDocuments.Date";
+	
+	Query.SetParameter("Filter_StartDate", ValueIsFilled(Settings.StartDate));
+	Query.SetParameter("StartDate", Settings.StartDate);
+	Query.SetParameter("Filter_EndDate", ValueIsFilled(Settings.EndDate));
+	Query.SetParameter("EndDate", Settings.EndDate);
+	Query.SetParameter("Filter_Company", Settings.CompanyList.Count() > 0);
+	Query.SetParameter("CompanyList", Settings.CompanyList);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	Return QueryTable;
+EndFunction
+
 #EndRegion
 
 #Region BackgroundJob
 
 Procedure CheckAndFixAccounting(Settings) Export
 	Settings.ExcludeDocumentTypes = GetExcludeDocumentTypes_AccountingAnalytics();
-	DocList = FixDocumentProblemsServer.GetDocumentList(Settings);     
+	If Settings.Accounting Then
+		DocList = GetDocumentList(Settings);     
+	Else
+		DocList = FixDocumentProblemsServer.GetDocumentList(Settings);
+	EndIf;
 	
 	// step 1. analytics
 	RegInfoArray = CheckAsJob_AccountingAnalytics(DocList);
@@ -3076,7 +3843,12 @@ Procedure CheckAndFixAccounting(Settings) Export
 	EndIf;
 	
 	Settings.ExcludeDocumentTypes = GetExcludeDocumentTypes_AccountingTranslation();
-	DocList = FixDocumentProblemsServer.GetDocumentList(Settings);     
+	
+	If Settings.Accounting Then
+		DocList = GetDocumentList(Settings);     
+	Else
+		DocList = FixDocumentProblemsServer.GetDocumentList(Settings);
+	EndIf;
 		
 	// step 2. translations
 	RegInfoArray = CheckAsJob_AccountingTranslation(DocList);
@@ -3116,7 +3888,7 @@ Function RunJob(JobDataSettings)
 
 	For Each JobRow In _JobList Do
 		If Not JobRow.Status = Enums.JobStatus.Completed Then
-			Raise "One job is failed";
+                        Raise R().OneJobFailed;
 		EndIf; 
 	EndDo;     
 	
@@ -3132,3 +3904,930 @@ Function RunJob(JobDataSettings)
 EndFunction
 
 #EndRegion
+
+#Region AccountingService
+
+Procedure LoadAccountingRecordsByPeriod(IntegrationSettings, StartDate, EndDate, RegisterName = "") Export
+	TotalArrayOfDates = New Array();
+	If BegOfDay(StartDate) = BegOfDay(EndDate) Then
+		TotalArrayOfDates.Add(BegOfDay(StartDate));
+	ELse
+		_Date = BegOfDay(StartDate);
+		While _Date <= BegOfDay(EndDate) Do
+			TotalArrayOfDates.Add(_Date);
+			_Date = EndOfDay(_Date) + 1;
+		EndDo;
+	EndIf;
+
+	LoadAccountingRecords(IntegrationSettings, TotalArrayOfDates, RegisterName);
+EndProcedure
+
+Procedure LoadAccountingRecordsAll(IntegrationSettings, RegisterName = "", EAOResultArray = Undefined) Export
+	If EAOResultArray = Undefined Then
+		EAOResultArray = New Array;
+	EndIf;
+	
+	ExternalRegisters = GetExternalRegisters(IntegrationSettings);	
+	
+	TotalArrayOfDates = New Array();
+	
+	For Each ExternalRegister In ExternalRegisters Do
+		
+		If ValueIsFilled(RegisterName) And Upper(RegisterName) <> Upper(TrimAll(ExternalRegister.ExternalName)) Then
+			Continue;
+		EndIf;
+	
+		QueryParams = New Structure();
+		QueryParams.Insert("RegisterName", TrimAll(ExternalRegister.ExternalName));
+		QueryParams.Insert("NodeCode", IntegrationSettings.UniqueID);
+		ResponseData = SendGETRequest(IntegrationSettings, "changesdates", QueryParams);
+		For Each ChangesDate In ResponseData.Data Do
+			_ChangesDate = ReadJSONDate(ChangesDate, JSONDateFormat.ISO);
+			If TotalArrayOfDates.Find(_ChangesDate) = Undefined Then
+				TotalArrayOfDates.Add(_ChangesDate);
+			EndIf;
+		EndDo;
+	EndDo;
+		
+	LoadAccountingRecords(IntegrationSettings, TotalArrayOfDates, RegisterName, EAOResultArray);
+EndProcedure
+
+Procedure LoadAccountingOpeningEntry(IntegrationSettings, Date, RegisterName = "") Export
+	ExternalRegisters = GetExternalRegisters(IntegrationSettings);	
+	For Each ExternalRegister In ExternalRegisters Do
+		
+		If ValueIsFilled(RegisterName) And Upper(RegisterName) <> Upper(TrimAll(ExternalRegister.ExternalName)) Then
+			Continue;
+		EndIf;
+		
+		RequestData = New Structure();
+		RequestData.Insert("Date", EndOfDay(Date));
+		RequestData.Insert("RegisterName", TrimAll(ExternalRegister.ExternalName));
+	
+		Json = SendPOSTRequest(IntegrationSettings, "get_opening_entry", RequestData);
+		ResponseData = CommonFunctionsServer.DeserializeJSON(Json);
+		For Each Data In ResponseData.Data Do
+			If Data.Records.Count() Then
+				CreateExternalAccountingOperation(IntegrationSettings, Data, ExternalRegister.LedgerType);
+			Else
+				DeleteExternalAccountingOperation(IntegrationSettings, Data, ExternalRegister.LedgerType);
+			EndIf;
+		EndDo;		
+	EndDo;
+EndProcedure
+
+Procedure LoadAccountingRecords(IntegrationSettings, ArrayOfDates, RegisterName, EAOResultArray = Undefined)
+	If EAOResultArray = Undefined Then
+		EAOResultArray = New Array;
+	EndIf;
+	
+	ExternalRegisters = GetExternalRegisters(IntegrationSettings);	
+	
+	For Each ExternalRegister In ExternalRegisters Do
+		
+		If ValueIsFilled(RegisterName) And Upper(RegisterName) <> Upper(TrimAll(ExternalRegister.ExternalName)) Then
+			Continue;
+		EndIf;
+		
+		For Each ChangesDate In ArrayOfDates Do
+			RequestData = New Structure();
+			RequestData.Insert("StartDate", BegOfDay(ChangesDate));
+			RequestData.Insert("EndDate", EndOfDay(ChangesDate));
+			RequestData.Insert("NodeCode", IntegrationSettings.UniqueID);
+			RequestData.Insert("RegisterName", TrimAll(ExternalRegister.ExternalName));
+	
+			Json = SendPOSTRequest(IntegrationSettings, "get_changes", RequestData);
+			ResponseData = CommonFunctionsServer.DeserializeJSON(Json);
+			
+			HaveError = False;
+			
+			ArrayOfRecorders = New Array();
+			
+			For Each Data In ResponseData.Data Do
+				
+				RecorderInfo = New Structure();
+				RecorderInfo.Insert("RecorderRef", Data.RecorderRef);
+				RecorderInfo.Insert("RecorderName", Data.RecorderName);
+				RecorderInfo.Insert("RecorderURL", Data.RecorderURL);
+				ArrayOfRecorders.Add(RecorderInfo);
+				
+				If Data.Records.Count() Then
+					CreationResultStructure = CreateExternalAccountingOperation(IntegrationSettings, Data, ExternalRegister.LedgerType);
+					
+					HaveError = CreationResultStructure.IsError;
+					EAOResultArray.Add(CreationResultStructure.EAORef);
+				Else
+					If Not DeleteExternalAccountingOperation(IntegrationSettings, Data, ExternalRegister.LedgerType) Then
+						HaveError = True;
+					EndIf;
+				EndIf;
+			EndDo;
+			
+			If Not HaveError And ResponseData.MessageNo <> 0 Then
+				RequestData = New Structure();
+				RequestData.Insert("NodeCode", IntegrationSettings.UniqueID);
+				RequestData.Insert("RegisterName", TrimAll(ExternalRegister.ExternalName));
+				RequestData.Insert("MessageNo", ResponseData.MessageNo);
+				RequestData.Insert("Recorders", ArrayOfRecorders);
+				SendPOSTRequest(IntegrationSettings, "DeleteChanges", RequestData);
+			EndIf;
+						
+		EndDo;
+	EndDo;
+	
+EndProcedure
+
+Function GetExternalRegisters(IntegrationSettings)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Reg.ExternalName,
+	|	Reg.LedgerType
+	|FROM
+	|	InformationRegister.T9064S_AccountingMappingRegisters AS Reg
+	|WHERE
+	|	Reg.IntegrationSettings = &IntegrationSettings";
+	Query.SetParameter("IntegrationSettings", IntegrationSettings);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+Function DeleteExternalAccountingOperation(IntegrationSettings, Data, LedgerType)
+	DataTable = GetEmptyTableForResponseData();
+	NewRow = DataTable.Add();
+	FillPropertyValues(NewRow, Data);
+	NewRow.RecorderDate = ReadJSONDate(Data.RecorderDate, JSONDateFormat.ISO);
+	NewRow.RecorderRef  = ?(ValueIsFilled(Data.RecorderRef)     , New UUID(Data.RecorderRef)   , Undefined);	
+	NewRow.LedgerType = LedgerType;
+	
+	Query = New Query();
+	Query.Text = GetDataTableQueryText();
+	Query.SetParameter("IntegrationSettings", IntegrationSettings);
+	Query.SetParameter("DataTable", DataTable);
+	
+	QueryResult = Query.Execute();
+	
+	QueryTable = QueryResult.Unload(); 
+	
+	If QueryTable.Count() Then
+		If ValueIsFilled(QueryTable[0].DocRef) Then
+			DocObject = QueryTable[0].DocRef.GetObject();
+		Else
+			Return True;
+		EndIf;
+				
+		FillPropertyValues(DocObject, QueryTable[0], , "Posted");
+		DocObject.Date = QueryTable[0].RecorderDate;
+		DocObject.Records.Clear();
+		DocObject.Write(DocumentWriteMode.UndoPosting);
+	EndIf;
+	Return True;
+EndFunction
+
+Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType)
+	ResultStructure = New Structure;
+	ResultStructure.Insert("IsError", False);
+	ResultStructure.Insert("EAORef", Documents.ExternalAccountingOperation.EmptyRef());
+	
+	DataTable = GetEmptyTableForResponseData();
+	For Each Record In Data.Records Do
+		NewRow = DataTable.Add();
+		FillPropertyValues(NewRow, Data);
+		FillPropertyValues(NewRow, Record);
+		NewRow.RecorderDate = ReadJSONDate(Data.RecorderDate, JSONDateFormat.ISO);
+		NewRow.RecorderRef  = ?(ValueIsFilled(Data.RecorderRef)     , New UUID(Data.RecorderRef)   , Undefined);
+		
+		NewRow.Period         = ReadJSONDate(Record.Period, JSONDateFormat.ISO);
+		NewRow.CompanyRef     = ?(ValueIsFilled(Record.CompanyRef)    , New UUID(Record.CompanyRef)    , Undefined);
+		NewRow.CurrencyRef    = ?(ValueIsFilled(Record.CurrencyRef)   , New UUID(Record.CurrencyRef)   , Undefined);
+		NewRow.CurrencyDrRef  = ?(ValueIsFilled(Record.CurrencyDrRef) , New UUID(Record.CurrencyDrRef) , Undefined);
+		NewRow.CurrencyCrRef  = ?(ValueIsFilled(Record.CurrencyCrRef) , New UUID(Record.CurrencyCrRef) , Undefined);
+		NewRow.AccountDrRef   = ?(ValueIsFilled(Record.AccountDrRef)  , New UUID(Record.AccountDrRef)  , Undefined);
+		NewRow.AccountCrRef   = ?(ValueIsFilled(Record.AccountCrRef)  , New UUID(Record.AccountCrRef)  , Undefined);
+		NewRow.AccountingCurrency	= ?(ValueIsFilled(Data.AccountingCurrency) , New UUID(Data.AccountingCurrency) , Undefined);
+		NewRow.DocumentCurrency	= ?(ValueIsFilled(Data.DocumentCurrency) , New UUID(Data.DocumentCurrency) , Undefined);
+		NewRow.LedgerType	= LedgerType;
+		
+		For Each ExtDimension In Record.ExtDimensionValueDr Do
+			FillExtDimensionsRow(NewRow, ExtDimension, "Dr");	
+		EndDo;
+		
+		For Each ExtDimension In Record.ExtDimensionValueCr Do
+			FillExtDimensionsRow(NewRow, ExtDimension, "Cr");	
+		EndDo;
+		
+	EndDo;
+	
+	Query = New Query();
+	Query.Text = GetDataTableQueryText();
+	Query.SetParameter("IntegrationSettings", IntegrationSettings);
+	Query.SetParameter("DataTable", DataTable);
+	
+	QueryResult = Query.Execute();
+	
+	QueryTable = QueryResult.Unload(); 
+	
+	If QueryTable.Count() Then
+		If Not ValueIsFilled(QueryTable[0].DocRef) Then
+			DocObject = Documents.ExternalAccountingOperation.CreateDocument();
+		Else
+			DocObject = QueryTable[0].DocRef.GetObject();
+		EndIf;
+		
+		FillPropertyValues(DocObject, QueryTable[0], , "Posted");
+		DocObject.Date = QueryTable[0].RecorderDate;
+		
+		RecorderPresentationStructure = RecorderPresentationStructure(Data.RecorderName, DocObject.Date, Data.RecorderNumber);
+		FillPropertyValues(DocObject, RecorderPresentationStructure, "Description_en, Description_ru, Description_tr");
+		
+		DocObject.Records.Clear();
+		DocObject.Errors.Clear();
+		
+		For Each Row In QueryTable Do
+			FindOrCreateAnalytic(IntegrationSettings, Row, Row, "Dr");
+			FindOrCreateAnalytic(IntegrationSettings, Row, Row, "Cr");
+			
+			NewRow = DocObject.Records.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.Key = New UUID();
+			
+			// errors
+			If Not ValueIsFilled(NewRow.Company) And ValueIsFilled(NewRow.CompanyRef) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_155, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.Currency) And ValueIsFilled(NewRow.CurrencyRef) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_156, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.AccountDr) And ValueIsFilled(NewRow.AccountDrRef) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_157, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.AccountCr) And ValueIsFilled(NewRow.AccountCrRef) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_158, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.CurrencyDr) And ValueIsFilled(NewRow.CurrencyDrRef) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_159, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.CurrencyCr) And ValueIsFilled(NewRow.CurrencyCrRef) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_160, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.InternalExtDimensionValueDr1) And ValueIsFilled(NewRow.ExtDimensionValueDr1) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_161, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.ExtDimensionTypeDr1) And ValueIsFilled(NewRow.ExtDimensionRefDr1) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_162, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.InternalExtDimensionValueDr2) And ValueIsFilled(NewRow.ExtDimensionValueDr2) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_163, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.ExtDimensionTypeDr2) And ValueIsFilled(NewRow.ExtDimensionRefDr2) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_164, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.InternalExtDimensionValueDr3) And ValueIsFilled(NewRow.ExtDimensionValueDr3) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_165, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.ExtDimensionTypeDr3) And ValueIsFilled(NewRow.ExtDimensionRefDr3) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_166, NewRow.Key);
+			EndIf;
+						
+			If Not ValueIsFilled(NewRow.InternalExtDimensionValueCr1) And ValueIsFilled(NewRow.ExtDimensionValueCr1) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_167, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.ExtDimensionTypeCr1) And ValueIsFilled(NewRow.ExtDimensionRefCr1) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_168, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.InternalExtDimensionValueCr2) And ValueIsFilled(NewRow.ExtDimensionValueCr2) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_169, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.ExtDimensionTypeCr2) And ValueIsFilled(NewRow.ExtDimensionRefCr2) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_170, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.InternalExtDimensionValueCr3) And ValueIsFilled(NewRow.ExtDimensionValueCr3) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_171, NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.ExtDimensionTypeCr3) And ValueIsFilled(NewRow.ExtDimensionRefCr3) Then
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_172, NewRow.Key);
+			EndIf;
+		EndDo;
+		SetRates(DocObject, LedgerType, Data, IntegrationSettings);
+		
+		If QueryTable[0].Posted Then
+			DocObject.Write(DocumentWriteMode.Posting);
+		ElsIf QueryTable[0].DeletionMark Then
+			If DocObject.Posted Then
+				DocObject.Write(DocumentWriteMode.UndoPosting);
+			EndIf;
+			DocObject.DeletionMark = True;
+			DocObject.Write(DocumentWriteMode.Write);
+		Else
+			If IsBlankString(DocObject.DataVersion) Then
+				DocObject.Write(DocumentWriteMode.Write);
+			Else
+				DocObject.Write(DocumentWriteMode.UndoPosting);		
+			EndIf;
+		EndIf;		
+	EndIf;
+	
+	ResultStructure.IsError = DocObject.Errors.Count() > 0;
+	ResultStructure.EAORef = DocObject.Ref;
+	
+	Return ResultStructure;
+EndFunction
+
+// Recorder presentation structure.
+// 
+// Parameters:
+//  RecorderMetaName - String
+// 
+// Returns:
+//  Structure - Recorder presentation structure:
+// * Description_en - String - 
+// * Description_ru - String - 
+// * Description_tr - String - 
+Function RecorderPresentationStructure(RecorderMetaName, RecorderDate, RecorderNumber) Export
+	AllDescriptionArray =  LocalizationServer.AllDescription();
+	Index = AllDescriptionArray.Find("Description_hash");
+	If Index <> Undefined Then
+		AllDescriptionArray.Delete(Index);
+	EndIf;	
+		
+	Structure = New Structure;
+	For Each Description In AllDescriptionArray Do
+		Structure.Insert(Description, "");		
+	EndDo;	
+	
+	Query = New Query;
+	Query.SetParameter("RecorderMetaName", RecorderMetaName);
+	Query.Text = "SELECT T9069S_AccountingMappingRecordersDescription.RecorderMetaName,";
+	StringsArray = New Array;
+	For Each Description In AllDescriptionArray Do
+		StringsArray.Add(StrTemplate("T9069S_AccountingMappingRecordersDescription.%1", Description));
+	EndDo;
+	Query.Text = Query.Text + StrConcat(StringsArray, ",");
+	Query.Text = Query.Text +  	
+		" FROM
+		|	InformationRegister.T9069S_AccountingMappingRecordersDescription AS T9069S_AccountingMappingRecordersDescription
+		|WHERE
+		|	T9069S_AccountingMappingRecordersDescription.RecorderMetaName = &RecorderMetaName";
+	
+	QueryResult = Query.Execute();
+	Selection = QueryResult.Select();
+	If Selection.Next() Then
+		For Each Description In AllDescriptionArray Do
+			LangCode = StrReplace(Description, "Description_", "");			
+			Structure[Description] = StrTemplate("%1 %2 %3 %4", Selection[Description], RecorderNumber, R(LangCode).DatePresentation, RecorderDate);		
+		EndDo;				
+	EndIf;	
+	Return Structure;
+EndFunction
+
+Procedure SetRates(DocObject, LedgerType, Data, IntegrationSettings)
+	LedgerTypeCurrency = LedgerType.CurrencyMovementType.Currency;
+	If Not(DocObject.AccountingCurrency = LedgerTypeCurrency And
+		DocObject.DocumentCurrency <> LedgerTypeCurrency) Then
+		Return;
+	EndIf;
+	RatesTable = New ValueTable;
+	RatesTable.Columns.Add("Currency", New TypeDescription("UUID"));
+	RatesTable.Columns.Add("Rate", New TypeDescription("Number"));
+	RatesTable.Columns.Add("ReverseRate", New TypeDescription("Number"));
+	RatesTable.Columns.Add("Multiplicity", New TypeDescription("Number"));
+	
+	For Each ValueInArray In Data.Rates Do
+		NewRow = RatesTable.Add();
+		FillPropertyValues(NewRow, ValueInArray);
+		NewRow.Currency = New UUID(ValueInArray.Currency);
+	EndDo;
+	
+	Query = New Query;
+	Query.SetParameter("TableCurrencyRates", RatesTable);
+	Query.SetParameter("IntegrationSettingsRef", IntegrationSettings);
+	Query.Text = 
+	"SELECT
+	|	TableCurrencyRates.Currency AS Currency,
+	|	TableCurrencyRates.Rate AS Rate,
+	|	TableCurrencyRates.ReverseRate AS ReverseRate,
+	|	TableCurrencyRates.Multiplicity AS Multiplicity
+	|INTO TT_CurrencyRates
+	|FROM
+	|	&TableCurrencyRates AS TableCurrencyRates
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	T9063S_AccountingMappingCurrencies.InternalRef AS Currency,
+	|	TT_CurrencyRates.Rate AS Rate,
+	|	TT_CurrencyRates.ReverseRate AS ReverseRate,
+	|	TT_CurrencyRates.Multiplicity AS Multiplicity
+	|FROM
+	|	TT_CurrencyRates AS TT_CurrencyRates
+	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS T9063S_AccountingMappingCurrencies
+	|		ON (TT_CurrencyRates.Currency = T9063S_AccountingMappingCurrencies.ExternalRef
+	|				AND T9063S_AccountingMappingCurrencies.IntegrationSettings = &IntegrationSettingsRef)";
+	
+	RatesTableResult = Query.Execute().Unload();
+	
+	DocObject.Currencies.Clear();
+	For Each Record In DocObject.Records Do
+		If ValueIsFilled(Record.CurrencyDr) And LedgerTypeCurrency <> Record.CurrencyDr Then
+			SearchRow = RatesTableResult.Find(Record.CurrencyDr, "Currency");
+			If SearchRow <> Undefined Then
+				RateRow = DocObject.Currencies.Add();
+				RateRow.Key = Record.Key;
+				RateRow.MovementType = LedgerType.CurrencyMovementType;
+				RateRow.CurrencyFrom = Record.CurrencyDr;
+				RateRow.Rate = SearchRow.Rate;
+				RateRow.ReverseRate = SearchRow.ReverseRate;
+				RateRow.Multiplicity = SearchRow.Multiplicity;
+				RateRow.Amount = Record.Amount;
+				RateRow.IsFixed = True;
+			EndIf;
+		EndIf;
+		If ValueIsFilled(Record.CurrencyCr) And 
+			LedgerTypeCurrency <> Record.CurrencyCr And
+			Record.CurrencyCr <> Record.CurrencyDr Then
+			SearchRow = RatesTableResult.Find(Record.CurrencyCr, "Currency");
+			If SearchRow <> Undefined Then
+				RateRow = DocObject.Currencies.Add();
+				RateRow.Key = Record.Key;
+				RateRow.MovementType = LedgerType.CurrencyMovementType;
+				RateRow.CurrencyFrom = Record.CurrencyCr;
+				RateRow.Rate = SearchRow.Rate;
+				RateRow.ReverseRate = SearchRow.ReverseRate;
+				RateRow.Multiplicity = SearchRow.Multiplicity;
+				RateRow.Amount = Record.Amount;
+				RateRow.IsFixed = True;
+			EndIf;
+		EndIf;
+	EndDo;	
+EndProcedure
+
+Function GetEmptyTableForResponseData()
+	Doc_StandardAttr = Metadata.Documents.ExternalAccountingOperation.StandardAttributes;
+	
+	Type_LedgerType = New TypeDescription("CatalogRef.LedgerTypes");
+	
+	Type_UUID     = New TypeDescription("UUID");
+	Type_Boolean  = New TypeDescription("Boolean");
+	Type_Desc     = Metadata.DefinedTypes.typeDescription.Type;
+	Type_Amount   = Metadata.DefinedTypes.typeAmount.Type;
+	Type_Quantity = Metadata.DefinedTypes.typeQuantity.Type;
+	
+	EmptyTable = New ValueTable();
+	
+	EmptyTable.Columns.Add("RecorderRef"			, Type_UUID);
+	EmptyTable.Columns.Add("RecorderPresentation"	, Type_Desc);
+	EmptyTable.Columns.Add("RecorderName"			, Type_Desc);
+	EmptyTable.Columns.Add("RecorderURL"			, Type_Desc);
+	EmptyTable.Columns.Add("LedgerType"				, Type_LedgerType);
+	EmptyTable.Columns.Add("RecorderDate"			, Doc_StandardAttr.Date.Type);
+	EmptyTable.Columns.Add("IsOpeningEntry"			, Type_Boolean);
+	EmptyTable.Columns.Add("AccountingCurrency"		, Type_UUID);
+	EmptyTable.Columns.Add("DocumentCurrency"		, Type_UUID);
+	
+	EmptyTable.Columns.Add("Posted"					, Type_Boolean);
+	EmptyTable.Columns.Add("DeletionMark"			, Type_Boolean);
+	
+	EmptyTable.Columns.Add("Period"					, Doc_StandardAttr.Date.Type);	
+	EmptyTable.Columns.Add("Activity"				, Type_Boolean);
+	EmptyTable.Columns.Add("OperationTitle"			, Type_Desc);
+	
+	EmptyTable.Columns.Add("CompanyRef"				, Type_UUID);
+	EmptyTable.Columns.Add("CompanyPresentation"	, Type_Desc);
+	
+	EmptyTable.Columns.Add("CurrencyRef"			, Type_UUID);
+	EmptyTable.Columns.Add("CurrencyPresentation"	, Type_Desc);
+	EmptyTable.Columns.Add("Amount"					, Type_Amount);
+	
+	// debit
+	EmptyTable.Columns.Add("ChartNameDr"			, Type_Desc);
+	EmptyTable.Columns.Add("AccountDrRef"			, Type_UUID);
+	EmptyTable.Columns.Add("AccountDrPresentation"	, Type_Desc);
+	
+	EmptyTable.Columns.Add("CurrencyDrRef"			, Type_UUID);
+	EmptyTable.Columns.Add("CurrencyDrPresentation"	, Type_Desc);
+	EmptyTable.Columns.Add("AmountCurrencyDr"		, Type_Amount);
+	EmptyTable.Columns.Add("QuantityDr"				, Type_Quantity);
+	
+	// credit
+	EmptyTable.Columns.Add("ChartNameCr"			, Type_Desc);
+	EmptyTable.Columns.Add("AccountCrRef"			, Type_UUID);
+	EmptyTable.Columns.Add("AccountCrPresentation"	, Type_Desc);
+	
+	EmptyTable.Columns.Add("CurrencyCrRef"			, Type_UUID);
+	EmptyTable.Columns.Add("CurrencyCrPresentation"	, Type_Desc);
+	EmptyTable.Columns.Add("AmountCurrencyCr"		, Type_Amount);
+	EmptyTable.Columns.Add("QuantityCr"				, Type_Quantity);
+	
+	CreateExtDimensionsColumns(EmptyTable, "Dr");
+	CreateExtDimensionsColumns(EmptyTable, "Cr");
+		
+	Return EmptyTable;
+EndFunction
+
+Procedure CreateExtDimensionsColumns(Table, AnalyticType)
+	Type_UUID     = New TypeDescription("UUID");
+	Type_Boolean  = New TypeDescription("Boolean");
+	Type_Desc     = Metadata.DefinedTypes.typeDescription.Type;
+	Type_Analytic = New TypeDescription(Metadata.ChartsOfCharacteristicTypes.AccountingExtraDimensionTypes.Type.Types());
+	
+	i = 1;
+	While i <= 3 Do
+		
+		Table.Columns.Add("ExtDimensionRef"   + AnalyticType + i , Type_UUID);
+		Table.Columns.Add("BaseClass"         + AnalyticType + i , Type_Desc);
+		Table.Columns.Add("Class"             + AnalyticType + i , Type_Desc);
+		Table.Columns.Add("IsRef"             + AnalyticType + i , Type_Boolean);
+		Table.Columns.Add("ExtDimensionValue" + AnalyticType + i , Type_Desc);
+		Table.Columns.Add("Description_ru"    + AnalyticType + i , Type_Desc);
+		Table.Columns.Add("Description_en"    + AnalyticType + i , Type_Desc);
+		Table.Columns.Add("Description_tr"    + AnalyticType + i , Type_Desc);
+		
+		Table.Columns.Add("InternalExtDimensionValue" + AnalyticType + i , Type_Analytic);
+		
+		i = i + 1;
+	EndDo;
+	
+EndProcedure
+
+Procedure FillExtDimensionsRow(Row, ExtDimension, AnalyticType)
+	Row["ExtDimensionRef"   + AnalyticType + ExtDimension.Number] = New UUID(ExtDimension.ExtDimensionRef);
+	Row["BaseClass"         + AnalyticType + ExtDimension.Number] = ExtDimension.BaseClass;
+	Row["Class"             + AnalyticType + ExtDimension.Number] = ExtDimension.Class;
+	Row["IsRef"             + AnalyticType + ExtDimension.Number] = ExtDimension.IsRef;
+	
+	Row["ExtDimensionValue" + AnalyticType + ExtDimension.Number] = ?(ExtDimension.IsRef, ExtDimension.Value.Ref, ExtDimension.Value.Name);
+	
+	ArrayOfDescriptions = LocalizationReuse.AllDescription();
+	
+	For Each Description In ArrayOfDescriptions Do
+		PropertyName = Description + AnalyticType + ExtDimension.Number;
+		If CommonFunctionsClientServer.ObjectHasProperty(Row, PropertyName) 
+			And CommonFunctionsClientServer.ObjectHasProperty(ExtDimension.Value, Description) Then
+			Row[PropertyName] = ExtDimension.Value[Description];
+		EndIf;
+	EndDo;
+EndProcedure
+
+Procedure FindOrCreateAnalytic(IntegrationSettings, Source, Target, AnalyticType)
+
+	i = 1;
+	While i <= 3 Do
+		_ExtDimensionRef   = Source["ExtDimensionRef"   + AnalyticType + i]; 
+		_ExternalBaseClass = Source["BaseClass"         + AnalyticType + i]; 
+		_ExternalClass     = Source["Class"             + AnalyticType + i]; 
+		_ExtDimensionValue = Source["ExtDimensionValue" + AnalyticType + i]; 
+		
+		ArrayOfDescriptions = LocalizationReuse.AllDescription();
+		
+		NewObjData = New Structure();
+		
+		For Each Description In ArrayOfDescriptions Do
+			PropertyName = Description + AnalyticType + i;
+			If CommonFunctionsClientServer.ObjectHasProperty(Source, PropertyName) Then
+				NewObjData.Insert(Description, Source[PropertyName]);
+			EndIf;
+		EndDo;
+		
+		_ExtDimensionType  = Source["ExtDimensionType"  + AnalyticType + i];
+		_InternalBaseClass = Source["InternalBaseClass" + AnalyticType + i];
+		_InternalClass     = Source["InternalClass"     + AnalyticType + i];
+		
+		If (ValueIsFilled(_ExtDimensionRef) And ValueIsFilled(_ExtDimensionValue))
+			And Not ValueIsFilled(_ExtDimensionType) Then
+                        Raise StrTemplate(R().ExtDimensionTypeNotDefined,
+                                _ExtDimensionRef, _ExternalBaseClass, _ExternalClass);
+		EndIf;
+		
+		If ValueIsFilled(_ExtDimensionValue) Then
+			
+			ExternalIsRef = Upper(_ExternalBaseClass) = Upper("Catalogs") Or Upper(_ExternalBaseClass) = Upper("Documents");
+			InternalIsRef = Upper(_InternalBaseClass) = Upper("Catalogs") Or Upper(_InternalBaseClass) = Upper("Documents");
+			
+			NewObjData.Insert("InternalBaseClass" , _InternalBaseClass);
+			NewObjData.Insert("InternalClass"     , _InternalClass);			
+			NewObjData.Insert("ExternalBaseClass" , _ExternalBaseClass);
+			NewObjData.Insert("ExternalClass"     , _ExternalClass);
+			
+			If ExternalIsRef Then				
+				Target["InternalExtDimensionValue" + AnalyticType + i] 
+				= FindOrCreateRefAnalytic(IntegrationSettings, _ExtDimensionValue, _ExtDimensionType, NewObjData, InternalIsRef);
+			
+			ELsIf Not ExternalIsRef Then 
+				Target["InternalExtDimensionValue" + AnalyticType + i] 
+					= FindOrCreateEnumAnalytic(IntegrationSettings, _ExtDimensionValue, _ExtDimensionType, NewObjData, InternalIsRef);
+			EndIf;
+			
+		EndIf;
+		
+		i = i + 1;
+	EndDo;
+
+EndProcedure
+
+Function FindOrCreateRefAnalytic(IntegrationSettings, ExternalRef, ExtDimensionType, NewObjData, InternalIsRef) Export
+	_ExternalRef_UUID = New UUID(ExternalRef);
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Reg.ExtDimensionValue
+	|FROM
+	|	InformationRegister.T9066S_AccountingMappingExtDimensionRefValues AS Reg
+	|WHERE
+	|	Reg.IntegrationSettings = &IntegrationSettings
+	|	AND Reg.ExternalRef = &ExternalRef
+	|	AND Reg.ExtDimensionType = &ExtDimensionType";
+	
+	Query.SetParameter("IntegrationSettings" , IntegrationSettings);
+	Query.SetParameter("ExternalRef"         , _ExternalRef_UUID);
+	Query.SetParameter("ExtDimensionType"    , ExtDimensionType);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	_ExtDimensionValue = Undefined;
+	If QuerySelection.Next() Then
+		_ExtDimensionValue = QuerySelection.ExtDimensionValue;
+	EndIf;
+	
+	If Not InternalIsRef And Not ValueIsFilled(_ExtDimensionValue) Then
+                Raise StrTemplate(R().ExternalRefValueNotFound, ExternalRef);
+	EndIf;
+			
+	NewRefData = FindOrCreateCatalogRef(_ExtDimensionValue, ExtDimensionType, NewObjData);
+		
+	If NewRefData.IsNewObject Then
+		RecordsSet = InformationRegisters.T9066S_AccountingMappingExtDimensionRefValues.CreateRecordSet();
+		RecordsSet.Filter.IntegrationSettings.Set(IntegrationSettings);
+		RecordsSet.Filter.ExternalRef.Set(_ExternalRef_UUID);
+		RecordsSet.Filter.ExtDimensionType.Set(ExtDimensionType);
+		
+		Record = RecordsSet.Add();
+		Record.IntegrationSettings = IntegrationSettings;
+		Record.ExternalRef         = _ExternalRef_UUID;
+		Record.ExtDimensionType    = ExtDimensionType;
+		
+		Record.ExtDimensionValue = NewRefData.Ref;
+		
+		RecordsSet.Write();
+	EndIf;
+	
+	Return NewRefData.Ref;
+EndFunction
+
+Function FindOrCreateEnumAnalytic(IntegrationSettings, ExternalValue, ExtDimensionType, NewObjData, InternalIsRef) Export
+	
+	_ExternalValue = "" + NewObjData.ExternalBaseClass + "." + NewObjData.ExternalClass + "." + ExternalValue;
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Reg.ExtDimensionValue
+	|FROM
+	|	InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues AS Reg
+	|WHERE
+	|	Reg.IntegrationSettings = &IntegrationSettings
+	|	AND Reg.ExternalValue = &ExternalValue
+	|	AND Reg.ExtDimensionType = &ExtDimensionType";
+	
+	Query.SetParameter("IntegrationSettings" , IntegrationSettings);
+	Query.SetParameter("ExternalValue"       , _ExternalValue);
+	Query.SetParameter("ExtDimensionType"    , ExtDimensionType);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	_ExtDimensionValue = Undefined;
+	If QuerySelection.Next() Then
+		_ExtDimensionValue = QuerySelection.ExtDimensionValue;
+	EndIf;
+	
+	If Not InternalIsRef And Not ValueIsFilled(_ExtDimensionValue) Then
+                Raise StrTemplate(R().ExternalValueNotFound, _ExternalValue);
+	EndIf;
+	
+	NewRefData = FindOrCreateCatalogRef(_ExtDimensionValue, ExtDimensionType, NewObjData);
+		
+	If NewRefData.IsNewObject Then
+		RecordsSet = InformationRegisters.T9067S_AccountingMappingExtDimensionEnumValues.CreateRecordSet();
+		RecordsSet.Filter.IntegrationSettings.Set(IntegrationSettings);
+		RecordsSet.Filter.ExternalValue.Set(_ExternalValue);
+		RecordsSet.Filter.ExtDimensionType.Set(ExtDimensionType);
+		
+		Record = RecordsSet.Add();
+		Record.IntegrationSettings = IntegrationSettings;
+		Record.ExternalValue       = _ExternalValue;
+		Record.ExtDimensionType    = ExtDimensionType;
+		
+		Record.ExtDimensionValue = NewRefData.Ref;
+		
+		RecordsSet.Write();
+	EndIf;
+	
+	Return NewRefData.Ref;
+EndFunction
+
+Function FindOrCreateCatalogRef(ExsistsRef, ExtDimensionType, NewObjData)
+	IsNewObject = False;
+	If ValueIsFilled(ExsistsRef) Then
+		Obj = ExsistsRef.GetObject();
+	Else
+		// create new Catalogs
+		If Upper(NewObjData.InternalBaseClass) = Upper("Catalogs") Then
+			IsNewObject = True;
+			Obj = Catalogs[NewObjData.InternalClass].CreateItem();
+			Obj.SetNewCode();
+                Else
+                        Raise R().CreateNewAnalyticsNotSupported;
+                EndIf;
+	EndIf;
+
+	FillPropertyValues(Obj, NewObjData);
+	If TypeOf(Obj) = Type("CatalogObject.ExtDimensions") Then
+		Obj.Owner = ExtDimensionType;
+	EndIf;	
+	Obj.DataExchange.Load = True;
+	Obj.Write();
+	Return New Structure("IsNewObject, Ref", IsNewObject, Obj.Ref);
+EndFunction
+
+Function GetDataTableQueryText()
+	Return
+	"SELECT
+	|	DataTable.*
+	|INTO DataTable
+	|FROM
+	|	&DataTable AS DataTable
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	DataTable.*,
+	|	Doc.Ref AS DocRef,
+	|	RegCompanies.InternalRef AS Company,
+	|	RegCurrenciesDr.InternalRef AS CurrencyDr,
+	|	RegCurrenciesCr.InternalRef AS CurrencyCr,
+	|	RegCurrencies.InternalRef AS Currency,
+	|	RegCurrenciesACC_Currency.InternalRef AS AccountingCurrency,
+	|	RegCurrenciesDoc_Currency.InternalRef AS DocumentCurrency,
+	|	AccountsDr.InternalRef AS AccountDr,
+	|	AccountsCr.InternalRef AS AccountCr,
+	|	ExtDimensionsDr1.InternalRef AS ExtDimensionTypeDr1,
+	|	ExtDimensionsDr1.InternalBaseClass AS InternalBaseClassDr1,
+	|	ExtDimensionsDr1.InternalClass AS InternalClassDr1,
+	|	ExtDimensionsDr2.InternalRef AS ExtDimensionTypeDr2,
+	|	ExtDimensionsDr2.InternalBaseClass AS InternalBaseClassDr2,
+	|	ExtDimensionsDr2.InternalClass AS InternalClassDr2,
+	|	ExtDimensionsDr3.InternalRef AS ExtDimensionTypeDr3,
+	|	ExtDimensionsDr3.InternalBaseClass AS InternalBaseClassDr3,
+	|	ExtDimensionsDr3.InternalClass AS InternalClassDr3,
+	|	ExtDimensionsCr1.InternalRef AS ExtDimensionTypeCr1,
+	|	ExtDimensionsCr1.InternalBaseClass AS InternalBaseClassCr1,
+	|	ExtDimensionsCr1.InternalClass AS InternalClassCr1,
+	|	ExtDimensionsCr2.InternalRef AS ExtDimensionTypeCr2,
+	|	ExtDimensionsCr2.InternalBaseClass AS InternalBaseClassCr2,
+	|	ExtDimensionsCr2.InternalClass AS InternalClassCr2,
+	|	ExtDimensionsCr3.InternalRef AS ExtDimensionTypeCr3,
+	|	ExtDimensionsCr3.InternalBaseClass AS InternalBaseClassCr3,
+	|	ExtDimensionsCr3.InternalClass AS InternalClassCr3
+	|FROM
+	|	DataTable AS DataTable
+	|		LEFT JOIN Document.ExternalAccountingOperation AS Doc
+	|		ON case
+	|			when DataTable.IsOpeningEntry
+	|				then Doc.IsOpeningEntry
+	|				and beginofperiod(Doc.Date, DAY) = beginofperiod(DataTable.Period, DAY)
+	|			else Doc.RecorderRef = DataTable.RecorderRef
+	|		end
+	|		AND Doc.LedgerType = DataTable.LedgerType
+	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS RegCurrenciesDr
+	|		ON RegCurrenciesDr.ExternalRef = DataTable.CurrencyDrRef
+	|		AND RegCurrenciesDr.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS RegCurrenciesCr
+	|		ON RegCurrenciesCr.ExternalRef = DataTable.CurrencyCrRef
+	|		AND RegCurrenciesCr.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS RegCurrencies
+	|		ON RegCurrencies.ExternalRef = DataTable.CurrencyRef
+	|		AND RegCurrencies.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS RegCurrenciesACC_Currency
+	|		ON RegCurrenciesACC_Currency.ExternalRef = DataTable.AccountingCurrency
+	|		AND RegCurrenciesACC_Currency.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS RegCurrenciesDoc_Currency
+	|		ON RegCurrenciesDoc_Currency.ExternalRef = DataTable.DocumentCurrency
+	|		AND RegCurrenciesDoc_Currency.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9062S_AccountingMappingCompanies AS RegCompanies
+	|		ON RegCompanies.ExternalRef = DataTable.CompanyRef
+	|		AND RegCompanies.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9061S_AccountingMappingAccounts AS AccountsDr
+	|		ON AccountsDr.ExternalRef = DataTable.AccountDrRef
+	|		AND AccountsDr.ExternalChartName = DataTable.ChartNameDr
+	|		AND AccountsDr.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9061S_AccountingMappingAccounts AS AccountsCr
+	|		ON AccountsCr.ExternalRef = DataTable.AccountCrRef
+	|		AND AccountsCr.ExternalChartName = DataTable.ChartNameCr
+	|		AND AccountsCr.IntegrationSettings = &IntegrationSettings
+	|		// analytics Dr
+	|		left join InformationRegister.T9065S_AccountingMappingExtDimensions AS ExtDimensionsDr1
+	|		on ExtDimensionsDr1.IntegrationSettings = &IntegrationSettings
+	|		and ExtDimensionsDr1.ExternalRef = DataTable.ExtDimensionRefDr1
+	|		and ExtDimensionsDr1.ExternalBaseClass = DataTable.BaseClassDr1
+	|		and ExtDimensionsDr1.ExternalClass = DataTable.ClassDr1
+	|		left join InformationRegister.T9065S_AccountingMappingExtDimensions AS ExtDimensionsDr2
+	|		on ExtDimensionsDr2.IntegrationSettings = &IntegrationSettings
+	|		and ExtDimensionsDr2.ExternalRef = DataTable.ExtDimensionRefDr2
+	|		and ExtDimensionsDr2.ExternalBaseClass = DataTable.BaseClassDr2
+	|		and ExtDimensionsDr2.ExternalClass = DataTable.ClassDr2
+	|		left join InformationRegister.T9065S_AccountingMappingExtDimensions AS ExtDimensionsDr3
+	|		on ExtDimensionsDr3.IntegrationSettings = &IntegrationSettings
+	|		and ExtDimensionsDr3.ExternalRef = DataTable.ExtDimensionRefDr3
+	|		and ExtDimensionsDr3.ExternalBaseClass = DataTable.BaseClassDr3
+	|		and ExtDimensionsDr3.ExternalClass = DataTable.ClassDr3
+	|		// analytics Cr
+	|		left join InformationRegister.T9065S_AccountingMappingExtDimensions AS ExtDimensionsCr1
+	|		on ExtDimensionsCr1.IntegrationSettings = &IntegrationSettings
+	|		and ExtDimensionsCr1.ExternalRef = DataTable.ExtDimensionRefCr1
+	|		and ExtDimensionsCr1.ExternalBaseClass = DataTable.BaseClassCr1
+	|		and ExtDimensionsCr1.ExternalClass = DataTable.ClassCr1
+	|		left join InformationRegister.T9065S_AccountingMappingExtDimensions AS ExtDimensionsCr2
+	|		on ExtDimensionsCr2.IntegrationSettings = &IntegrationSettings
+	|		and ExtDimensionsCr2.ExternalRef = DataTable.ExtDimensionRefCr2
+	|		and ExtDimensionsCr2.ExternalBaseClass = DataTable.BaseClassCr2
+	|		and ExtDimensionsCr2.ExternalClass = DataTable.ClassCr2
+	|		left join InformationRegister.T9065S_AccountingMappingExtDimensions AS ExtDimensionsCr3
+	|		on ExtDimensionsCr3.IntegrationSettings = &IntegrationSettings
+	|		and ExtDimensionsCr3.ExternalRef = DataTable.ExtDimensionRefCr3
+	|		and ExtDimensionsCr3.ExternalBaseClass = DataTable.BaseClassCr3
+	|		and ExtDimensionsCr3.ExternalClass = DataTable.ClassCr3";
+EndFunction
+	
+Function SendGETRequest(IntegrationSettings, Action, QueryParameters = Undefined) Export
+	
+	ConnectionSettings = IntegrationClientServer.ConnectionSetting(IntegrationSettings);
+	ConnectionSettings.Value.QueryType = "GET";
+	
+	If Not ConnectionSettings.Success Then
+		Raise ConnectionSettings.Message;
+	EndIf;
+	
+	ResourceParameters = New Structure();
+	ResourceParameters.Insert("action", Action);
+	
+	RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value, ResourceParameters, QueryParameters);
+	
+	If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
+		JsonObj = CommonFunctionsServer.DeserializeJSON(RequestResult.ResponseBody);
+	Else
+		Raise RequestResult.ResponseBody;
+	EndIf;
+	
+	Return JsonObj;
+EndFunction
+	
+Function SendPOSTRequest(IntegrationSettings, Action, Data) Export
+	
+	ConnectionSettings = IntegrationClientServer.ConnectionSetting(IntegrationSettings);
+	ConnectionSettings.Value.QueryType = "POST";
+	
+	If Not ConnectionSettings.Success Then
+		Raise ConnectionSettings.Message;
+	EndIf;
+	
+	ResourceParameters = New Structure();
+	ResourceParameters.Insert("action", Action);
+	
+	RequestBody = CommonFunctionsServer.SerializeJSON(Data);
+	
+	RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value, ResourceParameters,,RequestBody);
+	
+	If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
+		Return RequestResult.ResponseBody;
+	Else
+		Raise RequestResult.ResponseBody;
+	EndIf;
+	
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
+
+
+

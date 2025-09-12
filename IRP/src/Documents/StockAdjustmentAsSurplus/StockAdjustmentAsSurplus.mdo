@@ -44,7 +44,7 @@
   <objectField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -68,12 +68,15 @@
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+ <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
  <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</registerRecords>
  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
  <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
@@ -325,10 +328,10 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="cf5311ec-82f7-41fd-a35a-8df4be4d1ae7">
-   <name>Amount</name>
+   <name>NetAmount</name>
    <synonym>
     <key>en</key>
-    <value>A0BF9021-ECB4-EEC7-7116-6FE5E5903228</value>
+    <value>43CF5EA0-0B1E-9421-1420-036EDB425DE0</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -339,10 +342,10 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="9f7478de-babf-4bbe-821e-9c43adb199d5">
-   <name>AmountTax</name>
+   <name>TaxAmount</name>
    <synonym>
     <key>en</key>
-    <value>5A7D27E6-6A79-B39F-FB1A-AF167BC51FEE</value>
+    <value>FD11ACE0-25A6-21FA-A7BC-CEDA33632FED</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -387,6 +390,48 @@
    </synonym>
    <type>
     <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="1407c83d-7578-4e73-9386-b736bfdf43e0">
+   <name>TotalAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>D1EA65B3-A716-70D9-9F5A-AE6C19CB37A7</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="c0c103e5-24e5-4b30-a4b5-79f6814687fb">
+   <name>VatRate</name>
+   <synonym>
+    <key>en</key>
+    <value>B93AA929-CDA0-2B86-612D-D1A69208355A</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="b25982fb-4422-4a6b-b786-89aeeb2d0b8d">
+   <name>SimpleBatch</name>
+   <synonym>
+    <key>en</key>
+    <value>6DD13789-2027-A9E8-8610-0AFAEC3AF165</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SimpleBatch</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

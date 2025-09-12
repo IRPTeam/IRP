@@ -12,15 +12,18 @@
     <placementFragments>
       <group>NavigationPanelImportant</group>
       <commands>Catalog.Stores.StandardCommand.OpenList</commands>
+      <commands>Catalog.Items.StandardCommand.OpenList</commands>
     </placementFragments>
   </commandsPlacement>
   <commandsOrder>
     <orderFragments>
       <group>NavigationPanelImportant</group>
+      <commands>Catalog.Items.StandardCommand.OpenList</commands>
       <commands>Catalog.Stores.StandardCommand.OpenList</commands>
     </orderFragments>
     <orderFragments>
       <group>NavigationPanelOrdinary</group>
+      <commands>Document.InventoryTransfer.StandardCommand.OpenList</commands>
       <commands>Document.ShipmentConfirmation.StandardCommand.OpenList</commands>
       <commands>Document.GoodsReceipt.StandardCommand.OpenList</commands>
     </orderFragments>

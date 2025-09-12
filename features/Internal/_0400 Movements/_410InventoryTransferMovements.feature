@@ -87,7 +87,7 @@ Scenario: _04022 preparation (Inventory transfer)
 		When Create document InventoryTransfer objects (check movements)
 		When Create document InventoryTransfer objects (stock control serial lot numbers)
 		And I execute 1C:Enterprise script at server
-				| "Documents.InventoryTransfer.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.InventoryTransfer.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
@@ -98,7 +98,11 @@ Scenario: _04022 preparation (Inventory transfer)
 			| "Documents.InventoryTransfer.FindByNumber(204).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
-		
+		When Create document PurchaseInvoice and InventoryTransfer objects (Store distributed purchase, movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(1501).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(1501).GetObject().Write(DocumentWriteMode.Posting);"   |	
 	* Load documents (comission trade)
 		When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
 		When Create document InventoryTransfer objects (comission trade)
@@ -111,6 +115,28 @@ Scenario: _04022 preparation (Inventory transfer)
 			| "Documents.PurchaseReturn.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server	
 			| "Documents.InventoryTransfer.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Load documents (purchase for sales)
+		When data preparation for stock reserve check for purchase for sales
+		And I execute 1C:Enterprise script at server	
+			| "Documents.SalesOrder.FindByNumber(2316).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseOrder.FindByNumber(2325).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(2502).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(2502).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(2503).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(2113).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(2503).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(2504).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(2114).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(2116).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I close all client application windows
 
 
@@ -128,19 +154,19 @@ Scenario: _0402301 check Inventory transfer movements by the Register  "R4050 St
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | ''              | ''         | ''            | ''               | ''           | ''             |
-			| 'Document registrations records'                    | ''              | ''         | ''            | ''               | ''           | ''             |
-			| 'Register  "R4050 Stock inventory"'                 | ''              | ''         | ''            | ''               | ''           | ''             |
-			| ''                                                  | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'     | ''           | ''             |
-			| ''                                                  | ''              | ''         | 'Quantity'    | 'Company'        | 'Store'      | 'Item key'     |
-			| ''                                                  | 'Receipt'       | '*'        | '2'           | 'Main Company'   | 'Store 03'   | '36/Yellow'    |
-			| ''                                                  | 'Receipt'       | '*'        | '10'          | 'Main Company'   | 'Store 03'   | 'S/Yellow'     |
-			| ''                                                  | 'Receipt'       | '*'        | '10'          | 'Main Company'   | 'Store 03'   | 'XS/Blue'      |
-			| ''                                                  | 'Receipt'       | '*'        | '15'          | 'Main Company'   | 'Store 03'   | '36/Red'       |
-			| ''                                                  | 'Expense'       | '*'        | '2'           | 'Main Company'   | 'Store 02'   | '36/Yellow'    |
-			| ''                                                  | 'Expense'       | '*'        | '10'          | 'Main Company'   | 'Store 02'   | 'S/Yellow'     |
-			| ''                                                  | 'Expense'       | '*'        | '10'          | 'Main Company'   | 'Store 02'   | 'XS/Blue'      |
-			| ''                                                  | 'Expense'       | '*'        | '15'          | 'Main Company'   | 'Store 02'   | '36/Red'       |
+			| 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | ''              | ''         | ''            | ''                    | ''               | ''           | ''             | ''                         |
+			| 'Document registrations records'                    | ''              | ''         | ''            | ''                    | ''               | ''           | ''             | ''                         |
+			| 'Register  "R4050 Stock inventory"'                 | ''              | ''         | ''            | ''                    | ''               | ''           | ''             | ''                         |
+			| ''                                                  | 'Record type'   | 'Period'   | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''             |'Attributes'                |
+			| ''                                                  | ''              | ''         | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'     |'Calculation movement cost' |
+			| ''                                                  | 'Receipt'       | '*'        | '2'           | ''                    | 'Main Company'   | 'Store 03'   | '36/Yellow'    | ''                         |
+			| ''                                                  | 'Receipt'       | '*'        | '10'          | ''                    | 'Main Company'   | 'Store 03'   | 'S/Yellow'     | ''                         |
+			| ''                                                  | 'Receipt'       | '*'        | '10'          | ''                    | 'Main Company'   | 'Store 03'   | 'XS/Blue'      | ''                         |
+			| ''                                                  | 'Receipt'       | '*'        | '15'          | ''                    | 'Main Company'   | 'Store 03'   | '36/Red'       | ''                         |
+			| ''                                                  | 'Expense'       | '*'        | '2'           | ''                    | 'Main Company'   | 'Store 02'   | '36/Yellow'    | ''                         |
+			| ''                                                  | 'Expense'       | '*'        | '10'          | ''                    | 'Main Company'   | 'Store 02'   | 'S/Yellow'     | ''                         |
+			| ''                                                  | 'Expense'       | '*'        | '10'          | ''                    | 'Main Company'   | 'Store 02'   | 'XS/Blue'      | ''                         |
+			| ''                                                  | 'Expense'       | '*'        | '15'          | ''                    | 'Main Company'   | 'Store 02'   | '36/Red'       | ''                         |
 		And I close all client application windows
 
 Scenario: _0402303 check Inventory transfer movements by the Register  "R4010 Actual stocks" (Use SC and Use GR)
@@ -168,15 +194,15 @@ Scenario: _0402304 check Inventory transfer movements by the Register  "R4010 Ac
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 203 dated 01.03.2021 10:04:14'   | ''              | ''         | ''            | ''             | ''            | ''                     |
-			| 'Document registrations records'                     | ''              | ''         | ''            | ''             | ''            | ''                     |
-			| 'Register  "R4010 Actual stocks"'                    | ''              | ''         | ''            | ''             | ''            | ''                     |
-			| ''                                                   | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'   | ''            | ''                     |
-			| ''                                                   | ''              | ''         | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    |
-			| ''                                                   | 'Expense'       | '*'        | '2'           | 'Store 02'     | '36/Yellow'   | ''                     |
-			| ''                                                   | 'Expense'       | '*'        | '10'          | 'Store 02'     | 'S/Yellow'    | ''                     |
-			| ''                                                   | 'Expense'       | '*'        | '10'          | 'Store 02'     | 'XS/Blue'     | ''                     |
-			| ''                                                   | 'Expense'       | '*'        | '15'          | 'Store 02'     | '36/Red'      | ''                     |
+			| 'Inventory transfer 203 dated 01.03.2021 10:04:14'   | ''              | ''         | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Document registrations records'                     | ''              | ''         | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                    | ''              | ''         | ''            | ''             | ''            | ''                     | ''                     |
+			| ''                                                   | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'   | ''            | ''                     | ''                     |
+			| ''                                                   | ''              | ''         | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                   | 'Expense'       | '*'        | '2'           | 'Store 02'     | '36/Yellow'   | ''                     | ''                     |
+			| ''                                                   | 'Expense'       | '*'        | '10'          | 'Store 02'     | 'S/Yellow'    | ''                     | ''                     |
+			| ''                                                   | 'Expense'       | '*'        | '10'          | 'Store 02'     | 'XS/Blue'     | ''                     | ''                     |
+			| ''                                                   | 'Expense'       | '*'        | '15'          | 'Store 02'     | '36/Red'      | ''                     | ''                     |
 		And I close all client application windows
 
 Scenario: _0402305 check Inventory transfer movements by the Register  "R4010 Actual stocks" (not Use SC not Use GR)
@@ -190,19 +216,19 @@ Scenario: _0402305 check Inventory transfer movements by the Register  "R4010 Ac
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 201 dated 01.03.2021 09:55:16'   | ''              | ''         | ''            | ''             | ''            | ''                     |
-			| 'Document registrations records'                     | ''              | ''         | ''            | ''             | ''            | ''                     |
-			| 'Register  "R4010 Actual stocks"'                    | ''              | ''         | ''            | ''             | ''            | ''                     |
-			| ''                                                   | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'   | ''            | ''                     |
-			| ''                                                   | ''              | ''         | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    |
-			| ''                                                   | 'Receipt'       | '*'        | '2'           | 'Store 03'     | '36/Yellow'   | ''                     |
-			| ''                                                   | 'Receipt'       | '*'        | '10'          | 'Store 03'     | 'S/Yellow'    | ''                     |
-			| ''                                                   | 'Receipt'       | '*'        | '10'          | 'Store 03'     | 'XS/Blue'     | ''                     |
-			| ''                                                   | 'Receipt'       | '*'        | '15'          | 'Store 03'     | '36/Red'      | ''                     |
-			| ''                                                   | 'Expense'       | '*'        | '2'           | 'Store 02'     | '36/Yellow'   | ''                     |
-			| ''                                                   | 'Expense'       | '*'        | '10'          | 'Store 02'     | 'S/Yellow'    | ''                     |
-			| ''                                                   | 'Expense'       | '*'        | '10'          | 'Store 02'     | 'XS/Blue'     | ''                     |
-			| ''                                                   | 'Expense'       | '*'        | '15'          | 'Store 02'     | '36/Red'      | ''                     |
+			| 'Inventory transfer 201 dated 01.03.2021 09:55:16'   | ''              | ''         | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Document registrations records'                     | ''              | ''         | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                    | ''              | ''         | ''            | ''             | ''            | ''                     | ''                     |
+			| ''                                                   | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'   | ''            | ''                     | ''                     |
+			| ''                                                   | ''              | ''         | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                   | 'Receipt'       | '*'        | '2'           | 'Store 03'     | '36/Yellow'   | ''                     | ''                     |
+			| ''                                                   | 'Receipt'       | '*'        | '10'          | 'Store 03'     | 'S/Yellow'    | ''                     | ''                     |
+			| ''                                                   | 'Receipt'       | '*'        | '10'          | 'Store 03'     | 'XS/Blue'     | ''                     | ''                     |
+			| ''                                                   | 'Receipt'       | '*'        | '15'          | 'Store 03'     | '36/Red'      | ''                     | ''                     |
+			| ''                                                   | 'Expense'       | '*'        | '2'           | 'Store 02'     | '36/Yellow'   | ''                     | ''                     |
+			| ''                                                   | 'Expense'       | '*'        | '10'          | 'Store 02'     | 'S/Yellow'    | ''                     | ''                     |
+			| ''                                                   | 'Expense'       | '*'        | '10'          | 'Store 02'     | 'XS/Blue'     | ''                     | ''                     |
+			| ''                                                   | 'Expense'       | '*'        | '15'          | 'Store 02'     | '36/Red'      | ''                     | ''                     |
 		And I close all client application windows
 
 Scenario: _0402306 check Inventory transfer movements by the Register  "R4010 Actual stocks" (not Use SC)
@@ -216,19 +242,19 @@ Scenario: _0402306 check Inventory transfer movements by the Register  "R4010 Ac
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 1 112 dated 20.05.2022 18:11:23'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                       | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                      | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                     | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                     | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                     | 'Receipt'       | '20.05.2022 18:11:23'   | '5'           | 'Store 02'     | 'PZU'        | '8908899877'           |
-			| ''                                                     | 'Receipt'       | '20.05.2022 18:11:23'   | '5'           | 'Store 02'     | 'PZU'        | '8908899879'           |
-			| ''                                                     | 'Receipt'       | '20.05.2022 18:11:23'   | '10'          | 'Store 02'     | 'XL/Green'   | ''                     |
-			| ''                                                     | 'Receipt'       | '20.05.2022 18:11:23'   | '10'          | 'Store 02'     | 'UNIQ'       | ''                     |
-			| ''                                                     | 'Expense'       | '20.05.2022 18:11:23'   | '5'           | 'Store 03'     | 'PZU'        | '8908899877'           |
-			| ''                                                     | 'Expense'       | '20.05.2022 18:11:23'   | '5'           | 'Store 03'     | 'PZU'        | '8908899879'           |
-			| ''                                                     | 'Expense'       | '20.05.2022 18:11:23'   | '10'          | 'Store 03'     | 'XL/Green'   | ''                     |
-			| ''                                                     | 'Expense'       | '20.05.2022 18:11:23'   | '10'          | 'Store 03'     | 'UNIQ'       | ''                     |
+			| 'Inventory transfer 1 112 dated 20.05.2022 18:11:23'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                       | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                      | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                     | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                     | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                     | 'Receipt'       | '20.05.2022 18:11:23'   | '5'           | 'Store 02'     | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                                     | 'Receipt'       | '20.05.2022 18:11:23'   | '5'           | 'Store 02'     | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                                     | 'Receipt'       | '20.05.2022 18:11:23'   | '10'          | 'Store 02'     | 'XL/Green'   | ''                     | ''                     |
+			| ''                                                     | 'Receipt'       | '20.05.2022 18:11:23'   | '10'          | 'Store 02'     | 'UNIQ'       | ''                     | ''                     |
+			| ''                                                     | 'Expense'       | '20.05.2022 18:11:23'   | '5'           | 'Store 03'     | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                                     | 'Expense'       | '20.05.2022 18:11:23'   | '5'           | 'Store 03'     | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                                     | 'Expense'       | '20.05.2022 18:11:23'   | '10'          | 'Store 03'     | 'XL/Green'   | ''                     | ''                     |
+			| ''                                                     | 'Expense'       | '20.05.2022 18:11:23'   | '10'          | 'Store 03'     | 'UNIQ'       | ''                     | ''                     |
 		And I close all client application windows
 
 
@@ -420,15 +446,15 @@ Scenario: _0402421 check Inventory transfer movements by the Register  "R4032 Go
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | ''              | ''         | ''            | ''             | ''                                                  | ''             |
-			| 'Document registrations records'                    | ''              | ''         | ''            | ''             | ''                                                  | ''             |
-			| 'Register  "R4032 Goods in transit (outgoing)"'     | ''              | ''         | ''            | ''             | ''                                                  | ''             |
-			| ''                                                  | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'   | ''                                                  | ''             |
-			| ''                                                  | ''              | ''         | 'Quantity'    | 'Store'        | 'Basis'                                             | 'Item key'     |
-			| ''                                                  | 'Receipt'       | '*'        | '2'           | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | '36/Yellow'    |
-			| ''                                                  | 'Receipt'       | '*'        | '10'          | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | 'S/Yellow'     |
-			| ''                                                  | 'Receipt'       | '*'        | '10'          | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | 'XS/Blue'      |
-			| ''                                                  | 'Receipt'       | '*'        | '15'          | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | '36/Red'       |
+			| 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | ''              | ''         | ''            | ''             | ''                                                  | ''             | ''                 |
+			| 'Document registrations records'                    | ''              | ''         | ''            | ''             | ''                                                  | ''             | ''                 |
+			| 'Register  "R4032 Goods in transit (outgoing)"'     | ''              | ''         | ''            | ''             | ''                                                  | ''             | ''                 |
+			| ''                                                  | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'   | ''                                                  | ''             | ''                 |
+			| ''                                                  | ''              | ''         | 'Quantity'    | 'Store'        | 'Basis'                                             | 'Item key'     | 'Serial lot number'|
+			| ''                                                  | 'Receipt'       | '*'        | '2'           | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | '36/Yellow'    | ''                 |
+			| ''                                                  | 'Receipt'       | '*'        | '10'          | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | 'S/Yellow'     | ''                 |
+			| ''                                                  | 'Receipt'       | '*'        | '10'          | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | 'XS/Blue'      | ''                 |
+			| ''                                                  | 'Receipt'       | '*'        | '15'          | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | '36/Red'       | ''                 |
 		And I close all client application windows
 
 
@@ -520,17 +546,17 @@ Scenario: _0402431 check Inventory transfer movements by the Register  "R4010 Ac
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Register  "R4010 Actual stocks"'                  | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
-			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '1'         | 'Store 01'   | 'PZU'      | ''                  |
-			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Store 01'   | 'S/Yellow' | ''                  |
-			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Store 01'   | 'PZU'      | '0512'              |
-			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '1'         | 'Store 02'   | 'PZU'      | ''                  |
-			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Store 02'   | 'S/Yellow' | ''                  |
-			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Store 02'   | 'PZU'      | '0512'              |		
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| 'Register  "R4010 Actual stocks"'                  | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  | ''                     |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' | 'Source of origin'     |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '1'         | 'Store 01'   | 'PZU'      | ''                  | ''                     |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Store 01'   | 'S/Yellow' | ''                  | ''                     |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Store 01'   | 'PZU'      | '0512'              | ''                     |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '1'         | 'Store 02'   | 'PZU'      | ''                  | ''                     |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Store 02'   | 'S/Yellow' | ''                  | ''                     |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Store 02'   | 'PZU'      | '0512'              | ''                     |		
 		And I close all client application windows
 
 Scenario: _0402432 check Inventory transfer movements by the Register  "R4011 Free stocks" (transfer commission products)
@@ -570,13 +596,126 @@ Scenario: _0402433 check Inventory transfer movements by the Register  "R4050 St
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''                    | ''           | ''             | ''         | ''         | ''         |
-			| 'Register  "R4050 Stock inventory"'                | ''                    | ''           | ''             | ''         | ''         | ''         |
-			| ''                                                 | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' |
-			| ''                                                 | '04.11.2022 17:58:35' | 'Receipt'    | 'Main Company' | 'Store 01' | 'S/Yellow' | '2'        |
-			| ''                                                 | '04.11.2022 17:58:35' | 'Expense'    | 'Main Company' | 'Store 02' | 'S/Yellow' | '2'        |	
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'                | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     | ''                        |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                                 | '04.11.2022 17:58:35' | 'Receipt'    | 'Main Company' | 'Store 01' | 'S/Yellow' | '2'        | ''                     | ''                        |
+			| ''                                                 | '04.11.2022 17:58:35' | 'Expense'    | 'Main Company' | 'Store 02' | 'S/Yellow' | '2'        | ''                     | ''                        |
 		And I close all client application windows
 
+Scenario: _0402434 check Inventory transfer movements by the Register  "R4050 Stock inventory" (transfer commission products)
+	* Select Inventory transfer
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '192'       |
+	* Check movements by the Register  "R4050 Stock inventory"
+		And I click "Registrations report info" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'                | ''                    | ''           | ''             | ''         | ''         | ''         | ''                     | ''                        |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                                 | '04.11.2022 17:58:35' | 'Receipt'    | 'Main Company' | 'Store 01' | 'S/Yellow' | '2'        | ''                     | ''                        |
+			| ''                                                 | '04.11.2022 17:58:35' | 'Expense'    | 'Main Company' | 'Store 02' | 'S/Yellow' | '2'        | ''                     | ''                        |
+		And I close all client application windows
+
+Scenario: _0402435 check absence Inventory transfer movements by the Register  "R4032 Goods in transit (outgoing)" (Store distributed purchase=False)
+	* Select IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '192'     |
+	* Check movements by the Register  "R4032 Goods in transit (outgoing)"
+		And I click "Registrations report info" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4032 Goods in transit (outgoing)"'    |
+		And I close all client application windows
+
+Scenario: _0402436 check Inventory transfer movements by the Register  "R4032 Goods in transit (outgoing)" (Store distributed purchase=True)
+	* Select IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 501'   |
+	* Check movements by the Register  "R4032 Goods in transit (outgoing)"
+		And I click "Registrations report info" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 1 501 dated 25.07.2024 14:36:20' | ''                    | ''           | ''         | ''                                                   | ''         | ''                  | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'      | ''                    | ''           | ''         | ''                                                   | ''         | ''                  | ''         |
+			| ''                                                   | 'Period'              | 'RecordType' | 'Store'    | 'Basis'                                              | 'Item key' | 'Serial lot number' | 'Quantity' |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Receipt'    | 'Store 02' | 'Inventory transfer 1 501 dated 25.07.2024 14:36:20' | 'XS/Blue'  | ''                  | '3'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Receipt'    | 'Store 02' | 'Inventory transfer 1 501 dated 25.07.2024 14:36:20' | 'XS/Red'   | ''                  | '2'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Receipt'    | 'Store 02' | 'Inventory transfer 1 501 dated 25.07.2024 14:36:20' | 'ODS'      | ''                  | '8'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Receipt'    | 'Store 02' | 'Inventory transfer 1 501 dated 25.07.2024 14:36:20' | 'UNIQ'     | ''                  | '5'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Expense'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27'   | 'XS/Blue'  | ''                  | '3'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Expense'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27'   | 'XS/Red'   | ''                  | '2'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Expense'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27'   | 'ODS'      | '9090098908'        | '8'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Expense'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27'   | 'UNIQ'     | '09987897977889'    | '1'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Expense'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27'   | 'UNIQ'     | '09987897977890'    | '4'        |	
+		And I close all client application windows
+
+
+Scenario: _0402437 check absence Inventory transfer movements by the Register  "R4012 Stock Reservation" (SalesOrder not exist)
+	* Select IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '192'     |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4012 Stock Reservation"'    |
+		And I close all client application windows
+
+Scenario: _0402438 check Inventory transfer movements by the Register  "R4012 Stock Reservation" (SalesOrderExists, GR not use)
+	* Select IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2 502'   |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 2 502 dated 11.09.2024 13:52:43' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'                | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                                   | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                                   | '11.09.2024 13:52:43' | 'Receipt'    | 'Store 01' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
+			| ''                                                   | '11.09.2024 13:52:43' | 'Receipt'    | 'Store 01' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
+			| ''                                                   | '11.09.2024 13:52:43' | 'Receipt'    | 'Store 01' | 'UNIQ'     | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
+			| ''                                                   | '11.09.2024 13:52:43' | 'Expense'    | 'Store 02' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
+			| ''                                                   | '11.09.2024 13:52:43' | 'Expense'    | 'Store 02' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
+			| ''                                                   | '11.09.2024 13:52:43' | 'Expense'    | 'Store 02' | 'UNIQ'     | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |		
+		And I close all client application windows
+
+Scenario: _0402440 check Inventory transfer movements by the Register  "R4012 Stock Reservation" (SalesOrderExists, GR use)
+	* Select IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2 503'   |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 2 503 dated 11.09.2024 16:35:28' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'                | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                                   | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                                   | '11.09.2024 16:35:28' | 'Expense'    | 'Store 02' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |
+			| ''                                                   | '11.09.2024 16:35:28' | 'Expense'    | 'Store 02' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |
+			| ''                                                   | '11.09.2024 16:35:28' | 'Expense'    | 'Store 02' | 'UNIQ'     | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |		
+		And I close all client application windows
 
 Scenario: _0402439 Inventory transfer clear posting/mark for deletion
 	* Select Inventory transfer
@@ -636,3 +775,20 @@ Scenario: _0402439 Inventory transfer clear posting/mark for deletion
 		Then "ResultTable" spreadsheet document contains values
 			| 'R4050 Stock inventory'    |
 		And I close all client application windows
+
+Scenario: _0402441 check Inventory transfer movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	And I go to line in "List" table
+		| 'Number' |
+		| '201'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 201 dated 01.03.2021 09:55:16' | ''                                                 | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'            | ''                                                 | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                 | 'Document'                                         | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                 | 'Inventory transfer 201 dated 01.03.2021 09:55:16' | '01.03.2021 09:55:16' | '201'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

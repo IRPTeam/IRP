@@ -109,7 +109,7 @@ Scenario: _0202601 create RGR based on RSR
 		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
 		Then the form attribute named "Partner" became equal to "Retail customer"
 		Then the form attribute named "LegalName" became equal to "Company Retail customer"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "TransactionType" became equal to "Return from customer"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
@@ -370,11 +370,11 @@ Scenario: _0202603 create RRR based on RGR (without RSR)
 		And I finish line editing in "ItemList" table
 		And "ItemList" table became equal
 			| '#' | 'Retail sales receipt' | 'Item'               | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Return reason' | 'Source of origins' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' | 'Landed cost tax' |
-			| '1' | ''                     | 'Shirt'              | ''             | '38/Black' | ''                   | 'No'                 | '106,78'     | ''                   | 'pcs'  | ''              | ''                  | '2,000'    | '350,00' | '593,22'     | '700,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
-			| '2' | ''                     | 'Dress'              | ''             | 'L/Green'  | ''                   | 'No'                 | '83,90'      | ''                   | 'pcs'  | ''              | ''                  | '1,000'    | '550,00' | '466,10'     | '550,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
-			| '3' | ''                     | 'Product 1 with SLN' | ''             | 'PZU'      | ''                   | 'No'                 | '30,51'      | '8908899879'         | 'pcs'  | ''              | ''                  | '2,000'    | '100,00' | '169,49'     | '200,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
-			| '4' | ''                     | 'Product 3 with SLN' | ''             | 'UNIQ'     | ''                   | 'No'                 | '33,56'      | '09987897977891'     | 'pcs'  | ''              | ''                  | '2,000'    | '110,00' | '186,44'     | '220,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
-			| '5' | ''                     | 'Product 4 with SLN' | ''             | 'UNIQ'     | ''                   | 'No'                 | '18,31'      | '899007790088'       | 'pcs'  | ''              | ''                  | '1,000'    | '120,00' | '101,69'     | '120,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '1' | ''                     | 'Shirt'              | ''             | '38/Black' | 'Shop 01'            | 'No'                 | '106,78'     | ''                   | 'pcs'  | ''              | ''                  | '2,000'    | '350,00' | '593,22'     | '700,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '2' | ''                     | 'Dress'              | ''             | 'L/Green'  | 'Shop 01'            | 'No'                 | '83,90'      | ''                   | 'pcs'  | ''              | ''                  | '1,000'    | '550,00' | '466,10'     | '550,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '3' | ''                     | 'Product 1 with SLN' | ''             | 'PZU'      | 'Shop 01'            | 'No'                 | '30,51'      | '8908899879'         | 'pcs'  | ''              | ''                  | '2,000'    | '100,00' | '169,49'     | '200,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '4' | ''                     | 'Product 3 with SLN' | ''             | 'UNIQ'     | 'Shop 01'            | 'No'                 | '33,56'      | '09987897977891'     | 'pcs'  | ''              | ''                  | '2,000'    | '110,00' | '186,44'     | '220,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '5' | ''                     | 'Product 4 with SLN' | ''             | 'UNIQ'     | 'Shop 01'            | 'No'                 | '18,31'      | '899007790088'       | 'pcs'  | ''              | ''                  | '1,000'    | '120,00' | '101,69'     | '120,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
 		And in the table "ItemList" I click "Goods receipts" button
 		And Delay 2
 		And "DocumentsTree" table became equal
@@ -463,6 +463,8 @@ Scenario: _0202603 create RRR based on RGR (without RSR)
 		And I save the value of "Number" field as "$$NumberRRR2$$"
 		And I save the window as "$$RRR2$$"
 		And I close current window
+		If "1C:Enterprise" window is opened Then
+			And I click "No" button		
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table

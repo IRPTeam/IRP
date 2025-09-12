@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="70a244fb-2b5b-46f0-9a9a-24e58979959a">
+ <producedTypes>
+  <selectionType typeId="99692469-dc83-4ef9-bf02-8c151d54058a" valueTypeId="1f78f537-88c2-4bea-be94-03409a46fddd"/>
+  <listType typeId="a6355491-2338-4484-ab0d-125888e2f8db" valueTypeId="2ff62172-4cbb-49c5-9ba0-c37190dd580e"/>
+  <managerType typeId="1a29248d-3120-4a30-a968-d0fd7f81f356" valueTypeId="bcd3f08f-84f0-4b21-b5df-a517c88b9b98"/>
+  <recordSetType typeId="f7d1bace-e779-4a30-bd53-19e4a92ac490" valueTypeId="3999b8d6-d19c-406f-b728-357b451e4bbe"/>
+  <recordKeyType typeId="338f47c3-3e59-4869-a56b-0334da618940" valueTypeId="2d976bd5-56b4-431e-bd1b-46971cbac8a0"/>
+  <recordType typeId="4878b9d2-e5b5-430a-be56-29f88ef9bb39" valueTypeId="d5cacc0b-fe3c-4ee3-ab66-3c166dca39ed"/>
+  <recordManagerType typeId="7e2fc19c-523a-4107-b5b5-156daa37b6ab" valueTypeId="b517d5f7-fd08-4a24-93a1-415e3af66697"/>
+ </producedTypes>
+ <name>T9069S_AccountingMappingRecordersDescription</name>
+ <synonym>
+  <key>en</key>
+  <value>8EA7CAD5-F317-682F-F6AA-AB8E12ADB186__________</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="8488300a-deb5-49e9-b73f-d9dcc34e8459">
+  <name>Description_en</name>
+  <synonym>
+   <key>en</key>
+   <value>852E6D82-EF02-C46E-E49C-CE4F2A387144</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeDescription</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="c2677c84-31c5-4cf3-b88b-994f81eb6076">
+  <name>Description_ru</name>
+  <synonym>
+   <key>en</key>
+   <value>2BA76677-9DDA-26E2-281A-AA953CDB6E16</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeDescription</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="a9be1346-eb73-499d-a5dd-4537a4dd1e3e">
+  <name>Description_tr</name>
+  <synonym>
+   <key>en</key>
+   <value>7A63F275-A91E-58D1-156B-BEF404599632</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeDescription</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="8f3c13b3-4913-4de8-9ed7-ff5c93066cb1">
+  <name>RecorderMetaName</name>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>250</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+</mdclass:InformationRegister>

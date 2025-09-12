@@ -3,10 +3,21 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
-	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		
+		Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	
+		AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
+		AmountsInfo.TotalAmount.Value = ThisObject.ItemList.Total("TotalAmount");
+		AmountsInfo.NetAmount.Value   = ThisObject.ItemList.Total("NetAmount");
+		AmountsInfo.TaxAmount.Value   = ThisObject.ItemList.Total("TaxAmount");
+		TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
 
+	EndIf;
+	
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);
 EndProcedure
@@ -65,7 +76,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_PRO(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey, Store");
+		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, Item, ItemKey, Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 

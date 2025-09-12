@@ -32,6 +32,7 @@ Scenario: _022300 preparation
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
+		When Create OtherPartners objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
 		When Create catalog Countries objects
@@ -78,6 +79,14 @@ Scenario: _022300 preparation
 				| "Number"                                  |
 				| "$$NumberPurchaseReturnOrder022006$$"     |
 			When create PurchaseReturnOrder022006 based on PurchaseInvoice018001
+	* Partner Other
+		When Create document PurchaseInvoice objects (Other)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(40).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Price Calculation in Currency
+		When Create document PurchaseInvoice objects (contract currency differs from the invoice currency)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(222).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 Scenario: _0223001 check preparation
 	When check preparation
@@ -448,7 +457,7 @@ Scenario: _022310 create Purchase return based on Purchase return order
 				And "RowIDInfo" table contains lines
 					| '#'     | 'Key'                             | 'Basis'                             | 'Row ID'     | 'Next step'     | 'Quantity'     | 'Basis key'                             | 'Current step'     | 'Row ref'      |
 					| '1'     | '$$Rov1PurchaseReturn22310$$'     | '$$PurchaseReturnOrder022006$$'     | '*'          | 'SC'            | '3,000'        | '$$Rov1PurchaseReturnOrder022310$$'     | 'PR'               | '*'            |
-				And I click "Cancel posting" button	
+				And I click the button named "FormUndoPosting"	
 		And I close all client application windows
 	* Create Purchase return based on Purchase return order(Create button)
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
@@ -540,4 +549,83 @@ Scenario: _300512 check Use GR filling from store when create PR based on PI
 			| 'Item'    | 'Item key'   | 'Use shipment confirmation'    |
 			| 'Dress'   | 'L/Green'    | 'Yes'                          |
 		And I close all client application windows
+
+Scenario: _022311 create Purchase return with partner Other
+	And I close all client application windows
+	* Select PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '40'     |
+		And I select current line in "List" table
+	* Create PR
+		And I click the button named "FormDocumentPurchaseReturnGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+	* check PR document	
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And form attributes have values:
+			| 'Name'                      | 'Value'            | 'HowToSearch' |
+			| 'Agreement'                 | "Other partner 2"  | ''            |
+			| 'Company'                   | "Main Company"     | ''            |
+			| 'Currency'                  | "TRY"              | ''            |
+			| 'CurrencyTotalAmount'       | "TRY"              | ''            |
+			| 'ItemListTotalNetAmount'    | "150,00"           | ''            |
+			| 'ItemListTotalOffersAmount' | "0,00"             | ''            |
+			| 'ItemListTotalTaxAmount'    | "27,00"            | ''            |
+			| 'ItemListTotalTotalAmount'  | "177,00"           | ''            |
+			| 'LegalName'                 | "Other partner 2"  | ''            |
+			| 'Partner'                   | "Other partner 2"  | ''            |
+			| 'PriceIncludeTax'           | "No"               | ''            |
+			| 'Store'                     | "Store 01"         | ''            |
+			| 'TransactionType'           | "Return to vendor" | ''            |
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows
+
+Scenario: _022312 check if the return price matches the invoice price (contract currency differs from the invoice currency)
+	And I close all client application windows
+	* Select PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '222'     |
+		And I select current line in "List" table
+	* Create PR
+		And I click the button named "FormDocumentPurchaseReturnGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I go to line in "ItemList" table
+			| "#" | "Item"  | "Item key" |
+			| "2" | "Boots" | "36/18SD"  |
+		And I select current line in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* check PR document	
+		And form attributes have values:
+			| 'Name'                      | 'Value'              | 'HowToSearch' |
+			| 'Agreement'                 | "Vendor Ferron, TRY" | ''            |
+			| 'Company'                   | "Main Company"       | ''            |
+			| 'Currency'                  | "USD"                | ''            |
+			| 'CurrencyTotalAmount'       | "USD"                | ''            |
+			| 'ItemListTotalNetAmount'    | "101,70"             | ''            |
+			| 'ItemListTotalOffersAmount' | "0,00"               | ''            |
+			| 'ItemListTotalTaxAmount'    | "18,30"              | ''            |
+			| 'ItemListTotalTotalAmount'  | "120,00"             | ''            |
+			| 'LegalName'                 | "Company Ferron BP"  | ''            |
+			| 'Partner'                   | "Ferron BP"          | ''            |
+			| 'PriceIncludeTax'           | "Yes"                | ''            |
+			| 'Store'                     | "Store 02"           | ''            |
+			| 'TransactionType'           | "Return to vendor"   | ''            |
+		And "ItemList" table became equal
+			| '#' | 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Purchase invoice' | 'Profit loss center' | 'Expense type' | 'Detail' | 'Additional analytic' | 'Return reason' | 'Purchase return order' | 'Tax exemption reason' |
+			| '1' | 'Trousers' | '36/Yellow' | ''                   | ''                  | '2,000'    | 'pcs'  | '40,00' | '18%' | ''              | 'No'                 | '12,20'      | '67,80'      | '80,00'        | 'Yes'                       | 'Store 02' | ''        | '*'                | ''                   | ''             | ''       | ''                    | ''              | ''                      | ''                     |
+			| '2' | 'Boots'    | '36/18SD'   | ''                   | ''                  | '2,000'    | 'pcs'  | '20,00' | '18%' | ''              | 'No'                 | '6,10'       | '33,90'      | '40,00'        | 'Yes'                       | 'Store 02' | ''        | '*'                | ''                   | ''             | ''       | ''                    | ''              | ''                      | ''                     |
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows
 		
+				

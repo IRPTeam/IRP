@@ -30,6 +30,9 @@ EndProcedure
 
 &AtClient
 Procedure ListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	If IsFolder Then
+		Return;
+	EndIf;
 	Cancel = True;
 	FormParameters = New Structure("SourceOfOriginOwner", ThisObject.SourceOfOriginOwner);
 	Filter = New Structure("FillingValues", FormParameters);

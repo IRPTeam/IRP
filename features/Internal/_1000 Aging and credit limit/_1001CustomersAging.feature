@@ -203,7 +203,6 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 				| ''                                           | ''               | ''                               | 'Amount'       | 'Company'         | 'Branch'    | 'Multi currency movement type'    | 'Currency'    | 'Transaction currency'    | 'Legal name'         | 'Partner'    | 'Agreement'                           | 'Basis'                      | 'Order'    | 'Project'  | 'Deferred calculation'    | 'Customers advances closing'     |
 				| ''                                           | 'Receipt'        | '$$DateSalesInvoice0240162$$'    | '94,16'        | 'Main Company'    | ''          | 'Reporting currency'              | 'USD'         | 'TRY'                     | 'Company Kalipso'    | 'Kalipso'    | 'Basic Partner terms, without VAT'    | '$$SalesInvoice0240162$$'    | ''         | ''         | 'No'                      | ''                               |
 				| ''                                           | 'Receipt'        | '$$DateSalesInvoice0240162$$'    | '550'          | 'Main Company'    | ''          | 'Local currency'                  | 'TRY'         | 'TRY'                     | 'Company Kalipso'    | 'Kalipso'    | 'Basic Partner terms, without VAT'    | '$$SalesInvoice0240162$$'    | ''         | ''         | 'No'                      | ''                               |
-				| ''                                           | 'Receipt'        | '$$DateSalesInvoice0240162$$'    | '550'          | 'Main Company'    | ''          | 'TRY'                             | 'TRY'         | 'TRY'                     | 'Company Kalipso'    | 'Kalipso'    | 'Basic Partner terms, without VAT'    | '$$SalesInvoice0240162$$'    | ''         | ''         | 'No'                      | ''                               |
 				| ''                                           | 'Receipt'        | '$$DateSalesInvoice0240162$$'    | '550'          | 'Main Company'    | ''          | 'en description is empty'         | 'TRY'         | 'TRY'                     | 'Company Kalipso'    | 'Kalipso'    | 'Basic Partner terms, without VAT'    | '$$SalesInvoice0240162$$'    | ''         | ''         | 'No'                      | ''                               |
 			And I select "R5011 Customers aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
@@ -226,6 +225,8 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 		And I move to "Aging" tab
 		And I select current line in "PaymentTerms" table
 		And I delete "$$DatePaymentTermsSalesInvoice0240161$$" variable
+		And I delete "$$NumberSalesInvoice0240161$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice0240161$$"
 		And I save the value of "PaymentTermsDate" field of "PaymentTerms" table as "$$DatePaymentTermsSalesInvoice0240161$$"
 		And I click the button named "FormPostAndClose"
 	* Check Aging movements
@@ -258,7 +259,7 @@ Scenario: _1000009 create Cash receipt and check Aging register movements
 				| 'TRY'      |
 			And I select current line in "List" table
 		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'     |
@@ -342,7 +343,7 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 					| 'Bank account, TRY'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -365,7 +366,7 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 				And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 				And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -451,6 +452,16 @@ Scenario: _1000020 create Credit note and check Aging register movements
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "150,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Basis document" attribute in "Transactions" table
+		And I go to line in "" table
+			| ""              |
+			| "Sales invoice" |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| "Number"                       |
+			| "$$NumberSalesInvoice0240161$$" |
+		And I select current line in "List" table
 		And I click the button named "FormPost"
 		And I delete "$$CreditNote1000020$$" variable
 		And I delete "$$CreditNoteDate1000020$$" variable
@@ -488,7 +499,7 @@ Scenario: _1000020 create Credit note and check Aging register movements
 	And I close all client application windows
 			
 
-Scenario: _1000030 create Debit note and check Aging register movements
+Scenario: _1000030 create Debit note and check Aging register movements (with basis document)
 	* Create document
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
@@ -517,6 +528,17 @@ Scenario: _1000030 create Debit note and check Aging register movements
 		And I select current line in "List" table
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "50,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Basis document" attribute in "Transactions" table
+		Then "Select data type" window is opened
+		And I go to line in "" table
+			| ""              |
+			| "Sales invoice" |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| "Amount" | "Company"      | "Currency" | "Legal name"      | "Partner" |
+			| "550,00" | "Main Company" | "TRY"      | "Company Kalipso" | "Kalipso" |
+		And I select current line in "List" table	
 		And I finish line editing in "Transactions" table
 	* Check movements
 		And I click the button named "FormPost"
@@ -528,12 +550,12 @@ Scenario: _1000030 create Debit note and check Aging register movements
 		And I select "R5011 Customers aging" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$DebitNote1000030$$'                | ''              | ''                           | ''            | ''               | ''         | ''           | ''                                   | ''          | ''                       | ''               | ''                 |
-			| 'Document registrations records'      | ''              | ''                           | ''            | ''               | ''         | ''           | ''                                   | ''          | ''                       | ''               | ''                 |
-			| 'Register  "R5011 Customers aging"'   | ''              | ''                           | ''            | ''               | ''         | ''           | ''                                   | ''          | ''                       | ''               | ''                 |
-			| ''                                    | 'Record type'   | 'Period'                     | 'Resources'   | 'Dimensions'     | ''         | ''           | ''                                   | ''          | ''                       | ''               | 'Attributes'       |
-			| ''                                    | ''              | ''                           | 'Amount'      | 'Company'        | 'Branch'   | 'Currency'   | 'Agreement'                          | 'Partner'   | 'Invoice'                | 'Payment date'   | 'Aging closing'    |
-			| ''                                    | 'Receipt'       | '$$DebitNoteDate1000030$$'   | '50'          | 'Main Company'   | ''         | 'TRY'        | 'Basic Partner terms, without VAT'   | 'Kalipso'   | '$$DebitNote1000030$$'   | '*'              | ''                 |
+			| '$$DebitNote1000030$$'              | ''            | ''                         | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                       | ''             | ''              |
+			| 'Document registrations records'    | ''            | ''                         | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                       | ''             | ''              |
+			| 'Register  "R5011 Customers aging"' | ''            | ''                         | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                       | ''             | ''              |
+			| ''                                  | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''       | ''         | ''                                 | ''        | ''                       | ''             | 'Attributes'    |
+			| ''                                  | ''            | ''                         | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                | 'Payment date' | 'Aging closing' |
+			| ''                                  | 'Receipt'     | '$$DebitNoteDate1000030$$' | '50'        | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$' | '*'            | ''              |
 		And I close all client application windows
 	* Post customers advance closing document
 		Given I open hyperlink 'e1cib/list/Document.CustomersAdvancesClosing'
@@ -548,16 +570,15 @@ Scenario: _1000030 create Debit note and check Aging register movements
 	* Check movements
 		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5011B_CustomersAging'
 		And "List" table contains lines
-			| 'Period'                        | 'Recorder'                  | 'Currency'   | 'Company'        | 'Branch'   | 'Partner'   | 'Amount'   | 'Agreement'                          | 'Invoice'                   | 'Payment date'                              | 'Aging closing'                   |
-			| '$$DateSalesInvoice0240162$$'   | '$$SalesInvoice0240162$$'   | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '550,00'   | 'Basic Partner terms, without VAT'   | '$$SalesInvoice0240162$$'   | '19.11.2020'                                | ''                                |
-			| '$$DateSalesInvoice024016$$'    | '$$SalesInvoice024016$$'    | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '550,00'   | 'Basic Partner terms, without VAT'   | '$$SalesInvoice024016$$'    | '$$DatePaymentTermsSalesInvoice0240161$$'   | ''                                |
-			| '$$DateCashReceipt1000009$$'    | '$$CashReceipt1000009$$'    | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '550,00'   | 'Basic Partner terms, without VAT'   | '$$SalesInvoice0240162$$'   | '19.11.2020'                                | 'Customers advance closing 4*'    |
-			| '$$DateBankReceipt1000015$$'    | '$$BankReceipt1000015$$'    | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '250,00'   | 'Basic Partner terms, without VAT'   | '$$SalesInvoice024016$$'    | '$$DatePaymentTermsSalesInvoice0240161$$'   | 'Customers advance closing 4*'    |
-			| '$$DateBankReceipt1000015$$'    | '$$BankReceipt1000015$$'    | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '200,00'   | 'Basic Partner terms, without VAT'   | '$$SalesInvoice024016$$'    | '$$DatePaymentTermsSalesInvoice0240161$$'   | 'Customers advance closing 4*'    |
-			| '$$CreditNoteDate1000020$$'     | '$$CreditNote1000020$$'     | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '100,00'   | 'Basic Partner terms, without VAT'   | '$$SalesInvoice024016$$'    | '$$DatePaymentTermsSalesInvoice0240161$$'   | 'Customers advance closing 4*'    |
-			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1000030$$'      | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '50,00'    | 'Basic Partner terms, without VAT'   | '$$DebitNote1000030$$'      | '*'                                         | ''                                |
-			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1000030$$'      | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '50,00'    | 'Basic Partner terms, without VAT'   | '$$DebitNote1000030$$'      | '*'                                         | 'Customers advance closing 4*'    |
-		Then the number of "List" table lines is "равно" "8"
+			| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Branch' | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            | 'Aging closing'                |
+			| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                             |
+			| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                             |
+			| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advance closing 4*' |
+			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '250,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
+			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '200,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
+			| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
+			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                             |
+		Then the number of "List" table lines is "равно" "7"
 	And I close all client application windows
 				
 Scenario: _1000050 check the offset of Sales invoice advance (type of settlement by documents)
@@ -578,7 +599,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Bank account, TRY'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -611,13 +632,14 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Cash desk №4'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
 					| 'Kalipso'          |
 				And I select current line in "List" table
 				And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+				And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberCashReceipt1000050$$" variable
@@ -644,7 +666,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Bank account, TRY'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
@@ -704,13 +726,14 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Cash desk №4'      |
 				And I select current line in "List" table
 			* Filling in the tabular part
-				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
 				And I go to line in "List" table
 					| 'Description'      |
 					| 'Kalipso'          |
 				And I select current line in "List" table
 				And I input "550,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+				And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberCashReceipt10000505$$" variable
@@ -767,7 +790,6 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 			And "List" table contains lines:
 				| 'Recorder'                | 'Currency' | 'Company'      | 'Branch' | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date' | 'Aging closing'                |
 				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | ''                             |
-				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | 'Customers advance closing 4*' |
 				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | ''                             |
 				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advance closing 4*' |
 			And I close all client application windows	
@@ -937,8 +959,8 @@ Scenario: _1000057 create BR based on SO (Prepaid)
 		Then "Sales orders" window is opened
 		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And "PaymentList" table became equal
-			| 'Partner' | '#' | 'Commission' | 'Payer'           | 'Partner term' | 'Legal name contract' | 'Basis document' | 'Order'                                       | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Additional analytic' | 'Commission percent' | 'Expense type' |
-			| 'Kalipso' | '1' | ''           | 'Company Kalipso' | ''             | ''                    | ''               | 'Sales order 1 115 dated 04.01.2024 11:43:06' | '864,41'       | ''                        | ''                   | ''                 | ''                           | ''                    | ''                   | ''             |
+			| 'Partner' | '#' | 'Commission' | 'Legal name'           | 'Partner term'                     | 'Legal name contract' | 'Basis document' | 'Order'                                       | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Additional analytic' | 'Commission percent' | 'Expense type' |
+			| 'Kalipso' | '1' | ''           | 'Company Kalipso' | 'Basic Partner terms, without VAT' | ''                    | ''               | 'Sales order 1 115 dated 04.01.2024 11:43:06' | '864,41'       | ''                        | ''                   | ''                 | ''                           | ''                    | ''                   | ''             |
 		Then the form attribute named "Branch" became equal to "Front office"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
@@ -946,7 +968,7 @@ Scenario: _1000057 create BR based on SO (Prepaid)
 	* Try select SO in BR
 		And I activate "Partner term" field in "PaymentList" table
 		And I delete a line in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -960,6 +982,6 @@ Scenario: _1000057 create BR based on SO (Prepaid)
 			| 'Sales order 1 115 dated 04.01.2024 11:43:06' | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | '864,41' |
 		And I click "Select" button
 		And "PaymentList" table became equal
-			| 'Partner' | '#' | 'Commission' | 'Payer'           | 'Partner term' | 'Legal name contract' | 'Basis document' | 'Order'                                       | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Additional analytic' | 'Commission percent' | 'Expense type' |
+			| 'Partner' | '#' | 'Commission' | 'Legal name'           | 'Partner term' | 'Legal name contract' | 'Basis document' | 'Order'                                       | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Additional analytic' | 'Commission percent' | 'Expense type' |
 			| 'Kalipso' | '1' | ''           | 'Company Kalipso' | ''             | ''                    | ''               | 'Sales order 1 115 dated 04.01.2024 11:43:06' | '864,41'       | ''                        | ''                   | ''                 | ''                           | ''                    | ''                   | ''             |
 	And I close all client application windows

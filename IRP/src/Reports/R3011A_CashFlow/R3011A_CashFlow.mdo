@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6ba929ff-ae02-4c24-a6d4-687bf6ba0eac">
+ <producedTypes>
+  <objectType typeId="b77a8953-75e2-48c9-b151-a356f08a00e7" valueTypeId="f2f159c4-2b0d-4f82-a449-b555ef5ce283"/>
+  <managerType typeId="b6893040-1474-458d-961a-d9a7ea43aa44" valueTypeId="648f5487-6697-4e3f-bfd0-b1fb7dede762"/>
+ </producedTypes>
+ <name>R3011A_CashFlow</name>
+ <synonym>
+  <key>en</key>
+  <value>4BDBD40E-BD5B-FAB1-16C9-90492C9F943B</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R3011A_CashFlow.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="e0f66c0d-a554-47a0-ba5c-cc34439007d0">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>en</key>
+   <value>B4EC6338-A634-3D04-44E9-961DBE730141</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

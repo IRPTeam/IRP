@@ -12,7 +12,14 @@ Procedure OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, Ope
 	EndIf;
 
 	For Each Filter In OpenSettings.ArrayOfFilters Do
-		AddFilterToChoiceForm(ChoiceForm, Filter.FieldName, Filter.Value, Filter.ComparisonType);
+		If Filter.FilterType = "Group" Then
+			FilterGroup = AddFilterGroupToChoiceForm(ChoiceForm, Filter.GroupType);
+			For Each GroupItem In Filter.Items Do
+				AddFilterToChoiceForm(ChoiceForm, GroupItem.FieldName, GroupItem.Value, GroupItem.ComparisonType, FilterGroup);
+			EndDo;
+		Else
+			AddFilterToChoiceForm(ChoiceForm, Filter.FieldName, Filter.Value, Filter.ComparisonType);
+		EndIf;
 	EndDo;
 	ChoiceForm.Open();
 EndProcedure
@@ -35,20 +42,35 @@ EndProcedure
 #Region ItemPartner
 
 Procedure PartnerStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, TransactionType) Export
-	PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(TransactionType);
+	PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(TransactionType, False);
+	
+	If PartnerType = Undefined Then
+		PartnerType = New Array();
+	EndIf;
 	
 	OpenSettings = GetOpenSettingsStructure();
-
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
 	
 	OpenSettings.FormParameters = New Structure();
+	OpenSettings.FormParameters.Insert("DocumentFilter", New Structure());
+	OpenSettings.FormParameters.Insert("FilterGroupType", "OrGroup");
 	
-	If ValueIsFilled(PartnerType) Then
-		OpenSettings.FormParameters.Insert("Filter", New Structure(PartnerType, True));
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(PartnerType, True, DataCompositionComparisonType.Equal));
-		OpenSettings.FillingData = New Structure(PartnerType, True);
-	EndIf;
+	FilterGroup = DocumentsClientServer.CreateFilterGroup(DataCompositionFilterItemsGroupType.OrGroup);
+	
+	Segments = StrSplit(PartnerType, ",");
+	For Each Segment In Segments Do
+		OpenSettings.FormParameters.DocumentFilter.Insert(TrimAll(Segment), True);
+		FilterGroup.Items.Add(DocumentsClientServer.CreateFilterItem(TrimAll(Segment), True, DataCompositionComparisonType.Equal));
+	EndDo;
+	
+	OpenSettings.ArrayOfFilters.Add(FilterGroup);
+	
+	//If ValueIsFilled(PartnerType) Then
+	//	OpenSettings.FormParameters.Insert("Filter", New Structure(PartnerType, True));
+	//	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(PartnerType, True, DataCompositionComparisonType.Equal));
+	//	OpenSettings.FillingData = New Structure(PartnerType, True);
+	//sEndIf;
 	
 	PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
@@ -170,6 +192,7 @@ EndProcedure
 Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, TransactionType, Parameters = Undefined) Export
 	CompanyIsSet = True;
 	DateIsSet    = True;
+	LegalNameIsSet = True;
 	If Parameters <> Undefined Then
 		If Parameters.Property("Company") Then
 			Company = Parameters.Company;
@@ -196,8 +219,14 @@ Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceD
 			CompanyIsSet = False;
 		EndIf;
 		
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, "LegalName") Then
+			LegalName = Object.LegalName;
+		Else
+			LegalName = Undefined;
+			LegalNameIsSet = False;
+		EndIf;
+		
 		Partner   = Object.Partner;
-		LegalName = Object.LegalName;
 	EndIf;
 
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Date") Then
@@ -207,13 +236,13 @@ Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceD
 		DateIsSet = False;
 	EndIf;
 	
-	AgreementType = ModelServer_V2.GetAgreementTypeByTransactionType(TransactionType);
+	AgreementTypes = ModelServer_V2.GetAgreementTypeByTransactionType(TransactionType, False);
 	
 	OpenSettings = GetOpenSettingsStructure();
 
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementType, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementTypes, DataCompositionComparisonType.InList));
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
 	
 	OpenSettings.FormParameters = New Structure();
@@ -227,11 +256,13 @@ Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceD
 	
 	OpenSettings.FillingData = New Structure();
 	OpenSettings.FillingData.Insert("Partner"   , Partner);
-	OpenSettings.FillingData.Insert("LegalName" , LegalName);
+	If LegalNameIsSet Then
+		OpenSettings.FillingData.Insert("LegalName" , LegalName);
+	EndIf;
 	If CompanyIsSet Then
 		OpenSettings.FillingData.Insert("Company"   , Company);
 	EndIf;
-	OpenSettings.FillingData.Insert("Type"      , AgreementType);
+	OpenSettings.FillingData.Insert("Type"      , AgreementTypes[0]);
 
 	AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
@@ -267,7 +298,11 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	EndIf;
 
 	SetCurrentRow(Object, Form, Item, OpenSettings.FormParameters, "Agreement");
-
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "Company") Then
+		OpenSettings.FormParameters.Insert("CompanyIsReadOnly", Form.Items.Company.ReadOnly);
+	EndIf;
+	
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -688,10 +723,10 @@ Async Procedure OpenScanForm(Object, Form, Module) Export
 	NotifyParameters = New Structure;
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
-	NotifyDescription = New NotifyDescription("OpenScanFormEnd", ThisObject, NotifyParameters);
+	CallbackDescription = New CallbackDescription("OpenScanFormEnd", ThisObject, NotifyParameters);
 	OpenFormParameters = New Structure;
 	OpenFormParameters.Insert("Basis", Object.Ref);
-	OpenForm("DataProcessor.ScanBarcode.Form.Form", OpenFormParameters, Form, , , , NotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("DataProcessor.ScanBarcode.Form.Form", OpenFormParameters, Form, , , , CallbackDescription, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 Procedure OpenScanFormEnd(Result, AdditionalParameters) Export
@@ -709,18 +744,37 @@ EndProcedure
 
 Function CreateFilterItem(FieldName, Value, ComparisonType) Export
 	FilterStructure = New Structure();
+	FilterStructure.Insert("FilterType", "Item");
 	FilterStructure.Insert("FieldName", FieldName);
 	FilterStructure.Insert("Value", Value);
 	FilterStructure.Insert("ComparisonType", ComparisonType);
 	Return FilterStructure;
 EndFunction
 
-Procedure AddFilterToChoiceForm(ChoiceForm, PathToField, Value, ComparisonType)
-	FilterItem = ChoiceForm.List.Filter.Items.Add(Type("DataCompositionFilterItem"));
+Function CreateFilterGroup(GroupType) Export
+	FilterGroupStructure = New Structure();
+	FilterGroupStructure.Insert("FilterType", "Group");
+	FilterGroupStructure.Insert("GroupType", GroupType);
+	FilterGroupStructure.Insert("Items", New Array());
+	Return FilterGroupStructure;
+EndFunction
+
+Procedure AddFilterToChoiceForm(ChoiceForm, PathToField, Value, ComparisonType, FilterGroup = Undefined)
+	If FilterGroup <> Undefined Then
+		FilterItem = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
+	Else
+		FilterItem = ChoiceForm.List.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	EndIf;
 	FilterItem.LeftValue = New DataCompositionField(PathToField);
 	FilterItem.RightValue = Value;
 	FilterItem.ComparisonType = ComparisonType;
 EndProcedure
+
+Function AddFilterGroupToChoiceForm(ChoiceForm, GroupType);
+	FilterGroup = ChoiceForm.List.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
+	FilterGroup.GroupType = GroupType;
+	Return FilterGroup;
+EndFunction
 
 #EndRegion
 
@@ -843,10 +897,10 @@ EndProcedure
 #Region TitleChanges
 
 Procedure SetTextOfDescriptionAtForm(Object, Form) Export
-	If ValueIsFilled(Object.Description) Then
-		Form.Description = Object.Description;
+	If ValueIsFilled(Object.Comment) Then
+		Form.Comment = Object.Comment;
 	Else
-		Form.Description = R().I_2;
+		Form.Comment = R().I_2;
 	EndIf;
 EndProcedure
 
@@ -938,12 +992,6 @@ EndProcedure
 #Region MoneyTransfer
 
 Procedure MoneyTransferStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
-
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
 	If OpenSettings = Undefined Then
 		OpenSettings = GetOpenSettingsStructure();
 	EndIf;
@@ -999,7 +1047,13 @@ Procedure ExpenseAndRevenueTypeStartChoice(Object, Form, Item, ChoiceData, Stand
 	Else
 		OpenSettings.FormParameters.Insert("FillingData", OpenSettings.FillingData);
 	EndIf;
-
+	
+	If StrFind(Upper(Item.Name), Upper("RevenueType")) > 0 Then
+		SetCurrentRow(Object, Form, Item, OpenSettings.FormParameters, "RevenueType");
+	ElsIf StrFind(Upper(Item.Name), Upper("ExpenseType")) > 0 Then
+		SetCurrentRow(Object, Form, Item, OpenSettings.FormParameters, "ExpenseType");
+	EndIf;
+	
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -1095,7 +1149,12 @@ Function GetFormItemNames()
 				|FixedAssetsKey,
 				|AccrualListTotalVacationDays, AccrualListPaidVacationDays, AccrualListTotalSickLeaveDays ,AccrualListPaidSickLeaveDays,
 				|EmployeeListKey, SalaryTaxListKey,
-				|TaxesIncomingKey, TaxesOutgoingKey, TaxesDifferenceKey";
+				|TaxesIncomingKey, TaxesOutgoingKey, TaxesDifferenceKey,
+				|CalculationsKey,
+				|RecordsKey, ItemListIsClosedOrder,
+				|AllocationResultKey, AllocationResultRowID, AllocationResultBasisRowID,
+				|ItemListIsUnlockItemKey, ItemListIsUnlockStore,
+				|SelectedRowKey, Childrens";
 	Return ItemNames;
 EndFunction	
 
@@ -1111,6 +1170,10 @@ Procedure ShowRowKey(Form) Export
 EndProcedure
 
 Procedure SetCurrentRow(Object, Form, Item, FormParameters, AttributeName) Export
+	If FormParameters.Property("CurrentRow") Then
+		Return;
+	EndIf;
+	
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, Item.Name) Then
 		FormParameters.Insert("CurrentRow", Object[Item.Name]);
 	Else
@@ -1177,7 +1240,7 @@ Procedure OpenLinkedDocuments(Object, Form, TableName, DocumentColumnName, Quant
 	AdditionalParameters.Insert("Form"      , Form);
 	AdditionalParameters.Insert("TableName" , TableName);
 	
-	Notify = New NotifyDescription("LinkedDocumentsEnd", ThisObject, AdditionalParameters);
+	Notify = New CallbackDescription("LinkedDocumentsEnd", ThisObject, AdditionalParameters);
 	OpenForm("CommonForm.LinkedDocuments", FormParameters, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -1197,17 +1260,7 @@ Procedure LinkedDocumentsEnd(Result, AdditionalParameters) Export
 		EndDo;
 	EndDo;
 	
-	RowIDInfoClient.UpdateQuantity(Object, Form);
-EndProcedure
-
-Procedure UpdateQuantityByTradeDocuments(Object, TableName) Export
-	For Each Row In Object.ItemList Do
-		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
-
-		If ArrayOfDocuments.Count() = 1 And ArrayOfDocuments[0].Quantity <> Row.QuantityInBaseUnit Then
-			ArrayOfDocuments[0].Quantity = Row.QuantityInBaseUnit;
-		EndIf;
-	EndDo;
+	RowIDInfoClientServer.UpdateQuantity(Object);
 EndProcedure
 
 Procedure SetLockedRowsForItemListByTradeDocuments(Object, Form, TableName) Export
@@ -1308,25 +1361,16 @@ EndProcedure
 
 #Region PickUpItems
 
-Procedure OpenPickupItems(Object, Form, Command) Export
+Procedure OpenPickupItems(Object, Form) Export
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
 	NotifyParameters.Insert("Filter" , New Structure("DisableIfIsService", False));
-	NotifyDescription = New NotifyDescription("PickupItemsEnd", ThisObject, NotifyParameters);
+	CallbackDescription = New CallbackDescription("PickupItemsEnd", ThisObject, NotifyParameters);
 	OpenFormParameters = PickupItemsParameters(Object, Form);
-#If MobileClient Then
-
-#Else
-		If Command.AssociatedTable <> Undefined Then
-			OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
-			OpenFormParameters.Insert("Object", Object);
-		EndIf;
-
-		FormName = "CommonForm.PickUpItems";
-		OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
-#EndIf
-
+	OpenFormParameters.Insert("AssociatedTableName", "ItemList");
+	OpenFormParameters.Insert("Object", Object);
+	OpenForm("CommonForm.PickUpItems", OpenFormParameters, Form, , , , CallbackDescription);
 EndProcedure
 
 Function PickupItemsParameters(Object, Form)
@@ -1546,9 +1590,13 @@ Procedure PickupItemsEnd(ScanData, AddInfo) Export
 	EndIf;	
 
 	If Result.ChoiceForms.ControlStringStartChoice_Counter = 1 And Not FormAlreadyOpened Then
+		SerialLotNumberForCheck = Undefined;
+		If ScanData.Count() Then
+			SerialLotNumberForCheck = ScanData[ScanData.UBound()].SerialLotNumber;
+		EndIf;
 		Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
 			New Structure("Key", Result.ChoiceForms.ControlStringStartChoice_Key))[0].GetID();
-		Form.ItemListControlCodeStringStateClick();
+		Form.ItemListControlCodeStringStateClick(SerialLotNumberForCheck);
 	EndIf;
 	
 	For Each Message In Result.UserMessages Do

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9185c05f-5116-4e56-ad25-96339d059773">
+ <producedTypes>
+  <objectType typeId="9b4f7b43-8326-4db0-b790-fd3ed85fefd6" valueTypeId="d2f4d1ab-a7eb-459f-81c2-0e45b210f51e"/>
+  <managerType typeId="1d00021b-52e4-41af-bba0-112f26a4d83c" valueTypeId="8adc1709-f28b-482e-805d-4f07ca61a2f7"/>
+ </producedTypes>
+ <name>AccountantAutomatedWorkplace</name>
+ <synonym>
+  <key>en</key>
+  <value>1DB173D7-D2DB-C341-1487-704571A25DC1</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.AccountantAutomatedWorkplace.Form.Form</defaultForm>
+ <forms uuid="71d8e93a-790e-4048-a361-20baced5750e">
+  <name>Form</name>
+  <synonym>
+   <key>en</key>
+   <value>CD0679FB-EF21-3B31-10B0-059F588794C1</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="a1e23f2b-9784-40fc-8224-7de356fd37ff">
+  <name>FormSettings</name>
+  <synonym>
+   <key>en</key>
+   <value>33F1AC10-0076-6A39-9582-2FCDE4707DDD</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="9a464875-de5c-4ced-88a9-89e6a5472f87">
+  <name>PrintFormJE</name>
+  <synonym>
+   <key>en</key>
+   <value>0BCB526A-2F36-1484-4180-02B2706ABD17</value>
+  </synonym>
+ </templates>
+ <templates uuid="b0a0c4c9-a97d-4981-9d27-134ab0a27239">
+  <name>PrintHistory</name>
+  <synonym>
+   <key>en</key>
+   <value>6184E1AA-D9FB-1AC4-4124-47710622B05C</value>
+  </synonym>
+ </templates>
+</mdclass:DataProcessor>

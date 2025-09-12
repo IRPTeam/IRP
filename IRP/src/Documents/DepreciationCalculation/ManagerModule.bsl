@@ -134,8 +134,15 @@ EndFunction
 Function R8510B_BookValueOfFixedAsset()
 	Return
 		"SELECT
-		|	*,
+		|	Calculations.Company,
+		|	Calculations.Branch,
+		|	Calculations.ProfitLossCenter,
+		|	Calculations.FixedAsset,
+		|	Calculations.LedgerType,
+		|	Calculations.Schedule,
+		|	Calculations.Amount,
 		|	&Date AS Period,
+		|	Calculations.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency,
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType
 		|INTO R8510B_BookValueOfFixedAsset
 		|FROM
@@ -147,8 +154,15 @@ EndFunction
 Function R5022T_Expenses()
 	Return
 		"SELECT
-		|	*,
-		|	&Date AS Period
+		|	Calculations.Company,
+		|	Calculations.Branch,
+		|	Calculations.ProfitLossCenter,
+		|	Calculations.FixedAsset,
+		|	Calculations.LedgerType,
+		|	Calculations.ExpenseType,
+		|	Calculations.Amount,
+		|	&Date AS Period,
+		|	Calculations.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency
 		|INTO R5022T_Expenses
 		|FROM
 		|	Calculations
@@ -158,7 +172,7 @@ EndFunction
 
 #EndRegion
 
-Function GetCalculations(Ref, Date, Company, Branch) Export
+Function GetCalculations(Ref, Date, Company, Branch, FixedAsset = Undefined) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -170,10 +184,13 @@ Function GetCalculations(Ref, Date, Company, Branch) Export
 	|	T.AmountBalance AS AmountBalance
 	|INTO ActiveFixedAssets
 	|FROM
-	|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(&Period, Company = &Company
-	|	AND Branch = &Branch
-	|	AND LedgerType.CalculateDepreciation
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS T
+	|	AccumulationRegister.R8510B_BookValueOfFixedAsset.Balance(
+	|			&Period,
+	|			Company = &Company
+	|				AND Branch = &Branch
+	|				AND LedgerType.CalculateDepreciation
+	|				AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|				AND &FixedAssetFilter) AS T
 	|WHERE
 	|	T.AmountBalance > 0
 	|;
@@ -188,11 +205,12 @@ Function GetCalculations(Ref, Date, Company, Branch) Export
 	|	InformationRegister.T8515S_FixedAssetsLocation AS T8515S_FixedAssetsLocation
 	|WHERE
 	|	(T8515S_FixedAssetsLocation.Company, T8515S_FixedAssetsLocation.FixedAsset) IN
-	|		(SELECT
-	|			ActiveFixedAssets.Company,
-	|			ActiveFixedAssets.FixedAsset
-	|		FROM
-	|			ActiveFixedAssets AS ActiveFixedAssets)
+	|			(SELECT
+	|				ActiveFixedAssets.Company,
+	|				ActiveFixedAssets.FixedAsset
+	|			FROM
+	|				ActiveFixedAssets AS ActiveFixedAssets)
+	|
 	|GROUP BY
 	|	T8515S_FixedAssetsLocation.Company,
 	|	T8515S_FixedAssetsLocation.FixedAsset
@@ -206,15 +224,16 @@ Function GetCalculations(Ref, Date, Company, Branch) Export
 	|	T8515S_FixedAssetsLocationSliceLast.ProfitLossCenter AS ProfitLossCenter
 	|INTO LocationFixedAssets
 	|FROM
-	|	InformationRegister.T8515S_FixedAssetsLocation.SliceLast(&StartDate, (Company, Branch, FixedAsset, ProfitLossCenter)
-	|		IN
-	|		(SELECT
-	|			ActiveFixedAssets.Company,
-	|			ActiveFixedAssets.Branch,
-	|			ActiveFixedAssets.FixedAsset,
-	|			ActiveFixedAssets.ProfitLossCenter
-	|		FROM
-	|			ActiveFixedAssets AS ActiveFixedAssets)) AS T8515S_FixedAssetsLocationSliceLast
+	|	InformationRegister.T8515S_FixedAssetsLocation.SliceLast(
+	|			&DocDate,
+	|			(Company, Branch, FixedAsset, ProfitLossCenter) IN
+	|				(SELECT
+	|					ActiveFixedAssets.Company,
+	|					ActiveFixedAssets.Branch,
+	|					ActiveFixedAssets.FixedAsset,
+	|					ActiveFixedAssets.ProfitLossCenter
+	|				FROM
+	|					ActiveFixedAssets AS ActiveFixedAssets)) AS T8515S_FixedAssetsLocationSliceLast
 	|WHERE
 	|	T8515S_FixedAssetsLocationSliceLast.IsActive
 	|;
@@ -227,12 +246,16 @@ Function GetCalculations(Ref, Date, Company, Branch) Export
 	|	T.AmountTurnover AS AmountTurnover
 	|INTO CostFixedAsset
 	|FROM
-	|	AccumulationRegister.R8515T_CostOfFixedAsset.Turnovers(UNDEFINED, &Period,, (Company, FixedAsset) IN
-	|		(SELECT
-	|			ActiveFixedAssets.Company,
-	|			ActiveFixedAssets.FixedAsset
-	|		FROM
-	|			ActiveFixedAssets AS ActiveFixedAssets)) AS T
+	|	AccumulationRegister.R8515T_CostOfFixedAsset.Turnovers(
+	|			UNDEFINED,
+	|			&Period,
+	|			,
+	|			(Company, FixedAsset) IN
+	|				(SELECT
+	|					ActiveFixedAssets.Company,
+	|					ActiveFixedAssets.FixedAsset
+	|				FROM
+	|					ActiveFixedAssets AS ActiveFixedAssets)) AS T
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -248,45 +271,57 @@ Function GetCalculations(Ref, Date, Company, Branch) Export
 	|	ActiveFixedAssets.AmountBalance AS AmountBalance,
 	|	CostFixedAsset.AmountTurnover AS AmountTurnover,
 	|	StartingDates.StartDate AS StartDate,
-	|	DATEADD(StartingDates.StartDate, MONTH, T.Schedule.UsefulLife - 1) AS FinishDate,
+	|	DATEADD(StartingDates.StartDate, MONTH, T.Schedule.UsefulLife) AS FinishDate,
+	|	DATEDIFF(BEGINOFPERIOD(&DocDate, MONTH), DATEADD(StartingDates.StartDate, MONTH, T.Schedule.UsefulLife), MONTH) AS BalanceUsefulLife,
 	|	T.Schedule.UsefulLife AS UsefulLife,
 	|	T.Schedule.Rate AS Rate,
 	|	T.LedgerType.ExpenseType AS ExpenseType,
 	|	0 AS Amount
 	|FROM
-	|	AccumulationRegister.R8510B_BookValueOfFixedAsset.BalanceAndTurnovers(UNDEFINED, &Period,,, Company = &Company
-	|	AND Branch = &Branch
-	|	AND LedgerType.CalculateDepreciation
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS T
+	|	AccumulationRegister.R8510B_BookValueOfFixedAsset.BalanceAndTurnovers(
+	|			UNDEFINED,
+	|			&Period,
+	|			,
+	|			,
+	|			Company = &Company
+	|				AND Branch = &Branch
+	|				AND LedgerType.CalculateDepreciation
+	|				AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS T
 	|		INNER JOIN StartingDates AS StartingDates
 	|		ON (StartingDates.Company = T.Company)
-	|		AND (StartingDates.FixedAsset = T.FixedAsset)
-	|		AND (StartingDates.StartDate < &StartDate)
+	|			AND (StartingDates.FixedAsset = T.FixedAsset)
+	|			AND (StartingDates.StartDate < &DocDate)
 	|		INNER JOIN LocationFixedAssets AS LocationFixedAssets
 	|		ON (LocationFixedAssets.Company = T.Company)
-	|		AND (LocationFixedAssets.Branch = T.Branch)
-	|		AND (LocationFixedAssets.ProfitLossCenter = T.ProfitLossCenter)
-	|		AND (LocationFixedAssets.FixedAsset = T.FixedAsset)
+	|			AND (LocationFixedAssets.Branch = T.Branch)
+	|			AND (LocationFixedAssets.ProfitLossCenter = T.ProfitLossCenter)
+	|			AND (LocationFixedAssets.FixedAsset = T.FixedAsset)
 	|		INNER JOIN CostFixedAsset AS CostFixedAsset
 	|		ON (CostFixedAsset.Company = T.Company)
-	|		AND (CostFixedAsset.FixedAsset = T.FixedAsset)
-	|		AND (CostFixedAsset.LedgerType = T.LedgerType)
+	|			AND (CostFixedAsset.FixedAsset = T.FixedAsset)
+	|			AND (CostFixedAsset.LedgerType = T.LedgerType)
 	|		INNER JOIN ActiveFixedAssets AS ActiveFixedAssets
 	|		ON (ActiveFixedAssets.Company = T.Company)
-	|		AND (ActiveFixedAssets.Branch = T.Branch)
-	|		AND (ActiveFixedAssets.ProfitLossCenter = T.ProfitLossCenter)
-	|		AND (ActiveFixedAssets.FixedAsset = T.FixedAsset)
-	|		AND (ActiveFixedAssets.LedgerType = T.LedgerType)";
+	|			AND (ActiveFixedAssets.Branch = T.Branch)
+	|			AND (ActiveFixedAssets.ProfitLossCenter = T.ProfitLossCenter)
+	|			AND (ActiveFixedAssets.FixedAsset = T.FixedAsset)
+	|			AND (ActiveFixedAssets.LedgerType = T.LedgerType)";
 	
 	If Not ValueIsFilled(Ref) Then
 		Query.SetParameter("Period", EndOfDay(Date));
 	Else
 		Query.SetParameter("Period", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
 	EndIf;
-	Query.SetParameter("StartDate" , Date);
+	Query.SetParameter("DocDate" , Date);
 	Query.SetParameter("Company"   , Company);
 	Query.SetParameter("Branch"    , Branch); 
 	Query.SetParameter("Currency"  , CurrenciesServer.GetLandedCostCurrency(Company)); 
+	If FixedAsset <> Undefined Then
+		Query.Text = StrReplace(Query.Text, "&FixedAssetFilter", "FixedAsset = &FixedAsset");
+		Query.SetParameter("FixedAsset" , FixedAsset);
+	Else
+		Query.Text = StrReplace(Query.Text, "&FixedAssetFilter", "TRUE");
+	EndIf;
 	
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
@@ -297,7 +332,7 @@ Function GetCalculations(Ref, Date, Company, Branch) Export
 		Row.Key = New UUID();
 		
 		// last month
-		If EndOfMonth(Row.FinishDate) = EndOfMonth(Date) Then
+		If EndOfMonth(Row.FinishDate) = EndOfMonth(EndOfMonth(Date) + 1) Then
 			Row.Amount = Row.AmountBalance;
 			Continue;
 		EndIf;
@@ -305,8 +340,9 @@ Function GetCalculations(Ref, Date, Company, Branch) Export
 		Amount = 0;
 		
 		// Straight line
-		If Row.CalculationMethod = Enums.DepreciationMethods.StraightLine Then
-			Amount = Row.AmountTurnover / Row.UsefulLife;	
+		If Row.CalculationMethod = Enums.DepreciationMethods.StraightLine
+			And Row.BalanceUsefulLife <> 0 Then
+			Amount = Row.AmountBalance / Row.BalanceUsefulLife;	
 		EndIf;
 		
 		// Declining balance
@@ -396,11 +432,11 @@ Function GetAnalytics_Expenses_Depreciation(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 

@@ -36,16 +36,16 @@ EndProcedure
 &AtClient
 Procedure AddFile(Command)
 	PutFilesDialogParameters = New PutFilesDialogParameters();
-	EndCall			= New NotifyDescription("AddFileEndCall", ThisObject);
-	ProgressCall    = New NotifyDescription("AddFileProgressCall", ThisObject);
-	BeforeStartCall = New NotifyDescription("AddFileBeforeStartCall", ThisObject);
+	EndCall			= New CallbackDescription("AddFileEndCall", ThisObject);
+	ProgressCall    = New CallbackDescription("AddFileProgressCall", ThisObject);
+	BeforeStartCall = New CallbackDescription("AddFileBeforeStartCall", ThisObject);
 	BeginPutFileToServer(EndCall, ProgressCall, BeforeStartCall, , PutFilesDialogParameters, ThisObject.UUID);
 EndProcedure
 
 &AtClient
 Procedure SaveFile(Command)
 	If Parameters.Key.IsEmpty() Then
-		QuestionToUserNotify = New NotifyDescription("SaveFileNewObjectContinue", ThisObject);
+		QuestionToUserNotify = New CallbackDescription("SaveFileNewObjectContinue", ThisObject);
 		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 		Return;
 	EndIf;
@@ -55,8 +55,8 @@ EndProcedure
 &AtClient
 Procedure Install(Command)
 	If Modified Then
-		NotifyDescription = New NotifyDescription("InstallDriver_End", ThisObject);
-		ShowQueryBox(NotifyDescription, R().QuestionToUser_001, QuestionDialogMode.YesNo);
+		CallbackDescription = New CallbackDescription("InstallDriver_End", ThisObject);
+		ShowQueryBox(CallbackDescription, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 	Else
 		InstallDriver();
 	EndIf;
@@ -120,7 +120,7 @@ Async Procedure BeginGetDriverEnd(DriverObject, Params) Export
 				Object.RevisionNumber = InterfaceRevision;
 				ThisObject.Modified = True;
 			EndIf;
-			Notify = New NotifyDescription("BeginGetDriverEndAfter", ThisObject);
+			Notify = New CallbackDescription("BeginGetDriverEndAfter", ThisObject);
 			HardwareClient.Device_GetDescription_Begin(Settings, DriverObject, Notify);
 		EndTry;
 	EndIf;
@@ -185,7 +185,7 @@ Procedure UpdateDriverStatus()
 	DriverData.Insert("Driver", Object.Ref);
 	DriverData.Insert("AddInID", Object.AddInID);
 
-	Notify = New NotifyDescription("BeginGetDriverEnd", ThisObject);
+	Notify = New CallbackDescription("BeginGetDriverEnd", ThisObject);
 	HardwareClient.BeginGetDriver(Notify, DriverData);
 EndProcedure
 
@@ -197,7 +197,7 @@ Procedure InstallDriver()
 		Return;
 	EndIf;
 
-	Notify = New NotifyDescription("InstallDriverFromZIPEnd", ThisObject);
+	Notify = New CallbackDescription("InstallDriverFromZIPEnd", ThisObject);
 
 	HardwareClient.InstallDriver(Object.Ref, Notify);
 EndProcedure

@@ -100,6 +100,28 @@ Scenario: _04010 preparation (Goods receipt)
 			| "Documents.PurchaseInvoice.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Load documents (purchase for sales)
+		When data preparation for stock reserve check for purchase for sales
+		And I execute 1C:Enterprise script at server	
+			| "Documents.SalesOrder.FindByNumber(2316).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseOrder.FindByNumber(2325).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(2502).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(2502).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(2113).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(2503).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(2504).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(2114).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(2116).GetObject().Write(DocumentWriteMode.Posting);"   |
+	And I close all client application windows
+
 
 Scenario: _040101 check preparation
 	When check preparation
@@ -117,13 +139,13 @@ Scenario: _04011 check Goods receipt movements by the Register  "R4010 Actual st
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 115 dated 12.02.2021 15:10:35'   | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| 'Document registrations records'                | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| 'Register  "R4010 Actual stocks"'               | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     |
-			| ''                                              | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    |
-			| ''                                              | 'Receipt'       | '12.02.2021 15:10:35'   | '5'           | 'Store 02'     | '36/Yellow'   | ''                     |
-			| ''                                              | 'Receipt'       | '12.02.2021 15:10:35'   | '10'          | 'Store 02'     | 'S/Yellow'    | ''                     |
+			| 'Goods receipt 115 dated 12.02.2021 15:10:35'   | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Document registrations records'                | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'               | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     | ''                     |
+			| ''                                              | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                              | 'Receipt'       | '12.02.2021 15:10:35'   | '5'           | 'Store 02'     | '36/Yellow'   | ''                     | ''                     |
+			| ''                                              | 'Receipt'       | '12.02.2021 15:10:35'   | '10'          | 'Store 02'     | 'S/Yellow'    | ''                     | ''                     |
 		And I close all client application windows
 		
 Scenario: _04012 check Goods receipt movements by the Register  "R4017 Procurement of internal supply requests" (without ISR)
@@ -213,15 +235,15 @@ Scenario: _04016 check Goods receipt with serial lot numbers movements by the Re
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 1 112 dated 20.05.2022 17:44:58'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                 | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                | 'Receipt'       | '20.05.2022 17:44:58'   | '5'           | 'Store 03'     | 'PZU'        | '8908899877'           |
-			| ''                                                | 'Receipt'       | '20.05.2022 17:44:58'   | '5'           | 'Store 03'     | 'PZU'        | '8908899879'           |
-			| ''                                                | 'Receipt'       | '20.05.2022 17:44:58'   | '10'          | 'Store 03'     | 'XL/Green'   | ''                     |
-			| ''                                                | 'Receipt'       | '20.05.2022 17:44:58'   | '10'          | 'Store 03'     | 'UNIQ'       | ''                     |
+			| 'Goods receipt 1 112 dated 20.05.2022 17:44:58'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                 | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                | 'Receipt'       | '20.05.2022 17:44:58'   | '5'           | 'Store 03'     | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                                | 'Receipt'       | '20.05.2022 17:44:58'   | '5'           | 'Store 03'     | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                                | 'Receipt'       | '20.05.2022 17:44:58'   | '10'          | 'Store 03'     | 'XL/Green'   | ''                     | ''                     |
+			| ''                                                | 'Receipt'       | '20.05.2022 17:44:58'   | '10'          | 'Store 03'     | 'UNIQ'       | ''                     | ''                     |
 		And I close all client application windows
 		
 Scenario: _04017 check Goods receipt movements by the Register  "R2013 Procurement of sales orders"
@@ -365,6 +387,138 @@ Scenario: _0401211 check Goods receipt movements by the Register  "R4017 Procure
 			| ''                                                          | '12.02.2021 15:13:11' | 'Expense'    | 'Main Company' | 'Front office' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '36/Yellow' | '5'        |	
 		And I close all client application windows
 
+Scenario: _0401220 check absence Goods receipt movements by the Register "R4012 Stock Reservation" (SalesOrder not exist)
+	And I close all client application windows
+	* Select Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '117'       |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4012 Stock Reservation"'    |	
+		And I close all client application windows
+
+Scenario: _0401221 check Goods receipt movements by the Register  "R4012 Stock Reservation" (SalesOrderExists, PurchaseOrderExists)
+	* Select Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '2 113'     |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Goods receipt 2 113 dated 11.09.2024 14:03:25' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'           | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                              | '11.09.2024 14:03:25' | 'Receipt'    | 'Store 01' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '2'        |
+			| ''                                              | '11.09.2024 14:03:25' | 'Receipt'    | 'Store 01' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '2'        |
+			| ''                                              | '11.09.2024 14:03:25' | 'Receipt'    | 'Store 01' | 'UNIQ'     | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '2'        |		
+		And I close all client application windows
+
+Scenario: _0401222 check Goods receipt movements by the Register  "R4011 Free stocks" (SalesOrderExists, PurchaseOrderExists)
+	* Select Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '2 113'     |
+	* Check movements by the Register  "R4011 Free stocks"
+		And I click "Registrations report info" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Goods receipt 2 113 dated 11.09.2024 14:03:25' | ''                    | ''           | ''         | ''         | ''         |
+			| 'Register  "R4011 Free stocks"'                 | ''                    | ''           | ''         | ''         | ''         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Quantity' |
+			| ''                                              | '11.09.2024 14:03:25' | 'Receipt'    | 'Store 01' | 'ODS'      | '2'        |
+			| ''                                              | '11.09.2024 14:03:25' | 'Receipt'    | 'Store 01' | 'ODS'      | '2'        |
+			| ''                                              | '11.09.2024 14:03:25' | 'Receipt'    | 'Store 01' | 'UNIQ'     | '2'        |
+			| ''                                              | '11.09.2024 14:03:25' | 'Expense'    | 'Store 01' | 'ODS'      | '2'        |
+			| ''                                              | '11.09.2024 14:03:25' | 'Expense'    | 'Store 01' | 'ODS'      | '2'        |
+			| ''                                              | '11.09.2024 14:03:25' | 'Expense'    | 'Store 01' | 'UNIQ'     | '2'        |		
+		And I close all client application windows
+	
+Scenario: _0401223 check Goods receipt movements by the Register  "R4012 Stock Reservation" (SalesOrderExists, PurchaseInvoiceExists)
+	* Select Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '2 114'     |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Goods receipt 2 114 dated 11.09.2024 14:07:20' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'           | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                              | '11.09.2024 14:07:20' | 'Receipt'    | 'Store 02' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |
+		And I close all client application windows
+
+Scenario: _0401224 check Goods receipt movements by the Register  "R4011 Free stocks" (SalesOrderExists, PurchaseInvoiceExists)
+	* Select Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '2 114'     |
+	* Check movements by the Register  "R4011 Free stocks"
+		And I click "Registrations report info" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Goods receipt 2 114 dated 11.09.2024 14:07:20' | ''                    | ''           | ''         | ''         | ''         |
+			| 'Register  "R4011 Free stocks"'                 | ''                    | ''           | ''         | ''         | ''         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Quantity' |
+			| ''                                              | '11.09.2024 14:07:20' | 'Receipt'    | 'Store 02' | 'ODS'      | '3'        |
+			| ''                                              | '11.09.2024 14:07:20' | 'Expense'    | 'Store 02' | 'ODS'      | '3'        |	
+		And I close all client application windows
+
+Scenario: _0401225 check Goods receipt movements by the Register  "R4011 Free stocks" (InventoryTransferExists, SalesOrderExist)
+	* Select Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '2 116'     |
+	* Check movements by the Register  "R4011 Free stocks"
+		And I click "Registrations report info" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Goods receipt 2 116 dated 11.09.2024 16:35:35' | ''                    | ''           | ''         | ''         | ''         |
+			| 'Register  "R4011 Free stocks"'                 | ''                    | ''           | ''         | ''         | ''         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Quantity' |
+			| ''                                              | '11.09.2024 16:35:35' | 'Receipt'    | 'Store 01' | 'ODS'      | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Receipt'    | 'Store 01' | 'ODS'      | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Receipt'    | 'Store 01' | 'UNIQ'     | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Expense'    | 'Store 01' | 'ODS'      | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Expense'    | 'Store 01' | 'ODS'      | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Expense'    | 'Store 01' | 'UNIQ'     | '3'        |		
+		And I close all client application windows
+
+Scenario: _0401226 check Goods receipt movements by the Register  "R4012 Stock Reservation" (InventoryTransferExists, SalesOrderExist)
+	* Select Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '2 116'     |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Goods receipt 2 116 dated 11.09.2024 16:35:35' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'           | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                              | '11.09.2024 16:35:35' | 'Receipt'    | 'Store 01' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Receipt'    | 'Store 01' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Receipt'    | 'Store 01' | 'UNIQ'     | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |		
+		And I close all client application windows
+
 Scenario: _0401219 Goods receipt clear posting/mark for deletion
 	* Select Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
@@ -425,3 +579,20 @@ Scenario: _0401219 Goods receipt clear posting/mark for deletion
 			| 'R4010 Actual stocks'    |
 			| 'R4011 Free stocks'      |
 		And I close all client application windows
+
+Scenario: _0401227 check Goods receipt movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+	And I go to line in "List" table
+		| 'Number' |
+		| '115'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Goods receipt 115 dated 12.02.2021 15:10:35' | ''                                            | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'       | ''                                            | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                            | 'Document'                                    | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                            | 'Goods receipt 115 dated 12.02.2021 15:10:35' | '12.02.2021 15:10:35' | '115'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

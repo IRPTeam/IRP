@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsOrder>
+    <orderFragments>
+      <group>NavigationPanelOrdinary</group>
+      <commands>CommonCommand.OpenCompanies</commands>
+      <commands>Catalog.Stores.StandardCommand.OpenList</commands>
+      <commands>Catalog.Incoterms.StandardCommand.OpenList</commands>
+      <commands>Catalog.CancelReturnReasons.StandardCommand.OpenList</commands>
+      <commands>Catalog.PrintInfo.StandardCommand.OpenList</commands>
+    </orderFragments>
+  </commandsOrder>
+</cmi:CommandInterface>

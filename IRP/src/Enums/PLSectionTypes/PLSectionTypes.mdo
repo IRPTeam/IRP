@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bf0a5e96-7f18-49d7-af2f-d9e052e99770">
+ <producedTypes>
+  <refType typeId="1738556d-ffa4-4ebe-a9bd-230aee296ef6" valueTypeId="5359f5f9-90b8-45ba-9a74-3fc847930bb8"/>
+  <listType typeId="0a7fe1f2-c5d9-4211-a047-12051da6590d" valueTypeId="3386fc26-34f0-43be-b909-f70b5614dfe7"/>
+  <managerType typeId="a2323503-5a76-4535-8eb2-6760ffe228ff" valueTypeId="60fafd17-ff3e-4fa7-b403-3ef5cfa53b9b"/>
+ </producedTypes>
+ <name>PLSectionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>1102FC0E-C27D-7536-6128-8F81A9F1D960</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="7ccc7675-7da8-4e54-9f60-4e4d5f6e38b4">
+  <name>DataSelection</name>
+  <synonym>
+   <key>en</key>
+   <value>7FA066D8-511C-4EC5-591D-D46AB26C63D7</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="4933d08e-d0c9-4906-a083-4ab13b8654ac">
+  <name>Calculation</name>
+  <synonym>
+   <key>en</key>
+   <value>6227AAD1-E2F8-4B05-58A4-45C636B36276</value>
+  </synonym>
+ </enumValues>
+</mdclass:Enum>

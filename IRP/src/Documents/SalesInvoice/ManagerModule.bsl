@@ -181,6 +181,11 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+	
+	If Ref.TransactionType = Enums.SalesTransactionTypes.CurrencyRevaluationCustomer 
+		Or Ref.TransactionType = Enums.SalesTransactionTypes.CurrencyRevaluationVendor Then
+		CurrenciesServer.CurrencyRevaluationInvoice(Ref, Parameters, "R2021B_CustomersTransactions", AddInfo);
+	EndIf;
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -223,8 +228,7 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
-		"Document.SalesInvoice.ItemList");
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.SalesInvoice.ItemList");
 
 	If Not Unposting And Ref.Agreement.UseCreditLimit Then
 		CreditLimitsServer.CheckCreditLimit(Ref, Cancel);
@@ -234,22 +238,48 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		Return;
 	EndIf;
 
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	Current_R4050B_StockInventory = PostingServer.GetQueryTableByName("R4050B_StockInventory", Parameters);
+	Exists_R4050B_StockInventory  = PostingServer.GetQueryTableByName("Exists_R4050B_StockInventory", Parameters);
+	
+	Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory);
+	Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory);
+	
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
-	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4014B_SerialLotNumber", Parameters), AccumulationRecordType.Expense, Unposting, AddInfo) Then
+	R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters);
+	Exists_R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters);
+	
+	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, 
+		LineNumberAndItemKeyFromItemList,
+		R4014B_SerialLotNumber,
+		Exists_R4014B_SerialLotNumber, 
+		AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 
-	If Not Cancel And Not AccReg.R2001T_Sales.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R2001T_Sales", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R2001T_Sales", Parameters), AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+	R2001T_Sales = PostingServer.GetQueryTableByName("R2001T_Sales", Parameters);
+	Exists_R2001T_Sales = PostingServer.GetQueryTableByName("Exists_R2001T_Sales", Parameters);
+	
+	If Not Cancel And Not AccReg.R2001T_Sales.CheckBalance(Ref, 
+		LineNumberAndItemKeyFromItemList,
+		R2001T_Sales, 
+		Exists_R2001T_Sales, 
+		AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
+	
+	Current_R6080T_OtherPeriodsRevenues = PostingServer.GetQueryTableByName("R6080T_OtherPeriodsRevenues", Parameters);
+	Exists_R6080T_OtherPeriodsRevenues  = PostingServer.GetQueryTableByName("Exists_R6080T_OtherPeriodsRevenues", Parameters);
+	
+	If Not Cancel 
+		And Not AccReg.R6080T_OtherPeriodsRevenues.CheckBalance(Ref, 
+			Current_R6080T_OtherPeriodsRevenues, 
+			Exists_R6080T_OtherPeriodsRevenues, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;	
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.SalesInvoice.ItemList", AddInfo);
 EndProcedure
@@ -269,6 +299,11 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	_LandedCostCurrency = Undefined;
+	If ValueIsFilled(Ref.Company.LandedCostCurrencyMovementType) Then
+		_LandedCostCurrency = Ref.Company.LandedCostCurrencyMovementType.Currency;
+	EndIf;
+	StrParams.Insert("LandedCostCurrency", _LandedCostCurrency);	
 	If ValueIsFilled(Ref) Then
 		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
 	Else
@@ -285,10 +320,13 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(OffersInfo());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(SourceOfOrigins());
+	QueryArray.Add(OrderItemList());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	QueryArray.Add(PostingServer.Exists_R2001T_Sales());
+	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
+	QueryArray.Add(PostingServer.Exists_R6080T_OtherPeriodsRevenues());
 	Return QueryArray;
 EndFunction
 
@@ -314,6 +352,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(R6080T_OtherPeriodsRevenues());
 	QueryArray.Add(R8014T_ConsignorSales());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
@@ -323,6 +362,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
 	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());	
+	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
 
@@ -331,114 +372,125 @@ EndFunction
 #Region Posting_SourceTable
 
 Function ItemList()
-	Return "SELECT
-	       |	RowIDInfo.Ref AS Ref,
-	       |	RowIDInfo.Key AS Key,
-	       |	MAX(RowIDInfo.RowID) AS RowID
-	       |INTO TableRowIDInfo
-	       |FROM
-	       |	Document.SalesInvoice.RowIDInfo AS RowIDInfo
-	       |WHERE
-	       |	RowIDInfo.Ref = &Ref
-	       |
-	       |GROUP BY
-	       |	RowIDInfo.Ref,
-	       |	RowIDInfo.Key
-	       |;
-	       |
-	       |////////////////////////////////////////////////////////////////////////////////
-	       |SELECT
-	       |	ShipmentConfirmations.Key AS Key
-	       |INTO ShipmentConfirmations
-	       |FROM
-	       |	Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
-	       |WHERE
-	       |	ShipmentConfirmations.Ref = &Ref
-	       |
-	       |GROUP BY
-	       |	ShipmentConfirmations.Key
-	       |;
-	       |
-	       |////////////////////////////////////////////////////////////////////////////////
-	       |SELECT
-	       |	SalesInvoiceItemList.Ref.Company AS Company,
-	       |	SalesInvoiceItemList.Store AS Store,
-	       |	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
-	       |	SalesInvoiceItemList.Ref AS Invoice,
-	       |	SalesInvoiceItemList.ItemKey AS ItemKey,
-	       |	SalesInvoiceItemList.Quantity AS UnitQuantity,
-	       |	SalesInvoiceItemList.QuantityInBaseUnit AS Quantity,
-	       |	SalesInvoiceItemList.TotalAmount AS Amount,
-	       |	SalesInvoiceItemList.Ref.Partner AS Partner,
-	       |	SalesInvoiceItemList.Ref.LegalName AS LegalName,
-	       |	CASE
-	       |		WHEN SalesInvoiceItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-	       |				AND SalesInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-	       |			THEN SalesInvoiceItemList.Ref.Agreement.StandardAgreement
-	       |		ELSE SalesInvoiceItemList.Ref.Agreement
-	       |	END AS Agreement,
-	       |	SalesInvoiceItemList.Ref.Currency AS Currency,
-	       |	SalesInvoiceItemList.Unit AS Unit,
-	       |	SalesInvoiceItemList.Ref.Date AS Period,
-	       |	SalesInvoiceItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
-	       |	SalesInvoiceItemList.SalesOrder AS SalesOrder,
-	       |	CASE
-	       |		WHEN SalesInvoiceItemList.Ref.Agreement.UseOrdersForSettlements
-	       |			THEN SalesInvoiceItemList.SalesOrder
-	       |		ELSE UNDEFINED
-	       |	END AS SalesOrderSettlements,
-	       |	NOT SalesInvoiceItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
-	       |	TableRowIDInfo.RowID AS RowKey,
-	       |	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
-	       |	SalesInvoiceItemList.IsService AS IsService,
-	       |	SalesInvoiceItemList.ProfitLossCenter AS ProfitLossCenter,
-	       |	SalesInvoiceItemList.RevenueType AS RevenueType,
-	       |	SalesInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
-	       |	CASE
-	       |		WHEN SalesInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-	       |			THEN SalesInvoiceItemList.Ref
-	       |		ELSE UNDEFINED
-	       |	END AS Basis,
-	       |	SalesInvoiceItemList.NetAmount AS NetAmount,
-	       |	SalesInvoiceItemList.OffersAmount AS OffersAmount,
-	       |	SalesInvoiceItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
-	       |	SalesInvoiceItemList.Key AS Key,
-	       |	SalesInvoiceItemList.Ref.Branch AS Branch,
-	       |	SalesInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
-	       |	SalesInvoiceItemList.PriceType AS PriceType,
-	       |	SalesInvoiceItemList.Price AS Price,
-	       |	SalesInvoiceItemList.SalesPerson AS SalesPerson,
-	       |	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
-	       |	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
-	       |	SalesInvoiceItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
-	       |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
-	       |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
-	       |	SalesInvoiceItemList.InventoryOrigin AS InventoryOrigin,
-	       |	SalesInvoiceItemList.VatRate AS VatRate,
-	       |	SalesInvoiceItemList.TaxAmount AS TaxAmount,
-	       |	SalesInvoiceItemList.Project AS Project,
-	       |	SalesInvoiceItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType
-	       |INTO ItemList
-	       |FROM
-	       |	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
-	       |		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
-	       |		ON SalesInvoiceItemList.Key = ShipmentConfirmations.Key
-	       |		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
-	       |		ON SalesInvoiceItemList.Key = TableRowIDInfo.Key
-	       |WHERE
-	       |	SalesInvoiceItemList.Ref = &Ref
-	       |;
-	       |
-	       |////////////////////////////////////////////////////////////////////////////////
-	       |SELECT
-	       |	SalesInvoiceShipmentConfirmations.Key AS Key,
-	       |	SalesInvoiceShipmentConfirmations.ShipmentConfirmation AS ShipmentConfirmation,
-	       |	SalesInvoiceShipmentConfirmations.Quantity AS Quantity
-	       |INTO ShipmentConfirmationsInfo
-	       |FROM
-	       |	Document.SalesInvoice.ShipmentConfirmations AS SalesInvoiceShipmentConfirmations
-	       |WHERE
-	       |	SalesInvoiceShipmentConfirmations.Ref = &Ref";
+	Return 
+		"SELECT
+		|	RowIDInfo.Ref AS Ref,
+		|	RowIDInfo.Key AS Key,
+		|	MAX(RowIDInfo.RowID) AS RowID
+		|INTO TableRowIDInfo
+		|FROM
+		|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|GROUP BY
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ShipmentConfirmations.Key AS Key
+		|INTO ShipmentConfirmations
+		|FROM
+		|	Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
+		|WHERE
+		|	ShipmentConfirmations.Ref = &Ref
+		|GROUP BY
+		|	ShipmentConfirmations.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Store AS Store,
+		|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
+		|	ItemList.Ref AS Invoice,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Quantity AS UnitQuantity,
+		|	ItemList.QuantityInBaseUnit AS Quantity,
+		|	ItemList.TotalAmount AS Amount,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.LegalName AS LegalName,
+		|	CASE
+		|		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN ItemList.Ref.Agreement.StandardAgreement
+		|		ELSE ItemList.Ref.Agreement
+		|	END AS Agreement,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Unit AS Unit,
+		|	ItemList.Ref.Date AS Period,
+		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
+		|	ItemList.SalesOrder AS SalesOrder,
+		|	CASE
+		|		WHEN ItemList.Ref.Agreement.UseOrdersForSettlements
+		|			THEN ItemList.SalesOrder
+		|		ELSE UNDEFINED
+		|	END AS SalesOrderSettlements,
+		|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
+		|	TableRowIDInfo.RowID AS RowKey,
+		|	ItemList.DeliveryDate AS DeliveryDate,
+		|	ItemList.IsService AS IsService,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	CASE
+		|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN ItemList.Ref
+		|		ELSE UNDEFINED
+		|	END AS Basis,
+		|	ItemList.NetAmount AS NetAmount,
+		|	ItemList.OffersAmount AS OffersAmount,
+		|	ItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
+		|	ItemList.Key AS Key,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract,
+		|	ItemList.PriceType AS PriceType,
+		|	ItemList.Price AS Price,
+		|	ItemList.SalesPerson AS SalesPerson,
+		|	(ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales)
+		|	OR ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.CurrencyRevaluationCustomer)
+		|	OR ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.CurrencyRevaluationVendor)) AS IsSales,
+		|	ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
+		|	ItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
+		|	ItemList.InventoryOrigin AS InventoryOrigin,
+		|	ItemList.VatRate AS VatRate,
+		|	ItemList.TaxAmount AS TaxAmount,
+		|	ItemList.Project AS Project,
+		|	ItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType,
+		|	case
+		|		when ItemList.ItemKey = ItemList.Ref.Company.CurrencyRevaluationItemKey
+		|			then true
+		|		else false
+		|	end AS IsCurrencyRevaluation,
+		|	ISNULL(ItemList.Ref.CurrencyRevaluationInvoice.Ref, Undefined) AS CurrencyRevaluationInvoice,
+		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
+		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.TradeAgent) AS IsTradeAgent,
+		|	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
+		|   ItemList.SimpleBatch AS SimpleBatch
+		|INTO ItemList
+		|FROM
+		|	Document.SalesInvoice.ItemList AS ItemList
+		|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
+		|		ON ItemList.Key = ShipmentConfirmations.Key
+		|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+		|		ON ItemList.Key = TableRowIDInfo.Key
+		|WHERE
+		|	ItemList.Ref = &Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ShipmentConfirmations.Key AS Key,
+		|	ShipmentConfirmations.ShipmentConfirmation AS ShipmentConfirmation,
+		|	ShipmentConfirmations.Quantity AS Quantity
+		|INTO ShipmentConfirmationsInfo
+		|FROM
+		|	Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
+		|WHERE
+		|	ShipmentConfirmations.Ref = &Ref";
 EndFunction
 
 Function ItemListLandedCost()
@@ -555,6 +607,99 @@ Function SourceOfOrigins()
 		   |	SourceOfOrigins.SerialLotNumber";
 EndFunction
 
+Function OrderItemList()
+	Return
+		"SELECT
+		|	RowIDInfo.RowRef,
+		|	MAX(RowIDInfo.RowID) AS RowID,
+		|	RowIDInfo.Key
+		|INTO OrderItemList_tmp1
+		|FROM
+		|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|GROUP BY
+		|	RowIDInfo.RowRef,
+		|	RowIDInfo.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Key,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.SalesOrder,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.Quantity,
+		|	ItemList.IsService,
+		|	ItemList.UseShipmentConfirmation,
+		|	ItemList.SalesOrderExists,
+		|	ItemList.ShipmentConfirmationExists,
+		|	ItemList.Currency,
+		|	ItemList.Amount,
+		|	ItemList.NetAmount
+		|INTO OrderItemList_tmp2
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesOrderExists
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp1.RowRef,
+		|	tmp2.Period,
+		|	tmp2.Company,
+		|	tmp2.Branch,
+		|	tmp2.SalesOrder,
+		|	tmp2.ItemKey,
+		|	tmp2.RowKey,
+		|	tmp2.Quantity,
+		|	tmp2.IsService,
+		|	tmp2.UseShipmentConfirmation,
+		|	tmp2.SalesOrderExists,
+		|	tmp2.ShipmentConfirmationExists,
+		|	tmp2.Currency,
+		|	tmp2.Amount,
+		|	tmp2.NetAmount
+		|INTO OrderItemList_tmp3
+		|FROM
+		|	OrderItemList_tmp1 AS tmp1
+		|		INNER JOIN OrderItemList_tmp2 AS tmp2
+		|		ON tmp1.Key = tmp2.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmp3.Period,
+		|	tmp3.Company,
+		|	tmp3.Branch,
+		|	tmp3.SalesOrder,
+		|	tmp3.ItemKey,
+		|	tmp3.RowKey,
+		|	tmp3.Quantity,
+		|	tmp3.IsService,
+		|	tmp3.UseShipmentConfirmation,
+		|	tmp3.SalesOrderExists,
+		|	tmp3.ShipmentConfirmationExists,
+		|	tmp3.Currency,
+		|	tmp3.Amount,
+		|	tmp3.NetAmount,
+		|	SalesOrderItemList.ItemKey AS OrderItemKey
+		|INTO OrderItemList
+		|FROM
+		|	OrderItemList_tmp3 AS tmp3
+		|		INNER JOIN Document.SalesOrder.RowIDInfo AS SalesOrderRowIDInfo
+		|		ON SalesOrderRowIDInfo.RowRef = tmp3.RowRef
+		|		INNER JOIN Document.SalesOrder.ItemList AS SalesOrderItemList
+		|		ON SalesOrderItemList.Key = SalesOrderRowIDInfo.Key
+		|		AND SalesOrderItemList.Ref = tmp3.SalesOrder
+		|		AND SalesOrderItemList.IsVariableItemKey
+		|		AND SalesOrderItemList.ItemKey <> tmp3.ItemKey";	
+EndFunction
+
 #EndRegion
 
 #Region Posting_MainTables
@@ -625,38 +770,121 @@ Function R2005T_SalesSpecialOffers()
 EndFunction
 
 Function R2011B_SalesOrdersShipment()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.SalesOrder AS Order,
-		   |	*
-		   |INTO R2011B_SalesOrdersShipment
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND NOT ItemList.UseShipmentConfirmation
-		   |	AND ItemList.SalesOrderExists
-		   |	AND NOT ItemList.ShipmentConfirmationExists";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.SalesOrder AS Order,
+		|	ItemList.OrderItemKey AS ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.Quantity
+		|INTO R2011B_SalesOrdersShipment
+		|FROM
+		|	OrderItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseShipmentConfirmation
+		|	AND ItemList.SalesOrderExists
+		|	AND NOT ItemList.ShipmentConfirmationExists
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.SalesOrder,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.Quantity
+		|FROM
+		|	OrderItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseShipmentConfirmation
+		|	AND ItemList.SalesOrderExists
+		|	AND NOT ItemList.ShipmentConfirmationExists
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.SalesOrder,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseShipmentConfirmation
+		|	AND ItemList.SalesOrderExists
+		|	AND NOT ItemList.ShipmentConfirmationExists";
 EndFunction
 
 Function R2012B_SalesOrdersInvoiceClosing()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Period AS Period,
-		   |	ItemList.Company AS Company,
-		   |	ItemList.Branch AS Branch,
-		   |	ItemList.SalesOrder AS Order,
-		   |	ItemList.Currency AS Currency,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	ItemList.RowKey AS RowKey,
-		   |	ItemList.Quantity AS Quantity,
-		   |	ItemList.Amount AS Amount,
-		   |	ItemList.NetAmount AS NetAmount
-		   |INTO R2012B_SalesOrdersInvoiceClosing
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.SalesOrderExists";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period AS Period,
+		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
+		|	ItemList.SalesOrder AS Order,
+		|	ItemList.Currency AS Currency,
+		|	ItemList.OrderItemKey AS ItemKey,
+		|	ItemList.RowKey AS RowKey,
+		|	ItemList.Quantity AS Quantity,
+		|	ItemList.Amount AS Amount,
+		|	ItemList.NetAmount AS NetAmount
+		|INTO R2012B_SalesOrdersInvoiceClosing
+		|FROM
+		|	OrderItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesOrderExists
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.SalesOrder,
+		|	ItemList.Currency,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.Quantity,
+		|	ItemList.Amount,
+		|	ItemList.NetAmount
+		|FROM
+		|	OrderItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesOrderExists
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.SalesOrder,
+		|	ItemList.Currency,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.Quantity,
+		|	ItemList.Amount,
+		|	ItemList.NetAmount
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesOrderExists";
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
@@ -724,89 +952,123 @@ Function R2040B_TaxesIncoming()
 		|	ItemList.Currency,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
-		|	ItemList.TaxAmount AS Amount,
+		|	SUM(ItemList.TaxAmount) AS Amount,
 		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType
 		|INTO R2040B_TaxesIncoming
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.IsSales
-		|	AND ItemList.TaxAmount <> 0";
+		|	AND ItemList.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.VatRate,
+		|	VALUE(Enum.InvoiceType.Invoice)";
 EndFunction
 
 Function R4010B_ActualStocks()
 	Return 
 		"SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END AS SerialLotNumber,
-		   |	SUM(CASE
-		   |		WHEN SerialLotNumbers.SerialLotNumber IS NULL
-		   |			THEN ItemList.Quantity
-		   |		ELSE SerialLotNumbers.Quantity
-		   |	END) AS Quantity
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
-		   |		ON ItemList.Key = SerialLotNumbers.Key
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND NOT ItemList.UseShipmentConfirmation
-		   |	AND NOT ItemList.ShipmentConfirmationExists
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.TradeAgentStore,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END AS SerialLotNumber,
-		   |	SUM(CASE
-		   |		WHEN SerialLotNumbers.SerialLotNumber IS NULL
-		   |			THEN ItemList.Quantity
-		   |		ELSE SerialLotNumbers.Quantity
-		   |	END) AS Quantity
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
-		   |		ON ItemList.Key = SerialLotNumbers.Key
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND NOT ItemList.UseShipmentConfirmation
-		   |	AND NOT ItemList.ShipmentConfirmationExists
-		   |	AND ItemList.IsShipmentToTradeAgent
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.TradeAgentStore,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END";
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end AS SourceOfOrigin,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|		left join SourceOfOrigins AS SourceOfOrigins
+		|		on ItemList.Key = SourceOfOrigins.Key
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseShipmentConfirmation
+		|	AND NOT ItemList.ShipmentConfirmationExists
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end AS SourceOfOrigin,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|		left join SourceOfOrigins AS SourceOfOrigins
+		|		on ItemList.Key = SourceOfOrigins.Key
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseShipmentConfirmation
+		|	AND NOT ItemList.ShipmentConfirmationExists
+		|	AND ItemList.IsShipmentToTradeAgent
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END";
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -1135,6 +1397,48 @@ Function R5021T_Revenues()
 	|	AND ItemList.OtherPeriodRevenueType = VALUE(ENUM.OtherPeriodRevenueType.EmptyRef)";
 EndFunction
 
+Function R5022T_Expenses()
+	Return 
+		"SELECT
+		|	WriteOffBatchesInfo.Period,
+		|	WriteOffBatchesInfo.Company,
+		|	WriteOffBatchesInfo.Branch,
+		|	WriteOffBatchesInfo.ProfitLossCenter,
+		|	WriteOffBatchesInfo.ExpenseType,
+		|	WriteOffBatchesInfo.ItemKey,
+		|	WriteOffBatchesInfo.Currency,
+		|	WriteOffBatchesInfo.RowID AS Key,
+		|	WriteOffBatchesInfo.Recorder AS CalculationMovementCost,
+		|
+		|	WriteOffBatchesInfo.InvoiceAmount
+		|	+WriteOffBatchesInfo.PreliminaryAmount
+		|	+WriteOffBatchesInfo.IndirectCostAmount
+	    |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
+	    |	+WriteOffBatchesInfo.ExtraDirectCostAmount
+	    |	+WriteOffBatchesInfo.AllocatedCostAmount
+	    |	-WriteOffBatchesInfo.AllocatedRevenueAmount AS Amount,
+	    |
+	    |	WriteOffBatchesInfo.InvoiceAmount
+	    |	+WriteOffBatchesInfo.PreliminaryAmount
+	    |	+WriteOffBatchesInfo.InvoiceTaxAmount
+	    |	+WriteOffBatchesInfo.PreliminaryTaxAmount
+	    |	+WriteOffBatchesInfo.IndirectCostAmount
+	    |	+WriteOffBatchesInfo.IndirectCostTaxAmount
+	    |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
+	    |	+WriteOffBatchesInfo.ExtraCostTaxAmountByRatio
+	    |	+WriteOffBatchesInfo.ExtraDirectCostAmount
+	    |	+WriteOffBatchesInfo.ExtraDirectCostTaxAmount
+	    |	+WriteOffBatchesInfo.AllocatedCostAmount
+	    |	+WriteOffBatchesInfo.AllocatedCostTaxAmount
+	    |	-WriteOffBatchesInfo.AllocatedRevenueAmount
+	    |	-WriteOffBatchesInfo.AllocatedRevenueTaxAmount AS AmountWithTaxes
+		|INTO R5022T_Expenses
+		|FROM
+		|	InformationRegister.T6095S_WriteOffBatchesInfo AS WriteOffBatchesInfo
+		|WHERE
+		|	WriteOffBatchesInfo.Document = &Ref";
+EndFunction
+
 Function T3010S_RowIDInfo()
 	Return "SELECT
 		   |	RowIDInfo.RowRef AS RowRef,
@@ -1176,6 +1480,8 @@ Function R6080T_OtherPeriodsRevenues()
 		|			THEN ItemList.ItemKey
 		|	END AS ItemKey,
 		|	ItemList.Currency AS Currency,
+		|	ItemList.RevenueType,
+		|	ItemList.ProfitLossCenter,
 		|	ItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType,
 		|	ItemList.NetAmount AS Amount,
 		|	CASE
@@ -1196,7 +1502,10 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Key,
 		|	ItemList.ItemKey,
 		|	ItemList.Store,
+		|	ItemList.Branch,
 		|	ItemList.Company,
+		|	ItemList.ProfitLossCenter,
+		|	&LandedCostCurrency AS Currency,
 		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorBatches,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Period,
@@ -1213,7 +1522,10 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Key,
 		|	ItemList.ItemKey,
 		|	ItemList.TradeAgentStore,
+		|	ItemList.Branch,
 		|	ItemList.Company,
+		|	ItemList.ProfitLossCenter,
+		|	&LandedCostCurrency AS Currency,
 		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorBatches,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Period,
@@ -1230,7 +1542,10 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.Store,
+		|	BatchKeysInfo_1.Branch,
 		|	BatchKeysInfo_1.Company,
+		|	BatchKeysInfo_1.ProfitLossCenter,
+		|	BatchKeysInfo_1.Currency,
 		|	CASE
 		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
 		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
@@ -1251,7 +1566,10 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	BatchKeysInfo_2.ItemKey,
 		|	BatchKeysInfo_2.TradeAgentStore,
+		|	BatchKeysInfo_2.Branch,
 		|	BatchKeysInfo_2.Company,
+		|	BatchKeysInfo_2.ProfitLossCenter,
+		|	BatchKeysInfo_2.Currency,
 		|	CASE
 		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
 		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
@@ -1271,7 +1589,10 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	BatchKeysInfo.ItemKey,
 		|	BatchKeysInfo.Store,
+		|	BatchKeysInfo.Branch,
 		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.ProfitLossCenter,
+		|	BatchKeysInfo.Currency,
 		|	SUM(ISNULL(BatchKeysInfo.Quantity, 0)) AS Quantity,
 		|	BatchKeysInfo.Period,
 		|	BatchKeysInfo.Direction,
@@ -1285,7 +1606,10 @@ Function T6020S_BatchKeysInfo()
 		|GROUP BY
 		|	BatchKeysInfo.ItemKey,
 		|	BatchKeysInfo.Store,
+		|	BatchKeysInfo.Branch,
 		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.ProfitLossCenter,
+		|	BatchKeysInfo.Currency,
 		|	BatchKeysInfo.Period,
 		|	BatchKeysInfo.Direction,
 		|	BatchKeysInfo.SourceOfOrigin,
@@ -1322,6 +1646,60 @@ Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_SI();
 EndFunction
 		 
+Function R5015B_OtherPartnersTransactions()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Agreement,
+		|	ItemList.Basis,
+		|	ItemList.Key,
+		|	SUM(ItemList.Amount) AS Amount
+		|INTO R5015B_OtherPartnersTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsOther
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Agreement,
+		|	ItemList.Basis,
+		|	ItemList.Key";
+EndFunction
+	
+Function R6025B_SimpleBatch()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	0 AS Amount
+	|INTO R6025B_SimpleBatch
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
+	|		ON TRUE
+	|WHERE
+	|	NOT ItemList.IsService
+	|	AND NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	AND UseSimpleBatch.Value
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	VALUE(AccumulationRecordType.Expense)";
+EndFunction
 #EndRegion
 
 #Region AccessObject
@@ -1438,8 +1816,11 @@ Function GetAnalytics_RevenueFromSales(Parameters)
 	                                                   Parameters.ObjectData.Partner, 
 	                                                   Parameters.ObjectData.Agreement,
 	                                                   Parameters.ObjectData.Currency);
-	                                                   
-	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
+	If Parameters.ObjectData.Agreement.Type = Enums.AgreementTypes.Other Then
+		AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
+	Else                           
+		AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
+	EndIf;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
@@ -1467,8 +1848,11 @@ Function GetAnalytics_VATIncoming(Parameters)
 	                                                   Parameters.ObjectData.Partner, 
 	                                                   Parameters.ObjectData.Agreement,
 	                                                   Parameters.ObjectData.Currency);
-	                                                   
-	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
+	If Parameters.ObjectData.Agreement.Type = Enums.AgreementTypes.Other Then
+		AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
+	Else                           
+		AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
+	EndIf;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
@@ -1528,14 +1912,32 @@ Function GetAnalytics_DR_R5022T_CR_R4050B(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
 #EndRegion
+
+#EndRegion
+
+#Region SystemAttributes
+
+Function GetPredefinedSystemAttributes() Export
+	SystemAttributes = New Array(); // Array of ChartOfCharacteristicTypesRef.SystemAttributes
+	SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.Store);
+	Return SystemAttributes;
+EndFunction
+
+Function GetSystemAttributeValues(Obj, SystemAttribute) Export
+	Values = New Array();
+	If SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.Store Then
+		Values = Obj.ItemList.Unload(, "Store").UnloadColumn("Store");
+	EndIf;
+	Return Values;
+EndFunction
 
 #EndRegion

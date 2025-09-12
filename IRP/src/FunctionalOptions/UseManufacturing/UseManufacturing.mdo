@@ -18,5 +18,4 @@
  <content>Catalog.BusinessUnits.Attribute.Workshop</content>
  <content>Document.ProductionCostsAllocation</content>
  <content>Catalog.BillOfMaterials</content>
- <content>Subsystem.Reports.Subsystem.Manufacturing</content>
 </mdclass:FunctionalOption>

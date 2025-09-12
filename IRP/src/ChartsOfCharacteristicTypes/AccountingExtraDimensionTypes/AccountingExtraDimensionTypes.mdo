@@ -21,19 +21,21 @@
   <key>en</key>
   <value>9BAA346F-E96C-EABF-F86D-DD49B1793950</value>
  </objectPresentation>
+ <characteristicExtValues>Catalog.ExtDimensions</characteristicExtValues>
  <type>
   <types>CatalogRef.Companies</types>
   <types>CatalogRef.LegalNameContracts</types>
   <types>CatalogRef.CashAccounts</types>
   <types>CatalogRef.ExpenseAndRevenueTypes</types>
   <types>CatalogRef.Partners</types>
+  <types>CatalogRef.FixedAssets</types>
   <types>CatalogRef.Items</types>
   <types>CatalogRef.Agreements</types>
   <types>CatalogRef.Taxes</types>
   <types>CatalogRef.Stores</types>
   <types>CatalogRef.ItemKeys</types>
+  <types>CatalogRef.ExtDimensions</types>
   <types>CatalogRef.BusinessUnits</types>
-  <types>CatalogRef.FixedAssets</types>
  </type>
  <foldersOnTop>true</foldersOnTop>
  <codeAllowedLength>Variable</codeAllowedLength>

@@ -3,12 +3,17 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 		
-	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.ItemList);
-	For Each Row In ThisObject.ItemList Do
-		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, Row.Key, ThisObject.Currency, 0);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		
+		CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.ItemList);
+		For Each Row In ThisObject.ItemList Do
+			Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, Row.Key, ThisObject.Currency, 0);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		
+	EndIf;
+	
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
 	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);
@@ -42,7 +47,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_WS(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey");
+		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, Item, ItemKey");
 		ItemListTable.Columns.Add("Store", New TypeDescription("CatalogRef.Stores"));
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;	

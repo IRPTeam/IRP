@@ -14,7 +14,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	
 	ClearSelfRecords(Ref);
-	If ValueIsFilled(Ref.PersonalSalary) And ValueIsFilled(Ref.AccrualType) And PostingMode <> Undefined Then
+	If PostingMode <> Undefined Then
 		WriteSelfRecords(Ref);
 	EndIf;
 	
@@ -155,6 +155,8 @@ EndFunction
 
 Procedure ClearSelfRecords(Ref)
 	Query = New Query();
+	Query.SetParameter("Document", Ref);
+	
 	Query.Text =
 	"SELECT
 	|	Table.EmployeeOrPosition,
@@ -164,7 +166,6 @@ Procedure ClearSelfRecords(Ref)
 	|	InformationRegister.T9500S_AccrualAndDeductionValues AS Table
 	|WHERE
 	|	Table.Document = &Document";
-	Query.SetParameter("Document", Ref);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
@@ -176,21 +177,58 @@ Procedure ClearSelfRecords(Ref)
 		RecordSet.Clear();
 		RecordSet.Write();
 	EndDo;
+
+	Query.Text =
+	"SELECT
+	|	T9545S_VacationDaysLimits.Period,
+	|	T9545S_VacationDaysLimits.Company,
+	|	T9545S_VacationDaysLimits.Employee
+	|FROM
+	|	InformationRegister.T9545S_VacationDaysLimits AS T9545S_VacationDaysLimits
+	|WHERE
+	|	T9545S_VacationDaysLimits.Document = &Document";
+	QuerySelection = Query.Execute().Select();
+	While QuerySelection.Next() Do
+		RecordManager = InformationRegisters.T9545S_VacationDaysLimits.CreateRecordManager();
+		RecordManager.Period = QuerySelection.Period;
+		RecordManager.Company = QuerySelection.Company;
+		RecordManager.Employee = QuerySelection.Employee;
+		RecordManager.Read();
+		If RecordManager.Selected() Then
+			RecordManager.Delete();
+		EndIf;
+	EndDo;
 EndProcedure
 
 Procedure WriteSelfRecords(Ref)
-	RecordSet = InformationRegisters.T9500S_AccrualAndDeductionValues.CreateRecordSet();
-	RecordSet.Filter.EmployeeOrPosition.Set(Ref.Employee);
-	RecordSet.Filter.AccualOrDeductionType.Set(Ref.AccrualType);
-	NewRecord = RecordSet.Add();
 	
-	NewRecord.Period = Ref.Date;
-	NewRecord.EmployeeOrPosition = Ref.Employee;
-	NewRecord.AccualOrDeductionType = Ref.AccrualType;
-	NewRecord.Value = Ref.PersonalSalary;
-	NewRecord.Document = Ref;
+	If ValueIsFilled(Ref.PersonalSalary) And ValueIsFilled(Ref.AccrualType) Then
+		RecordSet = InformationRegisters.T9500S_AccrualAndDeductionValues.CreateRecordSet();
+		RecordSet.Filter.EmployeeOrPosition.Set(Ref.Employee);
+		RecordSet.Filter.AccualOrDeductionType.Set(Ref.AccrualType);
+		NewRecord = RecordSet.Add();
+		
+		NewRecord.Period = Ref.Date;
+		NewRecord.EmployeeOrPosition = Ref.Employee;
+		NewRecord.AccualOrDeductionType = Ref.AccrualType;
+		NewRecord.Value = Ref.PersonalSalary;
+		NewRecord.Document = Ref;
+		
+		RecordSet.Write();
+	EndIf;
 	
-	RecordSet.Write();
+	If Ref.VacationDayLimit > 0 Then
+		RecordManager = InformationRegisters.T9545S_VacationDaysLimits.CreateRecordManager();
+		
+		RecordManager.Period = Ref.Date;
+		RecordManager.Company = Ref.Company;
+		RecordManager.Employee = Ref.Employee;
+		RecordManager.DayLimit = Ref.VacationDayLimit;
+		RecordManager.Document = Ref;
+		
+		RecordManager.Write();
+	EndIf;
+	
 EndProcedure
 
 #EndRegion

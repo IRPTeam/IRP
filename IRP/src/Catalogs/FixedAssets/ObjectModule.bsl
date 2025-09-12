@@ -22,5 +22,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure OnCopy(CopiedObject)
-	ThisObject.InventoryNumber = "";
+	If Not ThisObject.IsFolder Then
+		ThisObject.InventoryNumber = "";
+	EndIf;
 EndProcedure

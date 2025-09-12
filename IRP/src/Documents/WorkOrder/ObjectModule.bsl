@@ -3,10 +3,21 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 	
-	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		
+		Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	
+		AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
+		AmountsInfo.TotalAmount.Value = CalculationServer.CalculateDocumentAmount(ItemList, "TotalAmount");
+		AmountsInfo.NetAmount.Value   = CalculationServer.CalculateDocumentAmount(ItemList, "NetAmount");
+		AmountsInfo.TaxAmount.Value   = CalculationServer.CalculateDocumentAmount(ItemList, "TaxAmount");
+		TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
 
+	EndIf;
+	
 	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
@@ -101,11 +112,17 @@ Procedure UndoPosting(Cancel)
 	RowIDInfoPrivileged.UndoPosting_RowIDUndoPosting(ThisObject, Cancel);
 EndProcedure
 
-Procedure Filling(FillingData, FillingText, StandardProcessing)
-	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
+Procedure Filling(FillingData, FillingText, StandardProcessing)      
+	
+	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOnType") And FillingData.BasedOnType = Documents.Issue.EmptyRef() Then
+		For Each Issue In FillingData.BasedOn Do
+			IssueList.Add().Issue = Issue;
+		EndDo;
+	
+	ElsIf TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
 		PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
 		FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 		ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
 	EndIf;
-EndProcedure
+EndProcedure       

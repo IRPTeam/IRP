@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="171a29df-fe99-4f9e-b6e7-98861625f89d">
+ <producedTypes>
+  <objectType typeId="9955543c-a5e7-470a-9118-f4350c09c823" valueTypeId="b4e5919a-fb60-4235-ad45-575bb2e2a6a4"/>
+  <managerType typeId="36b6eb76-4d50-482c-90e1-69557f7a910b" valueTypeId="d7dcfd3c-6821-45a1-bdfb-eaf8376bf572"/>
+ </producedTypes>
+ <name>R6060A_CostOfGoodsSold</name>
+ <synonym>
+  <key>en</key>
+  <value>A662B493-6964-7220-09BE-EABA399CC884</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R6060A_CostOfGoodsSold.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="98b8e39d-87a7-4aee-a96e-62155004929d">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>en</key>
+   <value>293973CE-E0AB-A17E-EE2E-EE44A82740EF</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

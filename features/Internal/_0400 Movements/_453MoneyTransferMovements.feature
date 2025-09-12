@@ -371,3 +371,20 @@ Scenario: _045311 check Money transfer movements by the Register "R3011 Cash flo
 			| ''                                           | '19.02.2022 11:18:33' | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | '178,5'  | 'No'                   |
 			| ''                                           | '19.02.2022 11:18:33' | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'EUR'      | 'en description is empty'      | '170'    | 'No'                   |
 		And I close all client application windows
+
+Scenario: _045312 check Money transfer movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Money transfer 1 dated 19.02.2022 10:35:21' | ''                                           | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'      | ''                                           | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                           | 'Document'                                   | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                           | 'Money transfer 1 dated 19.02.2022 10:35:21' | '19.02.2022 10:35:21' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

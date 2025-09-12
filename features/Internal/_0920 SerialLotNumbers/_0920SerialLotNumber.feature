@@ -1625,6 +1625,43 @@ Scenario: _0920072 check filling in serial lot number in the PurchaseReturn	from
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Dont calculate row'   | 'Tax amount'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Purchase invoice'                                | 'Purchase return order'   | 'Total amount'   | 'Store'       |
 			| 'Trousers'   | '38/Yellow'   | '0512; 0514'           | '3,000'      | 'pcs'    | 'No'                   | '183,05'       | '400,00'   | '18%'   | ''                | '1 016,95'     | 'Purchase invoice 29 dated 25.01.2021 12:37:04'   | ''                        | '1 200,00'       | 'Store 01'    |
+		And I click "Show row key" button
+		And I move to "Source of origin" tab
+		And "SourceOfOrigins" table became equal
+			| '#' | 'Key' | 'Serial lot number' | 'Source of origin' | 'Quantity' |
+			| '1' | '*'   | '0512'              | ''                 | '1,000'    |
+			| '2' | '*'   | '0514'              | ''                 | '2,000'    |
+			| '3' | '*'   | ''                  | ''                 | '1,000'    |
+		* Change PR
+			And I move to "Item list" tab
+			And I go to line in "ItemList" table
+				| "Item"     | "Item key"  | "Quantity" |
+				| "Trousers" | "38/Yellow" | "3,000"    |
+			And I select current line in "ItemList" table
+			And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+			And I go to line in "SerialLotNumbers" table
+				| "Code is approved" | "Quantity" | "Serial lot number" |
+				| "No"               | "2,000"    | "0514"              |
+			And I delete a line in "SerialLotNumbers" table
+			And I click "Ok" button
+			And I finish line editing in "ItemList" table
+			And I click "Post and close" button
+		* Create second PR
+			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+			And I go to line in "List" table
+				| 'Number'    |
+				| '29'        |
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And I click the button named "FormDocumentPurchaseReturnGenerate"
+			And I click "Ok" button
+			And I click "Show row key" button
+			And "ItemList" table became equal
+				| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Trousers' | '38/Yellow' | '0514'               | '2,000'    | '122,03'     | '677,97'     | '800,00'       |
+			And "SourceOfOrigins" table became equal
+				| '#' | 'Key' | 'Serial lot number' | 'Source of origin' | 'Quantity' |
+				| '1' | '*'   | '0514'              | ''                 | '2,000'    |
+			And I click "Post and close" button
 		And I close all client application windows
 		
 					
@@ -1710,7 +1747,7 @@ Scenario: _092008 check serial lot number in the Opening entry
 		And I close current window
 	* Clear post Opening entry and check movements
 		And I activate "$$OpeningEntry092008$$" window			
-		And I click "Cancel posting" button
+		And I click the button named "FormUndoPosting"
 		And I click "Registrations report" button		
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
@@ -2006,9 +2043,9 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
 			And "ItemList" table became equal
-				| '#'    | 'Revenue type'    | 'Amount'    | 'Item'        | 'Basis document'    | 'Item key'     | 'Profit loss center'         | 'Physical inventory'    | 'Serial lot numbers'                | 'Unit'    | 'Quantity'    | 'Amount tax'     |
-				| '1'    | 'Revenue'         | ''          | 'Trousers'    | ''                  | '38/Yellow'    | 'Distribution department'    | ''                      | '99098809009999; 99098809009008'    | 'pcs'     | '4,000'       | ''               |
-				| '2'    | 'Revenue'         | ''          | 'Boots'       | ''                  | '38/18SD'      | 'Distribution department'    | ''                      | ''                                  | 'pcs'     | '2,000'       | ''               |
+				| '#' | 'Revenue type' | 'Total amount' | 'Item'     | 'Basis document' | 'Item key'  | 'Profit loss center'      | 'Physical inventory' | 'Serial lot numbers'             | 'Unit' | 'Quantity' | 'Tax amount' |
+				| '1' | 'Revenue'      | ''             | 'Trousers' | ''               | '38/Yellow' | 'Distribution department' | ''                   | '99098809009999; 99098809009008' | 'pcs'  | '4,000'    | ''           |
+				| '2' | 'Revenue'      | ''             | 'Boots'    | ''               | '38/18SD'   | 'Distribution department' | ''                   | ''                               | 'pcs'  | '2,000'    | ''           |
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
@@ -3281,10 +3318,36 @@ Scenario: _092050 check filling in serial lot number in the GR from Purchase inv
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Purchase invoice'                                | 'Store'       |
 			| 'Trousers'   | '38/Yellow'   | '0512; 0514'           | '3,000'      | 'pcs'    | 'Purchase invoice 29 dated 25.01.2021 12:37:04'   | 'Store 01'    |
+	* Change quantity
+		And I go to line in "ItemList" table
+			| "Item"     | "Item key"  | "Serial lot numbers" |
+			| "Trousers" | "38/Yellow" | "0512; 0514"         |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And I go to line in "SerialLotNumbers" table
+			| "Quantity" | "Serial lot number" |
+			| "2,000"    | "0514"              |
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
 		And I click the button named "FormPost"
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Purchase invoice'                                | 'Store'       |
-			| 'Trousers'   | '38/Yellow'   | '0512; 0514'           | '3,000'      | 'pcs'    | 'Purchase invoice 29 dated 25.01.2021 12:37:04'   | 'Store 01'    |
+			| 'Trousers'   | '38/Yellow'   | '0512; 0514'           | '2,000'      | 'pcs'    | 'Purchase invoice 29 dated 25.01.2021 12:37:04'   | 'Store 01'    |
+	* Create second GR
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '29'        |
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Purchase invoice'                                | 'Store'       |
+			| 'Trousers'   | '38/Yellow'   | '0514'                 | '1,000'      | 'pcs'    | 'Purchase invoice 29 dated 25.01.2021 12:37:04'   | 'Store 01'    |
+		And I click the button named "FormPost"
 		And I close all client application windows	
 
 
@@ -3306,6 +3369,33 @@ Scenario: _092051 check filling in serial lot number in the SC from Sales invoic
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Sales invoice'                                   | 'Store'       |
 			| 'Trousers'   | '38/Yellow'   | '0512; 0514'           | '3,000'      | 'pcs'    | 'Sales invoice 1 029 dated 16.02.2022 13:02:27'   | 'Store 01'    |
+	* Change quantity
+		And I go to line in "ItemList" table
+			| "Item"     | "Item key"  | "Serial lot numbers" |
+			| "Trousers" | "38/Yellow" | "0512; 0514"         |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And I go to line in "SerialLotNumbers" table
+			| "Quantity" | "Serial lot number" |
+			| "2,000"    | "0514"              |
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+	* Create second SC
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 029'     |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Sales invoice'                                   | 'Store'       |
+			| 'Trousers'   | '38/Yellow'   | '0514'                 | '1,000'      | 'pcs'    | 'Sales invoice 1 029 dated 16.02.2022 13:02:27'   | 'Store 01'    |
 		And I close all client application windows
 
 Scenario: _092052 check filling in serial lot number in the SI from SC
@@ -3318,6 +3408,8 @@ Scenario: _092052 check filling in serial lot number in the SI from SC
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And I click "OK" button
+		And I select from "Partner term" drop-down list by "Basic Partner terms, TRY" string
+		And I click "OK" button	
 	* Check filling in serial lot number from SC
 		And "ItemList" table became equal
 			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Store'      | 'Use shipment confirmation'    |
@@ -3326,6 +3418,33 @@ Scenario: _092052 check filling in serial lot number in the SI from SC
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Store'      | 'Use shipment confirmation'    |
 			| 'Trousers'   | '38/Yellow'   | '0512; 0514'           | '3,000'      | 'pcs'    | 'Store 01'   | 'Yes'                          |
+	* Change quantity
+		And I go to line in "ItemList" table
+			| "Item"     | "Item key"  | "Serial lot numbers" |
+			| "Trousers" | "38/Yellow" | "0512; 0514"         |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And I go to line in "SerialLotNumbers" table
+			| "Quantity" | "Serial lot number" |
+			| "2,000"    | "0514"              |
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+	* Create second SI
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 029'     |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Store'      | 'Use shipment confirmation'    |
+			| 'Trousers'   | '38/Yellow'   | '0514'                 | '1,000'      | 'pcs'    | 'Store 01'   | 'Yes'                          |
 		And I close all client application windows
 
 Scenario: _092053 check filling in serial lot number in the PI from GR
@@ -3339,10 +3458,39 @@ Scenario: _092053 check filling in serial lot number in the PI from GR
 			| '1 029'     |
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		And I click "OK" button
+		And I select from "Partner term" drop-down list by "Vendor Ferron, TRY" string
+		And I click "OK" button
 	* Check filling in serial lot number from GR
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Store'      | 'Use goods receipt'    |
 			| 'Trousers'   | '38/Yellow'   | '0512; 0514'           | '3,000'      | 'pcs'    | 'Store 01'   | 'Yes'                  |
+	* Change quantity
+		And I go to line in "ItemList" table
+			| "Item"     | "Item key"  | "Serial lot numbers" |
+			| "Trousers" | "38/Yellow" | "0512; 0514"         |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And I go to line in "SerialLotNumbers" table
+			| "Quantity" | "Serial lot number" |
+			| "2,000"    | "0514"              |
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+	* Create second PI
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 029'     |
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity' | 'Unit' | 'Store'    | 'Use goods receipt' |
+			| 'Trousers' | '38/Yellow' | '0514'               | '1,000'    | 'pcs'  | 'Store 01' | 'Yes'               |
 		And I close all client application windows
 
 Scenario: _092054 check filling in serial lot number in the SC from IT
@@ -3359,6 +3507,34 @@ Scenario: _092054 check filling in serial lot number in the SC from IT
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Store'       |
 			| 'Trousers'   | '36/Yellow'   | '0512; 0514'           | '3,000'      | 'pcs'    | 'Store 02'    |
+	* Change quantity
+		And I go to line in "ItemList" table
+			| "Item"     | "Item key"  | "Serial lot numbers" |
+			| "Trousers" | "36/Yellow" | "0512; 0514"         |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And I go to line in "SerialLotNumbers" table
+			| "Quantity" | "Serial lot number" |
+			| "2,000"    | "0512"              |
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+	* Create second SC based on IT
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 029'     |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Store'       |
+			| 'Trousers'   | '36/Yellow'   | '0512'                 | '1,000'      | 'pcs'    | 'Store 02'    |
 		And I close all client application windows	
 
 Scenario: _092055 check filling in serial lot number in the GR from IT
@@ -3375,7 +3551,36 @@ Scenario: _092055 check filling in serial lot number in the GR from IT
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Store'       |
 			| 'Trousers'   | '36/Yellow'   | '0512; 0514'           | '3,000'      | 'pcs'    | 'Store 03'    |
+	* Change quantity
+		And I go to line in "ItemList" table
+			| "Item"     | "Item key"  | "Serial lot numbers" |
+			| "Trousers" | "36/Yellow" | "0512; 0514"         |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And I go to line in "SerialLotNumbers" table
+			| "Quantity" | "Serial lot number" |
+			| "2,000"    | "0512"              |
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+	* Create second GR based on IT
 		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 029'     |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Store'       |
+			| 'Trousers'   | '36/Yellow'   | '0512'                 | '1,000'      | 'pcs'    | 'Store 03'    |
+		And I close all client application windows
+
 
 Scenario: _092060 check serial lot number settings
 	And I close all client application windows
@@ -3388,7 +3593,6 @@ Scenario: _092060 check serial lot number settings
 	* Add reg exp
 		And I move to "Serial lot number settings" tab
 		And I set checkbox "Use serial lot number"	
-		And I select "By item key" exact value from "Stock balance detail" drop-down list
 		And in the table "RegExpSerialLotNumbersRules" I click the button named "RegExpSerialLotNumbersRulesAdd"
 		And I input "^\d\d\d\w\/\d$" text in "Reg exp" field of "RegExpSerialLotNumbersRules" table
 		And I activate "Example" field in "RegExpSerialLotNumbersRules" table
@@ -3907,6 +4111,10 @@ Scenario: _092083 check serial lot numbers in the POS
 		And I expand current line in "ItemsPickup" table
 	* Add items with serial lot numbers
 		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
 			| '(10001) Dress, XS/Blue'    |
 		And I select current line in "ItemsPickup" table
@@ -4386,10 +4594,11 @@ Scenario: _092099 check scan unique serial in the RSR
 			|'Serial lot number [ 8908899881 ] has to be unique at the document\n'|		
 	And I close all client application windows	
 		
-Scenario: _092100 check scan unique serial in the PhysicalInventory (use sln)
+Scenario: _092100 check unique serial in the PhysicalInventory (use sln)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"	
 	And I click "Create" button
+	And I select from the drop-down list named "Store" by "Store 06" string
 	* Use sln
 		And I move to "Rules" tab
 		And I set checkbox "Use serial lot"
@@ -4405,7 +4614,16 @@ Scenario: _092100 check scan unique serial in the PhysicalInventory (use sln)
 			| 'Item key' | 'Phys. count' | 'Unit' | 'Item'               |
 			| 'PZU'      | '1,000'       | 'pcs'  | 'Product 1 with SLN' |
 		Then there are lines in TestClient message log
-			|'Serial lot number [ 8908899881 ] has to be unique at the document\n'|		
+			|'Serial lot number [ 8908899881 ] has to be unique at the document\n'|	
+	* Add the same unique sln and try post document
+		And I go to line in "ItemList" table
+			| 'Item key' | 'Phys. count' | 'Unit' | 'Item'               |
+			| 'PZU'      | '1,000'       | 'pcs'  | 'Product 1 with SLN' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Serial lot number [ 8908899881 ] has to be unique at the document\n'|
 	And I close all client application windows	
 
 Scenario: _092101 check scan unique serial in the PhysicalInventory (not use sln)
@@ -4528,4 +4746,19 @@ Scenario: _092104 create a serial lot number with dependent serial lot numbers
 		And "List" table contains lines
 			| 'Serial number'   |
 			| '90899808089'     |
+	And I close all client application windows
+
+Scenario: _092105 barcodes link in SerialLotNumbers form
+	And I close all client application windows
+	* Select sln
+		Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
+		And I go to line in "List" table
+			| "Owner" | "Serial number"  |
+			| "UNIQ"  | "09987897977890" |
+		And I select current line in "List" table
+	* Check barcode
+		And In this window I click command interface button "Barcodes"
+		And "List" table became equal
+			| "Barcode"       | "Item key" | "Item serial/lot number" | "Source of origin" | "Unit" |
+			| "7889000090010" | "UNIQ"     | "09987897977890"         | ""                 | "pcs"  |
 	And I close all client application windows

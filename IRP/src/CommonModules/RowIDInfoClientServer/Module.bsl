@@ -31,6 +31,12 @@ Function GetLinkedDocumentsFilter_SC(Object) Export
 	Filter.Insert("LegalNamePurchases" , Object.LegalName);
 	Filter.Insert("TransactionType"    , Object.TransactionType);
 	Filter.Insert("ProcurementMethod"  , PredefinedValue("Enum.ProcurementMethods.Purchase"));
+	
+	Filter.Insert("TransactionTypeSC"  , Object.TransactionType);
+	Filter.Insert("TransactionTypeGR"  , PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase"));
+	Filter.Insert("PartnerPurchases"   , Object.Partner);
+	Filter.Insert("LegalNamePurchases" , Object.LegalName);
+	
 	Filter.Insert("Ref"                , Object.Ref);
 	Return Filter;
 EndFunction
@@ -123,6 +129,12 @@ Function GetLinkedDocumentsFilter_GR(Object) Export
 	Filter.Insert("PartnerSales"       , Object.Partner);
 	Filter.Insert("LegalNameSales"     , Object.LegalName);
 	Filter.Insert("TransactionType"    , Object.TransactionType);
+	
+	Filter.Insert("TransactionTypeGR"  , Object.TransactionType);
+	Filter.Insert("TransactionTypeSC"  , PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales"));
+	Filter.Insert("PartnerSales"       , Object.Partner);
+	Filter.Insert("LegalNameSales"     , Object.LegalName);
+	
 	Filter.Insert("Ref"                , Object.Ref);
 	Return Filter;
 EndFunction
@@ -291,6 +303,16 @@ Function GetLinkedDocumentsFilter_WS(Object) Export
 	Return Filter;
 EndFunction
 
+Function GetLinkedDocumentsFilter_SCPO(Object) Export
+	Filter = New Structure();
+	Filter.Insert("Company"            , Object.Company);
+	Filter.Insert("Branch"             , Object.Branch);
+	Filter.Insert("PartnerSales"       , Object.Partner);
+	Filter.Insert("LegalNameSales"     , Object.LegalName);
+	Filter.Insert("Ref"                , Object.Ref);
+	Return Filter;
+EndFunction
+
 Procedure FillVisibleFields(BasisesTree, VisibleFields) Export
 	For Each Field In VisibleFields Do
 		For Each TopLevel In BasisesTree.GetItems() Do
@@ -303,3 +325,48 @@ Procedure FillVisibleFields(BasisesTree, VisibleFields) Export
 	EndDo;
 EndProcedure
 
+Procedure UpdateQuantity(Object) Export
+	TabularSectionName = "";
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "ShipmentConfirmations") Then
+		TabularSectionName = "ShipmentConfirmations";
+	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Object, "GoodsReceipts") Then
+		TabularSectionName = "GoodsReceipts";
+	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Object, "WorkSheets") Then
+		TabularSectionName = "WorkSheets";
+	EndIf;
+	
+	For Each RowItemList In Object.ItemList Do
+		
+		IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 1 Then
+			If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then
+				IDInfoRows[0].Quantity = ?(RowItemList.Difference < 0, -RowItemList.Difference, RowItemList.Difference);
+			Else
+				IDInfoRows[0].Quantity = RowItemList.QuantityInBaseUnit;
+			EndIf;
+		Else
+			If Not ValueIsFilled(TabularSectionName) Then
+				If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then
+					For Each IDInfoRow In IDInfoRows Do
+						IDInfoRow.Quantity = ?(RowItemList.Difference < 0, -RowItemList.Difference,
+							RowItemList.Difference);
+					EndDo;
+				Else
+					For Each IDInfoRow In IDInfoRows Do
+						IDInfoRow.Quantity = RowItemList.QuantityInBaseUnit;
+					EndDo;
+				EndIf;
+			Else
+				For Each Row In Object[TabularSectionName] Do
+					If Row.Key <> RowItemList.Key Then
+						Continue;
+					EndIf;
+					IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key, BasisKey", Row.Key, Row.BasisKey));
+					If IDInfoRows.Count() = 1 Then
+						IDInfoRows[0].Quantity = Row.Quantity;
+					EndIf;
+				EndDo;
+			EndIf;
+		EndIf;
+	EndDo;	
+EndProcedure

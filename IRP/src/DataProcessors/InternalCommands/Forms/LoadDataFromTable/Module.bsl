@@ -47,7 +47,7 @@ Procedure RunCommandAction(Targets, Form, CommandFormItem, MainAttribute, AddInf
 	AddInfoNotify.Insert("DocumentObject",  MainAttribute);
 	AddInfoNotify.Insert("TableForLoading", TableForLoading);
 	NotifyContext = ?(Form[CommandFormItem.CommandName + "_UseFormNotify"] = True, Form, ThisObject);
-	EndNotify = New NotifyDescription(Form[CommandFormItem.CommandName + "_EndNotify"], NotifyContext, AddInfoNotify);
+	EndNotify = New CallbackDescription(Form[CommandFormItem.CommandName + "_EndNotify"], NotifyContext, AddInfoNotify);
 	
 	FormParameters = New Structure;
 	FormParameters.Insert("FieldsForLoadData", Form[CommandFormItem.CommandName + "_Fields"]);

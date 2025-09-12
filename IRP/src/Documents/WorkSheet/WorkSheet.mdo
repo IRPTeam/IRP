@@ -44,7 +44,7 @@
   <objectField>Document.WorkSheet.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.WorkSheet.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.WorkSheet.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.WorkSheet.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.WorkSheet.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>
@@ -72,8 +72,10 @@
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
@@ -1076,6 +1078,149 @@
    <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="fe84203c-f242-4604-b9d7-b6e810d1c931">
+  <producedTypes>
+   <objectType typeId="e99939c8-eae6-49e0-aeec-9b9019595616" valueTypeId="806840fc-24f9-45ab-a31f-6af22a08d0d3"/>
+   <rowType typeId="fe42d4b5-98d7-4b1e-ac41-054aa61406b8" valueTypeId="bb1d92f9-412a-4c34-8744-84d605ac6d0b"/>
+  </producedTypes>
+  <name>IssueList</name>
+  <synonym>
+   <key>en</key>
+   <value>9F6C3F7A-12C5-1FB6-6BAC-C6E70FCCB124</value>
+  </synonym>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>LineNumber</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <attributes uuid="16294d38-3ff8-4054-9e8f-c4331d1d4300">
+   <name>Issue</name>
+   <synonym>
+    <key>en</key>
+    <value>BD8B567F-74E3-34A2-2C4A-A32271FCB437</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.Issue</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="5b06a338-fe80-4ecc-804e-427bbc16013e">
+   <name>Comment</name>
+   <synonym>
+    <key>en</key>
+    <value>C0210463-7AF4-9EF5-5670-03F1092686A8</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <multiLine>true</multiLine>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="8494cc98-d92b-4629-ae9f-14c53460d7fa">
+   <name>StartJob</name>
+   <synonym>
+    <key>en</key>
+    <value>A5DBB4E9-C044-C8D6-6A29-9BB4847856FB</value>
+   </synonym>
+   <type>
+    <types>Date</types>
+    <dateQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="661cf1fb-646d-4f80-9692-24ff3b174488">
+   <name>EndJob</name>
+   <synonym>
+    <key>en</key>
+    <value>84926A92-A0C9-25B3-36E9-986F6A702748</value>
+   </synonym>
+   <type>
+    <types>Date</types>
+    <dateQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ca0412d2-067a-41fc-8d26-8c4831de2046">
+   <name>StartJobLatitude</name>
+   <synonym>
+    <key>en</key>
+    <value>48DC6670-1BDE-0665-579F-FFBA06044F37</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>8</precision>
+     <scale>5</scale>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="2fe9e374-fa63-46b2-873a-c292f7d4ec57">
+   <name>StartJobLongitude</name>
+   <synonym>
+    <key>en</key>
+    <value>5F4A78C0-B791-5F90-0643-341EEB8D8CA5</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>8</precision>
+     <scale>5</scale>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="a26d001e-5078-4f5d-94ed-4dd4a23ff16c">
+   <name>EndJobLatitude</name>
+   <synonym>
+    <key>en</key>
+    <value>3814E3EF-3EDD-DE54-40FD-DEC2956C9DBE</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>8</precision>
+     <scale>5</scale>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="bf5f2857-2406-4408-a7ba-898df7e9e4b9">
+   <name>EndJobLongitude</name>
+   <synonym>
+    <key>en</key>
+    <value>03F1FE77-2BA6-319E-E3D5-5495F0648657</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>8</precision>
+     <scale>5</scale>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
   </attributes>
  </tabularSections>
  <templates uuid="d8115267-310a-46de-980a-94cba30c1bb4">

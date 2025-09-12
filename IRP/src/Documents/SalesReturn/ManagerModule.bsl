@@ -235,6 +235,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|SELECT
 	|	SalesReturnItemList.ItemKey AS ItemKey,
 	|	SalesReturnItemList.Store AS Store,
+	|	SalesReturnItemList.Ref.Branch AS Branch,
 	|	SalesReturnItemList.Ref.Company AS Company,
 	|	SUM(SalesReturnItemList.QuantityInBaseUnit) AS Quantity,
 	|	SalesReturnItemList.Ref.Date AS Period,
@@ -272,6 +273,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|GROUP BY
 	|	SalesReturnItemList.ItemKey,
 	|	SalesReturnItemList.Store,
+	|	SalesReturnItemList.Ref.Branch,
 	|	SalesReturnItemList.Ref.Company,
 	|	SalesReturnItemList.Ref.Date,
 	|	SalesReturnItemList.Key,
@@ -293,6 +295,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|SELECT
 	|	tmpItemList.ItemKey,
 	|	tmpItemList.Store,
+	|	tmpItemList.Branch,
 	|	tmpItemList.Company,
 	|	tmpItemList.Quantity AS TotalQuantity,
 	|	tmpItemList.Period,
@@ -348,7 +351,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|		WHEN NOT BatchKeysInfo.SalesInvoiceIsFilled
 	|			THEN BatchKeysInfo.LandedCostTax
 	|		ELSE 0
-	|	END AS AmountTax,
+	|	END AS InvoiceTaxAmount,
+	|	BatchKeysInfo.Amount AS InvoiceAmount,
 	|	BatchKeysInfo.*
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -388,6 +392,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	PostingServer.SetPostingDataTable(Parameters.PostingDataTables, Parameters, T6020S_BatchKeysInfo.Name, BatchKeysInfo);
 	Parameters.PostingDataTables[T6020S_BatchKeysInfo].WriteInTransaction = Parameters.IsReposting;
 	
+	IncludeDimensions = New Map();
+	IncludeDimensions.Insert(T6020S_BatchKeysInfo, "SourceOfOriginStock, SerialLotNumberStock, InventoryOrigin, Consignor");
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "IncludeDimensions", IncludeDimensions);
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
 	
@@ -395,8 +402,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
-	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock, InventoryOrigin, Consignor";
-	BatchKeysInfoSettings.Totals = "Quantity, Amount, AmountTax";
+	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Branch, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock, InventoryOrigin, Consignor";
+	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
 	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
@@ -444,26 +451,41 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
-		"Document.SalesReturn.ItemList");
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.SalesReturn.ItemList");
 
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	Current_R4050B_StockInventory = PostingServer.GetQueryTableByName("R4050B_StockInventory", Parameters);
+	Exists_R4050B_StockInventory  = PostingServer.GetQueryTableByName("Exists_R4050B_StockInventory", Parameters);
+	
+	Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory);
+	Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory);
+	
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
-	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R4014B_SerialLotNumber", Parameters), AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+	Current_R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters);
+	Exists_R4014B_SerialLotNumber = PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters);
+	
+	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, 
+		LineNumberAndItemKeyFromItemList,
+		Current_R4014B_SerialLotNumber, 
+		Exists_R4014B_SerialLotNumber, 
+		AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
-
+	
+	Current_R2001T_Sales = PostingServer.GetQueryTableByName("R2001T_Sales", Parameters);
+	Exists_R2001T_Sales = PostingServer.GetQueryTableByName("Exists_R2001T_Sales", Parameters);
+	
 	If Not Cancel And Ref.TransactionType = Enums.SalesReturnTransactionTypes.ReturnFromCustomer
-		And Not AccReg.R2001T_Sales.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-		PostingServer.GetQueryTableByName("R2001T_Sales", Parameters), PostingServer.GetQueryTableByName(
-		"Exists_R2001T_Sales", Parameters), AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		And Not AccReg.R2001T_Sales.CheckBalance(Ref, 
+			LineNumberAndItemKeyFromItemList,
+			Current_R2001T_Sales, 
+			Exists_R2001T_Sales, 
+			AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.SalesReturn.ItemList", AddInfo);
 EndProcedure
 
@@ -498,6 +520,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	QueryArray.Add(PostingServer.Exists_R2001T_Sales());
+	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
@@ -528,6 +551,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
 
@@ -626,7 +651,11 @@ Function ItemList()
 		   |	ItemList.InventoryOrigin AS InventoryOrigin,
 		   |	ItemList.VatRate AS VatRate,
 		   |	ItemList.TaxAmount AS TaxAmount,
-		   |	ItemList.Project
+		   |	ItemList.Project,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.TradeAgent) AS IsTradeAgent,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
+		   |	ItemList.SimpleBatch AS SimpleBatch
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReturn.ItemList AS ItemList
@@ -900,90 +929,125 @@ Function R1040B_TaxesOutgoing()
 		|	ItemList.Currency,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
-		|	ItemList.TaxAmount AS Amount,
+		|	SUM(ItemList.TaxAmount) AS Amount,
 		|	VALUE(Enum.InvoiceType.Return) AS InvoiceType
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.IsReturnFromCustomer
-		|	AND ItemList.TaxAmount <> 0";
+		|	AND ItemList.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.VatRate,
+		|	VALUE(Enum.InvoiceType.Return)";
 EndFunction
 
 #Region Stock
 
 Function R4010B_ActualStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END AS SerialLotNumber,
-		   |	SUM(CASE
-		   |		WHEN SerialLotNumbers.SerialLotNumber IS NULL
-		   |			THEN ItemList.Quantity
-		   |		ELSE SerialLotNumbers.Quantity
-		   |	END) AS Quantity
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
-		   |		ON ItemList.Key = SerialLotNumbers.Key
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND NOT ItemList.UseGoodsReceipt
-		   |	AND NOT ItemList.GoodsReceiptExists
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.TradeAgentStore,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END AS SerialLotNumber,
-		   |	SUM(CASE
-		   |		WHEN SerialLotNumbers.SerialLotNumber IS NULL
-		   |			THEN ItemList.Quantity
-		   |		ELSE SerialLotNumbers.Quantity
-		   |	END) AS Quantity
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
-		   |		ON ItemList.Key = SerialLotNumbers.Key
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND NOT ItemList.UseGoodsReceipt
-		   |	AND NOT ItemList.GoodsReceiptExists
-		   |	AND ItemList.IsReturnFromTradeAgent
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.Period,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END,
-		   |	ItemList.TradeAgentStore";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end AS SourceOfOrigin,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|		left join SourceOfOrigins AS SourceOfOrigins
+		|		on ItemList.Key = SourceOfOrigins.Key
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseGoodsReceipt
+		|	AND NOT ItemList.GoodsReceiptExists
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end AS SourceOfOrigin,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|		left join SourceOfOrigins AS SourceOfOrigins
+		|		on ItemList.Key = SourceOfOrigins.Key
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseGoodsReceipt
+		|	AND NOT ItemList.GoodsReceiptExists
+		|	AND ItemList.IsReturnFromTradeAgent
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	ItemList.TradeAgentStore";
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -1159,9 +1223,10 @@ Function T6020S_BatchKeysInfo()
 		   |	BatchKeysInfo.SalesInvoice,
 		   |	BatchKeysInfo.ItemKey,
 		   |	BatchKeysInfo.Store,
+		   |	BatchKeysInfo.Branch,
 		   |	SUM(BatchKeysInfo.Quantity) AS Quantity,
-		   |	SUM(BatchKeysInfo.Amount) AS InvoiceAmount,
-		   |	SUM(BatchKeysInfo.AmountTax) AS InvoiceTaxAmount,
+		   |	SUM(BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
+		   |	SUM(BatchKeysInfo.InvoiceTaxAmount) AS InvoiceTaxAmount,
 		   |	BatchKeysInfo.SerialLotNumber,
 		   |	BatchKeysInfo.SourceOfOrigin
 		   |INTO T6020S_BatchKeysInfo
@@ -1178,6 +1243,7 @@ Function T6020S_BatchKeysInfo()
 		   |	BatchKeysInfo.SalesInvoice,
 		   |	BatchKeysInfo.ItemKey,
 		   |	BatchKeysInfo.Store,
+		   |	BatchKeysInfo.Branch,
 		   |	BatchKeysInfo.SerialLotNumber,
 		   |	BatchKeysInfo.SourceOfOrigin
 		   |
@@ -1192,6 +1258,7 @@ Function T6020S_BatchKeysInfo()
 		   |	UNDEFINED,
 		   |	ItemList.ItemKey,
 		   |	ItemList.TradeAgentStore,
+		   |	ItemList.Branch,
 		   |	SUM(CASE
 		   |		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
 		   |			THEN ISNULL(SourceOfOrigins.Quantity, 0)
@@ -1214,6 +1281,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Expense),
 		   |	ItemList.ItemKey,
 		   |	ItemList.TradeAgentStore,
+		   |	ItemList.Branch,
 		   |	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)),
 		   |	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef))";
 EndFunction
@@ -1246,6 +1314,60 @@ EndFunction
 
 Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_SR();
+EndFunction
+
+Function R5015B_OtherPartnersTransactions()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Basis,
+		|	ItemList.Key,
+		|	-SUM(ItemList.Amount) AS Amount
+		|INTO R5015B_OtherPartnersTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsOther
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Key";
+EndFunction
+
+Function R6025B_SimpleBatch()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	0 AS Amount
+	|INTO R6025B_SimpleBatch
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
+	|		ON TRUE
+	|WHERE
+	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	AND UseSimpleBatch.Value
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion
@@ -1334,12 +1456,16 @@ Function GetAccountingAnalytics(Parameters) Export
 	AO = Catalogs.AccountingOperations;
 
 	If Parameters.Operation = AO.SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers Then
-		Return GetAnalytics_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers(Parameters);
+		// customer transaction - customer advance
+		Return GetAnalytics_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers(Parameters); 
 	ElsIf Parameters.Operation = AO.SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions Then
+		// revenue - customer transaction
 		Return GetAnalytics_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions(Parameters);
 	ElsIf Parameters.Operation = AO.SalesReturn_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions Then
+		// tax outgoing - customer transaction
 		Return GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions(Parameters);
 	ElsIf Parameters.Operation = AO.SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory Then
+		// expenses - stock inventory
 		Return GetAnalytics_DR_R5022T_Expenses_CR_R4050B_StockInventory(Parameters);
 	EndIf;
 
@@ -1380,7 +1506,7 @@ Function GetAnalytics_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions(Paramet
 	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
 	                                                           Parameters.RowData.RevenueType,
 	                                                           Parameters.RowData.ProfitLossCenter);
-	AccountingAnalytics.Debit = Debit.AccountRevenue;
+	AccountingAnalytics.Debit = Debit.AccountRevenueReturn;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
 	// Credit
@@ -1388,8 +1514,11 @@ Function GetAnalytics_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions(Paramet
 	                                                   Parameters.ObjectData.Partner, 
 	                                                   Parameters.ObjectData.Agreement,
 	                                                   Parameters.ObjectData.Currency);
-	                                                   
-	AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;
+	If Parameters.ObjectData.Agreement.Type = Enums.AgreementTypes.Other Then
+		AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+	Else                           
+		AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;
+	EndIf;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
@@ -1411,8 +1540,11 @@ Function GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions(Pa
 	                                                   Parameters.ObjectData.Partner, 
 	                                                   Parameters.ObjectData.Agreement,
 	                                                   Parameters.ObjectData.Currency);
-	                                                   
-	AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;
+	If Parameters.ObjectData.Agreement.Type = Enums.AgreementTypes.Other Then
+		AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+	Else                           
+		AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;
+	EndIf;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
@@ -1441,14 +1573,32 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R4050B_StockInventory(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
 #EndRegion
+
+#EndRegion
+
+#Region SystemAttributes
+
+Function GetPredefinedSystemAttributes() Export
+	SystemAttributes = New Array(); // Array of ChartOfCharacteristicTypesRef.SystemAttributes
+	SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.Store);
+	Return SystemAttributes;
+EndFunction
+
+Function GetSystemAttributeValues(Obj, SystemAttribute) Export
+	Values = New Array();
+	If SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.Store Then
+		Values = Obj.ItemList.Unload(, "Store").UnloadColumn("Store");
+	EndIf;
+	Return Values;
+EndFunction
 
 #EndRegion

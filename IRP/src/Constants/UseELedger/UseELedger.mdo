@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="b8cad4fe-31a1-4bf2-b0e3-b2a580050df6">
+ <producedTypes>
+  <managerType typeId="075af19d-0054-478b-94f5-754a77a5721f" valueTypeId="4687fb09-6261-4a4e-b190-f970fc078a4d"/>
+  <valueManagerType typeId="629b2465-268c-47d6-957d-2d8d72324483" valueTypeId="2caf81f6-dcd7-49de-935f-77251fb74d84"/>
+  <valueKeyType typeId="1cc28000-eee5-4d7b-bc50-6a6710392bc2" valueTypeId="58357cb7-01f8-462c-bbf4-e29476023cb9"/>
+ </producedTypes>
+ <name>UseELedger</name>
+ <synonym>
+  <key>en</key>
+  <value>417668DB-C349-6124-45D3-3854851418F2</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

@@ -145,4 +145,20 @@
   <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
+ <dimensions uuid="f0c0c4c5-1714-4142-819c-cf885faab871">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>0DCF30D0-9D0E-944F-F07B-B0BF04B3A6D9</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

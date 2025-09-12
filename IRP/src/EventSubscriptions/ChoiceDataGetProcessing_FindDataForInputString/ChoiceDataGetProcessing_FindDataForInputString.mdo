@@ -6,9 +6,14 @@
   <value>AF3AA8B9-7352-9437-7F26-6F3D00F64604_________________</value>
  </synonym>
  <source>
+  <types>DocumentManager.PurchaseOrder</types>
+  <types>DocumentManager.DebitNote</types>
+  <types>DocumentManager.SalesInvoice</types>
+  <types>DocumentManager.SalesOrder</types>
   <types>ChartOfCharacteristicTypesManager</types>
   <types>CatalogManager</types>
   <types>ChartOfAccountsManager.Basic</types>
+  <types>DocumentManager.CreditNote</types>
  </source>
  <event>ChoiceDataGetProcessing</event>
  <handler>CommonModule.LocalizationEvents.FindDataForInputStringChoiceDataGetProcessing</handler>

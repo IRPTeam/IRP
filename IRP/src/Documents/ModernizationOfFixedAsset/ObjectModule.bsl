@@ -3,10 +3,14 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
-	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, Undefined, 
-		CurrenciesServer.GetLandedCostCurrency(ThisObject.Company), 0);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		
+		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, Undefined, 
+			CurrenciesServer.GetLandedCostCurrency(ThisObject.Company), 0);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+
+	EndIf;
 
 	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
 	

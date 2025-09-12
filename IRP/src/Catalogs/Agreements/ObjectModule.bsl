@@ -1,3 +1,4 @@
+
 Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
@@ -81,4 +82,8 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If ThisObject.Type = Enums.AgreementTypes.Other Then
 		CommonFunctionsClientServer.DeleteValueFromArray(CheckedAttributes, "PriceType");
 	EndIf;
+EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	ThisObject.Number = "";
 EndProcedure

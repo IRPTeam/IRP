@@ -9,7 +9,7 @@ EndProcedure
 
 &AtClient
 Procedure Load(Command)
-	_notify = New NotifyDescription("OnLoadContinue", ThisObject);
+	_notify = New CallbackDescription("OnLoadContinue", ThisObject);
 	OpenForm("DataProcessor.ReplaceSerialLotNumber.Form.LoadSerialLotNumbers", , ThisObject, , , , _notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -54,7 +54,7 @@ Function GetInfoBySerialLotNumber(_serialLotNumber)
 	
 	_itemKey = _serialLotNumber.SerialLotNumberOwner;
 	If TypeOf(_itemKey) <> Type("CatalogRef.ItemKeys") Then
-		Raise "Serial lot number owner is not Item key";
+        Raise R().SerialOwnerNotItemKey;
 	EndIf;
 	 
 	_result.ItemKey = _itemKey;
@@ -172,9 +172,9 @@ Procedure FindRefsAtServer(_rowInfo)
 			ElsIf _resultRow.Metadata.TabularSections.Find("Inventory") <> Undefined Then
 					
 				AddDocument_ItemList(_resultRow, _metadataFullName, "Inventory", _rowInfo);
-			Else
-				Raise StrTemplate("Undefined tabular section for : [%1] [%2]", _metadataFullName, _resultRow.Data);
-			EndIf;
+                        Else
+                                Raise StrTemplate(R().UndefinedTabularSection, _metadataFullName, _resultRow.Data);
+                        EndIf;
 			
 		ElsIf Metadata.InformationRegisters.Contains(_resultRow.Metadata) Then
 			
@@ -208,9 +208,9 @@ Procedure FindRefsAtServer(_rowInfo)
 			
 			_recordSet.Read();
 			
-			If _recordSet.Count() <> 1 Then
-				Raise StrTemplate("RecordSet.Count() <> 1 [%1]", _metadataFullName);
-			EndIf;
+                        If _recordSet.Count() <> 1 Then
+                                Raise StrTemplate(R().RecordSetCountNotOne, _metadataFullName);
+                        EndIf;
 			
 			_arrayOfResources = New Array();
 			For Each _resource In _resultRow.Metadata.Resources Do
@@ -230,10 +230,10 @@ Procedure FindRefsAtServer(_rowInfo)
 			
 			_newRow.Resources = StrConcat(_arrayOfResources, ",");
 			
-		Else
-			Raise StrTemplate("Not supported metadata : [%1]", _metadataFullName);
-		EndIf;
-	EndDo;
+                Else
+                        Raise StrTemplate(R().UnsupportedMetadata, _metadataFullName);
+                EndIf;
+        EndDo;
 EndProcedure
 
 &AtServer
@@ -252,9 +252,9 @@ Procedure AddDocument_SerialLotNumbers(_resultRow, _metadataFullName, _rowInfo)
 		_newRow.DepLineNumber     = _depRow.LineNumber;
 					
 		_itemListRows = _resultRow.Data.ItemList.FindRows(New Structure("Key", _depRow.Key));
-		If _itemListRows.Count() <> 1 Then
-			Raise StrTemplate("ItemListRows.Count() <> 1 :[%1] [%2]", _metadataFullName, _depRow.Key);
-		EndIf;
+                If _itemListRows.Count() <> 1 Then
+                        Raise StrTemplate(R().ItemListRowsCountNotOne, _metadataFullName, _depRow.Key);
+                EndIf;
 		
 		_itemListRow = _itemListRows[0];
 					
@@ -341,9 +341,9 @@ Procedure AddDocument_ItemList(_resultRow, _metadataFullName, _tabularSectionNam
 	_newRow.DepLineNumber     = 0;
 					
 	_mainRows = _resultRow.Data[_tabularSectionName].FindRows(New Structure("SerialLotNumber", _rowInfo.SerialLotNumber));
-	If _mainRows.Count() <> 1 Then
-		Raise StrTemplate("MainRows.Count() <> 1 :[%1] [%2]", _metadataFullName, _rowInfo.SerialLotNumber);
-	EndIf;
+        If _mainRows.Count() <> 1 Then
+                Raise StrTemplate(R().MainRowsCountNotOne, _metadataFullName, _rowInfo.SerialLotNumber);
+        EndIf;
 
 	_newRow.RepeatingLines    = 1;
 	_newRow.IsOk              = True;
@@ -385,9 +385,9 @@ Procedure ReplaceRef(_row)
 	_arrayOfDocuments = ThisObject.Documents.FindRows(New Structure("KeySLN", _row.KeySLN));
 	
 	For Each _rowDocuments In _arrayOfDocuments Do
-		If Not _rowDocuments.IsOk Then
-			Raise StrTemplate("Unable replace ref [%1]", _rowDocuments.Ref);
-		EndIf;
+                If Not _rowDocuments.IsOk Then
+                        Raise StrTemplate(R().UnableReplaceRef, _rowDocuments.Ref);
+                EndIf;
 	
 		_docInfo = New Structure();
 		_docInfo.Insert("DocObject"   , _rowDocuments.Ref.GetObject());

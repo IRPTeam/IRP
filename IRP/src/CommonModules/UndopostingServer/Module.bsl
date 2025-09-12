@@ -9,7 +9,8 @@ Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 		Return;
 	EndIf;
 	
-	If DocObject.ManualMovementsEdit Then
+	If CommonFunctionsServer.isCommonAttributeUseForMetadata("ManualMovementsEdit", DocObject.Metadata()) 
+			And DocObject.ManualMovementsEdit Then
 		Cancel = True;
 		TextMessage = R().Error_147;
 		CommonFunctionsClientServer.ShowUsersMessage(TextMessage);
@@ -72,6 +73,11 @@ Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 	EndDo;
 
 	Module.UndopostingCheckAfterWrite(DocObject.Ref, Cancel, Parameters, AddInfo);
+	
+	// Accounting MD5
+	If Not Cancel And Metadata.DefinedTypes.typeAccountingDocuments.Type.Types().Find(TypeOf(Parameters.Object.Ref)) <> Undefined Then
+		AccountingServer.ClearAccountingRelevance(DocObject.Ref);	
+	EndIf;
 EndProcedure
 
 Function SetLock(LockDataSources)

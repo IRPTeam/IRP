@@ -75,4 +75,11 @@
    <value>20BC2C2C-D26A-07BC-CEBC-CBB90EAF1088</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="d8d76565-9bac-4ff5-b5db-7beb763f1a84">
+  <name>AccountingService</name>
+  <synonym>
+   <key>en</key>
+   <value>E935EA58-6060-27E6-65DA-A51C15D25052</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

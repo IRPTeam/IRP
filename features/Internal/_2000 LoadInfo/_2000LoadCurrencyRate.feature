@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @LoadInfo
@@ -35,6 +35,10 @@ Scenario: _020000 preparation (Loadinfo)
 		When Create catalog Countries objects
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog IntegrationSettings objects
+		When Create catalog Users objects
+		When Create catalog AccessGroups and AccessProfiles objects (safe storage)
+		And I close TestClient session
+		And I open new TestClient session or connect the existing one
 	* Mocks settings
 		If "$isProdMode$" variable is equal to "false" Then
 			When import mocks for currency rate
@@ -146,8 +150,9 @@ Scenario: _020000 preparation (Loadinfo)
 				| 'Description'     |
 				| 'Bank UA'         |
 			And I select current line in "List" table
-			And in the table "ConnectionSetting" I click "Test" button
+			And I click "Test" button
 			// Given Recent TestClient message contains "Received response from bank.gov.ua:443 Status code: 200" string			
+			And Delay 80
 		And I close all client application windows
 		
 Scenario: _0200001 check preparation
@@ -271,8 +276,50 @@ Scenario: _020003 delete integration settings
 			| Integration settings    |
 			| Forex Buying            |
 		And I close all client application windows
-		
-		
+
+Scenario: _020004 test security storage for integration settings
+	And I close all client application windows
+	* Create security storage
+		Given I open hyperlink "e1cib/list/InformationRegister.SecureDataStorage"
+		And I click "Create" button
+		And I click Choice button of the field named "Owner"
+		And I go to line in "" table
+			| ""                    |
+			| "Integration setting" |
+		And I select current line in "" table
+		Then "Integration settings" window is opened
+		And I go to line in "List" table
+			| "Description" |
+			| "Bank UA"     |
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Owner'   |
+			| 'Bank UA' |
+	* Check settings
+		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+		And I go to line in "List" table
+			| "Description" |
+			| "Bank UA"     |
+		And I select current line in "List" table
+		And I set checkbox "Store in secure storage"
+		And I go to line in "ConnectionSetting" table
+			| "Key"             |
+			| "ResourceAddress" |
+		And I set checkbox named "ConnectionSettingHide" in "ConnectionSetting" table
+		And I finish line editing in "ConnectionSetting" table
+		And I click "Save" button
+		And I click "Test" button
+		Then TestClient log message contains "Status code: 200" string
+		And I remove checkbox "Store in secure storage"
+		And I click "Save" button
+		And I set checkbox "Store in secure storage"
+		And I click "Save" button
+		And I click "Test" button
+		Then TestClient log message contains "Status code: 200" string
+		And I close all client application windows
+				
+
 Scenario: _999999 close TestClient session
 	Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
 	And I go to line in "List" table

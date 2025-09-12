@@ -97,9 +97,16 @@ EndProcedure
 &AtServer
 Procedure FillExistsLangs()
 
-	For Each Lang In Metadata.Languages Do
+	InterfaceLocalizations = LocalizationReuse.GetInterfaceLocalizations();
+	For Each Lang In InterfaceLocalizations Do
+		//@skip-check typed-value-adding-to-untyped-collection
+		Items.InterfaceLocalizationCode.ChoiceList.Add(Lang.LanguageCode, Lang.Synonym);
+	EndDo;
+	
+	DataLocalizations = LocalizationReuse.GetDataLocalizations();
+	For Each Lang In DataLocalizations Do
+		//@skip-check typed-value-adding-to-untyped-collection
 		Items.LocalizationCode.ChoiceList.Add(Lower(Lang.LanguageCode), Lang.Synonym);
-		Items.InterfaceLocalizationCode.ChoiceList.Add(Lower(Lang.LanguageCode), Lang.Synonym);
 	EndDo;
 
 EndProcedure
@@ -118,7 +125,7 @@ EndProcedure
 Procedure SetPassword(Command)
 	OpenArgs = New Structure();
 	OpenArgs.Insert("Password", Password);
-	OpenForm("Catalog.Users.Form.InputPassword", OpenArgs, ThisObject, , , , New NotifyDescription("SetPasswordFinish",
+	OpenForm("Catalog.Users.Form.InputPassword", OpenArgs, ThisObject, , , , New CallbackDescription("SetPasswordFinish",
 		ThisObject));
 EndProcedure
 
@@ -140,7 +147,7 @@ EndProcedure
 &AtClient
 Procedure Settings(Command)
 	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
-		Notify = New NotifyDescription("EditUserSettingsProceed", ThisObject);
+		Notify = New CallbackDescription("EditUserSettingsProceed", ThisObject);
 		//@skip-check property-return-type
 		//@skip-check invocation-parameter-type-intersect
 		ShowQueryBox(Notify, R().QuestionToUser_001, QuestionDialogMode.YesNo);

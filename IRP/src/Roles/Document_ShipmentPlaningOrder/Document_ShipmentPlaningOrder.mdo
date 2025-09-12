@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b17a102d-a5ae-4ae5-8f71-bf016349d008">
+ <name>Document_ShipmentPlaningOrder</name>
+ <synonym>
+  <key>en</key>
+  <value>A9EC02EB-AC35-1904-42E2-29FA4AAD06D7</value>
+ </synonym>
+</mdclass:Role>

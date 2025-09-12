@@ -82,6 +82,21 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="5185b3d9-aed5-4032-9d1d-e6b72e9584b6">
+  <name>ExternalDataProcSettings</name>
+  <synonym>
+   <key>en</key>
+   <value>6BD572E7-3C31-F0A8-8E22-2056353D163C</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <attributes uuid="1ec86a86-9804-414c-96f9-68ce428fc58c">
   <name>IntegrationType</name>
   <synonym>
@@ -97,14 +112,14 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
- <attributes uuid="5185b3d9-aed5-4032-9d1d-e6b72e9584b6">
-  <name>ExternalDataProcSettings</name>
+ <attributes uuid="a2092519-7bdf-4673-94e3-2f34135de3cf">
+  <name>StoreInSecureStorage</name>
   <synonym>
    <key>en</key>
-   <value>6BD572E7-3C31-F0A8-8E22-2056353D163C</value>
+   <value>75A93658-69EF-1356-6D1E-E8AFF2C442C9</value>
   </synonym>
   <type>
-   <types>ValueStorage</types>
+   <types>Boolean</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

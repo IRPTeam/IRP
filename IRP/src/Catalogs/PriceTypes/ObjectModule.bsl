@@ -17,6 +17,10 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	If ThisObject.IsFolder Then
+		Return;
+	EndIf;
+	
 	NotCheckedAttributes = Catalogs.PriceTypes.GetNotCheckedAttributes(Ref);
 	For Each Attribut In NotCheckedAttributes Do
 		AttributIndex = CheckedAttributes.Find(Attribut);

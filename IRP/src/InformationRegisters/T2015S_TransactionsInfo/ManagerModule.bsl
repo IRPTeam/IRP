@@ -258,180 +258,6 @@ Function T2015S_TransactionsInfo_CreditNote() Export
 		|	Transactions.Key";
 EndFunction
 
-Function T2015S_TransactionsInfo_DebitCreditNote() Export
-	Return 
-		"SELECT
-		|	Doc.Period AS Date,
-		|	Doc.Company,
-		|	Doc.SendBranch AS Branch,
-		|	Doc.Currency,
-		|	Doc.SendLegalName AS LegalName,
-		|	Doc.SendPartner AS Partner,
-		|	Doc.SendAgreement AS Agreement,
-		|	Doc.SendProject AS Project,
-		|	Doc.SendBasisDocument AS TransactionBasis,
-		|	Doc.SendOrderSettlements AS Order,
-		|	Doc.SendIsVendorTransaction AS IsVendorTransaction,
-		|	Doc.SendIsCustomerTransaction AS IsCustomerTransaction,
-		|	case
-		|		when Doc.SendIsCustomerTransaction
-		|			then case
-		|				when Doc.PartnersIsEqual
-		|					then case
-		|						when Doc.IsReceiveAdvanceVendor
-		|						OR Doc.IsReceiveTransactionCustomer
-		|							then FALSE
-		|						else TRUE
-		|					end
-		|				else case
-		|					when Doc.IsReceiveAdvanceVendor
-		|					OR Doc.IsReceiveTransactionVendor
-		|					OR Doc.IsReceiveTransactionCustomer
-		|						then FALSE
-		|					else TRUE
-		|				end
-		|			end
-		|		else case
-		|			when Doc.PartnersIsEqual
-		|				then case
-		|					when Doc.IsReceiveAdvanceCustomer
-		|					OR Doc.IsReceiveTransactionCustomer
-		|					OR Doc.IsReceiveTransactionVendor
-		|						then FALSE
-		|					else TRUE
-		|				end
-		|			else case
-		|				when Doc.IsReceiveAdvanceCustomer
-		|				OR Doc.IsReceiveTransactionCustomer
-		|				OR Doc.IsReceiveTransactionVendor
-		|					then FALSE
-		|				else TRUE
-		|			end
-		|		end
-		|	end AS IsDue,
-		|	case
-		|		when Doc.SendIsCustomerTransaction
-		|			then case
-		|				when Doc.PartnersIsEqual
-		|					then case
-		|						when Doc.IsReceiveAdvanceVendor
-		|						OR Doc.IsReceiveTransactionCustomer
-		|							then TRUE
-		|						else FALSE
-		|					end
-		|				else case
-		|					when Doc.IsReceiveAdvanceVendor
-		|					OR Doc.IsReceiveTransactionVendor
-		|					OR Doc.IsReceiveTransactionCustomer
-		|						then TRUE
-		|					else FALSE
-		|				end
-		|			end
-		|		else case
-		|			when Doc.PartnersIsEqual
-		|				then case
-		|					when Doc.IsReceiveAdvanceCustomer
-		|					OR Doc.IsReceiveTransactionCustomer
-		|					OR Doc.IsReceiveTransactionVendor
-		|						then TRUE
-		|					else FALSE
-		|				end
-		|			else case
-		|				when Doc.IsReceiveAdvanceCustomer
-		|				OR Doc.IsReceiveTransactionCustomer
-		|				OR Doc.IsReceiveTransactionVendor
-		|					then TRUE
-		|				else FALSE
-		|			end
-		|		end
-		|	end AS IsPaid,
-		|	Doc.Amount
-		|INTO T2015S_TransactionsInfo
-		|FROM
-		|	SendTransactions AS Doc
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	Doc.Period,
-		|	Doc.Company,
-		|	Doc.ReceiveBranch,
-		|	Doc.Currency,
-		|	Doc.ReceiveLegalName,
-		|	Doc.ReceivePartner,
-		|	Doc.ReceiveAgreement,
-		|	Doc.ReceiveProject,
-		|	Doc.ReceiveBasisDocument,
-		|	Doc.ReceiveOrderSettlements,
-		|	Doc.SendIsVendorTransaction,
-		|	Doc.SendIsCustomerTransaction,
-		|	case
-		|		when Doc.SendIsCustomerTransaction
-		|			then case
-		|				when Doc.PartnersIsEqual
-		|					then case
-		|						when Doc.IsSendAdvanceCustomer
-		|						OR Doc.IsSendTransactionVendor
-		|							then FALSE
-		|						else TRUE
-		|					end
-		|				else case
-		|					when Doc.IsSendAdvanceCustomer
-		|					OR Doc.IsSendTransactionVendor
-		|						then FALSE
-		|					else TRUE
-		|				end
-		|			end
-		|		else case
-		|			when Doc.PartnersIsEqual
-		|				then case
-		|					when Doc.IsSendTransactionVendor
-		|						then TRUE
-		|					else FALSE
-		|				end
-		|			else case
-		|				when Doc.IsSendTransactionVendor
-		|					then TRUE
-		|				else FALSE
-		|			end
-		|		end
-		|	end AS IsDue,
-		|	case
-		|		when Doc.SendIsCustomerTransaction
-		|			then case
-		|				when Doc.PartnersIsEqual
-		|					then case
-		|						when Doc.IsSendAdvanceCustomer
-		|						OR Doc.IsSendTransactionVendor
-		|							then TRUE
-		|						else FALSE
-		|					end
-		|				else case
-		|					when Doc.IsSendAdvanceCustomer
-		|					OR Doc.IsSendTransactionVendor
-		|						then TRUE
-		|					else FALSE
-		|				end
-		|			end
-		|		else case
-		|			when Doc.PartnersIsEqual
-		|				then case
-		|					when Doc.IsSendTransactionVendor
-		|						then FALSE
-		|					else TRUE
-		|				end
-		|			else case
-		|				when Doc.IsSendTransactionVendor
-		|					then FALSE
-		|				else TRUE
-		|			end
-		|		end
-		|	end AS IsPaid,
-		|	Doc.Amount
-		|FROM
-		|	ReceiveTransactions AS Doc";
-EndFunction
-
 Function T2015S_TransactionsInfo_Cheque() Export
 	Return 
 		"SELECT
@@ -592,7 +418,7 @@ Function T2015S_TransactionsInfo_PI_SRTC() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsPurchase
+		|	ItemList.IsPurchase AND (ItemList.IsVendor OR ItemList.IsConsignor)
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Company,
@@ -603,6 +429,39 @@ Function T2015S_TransactionsInfo_PI_SRTC() Export
 		|	ItemList.Agreement,
 		|	ItemList.Project,
 		|	ItemList.PurchaseOrderSettlements,
+		|	ItemList.BasisDocument";
+EndFunction
+
+Function T2015S_TransactionsInfo_WTI() Export
+	Return 
+		"SELECT
+		|	ItemList.Period AS Date,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.Project,
+		|	UNDEFINED AS Order,
+		|	TRUE AS IsVendorTransaction,
+		|	ItemList.BasisDocument AS TransactionBasis,
+		|	SUM(ItemList.Amount) AS Amount,
+		|	TRUE AS IsDue
+		|INTO T2015S_TransactionsInfo
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsVendor
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.Project,
 		|	ItemList.BasisDocument";
 EndFunction
 
@@ -625,7 +484,7 @@ Function T2015S_TransactionsInfo_PR() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsReturnToVendor
+		|	ItemList.IsReturnToVendor AND (ItemList.IsVendor OR ItemList.IsConsignor)
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Company,
@@ -658,7 +517,7 @@ Function T2015S_TransactionsInfo_SI_SRFTA() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsSales
+		|	ItemList.IsSales AND (ItemList.IsCustomer OR ItemList.IsTradeAgent)
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Company,
@@ -691,7 +550,7 @@ Function T2015S_TransactionsInfo_SR() Export
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsReturnFromCustomer
+		|	ItemList.IsReturnFromCustomer AND (ItemList.IsCustomer OR ItemList.IsTradeAgent)
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Company,

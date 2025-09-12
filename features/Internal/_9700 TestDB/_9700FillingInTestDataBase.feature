@@ -67,8 +67,8 @@ When Create catalog ItemKeys objects (test data base)
 When Create catalog ItemTypes objects (test data base)
 When Create catalog Units objects (test data base)
 When Create catalog Items objects (test data base)
-When Create catalog CurrencyMovementSets objects (test data base)
 When Create catalog ObjectStatuses objects (test data base)
+When Create catalog CurrencyMovementSets objects (test data base)
 When Create catalog PartnerSegments objects (test data base)
 When Create catalog Agreements objects (test data base)
 When Create catalog Partners objects (test data base)
@@ -94,6 +94,7 @@ When Create catalog FixedAssets objects (test data base)
 When Create catalog ItemSegments objects (test data base)
 When Create catalog EmployeeSchedule objects (test data base)
 When Create catalog LegalNameContracts objects (test data base)
+When Create catalog ObjectLocations objects (test data base)
 When Create catalog Projects objects (test data base)
 When Create catalog UnitsOfMeasurement objects (test data base)
 When Create catalog Vehicles objects (test data base)
@@ -358,9 +359,16 @@ When Create document ConsolidatedRetailSales objects (test data base)
 		And I click "Close session" button		
 		And Delay 2
 		And I click "Open session" button
+* Additional table control
+	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"	
+	And I go to line in "FunctionalOptions" table
+		| "Option"                                |
+		| "Use additional table control document" |
+	And I set "Use" checkbox in "FunctionalOptions" table
+	And I click "Save" button
 * Posting first documents
 	And I execute 1C:Enterprise script at server
-			| "Documents.GoodsReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
+		| "Documents.GoodsReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
 * Posting Opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		Then "Opening entries" window is opened
@@ -402,16 +410,20 @@ When Create document ConsolidatedRetailSales objects (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
-* Posting BankPayment
-		Given I open hyperlink "e1cib/list/Document.BankPayment"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
 * Posting BankReceipt
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);"    |
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
+* Posting BankPayment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "10"
 * Posting Sales invoice
 		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -503,16 +515,18 @@ When Create document ConsolidatedRetailSales objects (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
+* Posting CashReceipt
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashPayment.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"    |
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
 * Posting CashPayment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
-* Posting CashReceipt
-		Given I open hyperlink "e1cib/list/Document.CashReceipt"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And Delay "3"
 * Posting CashExpense
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		Then I select all lines of "List" table

@@ -130,15 +130,15 @@ Scenario: _050003 check Retail shipment confirmation movements by the Register  
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                               | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                              | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                             | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '1'           | 'Store 01'     | 'PZU'        | '8908899877'           |
-			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '1'           | 'Store 01'     | 'PZU'        | '8908899879'           |
-			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '2'           | 'Store 01'     | 'XS/Blue'    | ''                     |
-			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '2'           | 'Store 01'     | '37/18SD'    | ''                     |
+			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                               | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                              | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                             | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '1'           | 'Store 01'     | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '1'           | 'Store 01'     | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '2'           | 'Store 01'     | 'XS/Blue'    | ''                     | ''                     |
+			| ''                                                             | 'Expense'       | '24.05.2023 14:43:31'   | '2'           | 'Store 01'     | '37/18SD'    | ''                     | ''                     |
 	
 
 		
@@ -195,12 +195,12 @@ Scenario: _050006 check Retail shipment confirmation movements by the Register  
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | ''                    | ''           | ''         | ''                                                           | ''         | ''         |
-			| 'Register  "R4032 Goods in transit (outgoing)"'              | ''                    | ''           | ''         | ''                                                           | ''         | ''         |
-			| ''                                                           | 'Period'              | 'RecordType' | 'Store'    | 'Basis'                                                      | 'Item key' | 'Quantity' |
-			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | 'XS/Blue'  | '2'        |
-			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | '37/18SD'  | '2'        |
-			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | 'PZU'      | '2'        |		
+			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | ''                    | ''           | ''         | ''                                                           | ''         | ''                 | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'              | ''                    | ''           | ''         | ''                                                           | ''         | ''                 | ''         |
+			| ''                                                           | 'Period'              | 'RecordType' | 'Store'    | 'Basis'                                                      | 'Item key' | 'Serial lot number'| 'Quantity' |
+			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | 'XS/Blue'  | ''                 | '2'        |
+			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | '37/18SD'  | ''                 | '2'        |
+			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | 'PZU'      | ''                 | '2'        |		
 		
 
 Scenario: _050007 check Retail shipment confirmation movements by the Register  "T3010S Row ID info"
@@ -263,3 +263,20 @@ Scenario: _050009 check Retail shipment confirmation (without SO) movements  by 
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "R4012 Stock Reservation"'    |
 		And I close all client application windows
+
+Scenario: _050010 check Retail shipment confirmation movements by the Register "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"
+	And I go to line in "List" table
+		| 'Number' |
+		| '314'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | ''                                                           | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"'                      | ''                                                           | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                                           | 'Document'                                                   | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                                           | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | '24.05.2023 14:43:31' | '314'    | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+	And I close all client application windows		

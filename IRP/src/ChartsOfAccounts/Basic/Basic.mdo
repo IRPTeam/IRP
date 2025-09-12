@@ -29,7 +29,6 @@
   <dataHistory>Use</dataHistory>
   <name>Order</name>
   <fillValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
  </standardAttributes>
@@ -113,7 +112,6 @@
  <extDimensionTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</extDimensionTypes>
  <maxExtDimensionCount>3</maxExtDimensionCount>
  <codeLength>12</codeLength>
- <checkUnique>true</checkUnique>
  <standardTabularSections>
   <name>ExtDimensionTypes</name>
   <synonym>
@@ -273,6 +271,20 @@
   <synonym>
    <key>en</key>
    <value>38BFF824-0174-73F5-58F0-058A6FF0F0C5</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </extDimensionAccountingFlags>
+ <extDimensionAccountingFlags uuid="f9a2048c-7d77-457b-b418-3151dbc89e98">
+  <name>ELedgerDetailed</name>
+  <synonym>
+   <key>en</key>
+   <value>5E0C93B4-400B-207A-AEF6-679FB24D884A</value>
   </synonym>
   <type>
    <types>Boolean</types>

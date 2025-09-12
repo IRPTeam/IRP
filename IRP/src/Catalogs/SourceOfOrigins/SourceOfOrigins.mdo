@@ -132,10 +132,11 @@
   <key>en</key>
   <value>3437F691-1649-99B9-9128-82F982300F44</value>
  </objectPresentation>
+ <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
- <descriptionLength>50</descriptionLength>
+ <descriptionLength>150</descriptionLength>
  <codeAllowedLength>Variable</codeAllowedLength>
  <checkUnique>true</checkUnique>
  <autonumbering>true</autonumbering>
@@ -143,8 +144,10 @@
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.SourceOfOrigins.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.SourceOfOrigins.Form.GroupForm</defaultFolderForm>
  <defaultListForm>Catalog.SourceOfOrigins.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.SourceOfOrigins.Form.ChoiceForm</defaultChoiceForm>
+ <defaultFolderChoiceForm>Catalog.SourceOfOrigins.Form.GroupChoiceForm</defaultFolderChoiceForm>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  <attributes uuid="b99a35df-7e7e-475f-a3b0-419399797c9e">
   <name>CustomProductID</name>
@@ -235,6 +238,21 @@
   <synonym>
    <key>en</key>
    <value>57E03B13-25C9-C330-0BDE-E45DE55108B2</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="bb7e1834-9777-4527-a129-815a9da23cc2">
+  <name>StockBalanceDetail</name>
+  <synonym>
+   <key>en</key>
+   <value>6C2C1735-17A1-4668-88B6-6EEA4AC16D3C</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -345,6 +363,24 @@
   <synonym>
    <key>en</key>
    <value>93BD2ED2-36CE-C684-4B26-61D77D8F75CF</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="b1730add-db77-484e-98bc-e387781acd24">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>29FE001D-7C35-C988-80E0-06472448C51A</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="6c4fdc5c-7917-4a2b-9146-460d7869efdd">
+  <name>GroupChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>270402D0-F5A0-ED77-7456-64B466C0D358</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

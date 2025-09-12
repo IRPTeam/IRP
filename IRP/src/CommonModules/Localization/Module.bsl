@@ -1,5 +1,6 @@
 // @strict-types
 
+
 // Strings.
 // 
 // Parameters:
@@ -7,6 +8,93 @@
 // 
 // Returns:
 //  Structure - Strings:
+// * SB_NotEnoughBatch - String - 
+// * JobAborted - String - 
+// * CannotConnectDriver - String - 
+// * CannotConnectHardwareService - String - 
+// * CannotAttachAddIn - String - 
+// * CannotGetDataKKT - String - 
+// * NotFoundOriginRowForClone - String - 
+// * SerialOwnerNotItemKey - String - 
+// * WrongAdvanceDirection - String - 
+// * UnknownTransactionType - String - 
+// * UnknownTransactionTypeT2015 - String - 
+// * UnknownTransactionTypeTableT2014 - String - 
+// * NotSupportedDRR5022TCashAdvance - String - 
+// * ErrorOnPostingDocument - String - 
+// * ConvertingDataToFillingValuesFailed - String - 
+// * AnalyticTypeNotDefined - String - 
+// * PropertyBeforeChangeDataPathNoRows - String - 
+// * OneJobFailed - String - 
+// * UnsupportedUpdateStatus - String - 
+// * DocumentQueryError - String - 
+// * UnknownFilterType - String - 
+// * FoundMoreThanOneWhenOptionNot - String - 
+// * DescriptionFormulaOperandError - String - 
+// * CacheRowsUndefined - String - 
+// * CachePropertyNotFound - String - 
+// * WrongListProperty - String - 
+// * CachePropertyDeleteNotFound - String - 
+// * WrongDatapathRemoveCache - String - 
+// * UnknownAgreementTypeByDebtType - String - 
+// * IDInfoNotFoundByName - String - 
+// * MoreThanOneAnalyticRowsFilter - String - 
+// * DocumentAccountingOpNotSupported - String - 
+// * UnsupportedRegisterName - String - 
+// * UnsupportedCheckType - String - 
+// * ExtDimensionTypeNotDefined - String - 
+// * ExternalRefValueNotFound - String - 
+// * ExternalValueNotFound - String - 
+// * UnsupportedTransactionType - String - 
+// * GetBasisesNotSupported - String - 
+// * UnsupportedExternalLink - String - 
+// * UnsupportedInternalLink - String - 
+// * UnknownControlCodeStringType - String - 
+// * CannotGetPointInTime - String - 
+// * CannotFiscalizeCCSTypeNone - String - 
+// * CannotFiscalizeCCSTypeEmpty - String - 
+// * ControlStringCodeNotFilled - String - 
+// * ControlStringCodeCountMismatch - String - 
+// * ControlStringMultipleRowsNotSupported - String - 
+// * WrongExternalFunctionType - String - 
+// * CurrencyInfoMoreThanOne - String - 
+// * RowsWithStoresEmpty - String - 
+// * DefaultAgreementOnlyCustVendor - String - 
+// * BatchForSalesReturnNotFound - String - 
+// * UnsupportedRowDataType - String - 
+// * UnsupportedType - String - 
+// * LoadMoreThanOneTableNotImplemented - String - 
+// * TempStorageTypeNotSupported - String - 
+// * UnsupportedOperation - String - 
+// * UnsupportedDirection - String - 
+// * UnsupportedDocumentType - String - 
+// * UnsupportedRegisterMetadata - String - 
+// * UnsupportedWhoIsChanged - String - 
+// * WrongDataPath - String - 
+// * TypeNotFound - String - 
+// * CreateNewAnalyticsNotSupported - String - 
+// * TaxNotAllowedForDocument - String - 
+// * RiseTestFalseString - String - 
+// * CorrectionDescriptionRequired - String - 
+// * GoodsReceiptPreliminaryPurchaseInvoice - String - 
+// * UndefinedTabularSection - String - 
+// * RecordSetCountNotOne - String - 
+// * UnsupportedMetadata - String - 
+// * ItemListRowsCountNotOne - String - 
+// * MainRowsCountNotOne - String - 
+// * UnableReplaceRef - String - 
+// * UnsupportedSettingStorageName - String - 
+// * InternalAccountNotFound - String - 
+// * InternalAccountMoreThanOne - String - 
+// * UnsupportedAnalyticType - String - 
+// * ItemFormUnknownCommand - String - 
+// * LedgerLocalizationCodeNotFilled - String - 
+// * LedgerAccountMainDrNotDefined - String - 
+// * LedgerAccountSubDrNotDefined - String - 
+// * LedgerAccountMainCrNotDefined - String - 
+// * LedgerAccountSubCrNotDefined - String - 
+// * InvoiceTypeNotSupported - String - 
+// * FewRetailCustomerFound - String - 
 // * ACS_UnknownValueType - String - 
 // * CERT_OnlyProdOrCert - String - 
 // * CERT_CertAlreadyUsed - String - 
@@ -29,6 +117,9 @@
 // * SMS_SendIsError - String - 
 // * SMS_WaitUntilNextSend - String - 
 // * SMS_SMSCodeWrong - String - 
+// * DefaultSMSProviderEmpty - String - 
+// * SMSModuleNotFound - String - 
+// * SMSMethodNotSupported - String - 
 // * ATC_001 - String - 
 // * ATC_NotSupported - String - 
 // * ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList - String - 
@@ -65,6 +156,10 @@
 // * ATC_FIX_ErrorNotFilledSalesTransactionType - String - 
 // * ATC_FIX_ErrorNotFilledSalesReturnTransactionType - String - 
 // * ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType - String - 
+// * ATC_ErrorAddAttributesIsUnknowAttribute - String - 
+// * ATC_FIX_ErrorAddAttributesIsUnknowAttribute - String - 
+// * ATC_ErrorAddAttributesNotSetTag - String - 
+// * ATC_FIX_ErrorAddAttributesNotSetTag - String - 
 // * Eq_001 - String - 
 // * Eq_002 - String - 
 // * Eq_003 - String - 
@@ -84,6 +179,7 @@
 // * EqError_003 - String - 
 // * EqError_004 - String - 
 // * EqError_005 - String - 
+// * EqFP_ShiftIsExpired - String - 
 // * EqFP_ShiftAlreadyOpened - String - 
 // * EqFP_ShiftIsNotOpened - String - 
 // * EqFP_ShiftAlreadyClosed - String - 
@@ -178,6 +274,10 @@
 // * Form_037 - String - 
 // * Form_038 - String - 
 // * Form_039 - String - 
+// * Form_040 - String - 
+// * Form_041 - String - 
+// * Form_042 - String - 
+// * Form_043 - String - 
 // * Error_002 - String - 
 // * Error_003 - String - 
 // * Error_004 - String - 
@@ -311,6 +411,45 @@
 // * Error_145 - String - 
 // * Error_146 - String - 
 // * Error_147 - String - 
+// * Error_148 - String - 
+// * Error_149 - String - 
+// * Error_150 - String - 
+// * Error_151 - String - 
+// * Error_152 - String - 
+// * Error_153 - String - 
+// * Error_154 - String - 
+// * Error_155 - String - 
+// * Error_156 - String - 
+// * Error_157 - String - 
+// * Error_158 - String - 
+// * Error_159 - String - 
+// * Error_160 - String - 
+// * Error_161 - String - 
+// * Error_162 - String - 
+// * Error_163 - String - 
+// * Error_164 - String - 
+// * Error_165 - String - 
+// * Error_166 - String - 
+// * Error_167 - String - 
+// * Error_168 - String - 
+// * Error_169 - String - 
+// * Error_170 - String - 
+// * Error_171 - String - 
+// * Error_172 - String - 
+// * Error_173 - String - 
+// * Error_174 - String - 
+// * Error_175 - String - 
+// * Error_176 - String - 
+// * Error_177 - String - 
+// * Error_178 - String - 
+// * Error_179 - String - 
+// * Error_180 - String - 
+// * Error_181 - String - 
+// * Error_182 - String - 
+// * Error_183 - String - 
+// * Error_184 - String - 
+// * Error_185 - String - 
+// * Error_186 - String - 
 // * Error_FillTotalAmount - String - 
 // * MF_Error_001 - String - 
 // * MF_Error_002 - String - 
@@ -374,6 +513,7 @@
 // * InfoMessage_038 - String - 
 // * InfoMessage_039 - String - 
 // * InfoMessage_040 - String - 
+// * InfoMessage_041 - String - 
 // * InfoMessage_WriteObject - String - 
 // * InfoMessage_Payment - String - 
 // * InfoMessage_PaymentReturn - String - 
@@ -418,6 +558,9 @@
 // * QuestionToUser_028 - String - 
 // * QuestionToUser_029 - String - 
 // * QuestionToUser_030 - String - 
+// * QuestionToUser_031 - String - 
+// * QuestionToUser_032 - String - 
+// * QuestionToUser_033 - String - 
 // * SuggestionToUser_1 - String - 
 // * SuggestionToUser_2 - String - 
 // * SuggestionToUser_3 - String - 
@@ -447,6 +590,10 @@
 // * Exc_010 - String - 
 // * Exc_011 - String - 
 // * Exc_012 - String - 
+// * Exc_013 - String - 
+// * Exc_014 - String - 
+// * Exc_015 - String - 
+// * Exc_016 - String - 
 // * Saas_001 - String - 
 // * Saas_002 - String - 
 // * Saas_003 - String - 
@@ -507,6 +654,13 @@
 // * Add_Setiings_010 - String - 
 // * Add_Setiings_011 - String - 
 // * Add_Setiings_012 - String - 
+// * Add_Settings_013 - String - 
+// * Add_Settings_014 - String - 
+// * Add_Settings_015 - String - 
+// * Add_Settings_016 - String - 
+// * Add_Settings_017 - String - 
+// * Add_Settings_018 - String - 
+// * Add_Settings_019 - String - 
 // * Mob_001 - String - 
 // * CP_001 - String - 
 // * CP_002 - String - 
@@ -514,6 +668,7 @@
 // * CP_004 - String - 
 // * CP_005 - String - 
 // * CP_006 - String - 
+// * CP_007 - String - 
 // * LDT_Button_Title - String - 
 // * LDT_Button_ToolTip - String - 
 // * LDT_FailReading - String - 
@@ -558,7 +713,7 @@
 // * RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory - String - 
 // * SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory - String - 
 // * SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues - String - 
-// * SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming - String - 
+// * SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming - String - 
 // * SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers - String - 
 // * ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues - String - 
@@ -566,12 +721,16 @@
 // * ForeignCurrencyRevaluation_DR_R3010B_CashOnHand_CR_R5021T_Revenues - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions - String - 
 // * ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming - String - 
+// * ForeignCurrencyRevaluation_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment - String - 
 // * ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors - String - 
 // * ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions - String - 
 // * ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing - String - 
+// * ForeignCurrencyRevaluation_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance - String - 
 // * ForeignCurrencyRevaluation_DR_R3015B_CashAdvance_CR_R5021T_Revenues - String - 
 // * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance - String - 
@@ -592,11 +751,15 @@
 // * DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues - String - 
 // * DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions - String - 
 // * DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues - String - 
+// * DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming - String - 
+// * DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming - String - 
 // * CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions - String - 
 // * CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions - String - 
 // * CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors - String - 
 // * CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions - String - 
 // * CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions - String - 
+// * CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions - String - 
+// * CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions - String - 
 // * MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand - String - 
 // * MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit - String - 
 // * MoneyTransfer_DR_R3021B_CashInTransit_CR_R3010B_CashOnHand - String - 
@@ -624,16 +787,20 @@
 // * BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand - String - 
 // * BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand - String - 
 // * BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand - String - 
+// * BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues - String - 
 // * CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder - String - 
 // * CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand - String - 
+// * CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues - String - 
 // * BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder - String - 
 // * BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange - String - 
 // * BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues - String - 
 // * BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit - String - 
 // * BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions - String - 
 // * BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues - String - 
+// * BankReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment - String - 
 // * CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder - String - 
 // * CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions - String - 
+// * CashReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment - String - 
 // * Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual - String - 
 // * Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes - String - 
 // * Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes - String - 
@@ -643,23 +810,41 @@
 // * DebitCreditNote_R5020B_PartnersBalance - String - 
 // * DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset - String - 
 // * DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset - String - 
+// * DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues - String - 
+// * DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance - String - 
 // * ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses - String - 
 // * RevenueAccruals_DR_R6080T_OtherPeriodsRevenues_CR_R5021T_Revenues - String - 
 // * ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses - String - 
 // * RevenueAccruals_DR_R5021T_Revenues_CR_R6080T_OtherPeriodsRevenues - String - 
 // * EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance - String - 
 // * EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance - String - 
+// * EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance - String - 
 // * SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers - String - 
 // * SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions - String - 
-// * SalesReturn_DR_R5021T_Revenues_CR_R1040B_TaxesOutgoing - String - 
+// * SalesReturn_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions - String - 
 // * SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory - String - 
 // * PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions - String - 
 // * PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory - String - 
-// * PurchaseReturn_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions - String - 
+// * PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming - String - 
+// * TaxesOperation_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing - String - 
+// * TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions - String - 
+// * TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing - String - 
+// * ExternalAccountingOperation - String - 
+// * AdditionalCostAllocation_DR_R4050B_StockInventory_CR_R5022T_Expenses - String - 
+// * AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory - String - 
+// * WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors - String - 
+// * WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions - String - 
+// * WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions - String - 
+// * WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions - String - 
+// * FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues - String - 
+// * FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset - String - 
+// * ExternalAccountingOperationExchangeReport - String - 
 // * InternalCommands_SetNotActive - String - 
 // * InternalCommands_SetNotActive_Check - String - 
 // * InternalCommands_ShowNotActive - String - 
 // * InternalCommands_ShowNotActive_Check - String - 
+// * InternalCommands_ShowNumerator - String - 
+// * InternalCommands_ShowNumerator_Check - String - 
 // * FormulaEditor_Delimiters - String - 
 // * FormulaEditor_Space - String - 
 // * FormulaEditor_Operators - String - 
@@ -705,9 +890,225 @@
 // * AuditLock_002 - String - 
 // * AuditLock_003 - String - 
 // * AuditLock_004 - String - 
+// * AuditLock_005 - String - 
+// * AuditLock_006 - String - 
+// * DocStatus_Name - String - 
+// * DocStatus_New - String - 
+// * DocStatus_Posted - String - 
+// * DocStatus_NotPosted - String - 
+// * DocStatus_Deleted - String - 
+// * DocPresentation - String - 
+// * DatePresentation - String - 
+// * PeriodClosing_Step1 - String - 
+// * PeriodClosing_Step2 - String - 
+// * PeriodClosing_Step3 - String - 
+// * PeriodClosing_Step4 - String - 
+// * PeriodClosing_Step5 - String - 
+// * PeriodClosing_Step6 - String - 
+// * PeriodClosing_Step7 - String - 
+// * PeriodClosing_Step8 - String - 
+// * PeriodClosing_Error1 - String - 
+// * PeriodClosing_Error2 - String - 
+// * PeriodClosing_Error3 - String - 
+// * PeriodClosing_Error4 - String - 
+// * PeriodClosing_Error5 - String - 
+// * PeriodClosing_Error6 - String - 
+// * SettingsStorage1 - String - 
+// * SettingsStorage2 - String - 
+// * SettingsStorage3 - String - 
+// * SettingsStorage4 - String - 
+// * SettingsStorage5 - String - 
+// * SettingsStorage6 - String - 
+// * Mobile_1 - String - 
+// * Mobile_2 - String - 
+// * Mobile_3 - String - 
+// * Mobile_4 - String - 
+// * Mobile_5 - String - 
+// * Mobile_6 - String - 
+// * Issue_1 - String - 
+// * Issue_2 - String - 
+// * SystemAttribute_Store - String - 
+// * SystemAttribute_Partner - String - 
+// * SystemAttribute_PartnerTerm - String - 
+// * SystemAttribute_LegalName - String - 
+// * SystemAttribute_LegalNameContract - String - 
+// * Update_001 - String - 
+// * UpdateDesc_001 - String - 
+// * Update_002 - String - 
+// * UpdateDesc_002 - String - 
+// * Update_003 - String - 
+// * UpdateDesc_003 - String - 
+// * Update_004 - String - 
+// * UpdateDesc_004 - String - 
+// * Update_005 - String - 
+// * UpdateDesc_005 - String - 
+// * Error_RaiseOnCalculationError - String - 
+// * Error_UnsupportedExternalLinkSO - String - 
+// * Error_UnsupportedInternalLinkSI - String - 
+// * Error_UnsupportedExternalLinkSI - String - 
+// * Error_UnsupportedInternalLinkSC - String - 
+// * Error_UnsupportedExternalLinkSC - String - 
+// * Error_UnsupportedInternalLinkSPO - String - 
+// * Error_UnsupportedExternalLinkSPO - String - 
+// * Error_UnsupportedInternalLinkRSC - String - 
+// * Error_UnsupportedExternalLinkRSC - String - 
+// * Error_UnsupportedInternalLinkSRO - String - 
+// * Error_UnsupportedExternalLinkSRO - String - 
+// * Error_UnsupportedInternalLinkPO - String - 
+// * Error_UnsupportedExternalLinkPO - String - 
+// * Error_UnsupportedInternalLinkGR - String - 
+// * Error_UnsupportedExternalLinkGR - String - 
+// * Error_UnsupportedInternalLinkRGR - String - 
+// * Error_UnsupportedExternalLinkRGR - String - 
+// * Error_UnsupportedInternalLinkPI - String - 
+// * Error_UnsupportedExternalLinkPI - String - 
+// * Error_UnsupportedInternalLinkITO - String - 
+// * Error_UnsupportedExternalLinkITO - String - 
+// * Error_UnsupportedInternalLinkIT - String - 
+// * Error_UnsupportedExternalLinkIT - String - 
+// * Error_UnsupportedExternalLinkISR - String - 
+// * Error_UnsupportedInternalLinkPR - String - 
+// * Error_UnsupportedExternalLinkPR - String - 
+// * Error_UnsupportedInternalLinkSR - String - 
+// * Error_UnsupportedExternalLinkSR - String - 
+// * Error_UnsupportedInternalLinkPRO - String - 
+// * Error_UnsupportedExternalLinkPRO - String - 
+// * Error_UnsupportedInternalLinkRSR - String - 
+// * Error_UnsupportedExternalLinkRSR - String - 
+// * Error_UnsupportedInternalLinkPRR - String - 
+// * Error_UnsupportedInternalLinkRRR - String - 
+// * Error_UnsupportedInternalLinkStockAdjustmentAsSurplus - String - 
+// * Error_UnsupportedInternalLinkStockAdjustmentAsWriteOff - String - 
+// * Error_UnsupportedExternalLinkPhysicalInventory - String - 
+// * Error_UnsupportedInternalLinkWO - String - 
+// * Error_UnsupportedExternalLinkWO - String - 
+// * Error_UnsupportedInternalLinkWS - String - 
+// * Error_UnsupportedExternalLinkSC2 - String - 
+// * Error_GetSeparatorColumnsNotSupported - String - 
+// * Error_FormElementNotFound - String - 
+// * Error_UnsupportedRegisterType - String - 
+// * Error_TableNotFoundInTempTables - String - 
+// * Error_DocumentAndAdvancesKeyNotFound - String - 
+// * Error_DocumentAndTransactionsKeyNotFound - String - 
+// * Error_UnknownAdvanceRegister - String - 
+// * Error_UnknownTransactionRegister - String - 
+// * Error_PostingInfoNotFound - String - 
+// * Error_AdvanceLessThanZero - String - 
+// * Error_FoundMoreThanOneCompany - String - 
+// * Error_FoundMoreThanOneItemKey - String - 
+// * Error_UnsupportedCommandName - String - 
+// * Error_UnsupportedBundleType - String - 
+// * Error_NotHandledViewNotify - String - 
+// * Error_KeyNotAllowedForDataPath - String - 
+// * Error_RowNotFoundInTable - String - 
+// * Error_RowNotFoundInSourceTableMap - String - 
+// * Error_WrongDataPathForReadOnlyProperty - String - 
+// * Error_UnknownRefType - String - 
+// * Error_StepsEnablerNotDefined - String - 
+// * Error_UnsupportedExternalLinkSC3 - String - 
+// * Task_Result_Execution - String - 
+// * Task_Result_Execution_Not - String - 
+// * Task_Result_Verification - String - 
+// * Task_Result_Verification_Not - String - 
+// * Task_Result_Confirmation - String - 
+// * Task_Result_Confirmation_Not - String - 
 Function Strings(Lang) Export
 
 	Strings = New Structure();
+
+#Region SimpleBatch
+	Strings.Insert("SB_NotEnoughBatch", NStr("en='8D130C08-2706-8E28-8BA9-9CF74F1215E0_______________%1,%2,%3'", Lang));
+#EndRegion
+
+#Region GenericErrors
+        Strings.Insert("JobAborted", NStr("en='D4EA092E-0437-D17F-F20B-BBFB6AF63BB7'", Lang));
+        Strings.Insert("CannotConnectDriver", NStr("en='F87C276A-3050-4E5A-ABD8-86A4A90077D1'", Lang));
+        Strings.Insert("CannotConnectHardwareService", NStr("en='41F8304B-7832-BF9D-DCCF-F8D7E86AC3C6'", Lang));
+        Strings.Insert("CannotAttachAddIn", NStr("en='1ABCF541-9FB5-1625-54E4-4D1B5CBFB783%1'", Lang));
+        Strings.Insert("CannotGetDataKKT", NStr("en='D6FB7553-9BFE-429A-AF93-343548F79E55'", Lang));
+        Strings.Insert("NotFoundOriginRowForClone", NStr("en='E674C2AA-F328-CB07-7EE5-5CC9EE5A7602'", Lang));
+        Strings.Insert("SerialOwnerNotItemKey", NStr("en='7EBFED4A-46D2-300E-EF6F-F2194704EEAF___'", Lang));
+        Strings.Insert("WrongAdvanceDirection", NStr("en='7E9F1F95-4DEA-AEE6-613C-CCAADA371A8D'", Lang));
+        Strings.Insert("UnknownTransactionType", NStr("en='622B41C5-969B-B904-424E-EAC2C3DC9BFC'", Lang));
+        Strings.Insert("UnknownTransactionTypeT2015", NStr("en='50745935-CA14-D33E-EDAD-DF4AD4EE091B_________________[T2015S_TransactionsInfo]'", Lang));
+        Strings.Insert("UnknownTransactionTypeTableT2014", NStr("en='4BE79F5C-161B-EDE7-7E98-804A0B0DC995___________________[Table_T2014S_AdvancesInfo]'", Lang));
+        Strings.Insert("NotSupportedDRR5022TCashAdvance", NStr("en='52BB1575-4416-BDD9-9B7E-E7888DA866E4____________________[DR_R5022T_Expenses_CR_R3015B_CashAdvance]'", Lang));
+        Strings.Insert("ErrorOnPostingDocument", NStr("en='9F04B8AA-2501-BA8D-D78D-DB174DDBD05A'", Lang));
+        Strings.Insert("ConvertingDataToFillingValuesFailed", NStr("en='5C34A248-6BD0-98AE-ED37-7B829096356F____'", Lang));
+        Strings.Insert("AnalyticTypeNotDefined", NStr("en='4E33D9CB-FF0D-7AB0-024A-AC4D90F9845E'", Lang));
+        Strings.Insert("PropertyBeforeChangeDataPathNoRows", NStr("en='C866E21E-20C4-84A3-3773-30318EF2DA99___________________________'", Lang));
+       Strings.Insert("OneJobFailed", NStr("en='DDCA0E04-28AF-4FE4-4C9E-E961FF66F0B2'", Lang));
+       Strings.Insert("UnsupportedUpdateStatus", NStr("en='06921477-F87C-2187-7D16-65A9ECECE785%1'", Lang));
+       Strings.Insert("DocumentQueryError", NStr("en='4A997EC6-568C-FE52-2219-9CADB94CEFD8%1,%2'", Lang));
+       Strings.Insert("UnknownFilterType", NStr("en='A068FF46-E1E6-028D-DBA3-31C3A9D812B0%1'", Lang));
+       Strings.Insert("FoundMoreThanOneWhenOptionNot", NStr("en='75441006-3D70-4AA3-30C4-4ACAE9DE658D___%1,%2'", Lang));
+       Strings.Insert("DescriptionFormulaOperandError", NStr("en='C7525718-F759-801E-EFA3-3161C459D2DE_________________%1,%2'", Lang));
+       Strings.Insert("CacheRowsUndefined", NStr("en='25A70917-F3FD-F88D-D783-3C2F5A9DE383________________________%1'", Lang));
+       Strings.Insert("CachePropertyNotFound", NStr("en='39364743-3DCB-E749-932E-E8ECAF726DCB__________________%1'", Lang));
+       Strings.Insert("WrongListProperty", NStr("en='DEA4F561-9E53-387D-D066-664154123526%1'", Lang));
+       Strings.Insert("CachePropertyDeleteNotFound", NStr("en='FC9CDCD2-3DF1-6DD7-7E5D-DF5190D9A8C7_____%1'", Lang));
+       Strings.Insert("WrongDatapathRemoveCache", NStr("en='92DFB0F6-9784-74FD-D0D7-7CD19CFD2013%1'", Lang));
+       Strings.Insert("UnknownAgreementTypeByDebtType", NStr("en='E2EF2170-C49F-11B2-2BC9-95B358A79742%1'", Lang));
+       Strings.Insert("IDInfoNotFoundByName", NStr("en='5D1E0AA0-6A29-DA12-2785-57491D23785C%1'", Lang));
+       Strings.Insert("MoreThanOneAnalyticRowsFilter", NStr("en='0C7ADF95-05E6-5710-0896-69A8305E90E9_____________________________________%1,%2,%3'", Lang));
+       Strings.Insert("DocumentAccountingOpNotSupported", NStr("en='4F6D7788-84E7-ED8C-C560-08AF2E66E657_____________%1,%2'", Lang));
+       Strings.Insert("UnsupportedRegisterName", NStr("en='A5F7A21E-CC79-493D-D15B-B5EDA785B39A%1'", Lang));
+       Strings.Insert("UnsupportedCheckType", NStr("en='AEBB80D8-1DBE-1D38-8BC0-03EEAD7ABE0C%1'", Lang));
+       Strings.Insert("ExtDimensionTypeNotDefined", NStr("en='7622F2C2-C134-DFCF-FF42-25518702F0D0________%1,%2,%3'", Lang));
+       Strings.Insert("ExternalRefValueNotFound", NStr("en='AAB85844-37D8-9DAA-A546-6D5F93A25BCE%1'", Lang));
+       Strings.Insert("ExternalValueNotFound", NStr("en='A05AC762-4FD2-BADB-B681-16A8ABC75C1B_%1'", Lang));
+       Strings.Insert("UnsupportedTransactionType", NStr("en='00817809-EE79-3C32-2274-46F260CC6BE8%1'", Lang));
+       Strings.Insert("GetBasisesNotSupported", NStr("en='BA372E02-1787-7FE5-51F9-92520AA40A1A%1'", Lang));
+       Strings.Insert("UnsupportedExternalLink", NStr("en='29C2D1E6-F687-4380-0D46-6275EE0DABF4%1'", Lang));
+       Strings.Insert("UnsupportedInternalLink", NStr("en='CBDC9027-DFE0-675A-AF8F-F884F8745905%1'", Lang));
+       Strings.Insert("UnknownControlCodeStringType", NStr("en='1E3B0C6C-3B05-7739-9A7D-DE9399A3AFCF'", Lang));
+        Strings.Insert("CannotGetPointInTime", NStr("en='A9F42016-5B51-3C68-86D8-8E46B6925D90'", Lang));
+        Strings.Insert("CannotFiscalizeCCSTypeNone", NStr("en='25E329A4-ED07-BE1F-FF2D-DF2615E27230___________________________________________________________________________'", Lang));
+        Strings.Insert("CannotFiscalizeCCSTypeEmpty", NStr("en='54A1C913-D0C4-776B-BDD6-63EF10253169_____________________________________________________________________________'", Lang));
+        Strings.Insert("ControlStringCodeNotFilled", NStr("en='BF9D6BDB-9F88-F9E0-066B-B22CA779AD71___%1'", Lang));
+        Strings.Insert("ControlStringCodeCountMismatch", NStr("en='FED0B007-FDC9-F06F-F451-162C1873C826____________________________%1'", Lang));
+        Strings.Insert("ControlStringMultipleRowsNotSupported", NStr("en='2A7BF742-5FF1-15D0-0025-54FA54BF6625___________________________%1'", Lang));
+        Strings.Insert("WrongExternalFunctionType", NStr("en='C6CF08DF-004E-475E-E899-96B3ACB849E1'", Lang));
+        Strings.Insert("CurrencyInfoMoreThanOne", NStr("en='A94BCADB-0EBD-C072-2248-807C9CDA7435'", Lang));
+        Strings.Insert("RowsWithStoresEmpty", NStr("en='670ABB14-6D2C-0AEF-F5B2-2E2A8C1A22CB'", Lang));
+        Strings.Insert("DefaultAgreementOnlyCustVendor", NStr("en='0A637850-239A-97DA-A56A-A09028353092_______________________'", Lang));
+        Strings.Insert("BatchForSalesReturnNotFound", NStr("en='14248BF7-7EC8-F4C1-1B40-08DABE317324'", Lang));
+        Strings.Insert("UnsupportedRowDataType", NStr("en='B718B7B7-14A7-51B0-0278-8262A9D07EF0'", Lang));
+        Strings.Insert("UnsupportedType", NStr("en='5B8325F7-CEFE-BC63-3B21-119FBCA81556%1'", Lang));
+        Strings.Insert("LoadMoreThanOneTableNotImplemented", NStr("en='06994157-982E-1F63-31C8-85F854D80263____'", Lang));
+        Strings.Insert("TempStorageTypeNotSupported", NStr("en='53B20DA6-D3B9-0095-50B8-8FDB70369F88'", Lang));
+        Strings.Insert("UnsupportedOperation", NStr("en='3ECAAAB2-7F4F-F62C-C31D-D6E570A09A2C%1'", Lang));
+        Strings.Insert("UnsupportedDirection", NStr("en='C77D0340-69E0-48B3-3F55-5AD6AB47844E%1'", Lang));
+        Strings.Insert("UnsupportedDocumentType", NStr("en='769F3777-E0C4-A8CF-FDDD-DEEDB8501866%1'", Lang));
+        Strings.Insert("UnsupportedRegisterMetadata", NStr("en='CFD0C2A5-A62B-22BC-C798-8C62DE6A390B%1'", Lang));
+        Strings.Insert("UnsupportedWhoIsChanged", NStr("en='C84D29C8-D949-AAC2-2CCA-AD64D257B519[WhoIsChanged],%1'", Lang));
+        Strings.Insert("WrongDataPath", NStr("en='58C96F3E-CCA5-04A2-23C3-3A10AD6739FC%1'", Lang));
+
+        Strings.Insert("TypeNotFound", NStr("en='E8EDF4E6-3D27-632B-BF80-0798E47C8FA6%1'", Lang));
+        Strings.Insert("CreateNewAnalyticsNotSupported", NStr("en='0AB2F952-1904-5AD3-3E95-57F1DF3A6CC5_________________'", Lang));
+        Strings.Insert("TaxNotAllowedForDocument", NStr("en='8C89459D-B7A1-1452-26B1-1376E07AF842____________'", Lang));
+        Strings.Insert("RiseTestFalseString", NStr("en='CD3B4249-1920-303C-C63B-B93F7BC8E0D5'", Lang));
+        Strings.Insert("CorrectionDescriptionRequired", NStr("en='7CCB658C-82E5-8CD1-135F-F53ACA656383____'", Lang));
+        Strings.Insert("GoodsReceiptPreliminaryPurchaseInvoice", NStr("en='8543E83C-2E59-3463-3682-2845B5BA5E18_____________________________________________________________________'", Lang));
+        Strings.Insert("UndefinedTabularSection", NStr("en='FD64DBFA-2FFE-AF20-00C6-6F7C311CF1BD_____%1,%2'", Lang));
+        Strings.Insert("RecordSetCountNotOne", NStr("en='C2E7BB94-241F-4383-39BB-B8B8E54EC0C2%1'", Lang));
+        Strings.Insert("UnsupportedMetadata", NStr("en='B172613F-3087-83A6-6AD3-388CB6D2FCBC%1'", Lang));
+        Strings.Insert("ItemListRowsCountNotOne", NStr("en='D8256A21-1C8B-CC29-9DCB-B8FAA78A2196%1,%2'", Lang));
+        Strings.Insert("MainRowsCountNotOne", NStr("en='1FFF95F9-E2B1-BFA0-032D-DB0316742424%1,%2'", Lang));
+        Strings.Insert("UnableReplaceRef", NStr("en='749D5E21-5436-4B17-794B-B05BC8F789F7%1'", Lang));
+        Strings.Insert("UnsupportedSettingStorageName", NStr("en='0C6B32A8-5385-BEFC-C776-6EF505FD7B0D_%1'", Lang));
+        Strings.Insert("InternalAccountNotFound", NStr("en='FC198899-F07A-5B1B-B432-2459013AE915_________________________________________________%1,%2,%3'", Lang));
+        Strings.Insert("InternalAccountMoreThanOne", NStr("en='20B74A85-2564-180F-F04E-EA8067DF0A0E_________________________________________________________%1,%2,%3'", Lang));
+       Strings.Insert("UnsupportedAnalyticType", NStr("en='D228016C-8B7B-4973-3119-910288A5AAA5%1'", Lang));
+       Strings.Insert("ItemFormUnknownCommand", NStr("en='A7A107F6-6DE6-262A-A799-91B19EF666B4%1'", Lang));
+       Strings.Insert("LedgerLocalizationCodeNotFilled", NStr("en='FFCA1C57-AAF6-4FEB-B45E-E0CAC41433B9__________________%1'", Lang));
+       Strings.Insert("LedgerAccountMainDrNotDefined", NStr("en='5CC83168-13F6-0549-9EF0-0E43D522E152%1,%2'", Lang));
+       Strings.Insert("LedgerAccountSubDrNotDefined", NStr("en='07B9F888-DAB7-5D9D-D326-6EE825B72B32%1,%2'", Lang));
+       Strings.Insert("LedgerAccountMainCrNotDefined", NStr("en='832B96CE-1E28-3B22-2695-51CC9037D68A%1,%2'", Lang));
+       Strings.Insert("LedgerAccountSubCrNotDefined", NStr("en='90BA74FD-F23D-CE12-2BB3-34F7E75A4648%1,%2'", Lang));
+       Strings.Insert("InvoiceTypeNotSupported", NStr("en='C9138535-A9F8-E0A5-5F6A-AE4FEEEA6FFD%1'", Lang));
+       Strings.Insert("FewRetailCustomerFound", NStr("en='C54DF8F9-1DD7-3C45-5B26-68635BE986A1'", Lang));
+#EndRegion
 
 #Region Access
 	Strings.Insert("ACS_UnknownValueType", NStr("en='B2FD40A5-6AEB-720F-F57B-B5C7495847E3__________'", Lang));
@@ -743,8 +1144,11 @@ Function Strings(Lang) Export
 #Region SMS
 	Strings.Insert("SMS_SendIsOk", NStr("en='DD77B758-A86A-0CAE-EE53-31CE699BB1D8'", Lang));
 	Strings.Insert("SMS_SendIsError", NStr("en='1AA01DBD-B625-E81E-EE95-5E1E66F9CEC1'", Lang));
-	Strings.Insert("SMS_WaitUntilNextSend", NStr("en='CB532443-C98B-A99A-A19D-DAACA093B226%1'", Lang));
-	Strings.Insert("SMS_SMSCodeWrong", NStr("en='22332D2D-8E98-007C-C167-715E712928D7'", Lang));
+        Strings.Insert("SMS_WaitUntilNextSend", NStr("en='CB532443-C98B-A99A-A19D-DAACA093B226%1'", Lang));
+        Strings.Insert("SMS_SMSCodeWrong", NStr("en='22332D2D-8E98-007C-C167-715E712928D7'", Lang));
+        Strings.Insert("DefaultSMSProviderEmpty", NStr("en='E5EBB090-1184-9A6E-E2E1-1278E6DA2ECC'", Lang));
+        Strings.Insert("SMSModuleNotFound", NStr("en='46A82833-FC47-2CCE-EFCA-A841D82A3843'", Lang));
+        Strings.Insert("SMSMethodNotSupported", NStr("en='2BC29086-1E9B-7C60-03C2-285CB5ADD614%1'", Lang));
 #EndRegion
 
 #Region AdditionalTableControl
@@ -789,6 +1193,11 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_FIX_ErrorNotFilledSalesReturnTransactionType", NStr("en='5B5F9EC0-7C09-A634-4BC0-00B6687D86EF________________________'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType", NStr("en='AA9B23AA-06AB-1241-193B-BFA73B1C1123____________________'", Lang));
 	
+	Strings.Insert("ATC_ErrorAddAttributesIsUnknowAttribute", NStr("en='3FA595CD-2A19-6C04-4245-5B251AE54A59%1,%2'", Lang));
+	Strings.Insert("ATC_FIX_ErrorAddAttributesIsUnknowAttribute", NStr("en='FD811865-EE5D-5538-8A94-4C7525D11D7E'", Lang));
+	Strings.Insert("ATC_ErrorAddAttributesNotSetTag", NStr("en='9A1F491F-FB69-9522-2901-1C92CDA9B530%1,%2'", Lang));
+	Strings.Insert("ATC_FIX_ErrorAddAttributesNotSetTag", NStr("en='3475B7CB-0BE8-52A1-1243-3A8E1F481DCC'", Lang));
+	
 #EndRegion
 
 #Region Equipment
@@ -817,6 +1226,7 @@ Function Strings(Lang) Export
 	Strings.Insert("EqError_004", NStr("en='CC3865AA-6A99-BD43-3620-0D8FC532E98D________'", Lang));
 	Strings.Insert("EqError_005", NStr("en='68BB357C-8B23-FC0F-F8CC-C6C098F55087______________%1,%2'", Lang));
 	
+	Strings.Insert("EqFP_ShiftIsExpired", NStr("en='1A32B4B2-0FCB-0100-0499-9987B14B32DB'", Lang));
 	Strings.Insert("EqFP_ShiftAlreadyOpened", NStr("en='891A0E4B-4FDF-E739-9FE9-9ABB43F0D481'", Lang));
 	Strings.Insert("EqFP_ShiftIsNotOpened", NStr("en='5D100E28-E77D-1279-9BC6-620D085AC49F'", Lang));
 	Strings.Insert("EqFP_ShiftAlreadyClosed", NStr("en='4344A774-5C8F-CA35-544E-EFACF40F229B'", Lang));
@@ -933,10 +1343,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_001", NStr("en='227B2DD1-03AA-8EA0-0130-07913DEAA02F'", Lang));
 	Strings.Insert("Form_002", NStr("en='84ADEDC7-D2D9-875F-FB00-081005992A16'", Lang));
 	Strings.Insert("Form_003", NStr("en='51E1E7E3-9C72-BEB1-1C62-233C85FF58E4'", Lang));
-	Strings.Insert("Form_004", NStr("en='C9ACF1DE-33F5-B49A-A261-1A9CBD1A850D'", Lang));
+	Strings.Insert("Form_004", NStr("en='3A659EB0-B69D-6043-30FB-B56170EF5E3D'", Lang));
 	Strings.Insert("Form_005", NStr("en='9394DC76-A7E8-AA35-5FC6-6517717CEECF'", Lang));
 	Strings.Insert("Form_006", NStr("en='B0A85FF6-4C94-A282-28AD-D851313053EA'", Lang));
-	Strings.Insert("Form_007", NStr("en='CB24FD49-510A-71E3-3C26-6B092CEE53EA'", Lang));
+	Strings.Insert("Form_007", NStr("en='9E101B46-651D-F3D8-850B-B67E254DDC33'", Lang));
 	Strings.Insert("Form_008", NStr("en='76C447B0-C7AF-4EE9-9529-9D625A59668E'", Lang));
 	Strings.Insert("Form_009", NStr("en='3C31AAC3-37C3-4A7F-FC55-5277B640ED15'", Lang));
 	Strings.Insert("Form_013", NStr("en='3D008872-6735-3A1E-E347-7972676B69B3'", Lang));
@@ -972,6 +1382,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_037", NStr("en='001DE2EF-D30A-B295-5EC5-5095B02C988B'", Lang));
 	Strings.Insert("Form_038", NStr("en='773327A1-6E49-DCE9-9CF7-73DC06D9F09F'", Lang));
 	Strings.Insert("Form_039", NStr("en='8D0A7925-2616-7BA2-294A-A79D10138249__________________________________________________%1'", Lang));
+	Strings.Insert("Form_040", NStr("en='073F5E84-CB99-80B3-3993-3805907AEAED'", Lang));
+	Strings.Insert("Form_041", NStr("en='53051146-E442-571B-BE6C-C83456A35355___________'", Lang));
+	Strings.Insert("Form_042", NStr("en='9990F68F-7E2F-2AE5-5746-645B1718C196'", Lang));
+	Strings.Insert("Form_043", NStr("en='C5F67AE3-AF76-A5C3-3B2B-B1541092798D________________%1'", Lang));
 #EndRegion
 
 #Region ErrorMessages
@@ -1063,7 +1477,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_053", NStr("en='169F34CA-EC97-C3B6-6CB1-1978E41FBC37_______________________________________________%2,%3,%1'", Lang));
 	
 	// %1 - sales order
-	Strings.Insert("Error_054", NStr("en='CF54FBB4-F580-1E54-439C-CFF317E3F114______________________%1'", Lang));
+	Strings.Insert("Error_054", NStr("en='D001895C-CF54-03DA-AB68-8592B7A522DA_______________________%1'", Lang));
 
 	Strings.Insert("Error_055", NStr("en='B39F867D-8289-A9EF-F9F2-2D1A791FDE8F_________________'", Lang));
 
@@ -1172,7 +1586,7 @@ Function Strings(Lang) Export
 	// %3 - Red/38 
 	// %4 - 8 
 	// %5 - 10
-	Strings.Insert("Error_081", NStr("en='5424D8B7-CCD3-EBE7-7505-538EAC1BB89C_________________%1,%2,%3,%4,%5'",
+	Strings.Insert("Error_081", NStr("en='046F6248-0F4A-307A-A481-10BB1ACE4436____________________%1,%2,%3,%4,%5'",
 		Lang));
 	
 	// %1 - 1 
@@ -1309,6 +1723,50 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("Error_146", NStr("en='0D210B61-E849-22AD-DEA5-5E735458607B'", Lang));
 	Strings.insert("Error_147", NStr("en='0BFD3CA7-AEEE-BC87-7F0E-E17228A189CE___________________'", Lang));
+	Strings.Insert("Error_148", NStr("en='B2754FBE-9217-D4CD-D916-62E3C603AC74_______________________'", Lang));
+
+	Strings.Insert("Error_149", NStr("en='CB5CC892-86D4-D14E-ED15-5DE3DBD49CBB'", Lang));
+	Strings.Insert("Error_150", NStr("en='A3B71130-EB85-149B-B1E8-8A6B5558A4AB'", Lang));
+	Strings.Insert("Error_151", NStr("en='2C08B0F8-96FB-0121-1245-5F1E5DB6D895'", Lang));
+	Strings.Insert("Error_152", NStr("en='87B58B7F-3D1F-1432-290A-A23DD00BEAD6%1'", Lang));
+	Strings.Insert("Error_153", NStr("en='A9043817-64B2-BC4A-A124-461540E5DA46%1,%2'", Lang));
+	Strings.Insert("Error_154", NStr("en='9D89783D-8F31-2A3E-E4E0-0176E8150ADB%1,%2'", Lang));
+	
+	Strings.Insert("Error_155", NStr("en='D09EE7DD-A1AD-BF85-5048-8D0D60B65AD2%1'", Lang));
+	Strings.Insert("Error_156", NStr("en='9DED6BBF-AC53-E948-8A71-1A5505F28B15%1'", Lang));
+	Strings.Insert("Error_157", NStr("en='A8247101-7E6E-A32E-EB1D-DF7FC538A853%1'", Lang));
+	Strings.Insert("Error_158", NStr("en='0C84BD1F-99EF-3E61-145A-A6BB834540C0%1'", Lang));
+	Strings.Insert("Error_159", NStr("en='52A03623-00CF-BD81-1862-29C4F64D284C%1'", Lang));
+	Strings.Insert("Error_160", NStr("en='0550D570-28C7-E397-7267-7A251F940EE4%1'", Lang));
+	Strings.Insert("Error_161", NStr("en='944B5181-3E4F-14CC-C8FC-C5FCD74328F5__________%1'", Lang));
+	Strings.Insert("Error_162", NStr("en='BD5345EF-0FA4-13E8-891A-A26EB4B88AA7_________%1'", Lang));
+	Strings.Insert("Error_163", NStr("en='FFD57EEC-A165-0587-72DF-FFD5454446B0__________%1'", Lang));
+	Strings.Insert("Error_164", NStr("en='D57505F3-E001-9251-1502-2978A0A50725_________%1'", Lang));
+	Strings.Insert("Error_165", NStr("en='C057E7B0-DB45-ABB7-7B0E-E59A5EE4DAE2__________%1'", Lang));
+	Strings.Insert("Error_166", NStr("en='D2411305-4859-C328-889F-FDCD35ECAB13_________%1'", Lang));
+	Strings.Insert("Error_167", NStr("en='560DFBE0-DD4B-F6C2-2C02-2364EDBA6EE6__________%1'", Lang));
+	Strings.Insert("Error_168", NStr("en='464F6DAE-7943-88FE-EC3E-EF78CC2D2314_________%1'", Lang));
+	Strings.Insert("Error_169", NStr("en='89D19792-0680-01E3-3EE4-4AAD2839D04A__________%1'", Lang));
+	Strings.Insert("Error_170", NStr("en='688B19F4-C3B1-4C25-50F7-7E274541A298_________%1'", Lang));
+	Strings.Insert("Error_171", NStr("en='E52837B3-7B68-69D7-76D9-98BFB026377B__________%1'", Lang));
+	Strings.Insert("Error_172", NStr("en='E6FD491F-26AF-B467-79D4-4652BBEB7EAF_________%1'", Lang));
+	Strings.Insert("Error_173", NStr("en='670BB4F5-A168-4A06-6B77-74D45D54DA64___%1,%2'", Lang));
+	Strings.Insert("Error_174", NStr("en='390614C2-170F-0D40-09A8-8BDC8233B2F4_______________'", Lang));
+	Strings.Insert("Error_175", NStr("en='E431424E-7422-3473-30F0-0F65E75DA6ED'", Lang));
+	Strings.Insert("Error_176", NStr("en='EC73475A-A7C0-87FE-E827-72EDED0BFAB7______'", Lang));
+	Strings.Insert("Error_177", NStr("en='BD83F615-81A8-A0E1-1DE0-0595A225081F%1,%2,%3'", Lang));
+	Strings.Insert("Error_178", NStr("en='0B489E71-3C28-936B-B06E-E2FA8BDFE9D0'", Lang));
+	Strings.Insert("Error_179", NStr("en='206F9984-1245-05BD-DCB3-335B8D0FB7EC%1,%2'", Lang));
+	Strings.Insert("Error_180", NStr("en='C129EA99-7595-C47F-FB74-48BD3C1A089B'", Lang));
+	Strings.Insert("Error_181", NStr("en='88BB25DB-FB72-AD59-927B-B1D2AD64C5D8______________________%1'", Lang));
+	Strings.Insert("Error_182", NStr("en='0B120AE5-9309-2049-93C6-6DAE018D3032%1,%2,%3,%2'", Lang));
+	Strings.Insert("Error_183", NStr("en='5E2E8F11-B5B0-729D-D127-7C675F81142C%1,%3,%2'", Lang));
+	Strings.Insert("Error_184", NStr("en='CE2D9F01-8E48-4F71-1924-40E75F00F21B'", Lang));
+	Strings.Insert("Error_185", NStr("en='D241C971-0664-4F82-2487-78F9A2A88C2E_______________________________%1,%2,%3'", Lang));
+	Strings.Insert("Error_186", NStr("en='E203DA14-D0AB-3DC0-064B-BF0A811E60CD_____________%1,%2,%3'", Lang));
+	Strings.Insert("Error_187", NStr("en='356FEE66-FAAA-C061-1497-725D1ED51AF0%1'", Lang));
+	Strings.Insert("Error_188", NStr("en='4D06FE22-7053-F407-7CA3-3475367FFDC8_%1'", Lang));
+	Strings.Insert("Error_189", NStr("en='0F7D27FD-DB0C-C82F-FECD-D2D58CCA0911___'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='E76C9AA7-C27F-D236-698A-A1ACB6BB42B1%1'", Lang));
 	
@@ -1423,6 +1881,7 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_038", NStr("en='62B4FE33-28D5-0B14-4389-95507838FF47_______________________________________________________________________________________________________'", Lang));
 	Strings.Insert("InfoMessage_039", NStr("en='0847EC02-3E83-9ADB-B486-668861C8D2AA'", Lang));
 	Strings.Insert("InfoMessage_040", NStr("en='6D300CE5-9D61-E3DF-F97A-AE98B83E3069'", Lang));
+	Strings.Insert("InfoMessage_041", NStr("en='1178CB2C-F006-0CB8-8E12-208D516358C4'", Lang));
 	
 	Strings.Insert("InfoMessage_WriteObject", NStr("en='2928233E-7EA0-DD38-830F-F339347701A0'", Lang));
 	Strings.Insert("InfoMessage_Payment", NStr("en='FC6DE927-8CF3-CA10-00D4-4E9938551163'", Lang));
@@ -1476,6 +1935,11 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_028", NStr("en='8C422C34-EA75-8D7E-E296-6F68D69E5DDB'", Lang));
 	Strings.Insert("QuestionToUser_029", NStr("en='702B3291-6073-39F0-0844-41430CDE4DAE_________________________________________________________________________________________________________________'", Lang));
 	Strings.Insert("QuestionToUser_030", NStr("en='044A4D5D-DFC6-D6F1-19B9-903B50609F32________'", Lang));
+	Strings.Insert("QuestionToUser_031", NStr("en='0D24930B-E6EC-B469-9637-7403F4EFE383_____________________'",
+		Lang));
+	Strings.Insert("QuestionToUser_032", NStr("en='3C6C9323-5660-EBBC-C22B-B3993DC80E9C_'", Lang));
+	Strings.Insert("QuestionToUser_033", NStr("en='9A5CFBA7-753B-ABC5-599C-C2E3569B5B15___'", Lang));
+		
 #EndRegion
 
 #Region SuggestionToUser
@@ -1497,7 +1961,7 @@ Function Strings(Lang) Export
 	
 	// Interface
 	Strings.Insert("I_1", NStr("en='CF633766-69D6-AC22-2FA2-21DF61CB554C'", Lang));
-	Strings.Insert("I_2", NStr("en='32E494B2-65BC-82E2-2C9A-AD050D13A222'", Lang));
+	Strings.Insert("I_2", NStr("en='2B0365FC-2B39-D6C3-3A63-3F9033A27EC2'", Lang));
 	Strings.Insert("I_3", NStr("en='30ED1AA4-EE80-2D37-761C-C9A1182FF786'", Lang));
 	Strings.Insert("I_4", NStr("en='F2138751-DA6B-23D8-82FC-C37ECA25E82A%1,%2'", Lang));
 	Strings.Insert("I_5", NStr("en='A7E7DC5A-9A28-D58F-F9DB-BC040736D241'", Lang));
@@ -1520,6 +1984,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Exc_010", NStr("en='CF406191-1D5B-480F-F65F-F99D235C65C4%1'", Lang));
 	Strings.Insert("Exc_011", NStr("en='E00F369B-430D-5BFB-B353-31C87EE8CF5F%1'", Lang));
 	Strings.Insert("Exc_012", NStr("en='24DF48BC-51FB-7CF3-308C-C54BAD250E26_____________________%1,%2'", Lang));
+	Strings.Insert("Exc_013", NStr("en='B273D567-936F-34CD-DC2A-A0A7BFD60582%1'", Lang));
+	Strings.Insert("Exc_014", NStr("en='25E362DE-D38D-7A3C-CF55-507EB1F37B17'", Lang));
+	Strings.Insert("Exc_015", NStr("en='93E20531-381C-7553-3465-5520E98A8318'", Lang));
+	Strings.Insert("Exc_016", NStr("en='D3AAAE21-0735-323A-A86D-DF88B4188647'", Lang));
 #EndRegion
 
 #Region Saas
@@ -1615,6 +2083,13 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_010", NStr("en='03609E0B-20FF-8D62-2FDC-C7E84A918326'", Lang));
 	Strings.Insert("Add_Setiings_011", NStr("en='C00C15D1-B130-7112-2A1B-BF2BCC576DD1'", Lang));
 	Strings.Insert("Add_Setiings_012", NStr("en='D20056CC-CBC8-E086-6E33-36F57FCBDD52'", Lang));
+	Strings.Insert("Add_Settings_013", NStr("en='0EE1AEE5-8530-27C2-27AA-A1A7414C44BB'", Lang));
+	Strings.Insert("Add_Settings_014", NStr("en='8A497443-A015-EFC6-6C73-38F198D1C181'", Lang));
+	Strings.Insert("Add_Settings_015", NStr("en='C90CA6E5-EE1E-1CD4-425D-D7B689F6F4FC'", Lang));
+	Strings.Insert("Add_Settings_016", NStr("en='34690DDA-7B34-6B9B-BC46-604965B1CA28'", Lang));
+	Strings.Insert("Add_Settings_017", NStr("en='20D41353-04EE-CD87-78A9-953CFC7D03FA'", Lang));
+	Strings.Insert("Add_Settings_018", NStr("en='4E4F5F66-B05D-A74E-E326-6914AAF23566'", Lang));
+	Strings.Insert("Add_Settings_019", NStr("en='E8D0D51C-7A85-01BE-E0B0-02160F9C192F_____________________________________'", Lang));
 #EndRegion
 
 #Region Mobile
@@ -1631,6 +2106,7 @@ Function Strings(Lang) Export
 	Strings.Insert("CP_004", NStr("en='E93C22BC-9F8B-C682-2B7B-BE3F47795385'", Lang));
 	Strings.Insert("CP_005", NStr("en='CFB4356F-62DB-F7D4-483E-E96C458C1092'", Lang));
 	Strings.Insert("CP_006", NStr("en='BBC0084A-4931-982D-D1F0-0CDBE6887303%1'", Lang));
+	Strings.Insert("CP_007", NStr("en='B66C12F6-FE5E-591B-B8AA-A457A216A4D0'", Lang));
 #EndRegion	
 	
 #Region LoadDataFromTable
@@ -1830,6 +2306,12 @@ Strings.Insert("DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTra
 
 Strings.Insert("DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues",
 	NStr("en='812FA080-6E20-7502-26EC-CBB48E33B2CE_______________________________'", Lang));
+
+Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming",
+	NStr("en='36E16BCE-AEA1-43C8-86ED-D0D7FCCC2893_______________________________'", Lang));
+
+Strings.Insert("DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming",
+	NStr("en='F7179F8D-D5DB-A521-1537-7EC725CA2C04_________________________________'", Lang));
 	
 Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions",
 	NStr("en='0BCBB721-D920-06C3-3AC6-6103B6E48E86_____________________________'", Lang));
@@ -1845,6 +2327,12 @@ Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
 
 Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions",
 	NStr("en='ED805170-0FB4-0046-64E5-5BE41E7D5EF7_________________________________'", Lang));
+
+Strings.Insert("CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
+	NStr("en='0FEFF871-FB3E-8FB0-0FCC-CDDE9520FF6C________________________________'", Lang));
+
+Strings.Insert("CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions",
+	NStr("en='8DF4EF66-0F3D-DAAD-DAD6-6168FC9F3C6E__________________________________'", Lang));
 
 Strings.Insert("MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand",
 	NStr("en='FEDF768B-1C91-739D-DAF4-4FC043271593_______________________'", Lang));
@@ -1927,11 +2415,17 @@ Strings.Insert("BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand",
 Strings.Insert("BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand",
 	NStr("en='B941D19F-B05A-97C1-10A6-668E389B8166______________________________'", Lang));
 
+Strings.Insert("BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues",
+	NStr("en='668AF088-9E82-2F19-9016-6FA6713051CD__________________________________'", Lang));
+
 Strings.Insert("CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder",
 	NStr("en='80020829-B528-3E71-17A3-3EA4AD559314________________________________________________'", Lang));
 
 Strings.Insert("CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand",
 	NStr("en='139DC35D-652C-3C9D-D49A-A71683431FA7____________________________________'", Lang));
+
+Strings.Insert("CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues",
+	NStr("en='995808F8-9B17-48B6-60FE-E565FFE33F42__________________________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
 	NStr("en='E1D06307-7E8D-DE23-3B5D-D44B00F132E6________________________________________________'", Lang));
@@ -1951,11 +2445,17 @@ Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransact
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues",
 	NStr("en='035344C9-DC6D-F602-2C21-17D5685317C8__________________'", Lang));
 
+Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment",
+	NStr("en='6D153D7D-88FA-F22F-FF10-03D47325C14E________________________'", Lang));
+
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
 	NStr("en='D7F13B54-C0C8-D2AF-F132-258C22D9B903________________________________________________'", Lang));
 
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions",
 	NStr("en='EE0DB7A7-5EAD-CF1E-E060-0374F72B6851____________________________________'", Lang));
+
+Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment",
+	NStr("en='E7BF8AA9-5A7F-1FA9-999D-D15A2FE012CA________________________'", Lang));
 
 Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual",
 	NStr("en='EB2600C7-2FE0-1D70-0AD6-629FF963E555____________________________'", Lang));
@@ -1984,6 +2484,12 @@ Strings.Insert("DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_Custom
 Strings.Insert("DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset",
 	NStr("en='D4E8D5BE-F9A8-176A-A2DB-B66B14756714__________________________________________________'", Lang));
 
+Strings.Insert("DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues",
+	NStr("en='C3DB5B29-3EBB-F465-52B1-1A8A122A2BB9___________________________'", Lang));
+
+Strings.Insert("DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance",
+	NStr("en='A9D68555-8D15-3FBD-DCCA-A4345B5F3043____________________________'", Lang));
+
 Strings.Insert("ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses",
 	NStr("en='FCA4D443-ABC6-7884-4EF1-17BC73E36083_________________________________'", Lang));
 
@@ -2001,6 +2507,9 @@ Strings.Insert("EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdv
 	
 Strings.Insert("EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance",
 	NStr("en='D1D1FC81-D741-FC4E-E5AE-E1017688ECE3_______________________________________________'", Lang));
+
+Strings.Insert("EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance",
+	NStr("en='2C13789B-9577-E88F-F58E-E3EDDA78AB98_________________________________________'", Lang));
 
 Strings.Insert("SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
 	NStr("en='4E03C877-87E7-6039-90B7-7A1BB2811D4E___________________________________________'", Lang));
@@ -2032,6 +2541,35 @@ Strings.Insert("TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTr
 Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing",
 	NStr("en='818F7E93-391A-1C55-58B6-6D2BBD8B0C0A__________________________________________'", Lang));
 
+Strings.Insert("ExternalAccountingOperation",
+	NStr("en='AB515055-37D2-92AC-CBD1-1F5E983DD679'", Lang));
+
+Strings.Insert("AdditionalCostAllocation_DR_R4050B_StockInventory_CR_R5022T_Expenses",
+	NStr("en='379F4416-88BE-8F24-4552-25A3E263C2F5____________________________________'", Lang));
+
+Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory",
+	NStr("en='6DB4AD48-6F96-6793-3B81-1AF9DC753685_______________________________________'", Lang));
+
+Strings.Insert("WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
+	NStr("en='0C6302AE-C08A-78D1-1616-61C0559F72FA_______________________________________________'", Lang));
+
+Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
+	NStr("en='C578DB4D-E6E6-B5D2-2EA9-98EA960FB794______________________________________'", Lang));
+
+Strings.Insert("WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
+	NStr("en='7ED76772-1022-F4D7-780E-E9261F5E1933___________________________________________'", Lang));
+
+Strings.Insert("WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions",
+	NStr("en='FCB4DC5E-B925-6E0B-BFE0-076BEC2DD616____________________________________________'", Lang));
+
+Strings.Insert("FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues",
+	NStr("en='365B9CCF-8372-6528-8896-601A0E3225D9________________________________________'", Lang));
+
+Strings.Insert("FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset",
+	NStr("en='D2A4435B-6740-046A-A17C-C3E192AB541B________________________________________'", Lang));
+	
+Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='1A8FBFCD-9091-5DC5-5D0A-A8FC64E1B626_________'", Lang));
+
 #EndRegion
 
 #Region InternalCommands
@@ -2039,6 +2577,9 @@ Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_Tax
 	Strings.Insert("InternalCommands_SetNotActive_Check", NStr("en='D465012D-432D-EDAD-D922-2CB12214E7C7'", Lang));
 	Strings.Insert("InternalCommands_ShowNotActive", NStr("en='5794DDBB-45DF-68A1-1B12-2081E43B6E15'", Lang));
 	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en='412150AF-E4DF-AE64-404F-FB8725BBA403'", Lang));
+	Strings.Insert("InternalCommands_ShowNumerator", NStr("en='E46ED8E9-819A-D0C3-33DA-A1FD89140FCA'", Lang));
+	Strings.Insert("InternalCommands_ShowNumerator_Check", NStr("en='88D6E317-4FF1-170F-F522-2FF88BB02FF1'", Lang));
+	Strings.Insert("InternalCommands_EditQuantity", NStr("en='B7D3262E-7F8E-DA0B-B6E9-97ADD7CC6925'", Lang));
 #EndRegion
 	
 #Region FormulaEditor
@@ -2104,7 +2645,188 @@ Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_Tax
 	Strings.Insert("AuditLock_002", NStr("en='6EAB906A-10B9-47CF-FB62-23DA35E19083'", Lang));
 	Strings.Insert("AuditLock_003", NStr("en='079F1273-6160-5A8C-C336-6F5D3412D7C7'", Lang));
 	Strings.Insert("AuditLock_004", NStr("en='22D666F3-E53D-AB3A-A816-62B3A4374F5D'", Lang));	
+	Strings.Insert("AuditLock_005", NStr("en='AE14ACC9-A2E4-0F04-4207-7485B6F396C0'", Lang));	
+	Strings.Insert("AuditLock_006", NStr("en='23979A11-1834-4F96-674B-B102358B7CB5_________'", Lang));	
 #EndRegion
 	
+#Region DocStatuses
+	Strings.Insert("DocStatus_Name", NStr("en='BE934A7B-505A-D58F-FCA4-4108ED81A986'", Lang));
+	Strings.Insert("DocStatus_New", NStr("en='FE942DC7-3769-A3F5-5066-69356ACCD136'", Lang));
+	Strings.Insert("DocStatus_Posted", NStr("en='0C99C226-2477-1379-9218-808A449878E1'", Lang));
+	Strings.Insert("DocStatus_NotPosted", NStr("en='4FB1BA7E-AE53-C521-19E0-0B65E7A9FF6A'", Lang));	
+	Strings.Insert("DocStatus_Deleted", NStr("en='BF9ABA0A-B3BE-AA4C-C39C-C02D77550C56'", Lang));	
+#EndRegion
+	
+#Region DocPresentations
+	// %1 - Object presentation
+	// %2 - Document number
+	// %3 - Document date
+	Strings.Insert("DocPresentation", NStr("en='D74ACB8C-CE6C-719D-DAA7-76CF114D8537%1,%2,%3'", Lang));
+	
+	Strings.Insert("DatePresentation", NStr("en='E3D23D8C-FA51-55AF-FD59-9B6BF738E57E'", Lang));	
+#EndRegion
+
+#Region PeriodClosing
+	Strings.Insert("PeriodClosing_Step1", NStr("en='66AF1BFA-8457-0D7E-E280-0C47A4738FEC'", Lang));
+	Strings.Insert("PeriodClosing_Step2", NStr("en='DDB29521-E876-CF72-2A4B-B56076886B08'", Lang));
+	Strings.Insert("PeriodClosing_Step3", NStr("en='704877A2-DF5B-E26D-DD84-4A3FBFAEC700'", Lang));
+	Strings.Insert("PeriodClosing_Step4", NStr("en='A9C1CAD5-CADB-DB24-472C-C95FD0CAB973'", Lang));
+	Strings.Insert("PeriodClosing_Step5", NStr("en='73BD6B36-563F-6539-9309-9F45A4ECBC62'", Lang));
+	Strings.Insert("PeriodClosing_Step6", NStr("en='B130BC53-E47E-F165-5A89-95F08FFE211B'", Lang));
+	Strings.Insert("PeriodClosing_Step7", NStr("en='78C24A7B-531E-EDA2-2EC2-2CCE42E2B9B9'", Lang));
+	Strings.Insert("PeriodClosing_Step8", NStr("en='4EF2068B-66E5-5FC3-3281-19FE2F3C96AA'", Lang));
+	
+	Strings.Insert("PeriodClosing_Error1", NStr("en='008E4E5D-603E-3801-14CD-D18D94A417E7'", Lang));
+	Strings.Insert("PeriodClosing_Error2", NStr("en='0D54B78A-76E8-30CD-DD4C-CDDBC3388D6E'", Lang));
+	Strings.Insert("PeriodClosing_Error3", NStr("en='AFFC728E-14CF-D885-598E-E31A2A7FFC14'", Lang));
+	Strings.Insert("PeriodClosing_Error4", NStr("en='9A4067E8-5B62-69F4-4CB6-6EF31209C29D'", Lang));
+	Strings.Insert("PeriodClosing_Error5", NStr("en='B853B031-95B4-B7A3-3630-0980827B91A6'", Lang));
+	Strings.Insert("PeriodClosing_Error6", NStr("en='0FC7BC32-DEB1-6146-66C5-54FEC1B56142%1,%2'", Lang));
+#EndRegion
+
+#Region CopyUserSettings
+	Strings.Insert("SettingsStorage1", NStr("en='0EDAE24E-5842-2616-6101-181D327AB754'", Lang));
+	Strings.Insert("SettingsStorage2", NStr("en='68474319-42BA-30D1-1CA5-5B66E0B7F387'", Lang));
+	Strings.Insert("SettingsStorage3", NStr("en='BB7E35F6-E35E-CB9E-EBE7-729132D1F0A0'", Lang));
+	Strings.Insert("SettingsStorage4", NStr("en='F24B2CDF-981D-DDF3-3654-46D08B41C56C'", Lang));
+	Strings.Insert("SettingsStorage5", NStr("en='AE4B94F7-E24A-1A00-062B-B89BEE256D99'", Lang));
+	Strings.Insert("SettingsStorage6", NStr("en='0769901D-0BA4-C9A0-0A77-7488FD17F983'", Lang));
+#EndRegion
+
+#Region Mobile
+	Strings.Insert("Mobile_1", NStr("en='159D5CD8-F562-C531-19DA-A92467E7724D________________'", Lang));
+	Strings.Insert("Mobile_2", NStr("en='EFD346E5-CEEF-4471-17B7-7FA0DEFBDFD0________________'", Lang));
+	Strings.Insert("Mobile_3", NStr("en='113B24EB-EB48-2824-431D-DEAC13B0863D%1'", Lang));
+	Strings.Insert("Mobile_4", NStr("en='B2D59E74-1CF7-AF5F-FB92-2B4D58E3C23B______________'", Lang));
+	Strings.Insert("Mobile_5", NStr("en='18AA9F6A-9461-369B-B404-4B42A158332D_____________________'", Lang));
+	Strings.Insert("Mobile_6", NStr("en='992964A0-952D-C4C8-899F-FAFA92345244'", Lang));
+#EndRegion
+
+#Region Issue
+    Strings.Insert("Issue_1", NStr("en='A052E940-D869-FB63-33F8-832EC2FA31C9__________'", Lang));
+	Strings.Insert("Issue_2", NStr("en='35191DDC-17FA-8EC3-393A-A9B5BC9F6BB8%1'", Lang));
+#EndRegion
+
+#Region SytemAttributes
+	Strings.Insert("SystemAttribute_Store", NStr("en='8F0F32B2-7C5B-D1B0-06B0-0B3B963A17F7'", Lang));
+	Strings.Insert("SystemAttribute_Partner", NStr("en='87C49892-9F34-5A74-4460-083030E166F8'", Lang));
+	Strings.Insert("SystemAttribute_PartnerTerm", NStr("en='BDEE3F4E-EF71-1EDB-B88A-ACBCCDDC52F1'", Lang));
+	Strings.Insert("SystemAttribute_LegalName", NStr("en='E122051D-B790-EB2A-A22E-E0359BA3E55A'", Lang));
+	Strings.Insert("SystemAttribute_LegalNameContract", NStr("en='4F5186B1-4EEC-3A53-31BA-A6177B72E195'", Lang));
+#EndRegion
+
+#Region Updates
+	Strings.Insert("Update_001", NStr("en='0513A28C-3240-F69B-BBD4-41BD0202BFB5'", Lang));
+	Strings.Insert("UpdateDesc_001", NStr("en='EF1620A2-920A-9FD4-42FE-E1305FE1B8FD
+		|_____________________________________________________________'", Lang));		
+	
+	Strings.Insert("Update_002", NStr("en='24CF0097-C269-8385-590C-CE4BB963BAD1'", Lang));
+	Strings.Insert("UpdateDesc_002", NStr("en='839AC19E-4FA6-3C27-702F-F361F571D465______'", Lang));
+	
+	Strings.Insert("Update_003", NStr("en='F9A37477-F1F4-AB2A-A3BF-F7C2AE59C39C'", Lang));
+	Strings.Insert("UpdateDesc_003", NStr("en='6C2EDDA2-B33E-7C59-96BE-E757B42E3166________________________'", Lang));
+	
+	Strings.Insert("Update_004", NStr("en='09B1D2AF-BDFE-CB09-926E-E1548074CD7F'", Lang));
+	Strings.Insert("UpdateDesc_004", NStr("en='A357EB9C-1C2F-FB47-7B47-7DEA9C46226B_________________________________'", Lang));
+	
+	Strings.Insert("Update_005", NStr("en='F8325522-FF4E-B74D-D076-6A11C5700CED'", Lang));
+	Strings.Insert("UpdateDesc_005", NStr("en='AE4132BC-57DB-2B7D-DB8B-B9FDA8C950E4'", Lang));
+	
+#EndRegion
+
+#Region ErrorMessages
+	// Error messages for various modules
+	Strings.Insert("Error_RaiseOnCalculationError", NStr("en='A31A11D4-CC98-231C-C7CF-F73ED6920B6D'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSO", NStr("en='FDB097B3-8DF0-602A-A1CC-C8E3F650B800________[SO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSI", NStr("en='B6F20AEC-6A2E-3D1E-EF70-05FB62CDFC0F________[SI],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSI", NStr("en='17F293DD-0492-A90E-EFB2-2F641B2B2B86________[SI],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSC", NStr("en='9572BCF2-FC6A-2FBE-EAF1-10A79E15BB24________[SC],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSC", NStr("en='658C6242-D121-DF6D-D4CD-DFACEBFCED08________[SC],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSPO", NStr("en='304AC939-7E66-EEE5-5605-52A9B2C3D319_________[SPO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSPO", NStr("en='6961A198-DAAA-765F-F79E-E23AB65EEF70_________[SPO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRSC", NStr("en='AA6DDFDB-8B24-B871-1D41-1142DA7BB263_________[RSC],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkRSC", NStr("en='CBFCBFC2-897F-9795-5278-8C653CBCE158_________[RSC],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSRO", NStr("en='06766B14-605A-C025-53AE-EBF24DA292A6_________[SRO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSRO", NStr("en='82F1C055-4161-D209-9E11-15F0FEF513F7_________[SRO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPO", NStr("en='08CBE378-5D4C-FFD9-9635-5B8ADB84C4E0________[PO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPO", NStr("en='DF9B9D16-4B83-680B-B390-0CB82D605851________[PO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkGR", NStr("en='05F57660-410C-7259-918E-E9C6523D4DE2________[GR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkGR", NStr("en='1E49F7E1-8CD0-1BF4-4324-4C2BCE1BD438________[GR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRGR", NStr("en='27FA7FDF-8C54-B158-88AF-FCA266DA2F6B_________[RGR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkRGR", NStr("en='2687366A-EBFF-48E5-58F4-40206B98A4EA_________[RGR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPI", NStr("en='21D10745-95FD-72D2-25CB-B5D75D405CCA________[PI],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPI", NStr("en='E4E1C933-20D7-D5C7-768E-EE7EC8B4D562________[PI],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkITO", NStr("en='AA8D71C4-46A1-836F-F38E-EF7FD09F7395_________[ITO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkITO", NStr("en='C98BC6D2-9323-339D-DE24-47D5DF99FA1C_________[ITO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkIT", NStr("en='10D88906-00C7-449B-B007-7A73A78FF82F________[IT],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkIT", NStr("en='3D56B561-4F11-303B-B154-4A5D240EEDB8________[IT],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkISR", NStr("en='393E508D-FE73-59AB-BD56-6F1152C1E5D8_________[ISR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPR", NStr("en='E8D36EB6-069F-B363-3918-8C5E0461225E________[PR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPR", NStr("en='ECFA94F4-A188-6B40-08EB-BC20FD0D8477________[PR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkSR", NStr("en='E8EB4D76-5F7A-241A-AE39-9952D0920264________[SR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSR", NStr("en='7AF12090-9CCE-07A3-31FB-BE3259F50D8B________[SR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPRO", NStr("en='1D046D98-7106-F604-4225-51B20DBF611E_________[PRO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPRO", NStr("en='646E6568-85C6-FB93-3F70-04E6DEA98C88_________[PRO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRSR", NStr("en='79D971D0-BD9D-155A-AEE9-9EA212EC1BC5_________[RSR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkRSR", NStr("en='1DDF2BF8-4CC4-8B18-80F7-7875F5E4A7C5_________[RSR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkPRR", NStr("en='C3B4661C-D8DB-AD28-82A5-54CF5607D7F7_________[PRR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkRRR", NStr("en='2CF9FB17-5B67-892A-A2F6-66F0C783E444_________[RRR],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkStockAdjustmentAsSurplus", NStr("en='DDAE9169-3E08-4463-36E1-1C3A0467E555______________________________[StockAdjustmentAsSurplus],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkStockAdjustmentAsWriteOff", NStr("en='D4A01EAC-5324-A5A4-4A65-5256399A6EE1_______________________________[StockAdjustmentAsWriteOff],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkPhysicalInventory", NStr("en='3408BB14-DEF1-ED07-73DC-CD036442064B_______________________[PhysicalInventory],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkWO", NStr("en='71B46BC6-0328-2A1C-C5AA-A505060E9716________[WO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkWO", NStr("en='A90A187B-A31F-0EE1-155B-B0C0F1C17711________[WO],%1'", Lang));
+	Strings.Insert("Error_UnsupportedInternalLinkWS", NStr("en='4E0682E1-A0A8-892C-C038-87DBB820EC76________[WS],%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSC2", NStr("en='658C6242-D121-DF6D-D4CD-DFACEBFCED08________[SC],%1'", Lang));
+	Strings.Insert("Error_GetSeparatorColumnsNotSupported", NStr("en='0CB4B23A-A35A-B37B-B6C8-89DF66152CBA___%1'", Lang));
+	Strings.Insert("Error_FormElementNotFound", NStr("en='3BB7E85B-AE33-AE4E-E8D9-974A26E63BCB%1'", Lang));
+	Strings.Insert("Error_UnsupportedRegisterType", NStr("en='85160C3A-BF1F-DDA9-90FE-E67FACDA5616%1'", Lang));
+	Strings.Insert("Error_TableNotFoundInTempTables", NStr("en='DAD7D07A-9460-69D7-727F-F9817E38CB5B%1'", Lang));
+	Strings.Insert("Error_DocumentAndAdvancesKeyNotFound", NStr("en='C6AE5926-6742-B268-8BF4-4E545D809F61_______________________%1'", Lang));
+	Strings.Insert("Error_DocumentAndTransactionsKeyNotFound", NStr("en='AA0908FF-D075-1133-30C5-5734A948D0F5___________________________%1'", Lang));
+	Strings.Insert("Error_UnknownAdvanceRegister", NStr("en='15531BF6-5F86-59CD-D392-2DD5577E9782%1'", Lang));
+	Strings.Insert("Error_UnknownTransactionRegister", NStr("en='7727ABB2-ED4A-176C-C1BA-A01DB98868BF%1'", Lang));
+	Strings.Insert("Error_PostingInfoNotFound", NStr("en='9E653E33-8FE7-C807-7259-94E4EE8E032E___%1'", Lang));
+	Strings.Insert("Error_AdvanceLessThanZero", NStr("en='B8CD97A3-876E-48F6-657E-E3446FC5F5F1%1'", Lang));
+	Strings.Insert("Error_FoundMoreThanOneCompany", NStr("en='319EB992-16F2-7187-7CE4-4757EC457BC2_____________________________________'", Lang));
+	Strings.Insert("Error_FoundMoreThanOneItemKey", NStr("en='0589CD3D-4E9E-3A9A-A51A-A6EBE095CAE0____________________'", Lang));
+	Strings.Insert("Error_UnsupportedCommandName", NStr("en='2AC2F7B7-BFA5-534B-BA25-5F50C958B7DE%1'", Lang));
+	Strings.Insert("Error_UnsupportedBundleType", NStr("en='747B372B-262A-63C6-6652-25A19234912B%1'", Lang));
+	Strings.Insert("Error_NotHandledViewNotify", NStr("en='FA31553E-C6D0-FB15-59DD-D0899A7FB7FF%1'", Lang));
+	Strings.Insert("Error_KeyNotAllowedForDataPath", NStr("en='CFFBD274-D724-458B-B357-7A02B06B17EE___%1,%2'", Lang));
+	Strings.Insert("Error_RowNotFoundInTable", NStr("en='D384C182-67EC-9939-9ED7-795F7EF96213_%1,%2'", Lang));
+	Strings.Insert("Error_RowNotFoundInSourceTableMap", NStr("en='EE239C89-5526-2AE9-9AC1-198D28FCC646_____%1,%2'", Lang));
+	Strings.Insert("Error_WrongDataPathForReadOnlyProperty", NStr("en='AB38FD25-5783-DE36-6FB4-4744BB6D3F3A_______%1'", Lang));
+	Strings.Insert("Error_UnknownRefType", NStr("en='9F414EE7-8E32-4BF3-3EE2-29E7ADF1B38C%1'", Lang));
+	Strings.Insert("Error_StepsEnablerNotDefined", NStr("en='887814AD-E107-B93F-FE20-09C100EA4459%1'", Lang));
+	Strings.Insert("Error_UnsupportedExternalLinkSC3", NStr("en='658C6242-D121-DF6D-D4CD-DFACEBFCED08________[SC],%1'", Lang));
+#EndRegion
+
+#Region Tasks
+    Strings.Insert("Task_Result_Execution", NStr("en='807FB5AE-34C6-44DE-EA92-24F5987DFE40'", Lang));
+	Strings.Insert("Task_Result_Execution_Not", NStr("en='DB192549-6C44-1CD0-0AC2-225DA2AB5F42'", Lang));
+    Strings.Insert("Task_Result_Verification", NStr("en='05DFDF96-ED3A-86C2-2113-308BD08F51E2'", Lang));
+	Strings.Insert("Task_Result_Verification_Not", NStr("en='1F9F38DC-61BB-49CA-A7B5-52D40FD4C7C0'", Lang));
+    Strings.Insert("Task_Result_Confirmation", NStr("en='1DD708B4-32E8-8DFD-DCA3-3E0833468641'", Lang));
+	Strings.Insert("Task_Result_Confirmation_Not", NStr("en='21382191-489F-6F26-67CE-E2DCEA68B256'", Lang));
+#EndRegion
+
+#Region SecureStorage
+	Strings.Insert("SecureStorage_CanStoreOnlyStructure", NStr("en='791F723C-EF5B-D8CF-F587-73FA6BF37CF4'", Lang));
+#EndRegion
+
+#Region Dashboard
+	Strings.Insert("Dashboard_01", NStr("en='D105BE57-7E21-3811-1145-52DC35B97C07'", Lang));
+	Strings.Insert("Dashboard_02", NStr("en='6928314A-56A5-63C3-3B9E-E9321ADD6FCF'", Lang));
+	Strings.Insert("Dashboard_03", NStr("en='35114F5A-6E7D-E6B0-088F-F14126F61EF8'", Lang));	
+	Strings.Insert("Dashboard_04", NStr("en='5400DE0B-EF2B-8559-950B-B6D1F3A2C8C6'", Lang));
+	Strings.Insert("Dashboard_05", NStr("en='E29B0D64-688D-A4A3-3ED5-59D5E9C1F59C'", Lang));
+	Strings.Insert("Dashboard_06", NStr("en='F05EC226-53FE-9256-6982-2D216712CEFD'", Lang));
+	Strings.Insert("Dashboard_07", NStr("en='B7356E25-A9F4-E656-6C6D-D9003720C5BE'", Lang));
+	Strings.Insert("Dashboard_08", NStr("en='B4E6F485-737E-AFCD-DBE2-2D1CB267FA3D'", Lang));
+	Strings.Insert("Dashboard_09", NStr("en='AB07E63B-5804-32E0-0E5B-BDD0C2FC7490'", Lang));
+
+#EndRegion
+
 	Return Strings;
 EndFunction

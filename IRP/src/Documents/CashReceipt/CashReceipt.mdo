@@ -60,8 +60,23 @@
   <objectField>Document.CashReceipt.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.CashReceipt.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.CashReceipt.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.CashReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.CashReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.SystemAttributesSets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.SystemAttributesSets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.SystemAttributesSets.Document_CashReceipt</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.SystemAttributes</characteristicValues>
+  <objectField>InformationRegister.SystemAttributes.Dimension.Object</objectField>
+  <typeField>InformationRegister.SystemAttributes.Dimension.Property</typeField>
+  <valueField>InformationRegister.SystemAttributes.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -93,9 +108,12 @@
  <registerRecords>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</registerRecords>
  <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+ <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
  <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
@@ -103,7 +121,6 @@
  <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
  <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
- <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -235,6 +252,21 @@
   </synonym>
   <type>
    <types>CatalogRef.Workstations</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="af4f8cc1-45ae-46a5-874e-b9ce4d9386bf">
+  <name>DetailsByRow</name>
+  <synonym>
+   <key>en</key>
+   <value>90B42DBD-9831-D079-98FA-A3E6893F7828</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -375,10 +407,10 @@
    <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="560cc350-3416-49eb-a147-c33c0c1506a5">
-   <name>Payer</name>
+   <name>LegalName</name>
    <synonym>
     <key>en</key>
-    <value>5152CBFC-D3EE-39BC-CC48-8B76AE5C743B</value>
+    <value>C7AC4445-255E-171D-D65E-EBB402EE7FCB</value>
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>
@@ -457,7 +489,7 @@
    <maxValue xsi:type="core:UndefinedValue"/>
    <choiceParameterLinks>
     <name>Filter.LegalName</name>
-    <field>Document.CashReceipt.TabularSection.PaymentList.Attribute.Payer</field>
+    <field>Document.CashReceipt.TabularSection.PaymentList.Attribute.LegalName</field>
    </choiceParameterLinks>
    <choiceParameterLinks>
     <name>Filter.Company</name>
@@ -558,6 +590,60 @@
    </synonym>
    <type>
     <types>CatalogRef.Projects</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="380bb4df-3fc8-44b0-8c2e-7f504790b37b">
+   <name>Employee</name>
+   <synonym>
+    <key>en</key>
+    <value>25E1F48F-0E2C-D44C-CEAA-AA71B648699C</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.Employee</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9feffeff-f392-4385-966c-495c94646bd3">
+   <name>PaymentPeriod</name>
+   <synonym>
+    <key>en</key>
+    <value>9A2DE915-D676-A4EF-FC23-34F212E65157</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.PlanningPeriods</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.IsSalary</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ed05550c-64c8-4a4e-9f77-1beb6712eb72">
+   <name>CalculationType</name>
+   <synonym>
+    <key>en</key>
+    <value>6301201E-CE30-4A5C-C0F2-2A3F1A014912</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SalaryCalculationType</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

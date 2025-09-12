@@ -115,14 +115,14 @@ Scenario: _051002 check Retail goods receipt movements by the Register  "R4010 A
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail goods receipt 314 dated 24.05.2023 15:17:43'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                       | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                      | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                     | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                     | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                     | 'Receipt'       | '24.05.2023 15:17:43'   | '1'           | 'Store 01'     | 'XS/Blue'    | ''                     |
-			| ''                                                     | 'Receipt'       | '24.05.2023 15:17:43'   | '1'           | 'Store 01'     | 'PZU'        | '8908899877'           |
-			| ''                                                     | 'Receipt'       | '24.05.2023 15:17:43'   | '1'           | 'Store 01'     | 'PZU'        | '8908899879'           |
+			| 'Retail goods receipt 314 dated 24.05.2023 15:17:43'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                       | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                      | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                     | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                     | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                     | 'Receipt'       | '24.05.2023 15:17:43'   | '1'           | 'Store 01'     | 'XS/Blue'    | ''                     | ''                     |
+			| ''                                                     | 'Receipt'       | '24.05.2023 15:17:43'   | '1'           | 'Store 01'     | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                                     | 'Receipt'       | '24.05.2023 15:17:43'   | '1'           | 'Store 01'     | 'PZU'        | '8908899879'           | ''                     |
 
 Scenario: _051003 check Retail goods receipt movements by the Register  "R4011 Free stocks"
 		And I close all client application windows
@@ -157,13 +157,13 @@ Scenario: _051004 check Retail goods receipt movements by the Register  "R4032 G
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail goods receipt 314 dated 24.05.2023 15:17:43'   | ''              | ''                      | ''            | ''             | ''                                                             | ''            |
-			| 'Document registrations records'                       | ''              | ''                      | ''            | ''             | ''                                                             | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'        | ''              | ''                      | ''            | ''             | ''                                                             | ''            |
-			| ''                                                     | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                                             | ''            |
-			| ''                                                     | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                                        | 'Item key'    |
-			| ''                                                     | 'Expense'       | '24.05.2023 15:17:43'   | '-2'          | 'Store 01'     | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | 'XS/Blue'     |
-			| ''                                                     | 'Expense'       | '24.05.2023 15:17:43'   | '-2'          | 'Store 01'     | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | 'PZU'         |
+			| 'Retail goods receipt 314 dated 24.05.2023 15:17:43'   | ''              | ''                      | ''            | ''             | ''                                                             | ''            | ''                 |
+			| 'Document registrations records'                       | ''              | ''                      | ''            | ''             | ''                                                             | ''            | ''                 |
+			| 'Register  "R4032 Goods in transit (outgoing)"'        | ''              | ''                      | ''            | ''             | ''                                                             | ''            | ''                 |
+			| ''                                                     | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                                             | ''            | ''                 |
+			| ''                                                     | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                                        | 'Item key'    | 'Serial lot number'|
+			| ''                                                     | 'Expense'       | '24.05.2023 15:17:43'   | '-2'          | 'Store 01'     | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | 'XS/Blue'     | ''                 |
+			| ''                                                     | 'Expense'       | '24.05.2023 15:17:43'   | '-2'          | 'Store 01'     | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | 'PZU'         | ''                 |
 		
 
 Scenario: _051004 check Retail goods receipt movements by the Register  "TM1010B Row ID movements"
@@ -220,16 +220,16 @@ Scenario: _051010 check Retail goods receipt movements by the Register  "R4010 A
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button	
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail goods receipt 1 204 dated 03.08.2023 10:54:07' | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Register  "R4010 Actual stocks"'                      | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
-			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '1'         | 'Store 01'   | 'L/Green'  | ''                  |
-			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '1'         | 'Store 01'   | 'UNIQ'     | ''                  |
-			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | '38/Black' | ''                  |
-			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | 'PZU'      | '8908899879'        |
-			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | 'UNIQ'     | '09987897977891'    |
+			| 'Retail goods receipt 1 204 dated 03.08.2023 10:54:07' | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                  |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                  |
+			| 'Register  "R4010 Actual stocks"'                      | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                  |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  | ''                  |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' | 'Source of origin'  |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '1'         | 'Store 01'   | 'L/Green'  | ''                  | ''                  |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '1'         | 'Store 01'   | 'UNIQ'     | ''                  | ''                  |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | '38/Black' | ''                  | ''                  |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | 'PZU'      | '8908899879'        | ''                  |
+			| ''                                                     | 'Receipt'     | '03.08.2023 10:54:07' | '2'         | 'Store 01'   | 'UNIQ'     | '09987897977891'    | ''                  |
 		
 Scenario: _051012 check Retail goods receipt movements by the Register  "R4011 Free stocks" (return from customer)
 	And I close all client application windows
@@ -252,3 +252,20 @@ Scenario: _051012 check Retail goods receipt movements by the Register  "R4011 F
 			| ''                                                     | '03.08.2023 10:54:07' | 'Receipt'    | 'Store 01' | 'UNIQ'     | '2'        |
 			| ''                                                     | '03.08.2023 10:54:07' | 'Receipt'    | 'Store 01' | 'UNIQ'     | '1'        |	
 		And I close all client application windows
+
+Scenario: _051013 check WorkOrder movements by the Register "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
+	And I go to line in "List" table
+		| 'Number' |
+		| '314'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail goods receipt 314 dated 24.05.2023 15:17:43' | ''                                                   | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"'              | ''                                                   | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                                   | 'Document'                                           | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                                   | 'Retail goods receipt 314 dated 24.05.2023 15:17:43' | '24.05.2023 15:17:43' | '314'    | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+	And I close all client application windows	

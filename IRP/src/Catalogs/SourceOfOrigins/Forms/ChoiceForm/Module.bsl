@@ -34,6 +34,9 @@ EndProcedure
 
 &AtClient
 Procedure ListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	If IsFolder Then
+		Return;
+	EndIf;
 	CommonFormActions.DynamicListBeforeAddRow(ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter,
 		"Catalog.SourceOfOrigins.ObjectForm");
 EndProcedure

@@ -11,14 +11,18 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Reports.Subsystem.Accounting</name>
+		<name>Subsystem.Accounting</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Accounting</name>
+		<name>DataProcessor.AccountantAutomatedWorkplace</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>

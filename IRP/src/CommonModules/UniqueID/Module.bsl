@@ -7,6 +7,9 @@ Procedure OnCopyRemoveUniqueIDOnCopy(Source, CopiedObject) Export
 EndProcedure
 
 Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
+	If TypeOf(Source) = Type("CatalogObject.Workstations") Then
+		Return; // exeptions with manual control
+	EndIf;
 	If Not ValueIsFilled(Source.UniqueID) Then
 		Source.UniqueID = "_" + StrReplace(String(New UUID()), "-", "");
 	EndIf;
@@ -15,8 +18,6 @@ Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
 	DataLockItem.Mode = DataLockMode.Shared;
 	Try
 		DataLock.Lock();
-		//@skip-check module-unused-local-variable
-		Str = New Structure(Source.UniqueID);
 	Except
 		Cancel = True;
 		CommonFunctionsClientServer.ShowUsersMessage(R().Error_012, "UniqueID", Source);
@@ -30,7 +31,16 @@ Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
 	EndIf;
 EndProcedure
 
-Function FindRefByUniqueMD5(Object, UniqueMD5) Export
+// Find ref by unique m d5.
+// 
+// Parameters:
+//  Object - CatalogObject, DocumentObject - Object
+//  UniqueMD5 - String - Unique MD5
+//  WithoutDeleted - Boolean - Without deleted
+// 
+// Returns:
+//  Undefined - Find ref by unique MD5
+Function FindRefByUniqueMD5(Object, UniqueMD5, WithoutDeleted = False) Export
 	MetadataFullName = Object.Metadata().FullName();
 	DataLock = New DataLock();
 	DataLockItem = DataLock.Add(MetadataFullName);
@@ -43,10 +53,13 @@ Function FindRefByUniqueMD5(Object, UniqueMD5) Export
 	|FROM
 	|	%1 AS T
 	|WHERE
-	|	T.UniqueMD5 = &UniqueMD5 AND T.Ref <> &Ref";
+	|	T.UniqueMD5 = &UniqueMD5 
+	|	AND T.Ref <> &Ref
+	|	AND NOT(T.DeletionMark AND &WithoutDeleted)";
 	Query.Text = StrTemplate(Query.Text, MetadataFullName);
 	Query.SetParameter("UniqueMD5", UniqueMD5);
 	Query.SetParameter("Ref", Object.Ref);
+	Query.SetParameter("WithoutDeleted", WithoutDeleted);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then

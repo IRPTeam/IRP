@@ -108,6 +108,12 @@ Scenario: _043500 preparation (Cash payment)
 			| "Documents.CashTransferOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashTransferOrder.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When create documents for WithholdingTaxInvoice registers (Payment movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.WithholdingTaxInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashPayment.FindByNumber(1529).GetObject().Write(DocumentWriteMode.Posting);"           |
+			| "Documents.CashPayment.FindByNumber(1530).GetObject().Write(DocumentWriteMode.Posting);"           |
+
 	* Load PO, PI, OPO
 		When Create document PurchaseOrder objects (with aging, prepaid, post-shipment credit)
 		And I execute 1C:Enterprise script at server
@@ -148,6 +154,8 @@ Scenario: _043500 preparation (Cash payment)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(326).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document CashPayment objects (return to customer)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashReceipt.FindByNumber(1527).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(327).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document CashPayment objects (with partner term by document, without basis)
@@ -226,7 +234,6 @@ Scenario: _043503 check Cash payment movements by the Register "R1020 Advances t
 			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Agreement'          | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
 			| ''                                           | '04.06.2021 11:30:02' | 'Receipt'    | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | ''        | '960'    | 'No'                   | ''                         |
 			| ''                                           | '04.06.2021 11:30:02' | 'Receipt'    | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | ''        | '164,35' | 'No'                   | ''                         |
-			| ''                                           | '04.06.2021 11:30:02' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | ''        | '960'    | 'No'                   | ''                         |
 			| ''                                           | '04.06.2021 11:30:02' | 'Receipt'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | ''        | '960'    | 'No'                   | ''                         |	
 	And I close all client application windows
 
@@ -269,7 +276,6 @@ Scenario: _043514 check Cash payment movements by the Register "R3035 Cash plann
 			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''                                                     | ''         | ''                    | ''          | ''                  | ''                             | ''                        | ''                | 'Attributes'           |
 			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Basis document'                                       | 'Currency' | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Multi currency movement type' | 'Financial movement type' | 'Planning period' | 'Deferred calculation' |
 			| ''                                           | '04.06.2021 11:30:02' | '-960'      | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing payment order 324 dated 04.06.2021 10:38:24' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Local currency'               | 'Movement type 1'         | 'Second'          | 'No'                   |
-			| ''                                           | '04.06.2021 11:30:02' | '-960'      | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing payment order 324 dated 04.06.2021 10:38:24' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'TRY'                          | 'Movement type 1'         | 'Second'          | 'No'                   |
 			| ''                                           | '04.06.2021 11:30:02' | '-960'      | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing payment order 324 dated 04.06.2021 10:38:24' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'en description is empty'      | 'Movement type 1'         | 'Second'          | 'No'                   |
 			| ''                                           | '04.06.2021 11:30:02' | '-164,35'   | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing payment order 324 dated 04.06.2021 10:38:24' | 'USD'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Reporting currency'           | 'Movement type 1'         | 'Second'          | 'No'                   |	
 	And I close all client application windows
@@ -453,7 +459,6 @@ Scenario: _043523 check Cash payment movements by the Register "R1020 Advances t
 			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Agreement'          | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
 			| ''                                           | '08.02.2022 13:44:32' | 'Receipt'    | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | ''        | '50'     | 'No'                   | ''                         |
 			| ''                                           | '08.02.2022 13:44:32' | 'Receipt'    | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | ''        | '8,56'   | 'No'                   | ''                         |
-			| ''                                           | '08.02.2022 13:44:32' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | ''        | '50'     | 'No'                   | ''                         |
 			| ''                                           | '08.02.2022 13:44:32' | 'Receipt'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | ''        | '50'     | 'No'                   | ''                         |		
 	And I close all client application windows
 
@@ -638,7 +643,6 @@ Scenario: _043528 check Cash payment movements by the Register  "R3011 Cash flow
 			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
 			| ''                                           | '04.06.2021 11:30:02' | '164,35'    | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | 'Second'          | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                           | '04.06.2021 11:30:02' | '960'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | 'Second'          | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                           | '04.06.2021 11:30:02' | '960'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | 'Second'          | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                           | '04.06.2021 11:30:02' | '960'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | 'Second'          | 'TRY'      | 'en description is empty'      | 'No'                   |	
 	And I close all client application windows
 
@@ -663,7 +667,6 @@ Scenario: _043531 check Cash payment movements by the Register  "R3011 Cash flow
 			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
 			| ''                                           | '12.06.2023 15:24:47' | '8,56'      | 'Main Company' | 'Front office' | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                           | '12.06.2023 15:24:47' | '50'        | 'Main Company' | 'Front office' | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                           | '12.06.2023 15:24:47' | '50'        | 'Main Company' | 'Front office' | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                           | '12.06.2023 15:24:47' | '50'        | 'Main Company' | 'Front office' | 'Cash desk №4' | 'Outgoing'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
 
@@ -734,7 +737,6 @@ Scenario: _043534 check Cash payment movements by the Register  "R5015 Other par
 			| ''                                                | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'        | 'Partner'           | 'Agreement'         |'Basis'             | 'Deferred calculation'    |
 			| ''                                                | 'Receipt'       | '12.06.2023 15:24:47'   | '8,56'        | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   |''                  | 'No'                      |
 			| ''                                                | 'Receipt'       | '12.06.2023 15:24:47'   | '50'          | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   |''                  | 'No'                      |
-			| ''                                                | 'Receipt'       | '12.06.2023 15:24:47'   | '50'          | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   |''                  | 'No'                      |
 			| ''                                                | 'Receipt'       | '12.06.2023 15:24:47'   | '50'          | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   |''                  | 'No'                      |
 	And I close all client application windows
 
@@ -904,3 +906,166 @@ Scenario: _043543 check absence Cash payment movements by the Register  "T2015 T
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "T2015 Transactions info"'    |
 		And I close all client application windows
+
+Scenario: _043543 check Cash payment movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 1 dated 05.04.2021 12:40:00' | ''                                         | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'    | ''                                         | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                         | 'Document'                                 | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                         | 'Cash payment 1 dated 05.04.2021 12:40:00' | '05.04.2021 12:40:00' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		
+
+Scenario: _043544 check Cash payment movements by the Register "Posted documents registry" (WithholdingTaxInvoice)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1 529'  |
+	* Check movements
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 1 529 dated 05.05.2025 13:57:00' | ''                                             | ''                    | ''       | ''                    | ''                    | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'        | ''                                             | ''                    | ''       | ''                    | ''                    | ''                        | ''                        | ''                      |
+			| ''                                             | 'Document'                                     | 'Date'                | 'Number' | 'Create date'         | 'Modify date'         | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                             | 'Cash payment 1 529 dated 05.05.2025 13:57:00' | '05.05.2025 13:57:00' | '1 529'  | '*'                   | '*'                   | 'en description is empty' | 'en description is empty' | 'No'                    |		
+	And I close all client application windows
+
+Scenario: _043545 check Cash payment movements by the Register "R1021 Vendors transactions" (WithholdingTaxInvoice)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1 529'  |
+	* Check movements
+		And I click "Registrations report info" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 1 529 dated 05.05.2025 13:57:00' | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                                    | ''      | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1021 Vendors transactions"'       | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                                    | ''      | ''        | ''       | ''                     | ''                         |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                               | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                             | '05.05.2025 13:57:00' | 'Expense'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Withholding tax invoice 2 dated 03.05.2025 12:25:23' | ''      | ''        | '150'    | 'No'                   | ''                         |
+			| ''                                             | '05.05.2025 13:57:00' | 'Expense'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Withholding tax invoice 2 dated 03.05.2025 12:25:23' | ''      | ''        | '25,68'  | 'No'                   | ''                         |
+			| ''                                             | '05.05.2025 13:57:00' | 'Expense'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Withholding tax invoice 2 dated 03.05.2025 12:25:23' | ''      | ''        | '150'    | 'No'                   | ''                         |		
+	And I close all client application windows	
+
+Scenario: _043546 check Cash payment movements by the Register "R3010 Cash on hand" (WithholdingTaxInvoice)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1 529'  |
+	* Check movements
+		And I click "Registrations report info" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 1 529 dated 05.05.2025 13:57:00' | ''                    | ''           | ''             | ''       | ''             | ''         | ''                     | ''                             | ''       | ''                     |
+			| 'Register  "R3010 Cash on hand"'               | ''                    | ''           | ''             | ''       | ''             | ''         | ''                     | ''                             | ''       | ''                     |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Account'      | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '05.05.2025 13:57:00' | 'Expense'    | 'Main Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Local currency'               | '150'    | 'No'                   |
+			| ''                                             | '05.05.2025 13:57:00' | 'Expense'    | 'Main Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'en description is empty'      | '150'    | 'No'                   |
+			| ''                                             | '05.05.2025 13:57:00' | 'Expense'    | 'Main Company' | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Reporting currency'           | '25,68'  | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _043547 check Cash payment movements by the Register "R3011 Cash flow" (WithholdingTaxInvoice)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1 529'  |
+	* Check movements
+		And I click "Registrations report info" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 1 529 dated 05.05.2025 13:57:00' | ''                    | ''             | ''       | ''             | ''          | ''                        | ''                        | ''                | ''         | ''                             | ''       | ''                     |
+			| 'Register  "R3011 Cash flow"'                  | ''                    | ''             | ''       | ''             | ''          | ''                        | ''                        | ''                | ''         | ''                             | ''       | ''                     |
+			| ''                                             | 'Period'              | 'Company'      | 'Branch' | 'Account'      | 'Direction' | 'Financial movement type' | 'Cash flow center'        | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '05.05.2025 13:57:00' | 'Main Company' | ''       | 'Cash desk №4' | 'Outgoing'  | 'Movement type 3'         | 'Distribution department' | ''                | 'TRY'      | 'Local currency'               | '150'    | 'No'                   |
+			| ''                                             | '05.05.2025 13:57:00' | 'Main Company' | ''       | 'Cash desk №4' | 'Outgoing'  | 'Movement type 3'         | 'Distribution department' | ''                | 'TRY'      | 'en description is empty'      | '150'    | 'No'                   |
+			| ''                                             | '05.05.2025 13:57:00' | 'Main Company' | ''       | 'Cash desk №4' | 'Outgoing'  | 'Movement type 3'         | 'Distribution department' | ''                | 'USD'      | 'Reporting currency'           | '25,68'  | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _043548 check Cash payment movements by the Register "R5010 Reconciliation statement" (WithholdingTaxInvoice)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1 529'  |
+	* Check movements
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 1 529 dated 05.05.2025 13:57:00' | ''                    | ''           | ''             | ''       | ''         | ''                  | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'   | ''                    | ''           | ''             | ''       | ''         | ''                  | ''                    | ''       |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Currency' | 'Legal name'        | 'Legal name contract' | 'Amount' |
+			| ''                                             | '05.05.2025 13:57:00' | 'Receipt'    | 'Main Company' | ''       | 'TRY'      | 'Company Ferron BP' | ''                    | '150'    |		
+	And I close all client application windows
+
+Scenario: _043549 check Cash payment movements by the Register "R5020 Partners balance" (WithholdingTaxInvoice)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1 529'  |
+	* Check movements
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 1 529 dated 05.05.2025 13:57:00' | ''                    | ''           | ''             | ''       | ''          | ''                  | ''                   | ''                                                    | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'           | ''                    | ''           | ''             | ''       | ''          | ''                  | ''                   | ''                                                    | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Document'                                            | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                             | '05.05.2025 13:57:00' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Withholding tax invoice 2 dated 03.05.2025 12:25:23' | 'TRY'      | 'Local currency'               | 'TRY'                  | '150'    | ''                     | ''                 | '150'                | ''               | ''                  | ''                 |
+			| ''                                             | '05.05.2025 13:57:00' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Withholding tax invoice 2 dated 03.05.2025 12:25:23' | 'TRY'      | 'en description is empty'      | 'TRY'                  | '150'    | ''                     | ''                 | '150'                | ''               | ''                  | ''                 |
+			| ''                                             | '05.05.2025 13:57:00' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Withholding tax invoice 2 dated 03.05.2025 12:25:23' | 'USD'      | 'Reporting currency'           | 'TRY'                  | '25,68'  | ''                     | ''                 | '25,68'              | ''               | ''                  | ''                 |		
+	And I close all client application windows
+
+Scenario: _043550 check Cash payment movements by the Register "T1040 Accounting amounts" (WithholdingTaxInvoice)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1 529'  |
+	* Check movements
+		And I click "Registrations report info" button
+		And I select "T1040 Accounting amounts" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 1 529 dated 05.05.2025 13:57:00' | ''                    | ''        | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
+			| 'Register  "T1040 Accounting amounts"'         | ''                    | ''        | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
+			| ''                                             | 'Period'              | 'Row key' | 'Operation'               | 'Multi currency movement type' | 'Currency' | 'Revaluated currency' | 'Dr currency' | 'Cr currency' | 'Amount' | 'Dr currency amount' | 'Cr currency amount' | 'Deferred calculation' | 'Advances closing' |
+			| ''                                             | '05.05.2025 13:57:00' | '*'       | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | 'TRY'         | ''            | '150'    | '150'                | ''                   | 'No'                   | ''                 |
+			| ''                                             | '05.05.2025 13:57:00' | '*'       | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | 'TRY'         | ''            | '25,68'  | '150'                | ''                   | 'No'                   | ''                 |
+			| ''                                             | '05.05.2025 13:57:00' | '*'       | 'en description is empty' | 'en description is empty'      | 'TRY'      | ''                    | 'TRY'         | ''            | '150'    | '150'                | ''                   | 'No'                   | ''                 |
+	And I close all client application windows
+
+Scenario: _043551 check Cash payment movements by the Register "T2015 Transactions info" (WithholdingTaxInvoice)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1 529'  |
+	* Check movements
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 1 529 dated 05.05.2025 13:57:00' | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                                    | ''          | ''        | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'          | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                                    | ''          | ''        | ''       | ''       | ''        |
+			| ''                                             | 'Company'      | 'Branch' | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                                   | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                             | 'Main Company' | ''       | ''      | '05.05.2025 13:57:00' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Withholding tax invoice 2 dated 03.05.2025 12:25:23' | '*'         | ''        | '150'    | 'No'     | 'Yes'     |
+	And I close all client application windows

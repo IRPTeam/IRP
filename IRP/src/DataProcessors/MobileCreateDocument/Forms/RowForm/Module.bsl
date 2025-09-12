@@ -78,7 +78,7 @@ Procedure SerialLotNumberCreating(Item, StandardProcessing)
 	FormParameters.Insert("ItemKey", ThisObject.ItemKey);
 	FormParameters.Insert("Description", Item.EditText);
 	
-	OpenForm("Catalog.SerialLotNumbers.ObjectForm", FormParameters, ThisObject, , , , New NotifyDescription("AfterCreateNewSerial", ThisObject));
+	OpenForm("Catalog.SerialLotNumbers.ObjectForm", FormParameters, ThisObject, , , , New CallbackDescription("AfterCreateNewSerial", ThisObject));
 EndProcedure
 
 &AtClient

@@ -43,6 +43,7 @@ Scenario: _040130 preparation (Sales invoice)
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
 		When Create catalog Partners objects
+		When Create OtherPartners objects
 		When Create catalog Companies objects (partners company)
 		When Create catalog Countries objects
 		When Create catalog LegalNameContracts objects
@@ -124,6 +125,9 @@ Scenario: _040130 preparation (Sales invoice)
 		When Create document SalesInvoice objects (comission trade, consignment)
 		When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
 		When Create document SalesInvoiceobjects (serial lot numbers sales)
+		When Create document SalesInvoice objects (partner Other)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(135).GetObject().Write(DocumentWriteMode.Posting);"    |		
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -169,6 +173,23 @@ Scenario: _040130 preparation (Sales invoice)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(1113).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.SalesInvoice.FindByNumber(1113).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Load documents for register R6060 Cost of goods sold
+		When create document for register R6060 Cost of goods sold
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.SalesInvoice.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(2506).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.PurchaseInvoice.FindByNumber(2506).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseReturn.FindByNumber(234).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.PurchaseReturn.FindByNumber(234).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.SalesReturn.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(1).GetObject().Write(DocumentWriteMode.Write);"      |
+			| "Documents.CalculationMovementCosts.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Check query for sales invoice movements
 		// Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"
 		// And in the table "Info" I click "Fill movements" button
@@ -201,14 +222,11 @@ Scenario: _0401311 check Sales invoice movements by the Register  "R2005 Sales s
 			| ''                                          | '28.01.2021 18:48:53' | '16,26'        | '13,78'      | '0,86'          | ''                 | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Internet' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'DocumentDiscount' |
 			| ''                                          | '28.01.2021 18:48:53' | '84,57'        | '71,67'      | '4,45'          | ''                 | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'DocumentDiscount' |
 			| ''                                          | '28.01.2021 18:48:53' | '95'           | '80,51'      | '5'             | ''                 | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Internet' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '95'           | '80,51'      | '5'             | ''                 | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Internet' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'DocumentDiscount' |
 			| ''                                          | '28.01.2021 18:48:53' | '95'           | '80,51'      | '5'             | ''                 | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Internet' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'DocumentDiscount' |
 			| ''                                          | '28.01.2021 18:48:53' | '494'          | '418,64'     | '26'            | ''                 | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '494'          | '418,64'     | '26'            | ''                 | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'DocumentDiscount' |
 			| ''                                          | '28.01.2021 18:48:53' | '494'          | '418,64'     | '26'            | ''                 | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'DocumentDiscount' |
 			| ''                                          | '28.01.2021 18:48:53' | '569,24'       | '482,41'     | '29,96'         | ''                 | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'DocumentDiscount' |
 			| ''                                          | '28.01.2021 18:48:53' | '3 325'        | '2 817,8'    | '175'           | ''                 | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '3 325'        | '2 817,8'    | '175'           | ''                 | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'DocumentDiscount' |
 			| ''                                          | '28.01.2021 18:48:53' | '3 325'        | '2 817,8'    | '175'           | ''                 | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'DocumentDiscount' |	
 		And I close all client application windows
 		
@@ -271,13 +289,13 @@ Scenario: _040135 check Sales invoice movements by the Register  "R4050 Stock in
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53'   | ''              | ''                      | ''            | ''               | ''           | ''            |
-			| 'Document registrations records'              | ''              | ''                      | ''            | ''               | ''           | ''            |
-			| 'Register  "R4050 Stock inventory"'           | ''              | ''                      | ''            | ''               | ''           | ''            |
-			| ''                                            | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''           | ''            |
-			| ''                                            | ''              | ''                      | 'Quantity'    | 'Company'        | 'Store'      | 'Item key'    |
-			| ''                                            | 'Expense'       | '28.01.2021 18:48:53'   | '1'           | 'Main Company'   | 'Store 02'   | 'XS/Blue'     |
-			| ''                                            | 'Expense'       | '28.01.2021 18:48:53'   | '10'          | 'Main Company'   | 'Store 02'   | '36/Red'      |
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
+			| 'Document registrations records'              | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
+			| 'Register  "R4050 Stock inventory"'           | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
+			| ''                                            | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''            |'Attributes'                |
+			| ''                                            | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'    |'Calculation movement cost' |
+			| ''                                            | 'Expense'       | '28.01.2021 18:48:53'   | '1'           | ''                    | 'Main Company'   | 'Store 02'   | 'XS/Blue'     | ''                         |
+			| ''                                            | 'Expense'       | '28.01.2021 18:48:53'   | '10'          | ''                    | 'Main Company'   | 'Store 02'   | '36/Red'      | ''                         |
 			
 		And I close all client application windows
 		
@@ -300,14 +318,11 @@ Scenario: _040136 check Sales invoice movements by the Register  "R2001 Sales"
 			| ''                                          | '28.01.2021 18:48:53' | '1'         | '16,26'  | '13,78'      | '0,86'          | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Internet' |''                  | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                |
 			| ''                                          | '28.01.2021 18:48:53' | '1'         | '84,57'  | '71,67'      | '4,45'          | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  |''                  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Alexander Orlov' |
 			| ''                                          | '28.01.2021 18:48:53' | '1'         | '95'     | '80,51'      | '5'             | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Internet' |''                  | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                |
-			| ''                                          | '28.01.2021 18:48:53' | '1'         | '95'     | '80,51'      | '5'             | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Internet' |''                  | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                |
 			| ''                                          | '28.01.2021 18:48:53' | '1'         | '95'     | '80,51'      | '5'             | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Internet' |''                  | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | ''                |
 			| ''                                          | '28.01.2021 18:48:53' | '1'         | '494'    | '418,64'     | '26'            | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  |''                  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Alexander Orlov' |
-			| ''                                          | '28.01.2021 18:48:53' | '1'         | '494'    | '418,64'     | '26'            | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  |''                  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Alexander Orlov' |
 			| ''                                          | '28.01.2021 18:48:53' | '1'         | '494'    | '418,64'     | '26'            | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  |''                  | '63008c12-b682-4aff-b29f-e6927036b05a' | 'Alexander Orlov' |
 			| ''                                          | '28.01.2021 18:48:53' | '10'        | '569,24' | '482,41'     | '29,96'         | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   |''                  | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'Alexander Orlov' |
 			| ''                                          | '28.01.2021 18:48:53' | '10'        | '3 325'  | '2 817,8'    | '175'           | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   |''                  | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'Alexander Orlov' |
-			| ''                                          | '28.01.2021 18:48:53' | '10'        | '3 325'  | '2 817,8'    | '175'           | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   |''                  | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'Alexander Orlov' |
 			| ''                                          | '28.01.2021 18:48:53' | '10'        | '3 325'  | '2 817,8'    | '175'           | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   |''                  | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'Alexander Orlov' |		
 		And I close all client application windows
 		
@@ -329,7 +344,6 @@ Scenario: _040137 check Sales invoice movements by the Register  "R2021 Customer
 			| ''                                            | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'                    | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'     | 'Agreement'                  | 'Basis'                                       | 'Order'                                     | 'Project'    | 'Deferred calculation'   | 'Customers advances closing'    |
 			| ''                                            | 'Receipt'       | '28.01.2021 18:48:53'   | '670,08'      | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales invoice 1 dated 28.01.2021 18:48:53'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | ''           | 'No'                     | ''                              |
 			| ''                                            | 'Receipt'       | '28.01.2021 18:48:53'   | '3 914'       | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales invoice 1 dated 28.01.2021 18:48:53'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | ''           | 'No'                     | ''                              |
-			| ''                                            | 'Receipt'       | '28.01.2021 18:48:53'   | '3 914'       | 'Main Company'   | 'Distribution department'   | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales invoice 1 dated 28.01.2021 18:48:53'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | ''           | 'No'                     | ''                              |
 			| ''                                            | 'Receipt'       | '28.01.2021 18:48:53'   | '3 914'       | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales invoice 1 dated 28.01.2021 18:48:53'   | 'Sales order 1 dated 27.01.2021 19:50:45'   | ''           | 'No'                     | ''                              |
 		And I close all client application windows
 				
@@ -374,13 +388,13 @@ Scenario: _040140 check Sales invoice movements by the Register  "R4032 Goods in
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53'     | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
-			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
-			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
-			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                                  | ''         |
-			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                             | 'Item key' |
-			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '1'         | 'Store 02'   | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | 'XS/Blue'  |
-			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '10'        | 'Store 02'   | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | '36/Red'   |		
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53'     | ''            | ''                    | ''          | ''           | ''                                                  | ''         | ''                  |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''                                                  | ''         | ''                  |
+			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''                                                  | ''         | ''                  |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                                  | ''         | ''                  |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                             | 'Item key' | 'Serial lot number' |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '1'         | 'Store 02'   | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | 'XS/Blue'  | ''                  |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '10'        | 'Store 02'   | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | '36/Red'   | ''                  |
 		And I close all client application windows
 		
 Scenario: _040141 check Sales invoice movements by the Register  "R5011 Customers aging" (without aging)
@@ -429,15 +443,9 @@ Scenario: _040143 check Sales invoice movements by the Register  "R2040 Taxes in
 			| 'Register  "R2040 Taxes incoming"'          | ''            | ''                    | ''          | ''             | ''                        | ''    | ''         | ''             | ''                             | ''         | ''                     |
 			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''    | ''         | ''             | ''                             | ''         | ''                     |
 			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '2,48'      | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '12,9'      | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '14,49'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '14,49'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '75,36'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '75,36'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '86,83'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '507,2'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '507,2'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |		
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '102,21'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '597,05'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '597,05'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |	
 		And I close all client application windows
 		
 Scenario: _040144 check Sales invoice movements by the Register  "R4034 Scheduled goods shipments" (use shedule)
@@ -587,19 +595,19 @@ Scenario: _0401446 check Sales invoice movements by the Register  "R5021 Revenue
 		And I select "R5021 Revenues" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains values
-			| 'Period'                | 'Amount'    | 'Amount with taxes'   | 'Dimensions'     | ''                          | ''          | ''           | ''      | ''   | ''                           |
-			| '28.01.2021 18:49:39'   | '13,78'     | '16,26'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'Internet'   | 'USD'   | ''   | 'Reporting currency'         |
-			| '28.01.2021 18:49:39'   | '80,51'     | '95'                  | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'Internet'   | 'TRY'   | ''   | 'Local currency'             |
-			| '28.01.2021 18:49:39'   | '80,51'     | '95'                  | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'Internet'   | 'TRY'   | ''   | 'TRY'                        |
-			| '28.01.2021 18:49:39'   | '80,51'     | '95'                  | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'Internet'   | 'TRY'   | ''   | 'en description is empty'    |
-			| '28.01.2021 18:49:39'   | '358,36'    | '422,86'              | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'XS/Blue'    | 'USD'   | ''   | 'Reporting currency'         |
-			| '28.01.2021 18:49:39'   | '482,41'    | '569,24'              | 'Main Company'   | 'Distribution department'   | 'Revenue'   | '36/Red'     | 'USD'   | ''   | 'Reporting currency'         |
-			| '28.01.2021 18:49:39'   | '2 093,2'   | '2 470'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'XS/Blue'    | 'TRY'   | ''   | 'Local currency'             |
-			| '28.01.2021 18:49:39'   | '2 093,2'   | '2 470'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'XS/Blue'    | 'TRY'   | ''   | 'TRY'                        |
-			| '28.01.2021 18:49:39'   | '2 093,2'   | '2 470'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'XS/Blue'    | 'TRY'   | ''   | 'en description is empty'    |
-			| '28.01.2021 18:49:39'   | '2 817,8'   | '3 325'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | '36/Red'     | 'TRY'   | ''   | 'Local currency'             |
-			| '28.01.2021 18:49:39'   | '2 817,8'   | '3 325'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | '36/Red'     | 'TRY'   | ''   | 'TRY'                        |
-			| '28.01.2021 18:49:39'   | '2 817,8'   | '3 325'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | '36/Red'     | 'TRY'   | ''   | 'en description is empty'    |
+			| 'Period'                | 'Amount'    | 'Amount with taxes'   | 'Dimensions'     | ''                          | ''          | ''           | ''      | ''   | ''                           |'Attributes'|
+			| '28.01.2021 18:49:39'   | '13,78'     | '16,26'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'Internet'   | 'USD'   | ''   | 'Reporting currency'         | ''         |
+			| '28.01.2021 18:49:39'   | '80,51'     | '95'                  | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'Internet'   | 'TRY'   | ''   | 'Local currency'             | ''         |
+			| '28.01.2021 18:49:39'   | '80,51'     | '95'                  | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'Internet'   | 'TRY'   | ''   | 'TRY'                        | ''         |
+			| '28.01.2021 18:49:39'   | '80,51'     | '95'                  | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'Internet'   | 'TRY'   | ''   | 'en description is empty'    | ''         |
+			| '28.01.2021 18:49:39'   | '358,36'    | '422,86'              | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'XS/Blue'    | 'USD'   | ''   | 'Reporting currency'         | ''         |
+			| '28.01.2021 18:49:39'   | '482,41'    | '569,24'              | 'Main Company'   | 'Distribution department'   | 'Revenue'   | '36/Red'     | 'USD'   | ''   | 'Reporting currency'         | ''         |
+			| '28.01.2021 18:49:39'   | '2 093,2'   | '2 470'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'XS/Blue'    | 'TRY'   | ''   | 'Local currency'             | ''         |
+			| '28.01.2021 18:49:39'   | '2 093,2'   | '2 470'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'XS/Blue'    | 'TRY'   | ''   | 'TRY'                        | ''         |
+			| '28.01.2021 18:49:39'   | '2 093,2'   | '2 470'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | 'XS/Blue'    | 'TRY'   | ''   | 'en description is empty'    | ''         |
+			| '28.01.2021 18:49:39'   | '2 817,8'   | '3 325'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | '36/Red'     | 'TRY'   | ''   | 'Local currency'             | ''         |
+			| '28.01.2021 18:49:39'   | '2 817,8'   | '3 325'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | '36/Red'     | 'TRY'   | ''   | 'TRY'                        | ''         |
+			| '28.01.2021 18:49:39'   | '2 817,8'   | '3 325'               | 'Main Company'   | 'Distribution department'   | 'Revenue'   | '36/Red'     | 'TRY'   | ''   | 'en description is empty'    | ''         |
 		And I close all client application windows	
 
 
@@ -619,12 +627,12 @@ Scenario: _0401333 check Sales invoice movements by the Register  "R4010 Actual 
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Register  "R4010 Actual stocks"'           | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
-			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:50:57' | '24'        | 'Store 02'   | '37/18SD'  | ''                  |		
+			| 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                  |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                  |
+			| 'Register  "R4010 Actual stocks"'           | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                  |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  | ''                  |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' | 'Source of origin'  |
+			| ''                                          | 'Expense'     | '28.01.2021 18:50:57' | '24'        | 'Store 02'   | '37/18SD'  | ''                  |	 ''                 |	
 		And I close all client application windows
 
 Scenario: _0401334 check Sales invoice movements (with serial lot numbers) by the Register  "R4010 Actual stocks" (SO-SI-SC, not use SC)
@@ -638,12 +646,12 @@ Scenario: _0401334 check Sales invoice movements (with serial lot numbers) by th
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 112 dated 23.05.2022 16:25:33'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                 | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                | 'Expense'       | '23.05.2022 16:25:33'   | '23'          | 'Store 02'     | 'PZU'        | '8908899879'           |
+			| 'Sales invoice 1 112 dated 23.05.2022 16:25:33'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                 | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                | 'Expense'       | '23.05.2022 16:25:33'   | '23'          | 'Store 02'     | 'PZU'        | '8908899879'           | ''                     |
 		And I close all client application windows
 		
 Scenario: _0401343 check Sales invoice movements by the Register  "R2011 Shipment of sales orders" (SO-SI, not use SC)
@@ -699,14 +707,14 @@ Scenario: _0401385 check Sales invoice movements by the Register  "R4032 Goods i
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 3 dated 28.01.2021 18:50:57'     | ''            | ''                    | ''          | ''           | ''                                          | ''         |
-			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''                                          | ''         |
-			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''                                          | ''         |
-			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                          | ''         |
-			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                     | 'Item key' |
-			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '1'         | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57' | 'XS/Blue'  |
-			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '10'        | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '36/Red'   |
-			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '24'        | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '36/18SD'  |		
+			| 'Sales invoice 3 dated 28.01.2021 18:50:57'     | ''            | ''                    | ''          | ''           | ''                                          | ''         | ''                  |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''                                          | ''         | ''                  |
+			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''                                          | ''         | ''                  |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                          | ''         | ''                  |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                     | 'Item key' | 'Serial lot number' |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '1'         | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57' | 'XS/Blue'  | ''                  |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '10'        | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '36/Red'   | ''                  |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '24'        | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '36/18SD'  |	''                  |	
 		And I close all client application windows
 
 
@@ -869,13 +877,13 @@ Scenario: _0401319 check Sales invoice movements by the Register  "R4032 Goods i
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 4 dated 16.02.2021 10:59:49'       | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    |
-			| ''                                                | 'Receipt'       | '16.02.2021 10:59:49'   | '1'           | 'Store 02'     | 'Sales invoice 4 dated 16.02.2021 10:59:49'   | 'XS/Blue'     |
-			| ''                                                | 'Receipt'       | '16.02.2021 10:59:49'   | '24'          | 'Store 02'     | 'Sales invoice 4 dated 16.02.2021 10:59:49'   | '37/18SD'     |
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49'       | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            | ''                 |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    | 'Serial lot number'|
+			| ''                                                | 'Receipt'       | '16.02.2021 10:59:49'   | '1'           | 'Store 02'     | 'Sales invoice 4 dated 16.02.2021 10:59:49'   | 'XS/Blue'     | ''                 |
+			| ''                                                | 'Receipt'       | '16.02.2021 10:59:49'   | '24'          | 'Store 02'     | 'Sales invoice 4 dated 16.02.2021 10:59:49'   | '37/18SD'     | ''                 |
 		And I close all client application windows
 
 //8 SI>SO
@@ -920,13 +928,13 @@ Scenario: _0401327 check Sales invoice movements by the Register  "R4032 Goods i
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 8 dated 18.02.2021 10:48:46'       | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    |
-			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '10'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     |
-			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '15'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     |
+			| 'Sales invoice 8 dated 18.02.2021 10:48:46'       | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            | ''                 |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    | 'Serial lot number'|
+			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '10'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     | ''                 |
+			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '15'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     | ''                 |
 		And I close all client application windows
 
 Scenario: _0401327 check Sales invoice movements by the Register  "R4032 Goods in transit (outgoing)" (SI >SO, use SC)
@@ -940,13 +948,13 @@ Scenario: _0401327 check Sales invoice movements by the Register  "R4032 Goods i
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 8 dated 18.02.2021 10:48:46'       | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    |
-			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '10'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     |
-			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '15'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     |
+			| 'Sales invoice 8 dated 18.02.2021 10:48:46'       | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            | ''                 |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    | 'Serial lot number'|
+			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '10'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     | ''                 |
+			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '15'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     | ''                 |
 		And I close all client application windows
 
 // Commission trade
@@ -962,21 +970,21 @@ Scenario: _0401330 check Sales invoice movements by the Register  "R4010 Actual 
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 192 dated 02.11.2022 10:53:19'   | ''              | ''                      | ''            | ''                    | ''           | ''                     |
-			| 'Document registrations records'                | ''              | ''                      | ''            | ''                    | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'               | ''              | ''                      | ''            | ''                    | ''           | ''                     |
-			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'          | ''           | ''                     |
-			| ''                                              | ''              | ''                      | 'Quantity'    | 'Store'               | 'Item key'   | 'Serial lot number'    |
-			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '1'           | 'Trade agent store'   | '37/18SD'    | ''                     |
-			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '2'           | 'Trade agent store'   | 'PZU'        | '8908899877'           |
-			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '2'           | 'Trade agent store'   | 'PZU'        | '8908899879'           |
-			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '2'           | 'Trade agent store'   | 'UNIQ'       | ''                     |
-			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '4'           | 'Trade agent store'   | 'XS/Blue'    | ''                     |
-			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '1'           | 'Store 01'            | '37/18SD'    | ''                     |
-			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '2'           | 'Store 01'            | 'PZU'        | '8908899877'           |
-			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '2'           | 'Store 01'            | 'PZU'        | '8908899879'           |
-			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '2'           | 'Store 01'            | 'UNIQ'       | ''                     |
-			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '4'           | 'Store 01'            | 'XS/Blue'    | ''                     |
+			| 'Sales invoice 192 dated 02.11.2022 10:53:19'   | ''              | ''                      | ''            | ''                    | ''           | ''                     | ''                     |
+			| 'Document registrations records'                | ''              | ''                      | ''            | ''                    | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'               | ''              | ''                      | ''            | ''                    | ''           | ''                     | ''                     |
+			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'          | ''           | ''                     | ''                     |
+			| ''                                              | ''              | ''                      | 'Quantity'    | 'Store'               | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '1'           | 'Trade agent store'   | '37/18SD'    | ''                     | ''                     |
+			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '2'           | 'Trade agent store'   | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '2'           | 'Trade agent store'   | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '2'           | 'Trade agent store'   | 'UNIQ'       | ''                     | ''                     |
+			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '4'           | 'Trade agent store'   | 'XS/Blue'    | ''                     | ''                     |
+			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '1'           | 'Store 01'            | '37/18SD'    | ''                     | ''                     |
+			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '2'           | 'Store 01'            | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '2'           | 'Store 01'            | 'PZU'        | '8908899879'           | ''                     |
+			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '2'           | 'Store 01'            | 'UNIQ'       | ''                     | ''                     |
+			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '4'           | 'Store 01'            | 'XS/Blue'    | ''                     | ''                     |
 	And I close all client application windows
 				
 Scenario: _0401331 check Sales invoice movements by the Register  "R4011 Free stocks" (Shipment to trade agent)
@@ -1033,19 +1041,19 @@ Scenario: _0401333 check Sales invoice movements by the Register  "R4050 Stock i
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 192 dated 02.11.2022 10:53:19'   | ''              | ''                      | ''            | ''               | ''                    | ''            |
-			| 'Document registrations records'                | ''              | ''                      | ''            | ''               | ''                    | ''            |
-			| 'Register  "R4050 Stock inventory"'             | ''              | ''                      | ''            | ''               | ''                    | ''            |
-			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''                    | ''            |
-			| ''                                              | ''              | ''                      | 'Quantity'    | 'Company'        | 'Store'               | 'Item key'    |
-			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '1'           | 'Main Company'   | 'Trade agent store'   | '37/18SD'     |
-			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '2'           | 'Main Company'   | 'Trade agent store'   | 'UNIQ'        |
-			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '4'           | 'Main Company'   | 'Trade agent store'   | 'XS/Blue'     |
-			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '4'           | 'Main Company'   | 'Trade agent store'   | 'PZU'         |
-			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '1'           | 'Main Company'   | 'Store 01'            | '37/18SD'     |
-			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '2'           | 'Main Company'   | 'Store 01'            | 'UNIQ'        |
-			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '4'           | 'Main Company'   | 'Store 01'            | 'XS/Blue'     |
-			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '4'           | 'Main Company'   | 'Store 01'            | 'PZU'         |
+			| 'Sales invoice 192 dated 02.11.2022 10:53:19'   | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                         |
+			| 'Document registrations records'                | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                         |
+			| 'Register  "R4050 Stock inventory"'             | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                         |
+			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''                    | ''            |'Attributes'                |
+			| ''                                              | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'               | 'Item key'    |'Calculation movement cost' |
+			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '1'           | ''                    | 'Main Company'   | 'Trade agent store'   | '37/18SD'     | ''                         |
+			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '2'           | ''                    | 'Main Company'   | 'Trade agent store'   | 'UNIQ'        | ''                         |
+			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '4'           | ''                    | 'Main Company'   | 'Trade agent store'   | 'XS/Blue'     | ''                         |
+			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '4'           | ''                    |'Main Company'    | 'Trade agent store'   | 'PZU'         | ''                         |
+			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '1'           | ''                    | 'Main Company'   | 'Store 01'            | '37/18SD'     | ''                         |
+			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '2'           | ''                    | 'Main Company'   | 'Store 01'            | 'UNIQ'        | ''                         |
+			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '4'           | ''                    | 'Main Company'   | 'Store 01'            | 'XS/Blue'     | ''                         |
+			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '4'           | ''                    | 'Main Company'   | 'Store 01'            | 'PZU'         | ''                         |
 	And I close all client application windows						
 
 
@@ -1141,22 +1149,17 @@ Scenario: _0401341 check Sales invoice movements by the Register  "R2001 Sales" 
 			| ''                                            | '04.11.2022 16:33:38' | '1'         | '17,12'  | '14,51'      | ''              | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'UNIQ'     | '09987897977889'    | '0e840263-804e-4014-969b-fc359e012989' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '1'         | '89,02'  | '75,44'      | ''              | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'XS/Blue'  | ''                  | '5742dfd4-05ae-4cc4-83cd-22be8886e921' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '1'         | '100'    | '84,75'      | ''              | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'UNIQ'     | '09987897977889'    | '0e840263-804e-4014-969b-fc359e012989' | ''             |
-			| ''                                            | '04.11.2022 16:33:38' | '1'         | '100'    | '84,75'      | ''              | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'UNIQ'     | '09987897977889'    | '0e840263-804e-4014-969b-fc359e012989' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '1'         | '100'    | '84,75'      | ''              | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'UNIQ'     | '09987897977889'    | '0e840263-804e-4014-969b-fc359e012989' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '1'         | '520'    | '440,68'     | ''              | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'XS/Blue'  | ''                  | '5742dfd4-05ae-4cc4-83cd-22be8886e921' | ''             |
-			| ''                                            | '04.11.2022 16:33:38' | '1'         | '520'    | '440,68'     | ''              | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'XS/Blue'  | ''                  | '5742dfd4-05ae-4cc4-83cd-22be8886e921' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '1'         | '520'    | '440,68'     | ''              | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'XS/Blue'  | ''                  | '5742dfd4-05ae-4cc4-83cd-22be8886e921' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '2'         | '68,48'  | '58,03'      | ''              | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'UNIQ'     | '11111111111111'    | '6e1ae606-a795-4a61-81b9-913bb616bb2e' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '2'         | '188,32' | '159,59'     | ''              | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'M/Black'  | ''                  | 'b214841c-117e-4560-8216-50ea42a6ffdd' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '2'         | '400'    | '338,98'     | ''              | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'UNIQ'     | '11111111111111'    | '6e1ae606-a795-4a61-81b9-913bb616bb2e' | ''             |
-			| ''                                            | '04.11.2022 16:33:38' | '2'         | '400'    | '338,98'     | ''              | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'UNIQ'     | '11111111111111'    | '6e1ae606-a795-4a61-81b9-913bb616bb2e' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '2'         | '400'    | '338,98'     | ''              | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'UNIQ'     | '11111111111111'    | '6e1ae606-a795-4a61-81b9-913bb616bb2e' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '2'         | '1 100'  | '932,2'      | ''              | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'M/Black'  | ''                  | 'b214841c-117e-4560-8216-50ea42a6ffdd' | ''             |
-			| ''                                            | '04.11.2022 16:33:38' | '2'         | '1 100'  | '932,2'      | ''              | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'M/Black'  | ''                  | 'b214841c-117e-4560-8216-50ea42a6ffdd' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '2'         | '1 100'  | '932,2'      | ''              | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'M/Black'  | ''                  | 'b214841c-117e-4560-8216-50ea42a6ffdd' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '4'         | '136,96' | '136,96'     | ''              | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'PZU'      | '0514'              | 'ecc17d2f-2741-47bb-8146-a0d224225c2a' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '4'         | '800'    | '800'        | ''              | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'PZU'      | '0514'              | 'ecc17d2f-2741-47bb-8146-a0d224225c2a' | ''             |
-			| ''                                            | '04.11.2022 16:33:38' | '4'         | '800'    | '800'        | ''              | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'PZU'      | '0514'              | 'ecc17d2f-2741-47bb-8146-a0d224225c2a' | ''             |
 			| ''                                            | '04.11.2022 16:33:38' | '4'         | '800'    | '800'        | ''              | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'PZU'      | '0514'              | 'ecc17d2f-2741-47bb-8146-a0d224225c2a' | ''             |		
 	And I close all client application windows	
 
@@ -1178,7 +1181,6 @@ Scenario: _0401342 check Sales invoice movements by the Register  "R2021 Custome
 			| ''                                              | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'                    | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'         | 'Partner'    | 'Agreement'                  | 'Basis'                                         | 'Order'   | 'Project' | 'Deferred calculation'   | 'Customers advances closing'    |
 			| ''                                              | 'Receipt'       | '04.11.2022 16:33:38'   | '499,9'       | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Lomaniti'   | 'Lomaniti'   | 'Basic Partner terms, TRY'   | 'Sales invoice 194 dated 04.11.2022 16:33:38'   | ''        | ''        | 'No'                     | ''                              |
 			| ''                                              | 'Receipt'       | '04.11.2022 16:33:38'   | '2 920'       | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Lomaniti'   | 'Lomaniti'   | 'Basic Partner terms, TRY'   | 'Sales invoice 194 dated 04.11.2022 16:33:38'   | ''        | ''        | 'No'                     | ''                              |
-			| ''                                              | 'Receipt'       | '04.11.2022 16:33:38'   | '2 920'       | 'Main Company'   | 'Distribution department'   | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Lomaniti'   | 'Lomaniti'   | 'Basic Partner terms, TRY'   | 'Sales invoice 194 dated 04.11.2022 16:33:38'   | ''        | ''        | 'No'                     | ''                              |
 			| ''                                              | 'Receipt'       | '04.11.2022 16:33:38'   | '2 920'       | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Lomaniti'   | 'Lomaniti'   | 'Basic Partner terms, TRY'   | 'Sales invoice 194 dated 04.11.2022 16:33:38'   | ''        | ''        | 'No'                     | ''                              |
 		And I close all client application windows
 		
@@ -1200,7 +1202,6 @@ Scenario: _0401343 check Sales invoice movements by the Register  "R2021 Custome
 			| ''                                              | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'                    | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'         | 'Partner'    | 'Agreement'                  | 'Basis'                                         | 'Order'   | 'Project' | 'Deferred calculation'   | 'Customers advances closing'    |
 			| ''                                              | 'Receipt'       | '04.11.2022 16:33:38'   | '499,9'       | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Lomaniti'   | 'Lomaniti'   | 'Basic Partner terms, TRY'   | 'Sales invoice 194 dated 04.11.2022 16:33:38'   | ''        | ''        | 'No'                     | ''                              |
 			| ''                                              | 'Receipt'       | '04.11.2022 16:33:38'   | '2 920'       | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Lomaniti'   | 'Lomaniti'   | 'Basic Partner terms, TRY'   | 'Sales invoice 194 dated 04.11.2022 16:33:38'   | ''        | ''        | 'No'                     | ''                              |
-			| ''                                              | 'Receipt'       | '04.11.2022 16:33:38'   | '2 920'       | 'Main Company'   | 'Distribution department'   | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Lomaniti'   | 'Lomaniti'   | 'Basic Partner terms, TRY'   | 'Sales invoice 194 dated 04.11.2022 16:33:38'   | ''        | ''        | 'No'                     | ''                              |
 			| ''                                              | 'Receipt'       | '04.11.2022 16:33:38'   | '2 920'       | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Lomaniti'   | 'Lomaniti'   | 'Basic Partner terms, TRY'   | 'Sales invoice 194 dated 04.11.2022 16:33:38'   | ''        | ''        | 'No'                     | ''                              |
 		And I close all client application windows	
 
@@ -1220,18 +1221,9 @@ Scenario: _0401344 check Sales invoice movements by the Register  "R2040 Taxes i
 			| 'Register  "R2040 Taxes incoming"'            | ''            | ''                    | ''          | ''             | ''                        | ''    | ''         | ''             | ''                             | ''         | ''                     |
 			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''    | ''         | ''             | ''                             | ''         | ''                     |
 			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' |
-			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '2,61'      | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '10,45'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '13,58'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '15,25'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '15,25'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
-			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '28,73'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '61,02'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '61,02'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
-			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '79,32'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '79,32'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
-			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '167,8'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '167,8'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |		
+			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '55,36'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '323,39'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+			| ''                                            | 'Receipt'     | '04.11.2022 16:33:38' | '323,39'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |		
 		And I close all client application windows		
 
 Scenario: _0401345 check Sales invoice movements by the Register  "R4010 Actual stocks" (consignor and own stocks)
@@ -1245,16 +1237,16 @@ Scenario: _0401345 check Sales invoice movements by the Register  "R4010 Actual 
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 194 dated 04.11.2022 16:33:38' | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| 'Register  "R4010 Actual stocks"'             | ''            | ''                    | ''          | ''           | ''         | ''                  |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
-			| ''                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '1'         | 'Store 02'   | 'XS/Blue'  | ''                  |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '1'         | 'Store 02'   | 'UNIQ'     | ''                  |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Store 02'   | 'UNIQ'     | '11111111111111'    |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Store 02'   | 'M/Black'  | ''                  |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Store 02'   | 'PZU'      | ''                  |
+			| 'Sales invoice 194 dated 04.11.2022 16:33:38' | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| 'Register  "R4010 Actual stocks"'             | ''            | ''                    | ''          | ''           | ''         | ''                  | ''                     |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  | ''                     |
+			| ''                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' | 'Source of origin'     |
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '1'         | 'Store 02'   | 'XS/Blue'  | ''                  | ''                     |
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '1'         | 'Store 02'   | 'UNIQ'     | ''                  | ''                     |
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Store 02'   | 'UNIQ'     | '11111111111111'    | ''                     |
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Store 02'   | 'M/Black'  | ''                  | ''                     |
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Store 02'   | 'PZU'      | ''                  | ''                     |
 		And I close all client application windows	
 
 Scenario: _0401346 check Sales invoice movements by the Register  "R4011 Free stocks" (consignor and own stocks)
@@ -1291,13 +1283,13 @@ Scenario: _0401347 check Sales invoice movements by the Register  "R4050 Stock i
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 194 dated 04.11.2022 16:33:38'   | ''              | ''                      | ''            | ''               | ''           | ''            |
-			| 'Document registrations records'                | ''              | ''                      | ''            | ''               | ''           | ''            |
-			| 'Register  "R4050 Stock inventory"'             | ''              | ''                      | ''            | ''               | ''           | ''            |
-			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''           | ''            |
-			| ''                                              | ''              | ''                      | 'Quantity'    | 'Company'        | 'Store'      | 'Item key'    |
-			| ''                                              | 'Expense'       | '04.11.2022 16:33:38'   | '1'           | 'Main Company'   | 'Store 02'   | 'XS/Blue'     |
-			| ''                                              | 'Expense'       | '04.11.2022 16:33:38'   | '1'           | 'Main Company'   | 'Store 02'   | 'UNIQ'        |
+			| 'Sales invoice 194 dated 04.11.2022 16:33:38'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
+			| 'Document registrations records'                | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
+			| 'Register  "R4050 Stock inventory"'             | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
+			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''            |'Attributes'                |
+			| ''                                              | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'    |'Calculation movement cost' |
+			| ''                                              | 'Expense'       | '04.11.2022 16:33:38'   | '1'           | ''                    | 'Main Company'   | 'Store 02'   | 'XS/Blue'     | ''                         |
+			| ''                                              | 'Expense'       | '04.11.2022 16:33:38'   | '1'           | ''                    | 'Main Company'   | 'Store 02'   | 'UNIQ'        | ''                         |
 		And I close all client application windows	
 
 Scenario: _0401348 check Sales invoice movements by the Register  "R4014 Serial lot numbers" (consignor and own stocks)
@@ -1371,31 +1363,24 @@ Scenario: _0401341 check Sales invoice movements by the Register  "R2001 Sales" 
 			| ''                                              | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Invoice'                                       | 'Item key' | 'Serial lot number' | 'Row key'                              | 'Sales person' |
 			| ''                                              | '14.12.2023 15:34:46' | '1'         | '5,71'   | '4,84'       | '0,29'          | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '8908899879'        | '2ecbdb37-8599-4dda-af5d-a1f321bf10d8' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '1'         | '33,33'  | '28,25'      | '1,67'          | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '8908899879'        | '2ecbdb37-8599-4dda-af5d-a1f321bf10d8' | ''             |
-			| ''                                              | '14.12.2023 15:34:46' | '1'         | '33,33'  | '28,25'      | '1,67'          | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '8908899879'        | '2ecbdb37-8599-4dda-af5d-a1f321bf10d8' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '1'         | '33,33'  | '28,25'      | '1,67'          | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '8908899879'        | '2ecbdb37-8599-4dda-af5d-a1f321bf10d8' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '2'         | '11,41'  | '9,67'       | '0,57'          | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '8908899877'        | '2ecbdb37-8599-4dda-af5d-a1f321bf10d8' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '2'         | '66,67'  | '56,5'       | '3,33'          | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '8908899877'        | '2ecbdb37-8599-4dda-af5d-a1f321bf10d8' | ''             |
-			| ''                                              | '14.12.2023 15:34:46' | '2'         | '66,67'  | '56,5'       | '3,33'          | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '8908899877'        | '2ecbdb37-8599-4dda-af5d-a1f321bf10d8' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '2'         | '66,67'  | '56,5'       | '3,33'          | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '8908899877'        | '2ecbdb37-8599-4dda-af5d-a1f321bf10d8' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '3'         | '11,41'  | '9,67'       | ''              | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '0512'              | '8b8d0dae-6d20-4471-be06-d8563cea1e7d' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '3'         | '17,12'  | '14,51'      | ''              | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '8908899879'        | '21f825ed-4514-4c49-8473-76e29ca1c56e' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '3'         | '66,67'  | '56,5'       | ''              | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '0512'              | '8b8d0dae-6d20-4471-be06-d8563cea1e7d' | ''             |
-			| ''                                              | '14.12.2023 15:34:46' | '3'         | '66,67'  | '56,5'       | ''              | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '0512'              | '8b8d0dae-6d20-4471-be06-d8563cea1e7d' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '3'         | '66,67'  | '56,5'       | ''              | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '0512'              | '8b8d0dae-6d20-4471-be06-d8563cea1e7d' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '3'         | '100'    | '84,75'      | ''              | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '8908899879'        | '21f825ed-4514-4c49-8473-76e29ca1c56e' | ''             |
-			| ''                                              | '14.12.2023 15:34:46' | '3'         | '100'    | '84,75'      | ''              | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '8908899879'        | '21f825ed-4514-4c49-8473-76e29ca1c56e' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '3'         | '100'    | '84,75'      | ''              | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '8908899879'        | '21f825ed-4514-4c49-8473-76e29ca1c56e' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '3'         | '282,48' | '239,39'     | ''              | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'S/Yellow' | ''                  | 'af905e80-5db0-4fc3-b2e1-b21116b73e39' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '3'         | '1 650'  | '1 398,31'   | ''              | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'S/Yellow' | ''                  | 'af905e80-5db0-4fc3-b2e1-b21116b73e39' | ''             |
-			| ''                                              | '14.12.2023 15:34:46' | '3'         | '1 650'  | '1 398,31'   | ''              | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'S/Yellow' | ''                  | 'af905e80-5db0-4fc3-b2e1-b21116b73e39' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '3'         | '1 650'  | '1 398,31'   | ''              | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'S/Yellow' | ''                  | 'af905e80-5db0-4fc3-b2e1-b21116b73e39' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '5'         | '103,58' | '87,78'      | ''              | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'UNIQ'     | '0512'              | '441b2862-0c2d-4b83-9829-15ba83f8dec5' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '5'         | '605'    | '512,71'     | ''              | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'UNIQ'     | '0512'              | '441b2862-0c2d-4b83-9829-15ba83f8dec5' | ''             |
-			| ''                                              | '14.12.2023 15:34:46' | '5'         | '605'    | '512,71'     | ''              | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'UNIQ'     | '0512'              | '441b2862-0c2d-4b83-9829-15ba83f8dec5' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '5'         | '605'    | '512,71'     | ''              | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'UNIQ'     | '0512'              | '441b2862-0c2d-4b83-9829-15ba83f8dec5' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '6'         | '22,83'  | '19,34'      | ''              | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '0514'              | '8b8d0dae-6d20-4471-be06-d8563cea1e7d' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '6'         | '133,33' | '112,99'     | ''              | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '0514'              | '8b8d0dae-6d20-4471-be06-d8563cea1e7d' | ''             |
-			| ''                                              | '14.12.2023 15:34:46' | '6'         | '133,33' | '112,99'     | ''              | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '0514'              | '8b8d0dae-6d20-4471-be06-d8563cea1e7d' | ''             |
 			| ''                                              | '14.12.2023 15:34:46' | '6'         | '133,33' | '112,99'     | ''              | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 113 dated 14.12.2023 15:34:46' | 'PZU'      | '0514'              | '8b8d0dae-6d20-4471-be06-d8563cea1e7d' | ''             |
 		And I close all client application windows		
 				
@@ -1463,3 +1448,330 @@ Scenario: _0401429 Sales invoice clear posting/mark for deletion
 			| 'R2001 Sales'                    |
 			| 'R2021 Customer transactions'    |
 		And I close all client application windows
+
+Scenario: _0401351 check Sales invoice movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                                          | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'     | ''                                          | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                          | 'Document'                                  | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                          | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '28.01.2021 18:48:53' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		
+
+Scenario: _0401352 check Sales invoice movements by the Register  "R6060 Cost of goods sold"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1 114'  |
+	* Check movements by the Register "R6060 Cost of goods sold"
+		And I click "Registrations report info" button
+		And I select "R6060 Cost of goods sold" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 1 114 dated 05.05.2025 12:00:00'     | ''                    | ''             | ''                                              | ''         | ''                        | ''         | ''                  | ''                 | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                     | ''                     | ''                         | ''                                                       |
+			| 'Register  "R6060 Cost of goods sold !Manual edit"' | ''                    | ''             | ''                                              | ''         | ''                        | ''         | ''                  | ''                 | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                     | ''                     | ''                         | ''                                                       |
+			| ''                                                  | 'Period'              | 'Company'      | 'Sales invoice'                                 | 'Item key' | 'Currency movement type'  | 'Currency' | 'Serial lot number' | 'Source of origin' | 'Quantity' | 'Invoice amount' | 'Invoice tax amount' | 'Indirect cost amount' | 'Indirect cost tax amount' | 'Extra cost amount by ratio' | 'Extra cost tax amount by ratio' | 'Extra direct cost amount' | 'Extra direct cost tax amount' | 'Allocated cost amount' | 'Allocated cost tax amount' | 'Allocated revenue amount' | 'Allocated revenue tax amount' | 'Total amount' | 'Total net amount' | 'Total tax amount' | 'Preliminary quantity' | 'Preliminary amount'   | 'Preliminary tax amount'   | 'Calculation movement cost'                              |
+			| ''                                                  | '05.05.2025 12:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/Brown'  | 'Local currency'          | 'TRY'      | ''                  | ''                 | '175'      | '51 906,78'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '05.05.2025 12:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'Local currency'          | 'TRY'      | ''                  | ''                 | '80'       | '25 762,71'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''             | ''                 | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '05.05.2025 12:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/Brown'  | 'en description is empty' | 'TRY'      | ''                  | ''                 | '175'      | '51 906,78'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '51 906,78'    | '51 906,78'        | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '05.05.2025 12:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/Brown'  | 'Local currency'          | 'TRY'      | ''                  | ''                 | '175'      | '51 906,78'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '51 906,78'    | '51 906,78'        | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '05.05.2025 12:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/Brown'  | 'Reporting currency'      | 'USD'      | ''                  | ''                 | '175'      | '8 886,44'       | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '8 886,44'     | '8 886,44'         | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '05.05.2025 12:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'en description is empty' | 'TRY'      | ''                  | ''                 | '80'       | '25 762,71'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '25 762,71'    | '25 762,71'        | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '05.05.2025 12:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'Local currency'          | 'TRY'      | ''                  | ''                 | '80'       | '25 762,71'      | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '25 762,71'    | '25 762,71'        | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+			| ''                                                  | '05.05.2025 12:00:00' | 'Main Company' | 'Sales invoice 1 114 dated 05.05.2025 12:00:00' | 'M/White'  | 'Reporting currency'      | 'USD'      | ''                  | ''                 | '80'       | '4 410,58'       | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | '4 410,58'     | '4 410,58'         | ''                 | ''                     | ''                     | ''                         | 'Calculation movement costs 1 dated 01.05.2025 00:00:00' |
+	And I close all client application windows
+
+Scenario: _0401353 check Sales invoice movements by the Register  "Posted documents registry" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                                            | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'       | ''                                            | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                            | 'Document'                                    | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                            | 'Sales invoice 135 dated 04.06.2025 13:43:50' | '04.06.2025 13:43:50' | '135'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		
+
+Scenario: _0401354 check Sales invoice movements by the Register  "R2001 Sales" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R2001 Sales"
+		And I click "Registrations report info" button
+		And I select "R2001 Sales" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''             | ''       | ''                             | ''         | ''                                            | ''                  | ''                  | ''                                     | ''             | ''         | ''       | ''           | ''              |
+			| 'Register  "R2001 Sales"'                     | ''                    | ''             | ''       | ''                             | ''         | ''                                            | ''                  | ''                  | ''                                     | ''             | ''         | ''       | ''           | ''              |
+			| ''                                            | 'Period'              | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Invoice'                                     | 'Item key'          | 'Serial lot number' | 'Row key'                              | 'Sales person' | 'Quantity' | 'Amount' | 'Net amount' | 'Offers amount' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Sales invoice 135 dated 04.06.2025 13:43:50' | 'Trousers/Trousers' | ''                  | '836c5b0d-1493-4299-8850-5258b504860f' | ''             | '10'       | '590'    | '500'        | ''              |
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Sales invoice 135 dated 04.06.2025 13:43:50' | 'Trousers/Trousers' | ''                  | '836c5b0d-1493-4299-8850-5258b504860f' | ''             | '10'       | '101,01' | '85,6'       | ''              |
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Sales invoice 135 dated 04.06.2025 13:43:50' | 'Trousers/Trousers' | ''                  | '836c5b0d-1493-4299-8850-5258b504860f' | ''             | '10'       | '590'    | '500'        | ''              |
+	And I close all client application windows
+
+Scenario: _0401355 check Sales invoice movements by the Register  "R2040 Taxes incoming" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R2040 Taxes incoming"
+		And I click "Registrations report info" button
+		And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| 'Register  "R2040 Taxes incoming"'            | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Amount' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '90'     |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '15,41'  |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '90'     |
+	And I close all client application windows
+
+Scenario: _0401356 check Sales invoice movements by the Register  "R4010 Actual stocks" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R4010 Actual stocks"
+		And I click "Registrations report info" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''         | ''                  | ''                  | ''                 | ''         |
+			| 'Register  "R4010 Actual stocks"'             | ''                    | ''           | ''         | ''                  | ''                  | ''                 | ''         |
+			| ''                                            | 'Period'              | 'RecordType' | 'Store'    | 'Item key'          | 'Serial lot number' | 'Source of origin' | 'Quantity' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Expense'    | 'Store 01' | 'Trousers/Trousers' | ''                  | ''                 | '10'       |
+	And I close all client application windows		
+
+Scenario: _0401357 check Sales invoice movements by the Register  "R4011 Free stocks" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R4011 Free stocks"
+		And I click "Registrations report info" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''         | ''                  | ''         |
+			| 'Register  "R4011 Free stocks"'               | ''                    | ''           | ''         | ''                  | ''         |
+			| ''                                            | 'Period'              | 'RecordType' | 'Store'    | 'Item key'          | 'Quantity' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Expense'    | 'Store 01' | 'Trousers/Trousers' | '10'       |
+	And I close all client application windows
+
+Scenario: _0401358 check Sales invoice movements by the Register  "R4050 Stock inventory" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R4050 Stock inventory"
+		And I click "Registrations report info" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'           | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     | ''                        |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key'          | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                            | '04.06.2025 13:43:50' | 'Expense'    | 'Main Company' | 'Store 01' | 'Trousers/Trousers' | '10'       | ''                     | ''                        |
+	And I close all client application windows
+
+Scenario: _0401359 check Sales invoice movements by the Register  "R5010 Reconciliation statement" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''             | ''       | ''         | ''                | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'  | ''                    | ''           | ''             | ''       | ''         | ''                | ''                    | ''       |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Currency' | 'Legal name'      | 'Legal name contract' | 'Amount' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'TRY'      | 'Other partner 1' | ''                    | '590'    |
+	And I close all client application windows
+
+Scenario: _0401360 check Sales invoice movements by the Register  "R5015 Other partners transactions" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R5015 Other partners transactions"
+		And I click "Registrations report info" button
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50'   | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                | ''      | ''       | ''                     |
+			| 'Register  "R5015 Other partners transactions"' | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                | ''      | ''       | ''                     |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'       | 'Basis' | 'Amount' | 'Deferred calculation' |
+			| ''                                              | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''      | '590'    | 'No'                   |
+			| ''                                              | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''      | '101,01' | 'No'                   |
+			| ''                                              | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''      | '590'    | 'No'                   |
+	And I close all client application windows
+
+Scenario: _0401361 check Sales invoice movements by the Register  "R5020 Partners balance" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R5020 Partners balance"
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''             | ''       | ''                | ''                | ''                | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'          | ''                    | ''           | ''             | ''       | ''                | ''                | ''                | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Partner'         | 'Legal name'      | 'Agreement'       | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'TRY'      | 'Local currency'               | 'TRY'                  | '590'    | ''                     | ''                 | ''                   | ''               | '590'               | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | '590'    | ''                     | ''                 | ''                   | ''               | '590'               | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | 'Receipt'    | 'Main Company' | ''       | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '101,01' | ''                     | ''                 | ''                   | ''               | '101,01'            | ''                 |
+	And I close all client application windows
+
+Scenario: _0401362 check Sales invoice movements by the Register  "R5021 Revenues" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "R5021 Revenues"
+		And I click "Registrations report info" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''             | ''       | ''                   | ''             | ''                  | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                        |
+			| 'Register  "R5021 Revenues"'                  | ''                    | ''             | ''       | ''                   | ''             | ''                  | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                        |
+			| ''                                            | 'Period'              | 'Company'      | 'Branch' | 'Profit loss center' | 'Revenue type' | 'Item key'          | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' |'Calculation movement cost'|
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | ''                   | ''             | 'Trousers/Trousers' | 'TRY'      | ''                    | 'Local currency'               | ''        | '500'    | '590'               | ''                        |
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | ''                   | ''             | 'Trousers/Trousers' | 'TRY'      | ''                    | 'en description is empty'      | ''        | '500'    | '590'               | ''                        |
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | ''                   | ''             | 'Trousers/Trousers' | 'USD'      | ''                    | 'Reporting currency'           | ''        | '85,6'   | '101,01'            | ''                        |
+	And I close all client application windows
+
+Scenario: _0401363 check Sales invoice movements by the Register  "T1040 Accounting amounts" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "T1040 Accounting amounts"
+		And I click "Registrations report info" button
+		And I select "T1040 Accounting amounts" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''                                     | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
+			| 'Register  "T1040 Accounting amounts"'        | ''                    | ''                                     | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
+			| ''                                            | 'Period'              | 'Row key'                              | 'Operation'               | 'Multi currency movement type' | 'Currency' | 'Revaluated currency' | 'Dr currency' | 'Cr currency' | 'Amount' | 'Dr currency amount' | 'Cr currency amount' | 'Deferred calculation' | 'Advances closing' |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | ''            | ''            | '500'    | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | ''            | ''            | '85,6'   | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | 'en description is empty'      | 'TRY'      | ''                    | ''            | ''            | '500'    | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | ''            | ''            | '90'     | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | ''            | ''            | '15,41'  | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | 'en description is empty'      | 'TRY'      | ''                    | ''            | ''            | '90'     | ''                   | ''                   | 'No'                   | ''                 |
+	And I close all client application windows
+
+Scenario: _0401364 check Sales invoice movements by the Register  "T1050 Accounting quantities" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "T1050 Accounting quantities"
+		And I click "Registrations report info" button
+		And I select "T1050 Accounting quantities" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''                                     | ''                        | ''         |
+			| 'Register  "T1050 Accounting quantities"'     | ''                    | ''                                     | ''                        | ''         |
+			| ''                                            | 'Period'              | 'Row key'                              | 'Operation'               | 'Quantity' |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | 'en description is empty' | '10'       |
+	And I close all client application windows
+
+Scenario: _0401365 check Sales invoice movements by the Register  "T3010S Row ID info" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "T3010S Row ID info"
+		And I click "Registrations report info" button
+		And I select "T3010S Row ID info" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                                     | ''                                     | ''          | ''      | ''                                     | ''                                     | ''      | ''         | ''     |
+			| 'Register  "T3010S Row ID info"'              | ''                                     | ''                                     | ''          | ''      | ''                                     | ''                                     | ''      | ''         | ''     |
+			| ''                                            | 'Key'                                  | 'Row ID'                               | 'Unique ID' | 'Basis' | 'Basis key'                            | 'Row ref'                              | 'Price' | 'Currency' | 'Unit' |
+			| ''                                            | '836c5b0d-1493-4299-8850-5258b504860f' | '836c5b0d-1493-4299-8850-5258b504860f' | '*'         | ''      | '                                    ' | '836c5b0d-1493-4299-8850-5258b504860f' | '50'    | 'TRY'      | 'pcs'  |
+	And I close all client application windows
+
+Scenario: _0401366 check Sales invoice movements by the Register  "T6020 Batch keys info" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "T6020 Batch keys info"
+		And I click "Registrations report info" button
+		And I select "T6020 Batch keys info" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''             | ''       | ''         | ''                  | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''     | ''           | ''                       | ''                  | ''                 | ''                    | ''                          | ''            | ''               | ''               | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''                             | ''                             | ''                             |
+			| 'Register  "T6020 Batch keys info"'           | ''                    | ''             | ''       | ''         | ''                  | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''     | ''           | ''                       | ''                  | ''                 | ''                    | ''                          | ''            | ''               | ''               | ''         | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''                             | ''                             | ''                             |
+			| ''                                            | 'Period'              | 'Company'      | 'Branch' | 'Store'    | 'Item key'          | 'Direction' | 'Currency movement type' | 'Currency' | 'Batch document' | 'Sales invoice' | 'Row ID'                               | 'Profit loss center' | 'Expense type' | 'Work' | 'Work sheet' | 'DELETE batch consignor' | 'Serial lot number' | 'Source of origin' | 'Production document' | 'Purchase invoice document' | 'Fixed asset' | 'Is preliminary' | 'Preliminary ID' | 'Quantity' | 'Invoice amount' | 'Invoice tax amount' | 'Indirect cost amount' | 'Indirect cost tax amount' | 'Extra cost amount by ratio' | 'Extra cost tax amount by ratio' | 'Extra direct cost amount' | 'Extra direct cost tax amount' | 'Allocated cost amount' | 'Allocated cost tax amount' | 'Allocated revenue amount' | 'Allocated revenue tax amount' | 'Preliminary quantity'         | 'Preliminary amount'           | 'Preliminary tax amount'       |
+			| ''                                            | '04.06.2025 13:43:50' | 'Main Company' | ''       | 'Store 01' | 'Trousers/Trousers' | 'Expense'   | ''                       | 'TRY'      | ''               | ''              | '                                    ' | ''                   | ''             | ''     | ''           | ''                       | ''                  | ''                 | ''                    | ''                          | ''            | 'No'             | ''               | '10'       | ''               | ''                   | ''                     | ''                         | ''                           | ''                               | ''                         | ''                             | ''                      | ''                          | ''                         | ''                             | ''                             | ''                             | ''                             |
+	And I close all client application windows
+
+Scenario: _0401367 check Sales invoice movements by the Register  "TM1010T Row ID movements" (partner Other)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '135'    |
+	* Check movements by the Register "TM1010T Row ID movements"
+		And I click "Registrations report info" button
+		And I select "TM1010T Row ID movements" exact value from "Register" drop-down list
+		And Delay 10
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''                                     | ''                                     | ''       | ''                                            | ''                                     | ''         |
+			| 'Register  "TM1010T Row ID movements"'        | ''                    | ''                                     | ''                                     | ''       | ''                                            | ''                                     | ''         |
+			| ''                                            | 'Period'              | 'Row ref'                              | 'Row ID'                               | 'Step'   | 'Basis'                                       | 'Basis key'                            | 'Quantity' |
+			| ''                                            | '04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | '836c5b0d-1493-4299-8850-5258b504860f' | 'SRO&SR' | 'Sales invoice 135 dated 04.06.2025 13:43:50' | '836c5b0d-1493-4299-8850-5258b504860f' | '10'       |
+	And I close all client application windows		

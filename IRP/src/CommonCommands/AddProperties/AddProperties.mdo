@@ -10,6 +10,10 @@
   <types>DefinedType.typeAddPropertyOwners</types>
  </commandParameterType>
  <representation>Picture</representation>
+ <toolTip>
+  <key>en</key>
+  <value>53C0D5CC-4425-B293-3191-18EA193B1714</value>
+ </toolTip>
  <picture xsi:type="core:PictureRef">
   <picture>CommonPicture.AddProperties</picture>
  </picture>

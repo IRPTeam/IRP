@@ -94,16 +94,16 @@ Scenario: _045503 check WorkSheet movements by the Register  "R4010 Actual stock
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work sheet 3 dated 22.09.2022 15:55:17'   | ''              | ''                      | ''            | ''             | ''             | ''                     |
-			| 'Document registrations records'           | ''              | ''                      | ''            | ''             | ''             | ''                     |
-			| 'Register  "R4010 Actual stocks"'          | ''              | ''                      | ''            | ''             | ''             | ''                     |
-			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''             | ''                     |
-			| ''                                         | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'     | 'Serial lot number'    |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '1,521'       | 'Store 01'     | 'Material 3'   | ''                     |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Store 01'     | 'Material 1'   | ''                     |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Store 01'     | 'Material 1'   | ''                     |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Store 01'     | 'Material 2'   | ''                     |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '4'           | 'Store 01'     | 'Material 2'   | ''                     |
+			| 'Work sheet 3 dated 22.09.2022 15:55:17'   | ''              | ''                      | ''            | ''             | ''             | ''                     | ''                     |
+			| 'Document registrations records'           | ''              | ''                      | ''            | ''             | ''             | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'          | ''              | ''                      | ''            | ''             | ''             | ''                     | ''                     |
+			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''             | ''                     | ''                     |
+			| ''                                         | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'     | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '1,521'       | 'Store 01'     | 'Material 3'   | ''                     | ''                     |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Store 01'     | 'Material 1'   | ''                     | ''                     |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Store 01'     | 'Material 1'   | ''                     | ''                     |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Store 01'     | 'Material 2'   | ''                     | ''                     |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '4'           | 'Store 01'     | 'Material 2'   | ''                     | ''                     |
 		And I close all client application windows
 		
 Scenario: _045504 check WorkOrder movements by the Register  "R4011 Free stocks" (stock)
@@ -140,16 +140,16 @@ Scenario: _045505 check WorkSheet movements by the Register  "R4050 Stock invent
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work sheet 3 dated 22.09.2022 15:55:17'   | ''              | ''                      | ''            | ''               | ''           | ''              |
-			| 'Document registrations records'           | ''              | ''                      | ''            | ''               | ''           | ''              |
-			| 'Register  "R4050 Stock inventory"'        | ''              | ''                      | ''            | ''               | ''           | ''              |
-			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''           | ''              |
-			| ''                                         | ''              | ''                      | 'Quantity'    | 'Company'        | 'Store'      | 'Item key'      |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '1,521'       | 'Main Company'   | 'Store 01'   | 'Material 3'    |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Main Company'   | 'Store 01'   | 'Material 1'    |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Main Company'   | 'Store 01'   | 'Material 1'    |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | 'Main Company'   | 'Store 01'   | 'Material 2'    |
-			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '4'           | 'Main Company'   | 'Store 01'   | 'Material 2'    |
+			| 'Work sheet 3 dated 22.09.2022 15:55:17'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''              | ''                         |
+			| 'Document registrations records'           | ''              | ''                      | ''            | ''                    | ''               | ''           | ''              | ''                         |
+			| 'Register  "R4050 Stock inventory"'        | ''              | ''                      | ''            | ''                    | ''               | ''           | ''              | ''                         |
+			| ''                                         | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''              |'Attributes'                |
+			| ''                                         | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'      |'Calculation movement cost' |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '1,521'       | ''                    | 'Main Company'   | 'Store 01'   | 'Material 3'    | ''                         |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | ''                    | 'Main Company'   | 'Store 01'   | 'Material 1'    | ''                         |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | ''                    | 'Main Company'   | 'Store 01'   | 'Material 1'    | ''                         |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '2'           | ''                    | 'Main Company'   | 'Store 01'   | 'Material 2'    | ''                         |
+			| ''                                         | 'Expense'       | '22.09.2022 15:55:17'   | '4'           | ''                    | 'Main Company'   | 'Store 01'   | 'Material 2'    | ''                         |
 		And I close all client application windows
 
 Scenario: _045506 check WorkSheet movements by the Register  "T3010S Row ID info"
@@ -422,3 +422,37 @@ Scenario: _045521 Work order clear posting/mark for deletion
 			| 'TM1010B Row ID movements'    |
 			| 'T3010S Row ID info'          |
 		And I close all client application windows
+
+Scenario: _045514 check WorkSheet movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WorkSheet"
+	And I go to line in "List" table
+		| 'Number' |
+		| '4'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Work sheet 4 dated 29.09.2022 19:07:21'             | ''                                       | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry !Manual edit"' | ''                                       | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                   | 'Document'                               | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                   | 'Work sheet 4 dated 29.09.2022 19:07:21' | '29.09.2022 19:07:21' | '4'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		
+
+Scenario: _045515 check WorkOrder movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WorkOrder"
+	And I go to line in "List" table
+		| 'Number' |
+		| '32'     |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Work order 32 dated 28.09.2022 19:53:33'            | ''                                        | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry !Manual edit"' | ''                                        | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                   | 'Document'                                | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                   | 'Work order 32 dated 28.09.2022 19:53:33' | '28.09.2022 19:53:33' | '32'     | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

@@ -120,6 +120,10 @@ Function IsIgnored_Field(Ignored_Fields, DocName, RegName, FieldName)
 		Return True;
 	EndIf;
 	
+	If StrFind(FieldName, "_") = 4 Then
+		Return True; // Field from extension
+	EndIf;
+	
 	ArrayOfFields = New Array();
 			
 	PutFieldsToArray(ArrayOfFields, Ignored_Fields, DocName, RegName);
@@ -170,12 +174,18 @@ Function GetIgnored_Fields()
 	Array.Add("*.T2014S_AdvancesInfo.UniqueID");
 	Array.Add("*.T2015S_TransactionsInfo.UniqueID");
 	Array.Add("*.T3010S_RowIDInfo.UniqueID");
+	Array.Add("*.T1040T_AccountingAmounts.DrCurrency");
+	Array.Add("*.T1040T_AccountingAmounts.CrCurrency");
+	Array.Add("*.T1040T_AccountingAmounts.DrCurrencyAmount");
+	Array.Add("*.T1040T_AccountingAmounts.CrCurrencyAmount");
 		
 	// technical registers
 	Array.Add("*.T6020S_BatchKeysInfo.*");
 	Array.Add("*.T6010S_BatchesInfo.*");
 	
 	// excludes
+	Array.Add("*.R4050B_StockInventory.PreliminaryQuantity");
+	
 	Array.Add("Payroll.R5021T_Revenues.ItemKey");
 	Array.Add("Payroll.R5021T_Revenues.AdditionalAnalytic");
 	Array.Add("Payroll.R5021T_Revenues.Project");
@@ -194,6 +204,7 @@ Function GetIgnored_Fields()
 	Array.Add("BankReceipt.R5021T_Revenues.AdditionalAnalytic");
 	
 	Array.Add("Production.R4010B_ActualStocks.SerialLotNumber");
+	Array.Add("Production.R4010B_ActualStocks.SourceOfOrigin");
 	
 	Array.Add("WorkSheet.R5022T_Expenses.FixedAsset");
 	Array.Add("WorkSheet.R5022T_Expenses.LedgerType");
@@ -355,6 +366,11 @@ Function GetIgnored_Fields()
 	Array.Add("RetailSalesReceipt.R4014B_SerialLotNumber.*");
 	Array.Add("RetailSalesReceipt.R4032B_GoodsInTransitOutgoing.*");
 	Array.Add("RetailSalesReceipt.R5021T_Revenues.*");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.FixedAsset");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.LedgerType");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.AdditionalAnalytic");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.Project");
+	Array.Add("RetailSalesReceipt.R5022T_Expenses.AmountCost");
 
 	Array.Add("SalesInvoice.R2005T_SalesSpecialOffers.*");
 	Array.Add("SalesInvoice.R2011B_SalesOrdersShipment.*");
@@ -363,6 +379,11 @@ Function GetIgnored_Fields()
 	Array.Add("SalesInvoice.R4034B_GoodsShipmentSchedule.*");
 	Array.Add("SalesInvoice.R5021T_Revenues.*");
 	Array.Add("SalesInvoice.R6080T_OtherPeriodsRevenues.*");
+	Array.Add("SalesInvoice.R5022T_Expenses.FixedAsset");
+	Array.Add("SalesInvoice.R5022T_Expenses.LedgerType");
+	Array.Add("SalesInvoice.R5022T_Expenses.AdditionalAnalytic");
+	Array.Add("SalesInvoice.R5022T_Expenses.Project");
+	Array.Add("SalesInvoice.R5022T_Expenses.AmountCost");
 
 	Array.Add("SalesOrder.R2010T_SalesOrders.*");
 	Array.Add("SalesOrder.R2011B_SalesOrdersShipment.*");
@@ -432,6 +453,7 @@ Function GetIgnored_Fields()
 	Array.Add("SalesReportFromTradeAgent.T2015S_TransactionsInfo.IsVendorTransaction");
 	
 	Array.Add("WorkSheet.R4010B_ActualStocks.SerialLotNumber");
+	Array.Add("WorkSheet.R4010B_ActualStocks.SourceOfOrigin");
 	Array.Add("WorkSheet.R5022T_Expenses.Project");
 	Array.Add("WorkSheet.R5022T_Expenses.AdditionalAnalytic");
 
@@ -456,8 +478,10 @@ Function GetIgnored_Fields()
 	Array.Add("PlannedReceiptReservation.R4037B_PlannedReceiptReservationRequests.ItemKey");
 
 	Array.Add("Bundling.R4010B_ActualStocks.SerialLotNumber");
+	Array.Add("Bundling.R4010B_ActualStocks.SourceOfOrigin");
 
 	Array.Add("Unbundling.R4010B_ActualStocks.SerialLotNumber");
+	Array.Add("Unbundling.R4010B_ActualStocks.SourceOfOrigin");
 
 	Array.Add("CashPayment.R2021B_CustomersTransactions.Order");
 	Array.Add("CashPayment.R5015B_OtherPartnersTransactions.Basis");
@@ -633,6 +657,9 @@ Function GetIgnored_Fields()
 	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.AllocatedCostTaxAmount");
 	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.AllocatedRevenueAmount");
 	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.AllocatedRevenueTaxAmount");
+	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.PreliminaryQuantity");
+	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.PreliminaryAmount");
+	Array.Add("Unbundling.T6050S_ManualBundleAmountValues.PreliminaryTaxAmount");
 
 	Array.Add("WorkSheet.R5022T_Expenses.AmountCost");
 
@@ -648,6 +675,18 @@ Function GetIgnored_Fields()
 	Array.Add("OpeningEntry.T2015S_TransactionsInfo.IsPaid");
 	Array.Add("OpeningEntry.R5015B_OtherPartnersTransactions.Basis");
 	Array.Add("OpeningEntry.R3021B_CashInTransitIncoming.Basis");
+	
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.ProfitLossCenter");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.ExpenseType");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.FixedAsset");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.LedgerType");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.AdditionalAnalytic");
+	Array.Add("WithholdingTaxInvoice.R5022T_Expenses.AmountCost");
+	Array.Add("WithholdingTaxInvoice.T2015S_TransactionsInfo.Key");
+	Array.Add("WithholdingTaxInvoice.T2015S_TransactionsInfo.IsCustomerTransaction");
+	Array.Add("WithholdingTaxInvoice.T2015S_TransactionsInfo.IsPaid");
+	
+	Array.Add("RetailGoodsReceipt.R4010B_ActualStocks.SourceOfOrigin");
 	
 	Map = New Map();
 	

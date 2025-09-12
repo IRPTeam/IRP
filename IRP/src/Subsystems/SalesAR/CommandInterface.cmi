@@ -31,8 +31,17 @@
       <group>NavigationPanelOrdinary</group>
       <commands>Catalog.LegalNameContracts.StandardCommand.OpenList</commands>
       <commands>Catalog.PartnerItems.StandardCommand.OpenList</commands>
-      <commands>Catalog.PartnersBankAccounts.StandardCommand.OpenList</commands>
-      <commands>Document.CustomersAdvancesClosing.StandardCommand.OpenList</commands>
+    </orderFragments>
+    <orderFragments>
+      <group>ActionsPanelReports</group>
+      <commands>Report.R2001A_Sales.StandardCommand.Open</commands>
+      <commands>Report.R2010A_SalesOrders.StandardCommand.Open</commands>
+      <commands>Report.R2010A_SalesOrdersExecution.StandardCommand.Open</commands>
+      <commands>Report.R2011A_SalesOrdersShipment.StandardCommand.Open</commands>
+      <commands>Report.R2012A_SalesOrdersInvoiceClosing.StandardCommand.Open</commands>
+      <commands>Report.R401A_FreeStocks.StandardCommand.Open</commands>
+      <commands>Report.M1010A_PriceList.StandardCommand.Open</commands>
+      <commands>Report.R5020A_PartnersBalance.StandardCommand.Open</commands>
     </orderFragments>
   </commandsOrder>
   <subsystemsOrder>

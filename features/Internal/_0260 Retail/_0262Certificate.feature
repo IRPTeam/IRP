@@ -237,7 +237,7 @@ Scenario: _0262106 try modify sum when pay by certificate
 		And I click "⌫" button
 		And "Payments" table became equal
 			| 'Payment done' | 'Payment type' | 'Amount' |
-			| ' '            | 'Certificate'  | '500,00' |
+			| ''             | 'Certificate'  | '500,00' |
 		And I delete all lines of "Payments" table
 		And I close current window	
 		If "Point of sales *" window is opened Then
@@ -264,8 +264,8 @@ Scenario: _0262107 payment by certificate and cash (POS, without retail customer
 		And I click "Cash (/)" button
 		And "Payments" table became equal
 			| 'Payment done' | 'Payment type' | 'Amount' |
-			| ' '            | 'Certificate'  | '500,00' |
-			| ' '            | 'Cash'         | '50,00'  |
+			| ''             | 'Certificate'  | '500,00' |
+			| ''             | 'Cash'         | '50,00'  |
 		And I click "OK" button
 	* Check
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -342,8 +342,8 @@ Scenario: _0262115 return items that was paid by certificate
 		And I click "Cash (/)" button
 		And "Payments" table became equal
 			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
-			| ' '            | 'Certificate'  | '500,00' | ''        |
-			| ' '            | 'Cash'         | '50,00'  | ''        |
+			| ''             | 'Certificate'  | '500,00' | ''        |
+			| ''             | 'Cash'         | '50,00'  | ''        |
 		And I click "OK" button
 	* Check 
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
@@ -400,7 +400,7 @@ Scenario: _0262117 return certificate
 		And I select current line in "List" table
 		And "ItemList" table became equal
 			| '#' | 'Retail sales receipt' | 'Item'                          | 'Sales person' | 'Item key'                      | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Return reason' | 'Source of origins' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' | 'Landed cost tax' |
-			| '1' | ''                     | 'Certificate without denominal' | ''             | 'Certificate without denominal' | ''                   | 'No'                 | '45,76'      | '99999999998'        | 'pcs'  | ''              | ''                  | '1,000'    | '300,00' | '254,24'     | '300,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |		
+			| '1' | ''                     | 'Certificate without denominal' | ''             | 'Certificate without denominal' | 'Shop 02'            | 'No'                 | '45,76'      | '99999999998'        | 'pcs'  | ''              | ''                  | '1,000'    | '300,00' | '254,24'     | '300,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |		
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Certificate' | 'Payment type' | 'Financial movement type' | 'Payment agent legal name contract' | 'Payment terminal' | 'Postponed payment' | 'Bank term' | 'Account'            | 'Percent' | 'RRN Code' | 'Payment agent partner' | 'Payment agent legal name' | 'Payment agent partner terms' |
 			| '1' | '300,00' | ''           | ''            | 'Cash'         | ''                        | ''                                  | ''                 | 'No'                | ''          | 'Pos cash account 1' | ''        | ''         | ''                      | ''                         | ''                            |		

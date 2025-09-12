@@ -262,3 +262,21 @@ Procedure ReceiveAgreementEditTextChange(Object, Form, Item, Text, StandardProce
 EndProcedure
 
 #EndRegion
+
+Procedure SendCurrencyOnChange(Object, Form, Item) Export
+	ViewClient_V2.SendCurrencyOnChange(Object, Form);
+EndProcedure
+
+Procedure ReceiveCurrencyOnChange(Object, Form, Item) Export
+	ViewClient_V2.ReceiveCurrencyOnChange(Object, Form);
+EndProcedure
+
+Procedure SendAmountOnChange(Object, Form, Item) Export
+	ViewClient_V2.SendAmountOnChange(Object, Form);
+EndProcedure
+
+Procedure ReceiveAmountOnChange(Object, Form, Item) Export
+	ViewClient_V2.ReceiveAmountOnChange(Object, Form);
+EndProcedure
+
+

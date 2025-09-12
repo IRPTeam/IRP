@@ -28,4 +28,7 @@
  <subsystems>Taxes</subsystems>
  <subsystems>ContactInfo</subsystems>
  <subsystems>ObjectAccess</subsystems>
+ <subsystems>SystemAttributes</subsystems>
+ <subsystems>ObjectTransformation</subsystems>
+ <subsystems>BusinessProcesses</subsystems>
 </mdclass:Subsystem>

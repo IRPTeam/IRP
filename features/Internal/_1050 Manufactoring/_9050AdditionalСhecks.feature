@@ -491,7 +491,7 @@ Scenario: _9064	try delete Bill of materials with Production planning document
 		And the field named "ProductionPlanningExists" is filled
 	* Try mark for deletion
 		When I Check the steps for Exception
-			| "And I click "Mark for deletion / Unmark for deletion" button"    |
+			| "And I click the button named "FormSetDeletionMark""    |
 		And I close all client application windows
 
 

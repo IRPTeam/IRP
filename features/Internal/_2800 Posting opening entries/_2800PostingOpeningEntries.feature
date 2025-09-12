@@ -78,6 +78,9 @@ Scenario: _400001 opening entry account balance
 	* Filling in the tabular part account balance
 		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
 		And I click choice button of "Account" attribute in "AccountBalance" table
+		And I go to line in "List" table
+			| Description     |
+			| Cash desk №1    |
 		And I select current line in "List" table
 		And I activate field named "AccountBalanceCurrency" in "AccountBalance" table
 		And I click choice button of "Currency" attribute in "AccountBalance" table
@@ -397,6 +400,9 @@ Scenario: _400002 opening entry inventory balance
 		And I select current line in "List" table
 		And I activate "Store" field in "Inventory" table
 		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Store 01'       |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "Inventory" table
 		And I input "500,000" text in "Quantity" field of "Inventory" table
@@ -477,7 +483,7 @@ Scenario: _400003 opening entry advance balance
 		And I finish line editing in "AdvanceFromCustomers" table
 		And I click "Post" button
 		Then there are lines in TestClient message log
-			|'The "Partner term" is required on line 1 of the "Advance from customers" list.'|
+			|'"Partner term" is required in row 1 of the "Advance from customers" list.'|
 		And I select current line in "AdvanceFromCustomers" table
 		And I select "Basic Partner terms, TRY" from "Partner term" drop-down list by string in "AdvanceFromCustomers" table	
 	* Filling in AdvanceToSuppliers
@@ -507,7 +513,7 @@ Scenario: _400003 opening entry advance balance
 		And I finish line editing in "AdvanceToSuppliers" table
 		And I click "Post" button
 		Then there are lines in TestClient message log
-			|'The "Partner term" is required on line 1 of the "Advance to suppliers" list.'|
+			|'"Partner term" is required in row 1 of the "Advance to suppliers" list.'|
 		And I select current line in "AdvanceToSuppliers" table
 		And I select "Vendor Ferron, TRY" from "Partner term" drop-down list by string in "AdvanceToSuppliers" table
 	* Post document

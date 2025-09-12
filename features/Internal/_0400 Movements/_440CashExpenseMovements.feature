@@ -166,23 +166,23 @@ Scenario: _044004 check Cash expense movements by the Register "R3027 Employee c
 		And I select "R3027 Employee cash advance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash expense 15 dated 04.03.2023 10:57:29'   | ''              | ''                      | ''            | ''                 | ''         | ''           | ''                       | ''               | ''                               | ''                        |
-			| 'Document registrations records'              | ''              | ''                      | ''            | ''                 | ''         | ''           | ''                       | ''               | ''                               | ''                        |
-			| 'Register  "R3027 Employee cash advance"'     | ''              | ''                      | ''            | ''                 | ''         | ''           | ''                       | ''               | ''                               | ''                        |
-			| ''                                            | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'       | ''         | ''           | ''                       | ''               | ''                               | 'Attributes'              |
-			| ''                                            | ''              | ''                      | 'Amount'      | 'Company'          | 'Branch'   | 'Currency'   | 'Transaction currency'   | 'Partner'        | 'Multi currency movement type'   | 'Deferred calculation'    |
-			| ''                                            | 'Receipt'       | '04.03.2023 10:57:29'   | '171,2'       | 'Main Company'     | ''         | 'USD'        | 'TRY'                    | 'Anna Petrova'   | 'Reporting currency'             | 'No'                      |
-			| ''                                            | 'Receipt'       | '04.03.2023 10:57:29'   | '342,4'       | 'Main Company'     | ''         | 'USD'        | 'TRY'                    | 'Arina Brown'    | 'Reporting currency'             | 'No'                      |
-			| ''                                            | 'Receipt'       | '04.03.2023 10:57:29'   | '1 000'       | 'Main Company'     | ''         | 'TRY'        | 'TRY'                    | 'Anna Petrova'   | 'Local currency'                 | 'No'                      |
-			| ''                                            | 'Receipt'       | '04.03.2023 10:57:29'   | '1 000'       | 'Main Company'     | ''         | 'TRY'        | 'TRY'                    | 'Anna Petrova'   | 'en description is empty'        | 'No'                      |
-			| ''                                            | 'Receipt'       | '04.03.2023 10:57:29'   | '2 000'       | 'Main Company'     | ''         | 'TRY'        | 'TRY'                    | 'Arina Brown'    | 'Local currency'                 | 'No'                      |
-			| ''                                            | 'Receipt'       | '04.03.2023 10:57:29'   | '2 000'       | 'Main Company'     | ''         | 'TRY'        | 'TRY'                    | 'Arina Brown'    | 'en description is empty'        | 'No'                      |
-			| ''                                            | 'Expense'       | '04.03.2023 10:57:29'   | '171,2'       | 'Second Company'   | ''         | 'USD'        | 'TRY'                    | 'Anna Petrova'   | 'Reporting currency'             | 'No'                      |
-			| ''                                            | 'Expense'       | '04.03.2023 10:57:29'   | '342,4'       | 'Second Company'   | ''         | 'USD'        | 'TRY'                    | 'Arina Brown'    | 'Reporting currency'             | 'No'                      |
-			| ''                                            | 'Expense'       | '04.03.2023 10:57:29'   | '1 000'       | 'Second Company'   | ''         | 'TRY'        | 'TRY'                    | 'Anna Petrova'   | 'Local currency'                 | 'No'                      |
-			| ''                                            | 'Expense'       | '04.03.2023 10:57:29'   | '1 000'       | 'Second Company'   | ''         | 'TRY'        | 'TRY'                    | 'Anna Petrova'   | 'en description is empty'        | 'No'                      |
-			| ''                                            | 'Expense'       | '04.03.2023 10:57:29'   | '2 000'       | 'Second Company'   | ''         | 'TRY'        | 'TRY'                    | 'Arina Brown'    | 'Local currency'                 | 'No'                      |
-			| ''                                            | 'Expense'       | '04.03.2023 10:57:29'   | '2 000'       | 'Second Company'   | ''         | 'TRY'        | 'TRY'                    | 'Arina Brown'    | 'en description is empty'        | 'No'                      |
+			| 'Cash expense 15 dated 04.03.2023 10:57:29' | ''            | ''                    | ''          | ''               | ''       | ''             | ''          | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''               | ''       | ''             | ''          | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3027 Employee cash advance"'   | ''            | ''                    | ''          | ''               | ''       | ''             | ''          | ''         | ''                     | ''                             | ''                     |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'     | ''       | ''             | ''          | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'        | 'Branch' | 'Partner'      | 'Agreement' | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '171,2'     | 'Main Company'   | ''       | 'Anna Petrova' | ''          | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '342,4'     | 'Main Company'   | ''       | 'Arina Brown'  | ''          | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '1 000'     | 'Main Company'   | ''       | 'Anna Petrova' | ''          | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '1 000'     | 'Main Company'   | ''       | 'Anna Petrova' | ''          | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '2 000'     | 'Main Company'   | ''       | 'Arina Brown'  | ''          | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '2 000'     | 'Main Company'   | ''       | 'Arina Brown'  | ''          | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '171,2'     | 'Second Company' | ''       | 'Anna Petrova' | ''          | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '342,4'     | 'Second Company' | ''       | 'Arina Brown'  | ''          | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '1 000'     | 'Second Company' | ''       | 'Anna Petrova' | ''          | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '1 000'     | 'Second Company' | ''       | 'Anna Petrova' | ''          | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '2 000'     | 'Second Company' | ''       | 'Arina Brown'  | ''          | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '2 000'     | 'Second Company' | ''       | 'Arina Brown'  | ''          | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
 
 
@@ -328,3 +328,19 @@ Scenario: _044030 Cash expense clear posting/mark for deletion
 			| 'R3010 Cash on hand'    |
 		And I close all client application windows		
 
+Scenario: _044008 check Cash expense movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashExpense"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash expense 1 dated 07.09.2020 19:25:17' | ''                                         | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'    | ''                                         | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                         | 'Document'                                 | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                         | 'Cash expense 1 dated 07.09.2020 19:25:17' | '07.09.2020 19:25:17' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

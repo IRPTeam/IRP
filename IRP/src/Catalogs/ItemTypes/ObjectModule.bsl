@@ -34,7 +34,6 @@ EndProcedure
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If Not ThisObject.IsFolder Then
 		ThisObject.Type = Enums.ItemTypes.Product;
-		ThisObject.StockBalanceDetail = Enums.StockBalanceDetail.ByItemKey;
 	EndIf;
 EndProcedure
 

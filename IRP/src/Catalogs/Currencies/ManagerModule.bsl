@@ -1,4 +1,5 @@
-Function GetCurrencyInfo(Period, CurrencyFrom, CurrencyTo, Source = Undefined) Export
+Function GetCurrencyInfo(Period, CurrencyFrom, CurrencyTo, 
+                         Source = Undefined, CurrencyMovementType = Undefined, Cancel = Undefined) Export
 
 	Result = New Structure("CurrencyFrom,
 						   |CurrencyTo,
@@ -52,5 +53,54 @@ Function GetCurrencyInfo(Period, CurrencyFrom, CurrencyTo, Source = Undefined) E
 		Result.Multiplicity = QuerySelection.Multiplicity;
 	EndIf;
 
+	If ValueIsFilled(CurrencyMovementType) Then
+		If Not ValueIsFilled(Result.Rate) Then
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_173, CurrencyFrom, CurrencyTo));
+			If CurrencyMovementType.NotPostIfRateNotSet Then
+				Cancel = True;
+			EndIf;
+		EndIf;
+		
+		If CurrencyMovementType.EverydayRates Then
+			Query = New Query();
+			Query.Text =
+			"SELECT
+			|	ISNULL(CurrencyRates.Rate, 0) AS Rate
+			|FROM
+			|	InformationRegister.CurrencyRates AS CurrencyRates
+			|WHERE
+			|	BEGINOFPERIOD(CurrencyRates.Period, DAY) = BEGINOFPERIOD(&Period, DAY)
+			|	AND CurrencyRates.CurrencyFrom = &CurrencyFrom
+			|	AND CurrencyRates.CurrencyTo = &CurrencyTo
+			|	AND CASE
+			|		WHEN &Source_Filter
+			|			THEN CurrencyRates.Source = &Source
+			|		ELSE TRUE
+			|	END";
+	
+			Source_Filter = False;
+		
+			If ValueIsFilled(Source) Then
+				Source_Filter = True;
+			EndIf;
+			
+			Query.SetParameter("Period", Period);
+			Query.SetParameter("CurrencyFrom", CurrencyFrom);
+			Query.SetParameter("CurrencyTo", CurrencyTo);
+			Query.SetParameter("Source_Filter", Source_Filter);
+			Query.SetParameter("Source", Source);
+		
+			QueryResult = Query.Execute();
+			QuerySelection = QueryResult.Select();
+			
+			If Not QuerySelection.Next() Then
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_173, CurrencyFrom, CurrencyTo));
+				If CurrencyMovementType.NotPostIfRateNotSet Then
+					Cancel = True;
+				EndIf;
+			EndIf;
+		
+			EndIf;
+		EndIf;
 	Return Result;
 EndFunction

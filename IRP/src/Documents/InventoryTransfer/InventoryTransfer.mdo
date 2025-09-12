@@ -44,7 +44,7 @@
   <objectField>Document.InventoryTransfer.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.InventoryTransfer.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.InventoryTransfer.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.InventoryTransfer.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.InventoryTransfer.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -71,11 +71,13 @@
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.R4022B_StockTransferOrdersShipment</registerRecords>
  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
  <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
@@ -300,6 +302,27 @@
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </attributes>
+ <attributes uuid="74f385da-3b77-4df4-9391-d19946b4e7b3">
+  <name>DistributedPurchaseInvoice</name>
+  <synonym>
+   <key>en</key>
+   <value>7B20A5D7-0F46-72CD-DCF6-601957ADECC0</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.StoreDistributedPurchase</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="7a5be0d3-3151-4fcc-999d-14fc15ce18bc">
   <name>DocumentForm</name>
   <synonym>
@@ -492,6 +515,35 @@
    </synonym>
    <type>
     <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="0918b60e-2a37-4baf-97bc-46c9a8258282">
+   <name>PurchaseInvoice</name>
+   <synonym>
+    <key>en</key>
+    <value>E0FC9C0E-FC49-AA12-2806-6ADF2032916D</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.PurchaseInvoice</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <createOnInput>DontUse</createOnInput>
+   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="605f7baa-5a36-4cc7-8b25-ee6dc3d89634">
+   <name>SalesOrder</name>
+   <synonym>
+    <key>en</key>
+    <value>81A3A51B-2A4A-E68F-F1FE-E6C07212D7C6</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.SalesOrder</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
@@ -898,6 +950,31 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
+ <tabularSections uuid="ecd1843e-cf1a-437b-942a-626f202b1d57">
+  <producedTypes>
+   <objectType typeId="6ad4be13-f251-478f-84ea-75a0b24ceee7" valueTypeId="3cf5cc50-9b05-4a60-843a-b8dd33c1ac14"/>
+   <rowType typeId="3b608f83-263c-45a4-a2fe-b26d35e988f2" valueTypeId="e301d3e4-c343-4deb-8e47-817e0de1b0e4"/>
+  </producedTypes>
+  <name>TrailerList</name>
+  <synonym>
+   <key>en</key>
+   <value>BB797BB4-A2C4-F99F-F69B-BE8ADE4D2ECF</value>
+  </synonym>
+  <attributes uuid="9c04d45b-ff91-474d-b73e-4a291597670b">
+   <name>Trailer</name>
+   <synonym>
+    <key>en</key>
+    <value>FB3FF9D7-8196-6342-2918-81F1FA517E4C</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Vehicles</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <createOnInput>Use</createOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
  <templates uuid="5720e8a3-9228-45d9-9d84-8ffee0147302">
   <name>InventoryTransferPrint</name>
   <synonym>
@@ -913,6 +990,7 @@
   </synonym>
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>
+   <types>DocumentRef.PurchaseInvoice</types>
    <types>DocumentRef.InventoryTransferOrder</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>

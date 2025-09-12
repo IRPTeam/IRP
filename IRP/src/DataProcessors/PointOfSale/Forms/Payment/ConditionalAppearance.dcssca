@@ -39,12 +39,7 @@
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
 				<dcscor:parameter>Text</dcscor:parameter>
-				<dcscor:value xsi:type="v8:LocalStringType">
-					<v8:item>
-						<v8:lang>en</v8:lang>
-						<v8:content/>
-					</v8:item>
-				</dcscor:value>
+				<dcscor:value xsi:type="v8:LocalStringType"/>
 			</dcscor:item>
 		</appearance>
 	</item>

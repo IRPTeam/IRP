@@ -2,12 +2,16 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-	
-	For Each Row In ThisObject.DeductionList Do
-		Parameters = CurrenciesClientServer.GetParameters_V5(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
+
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+			
+		For Each Row In ThisObject.DeductionList Do
+				Parameters = CurrenciesClientServer.GetParameters_V5(ThisObject, Row);
+				CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+				CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		
+	EndIf;
 	
 	ThisObject.DocumentAmount = ThisObject.DeductionList.Total("Amount");
 EndProcedure

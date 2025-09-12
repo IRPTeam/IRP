@@ -99,6 +99,28 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9064S_AccountingMappingRegisters</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9545S_VacationDaysLimits</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T6040S_BundleAmountValues</name>
 		<right>
 			<name>Read</name>
@@ -131,6 +153,31 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9062S_AccountingMappingCompanies</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9070S_ELedgerDetailComments</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9014S_AccountsExpenseRevenue</name>
 		<right>
 			<name>Read</name>
@@ -138,6 +185,17 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AppliedDatabaseUpdates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
 		</right>
 		<right>
 			<name>View</name>
@@ -163,6 +221,17 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.ExecutionResults</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -265,6 +334,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.ExecutionProcessStatus</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T7010S_BillOfMaterials</name>
 		<right>
 			<name>Read</name>
@@ -328,6 +408,17 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("", "", "", "", "",	"")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9068S_AccountingMappingAccountsMatching</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
 		</right>
 		<right>
 			<name>View</name>
@@ -488,6 +579,13 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.FilePartsForUpload</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.PartnerSegments</name>
 		<right>
 			<name>Read</name>
@@ -560,6 +658,17 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.CreditLimits</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -708,6 +817,35 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.ObjectsPrintTemplates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9065S_AccountingMappingExtDimensions</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.TranformedObjectsLink</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9010S_AccountsItemKey</name>
 		<right>
 			<name>Read</name>
@@ -733,13 +871,35 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T2012S_AdvancesCurrencyRevaluation</name>
+		<name>InformationRegister.T9069S_AccountingMappingRecordersDescription</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.TaskExecutors</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
 		</right>
 		<right>
 			<name>View</name>
@@ -882,6 +1042,39 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.NumeratorCounters</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9060S_AccountingMappingChartsOfAccounts</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.JobQueue</name>
 		<right>
 			<name>Read</name>
@@ -995,6 +1188,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.PostedDocumentsRegistry</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.DataMappingTable</name>
 		<right>
 			<name>Read</name>
@@ -1070,6 +1274,28 @@
 	</object>
 	<object>
 		<name>InformationRegister.AddProperties</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9061S_AccountingMappingAccounts</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9052S_AccountingRelevance</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -1260,6 +1486,20 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T4050_StockInventoryInfo</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9012S_AccountsPartner</name>
 		<right>
 			<name>Read</name>
@@ -1310,6 +1550,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.MessagesQueueToSend</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T8515S_FixedAssetsLocation.Dimension.Branch</name>
 		<right>
 			<name>Edit</name>
@@ -1346,6 +1597,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.LoggerNotification</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.BundleContents.Dimension.ItemKey</name>
 		<right>
 			<name>Edit</name>
@@ -1371,12 +1633,48 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T2011S_TransactionsCurrencyRevaluation</name>
+		<name>InformationRegister.Logger</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.DELETE_T2011S_TransactionsCurrencyRevaluation</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9063S_AccountingMappingCurrencies</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9016S_AccountsEmployee</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -1403,6 +1701,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.SystemAttributes</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9550S_EmployeeSickLeave</name>
 		<right>
 			<name>Read</name>
@@ -1410,6 +1719,28 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.LoggerFiles</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9066S_AccountingMappingExtDimensionRefValues</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
 		</right>
 		<right>
 			<name>View</name>
@@ -1459,6 +1790,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.DashboardSettings</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9011S_AccountsCashAccount</name>
 		<right>
 			<name>Read</name>
@@ -1498,34 +1840,6 @@
 		<right>
 			<name>View</name>
 			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T9015S_AccountsFixedAsset</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
-			</restrictionByCondition>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T9016S_AccountsEmployee</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
-			</restrictionByCondition>
 		</right>
 	</object>
 	<restrictionTemplate>

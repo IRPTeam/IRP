@@ -60,8 +60,23 @@
   <objectField>Document.SalesInvoice.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.SalesInvoice.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.SalesInvoice.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.SalesInvoice.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.SalesInvoice.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.SystemAttributesSets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.SystemAttributesSets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.SystemAttributesSets.Document_SalesInvoice</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.SystemAttributesSets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.SystemAttributes</characteristicValues>
+  <objectField>InformationRegister.SystemAttributes.Dimension.Object</objectField>
+  <typeField>InformationRegister.SystemAttributes.Dimension.Property</typeField>
+  <valueField>InformationRegister.SystemAttributes.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.SystemAttributes.Dimension.Key</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -84,13 +99,17 @@
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
  <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
+ <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
  <registerRecords>AccumulationRegister.R2022B_CustomersPaymentPlanning</registerRecords>
+ <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
  <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
@@ -99,6 +118,7 @@
  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <registerRecords>AccumulationRegister.R8014T_ConsignorSales</registerRecords>
@@ -115,9 +135,29 @@
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
+ <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="7047a0bb-2af7-4172-9a08-20bcb22b9eac">
+  <name>Account</name>
+  <synonym>
+   <key>en</key>
+   <value>392BA6B8-8AE2-5E18-8A37-77F7E43E7D00</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.Company</name>
+   <field>Document.SalesInvoice.Attribute.Company</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <attributes uuid="294b50ce-039b-421f-991d-4e87c3add7e8">
   <name>Agreement</name>
   <synonym>
@@ -320,6 +360,10 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.Ref</name>
+   <field>Document.SalesInvoice.StandardAttribute.Ref</field>
+  </choiceParameterLinks>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
@@ -441,6 +485,38 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="7a41cb3f-4b00-48c9-b011-8198e63760b4">
+  <name>CurrencyRevaluationInvoice</name>
+  <synonym>
+   <key>en</key>
+   <value>C08C9943-A297-8F08-8DA6-6C6893939072</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseInvoice</types>
+   <types>DocumentRef.SalesInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.Company</name>
+   <field>Document.SalesInvoice.Attribute.Company</field>
+  </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.Partner</name>
+   <field>Document.SalesInvoice.Attribute.Partner</field>
+  </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.Agreement</name>
+   <field>Document.SalesInvoice.Attribute.Agreement</field>
+  </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.LegalName</name>
+   <field>Document.SalesInvoice.Attribute.LegalName</field>
+  </choiceParameterLinks>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -954,6 +1030,38 @@
    </synonym>
    <type>
     <types>CatalogRef.Projects</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="08286568-6233-45b7-9000-7e19b43cfe5c">
+   <name>TaxExemptionReason</name>
+   <synonym>
+    <key>en</key>
+    <value>7C1A9D2C-2BCC-4020-09F5-554394A05B73</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxExemptionReasons</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.TaxRate</name>
+    <field>Document.SalesInvoice.TabularSection.ItemList.Attribute.VatRate</field>
+   </choiceParameterLinks>
+   <createOnInput>Use</createOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6f7d9c20-18f9-4934-9ae4-34f71ae2f20a">
+   <name>SimpleBatch</name>
+   <synonym>
+    <key>en</key>
+    <value>55AFE165-697B-1A20-0800-0A6BC61BAC40</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SimpleBatch</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
@@ -1947,6 +2055,85 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
+ <tabularSections uuid="b6b2b639-d98a-41be-9f7a-55d9081206dd">
+  <producedTypes>
+   <objectType typeId="a047aee1-e579-4b8c-aa3d-6fcbd39699b5" valueTypeId="6e527028-8e23-4c99-92bc-614e1435a9ef"/>
+   <rowType typeId="82647614-eaee-4648-8470-fc9d28740598" valueTypeId="1b5c3a66-c3be-48bf-ba1d-c9aae8658b71"/>
+  </producedTypes>
+  <name>ShipmentPlaningOrders</name>
+  <synonym>
+   <key>en</key>
+   <value>F874E835-85A8-2D53-3417-7352610A3785</value>
+  </synonym>
+  <attributes uuid="4d983cb8-d00c-46dd-af64-84806605052c">
+   <name>Key</name>
+   <synonym>
+    <key>en</key>
+    <value>DACBB2B2-884E-CC48-8AB0-0E0F5C12A88F</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="e57612c3-4a15-43c0-8277-f1f1c8788291">
+   <name>ShipmentPlaningOrder</name>
+   <synonym>
+    <key>en</key>
+    <value>06BBD8B8-CEC8-4A88-8C47-755D04F736ED</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.ShipmentPlaningOrder</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="f831f59f-08bc-41e5-af0b-b7cd3d0b7889">
+   <name>Quantity</name>
+   <synonym>
+    <key>en</key>
+    <value>CA9E21E1-EE36-CBE6-64CC-CA90BF095979</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="bbbe5825-0d49-405c-88d8-3798bd541e44">
+   <name>QuantityInShipmentPlaningOrder</name>
+   <synonym>
+    <key>en</key>
+    <value>E0F5895F-6973-4BC5-512C-CD978B2ED1A7</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="07f4b8b2-be4d-46ab-9d4b-650172c487df">
+   <name>BasisKey</name>
+   <synonym>
+    <key>en</key>
+    <value>E07E2321-8AD9-4C4D-D4EC-CB62FABBBFC5</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
  <templates uuid="3ff8fed4-eec7-453a-bebe-b7c540c6a558">
   <name>SalesInvoicePrint</name>
   <synonym>
@@ -1967,6 +2154,7 @@
    <types>DocumentRef.SalesOrder</types>
    <types>DocumentRef.WorkSheet</types>
    <types>DocumentRef.SalesReportToConsignor</types>
+   <types>DocumentRef.ShipmentPlaningOrder</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
   <representation>Auto</representation>
@@ -1982,6 +2170,18 @@
    <types>DocumentRef.SalesInvoice</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="efeafaed-17a1-4fe3-9f0d-204062ccfdaf">
+  <name>CurrencyRevaluationInvoce</name>
+  <synonym>
+   <key>en</key>
+   <value>28A1C9F0-E89B-E0BD-D3A3-336624B37DAE</value>
+  </synonym>
+  <group>FormCommandBarCreateBasedOn</group>
+  <commandParameterType>
+   <types>DocumentRef.SalesInvoice</types>
+  </commandParameterType>
   <representation>Auto</representation>
  </commands>
 </mdclass:Document>

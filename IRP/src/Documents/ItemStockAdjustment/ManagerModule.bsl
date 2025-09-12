@@ -182,7 +182,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
 		"Document.ItemStockAdjustment.ItemList");
 
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	Filter = New Structure("RecordType", AccumulationRecordType.Receipt);
 
@@ -203,7 +203,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	EndIf;
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
 		// is posting
 		FreeStocksTable   =  PostingServer.GetQueryTableByName("R4011B_FreeStocks", Parameters, True);
@@ -257,18 +257,32 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
+	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
+	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return "SELECT
@@ -295,19 +309,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
-	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
-	QueryArray.Add(T6010S_BatchesInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
-	Return QueryArray;
-EndFunction
 
 Function R4010B_ActualStocks()
 	Return "SELECT
@@ -484,6 +485,7 @@ Function T6020S_BatchKeysInfo()
 		   |	ItemList.Period,
 		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction,
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	ItemList.Store,
 		   |	ItemList.ItemKey,
 		   |	ItemList.Key AS RowID,
@@ -495,6 +497,7 @@ Function T6020S_BatchKeysInfo()
 		   |	TRUE
 		   |GROUP BY
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	ItemList.ItemKey,
 		   |	ItemList.Period,
 		   |	ItemList.Store,
@@ -507,6 +510,7 @@ Function T6020S_BatchKeysInfo()
 		   |	ItemList.Period,
 		   |	VALUE(Enum.BatchDirection.Expense),
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	ItemList.Store,
 		   |	ItemList.ItemKeyWriteOff,
 		   |	ItemList.Key,
@@ -517,6 +521,7 @@ Function T6020S_BatchKeysInfo()
 		   |	TRUE
 		   |GROUP BY
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	ItemList.ItemKeyWriteOff,
 		   |	ItemList.Period,
 		   |	ItemList.Store,

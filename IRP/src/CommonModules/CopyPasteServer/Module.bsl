@@ -39,6 +39,16 @@ Procedure CreateCommands(Form, ObjectFullName, FormType, AddInfo = Undefined) Ex
 	CommandButton.CommandName = "PasteFromClipboard";
 	CommandButton.Title = R().CP_002;
 	
+	CommandForm = Form.Commands.Add("PasteFromClipboardValues");
+	CommandForm.Title = R().CP_007;
+	CommandForm.ToolTip = R().CP_007;
+	CommandForm.Representation = ButtonRepresentation.Picture;
+	CommandForm.Picture = PictureLib.PasteValuesFromClipboard;
+	CommandForm.Action = "PasteFromClipboardValues";
+	CommandButton = Form.Items.Add("PasteFromClipboardValues", Type("FormButton"), CommandGroup);
+	CommandButton.CommandName = "PasteFromClipboardValues";
+	CommandButton.Title = R().CP_007;
+	
 EndProcedure
 
 #EndRegion

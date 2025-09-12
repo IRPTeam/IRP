@@ -44,7 +44,7 @@
   <objectField>Document.Payroll.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.Payroll.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.Payroll.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.Payroll.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.Payroll.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -70,11 +70,12 @@
  <registerRecords>AccumulationRegister.R9555T_PaidSickLeaves</registerRecords>
  <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
  <registerRecords>AccumulationRegister.R9545T_PaidVacations</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
- <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
- <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -180,10 +181,10 @@
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="c325072d-dd2e-49e2-bf9f-c0176567cfe7">
-  <name>CalculationType</name>
+  <name>DELETE_CalculationType</name>
   <synonym>
    <key>en</key>
-   <value>6C9BB154-EE26-66F8-892D-D9A3BAC8DD41</value>
+   <value>EC0F8C6D-3151-11A4-4EF8-86ADC86CF000</value>
   </synonym>
   <type>
    <types>CatalogRef.SalaryCalculationType</types>
@@ -195,10 +196,10 @@
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="31737c6d-0c18-498c-b04a-53ddefd184ba">
-  <name>Partner</name>
+  <name>DELETE_Partner</name>
   <synonym>
    <key>en</key>
-   <value>4174423D-C30F-E0B8-8487-76771F773253</value>
+   <value>B195829C-1D83-AF23-3BF7-7088EB20F5BC</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -211,10 +212,10 @@
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  </attributes>
  <attributes uuid="141c8f5c-9da9-4c22-ad8f-3c5f2f2fb678">
-  <name>LegalName</name>
+  <name>DELETE_LegalName</name>
   <synonym>
    <key>en</key>
-   <value>382C5CF3-53B6-564B-BBCA-A7364B2D8C44</value>
+   <value>500C72BF-160C-1DC2-24F6-639FDAECF76B</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -227,10 +228,10 @@
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  </attributes>
  <attributes uuid="3d7d97bd-63ac-428a-a46b-8a8c99fc07b3">
-  <name>Agreement</name>
+  <name>DELETE_Agreement</name>
   <synonym>
    <key>en</key>
-   <value>FD7D0DD2-8DCB-D257-721C-C6F4F72F0DDB</value>
+   <value>807B6D60-0630-CCBE-E437-75A6812FD79C</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -471,6 +472,20 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="ceab11d7-5324-4c2e-a6c6-bdc914763444">
+   <name>CalculationType</name>
+   <synonym>
+    <key>en</key>
+    <value>423EFAB7-F76A-82AB-B4DB-B012574370AE</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SalaryCalculationType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="98112b54-d37e-4a9c-ac1e-a4bff099ba4f">
   <producedTypes>
@@ -611,6 +626,20 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="a2fa8d16-b163-4a54-88f2-1c0d2bad0531">
+   <name>CalculationType</name>
+   <synonym>
+    <key>en</key>
+    <value>B0FD83E8-B3F9-9DAD-D4F0-0FC7F50FAC79</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SalaryCalculationType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="44b0b978-8ddc-40ae-98c2-60bdacb0be71">
   <producedTypes>
@@ -670,6 +699,38 @@
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
    <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a07ec2c4-5644-4598-b7ee-c671dc1dfb57">
+   <name>Agreement</name>
+   <synonym>
+    <key>en</key>
+    <value>CD03F33B-A25B-5883-3854-49E1D00BE093</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Agreements</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Partner</name>
+    <field>Document.Payroll.TabularSection.CashAdvanceDeductionList.Attribute.Employee</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="93c6446b-81fb-4131-b2f4-21d2e84af920">
+   <name>CalculationType</name>
+   <synonym>
+    <key>en</key>
+    <value>C5CEA767-097B-1BAD-D5B4-4589A3866680</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SalaryCalculationType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
@@ -962,6 +1023,78 @@
    <maxValue xsi:type="core:UndefinedValue"/>
    <fillChecking>ShowError</fillChecking>
    <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="598f28d0-698d-40a4-b34f-b8a588aabcb3">
+   <name>CalculationType</name>
+   <synonym>
+    <key>en</key>
+    <value>F33EBB33-30D4-EEF2-2065-5B65B09B7181</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SalaryCalculationType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a055139e-3466-42ad-8f5d-464bcb8116a5">
+   <name>Agreement</name>
+   <synonym>
+    <key>en</key>
+    <value>6ECDD5D1-0B0F-055E-EE3D-D334590427F4</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Agreements</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6101e6a6-c30f-467c-a331-60d15a488869">
+   <name>TakeAccountFromTaxes</name>
+   <synonym>
+    <key>en</key>
+    <value>515E3436-6097-BDE3-33DD-D57432D5CA34</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6c6d7562-08dc-4219-a159-8e2615614c2c">
+   <name>Partner</name>
+   <synonym>
+    <key>en</key>
+    <value>9FA7626D-F644-3566-691E-E24FE0197BC4</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="3260ebf2-72c1-4a5e-b834-ddaa15ac075d">
+   <name>LegalName</name>
+   <synonym>
+    <key>en</key>
+    <value>5F0BC451-1931-DD8B-BB0E-EDE5192E3770</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Companies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>

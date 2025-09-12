@@ -33,6 +33,7 @@ Scenario: _018000 preparation
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
+		When Create OtherPartners objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
 		When Create catalog Countries objects
@@ -720,7 +721,7 @@ Scenario: _018013 create PI using form link/unlink
 			| 'Purchase order 217 dated 12.02.2021 12:45:05'   | ''            | '2,000'      | 'PI'              |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I click "Save" button
-		And I click "Cancel posting" button	
+		And I click the button named "FormUndoPosting"	
 		And I close all client application windows
 
 Scenario: _018015 cancel line in the PO and create PI
@@ -834,9 +835,9 @@ Scenario: _018017 create PI based on GR with two same items (link items)
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab	
 		And "RowIDInfo" table became equal
-			| 'Key'   | 'Basis'                                           | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'   | ''            | '10,000'     | '17c1c453-6971-467e-96a5-baadd8496c38'   | 'PI'             | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'    |
-			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'   | ''            | '9,000'      | '5848e9dc-c303-4dfe-afef-4b2853214cac'   | 'PI'             | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'    |
+			| 'Key'   | 'Basis'                                           | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'      | 'Row ref'                                 |
+			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'   | ''            | '10,000'     | '17c1c453-6971-467e-96a5-baadd8496c38'   | 'PI&SC'             | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'    |
+			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'   | ''            | '9,000'      | '5848e9dc-c303-4dfe-afef-4b2853214cac'   | 'PI&SC'             | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'    |
 		And I close all client application windows
 		
 		
@@ -902,11 +903,11 @@ Scenario: _018018 create PI based on GR with two same items (add linked document
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab	
 		And "RowIDInfo" table became equal
-			| 'Key'   | 'Basis'                                           | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Basis key'                              | 'Current step'   | 'Row ref'                                 |
-			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'   | ''            | '10,000'     | '17c1c453-6971-467e-96a5-baadd8496c38'   | 'PI'             | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'    |
-			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'   | ''            | '9,000'      | '5848e9dc-c303-4dfe-afef-4b2853214cac'   | 'PI'             | '290b1eb2-e2ac-4f3f-9d12-0cd144474054'    |
-			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | 'f5b7bbaf-7525-4d01-a472-687190c70d35'   | ''            | '5,000'      | '6ff368ba-803b-4c49-a03a-9d0f4a05e5bf'   | 'PI'             | 'f5b7bbaf-7525-4d01-a472-687190c70d35'    |
-			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | 'f5b7bbaf-7525-4d01-a472-687190c70d35'   | ''            | '5,000'      | '5dff43f5-e537-4fae-a925-7fd7a77a4aae'   | 'PI'             | 'f5b7bbaf-7525-4d01-a472-687190c70d35'    |
+			| 'Key' | 'Basis'                                         | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' | ''          | '10,000'   | '17c1c453-6971-467e-96a5-baadd8496c38' | 'PI&SC'        | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' | ''          | '9,000'    | '5848e9dc-c303-4dfe-afef-4b2853214cac' | 'PI&SC'        | '290b1eb2-e2ac-4f3f-9d12-0cd144474054' |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | 'f5b7bbaf-7525-4d01-a472-687190c70d35' | ''          | '5,000'    | '6ff368ba-803b-4c49-a03a-9d0f4a05e5bf' | 'PI&SC'        | 'f5b7bbaf-7525-4d01-a472-687190c70d35' |
+			| '*'   | 'Goods receipt 1 111 dated 15.02.2022 14:34:54' | 'f5b7bbaf-7525-4d01-a472-687190c70d35' | ''          | '5,000'    | '5dff43f5-e537-4fae-a925-7fd7a77a4aae' | 'PI&SC'        | 'f5b7bbaf-7525-4d01-a472-687190c70d35' |
 		And I close all client application windows
 		
 
@@ -987,7 +988,7 @@ Scenario: _018020 check Purchase price records
 			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | 'en description is empty' | 'Ferron BP' | '37/18SD'  | 'pcs'  | 'TRY'      | '221,00' | '221,00'      | '187,29'    |
 	* Unpost PI and check price clearance
 		When in opened panel I select "$PurchaseInvoice018020$"
-		And I click "Cancel posting" button
+		And I click the button named "FormUndoPosting"
 		When in opened panel I select "S1001L Vendors prices by item key"
 		And "List" table does not contain lines
 			| 'Period'                      | 'Recorder'                | 'Price type'              | 'Partner'   | 'Item key' | 'Unit' | 'Currency' | 'Price'  | 'Total price' | 'Net price' |
@@ -1072,3 +1073,42 @@ Scenario: _018020 check Purchase price records
 				| '*'         | 'en description is empty'                       | '$PurchaseInvoice018020$' | 'High shoes box (8 pcs)' | '26,48'     | '250,00' | '31,25'       |
 				| 'Total'     | ''                                              | ''                        | ''                       | ''          | ''       | ''            |	
 		And I close all client application windows
+
+Scenario: _018019 create PI with partner Other
+	And I close all client application windows
+	* Create PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Filling main information
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| "Description"     |
+			| "Other partner 2" |
+		And I click the button named "FormChoose"
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Other partner 2'      |
+		And I click the button named "FormChoose"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Store" by "Store 01" string
+	* Add an Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Trousers" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "Trousers/Trousers" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I input "30,00" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		And I delete "$$PurchaseInvoice05$$" variable
+		And I delete "$$NumberPurchaseInvoice05$$" variable
+		And I save the window as "$$PurchaseInvoice05$$"
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice05$$"	
+		And I click the button named "FormPostAndClose"
+	* check creation
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And "List" table contains lines
+			| 'Number'                      |
+			| '$$NumberPurchaseInvoice05$$' |
+	And I close all client application windows			
+				

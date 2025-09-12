@@ -96,17 +96,17 @@ Scenario: _040002 check item stock adjustment movements by the Register  "R4010 
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Item stock adjustment 1 dated 27.01.2021 19:04:15'   | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| 'Register  "R4010 Actual stocks"'                     | ''              | ''                      | ''            | ''             | ''            | ''                     |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    |
-			| ''                                                    | 'Receipt'       | '27.01.2021 19:04:15'   | '5'           | 'Store 02'     | '36/Yellow'   | ''                     |
-			| ''                                                    | 'Receipt'       | '27.01.2021 19:04:15'   | '10'          | 'Store 02'     | '37/18SD'     | ''                     |
-			| ''                                                    | 'Receipt'       | '27.01.2021 19:04:15'   | '16'          | 'Store 02'     | 'XS/Blue'     | ''                     |
-			| ''                                                    | 'Expense'       | '27.01.2021 19:04:15'   | '5'           | 'Store 02'     | '38/Yellow'   | ''                     |
-			| ''                                                    | 'Expense'       | '27.01.2021 19:04:15'   | '10'          | 'Store 02'     | '38/18SD'     | ''                     |
-			| ''                                                    | 'Expense'       | '27.01.2021 19:04:15'   | '16'          | 'Store 02'     | 'S/Yellow'    | ''                     |
+			| 'Item stock adjustment 1 dated 27.01.2021 19:04:15'   | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                     | ''              | ''                      | ''            | ''             | ''            | ''                     | ''                     |
+			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''            | ''                     | ''                     |
+			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'    | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                    | 'Receipt'       | '27.01.2021 19:04:15'   | '5'           | 'Store 02'     | '36/Yellow'   | ''                     | ''                     |
+			| ''                                                    | 'Receipt'       | '27.01.2021 19:04:15'   | '10'          | 'Store 02'     | '37/18SD'     | ''                     | ''                     |
+			| ''                                                    | 'Receipt'       | '27.01.2021 19:04:15'   | '16'          | 'Store 02'     | 'XS/Blue'     | ''                     | ''                     |
+			| ''                                                    | 'Expense'       | '27.01.2021 19:04:15'   | '5'           | 'Store 02'     | '38/Yellow'   | ''                     | ''                     |
+			| ''                                                    | 'Expense'       | '27.01.2021 19:04:15'   | '10'          | 'Store 02'     | '38/18SD'     | ''                     | ''                     |
+			| ''                                                    | 'Expense'       | '27.01.2021 19:04:15'   | '16'          | 'Store 02'     | 'S/Yellow'    | ''                     | ''                     |
 		And I close all client application windows
 
 Scenario: _040003 check item stock adjustment (with serial lot numbers) movements by the Register  "R4010 Actual stocks"
@@ -120,15 +120,15 @@ Scenario: _040003 check item stock adjustment (with serial lot numbers) movement
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Item stock adjustment 1 112 dated 20.05.2022 18:23:15'   | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Document registrations records'                          | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| 'Register  "R4010 Actual stocks"'                         | ''              | ''                      | ''            | ''             | ''           | ''                     |
-			| ''                                                        | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     |
-			| ''                                                        | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    |
-			| ''                                                        | 'Receipt'       | '20.05.2022 18:23:15'   | '1'           | 'Store 02'     | 'UNIQ'       | ''                     |
-			| ''                                                        | 'Receipt'       | '20.05.2022 18:23:15'   | '2'           | 'Store 02'     | 'PZU'        | '8908899877'           |
-			| ''                                                        | 'Expense'       | '20.05.2022 18:23:15'   | '1'           | 'Store 02'     | 'UNIQ'       | ''                     |
-			| ''                                                        | 'Expense'       | '20.05.2022 18:23:15'   | '2'           | 'Store 02'     | 'PZU'        | '8908899879'           |
+			| 'Item stock adjustment 1 112 dated 20.05.2022 18:23:15'   | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Document registrations records'                          | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| 'Register  "R4010 Actual stocks"'                         | ''              | ''                      | ''            | ''             | ''           | ''                     | ''                     |
+			| ''                                                        | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''           | ''                     | ''                     |
+			| ''                                                        | ''              | ''                      | 'Quantity'    | 'Store'        | 'Item key'   | 'Serial lot number'    | 'Source of origin'     |
+			| ''                                                        | 'Receipt'       | '20.05.2022 18:23:15'   | '1'           | 'Store 02'     | 'UNIQ'       | ''                     | ''                     |
+			| ''                                                        | 'Receipt'       | '20.05.2022 18:23:15'   | '2'           | 'Store 02'     | 'PZU'        | '8908899877'           | ''                     |
+			| ''                                                        | 'Expense'       | '20.05.2022 18:23:15'   | '1'           | 'Store 02'     | 'UNIQ'       | ''                     | ''                     |
+			| ''                                                        | 'Expense'       | '20.05.2022 18:23:15'   | '2'           | 'Store 02'     | 'PZU'        | '8908899879'           | ''                     |
 		And I close all client application windows
 
 Scenario: _040004 check item stock adjustment movements by the Register  "R4050 Stock inventory"
@@ -142,17 +142,17 @@ Scenario: _040004 check item stock adjustment movements by the Register  "R4050 
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Item stock adjustment 1 dated 27.01.2021 19:04:15'   | ''              | ''                      | ''            | ''               | ''           | ''             |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''               | ''           | ''             |
-			| 'Register  "R4050 Stock inventory"'                   | ''              | ''                      | ''            | ''               | ''           | ''             |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''           | ''             |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Company'        | 'Store'      | 'Item key'     |
-			| ''                                                    | 'Receipt'       | '27.01.2021 19:04:15'   | '5'           | 'Main Company'   | 'Store 02'   | '36/Yellow'    |
-			| ''                                                    | 'Receipt'       | '27.01.2021 19:04:15'   | '10'          | 'Main Company'   | 'Store 02'   | '37/18SD'      |
-			| ''                                                    | 'Receipt'       | '27.01.2021 19:04:15'   | '16'          | 'Main Company'   | 'Store 02'   | 'XS/Blue'      |
-			| ''                                                    | 'Expense'       | '27.01.2021 19:04:15'   | '5'           | 'Main Company'   | 'Store 02'   | '38/Yellow'    |
-			| ''                                                    | 'Expense'       | '27.01.2021 19:04:15'   | '10'          | 'Main Company'   | 'Store 02'   | '38/18SD'      |
-			| ''                                                    | 'Expense'       | '27.01.2021 19:04:15'   | '16'          | 'Main Company'   | 'Store 02'   | 'S/Yellow'     |
+			| 'Item stock adjustment 1 dated 27.01.2021 19:04:15'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''             | ''                         |
+			| 'Document registrations records'                      | ''              | ''                      | ''            | ''                    | ''               | ''           | ''             | ''                         |
+			| 'Register  "R4050 Stock inventory"'                   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''             | ''                         |
+			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''             |'Attributes'                |
+			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'     |'Calculation movement cost' |
+			| ''                                                    | 'Receipt'       | '27.01.2021 19:04:15'   | '5'           | ''                    | 'Main Company'   | 'Store 02'   | '36/Yellow'    | ''                         |
+			| ''                                                    | 'Receipt'       | '27.01.2021 19:04:15'   | '10'          | ''                    | 'Main Company'   | 'Store 02'   | '37/18SD'      | ''                         |
+			| ''                                                    | 'Receipt'       | '27.01.2021 19:04:15'   | '16'          | ''                    | 'Main Company'   | 'Store 02'   | 'XS/Blue'      | ''                         |
+			| ''                                                    | 'Expense'       | '27.01.2021 19:04:15'   | '5'           | ''                    |'Main Company'    | 'Store 02'   | '38/Yellow'    | ''                         |
+			| ''                                                    | 'Expense'       | '27.01.2021 19:04:15'   | '10'          | ''                    | 'Main Company'   | 'Store 02'   | '38/18SD'      | ''                         |
+			| ''                                                    | 'Expense'       | '27.01.2021 19:04:15'   | '16'          | ''                    | 'Main Company'   | 'Store 02'   | 'S/Yellow'     | ''                         |
 		And I close all client application windows	
 				
 Scenario: _040005 check item stock adjustment movements by the Register  "R4011 Free stocks"
@@ -284,8 +284,25 @@ Scenario: _040012 item stock adjustment clear posting/mark for deletion
 			| 'R4010 Actual stocks'                 |
 		And I close all client application windows
 
-		
-				
+Scenario: _040008 check item stock adjustment movements by the Register "Posted documents registry"
+		And I close all client application windows	
+	* Select item stock adjustment
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1'         |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Item stock adjustment 1 dated 27.01.2021 19:04:15' | ''                                                  | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'             | ''                                                  | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                  | 'Document'                                          | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                  | 'Item stock adjustment 1 dated 27.01.2021 19:04:15' | '27.01.2021 19:04:15' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+		And I close all client application windows	
+	
+			
 
 
 		

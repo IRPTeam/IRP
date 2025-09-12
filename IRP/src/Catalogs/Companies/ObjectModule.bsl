@@ -23,5 +23,9 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	CheckUniqueDescriptionsParameters = New Structure();
+	CheckUniqueDescriptionsParameters.Insert("QueryText", "AND Table.OurCompany = &OurCompany");
+	CheckUniqueDescriptionsParameters.Insert("QueryParameters", New Structure("OurCompany", ThisObject.OurCompany));
+	ThisObject.AdditionalProperties.Insert("CheckUniqueDescriptionsParameters", CheckUniqueDescriptionsParameters);
 	CommonFunctionsServer.CheckUniqueDescriptions_PrivilegedCall(Cancel, ThisObject);
 EndProcedure

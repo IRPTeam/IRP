@@ -44,11 +44,12 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 			Else
 				PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
 				FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
+				FillingData.Property("DistributedPurchaseInvoice", ThisObject.DistributedPurchaseInvoice);
 				LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 				ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
 			EndIf;
 		EndIf;
-	 EndIf;
+	EndIf;
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
@@ -64,7 +65,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_IT(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey");
+		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, Item, ItemKey");
 		ItemListTable.Columns.Add("Store", New TypeDescription("CatalogRef.Stores"));
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;

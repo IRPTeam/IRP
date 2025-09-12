@@ -63,6 +63,7 @@ Function GetCashAdvanceDeduction(Parameters) Export
 	Query.Text = 
 	"SELECT
 	|	R3027B.Partner AS Employee,
+	|	R3027B.Agreement AS Agreement,
 	|	R3027B.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(&Boundary, Company = &Company
@@ -81,7 +82,7 @@ Function GetCashAdvanceDeduction(Parameters) Export
 	
 	ResultTable = Query.Execute().Unload();
 	
-	GroupColumn = "Employee";
+	GroupColumn = "Employee, Agreement";
 	SumColumn = "Amount";
 	
 	ResultTable.GroupBy(GroupColumn, SumColumn);
@@ -92,6 +93,7 @@ EndFunction
 
 Function GetPayrolls_Deduction(Parameters) Export
 	ResultTable = New ValueTable();
+	ResultTable.Columns.Add("CalculationType");
 	ResultTable.Columns.Add("Employee");
 	ResultTable.Columns.Add("Position");
 	ResultTable.Columns.Add("ProfitLossCenter");
@@ -105,29 +107,31 @@ Function GetPayrolls_Deduction(Parameters) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	R9570T_AdditionalDeductionTurnovers.Employee,
-	|	R9570T_AdditionalDeductionTurnovers.Position,
-	|	R9570T_AdditionalDeductionTurnovers.DeductionType,
-	|	R9570T_AdditionalDeductionTurnovers.ExpenseType,
-	|	R9570T_AdditionalDeductionTurnovers.ProfitLossCenter,
-	|	R9570T_AdditionalDeductionTurnovers.AmountTurnover AS Amount
+	|	R9570T_AdditionalDeductionTurnovers.Employee AS Employee,
+	|	R9570T_AdditionalDeductionTurnovers.Position AS Position,
+	|	R9570T_AdditionalDeductionTurnovers.DeductionType AS DeductionType,
+	|	R9570T_AdditionalDeductionTurnovers.ExpenseType AS ExpenseType,
+	|	R9570T_AdditionalDeductionTurnovers.ProfitLossCenter AS ProfitLossCenter,
+	|	R9570T_AdditionalDeductionTurnovers.AmountTurnover AS Amount,
+	|	R9570T_AdditionalDeductionTurnovers.DeductionType.CalculationType AS CalculationType
 	|FROM
-	|	AccumulationRegister.R9570T_AdditionalDeduction.Turnovers(BEGINOFPERIOD(&BeginDate, DAY), ENDOFPERIOD(&EndDate,
-	|		DAY),, Company = &Company
-	|	AND Branch = &Branch
-	|	AND DeductionType.CalculationType = &CalculationType) AS R9570T_AdditionalDeductionTurnovers";
+	|	AccumulationRegister.R9570T_AdditionalDeduction.Turnovers(
+	|			BEGINOFPERIOD(&BeginDate, DAY),
+	|			ENDOFPERIOD(&EndDate, DAY),
+	|			,
+	|			Company = &Company
+	|				AND Branch = &Branch) AS R9570T_AdditionalDeductionTurnovers";
 	Query.SetParameter("BeginDate", Parameters.BeginDate);
 	Query.SetParameter("EndDate", Parameters.EndDate);
 	Query.SetParameter("Company", Parameters.Company);
 	Query.SetParameter("Branch", Parameters.Branch);
-	Query.SetParameter("CalculationType", Parameters.CalculationType);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
 		FillPropertyValues(ResultTable.Add(), QuerySelection);
 	EndDo;
 	
-	GroupColumn = "Employee, Position, ProfitLossCenter, " + Parameters.TypeColumnName;
+	GroupColumn = "Employee, CalculationType, Position, ProfitLossCenter, " + Parameters.TypeColumnName;
 	SumColumn = "Amount, TotalVacationDays, PaidVacationDays, TotalSickLeaveDays, PaidSickLeaveDays";
 	
 	ResultTable.GroupBy(GroupColumn, SumColumn);
@@ -138,6 +142,7 @@ EndFunction
 
 Function GetPayrolls_Accrual(Parameters) Export
 	ResultTable = New ValueTable();
+	ResultTable.Columns.Add("CalculationType");
 	ResultTable.Columns.Add("Employee");
 	ResultTable.Columns.Add("Position");
 	ResultTable.Columns.Add("ProfitLossCenter");
@@ -274,13 +279,14 @@ Function GetPayrolls_Accrual(Parameters) Export
 		NewRow = ResultTable.Add();
 		FillPropertyValues(NewRow, Row);
 		NewRow[Parameters.TypeColumnName] = Row.Accrual;
-				
+		NewRow.CalculationType = Row.Accrual.CalculationType;
+		
 		If Not ValueIsFilled(NewRow.Amount) Then
 			NewRow.Amount = 0;
 		EndIf;
 	EndDo;
 		
-	GroupColumn = "Employee, Position, ProfitLossCenter, " + Parameters.TypeColumnName;
+	GroupColumn = "Employee, CalculationType, Position, ProfitLossCenter, " + Parameters.TypeColumnName;
 	SumColumn = "Amount, TotalVacationDays, PaidVacationDays, TotalSickLeaveDays, PaidSickLeaveDays";
 	
 	ResultTable.GroupBy(GroupColumn, SumColumn);
@@ -302,22 +308,24 @@ Function GetPayrolls_Accrual(Parameters) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	R9560T_AdditionalAccrualTurnovers.Employee,
-	|	R9560T_AdditionalAccrualTurnovers.Position,
-	|	R9560T_AdditionalAccrualTurnovers.AccrualType,
-	|	R9560T_AdditionalAccrualTurnovers.ExpenseType,
-	|	R9560T_AdditionalAccrualTurnovers.ProfitLossCenter,
-	|	R9560T_AdditionalAccrualTurnovers.AmountTurnover AS Amount
+	|	R9560T_AdditionalAccrualTurnovers.Employee AS Employee,
+	|	R9560T_AdditionalAccrualTurnovers.Position AS Position,
+	|	R9560T_AdditionalAccrualTurnovers.AccrualType AS AccrualType,
+	|	R9560T_AdditionalAccrualTurnovers.ExpenseType AS ExpenseType,
+	|	R9560T_AdditionalAccrualTurnovers.ProfitLossCenter AS ProfitLossCenter,
+	|	R9560T_AdditionalAccrualTurnovers.AmountTurnover AS Amount,
+	|	R9560T_AdditionalAccrualTurnovers.AccrualType.CalculationType AS CalculationType
 	|FROM
-	|	AccumulationRegister.R9560T_AdditionalAccrual.Turnovers(BEGINOFPERIOD(&BeginDate, DAY), ENDOFPERIOD(&EndDate, DAY),,
-	|		Company = &Company
-	|	AND Branch = &Branch
-	|	AND AccrualType.CalculationType = &CalculationType) AS R9560T_AdditionalAccrualTurnovers";
+	|	AccumulationRegister.R9560T_AdditionalAccrual.Turnovers(
+	|			BEGINOFPERIOD(&BeginDate, DAY),
+	|			ENDOFPERIOD(&EndDate, DAY),
+	|			,
+	|			Company = &Company
+	|				AND Branch = &Branch) AS R9560T_AdditionalAccrualTurnovers";
 	Query.SetParameter("BeginDate", Parameters.BeginDate);
 	Query.SetParameter("EndDate", Parameters.EndDate);
 	Query.SetParameter("Company", Parameters.Company);
 	Query.SetParameter("Branch", Parameters.Branch);
-	Query.SetParameter("CalculationType", Parameters.CalculationType);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
@@ -348,56 +356,31 @@ Function _CalculateDaysForPaid_Vacation(VacationEmployeeTable, Parameters, Setti
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	R9545T_PaidVacationsTurnovers.Company,
-	|	R9545T_PaidVacationsTurnovers.Employee,
-	|	SUM(R9545T_PaidVacationsTurnovers.PaidTurnover) AS PaidTurnover
-	|FROM
-	|	AccumulationRegister.R9545T_PaidVacations.Turnovers(BEGINOFPERIOD(&EndDate, YEAR), ENDOFPERIOD(&EndDate, YEAR),
-	|		Recorder, (Company, Employee) IN
-	|		(SELECT
-	|			tmp.Company,
-	|			tmp.Employee
-	|		FROM
-	|			tmp AS tmp)) AS R9545T_PaidVacationsTurnovers
-	|WHERE
-	|	R9545T_PaidVacationsTurnovers.Recorder <> &Recorder
-	|GROUP BY
-	|	R9545T_PaidVacationsTurnovers.Company,
-	|	R9545T_PaidVacationsTurnovers.Employee
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
 	|	tmp.Company,
 	|	tmp.Employee,
-	|	COUNT(tmp.Date) AS CountDates
+	|	COUNT(tmp.Date) AS TotalDays,
+	|	SUM(ISNULL(R9541T_VacationUsage.Days, 0)) AS PaidDays
 	|FROM
 	|	tmp AS tmp
+	|		LEFT JOIN AccumulationRegister.R9541T_VacationUsage AS R9541T_VacationUsage
+	|		ON tmp.Company = R9541T_VacationUsage.Company
+	|		AND tmp.Employee = R9541T_VacationUsage.Employee
+	|		AND tmp.Date = R9541T_VacationUsage.Period
+	|		AND R9541T_VacationUsage.Active
+	|		AND R9541T_VacationUsage.Recorder REFS Document.EmployeeVacation
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Employee";
 	Query.SetParameter("tmp", VacationEmployeeTable);
-	Query.SetParameter("EndDate", Parameters.EndDate);
-	Query.SetParameter("Recorder", Parameters.Ref);
 	
-	QueryResults = Query.ExecuteBatch();
-	PaidDays = QueryResults[1].Unload();
-	TotalDays = QueryResults[2].Unload();
-	
-	For Each TotalRow In TotalDays Do
+	DaysTable = Query.Execute().Unload();
+	For Each TotalRow In DaysTable Do
 		Filter = New Structure();
 		Filter.Insert("Company"  , TotalRow.Company);
 		Filter.Insert("Employee" , TotalRow.Employee);
-		
-		PaidRows = PaidDays.FindRows(Filter);
-		_PaidDays = 0;
-		For Each PaidRow In PaidRows Do
-			_PaidDays = _PaidDays + PaidRow.PaidTurnover;
-		EndDo;
-		
 		EmployeeRows = VacationEmployeeTable.FindRows(Filter);
 						
-		CalculatePaidDays(_PaidDays, Settings.VacationDays, EmployeeRows, "IsPaidVacation");
+		CalculatePaidDays(0, TotalRow.PaidDays, EmployeeRows, "IsPaidVacation");
 	EndDo;
 	
 	Return VacationEmployeeTable;
@@ -539,13 +522,11 @@ Function GetAccrualValue(Parameters, EmployeeOrPosition, Date)
 	|	AccrualValues.Period
 	|FROM
 	|	InformationRegister.T9500S_AccrualAndDeductionValues.SliceLast(ENDOFPERIOD(&Date, DAY),
-	|		EmployeeOrPosition = &EmployeeOrPosition
-	|	AND AccualOrDeductionType.CalculationType = &CalculationType) AS AccrualValues
+	|		EmployeeOrPosition = &EmployeeOrPosition) AS AccrualValues
 	|WHERE
 	|	NOT AccrualValues.NotActual";
 	Query.SetParameter("Date", Date);
 	Query.SetParameter("EmployeeOrPosition", EmployeeOrPosition);
-	Query.SetParameter("CalculationType", Parameters.CalculationType);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	

@@ -181,13 +181,13 @@
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="af5eae2d-d246-4a21-8c2e-e867874e2716">
-  <name>StockBalanceDetail</name>
+  <name>DELETE_StockBalanceDetail</name>
   <synonym>
    <key>en</key>
-   <value>02D65C66-586C-2D29-936A-AD59335804ED</value>
+   <value>77FD1809-AE5F-B776-63E2-2DC34F1F3EFC</value>
   </synonym>
   <type>
-   <types>EnumRef.StockBalanceDetail</types>
+   <types>EnumRef.DELETE_StockBalanceDetail</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -302,6 +302,120 @@
    <stringQualifiers>
     <length>1024</length>
    </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c776b0cf-da9e-4edf-9e6f-a2fe5e9735b8">
+  <name>ItemKeyDescriptionTemplate</name>
+  <synonym>
+   <key>en</key>
+   <value>34002ED1-ED24-9D96-6065-5750F0B46906</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>1024</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="5bdde7cd-a895-46fe-920a-4df17b50dfab">
+  <name>ItemKeyLocalFullDescriptionTemplate</name>
+  <synonym>
+   <key>en</key>
+   <value>B3CE66EC-1D53-A450-0EE1-1BA2EAC5C26E____</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>1024</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2dce2c51-9493-4df9-92c0-22615a58b9da">
+  <name>ItemKeyForeignFullDescriptionTemplate</name>
+  <synonym>
+   <key>en</key>
+   <value>C9A206B8-92AC-F193-3DE3-3FD27D4DBCF1______</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>1024</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="16fcf447-ac23-4fa1-833e-0561160f069e">
+  <name>StockBalanceDetailSerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>C2E37651-A240-AF84-4C9D-D588CF14BBA8</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="95acbc55-0e21-49fb-8983-d6eae46a2c64">
+  <name>BatchBalanceDetailSerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>730EE0C9-DCD7-439E-EB19-956729E29C18</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3c8d94bf-fe78-4d3e-992d-ff4392bcd3e5">
+  <name>StockBalanceDetailSourceOfOrigins</name>
+  <synonym>
+   <key>en</key>
+   <value>796D6304-7D02-89CC-C83B-BA8F98BCD99F</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="5304d91f-9d39-403a-ab3e-e9a1a0428782">
+  <name>BatchBalanceDetailSourceOfOrigins</name>
+  <synonym>
+   <key>en</key>
+   <value>72E14468-E0E4-1DA3-3A16-64B5E64FD6B7</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -527,6 +641,14 @@
   <synonym>
    <key>en</key>
    <value>D997F4F4-D6A9-6CB1-1EEB-BDE95BA0CAC2</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+ <templates uuid="a8a5ac3d-eb60-4f0e-946a-170827ea8f97">
+  <name>ItemKeyTemplate</name>
+  <synonym>
+   <key>en</key>
+   <value>ABD9ABFC-77E2-2B67-7AC2-2A859D5A7A31</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

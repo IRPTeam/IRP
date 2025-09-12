@@ -146,6 +146,16 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankPayment</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>WHERE False</condition>
+			</restrictionByCondition>
+		</right>
+	</object>
+	<object>
 		<name>Document.ConsolidatedRetailSales.Command.OpenSession</name>
 		<right>
 			<name>View</name>

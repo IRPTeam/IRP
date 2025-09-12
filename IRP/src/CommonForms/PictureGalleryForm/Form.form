@@ -15,11 +15,6 @@
   <extendedTooltip>
    <name>HTMLGalleryExtendedTooltip</name>
    <id>128</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -30,11 +25,6 @@
   <contextMenu>
    <name>HTMLGalleryContextMenu</name>
    <id>127</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <type>HTMLDocumentField</type>
@@ -62,11 +52,6 @@
  <autoCommandBar>
   <name>FormCommandBar</name>
   <id>-1</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
  </autoCommandBar>
  <handlers>
@@ -75,6 +60,7 @@
  </handlers>
  <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
  <autoSaveDataInSettings>Use</autoSaveDataInSettings>
+ <saveWindowSettings>true</saveWindowSettings>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>
  <autoFillCheck>true</autoFillCheck>

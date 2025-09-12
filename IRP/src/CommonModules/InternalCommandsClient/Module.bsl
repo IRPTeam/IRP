@@ -5,9 +5,9 @@
 // Run command action.
 // 
 // Parameters:
-//  Command - FormCommand - Command
+//  Command - FormCommand, CommandBarButton - Command
 //  Form - ClientApplicationForm - Form
-//  MainAttribute - FormAttribute, DynamicList - Main form attribute
+//  MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main form attribute
 //  Targets - AnyRef, Array of AnyRef - Command target
 //  AddInfo - Undefined -  Add info
 Procedure RunCommandAction(Command, Form, MainAttribute, Targets, AddInfo = Undefined) Export
@@ -22,7 +22,9 @@ Procedure RunCommandAction(Command, Form, MainAttribute, Targets, AddInfo = Unde
 	CommandName = CommandNameParts[CommandNameParts.UBound()];
 	
 	//@skip-check use-non-recommended-method
-	InternalCommandModule = GetForm("DataProcessor.InternalCommands.Form." + CommandName); // See DataProcessor.InternalCommands.Form.CommandTemplate
+	InternalCommandModule = 
+		GetForm("DataProcessor.InternalCommands.Form." + CommandName, 
+			New Structure("FullName", FullCommandName)); // See DataProcessor.InternalCommands.Form.CommandTemplate
 	
 	//@skip-check property-return-type
 	CommandDescription = InternalCommandModule.CommandDescription; // See InternalCommandsServer.GetCommandDescription
@@ -82,7 +84,7 @@ EndProcedure
 //  Targets - AnyRef, Array of AnyRef - Command target
 //  Form - ClientApplicationForm - Form
 //  CommandFormItem - FormButton - Command form item
-//  MainAttribute - FormAttribute, DynamicList - Main form attribute
+//  MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main form attribute
 //  AddInfo - Undefined - Add info
 Procedure Form_BeforeRunning(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
 	Return;
@@ -94,7 +96,7 @@ EndProcedure
 //  Targets - AnyRef, Array of AnyRef - Command target
 //  Form - ClientApplicationForm - Form
 //  CommandFormItem - FormButton - Command form item
-//  MainAttribute - FormAttribute, DynamicList - Main form attribute
+//  MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main form attribute
 //  AddInfo - Undefined -  Add info
 Procedure Form_RunCommandAction(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
 	Return;
@@ -106,7 +108,7 @@ EndProcedure
 //  Targets - AnyRef, Array of AnyRef - Command target
 //  Form - ClientApplicationForm - Form
 //  CommandFormItem - FormButton - Command form item
-//  MainAttribute - FormAttribute, DynamicList - Main form attribute
+//  MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main form attribute
 //  AddInfo - Undefined - Add info
 Procedure Form_AfterRunning(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
 	Return;

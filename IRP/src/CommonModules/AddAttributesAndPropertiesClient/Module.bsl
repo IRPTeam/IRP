@@ -4,7 +4,7 @@ Procedure AddAttributeStartChoice(Form, Item, StandardProcessing, AddInfo = Unde
 		StandardProcessing = False;
 		PropertyOwner = Form[Item.Name + "_owner"]; // ChartOfCharacteristicTypesRef.AddAttributeAndProperty 
 		Filter = New Structure("Owner", PropertyOwner);
-		OpenArgs = New Structure("Filter", Filter);
+		OpenArgs = New Structure("Filter, CurrentRow", Filter, Form[Item.Name]);
 		OpenForm("Catalog.AddAttributeAndPropertyValues.ChoiceForm", OpenArgs, Item);
 	EndIf;
 EndProcedure
@@ -14,7 +14,7 @@ Procedure SetRequiredAtAllSets(Object, Form, Command) Export
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
-	Notify = New NotifyDescription("SetRequiredAtAllSetsEnd", ThisObject, NotifyParameters);
+	Notify = New CallbackDescription("SetRequiredAtAllSetsEnd", ThisObject, NotifyParameters);
 	ShowInputValue(Notify, False, R().SuggestionToUser_1, Types);
 EndProcedure
 

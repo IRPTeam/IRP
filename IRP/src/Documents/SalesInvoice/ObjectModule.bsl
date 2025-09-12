@@ -3,10 +3,19 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
-	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies, Cancel);
 	
+		AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
+		AmountsInfo.TotalAmount.Value = ThisObject.ItemList.Total("TotalAmount");
+		AmountsInfo.NetAmount.Value   = ThisObject.ItemList.Total("NetAmount");
+		AmountsInfo.TaxAmount.Value   = ThisObject.ItemList.Total("TaxAmount");
+		TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
+	EndIf;
+		
 	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
 	
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
@@ -51,13 +60,24 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
 	ElsIf TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
 		If FillingData.BasedOn = "SalesReportToConsignor" Then
+			
 			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
 			Filling_BasedOn(FillingData);
+		
+		ElsIf FillingData.BasedOn = "CurrencyRevaluationInvoice" Then
+			
+			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+			Filling_BasedOn(FillingData);
+			CommonFunctionsClientServer.PutToAddInfo(ThisObject.AdditionalProperties, 
+				"RecalculationCommand", "Command_RecalculateByTotalAmount");			
+		
 		Else
+			
 			PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
 			FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
 			LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 			ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
+		
 		EndIf;	
 	EndIf;
 EndProcedure
@@ -82,6 +102,14 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		Cancel = True;
 	EndIf;
 
+	If (ThisObject.TransactionType = Enums.SalesTransactionTypes.CurrencyRevaluationCustomer 
+			Or ThisObject.TransactionType = Enums.SalesTransactionTypes.CurrencyRevaluationVendor)
+	 	And ValueIsFilled(ThisObject.Agreement) 
+		And Agreement.Type = Enums.ApArPostingDetail.ByDocuments
+		And Not ValueIsFilled(ThisObject.CurrencyRevaluationInvoice) Then 
+			CheckedAttributes.Add("CurrencyRevaluationInvoice");
+	EndIf;
+	
 	For Each Row In ThisObject.ItemList Do
 		ItemKeyRow = New Structure();
 		ItemKeyRow.Insert("LineNumber", Row.LineNumber);
@@ -129,7 +157,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_SI(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey, Store");
+		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, Item, ItemKey, Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 
@@ -203,5 +231,9 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 					"Object.ItemList");
 			EndIf;
 		EndDo;
+	EndIf;
+	
+	If Not Cancel = True Then
+		CreditLimitsServer.CheckCreditLimitByPartner(ThisObject, ThisObject.Date, Cancel);
 	EndIf;
 EndProcedure

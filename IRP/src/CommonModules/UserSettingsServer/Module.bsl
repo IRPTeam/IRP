@@ -64,6 +64,52 @@ Function LinkedDocumets_Settings_UseReverseTree(val User = Undefined) Export
 	Return False;	
 EndFunction
 
+Function AttachedFilesToDocumentsControl_AdditionalSettings_EnableChangeFilters(val User) Export
+	Value = GetUserSettings(User, New Structure("MetadataObject",
+		"DataProcessor.AttachedFilesToDocumentsControl.AdditionalSettings.EnableChangeFilters"));
+	If Value.Count() Then
+		Return Value[0].Value;
+	EndIf;
+	Return False;
+EndFunction
+
+Function AttachedFilesToDocumentsControl_AdditionalSettings_EnableCheckMode(val User) Export
+	Value = GetUserSettings(User, New Structure("MetadataObject",
+		"DataProcessor.AttachedFilesToDocumentsControl.AdditionalSettings.EnableCheckMode"));
+	If Value.Count() Then
+		Return Value[0].Value;
+	EndIf;
+	Return False;
+EndFunction
+
+Function AttachedFilesToDocumentsControl_AdditionalSettings_CompanyFilter(val User) Export
+	Value = GetUserSettings(User, New Structure("MetadataObject",
+		"DataProcessor.AttachedFilesToDocumentsControl.AdditionalSettings.Company"));
+	If Value.Count() Then
+		Return Value[0].Value;
+	EndIf;
+	Return Catalogs.Companies.EmptyRef();
+EndFunction
+
+Function AttachedFilesToDocumentsControl_AdditionalSettings_BranchFilter(val User) Export
+	Value = GetUserSettings(User, New Structure("MetadataObject",
+		"DataProcessor.AttachedFilesToDocumentsControl.AdditionalSettings.Branch"));
+	If Value.Count() Then
+		Return Value[0].Value;
+	EndIf;
+	Return Catalogs.BusinessUnits.EmptyRef();
+EndFunction
+
+Function AllCatalogs_AdditionalSettings_DisableAutomaticCreationOfCompanyAndAgreementForPartner(val User) Export
+	Value = GetUserSettings(User, New Structure("MetadataObject",
+		"Catalogs.AllCatalogs.AdditionalSettings.DisableAutomaticCreationOfCompanyAndAgreementForPartner"));
+	If Value.Count() Then
+		Return Value[0].Value;
+	Else
+		Return False;	
+	EndIf;	
+EndFunction
+
 #EndRegion
 
 Function GetPredefinedUserSettingNames() Export

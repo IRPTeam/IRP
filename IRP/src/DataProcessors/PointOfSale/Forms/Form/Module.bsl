@@ -52,6 +52,16 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 EndProcedure
 
 &AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
+EndProcedure
+
+&AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
@@ -184,11 +194,11 @@ Procedure CloseSession(Command)
 		, CommonFunctionsServer.GetRefAttribute(Object.Workstation, "AutoCreateMoneyTransferAtSessionClosing"));
 	FormParameters.Insert("ConsolidatedRetailSales", Object.ConsolidatedRetailSales);
 
-	NotifyDescription = New NotifyDescription("CloseSessionFinish", ThisObject);
+	CallbackDescription = New CallbackDescription("CloseSessionFinish", ThisObject);
 
 	OpenForm(
 		"DataProcessor.PointOfSale.Form.SessionClosing",
-		FormParameters, ThisObject, UUID, , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+		FormParameters, ThisObject, UUID, , , CallbackDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 &AtClient
@@ -529,7 +539,7 @@ EndProcedure
 Procedure ChangeRollbackRight(Command)
 	If Not Items.ChangeRollbackRight.Check Then
 		OpenForm("DataProcessor.PointOfSale.Form.ChangeRight", , ThisObject, , , ,
-			New NotifyDescription("ChangeRightEnd", ThisObject ) , FormWindowOpeningMode.LockOwnerWindow);
+			New CallbackDescription("ChangeRightEnd", ThisObject ) , FormWindowOpeningMode.LockOwnerWindow);
 	Else
 		Items.ChangeRollbackRight.Check = False;
 		ThisObject.KeepRights = False;
@@ -566,7 +576,7 @@ Procedure qPayment(Command)
 		Return;
 	EndIf;
 
-	OpenFormNotifyDescription = New NotifyDescription("PaymentFormClose", ThisObject);
+	OpenFormCallbackDescription = New CallbackDescription("PaymentFormClose", ThisObject);
 	ObjectParameters = New Structure();
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("Branch", Object.Branch);
@@ -579,7 +589,7 @@ Procedure qPayment(Command)
 	ObjectParameters.Insert("Discount", Object.ItemList.Total("OffersAmount"));
 	ObjectParameters.Insert("ConsolidatedRetailSales", ConsolidatedRetailSales);
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
-		OpenFormNotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+		OpenFormCallbackDescription, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtServer
@@ -641,7 +651,7 @@ Procedure Advance(Command)
 		Return;
 	EndIf;
 
-	OpenFormNotifyDescription = New NotifyDescription("AdvanceFormClose", ThisObject);
+	OpenFormCallbackDescription = New CallbackDescription("AdvanceFormClose", ThisObject);
 	ObjectParameters = New Structure();
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("Branch", Object.Branch);
@@ -652,7 +662,7 @@ Procedure Advance(Command)
 	ObjectParameters.Insert("Company", Object.Company);
 	ObjectParameters.Insert("ConsolidatedRetailSales", ConsolidatedRetailSales);
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
-		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+		OpenFormCallbackDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 &AtClient
@@ -775,7 +785,7 @@ Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
 EndProcedure
 
 &AtClient
-Procedure ItemListControlCodeStringStateClick() Export
+Procedure ItemListControlCodeStringStateClick(SerialLotNumberForCheck = Undefined) Export
 
 	CurrentData = Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
@@ -786,15 +796,25 @@ Procedure ItemListControlCodeStringStateClick() Export
 		Return;
 	EndIf;
 
+	// for checking we take the latest series
+	If SerialLotNumberForCheck = Undefined Then
+		SerialLotNumberForCheck = PredefinedValue("Catalog.SerialLotNumbers.EmptyRef");
+		SerialNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", CurrentData.Key));
+		If SerialNumbers.Count() Then
+			SerialLotNumberForCheck = SerialNumbers[SerialNumbers.UBound()].SerialLotNumber; 
+		EndIf;
+	EndIf;
+
 	Params = New Structure;
 	Params.Insert("Hardware", CommonFunctionsServer.GetRefAttribute(ConsolidatedRetailSales, "FiscalPrinter"));
 	Params.Insert("RowKey", CurrentData.Key);
 	Params.Insert("Item", CurrentData.Item);
 	Params.Insert("ItemKey", CurrentData.ItemKey);
+	Params.Insert("SerialLotNumber", SerialLotNumberForCheck);
 	//@skip-check unknown-method-property
 	Params.Insert("LineNumber", CurrentData.LineNumber);
 	Params.Insert("isReturn", isReturn);
-	Notify = New NotifyDescription("ItemListControlCodeStringStateOpeningEnd", ThisObject, Params);
+	Notify = New CallbackDescription("ItemListControlCodeStringStateOpeningEnd", ThisObject, Params);
 
 	OpenForm("CommonForm.CodeStringCheck", Params, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
@@ -813,7 +833,8 @@ Procedure ItemListControlCodeStringStateOpeningEnd(Result, AddInfo) Export
 	ControlCodeStringsClient.ClearAllByRow(Object, Array);
 	If Result.WithoutScan Then
 		CurrentRow = Object.ItemList.FindByID(Items.ItemList.CurrentRow);
-		CurrentRow.isControlCodeString = False;
+		ControlCodeStringsRows = Object.ControlCodeStrings.FindRows(New Structure("Key", CurrentRow.Key));
+		CurrentRow.isControlCodeString = (ControlCodeStringsRows.Count() > 0);
 	Else
 		For Each Row In Result.Scaned Do
 			FillPropertyValues(Object.ControlCodeStrings.Add(), Row);
@@ -1157,7 +1178,7 @@ Function GetAdvanceDocumentParameters(_Payments, AdvanceDirection)
 		DocumentParameters.Insert("BankDocumentTransactionType",
 			PredefinedValue("Enum.OutgoingPaymentTransactionTypes.RetailCustomerAdvance"));
 	Else
-		Raise "Wrong advance direction";
+          Raise R().WrongAdvanceDirection;
 	EndIf;
 
 	Return DocumentParameters;
@@ -1541,7 +1562,7 @@ Procedure CashInListSelection(Item, RowSelected, Field, StandardProcessing)
 		"Document.CashReceipt.ObjectForm",
 		New Structure("FillingValues", FillingData), ,
 		New UUID(), , ,
-		New NotifyDescription("CreateCashInFinish", ThisObject),
+		New CallbackDescription("CreateCashInFinish", ThisObject),
 		FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
@@ -1605,7 +1626,7 @@ EndFunction
 //  DocumentRef.CashReceipt
 &AtServer
 Function CreateAndPostCashInAtServer(FillingData)
-	Wrapper = BuilderAPI.Initialize("CashReceipt", , FillingData);
+	Wrapper = BuilderAPI.Initialize("CashReceipt", , FillingData, "PaymentList");
 	Doc = BuilderAPI.Write(Wrapper, DocumentWriteMode.Posting);
 	Return Doc.Ref;
 EndFunction
@@ -1628,7 +1649,7 @@ Procedure CreateCashOut(Command, AutoCreateMoneyTransfer = False)
 	OpenForm("DataProcessor.PointOfSale.Form.CashOut",
 			OpenFormParameters, ,
 			UUID, , ,
-			New NotifyDescription("CreateCashOutFinish", ThisObject),
+			New CallbackDescription("CreateCashOutFinish", ThisObject),
 			FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
@@ -1747,9 +1768,9 @@ Procedure FindRetailBasis(RowID)
 		FormParameters.Insert("ItemKey", CurrentRow.ItemKey);
 	EndIf;
 
-	NotifyDescription = New NotifyDescription("FindRetailBasisFinish", ThisObject, RowID);
+	CallbackDescription = New CallbackDescription("FindRetailBasisFinish", ThisObject, RowID);
 	OpenForm("CommonForm.SelectionRetailBasisForReturn",
-		FormParameters, ThisObject, UUID, , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+		FormParameters, ThisObject, UUID, , , CallbackDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 &AtClient
@@ -2005,8 +2026,11 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 		NewDoc.StatusType = StatusType;
 		NewDoc.Fill(FillingValues);
 		NewDoc.ConsolidatedRetailSales = ThisObject.Object.ConsolidatedRetailSales;
+		
+		DPPointOfSaleServer.BeforePostingDocument(NewDoc);
 		NewDoc.Write(DocumentWriteMode.Posting);
 		DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
+		
 		DocRefs.Add(NewDoc.Ref);
 	EndDo;
 	
@@ -2048,12 +2072,12 @@ Function CreateReturnWithoutBase(PaymentData, StatusType)
 	NewDoc.StatusType = StatusType;
 	NewDoc.Fill(FillingData);
 	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(NewDoc);
+	
+	DPPointOfSaleServer.BeforePostingDocument(NewDoc);	
 	NewDoc.Write(DocumentWriteMode.Posting);
+	DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
 
-	DocRef = NewDoc.Ref;
-	DPPointOfSaleServer.AfterPostingDocument(DocRef);
-
-	Return DocRef;
+	Return NewDoc.Ref;
 
 EndFunction
 
@@ -2153,10 +2177,10 @@ EndProcedure
 
 &AtClient
 Procedure SelectBasisDocument(Command)
-	OpenFormNotifyDescription = New NotifyDescription("SelectBasisDocumentClose", ThisObject);
+	OpenFormCallbackDescription = New CallbackDescription("SelectBasisDocumentClose", ThisObject);
 	FormParameters = New Structure();
 	FormParameters.Insert("RetailCustomer", Object.RetailCustomer);
-	OpenForm("DataProcessor.PointOfSale.Form.SelectBasisDocument", FormParameters, ThisObject, , , , OpenFormNotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("DataProcessor.PointOfSale.Form.SelectBasisDocument", FormParameters, ThisObject, , , , OpenFormCallbackDescription, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 // Select basis document close.
@@ -2171,6 +2195,7 @@ Procedure SelectBasisDocumentClose(Result, AdditionalData) Export
 	EndIf;
 
 	FillOnSelectBasisDocument(Result);
+	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(ThisObject.Object);
 	ThisObject.Object.ControlCodeStrings.Clear();
 	ControlCodeStringsClient.UpdateState(ThisObject.Object);
@@ -2223,12 +2248,7 @@ Procedure LinkUnlinkBasisDocuments(Command)
 	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_RSR(Object));
 	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form", ThisObject);
-	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters),
-			FormWindowOpeningMode.LockOwnerWindow);
+	RowIDInfoClient.OpenForm_LinkUnlinkDocumentRows(Object, ThisObject, FormParameters);
 EndProcedure
 
 &AtClient
@@ -2236,12 +2256,7 @@ Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
 	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_RSR(Object));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form", ThisObject);
-	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters),
-			FormWindowOpeningMode.LockOwnerWindow);
+	RowIDInfoClient.OpenForm_AddLinkedDocumentRows(Object, ThisObject, FormParameters);
 EndProcedure
 
 &AtClient
@@ -2250,26 +2265,21 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 		Return;
 	EndIf;
 	ThisObject.Modified = True;
-	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
-	If ExtractedData <> Undefined Then
-		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
-	EndIf;
-	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
-	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(Object, ThisObject, "ItemList");
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
-Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
-	ExtractedData = Undefined;
+Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	If Result.Operation = "LinkUnlinkDocumentRows" Then
-		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
+		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues, Result.CalculateRows);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+		ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
 	EndIf;
-	ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
 	LockLinkedRows();
-	Return ExtractedData;
-EndFunction
+EndProcedure
 
 &AtServer
 Procedure LockLinkedRows()
@@ -2322,7 +2332,7 @@ EndProcedure
 Procedure PostponeCurrentReceiptAtServer(WithReserve)
 	
 	If Not ThisObject.isReturn Then
-		ObjectValue = FormAttributeToValue("Object");
+		ObjectValue = FormAttributeToValue("Object"); // DocumentObject.RetailSalesReceipt
 		ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 		ObjectValue.Workstation = Workstation;
 		
@@ -2331,6 +2341,7 @@ Procedure PostponeCurrentReceiptAtServer(WithReserve)
 		Else
 			ObjectValue.StatusType = Enums.RetailReceiptStatusTypes.Postponed;
 		EndIf;
+		
 		DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 	
 		ObjectValue.Write(DocumentWriteMode.Posting);
@@ -2350,7 +2361,7 @@ Procedure OpenPostponedReceipt(Command)
 		Return;
 	EndIf;	
 	
-	Notification = New NotifyDescription("SelectPostponedReceiptNotify", ThisObject);
+	Notification = New CallbackDescription("SelectPostponedReceiptNotify", ThisObject);
 	OpenForm("DataProcessor.PointOfSale.Form.SelectPostponedReceipt", 
 		New Structure("Branch", Object.Branch), , , , , 
 		Notification, FormWindowOpeningMode.LockWholeInterface);

@@ -3,6 +3,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocPlannedReceiptReservationServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
+	SystemAttributesServer.OutputSystemAttributes(ThisObject, "StoreIncoming");
 EndProcedure
 
 #EndRegion

@@ -292,7 +292,7 @@ EndProcedure
 &AtClient
 Procedure FillDescriptionByTemplate(Command)
 	If ThisObject.Modified Then
-		ShowQueryBox(New NotifyDescription("FillDescriptionByTemplateEnd", ThisObject, New Structure("CommandName", Command.Name)), 
+		ShowQueryBox(New CallbackDescription("FillDescriptionByTemplateEnd", ThisObject, New Structure("CommandName", Command.Name)), 
 			R().QuestionToUser_001, QuestionDialogMode.OKCancel);
 	Else
 		FillDescriptionByTemplateAtClient(Command.Name);
@@ -317,7 +317,7 @@ Procedure FillDescriptionByTemplateAtClient(CommandName)
 	ElsIf StrStartsWith(CommandName, "CommandFillByTemplate_ForeignDescription") Then
 		FillDescriptionByTemplateAtServer("ForeignFullDescription", "ItemForeignFullDescriptionTemplate");
 	Else
-		Raise StrTemplate("Unknown command [%1]", CommandName);
+		Raise StrTemplate(R().ItemFormUnknownCommand, CommandName);
 	EndIf;		
 EndProcedure
 

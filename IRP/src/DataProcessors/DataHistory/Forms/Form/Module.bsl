@@ -28,8 +28,14 @@ Procedure FillTree()
 		NewRow.Name = MetaRow.Key;
 
 		For Each ObRow In Metadata[MetaRow.Key] Do
+			
+			If ObRow = Metadata.InformationRegisters.SecureDataStorage Then
+				Continue;
+			EndIf;
+			
 			AddRow = NewRow.GetItems().Add();
 			AddRow.Name = ObRow.Name;
+			
 			Settings = DataHistory.GetSettings(ObRow);
 			If Settings = Undefined Then
 				AddRow.Use = ObRow.DataHistory = Metadata.ObjectProperties.DataHistoryUse.Use;
@@ -54,7 +60,6 @@ Function FillMetadataStructure()
 	Structure.Insert("Documents");
 	Structure.Insert("ExchangePlans");
 	Structure.Insert("InformationRegisters");
-	Structure.Insert("Sequences");
 	Structure.Insert("Tasks");
 	Return Structure;
 EndFunction
@@ -68,7 +73,7 @@ Procedure SaveSettingsAtServer()
 				DataHistorySet.Use = MetaRow.Use;
 
 				DataHistory.SetSettings(Metadata[Row.Name][MetaRow.Name], DataHistorySet);
-			Else
+			Else				
 				DataHistory.SetSettings(Metadata[Row.Name][MetaRow.Name], Undefined);
 			EndIf;
 

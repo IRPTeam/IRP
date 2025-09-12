@@ -52,6 +52,7 @@
   <key>en</key>
   <value>627EB3E4-B20F-0795-5FFF-F7A35DE99FDF</value>
  </objectPresentation>
+ <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -62,8 +63,10 @@
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.CashAccounts.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.CashAccounts.Form.GroupForm</defaultFolderForm>
  <defaultListForm>Catalog.CashAccounts.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.CashAccounts.Form.ChoiceForm</defaultChoiceForm>
+ <defaultFolderChoiceForm>Catalog.CashAccounts.Form.GroupChoiceForm</defaultFolderChoiceForm>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  <attributes uuid="f853a165-64c1-427c-8e98-e23be321eafb">
   <name>Currency</name>
@@ -346,6 +349,21 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="18595574-f3b6-47bf-a3cd-5d3188ac339a">
+  <name>NegativeBalanceControl</name>
+  <synonym>
+   <key>en</key>
+   <value>5D7EDB54-B9DE-4F1A-AD63-36CB50AC43BA</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="e4e2c63b-a0fc-494f-8196-b38a6ddb475c">
   <producedTypes>
    <objectType typeId="f17642bd-0685-4d6c-8cf9-1c8be00bb9b9" valueTypeId="6413d6f8-0579-45ce-9ca5-14ad0721fb28"/>
@@ -412,6 +430,24 @@
   <synonym>
    <key>en</key>
    <value>513E519B-E0CD-C492-2E8D-D761595F29AF</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="5559095e-b820-4a1e-92d5-d1e9c7a32085">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>A1AAE2F1-5A38-4B89-960C-C7696882D9D0</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f0ef90d1-4371-4ea1-969e-31ffa23a62d0">
+  <name>GroupChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>0C6F082D-F593-8C6B-B00C-C9A2E930574B</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

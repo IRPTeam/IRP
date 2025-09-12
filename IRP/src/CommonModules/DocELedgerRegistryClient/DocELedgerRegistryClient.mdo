@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b8bcf17f-7bac-445f-81eb-dafb0cfb6f22">
+ <name>DocELedgerRegistryClient</name>
+ <synonym>
+  <key>en</key>
+  <value>244D6608-FC14-1A21-15A0-04AD09F0FA15</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

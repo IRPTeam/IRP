@@ -45,17 +45,18 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	IsSalaryTax = Object.Kind = PredefinedValue("Enum.TaxKind.Salary");
 	IsVatTax = Object.Kind = PredefinedValue("Enum.TaxKind.VAT");
+	IsWithholdingVatTax = Object.Kind = PredefinedValue("Enum.TaxKind.WithholdingTax");
 	UseTaxRate = Object.Type = PredefinedValue("Enum.TaxType.Rate");
 	
 	Form.Items.TaxPayer.Visible = IsSalaryTax;
 	
-	Form.Items.Type.Visible = IsVatTax;
+	Form.Items.Type.Visible = IsVatTax Or IsWithholdingVatTax;
 	
-	Form.Items.TaxRates.Visible = UseTaxRate And IsVatTax;
-	Form.Items.GroupTaxRates.Visible = UseTaxRate And IsVatTax;
+	Form.Items.TaxRates.Visible = UseTaxRate And (IsVatTax Or IsWithholdingVatTax);
+	Form.Items.GroupTaxRates.Visible = UseTaxRate And (IsVatTax Or IsWithholdingVatTax);
 	
-	Form.Items.UseDocuments.Visible = IsVatTax;
-	Form.Items.GroupUseDocuments.Visible = IsVatTax;
+	Form.Items.UseDocuments.Visible = IsVatTax Or IsWithholdingVatTax;
+	Form.Items.GroupUseDocuments.Visible = IsVatTax Or IsWithholdingVatTax;
 	
 	For Each Row In Form.Object.UseDocuments Do
 		ArrayOfTransactionTypes = Object.TransactionTypes.FindRows(New Structure("DocumentName", Row.DocumentName));
@@ -103,7 +104,7 @@ Procedure SetTransactionTypes(Command)
 	OpenParameters = New Structure();
 	OpenParameters.Insert("DocumentName", CurrentData.DocumentName);
 	OpenParameters.Insert("TransactionTypes", ArrayOfAllTransactionTypes);
-	Notify = new NotifyDescription("ChoiceTransactionTypesEnd", ThisObject);
+	Notify = new CallbackDescription("ChoiceTransactionTypesEnd", ThisObject);
 	OpenForm("Catalog.Taxes.Form.ChoiceTransactionTypes", OpenParameters, ThisObject, , , , Notify,
 		FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure

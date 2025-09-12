@@ -249,6 +249,9 @@ Scenario: _0154035 search the item key selection list
 		And I click "Create" button
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Dress"       |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
@@ -331,7 +334,7 @@ Scenario: _0154037 check autofilling item key in Sales report to consignor only 
 
 
 
-Scenario: _0154039 check impossibility deleting of the store field by line with the product in a Sales invoice
+Scenario: _0154039 check impossibility post Sales invoice with empty store (product)
 	* Open a creation form Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -364,14 +367,17 @@ Scenario: _0154039 check impossibility deleting of the store field by line with 
 		And I select current line in "ItemList" table
 		And I click Clear button of "Store" attribute in "ItemList" table
 		And I finish line editing in "ItemList" table
-	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
-		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store' |
+			| 'Dress' | 'M/White'  | '1,000'    | ''      |
+	* Check posting
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Specify a store in line 1.'|
 		And I close all client application windows
 	
 
-Scenario: _0154041 check impossibility deleting of the store field by line with the product in a Purchase Order
+Scenario: _0154041 check impossibility post Purchase Order with empty store (product) 
 	* Open a creation form Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
@@ -404,15 +410,18 @@ Scenario: _0154041 check impossibility deleting of the store field by line with 
 		And I select current line in "ItemList" table
 		And I click Clear button of "Store" attribute in "ItemList" table
 		And I finish line editing in "ItemList" table
-	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
-		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store' |
+			| 'Dress' | 'M/White'  | '1,000'    | ''      |
+	* Check posting
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Specify a store in line 1.'|
 		And I close all client application windows
 		
 
 
-Scenario: _0154043 check impossibility deleting of the store field by line with the product in a Purchase invoice
+Scenario: _0154043 check impossibility post Purchase invoice with empty store (product)
 	* Open a creation form Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
@@ -445,13 +454,16 @@ Scenario: _0154043 check impossibility deleting of the store field by line with 
 		And I select current line in "ItemList" table
 		And I click Clear button of "Store" attribute in "ItemList" table
 		And I finish line editing in "ItemList" table
-	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
-		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
+			| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+			| 'Dress'  | 'M/White'   | '1,000'     | ''           |
+	* Check posting
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Specify a store in line 1.'|
 		And I close all client application windows
 
-Scenario: _0154044 check impossibility deleting of the store field by line with the product in a Sales return order
+Scenario: _0154044 check impossibility post Sales return order with empty store (product)
 	* Open a creation form Sales Return Order
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I click the button named "FormCreate"
@@ -484,13 +496,16 @@ Scenario: _0154044 check impossibility deleting of the store field by line with 
 		And I select current line in "ItemList" table
 		And I click Clear button of "Store" attribute in "ItemList" table
 		And I finish line editing in "ItemList" table
-	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
-		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
+			| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
+			| 'Dress'  | 'M/White'   | '1,000'     | ''           |
+	* Check posting
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Specify a store in line 1.'|
 		And I close all client application windows
 
-Scenario: _0154045 check impossibility deleting of the store field by line with the product in a Sales return
+Scenario: _0154045 check impossibility post Sales return with empty store (product) 
 	* Open a creation form Sales Return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I click the button named "FormCreate"
@@ -525,11 +540,15 @@ Scenario: _0154045 check impossibility deleting of the store field by line with 
 		And I finish line editing in "ItemList" table
 	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
-		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
+			| 'Item'   | 'Item key'  | 'Quantity'  | 'Store' |
+			| 'Dress'  | 'M/White'   | '1,000'     | ''      |
+	* Check posting
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Specify a store in line 1.'|
 		And I close all client application windows
 
-Scenario: _0154046 check impossibility deleting of the store field by line with the product in a Purchase return
+Scenario: _0154046 check impossibility post Purchase return with empty store (product) 
 	* Open a creation form Purchase Return
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I click the button named "FormCreate"
@@ -562,13 +581,16 @@ Scenario: _0154046 check impossibility deleting of the store field by line with 
 		And I select current line in "ItemList" table
 		And I click Clear button of "Store" attribute in "ItemList" table
 		And I finish line editing in "ItemList" table
-	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
-		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
+			| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'  |
+			| 'Dress'  | 'M/White'   | '1,000'     | ''       |
+	* Check posting
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Specify a store in line 1.'|
 		And I close all client application windows
 	
-Scenario: _0154047 check impossibility deleting of the store field by line with the product in a Purchase return order
+Scenario: _0154047 check impossibility post Purchase return order with empty store (product)
 	* Open a creation form Purchase Return order
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		And I click the button named "FormCreate"
@@ -601,13 +623,16 @@ Scenario: _0154047 check impossibility deleting of the store field by line with 
 		And I select current line in "ItemList" table
 		And I click Clear button of "Store" attribute in "ItemList" table
 		And I finish line editing in "ItemList" table
-	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
-		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 01'   |
+			| 'Item'   | 'Item key'  | 'Quantity'  | 'Store' |
+			| 'Dress'  | 'M/White'   | '1,000'     | ''      |
+	* Check posting
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Specify a store in line 1.'|
 		And I close all client application windows
 
-Scenario: _0154048 check impossibility deleting of the store field by line with the product in a Goods receipt
+Scenario: _0154048 check impossibility post Goods receipt order with empty store (product)
 	* Open a creation form Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I click the button named "FormCreate"
@@ -641,13 +666,16 @@ Scenario: _0154048 check impossibility deleting of the store field by line with 
 		And I select current line in "ItemList" table
 		And I click Clear button of "Store" attribute in "ItemList" table
 		And I finish line editing in "ItemList" table
-	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
-		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 02'   |
+			| 'Item'   | 'Item key'  | 'Quantity'  | 'Store' |
+			| 'Dress'  | 'M/White'   | '1,000'     | ''      |
+	* Check posting
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Specify a store in line 1.'|
 		And I close all client application windows
 
-Scenario: _0154049 check impossibility deleting of the store field by line with the product in a  ShipmentConfirmation
+Scenario: _0154049 check impossibility post ShipmentConfirmation order with empty store (product)
 	* Open a creation form ShipmentConfirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
@@ -680,10 +708,13 @@ Scenario: _0154049 check impossibility deleting of the store field by line with 
 		And I select current line in "ItemList" table
 		And I click Clear button of "Store" attribute in "ItemList" table
 		And I finish line editing in "ItemList" table
-	* Check that the store field is still filled
 		And "ItemList" table contains lines
-		| 'Item'   | 'Item key'  | 'Quantity'  | 'Store'      |
-		| 'Dress'  | 'M/White'   | '1,000'     | 'Store 02'   |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store' |
+			| 'Dress' | 'M/White'  | '1,000'    | ''      |
+	* Check posting
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Specify a store in line 1.'|
 		And I close all client application windows
 			
 	
@@ -1362,6 +1393,7 @@ Scenario: _012026 check Partners selection form (SO)
 	* Create partner
 		And I click the button named "FormCreate"
 		And I input "Test Partner" text in "ENG" field
+		And I set checkbox named "Customer"	
 		And I click "Save and close" button
 		And I wait "Partner (create) *" window closing in 20 seconds
 	* Check current position in list
@@ -1553,5 +1585,51 @@ Scenario: _012044 clone value in the CashExpense
 	* Check clone value
 		When check clone value in the documents (Financial movement type, Cash flow center, Project, Expense type)
 
+Scenario: _012046 selected item positioning in Revenue/Expense selection form (SI -revenue)
+	And I close all client application windows
+	* Open Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+		And in the table "ItemList" I click "Add" button
+		And I activate "Revenue type" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Revenue type" attribute in "ItemList" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Software"    |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+	* Check
+		And I select current line in "ItemList" table
+		And I click choice button of "Revenue type" attribute in "ItemList" table
+		And the current line of "List" table is equal to
+			| "Description" |
+			| "Software"    |
+	And I close all client application windows
+
+Scenario: _012047 selected item positioning in Revenue/Expense selection form (PI -expense)
+	And I close all client application windows
+	* Open Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click "Create" button
+		And in the table "ItemList" I click "Add" button
+		And I activate "Expense type" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Expense type" attribute in "ItemList" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Software"    |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+	* Check
+		And I select current line in "ItemList" table
+		And I click choice button of "Expense type" attribute in "ItemList" table
+		And the current line of "List" table is equal to
+			| "Description" |
+			| "Software"    |
+	And I close all client application windows
+	
+
+				
 Scenario: _999999 close TestClient session
 	And I close TestClient session

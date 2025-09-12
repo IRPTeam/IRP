@@ -72,11 +72,24 @@ SalesReceiptXML5 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0" AdditionalAttribute=""/>
 	<Positions>
-		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="6" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="0" PrePayment="0" PostPayment="118" Barter="0"/>
 </CheckPackage>
 """
+
+SalesReceiptXML51 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0" AdditionalAttribute=""/>
+<Positions>
+<FiscalString AmountWithDiscount="129.8" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="5" PriceWithDiscount="129.8" VATRate="18" VATAmount="19.8"/>
+</Positions>
+<Payments Cash="20" ElectronicPayment="0" PrePayment="0" PostPayment="109.8" Barter="0"/>
+</CheckPackage>
+"""
+
 
 SalesReceiptXML6 =
 """xml
@@ -96,9 +109,21 @@ SalesReceiptXML7 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0" AdditionalAttribute=""/>
 	<Positions>
-		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="6" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="0" PrePayment="0" PostPayment="118" Barter="0"/>
+</CheckPackage>
+"""
+
+SalesReceiptXML71 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+     <Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0" AdditionalAttribute=""/>
+     <Positions>
+        <FiscalString AmountWithDiscount="129.8" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="5" PriceWithDiscount="129.8" VATRate="18" VATAmount="19.8"/>
+     </Positions>
+     <Payments Cash="20" ElectronicPayment="0" PrePayment="0" PostPayment="109.8" Barter="0"/>
 </CheckPackage>
 """
 
@@ -1280,7 +1305,7 @@ Scenario: _0850016 create retail sales receipt from POS (own stock, cash and car
 
 	
 				
-Scenario: _0850017 payment by payment agent from POS
+Scenario: _0850017 payment by payment agent from POS (full credit)
 	And I close all client application windows
 	And In the command interface I select "Retail" "Point of sale"
 	* Select retail customer
@@ -1312,7 +1337,41 @@ Scenario: _0850017 payment by payment agent from POS
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML5"
 
-
+Scenario: _08500171 payment by payment agent from POS (partial credit)
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I click "Search customer" button
+		And I input "002" text in "ID" field
+		And I move to the next attribute
+		And I click "OK" button
+	* Select first item (scan by barcode, with serial lot number)
+		And I click "Search by barcode (F7)" button
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "110,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Bank credit
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "2" button
+		And I click "0" button	
+		And I click "P\A" button
+		And "Payments" table became equal
+			| 'Payment type' | 'Amount'  |
+			| 'Cash'         | '20,00'   |
+			| 'Bank credit'  | '109,80'  |
+		And I click the button named "Enter"
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML51"
 	
 Scenario: _0850018 advance payment (cash)
 	And I close all client application windows
@@ -1570,9 +1629,16 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I activate "Control code string state" field in "ItemList" table
 		And I select current line in "ItemList" table
 		Then the form attribute named "isReturn" became equal to "Yes"
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "11111111111111111111" text in the field named "Barcode"
+			And I move to the next attribute
+			And I activate "Control code string state" field in "ItemList" table
+			And I select current line in "ItemList" table		
 		And "CurrentCodes" table became equal
 			| 'Type'         | 'Prefix' | 'Scanned codes'        | 'Approved' | 'Not check' |
-			| 'Marking code' | ''       | '11111111111111111111' | 'No'       | 'No'        |
+			| 'Marking code' | ''       | '11111111111111111111' | 'Yes'      | 'No'        |
 		And I close current window						
 		And I click "Payment Return" button		
 		Then "Payment" window is opened
@@ -1593,10 +1659,10 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I click "0" button
 		And I click "Cash (/)" button
 		And "Payments" table became equal
-			| 'Payment done'   | 'Payment type'   | 'Amount'   | 'RRNCode'     |
+			| 'Payment done'    | 'Payment type'   | 'Amount'   | 'RRNCode'     |
 			| '⚪'              | 'Card 04'        | '50,00'    | '$$RRN1$$'    |
 			| '⚪'              | 'Card 03'        | '40,00'    | '$$RRN2$$'    |
-			| ' '              | 'Cash'           | '10,00'    | ''            |
+			| ''                | 'Cash'           | '10,00'    | ''            |
 		And I go to line in "Payments" table
 			| 'Amount'   | 'Payment done'   | 'Payment type'   | 'RRNCode'     |
 			| '50,00'    | '⚪'              | 'Card 04'        | '$$RRN1$$'    |
@@ -1794,7 +1860,7 @@ Scenario: _0850028 check acquiring in BR
 			| 'Description'       |
 			| 'POS Terminal 2'    |
 		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'    |
@@ -1906,7 +1972,14 @@ Scenario: _0850025 print receipt from sales return (cash)
 		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I expand current line in "BasisesTree" table
 		And I click "Ok" button
-		Then the form attribute named "StatusType" became equal to "Completed"		
+		Then the form attribute named "StatusType" became equal to "Completed"	
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Code string check" window is opened
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute						
 		And I click the button named "FormWrite"
 	* Try print receipt (RRR unpost)
 		And I click "Print receipt" button
@@ -1918,7 +1991,7 @@ Scenario: _0850025 print receipt from sales return (cash)
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
 	* Try Print receipt (RRR with deletion mark)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button	
 		And I click "Print receipt" button	
@@ -1930,7 +2003,7 @@ Scenario: _0850025 print receipt from sales return (cash)
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"'    |
 	* Check Print receipt (RRR posted, status Canceled)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click the button named "FormPost"	
@@ -1967,16 +2040,23 @@ Scenario: _0850025 print receipt from sales return (cash)
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"
 				
-Scenario: _08500251 sales return (bank credit)
+Scenario: _08500251 sales return (full bank credit)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 	* Select Retail sales receipt
 		And I go to line in "List" table
-			| 'Amount'         |
+			| 'Amount'    |
 			| '118,00'    |
 		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I expand current line in "BasisesTree" table
 		And I click "Ok" button
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Code string check" window is opened
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute	
 		And I click "Post" button
 		And I click "Print receipt" button
 	* Check fiscal log
@@ -1985,6 +2065,32 @@ Scenario: _08500251 sales return (bank credit)
 		And Delay 5
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML7"
+
+Scenario: _08500252 sales return (partial bank credit)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+	* Select Retail sales receipt
+		And I go to line in "List" table
+			| 'Amount'    |
+			| '129,80'    |
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
+		And I expand current line in "BasisesTree" table
+		And I click "Ok" button
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Code string check" window is opened
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute	
+		And I click "Post" button
+		And I click "Print receipt" button
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML71"
 						
 Scenario: _0850026 sales return (card)
 	And I close all client application windows
@@ -2005,7 +2111,6 @@ Scenario: _0850026 sales return (card)
 		And I activate field named "PaymentsAmount" in "Payments" table
 		And I select current line in "Payments" table
 		And I input "520,00" text in the field named "PaymentsAmount" of "Payments" table
-		And I finish line editing in "Payments" table
 		And I click "Post" button
 		And I click "Print receipt" button
 	* Check fiscal log
@@ -2128,7 +2233,7 @@ Scenario: _0260150 check print cash in from Cash receipt form
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"'    |
 	* Try Print cash in (CR with deletion mark)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button	
 		And I click "Print cash in" button	
@@ -2140,7 +2245,7 @@ Scenario: _0260150 check print cash in from Cash receipt form
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"'    |
 	* Check Print cash in (CR posted)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click the button named "FormPost"	
@@ -2224,7 +2329,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"'    |
 	* Try Print cash out (MT with deletion mark)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button	
 		And I click "Print cash out" button	
@@ -2236,7 +2341,7 @@ Scenario: _0260151 check print cash out from Money transfer form
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"'    |
 	* Check Print cash out (MT posted)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click the button named "FormPost"	
@@ -2493,11 +2598,19 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 	* Create RRR
 		And I click "Sales return" button
 		And I click "Ok" button
+		And Delay 3
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Code string check" window is opened
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute	
 		And I click "Show hidden tables" button
 		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
-			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'No'                  |
+			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'Yes'                 |
 		And I close current window
 	* Add one more item in RRR and check code
 		And in the table "ItemList" I click the button named "SearchByBarcode"	
@@ -2513,7 +2626,7 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I move to "ControlCodeStrings (2)" tab	
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
-			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'No'                  |
+			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'Yes'                 |
 			| '*'     | '11111111111111111111113'                        | 'Yes'                 |
 		And I close all client application windows
 		
@@ -2670,7 +2783,7 @@ Scenario: _0260159 check marking code without check code string
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
 	* Try Print receipt (RSR with deletion mark)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button	
 		And I click "Print receipt" button	
@@ -2682,7 +2795,7 @@ Scenario: _0260159 check marking code without check code string
 			When I Check the steps for Exception
 				| 'And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML12"'    |
 	* Check Print receipt (RSR posted, status Canceled)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click the button named "FormPost"	
@@ -2921,15 +3034,22 @@ Scenario: _0260165 Return of a product paid for with a certificate
 			| 'Product 1 with SLN' |
 		And I activate "Control code string state" field in "ItemList" table
 		And I select current line in "ItemList" table
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+			And I move to the next attribute
+			And I activate "Control code string state" field in "ItemList" table
+			And I select current line in "ItemList" table	
 		And "CurrentCodes" table became equal
 			| 'Type'         | 'Prefix' | 'Scanned codes'                                | 'Approved' | 'Not check' |
-			| 'Marking code' | ''       | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'No'       | 'No'        |
+			| 'Marking code' | ''       | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'Yes'      | 'No'        |
 		And I close current window		
 		And I click "Payment Return" button
 		Then "Payment" window is opened
 		And "Payments" table became equal
 			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
-			| ' '            | 'Certificate'  | '500,00' | ''        |
+			| ''             | 'Certificate'  | '500,00' | ''        |
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
 			| 'Reference' |
@@ -3064,10 +3184,16 @@ Scenario: _02601691 check Good code data from RSR in the RRR (POS)
 		And I activate "Control code string state" field in "ItemList" table
 		And I select current line in "ItemList" table
 		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
-		Then the form attribute named "isReturn" became equal to "Yes"	
+		Then the form attribute named "isReturn" became equal to "Yes"
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1" text in the field named "Barcode"
+			And I move to the next attribute
+			And I select current line in "ItemList" table	
 		And "CurrentCodes" table became equal
 			| 'Type'           | 'Prefix'        | 'Scanned codes'                                | 'Approved' | 'Not check' |
-			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'No'       | 'No'        |
+			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'Yes'      | 'No'        |
 		And I close current window
 		And I go to line in "ItemList" table
 			| 'Item'                                                                | 'Item key' | 'Price'  | 'Quantity' | 'Serials'          | 'Total'  |
@@ -3076,9 +3202,15 @@ Scenario: _02601691 check Good code data from RSR in the RRR (POS)
 		And I select current line in "ItemList" table
 		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
 		Then the form attribute named "isReturn" became equal to "Yes"
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2" text in the field named "Barcode"
+			And I move to the next attribute
+			And I select current line in "ItemList" table
 		And "CurrentCodes" table became equal
 			| 'Type'           | 'Prefix'        | 'Scanned codes'                                | 'Approved' | 'Not check' |
-			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2' | 'No'       | 'No'        |
+			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2' | 'Yes'      | 'No'        |
 		And I close current window
 	* Payment
 		And I click "Payment Return" button
@@ -3153,9 +3285,16 @@ Scenario: _0260170 Good code data control return (POS)
 		And I select current line in "ItemList" table
 		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
 		Then the form attribute named "isReturn" became equal to "Yes"	
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1" text in the field named "Barcode"
+			And I move to the next attribute
+			And I activate "Control code string state" field in "ItemList" table
+			And I select current line in "ItemList" table	
 		And "CurrentCodes" table became equal
 			| 'Type'           | 'Prefix'        | 'Scanned codes'                                | 'Approved' | 'Not check' |
-			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'No'       | 'No'        |
+			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'Yes'      | 'No'        |
 		And I close current window
 		And I go to line in "ItemList" table
 			| 'Item'                                                                | 'Item key' | 'Price'  | 'Quantity' | 'Serials'          | 'Total'  |
@@ -3164,9 +3303,16 @@ Scenario: _0260170 Good code data control return (POS)
 		And I select current line in "ItemList" table
 		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
 		Then the form attribute named "isReturn" became equal to "Yes"	
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2" text in the field named "Barcode"
+			And I move to the next attribute
+			And I activate "Control code string state" field in "ItemList" table
+			And I select current line in "ItemList" table	
 		And "CurrentCodes" table became equal
 			| 'Type'           | 'Prefix'        | 'Scanned codes'                                | 'Approved' | 'Not check' |
-			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2' | 'No'       | 'No'        |
+			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2' | 'Yes'      | 'No'        |
 		And I close current window
 		And I click "Payment Return" button
 		And I click "Cash (/)" button
@@ -3225,6 +3371,23 @@ Scenario: _0260173 RSR and RRR for item with good code, scan marking code
 			| 'Amount' |
 			| '601,11' |
 		And I select current line in "List" table
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I change "Control code string type" radio button value to "Marking code"
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY3" text in the field named "Barcode"
+		And I move to the next attribute
+		And I go to line in "ItemList" table
+			| "Item"                                                                | "Serials"          |
+			| "Product 16 with SLN and Good code data (Main Company - Consignor 1)" | "9099009909999999" |			
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table	
+		And I change "Control code string type" radio button value to "Marking code"
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY4" text in the field named "Barcode"
+		And I move to the next attribute		
 		And I click "Payment Return" button
 		And I click "Cash (/)" button
 		And I click "OK" button
@@ -3283,6 +3446,21 @@ Scenario: _0260174 RSR and RRR for item with marking code, scan good code
 			| 'Amount' |
 			| '701,11' |
 		And I select current line in "List" table
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I change "Control code string type" radio button value to "Good code"
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY8" text in the field named "Barcode"
+		And I move to the next attribute
+		And I go to the last line in "ItemList" table
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table	
+		And I change "Control code string type" radio button value to "Good code"
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY9" text in the field named "Barcode"
+		And I move to the next attribute
 		And I click "Payment Return" button
 		And I click "Cash (/)" button
 		And I click "OK" button
@@ -4297,7 +4475,7 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "928"	
+	Then the number of "List" table lines is "равно" "1024"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table
@@ -4453,7 +4631,7 @@ Scenario: _0260191 check session open and close from CRS
 	* Try open session (CRS with deletion mark)
 		And I select from the drop-down list named "Status" by "new" string
 		And I click the button named "FormPost"
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click "Open session" button
@@ -4464,7 +4642,7 @@ Scenario: _0260191 check session open and close from CRS
 			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 			And I check "$ParsingResult$" with "0" and method is "GetCurrentStatus"			
 	* Try open session (CRS without deletion mark, status new)
-		And I click "Mark for deletion / Unmark for deletion" button
+		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I click the button named "FormPost"
@@ -4852,7 +5030,7 @@ Scenario: _0260210 on double click in CRS
 			| 'Cash payment 1*'          | 'Main Company' | '-200'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '200'  |
 			| 'Retail return receipt 4*' | 'Main Company' | '-210'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '210'  |
 			| 'Retail return receipt 5*' | 'Main Company' | '-118'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '118'  |
-			| 'Retail return receipt 6*' | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '520'  |
+			| 'Retail return receipt 7*' | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '520'  |
 			| 'Money transfer 13*'       | 'Main Company' | '1 000'  | ''        | 'TRY'      | 'CI'     | '1 000'   | ''     |
 		And "Documents" table contains lines
 			| 'Document'                                          |

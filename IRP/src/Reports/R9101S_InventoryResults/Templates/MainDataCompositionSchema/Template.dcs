@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataSource>
+		<name>DataSource1</name>
+		<dataSourceType>Local</dataSourceType>
+	</dataSource>
+	<dataSet xsi:type="DataSetQuery">
+		<name>DataSet1</name>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>PhysCount</dataPath>
+			<field>PhysCount</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>35EE59D3-4D36-D409-9086-6D2B9F1FD828</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>F8EF4BF8-88AD-3D98-8D6F-FE2BB46A4251</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Store</dataPath>
+			<field>Store</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ItemKey</dataPath>
+			<field>ItemKey</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ExpCount</dataPath>
+			<field>ExpCount</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>206A4331-7623-BE96-6746-609C64547245</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>F8EF4BF8-88AD-3D98-8D6F-FE2BB46A4251</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Difference</dataPath>
+			<field>Difference</field>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>F8EF4BF8-88AD-3D98-8D6F-FE2BB46A4251</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MarkNegatives</dcscor:parameter>
+					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>StockAdjustmentAsSurplus</dataPath>
+			<field>StockAdjustmentAsSurplus</field>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>F8EF4BF8-88AD-3D98-8D6F-FE2BB46A4251</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>StockAdjustmentAsWriteOff</dataPath>
+			<field>StockAdjustmentAsWriteOff</field>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>F8EF4BF8-88AD-3D98-8D6F-FE2BB46A4251</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Basis</dataPath>
+			<field>Basis</field>
+			<useRestriction>
+				<condition>true</condition>
+			</useRestriction>
+			<attributeUseRestriction>
+				<condition>true</condition>
+			</attributeUseRestriction>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Item</dataPath>
+			<field>Item</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>StokAdjustmentTotal</dataPath>
+			<field>StokAdjustmentTotal</field>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>F8EF4BF8-88AD-3D98-8D6F-FE2BB46A4251</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Price</dataPath>
+			<field>Price</field>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>182BCC81-F68C-6068-8166-611A68B390B7</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ExpCountAmount</dataPath>
+			<field>ExpCountAmount</field>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>182BCC81-F68C-6068-8166-611A68B390B7</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>PhysCountAmount</dataPath>
+			<field>PhysCountAmount</field>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>182BCC81-F68C-6068-8166-611A68B390B7</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>DifferenceAmount</dataPath>
+			<field>DifferenceAmount</field>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>182BCC81-F68C-6068-8166-611A68B390B7</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MarkNegatives</dcscor:parameter>
+					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>StokAdjustmentTotalAmount</dataPath>
+			<field>StokAdjustmentTotalAmount</field>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>182BCC81-F68C-6068-8166-611A68B390B7</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>PriceType</dataPath>
+			<field>PriceType</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Unit</dataPath>
+			<field>Unit</field>
+		</field>
+		<dataSource>DataSource1</dataSource>
+		<query>SELECT
+	PhysicalInventoryItemList.Ref.Store AS Store,
+	PhysicalInventoryItemList.ItemKey AS ItemKey,
+	PhysicalInventoryItemList.ExpCount AS ExpCount,
+	PhysicalInventoryItemList.PhysCount AS PhysCount,
+	PhysicalInventoryItemList.Difference AS Difference
+INTO Inventory
+FROM
+	Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
+WHERE
+	PhysicalInventoryItemList.Ref IN(&amp;PhysicalInventory)
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	R4051T_StockAdjustmentAsWriteOffTurnovers.Store AS Store,
+	R4051T_StockAdjustmentAsWriteOffTurnovers.ItemKey AS ItemKey,
+	R4051T_StockAdjustmentAsWriteOffTurnovers.QuantityTurnover AS Quantity
+INTO StockAdjustmentAsWriteOff
+FROM
+	AccumulationRegister.R4051T_StockAdjustmentAsWriteOff.Turnovers(
+			,
+			,
+			,
+			Store IN
+				(SELECT DISTINCT
+					Inventory.Store AS Store
+				FROM
+					Inventory AS Inventory)) AS R4051T_StockAdjustmentAsWriteOffTurnovers
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	R4052T_StockAdjustmentAsSurplusTurnovers.Store AS Store,
+	R4052T_StockAdjustmentAsSurplusTurnovers.ItemKey AS ItemKey,
+	R4052T_StockAdjustmentAsSurplusTurnovers.QuantityTurnover AS Quantity
+INTO StockAdjustmentAsSurplusTurnovers
+FROM
+	AccumulationRegister.R4052T_StockAdjustmentAsSurplus.Turnovers(
+			,
+			,
+			,
+			Store IN
+				(SELECT DISTINCT
+					Inventory.Store AS Store
+				FROM
+					Inventory AS Inventory)) AS R4052T_StockAdjustmentAsSurplusTurnovers
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	Inventory.Store AS Store,
+	Inventory.ItemKey.Item AS Item,
+	Inventory.ItemKey AS ItemKey,
+	Inventory.ExpCount AS ExpCount,
+	Inventory.PhysCount AS PhysCount,
+	Inventory.Difference AS Difference,
+	0 AS StockAdjustmentAsWriteOff,
+	0 AS StockAdjustmentAsSurplus
+INTO ResultTable
+FROM
+	Inventory AS Inventory
+
+UNION ALL
+
+SELECT
+	StockAdjustmentAsWriteOff.Store,
+	StockAdjustmentAsWriteOff.ItemKey.Item,
+	StockAdjustmentAsWriteOff.ItemKey,
+	0,
+	0,
+	0,
+	StockAdjustmentAsWriteOff.Quantity,
+	0
+FROM
+	StockAdjustmentAsWriteOff AS StockAdjustmentAsWriteOff
+
+UNION ALL
+
+SELECT
+	StockAdjustmentAsSurplusTurnovers.Store,
+	StockAdjustmentAsSurplusTurnovers.ItemKey.Item,
+	StockAdjustmentAsSurplusTurnovers.ItemKey,
+	0,
+	0,
+	0,
+	0,
+	StockAdjustmentAsSurplusTurnovers.Quantity
+FROM
+	StockAdjustmentAsSurplusTurnovers AS StockAdjustmentAsSurplusTurnovers
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	ResultTable.Store AS Store,
+	ResultTable.Item AS Item,
+	ResultTable.ItemKey AS ItemKey,
+	SUM(ResultTable.ExpCount) AS ExpCount,
+	SUM(ResultTable.PhysCount) AS PhysCount,
+	SUM(ResultTable.Difference) AS Difference,
+	SUM(ResultTable.StockAdjustmentAsWriteOff) AS StockAdjustmentAsWriteOff,
+	SUM(ResultTable.StockAdjustmentAsSurplus) AS StockAdjustmentAsSurplus,
+	SUM(ResultTable.StockAdjustmentAsSurplus - ResultTable.StockAdjustmentAsWriteOff) AS StokAdjustmentTotal,
+	PricesByItemKeysSliceLast.Price AS Price,
+	ResultTable.ExpCount * PricesByItemKeysSliceLast.Price AS ExpCountAmount,
+	ResultTable.PhysCount * PricesByItemKeysSliceLast.Price AS PhysCountAmount,
+	ResultTable.Difference * PricesByItemKeysSliceLast.Price AS DifferenceAmount,
+	(ResultTable.StockAdjustmentAsSurplus - ResultTable.StockAdjustmentAsWriteOff) * PricesByItemKeysSliceLast.Price AS StokAdjustmentTotalAmount
+FROM
+	ResultTable AS ResultTable
+		LEFT JOIN InformationRegister.PricesByItemKeys.SliceLast(, PriceType = &amp;PriceTypeCost) AS PricesByItemKeysSliceLast
+		ON ResultTable.ItemKey = PricesByItemKeysSliceLast.ItemKey
+
+GROUP BY
+	ResultTable.Item,
+	ResultTable.ItemKey,
+	ResultTable.Store,
+	PricesByItemKeysSliceLast.Price,
+	ResultTable.ExpCount * PricesByItemKeysSliceLast.Price,
+	ResultTable.PhysCount * PricesByItemKeysSliceLast.Price,
+	ResultTable.Difference * PricesByItemKeysSliceLast.Price,
+	(ResultTable.StockAdjustmentAsSurplus - ResultTable.StockAdjustmentAsWriteOff) * PricesByItemKeysSliceLast.Price</query>
+	</dataSet>
+	<totalField>
+		<dataPath>Difference</dataPath>
+		<expression>Sum(Difference)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>DifferenceAmount</dataPath>
+		<expression>Sum(DifferenceAmount)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ExpCount</dataPath>
+		<expression>Sum(ExpCount)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>ExpCountAmount</dataPath>
+		<expression>Sum(ExpCountAmount)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>PhysCount</dataPath>
+		<expression>Sum(PhysCount)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>PhysCountAmount</dataPath>
+		<expression>Sum(PhysCountAmount)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>StockAdjustmentAsSurplus</dataPath>
+		<expression>Sum(StockAdjustmentAsSurplus)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>StockAdjustmentAsWriteOff</dataPath>
+		<expression>Sum(StockAdjustmentAsWriteOff)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>StokAdjustmentTotal</dataPath>
+		<expression>Sum(StokAdjustmentTotal)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>StokAdjustmentTotalAmount</dataPath>
+		<expression>Sum(StokAdjustmentTotalAmount)</expression>
+	</totalField>
+	<parameter>
+		<name>PhysicalInventory</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>CD7C1381-1B3E-AD5A-A548-8795CC77A0C2</v8:content>
+			</v8:item>
+		</title>
+		<value xsi:type="xs:string"/>
+		<useRestriction>false</useRestriction>
+		<valueListAllowed>true</valueListAllowed>
+	</parameter>
+	<parameter>
+		<name>BeginOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>1390FF08-8C34-7996-6EFD-DB20AC63C0C8</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>true</useRestriction>
+		<expression>&amp;ReportPeriod.StartDate</expression>
+	</parameter>
+	<parameter>
+		<name>EndOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>DD72A1F6-3047-1EDF-F4D2-2E5BE8EF5626</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>true</useRestriction>
+		<expression>&amp;ReportPeriod.EndDate</expression>
+	</parameter>
+	<parameter>
+		<name>ReportPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>73056FB4-FC30-567F-F8E9-971D64BA931C</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>v8:StandardPeriod</v8:Type>
+		</valueType>
+		<value xsi:type="v8:StandardPeriod">
+			<v8:variant xsi:type="v8:StandardPeriodVariant">Custom</v8:variant>
+			<v8:startDate>0001-01-01T00:00:00</v8:startDate>
+			<v8:endDate>0001-01-01T00:00:00</v8:endDate>
+		</value>
+		<useRestriction>false</useRestriction>
+	</parameter>
+	<parameter>
+		<name>Period</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>4E8088ED-B353-A6AC-CA28-8CF007287145</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>false</useRestriction>
+	</parameter>
+	<parameter>
+		<name>PriceTypeCost</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>D690C9C6-6A16-2CCE-E794-4BC1CB8F8280</v8:content>
+			</v8:item>
+		</title>
+		<value xsi:type="dcscor:DesignTimeValue">Catalog.PriceTypes.EmptyRef</value>
+		<useRestriction>false</useRestriction>
+	</parameter>
+	<settingsVariant>
+		<dcsset:name>Default</dcsset:name>
+		<dcsset:presentation xsi:type="xs:string">Default</dcsset:presentation>
+		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
+			<dcsset:selection>
+				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
+					<dcsset:lwsTitle>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>9AFE10FA-6064-2B61-1107-70BFFE7D41B9</v8:content>
+						</v8:item>
+					</dcsset:lwsTitle>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Difference</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>ExpCount</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>PhysCount</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
+						<dcsset:field>StockAdjustmentAsSurplus</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:use>false</dcsset:use>
+						<dcsset:field>StockAdjustmentAsWriteOff</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>StokAdjustmentTotal</dcsset:field>
+					</dcsset:item>
+					<dcsset:placement>Auto</dcsset:placement>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
+					<dcsset:lwsTitle>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>09A778D1-43C8-3A99-940D-D00724479AF8</v8:content>
+						</v8:item>
+					</dcsset:lwsTitle>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>DifferenceAmount</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>ExpCountAmount</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>PhysCountAmount</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>StokAdjustmentTotalAmount</dcsset:field>
+					</dcsset:item>
+					<dcsset:placement>Auto</dcsset:placement>
+				</dcsset:item>
+			</dcsset:selection>
+			<dcsset:dataParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:use>false</dcscor:use>
+					<dcscor:parameter>PhysicalInventory</dcscor:parameter>
+					<dcscor:value xsi:nil="true"/>
+					<dcsset:userSettingID>dcdd4cf3-581f-43d4-8eda-bffaeb6108c7</dcsset:userSettingID>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:use>false</dcscor:use>
+					<dcscor:parameter>ReportPeriod</dcscor:parameter>
+					<dcscor:value xsi:type="v8:StandardPeriod">
+						<v8:variant xsi:type="v8:StandardPeriodVariant">Custom</v8:variant>
+						<v8:startDate>0001-01-01T00:00:00</v8:startDate>
+						<v8:endDate>0001-01-01T00:00:00</v8:endDate>
+					</dcscor:value>
+					<dcsset:userSettingID>f9de9af1-1a07-4b72-9d0f-e2326fcd98a7</dcsset:userSettingID>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>PriceTypeCost</dcscor:parameter>
+					<dcscor:value xsi:nil="true"/>
+					<dcsset:userSettingID>1ab86253-c41c-4631-a9ea-4803445a8a76</dcsset:userSettingID>
+				</dcscor:item>
+			</dcsset:dataParameters>
+			<dcsset:outputParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>AppearanceTemplate</dcscor:parameter>
+					<dcscor:value xsi:type="xs:string">Sea</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>HorizontalOverallPlacement</dcscor:parameter>
+					<dcscor:value xsi:type="dcscor:DataCompositionTotalPlacement">Begin</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>VerticalOverallPlacement</dcscor:parameter>
+					<dcscor:value xsi:type="dcscor:DataCompositionTotalPlacement">Begin</dcscor:value>
+				</dcscor:item>
+			</dcsset:outputParameters>
+			<dcsset:item xsi:type="dcsset:StructureItemTable">
+				<dcsset:column>
+					<dcsset:groupItems>
+						<dcsset:item xsi:type="dcsset:GroupItemField">
+							<dcsset:field>Store</dcsset:field>
+							<dcsset:groupType>Items</dcsset:groupType>
+							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+						</dcsset:item>
+					</dcsset:groupItems>
+					<dcsset:order>
+						<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+					</dcsset:order>
+					<dcsset:selection>
+						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+					</dcsset:selection>
+				</dcsset:column>
+				<dcsset:row>
+					<dcsset:groupItems>
+						<dcsset:item xsi:type="dcsset:GroupItemField">
+							<dcsset:field>Item</dcsset:field>
+							<dcsset:groupType>Hierarchy</dcsset:groupType>
+							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+						</dcsset:item>
+					</dcsset:groupItems>
+					<dcsset:order>
+						<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+					</dcsset:order>
+					<dcsset:selection>
+						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+					</dcsset:selection>
+					<dcsset:item>
+						<dcsset:groupItems>
+							<dcsset:item xsi:type="dcsset:GroupItemField">
+								<dcsset:field>ItemKey</dcsset:field>
+								<dcsset:groupType>Items</dcsset:groupType>
+								<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+								<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+								<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+							</dcsset:item>
+							<dcsset:item xsi:type="dcsset:GroupItemField">
+								<dcsset:field>Price</dcsset:field>
+								<dcsset:groupType>Items</dcsset:groupType>
+								<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+								<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+								<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+							</dcsset:item>
+						</dcsset:groupItems>
+						<dcsset:order>
+							<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+						</dcsset:order>
+						<dcsset:selection>
+							<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+						</dcsset:selection>
+					</dcsset:item>
+				</dcsset:row>
+			</dcsset:item>
+		</dcsset:settings>
+	</settingsVariant>
+</DataCompositionSchema>

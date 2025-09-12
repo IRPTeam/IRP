@@ -187,7 +187,13 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
 		"Document.StockAdjustmentAsWriteOff.ItemList");
 
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	Current_R4050B_StockInventory = PostingServer.GetQueryTableByName("R4050B_StockInventory", Parameters);
+	Exists_R4050B_StockInventory  = PostingServer.GetQueryTableByName("Exists_R4050B_StockInventory", Parameters);
+	
+	Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory);
+	Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory);
+	
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
 		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
@@ -196,7 +202,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	EndIf;
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.StockAdjustmentAsWriteOff.ItemList",
 		AddInfo);
@@ -220,10 +226,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -232,8 +234,29 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
+	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
+	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(R6025B_SimpleBatch());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return 
@@ -255,7 +278,8 @@ Function ItemList()
 		|	ItemList.QuantityInBaseUnit AS Quantity,
 		|	ItemList.Key,
 		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
-		|	ItemList.ExpenseType AS ExpenseType
+		|	ItemList.ExpenseType AS ExpenseType,
+		|	ItemList.SimpleBatch AS SimpleBatch
 		|INTO ItemList
 		|FROM
 		|	Document.StockAdjustmentAsWriteOff.ItemList AS ItemList
@@ -284,58 +308,46 @@ Function SerialLotNumbers()
 EndFunction
 
 Function SourceOfOrigins()
-	Return "SELECT
-		   |	SourceOfOrigins.Key AS Key,
-		   |	CASE
-		   |		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
-		   |			THEN SourceOfOrigins.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END AS SerialLotNumber,
-		   |	CASE
-		   |		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
-		   |			THEN SourceOfOrigins.SourceOfOrigin
-		   |		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		   |	END AS SourceOfOrigin,
-		   |	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
-		   |	SUM(SourceOfOrigins.Quantity) AS Quantity
-		   |INTO SourceOfOrigins
-		   |FROM
-		   |	Document.StockAdjustmentAsWriteOff.SourceOfOrigins AS SourceOfOrigins
-		   |WHERE
-		   |	SourceOfOrigins.Ref = &Ref
-		   |GROUP BY
-		   |	SourceOfOrigins.Key,
-		   |	CASE
-		   |		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
-		   |			THEN SourceOfOrigins.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END,
-		   |	CASE
-		   |		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
-		   |			THEN SourceOfOrigins.SourceOfOrigin
-		   |		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
-		   |	END,
-		   |	SourceOfOrigins.SourceOfOrigin";
+	Return 
+		"SELECT
+		|	SourceOfOrigins.Key AS Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
+		|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
+		|	SUM(SourceOfOrigins.Quantity) AS Quantity
+		|INTO SourceOfOrigins
+		|FROM
+		|	Document.StockAdjustmentAsWriteOff.SourceOfOrigins AS SourceOfOrigins
+		|WHERE
+		|	SourceOfOrigins.Ref = &Ref
+		|GROUP BY
+		|	SourceOfOrigins.Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END,
+		|	SourceOfOrigins.SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumber";
 EndFunction
 
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
-	QueryArray.Add(R5022T_Expenses());
-	QueryArray.Add(R9010B_SourceOfOriginStock());
-	QueryArray.Add(T3010S_RowIDInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
-	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
-	Return QueryArray;
-EndFunction
 
 Function R4032B_GoodsInTransitOutgoing()
 	Return 
@@ -345,6 +357,7 @@ Function R4032B_GoodsInTransitOutgoing()
 		|	ItemList.Store,
 		|	ItemList.AdjustmentBasis AS Basis,
 		|	ItemList.ItemKey,
+		|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
 		|	ItemList.Quantity
 		|INTO R4032B_GoodsInTransitOutgoing
 		|FROM
@@ -377,38 +390,52 @@ Function R4011B_FreeStocks()
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END AS SerialLotNumber,
-		   |	SUM(CASE
-		   |		WHEN SerialLotNumbers.SerialLotNumber IS NULL
-		   |			THEN ItemList.Quantity
-		   |		ELSE SerialLotNumbers.Quantity
-		   |	END) AS Quantity
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
-		   |		ON ItemList.Key = SerialLotNumbers.Key
-		   |WHERE
-		   |	NOT ItemList.PhysicalInventoryExists
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	CASE
-		   |		WHEN SerialLotNumbers.StockBalanceDetail
-		   |			THEN SerialLotNumbers.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end AS SourceOfOrigin,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|		left join SourceOfOrigins AS SourceOfOrigins
+		|		on ItemList.Key = SourceOfOrigins.Key
+		|		and ISNULL(SerialLotNumbers.SerialLotNumber,Value(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
+		|WHERE
+		|	NOT ItemList.PhysicalInventoryExists
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	case
+		|		when SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			then SourceOfOrigins.SourceOfOriginStock
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	end,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END";
 EndFunction
 
 Function R4051T_StockAdjustmentAsWriteOff()
@@ -524,40 +551,45 @@ Function T6020S_BatchKeysInfo()
 EndFunction
 
 Function R5022T_Expenses()
-	Return "SELECT
-		   |	WriteOffBatchesInfo.Period,
-		   |	WriteOffBatchesInfo.Company,
-		   |	WriteOffBatchesInfo.Branch,
-		   |	WriteOffBatchesInfo.ProfitLossCenter,
-		   |	WriteOffBatchesInfo.ExpenseType,
-		   |	WriteOffBatchesInfo.ItemKey,
-		   |	WriteOffBatchesInfo.Currency,
-		   |	WriteOffBatchesInfo.RowID AS Key,
-		   |	WriteOffBatchesInfo.Recorder AS CalculationMovementCost,
-		   |	WriteOffBatchesInfo.InvoiceAmount
-		   |	+WriteOffBatchesInfo.IndirectCostAmount
-	       |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
-	       |	+WriteOffBatchesInfo.ExtraDirectCostAmount
-	       |	+WriteOffBatchesInfo.AllocatedCostAmount
-	       |	-WriteOffBatchesInfo.AllocatedRevenueAmount AS Amount,
-	       |
-	       |	WriteOffBatchesInfo.InvoiceAmount
-	       |	+WriteOffBatchesInfo.InvoiceTaxAmount
-	       |	+WriteOffBatchesInfo.IndirectCostAmount
-	       |	+WriteOffBatchesInfo.IndirectCostTaxAmount
-	       |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
-	       |	+WriteOffBatchesInfo.ExtraCostTaxAmountByRatio
-	       |	+WriteOffBatchesInfo.ExtraDirectCostAmount
-	       |	+WriteOffBatchesInfo.ExtraDirectCostTaxAmount
-	       |	+WriteOffBatchesInfo.AllocatedCostAmount
-	       |	+WriteOffBatchesInfo.AllocatedCostTaxAmount
-	       |	-WriteOffBatchesInfo.AllocatedRevenueAmount
-	       |	-WriteOffBatchesInfo.AllocatedRevenueTaxAmount AS AmountWithTaxes
-		   |INTO R5022T_Expenses
-		   |FROM
-		   |	InformationRegister.T6095S_WriteOffBatchesInfo AS WriteOffBatchesInfo
-		   |WHERE
-		   |	WriteOffBatchesInfo.Document = &Ref";
+	Return 
+		"SELECT
+		|	WriteOffBatchesInfo.Period,
+		|	WriteOffBatchesInfo.Company,
+		|	WriteOffBatchesInfo.Branch,
+		|	WriteOffBatchesInfo.ProfitLossCenter,
+		|	WriteOffBatchesInfo.ExpenseType,
+		|	WriteOffBatchesInfo.ItemKey,
+		|	WriteOffBatchesInfo.Currency,
+		|	WriteOffBatchesInfo.RowID AS Key,
+		|	WriteOffBatchesInfo.Recorder AS CalculationMovementCost,
+		|
+		|	WriteOffBatchesInfo.InvoiceAmount
+		|	+WriteOffBatchesInfo.PreliminaryAmount
+		|	+WriteOffBatchesInfo.IndirectCostAmount
+	    |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
+	    |	+WriteOffBatchesInfo.ExtraDirectCostAmount
+	    |	+WriteOffBatchesInfo.AllocatedCostAmount
+	    |	-WriteOffBatchesInfo.AllocatedRevenueAmount AS Amount,
+	    |
+	    |	WriteOffBatchesInfo.InvoiceAmount
+	    |	+WriteOffBatchesInfo.PreliminaryAmount
+	    |	+WriteOffBatchesInfo.InvoiceTaxAmount
+	    |	+WriteOffBatchesInfo.PreliminaryTaxAmount
+	    |	+WriteOffBatchesInfo.IndirectCostAmount
+	    |	+WriteOffBatchesInfo.IndirectCostTaxAmount
+	    |	+WriteOffBatchesInfo.ExtraCostAmountByRatio
+	    |	+WriteOffBatchesInfo.ExtraCostTaxAmountByRatio
+	    |	+WriteOffBatchesInfo.ExtraDirectCostAmount
+	    |	+WriteOffBatchesInfo.ExtraDirectCostTaxAmount
+	    |	+WriteOffBatchesInfo.AllocatedCostAmount
+	    |	+WriteOffBatchesInfo.AllocatedCostTaxAmount
+	    |	-WriteOffBatchesInfo.AllocatedRevenueAmount
+	    |	-WriteOffBatchesInfo.AllocatedRevenueTaxAmount AS AmountWithTaxes
+		|INTO R5022T_Expenses
+		|FROM
+		|	InformationRegister.T6095S_WriteOffBatchesInfo AS WriteOffBatchesInfo
+		|WHERE
+		|	WriteOffBatchesInfo.Document = &Ref";
 EndFunction
 
 Function R9010B_SourceOfOriginStock()
@@ -588,6 +620,28 @@ Function R9010B_SourceOfOriginStock()
 		   |	ItemList.ItemKey,
 		   |	SourceOfOrigins.SourceOfOriginStock,
 		   |	SourceOfOrigins.SerialLotNumber";
+EndFunction
+
+Function R6025B_SimpleBatch()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	0 AS Amount
+	|INTO R6025B_SimpleBatch
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
+	|		ON TRUE
+	|WHERE
+	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	AND UseSimpleBatch.Value
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	VALUE(AccumulationRecordType.Expense)";
 EndFunction
 
 #EndRegion

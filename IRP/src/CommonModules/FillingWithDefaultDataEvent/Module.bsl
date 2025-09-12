@@ -115,7 +115,9 @@ Procedure FillingDocumentsWithDefaultData(Source, FillingData, FillingText, Stan
 		
 		For Each TableName In ArrayOfMainTables Do
 			ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfBasisDocumentProperties);
-			ViewServer_V2.ExecuteCommandAtServer(Source, TableName, "Command_RecalculationWhenBasedOn");
+			RecalculationCommand = CommonFunctionsClientServer.GetFromAddInfo(Source.AdditionalProperties, 
+				"RecalculationCommand", "Command_RecalculationWhenBasedOn");
+			ViewServer_V2.ExecuteCommandAtServer(Source, TableName, RecalculationCommand);
 		EndDo;
 		
 		For Each TableName In ArrayOfSubordinateTables Do
@@ -353,7 +355,10 @@ Function UsedNewFunctionality(Source)
 	Or TypeOf(Source) = Type("DocumentObject.Payroll")
 	Or TypeOf(Source) = Type("DocumentObject.ForeignCurrencyRevaluation")
 	Or TypeOf(Source) = Type("DocumentObject.RetailShipmentConfirmation")
-	Or TypeOf(Source) = Type("DocumentObject.RetailGoodsReceipt");
+	Or TypeOf(Source) = Type("DocumentObject.RetailGoodsReceipt")
+	Or TypeOf(Source) = Type("DocumentObject.ShipmentPlaningOrder")
+	Or TypeOf(Source) = Type("DocumentObject.StockCorrection")
+	Or TypeOf(Source) = Type("DocumentObject.WithholdingTaxInvoice");
 	
 	Return IsUsedNewFunctionality;
 EndFunction

@@ -88,7 +88,7 @@ Scenario: _028001 create document Sales return order based on SI (button Create)
 			Then the form attribute named "Partner" became equal to "Ferron BP"
 			Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 			Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-			Then the form attribute named "Description" became equal to "Click to enter description"
+			Then the form attribute named "Comment" became equal to "Click to enter comment"
 			Then the form attribute named "Company" became equal to "Main Company"
 			Then the form attribute named "Store" became equal to "Store 02"
 		And I select "Approved" exact value from "Status" drop-down list
@@ -561,7 +561,7 @@ Scenario: _028013 create SRO using form link/unlink
 			| '2'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | 'SR'            | '2,000'      | 'SRO&SR'          |
 			| '3'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | 'SR'            | '32,000'     | 'SRO&SR'          |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
-		And I click "Cancel posting" button	
+		And I click the button named "FormUndoPosting"	
 		And I close all client application windows
 
 

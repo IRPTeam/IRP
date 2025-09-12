@@ -88,7 +88,7 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And I select "Approved" exact value from "Status" drop-down list
@@ -518,7 +518,7 @@ Scenario: _022015 create PRO using form link/unlink
 			| '1'   | '$$PurchaseInvoice018001$$'   | 'PR'          | '40,000'     | 'PRO&PR'          |
 			| '2'   | '$$PurchaseInvoice018001$$'   | 'PR'          | '60,000'     | 'PRO&PR'          |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
-		And I click "Cancel posting" button	
+		And I click the button named "FormUndoPosting"	
 		And I close all client application windows
 
 Scenario: _022016 check totals in the document Purchase return order

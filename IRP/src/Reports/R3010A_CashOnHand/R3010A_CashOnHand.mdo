@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ecc2763e-7e03-4eb8-9dcc-0e72e3cec810">
+ <producedTypes>
+  <objectType typeId="a8757e39-0a1c-499e-864e-3bdcec4e8665" valueTypeId="06a7c365-6a11-4a2d-9bf5-a2854f0ac61e"/>
+  <managerType typeId="2cb4758e-4e62-4841-bba5-1d0c9c8ccecd" valueTypeId="3b55f4aa-772c-4802-bb7e-c6e638139e24"/>
+ </producedTypes>
+ <name>R3010A_CashOnHand</name>
+ <synonym>
+  <key>en</key>
+  <value>45F93ABF-5013-9584-4976-6E20B0925DF5</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R3010A_CashOnHand.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="0a008fb0-6276-49f6-9ace-f74bef6135f6">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>en</key>
+   <value>4BA3E30F-9F4E-330F-FE27-703A3F7FA970</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

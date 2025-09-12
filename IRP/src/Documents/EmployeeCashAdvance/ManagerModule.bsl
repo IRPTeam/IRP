@@ -11,6 +11,7 @@ EndFunction
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 		
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
@@ -30,10 +31,12 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R1040B_TaxesOutgoing.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R1020B_AdvancesToVendors.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-
+	Tables.R1021B_VendorsTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -82,6 +85,7 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("Vat", TaxesServer.GetVatRef());
 	Return StrParams;
 EndFunction
 
@@ -98,6 +102,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(R1040B_TaxesOutgoing());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(T1040T_AccountingAmounts());
@@ -113,11 +118,13 @@ Function PaymentList()
 		   |	PaymentList.Ref.Date AS Period,
 		   |	PaymentList.Ref.Company AS Company,
 		   |	PaymentList.Ref.Partner AS Partner,
+		   |	PaymentList.Ref.Agreement AS Agreement,
 		   |	PaymentList.Currency AS Currency,
 		   |	PaymentList.ExpenseType AS ExpenseType,
 		   |	PaymentList.NetAmount AS NetAmount,
 		   |	PaymentList.TaxAmount AS TaxAmount,
 		   |	PaymentList.TotalAmount AS TotalAmount,
+		   |	PaymentList.VatRate AS VatRate,
 		   |	PaymentList.Key,
 		   |	PaymentList.ProfitLossCenter,
 		   |	PaymentList.AdditionalAnalytic,
@@ -153,6 +160,7 @@ Function R3027B_EmployeeCashAdvance()
 		   |	PaymentList.Company,
 		   |	PaymentList.Branch,
 		   |	PaymentList.Partner,
+		   |	PaymentList.Agreement,
 		   |	PaymentList.Currency,
 		   |	PaymentList.TotalAmount AS Amount
 		   |INTO R3027B_EmployeeCashAdvance
@@ -207,6 +215,36 @@ Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_ECA();
 EndFunction
 
+Function R1040B_TaxesOutgoing()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	&Vat AS Tax,
+		|	PaymentList.VatRate AS TaxRate,
+		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType,
+		|	SUM(PaymentList.TaxAmount) AS Amount
+		|INTO R1040B_TaxesOutgoing
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsExpense
+		|	AND PaymentList.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.VatRate,
+		|	VALUE(Enum.InvoiceType.Invoice)";
+EndFunction
+
 #EndRegion
 
 #Region AccessObject
@@ -253,28 +291,42 @@ Function T1040T_AccountingAmounts()
 	|	PaymentList.Key AS RowKey,
 	|	PaymentList.Key AS Key,
 	|	PaymentList.Currency,
-	|	PaymentList.TotalAmount,
+	|	PaymentList.NetAmount,
 	|	VALUE(Catalog.AccountingOperations.EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance) AS
 	|		Operation,
 	|	UNDEFINED AS AdvancesClosing
 	|FROM
 	|	PaymentList AS PaymentList
 	|WHERE
-	|	NOT PaymentList.IsPurchase";
+	|	PaymentList.IsExpense
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	PaymentList.Period,
+	|	PaymentList.Key AS RowKey,
+	|	PaymentList.Key AS Key,
+	|	PaymentList.Currency,
+	|	PaymentList.TaxAmount,
+	|	VALUE(Catalog.AccountingOperations.EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance) AS
+	|		Operation,
+	|	UNDEFINED AS AdvancesClosing
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.IsExpense And PaymentList.TaxAmount <> 0";
 EndFunction
-
 
 Function GetAccountingAnalytics(Parameters) Export
 	AO = Catalogs.AccountingOperations;
 	If Parameters.Operation = AO.EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance Then
-		
 		Return GetAnalytics_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance(Parameters); // Vendor transactions - Employee cash advance
-		
 	ElsIf Parameters.Operation = AO.EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance Then
-		
 		Return GetAnalytics_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance(Parameters); // Expenses - Employee cash advance
-	
+	ElsIf Parameters.Operation = AO.EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance Then
+		Return GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance(Parameters); // Taxes outgoing - Employee cash advance
 	EndIf;
+	
 	Return Undefined;
 EndFunction
 
@@ -308,6 +360,24 @@ Function GetAnalytics_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvanc
 EndFunction
 
 // Expenses - Employee cash advance
+Function GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
+	AccountingAnalytics.Debit = Debit.OutgoingAccount;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
+	
+	// Credit
+	Credit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.ObjectData.Partner);                                                  
+	AccountingAnalytics.Credit = Credit.AccountCashAdvance;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Tax outgoing - Employee cash advance
 Function GetAnalytics_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
@@ -327,11 +397,11 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance(Parameter
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 

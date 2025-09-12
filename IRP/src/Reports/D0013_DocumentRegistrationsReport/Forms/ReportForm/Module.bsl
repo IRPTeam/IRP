@@ -317,7 +317,9 @@ Procedure OutputDifferenceInRegistersMovements(ParametersStructure)
 	EndDo;
 	FieldsString = Left(FieldsString, StrLen(FieldsString) - 1);
 	
-	NewMovementsVT.Columns.Delete("LineNumber");
+	If NewMovementsVT.Columns.Find("LineNumber") <> Undefined Then
+		NewMovementsVT.Columns.Delete("LineNumber");
+	EndIf;
 	If Not CurrentMovementsVT.Columns.Find("ItemKeyItem") = Undefined Then
 		ColumnString = "";
 		For Each Column In NewMovementsVT.Columns Do
@@ -430,23 +432,27 @@ EndFunction
 &AtServer
 Procedure SetConditionalAppearance(ReportBuilder)
 	If Not ReportBuilder.SelectedFields.Find("RecordType") = Undefined Then
-		Appearance = ReportBuilder.ConditionalAppearance.Add("ColorRecordTypeExpense");
-		Appearance.Use = True;
-		Appearance.Area.Add("RecordType", "RecordType", AppearanceAreaType.Field);
-		Filter = Appearance.Filter.Add("RecordType");
-		Filter.Value = AccumulationRecordType.Expense;
-		Filter.Use = True;
-		Appearance.Appearance.TextColor.Value = WebColors.Red;
-		Appearance.Appearance.TextColor.Use = True;
+		If ReportBuilder.AvailableFields.RecordType.ValueType.Types().Find(TypeOf(Enums.RecordType.Expense)) = Undefined Then
+			Appearance = ReportBuilder.ConditionalAppearance.Add("ColorRecordTypeExpense");
+			Appearance.Use = True;
+			Appearance.Area.Add("RecordType", "RecordType", AppearanceAreaType.Field);
+			Filter = Appearance.Filter.Add("RecordType");
+			Filter.Value = AccumulationRecordType.Expense;
+			Filter.Use = True;
+			Appearance.Appearance.TextColor.Value = WebColors.Red;
+			Appearance.Appearance.TextColor.Use = True;
+		EndIf;
 		
-		Appearance = ReportBuilder.ConditionalAppearance.Add("ColorRecordTypeReceipt");
-		Appearance.Use = True;
-		Filter = Appearance.Filter.Add("RecordType");
-		Filter.Value = AccumulationRecordType.Receipt;
-		Filter.Use = True;
-		Appearance.Area.Add("RecordType");
-		Appearance.Appearance.TextColor.Value = WebColors.Green;
-		Appearance.Appearance.TextColor.Use = True;
+		If ReportBuilder.AvailableFields.RecordType.ValueType.Types().Find(TypeOf(Enums.RecordType.Receipt)) = Undefined Then
+			Appearance = ReportBuilder.ConditionalAppearance.Add("ColorRecordTypeReceipt");
+			Appearance.Use = True;
+			Filter = Appearance.Filter.Add("RecordType");
+			Filter.Value = AccumulationRecordType.Receipt;
+			Filter.Use = True;
+			Appearance.Area.Add("RecordType");
+			Appearance.Appearance.TextColor.Value = WebColors.Green;
+			Appearance.Appearance.TextColor.Use = True;
+		EndIf;
 	EndIf;
 	
 	If Not ReportBuilder.SelectedFields.Find("ManualEdit") = Undefined Then

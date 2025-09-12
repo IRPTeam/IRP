@@ -316,28 +316,34 @@ Function GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfM
 	                                                                    ItemKey);
 EndFunction
 	
-Function GetPartnerTypeByTransactionType(TransactionType) Export
+Function GetPartnerTypeByTransactionType(TransactionType, OnlyMainPartnerType = True) Export
 	Map = New Map();
-	Map.Insert(Enums.PurchaseTransactionTypes.Purchase             , "Vendor");
+	Map.Insert(Enums.PurchaseTransactionTypes.Purchase             , "Vendor, Other");
 	Map.Insert(Enums.PurchaseTransactionTypes.ReceiptFromConsignor , "Consignor");
+	Map.Insert(Enums.PurchaseTransactionTypes.CurrencyRevaluationCustomer , "Customer");
+	Map.Insert(Enums.PurchaseTransactionTypes.CurrencyRevaluationVendor   , "Vendor");
 	
-	Map.Insert(Enums.SalesTransactionTypes.Sales                , "Customer");
+	Map.Insert(Enums.SalesTransactionTypes.Sales                , "Customer, Other");
 	Map.Insert(Enums.SalesTransactionTypes.ShipmentToTradeAgent , "TradeAgent");
 	Map.Insert(Enums.SalesTransactionTypes.RetailSales          , "Customer");
+	Map.Insert(Enums.SalesTransactionTypes.CurrencyRevaluationCustomer , "Customer");
+	Map.Insert(Enums.SalesTransactionTypes.CurrencyRevaluationVendor   , "Vendor");
 	
-	Map.Insert(Enums.SalesReturnTransactionTypes.ReturnFromCustomer   , "Customer");
+	Map.Insert(Enums.SalesReturnTransactionTypes.ReturnFromCustomer   , "Customer, Other");
 	Map.Insert(Enums.SalesReturnTransactionTypes.ReturnFromTradeAgent , "TradeAgent");
 
-	Map.Insert(Enums.PurchaseReturnTransactionTypes.ReturnToVendor    , "Vendor");
+	Map.Insert(Enums.PurchaseReturnTransactionTypes.ReturnToVendor    , "Vendor, Other");
 	Map.Insert(Enums.PurchaseReturnTransactionTypes.ReturnToConsignor , "Consignor");
 	
-	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.Sales                , "Customer");
-	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor       , "Vendor");
+	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.Sales                , "Customer, Other");
+	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor       , "Vendor, Other");
 	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent , "TradeAgent");
 	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor    , "Consignor");
 	
-	Map.Insert(Enums.GoodsReceiptTransactionTypes.Purchase             , "Vendor");
-	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer   , "Customer");
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.Purchase             , "Vendor, Other");
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.PreliminaryStock     , "Vendor, Other");
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer   , "Customer, Other");
+
 	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor , "Consignor");
 	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent , "TradeAgent");
 	
@@ -349,22 +355,54 @@ Function GetPartnerTypeByTransactionType(TransactionType) Export
 	Map.Insert(Enums.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS , "Customer");
 	Map.Insert(Enums.OutgoingPaymentTransactionTypes.OtherPartner , "Other");
 	Map.Insert(Enums.OutgoingPaymentTransactionTypes.OtherExpense , "Other");
+	Map.Insert(Enums.OutgoingPaymentTransactionTypes.EmployeeCashAdvance , "Other");
 	
 	Map.Insert(Enums.IncomingPaymentTransactionType.ReturnFromVendor , "Vendor");
 	Map.Insert(Enums.IncomingPaymentTransactionType.PaymentFromCustomer , "Customer");
 	Map.Insert(Enums.IncomingPaymentTransactionType.PaymentFromCustomerByPOS , "Customer");
 	Map.Insert(Enums.IncomingPaymentTransactionType.OtherPartner , "Other");
 	Map.Insert(Enums.IncomingPaymentTransactionType.OtherIncome , "Other");
+	Map.Insert(Enums.IncomingPaymentTransactionType.EmployeeCashAdvance , "Other");
 	
 	Map.Insert(Enums.TaxesOperationTransactionType.TaxOffset , "Other");
 	Map.Insert(Enums.TaxesOperationTransactionType.TaxOffsetAndPayment , "Other");
 	Map.Insert(Enums.TaxesOperationTransactionType.TaxPayment , "Other");
+		
+	Result = Map.Get(TransactionType);
 	
-	Return Map.Get(TransactionType);
+	If OnlyMainPartnerType Then
+		Segments = StrSplit(Result, ",");
+		If Segments.Count() >= 1 Then
+			PartnerTtype = TrimAll(Segments[0]);
+			Return PartnerTtype;
+		Else
+			Raise StrTemplate("Error get partner type by transacton type[%1]", TransactionType);
+		EndIf;
+	EndIf; 
+	
+	Return Result; 
 EndFunction
 
-Function GetAgreementTypeByTransactionType(TransactionType) Export
-	PartnerType = GetPartnerTypeByTransactionType(TransactionType);
+Function GetAgreementTypeByTransactionType(TransactionType, OnlyMainAgreementType = True) Export
+	PartnerType = GetPartnerTypeByTransactionType(TransactionType, OnlyMainAgreementType);
+	Segments = StrSplit(PartnerType, ",");
+	If Segments.Count() = 0 Then
+		Raise StrTemplate("Error get agreement type by transacton type[%1]", TransactionType);
+	EndIf;
+	
+	If OnlyMainAgreementType Then
+		AgreementType = GetAgreementTypeByPartnerType(TrimAll(Segments[0]));
+		Return AgreementType;
+	Else
+		ArrayOfAgreementTypes = New Array();
+		For Each Segment In Segments Do
+			ArrayOfAgreementTypes.Add(GetAgreementTypeByPartnerType(TrimAll(Segment)));
+		EndDo;
+		Return ArrayOfAgreementTypes;
+	EndIf;
+EndFunction	
+
+Function GetAgreementTypeByPartnerType(PartnerType) Export
 	If PartnerType = "Customer" Then
 		Return Enums.AgreementTypes.Customer;
 	ElsIf PartnerType = "Vendor" Then
@@ -377,6 +415,8 @@ Function GetAgreementTypeByTransactionType(TransactionType) Export
 		Return Enums.AgreementTypes.EmptyRef();
 	ElsIf PartnerType = "Other" Then
 		Return Enums.AgreementTypes.Other;
+	ElsIf PartnerType = "Employee" Then
+		Return Enums.AgreementTypes.Other;		
 	Else
 		Return Enums.AgreementTypes.EmptyRef();
 	EndIf;
@@ -393,8 +433,14 @@ Function GetAgreementTypeByDebtType(DebtType) Export
 	ElsIf DebtType = Enums.DebtTypes.AdvanceVendor
 		Or DebtType = Enums.DebtTypes.TransactionVendor Then
 		Return Enums.AgreementTypes.Vendor;
+	ElsIf DebtType = Enums.DebtTypes.OtherPartnerPayable
+		Or DebtType = Enums.DebtTypes.OtherPartnerReceivable Then
+		Return  Enums.AgreementTypes.Other;
+	ElsIf DebtType = Enums.DebtTypes.EmployeePayable
+		Or DebtType = Enums.DebtTypes.EmployeeReceivable Then
+		Return  Enums.AgreementTypes.Other;
 	Else
-		Raise StrTemplate("Unknown AgreementType by DebtType [%1]", DebtType);
+                Raise StrTemplate(R().UnknownAgreementTypeByDebtType, DebtType);
 	EndIf;
 EndFunction	
 	
@@ -440,3 +486,36 @@ Function GetPaymentTypesByBankTerm(BankTerm) Export
 	ArrayOfRefs = QueryResult.Unload().UnloadColumn("Ref");
 	Return ArrayOfRefs;
 EndFunction
+
+Function GetAmountsFromPO(Ref, Key) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 1
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.NetAmount AS Amount,
+	|	ItemList.TaxAmount AS AmountTax,
+	|	ItemList.QuantityInBaseUnit
+	|FROM
+	|	Document.PurchaseOrder.ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref
+	|	AND ItemList.Key = &Key";
+	Query.SetParameter("Ref", Ref);
+	Query.SetParameter("Key", Key);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	Result = New Structure();
+	Result.Insert("Currency", Undefined);
+	Result.Insert("Amount", 0);
+	Result.Insert("AmountTax", 0);
+	Result.Insert("QuantityInBaseUnit", 0);
+	
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+	EndIf;
+	
+	Return Result;
+EndFunction	
+	

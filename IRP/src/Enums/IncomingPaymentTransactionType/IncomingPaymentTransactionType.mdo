@@ -96,4 +96,11 @@
    <value>62F1C6CE-2A61-325D-DC96-6A29959EAE14</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="18ac4528-833b-4bec-9320-8243b9adc2e9">
+  <name>SalaryReturn</name>
+  <synonym>
+   <key>en</key>
+   <value>6B4D1CAF-BA76-791C-C240-04A14E727775</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

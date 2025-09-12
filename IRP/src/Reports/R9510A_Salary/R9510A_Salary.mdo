@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="373f4195-7168-4de0-b9d2-cd2a381bcb13">
+ <producedTypes>
+  <objectType typeId="e7bee4f6-a8c6-42b3-8cc5-ab4004e0e29e" valueTypeId="18e7f614-ac8a-4c48-9741-08238692a96f"/>
+  <managerType typeId="75d3520f-c094-4883-b57d-86bef486aa45" valueTypeId="0832762d-0112-4dc9-972f-ced2fc83051a"/>
+ </producedTypes>
+ <name>R9510A_Salary</name>
+ <synonym>
+  <key>en</key>
+  <value>18B32257-E7A5-4A74-4918-8F3E489BBF8F</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R9510A_Salary.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="dffd109b-7b19-4a8b-87c9-7531588554f9">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>en</key>
+   <value>149B1ACE-53E5-CE22-213E-EB5AFF8975AE</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

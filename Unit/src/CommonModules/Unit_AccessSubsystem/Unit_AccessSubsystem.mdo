@@ -3,7 +3,7 @@
   <name>Unit_AccessSubsystem</name>
   <synonym>
     <key>en</key>
-    <value>Documents</value>
+    <value>Access subsystem</value>
   </synonym>
   <server>true</server>
   <externalConnection>true</externalConnection>

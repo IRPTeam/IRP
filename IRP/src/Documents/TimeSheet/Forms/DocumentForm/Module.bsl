@@ -56,6 +56,16 @@ Procedure AfterWrite(WriteParameters)
 EndProcedure
 
 &AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
+EndProcedure
+
+&AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
@@ -219,7 +229,7 @@ Procedure CalendarSelection(Item, SelectedDate)
 	
 	OpenForm("Document.TimeSheet.Form.EditCalendarDay", 
 		OpeningParameters, ThisObject, , , , 
-		New NotifyDescription("EditCalendarDayEnd", ThisObject), 
+		New CallbackDescription("EditCalendarDayEnd", ThisObject), 
 		FormWindowOpeningMode.LockOwnerWindow);
 	
 EndProcedure
@@ -367,7 +377,7 @@ Procedure WorkersBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	OpeningParameters.Insert("Employees" , Employees);
 	
 	NotifyParameters = New Structure();
-	Notify = New NotifyDescription("AddEmployeeEnd", ThisObject, NotifyParameters);
+	Notify = New CallbackDescription("AddEmployeeEnd", ThisObject, NotifyParameters);
 	
 	OpenForm("Document.TimeSheet.Form.AddEmployee", OpeningParameters, 
 	ThisObject, , , , 
@@ -695,6 +705,20 @@ EndProcedure
 &AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure
 
 #EndRegion

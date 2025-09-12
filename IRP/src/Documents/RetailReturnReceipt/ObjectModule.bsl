@@ -18,10 +18,21 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		EndIf;
 	EndDo;
 	
-	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		
+		Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	
+		AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
+		AmountsInfo.TotalAmount.Value = ThisObject.ItemList.Total("TotalAmount");
+		AmountsInfo.NetAmount.Value   = ThisObject.ItemList.Total("NetAmount");
+		AmountsInfo.TaxAmount.Value   = ThisObject.ItemList.Total("TaxAmount");
+		TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
 
+	EndIf;
+	
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 	
 	ValuesBeforeWrite = New Structure();
@@ -123,7 +134,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	EndIf;
 
 	For Each Row In ThisObject.ItemList Do
-		If Not ValueIsFilled(Row.RetailSalesReceipt) And Not ValueIsFilled(Row.LandedCost) Then
+		If Not ValueIsFilled(Row.RetailSalesReceipt) And Not ValueIsFilled(Row.LandedCost) And Not Row.IsService Then
 			Cancel = True;
 			CommonFunctionsClientServer.ShowUsersMessage(R().Error_114,
 			"ItemList[" + Format((Row.LineNumber - 1), "NZ=0; NG=0;") + "].LandedCost", ThisObject);
@@ -133,7 +144,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_RRR(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey, Store");
+		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, Item, ItemKey, Store");
 		RowIDInfoPrivileged.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 	

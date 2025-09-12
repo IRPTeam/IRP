@@ -55,6 +55,7 @@
   <key>en</key>
   <value>167023D0-20C7-4A7C-CE96-67F7992A0248</value>
  </objectPresentation>
+ <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -66,8 +67,10 @@
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.Hardware.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.Hardware.Form.GroupForm</defaultFolderForm>
  <defaultListForm>Catalog.Hardware.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.Hardware.Form.ChoiceForm</defaultChoiceForm>
+ <defaultFolderChoiceForm>Catalog.Hardware.Form.GroupChoiceForm</defaultFolderChoiceForm>
  <attributes uuid="9753667e-e27e-4c25-afad-8cd1ef0e0961">
   <name>EquipmentType</name>
   <synonym>
@@ -332,6 +335,24 @@
   <synonym>
    <key>en</key>
    <value>86BFF1A9-3EEB-8884-4D0B-BEBEE0F54C35</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="811336bb-04f2-4af8-af2b-a30d10074fca">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>1ADD8866-60A1-20E5-5CE9-952D86D1A2BC</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ad8ed8e0-1b00-4de0-9ff7-648406957334">
+  <name>GroupChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>B815898F-70EE-367D-D775-519F62F1F70D</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

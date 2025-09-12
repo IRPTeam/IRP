@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="92b083ff-6830-4077-b679-ccfccc7a6d7d">
+ <producedTypes>
+  <objectType typeId="6d37b509-e112-405e-ab86-48a29974b1ae" valueTypeId="0cc43e62-ca11-4886-9ab5-7bec2c7aa788"/>
+  <managerType typeId="73485d34-a61d-49e0-ad0d-35cb0cb00c66" valueTypeId="fc753d0a-4619-4eb2-a675-e62727ce07c1"/>
+ </producedTypes>
+ <name>F0012_DepreciationStatement</name>
+ <synonym>
+  <key>en</key>
+  <value>593CC0F9-40CE-610E-E58E-EC1ED10623BC</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.F0012_DepreciationStatement.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="4ebbd589-6f66-4c53-8d37-ab0f36243645">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>en</key>
+   <value>923DE340-BEA8-8017-74BF-F85F9E296E40</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

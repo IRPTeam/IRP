@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a17a419d-670e-4106-a971-23733a3d7268">
+ <name>DocStockCorrectionServer</name>
+ <synonym>
+  <key>en</key>
+  <value>4232C20D-9256-6AEB-B0A0-0B8076DF17D7</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+</mdclass:CommonModule>

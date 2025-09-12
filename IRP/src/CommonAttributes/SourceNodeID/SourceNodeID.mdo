@@ -16,6 +16,10 @@
  <dataHistory>Use</dataHistory>
  <fillValue xsi:type="core:UndefinedValue"/>
  <content>
+  <metadata>Document.StockCorrection</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.BatchReallocateOutgoing</metadata>
   <use>Use</use>
  </content>
@@ -88,6 +92,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.WithholdingTaxInvoice</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.PurchaseReturnOrder</metadata>
   <use>Use</use>
  </content>
@@ -104,6 +112,14 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.PLSections</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.CalculationDeservedVacations</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.Users</metadata>
   <use>Use</use>
  </content>
@@ -112,11 +128,19 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.FixedAssetRevaluation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.BatchReallocateIncoming</metadata>
   <use>Use</use>
  </content>
  <content>
   <metadata>Document.AdditionalCostAllocation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.ExpenseAccruals</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -204,7 +228,15 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.TaxesOperation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.AccrualAndDeductionTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.ELedgerRegistry</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -225,6 +257,10 @@
  </content>
  <content>
   <metadata>Catalog.VehicleTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ObjectLocations</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -340,6 +376,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.Cities</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.RetailShipmentConfirmation</metadata>
   <use>Use</use>
  </content>
@@ -365,6 +405,10 @@
  </content>
  <content>
   <metadata>Document.Unbundling</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.ShipmentPlaningOrder</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -416,6 +460,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.RevenueAccruals</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.RetailSalesReceipt</metadata>
   <use>Use</use>
  </content>
@@ -433,6 +481,14 @@
  </content>
  <content>
   <metadata>Document.WorkOrderClosing</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.Issue</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Incoterms</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -609,18 +665,6 @@
  </content>
  <content>
   <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.ExpenseAccruals</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.RevenueAccruals</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.TaxesOperation</metadata>
   <use>Use</use>
  </content>
  <autoUse>DontUse</autoUse>

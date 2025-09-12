@@ -15,7 +15,7 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	FormParameters.Insert("MultipleChoice", False);
 	FormParameters.Insert("CloseOnChoice", True);
 	
-	Notify = New NotifyDescription("ChoiceSegmentEnd", ThisObject, New Structure("Items", CommandParameter));
+	Notify = New CallbackDescription("ChoiceSegmentEnd", ThisObject, New Structure("Items", CommandParameter));
 	
 	OpenForm("Catalog.ItemSegments.ChoiceForm", 
 		FormParameters, 

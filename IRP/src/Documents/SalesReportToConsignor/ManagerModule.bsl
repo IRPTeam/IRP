@@ -139,7 +139,10 @@ Function ItemList()
 		   |	ItemList.Project,
 		   |	TRUE AS IsPurchase,
 		   |	UNDEFINED AS PurchaseOrder,
-		   |	UNDEFINED AS PurchaseOrderSettlements
+		   |	UNDEFINED AS PurchaseOrderSettlements,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Consignor) AS IsConsignor,
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReportToConsignor.ItemList AS ItemList
@@ -163,11 +166,11 @@ Function GetQueryTextsMasterTables()
 EndFunction
 
 Function R1020B_AdvancesToVendors()
-	Return AccumulationRegisters.R1020B_AdvancesToVendors.R1020B_AdvancesToVendors_PI_PR_POC_SRTC();
+	Return AccumulationRegisters.R1020B_AdvancesToVendors.R1020B_AdvancesToVendors_PI_PR_POC_SRTC_WTI();
 EndFunction
 
 Function R1021B_VendorsTransactions()
-	Return AccumulationRegisters.R1021B_VendorsTransactions.R1021B_VendorsTransactions_PI_SRTC();
+	Return AccumulationRegisters.R1021B_VendorsTransactions.R1021B_VendorsTransactions_PI_SRTC_WTI();
 EndFunction
 
 Function R1040B_TaxesOutgoing()
@@ -181,12 +184,20 @@ Function R1040B_TaxesOutgoing()
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
 		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType,
-		|	-ItemList.TaxAmount AS Amount
+		|	SUM(-ItemList.TaxAmount) AS Amount
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	ItemList AS ItemLIst
 		|WHERE
-		|	ItemList.TaxAmount <> 0";
+		|	ItemList.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.VatRate,
+		|	VALUE(Enum.InvoiceType.Invoice)";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

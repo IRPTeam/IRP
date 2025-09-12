@@ -7,7 +7,6 @@
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
- <content>Document.InventoryTransfer</content>
  <content>Document.InventoryTransferOrder</content>
  <content>Document.InternalSupplyRequest</content>
  <content>Catalog.Vehicles</content>

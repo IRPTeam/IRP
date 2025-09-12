@@ -43,7 +43,7 @@ Procedure BeforeStartNewTransaction(Object, Form, DocRef) Export
 EndProcedure
 
 Procedure SearchCustomer(Object, Form) Export
-	Notify = New NotifyDescription("SetRetailCustomer", Form);
+	Notify = New CallbackDescription("SetRetailCustomer", Form);
 	Settings = New Structure;
 	Settings.Insert("RetailCustomer", Object.RetailCustomer);
 	Settings.Insert("Company", Object.Company);

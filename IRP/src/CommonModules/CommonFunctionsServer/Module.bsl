@@ -347,24 +347,59 @@ Function isMetadataAvailableByCurrentFunctionalOptions(ValidatedMetadata, hasTyp
 	If hasType And ValidatedMetadata.Type.Types().Count() = 1 Then
 		MetadataByType = Metadata.FindByType(ValidatedMetadata.Type.Types()[0]);
 	EndIf;
-	If MetadataByType = Undefined Then
-		MetadataByType = ValidatedMetadata;
-	EndIf;
 	
-	UsedInFunctionalOptions = False;
+	MetadataUsedInFunctionalOptions = False;
+	MetadataAvailableInFunctionalOptions = False;
+	TypeUsedInFunctionalOptions = False;
+	TypeAvailableInFunctionalOptions = ?(hasType And MetadataByType <> Undefined, False, True);
     
     For Each FunctionalOption In Metadata.FunctionalOptions Do
-        If FunctionalOption.Content.Contains(ValidatedMetadata) Or FunctionalOption.Content.Contains(MetadataByType) Then
-            UsedInFunctionalOptions = True;
-            If GetFunctionalOption(FunctionalOption.Name) = True Then
-                Return True;
-            EndIf;
+    	
+    	If NOT MetadataAvailableInFunctionalOptions And FunctionalOption.Content.Contains(ValidatedMetadata) Then
+    		MetadataUsedInFunctionalOptions = True;
+    		MetadataAvailableInFunctionalOptions = (GetFunctionalOption(FunctionalOption.Name) = True);
+    	EndIf;
+    	
+    	If NOT TypeAvailableInFunctionalOptions And FunctionalOption.Content.Contains(MetadataByType) Then
+    		TypeUsedInFunctionalOptions = True;
+    		TypeAvailableInFunctionalOptions = (GetFunctionalOption(FunctionalOption.Name) = True);
+    	EndIf;
+    	
+        If MetadataAvailableInFunctionalOptions And TypeAvailableInFunctionalOptions Then
+            Break;
         EndIf;
     EndDo;
     
-    Return Not UsedInFunctionalOptions;
+    Return (NOT MetadataUsedInFunctionalOptions OR MetadataAvailableInFunctionalOptions) And 
+    		(NOT TypeUsedInFunctionalOptions OR TypeAvailableInFunctionalOptions);
     	
 EndFunction	
+
+// Is oject attribute available by current functional options.
+// 
+// Parameters:
+//  Object - DocumentObjectDocumentName, DocumentRefDocumentName - Object
+//  AttributeName - String - Attribute name
+// 
+// Returns:
+//  Boolean - Is oject attribute available by current functional options
+Function isOjectAttributeAvailableByCurrentFunctionalOptions(Object, AttributeName) Export
+	
+	MetaObject = Object.Metadata();
+	
+	AttributItem = Metadata.CommonAttributes.Find(AttributeName);
+	If AttributItem <> Undefined And isCommonAttributeUseForMetadata(AttributeName, MetaObject) Then
+		Return isMetadataAvailableByCurrentFunctionalOptions(AttributItem, True)
+	EndIf;
+	
+	AttributObjectItem = MetaObject.Attributes.Find(AttributeName);
+	If AttributObjectItem <> Undefined Then
+		Return isMetadataAvailableByCurrentFunctionalOptions(AttributObjectItem, True)
+	EndIf;
+	
+	Return True;
+    	
+EndFunction
 
 // Is common attribute use for metadata.
 // 
@@ -381,6 +416,11 @@ Function isCommonAttributeUseForMetadata(Name, MetadataFullName) Export
 	
 	Attr = Metadata.CommonAttributes[Name];
 	Content = Attr.Content.Find(MetadataFullName);
+	
+	If Content = Undefined Then
+		Return False;
+	EndIf;
+	
 	UseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use;
 	AutoUseAndUseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Auto 
 		And Attr.AutoUse = Metadata.ObjectProperties.CommonAttributeAutoUse.Use;
@@ -1236,7 +1276,7 @@ Function RecalculateExpression(Params) Export
 				EndIf;
 			EndDo;
 		Else
-			Raise "Wrong External function type.";
+                        Raise R().WrongExternalFunctionType;
 		EndIf;
 		ResultInfo.Result = Result;
 	Except
@@ -1551,7 +1591,7 @@ Procedure CheckUniqueDescription(Cancel, Object) Export
         	|	%1 AS Table
         	|WHERE
         	|	Table.Ref <> &Ref
-        	|	AND (%2)";
+        	|	AND (%2) %3";
         	
         	Query.SetParameter("Ref", Object.Ref);
         	
@@ -1562,7 +1602,16 @@ Procedure CheckUniqueDescription(Cancel, Object) Export
         		Query.SetParameter(KeyValue.Key, KeyValue.Value);
         	EndDo;
         	
-        	Query.Text = StrTemplate(Query.Text, FullName, StrConcat(Array_where, " OR "));
+        	AdditionalConditions = "";
+        	Params = Undefined;
+        	If Object.AdditionalProperties.Property("CheckUniqueDescriptionsParameters", Params) Then
+        		AdditionalConditions = Params.QueryText;
+        		For Each KeyValue In Params.QueryParameters Do
+        			Query.SetParameter(KeyValue.Key, KeyValue.Value);
+        		EndDo;
+        	EndIf;
+        
+        	Query.Text = StrTemplate(Query.Text, FullName, StrConcat(Array_where, " OR "), AdditionalConditions);
         	QueryResult = Query.Execute();
         	QuerySelection = QueryResult.Select();
         	
@@ -1669,10 +1718,31 @@ Procedure MergeTables(MasterTable, SourceTable, AddColumnFromSourceTable = "") E
 	EndDo;
 EndProcedure
 
+// Table to structure.
+// 
+// Parameters:
+//  Table - ValueTable - Table
+// 
+// Returns:
+//  Array Of Structure
+Function TableToStructure(Table) Export
+	Array = New Array; // Array Of Structure
+	
+	For Each Row In Table Do
+		Str = New Structure;
+		For Each Column In Table.Columns Do
+			Str.Insert(Column.Name, Row[Column.Name]);
+		EndDo;
+		Array.Add(Str);
+	EndDo;
+	
+	Return Array;
+EndFunction
+
 // Create table.
 // 
 // Parameters:
-//  RegisterMetadata - MetadataObjectAccountingRegister - Register metadata
+//  RegisterMetadata - MetadataObjectAccountingRegister, MetadataObjectInformationRegister - Register metadata
 // 
 // Returns:
 //  ValueTable - Create table
@@ -1706,7 +1776,7 @@ EndFunction
 // 
 // Returns:
 //  Boolean - Tables is equal
-Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
+Function TablesIsEqual(Table1, Table2, DeleteColumns = "", SerializeToXML = False) Export
 	If Table1.Count() <> Table2.Count() Then
 		Return False;
 	EndIf;
@@ -1721,8 +1791,8 @@ Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
 	EndDo;
 		
 	If Table1.Count() = 1 Then
-		MD5_1 = GetMD5(Table1);
-		MD5_2 = GetMD5(Table2);
+		MD5_1 = GetMD5(Table1, , SerializeToXML);
+		MD5_2 = GetMD5(Table2, , SerializeToXML);
 	Else
 		Array = New Array; // Array Of String
 		For Each Column In Table1.Columns Do
@@ -1766,8 +1836,8 @@ Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
 		Query.SetParameter("VT2", Table2);
 		QueryResult = Query.ExecuteBatch();
 	
-		MD5_1 = GetMD5(QueryResult[2].Unload());
-		MD5_2 = GetMD5(QueryResult[3].Unload());
+		MD5_1 = GetMD5(QueryResult[2].Unload(), ,SerializeToXML);
+		MD5_2 = GetMD5(QueryResult[3].Unload(), ,SerializeToXML);
 	EndIf;
 	If MD5_1 = MD5_2 Then
 		Return True;
@@ -1903,3 +1973,116 @@ Procedure CreateFormTable(CreactionStructure) Export
 EndProcedure
 
 #EndRegion
+
+
+Procedure BeforeWrite_RegistersClearDataBeforeWrite(Source, Cancel, Replacing) Export
+	If Cancel Then
+		Return;
+	EndIf;
+	
+	RegMetadata = Source.Metadata();
+	CompositeDataTypes = GetCompositeDataTypes(RegMetadata);
+	
+	If CompositeDataTypes.Dimensions.Count() = 0 
+		And CompositeDataTypes.Resources.Count() = 0 Then
+			Return;
+	EndIf;
+	
+	For Each Record In Source Do
+		For Each Dimension In CompositeDataTypes.Dimensions Do
+			If Not ValueIsFilled(Record[Dimension.Name]) Then
+				Record[Dimension.Name] = Undefined;
+			EndIf;
+		EndDo;
+		
+		For Each Resource In CompositeDataTypes.Resources Do
+			If Not ValueIsFilled(Record[Resource.Name]) Then
+				Record[Resource.Name] = Undefined;
+			EndIf;
+		EndDo;
+	EndDo;
+EndProcedure
+
+Procedure SetDataTypesForLoadRecords(RegMetadata, TableForLoad) Export
+	CompositeDataTypes = GetCompositeDataTypes(RegMetadata);
+	
+	If CompositeDataTypes.Dimensions.Count() = 0 
+		And CompositeDataTypes.Resources.Count() = 0 Then
+			Return;
+	EndIf;
+	
+	For Each Dimension In CompositeDataTypes.Dimensions Do
+		TableForLoad.Columns.Add("_tmp_" + Dimension.Name, Dimension.TypeDescription);
+	EndDo;
+	
+	For Each Resource In CompositeDataTypes.Resources Do
+		TableForLoad.Columns.Add("_tmp_" + Resource.Name, Resource.TypeDescription);
+	EndDo;
+	
+	For Each Record In TableForLoad Do
+		For Each Dimension In CompositeDataTypes.Dimensions Do
+			
+			If Not CommonFunctionsClientServer.ObjectHasProperty(Record, Dimension.Name) Then
+				Continue;
+			EndIf; 
+			
+			If Not ValueIsFilled(Record[Dimension.Name]) Then
+				Record["_tmp_" + Dimension.Name] = Undefined;
+			Else
+				Record["_tmp_" + Dimension.Name] = Record[Dimension.Name];
+			EndIf;
+		EndDo;
+		
+		For Each Resource In CompositeDataTypes.Resources Do
+			
+			If Not CommonFunctionsClientServer.ObjectHasProperty(Record, Resource.Name) Then
+				Continue;
+			EndIf;
+			
+			If Not ValueIsFilled(Record[Resource.Name]) Then
+				Record["_tmp_" + Resource.Name] = Undefined;
+			Else
+				Record["_tmp_" + Resource.Name] = Record[Resource.Name];
+			EndIf;
+		EndDo;
+	EndDo;
+
+	For Each Dimension In CompositeDataTypes.Dimensions Do
+		If TableForLoad.Columns.Find(Dimension.Name) <> Undefined Then
+			TableForLoad.Columns.Delete(Dimension.Name);
+		EndIf;
+		TableForLoad.Columns["_tmp_" + Dimension.Name].Name = Dimension.Name;
+	EndDo;
+	
+	For Each Resource In CompositeDataTypes.Resources Do
+		If TableForLoad.Columns.Find(Resource.Name) <> Undefined Then
+			TableForLoad.Columns.Delete(Resource.Name);
+		EndIf;
+		TableForLoad.Columns["_tmp_" + Resource.Name].Name = Resource.Name;
+	EndDo;	
+EndProcedure
+
+Function GetCompositeDataTypes(RegMetadata) Export
+	CompositeDataTypes_Dimensions = New Array();
+	CompositeDataTypes_Resources = New Array();
+	
+	For Each Dimension In RegMetadata.Dimensions Do
+		If Dimension.Type.Types().Count() > 1 Then
+			CompositeDataTypes_Dimensions.Add(New Structure("Name, TypeDescription", 
+				Dimension.Name, Dimension.Type));
+		EndIf;	
+	EndDo;
+	
+	For Each Resource In RegMetadata.Resources Do
+		If Resource.Type.Types().Count() > 1 Then
+			CompositeDataTypes_Resources.Add(New Structure("Name, TypeDescription", 
+				Resource.Name, Resource.Type));
+		EndIf;	
+	EndDo;
+
+	Return New Structure("Dimensions, Resources", 
+		CompositeDataTypes_Dimensions,
+		CompositeDataTypes_Resources);
+EndFunction
+
+

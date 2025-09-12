@@ -23,6 +23,8 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 	* Opening the form for filling in Accounts
 		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
 		And Delay 2
+	* Check hierarchical
+		When create Groups in the catalog
 		And I click the button named "FormCreate"
 	* Check field visibility
 		And field "BankCountry" is not present on the form
@@ -157,6 +159,7 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 		And I click Select button of "Transit account" field
+		And I click "List" button		
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Transit Main'    |
@@ -194,6 +197,7 @@ Scenario: _005019 name uniqueness control (Cash/Bank accounts)
 	And I close all client application windows
 	* Preparation
 		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+		And I click "List" button
 		If "List" table does not contain lines Then
 			| 'Description' |
 			| 'Cash desk №1'       |

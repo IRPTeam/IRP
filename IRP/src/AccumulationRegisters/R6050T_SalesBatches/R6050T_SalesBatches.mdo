@@ -225,6 +225,45 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </resources>
+ <resources uuid="941ebd20-14ac-4e58-bd4a-934c6d5d1e9c">
+  <name>PreliminaryQuantity</name>
+  <synonym>
+   <key>en</key>
+   <value>C2B16076-F82F-314E-EBC5-5B47E73BF5C1</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="f80f6a9f-79e8-4032-a341-ab46f7ab2bbf">
+  <name>PreliminaryAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>97134D34-990C-2197-7D8F-F78B2C5428B4</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="85aefcc3-e7f5-46b8-aa19-81842f9eaa51">
+  <name>PreliminaryTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>129D2C8B-366F-F659-9395-55F028BEF9F2</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
  <dimensions uuid="c728c832-7cdd-417e-b575-31112913b75b">
   <name>Batch</name>
   <synonym>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1ec9b38f-bd61-4562-ab04-b5f4065b211f">
+ <name>ObjectTransformation</name>
+ <synonym>
+  <key>en</key>
+  <value>DB198352-A6F0-45E3-3EFC-C729B5FE72B6</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.TransformationRules</content>
+ <content>CommonModule.TransformObjects</content>
+ <content>EventSubscription.BeforeWrite_CatalogObjectTransformation</content>
+ <content>EventSubscription.BeforeWrite_DocumentObjectTransformation</content>
+ <content>EventSubscription.OnWrite_ObjectTransformation</content>
+ <content>InformationRegister.TranformedObjectsLink</content>
+ <content>FunctionalOption.UseObjectTransformation</content>
+ <content>Constant.UseObjectTransformation</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
+</mdclass:Subsystem>

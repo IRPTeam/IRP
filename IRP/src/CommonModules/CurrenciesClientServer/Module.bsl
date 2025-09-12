@@ -64,13 +64,27 @@ Function GetParameters_V6(Object, Row) Export
 	Return Parameters;
 EndFunction
 
-Function GetParameters_V7(Object, RowKey, Currency, Amount) Export
+Function GetParameters_V15(Object, Row) Export
+	Parameters = New Structure();
+	Parameters.Insert("Ref"            , Object.Ref);
+	Parameters.Insert("Date"           , Object.Date);
+	Parameters.Insert("Company"        , Object.Company);
+	Parameters.Insert("Currency"       , Object.DocumentCurrency);
+	Parameters.Insert("Agreement"      , Undefined);
+	Parameters.Insert("RowKey"         , Row.Key);
+	Parameters.Insert("DocumentAmount" , ?(Row.AmountCurrencyDr = 0, Row.AmountCurrencyCr, Row.AmountCurrencyDr));
+	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies, Row.Key));
+	Return Parameters;
+EndFunction
+
+
+Function GetParameters_V7(Object, RowKey, Currency, Amount, Agreement = Undefined) Export
 	Parameters = New Structure();
 	Parameters.Insert("Ref"            , Object.Ref);
 	Parameters.Insert("Date"           , Object.Date);
 	Parameters.Insert("Company"        , Object.Company);
 	Parameters.Insert("Currency"       , Currency);
-	Parameters.Insert("Agreement"      , Undefined);
+	Parameters.Insert("Agreement"      , Agreement);
 	Parameters.Insert("RowKey"         , RowKey);
 	Parameters.Insert("DocumentAmount" , Amount);
 	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies, RowKey));
@@ -110,9 +124,9 @@ Function GetParameters_V10(Object, Row) Export
 	Parameters.Insert("Company"        , Object.Company);
 	Parameters.Insert("Currency"       , Row.Currency);
 	If ValueIsFilled(Row.Invoice) Then
-		Parameters.Insert("Agreement"      , Row.Invoice.Agreement);
+		Parameters.Insert("Agreement" , Row.Invoice.Agreement);
 	Else
-		Parameters.Insert("Agreement"      , Undefined);
+		Parameters.Insert("Agreement" , Object.Agreement);
 	EndIf;
 	Parameters.Insert("RowKey"         , Row.Key);
 	Parameters.Insert("DocumentAmount" , Row.TotalAmount);
@@ -155,6 +169,32 @@ Function GetParameters_V13(Object) Export
 	Parameters.Insert("Agreement"      , Object.Agreement);
 	Parameters.Insert("RowKey"         , Undefined);
 	Parameters.Insert("DocumentAmount" , Object.TaxesDifference.Total("Amount"));
+	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies));
+	Return Parameters;
+EndFunction
+
+Function GetParameters_V14(Object, Row) Export
+	Parameters = New Structure();
+	Parameters.Insert("Ref"            , Object.Ref);
+	Parameters.Insert("Date"           , Object.Date);
+	Parameters.Insert("Company"        , Object.Company);
+	Parameters.Insert("Currency"       , Object.Currency);
+	Parameters.Insert("Agreement"      , Undefined);
+	Parameters.Insert("RowKey"         , Row.Key);
+	Parameters.Insert("DocumentAmount" , Row.TotalAmount);
+	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies, Row.Key));
+	Return Parameters;
+EndFunction
+
+Function GetParameters_GR_Preliminary(Object, Row) Export
+	Parameters = New Structure();
+	Parameters.Insert("Ref"            , Object.Ref);
+	Parameters.Insert("Date"           , Object.Date);
+	Parameters.Insert("Company"        , Object.Company);
+	Parameters.Insert("Currency"       , Row.Currency);
+	Parameters.Insert("Agreement"      , Undefined);
+	Parameters.Insert("RowKey"         , Row.Key);
+	Parameters.Insert("DocumentAmount" , Row.PreliminaryAmount);
 	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies));
 	Return Parameters;
 EndFunction
@@ -228,3 +268,13 @@ Procedure CalculateAmountByRow(CurrenciesRow, DocumentAmount) Export
 		CurrenciesRow.Amount = (DocumentAmount * CurrenciesRow.Rate) / CurrenciesRow.Multiplicity;
 	EndIf;
 EndProcedure
+
+Function GetLocalTotalAountsInfo() Export
+	Info = New Structure();
+	Info.Insert("TotalAmount", New Structure("Value, Name", 0, "LocalTotalAmount"));
+	Info.Insert("NetAmount"  , New Structure("Value, Name", 0, "LocalNetAmount"));
+	Info.Insert("TaxAmount"  , New Structure("Value, Name", 0, "LocalTaxAmount"));	
+	Info.Insert("LocalRate"  , New Structure("Value, Name", 0, "LocalRate"));	
+	Return Info;
+EndFunction
+

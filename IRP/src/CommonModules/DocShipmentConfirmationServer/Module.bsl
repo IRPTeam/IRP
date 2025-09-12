@@ -10,6 +10,10 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
 
+Procedure BeforeWriteAtServer(Object, Form, Cancel, CurrentObject, WriteParameters) Export
+	Catalogs.Vehicles.SaveTrailerListToObject(Form, CurrentObject);
+EndProcedure
+
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
@@ -23,6 +27,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
 	SerialLotNumbersServer.UpdateSerialLotNumbersPresentation(Object);
+	Catalogs.Vehicles.LoadTrailerListOnForm(Form, CurrentObject);
 EndProcedure
 
 #EndRegion

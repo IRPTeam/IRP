@@ -133,7 +133,7 @@ Function AccrualList()
 		|	AccrualList.Ref.Branch AS Branch,
 		|	AccrualList.Ref.Currency AS Currency,
 		|	AccrualList.Ref.PaymentPeriod AS PaymentPeriod,
-		|	AccrualList.Ref.CalculationType AS CalculationType,
+		|	AccrualList.CalculationType AS CalculationType,
 		|	AccrualList.Employee,
 		|	AccrualList.ExpenseType,
 		|	AccrualList.ProfitLossCenter,
@@ -155,7 +155,7 @@ Function DeductionList()
 		   |	DeductionList.Ref.Branch AS Branch,
 		   |	DeductionList.Ref.Currency AS Currency,
 		   |	DeductionList.Ref.PaymentPeriod AS PaymentPeriod,
-		   |	DeductionList.Ref.CalculationType AS CalculationType,
+		   |	DeductionList.CalculationType AS CalculationType,
 		   |	DeductionList.Employee,
 		   |	DeductionList.ExpenseType,
 		   |	DeductionList.ProfitLossCenter,
@@ -176,8 +176,9 @@ Function CashAdvanceDeductionList()
 		   |	CashAdvanceDeductionList.Ref.Branch AS Branch,
 		   |	CashAdvanceDeductionList.Ref.Currency AS Currency,
 		   |	CashAdvanceDeductionList.Ref.PaymentPeriod AS PaymentPeriod,
-		   |	CashAdvanceDeductionList.Ref.CalculationType AS CalculationType,
+		   |	CashAdvanceDeductionList.CalculationType AS CalculationType,
 		   |	CashAdvanceDeductionList.Employee,
+		   |	CashAdvanceDeductionList.Agreement,
 		   |	CashAdvanceDeductionList.Amount
 		   |INTO CashAdvanceDeductionList
 		   |FROM
@@ -194,11 +195,11 @@ Function SalaryTaxList()
 		|	PayrollSalaryTaxList.Ref.Company AS Company,
 		|	PayrollSalaryTaxList.Ref.Branch AS Branch,
 		|	PayrollSalaryTaxList.Ref.Currency AS Currency,
-		|	PayrollSalaryTaxList.Ref.Partner AS Partner,
-		|	PayrollSalaryTaxList.Ref.LegalName AS LegalName,
-		|	PayrollSalaryTaxList.Ref.Agreement AS Agreement,
+		|	PayrollSalaryTaxList.Partner AS Partner,
+		|	PayrollSalaryTaxList.LegalName AS LegalName,
+		|	PayrollSalaryTaxList.Agreement AS Agreement,
 		|	PayrollSalaryTaxList.Ref.PaymentPeriod AS PaymentPeriod,
-		|	PayrollSalaryTaxList.Ref.CalculationType AS CalculationType,
+		|	PayrollSalaryTaxList.CalculationType AS CalculationType,
 		|	PayrollSalaryTaxList.Employee AS Employee,
 		|	PayrollSalaryTaxList.ExpenseType AS ExpenseType,
 		|	PayrollSalaryTaxList.ProfitLossCenter AS ProfitLossCenter,
@@ -227,6 +228,7 @@ Function R5022T_Expenses()
 		|	AccrualList.Currency,
 		|	AccrualList.ExpenseType,
 		|	AccrualList.ProfitLossCenter,
+		|	AccrualList.Amount AS AmountWithTaxes,
 		|	AccrualList.Amount AS Amount
 		|INTO R5022T_Expenses
 		|FROM
@@ -244,6 +246,7 @@ Function R5022T_Expenses()
 		|	DeductionList.Currency,
 		|	DeductionList.ExpenseType,
 		|	DeductionList.ProfitLossCenter,
+		|	-DeductionList.Amount AS AmountWithTaxes,
 		|	-DeductionList.Amount AS Amount
 		|FROM
 		|	DeductionList
@@ -260,7 +263,8 @@ Function R5022T_Expenses()
 		|	SalaryTaxList.Currency,
 		|	SalaryTaxList.ExpenseType,
 		|	SalaryTaxList.ProfitLossCenter,
-		|	SalaryTaxList.Amount
+		|	SalaryTaxList.Amount AS AmountWithTaxes,
+		|	SalaryTaxList.Amount AS Amount
 		|FROM
 		|	SalaryTaxList
 		|WHERE
@@ -369,6 +373,7 @@ Function R3027B_EmployeeCashAdvance()
 		|	CashAdvanceDeductionList.Branch,
 		|	CashAdvanceDeductionList.Currency,
 		|	CashAdvanceDeductionList.Employee AS Partner,
+		|	CashAdvanceDeductionList.Agreement,
 		|	CashAdvanceDeductionList.Amount
 		|INTO R3027B_EmployeeCashAdvance
 		|FROM
@@ -610,17 +615,27 @@ Function GetAnalytics_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransaction
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
 	// Credit
-	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-	                                                    Parameters.ObjectData.Partner,
-	                                                    Parameters.ObjectData.Agreement,
-	                                                    Parameters.ObjectData.Currency);
-	AdditonalAnalytics = New Structure();
-	AdditonalAnalytics.Insert("Partner"   ,Parameters.ObjectData.Partner);
-	AdditonalAnalytics.Insert("Agreement" ,Parameters.ObjectData.Agreement);
-	
-	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditonalAnalytics);
-	
+
+	If 	Parameters.RowData.TakeAccountFromTaxes = True Then
+		Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters,
+			New Structure("Tax, VatRate", Parameters.RowData.Tax));
+		AccountingAnalytics.Credit = Credit.OutgoingAccount;
+		AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics,
+			New Structure("Tax, VatRate", Parameters.RowData.Tax));			
+	Else
+		Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+		                                                    Parameters.RowData.Partner,
+		                                                    Parameters.RowData.Agreement,
+		                                                    Parameters.ObjectData.Currency);
+		AdditonalAnalytics = New Structure();
+		AdditonalAnalytics.Insert("Partner"   ,Parameters.RowData.Partner);
+		AdditonalAnalytics.Insert("Agreement" ,Parameters.RowData.Agreement);
+		AdditonalAnalytics.Insert("LegalName" ,Parameters.RowData.LegalName);
+		
+		AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+		AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditonalAnalytics);
+	EndIf;
+
 	Return AccountingAnalytics;
 EndFunction
 
@@ -638,17 +653,26 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Tax
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
 	// Credit
-	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-	                                                    Parameters.ObjectData.Partner,
-	                                                    Parameters.ObjectData.Agreement,
-	                                                    Parameters.ObjectData.Currency);
-	AdditonalAnalytics = New Structure();
-	AdditonalAnalytics.Insert("Partner"   ,Parameters.ObjectData.Partner);
-	AdditonalAnalytics.Insert("Agreement" ,Parameters.ObjectData.Agreement);
+	If 	Parameters.RowData.TakeAccountFromTaxes = True Then
+		Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters,
+			New Structure("Tax, VatRate", Parameters.RowData.Tax));
+		AccountingAnalytics.Credit = Credit.OutgoingAccount;
+		AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics,
+			New Structure("Tax, VatRate", Parameters.RowData.Tax));			
+	Else
 	
-	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditonalAnalytics);
-	
+		Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+		                                                    Parameters.RowData.Partner,
+		                                                    Parameters.RowData.Agreement,
+		                                                    Parameters.ObjectData.Currency);
+		AdditonalAnalytics = New Structure();
+		AdditonalAnalytics.Insert("Partner"   ,Parameters.RowData.Partner);
+		AdditonalAnalytics.Insert("Agreement" ,Parameters.RowData.Agreement);
+		AdditonalAnalytics.Insert("LegalName" ,Parameters.RowData.LegalName);
+		
+		AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+		AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditonalAnalytics);
+	EndIf;
 	Return AccountingAnalytics;
 EndFunction
 
@@ -713,11 +737,11 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNot
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 

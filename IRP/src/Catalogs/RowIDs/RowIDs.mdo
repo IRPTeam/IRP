@@ -110,6 +110,7 @@
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.RowIDs.Form.ItemForm</defaultObjectForm>
  <defaultListForm>Catalog.RowIDs.Form.ListForm</defaultListForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  <attributes uuid="2c75300d-a052-41c5-9a04-d95eda280216">
   <name>AgreementPurchases</name>
   <synonym>
@@ -707,6 +708,111 @@
   </synonym>
   <type>
    <types>EnumRef.RetailGoodsReceiptTransactionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="fcf7a841-5d09-41f3-bc92-679b0c241529">
+  <name>StoreSales</name>
+  <synonym>
+   <key>en</key>
+   <value>EEA81A3E-C137-54B2-270C-CF2293219C1C</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1a4afe6a-f926-4aad-bf87-08b93aa6ce34">
+  <name>StorePurchases</name>
+  <synonym>
+   <key>en</key>
+   <value>9011CDD6-6C2D-5CAD-D219-9FD0ECE919E7</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="9023ed6d-b463-4fdb-8219-e02dcaa51e9e">
+  <name>Item</name>
+  <synonym>
+   <key>en</key>
+   <value>99F24E5D-A67F-D451-1984-452356FFFBF8</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="65999a93-2445-4fea-b229-f26c59b95bb5">
+  <name>IsVariableItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>A4173A08-98F8-DA95-5C99-9448F688C238</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="7bda96d1-2d55-41f6-873b-eb3621714ebb">
+  <name>IsFixedItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>B9B216E7-87E4-BEA0-0B4E-E79F87617766</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2b816e3b-1f5f-4bc3-801f-35afe3ce360c">
+  <name>IsVariableStore</name>
+  <synonym>
+   <key>en</key>
+   <value>71B6B0C0-5D3C-45C8-8CFE-E57EF263592C</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="5b29fd0b-b8ce-4557-ab29-c81c013a6354">
+  <name>IsFixedStore</name>
+  <synonym>
+   <key>en</key>
+   <value>239B2AD9-9A60-719E-EF0E-E1DD5F6F4EC0</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

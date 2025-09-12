@@ -290,4 +290,18 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
+ <dimensions uuid="492eacdd-80a6-4eba-b946-35827a4308e8">
+  <name>TransactionCurrency</name>
+  <synonym>
+   <key>en</key>
+   <value>E6755722-1176-6BB9-9C48-882853DBA941</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

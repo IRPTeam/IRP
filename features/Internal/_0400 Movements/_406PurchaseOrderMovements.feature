@@ -81,6 +81,11 @@ Scenario: _040115 preparation (Purchase order)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Write);"      |
 			| "Documents.PurchaseOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Create document PO, GR (check movements when change quantity)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(1326).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(1326).GetObject().Write(DocumentWriteMode.Posting);"    |
 	# * Check query for Purchase order movements
 	# 	Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"
 	# 	And in the table "Info" I click "Fill movements" button
@@ -175,7 +180,6 @@ Scenario: _040119 check Purchase order movements by the Register  "R1014 Cancele
 			| ''                                               | ''                      | 'Quantity'    | 'Amount'   | 'Net amount'   | 'Company'        | 'Branch'         | 'Multi currency movement type'   | 'Currency'   | 'Order'                                          | 'Item key'   | 'Row key'                                | 'Cancel reason'   | 'Deferred calculation'    |
 			| ''                                               | '12.02.2021 12:44:43'   | '8'           | '164,35'   | '139,28'       | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '36/18SD'    | '62d24ced-315a-473c-b47a-5bc9c4a824e0'   | 'not available'   | 'No'                      |
 			| ''                                               | '12.02.2021 12:44:43'   | '8'           | '960'      | '813,56'       | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '36/18SD'    | '62d24ced-315a-473c-b47a-5bc9c4a824e0'   | 'not available'   | 'No'                      |
-			| ''                                               | '12.02.2021 12:44:43'   | '8'           | '960'      | '813,56'       | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '36/18SD'    | '62d24ced-315a-473c-b47a-5bc9c4a824e0'   | 'not available'   | 'No'                      |
 			| ''                                               | '12.02.2021 12:44:43'   | '8'           | '960'      | '813,56'       | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '36/18SD'    | '62d24ced-315a-473c-b47a-5bc9c4a824e0'   | 'not available'   | 'No'                      |
 		And I close all client application windows
 		
@@ -212,15 +216,12 @@ Scenario: _040121 check Purchase order movements by the Register  "R1010 Purchas
 			| ''                                               | ''                      | 'Quantity'    | 'Amount'   | 'Net amount'   | 'Company'        | 'Branch'         | 'Multi currency movement type'   | 'Currency'   | 'Order'                                          | 'Item key'    | 'Row key'                                | 'Deferred calculation'    |
 			| ''                                               | '12.02.2021 12:44:43'   | '2'           | '51,36'    | '43,53'        | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Internet'    | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | 'No'                      |
 			| ''                                               | '12.02.2021 12:44:43'   | '2'           | '300'      | '254,24'       | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Internet'    | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | 'No'                      |
-			| ''                                               | '12.02.2021 12:44:43'   | '2'           | '300'      | '254,24'       | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Internet'    | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | 'No'                      |
 			| ''                                               | '12.02.2021 12:44:43'   | '2'           | '300'      | '254,24'       | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'Internet'    | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | 'No'                      |
 			| ''                                               | '12.02.2021 12:44:43'   | '5'           | '171,2'    | '145,09'       | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '36/Yellow'   | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | 'No'                      |
 			| ''                                               | '12.02.2021 12:44:43'   | '5'           | '1 000'    | '847,46'       | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '36/Yellow'   | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | 'No'                      |
-			| ''                                               | '12.02.2021 12:44:43'   | '5'           | '1 000'    | '847,46'       | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '36/Yellow'   | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | 'No'                      |
 			| ''                                               | '12.02.2021 12:44:43'   | '5'           | '1 000'    | '847,46'       | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '36/Yellow'   | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | 'No'                      |
 			| ''                                               | '12.02.2021 12:44:43'   | '10'          | '171,2'    | '145,09'       | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'S/Yellow'    | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'No'                      |
 			| ''                                               | '12.02.2021 12:44:43'   | '10'          | '1 000'    | '847,46'       | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'S/Yellow'    | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'No'                      |
-			| ''                                               | '12.02.2021 12:44:43'   | '10'          | '1 000'    | '847,46'       | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'S/Yellow'    | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'No'                      |
 			| ''                                               | '12.02.2021 12:44:43'   | '10'          | '1 000'    | '847,46'       | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'Purchase order 115 dated 12.02.2021 12:44:43'   | 'S/Yellow'    | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'No'                      |
 		And I close all client application windows
 		
@@ -419,6 +420,107 @@ Scenario: _0401239 Purchase order clear posting/mark for deletion
 			| 'R1012 Invoice closing of purchase orders'    |
 		And I close all client application windows
 
+Scenario: _0401240 check Purchase order movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	And I go to line in "List" table
+		| 'Number' |
+		| '115'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase order 115 dated 12.02.2021 12:44:43' | ''                                             | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'        | ''                                             | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                             | 'Document'                                     | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                             | 'Purchase order 115 dated 12.02.2021 12:44:43' | '12.02.2021 12:44:43' | '115'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		
 
 
-	
+
+Scenario: _0401241 check Purchase order and Goods receipt movements by the Register  "TM1010B RowIDMovements" when change quantity
+	And I close all client application windows
+	* Check movements by the Register "TM1010B Row ID movements" for PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 326'  |
+		And I click "Registrations report info" button
+		And I select "TM1010B Row ID movements" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase order 1 326 dated 06.08.2025 11:26:47' | ''                    | ''           | ''                                     | ''                                     | ''      | ''                                               | ''                                     | ''         |
+			| 'Register  "TM1010B Row ID movements"'           | ''                    | ''           | ''                                     | ''                                     | ''      | ''                                               | ''                                     | ''         |
+			| ''                                               | 'Period'              | 'RecordType' | 'Row ref'                              | 'Row ID'                               | 'Step'  | 'Basis'                                          | 'Basis key'                            | 'Quantity' |
+			| ''                                               | '06.08.2025 11:26:47' | 'Receipt'    | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'PI&GR' | 'Purchase order 1 326 dated 06.08.2025 11:26:47' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | '10'       |
+		And I close all client application windows
+	* Check movements by the Register "TM1010B Row ID movements" for GR
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 326'  |
+		And I click "Registrations report info" button
+		And I select "TM1010B Row ID movements" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Goods receipt 1 326 dated 06.08.2025 11:27:04' | ''                    | ''           | ''                                     | ''                                     | ''      | ''                                               | ''                                     | ''         |
+			| 'Register  "TM1010B Row ID movements"'          | ''                    | ''           | ''                                     | ''                                     | ''      | ''                                               | ''                                     | ''         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Row ref'                              | 'Row ID'                               | 'Step'  | 'Basis'                                          | 'Basis key'                            | 'Quantity' |
+			| ''                                              | '06.08.2025 11:27:04' | 'Receipt'    | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'PI&SC' | 'Goods receipt 1 326 dated 06.08.2025 11:27:04'  | 'be3bb2fe-1f17-41e3-9da2-93e15d53c3be' | '10'       |
+			| ''                                              | '06.08.2025 11:27:04' | 'Expense'    | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'PI&GR' | 'Purchase order 1 326 dated 06.08.2025 11:26:47' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | '10'       |
+	* Change quantity in GR and check movements
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 326'  |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "12,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I click "Registrations report info" button
+		And I select "TM1010B Row ID movements" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Goods receipt 1 326 dated 06.08.2025 11:27:04' | ''                    | ''           | ''                                     | ''                                     | ''      | ''                                               | ''                                     | ''         |
+			| 'Register  "TM1010B Row ID movements"'          | ''                    | ''           | ''                                     | ''                                     | ''      | ''                                               | ''                                     | ''         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Row ref'                              | 'Row ID'                               | 'Step'  | 'Basis'                                          | 'Basis key'                            | 'Quantity' |
+			| ''                                              | '06.08.2025 11:27:04' | 'Receipt'    | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'PI&SC' | 'Goods receipt 1 326 dated 06.08.2025 11:27:04'  | 'be3bb2fe-1f17-41e3-9da2-93e15d53c3be' | '2'        |
+			| ''                                              | '06.08.2025 11:27:04' | 'Receipt'    | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'PI&SC' | 'Goods receipt 1 326 dated 06.08.2025 11:27:04'  | 'be3bb2fe-1f17-41e3-9da2-93e15d53c3be' | '10'       |
+			| ''                                              | '06.08.2025 11:27:04' | 'Expense'    | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'PI&GR' | 'Purchase order 1 326 dated 06.08.2025 11:26:47' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | '10'       |
+	* Change quantity in PO and check movements for PO and GR
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 326'  |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I click "Edit quantity" button
+		And I input "12,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Post" button
+		And I click "Registrations report info" button
+		And I select "TM1010B Row ID movements" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase order 1 326 dated 06.08.2025 11:26:47' | ''                    | ''           | ''                                     | ''                                     | ''      | ''                                               | ''                                     | ''         |
+			| 'Register  "TM1010B Row ID movements"'           | ''                    | ''           | ''                                     | ''                                     | ''      | ''                                               | ''                                     | ''         |
+			| ''                                               | 'Period'              | 'RecordType' | 'Row ref'                              | 'Row ID'                               | 'Step'  | 'Basis'                                          | 'Basis key'                            | 'Quantity' |
+			| ''                                               | '06.08.2025 11:26:47' | 'Receipt'    | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'PI&GR' | 'Purchase order 1 326 dated 06.08.2025 11:26:47' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | '12'       |		
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 326'  |
+		And I click "Registrations report info" button
+		And I select "TM1010B Row ID movements" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Goods receipt 1 326 dated 06.08.2025 11:27:04' | ''                    | ''           | ''                                     | ''                                     | ''      | ''                                               | ''                                     | ''         |
+			| 'Register  "TM1010B Row ID movements"'          | ''                    | ''           | ''                                     | ''                                     | ''      | ''                                               | ''                                     | ''         |
+			| ''                                              | 'Period'              | 'RecordType' | 'Row ref'                              | 'Row ID'                               | 'Step'  | 'Basis'                                          | 'Basis key'                            | 'Quantity' |
+			| ''                                              | '06.08.2025 11:27:04' | 'Receipt'    | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'PI&SC' | 'Goods receipt 1 326 dated 06.08.2025 11:27:04'  | 'be3bb2fe-1f17-41e3-9da2-93e15d53c3be' | '12'       |
+			| ''                                              | '06.08.2025 11:27:04' | 'Expense'    | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | 'PI&GR' | 'Purchase order 1 326 dated 06.08.2025 11:26:47' | 'e10da78f-963a-4611-ae85-596ce7b66f3e' | '12'       |									
+	And I close all client application windows

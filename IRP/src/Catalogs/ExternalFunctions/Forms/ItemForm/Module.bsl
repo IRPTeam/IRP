@@ -184,7 +184,7 @@ Procedure Scheduler(Command)
 		ScheduledJob = JobScheduleInfo; // JobSchedule
 	EndIf;
 	EditSchedule = New ScheduledJobDialog(ScheduledJob);
-	EditSchedule.Show(New NotifyDescription("AfterSchedulerChange", ThisObject));
+	EditSchedule.Show(New CallbackDescription("AfterSchedulerChange", ThisObject));
 EndProcedure
 
 // After scheduler change.

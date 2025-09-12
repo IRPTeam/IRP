@@ -1,17 +1,16 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter", New Structure("Basises, Ref", CommandParameter, PredefinedValue(
-		"Document.GoodsReceipt.EmptyRef")));
+	FormParameters.Insert("Filter", 
+		New Structure("Basises, Ref", CommandParameter, 
+		PredefinedValue("Document.GoodsReceipt.EmptyRef")));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo());
 	FormParameters.Insert("SetAllCheckedOnOpen", True);
-
-	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+	RowIDInfoClient.OpenForm_AddLinkedDocumentRows(Undefined, ThisObject, FormParameters, "AddDocumentRowsContinue");
 EndProcedure
 
 &AtClient
-Procedure AddDocumentRowsContinue(Result, AdditionalParameters) Export
+Procedure AddDocumentRowsContinue(Result, NotifyParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;

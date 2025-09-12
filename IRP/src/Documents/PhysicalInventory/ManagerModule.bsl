@@ -182,10 +182,10 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	If StatusInfo.Posting Then
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod",
@@ -248,10 +248,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -259,6 +255,20 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+	QueryArray.Add(T3010S_RowIDInfo());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return "SELECT
@@ -294,16 +304,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
-	QueryArray.Add(R4031B_GoodsInTransitIncoming());
-	QueryArray.Add(T3010S_RowIDInfo());
-	Return QueryArray;
-EndFunction
 
 Function R4011B_FreeStocks()
 	Return "SELECT
@@ -381,10 +381,11 @@ Function R4032B_GoodsInTransitOutgoing()
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	ItemList.Period,
-		|	ItemList.Store,
-		|	ItemList.Basis,
-		|	ItemList.ItemKey,
+		|	ItemList.Period AS Period,
+		|	ItemList.Store AS Store,
+		|	ItemList.Basis AS Basis,
+		|	ItemList.ItemKey AS ItemKey,
+		|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
 		|	ItemList.WriteOffQuantity AS Quantity
 		|INTO R4032B_GoodsInTransitOutgoing
 		|FROM

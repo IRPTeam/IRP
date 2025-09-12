@@ -18,4 +18,10 @@
  <content>Catalog.DepreciationSchedules</content>
  <content>Document.ModernizationOfFixedAsset</content>
  <content>Document.CalculationMovementCosts</content>
+ <content>Report.F0010_FixedAssetsTransferCost</content>
+ <content>Report.F0011_InventoryBook</content>
+ <content>Report.F0012_DepreciationStatement</content>
+ <content>Document.FixedAssetRevaluation</content>
+ <content>Document.DepreciationCalculation</content>
+ <content>Report.R8510B_BookValueOfFixedAsset</content>
 </mdclass:FunctionalOption>

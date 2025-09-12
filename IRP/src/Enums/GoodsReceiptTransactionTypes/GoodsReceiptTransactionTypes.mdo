@@ -47,4 +47,11 @@
    <value>4AC06505-546F-C6C2-2DB9-9BE59031FDE3</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="ae554611-5d4f-4de1-ad7e-597675249d02">
+  <name>PreliminaryStock</name>
+  <synonym>
+   <key>en</key>
+   <value>F32F7447-28BB-8645-578F-F231ADE1E075</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

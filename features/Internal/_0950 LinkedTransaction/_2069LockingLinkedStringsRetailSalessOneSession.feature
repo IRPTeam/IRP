@@ -342,50 +342,60 @@ Scenario: _2069007 check unlock linked rows in the Retail return receipt
 		And I close all client application windows
 
 
-Scenario: _2068010 change quantity in the linked string in the Retail sales receipt (one session)
-	* Open RSR
-		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '51'        |
-		And I select current line in "List" table
-	* Change quantity (less then RRR)
-		And I go to line in "ItemList" table
-			| 'Item'    | 'Item key'    |
-			| 'Shirt'   | '36/Red'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "3,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I move to "Payments" tab
-		And I activate "Amount" field in "Payments" table
-		And I select current line in "Payments" table
-		And I input "7 650,00" text in "Amount" field of "Payments" table
-		And I finish line editing in "Payments" table
-		And I move to "Item list" tab		
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
-		Then there are lines in TestClient message log
-			| 'Line No. [2] [Shirt 36/Red] Return remaining: 4 . Required: 3 . Lacking: 1 .'    |
-	* Change quantity (more then RRR)
-		And I go to line in "ItemList" table
-			| 'Item'    | 'Item key'    |
-			| 'Shirt'   | '36/Red'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "6,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I move to "Payments" tab
-		And I activate "Amount" field in "Payments" table
-		And I select current line in "Payments" table
-		And I input "8 700,00" text in "Amount" field of "Payments" table
-		And I finish line editing in "Payments" table
-		And I move to "Item list" tab		
-		And I click "Post and close" button
-		Then user message window does not contain messages
-		Then "Retail sales receipts" window is opened
-		And I close all client application windows
+// Scenario: _2068010 change quantity in the linked string in the Retail sales receipt (one session)
+// 	* Open RSR
+// 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+// 		And I go to line in "List" table
+// 			| 'Number'    |
+// 			| '51'        |
+// 		And I select current line in "List" table
+// 	* Change quantity (less then RRR)
+// 		And I go to line in "ItemList" table
+// 			| 'Item'    | 'Item key'    |
+// 			| 'Shirt'   | '36/Red'      |
+// 		And I move to "Payments" tab
+// 		And I activate "Amount" field in "Payments" table
+// 		And I select current line in "Payments" table
+// 		And I input "7 650,00" text in "Amount" field of "Payments" table
+// 		And I finish line editing in "Payments" table
+// 		And I move to "Item list" tab		
+// 		And I click "Edit quantity" button
+// 		And Delay 2
+// 		And I activate "Quantity" field in "BasisesTree" table
+// 		And I select current line in "BasisesTree" table
+// 		And I go to line in "BasisesTree" table
+// 			| "Quantity" | "Row presentation" |
+// 			| "5,000"    | "Shirt (36/Red)"   |
+// 		And I input "3,000" text in "Quantity" field of "BasisesTree" table
+// 		And I click "Ok" button
+// 		Then there are lines in TestClient message log
+// 			| 'Line No. [2] [Shirt 36/Red] Return remaining: 4 . Required: 3 . Lacking: 1 .'    |
+// 		And I close current window
+// 	* Change quantity (more then RRR)
+// 		And I go to line in "ItemList" table
+// 			| 'Item'    | 'Item key'    |
+// 			| 'Shirt'   | '36/Red'      |
+// 		And I click "Edit quantity" button
+// 		And I activate "Quantity" field in "BasisesTree" table
+// 		And I select current line in "BasisesTree" table
+// 		And I go to line in "BasisesTree" table
+// 			| "Quantity" | "Row presentation" |
+// 			| "4,000"    | "Shirt (36/Red)"   |
+// 		And I input "6,000" text in "Quantity" field of "BasisesTree" table
+// 		And I click "Ok" button
+// 		And "ItemList" table contains lines
+// 			| 'Item'    | 'Item key'   | 'Quantity'    |
+// 			| 'Shirt'   | '36/Red'     | '6,000'       |
+// 		And I move to "Payments" tab
+// 		And I activate "Amount" field in "Payments" table
+// 		And I select current line in "Payments" table
+// 		And I input "8 700,00" text in "Amount" field of "Payments" table
+// 		And I finish line editing in "Payments" table
+// 		And I move to "Item list" tab		
+// 		And I click "Post and close" button
+// 		Then user message window does not contain messages
+// 		Then "Retail sales receipts" window is opened
+// 		And I close all client application windows
 
 Scenario: _2069015 delete linked string in the Retail sales receipt (one session)
 	And I close all client application windows

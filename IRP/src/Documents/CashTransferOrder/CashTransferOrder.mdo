@@ -60,7 +60,7 @@
   <objectField>Document.CashTransferOrder.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.CashTransferOrder.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.CashTransferOrder.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.CashTransferOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.CashTransferOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -83,6 +83,7 @@
  <defaultChoiceForm>Document.CashTransferOrder.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -330,6 +331,66 @@
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1ce5316e-4a54-42d9-8fa5-471be8c944f0">
+  <name>SendLocalTotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>A44E4003-866B-67AA-AD1A-A7112FEE05CE</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2ba28cb4-ca2c-49b2-bcc6-d5fa040dfb9f">
+  <name>SendLocalRate</name>
+  <synonym>
+   <key>en</key>
+   <value>B3ED7A10-49F1-41B2-2455-5AACBF504655</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeCurrencyRate</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="75c64ee4-e3bf-4a07-8f16-4876bcb338f1">
+  <name>ReceiveLocalTotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>7963AA95-E584-2BBC-C4DC-C5553EB3880F</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e4234682-7b2c-436c-b50b-bbed077b048d">
+  <name>ReceiveLocalRate</name>
+  <synonym>
+   <key>en</key>
+   <value>63028277-D525-3DB8-86FC-CACFF8443845</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeCurrencyRate</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

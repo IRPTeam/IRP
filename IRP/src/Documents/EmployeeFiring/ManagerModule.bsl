@@ -96,6 +96,7 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(T9510S_Staffing());
+	QueryArray.Add(R9541T_VacationUsage());
 	Return QueryArray;
 EndFunction
 
@@ -119,6 +120,29 @@ Function T9510S_Staffing()
 		|	Document.EmployeeFiring AS EmployeeFiring
 		|WHERE
 		|	EmployeeFiring.Ref = &Ref";
+EndFunction
+
+Function R9541T_VacationUsage()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	EmployeeFiring.Date AS Period,
+		|	EmployeeFiring.Company,
+		|	EmployeeFiring.Employee,
+		|	ISNULL(R9541T_VacationUsageBalance.DaysBalance, 0) + ISNULL(R9541T_VacationUsageTurnovers.DaysExpense, 0) AS Days
+		|INTO R9541T_VacationUsage
+		|FROM
+		|	Document.EmployeeFiring AS EmployeeFiring
+		|		LEFT JOIN AccumulationRegister.R9541T_VacationUsage.Balance AS R9541T_VacationUsageBalance
+		|		ON EmployeeFiring.Company = R9541T_VacationUsageBalance.Company
+		|		AND EmployeeFiring.Employee = R9541T_VacationUsageBalance.Employee
+		|		LEFT JOIN AccumulationRegister.R9541T_VacationUsage.Turnovers(,, Recorder,) AS R9541T_VacationUsageTurnovers
+		|		ON R9541T_VacationUsageTurnovers.Recorder = &Ref
+		|		AND R9541T_VacationUsageTurnovers.Company = EmployeeFiring.Company
+		|		AND R9541T_VacationUsageTurnovers.Employee = EmployeeFiring.Employee
+		|WHERE
+		|	EmployeeFiring.Ref = &Ref
+		|	AND ISNULL(R9541T_VacationUsageBalance.DaysBalance, 0) + ISNULL(R9541T_VacationUsageTurnovers.DaysExpense, 0) <> 0";
 EndFunction
 
 #EndRegion

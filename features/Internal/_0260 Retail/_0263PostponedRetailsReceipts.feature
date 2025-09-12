@@ -289,8 +289,12 @@ Scenario: _0263103 create postponed RSR without a reservation (CRS used)
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$PostponedRSR2$$'              |
-			| 'Document registrations records' |
+			| '$$PostponedRSR2$$'                     | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Document registrations records'        | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"' | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Dimensions'        | 'Attributes'            | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Document'          | 'Date'                  | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                      | '$$PostponedRSR2$$' | '$$DatePostponedRSR2$$' | '*'      | '*'           | ''            | 'CI'     | ''       | 'No'                    |
 		And I close current window
 
 		
@@ -353,8 +357,12 @@ Scenario: _0263104 create postponed RRR without a reservation and without bases 
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$PostponedRRR1$$'              |
-			| 'Document registrations records' |
+			| '$$PostponedRRR1$$'                     | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Document registrations records'        | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"' | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Dimensions'        | 'Attributes'            | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Document'          | 'Date'                  | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                      | '$$PostponedRRR1$$' | '$$DatePostponedRRR1$$' | '*'      | '*'           | ''            | 'CI'     | ''       | 'No'                    |
 		And I close current window
 
 
@@ -560,11 +568,11 @@ Scenario: _0263106 processing a postponed RRR
 		And I select current line in "List" table
 		And "ItemList" table became equal
 			| '#' | 'Retail sales receipt' | 'Item'                                                    | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Return reason' | 'Source of origins' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' | 'Landed cost tax' |
-			| '1' | ''                     | 'Product 1 with SLN'                                      | ''             | 'PZU'      | ''                   | 'No'                 | '15,25'      | '8908899877'         | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
-			| '2' | ''                     | 'Product 6 with SLN'                                      | ''             | 'PZU'      | ''                   | 'No'                 | '15,25'      | '57897909799'        | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
-			| '3' | ''                     | 'Product 9 with SLN (control code string, without check)' | ''             | 'ODS'      | ''                   | 'No'                 | '15,25'      | '999999999'          | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
-			| '4' | ''                     | 'Dress'                                                   | ''             | 'XS/Blue'  | ''                   | 'No'                 | '158,64'     | ''                   | 'pcs'  | ''              | ''                  | '2,000'    | '520,00' | '881,36'     | '1 040,00'     | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
-			| '5' | ''                     | 'Service'                                                 | ''             | 'Rent'     | ''                   | 'No'                 | '15,25'      | ''                   | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '1' | ''                     | 'Product 1 with SLN'                                      | ''             | 'PZU'      | 'Shop 02'            | 'No'                 | '15,25'      | '8908899877'         | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '2' | ''                     | 'Product 6 with SLN'                                      | ''             | 'PZU'      | 'Shop 02'            | 'No'                 | '15,25'      | '57897909799'        | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '3' | ''                     | 'Product 9 with SLN (control code string, without check)' | ''             | 'ODS'      | 'Shop 02'            | 'No'                 | '15,25'      | '999999999'          | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '4' | ''                     | 'Dress'                                                   | ''             | 'XS/Blue'  | 'Shop 02'            | 'No'                 | '158,64'     | ''                   | 'pcs'  | ''              | ''                  | '2,000'    | '520,00' | '881,36'     | '1 040,00'     | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
+			| '5' | ''                     | 'Service'                                                 | ''             | 'Rent'     | 'Shop 02'            | 'No'                 | '15,25'      | ''                   | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            | ''                |
 		Then the form attribute named "StatusType" became equal to "Completed"
 	* Check movements
 		And I click "Registrations report" button
@@ -646,6 +654,26 @@ Scenario: _0263111 create postponed return with basis document
 			| 'Amount' |'Retail customer' |
 			| '920,00' |''                |
 		And I select current line in "Receipts" table
+		And I go to line in "ItemList" table
+			| "Item"                                                    | "Serials"   |
+			| "Product 9 with SLN (control code string, without check)" | "999999999" |
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1" text in the field named "Barcode"
+			And I move to the next attribute
+		And I go to line in "ItemList" table
+			| "Item"               | "Serials"     |
+			| "Product 6 with SLN" | "57897909799" |
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+			And I move to the next attribute		
 		And I click "Payment Return" button
 		And I click "Cash (/)" button
 		And I click "OK" button

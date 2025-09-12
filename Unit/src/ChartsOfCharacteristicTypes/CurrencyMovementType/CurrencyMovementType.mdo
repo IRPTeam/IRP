@@ -21,6 +21,7 @@
     <codeAllowedLength>Checked</codeAllowedLength>
     <descriptionLength>Checked</descriptionLength>
   </extension>
+  <type/>
   <codeAllowedLength>Variable</codeAllowedLength>
   <attributes uuid="10234ece-e0e7-42a2-bb49-47d16a9f4d2a">
     <name>DeferredCalculation</name>
@@ -33,6 +34,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="4695ec89-0581-41ad-ab80-2dbd6913f7c0">
     <name>Currency</name>
@@ -45,6 +47,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="125a412a-3b5f-4c8e-8887-69f1b5d32a19">
     <name>Source</name>
@@ -57,6 +60,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="e2bd6ab9-2236-4a0c-b8a3-0351897a6ad5">
     <name>Type</name>
@@ -69,5 +73,6 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
 </mdclass:ChartOfCharacteristicTypes>

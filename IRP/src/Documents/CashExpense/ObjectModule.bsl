@@ -3,12 +3,17 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 	
-	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.PaymentList);
-	For Each Row In ThisObject.PaymentList Do
-		Parameters = CurrenciesClientServer.GetParameters_V2(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		
+		CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.PaymentList);
+		For Each Row In ThisObject.PaymentList Do
+			Parameters = CurrenciesClientServer.GetParameters_V2(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+	
+	EndIf;
+	
 	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
 EndProcedure
 

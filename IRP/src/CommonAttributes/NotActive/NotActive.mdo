@@ -49,6 +49,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.PrintFormTemplates</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.LegalNameContracts</metadata>
   <use>Use</use>
  </content>
@@ -73,7 +77,7 @@
   <use>Use</use>
  </content>
  <content>
-  <metadata>Catalog.TransactionsKeys</metadata>
+  <metadata>Catalog.DELETE_TransactionsKeys</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -97,7 +101,7 @@
   <use>Use</use>
  </content>
  <content>
-  <metadata>Catalog.AdvancesKeys</metadata>
+  <metadata>Catalog.DELETE_AdvancesKeys</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -173,6 +177,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.ObjectLocations</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.FixedAssets</metadata>
   <use>Use</use>
  </content>
@@ -210,6 +218,10 @@
  </content>
  <content>
   <metadata>Catalog.AccessProfiles</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ExtDimensions</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -253,6 +265,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.Cities</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.DataAreas</metadata>
   <use>Use</use>
  </content>
@@ -274,6 +290,10 @@
  </content>
  <content>
   <metadata>Catalog.RowIDs</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.NumeratorBasicRules</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -310,6 +330,10 @@
  </content>
  <content>
   <metadata>Catalog.SourceOfOrigins</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ExecutionTemplates</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -370,6 +394,10 @@
  </content>
  <content>
   <metadata>Catalog.UserGroups</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.NumeratorGroups</metadata>
   <use>Use</use>
  </content>
  <content>

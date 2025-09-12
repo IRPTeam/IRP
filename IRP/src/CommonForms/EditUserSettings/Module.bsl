@@ -663,6 +663,67 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	
 	RowOwner.Rows.Add(NewRow_PointOfSales);
 	
+	// Additional settings for Attached files to documents control
+	FullName = "DataProcessor.AttachedFilesToDocumentsControl.AdditionalSettings";
+		
+	NewRow_AttachedFilesToDocumentsControl = New Structure();
+	NewRow_AttachedFilesToDocumentsControl.Insert("FullName"     , FullName);
+	NewRow_AttachedFilesToDocumentsControl.Insert("Name"         , "AttachedFilesToDocumentsControl");
+	NewRow_AttachedFilesToDocumentsControl.Insert("Synonym"      , R().Add_Settings_013);
+	NewRow_AttachedFilesToDocumentsControl.Insert("PictureIndex" , 11);
+	NewRow_AttachedFilesToDocumentsControl.Insert("Rows"         , New Array());
+	
+	// change filters
+	NewSetting = New Structure();
+	NewSetting.Insert("Name", "EnableChangeFilters");
+	NewSetting.Insert("FullName", FullName + ".EnableChangeFilters");
+	NewSetting.Insert("Synonym" , R().Add_Settings_014);
+	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
+	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
+	NewSetting.Insert("SettingID"      , New UUID());
+	NewSetting.Insert("PictureIndex"   , 12);
+	NewRow_AttachedFilesToDocumentsControl.Rows.Add(NewSetting);
+	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
+	
+	// check mode
+	NewSetting = New Structure();
+	NewSetting.Insert("Name", "EnableCheckMode");
+	NewSetting.Insert("FullName", FullName + ".EnableCheckMode");
+	NewSetting.Insert("Synonym" , R().Add_Settings_015);
+	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
+	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
+	NewSetting.Insert("SettingID"      , New UUID());
+	NewSetting.Insert("PictureIndex"   , 12);
+	NewRow_AttachedFilesToDocumentsControl.Rows.Add(NewSetting);
+	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
+	
+	//Company
+	NewSetting = New Structure();
+	NewSetting.Insert("Name", "Company");
+	NewSetting.Insert("FullName", FullName + ".Company");
+	NewSetting.Insert("Synonym" , R().Add_Settings_016);
+	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
+	NewSetting.Insert("TypeRestriction", New TypeDescription("CatalogRef.Companies"));
+	NewSetting.Insert("SettingID"      , New UUID());
+	NewSetting.Insert("PictureIndex"   , 3);
+	NewRow_AttachedFilesToDocumentsControl.Rows.Add(NewSetting);
+	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
+	
+	//Branch
+	NewSetting = New Structure();
+	NewSetting.Insert("Name", "Branch");
+	NewSetting.Insert("FullName", FullName + ".Branch");
+	NewSetting.Insert("Synonym" , R().Add_Settings_017);
+	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
+	NewSetting.Insert("TypeRestriction", New TypeDescription("CatalogRef.BusinessUnits"));
+	NewSetting.Insert("SettingID"      , New UUID());
+	NewSetting.Insert("PictureIndex"   , 3);
+	NewRow_AttachedFilesToDocumentsControl.Rows.Add(NewSetting);
+	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
+	
+	RowOwner.Rows.Add(NewRow_AttachedFilesToDocumentsControl);
+	//
+	
 	// Additional settings for all documents
 	FullName = "Documents.AllDocuments.AdditionalSettings";
 	
@@ -747,6 +808,30 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	
 	RowOwner.Rows.Add(NewRow_Documents);
 	
+	//All Catalogs
+	FullName = "Catalogs.AllCatalogs.AdditionalSettings";
+	
+	NewRow_Catalogs = New Structure();
+	NewRow_Catalogs.Insert("FullName"     , FullName);
+	NewRow_Catalogs.Insert("Name"         , "Catalogs");
+	NewRow_Catalogs.Insert("Synonym"      , R().Add_Settings_018);
+	NewRow_Catalogs.Insert("PictureIndex" , 8);
+	NewRow_Catalogs.Insert("Rows"         , New Array());
+	
+	// DisableAutomaticCreationOfCompanyAndAgreementForPartner
+	NewSetting = New Structure();
+	NewSetting.Insert("Name", "DisableAutomaticCreationOfCompanyAndAgreementForPartner");
+	NewSetting.Insert("FullName", FullName + ".DisableAutomaticCreationOfCompanyAndAgreementForPartner");
+	NewSetting.Insert("Synonym" , R().Add_Settings_019);
+	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
+	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
+	NewSetting.Insert("SettingID"      , New UUID());
+	NewSetting.Insert("PictureIndex"   , 12);
+	NewRow_Catalogs.Rows.Add(NewSetting);
+	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
+	
+	RowOwner.Rows.Add(NewRow_Catalogs);
+
 	Return True;
 EndFunction
 

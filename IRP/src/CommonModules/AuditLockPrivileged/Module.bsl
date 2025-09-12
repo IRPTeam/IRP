@@ -47,8 +47,19 @@ Function DocumentIsLocked(DocRef) Export
 EndFunction	
 
 Procedure SetLock(DocRef) Export
-	If Not IsInRole(Metadata.Roles.AuditLockSet) Then
+	If Not (IsInRole(Metadata.Roles.AuditLockSet) OR IsInRole(Metadata.Roles.FullAccess)) Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().AuditLock_003);
+		Return;
+	EndIf;
+	
+	If DocRef.Metadata().Posting = Metadata.ObjectProperties.Posting.Allow
+		And Not DocRef.Posted Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().AuditLock_005);
+		Return;			
+	EndIf;
+	
+	If DocRef.DeletionMark Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().AuditLock_006);
 		Return;
 	EndIf;
 	
@@ -62,7 +73,7 @@ Procedure SetLock(DocRef) Export
 EndProcedure
 
 Procedure UnsetLock(DocRef) Export
-	If Not IsInRole(Metadata.Roles.AuditLockUnset) Then
+	If Not (IsInRole(Metadata.Roles.AuditLockUnset) OR IsInRole(Metadata.Roles.FullAccess)) Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().AuditLock_003);
 		Return;
 	EndIf;

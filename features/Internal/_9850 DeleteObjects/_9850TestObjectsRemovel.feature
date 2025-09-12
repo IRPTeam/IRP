@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @ObjectsRemovel
@@ -287,8 +287,12 @@ When Create catalog PartnerItems objects (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
-* Posting CashPayment
-		Given I open hyperlink "e1cib/list/Document.CashPayment"
+* Posting BankReceipt
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);"    |
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
@@ -296,17 +300,19 @@ When Create catalog PartnerItems objects (test data base)
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
-* Posting BankReceipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
+ 		And Delay "10"
 * Posting CashReceipt
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashPayment.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"    |
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
+* Posting CashPayment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
 * Posting CashExpense
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		Then I select all lines of "List" table

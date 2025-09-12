@@ -46,13 +46,17 @@ EndProcedure
 Procedure TypeOnChange(Item)
 	If Object.Type = PredefinedValue("Enum.ItemTypes.Service") Then
 		Object.UseSerialLotNumber = False;
-		Object.StockBalanceDetail = PredefinedValue("Enum.StockBalanceDetail.ByItemKey");
+		
+		Object.StockBalanceDetailSerialLotNumber = False;
+		Object.StockBalanceDetailSourceOfOrigins = False;
+		Object.BatchBalanceDetailSerialLotNumber = False;
+		Object.BatchBalanceDetailSourceOfOrigins = False;
+		
 	ElsIf Object.Type = PredefinedValue("Enum.ItemTypes.Certificate") Then
 		Object.UseSerialLotNumber = True;
 		Object.AlwaysAddNewRowAfterScan = True;
 		Object.EachSerialLotNumberIsUnique = True;
 		Object.NotUseLineGrouping = True;
-		Object.StockBalanceDetail = PredefinedValue("Enum.StockBalanceDetail.EmptyRef");
 		Object.SingleRow = True;
 	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);
@@ -61,7 +65,8 @@ EndProcedure
 &AtClient
 Procedure UseSerialLotNumberOnChange(Item)
 	If Not Object.UseSerialLotNumber Then
-		Object.StockBalanceDetail = PredefinedValue("Enum.StockBalanceDetail.ByItemKey");
+		Object.StockBalanceDetailSerialLotNumber = False;
+		Object.BatchBalanceDetailSerialLotNumber = False;
 		Object.SingleRow = False;
 	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);
@@ -94,16 +99,25 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.UseSerialLotNumber.ReadOnly = False;
 		Form.Items.AlwaysAddNewRowAfterScan.ReadOnly = Object.UseSerialLotNumber And Object.SingleRow;
 		Form.Items.EachSerialLotNumberIsUnique.ReadOnly = False;
-		Form.Items.StockBalanceDetail.ReadOnly = Not Object.UseSerialLotNumber;
+		
+		Form.Items.StockBalanceDetailSerialLotNumber.ReadOnly = Not Object.UseSerialLotNumber;
+		Form.Items.BatchBalanceDetailSerialLotNumber.ReadOnly = Not Object.UseSerialLotNumber;
+		
 		Form.Items.NotUseLineGrouping.ReadOnly = Object.SingleRow OR Object.AlwaysAddNewRowAfterScan;
 	ElsIf IsService Then
 		Form.Items.UseSerialLotNumber.ReadOnly = False;
 		Form.Items.AlwaysAddNewRowAfterScan.ReadOnly = False;
 		Form.Items.EachSerialLotNumberIsUnique.ReadOnly = False;
-		Form.Items.StockBalanceDetail.ReadOnly = Not Object.UseSerialLotNumber;
+		
+		Form.Items.StockBalanceDetailSerialLotNumber.ReadOnly = Not Object.UseSerialLotNumber;
+		Form.Items.BatchBalanceDetailSerialLotNumber.ReadOnly = Not Object.UseSerialLotNumber;
+		
 		Form.Items.NotUseLineGrouping.ReadOnly = Object.SingleRow OR Object.AlwaysAddNewRowAfterScan;
 	ElsIf IsCertificate Then
-		Form.Items.StockBalanceDetail.ReadOnly = True;
+		
+		Form.Items.StockBalanceDetailSerialLotNumber.ReadOnly = Not Object.UseSerialLotNumber;
+		Form.Items.BatchBalanceDetailSerialLotNumber.ReadOnly = Not Object.UseSerialLotNumber;
+		
 		Form.Items.UseSerialLotNumber.ReadOnly = True;
 		Form.Items.AlwaysAddNewRowAfterScan.ReadOnly = True;
 		Form.Items.EachSerialLotNumberIsUnique.ReadOnly = True;
@@ -174,13 +188,28 @@ Procedure EditItemForeignFullDescriptionTemplate(Command)
 EndProcedure
 
 &AtClient
+Procedure EditItemKeyDescriptionTemplate(Command)
+	EditItemTemplate("ItemKeyDescriptionTemplate");
+EndProcedure
+
+&AtClient
+Procedure EditItemKeyLocalFullDescriptionTemplate(Command)
+	EditItemTemplate("ItemKeyLocalFullDescriptionTemplate");
+EndProcedure
+
+&AtClient
+Procedure EditItemKeyForeignFullDescriptionTemplate(Command)
+	EditItemTemplate("ItemKeyForeignFullDescriptionTemplate");
+EndProcedure
+
+&AtClient
 Procedure EditItemTemplate(TemplateName)
-	If ThisObject.Modified Then
-		ShowQueryBox(New NotifyDescription("EditItemTemplateEnd", ThisObject, New Structure("TemplateName", TemplateName)), 
-			R().QuestionToUser_001, QuestionDialogMode.OKCancel);
-	Else
+//	If ThisObject.Modified Then
+//		ShowQueryBox(New CallbackDescription("EditItemTemplateEnd", ThisObject, New Structure("TemplateName", TemplateName)), 
+//			R().QuestionToUser_001, QuestionDialogMode.OKCancel);
+//	Else
 		EditItemTemplateAtClient(TemplateName);
-	EndIf;
+//	EndIf;
 EndProcedure
 
 &AtClient
@@ -193,20 +222,28 @@ Procedure EditItemTemplateEnd(Result, NotifyParameters) Export
 EndProcedure
 
 &AtClient
-Procedure EditItemTemplateAtClient(TemplateName)
-	Notify = New NotifyDescription("OnFinishEditItemTemplate", ThisObject, New Structure("TemplateName", TemplateName));
+Procedure EditItemTemplateAtClient(AttributeName)
+	isItemKey = StrFind(AttributeName, "ItemKey") <> 0;
+	PropertySet = ?(isItemKey,
+		PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_ItemKeys"),
+		PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Items"));
+	TemplateName = ?(isItemKey, "ItemKeyTemplate", "ItemTemplate");
+	SourceName = ?(isItemKey, "ItemKey", "Item");
+	
+	Notify = New CallbackDescription("OnFinishEditItemTemplate", ThisObject, New Structure("TemplateName", AttributeName));
 	FormParameters = New Structure();
-	FormParameters.Insert("Formula", Object[TemplateName]);
-	FormParameters.Insert("PropertySet"   , PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Items"));
+	FormParameters.Insert("Formula", Object[AttributeName]);
+	FormParameters.Insert("SourceName"    , SourceName);
+	FormParameters.Insert("PropertySet"   , PropertySet);
+	FormParameters.Insert("TemplateName"  , TemplateName);
 	FormParameters.Insert("TemplateOwner" , "ItemTypes");
-	FormParameters.Insert("TemplateName"  , "ItemTemplate");
 	
 	OpenForm("CommonForm.FormulaEditor", FormParameters, ThisObject,,,,Notify,FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient
 Procedure OnFinishEditItemTemplate(Result, NotfyParameters) Export
-	If ValueIsFilled(Result) And Object.ItemDescriptionTemplate <> Result Then
+	If Object.ItemDescriptionTemplate <> Result Then
 		ThisObject.Modified = True;
 		Object[NotfyParameters.TemplateName] = Result;
 	EndIf;

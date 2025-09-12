@@ -773,7 +773,7 @@ Scenario: _01541986 copy lines from SI to Physical inventory
 		And I change "Paste quantity as" radio button value to "Phys. count"
 		And I click "OK" button
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'                | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'                | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'        |
 			| '1'   | ''             | 'Product 1 with SLN'   | 'PZU'        | '0512'                | 'pcs'                 | '2,000'        | '2,000'         | ''                     | ''               |
 			| '2'   | ''             | 'Product 1 with SLN'   | 'PZU'        | '0514'                | 'pcs'                 | '1,000'        | '1,000'         | ''                     | ''               |
 			| '3'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'box Dress (8 pcs)'   | '2,000'        | '2,000'         | ''                     | ''               |
@@ -1035,6 +1035,7 @@ Scenario: _01541969 check copy lines from PurchaseInvoice
 		And I close all client application windows
 
 Scenario: _01541970 check copy lines from StockAdjustmentAsWriteOff
+	And Delay 10
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 	And I click the button named "FormCreate"
@@ -1057,6 +1058,7 @@ Scenario: _01541970 check copy lines from StockAdjustmentAsWriteOff
 		And I close all client application windows
 
 Scenario: _01541971 check copy lines from Inventory transfer
+	And Delay 80
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I click the button named "FormCreate"

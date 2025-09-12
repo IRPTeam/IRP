@@ -217,7 +217,7 @@ Scenario: _020112 load data in the Physical inventory
 		When check load data form in the document
 	* Check document
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'        |
 			| '1'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '6,000'        | '6,000'         | ''                     | ''               |
 			| '2'   | ''             | 'Product 1 with SLN'   | 'ODS'        | ''                    | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
 			| '3'   | ''             | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '1,000'        | '1,000'         | ''                     | ''               |
@@ -232,7 +232,7 @@ Scenario: _020112 load data in the Physical inventory
 		Then the form attribute named "Field_PhysCount" became equal to "No"
 		Then the form attribute named "Field_ManualFixedCount" became equal to "Yes"
 		Then the form attribute named "Field_Difference" became equal to "No"
-		Then the form attribute named "Field_Description" became equal to "No"
+		Then the form attribute named "Field_Comment" became equal to "No"
 		And I close all client application windows	
 
 Scenario: _020113 load data in the Bundling
@@ -714,8 +714,8 @@ Scenario: _020134 load data in the Stock adjustment as surplus
 		And I set checkbox "Price"
 		And I click "Next" button
 		Then the form attribute named "Field_Price" became equal to "Yes"
-		Then the form attribute named "Field_Amount" became equal to "No"
-		Then the form attribute named "Field_AmountTax" became equal to "No"		
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"		
 		And I close all client application windows
 
 Scenario: _020135 load data in the Stock adjustment as write off
@@ -1206,7 +1206,7 @@ Scenario: _020147 load data in the Price list (by item key)
 		And I change "Load type" radio button value to "Item / Item key"
 		And in "Template" spreadsheet document I move to "R3C2" cell
 		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "35"
+		And in "Template" spreadsheet document I input text "36"
 		And in "Template" spreadsheet document I move to "R3C3" cell
 		And in "Template" spreadsheet document I double-click the current cell
 		And in "Template" spreadsheet document I input text "30"

@@ -4,9 +4,9 @@ Procedure ReadStructureAtServer()
 	
 	ArrayList = New Array;
 	XDTOType = CommonFunctionsServer.XDTOFactoryObject(Object.WSName).Type(Object.URI, Object.TypeName);
-	If XDTOType = Undefined Then
-		Raise "Type not found " + Object.TypeName;
-	EndIf;
+        If XDTOType = Undefined Then
+                Raise StrTemplate(R().TypeNotFound, Object.TypeName);
+        EndIf;
 	Obj = ConvertXDTO.ObjectXDTOStructure(XDTOType, ArrayList, Object.WSName, Not EmptyValues); 
 	TreeData.GetItems().Clear();
 	NewRow = TreeData.GetItems().Add();
@@ -204,9 +204,9 @@ EndProcedure
 &AtServer
 Procedure ValidateXMLAtServer()
 	TypeXDTO = CommonFunctionsServer.XDTOFactoryObject(Object.WSName).Type(Object.URI, Object.TypeName);
-	If TypeXDTO = Undefined Then
-		Raise "Type not found " + Object.TypeName;
-	EndIf;
+        If TypeXDTO = Undefined Then
+                Raise StrTemplate(R().TypeNotFound, Object.TypeName);
+        EndIf;
 	XDTOObj = CommonFunctionsServer.DeserializeXMLUseXDTOFactory(XMLToValidate, TypeXDTO, , Object.WSName);
 	XDTOObj.Validate();
 EndProcedure

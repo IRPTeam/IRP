@@ -44,7 +44,7 @@
   <objectField>Document.StockAdjustmentAsWriteOff.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.StockAdjustmentAsWriteOff.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.StockAdjustmentAsWriteOff.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.StockAdjustmentAsWriteOff.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.StockAdjustmentAsWriteOff.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -69,13 +69,16 @@
  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+ <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
  <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
  <registerRecords>AccumulationRegister.R4051T_StockAdjustmentAsWriteOff</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
@@ -348,6 +351,20 @@
    </synonym>
    <type>
     <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="562da1d4-66f5-48fc-bd9d-5e42eaa0c1c3">
+   <name>SimpleBatch</name>
+   <synonym>
+    <key>en</key>
+    <value>CC45512F-A988-166E-E7A3-32771C91DC2B</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SimpleBatch</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

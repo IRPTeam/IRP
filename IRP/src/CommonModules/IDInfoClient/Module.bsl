@@ -6,7 +6,7 @@ Procedure IDInfoOpening(Item, StandardProcessing, Object, Form) Export
 	AddInfo.Insert("Object", Object);
 	AddInfo.Insert("Form", Form);
 	If Not ValueIsFilled(Object.Ref) Or Form.Modified Then
-		QuestionToUserNotify = New NotifyDescription("IDInfoOpeningNotify", ThisObject, AddInfo);
+		QuestionToUserNotify = New CallbackDescription("IDInfoOpeningNotify", ThisObject, AddInfo);
 		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 	Else
 		IDInfoOpeningNotify(DialogReturnCode.Yes, AddInfo);
@@ -38,7 +38,7 @@ Procedure IDInfoOpeningNotify(Result, AddInfo = Undefined) Export
 		OpenFormArgs.Insert("ArrayOfCountry", ArrayOfCountry);
 
 		//@skip-warning
-		Notify = New NotifyDescription("StartEditIDInfo", AddInfo.Form, Args);
+		Notify = New CallbackDescription("StartEditIDInfo", AddInfo.Form, Args);
 		OpenForm("ChartOfCharacteristicTypes.IDInfoTypes.Form.SelectCountryForm", OpenFormArgs, AddInfo.Form, , , ,
 			Notify);
 	ElsIf ArrayOfCountry.Count() = 1 Then
@@ -71,7 +71,7 @@ Procedure StartEditIDInfo(Form, Result, Parameters) Export
 	//@skip-warning
 	AddDataProcServer.CallMethodAddDataProc(OpenFormArgs, New Structure("ClientCall", True));
 
-	Notify = New NotifyDescription("EndEditIDInfo", Form, Parameters);
+	Notify = New CallbackDescription("EndEditIDInfo", Form, Parameters);
 
 	AddDataProcClient.OpenFormAddDataProc(OpenFormArgs, Notify, "Form");
 EndProcedure

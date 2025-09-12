@@ -63,6 +63,7 @@ Scenario: _097700 preparation (Сheck payroll)
 		When Create catalog Partners, Companies, Agreements for Tax authority
 	* Data for salary
 		When Create catalog EmployeePositions objects
+		When Create information register T9545S_VacationDaysLimits records
 		When Create catalog Partners objects (Employee for salary)
 		When Create catalog AccrualAndDeductionTypes objects
 		When Create information register T9500S_AccrualAndDeductionValues records
@@ -196,6 +197,36 @@ Scenario: _097706 check Employee sick leave
 			| 'Number'                    |
 			| '$NumberEmployeeSickLeave$' |
 
+Scenario: _097717 calculate deserved vacations
+	And I close all client application windows
+	* October (Main Company)
+		Given I open hyperlink "e1cib/list/Document.CalculationDeservedVacations"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I input "01.11.2023 12:00:00" text in the field named "Date"
+		And I input "01.10.2023" text in "Begin date" field
+		And I input "31.10.2023" text in "End date" field
+		And I click "Save" button
+		And I save the value of "Number" field as "NumberDeservedVacation"	
+		And I click "Post and close" button	
+	* Check
+		And "List" table contains lines
+			| 'Number'                   |
+			| '$NumberDeservedVacation$' |
+	* November
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I input "01.12.2023 12:00:00" text in the field named "Date"
+		And I input "01.11.2023" text in "Begin date" field
+		And I input "30.11.2023" text in "End date" field
+		And I click "Save" button
+		And I save the value of "Number" field as "NumberDeservedVacation1"	
+		And I click "Post and close" button	
+	* Check
+		And "List" table contains lines
+			| 'Number'                   |
+			| '$NumberDeservedVacation1$' |
+		
 Scenario: _097707 check Employee vacation
 	And I close all client application windows
 	* Create EmployeeVacation (Arina Brown, Anna Petrova)
@@ -230,6 +261,10 @@ Scenario: _097707 check Employee vacation
 		And I select from the drop-down list named "Branch" by "shop 01" string
 		And I click "Post" button	
 		And I save the value of "Number" field as "NumberEmployeeVacation"
+		And "EmployeeList" table became equal
+			| "Employee"     | "Begin date" | "End date"   | "Paid days" | "Own cost days" | "Total" |
+			| "Arina Brown"  | "06.11.2023" | "15.11.2023" | "10"        | "0"             | "10"    |
+			| "Anna Petrova" | "04.11.2023" | "08.11.2023" | "5"         | "0"             | "5"     |
 		And I click "Post and close" button
 	* Check
 		And "List" table contains lines
@@ -826,14 +861,9 @@ Scenario: _097716 create payroll
 		And I select from the drop-down list named "Branch" by "shop 01" string
 		And I select from the drop-down list named "Currency" by "Turkish lira" string
 		And I select from "Payment period" drop-down list by "fourth" string
-		And I select from "Calculation type" drop-down list by "Salary" string
 		And I input "01.11.2023" text in "Begin date" field
 		And I input "30.11.2023" text in "End date" field
 		And in the table "AccrualList" I click the button named "FillAccrual"
-		And I select from the drop-down list named "Partner" by "Tax authority" string
-		And I move to the next attribute
-		Then the form attribute named "LegalName" became equal to "Tax authority"
-		Then the form attribute named "Agreement" became equal to "Tax"	
 	* Check
 		And "AccrualList" table became equal
 			| '#' | 'Amount'   | 'Employee'        | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
@@ -854,6 +884,9 @@ Scenario: _097716 create payroll
 				| 'Description'                 |
 				| 'Social Insurance (Employee)' |
 			And I select current line in "List" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"			
+			And I select "Social insurance" from "Partner term" drop-down list by string in "SalaryTaxList" table			
 			And I activate field named "SalaryTaxListExpenseType" in "SalaryTaxList" table
 			And I select "Expense" by string from the drop-down list named "SalaryTaxListExpenseType" in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
@@ -873,18 +906,25 @@ Scenario: _097716 create payroll
 			And I select "Shop 01" by string from the drop-down list named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListAmount" in "SalaryTaxList" table
 			And I input "700,00" text in the field named "SalaryTaxListAmount" of "SalaryTaxList" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"
+			And I select "Income tax" from "Partner term" drop-down list by string in "SalaryTaxList" table
 			And I finish line editing in "SalaryTaxList" table
 			And in the table "SalaryTaxList" I click the button named "SalaryTaxListAdd"
 			And I activate field named "SalaryTaxListEmployee" in "SalaryTaxList" table
 			And I select "Alexander Orlov" by string from the drop-down list named "SalaryTaxListEmployee" in "SalaryTaxList" table
 			And I activate "Tax" field in "SalaryTaxList" table
 			And I select "Single Social Contribution (Company)" from "Tax" drop-down list by string in "SalaryTaxList" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"
+			And I select "Tax" from "Partner term" drop-down list by string in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListExpenseType" in "SalaryTaxList" table
 			And I select "Expense" by string from the drop-down list named "SalaryTaxListExpenseType" in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
 			And I select "Shop 01" by string from the drop-down list named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListAmount" in "SalaryTaxList" table
 			And I input "1 000,00" text in the field named "SalaryTaxListAmount" of "SalaryTaxList" table
+			And I select "Tax" from "Partner term" drop-down list by string in "SalaryTaxList" table
 			And I finish line editing in "SalaryTaxList" table
 		* Second Employee	
 			And in the table "SalaryTaxList" I click the button named "SalaryTaxListAdd"
@@ -897,6 +937,9 @@ Scenario: _097716 create payroll
 				| 'Description'                 |
 				| 'Social Insurance (Employee)' |
 			And I select current line in "List" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"
+			And I select "Social insurance" from "Partner term" drop-down list by string in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListExpenseType" in "SalaryTaxList" table
 			And I select "Expense" by string from the drop-down list named "SalaryTaxListExpenseType" in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
@@ -904,12 +947,18 @@ Scenario: _097716 create payroll
 			And I activate field named "SalaryTaxListAmount" in "SalaryTaxList" table
 			And I select current line in "SalaryTaxList" table
 			And I input "700,00" text in the field named "SalaryTaxListAmount" of "SalaryTaxList" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"
+			And I select "Social insurance" from "Partner term" drop-down list by string in "SalaryTaxList" table
 			And I finish line editing in "SalaryTaxList" table
 			And in the table "SalaryTaxList" I click the button named "SalaryTaxListAdd"
 			And I activate field named "SalaryTaxListEmployee" in "SalaryTaxList" table
 			And I select "Anna Petrova" by string from the drop-down list named "SalaryTaxListEmployee" in "SalaryTaxList" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"
 			And I activate "Tax" field in "SalaryTaxList" table
 			And I select "Income Tax (Emloyee)" from "Tax" drop-down list by string in "SalaryTaxList" table
+			And I select "Income tax" from "Partner term" drop-down list by string in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListExpenseType" in "SalaryTaxList" table
 			And I select "Expense" by string from the drop-down list named "SalaryTaxListExpenseType" in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
@@ -928,16 +977,19 @@ Scenario: _097716 create payroll
 			And I select "Shop 01" by string from the drop-down list named "SalaryTaxListProfitLossCenter" in "SalaryTaxList" table
 			And I activate field named "SalaryTaxListAmount" in "SalaryTaxList" table
 			And I input "1 000,00" text in the field named "SalaryTaxListAmount" of "SalaryTaxList" table
+			And I select "Tax authority" from "Partner" drop-down list by string in "SalaryTaxList" table
+			And the field named "SalaryTaxListLegalName" in "SalaryTaxList" table is equal to "Tax authority"
+			And I select "Tax" from "Partner term" drop-down list by string in "SalaryTaxList" table
 			And I finish line editing in "SalaryTaxList" table
 	* Check
 		And "SalaryTaxList" table became equal
-			| '#' | 'Amount'   | 'Employee'        | 'Tax'                                  | 'Tax payer' | 'Expense type' | 'Profit loss center' |
-			| '1' | '700,00'   | 'Alexander Orlov' | 'Social Insurance (Employee)'          | 'Employee'  | 'Expense'      | 'Shop 01'            |
-			| '2' | '700,00'   | 'Alexander Orlov' | 'Income Tax (Emloyee)'                 | 'Employee'  | 'Expense'      | 'Shop 01'            |
-			| '3' | '1 000,00' | 'Alexander Orlov' | 'Single Social Contribution (Company)' | 'Company'   | 'Expense'      | 'Shop 01'            |
-			| '4' | '700,00'   | 'Anna Petrova'    | 'Social Insurance (Employee)'          | 'Employee'  | 'Expense'      | 'Shop 01'            |
-			| '5' | '700,00'   | 'Anna Petrova'    | 'Income Tax (Emloyee)'                 | 'Employee'  | 'Expense'      | 'Shop 01'            |
-			| '6' | '1 000,00' | 'Anna Petrova'    | 'Single Social Contribution (Company)' | 'Company'   | 'Expense'      | 'Shop 01'            |			
+			| '#' | 'Employee'        | 'Calculation type' | 'Tax'                                  | 'Tax payer' | 'Partner'       | 'Legal name'    | 'Partner term'     | 'Take account from taxes' | 'Expense type' | 'Profit loss center' | 'Amount'   |
+			| '1' | 'Alexander Orlov' | ''                 | 'Social Insurance (Employee)'          | 'Employee'  | 'Tax authority' | 'Tax authority' | 'Social insurance' | 'No'                      | 'Expense'      | 'Shop 01'            | '700,00'   |
+			| '2' | 'Alexander Orlov' | ''                 | 'Income Tax (Emloyee)'                 | 'Employee'  | 'Tax authority' | 'Tax authority' | 'Income tax'       | 'No'                      | 'Expense'      | 'Shop 01'            | '700,00'   |
+			| '3' | 'Alexander Orlov' | ''                 | 'Single Social Contribution (Company)' | 'Company'   | 'Tax authority' | 'Tax authority' | 'Tax'              | 'No'                      | 'Expense'      | 'Shop 01'            | '1 000,00' |
+			| '4' | 'Anna Petrova'    | ''                 | 'Social Insurance (Employee)'          | 'Employee'  | 'Tax authority' | 'Tax authority' | 'Social insurance' | 'No'                      | 'Expense'      | 'Shop 01'            | '700,00'   |
+			| '5' | 'Anna Petrova'    | ''                 | 'Income Tax (Emloyee)'                 | 'Employee'  | 'Tax authority' | 'Tax authority' | 'Income tax'       | 'No'                      | 'Expense'      | 'Shop 01'            | '700,00'   |
+			| '6' | 'Anna Petrova'    | ''                 | 'Single Social Contribution (Company)' | 'Company'   | 'Tax authority' | 'Tax authority' | 'Tax'              | 'No'                      | 'Expense'      | 'Shop 01'            | '1 000,00' |		
 	* Post
 		And I click "Post" button	
 		And I delete "$$NumberPayroll$$" variable
@@ -958,6 +1010,7 @@ Scenario: _097721 check of payroll calculation (position and salary change in th
 			| "Documents.EmployeeHiring.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
 			| "Documents.EmployeeTransfer.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And Delay 2
 		And I execute 1C:Enterprise script at server
 			| "Documents.EmployeeVacation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Check Time Sheet
@@ -980,8 +1033,7 @@ Scenario: _097721 check of payroll calculation (position and salary change in th
 			| 'Number' |
 			| '11'     |
 		And I select current line in "List" table
-		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-		And I select from "Calculation type" drop-down list by "salary" string		
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"	
 		And in the table "AccrualList" I click "Calculate" button
 		And "AccrualList" table contains lines
 			| 'Amount'   | 'Employee'                                        | 'Position'   | 'Accrual type' | 'Expense type' | 'Profit loss center' |
@@ -1362,10 +1414,10 @@ Scenario: _097750 Salary payment (Bank payment)
 		And I click the button named "FormCreate"
 	* Filling main details
 		And I select from the drop-down list named "Company" by "Main Company" string
-		And I select from the drop-down list named "Branch" by "Front office" string
+		And I select from the drop-down list named "Branch" by "Distribution department" string
 		And I select from the drop-down list named "Account" by "Bank account, TRY" string
 		And I select "Salary payment" exact value from "Transaction type" drop-down list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Employee" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Alexander Orlov" from "Employee" drop-down list by string in "PaymentList" table
@@ -1381,7 +1433,8 @@ Scenario: _097750 Salary payment (Bank payment)
 		And I select current line in "List" table
 		And I activate "Cash flow center" field in "PaymentList" table
 		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
+		And I click the button named "PaymentListAdd"
 		And I activate "Employee" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Anna Petrova" from "Employee" drop-down list by string in "PaymentList" table
@@ -1397,6 +1450,7 @@ Scenario: _097750 Salary payment (Bank payment)
 		And I select current line in "List" table
 		And I activate "Cash flow center" field in "PaymentList" table
 		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
+		And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
 		And I click "Post" button	
 		And I delete "$$NumberBankPayment$$" variable
 		And I save the value of "Number" field as "$$NumberBankPayment$$"
@@ -1405,6 +1459,7 @@ Scenario: _097750 Salary payment (Bank payment)
 		And "List" table contains lines
 			| 'Number'            |
 			| '$$NumberBankPayment$$' |	
+
 
 Scenario: _097751 Salary payment (Cash payment)
 	And I close all client application windows
@@ -1416,7 +1471,7 @@ Scenario: _097751 Salary payment (Cash payment)
 		And I select from the drop-down list named "Branch" by "Front office" string
 		And I select from the drop-down list named "CashAccount" by "Cash desk №4" string
 		And I select "Salary payment" exact value from "Transaction type" drop-down list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Employee" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Alexander Orlov" from "Employee" drop-down list by string in "PaymentList" table
@@ -1432,7 +1487,7 @@ Scenario: _097751 Salary payment (Cash payment)
 		And I select current line in "List" table
 		And I activate "Cash flow center" field in "PaymentList" table
 		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Employee" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Anna Petrova" from "Employee" drop-down list by string in "PaymentList" table
@@ -1455,5 +1510,114 @@ Scenario: _097751 Salary payment (Cash payment)
 	* Check
 		And "List" table contains lines
 			| 'Number'            |
-			| '$$NumberCashPayment$$' |			
+			| '$$NumberCashPayment$$' |		
+
+Scenario: _097752 Salary return (Bank receipt)
+	And I close all client application windows
+	* Open BR
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+	* Filling main details
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Branch" by "Distribution department" string
+		And I select from the drop-down list named "Account" by "Bank account, TRY" string
+		And I select "Salary return" exact value from "Transaction type" drop-down list
+		And I click the button named "PaymentListAdd"
+		And I activate "Employee" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "Alexander Orlov" from "Employee" drop-down list by string in "PaymentList" table
+		And I select "Fourth (only salary)" from "Payment period" drop-down list by string in "PaymentList" table
+		And I select "Salary" from "Calculation type" drop-down list by string in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I activate "Cash flow center" field in "PaymentList" table
+		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
+		And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
+		And I click the button named "PaymentListAdd"
+		And I activate "Employee" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "Anna Petrova" from "Employee" drop-down list by string in "PaymentList" table
+		And I select "Fourth (only salary)" from "Payment period" drop-down list by string in "PaymentList" table
+		And I select "Salary" from "Calculation type" drop-down list by string in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I activate "Cash flow center" field in "PaymentList" table
+		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
+		And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
+		And I click "Post" button	
+		And I delete "$$NumberBankReceipt$$" variable
+		And I save the value of "Number" field as "$$NumberBankReceipt$$"
+		And I click "Post and close" button
+	* Check
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberBankReceipt$$' |	
+
+Scenario: _097753 Salary return (Cash receipt)
+	And I close all client application windows
+	* Open CR
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
+	* Filling main details
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Branch" by "Front office" string
+		And I select from the drop-down list named "CashAccount" by "Cash desk №4" string
+		And I select "Salary return" exact value from "Transaction type" drop-down list
+		And I click the button named "PaymentListAdd"
+		And I activate "Employee" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "Alexander Orlov" from "Employee" drop-down list by string in "PaymentList" table
+		And I select "Fourth (only salary)" from "Payment period" drop-down list by string in "PaymentList" table
+		And I select "Salary" from "Calculation type" drop-down list by string in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I activate "Cash flow center" field in "PaymentList" table
+		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
+		// And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
+		And I click the button named "PaymentListAdd"
+		And I activate "Employee" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "Anna Petrova" from "Employee" drop-down list by string in "PaymentList" table
+		And I select "Fourth (only salary)" from "Payment period" drop-down list by string in "PaymentList" table
+		And I select "Salary" from "Calculation type" drop-down list by string in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I activate "Cash flow center" field in "PaymentList" table
+		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
+		// And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
+		And I click "Post" button	
+		And I delete "$$NumberCashReceipt$$" variable
+		And I save the value of "Number" field as "$$NumberCashReceipt$$"
+		And I click "Post and close" button
+	* Check
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberCashReceipt$$' |		
+
+// Scenario: _097754 Salary tax payment (Bank payment - Other partners)
+
 						

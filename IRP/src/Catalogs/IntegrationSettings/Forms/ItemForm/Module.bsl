@@ -39,36 +39,25 @@ EndProcedure
 
 &AtClient
 Procedure TestConnection(Command)
+	
+	If Modified Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_004);
+		Return;
+	EndIf;
+	
 	TestConnectionCall();
 EndProcedure
 
 &AtClient
 Procedure TestConnectionCall()
+	
+	ConnectionSetting = GetConnectionSetting();
+	
 	If Object.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
-		TestRow = Object.ConnectionSetting.FindRows(New Structure("Key", "AddressPath"));
-		IntegrationServer.SaveFileToFileStorage(TestRow[0].Value, "Test.png", PictureLib.DataHistory.GetBinaryData());
+		IntegrationServer.SaveFileToFileStorage(ConnectionSetting.Value.AddressPath, "Test.png", PictureLib.DataHistory.GetBinaryData());
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);
 	ElsIf Object.IntegrationType = PredefinedValue("Enum.IntegrationType.Email") Then
-		ConnectionSetting = GetConnectionSetting();
-		For Each Str In Object.ConnectionSetting Do
-			FillPropertyValues(ConnectionSetting, New Structure(Str.Key, Str.Value));
-		EndDo;
-#If Not WebClient Then
-		eMail = New InternetMailMessage();
-		eMail.Texts.Add("<h1> Test </h1>", InternetMailTextType.HTML);
-		eMail.Subject = "Test";
-		eMail.SenderName = ConnectionSetting.SenderName;
-		eMail.To.Add(ConnectionSetting.eMailForTest);
-		//@skip-warning
-		Answer = IntegrationClientServer.SendEmail(ConnectionSetting, eMail);
-		If Not Answer.Count() Then
-			CommonFunctionsClientServer.ShowUsersMessage(CommonFunctionsServer.SerializeJSON(Answer));
-		Else
-			CommonFunctionsClientServer.ShowUsersMessage(R().S_028);
-		EndIf;
-#Else
-			CommonFunctionsClientServer.ShowUsersMessage(R().S_029);
-#EndIf
+		EmailMessagesServer.SendTestMessage(ConnectionSetting);
 	ElsIf Object.IntegrationType = PredefinedValue("Enum.IntegrationType.SMSProvider") Then
 		Params = SMSServer.TestConnectionParams();
 		Result = SMSServer.SMS(Params, "TestConnection", Object.Ref); // See SMSServer.TestConnectionResult
@@ -81,20 +70,6 @@ Procedure TestConnectionCall()
 		EndIf;
 		
 	ElsIf ExtensionCall_TestConnectionCall() = Undefined AND IntegrationServer.ExtensionCall_TestConnectionCall(Object.Ref) = Undefined Then
-		ConnectionSetting = GetConnectionSetting();
-
-		SettingsSource = Object.ConnectionSetting;
-		If Not ServiceSystemServer.isProduction() Then
-			SettingsSource = Object.ConnectionSettingTest;
-		EndIf; 		  
-		For Each Str In SettingsSource Do
-			FillPropertyValues(ConnectionSetting, New Structure(Str.Key, Str.Value));
-		EndDo;
-		
-		ConnectionSetting.QueryType = "GET";
-		ConnectionSetting.IntegrationSettingsRef = Object.Ref;
-		ConnectionSetting.Insert("Headers", New Map);
-		
 		ResourceParameters = New Structure();
 		ResourceParameters.Insert("MetadataName", "TestConnection");
 		ServerResponse = IntegrationClientServer.SendRequest(ConnectionSetting, ResourceParameters);
@@ -105,7 +80,7 @@ EndProcedure
 
 &AtServer
 Function GetConnectionSetting()
-	Return IntegrationServer.ConnectionSettingTemplate(Object.IntegrationType, Object);
+	Return IntegrationServer.ConnectionSetting(Object.Ref);
 EndFunction
 
 &AtClient
@@ -125,7 +100,7 @@ EndProcedure
 
 &AtServer
 Procedure FillByDefaultAtServer()
-	ConnectionSetting = GetConnectionSetting();
+	ConnectionSetting = IntegrationServer.ConnectionSettingTemplate(Object.IntegrationType, Object);;
 	For Each Str In ConnectionSetting Do
 		
 		If Str.Key = "IntegrationSettingsRef" Then
@@ -199,8 +174,8 @@ Procedure ExternalDataProcSettings(Command)
 	Info.Insert("Settings", ThisObject.AddressResult);
 	CallMethodAddDataProc(Info);
 
-	NotifyDescription = New NotifyDescription("OpenFormProcSettingsEnd", ThisObject);
-	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "Settings");
+	CallbackDescription = New CallbackDescription("OpenFormProcSettingsEnd", ThisObject);
+	AddDataProcClient.OpenFormAddDataProc(Info, CallbackDescription, "Settings");
 EndProcedure
 
 &AtServer

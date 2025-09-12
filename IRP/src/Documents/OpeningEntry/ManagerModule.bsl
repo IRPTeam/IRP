@@ -207,14 +207,15 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ReceiptFromConsignor.ItemKey,
 	|	ReceiptFromConsignor.Store,
 	|	ReceiptFromConsignor.Ref.Company AS Company,
+	|	ReceiptFromConsignor.Ref.Branch AS Branch,
 	|	SUM(ReceiptFromConsignor.Quantity) AS Quantity,
 	|	ReceiptFromConsignor.Ref.Date AS Period,
 	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
 	|	ReceiptFromConsignor.Key AS Key,
-	|	SUM(ReceiptFromConsignor.Amount) AS Amount,
+	|	SUM(ReceiptFromConsignor.Amount) AS InvoiceAmount,
 	|	ReceiptFromConsignor.Currency AS Currency,
 	|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef) AS CurrencyMovementType,
-	|	SUM(ReceiptFromConsignor.AmountTax) AS AmountTax,
+	|	SUM(ReceiptFromConsignor.AmountTax) AS InvoiceTaxAmount,
 	|	CASE
 	|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
 	|			THEN ReceiptFromConsignor.SerialLotNumber
@@ -233,6 +234,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ReceiptFromConsignor.ItemKey,
 	|	ReceiptFromConsignor.Store,
 	|	ReceiptFromConsignor.Ref.Company,
+	|	ReceiptFromConsignor.Ref.Branch,
 	|	ReceiptFromConsignor.Ref.Date,
 	|	VALUE(Enum.BatchDirection.Receipt),
 	|	ReceiptFromConsignor.Key,
@@ -273,8 +275,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
-	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SerialLotNumber, SourceOfOrigin";
-	BatchKeysInfoSettings.Totals = "Quantity, Amount, AmountTax";
+	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Branch, Store, ItemKey, Currency, CurrencyMovementType, SerialLotNumber, SourceOfOrigin";
+	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
 	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
@@ -310,10 +312,15 @@ EndProcedure
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
-		"Document.OpeningEntry.Inventory");
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,"Document.OpeningEntry.Inventory");
 
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	Current_R4050B_StockInventory = PostingServer.GetQueryTableByName("R4050B_StockInventory", Parameters);
+	Exists_R4050B_StockInventory  = PostingServer.GetQueryTableByName("Exists_R4050B_StockInventory", Parameters);
+	
+	Parameters.Insert("Current_R4050B_StockInventory", Current_R4050B_StockInventory);
+	Parameters.Insert("Exists_R4050B_StockInventory" , Exists_R4050B_StockInventory);
+	
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	If Not Cancel 
 		And Not AccReg.R4014B_SerialLotNumber.CheckBalance(
@@ -327,9 +334,17 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 			) Then
 		Cancel = True;
 	EndIf;
+	
+	Current_R3010B_CashOnHand = PostingServer.GetQueryTableByName("R3010B_CashOnHand", Parameters);
+	Exists_R3010B_CashOnHand  = PostingServer.GetQueryTableByName("Exists_R3010B_CashOnHand", Parameters);
+	
+	If Not Cancel 
+		And Not AccReg.R3010B_CashOnHand.CheckBalance(Ref, Current_R3010B_CashOnHand, Exists_R3010B_CashOnHand, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "TableDataPath", "Object.Inventory");
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.OpeningEntry.Inventory", AddInfo);
 EndProcedure
@@ -378,6 +393,8 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
+	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
+	QueryArray.Add(PostingServer.Exists_R3010B_CashOnHand());
 	Return QueryArray;
 EndFunction
 
@@ -412,9 +429,12 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(T9510S_Staffing());
+	QueryArray.Add(R9541T_VacationUsage());
 	QueryArray.Add(R9545T_PaidVacations());
 	QueryArray.Add(R2040B_TaxesIncoming());
 	QueryArray.Add(R1040B_TaxesOutgoing());
+	QueryArray.Add(T8510S_FixedAssetsInfo());
+	QueryArray.Add(R6025B_SimpleBatch());
 	Return QueryArray;
 EndFunction
 
@@ -423,27 +443,29 @@ EndFunction
 #Region Posting_SourceTable
 
 Function ItemList()
-	Return "SELECT
-		   |	OpeningEntryInventory.Ref,
-		   |	OpeningEntryInventory.Key,
-		   |	OpeningEntryInventory.ItemKey,
-		   |	OpeningEntryInventory.Store,
-		   |	OpeningEntryInventory.Quantity,
-		   |	NOT OpeningEntryInventory.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
-		   |	OpeningEntryInventory.SerialLotNumber,
-		   |	OpeningEntryInventory.Ref.Date AS Period,
-		   |	OpeningEntryInventory.Ref.Company AS Company,
-		   |	OpeningEntryInventory.Ref.Branch AS Branch,
-		   |	OpeningEntryInventory.Amount AS Amount,
-		   |	OpeningEntryInventory.AmountTax AS AmountTax,
-		   |	OpeningEntryInventory.Ref.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
-		   |	OpeningEntryInventory.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency,
-		   |	OpeningEntryInventory.SourceOfOrigin AS SourceOfOrigin
-		   |INTO ItemList
-		   |FROM
-		   |	Document.OpeningEntry.Inventory AS OpeningEntryInventory
-		   |WHERE
-		   |	OpeningEntryInventory.Ref = &Ref";
+	Return 
+	"SELECT
+	|	ItemList.Ref,
+	|	ItemList.Key,
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	ItemList.Quantity,
+	|	NOT ItemList.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
+	|	ItemList.SerialLotNumber,
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Amount AS Amount,
+	|	ItemList.AmountTax AS AmountTax,
+	|	ItemList.Ref.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
+	|	ItemList.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency,
+	|	ItemList.SourceOfOrigin AS SourceOfOrigin,
+	|	ItemList.SimpleBatch AS SimpleBatch
+	|INTO ItemList
+	|FROM
+	|	Document.OpeningEntry.Inventory AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function AccountBalance()
@@ -763,6 +785,7 @@ Function EmployeeCashAdvance()
 		   |	EmployeeCashAdvance.Account,
 		   |	EmployeeCashAdvance.Currency,
 		   |	EmployeeCashAdvance.Employee AS Partner,
+		   |	EmployeeCashAdvance.Agreement AS Agreement,
 		   |	EmployeeCashAdvance.Amount AS Amount,
 		   |	EmployeeCashAdvance.Ref.Date AS Period,
 		   |	EmployeeCashAdvance.Key
@@ -828,6 +851,8 @@ Function FixedAssets()
 	Return
 		"SELECT
 		|	OpeningEntryFixedAssets.Ref.Date AS Period,
+		|	OpeningEntryFixedAssets.Ref AS Ref,
+		|	OpeningEntryFixedAssets.Schedule,
 		|	OpeningEntryFixedAssets.Ref.Company,
 		|	OpeningEntryFixedAssets.FixedAsset,
 		|	OpeningEntryFixedAssets.ResponsiblePerson,
@@ -856,6 +881,7 @@ Function EmployeeList()
 		|	EmployeeList.Position,
 		|	EmployeeList.EmployeeSchedule,
 		|	EmployeeList.ProfitLossCenter,
+		|	EmployeeList.RemainingVacationDays,
 		|	CASE
 		|		WHEN EmployeeList.RemainingVacationDays >= EmployeeList.Ref.Company.SalaryMaxDaysVacation
 		|			THEN 0
@@ -1065,76 +1091,97 @@ Function R5011B_CustomersAging()
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	CASE
-		   |		WHEN ItemList.SerialLotNumber.StockBalanceDetail
-		   |			THEN ItemList.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END SerialLotNumber,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Quantity
-		   |INTO R4010B_ActualStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ShipmentToTradeAgent.Period,
-		   |	CASE
-		   |		WHEN ShipmentToTradeAgent.SerialLotNumber.StockBalanceDetail
-		   |			THEN ShipmentToTradeAgent.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END SerialLotNumber,
-		   |	ShipmentToTradeAgent.StoreTradeAgent,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	ShipmentToTradeAgent.Quantity
-		   |FROM
-		   |	ShipmentToTradeAgent
-		   |WHERE
-		   |	TRUE
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ShipmentToTradeAgent.Period,
-		   |	CASE
-		   |		WHEN ShipmentToTradeAgent.SerialLotNumber.StockBalanceDetail
-		   |			THEN ShipmentToTradeAgent.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END SerialLotNumber,
-		   |	ShipmentToTradeAgent.Store,
-		   |	ShipmentToTradeAgent.ItemKey,
-		   |	ShipmentToTradeAgent.Quantity
-		   |FROM
-		   |	ShipmentToTradeAgent
-		   |WHERE
-		   |	TRUE
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ReceiptFromConsignor.Period,
-		   |	CASE
-		   |		WHEN ReceiptFromConsignor.SerialLotNumber.StockBalanceDetail
-		   |			THEN ReceiptFromConsignor.SerialLotNumber
-		   |		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		   |	END SerialLotNumber,
-		   |	ReceiptFromConsignor.Store,
-		   |	ReceiptFromConsignor.ItemKey,
-		   |	ReceiptFromConsignor.Quantity
-		   |FROM
-		   |	ReceiptFromConsignor
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	CASE
+		|		WHEN ItemList.SerialLotNumber.StockBalanceDetail
+		|			THEN ItemList.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END SerialLotNumber,
+		|	CASE
+		|		WHEN ItemList.SourceOfOrigin.StockBalanceDetail
+		|			THEN ItemList.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END SourceOfOrigin,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Quantity
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ShipmentToTradeAgent.Period,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SerialLotNumber.StockBalanceDetail
+		|			THEN ShipmentToTradeAgent.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END SerialLotNumber,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SourceOfOrigin.StockBalanceDetail
+		|			THEN ShipmentToTradeAgent.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END SourceOfOrigin,
+		|	ShipmentToTradeAgent.StoreTradeAgent,
+		|	ShipmentToTradeAgent.ItemKey,
+		|	ShipmentToTradeAgent.Quantity
+		|FROM
+		|	ShipmentToTradeAgent
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ShipmentToTradeAgent.Period,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SerialLotNumber.StockBalanceDetail
+		|			THEN ShipmentToTradeAgent.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END SerialLotNumber,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SourceOfOrigin.StockBalanceDetail
+		|			THEN ShipmentToTradeAgent.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END SourceOfOrigin,
+		|	ShipmentToTradeAgent.Store,
+		|	ShipmentToTradeAgent.ItemKey,
+		|	ShipmentToTradeAgent.Quantity
+		|FROM
+		|	ShipmentToTradeAgent
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ReceiptFromConsignor.Period,
+		|	CASE
+		|		WHEN ReceiptFromConsignor.SerialLotNumber.StockBalanceDetail
+		|			THEN ReceiptFromConsignor.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END SerialLotNumber,
+		|	CASE
+		|		WHEN ReceiptFromConsignor.SourceOfOrigin.StockBalanceDetail
+		|			THEN ReceiptFromConsignor.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END SourceOfOrigin,
+		|	ReceiptFromConsignor.Store,
+		|	ReceiptFromConsignor.ItemKey,
+		|	ReceiptFromConsignor.Quantity
+		|FROM
+		|	ReceiptFromConsignor
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -1521,6 +1568,7 @@ Function T6020S_BatchKeysInfo()
 	Return "SELECT
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
@@ -1546,6 +1594,7 @@ Function T6020S_BatchKeysInfo()
 		|	TRUE
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.CurrencyMovementType,
 		|	ItemList.ItemKey,
@@ -1568,6 +1617,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	ShipmentToTradeAgent.Period,
 		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.Branch,
 		|	ShipmentToTradeAgent.Store,
 		|	ShipmentToTradeAgent.ItemKey,
 		|	VALUE(Enum.BatchDirection.Expense),
@@ -1593,6 +1643,7 @@ Function T6020S_BatchKeysInfo()
 		|GROUP BY
 		|	ShipmentToTradeAgent.Period,
 		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.Branch,
 		|	ShipmentToTradeAgent.Store,
 		|	ShipmentToTradeAgent.ItemKey,
 		|	VALUE(Enum.BatchDirection.Expense),
@@ -1614,6 +1665,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	ShipmentToTradeAgent.Period,
 		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.Branch,
 		|	ShipmentToTradeAgent.StoreTradeAgent,
 		|	ShipmentToTradeAgent.ItemKey,
 		|	VALUE(Enum.BatchDirection.Receipt),
@@ -1639,6 +1691,7 @@ Function T6020S_BatchKeysInfo()
 		|GROUP BY
 		|	ShipmentToTradeAgent.Period,
 		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.Branch,
 		|	ShipmentToTradeAgent.StoreTradeAgent,
 		|	ShipmentToTradeAgent.ItemKey,
 		|	VALUE(Enum.BatchDirection.Receipt),
@@ -1660,6 +1713,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	BatchKeysInfo.Period,
 		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.Branch,
 		|	BatchKeysInfo.Store,
 		|	BatchKeysInfo.ItemKey,
 		|	BatchKeysInfo.Direction,
@@ -1668,8 +1722,8 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo.SerialLotNumber,
 		|	BatchKeysInfo.SourceOfOrigin,
 		|	SUM(BatchKeysInfo.Quantity) AS Quantity,
-		|	SUM(BatchKeysInfo.Amount) AS InvoiceAmount,
-		|	SUM(BatchKeysInfo.AmountTax) AS InvoiceTaxAmount
+		|	SUM(BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
+		|	SUM(BatchKeysInfo.InvoiceTaxAmount) AS InvoiceTaxAmount
 		|FROM
 		|	BatchKeysInfo AS BatchKeysInfo
 		|WHERE
@@ -1677,6 +1731,7 @@ Function T6020S_BatchKeysInfo()
 		|GROUP BY
 		|	BatchKeysInfo.Period,
 		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.Branch,
 		|	BatchKeysInfo.Store,
 		|	BatchKeysInfo.ItemKey,
 		|	BatchKeysInfo.Direction,
@@ -1690,6 +1745,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	Table.Period,
 		|	Table.Company,
+		|	Table.Branch,
 		|	Table.Store,
 		|	Table.ItemKey,
 		|	Table.Direction,
@@ -1865,6 +1921,7 @@ Function R3027B_EmployeeCashAdvance()
 		   |	EmployeeCashAdvance.Branch,
 		   |	EmployeeCashAdvance.Currency,
 		   |	EmployeeCashAdvance.Partner,
+		   |	EmployeeCashAdvance.Agreement,
 		   |	EmployeeCashAdvance.Amount,
 		   |	EmployeeCashAdvance.Key
 		   |INTO R3027B_EmployeeCashAdvance
@@ -1946,6 +2003,7 @@ EndFunction
 Function R8510B_BookValueOfFixedAsset()
 	Return
 		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	OpeningEntryFixedAssets.Ref.Date AS Period,
 		|	OpeningEntryFixedAssets.Ref.Company,
 		|	OpeningEntryFixedAssets.FixedAsset,
@@ -1954,38 +2012,36 @@ Function R8510B_BookValueOfFixedAsset()
 		|	OpeningEntryFixedAssets.ProfitLossCenter AS ProfitLossCenter,
 		|	OpeningEntryFixedAssets.LedgerType,
 		|	OpeningEntryFixedAssets.CommissioningDate,
-		|	OpeningEntryFixedAssets.OriginalAmount,
-		|	OpeningEntryFixedAssets.BalanceAmount,
+		|	OpeningEntryFixedAssets.OriginalAmount AS Amount,
 		|	OpeningEntryFixedAssets.Currency,
+		|	OpeningEntryFixedAssets.Schedule,
 		|	OpeningEntryFixedAssets.Key
-		|INTO tmp
+		|INTO R8510B_BookValueOfFixedAsset
 		|FROM
 		|	Document.OpeningEntry.FixedAssets AS OpeningEntryFixedAssets
 		|WHERE
 		|	OpeningEntryFixedAssets.Ref = &Ref
-		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	tmp.Period,
-		|	tmp.Company,
-		|	tmp.Branch,
-		|	tmp.ProfitLossCenter,
-		|	tmp.FixedAsset,
-		|	tmp.LedgerType,
-		|	tmp.Currency,
-		|	tmp.Key,
-		|	tmp.BalanceAmount AS Amount,
-		|	FixedAssetsDepreciationInfo.Schedule AS Schedule
-		|INTO R8510B_BookValueOfFixedAsset
+		|union all
+		|
+		|select
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OpeningEntryFixedAssets.Ref.Date AS Period,
+		|	OpeningEntryFixedAssets.Ref.Company,
+		|	OpeningEntryFixedAssets.FixedAsset,
+		|	OpeningEntryFixedAssets.ResponsiblePerson,
+		|	OpeningEntryFixedAssets.Ref.Branch AS Branch,
+		|	OpeningEntryFixedAssets.ProfitLossCenter AS ProfitLossCenter,
+		|	OpeningEntryFixedAssets.LedgerType,
+		|	OpeningEntryFixedAssets.CommissioningDate,
+		|	OpeningEntryFixedAssets.OriginalAmount - OpeningEntryFixedAssets.BalanceAmount AS Amount,
+		|	OpeningEntryFixedAssets.Currency,
+		|	OpeningEntryFixedAssets.Schedule,
+		|	OpeningEntryFixedAssets.Key
 		|FROM
-		|	tmp AS tmp
-		|		LEFT JOIN Catalog.FixedAssets.DepreciationInfo AS FixedAssetsDepreciationInfo
-		|		ON FixedAssetsDepreciationInfo.Ref = tmp.FixedAsset
-		|		AND FixedAssetsDepreciationInfo.LedgerType = tmp.LedgerType
+		|	Document.OpeningEntry.FixedAssets AS OpeningEntryFixedAssets
 		|WHERE
-		|	FixedAssetsDepreciationInfo.LedgerType.CalculateDepreciation"
+		|	OpeningEntryFixedAssets.Ref = &Ref";
 EndFunction
 
 Function R5020B_PartnersBalance()
@@ -2008,6 +2064,21 @@ Function T9510S_Staffing()
 		|	EmployeeList AS EmployeeList
 		|WHERE
 		|	TRUE";
+EndFunction
+
+Function R9541T_VacationUsage()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	EmployeeList.Period,
+		|	EmployeeList.Company,
+		|	EmployeeList.Employee,
+		|	EmployeeList.RemainingVacationDays AS Days
+		|INTO R9541T_VacationUsage
+		|FROM
+		|	EmployeeList AS EmployeeList
+		|WHERE
+		|	EmployeeList.RemainingVacationDays > 0";
 EndFunction
 
 Function R9545T_PaidVacations()
@@ -2036,13 +2107,23 @@ Function R2040B_TaxesIncoming()
 		|	TaxesIncoming.Currency,
 		|	TaxesIncoming.TaxRate,
 		|	TaxesIncoming.InvoiceType,
-		|	TaxesIncoming.Amount,
+		|	SUM(TaxesIncoming.Amount) AS Amount,
 		|	TaxesIncoming.Tax
 		|INTO R2040B_TaxesIncoming
 		|FROM
 		|	TaxesIncoming AS TaxesIncoming
 		|WHERE
-		|	TRUE";
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	TaxesIncoming.Key,
+		|	TaxesIncoming.Period,
+		|	TaxesIncoming.Company,
+		|	TaxesIncoming.Branch,
+		|	TaxesIncoming.Currency,
+		|	TaxesIncoming.TaxRate,
+		|	TaxesIncoming.InvoiceType,
+		|	TaxesIncoming.Tax";
 EndFunction
 
 Function R1040B_TaxesOutgoing()
@@ -2056,13 +2137,65 @@ Function R1040B_TaxesOutgoing()
 		|	TaxesOutgoing.Currency,
 		|	TaxesOutgoing.TaxRate,
 		|	TaxesOutgoing.InvoiceType,
-		|	TaxesOutgoing.Amount,
+		|	SUM(TaxesOutgoing.Amount) AS Amount,
 		|	TaxesOutgoing.Tax
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	TaxesOutgoing AS TaxesOutgoing
 		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	TaxesOutgoing.Key,
+		|	TaxesOutgoing.Period,
+		|	TaxesOutgoing.Company,
+		|	TaxesOutgoing.Branch,
+		|	TaxesOutgoing.Currency,
+		|	TaxesOutgoing.TaxRate,
+		|	TaxesOutgoing.InvoiceType,
+		|	TaxesOutgoing.Tax";
+EndFunction
+
+Function T8510S_FixedAssetsInfo()
+	Return
+		"SELECT
+		|	FixedAssets.CommissioningDate AS Period,
+		|	FixedAssets.Company AS Company,
+		|	FixedAssets.FixedAsset AS FixedAsset,
+		|	FixedAssets.Branch AS Branch,
+		|	FixedAssets.ProfitLossCenter AS ProfitLossCenter,
+		|	FixedAssets.Ref AS Document,
+		|	FixedAssets.LedgerType AS LedgerType,
+		|	FixedAssets.Schedule AS Schedule,
+		|	FixedAssets.OriginalAmount AS Amount,
+		|	FixedAssets.Currency AS Currency
+		|INTO T8510S_FixedAssetsInfo
+		|FROM
+		|	FixedAssets AS FixedAssets
+		|WHERE
 		|	TRUE";
+EndFunction
+
+Function R6025B_SimpleBatch()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	SUM(ItemList.Amount) AS Amount
+	|INTO R6025B_SimpleBatch
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN Constant.UseSimpleBatch AS UseSimpleBatch
+	|		ON TRUE
+	|WHERE
+	|	NOT ItemList.SimpleBatch = VALUE(Catalog.SimpleBatch.EmptyRef)
+	|	AND UseSimpleBatch.Value
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.SimpleBatch,
+	|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion

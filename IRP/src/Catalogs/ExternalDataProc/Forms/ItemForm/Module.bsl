@@ -14,7 +14,7 @@ EndProcedure
 
 &AtClient
 Procedure AddExtDataProc(Command)
-	NotifyEndPut = New NotifyDescription("AddExtDataProcEnd", ThisObject);
+	NotifyEndPut = New CallbackDescription("AddExtDataProcEnd", ThisObject);
 	//@skip-warning
 	BeginPutFile(NotifyEndPut, , , True);
 EndProcedure
@@ -56,7 +56,7 @@ EndProcedure
 &AtClient
 Procedure ExportExtDataProc(Command)
 	FileDialog = New FileDialog(FileDialogMode.ChooseDirectory);
-	Notify = New NotifyDescription("ChooseDirectoryEnding", ThisObject);
+	Notify = New CallbackDescription("ChooseDirectoryEnding", ThisObject);
 	FileDialog.Show(Notify);
 EndProcedure
 

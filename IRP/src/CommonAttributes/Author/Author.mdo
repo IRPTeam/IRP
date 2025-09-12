@@ -13,11 +13,19 @@
  <dataHistory>Use</dataHistory>
  <fillValue xsi:type="core:UndefinedValue"/>
  <content>
+  <metadata>Document.StockCorrection</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.BatchReallocateOutgoing</metadata>
   <use>Use</use>
  </content>
  <content>
   <metadata>Catalog.PaymentTerminals</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.ExternalAccountingOperation</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -57,6 +65,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Task.ExecutorTasks</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.MoneyTransfer</metadata>
   <use>Use</use>
  </content>
@@ -66,6 +78,10 @@
  </content>
  <content>
   <metadata>Document.DepreciationCalculation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.PrintFormTemplates</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -89,7 +105,15 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.WithholdingTaxInvoice</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.FixedAssetsLedgerTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>BusinessProcess.ExecutionProcesses</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -109,11 +133,23 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.PLSections</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.CalculationDeservedVacations</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.Users</metadata>
   <use>Use</use>
  </content>
  <content>
   <metadata>Catalog.AddAttributeAndPropertySets</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.FixedAssetRevaluation</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -125,7 +161,7 @@
   <use>Use</use>
  </content>
  <content>
-  <metadata>Catalog.AdvancesKeys</metadata>
+  <metadata>Catalog.DELETE_AdvancesKeys</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -237,7 +273,15 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.TaxesOperation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.AccrualAndDeductionTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.ELedgerRegistry</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -262,6 +306,10 @@
  </content>
  <content>
   <metadata>Catalog.VehicleTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ObjectLocations</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -329,6 +377,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.ExtDimensions</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.CashRevenue</metadata>
   <use>Use</use>
  </content>
@@ -389,6 +441,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.Cities</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.RetailShipmentConfirmation</metadata>
   <use>Use</use>
  </content>
@@ -422,6 +478,10 @@
  </content>
  <content>
   <metadata>Document.Unbundling</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.ShipmentPlaningOrder</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -501,6 +561,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.Issue</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.Incoterms</metadata>
   <use>Use</use>
  </content>
@@ -522,6 +586,10 @@
  </content>
  <content>
   <metadata>Catalog.SourceOfOrigins</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ExecutionTemplates</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -686,10 +754,6 @@
  </content>
  <content>
   <metadata>Document.FixedAssetTransfer</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.TaxesOperation</metadata>
   <use>Use</use>
  </content>
  <autoUse>DontUse</autoUse>

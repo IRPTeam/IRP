@@ -2,6 +2,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)	
 	ThisObject.Formula     = Parameters.Formula;
+	ThisObject.SourceName  = Parameters.SourceName;
 	ThisObject.PropertySet = Parameters.PropertySet;
 	DCS = Catalogs[Parameters.TemplateOwner].GetTemplate(Parameters.TemplateName);	
 	DCS.Parameters.PropertySet.Value = ThisObject.PropertySet;
@@ -131,7 +132,7 @@ EndProcedure
 Procedure OperatorsDragEnd(Item, DragParameters, StandardProcessing)
 	If Item.CurrentData.Operator = "Format(,)" Then
 		Wizard = New FormatStringWizard();
-		Wizard.Show(New NotifyDescription("InsertOperatorToFormulaDragEnd", 
+		Wizard.Show(New CallbackDescription("InsertOperatorToFormulaDragEnd", 
 			ThisObject, New Structure("Wizard",Wizard)));
 	EndIf;
 EndProcedure
@@ -171,7 +172,7 @@ Function OperandTextProcessing(Val OperandText)
 		
 	OperandText = StrReplace(OperandText, "[", "");
 	OperandText = StrReplace(OperandText, "]", "");
-	OperandText = StrReplace(OperandText, "Item.", "");
+	OperandText = StrReplace(OperandText, SourceName+".", "");
 	OperandText = GetAttributeUniqueID(OperandText);
 	Return "[" + OperandText + "]";
 EndFunction
@@ -214,7 +215,7 @@ EndProcedure
 Procedure InsertOperatorToFormula()
 	If Items.Operators.CurrentData.Operator = "Format(,)" Then
 		Wizard = New FormatStringWizard();
-		Wizard.Show(New NotifyDescription("InsertOperatorToFormulaEnd", 
+		Wizard.Show(New CallbackDescription("InsertOperatorToFormulaEnd", 
 			ThisObject, New Structure("Wizard",Wizard)));
         Return;
 	Else

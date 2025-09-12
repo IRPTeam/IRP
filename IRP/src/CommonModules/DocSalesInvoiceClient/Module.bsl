@@ -8,6 +8,7 @@ Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
 	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
 	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "ShipmentConfirmations");
+	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "ShipmentPlaningOrders");
 	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters);
 EndProcedure
 
@@ -29,22 +30,36 @@ EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-		DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
-		DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", False, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, DataCompositionComparisonType.Equal));
 	OpenSettings.FillingData = New Structure("OurCompany", True);
-
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", False, ComparisonType.Equal));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, ComparisonType.Equal));
 	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
+EndProcedure
+
+#EndRegion
+
+#Region ACCOUNT
+
+Procedure AccountOnChange(Object, Form, Item) Export
+	ViewClient_V2.AccountOnChange(Object, Form, "ItemList");
+EndProcedure
+
+Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	CommonFormActions.AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, ArrayOfFilters);
+EndProcedure
+
+Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	CommonFormActions.AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
 #EndRegion
@@ -162,6 +177,11 @@ EndProcedure
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	ViewClient_V2.ItemListAfterDeleteRow(Object, Form);
 EndProcedure
+
+Async Function ItemListSplitRow(Object, Form) Export
+	NewRow = Await ViewClient_V2.ItemListSplitRow(Object, Form);
+	Return NewRow;
+EndFunction
 
 #Region ITEM_LIST_COLUMNS
 

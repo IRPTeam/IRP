@@ -72,8 +72,7 @@ Function CheckDocument() Export
 			ArrayOfErrors.Add("--------------------------");
 			ArrayOfErrors.Add();
 		EndTry;
-	EndDo;
-			
+	EndDo;			
 	
 	If ArrayOfErrors.Count() Then
 		Unit_Service.assertFalse(StrConcat(ArrayOfErrors, Chars.LF));
@@ -105,9 +104,9 @@ Function GenerateDocuments() Export
 			EndDo;
 			Descr = MetaObj.FullName() + " " + Descr;
 			NewDoc = CreateDoc(Row, MetaObj);
-			NewDoc.Description = Descr;
+			NewDoc.Comment = Descr;
 			NewDoc.Write();
-			AllDoc.Add(NewDoc.Description);
+			AllDoc.Add(NewDoc.Comment);
 			
 			StrTables = New Structure;
 			StrTables.Insert("AllocationList", "Store");
@@ -137,50 +136,50 @@ Procedure CreateDocumentsWithTable(Data, MetaObj, TabSection, AttrName, Descr, R
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][0];
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0];
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][0];
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][1];
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][1];
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][1];
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][2];
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][2];
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][2];
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][0];
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][1];
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][1];
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][1];
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][1];
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][2];
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][1] + "&" + Data[AttrName][2];
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][1] + "&" + Data[AttrName][2];
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][0];
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][2];
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][2];
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][2];
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
@@ -189,9 +188,9 @@ Procedure CreateDocumentsWithTable(Data, MetaObj, TabSection, AttrName, Descr, R
 	NewRow[AttrName] = Data[AttrName][1];
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][2];	
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][1] + "&" + Data[AttrName][2];		
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][1] + "&" + Data[AttrName][2];		
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 EndProcedure
 
 Function CreateDoc(Row, MetaObj)
@@ -449,7 +448,10 @@ Function InformationRegisters() Export
 	ArrayOfErrors = New Array();
 	
 	For Each MetaObj In Metadata.InformationRegisters Do
-			
+		
+		If MetaObj = Metadata.InformationRegisters.SecureDataStorage Then
+			Continue;
+		EndIf;
 		
 		Try
 			InformationRegisters[MetaObj.Name].GetAccessKey();
@@ -460,16 +462,20 @@ Function InformationRegisters() Export
 			ArrayOfErrors.Add();
 		EndTry;
 		
-		ReadResult = AccessParameters("Read", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateInformationRegisters);
-		If Not ReadResult.Accessibility Then
-			ArrayOfErrors.Add("Set Read access to Role TemplateInformationRegisters:" + MetaObj.FullName());
-			ArrayOfErrors.Add("--------------------------");
-		EndIf;
+		HasDimensions = MetaObj.Dimensions.Count() > 0;
 		
-		ReadResult = AccessParameters("Update", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateInformationRegisters);
-		If ReadResult.Accessibility Then
-			ArrayOfErrors.Add("Remove Update access from Role TemplateInformationRegisters:" + MetaObj.FullName());
-			ArrayOfErrors.Add("--------------------------");
+		If HasDimensions Then
+			ReadResult = AccessParameters("Read", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateInformationRegisters);
+			If Not ReadResult.Accessibility Then
+				ArrayOfErrors.Add("Set Read access to Role TemplateInformationRegisters:" + MetaObj.FullName());
+				ArrayOfErrors.Add("--------------------------");
+			EndIf;
+			
+			ReadResult = AccessParameters("Update", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateInformationRegisters);
+			If ReadResult.Accessibility Then
+				ArrayOfErrors.Add("Remove Update access from Role TemplateInformationRegisters:" + MetaObj.FullName());
+				ArrayOfErrors.Add("--------------------------");
+			EndIf;
 		EndIf; 
 
 		Query = New Query("Select ALLOWED TOP 1 * FROM " + MetaObj.FullName());
@@ -483,8 +489,7 @@ Function InformationRegisters() Export
 			ArrayOfErrors.Add();
 		EndTry;
 	EndDo;
-			
-	
+		
 	If ArrayOfErrors.Count() Then
 		Unit_Service.assertFalse(StrConcat(ArrayOfErrors, Chars.LF));
 	EndIf;

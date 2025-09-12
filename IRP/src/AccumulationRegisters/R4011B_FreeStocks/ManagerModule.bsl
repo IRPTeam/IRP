@@ -18,10 +18,10 @@ EndFunction
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
 
-	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4011B_FreeStocks") Then
+	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4011B_FreeStocks", True) Then
 		Return True;
 	EndIf;
-
+	
 	Tables = New Structure();
 	Tables.Insert("ItemList_InDocument", ItemList_InDocument);
 	Tables.Insert("Records_InDocument", Records_InDocument);

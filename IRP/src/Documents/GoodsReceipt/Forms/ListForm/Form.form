@@ -16,11 +16,6 @@
   <extendedTooltip>
    <name>ListSettingsComposerUserSettingsExtendedTooltip</name>
    <id>2</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -66,11 +61,6 @@
    <extendedTooltip>
     <name>NumberExtendedTooltip</name>
     <id>18</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -81,11 +71,6 @@
    <contextMenu>
     <name>NumberContextMenu</name>
     <id>17</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>LabelField</type>
@@ -112,11 +97,6 @@
    <extendedTooltip>
     <name>DateExtendedTooltip</name>
     <id>21</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -127,11 +107,6 @@
    <contextMenu>
     <name>DateContextMenu</name>
     <id>20</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>LabelField</type>
@@ -158,11 +133,6 @@
    <extendedTooltip>
     <name>CompanyExtendedTooltip</name>
     <id>24</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -173,61 +143,6 @@
    <contextMenu>
     <name>CompanyContextMenu</name>
     <id>23</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>InputField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:InputFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <wrap>true</wrap>
-    <chooseType>true</chooseType>
-    <typeDomainEnabled>true</typeDomainEnabled>
-    <textEdit>true</textEdit>
-   </extInfo>
-  </items>
-  <items xsi:type="form:FormField">
-   <name>Store</name>
-   <id>40</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>List.Store</segments>
-   </dataPath>
-   <extendedTooltip>
-    <name>StoreExtendedTooltip</name>
-    <id>42</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>StoreContextMenu</name>
-    <id>41</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -258,11 +173,6 @@
    <extendedTooltip>
     <name>TransactionTypeExtendedTooltip</name>
     <id>33</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -273,11 +183,6 @@
    <contextMenu>
     <name>TransactionTypeContextMenu</name>
     <id>32</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -312,11 +217,6 @@
    <extendedTooltip>
     <name>StatusExtendedTooltip</name>
     <id>45</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -327,11 +227,6 @@
    <contextMenu>
     <name>StatusContextMenu</name>
     <id>44</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -362,11 +257,6 @@
    <extendedTooltip>
     <name>PartnerExtendedTooltip</name>
     <id>30</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -377,11 +267,6 @@
    <contextMenu>
     <name>PartnerContextMenu</name>
     <id>29</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -412,11 +297,6 @@
    <extendedTooltip>
     <name>AuthorExtendedTooltip</name>
     <id>39</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -427,11 +307,6 @@
    <contextMenu>
     <name>AuthorContextMenu</name>
     <id>38</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -449,7 +324,7 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Description</name>
+   <name>Comment</name>
    <id>46</id>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -457,16 +332,11 @@
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Description</segments>
+    <segments>List.Comment</segments>
    </dataPath>
    <extendedTooltip>
-    <name>DescriptionExtendedTooltip</name>
+    <name>CommentExtendedTooltip</name>
     <id>48</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -475,13 +345,8 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>DescriptionContextMenu</name>
+    <name>CommentContextMenu</name>
     <id>47</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -510,11 +375,6 @@
    <extendedTooltip>
     <name>RefExtendedTooltip</name>
     <id>36</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -525,11 +385,6 @@
    <contextMenu>
     <name>RefContextMenu</name>
     <id>35</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -550,29 +405,14 @@
   <autoCommandBar>
    <name>ListCommandBar</name>
    <id>5</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <searchStringAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>ListSearchString</name>
    <id>7</id>
    <extendedTooltip>
     <name>ListSearchStringExtendedTooltip</name>
     <id>9</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -583,34 +423,19 @@
    <contextMenu>
     <name>ListSearchStringContextMenu</name>
     <id>8</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
-   <source>ListSearchString</source>
+   <source>List</source>
    <extInfo xsi:type="form:SearchStringAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
   </searchStringAddition>
   <viewStatusAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>ListViewStatus</name>
    <id>10</id>
    <extendedTooltip>
     <name>ListViewStatusExtendedTooltip</name>
     <id>12</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -621,36 +446,21 @@
    <contextMenu>
     <name>ListViewStatusContextMenu</name>
     <id>11</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>ViewStatusAddition</type>
-   <source>ListViewStatus</source>
+   <source>List</source>
    <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
     <horizontalLocation>Left</horizontalLocation>
    </extInfo>
   </viewStatusAddition>
   <searchControlAddition>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <name>ListSearchControl</name>
    <id>13</id>
    <extendedTooltip>
     <name>ListSearchControlExtendedTooltip</name>
     <id>15</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -661,15 +471,10 @@
    <contextMenu>
     <name>ListSearchControlContextMenu</name>
     <id>14</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>SearchControlAddition</type>
-   <source>ListSearchControl</source>
+   <source>List</source>
    <extInfo xsi:type="form:SearchControlAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -677,11 +482,6 @@
   <extendedTooltip>
    <name>ListExtendedTooltip</name>
    <id>6</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -692,11 +492,6 @@
   <contextMenu>
    <name>ListContextMenu</name>
    <id>4</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <representation>HierarchicalList</representation>
@@ -738,11 +533,6 @@
  <autoCommandBar>
   <name>FormCommandBar</name>
   <id>-1</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
   <autoFill>true</autoFill>
  </autoCommandBar>
@@ -750,6 +540,7 @@
   <event>OnCreateAtServer</event>
   <name>OnCreateAtServer</name>
  </handlers>
+ <saveWindowSettings>true</saveWindowSettings>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>
@@ -791,26 +582,26 @@ INDEX BY
 ;
 
 ////////////////////////////////////////////////////////////////////////////////
- SELECT
+SELECT
 	GoodsReceipt.Ref AS Ref,
 	CASE
-		WHEN case
-			when ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
-				then -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
-			else ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
-		end = 0
+		WHEN CASE
+			WHEN ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
+				THEN -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+			ELSE ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+		END = 0
 			THEN VALUE(Enum.InvoicingStatuses.Closed)
-		WHEN ItemListTable.QuantityInBaseUnit = case
-			when ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
-				then -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
-			else ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
-		end
+		WHEN ItemListTable.QuantityInBaseUnit = CASE
+			WHEN ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
+				THEN -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+			ELSE ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+		END
 			THEN VALUE(Enum.InvoicingStatuses.Awaiting)
-		WHEN ItemListTable.QuantityInBaseUnit &lt;&gt; case
-			when ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
-				then -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
-			else ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
-		end
+		WHEN ItemListTable.QuantityInBaseUnit &lt;&gt; CASE
+			WHEN ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
+				THEN -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+			ELSE ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+		END
 			THEN VALUE(Enum.InvoicingStatuses.Processing)
 	END AS Status,
 	GoodsReceipt.DeletionMark AS DeletionMark,
@@ -823,12 +614,7 @@ INDEX BY
 	GoodsReceipt.TransactionType AS TransactionType,
 	GoodsReceipt.Author AS Author,
 	GoodsReceipt.Branch AS Branch,
-	GoodsReceipt.Description AS Description,
-	CASE
-		WHEN ItemListTable.StoreCount = 1
-			THEN ItemListTable.Store
-		ELSE VALUE(Catalog.Stores.EmptyRef)
-	END AS Store
+	GoodsReceipt.Comment AS Comment
 FROM
 	Document.GoodsReceipt AS GoodsReceipt
 		LEFT JOIN ItemListTable AS ItemListTable
@@ -847,31 +633,26 @@ GROUP BY
 	GoodsReceipt.TransactionType,
 	GoodsReceipt.Author,
 	GoodsReceipt.Branch,
-	GoodsReceipt.Description,
-	CASE
-		WHEN ItemListTable.StoreCount = 1
-			THEN ItemListTable.Store
-		ELSE VALUE(Catalog.Stores.EmptyRef)
-	END,
+	GoodsReceipt.Comment,
 	R4031B_GoodsInTransitIncoming.QuantityBalance,
 	CASE
-		WHEN case
-			when ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
-				then -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
-			else ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
-		end = 0
+		WHEN CASE
+			WHEN ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
+				THEN -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+			ELSE ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+		END = 0
 			THEN VALUE(Enum.InvoicingStatuses.Closed)
-		WHEN ItemListTable.QuantityInBaseUnit = case
-			when ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
-				then -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
-			else ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
-		end
+		WHEN ItemListTable.QuantityInBaseUnit = CASE
+			WHEN ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
+				THEN -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+			ELSE ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+		END
 			THEN VALUE(Enum.InvoicingStatuses.Awaiting)
-		WHEN ItemListTable.QuantityInBaseUnit &lt;&gt; case
-			when ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
-				then -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
-			else ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
-		end
+		WHEN ItemListTable.QuantityInBaseUnit &lt;&gt; CASE
+			WHEN ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0) &lt; 0
+				THEN -ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+			ELSE ISNULL(R4031B_GoodsInTransitIncoming.QuantityBalance, 0)
+		END
 			THEN VALUE(Enum.InvoicingStatuses.Processing)
 	END</queryText>
    <mainTable>Document.GoodsReceipt</mainTable>
@@ -949,16 +730,16 @@ GROUP BY
     <field>Branch</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Description</dataPath>
-    <field>Description</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>Basis</dataPath>
     <field>Basis</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>ItemKey</dataPath>
     <field>ItemKey</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Comment</dataPath>
+    <field>Comment</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>ItemList</dataPath>
@@ -977,8 +758,44 @@ GROUP BY
     <field>SerialLotNumbers</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceOfOrigins</dataPath>
+    <field>SourceOfOrigins</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>PointInTime</dataPath>
     <field>PointInTime</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ManualMovementsEdit</dataPath>
+    <field>ManualMovementsEdit</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Editor</dataPath>
+    <field>Editor</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceNodeID</dataPath>
+    <field>SourceNodeID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>NumeratorRules</dataPath>
+    <field>NumeratorRules</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ModifyDate</dataPath>
+    <field>ModifyDate</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>UniqueID</dataPath>
+    <field>UniqueID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DocumentNumber</dataPath>
+    <field>DocumentNumber</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CreateDate</dataPath>
+    <field>CreateDate</field>
    </fields>
    <parameters>
     <name>Period</name>

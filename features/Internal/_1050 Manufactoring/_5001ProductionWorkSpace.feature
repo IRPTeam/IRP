@@ -90,7 +90,7 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 		And I select current line in "List" table		
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "BusinessUnit" became equal to "Production store 05"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "PlanningPeriod" became equal to "First month"
 		Then the form attribute named "ProductionPlanning" became equal to "Production planning 1 dated 29.04.2022 09:40:47"
 		And the field named "PlanningPeriodStartDate" is filled
@@ -123,7 +123,7 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 		And I select current line in "List" table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "StoreSender" became equal to "Store 01"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "StoreTransit" became equal to ""
 		Then the form attribute named "StoreReceiver" became equal to "Store 06"
 		And "ItemList" table became equal
@@ -167,7 +167,7 @@ Scenario: _5004 create IT from Production Workspace (product) and check filling 
 		And I select current line in "List" table	
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "StoreSender" became equal to "Store 01"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "StoreTransit" became equal to ""
 		Then the form attribute named "StoreReceiver" became equal to "Store 06"
 		And "ItemList" table became equal
@@ -217,7 +217,7 @@ Scenario: _5005 create IT from Production Workspace (product)
 		And I select current line in "List" table	
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "BusinessUnit" became equal to "Production store 05"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "PlanningPeriod" became equal to "First month"
 		Then the form attribute named "ProductionPlanning" became equal to "Production planning 1 dated 29.04.2022 09:40:47"
 		And the field named "PlanningPeriodStartDate" is filled

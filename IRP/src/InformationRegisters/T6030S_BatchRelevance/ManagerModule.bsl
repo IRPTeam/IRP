@@ -394,7 +394,7 @@ Function GetPointInTime(Date, Company, Store, ItemKey)
 	If QuerySelection.Next() Then
 		Return QuerySelection.PointInTime;
 	Else
-		Raise "Can not get point in time";
+                Raise R().CannotGetPointInTime;
 	EndIf;
 EndFunction
 

@@ -105,35 +105,103 @@ Scenario: _0978001 preparation (foreign currency revaluation)
 		When Create document ForeignCurrencyRevaluation objects (multicurrency revaluation)
 	* Post documents
 		* Posting OpeningEntry
-			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.OpeningEntry.FindByNumber(112).GetObject();"     |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 		* Posting PurchaseInvoice
-			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(1).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(2).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(3).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(4).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(5).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(6).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(7).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 		* Posting SalesInvoice
-			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.SalesInvoice.FindByNumber(1).GetObject();"       |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.SalesInvoice.FindByNumber(2).GetObject();"       |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.SalesInvoice.FindByNumber(3).GetObject();"       |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.SalesInvoice.FindByNumber(4).GetObject();"       |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.SalesInvoice.FindByNumber(5).GetObject();"       |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 		* Posting BankPayment
-			Given I open hyperlink "e1cib/list/Document.BankPayment"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankPayment.FindByNumber(1).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankPayment.FindByNumber(2).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankPayment.FindByNumber(3).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankPayment.FindByNumber(4).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankPayment.FindByNumber(5).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 		* Posting BankReceipt
-			Given I open hyperlink "e1cib/list/Document.BankReceipt"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankReceipt.FindByNumber(1).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankReceipt.FindByNumber(2).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankReceipt.FindByNumber(3).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankReceipt.FindByNumber(4).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 		* Posting DebitNote
-			Given I open hyperlink "e1cib/list/Document.DebitNote"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.DebitNote.FindByNumber(1).GetObject();"          |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 		* Posting CustomersAdvancesClosing
 			Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 			Then I select all lines of "List" table
@@ -224,10 +292,10 @@ Scenario: _0978008 Sales (PI) and receipt of money (BP) on the same date - no ex
 			| 'Partner'              | 'Total'                                                                 | ''         | ''         | ''        | 'Total'              | ''        | ''        | ''        | 'Total'                   | ''        | ''        | ''        | 'Total'                   | ''        | ''        | ''        |
 			| 'Partner terms'        | 'Opening'                                                               | 'Receipt'  | 'Expense'  | 'Balance' | 'Opening'            | 'Receipt' | 'Expense' | 'Balance' | 'Opening'                 | 'Receipt' | 'Expense' | 'Balance' | 'Opening'                 | 'Receipt' | 'Expense' | 'Balance' |
 			| 'Basis'                | ''                                                                      | ''         | ''         | ''        | ''                   | ''        | ''        | ''        | ''                        | ''        | ''        | ''        | ''                        | ''        | ''        | ''        |
-			| 'Total'                | ''                                                                      | '5 950,00' | '5 950,00' | ''        | ''                   | '700,00'  | '700,00'  | ''        | ''                        | '630,00'  | '630,00'  | ''        | ''                        | ''        | ''        | ''        |
-			| 'USD'                  | ''                                                                      | '5 950,00' | '5 950,00' | ''        | ''                   | '700,00'  | '700,00'  | ''        | ''                        | '630,00'  | '630,00'  | ''        | ''                        | '700,00'  | '700,00'  | ''        |
-			| 'Ferron BP'            | ''                                                                      | '5 950,00' | '5 950,00' | ''        | ''                   | '700,00'  | '700,00'  | ''        | ''                        | '630,00'  | '630,00'  | ''        | ''                        | '700,00'  | '700,00'  | ''        |
-			| 'Vendor Ferron, USD'   | ''                                                                      | '5 950,00' | '5 950,00' | ''        | ''                   | '700,00'  | '700,00'  | ''        | ''                        | '630,00'  | '630,00'  | ''        | ''                        | '700,00'  | '700,00'  | ''        |
+			| 'Total'                | ''                                                                      | '5 950,00' | '5 950,00' | ''        | ''                   | '700,00'  | '700,00'  | ''        | ''                        | '661,11'  | '661,11'  | ''        | ''                        | ''        | ''        | ''        |
+			| 'USD'                  | ''                                                                      | '5 950,00' | '5 950,00' | ''        | ''                   | '700,00'  | '700,00'  | ''        | ''                        | '661,11'  | '661,11'  | ''        | ''                        | '700,00'  | '700,00'  | ''        |
+			| 'Ferron BP'            | ''                                                                      | '5 950,00' | '5 950,00' | ''        | ''                   | '700,00'  | '700,00'  | ''        | ''                        | '661,11'  | '661,11'  | ''        | ''                        | '700,00'  | '700,00'  | ''        |
+			| 'Vendor Ferron, USD'   | ''                                                                      | '5 950,00' | '5 950,00' | ''        | ''                   | '700,00'  | '700,00'  | ''        | ''                        | '661,11'  | '661,11'  | ''        | ''                        | '700,00'  | '700,00'  | ''        |
 	And I close all client application windows
 	
 Scenario: _0978009 Sales (SI) and payment (BR) on the same date - no exchange difference - (R5020B_PartnersBalance)
@@ -254,11 +322,11 @@ Scenario: _0978009 Sales (SI) and payment (BR) on the same date - no exchange di
 			| 'Partner'                                   | 'Total'                                                               | ''          | ''          | ''        | 'Total'              | ''         | ''         | ''        | 'Total'                   | ''         | ''         | ''        | 'Total'                   | ''         | ''         | ''        |
 			| 'Partner terms'                             | 'Opening'                                                             | 'Receipt'   | 'Expense'   | 'Balance' | 'Opening'            | 'Receipt'  | 'Expense'  | 'Balance' | 'Opening'                 | 'Receipt'  | 'Expense'  | 'Balance' | 'Opening'                 | 'Receipt'  | 'Expense'  | 'Balance' |
 			| 'Basis'                                     | ''                                                                    | ''          | ''          | ''        | ''                   | ''         | ''         | ''        | ''                        | ''         | ''         | ''        | ''                        | ''         | ''         | ''        |
-			| 'Total'                                     | ''                                                                    | '11 265,14' | '11 265,14' | ''        | ''                   | '1 325,31' | '1 325,31' | ''        | ''                        | '1 192,78' | '1 192,78' | ''        | ''                        | ''         | ''         | ''        |
-			| 'USD'                                       | ''                                                                    | '11 265,14' | '11 265,14' | ''        | ''                   | '1 325,31' | '1 325,31' | ''        | ''                        | '1 192,78' | '1 192,78' | ''        | ''                        | '1 325,31' | '1 325,31' | ''        |
-			| 'Kalipso'                                   | ''                                                                    | '11 265,14' | '11 265,14' | ''        | ''                   | '1 325,31' | '1 325,31' | ''        | ''                        | '1 192,78' | '1 192,78' | ''        | ''                        | '1 325,31' | '1 325,31' | ''        |
-			| 'Personal Partner terms, $'                 | ''                                                                    | '11 265,14' | '11 265,14' | ''        | ''                   | '1 325,31' | '1 325,31' | ''        | ''                        | '1 192,78' | '1 192,78' | ''        | ''                        | '1 325,31' | '1 325,31' | ''        |
-			| 'Sales invoice 1 dated 01.02.2023 12:00:00' | ''                                                                    | '11 265,14' | '11 265,14' | ''        | ''                   | '1 325,31' | '1 325,31' | ''        | ''                        | '1 192,78' | '1 192,78' | ''        | ''                        | '1 325,31' | '1 325,31' | ''        |
+			| 'Total'                                     | ''                                                                    | '11 265,14' | '11 265,14' | ''        | ''                   | '1 325,31' | '1 325,31' | ''        | ''                        | '1 251,68' | '1 251,68' | ''        | ''                        | ''         | ''         | ''        |
+			| 'USD'                                       | ''                                                                    | '11 265,14' | '11 265,14' | ''        | ''                   | '1 325,31' | '1 325,31' | ''        | ''                        | '1 251,68' | '1 251,68' | ''        | ''                        | '1 325,31' | '1 325,31' | ''        |
+			| 'Kalipso'                                   | ''                                                                    | '11 265,14' | '11 265,14' | ''        | ''                   | '1 325,31' | '1 325,31' | ''        | ''                        | '1 251,68' | '1 251,68' | ''        | ''                        | '1 325,31' | '1 325,31' | ''        |
+			| 'Personal Partner terms, $'                 | ''                                                                    | '11 265,14' | '11 265,14' | ''        | ''                   | '1 325,31' | '1 325,31' | ''        | ''                        | '1 251,68' | '1 251,68' | ''        | ''                        | '1 325,31' | '1 325,31' | ''        |
+			| 'Sales invoice 1 dated 01.02.2023 12:00:00' | ''                                                                    | '11 265,14' | '11 265,14' | ''        | ''                   | '1 325,31' | '1 325,31' | ''        | ''                        | '1 251,68' | '1 251,68' | ''        | ''                        | '1 325,31' | '1 325,31' | ''        |
 		And I close all client application windows
 
 
@@ -510,15 +578,17 @@ Scenario: _0978026 revaluation of currency balance - USD to TRY falls, USD to EU
 		And I select "R5021 Revenues" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Foreign currency revaluation 3 dated 03.02.2023 23:59:00' | ''                    | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  |
-			| 'Register  "R5021 Revenues"'                               | ''                    | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  |
-			| ''                                                         | 'Period'              | 'Company'      | 'Branch'       | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '53,09'  | ''                  |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '142,43' | ''                  |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '6,26'   | ''                  |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '20'     | ''                  |	
+			| 'Foreign currency revaluation 3 dated 03.02.2023 23:59:00' | ''                    | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                        |
+			| 'Register  "R5021 Revenues"'                               | ''                    | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                        |
+			| ''                                                         | 'Period'              | 'Company'      | 'Branch'       | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' |'Calculation movement cost'|
+			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '53,09'  | ''                  | ''                        |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '142,43' | ''                  | ''                        |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '8,99'   | ''                  | ''                        |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  | ''                        |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  | ''                        |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '6,26'   | ''                  | ''                        |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '20'     | ''                  | ''                        |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '20,65'  | ''                  | ''                        |		
 		And I close all client application windows
 
 Scenario: _0978027 revaluation of currency balance - USD to TRY falls, USD to EUR rise - (R5022 Expenses) 
@@ -540,8 +610,10 @@ Scenario: _0978027 revaluation of currency balance - USD to TRY falls, USD to EU
 			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '7,12'   | ''                  | ''            | ''                          |
 			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '44,53'  | ''                  | ''            | ''                          |
 			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '142,43' | ''                  | ''            | ''                          |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '4,3'    | ''                  | ''            | ''                          |
 			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '69,14'  | ''                  | ''            | ''                          |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '20'     | ''                  | ''            | ''                          |		
+			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '20'     | ''                  | ''            | ''                          |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '34,45'  | ''                  | ''            | ''                          |		
 		And I close all client application windows
 
 Scenario: _0978028 revaluation of currency balance - USD to TRY falls, USD to EUR rise - (R3027 Employee cash advance) 
@@ -556,11 +628,11 @@ Scenario: _0978028 revaluation of currency balance - USD to TRY falls, USD to EU
 		And I select "R3027 Employee cash advance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Foreign currency revaluation 3 dated 03.02.2023 23:59:00' | ''                    | ''           | ''             | ''             | ''         | ''                     | ''                | ''                             | ''       | ''                     |
-			| 'Register  "R3027 Employee cash advance"'                  | ''                    | ''           | ''             | ''             | ''         | ''                     | ''                | ''                             | ''       | ''                     |
-			| ''                                                         | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Transaction currency' | 'Partner'         | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Receipt'    | 'Main Company' | 'Front office' | 'EUR'      | 'USD'                  | 'Alexander Orlov' | 'Reporting currency Euro'      | '1'      | 'No'                   |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'USD'                  | 'Alexander Orlov' | 'Local currency'               | '7,12'   | 'No'                   |		
+			| 'Foreign currency revaluation 3 dated 03.02.2023 23:59:00' | ''                    | ''           | ''             | ''             | ''                | ''                                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| 'Register  "R3027 Employee cash advance"'                  | ''                    | ''           | ''             | ''             | ''                | ''                                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| ''                                                         | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Partner'         | 'Agreement'                         | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Receipt'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'Alexander Orlov cash advance, USD' | 'EUR'      | 'USD'                  | 'Reporting currency Euro'      | '1'      | 'No'                   |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Expense'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'Alexander Orlov cash advance, USD' | 'TRY'      | 'USD'                  | 'Local currency'               | '7,12'   | 'No'                   |		
 		And I close all client application windows
 
 # Transaction +10, Reporting +100 (Trans*Rate < Rep - Expense) только инвойс
@@ -704,17 +776,19 @@ Scenario: _0978034 revaluation of currency balance - exchange rate increased - (
 		And I select "R5021 Revenues" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Foreign currency revaluation 5 dated 05.02.2023 23:59:00' | ''                    | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  |
-			| 'Register  "R5021 Revenues"'                               | ''                    | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  |
-			| ''                                                         | 'Period'              | 'Company'      | 'Branch'       | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' |
-			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '54,49'  | ''                  |
-			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '344,35' | ''                  |
-			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '10'     | ''                  |
-			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  |
-			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  |
-			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '5'      | ''                  |
-			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '6,25'   | ''                  |
-			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '100'    | ''                  |	
+			| 'Foreign currency revaluation 5 dated 05.02.2023 23:59:00' | ''                    | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                        |
+			| 'Register  "R5021 Revenues"'                               | ''                    | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                        |
+			| ''                                                         | 'Period'              | 'Company'      | 'Branch'       | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' |'Calculation movement cost'|
+			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '54,49'  | ''                  | ''                        |
+			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '344,35' | ''                  | ''                        |
+			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '10'     | ''                  | ''                        |
+			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '38,63'  | ''                  | ''                        |
+			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  | ''                        |
+			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  | ''                        |
+			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '5'      | ''                  | ''                        |
+			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '6,25'   | ''                  | ''                        |
+			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '24,1'   | ''                  | ''                        |
+			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '100'    | ''                  | ''                        |	
 		And I close all client application windows
 
 Scenario: _0978035 revaluation of currency balance - exchange rate increased - (R5022 Expenses) 
@@ -737,9 +811,11 @@ Scenario: _0978035 revaluation of currency balance - exchange rate increased - (
 			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '43,07'  | ''                  | ''            | ''                          |
 			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '688,7'  | ''                  | ''            | ''                          |
 			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '5'      | ''                  | ''            | ''                          |
+			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '18,65'  | ''                  | ''            | ''                          |
 			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '68,63'  | ''                  | ''            | ''                          |
 			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '2,5'    | ''                  | ''            | ''                          |
-			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '50'     | ''                  | ''            | ''                          |	
+			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '9,33'   | ''                  | ''            | ''                          |
+			| ''                                                         | '05.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '50'     | ''                  | ''            | ''                          |		
 		And I close all client application windows
 
 Scenario: _0978036 revaluation of currency balance - exchange rate increased - (R1021 Vendors transactions) 
@@ -939,24 +1015,26 @@ Scenario: _0978045 revaluation of currency balance - (R5021 Revenues, include Ot
 		And I select "R5021 Revenues" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Foreign currency revaluation 10 dated 10.02.2023 23:59:00' | ''                    | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  |
-			| 'Register  "R5021 Revenues"'                                | ''                    | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  |
-			| ''                                                          | 'Period'              | 'Company'      | 'Branch'       | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '10,17'  | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '317,46' | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '4'      | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '5'      | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '6'      | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '10'     | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '2'      | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '2'      | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '2,5'    | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '3'      | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '5'      | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '6,26'   | ''                  |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '100'    | ''                  |
+			| 'Foreign currency revaluation 10 dated 10.02.2023 23:59:00' | ''                    | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                        |
+			| 'Register  "R5021 Revenues"'                                | ''                    | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''                        |
+			| ''                                                          | 'Period'              | 'Company'      | 'Branch'       | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' |'Calculation movement cost'|
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '10,17'  | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '317,46' | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '4'      | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '5'      | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '6'      | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '10'     | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '23,96'  | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '2'      | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '2'      | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '2,5'    | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '3'      | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '5'      | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '6,26'   | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '11,99'  | ''                  | ''                        |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '100'    | ''                  | ''                        |		
 		And I close all client application windows
 
 Scenario: _0978046 revaluation of currency balance - (R5022 Expenses, include Other partner transaction) 
@@ -983,8 +1061,10 @@ Scenario: _0978046 revaluation of currency balance - (R5022 Expenses, include Ot
 			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '5'      | ''                  | ''            | ''                          |
 			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '6'      | ''                  | ''            | ''                          |
 			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '10,31'  | ''                  | ''            | ''                          |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '20,17'  | ''                  | ''            | ''                          |
 			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '2,5'    | ''                  | ''            | ''                          |
 			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '2,5'    | ''                  | ''            | ''                          |
 			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '3'      | ''                  | ''            | ''                          |
-			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '50'     | ''                  | ''            | ''                          |	
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '10,08'  | ''                  | ''            | ''                          |
+			| ''                                                          | '10.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '50'     | ''                  | ''            | ''                          |		
 		And I close all client application windows

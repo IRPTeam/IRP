@@ -18,7 +18,7 @@ EndProcedure
 // Parameters:
 //  Form - See Catalog.ItemKeys.Form.ItemForm
 //  Cancel - Boolean - Cancel
-//  CurrentObject - CatalogObject.ItemKeys - Current object
+//  CurrentObject - CatalogObject, DocumentObject, BusinessProcessObject, TaskObject - Current object
 //  WriteParameters - Structure - Write parameters
 //  Prefix - String -
 //  AddInfo - Undefined - Add info
@@ -488,7 +488,11 @@ Function GetObjectInfo(Object, Prefix)
 	FormInfo.Insert("Ref", Object.Ref);
 	FormInfo.Insert("Metadata", Object.Ref.Metadata());
 	FormInfo.Insert("IsNew", FormInfo.Ref.IsEmpty());
-	FormInfo.Insert("AddAttributes", Object[Prefix + "AddAttributes"]);
+	If Not Object.Ref.Metadata().TabularSections.Find(Prefix + "AddAttributes") = Undefined Then
+		FormInfo.Insert("AddAttributes", Object[Prefix + "AddAttributes"]);
+	Else
+		FormInfo.Insert("AddAttributes", New ValueTable());
+	EndIf;
 
 	If FormInfo.Metadata = Metadata.Catalogs.ItemKeys 
 		Or FormInfo.Metadata = Metadata.Catalogs.PriceKeys Then
@@ -546,6 +550,9 @@ EndFunction
 // Returns:
 //  See ReduceObjectAttributes
 Function ObjectAttributes(FormInfo, AddAttributeAndPropertySetName, AddInfo = Undefined) Export
+	If Metadata.Catalogs.AddAttributeAndPropertySets.GetPredefinedNames().Find(AddAttributeAndPropertySetName) = Undefined Then
+		Return New Array;
+	EndIf;
 	AllItems = Catalogs.AddAttributeAndPropertySets[AddAttributeAndPropertySetName].Attributes;
 	Return ReduceObjectAttributes(FormInfo, AllItems, AddAttributeAndPropertySetName, AddInfo);
 EndFunction
@@ -1268,16 +1275,21 @@ EndFunction
 
 Function GetDCSTemplate(PredefinedDataName, AddInfo = Undefined) Export
 	TableName = StrReplace(PredefinedDataName, "_", ".");
-	ObjectName = StrSplit(PredefinedDataName, "_");
+	ArrayOfObjectNames = StrSplit(PredefinedDataName, "_");
+	If ArrayOfObjectNames.Count() = 3 Then
+		ObjectName = ArrayOfObjectNames[1] + "_" + ArrayOfObjectNames[2];
+	Else
+		ObjectName = ArrayOfObjectNames[1];
+	EndIf;
 	If StrStartsWith(PredefinedDataName, "Catalog") Then
 		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Catalog");
 		Template.DataSets[0].Items[0].Query = StrReplace(Template.DataSets[0].Items[0].Query, "&TableName", TableName);
 		//@skip-check property-return-type, dynamic-access-method-not-found
-		Template.DataSets[0].Items.DataSet2.Fields.Find("Ref").ValueType = New TypeDescription("CatalogRef." + ObjectName[1]);
+		Template.DataSets[0].Items.DataSet2.Fields.Find("Ref").ValueType = New TypeDescription("CatalogRef." + ObjectName);
 	ElsIf StrStartsWith(PredefinedDataName, "Document") Then
 		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Document");
 		Template.DataSets[0].Query = StrReplace(Template.DataSets[0].Query, "&TableName", TableName);
-		Template.DataSets[0].Fields.Find("Ref").ValueType = New TypeDescription("DocumentRef." + ObjectName[1]);
+		Template.DataSets[0].Fields.Find("Ref").ValueType = New TypeDescription("DocumentRef." + ObjectName);
 	Else
 		Raise R().Error_004;
 	EndIf;

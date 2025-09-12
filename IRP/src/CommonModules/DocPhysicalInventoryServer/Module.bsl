@@ -156,7 +156,7 @@ Function GetRefilledItemTable(Object)
 		|	ItemList.ExpCount AS ExpCount,
 		|	ItemList.ManualFixedCount AS ManualFixedCount,
 		|	ItemList.Difference,
-		|	ItemList.Description
+		|	ItemList.Comment
 		|INTO ItemList
 		|FROM
 		|	&ItemList AS ItemList
@@ -178,7 +178,7 @@ Function GetRefilledItemTable(Object)
 		|	ActualStocksBalance.QuantityBalance AS ExpCount,
 		|	0 AS ManualFixedCount,
 		|	0 AS Difference,
-		|	"""" AS Description
+		|	"""" AS Comment
 		|INTO ActualStock
 		|FROM
 		|	AccumulationRegister.R4010B_ActualStocks.Balance(&Period, Store = &Store) AS ActualStocksBalance
@@ -196,7 +196,7 @@ Function GetRefilledItemTable(Object)
 		|	PhysicalCountByLocationItemList.ExpCount,
 		|	0 AS ManualFixedCount,
 		|	PhysicalCountByLocationItemList.Difference,
-		|	"""" AS Description
+		|	"""" AS Comment
 		|INTO PhysicalCount
 		|FROM
 		|	Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList

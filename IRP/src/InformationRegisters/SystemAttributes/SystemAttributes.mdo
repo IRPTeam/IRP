@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f17708d2-0598-454c-ab61-7e7d6e76a9b7">
+ <producedTypes>
+  <selectionType typeId="9e37c885-4134-469f-8fa2-1b12ee1230dc" valueTypeId="4badbdd1-3352-4f6f-bee6-15988fd26a14"/>
+  <listType typeId="e6ff6a7e-2baf-44aa-946d-a5dcf63b703b" valueTypeId="344e3c42-72ce-41cf-b3f9-736a81c9d2fc"/>
+  <managerType typeId="c0f1502a-fa46-448e-a59b-08d0c45e628d" valueTypeId="4a050634-a884-4dec-a414-0e5ac7decc9f"/>
+  <recordSetType typeId="a10c1d9a-9349-4fb7-aeff-e64c3681e1d1" valueTypeId="3690acd6-2f42-499b-9b43-46249eac37e5"/>
+  <recordKeyType typeId="825ab5d2-9516-446f-972d-0a8738ab4b1a" valueTypeId="652228b4-1e47-412c-875e-2bc3a23c17b5"/>
+  <recordType typeId="70bb1a24-ff2e-4fc6-b447-fa1f9a8913f9" valueTypeId="f4ed7937-f649-447e-8af6-272de14e5193"/>
+  <recordManagerType typeId="b5a6afb4-16c2-463d-a0ed-341944735146" valueTypeId="9e49e6ba-9133-44d7-a55b-f80aab848604"/>
+ </producedTypes>
+ <name>SystemAttributes</name>
+ <synonym>
+  <key>en</key>
+  <value>51C832E3-754E-ECD9-9E9A-A5A8C8D6F950</value>
+ </synonym>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="5f0e1822-ae99-460d-8088-83d1040d7c82">
+  <name>Value</name>
+  <synonym>
+   <key>en</key>
+   <value>1FA784B0-9A1C-20B8-81E6-6CCDC0F0E25C</value>
+  </synonym>
+  <type>
+   <types>Characteristic.SystemAttributes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="dca8ee46-8d77-4e2c-bc18-169cc16159a7">
+  <name>Object</name>
+  <synonym>
+   <key>en</key>
+   <value>33ECE448-9A4B-353B-B51C-CF88DA14F5AA</value>
+  </synonym>
+  <type>
+   <types>DocumentRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="cd583e45-8b8b-4727-aaa1-cf9289492dbd">
+  <name>Property</name>
+  <synonym>
+   <key>en</key>
+   <value>2C03C406-D743-6E33-3A23-34AC3E39C0FC</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.SystemAttributes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="f76f0360-2fcc-4b71-9e63-e3020833fb62">
+  <name>Key</name>
+  <synonym>
+   <key>en</key>
+   <value>2A0CD93C-FEB0-08F2-2A83-3A25B330E4DD</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+</mdclass:InformationRegister>

@@ -92,4 +92,40 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <forms uuid="f7488c15-ff05-4fa7-b83a-90c9f0f159c6">
+  <name>PrintTemplate</name>
+  <synonym>
+   <key>en</key>
+   <value>25872728-D58B-143B-B76A-A0B5FFB3084F</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="96ba903f-48e1-416e-b190-e10e2e09f416">
+  <name>ShowNumerator</name>
+  <synonym>
+   <key>en</key>
+   <value>4BB02379-5DE0-7C53-3CB7-713C5463DB94</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="33a1e88c-7429-4740-90bf-6f0afdbec654">
+  <name>ExecutionTemplate</name>
+  <synonym>
+   <key>en</key>
+   <value>754D8A55-7FDD-49D8-80E3-31CCDC2BFC96</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e1785ae8-e4fc-414a-a88e-005766fafd9a">
+  <name>EditQuantity</name>
+  <synonym>
+   <key>en</key>
+   <value>9C457F51-F965-E405-5F70-042BA8E68757</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

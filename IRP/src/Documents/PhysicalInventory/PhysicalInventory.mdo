@@ -44,7 +44,7 @@
   <objectField>Document.PhysicalInventory.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.PhysicalInventory.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.PhysicalInventory.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.PhysicalInventory.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.PhysicalInventory.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -69,8 +69,10 @@
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
@@ -320,10 +322,10 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="ff4c05f5-e5d7-47b6-a48f-9da9324e1502">
-   <name>Description</name>
+   <name>Comment</name>
    <synonym>
     <key>en</key>
-    <value>4B3A3917-3580-0ABD-DD48-897F64BE8FAD</value>
+    <value>223C3338-D7DE-3D8A-AC48-865C9970ECC6</value>
    </synonym>
    <type>
     <types>String</types>

@@ -230,13 +230,14 @@ Function R6080T_OtherPeriodsRevenues()
 	|	CostList.Branch AS Branch,
 	|	CostList.Basis AS Basis,
 	|	CostList.Currency AS Currency,
+	|	CostList.ProfitLossCenter,
+	|	CostList.RevenueType,
 	|	CostList.Amount * CostList.Factor AS Amount
 	|INTO R6080T_OtherPeriodsRevenues
 	|FROM
 	|	CostList AS CostList
 	|WHERE
 	|	TRUE";
-
 
 EndFunction
 
@@ -311,7 +312,6 @@ EndProcedure
 #EndRegion
 
 #Region AccessObject
-
 
 // Get access key.
 // 
@@ -431,11 +431,11 @@ Function GetAnalytics_DR_R5021T_Revenues_CR_R6080T_OtherPeriodsRevenues(Paramete
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 

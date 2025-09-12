@@ -44,8 +44,7 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 	EndIf;
 
 	ObjectMetadata = Metadata.FindByType(TypeOf(MetaTypeOrRef));
-	AttributesList = Catalogs.AddAttributeAndPropertySets.GetExtensionAttributesListByObjectMetadata(ObjectMetadata,
-		MetaTypeOrRef);
+	AttributesList = Catalogs.AddAttributeAndPropertySets.GetExtensionAttributesListByObjectMetadata(ObjectMetadata, MetaTypeOrRef);
 	FormGroups = AddAttributesAndPropertiesServer.FormGroups(AttributesList);
 	If ElementParent <> Undefined Then
 		For Each FormGroup In FormGroups Do
@@ -64,13 +63,27 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 			Parent = Form;
 		EndIf;
 
-		NewAttribute = Form.Items.Add(Attribute.Attribute, Type("FormField"), Parent);
+		Try
+			NewAttribute = Form.Items.Add(Attribute.Attribute, Type("FormField"), Parent);
+		Except
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_181, Attribute.Attribute));
+			Continue;
+		EndTry;
+		
 		NewAttribute.Type = FormFieldType.InputField;
 		NewAttribute.DataPath = "Object." + Attribute.Attribute;
-		If ObjectMetadata.Attributes[Attribute.Attribute].Type = BooleanTypeDescription Then
-			NewAttribute.Type = FormFieldType.CheckBoxField;
+		If ObjectMetadata.Attributes.Find(Attribute.Attribute) = Undefined Then
+			If Metadata.CommonAttributes[Attribute.Attribute].Type = BooleanTypeDescription Then
+				NewAttribute.Type = FormFieldType.CheckBoxField;
+			EndIf;
+		Else
+			If ObjectMetadata.Attributes[Attribute.Attribute].Type = BooleanTypeDescription Then
+				NewAttribute.Type = FormFieldType.CheckBoxField;
+			EndIf;
 		EndIf;
 	EndDo;
+
+	ArrayOfExcluding = GetArrayOfExcludingExternalAttributes(ObjectMetadata);
 
 	For Each TabularSection In ObjectMetadata.TabularSections Do
 		For Each Column In TabularSection.Attributes Do
@@ -80,19 +93,32 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 			If StrStartsWith(Column.Name, "DELETE_") Then
 				Continue;
 			EndIf;
+			If StrStartsWith(Column.Name, "Description_") Then
+				Continue;
+			EndIf;
 			Parent = Form.Items.Find(TabularSection.Name);
 			If Parent = Undefined Then
 				Continue;
 			EndIf;
 
+			FullColumnName = TabularSection.Name + "." + Column.Name;
+			If ArrayOfExcluding.Find(FullColumnName) <> Undefined Then
+				Continue;
+			EndIf;
+			
 			NewColumn = Form.Items.Add(Column.Name, Type("FormField"), Parent);
 			NewColumn.Type = FormFieldType.InputField;
-			NewColumn.DataPath = "Object." + TabularSection.Name + "." + Column.Name;
+			NewColumn.DataPath = "Object." + FullColumnName;
 			If Column.Type = BooleanTypeDescription Then
 				NewColumn.Type = FormFieldType.CheckBoxField;
 			EndIf;
 		EndDo;
 	EndDo;
 EndProcedure
+
+Function GetArrayOfExcludingExternalAttributes(ObjectMetadata)
+	ArrayOfExcluding = New Array();
+	Return ArrayOfExcluding;
+EndFunction
 
 #EndRegion

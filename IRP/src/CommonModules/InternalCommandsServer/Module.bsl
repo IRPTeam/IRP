@@ -20,7 +20,7 @@ EndProcedure
 // 
 // Parameters:
 //  Form - ClientApplicationForm - Form
-//  MainAttribute - FormAttribute, DynamicList - Main attribute
+//  MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main attribute
 //  ObjectFullName - String - Object full name
 //  FormType - EnumRef.FormTypes - Form type
 //  AddInfo - Undefined - Add info
@@ -34,6 +34,9 @@ Procedure CreateCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo 
 	
 	CommandArray = New Array; // Array of See GetCommandDescription
 	For Each ContentItem In SessionParameters.InternalCommands Do // See GetCommandDescription
+		If Not CheckByFunctionalOptions(ContentItem) Then
+			Continue;
+		EndIf;
 		If FormType = Enums.FormTypes.ObjectForm And Not ContentItem.UsingObjectForm Then
 			Continue;
 		ElsIf FormType = Enums.FormTypes.ListForm And Not ContentItem.UsingListForm Then
@@ -63,6 +66,22 @@ Procedure CreateCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo 
 		EndIf;
 		
 		For Each TableName In TablesArray Do
+			
+			IntenalCommandsParams = New Structure;
+			IntenalCommandsParams.Insert("CommandDescription", Command);
+			IntenalCommandsParams.Insert("Form", Form);
+			IntenalCommandsParams.Insert("MainAttribute", MainAttribute);
+			IntenalCommandsParams.Insert("ObjectFullName", ObjectFullName);
+			IntenalCommandsParams.Insert("FormType", FormType);
+			
+			If Command.HasActionInitialization Then
+				Cancel = False;
+				DataProcessors.InternalCommands.OnInitialization(Command.Name, IntenalCommandsParams, Cancel, AddInfo);
+				If Cancel Then
+					Continue;
+				EndIf;
+			EndIf;
+			
 			CommandName = "InternalCommand_" + ?(TableName="", "", TableName + "_") + Command.Name;
 			
 			CommandForm = Form.Commands.Add(CommandName); // FormCommand
@@ -76,7 +95,18 @@ Procedure CreateCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo 
 			CommandRepresentation = ButtonRepresentation[Command.Representation]; // ButtonRepresentation
 			CommandForm.Representation = CommandRepresentation;
 			
-			CommandButton = Form.Items.Add(CommandName, Type("FormButton"), GetFormGroupByName(Form, Command.LocationGroup, TableName)); // FormButton
+			CommandParent = Undefined;
+			If Command.CommandBarMap <> Undefined Then
+				CommandBarName = Command.CommandBarMap.Get(Form.FormName);
+				If CommandBarName <> Undefined Then
+					CommandParent = Form.Items[CommandBarName];
+				EndIf;
+			EndIf;			
+			If CommandParent = Undefined Then
+				CommandParent = GetFormGroupByName(Form, Command.LocationGroup, TableName);
+			EndIf;
+			
+			CommandButton = Form.Items.Add(CommandName, Type("FormButton"), CommandParent); // FormButton
 			CommandButton.CommandName = CommandName;
 			CommandLocationInCommandBar = ButtonLocationInCommandBar[Command.LocationInCommandBar]; // ButtonLocationInCommandBar 
 			CommandButton.LocationInCommandBar = CommandLocationInCommandBar;
@@ -86,15 +116,11 @@ Procedure CreateCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo 
 				ContextCommandButton.CommandName = CommandName;
 			EndIf;
 			
-			IntenalCommandsParams = New Structure;
 			IntenalCommandsParams.Insert("CommandButton", CommandButton);
-			IntenalCommandsParams.Insert("CommandDescription", Command);
-			IntenalCommandsParams.Insert("Form", Form);
-			IntenalCommandsParams.Insert("MainAttribute", MainAttribute);
-			IntenalCommandsParams.Insert("ObjectFullName", ObjectFullName);
-			IntenalCommandsParams.Insert("FormType", FormType);
 			
-			DataProcessors.InternalCommands.OnCommandCreate(Command.Name, IntenalCommandsParams, AddInfo);
+			If Command.HasActionOnCommandCreate Then
+				DataProcessors.InternalCommands.OnCommandCreate(Command.Name, IntenalCommandsParams, AddInfo);
+			EndIf;
 		EndDo;
 	EndDo;
 	
@@ -105,7 +131,7 @@ EndProcedure
 // Parameters:
 //  FullCommandName - String - Full command
 //  Form - ClientApplicationForm - Form
-//  MainAttribute - FormAttribute, DynamicList - Main form attribute
+//  MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main form attribute
 //  Targets - AnyRef, Array of AnyRef - Command target
 //  AddInfo - Undefined -  Add info
 Procedure RunCommandAction(Val FullCommandName, Form, MainAttribute, Targets, AddInfo = Undefined) Export
@@ -180,6 +206,7 @@ EndProcedure
 // * ForTables - Boolean - 
 // * ForContextMenu - Boolean - 
 // * SpecificTables - String - 
+// * CommandBarMap - Map, Undefined -
 // * ServerContextRequired - Boolean - 
 // * HasActionInitialization - Boolean - 
 // * HasActionOnCommandCreate - Boolean - 
@@ -190,6 +217,7 @@ EndProcedure
 // * UsingChoiceForm - Boolean - 
 // * Targets - Array of String
 //           - FixedArray of String 
+// * FunctionalOptions - FixedArray of String 
 Function GetCommandDescription() Export
 	
 	CommandDescription = New Structure;
@@ -213,6 +241,7 @@ Function GetCommandDescription() Export
 	CommandDescription.Insert("ForTables", False);
 	CommandDescription.Insert("ForContextMenu", False);
 	CommandDescription.Insert("SpecificTables", "");
+	CommandDescription.Insert("CommandBarMap", Undefined);
 	
 	CommandDescription.Insert("ServerContextRequired", False);
 	
@@ -228,6 +257,9 @@ Function GetCommandDescription() Export
 	Targets = New Array; // Array of String (Object.Metadata.FullName())
 	CommandDescription.Insert("Targets", Targets);
 	
+	FunctionalOptions = New Array; // Array of String
+	CommandDescription.Insert("FunctionalOptions", New FixedArray(FunctionalOptions));
+	
 	Return CommandDescription;
 	
 EndFunction
@@ -239,6 +271,7 @@ EndFunction
 // * Name - String - 
 // * Title - String - 
 // * ToolTip - String - 
+// * Picture - String - 
 // * LocationGroup - String - 
 // * Type - String - 
 // * Representation - String - 
@@ -249,6 +282,7 @@ Function GetCommandGroupDescription() Export
 	CommandGroupDescription.Insert("Name", "");
 	CommandGroupDescription.Insert("Title", "");
 	CommandGroupDescription.Insert("ToolTip", "");
+	CommandGroupDescription.Insert("Picture", "");
 	
 	CommandGroupDescription.Insert("LocationGroup", "");
 	
@@ -262,6 +296,22 @@ Function GetCommandGroupDescription() Export
 	
 EndFunction
 
+// On command Initialization.
+// 
+// Parameters:
+// 	CommandName - String - Command name
+// 	CommandParameters - Structure - Command parameters:
+//  * CommandDescription - See InternalCommandsServer.GetCommandDescription
+//  * Form - ClientApplicationForm - Form
+//  * MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main attribute
+//  * ObjectFullName - String - Object full name
+//  * FormType - EnumRef.FormTypes - Form type
+//  Cancel - Boolean - Cancel 
+//  AddInfo - Undefined - Add info
+Procedure OnInitialization(CommandName, CommandParameters, Cancel, AddInfo = Undefined) Export
+	Return;
+EndProcedure
+
 // On command create.
 // 
 // Parameters:
@@ -270,7 +320,7 @@ EndFunction
 //  * CommandButton - FormButton - Command button
 //  * CommandDescription - See InternalCommandsServer.GetCommandDescription
 //  * Form - ClientApplicationForm - Form
-//  * MainAttribute - FormAttribute, DynamicList - Main attribute
+//  * MainAttribute - FormDataStructure, FormAttribute, DynamicList - Main attribute
 //  * ObjectFullName - String - Object full name
 //  * FormType - EnumRef.FormTypes - Form type
 //  AddInfo - Undefined - Add info
@@ -348,8 +398,37 @@ Function GetFormGroupByName(Form, LocationGroup, TableName = "")
 		FormGroup.Representation = ButtonRepresentationValue;
 	EndIf;
 	
+	If Not IsBlankString(CommandGroupDescription.Picture) Then
+		CommandPicture = PictureLib[CommandGroupDescription.Picture]; // Picture
+		FormGroup.Picture = CommandPicture;
+	EndIf;
+	
 	Return FormGroup;
 	
+EndFunction
+
+// Check by functional options.
+// 
+// Parameters:
+//  CommandItem - See GetCommandDescription
+// 
+// Returns:
+//  Boolean - Check by functional options
+Function CheckByFunctionalOptions(CommandItem)
+	
+	If CommandItem.FunctionalOptions.Count() = 0 Then
+		Return True;
+	EndIf;
+	
+	SetSafeMode(True);
+	
+	Result = False;
+	For Each NameFO In CommandItem.FunctionalOptions Do
+		CheckMethod = StrTemplate("FOServer.Is%1()", NameFO);
+		Result = Result Or Eval(CheckMethod);
+	EndDo;
+
+	Return Result;
 EndFunction
 
 #EndRegion

@@ -16,7 +16,10 @@
       <key>en</key>
       <value>REP_Attribute1</value>
     </synonym>
-    <extension xsi:type="mdclassExtension:BasicFeatureExtension"/>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <synonym>Extended</synonym>
+      <choiceForm>Extended</choiceForm>
+    </extension>
     <type>
       <types>String</types>
       <stringQualifiers>

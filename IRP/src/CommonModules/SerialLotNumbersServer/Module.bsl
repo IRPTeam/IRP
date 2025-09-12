@@ -102,12 +102,15 @@ EndFunction
 // Check filling.
 // 
 // Parameters:
-//  Object - DocumentObject.SalesInvoice
+//  Object - DocumentObject
 // 
 // Returns:
 //  Boolean - Check filling
 Function CheckFilling(Object) Export
 	IsOk = True;
+	If TypeOf(Object) = Type("DocumentObject.PhysicalInventory") Then
+		Return CheckFillingPhysicalInventory(Object);
+	EndIf;	
 	For Each Row In Object.ItemList Do
 		If Not Row.UseSerialLotNumber Then
 			Continue;
@@ -146,7 +149,14 @@ Function CheckFilling(Object) Export
 			IsOk = False;
 			SerialsID = Object.SerialLotNumbers.FindRows(New Structure("SerialLotNumber", Serial.SerialLotNumber));
 			
+			ProcessedSerialLotNumbers = New Array();
 			For Each Row In SerialsID Do
+				
+				If ProcessedSerialLotNumbers.Find(Row.SerialLotNumber) <> Undefined Then
+					Continue;
+				EndIf;
+				ProcessedSerialLotNumbers.Add(Row.SerialLotNumber);
+			
 				For Each ItemRow In Object.ItemList.FindRows(New Structure("Key", Row.Key)) Do
 					CommonFunctionsClientServer.ShowUsersMessage(
 						StrTemplate(R().Error_113, Serial.SerialLotNumber), "ItemList[" + Format(
@@ -156,6 +166,43 @@ Function CheckFilling(Object) Export
 		EndIf;
 	EndDo;
 	
+	Return IsOk;
+EndFunction
+
+// Check filling PhysicalInventory.
+// 
+// Parameters:
+//  Object - DocumentObject.PhysicalInventory
+// 
+// Returns:
+//  Boolean - Check filling
+Function CheckFillingPhysicalInventory(Object)
+	IsOk = True;
+	
+	ItemListTable = Object.ItemList.Unload();
+	ItemListTable.GroupBy("SerialLotNumber", "ExpCount, PhysCount");
+	
+	For Each Serial In ItemListTable Do
+		
+		QuantityMoreThan1 = Serial.PhysCount > 1 Or Serial.ExpCount > 1;
+		If Not QuantityMoreThan1 Then
+			Continue;
+		EndIf;	
+			
+		If Serial.SerialLotNumber.EachSerialLotNumberIsUnique Then
+			IsOk = False;
+			SerialsID = Object.ItemList.FindRows(New Structure("SerialLotNumber", Serial.SerialLotNumber));
+			
+			For Each Row In SerialsID Do
+				For Each ItemRow In Object.ItemList.FindRows(New Structure("Key", Row.Key)) Do
+					CommonFunctionsClientServer.ShowUsersMessage(
+						StrTemplate(R().Error_113, Serial.SerialLotNumber),
+						 "ItemList[" + Format((ItemRow.LineNumber - 1), "NZ=0; NG=0;") + "].SerialLotNumber", Object);
+				EndDo;
+			EndDo;
+		EndIf;
+	EndDo;	
+			
 	Return IsOk;
 EndFunction
 
@@ -172,6 +219,7 @@ Function CreateNewSerialLotNumber(Options) Export
 	NewSerial.Description = Options.Description;
 	NewSerial.SerialLotNumberOwner = Options.Owner;
 	NewSerial.StockBalanceDetail = GetStockBalanceDetailByOwner(Options.Owner);
+	NewSerial.BatchBalanceDetail = GetBatchBalanceDetailByOwner(Options.Owner);
 	NewSerial.EachSerialLotNumberIsUnique = GetItemTypeByOwner(Options.Owner).EachSerialLotNumberIsUnique;
 	If NewSerial.CheckFilling() Then
 		NewSerial.Write();
@@ -295,7 +343,25 @@ EndFunction
 //  Boolean - Get stock balance detail by owner
 Function GetStockBalanceDetailByOwner(Owner) Export
 	ItemType = GetItemTypeByOwner(Owner);
-	Return ItemType.StockBalanceDetail = Enums.StockBalanceDetail.BySerialLotNumber;
+	If ValueIsFilled(ItemType) Then
+		Return ItemType.StockBalanceDetailSerialLotNumber;
+	EndIf;
+	Return False;
+EndFunction
+
+// Get batch balance detail by owner.
+// 
+// Parameters:
+//  Owner - See Catalog.SerialLotNumbers.SerialLotNumberOwner
+// 
+// Returns:
+//  Boolean - Get stock balance detail by owner
+Function GetBatchBalanceDetailByOwner(Owner) Export
+	ItemType = GetItemTypeByOwner(Owner);
+	If ValueIsFilled(ItemType) Then
+		Return ItemType.BatchBalanceDetailSerialLotNumber;
+	EndIf;
+	Return False;
 EndFunction
 
 // Is each serial lot number is unique by owner.
@@ -582,7 +648,7 @@ Procedure CreateCommands(Form, ObjectMetadata, FormType) Export
 	If Form.Commands.Find("OpenSerialLotNumbersTree") = Undefined Then
 		CommandForm = Form.Commands.Add("OpenSerialLotNumbersTree");
 		CommandForm.Representation = ButtonRepresentation.Picture;
-		CommandForm.Picture = PictureLib.ListViewModeTree;
+		CommandForm.Picture = PictureLib.ConnectionTreeGreen;
 		CommandForm.Action = "OpenSerialLotNumbersTree";
 		R().Property("OpenSLNTree_Button_Title",   CommandForm.Title);
 		R().Property("OpenSLNTree_Button_ToolTip", CommandForm.ToolTip);

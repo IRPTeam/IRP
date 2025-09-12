@@ -207,7 +207,7 @@ FROM
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-							<dcscor:parameter>MaximumHeight</dcscor:parameter>
+							<dcscor:parameter>MaxHeight</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">50</dcscor:value>
 						</dcscor:item>
 					</dcsset:appearance>

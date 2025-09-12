@@ -55,8 +55,8 @@ Procedure SetSettings(Command)
 	Info = AddDataProcServer.AddDataProcInfo(Object.Ref);
 	Info.Insert("Settings", AddressResult);
 	CallMethodAddDataProc(Info);
-	NotifyDescription = New NotifyDescription("OpenFormAddDataProcEnd", ThisObject);
-	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "RuleForm");
+	CallbackDescription = New CallbackDescription("OpenFormAddDataProcEnd", ThisObject);
+	AddDataProcClient.OpenFormAddDataProc(Info, CallbackDescription, "RuleForm");
 EndProcedure
 
 &AtServerNoContext

@@ -1,6 +1,6 @@
 #Region Public
 
-Function OpenFormAddDataProc(Info, NotifyDescription = Undefined, FormName = Undefined, AddInfo = Undefined) Export
+Function OpenFormAddDataProc(Info, CallbackDescription = Undefined, FormName = Undefined, AddInfo = Undefined) Export
 	ExternalOrInternalDataProcessor = "";
 	If AddDataProcServer.UseInternalDataProcessor(Info.ExternalDataProcName) Then
 		ExternalOrInternalDataProcessor = "DataProcessor";
@@ -9,7 +9,7 @@ Function OpenFormAddDataProc(Info, NotifyDescription = Undefined, FormName = Und
 	EndIf;
 	FormName = ExternalOrInternalDataProcessor + "." + Info.ExternalDataProcName + ".Form" + ?(ValueIsFilled(FormName),
 		"." + FormName, "");
-	OpenForm(FormName, Info, , , , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+	OpenForm(FormName, Info, , , , , CallbackDescription, FormWindowOpeningMode.LockWholeInterface);
 
 	Return Undefined;
 EndFunction

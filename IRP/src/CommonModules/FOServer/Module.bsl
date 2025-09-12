@@ -25,6 +25,10 @@ Function IsUseCompanies() Export
 	Return GetFunctionalOption("UseCompanies");
 EndFunction
 
+Function IsUseLegalName() Export
+	Return GetFunctionalOption("UseLegalName");
+EndFunction
+
 Function IsUsePartnersHierarchy() Export
 	Return GetFunctionalOption("UsePartnersHierarchy");
 EndFunction
@@ -91,6 +95,34 @@ EndFunction
 
 Function IsUseChequeBonds() Export
 	Return GetFunctionalOption("UseChequeBonds");
+EndFunction
+
+Function IsUseAccountingService() Export
+	Return GetFunctionalOption("UseAccountingService");
+EndFunction
+
+Function IsUseELedger() Export
+	Return GetFunctionalOption("UseELedger");
+EndFunction
+
+Function IsUseUseSerialLotNumbers() Export
+	Return GetFunctionalOption("UseSerialLotNumbers");
+EndFunction
+
+Function IsUseShipmentAndReceiptPlaningOrders() Export
+	Return GetFunctionalOption("UseShipmentAndReceiptPlaningOrders");
+EndFunction
+
+Function IsUseSimpleBatch() Export
+	Return GetFunctionalOption("UseSimpleBatch");
+EndFunction
+
+Function IsUsePreliminary() Export
+	Return GetFunctionalOption("UsePreliminary");
+EndFunction
+
+Function IsUseNumberingRules() Export
+	Return GetFunctionalOption("UseNumberingRules");
 EndFunction
 
 #EndRegion
@@ -245,7 +277,7 @@ Function GetDefault_Store(Value = Undefined, IsUpdateDefaults = False) Export
 EndFunction
 
 Function GetDefault_LegalName(Parameters, Value = Undefined) Export
-	If IsUseCompanies() Then
+	If IsUseLegalName() Then
 		Return Value;
 	EndIf;
 	Query = New Query();
@@ -262,7 +294,7 @@ Function GetDefault_LegalName(Parameters, Value = Undefined) Export
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
 		If QuerySelection.Count() > 1 Then
-			Raise StrTemplate("Found more than 1 [%1] when option NOT [%2]", "Companies (Legal name)", "UseCompanies");
+			Raise StrTemplate(R().Error_FoundMoreThanOneCompany);
 		EndIf;
 		Return New Structure("Ref, DeletionMark", QuerySelection.Ref, QuerySelection.DeletionMark);
 	EndIf;
@@ -287,7 +319,7 @@ Function GetDefault_ItemKey(Parameters, Value = Undefined) Export
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then 
 		If QuerySelection.Count() > 1 Then
-			Raise StrTemplate("Found more than 1 [%1] when option NOT [%2]", "ItemKey", "UseItemKey");
+                        Raise StrTemplate(R().Error_FoundMoreThanOneItemKey);
 		EndIf;
 		Return New Structure("Ref, DeletionMark", QuerySelection.Ref, QuerySelection.DeletionMark);
 	EndIf;
@@ -355,7 +387,7 @@ Function CreateDefault_AgreementByType(Partner, AgreementType, Value)
 		DefaultDescriptionKey = "Default_003";
 		DefaultPriceType = GetDefault_PriceType_Vendor();
 	Else
-		Raise "Get default agreement implement only for customer or vendor";
+                Raise R().DefaultAgreementOnlyCustVendor;
 	EndIf;
 	
 	DefaultLegalNameData = GetDefault_LegalName(Parameters);
@@ -380,7 +412,7 @@ Function CreateDefault_AgreementByType(Partner, AgreementType, Value)
 EndFunction	
 
 Function CreateDefault_LegalName(Parameters, Value = Undefined) Export
-	If IsUseCompanies() Then
+	If IsUseLegalName() Then
 		Return Value;
 	EndIf;
 		

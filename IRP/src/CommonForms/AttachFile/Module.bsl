@@ -1,3 +1,4 @@
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Owner = Parameters.Owner;
@@ -65,3 +66,56 @@ EndProcedure
 Function CreatePictureParameters(File)
 	Return PictureViewerServer.CreatePictureParameters(File);
 EndFunction
+
+&AtClient
+Procedure DeleteSelectedFiles(Command)
+	If Items.FileList.CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	FileKeys = New Array;
+	For Each SelectedRow In Items.FileList.SelectedRows Do
+		FileKeys.Add(SelectedRow);
+	EndDo;
+	
+	DeleteFilesAtServer(FileKeys);
+	Items.FileList.Refresh();
+EndProcedure
+
+&AtServerNoContext
+Procedure DeleteFilesAtServer(FileKeys)
+	
+	RecordManager = InformationRegisters.AttachedFiles.CreateRecordManager();
+	
+	For Each FileKey In FileKeys Do
+		RecordManager.Owner = FileKey.Owner;
+		RecordManager.File = FileKey.File;
+		RecordManager.Read();
+		If RecordManager.Selected() Then
+			RecordManager.Delete();
+		EndIf;
+	EndDo;
+	
+EndProcedure
+
+&AtClient
+Procedure FileListOnActivateRow(Item)
+	Items.PDFPreview.Visible = False;
+	Items.ImagePreview.Visible = False;
+
+	If Item.CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	Extension = CommonFunctionsServer.GetRefAttribute(Item.CurrentData.File, "Extension");
+	
+	If Not StrCompare(Extension, "pdf") Then
+		Items.PDFPreview.Visible = True;
+		PictureViewerClient.SetPDFForView(Item.CurrentData.File, PDFPreview);
+	ElsIf PictureViewerServer.isImage(Extension) Then
+		Items.ImagePreview.Visible = True;
+		PictureParameters = PictureViewerServer.CreatePictureParameters(Item.CurrentData.File);
+		
+		ImagePreview = PictureViewerClient.GetPictureURL(PictureParameters); //String 
+	EndIf;
+EndProcedure

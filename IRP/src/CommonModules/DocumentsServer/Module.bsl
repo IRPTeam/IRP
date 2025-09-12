@@ -1,7 +1,17 @@
+
 #Region FormEvents
 
+// On create at server.
+// 
+// Parameters:
+//  Object - DocumentObjectDocumentName - Object
+//  Form - ClientApplicationForm - Form
+//  Cancel - Boolean - Cancel
+//  StandardProcessing - Boolean - Standard processing
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	
+	SetDocumentState(Object, Form);
+		
 	If Form.Parameters.Key.IsEmpty() Then
 		SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
 	EndIf;
@@ -53,7 +63,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 EndProcedure
 
 Procedure OnWriteAtServer(Object, Form, Cancel, CurrentObject, WriteParameters) Export
-	Return;
+	SetDocumentState(CurrentObject, Form);
 EndProcedure
 
 #EndRegion
@@ -576,12 +586,25 @@ EndProcedure
 #Region Subscriptions
 
 Procedure OnCopyDocumentProcessingOnCopy(Source, CopiedObject, AddInfo = Undefined) Export
-	If Metadata.CommonAttributes.Author.Content.Contains(Source.Metadata()) Then
+	SourceMetadata = Source.Metadata();
+	
+	If Metadata.CommonAttributes.Author.Content.Contains(SourceMetadata) Then
 		FillingStructure = New Structure();
 		FillingStructure.Insert("Author", SessionParameters.CurrentUser);
 
 		FillPropertyValues(Source, FillingStructure);
 	EndIf;
+	
+	ContentItem = Metadata.CommonAttributes.DocumentNumber.Content.Find(SourceMetadata);
+	If ContentItem <> Undefined And ContentItem.Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
+		Source.DocumentNumber = "";
+	EndIf;
+	
+	ContentItem = Metadata.CommonAttributes.NumeratorRules.Content.Find(SourceMetadata);
+	If ContentItem <> Undefined And ContentItem.Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
+		Source.NumeratorRules = Catalogs.NumeratorGroups.EmptyRef();
+	EndIf;
+	
 EndProcedure
 
 #EndRegion
@@ -1000,7 +1023,6 @@ Procedure SalesBySerialLotNumbers(Parameters) Export
 	ResultTable.Columns.Add("NetAmount"    , AccMetadata.Resources.NetAmount.Type);
 	ResultTable.Columns.Add("OffersAmount" , AccMetadata.Resources.OffersAmount.Type);
 	
-	
 	For Each Row In Tree.Rows Do
 		If Row.Rows.Count() = 1 Then
 			FillPropertyValues(ResultTable.Add(), Row.Rows[0]);
@@ -1060,6 +1082,167 @@ Procedure SalesBySerialLotNumbers(Parameters) Export
 			
 	Query.Text = "SELECT * INTO SalesBySerialLotNumbers  FROM &ResultTable AS SalesBySerialLotNumbers";
 	Query.SetParameter("ResultTable", ResultTable);
-	Query.Execute();	
+	Query.Execute();
+		
 EndProcedure
 
+Procedure PurchasesBySerialLotNumbers(Parameters) Export
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+		"SELECT
+		|	ItemList.Key AS Key,
+		|	ItemList.Quantity,
+		|	ItemList.Amount AS Amount,
+		|	ItemList.NetAmount AS NetAmount,
+		|	ItemList.OffersAmount AS OffersAmount,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity AS SLNQuantity
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers as SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|TOTALS
+		|	MAX(Amount) AS Amount,
+		|	MAX(NetAmount) AS NetAmount,
+		|	MAX(OffersAmount) AS OffersAmount
+		|BY
+		|	Key";
+	
+	QueryResult = Query.Execute();
+	Tree = QueryResult.Unload(QueryResultIteration.ByGroups);	
+	
+	AccMetadata = Metadata.AccumulationRegisters.R1001T_Purchases;
+	ResultTable = New ValueTable();
+	ResultTable.Columns.Add("Key"             , AccMetadata.Dimensions.RowKey.Type);
+	ResultTable.Columns.Add("SerialLotNumber" , AccMetadata.Dimensions.SerialLotNumber.Type);
+	ResultTable.Columns.Add("Quantity"        , AccMetadata.Resources.Quantity.Type);
+	ResultTable.Columns.Add("Amount"          , AccMetadata.Resources.Amount.Type);
+	ResultTable.Columns.Add("NetAmount"       , AccMetadata.Resources.NetAmount.Type);
+	ResultTable.Columns.Add("OffersAmount"    , AccMetadata.Resources.OffersAmount.Type);
+	
+	For Each Row In Tree.Rows Do
+		If Row.Rows.Count() = 1 Then
+			FillPropertyValues(ResultTable.Add(), Row.Rows[0]);
+			Continue;
+		EndIf;
+		
+		Total_Amount = Row.Amount;
+		Total_NetAmount = Row.NetAmount;
+		Total_OffersAmount = Row.OffersAmount;
+		
+		MaxRow = Undefined;
+		
+		For Each Row2 In Row.Rows Do
+			If Not ValueIsFilled(Row2.SLNQuantity) Then
+				Continue;
+			EndIf;
+			
+			NewRow = ResultTable.Add();
+			FillPropertyValues(NewRow, Row2);
+			NewRow.Quantity	= Row2.SLNQuantity;
+			
+			If MaxRow = Undefined Then
+				MaxRow = NewRow;
+			Else
+				If MaxRow.Quantity < NewRow.Quantity Then
+					MaxRow = NewRow;
+				EndIf;
+			EndIf;
+			proportion = Row2.Quantity / Row2.SLNQuantity;
+			If proportion <> 0 Then
+				NewRow.Amount = Round(Row2.Amount / proportion, 2);
+				Total_Amount = Total_Amount - NewRow.Amount;
+			
+				NewRow.NetAmount = Round(Row2.NetAmount / proportion, 2);
+				Total_NetAmount = Total_NetAmount - NewRow.NetAmount;
+				
+				NewRow.OffersAmount = Round(Row2.OffersAmount / proportion, 2);
+				Total_OffersAmount = Total_OffersAmount - NewRow.OffersAmount;
+			EndIf;
+		EndDo;
+		
+		If MaxRow <> Undefined Then
+			If Total_Amount <> 0 Then
+				MaxRow.Amount = MaxRow.Amount + Total_Amount;
+			EndIf;
+				
+			If Total_NetAmount <> 0 Then
+				MaxRow.NetAmount = MaxRow.NetAmount + Total_NetAmount;
+			EndIf;
+				
+			If Total_OffersAmount <> 0 Then
+				MaxRow.OffersAmount = MaxRow.OffersAmount + Total_OffersAmount;
+			EndIf;
+		EndIf;
+		
+	EndDo;
+			
+	Query.Text = "SELECT * INTO PurchasesBySerialLotNumbers  FROM &ResultTable AS PurchasesBySerialLotNumbers";
+	Query.SetParameter("ResultTable", ResultTable);
+	Query.Execute();
+		
+EndProcedure
+
+Procedure Posting_DocumentsRegistryPosting(Source, Cancel, PostingMode) Export
+	If Cancel Then
+		Return;
+	EndIf;
+	If Source.RegisterRecords.Find("PostedDocumentsRegistry") = Undefined Then
+		Return;
+	EndIf;
+	
+	RecordSet = Source.RegisterRecords.PostedDocumentsRegistry;
+	RecordSet.Clear();
+	RecordSet.Write = True;
+	Record = RecordSet.Add();
+	FillPropertyValues(Record, Source);
+	Record.Document = Source.Ref;
+EndProcedure
+
+Procedure GetDocumentPresentationFields(Source, Fields, StandardProcessing) Export
+	If Not StandardProcessing Then
+		Return;
+	EndIf;
+	StandardProcessing = False;
+	Fields.Add("Number");
+	Fields.Add("DocumentNumber");
+	Fields.Add("Date");
+EndProcedure
+
+Procedure GetDocumentPresentation(Source, Data, Presentation, StandardProcessing) Export
+	If Not StandardProcessing Then
+		Return;
+	EndIf;
+	StandardProcessing = False;
+	
+	ObjectPresentation = Source.EmptyRef().Metadata().ObjectPresentation;
+	DocumentNumber = ?(ValueIsFilled(Data.DocumentNumber),StrTemplate(" (%1)", Data.DocumentNumber), "");
+	NewNumber = StrTemplate("%1%2", Data.Number, DocumentNumber);
+	
+	Presentation = StrTemplate(R().DocPresentation, ObjectPresentation, NewNumber, Data.Date);
+EndProcedure
+
+Function GenerateDocumentNumber(Object) Export
+	Return Object.DocumentNumber;
+EndFunction
+
+// Set document state.
+// 
+// Parameters:
+//  Object - DocumentObjectDocumentName - Object
+//  Form - ClientApplicationForm - Form
+Procedure SetDocumentState(Object, Form) Export
+	If Form.Items.Find("FormPostAndClose") = Undefined Then
+		Return;
+	EndIf;
+	FormPostAndClose = Form.Items.FormPostAndClose; // FormButton
+	If Object.DeletionMark Then
+		FormPostAndClose.Picture = PictureLib.DocumentDeleted;
+	ElsIf Object.Posted Then 
+		FormPostAndClose.Picture = PictureLib.DocumentPosted;
+	Else
+		FormPostAndClose.Picture = PictureLib.DocumentUnposted;
+	EndIf;
+	FormPostAndClose.Representation = ButtonRepresentation.PictureAndText;
+EndProcedure

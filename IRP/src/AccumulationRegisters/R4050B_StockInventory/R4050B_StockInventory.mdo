@@ -29,6 +29,32 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </resources>
+ <resources uuid="2eb05397-3bac-49bc-b786-beee214fea4c">
+  <name>PreliminaryQuantity</name>
+  <synonym>
+   <key>en</key>
+   <value>B32E0A8B-7FA6-1ED1-1BC5-5D7F19EB4E8B</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <attributes uuid="96684628-be94-40f1-911a-40fa2f2dd146">
+  <name>CalculationMovementCost</name>
+  <synonym>
+   <key>en</key>
+   <value>2D8ECBB2-EAE6-B2C0-0FCC-C993129AEB3A</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.CalculationMovementCosts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
  <dimensions uuid="fd973440-ec1b-4533-ad24-3180d0d33046">
   <name>Company</name>
   <synonym>

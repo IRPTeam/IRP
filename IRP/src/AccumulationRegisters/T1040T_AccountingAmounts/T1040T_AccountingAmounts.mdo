@@ -30,6 +30,32 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </resources>
+ <resources uuid="5055414a-44f8-4256-85cd-d4e31ddf91db">
+  <name>DrCurrencyAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>35ABE148-D679-DAF3-3B3F-FFB7998B8897</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="6f9fcdd3-f291-4e43-9ed8-948734ce60d6">
+  <name>CrCurrencyAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>82CAD8CD-657A-E0C8-8F10-072EFE413F04</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
  <attributes uuid="993d0d55-3bed-4827-9b07-70608ec7a544">
   <name>DeferredCalculation</name>
   <synonym>
@@ -121,6 +147,34 @@
   <synonym>
    <key>en</key>
    <value>D1D652A7-2212-35F0-08CC-CC494783407F</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="5f25c63c-0a60-4547-940f-0ba12fec32b2">
+  <name>DrCurrency</name>
+  <synonym>
+   <key>en</key>
+   <value>3D2AA624-950C-DAA7-782F-FE882C7A7D2A</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="b5d3e3cb-365c-4b9f-9045-ce3c5d664d1b">
+  <name>CrCurrency</name>
+  <synonym>
+   <key>en</key>
+   <value>D939CFA4-0874-30D2-2676-6983229C6F17</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

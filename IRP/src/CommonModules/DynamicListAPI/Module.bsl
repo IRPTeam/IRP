@@ -23,7 +23,7 @@ Function Get(DynamicList, ListName = Undefined, Form = Undefined) Export
 	FormQueryText = DynamicList.QueryText;
 	MainAttributeTable = DynamicList.MainTable;
 	If Not DynamicList.CustomQuery Then
-		FormQueryText = "Select * From " + MainAttributeTable;
+		FormQueryText = "Select _MainTable.* From " + MainAttributeTable + " AS _MainTable";
 	EndIf;
 	
 	QuerySchema = New QuerySchema;
@@ -113,6 +113,16 @@ Procedure AddFilter(QuerySchemaAPI, Filter) Export
 	Operator.Filter.Add(Filter);
 EndProcedure
 
+// Clear filter.
+// 
+// Parameters:
+//  QuerySchemaAPI - See Get
+Procedure ClearFilter(QuerySchemaAPI) Export
+	QueryBatch = QuerySchemaAPI.QuerySchema.QueryBatch[QuerySchemaAPI.QuerySchema.QueryBatch.Count() - 1];
+	Operator = QueryBatch.Operators[QueryBatch.Operators.Count() - 1];
+	Operator.Filter.Clear();
+EndProcedure
+
 // Add appearance.
 // 
 // Parameters:
@@ -167,7 +177,14 @@ Function AddSource(QuerySchemaAPI, Path, Alias, Condition) Export
 	
 	Condition = StrReplace(Condition, "#MainTable#", Operator.Sources[0].Source.Alias);
 	NewSource = Operator.Sources.Add(Path, Alias);
-	NewSource.Joins[0].Condition = New QuerySchemaExpression(Condition);
-	NewSource.Joins[0].JoinType = QuerySchemaJoinType.RightOuter;
+	
+	If NewSource.Joins.Count() = 1 Then
+		NewSource.Joins[0].Condition = New QuerySchemaExpression(Condition);
+		NewSource.Joins[0].JoinType = QuerySchemaJoinType.RightOuter;
+	Else
+		Operator.Sources[0].Joins.Add(NewSource, Condition);
+		Operator.Sources[0].Joins[Operator.Sources[0].Joins.Count()-1].JoinType = QuerySchemaJoinType.LeftOuter;
+	EndIf;
+	
 	Return NewSource;
 EndFunction

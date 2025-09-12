@@ -30,7 +30,7 @@ Procedure SetCondition(TableName, ColumnName, AddInfo = Undefined)
 	AddInfo.Insert("ColumnName", ColumnName);
 
 	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
-		QuestionToUserNotify = New NotifyDescription("SetConditionNotify", ThisObject, AddInfo);
+		QuestionToUserNotify = New CallbackDescription("SetConditionNotify", ThisObject, AddInfo);
 		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 	Else
 		SetConditionNotify(DialogReturnCode.Yes, AddInfo);
@@ -47,7 +47,7 @@ Procedure SetConditionNotify(Result, AddInfo = Undefined) Export
 
 		AddInfo.Insert("Element", CurrentRow[AddInfo.ColumnName]);
 
-		Notify = New NotifyDescription("OnFinishEditFilter", ThisObject, AddInfo);
+		Notify = New CallbackDescription("OnFinishEditFilter", ThisObject, AddInfo);
 		OpeningParameters = New Structure();
 		OpeningParameters.Insert("SavedSettings", GetSettings(CurrentRow[AddInfo.ColumnName], AddInfo));
 		OpeningParameters.Insert("Ref", Object.Ref);

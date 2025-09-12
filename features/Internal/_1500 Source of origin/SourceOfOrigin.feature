@@ -58,7 +58,8 @@ Scenario: _150041 preparation
 		When Data preparation (comission stock)
 		When Create catalog SourceOfOrigins objects
 		When Create catalog PaymentTypes objects
-		When Create catalog BankTerms objects (for Shop 02)	
+		When Create catalog BankTerms objects (for Shop 02)
+		When Create catalog TaxExemptionReasons objects
 		When Create information register Taxes records (VAT)
 	* Landed cost settings for company	
 			Given I open hyperlink "e1cib/list/Catalog.Companies"
@@ -524,8 +525,11 @@ Scenario: _150049 check filling source of origin in the StockAdjustmentAsSurplus
 				| 'Description'     |
 				| 'Revenue'         |
 			And I select current line in "List" table
-			And I input "50,00" text in "Amount" field of "ItemList" table
-			And I input "10,00" text in "Amount tax" field of "ItemList" table
+			And I input "50,00" text in "Total amount" field of "ItemList" table
+			And I finish line editing
+			And "ItemList" table became equal
+				| "Revenue type" | "Item"  | "Item key" | "Profit loss center"      | "Unit" | "Tax amount" | "Source of origins"  | "Quantity" | "Price" | "VAT" | "Net amount" | "Total amount" |
+				| "Revenue"      | "Dress" | "XS/Blue"  | "Distribution department" | "pcs"  | "7,63"       | "Source of origin 5" | "2,000"    | "21,19" | "18%" | "42,37"      | "50,00"        |		
 			And I finish line editing in "ItemList" table
 		* Second item
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -577,14 +581,13 @@ Scenario: _150049 check filling source of origin in the StockAdjustmentAsSurplus
 				| 'Description'     |
 				| 'Revenue'         |
 			And I select current line in "List" table
-			And I input "50,00" text in "Amount" field of "ItemList" table
-			And I input "10,00" text in "Amount tax" field of "ItemList" table
+			And I input "50,00" text in "Total amount" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check
 			And "ItemList" table contains lines
-				| 'Revenue type'    | 'Amount'    | 'Item'                  | 'Item key'    | 'Profit loss center'         | 'Serial lot numbers'    | 'Unit'    | 'Source of origins'     | 'Quantity'    | 'Price'    | 'Amount tax'     |
-				| 'Revenue'         | '50,00'     | 'Dress'                 | 'XS/Blue'     | 'Distribution department'    | ''                      | 'pcs'     | 'Source of origin 5'    | '2,000'       | '25,00'    | '10,00'          |
-				| 'Revenue'         | '50,00'     | 'Product 3 with SLN'    | 'UNIQ'        | 'Distribution department'    | '09987897977895'        | 'pcs'     | 'Source of origin 6'    | '2,000'       | '25,00'    | '10,00'          |
+				| 'Revenue type' | 'Total amount' | 'Item'               | 'Item key' | 'Profit loss center'      | 'Serial lot numbers' | 'Unit' | 'Source of origins'  | 'Quantity' | 'Price' | 'Tax amount' | 'Net amount' | 'VAT' |
+				| 'Revenue'      | '50,00'        | 'Dress'              | 'XS/Blue'  | 'Distribution department' | ''                   | 'pcs'  | 'Source of origin 5' | '2,000'    | '21,19' | '7,63'       | '42,37'      | '18%' |
+				| 'Revenue'      | '50,00'        | 'Product 3 with SLN' | 'UNIQ'     | 'Distribution department' | '09987897977895'     | 'pcs'  | 'Source of origin 6' | '2,000'    | '21,19' | '7,63'       | '42,37'      | '18%' |
 		* Post
 			And I click the button named "FormPost"
 			And I delete "$$StockAdjustmentAsSurplus1$$" variable
@@ -605,10 +608,10 @@ Scenario: _150049 check filling source of origin in the StockAdjustmentAsSurplus
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute		
 			And "ItemList" table contains lines
-				| 'Revenue type'    | 'Amount'    | 'Item'                  | 'Item key'    | 'Profit loss center'         | 'Serial lot numbers'    | 'Unit'    | 'Source of origins'     | 'Quantity'    | 'Price'    | 'Amount tax'     |
-				| 'Revenue'         | '50,00'     | 'Dress'                 | 'XS/Blue'     | 'Distribution department'    | ''                      | 'pcs'     | 'Source of origin 5'    | '2,000'       | '25,00'    | '10,00'          |
-				| 'Revenue'         | '50,00'     | 'Product 3 with SLN'    | 'UNIQ'        | 'Distribution department'    | '09987897977895'        | 'pcs'     | 'Source of origin 6'    | '2,000'       | '25,00'    | '10,00'          |
-				| ''                | ''          | 'Dress'                 | 'M/Brown'     | ''                           | ''                      | 'pcs'     | 'Source of origin 5'    | '1,000'       | ''         | ''               |
+				| 'Revenue type' | 'Total amount' | 'Item'               | 'Item key' | 'Profit loss center'      | 'Serial lot numbers' | 'Unit' | 'Source of origins'  | 'Quantity' | 'Price' | 'Tax amount' |
+				| 'Revenue'      | '50,00'        | 'Dress'              | 'XS/Blue'  | 'Distribution department' | ''                   | 'pcs'  | 'Source of origin 5' | '2,000'    | '21,19' | '7,63'       |
+				| 'Revenue'      | '50,00'        | 'Product 3 with SLN' | 'UNIQ'     | 'Distribution department' | '09987897977895'     | 'pcs'  | 'Source of origin 6' | '2,000'    | '21,19' | '7,63'       |
+				| ''             | ''             | 'Dress'              | 'M/Brown'  | ''                        | ''                   | 'pcs'  | 'Source of origin 5' | '1,000'    | ''      | ''           |
 			And I close all client application windows
 						
 			
@@ -1446,4 +1449,801 @@ Scenario: _150078 check filling source of origin from sln
 		And "ItemList" table contains lines
 			| 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Source of origins'  | 'Quantity' |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '8908899880'         | 'Source of origin 6' | '1,000'    |
+	And I close all client application windows
+
+Scenario: _150079 check filling source of origin in SC
+	And I close all client application windows
+	* Create SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click "Create" button
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select "Sales" exact value from the drop-down list named "TransactionType"
+		And I select from the drop-down list named "Partner" by "Lomaniti" string
+		And I select from the drop-down list named "Store" by "Store 05" string
+	* Add Item no Source of origin		
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Skittles" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I input "10 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Add Item and Source of origin
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Bag" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "ODS" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "5 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I select current line in "SourceOfOrigins" table
+		And I select "Source of origin 11" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I click the button named "FormOk"
+	* Add Item with SLN + Source of origin
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Product 1 with SLN" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "PZU" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| "Code" | "Owner" | "Serial number" |
+			| "17"   | "PZU"   | "8908899879"    |
+		And I click the button named "FormChoose"
+		And I activate field named "SerialLotNumbersQuantity" in "SerialLotNumbers" table
+		And I input "100,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click the button named "FormOk"
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I select "Source of origin 9" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I click the button named "FormOk"
+	* Add Item with 2 SLN + 2 Source of origin
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Product 3 with SLN" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "Uniq" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| "Code" | "Owner" | "Serial number"  |
+			| "23"   | "UNIQ"  | "09987897977895" |
+		And I click the button named "FormChoose"
+		And I input "200,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| "Code" | "Owner" | "Serial number"  |
+			| "21"   | "UNIQ"  | "09987897977893" |
+		And I click the button named "FormChoose"
+		And I input "200,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click the button named "FormOk"
+		And I activate field named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I click choice button of the attribute named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I close "Source of origins" window
+		And I select "Source of origin 4" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I go to line in "SourceOfOrigins" table
+			| "Quantity" | "Serial lot number" |
+			| "200,000"  | "09987897977893"    |
+		And I select "Source 1" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I click the button named "FormOk"
+	* Post
+		And I click the button named "FormPost"
+		And I delete "$$ShipmentConfirmation01$$" variable
+		And I delete "$$NumberShipmentConfirmation01$$" variable
+		And I save the window as "$$ShipmentConfirmation01$$"
+		And I save the value of the field named "Number" as "$$NumberShipmentConfirmation01$$"
+		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberShipmentConfirmation01$$' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'             | 'Source of origins'            | 'Quantity'   | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Shipment planing order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Skittles'           | 'Fruit'    | ''                               | ''                             | '10 000,000' | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '2' | 'Bag'                | 'ODS'      | ''                               | 'Source of origin 11'          | '5 000,000'  | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '3' | 'Product 1 with SLN' | 'PZU'      | '8908899879'                     | 'Source of origin 9'           | '100,000'    | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '4' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977895; 09987897977893' | 'Source of origin 4; Source 1' | '400,000'    | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+	And I close all client application windows	
+				
+Scenario: _150080 check filling source of origin in GR
+	And I close all client application windows
+	* Create SC
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click "Create" button
+	* Filling main info
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select "Purchase" exact value from the drop-down list named "TransactionType"
+		And I select from the drop-down list named "Partner" by "Veritas" string
+		And I select from the drop-down list named "Store" by "Store 05" string
+	* Add Item no Source of origin		
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Skittles" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I input "10 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Add Item and Source of origin
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Bag" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "ODS" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "5 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I select current line in "SourceOfOrigins" table
+		And I select "Source of origin 11" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I click the button named "FormOk"
+	* Add Item with SLN + Source of origin
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Product 1 with SLN" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "PZU" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| "Code" | "Owner" | "Serial number" |
+			| "17"   | "PZU"   | "8908899879"    |
+		And I click the button named "FormChoose"
+		And I activate field named "SerialLotNumbersQuantity" in "SerialLotNumbers" table
+		And I input "100,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click the button named "FormOk"
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I select "Source of origin 9" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I click the button named "FormOk"
+	* Add Item with 2 SLN + 2 Source of origin
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Product 3 with SLN" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "Uniq" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| "Code" | "Owner" | "Serial number"  |
+			| "23"   | "UNIQ"  | "09987897977895" |
+		And I click the button named "FormChoose"
+		And I input "200,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| "Code" | "Owner" | "Serial number"  |
+			| "21"   | "UNIQ"  | "09987897977893" |
+		And I click the button named "FormChoose"
+		And I input "200,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click the button named "FormOk"
+		And I activate field named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I click choice button of the attribute named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I close "Source of origins" window
+		And I select "Source of origin 4" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I go to line in "SourceOfOrigins" table
+			| "Quantity" | "Serial lot number" |
+			| "200,000"  | "09987897977893"    |
+		And I select "Source 1" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I click the button named "FormOk"
+	* Post
+		And I click the button named "FormPost"
+		And I delete "$$GoodsReceipt01$$" variable
+		And I delete "$$NumberGoodsReceipt01$$" variable
+		And I save the window as "$$GoodsReceipt01$$"
+		And I save the value of the field named "Number" as "$$NumberGoodsReceipt01$$"
+		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'                   |
+			| '$$NumberGoodsReceipt01$$' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'             | 'Source of origins'            | 'Store'    | 'Quantity'   | 'Unit' | 'Receipt basis' | 'Currency' | 'Purchase order' | 'Purchase invoice' | 'Sales order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Internal supply request' | 'Sales return' | 'Sales return order' | 'Production planning' |
+			| '1' | 'Skittles'           | 'Fruit'    | ''                               | ''                             | 'Store 05' | '10 000,000' | 'pcs'  | ''              | ''         | ''               | ''                 | ''            | ''              | ''                         | ''                   | ''                        | ''             | ''                   | ''                    |
+			| '2' | 'Bag'                | 'ODS'      | ''                               | 'Source of origin 11'          | 'Store 05' | '5 000,000'  | 'pcs'  | ''              | ''         | ''               | ''                 | ''            | ''              | ''                         | ''                   | ''                        | ''             | ''                   | ''                    |
+			| '3' | 'Product 1 with SLN' | 'PZU'      | '8908899879'                     | 'Source of origin 9'           | 'Store 05' | '100,000'    | 'pcs'  | ''              | ''         | ''               | ''                 | ''            | ''              | ''                         | ''                   | ''                        | ''             | ''                   | ''                    |
+			| '4' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977895; 09987897977893' | 'Source of origin 4; Source 1' | 'Store 05' | '400,000'    | 'pcs'  | ''              | ''         | ''               | ''                 | ''            | ''              | ''                         | ''                   | ''                        | ''             | ''                   | ''                    |
+
+
+Scenario: _150081 check filling source of origin in SPO
+	And I close all client application windows
+	* Create SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentPlaningOrder"
+		And I click "Create" button
+	* Filling main info
+		And I select from the drop-down list named "Partner" by "Lomaniti" string
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Store" by "Store 05" string
+		And I click Choice button of the field named "ShipmentPeriod"
+		And I click the hyperlink named "SwitchText"
+		And I click the button named "MonthPeriod"
+		And I click the button named "Select"
+	* Add Item and Source of origin
+	* Add Item no Source of origin		
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Skittles" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I input "10 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Add Item and Source of origin
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Bag" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "ODS" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I input "5 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I select current line in "SourceOfOrigins" table
+		And I select "Source of origin 11" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I click the button named "FormOk"
+	* Add Item with SLN + Source of origin
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Product 1 with SLN" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "PZU" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| "Code" | "Owner" | "Serial number" |
+			| "17"   | "PZU"   | "8908899879"    |
+		And I click the button named "FormChoose"
+		And I activate field named "SerialLotNumbersQuantity" in "SerialLotNumbers" table
+		And I input "100,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click the button named "FormOk"
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I select "Source of origin 9" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I click the button named "FormOk"
+	* Add Item with 2 SLN + 2 Source of origin
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Product 3 with SLN" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "Uniq" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| "Code" | "Owner" | "Serial number"  |
+			| "23"   | "UNIQ"  | "09987897977895" |
+		And I click the button named "FormChoose"
+		And I input "200,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I go to line in "List" table
+			| "Code" | "Owner" | "Serial number"  |
+			| "21"   | "UNIQ"  | "09987897977893" |
+		And I click the button named "FormChoose"
+		And I input "200,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click the button named "FormOk"
+		And I activate field named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I click choice button of the attribute named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I close "Source of origins" window
+		And I select "Source of origin 4" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I go to line in "SourceOfOrigins" table
+			| "Quantity" | "Serial lot number" |
+			| "200,000"  | "09987897977893"    |
+		And I select "Source 1" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I click the button named "FormOk"
+	* Post
+		And I click the button named "FormPost"
+		And I delete "$$ShipmentPlaningOrder01$$" variable
+		And I delete "$$NumberShipmentPlaningOrder01$$" variable
+		And I save the window as "$$ShipmentPlaningOrder01$$"
+		And I save the value of the field named "Number" as "$$NumberShipmentPlaningOrder01$$"
+		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.ShipmentPlaningOrder"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberShipmentPlaningOrder01$$' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'             | 'Source of origins'            | 'Quantity'   | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' |
+			| '1' | 'Skittles'           | 'Fruit'    | ''                               | ''                             | '10 000,000' | 'pcs'  | 'Store 05' | ''               | ''            |
+			| '2' | 'Bag'                | 'ODS'      | ''                               | 'Source of origin 11'          | '5 000,000'  | 'pcs'  | 'Store 05' | ''               | ''            |
+			| '3' | 'Product 1 with SLN' | 'PZU'      | '8908899879'                     | 'Source of origin 9'           | '100,000'    | 'pcs'  | 'Store 05' | ''               | ''            |
+			| '4' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977895; 09987897977893' | 'Source of origin 4; Source 1' | '400,000'    | 'pcs'  | 'Store 05' | ''               | ''            |
+	And I close all client application windows			
+
+Scenario: _150082 check Stock balance details, Batch balance details ticks in Source of origin (Item)
+	And I close all client application windows
+	* Create Source of origin
+		Given I open hyperlink "e1cib/list/Catalog.SourceOfOrigins"
+		And I click "Create" button
+		And I click Choice button of the field named "Owner"
+		And I go to line in "" table
+			| ""     |
+			| "Item" |
+		And I click "OK" button
+		And I go to line in "List" table
+			| "Code" | "Description" |
+			| "11"   | "Bag"         |
+		And I click the button named "FormChoose"
+		And I input "Source of origin 15" text in the field named "Description"
+		And I click Choice button of the field named "CountryOfOrigin"
+		And I go to line in "List" table
+			| "Code" | "Description" |
+			| "1"    | "Turkey"      |
+		And I click the button named "FormChoose"
+		And I change checkbox named "StockBalanceDetail"
+		And I change checkbox named "BatchBalanceDetail"
+		And I click the button named "FormWrite"
+		And I delete "$$CodeSourceOfOrigins01$$" variable
+		And I save the value of "Code" field as "$$CodeSourceOfOrigins01$$"
+		And I click the button named "FormWriteAndClose"
+	* Check
+		And I go to line in "List" table
+			| 'Code'                      |
+			| '$$CodeSourceOfOrigins01$$' |
+		And I select current line in "List" table
+		And checkbox "Stock balance detail" is equal to "Yes"
+		And checkbox "Batch balance detail" is equal to "Yes"
 	And I close all client application windows		
+
+Scenario: _150082 check Stock balance details, Batch balance details ticks in Source of origin (ItemKey)
+	And I close all client application windows
+	* Create Source of origin
+		Given I open hyperlink "e1cib/list/Catalog.SourceOfOrigins"
+		And I click "Create" button
+		And I click Choice button of the field named "Owner"
+		And I go to line in "" table
+			| ""         |
+			| "Item key" |
+		And I click "OK" button
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| "Code" | "Item" | "Item key" |
+			| "27"   | "Bag"  | "ODS"      |
+		And I activate field named "ItemKey" in "List" table
+		And I click the button named "FormChoose"
+		And I input "Source of origin 15/1" text in the field named "Description"
+		And I click Choice button of the field named "CountryOfOrigin"
+		And I go to line in "List" table
+			| "Code" | "Description" |
+			| "1"    | "Turkey"      |
+		And I click the button named "FormChoose"
+		And I change checkbox named "StockBalanceDetail"
+		And I change checkbox named "BatchBalanceDetail"
+		And I click the button named "FormWrite"
+		And I delete "$$CodeSourceOfOrigins02$$" variable
+		And I save the value of "Code" field as "$$CodeSourceOfOrigins02$$"
+		And I click the button named "FormWriteAndClose"
+	* Check
+		And I go to line in "List" table
+			| 'Code'                      |
+			| '$$CodeSourceOfOrigins02$$' |
+		And I select current line in "List" table
+		And checkbox "Stock balance detail" is equal to "Yes"
+		And checkbox "Batch balance detail" is equal to "Yes"
+	And I close all client application windows
+
+Scenario: _150083 check Stock balance details, Batch balance details ticks in Source of origin (ItemType)
+	And I close all client application windows
+	* Create Source of origin
+		Given I open hyperlink "e1cib/list/Catalog.SourceOfOrigins"
+		And I click "Create" button
+		And I click Choice button of the field named "Owner"
+		And I go to line in "" table
+			| ""          |
+			| "Item type" |
+		And I click "OK" button
+		Then "Item types" window is opened
+		And I go to line in "List" table
+			| "Code" | "Description" |
+			| "10"   | "Bags"        |
+		And I activate field named "Description" in "List" table
+		And I click the button named "FormChoose"
+		And I input "Source of origin BAGS" text in the field named "Description"
+		And I click Choice button of the field named "CountryOfOrigin"
+		And I go to line in "List" table
+			| "Code" | "Description" |
+			| "1"    | "Turkey"      |
+		And I click the button named "FormChoose"
+		And I change checkbox named "StockBalanceDetail"
+		And I change checkbox named "BatchBalanceDetail"
+		And I click the button named "FormWrite"
+		And I delete "$$CodeSourceOfOrigins03$$" variable
+		And I save the value of "Code" field as "$$CodeSourceOfOrigins03$$"
+		And I click the button named "FormWriteAndClose"
+	* Check
+		And I go to line in "List" table
+			| 'Code'                      |
+			| '$$CodeSourceOfOrigins03$$' |
+		And I select current line in "List" table
+		And checkbox "Stock balance detail" is equal to "Yes"
+		And checkbox "Batch balance detail" is equal to "Yes"
+	And I close all client application windows
+
+Scenario: _150084 check filling source of origin in SI created from SC
+	And I close all client application windows
+	* Open SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberShipmentConfirmation01$$' |
+		And I select current line in "List" table
+	* Create SI
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+		And I select from the drop-down list named "Agreement" by "TRY" string
+		Then "Update item list info" window is opened
+		And I change checkbox named "PriceTypes"
+		And I change checkbox named "Stores"
+		And I click the button named "FormOK"
+	* Check
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'             | 'Source of origins'            | 'Quantity'   | 'Price type' | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason' |
+			| '1' | 'Skittles'           | 'Fruit'    | ''                               | ''                             | '10 000,000' | ''           | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'No'             | 'Yes'                       | 'Store 05' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			| '2' | 'Bag'                | 'ODS'      | ''                               | 'Source of origin 11'          | '5 000,000'  | ''           | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'No'             | 'Yes'                       | 'Store 05' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			| '3' | 'Product 1 with SLN' | 'PZU'      | '8908899879'                     | 'Source of origin 9'           | '100,000'    | ''           | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'No'             | 'Yes'                       | 'Store 05' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+			| '4' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977893; 09987897977895' | 'Source of origin 4; Source 1' | '400,000'    | ''           | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'No'             | 'Yes'                       | 'Store 05' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                     |
+		And I click the button named "FormPost"
+		And I delete "$$SalesInvoice01$$" variable
+		And I delete "$$NumberSalesInvoice01$$" variable
+		And I save the window as "$$SalesInvoice01$$"
+		And I save the value of the field named "Number" as "$$NumberSalesInvoice01$$"
+		And I click the button named "FormPostAndClose"	
+	And I close all client application windows			
+
+Scenario: _150085 check filling source of origin in SC created from SPO	
+	And I close all client application windows
+	* Open SPO
+		Given I open hyperlink "e1cib/list/Document.ShipmentPlaningOrder"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberShipmentPlaningOrder01$$' |
+		And I select current line in "List" table
+	* Create SC
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+	* Check
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'             | 'Source of origins'            | 'Quantity'   | 'Unit' | 'Store'    | 'Shipment basis'             | 'Sales order' | 'Shipment planing order'     | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Skittles'           | 'Fruit'    | ''                               | ''                             | '10 000,000' | 'pcs'  | 'Store 05' | '$$ShipmentPlaningOrder01$$' | ''            | '$$ShipmentPlaningOrder01$$' | ''              | ''                         | ''                   | ''                      | ''                |
+			| '2' | 'Bag'                | 'ODS'      | ''                               | 'Source of origin 11'          | '5 000,000'  | 'pcs'  | 'Store 05' | '$$ShipmentPlaningOrder01$$' | ''            | '$$ShipmentPlaningOrder01$$' | ''              | ''                         | ''                   | ''                      | ''                |
+			| '3' | 'Product 1 with SLN' | 'PZU'      | '8908899879'                     | 'Source of origin 9'           | '100,000'    | 'pcs'  | 'Store 05' | '$$ShipmentPlaningOrder01$$' | ''            | '$$ShipmentPlaningOrder01$$' | ''              | ''                         | ''                   | ''                      | ''                |
+			| '4' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977893; 09987897977895' | 'Source of origin 4; Source 1' | '400,000'    | 'pcs'  | 'Store 05' | '$$ShipmentPlaningOrder01$$' | ''            | '$$ShipmentPlaningOrder01$$' | ''              | ''                         | ''                   | ''                      | ''                |
+		And I click the button named "FormPost"
+		And I delete "$$ShipmentConfirmation02$$" variable
+		And I delete "$$NumberShipmentConfirmation02$$" variable
+		And I save the window as "$$ShipmentConfirmation02$$"
+		And I save the value of the field named "Number" as "$$NumberShipmentConfirmation02$$"
+		And I click the button named "FormPostAndClose"	
+	And I close all client application windows		
+
+Scenario: _150086 check filling source of origin in PI created from GR
+	And I close all client application windows
+	* Open GR
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number'                   |
+			| '$$NumberGoodsReceipt01$$' |
+		And I select current line in "List" table
+	* Create PI
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click the button named "FormOk"
+	* Check
+		Then the form attribute named "Agreement" became equal to "Posting by Standard Partner term (Veritas)"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "LegalName" became equal to "Company Veritas "
+		Then the form attribute named "Partner" became equal to "Veritas"
+		Then the form attribute named "Store" became equal to "Store 05"
+		Then the form attribute named "TransactionType" became equal to "Purchase"
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'             | 'Source of origins'            | 'Quantity'   | 'Price type'        | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Project' | 'Delivery date' | 'Expense type' | 'Profit loss center' | 'Purchase order' | 'Sales order' | 'Internal supply request' | 'Use goods receipt' | 'Detail' | 'Additional analytic' | 'Other period expense type' |
+			| '1' | 'Skittles'           | 'Fruit'    | ''                               | ''                             | '10 000,000' | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'Store 05' | ''        | ''              | ''             | ''                   | ''               | ''            | ''                        | 'Yes'               | ''       | ''                    | ''                          |
+			| '2' | 'Bag'                | 'ODS'      | ''                               | 'Source of origin 11'          | '5 000,000'  | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'Store 05' | ''        | ''              | ''             | ''                   | ''               | ''            | ''                        | 'Yes'               | ''       | ''                    | ''                          |
+			| '3' | 'Product 1 with SLN' | 'PZU'      | '8908899879'                     | 'Source of origin 9'           | '100,000'    | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'Store 05' | ''        | ''              | ''             | ''                   | ''               | ''            | ''                        | 'Yes'               | ''       | ''                    | ''                          |
+			| '4' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977893; 09987897977895' | 'Source of origin 4; Source 1' | '400,000'    | 'Vendor price, TRY' | 'pcs'  | ''      | '18%' | ''              | 'No'                 | ''           | ''           | ''             | 'Store 05' | ''        | ''              | ''             | ''                   | ''               | ''            | ''                        | 'Yes'               | ''       | ''                    | ''                          |
+		And I click the button named "FormPost"
+		And I delete "$$PurchaseInvoice01$$" variable
+		And I delete "$$NumberPurchaseInvoice01$$" variable
+		And I save the window as "$$PurchaseInvoice01$$"
+		And I save the value of the field named "Number" as "$$NumberPurchaseInvoice01$$"
+		And I click the button named "FormPostAndClose"	
+	And I close all client application windows		
+
+Scenario: _150087 check row separation in SI
+	And I close all client application windows
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling main info
+		And I select from the drop-down list named "Partner" by "Lomaniti" string
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Store" by "Store 05" string
+		And I select from the drop-down list named "Agreement" by "Basic Partner terms, TRY" string
+	* Add Item with SLN
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Product 5 with SLN" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		Then "Select serial lot numbers" window is opened
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I select "90808979898" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I input "110,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I select "90808979899" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I input "120,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click the button named "FormOk"
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I select "source of origin 6" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I go to line in "SourceOfOrigins" table
+			| "Quantity" | "Serial lot number" |
+			| "120,000"  | "90808979899"       |
+		And I input "source of origin 6" text in the field named "SourceOfOriginsSourceOfOrigin" of "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I click the button named "FormOk"
+		And I input "5,01" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Add Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Skittles" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I input "10 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I input "0,53" text in the field named "ItemListPrice" of "ItemList" table
+		And I select "0%" exact value from the drop-down list named "ItemListVatRate" in "ItemList" table
+		And I select "Tax exeption reason 1 (0%, All countries)" by string from the drop-down list named "ItemListTaxExemptionReason" in "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		And "ItemList" table became equal
+			| '#' | 'Price type'              | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'       | 'Source of origins'                      | 'Quantity'   | 'Price' | 'Tax exemption reason'                      | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Additional analytic' | 'Project' | 'Store'    | 'Delivery date' | 'Other period revenue type' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Work order' | 'Revenue type' | 'Sales person' |
+			| '1' | 'en description is empty' | 'Product 5 with SLN' | 'ODS'      | ''                   | 'No'                 | '175,77'     | 'pcs'  | '90808979898; 90808979899' | 'Source of origin 6; Source of origin 6' | '230,000'    | '5,01'  | ''                                          | '18%' | ''              | '976,53'     | '1 152,30'     | 'No'             | ''                    | ''        | 'Store 01' | ''              | ''                          | 'No'                        | ''       | ''            | ''           | ''             | ''             |
+			| '2' | 'en description is empty' | 'Skittles'           | 'Fruit'    | ''                   | 'No'                 | ''           | 'pcs'  | ''                         | ''                                       | '10 000,000' | '0,53'  | 'Tax exeption reason 1 (0%, All countries)' | '0%'  | ''              | '5 300,00'   | '5 300,00'     | 'No'             | ''                    | ''        | 'Store 01' | ''              | ''                          | 'No'                        | ''       | ''            | ''           | ''             | ''             |
+		
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "6 276,53"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "175,77"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "6 452,30"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		Then the form attribute named "LegalName" became equal to "Company Lomaniti"
+		Then the form attribute named "ManagerSegment" became equal to "Region 2"
+		Then the form attribute named "Partner" became equal to "Lomaniti"
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "TransactionType" became equal to "Sales"
+	* Split first Item
+		And I go to line in "ItemList" table
+			| "#" | "Dont calculate row" | "Item"               | "Item key" | "Net amount" | "Price" | "Price type"              | "Quantity" | "Serial lot numbers"       | "Source of origins"                      | "Store"    | "Tax amount" | "Total amount" | "Unit" | "Use shipment confirmation" | "Use work sheet" | "VAT" |
+			| "1" | "No"                 | "Product 5 with SLN" | "ODS"      | "976,53"     | "5,01"  | "en description is empty" | "230,000"  | "90808979898; 90808979899" | "Source of origin 6; Source of origin 6" | "Store 01" | "175,77"     | "1 152,30"     | "pcs"  | "No"                        | "No"             | "18%" |
+		And in the table "ItemList" I click the button named "ItemListSplitRow"
+		Then "Set the quantity for the new row" window is opened
+		And I input "130" text in the field named "InputFld"
+		And I click the button named "OK"
+	* Check separation
+// needs to update
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'       | 'Source of origins'                      | 'Quantity'   | 'Price type'              | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason'                      |
+			| '1' | 'Product 5 with SLN' | 'ODS'      | '90808979898'              | 'Source of origin 6'                     | '100,000'    | 'en description is empty' | 'pcs'  | '5,01'  | '18%' | ''              | 'No'                 | '76,42'      | '424,58'     | '501,00'       | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                                          |
+			| '2' | 'Skittles'           | 'Fruit'    | ''                         | ''                                       | '10 000,000' | 'en description is empty' | 'pcs'  | '0,53'  | '0%'  | ''              | 'No'                 | ''           | '5 300,00'   | '5 300,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | 'Tax exeption reason 1 (0%, All countries)' |
+			| '3' | 'Product 5 with SLN' | 'ODS'      | '90808979899; 90808979898' | 'Source of origin 6; Source of origin 6' | '130,000'    | 'en description is empty' | 'pcs'  | '5,01'  | '18%' | ''              | 'No'                 | '99,35'      | '551,95'     | '651,30'       | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                                          |
+		And form attributes have values:
+			| 'Name'                     | 'Value'                    |
+			| 'Agreement'                | "Basic Partner terms, TRY" |
+			| 'Company'                  | "Main Company"             |
+			| 'Currency'                 | "TRY"                      |
+			| 'CurrencyTotalAmount'      | "TRY"                      |
+			| 'ItemListTotalNetAmount'   | "6 276,53"                 |
+			| 'ItemListTotalTaxAmount'   | "175,77"                   |
+			| 'ItemListTotalTotalAmount' | "6 452,30"                 |
+			| 'LegalName'                | "Company Lomaniti"         |
+			| 'ManagerSegment'           | "Region 2"                 |
+			| 'Partner'                  | "Lomaniti"                 |
+			| 'PriceIncludeTax'          | "Yes"                      |
+			| 'Store'                    | "Store 01"                 |
+			| 'TransactionType'          | "Sales"                    |
+		And I go to line in "ItemList" table
+			| "#" | "Dont calculate row" | "Item"               | "Item key" | "Net amount" | "Price" | "Price type"              | "Quantity" | "Serial lot numbers"       | "Store"    | "Tax amount" | "Total amount" | "Unit" | "Use shipment confirmation" | "Use work sheet" | "VAT" |
+			| "3" | "No"                 | "Product 5 with SLN" | "ODS"      | "551,95"     | "5,01"  | "en description is empty" | "130,000"  | "90808979899; 90808979898" | "Store 01" | "99,35"      | "651,30"       | "pcs"  | "No"                        | "No"             | "18%" |
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		Then "Edit source of origins" window is opened
+		And I activate field named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+// needs to update
+		And "SourceOfOrigins" table became equal
+			| 'Serial lot number' | 'Source of origin'   | 'Quantity' |
+			| '90808979899'       | 'Source of origin 6' | '120,000'  |
+			| '90808979898'       | 'Source of origin 6' | '10,000'   |
+		And I close current window	
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And "SerialLotNumbers" table became equal
+			| 'Serial lot number' | 'Quantity' | 'Code is approved' |
+			| '90808979899'       | '120,000'  | 'No'               |
+			| '90808979898'       | '10,000'   | 'No'               |
+		And I close current window	
+		And I go to line in "ItemList" table
+			| "#" | "Dont calculate row" | "Item"               | "Item key" | "Net amount" | "Price" | "Price type"              | "Quantity" | "Serial lot numbers" | "Source of origins"  | "Store"    | "Tax amount" | "Total amount" | "Unit" | "Use shipment confirmation" | "Use work sheet" | "VAT" |
+			| "1" | "No"                 | "Product 5 with SLN" | "ODS"      | "424,58"     | "5,01"  | "en description is empty" | "100,000"  | "90808979898"        | "Source of origin 6" | "Store 01" | "76,42"      | "501,00"       | "pcs"  | "No"                        | "No"             | "18%" |
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And "SourceOfOrigins" table became equal
+			| 'Serial lot number' | 'Source of origin'   | 'Quantity' |
+			| '90808979898'       | 'Source of origin 6' | '100,000'  |
+		And I close current window
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And "SerialLotNumbers" table became equal
+			| 'Serial lot number' | 'Quantity' | 'Code is approved' |
+			| '90808979898'       | '100,000'  | 'No'               |
+		And I close current window		
+	* Split second Item
+		And I go to line in "ItemList" table
+			| "#" | "Dont calculate row" | "Item"     | "Item key" | "Net amount" | "Price" | "Price type"              | "Quantity"   | "Store"    | "Tax exemption reason"                      | "Total amount" | "Unit" | "Use shipment confirmation" | "Use work sheet" | "VAT" |
+			| "2" | "No"                 | "Skittles" | "Fruit"    | "5 300,00"   | "0,53"  | "en description is empty" | "10 000,000" | "Store 01" | "Tax exeption reason 1 (0%, All countries)" | "5 300,00"     | "pcs"  | "No"                        | "No"             | "0%"  |
+		And in the table "ItemList" I click the button named "ItemListSplitRow"
+		Then "Set the quantity for the new row" window is opened
+		And I input "5 000" text in the field named "InputFld"
+		And I click the button named "OK"
+	* Check separation
+// needs to update
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'       | 'Source of origins'                      | 'Quantity'  | 'Price type'              | 'Unit' | 'Price' | 'VAT' | 'Offers amount' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Use shipment confirmation' | 'Store'    | 'Project' | 'Delivery date' | 'Sales order' | 'Work order' | 'Profit loss center' | 'Revenue type' | 'Detail' | 'Additional analytic' | 'Other period revenue type' | 'Sales person' | 'Tax exemption reason'                      |
+			| '1' | 'Product 5 with SLN' | 'ODS'      | '90808979898'              | 'Source of origin 6'                     | '100,000'   | 'en description is empty' | 'pcs'  | '5,01'  | '18%' | ''              | 'No'                 | '76,42'      | '424,58'     | '501,00'       | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                                          |
+			| '2' | 'Skittles'           | 'Fruit'    | ''                         | ''                                       | '5 000,000' | 'en description is empty' | 'pcs'  | '0,53'  | '0%'  | ''              | 'No'                 | ''           | '2 650,00'   | '2 650,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | 'Tax exeption reason 1 (0%, All countries)' |
+			| '3' | 'Product 5 with SLN' | 'ODS'      | '90808979899; 90808979898' | 'Source of origin 6; Source of origin 6' | '130,000'   | 'en description is empty' | 'pcs'  | '5,01'  | '18%' | ''              | 'No'                 | '99,35'      | '551,95'     | '651,30'       | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | ''                                          |
+			| '4' | 'Skittles'           | 'Fruit'    | ''                         | ''                                       | '5 000,000' | 'en description is empty' | 'pcs'  | '0,53'  | '0%'  | ''              | 'No'                 | ''           | '2 650,00'   | '2 650,00'     | 'No'             | 'No'                        | 'Store 01' | ''        | ''              | ''            | ''           | ''                   | ''             | ''       | ''                    | ''                          | ''             | 'Tax exeption reason 1 (0%, All countries)' |
+		And form attributes have values:
+			| 'Name'                     | 'Value'                    |
+			| 'Agreement'                | "Basic Partner terms, TRY" |
+			| 'Company'                  | "Main Company"             |
+			| 'Currency'                 | "TRY"                      |
+			| 'CurrencyTotalAmount'      | "TRY"                      |
+			| 'ItemListTotalNetAmount'   | "6 276,53"                 |
+			| 'ItemListTotalTaxAmount'   | "175,77"                   |
+			| 'ItemListTotalTotalAmount' | "6 452,30"                 |
+			| 'LegalName'                | "Company Lomaniti"         |
+			| 'ManagerSegment'           | "Region 2"                 |
+			| 'Partner'                  | "Lomaniti"                 |
+			| 'PriceIncludeTax'          | "Yes"                      |
+			| 'Store'                    | "Store 01"                 |
+			| 'TransactionType'          | "Sales"                    |
+	* Save and Post
+		And I click the button named "FormWrite"
+		And I delete "$$SalesInvoice02$$" variable
+		And I delete "$$NumberSalesInvoice02$$" variable
+		And I save the window as "$$SalesInvoice02$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice02$$"
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows													
+				
+Scenario: _150088 check row separation in SC 
+	And I close all client application windows
+	* Create SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Store" by "Store 05" string
+		And I select "Inventory transfer" exact value from the drop-down list named "TransactionType"
+	* Add Item with SLN
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Product 5 with SLN" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I select "90808979898" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I input "110,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I select "90808979899" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I input "120,000" text in the field named "SerialLotNumbersQuantity" of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click the button named "FormOk"
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And I select "Source of origin 6" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I go to line in "SourceOfOrigins" table
+			| "Serial lot number" |
+			| "90808979899"       |
+		And I select "Source of origin 6" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I click the button named "FormOk"
+		And I finish line editing in "ItemList" table
+	* Add Item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "Dress" by string from the drop-down list named "ItemListItem" in "ItemList" table
+		And I select "S/Yellow" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		Then "Edit source of origins" window is opened
+		And I activate field named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I select "Source 2" by string from the drop-down list named "SourceOfOriginsSourceOfOrigin" in "SourceOfOrigins" table
+		And I finish line editing in "SourceOfOrigins" table
+		And I click the button named "FormOk"
+		And I input "10 000,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 05"
+		Then the form attribute named "TransactionType" became equal to "Inventory transfer"
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'       | 'Source of origins'                      | 'Quantity'   | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Shipment planing order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Product 5 with SLN' | 'ODS'      | '90808979898; 90808979899' | 'Source of origin 6; Source of origin 6' | '230,000'    | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '2' | 'Dress'              | 'S/Yellow' | ''                         | 'Source 2'                               | '10 000,000' | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+	* Split first Item
+		And I go to line in "ItemList" table
+			| "Item"               |
+			| "Product 5 with SLN" |
+		And in the table "ItemList" I click the button named "ItemListSplitRow"
+		And I input "130" text in the field named "InputFld"
+		And I click the button named "OK"
+	* Check separation
+// needs to update
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'       | 'Source of origins'                      | 'Quantity'   | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Shipment planing order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Product 5 with SLN' | 'ODS'      | '90808979898'              | 'Source of origin 6'                     | '100,000'    | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '2' | 'Dress'              | 'S/Yellow' | ''                         | 'Source 2'                               | '10 000,000' | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '3' | 'Product 5 with SLN' | 'ODS'      | '90808979899; 90808979898' | 'Source of origin 6; Source of origin 6' | '130,000'    | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+		And form attributes have values:
+			| 'Name'            | 'Value'              |
+			| 'Company'         | "Main Company"       |
+			| 'Store'           | "Store 05"           |
+			| 'TransactionType' | "Inventory transfer" |
+		And I go to line in "ItemList" table
+			| '#' | 'Item'               |
+			| '3' | 'Product 5 with SLN' |
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And "SerialLotNumbers" table became equal
+			| 'Serial lot number' | 'Quantity' | 'Code is approved' |
+			| '90808979899'       | '120,000'  | 'No'               |
+			| '90808979898'       | '10,000'   | 'No'               |
+		And I close current window
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And "SourceOfOrigins" table became equal
+			| 'Serial lot number' | 'Source of origin'   | 'Quantity' |
+			| '90808979899'       | 'Source of origin 6' | '120,000'  |
+			| '90808979898'       | 'Source of origin 6' | '10,000'   |
+		And I close current window
+		And I go to line in "ItemList" table
+			| "#" | "Item"               |
+			| "1" | "Product 5 with SLN" |
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		Then the form attribute named "AutoCreateNewSerialLotNumbers" became equal to "No"
+		And "SerialLotNumbers" table became equal
+			| 'Serial lot number' | 'Quantity' | 'Code is approved' |
+			| '90808979898'       | '100,000'  | 'No'               |
+		And I close current window
+		And I click choice button of the attribute named "ItemListSourceOfOriginsPresentation" in "ItemList" table
+		And "SourceOfOrigins" table became equal
+			| 'Serial lot number' | 'Source of origin'   | 'Quantity' |
+			| '90808979898'       | 'Source of origin 6' | '100,000'  |
+		And I close current window
+	* Split second Item
+		And I go to line in "ItemList" table
+			| "#" | "Item"  |
+			| "2" | "Dress" |
+		And in the table "ItemList" I click the button named "ItemListSplitRow"
+		Then "Set the quantity for the new row" window is opened
+		And I input "5 000" text in the field named "InputFld"
+		And I click the button named "OK"
+	* Check separation
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'       | 'Source of origins'                      | 'Quantity'  | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Shipment planing order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Product 5 with SLN' | 'ODS'      | '90808979898'              | 'Source of origin 6'                     | '100,000'   | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '2' | 'Dress'              | 'S/Yellow' | ''                         | 'Source 2'                               | '5 000,000' | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '3' | 'Product 5 with SLN' | 'ODS'      | '90808979899; 90808979898' | 'Source of origin 6; Source of origin 6' | '130,000'   | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '4' | 'Dress'              | 'S/Yellow' | ''                         | 'Source 2'                               | '5 000,000' | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+		And form attributes have values:
+			| 'Name'                                   | 'Value'                                                                                                                   | 'HowToSearch' |
+			| 'Company'                                | "Main Company"                                                                                                            | ''            |
+			| 'Store'                                  | "Store 05"                                                                                                                | ''            |
+			| 'TransactionType'                        | "Inventory transfer"                                                                                                      | ''            |
+	* Save and Post
+		And I click the button named "FormWrite"
+		And I delete "$$ShipmentConfirmation03$$" variable
+		And I delete "$$NumberShipmentConfirmation03$$" variable
+		And I save the window as "$$ShipmentConfirmation03$$"
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation03$$"		
+		And I click the button named "FormPostAndClose"
+	And I close all client application windows						
+					

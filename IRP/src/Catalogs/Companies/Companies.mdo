@@ -415,6 +415,187 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="9c52a58f-e85c-430a-aa8b-2f53c30da901">
+  <name>LegalCurrencyMovementType</name>
+  <synonym>
+   <key>en</key>
+   <value>B7BF5A63-6430-3AEE-EBEC-CF3849E25A53</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.Type</name>
+   <value xsi:type="core:ReferenceValue">
+    <value>Enum.CurrencyType.EnumValue.Legal</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="8a79423f-b414-47fd-9f61-2a721bfad444">
+  <name>BillingEmail</name>
+  <synonym>
+   <key>en</key>
+   <value>B9F88E76-279D-FF0F-FF2F-F134058F0924</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="59a47681-d50a-416a-916a-190a0fcd9fea">
+  <name>CurrencyRevaluationItem</name>
+  <synonym>
+   <key>en</key>
+   <value>814CB13C-F021-BA67-79B7-7D1E7A1D8D15</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e030789e-8d21-4051-a425-c0c916d77ba7">
+  <name>CurrencyRevaluationItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>CCF31628-5E2F-4844-4CC9-9023A033A04C</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.Item</name>
+   <field>Catalog.Companies.Attribute.CurrencyRevaluationItem</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="69a0a950-9fa5-435f-baa5-8d528640a6d4">
+  <name>BatchID</name>
+  <synonym>
+   <key>en</key>
+   <value>26A0FAEE-9015-8C2B-B5A0-026D17764B70</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>20</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="66a02ddf-07b1-45cb-bc62-147d60f00d8f">
+  <name>EntityID</name>
+  <synonym>
+   <key>en</key>
+   <value>AF1834A4-DE4D-03DD-DB22-238391F942D0</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>20</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="8b67b3bd-b8c2-49bd-a13f-fc2791e5702c">
+  <name>UseVariableItemKeyInOrders</name>
+  <synonym>
+   <key>en</key>
+   <value>F0D02284-0D0E-ECE4-4871-17A7F41E0F7E</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="be6a8fd7-e393-48f2-b2bb-734b678d70b9">
+  <name>UseVariableStoreInOrders</name>
+  <synonym>
+   <key>en</key>
+   <value>BE95348F-6984-8D45-5393-3BB9E11AD377</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="00b99394-e153-4143-a4a9-63ba58742650">
+  <name>LandedCostAmountCorrectionExpenseType</name>
+  <synonym>
+   <key>en</key>
+   <value>2DAD42B5-86F5-C0CC-C325-56681F34EBA9</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.IsExpense</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="0cf87d7e-7d8f-4527-a091-4102aca3dc61">
+  <name>LandedCostAmountCorrectionRevenueType</name>
+  <synonym>
+   <key>en</key>
+   <value>EBAC4662-3CD0-B5CF-F4B3-32E7A46E673B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.IsRevenue</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="1cef8184-c8f4-4ae0-b558-76db940b1ce5">
   <producedTypes>
    <objectType typeId="e9c801b9-6993-4bc6-9c66-a808cd465688" valueTypeId="ef76d03a-c4a6-4068-9bd0-e3f4f8ae223d"/>

@@ -14,11 +14,19 @@
  <fillValue xsi:type="core:UndefinedValue"/>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  <content>
+  <metadata>Document.StockCorrection</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.VisitorCounter</metadata>
   <use>Use</use>
  </content>
  <content>
   <metadata>Document.VendorsAdvancesClosing</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.ForeignCurrencyRevaluation</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -46,6 +54,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.WithholdingTaxInvoice</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.PurchaseReturnOrder</metadata>
   <use>Use</use>
  </content>
@@ -55,6 +67,10 @@
  </content>
  <content>
   <metadata>Document.ChequeBondTransaction</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.FixedAssetRevaluation</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -104,6 +120,14 @@
  <content>
   <metadata>Document.StockAdjustmentAsSurplus</metadata>
   <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.TaxesOperation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.ELedgerRegistry</metadata>
+  <use>DontUse</use>
  </content>
  <content>
   <metadata>Document.EmployeeTransfer</metadata>
@@ -191,6 +215,10 @@
  </content>
  <content>
   <metadata>Document.Unbundling</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.ShipmentPlaningOrder</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -343,14 +371,6 @@
  </content>
  <content>
   <metadata>Document.FixedAssetTransfer</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.ForeignCurrencyRevaluation</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.TaxesOperation</metadata>
   <use>Use</use>
  </content>
  <autoUse>DontUse</autoUse>

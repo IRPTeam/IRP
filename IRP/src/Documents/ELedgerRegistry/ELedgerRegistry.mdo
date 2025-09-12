@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="61733f48-0a52-47a2-8a4f-4c7ab9556b3b">
+ <producedTypes>
+  <objectType typeId="f5f3527c-ad20-44c1-864d-ed5981cc2815" valueTypeId="31737ed4-7150-42f9-b751-3cd9eedd1c99"/>
+  <refType typeId="abf4b10b-0062-4d26-8995-6112d594b6e9" valueTypeId="9b1a30fa-81d9-43e2-9864-50c96a00fc06"/>
+  <selectionType typeId="362006bb-f9f1-44e5-8c34-d9eae3602cda" valueTypeId="7800343a-b88d-4414-920e-bd572fb0f62c"/>
+  <listType typeId="d6243fcf-5ffb-49f5-9240-1d680550519c" valueTypeId="99255d1e-7874-4c6f-b552-c39fab464621"/>
+  <managerType typeId="94b5728e-bddd-4133-88c9-49a0dc3c061e" valueTypeId="760a44fc-969a-4bce-9f1d-dcef9da3e0cb"/>
+ </producedTypes>
+ <name>ELedgerRegistry</name>
+ <synonym>
+  <key>en</key>
+  <value>E30F77DE-46D4-CF23-3376-6C5FC8C1C1FB</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.ELedgerRegistry.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_ELedgerRegistry</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_ELedgerRegistry</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Document.ELedgerRegistry.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.ELedgerRegistry.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.ELedgerRegistry.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.ELedgerRegistry.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesOrderField>Document.ELedgerRegistry.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>CF24C342-6700-49EC-CE02-23DA683CC41B</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>54F18C07-6147-B810-04F0-0BAF23681059</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.ELedgerRegistry.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.ELedgerRegistry.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.ELedgerRegistry.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="92d4daf8-f93d-4ea6-8da8-7ee892f3dac2">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>CF0421B6-4B19-48CA-A8D4-460851E85823</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f822ba80-e0d1-4249-a186-8febaeaff385">
+  <name>LedgerType</name>
+  <synonym>
+   <key>en</key>
+   <value>25E25953-9EBC-0D83-3ADB-BDB1ACCDE952</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ef882848-a1a0-47b1-bea4-4121076ed00f">
+  <name>BeginDate</name>
+  <synonym>
+   <key>en</key>
+   <value>956FACAF-6E69-842A-A4B1-1BED91B92CA4</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="74f8d81a-676f-4d93-bbe8-f1e6a88bcb16">
+  <name>EndDate</name>
+  <synonym>
+   <key>en</key>
+   <value>FFC57581-028B-87D1-1873-32A8A0BE6138</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="76f7780e-1248-400d-9d61-e57d8b479676">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>68D00442-6583-55CC-C6BA-AF28934897EE</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="732ad9ff-7724-4753-9f69-168c0f986f8c">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>B9BDE9A8-D575-5EAB-B91C-CBB63D90BEE9</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="8eae42e6-1774-4f17-a2ac-e658a67d1164">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>6B175CFC-2644-CA35-53CC-CBB003586996</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="b0d6f09e-6cc0-45dc-842a-861dfafda433">
+  <producedTypes>
+   <objectType typeId="bbfc0482-d751-4bd0-8239-e6652869d4e6" valueTypeId="5ee2818b-329d-4063-b666-1301a89fbc7e"/>
+   <rowType typeId="38476517-6d12-4bf7-94cf-121588ffc415" valueTypeId="43823409-09d3-413d-a6bf-2f669e502299"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>EF78246D-8415-2672-2009-97D26635FFE7</value>
+  </synonym>
+  <attributes uuid="f7724882-97fb-4d66-8061-773644109f78">
+   <name>Property</name>
+   <synonym>
+    <key>en</key>
+    <value>869722CE-632C-ABC2-2970-0904B46D1D87</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="160f0f83-0513-4842-b638-f1bb947478d5">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>E1B09C9C-F74E-D9BD-DD5B-B6D7838EF52A</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.ELedgerRegistry.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <commands uuid="18dcd3e4-9a7f-44f4-8d8e-5d779c19eeee">
+  <name>ExportToCSV</name>
+  <synonym>
+   <key>en</key>
+   <value>57A68E13-9AD1-DE0B-BA5A-A8DAFE4F2F3F</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>DocumentRef.ELedgerRegistry</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="71c33c5f-9f13-4b1e-977e-e11016d0f29b">
+  <name>ExportToCSV_ZIP</name>
+  <synonym>
+   <key>en</key>
+   <value>50CEB026-B23C-A0EB-B70D-D1E2A8B1DCB3</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>DocumentRef.ELedgerRegistry</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
+</mdclass:Document>

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @ExportScenarios
 @IgnoreOnCIMainBuild
 @tree
@@ -71,6 +71,9 @@ Scenario: check the filter for bank accounts (cash account selection is not avai
 			| Bank account, USD      |
 			| Bank account, EUR      |
 			| Bank account 2, EUR    |
+		And I go to line in "List" table
+			| Description       |
+			| Bank account, TRY |
 		And I select current line in "List" table
 		Then the form attribute named "Account" became equal to "Bank account, TRY"
 	* Check the filling in currency
@@ -114,6 +117,9 @@ Scenario: check the filter by cash account (bank account selection is not availa
 			| Cash desk №2    |
 			| Cash desk №3    |
 			| Cash desk №4    |
+		And I go to line in "List" table
+			| Description     |
+			| Cash desk №1    |
 		And I select current line in "List" table
 		Then the form attribute named "CashAccount" became equal to "Cash desk №1"
 	* Check the filter by string input
@@ -132,10 +138,10 @@ Scenario: check the filter by cash account (bank account selection is not availa
 Scenario: check filling in Description
 	And I click the button named "FormCreate"
 	* Filling in Description
-		And I click "Description" hyperlink
-		And I input "Test Description" text in "Text" field
+		And I click "Comment" hyperlink
+		And I input "Test Comment" text in "Text" field
 		And I click "OK" button
-		Then the form attribute named "Description" became equal to "Test Description"
+		Then the form attribute named "Comment" became equal to "Test Comment"
 	And I close all client application windows
 
 Scenario: check the choice of type of operation in the payment documents
@@ -164,14 +170,14 @@ Scenario: check the legal name filter in the tabular part of the payment documen
 	# when selecting a partner, only its legal names should be available on the selection list
 	And I click the button named "FormCreate"
 	* Filling in partner info
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
 			| Ferron BP      |
 		And I select current line in "List" table
 	* Check the filter by legal name
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I save number of "List" table lines as "QS"
 		Then "QS" variable is equal to 1
 		And "List" table contains lines
@@ -181,7 +187,7 @@ Scenario: check the legal name filter in the tabular part of the payment documen
 		And I move to the next attribute
 		And Delay 2
 		And "PaymentList" table contains lines
-		| Partner    | Payee               |
+		| Partner    | Legal name          |
 		| Ferron BP  | Company Ferron BP   |
 	And I close all client application windows
 
@@ -190,14 +196,14 @@ Scenario: check the legal name filter in the tabular part of the payment receipt
 	And I click the button named "FormCreate"
 	And I select "Payment from customer" exact value from "Transaction type" drop-down list
 	* Filling in partner info
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"		
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
 			| Ferron BP      |
 		And I select current line in "List" table
 	* Check the filter by legal name
-		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I save number of "List" table lines as "QS"
 		Then "QS" variable is equal to 1
 		And "List" table contains lines
@@ -207,7 +213,7 @@ Scenario: check the legal name filter in the tabular part of the payment receipt
 		And I move to the next attribute
 		And Delay 2
 		And "PaymentList" table contains lines
-		| Partner    | Payer               |
+		| Partner    | Legal name          |
 		| Ferron BP  | Company Ferron BP   |
 	And I close all client application windows
 
@@ -215,8 +221,8 @@ Scenario: check the partner filter in the tabular part of the payment documents.
 	# when selecting a legal name, only its partners should be available on the partner selection list
 	And I click the button named "FormCreate"
 	* Filling in legal name info
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I click the button named "PaymentListAdd"
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description          |
 			| Company Ferron BP    |
@@ -232,7 +238,7 @@ Scenario: check the partner filter in the tabular part of the payment documents.
 		And I select current line in "List" table
 		And I move to the next attribute
 		And "PaymentList" table contains lines
-		| Partner    | Payee               |
+		| Partner    | Legal name          |
 		| Ferron BP  | Company Ferron BP   |
 	And I close all client application windows
 
@@ -241,8 +247,8 @@ Scenario: check the partner filter in the tabular part of the payment receipt do
 	And I click the button named "FormCreate"
 	And I select "Payment from customer" exact value from "Transaction type" drop-down list
 	* Filling in legal name info
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I click the button named "PaymentListAdd"
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description          |
 			| Company Ferron BP    |
@@ -258,7 +264,7 @@ Scenario: check the partner filter in the tabular part of the payment receipt do
 		And I select current line in "List" table
 		And I move to the next attribute
 		And "PaymentList" table contains lines
-		| Partner    | Payer               |
+		| Partner    | Legal name          |
 		| Ferron BP  | Company Ferron BP   |
 	And I close all client application windows
 
@@ -277,24 +283,24 @@ Scenario: check the filter on the basis documents in the payment documents
 			| Company Kalipso   | Kalipso    |
 		And I close current window
 	* Check the filter by basis documents for Kalipso
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
+		And I click the button named "PaymentListAdd"
+		And I click Clear button of the attribute named "PaymentListLegalName" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
 			| Kalipso        |
 		And I select current line in "List" table
-		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And "List" table contains lines
 			| Description        |
 			| Company Kalipso    |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| Partner   | Payee              |
+			| Partner   | Legal name         |
 			| Kalipso   | Company Kalipso    |
 	* Check the filter by basis documents
 		And I go to line in "PaymentList" table
-			| Partner   | Payee              |
+			| Partner   | Legal name         |
 			| Kalipso   | Company Kalipso    |
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -326,23 +332,23 @@ Scenario: check the filter on the basis documents in the documents of receipt of
 			| Legal name        | Partner    |
 			| Company Kalipso   | Kalipso    |
 	* Check the filter by basis documents for Kalipso
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| Description    |
 			| Kalipso        |
 		And I select current line in "List" table
-		And I click choice button of "Payer" attribute in "PaymentList" table
+		And I click choice button of "Legal name" attribute in "PaymentList" table
 		And "List" table contains lines
 			| Description        |
 			| Company Kalipso    |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| Partner   | Payer              |
+			| Partner   | Legal name         |
 			| Kalipso   | Company Kalipso    |
 	* Check the filter by basis documents
 		And I go to line in "PaymentList" table
-			| Partner   | Payer              |
+			| Partner   | Legal name         |
 			| Kalipso   | Company Kalipso    |
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
@@ -355,7 +361,7 @@ Scenario: check the filter on the basis documents in the documents of receipt of
 Scenario: check the choice of the type of document-basis in the documents of receipt of payment
 	And I click the button named "FormCreate"
 	* Check the choice of the type of document-basis
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		# temporarily
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table

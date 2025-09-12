@@ -16,12 +16,16 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Properties.Sync_DeletionMark.Add("UnsetDeletionMark");
 	EndIf;
 	
-	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.ChequeBonds);
-	For Each Row In ThisObject.ChequeBonds Do
-		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		
+		CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.ChequeBonds);
+		For Each Row In ThisObject.ChequeBonds Do
+			Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+	
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)

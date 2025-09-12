@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="9314f8a7-435d-434f-aa6e-181a92b64898">
+ <producedTypes>
+  <objectType typeId="db94dd0e-6f3e-497a-a3bf-93d3dcb5c076" valueTypeId="7616b255-6fe4-4986-b63b-3a11b7e3253f"/>
+  <managerType typeId="dde77983-f624-4104-85a7-ba94b3642cc0" valueTypeId="ea402f9f-9496-4f80-93fd-ce04c82d4cfb"/>
+ </producedTypes>
+ <name>Chat</name>
+ <synonym>
+  <key>en</key>
+  <value>A6E80861-6707-2C09-94A7-7F72D6959FED</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.Chat.Form.Form</defaultForm>
+ <forms uuid="2bb6312a-620a-42db-b131-90fc4bf4e754">
+  <name>Form</name>
+  <synonym>
+   <key>en</key>
+   <value>100109C4-78A8-2655-5756-604F6ED465AF</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="1a37fff4-3e89-44b8-b4ef-fe7858892bf3">
+  <name>ChatHTML</name>
+  <synonym>
+   <key>en</key>
+   <value>C00C0CDC-1498-DC9A-AEE3-38ECB51302E3</value>
+  </synonym>
+  <templateType>TextDocument</templateType>
+ </templates>
+ <commands uuid="41733d6d-e7dd-4b8e-8390-a8252d7b7528">
+  <name>OpenChat</name>
+  <synonym>
+   <key>en</key>
+   <value>8930B882-1888-1735-5AE7-7B902572E270</value>
+  </synonym>
+  <group>FormCommandBarImportant</group>
+  <commandParameterType>
+   <types>DefinedType.typeChatObject</types>
+  </commandParameterType>
+  <representation>Picture</representation>
+  <picture xsi:type="core:PictureRef">
+   <picture>CommonPicture.Chat</picture>
+  </picture>
+ </commands>
+</mdclass:DataProcessor>

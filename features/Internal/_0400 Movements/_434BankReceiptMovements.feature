@@ -16,6 +16,7 @@ Background:
 
 Scenario: _043400 preparation (Bank receipt)
 	When set True value to the constant
+	When set True value to the constant Use salary
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -242,6 +243,10 @@ Scenario: _043400 preparation (Bank receipt)
 			| "Documents.PurchaseReturn.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create document BankReceipt objects (Return from vendor)
 		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(516).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(517).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(516).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(517).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -260,6 +265,11 @@ Scenario: _043400 preparation (Bank receipt)
 		When create BankReceipt (Customer advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(1526).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When create BankReceipt (Salary return)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(1529).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(1530).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I close all client application windows
 
 Scenario: _0434001 check preparation
@@ -375,7 +385,6 @@ Scenario: _043410 check Bank receipt movements by the Register "R2021 Customer t
 			| ''                                           | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'     | 'Agreement'                  | 'Basis'                                       | 'Order'   | 'Project' | 'Deferred calculation'   | 'Customers advances closing'    |
 			| ''                                           | 'Expense'       | '07.09.2020 19:14:59'   | '17,12'       | 'Main Company'   | ''         | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales invoice 1 dated 28.01.2021 18:48:53'   | ''        | ''        | 'No'                     | ''                              |
 			| ''                                           | 'Expense'       | '07.09.2020 19:14:59'   | '100'         | 'Main Company'   | ''         | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales invoice 1 dated 28.01.2021 18:48:53'   | ''        | ''        | 'No'                     | ''                              |
-			| ''                                           | 'Expense'       | '07.09.2020 19:14:59'   | '100'         | 'Main Company'   | ''         | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales invoice 1 dated 28.01.2021 18:48:53'   | ''        | ''        | 'No'                     | ''                              |
 			| ''                                           | 'Expense'       | '07.09.2020 19:14:59'   | '100'         | 'Main Company'   | ''         | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales invoice 1 dated 28.01.2021 18:48:53'   | ''        | ''        | 'No'                     | ''                              |
 		
 	And I close all client application windows
@@ -399,7 +408,6 @@ Scenario: _043412 check Bank receipt movements by the Register "R2020 Advances f
 			| ''                                         | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'       | 'Partner'  | 'Order' | 'Agreement'                | 'Project' | 'Amount'   | 'Deferred calculation' | 'Customers advances closing' |
 			| ''                                         | '15.04.2021 10:21:22' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Lomaniti' | 'Lomaniti' | ''      | 'Basic Partner terms, TRY' | ''        | '54 800'   | 'No'                   | ''                           |
 			| ''                                         | '15.04.2021 10:21:22' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Lomaniti' | 'Lomaniti' | ''      | 'Basic Partner terms, TRY' | ''        | '9 381,76' | 'No'                   | ''                           |
-			| ''                                         | '15.04.2021 10:21:22' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Lomaniti' | 'Lomaniti' | ''      | 'Basic Partner terms, TRY' | ''        | '54 800'   | 'No'                   | ''                           |
 			| ''                                         | '15.04.2021 10:21:22' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Lomaniti' | 'Lomaniti' | ''      | 'Basic Partner terms, TRY' | ''        | '54 800'   | 'No'                   | ''                           |		
 	And I close all client application windows
 
@@ -436,10 +444,8 @@ Scenario: _043420 check Bank receipt movements by the Register "R3035 Cash plann
 			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''                                                     | ''         | ''                    | ''         | ''                 | ''                             | ''                        | ''                | 'Attributes'           |
 			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Basis document'                                       | 'Currency' | 'Cash flow direction' | 'Partner'  | 'Legal name'       | 'Multi currency movement type' | 'Financial movement type' | 'Planning period' | 'Deferred calculation' |
 			| ''                                           | '04.06.2021 12:27:04' | '-600'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'TRY'      | 'Incoming'            | 'Kalipso'  | 'Company Kalipso'  | 'Local currency'               | 'Movement type 1'         | 'First'           | 'No'                   |
-			| ''                                           | '04.06.2021 12:27:04' | '-600'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'TRY'      | 'Incoming'            | 'Kalipso'  | 'Company Kalipso'  | 'TRY'                          | 'Movement type 1'         | 'First'           | 'No'                   |
 			| ''                                           | '04.06.2021 12:27:04' | '-600'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'TRY'      | 'Incoming'            | 'Kalipso'  | 'Company Kalipso'  | 'en description is empty'      | 'Movement type 1'         | 'First'           | 'No'                   |
 			| ''                                           | '04.06.2021 12:27:04' | '-400'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'Local currency'               | 'Movement type 1'         | 'First'           | 'No'                   |
-			| ''                                           | '04.06.2021 12:27:04' | '-400'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'TRY'                          | 'Movement type 1'         | 'First'           | 'No'                   |
 			| ''                                           | '04.06.2021 12:27:04' | '-400'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'en description is empty'      | 'Movement type 1'         | 'First'           | 'No'                   |
 			| ''                                           | '04.06.2021 12:27:04' | '-102,72'   | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'USD'      | 'Incoming'            | 'Kalipso'  | 'Company Kalipso'  | 'Reporting currency'           | 'Movement type 1'         | 'First'           | 'No'                   |
 			| ''                                           | '04.06.2021 12:27:04' | '-68,48'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'Reporting currency'           | 'Movement type 1'         | 'First'           | 'No'                   |	
@@ -549,7 +555,6 @@ Scenario: _043426 check Bank receipt movements by the Register "R1021 Vendors tr
 			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''                               | ''           | ''                       | ''                | ''          | ''                     | ''                                               | ''        | ''        | 'Attributes'             | ''                            |
 			| ''                                             | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'      | 'Partner'   | 'Agreement'            | 'Basis'                                          | 'Order'   | 'Project' | 'Deferred calculation'   | 'Vendors advances closing'    |
 			| ''                                             | 'Expense'       | '08.02.2022 12:44:01'   | '-50'         | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Maxim'   | 'Maxim'     | 'Partner term Maxim'   | 'Purchase return 21 dated 28.04.2021 21:50:02'   | ''        | ''        | 'No'                     | ''                            |
-			| ''                                             | 'Expense'       | '08.02.2022 12:44:01'   | '-50'         | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Maxim'   | 'Maxim'     | 'Partner term Maxim'   | 'Purchase return 21 dated 28.04.2021 21:50:02'   | ''        | ''        | 'No'                     | ''                            |
 			| ''                                             | 'Expense'       | '08.02.2022 12:44:01'   | '-50'         | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Maxim'   | 'Maxim'     | 'Partner term Maxim'   | 'Purchase return 21 dated 28.04.2021 21:50:02'   | ''        | ''        | 'No'                     | ''                            |
 			| ''                                             | 'Expense'       | '08.02.2022 12:44:01'   | '-8,56'       | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Maxim'   | 'Maxim'     | 'Partner term Maxim'   | 'Purchase return 21 dated 28.04.2021 21:50:02'   | ''        | ''        | 'No'                     | ''                            |
 	And I close all client application windows
@@ -572,7 +577,6 @@ Scenario: _043427 check Bank receipt movements by the Register "R2020 Advances f
 			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Agreement'                | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
 			| ''                                           | '08.02.2022 13:39:01' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '50'     | 'No'                   | ''                           |
 			| ''                                           | '08.02.2022 13:39:01' | 'Receipt'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '8,56'   | 'No'                   | ''                           |
-			| ''                                           | '08.02.2022 13:39:01' | 'Receipt'    | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '50'     | 'No'                   | ''                           |
 			| ''                                           | '08.02.2022 13:39:01' | 'Receipt'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '50'     | 'No'                   | ''                           |		
 	And I close all client application windows
 
@@ -594,7 +598,6 @@ Scenario: _0434281 check Bank receipt movements by the Register "R2020 Advances 
 			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Agreement'                | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
 			| ''                                             | '23.06.2022 19:41:15' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '100'    | 'No'                   | ''                           |
 			| ''                                             | '23.06.2022 19:41:15' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '17,12'  | 'No'                   | ''                           |
-			| ''                                             | '23.06.2022 19:41:15' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '100'    | 'No'                   | ''                           |
 			| ''                                             | '23.06.2022 19:41:15' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '100'    | 'No'                   | ''                           |				
 	And I close all client application windows
 
@@ -683,7 +686,6 @@ Scenario: _0434286 check Bank receipt movements by the Register "R2021 Customer 
 			| ''                                               | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'                    | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'     | 'Agreement'                  | 'Basis'                                       | 'Order'   | 'Project' | 'Deferred calculation'   | 'Customers advances closing'    |
 			| ''                                               | 'Expense'       | '23.06.2022 17:50:08'   | '17,12'       | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales invoice 3 dated 28.01.2021 18:50:57'   | ''        | ''        | 'No'                     | ''                              |
 			| ''                                               | 'Expense'       | '23.06.2022 17:50:08'   | '100'         | 'Main Company'   | 'Distribution department'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales invoice 3 dated 28.01.2021 18:50:57'   | ''        | ''        | 'No'                     | ''                              |
-			| ''                                               | 'Expense'       | '23.06.2022 17:50:08'   | '100'         | 'Main Company'   | 'Distribution department'   | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales invoice 3 dated 28.01.2021 18:50:57'   | ''        | ''        | 'No'                     | ''                              |
 			| ''                                               | 'Expense'       | '23.06.2022 17:50:08'   | '100'         | 'Main Company'   | 'Distribution department'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales invoice 3 dated 28.01.2021 18:50:57'   | ''        | ''        | 'No'                     | ''                              |
 		And I close all client application windows
 
@@ -923,7 +925,6 @@ Scenario: _0434300 check Bank receipt movements by the Register  "R3011 Cash flo
 			| ''                                          | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
 			| ''                                          | '12.06.2023 15:25:57' | '8,56'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                          | '12.06.2023 15:25:57' | '50'        | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                          | '12.06.2023 15:25:57' | '50'        | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                          | '12.06.2023 15:25:57' | '50'        | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
 
@@ -966,7 +967,6 @@ Scenario: _0434302 check Bank receipt movements by the Register  "R5015 Other pa
 			| ''                                                | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'        | 'Partner'           | 'Agreement'         | 'Basis'             | 'Deferred calculation'    |
 			| ''                                                | 'Expense'       | '12.06.2023 15:25:57'   | '8,56'        | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      |
 			| ''                                                | 'Expense'       | '12.06.2023 15:25:57'   | '50'          | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      |
-			| ''                                                | 'Expense'       | '12.06.2023 15:25:57'   | '50'          | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      |
 			| ''                                                | 'Expense'       | '12.06.2023 15:25:57'   | '50'          | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      |
 	And I close all client application windows
 
@@ -1050,10 +1050,8 @@ Scenario: _0434299 check Bank receipt movements by the Register  "R3011 Cash flo
 			| ''                                           | '04.06.2021 12:27:04' | '68,48'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                           | '04.06.2021 12:27:04' | '102,72'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                           | '04.06.2021 12:27:04' | '400'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                           | '04.06.2021 12:27:04' | '400'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                           | '04.06.2021 12:27:04' | '400'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'TRY'      | 'en description is empty'      | 'No'                   |
 			| ''                                           | '04.06.2021 12:27:04' | '600'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                           | '04.06.2021 12:27:04' | '600'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                           | '04.06.2021 12:27:04' | '600'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | 'First'           | 'TRY'      | 'en description is empty'      | 'No'                   |	
 	And I close all client application windows
 
@@ -1113,14 +1111,14 @@ Scenario: _0434305 check Bank receipt movements by the Register  "R5021 Revenues
 		And I select "R5021 Revenues" exact value from "Register" drop-down list
 		And I click "Generate report" button	
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 1 525 dated 12.06.2023 17:31:38' | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        |
-			| 'Document registrations records'               | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        |
-			| 'Register  "R5021 Revenues"'                   | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        |
-			| ''                                             | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        |
-			| ''                                             | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' |
-			| ''                                             | '12.06.2023 17:31:38' | '17,12'     | '17,12'             | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        |
-			| ''                                             | '12.06.2023 17:31:38' | '100'       | '100'               | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        |
-			| ''                                             | '12.06.2023 17:31:38' | '100'       | '100'               | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''        |
+			| 'Bank receipt 1 525 dated 12.06.2023 17:31:38' | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''                          |
+			| 'Document registrations records'               | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''                          |
+			| 'Register  "R5021 Revenues"'                   | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''                          |
+			| ''                                             | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | 'Attributes'                |
+			| ''                                             | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost' |
+			| ''                                             | '12.06.2023 17:31:38' | '17,12'     | '17,12'             | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
+			| ''                                             | '12.06.2023 17:31:38' | '100'       | '100'               | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
+			| ''                                             | '12.06.2023 17:31:38' | '100'       | '100'               | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |
 	And I close all client application windows
 
 Scenario: _0434306 check Bank receipt movements by the Register  "R3010 Cash on hand" (cash transfer without CTO)
@@ -1223,11 +1221,9 @@ Scenario: _0434310 check Bank receipt movements by the Register  "R3011 Cash flo
 			| ''                                             | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'            | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
 			| ''                                             | '23.06.2022 19:41:15' | '1,71'      | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                             | '23.06.2022 19:41:15' | '10'        | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                             | '23.06.2022 19:41:15' | '10'        | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                             | '23.06.2022 19:41:15' | '10'        | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
 			| ''                                             | '23.06.2022 19:41:15' | '18,83'     | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                             | '23.06.2022 19:41:15' | '110'       | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                             | '23.06.2022 19:41:15' | '110'       | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                             | '23.06.2022 19:41:15' | '110'       | 'Main Company' | 'Distribution department' | 'POS account 1, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |	
 	And I close all client application windows
 
@@ -1250,7 +1246,6 @@ Scenario: _0434310 check Bank receipt movements by the Register  "R2021 Customer
 			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Order' | 'Project' | 'Deferred calculation' | 'Customers advances closing' |
 			| ''                                             | 'Expense'     | '23.06.2022 17:50:08' | '17,12'     | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''      | ''        | 'No'                   | ''                           |
 			| ''                                             | 'Expense'     | '23.06.2022 17:50:08' | '100'       | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''      | ''        | 'No'                   | ''                           |
-			| ''                                             | 'Expense'     | '23.06.2022 17:50:08' | '100'       | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''      | ''        | 'No'                   | ''                           |
 			| ''                                             | 'Expense'     | '23.06.2022 17:50:08' | '100'       | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''      | ''        | 'No'                   | ''                           |		
 	And I close all client application windows
 
@@ -1586,11 +1581,9 @@ Scenario: _0434341 check Bank receipt movements by the Register "R3011 Cash flow
 			| ''                                             | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
 			| ''                                             | '05.03.2024 16:24:49' | '0,86'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                             | '05.03.2024 16:24:49' | '5'         | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                             | '05.03.2024 16:24:49' | '5'         | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                             | '05.03.2024 16:24:49' | '5'         | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 3'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |
 			| ''                                             | '05.03.2024 16:24:49' | '9,42'      | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                             | '05.03.2024 16:24:49' | '55'        | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                             | '05.03.2024 16:24:49' | '55'        | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                             | '05.03.2024 16:24:49' | '55'        | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Front office'     | ''                | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
 
@@ -1962,3 +1955,158 @@ Scenario: _0401056 check absence Bank receipt movements by the Register  "T2014 
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "T2014 Advances info"'    |
 		And I close all client application windows
+
+Scenario: _0434357 check Bank receipt movements by the Register  "R3010 Cash on hand" (Salary return,  Branch in lines)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 529' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report info" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 529 dated 02.09.2024 17:20:24' | ''                    | ''           | ''             | ''                        | ''                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| 'Register  "R3010 Cash on hand"'               | ''                    | ''           | ''             | ''                        | ''                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | '17,12'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | '17,12'  | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0434358 check Bank receipt movements by the Register  "R3011 Cash flow" (Salary return,  Branch in lines)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 529' |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report info" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 529 dated 02.09.2024 17:20:24' | ''                    | ''             | ''                        | ''                  | ''          | ''                        | ''                        | ''                | ''         | ''                             | ''       | ''                     |
+			| 'Register  "R3011 Cash flow"'                  | ''                    | ''             | ''                        | ''                  | ''          | ''                        | ''                        | ''                | ''         | ''                             | ''       | ''                     |
+			| ''                                             | 'Period'              | 'Company'      | 'Branch'                  | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center'        | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '02.09.2024 17:20:24' | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'TRY'      | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'TRY'      | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'USD'      | 'Reporting currency'           | '17,12'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Accountants office'      | ''                | 'TRY'      | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Accountants office'      | ''                | 'TRY'      | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Accountants office'      | ''                | 'USD'      | 'Reporting currency'           | '17,12'  | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0434359 check Bank receipt movements by the Register  "R9510 Salary payment" (Salary return,  Branch in lines)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 529' |
+	* Check movements by the Register  "R9510 Salary payment" 
+		And I click "Registrations report info" button
+		And I select "R9510 Salary payment" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 529 dated 02.09.2024 17:20:24' | ''                    | ''           | ''             | ''                        | ''                | ''               | ''         | ''                     | ''                             | ''                 | ''       |
+			| 'Register  "R9510 Salary payment"'             | ''                    | ''           | ''             | ''                        | ''                | ''               | ''         | ''                     | ''                             | ''                 | ''       |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Employee'        | 'Payment period' | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Calculation type' | 'Amount' |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Accountants office'      | 'Anna Petrova'    | 'Second'         | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Accountants office'      | 'Anna Petrova'    | 'Second'         | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Accountants office'      | 'Anna Petrova'    | 'Second'         | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '17,12'  |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Alexander Orlov' | 'First'          | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Alexander Orlov' | 'First'          | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Alexander Orlov' | 'First'          | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '17,12'  |		
+	And I close all client application windows
+
+Scenario: _0434360 check Bank receipt movements by the Register  "R3010 Cash on hand" (Salary return,  Branch in header)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 530' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report info" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 530 dated 02.09.2024 17:23:53' | ''                    | ''           | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| 'Register  "R3010 Cash on hand"'               | ''                    | ''           | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | '17,12'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | '17,12'  | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0434358 check Bank receipt movements by the Register  "R3011 Cash flow" (Salary return,  Branch in header)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 530' |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report info" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 530 dated 02.09.2024 17:23:53' | ''                    | ''             | ''             | ''                  | ''          | ''                        | ''                        | ''                | ''         | ''                             | ''       | ''                     |
+			| 'Register  "R3011 Cash flow"'                  | ''                    | ''             | ''             | ''                  | ''          | ''                        | ''                        | ''                | ''         | ''                             | ''       | ''                     |
+			| ''                                             | 'Period'              | 'Company'      | 'Branch'       | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center'        | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '02.09.2024 17:23:53' | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Accountants office'      | ''                | 'TRY'      | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Accountants office'      | ''                | 'TRY'      | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Accountants office'      | ''                | 'USD'      | 'Reporting currency'           | '17,12'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'TRY'      | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'TRY'      | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 1'         | 'Distribution department' | ''                | 'USD'      | 'Reporting currency'           | '17,12'  | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0434359 check Bank receipt movements by the Register  "R9510 Salary payment" (Salary return,  Branch in header)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 530' |
+	* Check movements by the Register  "R9510 Salary payment" 
+		And I click "Registrations report info" button
+		And I select "R9510 Salary payment" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 530 dated 02.09.2024 17:23:53' | ''                    | ''           | ''             | ''             | ''                | ''               | ''         | ''                     | ''                             | ''                 | ''       |
+			| 'Register  "R9510 Salary payment"'             | ''                    | ''           | ''             | ''             | ''                | ''               | ''         | ''                     | ''                             | ''                 | ''       |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Employee'        | 'Payment period' | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Calculation type' | 'Amount' |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'First'          | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'First'          | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'First'          | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '17,12'  |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'Second'         | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'Second'         | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'Second'         | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '17,12'  |		
+	And I close all client application windows
+
+Scenario: _0434360 check Bank receipt movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankReceipt"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 dated 07.09.2020 19:14:59' | ''                                         | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'    | ''                                         | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                         | 'Document'                                 | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                         | 'Bank receipt 1 dated 07.09.2020 19:14:59' | '07.09.2020 19:14:59' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

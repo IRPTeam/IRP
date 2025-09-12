@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataSource>
+		<name>DataSource1</name>
+		<dataSourceType>Local</dataSourceType>
+	</dataSource>
+	<dataSet xsi:type="DataSetQuery">
+		<name>DataSet1</name>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Recorder</dataPath>
+			<field>Recorder</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>A295A0D2-D60E-4127-7EB1-1DA756D5C211</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:periodNumber>1</dcscom:periodNumber>
+				<dcscom:periodType>Main</dcscom:periodType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Company</dataPath>
+			<field>Company</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>E02804E0-7830-DD2B-B28A-AA5E719A6D0F</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+			<inputParameters>
+				<dcscor:item>
+					<dcscor:parameter>ChoiceParameters</dcscor:parameter>
+					<dcscor:value xsi:type="dcscor:ChoiceParameters">
+						<dcscor:item>
+							<dcscor:choiceParameter>Filter.OurCompany</dcscor:choiceParameter>
+							<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+						</dcscor:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item>
+					<dcscor:parameter>QuickChoice</dcscor:parameter>
+					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+				</dcscor:item>
+			</inputParameters>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SecondPeriod</dataPath>
+			<field>SecondPeriod</field>
+			<role>
+				<dcscom:periodNumber>2</dcscom:periodNumber>
+				<dcscom:periodType>Main</dcscom:periodType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ItemKey</dataPath>
+			<field>ItemKey</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>231BAD4B-D9E8-26CA-A659-9A2139565B94</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SalesPerson</dataPath>
+			<field>SalesPerson</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>DD153362-91C6-891A-AF8D-DC0D18D78225</v8:content>
+				</v8:item>
+			</title>
+			<useRestriction>
+				<condition>true</condition>
+			</useRestriction>
+			<attributeUseRestriction>
+				<condition>true</condition>
+			</attributeUseRestriction>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Invoice</dataPath>
+			<field>Invoice</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>A9FCC9D5-FFB3-A18D-DD19-9EA18F81E1D1</v8:content>
+				</v8:item>
+			</title>
+			<useRestriction>
+				<condition>true</condition>
+			</useRestriction>
+			<attributeUseRestriction>
+				<condition>true</condition>
+			</attributeUseRestriction>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SalesTotalAmount</dataPath>
+			<field>SalesTotalAmount</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>43387637-27E1-4033-3616-67AE78000CC4</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>AD92B606-A404-C3A6-62BC-C5BE2EAEF25E</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>QuantityTurnover</dataPath>
+			<field>QuantityTurnover</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>16DEEDBC-A9A3-012E-E0D4-412ABE5FC6E3</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>FF085DB2-11BF-37AA-A2F0-0743BB8718C7</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>CogsTotalAmount</dataPath>
+			<field>CogsTotalAmount</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>8102330A-8182-8A3B-B111-12DE4DB04A78</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>AD92B606-A404-C3A6-62BC-C5BE2EAEF25E</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Currency</dataPath>
+			<field>Currency</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>119D2094-42B7-A167-77FF-FD5625B73367</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SalesNetAmount</dataPath>
+			<field>SalesNetAmount</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>DD918BFF-BB89-1B5A-A360-04D30594C3C7</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>AD92B606-A404-C3A6-62BC-C5BE2EAEF25E</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>CogsNetAmount</dataPath>
+			<field>CogsNetAmount</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>5AA1C50E-46AB-B1A5-50D4-4A473B3788DC</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>AD92B606-A404-C3A6-62BC-C5BE2EAEF25E</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>QuantityCheck</dataPath>
+			<field>QuantityCheck</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>B1FC8834-4E9B-0AC8-8448-80BC915EEF2E</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>FF085DB2-11BF-37AA-A2F0-0743BB8718C7</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Branch</dataPath>
+			<field>Branch</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>503EF70D-123A-719E-EA11-12983AB31CB9</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>CurrencyMovementType</dataPath>
+			<field>CurrencyMovementType</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>7DF46E32-21D9-3E08-8A53-3265F1E132E0</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>RowKey</dataPath>
+			<field>RowKey</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>C229BF57-F1DB-162E-E966-613FA9952A77</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SalesInvoice</dataPath>
+			<field>SalesInvoice</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>FB77B926-7BBE-08E8-854D-D79D2E855F8F</v8:content>
+				</v8:item>
+			</title>
+			<useRestriction>
+				<condition>true</condition>
+			</useRestriction>
+			<attributeUseRestriction>
+				<condition>true</condition>
+			</attributeUseRestriction>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Item</dataPath>
+			<field>Item</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>55E8B01B-995E-0379-93B7-7E634D8C96E4</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountRevenue</dataPath>
+			<field>AmountRevenue</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>7A3C3F9C-E392-7B3D-DD87-7CA1245C4618</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>AD92B606-A404-C3A6-62BC-C5BE2EAEF25E</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MarkNegatives</dcscor:parameter>
+					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>NetAmountRevenue</dataPath>
+			<field>NetAmountRevenue</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>CC84F70D-1840-6E8A-AC7C-C9DF0603D1A6</v8:content>
+				</v8:item>
+			</title>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>AD92B606-A404-C3A6-62BC-C5BE2EAEF25E</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MarkNegatives</dcscor:parameter>
+					<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>MinWidth</dcscor:parameter>
+					<dcscor:value xsi:type="xs:decimal">10</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SerialLotNumber</dataPath>
+			<field>SerialLotNumber</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SourceOfOrigin</dataPath>
+			<field>SourceOfOrigin</field>
+		</field>
+		<dataSource>DataSource1</dataSource>
+		<query>SELECT
+	R2001T_SalesTurnovers.Recorder AS Recorder,
+	R2001T_SalesTurnovers.SecondPeriod AS SecondPeriod,
+	R2001T_SalesTurnovers.Company AS Company,
+	R2001T_SalesTurnovers.Branch AS Branch,
+	R2001T_SalesTurnovers.Invoice AS Invoice,
+	R2001T_SalesTurnovers.ItemKey.Item AS Item,
+	R2001T_SalesTurnovers.ItemKey AS ItemKey,
+	R2001T_SalesTurnovers.QuantityTurnover AS QuantityTurnover,
+	R2001T_SalesTurnovers.AmountTurnover AS SalesTotalAmount,
+	R2001T_SalesTurnovers.NetAmountTurnover AS SalesNetAmount,
+	0 AS CogsTotalAmount,
+	0 AS CogsNetAmount,
+	-R2001T_SalesTurnovers.QuantityTurnover AS QuantityCheck,
+	R2001T_SalesTurnovers.AmountTurnover AS AmountRevenue,
+	R2001T_SalesTurnovers.NetAmountTurnover AS NetAmountRevenue
+FROM
+	AccumulationRegister.R2001T_Sales.Turnovers(,, Auto, CurrencyMovementType.Type = VALUE(Enum.CurrencyType.Legal)) AS
+		R2001T_SalesTurnovers
+
+UNION ALL
+
+SELECT
+	R6060T_CostOfGoodsSoldTurnovers.Recorder,
+	R6060T_CostOfGoodsSoldTurnovers.SecondPeriod,
+	R6060T_CostOfGoodsSoldTurnovers.Company,
+	ISNULL(R6060T_CostOfGoodsSoldTurnovers.Recorder.Branch, VALUE(Catalog.BusinessUnits.EmptyRef)),
+	R6060T_CostOfGoodsSoldTurnovers.SalesInvoice,
+	R6060T_CostOfGoodsSoldTurnovers.ItemKey.Item,
+	R6060T_CostOfGoodsSoldTurnovers.ItemKey,
+	0,
+	0,
+	0,
+	R6060T_CostOfGoodsSoldTurnovers.InvoiceAmountTurnover + R6060T_CostOfGoodsSoldTurnovers.InvoiceTaxAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.IndirectCostAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.IndirectCostTaxAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.ExtraCostAmountByRatioTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.ExtraCostTaxAmountByRatioTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.ExtraDirectCostAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.ExtraDirectCostTaxAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.AllocatedCostAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.AllocatedCostTaxAmountTurnover -
+		R6060T_CostOfGoodsSoldTurnovers.AllocatedRevenueAmountTurnover -
+		R6060T_CostOfGoodsSoldTurnovers.AllocatedRevenueTaxAmountTurnover,
+	R6060T_CostOfGoodsSoldTurnovers.InvoiceAmountTurnover + R6060T_CostOfGoodsSoldTurnovers.IndirectCostAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.ExtraCostAmountByRatioTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.ExtraDirectCostAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.AllocatedCostAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.AllocatedRevenueAmountTurnover,
+	R6060T_CostOfGoodsSoldTurnovers.QuantityTurnover,
+	-1 * (R6060T_CostOfGoodsSoldTurnovers.InvoiceAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.InvoiceTaxAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.IndirectCostAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.IndirectCostTaxAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.ExtraCostAmountByRatioTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.ExtraCostTaxAmountByRatioTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.ExtraDirectCostAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.ExtraDirectCostTaxAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.AllocatedCostAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.AllocatedCostTaxAmountTurnover -
+		R6060T_CostOfGoodsSoldTurnovers.AllocatedRevenueAmountTurnover -
+		R6060T_CostOfGoodsSoldTurnovers.AllocatedRevenueTaxAmountTurnover),
+	-1 * (R6060T_CostOfGoodsSoldTurnovers.InvoiceAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.IndirectCostAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.ExtraCostAmountByRatioTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.ExtraDirectCostAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.AllocatedCostAmountTurnover +
+		R6060T_CostOfGoodsSoldTurnovers.AllocatedRevenueAmountTurnover)
+FROM
+	AccumulationRegister.R6060T_CostOfGoodsSold.Turnovers(,, Auto,
+		CurrencyMovementType.Type = VALUE(Enum.CurrencyType.Legal)) AS R6060T_CostOfGoodsSoldTurnovers</query>
+	</dataSet>
+	<totalField>
+		<dataPath>AmountRevenue</dataPath>
+		<expression>Sum(AmountRevenue)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>CogsNetAmount</dataPath>
+		<expression>Sum(CogsNetAmount)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>CogsTotalAmount</dataPath>
+		<expression>Sum(CogsTotalAmount)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>NetAmountRevenue</dataPath>
+		<expression>Sum(NetAmountRevenue)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>QuantityCheck</dataPath>
+		<expression>Sum(QuantityCheck)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>QuantityTurnover</dataPath>
+		<expression>Sum(QuantityTurnover)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>SalesNetAmount</dataPath>
+		<expression>Sum(SalesNetAmount)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>SalesTotalAmount</dataPath>
+		<expression>Sum(SalesTotalAmount)</expression>
+	</totalField>
+	<parameter>
+		<name>BeginOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>7C98FDB4-74F4-C17A-AD81-1EEC4438AB98</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>true</useRestriction>
+		<expression>&amp;ReportPeriod.StartDate</expression>
+		<availableAsField>false</availableAsField>
+	</parameter>
+	<parameter>
+		<name>EndOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>F9086431-96EC-72EC-C56C-CF6DB3DAE333</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>true</useRestriction>
+		<expression>&amp;ReportPeriod.EndDate</expression>
+		<availableAsField>false</availableAsField>
+	</parameter>
+	<parameter>
+		<name>ReportPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>0333CB3E-5871-D5F5-59A8-8168FC97790D</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>v8:StandardPeriod</v8:Type>
+		</valueType>
+		<value xsi:type="v8:StandardPeriod">
+			<v8:variant xsi:type="v8:StandardPeriodVariant">Custom</v8:variant>
+			<v8:startDate>0001-01-01T00:00:00</v8:startDate>
+			<v8:endDate>0001-01-01T00:00:00</v8:endDate>
+		</value>
+		<useRestriction>false</useRestriction>
+	</parameter>
+	<settingsVariant>
+		<dcsset:name>Default</dcsset:name>
+		<dcsset:presentation xsi:type="xs:string">Default</dcsset:presentation>
+		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
+			<dcsset:userFields>
+				<dcsset:item xsi:type="dcsset:UserFieldExpression">
+					<dcsset:dataPath>UserFields.Field1</dcsset:dataPath>
+					<dcsset:lwsTitle>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>7CD6A320-49A5-70A2-276E-EEA7D4A2C75D</v8:content>
+						</v8:item>
+					</dcsset:lwsTitle>
+					<dcsset:detailExpression>Case
+	When QuantityTurnover &lt;&gt; 0
+		Then SalesTotalAmount / QuantityTurnover
+	Else 0
+End</dcsset:detailExpression>
+					<dcsset:detailExpressionPresentation>Case
+	When [Quantity Turnover] &lt;&gt; 0
+		Then [Sales total amount] / [Quantity Turnover]
+	Else 0
+End</dcsset:detailExpressionPresentation>
+					<dcsset:totalExpression>Case
+	When QuantityTurnover &lt;&gt; 0
+		Then SalesTotalAmount / QuantityTurnover
+	Else 0
+End</dcsset:totalExpression>
+					<dcsset:totalExpressionPresentation>Case
+	When [Quantity Turnover] &lt;&gt; 0
+		Then [Sales total amount] / [Quantity Turnover]
+	Else 0
+End</dcsset:totalExpressionPresentation>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:UserFieldExpression">
+					<dcsset:dataPath>UserFields.Field2</dcsset:dataPath>
+					<dcsset:lwsTitle>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>A0B94CF9-7DA1-1811-1BAB-B898660D4618</v8:content>
+						</v8:item>
+					</dcsset:lwsTitle>
+					<dcsset:detailExpression>Case
+	When QuantityTurnover &lt;&gt; 0
+		Then CogsTotalAmount / QuantityTurnover
+	Else 0
+End</dcsset:detailExpression>
+					<dcsset:detailExpressionPresentation>Case
+	When [Quantity Turnover] &lt;&gt; 0
+		Then [Cogs total amount] / [Quantity Turnover]
+	Else 0
+End</dcsset:detailExpressionPresentation>
+					<dcsset:totalExpression>Case
+	When QuantityTurnover &lt;&gt; 0
+		Then CogsTotalAmount / QuantityTurnover
+	Else 0
+End</dcsset:totalExpression>
+					<dcsset:totalExpressionPresentation>Case
+	When [Quantity Turnover] &lt;&gt; 0
+		Then [Cogs total amount] / [Quantity Turnover]
+	Else 0
+End</dcsset:totalExpressionPresentation>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:UserFieldExpression">
+					<dcsset:dataPath>UserFields.Field3</dcsset:dataPath>
+					<dcsset:lwsTitle>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>8627C880-51B2-E407-75D1-15313D9CBE99</v8:content>
+						</v8:item>
+					</dcsset:lwsTitle>
+					<dcsset:detailExpression>Case
+	When QuantityTurnover &lt;&gt; 0
+		Then SalesNetAmount / QuantityTurnover
+	Else 0
+End</dcsset:detailExpression>
+					<dcsset:detailExpressionPresentation>Case
+	When [Quantity Turnover] &lt;&gt; 0
+		Then [Sales net amount] / [Quantity Turnover]
+	Else 0
+End</dcsset:detailExpressionPresentation>
+					<dcsset:totalExpression>Case
+	When QuantityTurnover &lt;&gt; 0
+		Then SalesNetAmount / QuantityTurnover
+	Else 0
+End</dcsset:totalExpression>
+					<dcsset:totalExpressionPresentation>Case
+	When [Quantity Turnover] &lt;&gt; 0
+		Then [Sales net amount] / [Quantity Turnover]
+	Else 0
+End</dcsset:totalExpressionPresentation>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:UserFieldExpression">
+					<dcsset:dataPath>UserFields.Field4</dcsset:dataPath>
+					<dcsset:lwsTitle>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>4673B48E-EC52-F532-24AC-CFA132760CA5</v8:content>
+						</v8:item>
+					</dcsset:lwsTitle>
+					<dcsset:detailExpression>Case
+	When QuantityTurnover &lt;&gt; 0
+		Then AmountRevenue / QuantityTurnover
+	Else 0
+End</dcsset:detailExpression>
+					<dcsset:detailExpressionPresentation>Case
+	When [Quantity Turnover] &lt;&gt; 0
+		Then [Amount revenue] / [Quantity Turnover]
+	Else 0
+End</dcsset:detailExpressionPresentation>
+					<dcsset:totalExpression>Case
+	When QuantityTurnover &lt;&gt; 0
+		Then AmountRevenue / QuantityTurnover
+	Else 0
+End</dcsset:totalExpression>
+					<dcsset:totalExpressionPresentation>Case
+	When [Quantity Turnover] &lt;&gt; 0
+		Then [Amount revenue] / [Quantity Turnover]
+	Else 0
+End</dcsset:totalExpressionPresentation>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:UserFieldExpression">
+					<dcsset:dataPath>UserFields.Field5</dcsset:dataPath>
+					<dcsset:lwsTitle>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>D33156DE-7386-94E4-4CEA-A9CCAB1D319A</v8:content>
+						</v8:item>
+					</dcsset:lwsTitle>
+					<dcsset:detailExpression>Case
+	When QuantityTurnover &lt;&gt; 0
+		Then NetAmountRevenue / QuantityTurnover
+	Else 0
+End</dcsset:detailExpression>
+					<dcsset:detailExpressionPresentation>Case
+	When [Quantity Turnover] &lt;&gt; 0
+		Then [Net amount revenue] / [Quantity Turnover]
+	Else 0
+End</dcsset:detailExpressionPresentation>
+					<dcsset:totalExpression>Case
+	When QuantityTurnover &lt;&gt; 0
+		Then NetAmountRevenue / QuantityTurnover
+	Else 0
+End</dcsset:totalExpression>
+					<dcsset:totalExpressionPresentation>Case
+	When [Quantity Turnover] &lt;&gt; 0
+		Then [Net amount revenue] / [Quantity Turnover]
+	Else 0
+End</dcsset:totalExpressionPresentation>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:UserFieldExpression">
+					<dcsset:dataPath>UserFields.Field6</dcsset:dataPath>
+					<dcsset:lwsTitle>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>D33156DE-7386-94E4-4CEA-A9CCAB1D319A</v8:content>
+						</v8:item>
+					</dcsset:lwsTitle>
+					<dcsset:detailExpression>Case
+	When QuantityTurnover &lt;&gt; 0
+		Then CogsNetAmount / QuantityTurnover
+	Else 0
+End</dcsset:detailExpression>
+					<dcsset:detailExpressionPresentation>Case
+	When [Quantity Turnover] &lt;&gt; 0
+		Then [Cogs net amount] / [Quantity Turnover]
+	Else 0
+End</dcsset:detailExpressionPresentation>
+					<dcsset:totalExpression>Case
+	When QuantityTurnover &lt;&gt; 0
+		Then CogsNetAmount / QuantityTurnover
+	Else 0
+End</dcsset:totalExpression>
+					<dcsset:totalExpressionPresentation>Case
+	When [Quantity Turnover] &lt;&gt; 0
+		Then [Cogs net amount] / [Quantity Turnover]
+	Else 0
+End</dcsset:totalExpressionPresentation>
+				</dcsset:item>
+			</dcsset:userFields>
+			<dcsset:selection>
+				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
+					<dcsset:lwsTitle>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>FF5BAC6E-A201-D40E-EEAA-A9F9AB75DA06</v8:content>
+						</v8:item>
+					</dcsset:lwsTitle>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>QuantityTurnover</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>UserFields.Field3</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>SalesNetAmount</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>UserFields.Field6</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>CogsNetAmount</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>UserFields.Field5</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>NetAmountRevenue</dcsset:field>
+					</dcsset:item>
+					<dcsset:placement>Auto</dcsset:placement>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
+					<dcsset:lwsTitle>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>3E9AF080-9905-B876-6B05-5D2A3FE596F6</v8:content>
+						</v8:item>
+					</dcsset:lwsTitle>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>UserFields.Field1</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>SalesTotalAmount</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>UserFields.Field2</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>CogsTotalAmount</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>UserFields.Field4</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>AmountRevenue</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>QuantityCheck</dcsset:field>
+					</dcsset:item>
+					<dcsset:placement>Auto</dcsset:placement>
+				</dcsset:item>
+			</dcsset:selection>
+			<dcsset:filter>
+				<dcsset:item xsi:type="dcsset:FilterItemComparison">
+					<dcsset:use>false</dcsset:use>
+					<dcsset:left xsi:type="dcscor:Field">Item</dcsset:left>
+					<dcsset:comparisonType>Equal</dcsset:comparisonType>
+					<dcsset:userSettingID>c18a02d6-ae49-49ef-a97e-6b7038680dd0</dcsset:userSettingID>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:FilterItemComparison">
+					<dcsset:use>false</dcsset:use>
+					<dcsset:left xsi:type="dcscor:Field">Company</dcsset:left>
+					<dcsset:comparisonType>Equal</dcsset:comparisonType>
+					<dcsset:userSettingID>688d14d4-d6b0-480d-89e9-e06058f07755</dcsset:userSettingID>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:FilterItemComparison">
+					<dcsset:use>false</dcsset:use>
+					<dcsset:left xsi:type="dcscor:Field">ItemKey</dcsset:left>
+					<dcsset:comparisonType>Equal</dcsset:comparisonType>
+					<dcsset:userSettingID>37fead36-e6a1-445f-8966-6602049b8f07</dcsset:userSettingID>
+				</dcsset:item>
+			</dcsset:filter>
+			<dcsset:dataParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>ReportPeriod</dcscor:parameter>
+					<dcscor:value xsi:type="v8:StandardPeriod">
+						<v8:variant xsi:type="v8:StandardPeriodVariant">ThisMonth</v8:variant>
+					</dcscor:value>
+					<dcsset:userSettingID>d9452650-8741-4fe7-994a-72ef713e9fb9</dcsset:userSettingID>
+				</dcscor:item>
+			</dcsset:dataParameters>
+			<dcsset:order>
+				<dcsset:item xsi:type="dcsset:OrderItemField">
+					<dcsset:field>SecondPeriod</dcsset:field>
+					<dcsset:orderType>Asc</dcsset:orderType>
+				</dcsset:item>
+			</dcsset:order>
+			<dcsset:conditionalAppearance>
+				<dcsset:item>
+					<dcsset:selection>
+						<dcsset:item>
+							<dcsset:field>UserFields.Field1</dcsset:field>
+						</dcsset:item>
+						<dcsset:item>
+							<dcsset:field>UserFields.Field2</dcsset:field>
+						</dcsset:item>
+						<dcsset:item>
+							<dcsset:field>UserFields.Field3</dcsset:field>
+						</dcsset:item>
+						<dcsset:item>
+							<dcsset:field>UserFields.Field4</dcsset:field>
+						</dcsset:item>
+						<dcsset:item>
+							<dcsset:field>UserFields.Field5</dcsset:field>
+						</dcsset:item>
+						<dcsset:item>
+							<dcsset:field>UserFields.Field6</dcsset:field>
+						</dcsset:item>
+					</dcsset:selection>
+					<dcsset:filter/>
+					<dcsset:appearance>
+						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+							<dcscor:parameter>Format</dcscor:parameter>
+							<dcscor:value xsi:type="v8:LocalStringType">
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>5B2BD692-0DB1-89C1-10BA-A392D958ED5C</v8:content>
+								</v8:item>
+							</dcscor:value>
+						</dcscor:item>
+					</dcsset:appearance>
+				</dcsset:item>
+				<dcsset:item>
+					<dcsset:selection>
+						<dcsset:item>
+							<dcsset:field>UserFields.Field4</dcsset:field>
+						</dcsset:item>
+						<dcsset:item>
+							<dcsset:field>UserFields.Field5</dcsset:field>
+						</dcsset:item>
+					</dcsset:selection>
+					<dcsset:filter/>
+					<dcsset:appearance>
+						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+							<dcscor:use>false</dcscor:use>
+							<dcscor:parameter>Format</dcscor:parameter>
+							<dcscor:value xsi:type="v8:LocalStringType">
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>19AFB280-9317-EC71-1D7F-F3114FED5B45</v8:content>
+								</v8:item>
+							</dcscor:value>
+						</dcscor:item>
+						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+							<dcscor:parameter>MarkNegatives</dcscor:parameter>
+							<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+						</dcscor:item>
+					</dcsset:appearance>
+				</dcsset:item>
+			</dcsset:conditionalAppearance>
+			<dcsset:outputParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>AppearanceTemplate</dcscor:parameter>
+					<dcscor:value xsi:type="xs:string">Sea</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>VerticalOverallPlacement</dcscor:parameter>
+					<dcscor:value xsi:type="dcscor:DataCompositionTotalPlacement">Begin</dcscor:value>
+				</dcscor:item>
+			</dcsset:outputParameters>
+			<dcsset:item xsi:type="dcsset:StructureItemTable">
+				<dcsset:row>
+					<dcsset:groupItems>
+						<dcsset:item xsi:type="dcsset:GroupItemField">
+							<dcsset:field>Company</dcsset:field>
+							<dcsset:groupType>Items</dcsset:groupType>
+							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+						</dcsset:item>
+					</dcsset:groupItems>
+					<dcsset:order>
+						<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+					</dcsset:order>
+					<dcsset:selection>
+						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+					</dcsset:selection>
+					<dcsset:item>
+						<dcsset:groupItems>
+							<dcsset:item xsi:type="dcsset:GroupItemField">
+								<dcsset:field>Item</dcsset:field>
+								<dcsset:groupType>Hierarchy</dcsset:groupType>
+								<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+								<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+								<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+							</dcsset:item>
+						</dcsset:groupItems>
+						<dcsset:order>
+							<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+						</dcsset:order>
+						<dcsset:selection>
+							<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+						</dcsset:selection>
+						<dcsset:item>
+							<dcsset:groupItems>
+								<dcsset:item xsi:type="dcsset:GroupItemField">
+									<dcsset:field>ItemKey</dcsset:field>
+									<dcsset:groupType>Items</dcsset:groupType>
+									<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+									<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+									<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+								</dcsset:item>
+							</dcsset:groupItems>
+							<dcsset:order>
+								<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+							</dcsset:order>
+							<dcsset:selection>
+								<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+							</dcsset:selection>
+							<dcsset:item>
+								<dcsset:groupItems>
+									<dcsset:item xsi:type="dcsset:GroupItemField">
+										<dcsset:field>Invoice</dcsset:field>
+										<dcsset:groupType>Items</dcsset:groupType>
+										<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+										<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+										<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+									</dcsset:item>
+								</dcsset:groupItems>
+								<dcsset:order>
+									<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+								</dcsset:order>
+								<dcsset:selection>
+									<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+								</dcsset:selection>
+							</dcsset:item>
+						</dcsset:item>
+					</dcsset:item>
+				</dcsset:row>
+			</dcsset:item>
+		</dcsset:settings>
+	</settingsVariant>
+</DataCompositionSchema>

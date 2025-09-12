@@ -21,6 +21,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="e24992d8-4e4b-48fb-9e33-1ecff27521fe">
     <name>Unit</name>
@@ -33,6 +34,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="bed58c0a-067f-4c6d-a9b1-484e01981e58">
     <name>Specification</name>
@@ -45,6 +47,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="0b3eea57-92cf-4afb-a48a-9f29dd8414ea">
     <name>AffectPricingMD5</name>
@@ -60,6 +63,7 @@
         </stringQualifiers>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="6bdf1e79-77a8-4713-9f71-1a618a8163dd">
     <name>UniqueMD5</name>
@@ -75,6 +79,7 @@
         </stringQualifiers>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="0335ab5b-d050-46e0-8d7b-232875676960">
     <name>ItemKeyID</name>
@@ -90,6 +95,7 @@
         </stringQualifiers>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <tabularSections uuid="e308f718-cb1d-42a1-9be7-d3fe7b6113f7">
     <producedTypes>
@@ -113,6 +119,7 @@
           </stringQualifiers>
         </typeExtension>
       </extension>
+      <type/>
     </attributes>
   </tabularSections>
   <forms uuid="3fc2847e-aa4b-4477-acfb-df076db489fd">

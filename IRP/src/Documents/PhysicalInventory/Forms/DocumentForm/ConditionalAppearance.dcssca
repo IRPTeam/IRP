@@ -74,7 +74,7 @@
 	<item>
 		<selection>
 			<item>
-				<field>ItemListDescription</field>
+				<field>ItemListComment</field>
 			</item>
 		</selection>
 		<filter>
@@ -83,7 +83,7 @@
 				<comparisonType>Filled</comparisonType>
 			</item>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.ItemList.Description</left>
+				<left xsi:type="dcscor:Field">Object.ItemList.Comment</left>
 				<comparisonType>NotFilled</comparisonType>
 				<right xsi:type="xs:string"/>
 			</item>

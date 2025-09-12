@@ -244,4 +244,16 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <commands uuid="a9f27bd6-1f13-4ae3-93e6-785035fda9d9">
+  <name>OpenPartnersBankAccountsList</name>
+  <synonym>
+   <key>en</key>
+   <value>B7F465C1-FFBC-3396-69ED-D7DFA34A44DE</value>
+  </synonym>
+  <group>FormNavigationPanelGoTo</group>
+  <commandParameterType>
+   <types>CatalogRef.Partners</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Catalog>

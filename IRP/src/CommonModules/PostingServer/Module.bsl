@@ -28,7 +28,7 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	EndIf;
 		
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
-
+	
 	RegisteredRecords = RegisterRecords(Parameters);
 	If Parameters.Cancel Then
 		For Each Message In Parameters.Messages Do
@@ -52,8 +52,26 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 		RegisteredRecordsArray.Add(Record.Value.RecordSet);
 	EndDo;
 	Parameters.Insert("RegisteredRecords", RegisteredRecordsArray);
-
 	Parameters.Module.PostingCheckAfterWrite(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
+	// Accounting MD5
+	If Not Cancel And Metadata.DefinedTypes.typeAccountingDocuments.Type.Types().Find(TypeOf(Parameters.Object.Ref)) <> Undefined Then
+		AccountingServer.UpdateAccountingRelevance(DocObject.Ref);	
+	EndIf;
+	
+	If FOServer.IsUseSimpleBatch() Then
+    //@skip-check bsl-legacy-check-expression-type
+	  R6025B_SimpleBatchData = Parameters.PostingDataTables.Get(Metadata.AccumulationRegisters.R6025B_SimpleBatch);
+		If Not R6025B_SimpleBatchData = Undefined Then
+			OutgoingMovements = SimpleBatchCostCalculationServer.UpdateOutgoingMovementsCost(Parameters.Object.Ref, R6025B_SimpleBatchData.PrepareTable, Cancel, , , AddInfo);
+			If Not OutgoingMovements = Undefined Then
+				DocObject.RegisterRecords.R6025B_SimpleBatch.Load(OutgoingMovements);
+				DocObject.RegisterRecords.R6025B_SimpleBatch.Write();
+			Else
+				DocObject.RegisterRecords.R6025B_SimpleBatch.Load(R6025B_SimpleBatchData.PrepareTable);
+				DocObject.RegisterRecords.R6025B_SimpleBatch.Write();
+			EndIf;
+		EndIf;
+	EndIf;
 EndProcedure
 
 // Get posting parameters.
@@ -77,11 +95,11 @@ EndProcedure
 // * DocumentDataTables - Map -
 // * LockDataSources - Map -
 // * PostingDataTables - Array Of KeyAndValue:
-// ** Key - MetadataObjectDocument - Meta doc
+// ** Key - MetadataObjectAccumulationRegister - Meta doc
 // ** Value - See PostingTableSettings
 // * ManualMovementsEdit - Boolean -  
 // * Messages -  Array of String - User message
-Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
+Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined) Export
 	Cancel = False;
 	
 	Parameters = New Structure();
@@ -95,8 +113,13 @@ Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Parameters.Insert("DocumentDataTables", New Structure);
 	Parameters.Insert("LockDataSources", New Map);
 	Parameters.Insert("PostingDataTables", New Map);
-	Parameters.Insert("ManualMovementsEdit", DocObject.ManualMovementsEdit);
 	Parameters.Insert("Messages", New Array);
+	
+	If CommonFunctionsServer.isCommonAttributeUseForMetadata("ManualMovementsEdit", DocObject.Metadata()) Then
+		Parameters.Insert("ManualMovementsEdit", DocObject.ManualMovementsEdit);
+	Else
+		Parameters.Insert("ManualMovementsEdit", False);		
+	EndIf;
 	
 	Module = Documents[Parameters.Metadata.Name]; // DocumentManager.SalesOrder, DocumentManagerDocumentName
 	Parameters.Insert("Module", Module);
@@ -202,20 +225,26 @@ Function RegisterRecords(Parameters)
 		EndIf;
 		
 		If Row.Value.Metadata = Metadata.AccumulationRegisters.R6020B_BatchBalance 
-			Or Row.Value.Metadata = AccumulationRegisters.R6060T_CostOfGoodsSold Then
+			Or Row.Value.Metadata = Metadata.AccumulationRegisters.R6060T_CostOfGoodsSold
+			Or Row.Value.Metadata = Metadata.AccumulationRegisters.R6025B_SimpleBatch Then
 				Continue; //Never rewrite
 		EndIf;
-		If Metadata.AccumulationRegisters.Contains(Row.Value.Metadata) Then
+		
+		ArrayOfRegisters = RegistersWithAdditionalDataFilling();
+		If ArrayOfRegisters.Find(Row.Value.Metadata) <> Undefined Then
 			RegisterName = Row.Value.Metadata.Name;
-			try
 			AccumulationRegisters[RegisterName].AdditionalDataFilling(TableForLoad);
-			except endtry;
 		EndIf;
+		
 		WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
 		
 		If Row.Value.Metadata = Metadata.InformationRegisters.T6020S_BatchKeysInfo Then
 			UpdateCosts(Parameters.Object, TableForLoad, RegisteredRecords);
 		EndIf;
+		
+		If TableForLoad.Count() Then
+			CommonFunctionsServer.SetDataTypesForLoadRecords(Row.Value.Metadata, TableForLoad);
+		EndIf;		
 		
 		// MD5
 		If RecordSetIsEqual(RecordSet, TableForLoad) Then
@@ -707,9 +736,11 @@ Function PrepareRecordsTables(Dimensions, LineNumberJoinConditionField, ItemList
 	Return Query.TempTablesManager;
 EndFunction
 
-Function CheckingBalanceIsRequired(Ref, SettingUniqueID) Export
+Function CheckingBalanceIsRequired(Ref, SettingUniqueID, IsCommonSetting = False) Export
 	Filter = New Structure();
-	Filter.Insert("MetadataObject", Ref.Metadata());
+	If Not IsCommonSetting Then
+		Filter.Insert("MetadataObject", Ref.Metadata());
+	EndIf;
 	Filter.Insert("AttributeName", SettingUniqueID);
 	UserSettings = UserSettingsServer.GetUserSettings(Undefined, Filter);
 	If UserSettings.Count() And UserSettings[0].Value = True Then
@@ -784,7 +815,57 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 			Cancel = True;
 		EndIf;
 	EndIf;
+	
+	// R4050B_StockInventory
+	If Parameters.Object.RegisterRecords.Find("R4050B_StockInventory") <> Undefined Then
+		Records_InDocument = Undefined;
+		
+		If Parameters.Property("Current_R4050B_StockInventory") Then
+			Records_InDocument = Parameters.Current_R4050B_StockInventory;
+		Else
+			If Unposting Then
+				Records_InDocument = Parameters.Object.RegisterRecords.R4050B_StockInventory.Unload();
+			Else
+				Records_InDocument = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "R4050B_StockInventory");
+				If Records_InDocument = Undefined Then
+					Records_InDocument = GetQueryTableByName("R4050B_StockInventory", Parameters, True);
+				EndIf;
+			EndIf;
+	
+			If Not Records_InDocument.Columns.Count() Then
+				Records_InDocument = CommonFunctionsServer.CreateTable(Metadata.AccumulationRegisters.R4050B_StockInventory);
+			EndIf;
+		EndIf;
+		
+		Exists_R4050B_StockInventory = Undefined;
+		
+		If Parameters.Property("Exists_R4050B_StockInventory") Then
+			Exists_R4050B_StockInventory = Parameters.Exists_R4050B_StockInventory;
+		Else
+			Exists_R4050B_StockInventory = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Exists_R4050B_StockInventory");
+			If Exists_R4050B_StockInventory = Undefined Then
+				Exists_R4050B_StockInventory = GetQueryTableByName("Exists_R4050B_StockInventory", Parameters, True);
+			EndIf;
+		EndIf;
+		
+		If Not Cancel And Not AccReg.R4050B_StockInventory.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+			Records_InDocument, 
+			Exists_R4050B_StockInventory, 
+			RecordType, Unposting, AddInfo) Then
+			Cancel = True;
+		EndIf;
+	EndIf;
+	
 EndProcedure
+
+Function Exists_R4050B_StockInventory() Export
+	Return "SELECT *
+		   |INTO Exists_R4050B_StockInventory
+		   |FROM
+		   |	AccumulationRegister.R4050B_StockInventory AS R4050B_StockInventory
+		   |WHERE
+		   |	R4050B_StockInventory.Recorder = &Ref";
+EndFunction
 
 Function CheckBalance_R4011B_FreeStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
@@ -842,7 +923,7 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 			Return CheckResult.IsOk;
 		Else
-			Raise StrTemplate("Unsupported register type [%1]", Parameters.Metadata);
+			Raise StrTemplate(R().Error_UnsupportedRegisterType, Parameters.Metadata);
 		EndIf;
 		
 	Else // Receipt
@@ -1192,7 +1273,7 @@ Function GetQueryTableByName(TableName, Parameters, RaiseExeption = False) Expor
 	VTSearch = Parameters.TempTablesManager.Tables.Find(TableName);
 	If VTSearch = Undefined Then
 		If RaiseExeption Then
-			Raise StrTemplate("Table [%1] not found in temp tables", TableName);
+			Raise StrTemplate(R().Error_TableNotFoundInTempTables, TableName);
 		Else
 			Return New ValueTable();
 		EndIf;
@@ -1311,6 +1392,63 @@ Function Exists_R2001T_Sales() Export
 		|	AccumulationRegister.R2001T_Sales AS R2001T_Sales
 		|WHERE
 		|	R2001T_Sales.Recorder = &Ref";
+EndFunction
+
+Function Exists_R2020B_AdvancesFromCustomers() Export
+	Return 
+		"SELECT *
+		|	INTO Exists_R2020B_AdvancesFromCustomers
+		|FROM
+		|	AccumulationRegister.R2020B_AdvancesFromCustomers AS R2020B_AdvancesFromCustomers
+		|WHERE
+		|	R2020B_AdvancesFromCustomers.Recorder = &Ref";
+EndFunction
+
+Function Exists_R1020B_AdvancesToVendors() Export
+	Return 
+		"SELECT *
+		|	INTO Exists_R1020B_AdvancesToVendors
+		|FROM
+		|	AccumulationRegister.R1020B_AdvancesToVendors AS R1020B_AdvancesToVendors
+		|WHERE
+		|	R1020B_AdvancesToVendors.Recorder = &Ref";
+EndFunction
+
+Function Exists_R3010B_CashOnHand() Export
+	Return 
+		"SELECT *
+		|	INTO Exists_R3010B_CashOnHand
+		|FROM
+		|	AccumulationRegister.R3010B_CashOnHand AS R3010B_CashOnHand
+		|WHERE
+		|	R3010B_CashOnHand.Recorder = &Ref";
+EndFunction
+
+Function Exists_R6070T_OtherPeriodsExpenses() Export
+	Return 
+		"SELECT *
+		|	INTO Exists_R6070T_OtherPeriodsExpenses
+		|FROM
+		|	AccumulationRegister.R6070T_OtherPeriodsExpenses AS R6070T_OtherPeriodsExpenses
+		|WHERE
+		|	R6070T_OtherPeriodsExpenses.Recorder = &Ref";
+EndFunction
+
+Function Exists_R6080T_OtherPeriodsRevenues() Export
+	Return 
+		"SELECT
+		|	*
+		|INTO Exists_R6080T_OtherPeriodsRevenues
+		|FROM
+		|	AccumulationRegister.R6080T_OtherPeriodsRevenues AS R6080T_OtherPeriodsRevenues
+		|WHERE
+		|	R6080T_OtherPeriodsRevenues.Recorder = &Ref";
+EndFunction
+
+Function RegistersWithAdditionalDataFilling()
+	ArrayOfRegisters = New Array();
+	ArrayOfRegisters.Add(Metadata.AccumulationRegisters.R5020B_PartnersBalance);
+	Return ArrayOfRegisters;
 EndFunction
 
 #Region BatchInfo
@@ -1474,7 +1612,9 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 			LastPercentLogged = Int(Percent);
 			Msg = BackgroundJobAPIServer.NotifySettings();
 			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
-			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			If DateDiff > 0 Then
+				Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			EndIf;
 			Msg.Percent = Percent;
 			BackgroundJobAPIServer.NotifyStream(Msg);
 		EndIf;
@@ -1496,6 +1636,8 @@ Function SkipOnCheckPosting(Doc)
 	Array = New Array;
 	Array.Add(Metadata.Documents.CalculationMovementCosts);
 	Array.Add(Metadata.Documents.JournalEntry);
+	Array.Add(Metadata.Documents.CustomersAdvancesClosing);
+	Array.Add(Metadata.Documents.VendorsAdvancesClosing);
 	
 	Return Not Array.Find(Doc) = Undefined;
 EndFunction
@@ -1555,7 +1697,9 @@ Function PostingDocumentArray(DocumentArray, isJob = False) Export
 			LastPercentLogged = Int(Percent);
 			Msg = BackgroundJobAPIServer.NotifySettings();
 			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
-			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			If DateDiff > 0 Then
+				Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			EndIf;
 			Msg.Percent = Percent;
 			BackgroundJobAPIServer.NotifyStream(Msg);
 		EndIf;
@@ -1638,7 +1782,6 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 					
 					For Each Row In TableOfJEDocuments Do
 						CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "WriteOnForm", True);
-						CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "DataTable", NewMovement);
 						Row.JEDocument.DeletionMark = Row.BasisDocument.DeletionMark;
 						Row.JEDocument.Write(DocumentWriteMode.Write);
 					EndDo;							
@@ -1678,7 +1821,9 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 			LastPercentLogged = Int(Percent);
 			Msg = BackgroundJobAPIServer.NotifySettings();
 			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
-			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			If DateDiff > 0 Then
+				Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			EndIf;
 			Msg.Percent = Percent;
 			BackgroundJobAPIServer.NotifyStream(Msg);
 		EndIf;

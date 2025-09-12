@@ -308,3 +308,20 @@ Scenario: _045430 Cash statement clear posting/mark for deletion
 			| 'R3010 Cash on hand'                  |
 			| 'R3021 Cash in transit (incoming)'    |
 		And I close all client application windows
+
+Scenario: _045406 check CashStatement movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashStatement"
+	And I go to line in "List" table
+		| 'Number' |
+		| '11'     |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+		| 'Cash statement 11 dated 23.06.2022 22:53:32' | ''                                            | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+		| 'Register  "Posted documents registry"'       | ''                                            | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+		| ''                                            | 'Document'                                    | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+		| ''                                            | 'Cash statement 11 dated 23.06.2022 22:53:32' | '23.06.2022 22:53:32' | '11'     | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

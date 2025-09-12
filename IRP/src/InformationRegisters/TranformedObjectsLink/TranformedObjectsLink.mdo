@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="6cfc708a-9271-4e17-99df-6e99ac14cb1e">
+ <producedTypes>
+  <selectionType typeId="66a9172a-0735-4770-b9de-9e999e9b57b3" valueTypeId="126062b6-7429-4bf9-86b2-01b49331aa22"/>
+  <listType typeId="f9acb49f-311e-4dd0-a90a-125ff947dc97" valueTypeId="2f3df8d7-3ced-40bd-a176-85c0134d5c54"/>
+  <managerType typeId="3c5a4635-f046-4a17-a74d-9703986617a4" valueTypeId="596b7699-12a6-47e3-b367-f8b4664bcf0b"/>
+  <recordSetType typeId="835ac932-a2b7-48e5-8b0b-573e14945c5d" valueTypeId="1f59139a-41fd-4ebf-b382-5684b9390daf"/>
+  <recordKeyType typeId="43b47e70-533a-4eab-9b2b-ab17a225eb0a" valueTypeId="1d42301c-d464-4a60-bdd9-c56d720d19c2"/>
+  <recordType typeId="735e954a-887b-411c-9605-270543c779dc" valueTypeId="acfe8364-76a7-4637-ab96-b888669ced4e"/>
+  <recordManagerType typeId="c35f5b86-00be-458d-9ec3-311ba3e34ac8" valueTypeId="2b50efe1-d6d8-4809-a22c-e3bdef3f9d97"/>
+ </producedTypes>
+ <name>TranformedObjectsLink</name>
+ <synonym>
+  <key>en</key>
+  <value>E3A1B764-D874-7FBE-EFF1-1EED480C55F5</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="76ebd240-83a0-48f4-8d66-1635a8af1804">
+  <name>TransformationRule</name>
+  <synonym>
+   <key>en</key>
+   <value>59D5E84E-E508-25A8-8DB5-59F0E130BCBF</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.TransformationRules</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="5ad8d5ba-4ba1-4507-85bf-9b7383b4a32d">
+  <name>Source</name>
+  <synonym>
+   <key>en</key>
+   <value>DC77CBC7-7829-6D31-16DF-F43EFD09DE2B</value>
+  </synonym>
+  <type>
+   <types>AnyRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="4cacf033-bfd5-4590-a3c2-ad5d828b35aa">
+  <name>Target</name>
+  <synonym>
+   <key>en</key>
+   <value>46C20C22-5722-5C62-2A5E-EAC1B0BD2BF4</value>
+  </synonym>
+  <type>
+   <types>AnyRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+</mdclass:InformationRegister>

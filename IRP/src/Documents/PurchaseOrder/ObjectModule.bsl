@@ -3,12 +3,33 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
-	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		
+		Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	
+		AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
+		AmountsInfo.TotalAmount.Value = CalculationServer.CalculateDocumentAmount(ItemList, "TotalAmount");
+		AmountsInfo.NetAmount.Value   = CalculationServer.CalculateDocumentAmount(ItemList, "NetAmount");
+		AmountsInfo.TaxAmount.Value   = CalculationServer.CalculateDocumentAmount(ItemList, "TaxAmount");
+		TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
 
+	EndIf;
+	
 	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
+	ThisObject.DocumentNumber = DocumentsServer.GenerateDocumentNumber(ThisObject);
+	
 	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);
+	
+	If Not Ref.IsEmpty() 
+			And (DeletionMark 
+				OR WriteMode = DocumentWriteMode.UndoPosting 
+				OR Not Posted And Ref.Posted) 
+			And DocPurchaseOrderServer.CheckRelatedDocuments(Ref, True) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)
@@ -69,6 +90,11 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 		ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
+	Else
+		FillPropertyValues(ThisObject, FillingData);
+		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+		Number = Undefined;
+		Date = Undefined;
 	EndIf;
 EndProcedure
 
@@ -96,7 +122,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_PO(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey, Store");
+		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, Item, ItemKey, Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 

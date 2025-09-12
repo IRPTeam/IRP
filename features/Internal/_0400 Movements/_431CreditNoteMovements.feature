@@ -208,7 +208,6 @@ Scenario: _043102 check Credit note movements by the Register "R2021 Customer tr
 			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''                         | ''                                        | ''      | ''        | 'Attributes'           | ''                           |
 			| ''                                        | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                   | 'Order' | 'Project' | 'Deferred calculation' | 'Customers advances closing' |
 			| ''                                        | 'Receipt'     | '05.04.2021 09:30:58' | '-700'      | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Credit note 2 dated 05.04.2021 09:30:58' | ''      | ''        | 'No'                   | ''                           |
-			| ''                                        | 'Receipt'     | '05.04.2021 09:30:58' | '-700'      | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Credit note 2 dated 05.04.2021 09:30:58' | ''      | ''        | 'No'                   | ''                           |
 			| ''                                        | 'Receipt'     | '05.04.2021 09:30:58' | '-700'      | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Credit note 2 dated 05.04.2021 09:30:58' | ''      | ''        | 'No'                   | ''                           |
 			| ''                                        | 'Receipt'     | '05.04.2021 09:30:58' | '-119,84'   | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Credit note 2 dated 05.04.2021 09:30:58' | ''      | ''        | 'No'                   | ''                           |	
 		And I close all client application windows
@@ -247,7 +246,6 @@ Scenario: _043104 check Credit note movements by the Register "R1021 Vendors tra
 			| ''                                          | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'     | 'Agreement'            | 'Basis'                                     | 'Order'   | 'Project' | 'Deferred calculation'   | 'Vendors advances closing'    |
 			| ''                                          | 'Receipt'       | '05.04.2021 09:30:47'   | '85,6'        | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Credit note 1 dated 05.04.2021 09:30:47'   | ''        | ''        | 'No'                     | ''                            |
 			| ''                                          | 'Receipt'       | '05.04.2021 09:30:47'   | '500'         | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Credit note 1 dated 05.04.2021 09:30:47'   | ''        | ''        | 'No'                     | ''                            |
-			| ''                                          | 'Receipt'       | '05.04.2021 09:30:47'   | '500'         | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Credit note 1 dated 05.04.2021 09:30:47'   | ''        | ''        | 'No'                     | ''                            |
 			| ''                                          | 'Receipt'       | '05.04.2021 09:30:47'   | '500'         | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Credit note 1 dated 05.04.2021 09:30:47'   | ''        | ''        | 'No'                     | ''                            |
 		And I close all client application windows
 
@@ -283,9 +281,9 @@ Scenario: _043106 check Credit note movements by the Register "R5022 Expenses" (
 			| 'Register  "R5022 Expenses"'              | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                        | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
 			| ''                                        | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''             | ''                        | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | 'Attributes'                |
 			| ''                                        | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost' |
-			| ''                                        | '05.04.2021 09:30:47' | '85,6'      | '85,6'              | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
-			| ''                                        | '05.04.2021 09:30:47' | '500'       | '500'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
-			| ''                                        | '05.04.2021 09:30:47' | '500'       | '500'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |
+			| ''                                        | '05.04.2021 09:30:47' | '72,54'     | '85,6'              | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
+			| ''                                        | '05.04.2021 09:30:47' | '423,73'    | '500'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
+			| ''                                        | '05.04.2021 09:30:47' | '423,73'    | '500'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |
 		And I close all client application windows
 
 Scenario: _043107 check Credit note movements by the Register "R5022 Expenses" (with customer)
@@ -305,9 +303,9 @@ Scenario: _043107 check Credit note movements by the Register "R5022 Expenses" (
 			| 'Register  "R5022 Expenses"'              | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                        | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
 			| ''                                        | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''             | ''                        | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | 'Attributes'                |
 			| ''                                        | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost' |
-			| ''                                        | '05.04.2021 09:30:58' | '119,84'    | '119,84'            | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
-			| ''                                        | '05.04.2021 09:30:58' | '700'       | '700'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
-			| ''                                        | '05.04.2021 09:30:58' | '700'       | '700'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |
+			| ''                                        | '05.04.2021 09:30:58' | '101,56'    | '119,84'            | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
+			| ''                                        | '05.04.2021 09:30:58' | '593,22'    | '700'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
+			| ''                                        | '05.04.2021 09:30:58' | '593,22'    | '700'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |
 	And I close all client application windows
 
 Scenario: _043108 check Credit note movements by the Register "R5022 Expenses" (OtherPartnersTransactions)
@@ -351,7 +349,6 @@ Scenario: _043109 check Credit note movements by the Register "R5015 Other partn
 			| ''                                                | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'        | 'Partner'           | 'Agreement'         | 'Basis'             | 'Deferred calculation'    |
 			| ''                                                | 'Expense'       | '12.06.2023 14:56:54'   | '17,12'       | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      |
 			| ''                                                | 'Expense'       | '12.06.2023 14:56:54'   | '100'         | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      |
-			| ''                                                | 'Expense'       | '12.06.2023 14:56:54'   | '100'         | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      |
 			| ''                                                | 'Expense'       | '12.06.2023 14:56:54'   | '100'         | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      | 
 	And I close all client application windows
 
@@ -390,7 +387,6 @@ Scenario: _043111 check Credit note movements by the Register "R2021 Customer tr
 			| ''                                        | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
 			| ''                                        | '16.04.2024 14:30:45' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''      | ''        | '-23'    | 'No'                   | ''                           |
 			| ''                                        | '16.04.2024 14:30:45' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''      | ''        | '-3,94'  | 'No'                   | ''                           |
-			| ''                                        | '16.04.2024 14:30:45' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''      | ''        | '-23'    | 'No'                   | ''                           |
 			| ''                                        | '16.04.2024 14:30:45' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | ''      | ''        | '-23'    | 'No'                   | ''                           |		
 		And I close all client application windows
 
@@ -410,7 +406,6 @@ Scenario: _043112 check Credit note movements by the Register "R1021 Vendors tra
 			| ''                                        | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                          | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
 			| ''                                        | '16.04.2024 14:30:17' | 'Receipt'    | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''      | ''        | '120'    | 'No'                   | ''                         |
 			| ''                                        | '16.04.2024 14:30:17' | 'Receipt'    | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''      | ''        | '20,54'  | 'No'                   | ''                         |
-			| ''                                        | '16.04.2024 14:30:17' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''      | ''        | '120'    | 'No'                   | ''                         |
 			| ''                                        | '16.04.2024 14:30:17' | 'Receipt'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''      | ''        | '120'    | 'No'                   | ''                         |		
 		And I close all client application windows
 
@@ -429,7 +424,6 @@ Scenario: _043113 check Credit note movements by the Register "R5020 Partners ba
 			| 'Register  "R5020 Partners balance"'      | ''                    | ''           | ''             | ''             | ''                | ''                | ''                | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
 			| ''                                        | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Partner'         | 'Legal name'      | 'Agreement'       | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
 			| ''                                        | '12.06.2023 14:56:54' | 'Expense'    | 'Main Company' | 'Front office' | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''         | 'TRY'      | 'Local currency'               | 'TRY'                  | '100'    | ''                     | ''                 | ''                   | ''               | '100'               | ''                 |
-			| ''                                        | '12.06.2023 14:56:54' | 'Expense'    | 'Main Company' | 'Front office' | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''         | 'TRY'      | 'TRY'                          | 'TRY'                  | '100'    | ''                     | ''                 | ''                   | ''               | '100'               | ''                 |
 			| ''                                        | '12.06.2023 14:56:54' | 'Expense'    | 'Main Company' | 'Front office' | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | '100'    | ''                     | ''                 | ''                   | ''               | '100'               | ''                 |
 			| ''                                        | '12.06.2023 14:56:54' | 'Expense'    | 'Main Company' | 'Front office' | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '17,12'  | ''                     | ''                 | ''                   | ''               | '17,12'             | ''                 |		
 		And I close all client application windows
@@ -499,7 +493,45 @@ Scenario: _043017 check absence Credit note movements by the Register  "T2014 Ad
 			| 'Register  "T2014 Advances info"'    |
 		And I close all client application windows
 
+Scenario: _043018 check Credit note movements by the Register  "R1040 Taxes outgoing" (with customer)
+	And I close all client application windows
+	* Select CN
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'|
+			| '2'     |
+	* Check movements by the Register  "R1040 Taxes outgoing" 
+		And I click "Registrations report info" button
+		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Credit note 2 dated 05.04.2021 09:30:58' | ''                    | ''           | ''             | ''             | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| 'Register  "R1040 Taxes outgoing"'        | ''                    | ''           | ''             | ''             | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| ''                                        | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Amount' |
+			| ''                                        | '05.04.2021 09:30:58' | 'Receipt'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Return'       | 'Local currency'               | 'TRY'      | 'TRY'                  | '106,78' |
+			| ''                                        | '05.04.2021 09:30:58' | 'Receipt'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Return'       | 'Reporting currency'           | 'USD'      | 'TRY'                  | '18,28'  |
+			| ''                                        | '05.04.2021 09:30:58' | 'Receipt'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Return'       | 'en description is empty'      | 'TRY'      | 'TRY'                  | '106,78' |		
+	And I close all client application windows
 
+Scenario: _043019 check Credit note movements by the Register  "R1040 Taxes outgoing" (with vendor)
+	And I close all client application windows
+	* Select CN
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1'     |
+	* Check movements by the Register  "R1040 Taxes outgoing" 
+		And I click "Registrations report info" button
+		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Credit note 1 dated 05.04.2021 09:30:47' | ''                    | ''           | ''             | ''             | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| 'Register  "R1040 Taxes outgoing"'        | ''                    | ''           | ''             | ''             | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| ''                                        | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Amount' |
+			| ''                                        | '05.04.2021 09:30:47' | 'Receipt'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '76,27'  |
+			| ''                                        | '05.04.2021 09:30:47' | 'Receipt'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '13,06'  |
+			| ''                                        | '05.04.2021 09:30:47' | 'Receipt'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '76,27'  |
+	And I close all client application windows
 
 Scenario: _043130 Credit note clear posting/mark for deletion
 	And I close all client application windows
@@ -560,3 +592,20 @@ Scenario: _043130 Credit note clear posting/mark for deletion
 		Then "ResultTable" spreadsheet document contains values
 			| 'R5010 Reconciliation statement'    |
 		And I close all client application windows
+
+Scenario: _043020 check Credit note movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CreditNote"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Credit note 1 dated 05.04.2021 09:30:47' | ''                                        | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'   | ''                                        | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                        | 'Document'                                | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                        | 'Credit note 1 dated 05.04.2021 09:30:47' | '05.04.2021 09:30:47' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

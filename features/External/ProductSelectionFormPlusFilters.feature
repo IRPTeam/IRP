@@ -1147,18 +1147,18 @@ Scenario: check the filter by vendor partner terms in the purchase documents
 
 Scenario: check Description
 	And I click the button named "FormCreate"
-	And I click "Description" hyperlink
+	And I click "Comment" hyperlink
 	And I input "Test description" text in "Text" field
 	And I click "OK" button
-	Then the form attribute named "Description" became equal to "Test description"
+	Then the form attribute named "Comment" became equal to "Test description"
 	And I close all client application windows
 
 Scenario: check filter for Legal name contract (in BP, CP)
 	And I click the button named "FormCreate"
 	And I select from the drop-down list named "Company" by "Main Company" string
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
-	And I select "Company Ferron BP" from "Payee" drop-down list by string in "PaymentList" table
+	And I select "Company Ferron BP" from "Legal name" drop-down list by string in "PaymentList" table
 	* Check list from
 		And I activate "Legal name contract" field in "PaymentList" table
 		And I click choice button of "Legal name contract" attribute in "PaymentList" table
@@ -1181,21 +1181,21 @@ Scenario: check filter for Legal name contract (in BP, CP)
 			| 'Contract (Second Company)' |
 		And I select current line in "List" table
 		And "PaymentList" table became equal
-			| 'Partner'   | 'Payee'             | 'Legal name contract'       |
+			| 'Partner'   | 'Legal name'        | 'Legal name contract'       |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Contract (Second Company)' |
 		And I finish line editing in "PaymentList" table
 		And I select from the drop-down list named "Company" by "main" string
 		And "PaymentList" table became equal
-			| 'Partner'   | 'Payee'             | 'Legal name contract' |
+			| 'Partner'   | 'Legal name'        | 'Legal name contract' |
 			| 'Ferron BP' | 'Company Ferron BP' | ''                    |			
 		And I close all client application windows
 		
 Scenario: check filter for Legal name contract (in BR, CR)
 	And I click the button named "FormCreate"
 	And I select from the drop-down list named "Company" by "Main Company" string
-	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I click the button named "PaymentListAdd"
 	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
-	And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
+	And I select "Company Ferron BP" from "Legal name" drop-down list by string in "PaymentList" table
 	* Check list from
 		And I activate "Legal name contract" field in "PaymentList" table
 		And I click choice button of "Legal name contract" attribute in "PaymentList" table
@@ -1218,12 +1218,12 @@ Scenario: check filter for Legal name contract (in BR, CR)
 			| 'Contract (Second Company)' |
 		And I select current line in "List" table
 		And "PaymentList" table became equal
-			| 'Partner'   | 'Payer'             | 'Legal name contract'       |
+			| 'Partner'   | 'Legal name'        | 'Legal name contract'       |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Contract (Second Company)' |
 		And I finish line editing in "PaymentList" table
 		And I select from the drop-down list named "Company" by "main" string
 		And "PaymentList" table became equal
-			| 'Partner'   | 'Payer'             | 'Legal name contract' |
+			| 'Partner'   | 'Legal name'        | 'Legal name contract' |
 			| 'Ferron BP' | 'Company Ferron BP' | ''                    |			
 		And I close all client application windows		
 
@@ -1605,7 +1605,7 @@ Scenario: create a test partner with one vendor partner term and one customer pa
 		And I click "Save" button
 	* Add customer partner term
 		And In this window I click command interface button "Partner terms"
-		And I click the button named "FormCreate"
+		And I click "Yes" button
 		And I input "Partner Kalipso Customer" text in the field named "Description_en"
 		And I change "Type" radio button value to "Customer"
 		And I expand "Agreement info" group
@@ -2053,7 +2053,7 @@ Scenario: check clone value in the documents (Profit loss center, Revenue type)
 
 Scenario: check clone value in the documents (Financial movement type, Cash flow center, Project)
 	* Add line and fill Financial movement type, Cash flow center, project
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Financial movement type" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Movement type 1" from "Financial movement type" drop-down list by string in "PaymentList" table
@@ -2088,7 +2088,7 @@ Scenario: check clone value in the documents (Financial movement type, Cash flow
 
 Scenario: check clone value in the documents (Financial movement type, Cash flow center, Project, Expense type)
 	* Add line and fill Financial movement type, Cash flow center, project
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Financial movement type" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "Movement type 1" from "Financial movement type" drop-down list by string in "PaymentList" table

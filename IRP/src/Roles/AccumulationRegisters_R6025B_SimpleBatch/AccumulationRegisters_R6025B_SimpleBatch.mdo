@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="af6e2994-8e8b-4fd7-9e9e-c52628453187">
+ <name>AccumulationRegisters_R6025B_SimpleBatch</name>
+ <synonym>
+  <key>en</key>
+  <value>A31289E4-1A5F-391A-AC3F-FE91521B83CF_____</value>
+ </synonym>
+</mdclass:Role>

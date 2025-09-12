@@ -7,6 +7,7 @@ EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
 	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters);
 EndProcedure
 
@@ -45,39 +46,11 @@ Procedure PartnerOnChange(Object, Form, Item) Export
 EndProcedure
 
 Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-		DataCompositionComparisonType.NotEqual));
-	OpenSettings.FormParameters = New Structure();
-	FilterPartnerType = "";
-	If Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase") Then
-		FilterPartnerType = "Vendor";
-	ElsIf Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer") Then
-		FilterPartnerType = "Customer";
-	EndIf;
-	If Not IsBlankString(FilterPartnerType) Then
-		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterPartnerType, True,
-			DataCompositionComparisonType.Equal));
-		OpenSettings.FormParameters.Insert("Filter", New Structure(FilterPartnerType, True));
-		OpenSettings.FillingData = New Structure(FilterPartnerType, True);
-	EndIf;
-	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	DocumentsClient.PartnerStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, Object.TransactionType);
 EndProcedure
 
 Procedure PartnerTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	FilterPartnerType = "";
-	If Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase") Then
-		FilterPartnerType = "Vendor";
-	ElsIf Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer") Then
-		FilterPartnerType = "Customer";
-	EndIf;
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterPartnerType, True, ComparisonType.Equal));
-	AdditionalParameters = New Structure();
-	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
-		AdditionalParameters);
+	DocumentsClient.PartnerTextChange_TransactionTypeFilter(Object, Form, Item, Text, StandardProcessing, Object.TransactionType);
 EndProcedure
 
 #EndRegion
@@ -128,6 +101,14 @@ EndProcedure
 
 Procedure TransactionTypeOnChange(Object, Form, Item) Export
 	ViewClient_V2.TransactionTypeOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
+#Region _DATE
+
+Procedure DateOnChange(Object, Form, Item) Export
+	ViewClient_V2.DateOnChange(Object, Form, "ItemList");
 EndProcedure
 
 #EndRegion
@@ -214,6 +195,14 @@ EndProcedure
 
 Procedure ItemListStoreOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListStoreOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region IS_PRELIMINARY
+
+Procedure ItemListIsPreliminaryOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListIsPreliminaryChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion

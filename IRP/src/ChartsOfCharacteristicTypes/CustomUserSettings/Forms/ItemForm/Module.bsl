@@ -60,7 +60,7 @@ Procedure AddRefersToObject(Command)
 	For Each Row In Object.RefersToObjects Do
 		ArrayOfSelectedObjects.Add(Row.FullName);
 	EndDo;
-	Notify = New NotifyDescription("AddRefersToObjectEnd", ThisObject);
+	Notify = New CallbackDescription("AddRefersToObjectEnd", ThisObject);
 	OpenForm("ChartOfCharacteristicTypes.CustomUserSettings.Form.SelectMetadataForm",
 		New Structure("ArrayOfSelectedObjects", ArrayOfSelectedObjects), ThisObject, , , , Notify);
 EndProcedure

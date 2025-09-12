@@ -44,6 +44,7 @@ Scenario: _001 test data
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create catalog ItemTypes objects (LC)
 		When Create catalog Units objects (LC)
+		When Create catalog Countries objects
 		When Create catalog Items objects (LC)
 		When Create catalog CurrencyMovementSets objects (LC)
 		When Create catalog ObjectStatuses objects (LC)
@@ -77,6 +78,7 @@ Scenario: _001 test data
 		When Create information register UserSettings records (LC)
 		When create items for work order (LC)
 		When Create catalog BillOfMaterials objects (LC)
+		When Create catalog SourceOfOrigins objects (LC)
 		And Delay 5
 	* Landed cost currency movement type for company
 		
@@ -1682,6 +1684,9 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| 'Description'     |
 			| 'Main Company'    |
 		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table	
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1, №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -2297,17 +2302,17 @@ Scenario: _023 check Stock adjustment as write off movements by register R5022 E
 		And I click "Generate report" button
 	* Check movements
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as write-off 1 dated 10.08.2021 16:47:25'   | ''                      | ''            | ''                    | ''              | ''               | ''         | ''                     | ''               | ''           | ''           | ''              | ''           | ''                      | ''                               | ''                      | ''                                                          |
-			| 'Document registrations records'                              | ''                      | ''            | ''                    | ''              | ''               | ''         | ''                     | ''               | ''           | ''           | ''              | ''           | ''                      | ''                               | ''                      | ''                                                          |
-			| 'Register  "R5022 Expenses"'                                  | ''                      | ''            | ''                    | ''              | ''               | ''         | ''                     | ''               | ''           | ''           | ''              | ''           | ''                      | ''                               | ''                      | ''                                                          |
-			| ''                                                            | 'Period'                | 'Resources'   | ''                    | ''              | 'Dimensions'     | ''         | ''                     | ''               | ''           | ''           | ''              | ''           | ''                      | ''                               | ''                      | 'Attributes'                                                |
-			| ''                                                            | ''                      | 'Amount'      | 'Amount with taxes'   | 'Amount cost'   | 'Company'        | 'Branch'   | 'Profit loss center'   | 'Expense type'   | 'Item key'   | 'Fixed asset'| 'Ledger type'   | 'Currency'   | 'Additional analytic'   | 'Multi currency movement type'   | 'Project'               | 'Calculation movement cost'                                 |
-			| ''                                                            | '10.08.2021 16:47:25'   | '17,12'       | '17,29'               | ''              | 'Main Company'   | ''         | 'Front office'         | 'Expense'        | ''           | ''           | ''              | 'USD'        | ''                      | 'Reporting currency'             | ''                      | 'Calculation movement costs 1 dated 01.08.2021 01:00:00'    |
-			| ''                                                            | '10.08.2021 16:47:25'   | '100'         | '101'                 | ''              | 'Main Company'   | ''         | 'Front office'         | 'Expense'        | ''           | ''           | ''              | 'TRY'        | ''                      | 'Local currency'                 | ''                      | 'Calculation movement costs 1 dated 01.08.2021 01:00:00'    |
-			| ''                                                            | '10.08.2021 16:47:25'   | '100'         | '101'                 | ''              | 'Main Company'   | ''         | 'Front office'         | 'Expense'        | ''           | ''           | ''              | 'TRY'        | ''                      | 'en description is empty'        | ''                      | 'Calculation movement costs 1 dated 01.08.2021 01:00:00'    |
-			| ''                                                            | '10.08.2021 16:47:25'   | '171,2'       | '174,62'              | ''              | 'Main Company'   | ''         | 'Front office'         | 'Expense'        | ''           | ''           | ''              | 'USD'        | ''                      | 'Reporting currency'             | ''                      | 'Calculation movement costs 1 dated 01.08.2021 01:00:00'    |
-			| ''                                                            | '10.08.2021 16:47:25'   | '1 000'       | '1 020'               | ''              | 'Main Company'   | ''         | 'Front office'         | 'Expense'        | ''           | ''           | ''              | 'TRY'        | ''                      | 'Local currency'                 | ''                      | 'Calculation movement costs 1 dated 01.08.2021 01:00:00'    |
-			| ''                                                            | '10.08.2021 16:47:25'   | '1 000'       | '1 020'               | ''              | 'Main Company'   | ''         | 'Front office'         | 'Expense'        | ''           | ''           | ''              | 'TRY'        | ''                      | 'en description is empty'        | ''                      | 'Calculation movement costs 1 dated 01.08.2021 01:00:00'    |
+			| 'Stock adjustment as write-off 1 dated 10.08.2021 16:47:25' | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''          | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                                                       |
+			| 'Document registrations records'                            | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''          | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                                                       |
+			| 'Register  "R5022 Expenses"'                                | ''                    | ''          | ''                  | ''            | ''             | ''       | ''                   | ''             | ''          | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                                                       |
+			| ''                                                          | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''       | ''                   | ''             | ''          | ''            | ''            | ''         | ''                    | ''                             | ''        | 'Attributes'                                             |
+			| ''                                                          | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key'  | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost'                              |
+			| ''                                                          | '10.08.2021 16:47:25' | '17,12'     | '17,29'             | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | 'M/White'   | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
+			| ''                                                          | '10.08.2021 16:47:25' | '100'       | '101'               | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | 'M/White'   | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
+			| ''                                                          | '10.08.2021 16:47:25' | '100'       | '101'               | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | 'M/White'   | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
+			| ''                                                          | '10.08.2021 16:47:25' | '171,2'     | '174,62'            | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | '38/Yellow' | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
+			| ''                                                          | '10.08.2021 16:47:25' | '1 000'     | '1 020'             | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | '38/Yellow' | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
+			| ''                                                          | '10.08.2021 16:47:25' | '1 000'     | '1 020'             | ''            | 'Main Company' | ''       | 'Front office'       | 'Expense'      | '38/Yellow' | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | 'Calculation movement costs 1 dated 01.08.2021 01:00:00' |
 		And I close all client application windows
 		
 Scenario: _024 check Stock adjustment as surplus movements by register R5021 Revenues		
@@ -2323,14 +2328,14 @@ Scenario: _024 check Stock adjustment as surplus movements by register R5021 Rev
 		And I click "Generate report" button
 	* Check movements
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as surplus 1 dated 01.08.2021 09:42:37'   | ''                      | ''            | ''                    | ''               | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                                | ''                      |
-			| 'Document registrations records'                            | ''                      | ''            | ''                    | ''               | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                                | ''                      |
-			| 'Register  "R5021 Revenues"'                                | ''                      | ''            | ''                    | ''               | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                                | ''                      |
-			| ''                                                          | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                                | ''                      |
-			| ''                                                          | ''                      | 'Amount'      | 'Amount with taxes'   | 'Company'        | 'Branch'   | 'Profit loss center'   | 'Revenue type'   | 'Item key'   | 'Currency'   | 'Additional analytic'   | 'Multi currency movement type'    | 'Project'               |
-			| ''                                                          | '01.08.2021 09:42:37'   | '154,08'      | ''                    | 'Main Company'   | ''         | 'Front office'         | 'Revenue'        | '39/18SD'    | 'USD'        | ''                      | 'Reporting currency'              | ''                      |
-			| ''                                                          | '01.08.2021 09:42:37'   | '900'         | ''                    | 'Main Company'   | ''         | 'Front office'         | 'Revenue'        | '39/18SD'    | 'TRY'        | ''                      | 'Local currency'                  | ''                      |
-			| ''                                                          | '01.08.2021 09:42:37'   | '900'         | ''                    | 'Main Company'   | ''         | 'Front office'         | 'Revenue'        | '39/18SD'    | 'TRY'        | ''                      | 'en description is empty'         | ''                      |
+			| 'Stock adjustment as surplus 1 dated 01.08.2021 09:42:37'   | ''                      | ''            | ''                    | ''               | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                                | ''                      | ''                          |
+			| 'Document registrations records'                            | ''                      | ''            | ''                    | ''               | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                                | ''                      | ''                          |
+			| 'Register  "R5021 Revenues"'                                | ''                      | ''            | ''                    | ''               | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                                | ''                      | ''                          |
+			| ''                                                          | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''         | ''                     | ''               | ''           | ''           | ''                      | ''                                | ''                      | 'Attributes'                |
+			| ''                                                          | ''                      | 'Amount'      | 'Amount with taxes'   | 'Company'        | 'Branch'   | 'Profit loss center'   | 'Revenue type'   | 'Item key'   | 'Currency'   | 'Additional analytic'   | 'Multi currency movement type'    | 'Project'               | 'Calculation movement cost' |
+			| ''                                                          | '01.08.2021 09:42:37'   | '130,58'      | '154,08'              | 'Main Company'   | ''         | 'Front office'         | 'Revenue'        | '39/18SD'    | 'USD'        | ''                      | 'Reporting currency'              | ''                      | ''                          |
+			| ''                                                          | '01.08.2021 09:42:37'   | '762,71'      | '900'                 | 'Main Company'   | ''         | 'Front office'         | 'Revenue'        | '39/18SD'    | 'TRY'        | ''                      | 'Local currency'                  | ''                      | ''                          |
+			| ''                                                          | '01.08.2021 09:42:37'   | '762,71'      | '900'                 | 'Main Company'   | ''         | 'Front office'         | 'Revenue'        | '39/18SD'    | 'TRY'        | ''                      | 'en description is empty'         | ''                      | ''                          |
 		And I close all client application windows
 		
 						
@@ -2537,3 +2542,40 @@ Scenario: _032 check landed cost SR and RRR with the same items in different lin
 		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_073_2" template lines by template
 		And I close all client application windows				
+	
+Scenario: _035 check landed cost stock correction (source of origin)
+	And I close all client application windows
+	* Load documents stock correction (source of origin)
+		When Data preparation for stock correction CalculationMovementCosts (LC)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9014).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockCorrection.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockCorrection.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockCorrection.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Check movement cost calculation
+		Given I open hyperlink "e1cib/app/Report.R6020_BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I go to line in "OptionsList" table
+			| 'Report option'    |
+			| 'With SOO'             |
+		And I click "Load setting" button
+		And I click "Generate" button	
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Store 03'       |
+		And I select current line in "List" table
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
+		And I go to line in "List" table
+			| "Item"               | "Item key" |
+			| "Product 3 with SLN" | "UNIQ"     |
+		And I select current line in "List" table	
+		And I click "Generate" button
+		And "Result" spreadsheet document contains "BathBalance_035_2" template lines by template
+		And I close all client application windows

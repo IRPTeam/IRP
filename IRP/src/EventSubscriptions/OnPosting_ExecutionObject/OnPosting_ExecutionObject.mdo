@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="29982315-5405-452b-8190-19e6bcd974dc">
+ <name>OnPosting_ExecutionObject</name>
+ <synonym>
+  <key>en</key>
+  <value>CD9D41F0-A930-3651-1E8A-AAF18D1424BD</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>Posting</event>
+ <handler>CommonModule.BusinessProcessesServer.OnPosting_ExecutionObjectPosting</handler>
+</mdclass:EventSubscription>

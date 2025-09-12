@@ -36,6 +36,7 @@
  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
@@ -181,6 +182,20 @@
    </choiceParameterLinks>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="018a4e34-73fd-498a-b4b0-30e112b9f519">
+   <name>Branch</name>
+   <synonym>
+    <key>en</key>
+    <value>98F19555-CFAF-91B2-2BD0-060AD8441039</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <createOnInput>DontUse</createOnInput>
+   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   </attributes>
   <attributes uuid="98cdb7f8-e545-4de2-9cf5-4fd02a33c89c">
    <name>Quantity</name>

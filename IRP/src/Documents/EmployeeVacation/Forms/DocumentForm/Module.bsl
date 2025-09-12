@@ -4,6 +4,9 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocEmployeeVacationServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	For Each EmployeeRow In Object.EmployeeList Do
+		CalculateEmployeeRowAtServer(EmployeeRow.GetID());
+	EndDo;
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 //++
@@ -23,6 +26,9 @@ EndProcedure
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocEmployeeVacationServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	For Each EmployeeRow In Object.EmployeeList Do
+		CalculateEmployeeRowAtServer(EmployeeRow.GetID());
+	EndDo;
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -43,10 +49,20 @@ EndProcedure
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
-//++
+
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	DocEmployeeVacationClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
 EndProcedure
 
 &AtClient
@@ -76,6 +92,8 @@ EndProcedure
 
 #EndRegion
 
+#Region FORM_ITEMS
+
 #Region _DATE
 //++
 &AtClient
@@ -90,6 +108,32 @@ EndProcedure
 &AtClient
 Procedure CompanyOnChange(Item)
 	DocEmployeeVacationClient.CompanyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+&AtClient
+Procedure EmployeeListEmployeeOnChange(Item)
+	CalculateEmployeeRow(Items.EmployeeList.CurrentData);
+EndProcedure
+
+&AtClient
+Procedure EmployeeListEndDateOnChange(Item)
+	CalculateEmployeeRow(Items.EmployeeList.CurrentData);
+EndProcedure
+
+&AtClient
+Procedure EmployeeListBeginDateOnChange(Item)
+	CalculateEmployeeRow(Items.EmployeeList.CurrentData);
+EndProcedure
+
+&AtClient
+Procedure EmployeeListPaidDaysOnChange(Item)
+	EmployeeRow = Items.EmployeeList.CurrentData;
+	If EmployeeRow.PaidDays > EmployeeRow.TotalDays Then
+		EmployeeRow.PaidDays = EmployeeRow.TotalDays;
+	EndIf;
+	EmployeeRow.OwnCostDays = EmployeeRow.TotalDays - EmployeeRow.PaidDays;
 EndProcedure
 
 #EndRegion
@@ -200,4 +244,28 @@ Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure CalculateEmployeeRow(EmployeeRow)
+	If NOT ValueIsFilled(EmployeeRow.Employee)
+			OR NOT ValueIsFilled(EmployeeRow.BeginDate)
+			OR NOT ValueIsFilled(EmployeeRow.EndDate)
+			OR EmployeeRow.EndDate < EmployeeRow.BeginDate Then
+		EmployeeRow.TotalDays = 0;
+		EmployeeRow.PaidDays = 0;
+		EmployeeRow.OwnCostDays = 0;
+		Return;
+	EndIf;
+	CalculateEmployeeRowAtServer(EmployeeRow.GetID());
+EndProcedure
+
+&AtServer
+Procedure CalculateEmployeeRowAtServer(EmployeeRowID)
+	EmployeeRow = Object.EmployeeList.FindByID(EmployeeRowID);
+	EmployeeRow.TotalDays = Max((EmployeeRow.EndDate - EmployeeRow.BeginDate) / 86400 + 1, 0);
+	If EmployeeRow.PaidDays = 0 Or EmployeeRow.PaidDays > EmployeeRow.TotalDays Then
+		EmployeeRow.PaidDays = EmployeeRow.TotalDays;
+	EndIf;
+	EmployeeRow.OwnCostDays = EmployeeRow.TotalDays - EmployeeRow.PaidDays;
+EndProcedure
+	
 #EndRegion

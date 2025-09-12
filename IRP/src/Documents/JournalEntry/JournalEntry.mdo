@@ -44,7 +44,7 @@
   <objectField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>
@@ -132,6 +132,39 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="16d4f230-101a-4b44-961e-4232dc36ac0f">
+  <name>ELedgerRegistry</name>
+  <synonym>
+   <key>en</key>
+   <value>323ACF50-7F2D-27B4-499C-C31CDABAA32A</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.ELedgerRegistry</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="868732cf-c360-4d4a-9970-141c91f0ee40">
+  <name>SequentalNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>3EEB7202-8A3A-F417-7C96-6FEB35543061</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>12</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="a7ceddf1-8c4e-44f9-a830-42106fc0bc53">
   <name>DocumentForm</name>
   <synonym>
@@ -207,6 +240,34 @@
     <field>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Property</field>
    </choiceParameterLinks>
    <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="80c317ce-1ce8-4492-8590-d4dcf330114b">
+  <producedTypes>
+   <objectType typeId="bdfefc31-4176-4f7d-82ec-5d6965be2759" valueTypeId="6b5a6bbf-331a-479f-aea0-da6f73d1a632"/>
+   <rowType typeId="ddfc7662-de12-413c-bbc4-2b3cf92767d2" valueTypeId="4f04e2c5-af8a-444b-a4ba-ab55ef233424"/>
+  </producedTypes>
+  <name>Errors</name>
+  <synonym>
+   <key>en</key>
+   <value>B2F9E381-D614-9A0C-C672-215A82DB799E</value>
+  </synonym>
+  <attributes uuid="40aa1101-080a-412f-bc13-a5bf5d005d7d">
+   <name>Error</name>
+   <synonym>
+    <key>en</key>
+    <value>1DAF46A3-CCE1-537E-E825-58B73282AADD</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>1024</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
  <commands uuid="3ff17cfd-55b1-44f3-afc7-73b16bb66d4a">

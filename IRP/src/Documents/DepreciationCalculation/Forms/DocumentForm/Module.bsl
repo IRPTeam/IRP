@@ -9,6 +9,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -29,7 +30,40 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
+EndProcedure
+
 #EndRegion
+
+&AtClient
+Procedure CalculationsFixedAssetOnChange(Item)
+	CurrentId = Items.Calculations.CurrentRow;
+	CalculationsFixedAssetOnChangeAtServer(CurrentId);	
+EndProcedure
+
+&AtServer
+Procedure CalculationsFixedAssetOnChangeAtServer(ID)
+	CurrentData = Object.Calculations.FindByID(ID);
+	
+	DataTable = Documents.DepreciationCalculation.GetCalculations(
+		Object.Ref,
+		Object.Date,
+		Object.Company,
+		Object.Branch,
+		CurrentData.FixedAsset);
+	If DataTable.Count() > 0 Then
+		PropertyString = "ProfitLossCenter, LedgerType, Schedule, CalculationMethod, Currency, ExpenseType, AmountBalance, Amount";
+		FillPropertyValues(CurrentData, DataTable[0], PropertyString);
+	EndIf;		
+	
+EndProcedure	 
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
@@ -44,8 +78,22 @@ Procedure EditCurrencies(Command)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure
 
 #Region COMMANDS
@@ -111,6 +159,16 @@ Procedure UpdateAccountingData()
 	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
 EndProcedure
 
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ShowHiddenTables(Command)
+	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
 #EndRegion
 
 #Region TITLE_DECORATIONS
@@ -170,6 +228,30 @@ EndProcedure
 &AtClient
 Procedure DateOnChange(Item)
 	DocDepreciationCalculationClient.DateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region CALCULATIONS
+
+&AtClient
+Procedure CalculationsAfterDeleteRow(Item)
+	DocDepreciationCalculationClient.CalculationsAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure CalculationsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocDepreciationCalculationClient.CalculationsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter)
+EndProcedure
+
+&AtClient
+Procedure CalculationsSelection(Item, RowSelected, Field, StandardProcessing)
+	DocDepreciationCalculationClient.CalculationsSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CalculationsBeforeDeleteRow(Item, Cancel)
+	DocDepreciationCalculationClient.CalculationsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 #EndRegion

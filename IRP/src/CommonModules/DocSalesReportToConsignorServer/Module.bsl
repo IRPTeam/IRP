@@ -155,7 +155,7 @@ Function GetConsignorSales(Parameters) Export
 	Query.SetParameter("Partner"         , Parameters.Partner);
 	Query.SetParameter("Agreement"       , Parameters.Agreement);
 	Query.SetParameter("PriceIncludeTax" , Parameters.PriceIncludeTax);
-	Query.SetParameter("CurrencyMovementType" , Parameters.Agreement.CurrencyMovementType);
+	Query.SetParameter("CurrencyMovementType" , ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 	
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();

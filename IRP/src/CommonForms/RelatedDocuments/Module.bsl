@@ -1,6 +1,11 @@
+#Region Variables
+
 &AtClient
 Var CurrentDocument;
 
+#EndRegion
+
+#Region FormEventHandlers
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Property("DocumentRef") Then
@@ -20,6 +25,114 @@ Procedure OnOpen(Cancel)
 	SetVisibleToAllAttributesValueTable(False);
 EndProcedure
 
+#EndRegion
+
+#Region FormCommandsEventHandlers
+&AtClient
+Procedure Post(Command)
+	SetCurrentDocument();
+	PostAtServer();
+	GenerateTree();
+	ExpandDocumentsTree();
+	Notify("LockLinkedRows", Undefined, Undefined);
+EndProcedure
+
+&AtClient
+Procedure Unpost(Command)
+	SetCurrentDocument();
+	UnpostAtServer();
+	GenerateTree();
+	ExpandDocumentsTree();
+	Notify("LockLinkedRows", Undefined, Undefined);
+EndProcedure
+
+&AtClient
+Procedure Delete(Command)
+	SetCurrentDocument();
+	DeleteAtServer();
+	GenerateTree();
+	ExpandDocumentsTree();
+	Notify("LockLinkedRows", Undefined, Undefined);
+EndProcedure
+
+&AtClient
+Procedure Refresh(Command)
+	
+	RefreshReport();
+		
+EndProcedure
+
+&AtClient
+Procedure GenerateForCurrent(Command)
+	CurrentData = ThisObject.DocumentsTree.FindByID(Items.DocumentsTree.CurrentRow);
+	If Not CurrentData = Undefined And ValueIsFilled(CurrentData.Ref) Then
+		ThisObject.DocumentRef = CurrentData.Ref;
+		Title = String(CurrentData.Ref);
+		GenerateTree();
+		ExpandDocumentsTree();
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure SelectAll(Command)
+	ChangeCheckStatusInAllAttributesValueTable(True);
+EndProcedure
+
+&AtClient
+Procedure DeselectAll(Command)
+	ChangeCheckStatusInAllAttributesValueTable(False);
+EndProcedure
+
+&AtClient
+Procedure Edit(Command)
+	OpenDocument();
+EndProcedure
+
+&AtClient
+Procedure ShowColumns(Command)
+	Items.DocumentsTreeShowSettings.Check = Not Items.DocumentsTreeShowSettings.Check;
+	
+	SetVisibleToAllAttributesValueTable(Items.DocumentsTreeShowSettings.Check);
+EndProcedure
+
+&AtClient
+Procedure AllAttributesValueTableOnChange(Item)
+	CreateColumnsAtServer();
+	RefreshReport();
+EndProcedure
+
+#EndRegion
+
+#Region FormTableItemsEventHandlersDocumentsTree
+&AtClient
+Procedure DocumentsTreeOnActivateRow(Item)
+	UpdateCommandAvailability();
+EndProcedure
+
+&AtClient
+Procedure DocumentsTreeSelection(Item, RowSelected, Field, StandardProcessing)
+	StandardProcessing = False;
+	OpenDocument();
+EndProcedure
+
+&AtClient
+Procedure DocumentsTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure DocumentsTreeBeforeDeleteRow(Item, Cancel)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure SetVisibleToAllAttributesValueTable(Visible)
+	Items.AllAttributesValueTable.Visible = Visible;
+EndProcedure
+
+#EndRegion
+
+#Region Private
 &AtServer
 Procedure GenerateTree()
 	ThisObject.DocumentsTree.GetItems().Clear();
@@ -105,31 +218,6 @@ Function GetDocumentNameByRef(DocumentRef)
 	Return DocumentRef.Metadata().Name;
 EndFunction
 
-&AtClient
-Procedure DocumentsTreeOnActivateRow(Item)
-	UpdateCommandAvailability();
-EndProcedure
-
-&AtClient
-Procedure DocumentsTreeSelection(Item, RowSelected, Field, StandardProcessing)
-	StandardProcessing = False;
-	OpenDocument();
-EndProcedure
-
-&AtClient
-Procedure Edit(Command)
-	OpenDocument();
-EndProcedure
-
-&AtClient
-Procedure Post(Command)
-	SetCurrentDocument();
-	PostAtServer();
-	GenerateTree();
-	ExpandDocumentsTree();
-	Notify("LockLinkedRows", Undefined, Undefined);
-EndProcedure
-
 &AtServer
 Procedure PostAtServer()
 	CurrentData = ThisObject.DocumentsTree.FindByID(Items.DocumentsTree.CurrentRow);
@@ -143,15 +231,6 @@ Procedure PostAtServer()
 	EndIf;
 EndProcedure
 
-&AtClient
-Procedure Unpost(Command)
-	SetCurrentDocument();
-	UnpostAtServer();
-	GenerateTree();
-	ExpandDocumentsTree();
-	Notify("LockLinkedRows", Undefined, Undefined);
-EndProcedure
-
 &AtServer
 Procedure UnpostAtServer()
 	CurrentData = ThisObject.DocumentsTree.FindByID(Items.DocumentsTree.CurrentRow);
@@ -161,15 +240,6 @@ Procedure UnpostAtServer()
 
 	DocumentObject = CurrentData.Ref.GetObject();
 	DocumentObject.Write(DocumentWriteMode.UndoPosting);
-EndProcedure
-
-&AtClient
-Procedure Delete(Command)
-	SetCurrentDocument();
-	DeleteAtServer();
-	GenerateTree();
-	ExpandDocumentsTree();
-	Notify("LockLinkedRows", Undefined, Undefined);
 EndProcedure
 
 &AtServer
@@ -194,30 +264,12 @@ Procedure SetCurrentDocument()
 EndProcedure
 
 &AtClient
-Procedure Refresh(Command)
-	
-	RefreshReport();
-		
-EndProcedure
-
-&AtClient
 Procedure RefreshReport()
 	
 	SetCurrentDocument();
 	GenerateTree();
 	ExpandDocumentsTree();
 	
-EndProcedure
-
-&AtClient
-Procedure GenerateForCurrent(Command)
-	CurrentData = ThisObject.DocumentsTree.FindByID(Items.DocumentsTree.CurrentRow);
-	If Not CurrentData = Undefined And ValueIsFilled(CurrentData.Ref) Then
-		ThisObject.DocumentRef = CurrentData.Ref;
-		Title = String(CurrentData.Ref);
-		GenerateTree();
-		ExpandDocumentsTree();
-	EndIf;
 EndProcedure
 
 &AtServer
@@ -230,6 +282,23 @@ Procedure AddRowToAllAttributesValueTable(MetaAttribute)
 	ArrayException.Add("Posted");
 	ArrayException.Add("LimitationByParent");
 	ArrayException.Add("IsCurrentDocument");
+	ArrayException.Add("Description");
+	ArrayException.Add("Description_en");
+	ArrayException.Add("Description_hash");
+	ArrayException.Add("Description_ru");
+	ArrayException.Add("Description_tr");
+	ArrayException.Add("Height");
+	ArrayException.Add("ID");
+	ArrayException.Add("Length");
+	ArrayException.Add("UniqueID");
+	ArrayException.Add("Volume");
+	ArrayException.Add("Weight");
+	ArrayException.Add("Width");
+	ArrayException.Add("LocalFullDescription");
+	ArrayException.Add("ForeignFullDescription");
+	ArrayException.Add("SourceNodeID");
+	ArrayException.Add("SourceNode");
+	ArrayException.Add("NotActive");	
 	
 	If ArrayException.Find(MetaAttribute.Name) <> Undefined Then
 		Return;
@@ -243,12 +312,35 @@ Procedure AddRowToAllAttributesValueTable(MetaAttribute)
 	EndIf;
 EndProcedure
 
+// Output parent documents.
+// 
+// Parameters:
+//  DocumentRef - DocumentRef
+//  CurrentBranch - CatalogRef.BusinessUnits
 &AtServer
 Procedure OutputParentDocuments(DocumentRef, CurrentBranch)
 	DocumentMetadata = DocumentRef.Metadata();
 	ListOfAttributes = New ValueList();
-
+	AttributesToAnalyseTable = New ValueTable;
+	AttributesToAnalyseTable.Columns.Add("Attribute");
+	AttributesToAnalyseTable.Columns.Add("AttributeName");
+	
+	For Each CommonAttribute In Metadata.CommonAttributes Do
+		If CommonAttribute.Content.Contains(DocumentMetadata) Then
+			NewRow = AttributesToAnalyseTable.Add();
+			NewRow.Attribute = CommonAttribute;
+			NewRow.AttributeName = CommonAttribute.Name;
+		EndIf;	
+	EndDo;
 	For Each Attribute In DocumentMetadata.Attributes Do
+		NewRow = AttributesToAnalyseTable.Add();
+		NewRow.Attribute = Attribute;
+		NewRow.AttributeName = Attribute.Name;
+	EndDo;
+	AttributesToAnalyseTable.Sort("AttributeName");
+
+	For Each TableRow In AttributesToAnalyseTable Do
+		Attribute = TableRow.Attribute;
 		AddRowToAllAttributesValueTable(Attribute);
 		ArrayOfTypes = Attribute.Type.Types();
 		For Each CurrentType In ArrayOfTypes Do
@@ -501,6 +593,11 @@ Function GetAllAttributesForDocument(DocumentMetadata)
 	For Each Attribute In DocumentMetadata.StandardAttributes Do
 		AllAttributes.Add(Attribute);
 	EndDo;
+	For Each Attribute In Metadata.CommonAttributes Do
+		If Attribute.Content.Contains(DocumentMetadata) Then
+			AllAttributes.Add(Attribute);
+		EndIf;
+	EndDo;
 	Return AllAttributes;
 EndFunction
 
@@ -576,16 +673,6 @@ Function GetCacheByType(CacheType)
 	Return CacheTypeMap.Get(CacheType);
 EndFunction
 
-&AtClient
-Procedure DocumentsTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;
-EndProcedure
-
-&AtClient
-Procedure DocumentsTreeBeforeDeleteRow(Item, Cancel)
-	Cancel = True;
-EndProcedure
-
 &AtServer
 Procedure CreateColumnsAtServer()
 	AttributesArray = GetAttributes("DocumentsTree");
@@ -637,19 +724,12 @@ Procedure CreateColumnsAtServer()
 EndProcedure
 
 &AtClient
-Procedure AllAttributesValueTableOnChange(Item)
+Procedure ChangeCheckStatusInAllAttributesValueTable(CheckStatus)
+	For Each Row In AllAttributesValueTable Do
+		Row.Check = CheckStatus;
+	EndDo;
 	CreateColumnsAtServer();
 	RefreshReport();
 EndProcedure
 
-&AtClient
-Procedure ShowColumns(Command)
-	Items.DocumentsTreeShowSettings.Check = Not Items.DocumentsTreeShowSettings.Check;
-	
-	SetVisibleToAllAttributesValueTable(Items.DocumentsTreeShowSettings.Check);
-EndProcedure
-
-&AtClient
-Procedure SetVisibleToAllAttributesValueTable(Visible)
-	Items.AllAttributesValueTable.Visible = Visible;
-EndProcedure
+#EndRegion

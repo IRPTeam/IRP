@@ -209,10 +209,13 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		And I close all client application windows
 	* Open POS and create first RSR (card)
 		And In the command interface I select "Retail" "Point of sale"
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'                      |
-			| '(10001) Dress, XS/Blue'    |
+			| "Item"                   |
+			| "(10001) Dress, XS/Blue" |
 		And I select current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
@@ -233,6 +236,10 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		And I select current line in "BankPaymentTypeList" table	
 		And I click the button named "Enter"
 	* Create second RSR (card)
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
+		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
 			| '(10001) Dress, XS/Blue'    |
@@ -580,6 +587,9 @@ Scenario: _0260132 create RSR (payment by bank credit)
 		And I close all client application windows
 	* Open POS and create RSR
 		And In the command interface I select "Retail" "Point of sale"
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
@@ -688,6 +698,9 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		And I close all client application windows
 	* Create RSR and check using advance 
 		And In the command interface I select "Retail" "Point of sale"
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
@@ -751,7 +764,7 @@ Scenario: _0260137 return advance payment (cash)
 			| 'Code' | 'Description'  |
 			| 'TRY'  | 'Turkish lira' |
 		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Retail customer" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Retail customer" attribute in "PaymentList" table
@@ -793,7 +806,7 @@ Scenario: _0260138 return advance payment (card)
 			| 'Description'          |
 			| 'Bank account, TRY'    |
 		And I select current line in "List" table
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I activate "Retail customer" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click choice button of "Retail customer" attribute in "PaymentList" table
@@ -1036,6 +1049,9 @@ Scenario: _0260140 create RRR from POS (add items than select basis document)
 		And I input "2202283705" text in the field named "Barcode"
 		And I move to the next attribute
 		And I move to "Items" tab	
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
@@ -1104,7 +1120,10 @@ Scenario: _0260141 return from POS (without basis document)
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "Barcode"
 		And I move to the next attribute
-		And I move to "Items" tab	
+		And I move to "Items" tab
+		And I go to line in "ItemsPickup" table
+			| "Item"          |
+			| "(10001) Dress" |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                      |
@@ -1145,8 +1164,8 @@ Scenario: _0260141 return from POS (without basis document)
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
 			| '#'   | 'Retail sales receipt'   | 'Item'    | 'Sales person'   | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Serial lot numbers'   | 'Unit'   | 'Tax amount'   | 'Return reason'   | 'Source of origins'   | 'Quantity'   | 'Price'    | 'Net amount'   | 'Total amount'   | 'Additional analytic'   | 'Store'      | 'Revenue type'   | 'Detail'   | 'VAT'   | 'Offers amount'   | 'Landed cost'    |
-			| '1'   | ''                       | 'Dress'   | ''               | 'XS/Blue'    | ''                     | 'No'                   | ''                     | 'pcs'    | '79,32'        | ''                | ''                    | '1,000'      | '520,00'   | '440,68'       | '520,00'         | ''                      | 'Store 01'   | ''               | ''         | '18%'   | ''                | ''               |
-			| '2'   | ''                       | 'Dress'   | ''               | 'L/Green'    | ''                     | 'No'                   | ''                     | 'pcs'    | '83,90'        | ''                | ''                    | '1,000'      | '550,00'   | '466,10'       | '550,00'         | ''                      | 'Store 01'   | ''               | ''         | '18%'   | ''                | ''               |
+			| '1'   | ''                       | 'Dress'   | ''               | 'XS/Blue'    | 'Shop 02'              | 'No'                   | ''                     | 'pcs'    | '79,32'        | ''                | ''                    | '1,000'      | '520,00'   | '440,68'       | '520,00'         | ''                      | 'Store 01'   | ''               | ''         | '18%'   | ''                | ''               |
+			| '2'   | ''                       | 'Dress'   | ''               | 'L/Green'    | 'Shop 02'              | 'No'                   | ''                     | 'pcs'    | '83,90'        | ''                | ''                    | '1,000'      | '550,00'   | '466,10'       | '550,00'         | ''                      | 'Store 01'   | ''               | ''         | '18%'   | ''                | ''               |
 		
 		Then the number of "SpecialOffers" table lines is "равно" 0
 		And "Payments" table became equal

@@ -55,6 +55,7 @@
   <key>en</key>
   <value>ACDC6D4C-1E78-89F0-0D67-7985A854469B</value>
  </listPresentation>
+ <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -65,8 +66,10 @@
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.FixedAssets.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.FixedAssets.Form.GroupForm</defaultFolderForm>
  <defaultListForm>Catalog.FixedAssets.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.FixedAssets.Form.ChoiceForm</defaultChoiceForm>
+ <defaultFolderChoiceForm>Catalog.FixedAssets.Form.GroupChoiceForm</defaultFolderChoiceForm>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  <attributes uuid="93384d7d-d83c-4da2-bf57-5a5f7b7e78d9">
   <name>Type</name>
@@ -100,6 +103,25 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="282b9254-d491-4718-8a72-ac14dca95789">
+  <name>DepreciationRate</name>
+  <synonym>
+   <key>en</key>
+   <value>9B313E2E-360D-0BFA-A86F-F68839795283</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <use>ForFolder</use>
   <dataHistory>Use</dataHistory>
  </attributes>
  <tabularSections uuid="07eefe30-4e67-4a8b-a88e-a24cbcf1afdd">
@@ -227,6 +249,24 @@
   <synonym>
    <key>en</key>
    <value>829C4773-D358-A117-7B70-02FD3AD296F9</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="78d3513c-52fe-4db3-8cfd-f3756c14ed85">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>069DFE66-D817-C780-0A7A-AE96631D41C5</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="60490c4b-c5d5-4b4f-bc4a-ee30968ae75b">
+  <name>GroupChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>08093D58-97B4-9CC1-1E3D-D5E918C38D56</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

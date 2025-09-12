@@ -26,4 +26,11 @@
    <value>BD97AF0B-5147-5346-6122-2F5FCBC0974E</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="da993ea4-66a5-4a59-b6a2-1343ffd233a0">
+  <name>WithholdingTax</name>
+  <synonym>
+   <key>en</key>
+   <value>25EAA070-CDDD-6CD7-7A9F-F42DC01FEB47</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

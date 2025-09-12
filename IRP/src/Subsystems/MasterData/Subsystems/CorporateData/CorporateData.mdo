@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="79f057ad-dc5f-4f77-b7be-63a8f92be4f9">
+ <name>CorporateData</name>
+ <synonym>
+  <key>en</key>
+  <value>290D75C3-A818-9CDC-C346-6A4F2274A344</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.Stores</content>
+ <content>Catalog.Incoterms</content>
+ <content>Catalog.CancelReturnReasons</content>
+ <content>Catalog.PrintInfo</content>
+ <content>CommonCommand.OpenCompanies</content>
+ <parentSubsystem>Subsystem.MasterData</parentSubsystem>
+</mdclass:Subsystem>

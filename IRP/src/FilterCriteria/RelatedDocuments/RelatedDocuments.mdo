@@ -120,6 +120,13 @@
  <content>Document.RetailReceiptCorrection.Attribute.BasisDocument</content>
  <content>Document.ExpenseAccruals.Attribute.Basis</content>
  <content>Document.RevenueAccruals.Attribute.Basis</content>
+ <content>Document.InventoryTransfer.Attribute.DistributedPurchaseInvoice</content>
+ <content>Document.OutgoingMessage.Attribute.BasisDocument</content>
+ <content>Document.PurchaseInvoice.Attribute.CurrencyRevaluationInvoice</content>
+ <content>Document.SalesInvoice.Attribute.CurrencyRevaluationInvoice</content>
+ <content>Document.ShipmentPlaningOrder.TabularSection.ItemList.Attribute.SalesOrder</content>
+ <content>Document.SalesInvoice.TabularSection.ShipmentPlaningOrders.Attribute.ShipmentPlaningOrder</content>
+ <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.ShipmentPlaningOrder</content>
  <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
   <name>RelatedDocuments</name>
   <synonym>
@@ -149,6 +156,7 @@
    <types>DocumentRef.RetailShipmentConfirmation</types>
    <types>DocumentRef.FixedAssetTransfer</types>
    <types>DocumentRef.PurchaseReturnOrder</types>
+   <types>DocumentRef.ExpenseAccruals</types>
    <types>DocumentRef.Labeling</types>
    <types>DocumentRef.ConsolidatedRetailSales</types>
    <types>DocumentRef.BankPayment</types>
@@ -174,6 +182,7 @@
    <types>DocumentRef.ModernizationOfFixedAsset</types>
    <types>DocumentRef.StockAdjustmentAsWriteOff</types>
    <types>DocumentRef.EmployeeHiring</types>
+   <types>DocumentRef.WithholdingTaxInvoice</types>
    <types>DocumentRef.Bundling</types>
    <types>DocumentRef.RetailSalesReceipt</types>
    <types>DocumentRef.RetailReceiptCorrection</types>
@@ -183,11 +192,14 @@
    <types>DocumentRef.SalesReportToConsignor</types>
    <types>DocumentRef.Production</types>
    <types>DocumentRef.ItemStockAdjustment</types>
+   <types>DocumentRef.ShipmentPlaningOrder</types>
    <types>DocumentRef.DecommissioningOfFixedAsset</types>
    <types>DocumentRef.InventoryTransferOrder</types>
    <types>DocumentRef.PurchaseOrderClosing</types>
+   <types>DocumentRef.RevenueAccruals</types>
    <types>DocumentRef.SalesOrderClosing</types>
    <types>DocumentRef.JournalEntry</types>
+   <types>DocumentRef.FixedAssetRevaluation</types>
    <types>DocumentRef.ProductionPlanningCorrection</types>
    <types>DocumentRef.InventoryTransfer</types>
    <types>DocumentRef.EmployeeFiring</types>
@@ -197,8 +209,6 @@
    <types>DocumentRef.ProductionPlanningClosing</types>
    <types>DocumentRef.RetailGoodsReceipt</types>
    <types>DocumentRef.CashExpense</types>
-   <types>DocumentRef.ExpenseAccruals</types>
-   <types>DocumentRef.RevenueAccruals</types>
   </commandParameterType>
   <representation>Auto</representation>
  </commands>

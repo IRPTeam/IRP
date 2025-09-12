@@ -12,11 +12,21 @@ Function GetAllCommandDescriptions() Export
 	
 	Result.Add(GetCommandDescription("SetNotActive"));
 	Result.Add(GetCommandDescription("ShowNotActive"));
+	Result.Add(GetCommandDescription("ShowNumerator"));
 	Result.Add(GetCommandDescription("GroupEditingProperties"));
 	Result.Add(GetCommandDescription("CloneValueFromFirstRow"));
 	Result.Add(GetCommandDescription("LoadDataFromTable"));
 	Result.Add(GetCommandDescription("AuditLock"));
 	Result.Add(GetCommandDescription("OpenVendorPrices"));
+	Result.Add(GetCommandDescription("EditQuantity"));
+	
+	For Each PrintTemplate_Name In PrintTemplates_GetCommandNames() Do
+		Result.Add(GetCommandDescription(PrintTemplate_Name));
+	EndDo;
+	
+	For Each ExecutionTemplate_Name In ExecutionTemplates_GetCommandNames() Do
+		Result.Add(GetCommandDescription(ExecutionTemplate_Name));
+	EndDo;
 	
 	Return Result;
 	
@@ -37,6 +47,9 @@ Function GetCommandDescription(CommandName) Export
 	ElsIf CommandName = "ShowNotActive" Then
 		Return ShowNotActive_GetCommandDescription();
 
+	ElsIf CommandName = "ShowNumerator" Then
+		Return ShowNumerator_GetCommandDescription();
+
 	ElsIf CommandName = "GroupEditingProperties" Then
 		Return GroupEditingProperties_GetCommandDescription();
 
@@ -48,8 +61,19 @@ Function GetCommandDescription(CommandName) Export
 	
 	ElsIf CommandName = "AuditLock" Then
 		Return AuditLock_GetCommandDescription();
+	
 	ElsIf CommandName = "OpenVendorPrices" Then	
 		Return OpenVendorPrices_GetCommandDescription();
+	
+	ElsIf CommandName = "EditQuantity" Then	
+		Return EditQuantity_GetCommandDescription();
+	
+	ElsIf Right(CommandName, 14) = "_PrintTemplate" Then
+		Return PrintTemplates_GetCommandDescription(CommandName);
+	
+	ElsIf Right(CommandName, 18) = "_ExecutionTemplate" Then
+		Return ExecutionTemplates_GetCommandDescription(CommandName);
+	
 	EndIf;
 	
 	Raise StrTemplate(R().Exc_011, CommandName);
@@ -78,8 +102,25 @@ Function GetCommandGroupDescription(GroupName) Export
 		CommandGroupDescription.Type = "Popup";
 	EndIf;
 	
+	If Left(CommandGroupDescription.Name, 18) = "ExecutionTemplate_" Then
+		ExecutionTemplate_GroupDescription(CommandGroupDescription);
+	EndIf;
+	
 	Return CommandGroupDescription;
 EndFunction
+
+// See InternalCommandsServer.OnInitialization
+Procedure OnInitialization(CommandName, CommandParameters, Cancel, AddInfo = Undefined) Export
+	
+	If CommandName = "AuditLock" Then
+		AuditLock_OnInitialization(CommandName, CommandParameters, Cancel, AddInfo);
+	
+	ElsIf CommandName = "ShowNumerator" Then
+		ShowNumerator_OnInitialization(CommandName, CommandParameters, Cancel, AddInfo);
+	 	
+	EndIf;
+	
+EndProcedure
 
 // See InternalCommandsServer.OnCommandCreate
 Procedure OnCommandCreate(CommandName, CommandParameters, AddInfo = Undefined) Export
@@ -280,6 +321,82 @@ EndProcedure
 
 #EndRegion
 
+#Region ShowNumerator
+
+// Show not active get command description.
+// 
+// Returns:
+//  See InternalCommandsServer.GetCommandDescription
+Function ShowNumerator_GetCommandDescription()
+	
+	CommandDescription = InternalCommandsServer.GetCommandDescription();
+	
+	CommandDescription.Name = "ShowNumerator";
+	//@skip-check statement-type-change, property-return-type
+	CommandDescription.Title = R().InternalCommands_ShowNumerator;
+	//@skip-check statement-type-change, property-return-type
+	CommandDescription.TitleCheck = R().InternalCommands_ShowNumerator_Check;
+	CommandDescription.ToolTip = CommandDescription.Title;
+	CommandDescription.Picture = "ShowNumeratore";
+	CommandDescription.PictureCheck = "HideNumeratore";
+	CommandDescription.EnableChecking = True;
+	
+	CommandDescription.LocationGroup = "CommandBar.Tools";
+	CommandDescription.LocationInCommandBar = "InAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
+	CommandDescription.ModifiesStoredData = False;
+	
+	CommandDescription.HasActionInitialization = True;
+	
+	CommandDescription.UsingObjectForm = True;
+	
+	Targets = CommandDescription.Targets;
+	For Each ContentItem In Metadata.CommonAttributes.NumeratorRules.Content Do
+		If ContentItem.Use = Metadata.ObjectProperties.CommonAttributeUse.Use  Then
+			Targets.Add(ContentItem.Metadata.FullName());
+		EndIf;
+	EndDo;
+	CommandDescription.Targets = New FixedArray(Targets);
+	
+	FunctionalOptions = New Array; // Array of String
+	FunctionalOptions.Add(Metadata.FunctionalOptions.UseNumberingRules.Name);
+	CommandDescription.FunctionalOptions = New FixedArray(FunctionalOptions);
+	
+	Return CommandDescription;
+	
+EndFunction
+
+// See InternalCommandsServer.OnInitialization
+Procedure ShowNumerator_OnInitialization(CommandName, CommandParameters, Cancel, AddInfo)
+
+	If CommandParameters.FormType = Enums.FormTypes.ObjectForm Then
+		NumeratorItem = CommandParameters.Form.Items.Find("NumeratorRules");
+		If NumeratorItem = Undefined Then
+			Cancel = True;
+		Else
+			NumeratorItem.Visible = False;
+		EndIf;
+		
+		//@skip-check property-return-type
+		RuleRef = CommandParameters.MainAttribute.NumeratorRules; // CatalogRef.NumeratorGroups
+		If Not ValueIsFilled(RuleRef) Then
+			RuleRef = NumberingRulesServer.GetNumeratorGroupForDocument(
+				CommandParameters.ObjectFullName, CommonFunctionsServer.GetCurrentSessionDate());
+		EndIf;
+		
+		NumeratorDescription = NumberingRulesServer.FillNumeratorDescription(RuleRef);
+		If Not RuleRef.IsEmpty() And Not NumeratorDescription.AllowedManualEditing Then
+			NumberName = NumberingRulesServer.GetNumberNameByMetadata(CommandParameters.ObjectFullName, RuleRef);
+			DocumentNumberItem = CommandParameters.Form.Items.Find(NumberName);
+			If DocumentNumberItem <> Undefined Then
+				DocumentNumberItem.ReadOnly = True;
+			EndIf;
+		EndIf;
+	EndIf;
+		 
+EndProcedure
+
+#EndRegion
+
 #Region GroupEditingProperties
 
 // Group editing properties get command description.
@@ -404,6 +521,13 @@ Function CloneValueFromFirstRow_GetCommandDescription()
 	
 	CommandDescription.Targets = New FixedArray(Targets);
 	
+	CommandBarMap = New Map();
+	CommandBarMap.Insert("Document.BankPayment.Form.DocumentForm", "GroupPaymentListCommandBar");
+	CommandBarMap.Insert("Document.BankReceipt.Form.DocumentForm", "GroupPaymentListCommandBar");
+	CommandBarMap.Insert("Document.CashPayment.Form.DocumentForm", "GroupPaymentListCommandBar");
+	CommandBarMap.Insert("Document.CashReceipt.Form.DocumentForm", "GroupPaymentListCommandBar");
+	
+	CommandDescription.CommandBarMap = New FixedMap(CommandBarMap);
 	Return CommandDescription;
 	
 EndFunction
@@ -471,7 +595,7 @@ Function LoadDataFromTable_GetCommandDescription()
 	CommandDescription.Name = "LoadDataFromTable";
 	CommandDescription.Title = R().LDT_Button_Title;
 	CommandDescription.ToolTip = R().LDT_Button_ToolTip; 
-	CommandDescription.Picture = "SpreadsheetShowGrid";
+	CommandDescription.Picture = "LoadDataFromTable";
 	CommandDescription.Representation = "Picture";
 	
 	CommandDescription.ForTables = True;
@@ -621,7 +745,7 @@ Function AuditLock_GetCommandDescription()
 	CommandDescription.HasActionOnCommandCreate = True;
 	CommandDescription.HasActionAfterRunning = True;
 	
-	CommandDescription.UsingListForm = False;
+	CommandDescription.UsingListForm = True;
 	CommandDescription.UsingChoiceForm = False;
 	CommandDescription.UsingObjectForm = True;
 	
@@ -635,6 +759,45 @@ Function AuditLock_GetCommandDescription()
 	Return CommandDescription;
 	
 EndFunction
+
+// See InternalCommandsServer.OnInitialization
+Procedure AuditLock_OnInitialization(CommandName, CommandParameters, Cancel, AddInfo)
+
+	If CommandParameters.FormType = Enums.FormTypes.ListForm Then
+		
+		QuerySchemaAPI = DynamicListAPI.Get(CommandParameters.MainAttribute);
+		DynamicListAPI.AddSource(
+				QuerySchemaAPI, 
+				"InformationRegister.AuditLock", 
+				"_AuditLock", 
+				"#MainTable#.Ref = _AuditLock.Document");
+		DynamicListAPI.AddField(
+				QuerySchemaAPI, 
+				"(NOT _AuditLock.Document IS NULL)", 
+				"AuditLockSet", 
+				Metadata.InformationRegisters.AuditLock.Synonym);
+		DynamicListAPI.Set(QuerySchemaAPI);
+		
+		NewColumn = CommandParameters.Form.Items.Insert(
+				"ListAuditLockSet", 
+				Type("FormField"), 
+				CommandParameters.Form.Items["List"],
+				CommandParameters.Form.Items["List"].ChildItems[0]);
+		NewColumn.DataPath = "List.AuditLockSet";
+		NewColumn.Type = FormFieldType.PictureField;
+		NewColumn.TitleLocation = FormItemTitleLocation.None;
+		
+		CommandPicture = PictureLib[CommandParameters.CommandDescription.Picture]; // Picture
+		NewColumn.HeaderPicture = CommandPicture; 
+		//@skip-check property-return-type
+		NewColumn.ValuesPicture = CommandPicture;
+		NewColumn.ToolTip = NStr("en='B80AC6E4-9910-9D56-6DD7-7036C7066C77'");
+		
+		Cancel = True;
+		
+	EndIf;
+		 
+EndProcedure
 
 // See InternalCommandsServer.OnCommandCreate
 Procedure AuditLock_OnCommandCreate(CommandName, CommandParameters, AddInfo)
@@ -664,6 +827,7 @@ EndProcedure
 #EndRegion
 
 #Region OpenVendorPrices
+
 Function OpenVendorPrices_GetCommandDescription()
 	
 	CommandDescription = InternalCommandsServer.GetCommandDescription();
@@ -691,6 +855,227 @@ Function OpenVendorPrices_GetCommandDescription()
 	
 	Targets.Add(Metadata.Documents.PurchaseInvoice.FullName());
 	Targets.Add(Metadata.Documents.PurchaseOrder.FullName());
+	
+	CommandDescription.Targets = New FixedArray(Targets);
+	
+	Return CommandDescription;
+	
+EndFunction
+
+#EndRegion
+
+#Region PrintTemplates
+
+// Print templates get command names.
+// 
+// Returns:
+//  Array - Print templates get command names
+Function PrintTemplates_GetCommandNames()
+	
+	Results = New Array; // Array of String
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT DISTINCT
+	|	PrintFormTemplates.Code AS Code
+	|FROM
+	|	Catalog.PrintFormTemplates AS PrintFormTemplates
+	|		INNER JOIN InformationRegister.ObjectsPrintTemplates AS ObjectsPrintTemplates
+	|		ON PrintFormTemplates.Ref = ObjectsPrintTemplates.PrintTemplate
+	|WHERE
+	|	NOT PrintFormTemplates.DeletionMark
+	|	AND NOT PrintFormTemplates.NotActive
+	|
+	|ORDER BY
+	|	Code";
+	
+	QuerySelection = Query.Execute().Select();
+	
+	While QuerySelection.Next() Do
+		//@skip-check invocation-parameter-type-intersect, property-return-type
+		Results.Add("ID_" + Format(QuerySelection.Code, "NG=;") + "_PrintTemplate");
+	EndDo;
+	
+	Return Results;
+	
+EndFunction
+
+// Show not active get command description.
+// 
+// Parameters:
+//  CommandName - String - Command name
+// 
+// Returns:
+//  See InternalCommandsServer.GetCommandDescription
+Function PrintTemplates_GetCommandDescription(CommandName)
+	
+	NameParts = StrSplit(CommandName, "_");
+	TemplateCode = Number(NameParts[1]);
+	TemplateRef = Catalogs.PrintFormTemplates.FindByCode(TemplateCode);
+	
+	CommandDescription = InternalCommandsServer.GetCommandDescription();
+	
+	CommandDescription.Name = CommandName;
+	CommandDescription.Title = String(TemplateRef);
+	CommandDescription.ToolTip = String(TemplateRef);
+	CommandDescription.Picture = "Print";
+	CommandDescription.EnableChecking = False;
+	
+	CommandDescription.Representation = "PictureAndText";
+	CommandDescription.LocationGroup = "CommandBar.FormPrint";
+	CommandDescription.LocationInCommandBar = "InCommandBarAndInAdditionalSubmenu"; // ButtonLocationInCommandBar.InCommandBarAndInAdditionalSubmenu
+	
+	CommandDescription.UsingListForm = True;
+	CommandDescription.UsingChoiceForm = True;
+	
+	Targets = CommandDescription.Targets;
+	For Each ObjectRef In InformationRegisters.ObjectsPrintTemplates.GetObjectsForPrintTemplate(TemplateRef) Do
+		Targets.Add(ObjectRef.ObjectFullName);
+	EndDo;
+	CommandDescription.Targets = New FixedArray(Targets);
+	
+	Return CommandDescription;
+	
+EndFunction
+
+#EndRegion
+
+#Region ExecutionTemplates
+
+// Execution templates get command names.
+// 
+// Returns:
+//  Array - Execution templates get command names
+Function ExecutionTemplates_GetCommandNames()
+	
+	Results = New Array; // Array of String
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT DISTINCT
+	|	ExecutionTemplates.Code AS Code
+	|FROM
+	|	Catalog.ExecutionTemplates AS ExecutionTemplates
+	|WHERE
+	|	NOT ExecutionTemplates.DeletionMark
+	|	AND NOT ExecutionTemplates.NotActive
+	|	AND ExecutionTemplates.ReadyToStartProcesses
+	|
+	|ORDER BY
+	|	Code";
+	
+	QuerySelection = Query.Execute().Select();
+	
+	While QuerySelection.Next() Do
+		//@skip-check invocation-parameter-type-intersect, property-return-type
+		Results.Add("ID_" + Format(QuerySelection.Code, "NG=;") + "_ExecutionTemplate");
+	EndDo;
+	
+	Return Results;
+	
+EndFunction
+
+Function ExecutionTemplates_GetCommandDescription(CommandName)
+	
+	NameParts = StrSplit(CommandName, "_");
+	TemplateCode = Number(NameParts[1]);
+	TemplateRef = Catalogs.ExecutionTemplates.FindByCode(TemplateCode);
+	
+	SubMenus = "";
+	SubMenusArray = New Array; // Array of String
+	TemplateParentRef = TemplateRef.Parent;
+	While Not TemplateParentRef.IsEmpty() Do
+		SubMenusArray.Insert(0, "ExecutionTemplate_"+Format(TemplateParentRef.Code, "NG=;"));
+		TemplateParentRef = TemplateParentRef.Parent;
+	EndDo;
+	If SubMenusArray.Count() Then
+		SubMenus = "." + StrConcat(SubMenusArray, ".");
+	EndIf;
+	
+	CommandDescription = InternalCommandsServer.GetCommandDescription();
+	
+	CommandDescription.Name = CommandName;
+	CommandDescription.Title = String(TemplateRef);
+	CommandDescription.ToolTip = String(TemplateRef);
+	CommandDescription.Picture = "BusinessProcessStart";
+	CommandDescription.EnableChecking = False;
+	
+	CommandDescription.Representation = "PictureAndText";
+	CommandDescription.LocationGroup = "CommandBar.ExecutionTemplate_" + SubMenus;
+	CommandDescription.LocationInCommandBar = "InCommandBarAndInAdditionalSubmenu"; // ButtonLocationInCommandBar.InCommandBarAndInAdditionalSubmenu
+	
+	CommandDescription.UsingObjectForm = True;
+	CommandDescription.UsingListForm = False;
+	CommandDescription.UsingChoiceForm = False;
+	
+	Targets = CommandDescription.Targets;
+	For Each ExecutionObjectRow In TemplateRef.ExecutionObjects Do
+		Targets.Add(ExecutionObjectRow.ObjectType.ObjectFullName);
+	EndDo;
+	CommandDescription.Targets = New FixedArray(Targets);
+	
+	Return CommandDescription;
+	
+EndFunction
+
+// Execution template group description.
+// 
+// Parameters:
+//  GroupDescription - See InternalCommandsServer.GetCommandGroupDescription 
+Procedure ExecutionTemplate_GroupDescription(GroupDescription)
+	
+	GroupCode = Mid(GroupDescription.Name, 19);
+	If GroupCode = "" Then
+		GroupDescription.Title = Metadata.BusinessProcesses.ExecutionProcesses.Synonym;
+		GroupDescription.Picture = "BusinessProcess";
+	Else
+		GroupRef = Catalogs.ExecutionTemplates.FindByCode(GroupCode);
+		GroupDescription.Title = String(GroupRef);
+		GroupDescription.Picture = "LevelDown";
+	EndIf;
+	
+	GroupDescription.ToolTip = GroupDescription.Title;
+	GroupDescription.Type = "Popup";
+	
+EndProcedure 
+
+#EndRegion
+
+
+#Region ShowNumerator
+
+// Show not active get command description.
+// 
+// Returns:
+//  See InternalCommandsServer.GetCommandDescription
+Function EditQuantity_GetCommandDescription()
+	
+	CommandDescription = InternalCommandsServer.GetCommandDescription();
+	
+	CommandDescription.Name = "EditQuantity";
+	//@skip-check statement-type-change, property-return-type
+	CommandDescription.Title = R().InternalCommands_EditQuantity;
+	CommandDescription.ToolTip = CommandDescription.Title;
+	CommandDescription.Picture = "Resource";
+	
+	CommandDescription.LocationGroup = "CommandBar.Tools";
+	CommandDescription.LocationInCommandBar = "InAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
+	CommandDescription.ModifiesStoredData = False;
+		
+	CommandDescription.UsingObjectForm = True;
+	
+	Targets = CommandDescription.Targets;
+	
+	For Each Doc In Metadata.Documents Do
+		If Doc = Metadata.Documents.PhysicalInventory
+			Or Doc = Metadata.Documents.RetailSalesReceipt
+			Or Doc = Metadata.Documents.RetailReturnReceipt Then
+				Continue;
+		EndIf;
+		If Doc.TabularSections.Find("RowIDInfo") <> Undefined  Then
+			Targets.Add(Doc.FullName());
+		EndIf;
+	EndDo;
 	
 	CommandDescription.Targets = New FixedArray(Targets);
 	

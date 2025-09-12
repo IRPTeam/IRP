@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="426b6364-3bae-4823-a458-3fe0861befe3">
+ <producedTypes>
+  <refType typeId="186ad940-b869-4ec1-90fd-836798239b07" valueTypeId="92854330-bd0f-47f5-83f0-3901ec4e00c6"/>
+  <listType typeId="9925fbe8-e4e4-4570-ba8c-aad951901598" valueTypeId="60decb82-0035-46cf-a450-8aa4c70410c2"/>
+  <managerType typeId="82ffb77a-6c64-47d7-94ce-e8cdfd61dd98" valueTypeId="1d6e247d-3d44-4b41-85bf-0bf8c2f3231e"/>
+ </producedTypes>
+ <name>AutostartProcessTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>52514AFE-65E5-0E58-8E55-5B9AC4791B5A</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="126db14e-bb9f-405d-9141-c499273956eb">
+  <name>NotUsed</name>
+  <synonym>
+   <key>en</key>
+   <value>3293A549-7517-8101-10BD-DB2CC676A547</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="8ac79398-1bdc-4210-a003-83956f6e25b9">
+  <name>WhenCreating</name>
+  <synonym>
+   <key>en</key>
+   <value>3E55EB92-301A-0692-2B64-43FBB5D58769</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="e210d340-249d-4e51-a45d-88f6f62a0366">
+  <name>WhenPosting</name>
+  <synonym>
+   <key>en</key>
+   <value>1FB464C6-EB27-3D66-6B85-5F4642504647</value>
+  </synonym>
+ </enumValues>
+</mdclass:Enum>

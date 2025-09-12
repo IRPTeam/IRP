@@ -296,8 +296,8 @@ Scenario: _0155265 create retail sales receipt based on retail sales order
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
 			| '#'   | 'Sales person'   | 'Price type'          | 'Item'    | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Serial lot numbers'   | 'Unit'   | 'Tax amount'   | 'Source of origins'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Additional analytic'   | 'Store'      | 'Detail'   | 'Sales order'                                 | 'Revenue type'    |
-			| '1'   | ''               | 'Basic Price Types'   | 'Dress'   | 'XS/Blue'    | ''                     | 'No'                   | ''                     | 'pcs'    | '158,64'       | ''                    | '2,000'      | '520,00'   | '18%'   | ''                | '881,36'       | '1 040,00'       | ''                      | 'Store 01'   | ''         | 'Sales order 314 dated 09.01.2023 12:49:08'   | ''                |
-			| '2'   | ''               | 'Basic Price Types'   | 'Boots'   | '37/18SD'    | ''                     | 'No'                   | ''                     | 'pcs'    | '213,56'       | ''                    | '2,000'      | '700,00'   | '18%'   | ''                | '1 186,44'     | '1 400,00'       | ''                      | 'Store 01'   | ''         | 'Sales order 314 dated 09.01.2023 12:49:08'   | ''                |
+			| '1'   | ''               | 'Basic Price Types'   | 'Dress'   | 'XS/Blue'    | 'Shop 01'              | 'No'                   | ''                     | 'pcs'    | '158,64'       | ''                    | '2,000'      | '520,00'   | '18%'   | ''                | '881,36'       | '1 040,00'       | ''                      | 'Store 01'   | ''         | 'Sales order 314 dated 09.01.2023 12:49:08'   | ''                |
+			| '2'   | ''               | 'Basic Price Types'   | 'Boots'   | '37/18SD'    | 'Shop 01'              | 'No'                   | ''                     | 'pcs'    | '213,56'       | ''                    | '2,000'      | '700,00'   | '18%'   | ''                | '1 186,44'     | '1 400,00'       | ''                      | 'Store 01'   | ''         | 'Sales order 314 dated 09.01.2023 12:49:08'   | ''                |
 		And "Payments" table became equal
 			| '#'   | 'Amount'     | 'Commission'   | 'Payment type'   | 'Payment terminal'   | 'Bank term'   | 'Account'   | 'Percent'    |
 			| '1'   | '1 010,00'   | ''             | 'Advance'        | ''                   | ''            | ''          | ''           |
@@ -807,7 +807,7 @@ Scenario: _0155272 create RSC - RGR - RSR transaction type (pickup), without ret
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
 			| '#'   | 'Price type'          | 'Item'                           | 'Sales person'   | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Serial lot numbers'   | 'Unit'   | 'Tax amount'   | 'Source of origins'   | 'Quantity'   | 'Price'   | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Additional analytic'   | 'Store'      | 'Detail'   | 'Sales order'   | 'Revenue type'    |
-			| '1'   | 'Basic Price Types'   | 'Product 7 with SLN (new row)'   | ''               | 'PZU'        | ''                     | 'No'                   | '9009099'              | 'pcs'    | ''             | ''                    | '1,000'      | ''        | '18%'   | ''                | ''             | ''               | ''                      | 'Store 02'   | ''         | ''              | ''                |
+			| '1'   | 'Basic Price Types'   | 'Product 7 with SLN (new row)'   | ''               | 'PZU'        | 'Shop 01'              | 'No'                   | '9009099'              | 'pcs'    | ''             | ''                    | '1,000'      | ''        | '18%'   | ''                | ''             | ''               | ''                      | 'Store 02'   | ''         | ''              | ''                |
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
@@ -828,9 +828,9 @@ Scenario: _0155273 select items from RSC in POS
 	* Select RSC with RGR based on RSO
 		And I click "Select basis document" button
 		And "SalesOrders" table became equal
-			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' | 'Description' |
-			| '317'    | '11.08.2023 15:50:42' | '3 183,00' | 'Daniel Smith'    | ''       | ''            |
-			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       | ''            |
+			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' |
+			| '317'    | '11.08.2023 15:50:42' | '3 183,00' | 'Daniel Smith'    | ''       |
+			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       |
 		And "RetailShipmentConfirmation" table became equal
 			| 'Number' | 'Date'                | 'Retail customer' | 'Courier' | 'Transaction type' | 'Branch' |
 			| '317'    | '11.08.2023 16:02:15' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
@@ -855,9 +855,9 @@ Scenario: _0155273 select items from RSC in POS
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
 		And "Payments" table became equal
-			| 'Payment done' | 'Payment type' | 'Amount' |
-			| ' '            | 'Advance'      | '20,00'  |
-			| ' '            | 'Cash'         | '674,00' |
+			| 'Payment done'| 'Payment type' | 'Amount' |
+			| ''            | 'Advance'      | '20,00'  |
+			| ''            | 'Cash'         | '674,00' |
 		And I click "OK" button
 		And I move to the next attribute
 	* Check RSR
@@ -866,8 +866,8 @@ Scenario: _0155273 select items from RSC in POS
 		And I select current line in "List" table
 		And "ItemList" table became equal
 			| '#' | 'Price type'              | 'Item'                         | 'Sales person'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order'                               | 'Revenue type' |
-			| '1' | 'Basic Price Types'       | 'Dress'                        | 'David Romanov' | 'XS/Blue'  | ''                   | 'No'                 | ''                   | 'pcs'  | '76,46'      | ''                  | '1,000'    | '520,00' | '18%' | '18,78'         | '424,76'     | '501,22'       | ''                    | 'Store 01' | ''       | 'Sales order 317 dated 11.08.2023 15:50:42' | ''             |
-			| '2' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'David Romanov' | 'PZU'      | ''                   | 'No'                 | '9009099'            | 'pcs'  | '29,41'      | ''                  | '1,000'    | '200,00' | '18%' | '7,22'          | '163,37'     | '192,78'       | ''                    | 'Store 01' | ''       | 'Sales order 317 dated 11.08.2023 15:50:42' | ''             |
+			| '1' | 'Basic Price Types'       | 'Dress'                        | 'David Romanov' | 'XS/Blue'  | 'Shop 01'            | 'No'                 | ''                   | 'pcs'  | '76,46'      | ''                  | '1,000'    | '520,00' | '18%' | '18,78'         | '424,76'     | '501,22'       | ''                    | 'Store 01' | ''       | 'Sales order 317 dated 11.08.2023 15:50:42' | ''             |
+			| '2' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'David Romanov' | 'PZU'      | 'Shop 01'            | 'No'                 | '9009099'            | 'pcs'  | '29,41'      | ''                  | '1,000'    | '200,00' | '18%' | '7,22'          | '163,37'     | '192,78'       | ''                    | 'Store 01' | ''       | 'Sales order 317 dated 11.08.2023 15:50:42' | ''             |
 	And I close all client application windows
 	
 
@@ -929,8 +929,8 @@ Scenario: _0155274 select items from RSO in POS
 		And I click "OK" button	
 		And I click "Select basis document" button
 		And "SalesOrders" table does not contain lines
-			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' | 'Description' |
-			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       | ''            |
+			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' |
+			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       |
 		And I close all client application windows
 		
 				
@@ -978,7 +978,7 @@ Scenario: _0155275 add items in POS	and link lines to basis document
 		And I select current line in "List" table
 		And "ItemList" table became equal
 			| '#' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order'                               | 'Revenue type' |
-			| '1' | 'Basic Price Types' | 'Boots' | '37/18SD'  | ''                   | 'No'                 | ''                   | 'pcs'  | '101,44'     | ''                  | '1,000'    | '700,00' | '18%' | '35,00'         | '563,56'     | '665,00'       | ''                    | 'Store 01' | ''       | 'Sales order 317 dated 11.08.2023 15:50:42' | ''             |
+			| '1' | 'Basic Price Types' | 'Boots' | '37/18SD'  | 'Shop 01'            | 'No'                 | ''                   | 'pcs'  | '101,44'     | ''                  | '1,000'    | '700,00' | '18%' | '35,00'         | '563,56'     | '665,00'       | ''                    | 'Store 01' | ''       | 'Sales order 317 dated 11.08.2023 15:50:42' | ''             |
 		And I close all client application windows
 		
 				
@@ -1064,8 +1064,8 @@ Scenario: _0155276 check links with different Branches for IM documents (RSO-RSC
 			And I move to "Item list" tab
 			And "ItemList" table became equal
 				| '#' | 'Retail sales receipt'                                 | 'Item'               | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Return reason' | 'Source of origins' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' | 'Landed cost tax' |
-				| '1' | 'Retail sales receipt 1 708 dated 09.04.2024 18:35:58' | 'Product 5 with SLN' | ''             | 'ODS'      | ''                   | 'No'                 | '15,25'      | '90808979899'        | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 02' | ''             | ''       | '18%' | ''              | ''            | ''                |
-				| '2' | 'Retail sales receipt 1 708 dated 09.04.2024 18:35:58' | 'Scarf'              | ''             | 'XS/Red'   | ''                   | 'No'                 | '10,68'      | ''                   | 'pcs'  | ''              | ''                  | '1,000'    | '70,00'  | '59,32'      | '70,00'        | ''                    | 'Store 02' | ''             | ''       | '18%' | ''              | ''            | ''                |
+				| '1' | 'Retail sales receipt 1 708 dated 09.04.2024 18:35:58' | 'Product 5 with SLN' | ''             | 'ODS'      | 'Shop 01'            | 'No'                 | '15,25'      | '90808979899'        | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 02' | ''             | ''       | '18%' | ''              | ''            | ''                |
+				| '2' | 'Retail sales receipt 1 708 dated 09.04.2024 18:35:58' | 'Scarf'              | ''             | 'XS/Red'   | 'Shop 01'            | 'No'                 | '10,68'      | ''                   | 'pcs'  | ''              | ''                  | '1,000'    | '70,00'  | '59,32'      | '70,00'        | ''                    | 'Store 02' | ''             | ''       | '18%' | ''              | ''            | ''                |
 			And in the table "ItemList" I click "Goods receipts" button
 			And Delay 2
 			And "DocumentsTree" table became equal
@@ -1105,8 +1105,8 @@ Scenario: _0155276 check links with different Branches for IM documents (RSO-RSC
 		* Check
 			And "ItemList" table became equal
 				| '#' | 'Retail sales receipt'                                 | 'Item'               | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Return reason' | 'Source of origins' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' | 'Landed cost tax' |
-				| '1' | 'Retail sales receipt 1 708 dated 09.04.2024 18:35:58' | 'Product 5 with SLN' | ''             | 'ODS'      | ''                   | 'No'                 | '15,25'      | '90808979899'        | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 02' | ''             | ''       | '18%' | ''              | ''            | ''                |
-				| '2' | 'Retail sales receipt 1 708 dated 09.04.2024 18:35:58' | 'Scarf'              | ''             | 'XS/Red'   | ''                   | 'No'                 | '10,68'      | ''                   | 'pcs'  | ''              | ''                  | '1,000'    | '70,00'  | '59,32'      | '70,00'        | ''                    | 'Store 02' | ''             | ''       | '18%' | ''              | ''            | ''                |
+				| '1' | 'Retail sales receipt 1 708 dated 09.04.2024 18:35:58' | 'Product 5 with SLN' | ''             | 'ODS'      | 'Shop 01'            | 'No'                 | '15,25'      | '90808979899'        | 'pcs'  | ''              | ''                  | '1,000'    | '100,00' | '84,75'      | '100,00'       | ''                    | 'Store 02' | ''             | ''       | '18%' | ''              | ''            | ''                |
+				| '2' | 'Retail sales receipt 1 708 dated 09.04.2024 18:35:58' | 'Scarf'              | ''             | 'XS/Red'   | 'Shop 01'            | 'No'                 | '10,68'      | ''                   | 'pcs'  | ''              | ''                  | '1,000'    | '70,00'  | '59,32'      | '70,00'        | ''                    | 'Store 02' | ''             | ''       | '18%' | ''              | ''            | ''                |
 			And in the table "ItemList" I click "Goods receipts" button
 			And Delay 2
 			And "DocumentsTree" table became equal

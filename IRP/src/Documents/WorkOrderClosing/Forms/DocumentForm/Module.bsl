@@ -15,6 +15,16 @@ Procedure OnReadAtServer(CurrentObject)
 	DocWorkOrderClosingServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 EndProcedure
 
+&AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
+EndProcedure
+
 #EndRegion
 
 #Region COMMANDS
@@ -107,3 +117,18 @@ Procedure DateOnChange(Item)
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	NumberingRulesServer.SetSourceNewNumber(Object);
+EndProcedure
+

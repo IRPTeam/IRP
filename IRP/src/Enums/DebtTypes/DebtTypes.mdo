@@ -40,4 +40,32 @@
    <value>33A800D4-AF91-605F-F06E-EB4EA767384A</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="1b82ec7b-9667-4f44-84c1-04e4614e7ded">
+  <name>OtherPartnerPayable</name>
+  <synonym>
+   <key>en</key>
+   <value>EDB790E3-39C4-18AF-FB71-10A43F82772F</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="e3aaa14e-335a-419c-86e0-05de150d440e">
+  <name>OtherPartnerReceivable</name>
+  <synonym>
+   <key>en</key>
+   <value>6D0DF0EB-9C6B-2A25-56C3-3CBF59BEE872</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="7483a393-cca8-4409-9298-2106c6645c19">
+  <name>EmployeePayable</name>
+  <synonym>
+   <key>en</key>
+   <value>1CFC1E5B-51EC-A830-01D7-7B340D3AEE6B</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="efa3a887-1dfe-43e5-b5ba-fcc03d05a598">
+  <name>EmployeeReceivable</name>
+  <synonym>
+   <key>en</key>
+   <value>C3A4D894-346D-1FFB-BC8C-CBC03E1E63D1</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -71,7 +71,7 @@ Function GetParametersEditAccounting(Object,
 			ElsIf RowExtDimensions.AnalyticType = PredefinedValue("Enum.AccountingAnalyticTypes.Credit") Then
 				NewAnalyticRow.CreditExtDimensions.Add(NewExtDimension);
 			Else
-				Raise "Analytic type is not defined";
+                    Raise R().AnalyticTypeNotDefined;
 			EndIf;
 		EndDo;
 		Parameters.AccountingAnalytics.Add(NewAnalyticRow);
@@ -90,7 +90,9 @@ Function GetDocumentMainTable(Doc) Export
 	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Doc, "Calculations") Then
 		MainTable = "Calculations";	
 	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Doc, "CostList") Then
-		MainTable = "CostList";				
+		MainTable = "CostList";	
+	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Doc, "Records") Then
+		MainTable = "Records";	
 	EndIf;
 	Return MainTable;
 EndFunction

@@ -33,4 +33,18 @@
    <value>43C2BD2A-6F86-FD91-1385-5F41D31AC473</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="9c13a8d0-a355-4fe0-9618-d7690dbe2760">
+  <name>CurrencyRevaluationCustomer</name>
+  <synonym>
+   <key>en</key>
+   <value>B33FB2F9-C03F-6E12-2DFD-D382E14B951B</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="dac34fb0-e697-40c8-a7ea-54d62d301f66">
+  <name>CurrencyRevaluationVendor</name>
+  <synonym>
+   <key>en</key>
+   <value>E4BDCD09-D09C-7234-47DD-D5FC30679338</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

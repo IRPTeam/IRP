@@ -199,6 +199,34 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
+ <resources uuid="c6bcb335-301e-4f3a-bbc2-50008f62ad47">
+  <name>PreliminaryAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>A66FE156-FE8C-4BCE-EA62-207F3D7C83B5</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="03680e12-7a1f-4f19-a3ab-5a2451a260c0">
+  <name>PreliminaryTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>475938BC-B6CB-03CA-AEA8-875F0FF58741</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
  <dimensions uuid="4c1a7f53-6465-4ad8-95f6-9e4872b1cfdf">
   <name>Company</name>
   <synonym>

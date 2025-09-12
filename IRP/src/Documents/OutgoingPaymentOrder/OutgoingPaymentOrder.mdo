@@ -60,7 +60,7 @@
   <objectField>Document.OutgoingPaymentOrder.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.OutgoingPaymentOrder.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.OutgoingPaymentOrder.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.OutgoingPaymentOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.OutgoingPaymentOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -83,6 +83,7 @@
  <defaultChoiceForm>Document.OutgoingPaymentOrder.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
@@ -282,16 +283,16 @@
    </choiceParameterLinks>
    <choiceParameterLinks>
     <name>Filter.LegalEntity</name>
-    <field>Document.OutgoingPaymentOrder.TabularSection.PaymentList.Attribute.Payee</field>
+    <field>Document.OutgoingPaymentOrder.TabularSection.PaymentList.Attribute.LegalName</field>
    </choiceParameterLinks>
    <createOnInput>Use</createOnInput>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="6a667dd2-72f0-4213-8913-8134ed024078">
-   <name>Payee</name>
+   <name>LegalName</name>
    <synonym>
     <key>en</key>
-    <value>25A02D65-1F3F-3D18-87E0-0F1E8A44FFFE</value>
+    <value>5F848A0B-0CC4-639C-C296-603F71C8923E</value>
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>

@@ -1,5 +1,5 @@
 
-Function CalculateDocumentAmount(ItemList) Export
+Function CalculateDocumentAmount(ItemList, ColumnName = "TotalAmount") Export
 	CancelColumnIsPresent = False;
 	If ItemList.Count() 
 		And CommonFunctionsClientServer.ObjectHasProperty(ItemList[0], "Cancel") Then
@@ -11,7 +11,7 @@ Function CalculateDocumentAmount(ItemList) Export
 		If CancelColumnIsPresent And Row.Cancel Then
 			Continue;
 		EndIf;
-		TotalAmount = TotalAmount + Row.TotalAmount;
+		TotalAmount = TotalAmount + Row[ColumnName];
 	EndDo;
 	Return TotalAmount;
 EndFunction

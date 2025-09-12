@@ -10,7 +10,11 @@
   <types>DefinedType.typeFilesOwner</types>
  </commandParameterType>
  <representation>Auto</representation>
+ <toolTip>
+  <key>en</key>
+  <value>8533C3C1-B7FD-F9B4-4680-0FA4B0FDD287</value>
+ </toolTip>
  <picture xsi:type="core:PictureRef">
-  <picture>StdPicture.Attach</picture>
+  <picture>CommonPicture.AttachFiles</picture>
  </picture>
 </mdclass:CommonCommand>

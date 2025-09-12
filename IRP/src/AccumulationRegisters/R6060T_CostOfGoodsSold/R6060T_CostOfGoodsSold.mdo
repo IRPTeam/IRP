@@ -225,6 +225,45 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </resources>
+ <resources uuid="eb9aeaff-e684-4121-8025-65c23cbc43da">
+  <name>PreliminaryQuantity</name>
+  <synonym>
+   <key>en</key>
+   <value>E3F37DA9-8670-3E6A-A824-44DCEDD481DA</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="c53abd51-de78-428a-ad59-c3776fe9493e">
+  <name>PreliminaryAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>B7950575-4AB8-DE64-4121-15B7F26839B8</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="b22614b2-e4a6-46df-954d-c7334c052801">
+  <name>PreliminaryTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>5A20A376-E60D-5676-6FED-D309E933D810</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
  <attributes uuid="8c8f1709-0dba-4082-93ce-434a813d07a5">
   <name>CalculationMovementCost</name>
   <synonym>
@@ -307,6 +346,34 @@
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="9b478231-9537-4c15-a728-2ed9ffc2587d">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>D1439D8E-B49D-6290-0E16-6ED9A7A4E77B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="5ed1afde-f92b-466a-b828-c3593c4bbed2">
+  <name>SourceOfOrigin</name>
+  <synonym>
+   <key>en</key>
+   <value>2CD48C04-2B97-5627-712F-FB7C3D950D8F</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SourceOfOrigins</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

@@ -53,6 +53,22 @@ EndProcedure
 
 #EndRegion
 
+#Region ACCOUNT
+Procedure AccountOnChange(Object, Form, Item) Export
+	ViewClient_V2.AccountOnChange(Object, Form, "ItemList");
+EndProcedure
+
+Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	CommonFormActions.AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, ArrayOfFilters);
+EndProcedure
+
+Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	CommonFormActions.AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
+EndProcedure
+#EndRegion
+
 #Region TRANSACTION_TYPE
 
 Procedure TransactionTypeOnChange(Object, Form, Item) Export
@@ -396,8 +412,8 @@ Procedure SetProcurementMethods(Object, Form, Command) Export
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
-	NotifyDescription = New NotifyDescription("PickupProcurementEnd", ThisObject, NotifyParameters);
-	OpenForm("Enum.ProcurementMethods.ChoiceForm", , Form, , , , NotifyDescription);
+	CallbackDescription = New CallbackDescription("PickupProcurementEnd", ThisObject, NotifyParameters);
+	OpenForm("Enum.ProcurementMethods.ChoiceForm", , Form, , , , CallbackDescription);
 EndProcedure
 
 Procedure PickupProcurementEnd(Result, AdditionalParameters) Export

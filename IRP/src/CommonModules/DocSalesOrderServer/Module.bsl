@@ -38,7 +38,8 @@ Procedure SetGroupItemsList(Object, Form)
 	
 	AttributesArray.Add("Partner");
 	AttributesArray.Add("LegalName");
-	AttributesArray.Add("Agreement");	
+	AttributesArray.Add("Agreement");
+	AttributesArray.Add("Account");	
 	
 	AttributesArray.Add("Status");
 	
@@ -50,6 +51,22 @@ Procedure SetGroupItemsList(Object, Form)
 		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,
 			Object.Ref.Metadata().Attributes[Attr].Synonym + ":" + Chars.NBSp));
 	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region ListFormEvents
+
+Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ChoiceFormEvents
+
+Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
+	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -99,18 +116,29 @@ Function CheckItemList(Object) Export
 	Return StrTemplate(R().Error_064, Stores);
 EndFunction
 
-#Region ListFormEvents
+Function CheckRelatedDocuments(SalesOrderRef, ShowWarning = False) Export
 
-Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
-	DocumentsServer.OnCreateAtServerListForm(Form, Cancel, StandardProcessing);
-EndProcedure
+	Query = New Query;
+	Query.Text =
+	"SELECT TOP 1
+	|	SalesOrderClosing.Ref
+	|FROM
+	|	Document.SalesOrderClosing AS SalesOrderClosing
+	|WHERE
+	|	SalesOrderClosing.SalesOrder = &SalesOrder
+	|	AND SalesOrderClosing.Posted";
+	
+	Query.SetParameter("SalesOrder", SalesOrderRef);
+	
+	QuerySelection = Query.Execute().Select();
+	
+	If QuerySelection.Next() Then
+		If ShowWarning Then
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Exc_013, QuerySelection.Ref));
+		EndIf;
+		Return True;
+	EndIf;
+	
+	Return False;
 
-#EndRegion
-
-#Region ChoiceFormEvents
-
-Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
-	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
-EndProcedure
-
-#EndRegion
+EndFunction

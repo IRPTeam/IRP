@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Inventory
@@ -167,6 +167,7 @@ Scenario: _029507 create Bundling ( Store use Shipment confirmation and Goods re
 Scenario: _029508 check the automatic creation of an additional specification for the created Bundle
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.Specifications"
+	And I go to the last line in "List" table
 	And I go to line in "List" table
 		| 'Description'     | 'Type'     |
 		| 'Dress+Trousers'  | 'Bundle'   |

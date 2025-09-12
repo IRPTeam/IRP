@@ -133,7 +133,7 @@
   <key>en</key>
   <value>1E02FB48-68D0-E907-750B-B4E0FDF5D4C5</value>
  </objectPresentation>
- <hierarchyType>HierarchyOfItems</hierarchyType>
+ <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -144,8 +144,10 @@
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.EmployeePositions.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.EmployeePositions.Form.GroupForm</defaultFolderForm>
  <defaultListForm>Catalog.EmployeePositions.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.EmployeePositions.Form.ChoiceForm</defaultChoiceForm>
+ <defaultFolderChoiceForm>Catalog.EmployeePositions.Form.GroupChoiceForm</defaultFolderChoiceForm>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  <tabularSections uuid="1eb37768-60b9-4946-a879-6637d1cbd54e">
   <producedTypes>
@@ -213,6 +215,24 @@
   <synonym>
    <key>en</key>
    <value>3169721A-EE2E-F7C7-7C0E-E539EC5D0B19</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="176ccdbe-cd91-4c01-8d01-d3f0800bc808">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>63FD42D0-117F-8BA6-67A0-09388276BE90</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="7c568430-565a-4463-9e3e-e0e918449334">
+  <name>GroupChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>61B3E3AA-72E1-2BE6-6677-7C3AD23445F8</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

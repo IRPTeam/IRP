@@ -186,7 +186,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
 		"Document.DecommissioningOfFixedAsset.ItemList");
 
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
 		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
@@ -195,7 +195,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	EndIf;
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.DecommissioningOfFixedAsset.ItemList", AddInfo);
 EndProcedure
 
@@ -233,6 +233,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
+	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
@@ -311,6 +312,7 @@ Function SourceOfOrigins()
 		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
 		|	END AS SourceOfOrigin,
 		|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
 		|	SUM(SourceOfOrigins.Quantity) AS Quantity
 		|INTO SourceOfOrigins
 		|FROM
@@ -329,7 +331,8 @@ Function SourceOfOrigins()
 		|			THEN SourceOfOrigins.SourceOfOrigin
 		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
 		|	END,
-		|	SourceOfOrigins.SourceOfOrigin";
+		|	SourceOfOrigins.SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumber";
 EndFunction
 
 #EndRegion
@@ -373,6 +376,11 @@ Function R4010B_ActualStocks()
 		|			THEN SerialLotNumbers.SerialLotNumber
 		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
 		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOriginStock
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
 		|	SUM(CASE
 		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
 		|			THEN ItemList.Quantity
@@ -383,6 +391,9 @@ Function R4010B_ActualStocks()
 		|	ItemList AS ItemList
 		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
 		|		ON ItemList.Key = SerialLotNumbers.Key
+		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON ItemList.Key = SourceOfOrigins.Key
+		|		AND ISNULL(SerialLotNumbers.SerialLotNumber,Value(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
 		|WHERE
 		|	TRUE
 		|GROUP BY
@@ -391,10 +402,16 @@ Function R4010B_ActualStocks()
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOriginStock.StockBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOriginStock
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END,
+		|	CASE
 		|		WHEN SerialLotNumbers.StockBalanceDetail
 		|			THEN SerialLotNumbers.SerialLotNumber
 		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		|	END";
+		|	END,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 Function R4050B_StockInventory()
@@ -442,6 +459,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.ItemKey,
 		|	ItemList.Store,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
 		|	ItemList.Company.LandedCostCurrencyMovementType.Currency AS Currency,
 		|	ItemList.Quantity AS TotalQuantity,
@@ -461,6 +479,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.Store,
 		|	BatchKeysInfo_1.Company,
+		|	BatchKeysInfo_1.Branch,
 		|	BatchKeysInfo_1.CurrencyMovementType,
 		|	BatchKeysInfo_1.Currency,
 		|	SUM(CASE
@@ -486,6 +505,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.Store,
 		|	BatchKeysInfo_1.Company,
+		|	BatchKeysInfo_1.Branch,
 		|	BatchKeysInfo_1.CurrencyMovementType,
 		|	BatchKeysInfo_1.Currency,
 		|	BatchKeysInfo_1.Period,
@@ -499,6 +519,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.Store,
 		|	BatchKeysInfo_1.Company,
+		|	BatchKeysInfo_1.Branch,
 		|	BatchKeysInfo_1.CurrencyMovementType,
 		|	BatchKeysInfo_1.Currency,
 		|	BatchKeysInfo_1.Quantity,
@@ -650,14 +671,32 @@ Function GetAnalytics_StockInventory_BookValue(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
 #EndRegion
+
+#EndRegion
+
+#Region SystemAttributes
+
+Function GetPredefinedSystemAttributes() Export
+	SystemAttributes = New Array(); // Array of ChartOfCharacteristicTypesRef.SystemAttributes
+	SystemAttributes.Add(ChartsOfCharacteristicTypes.SystemAttributes.Store);
+	Return SystemAttributes;
+EndFunction
+
+Function GetSystemAttributeValues(Obj, SystemAttribute) Export
+	Values = New Array();
+	If SystemAttribute = ChartsOfCharacteristicTypes.SystemAttributes.Store Then
+		Values = Obj.ItemList.Unload(, "Store").UnloadColumn("Store");
+	EndIf;
+	Return Values;
+EndFunction
 
 #EndRegion

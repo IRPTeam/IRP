@@ -3,12 +3,29 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
-	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.PaymentList);
-	For Each Row In ThisObject.PaymentList Do
-		Parameters = CurrenciesClientServer.GetParameters_V8(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		
+		CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.PaymentList);
+		LocalTotalAmounts = New Structure("LocalTotalAmount, LocalNetAmount, LocalTaxAmount, LocalRate", 0, 0, 0, 0);
+		AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();
+		For Each Row In ThisObject.PaymentList Do
+			Parameters = CurrenciesClientServer.GetParameters_V8(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+			
+			AmountsInfo.TotalAmount.Value = Row.TotalAmount;
+			AmountsInfo.NetAmount.Value   = Row.NetAmount;
+			AmountsInfo.TaxAmount.Value   = Row.TaxAmount;
+			TotalAounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+			LocalTotalAmounts.LocalTotalAmount = LocalTotalAmounts.LocalTotalAmount + TotalAounts.LocalTotalAmount;
+			LocalTotalAmounts.LocalNetAmount   = LocalTotalAmounts.LocalNetAmount   + TotalAounts.LocalNetAmount;
+			LocalTotalAmounts.LocalTaxAmount   = LocalTotalAmounts.LocalTaxAmount   + TotalAounts.LocalTaxAmount;
+			LocalTotalAmounts.LocalRate        = TotalAounts.LocalRate;
+			CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, LocalTotalAmounts, AmountsInfo);		
+		EndDo;
+	
+	EndIf;
+	
 	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("TotalAmount");
 EndProcedure

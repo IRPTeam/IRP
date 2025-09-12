@@ -380,7 +380,7 @@ Procedure SetCondition(TableName, ColumnName)
 	NotifyParameters.Insert("CurrentData" , CurrentData[ColumnName]);
 	
 	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
-		Notify = New NotifyDescription("SetConditionNotify", ThisObject, NotifyParameters);
+		Notify = New CallbackDescription("SetConditionNotify", ThisObject, NotifyParameters);
 		ShowQueryBox(Notify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 	Else
 		SetConditionNotify(DialogReturnCode.Yes, NotifyParameters);
@@ -390,7 +390,7 @@ EndProcedure
 &AtClient
 Procedure SetConditionNotify(Result, AdditionalParameters) Export
 	If Result = DialogReturnCode.Yes And Write() Then
-		Notify = New NotifyDescription("OnFinishEditFilter", ThisObject, AdditionalParameters);
+		Notify = New CallbackDescription("OnFinishEditFilter", ThisObject, AdditionalParameters);
 		OpeningParameters = New Structure();
 		OpeningParameters.Insert("SavedSettings", GetSettings(AdditionalParameters));
 		OpeningParameters.Insert("Ref", Object.Ref);
@@ -501,7 +501,12 @@ EndProcedure
 
 &AtServer
 Procedure FillExtensionAttributesListAtServer()
-	MetadataName = StrReplace(Object.PredefinedDataName, "_", ".");
+	Segments = StrSplit(Object.PredefinedDataName, "_");
+	If Segments.Count() = 2 Then
+		MetadataName = StrReplace(Object.PredefinedDataName, "_", ".");
+	Else
+		MetadataName = Segments[0]+"."+Segments[1]+"_"+Segments[2];
+	EndIf;
 	ObjectMetadata = Metadata.FindByFullName(MetadataName);
 	For Each Attribute In ObjectMetadata.Attributes Do
 		If Not StrFind(Attribute.Name, "_") Then

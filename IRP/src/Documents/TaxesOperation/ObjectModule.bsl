@@ -4,10 +4,14 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 	
-	Parameters = CurrenciesClientServer.GetParameters_V13(ThisObject);
-	Parameters.Insert("DocObject", ThisObject);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		
+		Parameters = CurrenciesClientServer.GetParameters_V13(ThisObject);
+		Parameters.Insert("DocObject", ThisObject);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+
+	EndIf;
 	
 	Result = DocTaxesOperationServer.CalculateTaxDifference(ThisObject);
 	ThisObject.TaxesDifference.Clear();

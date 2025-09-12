@@ -568,7 +568,7 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Select store
 		And I click Select button of "Store" field
@@ -608,7 +608,7 @@ Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I select "Approved" exact value from "Status" drop-down list
 	And I move to "Item list" tab
@@ -637,6 +637,72 @@ Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001
 	And I click the button named "FormPostAndClose"
 	And I close current window
 
+Scenario: Create document PurchaseInvoice objects (Other)
+	// Catalog.RowIDs
+
+	And I check or create catalog "RowIDs" objects:
+		| 'Ref'                                                            | 'DeletionMark' | 'Description'                          | 'AgreementPurchases'                                                 | 'AgreementSales' | 'Basis'                                                                    | 'Branch' | 'BranchReturn' | 'Company'                                                           | 'CompanyReturn' | 'CurrencyPurchases'                                                  | 'CurrencySales' | 'Hash'                                 | 'ItemKey'                                                          | 'LegalNamePurchases'                                                | 'LegalNameSales' | 'PartnerPurchases'                                                 | 'PartnerSales' | 'PriceIncludeTaxPurchases' | 'PriceIncludeTaxSales' | 'ProcurementMethod' | 'Requester' | 'RowID'                                | 'Store'                                                          | 'StoreReturn' | 'StoreReceiver' | 'StoreSender' | 'TransactionType' | 'TransactionTypeGR'                          | 'TransactionTypeSC' | 'TransactionTypeSales' | 'TransactionTypePurchases'               | 'TransactionTypeSR' | 'TransactionTypePR'                                  | 'Unit'                                                          | 'RetailCustomer' | 'TransactionTypeGRReturn' | 'TransactionTypeSCReturn'                                  | 'TransactionTypeRSC' | 'TransactionTypeRGR' | 'StoreSales' | 'StorePurchases' | 'Item'                                                          | 'IsVariableItemKey' | 'IsFixedItemKey' | 'IsVariableStore' | 'IsFixedStore' | 'NotActive' |
+		| 'e1cib/data/Catalog.RowIDs?ref=b85cf83b00f96e9211f041387a2b5139' | 'False'        | '10acfb80-074a-4da7-b0ad-72a22bbf9819' | 'e1cib/data/Catalog.Agreements?ref=b79ea93fec1998ed11ee09140139bba5' | ''               | 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | ''       | ''             | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''              | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | ''              | '38B2B1BB-A64A-2CEF-F9BB-BBEC797A9F44' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf11c9f09fc9f' | 'e1cib/data/Catalog.Companies?ref=b79ea93fec1998ed11ee09140139bba4' | ''               | 'e1cib/data/Catalog.Partners?ref=b79ea93fec1998ed11ee09140139bba3' | ''             | 'False'                    | 'False'                | ''                  | ''          | '10acfb80-074a-4da7-b0ad-72a22bbf9819' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | ''            | ''              | ''            | ''                | 'Enum.GoodsReceiptTransactionTypes.Purchase' | ''                  | ''                     | 'Enum.PurchaseTransactionTypes.Purchase' | ''                  | 'Enum.PurchaseReturnTransactionTypes.ReturnToVendor' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''               | ''                        | 'Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor' | ''                   | ''                   | ''           | ''               | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f4' | 'False'             | 'False'          | 'False'           | 'False'        | 'False'     |
+
+	// Document.PurchaseInvoice
+
+	And I check or create document "PurchaseInvoice" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Agreement'                                                          | 'Company'                                                           | 'Currency'                                                           | 'DocDate'            | 'DocNumber' | 'LegalName'                                                         | 'Partner'                                                          | 'PriceIncludeTax' | 'LegalNameContract' | 'TransactionType'                        | 'RecordPurchasePrices' | 'StoreDistributedPurchase' | 'CurrencyRevaluationInvoice' | 'Author'                                                        | 'Branch' | 'Comment' | 'CreateDate'          | 'DocumentAmount' | 'DocumentNumber' | 'Editor'                                                        | 'LocalNetAmount' | 'LocalRate' | 'LocalTaxAmount' | 'LocalTotalAmount' | 'ManualMovementsEdit' | 'ModifyDate'          | 'NumeratorRules' | 'SourceNodeID' | 'UniqueID' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | 'False'        | 40       | '04.06.2025 14:45:12' | 'True'   | 'e1cib/data/Catalog.Agreements?ref=b79ea93fec1998ed11ee09140139bba5' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '01.01.0001 0:00:00' | ''          | 'e1cib/data/Catalog.Companies?ref=b79ea93fec1998ed11ee09140139bba4' | 'e1cib/data/Catalog.Partners?ref=b79ea93fec1998ed11ee09140139bba3' | 'False'           | ''                  | 'Enum.PurchaseTransactionTypes.Purchase' | 'False'                | 'False'                    | ''                           | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''        | '04.06.2025 14:45:12' | 354              | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 300              | 1           | 54               | 354                | 'False'               | '04.06.2025 14:45:13' | ''               | ''             | ''         |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                      | 'Key'                                  | 'Item'                                                          | 'ItemKey'                                                          | 'Store'                                                          | 'PurchaseOrder' | 'Unit'                                                          | 'Quantity' | 'Price' | 'PriceType'                                             | 'TaxAmount' | 'TotalAmount' | 'NetAmount' | 'OffersAmount' | 'ProfitLossCenter' | 'ExpenseType' | 'DeliveryDate'       | 'SalesOrder' | 'Detail' | 'AdditionalAnalytic' | 'DontCalculateRow' | 'QuantityInBaseUnit' | 'UseGoodsReceipt' | 'InternalSupplyRequest' | 'DELETE_IsAdditionalItemCost' | 'OtherPeriodExpenseType' | 'UseSerialLotNumber' | 'IsService' | 'QuantityIsFixed' | 'VatRate'                                                          | 'Project' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | '10acfb80-074a-4da7-b0ad-72a22bbf9819' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f4' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf11c9f09fc9f' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | ''              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 10         | 30      | 'e1cib/data/Catalog.PriceTypes?refName=ManualPriceType' | 54          | 354           | 300         |                | ''                 | ''            | '01.01.0001 0:00:00' | ''           | ''       | ''                   | 'False'            | 10                   | 'False'           | ''                      | 'False'                       | ''                       | 'False'              | 'False'     | 'False'           | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' | ''        |
+
+	And I refill object tabular section "Currencies":
+		| 'Ref'                                                                      | 'Key'                                  | 'CurrencyFrom'                                                       | 'Rate' | 'ReverseRate' | 'ShowReverseRate' | 'Multiplicity' | 'MovementType'                                                                                    | 'Amount' | 'IsFixed' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 1      | 1             | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 354      | 'False'   |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 1      | 1             | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d' | 354      | 'False'   |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 0.1712 | 5.841121      | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' | 60.6     | 'False'   |
+
+	And I refill object tabular section "RowIDInfo":
+		| 'Ref'                                                                      | 'Key'                                  | 'RowID'                                | 'Quantity' | 'Basis' | 'CurrentStep' | 'NextStep' | 'RowRef'                                                         | 'BasisKey'                             |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | '10acfb80-074a-4da7-b0ad-72a22bbf9819' | '10acfb80-074a-4da7-b0ad-72a22bbf9819' | 10         | ''      | ''            | ''         | 'e1cib/data/Catalog.RowIDs?ref=b85cf83b00f96e9211f041387a2b5139' | '                                    ' |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85cf83b00f96e9211f041387a2b513a' | '10acfb80-074a-4da7-b0ad-72a22bbf9819' | ''                | ''               | 10         |
+
+
+Scenario: Create document PurchaseInvoice objects (contract currency differs from the invoice currency)
+	// Catalog.RowIDs
+
+	And I check or create catalog "RowIDs" objects:
+		| 'Ref'                                                            | 'DeletionMark' | 'Description'                          | 'AgreementPurchases'                                                 | 'AgreementSales' | 'Basis'                                                                    | 'Branch' | 'BranchReturn' | 'Company'                                                           | 'CompanyReturn' | 'CurrencyPurchases'                                                  | 'CurrencySales' | 'Hash'                                 | 'ItemKey'                                                          | 'LegalNamePurchases'                                                | 'LegalNameSales' | 'PartnerPurchases'                                                 | 'PartnerSales' | 'PriceIncludeTaxPurchases' | 'PriceIncludeTaxSales' | 'ProcurementMethod' | 'Requester' | 'RowID'                                | 'Store'                                                          | 'StoreReturn' | 'StoreReceiver' | 'StoreSender' | 'TransactionType' | 'TransactionTypeGR'                          | 'TransactionTypeSC' | 'TransactionTypeSales' | 'TransactionTypePurchases'               | 'TransactionTypeSR' | 'TransactionTypePR'                                  | 'Unit'                                                          | 'RetailCustomer' | 'TransactionTypeGRReturn' | 'TransactionTypeSCReturn'                                  | 'TransactionTypeRSC' | 'TransactionTypeRGR' | 'StoreSales' | 'StorePurchases' | 'Item'                                                          | 'IsVariableItemKey' | 'IsFixedItemKey' | 'IsVariableStore' | 'IsFixedStore' | 'NotActive' |
+		| 'e1cib/data/Catalog.RowIDs?ref=b85de730704fc69511f046e984b51db6' | 'False'        | '8ef58f62-35f6-44f7-8a1e-c8bed4a4e37c' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb77' | ''               | 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | ''       | ''             | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''              | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | ''              | 'E8694267-02B3-09CD-DBAA-AA08D20A4812' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c600' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | ''               | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | ''             | 'True'                     | 'False'                | ''                  | ''          | '8ef58f62-35f6-44f7-8a1e-c8bed4a4e37c' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | ''            | ''              | ''            | ''                | 'Enum.GoodsReceiptTransactionTypes.Purchase' | ''                  | ''                     | 'Enum.PurchaseTransactionTypes.Purchase' | ''                  | 'Enum.PurchaseReturnTransactionTypes.ReturnToVendor' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''               | ''                        | 'Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor' | ''                   | ''                   | ''           | ''               | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f4' | 'False'             | 'False'          | 'False'           | 'False'        | 'False'     |
+		| 'e1cib/data/Catalog.RowIDs?ref=b85de730704fc69511f046e984b51db7' | 'False'        | '401df558-9dd2-4f01-ab96-237cf0977cf5' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb77' | ''               | 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | ''       | ''             | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''              | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | ''              | 'CACEC3C6-D145-D898-861B-B8C087BDF518' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c604' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | ''               | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | ''             | 'True'                     | 'False'                | ''                  | ''          | '401df558-9dd2-4f01-ab96-237cf0977cf5' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | ''            | ''              | ''            | ''                | 'Enum.GoodsReceiptTransactionTypes.Purchase' | ''                  | ''                     | 'Enum.PurchaseTransactionTypes.Purchase' | ''                  | 'Enum.PurchaseReturnTransactionTypes.ReturnToVendor' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''               | ''                        | 'Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor' | ''                   | ''                   | ''           | ''               | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6' | 'False'             | 'False'          | 'False'           | 'False'        | 'False'     |
+
+	// Document.PurchaseInvoice
+
+	And I check or create document "PurchaseInvoice" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Agreement'                                                          | 'Company'                                                           | 'Currency'                                                           | 'DocDate'            | 'DocNumber' | 'LegalName'                                                         | 'Partner'                                                          | 'PriceIncludeTax' | 'LegalNameContract' | 'TransactionType'                        | 'RecordPurchasePrices' | 'StoreDistributedPurchase' | 'CurrencyRevaluationInvoice' | 'Author'                                                        | 'Branch' | 'Comment' | 'CreateDate'          | 'DocumentAmount' | 'DocumentNumber' | 'Editor'                                                        | 'LocalNetAmount' | 'LocalRate' | 'LocalTaxAmount' | 'LocalTotalAmount' | 'ManualMovementsEdit' | 'ModifyDate'          | 'NumeratorRules' | 'SourceNodeID' | 'UniqueID' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | 'False'        | 222      | '11.06.2025 12:12:12' | 'True'   | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb77' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | '01.01.0001 0:00:00' | ''          | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'True'            | ''                  | 'Enum.PurchaseTransactionTypes.Purchase' | 'True'                 | 'False'                    | ''                           | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''        | '11.06.2025 20:28:49' | 160              | ''               | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 763.09           | 5.6275      | 137.31           | 900.4              | 'False'               | '11.06.2025 20:28:51' | ''               | ''             | ''         |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                      | 'Key'                                  | 'Item'                                                          | 'ItemKey'                                                          | 'Store'                                                          | 'PurchaseOrder' | 'Unit'                                                          | 'Quantity' | 'Price' | 'PriceType'                                             | 'TaxAmount' | 'TotalAmount' | 'NetAmount' | 'OffersAmount' | 'ProfitLossCenter' | 'ExpenseType' | 'DeliveryDate'       | 'SalesOrder' | 'Detail' | 'AdditionalAnalytic' | 'DontCalculateRow' | 'QuantityInBaseUnit' | 'UseGoodsReceipt' | 'InternalSupplyRequest' | 'DELETE_IsAdditionalItemCost' | 'OtherPeriodExpenseType' | 'UseSerialLotNumber' | 'IsService' | 'QuantityIsFixed' | 'VatRate'                                                          | 'Project' | 'SimpleBatch' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '8ef58f62-35f6-44f7-8a1e-c8bed4a4e37c' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f4' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c600' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | ''              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 2          | 40      | 'e1cib/data/Catalog.PriceTypes?refName=ManualPriceType' | 12.2        | 80            | 67.8        |                | ''                 | ''            | '01.01.0001 0:00:00' | ''           | ''       | ''                   | 'False'            | 2                    | 'True'            | ''                      | 'False'                       | ''                       | 'False'              | 'False'     | 'False'           | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' | ''        | ''            |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '401df558-9dd2-4f01-ab96-237cf0977cf5' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c604' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | ''              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 4          | 20      | 'e1cib/data/Catalog.PriceTypes?refName=ManualPriceType' | 12.2        | 80            | 67.8        |                | ''                 | ''            | '01.01.0001 0:00:00' | ''           | ''       | ''                   | 'False'            | 4                    | 'True'            | ''                      | 'False'                       | ''                       | 'False'              | 'False'     | 'False'           | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' | ''        | ''            |
+
+	And I refill object tabular section "Currencies":
+		| 'Ref'                                                                      | 'Key'                                  | 'CurrencyFrom'                                                       | 'Rate' | 'ReverseRate' | 'ShowReverseRate' | 'Multiplicity' | 'MovementType'                                                                                    | 'Amount' | 'IsFixed' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | 5.6275 | 0.177699      | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 900.4    | 'False'   |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | 5.6275 | 0.177699      | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d' | 900.4    | 'False'   |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | 1      | 1             | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' | 160      | 'False'   |
+
+	And I refill object tabular section "RowIDInfo":
+		| 'Ref'                                                                      | 'Key'                                  | 'RowID'                                | 'Quantity' | 'Basis' | 'CurrentStep' | 'NextStep'                                    | 'RowRef'                                                         | 'BasisKey'                             |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '8ef58f62-35f6-44f7-8a1e-c8bed4a4e37c' | '8ef58f62-35f6-44f7-8a1e-c8bed4a4e37c' | 2          | ''      | ''            | 'e1cib/data/Catalog.MovementRules?refName=GR' | 'e1cib/data/Catalog.RowIDs?ref=b85de730704fc69511f046e984b51db6' | '                                    ' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '401df558-9dd2-4f01-ab96-237cf0977cf5' | '401df558-9dd2-4f01-ab96-237cf0977cf5' | 4          | ''      | ''            | 'e1cib/data/Catalog.MovementRules?refName=GR' | 'e1cib/data/Catalog.RowIDs?ref=b85de730704fc69511f046e984b51db7' | '                                    ' |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber' | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '8ef58f62-35f6-44f7-8a1e-c8bed4a4e37c' | ''                | ''               | 2          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b85de730704fc69511f046e984b51db8' | '401df558-9dd2-4f01-ab96-237cf0977cf5' | ''                | ''               | 4          |
 
 
 Scenario: create InventoryTransferOrder020001
@@ -1108,7 +1174,7 @@ Scenario: create SalesReturnOrder028004
 			Then the form attribute named "Partner" became equal to "Ferron BP"
 			Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 			Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-			Then the form attribute named "Description" became equal to "Click to enter description"
+			Then the form attribute named "Comment" became equal to "Click to enter comment"
 			Then the form attribute named "Company" became equal to "Main Company"
 		And I click Select button of "Store" field
 		And I go to line in "List" table
@@ -1302,7 +1368,7 @@ Scenario: create InventoryTransfer021030
 Scenario: Create document PriceList objects (works)
 
 	And I check or create document "PriceList" objects:
-		| 'Ref'                                                                 | 'DeletionMark'  | 'Number'  | 'Date'                 | 'Posted'  | 'ItemType'  | 'PriceListType'                     | 'PriceType'                                                           | 'Author'                                                         | 'Branch'  | 'Description'   |
+		| 'Ref'                                                                 | 'DeletionMark'  | 'Number'  | 'Date'                 | 'Posted'  | 'ItemType'  | 'PriceListType'                     | 'PriceType'                                                           | 'Author'                                                         | 'Branch'  | 'Comment'   |
 		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c'  | 'False'         | 21        | '25.09.2022 17:18:39'  | 'False'   | ''          | 'Enum.PriceListTypes.PriceByItems'  | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe'  | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0'  | ''        | ''              |
 		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d'  | 'False'         | 22        | '25.09.2022 17:19:14'  | 'False'   | ''          | 'Enum.PriceListTypes.PriceByItems'  | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef002'  | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0'  | ''        | ''              |
 
@@ -1514,12 +1580,160 @@ Scenario: set True value to the constant
 			| 'Option'            | 'Use' |
 			| 'Use object access' | 'Yes' |
 		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                                  | 'Use' |
+			| 'Use shipment and receipt planing orders' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'           | 'Use' |
+			| 'Use simple batch' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
 	* Disable LinkedRowsIntegrity
 		And I execute 1C:Enterprise script at server
 			| "Constants.DisableLinkedRowsIntegrity.Set(True);"     |
+	* Fill default settings for system attributes
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.SystemAttributes"	
+		And I click "Fill default descriptions" button
+		Given I open hyperlink "e1cib/list/Catalog.SystemAttributesSets"	
+		And I click "Fill by default" button
 
+Scenario: set True value to the constant (DemoDB)
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		And I click "Check all" button
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                       | 'Use'    |
+			| 'Use lock data modification'   | 'Yes'    |
+		And I activate "Use" field in "FunctionalOptions" table
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                          | 'Use'    |
+			| 'Use consolidated retail sales'   | 'Yes'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                                 | 'Use'    |
+			| 'Use job queue for external functions'   | 'Yes'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'               | 'Use'    |
+			| 'Use all functional'   | 'Yes'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'           | 'Use'    |
+			| 'Use accounting'   | 'Yes'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                   | 'Use'    |
+			| 'Use commission trading'   | 'Yes'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                                | 'Use' |
+			| 'Use additional table control document' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'          | 'Use' |
+			| 'Use simple mode' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'            | 'Use' |
+			| 'Use object access' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                                  | 'Use' |
+			| 'Use shipment and receipt planing orders' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'          | 'Use' |
+			| 'Use preliminary' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'          | 'Use' |
+			| 'Use work orders' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                  | 'Use' |
+			| 'Use price by properties' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                          | 'Use' |
+			| 'Use planned receipt reservation' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        | 'Use' |
+			| 'Use Incidents' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                 | 'Use' |
+			| 'Use accounting service' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'           | 'Use' |
+			| 'Use cheque bonds' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'      | 'Use' |
+			| 'Use eLedger' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'            | 'Use' |
+			| 'Use delivery date' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'            | 'Use' |
+			| 'Use manufacturing' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'           | 'Use' |
+			| 'Use fixed assets' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'           | 'Use' |
+			| 'Use simple batch' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'            | 'Use' |
+			| 'Use partner items' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'       | 'Use' |
+			| 'Use bundling' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+	* Disable LinkedRowsIntegrity
+		And I execute 1C:Enterprise script at server
+			| "Constants.DisableLinkedRowsIntegrity.Set(True);"     |
+	* Fill default settings for system attributes
+		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.SystemAttributes"	
+		And I click "Fill default descriptions" button
+		Given I open hyperlink "e1cib/list/Catalog.SystemAttributesSets"	
+		And I click "Fill by default" button
 		
 		
 Scenario: set True value to the constant Use salary
@@ -1532,6 +1746,38 @@ Scenario: set True value to the constant Use salary
 		And I click "Save" button
 		And I close current window	
 
+Scenario: set True value to the constant Use simple batch
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        |
+			| 'Use simple batch'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window	
+
+
+
+Scenario: set True value to the constant Use shipment and receipt planing orders
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        |
+			| 'Use shipment and receipt planing orders'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+
+Scenario: set False value to the constant Use shipment and receipt planing orders
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        |
+			| 'Use fixed assets'    |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+
 Scenario: set True value to the constant Use fixed assets
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
@@ -1541,6 +1787,7 @@ Scenario: set True value to the constant Use fixed assets
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window	
+
 
 Scenario: set True value to the constant Use additional table control document
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
@@ -1559,6 +1806,16 @@ Scenario: set True value to the constant Use consolidated retail sales
 		And I go to line in "FunctionalOptions" table
 			| 'Option'                           |
 			| 'Use consolidated retail sales'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+
+Scenario: set True value to the constant Use manufacturing
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'            |
+			| 'Use manufacturing' |
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
@@ -1644,9 +1901,23 @@ Scenario: set True value to the constant Use lock data modification
 		And I click "Save" button
 		And I close current window	
 
+Scenario: set True value to the constant Use numbering rules
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                        |
+			| 'Use numbering rules'    |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+
 Scenario: set False value to the constant DisableLinkedRowsIntegrity
 		And I execute 1C:Enterprise script at server
 				| "Constants.DisableLinkedRowsIntegrity.Set(False);"     |
+
+Scenario: set True value to the constant DisableLinkedRowsIntegrity
+		And I execute 1C:Enterprise script at server
+				| "Constants.DisableLinkedRowsIntegrity.Set(True);"     |
 
 Scenario: set True value to the constant SaasMode
 		And I execute 1C:Enterprise script at server
@@ -2055,10 +2326,10 @@ Scenario: check filter by transaction type in CR/BR
 		And I select current line in "List" table
 		And I select "Payment from customer" exact value from the drop-down list named "TransactionType"		
 	* Check filter for partner term (transaction type)
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term'     |
+			| 'Partner' | 'Legal name'  | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 		And I select current line in "PaymentList" table
 		And I click choice button of the attribute named "PaymentListAgreement" in "PaymentList" table
@@ -2073,26 +2344,26 @@ Scenario: check filter by transaction type in CR/BR
 		And I select "Return from vendor" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term'            |
+			| 'Partner' | 'Legal name'  | 'Partner term'            |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 	* Add second line and check partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term'            |
+			| 'Partner' | 'Legal name'  | 'Partner term'            |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 	* Select transaction type Other partner
 		And I select "Other partner" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term' |
+			| 'Partner' | 'Legal name'  | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term' |
+			| 'Partner' | 'Legal name'  | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
@@ -2105,10 +2376,10 @@ Scenario: check filter by transaction type in CP/BP
 		And I select current line in "List" table
 		And I select "Payment to the vendor" exact value from the drop-down list named "TransactionType"		
 	* Check filter for partner term (transaction type)
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term'            |
+			| 'Partner' | 'Legal name'  | 'Partner term'            |
 			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
 		And I select current line in "PaymentList" table
 		And I click choice button of the attribute named "PaymentListAgreement" in "PaymentList" table
@@ -2123,26 +2394,39 @@ Scenario: check filter by transaction type in CP/BP
 		And I select "Return to customer" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term'     |
+			| 'Partner' | 'Legal name'  | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 	* Add second line and check partner term
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term'     |
+			| 'Partner' | 'Legal name'  | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 	* Select transaction type Other partner
 		And I select "Other partner" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term' |
+			| 'Partner' | 'Legal name'  | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click the button named "PaymentListAdd"
 		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payee'       | 'Partner term' |
+			| 'Partner' | 'Legal name'  | 'Partner term' |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
+
+Scenario: Create information register UserSettings records (DisableAutomaticCreationOfCompanyAndAgreementForPartner - True)
+
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup'                                                   | 'MetadataObject'                                                                                  | 'AttributeName'                                           | 'KindOfAttribute'                          | 'Value' |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Catalogs.AllCatalogs.AdditionalSettings.DisableAutomaticCreationOfCompanyAndAgreementForPartner' | 'DisableAutomaticCreationOfCompanyAndAgreementForPartner' | 'Enum.KindsOfAttributes.AdditionalSetting' | 'True'  |
+
+Scenario: Create information register UserSettings records (DisableAutomaticCreationOfCompanyAndAgreementForPartner - False)
+
+		And I check or create information register "UserSettings" records:
+		| 'UserOrGroup'                                                   | 'MetadataObject'                                                                                  | 'AttributeName'                                           | 'KindOfAttribute'                          | 'Value' |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Catalogs.AllCatalogs.AdditionalSettings.DisableAutomaticCreationOfCompanyAndAgreementForPartner' | 'DisableAutomaticCreationOfCompanyAndAgreementForPartner' | 'Enum.KindsOfAttributes.AdditionalSetting' | 'False' |
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="439131ad-7af3-48b2-8e54-417913ecb7af">
+ <name>SecureDataStorage</name>
+ <synonym>
+  <key>en</key>
+  <value>7B5E13ED-9807-9AFA-AE0A-AD7A5ABDC9FB</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

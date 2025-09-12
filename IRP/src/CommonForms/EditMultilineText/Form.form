@@ -15,11 +15,6 @@
   <extendedTooltip>
    <name>TextExtendedTooltip</name>
    <id>13</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <type>Label</type>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
@@ -30,11 +25,6 @@
   <contextMenu>
    <name>TextContextMenu</name>
    <id>12</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
   <type>TextDocumentField</type>
@@ -66,11 +56,6 @@
    <extendedTooltip>
     <name>FormOKExtendedTooltip</name>
     <id>5</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -94,11 +79,6 @@
    <extendedTooltip>
     <name>FormVoiceNarratorExtendedTooltip</name>
     <id>7</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -112,11 +92,6 @@
    <autoMaxHeight>true</autoMaxHeight>
    <placementArea>UserCmds</placementArea>
   </items>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
   <horizontalAlign>Left</horizontalAlign>
  </autoCommandBar>
  <handlers>
@@ -127,6 +102,7 @@
   <event>OnCreateAtServer</event>
   <name>OnCreateAtServer</name>
  </handlers>
+ <saveWindowSettings>true</saveWindowSettings>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>
@@ -162,6 +138,44 @@
   <valueType>
    <types>String</types>
    <stringQualifiers/>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>TableName</name>
+  <title>
+   <key>en</key>
+   <value>CB9E2EE8-19B9-D614-457A-A4524B715445</value>
+  </title>
+  <id>3</id>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>TableIndex</name>
+  <title>
+   <key>en</key>
+   <value>D1F5C6F9-6CC8-7754-4C6B-B4C73F809751</value>
+  </title>
+  <id>4</id>
+  <valueType>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+   </numberQualifiers>
   </valueType>
   <view>
    <common>true</common>
@@ -211,6 +225,22 @@
    <stringQualifiers/>
   </valueType>
   <keyParameter>true</keyParameter>
+ </parameters>
+ <parameters>
+  <name>TableName</name>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+ </parameters>
+ <parameters>
+  <name>TableIndex</name>
+  <valueType>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+   </numberQualifiers>
+  </valueType>
  </parameters>
  <commandInterface>
   <navigationPanel/>

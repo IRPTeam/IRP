@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fbb5c4a9-9883-41da-98e1-28c518af857a">
+ <name>PresentationFieldsGetProcessing_GetDocumentPresentationFields</name>
+ <synonym>
+  <key>en</key>
+  <value>20BC024A-5553-B86D-D59C-CF3A1EB8C5B1_______________________________</value>
+ </synonym>
+ <source>
+  <types>DocumentManager.SalesReturn</types>
+  <types>DocumentManager.PurchaseOrder</types>
+  <types>DocumentManager.RetailReturnReceipt</types>
+  <types>DocumentManager.DebitNote</types>
+  <types>DocumentManager.SalesInvoice</types>
+  <types>DocumentManager.SalesOrder</types>
+  <types>DocumentManager.PurchaseReturn</types>
+  <types>DocumentManager.PurchaseInvoice</types>
+  <types>DocumentManager.RetailSalesReceipt</types>
+  <types>DocumentManager.CreditNote</types>
+ </source>
+ <event>PresentationFieldsGetProcessing</event>
+ <handler>CommonModule.DocumentsServer.GetDocumentPresentationFields</handler>
+</mdclass:EventSubscription>

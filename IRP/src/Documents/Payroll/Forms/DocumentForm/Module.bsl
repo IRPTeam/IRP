@@ -19,6 +19,7 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -50,14 +51,22 @@ Procedure AfterWrite(WriteParameters)
 EndProcedure
 
 &AtClient
+Procedure FormUpdateFormAttributes(Direction) Export
+	UpdateFormAttributes(Object, ThisObject, Direction);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure UpdateFormAttributes(Object, Form, Direction)
+	Return;
+EndProcedure
+
+&AtClient
 Procedure FormSetVisibilityAvailability() Export
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
-	
 	Form.Items.EditCurrenciesAccrual.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesDeduction.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesCashAdvanceDeduction.Enabled = Not Form.ReadOnly;
@@ -157,64 +166,6 @@ EndProcedure
 	
 #EndRegion
 
-
-#Region PARTNER
-
-&AtClient
-Procedure PartnerOnChange(Item)
-	DocPayrollClient.PartnerOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPayrollClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
-	DocPayrollClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region LEGAL_NAME
-
-&AtClient
-Procedure LegalNameOnChange(Item)
-	DocPayrollClient.LegalNameOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPayrollClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
-	DocPayrollClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region AGREEMENT
-
-&AtClient
-Procedure AgreementOnChange(Item)
-	DocPayrollClient.AgreementOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPayrollClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
-	DocPayrollClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
 #Region SALARY_TAX_LIST
 
 &AtClient
@@ -236,6 +187,63 @@ EndProcedure
 Procedure SalaryTaxListAfterDeleteRow(Item)
 	DocPayrollClient.PayrollListsAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
+
+#Region SALARY_TAX_LIST_PARTNER
+
+&AtClient
+Procedure SalaryTaxListPartnerOnChange(Item)
+	DocPayrollClient.SalaryTaxListPartnerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListPartnerStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocPayrollClient.SalaryTaxListPartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListPartnerEditTextChange(Item, Text, StandardProcessing)
+	DocPayrollClient.SalaryTaxListPartnerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region SALARY_TAX_LIST_LEGAL_NAME
+
+&AtClient
+Procedure SalaryTaxListLegalNameOnChange(Item)
+	DocPayrollClient.SalaryTaxListLegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListLegalNameStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocPayrollClient.SalaryTaxListLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListLegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocPayrollClient.SalaryTaxListLegalNameEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region SALARY_TAX_LIST_AGREEMENT
+
+&AtClient
+Procedure SalaryTaxListAgreementOnChange(Item)
+	DocPayrollClient.SalaryTaxListAgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPayrollClient.SalaryTaxListAgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListAgreementEditTextChange(Item, Text, StandardProcessing)
+	DocPayrollClient.SalaryTaxListAgreementEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 
@@ -483,8 +491,7 @@ Function FillPayrollListsAtServer(TypeColumnName, _Type)
 	FillingParameters.Insert("_Type"     , _Type);
 	FillingParameters.Insert("TypeColumnName" , TypeColumnName);
 	FillingParameters.Insert("Ref" , Object.Ref);
-	FillingParameters.Insert("CalculationType" , Object.CalculationType);
-	
+		
 	If _Type = Enums.PayrollTypes.Accrual Then
 		Result = DocPayrollServer.GetPayrolls_Accrual(FillingParameters);
 	Else
@@ -501,7 +508,22 @@ EndProcedure
 
 &AtClient
 Procedure EditCurrenciesCashAdvanceDeduction(Command)
-	EditCurrencies(Command, "CashAdvanceDeductionList");
+	CurrentData = ThisObject.Items.CashAdvanceDeductionList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;	
+	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, 
+	                                                         CurrentData.Key, 
+	                                                         Object.Currency, 
+	                                                         CurrentData.Amount, 
+	                                                         CurrentData.Agreement);
+
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+	
 EndProcedure
 
 &AtClient
@@ -524,7 +546,7 @@ Procedure EditCurrencies(Command, TableName)
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	Notify = New CallbackDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
@@ -572,6 +594,20 @@ Procedure UpdateAccountingData(TableName)
 		                                          _AccountingExtDimensions, TableName);
 	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
 	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
+EndProcedure
+
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure
 
 #EndRegion

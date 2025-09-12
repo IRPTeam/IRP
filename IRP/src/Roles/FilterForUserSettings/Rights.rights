@@ -355,6 +355,20 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ShipmentPlaningOrder.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.TaxesOperation.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.MoneyTransfer.Attribute.RevenueType</name>
 		<right>
 			<name>View</name>
@@ -408,6 +422,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankReceipt.Attribute.DetailsByRow</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PurchaseOrder.Attribute.TransactionType</name>
 		<right>
 			<name>View</name>
@@ -416,6 +437,13 @@
 	</object>
 	<object>
 		<name>Document.SalesReturn.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.TaxesOperation.Attribute.Partner</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -756,6 +784,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankPayment.Attribute.DetailsByRow</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.MoneyTransfer.Attribute.SendCashFlowCenter</name>
 		<right>
 			<name>View</name>
@@ -860,6 +895,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.TaxesOperation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashReceipt.Attribute.Currency</name>
 		<right>
 			<name>View</name>
@@ -897,6 +943,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashPayment.Attribute.DetailsByRow</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -971,6 +1024,13 @@
 	</object>
 	<object>
 		<name>Document.CashRevenue.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.OutgoingMessage.Attribute.MailAccount</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1061,6 +1121,13 @@
 	</object>
 	<object>
 		<name>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.ProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ShipmentPlaningOrder.TabularSection.ItemList.Attribute.Store</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1294,6 +1361,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.TaxesOperation.Attribute.Agreement</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.ProductionPlanningCorrection.Attribute.BusinessUnit</name>
 		<right>
 			<name>View</name>
@@ -1411,6 +1485,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.RevenueAccruals.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.DebitCreditNote.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -1483,6 +1564,17 @@
 	</object>
 	<object>
 		<name>Document.DebitNote.TabularSection.Transactions</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ShipmentPlaningOrder</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1593,6 +1685,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ShipmentPlaningOrder.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.ProfitLossCenter</name>
 		<right>
 			<name>View</name>
@@ -1614,6 +1713,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.OutgoingMessage</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.MoneyTransfer.Attribute.SendFinancialMovementType</name>
 		<right>
 			<name>View</name>
@@ -1629,6 +1739,13 @@
 	</object>
 	<object>
 		<name>Document.EmployeeFiring.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashReceipt.Attribute.DetailsByRow</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1665,6 +1782,17 @@
 	</object>
 	<object>
 		<name>Document.ProductionPlanningClosing.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RevenueAccruals</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1747,6 +1875,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.GoodsReceipt.TabularSection.ItemList.Attribute.IsPreliminary</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1882,6 +2017,13 @@
 	</object>
 	<object>
 		<name>Document.CreditNote.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.TaxesOperation.Attribute.LegalNameContract</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -2075,6 +2217,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.TaxesOperation.Attribute.LegalName</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -2438,70 +2587,6 @@
 	</object>
 	<object>
 		<name>Document.IncomingPaymentOrder.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RevenueAccruals</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RevenueAccruals.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TaxesOperation</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TaxesOperation.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TaxesOperation.Attribute.Partner</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TaxesOperation.Attribute.LegalName</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TaxesOperation.Attribute.Agreement</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TaxesOperation.Attribute.LegalNameContract</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

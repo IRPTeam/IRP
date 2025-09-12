@@ -20,32 +20,29 @@
   <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
   <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
   <typesFilterValue xsi:type="core:ReferenceValue">
-   <value>Catalog.AddAttributeAndPropertySets.Document_ExpenseAccruals</value>
+   <value>Catalog.AddAttributeAndPropertySets.Document_RevenueAccruals</value>
   </typesFilterValue>
-  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
-  <multipleValuesUseField>0</multipleValuesUseField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  <multipleValuesKeyField>0</multipleValuesKeyField>
-  <multipleValuesOrderField>0</multipleValuesOrderField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
   <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
   <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
   <typesFilterValue xsi:type="core:ReferenceValue">
-   <value>Catalog.AddAttributeAndPropertySets.Document_ExpenseAccruals</value>
+   <value>Catalog.AddAttributeAndPropertySets.Document_RevenueAccruals</value>
   </typesFilterValue>
-  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
-  <multipleValuesUseField>0</multipleValuesUseField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Document.RevenueAccruals.TabularSection.AddAttributes</characteristicValues>
   <objectField>Document.RevenueAccruals.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.RevenueAccruals.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.RevenueAccruals.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>0</multipleValuesKeyField>
-  <multipleValuesOrderField>0</multipleValuesOrderField>
+  <multipleValuesOrderField>Document.RevenueAccruals.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -66,6 +63,7 @@
  <defaultListForm>Document.RevenueAccruals.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Document.RevenueAccruals.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
  <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>

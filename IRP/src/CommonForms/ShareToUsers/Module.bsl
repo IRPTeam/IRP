@@ -75,6 +75,9 @@ Procedure FillUsersList(ListData)
 	Query.SetParameter("SourceTable", SourceTable);
 	QueryResult = Query.Execute().Unload();
 	ThisObject.UsersList.Load(QueryResult);
+	
+	RowAllUsers = ThisObject.UsersList.Insert(0);
+	RowAllUsers.User = Catalogs.Users.EmptyRef();
 EndProcedure
 
 #EndRegion

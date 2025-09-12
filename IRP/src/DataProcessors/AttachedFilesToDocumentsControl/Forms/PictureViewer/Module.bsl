@@ -43,4 +43,3 @@ Procedure ShowPicture()
 EndProcedure
 
 
-

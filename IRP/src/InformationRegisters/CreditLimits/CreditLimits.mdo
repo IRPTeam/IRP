@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="543a17e3-9f22-404e-a657-4f5bd6683514">
+ <producedTypes>
+  <selectionType typeId="4b4a7dfc-8702-4ca6-b24c-b05624f14110" valueTypeId="f60a0e9d-e43a-43c0-9cad-54dcc6d61dfc"/>
+  <listType typeId="4df376d2-1b8a-4dd9-b44d-0788ab7b6049" valueTypeId="72f47034-092f-4339-b13a-73f14799ddc9"/>
+  <managerType typeId="60673b36-23cf-4d0f-8599-0e5eecd9c1e0" valueTypeId="3026f3f1-86ff-4944-8f03-57cc65432301"/>
+  <recordSetType typeId="fb64612e-d387-4977-b11b-a8df8f4922bc" valueTypeId="a4de4e33-5fec-4c46-b8b4-945f9a8fcb41"/>
+  <recordKeyType typeId="6e996b5b-4283-4bea-b1fb-56bcb0e6973a" valueTypeId="c98f2bf0-3271-46ff-b378-4bbd34c6507e"/>
+  <recordType typeId="809c5944-f401-44ff-aa90-5c14191609c2" valueTypeId="aad060f6-d79b-4d87-83b4-451a8ecb0fe8"/>
+  <recordManagerType typeId="b25ac2d4-b0b8-4aa5-9f74-cca013c5abf3" valueTypeId="27d4bdc9-3c6a-4d61-a4d6-fb762e625ca2"/>
+ </producedTypes>
+ <name>CreditLimits</name>
+ <synonym>
+  <key>en</key>
+  <value>F42AFBBF-0F18-43C5-5796-6242CD0C8A9B</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="f24dcf13-3edc-49f3-bd5e-f951e7498a45">
+  <name>LimitAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>A098CB8E-27B8-61A0-0DFB-B76ECBA6C053</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="32548aab-cb95-41be-ad43-1fc17f307085">
+  <name>Partner</name>
+  <synonym>
+   <key>en</key>
+   <value>8766366A-4D0A-9189-99E0-070BE2EC6511</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="ab59e33e-8bc4-4225-8aee-5186e5bca817">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>en</key>
+   <value>13B3C900-D956-A648-89DB-BD62E7356A84</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.Type</name>
+   <value xsi:type="core:ReferenceValue">
+    <value>Enum.CurrencyType.EnumValue.Agreement</value>
+   </value>
+  </choiceParameters>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+</mdclass:InformationRegister>

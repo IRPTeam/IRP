@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="79656dea-656f-46b7-a433-a55c6a8833f7">
+ <name>UsePurchase</name>
+ <synonym>
+  <key>en</key>
+  <value>A77EC7D6-119A-F9F7-7893-330BE19D39B2</value>
+ </synonym>
+ <location>Constant.UsePurchase</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Subsystem.PurchaseAP</content>
+ <content>Catalog.Items</content>
+ <content>Document.GoodsReceipt</content>
+ <content>Document.PurchaseOrder</content>
+ <content>Report.R1001_Purchases</content>
+ <content>Catalog.PartnersBankAccounts</content>
+ <content>Document.PriceList</content>
+ <content>Document.PurchaseReturn</content>
+ <content>CommonCommand.OpenVendorAgreements</content>
+ <content>Catalog.PartnerItems</content>
+ <content>Document.PurchaseReturnOrder</content>
+ <content>Document.InternalSupplyRequest</content>
+ <content>Catalog.Agreements</content>
+ <content>Document.WithholdingTaxInvoice</content>
+ <content>Document.PurchaseOrderClosing</content>
+ <content>Document.VendorsAdvancesClosing</content>
+ <content>Catalog.PriceTypes</content>
+ <content>Report.D1001_Purchases</content>
+ <content>InformationRegister.S1001L_VendorsPricesByItemKey</content>
+ <content>CommonCommand.OpenPartnersVendor</content>
+ <content>Report.S1001L_VendorsPrices</content>
+ <content>Catalog.LegalNameContracts</content>
+ <content>Document.PurchaseInvoice</content>
+ <content>AccumulationRegister.R5012B_VendorsAging</content>
+ <content>AccumulationRegister.R5020B_PartnersBalance</content>
+ <content>AccumulationRegister.R1005T_PurchaseSpecialOffers</content>
+ <content>AccumulationRegister.R1021B_VendorsTransactions</content>
+ <content>AccumulationRegister.R1022B_VendorsPaymentPlanning</content>
+ <content>AccumulationRegister.R1010T_PurchaseOrders</content>
+ <content>AccumulationRegister.R1002T_PurchaseReturns</content>
+ <content>AccumulationRegister.R1014T_CanceledPurchaseOrders</content>
+ <content>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</content>
+ <content>AccumulationRegister.R1001T_Purchases</content>
+ <content>AccumulationRegister.R1020B_AdvancesToVendors</content>
+ <content>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</content>
+ <content>AccumulationRegister.R1011B_PurchaseOrdersReceipt</content>
+</mdclass:FunctionalOption>

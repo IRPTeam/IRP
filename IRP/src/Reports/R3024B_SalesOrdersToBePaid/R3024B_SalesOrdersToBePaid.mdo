@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d1ee1e35-f995-48cc-94f2-2a62f3d7299b">
+ <producedTypes>
+  <objectType typeId="f7916fe8-76de-4ce9-ae99-00a7894a4438" valueTypeId="39a8e7e1-b291-4f7f-8beb-d94fde282ac2"/>
+  <managerType typeId="d7c8ea62-d3b1-4c63-9921-c6dc1e0bd408" valueTypeId="7af2ea5c-8811-493b-978c-ca5819f21dfb"/>
+ </producedTypes>
+ <name>R3024B_SalesOrdersToBePaid</name>
+ <synonym>
+  <key>en</key>
+  <value>8643D55B-862A-C697-7778-8F8A6C7F9F86</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R3024B_SalesOrdersToBePaid.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="82401a7a-5981-4112-8597-59cd7dae92c5">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>en</key>
+   <value>CDFF651D-2049-A22E-EE30-0F0BE3C47752</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

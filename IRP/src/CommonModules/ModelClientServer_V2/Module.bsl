@@ -50,7 +50,6 @@ Procedure EntryPoint(StepNames, Parameters, ExecuteLazySteps = False) Export
 	
 	EndIf;
 
-	
 	// if cache was initialized from this EntryPoint then ChainComplete
 	If Parameters.ModelEnvironment.FirstStepNames = StepNames Or ExecuteLazySteps Then
 		If Parameters.ModelEnvironment.ArrayOfLazySteps.Count() Then
@@ -239,7 +238,9 @@ Procedure ExecuteInExtension(Result, Options, ExecutorName)
 EndProcedure
 
 Function GetChain()
+	
 	Chain = New Structure("Idle", False);
+	
 	// Default.List
 	Chain.Insert("DefaultStoreInList"        , GetChainLink("DefaultStoreInListExecute"));
 	Chain.Insert("DefaultDeliveryDateInList" , GetChainLink("DefaultDeliveryDateInListExecute"));
@@ -247,6 +248,8 @@ Function GetChain()
 	Chain.Insert("DefaultCurrencyInList"     , GetChainLink("DefaultCurrencyInListExecute"));
 	Chain.Insert("DefaultInventoryOrigin"    , GetChainLink("DefaultInventoryOriginExecute"));
 	Chain.Insert("DefaultVatRateInList"      , GetChainLink("DefaultVatRateInListExecute"));
+	Chain.Insert("DefaultIsVariableItemKeyInList", GetChainLink("DefaultIsVariableItemKeyInListExecute"));
+	Chain.Insert("DefaultIsVariableStoreInList"  , GetChainLink("DefaultIsVariableStoreInListExecute"));
 	
 	// Empty.Header
 	Chain.Insert("EmptyStoreInHeader"     , GetChainLink("EmptyStoreInHeaderExecute"));
@@ -333,15 +336,18 @@ Function GetChain()
 	Chain.Insert("ClearSerialLotNumberByItemKey"    , GetChainLink("ClearSerialLotNumberByItemKeyExecute"));
 	Chain.Insert("ClearBarcodeByItemKey"            , GetChainLink("ClearBarcodeByItemKeyExecute"));
 	
-	Chain.Insert("ChangePriceByPriceType"        , GetChainLink("ChangePriceByPriceTypeExecute"));
-	Chain.Insert("ChangePaymentTermsByAgreement" , GetChainLink("ChangePaymentTermsByAgreementExecute"));	
-	Chain.Insert("ChangeTaxVisible", GetChainLink("ChangeTaxVisibleExecute"));
+	Chain.Insert("ChangePriceByPriceType"          , GetChainLink("ChangePriceByPriceTypeExecute"));
+	Chain.Insert("ChangePaymentTermsByAgreement"   , GetChainLink("ChangePaymentTermsByAgreementExecute"));	
+	Chain.Insert("ChangeTaxVisible"				   , GetChainLink("ChangeTaxVisibleExecute"));
+	Chain.Insert("ChangeWithholdingTaxVisible"	   , GetChainLink("ChangeWithholdingTaxVisibleExecute"));
+	Chain.Insert("ChangeTaxExemptionReasonVisible" , GetChainLink("ChangeTaxExemptionReasonVisibleExecute"));
 	
 	Chain.Insert("ChangeVatRate", GetChainLink("ChangeVatRateExecute"));
 		
 	Chain.Insert("Calculations" , GetChainLink("CalculationsExecute"));
 	Chain.Insert("SimpleCalculations" , GetChainLink("SimpleCalculationsExecute"));
 	Chain.Insert("UpdatePaymentTerms" , GetChainLink("UpdatePaymentTermsExecute"));
+	Chain.Insert("CalculationsWithHoldingTax" , GetChainLink("CalculationsWithHoldingTaxExecute"));
 	
 	Chain.Insert("ChangePartnerByRetailCustomer"   , GetChainLink("ChangePartnerByRetailCustomerExecute"));
 	Chain.Insert("ChangeAgreementByRetailCustomer" , GetChainLink("ChangeAgreementByRetailCustomerExecute"));
@@ -437,6 +443,15 @@ Function GetChain()
 	Chain.Insert("ChangeAccrualTypeByPositionOrEmployee"  , GetChainLink("ChangeAccrualTypeByPositionOrEmployeeExecute"));
 	Chain.Insert("ChangeSalaryBySalaryType", GetChainLink("ChangeSalaryBySalaryTypeExecute"));
 
+	Chain.Insert("ChangePartnerChoiceList", GetChainLink("ChangePartnerChoiceListExecute"));
+	
+	Chain.Insert("ChangeCurrencyRevaluationInvoiceByBasis", GetChainLink("ChangeCurrencyRevaluationInvoiceByBasisExecute"));
+	
+	Chain.Insert("ChangeAmountByNewAmountBalance", GetChainLink("ChangeAmountByNewAmountBalanceExecute"));
+	Chain.Insert("ChangeNewAmountBalanceByAmount", GetChainLink("ChangeNewAmountBalanceByAmountExecute"));
+	
+	Chain.Insert("ChangePreliminaryDataByBasis"  , GetChainLink("ChangePreliminaryDataByBasisExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -444,7 +459,6 @@ Function GetChain()
 	// Loaders
 	Chain.Insert("LoadTable", GetChainLink("LoadTableExecute"));
 
-	
 	Return Chain;
 EndFunction
 
@@ -741,7 +755,7 @@ Function ChangeCashAccountByCompanyOptions() Export
 EndFunction
 
 Function ChangeCashAccountByCompanyExecute(Options) Export
-	CashAccount = DocumentsServer.GetCashAccountByCompany(Options.Company, Options.Account, Options.AccountType);
+	CashAccount = DocumentsServer.GetCashAccountByCompany(Options.Company, Options.Account, Undefined);
 	Return CashAccount;
 EndFunction
 
@@ -1208,17 +1222,77 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_CURRENCY_REVALUATION_INVOICE_BY_BASIS
+ 
+Function ChangeCurrencyRevaluationInvoiceByBasisOptions() Export
+ Return GetChainLinkOptions("CurrentCurrencyRevaluationInvoice, Company, TransactionType, Partner, Agreement, LegalName");
+EndFunction	
+
+Function ChangeCurrencyRevaluationInvoiceByBasisExecute(Options) Export
+	If Not ValueIsFilled(Options.CurrentCurrencyRevaluationInvoice) Then
+		Return Undefined;
+	EndIf;
+	
+	IsCustomer = (Options.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.CurrencyRevaluationCustomer")
+		Or Options.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.CurrencyRevaluationCustomer"));
+	
+	IsVendor = (Options.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.CurrencyRevaluationVendor")
+		Or Options.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.CurrencyRevaluationVendor"));
+	
+	If Not IsCustomer And Not IsVendor Then
+		Return Undefined;
+	EndIf;
+	
+	If IsCustomer And TypeOf(Options.CurrentCurrencyRevaluationInvoice) <> Type("DocumentRef.SalesInvoice") Then
+	   	Return Undefined;
+	EndIf;
+
+	If IsVendor And TypeOf(Options.CurrentCurrencyRevaluationInvoice) <> Type("DocumentRef.PurchaseInvoice") Then
+		Return Undefined;
+	EndIf;
+	
+	InvoiceData = CommonFunctionsServer.GetAttributesFromRef(Options.CurrentCurrencyRevaluationInvoice, 
+		"Company, Partner, Agreement, LegalName");
+
+	If InvoiceData.Company <> Options.Company
+		Or InvoiceData.Partner <> Options.Partner
+		Or InvoiceData.Agreement <> Options.Agreement
+		Or InvoiceData.LegalName <> Options.LegalName Then
+			Return Undefined;
+	EndIf; 
+
+	Return Options.CurrentCurrencyRevaluationInvoice;
+EndFunction	
+
+#EndRegion
+
 #Region CHANGE_COMPANY_BY_AGREEMENT
 
 Function ChangeCompanyByAgreementOptions() Export
-	Return GetChainLinkOptions("Agreement, CurrentCompany");
+	Return GetChainLinkOptions("Agreement, CurrentCompany, Object");
 EndFunction
 
 Function ChangeCompanyByAgreementExecute(Options) Export
+	IsLinkedDocument = False;
+	If CommonFunctionsClientServer.ObjectHasProperty(Options.Object, "RowIDInfo") Then
+		For Each Row In Options.Object.RowIDInfo Do
+			If ValueIsFilled(Row.Basis) Then
+				IsLinkedDocument = True;
+				Break;
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	If ValueIsFilled(Options.CurrentCompany) And IsLinkedDocument Then
+		Return Options.CurrentCompany;
+	EndIf;
+	
 	If Not ValueIsFilled(Options.Agreement) Then
 		Return Options.CurrentCompany;
 	EndIf;
+	
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+	
 	If ValueIsFilled(AgreementInfo.Company) Then
 		Return AgreementInfo.Company;
 	EndIf;
@@ -1310,7 +1384,7 @@ Function ChangePriceByPriceTypeExecute(Options) Export
 	For Each Row In Options.RowIDInfo Do
 		DataFromBasis = RowIDInfoServer.GetAllDataFromBasis(Options.Ref, Row.Basis, Row.BasisKey, Row.RowID, Row.CurrentStep);
 		If DataFromBasis <> Undefined And DataFromBasis.Count() 
-			And DataFromBasis[0].ItemList.Count() And DataFromBasis[0].SpecialOffers.Count() Then
+			And DataFromBasis[0].ItemList.Count() Then
 			BasisRow = DataFromBasis[0].ItemList[0];
 			PriceFromBasis = BasisRow.Price;
 			UnitFactor = ModelServer_V2.GetUnitFactor(Options.Unit, BasisRow.Unit);
@@ -1979,6 +2053,64 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_AMOUNT_BY_NEW_AMOUNT_BALANCE
+
+Function ChangeAmountByNewAmountBalanceOptions() Export
+	Return GetChainLinkOptions("AmountBalance, NewAmountBalance");
+EndFunction
+
+Function ChangeAmountByNewAmountBalanceExecute(Options) Export	
+	Return ?(ValueIsFilled(Options.NewAmountBalance), Options.NewAmountBalance, 0)  
+		- ?(ValueIsFilled(Options.AmountBalance), Options.AmountBalance, 0)  ;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_NEW_AMOUNT_BALANCE_BY_AMOUNT
+
+Function ChangeNewAmountBalanceByAmountOptions() Export
+	Return GetChainLinkOptions("AmountBalance, Amount");
+EndFunction
+
+Function ChangeNewAmountBalanceByAmountExecute(Options) Export	
+	Return ?(ValueIsFilled(Options.Amount), Options.Amount, 0)  
+		+ ?(ValueIsFilled(Options.AmountBalance), Options.AmountBalance, 0)  ;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PRELIMINARY_DATA_BY_BASIS
+
+Function ChangePreliminaryDataByBasisOptions() Export
+	Return GetChainLinkOptions("IsPreliminary, QuantityInBaseUnit, RowIDInfo, Ref");
+EndFunction
+
+Function ChangePreliminaryDataByBasisExecute(Options) Export	
+	Result = New Structure();
+	Result.Insert("Amount"    , 0);
+	Result.Insert("AmountTax" , 0);
+	Result.Insert("Currency"  , Undefined);
+	
+	If Options.IsPreliminary = False Then
+		Return Result;
+	EndIf;
+
+	For Each Row In Options.RowIDInfo Do
+		BasisAmounts = ModelServer_V2.GetAmountsFromPO(Row.Basis, Row.BasisKey);
+		If Not ValueIsFilled(BasisAmounts.QuantityInBaseUnit) Then
+			Return Result;
+		EndIf;
+		
+		Result.Currency = BasisAmounts.Currency;
+		Result.Amount = (BasisAmounts.Amount / BasisAmounts.QuantityInBaseUnit) * Options.QuantityInBaseUnit;
+		Result.AmountTax = (BasisAmounts.AmountTax / BasisAmounts.QuantityInBaseUnit) * Options.QuantityInBaseUnit;
+	EndDo;
+
+	Return Result;
+EndFunction
+
+#EndRegion
+
 #Region CALCULATE_DIFFERENCE
 
 Function CalculateDifferenceCountOptions() Export
@@ -2144,7 +2276,13 @@ Function DefaultStoreInHeaderExecute(Options) Export
 EndFunction
 
 Function DefaultStoreInListOptions() Export
-	Return GetChainLinkOptions("StoreFromUserSettings, StoreInList, StoreInHeader, Agreement, StoreInPreviousRow, IsService");
+	Return GetChainLinkOptions(
+	"StoreFromUserSettings, 
+	|StoreInList, 
+	|StoreInHeader, 
+	|Agreement, 
+	|StoreInPreviousRow, 
+	|IsService");
 EndFunction
 
 // fill store in tabular part ItemList by default
@@ -2152,6 +2290,7 @@ Function DefaultStoreInListExecute(Options) Export
 	If Options.IsService = True Then
 		Return Undefined;
 	EndIf;
+	
 	If ValueIsFilled(Options.StoreInList) Then
 		Return Options.StoreInList; // store already is filled
 	EndIf;
@@ -2228,9 +2367,11 @@ Function FillStoresInListExecute(Options) Export
 	If Options.IsService = True Then
 		Return Undefined;
 	EndIf;
+		
 	If Options.IsUserChange = True Then
 		Return Options.Store;
 	EndIf;
+	
 	If ValueIsFilled(Options.Store) Then
 		Return Options.Store;
 	EndIf;
@@ -2283,6 +2424,18 @@ EndFunction
 
 #EndRegion
 
+#Region PARTNERS
+
+Function ChangePartnerChoiceListOptions() Export
+	Return GetChainLinkOptions("DocumentName, Company, TransactionType");
+EndFunction
+
+Function ChangePartnerChoiceListExecute(Options) Export
+	Return CatPartnersServer.GetChoiceListForDocument(Options.DocumentName, Options.Company, Options.TransactionType);
+EndFunction
+
+#EndRegion
+
 #Region TAXES
 
 Function ChangeTaxVisibleOptions() Export
@@ -2305,6 +2458,16 @@ Function ChangeTaxVisibleExecute(Options) Export
 	EndIf;
 	
 	Return New Structure("TaxVisible, TaxChoiceList", _visible, _choiceList);
+EndFunction
+
+Function ChangeTaxExemptionReasonVisibleExecute(Options) Export
+	_arrayOfTaxes = TaxesServer.GetTaxesInfo(
+		Options.Date, 
+		Options.Company, 
+		Options.DocumentName, 
+		Options.TransactionType, 
+		PredefinedValue("Enum.TaxKind.VAT"));
+	Return (_arrayOfTaxes.Count() <> 0);
 EndFunction
 
 Function ChangeVatRateOptions() Export
@@ -2353,6 +2516,28 @@ Function ChangeVatRateExecute(Options) Export
 	Parameters.Insert("TransactionType" , Options.TransactionType);		
 	TaxRate = TaxesServer.GetVatRateByPriority(Parameters);
 	Return TaxRate;
+EndFunction
+
+Function ChangeWithholdingTaxVisibleOptions() Export
+	Return GetChainLinkOptions("Date, Company, DocumentName");
+EndFunction
+
+Function ChangeWithholdingTaxVisibleExecute(Options) Export
+	_arrayOfTaxes = TaxesServer.GetTaxesInfo(
+		Options.Date, 
+		Options.Company, 
+		Options.DocumentName, 
+		Undefined, 
+		PredefinedValue("Enum.TaxKind.WithholdingTax"));
+	
+	_visible = _arrayOfTaxes.Count() <> 0;
+	_choiceList = New Array();
+	
+	If _visible Then
+		_choiceList = TaxesServer.GetTaxRatesByTax(_arrayOfTaxes[0].Tax); 
+	EndIf;
+	
+	Return New Structure("WithholdingTaxVisible, WithholdingTaxChoiceList", _visible, _choiceList);
 EndFunction
 
 #EndRegion
@@ -2511,6 +2696,165 @@ Function MaterialsRecalculateQuantityExecute(Options) Export
 	ManufacturingServer.CalculateMaterialsQuantity(CalculationParameters);
 	
 	Return Result;
+EndFunction
+
+#EndRegion
+
+#Region WITHHOLDING_TAX_CALCULATIONS
+
+Function CalculationsWithHoldingTaxOptions() Export
+	Options = GetChainLinkOptions("WhoIsChanged, DontCalculateBrutto, WithholdingTaxRate, VatRate, PriceIncludeTax,
+	|QuantityInBaseUnit,
+	|Price,
+	|NetAmount,
+	|VatAmount,
+	|TotalAmount,
+	|WithholdingTaxAmount,
+	|BruttoAmount,
+	|DontCalculateRow");
+	Return Options; 
+EndFunction
+
+Function CalculationsWithHoldingTaxExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("QuantityInBaseUnit"   , Options.QuantityInBaseUnit);
+	Result.Insert("Price"                , Options.Price);
+	Result.Insert("NetAmount"            , Options.NetAmount);
+	Result.Insert("VatAmount"            , Options.VatAmount);
+	Result.Insert("TotalAmount"          , Options.TotalAmount);
+	Result.Insert("WithholdingTaxAmount" , Options.WithholdingTaxAmount);
+	Result.Insert("BruttoAmount"         , Options.BruttoAmount);
+	Result.Insert("WithholdingTaxRate"   , Options.WithholdingTaxRate);
+	
+	If Options.DontCalculateRow = True Then
+		Return Result;
+	EndIf;
+	
+	If Options.WhoIsChanged = "IsNetAmountChanged"  Then
+		
+		Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
+		Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate, Options.DontCalculateBrutto);
+		Result.BruttoAmount =  Result.NetAmount + Result.WithholdingTaxAmount;
+		
+	ElsIf Options.WhoIsChanged = "IsBruttoAmountChanged" then
+		
+		Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate, Options.DontCalculateBrutto);
+		Result.NetAmount = Result.BruttoAmount - Result.WithholdingTaxAmount;
+		Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
+		
+	ElsIf Options.WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
+		
+		If Options.DontCalculateBrutto Then
+			Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
+		Else
+			Result.NetAmount = Result.QuantityInBaseUnit * Result.Price;
+		EndIf;
+		
+		Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate, Options.DontCalculateBrutto);	
+		Result.BruttoAmount = Result.NetAmount + Result.WithholdingTaxAmount; 
+	
+	ElsIf Options.WhoIsChanged = "IsPriceChanged" Then
+		
+		Result.NetAmount = Result.QuantityInBaseUnit * Result.Price;
+		Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate, Options.DontCalculateBrutto);	
+		Result.BruttoAmount = Result.NetAmount + Result.WithholdingTaxAmount; 
+		
+	ElsIf Options.WhoIsChanged = "IsWithholdingTaxRateChanged" Then
+		
+		If Options.DontCalculateBrutto Then
+			Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate, Options.DontCalculateBrutto);
+			Result.NetAmount = Result.BruttoAmount - Result.WithholdingTaxAmount;
+			Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
+		Else
+			Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);			
+			Result.WithholdingTaxAmount = CalculateWithholdingTaxAmount(Result, Options.WithholdingTaxRate, Options.DontCalculateBrutto);
+			Result.BruttoAmount =  Result.NetAmount + Result.WithholdingTaxAmount;
+		EndIf;
+	
+	ElsIf Options.WhoIsChanged = "IsWithholdingTaxAmountChanged" Then
+		
+		If Options.DontCalculateBrutto Then
+			Result.WithholdingTaxRate = GetArbitraryWithholdintTaxRate();
+			Result.NetAmount =  Result.BruttoAmount - Result.WithholdingTaxAmount;
+			Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
+		Else
+			Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
+			Result.WithholdingTaxRate = GetArbitraryWithholdintTaxRate();
+			Result.BruttoAmount = Result.NetAmount + Result.WithholdingTaxAmount;
+		EndIf;		
+		
+	EndIf;
+	
+	If ValueIsFilled(Options.VatRate) Then
+		If Options.PriceIncludeTax Then
+			If Options.DontCalculateBrutto Then
+				Result.VatAmount =  CalculateVatAmount(Result.TotalAmount, Options.VatRate, Options.PriceIncludeTax);				
+				Result.NetAmount =  Result.TotalAmount - Result.VatAmount;
+				Result.Price = CalculatePrice(Result.NetAmount, Result.QuantityInBaseUnit);
+			Else
+				Result.TotalAmount = Result.NetAmount;				
+				Result.VatAmount = CalculateVatAmount(Result.TotalAmount, Options.VatRate, Options.PriceIncludeTax);				
+			EndIf;
+		Else
+			Result.VatAmount = CalculateVatAmount(Result.BruttoAmount, Options.VatRate, Options.PriceIncludeTax);
+			Result.TotalAmount = Result.NetAmount + Result.VatAmount;
+		EndIf;
+	Else
+		Result.TotalAmount = Result.NetAmount;
+	Endif;
+	
+	Return Result;
+EndFunction
+
+Function CalculateWithholdingTaxAmount(Result, WithholdingTaxRate, DontCalculateBrutto)
+	If DontCalculateBrutto Then
+		Amount = Result.BruttoAmount;
+	Else
+		Amount = Result.NetAmount;
+	EndIf;
+	
+	If Not ValueIsFilled(WithholdingTaxRate) Then
+		Return 0;
+	Else	
+		Rate = CommonFunctionsServer.GetRefAttribute(WithholdingTaxRate, "Rate");
+	EndIf;
+	
+	If Rate = 0 Then
+		Return 0;
+	EndIf;
+	
+	If DontCalculateBrutto Then
+		Return (Amount / 100) * Rate;
+	Else
+		Return 100 * (Amount / (100 - Rate)) - Amount;
+	EndIf;
+	
+	Return 0;
+EndFunction
+
+Function GetArbitraryWithholdintTaxRate()
+	Return PredefinedValue("Catalog.TaxRates.EmptyRef");
+EndFunction
+
+Function CalculateVatAmount(Amount, VatRate, PriceIncludeTax)
+	If Not ValueIsFilled(VatRate) Then
+		Return 0;
+	EndIf;
+	
+	Rate = CommonFunctionsServer.GetRefAttribute(VatRate, "Rate");
+	
+	If PriceIncludeTax Then
+		Return (Amount / (100 + Rate)) * Rate;
+	Else
+		Return (Amount / 100) * Rate;
+	EndIf; 
+EndFunction
+
+Function CalculatePrice(NetAmount, Quantity)
+	If Not ValueIsFilled(Quantity) Then
+		Return 0;
+	EndIf;
+	Return NetAmount / Quantity;
 EndFunction
 
 #EndRegion
@@ -3266,7 +3610,7 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 	Return GetChainLinkOptions("TransactionType,
 		|TransitAccount,
 		|Partner,
-		|Payee,
+		|LegalName,
 		|Agreement,
 		|LegalNameContract,
 		|BasisDocument,
@@ -3284,14 +3628,17 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 		|Project,
 		|ExpenseType,
 		|ProfitLossCenter,
-		|AdditionalAnalytic");
+		|AdditionalAnalytic,
+		|Tax,
+		|TaxDiscountAmount,
+		|RevenueType");
 EndFunction
 
 Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("TransitAccount"           , Options.TransitAccount);
 	Result.Insert("Partner"                  , Options.Partner);
-	Result.Insert("Payee"                    , Options.Payee);
+	Result.Insert("LegalName"                , Options.LegalName);
 	Result.Insert("Agreement"                , Options.Agreement);
 	Result.Insert("LegalNameContract"        , Options.LegalNameContract);
 	Result.Insert("BasisDocument"            , Options.BasisDocument);
@@ -3310,6 +3657,9 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result.Insert("ExpenseType"              , Options.ExpenseType);
 	Result.Insert("ProfitLossCenter"         , Options.ProfitLossCenter);
 	Result.Insert("AdditionalAnalytic"       , Options.AdditionalAnalytic);
+	Result.Insert("Tax"                      , Options.Tax);
+	Result.Insert("TaxDiscountAmount"        , Options.TaxDiscountAmount);
+	Result.Insert("RevenueType"              , Options.RevenueType);
 		
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3342,7 +3692,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 		
 		StrByType = "
 		|Agreement,
-		|Payee,
+		|LegalName,
 		|LegalNameContract";
 					
 		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
@@ -3367,9 +3717,13 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_OtherPartner Then
 		StrByType = "
 		|Agreement,
-		|Payee,
-		|LegalNameContract";
-		
+		|LegalName,
+		|LegalNameContract,
+		|Tax,
+		|TaxDiscountAmount,
+		|RevenueType,
+		|ProfitLossCenter,
+		|AdditionalAnalytic";
 		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
 		If PartnerType = "Other" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then
 			StrByType = StrByType + ", 
@@ -3419,7 +3773,7 @@ Function ClearByTransactionTypeBankReceiptOptions() Export
 		|TransitAccount,
 		|CurrencyExchange,
 		|Partner,
-		|Payer,
+		|LegalName,
 		|Agreement,
 		|LegalNameContract,
 		|BasisDocument,
@@ -3440,7 +3794,10 @@ Function ClearByTransactionTypeBankReceiptOptions() Export
 		|AdditionalAnalytic,
 		|CommissionPercent,
 		|Commission,
-		|CommissionFinancialMovementType");		
+		|CommissionFinancialMovementType,
+		|Employee,
+		|PaymentPeriod,
+		|CalculationType");		
 EndFunction
 
 Function ClearByTransactionTypeBankReceiptExecute(Options) Export
@@ -3448,7 +3805,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Result.Insert("TransitAccount"           , Options.TransitAccount);
 	Result.Insert("CurrencyExchange"         , Options.CurrencyExchange);
 	Result.Insert("Partner"                  , Options.Partner);
-	Result.Insert("Payer"                    , Options.Payer);
+	Result.Insert("LegalName"                , Options.LegalName);
 	Result.Insert("Agreement"                , Options.Agreement);
 	Result.Insert("LegalNameContract"        , Options.LegalNameContract);
 	Result.Insert("BasisDocument"            , Options.BasisDocument);
@@ -3470,6 +3827,9 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Result.Insert("CommissionPercent"        , Options.CommissionPercent);
 	Result.Insert("Commission"               , Options.Commission);
 	Result.Insert("CommissionFinancialMovementType" , Options.CommissionFinancialMovementType);
+	Result.Insert("Employee"                 , Options.Employee);
+	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
+	Result.Insert("CalculationType"          , Options.Calculationtype);
 		
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
@@ -3482,6 +3842,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Incoming_EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	Incoming_OtherIncome         = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherIncome");
 	Incoming_OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
+	Incoming_SalaryReturn        = PredefinedValue("Enum.IncomingPaymentTransactionType.SalaryReturn");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -3516,7 +3877,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		
 		StrByType = "
 		|Agreement,
-		|Payer,
+		|LegalName,
 		|LegalNameContract";
 		
 		If Options.TransactionType = Incoming_PaymentFromCustomerByPOS Then
@@ -3547,7 +3908,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	ElsIf Options.TransactionType = Incoming_OtherPartner Then
 		StrByType = "
 		|Agreement,
-		|Payer,
+		|LegalName,
 		|LegalNameContract";
 		
 		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
@@ -3580,6 +3941,11 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		|RevenueType,
 		|ProfitLossCenter,
 		|AdditionalAnalytic";
+	ElsIf Options.TransactionType = Incoming_SalaryReturn Then
+		StrByType = "
+		|Employee,
+		|PaymentPeriod,
+		|CalculationType";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -3607,7 +3973,7 @@ Function ClearByTransactionTypeCashPaymentOptions() Export
 		|PlanningTransactionBasis,
 		|Agreement,
 		|LegalNameContract,
-		|Payee,
+		|LegalName,
 		|Order,
 		|RetailCustomer,
 		|Employee,
@@ -3615,7 +3981,12 @@ Function ClearByTransactionTypeCashPaymentOptions() Export
 		|CalculationType,
 		|ReceiptingAccount,
 		|ReceiptingBranch,
-		|Project");
+		|Project,
+		|AdditionalAnalytic,
+		|Tax,
+		|TaxDiscountAmount,
+		|ProfitLossCenter,
+		|RevenueType");		
 EndFunction
 
 Function ClearByTransactionTypeCashPaymentExecute(Options) Export
@@ -3625,7 +3996,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Result.Insert("PlanningTransactionBasis" , Options.PlanningTransactionBasis);
 	Result.Insert("Agreement"                , Options.Agreement);
 	Result.Insert("LegalNameContract"        , Options.LegalNameContract);
-	Result.Insert("Payee"                    , Options.Payee);
+	Result.Insert("LegalName"                , Options.LegalName);
 	Result.Insert("Order"                    , Options.Order);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("Employee"                 , Options.Employee);
@@ -3634,6 +4005,11 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Result.Insert("ReceiptingAccount"        , Options.ReceiptingAccount);
 	Result.Insert("ReceiptingBranch"         , Options.ReceiptingBranch);
 	Result.Insert("Project"                  , Options.Project);
+	Result.Insert("AdditionalAnalytic"       , Options.AdditionalAnalytic);
+	Result.Insert("Tax"                      , Options.Tax);
+	Result.Insert("TaxDiscountAmount"        , Options.TaxDiscountAmount);
+	Result.Insert("RevenueType"              , Options.RevenueType);
+	Result.Insert("ProfitLossCenter"         , Options.ProfitLossCenter);
 
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3664,7 +4040,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_PaymentToVendor Or Options.TransactionType = Outgoing_ReturnToCustomer Then
 		StrByType = "
 		|Agreement,
-		|Payee,
+		|LegalName,
 		|LegalNameContract,
 		|Project";
 		
@@ -3677,9 +4053,13 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_OtherPartner Then
 		StrByType = "
 		|Agreement,
-		|Payee,
-		|LegalNameContract";
-		
+		|LegalName,
+		|LegalNameContract,
+		|AdditionalAnalytic,
+		|Tax,
+		|TaxDiscountAmount,
+		|ProfitLossCenter,
+		|RevenueType";		
 		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
 		If PartnerType = "Other" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then
 			StrByType = StrByType + ", 
@@ -3718,14 +4098,17 @@ Function ClearByTransactionTypeCashReceiptOptions() Export
 		|PlanningTransactionBasis,
 		|Agreement,
 		|LegalNameContract,
-		|Payer,
+		|LegalName,
 		|AmountExchange,
 		|Order,
 		|MoneyTransfer,
 		|RetailCustomer,
 		|SendingAccount,
 		|SendingBranch,
-		|Project");		
+		|Project,
+		|Employee,
+		|PaymentPeriod,
+		|CalculationType");		
 EndFunction
 
 Function ClearByTransactionTypeCashReceiptExecute(Options) Export
@@ -3736,7 +4119,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Result.Insert("PlanningTransactionBasis" , Options.PlanningTransactionBasis);
 	Result.Insert("Agreement"                , Options.Agreement);
 	Result.Insert("LegalNameContract"        , Options.LegalNameContract);
-	Result.Insert("Payer"                    , Options.Payer);
+	Result.Insert("LegalName"                , Options.LegalName);
 	Result.Insert("AmountExchange"           , Options.AmountExchange);
 	Result.Insert("Order"                    , Options.Order);
 	Result.Insert("MoneyTransfer"            , Options.MoneyTransfer);
@@ -3744,6 +4127,9 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Result.Insert("SendingAccount"           , Options.SendingAccount);
 	Result.Insert("SendingBranch"            , Options.SendingBranch);
 	Result.Insert("Project"                  , Options.Project);
+	Result.Insert("Employee"                 , Options.Employee);
+	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
+	Result.Insert("CalculationType"          , Options.CalculationType);
 	
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
@@ -3753,6 +4139,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Incoming_RetailCustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance");
 	Incoming_EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	Incoming_OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
+	Incoming_SalaryReturn        = PredefinedValue("Enum.IncomingPaymentTransactionType.SalaryReturn");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order, MoneyTransfer - clearing always
@@ -3772,7 +4159,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	ElsIf Options.TransactionType = Incoming_PaymentFromCustomer Or Options.TransactionType = Incoming_ReturnFromVendor Then
 		StrByType = "
 		|Agreement,
-		|Payer,
+		|LegalName,
 		|LegalNameContract,
 		|Project";
 		
@@ -3785,7 +4172,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	ElsIf Options.TransactionType = Incoming_OtherPartner Then
 		StrByType = "
 		|Agreement,
-		|Payer,
+		|LegalName,
 		|LegalNameContract";	
 		
 		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
@@ -3799,6 +4186,11 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	ElsIf Options.TransactionType = Incoming_EmployeeCashAdvance Then
 		StrByType = "
 		|Partner";
+	ElsIf Options.TransactionType = Incoming_SalaryReturn Then
+		StrByType = "
+		|Employee,
+		|PaymentPeriod,
+		|CalculationType";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -3823,7 +4215,7 @@ Function ClearByTransactionTypeOutgoingPaymentOrderOptions() Export
 	Return GetChainLinkOptions("TransactionType,
 		|Partner,
 		|PartnerBankAccount,
-		|Payee,
+		|LegalName,
 		|BasisDocument");
 EndFunction
 
@@ -3831,7 +4223,7 @@ Function ClearByTransactionTypeOutgoingPaymentOrderExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("Partner"                  , Options.Partner);
 	Result.Insert("PartnerBankAccount"       , Options.PartnerBankAccount);
-	Result.Insert("Payee"                    , Options.Payee);
+	Result.Insert("LegalName"                , Options.LegalName);
 	Result.Insert("BasisDocument"            , Options.BasisDocument);
 
 	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
@@ -3846,7 +4238,7 @@ Function ClearByTransactionTypeOutgoingPaymentOrderExecute(Options) Export
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.PartnerBankAccount,
-		|PaymentList.Payee";
+		|PaymentList.LegalName";
 	EndIf;
 		
 	ArrayOfAttributes = New Array();
@@ -4161,7 +4553,7 @@ EndFunction
 #Region CHANGE_ACCOUNT_BY_PAYMENT_TYPE
 
 Function ChangeAccountByPaymentTypeOptions() Export
-	Return GetChainLinkOptions("PaymentType, Workstation, CurrentAccount");
+	Return GetChainLinkOptions("PaymentType, Workstation, BankTerm, CurrentAccount");
 EndFunction
 
 Function ChangeAccountByPaymentTypeExecute(Options) Export
@@ -4175,6 +4567,8 @@ Function ChangeAccountByPaymentTypeExecute(Options) Export
 		If ValueIsFilled(Account) Then
 			Return Account;
 		EndIf; 
+	ElsIf _Type = PredefinedValue("Enum.PaymentTypes.Card") Then
+		Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).Account;
 	EndIf;
 	
 	Return Options.CurrentAccount;
@@ -4417,6 +4811,36 @@ Function ChangeSalaryBySalaryTypeExecute(Options) Export
 	EndIf;
 	
 	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region IS_VARIABLE_ITEM_KEY
+
+Function DefaultIsVariableItemKeyInListOptions() Export
+	Return GetChainLinkOptions("Company");
+EndFunction
+	
+Function DefaultIsVariableItemKeyInListExecute(Options) Export	
+	If ValueIsFilled(Options.Company) Then
+		Return CommonFunctionsServer.GetRefAttribute(Options.Company, "UseVariableItemKeyInOrders");
+	EndIf;
+	Return False;
+EndFunction
+
+#EndRegion
+
+#Region IS_VARIABLE_STORE
+
+Function DefaultIsVariableStoreInListOptions() Export
+	Return GetChainLinkOptions("Company");
+EndFunction
+	
+Function DefaultIsVariableStoreInListExecute(Options) Export	
+	If ValueIsFilled(Options.Company) Then
+		Return CommonFunctionsServer.GetRefAttribute(Options.Company, "UseVariableStoreInOrders");
+	EndIf;
+	Return False;
 EndFunction
 
 #EndRegion

@@ -364,8 +364,12 @@ Scenario: _2066006 check locking tab in the PI with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Purchase order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Purchase order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Sales order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -380,8 +384,12 @@ Scenario: _2066006 check locking tab in the PI with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Internal supply request
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -396,8 +404,12 @@ Scenario: _2066006 check locking tab in the PI with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Internal supply request" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Internal supply request" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		And I close all client application windows
 
 
@@ -486,8 +498,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Receipt basis" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Receipt basis" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Purchase order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -502,8 +518,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Purchase order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Purchase order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Purchase invoice
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -518,8 +538,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Purchase invoice" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Purchase invoice" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Sales order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -534,8 +558,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Sales invoice
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -550,8 +578,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales invoice" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales invoice" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Inventory transfer order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -566,8 +598,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Inventory transfer order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Inventory transfer order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Inventory transfer
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -582,8 +618,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Inventory transfer" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Inventory transfer" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Internal supply request
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -598,8 +638,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Internal supply request" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Internal supply request" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Sales return
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -614,8 +658,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales return" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales return" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		* Sales return order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -630,8 +678,12 @@ Scenario: _2066007 check locking tab in the GR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Sales return order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Sales return order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		And I close all client application windows
 		
 
@@ -696,23 +748,30 @@ Scenario: _2066010 change quantity in the linked string in the PO (one session)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
 			| 'Shirt'   | '36/Red'     | '11,000'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "9,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And Delay 2
+		And I select current line in "BasisesTree" table
+		And I input "9,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [3] [Shirt 36/Red] RowID movements remaining: 10 . Required: 9 . Lacking: 1 .'    |
+		And I close current window
 	* Change quantity (more then PI)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
-			| 'Shirt'   | '36/Red'     | '9,000'       |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "11,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+			| 'Shirt'   | '36/Red'     | '11,000'      |
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I input "12,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Shirt'   | '36/Red'     | '12,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Purchase orders" window is opened
@@ -729,31 +788,46 @@ Scenario: _2066011 change quantity in the linked string in the PI, GR after PI, 
 	* Change quantity (less then GR, GR exist)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
-			| 'Boots'   | '37/18SD'    | '2,000'       |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "1,000" text in "Quantity" field of "ItemList" table
-		And I activate "Unit" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of "Unit" attribute in "ItemList" table
+			| 'Boots'   | '37/18SD'    | '27,000'      |
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And Delay 2
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" | "Unit"           |
+			| "2,250"    | "Boots (37/18SD)"  | "Boots (12 pcs)" |
+		And I input "1,000" text in "Quantity" field of "BasisesTree" table
+		And I click choice button of "Unit" attribute in "BasisesTree" table
 		And I go to line in "List" table
 			| 'Description'    |
 			| 'pcs'            |
-		And I select current line in "List" table	
-		And I finish line editing in "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I select current line in "List" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [1] [Boots 37/18SD] RowID movements remaining: 12 . Required: 1 . Lacking: 11 .'    |
+		And I close current window
 	* Change quantity (more then GR, GR exist)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
-			| 'Boots'   | '37/18SD'    | '1,000'       |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "27,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+			| 'Boots'   | '37/18SD'    | '27,000'      |
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" | "Unit"           |
+			| "2,250"    | "Boots (37/18SD)"  | "Boots (12 pcs)" |
+		And I input "28,000" text in "Quantity" field of "BasisesTree" table
+		And I click choice button of "Unit" attribute in "BasisesTree" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'pcs'            |
+		And I select current line in "List" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Boots'   | '37/18SD'    | '28,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Purchase invoices" window is opened
@@ -771,23 +845,34 @@ Scenario: _2066013 change quantity in the linked string in the GR, GR before PI 
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
 			| 'Shirt'   | '36/Red'     | '10,000'      |
-		And I select current line in "ItemList" table
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "8,000" text in "Quantity" field of "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And I activate "Quantity" field in "BasisesTree" table
+		And Delay 2
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "10,000"   | "Shirt (36/Red)"   |
+		And I input "8,000" text in "Quantity" field of "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [2] [Shirt 36/Red] RowID movements remaining: 10 . Required: 8 . Lacking: 2 .'    |
+		And I close current window
 	* Change quantity (more then PI)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'    |
-			| 'Shirt'   | '36/Red'     | '8,000'       |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "11,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+			| 'Shirt'   | '36/Red'     | '10,000'      |
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "10,000"   | "Shirt (36/Red)"   |
+		And I input "11,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Boots'   | '37/18SD'    | '9,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Goods receipts" window is opened
@@ -909,7 +994,7 @@ Scenario: _2066021 unpost GR with linked strings (one session)
 		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
-			| 'Line No. [3] [Boots 37/18SD] RowID movements remaining: 12 . Required: 0 . Lacking: 12 .'    |
+			| 'Line No. [3] [Boots 37/18SD] RowID movements remaining: 9 . Required: 0 . Lacking: 9 .'    |
 			| 'Line No. [2] [Shirt 36/Red] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'     |
 	And I close all client application windows		
 				
@@ -995,7 +1080,7 @@ Scenario: _2066025 delete GR with linked strings (one session)
 		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
-			| 'Line No. [3] [Boots 37/18SD] RowID movements remaining: 12 . Required: 0 . Lacking: 12 .'    |
+			| 'Line No. [3] [Boots 37/18SD] RowID movements remaining: 9 . Required: 0 . Lacking: 9 .'    |
 			| 'Line No. [2] [Shirt 36/Red] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'     |
 	And I close all client application windows
 
@@ -1132,8 +1217,12 @@ Scenario: _2066031 check locking tab in the PRO with linked documents (one sessi
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
-			And I click choice button of "Purchase invoice" attribute in "ItemList" table			
+			When I Check the steps for Exception
+				| 'And I click choice button of "Purchase invoice" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
+			And I click choice button of "Purchase invoice" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		And I close all client application windows
 	
 
@@ -1227,6 +1316,13 @@ Scenario: _2066032 check locking tab in the PR with linked documents (one sessio
 				| 'Trousers'    | '38/Yellow'     |
 			And I click choice button of "Purchase invoice" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'     |
+				| 'Shirt'    | '36/Red'       |			
+			And I click choice button of "Purchase invoice" attribute in "ItemList" table
+			And I close current window
+			And I click "Unlock linked rows" button		
 		* Purchase return order
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'     |
@@ -1241,10 +1337,14 @@ Scenario: _2066032 check locking tab in the PR with linked documents (one sessio
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |
 				| 'Trousers'    | '38/Yellow'     |
+			When I Check the steps for Exception
+				| 'And I click choice button of "Purchase return order" attribute in "ItemList" table'     |
+			And I click "Unlock linked rows" button			
 			And I click choice button of "Purchase return order" attribute in "ItemList" table
 			And I close current window
+			And I click "Unlock linked rows" button
 		And I close all client application windows
-	
+		
 
 Scenario: _2066033 unpost PRO with linked strings (one session)
 	And I close all client application windows
@@ -1377,22 +1477,34 @@ Scenario: _2066039 change quantity in the linked string in the PRO (one session)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I select current line in "ItemList" table
-		And I activate "Quantity" field in "ItemList" table
-		And I input "5,000" text in "Quantity" field of "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "7,000"    | "Shirt (36/Red)"   |
+		And I input "5,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [1] [Shirt 36/Red] RowID movements remaining: 7 . Required: 5 . Lacking: 2 .'    |
+		And I close current window
 	* Change quantity (more then PR)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "8,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "7,000"    | "Shirt (36/Red)"   |
+		And I input "8,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Shirt'   | '36/Red'     | '8,000'       |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Purchase return orders" window is opened
@@ -1412,20 +1524,34 @@ Scenario: _2066040 change quantity in the linked string in the PR (one session)
 			| 'Shirt'   | '36/Red'      |
 		And I select current line in "ItemList" table
 		And I activate "Quantity" field in "ItemList" table
-		And I input "5,000" text in "Quantity" field of "ItemList" table
-		And I click "Post" button
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "7,000"    | "Shirt (36/Red)"   |
+		And I input "5,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
 		Then there are lines in TestClient message log
 			| 'Line No. [1] [Shirt 36/Red] RowID movements remaining: 7 . Required: 5 . Lacking: 2 .'    |
+		And I close current window
 	* Change quantity (more then SC)
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Shirt'   | '36/Red'      |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "8,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
+		And I click "Edit quantity" button
+		And Delay 2
+		And I activate "Quantity" field in "BasisesTree" table
+		And I select current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| "Quantity" | "Row presentation" |
+			| "7,000"    | "Shirt (36/Red)"   |
+		And I input "8,000" text in "Quantity" field of "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key'   | 'Quantity'    |
+			| 'Shirt'   | '36/Red'     | '8,000'      |
 		And I click "Post and close" button
 		Then user message window does not contain messages
 		Then "Purchase returns" window is opened

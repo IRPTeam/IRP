@@ -246,9 +246,11 @@ Procedure ValidateProcessCheck(DataSource)
 		OR TypeOf(DataSource) = Type("DocumentRef.RetailReceiptCorrection")
 		 Then
 	
-		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, "StatusType, Posted, DeletionMark");
+		StatusData = CommonFunctionsServer.GetAttributesFromRef(DataSource, 
+			"StatusType, Posted, DeletionMark, ConsolidatedRetailSales.FiscalPrinter.DocumentPostingAfterPrinting");
 		
-		If Not StatusData.StatusType = PredefinedValue("Enum.RetailReceiptStatusTypes.Completed") Then
+		If Not StatusData.StatusType = PredefinedValue("Enum.RetailReceiptStatusTypes.Completed") 
+				And StatusData.ConsolidatedRetailSales.FiscalPrinter.DocumentPostingAfterPrinting <> True Then
 			Raise R().EqFP_CanPrintOnlyComplete;
 		EndIf;
 		

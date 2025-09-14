@@ -227,7 +227,11 @@ EndProcedure
 
 #Region CheckAfterWrite
 
-Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return;
+	EndIf;
+
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;

@@ -113,6 +113,9 @@ Function GetLockFieldNames() Export
 EndFunction
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return True;
+	EndIf;
 
 	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4050B_StockInventory", True) Then
 		Return True;

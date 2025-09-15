@@ -253,14 +253,31 @@ Procedure FixTypesForWrite(Data) Export
 				EndDo;
 			EndIf;
 		EndIf;
-		If Data.Property("In") And Data.In.Property("CheckPackage") And Data.In.CheckPackage.Property("Positions") Then
-			For Each Row In Data.In.CheckPackage.Positions.FiscalStrings Do
-				For Each Prop In Row Do
-					If Not CommonFunctionsServer.IsPrimitiveValue(Prop.Value) Then
-						Row[Prop.Key] = String(Prop.Value);
+		If Data.Property("In") And Data.In.Property("CheckPackage")  Then
+			If Data.In.CheckPackage.Property("Positions") Then
+				For Each Row In Data.In.CheckPackage.Positions.FiscalStrings Do
+					For Each Prop In Row Do
+						If Not CommonFunctionsServer.IsPrimitiveValue(Prop.Value) Then
+							Row[Prop.Key] = String(Prop.Value);
+						EndIf;
+					EndDo;
+				EndDo;
+			EndIf;
+			If Data.In.CheckPackage.Property("Parameters") Then
+				For Each ParameterKeyValue In Data.In.CheckPackage.Parameters Do
+					If TypeOf(ParameterKeyValue.Value) = Type("Structure") Then
+						For Each Prop In ParameterKeyValue.Value Do
+							If Not CommonFunctionsServer.IsPrimitiveValue(Prop.Value) Then
+								Data.In.CheckPackage.Parameters[ParameterKeyValue.Key][Prop.Key] = String(Prop.Value);
+							EndIf;
+						EndDo;
+					Else
+						If Not CommonFunctionsServer.IsPrimitiveValue(ParameterKeyValue.Value) Then
+							Data.In.CheckPackage.Parameters[ParameterKeyValue.Key] = String(ParameterKeyValue.Value);
+						EndIf;
 					EndIf;
 				EndDo;
-			EndDo;
+			EndIf;
 		EndIf;
 	EndIf;
 EndProcedure

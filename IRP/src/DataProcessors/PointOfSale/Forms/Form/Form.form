@@ -6692,6 +6692,23 @@ End</presentationExpression>
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>DocumentPostingAfterPrinting</name>
+    <title>
+      <key>en</key>
+      <value>Document posting after printing</value>
+    </title>
+    <id>216</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>qPayment</name>
     <title>

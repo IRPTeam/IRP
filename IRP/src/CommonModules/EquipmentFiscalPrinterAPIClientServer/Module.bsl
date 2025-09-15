@@ -325,6 +325,7 @@ EndFunction
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** CheckNumber - String - Fiscal check number
+// ** ShiftNumber - String - Shift number
 // * InOut - Structure -
 // * Out - Structure:
 Function GetPrintCheckCopySettings() Export
@@ -338,6 +339,7 @@ Function GetPrintCheckCopySettings() Export
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("CheckNumber", "");
+	Str.In.Insert("ShiftNumber", "");
 
     Str.Insert("InOut", New Structure);
 
@@ -814,6 +816,7 @@ EndFunction
 // *** Description - String - Description of the correction
 // *** Date - Date - Date of the corrected transaction
 // *** Number - String - Number of the tax authority's prescription
+// *** FiscalResponse - String - Fiscal response
 // ** TaxationSystem - Number - Taxation system code
 // ** CustomerDetail - Structure - Customer (client) details:
 // *** Info - String - Name of the organization or surname, name, patronymic (if available)
@@ -874,6 +877,7 @@ Function CheckPackage() Export
     CorrectionData.Insert("Description", "");
     CorrectionData.Insert("Date", Date(1, 1, 1));
     CorrectionData.Insert("Number", "");
+    CorrectionData.Insert("FiscalResponse", "");
     Str.Parameters.Insert("CorrectionData", CorrectionData);
 
     CustomerDetail = New Structure;

@@ -84,9 +84,11 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		ThisObject.BasisDocument = Basis;
 		If TypeOf(Basis) = Type("DocumentRef.RetailReceiptCorrection") Then
 			ThisObject.BasisDocumentFiscalNumber = Basis.BasisDocumentFiscalNumber;
+			ThisObject.BasisDocumentShiftNumber = Basis.BasisDocumentShiftNumber;
 		Else
 			FiscalBasisData = InformationRegisters.DocumentFiscalStatus.GetStatusData(Basis);
 			ThisObject.BasisDocumentFiscalNumber = FiscalBasisData.CheckNumber;
+			ThisObject.BasisDocumentShiftNumber = FiscalBasisData.ShiftNumber;
 		EndIf;
 		
 		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingStructure);

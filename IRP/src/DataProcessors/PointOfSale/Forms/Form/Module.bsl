@@ -1564,14 +1564,22 @@ Procedure ClearRetailCustomerAtServer()
 	EndDo;
 EndProcedure
 
+// Change consolidated retail sales.
+// 
+// Parameters:
+//  Object - FormDataStructure - Object
+//  Form - ClientApplicationForm - Form
+//  NewDocument - DocumentRef.ConsolidatedRetailSales, Undefined - New document
 &AtClientAtServerNoContext
 Procedure ChangeConsolidatedRetailSales(Object, Form, NewDocument)
 	Form.ConsolidatedRetailSales = NewDocument;
 	Object.ConsolidatedRetailSales = NewDocument;
-	Form.DocumentPostingAfterPrinting = 
-		CommonFunctionsServer.GetAttributesFromRef(
-			NewDocument, "FiscalPrinter.DocumentPostingAfterPrinting").
-				FiscalPrinter.DocumentPostingAfterPrinting;
+	If NewDocument <> Undefined Then
+		Form.DocumentPostingAfterPrinting = 
+			CommonFunctionsServer.GetAttributesFromRef(
+				NewDocument, "FiscalPrinter.DocumentPostingAfterPrinting").
+					FiscalPrinter.DocumentPostingAfterPrinting;
+	EndIf;
 EndProcedure
 
 #EndRegion

@@ -32,22 +32,31 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ListParameters.Insert("OpeningEntry_AccountPayable", False);
 	ListParameters.Insert("OpeningEntry_AccountReceivable", False);
 	
-	ListParameters.SalesReportFromTradeAgent = True;
-	ListParameters.CashTransferOrder = True;
-	ListParameters.DebitNote = True;
-	ListParameters.CreditNote = True;
-	ListParameters.SalesInvoice = True;
-	ListParameters.SalesReturn = True;
-	ListParameters.PurchaseInvoice = True;
-	ListParameters.PurchaseReturn = True;
-	ListParameters.RetailReturnReceipt = True;
-	ListParameters.RetailSalesReceipt = True;
-	ListParameters.WithholdingTaxInvoice = True; 
-	ListParameters.SalesReportToConsignor = True;
-	ListParameters.OpeningEntry_TradeAgent = True;
-	ListParameters.OpeningEntry_Consignor = True;
-	ListParameters.OpeningEntry_AccountPayable = True;
-	ListParameters.OpeningEntry_AccountReceivable = True;
+	Outgoing = Enums.OutgoingPaymentTransactionTypes;
+	Incoming = Enums.IncomingPaymentTransactionType;
+	TransactionTypeMap = New Map();
+	TransactionTypeMap.Insert(Outgoing.PaymentToVendor, 
+		"PurchaseInvoice, DebitNote, SalesReportToConsignor, WithholdingTaxInvoice, OpeningEntry_Consignor, OpeningEntry_AccountPayable");
+	TransactionTypeMap.Insert(Outgoing.ReturnToCustomer, "SalesReturn, CreditNote, OpeningEntry_AccountReceivable");
+	TransactionTypeMap.Insert(Outgoing.RetailCustomerAdvance,"RetailSalesReceipt");
+	TransactionTypeMap.Insert(Outgoing.ReturnToCustomerByPOS, "RetailReturnReceipt, SalesReturn");
+	
+	TransactionTypeMap.Insert(Incoming.PaymentFromCustomer, 
+		"SalesInvoice, CreditNote, SalesReportFromTradeAgent, OpeningEntry_TradeAgent, OpeningEntry_AccountReceivable");
+	TransactionTypeMap.Insert(Incoming.ReturnFromVendor, "PurchaseReturn, DebitNote, OpeningEntry_AccountPayable");
+	TransactionTypeMap.Insert(Incoming.RetailCustomerAdvance, "RetailSalesReceipt");
+	
+	DocumentNames = TransactionTypeMap.Get(Parameters.TransactionType);
+	If DocumentNames = Undefined Then
+		For Each KeyValue In ListParameters Do
+			ListParameters[KeyValue.Key] = True
+		EndDo;
+	Else
+		ArrayOfDocumentNames = StrSplit(DocumentNames, ",");
+		For Each DocName In ArrayOfDocumentNames Do
+			ListParameters[TrimAll(DocName)] = True
+		EndDo;
+	EndIf;
 	
 	For Each KeyValue In ListParameters Do
 		ThisObject.List.Parameters.SetParameterValue(KeyValue.Key , KeyValue.Value);

@@ -71,7 +71,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Gross Sales</v8:content>
+							<v8:content>Brüt Satışlar</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -102,7 +102,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Sales Returns &amp; Discounts</v8:content>
+							<v8:content>Satış İadeleri ve İskontolar</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -133,7 +133,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Net Sales</v8:content>
+							<v8:content>Net Satışlar</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -164,7 +164,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Cost of Goods Sold (COGS)</v8:content>
+							<v8:content>Satılan Ürünlerin Maliyeti (COGS)</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -195,7 +195,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Gross Profit</v8:content>
+							<v8:content>Brüt Kâr</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -226,7 +226,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Selling &amp; Distribution Expenses</v8:content>
+							<v8:content>Satış ve Dağıtım Giderleri</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -257,7 +257,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Marketing Expenses</v8:content>
+							<v8:content>Pazarlama Giderleri</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -288,7 +288,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>General &amp; Administrative Expenses</v8:content>
+							<v8:content>Genel Yönetim Giderleri</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -319,7 +319,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Research &amp; Development (R&amp;D)</v8:content>
+							<v8:content>Araştırma ve Geliştirme (Ar-Ge)</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -350,7 +350,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Other Operating Income / Expenses (Net)</v8:content>
+							<v8:content>Diğer Faaliyet Gelir/Giderleri (Net)</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -381,7 +381,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>EBITDA</v8:content>
+							<v8:content>Faiz, Vergi, Amortisman ve İtfa Öncesi Kâr (FVAÖK)</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -412,7 +412,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Depreciation &amp; Amortization</v8:content>
+							<v8:content>Amortisman ve İtfa Payları</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -443,7 +443,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>EBIT (Operating Profit)</v8:content>
+							<v8:content>Faaliyet Kârı (EBIT)</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -474,7 +474,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Financial Income / Expenses (Net)</v8:content>
+							<v8:content>Finansal Gelirler / Giderler (Net)</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -505,7 +505,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Profit Before Tax (EBT)</v8:content>
+							<v8:content>Vergi Öncesi Kâr (EBT)</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -536,7 +536,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Income Tax</v8:content>
+							<v8:content>Gelir Vergisi / Kurumlar Vergisi</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -567,7 +567,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Net Profit</v8:content>
+							<v8:content>Net Kâr</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
@@ -598,7 +598,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Unmapped GL Accounts</v8:content>
+							<v8:content>Eşleştirilmemiş Hesaplar (MUH)</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>

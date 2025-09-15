@@ -278,6 +278,7 @@ Function PrintCheckCopy(ConsolidatedRetailSales, DataSource) Export
 	EndIf;
 
 	PrintCheckCopySettings.In.CheckNumber = StatusData.CheckNumber;
+	PrintCheckCopySettings.In.ShiftNumber = StatusData.ShiftNumber;
 	EquipmentFiscalPrinterAPIServer.PrintCheckCopy(CRS.FiscalPrinter, PrintCheckCopySettings);
 
 	Return PrintCheckCopySettings;
@@ -531,9 +532,12 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 			CheckPackage.Parameters.CorrectionData.Number = "0";
 		EndIf;
 		
-                If IsBlankString(CheckPackage.Parameters.CorrectionData.Description) Then
-                        Raise R().CorrectionDescriptionRequired;
-                EndIf;
+		FiscalStatus = InformationRegisters.DocumentFiscalStatus.GetStatusData(DocumentWithCorrectionInfo);
+		CheckPackage.Parameters.CorrectionData.FiscalResponse = FiscalStatus.FiscalResponse; 
+		
+		If IsBlankString(CheckPackage.Parameters.CorrectionData.Description) Then
+			Raise R().CorrectionDescriptionRequired;
+		EndIf;
 		
 	Else
 		CheckPackage.Parameters.CorrectionData = New Structure();
@@ -670,18 +674,7 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 		FiscalStringData.PaymentMethod = 3;
 		FiscalStringData.PriceWithDiscount = Item.TotalAmount;
 		
-		If ValueIsFilled(Item.VatRate) Then
-			If Item.VatRate.NoRate Then
-				FiscalStringData.VATRate = "none";
-				FiscalStringData.VATAmount = 0;
-			Else
-				FiscalStringData.VATRate = Format(Item.VatRate.Rate, "NZ=0; NG=0;");
-				FiscalStringData.VATAmount = Item.TaxAmount;
-			EndIf;
-		Else
-			FiscalStringData.VATRate = "none";
-			FiscalStringData.VATAmount = 0;
-		EndIf;
+		FillVatRate(Item, FiscalStringData);
 		
 		CheckPackage.Positions.FiscalStrings.Add(FiscalStringData);
 	EndDo;
@@ -786,7 +779,8 @@ EndFunction
 //  Ref - DocumentRef.RetailSalesReceipt, DocumentRef.ConsolidatedRetailSales -
 //  InputParameters - See EquipmentFiscalPrinterAPIClient.InputParameters
 Procedure FillInputParameters(Ref, InputParameters) Export
-	InputParameters.CashierName = Ref.Author.Partner.Description_ru;
+	//InputParameters.CashierName = Ref.Author.Partner.Description_ru;
+	InputParameters.CashierName = LocalizationServer.RefDescription(Ref.Author.Partner);
 
 	If IsBlankString(InputParameters.CashierName) Then
 		//@skip-check property-return-type
@@ -1044,46 +1038,54 @@ EndProcedure
 
 Procedure FillPayments(SourceData, CheckPackage)
 	For Each Payment In SourceData.Payments Do
-			If Payment.Amount < 0 Then
-				Continue;
-			EndIf;
-	
-			If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
-				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
-			ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialPrepayment Then
-				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
-			ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.AdvancePayment Then
-				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
-			ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation Then
-				If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
-					CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
-				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
-					CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
-				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
+		If Payment.Amount < 0 Then
+			Continue;
+		EndIf;
+
+		If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
+			CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialPrepayment Then
+			CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.AdvancePayment Then
+			CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation Then
+			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
+				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
+				If Payment.PaymentInFiscalPrinterMode Then
 					CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
-				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
-					CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
-				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
-					CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
 				Else
-					CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
+					CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
 				EndIf;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
+				CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
 			Else
-				If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
-					CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
-				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
-					CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
-				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
-					CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
-				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
-					CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
-				ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
-					CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
-				Else
-					CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
-				EndIf;
+				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
 			EndIf;
-		EndDo;
+		Else
+			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
+				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
+				If Payment.PaymentInFiscalPrinterMode Then
+					CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
+				Else
+					CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
+				EndIf;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
+				CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Certificate Then
+				CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
+			Else
+				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
+			EndIf;
+		EndIf;
+	EndDo;
 EndProcedure
 
 #EndRegion

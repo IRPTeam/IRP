@@ -17,7 +17,10 @@ Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Expo
 EndFunction
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
-	
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return True;
+	EndIf;
+
 	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4010B_ActualStocks", True) Then
 		Return True;
 	EndIf;

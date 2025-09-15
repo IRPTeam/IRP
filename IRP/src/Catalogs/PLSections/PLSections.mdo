@@ -10,7 +10,7 @@
  <name>PLSections</name>
  <synonym>
   <key>tr</key>
-  <value>P&amp;L Sections</value>
+  <value>Kâr&amp;Zarar Bölümleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -27,7 +27,7 @@
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
   <key>tr</key>
-  <value>P&amp;L Section</value>
+  <value>Kâr&amp;Zarar Bölümü</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
@@ -199,7 +199,7 @@
    <name>TurnoversType</name>
    <synonym>
     <key>tr</key>
-    <value>Turnovers type</value>
+    <value>Ciro türleri</value>
    </synonym>
    <synonym>
     <key>ru</key>

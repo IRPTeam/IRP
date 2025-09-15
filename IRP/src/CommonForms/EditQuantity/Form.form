@@ -2695,7 +2695,7 @@
   <name>SelectedRowKey</name>
   <title>
    <key>tr</key>
-   <value>Selected row key</value>
+   <value>Seçili satır anahtarı</value>
   </title>
   <title>
    <key>ru</key>
@@ -2721,7 +2721,7 @@
   <name>Childrens</name>
   <title>
    <key>tr</key>
-   <value>Childrens</value>
+   <value>Çocuklar</value>
   </title>
   <title>
    <key>ru</key>
@@ -2745,7 +2745,7 @@
    <name>Children</name>
    <title>
     <key>tr</key>
-    <value>Children</value>
+    <value>Çocuklar</value>
    </title>
    <title>
     <key>ru</key>

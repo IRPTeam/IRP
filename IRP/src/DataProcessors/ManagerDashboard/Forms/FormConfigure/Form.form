@@ -401,7 +401,7 @@
       </title>
       <toolTip>
        <key>tr</key>
-       <value>Sales widgets create new</value>
+       <value>Satış ekran araçları yeni oluştur</value>
       </toolTip>
       <toolTip>
        <key>ru</key>
@@ -921,7 +921,7 @@
       </title>
       <toolTip>
        <key>tr</key>
-       <value>Purchases widgets create new</value>
+       <value>Alım araçları yeni oluştur</value>
       </toolTip>
       <toolTip>
        <key>ru</key>
@@ -1086,7 +1086,7 @@
    </title>
    <toolTip>
     <key>tr</key>
-    <value>Group purchases</value>
+    <value>Alımları gruplandır</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
@@ -1492,7 +1492,7 @@
       </title>
       <toolTip>
        <key>tr</key>
-       <value>Money widgets create new</value>
+       <value>Yeni nakit ekran araçları oluştur</value>
       </toolTip>
       <toolTip>
        <key>ru</key>
@@ -1645,7 +1645,7 @@
    </userVisible>
    <title>
     <key>tr</key>
-    <value>Money</value>
+    <value>Nakit</value>
    </title>
    <title>
     <key>ru</key>
@@ -1657,7 +1657,7 @@
    </title>
    <toolTip>
     <key>tr</key>
-    <value>Group money</value>
+    <value>Nakiti gruplandır</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
@@ -1819,7 +1819,7 @@
   <name>SalesWidgets</name>
   <title>
    <key>tr</key>
-   <value>Sales widgets</value>
+   <value>Satış ekran araçları</value>
   </title>
   <title>
    <key>ru</key>
@@ -1843,7 +1843,7 @@
    <name>WidgetName</name>
    <title>
     <key>tr</key>
-    <value>Widget name</value>
+    <value>Araç adı</value>
    </title>
    <title>
     <key>ru</key>
@@ -1999,7 +1999,7 @@
   <name>PurchasesWidgets</name>
   <title>
    <key>tr</key>
-   <value>Purchases widgets</value>
+   <value>Alım ekran araçları</value>
   </title>
   <title>
    <key>ru</key>
@@ -2023,7 +2023,7 @@
    <name>WidgetName</name>
    <title>
     <key>tr</key>
-    <value>Widget name</value>
+    <value>Araç adı</value>
    </title>
    <title>
     <key>ru</key>
@@ -2179,7 +2179,7 @@
   <name>MoneyWidgets</name>
   <title>
    <key>tr</key>
-   <value>Money widgets</value>
+   <value>Nakit ekran araçları</value>
   </title>
   <title>
    <key>ru</key>
@@ -2203,7 +2203,7 @@
    <name>WidgetName</name>
    <title>
     <key>tr</key>
-    <value>Widget name</value>
+    <value>Araç adı</value>
    </title>
    <title>
     <key>ru</key>
@@ -2385,7 +2385,7 @@
   <name>Sales_AverageBill</name>
   <title>
    <key>tr</key>
-   <value>Average bill</value>
+   <value>Ortalama fiş tutarı</value>
   </title>
   <title>
    <key>ru</key>
@@ -2398,7 +2398,7 @@
   <id>1</id>
   <toolTip>
    <key>tr</key>
-   <value>Sales average bill</value>
+   <value>Satış fiş ortalaması</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
@@ -2422,7 +2422,7 @@
   <name>Sales_SalesAmount</name>
   <title>
    <key>tr</key>
-   <value>Tutar</value>
+   <value>Satış tutarı</value>
   </title>
   <title>
    <key>ru</key>
@@ -2435,7 +2435,7 @@
   <id>2</id>
   <toolTip>
    <key>tr</key>
-   <value>Sales sales amount</value>
+   <value>Satışlar Satış tutarı</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
@@ -2459,7 +2459,7 @@
   <name>Sales_SalerReturnPercentage</name>
   <title>
    <key>tr</key>
-   <value>Saler return percentage</value>
+   <value>Satış iade yüzdesi</value>
   </title>
   <title>
    <key>ru</key>
@@ -2472,7 +2472,7 @@
   <id>3</id>
   <toolTip>
    <key>tr</key>
-   <value>Sales saler return percentage</value>
+   <value>Satışlar Satış iadesi yüzdesi</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
@@ -2496,7 +2496,7 @@
   <name>Purchases_VolumeOfPurchases</name>
   <title>
    <key>tr</key>
-   <value>Volume of purchases</value>
+   <value>Satın alma hacmi</value>
   </title>
   <title>
    <key>ru</key>
@@ -2509,7 +2509,7 @@
   <id>4</id>
   <toolTip>
    <key>tr</key>
-   <value>Purchases volume of purchases</value>
+   <value>Satınalma hacmi satınalma</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
@@ -2546,7 +2546,7 @@
   <id>5</id>
   <toolTip>
    <key>tr</key>
-   <value>Purchases stock balance</value>
+   <value>Satınalma stok bakiyesi</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
@@ -2583,7 +2583,7 @@
   <id>6</id>
   <toolTip>
    <key>tr</key>
-   <value>Money cash balance</value>
+   <value>Nakit bakiyesi</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
@@ -2607,7 +2607,7 @@
   <name>Money_PaymentsFromClients</name>
   <title>
    <key>tr</key>
-   <value>Payments from clients</value>
+   <value>Müşterilerden gelen ödemeler</value>
   </title>
   <title>
    <key>ru</key>
@@ -2620,7 +2620,7 @@
   <id>7</id>
   <toolTip>
    <key>tr</key>
-   <value>Money payments from clients</value>
+   <value>Müşterilerden gelen ödemeler</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
@@ -2644,7 +2644,7 @@
   <name>Money_PaymentsToSuppliers</name>
   <title>
    <key>tr</key>
-   <value>Payments to suppliers</value>
+   <value>Tedarikçilere yapılan ödemeler</value>
   </title>
   <title>
    <key>ru</key>
@@ -2657,7 +2657,7 @@
   <id>8</id>
   <toolTip>
    <key>tr</key>
-   <value>Money payments to suppliers</value>
+   <value>Tedarikçilere yapılan ödemeler</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
@@ -2681,7 +2681,7 @@
   <name>Money_ApAr</name>
   <title>
    <key>tr</key>
-   <value>AP\AR</value>
+   <value>Borç/Alacak</value>
   </title>
   <title>
    <key>ru</key>
@@ -2694,7 +2694,7 @@
   <id>9</id>
   <toolTip>
    <key>tr</key>
-   <value>Money ap ar</value>
+   <value>Nakit Borç Alacak</value>
   </toolTip>
   <toolTip>
    <key>ru</key>

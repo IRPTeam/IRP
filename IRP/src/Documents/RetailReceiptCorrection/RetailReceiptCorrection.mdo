@@ -647,6 +647,32 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="f1d9ebf0-6e8d-416d-a191-6a9f02b6d651">
+  <name>BasisDocumentShiftNumber</name>
+  <synonym>
+   <key>tr</key>
+   <value>Kaynak evrak vardiya numarası</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Basis document shift number</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Basis document shift number</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>20</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="25f5eabb-f4ad-4a36-b595-cf68b50bc18b">
   <name>DocumentForm</name>
   <synonym>
@@ -2177,6 +2203,28 @@
    </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="95ca2eca-17a3-4652-a547-5a5cf5fb52d0">
+   <name>PaymentInFiscalPrinterMode</name>
+   <synonym>
+    <key>tr</key>
+    <value>Fiskal yazıcıda ödeme modu</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Payment in fiscal printer mode</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Payment in fiscal printer mode</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

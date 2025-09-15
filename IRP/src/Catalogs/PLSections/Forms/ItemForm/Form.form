@@ -107,7 +107,7 @@
    <choiceList>
     <presentation>
      <key>tr</key>
-     <value>Data selection</value>
+     <value>Veri seçimi</value>
     </presentation>
     <presentation>
      <key>ru</key>
@@ -648,7 +648,7 @@
     <id>69</id>
     <title>
      <key>tr</key>
-     <value>Section.&lt;Section name&gt;</value>
+     <value>Bölüm.&lt;Bölüm adı&gt;</value>
     </title>
     <title>
      <key>ru</key>

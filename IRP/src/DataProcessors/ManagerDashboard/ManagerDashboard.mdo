@@ -7,7 +7,7 @@
  <name>ManagerDashboard</name>
  <synonym>
   <key>tr</key>
-  <value>Manager dashboard</value>
+  <value>Yönetici Gösterge Paneli</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -40,7 +40,7 @@
   <name>FormConfigure</name>
   <synonym>
    <key>tr</key>
-   <value>Form configure</value>
+   <value>Form yapılandır</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -57,7 +57,7 @@
   <name>FormWidgetSettings</name>
   <synonym>
    <key>tr</key>
-   <value>Widget settings</value>
+   <value>Araç ayarları</value>
   </synonym>
   <synonym>
    <key>ru</key>

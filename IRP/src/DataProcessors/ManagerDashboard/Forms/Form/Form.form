@@ -58,7 +58,7 @@
    </userVisible>
    <title>
     <key>tr</key>
-    <value>Dashboard</value>
+    <value>Gösterge Paneli</value>
    </title>
    <title>
     <key>ru</key>
@@ -70,7 +70,7 @@
    </title>
    <toolTip>
     <key>tr</key>
-    <value>Group dashboard</value>
+    <value>Gösterge Paneli gruplandır</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
@@ -704,7 +704,7 @@
   <name>WidgetSettings</name>
   <title>
    <key>tr</key>
-   <value>Widget settings</value>
+   <value>Ekran aracı ayarları</value>
   </title>
   <title>
    <key>ru</key>
@@ -728,7 +728,7 @@
    <name>WidgetName</name>
    <title>
     <key>tr</key>
-    <value>Widget name</value>
+    <value>Ekran aracı adı</value>
    </title>
    <title>
     <key>ru</key>

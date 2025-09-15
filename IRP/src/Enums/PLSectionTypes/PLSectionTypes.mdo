@@ -8,7 +8,7 @@
  <name>PLSectionTypes</name>
  <synonym>
   <key>tr</key>
-  <value>PLSection types</value>
+  <value>Kâr/Zarar (PL) bölüm türleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -24,7 +24,7 @@
   <name>DataSelection</name>
   <synonym>
    <key>tr</key>
-   <value>Data selection</value>
+   <value>Veri seçimi</value>
   </synonym>
   <synonym>
    <key>ru</key>

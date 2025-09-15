@@ -303,7 +303,7 @@
      </userVisible>
      <title>
       <key>tr</key>
-      <value>Group last period</value>
+      <value>Son dönemi gruplandır</value>
      </title>
      <title>
       <key>ru</key>
@@ -315,7 +315,7 @@
      </title>
      <toolTip>
       <key>tr</key>
-      <value>Group last period</value>
+      <value>Son dönemi gruplandır</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
@@ -443,7 +443,7 @@
       <id>23</id>
       <title>
        <key>tr</key>
-       <value>Compare with</value>
+       <value>ile karşılaştır</value>
       </title>
       <title>
        <key>ru</key>
@@ -502,7 +502,7 @@
       <id>28</id>
       <title>
        <key>tr</key>
-       <value>same previous periods</value>
+       <value>Aynı önceki dönemler</value>
       </title>
       <title>
        <key>ru</key>
@@ -583,7 +583,7 @@
     </title>
     <toolTip>
      <key>tr</key>
-     <value>Group period</value>
+     <value>Dönemi gruplandır</value>
     </toolTip>
     <toolTip>
      <key>ru</key>
@@ -1726,7 +1726,7 @@
      </userVisible>
      <title>
       <key>tr</key>
-      <value>Chart options</value>
+      <value>Grafik seçenekleri</value>
      </title>
      <title>
       <key>ru</key>
@@ -2077,7 +2077,7 @@
    </title>
    <toolTip>
     <key>tr</key>
-    <value>Group series</value>
+    <value>Serileri gruplandır</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
@@ -2220,7 +2220,7 @@
   <name>WidgetType</name>
   <title>
    <key>tr</key>
-   <value>Widget type</value>
+   <value>Ekran aracı tipi</value>
   </title>
   <title>
    <key>ru</key>
@@ -2298,7 +2298,7 @@
   <name>LastPeriodCount</name>
   <title>
    <key>tr</key>
-   <value>Last period count</value>
+   <value>Son dönem sayı</value>
   </title>
   <title>
    <key>ru</key>
@@ -2326,7 +2326,7 @@
   <name>LastPeriodType</name>
   <title>
    <key>tr</key>
-   <value>Last period type</value>
+   <value>Son dönem türü</value>
   </title>
   <title>
    <key>ru</key>
@@ -2378,7 +2378,7 @@
   <name>ComparePeriodCount</name>
   <title>
    <key>tr</key>
-   <value>Compare period count</value>
+   <value>Dönem karşılaştır sayı</value>
   </title>
   <title>
    <key>ru</key>
@@ -2761,7 +2761,7 @@
   <name>WidgetID</name>
   <title>
    <key>tr</key>
-   <value>Widget ID</value>
+   <value>Ekran aracı ID</value>
   </title>
   <title>
    <key>ru</key>
@@ -2787,7 +2787,7 @@
   <name>WidgetName</name>
   <title>
    <key>tr</key>
-   <value>Widget name</value>
+   <value>Araç adı</value>
   </title>
   <title>
    <key>ru</key>
@@ -2865,7 +2865,7 @@
   <name>Options_DetailsType</name>
   <title>
    <key>tr</key>
-   <value>Details type</value>
+   <value>Detay türü</value>
   </title>
   <title>
    <key>ru</key>
@@ -2891,7 +2891,7 @@
   <name>Options_ModalTitle</name>
   <title>
    <key>tr</key>
-   <value>Modal title</value>
+   <value>Modal başlık</value>
   </title>
   <title>
    <key>ru</key>
@@ -2917,7 +2917,7 @@
   <name>Options_ModalIcon</name>
   <title>
    <key>tr</key>
-   <value>Modal icon</value>
+   <value>Modal simge</value>
   </title>
   <title>
    <key>ru</key>
@@ -2969,7 +2969,7 @@
   <name>Options_TimeLineDateFormat</name>
   <title>
    <key>tr</key>
-   <value>Time line date format</value>
+   <value>Zaman çizelgesi tarih biçimi</value>
   </title>
   <title>
    <key>ru</key>
@@ -2995,7 +2995,7 @@
   <name>ChartOptions_ShowPoint</name>
   <title>
    <key>tr</key>
-   <value>Show point</value>
+   <value>Noktaları göster</value>
   </title>
   <title>
    <key>ru</key>
@@ -3020,7 +3020,7 @@
   <name>ChartOptions_ValueDivider</name>
   <title>
    <key>tr</key>
-   <value>Value divider</value>
+   <value>Değer bölücü</value>
   </title>
   <title>
    <key>ru</key>

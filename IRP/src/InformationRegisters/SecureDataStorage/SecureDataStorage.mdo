@@ -12,7 +12,7 @@
  <name>SecureDataStorage</name>
  <synonym>
   <key>tr</key>
-  <value>Secure data storage</value>
+  <value>Güvenli depo</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -26,7 +26,7 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
   <key>tr</key>
-  <value>Secure data storage</value>
+  <value>Güvenli veri depolama</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>

@@ -1827,7 +1827,7 @@ Function Strings(Lang) Export
 		|tr='Miktar'", Lang));
 	Strings.Insert("Form_004", NStr("en='Customer terms';
 		|ru='Customer terms';
-		|tr='Customer terms'", Lang));
+		|tr='Müşteri sözleşmesi'", Lang));
 	Strings.Insert("Form_005", NStr("en='Customers';
 		|ru='Клиенты';
 		|tr='Müşteriler'", Lang));
@@ -1836,7 +1836,7 @@ Function Strings(Lang) Export
 		|tr='Tedarikçiler'", Lang));
 	Strings.Insert("Form_007", NStr("en='Vendor terms';
 		|ru='Vendor terms';
-		|tr='Vendor terms'", Lang));
+		|tr='Tedarikçi sözleşmesi'", Lang));
 	Strings.Insert("Form_008", NStr("en='User';
 		|ru='Пользователь';
 		|tr='Kullanıcı'", Lang));
@@ -2266,7 +2266,7 @@ Function Strings(Lang) Export
 	// %5 - 10
 	Strings.Insert("Error_081", NStr("en='In line %1 quantity by %2-%3 %4 greater than quantity %5';
 		|ru='В строке %1 количество %2-%3 %4 больше чем количество %5';
-		|tr='In line %1 quantity by %2-%3 %4 greater than quantity %5'",
+		|tr='%1 satırında miktar %2-%3 miktar %5ten %4 fazla'",
 		Lang));
 	
 	// %1 - 1 
@@ -2662,13 +2662,13 @@ Function Strings(Lang) Export
 		|tr='Belge tarihi [%1], [%3] içindeki [%2] tarihinden büyük'", Lang));
 	Strings.Insert("Error_187", NStr("en='Error chage quantity for [%1]';
 		|ru='Ошибка изменения количества на [%1]';
-		|tr='Error chage quantity for [%1]'", Lang));
+		|tr='[%1] için miktar değişikliği hatası'", Lang));
 	Strings.Insert("Error_188", NStr("en='Section with name [%1] already exists';
 		|ru='Аналитика с наименовением [%1] уже существует';
-		|tr='Section with name [%1] already exists'", Lang));
+		|tr='[%1] adlı bölüm zaten mevcut'", Lang));
 	Strings.Insert("Error_189", NStr("en='Ext. dimension number is required field';
 		|ru='Субконто это обязательное поле';
-		|tr='Ext. dimension number is required field'", Lang));
+		|tr='Ek boyut numarası zorunlu alandır'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -4848,37 +4848,37 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 #Region SecureStorage
 	Strings.Insert("SecureStorage_CanStoreOnlyStructure", NStr("en='It can be stored only Structure type';
 		|ru='Только тип Структура может храниться';
-		|tr='It can be stored only Structure type'", Lang));
+		|tr='Sadece Yapı türü saklanabilir'", Lang));
 #EndRegion
 
 #Region Dashboard
 	Strings.Insert("Dashboard_01", NStr("en='Sales amount';
 		|ru='Сумма продаж';
-		|tr='Tutar'", Lang));
+		|tr='Satış tutarı'", Lang));
 	Strings.Insert("Dashboard_02", NStr("en='Average bill';
 		|ru='Average bill';
-		|tr='Average bill'", Lang));
+		|tr='Ortalama fiş tutarı'", Lang));
 	Strings.Insert("Dashboard_03", NStr("en='Sales return percentage';
 		|ru='Sales return percentage';
-		|tr='Sales return percentage'", Lang));	
+		|tr='Satış iade yüzdesi'", Lang));	
 	Strings.Insert("Dashboard_04", NStr("en='Cash Balance';
 		|ru='Cash Balance';
-		|tr='Cash Balance'", Lang));
+		|tr='Nakit Bakiyesi'", Lang));
 	Strings.Insert("Dashboard_05", NStr("en='Payments from clients';
 		|ru='Payments from clients';
-		|tr='Payments from clients'", Lang));
+		|tr='Müşterilerden gelen ödemeler'", Lang));
 	Strings.Insert("Dashboard_06", NStr("en='Payments to suppliers';
 		|ru='Payments to suppliers';
-		|tr='Payments to suppliers'", Lang));
+		|tr='Tedarikçilere yapılan ödemeler'", Lang));
 	Strings.Insert("Dashboard_07", NStr("en='AP/AR Balance';
 		|ru='AP/AR Balance';
-		|tr='AP/AR Balance'", Lang));
+		|tr='Borç/Alacak Bakiyesi'", Lang));
 	Strings.Insert("Dashboard_08", NStr("en='Stock Balance';
 		|ru='Stock Balance';
-		|tr='Stock Balance'", Lang));
+		|tr='Stok Bakiyesi'", Lang));
 	Strings.Insert("Dashboard_09", NStr("en='Volume of purchases';
 		|ru='Volume of purchases';
-		|tr='Volume of purchases'", Lang));
+		|tr='Satın alma hacmi'", Lang));
 
 #EndRegion
 

@@ -370,6 +370,7 @@ EndProcedure
 &AtClient
 Async Procedure ReconnectFiscalPrinter(Command)
 	If FiscalPrinter.IsEmpty() Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Eq_013);
 		Return;
 	EndIf;
 	

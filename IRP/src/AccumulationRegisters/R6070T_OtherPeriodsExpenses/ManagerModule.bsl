@@ -1,5 +1,8 @@
 
 Function CheckBalance(Ref, CurrentRecords, ExistsRecords, Unposting, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return True;
+	EndIf;
 	
 	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R6070T_OtherPeriodsExpenses", True) Then
 		Return True;

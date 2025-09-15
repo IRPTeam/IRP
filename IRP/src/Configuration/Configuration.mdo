@@ -1185,6 +1185,7 @@
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.EditQuantity</commonForms>
   <commonForms>CommonForm.ChoiceTransactionBasis</commonForms>
+  <commonForms>CommonForm.ChoicePaymentBasis</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessKey</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>

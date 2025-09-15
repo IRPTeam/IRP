@@ -298,11 +298,16 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	Notify = New CallbackDescription("PaymentListBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
 	FormParameters = New Structure();
 	FormParameters.Insert("Company", Object.Company);
+	FormParameters.Insert("Branch", Object.Branch);
 	FormParameters.Insert("Partner", CurrentData.Partner);
+	FormParameters.Insert("Agreement", CurrentData.Agreement);
+	FormParameters.Insert("LegalName", CurrentData.LegalName);
+	FormParameters.Insert("TransactionType", Object.TransactionType);
+	FormParameters.Insert("Date", Object.Date);
 	FormParameters.Insert("Ref", Object.Ref);
 	FormParameters.Insert("Document", CurrentData.BasisDocument);
 		
-	OpenForm("CommonForm.ChoiceTransactionBasis", FormParameters, Form,,,,Notify,FormWindowOpeningMode.LockOwnerWindow); 
+	OpenForm("CommonForm.ChoicePaymentBasis", FormParameters, Form,,,,Notify,FormWindowOpeningMode.LockOwnerWindow); 
 EndProcedure
 
 Procedure PaymentListBasisDocumentStartChoiceEnd(Result, NotifyParameters) Export
@@ -314,9 +319,9 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, NotifyParameters) Expor
 	CurrentData = NotifyParameters.CurrentData;
 	If CurrentData <> Undefined Then
 		ViewClient_V2.SetPaymentListBasisDocument(Object, Form, CurrentData, Result.BasisDocument);
-		//If CurrentData.TotalAmount = 0 Then
-		//	ViewClient_V2.SetPaymentListTotalAmount(Object, Form, CurrentData, Result.Amount);
-		//EndIf;
+		If CurrentData.TotalAmount = 0 Then
+			ViewClient_V2.SetPaymentListTotalAmount(Object, Form, CurrentData, Result.Amount);
+		EndIf;
 		Form.FormUpdateFormAttributes("FromListToHeader"); 
 	EndIf;
 EndProcedure

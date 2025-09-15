@@ -313,7 +313,7 @@ Procedure SendBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardP
 	Notify = New CallbackDescription("SendBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
 	FormParameters = New Structure();
 	FormParameters.Insert("Company", Object.Company);
-	FormParameters.Insert("Partner", Object.ReceivePartner);
+	FormParameters.Insert("Partner", Object.SendPartner);
 	FormParameters.Insert("Ref", Object.Ref);
 	FormParameters.Insert("IsSender", True);
 	FormParameters.Insert("Document", Object.SendBasisDocument);
@@ -326,5 +326,57 @@ Procedure SendBasisDocumentStartChoiceEnd(Result, NotifyParameters) Export
 		Return;
 	EndIf;
 	Object = NotifyParameters.Object;
-	Object.ReceiveBasisDocument = Result.BasisDocument;
+	Object.SendBasisDocument = Result.BasisDocument;
+EndProcedure
+
+Procedure ReceiveOrderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
+	
+	Notify = New CallbackDescription("ReceiveOrderStartChoiceEnd", ThisObject, NotifyParameters);
+	FormParameters = New Structure();
+	FormParameters.Insert("Company", Object.Company);
+	FormParameters.Insert("Partner", Object.ReceivePartner);
+	FormParameters.Insert("Ref", Object.Ref);
+	FormParameters.Insert("IsReceiver", True);
+	FormParameters.Insert("IsOrder", True);
+	FormParameters.Insert("Document", Object.ReceiveOrder);
+		
+	OpenForm("CommonForm.ChoiceTransactionBasis", FormParameters, Form,,,,Notify,FormWindowOpeningMode.LockOwnerWindow); 
+EndProcedure
+
+Procedure ReceiveOrderStartChoiceEnd(Result, NotifyParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	Object = NotifyParameters.Object;
+	Object.ReceiveOrder = Result.BasisDocument;
+EndProcedure
+
+Procedure SendOrderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
+	
+	Notify = New CallbackDescription("SendOrderStartChoiceEnd", ThisObject, NotifyParameters);
+	FormParameters = New Structure();
+	FormParameters.Insert("Company", Object.Company);
+	FormParameters.Insert("Partner", Object.SendPartner);
+	FormParameters.Insert("Ref", Object.Ref);
+	FormParameters.Insert("IsSender", True);
+	FormParameters.Insert("IsOrder", True);
+	FormParameters.Insert("Document", Object.SendOrder);
+		
+	OpenForm("CommonForm.ChoiceTransactionBasis", FormParameters, Form,,,,Notify,FormWindowOpeningMode.LockOwnerWindow); 
+EndProcedure
+
+Procedure SendOrderStartChoiceEnd(Result, NotifyParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	Object = NotifyParameters.Object;
+	Object.SendOrder = Result.BasisDocument;
 EndProcedure

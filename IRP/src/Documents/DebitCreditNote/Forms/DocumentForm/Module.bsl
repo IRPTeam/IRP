@@ -293,6 +293,16 @@ Procedure SendBasisDocumentStartChoice(Item, ChoiceData, ChoiceByAdding, Standar
 EndProcedure
 
 &AtClient
+Procedure ReceiveOrderStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocDebitCreditNoteClient.ReceiveOrderStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure SendOrderStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocDebitCreditNoteClient.SendOrderStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
 Procedure CurrencyOnChange(Item)
 	DocDebitCreditNoteClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure

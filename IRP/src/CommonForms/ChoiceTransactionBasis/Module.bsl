@@ -4,7 +4,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.List.Parameters.SetParameterValue("Company", Parameters.Company);
 	ThisObject.List.Parameters.SetParameterValue("Partner", Parameters.Partner);
 	IsOrder = False;
-	If Parameters.Filter.Property("IsOrder") Then
+	If Parameters.Property("IsOrder") Then
 		IsOrder = Parameters.IsOrder;
 	EndIf;
 	ThisObject.List.Parameters.SetParameterValue("IsOrder", IsOrder);
@@ -26,36 +26,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	WithholdingTaxInvoice = False; 
 	SalesReportToConsignor = False;
 
-	If TypeOf(Parameters.Ref) = Type("DocumentRef.BankReceipt") 
-		Or TypeOf(Parameters.Ref) = Type("DocumentRef.CashReceipt") Then 
-		SalesReportFromTradeAgent = True;
-		CashTransferOrder = True;
-		DebitNote = True;
-		CreditNote = True;
-		PurchaseReturn = True;
-		EmployeeCashAdvance = True;
-		OpeningEntry = True;
-		RetailReturnReceipt = True; 
-		SalesReturn = True;
-		RetailSalesReceipt = True; 
-		SalesInvoice = True;
-		SalesOrder = True;
-	ElsIf TypeOf(Parameters.Ref) = Type("DocumentRef.BankPayment") 
-		Or TypeOf(Parameters.Ref) = Type("DocumentRef.CashPayment") Then 
-		CashTransferOrder = True;
-		PurchaseInvoice = True;
-		DebitNote = True;
-		CreditNote = True;
-		PurchaseReturn = True;
-		EmployeeCashAdvance = True;
-		OpeningEntry = True;
-		RetailReturnReceipt = True; 
-		SalesReturn = True;
-		WithholdingTaxInvoice = True; 
-		RetailSalesReceipt = True;
-		SalesReportToConsignor = True;
-		PurchaseOrder = True;
-	ElsIf TypeOf(Parameters.Ref) = Type("DocumentRef.ChequeBondTransaction") Then
+	If TypeOf(Parameters.Ref) = Type("DocumentRef.ChequeBondTransaction") Then
 		CashTransferOrder = True;
 		PurchaseInvoice = True;
 		DebitNote = True;
@@ -79,20 +50,25 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		SalesReturn = True;
 		SalesInvoice = True;
 	ElsIf TypeOf(Parameters.Ref) = Type("DocumentRef.DebitCreditNote") Then
-		SalesReportFromTradeAgent = True; 
-		CashTransferOrder = True;
-		PurchaseInvoice = True;
-		DebitNote = True;
-		CreditNote = True;
-		PurchaseReturn = True;
-		EmployeeCashAdvance = True;
-		OpeningEntry = True; 
-		RetailReturnReceipt = True; 
-		SalesReturn = True;
-		WithholdingTaxInvoice = True; 
-		RetailSalesReceipt = True;
-		SalesReportToConsignor = True;
-		SalesInvoice = True;
+		If IsOrder Then
+			SalesOrder = True;
+			PurchaseOrder = True;
+		Else
+			SalesReportFromTradeAgent = True; 
+			CashTransferOrder = True;
+			PurchaseInvoice = True;
+			DebitNote = True;
+			CreditNote = True;
+			PurchaseReturn = True;
+			EmployeeCashAdvance = True;
+			OpeningEntry = True; 
+			RetailReturnReceipt = True; 
+			SalesReturn = True;
+			WithholdingTaxInvoice = True; 
+			RetailSalesReceipt = True;
+			SalesReportToConsignor = True;
+			SalesInvoice = True;
+		EndIf;
 	EndIf;
 	
 	ThisObject.List.Parameters.SetParameterValue("SalesReportFromTradeAgent" , SalesReportFromTradeAgent); 

@@ -93,6 +93,46 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Branch</name>
+      <id>32</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Branch</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>BranchExtendedTooltip</name>
+        <id>34</id>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>BranchContextMenu</name>
+        <id>33</id>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Partner</name>
       <id>17</id>
       <visible>true</visible>
@@ -127,6 +167,174 @@
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>Agreement</name>
+      <id>26</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Agreement</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>AgreementExtendedTooltip</name>
+        <id>28</id>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>AgreementContextMenu</name>
+        <id>27</id>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>LegalName</name>
+      <id>35</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.LegalName</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>LegalNameExtendedTooltip</name>
+        <id>37</id>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>LegalNameContextMenu</name>
+        <id>36</id>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>Currency</name>
+      <id>41</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Currency</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>CurrencyExtendedTooltip</name>
+        <id>43</id>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>CurrencyContextMenu</name>
+        <id>42</id>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>Amount</name>
+      <id>38</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Amount</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>AmountExtendedTooltip</name>
+        <id>40</id>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>AmountContextMenu</name>
+        <id>39</id>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <format>
+          <key>en</key>
+          <value>NFD=2</value>
+        </format>
+        <editFormat>
+          <key>en</key>
+          <value>NFD=2</value>
+        </editFormat>
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
@@ -298,13 +506,20 @@
       <queryText>SELECT DISTINCT
 	Table.Ref AS Document,
 	Table.Company AS Company,
-	Table.Partner AS Partner
+	Table.Branch AS Branch,
+	Table.Partner AS Partner,
+	Table.Agreement AS Agreement,
+	Table.LegalName AS LegalName
+INTO tmp
 FROM
 	Document.SalesReportFromTradeAgent AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
+	AND Table.Branch = &amp;Branch
 	AND Table.Partner = &amp;Partner
+	AND Table.Agreement = &amp;Agreement
+	AND Table.LegalName = &amp;LegalName
 	AND &amp;SalesReportFromTradeAgent
 
 UNION
@@ -312,12 +527,16 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
+	Table.Branch,
+	NULL,
+	NULL,
 	NULL
 FROM
 	Document.CashTransferOrder AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
+	AND Table.Branch = &amp;Branch
 	AND &amp;CashTransferOrder
 
 UNION
@@ -325,13 +544,19 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
+	Table.Ref.Branch,
+	Table.Partner,
+	Table.Agreement,
+	Table.LegalName
 FROM
 	Document.DebitNote.Transactions AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
+	AND Table.Ref.Branch = &amp;Branch
 	AND Table.Partner = &amp;Partner
+	AND Table.Agreement = &amp;Agreement
+	AND Table.LegalName = &amp;LegalName
 	AND &amp;DebitNote
 
 UNION
@@ -339,13 +564,19 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
+	Table.Ref.Branch,
+	Table.Partner,
+	Table.Agreement,
+	Table.LegalName
 FROM
 	Document.CreditNote.Transactions AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
+	AND Table.Ref.Branch = &amp;Branch
 	AND Table.Partner = &amp;Partner
+	AND Table.Agreement = &amp;Agreement
+	AND Table.LegalName = &amp;LegalName
 	AND &amp;CreditNote
 
 UNION
@@ -353,13 +584,19 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Branch,
+	Table.Partner,
+	Table.Agreement,
+	Table.LegalName
 FROM
 	Document.PurchaseInvoice AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
+	AND Table.Branch = &amp;Branch
 	AND Table.Partner = &amp;Partner
+	AND Table.Agreement = &amp;Agreement
+	AND Table.LegalName = &amp;LegalName
 	AND &amp;PurchaseInvoice
 
 UNION
@@ -367,28 +604,19 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
-FROM
-	Document.PurchaseOrder AS Table
-WHERE
-	Table.Posted
-	AND Table.Company = &amp;Company
-	AND Table.Partner = &amp;Partner
-	AND &amp;PurchaseOrder
-	AND &amp;IsOrder
-
-UNION
-
-SELECT DISTINCT
-	Table.Ref,
-	Table.Company,
-	Table.Partner
+	Table.Branch,
+	Table.Partner,
+	Table.Agreement,
+	Table.LegalName
 FROM
 	Document.SalesInvoice AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
+	AND Table.Branch = &amp;Branch
 	AND Table.Partner = &amp;Partner
+	AND Table.Agreement = &amp;Agreement
+	AND Table.LegalName = &amp;LegalName
 	AND &amp;SalesInvoice
 
 UNION
@@ -396,28 +624,19 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
-FROM
-	Document.SalesOrder AS Table
-WHERE
-	Table.Posted
-	AND Table.Company = &amp;Company
-	AND Table.Partner = &amp;Partner
-	AND &amp;SalesOrder
-	AND &amp;IsOrder
-
-UNION
-
-SELECT DISTINCT
-	Table.Ref,
-	Table.Company,
-	Table.Partner
+	Table.Branch,
+	Table.Partner,
+	Table.Agreement,
+	Table.LegalName
 FROM
 	Document.SalesReturn AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
+	AND Table.Branch = &amp;Branch
 	AND Table.Partner = &amp;Partner
+	AND Table.Agreement = &amp;Agreement
+	AND Table.LegalName = &amp;LegalName
 	AND &amp;SalesReturn
 
 UNION
@@ -425,13 +644,19 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Branch,
+	Table.Partner,
+	Table.Agreement,
+	Table.LegalName
 FROM
 	Document.PurchaseReturn AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
+	AND Table.Branch = &amp;Branch
 	AND Table.Partner = &amp;Partner
+	AND Table.Agreement = &amp;Agreement
+	AND Table.LegalName = &amp;LegalName
 	AND &amp;PurchaseReturn
 
 UNION
@@ -439,13 +664,19 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Branch,
+	Table.Partner,
+	Table.Agreement,
+	Table.LegalName
 FROM
 	Document.RetailSalesReceipt AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
+	AND Table.Branch = &amp;Branch
 	AND Table.Partner = &amp;Partner
+	AND Table.Agreement = &amp;Agreement
+	AND Table.LegalName = &amp;LegalName
 	AND &amp;RetailSalesReceipt
 
 UNION
@@ -453,13 +684,19 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Branch,
+	Table.Partner,
+	Table.Agreement,
+	Table.LegalName
 FROM
 	Document.RetailReturnReceipt AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
+	AND Table.Branch = &amp;Branch
 	AND Table.Partner = &amp;Partner
+	AND Table.Agreement = &amp;Agreement
+	AND Table.LegalName = &amp;LegalName
 	AND &amp;RetailReturnReceipt
 
 UNION
@@ -467,27 +704,19 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
-FROM
-	Document.EmployeeCashAdvance AS Table
-WHERE
-	Table.Posted
-	AND Table.Company = &amp;Company
-	AND Table.Partner = &amp;Partner
-	AND &amp;EmployeeCashAdvance
-
-UNION
-
-SELECT DISTINCT
-	Table.Ref,
-	Table.Company,
-	Table.Partner
+	Table.Branch,
+	Table.Partner,
+	Table.Agreement,
+	Table.LegalName
 FROM
 	Document.SalesReportToConsignor AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
+	AND Table.Branch = &amp;Branch
 	AND Table.Partner = &amp;Partner
+	AND Table.Agreement = &amp;Agreement
+	AND Table.LegalName = &amp;LegalName
 	AND &amp;SalesReportToConsignor
 
 UNION
@@ -495,13 +724,19 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Branch,
+	Table.Partner,
+	Table.Agreement,
+	Table.LegalName
 FROM
 	Document.WithholdingTaxInvoice AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
+	AND Table.Branch = &amp;Branch
 	AND Table.Partner = &amp;Partner
+	AND Table.Agreement = &amp;Agreement
+	AND Table.LegalName = &amp;LegalName
 	AND &amp;WithholdingTaxInvoice
 
 UNION
@@ -509,154 +744,116 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.PartnerTradeAgent
+	Table.Branch,
+	Table.PartnerTradeAgent,
+	Table.AgreementTradeAgent,
+	Table.LegalNameTradeAgent
 FROM
 	Document.OpeningEntry AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
+	AND Table.Branch = &amp;Branch
 	AND Table.PartnerTradeAgent = &amp;Partner
-	AND &amp;OpeningEntry
+	AND Table.AgreementTradeAgent = &amp;Agreement
+	AND Table.LegalNameTradeAgent = &amp;LegalName
+	AND &amp;OpeningEntry_TradeAgent
 
 UNION
 
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.PartnerConsignor
+	Table.Branch,
+	Table.PartnerConsignor,
+	Table.AgreementConsignor,
+	Table.LegalNameConsignor
 FROM
 	Document.OpeningEntry AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.PartnerConsignor = &amp;Partner
-	AND &amp;OpeningEntry
+	AND Table.AgreementConsignor = &amp;Agreement
+	AND Table.LegalNameConsignor = &amp;LegalName
+	AND &amp;OpeningEntry_Consignor
 
 UNION
 
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
-FROM
-	Document.OpeningEntry.AdvanceFromCustomers AS Table
-WHERE
-	Table.Ref.Posted
-	AND Table.Ref.Company = &amp;Company
-	AND Table.Partner = &amp;Partner
-	AND &amp;OpeningEntry
-
-UNION
-
-SELECT DISTINCT
-	Table.Ref,
-	Table.Ref.Company,
-	Table.Partner
-FROM
-	Document.OpeningEntry.AdvanceToSuppliers AS Table
-WHERE
-	Table.Ref.Posted
-	AND Table.Ref.Company = &amp;Company
-	AND Table.Partner = &amp;Partner
-	AND &amp;OpeningEntry
-
-UNION
-
-SELECT DISTINCT
-	Table.Ref,
-	Table.Ref.Company,
-	Table.Partner
-FROM
-	Document.OpeningEntry.AccountPayableByAgreements AS Table
-WHERE
-	Table.Ref.Posted
-	AND Table.Ref.Company = &amp;Company
-	AND Table.Partner = &amp;Partner
-	AND &amp;OpeningEntry
-
-UNION
-
-SELECT DISTINCT
-	Table.Ref,
-	Table.Ref.Company,
-	Table.Partner
+	Table.Ref.Branch,
+	Table.Partner,
+	Table.Agreement,
+	Table.LegalName
 FROM
 	Document.OpeningEntry.AccountPayableByDocuments AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
+	AND Table.Ref.Branch = &amp;Branch
 	AND Table.Partner = &amp;Partner
-	AND &amp;OpeningEntry
+	AND Table.Agreement = &amp;Agreement
+	AND Table.LegalName = &amp;LegalName
+	AND &amp;OpeningEntry_AccountPayable
 
 UNION
 
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
+	Table.Ref.Branch,
+	Table.Partner,
+	Table.Agreement,
+	Table.LegalName
 FROM
 	Document.OpeningEntry.AccountReceivableByDocuments AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
+	AND Table.Ref.Branch = &amp;Branch
 	AND Table.Partner = &amp;Partner
-	AND &amp;OpeningEntry
+	AND Table.Agreement = &amp;Agreement
+	AND Table.LegalName = &amp;LegalName
+	AND &amp;OpeningEntry_AccountReceivable
+;
 
-UNION
-
-SELECT DISTINCT
-	Table.Ref,
-	Table.Ref.Company,
-	Table.Partner
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	tmp.Document,
+	tmp.Company,
+	tmp.Branch,
+	tmp.Partner,
+	tmp.Agreement,
+	tmp.LegalName,
+	R5020B_PartnersBalanceBalance.Currency,
+	CASE
+		WHEN ISNULL(R5020B_PartnersBalanceBalance.CustomerTransactionBalance, 0) = 0
+			THEN ISNULL(R5020B_PartnersBalanceBalance.VendorTransactionBalance, 0)
+		ELSE ISNULL(R5020B_PartnersBalanceBalance.CustomerTransactionBalance, 0)
+	END AS Amount
 FROM
-	Document.OpeningEntry.AccountReceivableByAgreements AS Table
-WHERE
-	Table.Ref.Posted
-	AND Table.Ref.Company = &amp;Company
-	AND Table.Partner = &amp;Partner
-	AND &amp;OpeningEntry
-
-UNION
-
-SELECT DISTINCT
-	Table.Ref,
-	Table.Ref.Company,
-	Table.Employee
-FROM
-	Document.OpeningEntry.EmployeeCashAdvance AS Table
-WHERE
-	Table.Ref.Posted
-	AND Table.Ref.Company = &amp;Company
-	AND Table.Employee = &amp;Partner
-	AND &amp;OpeningEntry
-
-UNION
-
-SELECT DISTINCT
-	Table.Ref,
-	Table.Ref.Company,
-	Table.Partner
-FROM
-	Document.OpeningEntry.AccountReceivableOther AS Table
-WHERE
-	Table.Ref.Posted
-	AND Table.Ref.Company = &amp;Company
-	AND Table.Partner = &amp;Partner
-	AND &amp;OpeningEntry
-
-UNION
-
-SELECT DISTINCT
-	Table.Ref,
-	Table.Ref.Company,
-	Table.Partner
-FROM
-	Document.OpeningEntry.AccountPayableOther AS Table
-WHERE
-	Table.Ref.Posted
-	AND Table.Ref.Company = &amp;Company
-	AND Table.Partner = &amp;Partner
-	AND &amp;OpeningEntry</queryText>
+	tmp AS tmp
+		LEFT JOIN AccumulationRegister.R5020B_PartnersBalance.Balance(&amp;Period, (Company, Branch, Partner, Agreement,
+			LegalName, Document) IN
+			(SELECT
+				tmp.Company,
+				tmp.Branch,
+				tmp.Partner,
+				tmp.Agreement,
+				tmp.LegalName,
+				tmp.Document
+			FROM
+				tmp AS tmp)
+		AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+			R5020B_PartnersBalanceBalance
+		ON tmp.Company = R5020B_PartnersBalanceBalance.Company
+		AND tmp.Branch = R5020B_PartnersBalanceBalance.Branch
+		AND tmp.Partner = R5020B_PartnersBalanceBalance.Partner
+		AND tmp.Agreement = R5020B_PartnersBalanceBalance.Agreement
+		AND tmp.LegalName = R5020B_PartnersBalanceBalance.LegalName
+		AND tmp.Document = R5020B_PartnersBalanceBalance.Document</queryText>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
@@ -680,6 +877,34 @@ WHERE
             </content>
           </localValue>
         </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Branch</dataPath>
+        <field>Branch</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Agreement</dataPath>
+        <field>Agreement</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>LegalName</dataPath>
+        <field>LegalName</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Currency</dataPath>
+        <field>Currency</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Amount</dataPath>
+        <field>Amount</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CurrencyMovementType</dataPath>
+        <field>CurrencyMovementType</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>TransactionCurrency</dataPath>
+        <field>TransactionCurrency</field>
       </fields>
       <parameters>
         <name>RetailSalesReceipt</name>
@@ -787,21 +1012,6 @@ WHERE
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
-        <name>SalesOrder</name>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Sales order</value>
-            </content>
-          </localValue>
-        </title>
-        <valueType>
-          <types>Boolean</types>
-        </valueType>
-        <useRestriction>true</useRestriction>
-      </parameters>
-      <parameters>
         <name>SalesReportToConsignor</name>
         <title>
           <localValue>
@@ -847,21 +1057,6 @@ WHERE
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
-        <name>PurchaseOrder</name>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Purchase order</value>
-            </content>
-          </localValue>
-        </title>
-        <valueType>
-          <types>Boolean</types>
-        </valueType>
-        <useRestriction>true</useRestriction>
-      </parameters>
-      <parameters>
         <name>Company</name>
         <title>
           <localValue>
@@ -873,21 +1068,6 @@ WHERE
         </title>
         <valueType>
           <types>CatalogRef.Companies</types>
-        </valueType>
-        <useRestriction>true</useRestriction>
-      </parameters>
-      <parameters>
-        <name>EmployeeCashAdvance</name>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Employee cash advance</value>
-            </content>
-          </localValue>
-        </title>
-        <valueType>
-          <types>Boolean</types>
         </valueType>
         <useRestriction>true</useRestriction>
       </parameters>
@@ -937,12 +1117,42 @@ WHERE
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
-        <name>OpeningEntry</name>
+        <name>LegalName</name>
         <title>
           <localValue>
             <content>
               <key>en</key>
-              <value>Opening entry</value>
+              <value>Legal name</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.Companies</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>Branch</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Branch</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.BusinessUnits</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>OpeningEntry_TradeAgent</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Opening entry trade agent</value>
             </content>
           </localValue>
         </title>
@@ -952,12 +1162,72 @@ WHERE
         <useRestriction>true</useRestriction>
       </parameters>
       <parameters>
-        <name>IsOrder</name>
+        <name>OpeningEntry_Consignor</name>
         <title>
           <localValue>
             <content>
               <key>en</key>
-              <value>Is order</value>
+              <value>Opening entry consignor</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>Boolean</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>OpeningEntry_AccountPayable</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Opening entry account payable</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>Boolean</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>Period</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Period</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>Date</types>
+          <dateQualifiers/>
+        </valueType>
+      </parameters>
+      <parameters>
+        <name>Agreement</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Agreement</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.Agreements</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>OpeningEntry_AccountReceivable</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Opening entry account receivable</value>
             </content>
           </localValue>
         </title>

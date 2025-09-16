@@ -2032,6 +2032,9 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 		ExtractedDataItem.Payments.Clear();
 		ExtractedDataItem.SerialLotNumbers.Clear();
 		ExtractedDataItem.ControlCodeStrings.Clear();
+		If ExtractedDataItem.Payments.Columns.Find("PaymentInFiscalPrinterMode") = Undefined Then
+			ExtractedDataItem.Payments.Columns.Add("PaymentInFiscalPrinterMode", New TypeDescription("Boolean"));
+		EndIf;
 		If isFirst Then
 			isFirst = False;
 			For Each PaymentDataItem In PaymentData Do

@@ -829,9 +829,16 @@ SELECT
 	tmp.LegalName,
 	R5020B_PartnersBalanceBalance.Currency,
 	CASE
-		WHEN ISNULL(R5020B_PartnersBalanceBalance.CustomerTransactionBalance, 0) = 0
-			THEN ISNULL(R5020B_PartnersBalanceBalance.VendorTransactionBalance, 0)
-		ELSE ISNULL(R5020B_PartnersBalanceBalance.CustomerTransactionBalance, 0)
+		WHEN CASE
+			WHEN ISNULL(R5020B_PartnersBalanceBalance.CustomerTransactionBalance, 0) = 0
+				THEN ISNULL(R5020B_PartnersBalanceBalance.VendorTransactionBalance, 0)
+			ELSE ISNULL(R5020B_PartnersBalanceBalance.CustomerTransactionBalance, 0)
+		END &lt; 0
+			THEN -CASE
+				WHEN ISNULL(R5020B_PartnersBalanceBalance.CustomerTransactionBalance, 0) = 0
+					THEN ISNULL(R5020B_PartnersBalanceBalance.VendorTransactionBalance, 0)
+				ELSE ISNULL(R5020B_PartnersBalanceBalance.CustomerTransactionBalance, 0)
+			END
 	END AS Amount
 FROM
 	tmp AS tmp

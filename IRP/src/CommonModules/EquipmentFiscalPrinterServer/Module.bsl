@@ -545,6 +545,10 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 			CheckPackage.Parameters.OperationType = 1;
 		Else
 			CheckPackage.Parameters.OperationType = 2;
+			If SourceData.ItemList.Count() Then
+				FiscalStatus = InformationRegisters.DocumentFiscalStatus.GetStatusData(SourceData.ItemList[0].RetailSalesReceipt);
+				CheckPackage.Parameters.CorrectionData.Insert("FiscalResponse", FiscalStatus.FiscalResponse); 
+			EndIf;
 		EndIf;		
 	EndIf;
 
@@ -1041,6 +1045,11 @@ Procedure FillPayments(SourceData, CheckPackage)
 		If Payment.Amount < 0 Then
 			Continue;
 		EndIf;
+		
+		If Payment.PaymentInFiscalPrinterMode Then
+			CheckPackage.Payments.PaymentsInFiscalPrinterMode.Add(Payment.Amount);
+			Continue;
+		EndIf;
 
 		If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
 			CheckPackage.Payments.PrePayment = CheckPackage.Payments.PrePayment + Payment.Amount;
@@ -1052,11 +1061,7 @@ Procedure FillPayments(SourceData, CheckPackage)
 			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
 				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
-				If Payment.PaymentInFiscalPrinterMode Then
-					CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
-				Else
-					CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
-				EndIf;
+				CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
 				CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then
@@ -1070,11 +1075,7 @@ Procedure FillPayments(SourceData, CheckPackage)
 			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
 				CheckPackage.Payments.Cash = CheckPackage.Payments.Cash + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
-				If Payment.PaymentInFiscalPrinterMode Then
-					CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
-				Else
-					CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
-				EndIf;
+				CheckPackage.Payments.ElectronicPayment = CheckPackage.Payments.ElectronicPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
 				CheckPackage.Payments.PostPayment = CheckPackage.Payments.PostPayment + Payment.Amount;
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Advance Then

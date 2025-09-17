@@ -496,7 +496,7 @@ EndProcedure
 // Prepare receipt data by retail receipt.
 //
 // Parameters:
-//  SourceData - DocumentRef.RetailSalesReceipt, DocumentRef.RetailReceiptCorrection -
+//  SourceData - DocumentRef.RetailSalesReceipt, DocumentRef.RetailReturnReceipt, DocumentRef.RetailReceiptCorrection -
 //  CheckPackage - See EquipmentFiscalPrinterAPIClient.CheckPackage
 Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 	
@@ -540,15 +540,24 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 		EndIf;
 		
 	Else
-		CheckPackage.Parameters.CorrectionData = New Structure();
 		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
 			CheckPackage.Parameters.OperationType = 1;
-		Else
+			CheckPackage.Parameters.CorrectionData.Date = SourceData.Date; 
+			CheckPackage.Parameters.CorrectionData.Number = SourceData.DocumentNumber; 
+		ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.RetailReturnReceipt") Then
 			CheckPackage.Parameters.OperationType = 2;
-			If SourceData.ItemList.Count() Then
-				FiscalStatus = InformationRegisters.DocumentFiscalStatus.GetStatusData(SourceData.ItemList[0].RetailSalesReceipt);
-				CheckPackage.Parameters.CorrectionData.Insert("FiscalResponse", FiscalStatus.FiscalResponse); 
+			If SourceData.ItemList.Count() > 0 Then
+				DocumentWithCorrectionInfo = SourceData.ItemList[0].RetailSalesReceipt;
+				CheckPackage.Parameters.CorrectionData.Date = DocumentWithCorrectionInfo.Date; 
+				CheckPackage.Parameters.CorrectionData.Number = DocumentWithCorrectionInfo.DocumentNumber; 
+				FiscalStatus = InformationRegisters.DocumentFiscalStatus.GetStatusData(DocumentWithCorrectionInfo);
+				CheckPackage.Parameters.CorrectionData.FiscalResponse = FiscalStatus.FiscalResponse;
+			Else
+				CheckPackage.Parameters.CorrectionData.Date = SourceData.Date; 
+				CheckPackage.Parameters.CorrectionData.Number = SourceData.DocumentNumber; 
 			EndIf;
+		Else
+			Raise StrTemplate(R().Error_UnknownRefType, TypeOf(SourceData.Ref));
 		EndIf;		
 	EndIf;
 

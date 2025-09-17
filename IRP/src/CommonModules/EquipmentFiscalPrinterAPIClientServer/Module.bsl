@@ -862,6 +862,7 @@ EndFunction
 // ** PrePayment - Number - Amount of credited prepayment or advance
 // ** PostPayment - Number - Credit payment amount
 // ** Barter - Number - Payment amount by counter provision
+// ** PaymentsInFiscalPrinterMode - Array of Number - Array of payments for Fiscal Printer Mode
 Function CheckPackage() Export
     Str = New Structure;
 

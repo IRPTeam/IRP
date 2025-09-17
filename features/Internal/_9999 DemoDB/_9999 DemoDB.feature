@@ -230,6 +230,24 @@ Scenario: _999901 filling in demo data base
 			| "Documents.SalesInvoice.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.ShipmentConfirmation.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(18).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Posting Purchase order
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			Then I select all lines of "List" table

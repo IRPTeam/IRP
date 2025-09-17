@@ -288,7 +288,7 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	FormParameters.Insert("Ref", Object.Ref);
 	FormParameters.Insert("Document", CurrentData.BasisDocument);
 		
-	OpenForm("CommonForm.ChoiceTransactionBasis", FormParameters, Form,,,,Notify,FormWindowOpeningMode.LockOwnerWindow); 
+	OpenForm("CommonForm.ChoicePaymentBasis", FormParameters, Form,,,,Notify,FormWindowOpeningMode.LockOwnerWindow); 
 EndProcedure
 
 Procedure PaymentListBasisDocumentStartChoiceEnd(Result, NotifyParameters) Export

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1c2dded1-9bf3-48a2-b531-0448ac17ad30">
+  <name>ConnectionTreeGreen</name>
+  <synonym>
+    <key>en</key>
+    <value>Connection tree green</value>
+  </synonym>
+</mdclass:CommonPicture>

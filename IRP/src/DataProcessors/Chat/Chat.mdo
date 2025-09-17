@@ -40,7 +40,7 @@
     </commandParameterType>
     <representation>Picture</representation>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.Message</picture>
+      <picture>CommonPicture.Chat</picture>
     </picture>
   </commands>
 </mdclass:DataProcessor>

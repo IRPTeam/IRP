@@ -15,7 +15,7 @@ Background:
 
 Scenario: _999901 filling in demo data base
 	When set True value to the constant(DemoDB)
-	When Create catalog ExternalDataProc objects
+	When Create catalog ExternalDataProc objects(DemoDB)
 	* Add ExternalDataProc
 		* Discount
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -38,6 +38,7 @@ Scenario: _999901 filling in demo data base
 	When Create catalog Companies objects(DemoDB)
 	When Create catalog ConfigurationMetadata objects(DemoDB)
 	When Create catalog Countries objects(DemoDB)
+	When Create catalog SalaryCalculationType objects(DemoDB)
 	When Create catalog Currencies objects(DemoDB)
 	When Create catalog PaymentTerminals objects(DemoDB)
 	When Create catalog BankTerms objects(DemoDB)
@@ -100,23 +101,24 @@ Scenario: _999901 filling in demo data base
 	When Create catalog AccessProfiles objects(DemoDB)
 	When Create catalog UserGroups objects(DemoDB)
 	When Create catalog Users objects(DemoDB)
+	When Create catalog CashStatementStatuses objects(DemoDB)
 	When Create document BankPayment objects(DemoDB)
 	When Create document BankReceipt objects(DemoDB)
 	When Create document CashPayment objects(DemoDB)
 	When Create document CashReceipt objects(DemoDB)
 	When Create document CreditNote objects(DemoDB)
 	When Create document DebitNote objects(DemoDB)
-	When Create document GoodsReceipt objects(DemoDB)
 	When Create document EmployeeCashAdvance objects(DemoDB)
 	When Create document InventoryTransfer objects(DemoDB)
 	When Create document CalculationMovementCosts objects(DemoDB)
 	When Create document PhysicalInventory objects(DemoDB)
 	When Create document PriceList objects(DemoDB)
-	When Create document PurchaseInvoice objects(DemoDB)
-	When Create document PurchaseOrder objects(DemoDB)
 	When Create document RetailSalesReceipt objects(DemoDB)
-	When Create document SalesInvoice objects(DemoDB)
 	When Create document SalesOrder objects(DemoDB)
+	When Create document PurchaseOrder objects(DemoDB)
+	When Create document PurchaseInvoice objects(DemoDB)
+	When Create document GoodsReceipt objects(DemoDB)
+	When Create document SalesInvoice objects(DemoDB)
 	When Create document ShipmentConfirmation objects(DemoDB)
 	When Create document StockAdjustmentAsSurplus objects(DemoDB)
 	When Create document StockAdjustmentAsWriteOff objects(DemoDB)
@@ -391,8 +393,11 @@ Scenario: _999901 filling in demo data base
 			| 'is Product server'  |
 			| 'Yes'                |	
 		And I select current line in "List" table
-		And I remove checkbox "is Product server"
-		And I click "Save and close" button	
+		And I activate "Connection string" field in "ConnectionSettings" table
+		And I select current line in "ConnectionSettings" table
+		And I input "File_\"D__IRPDB\"_" text in "Connection string" field of "ConnectionSettings" table
+		And I finish line editing in "ConnectionSettings" table
+		And I click "Save and close" button
 	And I close all client application windows
 
 

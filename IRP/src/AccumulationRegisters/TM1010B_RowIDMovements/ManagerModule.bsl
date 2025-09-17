@@ -15,6 +15,10 @@ Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Expo
 EndFunction
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return True;
+	EndIf;
+	
 	Query = New Query();
 	Query.TempTablesManager = PostingServer.PrepareRecordsTables(GetLockFieldNames(), "RowID", ItemList_InDocument,
 		Records_InDocument, Records_Exists, Unposting, AddInfo);

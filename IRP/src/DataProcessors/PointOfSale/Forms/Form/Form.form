@@ -649,7 +649,7 @@
                         </titleBackColor>
                         <showInHeader>true</showInHeader>
                         <headerPicture xsi:type="core:PictureRef">
-                          <picture>CommonPicture.Purchase</picture>
+                          <picture>CommonPicture.AddItem</picture>
                         </headerPicture>
                         <fixingInTable>Left</fixingInTable>
                       </extInfo>
@@ -695,7 +695,7 @@
                       <editMode>Enter</editMode>
                       <showInHeader>true</showInHeader>
                       <headerPicture xsi:type="core:PictureRef">
-                        <picture>CommonPicture.SerialNumber</picture>
+                        <picture>CommonPicture.SerialLotBlack</picture>
                       </headerPicture>
                       <headerHorizontalAlign>Left</headerHorizontalAlign>
                       <showInFooter>true</showInFooter>
@@ -994,7 +994,7 @@
                       <editMode>Enter</editMode>
                       <showInHeader>true</showInHeader>
                       <headerPicture xsi:type="core:PictureRef">
-                        <picture>CommonPicture.Price</picture>
+                        <picture>CommonPicture.PriceGrey</picture>
                       </headerPicture>
                       <headerHorizontalAlign>Center</headerHorizontalAlign>
                       <showInFooter>true</showInFooter>
@@ -3096,6 +3096,9 @@
               </extendedTooltip>
               <type>Page</type>
               <extInfo xsi:type="form:PageGroupExtInfo">
+                <picture xsi:type="core:PictureRef">
+                  <picture>CommonPicture.CashOk</picture>
+                </picture>
                 <group>Vertical</group>
                 <verticalSpacing>Single</verticalSpacing>
                 <showTitle>true</showTitle>
@@ -3436,7 +3439,7 @@
               <type>Page</type>
               <extInfo xsi:type="form:PageGroupExtInfo">
                 <picture xsi:type="core:PictureRef">
-                  <picture>CommonPicture.Purchase</picture>
+                  <picture>CommonPicture.AddItem</picture>
                 </picture>
                 <group>Vertical</group>
                 <showTitle>true</showTitle>
@@ -6672,6 +6675,23 @@ End</presentationExpression>
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>DocumentPostingAfterPrinting</name>
+    <title>
+      <key>en</key>
+      <value>Document posting after printing</value>
+    </title>
+    <id>216</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>qPayment</name>
     <title>
@@ -7039,7 +7059,7 @@ person</value>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>CommonPicture.CashOk</picture>
+      <picture>CommonPicture.CashOut</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
@@ -7194,7 +7214,7 @@ document</value>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.QueryWizardCreateTempTableDescription</picture>
+      <picture>CommonPicture.AddBasisDocument</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
@@ -7215,7 +7235,7 @@ document</value>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.QueryWizardTempTableDescription</picture>
+      <picture>CommonPicture.LinkUnlinkBasisDocument</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>

@@ -939,6 +939,7 @@ Function CheckPackage() Export
     Str.Payments.Insert("PrePayment", 0);
     Str.Payments.Insert("PostPayment", 0);
     Str.Payments.Insert("Barter", 0);
+	Str.Payments.Insert("PaymentsInFiscalPrinterMode", New Array);
     Return Str;
 EndFunction
 

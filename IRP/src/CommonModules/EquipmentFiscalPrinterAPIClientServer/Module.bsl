@@ -950,6 +950,7 @@ EndFunction
 //  Structure - Fiscal string:
 // * Name - String - Name of the product
 // * Quantity - Number - Quantity of the product
+// * Price - Number - Price per product unit
 // * PriceWithDiscount - Number - Price per product unit with discounts/surcharges
 // * AmountWithDiscount - Number - Final amount for the item with all discounts/surcharges
 // * DiscountAmount - Number - Amount of discounts and surcharges
@@ -992,6 +993,7 @@ Function CheckPackage_FiscalString() Export
 
     Str.Insert("Name", "");
     Str.Insert("Quantity", 0);
+    Str.Insert("Price", 0);
     Str.Insert("PriceWithDiscount", 0);
     Str.Insert("AmountWithDiscount", 0);
     Str.Insert("DiscountAmount", 0);

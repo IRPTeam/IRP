@@ -608,6 +608,7 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 		
 		FillPaymentType(SourceData, FiscalStringData, ItemRow);
 		
+		FiscalStringData.Price = Round(ItemRow.Price, 2);
 		FiscalStringData.PriceWithDiscount = Round(ItemRow.TotalAmount / ItemRow.Quantity, 2);
 		
 		FillVatRate(ItemRow, FiscalStringData);
@@ -685,6 +686,7 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 		FiscalStringData.Name = String(RetailCustomer);
 		FiscalStringData.Quantity = 1;
 		FiscalStringData.PaymentMethod = 3;
+		FiscalStringData.Price = Item.TotalAmount;
 		FiscalStringData.PriceWithDiscount = Item.TotalAmount;
 		
 		FillVatRate(Item, FiscalStringData);

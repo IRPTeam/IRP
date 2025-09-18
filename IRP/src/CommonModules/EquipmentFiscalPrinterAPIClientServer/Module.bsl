@@ -816,8 +816,10 @@ EndFunction
 // *** Description - String - Description of the correction
 // *** Date - Date - Date of the corrected transaction
 // *** Number - String - Number of the tax authority's prescription
+// *** CRS - String - ConsolidatedRetailSales of the correction (UUID from ref)
 // *** FiscalResponse - String - Fiscal response
 // ** TaxationSystem - Number - Taxation system code
+// ** CurrentCRS - String - Current ConsolidatedRetailSales (UUID from ref)
 // ** CustomerDetail - Structure - Customer (client) details:
 // *** Info - String - Name of the organization or surname, name, patronymic (if available)
 // *** INN - String - INN of the organization or buyer (client)
@@ -872,12 +874,14 @@ Function CheckPackage() Export
     Str.Parameters.Insert("CashierINN", "");
     Str.Parameters.Insert("OperationType", 0);
     Str.Parameters.Insert("TaxationSystem", 0);
+    Str.Parameters.Insert("CurrentCRS", "");
 
 	CorrectionData = New Structure;
     CorrectionData.Insert("Type", 0);
     CorrectionData.Insert("Description", "");
     CorrectionData.Insert("Date", Date(1, 1, 1));
     CorrectionData.Insert("Number", "");
+    CorrectionData.Insert("CRS", "");
     CorrectionData.Insert("FiscalResponse", "");
     Str.Parameters.Insert("CorrectionData", CorrectionData);
 
@@ -949,6 +953,8 @@ EndFunction
 // Returns:
 //  Structure - Fiscal string:
 // * Name - String - Name of the product
+// * ShortName - String - Short name of the product
+// * Barcode - String - Barcode
 // * Quantity - Number - Quantity of the product
 // * Price - Number - Price per product unit
 // * PriceWithDiscount - Number - Price per product unit with discounts/surcharges
@@ -992,6 +998,9 @@ Function CheckPackage_FiscalString() Export
     Str = New Structure;
 
     Str.Insert("Name", "");
+    Str.Insert("ShortName", "");
+    Str.Insert("Barcode", "");
+    
     Str.Insert("Quantity", 0);
     Str.Insert("Price", 0);
     Str.Insert("PriceWithDiscount", 0);

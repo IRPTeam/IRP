@@ -527,6 +527,9 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 		CheckPackage.Parameters.CorrectionData.Description = DocumentWithCorrectionInfo.CorrectionDescription;
 		CheckPackage.Parameters.CorrectionData.Date = DocumentWithCorrectionInfo.Date;
 		CheckPackage.Parameters.CorrectionData.Number = DocumentWithCorrectionInfo.NumberTaxAuthorityPrescription;
+		CheckPackage.Parameters.CorrectionData.CRS = 
+			?(DocumentWithCorrectionInfo.ConsolidatedRetailSales.IsEmpty(), 
+				"", String(DocumentWithCorrectionInfo.ConsolidatedRetailSales.UUID()));;
 		
 		If IsBlankString(CheckPackage.Parameters.CorrectionData.Number) Then
 			CheckPackage.Parameters.CorrectionData.Number = "0";
@@ -550,6 +553,9 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 				DocumentWithCorrectionInfo = SourceData.ItemList[0].RetailSalesReceipt;
 				CheckPackage.Parameters.CorrectionData.Date = DocumentWithCorrectionInfo.Date; 
 				CheckPackage.Parameters.CorrectionData.Number = DocumentWithCorrectionInfo.DocumentNumber; 
+				CheckPackage.Parameters.CorrectionData.CRS = 
+					?(DocumentWithCorrectionInfo.ConsolidatedRetailSales.IsEmpty(), 
+						"", String(DocumentWithCorrectionInfo.ConsolidatedRetailSales.UUID()));;
 				FiscalStatus = InformationRegisters.DocumentFiscalStatus.GetStatusData(DocumentWithCorrectionInfo);
 				CheckPackage.Parameters.CorrectionData.FiscalResponse = FiscalStatus.FiscalResponse;
 			Else
@@ -603,6 +609,14 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 		
 		Name = GenerateItemName(SourceData, ItemRow);
 		FiscalStringData.Name = StrConcat(Name, " ");
+		
+		SerialName = New Array; // Array Of String
+		SearchSerial = SourceData.SerialLotNumbers.FindRows(New Structure("Key", ItemRow.Key));
+		For Each Serial In SearchSerial Do
+			SerialName.Add(String(Serial.SerialLotNumber));
+		EndDo;
+		FiscalStringData.Barcode = StrConcat(SerialName, ",");
+		FiscalStringData.ShortName = String(ItemRow.Item);
 
 		FiscalStringData.Quantity = ItemRow.Quantity;
 		
@@ -684,6 +698,7 @@ Procedure FillCheckPackageByPayment(SourceData, CheckPackage, isCash)
 		FiscalStringData.MeasureOfQuantity = 255;
 		FiscalStringData.MeasureOfQuantityRef = Catalogs.UnitsOfMeasurement.EmptyRef();
 		FiscalStringData.Name = String(RetailCustomer);
+		FiscalStringData.ShortName = FiscalStringData.Name;
 		FiscalStringData.Quantity = 1;
 		FiscalStringData.PaymentMethod = 3;
 		FiscalStringData.Price = Item.TotalAmount;
@@ -810,6 +825,8 @@ Procedure FillInputParameters(Ref, InputParameters) Export
 	Else
 		InputParameters.SaleAddress = Ref.ConsolidatedRetailSales.FiscalPrinter.SaleAddress;
 		InputParameters.SaleLocation = Ref.ConsolidatedRetailSales.FiscalPrinter.SaleLocation;
+		InputParameters.CurrentCRS = ?(Ref.ConsolidatedRetailSales.IsEmpty(), 
+			"", String(Ref.ConsolidatedRetailSales.UUID()));
 	EndIf;
 EndProcedure
 

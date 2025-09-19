@@ -332,7 +332,7 @@ EndFunction
 // Get date from string.
 // 
 // Parameters:
-//  DateString - String - Date string
+//  DateString - String, Date - Date string
 // 
 // Returns:
 //  Date

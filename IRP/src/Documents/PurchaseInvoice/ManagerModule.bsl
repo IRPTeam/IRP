@@ -810,6 +810,8 @@ Function ItemList()
 	|	undefined as TaxPartner,
 	|	undefined as TaxLegalName,
 	|	undefined as TaxAgreement,
+	|	undefined as PartnerUUID,
+	|	undefined as TaxUUID,
 	|	0 as WithholdingTaxAmount
 	|INTO ItemList
 	|FROM

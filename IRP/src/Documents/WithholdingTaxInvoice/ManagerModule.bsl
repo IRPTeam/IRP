@@ -29,6 +29,15 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
+	
+	Tables.R1001T_Purchases.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R1040B_TaxesOutgoing.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5010B_ReconciliationStatement.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R1021B_VendorsTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -174,7 +183,9 @@ Function ItemList()
 		|	ItemList.Ref.TaxPartner as TaxPartner,
 		|	ItemList.Ref.TaxLegalName as TaxLegalName,
 		|	ItemList.Ref.TaxAgreement as TaxAgreement,
-		|	ItemList.Ref.TaxLegalNameContract as TaxLegalNameContract
+		|	ItemList.Ref.TaxLegalNameContract as TaxLegalNameContract,
+		|	ItemList.Ref.PartnerUUID AS PartnerUUID,
+		|	ItemList.Ref.TaxUUID AS TaxUUID
 		|INTO ItemList
 		|FROM
 		|	Document.WithholdingTaxInvoice.ItemList AS ItemList
@@ -192,6 +203,7 @@ Function R1001T_Purchases()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.Currency,
+		|	ItemList.PartnerUUID AS Key,
 		|	ItemList.Invoice,
 		|	ItemList.ItemKey,
 		|	ItemList.RowKey,
@@ -215,6 +227,7 @@ Function R1040B_TaxesOutgoing()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.Currency,
+		|	ItemList.PartnerUUID AS Key,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
 		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType,
@@ -230,6 +243,7 @@ Function R1040B_TaxesOutgoing()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.Currency,
+		|	ItemList.PartnerUUID,
 		|	ItemList.VatRate,
 		|	VALUE(Enum.InvoiceType.Invoice)";
 EndFunction
@@ -243,6 +257,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.LegalName AS LegalName,
 		|	ItemList.LegalNameContract AS LegalNameContract,
 		|	ItemList.Currency AS Currency,
+		|	ItemList.PartnerUUID AS Key,
 		|	SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Period
 		|INTO R5010B_ReconciliationStatement
@@ -256,6 +271,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.LegalName,
 		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
+		|	ItemList.PartnerUUID,
 		|	ItemList.Period,
 		|	VALUE(AccumulationRecordType.Expense)
 		|
@@ -268,9 +284,9 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.TaxLegalName,
 		|	ItemList.TaxLegalNameContract,
 		|	ItemList.Currency,
+		|	ItemList.TaxUUID,
 		|	SUM(ItemList.WithholdingTaxAmount),
 		|	ItemList.Period
-		|
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
@@ -281,6 +297,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.TaxLegalName,
 		|	ItemList.TaxLegalNameContract,
 		|	ItemList.Currency,
+		|	ItemList.TaxUUID,
 		|	ItemList.Period,
 		|	VALUE(AccumulationRecordType.Expense)";
 EndFunction
@@ -290,7 +307,8 @@ Function R5022T_Expenses()
 		"SELECT
 		|	*,
 		|	ItemList.NetAmount + ItemList.WithholdingTaxAmount AS Amount,
-		|	ItemList.Amount AS AmountWithTaxes
+		|	ItemList.Amount AS AmountWithTaxes,
+		|	ItemList.PartnerUUID AS Key
 		|INTO R5022T_Expenses
 		|FROM
 		|	ItemList AS ItemList
@@ -324,6 +342,7 @@ Function R5015B_OtherPartnersTransactions()
 		|	ItemList.Partner,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
+		|	ItemList.PartnerUUID AS Key,
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument AS Basis,
 		|	ItemList.Key,
@@ -341,6 +360,7 @@ Function R5015B_OtherPartnersTransactions()
 		|	ItemList.Partner,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
+		|	ItemList.PartnerUUID,
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
 		|	ItemList.Key
@@ -355,11 +375,11 @@ Function R5015B_OtherPartnersTransactions()
 		|	ItemList.TaxPartner,
 		|	ItemList.TaxLegalName,
 		|	ItemList.Currency,
+		|	ItemList.TaxUUID,
 		|	ItemList.TaxAgreement,
 		|	ItemList.BasisDocument AS Basis,
 		|	ItemList.Key,
 		|	SUM(ItemList.WithholdingTaxAmount) AS Amount
-		|
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
@@ -372,6 +392,7 @@ Function R5015B_OtherPartnersTransactions()
 		|	ItemList.TaxPartner,
 		|	ItemList.TaxLegalName,
 		|	ItemList.Currency,
+		|	ItemList.TaxUUID,
 		|	ItemList.TaxAgreement,
 		|	ItemList.BasisDocument,
 		|	ItemList.Key";

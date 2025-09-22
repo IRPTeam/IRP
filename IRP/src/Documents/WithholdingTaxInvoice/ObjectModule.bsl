@@ -2,20 +2,41 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	
+	If Not ValueIsFilled(ThisObject.PartnerUUID) Then
+		ThisObject.PartnerUUID = New UUID();
+	EndIf;
 
+	If Not ValueIsFilled(ThisObject.TaxUUID) Then
+		ThisObject.TaxUUID = New UUID();
+	EndIf;
+	
+	TotalTable = New ValueTable();
+	TotalTable.Columns.Add("Key");
+	TotalTable.Add().Key = ThisObject.PartnerUUID;
+	TotalTable.Add().Key = ThisObject.TaxUUID;
+	
 	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
 		
-		Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+		CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
+		
+		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.PartnerUUID, ThisObject.Currency, 
+			ThisObject.ItemList.Total("TotalAmount"), ThisObject.Agreement);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.PartnerUUID);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	
+			
 		AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
 		AmountsInfo.TotalAmount.Value = ThisObject.ItemList.Total("TotalAmount");
 		AmountsInfo.NetAmount.Value   = ThisObject.ItemList.Total("NetAmount");
 		AmountsInfo.TaxAmount.Value   = ThisObject.ItemList.Total("TaxAmount");
 		TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
 		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
-
+		
+		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.TaxUUID, ThisObject.Currency, 
+		ThisObject.ItemList.Total("WithholdingTaxAmount"), ThisObject.TaxAgreement);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.TaxUUID);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		
 	EndIf;
 	
 	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);

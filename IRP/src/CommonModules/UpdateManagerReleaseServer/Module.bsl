@@ -35,7 +35,11 @@ Function RunUpdate_DBMigration_IRP680(MethodName) Export
 	
 	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
-		Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "No data for update: 0");
+		Msg.Log = "No data for update: 0";
+		BackgroundJobAPIServer.NotifyStream(Msg);
+		UpdateManagerServer.ApplieDatabaseUpdate(MethodName);
+		Return Errors;
+		//Return BackgroundJobAPIServer.JobAddErrorEmptyCollection(Msg, Errors, "No data for update: 0");
 	EndIf;
 
 	Msg = BackgroundJobAPIServer.NotifySettings();

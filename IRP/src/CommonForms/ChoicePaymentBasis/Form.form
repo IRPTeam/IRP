@@ -829,16 +829,9 @@ SELECT
 	tmp.LegalName,
 	R5020B_PartnersBalanceBalance.Currency,
 	CASE
-		WHEN CASE
-			WHEN ISNULL(R5020B_PartnersBalanceBalance.CustomerTransactionBalance, 0) = 0
-				THEN ISNULL(R5020B_PartnersBalanceBalance.VendorTransactionBalance, 0)
-			ELSE ISNULL(R5020B_PartnersBalanceBalance.CustomerTransactionBalance, 0)
-		END &lt; 0
-			THEN -CASE
-				WHEN ISNULL(R5020B_PartnersBalanceBalance.CustomerTransactionBalance, 0) = 0
-					THEN ISNULL(R5020B_PartnersBalanceBalance.VendorTransactionBalance, 0)
-				ELSE ISNULL(R5020B_PartnersBalanceBalance.CustomerTransactionBalance, 0)
-			END
+		WHEN ISNULL(R5020B_PartnersBalanceBalance.AmountBalance, 0) &lt; 0
+			THEN -ISNULL(R5020B_PartnersBalanceBalance.AmountBalance, 0)
+		ELSE ISNULL(R5020B_PartnersBalanceBalance.AmountBalance, 0)
 	END AS Amount
 FROM
 	tmp AS tmp
@@ -892,6 +885,14 @@ FROM
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Agreement</dataPath>
         <field>Agreement</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Partner term</value>
+            </content>
+          </localValue>
+        </title>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>LegalName</dataPath>

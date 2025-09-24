@@ -69,6 +69,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			SalesReportToConsignor = True;
 			SalesInvoice = True;
 		EndIf;
+	Else
+		If IsOrder Then
+			SalesOrder = True;
+			PurchaseOrder = True;
+		EndIf;
 	EndIf;
 	
 	ThisObject.List.Parameters.SetParameterValue("SalesReportFromTradeAgent" , SalesReportFromTradeAgent); 

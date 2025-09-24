@@ -174,7 +174,11 @@ EndProcedure
 
 #Region CheckAfterWrite
 
-Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return;
+	EndIf;
+
 	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 

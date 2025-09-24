@@ -325,6 +325,7 @@ EndFunction
 // * In - Structure:
 // ** DeviceID - String - Device ID
 // ** CheckNumber - String - Fiscal check number
+// ** ShiftNumber - String - Shift number
 // * InOut - Structure -
 // * Out - Structure:
 Function GetPrintCheckCopySettings() Export
@@ -338,6 +339,7 @@ Function GetPrintCheckCopySettings() Export
     Str.Insert("In", New Structure);
     Str.In.Insert("DeviceID", "");
     Str.In.Insert("CheckNumber", "");
+	Str.In.Insert("ShiftNumber", "");
 
     Str.Insert("InOut", New Structure);
 
@@ -814,7 +816,10 @@ EndFunction
 // *** Description - String - Description of the correction
 // *** Date - Date - Date of the corrected transaction
 // *** Number - String - Number of the tax authority's prescription
+// *** CRS - String - ConsolidatedRetailSales of the correction (UUID from ref)
+// *** FiscalResponse - String - Fiscal response
 // ** TaxationSystem - Number - Taxation system code
+// ** CurrentCRS - String - Current ConsolidatedRetailSales (UUID from ref)
 // ** CustomerDetail - Structure - Customer (client) details:
 // *** Info - String - Name of the organization or surname, name, patronymic (if available)
 // *** INN - String - INN of the organization or buyer (client)
@@ -859,6 +864,7 @@ EndFunction
 // ** PrePayment - Number - Amount of credited prepayment or advance
 // ** PostPayment - Number - Credit payment amount
 // ** Barter - Number - Payment amount by counter provision
+// ** PaymentsInFiscalPrinterMode - Array of Number - Array of payments for Fiscal Printer Mode
 Function CheckPackage() Export
     Str = New Structure;
 
@@ -868,12 +874,15 @@ Function CheckPackage() Export
     Str.Parameters.Insert("CashierINN", "");
     Str.Parameters.Insert("OperationType", 0);
     Str.Parameters.Insert("TaxationSystem", 0);
+    Str.Parameters.Insert("CurrentCRS", "");
 
 	CorrectionData = New Structure;
     CorrectionData.Insert("Type", 0);
     CorrectionData.Insert("Description", "");
     CorrectionData.Insert("Date", Date(1, 1, 1));
     CorrectionData.Insert("Number", "");
+    CorrectionData.Insert("CRS", "");
+    CorrectionData.Insert("FiscalResponse", "");
     Str.Parameters.Insert("CorrectionData", CorrectionData);
 
     CustomerDetail = New Structure;
@@ -935,6 +944,7 @@ Function CheckPackage() Export
     Str.Payments.Insert("PrePayment", 0);
     Str.Payments.Insert("PostPayment", 0);
     Str.Payments.Insert("Barter", 0);
+	Str.Payments.Insert("PaymentsInFiscalPrinterMode", New Array);
     Return Str;
 EndFunction
 
@@ -943,7 +953,10 @@ EndFunction
 // Returns:
 //  Structure - Fiscal string:
 // * Name - String - Name of the product
+// * ShortName - String - Short name of the product
+// * Barcode - String - Barcode
 // * Quantity - Number - Quantity of the product
+// * Price - Number - Price per product unit
 // * PriceWithDiscount - Number - Price per product unit with discounts/surcharges
 // * AmountWithDiscount - Number - Final amount for the item with all discounts/surcharges
 // * DiscountAmount - Number - Amount of discounts and surcharges
@@ -985,7 +998,11 @@ Function CheckPackage_FiscalString() Export
     Str = New Structure;
 
     Str.Insert("Name", "");
+    Str.Insert("ShortName", "");
+    Str.Insert("Barcode", "");
+    
     Str.Insert("Quantity", 0);
+    Str.Insert("Price", 0);
     Str.Insert("PriceWithDiscount", 0);
     Str.Insert("AmountWithDiscount", 0);
     Str.Insert("DiscountAmount", 0);

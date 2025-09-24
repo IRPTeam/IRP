@@ -461,7 +461,11 @@ EndProcedure
 
 #Region CheckAfterWrite
 
-Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return;
+	EndIf;
+
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.RetailReturnReceipt.ItemList");

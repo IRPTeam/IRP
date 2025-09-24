@@ -2985,6 +2985,23 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>PaymentInFiscalPrinterMode</name>
+      <title>
+        <key>en</key>
+        <value>Payment in fiscal printer mode</value>
+      </title>
+      <id>67</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>PaymentsAmountTotal</name>
@@ -3756,6 +3773,23 @@ WHERE
         <common>true</common>
       </edit>
     </columns>
+  </attributes>
+  <attributes>
+    <name>FiscalPrinter</name>
+    <title>
+      <key>en</key>
+      <value>Fiscal printer</value>
+    </title>
+    <id>66</id>
+    <valueType>
+      <types>CatalogRef.Hardware</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
   </attributes>
   <formCommands>
     <name>Card</name>

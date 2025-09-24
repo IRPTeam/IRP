@@ -200,7 +200,11 @@ EndProcedure
 
 #Region CheckAfterWrite
 
-Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return;
+	EndIf;
+
 	Parameters.Insert("RecordType", AccumulationRecordType.Receipt);
 	
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);

@@ -49,7 +49,7 @@ Scenario: _40001001 check preparation
 	
 Scenario: _4000120 check reports option save
 	* Open test report	
-		And In the command interface I select "Reports" "Barcodes"
+		Given I open hyperlink "e1cib/app/Report.REP_Barcodes"		
 		And I click "Generate" button
 	* Change report and check option save
 		And I click "Change option..." button
@@ -134,7 +134,7 @@ Scenario: _4000120 check reports option save
 	
 Scenario: _4000125 check switching between options and default settings
 	* Open test report	
-		And In the command interface I select "Reports" "Barcodes"
+		Given I open hyperlink "e1cib/app/Report.REP_Barcodes"
 		And I click "Generate" button
 	* Check switching between options
 		And I click "Select option..." button
@@ -222,7 +222,7 @@ Scenario: _4000125 check switching between options and default settings
 	
 Scenario: _4000128 check mark/unmark option for deletion
 	* Open test report	
-		And In the command interface I select "Reports" "Barcodes"
+		Given I open hyperlink "e1cib/app/Report.REP_Barcodes"
 		And I click "Generate" button
 	* Mark option for deletion
 		And I click "Select option..." button
@@ -258,7 +258,7 @@ Scenario: _4000128 check mark/unmark option for deletion
 
 Scenario: _4000128 check reports option share (select users)
 	* Open test report	
-		And In the command interface I select "Reports" "Barcodes"
+		Given I open hyperlink "e1cib/app/Report.REP_Barcodes"
 	* Option share
 		And I click "Select option..." button
 		And I move to "Custom" tab
@@ -290,7 +290,7 @@ Scenario: _4000128 check reports option share (select users)
 			| 'Arina Brown (Financier 3)'   | 'test2'            |
 			| 'CI'                          | 'test2'            |
 		And I connect "TestAdmin" TestClient using "ABrown" login and "" password
-		And In the command interface I select "Reports" "Barcodes"
+		Given I open hyperlink "e1cib/app/Report.REP_Barcodes"
 		And I click "Generate" button
 		And I click "Select option..." button
 		And I move to "Custom" tab
@@ -327,7 +327,7 @@ Scenario: _4000129 check that report created by another user cannot be overwritt
 	And I close all client application windows
 	And I connect "TestAdmin" TestClient using "ABrown" login and "" password
 	* Open test report	
-		And In the command interface I select "Reports" "Barcodes" 
+		Given I open hyperlink "e1cib/app/Report.REP_Barcodes"
 	* Try change (not report author)
 		And I click "Save option..." button
 		And I activate "Report option" field in "OptionsList" table
@@ -342,7 +342,7 @@ Scenario: _4000129 check that report created by another user cannot be overwritt
 		And I close TestClient session
 	* Try change (report author)
 		Then I connect launched Test client "Этот клиент"
-		And In the command interface I select "Reports" "Barcodes" 
+		Given I open hyperlink "e1cib/app/Report.REP_Barcodes" 
 		And I click "Save option..." button
 		And I activate "Report option" field in "OptionsList" table
 		And I go to line in "OptionsList" table

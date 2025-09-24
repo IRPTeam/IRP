@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a643e645-e8cd-4aab-8768-eb76d154b80c">
+  <name>Unit_RegistersCheckBalance</name>
+  <synonym>
+    <key>en</key>
+    <value>Document reistration</value>
+  </synonym>
+  <server>true</server>
+  <externalConnection>true</externalConnection>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

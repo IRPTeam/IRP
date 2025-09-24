@@ -963,8 +963,14 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 	EndIf;
 	
 	If Ref.IsEmpty() Then
-		For Each Attr In CurrentResult Do
-			CurrentResult[Attr.Key] = Ref[Attr.Key];
+		For Each ItemAttribute In AttributesStructure Do
+			CurrentResult = Result;
+			FieldName = ?(ValueIsFilled(ItemAttribute.Value), ItemAttribute.Value, ItemAttribute.Key); // String
+			FieldParts = StrSplit(FieldName, ".");
+			For Index = 0 To FieldParts.UBound() - 1 Do
+				CurrentResult = CurrentResult[FieldParts[Index]]; // Structure
+			EndDo;
+			CurrentResult[FieldParts[FieldParts.UBound()]] = GetRefAttribute(Ref, FieldName);
 		EndDo;
 		Return Result;
 	EndIf;

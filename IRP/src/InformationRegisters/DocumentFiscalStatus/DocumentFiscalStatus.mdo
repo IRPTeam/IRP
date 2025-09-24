@@ -55,6 +55,24 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="badebfa3-0b35-4b94-84fd-afd47c241f8d">
+    <name>ShiftNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Shift number</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <attributes uuid="57efa06c-9cde-43c8-a1ca-1af9b4c65b19">
     <name>FiscalResponse</name>
     <synonym>

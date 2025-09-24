@@ -33,7 +33,6 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.Unit_MainRole</defaultRoles>
   <defaultLanguage>Language.English</defaultLanguage>
-  <compatibilityMode>8.3.27</compatibilityMode>
   <languages uuid="a12cbfb0-6dc3-4d28-97a9-113587c1e0c5">
     <name>English</name>
     <objectBelonging>Adopted</objectBelonging>
@@ -69,6 +68,7 @@
   <commonModules>CommonModule.EquipmentFiscalPrinter_CommonAPI</commonModules>
   <commonModules>CommonModule.DocSalesInvoiceServer</commonModules>
   <commonModules>CommonModule.DocPurchaseInvoiceServer</commonModules>
+  <commonModules>CommonModule.Unit_RegistersCheckBalance</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>

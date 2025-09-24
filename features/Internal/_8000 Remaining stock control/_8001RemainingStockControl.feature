@@ -1181,8 +1181,8 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4010 Actual stocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
-			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4010 Actual stocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011 Free stocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011 Free stocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Check remaining stock control (store use SC and GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
@@ -1193,8 +1193,8 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4010 Actual stocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
-			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4010 Actual stocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011 Free stocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011 Free stocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Check remaining stock control (store use SC and does not use GR)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
@@ -1205,8 +1205,8 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4010 Actual stocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
-			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4010 Actual stocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011 Free stocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011 Free stocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Check remaining stock control (store use GR and does not use SC)	
 			And I click Choice button of the field named "Store"
 			And I go to line in "List" table
@@ -1217,8 +1217,8 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4010 Actual stocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
-			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4010 Actual stocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011 Free stocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011 Free stocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Change items and post document
 			And I go to line in "ItemList" table
 				| 'Item'     | 'Item key'      |
@@ -2631,7 +2631,7 @@ Scenario:_800051 check remaining stock control in the Work Sheet
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
-			| 'Line No. [1] [Material 1 Material 1] R4010 Actual stocks remaining: 10 . Required: 42 . Lacking: 32 .'    |
+			| 'Line No. [1] [Material 1 Material 1] R4011 Free stocks remaining: 10 . Required: 42 . Lacking: 32 .'    |
 		And I close all client application windows
 				
 
@@ -3241,7 +3241,7 @@ Scenario:_800085 check stock control in the Production (store with and without s
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
-			|'Line No. [2] [Material 2 Material 2] R4010 Actual stocks remaining: 20 . Required: 58 . Lacking: 38 .'|	
+			|'Line No. [2] [Material 2 Material 2] R4011 Free stocks remaining: 20 . Required: 58 . Lacking: 38 .'|	
 	* Try post (store not use stock control, materials are not enough)	
 		And I activate "Writeoff store" field in "Materials" table
 		And I select current line in "Materials" table
@@ -3261,7 +3261,7 @@ Scenario:_800085 check stock control in the Production (store with and without s
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
-			|'Line No. [2] [Material 2 Material 2] R4010 Actual stocks remaining: 20 . Required: 58 . Lacking: 38 .'|	
+			|'Line No. [2] [Material 2 Material 2] R4011 Free stocks remaining: 20 . Required: 58 . Lacking: 38 .'|	
 	And I close all client application windows
 	
 

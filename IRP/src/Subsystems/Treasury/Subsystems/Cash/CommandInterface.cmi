@@ -3,8 +3,8 @@
   <commandsOrder>
     <orderFragments>
       <group>NavigationPanelOrdinary</group>
-      <commands>Document.CashPayment.StandardCommand.OpenList</commands>
       <commands>Document.CashReceipt.StandardCommand.OpenList</commands>
+      <commands>Document.CashPayment.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
 </cmi:CommandInterface>

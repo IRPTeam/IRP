@@ -17,5 +17,9 @@ Procedure AdditionalDataFilling(MovementsValueTable) Export
 EndProcedure
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
+	If CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "UnitTest", False) Then
+		Return True;
+	EndIf;
+
 	Return True;
 EndFunction

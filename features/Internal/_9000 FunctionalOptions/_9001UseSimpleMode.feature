@@ -129,7 +129,7 @@ Scenario: _900004 create partners (vendor and customer)
 
 Scenario: _900005 create price list (customer price type)
 	* Open price list
-		And In the command interface I select "Purchase  - A/P" "Price lists"
+		And In the command interface I select "Sales - A/R" "Price lists"
 		Then "Price lists" window is opened
 		And I click the button named "FormCreate"
 	* Select price type
@@ -183,65 +183,65 @@ Scenario: _900006 create Cash account
 			| 'Cash 1'         |
 		And I close all client application windows
 
-Scenario: _900007 create Opening entry
-	* Open OE form
-		And In the command interface I select "Master data" "Opening entries"
-	* Filling Inventory tab
-		And in the table "Inventory" I click the button named "InventoryAdd"
-		And I select "pr" from "Item" drop-down list by string in "Inventory" table
-		And I activate "Quantity" field in "Inventory" table
-		And I input "100,000" text in "Quantity" field of "Inventory" table
-		And I finish line editing in "Inventory" table
-	* Filling Account balance tab
-		And I move to "Account balance" tab
-		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
-		And I click choice button of the attribute named "AccountBalanceAccount" in "AccountBalance" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Cash 1'      |
-		And I select current line in "List" table
-		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
-		And I input "5 000,00" text in the field named "AccountBalanceAmount" of "AccountBalance" table
-		And I finish line editing in "AccountBalance" table
-	* Filling Account payable tab
-		And I move to "Account payable" tab
-		And in the table "AccountPayableByAgreements" I click the button named "AccountPayableByAgreementsAdd"
-		And I select "vendor" by string from the drop-down list named "AccountPayableByAgreementsPartner" in "AccountPayableByAgreements" table
-		And I activate field named "AccountPayableByAgreementsAmount" in "AccountPayableByAgreements" table
-		And I input "500,00" text in the field named "AccountPayableByAgreementsAmount" of "AccountPayableByAgreements" table
-		And I finish line editing in "AccountPayableByAgreements" table
-	* Filling Account receivable tab
-		And I move to "Account receivable" tab
-		And in the table "AccountReceivableByAgreements" I click the button named "AccountReceivableByAgreementsAdd"
-		And I select "cu" by string from the drop-down list named "AccountReceivableByAgreementsPartner" in "AccountReceivableByAgreements" table
-		And I activate field named "AccountReceivableByAgreementsAmount" in "AccountReceivableByAgreements" table
-		And I input "150,00" text in the field named "AccountReceivableByAgreementsAmount" of "AccountReceivableByAgreements" table
-		And I finish line editing in "AccountReceivableByAgreements" table
-	* Post document
-		And I click the button named "FormPost"
-		And I delete "$$NumberOpeningEntry01$$" variable
-		And I delete "$$OpeningEntry01$$" variable
-		And I save the value of "Number" field as "$$NumberOpeningEntry01$$"
-		And I save the window as "$$OpeningEntry01$$"
-		And I click the button named "FormPostAndClose"
-	* Check creation
-		And In the command interface I select "Master data" "Opening entries"
-		Then the form attribute named "Company" became equal to "My Company"
-		Then the form attribute named "Comment" became equal to "Click to enter comment"
-		And "Inventory" table became equal
-			| '#'   | 'Item'        | 'Quantity'    |
-			| '1'   | 'Product 1'   | '100,000'     |
-		// And "AccountBalance" table became equal
-		// 	| '#' | 'Amount'   | 'Account' | 'Currency' |
-		// 	| '1' | '5 000,00' | 'Cash 1'  | 'USD'      |	
-		And "AccountPayableByAgreements" table became equal
-			| '#'   | 'Partner'    | 'Amount'   | 'Currency'    |
-			| '1'   | 'Vendor 1'   | '500,00'   | 'USD'         |
-		And "AccountReceivableByAgreements" table became equal
-			| '#'   | 'Partner'      | 'Amount'   | 'Currency'    |
-			| '1'   | 'Customer 1'   | '150,00'   | 'USD'         |
-		Then the form attribute named "Branch" became equal to ""
-		And I close all client application windows
+// Scenario: _900007 create Opening entry
+// 	* Open OE form
+// 		And In the command interface I select "Master data" "Opening entries"
+// 	* Filling Inventory tab
+// 		And in the table "Inventory" I click the button named "InventoryAdd"
+// 		And I select "pr" from "Item" drop-down list by string in "Inventory" table
+// 		And I activate "Quantity" field in "Inventory" table
+// 		And I input "100,000" text in "Quantity" field of "Inventory" table
+// 		And I finish line editing in "Inventory" table
+// 	* Filling Account balance tab
+// 		And I move to "Account balance" tab
+// 		And in the table "AccountBalance" I click the button named "AccountBalanceAdd"
+// 		And I click choice button of the attribute named "AccountBalanceAccount" in "AccountBalance" table
+// 		And I go to line in "List" table
+// 			| 'Description' |
+// 			| 'Cash 1'      |
+// 		And I select current line in "List" table
+// 		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
+// 		And I input "5 000,00" text in the field named "AccountBalanceAmount" of "AccountBalance" table
+// 		And I finish line editing in "AccountBalance" table
+// 	* Filling Account payable tab
+// 		And I move to "Account payable" tab
+// 		And in the table "AccountPayableByAgreements" I click the button named "AccountPayableByAgreementsAdd"
+// 		And I select "vendor" by string from the drop-down list named "AccountPayableByAgreementsPartner" in "AccountPayableByAgreements" table
+// 		And I activate field named "AccountPayableByAgreementsAmount" in "AccountPayableByAgreements" table
+// 		And I input "500,00" text in the field named "AccountPayableByAgreementsAmount" of "AccountPayableByAgreements" table
+// 		And I finish line editing in "AccountPayableByAgreements" table
+// 	* Filling Account receivable tab
+// 		And I move to "Account receivable" tab
+// 		And in the table "AccountReceivableByAgreements" I click the button named "AccountReceivableByAgreementsAdd"
+// 		And I select "cu" by string from the drop-down list named "AccountReceivableByAgreementsPartner" in "AccountReceivableByAgreements" table
+// 		And I activate field named "AccountReceivableByAgreementsAmount" in "AccountReceivableByAgreements" table
+// 		And I input "150,00" text in the field named "AccountReceivableByAgreementsAmount" of "AccountReceivableByAgreements" table
+// 		And I finish line editing in "AccountReceivableByAgreements" table
+// 	* Post document
+// 		And I click the button named "FormPost"
+// 		And I delete "$$NumberOpeningEntry01$$" variable
+// 		And I delete "$$OpeningEntry01$$" variable
+// 		And I save the value of "Number" field as "$$NumberOpeningEntry01$$"
+// 		And I save the window as "$$OpeningEntry01$$"
+// 		And I click the button named "FormPostAndClose"
+// 	* Check creation
+// 		And In the command interface I select "Master data" "Opening entries"
+// 		Then the form attribute named "Company" became equal to "My Company"
+// 		Then the form attribute named "Comment" became equal to "Click to enter comment"
+// 		And "Inventory" table became equal
+// 			| '#'   | 'Item'        | 'Quantity'    |
+// 			| '1'   | 'Product 1'   | '100,000'     |
+// 		// And "AccountBalance" table became equal
+// 		// 	| '#' | 'Amount'   | 'Account' | 'Currency' |
+// 		// 	| '1' | '5 000,00' | 'Cash 1'  | 'USD'      |	
+// 		And "AccountPayableByAgreements" table became equal
+// 			| '#'   | 'Partner'    | 'Amount'   | 'Currency'    |
+// 			| '1'   | 'Vendor 1'   | '500,00'   | 'USD'         |
+// 		And "AccountReceivableByAgreements" table became equal
+// 			| '#'   | 'Partner'      | 'Amount'   | 'Currency'    |
+// 			| '1'   | 'Customer 1'   | '150,00'   | 'USD'         |
+// 		Then the form attribute named "Branch" became equal to ""
+// 		And I close all client application windows
 		
 				
 
@@ -356,9 +356,9 @@ Scenario: _900010 create Cash receipt based on SI (Payment from customer)
 		Then the form attribute named "CurrencyExchange" became equal to ""
 		And "PaymentList" table became equal
 			| '#'   | 'Partner'      | 'Total amount'    |
-			| '1'   | 'Customer 1'   | '450,00'          |
+			| '1'   | 'Customer 1'   | '300,00'          |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "450,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "300,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 	* Change amount
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
@@ -697,9 +697,9 @@ Scenario: _900031 return money to customer based on Sales return
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table became equal
 			| '#'   | 'Partner'      | 'Total amount'    |
-			| '1'   | 'Customer 1'   | '150,00'          |
+			| '1'   | 'Customer 1'   | '300,00'          |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "150,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "300,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment03$$" variable

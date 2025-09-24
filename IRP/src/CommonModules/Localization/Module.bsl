@@ -1353,10 +1353,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_001", NStr("en = 'New page'", Lang));
 	Strings.Insert("Form_002", NStr("en = 'Delete'", Lang));
 	Strings.Insert("Form_003", NStr("en = 'Quantity'", Lang));
-	Strings.Insert("Form_004", NStr("en = 'Customers terms'", Lang));
+	Strings.Insert("Form_004", NStr("en = 'Customer terms'", Lang));
 	Strings.Insert("Form_005", NStr("en = 'Customers'", Lang));
 	Strings.Insert("Form_006", NStr("en = 'Vendors'", Lang));
-	Strings.Insert("Form_007", NStr("en = 'Vendors terms'", Lang));
+	Strings.Insert("Form_007", NStr("en = 'Vendor terms'", Lang));
 	Strings.Insert("Form_008", NStr("en = 'User'", Lang));
 	Strings.Insert("Form_009", NStr("en = 'User group'", Lang));
 	Strings.Insert("Form_013", NStr("en = 'Date'", Lang));
@@ -1796,6 +1796,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_185", NStr("en = 'Wrong linked row [%1]: Document date [%2] less than Basis date [%3]'", Lang));
 	Strings.Insert("Error_186", NStr("en = 'Document date [%1] greater than date [%2] in [%3]'", Lang));
 	Strings.Insert("Error_187", NStr("en = 'Error chage quantity for [%1]'", Lang));
+	Strings.Insert("Error_188", NStr("en = 'Section with name [%1] already exists'", Lang));
+	Strings.Insert("Error_189", NStr("en = 'Ext. dimension number is required field'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -2850,7 +2852,19 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 
 #Region SecureStorage
 	Strings.Insert("SecureStorage_CanStoreOnlyStructure", NStr("en = 'It can be stored only Structure type'", Lang));
-	
+#EndRegion
+
+#Region Dashboard
+	Strings.Insert("Dashboard_01", NStr("en = 'Sales amount'", Lang));
+	Strings.Insert("Dashboard_02", NStr("en = 'Average bill'", Lang));
+	Strings.Insert("Dashboard_03", NStr("en = 'Sales return percentage'", Lang));	
+	Strings.Insert("Dashboard_04", NStr("en = 'Cash Balance'", Lang));
+	Strings.Insert("Dashboard_05", NStr("en = 'Payments from clients'", Lang));
+	Strings.Insert("Dashboard_06", NStr("en = 'Payments to suppliers'", Lang));
+	Strings.Insert("Dashboard_07", NStr("en = 'AP/AR Balance'", Lang));
+	Strings.Insert("Dashboard_08", NStr("en = 'Stock Balance'", Lang));
+	Strings.Insert("Dashboard_09", NStr("en = 'Volume of purchases'", Lang));
+
 #EndRegion
 
 	Return Strings;

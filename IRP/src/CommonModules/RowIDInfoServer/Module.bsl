@@ -2009,6 +2009,10 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	Is = Is(Source);
 	If Is.SC And Is(RowRefObject.Basis).ISR Then
 		FillPropertyValues(RowRefObject, RowItemList, , "Store");
+	ElsIf Is.SC And Is(RowRefObject.Basis).IT Then
+		FillPropertyValues(RowRefObject, RowItemList, , "Store");
+	ElsIf Is.GR And Is(RowRefObject.Basis).IT Then
+		FillPropertyValues(RowRefObject, RowItemList, , "Store");		
 	ElsIf Is.RRR Or Is.SR Then
 		FillPropertyValues(RowRefObject, RowItemList, , "Store");
 		RowRefObject.StoreReturn = RowItemList.Store;
@@ -2023,7 +2027,11 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		RowRefObject.StorePurchases = RowItemList.Store;
 	ElsIf Is.PI And ValueIsFilled(RowItemList.SalesOrder) Then
 		FillPropertyValues(RowRefObject, RowItemList, , "Store"); 
-		RowRefObject.StorePurchases = RowItemList.Store;		
+		RowRefObject.StorePurchases = RowItemList.Store;
+	ElsIf Is.SO And RowItemList.IsVariableStore Then
+		FillPropertyValues(RowRefObject, RowItemList, , "Store");
+	ElsIf Is.PO And RowItemList.IsVariableStore Then
+		FillPropertyValues(RowRefObject, RowItemList, , "Store");		
 	Else
 		FillPropertyValues(RowRefObject, RowItemList);
 	EndIf;
@@ -2093,7 +2101,8 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 			RowRefObject.TransactionTypeSCReturn = Source.TransactionType;
 		ElsIf Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales Then
 			RowRefObject.TransactionTypeSC = Source.TransactionType;
-			If Not (ValueIsFilled(Row.Basis) And TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt")) Then
+			If Not (ValueIsFilled(Row.Basis) And TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt"))
+				And (ValueIsFilled(RowRefObject.Basis) And TypeOf(RowRefObject.Basis) <> Type("DocumentRef.SalesOrder")) Then
 				RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
 			EndIf;
 		Else
@@ -6088,6 +6097,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Payments.BankTerm,
 	|	Payments.Key,
 	|	Payments.Certificate,
+	|	Payments.PaymentInFiscalPrinterMode,
 	|	CAST("""" AS String(30)) AS RRNCode,
 	|	CAST("""" AS String(1024)) AS PaymentInfo
 	|FROM
@@ -6104,6 +6114,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Payments.PaymentTerminal,
 	|	Payments.PaymentType,
 	|	Payments.Certificate,
+	|	Payments.PaymentInFiscalPrinterMode,
 	|	Payments.Percent
 	|;
 	|
@@ -13854,7 +13865,11 @@ EndFunction
 #Region EmptyTables_Payments
 
 Function GetColumnNames_Payments()
-	Return "Key, Ref, PaymentType, PaymentTerminal, Account, FinancialMovementType, Percent, BankTerm, RRNCode, PaymentInfo, Certificate";
+	Return 
+		"Key, Ref, PaymentType, PaymentTerminal, 
+		|Account, FinancialMovementType, Percent, 
+		|BankTerm, RRNCode, PaymentInfo, 
+		|Certificate, PaymentInFiscalPrinterMode";
 EndFunction
 
 Function GetColumnNamesSum_Payments()

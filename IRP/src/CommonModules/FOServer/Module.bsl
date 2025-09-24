@@ -317,6 +317,12 @@ Function IsUseAddAttributesAndProperties() Export
 	Return GetFunctionalOption("UseAddAttributesAndProperties");
 EndFunction
 
+Function IsUseNumberingRules() Export
+	Return GetFunctionalOption("UseNumberingRules");
+EndFunction
+
+#EndRegion
+
 Function IsUseAdditionalSettings() Export
 	Return GetFunctionalOption("UseAdditionalSettings");
 EndFunction

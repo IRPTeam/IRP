@@ -3,7 +3,9 @@
   <subsystemsOrder>
     <subsystems>Subsystem.MasterData.Subsystem.Items</subsystems>
     <subsystems>Subsystem.MasterData.Subsystem.Finance</subsystems>
-    <subsystems>Subsystem.MasterData.Subsystem.PurchaseAndSales</subsystems>
+    <subsystems>Subsystem.MasterData.Subsystem.Partners</subsystems>
+    <subsystems>Subsystem.MasterData.Subsystem.CorporateData</subsystems>
+    <subsystems>Subsystem.MasterData.Subsystem.PriceManagment</subsystems>
     <subsystems>Subsystem.MasterData.Subsystem.OpeningEntry</subsystems>
     <subsystems>Subsystem.MasterData.Subsystem.Retail</subsystems>
     <subsystems>Subsystem.MasterData.Subsystem.Production</subsystems>

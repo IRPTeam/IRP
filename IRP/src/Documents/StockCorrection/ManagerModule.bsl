@@ -118,6 +118,8 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
@@ -132,6 +134,7 @@ Function ItemList()
 		|	ItemList.Ref.Company AS Company,
 		|	ItemList.Ref.Branch AS Branch,
 		|	ItemList.Ref.Store AS Store,
+		|	ItemList.Ref AS Ref,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.QuantityInBaseUnit AS Quantity,
 		|	ItemList.SourceOfOriginFrom AS SourceOfOriginFrom,
@@ -143,7 +146,6 @@ Function ItemList()
 		|WHERE
 		|	ItemList.Ref = &Ref";
 EndFunction
-
 
 #EndRegion
 
@@ -183,6 +185,93 @@ Function R9010B_SourceOfOriginStock()
 		|	ItemList AS ItemList
 		|WHERE
 		|	TRUE";
+EndFunction
+
+Function T6010S_BatchesInfo()
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Ref AS Document
+		|INTO T6010S_BatchesInfo
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.Ref";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Key AS RowID,
+		|	CASE
+		|		WHEN ItemList.SourceOfOriginTo.BatchBalanceDetail
+		|			THEN ItemList.SourceOfOriginTo
+		|		ELSE UNDEFINED
+		|	END AS SourceOfOrigin,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO T6020S_BatchKeysInfo
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.ItemKey,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.Key,
+		|	VALUE(Enum.BatchDirection.Receipt),
+		|	CASE
+		|		WHEN ItemList.SourceOfOriginTo.BatchBalanceDetail
+		|			THEN ItemList.SourceOfOriginTo
+		|		ELSE UNDEFINED
+		|	END
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	ItemList.Period,
+		|	VALUE(Enum.BatchDirection.Expense),
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Key,
+		|	CASE
+		|		WHEN ItemList.SourceOfOriginFrom.BatchBalanceDetail
+		|			THEN ItemList.SourceOfOriginFrom
+		|		ELSE UNDEFINED
+		|	END,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.ItemKey,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.Key,
+		|	CASE
+		|		WHEN ItemList.SourceOfOriginFrom.BatchBalanceDetail
+		|			THEN ItemList.SourceOfOriginFrom
+		|		ELSE UNDEFINED
+		|	END,
+		|	VALUE(Enum.BatchDirection.Expense)";
 EndFunction
 
 #EndRegion

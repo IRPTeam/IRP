@@ -11,13 +11,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Reports.Subsystem.Accounting</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.Accounting</name>
 		<right>
 			<name>View</name>

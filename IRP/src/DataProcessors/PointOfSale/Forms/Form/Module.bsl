@@ -1095,9 +1095,11 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	EndDo;
 
 	If Not ResultPrint Then
-		ReceiptsCanceling(TransactionResult.Refs);
+		ReceiptsCanceling(TransactionResult);
 		PaymentForm.Items.Enter.Enabled = True;
 		Return;
+	ElsIf DocumentPostingAfterPrinting Then
+		PostTransaction(TransactionResult);
 	EndIf;
 	
 	PaymentForm.Close();
@@ -1362,6 +1364,11 @@ Function WriteTransaction(PaymentResult)
 	DocRef = Undefined;
 	CashbackAmount = 0;
 
+	ReceiptStatus = Enums.RetailReceiptStatusTypes.Completed;
+	If DocumentPostingAfterPrinting Then
+		ReceiptStatus = Enums.RetailReceiptStatusTypes.PostponedWithReserve;
+	EndIf;
+		
 	If ThisObject.isReturn Then
 
 		PaymentsTable = PaymentResult.Payments.Unload(); // ValueTable
@@ -1372,10 +1379,10 @@ Function WriteTransaction(PaymentResult)
 		EndDo;
 
 		If ThisObject.RetailBasis.IsEmpty() Then
-			DocRef = CreateReturnWithoutBase(PaymentsTable, Enums.RetailReceiptStatusTypes.Completed);
+			DocRef = CreateReturnWithoutBase(PaymentsTable, ReceiptStatus);
 			Result.Refs.Add(DocRef);
 		Else
-			DocRefs = CreateReturnOnBase(PaymentsTable, Enums.RetailReceiptStatusTypes.Completed);
+			DocRefs = CreateReturnOnBase(PaymentsTable, ReceiptStatus);
 			For Each DocRef In DocRefs Do
 				Result.Refs.Add(DocRef);
 			EndDo;
@@ -1396,7 +1403,7 @@ Function WriteTransaction(PaymentResult)
 			ObjectValue = FormAttributeToValue("Object");
 		EndIf;
 		ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
-		ObjectValue.StatusType = Enums.RetailReceiptStatusTypes.Completed;
+		ObjectValue.StatusType = ReceiptStatus;
 		ObjectValue.Payments.Load(Payments);
 		For Each Row In ObjectValue.Payments Do
 			If ValueIsFilled(Row.PaymentType) Then
@@ -1411,10 +1418,14 @@ Function WriteTransaction(PaymentResult)
 		Except
 			Return Result;
 		EndTry;
-
 		DocRef = ObjectValue.Ref;
-		DPPointOfSaleServer.AfterPostingDocument(DocRef);
+		
+		If ReceiptStatus = Enums.RetailReceiptStatusTypes.Completed Then
+			DPPointOfSaleServer.AfterPostingDocument(DocRef);
+		EndIf;
+		
 		Result.Refs.Add(DocRef);
+
 	EndIf;
 
 	CashAmountFilter = New Structure();
@@ -1429,6 +1440,38 @@ Function WriteTransaction(PaymentResult)
 
 	Return Result;
 EndFunction
+
+// Receipts canceling.
+// 
+// Parameters:
+//  TransactionInfo - See WriteTransaction
+&AtServer
+Procedure ReceiptsCanceling(TransactionInfo)
+	For Each Ref In TransactionInfo.Refs Do
+		ThisObject.PostponedReceipt = Ref;
+		RefObject = Ref.GetObject();
+		If RefObject.StatusType = Enums.RetailReceiptStatusTypes.Canceled Then
+			Continue;
+		EndIf;
+		RefObject.StatusType = Enums.RetailReceiptStatusTypes.Canceled;
+		RefObject.Write(DocumentWriteMode.Posting);
+	EndDo;
+EndProcedure
+
+// Post transaction.
+// 
+// Parameters:
+//  TransactionInfo - See WriteTransaction 
+&AtServer
+Procedure PostTransaction(TransactionInfo)
+	For Each DocRef In TransactionInfo.Refs Do
+		ThisObject.PostponedReceipt = DocRef;
+		RefObject = DocRef.GetObject();
+		RefObject.StatusType = Enums.RetailReceiptStatusTypes.Completed;
+		RefObject.Write(DocumentWriteMode.Posting);
+		DPPointOfSaleServer.AfterPostingDocument(DocRef);
+	EndDo;
+EndProcedure
 
 &AtClient
 Procedure SetShowItems()
@@ -1521,10 +1564,22 @@ Procedure ClearRetailCustomerAtServer()
 	EndDo;
 EndProcedure
 
+// Change consolidated retail sales.
+// 
+// Parameters:
+//  Object - FormDataStructure - Object
+//  Form - ClientApplicationForm - Form
+//  NewDocument - DocumentRef.ConsolidatedRetailSales, Undefined - New document
 &AtClientAtServerNoContext
 Procedure ChangeConsolidatedRetailSales(Object, Form, NewDocument)
 	Form.ConsolidatedRetailSales = NewDocument;
 	Object.ConsolidatedRetailSales = NewDocument;
+	If NewDocument <> Undefined Then
+		Form.DocumentPostingAfterPrinting = 
+			CommonFunctionsServer.GetAttributesFromRef(
+				NewDocument, "FiscalPrinter.DocumentPostingAfterPrinting").
+					FiscalPrinter.DocumentPostingAfterPrinting;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -1977,6 +2032,9 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 		ExtractedDataItem.Payments.Clear();
 		ExtractedDataItem.SerialLotNumbers.Clear();
 		ExtractedDataItem.ControlCodeStrings.Clear();
+		If ExtractedDataItem.Payments.Columns.Find("PaymentInFiscalPrinterMode") = Undefined Then
+			ExtractedDataItem.Payments.Columns.Add("PaymentInFiscalPrinterMode", New TypeDescription("Boolean"));
+		EndIf;
 		If isFirst Then
 			isFirst = False;
 			For Each PaymentDataItem In PaymentData Do
@@ -2029,7 +2087,10 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 		
 		DPPointOfSaleServer.BeforePostingDocument(NewDoc);
 		NewDoc.Write(DocumentWriteMode.Posting);
-		DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
+		
+		If StatusType = Enums.RetailReceiptStatusTypes.Completed Then
+			DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
+		EndIf;
 		
 		DocRefs.Add(NewDoc.Ref);
 	EndDo;
@@ -2073,9 +2134,12 @@ Function CreateReturnWithoutBase(PaymentData, StatusType)
 	NewDoc.Fill(FillingData);
 	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(NewDoc);
 	
-	DPPointOfSaleServer.BeforePostingDocument(NewDoc);	
+	DPPointOfSaleServer.BeforePostingDocument(NewDoc);
 	NewDoc.Write(DocumentWriteMode.Posting);
-	DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
+	
+	If StatusType = Enums.RetailReceiptStatusTypes.Completed Then
+		DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
+	EndIf;	
 
 	Return NewDoc.Ref;
 
@@ -2440,23 +2504,6 @@ Procedure OpenPostponedReceiptAtServer(Receipt)
 		ThisObject.Object.ControlCodeStrings.Load(ControlCodeStringsTable);
 	EndIf;
 	
-EndProcedure
-
-// Receipts canceling.
-// 
-// Parameters:
-//  Refs - Array of DocumentRef.RetailSalesReceipt - Refs
-&AtServer
-Procedure ReceiptsCanceling(Refs)
-	For Each Ref In Refs Do
-		ThisObject.PostponedReceipt = Ref;
-		RefObject = Ref.GetObject();
-		If RefObject.StatusType = Enums.RetailReceiptStatusTypes.Canceled Then
-			Continue;
-		EndIf;
-		RefObject.StatusType = Enums.RetailReceiptStatusTypes.Canceled;
-		RefObject.Write(DocumentWriteMode.Posting);
-	EndDo;
 EndProcedure
 
 &AtServerNoContext

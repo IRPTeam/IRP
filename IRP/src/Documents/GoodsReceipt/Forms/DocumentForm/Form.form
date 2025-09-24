@@ -4197,7 +4197,7 @@
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.QueryWizardTempTableDescription</picture>
+      <picture>CommonPicture.LinkUnlinkBasisDocument</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
@@ -4222,7 +4222,7 @@
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.QueryWizardCreateTempTableDescription</picture>
+      <picture>CommonPicture.AddBasisDocument</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
@@ -4313,7 +4313,7 @@
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.Calculator</picture>
+      <picture>CommonPicture.EditQuantityInBaseUnit</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>

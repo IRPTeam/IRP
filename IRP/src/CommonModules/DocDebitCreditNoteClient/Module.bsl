@@ -289,6 +289,8 @@ Procedure ReceiveBasisDocumentStartChoice(Object, Form, Item, ChoiceData, Standa
 	FormParameters = New Structure();
 	FormParameters.Insert("Company", Object.Company);
 	FormParameters.Insert("Partner", Object.ReceivePartner);
+	FormParameters.Insert("LegalName", Object.ReceiveLegalName);
+	FormParameters.Insert("Agreement", Object.ReceiveAgreement);
 	FormParameters.Insert("Ref", Object.Ref);
 	FormParameters.Insert("IsReceiver", True);
 	FormParameters.Insert("Document", Object.ReceiveBasisDocument);
@@ -314,6 +316,8 @@ Procedure SendBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardP
 	FormParameters = New Structure();
 	FormParameters.Insert("Company", Object.Company);
 	FormParameters.Insert("Partner", Object.SendPartner);
+	FormParameters.Insert("LegalName", Object.SendLegalName);
+	FormParameters.Insert("Agreement", Object.SendAgreement);
 	FormParameters.Insert("Ref", Object.Ref);
 	FormParameters.Insert("IsSender", True);
 	FormParameters.Insert("Document", Object.SendBasisDocument);
@@ -339,6 +343,8 @@ Procedure ReceiveOrderStartChoice(Object, Form, Item, ChoiceData, StandardProces
 	FormParameters = New Structure();
 	FormParameters.Insert("Company", Object.Company);
 	FormParameters.Insert("Partner", Object.ReceivePartner);
+	FormParameters.Insert("LegalName", Object.ReceiveLegalName);
+	FormParameters.Insert("Agreement", Object.ReceiveAgreement);
 	FormParameters.Insert("Ref", Object.Ref);
 	FormParameters.Insert("IsReceiver", True);
 	FormParameters.Insert("IsOrder", True);
@@ -365,6 +371,8 @@ Procedure SendOrderStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	FormParameters = New Structure();
 	FormParameters.Insert("Company", Object.Company);
 	FormParameters.Insert("Partner", Object.SendPartner);
+	FormParameters.Insert("LegalName", Object.SendLegalName);
+	FormParameters.Insert("Agreement", Object.SendAgreement);
 	FormParameters.Insert("Ref", Object.Ref);
 	FormParameters.Insert("IsSender", True);
 	FormParameters.Insert("IsOrder", True);

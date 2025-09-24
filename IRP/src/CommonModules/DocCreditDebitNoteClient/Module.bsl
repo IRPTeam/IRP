@@ -189,6 +189,8 @@ Procedure TransactionsListBasisDocumentStartChoice(Object, Form, Item, ChoiceDat
 	FormParameters = New Structure();
 	FormParameters.Insert("Company", Object.Company);
 	FormParameters.Insert("Partner", CurrentData.Partner);
+	FormParameters.Insert("LegalName", CurrentData.LegalName);
+	FormParameters.Insert("Agreement", CurrentData.Agreement);
 	FormParameters.Insert("Ref", Object.Ref);
 	FormParameters.Insert("Document", CurrentData.BasisDocument);
 		

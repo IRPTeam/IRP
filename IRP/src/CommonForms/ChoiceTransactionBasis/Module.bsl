@@ -3,6 +3,8 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.List.Parameters.SetParameterValue("Company", Parameters.Company);
 	ThisObject.List.Parameters.SetParameterValue("Partner", Parameters.Partner);
+	ThisObject.List.Parameters.SetParameterValue("LegalName", Parameters.LegalName);
+	ThisObject.List.Parameters.SetParameterValue("Agreement", Parameters.Agreement);
 	IsOrder = False;
 	If Parameters.Property("IsOrder") Then
 		IsOrder = Parameters.IsOrder;

@@ -132,6 +132,86 @@
         <textEdit>true</textEdit>
       </extInfo>
     </items>
+    <items xsi:type="form:FormField">
+      <name>LegalName</name>
+      <id>26</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.LegalName</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>LegalNameExtendedTooltip</name>
+        <id>28</id>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>LegalNameContextMenu</name>
+        <id>27</id>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>Agreement</name>
+      <id>29</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Agreement</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>AgreementExtendedTooltip</name>
+        <id>31</id>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>AgreementContextMenu</name>
+        <id>30</id>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
     <autoCommandBar>
       <name>ListCommandBar</name>
       <id>2</id>
@@ -298,13 +378,17 @@
       <queryText>SELECT DISTINCT
 	Table.Ref AS Document,
 	Table.Company AS Company,
-	Table.Partner AS Partner
+	Table.Partner AS Partner,
+	Table.LegalName AS LegalName,
+	Table.Agreement AS Agreement
 FROM
 	Document.SalesReportFromTradeAgent AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;SalesReportFromTradeAgent
 
 UNION
@@ -312,6 +396,8 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
+	NULL,
+	NULL,
 	NULL
 FROM
 	Document.CashTransferOrder AS Table
@@ -325,13 +411,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.DebitNote.Transactions AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;DebitNote
 
 UNION
@@ -339,13 +429,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.CreditNote.Transactions AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;CreditNote
 
 UNION
@@ -353,13 +447,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.PurchaseInvoice AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;PurchaseInvoice
 
 UNION
@@ -367,13 +465,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.PurchaseOrder AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;PurchaseOrder
 	AND &amp;IsOrder
 
@@ -382,13 +484,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.SalesInvoice AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;SalesInvoice
 
 UNION
@@ -396,13 +502,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.SalesOrder AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;SalesOrder
 	AND &amp;IsOrder
 
@@ -411,13 +521,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.SalesReturn AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;SalesReturn
 
 UNION
@@ -425,13 +539,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.PurchaseReturn AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;PurchaseReturn
 
 UNION
@@ -439,13 +557,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.RetailSalesReceipt AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;RetailSalesReceipt
 
 UNION
@@ -453,13 +575,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.RetailReturnReceipt AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;RetailReturnReceipt
 
 UNION
@@ -467,13 +593,16 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Partner,
+	NULL,
+	Table.Agreement
 FROM
 	Document.EmployeeCashAdvance AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;EmployeeCashAdvance
 
 UNION
@@ -481,13 +610,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.SalesReportToConsignor AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;SalesReportToConsignor
 
 UNION
@@ -495,13 +628,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.WithholdingTaxInvoice AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;WithholdingTaxInvoice
 
 UNION
@@ -509,13 +646,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.PartnerTradeAgent
+	Table.PartnerTradeAgent,
+	Table.LegalNameTradeAgent,
+	Table.AgreementTradeAgent
 FROM
 	Document.OpeningEntry AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.PartnerTradeAgent = &amp;Partner
+	AND Table.LegalNameTradeAgent = &amp;LegalName
+	AND Table.AgreementTradeAgent = &amp;Agreement
 	AND &amp;OpeningEntry
 
 UNION
@@ -523,13 +664,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Company,
-	Table.PartnerConsignor
+	Table.PartnerConsignor,
+	Table.LegalNameConsignor,
+	Table.AgreementConsignor
 FROM
 	Document.OpeningEntry AS Table
 WHERE
 	Table.Posted
 	AND Table.Company = &amp;Company
 	AND Table.PartnerConsignor = &amp;Partner
+	AND Table.LegalNameConsignor = &amp;LegalName
+	AND Table.AgreementConsignor = &amp;Agreement
 	AND &amp;OpeningEntry
 
 UNION
@@ -537,13 +682,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.OpeningEntry.AdvanceFromCustomers AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;OpeningEntry
 
 UNION
@@ -551,13 +700,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.OpeningEntry.AdvanceToSuppliers AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;OpeningEntry
 
 UNION
@@ -565,13 +718,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.OpeningEntry.AccountPayableByAgreements AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;OpeningEntry
 
 UNION
@@ -579,13 +736,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.OpeningEntry.AccountPayableByDocuments AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;OpeningEntry
 
 UNION
@@ -593,13 +754,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.OpeningEntry.AccountReceivableByDocuments AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;OpeningEntry
 
 UNION
@@ -607,13 +772,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.OpeningEntry.AccountReceivableByAgreements AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;OpeningEntry
 
 UNION
@@ -621,13 +790,16 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Employee
+	Table.Employee,
+	NULL,
+	Table.Agreement
 FROM
 	Document.OpeningEntry.EmployeeCashAdvance AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
 	AND Table.Employee = &amp;Partner
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;OpeningEntry
 
 UNION
@@ -635,13 +807,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.OpeningEntry.AccountReceivableOther AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;OpeningEntry
 
 UNION
@@ -649,13 +825,17 @@ UNION
 SELECT DISTINCT
 	Table.Ref,
 	Table.Ref.Company,
-	Table.Partner
+	Table.Partner,
+	Table.LegalName,
+	Table.Agreement
 FROM
 	Document.OpeningEntry.AccountPayableOther AS Table
 WHERE
 	Table.Ref.Posted
 	AND Table.Ref.Company = &amp;Company
 	AND Table.Partner = &amp;Partner
+	AND Table.LegalName = &amp;LegalName
+	AND Table.Agreement = &amp;Agreement
 	AND &amp;OpeningEntry</queryText>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
@@ -677,6 +857,22 @@ WHERE
             <content>
               <key>en</key>
               <value>Document</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>LegalName</dataPath>
+        <field>LegalName</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Agreement</dataPath>
+        <field>Agreement</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Partner term</value>
             </content>
           </localValue>
         </title>
@@ -963,6 +1159,36 @@ WHERE
         </title>
         <valueType>
           <types>Boolean</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>Agreement</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Agreement</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.Agreements</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>LegalName</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Legal name</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.Companies</types>
         </valueType>
         <useRestriction>true</useRestriction>
       </parameters>

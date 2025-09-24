@@ -162,7 +162,7 @@ Scenario: _051001 create Cash payment based on Purchase invoice
 	And I go to line in "List" table
 		| 'Document'                    |
 		| '$$PurchaseInvoice29604$$'    |
-	And I click "Select" button
+	And I select current line in "List" table
 	And in "PaymentList" table I move to the next cell
 * Change in payment amount
 	And I activate field named "PaymentListTotalAmount" in "PaymentList" table
@@ -197,7 +197,7 @@ And I close all client application windows
 	And I go to line in "List" table
 		| 'Company'        | 'Amount'      | 'Legal name'          | 'Partner'      |
 		| 'Main Company'   | '137 000,00'  | 'Company Ferron BP'   | 'Ferron BP'    |
-	And I click "Select" button
+	And I select current line in "List" table
 	And "PaymentList" table contains lines
 		| 'Partner'   | 'Partner term'       | 'Total amount' | 'Legal name'             | 'Basis document'            |
 		| 'Ferron BP' | 'Vendor Ferron, TRY' | '5 000,00'     | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' |
@@ -213,7 +213,7 @@ And I close all client application windows
 // 	And I go to line in "List" table
 // 		| 'Company'        | 'Amount'     | 'Legal name'          | 'Partner'      |
 // 		| 'Main Company'   | '132 000,00' | 'Company Ferron BP'   | 'Ferron BP'    |
-// 	And I click "Select" button
+// 	And I select current line in "List" table
 // 	And "PaymentList" table contains lines
 // 		| 'Partner'   | 'Partner term'       | 'Total amount' | 'Legal name'             | 'Basis document'            |
 // 		| 'Ferron BP' | 'Vendor Ferron, TRY' | '5 000,00'     | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' |
@@ -240,7 +240,7 @@ Scenario: _0510011 create Cash payment (independently)
 		And I go to line in "List" table
 			| Code    | Description      |
 			| TRY     | Turkish lira     |
-		And I click "Select" button
+		And I select current line in "List" table
 	And I click the button named "PaymentListAdd"
 	* Filling in a partner in a tabular part
 		And I activate "Partner" field in "PaymentList" table
@@ -267,7 +267,7 @@ Scenario: _0510011 create Cash payment (independently)
 		And I go to line in "List" table
 			| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
 			| '137 000,00'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
-		And I click "Select" button
+		And I select current line in "List" table
 		And I click choice button of "Order" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
@@ -315,7 +315,7 @@ Scenario: _0510011 create Cash payment (independently)
 		And I go to line in "List" table
 			| Code    | Description         |
 			| USD     | American dollar     |
-		And I click "Select" button
+		And I select current line in "List" table
 	And I click the button named "PaymentListAdd"
 	* Filling in a partner in a tabular part
 		And I activate "Partner" field in "PaymentList" table
@@ -336,13 +336,12 @@ Scenario: _0510011 create Cash payment (independently)
 				| 'Vendor Ferron, TRY'      |
 		And I select current line in "List" table
 	* Filling in basis documents in a tabular part
-		And I finish line editing in "PaymentList" table
-		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
+		And I click choice button of "Basis document" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
 			| '136 000,00'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
-		And I click "Select" button
+		And I select current line in "List" table
 		And I click choice button of "Order" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
@@ -381,7 +380,7 @@ Scenario: _0510011 create Cash payment (independently)
 		And I go to line in "List" table
 			| Code    | Description     |
 			| EUR     | Euro            |
-		And I click "Select" button
+		And I select current line in "List" table
 	And I click the button named "PaymentListAdd"
 	* Filling in a partner in a tabular part
 		And I activate "Partner" field in "PaymentList" table
@@ -469,7 +468,7 @@ Scenario: _0510012 check form for select basis document
 		And I go to line in "List" table
 			| 'Amount'         |
 			| '135 887,45'     |
-		And I click "Select" button
+		And I select current line in "List" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table

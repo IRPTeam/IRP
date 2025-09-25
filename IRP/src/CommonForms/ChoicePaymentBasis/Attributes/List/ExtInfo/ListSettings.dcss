@@ -6,8 +6,8 @@
 	</filter>
 	<order>
 		<item xsi:type="OrderItemField">
-			<field>Ref.Date</field>
-			<orderType>Asc</orderType>
+			<field>Document.Date</field>
+			<orderType>Desc</orderType>
 		</item>
 		<viewMode>Normal</viewMode>
 		<userSettingID>88619765-ccb3-46c6-ac52-38e9c992ebd4</userSettingID>

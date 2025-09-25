@@ -62,6 +62,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.List.Parameters.SetParameterValue(KeyValue.Key , KeyValue.Value);
 	EndDo;
 	
+	ChangeListFilter();
+	
 	Items.List.CurrentRow = Parameters.Document;
 EndProcedure
 
@@ -73,4 +75,15 @@ Procedure ListSelection(Item, RowSelected, Field, StandardProcessing)
 		Close(New Structure("BasisDocument, Amount", 
 			CurrentData.Document, CurrentData.Amount));
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure ShowAllOnChange(Item)
+	ChangeListFilter();
+EndProcedure
+
+&AtServer
+Procedure ChangeListFilter()
+	CommonFunctionsClientServer.SetFilterItem(List.Filter.Items, 
+		"Amount", 0, DataCompositionComparisonType.NotEqual, Not ThisObject.ShowAll);
 EndProcedure

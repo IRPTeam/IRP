@@ -230,7 +230,7 @@ Scenario: _2050001 preparation
 			And I go to line in "List" table
 				| 'Legal name'      | 'Partner'     |
 				| 'Company Adel'    | 'Crystal'     |
-			And I click "Select" button
+			And I select current line in "List" table
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table
 			And I input "5000,00" text in "Total amount" field of "PaymentList" table

@@ -270,8 +270,8 @@ Scenario: _0510011 create Cash payment (independently)
 		And I select current line in "List" table
 		And I click choice button of "Order" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
-			| '137 000,00'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
+			| 'Document'                | 'Company'      | 'Partner'   |
+			| '$$PurchaseOrder017001$$' | 'Main Company' | 'Ferron BP' |
 		And I select current line in "List" table
 	* Filling in amount in a tabular part
 		And I activate "Total amount" field in "PaymentList" table
@@ -336,16 +336,16 @@ Scenario: _0510011 create Cash payment (independently)
 				| 'Vendor Ferron, TRY'      |
 		And I select current line in "List" table
 	* Filling in basis documents in a tabular part
-		And I select current line in "PaymentList" table
-		And I click choice button of "Basis document" attribute in "PaymentList" table
+		And Delay 2
+		And I click choice button of "Basis document" attribute in "PaymentList" table	
 		And I go to line in "List" table
 			| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
 			| '136 000,00'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
 		And I select current line in "List" table
 		And I click choice button of "Order" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
-			| '136 000,00'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
+			| 'Document'                | 'Company'      | 'Partner'   |
+			| '$$PurchaseOrder017001$$' | 'Main Company' | 'Ferron BP' |
 		And I select current line in "List" table
 	* Filling in amount in a tabular part
 		And I activate "Total amount" field in "PaymentList" table
@@ -490,7 +490,7 @@ Scenario: _0510012 check form for select basis document
 		And I select current line in "PaymentList" table
 		And "List" table contains lines
 			| 'Document'               | 'Company'         | 'Partner'      | 'Amount'        | 'Legal name'           | 'Partner term'          | 'Currency'     |
-			| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '135 787,45'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
+			| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '135 887,45'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
 			| 'Purchase invoice 2*'    | 'Main Company'    | 'Ferron BP'    | '13 000,00'     | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
 		And I close current window
 	* Check forms DocumentsForIncomingPayment
@@ -504,7 +504,7 @@ Scenario: _0510012 check form for select basis document
 		And I select current line in "PaymentList" table
 		And "List" table contains lines
 			| 'Document'               | 'Company'         | 'Partner'      | 'Amount'        | 'Legal name'           | 'Partner term'          | 'Currency'     |
-			| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '135 787,45'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
+			| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '135 887,45'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
 			| 'Purchase invoice 2*'    | 'Main Company'    | 'Ferron BP'    | '13 000,00'     | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
 		And I close current window
 		And I input "{CurrentDate() - 86401}" text in the field named "Date"
@@ -515,7 +515,7 @@ Scenario: _0510012 check form for select basis document
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
-		Then the number of "List" table lines is "равно" 1
+		Then the number of "List" table lines is "равно" 5
 		And I close all client application windows	
 
 # Filters
@@ -704,8 +704,8 @@ Scenario: _051015 check connection to CashPayment report "Related documents"
 Given I open hyperlink "e1cib/list/Document.CashPayment"
 * Form report Related documents
 	And I go to line in "List" table
-	| Number                         |
-	| $$NumberCashPayment0510011$$   |
+	| 'Number'                         |
+	| '$$NumberCashPayment0510011$$'   |
 	And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 	And Delay 1
 Then "* Related documents" window is opened

@@ -278,7 +278,7 @@ Scenario: _1000009 create Cash receipt and check Aging register movements
 			And I go to line in "List" table
 				| 'Amount'    | 'Company'         | 'Legal name'         | 'Partner'    | 'Document'                    |
 				| '550,00'    | 'Main Company'    | 'Company Kalipso'    | 'Kalipso'    | '$$SalesInvoice0240162$$'     |
-			And I click "Select" button
+			And I select current line in "List" table
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "550,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
@@ -362,7 +362,7 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 				And I go to line in "List" table
 					| 'Amount'     | 'Company'          | 'Legal name'          | 'Partner'     | 'Document'                    |
 					| '550,00'     | 'Main Company'     | 'Company Kalipso'     | 'Kalipso'     | '$$SalesInvoice024016$$'      |
-				And I click "Select" button
+				And I select current line in "List" table
 				And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 				And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
@@ -453,14 +453,9 @@ Scenario: _1000020 create Credit note and check Aging register movements
 		And I input "150,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
 		And I select current line in "Transactions" table
-		And I click choice button of "Basis document" attribute in "Transactions" table
-		And I go to line in "" table
-			| ""              |
-			| "Sales invoice" |
-		And I select current line in "" table
 		And I go to line in "List" table
-			| "Number"                       |
-			| "$$NumberSalesInvoice0240161$$" |
+			| "Document"                |
+			| "$$SalesInvoice024016$$" |
 		And I select current line in "List" table
 		And I click the button named "FormPost"
 		And I delete "$$CreditNote1000020$$" variable
@@ -530,14 +525,9 @@ Scenario: _1000030 create Debit note and check Aging register movements (with ba
 		And I input "50,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I select current line in "Transactions" table
 		And I click choice button of "Basis document" attribute in "Transactions" table
-		Then "Select data type" window is opened
-		And I go to line in "" table
-			| ""              |
-			| "Sales invoice" |
-		And I select current line in "" table
 		And I go to line in "List" table
-			| "Amount" | "Company"      | "Currency" | "Legal name"      | "Partner" |
-			| "550,00" | "Main Company" | "TRY"      | "Company Kalipso" | "Kalipso" |
+			| "Document"                |
+			| "$$SalesInvoice024016$$" |
 		And I select current line in "List" table	
 		And I finish line editing in "Transactions" table
 	* Check movements
@@ -974,14 +964,19 @@ Scenario: _1000057 create BR based on SO (Prepaid)
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Kalipso'     |
+		And I select current line in "List" table	
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, without VAT'     |
 		And I select current line in "List" table		
 		And I activate "Order" field in "PaymentList" table
 		And I click choice button of "Order" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Document'                                    | 'Company'      | 'Partner' | 'Legal name'      | 'Partner term'                     | 'Currency' | 'Amount' |
-			| 'Sales order 1 115 dated 04.01.2024 11:43:06' | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | '864,41' |
-		And I click "Select" button
+			| 'Document'                                    | 'Company'      | 'Partner' | 'Legal name'      | 'Partner term'                     |
+			| 'Sales order 1 115 dated 04.01.2024 11:43:06' | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' |
+		And I select current line in "List" table
 		And "PaymentList" table became equal
-			| 'Partner' | '#' | 'Commission' | 'Legal name'           | 'Partner term' | 'Legal name contract' | 'Basis document' | 'Order'                                       | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Additional analytic' | 'Commission percent' | 'Expense type' |
-			| 'Kalipso' | '1' | ''           | 'Company Kalipso' | ''             | ''                    | ''               | 'Sales order 1 115 dated 04.01.2024 11:43:06' | '864,41'       | ''                        | ''                   | ''                 | ''                           | ''                    | ''                   | ''             |
+			| 'Partner' | '#' | 'Commission' | 'Legal name'      | 'Partner term'                     | 'Legal name contract' | 'Basis document' | 'Order'                                       | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Additional analytic' | 'Commission percent' | 'Expense type' |
+			| 'Kalipso' | '1' | ''           | 'Company Kalipso' | 'Basic Partner terms, without VAT' | ''                    | ''               | 'Sales order 1 115 dated 04.01.2024 11:43:06' | ''             | ''                        | ''                   | ''                 | ''                           | ''                    | ''                   | ''             |
 	And I close all client application windows

@@ -2314,7 +2314,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		And I go to line in "List" table
 			| 'Document'                 | 'Amount'      | 'Company'        | 'Legal name'        | 'Partner'    |
 			| '$$SalesInvoice024025$$'   | '11 000,00'   | 'Main Company'   | 'Company Kalipso'   | 'Kalipso'    |
-		And I click "Select" button
+		And I select current line in "List" table
 	* Check clearing basis document when clearing partner term
 		And I select current line in "PaymentList" table
 		And I click Clear button of "Partner term" field
@@ -2473,7 +2473,7 @@ Scenario: _0154108 total amount calculation in Cash receipt
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
-		And I click "Select" button	
+		And I select current line in "List" table	
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "980,00"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
@@ -2593,7 +2593,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 		And I go to line in "List" table
 			| 'Document'                 | 'Amount'      | 'Company'        | 'Legal name'        | 'Partner'    |
 			| '$$SalesInvoice024025$$'   | '11 000,00'   | 'Main Company'   | 'Company Kalipso'   | 'Kalipso'    |
-		And I click "Select" button
+		And I select current line in "List" table
 	* Check clearing basis document when clearing partner term
 		And I select current line in "PaymentList" table
 		And I click Clear button of "Partner term" field
@@ -2748,7 +2748,7 @@ Scenario: _0154110 total amount calculation in Bank receipt
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
-		And I click "Select" button	
+		And I select current line in "List" table	
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "980,00"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
@@ -2884,7 +2884,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		And I go to line in "List" table
 		| 'Document'                  | 'Amount'     | 'Company'       | 'Legal name'         | 'Partner'     |
 		| '$$PurchaseInvoice29604$$'  | '13 000,00'  | 'Main Company'  | 'Company Ferron BP'  | 'Ferron BP'   |
-		And I click "Select" button
+		And I select current line in "List" table
 	* Check clearing basis document when clearing partner term
 		And I select current line in "PaymentList" table
 		And I click Clear button of "Partner term" field
@@ -3040,7 +3040,7 @@ Scenario: _0154112 total amount calculation in Cash payment
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
-		And I click "Select" button
+		And I select current line in "List" table
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "13 430,00"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
@@ -3160,7 +3160,7 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I go to line in "List" table
 		| 'Document'                  | 'Amount'     | 'Company'       | 'Legal name'         | 'Partner'     |
 		| '$$PurchaseInvoice29604$$'  | '13 000,00'  | 'Main Company'  | 'Company Ferron BP'  | 'Ferron BP'   |
-		And I click "Select" button
+		And I select current line in "List" table
 	* Check clearing basis document when clearing partner term
 		And I select current line in "PaymentList" table
 		And I click Clear button of "Partner term" field
@@ -3316,7 +3316,7 @@ Scenario: _0154114 total amount calculation in Bank payment
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
-		And I click "Select" button
+		And I select current line in "List" table
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "13 430,00"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table

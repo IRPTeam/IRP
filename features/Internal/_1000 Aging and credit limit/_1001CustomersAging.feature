@@ -452,6 +452,7 @@ Scenario: _1000020 create Credit note and check Aging register movements
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "150,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
+		And I activate "Basis document" field in "Transactions" table
 		And I select current line in "Transactions" table
 		And I go to line in "List" table
 			| "Document"                |

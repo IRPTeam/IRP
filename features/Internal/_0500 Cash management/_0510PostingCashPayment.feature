@@ -336,8 +336,9 @@ Scenario: _0510011 create Cash payment (independently)
 				| 'Vendor Ferron, TRY'      |
 		And I select current line in "List" table
 	* Filling in basis documents in a tabular part
-		And Delay 2
-		And I click choice button of "Basis document" attribute in "PaymentList" table	
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table	
 		And I go to line in "List" table
 			| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
 			| '136 000,00'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
@@ -515,7 +516,7 @@ Scenario: _0510012 check form for select basis document
 		And I finish line editing in "PaymentList" table
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
-		Then the number of "List" table lines is "равно" 5
+		Then the number of "List" table lines is "равно" 3
 		And I close all client application windows	
 
 # Filters

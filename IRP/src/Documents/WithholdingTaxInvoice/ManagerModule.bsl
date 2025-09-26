@@ -37,6 +37,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R1021B_VendorsTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -425,6 +426,7 @@ Function T1040T_AccountingAmounts()
 		"SELECT
 		|	ItemList.Period,
 		|	ItemList.Key AS RowKey,
+		|	ItemList.PartnerUUID AS Key,
 		|	ItemList.Currency,
 		|	undefined as DrCurrency,
 		|	undefined as CrCurrency,
@@ -442,6 +444,7 @@ Function T1040T_AccountingAmounts()
 		|SELECT
 		|	ItemList.Period,
 		|	ItemList.Key AS RowKey,
+		|	ItemList.PartnerUUID,
 		|	ItemList.Currency,
 		|	undefined,
 		|	undefined,
@@ -458,6 +461,7 @@ Function T1040T_AccountingAmounts()
 		|SELECT
 		|	ItemList.Period,
 		|	ItemList.Key AS RowKey,
+		|	ItemList.PartnerUUID,
 		|	ItemList.TaxAgreement.CurrencyMovementType.Currency,
 		|	undefined,
 		|	ItemList.TaxAgreement.CurrencyMovementType.Currency,
@@ -474,6 +478,7 @@ Function T1040T_AccountingAmounts()
 		|SELECT
 		|	T2010S_OffsetOfAdvances.Period,
 		|	T2010S_OffsetOfAdvances.Key AS RowKey,
+		|	T2010S_OffsetOfAdvances.Key,
 		|	T2010S_OffsetOfAdvances.Currency,
 		|	undefined,
 		|	undefined,

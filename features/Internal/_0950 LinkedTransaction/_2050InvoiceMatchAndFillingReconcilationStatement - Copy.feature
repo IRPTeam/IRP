@@ -48,6 +48,7 @@ Scenario: _2050001 preparation
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create information register Taxes records (VAT)
+		When Create catalog BusinessUnits objects
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -205,6 +206,8 @@ Scenario: _2050001 preparation
 				| Cash desk №3     |
 			And I select current line in "List" table
 			And I input begin of the current month date in "Date" field
+			And I move to "Other" tab
+			And I select from the drop-down list named "Branch" by "Distribution department" string	
 		And I click the button named "PaymentListAdd"
 		* Filling in partners in a tabular part
 			And I activate "Partner" field in "PaymentList" table

@@ -485,18 +485,20 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 	|	TransactionsBalance.Partner,
 	|	TransactionsBalance.LegalName,
 	|	TransactionsBalance.Agreement,
-	|	TransactionsBalance.TransactionBasis,
+	|	TransactionsBalance.TransactionBasis AS TransactionBasis,
 	|	TransactionsBalance.Order,
 	|	TransactionsBalance.Project,
 	|	TransactionsBalance.AmountBalance AS TransactionAmount
 	|FROM
-	|	AccumulationRegister.TM1030B_TransactionsKey.Balance(&AdvanceBoundary, 
-	|		Company = &Company
+	|	AccumulationRegister.TM1030B_TransactionsKey.Balance(&AdvanceBoundary, Company = &Company
 	|	AND Branch = &Branch
 	|	AND Currency = &Currency
 	|	AND Partner = &Partner
 	|	AND Agreement = &Agreement
-	|	AND LegalName = &LegalName) AS TransactionsBalance";
+	|	AND LegalName = &LegalName) AS TransactionsBalance
+	|
+	|ORDER BY
+	|	TransactionBasis.PointInTime";
 
 	Point = New PointInTime(PointInTime.Date, Parameters.Object.Ref);
 	Boundary = New Boundary(Point, BoundaryType.Including);

@@ -67,11 +67,17 @@ Procedure ReadData()
 
 	For Each DataItem In _AttributeFromFO Do
 		FO_Name = DataItem.Key;
-		FO_Value = FOServer.GetFunctionalOptionValue(FO_Name);
 		AttributeNames = DataItem.Value; // Array
-		For Each AttributeName In AttributeNames Do
-			ThisObject[AttributeName] = FO_Value;
-		EndDo;
+		Try
+			FO_Value = FOServer.GetFunctionalOptionValue(FO_Name);
+			For Each AttributeName In AttributeNames Do
+				ThisObject[AttributeName] = FO_Value;
+			EndDo;
+		Except
+			For Each AttributeName In AttributeNames Do
+				Items[AttributeName].Enabled = False;
+			EndDo;
+		EndTry;
 	EndDo;
 		
 	SetItemsEnables(ThisObject);

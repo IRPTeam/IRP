@@ -321,8 +321,6 @@ Function IsUseNumberingRules() Export
 	Return GetFunctionalOption("UseNumberingRules");
 EndFunction
 
-#EndRegion
-
 Function IsUseAdditionalSettings() Export
 	Return GetFunctionalOption("UseAdditionalSettings");
 EndFunction
@@ -395,10 +393,6 @@ Function IsUseMobile() Export
 	Return GetFunctionalOption("UseMobile");
 EndFunction
 
-Function IsUseNumberingRules() Export
-	Return GetFunctionalOption("UseNumberingRules");
-EndFunction
-
 Function IsUseObjectAccess() Export
 	Return GetFunctionalOption("UseObjectAccess");
 EndFunction
@@ -457,6 +451,10 @@ EndFunction
 
 Function IsUseBusinessProcess() Export
 	Return GetFunctionalOption("UseBusinessProcess");
+EndFunction
+
+Function IsUseDashboard() Export
+	Return GetFunctionalOption("UseDashboard");
 EndFunction
 
 #EndRegion

@@ -17,87 +17,63 @@ Procedure UpdateDefaults() Export
 EndProcedure
 
 Procedure UpdateDefaultsAtTransaction() Export
-	Strings = GetStrings();
 	
+	UpdateDefault_Unit();
+	
+	UpdateDefault_PriceTypes();
+	
+	UpdateDefault_CurrencyMovementTypes();
+	
+	UpdateDefault_Currency();
+	
+	UpdateDefault_Company();
+	
+	UpdateDefault_Store();
+	
+EndProcedure
+
 #Region Catalog_Units
 
-	ObjectUnit = Catalogs.Units.Default.GetObject();
-	FillPropertyValues(ObjectUnit, GetDescriptions("Default_001", Strings)); // pcs
-	ObjectUnit.Quantity = 1;
-	ObjectUnit.Write();
+Procedure UpdateDefault_Unit() Export
 	
+	NeedSave = False;
+	ObjectUnit = Catalogs.Units.Default.GetObject();
+	
+	SetObjectProperty(ObjectUnit, "Quantity", 1, NeedSave);
+	SetObjectDescription(ObjectUnit, "Default_001", NeedSave);
+	
+	SaveModifiedObject(ObjectUnit, NeedSave);
+	
+EndProcedure
+
+Function GetDefault_Unit(UnitRef = Undefined) Export
+	If FOServer.IsUseUnitsAndDimensions() Then
+		Return UnitRef;
+	EndIf;
+	Return Catalogs.Units.Default;	
+EndFunction
+
 #EndRegion
 	
 #Region Catalog_PriceTypes
 
+Procedure UpdateDefault_PriceTypes() Export
+	
+	NeedSave = False;
 	ObjectPriceTypeCustomer = Catalogs.PriceTypes.Default_Customer.GetObject();
-	FillPropertyValues(ObjectPriceTypeCustomer, GetDescriptions("Default_004", Strings)); // Customer price type
-	ObjectPriceTypeCustomer.Currency = GetDefault_Currency(Undefined, True);
-	ObjectPriceTypeCustomer.Assignment = Enums.PriceAssignment.Customer;
-	ObjectPriceTypeCustomer.Write();
+	SetObjectProperty(ObjectPriceTypeCustomer, "Assignment", Enums.PriceAssignment.Customer, NeedSave);
+	SetObjectProperty(ObjectPriceTypeCustomer, "Currency", GetDefault_Currency(Undefined, True), NeedSave);
+	SetObjectDescription(ObjectPriceTypeCustomer, "Default_004", NeedSave);
+	SaveModifiedObject(ObjectPriceTypeCustomer, NeedSave);
 	
+	NeedSave = False;
 	ObjectPriceTypeVendor = Catalogs.PriceTypes.Default_Vendor.GetObject();
-	FillPropertyValues(ObjectPriceTypeVendor, GetDescriptions("Default_005", Strings)); // Vendor price type
-	ObjectPriceTypeVendor.Currency = GetDefault_Currency(Undefined, True);
-	ObjectPriceTypeVendor.Assignment = Enums.PriceAssignment.Vendor;
-	ObjectPriceTypeVendor.Write();
-
-#EndRegion
-	
-#Region ChartsOfCharacteristicType_CurrencyMovementType
-
-	ObjectCurrencyMovementTypePartnerTerm = ChartsOfCharacteristicTypes.CurrencyMovementType.Default_PartnerTerm.GetObject();
-	FillPropertyValues(ObjectCurrencyMovementTypePartnerTerm, GetDescriptions("Default_006", Strings)); // Partner term currency type 
-	ObjectCurrencyMovementTypePartnerTerm.Currency = GetDefault_Currency(Undefined, True);
-	ObjectCurrencyMovementTypePartnerTerm.Type = Enums.CurrencyType.Agreement;
-	ObjectCurrencyMovementTypePartnerTerm.Write();
-	
-	ObjectCurrencyMovementTypeLegal = ChartsOfCharacteristicTypes.CurrencyMovementType.Default_Legal.GetObject();
-	FillPropertyValues(ObjectCurrencyMovementTypeLegal, GetDescriptions("Default_007", Strings)); // Legal currency type
-	ObjectCurrencyMovementTypeLegal.Currency = GetDefault_Currency(Undefined, True);
-	ObjectCurrencyMovementTypeLegal.Type = Enums.CurrencyType.Legal;
-	ObjectCurrencyMovementTypeLegal.Write();
-
-#EndRegion
-	
-#Region Catalog_Currencies
-	
-	ObjectCurrency = Catalogs.Currencies.Default.GetObject();
-	FillPropertyValues(ObjectCurrency, GetDescriptions("Default_008", Strings)); // American dollar
-	ObjectCurrency.Code = R().Default_009; // USD
-	ObjectCurrency.Symbol = R().Default_010; // $
-	ObjectCurrency.Write();
-	
-#EndRegion
-
-#Region Catalog_Companies
-
-	ObjectCompany = Catalogs.Companies.Default.GetObject();
-	FillPropertyValues(ObjectCompany, GetDescriptions("Default_011", Strings)); // My Company
-	ObjectCompany.Type = Enums.CompanyLegalType.Company;
-	ObjectCompany.OurCompany = True;
-	ObjectCompany.Currencies.Clear();
-	ObjectCompany.Currencies.Add().MovementType = GetDefault_CurrencyMovementType_Legal(Undefined, True);
-	ObjectCompany.Write();
-
-#EndRegion
-
-#Region Catalog_Stores
-
-	ObjectStore = Catalogs.Stores.Default.GetObject();
-	FillPropertyValues(ObjectStore, GetDescriptions("Default_012", Strings)); // My Store
-	ObjectStore.Write();
-
-#EndRegion
+	SetObjectProperty(ObjectPriceTypeVendor, "Assignment", Enums.PriceAssignment.Vendor, NeedSave);
+	SetObjectProperty(ObjectPriceTypeVendor, "Currency", GetDefault_Currency(Undefined, True), NeedSave);
+	SetObjectDescription(ObjectPriceTypeVendor, "Default_005", NeedSave);
+	SaveModifiedObject(ObjectPriceTypeVendor, NeedSave);
 
 EndProcedure
-
-Function GetDefault_Unit(Value = Undefined) Export
-	If FOServer.IsUseUnitsAndDimensions() Then
-		Return Value;
-	EndIf;
-	Return Catalogs.Units.Default;	
-EndFunction
 
 Function GetDefault_PriceType_Vendor(Value = Undefined) Export
 	If FOServer.IsUsePartnerTerms() Then
@@ -113,6 +89,28 @@ Function GetDefault_PriceType_Customer(Value = Undefined) Export
 	Return Catalogs.PriceTypes.Default_Customer;
 EndFunction
 
+#EndRegion
+	
+#Region ChartsOfCharacteristicType_CurrencyMovementType
+
+Procedure UpdateDefault_CurrencyMovementTypes() Export
+	
+	NeedSave = False;
+	TypeObject = ChartsOfCharacteristicTypes.CurrencyMovementType.Default_PartnerTerm.GetObject();
+	SetObjectProperty(TypeObject, "Type", Enums.CurrencyType.Agreement, NeedSave);
+	SetObjectProperty(TypeObject, "Currency", GetDefault_Currency(Undefined, True), NeedSave);
+	SetObjectDescription(TypeObject, "Default_006", NeedSave);
+	SaveModifiedObject(TypeObject, NeedSave);
+	
+	NeedSave = False;
+	TypeObject = ChartsOfCharacteristicTypes.CurrencyMovementType.Default_Legal.GetObject();
+	SetObjectProperty(TypeObject, "Type", Enums.CurrencyType.Legal, NeedSave);
+	SetObjectProperty(TypeObject, "Currency", GetDefault_Currency(Undefined, True), NeedSave);
+	SetObjectDescription(TypeObject, "Default_007", NeedSave);
+	SaveModifiedObject(TypeObject, NeedSave);
+	
+EndProcedure
+
 Function GetDefault_CurrencyMovementType_PartnerTerm(Value = Undefined) Export
 	If FOServer.IsUsePartnerTerms() Then
 		Return Value;
@@ -127,12 +125,50 @@ Function GetDefault_CurrencyMovementType_Legal(Value = Undefined, IsUpdateDefaul
 	Return ChartsOfCharacteristicTypes.CurrencyMovementType.Default_Legal;
 EndFunction
 
+#EndRegion
+	
+#Region Catalog_Currencies
+	
+Procedure UpdateDefault_Currency() Export
+	
+	NeedSave = False;
+	ObjectCurrency = Catalogs.Currencies.Default.GetObject();
+	SetObjectProperty(ObjectCurrency, "Code", R().Default_009, NeedSave); // USD
+	SetObjectProperty(ObjectCurrency, "Symbol", R().Default_010, NeedSave); // $
+	SetObjectDescription(ObjectCurrency, "Default_008", NeedSave);
+	SaveModifiedObject(ObjectCurrency, NeedSave);
+	
+EndProcedure
+
 Function GetDefault_Currency(Value = Undefined, IsUpdateDefaults = False) Export
 	If FOServer.IsUsePartnerTerms() And Not IsUpdateDefaults Then
 		Return Value;
 	EndIf;
 	Return Catalogs.Currencies.Default;
 EndFunction
+
+#EndRegion
+
+#Region Catalog_Companies
+
+Procedure UpdateDefault_Company() Export
+	
+	NeedSave = False;
+	ObjectCompany = Catalogs.Companies.Default.GetObject();
+	SetObjectProperty(ObjectCompany, "Type", Enums.CompanyLegalType.Company, NeedSave);
+	SetObjectProperty(ObjectCompany, "OurCompany", True, NeedSave);
+	SetObjectDescription(ObjectCompany, "Default_011", NeedSave);
+	
+	LegalCMT = GetDefault_CurrencyMovementType_Legal(Undefined, True);
+	If ObjectCompany.Currencies.Count() = 0 OR ObjectCompany.Currencies[0].MovementType <> LegalCMT Then
+		NeedSave = True;
+		ObjectCompany.Currencies.Clear();
+		ObjectCompany.Currencies.Add().MovementType = LegalCMT;
+	EndIf;
+	
+	SaveModifiedObject(ObjectCompany, NeedSave);
+
+EndProcedure
 
 Function GetDefault_Company(Value = Undefined, IsUpdateDefaults = False) Export
 	If FOServer.IsUseCompanies() And Not IsUpdateDefaults Then
@@ -141,11 +177,49 @@ Function GetDefault_Company(Value = Undefined, IsUpdateDefaults = False) Export
 	Return Catalogs.Companies.Default;
 EndFunction
 
+#EndRegion
+
+#Region Catalog_Stores
+
+Procedure UpdateDefault_Store() Export
+	
+	NeedSave = False;
+	ObjectStore = Catalogs.Stores.Default.GetObject();
+	
+	SetObjectDescription(ObjectStore, "Default_012", NeedSave);
+	
+	SaveModifiedObject(ObjectStore, NeedSave);
+
+EndProcedure
+
 Function GetDefault_Store(Value = Undefined, IsUpdateDefaults = False) Export
 	If FOServer.IsUseStores() And Not IsUpdateDefaults Then
 		Return Value;
 	EndIf;
 	Return Catalogs.Stores.Default;
+EndFunction
+
+#EndRegion
+
+#Region Catalog_LegalName
+
+Function CreateDefault_LegalName(Parameters, Value = Undefined) Export
+	If FOServer.IsUseLegalName() Then
+		Return Value;
+	EndIf;
+		
+	Exists = GetDefault_LegalName(Parameters, Value);
+	If Exists <> Undefined Then
+		Return SyncDeletionMark(Exists, Parameters.Partner);
+	EndIf;
+	
+	// creating	
+	NewObject = Catalogs.Companies.CreateItem();
+	FillPropertyValues(NewObject, Parameters.Partner, , "Parent, Owner, Ref, Code");
+	NewObject.Partner = Parameters.Partner.Ref;
+	NewObject.Type    = Enums.CompanyLegalType.Company;
+	NewObject.Write();
+	Return NewObject.Ref;
 EndFunction
 
 Function GetDefault_LegalName(Parameters, Value = Undefined) Export
@@ -154,10 +228,10 @@ Function GetDefault_LegalName(Parameters, Value = Undefined) Export
 	EndIf;
 	Query = New Query();
 	Query.Text = 
-	"SELECT TOP 2
-	|	Table.Ref,
-	|	Table.DeletionMark
-	|FROM 
+	"SELECT ALLOWED TOP 2
+	|	Table.Ref AS Ref,
+	|	Table.DeletionMark AS DeletionMark
+	|FROM
 	|	Catalog.Companies AS Table
 	|WHERE
 	|	Table.Partner = &Partner";
@@ -168,9 +242,30 @@ Function GetDefault_LegalName(Parameters, Value = Undefined) Export
 		If QuerySelection.Count() > 1 Then
 			Raise StrTemplate(R().Error_FoundMoreThanOneCompany);
 		EndIf;
-		Return New Structure("Ref, DeletionMark", QuerySelection.Ref, QuerySelection.DeletionMark);
+		Return RefStructure(QuerySelection.Ref, QuerySelection.DeletionMark);
 	EndIf;
 	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region Catalog_ItemKey
+
+Function CreateDefault_ItemKey(Parameters, Value = Undefined) Export
+	If FOServer.IsUseItemKey() Then
+		Return Value;
+	EndIf;
+	Exists = GetDefault_ItemKey(Parameters, Value);
+	If Exists <> Undefined Then
+		Return SyncDeletionMark(Exists, Parameters.Item);
+	EndIf;
+	
+	// creating
+	NewObject = Catalogs.ItemKeys.CreateItem();
+	FillPropertyValues(NewObject, Parameters.Item, , "Parent, Owner, Ref, Unit, Code");
+	NewObject.Item = Parameters.Item.Ref;
+	NewObject.Write();
+	Return NewObject.Ref;	
 EndFunction
 
 Function GetDefault_ItemKey(Parameters, Value = Undefined) Export
@@ -179,10 +274,10 @@ Function GetDefault_ItemKey(Parameters, Value = Undefined) Export
 	EndIf;
 	Query = New Query();
 	Query.Text = 
-	"SELECT TOP 2
-	|	Table.Ref,
-	|	Table.DeletionMark
-	|FROM 
+	"SELECT DISTINCT TOP 2
+	|	Table.Ref AS Ref,
+	|	Table.DeletionMark AS DeletionMark
+	|FROM
 	|	Catalog.ItemKeys AS Table
 	|WHERE
 	|	Table.Item = &Item";
@@ -191,39 +286,16 @@ Function GetDefault_ItemKey(Parameters, Value = Undefined) Export
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then 
 		If QuerySelection.Count() > 1 Then
-                        Raise StrTemplate(R().Error_FoundMoreThanOneItemKey);
+			Raise StrTemplate(R().Error_FoundMoreThanOneItemKey);
 		EndIf;
-		Return New Structure("Ref, DeletionMark", QuerySelection.Ref, QuerySelection.DeletionMark);
+		Return RefStructure(QuerySelection.Ref, QuerySelection.DeletionMark);
 	EndIf;
 	Return Undefined;
 EndFunction
 
-Function GetDefault_Agreement(Parameters, Value) Export
-	If FOServer.IsUsePartnerTerms() Then
-		Return Value;
-	EndIf;
-	Query = New Query();
-	Query.Text = 
-	"SELECT TOP 2
-	|	Table.Ref,
-	|	Table.DeletionMark
-	|FROM 
-	|	Catalog.Agreements AS Table
-	|WHERE
-	|	Table.Partner = &Partner
-	|	AND Table.Type = &AgreementType";
-	Query.SetParameter("Partner", Parameters.Partner.Ref);
-	Query.SetParameter("AgreementType", Parameters.AgreementType);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	If QuerySelection.Next() Then
-		If QuerySelection.Count() > 1 Then
-			StrTemplate("Found more than 1 [%1] when option NOT [%2]", "Agreement", "IsUsePartnerTerms");
-		EndIf;
-		Return New Structure("Ref, DeletionMark", QuerySelection.Ref, QuerySelection.DeletionMark);
-	EndIf;
-	Return Undefined;
-EndFunction
+#EndRegion
+
+#Region Catalog_Agreement
 
 Function CreateDefault_Agreement(Parameters, Value = Undefined) Export
 	If Not Parameters.AgreementTypes.Count() Then
@@ -245,7 +317,7 @@ Function CreateDefault_AgreementByType(Partner, AgreementType, Value)
 	Parameters = New Structure("Partner, AgreementType", Partner, AgreementType);
 	Exists = GetDefault_Agreement(Parameters, Value);
 	If Exists <> Undefined Then
-		Return UpdateDeletionMark(Exists, Parameters.Partner);
+		Return SyncDeletionMark(Exists, Parameters.Partner);
 	EndIf;
 	
 	// creating
@@ -259,7 +331,7 @@ Function CreateDefault_AgreementByType(Partner, AgreementType, Value)
 		DefaultDescriptionKey = "Default_003";
 		DefaultPriceType = GetDefault_PriceType_Vendor();
 	Else
-                Raise R().DefaultAgreementOnlyCustVendor;
+		Raise R().DefaultAgreementOnlyCustVendor;
 	EndIf;
 	
 	DefaultLegalNameData = GetDefault_LegalName(Parameters);
@@ -269,7 +341,7 @@ Function CreateDefault_AgreementByType(Partner, AgreementType, Value)
 	EndIf;
 	
 	NewObject = Catalogs.Agreements.CreateItem();
-	FillPropertyValues(NewObject, GetDescriptions(DefaultDescriptionKey));
+	SetObjectDescription(NewObject, DefaultDescriptionKey, False);
 	NewObject.Partner              = Parameters.Partner.Ref;
 	NewObject.LegalName            = DefaultLegalNameRef;
 	NewObject.Company              = GetDefault_Company();
@@ -283,73 +355,110 @@ Function CreateDefault_AgreementByType(Partner, AgreementType, Value)
 	Return NewObject.Ref;
 EndFunction	
 
-Function CreateDefault_LegalName(Parameters, Value = Undefined) Export
-	If FOServer.IsUseLegalName() Then
+Function GetDefault_Agreement(Parameters, Value) Export
+	If FOServer.IsUsePartnerTerms() Then
 		Return Value;
 	EndIf;
-		
-	Exists = GetDefault_LegalName(Parameters, Value);
-	If Exists <> Undefined Then
-		Return UpdateDeletionMark(Exists, Parameters.Partner);
+	Query = New Query();
+	Query.Text = 
+	"SELECT ALLOWED TOP 2
+	|	Table.Ref AS Ref,
+	|	Table.DeletionMark AS DeletionMark
+	|FROM
+	|	Catalog.Agreements AS Table
+	|WHERE
+	|	Table.Partner = &Partner
+	|	AND Table.Type = &AgreementType";
+	Query.SetParameter("Partner", Parameters.Partner.Ref);
+	Query.SetParameter("AgreementType", Parameters.AgreementType);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		If QuerySelection.Count() > 1 Then
+			StrTemplate(R().FoundMoreThanOneWhenOptionNot, "Agreement", "IsUsePartnerTerms");
+		EndIf;
+		Return RefStructure(QuerySelection.Ref, QuerySelection.DeletionMark);
 	EndIf;
-	
-	// creating	
-	NewObject = Catalogs.Companies.CreateItem();
-	FillPropertyValues(NewObject, Parameters.Partner, , "Parent, Owner, Ref, Code");
-	NewObject.Partner = Parameters.Partner.Ref;
-	NewObject.Type    = Enums.CompanyLegalType.Company;
-	NewObject.Write();
-	Return NewObject.Ref;
+	Return Undefined;
 EndFunction
 
-Function CreateDefault_ItemKey(Parameters, Value = Undefined) Export
-	If FOServer.IsUseItemKey() Then
-		Return Value;
-	EndIf;
-	Exists = GetDefault_ItemKey(Parameters, Value);
-	If Exists <> Undefined Then
-		Return UpdateDeletionMark(Exists, Parameters.Item);
-	EndIf;
-	
-	// creating
-	NewObject = Catalogs.ItemKeys.CreateItem();
-	FillPropertyValues(NewObject, Parameters.Item, , "Parent, Owner, Ref, Unit, Code");
-	NewObject.Item = Parameters.Item.Ref;
-	NewObject.Write();
-	Return NewObject.Ref;	
+#EndRegion
+
+#Region Private
+
+// Ref structure.
+// 
+// Parameters:
+//  Ref - CatalogRef - Ref
+//  DeletionMark - Boolean - Deletion mark
+// 
+// Returns:
+//  Structure - Ref structure:
+// * Ref - CatalogRef - 
+// * DeletionMark - Boolean - 
+Function RefStructure(Ref, DeletionMark)
+	Result = New Structure("Ref, DeletionMark", Ref, DeletionMark);
+	Return Result;
 EndFunction
 
-Function UpdateDeletionMark(Receiver, Source)
-	If Receiver.DeletionMark = Source.DeletionMark Then
-		Return Receiver.Ref;
+// Sync deletion mark.
+// 
+// Parameters:
+//  Ref - See RefStructure 
+//  MainRef - CatalogRef - Main ref
+// 
+// Returns:
+//  CatalogRef - Synchronized ref
+Function SyncDeletionMark(RefStructure, MainRef)
+	If RefStructure.DeletionMark = MainRef.DeletionMark Then
+		Return RefStructure.Ref;
 	EndIf;
-	ObjectReceiver = Receiver.Ref.GetObject();
-	ObjectReceiver.DeletionMark = Source.DeletionMark;
+	ObjectReceiver = RefStructure.Ref.GetObject();
+	ObjectReceiver.DeletionMark = MainRef.DeletionMark;
 	ObjectReceiver.Write();
-	Return ObjectReceiver.Ref;
+	Return RefStructure.Ref;
 EndFunction
 
-Function GetStrings()
-	Strings = New Structure();
-	Strings.Insert("en", Localization.Strings("en"));
-	Strings.Insert("ru", Localization.Strings("ru"));
-	Strings.Insert("tr", Localization.Strings("tr"));
-	Return Strings;
-EndFunction
-
-Function GetDescriptions(DescriptionKey, Strings = Undefined)
-	If Strings = Undefined Then
-		Strings = GetStrings();
-	EndIf;
-	Descriptions = New Structure();
-	Descriptions.Insert("Description_en");
-	Descriptions.Insert("Description_ru");
-	Descriptions.Insert("Description_tr");
+// Set object property.
+// 
+// Parameters:
+//  Object - CatalogObject - Object
+//  PropertyName - String - Property name
+//  NewValue - Arbitrary - New value
+//  Modified - Boolean - Modified
+Procedure SetObjectProperty(Object, PropertyName, NewValue, Modified)
 	
-	For Each Desc In Descriptions Do
-		Lang = StrReplace(Desc.Key, "Description_", "");
-		Descriptions[Desc.Key] = Strings[Lang][DescriptionKey];
-	EndDo;
-	Return Descriptions;
-EndFunction
+	If Object[PropertyName] <> NewValue Then
+		Object[PropertyName] = NewValue;
+		Modified = True;
+	EndIf;
+	
+EndProcedure	
 
+// Set object description.
+// 
+// Parameters:
+//  Object - CatalogObject - Object
+//  PredefinedNameCode - String - Predefined name code
+//  Modified - Boolean - Modified
+Procedure SetObjectDescription(Object, PredefinedNameCode, Modified)
+
+	For Each Lang In LocalizationReuse.AllDescription() Do
+		PredefinedName = R(StrSplit(Lang, "_")[1])[PredefinedNameCode];
+		SetObjectProperty(Object, Lang, PredefinedName, Modified);
+	EndDo;
+
+EndProcedure	
+
+// Save modified object.
+// 
+// Parameters:
+//  Object - CatalogObject - Object
+//  Modified - Boolean - Modified
+Procedure SaveModifiedObject(Object, Modified)
+	If Modified Then
+		Object.Write();
+	EndIf;
+EndProcedure
+	
+#EndRegion

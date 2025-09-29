@@ -45,6 +45,11 @@ Procedure UncheckAll(Command)
 	ChangeChecked(False);
 EndProcedure
 
+&AtClient
+Procedure UpdateDefaults(Command)
+	UpdateDefaultsAtServer();
+EndProcedure
+
 #EndRegion
 
 #Region FormItemsEvents
@@ -155,6 +160,11 @@ Procedure CreateItems()
 	
 	CreateCheckBoxes();
 
+EndProcedure
+
+&AtServerNoContext
+Procedure UpdateDefaultsAtServer()
+	DefaultDataServer.UpdateDefaults();	
 EndProcedure
 
 #EndRegion

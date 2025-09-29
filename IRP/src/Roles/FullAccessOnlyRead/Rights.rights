@@ -4969,17 +4969,6 @@
 		</right>
 	</object>
 	<object>
-		<name>DocumentJournal.DocumentsForOutgoingPayment</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.Settings.Subsystem.LockDataModification</name>
 		<right>
 			<name>View</name>
@@ -12369,17 +12358,6 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>DocumentJournal.DocumentsForIncomingPayment</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
 		</right>
 	</object>
 	<object>

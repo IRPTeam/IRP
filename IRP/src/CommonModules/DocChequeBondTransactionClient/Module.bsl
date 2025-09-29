@@ -325,48 +325,30 @@ Procedure ChequeBondsBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 		Return;
 	EndIf;
 
-	Parameters = New Structure();
-	Parameters.Insert("Filter", New Structure());
-	If ValueIsFilled(CurrentData.LegalName) Then
-		Parameters.Filter.Insert("LegalName", CurrentData.LegalName);
-	EndIf;
-	Parameters.Filter.Insert("Company", Object.Company);
-
-	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
+	NotifyParameters.Insert("CurrentData", CurrentData);
 	
-	NotifyParameters = New Structure("Object, Form", Object, Form);
 	Notify = New CallbackDescription("ChequeBondsBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
-	Parameters.Insert("Notify", Notify);
-	
-	IsPartnerCheque = ServiceSystemServer.GetObjectAttribute(CurrentData.Cheque, "Type")
-		= PredefinedValue("Enum.ChequeBondTypes.PartnerCheque");
+	FormParameters = New Structure();
+	FormParameters.Insert("Company", Object.Company);
+	FormParameters.Insert("Partner", CurrentData.Partner);
+	FormParameters.Insert("LegalName", CurrentData.LegalName);
+	FormParameters.Insert("Agreement", CurrentData.Agreement);
+	FormParameters.Insert("Ref", Object.Ref);
+	FormParameters.Insert("Document", CurrentData.BasisDocument);
 		
-	If IsPartnerCheque Then
-		// partner cheque
-		Parameters.Insert("TableName", "DocumentsForIncomingPayment");
-		Parameters.Insert("OpeningEntryTableName1", "AccountPayableByDocuments");
-		Parameters.Insert("OpeningEntryTableName2", "AccountReceivableByDocuments");
-		Parameters.Insert("DebitNoteTableName", "Transactions");
-	Else
-		// own cheque
-		Parameters.Insert("TableName", "DocumentsForOutgoingPayment");
-		Parameters.Insert("OpeningEntryTableName1", "AccountPayableByDocuments");
-		Parameters.Insert("OpeningEntryTableName2", "AccountReceivableByDocuments");
-		Parameters.Insert("CreditNoteTableName", "Transactions");
-	EndIf;
-	
-	Parameters.Insert("Ref", Object.Ref);
-	Parameters.Insert("IsReturnTransactionType", False);
-	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
+	OpenForm("CommonForm.ChoiceTransactionBasis", FormParameters, Form,,,,Notify,FormWindowOpeningMode.LockOwnerWindow); 
 EndProcedure
 
-Procedure ChequeBondsBasisDocumentStartChoiceEnd(Result, AdditionalParameters) Export
+Procedure ChequeBondsBasisDocumentStartChoiceEnd(Result, NotifyParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	Form = AdditionalParameters.Form;
-	Object = AdditionalParameters.Object;
-	CurrentData = Form.Items.ChequeBonds.CurrentData;
+	Form = NotifyParameters.Form;
+	Object = NotifyParameters.Object;
+	CurrentData = NotifyParameters.CurrentData;
 	If CurrentData <> Undefined Then
 		ViewClient_V2.SetChequeBondsBasisDocument(Object, Form, CurrentData, Result.BasisDocument);
 	EndIf;
@@ -388,49 +370,22 @@ Procedure ChequeBondsOrderStartChoice(Object, Form, Item, ChoiceData, StandardPr
 		Return;
 	EndIf;
 
-	Parameters = New Structure();
-	Parameters.Insert("Filter", New Structure());
-	If ValueIsFilled(CurrentData.LegalName) Then
-		Parameters.Filter.Insert("LegalName", CurrentData.LegalName);
-	EndIf;
-	Parameters.Filter.Insert("Company", Object.Company);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
+	NotifyParameters.Insert("CurrentData", CurrentData);
 	
-	IsPartnerCheque = ServiceSystemServer.GetObjectAttribute(CurrentData.Cheque, "Type")
-		= PredefinedValue("Enum.ChequeBondTypes.PartnerCheque");
-	
-	If IsPartnerCheque Then
-		// partner cheque
-		Parameters.Filter.Insert("Type", Type("DocumentRef.SalesOrder"));
-		If ValueIsFilled(CurrentData.BasisDocument) 
-			And TypeOf(CurrentData.BasisDocument) = Type("DocumentRef.SalesInvoice") Then
-			Parameters.Filter.Insert("RefInList",
-			DocumentsServer.GetArrayOfSalesOrdersBySalesInvoice(CurrentData.BasisDocument));
-		EndIf;
-	Else
-		// own cheque
-		Parameters.Filter.Insert("Type", Type("DocumentRef.PurchaseOrder"));
-		If ValueIsFilled(CurrentData.BasisDocument) 
-			And TypeOf(CurrentData.BasisDocument) = Type("DocumentRef.PurchaseInvoice") Then
-			Parameters.Filter.Insert("RefInList",
-			DocumentsServer.GetArrayOfPurchaseOrdersByPurchaseInvoice(CurrentData.BasisDocument));
-		EndIf;
-	EndIf;
-	
-	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
-	
-	NotifyParameters = New Structure("Object, Form", Object, Form);
 	Notify = New CallbackDescription("ChequeBondsOrderStartChoiceEnd", ThisObject, NotifyParameters);
-	Parameters.Insert("Notify"    , Notify);
-	
-	If IsPartnerCheque Then
-		Parameters.Insert("TableName" , "DocumentsForIncomingPayment");	
-	Else
-		Parameters.Insert("TableName" , "DocumentsForOutgoingPayment");	
-	EndIf;
-	
-	Parameters.Insert("Ref"       , Object.Ref);
-	Parameters.Insert("IsReturnTransactionType", False);
-	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
+	FormParameters = New Structure();
+	FormParameters.Insert("Company", Object.Company);
+	FormParameters.Insert("Partner", CurrentData.Partner);
+	FormParameters.Insert("LegalName", CurrentData.LegalName);
+	FormParameters.Insert("Agreement", CurrentData.Agreement);
+	FormParameters.Insert("Ref", Object.Ref);
+	FormParameters.Insert("IsOrder", True);
+	FormParameters.Insert("Document", CurrentData.Order);
+		
+	OpenForm("CommonForm.ChoiceTransactionBasis", FormParameters, Form,,,,Notify,FormWindowOpeningMode.LockOwnerWindow); 
 EndProcedure
 
 Procedure ChequeBondsOrderStartChoiceEnd(Result, AdditionalParameters) Export

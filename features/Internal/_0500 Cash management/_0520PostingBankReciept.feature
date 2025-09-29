@@ -177,7 +177,7 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 		And I go to line in "List" table
 			| 'Company'        | 'Amount'      | 'Legal name'          | 'Partner'      |
 			| 'Main Company'   | '11 099,93'   | 'Company Ferron BP'   | 'Ferron BP'    |
-		And I click "Select" button
+		And I select current line in "List" table
 		And in "PaymentList" table I move to the next cell
 	* Change in payment amount
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
@@ -211,7 +211,7 @@ Scenario: _052002 check that the amount does not change when select basis docume
 		And I go to line in "List" table
 			| 'Company'        | 'Amount'      | 'Legal name'          | 'Partner'      |
 			| 'Main Company'   | '11 099,93'   | 'Company Ferron BP'   | 'Ferron BP'    |
-		And I click "Select" button
+		And I select current line in "List" table
 		And "PaymentList" table contains lines
 			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Legal name'               | 'Basis document'            |
 			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '5 000,00'       | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
@@ -226,8 +226,14 @@ Scenario: _052002 check that the amount does not change when select basis docume
 		And I select current line in "PaymentList" table
 		And I go to line in "List" table
 			| 'Company'        | 'Amount'      | 'Legal name'          | 'Partner'      |
-			| 'Main Company'   | '6 099,93'   | 'Company Ferron BP'   | 'Ferron BP'    |
-		And I click "Select" button
+			| 'Main Company'   | '11 099,93'   | 'Company Ferron BP'   | 'Ferron BP'    |
+		And I select current line in "List" table
+		And I go to line in "PaymentList" table
+			| "#" | "Basis document"         | "Legal name"        | "Partner"   | "Partner term"                     | "Total amount" |
+			| "2" | "$$SalesInvoice024008$$" | "Company Ferron BP" | "Ferron BP" | "Basic Partner terms, without VAT" | "11 099,93"    |
+		And I select current line in "PaymentList" table
+		And I input "6 099,93" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner'     | 'Partner term'                       | 'Total amount'   | 'Legal name'               | 'Basis document'            |
 			| 'Ferron BP'   | 'Basic Partner terms, without VAT'   | '5 000,00'       | 'Company Ferron BP'   | '$$SalesInvoice024008$$'    |
@@ -284,11 +290,11 @@ Scenario: _052001 create Bank receipt (independently)
 			And I go to line in "List" table
 				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
 				| '3 687,25'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
-			And I click "Select" button
+			And I select current line in "List" table
 			And I click choice button of "Order" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
-				| '3 687,25'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
+				| 'Document'             | 'Company'      | 'Partner'   |
+				| '$$SalesOrder023001$$' | 'Main Company' | 'Ferron BP' |
 			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
@@ -364,11 +370,11 @@ Scenario: _052001 create Bank receipt (independently)
 			And I go to line in "List" table
 				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
 				| '3 587,25'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
-			And I click "Select" button
+			And I select current line in "List" table
 			And I click choice button of "Order" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'       |
-				| '3 587,25'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
+				| 'Document'             | 'Company'      | 'Partner'   |
+				| '$$SalesOrder023001$$' | 'Main Company' | 'Ferron BP' |
 			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
@@ -436,7 +442,7 @@ Scenario: _052001 create Bank receipt (independently)
 			And I go to line in "List" table
 				| 'Amount'    | 'Company'         | 'Legal name'           | 'Partner'       |
 				| '200,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
-			And I click "Select" button
+			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table

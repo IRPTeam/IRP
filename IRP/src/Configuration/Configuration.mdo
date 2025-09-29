@@ -798,9 +798,6 @@
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
   <commonModules>CommonModule.InternalCommandsClient</commonModules>
   <commonModules>CommonModule.InternalCommandsServer</commonModules>
-  <commonModules>CommonModule.JorDocumentsClient</commonModules>
-  <commonModules>CommonModule.JorDocumentsClientServer</commonModules>
-  <commonModules>CommonModule.JorDocumentsServer</commonModules>
   <commonModules>CommonModule.LandedCostServer</commonModules>
   <commonModules>CommonModule.LandedCostServer2</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
@@ -1203,6 +1200,8 @@
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.EditQuantity</commonForms>
+  <commonForms>CommonForm.ChoiceTransactionBasis</commonForms>
+  <commonForms>CommonForm.ChoicePaymentBasis</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessKey</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
@@ -1409,8 +1408,6 @@
   <documents>Document.WorkSheet</documents>
   <documents>Document.FixedAssetRevaluation</documents>
   <sequences>Sequence.SimpleBatch</sequences>
-  <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
-  <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
   <enums>Enum.AccrualAndDeductionPeriodicity</enums>
   <enums>Enum.AccrualsTransactionType</enums>

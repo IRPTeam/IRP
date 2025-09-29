@@ -286,6 +286,14 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.PaymentListChoiceByAccrual.Visible = IsSalaryPayment;
 	Form.Items.PaymentListPaymentByDocuments.Visible = IsPaymentToVendor;
+
+	If ValueIsFilled(Form.PaymentListAgreementNoSplits) Then
+		Form.Items.PaymentListBasisDocumentNoSplits.ReadOnly =
+			(CommonFunctionsServer.GetRefAttribute(Form.PaymentListAgreementNoSplits, "ApArPostingDetail")
+			<> PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
+	Else
+		Form.Items.PaymentListBasisDocumentNoSplits.ReadOnly = True;
+	EndIf;
 EndProcedure
 
 &AtClient

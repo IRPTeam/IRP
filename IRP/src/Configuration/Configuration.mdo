@@ -129,20 +129,20 @@
     </synonym>
     <languageCode>ha</languageCode>
   </languages>
-  <subsystems>Subsystem.PurchaseAP</subsystems>
-  <subsystems>Subsystem.SalesAR</subsystems>
   <subsystems>Subsystem.Retail</subsystems>
+  <subsystems>Subsystem.PurchaseAP</subsystems>
   <subsystems>Subsystem.Inventory</subsystems>
+  <subsystems>Subsystem.MasterData</subsystems>
   <subsystems>Subsystem.Treasury</subsystems>
-  <subsystems>Subsystem.Manufacturing</subsystems>
-  <subsystems>Subsystem.FixedAssets</subsystems>
+  <subsystems>Subsystem.Settings</subsystems>
   <subsystems>Subsystem.Salary</subsystems>
   <subsystems>Subsystem.Accounting</subsystems>
-  <subsystems>Subsystem.MasterData</subsystems>
-  <subsystems>Subsystem.Reports</subsystems>
-  <subsystems>Subsystem.Settings</subsystems>
-  <subsystems>Subsystem.Technical</subsystems>
   <subsystems>Subsystem.Incidents</subsystems>
+  <subsystems>Subsystem.Reports</subsystems>
+  <subsystems>Subsystem.SalesAR</subsystems>
+  <subsystems>Subsystem.FixedAssets</subsystems>
+  <subsystems>Subsystem.Technical</subsystems>
+  <subsystems>Subsystem.Manufacturing</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -972,6 +972,7 @@
   <functionalOptions>FunctionalOption.UseAllFunctional</functionalOptions>
   <functionalOptions>FunctionalOption.UseBankDocuments</functionalOptions>
   <functionalOptions>FunctionalOption.UseBundling</functionalOptions>
+  <functionalOptions>FunctionalOption.UseBusinessProcess</functionalOptions>
   <functionalOptions>FunctionalOption.UseBusinessUnits</functionalOptions>
   <functionalOptions>FunctionalOption.UseCashTransaction</functionalOptions>
   <functionalOptions>FunctionalOption.UseChequeBonds</functionalOptions>
@@ -979,6 +980,7 @@
   <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
   <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
   <functionalOptions>FunctionalOption.UseContactInformation</functionalOptions>
+  <functionalOptions>FunctionalOption.UseDashboard</functionalOptions>
   <functionalOptions>FunctionalOption.UseDeliveryDate</functionalOptions>
   <functionalOptions>FunctionalOption.UseELedger</functionalOptions>
   <functionalOptions>FunctionalOption.UseEquipments</functionalOptions>
@@ -1005,6 +1007,7 @@
   <functionalOptions>FunctionalOption.UsePartnersHierarchy</functionalOptions>
   <functionalOptions>FunctionalOption.UsePartnerTerms</functionalOptions>
   <functionalOptions>FunctionalOption.UsePlannedReceiptReservation</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePreliminary</functionalOptions>
   <functionalOptions>FunctionalOption.UsePriceByProperties</functionalOptions>
   <functionalOptions>FunctionalOption.UseProfitLossCenter</functionalOptions>
   <functionalOptions>FunctionalOption.UsePurchase</functionalOptions>
@@ -1025,9 +1028,6 @@
   <functionalOptions>FunctionalOption.UseVariableItemKey</functionalOptions>
   <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
-  <functionalOptions>FunctionalOption.UseBusinessProcess</functionalOptions>
-  <functionalOptions>FunctionalOption.UsePreliminary</functionalOptions>
-  <functionalOptions>FunctionalOption.UseDashboard</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>

@@ -173,7 +173,12 @@ EndFunction
 Function GetFunctionalOptionValue(Name) Export
 	MethodName = "Is" + Name + "()";
 	SetSafeMode(True);
-	Return Eval(MethodName);
+	Try
+		Result = Eval(MethodName);
+	Except
+		Result = IsUseFunctionalOptionByName(Name);
+	EndTry;
+	Return Result;
 EndFunction
 
 // Set functional option value.
@@ -192,6 +197,21 @@ Procedure SetFunctionalOptionValue(Name, Value) Export
 EndProcedure
 
 #Region FunctionalOptions
+
+// Is use functional option by name.
+// 
+// Parameters:
+//  FunctionalOptionName - String - Functional option name
+// 
+// Returns:
+//  Arbitrary - Is use functional option by name
+Function IsUseFunctionalOptionByName(FunctionalOptionName)
+	FunctionalOptionMetadata = Metadata.FunctionalOptions.Find(FunctionalOptionName);
+	If FunctionalOptionMetadata = Undefined Then
+		Raise StrTemplate(R().Exc_010, FunctionalOptionName)
+	EndIf;
+	Return GetFunctionalOption(FunctionalOptionName);
+EndFunction
 
 Function IsUseAccounting() Export
 	Return GetFunctionalOption("UseAccounting");

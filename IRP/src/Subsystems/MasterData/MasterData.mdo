@@ -27,4 +27,5 @@
   <subsystems>CorporateData</subsystems>
   <subsystems>PriceManagment</subsystems>
   <subsystems>Other</subsystems>
+  <subsystems>Taxes</subsystems>
 </mdclass:Subsystem>

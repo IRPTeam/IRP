@@ -36,5 +36,4 @@
   <content>InformationRegister.PricesByItemKeys.Dimension.ItemKey</content>
   <content>Document.InventoryTransfer.TabularSection.ItemList.Attribute.ItemKey</content>
   <content>Catalog.ItemKeys</content>
-  <content>Catalog.Items</content>
 </mdclass:FunctionalOption>

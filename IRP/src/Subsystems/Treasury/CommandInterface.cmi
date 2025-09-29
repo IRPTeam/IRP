@@ -36,6 +36,6 @@
     <subsystems>Subsystem.Treasury.Subsystem.Transfer</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.SchedulingOfPaymentDeadlines</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.ChequeBond</subsystems>
-    <subsystems>Subsystem.Settings.Subsystem.Taxes</subsystems>
+    <subsystems>Subsystem.MasterData.Subsystem.Taxes</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

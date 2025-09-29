@@ -10,5 +10,5 @@
   <content>Catalog.TaxRates</content>
   <content>Catalog.Taxes</content>
   <content>Catalog.TaxAnalytics</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

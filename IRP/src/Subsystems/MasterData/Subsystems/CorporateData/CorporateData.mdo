@@ -10,7 +10,7 @@
   <content>Catalog.Stores</content>
   <content>Catalog.Incoterms</content>
   <content>Catalog.CancelReturnReasons</content>
-  <content>Catalog.PrintInfo</content>
   <content>CommonCommand.OpenCompanies</content>
+  <content>Catalog.PaymentSchedules</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

@@ -38,7 +38,6 @@
   <content>InformationRegister.RemainingItemsInfo.Dimension.Store</content>
   <content>AccumulationRegister.R4020T_StockTransferOrders.Dimension.StoreSender</content>
   <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.Store</content>
-  <content>Catalog.Stores</content>
   <content>Document.OpeningEntry.TabularSection.Inventory.Attribute.Store</content>
   <content>InformationRegister.T6020S_BatchKeysInfo.Dimension.Store</content>
   <content>AccumulationRegister.R4050B_StockInventory.Dimension.Store</content>

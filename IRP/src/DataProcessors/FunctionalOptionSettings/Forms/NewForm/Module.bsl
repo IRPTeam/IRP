@@ -13,6 +13,13 @@ EndProcedure
 #Region FormCommands
 
 &AtClient
+Procedure SaveAndClose(Command)
+	Save(Command);
+	Modified = False;
+	Close();
+EndProcedure
+
+&AtClient
 Procedure Save(Command)
 	SaveData();
 	RefreshInterface();
@@ -26,6 +33,16 @@ EndProcedure
 &AtClient
 Procedure Reset(Command)
 	ReadData();
+EndProcedure
+
+&AtClient
+Procedure CheckAll(Command)
+	ChangeChecked(True);
+EndProcedure
+
+&AtClient
+Procedure UncheckAll(Command)
+	ChangeChecked(False);
 EndProcedure
 
 #EndRegion
@@ -389,6 +406,16 @@ Procedure SetItemsEnables(Form)
 				Form.Items[SubFO_Attribute].Enabled = FO_Value;
 			EndDo;
 		EndDo;
+	EndDo;
+
+EndProcedure
+
+&AtClient
+Procedure ChangeChecked(NewValue)
+	
+	_AttributeToFO = GetFormStructure(ThisObject, "AttributeToFO");
+	For Each DataItem In _AttributeToFO Do
+		ThisObject[DataItem.Key] = NewValue;
 	EndDo;
 
 EndProcedure

@@ -1571,7 +1571,6 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|WHERE
 	|	AdvInfo.Date BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND AdvInfo.Company = &Company
-	|	AND AdvInfo.Branch = &Branch
 	|	AND AdvInfo.%2
 	|GROUP BY
 	|	AdvInfo.Date,
@@ -1682,8 +1681,7 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|	InformationRegister.T2015S_TransactionsInfo AS TrnInfo
 	|WHERE
 	|	TrnInfo.Date BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
-	|	AND TrnInfo.Company = &Company
-	|	AND TrnInfo.Branch = &Branch 
+	|	AND TrnInfo.Company = &Company 
 	|	AND CASE WHEN &Filter_Recorder THEN TrnInfo.Recorder = &Recorder ELSE TRUE END
 	|	AND TrnInfo.%1";
 	

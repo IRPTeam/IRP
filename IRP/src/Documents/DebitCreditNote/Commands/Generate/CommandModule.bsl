@@ -13,6 +13,8 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 
 	ArrayOf_SalesReturn      = New Array();
 	ArrayOf_PurchaseReturn   = New Array();
+	ArrayOf_DebitNote   = New Array();
+	ArrayOf_CreditNote   = New Array();
 	
 	For Each Row In ArrayOfBasisDocuments Do
 
@@ -20,6 +22,10 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 			ArrayOf_SalesReturn.Add(Row);
 		ElsIf TypeOf(Row) = Type("DocumentRef.PurchaseReturn") Then
 			ArrayOf_PurchaseReturn.Add(Row);
+		ElsIf TypeOf(Row) = Type("DocumentRef.DebitNote") Then
+			ArrayOf_DebitNote.Add(Row);
+		ElsIf TypeOf(Row) = Type("DocumentRef.CreditNote") Then
+			ArrayOf_CreditNote.Add(Row);
 		Else
 			Raise R().Error_043;
 		EndIf;
@@ -29,8 +35,90 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables = New Array();
 	ArrayOfTables.Add(GetDocumentTable_SalesReturn(ArrayOf_SalesReturn));
 	ArrayOfTables.Add(GetDocumentTable_PurchaseReturn(ArrayOf_PurchaseReturn));
+	ArrayOfTables.Add(GetDocumentTable_DebitNote(ArrayOf_DebitNote));
+	ArrayOfTables.Add(GetDocumentTable_CreditNote(ArrayOf_CreditNote));
 	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
+
+&AtServer
+Function GetDocumentTable_DebitNote(ArrayOfBasisDocuments)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	""DebitNote"" AS BasedOn,
+	|	DebitNoteTransactions.Ref.Company AS Company,
+	|	DebitNoteTransactions.Currency AS Currency,
+	|	DebitNoteTransactions.Ref AS BasisDocument,
+	|	VALUE(Enum.DebtTypes.TransactionVendor) AS SendDebtType,
+	|	DebitNoteTransactions.Ref.Branch AS Branch,
+	|	DebitNoteTransactions.Partner AS SendPartner,
+	|	DebitNoteTransactions.LegalName AS SendLegalName,
+	|	DebitNoteTransactions.Agreement AS SendAgreement,
+	|	DebitNoteTransactions.LegalNameContract AS SendLegalNameContract,
+	|	DebitNoteTransactions.Project AS SendProject,
+	|	DebitNoteTransactions.Ref AS SendBasisDocument,
+	|	DebitNoteTransactions.Currency AS SendCurrency,
+	|	-DebitNoteTransactions.Amount AS SendAmount,
+	|	VALUE(Enum.DebtTypes.AdvanceVendor) AS ReceiveDebtType,
+	|	DebitNoteTransactions.Ref.Branch AS ReceiveBranch,
+	|	DebitNoteTransactions.Partner AS ReceivePartner,
+	|	DebitNoteTransactions.LegalName AS ReceiveLegalName,
+	|	DebitNoteTransactions.Agreement AS ReceiveAgreement,
+	|	DebitNoteTransactions.LegalNameContract AS ReceiveLegalNameContract,
+	|	DebitNoteTransactions.Project AS ReceiveProject,
+	|	DebitNoteTransactions.Currency AS ReceiveCurrency,
+	|	-DebitNoteTransactions.Amount AS ReceiveAmount
+	|FROM
+	|	Document.DebitNote.Transactions AS DebitNoteTransactions
+	|WHERE
+	|	DebitNoteTransactions.Ref IN (&ArrayOfBasisDocuments)
+	|	AND DebitNoteTransactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor)";
+	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+Endfunction
+
+&AtServer
+Function GetDocumentTable_CreditNote(ArrayOfBasisDocuments)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	""CreditNote"" AS BasedOn,
+	|	CreditNoteTransactions.Ref.Company AS Company,
+	|	CreditNoteTransactions.Currency AS Currency,
+	|	CreditNoteTransactions.Ref AS BasisDocument,
+	|	VALUE(Enum.DebtTypes.TransactionCustomer) AS SendDebtType,
+	|	CreditNoteTransactions.Ref.Branch AS Branch,
+	|	CreditNoteTransactions.Partner AS SendPartner,
+	|	CreditNoteTransactions.LegalName AS SendLegalName,
+	|	CreditNoteTransactions.Agreement AS SendAgreement,
+	|	CreditNoteTransactions.LegalNameContract AS SendLegalNameContract,
+	|	CreditNoteTransactions.Project AS SendProject,
+	|	CreditNoteTransactions.Ref AS SendBasisDocument,
+	|	CreditNoteTransactions.Currency AS SendCurrency,
+	|	-CreditNoteTransactions.Amount AS SendAmount,
+	|	VALUE(Enum.DebtTypes.AdvanceCustomer) AS ReceiveDebtType,
+	|	CreditNoteTransactions.Ref.Branch AS ReceiveBranch,
+	|	CreditNoteTransactions.Partner AS ReceivePartner,
+	|	CreditNoteTransactions.LegalName AS ReceiveLegalName,
+	|	CreditNoteTransactions.Agreement AS ReceiveAgreement,
+	|	CreditNoteTransactions.LegalNameContract AS ReceiveLegalNameContract,
+	|	CreditNoteTransactions.Project AS ReceiveProject,
+	|	CreditNoteTransactions.Currency AS ReceiveCurrency,
+	|	-CreditNoteTransactions.Amount AS ReceiveAmount
+	|FROM
+	|	Document.CreditNote.Transactions AS CreditNoteTransactions
+	|WHERE
+	|	CreditNoteTransactions.Ref IN (&ArrayOfBasisDocuments)
+	|	AND CreditNoteTransactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer)";
+	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+Endfunction
 
 &AtServer
 Function GetDocumentTable_SalesReturn(ArrayOfBasisDocuments)

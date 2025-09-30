@@ -882,6 +882,8 @@
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
+      <types>DocumentRef.DebitNote</types>
+      <types>DocumentRef.CreditNote</types>
       <types>DocumentRef.PurchaseReturn</types>
       <types>DocumentRef.SalesReturn</types>
     </commandParameterType>

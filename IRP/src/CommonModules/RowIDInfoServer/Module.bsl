@@ -369,6 +369,7 @@ Procedure Posting_TM1010B_RowIDMovements_SOC(Source, Cancel, PostingMode)
 	Query.SetParameter("BalancePeriod", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
 	QueryResult = Query.Execute().Unload();
 	Source.RegisterRecords.TM1010B_RowIDMovements.Load(QueryResult);
+	Source.RegisterRecords.TM1010B_RowIDMovements.Write = True;
 EndProcedure
 
 Procedure Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode)
@@ -423,6 +424,7 @@ Procedure Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode)
 	Query.SetParameter("BalancePeriod", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
 	QueryResult = Query.Execute().Unload();
 	Source.RegisterRecords.TM1010B_RowIDMovements.Load(QueryResult);
+	Source.RegisterRecords.TM1010B_RowIDMovements.Write = True;
 EndProcedure
 
 Procedure Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode)

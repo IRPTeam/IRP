@@ -72,7 +72,6 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	Records_OffsetOfAdvances.Columns.Add("TransactionsRowKey" , Metadata.DefinedTypes.typeRowID.Type);
 	Records_OffsetOfAdvances.Columns.Add("IsReturnToAdvance" , New TypeDescription("Boolean"));
 	
-		
 	// detail info by all aging
 	Records_OffsetAging = InformationRegisters.T2013S_OffsetOfAging.CreateRecordSet().UnloadColumns();
 	Records_OffsetAging.Columns.Delete(Records_OffsetAging.Columns.PointInTime);
@@ -1571,6 +1570,7 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|WHERE
 	|	AdvInfo.Date BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND AdvInfo.Company = &Company
+	|	and case when &Filter_Branch then AdvInfo.Branch = &Branch else true end
 	|	AND AdvInfo.%2
 	|GROUP BY
 	|	AdvInfo.Date,
@@ -1598,6 +1598,7 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	Query.SetParameter("EndOfPeriod"   , Parameters.Object.EndOfPeriod);
 	Query.SetParameter("Company"       , Parameters.Object.Company);
 	Query.SetParameter("Branch"        , Parameters.Object.Branch);
+	Query.SetParameter("Filter_Branch" , ValueIsFilled(Parameters.Object.Branch));
 	Query.SetParameter("Order_EmptyRef", Parameters.Order_EmptyRef);
 
 	QueryResult = Query.Execute();
@@ -1682,6 +1683,7 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|WHERE
 	|	TrnInfo.Date BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND TrnInfo.Company = &Company 
+	|	and case when &Filter_Branch then TrnInfo.Branch = &Branch else true end
 	|	AND CASE WHEN &Filter_Recorder THEN TrnInfo.Recorder = &Recorder ELSE TRUE END
 	|	AND TrnInfo.%1";
 	
@@ -1691,6 +1693,7 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	Query.SetParameter("EndOfPeriod"   , Parameters.Object.EndOfPeriod);
 	Query.SetParameter("Company"       , Parameters.Object.Company);
 	Query.SetParameter("Branch"        , Parameters.Object.Branch);
+	Query.SetParameter("Filter_Branch" , ValueIsFilled(Parameters.Object.Branch));
 	Query.SetParameter("Order_EmptyRef", Parameters.Order_EmptyRef);
 	
 	If FilterRecorder <> Undefined Then 

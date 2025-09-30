@@ -646,6 +646,26 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="77f241e5-8959-4b1f-86fd-b659e344899f">
+    <name>BasisDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.SalesReturn</types>
+      <types>String</types>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="f22da94d-3c1b-4ac4-874c-5f495f7bf64f">
     <name>DocumentForm</name>
     <synonym>
@@ -854,4 +874,20 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <commands uuid="ade78fa3-1975-4297-8696-6c550f1db729">
+    <name>Generate</name>
+    <synonym>
+      <key>en</key>
+      <value>Debit/Credit note</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.DebitNote</types>
+      <types>DocumentRef.CreditNote</types>
+      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.SalesReturn</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

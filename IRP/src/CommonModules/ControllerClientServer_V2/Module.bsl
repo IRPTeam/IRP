@@ -14100,11 +14100,15 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.Unit    = GetItemListUnit(Parameters, Row.Key);
 		
 		// need recalculate NetAmount, TotalAmount, TaxAmount, OffersAmount
-		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
-			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
-			Or WhoIsChanged = "IsVatRateChanged"          Or WhoIsChanged = "IsOffersChanged"
-			Or WhoIsChanged = "IsCopyRow"                 Or WhoIsChanged = "IsTaxAmountUserFormChanged"
-			Or WhoIsChanged = "RecalculationsOnCopy"      Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
+		If     WhoIsChanged = "IsPriceChanged"            
+			Or WhoIsChanged = "IsPriceIncludeTaxChanged"
+			Or WhoIsChanged = "IsDontCalculateRowChanged"  
+			Or WhoIsChanged = "IsVatRateChanged"          
+			Or WhoIsChanged = "IsOffersChanged"
+			Or WhoIsChanged = "IsCopyRow"                 
+			Or WhoIsChanged = "IsTaxAmountUserFormChanged"
+			Or WhoIsChanged = "RecalculationsOnCopy"      
+			Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
 			Options.CalculateNetAmount.Enable       = True;
 			Options.CalculateTotalAmount.Enable     = True;
 			Options.CalculateTaxAmount.Enable       = True;
@@ -14182,7 +14186,6 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 		If     WhoIsChanged = "IsPriceChanged"            
 		    Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" 
-			Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
 			Or WhoIsChanged = "IsVatRateChanged"
 		    Or WhoIsChanged = "IsTaxAmountUserFormChanged"
 			Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
@@ -14251,7 +14254,6 @@ Procedure StepItemListCalculations_StockDocuments(Parameters, Chain, WhoIsChange
 		
 		// need recalculate NetAmount, TotalAmount, TaxAmount
 		If 	   WhoIsChanged = "IsPriceChanged"
-			Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
 			Or WhoIsChanged = "IsVatRateChanged"   
 			Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
 			Options.CalculateNetAmount.Enable     = True;

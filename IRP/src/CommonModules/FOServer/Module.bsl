@@ -66,6 +66,7 @@ Function GetFOSubordination() Export
 	UseFinance.Add("UseCashTransaction");
 	UseFinance.Add("UseChequeBonds");
 	UseFinance.Add("UseAging");
+	UseFinance.Add("UseAccounting");
 	UseFinance.Add("UseAccountingService");
 	UseFinance.Add("UseELedger");
 	UseFinance.Add("UseFixedAssets");
@@ -91,6 +92,7 @@ Function GetFOGroups() Export
 	FOList.Add("UseContactInformation");
 	FOList.Add("UseNumberingRules");
 	FOList.Add("UseEquipments");
+	FOList.Add("UseObjectAccess");
 	FOList.Add("UseObjectTransformation");
 	FOList.Add("UseIncidents");
 	FOList.Add("UseIntegrations");
@@ -111,7 +113,9 @@ Function GetFOGroups() Export
 	FOList.Add("UsePartnersHierarchy");
 	FOList.Add("UsePartnerItems");
 	FOList.Add("UseItemKey");
+	FOList.Add("UseSerialLotNumbers");
 	FOList.Add("UsePriceByProperties");
+	FOList.Add("UseExpenseAndRevenueTypes");
 	FOGroups.Insert("MasterData", FOList);
 	
 	FOList = New Array; // Array of String

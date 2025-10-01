@@ -74,6 +74,18 @@ Procedure FO_Item_OnChange(Item) Export
 		ThisObject[AttributeName] = CurrentValue;
 	EndDo;
 	
+	If CurrentValue = False Then
+		CurrentSubordination = Undefined; // Array of String
+		If GetFormStructure(ThisObject, "FOSubordination").Property(FO_Name, CurrentSubordination) Then
+			For Each FO_SubordinationName In CurrentSubordination Do
+				AttributeNames = _AttributeFromFO[FO_SubordinationName]; // Array
+				For Each AttributeName In AttributeNames Do
+					ThisObject[AttributeName] = False;
+				EndDo;
+			EndDo;
+		EndIf;
+	EndIf;
+	
 	SetItemsEnables(ThisObject);
 	
 EndProcedure
@@ -123,8 +135,9 @@ Procedure CreateItems()
 	
 	FillGroupPresence();
 	
+	FOSubordination = FOServer.GetFOSubordination();
+	
 	FO_Groups = FOServer.GetFOGroups();
-	FO_Subordination = FOServer.GetFOSubordination();
 	For Each GroupKeyValue In FO_Groups Do
 		GroupName = GroupKeyValue.Key;
 		NewFormGroup = CreateFormGroup(GroupName);
@@ -134,8 +147,9 @@ Procedure CreateItems()
 			MarkGroupPresence(FO_Item);
 			FO_Attribute = CreateAttributeName(FO_Item);
 			SubItemItems = New Structure;
-			If FO_Subordination.Property(FO_Item) = True Then
-				For Each FO_SubItem In FO_Subordination[FO_Item] Do // String
+			//@skip-check dynamic-access-method-not-found
+			If FOSubordination.Property(FO_Item) = True Then
+				For Each FO_SubItem In FOSubordination[FO_Item] Do // String
 					MarkGroupPresence(FO_SubItem);
 					SubItemItems.Insert(CreateAttributeName(FO_SubItem));
 				EndDo;

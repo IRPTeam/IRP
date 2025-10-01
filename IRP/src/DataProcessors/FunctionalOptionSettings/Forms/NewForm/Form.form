@@ -367,6 +367,21 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>FOSubordination</name>
+    <title>
+      <key>en</key>
+      <value>FO subordination</value>
+    </title>
+    <id>10</id>
+    <valueType/>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>Save</name>
     <title>

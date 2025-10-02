@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DefinedType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="cc2512db-0c5a-4096-959a-f9286378ce21">
+<mdclass:DefinedType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="30ba7f4e-2024-4098-87a4-af136aae1319" extendedConfigurationObject="ee58c3d7-4929-47d6-8e26-365106f72071">
   <producedTypes>
-    <containerType typeId="9e95519d-abab-4791-b729-a01d741993f2" valueTypeId="fd32cb70-69bb-40f9-9e66-b0c79c5b20f0"/>
+    <containerType typeId="7e721575-9f02-43b7-84cc-a05f3fc7f58c" valueTypeId="d320385c-a306-4f32-a2dc-68757d31430b"/>
   </producedTypes>
   <name>typeAmount</name>
   <objectBelonging>Adopted</objectBelonging>
   <extension xsi:type="mdclassExtension:DefinedTypeExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
     <typeExtension>
       <types>
         <state>Checked</state>
         <type>Number</type>
       </types>
       <numberQualifiers>
-        <precision>15</precision>
+        <precision>20</precision>
         <scale>2</scale>
       </numberQualifiers>
     </typeExtension>
   </extension>
-  <type/>
 </mdclass:DefinedType>

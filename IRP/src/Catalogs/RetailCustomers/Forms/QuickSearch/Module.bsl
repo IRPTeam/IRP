@@ -1,3 +1,4 @@
+
 &AtClient
 Procedure ObjectAttributeTextEditEnd(Item)
 	FillFilterList();
@@ -90,4 +91,23 @@ EndFunction
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	Close(RetailCustomer.Ref);
+EndProcedure
+
+&AtClient
+Procedure Select(Command)
+	
+	If Not ValueIsFilled(RetailCustomer.Ref) Then
+		Return;
+	EndIf;
+	
+	If Modified Then
+		Write();
+	EndIf;		
+	
+	If ThisObject.IsOpen() Then
+		Close(RetailCustomer.Ref);
+	Else
+		NotifyChoice(RetailCustomer.Ref);
+	EndIf;
+	
 EndProcedure

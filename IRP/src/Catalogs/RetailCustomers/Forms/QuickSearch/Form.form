@@ -617,21 +617,16 @@
     </extInfo>
   </items>
   <items xsi:type="form:Button">
-    <name>FormWriteAndClose</name>
-    <id>64</id>
-    <title>
-      <key>en</key>
-      <value>OK</value>
-    </title>
+    <name>Select</name>
+    <id>81</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
-    <skipOnInput>false</skipOnInput>
     <extendedTooltip>
-      <name>FormWriteAndCloseExtendedTooltip</name>
-      <id>65</id>
+      <name>SelectExtendedTooltip</name>
+      <id>82</id>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -640,15 +635,12 @@
       </extInfo>
     </extendedTooltip>
     <type>UsualButton</type>
-    <commandName>Form.StandardCommand.WriteAndClose</commandName>
-    <representation>PictureAndText</representation>
+    <commandName>Form.Command.Select</commandName>
+    <representation>Auto</representation>
     <defaultButton>true</defaultButton>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
     <placementArea>UserCmds</placementArea>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.AppearanceCheckBox</picture>
-    </picture>
     <representationInContextMenu>Auto</representationInContextMenu>
   </items>
   <commandBarLocation>Bottom</commandBarLocation>
@@ -732,6 +724,27 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>Clear</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Select</name>
+    <title>
+      <key>en</key>
+      <value>OK</value>
+    </title>
+    <id>5</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCheckBox</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Select</name>
       </handler>
     </action>
     <representation>TextPicture</representation>

@@ -122,6 +122,7 @@ Function GetFormAttributeMapping() Export
 	Map.Insert("PaymentList.Tax"                      , "PaymentListTaxNoSplits");
 	Map.Insert("PaymentList.TaxDiscountAmount"        , "PaymentListTaxDiscountAmountNoSplits");
 	Map.Insert("PaymentList.AdditionalAnalytic"       , "PaymentListAdditionalAnalyticNoSplits");
+	Map.Insert("PaymentList.PaymentDate"              ,"PaymentListPaymentDateNoSplits");
 	Return Map;
 EndFunction
 
@@ -294,6 +295,16 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Else
 		Form.Items.PaymentListBasisDocumentNoSplits.ReadOnly = True;
 	EndIf;
+	
+	For Each Row In Object.PaymentList Do
+		Row.PaymentDateReadOnly = 
+			Not (ValueIsFilled(Row.BasisDocument) 
+				And TypeOf(Row.BasisDocument) = Type("DocumentRef.SalesInvoice"));
+	EndDo;
+	
+	Form.Items.PaymentListPaymentDateNoSplits.ReadOnly = 
+		Not (ValueIsFilled(Form.PaymentListBasisDocumentNoSplits)
+			And TypeOf(Form.PaymentListBasisDocumentNoSplits) = Type("DocumentRef.SalesInvoice"));
 EndProcedure
 
 &AtClient
@@ -951,6 +962,24 @@ Procedure PaymentListTaxDiscountAmountNoSplitsOnChange(Item)
 		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
 	EndIf;
 	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_DATE
+
+&AtClient
+Procedure PaymentListPaymentDateOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListPaymentDateNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");	
 EndProcedure
 
 #EndRegion

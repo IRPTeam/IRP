@@ -3155,6 +3155,11 @@ Procedure SetPaymentListBasisDocument(Object, Form, Row, Value, FormAttributeUpd
 	ControllerClientServer_V2.PaymentListBasisDocumentOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetPaymentListBasisDocumentNotify(Parameters) Export
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
+EndProcedure
+
 // PaymentList.PlanningTransactionBasis
 Procedure PaymentListPlanningTransactionBasisOnChange(Object, Form, CurrentData = Undefined, FormAttributeUpdateDirection = "FromListToHeader") Export
 	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);

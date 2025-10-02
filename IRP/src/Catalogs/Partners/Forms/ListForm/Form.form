@@ -692,6 +692,7 @@ FROM
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
   </attributes>
   <attributes>
     <name>FilterTradeAgent</name>
@@ -709,6 +710,7 @@ FROM
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
   </attributes>
   <attributes>
     <name>FilterOther</name>

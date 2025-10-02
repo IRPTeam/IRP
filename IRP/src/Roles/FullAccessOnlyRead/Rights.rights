@@ -13594,13 +13594,6 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.RetailWorkers.Command.RetailWorkers</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</name>
 		<right>
 			<name>Read</name>

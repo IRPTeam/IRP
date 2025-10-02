@@ -727,6 +727,7 @@ WHERE
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
   </attributes>
   <attributes>
     <name>FilterTradeAgent</name>
@@ -744,6 +745,7 @@ WHERE
     <edit>
       <common>true</common>
     </edit>
+    <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
   </attributes>
   <attributes>
     <name>FilterOther</name>

@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsVisibility>
+    <visibilityFragments>
+      <command>Report.R6020_BatchBalance.StandardCommand.Open</command>
+      <visible/>
+    </visibilityFragments>
+    <visibilityFragments>
+      <command>Report.R6060A_CostOfGoodsSold.StandardCommand.Open</command>
+      <visible/>
+    </visibilityFragments>
+  </commandsVisibility>
   <commandsPlacement>
     <placementFragments>
       <group>NavigationPanelImportant</group>
       <commands>Catalog.CashAccounts.StandardCommand.OpenList</commands>
+      <commands>Document.ReconciliationStatement.StandardCommand.OpenList</commands>
     </placementFragments>
   </commandsPlacement>
   <commandsOrder>
     <orderFragments>
       <group>NavigationPanelImportant</group>
       <commands>Catalog.CashAccounts.StandardCommand.OpenList</commands>
+      <commands>Document.ReconciliationStatement.StandardCommand.OpenList</commands>
     </orderFragments>
     <orderFragments>
       <group>ActionsPanelReports</group>
@@ -31,8 +43,7 @@
   <subsystemsOrder>
     <subsystems>Subsystem.Treasury.Subsystem.Bank</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.Cash</subsystems>
-    <subsystems>Subsystem.Treasury.Subsystem.CashTransactions</subsystems>
-    <subsystems>Subsystem.Treasury.Subsystem.Retail</subsystems>
+    <subsystems>Subsystem.Treasury.Subsystem.Transactions</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.Transfer</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.SchedulingOfPaymentDeadlines</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.ChequeBond</subsystems>

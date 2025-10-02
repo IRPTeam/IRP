@@ -20,6 +20,7 @@
   <content>Document.RetailShipmentConfirmation</content>
   <content>Document.RetailGoodsReceipt</content>
   <content>DataProcessor.AttachedFilesToDocumentsControl</content>
+  <content>CommonCommand.OpenPointOfSale</content>
   <subsystems>Sales</subsystems>
   <subsystems>VisitorCounter</subsystems>
 </mdclass:Subsystem>

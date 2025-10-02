@@ -13,5 +13,6 @@
   <content>Catalog.PartnersBankAccounts</content>
   <content>Catalog.PaymentSchedules</content>
   <content>Catalog.PartnerSegments</content>
+  <content>CommonCommand.OpenLegalNames</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

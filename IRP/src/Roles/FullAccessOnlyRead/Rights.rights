@@ -5405,7 +5405,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Treasury.Subsystem.CashTransactions</name>
+		<name>Subsystem.Treasury.Subsystem.Transactions</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -16615,13 +16615,6 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Treasury.Subsystem.Retail</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
 		</right>
 	</object>
 	<object>

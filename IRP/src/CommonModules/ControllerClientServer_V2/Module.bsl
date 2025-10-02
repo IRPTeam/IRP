@@ -7447,7 +7447,6 @@ Procedure StepPaymentListChangePartnerByLegalName(Parameters, Chain) Export
 		Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
 		Options.Partner   = GetPaymentListPartner(Parameters, Row.Key);
 		Options.LegalName = GetPaymentListLegalName(Parameters, Row.Key);
-		Options.TypeOfDocument = TypeOf(Parameters.Object.Ref);
 		Options.Key = Row.Key;
 		Options.StepName = "StepPaymentListChangePartnerByLegalName";
 		Chain.ChangePartnerByLegalName.Options.Add(Options);
@@ -7587,6 +7586,7 @@ Procedure StepPaymentListChangePaymentDateByBasisDocument(Parameters, Chain) Exp
 		Options = ModelClientServer_V2.ChangePaymentDateByBasisDocumentOptions();
 		Options.BasisDocument  = GetPaymentListBasisDocument(Parameters, Row.Key);
 		Options.PaymentDate    = GetPaymentListPaymentDate(Parameters, Row.Key);
+		Options.TypeOfDocument = TypeOf(Parameters.Object.Ref);
 		Options.Key = Row.Key;
 		Options.StepName = "StepPaymentListChangePaymentDateByBasisDocument";
 		Chain.ChangePaymentDateByBasisDocument.Options.Add(Options);

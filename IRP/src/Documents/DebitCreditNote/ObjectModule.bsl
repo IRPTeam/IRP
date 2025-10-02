@@ -93,5 +93,14 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	Return;
+	If TypeOf(FillingData) = Type("Structure") Then
+		If FillingData.Property("BasedOn") Then
+			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+			Filling_BasedOn(FillingData);
+		EndIf;
+	EndIf;
+EndProcedure
+
+Procedure Filling_BasedOn(FillingData)
+	FillPropertyValues(ThisObject, FillingData);
 EndProcedure

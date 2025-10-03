@@ -166,7 +166,7 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And I go to line in "List" table
 			| 'Document'                    |
 			| '$$PurchaseInvoice29604$$'    |
-		And I click "Select" button
+		And I select current line in "List" table
 		And in "PaymentList" table I move to the next cell
 	* Change in payment amount
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
@@ -200,7 +200,7 @@ Scenario: _051002 check that the amount does not change when select basis docume
 		And I go to line in "List" table
 			| 'Company'        | 'Amount'      | 'Legal name'          | 'Partner'      |
 			| 'Main Company'   | '135 887,45'  | 'Company Ferron BP'   | 'Ferron BP'    |
-		And I click "Select" button
+		And I select current line in "List" table
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term'       | 'Total amount' | 'Legal name'             | 'Basis document'            |
 			| 'Ferron BP' | 'Vendor Ferron, TRY' | '5 000,00'     | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' |
@@ -275,11 +275,11 @@ Scenario: _0530011 create Bank payment (independently)
 			And I go to line in "List" table
 				| 'Amount'        | 'Company'         | 'Legal name'           | 'Partner'       |
 				| '135 887,45'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
-			And I click "Select" button
+			And I select current line in "List" table	
 			And I click choice button of "Order" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
-				| '135 887,45'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
+				| 'Document'                | 'Company'      | 'Legal name'        | 'Partner'   |
+				| '$$PurchaseOrder017001$$' | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
@@ -355,11 +355,11 @@ Scenario: _0530011 create Bank payment (independently)
 			And I go to line in "List" table
 				| 'Amount'        | 'Company'         | 'Legal name'           | 'Partner'       |
 				| '134 887,45'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
-			And I click "Select" button
+			And I select current line in "List" table
 			And I click choice button of "Order" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
-				| '134 887,45'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
+				| 'Document'                | 'Company'      | 'Legal name'        | 'Partner'   |
+				| '$$PurchaseOrder017001$$' | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part

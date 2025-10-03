@@ -117,11 +117,11 @@
  <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
+ <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
- <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -1010,10 +1010,15 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
+       <handlers>
+        <event>StartChoice</event>
+        <name>SendOrderStartChoice</name>
+       </handlers>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
        <wrap>true</wrap>
-       <chooseType>true</chooseType>
+       <dropListButton>true</dropListButton>
+       <openButton>true</openButton>
        <typeDomainEnabled>true</typeDomainEnabled>
        <textEdit>true</textEdit>
       </extInfo>
@@ -1050,10 +1055,15 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
+       <handlers>
+        <event>StartChoice</event>
+        <name>SendBasisDocumentStartChoice</name>
+       </handlers>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
        <wrap>true</wrap>
-       <chooseType>true</chooseType>
+       <dropListButton>true</dropListButton>
+       <openButton>true</openButton>
        <typeDomainEnabled>true</typeDomainEnabled>
        <textEdit>true</textEdit>
       </extInfo>
@@ -1641,10 +1651,15 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
+       <handlers>
+        <event>StartChoice</event>
+        <name>ReceiveOrderStartChoice</name>
+       </handlers>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
        <wrap>true</wrap>
-       <chooseType>true</chooseType>
+       <dropListButton>true</dropListButton>
+       <openButton>true</openButton>
        <typeDomainEnabled>true</typeDomainEnabled>
        <textEdit>true</textEdit>
       </extInfo>
@@ -1681,10 +1696,15 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
+       <handlers>
+        <event>StartChoice</event>
+        <name>ReceiveBasisDocumentStartChoice</name>
+       </handlers>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
        <wrap>true</wrap>
-       <chooseType>true</chooseType>
+       <dropListButton>true</dropListButton>
+       <openButton>true</openButton>
        <typeDomainEnabled>true</typeDomainEnabled>
        <textEdit>true</textEdit>
       </extInfo>
@@ -2133,6 +2153,46 @@
     <contextMenu>
      <name>BranchContextMenu</name>
      <id>411</id>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <wrap>true</wrap>
+     <chooseType>true</chooseType>
+     <typeDomainEnabled>true</typeDomainEnabled>
+     <textEdit>true</textEdit>
+    </extInfo>
+   </items>
+   <items xsi:type="form:FormField">
+    <name>BasisDocument</name>
+    <id>630</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.BasisDocument</segments>
+    </dataPath>
+    <extendedTooltip>
+     <name>BasisDocumentExtendedTooltip</name>
+     <id>632</id>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>BasisDocumentContextMenu</name>
+     <id>631</id>
      <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>

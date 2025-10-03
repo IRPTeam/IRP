@@ -223,7 +223,7 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 			And I go to line in "List" table
 				| 'Amount'      | 'Company'         | 'Legal name'           | 'Partner'      | 'Document'                      |
 				| '4 000,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'    | '$$PurchaseInvoiceAging1$$'     |
-			And I click "Select" button
+			And I select current line in "List" table
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "4 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
@@ -302,7 +302,7 @@ Scenario: _1002015 create Bank payment and check Aging register movements
 				And I go to line in "List" table
 					| 'Amount'       | 'Company'          | 'Legal name'            | 'Partner'       | 'Document'                      |
 					| '4 000,00'     | 'Main Company'     | 'Company Ferron BP'     | 'Ferron BP'     | '$$PurchaseInvoiceAging$$'      |
-				And I click "Select" button
+				And I select current line in "List" table
 				And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 				And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
@@ -381,15 +381,9 @@ Scenario: _1002020 create Credit note and check Aging register movements
 		And I finish line editing in "Transactions" table
 		And I activate "Basis document" field in "Transactions" table
 		And I select current line in "Transactions" table
-		And I click choice button of "Basis document" attribute in "Transactions" table
-		Then "Select data type" window is opened
-		And I go to line in "" table
-			| ""                 |
-			| "Purchase invoice" |
-		And I select current line in "" table
 		And I go to line in "List" table
-			| "Amount"   | "Company"      | "Currency" | "Legal name"        | "Number" | "Partner"   |
-			| "4 000,00" | "Main Company" | "TRY"      | "Company Ferron BP" | "2"      | "Ferron BP" |
+			| "Document"                 | "Company"      | "Legal name"        | "Partner"   |
+			| "$$PurchaseInvoiceAging$$" | "Main Company" | "Company Ferron BP" | "Ferron BP" |
 		And I select current line in "List" table	
 		And I click the button named "FormPost"
 		And I delete "$$CreditNote1002020$$" variable
@@ -460,15 +454,12 @@ Scenario: _1020030 create Debit note and check Aging register movements
 		And I select current line in "List" table
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "50,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And I activate "Basis document" field in "Transactions" table
 		And I select current line in "Transactions" table
-		And I click choice button of "Basis document" attribute in "Transactions" table
-		And I go to line in "" table
-			| ""                 |
-			| "Purchase invoice" |
-		And I select current line in "" table
 		And I go to line in "List" table
-			| "Number"                         |
-			| "$$NumberPurchaseInvoiceAging$$" |
+			| "Document"                 |
+			| "$$PurchaseInvoiceAging$$" |
 		And I select current line in "List" table
 		And I finish line editing in "Transactions" table
 	* Check movements
@@ -872,14 +863,19 @@ Scenario: _1200057 create BP based on PO (Prepaid)
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Ferron BP'     |
-		And I select current line in "List" table		
+		And I select current line in "List" table	
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table	
 		And I activate "Order" field in "PaymentList" table
-		And I click choice button of "Order" attribute in "PaymentList" table
-		And "List" table became equal
-			| 'Document'                                       | 'Company'      | 'Partner'   | 'Legal name'        | 'Partner term'       | 'Currency' | 'Amount'   |
-			| 'Purchase order 1 115 dated 04.01.2024 12:09:17' | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | '1 000,00' |		
-		And I click "Select" button
+		And I click choice button of "Order" attribute in "PaymentList" table		
+		And "List" table contains lines
+			| 'Document'                                       | 'Company'      | 'Partner'   | 'Legal name'        | 'Partner term'       |
+			| 'Purchase order 1 115 dated 04.01.2024 12:09:17' | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
 		And "PaymentList" table became equal
-			| '#' | 'Partner'   | 'Legal name'             | 'Partner term' | 'Legal name contract' | 'Basis document' | 'Order'                                          | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Additional analytic' | 'Expense type' |
-			| '1' | 'Ferron BP' | 'Company Ferron BP' | ''             | ''                    | ''               | 'Purchase order 1 115 dated 04.01.2024 12:09:17' | '1 000,00'     | ''                        | ''                   | ''                 | ''                           | ''                    | ''             |		
+			| '#' | 'Partner'   | 'Legal name'        | 'Partner term'       | 'Legal name contract' | 'Basis document' | 'Order'                                          | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Additional analytic' | 'Expense type' |
+			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | ''               | 'Purchase order 1 115 dated 04.01.2024 12:09:17' | ''             | ''                        | ''                   | ''                 | ''                           | ''                    | ''             |
 	And I close all client application windows

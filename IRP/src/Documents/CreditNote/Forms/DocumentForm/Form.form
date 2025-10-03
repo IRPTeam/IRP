@@ -819,7 +819,7 @@
     </items>
     <items xsi:type="form:FormField">
      <name>TransactionsBasisDocument</name>
-     <id>350</id>
+     <id>420</id>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -828,9 +828,13 @@
      <dataPath xsi:type="form:DataPath">
       <segments>Object.Transactions.BasisDocument</segments>
      </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>TransactionsBasisDocumentOnChange</name>
+     </handlers>
      <extendedTooltip>
       <name>TransactionsBasisDocumentExtendedTooltip</name>
-      <id>352</id>
+      <id>422</id>
       <type>Label</type>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -840,15 +844,19 @@
      </extendedTooltip>
      <contextMenu>
       <name>TransactionsBasisDocumentContextMenu</name>
-      <id>351</id>
+      <id>421</id>
       <autoFill>true</autoFill>
      </contextMenu>
      <type>InputField</type>
-     <editMode>Enter</editMode>
+     <editMode>EnterOnInput</editMode>
      <showInHeader>true</showInHeader>
      <headerHorizontalAlign>Left</headerHorizontalAlign>
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:InputFieldExtInfo">
+      <handlers>
+       <event>StartChoice</event>
+       <name>TransactionsBasisDocumentStartChoice</name>
+      </handlers>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <wrap>true</wrap>

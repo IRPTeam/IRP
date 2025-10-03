@@ -489,7 +489,7 @@ Function R5020B_PartnersBalance_PI_WTI() Export
 		|	0 AS VendorAdvance,
 		|	0 AS OtherTransaction,
 		|	UNDEFINED AS AdvancesClosing,
-		|	UNDEFINED AS Key
+		|	ItemList.PartnerUUID AS Key
 		|INTO R5020B_PartnersBalance
 		|FROM
 		|	ItemList AS ItemList
@@ -504,7 +504,8 @@ Function R5020B_PartnersBalance_PI_WTI() Export
 		|	ItemList.LegalName,
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
-		|	ItemList.Currency
+		|	ItemList.Currency,
+		|	ItemList.PartnerUUID
 		|
 		|UNION ALL
 		|
@@ -526,7 +527,7 @@ Function R5020B_PartnersBalance_PI_WTI() Export
 		|	0 AS VendorAdvance,
 		|	SUM(ItemList.Amount) AS OtherTransaction,
 		|	UNDEFINED AS AdvancesClosing,
-		|	UNDEFINED AS Key
+		|	ItemList.PartnerUUID AS Key
 		|
 		|FROM
 		|	ItemList AS ItemList
@@ -541,7 +542,8 @@ Function R5020B_PartnersBalance_PI_WTI() Export
 		|	ItemList.LegalName,
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
-		|	ItemList.Currency
+		|	ItemList.Currency,
+		|	ItemList.PartnerUUID
 		|
 		|UNION ALL
 		|
@@ -563,7 +565,7 @@ Function R5020B_PartnersBalance_PI_WTI() Export
 		|	0 AS VendorAdvance,
 		|	SUM(ItemList.WithholdingTaxAmount) AS OtherTransaction,
 		|	UNDEFINED AS AdvancesClosing,
-		|	UNDEFINED AS Key
+		|	ItemList.TaxUUID AS Key
 		|
 		|FROM
 		|	ItemList AS ItemList
@@ -578,7 +580,8 @@ Function R5020B_PartnersBalance_PI_WTI() Export
 		|	ItemList.TaxLegalName,
 		|	ItemList.TaxAgreement,
 		|	ItemList.BasisDocument,
-		|	ItemList.Currency
+		|	ItemList.Currency,
+		|	ItemList.TaxUUID
 		|
 		|UNION ALL
 		|

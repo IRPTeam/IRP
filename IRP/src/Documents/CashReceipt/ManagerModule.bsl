@@ -868,6 +868,7 @@ Function GetAnalytics_PaymentFromCustomer(Parameters)
 
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.RowData.FinancialMovementType);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
@@ -921,6 +922,7 @@ Function GetAnalytics_ReturnFromVendor(Parameters)
 
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.RowData.FinancialMovementType);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
@@ -973,6 +975,7 @@ Function GetAnalytics_CashTransferOrder(Parameters)
 	AccountingAnalytics.Debit = Debit.Account;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.RowData.SendingAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.RowData.FinancialMovementType);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
@@ -983,6 +986,7 @@ Function GetAnalytics_CashTransferOrder(Parameters)
 	AccountingAnalytics.Credit = Credit.AccountTransit;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.RowData.FinancialMovementType);
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 
 	Return AccountingAnalytics;
@@ -1001,6 +1005,7 @@ Function GetAnalytics_OtherPartner(Parameters)
 
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.RowData.FinancialMovementType);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
@@ -1026,6 +1031,7 @@ Function GetAnalytics_SalaryPayment(Parameters)
 	AccountingAnalytics.Debit = Debit.Account;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
+	AdditionalAnalytics.Insert("FinancialMovementType", Parameters.RowData.FinancialMovementType);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit

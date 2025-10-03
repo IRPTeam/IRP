@@ -19,7 +19,7 @@
  <type>
   <types>Number</types>
   <numberQualifiers>
-   <precision>15</precision>
+   <precision>20</precision>
    <scale>2</scale>
   </numberQualifiers>
  </type>

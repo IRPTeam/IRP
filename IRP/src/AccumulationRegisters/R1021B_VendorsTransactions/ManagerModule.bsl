@@ -134,7 +134,8 @@ Function R1021B_VendorsTransactions_PI_SRTC_WTI() Export
 		|	ItemList.BasisDocument AS Basis,
 		|	ItemList.PurchaseOrderSettlements AS Order,
 		|	SUM(ItemList.Amount) AS Amount,
-		|	UNDEFINED AS VendorsAdvancesClosing
+		|	UNDEFINED AS VendorsAdvancesClosing,
+		|	ItemList.PartnerUUID AS Key
 		|INTO R1021B_VendorsTransactions
 		|FROM
 		|	ItemList AS ItemList
@@ -151,7 +152,8 @@ Function R1021B_VendorsTransactions_PI_SRTC_WTI() Export
 		|	ItemList.Project,
 		|	ItemList.Partner,
 		|	ItemList.Period,
-		|	VALUE(AccumulationRecordType.Receipt)
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.PartnerUUID
 		|
 		|UNION ALL
 		|
@@ -172,7 +174,8 @@ Function R1021B_VendorsTransactions_PI_SRTC_WTI() Export
 		|	OffsetOfAdvances.TransactionDocument,
 		|	OffsetOfAdvances.TransactionOrder,
 		|	OffsetOfAdvances.Amount,
-		|	OffsetOfAdvances.Recorder
+		|	OffsetOfAdvances.Recorder,
+		|	Undefined
 		|FROM
 		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE

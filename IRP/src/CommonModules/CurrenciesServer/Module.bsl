@@ -1077,7 +1077,7 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 			PrepereTable = PartnerBalanceTables.R1021B_VendorsTransactions;
 			MainTableName = "R1021B_VendorsTransactions";
 		Else
-                        Raise R().UnknownTransactionTypeT2015;
+            Raise R().UnknownTransactionTypeT2015;
 		EndIf;
 		
 		If Not PrepereTable.Count() Then
@@ -1086,7 +1086,7 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 		
 		RegisterRows = PrepereTable.FindRows(Filter);	
 		If RegisterRows.Count() = 0 Then
-                        Raise StrTemplate(R().TransactionCurrencyNotFound, MainTableName);
+            Raise StrTemplate(R().TransactionCurrencyNotFound, MainTableName);
 		EndIf;
 		
 		RegMetadata = Metadata.AccumulationRegisters[MainTableName];  
@@ -1135,7 +1135,7 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 			PrepereTable = PartnerBalanceTables.R1020B_AdvancesToVendors;
 			MainTableName = "R1020B_AdvancesToVendors";
 		Else
-                        Raise R().UnknownTransactionTypeTableT2014;
+            Raise R().UnknownTransactionTypeTableT2014;
 		EndIf;
 		
 		If Not PrepereTable.Count() Then
@@ -1143,8 +1143,8 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 		EndIf;
 		
 		RegisterRows = PrepereTable.FindRows(Filter);	
-                If RegisterRows.Count() = 0 Then
-                        Raise StrTemplate(R().TransactionCurrencyNotFound, MainTableName);
+        If RegisterRows.Count() = 0 Then
+        	Raise StrTemplate(R().TransactionCurrencyNotFound, MainTableName);
 		EndIf;
 		
 		RegMetadata = Metadata.AccumulationRegisters[MainTableName];

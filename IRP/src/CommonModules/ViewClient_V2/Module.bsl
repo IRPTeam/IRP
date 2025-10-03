@@ -1062,11 +1062,17 @@ Procedure OnOpenFormNotify(Parameters) Export
 		DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Parameters.Object, Parameters.Form, "GoodsReceipts");
 	EndIf;
 	
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	
 	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "EmployeeCashAdvance" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "EmployeeCashAdvance" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "BankPayment" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	 
@@ -1075,8 +1081,6 @@ Procedure OnOpenFormNotify(Parameters) Export
 	If Parameters.Form.IsCopyingInteractive Then
 		SetDate(Parameters.Object, Parameters.Form, Parameters.TableName, CommonFunctionsServer.GetCurrentSessionDate());
 	EndIf;
-	
-	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
 	
 	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);
 EndProcedure
@@ -3084,6 +3088,7 @@ EndProcedure
 
 Procedure OnSetPaymentListPartnerNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.Agreement
@@ -3109,6 +3114,7 @@ EndProcedure
 
 Procedure OnSetPaymentListLegalNameNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.FinancialMovementType
@@ -3121,6 +3127,7 @@ EndProcedure
 
 Procedure OnSetPaymentListFinancialMovementTypeNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.Account
@@ -3158,6 +3165,7 @@ EndProcedure
 
 Procedure OnSetPaymentListPlanningTransactionBasisNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.MoneyTransfer
@@ -3200,6 +3208,7 @@ EndProcedure
 
 Procedure OnSetPaymentListTaxAmountNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.NetAmount
@@ -3212,6 +3221,7 @@ EndProcedure
 
 Procedure OnSetPaymentListNetAmountNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.TotalAmount
@@ -3233,6 +3243,7 @@ EndProcedure
 
 Procedure OnSetPaymentListTotalAmountNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.Commission
@@ -3245,6 +3256,7 @@ EndProcedure
 
 Procedure OnSetPaymentListCommissionNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.PaymentType
@@ -3257,6 +3269,7 @@ EndProcedure
 
 Procedure OnSetPaymentListPaymentTypeNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.BankTerm
@@ -3269,6 +3282,7 @@ EndProcedure
 
 Procedure OnSetPaymentListBankTermNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.CommissionPercent
@@ -3281,6 +3295,7 @@ EndProcedure
 
 Procedure OnSetPaymentListCommissionPercentNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 // PaymentList.VatRate
@@ -3293,6 +3308,7 @@ EndProcedure
 
 Procedure OnSetPaymentListVatRateNotify(Parameters) Export
 	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 #EndRegion
@@ -4089,8 +4105,8 @@ Procedure DetailsByRowOnChange(Object, Form, TableNames) Export
 EndProcedure
 
 Procedure OnSetDetailsByRowNotify(Parameters) Export
-	Parameters.Form.FormSetVisibilityAvailability();
-	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");	
+	Parameters.Form.FormUpdateFormAttributes("FromListToHeader");
+	Parameters.Form.FormSetVisibilityAvailability();	
 EndProcedure
 
 #EndRegion

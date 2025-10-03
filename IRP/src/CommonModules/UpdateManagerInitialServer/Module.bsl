@@ -143,6 +143,9 @@ Function RunUpdate_UpdateSystemAttributesSets(MethodName) Export
 EndFunction
 
 Function RunUpdate_UpdateSystemAttributesValue(MethodName) Export	
+	
+	MaxDocsCount = 1000;
+	
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -182,51 +185,79 @@ Function RunUpdate_UpdateSystemAttributesValue(MethodName) Export
 			DocMetadataName = NameSegments[1];
 			
 			ArrayOfAttributes = SystemAttributesServer.GetSystemAttributes(DocMetadataFullName);
+			If ArrayOfAttributes.Count() = 0 Then
+				Continue;
+			EndIf;
+			
+			Query = New Query;
+			Query.Text = 
+			"SELECT TOP 1 Object
+			|FROM InformationRegister.SystemAttributes AS SystemAttributes
+			|WHERE Object REFS Document." + DocMetadataName;
+			QueryResult = Query.Execute();
+			If QueryResult.IsEmpty() Then
+				Msg = BackgroundJobAPIServer.NotifySettings();
+				Msg.Log = DocMetadataName+ " - start";
+				BackgroundJobAPIServer.NotifyStream(Msg);
+			Else
+				Msg = BackgroundJobAPIServer.NotifySettings();
+				Msg.Log = DocMetadataName + " - skip";
+				BackgroundJobAPIServer.NotifyStream(Msg);
+				Continue;
+			EndIf;
+	
+			PackNumber = 1;
 			
 			QueryDoc = New Query();
 			QueryDoc.Text = 
-			"SELECT
-			|	Doc.Ref
-			|FROM
-			|	Document.%1 AS Doc";
-			QueryDoc.Text = StrTemplate(QueryDoc.Text, DocMetadataName);
-			QueryDocResult = QueryDoc.Execute();
-			QueryDocSelection = QueryDocResult.Select();
+			"SELECT Doc.Ref AS Ref, RECORDAUTONUMBER() AS Number INTO tmp
+			|FROM Document." + DocMetadataName + " AS Doc;
+			|SELECT tmp.Ref WHERE tmp.Number BETWEEN &StartNumber AND &FinishNumber";
+			QueryDoc.SetParameter("StartNumber", (PackNumber - 1) * MaxDocsCount + 1);
+			QueryDoc.SetParameter("FinishNumber", PackNumber * MaxDocsCount);
 			
-			While QueryDocSelection.Next() Do
+			QueryDocSelection = QueryDoc.Execute().Select();
 			
-				RecordSet = InformationRegisters.SystemAttributes.CreateRecordSet();
-				RecordSet.Filter.Object.Set(QueryDocSelection.Ref);
-		
-				For Each Attr In ArrayOfAttributes Do
-					Values = Documents[DocMetadataName].GetSystemAttributeValues(QueryDocSelection.Ref, Attr);
-			
-					If Values = Undefined Then
-						Continue;
-					EndIf;
+			While QueryDocSelection.Count() > 0 Do
+				While QueryDocSelection.Next() Do
 				
-					ValueTable = New ValueTable();
-					ValueTable.Columns.Add("Value");
-					For Each Value In Values Do
-						ValueTable.Add().Value = Value;
-					EndDo;
-					ValueTable.GroupBy("Value");
-					
-					LineNumber = 1;
-					For Each TableRow In ValueTable Do
-						If Not ValueIsFilled(TableRow.Value) Then
+					RecordSet = InformationRegisters.SystemAttributes.CreateRecordSet();
+					RecordSet.Filter.Object.Set(QueryDocSelection.Ref);
+			
+					For Each Attr In ArrayOfAttributes Do
+						Values = Documents[DocMetadataName].GetSystemAttributeValues(QueryDocSelection.Ref, Attr);
+				
+						If Values = Undefined Then
 							Continue;
 						EndIf;
-						Record = RecordSet.Add();
-						Record.Object = QueryDocSelection.Ref;
-						Record.Property = Attr;
-						Record.Key = LineNumber;
-						Record.Value = TableRow.Value;
-						LineNumber = LineNumber + 1;
+					
+						ValueTable = New ValueTable();
+						ValueTable.Columns.Add("Value");
+						For Each Value In Values Do
+							ValueTable.Add().Value = Value;
+						EndDo;
+						ValueTable.GroupBy("Value");
+						
+						LineNumber = 1;
+						For Each TableRow In ValueTable Do
+							If Not ValueIsFilled(TableRow.Value) Then
+								Continue;
+							EndIf;
+							Record = RecordSet.Add();
+							Record.Object = QueryDocSelection.Ref;
+							Record.Property = Attr;
+							Record.Key = LineNumber;
+							Record.Value = TableRow.Value;
+							LineNumber = LineNumber + 1;
+						EndDo;
 					EndDo;
+					RecordSet.AdditionalProperties.Insert("SystemRecord", True);
+					RecordSet.Write();		
 				EndDo;
-				RecordSet.AdditionalProperties.Insert("SystemRecord", True);
-				RecordSet.Write();		
+			PackNumber = PackNumber + 1;
+			QueryDoc.SetParameter("StartNumber", (PackNumber - 1) * MaxDocsCount + 1);
+			QueryDoc.SetParameter("FinishNumber", PackNumber * MaxDocsCount);
+			QueryDocSelection = QueryDoc.Execute().Select();
 			EndDo;
 		Except
 			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
@@ -240,10 +271,14 @@ Function RunUpdate_UpdateSystemAttributesValue(MethodName) Export
 		
 	EndDo;
 	
+	Msg = BackgroundJobAPIServer.NotifySettings();
+	Msg.Log = "Finish";
+	BackgroundJobAPIServer.NotifyStream(Msg);
+	
 	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
-            Raise R().JobAborted;
+		Raise R().JobAborted;
 	EndIf;
 	
 	If Errors.Count() = 0 Then

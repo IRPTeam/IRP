@@ -135,6 +135,7 @@
  <content>Document.ShipmentPlaningOrder.TabularSection.ItemList.Attribute.SalesOrder</content>
  <content>Document.SalesInvoice.TabularSection.ShipmentPlaningOrders.Attribute.ShipmentPlaningOrder</content>
  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.ShipmentPlaningOrder</content>
+ <content>Document.DebitCreditNote.Attribute.BasisDocument</content>
  <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
   <name>RelatedDocuments</name>
   <synonym>

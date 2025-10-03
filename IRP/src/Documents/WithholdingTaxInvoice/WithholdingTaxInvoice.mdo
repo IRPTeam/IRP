@@ -429,6 +429,52 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="56d56b72-73a6-4b0d-ad3c-a051886adc76">
+  <name>PartnerUUID</name>
+  <synonym>
+   <key>tr</key>
+   <value>Partner UUID</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>UUID Партнера</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Partner UUID</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="19c2e8c3-3278-4696-889f-bd957824ebcd">
+  <name>TaxUUID</name>
+  <synonym>
+   <key>tr</key>
+   <value>Tax UUID</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>UUID Налога</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tax UUID</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="9a4aa5d5-bbcc-495e-8f7d-8eef4025b7e8">
   <name>DocumentForm</name>
   <synonym>

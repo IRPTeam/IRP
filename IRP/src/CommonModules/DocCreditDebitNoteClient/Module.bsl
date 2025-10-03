@@ -168,6 +168,47 @@ EndProcedure
 
 #EndRegion
 
+#Region BASIS_DOCUMENT
+
+Procedure TransactionsListBasisDocumentOnChange(Object, Form, Item, CurrentData = Undefined, FormAttributeUpdateDirection = Undefined) Export
+	Return;
+EndProcedure
+
+Procedure TransactionsListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, CurrentData = Undefined) Export
+	StandardProcessing = False;
+	If CurrentData = Undefined Then
+		CurrentData = Form.Items.Transactions.CurrentData;
+	EndIf;
+
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
+	NotifyParameters.Insert("CurrentData", CurrentData);
+	
+	Notify = New CallbackDescription("TransactionsListBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
+	FormParameters = New Structure();
+	FormParameters.Insert("Company", Object.Company);
+	FormParameters.Insert("Partner", CurrentData.Partner);
+	FormParameters.Insert("LegalName", CurrentData.LegalName);
+	FormParameters.Insert("Agreement", CurrentData.Agreement);
+	FormParameters.Insert("Ref", Object.Ref);
+	FormParameters.Insert("Document", CurrentData.BasisDocument);
+		
+	OpenForm("CommonForm.ChoiceTransactionBasis", FormParameters, Form,,,,Notify,FormWindowOpeningMode.LockOwnerWindow); 
+EndProcedure
+
+Procedure TransactionsListBasisDocumentStartChoiceEnd(Result, NotifyParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	CurrentData = NotifyParameters.CurrentData;
+	If CurrentData <> Undefined Then
+		CurrentData.BasisDocument = Result.BasisDocument;
+	EndIf;
+EndProcedure
+
+#EndRegion
+
 #Region EXPENSE_TYPE
 
 Procedure TransactionsExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

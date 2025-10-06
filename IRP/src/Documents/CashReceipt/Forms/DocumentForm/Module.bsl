@@ -296,15 +296,6 @@ Procedure SetVisibilityAvailability(Object, Form)
 				And TypeOf(Row.BasisDocument) = Type("DocumentRef.PurchaseInvoice"));
 	EndDo;
 	
-	Form.Items.PaymentListBasisDocumentNoSplits.ReadOnly = 
-		Not (ValueIsFilled(Form.PaymentListBasisDocumentNoSplits)
-			And TypeOf(Form.PaymentListBasisDocumentNoSplits) = Type("DocumentRef.PurchaseInvoice"));
-	For Each Row In Object.PaymentList Do
-		Row.PaymentDateReadOnly = 
-			Not (ValueIsFilled(Row.BasisDocument) 
-				And TypeOf(Row.BasisDocument) = Type("DocumentRef.PurchaseInvoice"));
-	EndDo;
-	
 	Form.Items.PaymentListPaymentDateNoSplits.ReadOnly = 
 		Not (ValueIsFilled(Form.PaymentListBasisDocumentNoSplits)
 			And TypeOf(Form.PaymentListBasisDocumentNoSplits) = Type("DocumentRef.PurchaseInvoice"));

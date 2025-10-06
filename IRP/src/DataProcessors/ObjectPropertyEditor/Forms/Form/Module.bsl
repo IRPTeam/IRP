@@ -1803,6 +1803,7 @@ Procedure LoadTableData()
 	ThisObject.PropertiesTable.Clear();
 	For Each RowData In DataTable Do
 		TableRecord = ThisObject.PropertiesTable.Add();
+		TableRecord.Marked = True;
 		DataRef = RowData[Ref_String]; // AnyRef
 		ConstraintRef = RowData[Constraint_String]; // AnyRef
 		TableRecord[Object_String] = DataRef;

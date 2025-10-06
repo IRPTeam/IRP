@@ -17,7 +17,7 @@ Procedure CodeOnChange(Item)
 	If Not RetailCustomerByCode.isEmpty() Then
 		FillDataOnServer(RetailCustomerByCode);
 		Modified = False;
-		CurrentItem = Items.FormWriteAndClose;
+		CurrentItem = Items.Select;
 	Else
 		Modified = True;
 	EndIf;

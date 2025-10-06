@@ -37,6 +37,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R1021B_VendorsTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5010B_ReconciliationStatement.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -105,6 +106,7 @@ Function GetAdditionalQueryParameters(Ref)
 	Else
 		StrParams.Insert("BalancePeriod", Undefined);
 	EndIf;
+	StrParams.Insert("AmountDigitCapacity", Metadata.DefinedTypes.typeAmount.Type.NumberQualifiers.FractionDigits);
 	Return StrParams;
 EndFunction
 
@@ -286,13 +288,19 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.TaxLegalNameContract,
 		|	Currencies.MovementType.Currency,
 		|	ItemList.TaxUUID,
-		|	SUM(Currencies.Amount),
+		|	SUM(ROUND(CASE
+		|		WHEN Currencies.Rate = 0
+		|		OR Currencies.Multiplicity = 0
+		|			THEN 0
+		|		ELSE (ItemList.WithholdingTaxAmount * Currencies.Rate) / Currencies.Multiplicity
+		|	END, &AmountDigitCapacity)),
 		|	ItemList.Period
 		|FROM
 		|	ItemList AS ItemList
 		|		LEFT JOIN Document.WithholdingTaxInvoice.Currencies AS Currencies
 		|		ON ItemList.Ref = Currencies.Ref
 		|		AND ItemList.Ref.TaxAgreement.CurrencyMovementType = Currencies.MovementType
+		|		AND ItemList.TaxUUID = Currencies.Key
 		|WHERE
 		|	ItemList.WithholdingTaxAmount <> 0
 		|GROUP BY

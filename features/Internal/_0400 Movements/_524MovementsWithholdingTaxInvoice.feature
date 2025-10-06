@@ -373,8 +373,8 @@ Scenario: _052418 check With holding Tax Invoice movements by register "R5010 Re
 			| 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''                    | ''           | ''             | ''       | ''         | ''                  | ''                    | ''       |
 			| 'Register  "R5010 Reconciliation statement"'          | ''                    | ''           | ''             | ''       | ''         | ''                  | ''                    | ''       |
 			| ''                                                    | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Currency' | 'Legal name'        | 'Legal name contract' | 'Amount' |
-			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'USD'      | 'Company Ferron BP' | ''                    | '150'    |
 			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'TRY'      | 'Tax authority'     | ''                    | '211,03' |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'USD'      | 'Company Ferron BP' | ''                    | '150'    |
 		And I close all client application windows
 
 Scenario: _052419 check With holding Tax Invoice movements by register "R5020 Partners balance" (transaction currency not equal local currency)

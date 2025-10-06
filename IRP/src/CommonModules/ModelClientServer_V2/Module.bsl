@@ -4127,6 +4127,7 @@ Function ClearByTransactionTypeCashReceiptOptions() Export
 		|Project,
 		|Employee,
 		|PaymentPeriod,
+		|PaymentDate,
 		|CalculationType");		
 EndFunction
 
@@ -4149,6 +4150,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Result.Insert("Employee"                 , Options.Employee);
 	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
 	Result.Insert("CalculationType"          , Options.CalculationType);
+	Result.Insert("PaymentDate"              , Options.PaymentDate);
 	
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
@@ -4187,6 +4189,10 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 			Or (PartnerType = "Customer" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType)) Then	 
 			StrByType = StrByType + ", 
 			|Partner";
+		EndIf;
+		
+		If Options.TransactionType = Incoming_ReturnFromVendor Then
+			StrByType = StrByType + ", PaymentDate";
 		EndIf;
 	ElsIf Options.TransactionType = Incoming_OtherPartner Then
 		StrByType = "

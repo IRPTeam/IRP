@@ -146,7 +146,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.Project,
 	|PaymentList.Employee,
 	|PaymentList.PaymentPeriod,
-	|PaymentList.Paymentdate,
+	|PaymentList.PaymentDate,
 	|PaymentList.CalculationType";
 
 	ArrayOfAllAttributes = New Array();

@@ -152,6 +152,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.Tax,
 	|PaymentList.TaxDiscountAmount,
 	|PaymentList.ProfitLossCenter,
+	|PaymentList.PaymentDate,
 	|PaymentList.RevenueType";
 	
 	ArrayOfAllAttributes = New Array();
@@ -188,8 +189,13 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.LegalNameContract,
 		|PaymentList.Project";
+		
 		If TransactionType = PaymentToVendor Then
 			StrByType = StrByType + ", PaymentList.Order";
+		EndIf;
+		
+		If TransactionType = ReturnToCustomer Then
+			StrByType = StrByType + ", PaymentList.PaymentDate";
 		EndIf;
 	ElsIf TransactionType = OtherPartner Then
 		StrByType = "

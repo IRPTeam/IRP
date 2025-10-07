@@ -32,6 +32,7 @@ Function R5011B_CustomersAging_Offset() Export
 		|	OffsetOfAging.Currency,
 		|	OffsetOfAging.Invoice,
 		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Key,
 		|	OffsetOfAging.Amount,
 		|	OffsetOfAging.Recorder AS AgingClosing
 		|INTO R5011B_CustomersAging

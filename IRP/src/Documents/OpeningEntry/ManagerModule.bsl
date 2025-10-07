@@ -419,6 +419,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(B1040B_AgingKey());
 	QueryArray.Add(R8015T_ConsignorPrices());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(R9510B_SalaryPayment());
@@ -686,6 +687,7 @@ Function CustomersAging()
 		   |	OpeningEntryAccountReceivableByDocuments.Partner AS Partner,
 		   |	OpeningEntryAccountReceivableByDocuments.Agreement AS Agreement,
 		   |	OpeningEntryAccountReceivableByDocuments.Ref AS Invoice,
+		   |	OpeningEntryAccountReceivableByDocuments.Key,
 		   |	OpeningEntryCustomersPaymentTerms.Date AS PaymentDate,
 		   |	OpeningEntryAccountReceivableByDocuments.Currency AS Currency,
 		   |	OpeningEntryCustomersPaymentTerms.Amount AS Amount
@@ -708,6 +710,7 @@ Function VendorsAging()
 		   |	OpeningEntryAccountPayableByDocuments.Partner AS Partner,
 		   |	OpeningEntryAccountPayableByDocuments.Agreement AS Agreement,
 		   |	OpeningEntryAccountPayableByDocuments.Ref AS Invoice,
+		   |	OpeningEntryAccountPayableByDocuments.Key,
 		   |	OpeningEntryVendorsPaymentTerms.Date AS PaymentDate,
 		   |	OpeningEntryAccountPayableByDocuments.Currency AS Currency,
 		   |	OpeningEntryVendorsPaymentTerms.Amount AS Amount
@@ -1020,6 +1023,7 @@ Function R5012B_VendorsAging()
 		   |	VendorsAging.Partner,
 		   |	VendorsAging.Invoice,
 		   |	VendorsAging.PaymentDate,
+		   |	VendorsAging.Key,
 		   |	VendorsAging.Amount
 		   |INTO R5012B_VendorsAging
 		   |FROM
@@ -1085,6 +1089,7 @@ Function R5011B_CustomersAging()
 		   |	CustomersAging.Partner,
 		   |	CustomersAging.Invoice,
 		   |	CustomersAging.PaymentDate,
+		   |	CustomersAging.Key,
 		   |	CustomersAging.Amount
 		   |INTO R5011B_CustomersAging
 		   |FROM
@@ -1092,6 +1097,44 @@ Function R5011B_CustomersAging()
 		   |WHERE 
 		   |	TRUE";
 
+EndFunction
+
+Function B1040B_AgingKey()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CustomersAging.Period,
+		|	CustomersAging.Company,
+		|	CustomersAging.Branch,
+		|	CustomersAging.Currency,
+		|	CustomersAging.Agreement,
+		|	CustomersAging.Partner,
+		|	CustomersAging.Invoice,
+		|	CustomersAging.PaymentDate,
+		|	CustomersAging.Amount
+		|INTO B1040B_AgingKey
+		|FROM
+		|	CustomersAging AS CustomersAging
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	VendorsAging.Period,
+		|	VendorsAging.Company,
+		|	VendorsAging.Branch,
+		|	VendorsAging.Currency,
+		|	VendorsAging.Agreement,
+		|	VendorsAging.Partner,
+		|	VendorsAging.Invoice,
+		|	VendorsAging.PaymentDate,
+		|	VendorsAging.Amount
+		|FROM
+		|	VendorsAging AS VendorsAging
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R4010B_ActualStocks()

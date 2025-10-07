@@ -72,7 +72,7 @@ EndFunction
 Function R1021B_VendorsTransactions_BR_CR() Export
 	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	PaymentList.Period,
 		|	PaymentList.Company,
 		|	PaymentList.Branch,
@@ -83,7 +83,7 @@ Function R1021B_VendorsTransactions_BR_CR() Export
 		|	PaymentList.Project,
 		|	PaymentList.TransactionDocument AS Basis,
 		|	PaymentList.Key,
-		|	-PaymentList.Amount AS Amount,
+		|	PaymentList.Amount AS Amount,
 		|	UNDEFINED AS VendorsAdvancesClosing
 		|INTO R1021B_VendorsTransactions
 		|FROM

@@ -2861,6 +2861,68 @@ EndFunction
 
 #Region CALCULATIONS
 
+// Calculations options.
+// 
+// Returns:
+//  Structure - Calculations options:
+// * Key - String -
+// * StepName - String -
+// * DontExecuteIfExecutedBefore - Boolean - 
+// * DisableNextSteps - Boolean - 
+// * AmountOptions - Structure - :
+// ** DontCalculateRow - Boolean - 
+// ** NetAmount - Number - 
+// ** OffersAmount - Number - 
+// ** OffersBonus - Number - 
+// ** TaxAmount - Number - 
+// ** TotalAmount - Number - 
+// * PriceOptions - Structure - :
+// ** PriceType - CatalogRef.PriceTypes -
+// ** Price - Number -
+// ** Quantity - Number -
+// ** QuantityInBaseUnit - Number -
+// * TaxOptions - Structure - :
+// ** PriceIncludeTax - Boolean -
+// ** VatRate - CatalogRef.TaxRates -
+// ** UseManualAmount - Boolean -
+// * QuantityOptions - Structure - :
+// ** ItemKey - CatalogRef.ItemKeys - 
+// ** Unit - CatalogRef.Units -
+// ** Quantity - Number - 
+// ** QuantityInBaseUnit - Number - 
+// ** QuantityIsFixed - Boolean - 
+// * OffersOptions - Structure - :
+// ** SpecialOffers - Array - 
+// ** SpecialOffersCache - Array - 
+// * CalculateTotalAmount - Structure - :
+// ** Enable - Boolean - 
+// * CalculateTotalAmountByNetAmount - Structure - :
+// ** Enable - Boolean - 
+// * CalculateNetAmount - Structure - :
+// ** Enable - Boolean - 
+// * CalculateNetAmountByTotalAmount - Structure - :
+// ** Enable - Boolean - 
+// * CalculateNetAmountAsTotalAmountMinusTaxAmount - Structure - :
+// ** Enable - Boolean - 
+// * CalculateTaxAmount - Structure - :
+// ** Enable - Boolean - 
+// * CalculateTaxAmountByNetAmount - Structure - :
+// ** Enable - Boolean - 
+// * CalculateTaxAmountByTotalAmount - Structure - :
+// ** Enable - Boolean - 
+// * CalculateTaxAmountReverse - Structure - :
+// ** Enable - Boolean - 
+// * CalculatePriceByTotalAmount - Structure - :
+// ** Enable - Boolean - 
+// * CalculateQuantityInBaseUnit - Structure - :
+// ** Enable - Boolean - 
+// * CalculateQuantity - Structure - :
+// ** Enable - Boolean - 
+// * CalculateSpecialOffers - Structure - :
+// ** Enable - Boolean - 
+// * RecalculateSpecialOffers - Structure - :
+// ** Enable - Boolean - 
+// * RowIDInfo - Array - 
 Function CalculationsOptions() Export
 	Options = GetChainLinkOptions("Ref, ItemKey, Unit");
 	
@@ -2908,6 +2970,7 @@ Function CalculationsOptions() Export
 	
 	// QuantityInBaseUnit
 	Options.Insert("CalculateQuantityInBaseUnit" , New Structure("Enable", False));
+	Options.Insert("CalculateQuantity" , New Structure("Enable", False));
 	
 	// SpecialOffers
 	Options.Insert("CalculateSpecialOffers"   , New Structure("Enable", False));
@@ -2918,6 +2981,23 @@ Function CalculationsOptions() Export
 	Return Options;
 EndFunction
 
+// Calculations execute.
+// 
+// Parameters:
+//  Options - See CalculationsOptions
+// 
+// Returns:
+//  Structure - Calculations execute:
+// * NetAmount - Number - 
+// * OffersAmount - Number - 
+// * OffersBonus - Number - 
+// * TaxAmount - Number - 
+// * TotalAmount - Number - 
+// * Price - Number - 
+// * Quantity - Number - 
+// * QuantityInBaseUnit - Number - 
+// * QuantityIsFixed - Boolean - 
+// * SpecialOffers - Array - 
 Function CalculationsExecute(Options) Export
 	IsCalculatedRow = Not Options.AmountOptions.DontCalculateRow;
 
@@ -2928,9 +3008,33 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("TaxAmount"    , Options.AmountOptions.TaxAmount);
 	Result.Insert("TotalAmount"  , Options.AmountOptions.TotalAmount);
 	Result.Insert("Price"        , Options.PriceOptions.Price);
+	Result.Insert("Quantity"     , Options.QuantityOptions.Quantity);
 	Result.Insert("QuantityInBaseUnit" , Options.QuantityOptions.QuantityInBaseUnit);
 	Result.Insert("QuantityIsFixed"    , Options.QuantityOptions.QuantityIsFixed);
 	Result.Insert("SpecialOffers", New Array());
+	
+	// Calculate Quantity
+	If Options.QuantityOptions.QuantityIsFixed <> True Then
+		If Options.CalculateQuantityInBaseUnit.Enable Then
+			If Not ValueIsFilled(Options.QuantityOptions.ItemKey) Then
+				UnitFactor = 0;
+			Else
+				UnitFactor = GetItemInfo.GetUnitFactor(Options.QuantityOptions.ItemKey, Options.QuantityOptions.Unit);
+			EndIf;
+			Result.QuantityInBaseUnit = Options.QuantityOptions.Quantity * UnitFactor;
+			Options.QuantityOptions.QuantityInBaseUnit = Result.QuantityInBaseUnit; 
+			Options.PriceOptions.QuantityInBaseUnit = Result.QuantityInBaseUnit; 
+		ElsIf Options.CalculateQuantity.Enable Then
+			If Not ValueIsFilled(Options.QuantityOptions.ItemKey) Then
+				UnitFactor = 1;
+			Else
+				UnitFactor = GetItemInfo.GetUnitFactor(Options.QuantityOptions.ItemKey, Options.QuantityOptions.Unit);
+			EndIf;
+			Result.Quantity = Options.QuantityOptions.QuantityInBaseUnit / UnitFactor;
+			Options.QuantityOptions.Quantity = Result.Quantity;
+			Options.PriceOptions.Quantity = Result.Quantity;
+		EndIf;
+	EndIf;
 	
 	For Each OfferRow In Options.OffersOptions.SpecialOffers Do
 		NewOfferRow = OffersServer.GetOffersTableRow();
@@ -3003,16 +3107,6 @@ Function CalculationsExecute(Options) Export
 		EndDo;
 		Result.OffersAmount = TotalOffers;
 		Result.OffersBonus = TotalBonus;
-	EndIf;
-	
-	// CalculateQuantityInBaseUnit
-	If Options.CalculateQuantityInBaseUnit.Enable And (Options.QuantityOptions.QuantityIsFixed <> True) Then
-		If Not ValueIsFilled(Options.QuantityOptions.ItemKey) Then
-			UnitFactor = 0;
-		Else
-			UnitFactor = GetItemInfo.GetUnitFactor(Options.QuantityOptions.ItemKey, Options.QuantityOptions.Unit);
-		EndIf;
-		Result.QuantityInBaseUnit = Options.QuantityOptions.Quantity * UnitFactor;
 	EndIf;
 	
 	If Options.TaxOptions.PriceIncludeTax <> Undefined Then

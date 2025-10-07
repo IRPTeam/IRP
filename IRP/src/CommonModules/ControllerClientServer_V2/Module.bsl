@@ -1795,6 +1795,7 @@ Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("Tax"                      , BindPaymentListTax(Parameters));
 	ResourceToBinding.Insert("TaxDiscountAmount"        , BindPaymentListTaxDiscountAmount(Parameters));
 	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
+	ResourceToBinding.Insert("PaymentDate"              , BindPaymentListPaymentDate(Parameters));
 		
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
@@ -1830,6 +1831,7 @@ Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
 	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
 	ResourceToBinding.Insert("CalculationType"          , BindPaymentListCalculationType(Parameters));
+	ResourceToBinding.Insert("PaymentDate"              , BindPaymentListPaymentDate(Parameters));
 		
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
@@ -1856,6 +1858,7 @@ Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("TaxDiscountAmount"        , BindPaymentListTaxDiscountAmount(Parameters));
 	ResourceToBinding.Insert("ProfitLossCenter"         , BindPaymentListProfitLossCenter(Parameters));
 	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
+	ResourceToBinding.Insert("PaymentDate"              , BindPaymentListPaymentDate(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1879,6 +1882,7 @@ Procedure MultiSetTransactionType_CashReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
 	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
 	ResourceToBinding.Insert("CalculationType"          , BindPaymentListCalculationType(Parameters));
+	ResourceToBinding.Insert("PaymentDate"              , BindPaymentListPaymentDate(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1949,6 +1953,7 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.Tax                      = GetPaymentListTax(Parameters, Row.Key);
 		Options.TaxDiscountAmount        = GetPaymentListTaxDiscountAmount(Parameters, Row.Key);
 		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
+		Options.PaymentDate              = GetPaymentListPaymentDate(Parameters, Row.Key);
 		
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankPayment";
@@ -1994,6 +1999,7 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
 		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
 		Options.CalculationType          = GetPaymentListCalculationType(Parameters, Row.Key);
+		Options.PaymentDate              = GetPaymentListPaymentDate(Parameters, Row.Key);
 				
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankReceipt";
@@ -2030,6 +2036,8 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.TaxDiscountAmount        = GetPaymentListTaxDiscountAmount(Parameters, Row.Key);
 		Options.ProfitLossCenter         = GetPaymentListProfitLossCenter(Parameters, Row.Key);
 		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
+		Options.PaymentDate              = GetPaymentListPaymentDate(Parameters, Row.Key);
+		
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashPayment";
 		Chain.ClearByTransactionTypeCashPayment.Options.Add(Options);
@@ -2063,6 +2071,8 @@ Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
 		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
 		Options.CalculationType          = GetPaymentListCalculationType(Parameters, Row.Key);
+		Options.PaymentDate              = GetPaymentListPaymentDate(Parameters, Row.Key);
+		
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashReceipt";
 		Chain.ClearByTransactionTypeCashReceipt.Options.Add(Options);
@@ -7545,6 +7555,46 @@ EndFunction
 
 #EndRegion
 
+#Region PAYMENT_LIST_PAYMENT_DATE
+
+// PaymentList.PaymentDate.Set
+Procedure SetPaymentListPaymentDate(Parameters, Results) Export
+	Binding = BindPaymentListPaymentDate(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.PaymentDate.Get
+Function GetPaymentListPaymentDate(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListPaymentDate(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.PaymentDate.Bind
+Function BindPaymentListPaymentDate(Parameters)
+	DataPath = "PaymentList.PaymentDate";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListPaymentDate");
+EndFunction
+
+// PaymentList.PaymentDate.ChangePaymentDateByBasisDocument.Step
+Procedure StepPaymentListChangePaymentDateByBasisDocument(Parameters, Chain) Export
+	Chain.ChangePaymentDateByBasisDocument.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePaymentDateByBasisDocument.Setter = "SetPaymentListPaymentDate";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangePaymentDateByBasisDocumentOptions();
+		Options.BasisDocument  = GetPaymentListBasisDocument(Parameters, Row.Key);
+		Options.PaymentDate    = GetPaymentListPaymentDate(Parameters, Row.Key);
+		Options.TypeOfDocument = TypeOf(Parameters.Object.Ref);
+		Options.Key = Row.Key;
+		Options.StepName = "StepPaymentListChangePaymentDateByBasisDocument";
+		Chain.ChangePaymentDateByBasisDocument.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #Region PAYMENT_LIST_PROFIT_LOSS_CENTER
 
 // PaymentList.ProfitLossCenter.Set
@@ -8090,6 +8140,7 @@ EndFunction
 
 // PaymentList.BasisDocument.OnChange
 Procedure PaymentListBasisDocumentOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListBasisDocumentNotify", Parameters);
 	Binding = BindPaymentListBasisDocument(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -8097,7 +8148,7 @@ EndProcedure
 // PaymentList.BasisDocument.Set
 Procedure SetPaymentListBasisDocument(Parameters, Results) Export
 	Binding = BindPaymentListBasisDocument(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListBasisDocumentNotify");
 EndProcedure
 
 // PaymentList.BasisDocument.Get
@@ -8116,6 +8167,11 @@ Function BindPaymentListBasisDocument(Parameters)
 	DataPath.Insert("IncomingPaymentOrder", "PaymentList.Basis");
 	DataPath.Insert("OutgoingPaymentOrder", "PaymentList.Basis");
 	Binding = New Structure();
+	Binding.Insert("BankPayment" , "StepPaymentListChangePaymentDateByBasisDocument");
+	Binding.Insert("BankReceipt" , "StepPaymentListChangePaymentDateByBasisDocument");
+	Binding.Insert("CashPayment" , "StepPaymentListChangePaymentDateByBasisDocument");
+	Binding.Insert("CashReceipt" , "StepPaymentListChangePaymentDateByBasisDocument");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListBasisDocument");
 EndFunction
 
@@ -17485,6 +17541,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetPaymentListCommissionPercentNotify"        Then ViewClient_V2.OnSetPaymentListCommissionPercentNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListIsPreliminary" Then ViewClient_V2.OnSetItemListIsPreliminary(Parameters);
 	ElsIf ViewNotify = "OnSetTaxPartnerNotify" Then ViewClient_V2.OnSetTaxPartnerNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListBasisDocumentNotify" Then ViewClient_V2.OnSetPaymentListBasisDocumentNotify(Parameters);
 	
 	Else
 		Raise StrTemplate(R().Error_NotHandledViewNotify, ViewNotify);

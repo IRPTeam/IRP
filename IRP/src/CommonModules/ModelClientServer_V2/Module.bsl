@@ -451,6 +451,7 @@ Function GetChain()
 	Chain.Insert("ChangeNewAmountBalanceByAmount", GetChainLink("ChangeNewAmountBalanceByAmountExecute"));
 	
 	Chain.Insert("ChangePreliminaryDataByBasis"  , GetChainLink("ChangePreliminaryDataByBasisExecute"));
+	Chain.Insert("ChangePaymentDateByBasisDocument"  , GetChainLink("ChangePaymentDateByBasisDocumentExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -3631,6 +3632,7 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 		|AdditionalAnalytic,
 		|Tax,
 		|TaxDiscountAmount,
+		|PaymentDate,
 		|RevenueType");
 EndFunction
 
@@ -3660,6 +3662,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result.Insert("Tax"                      , Options.Tax);
 	Result.Insert("TaxDiscountAmount"        , Options.TaxDiscountAmount);
 	Result.Insert("RevenueType"              , Options.RevenueType);
+	Result.Insert("PaymentDate"              , Options.PaymentDate);
 		
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3712,6 +3715,10 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 		If Options.TransactionType = Outgoing_PaymentToVendor 
 			Or Options.TransactionType = Outgoing_ReturnToCustomer Then
 			StrByType = StrByType + ", Project";	
+		EndIf;
+		
+		If Options.TransactionType = Outgoing_ReturnToCustomer Then
+			StrByType = StrByType + ", PaymentDate";	
 		EndIf;
 		
 	ElsIf Options.TransactionType = Outgoing_OtherPartner Then
@@ -3797,6 +3804,7 @@ Function ClearByTransactionTypeBankReceiptOptions() Export
 		|CommissionFinancialMovementType,
 		|Employee,
 		|PaymentPeriod,
+		|PaymentDate,	
 		|CalculationType");		
 EndFunction
 
@@ -3830,6 +3838,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Result.Insert("Employee"                 , Options.Employee);
 	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
 	Result.Insert("CalculationType"          , Options.Calculationtype);
+	Result.Insert("PaymentDate"              , Options.PaymentDate);
 		
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
@@ -3897,6 +3906,10 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 			Or Options.TransactionType = Incoming_ReturnFromVendor Then
 			
 			StrByType = StrByType + ", Project";
+		EndIf;
+		
+		If Options.TransactionType = Incoming_ReturnFromVendor Then
+			StrByType = StrByType + ", PaymentDate";
 		EndIf;
 		
 		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
@@ -3986,6 +3999,7 @@ Function ClearByTransactionTypeCashPaymentOptions() Export
 		|Tax,
 		|TaxDiscountAmount,
 		|ProfitLossCenter,
+		|PaymentDate,	
 		|RevenueType");		
 EndFunction
 
@@ -4010,6 +4024,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Result.Insert("TaxDiscountAmount"        , Options.TaxDiscountAmount);
 	Result.Insert("RevenueType"              , Options.RevenueType);
 	Result.Insert("ProfitLossCenter"         , Options.ProfitLossCenter);
+	Result.Insert("PaymentDate"              , Options.PaymentDate);
 
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -4043,6 +4058,10 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 		|LegalName,
 		|LegalNameContract,
 		|Project";
+		
+		If Options.TransactionType = Outgoing_ReturnToCustomer Then
+			StrByType = StrByType + ", PaymentDate";
+		EndIf;
 		
 		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
 		If (PartnerType = "Vendor" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType))
@@ -4108,6 +4127,7 @@ Function ClearByTransactionTypeCashReceiptOptions() Export
 		|Project,
 		|Employee,
 		|PaymentPeriod,
+		|PaymentDate,
 		|CalculationType");		
 EndFunction
 
@@ -4130,6 +4150,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Result.Insert("Employee"                 , Options.Employee);
 	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
 	Result.Insert("CalculationType"          , Options.CalculationType);
+	Result.Insert("PaymentDate"              , Options.PaymentDate);
 	
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
@@ -4168,6 +4189,10 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 			Or (PartnerType = "Customer" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType)) Then	 
 			StrByType = StrByType + ", 
 			|Partner";
+		EndIf;
+		
+		If Options.TransactionType = Incoming_ReturnFromVendor Then
+			StrByType = StrByType + ", PaymentDate";
 		EndIf;
 	ElsIf Options.TransactionType = Incoming_OtherPartner Then
 		StrByType = "
@@ -4808,6 +4833,38 @@ EndFunction
 Function ChangeSalaryBySalaryTypeExecute(Options) Export
 	If Options.SalaryType = PredefinedValue("Enum.SalaryTypes.Personal") Then
 		Return Options.CurrentSalary;
+	EndIf;
+	
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PAYMENT_DATE_BY_BASIS_DOCUMENT
+
+Function ChangePaymentDateByBasisDocumentOptions() Export
+	Return GetChainLinkOptions("BasisDocument, PaymentDate, TypeOfDocument");
+EndFunction
+	
+Function ChangePaymentDateByBasisDocumentExecute(Options) Export
+	If Not ValueIsFilled(Options.BasisDocument) Then
+		Return Undefined;
+	EndIf;
+	
+	If Options.TypeOfDocument = Type("DocumentRef.BankReceipt")
+		Or Options.TypeOfDocument = Type("DocumentRef.CashReceipt") Then
+	
+		If TypeOf(Options.BasisDocument) = Type("DocumentRef.PurchaseInvoice") Then
+			Return Options.PaymentDate;
+		EndIf;
+			
+	ElsIf Options.TypeOfDocument = Type("DocumentRef.BankPayment")
+		Or Options.TypeOfDocument = Type("DocumentRef.CashPayment") Then
+	
+		If TypeOf(Options.BasisDocument) = Type("DocumentRef.SalesInvoice") Then
+			Return Options.PaymentDate;
+		EndIf;
+				
 	EndIf;
 	
 	Return Undefined;

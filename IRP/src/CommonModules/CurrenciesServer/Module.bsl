@@ -151,6 +151,9 @@ Function IsUseAgreementMovementType(RegMetadata)
 	
 	Registers.Add(Reg.R3027B_EmployeeCashAdvance);
 	
+	Registers.Add(Reg.R5011B_CustomersAging);
+	Registers.Add(Reg.R5012B_VendorsAging);
+	
 	If Registers.Find(RegMetadata) = Undefined Then
 		Return False;
 	Else

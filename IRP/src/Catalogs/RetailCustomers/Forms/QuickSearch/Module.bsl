@@ -96,13 +96,13 @@ EndProcedure
 &AtClient
 Procedure Select(Command)
 	
-	If Not ValueIsFilled(RetailCustomer.Ref) Then
-		Return;
-	EndIf;
-	
 	If Modified Then
 		Write();
 	EndIf;		
+	
+	If Not ValueIsFilled(RetailCustomer.Ref) Then
+		Return;
+	EndIf;
 	
 	If ThisObject.IsOpen() Then
 		Close(RetailCustomer.Ref);

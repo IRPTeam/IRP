@@ -111,6 +111,7 @@ Function R5012B_VendorsAging_DebitNote() Export
 		|	OffsetOfAging.Agreement,
 		|	OffsetOfAging.Currency,
 		|	OffsetOfAging.Invoice,
+		|	OffsetOfAging.Key,
 		|	OffsetOfAging.PaymentDate,
 		|	OffsetOfAging.Amount,
 		|	OffsetOfAging.Recorder AS AgingClosing
@@ -133,6 +134,7 @@ Function R5012B_VendorsAging_CreditNote() Export
 		|	Transactions.Currency,
 		|	Transactions.Partner,
 		|	Transactions.Agreement,
+		|	Transactions.Key,
 		|	PaymentTerms.DocRef AS Invoice,
 		|	Transactions.Amount AS Amount,
 		|	UNDEFINED AS AgingClosing
@@ -161,6 +163,7 @@ Function R5012B_VendorsAging_CreditNote() Export
 		|	OffsetOfAging.Currency,
 		|	OffsetOfAging.Partner,
 		|	OffsetOfAging.Agreement,
+		|	OffsetOfAging.Key,
 		|	OffsetOfAging.Invoice,
 		|	OffsetOfAging.Amount,
 		|	OffsetOfAging.Recorder

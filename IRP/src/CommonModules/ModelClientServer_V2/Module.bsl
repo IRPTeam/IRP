@@ -3022,7 +3022,6 @@ Function CalculationsExecute(Options) Export
 				UnitFactor = GetItemInfo.GetUnitFactor(Options.QuantityOptions.ItemKey, Options.QuantityOptions.Unit);
 			EndIf;
 			Result.QuantityInBaseUnit = Options.QuantityOptions.Quantity * UnitFactor;
-			Options.QuantityOptions.QuantityInBaseUnit = Result.QuantityInBaseUnit; 
 			Options.PriceOptions.QuantityInBaseUnit = Result.QuantityInBaseUnit; 
 		ElsIf Options.CalculateQuantity.Enable Then
 			If Not ValueIsFilled(Options.QuantityOptions.ItemKey) Then
@@ -3031,7 +3030,6 @@ Function CalculationsExecute(Options) Export
 				UnitFactor = GetItemInfo.GetUnitFactor(Options.QuantityOptions.ItemKey, Options.QuantityOptions.Unit);
 			EndIf;
 			Result.Quantity = Options.QuantityOptions.QuantityInBaseUnit / UnitFactor;
-			Options.QuantityOptions.Quantity = Result.Quantity;
 			Options.PriceOptions.Quantity = Result.Quantity;
 		EndIf;
 	EndIf;

@@ -12873,7 +12873,7 @@ EndFunction
 // ItemList.Quantity.Bind
 Function BindItemListQuantity(Parameters)
 	DataBinding = GetBindingStructure_ItemListQuantity(Parameters);		
-	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", 
+	Return BindSteps("BindVoid", 
 		DataBinding.DataPath, 
 		DataBinding.Binding, 
 		Parameters, 
@@ -13876,6 +13876,8 @@ Procedure SetItemListCalculations(Parameters, Results) Export
 	ViewNotify = "OnSetCalculationsNotify";
 	NotifyAnyway = True;
 	Binding = BindItemListCalculations(Parameters);
+	SetterObject(Undefined, "ItemList.Quantity"    , Parameters, Results, ViewNotify, "Quantity"     , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.QuantityInBaseUnit", Parameters, Results, ViewNotify, "QuantityInBaseUnit", NotifyAnyway);
 	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.OffersAmount", Parameters, Results, ViewNotify, "OffersAmount" , NotifyAnyway);
@@ -14195,6 +14197,12 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		Options.Unit    = GetItemListUnit(Parameters, Row.Key);
 		
+		Options.QuantityOptions.ItemKey            = GetItemListItemKey(Parameters, Row.Key);
+		Options.QuantityOptions.Unit               = GetItemListUnit(Parameters, Row.Key);
+		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
+		
 		// need recalculate NetAmount, TotalAmount, TaxAmount, OffersAmount
 		If     WhoIsChanged = "IsPriceChanged"            
 			Or WhoIsChanged = "IsPriceIncludeTaxChanged"
@@ -14230,17 +14238,11 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateTaxAmount.Enable   = True;
 		ElsIf WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
 			Options.CalculateQuantity.Enable = True;			
-			Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
-			Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
-			Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
 		ElsIf WhoIsChanged = "IsQuantityChanged" Then
 			Options.CalculateNetAmount.Enable = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable = True;
 			Options.CalculateQuantityInBaseUnit.Enable = True;			
-			Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
-			Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
-			Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
 		Else
 			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
@@ -14291,6 +14293,12 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
 		
+		Options.QuantityOptions.ItemKey            = GetItemListItemKey(Parameters, Row.Key);
+		Options.QuantityOptions.Unit               = GetItemListUnit(Parameters, Row.Key);
+		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
+		
 		// need recalculate NetAmount, TotalAmount, TaxAmount
 		If     WhoIsChanged = "IsPriceChanged"            
 		    Or WhoIsChanged = "IsPriceIncludeTaxChanged"
@@ -14321,17 +14329,11 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 			Options.CalculateTaxAmount.Enable   = True;
 		ElsIf WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
 			Options.CalculateQuantity.Enable = True;			
-			Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
-			Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
-			Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
 		ElsIf WhoIsChanged = "IsQuantityChanged" Then
 			Options.CalculateNetAmount.Enable = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable = True;
 			Options.CalculateQuantityInBaseUnit.Enable = True;			
-			Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
-			Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
-			Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
 		Else
 			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
@@ -14374,6 +14376,12 @@ Procedure StepItemListCalculations_StockDocuments(Parameters, Chain, WhoIsChange
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
 		
+		Options.QuantityOptions.ItemKey            = GetItemListItemKey(Parameters, Row.Key);
+		Options.QuantityOptions.Unit               = GetItemListUnit(Parameters, Row.Key);
+		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
+		
 		// need recalculate NetAmount, TotalAmount, TaxAmount
 		If 	   WhoIsChanged = "IsPriceChanged"
 			Or WhoIsChanged = "IsVatRateChanged"   
@@ -14394,17 +14402,11 @@ Procedure StepItemListCalculations_StockDocuments(Parameters, Chain, WhoIsChange
 			Options.CalculateTaxAmount.Enable   = True;
 		ElsIf WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
 			Options.CalculateQuantity.Enable = True;			
-			Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
-			Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
-			Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
 		ElsIf WhoIsChanged = "IsQuantityChanged" Then
 			Options.CalculateNetAmount.Enable = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable = True;
 			Options.CalculateQuantityInBaseUnit.Enable = True;			
-			Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
-			Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
-			Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
 		Else
 			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;

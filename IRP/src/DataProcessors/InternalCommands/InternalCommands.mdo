@@ -42,7 +42,7 @@
     <name>GroupEditingProperties</name>
     <synonym>
       <key>en</key>
-      <value>Group editing of properties</value>
+      <value>Edit properties</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

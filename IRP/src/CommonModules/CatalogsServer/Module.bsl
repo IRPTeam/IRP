@@ -72,6 +72,9 @@ Procedure OnCreateAtServerListForm(Form, MainAttribute, Cancel, StandardProcessi
 	ExternalCommandsServer.CreateCommands(Form, CatalogFullName, Enums.FormTypes.ListForm);
 	InternalCommandsServer.CreateCommands(Form, MainAttribute, CatalogFullName, Enums.FormTypes.ListForm);
 	
+	If Form.Items.Find("Code") <> Undefined Then
+		Form.Items.Code.Width = 5;
+	EndIf;
 EndProcedure
 
 // On create at server choice form.
@@ -89,6 +92,9 @@ Procedure OnCreateAtServerChoiceForm(Form, MainAttribute, Cancel, StandardProces
 	ExternalCommandsServer.CreateCommands(Form, CatalogFullName, Enums.FormTypes.ChoiceForm);
 	InternalCommandsServer.CreateCommands(Form, MainAttribute, CatalogFullName, Enums.FormTypes.ChoiceForm);
 	
+	If Form.Items.Find("Code") <> Undefined Then
+		Form.Items.Code.Width = 5;
+	EndIf;	
 EndProcedure
 
 #EndRegion

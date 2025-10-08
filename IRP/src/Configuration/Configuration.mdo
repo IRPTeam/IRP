@@ -1079,6 +1079,8 @@
   <commonCommands>CommonCommand.OpenRetailSalesOrders</commonCommands>
   <commonCommands>CommonCommand.OpenVendorAgreements</commonCommands>
   <commonCommands>CommonCommand.UpdateAllUserRoles</commonCommands>
+  <commonCommands>CommonCommand.OpenPointOfSale</commonCommands>
+  <commonCommands>CommonCommand.OpenLegalNames</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <commandGroups>CommandGroup.Fiscalization</commandGroups>

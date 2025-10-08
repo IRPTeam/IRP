@@ -20,7 +20,6 @@
   <content>Report.D4010_ActualStocks</content>
   <content>Report.D4011_FreeStocks</content>
   <content>Report.D4012_StockReservation</content>
-  <content>Report.R3024B_SalesOrdersToBePaid</content>
   <content>Report.R7010_DetailingSupplies</content>
   <content>Report.R7030_ProductionPlanning</content>
   <parentSubsystem>Subsystem.Reports</parentSubsystem>

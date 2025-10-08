@@ -84,25 +84,25 @@ Scenario: _604702 check filling additional attribute and filters in the ObjectPr
 		And I click the button named "Refresh"
 		And "PropertiesTable" table contains lines
 			| 'Marked' | 'Is modified' | 'Object'                 | 'Brand' | 'Producer' | 'Article' | 'Country of consignment' |
-			| 'Yes'    | 'No'          | 'Dress'                  | 'Rose'  | 'UNIQ'     | ''        | 'Poland'                 |
-			| 'Yes'    | 'No'          | 'Scarf + Dress'          | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Skittles + Chewing gum' | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Trousers'               | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Shirt'                  | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Boots'                  | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'High shoes'             | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Box'                    | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Bound Dress+Shirt'      | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Bound Dress+Trousers'   | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Service'                | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Router'                 | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Bag'                    | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Scarf'                  | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Chewing gum'            | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Skittles'               | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Socks'                  | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Jacket J22001'          | ''      | ''         | ''        | ''                       |
-			| 'Yes'    | 'No'          | 'Fee'                    | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Dress'                  | 'Rose'  | 'UNIQ'     | ''        | 'Poland'                 |
+			| 'No'     | 'No'          | 'Scarf + Dress'          | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Skittles + Chewing gum' | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Trousers'               | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Shirt'                  | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Boots'                  | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'High shoes'             | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Box'                    | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Bound Dress+Shirt'      | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Bound Dress+Trousers'   | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Service'                | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Router'                 | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Bag'                    | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Scarf'                  | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Chewing gum'            | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Skittles'               | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Socks'                  | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Jacket J22001'          | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Fee'                    | ''      | ''         | ''        | ''                       |
 	* Add filter
 		And I click Select button of "Filter" field
 		And I expand current line in "FilterAvailableFields" table
@@ -148,9 +148,9 @@ Scenario: _604703 check filling additional attribute and filters in the ObjectPr
 		And I click the button named "Refresh"
 		And "PropertiesTable" table became equal
 			| 'Marked' | 'Is modified' | 'Object'                                                 | 'Brand' | 'Producer' |
-			| 'Yes'    | 'No'          | 'Inventory transfer order 21 dated 16.02.2021 16:14:02'  | ''      | ''         |
-			| 'Yes'    | 'No'          | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | ''      | ''         |
-			| 'Yes'    | 'No'          | 'Inventory transfer order 202 dated 01.03.2021 10:04:57' | ''      | ''         |
+			| 'No'     | 'No'          | 'Inventory transfer order 21 dated 16.02.2021 16:14:02'  | ''      | ''         |
+			| 'No'     | 'No'          | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | ''      | ''         |
+			| 'No'     | 'No'          | 'Inventory transfer order 202 dated 01.03.2021 10:04:57' | ''      | ''         |
 	* Add filter
 		And I click Select button of "Filter" field
 		And I expand a line in "FilterAvailableFields" table
@@ -168,8 +168,8 @@ Scenario: _604703 check filling additional attribute and filters in the ObjectPr
 		And I click the button named "Refresh"
 		And "PropertiesTable" table became equal
 			| 'Marked' | 'Is modified' | 'Object'                                                 | 'Brand' | 'Producer' |
-			| 'Yes'    | 'No'          | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | ''      | ''         |
-			| 'Yes'    | 'No'          | 'Inventory transfer order 202 dated 01.03.2021 10:04:57' | ''      | ''         |
+			| 'No'     | 'No'          | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | ''      | ''         |
+			| 'No'     | 'No'          | 'Inventory transfer order 202 dated 01.03.2021 10:04:57' | ''      | ''         |
 		And I close all client application windows
 
 

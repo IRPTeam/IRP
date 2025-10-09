@@ -12873,7 +12873,7 @@ EndFunction
 // ItemList.Quantity.Bind
 Function BindItemListQuantity(Parameters)
 	DataBinding = GetBindingStructure_ItemListQuantity(Parameters);		
-	Return BindSteps("BindVoid", 
+	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", 
 		DataBinding.DataPath, 
 		DataBinding.Binding, 
 		Parameters, 

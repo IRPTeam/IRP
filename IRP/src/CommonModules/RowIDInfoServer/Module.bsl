@@ -10554,7 +10554,7 @@ Procedure ApplyFilterSet_GR_ForSR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Branch OR &Filter_BranchReturn
-	|					THEN RowRef.Branch = &Branch OR RowRef.Branch = &BranchReturn
+	|					THEN RowRef.Branch = &Branch OR RowRef.BranchReturn = &BranchReturn
 	|				ELSE FALSE
 	|			END
 	|			AND CASE

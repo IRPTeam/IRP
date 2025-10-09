@@ -4396,7 +4396,7 @@ Scenario: _015400711 check that additional attributes and properties are display
 			| 'Description'    |
 			| 'Test 1'         |
 		And I select current line in "List" table
-		Then "Test" form attribute became equal to "Test 1"
+		And the attribute named "__a154" presentation became equal to "Test 1"
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property'   | 'Value'    |

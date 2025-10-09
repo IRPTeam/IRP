@@ -3017,7 +3017,7 @@ Function CalculationsExecute(Options) Export
 	If Options.QuantityOptions.QuantityIsFixed <> True Then
 		If Options.CalculateQuantityInBaseUnit.Enable Then
 			If Not ValueIsFilled(Options.QuantityOptions.ItemKey) Then
-				UnitFactor = 0;
+				UnitFactor = 1;
 			Else
 				UnitFactor = GetItemInfo.GetUnitFactor(Options.QuantityOptions.ItemKey, Options.QuantityOptions.Unit);
 			EndIf;

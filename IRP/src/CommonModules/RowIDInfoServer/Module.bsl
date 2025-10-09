@@ -369,7 +369,6 @@ Procedure Posting_TM1010B_RowIDMovements_SOC(Source, Cancel, PostingMode)
 	Query.SetParameter("BalancePeriod", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
 	QueryResult = Query.Execute().Unload();
 	Source.RegisterRecords.TM1010B_RowIDMovements.Load(QueryResult);
-	Source.RegisterRecords.TM1010B_RowIDMovements.Write = True;
 EndProcedure
 
 Procedure Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode)
@@ -424,7 +423,6 @@ Procedure Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode)
 	Query.SetParameter("BalancePeriod", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
 	QueryResult = Query.Execute().Unload();
 	Source.RegisterRecords.TM1010B_RowIDMovements.Load(QueryResult);
-	Source.RegisterRecords.TM1010B_RowIDMovements.Write = True;
 EndProcedure
 
 Procedure Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode)
@@ -10549,7 +10547,7 @@ Procedure ApplyFilterSet_GR_ForSR(Query)
 	|		WHERE
 	|			CASE
 	|				WHEN &Filter_Company OR &Filter_CompanyReturn
-	|					THEN RowRef.Company = &Company OR RowRef.Company = &CompanyReturn
+	|					THEN RowRef.Company = &Company OR RowRef.CompanyReturn = &CompanyReturn
 	|				ELSE FALSE
 	|			END
 	|			AND CASE

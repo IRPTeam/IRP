@@ -13891,6 +13891,8 @@ Procedure SetItemListCalculations_Without_SpecialOffers(Parameters, Results) Exp
 	ViewNotify = "OnSetCalculationsNotify";
 	NotifyAnyway = True;
 	Binding = BindItemListCalculations(Parameters);
+	SetterObject(Undefined, "ItemList.Quantity"    , Parameters, Results, ViewNotify, "Quantity"     , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.QuantityInBaseUnit", Parameters, Results, ViewNotify, "QuantityInBaseUnit", NotifyAnyway);
 	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, ViewNotify, "Price"        , NotifyAnyway);
@@ -13903,6 +13905,8 @@ Procedure SetItemListCalculations_StockDocuments(Parameters, Results) Export
 	ViewNotify = "OnSetCalculationsNotify";
 	NotifyAnyway = True;
 	Binding = BindItemListCalculations(Parameters);
+	SetterObject(Undefined, "ItemList.Quantity"    , Parameters, Results, ViewNotify, "Quantity"   , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.QuantityInBaseUnit", Parameters, Results, ViewNotify, "QuantityInBaseUnit", NotifyAnyway);
 	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount"  , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"  , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, ViewNotify, "Price"      , NotifyAnyway);
@@ -14242,6 +14246,8 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateNetAmount.Enable = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable = True;
+			Options.CalculateSpecialOffers.Enable   = True;
+			Options.RecalculateSpecialOffers.Enable = True;
 			Options.CalculateQuantityInBaseUnit.Enable = True;			
 		Else
 			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);

@@ -171,6 +171,8 @@ WHERE NOT (FALSE) IN (
 					 	OR  AG.DoNotControl)
 					#If #CurrentAccessRightName = "Insert" OR #CurrentAccessRightName = "Update" #Then
 					AND (AG.Modify)
+					#Else
+					AND (AG.AccessKey.SeparateReading &lt;&gt; TRUE OR AG.Modify = FALSE)
 					#EndIf
 			ON ObjectAccessKeysFilterDataList.Ref = T9100A_ObjectAccessMap.ObjectAccessKeys
 		

@@ -24,6 +24,7 @@
   <content>Report.R401A_FreeStocks</content>
   <content>Report.M1010A_PriceList</content>
   <content>Report.R5020A_PartnersBalance</content>
+  <content>Report.R3024B_SalesOrdersToBePaid</content>
   <subsystems>Pricing</subsystems>
   <subsystems>WorkOrders</subsystems>
   <subsystems>Sales</subsystems>

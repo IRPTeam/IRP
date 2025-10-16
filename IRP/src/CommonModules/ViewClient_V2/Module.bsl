@@ -2925,7 +2925,63 @@ Procedure SetItemListQuantity(Object, Form, Row, Value) Export
 EndProcedure
 
 Procedure OnSetItemListQuantityNotify(Parameters) Export
-	Return;
+	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
+		SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Parameters.Object, Parameters.Form);
+	EndIf;
+	
+	// Update -> RowIDInfoQuantity
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentPlaningOrder" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailShipmentConfirmation" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReceiptCorrection"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder" Then
+		
+		RowIDInfoClientServer.UpdateQuantity(Parameters.Object);
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentConfirmations") Then
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentConfirmations");
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ShipmentPlaningOrders") Then
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(Parameters.Object, "ShipmentPlaningOrders");
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "GoodsReceipts") Then
+		DocumentsClientServer.UpdateQuantityByTradeDocuments(Parameters.Object, "GoodsReceipts");
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet" Then
+		VisibleRows = Parameters.Object.Materials.FindRows(New Structure("IsVisible", True));
+		If VisibleRows.Count() Then
+			Parameters.Form.Items.Materials.CurrentRow = VisibleRows[0].GetID();
+		EndIf;
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
+		If Not Parameters.isRowsAddByScan Then 
+			ControlCodeStringsClient.ClearAllByRow(Parameters.Object, Parameters.UpdatedRowsByScan);
+			ControlCodeStringsClient.UpdateState(Parameters.Object);
+		EndIf;
+	EndIf;
 EndProcedure
 
 #EndRegion

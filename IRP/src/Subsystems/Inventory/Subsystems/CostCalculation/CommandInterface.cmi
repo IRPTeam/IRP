@@ -7,6 +7,14 @@
         <common>true</common>
       </visible>
     </visibilityFragments>
+    <visibilityFragments>
+      <command>Document.BatchReallocateIncoming.StandardCommand.OpenList</command>
+      <visible/>
+    </visibilityFragments>
+    <visibilityFragments>
+      <command>Document.BatchReallocateOutgoing.StandardCommand.OpenList</command>
+      <visible/>
+    </visibilityFragments>
   </commandsVisibility>
   <commandsPlacement>
     <placementFragments>

@@ -16,7 +16,6 @@
   <content>Document.GoodsReceipt</content>
   <content>DataProcessor.MobileDesktop</content>
   <content>Document.InventoryTransfer</content>
-  <content>Catalog.Items</content>
   <content>Report.R4010A_StockBalance</content>
   <content>Report.R4011B_FreeStockMovements</content>
   <content>Report.R4012A_StockReservation</content>
@@ -26,6 +25,8 @@
   <content>Report.R405A_StockAdjustments</content>
   <content>Report.R6020A_InventoryCost</content>
   <content>Report.R9101S_InventoryResults</content>
+  <content>Report.R6060A_CostOfGoodsSold</content>
+  <content>Report.R6020_BatchBalance</content>
   <subsystems>Items</subsystems>
   <subsystems>Transfers</subsystems>
   <subsystems>CostCalculation</subsystems>

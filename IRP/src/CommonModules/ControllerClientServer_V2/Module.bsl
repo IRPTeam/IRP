@@ -12868,8 +12868,61 @@ Function BindDefaultItemListQuantity(Parameters)
 EndFunction
 
 Function GetBindingStructure_ItemListQuantity(Parameters)
-	Result = New Structure("Binding, DataPath, ExtensionPrefix", New Structure(), Undefined, "");
-	Result.DataPath = "ItemList.Quantity";
+	
+	Binding = New Structure();
+	Binding.Insert("SalesOrder",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("WorkOrder", 
+		"StepItemListCalculations_IsQuantityChanged,
+		|StepMaterialsRecalculateQuantityWithKeyOwner");
+	
+	Binding.Insert("WorkSheet", 
+		"StepMaterialsRecalculateQuantityWithKeyOwner");
+		
+	Binding.Insert("SalesInvoice",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("RetailSalesReceipt",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("RetailReceiptCorrection",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("PurchaseOrder",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("PurchaseInvoice",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("WithholdingTaxInvoice",
+		"StepItemListCalculations_IsQuantityChanged_Withholding_Tax");
+	
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepItemListCalculations_IsQuantityChanged_Without_SpecialOffers");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListCalculations_IsQuantityChanged_Without_SpecialOffers");
+	
+	Binding.Insert("RetailReturnReceipt",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("PurchaseReturnOrder",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("PurchaseReturn",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("SalesReturnOrder",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("SalesReturn",
+		"StepItemListCalculations_IsQuantityChanged");
+			
+	Binding.Insert("StockAdjustmentAsSurplus",
+		"StepItemListCalculations_IsQuantityChanged_StockDocuments");
+	
+	Result = New Structure("Binding, DataPath, ExtensionPrefix", Binding, "ItemList.Quantity", "");
 	Return Result;
 EndFunction
 
@@ -12896,6 +12949,29 @@ Procedure StepItemListDefaultQuantityInList(Parameters, Chain) Export
 	Options.CurrentQuantity = GetItemListQuantity(Parameters, NewRow.Key);
 	Options.Key = NewRow.Key;
 	Chain.DefaultQuantityInList.Options.Add(Options);
+EndProcedure
+
+// ItemList.Quantity.CalculateQuantity.Step
+Procedure StepItemListCalculateQuantity(Parameters, Chain) Export
+	StepName = "StepItemListCalculateQuantity";
+	Chain.Calculations.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.Calculations.Setter = "SetItemListQuantity";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options     = ModelClientServer_V2.CalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		Options.CalculateQuantity.Enable = True;
+		Options.QuantityOptions.ItemKey = GetItemListItemKey(Parameters, Row.Key);
+		Options.QuantityOptions.Unit    = GetItemListUnit(Parameters, Row.Key);
+		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = StepName;
+		Chain.Calculations.Options.Add(Options);
+	EndDo;	
 EndProcedure
 
 #EndRegion
@@ -13856,6 +13932,8 @@ Procedure SetItemListCalculations(Parameters, Results) Export
 	ViewNotify = "OnSetCalculationsNotify";
 	NotifyAnyway = True;
 	Binding = BindItemListCalculations(Parameters);
+	SetterObject(Undefined, "ItemList.Quantity"    , Parameters, Results, ViewNotify, "Quantity"     , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.QuantityInBaseUnit", Parameters, Results, ViewNotify, "QuantityInBaseUnit", NotifyAnyway);
 	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.OffersAmount", Parameters, Results, ViewNotify, "OffersAmount" , NotifyAnyway);
@@ -13869,6 +13947,8 @@ Procedure SetItemListCalculations_Without_SpecialOffers(Parameters, Results) Exp
 	ViewNotify = "OnSetCalculationsNotify";
 	NotifyAnyway = True;
 	Binding = BindItemListCalculations(Parameters);
+	SetterObject(Undefined, "ItemList.Quantity"    , Parameters, Results, ViewNotify, "Quantity"     , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.QuantityInBaseUnit", Parameters, Results, ViewNotify, "QuantityInBaseUnit", NotifyAnyway);
 	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, ViewNotify, "Price"        , NotifyAnyway);
@@ -13881,6 +13961,8 @@ Procedure SetItemListCalculations_StockDocuments(Parameters, Results) Export
 	ViewNotify = "OnSetCalculationsNotify";
 	NotifyAnyway = True;
 	Binding = BindItemListCalculations(Parameters);
+	SetterObject(Undefined, "ItemList.Quantity"    , Parameters, Results, ViewNotify, "Quantity"   , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.QuantityInBaseUnit", Parameters, Results, ViewNotify, "QuantityInBaseUnit", NotifyAnyway);
 	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount"  , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"  , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, ViewNotify, "Price"      , NotifyAnyway);
@@ -13913,6 +13995,11 @@ Function BindItemListCalculations(Parameters)
 EndFunction
 
 #Region ITEM_LIST_CALCULATIONS_WITHHOLDING_TAX
+
+// ItemList.Calculations.[IsQuantityChanged_Withholding_Tax].Step
+Procedure StepItemListCalculations_IsQuantityChanged_Withholding_Tax(Parameters, Chain) Export
+	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
 
 // ItemList.Calculations.[IsQuantityInBaseUnitChanged_Withholding_Tax].Step
 Procedure StepItemListCalculations_IsQuantityInBaseUnitChanged_Withholding_Tax(Parameters, Chain) Export
@@ -14016,6 +14103,11 @@ Procedure StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffe
 	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsDontCalculateRowChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsQuantityChanged_Without_SpecialOffers].Step
+Procedure StepItemListCalculations_IsQuantityChanged_Without_SpecialOffers(Parameters, Chain) Export
+	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
+
 // ItemList.Calculations.[IsQuantityInBaseUnitChanged_Without_SpecialOffers].Step
 Procedure StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOffers(Parameters, Chain) Export
 	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsQuantityInBaseUnitChanged");
@@ -14077,6 +14169,11 @@ Procedure StepItemListCalculations_IsDontCalculateRowChanged(Parameters, Chain) 
 	StepItemListCalculations(Parameters, Chain, "IsDontCalculateRowChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsQuantityChanged].Step
+Procedure StepItemListCalculations_IsQuantityChanged(Parameters, Chain) Export
+	StepItemListCalculations(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
+
 // ItemList.Calculations.[IsQuantityInBaseUnitChanged].Step
 Procedure StepItemListCalculations_IsQuantityInBaseUnitChanged(Parameters, Chain) Export
 	StepItemListCalculations(Parameters, Chain, "IsQuantityInBaseUnitChanged");
@@ -14114,6 +14211,11 @@ EndProcedure
 // ItemList.Calculations.[IsTotalAmountChanged_StockDocuments].Step
 Procedure StepItemListCalculations_IsTotalAmountChanged_StockDocuments(Parameters, Chain) Export
 	StepItemListCalculations_StockDocuments(Parameters, Chain, "IsTotalAmountChanged");
+EndProcedure
+
+// ItemList.Calculations.[IsQuantityChanged_StockDocuments].Step
+Procedure StepItemListCalculations_IsQuantityChanged_StockDocuments(Parameters, Chain) Export
+	StepItemListCalculations_StockDocuments(Parameters, Chain, "IsQuantityChanged");
 EndProcedure
 
 // ItemList.Calculations.[IsQuantityInBaseUnitChanged_StockDocuments].Step
@@ -14155,12 +14257,22 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		Options.Unit    = GetItemListUnit(Parameters, Row.Key);
 		
+		Options.QuantityOptions.ItemKey            = GetItemListItemKey(Parameters, Row.Key);
+		Options.QuantityOptions.Unit               = GetItemListUnit(Parameters, Row.Key);
+		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
+		
 		// need recalculate NetAmount, TotalAmount, TaxAmount, OffersAmount
-		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
-			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
-			Or WhoIsChanged = "IsVatRateChanged"          Or WhoIsChanged = "IsOffersChanged"
-			Or WhoIsChanged = "IsCopyRow"                 Or WhoIsChanged = "IsTaxAmountUserFormChanged"
-			Or WhoIsChanged = "RecalculationsOnCopy"      Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
+		If     WhoIsChanged = "IsPriceChanged"            
+			Or WhoIsChanged = "IsPriceIncludeTaxChanged"
+			Or WhoIsChanged = "IsDontCalculateRowChanged"  
+			Or WhoIsChanged = "IsVatRateChanged"          
+			Or WhoIsChanged = "IsOffersChanged"
+			Or WhoIsChanged = "IsCopyRow"                 
+			Or WhoIsChanged = "IsTaxAmountUserFormChanged"
+			Or WhoIsChanged = "RecalculationsOnCopy"      
+			Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
 			Options.CalculateNetAmount.Enable       = True;
 			Options.CalculateTotalAmount.Enable     = True;
 			Options.CalculateTaxAmount.Enable       = True;
@@ -14184,6 +14296,15 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
+		ElsIf WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
+			Options.CalculateQuantity.Enable = True;			
+		ElsIf WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateNetAmount.Enable = True;
+			Options.CalculateTotalAmount.Enable = True;
+			Options.CalculateTaxAmount.Enable = True;
+			Options.CalculateSpecialOffers.Enable   = True;
+			Options.RecalculateSpecialOffers.Enable = True;
+			Options.CalculateQuantityInBaseUnit.Enable = True;			
 		Else
 			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
@@ -14234,11 +14355,16 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
 		
+		Options.QuantityOptions.ItemKey            = GetItemListItemKey(Parameters, Row.Key);
+		Options.QuantityOptions.Unit               = GetItemListUnit(Parameters, Row.Key);
+		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
+		
 		// need recalculate NetAmount, TotalAmount, TaxAmount
 		If     WhoIsChanged = "IsPriceChanged"            
 		    Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" 
-			Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
 			Or WhoIsChanged = "IsVatRateChanged"
 		    Or WhoIsChanged = "IsTaxAmountUserFormChanged"
 			Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
@@ -14263,6 +14389,13 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
+		ElsIf WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
+			Options.CalculateQuantity.Enable = True;			
+		ElsIf WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateNetAmount.Enable = True;
+			Options.CalculateTotalAmount.Enable = True;
+			Options.CalculateTaxAmount.Enable = True;
+			Options.CalculateQuantityInBaseUnit.Enable = True;			
 		Else
 			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
@@ -14305,9 +14438,14 @@ Procedure StepItemListCalculations_StockDocuments(Parameters, Chain, WhoIsChange
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
 		
+		Options.QuantityOptions.ItemKey            = GetItemListItemKey(Parameters, Row.Key);
+		Options.QuantityOptions.Unit               = GetItemListUnit(Parameters, Row.Key);
+		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
+		
 		// need recalculate NetAmount, TotalAmount, TaxAmount
 		If 	   WhoIsChanged = "IsPriceChanged"
-			Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
 			Or WhoIsChanged = "IsVatRateChanged"   
 			Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
 			Options.CalculateNetAmount.Enable     = True;
@@ -14324,6 +14462,13 @@ Procedure StepItemListCalculations_StockDocuments(Parameters, Chain, WhoIsChange
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
+		ElsIf WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
+			Options.CalculateQuantity.Enable = True;			
+		ElsIf WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateNetAmount.Enable = True;
+			Options.CalculateTotalAmount.Enable = True;
+			Options.CalculateTaxAmount.Enable = True;
+			Options.CalculateQuantityInBaseUnit.Enable = True;			
 		Else
 			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;

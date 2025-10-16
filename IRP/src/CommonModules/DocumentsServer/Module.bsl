@@ -400,6 +400,10 @@ Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
 	DocumentFullName = FormNamesArray[0] + "." + FormNamesArray[1];
 	ExternalCommandsServer.CreateCommands(Form, DocumentFullName, Enums.FormTypes.ListForm);
 	InternalCommandsServer.CreateCommands(Form, Form.List, DocumentFullName, Enums.FormTypes.ListForm);
+	
+	If Form.Items.Find("Number") <> Undefined Then
+		Form.Items.Number.Width = 5;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -411,6 +415,10 @@ Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 	DocumentFullName = FormNamesArray[0] + "." + FormNamesArray[1];
 	ExternalCommandsServer.CreateCommands(Form, DocumentFullName, Enums.FormTypes.ChoiceForm);
 	InternalCommandsServer.CreateCommands(Form, Form.List, DocumentFullName, Enums.FormTypes.ChoiceForm);
+	
+	If Form.Items.Find("Number") <> Undefined Then
+		Form.Items.Number.Width = 5;
+	EndIf;
 EndProcedure
 
 #EndRegion

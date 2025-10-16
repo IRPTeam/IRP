@@ -21,7 +21,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			If Not IsBlankString(GetObjectTable(ThisObject)) Then
 				SetNewTable();
 				SetRefsToFilter(RefsList, ThisObject.DataSettingsComposer);
-				LoadTableData();
+				LoadTableData(True);
 			EndIf;
 		EndIf;
 	EndIf;
@@ -1774,7 +1774,7 @@ Procedure LoadNewColumns(Form)
 EndProcedure
 
 &AtServer
-Procedure LoadTableData()
+Procedure LoadTableData(Marked = False)
 	
 	Ref_String = "Ref";
 	Object_String = "Object";
@@ -1803,6 +1803,7 @@ Procedure LoadTableData()
 	ThisObject.PropertiesTable.Clear();
 	For Each RowData In DataTable Do
 		TableRecord = ThisObject.PropertiesTable.Add();
+		TableRecord.Marked = Marked;
 		DataRef = RowData[Ref_String]; // AnyRef
 		ConstraintRef = RowData[Constraint_String]; // AnyRef
 		TableRecord[Object_String] = DataRef;

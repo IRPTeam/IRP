@@ -2326,7 +2326,6 @@ Function GetFieldsForCheckRowRef(Source, RowRefObject, RecordersByRowRef)
 	RecordersTable = RecordersByRowRef.Copy(New Structure("RowRef", RowRefObject.Ref));
 	RecordersTable.GroupBy("Recorder");
 
-		
 	ExternalLinkedDocsTable = New ValueTable();
 	ExternalLinkedDocsTable.Columns.Add("Doc");
 	
@@ -14195,12 +14194,14 @@ Function GetBasisesInfo(Basis, BasisKey, RowID, ErrorInfo = Undefined) Export
 	Query.SetParameter("RowID"    , RowID);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	BasisInfo = New Structure("Key, Basis, RowRef, RowID, ParentBasis, BasisKey, Price, Currency, Unit");
+	BasisInfo = New Structure(
+		"Key, Basis, RowRef, RowID, ParentBasis, BasisKey, Price, Currency, Unit",
+		"", Undefined, Catalogs.RowIDs.EmptyRef(), RowID, Undefined, BasisKey, 0, 
+			Catalogs.Currencies.EmptyRef(), Catalogs.Units.EmptyRef());
 	If QuerySelection.Next() Then
 		FillPropertyValues(BasisInfo, QuerySelection); 
 	Else
 		Log.Write(R().Error_128, New Structure("Basis, BasisKey, RowID", String(Basis), BasisKey, RowID));
-		Raise R().Error_128;
 	EndIf;
 	Return BasisInfo;
 EndFunction

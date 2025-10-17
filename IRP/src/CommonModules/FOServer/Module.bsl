@@ -2,19 +2,39 @@
 
 // Get FO List.
 // 
+// Parameters:
+//  WithoutHiddenFO - Boolean - Without hidden FO
+// 
 // Returns:
 //  Array of String - Get FO List
-Function GetFOList() Export
+Function GetFOList(WithoutHiddenFO = False) Export
+
+	HiddenFOList = GetHiddenFOList();
 
 	FOList = New Array; // Array of String
 	
 	For Each FunctionalOption In Metadata.FunctionalOptions Do
+		If WithoutHiddenFO And HiddenFOList.Find(FunctionalOption.Name) <> Undefined Then
+			Continue;
+		EndIf;
 		NameParts = StrSplit(FunctionalOption.Name, "_");
 		If StrStartsWith(NameParts[NameParts.UBound()], "Use") Then
 			FOList.Add(FunctionalOption.Name);
 		EndIf;
 	EndDo;
 	
+	Return FOList;
+	
+EndFunction
+
+// Get hidden FOList.
+// 
+// Returns:
+//  Array - Get hidden FO list
+Function GetHiddenFOList() Export
+	
+	FOList = New Array; // Array of String
+	FOList.Add("UseSimpleBatch");
 	Return FOList;
 	
 EndFunction
@@ -32,7 +52,6 @@ Function GetFOSubordination() Export
 	Subordination.Insert("UseLegalName", UseLegalName);
 	
 	UseStores = New Array; // Array of String
-	UseStores.Add("UseSimpleBatch");
 	UseStores.Add("UseVariableStore");
 	Subordination.Insert("UseStores", UseStores);
 	
@@ -41,19 +60,20 @@ Function GetFOSubordination() Export
 	Subordination.Insert("UseItemKey", UseItemKey);
 	
 	UsePurchase = New Array; // Array of String
-	UsePurchase.Add("UseOrders");
+	UsePurchase.Add("UsePurchaseOrders");
 	UsePurchase.Add("UsePlannedReceiptReservation");
 	UsePurchase.Add("UseLandedCost");
-	UsePurchase.Add("UsePreliminary");
+	UsePurchase.Add("UsePreliminaryStock");
 	UsePurchase.Add("UseSourceOfOrigin");
 	Subordination.Insert("UsePurchase", UsePurchase);
 	
 	UseSales = New Array; // Array of String
-	UseSales.Add("UseOrders");
+	UseSales.Add("UseSalesOrders");
 	UseSales.Add("UseSpecialOffers");
 	UseSales.Add("UseDeliveryDate");
 	UseSales.Add("UsePartnerTerms");
 	UseSales.Add("UseWorkOrders");
+	UseSales.Add("UseManagersAndSalesPersons");
 	Subordination.Insert("UseSales", UseSales);
 	
 	UseRetail = New Array; // Array of String
@@ -63,15 +83,15 @@ Function GetFOSubordination() Export
 	
 	UseFinance = New Array; // Array of String
 	UseFinance.Add("UseBankDocuments");
-	UseFinance.Add("UseCashTransaction");
+	UseFinance.Add("UseCashTransactions");
 	UseFinance.Add("UseChequeBonds");
 	UseFinance.Add("UseAging");
-	UseFinance.Add("UseAccounting");
-	UseFinance.Add("UseAccountingService");
-	UseFinance.Add("UseELedger");
-	UseFinance.Add("UseFixedAssets");
-	UseFinance.Add("UseSalary");
 	Subordination.Insert("UseFinance", UseFinance);
+	
+	UseAccounting = New Array; // Array of String
+	UseAccounting.Add("UseAccountingService");
+	UseAccounting.Add("UseELedger");
+	Subordination.Insert("UseAccounting", UseAccounting);
 	
 	Return Subordination;
 	
@@ -89,7 +109,6 @@ Function GetFOGroups() Export
 	FOList.Add("UseAllFunctional");
 	FOList.Add("UseAdditionalSettings");
 	FOList.Add("UseAddAttributesAndProperties");
-	FOList.Add("UseContactInformation");
 	FOList.Add("UseNumberingRules");
 	FOList.Add("UseEquipments");
 	FOList.Add("UseObjectAccess");
@@ -100,21 +119,25 @@ Function GetFOGroups() Export
 	FOList.Add("UseMobile");
 	FOList.Add("UseBusinessProcess");
 	FOList.Add("UseLockDataModification");
+	FOList.Add("UseManufacturing");
 	FOList.Add("UseMessaging");
+	FOList.Add("UseFixedAssets");
+	FOList.Add("UseSalary");
 	FOGroups.Insert("BaseSettings", FOList);
 	
 	FOList = New Array; // Array of String
-	FOList.Add("UseUnitsAndDimensions");
 	FOList.Add("UseStores");
 	FOList.Add("UseCompanies");
 	FOList.Add("UseLegalName");
-	FOList.Add("UseProfitLossCenter");
-	FOList.Add("UseBusinessUnits");
 	FOList.Add("UsePartnersHierarchy");
 	FOList.Add("UsePartnerItems");
+	FOList.Add("UseContactInformation");
 	FOList.Add("UseItemKey");
 	FOList.Add("UseSerialLotNumbers");
+	FOList.Add("UseUnitsAndDimensions");
 	FOList.Add("UsePriceByProperties");
+	FOList.Add("UseProfitLossCenter");
+	FOList.Add("UseBusinessUnits");
 	FOList.Add("UseExpenseAndRevenueTypes");
 	FOGroups.Insert("MasterData", FOList);
 	
@@ -129,12 +152,16 @@ Function GetFOGroups() Export
 	FOList.Add("UseShipmentAndReceiptPlaningOrders");
 	FOList.Add("UseShipmentConfirmationAndGoodsReceipts");
 	FOList.Add("UseBundling");
-	FOList.Add("UseManufacturing");
 	FOGroups.Insert("Inventory", FOList);
 
 	FOList = New Array; // Array of String
+	FOList.Add("UsePaymentOrders");
 	FOList.Add("UseFinance");
 	FOGroups.Insert("Money", FOList);
+	
+	FOList = New Array; // Array of String
+	FOList.Add("UseAccounting");
+	FOGroups.Insert("Accounting", FOList);
 	
 	Return FOGroups;
 	
@@ -258,7 +285,7 @@ Function IsUseStores() Export
 EndFunction
 
 Function IsUseCashTransaction() Export
-	Return GetFunctionalOption("UseCashTransaction");
+	Return GetFunctionalOption("UseCashTransactions");
 EndFunction
 
 Function IsUseConsolidatedRetailSales() Export
@@ -334,7 +361,7 @@ Function IsUseSimpleBatch() Export
 EndFunction
 
 Function IsUsePreliminary() Export
-	Return GetFunctionalOption("UsePreliminary");
+	Return GetFunctionalOption("UsePreliminaryStock");
 EndFunction
 
 Function IsUseAddAttributesAndProperties() Export
@@ -426,7 +453,7 @@ Function IsUseObjectTransformation() Export
 EndFunction
 
 Function IsUseOrders() Export
-	Return GetFunctionalOption("UseOrders");
+	Return GetFunctionalOption("UsePurchaseOrders");
 EndFunction
 
 Function IsUsePartnerItems() Export

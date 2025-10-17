@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="53eeab3c-edfa-495e-a47e-7036180ffaa2">
-  <name>UsePreliminary</name>
+  <name>UsePreliminaryStock</name>
   <synonym>
     <key>en</key>
-    <value>Use preliminary</value>
+    <value>Use preliminary stock</value>
   </synonym>
-  <location>Constant.UsePreliminary</location>
+  <location>Constant.UsePreliminaryStock</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>InformationRegister.T6090S_CompositeBatchesAmountValues.Resource.PreliminaryQuantity</content>
   <content>InformationRegister.T6090S_CompositeBatchesAmountValues.Resource.PreliminaryAmount</content>

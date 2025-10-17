@@ -30,4 +30,5 @@
   <subsystems>SystemAttributes</subsystems>
   <subsystems>ObjectTransformation</subsystems>
   <subsystems>BusinessProcesses</subsystems>
+  <subsystems>Taxes</subsystems>
 </mdclass:Subsystem>

@@ -4344,6 +4344,7 @@
             <name>PaymentListAfterDeleteRow</name>
           </handlers>
           <searchStringAddition>
+            <enabled>false</enabled>
             <name>PaymentListSearchString</name>
             <id>29</id>
             <extendedTooltip>
@@ -4367,6 +4368,7 @@
             </extInfo>
           </searchStringAddition>
           <viewStatusAddition>
+            <enabled>false</enabled>
             <name>PaymentListViewStatus</name>
             <id>32</id>
             <extendedTooltip>
@@ -4392,6 +4394,7 @@
             </extInfo>
           </viewStatusAddition>
           <searchControlAddition>
+            <enabled>false</enabled>
             <name>PaymentListSearchControl</name>
             <id>35</id>
             <extendedTooltip>
@@ -6028,7 +6031,7 @@
     <edit>
       <common>true</common>
     </edit>
-    <functionalOptions>FunctionalOption.UseOrders</functionalOptions>
+    <functionalOptions>FunctionalOption.UsePurchaseOrders</functionalOptions>
   </attributes>
   <attributes>
     <name>PaymentListPlaningTransactionBasisNoSplits</name>
@@ -6046,7 +6049,7 @@
     <edit>
       <common>true</common>
     </edit>
-    <functionalOptions>FunctionalOption.UseCashTransaction</functionalOptions>
+    <functionalOptions>FunctionalOption.UseCashTransactions</functionalOptions>
   </attributes>
   <attributes>
     <name>PaymentListReceiptingAccountNoSplits</name>

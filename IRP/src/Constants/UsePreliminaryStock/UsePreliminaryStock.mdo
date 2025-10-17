@@ -5,10 +5,10 @@
     <valueManagerType typeId="e150e72d-656f-46ed-8815-459c62842f90" valueTypeId="bf1ff5f5-bea8-45ac-bb6c-c7c937e08f76"/>
     <valueKeyType typeId="06db6c68-1bbf-404c-84f8-6d5fccd60ec7" valueTypeId="ae57d52d-8333-49d0-9e6c-707df976a5f5"/>
   </producedTypes>
-  <name>UsePreliminary</name>
+  <name>UsePreliminaryStock</name>
   <synonym>
     <key>en</key>
-    <value>Use preliminary</value>
+    <value>Use preliminary stock</value>
   </synonym>
   <type>
     <types>Boolean</types>

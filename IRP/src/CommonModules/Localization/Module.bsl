@@ -1025,6 +1025,7 @@ Function Strings(Lang) Export
 	Strings.Insert("FO_Group_Trading", NStr("en = 'Trading'", Lang));
 	Strings.Insert("FO_Group_Inventory", NStr("en = 'Inventory'", Lang));
 	Strings.Insert("FO_Group_Money", NStr("en = 'Money'", Lang));
+	Strings.Insert("FO_Group_Accounting", NStr("en = 'Accounting'", Lang));
 	Strings.Insert("FO_Group_Other", NStr("en = 'Other'", Lang));
 #EndRegion
 

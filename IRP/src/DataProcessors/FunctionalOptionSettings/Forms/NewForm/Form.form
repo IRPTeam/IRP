@@ -19,6 +19,7 @@
         <key>en</key>
         <value>Other</value>
       </title>
+      <horizontalStretch>true</horizontalStretch>
       <extendedTooltip>
         <name>FO_Group_OtherExtendedTooltip</name>
         <id>8</id>
@@ -32,13 +33,13 @@
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>Vertical</group>
-        <behavior>Collapsible</behavior>
+        <behavior>Auto</behavior>
         <collapsedRepresentationTitle>
           <key>en</key>
           <value>Other</value>
         </collapsedRepresentationTitle>
         <controlRepresentation>Picture</controlRepresentation>
-        <representation>WeakSeparation</representation>
+        <representation>StrongSeparation</representation>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <showTitle>true</showTitle>

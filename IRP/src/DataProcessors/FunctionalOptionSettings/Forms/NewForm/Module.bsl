@@ -163,6 +163,8 @@ Procedure CreateItems()
 		AddValueToFormArray(CreateAttributeName(FO_Item), ThisObject, "AttributesWithoutGroup");
 	EndDo;
 	
+	CreateGroupsTable();
+	
 	BType = New TypeDescription("Boolean");
 	NewAttributes = New Array; // Array of FormAttribute
 	_AttributesTitles = GetFormStructure(ThisObject, "AttributesTitles");
@@ -189,7 +191,7 @@ EndProcedure
 //
 &AtServer
 Procedure FillGroupPresence()
-	SetValueListToFormArray(FOServer.GetFOList(), ThisObject, "FOWithoutGroup");
+	SetValueListToFormArray(FOServer.GetFOList(True), ThisObject, "FOWithoutGroup");
 EndProcedure
 
 // Mark group presence.
@@ -221,17 +223,48 @@ Function CreateFormGroup(GroupName)
 		Type("FormGroup"), Items.GroupForGroups, Items.FO_Group_Other); // FormGroupExtensionForAUsualGroup
 	NewFormGroup.Type = FormGroupType.UsualGroup;
 	NewFormGroup.Group = ChildFormItemsGroup.Vertical;
-	NewFormGroup.Behavior = UsualGroupBehavior.Collapsible;
+	NewFormGroup.Representation = UsualGroupRepresentation.StrongSeparation;
 	NewFormGroup.Title = GroupSynonym;
-	NewFormGroup.CollapsedRepresentationTitle = GroupSynonym;
-	NewFormGroup.ControlRepresentation = UsualGroupControlRepresentation.Picture;
-	
-	If GroupName <> "BaseSettings" And GroupName <> "MasterData" Then
-		NewFormGroup.Hide();
-	EndIf;
+	NewFormGroup.HorizontalStretch = True;
 	
 	Return NewFormGroup;
 EndFunction
+
+// Create groups table.
+&AtServer
+Procedure CreateGroupsTable()
+	MaxColumnCount = 3;
+	If Items.GroupForGroups.ChildItems.Count() <= MaxColumnCount Then
+		Return;
+	EndIf;
+	
+	NewGroups = New Map;
+	
+	PlusOne = Items.GroupForGroups.ChildItems.Count() % MaxColumnCount > 0;
+	NewRowCount = Int(Items.GroupForGroups.ChildItems.Count() / MaxColumnCount) + ?(PlusOne, 1, 0);
+	For RowNumber = 1 To NewRowCount Do
+		NewRowGroup = Items.Add("FO_Group_Row" + Format(RowNumber, "NG=;"), Type("FormGroup")); // FormGroupExtensionForAUsualGroup
+		NewRowGroup.Type = FormGroupType.UsualGroup;
+		NewRowGroup.Group = ChildFormItemsGroup.Horizontal;
+		NewRowGroup.Representation = UsualGroupRepresentation.None;
+		
+		GroupsForMoving = New Array; // Array of FormGroup
+		FirstIndex = (MaxColumnCount * (RowNumber - 1));
+		LastIndex = Min(MaxColumnCount * RowNumber, Items.GroupForGroups.ChildItems.Count()) - 1;
+		For ColumnNumber = FirstIndex To LastIndex Do
+			GroupsForMoving.Add(Items.GroupForGroups.ChildItems[ColumnNumber]);
+		EndDo;
+		NewGroups.Insert(NewRowGroup, GroupsForMoving);
+	EndDo;
+	
+	For Each GroupRowData In NewGroups Do
+		GroupsForMoving = GroupRowData.Value; // Array of FormGroup
+		For Each GroupItem In GroupsForMoving Do
+			GroupItem.HorizontalStretch = False;
+			Items.Move(GroupItem, GroupRowData.Key);
+		EndDo;
+	EndDo; 
+EndProcedure
 
 // Create check boxes.
 // 

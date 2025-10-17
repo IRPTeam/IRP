@@ -10,7 +10,7 @@
     <subsystems>Subsystem.Settings.Subsystem.Contacts</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.Equipment</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.OrdersSettings</subsystems>
-    <subsystems>Subsystem.MasterData.Subsystem.Taxes</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.Taxes</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.Saas</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.ContactInfo</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.ObjectAccess</subsystems>

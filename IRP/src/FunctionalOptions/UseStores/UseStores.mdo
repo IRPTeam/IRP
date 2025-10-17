@@ -74,4 +74,6 @@
   <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.Store</content>
   <content>InformationRegister.T6030S_BatchRelevance.Dimension.Store</content>
   <content>Subsystem.Inventory</content>
+  <content>Catalog.Stores</content>
+  <content>Report.D4010_ActualStocks</content>
 </mdclass:FunctionalOption>

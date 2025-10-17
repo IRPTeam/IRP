@@ -2,7 +2,11 @@
 <cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
   <commandsVisibility>
     <visibilityFragments>
-      <command>Report.A1010_PartnersBalance.StandardCommand.Open</command>
+      <command>CommonCommand.EditConstants</command>
+      <visible/>
+    </visibilityFragments>
+    <visibilityFragments>
+      <command>DataProcessor.SystemSettings.StandardCommand.Open</command>
       <visible/>
     </visibilityFragments>
   </commandsVisibility>

@@ -27,10 +27,7 @@
     </orderFragments>
     <orderFragments>
       <group>ActionsPanelReports</group>
-      <commands>Report.R4010A_StockBalance.StandardCommand.Open</commands>
       <commands>Report.R401A_FreeStocks.StandardCommand.Open</commands>
-      <commands>Report.R4011B_FreeStockMovements.StandardCommand.Open</commands>
-      <commands>Report.R4012A_StockReservation.StandardCommand.Open</commands>
       <commands>Report.R403A_GoodsInTransit.StandardCommand.Open</commands>
       <commands>Report.R4050A_InventoryBalance.StandardCommand.Open</commands>
       <commands>Report.R6020_BatchBalance.StandardCommand.Open</commands>

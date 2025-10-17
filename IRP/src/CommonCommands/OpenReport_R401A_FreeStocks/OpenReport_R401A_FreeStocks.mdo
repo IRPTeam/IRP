@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="db7b68e5-fc05-40df-af25-1d1ef1a01a1d">
+  <name>OpenReport_R401A_FreeStocks</name>
+  <synonym>
+    <key>en</key>
+    <value>R401A Free stocks</value>
+  </synonym>
+  <group>NavigationPanelOrdinary</group>
+  <representation>Auto</representation>
+</mdclass:CommonCommand>

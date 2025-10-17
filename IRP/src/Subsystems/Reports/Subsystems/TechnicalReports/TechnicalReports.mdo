@@ -7,20 +7,5 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Report.A1010_PartnersBalance</content>
-  <content>Report.A0010_TrialBalance</content>
-  <content>Report.A0011_TrialBalanceByAccount</content>
-  <content>Report.A0012_AccountCard</content>
-  <content>Report.A0013_AccountAnalysis</content>
-  <content>Report.D1001_Purchases</content>
-  <content>Report.R1001_Purchases</content>
-  <content>Report.D2001_Sales</content>
-  <content>Report.R2001_Sales</content>
-  <content>Report.D0010_ItemsInfo</content>
-  <content>Report.D4010_ActualStocks</content>
-  <content>Report.D4011_FreeStocks</content>
-  <content>Report.D4012_StockReservation</content>
-  <content>Report.R7010_DetailingSupplies</content>
-  <content>Report.R7030_ProductionPlanning</content>
   <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

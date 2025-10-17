@@ -1750,13 +1750,21 @@ Scenario: set True value to the constant Use simple batch
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
 		And I go to line in "FunctionalOptions" table
-			| 'Option'        |
-			| 'Use simple batch'    |
+			| 'Option'           |
+			| 'Use simple batch' |
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window	
 
-
+Scenario: set False value to the constant Use Use dashboard
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'        |
+			| 'Use dashboard' |
+		And I set "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window	
 
 Scenario: set True value to the constant Use shipment and receipt planing orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"

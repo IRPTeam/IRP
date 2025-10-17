@@ -86,9 +86,9 @@
   <commonAttributes>CommonAttribute.Width</commonAttributes>
   <httpServices>HTTPService.MockService</httpServices>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
-  <definedTypes>DefinedType.typeAmount</definedTypes>
   <definedTypes>DefinedType.typeDescription</definedTypes>
   <definedTypes>DefinedType.typeFilesOwner</definedTypes>
+  <definedTypes>DefinedType.typeAmount</definedTypes>
   <commandGroups>CommandGroup.Service</commandGroups>
   <constants>Constant.SaasMode</constants>
   <commonForms>CommonForm.AttachFile</commonForms>

@@ -83,26 +83,26 @@ Scenario: _604702 check filling additional attribute and filters in the ObjectPr
 	* Check filling additional attribute
 		And I click the button named "Refresh"
 		And "PropertiesTable" table contains lines
-			| 'Marked'   | 'Is modified'   | 'Object'                   | 'Brand'   | 'Producer'   | 'Article'   | 'Country of consignment'    |
-			| 'No'       | 'No'            | 'Dress'                    | 'Rose'    | 'UNIQ'       | ''          | 'Poland'                    |
-			| 'No'       | 'No'            | 'Scarf + Dress'            | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Skittles + Chewing gum'   | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Trousers'                 | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Shirt'                    | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Boots'                    | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'High shoes'               | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Box'                      | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Bound Dress+Shirt'        | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Bound Dress+Trousers'     | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Service'                  | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Router'                   | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Bag'                      | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Scarf'                    | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Chewing gum'              | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Skittles'                 | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Socks'                    | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Jacket J22001'            | ''        | ''           | ''          | ''                          |
-			| 'No'       | 'No'            | 'Fee'                      | ''        | ''           | ''          | ''                          |
+			| 'Marked' | 'Is modified' | 'Object'                 | 'Brand' | 'Producer' | 'Article' | 'Country of consignment' |
+			| 'No'     | 'No'          | 'Dress'                  | 'Rose'  | 'UNIQ'     | ''        | 'Poland'                 |
+			| 'No'     | 'No'          | 'Scarf + Dress'          | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Skittles + Chewing gum' | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Trousers'               | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Shirt'                  | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Boots'                  | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'High shoes'             | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Box'                    | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Bound Dress+Shirt'      | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Bound Dress+Trousers'   | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Service'                | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Router'                 | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Bag'                    | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Scarf'                  | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Chewing gum'            | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Skittles'               | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Socks'                  | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Jacket J22001'          | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Fee'                    | ''      | ''         | ''        | ''                       |
 	* Add filter
 		And I click Select button of "Filter" field
 		And I expand current line in "FilterAvailableFields" table
@@ -147,10 +147,10 @@ Scenario: _604703 check filling additional attribute and filters in the ObjectPr
 		And I select "Additional attributes" exact value from "Table" drop-down list
 		And I click the button named "Refresh"
 		And "PropertiesTable" table became equal
-			| 'Marked'   | 'Is modified'   | 'Object'                                                   | 'Brand'   | 'Producer'    |
-			| 'No'       | 'No'            | 'Inventory transfer order 21 dated 16.02.2021 16:14:02'    | ''        | ''            |
-			| 'No'       | 'No'            | 'Inventory transfer order 201 dated 28.02.2021 20:17:48'   | ''        | ''            |
-			| 'No'       | 'No'            | 'Inventory transfer order 202 dated 01.03.2021 10:04:57'   | ''        | ''            |
+			| 'Marked' | 'Is modified' | 'Object'                                                 | 'Brand' | 'Producer' |
+			| 'No'     | 'No'          | 'Inventory transfer order 21 dated 16.02.2021 16:14:02'  | ''      | ''         |
+			| 'No'     | 'No'          | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | ''      | ''         |
+			| 'No'     | 'No'          | 'Inventory transfer order 202 dated 01.03.2021 10:04:57' | ''      | ''         |
 	* Add filter
 		And I click Select button of "Filter" field
 		And I expand a line in "FilterAvailableFields" table
@@ -167,22 +167,34 @@ Scenario: _604703 check filling additional attribute and filters in the ObjectPr
 		And I click the button named "OK"
 		And I click the button named "Refresh"
 		And "PropertiesTable" table became equal
-			| 'Marked'   | 'Is modified'   | 'Object'                                                   | 'Brand'   | 'Producer'    |
-			| 'No'       | 'No'            | 'Inventory transfer order 201 dated 28.02.2021 20:17:48'   | ''        | ''            |
-			| 'No'       | 'No'            | 'Inventory transfer order 202 dated 01.03.2021 10:04:57'   | ''        | ''            |
+			| 'Marked' | 'Is modified' | 'Object'                                                 | 'Brand' | 'Producer' |
+			| 'No'     | 'No'          | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | ''      | ''         |
+			| 'No'     | 'No'          | 'Inventory transfer order 202 dated 01.03.2021 10:04:57' | ''      | ''         |
 		And I close all client application windows
 
 
 				
 Scenario: _604706 edit selected elements (ObjectPropertyEditor)
 	And I close all client application windows
-	* Open Object property editor
-		Given I open hyperlink "e1cib/app/DataProcessor.ObjectPropertyEditor"			
-	* Select catalog items
-		And I select "(Catalog) Item" exact value from "Object type" drop-down list
-		And I select "Additional attributes" exact value from "Table" drop-down list
-		And I click the button named "Refresh"	
+	* Open Object property editor from Item list
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I move one line down in "List" table and select line
+		And in the table "List" I click "Edit properties" button		
+		And the editing text of form attribute named "ObjectType" became equal to "(Catalog) Item"
+		And "PropertiesTable" table became equal
+			| 'Marked' | 'Object'   | 'Is modified' | 'Item type' | 'Unit' | 'Item ID' | 'Package unit' | 'Control code string' | 'Check code string' | 'Control code string type' |
+			| 'Yes'    | 'Trousers' | 'No'          | 'Clothes'   | 'pcs'  | '10002'   | ''             | 'No'                  | 'No'                | ''                         |
+			| 'Yes'    | 'Dress'    | 'No'          | 'Clothes'   | 'pcs'  | '10001'   | ''             | 'No'                  | 'No'                | ''                         |				
 	* Edit selected elements
+		And I select "Additional attributes" exact value from "Table" drop-down list
+		And I click the button named "Refresh"
+		And I go to line in "PropertiesTable" table
+			| "Object" |
+			| "Boots"  |
+		And in the table "PropertiesTable" I click "Unmark all rows" button	
 		And I go to line in "PropertiesTable" table
 			| 'Object'      |
 			| 'Trousers'    |
@@ -306,6 +318,7 @@ Scenario: _604714 copy value to marked row (ObjectPropertyEditor)
 		And I select "(Catalog) Item" exact value from "Object type" drop-down list
 		And I select "Additional attributes" exact value from "Table" drop-down list
 		And I click the button named "Refresh"
+		And in the table "PropertiesTable" I click "Unmark all rows" button	
 	* Select row
 		And I go to line in "PropertiesTable" table
 			| 'Marked'   | 'Object'   | 'Producer'    |
@@ -340,6 +353,7 @@ Scenario: _604717 change main attributes (ObjectPropertyEditor)
 		And I select "(Catalog) Item" exact value from "Object type" drop-down list
 		And I select "Main attributes" exact value from "Table" drop-down list
 		And I click the button named "Refresh"
+		And in the table "PropertiesTable" I click "Unmark all rows" button	
 	* Change unit and Vendor
 		And I go to line in "PropertiesTable" table
 			| 'Is modified' | 'Item ID' | 'Item type' | 'Marked' | 'Object' | 'Unit' |

@@ -639,7 +639,8 @@ EndProcedure
 
 &AtClient
 Procedure EditCurrencies(Command)
-	FormParameters = CurrenciesClientServer.GetParameters_V3(Object);
+	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, Object.PartnerUUID, Object.Currency, 
+		Object.ItemList.Total("TotalAmount"), Object.Agreement);	
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);

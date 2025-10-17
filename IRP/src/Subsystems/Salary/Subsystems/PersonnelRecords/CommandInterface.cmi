@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsOrder>
+    <orderFragments>
+      <group>NavigationPanelOrdinary</group>
+      <commands>Document.EmployeeHiring.StandardCommand.OpenList</commands>
+      <commands>Document.EmployeeFiring.StandardCommand.OpenList</commands>
+      <commands>Document.EmployeeTransfer.StandardCommand.OpenList</commands>
+      <commands>Document.EmployeeSickLeave.StandardCommand.OpenList</commands>
+      <commands>Document.EmployeeVacation.StandardCommand.OpenList</commands>
+    </orderFragments>
+  </commandsOrder>
+</cmi:CommandInterface>

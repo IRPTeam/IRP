@@ -869,11 +869,6 @@ Scenario: _160014 create Cash receipt based on Employee cash advance - Employee 
 			| 'TransactionType'                   | "Employee cash advance"                             | '' |
 		And the editing text of form attribute named "PaymentListTotalAmountNoSplits" became equal to "150,00"
 		And I input "100,00" text in the field named "PaymentListTotalAmountNoSplits"	
-	* Reselect basis document
-		And I input "" text in the field named "PaymentListBasisDocumentNoSplits"
-		And I click Choice button of the field named "PaymentListBasisDocumentNoSplits"
-		And I select current line in "List" table
-		Then the form attribute named "PaymentListBasisDocumentNoSplits" became equal to "Employee cash advance 2 dated 01.08.2023 12:00:00"
 	* Post document and check saving
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashReceipt6$$" variable

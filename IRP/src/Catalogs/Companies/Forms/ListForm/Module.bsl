@@ -4,6 +4,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	CatCompaniesServer.OnCreateAtServer(Cancel, StandardProcessing, ThisObject, Parameters);
 	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
 	CatalogsServer.OnCreateAtServerListForm(ThisObject, List, Cancel, StandardProcessing);
+	If Parameters.Filter.Property("OurCompany") Then
+		If Parameters.Filter.OurCompany Then
+			ThisObject.OurCompanyFilter = 1;
+		Else
+			ThisObject.OurCompanyFilter = 2;
+		EndIf;
+	Else
+		ThisObject.OurCompanyFilter = 0;
+	Endif;
 EndProcedure
 
 &AtClient

@@ -24,6 +24,7 @@ EndProcedure
 
 Procedure Posting(Cancel, PostingMode)
 	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
+	RowIDInfoPrivileged.Posting_RowID(ThisObject, Cancel, PostingMode);
 EndProcedure
 
 Procedure UndoPosting(Cancel)

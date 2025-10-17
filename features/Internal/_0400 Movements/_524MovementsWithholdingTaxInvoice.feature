@@ -58,6 +58,7 @@ Scenario: _052401 preparation (WithholdingTaxInvoice)
 			| "Documents.WithholdingTaxInvoice.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.WithholdingTaxInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.WithholdingTaxInvoice.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.WithholdingTaxInvoice.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashPayment.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"           |
 			| "Documents.CashPayment.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"           |
 			| "Documents.CashPayment.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"           |
@@ -275,4 +276,210 @@ Scenario: _052413 check With holding Tax Invoice movements by register "R5015 Ot
 			| ''                                                    | '01.05.2025 13:00:00' | 'Expense'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Tax authority' | 'Tax authority' | 'Tax'       | ''      | '37,5'   | 'No'                   |
 			| ''                                                    | '01.05.2025 13:00:00' | 'Expense'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Tax authority' | 'Tax authority' | 'Tax'       | ''      | '6,42'   | 'No'                   |
 			| ''                                                    | '01.05.2025 13:00:00' | 'Expense'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Tax authority' | 'Tax authority' | 'Tax'       | ''      | '37,5'   | 'No'                   |		
+	And I close all client application windows
+
+//1
+Scenario: _052414 check With holding Tax Invoice movements by register "Posted documents registry" (transaction currency not equal local currency)
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6'      |
+	* Check movements
+		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''                                                    | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"'               | ''                                                    | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                                    | 'Document'                                            | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                                    | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | '25.09.2025 18:12:10' | '6'      | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+		And I close all client application windows
+
+Scenario: _052415 check With holding Tax Invoice movements by register "R1001 Purchases" (transaction currency not equal local currency)
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6'      |
+	* Check movements
+		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
+		And I select "R1001 Purchases" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''                    | ''             | ''       | ''                             | ''         | ''                                                    | ''             | ''                  | ''                                     | ''         | ''       | ''           | ''              | ''                     |
+			| 'Register  "R1001 Purchases"'                         | ''                    | ''             | ''       | ''                             | ''         | ''                                                    | ''             | ''                  | ''                                     | ''         | ''       | ''           | ''              | ''                     |
+			| ''                                                    | 'Period'              | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Invoice'                                             | 'Item key'     | 'Serial lot number' | 'Row key'                              | 'Quantity' | 'Amount' | 'Net amount' | 'Offers amount' | 'Deferred calculation' |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | 'Installation' | ''                  | 'e91395fd-86de-46b8-83ff-7982831daa48' | '1'        | '844,13' | '844,13'     | ''              | 'No'                   |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | 'Installation' | ''                  | 'e91395fd-86de-46b8-83ff-7982831daa48' | '1'        | '150'    | '150'        | ''              | 'No'                   |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Main Company' | ''       | 'en description is empty'      | 'USD'      | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | 'Installation' | ''                  | 'e91395fd-86de-46b8-83ff-7982831daa48' | '1'        | '150'    | '150'        | ''              | 'No'                   |		
+		And I close all client application windows
+
+Scenario: _052416 check With holding Tax Invoice movements by register "R1021 Vendors transactions" (transaction currency not equal local currency)
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6'      |
+	* Check movements
+		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                                    | ''      | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1021 Vendors transactions"'              | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                                    | ''      | ''        | ''       | ''                     | ''                         |
+			| ''                                                    | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                               | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''      | ''        | '844,13' | 'No'                   | ''                         |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Receipt'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''      | ''        | '150'    | 'No'                   | ''                         |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Receipt'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''      | ''        | '844,13' | 'No'                   | ''                         |		
+		And I close all client application windows
+
+Scenario: _052417 check With holding Tax Invoice movements by register "R1040 Taxes outgoing" (transaction currency not equal local currency)
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6'      |
+	* Check movements
+		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
+		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| 'Register  "R1040 Taxes outgoing"'                    | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| ''                                                    | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Amount' |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '128,76' |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '22,88'  |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '128,76' |		
+		And I close all client application windows
+
+
+Scenario: _052418 check With holding Tax Invoice movements by register "R5010 Reconciliation statement" (transaction currency not equal local currency)
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6'      |
+	* Check movements
+		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''                    | ''           | ''             | ''       | ''         | ''                  | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'          | ''                    | ''           | ''             | ''       | ''         | ''                  | ''                    | ''       |
+			| ''                                                    | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Currency' | 'Legal name'        | 'Legal name contract' | 'Amount' |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'TRY'      | 'Tax authority'     | ''                    | '211,03' |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'USD'      | 'Company Ferron BP' | ''                    | '150'    |
+		And I close all client application windows
+
+Scenario: _052419 check With holding Tax Invoice movements by register "R5020 Partners balance" (transaction currency not equal local currency)
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6'      |
+	* Check movements
+		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''                    | ''           | ''             | ''       | ''              | ''                  | ''                   | ''                                                    | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'                  | ''                    | ''           | ''             | ''       | ''              | ''                  | ''                   | ''                                                    | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                                    | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Partner'       | 'Legal name'        | 'Agreement'          | 'Document'                                            | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'Ferron BP'     | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | 'TRY'      | 'Local currency'               | 'TRY'                  | '844,13' | ''                     | ''                 | '844,13'             | ''               | ''                  | ''                 |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'Ferron BP'     | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | 'TRY'      | 'en description is empty'      | 'TRY'                  | '844,13' | ''                     | ''                 | '844,13'             | ''               | ''                  | ''                 |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'Ferron BP'     | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | 'USD'      | 'Reporting currency'           | 'TRY'                  | '150'    | ''                     | ''                 | '150'                | ''               | ''                  | ''                 |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'Tax authority' | 'Tax authority'     | 'Tax'                | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | 'TRY'      | 'Local currency'               | 'TRY'                  | '211,03' | ''                     | ''                 | ''                   | ''               | '211,03'            | ''                 |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'Tax authority' | 'Tax authority'     | 'Tax'                | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | 'TRY'      | 'en description is empty'      | 'TRY'                  | '211,03' | ''                     | ''                 | ''                   | ''               | '211,03'            | ''                 |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'Tax authority' | 'Tax authority'     | 'Tax'                | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | 'USD'      | 'Reporting currency'           | 'TRY'                  | '37,5'   | ''                     | ''                 | ''                   | ''               | '37,5'              | ''                 |		
+		And I close all client application windows
+
+Scenario: _052420 check With holding Tax Invoice movements by register "R5022 Expenses" (transaction currency not equal local currency)
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6'      |
+	* Check movements
+		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''                    | ''             | ''       | ''                        | ''             | ''             | ''            | ''            | ''         | ''                    | ''                             | ''        | ''         | ''                  | ''            | ''                          |
+			| 'Register  "R5022 Expenses"'                          | ''                    | ''             | ''       | ''                        | ''             | ''             | ''            | ''            | ''         | ''                    | ''                             | ''        | ''         | ''                  | ''            | ''                          |
+			| ''                                                    | 'Period'              | 'Company'      | 'Branch' | 'Profit loss center'      | 'Expense type' | 'Item key'     | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount'   | 'Amount with taxes' | 'Amount cost' | 'Calculation movement cost' |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Main Company' | ''       | 'Distribution department' | ''             | 'Installation' | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '1 055,16' | '844,13'            | ''            | ''                          |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Main Company' | ''       | 'Distribution department' | ''             | 'Installation' | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '187,5'    | '150'               | ''            | ''                          |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Main Company' | ''       | 'Distribution department' | ''             | 'Installation' | ''            | ''            | 'USD'      | ''                    | 'en description is empty'      | ''        | '187,5'    | '150'               | ''            | ''                          |		
+		And I close all client application windows
+
+Scenario: _052421 check With holding Tax Invoice movements by register "T1040 Accounting amounts" (transaction currency not equal local currency)
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6'      |
+	* Check movements
+		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
+		And I select "T1040 Accounting amounts" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''                    | ''                                     | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
+			| 'Register  "T1040 Accounting amounts"'                | ''                    | ''                                     | ''                        | ''                             | ''         | ''                    | ''            | ''            | ''       | ''                   | ''                   | ''                     | ''                 |
+			| ''                                                    | 'Period'              | 'Row key'                              | 'Operation'               | 'Multi currency movement type' | 'Currency' | 'Revaluated currency' | 'Dr currency' | 'Cr currency' | 'Amount' | 'Dr currency amount' | 'Cr currency amount' | 'Deferred calculation' | 'Advances closing' |
+			| ''                                                    | '25.09.2025 18:12:10' | 'e91395fd-86de-46b8-83ff-7982831daa48' | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | ''            | ''            | '844,13' | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                                    | '25.09.2025 18:12:10' | 'e91395fd-86de-46b8-83ff-7982831daa48' | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | ''            | ''            | '150'    | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                                    | '25.09.2025 18:12:10' | 'e91395fd-86de-46b8-83ff-7982831daa48' | 'en description is empty' | 'en description is empty'      | 'USD'      | ''                    | ''            | ''            | '150'    | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                                    | '25.09.2025 18:12:10' | 'e91395fd-86de-46b8-83ff-7982831daa48' | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | ''            | ''            | '128,76' | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                                    | '25.09.2025 18:12:10' | 'e91395fd-86de-46b8-83ff-7982831daa48' | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | ''            | ''            | '22,88'  | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                                    | '25.09.2025 18:12:10' | 'e91395fd-86de-46b8-83ff-7982831daa48' | 'en description is empty' | 'en description is empty'      | 'USD'      | ''                    | ''            | ''            | '22,88'  | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                                    | '25.09.2025 18:12:10' | 'e91395fd-86de-46b8-83ff-7982831daa48' | 'en description is empty' | 'Local currency'               | 'TRY'      | ''                    | ''            | 'TRY'         | '211,03' | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                                    | '25.09.2025 18:12:10' | 'e91395fd-86de-46b8-83ff-7982831daa48' | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | ''            | 'TRY'         | '37,5'   | ''                   | ''                   | 'No'                   | ''                 |
+			| ''                                                    | '25.09.2025 18:12:10' | 'e91395fd-86de-46b8-83ff-7982831daa48' | 'en description is empty' | 'en description is empty'      | 'TRY'      | ''                    | ''            | 'TRY'         | '37,5'   | ''                   | ''                   | 'No'                   | ''                 |		
+		And I close all client application windows
+
+Scenario: _052422 check With holding Tax Invoice movements by register "T2015 Transactions info" (transaction currency not equal local currency)
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6'      |
+	* Check movements
+		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''             | ''       | ''      | ''                    | ''                                     | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                                    | ''          | ''        | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'                 | ''             | ''       | ''      | ''                    | ''                                     | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                                    | ''          | ''        | ''       | ''       | ''        |
+			| ''                                                    | 'Company'      | 'Branch' | 'Order' | 'Date'                | 'Key'                                  | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                                   | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                                    | 'Main Company' | ''       | ''      | '25.09.2025 18:12:10' | '                                    ' | 'USD'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | '*'         | ''        | '150'    | 'Yes'    | 'No'      |
+	And I close all client application windows		
+
+Scenario: _052423 check With holding Tax Invoice movements by register "R5015 Other partners transactions" (transaction currency not equal local currency)
+	And I close all client application windows
+	* Open WithholdingTaxInvoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '6'      |
+	* Check movements
+		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"
+		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Withholding tax invoice 6 dated 25.09.2025 18:12:10' | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''              | ''              | ''          | ''      | ''       | ''                     |
+			| 'Register  "R5015 Other partners transactions"'       | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''              | ''              | ''          | ''      | ''       | ''                     |
+			| ''                                                    | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'    | 'Partner'       | 'Agreement' | 'Basis' | 'Amount' | 'Deferred calculation' |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Tax authority' | 'Tax authority' | 'Tax'       | ''      | '211,03' | 'No'                   |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Tax authority' | 'Tax authority' | 'Tax'       | ''      | '37,5'   | 'No'                   |
+			| ''                                                    | '25.09.2025 18:12:10' | 'Expense'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Tax authority' | 'Tax authority' | 'Tax'       | ''      | '211,03' | 'No'                   |		
 	And I close all client application windows

@@ -119,6 +119,7 @@ Function GetFormAttributeMapping() Export
 	Map.Insert("PaymentList.AmountExchange"          , "PaymentListAmountExchangeNoSplits");
 	Map.Insert("PaymentList.PlaningTransactionBasis" , "PaymentListPlaningTransactionBasisNoSplits");
 	Map.Insert("PaymentList.MoneyTransfer"           , "PaymentListMoneyTransferNoSplits");
+	Map.Insert("PaymentList.PaymentDate"             ,"PaymentListPaymentDateNoSplits");
 	Return Map;
 EndFunction
 
@@ -145,6 +146,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.Project,
 	|PaymentList.Employee,
 	|PaymentList.PaymentPeriod,
+	|PaymentList.PaymentDate,
 	|PaymentList.CalculationType";
 
 	ArrayOfAllAttributes = New Array();
@@ -190,6 +192,9 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.Project";
 		If TransactionType = PaymentFromCustomer Then
 			StrByType = StrByType + ", PaymentList.Order";
+		EndIf;
+		If TransactionType = ReturnFromVendor Then
+			StrByType = StrByType + ", PaymentList.PaymentDate";
 		EndIf;
 	ElsIf TransactionType = OtherPartner Then
 		StrByType = "
@@ -276,6 +281,24 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.PaymentListPaymentByDocuments.Enabled = Not Form.ReadOnly;
 
 	Form.Items.PaymentListPaymentByDocuments.Visible = IsPaymentFormCustomer;
+		
+	If ValueIsFilled(Form.PaymentListAgreementNoSplits) Then
+		Form.Items.PaymentListBasisDocumentNoSplits.ReadOnly =
+			(CommonFunctionsServer.GetRefAttribute(Form.PaymentListAgreementNoSplits, "ApArPostingDetail")
+			<> PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
+	Else
+		Form.Items.PaymentListBasisDocumentNoSplits.ReadOnly = True;
+	EndIf;
+	
+	For Each Row In Object.PaymentList Do
+		Row.PaymentDateReadOnly = 
+			Not (ValueIsFilled(Row.BasisDocument) 
+				And TypeOf(Row.BasisDocument) = Type("DocumentRef.PurchaseInvoice"));
+	EndDo;
+	
+	Form.Items.PaymentListPaymentDateNoSplits.ReadOnly = 
+		Not (ValueIsFilled(Form.PaymentListBasisDocumentNoSplits)
+			And TypeOf(Form.PaymentListBasisDocumentNoSplits) = Type("DocumentRef.PurchaseInvoice"));
 EndProcedure
 
 &AtClient
@@ -884,6 +907,24 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListAmountExchangeNoSplitsOnChange(Item)
+	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
+	If LineAttribute <> Undefined Then
+		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);
+	EndIf;
+	UpdateFormAttributes(Object, ThisObject, "FromHeaderToList");
+EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_DATE
+
+&AtClient
+Procedure PaymentListPaymentDateOnChange(Item)
+	UpdateFormAttributes(Object, ThisObject, "FromListToHeader");
+EndProcedure
+
+&AtClient
+Procedure PaymentListPaymentDateNoSplitsOnChange(Item)
 	LineAttribute = GetLineAttributeByNoSplitsAttribute(Object, ThisObject, Item.Name);
 	If LineAttribute <> Undefined Then
 		SetLineAttributeValue(Object, ThisObject, LineAttribute, ThisObject[Item.Name]);

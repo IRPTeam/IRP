@@ -142,7 +142,9 @@ Function ItemList()
 		   |	UNDEFINED AS PurchaseOrderSettlements,
 		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
 		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Consignor) AS IsConsignor,
-		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther
+		   |	ItemList.Ref.Agreement.Type = VALUE(Enum.AgreementTypes.Other) AS IsOther,
+		   |	undefined as PartnerUUID,
+		   |	undefined as TaxUUID
 		   |INTO ItemList
 		   |FROM
 		   |	Document.SalesReportToConsignor.ItemList AS ItemList

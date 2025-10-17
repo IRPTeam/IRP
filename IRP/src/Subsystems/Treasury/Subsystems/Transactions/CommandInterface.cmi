@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsOrder>
+    <orderFragments>
+      <group>NavigationPanelOrdinary</group>
+      <commands>Document.DebitNote.StandardCommand.OpenList</commands>
+      <commands>Document.CreditNote.StandardCommand.OpenList</commands>
+      <commands>Document.DebitCreditNote.StandardCommand.OpenList</commands>
+      <commands>Document.ForeignCurrencyRevaluation.StandardCommand.OpenList</commands>
+      <commands>Document.EmployeeCashAdvance.StandardCommand.OpenList</commands>
+      <commands>Document.CustomersAdvancesClosing.StandardCommand.OpenList</commands>
+      <commands>Document.VendorsAdvancesClosing.StandardCommand.OpenList</commands>
+      <commands>Document.CashExpense.StandardCommand.OpenList</commands>
+      <commands>Document.CashRevenue.StandardCommand.OpenList</commands>
+      <commands>Document.CashStatement.StandardCommand.OpenList</commands>
+      <commands>Document.TaxesOperation.StandardCommand.OpenList</commands>
+    </orderFragments>
+  </commandsOrder>
+</cmi:CommandInterface>

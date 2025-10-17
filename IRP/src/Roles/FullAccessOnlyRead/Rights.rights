@@ -4988,17 +4988,6 @@
 		</right>
 	</object>
 	<object>
-		<name>DocumentJournal.DocumentsForOutgoingPayment</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.Settings.Subsystem.LockDataModification</name>
 		<right>
 			<name>View</name>
@@ -5454,7 +5443,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Treasury.Subsystem.CashTransactions</name>
+		<name>Subsystem.Treasury.Subsystem.Transactions</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -12410,17 +12399,6 @@
 		</right>
 	</object>
 	<object>
-		<name>DocumentJournal.DocumentsForIncomingPayment</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.T9012S_AccountsPartner.Resource.AccountAdvancesVendor</name>
 		<right>
 			<name>Edit</name>
@@ -13648,13 +13626,6 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.RetailWorkers.Command.RetailWorkers</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -16682,13 +16653,6 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Treasury.Subsystem.Retail</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
 		</right>
 	</object>
 	<object>

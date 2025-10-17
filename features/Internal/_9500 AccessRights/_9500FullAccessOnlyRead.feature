@@ -988,7 +988,7 @@ Scenario: 950074 check role Full access only read (ReconciliationStatement)
 
 Scenario: 950075 check role Full access only read (Opening entry)
 		And I close all client application windows
-		And In the command interface I select "Master data" "Opening entries"	
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"	
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception

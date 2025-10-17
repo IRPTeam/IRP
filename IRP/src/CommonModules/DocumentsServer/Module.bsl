@@ -1255,10 +1255,7 @@ EndProcedure
 //  Form - ClientApplicationForm - Form
 Procedure SetListFormAppearance(Form)
 	If Form.Items.Find("Number") <> Undefined Then
-		Form.Items.Number.Width = 5;
-	EndIf;
-	If Form.Items.Find("Comment") <> Undefined Then
-		Form.Items.Comment.MaxWidth = 20;
+		Form.Items.Number.Width = 6;
 	EndIf;
 	
 	DateFormItem = Form.Items.Find("Date");

@@ -7,5 +7,14 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
+  <content>CommonCommand.OpenReport_R4011B_FreeStockMovements</content>
+  <content>CommonCommand.OpenReport_R4012A_StockReservation</content>
+  <content>CommonCommand.OpenReport_R4010A_StockBalance</content>
+  <content>CommonCommand.OpenReport_R9101S_InventoryResults</content>
+  <content>CommonCommand.OpenReport_R405A_StockAdjustments</content>
+  <content>CommonCommand.OpenReport_R4050A_InventoryBalance</content>
+  <content>CommonCommand.OpenReport_R6020A_InventoryCost</content>
+  <content>CommonCommand.OpenReport_R401A_FreeStocks</content>
+  <content>CommonCommand.OpenReport_R403A_GoodsInTransit</content>
   <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

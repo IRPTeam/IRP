@@ -7,5 +7,18 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
+  <content>CommonCommand.OpenReport_R5020A_PartnersBalance</content>
+  <content>CommonCommand.OpenReport_R3021A_CashInTransit</content>
+  <content>CommonCommand.OpenReport_R5021A_Revenues</content>
+  <content>CommonCommand.OpenReport_R1200_VendorsAging</content>
+  <content>CommonCommand.OpenReport_R5022A_Expenses</content>
+  <content>CommonCommand.OpenReport_R6020_BatchBalance</content>
+  <content>CommonCommand.OpenReport_R3010A_CashOnHand</content>
+  <content>CommonCommand.OpenReport_R1100_CustomersAging</content>
+  <content>CommonCommand.OpenReport_R6060A_CostOfGoodsSold</content>
+  <content>CommonCommand.OpenReport_R3011A_CashFlow</content>
+  <content>CommonCommand.OpenReport_R3027A_CashAdvance</content>
+  <content>CommonCommand.OpenReport_R502A_ProfitLosses</content>
+  <content>CommonCommand.OpenReport_R5010A_ReconciliationStatement</content>
   <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="91e74792-9572-4b6f-9177-f9917aab2484">
+  <name>OpenReport_R2012A_SalesOrdersInvoiceClosing</name>
+  <synonym>
+    <key>en</key>
+    <value>R2012A Sales orders invoice closing</value>
+  </synonym>
+  <group>NavigationPanelOrdinary</group>
+  <representation>Auto</representation>
+</mdclass:CommonCommand>

@@ -317,17 +317,18 @@ Procedure OffsetAdvancesToTransactions(Parameters,
 	NeedWriteAdvances = False;
 
 	While QuerySelection.Next() Do
-		DistributeAdvanceToTransaction(Parameters, 
-	                                   PointInTime, 
-	                                   Document, 
-	                                   AdvanceRecordData,
-	                                   QuerySelection.AdvanceAmount, 
-	                                   Records_TransactionsKey, 
-	                                   Records_AdvancesKey, 
-	                                   Records_OffsetOfAdvances,
-	                                   Records_OffsetAging, 
-	                                   NeedWriteAdvances);
-		
+		If QuerySelection.AdvanceAmount > 0 Then
+			DistributeAdvanceToTransaction(Parameters, 
+		                                   PointInTime, 
+		                                   Document, 
+		                                   AdvanceRecordData,
+		                                   QuerySelection.AdvanceAmount, 
+		                                   Records_TransactionsKey, 
+		                                   Records_AdvancesKey, 
+		                                   Records_OffsetOfAdvances,
+		                                   Records_OffsetAging, 
+		                                   NeedWriteAdvances);
+		EndIf;		
 	EndDo;
 	
 	// Write ofsetted advances to TM1020B_AdvancesKey, Expense

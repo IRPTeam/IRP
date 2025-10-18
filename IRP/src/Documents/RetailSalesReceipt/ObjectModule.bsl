@@ -158,8 +158,8 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		Cancel = True;
 	EndIf;
 		
-	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(ThisObject.Branch) 
-		And Not ValueIsFilled(ThisObject.ConsolidatedRetailSales) Then
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(ThisObject.Branch,, ThisObject.Date) 
+			And Not ValueIsFilled(ThisObject.ConsolidatedRetailSales) Then
 		Cancel = True;
 		FieldName = ThisObject.Metadata().Attributes.ConsolidatedRetailSales.Synonym;
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_047, FieldName), "ConsolidatedRetailSales", ThisObject);

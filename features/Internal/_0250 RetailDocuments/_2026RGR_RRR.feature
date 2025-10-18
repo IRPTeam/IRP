@@ -339,8 +339,8 @@ Scenario: _0202603 create RRR based on RGR (without RSR)
 	* Select RGR
 		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
 		And I go to line in "List" table
-			| 'Date'                | 'Number' | 'Retail customer' | 'Transaction type'     |
-			| '03.08.2023 10:54:07' | '1 204'  | 'Sam Jons'        | 'Return from customer' |
+			| 'Date'       | 'Number' | 'Retail customer' | 'Transaction type'     |
+			| '03.08.2023' | '1 204'  | 'Sam Jons'        | 'Return from customer' |
 		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I click "Ok" button
 	* Filling branch

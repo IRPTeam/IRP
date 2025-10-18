@@ -64,7 +64,7 @@ Scenario: 963002 try post SO (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '81'     | '26.10.2023 17:19:50' |
+		| '81'     | '26.10.2023' |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -75,7 +75,7 @@ Scenario: 963003 try post SI (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '73'     |'26.10.2023 17:20:16'  |
+		| '73'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -86,7 +86,7 @@ Scenario: 963004 try post SC (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '73'     |'26.10.2023 17:20:46'  |
+		| '73'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -97,7 +97,7 @@ Scenario: 963005 try post PlannedReceiptReservation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                |
-		| '217'     |'26.10.2023 17:21:29'  |
+		| '217'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -108,7 +108,7 @@ Scenario: 963006 try post SalesReturnOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '73'     |'26.10.2023 17:21:56'  |
+		| '73'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -119,7 +119,7 @@ Scenario: 963007 try post SalesReturn(LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesReturn"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '73'     |'26.10.2023 17:22:43'  |
+		| '73'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -130,7 +130,7 @@ Scenario: 963008 try post PriceList (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PriceList"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '11'     |'26.10.2023 17:14:53'  |
+		| '11'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -141,7 +141,7 @@ Scenario: 963009 try post WorkOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.WorkOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '10'     |'26.10.2023 17:25:31'  |
+		| '10'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -152,7 +152,7 @@ Scenario: 963010 try post WorkSheet (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.WorkSheet"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '10'     |'26.10.2023 17:26:08'  |
+		| '10'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -163,7 +163,7 @@ Scenario: 963011 try post SalesReportFromTradeAgent (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '10'     |'26.10.2023 17:26:52'  |
+		| '10'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -174,7 +174,7 @@ Scenario: 963012 try post SalesReportToConsignor (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                |
-		| '10'     |'26.10.2023 17:27:31'  |
+		| '10'     |'26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -185,7 +185,7 @@ Scenario: 963013 try post SalesReportToConsignor (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '26.10.2023 17:27:31'  |
+		| '10'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -196,7 +196,7 @@ Scenario: 963014 try post SalesReportToConsignor (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '26.10.2023 17:27:31'  |
+		| '10'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -208,7 +208,7 @@ Scenario: 963015 try post PurchaseOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '26.10.2023 17:11:07'  |
+		| '73'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -219,7 +219,7 @@ Scenario: 963017 try post PurchaseInvoice (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '26.10.2023 17:11:46'  |
+		| '73'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -230,7 +230,7 @@ Scenario: 963018 try post GoodsReceipt (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '26.10.2023 17:13:07'  |
+		| '73'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -241,7 +241,7 @@ Scenario: 963018 try post PurchaseReturnOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '26.10.2023 17:13:40'  |
+		| '73'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -252,7 +252,7 @@ Scenario: 963018 try post PurchaseReturn (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '26.10.2023 17:14:09'  |
+		| '73'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -263,7 +263,7 @@ Scenario: 963019 try post InternalSupplyRequest (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '26.10.2023 17:15:29'  |
+		| '28'     | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -274,7 +274,7 @@ Scenario: 963020 try post Labeling (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.Labeling"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '4'      | '26.10.2023 17:15:49'  |
+		| '4'      | '26.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -285,7 +285,7 @@ Scenario: 963021 try post Cash statement (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CashStatement"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '28'      | '30.10.2023 16:40:34'  |
+		| '28'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -296,7 +296,7 @@ Scenario: 963022 try post RetailGoodsReceipt (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '73'      | '30.10.2023 16:41:52'  |
+		| '73'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -307,7 +307,7 @@ Scenario: 963023 try post RetailShipmentConfirmation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '73'      | '30.10.2023 16:42:31'  |
+		| '73'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -318,7 +318,7 @@ Scenario: 963024 try post RetailSalesReceipt (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '73'      | '30.10.2023 16:43:38'  |
+		| '73'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -329,7 +329,7 @@ Scenario: 963025 try post RetailReturnReceipt (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '73'      | '30.10.2023 16:47:40'  |
+		| '73'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -340,7 +340,7 @@ Scenario: 963026 try post ConsolidatedRetailSales (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '28'      | '30.10.2023 16:47:25'  |
+		| '28'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -351,7 +351,7 @@ Scenario: 963027 try post AdditionalCostAllocation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '73'      | '31.10.2023 09:50:59'  |
+		| '73'      | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -362,13 +362,13 @@ Scenario: 963028 try post AdditionalRevenueAllocation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '74'      | '30.10.2023 11:20:01'  |
+		| '74'      | '30.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '73'      | '31.10.2023 09:51:45'  |
+		| '73'      | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -379,7 +379,7 @@ Scenario: 963029 try post Bundling (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.Bundling"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '28'      | '31.10.2023 09:52:46'  |
+		| '28'      | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -390,7 +390,7 @@ Scenario: 963030 try post CalculationMovementCosts (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '4'       | '31.10.2023 09:50:35'  |
+		| '4'       | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -401,7 +401,7 @@ Scenario: 963031 try post InventoryTransfer (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '244'     | '31.10.2023 09:36:46'  |
+		| '244'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -412,7 +412,7 @@ Scenario: 963032 try post InventoryTransferOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '82'     | '31.10.2023 09:37:17'  |
+		| '82'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -423,7 +423,7 @@ Scenario: 963033 try post ItemStockAdjustment (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 09:35:50'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -434,7 +434,7 @@ Scenario: 963034 try post PhysicalCountByLocation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 09:47:30'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Save and close" button
 	Then user message window does not contain messages
@@ -445,7 +445,7 @@ Scenario: 963035 try post PhysicalInventory (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 09:43:14'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -456,7 +456,7 @@ Scenario: 963036 try post StockAdjustmentAsSurplus (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 09:49:18'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -467,7 +467,7 @@ Scenario: 963037 try post StockAdjustmentAsWriteOff (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 09:50:02'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -478,7 +478,7 @@ Scenario: 963038 try post Unbundling (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 09:53:14'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -489,7 +489,7 @@ Scenario: 963039 try post Unbundling (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 09:53:14'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -500,7 +500,7 @@ Scenario: 963040 try post BankPayment (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '82'     | '31.10.2023 11:45:20'  |
+		| '82'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I activate "Partner term" field in "PaymentList" table
 	And I select current line in "PaymentList" table
@@ -514,7 +514,7 @@ Scenario: 963040 try post BankReceipt (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '82'     | '31.10.2023 11:46:28'  |
+		| '82'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I activate "Partner term" field in "PaymentList" table
 	And I select current line in "PaymentList" table
@@ -528,7 +528,7 @@ Scenario: 963041 try post CashExpense (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CashExpense"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '82'     | '31.10.2023 11:48:21'  |
+		| '82'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -539,7 +539,7 @@ Scenario: 963042 try post CashPayment (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CashPayment"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 11:46:55'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I activate "Partner term" field in "PaymentList" table
 	And I select current line in "PaymentList" table
@@ -553,7 +553,7 @@ Scenario: 963043 try post CashReceipt (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 11:47:16'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I activate "Partner term" field in "PaymentList" table
 	And I select current line in "PaymentList" table
@@ -567,7 +567,7 @@ Scenario: 963044 try post CashRevenue (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CashRevenue"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 11:48:49'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -578,7 +578,7 @@ Scenario: 963045 try post CashTransferOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I go to line in "List" table
 		| 'Number'  | 'Date'                 |
-		| '244'     | '31.10.2023 11:54:02'  |
+		| '244'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -589,7 +589,7 @@ Scenario: 963046 try post CreditNote (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CreditNote"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:50:10'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -600,7 +600,7 @@ Scenario: 963047 try post CustomersAdvancesClosing (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:50:26'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -611,7 +611,7 @@ Scenario: 963048 try post DebitNote (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.DebitNote"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:49:37'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -622,7 +622,7 @@ Scenario: 963049 try post EmployeeCashAdvance (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:51:24'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -633,7 +633,7 @@ Scenario: 963050 try post ForeignCurrencyRevaluation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
 	And I go to line in "List" table
 		| 'Number'| 'Date'                 |
-		| '4'     | '31.10.2023 11:51:47'  |
+		| '4'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -644,7 +644,7 @@ Scenario: 963051 try post IncomingPaymentOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:54:57'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -655,7 +655,7 @@ Scenario: 963052 try post MoneyTransfer (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '244'    | '31.10.2023 11:54:30'  |
+		| '244'    | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -666,7 +666,7 @@ Scenario: 963053 try post OutgoingPaymentOrder (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '31.10.2023 11:55:21'  |
+		| '28'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -677,7 +677,7 @@ Scenario: 963054 try post ReconciliationStatement (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:47:36'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -688,7 +688,7 @@ Scenario: 963055 try post VendorsAdvancesClosing (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 11:50:47'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -699,7 +699,7 @@ Scenario: 963056 try post Payroll (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.Payroll"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 17:01:18'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -710,7 +710,7 @@ Scenario: 963057 try post TimeSheet (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.TimeSheet"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '31.10.2023 17:02:09'  |
+		| '10'     | '31.10.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -721,7 +721,7 @@ Scenario: 963058 try post ProductionPlanning (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanning"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '02.11.2023 12:01:51'  |
+		| '10'     | '02.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -732,7 +732,7 @@ Scenario: 963059 try post Production (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.Production"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '28'     | '02.11.2023 12:02:30'  |
+		| '28'     | '02.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -743,7 +743,7 @@ Scenario: 963060 try post ProductionPlanningCorrection (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '02.11.2023 12:03:16'  |
+		| '10'     | '02.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -754,7 +754,7 @@ Scenario: 963061 try post ProductionPlanningClosing (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningClosing"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '02.11.2023 12:03:24'  |
+		| '10'     | '02.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -765,7 +765,7 @@ Scenario: 963062 try post SalesOrderClosing (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '01.11.2023 13:35:53'  |
+		| '73'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -776,7 +776,7 @@ Scenario: 963063 try post PurchaseOrderClosing (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '01.11.2023 13:36:20'  |
+		| '73'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -787,7 +787,7 @@ Scenario: 963064 try post CommissioningOfFixedAsset (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.CommissioningOfFixedAsset"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '01.11.2023 13:15:18'  |
+		| '73'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -798,7 +798,7 @@ Scenario: 963065 try post DecommissioningOfFixedAsset (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.DecommissioningOfFixedAsset"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '01.11.2023 13:15:51'  |
+		| '73'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -809,7 +809,7 @@ Scenario: 963066 try post DepreciationCalculation (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '01.11.2023 13:16:01'  |
+		| '10'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -820,7 +820,7 @@ Scenario: 963067 try post ModernizationOfFixedAsset (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ModernizationOfFixedAsset"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '73'     | '01.11.2023 13:35:12'  |
+		| '73'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages
@@ -831,7 +831,7 @@ Scenario: 963068 try post ChequeBondTransaction (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 	And I go to line in "List" table
 		| 'Number' | 'Date'                 |
-		| '10'     | '01.11.2023 13:54:15'  |
+		| '10'     | '01.11.2023'  |
 	And I select current line in "List" table
 	And I click "Post and close" button
 	Then user message window does not contain messages

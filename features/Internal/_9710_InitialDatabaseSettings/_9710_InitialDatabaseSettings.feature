@@ -803,7 +803,7 @@ Scenario: _971009 check Partner, Partner term, Legal name, Legal name fields in 
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	And "List" table contains lines
 		| 'Number' | 'Legal name contract' | 'Date'                | 'Amount' | 'Partner'                      | 'Company'       | 'Account'           | 'Currency' | 'Transaction type'   | 'Author' | 'Partner term'                                            | 'Legal name' | 'Comment' |
-		| '3'      | 'CM-9008'             | '11.08.2023 12:00:00' | '100,00' | 'Customer 1 (3 partner terms)' | 'Own company 2' | 'Bank account, TRY' | 'TRY'      | 'Return to customer' | 'CI'     | 'Partner term with customer (by document + credit limit)' | 'Client 1'   | ''        |
+		| '3'      | 'CM-9008'             | '11.08.2023' | '100,00' | 'Customer 1 (3 partner terms)' | 'Own company 2' | 'Bank account, TRY' | 'TRY'      | 'Return to customer' | 'CI'     | 'Partner term with customer (by document + credit limit)' | 'Client 1'   | ''        |
 	And I close all client application windows
 
 Scenario: _971010 check Partner, Partner term, Legal name, Legal name fields in document list (BankReceipt)
@@ -811,7 +811,7 @@ Scenario: _971010 check Partner, Partner term, Legal name, Legal name fields in 
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	And "List" table contains lines
 		| 'Number' | 'Legal name contract' | 'Date'                | 'Amount' | 'Partner'                   | 'Company'       | 'Account'           | 'Currency' | 'Transaction type'   | 'Author' | 'Partner term'               | 'Legal name' | 'Comment' |
-		| '8'      | 'VD-7889'             | '10.08.2023 12:00:00' | '100,00' | 'Vendor 1 (1 partner term)' | 'Own company 2' | 'Bank account, TRY' | 'TRY'      | 'Return from vendor' | 'CI'     | 'Partner term with vendor 1' | 'Vendor 1'   | ''        |
+		| '8'      | 'VD-7889'             | '10.08.2023' | '100,00' | 'Vendor 1 (1 partner term)' | 'Own company 2' | 'Bank account, TRY' | 'TRY'      | 'Return from vendor' | 'CI'     | 'Partner term with vendor 1' | 'Vendor 1'   | ''        |
 	And I close all client application windows
 
 Scenario: _971011 check Partner, Partner term, Legal name, Legal name fields in document list (CashPayment)
@@ -819,7 +819,7 @@ Scenario: _971011 check Partner, Partner term, Legal name, Legal name fields in 
 	Given I open hyperlink "e1cib/list/Document.CashPayment"
 	And "List" table contains lines
 		| 'Number' | 'Date'                | 'Cash account' | 'Amount' | 'Currency' | 'Transaction type'      | 'Partner'                   | 'Partner term'               | 'Legal name' | 'Legal name contract' | 'Company'       | 'Author' | 'Comment' |
-		| '1'      | '24.02.2023 10:50:30' | 'Cash, TRY'    | '500,00' | 'TRY'      | 'Payment to the vendor' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Vendor 1'   | 'VD-7889'             | 'Own company 2' | 'CI'     | ''        |
+		| '1'      | '24.02.2023' | 'Cash, TRY'    | '500,00' | 'TRY'      | 'Payment to the vendor' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Vendor 1'   | 'VD-7889'             | 'Own company 2' | 'CI'     | ''        |
 	And I close all client application windows
 
 Scenario: _971012 check Partner, Partner term, Legal name, Legal name fields in document list (CashReceipt)
@@ -827,7 +827,7 @@ Scenario: _971012 check Partner, Partner term, Legal name, Legal name fields in 
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And "List" table contains lines
 		| 'Number' | 'Date'                | 'Cash account' | 'Amount'   | 'Currency' | 'Transaction type'      | 'Partner'                                                   | 'Partner term'                                                                                         | 'Legal name'         | 'Legal name contract' | 'Company'       | 'Author' | 'Comment' |
-		| '1'      | '10.03.2023 00:00:00' | 'Cash, TRY'    | '1 350,00' | 'TRY'      | 'Payment from customer' | 'Customer 1 (3 partner terms), Customer 2 (2 partner term)' | 'Partner term with customer (by document + credit limit), Individual partner term 1 (by partner term)' | 'Client 1, Client 2' | 'CM-9008'             | 'Own company 2' | 'CI'     | ''        |
+		| '1'      | '10.03.2023' | 'Cash, TRY'    | '1 350,00' | 'TRY'      | 'Payment from customer' | 'Customer 1 (3 partner terms), Customer 2 (2 partner term)' | 'Partner term with customer (by document + credit limit), Individual partner term 1 (by partner term)' | 'Client 1, Client 2' | 'CM-9008'             | 'Own company 2' | 'CI'     | ''        |
 	And I close all client application windows
 
 Scenario: _971013 check Partner, Partner term, Legal name, Legal name fields in document list (CreditNote)
@@ -835,7 +835,7 @@ Scenario: _971013 check Partner, Partner term, Legal name, Legal name fields in 
 	Given I open hyperlink "e1cib/list/Document.CreditNote"
 	And "List" table contains lines
 		| 'Number' | 'Date'                | 'Partner'                      | 'Partner term'                                            | 'Legal name' | 'Legal name contract' | 'Company'       | 'Author' | 'Comment' |
-		| '2'      | '07.05.2023 12:00:01' | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Client 1'   | 'CM-9008'             | 'Own company 2' | 'CI'     | ''        |
+		| '2'      | '07.05.2023' | 'Customer 1 (3 partner terms)' | 'Partner term with customer (by document + credit limit)' | 'Client 1'   | 'CM-9008'             | 'Own company 2' | 'CI'     | ''        |
 	And I close all client application windows
 
 Scenario: _971014 check Partner, Partner term, Legal name, Legal name fields in document list (DebitNote)
@@ -843,5 +843,5 @@ Scenario: _971014 check Partner, Partner term, Legal name, Legal name fields in 
 	Given I open hyperlink "e1cib/list/Document.DebitNote"
 	And "List" table contains lines
 		| 'Number' | 'Date'                | 'Partner'                   | 'Partner term'               | 'Legal name' | 'Legal name contract' | 'Company'       | 'Author' | 'Comment' |
-		| '1'      | '24.02.2023 11:03:25' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Vendor 1'   | 'VD-7889'             | 'Own company 2' | 'CI'     | ''        |
+		| '1'      | '24.02.2023' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Vendor 1'   | 'VD-7889'             | 'Own company 2' | 'CI'     | ''        |
 	And I close all client application windows

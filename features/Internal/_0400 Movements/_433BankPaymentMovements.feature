@@ -242,7 +242,7 @@ Scenario: _043302 check Bank payment movements by the Register "R5010 Reconcilia
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '1'        | '07.09.2020 19:16:43'    |
+			| '1'        | '07.09.2020'    |
 	* Check movements by the Register  "R5010 Reconciliation statement" 
 		And I click "Registrations report" button
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
@@ -290,7 +290,7 @@ Scenario: _043304 check Bank payment movements by the Register "R1021 Vendors tr
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '1'        | '07.09.2020 19:16:43'    |
+			| '1'        | '07.09.2020'    |
 		And I select current line in "List" table		
 	* Check movements by the Register  "R1021 Vendors transactions" 
 		And I click "Registrations report" button
@@ -313,7 +313,7 @@ Scenario: _043305 check absence Bank payment movements by the Register "R1021 Ve
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '10'       | '12.02.2021 11:24:13'    |
+			| '10'       | '12.02.2021'    |
 	* Check movements by the Register  "R1021 Vendors transactions" 
 		And I click "Registrations report" button
 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
@@ -328,7 +328,7 @@ Scenario: _043306 check Bank payment movements by the Register "R1020 Advances t
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '10'       | '12.02.2021 11:24:13'    |
+			| '10'       | '12.02.2021'    |
 	* Check movements by the Register  "R1020 Advances to vendors" 
 		And I click "Registrations report info" button
 		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
@@ -348,7 +348,7 @@ Scenario: _043307 check absence Bank payment movements by the Register "R1020 Ad
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '1'        | '07.09.2020 19:16:43'    |
+			| '1'        | '07.09.2020'    |
 	* Check movements by the Register  "R1020 Advances to vendors" 
 		And I click "Registrations report" button
 		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
@@ -364,7 +364,7 @@ Scenario: _043315 check Bank payment movements by the Register "R3035 Cash plann
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '323'      | '03.06.2021 17:01:44'    |
+			| '323'      | '03.06.2021'    |
 	* Check movements by the Register  "R3035 Cash planning" 
 		And I click "Registrations report" button
 		And I select "R3035 Cash planning" exact value from "Register" drop-down list
@@ -436,7 +436,7 @@ Scenario: _043318 check absence Bank payment movements by the Register "R3035 Ca
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '1'        | '07.09.2020 19:16:43'    |
+			| '1'        | '07.09.2020'    |
 	* Check movements by the Register  "R3035 Cash planning" 
 		And I click "Registrations report" button
 		And I select "R3035 Cash planning" exact value from "Register" drop-down list

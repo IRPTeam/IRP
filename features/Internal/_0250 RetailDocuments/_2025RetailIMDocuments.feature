@@ -828,16 +828,16 @@ Scenario: _0155273 select items from RSC in POS
 	* Select RSC with RGR based on RSO
 		And I click "Select basis document" button
 		And "SalesOrders" table became equal
-			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' |
-			| '317'    | '11.08.2023 15:50:42' | '3 183,00' | 'Daniel Smith'    | ''       |
-			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       |
+			| 'Number' | 'Date'       | 'Amount'   | 'Retail customer' | 'Branch' |
+			| '317'    | '11.08.2023' | '3 183,00' | 'Daniel Smith'    | ''       |
+			| '318'    | '11.08.2023' | '1 188,00' | 'Daniel Smith'    | ''       |
 		And "RetailShipmentConfirmation" table became equal
-			| 'Number' | 'Date'                | 'Retail customer' | 'Courier' | 'Transaction type' | 'Branch' |
-			| '317'    | '11.08.2023 16:02:15' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
-			| '318'    | '11.08.2023 16:07:56' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
+			| 'Number' | 'Date'        'Retail customer' | 'Courier' | 'Transaction type' | 'Branch' |
+			| '317'    | '11.08.2023' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
+			| '318'    | '11.08.2023' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
 		And I go to line in "RetailShipmentConfirmation" table
-			| 'Number' | 'Date'                | 'Retail customer' | 'Courier' | 'Transaction type' | 'Branch' |
-			| '317'    | '11.08.2023 16:02:15' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
+			| 'Number' | 'Date'       | 'Retail customer' | 'Courier' | 'Transaction type' | 'Branch' |
+			| '317'    | '11.08.2023' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
 		And I activate field named "SalesOrdersDate" in "SalesOrders" table
 		And I activate field named "RetailShipmentConfirmationDate" in "RetailShipmentConfirmation" table
 		And in the table "SalesOrders" I click "Select" button
@@ -886,8 +886,8 @@ Scenario: _0155274 select items from RSO in POS
 	* Select RSO
 		And I click "Select basis document" button
 		And I go to line in "SalesOrders" table
-			| 'Amount'   | 'Date'                | 'Number' | 'Retail customer' |
-			| '1 188,00' | '11.08.2023 15:51:30' | '318'    | 'Daniel Smith'    |
+			| 'Amount'   | 'Date'       | 'Number' | 'Retail customer' |
+			| '1 188,00' | '11.08.2023' | '318'    | 'Daniel Smith'    |
 		And in the table "SalesOrders" I click "Select" button
 		If "Select sales person" window is opened Then
 			And I go to line in "" table
@@ -929,8 +929,8 @@ Scenario: _0155274 select items from RSO in POS
 		And I click "OK" button	
 		And I click "Select basis document" button
 		And "SalesOrders" table does not contain lines
-			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' |
-			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       |
+			| 'Number' | 'Date'       | 'Amount'   | 'Retail customer' | 'Branch' |
+			| '318'    | '11.08.2023' | '1 188,00' | 'Daniel Smith'    | ''       |
 		And I close all client application windows
 		
 				

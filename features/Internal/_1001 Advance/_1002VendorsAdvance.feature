@@ -205,9 +205,9 @@ Scenario: _1002002 create VendorsAdvancesClosing
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
 		And "List" table contains lines
-			| 'Number'                                     | 'Date'                  | 'Company'        | 'Begin of period'   | 'End of period'    |
-			| '$$NumberVendorsAdvancesClosing11022021$$'   | '11.02.2021 12:00:00'   | 'Main Company'   | '11.02.2021'        | '11.02.2021'       |
-			| '$$NumberVendorsAdvancesClosing15032021$$'   | '15.03.2021 12:00:00'   | 'Main Company'   | '15.03.2021'        | '15.03.2021'       |
+			| 'Number'                                     | 'Date'         | 'Company'        | 'Begin of period'   | 'End of period'    |
+			| '$$NumberVendorsAdvancesClosing11022021$$'   | '11.02.2021'   | 'Main Company'   | '11.02.2021'        | '11.02.2021'       |
+			| '$$NumberVendorsAdvancesClosing15032021$$'   | '15.03.2021'   | 'Main Company'   | '15.03.2021'        | '15.03.2021'       |
 	* Post all vendors advance closing
 		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
 		Then I select all lines of "List" table
@@ -591,19 +591,19 @@ Scenario: _1002070 check payment status for PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	* Check
 		And "List" table contains lines
-			| 'Number' | 'Date'                | 'Partner'   | 'Amount'   | 'Legal name'        | 'Status'   | 'Store'    | 'PaymentStatusUnit' |
-			| '125'    | '12.02.2021 12:00:00' | 'Maxim'     | '100,00'   | 'Company Maxim'     | 'Closed'   | 'Store 01' | 'Not paid'          |
-			| '117'    | '12.02.2021 15:12:15' | 'Ferron BP' | '4 470,00' | 'Company Ferron BP' | 'Shipping' | 'Store 02' | 'Fully paid'        |
-			| '116'    | '12.02.2021 15:13:37' | 'Ferron BP' | '2 300,00' | 'Company Ferron BP' | 'Closed'   | 'Store 02' | 'Fully paid'        |
-			| '115'    | '12.02.2021 15:13:56' | 'Ferron BP' | '2 300,00' | 'Company Ferron BP' | 'Closed'   | 'Store 02' | 'Fully paid'        |
-			| '120'    | '12.02.2021 15:40:00' | 'DFC'       | '170,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'       |
-			| '121'    | '12.02.2021 15:40:00' | 'Adel'      | '170,00'   | 'Company Adel'      | 'Closed'   | 'Store 02' | 'Not tracked'       |
-			| '118'    | '12.02.2021 16:08:41' | 'Ferron BP' | '2 070,00' | 'Company Ferron BP' | 'Shipping' | 'Store 02' | 'Fully paid'        |
-			| '119'    | '12.02.2021 16:21:23' | 'Ferron BP' | '1 600,00' | 'Company Ferron BP' | 'Closed'   | 'Store 02' | 'Fully paid'        |
-			| '126'    | '15.03.2021 12:00:00' | 'Maxim'     | '190,00'   | 'Company Maxim'     | 'Closed'   | 'Store 01' | 'Fully paid'        |
-			| '122'    | '15.03.2021 12:00:01' | 'DFC'       | '110,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'       |
-			| '123'    | '15.03.2021 19:00:00' | 'DFC'       | '190,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'       |
-			| '124'    | '28.04.2021 16:40:13' | 'DFC'       | '200,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'       |
-			| '127'    | '28.04.2021 21:50:01' | 'Maxim'     | '100,00'   | 'Company Maxim'     | 'Closed'   | 'Store 01' | 'Fully paid'        |
-			| '194'    | '04.09.2023 13:50:38' | 'Maxim'     | '1 800,00' | 'Company Aldis'     | 'Closed'   | 'Store 01' | 'Fully paid'        |
+			| 'Number' | 'Date'       | 'Partner'   | 'Amount'   | 'Legal name'        | 'Status'   | 'Store'    | 'PaymentStatusUnit' |
+			| '125'    | '12.02.2021' | 'Maxim'     | '100,00'   | 'Company Maxim'     | 'Closed'   | 'Store 01' | 'Not paid'          |
+			| '117'    | '12.02.2021' | 'Ferron BP' | '4 470,00' | 'Company Ferron BP' | 'Shipping' | 'Store 02' | 'Fully paid'        |
+			| '116'    | '12.02.2021' | 'Ferron BP' | '2 300,00' | 'Company Ferron BP' | 'Closed'   | 'Store 02' | 'Fully paid'        |
+			| '115'    | '12.02.2021' | 'Ferron BP' | '2 300,00' | 'Company Ferron BP' | 'Closed'   | 'Store 02' | 'Fully paid'        |
+			| '120'    | '12.02.2021' | 'DFC'       | '170,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'       |
+			| '121'    | '12.02.2021' | 'Adel'      | '170,00'   | 'Company Adel'      | 'Closed'   | 'Store 02' | 'Not tracked'       |
+			| '118'    | '12.02.2021' | 'Ferron BP' | '2 070,00' | 'Company Ferron BP' | 'Shipping' | 'Store 02' | 'Fully paid'        |
+			| '119'    | '12.02.2021' | 'Ferron BP' | '1 600,00' | 'Company Ferron BP' | 'Closed'   | 'Store 02' | 'Fully paid'        |
+			| '126'    | '15.03.2021' | 'Maxim'     | '190,00'   | 'Company Maxim'     | 'Closed'   | 'Store 01' | 'Fully paid'        |
+			| '122'    | '15.03.2021' | 'DFC'       | '110,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'       |
+			| '123'    | '15.03.2021' | 'DFC'       | '190,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'       |
+			| '124'    | '28.04.2021' | 'DFC'       | '200,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'       |
+			| '127'    | '28.04.2021' | 'Maxim'     | '100,00'   | 'Company Maxim'     | 'Closed'   | 'Store 01' | 'Fully paid'        |
+			| '194'    | '04.09.2023' | 'Maxim'     | '1 800,00' | 'Company Aldis'     | 'Closed'   | 'Store 01' | 'Fully paid'        |
 	And I close all client application windows

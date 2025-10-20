@@ -226,8 +226,8 @@ Scenario: _054103 create Money transfer based on Cash transfer order (same curre
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'   | 'Sender'              | 'Receiver'              | 'Company'        | 'Date'                   |
-			| '2'        | 'Bank account, EUR'   | 'Bank account 2, EUR'   | 'Main Company'   | '05.04.2021 12:09:54'    |
+			| 'Number'   | 'Sender'              | 'Receiver'              | 'Company'        | 'Date'          |
+			| '2'        | 'Bank account, EUR'   | 'Bank account 2, EUR'   | 'Main Company'   | '05.04.2021'    |
 		And I click "Money transfer" button
 	* Check money transfer creation
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -264,8 +264,8 @@ Scenario: _054104 try to re-create Money transfer based on Cash transfer order (
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'   | 'Sender'              | 'Receiver'              | 'Company'        | 'Date'                   |
-			| '2'        | 'Bank account, EUR'   | 'Bank account 2, EUR'   | 'Main Company'   | '05.04.2021 12:09:54'    |
+			| 'Number'   | 'Sender'              | 'Receiver'              | 'Company'        | 'Date'      |
+			| '2'        | 'Bank account, EUR'   | 'Bank account 2, EUR'   | 'Main Company'   | '05.04.2021 |
 		And I click "Money transfer" button
 	* Check info message
 		When TestClient log message contains "Document [Cash transfer order 2 dated 05.04.2021 12:09:54] already have related documents" string
@@ -276,8 +276,8 @@ Scenario: _054105 create two Money transfer based on Cash transfer order (differ
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'   | 'Sender'              | 'Receiver'            | 'Company'        | 'Date'                   |
-			| '3'        | 'Bank account, TRY'   | 'Bank account, EUR'   | 'Main Company'   | '05.04.2021 12:23:49'    |
+			| 'Number'   | 'Sender'              | 'Receiver'            | 'Company'        | 'Date'          |
+			| '3'        | 'Bank account, TRY'   | 'Bank account, EUR'   | 'Main Company'   | '05.04.2021'    |
 		And I click "Money transfer" button
 	* Check money transfer creation
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -310,8 +310,8 @@ Scenario: _054105 create two Money transfer based on Cash transfer order (differ
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'   | 'Sender'              | 'Receiver'            | 'Company'        | 'Date'                   |
-			| '3'        | 'Bank account, TRY'   | 'Bank account, EUR'   | 'Main Company'   | '05.04.2021 12:23:49'    |
+			| 'Number'   | 'Sender'              | 'Receiver'            | 'Company'        | 'Date'          |
+			| '3'        | 'Bank account, TRY'   | 'Bank account, EUR'   | 'Main Company'   | '05.04.2021'    |
 		And I click "Money transfer" button
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Sender" became equal to "Bank account, TRY"
@@ -345,8 +345,8 @@ Scenario: _054106 check refilling Monet rtransfer based on Cash transfer order
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
-			| 'Number'   | 'Sender'              | 'Receiver'            | 'Company'        | 'Date'                   |
-			| '3'        | 'Bank account, TRY'   | 'Bank account, EUR'   | 'Main Company'   | '05.04.2021 12:23:49'    |
+			| 'Number'   | 'Sender'              | 'Receiver'            | 'Company'        | 'Date'          |
+			| '3'        | 'Bank account, TRY'   | 'Bank account, EUR'   | 'Main Company'   | '05.04.2021'    |
 		And I click "Money transfer" button
 		Then the form attribute named "CashTransferOrder" became equal to "Cash transfer order 3 dated 05.04.2021 12:23:49"
 	* Select another CTO
@@ -376,8 +376,8 @@ Scenario: _054106 check refilling Monet rtransfer based on Cash transfer order
 		And I move to "Other" tab
 		And I click Select button of "Cash transfer order" field
 		And I go to line in "List" table
-			| 'Company'        | 'Date'                  | 'Number'   | 'Receiver'            | 'Sender'               |
-			| 'Main Company'   | '05.04.2021 12:23:49'   | '3'        | 'Bank account, EUR'   | 'Bank account, TRY'    |
+			| 'Company'        | 'Date'         | 'Number'   | 'Receiver'            | 'Sender'               |
+			| 'Main Company'   | '05.04.2021'   | '3'        | 'Bank account, EUR'   | 'Bank account, TRY'    |
 		And I select current line in "List" table
 		Then "1C:Enterprise" window is opened
 		And I click "Cancel" button

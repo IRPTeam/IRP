@@ -31,4 +31,14 @@
   <content>Report.R3010_CashOnHand</content>
   <content>Report.R5020_PartnersBalance</content>
   <content>Report.R5020_ProfitLosses</content>
+  <content>Report.R3010A_CashOnHand</content>
+  <content>Report.R3011A_CashFlow</content>
+  <content>Report.R3021A_CashInTransit</content>
+  <content>Report.R3027A_CashAdvance</content>
+  <content>Report.R5010A_ReconciliationStatement</content>
+  <content>Report.R5020A_PartnersBalance</content>
+  <content>Report.R5021A_Revenues</content>
+  <content>Report.R5022A_Expenses</content>
+  <content>Report.R502A_ProfitLosses</content>
+  <content>Report.R6070_OtherPeriodsExpenses</content>
 </mdclass:FunctionalOption>

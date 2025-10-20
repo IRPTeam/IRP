@@ -11,7 +11,6 @@
   <content>Catalog.PartnersBankAccounts</content>
   <content>Catalog.PriceTypes</content>
   <content>Subsystem.SalesAR</content>
-  <content>Report.R1100_CustomersAging</content>
   <content>Document.PriceList</content>
   <content>Report.D2001_Sales</content>
   <content>Document.SalesReportFromTradeAgent</content>
@@ -31,4 +30,8 @@
   <content>Report.R2001A_Sales</content>
   <content>Report.D4011_FreeStocks</content>
   <content>Report.D4012_StockReservation</content>
+  <content>Report.M1010A_PriceList</content>
+  <content>Report.R4050A_InventoryBalance</content>
+  <content>Report.R5020_PartnersBalance</content>
+  <content>Report.R5020A_PartnersBalance</content>
 </mdclass:FunctionalOption>

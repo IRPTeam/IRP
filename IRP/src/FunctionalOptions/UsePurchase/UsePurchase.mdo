@@ -28,4 +28,11 @@
   <content>AccumulationRegister.R1002T_PurchaseReturns</content>
   <content>AccumulationRegister.R1001T_Purchases</content>
   <content>AccumulationRegister.R1020B_AdvancesToVendors</content>
+  <content>Report.M1010A_PriceList</content>
+  <content>Report.R1001A_Purchases</content>
+  <content>Report.R1031A_ReceiptInvoicingBalance</content>
+  <content>Report.R1031B_ReceiptInvoicingMovements</content>
+  <content>Report.R4050A_InventoryBalance</content>
+  <content>Report.R5020_PartnersBalance</content>
+  <content>Report.R5020A_PartnersBalance</content>
 </mdclass:FunctionalOption>

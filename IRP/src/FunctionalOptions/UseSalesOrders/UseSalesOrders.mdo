@@ -33,4 +33,7 @@
   <content>Report.R2011A_SalesOrdersShipment</content>
   <content>Report.R2012A_SalesOrdersInvoiceClosing</content>
   <content>Report.R401A_FreeStocks</content>
+  <content>Report.R3024B_SalesOrdersToBePaid</content>
+  <content>Report.R4011B_FreeStockMovements</content>
+  <content>Report.R4012A_StockReservation</content>
 </mdclass:FunctionalOption>

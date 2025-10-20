@@ -76,4 +76,8 @@
   <content>Subsystem.Inventory</content>
   <content>Catalog.Stores</content>
   <content>Report.D4010_ActualStocks</content>
+  <content>Report.R4010A_StockBalance</content>
+  <content>Report.R4050A_InventoryBalance</content>
+  <content>Report.R405A_StockAdjustments</content>
+  <content>Report.R9101S_InventoryResults</content>
 </mdclass:FunctionalOption>

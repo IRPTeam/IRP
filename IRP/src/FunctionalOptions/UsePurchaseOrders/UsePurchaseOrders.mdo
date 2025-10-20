@@ -41,4 +41,6 @@
   <content>Report.R1010A_PurchaseOrders</content>
   <content>Report.R1011A_PuchaseOrdersShipment</content>
   <content>Report.R1012A_PurchaseOrdersInvoiceClosing</content>
+  <content>Report.R4011B_FreeStockMovements</content>
+  <content>Report.R4012A_StockReservation</content>
 </mdclass:FunctionalOption>

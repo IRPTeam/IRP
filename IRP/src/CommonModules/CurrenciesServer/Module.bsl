@@ -186,6 +186,8 @@ Function IsUseCurrencyJoin(Parameters, RecMetadata)
 	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R3015B_CashAdvance);
 	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R2021B_CustomersTransactions);
 	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R1021B_VendorsTransactions);
+	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R5011B_CustomersAging);
+	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R5012B_VendorsAging);
 
 	FilterByDocument = False;
 

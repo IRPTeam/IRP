@@ -4,7 +4,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocShipmentPlaningOrderServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
-	SystemAttributesServer.OutputSystemAttributes(ThisObject, "Company");
+	SystemAttributesServer.OutputSystemAttributes(ThisObject, "Author");
 EndProcedure
 
 #EndRegion

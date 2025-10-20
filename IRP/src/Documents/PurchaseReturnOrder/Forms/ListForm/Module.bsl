@@ -4,7 +4,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocPurchaseReturnOrderServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
-	SystemAttributesServer.OutputSystemAttributes(ThisObject, "TransactionType");
+	SystemAttributesServer.OutputSystemAttributes(ThisObject, "Author");
 EndProcedure
 
 #EndRegion

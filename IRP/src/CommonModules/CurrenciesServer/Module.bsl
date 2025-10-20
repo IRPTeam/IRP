@@ -98,8 +98,17 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			GroupTableByAllDimensions(PrepareTable, ItemOfPostingInfo.Metadata, UseKey, "RowKey", IncludeDimensions);	
 			GroupedTable = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
 			
-			Table = AlignTables(FullTable, GroupedTable, ItemOfPostingInfo.Metadata, UseKey);
-					
+			If Parameters.Metadata = Metadata.Documents.WithholdingTaxInvoice and Parameters.Object.PriceIncludeTax = False Then
+					Op1 = Catalogs.AccountingOperations.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions;
+					Op2 = Catalogs.AccountingOperations.WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions;
+					TrnCurrency = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency;
+					LocalCurrency = Parameters.Object.Company.LegalCurrencyMovementType;
+		
+				Table = AlignTables2("", Op1, Op2, TrnCurrency, LocalCurrency, FullTable, 
+						ItemOfPostingInfo, TempTablesManager, UseAgreementMovementType, UseCurrencyJoin, UseKey);			
+			Else
+				Table = AlignTables(FullTable, GroupedTable, ItemOfPostingInfo.Metadata, UseKey);
+			EndIf;		
 		Else
 			Table = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
 			GroupTableByAllDimensions(Table, ItemOfPostingInfo.Metadata, UseKey, "", IncludeDimensions);
@@ -543,6 +552,87 @@ Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurre
 	QueryTable = QueryResults[1].Unload();
 		
 	Return QueryTable;
+EndFunction
+
+Function AlignTables2(_Key, Op1, Op2, TrnCurrency, LocalCurrency, FullTable, 
+		ItemOfPostingInfo, TempTablesManager, UseAgreementMovementType, UseCurrencyJoin, UseKey)
+	FilterTrn1 = New Structure();
+	FilterTrn1.Insert("Operation", Op1);
+	FilterTrn1.Insert("CurrencyMovementType", TrnCurrency);
+	If ValueIsFilled(_Key) Then
+		FilterTrn1.Insert("Key", _key);
+	EndIf;
+	TableTrn1 = FullTable.Copy(FilterTrn1);
+		
+	FilterTrn2 = New Structure();
+	FilterTrn2.Insert("Operation", Op2);
+	FilterTrn2.Insert("CurrencyMovementType", TrnCurrency);
+	If ValueIsFilled(_Key) Then
+		FilterTrn2.Insert("Key", _Key);
+	EndIf;
+	TableTrn2 = FullTable.Copy(FilterTrn2);
+			
+	TableTrn = FullTable.CopyColumns();
+	For Each R1 In TableTrn1 Do
+		FillPropertyValues(TableTrn.Add(), R1);
+	EndDo;
+	For Each R2 In TableTrn2 Do
+		FillPropertyValues(TableTrn.Add(), R2);
+	EndDo;
+			
+	GroupTableByAllDimensions(TableTrn, ItemOfPostingInfo.Metadata, UseKey, 
+		"RowKey, Operation, CrCurrency, DrCurrency", "");
+	
+	TableTrn = ExpandTable(TempTablesManager, TableTrn, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+	
+	FilterTrn3 = New Structure();
+	FilterTrn3.Insert("CurrencyMovementType", LocalCurrency);
+	
+	TableTrn = TableTrn.Copy(FilterTrn3);
+	
+	__Amount1 = 0;
+	For Each R3 In TableTrn Do
+		__Amount1 = __Amount1 + R3.Amount;
+	EndDo;
+	
+	FilterLoc1 = New Structure();
+	FilterLoc1.Insert("Operation", Op1);
+	FilterLoc1.Insert("CurrencyMovementType", LocalCurrency);
+	If ValueIsFilled(_Key) Then
+		FilterLoc1.Insert("Key", _Key);
+	EndIf;
+	TableLoc1 = FullTable.FindRows(FilterLoc1);
+	
+	FilterLoc2 = New Structure();
+	FilterLoc2.Insert("Operation", Op2);
+	FilterLoc2.Insert("CurrencyMovementType", LocalCurrency);
+	If ValueIsFilled(_Key) Then
+		FilterLoc2.Insert("Key", _Key);
+	EndIf;
+	TableLoc2 = FullTable.Copy(FilterLoc2);
+		
+	__Amount2 = 0;
+	__MaxRow = Undefined;
+	For Each R1 In TableLoc1 Do
+		If __MaxRow = Undefined Then
+			__MaxRow = R1;
+		Else
+			 If R1.Amount > __MaxRow.Amount Then
+			 	__MaxRow = R1;
+			 EndIf;
+		EndIf;
+		__Amount2 = __Amount2 + R1.Amount;
+	EndDo;
+	
+	For Each R2 In TableLoc2 Do
+		__Amount2 = __Amount2 + R2.Amount;
+	EndDo;
+	
+	__Diff = __Amount1 - __Amount2;
+	If __Diff > 0 And __MaxRow <> Undefined Then
+		__MaxRow.Amount = __MaxRow.Amount +__Diff;
+	EndIf;			
+	Return FullTable;		
 EndFunction
 
 Function AlignTables(FullTable, GroupedTable, RegMetadata, UseKey)

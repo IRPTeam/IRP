@@ -764,6 +764,8 @@ Procedure SetFiscalStatus(DocumentRef, Status, FiscalResponse = Undefined, DataP
 		FiscalResponse = New Structure;
 	EndIf;
 
+	SetPrivilegedMode(True);
+	
 	InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef, Status, FiscalResponse, DataPresentation);
 EndProcedure
 

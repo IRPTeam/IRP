@@ -581,6 +581,7 @@ Procedure RecalculateQuantityInRow(Row, UnitQuantityName = "QuantityUnit") Expor
 	UnitFactorFrom = Catalogs.Units.GetUnitFactor(Row[UnitQuantityName], ItemKeyUnit);
 	UnitFactorTo = Catalogs.Units.GetUnitFactor(Row.Unit, ItemKeyUnit);
 	Row.Quantity = ?(UnitFactorTo = 0, 0, Row.Quantity * UnitFactorFrom / UnitFactorTo);
+	Row.Quantity = Round(Row.Quantity, Metadata.DefinedTypes.typeQuantity.Type.NumberQualifiers.FractionDigits);
 EndProcedure
 
 #EndRegion

@@ -37,4 +37,8 @@
   <content>AccumulationRegister.R1010T_PurchaseOrders</content>
   <content>Document.PurchaseOrder</content>
   <content>Document.InternalSupplyRequest</content>
+  <content>Report.R401A_FreeStocks</content>
+  <content>Report.R1010A_PurchaseOrders</content>
+  <content>Report.R1011A_PuchaseOrdersShipment</content>
+  <content>Report.R1012A_PurchaseOrdersInvoiceClosing</content>
 </mdclass:FunctionalOption>

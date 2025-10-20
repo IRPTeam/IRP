@@ -999,22 +999,22 @@
   <functionalOptions>FunctionalOption.UseNumberingRules</functionalOptions>
   <functionalOptions>FunctionalOption.UseObjectAccess</functionalOptions>
   <functionalOptions>FunctionalOption.UseObjectTransformation</functionalOptions>
-  <functionalOptions>FunctionalOption.UsePurchaseOrders</functionalOptions>
-  <functionalOptions>FunctionalOption.UseSalesOrders</functionalOptions>
-  <functionalOptions>FunctionalOption.UsePaymentOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UsePartnerItems</functionalOptions>
   <functionalOptions>FunctionalOption.UsePartnersHierarchy</functionalOptions>
   <functionalOptions>FunctionalOption.UsePartnerTerms</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePaymentOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UsePlannedReceiptReservation</functionalOptions>
   <functionalOptions>FunctionalOption.UsePreliminaryStock</functionalOptions>
   <functionalOptions>FunctionalOption.UsePriceByProperties</functionalOptions>
   <functionalOptions>FunctionalOption.UseProfitLossCenter</functionalOptions>
   <functionalOptions>FunctionalOption.UsePurchase</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePurchaseOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseResponsiblePerson</functionalOptions>
   <functionalOptions>FunctionalOption.UseRetail</functionalOptions>
   <functionalOptions>FunctionalOption.UseRetailOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseSalary</functionalOptions>
   <functionalOptions>FunctionalOption.UseSales</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSalesOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
   <functionalOptions>FunctionalOption.UseShipmentAndReceiptPlaningOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseShipmentConfirmationAndGoodsReceipts</functionalOptions>

@@ -28,4 +28,9 @@
   <content>AccumulationRegister.R4037B_PlannedReceiptReservationRequests.Dimension.Order</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesOrder</content>
   <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.SalesOrder</content>
+  <content>Report.R2010A_SalesOrders</content>
+  <content>Report.R2010A_SalesOrdersExecution</content>
+  <content>Report.R2011A_SalesOrdersShipment</content>
+  <content>Report.R2012A_SalesOrdersInvoiceClosing</content>
+  <content>Report.R401A_FreeStocks</content>
 </mdclass:FunctionalOption>

@@ -10,4 +10,5 @@
   <content>Document.PlannedReceiptReservation</content>
   <content>Document.SalesOrder.TabularSection.ItemList.Attribute.ReservationDate</content>
   <content>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</content>
+  <content>Report.R401A_FreeStocks</content>
 </mdclass:FunctionalOption>

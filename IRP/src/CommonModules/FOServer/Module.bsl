@@ -60,6 +60,7 @@ Function GetFOSubordination() Export
 	Subordination.Insert("UseItemKey", UseItemKey);
 	
 	UsePurchase = New Array; // Array of String
+	UsePurchase.Add("UsePartnerTerms");
 	UsePurchase.Add("UsePurchaseOrders");
 	UsePurchase.Add("UsePlannedReceiptReservation");
 	UsePurchase.Add("UseLandedCost");
@@ -68,10 +69,10 @@ Function GetFOSubordination() Export
 	Subordination.Insert("UsePurchase", UsePurchase);
 	
 	UseSales = New Array; // Array of String
+	UseSales.Add("UsePartnerTerms");
 	UseSales.Add("UseSalesOrders");
 	UseSales.Add("UseSpecialOffers");
 	UseSales.Add("UseDeliveryDate");
-	UseSales.Add("UsePartnerTerms");
 	UseSales.Add("UseWorkOrders");
 	UseSales.Add("UseManagersAndSalesPersons");
 	Subordination.Insert("UseSales", UseSales);
@@ -84,6 +85,7 @@ Function GetFOSubordination() Export
 	UseFinance = New Array; // Array of String
 	UseFinance.Add("UseBankDocuments");
 	UseFinance.Add("UseCashTransactions");
+	UseFinance.Add("UsePaymentOrders");
 	UseFinance.Add("UseChequeBonds");
 	UseFinance.Add("UseAging");
 	Subordination.Insert("UseFinance", UseFinance);
@@ -155,7 +157,6 @@ Function GetFOGroups() Export
 	FOGroups.Insert("Inventory", FOList);
 
 	FOList = New Array; // Array of String
-	FOList.Add("UsePaymentOrders");
 	FOList.Add("UseFinance");
 	FOGroups.Insert("Money", FOList);
 	

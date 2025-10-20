@@ -122,6 +122,7 @@ Procedure GenerateReportAtServer(Result)
 	If TypeOf(ThisObject.Document) = Type("DocumentRef.ChequeBondTransaction") Then
 		GenerateReportForOneDocument(ThisObject.Document, Result, Template, MainTitleArea);
 		ArrayOfChequeBondTransactionItems = GetChequeBondTransactionItems(ThisObject.Document);
+		Template = Reports.D0013_DocumentRegistrationsReport.GetTemplate("Template");
 		MainTitleAreaLowSelection = Template.GetArea("MainTitleLowSelection");
 		For Each ItemOfChequeBondTransactionItems In ArrayOfChequeBondTransactionItems Do
 			GenerateReportForOneDocument(ItemOfChequeBondTransactionItems, Result, Template, MainTitleAreaLowSelection);

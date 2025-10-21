@@ -182,6 +182,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R2040B_TaxesIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R1040B_TaxesOutgoing.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
+	Tables.R5011B_CustomersAging.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5012B_VendorsAging.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 

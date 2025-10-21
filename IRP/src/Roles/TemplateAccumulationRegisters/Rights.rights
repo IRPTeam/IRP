@@ -585,6 +585,20 @@
 		</right>
 	</object>
 	<object>
+		<name>AccumulationRegister.B1040B_AgingKey</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.R3011T_CashFlow.Dimension.CurrencyMovementType</name>
 		<right>
 			<name>Edit</name>

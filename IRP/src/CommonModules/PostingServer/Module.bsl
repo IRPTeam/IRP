@@ -1299,11 +1299,17 @@ EndProcedure
 //  * Value - See PostingTableSettings
 //  Parameters - See GetPostingParameters
 //  UseOldRegisters - Boolean - Use old registers
-Procedure SetPostingDataTables(PostingDataTables, Parameters, UseOldRegisters = False) Export
+Procedure SetPostingDataTables(PostingDataTables, Parameters, UseOldRegisters = False, ExcludeRegisters = Undefined) Export
 	
 	RegisterRecords = GetRegisterRecords(Parameters);
 	
 	For Each Table In Parameters.DocumentDataTables Do
+		If ExcludeRegisters <> Undefined Then
+			If ExcludeRegisters.Find(Table.Key) <> Undefined Then
+				Continue;
+			EndIf;
+		EndIf;
+		
 		If UseOldRegisters Or UseRegister(Table.Key) Then
 			SetPostingDataTable(PostingDataTables, Parameters, Table.Key, Table.Value, RegisterRecords);
 		EndIf;

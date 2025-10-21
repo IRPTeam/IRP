@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="acf7993d-7391-4d24-b691-6d9506d5aba2">
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4d5a2aa1-b7e9-40cd-ac2e-e3ca21280b9a">
   <producedTypes>
-    <selectionType typeId="279391e4-27f6-4c9d-b0d6-537045f1287f" valueTypeId="e48151ac-1d38-4f33-a1bb-866ffec2ff35"/>
-    <listType typeId="39edc9ff-91a9-4fc8-81d3-132a68149c9e" valueTypeId="0462cd81-0cc1-4bd4-918c-f0fdb8f72efa"/>
-    <managerType typeId="3eb12cf8-c2a0-4567-8c8d-360b5b7020d8" valueTypeId="a9d0c3be-483c-4a57-ab50-7d0ba036706b"/>
-    <recordSetType typeId="a888034d-d5e3-4c4e-a42e-4dca962f62df" valueTypeId="b9060fd4-2f2a-4e00-b0aa-9893fdea740b"/>
-    <recordKeyType typeId="85c20467-91d6-4055-9084-cd2377241ea4" valueTypeId="52852120-2a81-48fa-9692-7a469165a761"/>
-    <recordType typeId="5240f246-a22e-464e-a9c1-b91d42437f18" valueTypeId="1874a612-efb4-42b4-954b-3796c2136956"/>
+    <selectionType typeId="2e29a60d-613b-49a6-924e-50449b7b3ce7" valueTypeId="0953b6cf-2b39-4fee-b36f-df5c7d3c3e19"/>
+    <listType typeId="a635aa44-40a0-4d43-b689-f3efbe81531f" valueTypeId="b24f3877-b0e7-4fb9-924f-e07dad8cbc1d"/>
+    <managerType typeId="e88f15c5-b27b-47b9-afde-adbd32a07f8c" valueTypeId="1764a412-a20c-46b1-91c9-4f4f8b484647"/>
+    <recordSetType typeId="459ecee9-f6c0-4261-87a4-4f560e8e674e" valueTypeId="f0df6450-0a22-4688-8553-67934cb44a4e"/>
+    <recordKeyType typeId="a61f89f0-8b07-4194-9710-98f76505f8a5" valueTypeId="cc065ed5-04d1-4bca-a23b-300906a80e66"/>
+    <recordType typeId="60e29892-893c-4b70-9114-d2e648aa2e1c" valueTypeId="81cbd110-c8df-4b86-a250-bd9079a1fbe8"/>
   </producedTypes>
-  <name>R5011B_CustomersAging</name>
+  <name>B1040B_AgingKey</name>
   <synonym>
     <key>en</key>
-    <value>R5011 Customers aging</value>
+    <value>B1040 Aging key</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="965441c7-840c-4688-8755-1648df4bc25a">
+  <resources uuid="152806f7-63dd-43d4-8084-ac4d3c7e18d2">
     <name>Amount</name>
     <synonym>
       <key>en</key>
@@ -29,21 +29,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <attributes uuid="dfce274b-b52e-4d5b-a5be-79816f85b550">
-    <name>AgingClosing</name>
-    <synonym>
-      <key>en</key>
-      <value>Aging closing</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.CustomersAdvancesClosing</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <dimensions uuid="d69e7da8-45e4-4882-97ae-eddbc6e36abd">
+  <dimensions uuid="0355bab6-7399-4426-85fd-c097b4bfab9e">
     <name>Company</name>
     <synonym>
       <key>en</key>
@@ -57,7 +43,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="84e2d15b-52fd-4d72-8a86-1be298641988">
+  <dimensions uuid="019545dc-5e02-45b7-ac44-be0eb8fbaf21">
     <name>Branch</name>
     <synonym>
       <key>en</key>
@@ -71,7 +57,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="ec98bf53-0162-4c2a-8ab4-dc9676c99b9a">
+  <dimensions uuid="92afb181-a42f-4dd1-a7bd-e2db9744ecb2">
     <name>Currency</name>
     <synonym>
       <key>en</key>
@@ -85,7 +71,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="f3d28975-9411-4cc7-b374-b25a2762b845">
+  <dimensions uuid="9b294efc-9d76-4071-a11c-4956cce94cf8">
     <name>Agreement</name>
     <synonym>
       <key>en</key>
@@ -99,7 +85,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="f87446a6-4761-4112-b56e-b4091785b3f0">
+  <dimensions uuid="36abf279-5841-4c6e-ba13-e7c05f8a62d0">
     <name>Partner</name>
     <synonym>
       <key>en</key>
@@ -113,7 +99,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="0a827974-b319-44d4-ba9e-da7698392e9d">
+  <dimensions uuid="673c8721-9f60-4139-9b6b-483ffa80beec">
     <name>Invoice</name>
     <synonym>
       <key>en</key>
@@ -134,7 +120,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="1a7aaf2f-3dea-4bd1-97ca-6df51ce20a71">
+  <dimensions uuid="f8d53919-f6df-4748-acd0-e71f218da093">
     <name>PaymentDate</name>
     <synonym>
       <key>en</key>
@@ -145,34 +131,6 @@
       <dateQualifiers>
         <dateFractions>Date</dateFractions>
       </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="1a229a06-bf28-4e63-adeb-9e018a892e68">
-    <name>CurrencyMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Multi currency movement type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="d5f45b28-d562-4fd9-a80c-eb8354925057">
-    <name>TransactionCurrency</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

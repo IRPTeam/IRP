@@ -160,6 +160,9 @@ Function IsUseAgreementMovementType(RegMetadata)
 	
 	Registers.Add(Reg.R3027B_EmployeeCashAdvance);
 	
+	Registers.Add(Reg.R5011B_CustomersAging);
+	Registers.Add(Reg.R5012B_VendorsAging);
+	
 	If Registers.Find(RegMetadata) = Undefined Then
 		Return False;
 	Else
@@ -192,6 +195,8 @@ Function IsUseCurrencyJoin(Parameters, RecMetadata)
 	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R3015B_CashAdvance);
 	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R2021B_CustomersTransactions);
 	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R1021B_VendorsTransactions);
+	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R5011B_CustomersAging);
+	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R5012B_VendorsAging);
 
 	FilterByDocument = False;
 
@@ -205,6 +210,10 @@ Function IsUseCurrencyJoin(Parameters, RecMetadata)
 		FilterByDocument = True;
 	EndIf;
 
+	If TypeOf(Parameters.Object) = Type("DocumentObject.EmployeeCashAdvance") Or TypeOf(Parameters.Object) = Type("DocumentRef.EmployeeCashAdvance") Then
+		FilterByDocument = True;
+	EndIf;
+	
 	If FilterByDocument And ArrayOfRecMetadata.Find(RecMetadata) <> Undefined Then
 		UseCurrencyJoin = True;
 	EndIf;

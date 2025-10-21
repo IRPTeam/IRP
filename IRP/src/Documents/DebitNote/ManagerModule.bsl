@@ -120,6 +120,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R2040B_TaxesIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
+	Tables.R5011B_CustomersAging.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5012B_VendorsAging.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -188,6 +191,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(B1040B_AgingKey());
 	QueryArray.Add(R5015B_OtherPartnersTransactions());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(T2015S_TransactionsInfo());
@@ -311,6 +315,30 @@ EndFunction
 
 Function R5011B_CustomersAging()
 	Return AccumulationRegisters.R5011B_CustomersAging.R5011B_CustomersAging_DebitNote();
+EndFunction
+
+Function B1040B_AgingKey()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency AS Currency,
+		|	Transactions.Agreement AS Agreement,
+		|	Transactions.Partner AS Partner,
+		|	PaymentTerms.DocRef AS Invoice,
+		|	PaymentTerms.PaymentDate AS PaymentDate,
+		|	Transactions.Amount AS Amount
+		|INTO B1040B_AgingKey
+		|FROM
+		|	Transactions AS Transactions
+		|
+		|inner join PaymentTerms as PaymentTerms on
+		|	PaymentTerms.DocRef = Transactions.AgingBasisDocument
+		|	and PaymentTerms.Key = Transactions.Key
+		|	and Transactions.IsCustomer
+		|	and Transactions.IsPostingDetail_ByDocuments";
 EndFunction
 
 Function R2022B_CustomersPaymentPlanning()

@@ -755,6 +755,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances, Records_Offset
 	ArrayOfDocuments_UseKeyForCurrency.Add(Metadata.Documents.CreditNote);
 	ArrayOfDocuments_UseKeyForCurrency.Add(Metadata.Documents.DebitCreditNote);
 	ArrayOfDocuments_UseKeyForCurrency.Add(Metadata.Documents.OpeningEntry);
+	ArrayOfDocuments_UseKeyForCurrency.Add(Metadata.Documents.EmployeeCashAdvance);
 
 	IsCustomerAdvanceClosing = Parameters.Object.Ref.Metadata() = Metadata.Documents.CustomersAdvancesClosing;
 	IsVendorAdvanceClosing = Parameters.Object.Ref.Metadata() = Metadata.Documents.VendorsAdvancesClosing;

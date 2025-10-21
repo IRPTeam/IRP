@@ -201,6 +201,10 @@ Function IsUseCurrencyJoin(Parameters, RecMetadata)
 		FilterByDocument = True;
 	EndIf;
 
+	If TypeOf(Parameters.Object) = Type("DocumentObject.EmployeeCashAdvance") Or TypeOf(Parameters.Object) = Type("DocumentRef.EmployeeCashAdvance") Then
+		FilterByDocument = True;
+	EndIf;
+	
 	If FilterByDocument And ArrayOfRecMetadata.Find(RecMetadata) <> Undefined Then
 		UseCurrencyJoin = True;
 	EndIf;

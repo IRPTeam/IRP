@@ -182,10 +182,15 @@ Function IsClosedRetailDocument(DocRef) Export
 			And DocRef.ConsolidatedRetailSales.Posted;
 EndFunction
 
-Function UseConsolidatedRetailSales(Branch, SalesReturnData = Undefined) Export
+Function UseConsolidatedRetailSales(Branch, SalesReturnData = Undefined, CurrentDate = Undefined) Export
 	Result = FOServer.IsUseConsolidatedRetailSales() 
 		And ValueIsFilled(Branch)
 		And Branch.UseConsolidatedRetailSales;
+	
+	If Result And CurrentDate <> Undefined Then
+		Result = Branch.UseConsolidatedRetailSalesStartDate = Date(1,1,1) 
+			OR Branch.UseConsolidatedRetailSalesStartDate <= CurrentDate;
+	EndIf;
 		
 	If SalesReturnData = Undefined Then
 		Return Result;

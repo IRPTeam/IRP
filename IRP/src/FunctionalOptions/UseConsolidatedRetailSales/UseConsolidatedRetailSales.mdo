@@ -12,4 +12,5 @@
   <content>Catalog.BusinessUnits.Attribute.UseConsolidatedRetailSales</content>
   <content>InformationRegister.DocumentFiscalStatus.Resource.Status</content>
   <content>InformationRegister.DocumentFiscalStatus.Resource.CheckNumber</content>
+  <content>Catalog.BusinessUnits.Attribute.UseConsolidatedRetailSalesStartDate</content>
 </mdclass:FunctionalOption>

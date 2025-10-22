@@ -14571,6 +14571,8 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 		Return;
 	EndIf;
 	
+	SetPrivilegedMode(True);
+	
 	TempTablesManager = New TempTablesManager();
 	
 	Query = New Query();

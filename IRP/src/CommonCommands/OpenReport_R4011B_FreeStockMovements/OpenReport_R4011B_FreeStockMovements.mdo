@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="625d865e-d116-4c48-9c15-d3bea7eaf2f7">
+  <name>OpenReport_R4011B_FreeStockMovements</name>
+  <synonym>
+    <key>en</key>
+    <value>R4011B Free stock movements</value>
+  </synonym>
+  <group>NavigationPanelOrdinary</group>
+  <representation>Auto</representation>
+</mdclass:CommonCommand>

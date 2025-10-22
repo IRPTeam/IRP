@@ -89,11 +89,12 @@ Function RunUpdate_ItemType_StockBalanceDetail_SerialLotNumber(MethodName) Expor
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	ItemTypes.Ref
+	|	ItemTypes.Ref AS Ref
 	|FROM
 	|	Catalog.ItemTypes AS ItemTypes
 	|WHERE
-	|	NOT ItemTypes.DeletionMark";
+	|	NOT ItemTypes.DeletionMark
+	|	AND NOT ItemTypes.IsFolder";
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
@@ -142,7 +143,7 @@ Function RunUpdate_ItemType_StockBalanceDetail_SerialLotNumber(MethodName) Expor
 	BackgroundJobAPIServer.JobAddEndMessage(Errors);
 	
 	If HaveErrors Then
-               Raise R().JobAborted;
+		Raise R().JobAborted;
 	EndIf;
 	
 	If Errors.Count() = 0 Then

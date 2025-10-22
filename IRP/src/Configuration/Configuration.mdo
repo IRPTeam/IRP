@@ -1082,6 +1082,41 @@
   <commonCommands>CommonCommand.UpdateAllUserRoles</commonCommands>
   <commonCommands>CommonCommand.OpenPointOfSale</commonCommands>
   <commonCommands>CommonCommand.OpenLegalNames</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R1001A_Purchases</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R2001A_Sales</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R1010A_PurchaseOrders</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R1011A_PuchaseOrdersShipment</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R1012A_PurchaseOrdersInvoiceClosing</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R1031A_ReceiptInvoicingBalance</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R1031B_ReceiptInvoicingMovements</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R5020A_PartnersBalance</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R3010A_CashOnHand</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R3011A_CashFlow</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R3021A_CashInTransit</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R3027A_CashAdvance</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R5021A_Revenues</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R5022A_Expenses</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R502A_ProfitLosses</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R6020_BatchBalance</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R6060A_CostOfGoodsSold</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R5010A_ReconciliationStatement</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R1100_CustomersAging</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R1200_VendorsAging</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R2010A_SalesOrders</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R2010A_SalesOrdersExecution</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R2011A_SalesOrdersShipment</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R2012A_SalesOrdersInvoiceClosing</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R401A_FreeStocks</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_M1010A_PriceList</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R4010A_StockBalance</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R4011B_FreeStockMovements</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R4012A_StockReservation</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R403A_GoodsInTransit</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R4050A_InventoryBalance</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R405A_StockAdjustments</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R6020A_InventoryCost</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R9101S_InventoryResults</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_R9510A_Salary</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <commandGroups>CommandGroup.Fiscalization</commandGroups>

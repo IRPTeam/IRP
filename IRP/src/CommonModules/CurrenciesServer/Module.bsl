@@ -92,6 +92,14 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			EndIf;
 		EndIf;
 		
+		If ItemOfPostingInfo.Metadata = Metadata.InformationRegisters.T2015S_TransactionsInfo Then
+			IncludeDimensions = IncludeDimensions + ", IsDue, IsPaid";
+		EndIf;
+		
+		If ItemOfPostingInfo.Metadata = Metadata.InformationRegisters.T2014S_AdvancesInfo Then
+			IncludeDimensions = IncludeDimensions + ", IsPurchaseOrderClose, IsSalesOrderClose, RecordType";
+		EndIf;
+		
 		PrepareTable = ItemOfPostingInfo.PrepareTable;
 		If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.T1040T_AccountingAmounts Then
 			FullTable = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
@@ -137,6 +145,7 @@ Function IsUseAgreementMovementType(RegMetadata)
 	// return true if use else (not use) return false	
 	
 	Reg = Metadata.AccumulationRegisters;
+	RegInfo = Metadata.InformationRegisters;
 	
 	Registers = New Array();
 	Registers.Add(Reg.R2020B_AdvancesFromCustomers);
@@ -153,6 +162,10 @@ Function IsUseAgreementMovementType(RegMetadata)
 	
 	Registers.Add(Reg.R5011B_CustomersAging);
 	Registers.Add(Reg.R5012B_VendorsAging);
+	Registers.Add(Reg.B1040B_AgingKey);
+	
+	Registers.Add(RegInfo.T2015S_TransactionsInfo);
+	Registers.Add(RegInfo.T2014S_AdvancesInfo);
 	
 	If Registers.Find(RegMetadata) = Undefined Then
 		Return False;
@@ -675,7 +688,7 @@ Procedure GroupTableByAllDimensions(Table, RegMetadata, UseKey, ExcludeDimension
 	SummColumn = New Array();
 	
 	For Each Field In RegMetadata.Resources Do
-		If Table.Columns.Find(Field.Name) <> Undefined Then
+		If Table.Columns.Find(Field.Name) <> Undefined And GroupColumns.Find(Lower(Field.Name)) = Undefined  Then
 			SummColumn.Add(Field.Name)
 		EndIf;				
 	EndDo;

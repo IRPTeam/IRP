@@ -90,7 +90,7 @@ Procedure AgreementCreationQuestionAfter(QuestionResult, AdditionalParameters) E
 	AgreementStructure = New Structure;
 	AgreementStructure.Insert("Company", GetDefaultCompany());
 	AgreementStructure.Insert("Partner", AdditionalParameters.Partner);
-	AgreementStructure.Insert("CurrencyMovementType", GetDefaultMovementType(AgreementStructure.Company));
+	AgreementStructure.Insert("CurrencyMovementType", GetDefaultMovementType());
 	
 	FormParameters = New Structure("FillingValues", AgreementStructure);
 	
@@ -98,10 +98,25 @@ Procedure AgreementCreationQuestionAfter(QuestionResult, AdditionalParameters) E
 EndProcedure
 
 &AtServerNoContext
-Function GetDefaultMovementType(CompanyRef)
+Function GetDefaultMovementType()
+	CurrencyCurrencyMovementType = ChartsOfCharacteristicTypes.CurrencyMovementType.EmptyRef();
 	
-	Return Catalogs.Companies.GetLegalCurrencies(CompanyRef)[0].CurrencyMovementType;
-	
+	Query = New Query;
+	Query.Text = 
+	"SELECT
+	|	CurrencyMovementType.Ref
+	|FROM
+	|	ChartOfCharacteristicTypes.CurrencyMovementType AS CurrencyMovementType
+	|WHERE
+	|	CurrencyMovementType.Type = VALUE(Enum.CurrencyType.Agreement)
+	|	AND NOT CurrencyMovementType.DeletionMark";
+	Selection = Query.Execute().Select();
+	If Selection.Count() = 1 Then
+		Selection.Next();
+		CurrencyCurrencyMovementType = Selection.Ref;
+	EndIf;
+		
+	Return 	CurrencyCurrencyMovementType;
 EndFunction	
 
 // Get default company.

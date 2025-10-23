@@ -14,21 +14,9 @@ Background:
 Scenario: _900000 check open company catalog (dont use company)
 	#Temp
 	And In the command interface I select "Settings" "Functional option settings"
-	And I go to line in "FunctionalOptions" table
-		| "Option"       |
-		| "Use purchase" |
-	And I set "Use" checkbox in "FunctionalOptions" table
-	And I finish line editing in "FunctionalOptions" table
-	And I go to line in "FunctionalOptions" table
-		| "Option"    |
-		| "Use sales" |
-	And I set "Use" checkbox in "FunctionalOptions" table
-	And I finish line editing in "FunctionalOptions" table
-	And I go to line in "FunctionalOptions" table
-		| "Option"    |
-		| "Use finance" |
-	And I set "Use" checkbox in "FunctionalOptions" table
-	And I finish line editing in "FunctionalOptions" table
+	And I set checkbox "Use purchase"	
+	And I set checkbox "Use sales"
+	And I set checkbox "Use finance"
 	And I click "Save" button
 	#EndTemp
 	* Check open Company catalog
@@ -794,13 +782,7 @@ Scenario: _900035 return money from vendor
 Scenario: _900090 change functional options use company and check users settings
 	* Change functional option
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'          | 'Use'    |
-			| 'Use companies'   | 'No'     |
-		And I activate "Use" field in "FunctionalOptions" table
-		And I change "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
+		And I set checkbox "Use companies"
 		And I click "Update all user settings" button
 		And I click "Save" button
 		And I close "Functional option settings" window

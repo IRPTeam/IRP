@@ -2373,17 +2373,16 @@ Scenario: _0991078 check Bank receipt accounting movements (Return from vendor)
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit'  | 'Cash/Bank account'   | 'Business unit' | 'Partner'             | 'Financial movement type' | 'Credit' | 'Partner term'                                           | 'Operation'                                                                                   |
-			| '3250'   | 'Bank account, TRY'   | ''              | 'Customer and vendor' | 'Refund from vendor'      | '4020.2' | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
+			| '3250'   | 'Bank account, TRY'   | ''              | 'Customer and vendor' | 'Refund from vendor'      | '5201'   | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
 			| '4020.2' | 'Customer and vendor' | ''              | 'Customer and vendor' | ''                        | '5201'   | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                   |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'     | 'Extra dimension2 Dr'                                    | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'    | 'Extra dimension2 Cr'                                    | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                   |
-			| '1' | 'Yes'      | '3250'       | 'Bank account, TRY'   | ''                                                       | 'Refund from vendor'  | 'TRY'            | '50'           | ''              | '4020.2'     | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'             | '50'            | ''                | '50,00'  | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
-			| '2' | 'Yes'      | '4020.2'     | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'            | '50'           | ''              | '5201'       | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'             | '50'            | ''                | '50,00'  | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                   |
-		Then the number of "RegisterRecords" table lines is "равно" "2"
+			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'    | 'Extra dimension2 Cr'                                    | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                   |
+			| '1' | 'Yes'      | '3250'       | 'Bank account, TRY' | ''                    | 'Refund from vendor'  | 'TRY'            | '50'           | ''              | '5201'       | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'             | '50'            | ''                | '50,00'  | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |		
+		Then the number of "RegisterRecords" table lines is "равно" "1"
 	And I close all client application windows
 
 Scenario: _0991079 check Bank receipt accounting movements (Other partner)

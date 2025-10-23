@@ -224,7 +224,7 @@ Scenario: _040916 check EmployeeCashAdvance movements by the Register  "R5012 Ve
 			| 'Number'    |
 			| '1'         |
 	* Check movements by the Register  "R5012 Vendors aging" 
-		And I click "Registrations report info" button
+		And I click "Registrations report" button
 		And I select "R5012 Vendors aging" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal

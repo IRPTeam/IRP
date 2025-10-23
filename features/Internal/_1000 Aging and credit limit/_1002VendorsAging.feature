@@ -938,25 +938,25 @@ Scenario: _1200058 check recalculate Aging Amount (PurchaseInvoice)
 	And I finish line editing in "ItemList" table
 	And I activate field named "ItemListQuantity" in "ItemList" table
 	And I select current line in "ItemList" table
-	And I input "2.000" text in the field named "ItemListQuantity" of "ItemList" table
-	And I input "600.00" text in "Price" field of "ItemList" table
+	And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+	And I input "600,00" text in "Price" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I move to "Aging" tab
 	And "PaymentTerms" table became equal
 		| '#' | 'Calculation type'     | 'Date'       | 'Due period, days' | 'Proportion of payment' | 'Amount'   |
-		| '1' | 'Post-shipment credit' | '*' | '7'                | '100.00'                | '1,200.00' |		
+		| '1' | 'Post-shipment credit' | '*'          | '7'                | '100,00'                | '1 200,00' |		
 	And I activate field named "PaymentTermsAmount" in "PaymentTerms" table
 	And I select current line in "PaymentTerms" table
 	And I move to "Item list" tab
 	And I activate field named "ItemListTotalAmount" in "ItemList" table
 	And I select current line in "ItemList" table
-	And I input "1,300.00" text in the field named "ItemListTotalAmount" of "ItemList" table
+	And I input "1300,00" text in the field named "ItemListTotalAmount" of "ItemList" table
 	And I move to "Aging" tab
 	And "PaymentTerms" table became equal
 		| '#' | 'Calculation type'     | 'Date'       | 'Due period, days' | 'Proportion of payment' | 'Amount'   |
-		| '1' | 'Post-shipment credit' | '*' | '7'                | '100.00'                | '1,300.00' |	
+		| '1' | 'Post-shipment credit' | '*'          | '7'                | '100,00'                | '1 300,00' |	
 	And I click "Post" button
 	And "PaymentTerms" table became equal
 		| '#' | 'Calculation type'     | 'Date'       | 'Due period, days' | 'Proportion of payment' | 'Amount'   |
-		| '1' | 'Post-shipment credit' | '*' | '7'                | '100.00'                | '1,300.00' |		
+		| '1' | 'Post-shipment credit' | '*'          | '7'                | '100,00'                | '1 300,00' |		
 	And I close all client application windows

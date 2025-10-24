@@ -580,7 +580,8 @@ Function R5012B_VendorsAging()
 		|FROM
 		|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
 		|WHERE
-		|	OffsetOfAging.Document = &Ref";
+		|	OffsetOfAging.Document = &Ref
+		|	and OffsetOfAging.Recorder refs Document.VendorsAdvancesClosing";
 EndFunction
 
 Function B1040B_AgingKey()

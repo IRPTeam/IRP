@@ -50,18 +50,8 @@ Scenario: _972001 preparetion
 	When Create catalog Agreements objects (Incidents)
 	When Create catalog FileStorage and IntegrationSettings objects (Incidents)
 	* FileStorage
-		And In the command interface I select "Settings" "Edit constants"
-		And I click Choice button of the field named "DefaultFilesStorageVolume"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Documents'   |
-		And I click the button named "FormChoose"
-		And I click Choice button of the field named "DefaultPictureStorageVolume"
-		And I go to line in "List" table
-			| "Description" |
-			| "Pictures"    |
-		And I click the button named "FormChoose"
-		And I click the button named "FormWriteAndClose"	
+		And I refill constant "DefaultFilesStorageVolume" by value "e1cib/data/Catalog.FileStorageVolumes?ref=b855e587bf603fbd11efaf2b14ca81d8"
+		And I refill constant "DefaultPictureStorageVolume" by value "e1cib/data/Catalog.FileStorageVolumes?ref=b855e587bf603fbd11efaf2b14ca81d7"
 	When Create catalog Partners objects (test data base)
 	When Create catalog PartnersBankAccounts objects (test data base)
 	When Create catalog PaymentTerminals objects (test data base)

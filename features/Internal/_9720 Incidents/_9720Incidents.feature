@@ -49,9 +49,38 @@ Scenario: _972001 preparetion
 	When Create catalog Agreements objects (test data base)
 	When Create catalog Agreements objects (Incidents)
 	When Create catalog FileStorage and IntegrationSettings objects (Incidents)
-	* FileStorage
-		And I refill constant "DefaultFilesStorageVolume" by value "e1cib/data/Catalog.FileStorageVolumes?ref=b855e587bf603fbd11efaf2b14ca81d8"
-		And I refill constant "DefaultPictureStorageVolume" by value "e1cib/data/Catalog.FileStorageVolumes?ref=b855e587bf603fbd11efaf2b14ca81d7"
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description"     |
+				| "VAExtension"     |
+			When add VAExtension	
+	* Default files storage
+		And I open Functions for technical specialist window (Extension)
+		And I expand current line in "Table" table
+		And I go to line in "Table" table
+			| "Name"                         |
+			| "Default files storage volume" |
+		And I select current line in "Table" table
+		And I click Select button of "Default files storage volume" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'DEFAULT DOCUMENT STORAGE' |
+		And I select current line in "List" table		
+		And I click "Save and close" button
+		And I open Functions for technical specialist window (Extension)
+		And I expand current line in "Table" table
+		And I go to line in "Table" table
+			| "Name"                         |
+			| "Default picture storage volume" |
+		And I select current line in "Table" table
+		And I click Select button of "Default picture storage volume" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'DEFAULT DOCUMENT STORAGE' |
+		And I select current line in "List" table		
+		And I click "Save and close" button
+		And Delay 3
 	When Create catalog Partners objects (test data base)
 	When Create catalog PartnersBankAccounts objects (test data base)
 	When Create catalog PaymentTerminals objects (test data base)

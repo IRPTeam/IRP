@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1ee6f9a8-c555-444c-8de7-8818165dd173">
+  <name>Report_R2010A_SalesOrdersExecution</name>
+  <synonym>
+    <key>en</key>
+    <value>Report R2010A_SalesOrdersExecution</value>
+  </synonym>
+</mdclass:Role>

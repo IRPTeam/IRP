@@ -129,20 +129,20 @@
     </synonym>
     <languageCode>ha</languageCode>
   </languages>
-  <subsystems>Subsystem.PurchaseAP</subsystems>
-  <subsystems>Subsystem.SalesAR</subsystems>
   <subsystems>Subsystem.Retail</subsystems>
+  <subsystems>Subsystem.PurchaseAP</subsystems>
   <subsystems>Subsystem.Inventory</subsystems>
+  <subsystems>Subsystem.MasterData</subsystems>
   <subsystems>Subsystem.Treasury</subsystems>
-  <subsystems>Subsystem.Manufacturing</subsystems>
-  <subsystems>Subsystem.FixedAssets</subsystems>
+  <subsystems>Subsystem.Settings</subsystems>
   <subsystems>Subsystem.Salary</subsystems>
   <subsystems>Subsystem.Accounting</subsystems>
-  <subsystems>Subsystem.MasterData</subsystems>
-  <subsystems>Subsystem.Reports</subsystems>
-  <subsystems>Subsystem.Settings</subsystems>
-  <subsystems>Subsystem.Technical</subsystems>
   <subsystems>Subsystem.Incidents</subsystems>
+  <subsystems>Subsystem.Reports</subsystems>
+  <subsystems>Subsystem.SalesAR</subsystems>
+  <subsystems>Subsystem.FixedAssets</subsystems>
+  <subsystems>Subsystem.Technical</subsystems>
+  <subsystems>Subsystem.Manufacturing</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -587,6 +587,7 @@
   <commonModules>CommonModule.CurrenciesClientServer</commonModules>
   <commonModules>CommonModule.CurrenciesServer</commonModules>
   <commonModules>CommonModule.DataVersioningServer</commonModules>
+  <commonModules>CommonModule.DefaultDataServer</commonModules>
   <commonModules>CommonModule.DocAdditionalAccrualClient</commonModules>
   <commonModules>CommonModule.DocAdditionalAccrualServer</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>
@@ -969,13 +970,15 @@
   <functionalOptions>FunctionalOption.UseAllFunctional</functionalOptions>
   <functionalOptions>FunctionalOption.UseBankDocuments</functionalOptions>
   <functionalOptions>FunctionalOption.UseBundling</functionalOptions>
+  <functionalOptions>FunctionalOption.UseBusinessProcess</functionalOptions>
   <functionalOptions>FunctionalOption.UseBusinessUnits</functionalOptions>
-  <functionalOptions>FunctionalOption.UseCashTransaction</functionalOptions>
+  <functionalOptions>FunctionalOption.UseCashTransactions</functionalOptions>
   <functionalOptions>FunctionalOption.UseChequeBonds</functionalOptions>
   <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
   <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
   <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
   <functionalOptions>FunctionalOption.UseContactInformation</functionalOptions>
+  <functionalOptions>FunctionalOption.UseDashboard</functionalOptions>
   <functionalOptions>FunctionalOption.UseDeliveryDate</functionalOptions>
   <functionalOptions>FunctionalOption.UseELedger</functionalOptions>
   <functionalOptions>FunctionalOption.UseEquipments</functionalOptions>
@@ -997,19 +1000,22 @@
   <functionalOptions>FunctionalOption.UseNumberingRules</functionalOptions>
   <functionalOptions>FunctionalOption.UseObjectAccess</functionalOptions>
   <functionalOptions>FunctionalOption.UseObjectTransformation</functionalOptions>
-  <functionalOptions>FunctionalOption.UseOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UsePartnerItems</functionalOptions>
   <functionalOptions>FunctionalOption.UsePartnersHierarchy</functionalOptions>
   <functionalOptions>FunctionalOption.UsePartnerTerms</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePaymentOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UsePlannedReceiptReservation</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePreliminaryStock</functionalOptions>
   <functionalOptions>FunctionalOption.UsePriceByProperties</functionalOptions>
   <functionalOptions>FunctionalOption.UseProfitLossCenter</functionalOptions>
   <functionalOptions>FunctionalOption.UsePurchase</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePurchaseOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseResponsiblePerson</functionalOptions>
   <functionalOptions>FunctionalOption.UseRetail</functionalOptions>
   <functionalOptions>FunctionalOption.UseRetailOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseSalary</functionalOptions>
   <functionalOptions>FunctionalOption.UseSales</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSalesOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
   <functionalOptions>FunctionalOption.UseShipmentAndReceiptPlaningOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseShipmentConfirmationAndGoodsReceipts</functionalOptions>
@@ -1022,9 +1028,6 @@
   <functionalOptions>FunctionalOption.UseVariableItemKey</functionalOptions>
   <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
-  <functionalOptions>FunctionalOption.UseBusinessProcess</functionalOptions>
-  <functionalOptions>FunctionalOption.UsePreliminary</functionalOptions>
-  <functionalOptions>FunctionalOption.UseDashboard</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1139,7 +1142,7 @@
   <constants>Constant.UseBankDocuments</constants>
   <constants>Constant.UseBundling</constants>
   <constants>Constant.UseBusinessUnits</constants>
-  <constants>Constant.UseCashTransaction</constants>
+  <constants>Constant.UseCashTransactions</constants>
   <constants>Constant.UseChequeBonds</constants>
   <constants>Constant.UseCommissionTrading</constants>
   <constants>Constant.UseCompanies</constants>
@@ -1166,7 +1169,8 @@
   <constants>Constant.UseNumberingRules</constants>
   <constants>Constant.UseObjectAccess</constants>
   <constants>Constant.UseObjectTransformation</constants>
-  <constants>Constant.UseOrders</constants>
+  <constants>Constant.UsePurchaseOrders</constants>
+  <constants>Constant.UseSalesOrders</constants>
   <constants>Constant.UsePartnerItems</constants>
   <constants>Constant.UsePartnersHierarchy</constants>
   <constants>Constant.UsePartnerTerms</constants>
@@ -1192,8 +1196,9 @@
   <constants>Constant.UseVariableStore</constants>
   <constants>Constant.UseWorkOrders</constants>
   <constants>Constant.UseBusinessProcess</constants>
-  <constants>Constant.UsePreliminary</constants>
+  <constants>Constant.UsePreliminaryStock</constants>
   <constants>Constant.UseDashboard</constants>
+  <constants>Constant.UsePaymentOrders</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>

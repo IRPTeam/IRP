@@ -9284,9 +9284,9 @@ Scenario: _0154202 check row separation in SC
 		Then the form attribute named "Store" became equal to "Store 02"
 		Then the form attribute named "TransactionType" became equal to "Inventory transfer"
 		And "ItemList" table became equal
-			| '#' | 'Item'               | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Source of origins' | 'Quantity'   | 'Sales invoice' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Shipment planing order' | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
-			| '1' | 'Product 5 with SLN' | ''                   | 'ODS'      | '0512; 0514'         | 'pcs'  | ''                  | '230,000'    | ''              | 'Store 02' | ''               | ''            | ''                       | ''                         | ''                      | ''                |
-			| '2' | 'Skittles'           | ''                   | 'Fruit'    | ''                   | 'pcs'  | ''                  | '10 000,000' | ''              | 'Store 02' | ''               | ''            | ''                       | ''                         | ''                      | ''                |
+			| '#' | 'Item'               | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Source of origins' | 'Quantity'   | 'Sales invoice' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Product 5 with SLN' | ''                   | 'ODS'      | '0512; 0514'         | 'pcs'  | ''                  | '230,000'    | ''              | 'Store 02' | ''               | ''            | ''                         | ''                      | ''                |
+			| '2' | 'Skittles'           | ''                   | 'Fruit'    | ''                   | 'pcs'  | ''                  | '10 000,000' | ''              | 'Store 02' | ''               | ''            | ''                         | ''                      | ''                |
 	* Split first Item
 		And I go to line in "ItemList" table
 			| "#" | "Item"               | "Item key" | "Quantity" | "Serial lot numbers" | "Store"    | "Unit" |
@@ -9296,10 +9296,10 @@ Scenario: _0154202 check row separation in SC
 		And I click the button named "OK"
 	* Check separation
 		And "ItemList" table became equal
-			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity'   | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Shipment planing order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
-			| '1' | 'Product 5 with SLN' | 'ODS'      | '0512'               | ''                  | '100,000'    | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
-			| '2' | 'Skittles'           | 'Fruit'    | ''                   | ''                  | '10 000,000' | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
-			| '3' | 'Product 5 with SLN' | 'ODS'      | '0514; 0512'         | ''                  | '130,000'    | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity'   | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Product 5 with SLN' | 'ODS'      | '0512'               | ''                  | '100,000'    | 'pcs'  | 'Store 02' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
+			| '2' | 'Skittles'           | 'Fruit'    | ''                   | ''                  | '10 000,000' | 'pcs'  | 'Store 02' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
+			| '3' | 'Product 5 with SLN' | 'ODS'      | '0514; 0512'         | ''                  | '130,000'    | 'pcs'  | 'Store 02' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
 		And form attributes have values:
 			| 'Name'            | 'Value'              |
 			| 'Company'         | "Main Company"       |
@@ -9334,11 +9334,11 @@ Scenario: _0154202 check row separation in SC
 		And I click the button named "OK"
 	* Check separation
 		And "ItemList" table became equal
-			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity'  | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Shipment planing order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
-			| '1' | 'Product 5 with SLN' | 'ODS'      | '0512'               | ''                  | '100,000'   | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
-			| '2' | 'Skittles'           | 'Fruit'    | ''                   | ''                  | '5 000,000' | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
-			| '3' | 'Product 5 with SLN' | 'ODS'      | '0514; 0512'         | ''                  | '130,000'   | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
-			| '4' | 'Skittles'           | 'Fruit'    | ''                   | ''                  | '5 000,000' | 'pcs'  | 'Store 02' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Source of origins' | 'Quantity'  | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Product 5 with SLN' | 'ODS'      | '0512'               | ''                  | '100,000'   | 'pcs'  | 'Store 02' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
+			| '2' | 'Skittles'           | 'Fruit'    | ''                   | ''                  | '5 000,000' | 'pcs'  | 'Store 02' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
+			| '3' | 'Product 5 with SLN' | 'ODS'      | '0514; 0512'         | ''                  | '130,000'   | 'pcs'  | 'Store 02' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
+			| '4' | 'Skittles'           | 'Fruit'    | ''                   | ''                  | '5 000,000' | 'pcs'  | 'Store 02' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
 		And form attributes have values:
 			| 'Name'                                   | 'Value'                                                                                                                   | 'HowToSearch' |
 			| 'Company'                                | "Main Company"                                                                                                            | ''            |

@@ -1520,75 +1520,19 @@ Scenario: create PurchaseReturn300301
 Scenario: set True value to the constant
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		And I click "Check all" button
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                       | 'Use'    |
-			| 'Use lock data modification'   | 'Yes'    |
-		And I activate "Use" field in "FunctionalOptions" table
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                          | 'Use'    |
-			| 'Use consolidated retail sales'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                 | 'Use'    |
-			| 'Use job queue for external functions'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'               | 'Use'    |
-			| 'Use all functional'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use'    |
-			| 'Use accounting'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                   | 'Use'    |
-			| 'Use commission trading'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'       | 'Use'    |
-			| 'Use salary'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		// And I go to line in "FunctionalOptions" table
-		// 	| 'Option'                                | 'Use' |
-		// 	| 'Use additional table control document' | 'Yes' |
-		// And I remove "Use" checkbox in "FunctionalOptions" table
-		// And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                | 'Use' |
-			| 'Use additional table control document' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'          | 'Use' |
-			| 'Use simple mode' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use' |
-			| 'Use fixed assets' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            | 'Use' |
-			| 'Use object access' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                  | 'Use' |
-			| 'Use shipment and receipt planing orders' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use' |
-			| 'Use simple batch' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I remove checkbox "Use lock data modification"
+		And I remove checkbox "  -  Use consolidated retail sales"		
+		And I remove checkbox "Use job queue for external functions"
+		And I remove checkbox "Use all functional"
+		And I remove checkbox "Use accounting"
+		And I remove checkbox "Use commission trading"
+		And I remove checkbox "Use salary"
+		And I remove checkbox "Use additional table control document"
+		And I remove checkbox "Use simple mode"
+		And I remove checkbox "Use fixed assets"
+		And I remove checkbox "Use object access"
+		And I remove checkbox "Use shipment and receipt planing orders"
+//		And I remove checkbox "Use simple batch"
 		And I click "Save" button
 		And I close current window
 	* Disable LinkedRowsIntegrity
@@ -1603,127 +1547,27 @@ Scenario: set True value to the constant
 Scenario: set True value to the constant (DemoDB)
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		And I click "Check all" button
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                       | 'Use'    |
-			| 'Use lock data modification'   | 'Yes'    |
-		And I activate "Use" field in "FunctionalOptions" table
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                          | 'Use'    |
-			| 'Use consolidated retail sales'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                 | 'Use'    |
-			| 'Use job queue for external functions'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'               | 'Use'    |
-			| 'Use all functional'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use'    |
-			| 'Use accounting'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                   | 'Use'    |
-			| 'Use commission trading'   | 'Yes'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                | 'Use' |
-			| 'Use additional table control document' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'          | 'Use' |
-			| 'Use simple mode' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            | 'Use' |
-			| 'Use object access' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                  | 'Use' |
-			| 'Use shipment and receipt planing orders' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'          | 'Use' |
-			| 'Use preliminary' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'          | 'Use' |
-			| 'Use work orders' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                  | 'Use' |
-			| 'Use price by properties' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                          | 'Use' |
-			| 'Use planned receipt reservation' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        | 'Use' |
-			| 'Use Incidents' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                 | 'Use' |
-			| 'Use accounting service' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use' |
-			| 'Use cheque bonds' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'      | 'Use' |
-			| 'Use eLedger' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            | 'Use' |
-			| 'Use delivery date' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            | 'Use' |
-			| 'Use manufacturing' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use' |
-			| 'Use fixed assets' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           | 'Use' |
-			| 'Use simple batch' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            | 'Use' |
-			| 'Use partner items' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
-		And I go to line in "FunctionalOptions" table
-			| 'Option'       | 'Use' |
-			| 'Use bundling' | 'Yes' |
-		And I remove "Use" checkbox in "FunctionalOptions" table
-		And I finish line editing in "FunctionalOptions" table
+		And I remove checkbox "Use lock data modification"
+		And I remove checkbox "  -  Use consolidated retail sales"
+		And I remove checkbox "Use job queue for external functions"
+		And I remove checkbox "Use all functional"
+		And I remove checkbox "Use accounting"
+		And I remove checkbox "Use commission trading"
+		And I remove checkbox "Use additional table control document"
+		And I remove checkbox "Use simple mode"
+		And I remove checkbox "Use object access"
+		And I remove checkbox "Use shipment and receipt planing orders"
+		And I remove checkbox "  -  Use preliminary stock"
+		And I remove checkbox "  -  Use work orders"
+		And I remove checkbox "Use price by properties"
+		And I remove checkbox "  -  Use planned receipt reservation"
+		And I remove checkbox "Use Incidents"
+		And I remove checkbox "  -  Use cheque bonds"
+		And I remove checkbox "  -  Use delivery date"
+		And I remove checkbox "Use manufacturing"
+		And I remove checkbox "Use fixed assets"
+		And I remove checkbox "Use partner items"
+		And I remove checkbox "Use bundling"
 		And I click "Save" button
 		And I close current window
 	* Disable LinkedRowsIntegrity
@@ -1739,60 +1583,40 @@ Scenario: set True value to the constant (DemoDB)
 Scenario: set True value to the constant Use salary
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        |
-			| 'Use salary'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use salary"
 		And I click "Save" button
 		And I close current window	
 
 Scenario: set True value to the constant Use simple batch
-		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'           |
-			| 'Use simple batch' |
-		And I set "Use" checkbox in "FunctionalOptions" table
-		And I click "Save" button
-		And I close current window	
+		And I execute 1C:Enterprise script at server
+				| "Constants.UseSimpleBatch.Set(True);"     |
+
 
 Scenario: set False value to the constant Use Use dashboard
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        |
-			| 'Use dashboard' |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use dashboard"
 		And I click "Save" button
 		And I close current window	
 
 Scenario: set True value to the constant Use shipment and receipt planing orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        |
-			| 'Use shipment and receipt planing orders'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use shipment and receipt planing orders"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set False value to the constant Use shipment and receipt planing orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        |
-			| 'Use fixed assets'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I remove checkbox "Use fixed assets"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set True value to the constant Use fixed assets
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        |
-			| 'Use fixed assets'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use fixed assets"
 		And I click "Save" button
 		And I close current window	
 
@@ -1800,10 +1624,7 @@ Scenario: set True value to the constant Use fixed assets
 Scenario: set True value to the constant Use additional table control document
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'        |
-			| 'Use additional table control document'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use additional table control document"
 		And I click "Save" button
 		And I close current window		
 				
@@ -1811,50 +1632,35 @@ Scenario: set True value to the constant Use additional table control document
 Scenario: set True value to the constant Use consolidated retail sales
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                           |
-			| 'Use consolidated retail sales'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "  -  Use consolidated retail sales"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set True value to the constant Use manufacturing
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            |
-			| 'Use manufacturing' |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use manufacturing"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set True value to the constant Use commission trading
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                    |
-			| 'Use commission trading'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use commission trading"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set True value to the constant Use object access
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                    |
-			| 'Use object access'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use object access"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set True value to the constant Use retail orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'               |
-			| 'Use retail orders'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "  -  Use retail orders"
 		And I click "Save" button
 		And I close current window
 
@@ -1862,60 +1668,42 @@ Scenario: set True value to the constant Use retail orders
 Scenario: set False value to the constant Use retail orders
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'               |
-			| 'Use retail orders'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I remove checkbox "  -  Use retail orders"
 		And I click "Save" button
 		And I close current window
 
 Scenario: set False value to the constant Use commission trading
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                    |
-			| 'Use commission trading'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I remove checkbox "Use commission trading"
 		And I click "Save" button
 		And I close current window
 		
 Scenario: set True value to the constant Use accounting
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'            |
-			| 'Use accounting'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use accounting"
 		And I click "Save" button
 		And I close current window				
 
 Scenario: set True value to the constant Use job queue for external functions
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                                  |
-			| 'Use job queue for external functions'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use job queue for external functions"
 		And I click "Save" button
 		And I close current window	
 
 Scenario: set True value to the constant Use lock data modification
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                        |
-			| 'Use lock data modification'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use lock data modification"
 		And I click "Save" button
 		And I close current window	
 
 Scenario: set True value to the constant Use numbering rules
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened
-		And I go to line in "FunctionalOptions" table
-			| 'Option'                        |
-			| 'Use numbering rules'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use numbering rules"
 		And I click "Save" button
 		And I close current window
 
@@ -2309,19 +2097,13 @@ Scenario: settings for Company (commission trade)
 
 Scenario: set False value to the constant Use source of origin	
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		And I go to line in "FunctionalOptions" table
-			| 'Option'               |
-			| 'Use source of origin'    |
-		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I remove checkbox "  -  Use source of origin"
 		And I click "Save" button
 		And I close current window
 	
 Scenario: set True value to the constant Use source of origin	
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		And I go to line in "FunctionalOptions" table
-			| 'Option'               |
-			| 'Use source of origin'    |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "  -  Use source of origin"
 		And I click "Save" button
 		And I close current window
 

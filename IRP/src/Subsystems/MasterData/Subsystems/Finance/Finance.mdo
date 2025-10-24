@@ -8,7 +8,6 @@
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>InformationRegister.Taxes</content>
-  <content>Catalog.Currencies</content>
   <content>Catalog.ExpenseAndRevenueTypes</content>
   <content>Catalog.CashAccounts</content>
   <content>Catalog.BusinessUnits</content>

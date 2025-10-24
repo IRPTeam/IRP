@@ -27,25 +27,10 @@ Scenario: Refill constants by value (smoke)
 	And I refill constant "SaasMode" by value "False"
 	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 	And I click "Check all" button
-	And I go to line in "FunctionalOptions" table
-		| 'Option'                                 | 'Use'    |
-		| 'Use job queue for external functions'   | 'Yes'    |
-	And I remove "Use" checkbox in "FunctionalOptions" table
-	And I finish line editing in "FunctionalOptions" table
-	And I go to line in "FunctionalOptions" table
-		| 'Option'                                | 'Use' |
-		| 'Use additional table control document' | 'Yes' |
-	And I remove "Use" checkbox in "FunctionalOptions" table
-	And I finish line editing in "FunctionalOptions" table
-	And I go to line in "FunctionalOptions" table
-		| 'Option'          | 'Use' |
-		| 'Use simple mode' | 'Yes' |
-	And I remove "Use" checkbox in "FunctionalOptions" table
-	And I finish line editing in "FunctionalOptions" table
-	And I go to line in "FunctionalOptions" table
-		| 'Option'            | 'Use' |
-		| 'Use object access' | 'Yes' |
-	And I remove "Use" checkbox in "FunctionalOptions" table
+	And I remove checkbox "Use job queue for external functions"
+	And I remove checkbox "Use additional table control document"
+	And I remove checkbox "Use simple mode"
+	And I remove checkbox "Use object access"
 	And I click "Save" button
 	And I close current window
 * Disable LinkedRowsIntegrity

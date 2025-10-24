@@ -27,4 +27,5 @@
   <content>Document.SalesReturn.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
   <content>Enum.GoodsReceiptTransactionTypes</content>
   <content>Document.PurchaseReturn.TabularSection.ShipmentConfirmations</content>
+  <content>Report.R403A_GoodsInTransit</content>
 </mdclass:FunctionalOption>

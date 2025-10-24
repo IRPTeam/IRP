@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsVisibility>
+    <visibilityFragments>
+      <command>DataProcessor.GroupPhotoUploading.StandardCommand.Open</command>
+      <visible/>
+    </visibilityFragments>
+  </commandsVisibility>
   <subsystemsOrder>
     <subsystems>Subsystem.MasterData.Subsystem.Items</subsystems>
     <subsystems>Subsystem.MasterData.Subsystem.Finance</subsystems>

@@ -6,7 +6,7 @@ Procedure BeforeWrite(Cancel)
 	EndIf;
 	
 	If Not ThisObject.IsFolder Then
-		ThisObject.Unit = FOServer.GetDefault_Unit(ThisObject.Unit);
+		ThisObject.Unit = DefaultDataServer.GetDefault_Unit(ThisObject.Unit);
 		
 		CheckResult = CheckDataPrivileged.CheckUnitForItem(ThisObject);
 		If CheckResult.Error Then
@@ -27,7 +27,7 @@ Procedure OnWrite(Cancel)
 		Return;
 	EndIf;
 	If Not ThisObject.IsFolder Then
-		FOServer.CreateDefault_ItemKey(New Structure("Item", ThisObject));
+		DefaultDataServer.CreateDefault_ItemKey(New Structure("Item", ThisObject));
 	EndIf;
 EndProcedure
 

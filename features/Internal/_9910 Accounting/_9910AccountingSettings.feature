@@ -178,19 +178,37 @@ Scenario: _099100 preparation
 		When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 		When Create information register T9016S_AccountsEmployee records (test data base)
 		When Create information register T9015S_AccountsFixedAsset records (test data base)
-		When Create catalog PLSections objects		
+		When Create catalog PLSections objects
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description"     |
+				| "VAExtension"     |
+			When add VAExtension	
 	* Default files storage
-		And In the command interface I select "Settings" "Edit constants"
+		And I open Functions for technical specialist window (Extension)
+		And I expand current line in "Table" table
+		And I go to line in "Table" table
+			| "Name"                         |
+			| "Default files storage volume" |
+		And I select current line in "Table" table
 		And I click Select button of "Default files storage volume" field
 		And I go to line in "List" table
 			| 'Description'              |
 			| 'DEFAULT DOCUMENT STORAGE' |
-		And I select current line in "List" table
+		And I select current line in "List" table		
+		And I click "Save and close" button
+		And I open Functions for technical specialist window (Extension)
+		And I expand current line in "Table" table
+		And I go to line in "Table" table
+			| "Name"                         |
+			| "Default picture storage volume" |
+		And I select current line in "Table" table
 		And I click Select button of "Default picture storage volume" field
 		And I go to line in "List" table
 			| 'Description'              |
 			| 'DEFAULT DOCUMENT STORAGE' |
-		And I select current line in "List" table
+		And I select current line in "List" table		
 		And I click "Save and close" button
 		And Delay 3
 	* Posting first documents

@@ -206,10 +206,7 @@ When Create document ConsolidatedRetailSales objects (test data base)
 	When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 * Additional table control
 	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"	
-	And I go to line in "FunctionalOptions" table
-		| "Option"                                |
-		| "Use additional table control document" |
-	And I set "Use" checkbox in "FunctionalOptions" table
+	And I set checkbox "Use additional table control document"
 	And I click "Save" button
 * Posting first documents
 	And I execute 1C:Enterprise script at server

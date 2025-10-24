@@ -1,6 +1,5 @@
 // @strict-types
 
-
 // Strings.
 // 
 // Parameters:
@@ -1018,6 +1017,16 @@ Function Strings(Lang) Export
 
 #Region SimpleBatch
 	Strings.Insert("SB_NotEnoughBatch", NStr("en = 'Not enough batch %1: On stock: %2; In document: %3.'", Lang));
+#EndRegion
+
+#Region FunctionalOptions
+	Strings.Insert("FO_Group_BaseSettings", NStr("en = 'Base settings'", Lang));
+	Strings.Insert("FO_Group_MasterData", NStr("en = 'Master data'", Lang));
+	Strings.Insert("FO_Group_Trading", NStr("en = 'Trading'", Lang));
+	Strings.Insert("FO_Group_Inventory", NStr("en = 'Inventory'", Lang));
+	Strings.Insert("FO_Group_Money", NStr("en = 'Money'", Lang));
+	Strings.Insert("FO_Group_Accounting", NStr("en = 'Accounting'", Lang));
+	Strings.Insert("FO_Group_Other", NStr("en = 'Other'", Lang));
 #EndRegion
 
 #Region GenericErrors

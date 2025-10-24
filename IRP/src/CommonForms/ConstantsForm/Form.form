@@ -621,7 +621,7 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>ConstantsSet.UseCashTransaction</segments>
+      <segments>ConstantsSet.UseCashTransactions</segments>
     </dataPath>
     <extendedTooltip>
       <name>UseCashTransactionExtendedTooltip</name>
@@ -951,7 +951,7 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>ConstantsSet.UseOrders</segments>
+      <segments>ConstantsSet.UsePurchaseOrders</segments>
     </dataPath>
     <extendedTooltip>
       <name>UseOrdersExtendedTooltip</name>

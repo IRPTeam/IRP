@@ -64,8 +64,8 @@ Scenario: _972001 preparetion
 		And I select current line in "Table" table
 		And I click Select button of "Default files storage volume" field
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'DEFAULT DOCUMENT STORAGE' |
+			| 'Description' |
+			| 'Documents'   |
 		And I select current line in "List" table		
 		And I click "Save and close" button
 		And I open Functions for technical specialist window (Extension)
@@ -76,8 +76,8 @@ Scenario: _972001 preparetion
 		And I select current line in "Table" table
 		And I click Select button of "Default picture storage volume" field
 		And I go to line in "List" table
-			| 'Description'              |
-			| 'DEFAULT DOCUMENT STORAGE' |
+			| 'Description' |
+			| 'Pictures'    |
 		And I select current line in "List" table		
 		And I click "Save and close" button
 		And Delay 3

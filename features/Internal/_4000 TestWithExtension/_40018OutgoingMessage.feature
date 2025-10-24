@@ -60,15 +60,37 @@ Scenario: _4001801 preparation (Outging messages)
 		When Create catalog IntegrationSettings objects (Email)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"    |
-	* Default picture storage
-		And In the command interface I select "Settings" "Edit constants"
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description"     |
+				| "VAExtension"     |
+			When add VAExtension	
+	* Default files storage
+		And I open Functions for technical specialist window (Extension)
+		And I expand current line in "Table" table
+		And I go to line in "Table" table
+			| "Name"                         |
+			| "Default files storage volume" |
+		And I select current line in "Table" table
 		And I click Select button of "Default files storage volume" field
 		And I go to line in "List" table
 			| 'Description'              |
 			| 'DEFAULT DOCUMENT STORAGE' |
-		And I select current line in "List" table
+		And I select current line in "List" table		
 		And I click "Save and close" button
-		And Delay 3
+		And I open Functions for technical specialist window (Extension)
+		And I expand current line in "Table" table
+		And I go to line in "Table" table
+			| "Name"                         |
+			| "Default picture storage volume" |
+		And I select current line in "Table" table
+		And I click Select button of "Default picture storage volume" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'DEFAULT DOCUMENT STORAGE' |
+		And I select current line in "List" table		
+		And I click "Save and close" button
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one	
 

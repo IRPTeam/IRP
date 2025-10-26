@@ -288,8 +288,8 @@ Scenario: _042 check additional cost allocation (documents, by quantity)
 		| 'Purchase invoice'   |
 	And I select current line in "" table
 	And I go to line in "List" table
-		| 'Amount'    | 'Company'      | 'Currency' | 'Date'                | 'Legal name'        | 'Number' | 'Partner'   |
-		| '16 560,00' | 'Main Company' | 'TRY'      | '14.08.2021 12:00:00' | 'Company Ferron BP' | '2'      | 'Ferron BP' |
+		| 'Amount'    | 'Company'      | 'Currency' | 'Date'       |  'Legal name'        | 'Number' | 'Partner'   |
+		| '16 560,00' | 'Main Company' | 'TRY'      | '14.08.2021' | 'Company Ferron BP' | '2'      | 'Ferron BP' |
 	And I activate field named "Date" in "List" table
 	And I select current line in "List" table
 	And I finish line editing in "SettingsComposerSettingsFilter" table
@@ -331,8 +331,8 @@ Scenario: _043 check additional cost allocation (documents, by amount)
 		| 'Purchase invoice'   |
 	And I select current line in "" table
 	And I go to line in "List" table
-		| 'Amount'     | 'Company'      | 'Currency' | 'Date'                | 'Legal name' | 'Number' | 'Partner' |
-		| '104 241,20' | 'Main Company' | 'TRY'      | '13.08.2021 16:52:30' | 'DFC'        | '3'      | 'DFC'     |
+		| 'Amount'     | 'Company'      | 'Currency' | 'Date'       | 'Legal name' | 'Number' | 'Partner' |
+		| '104 241,20' | 'Main Company' | 'TRY'      | '13.08.2021' | 'DFC'        | '3'      | 'DFC'     |
 	And I activate field named "Date" in "List" table
 	And I select current line in "List" table
 	And I finish line editing in "SettingsComposerSettingsFilter" table
@@ -409,8 +409,8 @@ Scenario: _045 check additional cost allocation (rows, by amount)
 		| 'Purchase invoice'   |
 	And I select current line in "" table
 	And I go to line in "List" table
-		| 'Amount'    | 'Company'      | 'Currency' | 'Date'                | 'Legal name'        | 'Number' | 'Partner'   |
-		| '19 700,00' | 'Main Company' | 'USD'      | '15.08.2021 16:56:10' | 'Company Ferron BP' | '5'      | 'Ferron BP' |
+		| 'Amount'    | 'Company'      | 'Currency' | 'Date'       | 'Legal name'        | 'Number' | 'Partner'   |
+		| '19 700,00' | 'Main Company' | 'USD'      | '15.08.2021' | 'Company Ferron BP' | '5'      | 'Ferron BP' |
 	And I select current line in "List" table
 	And I select current line in "SettingsComposerSettingsFilter" table
 	And I click choice button of "Right value" attribute in "SettingsComposerSettingsFilter" table
@@ -419,8 +419,8 @@ Scenario: _045 check additional cost allocation (rows, by amount)
 		| 'Purchase invoice'   |
 	And I select current line in "" table
 	And I go to line in "List" table
-		| 'Amount'     | 'Company'      | 'Currency' | 'Date'                | 'Legal name' | 'Number' | 'Partner' |
-		| '839 233,70' | 'Main Company' | 'TRY'      | '15.08.2021 16:56:11' | 'DFC'        | '6'      | 'DFC'     |
+		| 'Amount'     | 'Company'      | 'Currency' | 'Date'       | 'Legal name' | 'Number' | 'Partner' |
+		| '839 233,70' | 'Main Company' | 'TRY'      | '15.08.2021' | 'DFC'        | '6'      | 'DFC'     |
 	And I select current line in "List" table
 	And I finish line editing in "SettingsComposerSettingsFilter" table
 	And I move to "Parameters" tab

@@ -129,7 +129,7 @@ Scenario: _097704 check Employee hiring
 	* Check
 		And "List" table contains lines
 			| 'Date'                | 'Company'      | 'Employee'      | 'Position' | 'Branch'  |
-			| '01.11.2023 12:00:00' | 'Main Company' | 'David Romanov' | 'Manager'  | 'Shop 01' |
+			| '01.11.2023' | 'Main Company' | 'David Romanov' | 'Manager'  | 'Shop 01' |
 		
 				
 Scenario: _097705 check Employee firings

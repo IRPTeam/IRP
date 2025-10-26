@@ -2153,7 +2153,7 @@ Scenario: _0991058 create journal entry for one PI
 		Given I open hyperlink "e1cib/list/Document.JournalEntry"
 		And "List" table contains lines
 			| 'User defined' | 'Date'                | 'Company'       | 'Ledger type' | 'Basis'                                        |
-			| 'No'           | '24.02.2023 10:04:33' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 1 dated 24.02.2023 10:04:33' |
+			| 'No'           | '24.02.2023' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 1 dated 24.02.2023 10:04:33' |
 		
 							
 Scenario: _0991059 create journal entry for two PI
@@ -2178,9 +2178,9 @@ Scenario: _0991059 create journal entry for two PI
 	* Check journal entry
 		Given I open hyperlink "e1cib/list/Document.JournalEntry"
 		And "List" table contains lines
-			| 'User defined' | 'Date'                | 'Company'       | 'Ledger type' | 'Basis'                                        |
-			| 'No'           | '22.07.2023 09:38:02' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 2 dated 22.07.2023 09:38:02' |
-			| 'No'           | '30.11.2023 16:01:04' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 3 dated 30.11.2023 16:01:04' |
+			| 'User defined' | 'Date'       | 'Company'       | 'Ledger type' | 'Basis'                                        |
+			| 'No'           | '22.07.2023' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 2 dated 22.07.2023 09:38:02' |
+			| 'No'           | '30.11.2023' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 3 dated 30.11.2023 16:01:04' |
 			
 				
 Scenario: _0991070 check Bank receipt accounting movements (Payment from customer)

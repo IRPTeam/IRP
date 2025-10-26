@@ -2756,8 +2756,8 @@ Scenario: _2060021 check button	Select all/ Uncheck all in the Add linked docume
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		Then "Sales invoices" window is opened
 		And I go to line in "List" table
-			| 'Date'                | 'Number' |
-			| '05.03.2021 12:57:59' | '102'    |
+			| 'Date'       | 'Number' |
+			| '05.03.2021' | '102'    |
 		And I click the button named "FormDocumentSalesReturnGenerate"
 		Then "Add linked document rows" window is opened
 		And I expand current line in "BasisesTree" table
@@ -2789,8 +2789,8 @@ Scenario: _2060022 check button	Show row key in the Add linked documents rows
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		Then "Sales invoices" window is opened
 		And I go to line in "List" table
-			| 'Date'                | 'Number' |
-			| '05.03.2021 12:57:59' | '102'    |
+			| 'Date'       | 'Number' |
+			| '05.03.2021' | '102'    |
 		And I click the button named "FormDocumentSalesReturnGenerate"
 		Then "Add linked document rows" window is opened
 		And I click "Ok" button

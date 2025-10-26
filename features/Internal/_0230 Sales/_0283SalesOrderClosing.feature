@@ -56,12 +56,12 @@ Scenario: _0230000 preparation (Sales order closing)
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Date'                |
-			| '10.04.2025 22:03:13' |
+			| '10.04.2025' |
 		And I click the button named "FormPost"
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
 			| 'Date'                |
-			| '10.04.2025 22:04:36' |
+			| '10.04.2025' |
 		And I click the button named "FormPost"
 
 		And I execute 1C:Enterprise script at server
@@ -108,7 +108,7 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '132'      | '09.02.2021 19:53:45'    |
+			| '132'      | '09.02.2021'    |
 		And I click the button named "FormDocumentSalesOrderClosingGenerate"
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -170,7 +170,7 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '132'      | '09.02.2021 19:53:45'    |
+			| '132'      | '09.02.2021'    |
 		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click the button named "Button0"
@@ -183,7 +183,7 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '132'      | '09.02.2021 19:53:45'    |
+			| '132'      | '09.02.2021'    |
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
@@ -210,7 +210,7 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '132'      | '09.02.2021 19:53:45'    |
+			| '132'      | '09.02.2021'    |
 		And I click the button named "FormDocumentSalesOrderClosingGenerate"	
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -238,7 +238,7 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 	* Check SO lock
 		And I go to line in "List" table
 			| 'Number' | 'Closed' | 'Date'                |
-			| '132'    | 'Yes'    | '09.02.2021 19:53:45' |
+			| '132'    | 'Yes'    | '09.02.2021' |
 		And I select current line in "List" table
 		When I Check the steps for Exception
 			| 'And in the table "ItemList" I click "Add" button'    |
@@ -248,7 +248,7 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
 			| 'Number' | 'Date'                |
-			| '132'    | '10.02.2021 13:58:29' |
+			| '132'    | '10.02.2021' |
 		And I select current line in "List" table
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
@@ -271,14 +271,14 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 			And I go to line in "List" table
 				| 'Number' | 'Date'                |
-				| '132'    | '10.02.2021 13:58:29' |
+				| '132'    | '10.02.2021' |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then user message window does not contain messages				
 	* Check SC lock	
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' | 'Date'                |
-			| '1'      | '15.02.2021 08:42:56' |
+			| '1'      | '15.02.2021' |
 		And I select current line in "List" table
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
@@ -301,14 +301,14 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 			And I go to line in "List" table
 				| 'Number' | 'Date'                |
-				| '1'      | '15.02.2021 08:42:56' |
+				| '1'      | '15.02.2021' |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then user message window does not contain messages
 	* Repost SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Number' | 'Closed' | 'Date'                |
-			| '132'    | 'Yes'    | '09.02.2021 19:53:45' |
+			| '132'    | 'Yes'    | '09.02.2021' |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Then user message window does not contain messages
 		And I close all client application windows
@@ -354,7 +354,7 @@ Scenario: _0230004 create Sales order closing (different ItemKey)
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Date'                |
-			| '10.04.2025 22:03:13' |
+			| '10.04.2025' |
 		And I click the button named "FormDocumentSalesOrderClosingGenerate"
 		And I click "Save" button
 		And I delete "$$NumberSalesOrderClosing0230004$$" variable

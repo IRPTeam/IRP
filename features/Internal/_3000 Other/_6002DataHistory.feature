@@ -101,7 +101,7 @@ Scenario: _602702 check data history for document (Purchase order)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '116'      | '12.02.2021 12:44:59'    |
+			| '116'      | '12.02.2021'    |
 		And I select current line in "List" table
 		And I click "Post" button
 		And I click "Change history" button

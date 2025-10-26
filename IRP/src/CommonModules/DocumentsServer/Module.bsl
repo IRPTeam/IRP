@@ -396,14 +396,11 @@ EndFunction
 #Region ListFormEvents
 
 Procedure OnCreateAtServerListForm(Form, Cancel, StandardProcessing) Export
+	SetListFormAppearance(Form);
 	FormNamesArray = StrSplit(Form.FormName, ".");
 	DocumentFullName = FormNamesArray[0] + "." + FormNamesArray[1];
 	ExternalCommandsServer.CreateCommands(Form, DocumentFullName, Enums.FormTypes.ListForm);
 	InternalCommandsServer.CreateCommands(Form, Form.List, DocumentFullName, Enums.FormTypes.ListForm);
-	
-	If Form.Items.Find("Number") <> Undefined Then
-		Form.Items.Number.Width = 5;
-	EndIf;
 EndProcedure
 
 #EndRegion
@@ -411,14 +408,11 @@ EndProcedure
 #Region ChoiceFormEvents
 
 Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
+	SetListFormAppearance(Form);
 	FormNamesArray = StrSplit(Form.FormName, ".");
 	DocumentFullName = FormNamesArray[0] + "." + FormNamesArray[1];
 	ExternalCommandsServer.CreateCommands(Form, DocumentFullName, Enums.FormTypes.ChoiceForm);
 	InternalCommandsServer.CreateCommands(Form, Form.List, DocumentFullName, Enums.FormTypes.ChoiceForm);
-	
-	If Form.Items.Find("Number") <> Undefined Then
-		Form.Items.Number.Width = 5;
-	EndIf;
 EndProcedure
 
 #EndRegion
@@ -1254,4 +1248,42 @@ Procedure SetDocumentState(Object, Form) Export
 		FormPostAndClose.Picture = PictureLib.DocumentUnposted;
 	EndIf;
 	FormPostAndClose.Representation = ButtonRepresentation.PictureAndText;
+EndProcedure
+
+// Set list form appearance.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+Procedure SetListFormAppearance(Form)
+	If Form.Items.Find("Number") <> Undefined Then
+		Form.Items.Number.Width = 6;
+	EndIf;
+	
+	DateFormItem = Form.Items.Find("Date");
+	If DateFormItem <> Undefined Then
+		CurrentDate = BegOfDay(CurrentSessionDate());
+		DateFormItem.MaxWidth = 10;
+		
+		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+		ConditionalAppearanceItem.Appearance.SetParameterValue("Format", "DLF=D;");
+		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterItem.ComparisonType = DataCompositionComparisonType.Less;
+		FilterItem.LeftValue = New DataCompositionField(DateFormItem.DataPath);
+		FilterItem.RightValue = CurrentDate;
+		FilterItem.Use = True;
+		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+		AppearanceField.Field = New DataCompositionField(DateFormItem.Name);
+		AppearanceField.Use = True;
+		
+		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+		ConditionalAppearanceItem.Appearance.SetParameterValue("Format", "DLF=T;");
+		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterItem.ComparisonType = DataCompositionComparisonType.GreaterOrEqual;
+		FilterItem.LeftValue = New DataCompositionField(DateFormItem.DataPath);
+		FilterItem.RightValue = CurrentDate;
+		FilterItem.Use = True;
+		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+		AppearanceField.Field = New DataCompositionField(DateFormItem.Name);
+		AppearanceField.Use = True;
+	EndIf;
 EndProcedure

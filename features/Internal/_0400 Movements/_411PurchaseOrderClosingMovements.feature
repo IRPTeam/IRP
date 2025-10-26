@@ -348,7 +348,7 @@ Scenario: _041170 check Purchase order closing movements by the Register (differ
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I go to line in "List" table
 			| 'Date'                |
-			| '10.04.2025 22:26:08' |
+			| '10.04.2025' |
 		And I click the button named "FormPost"						
 	* Check movements by the Register "Posted documents registry"
 		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"

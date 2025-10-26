@@ -584,8 +584,8 @@ Scenario: _050009 create Cash receipt based on Purchase return
 	* Select PR
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table
-			| 'Date'                  | 'Number'    |
-			| '24.03.2021 16:08:15'   | '351'       |
+			| 'Date'         | 'Number'    |
+			| '24.03.2021'   | '351'       |
 		And I select current line in "List" table
 		And I click "Cash receipt" button
 	* Check creation

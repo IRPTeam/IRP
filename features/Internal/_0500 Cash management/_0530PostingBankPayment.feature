@@ -477,8 +477,8 @@ Scenario: _053009 create Bank payment based on Sales return
 	* Select SR
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
-			| 'Date'                  | 'Number'    |
-			| '27.01.2021 19:50:46'   | '12'        |
+			| 'Date'         | 'Number'    |
+			| '27.01.2021'   | '12'        |
 		And I select current line in "List" table
 		And I click "Bank payment" button
 	* Check creation

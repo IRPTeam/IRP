@@ -16,7 +16,6 @@
   <content>DataProcessor.CreateSerialLotNumbers</content>
   <content>DataProcessor.MobileDesktop</content>
   <content>Catalog.ItemKeys</content>
-  <content>Catalog.PrintTemplates</content>
   <content>Catalog.SerialLotNumbers</content>
   <content>Catalog.UnitsOfMeasurement</content>
   <content>Catalog.SourceOfOrigins</content>

@@ -3281,6 +3281,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseSalesOrders</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T2015S_TransactionsInfo.Dimension.Date</name>
 		<right>
 			<name>Edit</name>
@@ -5140,6 +5159,25 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UsePaymentOrders</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -7239,7 +7277,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.UseCashTransaction</name>
+		<name>Constant.UseCashTransactions</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -14508,7 +14546,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.UseOrders</name>
+		<name>Constant.UsePurchaseOrders</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

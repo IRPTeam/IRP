@@ -32,4 +32,5 @@
   <content>AccumulationRegister.R9541T_VacationUsage</content>
   <content>InformationRegister.T9545S_VacationDaysLimits</content>
   <content>Document.CalculationDeservedVacations</content>
+  <content>Report.R9510A_Salary</content>
 </mdclass:FunctionalOption>

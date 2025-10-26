@@ -8,4 +8,7 @@
   <location>Constant.UseRetailOrders</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Document.SalesOrder.Attribute.TransactionType</content>
+  <content>Report.R4011B_FreeStockMovements</content>
+  <content>Report.R4012A_StockReservation</content>
+  <content>Report.R401A_FreeStocks</content>
 </mdclass:FunctionalOption>

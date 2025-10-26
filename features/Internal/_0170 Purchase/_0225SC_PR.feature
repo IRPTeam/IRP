@@ -174,8 +174,8 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 				| 'Dress'    | 'L/Green'     | '5,000'       | 'Store 02'    | 'pcs'      |
 			And I click choice button of "Purchase invoice" attribute in "ItemList" table
 			And I go to line in "List" table
-				| 'Company'         | 'Currency'    | 'Date'                   | 'Legal name'           | 'Partner'       |
-				| 'Main Company'    | 'TRY'         | '07.09.2020 17:53:38'    | 'Company Ferron BP'    | 'Ferron BP'     |
+				| 'Company'         | 'Currency'    | 'Date'          | 'Legal name'           | 'Partner'       |
+				| 'Main Company'    | 'TRY'         | '07.09.2020'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I select current line in "List" table	
 		* Check Row ID tab
 			And I click "Show row key" button

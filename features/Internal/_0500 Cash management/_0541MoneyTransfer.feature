@@ -265,7 +265,7 @@ Scenario: _054104 try to re-create Money transfer based on Cash transfer order (
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 		And I go to line in "List" table
 			| 'Number'   | 'Sender'              | 'Receiver'              | 'Company'        | 'Date'      |
-			| '2'        | 'Bank account, EUR'   | 'Bank account 2, EUR'   | 'Main Company'   | '05.04.2021 |
+			| '2'        | 'Bank account, EUR'   | 'Bank account 2, EUR'   | 'Main Company'   | '05.04.2021' |
 		And I click "Money transfer" button
 	* Check info message
 		When TestClient log message contains "Document [Cash transfer order 2 dated 05.04.2021 12:09:54] already have related documents" string
@@ -340,7 +340,7 @@ Scenario: _054105 create two Money transfer based on Cash transfer order (differ
 			| 'Number'                          |
 			| '$NumberMoneyTransfer0541052$'    |
 
-Scenario: _054106 check refilling Monet rtransfer based on Cash transfer order
+Scenario: _054106 check refilling Money transfer based on Cash transfer order
 	* Select CTO and create Money transfer
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
@@ -354,8 +354,8 @@ Scenario: _054106 check refilling Monet rtransfer based on Cash transfer order
 		And I click Select button of "Cash transfer order" field
 		Then "Cash transfer orders" window is opened
 		And I go to line in "List" table
-			| 'Date'                  | 'Number'   | 'Receiver'       | 'Sender'          |
-			| '05.04.2021 12:24:12'   | '4'        | 'Cash desk №2'   | 'Cash desk №1'    |
+			| 'Date'         | 'Number'   | 'Receiver'       | 'Sender'          |
+			| '05.04.2021'   | '4'        | 'Cash desk №2'   | 'Cash desk №1'    |
 		And I select current line in "List" table
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button

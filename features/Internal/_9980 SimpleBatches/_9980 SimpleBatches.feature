@@ -132,10 +132,7 @@ When Create catalog SimpleBatch objects
 	When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 * Additional table control
 	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"	
-	And I go to line in "FunctionalOptions" table
-		| "Option"                                |
-		| "Use additional table control document" |
-	And I set "Use" checkbox in "FunctionalOptions" table
+	And I set checkbox "Use additional table control document"
 	And I click "Save" button
 When set False value to the constant DisableLinkedRowsIntegrity
 And I close all client application windows

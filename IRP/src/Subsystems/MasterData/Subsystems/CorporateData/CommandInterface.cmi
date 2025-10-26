@@ -7,7 +7,6 @@
       <commands>Catalog.Stores.StandardCommand.OpenList</commands>
       <commands>Catalog.Incoterms.StandardCommand.OpenList</commands>
       <commands>Catalog.CancelReturnReasons.StandardCommand.OpenList</commands>
-      <commands>Catalog.PrintInfo.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
 </cmi:CommandInterface>

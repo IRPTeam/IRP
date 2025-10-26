@@ -134,10 +134,7 @@ Scenario: _999901 filling in demo data base
 	When Create document MoneyTransfer objects(DemoDB)
 	* Additional table control
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"	
-		And I go to line in "FunctionalOptions" table
-			| "Option"                                |
-			| "Use additional table control document" |
-		And I set "Use" checkbox in "FunctionalOptions" table
+		And I set checkbox "Use additional table control document"
 		And I click "Save" button
 	* Posting documents
 		And I execute 1C:Enterprise script at server

@@ -253,14 +253,14 @@ EndProcedure
 
 Procedure SetDefaultUserSettings_ByUser(User) Export
 	DefaultCurrent = New Structure();
-	DefaultCurrent.Insert("Company"  , FOServer.GetDefault_Company());
-	DefaultCurrent.Insert("Store"    , FOServer.GetDefault_Store());
-	DefaultCurrent.Insert("Currency" , FOServer.GetDefault_Currency());
+	DefaultCurrent.Insert("Company"  , DefaultDataServer.GetDefault_Company());
+	DefaultCurrent.Insert("Store"    , DefaultDataServer.GetDefault_Store());
+	DefaultCurrent.Insert("Currency" , DefaultDataServer.GetDefault_Currency());
 	
 	DefaultIfNotSet = New Structure();
-	DefaultIfNotSet.Insert("Company"  , FOServer.GetDefault_Company(Undefined, True));
-	DefaultIfNotSet.Insert("Store"    , FOServer.GetDefault_Store(Undefined, True));
-	DefaultIfNotSet.Insert("Currency" , FOServer.GetDefault_Currency(Undefined, True));
+	DefaultIfNotSet.Insert("Company"  , DefaultDataServer.GetDefault_Company(Undefined, True));
+	DefaultIfNotSet.Insert("Store"    , DefaultDataServer.GetDefault_Store(Undefined, True));
+	DefaultIfNotSet.Insert("Currency" , DefaultDataServer.GetDefault_Currency(Undefined, True));
 	
 	RecordSetInfo = InformationRegisters.UserSettings.CreateRecordSet().UnloadColumns();
 	

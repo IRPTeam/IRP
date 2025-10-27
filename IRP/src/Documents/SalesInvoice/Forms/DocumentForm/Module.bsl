@@ -138,7 +138,40 @@ Procedure SetVisibilityAvailability(Object, Form)
 	ElsIf IsTransactionType_CurrencyRevaluationVendor Then
 		Form.Items.CurrencyRevaluationInvoice.TypeRestriction = New TypeDescription("DocumentRef.PurchaseInvoice");
 	EndIf;
+	
+	ExternalOffers = GetExternalOffers(Object);
+	For Each Row In Form.Object.SpecialOffers Do
+		Row.ExternalOffer = False;
+		For Each ExternalOfferKey In ExternalOffers Do
+			If Row.Key = ExternalOfferKey Then
+				Row.ExternalOffer = True;
+			EndIf;
+		EndDo;
+	EndDo;
 EndProcedure
+
+&AtServerNoContext
+Function GetExternalOffers(val _Object)
+	ArrayOfKeys = New Array();
+	For Each Row_SpecialOffer In _Object.SpecialOffers Do               
+		Rows_RowIDInfo = _Object.RowIDInfo.FindRows(New Structure("Key", Row_SpecialOffer.Key));
+		For Each Row_RowIDInfo In Rows_RowIDInfo Do
+			If ValueIsFilled(Row_RowIDInfo.BasisKey)
+				And ValueIsFilled(Row_RowIDInfo.Basis)
+				And (TypeOf(Row_RowIDInfo.Basis) = Type("DocumentRef.SalesOrder") 
+					Or TypeOf(Row_RowIDInfo.Basis) = Type("DocumentRef.PurchaseOrder")) Then
+					
+				If Row_RowIDInfo.Basis.SpecialOffers.FindRows(
+							New Structure("Key", Row_RowIDInfo.BasisKey)).Count() > 0 Then
+					If 	ArrayOfKeys.Find(Row_SpecialOffer.Key) = Undefined Then
+						ArrayOfKeys.Add(Row_SpecialOffer.Key);
+					EndIf;
+				EndIf; 
+			EndIf;
+		EndDo;
+	EndDo;
+	Return ArrayOfKeys;
+EndFunction
 
 &AtClient
 Procedure _IdeHandler()

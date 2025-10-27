@@ -19,4 +19,6 @@
   <content>Document.SalesInvoice.TabularSection.PaymentTerms</content>
   <content>Report.R1200_VendorsAging</content>
   <content>Report.R1100_CustomersAging</content>
+  <content>CommonCommand.OpenReport_R1100_CustomersAging</content>
+  <content>CommonCommand.OpenReport_R1200_VendorsAging</content>
 </mdclass:FunctionalOption>

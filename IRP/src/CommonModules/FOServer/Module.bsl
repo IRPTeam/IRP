@@ -128,7 +128,6 @@ Function GetFOGroups() Export
 	FOGroups.Insert("BaseSettings", FOList);
 	
 	FOList = New Array; // Array of String
-	FOList.Add("UseStores");
 	FOList.Add("UseCompanies");
 	FOList.Add("UseLegalName");
 	FOList.Add("UsePartnersHierarchy");
@@ -150,6 +149,7 @@ Function GetFOGroups() Export
 	FOGroups.Insert("Trading", FOList);
 	
 	FOList = New Array; // Array of String
+	FOList.Add("UseInventory");
 	FOList.Add("UseStores");
 	FOList.Add("UseShipmentAndReceiptPlaningOrders");
 	FOList.Add("UseShipmentConfirmationAndGoodsReceipts");
@@ -453,7 +453,7 @@ Function IsUseObjectTransformation() Export
 	Return GetFunctionalOption("UseObjectTransformation");
 EndFunction
 
-Function IsUseOrders() Export
+Function IsUsePurchaseOrders() Export
 	Return GetFunctionalOption("UsePurchaseOrders");
 EndFunction
 
@@ -507,6 +507,26 @@ EndFunction
 
 Function IsUseDashboard() Export
 	Return GetFunctionalOption("UseDashboard");
+EndFunction
+
+Function IsUseSalesOrders() Export
+	Return GetFunctionalOption("UseSalesOrders");
+EndFunction
+
+Function IsUseCashTransactions() Export
+	Return GetFunctionalOption("UseCashTransactions");
+EndFunction
+
+Function IsUsePaymentOrders() Export
+	Return GetFunctionalOption("UsePaymentOrders");
+EndFunction
+
+Function IsUsePreliminaryStock() Export
+	Return GetFunctionalOption("UsePreliminaryStock");
+EndFunction
+
+Function IsUseInventory() Export
+	Return GetFunctionalOption("UseInventory");
 EndFunction
 
 #EndRegion

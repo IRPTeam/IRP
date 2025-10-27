@@ -2788,7 +2788,7 @@ Scenario: 950450 check ignore lock modification data
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 	* Ignore lock modification data
-		And In the command interface I select "Settings" "System settings"
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"		
 		And I set checkbox "Ignore lock modification data"
 	* Check
 		Given I open hyperlink "e1cib/list/Catalog.Items"
@@ -2808,7 +2808,7 @@ Scenario: 950450 check ignore lock modification data
 		And I close all client application windows	
 	* Turn off ignore lock modification data
 		And I close all client application windows
-		And In the command interface I select "Settings" "System settings"
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"	
 		Then the form attribute named "IgnoreLockModificationData" became equal to "Yes"		
 		And I remove checkbox "Ignore lock modification data"		
 	* Check

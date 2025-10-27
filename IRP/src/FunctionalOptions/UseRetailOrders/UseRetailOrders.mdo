@@ -11,4 +11,7 @@
   <content>Report.R4011B_FreeStockMovements</content>
   <content>Report.R4012A_StockReservation</content>
   <content>Report.R401A_FreeStocks</content>
+  <content>CommonCommand.OpenReport_R401A_FreeStocks</content>
+  <content>CommonCommand.OpenReport_R4011B_FreeStockMovements</content>
+  <content>CommonCommand.OpenReport_R4012A_StockReservation</content>
 </mdclass:FunctionalOption>

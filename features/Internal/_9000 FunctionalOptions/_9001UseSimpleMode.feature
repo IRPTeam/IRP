@@ -17,8 +17,9 @@ Scenario: _900000 check open company catalog (dont use company)
 	And I set checkbox "Use purchase"	
 	And I set checkbox "Use sales"
 	And I set checkbox "Use finance"
-	And I set checkbox "Use cash transactions"
+	And I set checkbox "  -  Use cash transactions"
 	And I click "Save" button
+	And I click "Update defaults" button	
 	#EndTemp
 	* Check open Company catalog
 		And In the command interface I select "Master data" "Companies"
@@ -35,7 +36,7 @@ Scenario: _900001 Check Company creation
 		Then the form attribute named "Country" became equal to ""
 		Then the form attribute named "MainCompany" became equal to ""
 		Then the form attribute named "Partner" became equal to ""
-		Then the form attribute named "Type" became equal to "Company"
+		And I select "Company" exact value from the drop-down list named "Type"	
 		Then the form attribute named "OurCompany" became equal to "Yes"
 		Then the form attribute named "Code" became equal to "1"
 		Then the form attribute named "Description_en" became equal to "My Company"

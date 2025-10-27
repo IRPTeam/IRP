@@ -35,4 +35,5 @@
   <content>Document.SalesReportToConsignor</content>
   <content>Catalog.ItemTypes.Attribute.StockBalanceDetailSourceOfOrigins</content>
   <content>Catalog.ItemTypes.Attribute.BatchBalanceDetailSourceOfOrigins</content>
+  <content>AccumulationRegister.R4010B_ActualStocks.Dimension.SourceOfOrigin</content>
 </mdclass:FunctionalOption>

@@ -133,8 +133,6 @@ Function GetFOGroups() Export
 	FOList.Add("UsePartnersHierarchy");
 	FOList.Add("UsePartnerItems");
 	FOList.Add("UseContactInformation");
-	FOList.Add("UseInventory");
-	FOList.Add("UseStores");
 	FOList.Add("UseItemKey");
 	FOList.Add("UseSerialLotNumbers");
 	FOList.Add("UseUnitsAndDimensions");
@@ -151,6 +149,7 @@ Function GetFOGroups() Export
 	FOGroups.Insert("Trading", FOList);
 	
 	FOList = New Array; // Array of String
+	FOList.Add("UseInventory");
 	FOList.Add("UseStores");
 	FOList.Add("UseShipmentAndReceiptPlaningOrders");
 	FOList.Add("UseShipmentConfirmationAndGoodsReceipts");

@@ -23,4 +23,11 @@
   <content>AccumulationRegister.R4050B_StockInventory</content>
   <content>Report.D4010_ActualStocks.Command.D4010_ActualStocks</content>
   <content>Report.D4010_ActualStocks</content>
+  <content>Document.StockCorrection</content>
+  <content>Document.PhysicalInventory</content>
+  <content>Document.PhysicalCountByLocation</content>
+  <content>CommonCommand.OpenReport_R4010A_StockBalance</content>
+  <content>CommonCommand.OpenReport_R4050A_InventoryBalance</content>
+  <content>CommonCommand.OpenReport_R405A_StockAdjustments</content>
+  <content>CommonCommand.OpenReport_R9101S_InventoryResults</content>
 </mdclass:FunctionalOption>

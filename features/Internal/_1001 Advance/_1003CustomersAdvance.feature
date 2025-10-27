@@ -228,9 +228,9 @@ Scenario: _1003002 create CustomersAdvancesClosing
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 		And "List" table contains lines
-			| 'Number'                                       | 'Date'                  | 'Company'        | 'Begin of period'   | 'End of period'    |
-			| '$$NumberCustomersAdvancesClosing12012021$$'   | '12.01.2021 12:00:00'   | 'Main Company'   | '12.01.2021'        | '12.01.2021'       |
-			| '$$NumberCustomersAdvancesClosing27012021$$'   | '27.01.2021 12:00:00'   | 'Main Company'   | '27.01.2021'        | '27.01.2021'       |
+			| 'Number'                                       | 'Date'         | 'Company'        | 'Begin of period'   | 'End of period'    |
+			| '$$NumberCustomersAdvancesClosing12012021$$'   | '12.01.2021'   | 'Main Company'   | '12.01.2021'        | '12.01.2021'       |
+			| '$$NumberCustomersAdvancesClosing27012021$$'   | '27.01.2021'   | 'Main Company'   | '27.01.2021'        | '27.01.2021'       |
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I close all client application windows

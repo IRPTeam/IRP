@@ -177,8 +177,8 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 				| 'Sales invoice'     |
 			And I select current line in "" table
 			And I go to line in "List" table
-				| 'Amount'    | 'Company'         | 'Currency'    | 'Date'                   | 'Legal name'         | 'Partner'     |
-				| '800,00'    | 'Main Company'    | 'TRY'         | '07.10.2020 01:19:02'    | 'Company Kalipso'    | 'Kalipso'     |
+				| 'Amount'    | 'Company'         | 'Currency'    | 'Date'          | 'Legal name'         | 'Partner'     |
+				| '800,00'    | 'Main Company'    | 'TRY'         | '07.10.2020'    | 'Company Kalipso'    | 'Kalipso'     |
 			And I select current line in "List" table			
 		And I click "Post" button
 		* Check Row ID tab

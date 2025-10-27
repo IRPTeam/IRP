@@ -120,19 +120,19 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>Company</name>
-      <id>25</id>
+      <name>TransactionType</name>
+      <id>31</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Company</segments>
+        <segments>List.TransactionType</segments>
       </dataPath>
       <extendedTooltip>
-        <name>CompanyExtendedTooltip</name>
-        <id>27</id>
+        <name>TransactionTypeExtendedTooltip</name>
+        <id>33</id>
         <type>Label</type>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -141,8 +141,8 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CompanyContextMenu</name>
-        <id>26</id>
+        <name>TransactionTypeContextMenu</name>
+        <id>32</id>
         <autoFill>true</autoFill>
       </contextMenu>
       <type>LabelField</type>
@@ -192,19 +192,19 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>TransactionType</name>
-      <id>31</id>
+      <name>Company</name>
+      <id>25</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.TransactionType</segments>
+        <segments>List.Company</segments>
       </dataPath>
       <extendedTooltip>
-        <name>TransactionTypeExtendedTooltip</name>
-        <id>33</id>
+        <name>CompanyExtendedTooltip</name>
+        <id>27</id>
         <type>Label</type>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -213,8 +213,8 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>TransactionTypeContextMenu</name>
-        <id>32</id>
+        <name>CompanyContextMenu</name>
+        <id>26</id>
         <autoFill>true</autoFill>
       </contextMenu>
       <type>LabelField</type>

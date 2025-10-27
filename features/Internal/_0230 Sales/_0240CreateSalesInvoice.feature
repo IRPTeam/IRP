@@ -92,8 +92,8 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 	* Select SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| 'Number'   | 'Partner'     | 'Date'                   |
-			| '3'        | 'Ferron BP'   | '27.01.2021 19:50:45'    |
+			| 'Number'   | 'Partner'     | 'Date'          |
+			| '3'        | 'Ferron BP'   | '27.01.2021'    |
 	* Create SI
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		Then "Add linked document rows" window is opened
@@ -552,7 +552,7 @@ Scenario: _024006 create SI based on 2 SO with SC
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '3'        | '27.01.2021 19:50:45'    |
+			| '3'        | '27.01.2021'    |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentSalesInvoiceGenerate"	
 		And "BasisesTree" table contains lines

@@ -11,7 +11,6 @@
   <content>Enum.AgreementKinds</content>
   <content>Document.PurchaseOrder.Attribute.Agreement</content>
   <content>Document.SalesReturn.Attribute.Agreement</content>
-  <content>Catalog.Agreements.Attribute.StandardAgreement</content>
   <content>Document.SalesInvoice.Attribute.Agreement</content>
   <content>Catalog.RowIDs.Attribute.AgreementPurchases</content>
   <content>Document.CreditNote.TabularSection.Transactions.Attribute.Agreement</content>
@@ -31,7 +30,6 @@
   <content>InformationRegister.T2010S_OffsetOfAdvances.Dimension.DELETE_TransactionAgreement</content>
   <content>InformationRegister.TaxSettings.Dimension.Agreement</content>
   <content>Document.RetailSalesReceipt.Attribute.Agreement</content>
-  <content>Catalog.Agreements.Command.OpenAgreementsList</content>
   <content>Catalog.RowIDs.Attribute.AgreementSales</content>
   <content>Catalog.DELETE_TransactionsKeys.Attribute.Agreement</content>
   <content>AccumulationRegister.R1022B_VendorsPaymentPlanning.Dimension.Agreement</content>

@@ -13770,7 +13770,8 @@ Function BindItemListTotalAmount(Parameters)
 	Binding = New Structure();
 	Binding.Insert("SalesOrder",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-		|StepItemListCalculations_IsTotalAmountChanged");
+		|StepItemListCalculations_IsTotalAmountChanged,
+		|StepUpdatePaymentTerms");
 	
 	Binding.Insert("WorkOrder",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
@@ -13778,7 +13779,8 @@ Function BindItemListTotalAmount(Parameters)
 	
 	Binding.Insert("SalesInvoice",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-		|StepItemListCalculations_IsTotalAmountChanged");
+		|StepItemListCalculations_IsTotalAmountChanged,
+		|StepUpdatePaymentTerms");
 
 	Binding.Insert("RetailSalesReceipt",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
@@ -13790,21 +13792,25 @@ Function BindItemListTotalAmount(Parameters)
 
 	Binding.Insert("PurchaseOrder",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-		|StepItemListCalculations_IsTotalAmountChanged");
+		|StepItemListCalculations_IsTotalAmountChanged,
+		|StepUpdatePaymentTerms");
 	
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-		|StepItemListCalculations_IsTotalAmountChanged");
+		|StepItemListCalculations_IsTotalAmountChanged,
+		|StepUpdatePaymentTerms");
 	
 	Binding.Insert("WithholdingTaxInvoice", "StepItemListChangePriceTypeAsManual_IsTotalAmountChange");
 	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
+		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers,
+		|StepUpdatePaymentTerms");
 	
 	Binding.Insert("SalesReportToConsignor",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
+		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers,
+		|StepUpdatePaymentTerms");
 	
 //	SafeBinding(Binding, "GoodsReceipt",
 //		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,

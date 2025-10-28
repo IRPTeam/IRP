@@ -186,10 +186,7 @@ Scenario: _170000 preparation (Bank receipt simple form)
 	When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 * Additional table control
 	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"	
-	And I go to line in "FunctionalOptions" table
-		| "Option"                                |
-		| "Use additional table control document" |
-	And I set "Use" checkbox in "FunctionalOptions" table
+	And I set checkbox "Use additional table control document"	
 	And I click "Save" button
 * Posting first documents
 	And I execute 1C:Enterprise script at server
@@ -591,7 +588,7 @@ Scenario: _170002 create Bank receipt based on Purchase return - Return from ven
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table
 			| 'Number' |
-			| '3'      |
+			| '4'      |
 		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -610,7 +607,7 @@ Scenario: _170002 create Bank receipt based on Purchase return - Return from ven
 			| 'DetailsByRow'                     | "Yes"                                         | '' |
 			| 'DetailsByRowNoSplits'             | "Yes"                                         | '' |
 			| 'PaymentListAgreementNoSplits'     | "№31-92"                                      | '' |
-			| 'PaymentListBasisDocumentNoSplits' | "Purchase return 3 dated 10.12.2023 12:00:00" | '' |
+			| 'PaymentListBasisDocumentNoSplits' | "Purchase return 4 dated 22.10.2025 15:07:22" | '' |
 			| 'PaymentListNetAmountNoSplits'     | "200"                                         | '' |
 			| 'PaymentListPartnerNoSplits'       | "Vendor 3 (1 partner term)"                   | '' |
 			| 'PaymentListLegalNameNoSplits'     | "Vendor 3"                                    | '' |
@@ -622,9 +619,9 @@ Scenario: _170002 create Bank receipt based on Purchase return - Return from ven
 		And I click Choice button of the field named "PaymentListBasisDocumentNoSplits"
 		And I go to line in "List" table
 			| "Amount" | "Document"                                  |
-			| "80,00"  | "Purchase return 3 dated 10.12.2023 12:00:00" |
+			| "80,00"  | "Purchase return 4 dated 22.10.2025 15:07:22" |
 		And I select current line in "List" table
-		Then the form attribute named "PaymentListBasisDocumentNoSplits" became equal to "Purchase return 3 dated 10.12.2023 12:00:00"	
+		Then the form attribute named "PaymentListBasisDocumentNoSplits" became equal to "Purchase return 4 dated 22.10.2025 15:07:22"	
 	* Change in payment amount
 		And I input "70,00" text in the field named "PaymentListTotalAmountNoSplits"
 		And I click Choice button of the field named "PaymentListProjectNoSplits"

@@ -900,8 +900,8 @@ Scenario: 950410 check rules for accumulation and information registers (9 rules
 	* Check rule - accumulations registers
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"				
 		And I go to line in "List" table
-			| 'Amount' | 'Date'                | 'Number' |
-			| '920,00' | '30.12.2023 00:00:00' | '107'    |
+			| 'Amount' | 'Date'       | 'Number' |
+			| '920,00' | '30.12.2023' | '107'    |
 		And I select current line in "List" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
@@ -937,8 +937,8 @@ Scenario: 950410 check rules for accumulation and information registers (9 rules
 	* Check rule - information registers
 		Given I open hyperlink "e1cib/list/Document.PriceList"		
 		And I go to line in "List" table
-			| 'Date'                | 'Number' | 'Price list type'    | 'Price type'        |
-			| '01.11.2018 12:32:22' | '2'      | 'Price by item keys' | 'Basic Price Types' |
+			| 'Date'       | 'Number' | 'Price list type'    | 'Price type'        |
+			| '01.11.2018' | '2'      | 'Price by item keys' | 'Basic Price Types' |
 		And I select current line in "List" table
 		And I go to line in "ItemKeyList" table
 			| 'Item'  | 'Item key' | 'Price'  |
@@ -972,8 +972,8 @@ Scenario: 9504101 check rules for accumulation registers (2 rules for 1 register
 	* Check rule
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"				
 		And I go to line in "List" table
-			| 'Date'                | 'Number' |
-			| '19.02.2024 12:00:00' | '1 902'  |
+			| 'Date'       | 'Number' |
+			| '19.02.2024' | '1 902'  |
 		And I select current line in "List" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
@@ -2788,7 +2788,7 @@ Scenario: 950450 check ignore lock modification data
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 	* Ignore lock modification data
-		And In the command interface I select "Settings" "System settings"
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"		
 		And I set checkbox "Ignore lock modification data"
 	* Check
 		Given I open hyperlink "e1cib/list/Catalog.Items"
@@ -2808,7 +2808,7 @@ Scenario: 950450 check ignore lock modification data
 		And I close all client application windows	
 	* Turn off ignore lock modification data
 		And I close all client application windows
-		And In the command interface I select "Settings" "System settings"
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"	
 		Then the form attribute named "IgnoreLockModificationData" became equal to "Yes"		
 		And I remove checkbox "Ignore lock modification data"		
 	* Check

@@ -79,8 +79,8 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 	* Select PO
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
-			| 'Number'   | 'Partner'     | 'Date'                   |
-			| '217'      | 'Ferron BP'   | '12.02.2021 12:45:05'    |
+			| 'Number'   | 'Partner'     | 'Date'          |
+			| '217'      | 'Ferron BP'   | '12.02.2021'    |
 	* Create PI
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		Then "Add linked document rows" window is opened

@@ -273,8 +273,8 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And "List" table contains lines
-			| 'Number'                      | 'Date'                       |
-			| '$$NumberDeditNote095002$$'   | '$$DeditNoteDate095002$$'    |
+			| 'Number'                      |
+			| '$$NumberDeditNote095002$$'   |
 		And I close all client application windows
 
 
@@ -348,8 +348,8 @@ Scenario: _095003 create document Credit Note (increase in debt to the vendor)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And "List" table contains lines
-			| 'Number'                       | 'Date'                        |
-			| '$$NumberCreditNote095003$$'   | '$$CreditNoteDate095003$$'    |
+			| 'Number'                       |
+			| '$$NumberCreditNote095003$$'   |
 		And I close all client application windows
 
 
@@ -423,8 +423,8 @@ Scenario: _095004 create document Credit Note (write off customers debts)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And "List" table contains lines
-			| 'Number'                       | 'Date'                        |
-			| '$$NumberCreditNote095004$$'   | '$$CreditNoteDate095004$$'    |
+			| 'Number'                       |
+			| '$$NumberCreditNote095004$$'   |
 		And I close all client application windows
 
 
@@ -498,8 +498,8 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And "List" table contains lines
-			| 'Number'                      | 'Date'                       |
-			| '$$DeditNoteNumber095005$$'   | '$$DeditNoteDate095005$$'    |
+			| 'Number'                      |
+			| '$$DeditNoteNumber095005$$'   |
 		And I close all client application windows
 
 
@@ -658,8 +658,8 @@ Scenario: _095008 create DebitNote (OtherPartnersTransactions)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And "List" table contains lines
-			| 'Number'                      | 'Date'                       |
-			| '$$DeditNoteNumber095008$$'   | '$$DeditNoteDate095008$$'    |
+			| 'Number'                      |
+			| '$$DeditNoteNumber095008$$'   |
 		And I close all client application windows
 
 
@@ -721,8 +721,8 @@ Scenario: _095009 create CreditNote (OtherPartnersTransactions)
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And "List" table contains lines
-			| 'Number'                       | 'Date'                        |
-			| '$$CreditNoteNumber095009$$'   | '$$CreditNoteDate095009$$'    |
+			| 'Number'                       |
+			| '$$CreditNoteNumber095009$$'   |
 		And I close all client application windows
 
 Scenario: _095010 create DebitCreditNote (check amount control CurrencyFrom=CurrencyTo)

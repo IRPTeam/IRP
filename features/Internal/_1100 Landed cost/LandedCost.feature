@@ -1036,8 +1036,8 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Changing Quantity in the Inventory transfer 1 dated 05.08.2021 12:00:00	
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Date'                  | 'Number'    |
-			| '05.08.2021 12:00:00'   | '1'         |
+			| 'Date'         | 'Number'    |
+			| '05.08.2021'   | '1'         |
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'   | 'Quantity'   | 'Unit'    |
@@ -1076,8 +1076,8 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Changing Store Sender on Store 05 (no balance)
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Date'                  | 'Number'    |
-			| '05.08.2021 12:00:00'   | '1'         |
+			| 'Date'         | 'Number'    |
+			| '05.08.2021'   | '1'         |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Store sender" field
@@ -1114,8 +1114,8 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 	* Changing Store Sender on Store 01 and changing date
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
-			| 'Date'                  | 'Number'    |
-			| '05.08.2021 12:00:00'   | '1'         |
+			| 'Date'         | 'Number'    |
+			| '05.08.2021'   | '1'         |
 		And I select current line in "List" table
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 		And I click Select button of "Store sender" field

@@ -591,8 +591,8 @@ And I close all client application windows
 * Select SR
 	Given I open hyperlink "e1cib/list/Document.SalesReturn"
 	And I go to line in "List" table
-		| 'Date'                  | 'Number'    |
-		| '27.01.2021 19:50:46'   | '12'        |
+		| 'Date'         | 'Number'    |
+		| '27.01.2021'   | '12'        |
 	And I select current line in "List" table
 	And I click "Cash payment" button
 * Check creation
@@ -605,7 +605,7 @@ And I close all client application windows
 	Then the form attribute named "TransactionType" became equal to "Return to customer"
 	Then the form attribute named "Currency" became equal to "TRY"
 	And "PaymentList" table became equal
-		| '#'   | 'Partner'     | 'Legal name'               | 'Partner term'               | 'Legal name contract'   | 'Basis document'                              | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
+		| '#'   | 'Partner'     | 'Legal name'          | 'Partner term'               | 'Legal name contract'   | 'Basis document'                              | 'Total amount'   | 'Financial movement type'   | 'Planning transaction basis'    |
 		| '1'   | 'Ferron BP'   | 'Company Ferron BP'   | 'Basic Partner terms, TRY'   | ''                      | 'Sales return 12 dated 27.01.2021 19:50:46'   | '500,00'         | ''                          | ''                              |
 	
 	Then the form attribute named "Branch" became equal to "Distribution department"

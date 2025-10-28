@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="50719e8a-ad60-4221-a42d-dc814a927832">
+  <producedTypes>
+    <managerType typeId="18679612-e5c0-4cd8-bb73-9fd307f5ed2c" valueTypeId="4c6be49e-5e88-493b-a76d-c11c114e448b"/>
+    <valueManagerType typeId="7c6da7d1-1a27-43ef-8647-a6c416c32d5a" valueTypeId="23bb3d8e-6d20-42ea-b302-2d565d67d697"/>
+    <valueKeyType typeId="4ca00dda-0916-4581-a60c-9c0ed6f636d2" valueTypeId="696c4af5-5078-46b2-9299-dd1cd7f20600"/>
+  </producedTypes>
+  <name>UsePaymentOrders</name>
+  <synonym>
+    <key>en</key>
+    <value>Use payment orders</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

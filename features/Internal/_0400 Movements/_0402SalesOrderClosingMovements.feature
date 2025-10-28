@@ -422,8 +422,8 @@ Scenario: _040171 check Sales order closing movements by the Register (different
 	* Select Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
-			| 'Date'                |
-			| '10.04.2025 22:14:52' |
+			| 'Date'       |
+			| '10.04.2025' |
 		And I click the button named "FormPost"						
 	* Check movements by the Register "Posted documents registry"
 		And I click the button named "FormReportD0013_DocumentRegistrationsReportRegistrationsReportInfo"

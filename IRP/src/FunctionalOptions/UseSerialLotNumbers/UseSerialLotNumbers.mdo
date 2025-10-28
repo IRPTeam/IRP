@@ -23,4 +23,5 @@
   <content>InformationRegister.T6070S_BatchRevenueAllocationInfo.Dimension.SerialLotNumber</content>
   <content>Catalog.ItemTypes.Attribute.BatchBalanceDetailSerialLotNumber</content>
   <content>Catalog.ItemTypes.Attribute.StockBalanceDetailSerialLotNumber</content>
+  <content>AccumulationRegister.R4010B_ActualStocks.Dimension.SerialLotNumber</content>
 </mdclass:FunctionalOption>

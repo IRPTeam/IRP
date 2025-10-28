@@ -30,4 +30,9 @@
   <content>InformationRegister.T6060S_BatchCostAllocationInfo</content>
   <content>Document.AdditionalRevenueAllocation</content>
   <content>Document.OpeningEntry.TabularSection.Inventory.Attribute.Amount</content>
+  <content>Report.R6020A_InventoryCost</content>
+  <content>Report.R6060A_CostOfGoodsSold</content>
+  <content>CommonCommand.OpenReport_R6020_BatchBalance</content>
+  <content>CommonCommand.OpenReport_R6060A_CostOfGoodsSold</content>
+  <content>CommonCommand.OpenReport_R6020A_InventoryCost</content>
 </mdclass:FunctionalOption>

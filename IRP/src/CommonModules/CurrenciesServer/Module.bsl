@@ -146,7 +146,9 @@ Procedure CheckClosingColumn(ItemOfPostingInfo, ClosingRecords, _PartnerBalanceT
 	If ClosingRecordsIsPresent Then
 		ClosingRecords.Add(NewClosingRecords);
 		_PostingDataTables.Insert(NewClosingRecords.Value.Metadata, NewClosingRecords.Value);
-		If NewClosingRecords.Value.Metadata = Metadata.AccumulationRegisters.R5020B_PartnersBalance Then
+		If NewClosingRecords.Value.Metadata = Metadata.AccumulationRegisters.R5020B_PartnersBalance 
+			Or NewClosingRecords.Value.Metadata = Metadata.AccumulationRegisters.R5011B_CustomersAging
+			Or NewClosingRecords.Value.Metadata = Metadata.AccumulationRegisters.R5012B_VendorsAging Then
 			_PartnerBalanceTable = NewClosingRecords.Value.PrepareTable;
 		EndIf;
 	EndIf;

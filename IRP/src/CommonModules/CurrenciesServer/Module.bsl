@@ -1022,7 +1022,7 @@ Procedure ReplaceTransactionCurrency(ExpandTable, TrnRows, OtherRows, ExcludeDim
 EndProcedure
 
 Function GetEmptyCurrenciesTable(RefMetadata)
-	Columns = RefMetadata.TabularSections.Currencies.Attributes;
+	Columns = Metadata.Documents.SalesInvoice.TabularSections.Currencies.Attributes;
 	EmptyCurrenciesTable = New ValueTable();
 	EmptyCurrenciesTable.Columns.Add("Key"             , Columns.Key.Type);
 	EmptyCurrenciesTable.Columns.Add("IsFixed"         , Columns.IsFixed.Type);

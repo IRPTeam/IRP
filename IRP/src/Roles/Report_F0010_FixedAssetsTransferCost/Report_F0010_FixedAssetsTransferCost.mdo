@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="69136e89-6fb2-4d8a-a5c4-ac5ce8fcbbd8">
+  <name>Report_F0010_FixedAssetsTransferCost</name>
+  <synonym>
+    <key>en</key>
+    <value>Report F0010_FixedAssetsTransferCost</value>
+  </synonym>
+</mdclass:Role>

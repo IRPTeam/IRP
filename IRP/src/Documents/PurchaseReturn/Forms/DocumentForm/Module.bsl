@@ -474,8 +474,15 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffersAtRow(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject,
-		"SpecialOffersEditFinish_ForRow");
+	If Items.ItemList.SelectedRows.Count() > 1 Then 
+		ArrayOfRowKeys = New Array();
+		For Each ItemOfArray In Items.ItemList.SelectedRows Do  
+			ArrayOfRowKeys.Add(Object.ItemList.FindByID(ItemOfArray).Key);
+		EndDo;
+		OffersClient.OpenFormPickupSpecialOffers_ForSelectedRows(Object, ArrayOfRowKeys, ThisObject, "SpecialOffersEditFinish_ForSelectedRows");
+	Else	
+		OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject, "SpecialOffersEditFinish_ForRow");
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -490,6 +497,20 @@ EndProcedure
 &AtServer
 Procedure CalculateAndLoadOffers_ForRow(Result)
 	OffersServer.CalculateAndLoadOffers_ForRow(Object, Result.OffersAddress, Result.ItemListRowKey);
+EndProcedure
+
+&AtClient
+Procedure SpecialOffersEditFinish_ForSelectedRows(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	CalculateAndLoadOffers_ForSelectedRows(Result);
+	OffersClient.SpecialOffersEditFinish_ForSelectedRows(Result, Object, ThisObject, AdditionalParameters);
+EndProcedure
+
+&AtServer
+Procedure CalculateAndLoadOffers_ForSelectedRows(Result)
+	OffersServer.CalculateAndLoadOffers_ForSelectedRows(Object, Result.OffersAddress, Result.ArrayOfRowKeys);
 EndProcedure
 
 #EndRegion

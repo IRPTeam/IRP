@@ -160,13 +160,12 @@ Function GetExternalOffers(val _Object)
 				And ValueIsFilled(Row_RowIDInfo.Basis)
 				And (TypeOf(Row_RowIDInfo.Basis) = Type("DocumentRef.SalesOrder") 
 					Or TypeOf(Row_RowIDInfo.Basis) = Type("DocumentRef.PurchaseOrder")) Then
-					
-				If Row_RowIDInfo.Basis.SpecialOffers.FindRows(
-							New Structure("Key", Row_RowIDInfo.BasisKey)).Count() > 0 Then
-					If 	ArrayOfKeys.Find(Row_SpecialOffer.Key) = Undefined Then
+				OrderRows = Row_RowIDInfo.Basis.SpecialOffers.FindRows(New Structure("Key", Row_RowIDInfo.BasisKey));
+				For Each OrderRow In OrderRows Do
+					If OrderRow.Offer = Row_SpecialOffer.Offer And ArrayOfKeys.Find(Row_SpecialOffer.Key) = Undefined Then
 						ArrayOfKeys.Add(Row_SpecialOffer.Key);
 					EndIf;
-				EndIf; 
+				EndDo; 
 			EndIf;
 		EndDo;
 	EndDo;

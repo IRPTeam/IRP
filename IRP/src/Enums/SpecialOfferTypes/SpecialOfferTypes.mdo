@@ -26,4 +26,11 @@
       <value>For row</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="e3549c72-c655-4dab-bec1-372ee4cd1694">
+    <name>ForSelectedRows</name>
+    <synonym>
+      <key>en</key>
+      <value>For selected rows</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

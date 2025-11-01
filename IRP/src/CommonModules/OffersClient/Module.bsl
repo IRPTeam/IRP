@@ -38,3 +38,28 @@ Procedure SpecialOffersEditFinish_ForRow(OffersInfo, Object, Form, AddInfo = Und
 	ViewClient_V2.OffersOnChange(Object, Form);
 	Form.Modified = True;
 EndProcedure
+
+Procedure OpenFormPickupSpecialOffers_ForSelectedRows(Object, ArrayOfRowKeys, Form, NotifyEditFinish, AddInfo = Undefined) Export
+	OpenFormArgs = GetOpenFormArgsPickupSpecialOffers_ForSelectedRows(Object, ArrayOfRowKeys);
+	OpenForm("CommonForm.PickupSpecialOffers", New Structure("Info", OpenFormArgs), Form, , , ,
+		New CallbackDescription(NotifyEditFinish, Form, AddInfo), FormWindowOpeningMode.LockWholeInterface);
+EndProcedure        
+
+Function GetOpenFormArgsPickupSpecialOffers_ForSelectedRows(Object, ArrayOfRowKeys) Export
+	OpenArgs = New Structure();
+	OpenArgs.Insert("ArrayOfOffers", OffersServer.GetAllActiveOffers_ForSelectedRows(Object));
+	OpenArgs.Insert("Type", "Offers_ForSelectedRows");
+	OpenArgs.Insert("ArrayOfRowKeys", ArrayOfRowKeys);
+	OpenArgs.Insert("Object", Object);
+	Return OpenArgs;
+EndFunction
+
+Procedure SpecialOffersEditFinish_ForSelectedRows(OffersInfo, Object, Form, AddInfo = Undefined) Export
+	If OffersInfo = Undefined Then
+		Return;
+	EndIf;
+	ViewClient_V2.OffersOnChange(Object, Form);
+	Form.Modified = True;
+EndProcedure
+
+

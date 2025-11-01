@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a0a33111-1ad3-448b-acb9-8a7f4abecbe2">
+  <name>Report_R5010A_ReconciliationStatement</name>
+  <synonym>
+    <key>en</key>
+    <value>Report R5010A_ReconciliationStatement</value>
+  </synonym>
+</mdclass:Role>

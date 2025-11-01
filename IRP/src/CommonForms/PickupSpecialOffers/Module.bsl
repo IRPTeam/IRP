@@ -1,8 +1,12 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.FormParametersInfo = Parameters.Info;
-	ThisObject.FormType = Parameters.Info.Type;
-	ThisObject.ItemListRowKey = Parameters.Info.ItemListRowKey;
+	ThisObject.FormType = Parameters.Info.Type; 
+	If ThisObject.FormType = "Offers_ForSelectedRows" Then
+		ThisObject.ArrayOfRowKeys.LoadValues(Parameters.Info.ArrayOfRowKeys);	
+	Else
+		ThisObject.ItemListRowKey = Parameters.Info.ItemListRowKey;
+	EndIf;
 	OffersTree = OffersServer.FillOffersTree(Parameters.Info);
 	ValueToFormAttribute(OffersTree, "Offers");
 EndProcedure
@@ -68,7 +72,27 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 
 		AddDataProcClient.OpenFormAddDataProc(Info, CallbackDescription, "InputManualValue");
 	EndIf;
+	
+	If Field.Name <> "OffersSelect" And OfferHaveManualInputValue(thisString.Offer) 
+		And ThisObject.FormType = "Offers_ForSelectedRows" Then
 
+		Info = AddDataProcServer.AddDataProcInfo(GetExternalDataProcessorByOffer(thisString.Offer));
+		Info.Insert("Settings", GetSettingsForOffer(thisString.Offer));
+		Info.Insert("TotalAmount", thisString.TotalAmount);
+		Info.Insert("TotalPercent", thisString.TotalPercent);
+		Info.Insert("ArrayOfRowKeys", ThisObject.ArrayOfRowKeys.UnloadValues());
+		Info.Insert("FormParametersInfo", ThisObject.FormParametersInfo);
+		Info.Insert("SelectedRow", SelectedRow);
+		Info.Insert("RuleStatus", thisString.RuleStatus);
+		Info.Insert("SpecialOffer", thisString.Offer);
+
+		CallMethodAddDataProc(Info);
+
+		CallbackDescription = New CallbackDescription("InputManualValueForOfferEnd", ThisObject);
+
+		AddDataProcClient.OpenFormAddDataProc(Info, CallbackDescription, "InputManualValue");
+	EndIf;
+	
 	If Field.Name <> "OffersSelect" And OfferHaveManualInputValue(thisString.Offer) 
 		And ThisObject.FormType	= "Offers_ForDocument" Then
 
@@ -181,6 +205,6 @@ Function PutOffersTreeToTempStorage()
 	Result = OffersServer.GetOffersInfoParam();
 	Result.OffersAddress = PutToTempStorage(OffersServer.GetSelectedOffersTree(ThisObject), ThisObject.UUID);
 	Result.ItemListRowKey = ThisObject.ItemListRowKey;
+	Result.ArrayOfRowKeys = ThisObject.ArrayOfRowKeys.UnloadValues();
 	Return Result;
 EndFunction
-

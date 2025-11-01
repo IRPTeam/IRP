@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ff3a4416-e4f0-4090-9dfc-f214604bc30d">
+  <name>Report_R9101S_InventoryResults</name>
+  <synonym>
+    <key>en</key>
+    <value>Report R9101S_InventoryResults</value>
+  </synonym>
+</mdclass:Role>

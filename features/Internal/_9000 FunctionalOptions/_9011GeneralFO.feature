@@ -24,8 +24,9 @@ Scenario: _900105 check FO use store
 	* Check
 		* Subsystem Inventory
 			When I Check the steps for Exception
-				| 'When in sections panel I select "Inventory"'     |
+				| 'And In the command interface I select "Inventory" "Stores"'     |			
 		* Attribute isAdditionalİtemCost in PI
+			And in functions panel I select "Items"		
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			And I click "Create" button	
 			And in the table "ItemList" I click "Add" button
@@ -70,7 +71,7 @@ Scenario: _900107 check FO use cheque bonds
 	And I close all client application windows
 	* Switch-off FO use cheque bonds
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
-		And I remove checkbox "Use cheque bonds"
+		And I remove checkbox "  -  Use cheque bonds"	
 		And I click "Save" button
 		And I close "Functional option settings" window	
 	* Check

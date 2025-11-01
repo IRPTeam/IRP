@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2e1a548a-2de9-414b-a168-7491b72c6985">
+  <name>Report_R405A_StockAdjustments</name>
+  <synonym>
+    <key>en</key>
+    <value>Report R405A_StockAdjustments</value>
+  </synonym>
+</mdclass:Role>

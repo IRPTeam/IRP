@@ -2729,7 +2729,7 @@ Function GetAccountingData(Parameters)
 	If QuerySelection.Next() Then
 		Result.CurrencyDr = QuerySelection.DrCurrency;
 		If ValueIsFilled(QuerySelection.DrCurrency) 
-			And Parameters.CurrencyMovementType.Currency <> QuerySelection.DrCurrency
+			//And Parameters.CurrencyMovementType.Currency <> QuerySelection.DrCurrency
 			And QuerySelection.DrCurrencyAmountIsEmpty Then
 				Result.CurrencyAmountDr = 
 					GetCurrencyAmount(Parameters.Recorder, Parameters.Operation, QuerySelection.DrCurrency, RowKey);
@@ -2739,7 +2739,7 @@ Function GetAccountingData(Parameters)
 		
 		Result.CurrencyCr = QuerySelection.CrCurrency;
 		If ValueIsFilled(QuerySelection.CrCurrency) 
-			And Parameters.CurrencyMovementType.Currency <> QuerySelection.CrCurrency
+			//And Parameters.CurrencyMovementType.Currency <> QuerySelection.CrCurrency
 			And QuerySelection.CrCurrencyAmountIsEmpty Then
 				Result.CurrencyAmountCr = 
 					GetCurrencyAmount(Parameters.Recorder, Parameters.Operation, QuerySelection.CrCurrency, RowKey);

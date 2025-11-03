@@ -62,7 +62,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Dashboard</value>
+    <value>Панель мониторинга</value>
    </title>
    <title>
     <key>en</key>
@@ -74,7 +74,7 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Group dashboard</value>
+    <value>Группа (панель мониторинга)</value>
    </toolTip>
    <toolTip>
     <key>en</key>
@@ -682,7 +682,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Html</value>
+   <value>HTML</value>
   </title>
   <title>
    <key>en</key>
@@ -708,7 +708,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Widget settings</value>
+   <value>Настройки виджета</value>
   </title>
   <title>
    <key>en</key>
@@ -732,7 +732,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Widget name</value>
+    <value>Наименование виджета</value>
    </title>
    <title>
     <key>en</key>
@@ -784,7 +784,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Enabled</value>
+    <value>Включено</value>
    </title>
    <title>
     <key>en</key>
@@ -835,7 +835,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Json</value>
+    <value>JSON</value>
    </title>
    <title>
     <key>en</key>
@@ -861,7 +861,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Indicator name</value>
+    <value>Наименование индикатора</value>
    </title>
    <title>
     <key>en</key>

@@ -929,8 +929,8 @@ Scenario: _0155274 select items from RSO in POS
 		And I click "OK" button	
 		And I click "Select basis document" button
 		And "SalesOrders" table does not contain lines
-			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' |
-			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       |
+			| 'Number' | 'Date'       | 'Amount'   | 'Retail customer' | 'Branch' |
+			| '318'    | '11.08.2023' | '1 188,00' | 'Daniel Smith'    | ''       |
 		And I close all client application windows
 		
 				

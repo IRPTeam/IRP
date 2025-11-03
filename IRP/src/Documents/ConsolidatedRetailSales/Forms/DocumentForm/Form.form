@@ -2838,19 +2838,16 @@
   <edit>
    <common>true</common>
   </edit>
-  <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-   <segments>Documents.Ref</segments>
-  </notDefaultUseAlwaysAttributes>
   <extInfo xsi:type="form:DynamicListExtInfo">
-   <queryText>SELECT
+   <queryText>SELECT ALLOWED
 	RetailSalesReceipt.Ref AS Document,
-	RetailSalesReceipt.Number,
-	RetailSalesReceipt.Date,
-	RetailSalesReceipt.Company,
-	RetailSalesReceipt.Currency,
-	RetailSalesReceipt.Author,
-	RetailSalesReceipt.Branch,
-	RetailSalesReceipt.DocumentAmount,
+	RetailSalesReceipt.Number AS Number,
+	RetailSalesReceipt.Date AS Date,
+	RetailSalesReceipt.Company AS Company,
+	RetailSalesReceipt.Currency AS Currency,
+	RetailSalesReceipt.Author AS Author,
+	RetailSalesReceipt.Branch AS Branch,
+	RetailSalesReceipt.DocumentAmount AS DocumentAmount,
 	0 AS Send,
 	RetailSalesReceipt.DocumentAmount AS Receipt,
 	CASE

@@ -12,7 +12,6 @@
       <commands>Catalog.SourceOfOrigins.StandardCommand.OpenList</commands>
       <commands>Catalog.Specifications.StandardCommand.OpenList</commands>
       <commands>Catalog.PartnerItems.StandardCommand.OpenList</commands>
-      <commands>Catalog.PrintTemplates.StandardCommand.OpenList</commands>
       <commands>Catalog.ItemSegments.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>

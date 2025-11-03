@@ -86,6 +86,7 @@
    <headerHorizontalAlign>Left</headerHorizontalAlign>
    <showInFooter>true</showInFooter>
    <extInfo xsi:type="form:LabelFieldExtInfo">
+    <width>6</width>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
    </extInfo>
@@ -194,7 +195,7 @@
    <headerHorizontalAlign>Left</headerHorizontalAlign>
    <showInFooter>true</showInFooter>
    <extInfo xsi:type="form:InputFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
+    <maxWidth>20</maxWidth>
     <autoMaxHeight>true</autoMaxHeight>
     <wrap>true</wrap>
     <chooseType>true</chooseType>

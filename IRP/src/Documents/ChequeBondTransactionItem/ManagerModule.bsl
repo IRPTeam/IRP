@@ -157,22 +157,14 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	Return QueryArray;
 EndFunction
 
-#EndRegion
-
-#Region Posting_MainTables
-
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-	QueryArray.Add(R1020B_AdvancesToVendors());
+	QueryArray.Add(R1020B_AdvancesToVendors());//+
 	QueryArray.Add(R1021B_VendorsTransactions());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R2021B_CustomersTransactions());
@@ -183,7 +175,418 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_MainTables
+
+Function R5020B_PartnersBalance()
+	Return 
+		"SELECT
+		|	CASE
+		|		WHEN OffsetOfAdvances.RecordType = VALUE(Enum.RecordType.Receipt)
+		|			THEN VALUE(AccumulationRecordType.Receipt)
+		|		ELSE VALUE(AccumulationRecordType.Expense)
+		|	END AS RecordType,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.Amount,
+		|	case
+		|		when OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing
+		|			then true
+		|		else false
+		|	end as IsVendorOffset,
+		|	case
+		|		when OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing
+		|			then true
+		|		else false
+		|	end as IsCustomerOffset,
+		|	OffsetOfAdvances.Recorder AS AdvancesClosing
+		|INTO OffsetPartnersBalance
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND (OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing
+		|	OR OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing)
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		// Vendor advance
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.AdvanceAgreement AS Agreement,
+		|	UNDEFINED AS Document,
+		|	Table.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	Table.Amount AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO R5020B_PartnersBalance
+		|FROM
+		|	VendorTransaction_Posting AS Table
+		|WHERE
+		|	Table.IsOutgoingCheque
+		|	and Table.IsAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.AdvanceAgreement AS Agreement,
+		|	UNDEFINED AS Document,
+		|	Table.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	Table.Amount AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	VendorTransaction_Reversal AS Table
+		|WHERE
+		|	Table.IsOutgoingCheque
+		|	and Table.IsAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.AdvanceAgreement AS Agreement,
+		|	UNDEFINED AS Document,
+		|	Table.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	Table.Amount AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	VendorTransaction_Correction AS Table
+		|WHERE
+		|	Table.IsOutgoingCheque
+		|	and Table.IsAdvance
+		|
+		|UNION ALL
+		// Customer advance
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.AdvanceAgreement AS Agreement,
+		|	UNDEFINED AS Document,
+		|	Table.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	Table.Amount AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	CustomerTransaction_Posting AS Table
+		|WHERE
+		|	Table.IsIncomingCheque
+		|	AND Table.IsAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.AdvanceAgreement AS Agreement,
+		|	UNDEFINED AS Document,
+		|	Table.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	Table.Amount AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	CustomerTransaction_Reversal AS Table
+		|WHERE
+		|	Table.IsIncomingCheque
+		|	AND Table.IsAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.AdvanceAgreement AS Agreement,
+		|	UNDEFINED AS Document,
+		|	Table.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	Table.Amount AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	CustomerTransaction_Correction AS Table
+		|WHERE
+		|	Table.IsIncomingCheque
+		|	AND Table.IsAdvance
+		|
+		|UNION ALL
+		//		// Customer advance, Vendor advance (offset)
+		|SELECT
+		|	OffsetPartnersBalance.RecordType,
+		|	OffsetPartnersBalance.Period,
+		|	OffsetPartnersBalance.Company,
+		|	OffsetPartnersBalance.Branch,
+		|	OffsetPartnersBalance.Partner,
+		|	OffsetPartnersBalance.LegalName,
+		|	OffsetPartnersBalance.Agreement,
+		|	UNDEFINED,
+		|	OffsetPartnersBalance.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	case
+		|		when OffsetPartnersBalance.IsCustomerOffset
+		|			then OffsetPartnersBalance.Amount
+		|		else 0
+		|	end as CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	case
+		|		when OffsetPartnersBalance.IsVendorOffset
+		|			then OffsetPartnersBalance.Amount
+		|		else 0
+		|	end as VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	OffsetPartnersBalance.AdvancesClosing
+		|FROM
+		|	OffsetPartnersBalance AS OffsetPartnersBalance
+		|WHERE
+		|	OffsetPartnersBalance.IsCustomerOffset
+		|	OR OffsetPartnersBalance.IsVendorOffset
+		|
+		|UNION ALL
+		// Customer transaction, Vendor transaction
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.Agreement,
+		|	Table.BasisDocument,
+		|	Table.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	Table.Amount AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED
+		|FROM
+		|	VendorTransaction_Posting AS Table
+		|WHERE
+		|	Table.IsOutgoingCheque
+		|	and not Table.IsAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.Agreement,
+		|	Table.BasisDocument,
+		|	Table.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	Table.Amount AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED
+		|FROM
+		|	VendorTransaction_Reversal AS Table
+		|WHERE
+		|	Table.IsOutgoingCheque
+		|	and not Table.IsAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.Agreement,
+		|	Table.BasisDocument,
+		|	Table.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	Table.Amount AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED
+		|FROM
+		|	VendorTransaction_Correction AS Table
+		|WHERE
+		|	Table.IsOutgoingCheque
+		|	and not Table.IsAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.Agreement,
+		|	Table.BasisDocument,
+		|	Table.Currency,
+		|	0 AS Amount,
+		|	Table.Amount AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED
+		|FROM
+		|	CustomerTransaction_Posting AS Table
+		|WHERE
+		|	Table.IsIncomingCheque
+		|	and not Table.IsAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.Agreement,
+		|	Table.BasisDocument,
+		|	Table.Currency,
+		|	0 AS Amount,
+		|	Table.Amount AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED
+		|FROM
+		|	CustomerTransaction_Reversal AS Table
+		|WHERE
+		|	Table.IsIncomingCheque
+		|	and not Table.IsAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Partner,
+		|	Table.LegalName,
+		|	Table.Agreement,
+		|	Table.BasisDocument,
+		|	Table.Currency,
+		|	0 AS Amount,
+		|	Table.Amount AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	UNDEFINED
+		|FROM
+		|	CustomerTransaction_Correction AS Table
+		|WHERE
+		|	Table.IsIncomingCheque
+		|	and not Table.IsAdvance
+		|
+		|UNION ALL
+		// Customer transaction, Vendor transaction (offset)
+		|SELECT
+		|	OffsetPartnersBalance.RecordType,
+		|	OffsetPartnersBalance.Period,
+		|	OffsetPartnersBalance.Company,
+		|	OffsetPartnersBalance.Branch,
+		|	OffsetPartnersBalance.Partner,
+		|	OffsetPartnersBalance.LegalName,
+		|	OffsetPartnersBalance.Agreement,
+		|	OffsetPartnersBalance.TransactionDocument,
+		|	OffsetPartnersBalance.Currency,
+		|	0 AS Amount,
+		|	case
+		|		when OffsetPartnersBalance.IsCustomerOffset
+		|			then OffsetPartnersBalance.Amount
+		|		else 0
+		|	end as CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	case
+		|		when OffsetPartnersBalance.IsVendorOffset
+		|			then OffsetPartnersBalance.Amount
+		|		else 0
+		|	end as VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	0 AS OtherTransaction,
+		|	OffsetPartnersBalance.AdvancesClosing
+		|FROM
+		|	OffsetPartnersBalance AS OffsetPartnersBalance
+		|WHERE
+		|	OffsetPartnersBalance.IsCustomerOffset
+		|	OR OffsetPartnersBalance.IsVendorOffset";
 EndFunction
 
 Function R3035T_CashPlanning()
@@ -428,62 +831,61 @@ EndFunction
 #Region Service
 
 Function ChequeBondTransactionItem()
-	Return "SELECT
-		   |	Doc.Date AS Period,
-		   |	Doc.Company,
-		   |	Doc.Branch,
-		   |	Doc.Cheque,
-		   |	Doc.Cheque.Currency AS Currency,
-		   |	Doc.Account,
-		   |	Doc.Partner,
-		   |	Doc.LegalName,
-		   |	Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.PartnerCheque) AS IsIncomingCheque,
-		   |	Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.OwnCheque) AS IsOutgoingCheque,
-		   |	Doc.Cheque.Amount AS Amount,
-		   |	Doc.Cheque.DueDate AS DueDate,
-		   |	Doc.BasisDocument,
-		   |	Doc.Order,
-		   |	CASE
-		   |		WHEN DOc.Agreement.UseOrdersForSettlements
-		   |			THEN Doc.Order
-		   |		ELSE UNDEFINED
-		   |	END AS OrderSettlements,
-		   |	Doc.LegalNameContract,
-		   |	Doc.FinancialMovementType,
-		   |	Doc.PlanningPeriod,
-		   |	Doc.Ref AS CashPlanningBasis,
-		   |	Doc.Ref AS Ref,
-		   |	CASE 
-		   |		WHEN Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.PartnerCheque) THEN VALUE(Enum.CashFlowDirections.Incoming)
-		   |		WHEN Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.OwnCheque) THEN VALUE(Enum.CashFlowDirections.Outgoing)
-		   |	END AS CashFlowDirection,
-		   |
-		   |	CASE
-		   |		WHEN Doc.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		   |		AND Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		   |			THEN Doc.Agreement.StandardAgreement
-		   |		ELSE Doc.Agreement
-		   |	END AS Agreement,
-		   |
-		   |	CASE
-		   |		WHEN Doc.Agreement.Ref IS NULL
-		   |			THEN TRUE
-		   |		ELSE CASE
-		   |			WHEN Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			AND Doc.BasisDocument.Ref IS NULL
-		   |				THEN TRUE
-		   |			ELSE FALSE
-		   |		END
-		   |	END AS IsAdvance,
-		   |
-		   |	case when Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) Then
-		   |	Doc.Agreement else Undefined end AS AdvanceAgreement,
-		   |	Doc.Project
-		   |INTO ChequeBondTransactionItem
-		   |FROM
-		   |	Document.ChequeBondTransactionItem AS Doc
-		   |WHERE
-		   |	Doc.Ref = &Ref";
+	Return 
+		"SELECT
+		|	Doc.Date AS Period,
+		|	Doc.Company,
+		|	Doc.Branch,
+		|	Doc.Cheque,
+		|	Doc.Cheque.Currency AS Currency,
+		|	Doc.Account,
+		|	Doc.Partner,
+		|	Doc.LegalName,
+		|	Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.PartnerCheque) AS IsIncomingCheque,
+		|	Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.OwnCheque) AS IsOutgoingCheque,
+		|	Doc.Cheque.Amount AS Amount,
+		|	Doc.Cheque.DueDate AS DueDate,
+		|	Doc.BasisDocument,
+		|	Doc.Order,
+		|	CASE
+		|		WHEN DOc.Agreement.UseOrdersForSettlements
+		|			THEN Doc.Order
+		|		ELSE UNDEFINED
+		|	END AS OrderSettlements,
+		|	Doc.LegalNameContract,
+		|	Doc.FinancialMovementType,
+		|	Doc.PlanningPeriod,
+		|	Doc.Ref AS CashPlanningBasis,
+		|	Doc.Ref AS Ref,
+		|	CASE
+		|		WHEN Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.PartnerCheque)
+		|			THEN VALUE(Enum.CashFlowDirections.Incoming)
+		|		WHEN Doc.Cheque.Type = VALUE(Enum.ChequeBondTypes.OwnCheque)
+		|			THEN VALUE(Enum.CashFlowDirections.Outgoing)
+		|	END AS CashFlowDirection,
+		|	CASE
+		|		WHEN Doc.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN Doc.Agreement.StandardAgreement
+		|		ELSE Doc.Agreement
+		|	END AS Agreement,
+		|	CASE
+		|		WHEN Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|		AND Doc.BasisDocument.Ref IS NULL
+		|			THEN TRUE
+		|		ELSE FALSE
+		|	END AS IsAdvance,
+		|	case
+		|		when Doc.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			Then Doc.Agreement
+		|		else Undefined
+		|	end AS AdvanceAgreement,
+		|	Doc.Project
+		|INTO ChequeBondTransactionItem
+		|FROM
+		|	Document.ChequeBondTransactionItem AS Doc
+		|WHERE
+		|	Doc.Ref = &Ref";
 EndFunction
 
 #Region CashPlanning

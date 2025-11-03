@@ -199,7 +199,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Количество штрихкодов</value>
+       <value>Количество</value>
       </title>
       <title>
        <key>en</key>
@@ -307,7 +307,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Group last period</value>
+      <value>Группа (последний период)</value>
      </title>
      <title>
       <key>en</key>
@@ -319,7 +319,7 @@
      </toolTip>
      <toolTip>
       <key>ru</key>
-      <value>Group last period</value>
+      <value>Группа (последний период)</value>
      </toolTip>
      <toolTip>
       <key>en</key>
@@ -447,7 +447,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Compare with</value>
+       <value>Сравнить с</value>
       </title>
       <title>
        <key>en</key>
@@ -506,7 +506,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>same previous periods</value>
+       <value>те же предыдущие периоды</value>
       </title>
       <title>
        <key>en</key>
@@ -575,7 +575,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Period settings</value>
+     <value>Настройки периода</value>
     </title>
     <title>
      <key>en</key>
@@ -1197,7 +1197,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Series</value>
+       <value>Серии</value>
       </title>
       <title>
        <key>en</key>
@@ -1582,7 +1582,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Options</value>
+       <value>Параметры</value>
       </title>
       <title>
        <key>en</key>
@@ -1730,7 +1730,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Chart options</value>
+      <value>Параметры диаграммы</value>
      </title>
      <title>
       <key>en</key>
@@ -2069,7 +2069,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Series</value>
+    <value>Серии</value>
    </title>
    <title>
     <key>en</key>
@@ -2081,7 +2081,7 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Group series</value>
+    <value>Группа (серии)</value>
    </toolTip>
    <toolTip>
     <key>en</key>
@@ -2224,7 +2224,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Widget type</value>
+   <value>Тип виджета</value>
   </title>
   <title>
    <key>en</key>
@@ -2276,7 +2276,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Chart type</value>
+   <value>Тип диаграммы</value>
   </title>
   <title>
    <key>en</key>
@@ -2302,7 +2302,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Last period count</value>
+   <value>Количество последних периодов</value>
   </title>
   <title>
    <key>en</key>
@@ -2330,7 +2330,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Last period type</value>
+   <value>Тип последнего периода</value>
   </title>
   <title>
    <key>en</key>
@@ -2382,7 +2382,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Compare period count</value>
+   <value>Количество периодов для сравнения</value>
   </title>
   <title>
    <key>en</key>
@@ -2410,7 +2410,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Period presentation</value>
+   <value>Отображение периода</value>
   </title>
   <title>
    <key>en</key>
@@ -2436,7 +2436,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Series</value>
+   <value>Серии</value>
   </title>
   <title>
    <key>en</key>
@@ -2662,7 +2662,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Debt type</value>
+    <value>Тип задолженности</value>
    </title>
    <title>
     <key>en</key>
@@ -2688,7 +2688,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Available parameters</value>
+   <value>Доступные параметры</value>
   </title>
   <title>
    <key>en</key>
@@ -2712,7 +2712,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Parameter name</value>
+    <value>Наименование параметра</value>
    </title>
    <title>
     <key>en</key>
@@ -2739,7 +2739,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Indicator name</value>
+   <value>Наименование индикатора</value>
   </title>
   <title>
    <key>en</key>
@@ -2765,7 +2765,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Widget ID</value>
+   <value>Идентификатор виджета</value>
   </title>
   <title>
    <key>en</key>
@@ -2791,7 +2791,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Widget name</value>
+   <value>Наименование виджета</value>
   </title>
   <title>
    <key>en</key>
@@ -2869,7 +2869,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Details type</value>
+   <value>Тип подробностей</value>
   </title>
   <title>
    <key>en</key>
@@ -2895,7 +2895,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Modal title</value>
+   <value>Заголовок модального окна</value>
   </title>
   <title>
    <key>en</key>
@@ -2921,7 +2921,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Modal icon</value>
+   <value>Иконка модального окна</value>
   </title>
   <title>
    <key>en</key>
@@ -2973,7 +2973,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Time line date format</value>
+   <value>Формат даты временной шкалы</value>
   </title>
   <title>
    <key>en</key>
@@ -2999,7 +2999,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show point</value>
+   <value>Показать точку</value>
   </title>
   <title>
    <key>en</key>
@@ -3024,7 +3024,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Value divider</value>
+   <value>Разделитель значений</value>
   </title>
   <title>
    <key>en</key>

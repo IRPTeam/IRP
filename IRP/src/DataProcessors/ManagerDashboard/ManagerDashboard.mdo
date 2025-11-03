@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Manager dashboard</value>
+  <value>Панель менеджера</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -44,7 +44,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Form configure</value>
+   <value>Настройка формы</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -61,7 +61,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Widget settings</value>
+   <value>Настройки виджета</value>
   </synonym>
   <synonym>
    <key>en</key>

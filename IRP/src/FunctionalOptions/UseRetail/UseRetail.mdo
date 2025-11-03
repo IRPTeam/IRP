@@ -35,4 +35,8 @@
  <content>Subsystem.Retail.Subsystem.VisitorCounter</content>
  <content>Document.VisitorCounter</content>
  <content>Document.RetailReceiptCorrection</content>
+ <content>Report.M1010A_PriceList</content>
+ <content>Report.R4050A_InventoryBalance</content>
+ <content>CommonCommand.OpenReport_M1010A_PriceList</content>
+ <content>CommonCommand.OpenReport_R4050A_InventoryBalance</content>
 </mdclass:FunctionalOption>

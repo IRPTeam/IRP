@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4b807d36-9c29-40c5-bda5-712b1305670b">
+ <name>Report_D0012_AdditionalDocumentTablesCheck</name>
+ <synonym>
+  <key>tr</key>
+  <value>Report D0012_AdditionalDocumentTablesCheck</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет D0012_ПроверкаДополнительныхТаблицДокументов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report D0012_AdditionalDocumentTablesCheck</value>
+ </synonym>
+</mdclass:Role>

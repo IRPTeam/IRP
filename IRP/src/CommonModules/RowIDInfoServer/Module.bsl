@@ -10549,12 +10549,12 @@ Procedure ApplyFilterSet_GR_ForSR(Query)
 	|		WHERE
 	|			CASE
 	|				WHEN &Filter_Company OR &Filter_CompanyReturn
-	|					THEN RowRef.Company = &Company OR RowRef.Company = &CompanyReturn
+	|					THEN RowRef.Company = &Company OR RowRef.CompanyReturn = &CompanyReturn
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Branch OR &Filter_BranchReturn
-	|					THEN RowRef.Branch = &Branch OR RowRef.Branch = &BranchReturn
+	|					THEN RowRef.Branch = &Branch OR RowRef.BranchReturn = &BranchReturn
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -14570,6 +14570,8 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	If Not LinkedRowsIntegrityIsEnable() Then
 		Return;
 	EndIf;
+	
+	SetPrivilegedMode(True);
 	
 	TempTablesManager = New TempTablesManager();
 	

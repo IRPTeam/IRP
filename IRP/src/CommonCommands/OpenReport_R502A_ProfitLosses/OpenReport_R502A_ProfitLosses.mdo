@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="610b469f-3842-44ac-82fa-fb83cd8bb98a">
+ <name>OpenReport_R502A_ProfitLosses</name>
+ <synonym>
+  <key>tr</key>
+  <value>R502A Kar ve Zararlar</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R502A Отчет по прибылям и убыткам</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R502A Profit &amp; Losses</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

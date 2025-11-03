@@ -2262,6 +2262,50 @@
          <textEdit>true</textEdit>
         </extInfo>
        </items>
+       <items xsi:type="form:FormField">
+        <name>PaymentListPaymentDateNoSplits</name>
+        <id>605</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+         <segments>PaymentListPaymentDateNoSplits</segments>
+        </dataPath>
+        <handlers>
+         <event>OnChange</event>
+         <name>PaymentListPaymentDateNoSplitsOnChange</name>
+        </handlers>
+        <extendedTooltip>
+         <name>PaymentListPaymentDateNoSplitsExtendedTooltip</name>
+         <id>607</id>
+         <type>Label</type>
+         <autoMaxWidth>true</autoMaxWidth>
+         <autoMaxHeight>true</autoMaxHeight>
+         <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+         </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+         <name>PaymentListPaymentDateNoSplitsContextMenu</name>
+         <id>606</id>
+         <autoFill>true</autoFill>
+        </contextMenu>
+        <type>InputField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:InputFieldExtInfo">
+         <autoMaxWidth>true</autoMaxWidth>
+         <autoMaxHeight>true</autoMaxHeight>
+         <wrap>true</wrap>
+         <chooseType>true</chooseType>
+         <typeDomainEnabled>true</typeDomainEnabled>
+         <textEdit>true</textEdit>
+        </extInfo>
+       </items>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -4502,6 +4546,82 @@
        <textEdit>true</textEdit>
       </extInfo>
      </items>
+     <items xsi:type="form:FormField">
+      <name>PaymentListPaymentDateReadOnly</name>
+      <id>608</id>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>Object.PaymentList.PaymentDateReadOnly</segments>
+      </dataPath>
+      <extendedTooltip>
+       <name>PaymentListPaymentDateReadOnlyExtendedTooltip</name>
+       <id>610</id>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>PaymentListPaymentDateReadOnlyContextMenu</name>
+       <id>609</id>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>CheckBoxField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+     </items>
+     <items xsi:type="form:FormField">
+      <name>PaymentListPaymentDate</name>
+      <id>602</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>Object.PaymentList.PaymentDate</segments>
+      </dataPath>
+      <handlers>
+       <event>OnChange</event>
+       <name>PaymentListPaymentDateOnChange</name>
+      </handlers>
+      <extendedTooltip>
+       <name>PaymentListPaymentDateExtendedTooltip</name>
+       <id>604</id>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>PaymentListPaymentDateContextMenu</name>
+       <id>603</id>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <wrap>true</wrap>
+       <chooseType>true</chooseType>
+       <typeDomainEnabled>true</typeDomainEnabled>
+       <textEdit>true</textEdit>
+      </extInfo>
+     </items>
      <autoCommandBar>
       <name>PaymentListCommandBar</name>
       <id>27</id>
@@ -4520,6 +4640,7 @@
       <name>PaymentListAfterDeleteRow</name>
      </handlers>
      <searchStringAddition>
+      <enabled>false</enabled>
       <name>PaymentListSearchString</name>
       <id>29</id>
       <extendedTooltip>
@@ -4543,6 +4664,7 @@
       </extInfo>
      </searchStringAddition>
      <viewStatusAddition>
+      <enabled>false</enabled>
       <name>PaymentListViewStatus</name>
       <id>32</id>
       <extendedTooltip>
@@ -4568,6 +4690,7 @@
       </extInfo>
      </viewStatusAddition>
      <searchControlAddition>
+      <enabled>false</enabled>
       <name>PaymentListSearchControl</name>
       <id>35</id>
       <extendedTooltip>
@@ -5716,6 +5839,31 @@
      <common>true</common>
     </edit>
    </columns>
+   <columns>
+    <name>PaymentDateReadOnly</name>
+    <title>
+     <key>tr</key>
+     <value>Payment date read only</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Дата платежа только для чтения</value>
+    </title>
+    <title>
+     <key>en</key>
+     <value>Payment date read only</value>
+    </title>
+    <id>50</id>
+    <valueType>
+     <types>Boolean</types>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+   </columns>
   </additionalColumns>
   <additionalColumns>
    <tablePath xsi:type="form:DataPath">
@@ -6532,7 +6680,7 @@
   <edit>
    <common>true</common>
   </edit>
-  <functionalOptions>FunctionalOption.UseOrders</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePurchaseOrders</functionalOptions>
  </attributes>
  <attributes>
   <name>PaymentListPlaningTransactionBasisNoSplits</name>
@@ -6558,7 +6706,7 @@
   <edit>
    <common>true</common>
   </edit>
-  <functionalOptions>FunctionalOption.UseCashTransaction</functionalOptions>
+  <functionalOptions>FunctionalOption.UseCashTransactions</functionalOptions>
  </attributes>
  <attributes>
   <name>PaymentListReceiptingAccountNoSplits</name>
@@ -6752,6 +6900,34 @@
   <id>48</id>
   <valueType>
    <types>EnumRef.ApArPostingDetail</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>PaymentListPaymentDateNoSplits</name>
+  <title>
+   <key>tr</key>
+   <value>Ödeme tarihi</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Дата оплаты</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Payment date</value>
+  </title>
+  <id>49</id>
+  <valueType>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
   </valueType>
   <view>
    <common>true</common>

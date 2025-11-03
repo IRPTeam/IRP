@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="044a3b4b-c31e-4efe-8bf8-a05ccc0470a7">
+ <name>OpenReport_R5021A_Revenues</name>
+ <synonym>
+  <key>tr</key>
+  <value>R5021A Gelirler</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R5021A Отчет по доходам</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R5021A Revenues</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

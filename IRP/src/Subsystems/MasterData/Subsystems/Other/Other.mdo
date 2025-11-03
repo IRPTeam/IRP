@@ -17,5 +17,8 @@
  <includeInCommandInterface>true</includeInCommandInterface>
  <content>Catalog.Cities</content>
  <content>Catalog.Countries</content>
+ <content>Catalog.Currencies</content>
+ <content>Catalog.PrintFormTemplates</content>
+ <content>Catalog.PrintInfo</content>
  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

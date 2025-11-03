@@ -74,5 +74,5 @@ EndProcedure
 
 &AtServerNoContext
 Procedure UpdateDefaultsAtServer()
-	FOServer.UpdateDefaults();	
+	DefaultDataServer.UpdateDefaults();	
 EndProcedure

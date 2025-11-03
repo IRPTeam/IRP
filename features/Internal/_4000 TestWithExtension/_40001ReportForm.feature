@@ -357,7 +357,7 @@ Scenario: _4000130 check reports option share (all users)
 		Then I connect launched Test client "Этот клиент"
 		And I close all client application windows
 	* Open test report	
-		And In the command interface I select "Reports" "D2001 Sales"
+		And In the command interface I select "Reports" "R2001A Sales"
 	* Option share
 		And I click "Save option..." button
 		And I set checkbox "Share"		
@@ -377,7 +377,7 @@ Scenario: _4000130 check reports option share (all users)
 			| ''     | 'test_new'      |
 			| 'CI'   | 'test_new'      |
 		And I connect "TestAdmin" TestClient using "ABrown" login and "" password
-		And In the command interface I select "Reports" "D2001 Sales"
+		And In the command interface I select "Reports" "R2001A Sales"
 		And I click "Generate" button
 		And I click "Select option..." button
 		And I move to "Custom" tab

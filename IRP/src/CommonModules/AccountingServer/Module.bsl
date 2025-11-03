@@ -2737,7 +2737,9 @@ Procedure CreateJE_ByArrayRefs(ArrayOfBasisDocuments, ArrayOfLedgerTypes) Export
 	TableOfJEDocuments = GetTableOfJEDocuments(ArrayOfBasisDocuments, ArrayOfLedgerTypes);
 	For Each Row In TableOfJEDocuments Do
 		CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "WriteOnForm", True);
+		Try
 		Row.JEDocument.Write(DocumentWriteMode.Write);
+		Except EndTry;
 	EndDo;	
 EndProcedure
 

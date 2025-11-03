@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="352c2d8a-1d37-474e-949f-146086c12d69">
+ <producedTypes>
+  <managerType typeId="8ae28df6-78be-42cb-9516-defe146d8ac1" valueTypeId="9f6baf19-3c43-4d69-b3a8-d22da4a572d4"/>
+  <valueManagerType typeId="e2d99158-fe3f-4d72-a9ec-ee881063a6e5" valueTypeId="6c169071-73dd-43fc-8cd7-afe8308ad186"/>
+  <valueKeyType typeId="8caa9b22-fd42-42ab-bde9-0ba810a7c5fb" valueTypeId="eedfa70b-413d-403b-83d1-7b38266efba1"/>
+ </producedTypes>
+ <name>UseSalesOrders</name>
+ <synonym>
+  <key>tr</key>
+  <value>Satış siparişlerinin kullanımı</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать заказы на продажу</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Use sales orders</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

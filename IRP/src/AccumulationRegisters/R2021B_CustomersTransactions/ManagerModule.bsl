@@ -20,7 +20,7 @@ EndFunction
 Function R2021B_CustomersTransactions_BP_CP() Export
 	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	PaymentList.Period,
 		|	PaymentList.Company,
 		|	PaymentList.Branch,
@@ -31,7 +31,7 @@ Function R2021B_CustomersTransactions_BP_CP() Export
 		|	PaymentList.Project,
 		|	PaymentList.TransactionDocument AS Basis,
 		|	PaymentList.Key,
-		|	-PaymentList.Amount AS Amount,
+		|	PaymentList.Amount AS Amount,
 		|	UNDEFINED AS CustomersAdvancesClosing
 		|INTO R2021B_CustomersTransactions
 		|FROM

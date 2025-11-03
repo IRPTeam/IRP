@@ -405,7 +405,7 @@
       </toolTip>
       <toolTip>
        <key>ru</key>
-       <value>Sales widgets create new</value>
+       <value>Создать новый виджет: продажи</value>
       </toolTip>
       <toolTip>
        <key>en</key>
@@ -570,7 +570,7 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Group sales</value>
+    <value>Группа (продажи)</value>
    </toolTip>
    <toolTip>
     <key>en</key>
@@ -925,7 +925,7 @@
       </toolTip>
       <toolTip>
        <key>ru</key>
-       <value>Purchases widgets create new</value>
+       <value>Создать новый виджет: закупки</value>
       </toolTip>
       <toolTip>
        <key>en</key>
@@ -1090,7 +1090,7 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Group purchases</value>
+    <value>Группа (закупки)</value>
    </toolTip>
    <toolTip>
     <key>en</key>
@@ -1496,7 +1496,7 @@
       </toolTip>
       <toolTip>
        <key>ru</key>
-       <value>Money widgets create new</value>
+       <value>Создать новый виджет: деньги</value>
       </toolTip>
       <toolTip>
        <key>en</key>
@@ -1649,7 +1649,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Money</value>
+    <value>Деньги</value>
    </title>
    <title>
     <key>en</key>
@@ -1661,7 +1661,7 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Group money</value>
+    <value>Группа (деньги)</value>
    </toolTip>
    <toolTip>
     <key>en</key>
@@ -1823,7 +1823,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Sales widgets</value>
+   <value>Виджеты: продажи</value>
   </title>
   <title>
    <key>en</key>
@@ -1847,7 +1847,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Widget name</value>
+    <value>Наименование виджета</value>
    </title>
    <title>
     <key>en</key>
@@ -1899,7 +1899,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Enabled</value>
+    <value>Включено</value>
    </title>
    <title>
     <key>en</key>
@@ -1950,7 +1950,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Json</value>
+    <value>JSON</value>
    </title>
    <title>
     <key>en</key>
@@ -1976,7 +1976,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Indicator name</value>
+    <value>Наименование индикатора</value>
    </title>
    <title>
     <key>en</key>
@@ -2003,7 +2003,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Purchases widgets</value>
+   <value>Виджеты закупок</value>
   </title>
   <title>
    <key>en</key>
@@ -2027,7 +2027,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Widget name</value>
+    <value>Наименование виджета</value>
    </title>
    <title>
     <key>en</key>
@@ -2079,7 +2079,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Enabled</value>
+    <value>Включено</value>
    </title>
    <title>
     <key>en</key>
@@ -2130,7 +2130,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Json</value>
+    <value>JSON</value>
    </title>
    <title>
     <key>en</key>
@@ -2156,7 +2156,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Indicator name</value>
+    <value>Наименование индикатора</value>
    </title>
    <title>
     <key>en</key>
@@ -2183,7 +2183,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Money widgets</value>
+   <value>Виджеты: деньги</value>
   </title>
   <title>
    <key>en</key>
@@ -2207,7 +2207,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Widget name</value>
+    <value>Наименование виджета</value>
    </title>
    <title>
     <key>en</key>
@@ -2259,7 +2259,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Enabled</value>
+    <value>Включено</value>
    </title>
    <title>
     <key>en</key>
@@ -2310,7 +2310,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Json</value>
+    <value>JSON</value>
    </title>
    <title>
     <key>en</key>
@@ -2336,7 +2336,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Indicator name</value>
+    <value>Наименование индикатора</value>
    </title>
    <title>
     <key>en</key>
@@ -2389,7 +2389,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Average bill</value>
+   <value>Средний счет</value>
   </title>
   <title>
    <key>en</key>
@@ -2402,7 +2402,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Sales average bill</value>
+   <value>Средний чек продаж</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -2439,7 +2439,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Sales sales amount</value>
+   <value>Сумма продаж</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -2463,7 +2463,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Saler return percentage</value>
+   <value>Процент возврата продавца</value>
   </title>
   <title>
    <key>en</key>
@@ -2476,7 +2476,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Sales saler return percentage</value>
+   <value>Процент возврата продавца (продажи)</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -2500,7 +2500,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Volume of purchases</value>
+   <value>Объем закупок</value>
   </title>
   <title>
    <key>en</key>
@@ -2513,7 +2513,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Purchases volume of purchases</value>
+   <value>Объем закупок</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -2537,7 +2537,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Stock balance</value>
+   <value>Остаток на складе</value>
   </title>
   <title>
    <key>en</key>
@@ -2550,7 +2550,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Purchases stock balance</value>
+   <value>Остаток закупок на складе</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -2574,7 +2574,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Cash balance</value>
+   <value>Денежный остаток</value>
   </title>
   <title>
    <key>en</key>
@@ -2587,7 +2587,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Money cash balance</value>
+   <value>Денежный остаток</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -2611,7 +2611,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Payments from clients</value>
+   <value>Платежи от клиентов</value>
   </title>
   <title>
    <key>en</key>
@@ -2624,7 +2624,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Money payments from clients</value>
+   <value>Платежи от клиентов</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -2648,7 +2648,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Payments to suppliers</value>
+   <value>Платежи поставщикам</value>
   </title>
   <title>
    <key>en</key>
@@ -2661,7 +2661,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Money payments to suppliers</value>
+   <value>Платежи поставщикам</value>
   </toolTip>
   <toolTip>
    <key>en</key>
@@ -2685,7 +2685,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>AP\AR</value>
+   <value>ДТ\КР</value>
   </title>
   <title>
    <key>en</key>
@@ -2698,7 +2698,7 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Money ap ar</value>
+   <value>Деньги ДТ/КТ</value>
   </toolTip>
   <toolTip>
    <key>en</key>

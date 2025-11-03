@@ -414,8 +414,10 @@ Function GroupEditingProperties_GetCommandDescription()
 	CommandDescription.Picture = "SpreadsheetReadOnly";
 	CommandDescription.Representation = "Picture";
 	
-	CommandDescription.LocationGroup = "CommandBar.Tools";
-	CommandDescription.LocationInCommandBar = "InCommandBarAndInAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
+	CommandDescription.LocationGroup = "ContextMenu";
+	CommandDescription.ForTables = True;
+	CommandDescription.SpecificTables = "List";
+	
 	CommandDescription.ModifiesStoredData = True;
 	
 	CommandDescription.HasActionOnCommandCreate = True;

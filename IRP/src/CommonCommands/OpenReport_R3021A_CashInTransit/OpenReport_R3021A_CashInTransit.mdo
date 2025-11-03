@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c11811db-d2ca-42fb-b438-8bed6babe542">
+ <name>OpenReport_R3021A_CashInTransit</name>
+ <synonym>
+  <key>tr</key>
+  <value>R3021A Yoldaki nakit</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R3021A Деньги в пути</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R3021A Cash in transit</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

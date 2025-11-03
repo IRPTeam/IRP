@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="17fd0297-4432-44c8-832c-e8d5c7102af9">
+ <name>Report_R1001A_Purchases</name>
+ <synonym>
+  <key>tr</key>
+  <value>Report R1001A_Purchases</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет R1001A_Покупки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report R1001A_Purchases</value>
+ </synonym>
+</mdclass:Role>

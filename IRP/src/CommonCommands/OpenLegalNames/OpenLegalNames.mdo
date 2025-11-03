@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1a618e8d-7328-45d1-91bc-3caa7db630bd">
+ <name>OpenLegalNames</name>
+ <synonym>
+  <key>tr</key>
+  <value>Legal names</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Юридические наименования</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Legal names</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

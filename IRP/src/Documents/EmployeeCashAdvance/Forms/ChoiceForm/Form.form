@@ -87,6 +87,7 @@
    <headerHorizontalAlign>Left</headerHorizontalAlign>
    <showInFooter>true</showInFooter>
    <extInfo xsi:type="form:LabelFieldExtInfo">
+    <width>6</width>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
    </extInfo>
@@ -115,42 +116,6 @@
    <contextMenu>
     <name>DateContextMenu</name>
     <id>20</id>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>LabelField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:LabelFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-   </extInfo>
-  </items>
-  <items xsi:type="form:FormField">
-   <name>Company</name>
-   <id>22</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>List.Company</segments>
-   </dataPath>
-   <extendedTooltip>
-    <name>CompanyExtendedTooltip</name>
-    <id>24</id>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>CompanyContextMenu</name>
-    <id>23</id>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>LabelField</type>
@@ -204,19 +169,19 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Branch</name>
-   <id>31</id>
+   <name>Comment</name>
+   <id>40</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Branch</segments>
+    <segments>List.Comment</segments>
    </dataPath>
    <extendedTooltip>
-    <name>BranchExtendedTooltip</name>
-    <id>33</id>
+    <name>CommentExtendedTooltip</name>
+    <id>42</id>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -225,8 +190,8 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>BranchContextMenu</name>
-    <id>32</id>
+    <name>CommentContextMenu</name>
+    <id>41</id>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -235,7 +200,7 @@
    <headerHorizontalAlign>Left</headerHorizontalAlign>
    <showInFooter>true</showInFooter>
    <extInfo xsi:type="form:InputFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
+    <maxWidth>20</maxWidth>
     <autoMaxHeight>true</autoMaxHeight>
     <wrap>true</wrap>
     <chooseType>true</chooseType>
@@ -284,19 +249,19 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Comment</name>
-   <id>40</id>
+   <name>Company</name>
+   <id>22</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Comment</segments>
+    <segments>List.Company</segments>
    </dataPath>
    <extendedTooltip>
-    <name>CommentExtendedTooltip</name>
-    <id>42</id>
+    <name>CompanyExtendedTooltip</name>
+    <id>24</id>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -305,8 +270,44 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>CommentContextMenu</name>
-    <id>41</id>
+    <name>CompanyContextMenu</name>
+    <id>23</id>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>LabelField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:LabelFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+   <name>Branch</name>
+   <id>31</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.Branch</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>BranchExtendedTooltip</name>
+    <id>33</id>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>BranchContextMenu</name>
+    <id>32</id>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>

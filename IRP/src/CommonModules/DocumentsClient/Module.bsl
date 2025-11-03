@@ -1154,7 +1154,7 @@ Function GetFormItemNames()
 				|RecordsKey, ItemListIsClosedOrder,
 				|AllocationResultKey, AllocationResultRowID, AllocationResultBasisRowID,
 				|ItemListIsUnlockItemKey, ItemListIsUnlockStore,
-				|SelectedRowKey, Childrens";
+				|SelectedRowKey, Childrens, PaymentListPaymentDateReadOnly";
 	Return ItemNames;
 EndFunction	
 

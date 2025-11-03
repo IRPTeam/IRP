@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ebc97d9a-4197-44f3-b58b-3bcaa3280c8b">
+ <name>Report_S1001L_VendorsPrices</name>
+ <synonym>
+  <key>tr</key>
+  <value>Report S1001L_VendorsPrices</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет S1001L_ЦеныПоставщиков</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report S1001L_VendorsPrices</value>
+ </synonym>
+</mdclass:Role>

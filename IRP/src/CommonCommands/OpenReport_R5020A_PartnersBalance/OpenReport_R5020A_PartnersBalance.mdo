@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a80ab5aa-1822-469c-843a-e6c5b2df4aa0">
+ <name>OpenReport_R5020A_PartnersBalance</name>
+ <synonym>
+  <key>tr</key>
+  <value>R5020A Cari hesap bakiyesi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R5020A Взаиморасчеты с партнерами</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R5020A Partners balance</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

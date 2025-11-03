@@ -1795,6 +1795,7 @@ Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("Tax"                      , BindPaymentListTax(Parameters));
 	ResourceToBinding.Insert("TaxDiscountAmount"        , BindPaymentListTaxDiscountAmount(Parameters));
 	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
+	ResourceToBinding.Insert("PaymentDate"              , BindPaymentListPaymentDate(Parameters));
 		
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
@@ -1830,6 +1831,7 @@ Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
 	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
 	ResourceToBinding.Insert("CalculationType"          , BindPaymentListCalculationType(Parameters));
+	ResourceToBinding.Insert("PaymentDate"              , BindPaymentListPaymentDate(Parameters));
 		
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
@@ -1856,6 +1858,7 @@ Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("TaxDiscountAmount"        , BindPaymentListTaxDiscountAmount(Parameters));
 	ResourceToBinding.Insert("ProfitLossCenter"         , BindPaymentListProfitLossCenter(Parameters));
 	ResourceToBinding.Insert("RevenueType"              , BindPaymentListRevenueType(Parameters));
+	ResourceToBinding.Insert("PaymentDate"              , BindPaymentListPaymentDate(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1879,6 +1882,7 @@ Procedure MultiSetTransactionType_CashReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
 	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
 	ResourceToBinding.Insert("CalculationType"          , BindPaymentListCalculationType(Parameters));
+	ResourceToBinding.Insert("PaymentDate"              , BindPaymentListPaymentDate(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1949,6 +1953,7 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.Tax                      = GetPaymentListTax(Parameters, Row.Key);
 		Options.TaxDiscountAmount        = GetPaymentListTaxDiscountAmount(Parameters, Row.Key);
 		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
+		Options.PaymentDate              = GetPaymentListPaymentDate(Parameters, Row.Key);
 		
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankPayment";
@@ -1994,6 +1999,7 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
 		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
 		Options.CalculationType          = GetPaymentListCalculationType(Parameters, Row.Key);
+		Options.PaymentDate              = GetPaymentListPaymentDate(Parameters, Row.Key);
 				
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankReceipt";
@@ -2030,6 +2036,8 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.TaxDiscountAmount        = GetPaymentListTaxDiscountAmount(Parameters, Row.Key);
 		Options.ProfitLossCenter         = GetPaymentListProfitLossCenter(Parameters, Row.Key);
 		Options.RevenueType              = GetPaymentListRevenueType(Parameters, Row.Key);
+		Options.PaymentDate              = GetPaymentListPaymentDate(Parameters, Row.Key);
+		
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashPayment";
 		Chain.ClearByTransactionTypeCashPayment.Options.Add(Options);
@@ -2063,6 +2071,8 @@ Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
 		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
 		Options.CalculationType          = GetPaymentListCalculationType(Parameters, Row.Key);
+		Options.PaymentDate              = GetPaymentListPaymentDate(Parameters, Row.Key);
+		
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashReceipt";
 		Chain.ClearByTransactionTypeCashReceipt.Options.Add(Options);
@@ -7545,6 +7555,46 @@ EndFunction
 
 #EndRegion
 
+#Region PAYMENT_LIST_PAYMENT_DATE
+
+// PaymentList.PaymentDate.Set
+Procedure SetPaymentListPaymentDate(Parameters, Results) Export
+	Binding = BindPaymentListPaymentDate(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.PaymentDate.Get
+Function GetPaymentListPaymentDate(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListPaymentDate(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.PaymentDate.Bind
+Function BindPaymentListPaymentDate(Parameters)
+	DataPath = "PaymentList.PaymentDate";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListPaymentDate");
+EndFunction
+
+// PaymentList.PaymentDate.ChangePaymentDateByBasisDocument.Step
+Procedure StepPaymentListChangePaymentDateByBasisDocument(Parameters, Chain) Export
+	Chain.ChangePaymentDateByBasisDocument.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePaymentDateByBasisDocument.Setter = "SetPaymentListPaymentDate";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangePaymentDateByBasisDocumentOptions();
+		Options.BasisDocument  = GetPaymentListBasisDocument(Parameters, Row.Key);
+		Options.PaymentDate    = GetPaymentListPaymentDate(Parameters, Row.Key);
+		Options.TypeOfDocument = TypeOf(Parameters.Object.Ref);
+		Options.Key = Row.Key;
+		Options.StepName = "StepPaymentListChangePaymentDateByBasisDocument";
+		Chain.ChangePaymentDateByBasisDocument.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #Region PAYMENT_LIST_PROFIT_LOSS_CENTER
 
 // PaymentList.ProfitLossCenter.Set
@@ -8090,6 +8140,7 @@ EndFunction
 
 // PaymentList.BasisDocument.OnChange
 Procedure PaymentListBasisDocumentOnChange(Parameters) Export
+	AddViewNotify("OnSetPaymentListBasisDocumentNotify", Parameters);
 	Binding = BindPaymentListBasisDocument(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -8097,7 +8148,7 @@ EndProcedure
 // PaymentList.BasisDocument.Set
 Procedure SetPaymentListBasisDocument(Parameters, Results) Export
 	Binding = BindPaymentListBasisDocument(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPaymentListBasisDocumentNotify");
 EndProcedure
 
 // PaymentList.BasisDocument.Get
@@ -8116,6 +8167,11 @@ Function BindPaymentListBasisDocument(Parameters)
 	DataPath.Insert("IncomingPaymentOrder", "PaymentList.Basis");
 	DataPath.Insert("OutgoingPaymentOrder", "PaymentList.Basis");
 	Binding = New Structure();
+	Binding.Insert("BankPayment" , "StepPaymentListChangePaymentDateByBasisDocument");
+	Binding.Insert("BankReceipt" , "StepPaymentListChangePaymentDateByBasisDocument");
+	Binding.Insert("CashPayment" , "StepPaymentListChangePaymentDateByBasisDocument");
+	Binding.Insert("CashReceipt" , "StepPaymentListChangePaymentDateByBasisDocument");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPaymentListBasisDocument");
 EndFunction
 
@@ -12812,8 +12868,61 @@ Function BindDefaultItemListQuantity(Parameters)
 EndFunction
 
 Function GetBindingStructure_ItemListQuantity(Parameters)
-	Result = New Structure("Binding, DataPath, ExtensionPrefix", New Structure(), Undefined, "");
-	Result.DataPath = "ItemList.Quantity";
+	
+	Binding = New Structure();
+	Binding.Insert("SalesOrder",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("WorkOrder", 
+		"StepItemListCalculations_IsQuantityChanged,
+		|StepMaterialsRecalculateQuantityWithKeyOwner");
+	
+	Binding.Insert("WorkSheet", 
+		"StepMaterialsRecalculateQuantityWithKeyOwner");
+		
+	Binding.Insert("SalesInvoice",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("RetailSalesReceipt",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("RetailReceiptCorrection",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("PurchaseOrder",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("PurchaseInvoice",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("WithholdingTaxInvoice",
+		"StepItemListCalculations_IsQuantityChanged_Withholding_Tax");
+	
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepItemListCalculations_IsQuantityChanged_Without_SpecialOffers");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListCalculations_IsQuantityChanged_Without_SpecialOffers");
+	
+	Binding.Insert("RetailReturnReceipt",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("PurchaseReturnOrder",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("PurchaseReturn",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("SalesReturnOrder",
+		"StepItemListCalculations_IsQuantityChanged");
+	
+	Binding.Insert("SalesReturn",
+		"StepItemListCalculations_IsQuantityChanged");
+			
+	Binding.Insert("StockAdjustmentAsSurplus",
+		"StepItemListCalculations_IsQuantityChanged_StockDocuments");
+	
+	Result = New Structure("Binding, DataPath, ExtensionPrefix", Binding, "ItemList.Quantity", "");
 	Return Result;
 EndFunction
 
@@ -12840,6 +12949,29 @@ Procedure StepItemListDefaultQuantityInList(Parameters, Chain) Export
 	Options.CurrentQuantity = GetItemListQuantity(Parameters, NewRow.Key);
 	Options.Key = NewRow.Key;
 	Chain.DefaultQuantityInList.Options.Add(Options);
+EndProcedure
+
+// ItemList.Quantity.CalculateQuantity.Step
+Procedure StepItemListCalculateQuantity(Parameters, Chain) Export
+	StepName = "StepItemListCalculateQuantity";
+	Chain.Calculations.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.Calculations.Setter = "SetItemListQuantity";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options     = ModelClientServer_V2.CalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		Options.CalculateQuantity.Enable = True;
+		Options.QuantityOptions.ItemKey = GetItemListItemKey(Parameters, Row.Key);
+		Options.QuantityOptions.Unit    = GetItemListUnit(Parameters, Row.Key);
+		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = StepName;
+		Chain.Calculations.Options.Add(Options);
+	EndDo;	
 EndProcedure
 
 #EndRegion
@@ -13638,7 +13770,8 @@ Function BindItemListTotalAmount(Parameters)
 	Binding = New Structure();
 	Binding.Insert("SalesOrder",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-		|StepItemListCalculations_IsTotalAmountChanged");
+		|StepItemListCalculations_IsTotalAmountChanged,
+		|StepUpdatePaymentTerms");
 	
 	Binding.Insert("WorkOrder",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
@@ -13646,7 +13779,8 @@ Function BindItemListTotalAmount(Parameters)
 	
 	Binding.Insert("SalesInvoice",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-		|StepItemListCalculations_IsTotalAmountChanged");
+		|StepItemListCalculations_IsTotalAmountChanged,
+		|StepUpdatePaymentTerms");
 
 	Binding.Insert("RetailSalesReceipt",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
@@ -13658,21 +13792,25 @@ Function BindItemListTotalAmount(Parameters)
 
 	Binding.Insert("PurchaseOrder",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-		|StepItemListCalculations_IsTotalAmountChanged");
+		|StepItemListCalculations_IsTotalAmountChanged,
+		|StepUpdatePaymentTerms");
 	
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-		|StepItemListCalculations_IsTotalAmountChanged");
+		|StepItemListCalculations_IsTotalAmountChanged,
+		|StepUpdatePaymentTerms");
 	
 	Binding.Insert("WithholdingTaxInvoice", "StepItemListChangePriceTypeAsManual_IsTotalAmountChange");
 	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
+		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers,
+		|StepUpdatePaymentTerms");
 	
 	Binding.Insert("SalesReportToConsignor",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
+		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers,
+		|StepUpdatePaymentTerms");
 	
 //	SafeBinding(Binding, "GoodsReceipt",
 //		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
@@ -13800,6 +13938,8 @@ Procedure SetItemListCalculations(Parameters, Results) Export
 	ViewNotify = "OnSetCalculationsNotify";
 	NotifyAnyway = True;
 	Binding = BindItemListCalculations(Parameters);
+	SetterObject(Undefined, "ItemList.Quantity"    , Parameters, Results, ViewNotify, "Quantity"     , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.QuantityInBaseUnit", Parameters, Results, ViewNotify, "QuantityInBaseUnit", NotifyAnyway);
 	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.OffersAmount", Parameters, Results, ViewNotify, "OffersAmount" , NotifyAnyway);
@@ -13813,6 +13953,8 @@ Procedure SetItemListCalculations_Without_SpecialOffers(Parameters, Results) Exp
 	ViewNotify = "OnSetCalculationsNotify";
 	NotifyAnyway = True;
 	Binding = BindItemListCalculations(Parameters);
+	SetterObject(Undefined, "ItemList.Quantity"    , Parameters, Results, ViewNotify, "Quantity"     , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.QuantityInBaseUnit", Parameters, Results, ViewNotify, "QuantityInBaseUnit", NotifyAnyway);
 	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, ViewNotify, "Price"        , NotifyAnyway);
@@ -13825,6 +13967,8 @@ Procedure SetItemListCalculations_StockDocuments(Parameters, Results) Export
 	ViewNotify = "OnSetCalculationsNotify";
 	NotifyAnyway = True;
 	Binding = BindItemListCalculations(Parameters);
+	SetterObject(Undefined, "ItemList.Quantity"    , Parameters, Results, ViewNotify, "Quantity"   , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.QuantityInBaseUnit", Parameters, Results, ViewNotify, "QuantityInBaseUnit", NotifyAnyway);
 	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount"  , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"  , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, ViewNotify, "Price"      , NotifyAnyway);
@@ -13857,6 +14001,11 @@ Function BindItemListCalculations(Parameters)
 EndFunction
 
 #Region ITEM_LIST_CALCULATIONS_WITHHOLDING_TAX
+
+// ItemList.Calculations.[IsQuantityChanged_Withholding_Tax].Step
+Procedure StepItemListCalculations_IsQuantityChanged_Withholding_Tax(Parameters, Chain) Export
+	StepItemListCalculations_Withholding_Tax(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
 
 // ItemList.Calculations.[IsQuantityInBaseUnitChanged_Withholding_Tax].Step
 Procedure StepItemListCalculations_IsQuantityInBaseUnitChanged_Withholding_Tax(Parameters, Chain) Export
@@ -13960,6 +14109,11 @@ Procedure StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffe
 	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsDontCalculateRowChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsQuantityChanged_Without_SpecialOffers].Step
+Procedure StepItemListCalculations_IsQuantityChanged_Without_SpecialOffers(Parameters, Chain) Export
+	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
+
 // ItemList.Calculations.[IsQuantityInBaseUnitChanged_Without_SpecialOffers].Step
 Procedure StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOffers(Parameters, Chain) Export
 	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsQuantityInBaseUnitChanged");
@@ -14021,6 +14175,11 @@ Procedure StepItemListCalculations_IsDontCalculateRowChanged(Parameters, Chain) 
 	StepItemListCalculations(Parameters, Chain, "IsDontCalculateRowChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsQuantityChanged].Step
+Procedure StepItemListCalculations_IsQuantityChanged(Parameters, Chain) Export
+	StepItemListCalculations(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
+
 // ItemList.Calculations.[IsQuantityInBaseUnitChanged].Step
 Procedure StepItemListCalculations_IsQuantityInBaseUnitChanged(Parameters, Chain) Export
 	StepItemListCalculations(Parameters, Chain, "IsQuantityInBaseUnitChanged");
@@ -14058,6 +14217,11 @@ EndProcedure
 // ItemList.Calculations.[IsTotalAmountChanged_StockDocuments].Step
 Procedure StepItemListCalculations_IsTotalAmountChanged_StockDocuments(Parameters, Chain) Export
 	StepItemListCalculations_StockDocuments(Parameters, Chain, "IsTotalAmountChanged");
+EndProcedure
+
+// ItemList.Calculations.[IsQuantityChanged_StockDocuments].Step
+Procedure StepItemListCalculations_IsQuantityChanged_StockDocuments(Parameters, Chain) Export
+	StepItemListCalculations_StockDocuments(Parameters, Chain, "IsQuantityChanged");
 EndProcedure
 
 // ItemList.Calculations.[IsQuantityInBaseUnitChanged_StockDocuments].Step
@@ -14099,12 +14263,22 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		Options.Unit    = GetItemListUnit(Parameters, Row.Key);
 		
+		Options.QuantityOptions.ItemKey            = GetItemListItemKey(Parameters, Row.Key);
+		Options.QuantityOptions.Unit               = GetItemListUnit(Parameters, Row.Key);
+		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
+		
 		// need recalculate NetAmount, TotalAmount, TaxAmount, OffersAmount
-		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
-			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
-			Or WhoIsChanged = "IsVatRateChanged"          Or WhoIsChanged = "IsOffersChanged"
-			Or WhoIsChanged = "IsCopyRow"                 Or WhoIsChanged = "IsTaxAmountUserFormChanged"
-			Or WhoIsChanged = "RecalculationsOnCopy"      Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
+		If     WhoIsChanged = "IsPriceChanged"            
+			Or WhoIsChanged = "IsPriceIncludeTaxChanged"
+			Or WhoIsChanged = "IsDontCalculateRowChanged"  
+			Or WhoIsChanged = "IsVatRateChanged"          
+			Or WhoIsChanged = "IsOffersChanged"
+			Or WhoIsChanged = "IsCopyRow"                 
+			Or WhoIsChanged = "IsTaxAmountUserFormChanged"
+			Or WhoIsChanged = "RecalculationsOnCopy"      
+			Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
 			Options.CalculateNetAmount.Enable       = True;
 			Options.CalculateTotalAmount.Enable     = True;
 			Options.CalculateTaxAmount.Enable       = True;
@@ -14128,6 +14302,15 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
+		ElsIf WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
+			Options.CalculateQuantity.Enable = True;			
+		ElsIf WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateNetAmount.Enable = True;
+			Options.CalculateTotalAmount.Enable = True;
+			Options.CalculateTaxAmount.Enable = True;
+			Options.CalculateSpecialOffers.Enable   = True;
+			Options.RecalculateSpecialOffers.Enable = True;
+			Options.CalculateQuantityInBaseUnit.Enable = True;			
 		Else
 			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
@@ -14178,11 +14361,16 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
 		
+		Options.QuantityOptions.ItemKey            = GetItemListItemKey(Parameters, Row.Key);
+		Options.QuantityOptions.Unit               = GetItemListUnit(Parameters, Row.Key);
+		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
+		
 		// need recalculate NetAmount, TotalAmount, TaxAmount
 		If     WhoIsChanged = "IsPriceChanged"            
 		    Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" 
-			Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
 			Or WhoIsChanged = "IsVatRateChanged"
 		    Or WhoIsChanged = "IsTaxAmountUserFormChanged"
 			Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
@@ -14207,6 +14395,13 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
+		ElsIf WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
+			Options.CalculateQuantity.Enable = True;			
+		ElsIf WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateNetAmount.Enable = True;
+			Options.CalculateTotalAmount.Enable = True;
+			Options.CalculateTaxAmount.Enable = True;
+			Options.CalculateQuantityInBaseUnit.Enable = True;			
 		Else
 			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
@@ -14249,9 +14444,14 @@ Procedure StepItemListCalculations_StockDocuments(Parameters, Chain, WhoIsChange
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
 		
+		Options.QuantityOptions.ItemKey            = GetItemListItemKey(Parameters, Row.Key);
+		Options.QuantityOptions.Unit               = GetItemListUnit(Parameters, Row.Key);
+		Options.QuantityOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Options.QuantityOptions.QuantityIsFixed    = GetItemListQuantityIsFixed(Parameters, Row.Key);
+		
 		// need recalculate NetAmount, TotalAmount, TaxAmount
 		If 	   WhoIsChanged = "IsPriceChanged"
-			Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
 			Or WhoIsChanged = "IsVatRateChanged"   
 			Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
 			Options.CalculateNetAmount.Enable     = True;
@@ -14268,6 +14468,13 @@ Procedure StepItemListCalculations_StockDocuments(Parameters, Chain, WhoIsChange
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
+		ElsIf WhoIsChanged = "IsQuantityInBaseUnitChanged" Then
+			Options.CalculateQuantity.Enable = True;			
+		ElsIf WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateNetAmount.Enable = True;
+			Options.CalculateTotalAmount.Enable = True;
+			Options.CalculateTaxAmount.Enable = True;
+			Options.CalculateQuantityInBaseUnit.Enable = True;			
 		Else
 			Raise StrTemplate(R().UnsupportedWhoIsChanged, WhoIsChanged);
 		EndIf;
@@ -17485,6 +17692,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetPaymentListCommissionPercentNotify"        Then ViewClient_V2.OnSetPaymentListCommissionPercentNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListIsPreliminary" Then ViewClient_V2.OnSetItemListIsPreliminary(Parameters);
 	ElsIf ViewNotify = "OnSetTaxPartnerNotify" Then ViewClient_V2.OnSetTaxPartnerNotify(Parameters);
+	ElsIf ViewNotify = "OnSetPaymentListBasisDocumentNotify" Then ViewClient_V2.OnSetPaymentListBasisDocumentNotify(Parameters);
 	
 	Else
 		Raise StrTemplate(R().Error_NotHandledViewNotify, ViewNotify);

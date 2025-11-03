@@ -147,6 +147,7 @@
  <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
  <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.B1040B_AgingKey</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1424,6 +1425,31 @@
    <maxValue xsi:type="core:UndefinedValue"/>
    <createOnInput>DontUse</createOnInput>
    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  </attributes>
+  <attributes uuid="74e130ef-5d38-4898-a3c6-1dda78306263">
+   <name>PaymentDate</name>
+   <synonym>
+    <key>tr</key>
+    <value>Ödeme tarihi</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Дата оплаты</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Payment date</value>
+   </synonym>
+   <type>
+    <types>Date</types>
+    <dateQualifiers>
+     <dateFractions>Date</dateFractions>
+    </dateQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
  <tabularSections uuid="2434d324-00b7-4acc-847b-a51fc5c9af2e">

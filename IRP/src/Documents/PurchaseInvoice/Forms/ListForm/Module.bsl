@@ -6,7 +6,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocPurchaseInvoiceServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
 	Items.IsHaveJE.Visible = FOServer.IsUseAccounting();
 	Items.Status.Visible = FOServer.IsUseShipmentConfirmationAndGoodsReceipts();
-	SystemAttributesServer.OutputSystemAttributes(ThisObject, "TransactionType");
+	SystemAttributesServer.OutputSystemAttributes(ThisObject, "Author");
 EndProcedure
 
 #EndRegion

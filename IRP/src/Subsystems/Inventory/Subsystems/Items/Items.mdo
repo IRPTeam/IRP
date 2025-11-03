@@ -30,5 +30,6 @@
  <content>Catalog.PartnerItems</content>
  <content>Catalog.SerialLotNumbers</content>
  <content>Catalog.SourceOfOrigins</content>
+ <content>Catalog.Items</content>
  <parentSubsystem>Subsystem.Inventory</parentSubsystem>
 </mdclass:Subsystem>

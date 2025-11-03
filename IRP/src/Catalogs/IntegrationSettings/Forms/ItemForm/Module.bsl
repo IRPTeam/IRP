@@ -72,7 +72,7 @@ Procedure TestConnectionCall()
 	ElsIf ExtensionCall_TestConnectionCall() = Undefined AND IntegrationServer.ExtensionCall_TestConnectionCall(Object.Ref) = Undefined Then
 		ResourceParameters = New Structure();
 		ResourceParameters.Insert("MetadataName", "TestConnection");
-		ServerResponse = IntegrationClientServer.SendRequest(ConnectionSetting, ResourceParameters);
+		ServerResponse = IntegrationClientServer.SendRequest(ConnectionSetting.Value, ResourceParameters);
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_016, ServerResponse.Message,
 			ServerResponse.StatusCode, ServerResponse.ResponseBody));
 	EndIf;

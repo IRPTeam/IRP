@@ -74,15 +74,15 @@
   <name>GroupEditingProperties</name>
   <synonym>
    <key>tr</key>
-   <value>Özelliklerin grup düzenlemesi</value>
+   <value>Edit properties</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Групповое изменение реквизитов</value>
+   <value>Редактировать свойства</value>
   </synonym>
   <synonym>
    <key>en</key>
-   <value>Group editing of properties</value>
+   <value>Edit properties</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

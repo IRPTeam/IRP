@@ -4820,7 +4820,7 @@
     <name>EditCurrencies</name>
    </handler>
   </action>
-  <functionalOptions>FunctionalOption.UsePreliminary</functionalOptions>
+  <functionalOptions>FunctionalOption.UsePreliminaryStock</functionalOptions>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

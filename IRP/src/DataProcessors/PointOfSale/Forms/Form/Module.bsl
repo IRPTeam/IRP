@@ -182,10 +182,21 @@ EndProcedure
 
 &AtClient
 Procedure CloseSession(Command)
-	CountPostponedReceipts = GetCountPostponedReceipts(Object.ConsolidatedRetailSales);
-	If CountPostponedReceipts > 0 Then
-		OpenPostponedReceipt(Command);
-		Return;
+	
+	If ValueIsFilled(Object.ConsolidatedRetailSales) Then
+		CountPostponedReceipts = GetCountPostponedReceipts(Object.ConsolidatedRetailSales);
+		If CountPostponedReceipts > 0 Then
+			PostponeOptions = CommonFunctionsServer.GetAttributesFromRef(Workstation, "PostponeWithReserve, PostponeWithoutReserve");
+			If Not PostponeOptions.PostponeWithReserve And Not PostponeOptions.PostponeWithoutReserve Then
+				NumberOfCanceled = CancelingPostponedReceipts(Object.ConsolidatedRetailSales);
+				If NumberOfCanceled > 0 Then
+					CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_CancelPostponed, NumberOfCanceled));
+				EndIf;
+			Else
+				OpenPostponedReceipt(Command);
+				Return;
+			EndIf;
+		EndIf;
 	EndIf;
 	
 	FormParameters = New Structure();
@@ -1091,7 +1102,12 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	
 	ResultPrint = True;
 	For Each DocRef In TransactionResult.Refs Do
-		ResultPrint = ResultPrint AND Await PrintFiscalReceipt(DocRef);
+		Try
+			ResultPrint = ResultPrint AND Await PrintFiscalReceipt(DocRef);
+		Except
+			ResultPrint = False;
+			Break;
+		EndTry;
 	EndDo;
 
 	If Not ResultPrint Then

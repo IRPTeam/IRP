@@ -309,4 +309,28 @@
   <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
+ <dimensions uuid="85396625-7144-4838-b545-7398ef492a45">
+  <name>Key</name>
+  <synonym>
+   <key>tr</key>
+   <value>Anahtar</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Key</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

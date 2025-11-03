@@ -15,48 +15,35 @@
  </synonym>
  <location>Constant.UseSales</location>
  <privilegedGetMode>true</privilegedGetMode>
- <content>CommonCommand.OpenCustomerAgreements</content>
- <content>Catalog.Items</content>
  <content>CommonCommand.OpenPartnersCustomer</content>
- <content>Catalog.SpecialOfferTypes</content>
  <content>Catalog.PartnersBankAccounts</content>
- <content>Catalog.PartnerItems</content>
- <content>Catalog.SpecialOfferRules</content>
- <content>Catalog.SpecialOffers</content>
- <content>Catalog.Agreements</content>
  <content>Catalog.PriceTypes</content>
  <content>Subsystem.SalesAR</content>
- <content>Catalog.LegalNameContracts</content>
- <content>Document.SalesOrder</content>
- <content>Report.R1100_CustomersAging</content>
- <content>Document.SalesReturnOrder</content>
  <content>Document.PriceList</content>
- <content>Document.WorkOrder</content>
  <content>Report.D2001_Sales</content>
- <content>Document.WorkSheet</content>
  <content>Document.SalesReportFromTradeAgent</content>
  <content>Report.A1010_PartnersBalance</content>
  <content>Document.SalesReportToConsignor</content>
- <content>Document.PlannedReceiptReservation</content>
- <content>Document.ShipmentConfirmation</content>
- <content>Document.WorkOrderClosing</content>
  <content>Document.SalesReturn</content>
  <content>Document.CustomersAdvancesClosing</content>
  <content>Report.R2001_Sales</content>
  <content>Document.SalesInvoice</content>
- <content>Document.SalesOrderClosing</content>
- <content>Document.ShipmentPlaningOrder</content>
  <content>AccumulationRegister.R2001T_Sales</content>
- <content>AccumulationRegister.R2010T_SalesOrders</content>
- <content>AccumulationRegister.R2014T_CanceledSalesOrders</content>
  <content>AccumulationRegister.R2021B_CustomersTransactions</content>
  <content>AccumulationRegister.R2022B_CustomersPaymentPlanning</content>
  <content>AccumulationRegister.R5020B_PartnersBalance</content>
  <content>AccumulationRegister.R2020B_AdvancesFromCustomers</content>
- <content>AccumulationRegister.R2013T_SalesOrdersProcurement</content>
  <content>AccumulationRegister.R2002T_SalesReturns</content>
- <content>AccumulationRegister.R2011B_SalesOrdersShipment</content>
  <content>AccumulationRegister.R5011B_CustomersAging</content>
- <content>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</content>
- <content>AccumulationRegister.R2005T_SalesSpecialOffers</content>
+ <content>Report.R2001A_Sales</content>
+ <content>Report.D4011_FreeStocks</content>
+ <content>Report.D4012_StockReservation</content>
+ <content>Report.M1010A_PriceList</content>
+ <content>Report.R4050A_InventoryBalance</content>
+ <content>Report.R5020_PartnersBalance</content>
+ <content>Report.R5020A_PartnersBalance</content>
+ <content>CommonCommand.OpenReport_R2001A_Sales</content>
+ <content>CommonCommand.OpenReport_R5020A_PartnersBalance</content>
+ <content>CommonCommand.OpenReport_M1010A_PriceList</content>
+ <content>CommonCommand.OpenReport_R4050A_InventoryBalance</content>
 </mdclass:FunctionalOption>

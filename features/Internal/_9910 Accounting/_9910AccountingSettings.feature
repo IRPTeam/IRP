@@ -178,19 +178,37 @@ Scenario: _099100 preparation
 		When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 		When Create information register T9016S_AccountsEmployee records (test data base)
 		When Create information register T9015S_AccountsFixedAsset records (test data base)
-		When Create catalog PLSections objects		
+		When Create catalog PLSections objects
+	* Add VA extension
+		Given I open hyperlink "e1cib/list/Catalog.Extensions"
+		If "List" table does not contain lines Then
+				| "Description"     |
+				| "VAExtension"     |
+			When add VAExtension	
 	* Default files storage
-		And In the command interface I select "Settings" "Edit constants"
+		And I open Functions for technical specialist window (Extension)
+		And I expand current line in "Table" table
+		And I go to line in "Table" table
+			| "Name"                         |
+			| "Default files storage volume" |
+		And I select current line in "Table" table
 		And I click Select button of "Default files storage volume" field
 		And I go to line in "List" table
 			| 'Description'              |
 			| 'DEFAULT DOCUMENT STORAGE' |
-		And I select current line in "List" table
+		And I select current line in "List" table		
+		And I click "Save and close" button
+		And I open Functions for technical specialist window (Extension)
+		And I expand current line in "Table" table
+		And I go to line in "Table" table
+			| "Name"                         |
+			| "Default picture storage volume" |
+		And I select current line in "Table" table
 		And I click Select button of "Default picture storage volume" field
 		And I go to line in "List" table
 			| 'Description'              |
 			| 'DEFAULT DOCUMENT STORAGE' |
-		And I select current line in "List" table
+		And I select current line in "List" table		
 		And I click "Save and close" button
 		And Delay 3
 	* Posting first documents
@@ -2135,7 +2153,7 @@ Scenario: _0991058 create journal entry for one PI
 		Given I open hyperlink "e1cib/list/Document.JournalEntry"
 		And "List" table contains lines
 			| 'User defined' | 'Date'                | 'Company'       | 'Ledger type' | 'Basis'                                        |
-			| 'No'           | '24.02.2023 10:04:33' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 1 dated 24.02.2023 10:04:33' |
+			| 'No'           | '24.02.2023' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 1 dated 24.02.2023 10:04:33' |
 		
 							
 Scenario: _0991059 create journal entry for two PI
@@ -2160,9 +2178,9 @@ Scenario: _0991059 create journal entry for two PI
 	* Check journal entry
 		Given I open hyperlink "e1cib/list/Document.JournalEntry"
 		And "List" table contains lines
-			| 'User defined' | 'Date'                | 'Company'       | 'Ledger type' | 'Basis'                                        |
-			| 'No'           | '22.07.2023 09:38:02' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 2 dated 22.07.2023 09:38:02' |
-			| 'No'           | '30.11.2023 16:01:04' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 3 dated 30.11.2023 16:01:04' |
+			| 'User defined' | 'Date'       | 'Company'       | 'Ledger type' | 'Basis'                                        |
+			| 'No'           | '22.07.2023' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 2 dated 22.07.2023 09:38:02' |
+			| 'No'           | '30.11.2023' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 3 dated 30.11.2023 16:01:04' |
 			
 				
 Scenario: _0991070 check Bank receipt accounting movements (Payment from customer)
@@ -2373,17 +2391,16 @@ Scenario: _0991078 check Bank receipt accounting movements (Return from vendor)
 		And I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
 			| 'Debit'  | 'Cash/Bank account'   | 'Business unit' | 'Partner'             | 'Financial movement type' | 'Credit' | 'Partner term'                                           | 'Operation'                                                                                   |
-			| '3250'   | 'Bank account, TRY'   | ''              | 'Customer and vendor' | 'Refund from vendor'      | '4020.2' | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
+			| '3250'   | 'Bank account, TRY'   | ''              | 'Customer and vendor' | 'Refund from vendor'      | '5201'   | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
 			| '4020.2' | 'Customer and vendor' | ''              | 'Customer and vendor' | ''                        | '5201'   | 'Partner term with vendor (advance payment by document)' | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                   |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'     | 'Extra dimension2 Dr'                                    | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'    | 'Extra dimension2 Cr'                                    | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                   |
-			| '1' | 'Yes'      | '3250'       | 'Bank account, TRY'   | ''                                                       | 'Refund from vendor'  | 'TRY'            | '50'           | ''              | '4020.2'     | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'             | '50'            | ''                | '50,00'  | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |
-			| '2' | 'Yes'      | '4020.2'     | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'            | '50'           | ''              | '5201'       | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'             | '50'            | ''                | '50,00'  | 'BankReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                   |
-		Then the number of "RegisterRecords" table lines is "равно" "2"
+			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'   | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'    | 'Extra dimension2 Cr'                                    | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount' | 'Operation'                                                                                   |
+			| '1' | 'Yes'      | '3250'       | 'Bank account, TRY' | ''                    | 'Refund from vendor'  | 'TRY'            | '50'           | ''              | '5201'       | 'Customer and vendor' | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'             | '50'            | ''                | '50,00'  | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)' |		
+		Then the number of "RegisterRecords" table lines is "равно" "1"
 	And I close all client application windows
 
 Scenario: _0991079 check Bank receipt accounting movements (Other partner)

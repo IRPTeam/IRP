@@ -68,4 +68,5 @@
  <content>Document.WithholdingTaxInvoice.Attribute.LegalName</content>
  <content>Document.ShipmentPlaningOrder.Attribute.LegalName</content>
  <content>Catalog.Companies.Command.OpenCompanyList</content>
+ <content>CommonCommand.OpenLegalNames</content>
 </mdclass:FunctionalOption>

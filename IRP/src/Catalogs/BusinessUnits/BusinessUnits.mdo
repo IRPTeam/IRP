@@ -179,6 +179,32 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="5d707b7b-f7be-4f4e-adad-7f51f0944649">
+  <name>UseConsolidatedRetailSalesStartDate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Use consolidated retail sales start date</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дату начала использования консолидированных розничных продаж</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Use consolidated retail sales start date</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <attributes uuid="f63ed0aa-493b-4462-9ffa-b0c5a232daf3">
   <name>MaterialStore</name>
   <synonym>

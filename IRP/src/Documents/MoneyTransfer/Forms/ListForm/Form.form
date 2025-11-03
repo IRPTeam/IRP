@@ -134,6 +134,7 @@
    <headerHorizontalAlign>Left</headerHorizontalAlign>
    <showInFooter>true</showInFooter>
    <extInfo xsi:type="form:LabelFieldExtInfo">
+    <width>6</width>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
    </extInfo>
@@ -198,46 +199,6 @@
    <contextMenu>
     <name>SenderContextMenu</name>
     <id>26</id>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>InputField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:InputFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <wrap>true</wrap>
-    <chooseType>true</chooseType>
-    <typeDomainEnabled>true</typeDomainEnabled>
-    <textEdit>true</textEdit>
-   </extInfo>
-  </items>
-  <items xsi:type="form:FormField">
-   <name>Receiver</name>
-   <id>28</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>List.Receiver</segments>
-   </dataPath>
-   <extendedTooltip>
-    <name>ReceiverExtendedTooltip</name>
-    <id>30</id>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>ReceiverContextMenu</name>
-    <id>29</id>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -335,6 +296,46 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
+   <name>Receiver</name>
+   <id>28</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.Receiver</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>ReceiverExtendedTooltip</name>
+    <id>30</id>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>ReceiverContextMenu</name>
+    <id>29</id>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
    <name>ReceiveAmount</name>
    <id>37</id>
    <visible>true</visible>
@@ -415,19 +416,19 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Company</name>
-   <id>22</id>
+   <name>Comment</name>
+   <id>55</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Company</segments>
+    <segments>List.Comment</segments>
    </dataPath>
    <extendedTooltip>
-    <name>CompanyExtendedTooltip</name>
-    <id>24</id>
+    <name>CommentExtendedTooltip</name>
+    <id>57</id>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -436,8 +437,8 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>CompanyContextMenu</name>
-    <id>23</id>
+    <name>CommentContextMenu</name>
+    <id>56</id>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>
@@ -446,7 +447,7 @@
    <headerHorizontalAlign>Left</headerHorizontalAlign>
    <showInFooter>true</showInFooter>
    <extInfo xsi:type="form:InputFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
+    <maxWidth>20</maxWidth>
     <autoMaxHeight>true</autoMaxHeight>
     <wrap>true</wrap>
     <chooseType>true</chooseType>
@@ -495,19 +496,19 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Comment</name>
-   <id>55</id>
+   <name>Company</name>
+   <id>22</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Comment</segments>
+    <segments>List.Company</segments>
    </dataPath>
    <extendedTooltip>
-    <name>CommentExtendedTooltip</name>
-    <id>57</id>
+    <name>CompanyExtendedTooltip</name>
+    <id>24</id>
     <type>Label</type>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -516,8 +517,8 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>CommentContextMenu</name>
-    <id>56</id>
+    <name>CompanyContextMenu</name>
+    <id>23</id>
     <autoFill>true</autoFill>
    </contextMenu>
    <type>InputField</type>

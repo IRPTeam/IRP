@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f5f13b36-c46a-4391-ac32-3a6c6fa9dd95">
+ <name>OpenReport_R9101S_InventoryResults</name>
+ <synonym>
+  <key>tr</key>
+  <value>R9101S Sayım sonuçları</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R9101S Результаты инвентаризации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R9101S Inventory results</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

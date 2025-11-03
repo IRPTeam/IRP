@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8a61c557-baef-47f8-be36-f52eded9ae4d">
+ <name>Report_D0011_PriceInfo</name>
+ <synonym>
+  <key>tr</key>
+  <value>Report D0011_PriceInfo</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет D0011_ИнформацияОЦенах</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report D0011_PriceInfo</value>
+ </synonym>
+</mdclass:Role>

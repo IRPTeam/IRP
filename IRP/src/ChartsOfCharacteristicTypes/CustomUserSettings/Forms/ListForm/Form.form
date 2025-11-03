@@ -648,7 +648,7 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Check balance: R3010 Cash on hand</value>
+   <value>Проверить баланс: R3010 Наличные в кассе</value>
   </title>
   <title>
    <key>en</key>
@@ -673,7 +673,7 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Check balance: R4010 Actual stocks</value>
+   <value>Проверить баланс: R4010 Фактические запасы</value>
   </title>
   <title>
    <key>en</key>
@@ -698,7 +698,7 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Check balance: R4011 Free stocks</value>
+   <value>Проверить баланс: R4011 Свободные запасы</value>
   </title>
   <title>
    <key>en</key>
@@ -723,7 +723,7 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Check balance: R4014 Serial lot number</value>
+   <value>Проверить остаток: R4014 серийный номер партии</value>
   </title>
   <title>
    <key>en</key>
@@ -748,7 +748,7 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Check balance: R4035 Incoming stocks</value>
+   <value>Проверить баланс: R4035 Входящие запасы</value>
   </title>
   <title>
    <key>en</key>
@@ -773,7 +773,7 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Check balance: R4036 Incoming stocks requested</value>
+   <value>Проверить баланс: R4036 Запрошенные входящие запасы</value>
   </title>
   <title>
    <key>en</key>
@@ -798,7 +798,7 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Check balance: R4037 Planned receipt</value>
+   <value>Проверить баланс: R4037 Планируемое поступление</value>
   </title>
   <title>
    <key>en</key>
@@ -823,7 +823,7 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Check balance: R6070 Other periods expenses</value>
+   <value>Проверить баланс: R6070 Расходы прошлых периодов</value>
   </title>
   <title>
    <key>en</key>
@@ -848,7 +848,7 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Check balance: R6080 Other periods revenues</value>
+   <value>Проверить баланс: R6080 Доходы прошлых периодов</value>
   </title>
   <title>
    <key>en</key>

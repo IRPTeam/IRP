@@ -355,6 +355,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5011B_CustomersAging());
+	QueryArray.Add(B1040B_AgingKey());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(R6080T_OtherPeriodsRevenues());
@@ -1324,6 +1325,36 @@ EndFunction
 
 Function R5011B_CustomersAging()
 	Return AccumulationRegisters.R5011B_CustomersAging.R5011B_CustomersAging_SI();
+EndFunction
+
+Function B1040B_AgingKey() Export
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentTerms.Ref.Date AS Period,
+		|	PaymentTerms.Ref.Company AS Company,
+		|	PaymentTerms.Ref.Branch AS Branch,
+		|	PaymentTerms.Ref.Currency AS Currency,
+		|	PaymentTerms.Ref.Agreement AS Agreement,
+		|	PaymentTerms.Ref.Partner AS Partner,
+		|	PaymentTerms.Ref AS Invoice,
+		|	PaymentTerms.Date AS PaymentDate,
+		|	SUM(PaymentTerms.Amount) AS Amount
+		|INTO B1040B_AgingKey
+		|FROM
+		|	Document.SalesInvoice.PaymentTerms AS PaymentTerms
+		|WHERE
+		|	PaymentTerms.Ref = &Ref
+		|GROUP BY
+		|	PaymentTerms.Date,
+		|	PaymentTerms.Ref,
+		|	PaymentTerms.Ref.Agreement,
+		|	PaymentTerms.Ref.Company,
+		|	PaymentTerms.Ref.Branch,
+		|	PaymentTerms.Ref.Currency,
+		|	PaymentTerms.Ref.Date,
+		|	PaymentTerms.Ref.Partner,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

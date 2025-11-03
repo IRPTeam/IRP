@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4998da0e-fea6-4ca4-afa8-554d07e7d557">
+ <name>AccumulationRegisters_B1040B_AgingKey</name>
+ <synonym>
+  <key>tr</key>
+  <value>AccumulationRegisters B1040B AgingKey</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РегистрыНакопления B1040B КлючРассрочки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>AccumulationRegisters B1040B AgingKey</value>
+ </synonym>
+</mdclass:Role>

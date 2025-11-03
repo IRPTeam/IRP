@@ -1543,11 +1543,11 @@ Scenario: _150079 check filling source of origin in SC
 			| '$$NumberShipmentConfirmation01$$' |
 		And I select current line in "List" table
 		And "ItemList" table became equal
-			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'             | 'Source of origins'            | 'Quantity'   | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Shipment planing order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
-			| '1' | 'Skittles'           | 'Fruit'    | ''                               | ''                             | '10 000,000' | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
-			| '2' | 'Bag'                | 'ODS'      | ''                               | 'Source of origin 11'          | '5 000,000'  | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
-			| '3' | 'Product 1 with SLN' | 'PZU'      | '8908899879'                     | 'Source of origin 9'           | '100,000'    | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
-			| '4' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977895; 09987897977893' | 'Source of origin 4; Source 1' | '400,000'    | 'pcs'  | 'Store 05' | ''               | ''            | ''                       | ''              | ''                         | ''                   | ''                      | ''                |
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'             | 'Source of origins'            | 'Quantity'   | 'Unit' | 'Store'    | 'Shipment basis' | 'Sales order' | 'Sales invoice' | 'Inventory transfer order' | 'Inventory transfer' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Skittles'           | 'Fruit'    | ''                               | ''                             | '10 000,000' | 'pcs'  | 'Store 05' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
+			| '2' | 'Bag'                | 'ODS'      | ''                               | 'Source of origin 11'          | '5 000,000'  | 'pcs'  | 'Store 05' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
+			| '3' | 'Product 1 with SLN' | 'PZU'      | '8908899879'                     | 'Source of origin 9'           | '100,000'    | 'pcs'  | 'Store 05' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
+			| '4' | 'Product 3 with SLN' | 'UNIQ'     | '09987897977895; 09987897977893' | 'Source of origin 4; Source 1' | '400,000'    | 'pcs'  | 'Store 05' | ''               | ''            | ''              | ''                         | ''                   | ''                      | ''                |
 	And I close all client application windows	
 				
 Scenario: _150080 check filling source of origin in GR
@@ -1651,6 +1651,9 @@ Scenario: _150080 check filling source of origin in GR
 
 Scenario: _150081 check filling source of origin in SPO
 	And I close all client application windows
+	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+	And I set checkbox "Use shipment and receipt planing orders"	
+	And I click "Save" button
 	* Create SC
 		Given I open hyperlink "e1cib/list/Document.ShipmentPlaningOrder"
 		And I click "Create" button

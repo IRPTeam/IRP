@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4ba14ce1-2b53-44f3-bac9-3d915807a29e">
+ <name>Report_R5020_ProfitLosses</name>
+ <synonym>
+  <key>tr</key>
+  <value>Report R5020_ProfitLosses</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет R5020_ПрибылиИУбытки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report R5020_ProfitLosses</value>
+ </synonym>
+</mdclass:Role>

@@ -209,20 +209,20 @@
   </synonym>
   <languageCode>ha</languageCode>
  </languages>
- <subsystems>Subsystem.PurchaseAP</subsystems>
- <subsystems>Subsystem.SalesAR</subsystems>
  <subsystems>Subsystem.Retail</subsystems>
+ <subsystems>Subsystem.PurchaseAP</subsystems>
  <subsystems>Subsystem.Inventory</subsystems>
+ <subsystems>Subsystem.MasterData</subsystems>
  <subsystems>Subsystem.Treasury</subsystems>
- <subsystems>Subsystem.Manufacturing</subsystems>
- <subsystems>Subsystem.FixedAssets</subsystems>
+ <subsystems>Subsystem.Settings</subsystems>
  <subsystems>Subsystem.Salary</subsystems>
  <subsystems>Subsystem.Accounting</subsystems>
- <subsystems>Subsystem.MasterData</subsystems>
- <subsystems>Subsystem.Reports</subsystems>
- <subsystems>Subsystem.Settings</subsystems>
- <subsystems>Subsystem.Technical</subsystems>
  <subsystems>Subsystem.Incidents</subsystems>
+ <subsystems>Subsystem.Reports</subsystems>
+ <subsystems>Subsystem.SalesAR</subsystems>
+ <subsystems>Subsystem.FixedAssets</subsystems>
+ <subsystems>Subsystem.Technical</subsystems>
+ <subsystems>Subsystem.Manufacturing</subsystems>
  <styles>Style.TestDataBase</styles>
  <commonPictures>CommonPicture.AccountingFlags</commonPictures>
  <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -598,6 +598,73 @@
  <roles>Role.UseExternalReports</roles>
  <roles>Role.UseGroupEditingProperties</roles>
  <roles>Role.UseOutput</roles>
+ <roles>Role.AccumulationRegisters_B1040B_AgingKey</roles>
+ <roles>Role.Report_A0010_TrialBalance</roles>
+ <roles>Role.Report_A0011_TrialBalanceByAccount</roles>
+ <roles>Role.Report_A0012_AccountCard</roles>
+ <roles>Role.Report_A0013_AccountAnalysis</roles>
+ <roles>Role.Report_A0014_AccountingPLReport</roles>
+ <roles>Role.Report_A1010_PartnersBalance</roles>
+ <roles>Role.Report_D0010_ItemsInfo</roles>
+ <roles>Role.Report_D0011_PriceInfo</roles>
+ <roles>Role.Report_D0012_AdditionalDocumentTablesCheck</roles>
+ <roles>Role.Report_D0013_DocumentRegistrationsReport</roles>
+ <roles>Role.Report_D1001_Purchases</roles>
+ <roles>Role.Report_D2001_Sales</roles>
+ <roles>Role.Report_D4010_ActualStocks</roles>
+ <roles>Role.Report_D4011_FreeStocks</roles>
+ <roles>Role.Report_D4012_StockReservation</roles>
+ <roles>Role.Report_F0010_FixedAssetsTransferCost</roles>
+ <roles>Role.Report_F0011_InventoryBook</roles>
+ <roles>Role.Report_F0012_DepreciationStatement</roles>
+ <roles>Role.Report_M1010A_PriceList</roles>
+ <roles>Role.Report_R1001_Purchases</roles>
+ <roles>Role.Report_R1001A_Purchases</roles>
+ <roles>Role.Report_R1010A_PurchaseOrders</roles>
+ <roles>Role.Report_R1011A_PuchaseOrdersShipment</roles>
+ <roles>Role.Report_R1012A_PurchaseOrdersInvoiceClosing</roles>
+ <roles>Role.Report_R1031A_ReceiptInvoicingBalance</roles>
+ <roles>Role.Report_R1031B_ReceiptInvoicingMovements</roles>
+ <roles>Role.Report_R1100_CustomersAging</roles>
+ <roles>Role.Report_R1200_VendorsAging</roles>
+ <roles>Role.Report_R2001_Sales</roles>
+ <roles>Role.Report_R2001A_Sales</roles>
+ <roles>Role.Report_R2010A_SalesOrders</roles>
+ <roles>Role.Report_R2010A_SalesOrdersExecution</roles>
+ <roles>Role.Report_R2011A_SalesOrdersShipment</roles>
+ <roles>Role.Report_R2012A_SalesOrdersInvoiceClosing</roles>
+ <roles>Role.Report_R3010_CashOnHand</roles>
+ <roles>Role.Report_R3010A_CashOnHand</roles>
+ <roles>Role.Report_R3011A_CashFlow</roles>
+ <roles>Role.Report_R3021A_CashInTransit</roles>
+ <roles>Role.Report_R3024B_SalesOrdersToBePaid</roles>
+ <roles>Role.Report_R3027A_CashAdvance</roles>
+ <roles>Role.Report_R4010A_StockBalance</roles>
+ <roles>Role.Report_R4011B_FreeStockMovements</roles>
+ <roles>Role.Report_R4012A_StockReservation</roles>
+ <roles>Role.Report_R401A_FreeStocks</roles>
+ <roles>Role.Report_R403A_GoodsInTransit</roles>
+ <roles>Role.Report_R4050A_InventoryBalance</roles>
+ <roles>Role.Report_R405A_StockAdjustments</roles>
+ <roles>Role.Report_R5010A_ReconciliationStatement</roles>
+ <roles>Role.Report_R5020_PartnersBalance</roles>
+ <roles>Role.Report_R5020_ProfitLosses</roles>
+ <roles>Role.Report_R5020A_PartnersBalance</roles>
+ <roles>Role.Report_R5021A_Revenues</roles>
+ <roles>Role.Report_R5022A_Expenses</roles>
+ <roles>Role.Report_R502A_ProfitLosses</roles>
+ <roles>Role.Report_R6020_BatchBalance</roles>
+ <roles>Role.Report_R6020A_InventoryCost</roles>
+ <roles>Role.Report_R6021_BatchBalanceSimple</roles>
+ <roles>Role.Report_R6060A_CostOfGoodsSold</roles>
+ <roles>Role.Report_R6070_OtherPeriodsExpenses</roles>
+ <roles>Role.Report_R7010_DetailingSupplies</roles>
+ <roles>Role.Report_R7030_ProductionPlanning</roles>
+ <roles>Role.Report_R8510B_BookValueOfFixedAsset</roles>
+ <roles>Role.Report_R9101S_InventoryResults</roles>
+ <roles>Role.Report_R9510A_Salary</roles>
+ <roles>Role.Report_S1001L_VendorsPrices</roles>
+ <roles>Role.Report_T0001_FilesAnalyser</roles>
  <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -666,6 +733,7 @@
  <commonModules>CommonModule.CurrenciesClientServer</commonModules>
  <commonModules>CommonModule.CurrenciesServer</commonModules>
  <commonModules>CommonModule.DataVersioningServer</commonModules>
+ <commonModules>CommonModule.DefaultDataServer</commonModules>
  <commonModules>CommonModule.DocAdditionalAccrualClient</commonModules>
  <commonModules>CommonModule.DocAdditionalAccrualServer</commonModules>
  <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>
@@ -1048,13 +1116,15 @@
  <functionalOptions>FunctionalOption.UseAllFunctional</functionalOptions>
  <functionalOptions>FunctionalOption.UseBankDocuments</functionalOptions>
  <functionalOptions>FunctionalOption.UseBundling</functionalOptions>
+ <functionalOptions>FunctionalOption.UseBusinessProcess</functionalOptions>
  <functionalOptions>FunctionalOption.UseBusinessUnits</functionalOptions>
- <functionalOptions>FunctionalOption.UseCashTransaction</functionalOptions>
+ <functionalOptions>FunctionalOption.UseCashTransactions</functionalOptions>
  <functionalOptions>FunctionalOption.UseChequeBonds</functionalOptions>
  <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
  <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
  <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
  <functionalOptions>FunctionalOption.UseContactInformation</functionalOptions>
+ <functionalOptions>FunctionalOption.UseDashboard</functionalOptions>
  <functionalOptions>FunctionalOption.UseDeliveryDate</functionalOptions>
  <functionalOptions>FunctionalOption.UseELedger</functionalOptions>
  <functionalOptions>FunctionalOption.UseEquipments</functionalOptions>
@@ -1063,6 +1133,7 @@
  <functionalOptions>FunctionalOption.UseFixedAssets</functionalOptions>
  <functionalOptions>FunctionalOption.UseIncidents</functionalOptions>
  <functionalOptions>FunctionalOption.UseIntegrations</functionalOptions>
+ <functionalOptions>FunctionalOption.UseInventory</functionalOptions>
  <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
  <functionalOptions>FunctionalOption.UseJobQueueForExternalFunctions</functionalOptions>
  <functionalOptions>FunctionalOption.UseLandedCost</functionalOptions>
@@ -1076,19 +1147,22 @@
  <functionalOptions>FunctionalOption.UseNumberingRules</functionalOptions>
  <functionalOptions>FunctionalOption.UseObjectAccess</functionalOptions>
  <functionalOptions>FunctionalOption.UseObjectTransformation</functionalOptions>
- <functionalOptions>FunctionalOption.UseOrders</functionalOptions>
  <functionalOptions>FunctionalOption.UsePartnerItems</functionalOptions>
  <functionalOptions>FunctionalOption.UsePartnersHierarchy</functionalOptions>
  <functionalOptions>FunctionalOption.UsePartnerTerms</functionalOptions>
+ <functionalOptions>FunctionalOption.UsePaymentOrders</functionalOptions>
  <functionalOptions>FunctionalOption.UsePlannedReceiptReservation</functionalOptions>
+ <functionalOptions>FunctionalOption.UsePreliminaryStock</functionalOptions>
  <functionalOptions>FunctionalOption.UsePriceByProperties</functionalOptions>
  <functionalOptions>FunctionalOption.UseProfitLossCenter</functionalOptions>
  <functionalOptions>FunctionalOption.UsePurchase</functionalOptions>
+ <functionalOptions>FunctionalOption.UsePurchaseOrders</functionalOptions>
  <functionalOptions>FunctionalOption.UseResponsiblePerson</functionalOptions>
  <functionalOptions>FunctionalOption.UseRetail</functionalOptions>
  <functionalOptions>FunctionalOption.UseRetailOrders</functionalOptions>
  <functionalOptions>FunctionalOption.UseSalary</functionalOptions>
  <functionalOptions>FunctionalOption.UseSales</functionalOptions>
+ <functionalOptions>FunctionalOption.UseSalesOrders</functionalOptions>
  <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
  <functionalOptions>FunctionalOption.UseShipmentAndReceiptPlaningOrders</functionalOptions>
  <functionalOptions>FunctionalOption.UseShipmentConfirmationAndGoodsReceipts</functionalOptions>
@@ -1101,9 +1175,6 @@
  <functionalOptions>FunctionalOption.UseVariableItemKey</functionalOptions>
  <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
  <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
- <functionalOptions>FunctionalOption.UseBusinessProcess</functionalOptions>
- <functionalOptions>FunctionalOption.UsePreliminary</functionalOptions>
- <functionalOptions>FunctionalOption.UseDashboard</functionalOptions>
  <definedTypes>DefinedType.typeAccessDocument</definedTypes>
  <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
  <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1159,6 +1230,43 @@
  <commonCommands>CommonCommand.OpenRetailSalesOrders</commonCommands>
  <commonCommands>CommonCommand.OpenVendorAgreements</commonCommands>
  <commonCommands>CommonCommand.UpdateAllUserRoles</commonCommands>
+ <commonCommands>CommonCommand.OpenPointOfSale</commonCommands>
+ <commonCommands>CommonCommand.OpenLegalNames</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R1001A_Purchases</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R2001A_Sales</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R1010A_PurchaseOrders</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R1011A_PuchaseOrdersShipment</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R1012A_PurchaseOrdersInvoiceClosing</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R1031A_ReceiptInvoicingBalance</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R1031B_ReceiptInvoicingMovements</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R5020A_PartnersBalance</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R3010A_CashOnHand</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R3011A_CashFlow</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R3021A_CashInTransit</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R3027A_CashAdvance</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R5021A_Revenues</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R5022A_Expenses</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R502A_ProfitLosses</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R6020_BatchBalance</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R6060A_CostOfGoodsSold</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R5010A_ReconciliationStatement</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R1100_CustomersAging</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R1200_VendorsAging</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R2010A_SalesOrders</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R2010A_SalesOrdersExecution</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R2011A_SalesOrdersShipment</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R2012A_SalesOrdersInvoiceClosing</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R401A_FreeStocks</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_M1010A_PriceList</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R4010A_StockBalance</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R4011B_FreeStockMovements</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R4012A_StockReservation</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R403A_GoodsInTransit</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R4050A_InventoryBalance</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R405A_StockAdjustments</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R6020A_InventoryCost</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R9101S_InventoryResults</commonCommands>
+ <commonCommands>CommonCommand.OpenReport_R9510A_Salary</commonCommands>
  <commandGroups>CommandGroup.Service</commandGroups>
  <commandGroups>CommandGroup.Print</commandGroups>
  <commandGroups>CommandGroup.Fiscalization</commandGroups>
@@ -1180,13 +1288,15 @@
  <constants>Constant.UseAllFunctional</constants>
  <constants>Constant.UseBankDocuments</constants>
  <constants>Constant.UseBundling</constants>
+ <constants>Constant.UseBusinessProcess</constants>
  <constants>Constant.UseBusinessUnits</constants>
- <constants>Constant.UseCashTransaction</constants>
+ <constants>Constant.UseCashTransactions</constants>
  <constants>Constant.UseChequeBonds</constants>
  <constants>Constant.UseCommissionTrading</constants>
  <constants>Constant.UseCompanies</constants>
  <constants>Constant.UseConsolidatedRetailSales</constants>
  <constants>Constant.UseContactInformation</constants>
+ <constants>Constant.UseDashboard</constants>
  <constants>Constant.UseDeliveryDate</constants>
  <constants>Constant.UseELedger</constants>
  <constants>Constant.UseEquipments</constants>
@@ -1195,6 +1305,7 @@
  <constants>Constant.UseFixedAssets</constants>
  <constants>Constant.UseIncidents</constants>
  <constants>Constant.UseIntegrations</constants>
+ <constants>Constant.UseInventory</constants>
  <constants>Constant.UseItemKey</constants>
  <constants>Constant.UseJobQueueForExternalFunctions</constants>
  <constants>Constant.UseLandedCost</constants>
@@ -1208,19 +1319,22 @@
  <constants>Constant.UseNumberingRules</constants>
  <constants>Constant.UseObjectAccess</constants>
  <constants>Constant.UseObjectTransformation</constants>
- <constants>Constant.UseOrders</constants>
  <constants>Constant.UsePartnerItems</constants>
  <constants>Constant.UsePartnersHierarchy</constants>
  <constants>Constant.UsePartnerTerms</constants>
+ <constants>Constant.UsePaymentOrders</constants>
  <constants>Constant.UsePlannedReceiptReservation</constants>
+ <constants>Constant.UsePreliminaryStock</constants>
  <constants>Constant.UsePriceByProperties</constants>
  <constants>Constant.UseProfitLossCenter</constants>
  <constants>Constant.UsePurchase</constants>
+ <constants>Constant.UsePurchaseOrders</constants>
  <constants>Constant.UseResponsiblePerson</constants>
  <constants>Constant.UseRetail</constants>
  <constants>Constant.UseRetailOrders</constants>
  <constants>Constant.UseSalary</constants>
  <constants>Constant.UseSales</constants>
+ <constants>Constant.UseSalesOrders</constants>
  <constants>Constant.UseSerialLotNumbers</constants>
  <constants>Constant.UseShipmentAndReceiptPlaningOrders</constants>
  <constants>Constant.UseShipmentConfirmationAndGoodsReceipts</constants>
@@ -1233,9 +1347,6 @@
  <constants>Constant.UseVariableItemKey</constants>
  <constants>Constant.UseVariableStore</constants>
  <constants>Constant.UseWorkOrders</constants>
- <constants>Constant.UseBusinessProcess</constants>
- <constants>Constant.UsePreliminary</constants>
- <constants>Constant.UseDashboard</constants>
  <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
  <commonForms>CommonForm.AttachFile</commonForms>
@@ -1918,6 +2029,7 @@
  <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
+ <accumulationRegisters>AccumulationRegister.B1040B_AgingKey</accumulationRegisters>
  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
  <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

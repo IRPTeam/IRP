@@ -102,7 +102,7 @@ Scenario: _0224001 create and check filling Purchase order closing (PO not shipp
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '37'       | '09.03.2021 14:29:00'    |
+			| '37'       | '09.03.2021'    |
 		And I click the button named "FormDocumentPurchaseOrderClosingGenerate"
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -154,7 +154,7 @@ Scenario: _0224001 create and check filling Purchase order closing (PO not shipp
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '37'       | '09.03.2021 14:29:00'    |
+			| '37'       | '09.03.2021'    |
 		And I click the button named "FormSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click the button named "Button0"
@@ -167,7 +167,7 @@ Scenario: _0224001 create and check filling Purchase order closing (PO not shipp
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '37'       | '09.03.2021 14:29:00'    |
+			| '37'       | '09.03.2021'    |
 		And I click the button named "FormUndoPosting"
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
@@ -195,7 +195,7 @@ Scenario: _0230002 create and check filling Purchase order closing (PO partially
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '37'       | '09.03.2021 14:29:00'    |
+			| '37'       | '09.03.2021'    |
 		And I click the button named "FormDocumentPurchaseOrderClosingGenerate"	
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -222,7 +222,7 @@ Scenario: _0230002 create and check filling Purchase order closing (PO partially
 	* Check PO lock
 		And I go to line in "List" table
 			| 'Number' | 'Closed' | 'Date'                |
-			| '37'     | 'Yes'    | '09.03.2021 14:29:00' |
+			| '37'     | 'Yes'    | '09.03.2021' |
 		And I select current line in "List" table
 		When I Check the steps for Exception
 			| 'And in the table "ItemList" I click "Add" button'    |
@@ -232,7 +232,7 @@ Scenario: _0230002 create and check filling Purchase order closing (PO partially
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
 			| 'Number' | 'Date'                |
-			| '37'     | '09.03.2021 15:17:48' |
+			| '37'     | '09.03.2021' |
 		And I select current line in "List" table
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
@@ -255,14 +255,14 @@ Scenario: _0230002 create and check filling Purchase order closing (PO partially
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			And I go to line in "List" table
 				| 'Number' | 'Date'                |
-				| '37'     | '09.03.2021 15:17:48' |
+				| '37'     | '09.03.2021' |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then user message window does not contain messages				
 	* Check GR lock	
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
 			| 'Number' | 'Date'                |
-			| '37'     | '09.03.2021 15:16:42' |
+			| '37'     | '09.03.2021' |
 		And I select current line in "List" table
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
@@ -285,14 +285,14 @@ Scenario: _0230002 create and check filling Purchase order closing (PO partially
 			Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 			And I go to line in "List" table
 				| 'Number' | 'Date'                |
-				| '37'     | '09.03.2021 15:16:42' |
+				| '37'     | '09.03.2021' |
 			And in the table "List" I click the button named "ListContextMenuPost"
 			Then user message window does not contain messages
 	* Repost PO
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number' | 'Closed' | 'Date'                |
-			| '37'     | 'Yes'    | '09.03.2021 14:29:00' |
+			| '37'     | 'Yes'    | '09.03.2021' |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Then user message window does not contain messages
 		And I close all client application windows
@@ -338,7 +338,7 @@ Scenario: _0230004 create Purchase order closing (different ItemKey)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Date'                |
-			| '10.04.2025 22:01:33' |
+			| '10.04.2025' |
 		Then "Purchase orders" window is opened
 		And I click the button named "FormDocumentPurchaseOrderClosingGenerate"
 		And I click "Save" button

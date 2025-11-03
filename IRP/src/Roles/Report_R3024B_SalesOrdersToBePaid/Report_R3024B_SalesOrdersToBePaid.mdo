@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="93575e92-471d-4232-a0e5-9cf24cd9a6b6">
+ <name>Report_R3024B_SalesOrdersToBePaid</name>
+ <synonym>
+  <key>tr</key>
+  <value>Report R3024B_SalesOrdersToBePaid</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет R3024B_ЗаказыНаПродажуКОплате</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report R3024B_SalesOrdersToBePaid</value>
+ </synonym>
+</mdclass:Role>

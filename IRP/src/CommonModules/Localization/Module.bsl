@@ -1,6 +1,5 @@
 // @strict-types
 
-
 // Strings.
 // 
 // Parameters:
@@ -1022,6 +1021,30 @@ Function Strings(Lang) Export
 		|tr='Yetersiz parti %1: Stokta: %2; Evrakta: %3.'", Lang));
 #EndRegion
 
+#Region FunctionalOptions
+	Strings.Insert("FO_Group_BaseSettings", NStr("en='Base settings';
+		|ru='Основные настройки';
+		|tr='Ana ayarlar'", Lang));
+	Strings.Insert("FO_Group_MasterData", NStr("en='Master data';
+		|ru='Справочники';
+		|tr='Tanımlar'", Lang));
+	Strings.Insert("FO_Group_Trading", NStr("en='Trading';
+		|ru='Торговля';
+		|tr='Trading'", Lang));
+	Strings.Insert("FO_Group_Inventory", NStr("en='Inventory';
+		|ru='Склад';
+		|tr='Stok'", Lang));
+	Strings.Insert("FO_Group_Money", NStr("en='Money';
+		|ru='Деньги';
+		|tr='Nakit'", Lang));
+	Strings.Insert("FO_Group_Accounting", NStr("en='Accounting';
+		|ru='Бухгалтерия';
+		|tr='Muhasebe'", Lang));
+	Strings.Insert("FO_Group_Other", NStr("en='Other';
+		|ru='Прочее';
+		|tr='Diğer'", Lang));
+#EndRegion
+
 #Region GenericErrors
         Strings.Insert("JobAborted", NStr("en='Job aborted';
         	|ru='Регламентное задание прервано';
@@ -1826,7 +1849,7 @@ Function Strings(Lang) Export
 		|ru='Количество';
 		|tr='Miktar'", Lang));
 	Strings.Insert("Form_004", NStr("en='Customer terms';
-		|ru='Customer terms';
+		|ru='Соглашения клиента';
 		|tr='Müşteri sözleşmesi'", Lang));
 	Strings.Insert("Form_005", NStr("en='Customers';
 		|ru='Клиенты';
@@ -1835,7 +1858,7 @@ Function Strings(Lang) Export
 		|ru='Поставщики';
 		|tr='Tedarikçiler'", Lang));
 	Strings.Insert("Form_007", NStr("en='Vendor terms';
-		|ru='Vendor terms';
+		|ru='Соглашения поставщика';
 		|tr='Tedarikçi sözleşmesi'", Lang));
 	Strings.Insert("Form_008", NStr("en='User';
 		|ru='Пользователь';
@@ -4856,28 +4879,28 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 		|ru='Сумма продаж';
 		|tr='Satış tutarı'", Lang));
 	Strings.Insert("Dashboard_02", NStr("en='Average bill';
-		|ru='Average bill';
+		|ru='Средний счет';
 		|tr='Ortalama fiş tutarı'", Lang));
 	Strings.Insert("Dashboard_03", NStr("en='Sales return percentage';
-		|ru='Sales return percentage';
+		|ru='Процент возврата продаж';
 		|tr='Satış iade yüzdesi'", Lang));	
 	Strings.Insert("Dashboard_04", NStr("en='Cash Balance';
-		|ru='Cash Balance';
+		|ru='Кассовый остаток';
 		|tr='Nakit Bakiyesi'", Lang));
 	Strings.Insert("Dashboard_05", NStr("en='Payments from clients';
-		|ru='Payments from clients';
+		|ru='Платежи от клиентов';
 		|tr='Müşterilerden gelen ödemeler'", Lang));
 	Strings.Insert("Dashboard_06", NStr("en='Payments to suppliers';
-		|ru='Payments to suppliers';
+		|ru='Платежи поставщикам';
 		|tr='Tedarikçilere yapılan ödemeler'", Lang));
 	Strings.Insert("Dashboard_07", NStr("en='AP/AR Balance';
-		|ru='AP/AR Balance';
+		|ru='Баланс кредиторской/дебиторской задолженности';
 		|tr='Borç/Alacak Bakiyesi'", Lang));
 	Strings.Insert("Dashboard_08", NStr("en='Stock Balance';
-		|ru='Stock Balance';
+		|ru='Остаток на складе';
 		|tr='Stok Bakiyesi'", Lang));
 	Strings.Insert("Dashboard_09", NStr("en='Volume of purchases';
-		|ru='Volume of purchases';
+		|ru='Объем закупок';
 		|tr='Satın alma hacmi'", Lang));
 
 #EndRegion

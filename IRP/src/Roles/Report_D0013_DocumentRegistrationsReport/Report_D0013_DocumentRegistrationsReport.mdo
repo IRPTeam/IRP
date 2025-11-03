@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bf304e97-a609-49f1-8e63-7d7b0fac1e8e">
+ <name>Report_D0013_DocumentRegistrationsReport</name>
+ <synonym>
+  <key>tr</key>
+  <value>Report D0013_DocumentRegistrationsReport</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет D0013_РегистрацияДокументов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report D0013_DocumentRegistrationsReport</value>
+ </synonym>
+</mdclass:Role>

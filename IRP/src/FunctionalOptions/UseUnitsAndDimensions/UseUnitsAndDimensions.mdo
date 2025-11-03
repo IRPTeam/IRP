@@ -15,7 +15,6 @@
  </synonym>
  <location>Constant.UseUnitsAndDimensions</location>
  <privilegedGetMode>true</privilegedGetMode>
- <content>Catalog.Units</content>
  <content>Catalog.Units.Command.OpenUnits</content>
  <content>Catalog.UnitsOfMeasurement</content>
  <content>Document.RetailReturnReceipt.TabularSection.ItemList.Attribute.Unit</content>
@@ -57,7 +56,6 @@
  <content>Document.PriceList.TabularSection.ItemList.Attribute.InputUnit</content>
  <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.Unit</content>
  <content>Document.SalesOrderClosing.TabularSection.ItemList.Attribute.Unit</content>
- <content>Catalog.Units.Attribute.BasisUnit</content>
  <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.Unit</content>
  <content>InformationRegister.PricesByItemKeys.Resource.InputUnit</content>
  <content>CommonAttribute.Volume</content>

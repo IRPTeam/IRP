@@ -230,4 +230,48 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
+ <dimensions uuid="451f86ea-d875-406f-8c57-b30797baf7b2">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>tr</key>
+   <value>Çoklu döviz hareket tipi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид мультивалютной аналитики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Multi currency movement type</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="1cc07b30-6340-436f-b298-a483fc7b98ec">
+  <name>TransactionCurrency</name>
+  <synonym>
+   <key>tr</key>
+   <value>İşlem para birimi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта транзакции</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Transaction currency</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

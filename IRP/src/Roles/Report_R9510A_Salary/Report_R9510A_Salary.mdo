@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c15805d3-cb13-47ce-9223-75b0428983b8">
+ <name>Report_R9510A_Salary</name>
+ <synonym>
+  <key>tr</key>
+  <value>Report R9510A_Salary</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отчет R9510A_Зарплата</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Report R9510A_Salary</value>
+ </synonym>
+</mdclass:Role>

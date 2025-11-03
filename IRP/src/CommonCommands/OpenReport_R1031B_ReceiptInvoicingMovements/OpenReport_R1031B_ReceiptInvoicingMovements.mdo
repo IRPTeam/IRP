@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2977a68c-8385-449a-a633-1b3817d060f0">
+ <name>OpenReport_R1031B_ReceiptInvoicingMovements</name>
+ <synonym>
+  <key>tr</key>
+  <value>R1031B Gelen faturaların hareketleri</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R1031A Ожидающие закрытия поступления</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>R1031B Receipt invoicing movements</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

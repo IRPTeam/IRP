@@ -18,45 +18,44 @@
  <content>Subsystem.MasterData.Subsystem.Finance</content>
  <content>Subsystem.Treasury</content>
  <content>Catalog.BankTerms</content>
- <content>Document.ChequeBondTransaction</content>
- <content>Catalog.ChequeBonds</content>
  <content>Document.CreditNote</content>
- <content>Catalog.Currencies</content>
  <content>Document.ExpenseAccruals</content>
- <content>Document.CashPayment</content>
- <content>Document.CashRevenue</content>
  <content>Catalog.PlanningPeriods</content>
- <content>Catalog.AgingPeriods</content>
  <content>Catalog.Projects</content>
  <content>Document.CustomersAdvancesClosing</content>
  <content>Document.TaxesOperation</content>
  <content>Document.MoneyTransfer</content>
  <content>Document.ChequeBondTransactionItem</content>
  <content>Catalog.CashAccounts</content>
- <content>Catalog.BusinessUnits</content>
  <content>Document.EmployeeCashAdvance</content>
  <content>Document.DebitNote</content>
- <content>Document.IncomingPaymentOrder</content>
  <content>Document.ForeignCurrencyRevaluation</content>
- <content>Document.CashReceipt</content>
- <content>Document.CashTransferOrder</content>
- <content>Document.BankPayment</content>
  <content>Document.DebitCreditNote</content>
- <content>Document.CashExpense</content>
- <content>Document.BankReceipt</content>
  <content>Document.ReconciliationStatement</content>
- <content>Document.CashStatement</content>
- <content>Catalog.ExpenseAndRevenueTypes</content>
  <content>Catalog.PaymentTypes</content>
  <content>Document.RevenueAccruals</content>
- <content>Document.OutgoingPaymentOrder</content>
  <content>InformationRegister.Taxes</content>
- <content>Report.A1010_PartnersBalance</content>
- <content>Report.R1200_VendorsAging</content>
  <content>Document.VendorsAdvancesClosing</content>
  <content>Report.R3010_CashOnHand</content>
  <content>Report.R5020_PartnersBalance</content>
- <content>Catalog.Partners</content>
- <content>Report.R1100_CustomersAging</content>
  <content>Report.R5020_ProfitLosses</content>
+ <content>Report.R3010A_CashOnHand</content>
+ <content>Report.R3011A_CashFlow</content>
+ <content>Report.R3021A_CashInTransit</content>
+ <content>Report.R3027A_CashAdvance</content>
+ <content>Report.R5010A_ReconciliationStatement</content>
+ <content>Report.R5020A_PartnersBalance</content>
+ <content>Report.R5021A_Revenues</content>
+ <content>Report.R5022A_Expenses</content>
+ <content>Report.R502A_ProfitLosses</content>
+ <content>Report.R6070_OtherPeriodsExpenses</content>
+ <content>CommonCommand.OpenReport_R5020A_PartnersBalance</content>
+ <content>CommonCommand.OpenReport_R3010A_CashOnHand</content>
+ <content>CommonCommand.OpenReport_R3011A_CashFlow</content>
+ <content>CommonCommand.OpenReport_R3021A_CashInTransit</content>
+ <content>CommonCommand.OpenReport_R3027A_CashAdvance</content>
+ <content>CommonCommand.OpenReport_R5022A_Expenses</content>
+ <content>CommonCommand.OpenReport_R502A_ProfitLosses</content>
+ <content>CommonCommand.OpenReport_R5021A_Revenues</content>
+ <content>CommonCommand.OpenReport_R5010A_ReconciliationStatement</content>
 </mdclass:FunctionalOption>

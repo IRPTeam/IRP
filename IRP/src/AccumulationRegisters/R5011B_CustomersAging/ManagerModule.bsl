@@ -32,6 +32,7 @@ Function R5011B_CustomersAging_Offset() Export
 		|	OffsetOfAging.Currency,
 		|	OffsetOfAging.Invoice,
 		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Key,
 		|	OffsetOfAging.Amount,
 		|	OffsetOfAging.Recorder AS AgingClosing
 		|INTO R5011B_CustomersAging
@@ -105,6 +106,7 @@ Function R5011B_CustomersAging_DebitNote() Export
 		|	Transactions.Currency AS Currency,
 		|	Transactions.Agreement AS Agreement,
 		|	Transactions.Partner AS Partner,
+		|	Transactions.Key,
 		|	PaymentTerms.DocRef AS Invoice,
 		|	PaymentTerms.PaymentDate AS PaymentDate,
 		|	Transactions.Amount AS Amount,
@@ -133,6 +135,7 @@ Function R5011B_CustomersAging_DebitNote() Export
 		|	OffsetOfAging.Currency,
 		|	OffsetOfAging.Agreement,
 		|	OffsetOfAging.Partner,
+		|	OffsetOfAging.Key,
 		|	OffsetOfAging.Invoice,
 		|	OffsetOfAging.PaymentDate,
 		|	OffsetOfAging.Amount,
@@ -160,6 +163,7 @@ Function R5011B_CustomersAging_CreditNote() Export
 		|	OffsetOfAging.Currency,
 		|	OffsetOfAging.Invoice,
 		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Key,
 		|	OffsetOfAging.Amount,
 		|	OffsetOfAging.Recorder AS AgingClosing
 		|INTO R5011B_CustomersAging

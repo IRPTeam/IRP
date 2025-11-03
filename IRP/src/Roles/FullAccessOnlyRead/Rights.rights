@@ -3281,6 +3281,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseSalesOrders</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T2015S_TransactionsInfo.Dimension.Date</name>
 		<right>
 			<name>Edit</name>
@@ -3462,6 +3481,25 @@
 		<name>CommonAttribute.Weight</name>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseInventory</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -5143,6 +5181,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UsePaymentOrders</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.SpecialOffers</name>
 		<right>
 			<name>Read</name>
@@ -5405,7 +5462,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Treasury.Subsystem.CashTransactions</name>
+		<name>Subsystem.Treasury.Subsystem.Transactions</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -7239,7 +7296,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.UseCashTransaction</name>
+		<name>Constant.UseCashTransactions</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -13594,13 +13651,6 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.RetailWorkers.Command.RetailWorkers</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</name>
 		<right>
 			<name>Read</name>
@@ -14515,7 +14565,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.UseOrders</name>
+		<name>Constant.UsePurchaseOrders</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -16622,13 +16672,6 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Treasury.Subsystem.Retail</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
 		</right>
 	</object>
 	<object>

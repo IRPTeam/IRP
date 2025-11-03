@@ -433,7 +433,7 @@
   <name>PartnerUUID</name>
   <synonym>
    <key>tr</key>
-   <value>Partner UUID</value>
+   <value>Cari hesap UUID</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -456,7 +456,7 @@
   <name>TaxUUID</name>
   <synonym>
    <key>tr</key>
-   <value>Tax UUID</value>
+   <value>Vergi UUID</value>
   </synonym>
   <synonym>
    <key>ru</key>

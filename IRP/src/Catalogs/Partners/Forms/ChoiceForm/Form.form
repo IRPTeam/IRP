@@ -949,7 +949,7 @@ WHERE
      <localValue>
       <content>
        <key>tr</key>
-       <value>Partners by companies</value>
+       <value>Şirketlere göre cari hesaplar</value>
       </content>
       <content>
        <key>ru</key>
@@ -973,7 +973,7 @@ WHERE
      <localValue>
       <content>
        <key>tr</key>
-       <value>Filter partners by companies</value>
+       <value>Cari hesapları şirketlere göre filtrele</value>
       </content>
       <content>
        <key>ru</key>

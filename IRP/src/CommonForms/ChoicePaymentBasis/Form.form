@@ -1367,7 +1367,7 @@ FROM
      <localValue>
       <content>
        <key>tr</key>
-       <value>Opening entry trade agent</value>
+       <value>Açılış kaydı - konsinye</value>
       </content>
       <content>
        <key>ru</key>
@@ -1390,7 +1390,7 @@ FROM
      <localValue>
       <content>
        <key>tr</key>
-       <value>Opening entry consignor</value>
+       <value>Açılış kaydı - konsiyeye veren</value>
       </content>
       <content>
        <key>ru</key>
@@ -1413,7 +1413,7 @@ FROM
      <localValue>
       <content>
        <key>tr</key>
-       <value>Opening entry account payable</value>
+       <value>Açılış kaydı - borç hesabı</value>
       </content>
       <content>
        <key>ru</key>
@@ -1482,7 +1482,7 @@ FROM
      <localValue>
       <content>
        <key>tr</key>
-       <value>Opening entry account receivable</value>
+       <value>Açılış kaydı - alacak hesabı</value>
       </content>
       <content>
        <key>ru</key>

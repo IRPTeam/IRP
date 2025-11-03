@@ -1030,7 +1030,7 @@ Function Strings(Lang) Export
 		|tr='Tanımlar'", Lang));
 	Strings.Insert("FO_Group_Trading", NStr("en='Trading';
 		|ru='Торговля';
-		|tr='Trading'", Lang));
+		|tr='Ticaret'", Lang));
 	Strings.Insert("FO_Group_Inventory", NStr("en='Inventory';
 		|ru='Склад';
 		|tr='Stok'", Lang));

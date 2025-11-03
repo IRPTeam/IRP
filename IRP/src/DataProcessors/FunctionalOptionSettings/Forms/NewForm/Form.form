@@ -78,7 +78,7 @@
   </userVisible>
   <title>
    <key>tr</key>
-   <value>Group for groups</value>
+   <value>Gruplar için grup</value>
   </title>
   <title>
    <key>ru</key>
@@ -314,7 +314,7 @@
   <name>GroupsData</name>
   <title>
    <key>tr</key>
-   <value>Groups data</value>
+   <value>Grup verileri</value>
   </title>
   <title>
    <key>ru</key>
@@ -337,7 +337,7 @@
   <name>AttributeToFO</name>
   <title>
    <key>tr</key>
-   <value>Attribute to FO</value>
+   <value>İşlevsel Seçeneğe gelen öznitelik</value>
   </title>
   <title>
    <key>ru</key>
@@ -360,7 +360,7 @@
   <name>AttributeFromFO</name>
   <title>
    <key>tr</key>
-   <value>Attribute from FO</value>
+   <value>İşlevsel Seçenekten gelen öznitelik</value>
   </title>
   <title>
    <key>ru</key>
@@ -383,7 +383,7 @@
   <name>AttributesTitles</name>
   <title>
    <key>tr</key>
-   <value>Attributes titles</value>
+   <value>Özitelik başlıkları</value>
   </title>
   <title>
    <key>ru</key>
@@ -406,7 +406,7 @@
   <name>AttributesWithoutGroup</name>
   <title>
    <key>tr</key>
-   <value>Attributes without group</value>
+   <value>Grupsuz öznitelikler</value>
   </title>
   <title>
    <key>ru</key>
@@ -429,7 +429,7 @@
   <name>FOWithoutGroup</name>
   <title>
    <key>tr</key>
-   <value>FO without group</value>
+   <value>Grupsuz İşlevsel Seçenek </value>
   </title>
   <title>
    <key>ru</key>
@@ -452,7 +452,7 @@
   <name>FOSubordination</name>
   <title>
    <key>tr</key>
-   <value>FO subordination</value>
+   <value>İşlevsel Seçenek bağımlılığı</value>
   </title>
   <title>
    <key>ru</key>
@@ -616,7 +616,7 @@
   <name>SaveAndClose</name>
   <title>
    <key>tr</key>
-   <value>Save and Close</value>
+   <value>Kaydet ve Kapat</value>
   </title>
   <title>
    <key>ru</key>

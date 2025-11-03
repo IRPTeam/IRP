@@ -34,4 +34,8 @@
   <content>Report.R4050A_InventoryBalance</content>
   <content>Report.R5020_PartnersBalance</content>
   <content>Report.R5020A_PartnersBalance</content>
+  <content>CommonCommand.OpenReport_R2001A_Sales</content>
+  <content>CommonCommand.OpenReport_R5020A_PartnersBalance</content>
+  <content>CommonCommand.OpenReport_M1010A_PriceList</content>
+  <content>CommonCommand.OpenReport_R4050A_InventoryBalance</content>
 </mdclass:FunctionalOption>

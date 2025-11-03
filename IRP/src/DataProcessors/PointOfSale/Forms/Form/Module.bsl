@@ -1102,7 +1102,12 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	
 	ResultPrint = True;
 	For Each DocRef In TransactionResult.Refs Do
-		ResultPrint = ResultPrint AND Await PrintFiscalReceipt(DocRef);
+		Try
+			ResultPrint = ResultPrint AND Await PrintFiscalReceipt(DocRef);
+		Except
+			ResultPrint = False;
+			Break;
+		EndTry;
 	EndDo;
 
 	If Not ResultPrint Then

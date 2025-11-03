@@ -253,19 +253,25 @@ EndProcedure
 
 Procedure CalculateAmount(CurrenciesTable, DocumentAmount) Export
 	For Each Row In CurrenciesTable Do
-		If Row.Multiplicity = 0 Or Row.Rate = 0 Then
-			Row.Amount = 0;
-			Continue;
-		EndIf;
 		CalculateAmountByRow(Row, DocumentAmount);
 	EndDo;
 EndProcedure
 
 Procedure CalculateAmountByRow(CurrenciesRow, DocumentAmount) Export
 	If CurrenciesRow.ShowReverseRate = True Then
-		CurrenciesRow.Amount = (DocumentAmount / CurrenciesRow.ReverseRate) / CurrenciesRow.Multiplicity;
+		If ValueIsFilled(CurrenciesRow.Multiplicity)
+			And ValueIsFilled(CurrenciesRow.ReverseRate) Then
+			CurrenciesRow.Amount = (DocumentAmount / CurrenciesRow.ReverseRate) / CurrenciesRow.Multiplicity;
+		Else
+			CurrenciesRow.Amount = 0 ;
+		EndIf;
 	Else
-		CurrenciesRow.Amount = (DocumentAmount * CurrenciesRow.Rate) / CurrenciesRow.Multiplicity;
+		If ValueIsFilled(CurrenciesRow.Multiplicity)
+			And ValueIsFilled(CurrenciesRow.Rate) Then	
+			CurrenciesRow.Amount = (DocumentAmount * CurrenciesRow.Rate) / CurrenciesRow.Multiplicity;
+		Else
+			CurrenciesRow.Amount = 0;
+		EndIf;				
 	EndIf;
 EndProcedure
 

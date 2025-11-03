@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b4dd0d17-42e5-4bef-bc1d-343a6858d94a">
+  <name>Report_D4010_ActualStocks</name>
+  <synonym>
+    <key>en</key>
+    <value>Report D4010_ActualStocks</value>
+  </synonym>
+</mdclass:Role>

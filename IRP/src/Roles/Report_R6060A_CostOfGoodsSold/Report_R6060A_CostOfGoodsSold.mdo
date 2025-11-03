@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e5856017-6fcf-4c51-bec6-ddeba5af4895">
+  <name>Report_R6060A_CostOfGoodsSold</name>
+  <synonym>
+    <key>en</key>
+    <value>Report R6060A_CostOfGoodsSold</value>
+  </synonym>
+</mdclass:Role>

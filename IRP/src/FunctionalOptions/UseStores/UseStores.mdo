@@ -7,13 +7,11 @@
   </synonym>
   <location>Constant.UseStores</location>
   <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.InventoryTransferOrder.Attribute.StoreSender</content>
   <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.Store</content>
   <content>AccumulationRegister.R4036B_IncomingStocksRequested.Dimension.RequesterStore</content>
   <content>AccumulationRegister.R4033B_GoodsReceiptSchedule.Dimension.Store</content>
   <content>Catalog.Agreements.Attribute.Store</content>
   <content>AccumulationRegister.R4031B_GoodsInTransitIncoming.Dimension.Store</content>
-  <content>Document.InventoryTransfer.Attribute.StoreTransit</content>
   <content>AccumulationRegister.R4017B_InternalSupplyRequestProcurement.Dimension.Store</content>
   <content>AccumulationRegister.R4032B_GoodsInTransitOutgoing.Dimension.Store</content>
   <content>Document.Bundling.Attribute.Store</content>
@@ -21,7 +19,6 @@
   <content>Document.InternalSupplyRequest.Attribute.Store</content>
   <content>Document.ItemStockAdjustment.Attribute.Store</content>
   <content>Document.AdditionalRevenueAllocation.TabularSection.AllocationList.Attribute.Store</content>
-  <content>Document.InventoryTransfer.Attribute.StoreSender</content>
   <content>AccumulationRegister.R4010B_ActualStocks.Dimension.Store</content>
   <content>AccumulationRegister.R4036B_IncomingStocksRequested.Dimension.IncomingStore</content>
   <content>AccumulationRegister.R1031B_ReceiptInvoicing.Dimension.Store</content>
@@ -41,7 +38,6 @@
   <content>Document.OpeningEntry.TabularSection.Inventory.Attribute.Store</content>
   <content>InformationRegister.T6020S_BatchKeysInfo.Dimension.Store</content>
   <content>AccumulationRegister.R4050B_StockInventory.Dimension.Store</content>
-  <content>Document.InventoryTransfer.Attribute.StoreReceiver</content>
   <content>Document.InventoryTransferOrder</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.Store</content>
   <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.Store</content>
@@ -61,7 +57,6 @@
   <content>Document.AdditionalCostAllocation.TabularSection.AllocationList.Attribute.Store</content>
   <content>Document.StockAdjustmentAsSurplus.Attribute.Store</content>
   <content>Document.StockAdjustmentAsWriteOff.Attribute.Store</content>
-  <content>Document.InventoryTransferOrder.Attribute.StoreReceiver</content>
   <content>Catalog.RowIDs.Attribute.StoreReceiver</content>
   <content>Catalog.RowIDs.Attribute.StoreSender</content>
   <content>AccumulationRegister.R4016B_InternalSupplyRequestOrdering.Dimension.Store</content>
@@ -73,11 +68,6 @@
   <content>Document.SalesOrder.TabularSection.ItemList.Attribute.Store</content>
   <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.Store</content>
   <content>InformationRegister.T6030S_BatchRelevance.Dimension.Store</content>
-  <content>Subsystem.Inventory</content>
   <content>Catalog.Stores</content>
-  <content>Report.D4010_ActualStocks</content>
-  <content>Report.R4010A_StockBalance</content>
-  <content>Report.R4050A_InventoryBalance</content>
-  <content>Report.R405A_StockAdjustments</content>
-  <content>Report.R9101S_InventoryResults</content>
+  <content>Subsystem.Inventory.Subsystem.Transfers</content>
 </mdclass:FunctionalOption>

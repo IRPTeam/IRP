@@ -1708,7 +1708,7 @@ Procedure DistributeTransactionToAging(Parameters, PointInTime, Document, Transa
 	|	RegAging.PaymentDate,
 	|	RegAging.AmountBalance AS PaymentAmount
 	|FROM
-	|	AccumulationRegister.B1040B_AgingKey.Balance(, Company = &Company
+	|	AccumulationRegister.B1040B_AgingKey.Balance(&Period, Company = &Company
 	|	AND Branch = &Branch
 	|	AND Agreement = &Agreement
 	|	AND Partner = &Partner
@@ -1716,6 +1716,8 @@ Procedure DistributeTransactionToAging(Parameters, PointInTime, Document, Transa
 	|	AND Currency = &Currency
 	|) AS RegAging";
 	
+	Query.SetParameter("Period"          , 
+		New Boundary(New PointInTime(PointInTime.Date, Parameters.Object.Ref), BoundaryType.Excluding));
 	Query.SetParameter("Company"         , TransactionData.Company);
 	Query.SetParameter("Branch"          , TransactionData.Branch);
 	Query.SetParameter("Currency"        , TransactionData.Currency);

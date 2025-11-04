@@ -814,8 +814,8 @@ Scenario: _052017 create Bank receipt with Cash statement (Transfer from POS wit
 			| '104'    | '07.07.2022 16:33:55' | 'Main Company' | '200,00' | ''       | '100,00'         |
 			| '105'    | '08.07.2022 10:47:16' | 'Main Company' | '150,00' | ''       | '150,00'         |
 		And I go to line in "List" table
-			| 'Amount' | 'Amount Balance' | 'Company'      | 'Date'       | 'Number' |
-			| '200,00' | '100,00'         | 'Main Company' | '07.07.2022' | '104'    |
+			| 'Amount' | 'Amount Balance' | 'Company'      | 'Date'                | 'Number' |
+			| '200,00' | '100,00'         | 'Main Company' | '07.07.2022 16:33:55' | '104'    |
 		And I select current line in "List" table
 	* Filling other attribute
 		And I activate "Commission percent" field in "PaymentList" table

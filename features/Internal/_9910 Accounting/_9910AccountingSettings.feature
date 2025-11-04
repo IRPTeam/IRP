@@ -3900,7 +3900,7 @@ Scenario: _0991228 check Bank payment accounting movements (Other partner, tax w
 	And I close all client application windows
 
 
-Scenario: _0991229 check Withholding tax invoice accounting movements (Other partner, tax with discount)
+Scenario: _0991229 check Withholding tax invoice accounting movements (Other partner, tax with discount, Partner term and document in local currency)
 	And I close all client application windows
 	* Select Withholding tax invoice
 		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
@@ -3926,6 +3926,64 @@ Scenario: _0991229 check Withholding tax invoice accounting movements (Other par
 			| '1' | 'Yes'      | '420.5'      | 'Vendor 5'        | ''                    | ''                    | 'TRY'            | '200'          | ''              | '5201'       | 'Vendor 5'         | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'             | '200'           | ''                | '200,00' | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'       |
 			| '2' | 'Yes'      | '5301'       | 'VAT'             | ''                    | ''                    | 'TRY'            | '33,33'        | ''              | '5201'       | 'Vendor 5'         | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'             | '33,33'         | ''                | '33,33'  | 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'  |
 			| '3' | 'Yes'      | '420.5'      | 'Vendor 5'        | ''                    | ''                    | 'TRY'            | '50'           | ''              | '9200'       | 'Tax authority'    | 'Vendor 5'                                               | 'Withholding tax'     | 'TRY'             | '50'            | ''                | '50,00'  | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' |		
+	And I close all client application windows
+
+
+Scenario: _0991231 check Withholding tax invoice accounting movements (Other partner, tax with discount, Partner term in local currency and document in USD)
+	And I close all client application windows
+	* Select Withholding tax invoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check accounting movements
+		And I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'       | 'Business unit'   | 'Partner term'                                           | 'Credit' | 'Operation'                                                                           |
+			| '5201'  | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '4020.2' | 'WithholdingTaxInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
+			| '420.5' | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '5201'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'          |
+			| '5301'  | 'Vendor 5'      | ''                | 'Partner term with vendor (advance payment by document)' | '5201'   | 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'     |
+			| '420.5' | 'Tax authority' | 'Withholding tax' | 'Vendor 5'                                               | '9200'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'    |	
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit' | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit' | 'Extra dimension2 Cr'                                    | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                                        |
+			| '1' | 'Yes'      | '420.5'      | 'Vendor 5'        | ''                    | ''                    | 'USD'            | '200'          | ''              | '5201'       | 'Vendor 5'         | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'             | '5 976,46'      | ''                | '5 976,46' | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'       |
+			| '2' | 'Yes'      | '5301'       | 'VAT'             | ''                    | ''                    | 'USD'            | '33,33'        | ''              | '5201'       | 'Vendor 5'         | 'Partner term with vendor (advance payment by document)' | ''                    | 'TRY'             | '995,98'        | ''                | '995,98'   | 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'  |
+			| '3' | 'Yes'      | '420.5'      | 'Vendor 5'        | ''                    | ''                    | 'TRY'            | '1 494,12'     | ''              | '9200'       | 'Tax authority'    | 'Vendor 5'                                               | 'Withholding tax'     | 'TRY'             | '1 494,12'      | ''                | '1 494,12' | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' |		
+	And I close all client application windows
+
+
+Scenario: _0991232 check Withholding tax invoice accounting movements (Other partner, tax with discount, Partner term in EURO and local currency TRY)
+	And I close all client application windows
+	* Select Withholding tax invoice
+		Given I open hyperlink "e1cib/list/Document.WithholdingTaxInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check accounting movements
+		And I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'                            | 'Business unit'   | 'Partner term'                       | 'Credit' | 'Operation'                                                                           |
+			| '5201'  | 'Vendor and Customer (by documents)' | ''                | 'Vendor (by documents)'              | '4020.2' | 'WithholdingTaxInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |
+			| '420.5' | 'Vendor and Customer (by documents)' | ''                | 'Vendor (by documents)'              | '5201'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'          |
+			| '5301'  | 'Vendor and Customer (by documents)' | ''                | 'Vendor (by documents)'              | '5201'   | 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'     |
+			| '420.5' | 'Tax authority'                      | 'Withholding tax' | 'Vendor and Customer (by documents)' | '9200'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'    |		
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| '#' | 'Activity' | 'Account Dr' | 'Ext. Dim. Debit'                    | 'Extra dimension2 Dr' | 'Extra dimension3 Dr' | 'Debit currency' | 'Debit amount' | 'DebitQuantity' | 'Account Cr' | 'Ext. Dim. Credit'                   | 'Extra dimension2 Cr'                | 'Extra dimension3 Cr' | 'Credit currency' | 'Credit amount' | 'Credit quantity' | 'Amount'   | 'Operation'                                                                        |
+			| '1' | 'Yes'      | '420.5'      | 'Vendor and Customer (by documents)' | ''                    | ''                    | 'TRY'            | '2 000'        | ''              | '5201'       | 'Vendor and Customer (by documents)' | 'Vendor (by documents)'              | ''                    | 'EUR'             | '61,15'         | ''                | '2 000,00' | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'       |
+			| '2' | 'Yes'      | '5301'       | 'VAT'                                | ''                    | ''                    | 'TRY'            | '500'          | ''              | '5201'       | 'Vendor and Customer (by documents)' | 'Vendor (by documents)'              | ''                    | 'EUR'             | '15,29'         | ''                | '500,00'   | 'WithholdingTaxInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'  |
+			| '3' | 'Yes'      | '420.5'      | 'Vendor and Customer (by documents)' | ''                    | ''                    | 'TRY'            | '500'          | ''              | '9200'       | 'Tax authority'                      | 'Vendor and Customer (by documents)' | 'Withholding tax'     | 'TRY'             | '500'           | ''                | '500,00'   | 'WithholdingTaxInvoice DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' |		
 	And I close all client application windows
 
 

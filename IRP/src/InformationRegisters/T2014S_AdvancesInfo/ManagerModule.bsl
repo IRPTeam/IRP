@@ -299,3 +299,17 @@ Function T2014S_AdvancesInfo_POC() Export
 		|WHERE
 		|	CloseOrderItemList.Ref = &Ref";
 EndFunction
+
+Procedure AdditionalDataFilling(MovementsValueTable) Export
+	ArrayForDelete = New Array();
+	
+	For Each Row In MovementsValueTable Do
+		If Row.CurrencyMovementType <> ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each Item In ArrayForDelete Do
+		MovementsValueTable.Delete(Item);
+	EndDo;
+EndProcedure

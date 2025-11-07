@@ -869,6 +869,48 @@
       <createOnInput>Use</createOnInput>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="b94353b5-22bc-42be-9888-047c1988fa8a">
+      <name>ManualOfferAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Manual offer amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="02295538-2850-445f-9888-e8178ef7494e">
+      <name>ManualOfferPercent</name>
+      <synonym>
+        <key>en</key>
+        <value>Manual offer percent</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePercent</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="02c94ed4-d811-4436-aa35-301ea136265a">
+      <name>ManualOfferType</name>
+      <synonym>
+        <key>en</key>
+        <value>Manual offer type</value>
+      </synonym>
+      <type>
+        <types>EnumRef.ManualOfferTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="0d32dd7b-16e6-4c0b-a360-865e3d47dc78">
     <producedTypes>

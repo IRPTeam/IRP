@@ -13745,6 +13745,90 @@ EndFunction
 
 #EndRegion
 
+#Region ITEM_LIST_MANUAL_OFFER_AMOUNT
+
+// ItemList.ManualOfferAmount.OnChange
+Procedure ItemListManualOfferAmountOnChange(Parameters) Export
+	Binding = BindItemListManualOfferAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.ManualOfferAmount.Set
+Procedure SetItemListManualOfferAmount(Parameters, Results) Export
+	Binding = BindItemListManualOfferAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.ManualOfferAmount.Get
+Function GetItemListManualOfferAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListManualOfferAmount(Parameters).DataPath , _Key);
+EndFunction
+
+// ItemList.ManualOfferAmount.Bind
+Function BindItemListManualOfferAmount(Parameters)
+	DataPath = "ItemList.ManualOfferAmount";
+	Binding = New Structure();
+	Return BindSteps("StepItemListCalculations_IsManualOfferAmountChanged", DataPath, Binding, Parameters, "BindItemListManualOfferAmount");
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_MANUAL_OFFER_PERCENT
+
+// ItemList.ManualOfferPercent.OnChange
+Procedure ItemListManualOfferPercentOnChange(Parameters) Export
+	Binding = BindItemListManualOfferPercent(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.ManualOfferPercent.Set
+Procedure SetItemListManualOfferPercent(Parameters, Results) Export
+	Binding = BindItemListManualOfferPercent(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.ManualOfferPercent.Get
+Function GetItemListManualOfferPercent(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListManualOfferPercent(Parameters).DataPath , _Key);
+EndFunction
+
+// ItemList.ManualOfferPercent.Bind
+Function BindItemListManualOfferPercent(Parameters)
+	DataPath = "ItemList.ManualOfferPercent";
+	Binding = New Structure();
+	Return BindSteps("StepItemListCalculations_IsManualOfferPercentChanged", DataPath, Binding, Parameters, "BindItemListManualOfferPercent");
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_MANUAL_OFFER_TYPE
+
+// ItemList.ManualOfferType.OnChange
+Procedure ItemListManualOfferTypeOnChange(Parameters) Export
+	Binding = BindItemListManualOfferType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.ManualOfferType.Set
+Procedure SetItemListManualOfferType(Parameters, Results) Export
+	Binding = BindItemListManualOfferType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.ManualOfferType.Get
+Function GetItemListManualOfferType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListManualOfferType(Parameters).DataPath , _Key);
+EndFunction
+
+// ItemList.ManualOfferType.Bind
+Function BindItemListManualOfferType(Parameters)
+	DataPath = "ItemList.ManualOfferType";
+	Binding = New Structure();
+	Return BindSteps("StepItemListCalculations_IsManualOfferTypeChanged", DataPath, Binding, Parameters, "BindItemListManualOfferType");
+EndFunction
+
+#EndRegion
+
 #Region ITEM_LIST_TOTAL_AMOUNT
 
 // ItemList.TotalAmount.OnChange
@@ -13944,6 +14028,11 @@ Procedure SetItemListCalculations(Parameters, Results) Export
 	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.OffersAmount", Parameters, Results, ViewNotify, "OffersAmount" , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, ViewNotify, "Price"        , NotifyAnyway);
+	
+	SetterObject(Undefined, "ItemList.ManualOfferAmount"  , Parameters, Results, ViewNotify, "ManualOfferAmount"  , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.ManualOfferPercent" , Parameters, Results, ViewNotify, "ManualOfferPercent" , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.ManualOfferType"    , Parameters, Results, ViewNotify, "ManualOfferType"    , NotifyAnyway);
+	
 	SetterObject(Binding.StepsEnabler, "ItemList.TotalAmount" , Parameters, Results, ViewNotify, "TotalAmount" , NotifyAnyway);
 	SetSpecialOffers(Parameters, Results);
 EndProcedure
@@ -14205,6 +14294,21 @@ Procedure StepItemListCalculations_IsRecalculationWhenBasedOn(Parameters, Chain)
 	StepItemListCalculations(Parameters, Chain, "IsRecalculationWhenBasedOn");
 EndProcedure
 
+// ItemList.Calculations.[IsManualOfferAmountChanged].Step
+Procedure StepItemListCalculations_IsManualOfferAmountChanged(Parameters, Chain) Export
+	StepItemListCalculations(Parameters, Chain, "IsManualOfferAmountChanged");
+EndProcedure
+
+// ItemList.Calculations.[IsManualOfferPercentChanged].Step
+Procedure StepItemListCalculations_IsManualOfferPercentChanged(Parameters, Chain) Export
+	StepItemListCalculations(Parameters, Chain, "IsManualOfferPercentChanged");
+EndProcedure
+
+// ItemList.Calculations.[IsManualOfferTypeChanged].Step
+Procedure StepItemListCalculations_IsManualOfferTypeChanged(Parameters, Chain) Export
+	StepItemListCalculations(Parameters, Chain, "IsManualOfferTypeChanged");
+EndProcedure
+
 #EndRegion
 
 #Region ITEM_LIST_CALCULATIONS_STOCK_DOCUMENTS
@@ -14278,12 +14382,16 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 			Or WhoIsChanged = "IsCopyRow"                 
 			Or WhoIsChanged = "IsTaxAmountUserFormChanged"
 			Or WhoIsChanged = "RecalculationsOnCopy"      
-			Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
+			Or WhoIsChanged = "IsRecalculationWhenBasedOn"
+			Or WhoIsChanged = "IsManualOfferAmountChanged"
+			Or WhoIsChanged = "IsManualOfferPercentChanged"
+			Or WhoIsChanged = "IsManualOfferTypeChanged" Then
 			Options.CalculateNetAmount.Enable       = True;
 			Options.CalculateTotalAmount.Enable     = True;
 			Options.CalculateTaxAmount.Enable       = True;
 			Options.CalculateSpecialOffers.Enable   = True;
 			Options.RecalculateSpecialOffers.Enable = True;
+			Options.CalculateManualOffers.Enable    = True;
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
 		// when TotalAmount is changed taxes need recalculate reverse, will be changed NetAmount and Price
 			
@@ -14338,7 +14446,11 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		
 		Options.OffersOptions.SpecialOffers      = Row.SpecialOffers;
 		Options.OffersOptions.SpecialOffersCache = Row.SpecialOffersCache;
-
+		
+		Options.OffersOptions.ManualOfferAmount  = GetItemListManualOfferAmount(Parameters, Row.Key);
+		Options.OffersOptions.ManualOfferPercent = GetItemListManualOfferPercent(Parameters, Row.Key);
+		Options.OffersOptions.ManualOfferType    = GetItemListManualOfferType(Parameters, Row.Key);
+		
 		Options.RowIDInfo = Row.RowIdInfo;
 		
 		Options.Key = Row.Key;

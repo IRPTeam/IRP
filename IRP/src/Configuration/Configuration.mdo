@@ -1095,6 +1095,7 @@
   <functionalOptions>FunctionalOption.UseVariableItemKey</functionalOptions>
   <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
+  <functionalOptions>FunctionalOption.UseManualOffers</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1267,6 +1268,7 @@
   <constants>Constant.UseVariableItemKey</constants>
   <constants>Constant.UseVariableStore</constants>
   <constants>Constant.UseWorkOrders</constants>
+  <constants>Constant.UseManualOffers</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>

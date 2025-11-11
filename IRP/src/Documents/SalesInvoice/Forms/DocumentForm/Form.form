@@ -8271,6 +8271,7 @@
         <name>SetManualOffers</name>
       </handler>
     </action>
+    <functionalOptions>FunctionalOption.UseManualOffers</functionalOptions>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

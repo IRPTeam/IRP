@@ -14417,6 +14417,7 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable = True;
 			Options.CalculateSpecialOffers.Enable   = True;
+			Options.CalculateManualOffers.Enable    = True;
 			Options.RecalculateSpecialOffers.Enable = True;
 			Options.CalculateQuantityInBaseUnit.Enable = True;			
 		Else

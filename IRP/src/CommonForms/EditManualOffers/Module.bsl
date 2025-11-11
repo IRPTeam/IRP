@@ -45,7 +45,7 @@ Procedure Ok(Command)
 			If TotalAmount = 0 Then
 				Continue;
 			EndIf;
-			PercentOnRow = (Row.Price * Row.Quantity) / (TotalAmount/100);//TotalAmount / 100 * (Row.Price * Row.Quantity);
+			PercentOnRow = (Row.Price * Row.Quantity) / (TotalAmount/100);
 			NewRow.ManualOfferAmount = Round(ThisObject.ManualOfferAmount / 100 * PercentOnRow, 2);
 			TotalManualOfferAmount = TotalManualOfferAmount + NewRow.ManualOfferAmount;
 			If MaxRow = Undefined Then
@@ -57,10 +57,14 @@ Procedure Ok(Command)
 			EndIf;
 		EndIf;
 	EndDo;
-	If Not IsPercent Then
-		If TotalManualOfferAmount <> ThisObject.ManualOfferAmount And MaxRow <> Undefined Then
-			MaxRow.ManualOfferAmount = MaxRow.ManualOfferAmount + (TotalManualOfferAmount - ThisObject.ManualOfferAmount);
+	If Not IsPercent And MaxRow <> Undefined Then
+		If ThisObject.ManualOfferAmount > TotalManualOfferAmount Then
+			MaxRow.ManualOfferAmount = MaxRow.ManualOfferAmount + (ThisObject.ManualOfferAmount - TotalManualOfferAmount);
 		EndIf;
+		
+		If TotalManualOfferAmount > ThisObject.ManualOfferAmount Then
+			MaxRow.ManualOfferAmount = MaxRow.ManualOfferAmount - (TotalManualOfferAmount - ThisObject.ManualOfferAmount);
+		EndIf;		
 	EndIf;
 	Close(New Structure("ItemList", ArrayOfResuts));
 EndProcedure

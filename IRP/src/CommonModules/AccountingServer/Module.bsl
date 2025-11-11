@@ -329,46 +329,263 @@ Function GetMappingOperationsToPartnerBalance() Export
 	AO = Catalogs.AccountingOperations;
 	
 	Map = New Map();
+	KeyNames = "ResourceName, AccountType";
+		
+	// Bank payment
+	Map.Insert(AO.BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerAdvance", "DR"),
+			New Structure(KeyNames, "CustomerTransaction", "DR")));
+
+	Map.Insert(AO.BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerTransaction", "DR"),
+			New Structure(KeyNames, "CustomerAdvance", "CR")));
+
+	Map.Insert(AO.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorAdvance", "DR"),
+			New Structure(KeyNames, "VendorTransaction", "DR")));
+
+	Map.Insert(AO.BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "DR"),
+			New Structure(KeyNames, "VendorAdvance", "CR")));
+
+	// Bank rceipt
+	Map.Insert(AO.BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerAdvance", "DR"),
+			New Structure(KeyNames, "CustomerTransaction", "CR")));
 	
 	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions,
 		CommonFunctionsClientServer.CreateArray(
-			New Structure("ResourceName, AccountType", "CustomerTransaction", "CR"), 
-			New Structure("ResourceName, AccountType", "CustomerAdvance", "CR")));
-		
+			New Structure(KeyNames, "CustomerAdvance", "CR"),
+			New Structure(KeyNames, "CustomerTransaction", "CR")));
+	
+	Map.Insert(AO.BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorAdvance", "DR"),
+			New Structure(KeyNames, "VendorTransaction", "CR")));
+
 	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions,
 		CommonFunctionsClientServer.CreateArray(
-			New Structure("ResourceName, AccountType", "VendorTransaction", "CR"), 
-			New Structure("ResourceName, AccountType", "VendorAdvance", "CR")));
+			New Structure(KeyNames, "VendorAdvance", "CR"),
+			New Structure(KeyNames, "VendorTransaction", "CR")));
 
-	Map.Insert(AO.BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand,
-		CommonFunctionsClientServer.CreateArray(
-			New Structure("ResourceName, AccountType", "CustomerTransaction", "DR"), 
-			New Structure("ResourceName, AccountType", "CustomerAdvance", "DR")));
-			
-	Map.Insert(AO.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand,
-		CommonFunctionsClientServer.CreateArray(
-			New Structure("ResourceName, AccountType", "VendorTransaction", "DR"), 
-			New Structure("ResourceName, AccountType", "VendorAdvance", "DR")));
-
+	// Cash payment
 	Map.Insert(AO.CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand,
 		CommonFunctionsClientServer.CreateArray(
-			New Structure("ResourceName, AccountType", "CustomerTransaction", "DR"), 
-			New Structure("ResourceName, AccountType", "CustomerAdvance", "DR")));
+			New Structure(KeyNames, "CustomerAdvance", "DR"),
+			New Structure(KeyNames, "CustomerTransaction", "DR")));
+
+	Map.Insert(AO.CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerTransaction", "DR"),
+			New Structure(KeyNames, "CustomerAdvance", "CR")));
 
 	Map.Insert(AO.CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand,
 		CommonFunctionsClientServer.CreateArray(
-			New Structure("ResourceName, AccountType", "VendorTransaction", "DR"), 
-			New Structure("ResourceName, AccountType", "VendorAdvance", "DR")));
+			New Structure(KeyNames, "VendorAdvance", "DR"),
+			New Structure(KeyNames, "VendorTransaction", "DR")));
+
+	Map.Insert(AO.CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "DR"),
+			New Structure(KeyNames, "VendorAdvance", "CR")));
 	
+	// Cash receipt
+	Map.Insert(AO.CashReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerAdvance", "DR"),
+			New Structure(KeyNames, "CustomerTransaction", "CR")));
+
 	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions,
 		CommonFunctionsClientServer.CreateArray(
-			New Structure("ResourceName, AccountType", "CustomerTransaction", "CR"), 
-			New Structure("ResourceName, AccountType", "CustomerAdvance", "CR")));
-	
+			New Structure(KeyNames, "CustomerAdvance", "CR"),
+			New Structure(KeyNames, "CustomerTransaction", "CR")));
+
+	Map.Insert(AO.CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorAdvance", "DR"),
+			New Structure(KeyNames, "VendorTransaction", "CR")));
+
 	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions,
 		CommonFunctionsClientServer.CreateArray(
-			New Structure("ResourceName, AccountType", "VendorTransaction", "CR"), 
-			New Structure("ResourceName, AccountType", "VendorAdvance", "CR")));
+			New Structure(KeyNames, "VendorAdvance", "CR"),
+			New Structure(KeyNames, "VendorTransaction", "CR")));
+
+	// Credit note
+	Map.Insert(AO.CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerAdvance", "DR"),
+			New Structure(KeyNames, "CustomerTransaction", "CR")));
+	
+	Map.Insert(AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerTransaction", "CR")));
+	
+	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerTransaction", "CR")));
+	
+	Map.Insert(AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "DR"),
+			New Structure(KeyNames, "VendorAdvance", "CR")));
+	
+	Map.Insert(AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "CR")));
+	
+	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "CR")));
+	
+	// Debit note	
+	Map.Insert(AO.DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerAdvance", "DR"),
+			New Structure(KeyNames, "CustomerTransaction", "CR")));
+
+	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerTransaction", "DR")));
+
+	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerTransaction", "DR")));
+
+	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "DR"),
+			New Structure(KeyNames, "VendorAdvance", "CR")));
+
+	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "DR")));
+
+	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "DR")));
+	
+	Map.Insert(AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerAdvance", "DR"),
+			New Structure(KeyNames, "CustomerTransaction", "CR")));
+
+	Map.Insert(AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "DR"),
+			New Structure(KeyNames, "VendorAdvance", "CR")));
+	
+	// Foreign currency revaluation	
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerAdvance", "DR")));
+	
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerAdvance", "CR")));
+
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerTransaction", "DR")));
+
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerTransaction", "CR")));
+
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorAdvance", "DR")));
+
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorAdvance", "CR")));
+
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "DR")));
+
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "CR")));
+
+	// Sales invoice
+	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerAdvance", "DR"),
+			New Structure(KeyNames, "CustomerTransaction", "CR")));
+
+	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerTransaction", "DR")));
+
+	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerTransaction", "DR")));
+
+	// Sales return
+	Map.Insert(AO.SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerTransaction", "DR"),
+			New Structure(KeyNames, "CustomerAdvance", "CR")));
+
+	Map.Insert(AO.SalesReturn_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerTransaction", "CR")));
+
+	Map.Insert(AO.SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "CustomerTransaction", "CR")));
+	
+	// Purchase invoice
+	Map.Insert(AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "DR"),
+			New Structure(KeyNames, "VendorAdvance", "CR")));
+
+	Map.Insert(AO.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "CR")));
+
+	Map.Insert(AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "CR")));
+
+	// Purchase return
+	Map.Insert(AO.PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorAdvance", "DR"),
+			New Structure(KeyNames, "VendorTransaction", "CR")));
+
+	Map.Insert(AO.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "DR")));
+
+	Map.Insert(AO.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "DR")));
+
+	// Withholding tax invoice
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "DR"),
+			New Structure(KeyNames, "VendorAdvance", "CR")));
+
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "CR")));
+
+	Map.Insert(AO.WithholdingTaxInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "CR")));
+
+	// Employee cash advance
+	Map.Insert(AO.EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure(KeyNames, "VendorTransaction", "DR")));
 	
 	Return Map;
 EndFunction
@@ -2512,7 +2729,7 @@ Function GetAccountingData(Parameters)
 	If QuerySelection.Next() Then
 		Result.CurrencyDr = QuerySelection.DrCurrency;
 		If ValueIsFilled(QuerySelection.DrCurrency) 
-			And Parameters.CurrencyMovementType.Currency <> QuerySelection.DrCurrency
+			//And Parameters.CurrencyMovementType.Currency <> QuerySelection.DrCurrency
 			And QuerySelection.DrCurrencyAmountIsEmpty Then
 				Result.CurrencyAmountDr = 
 					GetCurrencyAmount(Parameters.Recorder, Parameters.Operation, QuerySelection.DrCurrency, RowKey);
@@ -2522,7 +2739,7 @@ Function GetAccountingData(Parameters)
 		
 		Result.CurrencyCr = QuerySelection.CrCurrency;
 		If ValueIsFilled(QuerySelection.CrCurrency) 
-			And Parameters.CurrencyMovementType.Currency <> QuerySelection.CrCurrency
+			//And Parameters.CurrencyMovementType.Currency <> QuerySelection.CrCurrency
 			And QuerySelection.CrCurrencyAmountIsEmpty Then
 				Result.CurrencyAmountCr = 
 					GetCurrencyAmount(Parameters.Recorder, Parameters.Operation, QuerySelection.CrCurrency, RowKey);

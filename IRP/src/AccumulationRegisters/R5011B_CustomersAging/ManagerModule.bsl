@@ -39,7 +39,8 @@ Function R5011B_CustomersAging_Offset() Export
 		|FROM
 		|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
 		|WHERE
-		|	OffsetOfAging.Document = &Ref";
+		|	OffsetOfAging.Document = &Ref
+		|	and OffsetOfAging.Recorder refs Document.CustomersAdvancesClosing";
 EndFunction
 
 Function R5011B_CustomersAging_SI() Export
@@ -93,7 +94,8 @@ Function R5011B_CustomersAging_SI() Export
 		|FROM
 		|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
 		|WHERE
-		|	OffsetOfAging.Document = &Ref";
+		|	OffsetOfAging.Document = &Ref
+		|	and OffsetOfAging.Recorder refs Document.CustomersAdvancesClosing";
 EndFunction
 
 Function R5011B_CustomersAging_DebitNote() Export

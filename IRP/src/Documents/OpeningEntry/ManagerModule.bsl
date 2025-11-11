@@ -274,6 +274,10 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
 	
+	If Parameters.Property("ArrayOfPostingInfo") Then
+		Parameters.Delete("ArrayOfPostingInfo");
+	EndIf;
+	
 	BatchKeysInfo_DataTable = Parameters.PostingDataTables[T6020S_BatchKeysInfo].PrepareTable;
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();

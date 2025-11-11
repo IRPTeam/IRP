@@ -730,21 +730,27 @@ Procedure DistributeTransactionToAdvance(Parameters,
 EndProcedure
 
 Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances, Records_OffsetAging)
-	Recorders = New ValueTable();
-	Recorders.Columns.Add("Document");
+	RecordersTotal = New ValueTable();
+	RecordersTotal.Columns.Add("Document");
+	RecordersTotal.Columns.Add("Company");
+	RecordersTotal.Columns.Add("Agreement");
+	RecordersTotal.Columns.Add("Currency");
+	RecordersTotal.Columns.Add("Key");
 	
 	Recorders_Advances = Records_OffsetOfAdvances.Copy();
-	Recorders_Advances.GroupBy("Document");
+	Recorders_Advances.GroupBy("Document, Company, Agreement, Currency, Key");
 	For Each Row In Recorders_Advances Do
-		FillPropertyValues(Recorders.Add(), Row);
+		FillPropertyValues(RecordersTotal.Add(), Row);
 	EndDo;
 	
 	Recorders_Aging = Records_OffsetAging.Copy();
-	Recorders_Aging.GroupBy("Document");
+	Recorders_Aging.GroupBy("Document, Company, Agreement, Currency, Key");
 	For Each Row In Recorders_Aging Do
-		FillPropertyValues(Recorders.Add(), Row);
+		FillPropertyValues(RecordersTotal.Add(), Row);
 	EndDo;
 	
+	RecordersTotal.GroupBy("Document, Company, Agreement, Currency, Key");
+	Recorders = RecordersTotal.Copy();
 	Recorders.GroupBy("Document");
 	
 	ArrayOfDocuments_UseKeyForCurrency = New Array();
@@ -1003,13 +1009,6 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances, Records_Offset
 	
 		// Currency calculation
 		
-		CurrencyTable = Undefined;
-		If DocMetadata = Metadata.Documents.PurchaseOrderClosing Then
-			CurrencyTable = Row.Document.PurchaseOrder.Currencies.Unload();
-		ElsIf DocMetadata = Metadata.Documents.SalesOrderClosing Then
-			CurrencyTable = Row.Document.SalesOrder.Currencies.Unload();
-		EndIf;
-		
 		PostingDataTables = New Map();
 		
 		// Advances
@@ -1037,12 +1036,39 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances, Records_Offset
 			ArrayOfPostingInfo.Add(DataTable);
 		EndDo;
 		
+		CurrencyTable = Undefined;
+		If DocMetadata = Metadata.Documents.PurchaseOrderClosing Then
+			CurrencyTable = Row.Document.PurchaseOrder.Currencies.Unload();
+		ElsIf DocMetadata = Metadata.Documents.SalesOrderClosing Then
+			CurrencyTable = Row.Document.SalesOrder.Currencies.Unload();
+		Else
+			CurrencyTable = Row.Document.Currencies.Unload();
+		EndIf;
+		CurrencyTable_Agreement = CurrencyTable.CopyColumns();
+		
+		RecordersTotalRows = RecordersTotal.FindRows(New Structure("Document", Row.Document));
+		For Each RecorderTotalRow In RecordersTotalRows Do
+			_CurrencyParameters = New Structure();
+			_CurrencyParameters.Insert("Ref"       , Row.Document);
+			_CurrencyParameters.Insert("RowKey"    , RecorderTotalRow.Key);
+			_CurrencyParameters.Insert("Date"      , Row.Document.Date);
+			_CurrencyParameters.Insert("Currency"  , RecorderTotalRow.Currency);
+			_CurrencyParameters.Insert("Agreement" , RecorderTotalRow.Agreement);
+			_CurrencyParameters.Insert("Company"   , RecorderTotalRow.Company);
+			_CurrencyParameters.Insert("DocumentAmount" , 0);
+			_CurrencyParameters.Insert("Currencies"     , CurrencyTable_Agreement);
+		
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(CurrencyTable_Agreement, RecorderTotalRow.Key);
+			CurrenciesServer.UpdateCurrencyTable(_CurrencyParameters, CurrencyTable_Agreement);
+		EndDo;	
+		
 		CurrenciesParameters = New Structure();
 		CurrenciesParameters.Insert("Object", Row.Document);
 		CurrenciesParameters.Insert("Metadata", Row.Document.Metadata());
 		CurrenciesParameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
 		CurrenciesParameters.Insert("IsOffsetOfAdvances", CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False));
-		CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, CurrencyTable);
+		CurrenciesParameters.Insert("PostingDataTables", PostingDataTables);
+		CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, CurrencyTable_Agreement);
 
 		// Advances
 		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters[Parameters.RegisterName_Advances]);
@@ -1102,6 +1128,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances, Records_Offset
 		EndDo;
 		RecordSet_Aging.SetActive(True);
 		RecordSet_Aging.Write();
+		
 	EndDo; // Recorders
 EndProcedure
 
@@ -1139,7 +1166,7 @@ Function GetAccountingOperation(DocMetadata, Doc, IsCustomerAdvanceClosing, IsVe
 	ElsIf DocMetadata = Metadata.Documents.CashReceipt Then
 	
 		If Doc.TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomer Then
-			Return AO.CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions;
+			Return AO.CashReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions;
 		ElsIf Doc.TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor Then
 			Return AO.CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions;
 		EndIf;
@@ -1681,7 +1708,7 @@ Procedure DistributeTransactionToAging(Parameters, PointInTime, Document, Transa
 	|	RegAging.PaymentDate,
 	|	RegAging.AmountBalance AS PaymentAmount
 	|FROM
-	|	AccumulationRegister.B1040B_AgingKey.Balance(&TransactionBoundary, Company = &Company
+	|	AccumulationRegister.B1040B_AgingKey.Balance(&Period, Company = &Company
 	|	AND Branch = &Branch
 	|	AND Agreement = &Agreement
 	|	AND Partner = &Partner
@@ -1689,9 +1716,8 @@ Procedure DistributeTransactionToAging(Parameters, PointInTime, Document, Transa
 	|	AND Currency = &Currency
 	|) AS RegAging";
 	
-	Boundary = New Boundary(New PointInTime(PointInTime.Date, Parameters.Object.Ref), BoundaryType.Including);
-	Query.SetParameter("TransactionBoundary", Boundary);
-
+	Query.SetParameter("Period"          , 
+		New Boundary(New PointInTime(PointInTime.Date, Parameters.Object.Ref), BoundaryType.Excluding));
 	Query.SetParameter("Company"         , TransactionData.Company);
 	Query.SetParameter("Branch"          , TransactionData.Branch);
 	Query.SetParameter("Currency"        , TransactionData.Currency);
@@ -1752,6 +1778,8 @@ Procedure Write_Aging(Parameters, Records_OffsetAging)
 		Else
 			NewRow_Aging.RecordType = AccumulationRecordType.Expense;
 		EndIf;
+		NewRow_Aging.CurrencyMovementType = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency;
+		NewRow_Aging.TransactionCurrency = NewRow_Aging.Currency;
 	EndDo;
 
 	RecordSet_Aging.SetActive(True);

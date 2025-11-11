@@ -434,4 +434,52 @@
   <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
+ <dimensions uuid="e398073a-6904-4f7a-8754-ad94923bf2d7">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>tr</key>
+   <value>Çoklu döviz hareket tipi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид мультивалютной аналитики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency movement type</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="b20c4fb9-8009-417e-907b-2254cf6afa5b">
+  <name>TransactionCurrency</name>
+  <synonym>
+   <key>tr</key>
+   <value>İşlem para birimi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта транзакции</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Transaction currency</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

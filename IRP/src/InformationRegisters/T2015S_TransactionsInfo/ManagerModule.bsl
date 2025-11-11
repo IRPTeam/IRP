@@ -587,3 +587,17 @@ Function T2015S_TransactionsInfo_ECA() Export
 		|WHERE
 		|	PaymentList.IsPurchase";
 EndFunction
+
+Procedure AdditionalDataFilling(MovementsValueTable) Export
+	ArrayForDelete = New Array();
+	
+	For Each Row In MovementsValueTable Do
+		If Row.CurrencyMovementType <> ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each Item In ArrayForDelete Do
+		MovementsValueTable.Delete(Item);
+	EndDo;
+EndProcedure

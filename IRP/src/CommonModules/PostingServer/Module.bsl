@@ -230,10 +230,15 @@ Function RegisterRecords(Parameters)
 				Continue; //Never rewrite
 		EndIf;
 		
-		ArrayOfRegisters = RegistersWithAdditionalDataFilling();
-		If ArrayOfRegisters.Find(Row.Value.Metadata) <> Undefined Then
+		RegistersWithAdditionalDataFilling = GetRegistersWithAdditionalDataFilling();
+		_RegisterType = RegistersWithAdditionalDataFilling.Get(Row.Value.Metadata); 
+		If _RegisterType <> Undefined Then
 			RegisterName = Row.Value.Metadata.Name;
-			AccumulationRegisters[RegisterName].AdditionalDataFilling(TableForLoad);
+			If _RegisterType = Metadata.AccumulationRegisters Then
+				AccumulationRegisters[RegisterName].AdditionalDataFilling(TableForLoad);
+			ElsIf _RegisterType = Metadata.InformationRegisters Then
+				InformationRegisters[RegisterName].AdditionalDataFilling(TableForLoad);
+			EndIf;
 		EndIf;
 		
 		WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
@@ -1451,10 +1456,18 @@ Function Exists_R6080T_OtherPeriodsRevenues() Export
 		|	R6080T_OtherPeriodsRevenues.Recorder = &Ref";
 EndFunction
 
-Function RegistersWithAdditionalDataFilling()
-	ArrayOfRegisters = New Array();
-	ArrayOfRegisters.Add(Metadata.AccumulationRegisters.R5020B_PartnersBalance);
-	Return ArrayOfRegisters;
+Function GetRegistersWithAdditionalDataFilling()
+	AccReg = Metadata.AccumulationRegisters;
+	InfoReg = Metadata.InformationRegisters;
+	
+	Map = New Map();
+	Map.Insert(AccReg.R5020B_PartnersBalance, AccReg);
+	Map.Insert(AccReg.B1040B_AgingKey       , AccReg);
+	
+	Map.Insert(InfoReg.T2015S_TransactionsInfo, InfoReg);
+	Map.Insert(InfoReg.T2014S_AdvancesInfo    , InfoReg);
+	
+	Return Map;
 EndFunction
 
 #Region BatchInfo

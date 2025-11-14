@@ -267,7 +267,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Company</value>
+   <value>Организация</value>
   </title>
   <title>
    <key>en</key>
@@ -317,7 +317,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ledger type</value>
+   <value>Тип учета</value>
   </title>
   <title>
    <key>en</key>
@@ -342,7 +342,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Generate</value>
+   <value>Сформировать</value>
   </title>
   <title>
    <key>en</key>

@@ -1126,7 +1126,7 @@ WHERE
       </content>
       <content>
        <key>ru</key>
-       <value>ВключитьСегментыПартнера</value>
+       <value>Включить сегменты партнеров</value>
       </content>
       <content>
        <key>en</key>
@@ -1149,7 +1149,7 @@ WHERE
       </content>
       <content>
        <key>ru</key>
-       <value>ВключитьФильтрПоДатеОкончанияИспользования</value>
+       <value>Включить фильтр по дате окончания использования</value>
       </content>
       <content>
        <key>en</key>

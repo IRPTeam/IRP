@@ -1006,6 +1006,20 @@
         <value>165</value>
       </code>
     </items>
+    <items id="ed60e9d4-abe7-46a7-971e-4e7b18657846">
+      <name>Document_IncomingExchRateAdjustmentInvoice</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>166</value>
+      </code>
+    </items>
+    <items id="429e2da5-8fe9-4859-8f7f-ca8649491fc2">
+      <name>Document_OutgoingExchRateAdjustmentInvoice</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>167</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a1017263-41a7-4716-b67b-a344f68bf33a">
+  <producedTypes>
+    <objectType typeId="7b95eab9-b654-480b-a0a2-9c99007c5866" valueTypeId="afcc07f1-e48c-4b9e-900b-2725f993b060"/>
+    <refType typeId="74aa90b9-51f7-4dc1-ba82-1723236e7ef6" valueTypeId="a34d176a-68f4-45b5-bef4-8d64ff30a33e"/>
+    <selectionType typeId="358cd13e-bf35-48c6-83b3-6e5c0e4246fb" valueTypeId="dc2f7e8f-a2e1-40a6-bca0-8ce66a81694d"/>
+    <listType typeId="5e801119-4e10-474c-877f-c7257f1641da" valueTypeId="c279ce14-7202-4acf-83b0-a607789b1389"/>
+    <managerType typeId="c41d0f0c-84b3-4167-ad90-29df9e3c9009" valueTypeId="9a95afcd-a05c-4cdf-bd60-99136017e8a2"/>
+  </producedTypes>
+  <name>OutgoingExchRateAdjustmentInvoice</name>
+  <synonym>
+    <key>en</key>
+    <value>Outgoing exch. rate adjustment invoice</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.OutgoingExchRateAdjustmentInvoice.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_OutgoingExchRateAdjustmentInvoice</value>
+    </typesFilterValue>
+    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_OutgoingExchRateAdjustmentInvoice</value>
+    </typesFilterValue>
+    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+    <characteristicValues>Document.OutgoingExchRateAdjustmentInvoice.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.OutgoingExchRateAdjustmentInvoice.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.OutgoingExchRateAdjustmentInvoice.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.OutgoingExchRateAdjustmentInvoice.TabularSection.AddAttributes.Attribute.Value</valueField>
+    <multipleValuesOrderField>Document.OutgoingExchRateAdjustmentInvoice.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+  </characteristics>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Outgoing exch. rate adjustment invoice</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Outgoing exch. rate adjustment invoices</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.OutgoingExchRateAdjustmentInvoice.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.OutgoingExchRateAdjustmentInvoice.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.OutgoingExchRateAdjustmentInvoice.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
+  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
+  <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="2064b548-0752-4619-86fe-287f32347248">
+    <name>Agreement</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner term</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Agreements</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="ee321b99-7960-4ccd-b5ec-c1c7694196bc">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e9cef849-1bc5-4924-aecc-10cace41d438">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d5f84c0f-b9f5-4c4d-b3b0-ed84f57ff4e5">
+    <name>DocDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Doc date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="75c48e45-ddf1-48bc-8c10-0fc62b66d32f">
+    <name>DocNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Doc number</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="50a43425-54f9-48a1-879c-89b30fbc4b36">
+    <name>LegalName</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="ec0a9936-5a1e-4c87-811c-b79da91fd872">
+    <name>Partner</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="05fdb6c5-0d1d-48c3-a04e-69b13923f823">
+    <name>PriceIncludeTax</name>
+    <synonym>
+      <key>en</key>
+      <value>Price includes tax</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="dd918b9b-6573-4fba-9686-309375bb7ddd">
+    <name>LegalNameContract</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name contract</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LegalNameContracts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.LegalName</name>
+      <field>Document.OutgoingExchRateAdjustmentInvoice.Attribute.LegalName</field>
+    </choiceParameterLinks>
+    <choiceParameterLinks>
+      <name>Filter.Company</name>
+      <field>Document.OutgoingExchRateAdjustmentInvoice.Attribute.Company</field>
+    </choiceParameterLinks>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="46e58b19-2e49-484d-844c-1d0d2c6ba743">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="6cbe2a6a-6ab5-4b49-b31a-7666e78b54e7">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="7502c7d5-68ed-4320-a982-fc500449ca6b">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="56b126ee-e592-48a4-ae5c-af70792f918b">
+    <producedTypes>
+      <objectType typeId="0275880c-302f-4f90-80dc-4c13e51319e4" valueTypeId="87832db5-ce89-4de9-8fdc-92c058f7e77b"/>
+      <rowType typeId="10cd1e39-f825-4c74-9f57-ca47d99c713f" valueTypeId="17b881c0-2948-4f44-8c19-0822a36dfc07"/>
+    </producedTypes>
+    <name>ItemList</name>
+    <synonym>
+      <key>en</key>
+      <value>Item list</value>
+    </synonym>
+    <attributes uuid="479fe85d-4dc8-4ea7-a56b-969dd0ee722a">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="4480c8a6-8ac9-4f48-80b7-fb41f03240e0">
+      <name>Item</name>
+      <synonym>
+        <key>en</key>
+        <value>Item</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Items</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3f1580be-31b6-4d27-922f-243ebf3ae1e4">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <changeMode>DontChange</changeMode>
+        <field>Document.OutgoingExchRateAdjustmentInvoice.TabularSection.ItemList.Attribute.Item</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="4e4890bd-2c70-4769-83a8-642160904436">
+      <name>Unit</name>
+      <synonym>
+        <key>en</key>
+        <value>Unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <changeMode>DontChange</changeMode>
+        <field>Document.OutgoingExchRateAdjustmentInvoice.TabularSection.ItemList.Attribute.Item</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="336247ba-fff9-4675-b39c-6956baa6dc8b">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="fe8611bb-abd4-4566-9d7c-a4f8a632e595">
+      <name>Price</name>
+      <synonym>
+        <key>en</key>
+        <value>Price</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePrice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6ccd2a89-bd71-4740-981b-a30b09107d89">
+      <name>PriceType</name>
+      <synonym>
+        <key>en</key>
+        <value>Price type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.PriceTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="140f4df4-1710-445e-8388-a87e362bb939">
+      <name>TaxAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Tax amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f2202358-a89f-4ada-9652-ab9f7a9ca437">
+      <name>TotalAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Total amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a99424c9-b1fb-4792-97b1-705b1e9e0805">
+      <name>NetAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Net amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d2044096-2c11-419b-9038-6aeb80ee8cc3">
+      <name>ProfitLossCenter</name>
+      <synonym>
+        <key>en</key>
+        <value>Profit loss center</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2e94a4cb-f5b2-4bb5-b430-e956184216d3">
+      <name>RevenueType</name>
+      <synonym>
+        <key>en</key>
+        <value>Revenue type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0a0fb056-7170-4da6-9185-338394b03d3a">
+      <name>AdditionalAnalytic</name>
+      <synonym>
+        <key>en</key>
+        <value>Additional analytic</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="54ba03cb-e6fd-4c8a-bf40-d41cd2914428">
+      <name>DontCalculateRow</name>
+      <synonym>
+        <key>en</key>
+        <value>Dont calculate row</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="48e9ee0d-3f73-461d-b907-5e5d8f6a8357">
+      <name>QuantityInBaseUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Stock quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="7cdc2402-ad72-4cd3-bcf5-18c2a8a12d3c">
+      <name>IsService</name>
+      <synonym>
+        <key>en</key>
+        <value>Is service</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="064b80f1-ddf8-470d-b85d-a3b8f1992549">
+      <name>QuantityIsFixed</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity is fixed</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9e652713-f969-4cd4-83f5-521c6afbe614">
+      <name>VatRate</name>
+      <synonym>
+        <key>en</key>
+        <value>VAT</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.TaxRates</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="30f2ff7e-ec8d-490f-8a08-f700272a8194">
+      <name>Project</name>
+      <synonym>
+        <key>en</key>
+        <value>Project</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Projects</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="342aaedf-545e-4235-95d2-fa1b9cdddc99">
+      <name>Invoice</name>
+      <synonym>
+        <key>en</key>
+        <value>Invoice</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesInvoice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.OutgoingExchRateAdjustmentInvoice.Attribute.Company</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Branch</name>
+        <field>CommonAttribute.Branch</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Partner</name>
+        <field>Document.OutgoingExchRateAdjustmentInvoice.Attribute.Partner</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.LegalName</name>
+        <field>Document.OutgoingExchRateAdjustmentInvoice.Attribute.LegalName</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Agreement</name>
+        <field>Document.OutgoingExchRateAdjustmentInvoice.Attribute.Agreement</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="51116e6c-9c0d-4406-b2a2-567987fc77a7">
+    <producedTypes>
+      <objectType typeId="d231d034-9b65-447c-90f7-bee73b6e1741" valueTypeId="8429d343-dea2-47e5-81a7-b620b4b0bca7"/>
+      <rowType typeId="4e8057b8-3fcf-4f8b-af19-57a617ed9ccb" valueTypeId="7e387b71-8769-48b2-aab4-c4cc5d48df9d"/>
+    </producedTypes>
+    <name>Currencies</name>
+    <synonym>
+      <key>en</key>
+      <value>Currencies</value>
+    </synonym>
+    <attributes uuid="c7cc9f83-ea45-4a20-b1d7-80df87ebc421">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4f2e8eb8-ef9a-45c9-af08-d57d8f1bc595">
+      <name>CurrencyFrom</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency from</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Currencies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0f7d7861-3888-481f-a79e-cd1b85687ce7">
+      <name>Rate</name>
+      <synonym>
+        <key>en</key>
+        <value>Rate</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeCurrencyRate</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="de056b3b-43dc-4dc5-bf85-d6ce6c7aca93">
+      <name>ReverseRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Reverse rate</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeCurrencyRate</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="33c1bede-e2f0-44e2-80d6-db327b3a6f61">
+      <name>ShowReverseRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Show reverse rate</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="bcabb5a4-ac8f-4b0b-a0b8-906b4066dbbe">
+      <name>Multiplicity</name>
+      <synonym>
+        <key>en</key>
+        <value>Multiplicity</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c64ffefe-f34a-4e88-a547-e28fb89d562e">
+      <name>MovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Movement type</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f9a4dd24-098f-479d-839d-ec86aa79d04f">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="be00ee98-8142-48ba-8ed6-a692d29186f5">
+      <name>IsFixed</name>
+      <synonym>
+        <key>en</key>
+        <value>Is fixed</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="ca079bdc-f6c6-494f-a8d0-893a7ef842cd">
+    <producedTypes>
+      <objectType typeId="3adc97e0-70ba-48d1-a28f-b534d65d4cce" valueTypeId="048c172e-77a6-46a1-8ed7-7c212242cb1b"/>
+      <rowType typeId="4e93618f-4439-41d1-9084-ebff8ab23d12" valueTypeId="7619295c-e6f9-4aaf-ae4f-d7fea6e7d6fe"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="afc81da7-24d5-408c-b102-e58080639a11">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="89aa67f5-2fde-45e0-b60a-8f48566e910a">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.OutgoingExchRateAdjustmentInvoice.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

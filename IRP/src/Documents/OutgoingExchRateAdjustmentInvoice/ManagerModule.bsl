@@ -389,6 +389,9 @@ Function GetAnalytics_CustomerTransacton_Revenue(Parameters)
 	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
+	AdditionalAnalytics.Insert("Agreement", Parameters.ObjectData.Agreement);
+	AdditionalAnalytics.Insert("LegalName", Parameters.ObjectData.LegalName);
+	AdditionalAnalytics.Insert("LegalNameContract", Parameters.ObjectData.LegalNameContract);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
@@ -413,6 +416,9 @@ Function GetAnalytics_CustomerTransactions_TaxIncomng(Parameters)
 	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
+	AdditionalAnalytics.Insert("Agreement", Parameters.ObjectData.Agreement);
+	AdditionalAnalytics.Insert("LegalName", Parameters.ObjectData.LegalName);
+	AdditionalAnalytics.Insert("LegalNameContract", Parameters.ObjectData.LegalNameContract);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit

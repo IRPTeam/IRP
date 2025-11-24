@@ -462,6 +462,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.IncomingExchRateAdjustmentInvoice</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.AccountingOperations</metadata>
     <use>Use</use>
   </content>
@@ -471,6 +475,10 @@
   </content>
   <content>
     <metadata>Catalog.LockDataModificationReasons</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.OutgoingExchRateAdjustmentInvoice</metadata>
     <use>Use</use>
   </content>
   <content>

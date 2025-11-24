@@ -266,6 +266,34 @@ Procedure _PreparePostingDataTables(Parameters, CurrencyTable, IsOffsetOfAdvance
 	If Parameters.Property("PostingDataTables") Then
 		SetAccountingCurrenciesAndAmounts(Parameters);
 	EndIf;
+	
+	If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.IncomingExchRateAdjustmentInvoice")
+		Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.OutgoingExchRateAdjustmentInvoice") Then
+		For Each Item In Parameters.ArrayOfPostingInfo Do
+			If Item.Key = Metadata.AccumulationRegisters.R5020B_PartnersBalance Then
+				DeleteTransactonCurrency(Item.Value.PrepareTable);
+			EndIf;
+			If Item.Key = Metadata.AccumulationRegisters.R2021B_CustomersTransactions Then
+				DeleteTransactonCurrency(Item.Value.PrepareTable);
+			EndIf;
+			If Item.Key = Metadata.AccumulationRegisters.R1021B_VendorsTransactions Then
+				DeleteTransactonCurrency(Item.Value.PrepareTable);
+			EndIf;
+		EndDo;
+	EndIf;
+EndProcedure
+
+Procedure DeleteTransactonCurrency(Table)
+	ArrayForDelete = New Array();
+	For Each Row In Table Do
+		If Row.CurrencyMovementType = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each ItemForDelete In ArrayForDelete Do
+		Table.Delete(ItemForDelete);
+	EndDo;
 EndProcedure
 
 Function IsUseAgreementMovementType(RegMetadata)

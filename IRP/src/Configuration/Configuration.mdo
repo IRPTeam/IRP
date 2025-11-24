@@ -585,6 +585,8 @@
   <roles>Role.Report_R9510A_Salary</roles>
   <roles>Role.Report_S1001L_VendorsPrices</roles>
   <roles>Role.Report_T0001_FilesAnalyser</roles>
+  <roles>Role.Document_IncomingExchRateAdjustmentInvoice</roles>
+  <roles>Role.Document_OutgoingExchRateAdjustmentInvoice</roles>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -950,6 +952,10 @@
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.DashboardClient</commonModules>
   <commonModules>CommonModule.DashboardServer</commonModules>
+  <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceClient</commonModules>
+  <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceServer</commonModules>
+  <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceClient</commonModules>
+  <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1521,6 +1527,8 @@
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
   <documents>Document.FixedAssetRevaluation</documents>
+  <documents>Document.IncomingExchRateAdjustmentInvoice</documents>
+  <documents>Document.OutgoingExchRateAdjustmentInvoice</documents>
   <sequences>Sequence.SimpleBatch</sequences>
   <enums>Enum.AccountingAnalyticTypes</enums>
   <enums>Enum.AccrualAndDeductionPeriodicity</enums>

@@ -1294,7 +1294,7 @@ Scenario: _030030 create Discount coupon
 		And I click the button named "FormChoose"
 		And I click "Save" button
 		And I click "Set settings" button
-		And I input "10,00" text in "Default percent" field
+		And I input "10,00" text in "Default percent" field		
 		And I click "Save settings" button		
 		And I click "Save and close" button
 		And I click the button named "FormChoose"

@@ -322,6 +322,11 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.FixedAssetRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues, New Structure("ByRow", True));
 	Map.Insert(AO.FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow", True));
 	
+	Map.Insert(AO.IncomingExchRateAdjustmentInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions, New Structure("ByRow", True));
+	Map.Insert(AO.IncomingExchRateAdjustmentInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions, New Structure("ByRow", True));
+	Map.Insert(AO.OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming, New Structure("ByRow", True));
+	Map.Insert(AO.OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues, New Structure("ByRow", True));
+	
 	Return Map;
 EndFunction
 
@@ -2729,20 +2734,24 @@ Function GetAccountingData(Parameters)
 	If QuerySelection.Next() Then
 		Result.CurrencyDr = QuerySelection.DrCurrency;
 		If ValueIsFilled(QuerySelection.DrCurrency) 
-			//And Parameters.CurrencyMovementType.Currency <> QuerySelection.DrCurrency
 			And QuerySelection.DrCurrencyAmountIsEmpty Then
-				Result.CurrencyAmountDr = 
-					GetCurrencyAmount(Parameters.Recorder, Parameters.Operation, QuerySelection.DrCurrency, RowKey);
+				
+				If Not (Parameters.Operation = Catalogs.AccountingOperations.OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming
+				   Or Parameters.Operation = Catalogs.AccountingOperations.OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues) Then	
+					Result.CurrencyAmountDr = GetCurrencyAmount(Parameters.Recorder, Parameters.Operation, QuerySelection.DrCurrency, RowKey);
+				EndIf;
 		Else
 			Result.CurrencyAmountDr = QuerySelection.DrCurrencyAmount;
 		EndIf;
 		
 		Result.CurrencyCr = QuerySelection.CrCurrency;
 		If ValueIsFilled(QuerySelection.CrCurrency) 
-			//And Parameters.CurrencyMovementType.Currency <> QuerySelection.CrCurrency
 			And QuerySelection.CrCurrencyAmountIsEmpty Then
-				Result.CurrencyAmountCr = 
-					GetCurrencyAmount(Parameters.Recorder, Parameters.Operation, QuerySelection.CrCurrency, RowKey);
+				
+				If Not(Parameters.Operation = Catalogs.AccountingOperations.IncomingExchRateAdjustmentInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions
+					Or Parameters.Operation = Catalogs.AccountingOperations.IncomingExchRateAdjustmentInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions) Then
+					Result.CurrencyAmountCr = GetCurrencyAmount(Parameters.Recorder, Parameters.Operation, QuerySelection.CrCurrency, RowKey);
+				EndIf;
 		Else
 			Result.CurrencyAmountCr = QuerySelection.CrCurrencyAmount;
 		EndIf;

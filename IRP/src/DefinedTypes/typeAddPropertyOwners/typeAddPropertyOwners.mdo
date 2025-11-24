@@ -97,6 +97,7 @@
     <types>CatalogRef.FixedAssets</types>
     <types>CatalogRef.LedgerTypeVariants</types>
     <types>DocumentRef.SalesReturn</types>
+    <types>DocumentRef.OutgoingExchRateAdjustmentInvoice</types>
     <types>DocumentRef.CashRevenue</types>
     <types>CatalogRef.ObjectLocations</types>
     <types>CatalogRef.FileStoragesInfo</types>
@@ -114,6 +115,7 @@
     <types>DocumentRef.WithholdingTaxInvoice</types>
     <types>DocumentRef.Bundling</types>
     <types>CatalogRef.AccrualAndDeductionTypes</types>
+    <types>DocumentRef.IncomingExchRateAdjustmentInvoice</types>
     <types>DocumentRef.RetailSalesReceipt</types>
     <types>DocumentRef.RetailReceiptCorrection</types>
     <types>DocumentRef.EmployeeTransfer</types>

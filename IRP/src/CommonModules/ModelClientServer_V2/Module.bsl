@@ -2862,68 +2862,6 @@ EndFunction
 
 #Region CALCULATIONS
 
-// Calculations options.
-// 
-// Returns:
-//  Structure - Calculations options:
-// * Key - String -
-// * StepName - String -
-// * DontExecuteIfExecutedBefore - Boolean - 
-// * DisableNextSteps - Boolean - 
-// * AmountOptions - Structure - :
-// ** DontCalculateRow - Boolean - 
-// ** NetAmount - Number - 
-// ** OffersAmount - Number - 
-// ** OffersBonus - Number - 
-// ** TaxAmount - Number - 
-// ** TotalAmount - Number - 
-// * PriceOptions - Structure - :
-// ** PriceType - CatalogRef.PriceTypes -
-// ** Price - Number -
-// ** Quantity - Number -
-// ** QuantityInBaseUnit - Number -
-// * TaxOptions - Structure - :
-// ** PriceIncludeTax - Boolean -
-// ** VatRate - CatalogRef.TaxRates -
-// ** UseManualAmount - Boolean -
-// * QuantityOptions - Structure - :
-// ** ItemKey - CatalogRef.ItemKeys - 
-// ** Unit - CatalogRef.Units -
-// ** Quantity - Number - 
-// ** QuantityInBaseUnit - Number - 
-// ** QuantityIsFixed - Boolean - 
-// * OffersOptions - Structure - :
-// ** SpecialOffers - Array - 
-// ** SpecialOffersCache - Array - 
-// * CalculateTotalAmount - Structure - :
-// ** Enable - Boolean - 
-// * CalculateTotalAmountByNetAmount - Structure - :
-// ** Enable - Boolean - 
-// * CalculateNetAmount - Structure - :
-// ** Enable - Boolean - 
-// * CalculateNetAmountByTotalAmount - Structure - :
-// ** Enable - Boolean - 
-// * CalculateNetAmountAsTotalAmountMinusTaxAmount - Structure - :
-// ** Enable - Boolean - 
-// * CalculateTaxAmount - Structure - :
-// ** Enable - Boolean - 
-// * CalculateTaxAmountByNetAmount - Structure - :
-// ** Enable - Boolean - 
-// * CalculateTaxAmountByTotalAmount - Structure - :
-// ** Enable - Boolean - 
-// * CalculateTaxAmountReverse - Structure - :
-// ** Enable - Boolean - 
-// * CalculatePriceByTotalAmount - Structure - :
-// ** Enable - Boolean - 
-// * CalculateQuantityInBaseUnit - Structure - :
-// ** Enable - Boolean - 
-// * CalculateQuantity - Structure - :
-// ** Enable - Boolean - 
-// * CalculateSpecialOffers - Structure - :
-// ** Enable - Boolean - 
-// * RecalculateSpecialOffers - Structure - :
-// ** Enable - Boolean - 
-// * RowIDInfo - Array - 
 Function CalculationsOptions() Export
 	Options = GetChainLinkOptions("Ref, ItemKey, Unit");
 	
@@ -2949,6 +2887,9 @@ Function CalculationsOptions() Export
 	OffersOptions = New Structure();
 	OffersOptions.Insert("SpecialOffers"      , New Array());
 	OffersOptions.Insert("SpecialOffersCache" , New Array());
+	OffersOptions.Insert("ManualOfferAmount", 0);
+	OffersOptions.Insert("ManualOfferPercent", 0);
+	OffersOptions.Insert("ManualOfferType", Undefined); // percent or amount
 	Options.Insert("OffersOptions", OffersOptions);
 	
 	// TotalAmount
@@ -2976,29 +2917,13 @@ Function CalculationsOptions() Export
 	// SpecialOffers
 	Options.Insert("CalculateSpecialOffers"   , New Structure("Enable", False));
 	Options.Insert("RecalculateSpecialOffers" , New Structure("Enable", False));
+	Options.Insert("CalculateManualOffers"    , New Structure("Enable", False));
 	
 	Options.Insert("RowIDInfo", New Array());
 	
 	Return Options;
 EndFunction
 
-// Calculations execute.
-// 
-// Parameters:
-//  Options - See CalculationsOptions
-// 
-// Returns:
-//  Structure - Calculations execute:
-// * NetAmount - Number - 
-// * OffersAmount - Number - 
-// * OffersBonus - Number - 
-// * TaxAmount - Number - 
-// * TotalAmount - Number - 
-// * Price - Number - 
-// * Quantity - Number - 
-// * QuantityInBaseUnit - Number - 
-// * QuantityIsFixed - Boolean - 
-// * SpecialOffers - Array - 
 Function CalculationsExecute(Options) Export
 	IsCalculatedRow = Not Options.AmountOptions.DontCalculateRow;
 
@@ -3006,6 +2931,9 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("NetAmount"    , Options.AmountOptions.NetAmount);
 	Result.Insert("OffersAmount" , Options.AmountOptions.OffersAmount);
 	Result.Insert("OffersBonus"  , Options.AmountOptions.OffersBonus);
+	Result.Insert("ManualOfferAmount"  , Options.OffersOptions.ManualOfferAmount);
+	Result.Insert("ManualOfferPercent" , Options.OffersOptions.ManualOfferPercent);
+	Result.Insert("ManualOfferType"    , Options.OffersOptions.ManualOfferType);
 	Result.Insert("TaxAmount"    , Options.AmountOptions.TaxAmount);
 	Result.Insert("TotalAmount"  , Options.AmountOptions.TotalAmount);
 	Result.Insert("Price"        , Options.PriceOptions.Price);
@@ -3041,8 +2969,16 @@ Function CalculationsExecute(Options) Export
 		Result.SpecialOffers.Add(NewOfferRow);
 	EndDo;
 	
-	UserManualAmountsFromBasisDocument = New Array();
+	// Manual offers
+	If Options.CalculateManualOffers.Enable Then
+		If Options.OffersOptions.ManualOfferType = PredefinedValue("Enum.ManualOfferTypes.Percent") Then
+			Result.ManualOfferAmount = (Options.QuantityOptions.Quantity * Options.PriceOptions.Price) / 100 * Result.ManualOfferPercent;
+		Else
+			Result.ManualOfferPercent = 0;
+		EndIf;
+	EndIf;
 	
+	// Special offers
 	OffersFromBaseDocument = False;
 	If Options.RecalculateSpecialOffers.Enable Or Options.CalculateSpecialOffers.Enable Or Options.CalculateTaxAmount.Enable Then
 		For Each Row In Options.RowIDInfo Do
@@ -3123,7 +3059,8 @@ Function CalculationsExecute(Options) Export
 			
 			If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
 				Result.Price = ?(Options.PriceOptions.Quantity = 0, 0, 
-					(Result.TotalAmount / Options.PriceOptions.Quantity) + Result.OffersAmount / Options.PriceOptions.Quantity);  
+					(Result.TotalAmount / Options.PriceOptions.Quantity) 
+					+ (Result.OffersAmount + Result.ManualOfferAmount) / Options.PriceOptions.Quantity);  
 			EndIf;
 			
 			If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
@@ -3160,7 +3097,8 @@ Function CalculationsExecute(Options) Export
 			
 			If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
 				Result.Price = ?(Options.PriceOptions.Quantity = 0, 0, 
-				((Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity)  + Result.OffersAmount / Options.PriceOptions.Quantity);
+				((Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity)  
+				+ (Result.OffersAmount + Result.ManualOfferAmount) / Options.PriceOptions.Quantity);
 			EndIf;
 			
 			If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
@@ -3198,7 +3136,8 @@ Function CalculationsExecute(Options) Export
 		
 		If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
 			Result.Price = ?(Options.PriceOptions.Quantity = 0, 0, 
-			((Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity) + Result.OffersAmount / Options.PriceOptions.Quantity);
+			((Result.TotalAmount - Result.TaxAmount) / Options.PriceOptions.Quantity) 
+			+ (Result.OffersAmount + Result.ManualOfferAmount) / Options.PriceOptions.Quantity);
 		EndIf;
 		
 		If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
@@ -3253,7 +3192,7 @@ EndFunction
 
 Function CalculateTotalAmount_PriceIncludeTax(PriceOptions, Result)
 	If PriceOptions.Price <> Undefined Then
-		Return _CalculateAmount(PriceOptions, Result) - Result.OffersAmount;
+		Return _CalculateAmount(PriceOptions, Result) - (Result.OffersAmount + Result.ManualOfferAmount);
 	Else
 		Return Result.NetAmount;
 	EndIf;
@@ -3268,15 +3207,15 @@ EndFunction
 
 Function CalculateNetAmount_PriceIncludeTax(PriceOptions, Result)
 	If PriceOptions.Price <> Undefined Then
-		Return _CalculateAmount(PriceOptions, Result) - Result.TaxAmount - Result.OffersAmount;
+		Return _CalculateAmount(PriceOptions, Result) - Result.TaxAmount - (Result.OffersAmount + Result.ManualOfferAmount);
 	Else
-		Return (Result.TotalAmount - Result.TaxAmount - Result.OffersAmount);
+		Return (Result.TotalAmount - Result.TaxAmount - (Result.OffersAmount + Result.ManualOfferAmount));
 	EndIf;
 EndFunction
 
 Function CalculateNetAmount_PriceNotIncludeTax(PriceOptions, Result)
 	If PriceOptions.Price <> Undefined Then
-		Return _CalculateAmount(PriceOptions, Result) - Result.OffersAmount;
+		Return _CalculateAmount(PriceOptions, Result) - (Result.OffersAmount + Result.ManualOfferAmount);
 	Else
 		Return Result.TotalAmount;
 	EndIf;

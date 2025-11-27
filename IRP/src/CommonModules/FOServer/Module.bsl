@@ -72,6 +72,7 @@ Function GetFOSubordination() Export
 	UseSales.Add("UsePartnerTerms");
 	UseSales.Add("UseSalesOrders");
 	UseSales.Add("UseSpecialOffers");
+	UseSales.Add("UseManualOffers");
 	UseSales.Add("UseDeliveryDate");
 	UseSales.Add("UseWorkOrders");
 	UseSales.Add("UseManagersAndSalesPersons");

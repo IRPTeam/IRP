@@ -1101,6 +1101,7 @@
   <functionalOptions>FunctionalOption.UseVariableItemKey</functionalOptions>
   <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
+  <functionalOptions>FunctionalOption.UseManualOffers</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1273,6 +1274,7 @@
   <constants>Constant.UseVariableItemKey</constants>
   <constants>Constant.UseVariableStore</constants>
   <constants>Constant.UseWorkOrders</constants>
+  <constants>Constant.UseManualOffers</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
@@ -1319,6 +1321,7 @@
   <commonForms>CommonForm.EditQuantity</commonForms>
   <commonForms>CommonForm.ChoiceTransactionBasis</commonForms>
   <commonForms>CommonForm.ChoicePaymentBasis</commonForms>
+  <commonForms>CommonForm.EditManualOffers</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessKey</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
@@ -1637,6 +1640,7 @@
   <enums>Enum.TradeAgentFeeTypes</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
+  <enums>Enum.ManualOfferTypes</enums>
   <reports>Report.A0010_TrialBalance</reports>
   <reports>Report.A0011_TrialBalanceByAccount</reports>
   <reports>Report.A0012_AccountCard</reports>

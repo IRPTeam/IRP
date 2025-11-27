@@ -539,6 +539,7 @@ Scenario: _034033 check the Document discount by selected row in Purchase order
 			| 'Description'          |
 			| 'Discount for selected row'    |
 		And I select current line in "List" table
+		And I select from "Special offer type" drop-down list by "Document discount" string	
 		And I set checkbox "Launch"
 		And I click "Save and close" button
 	* Create Purchase order

@@ -198,7 +198,14 @@ Function DescriptionRefLocalization(Ref, LocalizationCode = Undefined) Export
 	If LocalizationCode = Undefined Then
 		LocalizationCode = LocalizationReuse.GetLocalizationCode();
 	EndIf;
-	Result = CommonFunctionsServer.GetRefAttribute(Ref, "Description_" + LocalizationCode);
+	
+	AllDescription = LocalizationReuse.AllDescription();
+	LocalizationDescription = "Description_" + LocalizationCode;
+	If AllDescription.Find(LocalizationDescription) = Undefined Then
+		LocalizationDescription = "Description_en";
+	EndIf;
+	
+	Result = CommonFunctionsServer.GetRefAttribute(Ref, LocalizationDescription);
 	If Result = "" Then
 		Result = CommonFunctionsServer.GetRefAttribute(Ref, "Description_en");
 	EndIf;

@@ -1742,6 +1742,7 @@
   <dataProcessors>DataProcessor.SimpleBatchSequence</dataProcessors>
   <dataProcessors>DataProcessor.Chat</dataProcessors>
   <dataProcessors>DataProcessor.ManagerDashboard</dataProcessors>
+  <dataProcessors>DataProcessor.ManualTechnicalOperations</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AppliedDatabaseUpdates</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>

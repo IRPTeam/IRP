@@ -16,6 +16,7 @@
   <content>DataProcessor.GroupPhotoUploading</content>
   <content>Report.T0001_FilesAnalyser</content>
   <content>DataProcessor.DownloadAttachedFiles</content>
+  <content>DataProcessor.ManualTechnicalOperations</content>
   <subsystems>Finance</subsystems>
   <subsystems>OpeningEntry</subsystems>
   <subsystems>Items</subsystems>

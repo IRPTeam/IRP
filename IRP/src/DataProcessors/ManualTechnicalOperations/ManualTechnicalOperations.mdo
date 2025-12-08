@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="26e7cfbe-2c38-4b8b-8fbf-60f9457bdbf0">
+  <producedTypes>
+    <objectType typeId="ec517820-780d-4829-b2f5-40a3be05b60a" valueTypeId="2c14427d-6185-46a2-af5e-18ef99223da6"/>
+    <managerType typeId="365a0502-6950-4c83-bc06-381a51a41875" valueTypeId="3b172240-69ff-4ed5-8789-5150ca8ff787"/>
+  </producedTypes>
+  <name>ManualTechnicalOperations</name>
+  <synonym>
+    <key>en</key>
+    <value>Manual technical operations</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.ManualTechnicalOperations.Form.Form</defaultForm>
+  <tabularSections uuid="0668f6b0-e742-4fcb-a72c-eae9a9fb83f3">
+    <producedTypes>
+      <objectType typeId="24cca6c6-cfeb-44c3-bda0-7f6fac0416d9" valueTypeId="8e0fab23-95c4-4676-bcaf-d276a0508789"/>
+      <rowType typeId="e9bb6362-8238-4043-8af3-c0e8ba19caa7" valueTypeId="e9ce09dd-370a-4c01-9442-683da5a2ab68"/>
+    </producedTypes>
+    <name>Result</name>
+    <synonym>
+      <key>en</key>
+      <value>Result</value>
+    </synonym>
+    <attributes uuid="be2a37b3-5f4b-4e0f-a2c2-cc7549e55990">
+      <name>Ref</name>
+      <synonym>
+        <key>en</key>
+        <value>Ref</value>
+      </synonym>
+      <type>
+        <types>DocumentRef</types>
+        <types>CatalogRef</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="6c465f97-a3dc-4afa-9e49-41add3746267">
+      <name>Comment</name>
+      <synonym>
+        <key>en</key>
+        <value>Comment</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <multiLine>true</multiLine>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="35381d7e-b0ab-4e8e-8f22-99471936c5de">
+      <name>Error</name>
+      <synonym>
+        <key>en</key>
+        <value>Error</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+  </tabularSections>
+  <forms uuid="37b29099-432a-41c4-a832-816249c7bb6b">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:DataProcessor>

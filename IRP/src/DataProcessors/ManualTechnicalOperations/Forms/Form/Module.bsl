@@ -28,6 +28,10 @@ Procedure UpdateCurreiciesTableOnServer()
 	Query.SetParameter("Company", Companies.UnloadValues());
 	Query.Text = QueryTextCurrenciesUpdate(DocumentsNamesArray);
 	
+	If Query.Text = "" Then
+		Return;
+	EndIf;
+	
 	Selection = Query.Execute().Select();
 	While Selection.Next() Do
 		NewRow = Object.Result.Add();

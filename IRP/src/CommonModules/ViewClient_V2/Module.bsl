@@ -251,6 +251,8 @@ Procedure OnChainComplete(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WithholdingTaxInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "IncomingExchRateAdjustmentInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "OutgoingExchRateAdjustmentInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
@@ -2736,6 +2738,66 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_MANUAL_OFFER_AMOUNT
+
+// ItemList.ManualOfferAmount
+Procedure ItemListManualOfferAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListManualOfferAmountOnChange(Parameters);
+EndProcedure
+
+// ItemList.ManualOfferAmount.Set
+Procedure SetItemListManualOfferAmount(Object, Form, Row, Value) Export
+	Row.ManualOfferAmount = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ItemListManualOfferAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_MANUAL_OFFER_PERCENT
+
+// ItemList.ManualOfferPercent
+Procedure ItemListManualOfferPercentOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListManualOfferPercentOnChange(Parameters);
+EndProcedure
+
+// ItemList.ManualOfferPercent.Set
+Procedure SetItemListManualOfferPercent(Object, Form, Row, Value) Export
+	Row.ManualOfferPercent = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ItemListManualOfferPercentOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_MANUAL_OFFER_TYPE
+
+// ItemList.ManualOfferType
+Procedure ItemListManualOfferTypeOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListManualOfferTypeOnChange(Parameters);
+EndProcedure
+
+// ItemList.ManualOfferType.Set
+Procedure SetItemListManualOfferType(Object, Form, Row, Value) Export
+	Row.ManualOfferType = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ItemListManualOfferTypeOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST_BRUTTO_AMOUNT
 
 // ItemList.BruttoAmount
@@ -4340,6 +4402,8 @@ Procedure OnSetPartnerNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WithholdingTaxInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "IncomingExchRateAdjustmentInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "OutgoingExchRateAdjustmentInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"

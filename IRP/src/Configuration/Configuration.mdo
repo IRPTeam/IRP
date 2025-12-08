@@ -665,6 +665,8 @@
  <roles>Role.Report_R9510A_Salary</roles>
  <roles>Role.Report_S1001L_VendorsPrices</roles>
  <roles>Role.Report_T0001_FilesAnalyser</roles>
+ <roles>Role.Document_IncomingExchRateAdjustmentInvoice</roles>
+ <roles>Role.Document_OutgoingExchRateAdjustmentInvoice</roles>
  <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -1030,6 +1032,10 @@
  <commonModules>CommonModule.WorkstationServer</commonModules>
  <commonModules>CommonModule.DashboardClient</commonModules>
  <commonModules>CommonModule.DashboardServer</commonModules>
+ <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceClient</commonModules>
+ <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceServer</commonModules>
+ <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceClient</commonModules>
+ <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceServer</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
  <commonAttributes>CommonAttribute.Branch</commonAttributes>
  <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1175,6 +1181,7 @@
  <functionalOptions>FunctionalOption.UseVariableItemKey</functionalOptions>
  <functionalOptions>FunctionalOption.UseVariableStore</functionalOptions>
  <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
+ <functionalOptions>FunctionalOption.UseManualOffers</functionalOptions>
  <definedTypes>DefinedType.typeAccessDocument</definedTypes>
  <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
  <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1347,6 +1354,7 @@
  <constants>Constant.UseVariableItemKey</constants>
  <constants>Constant.UseVariableStore</constants>
  <constants>Constant.UseWorkOrders</constants>
+ <constants>Constant.UseManualOffers</constants>
  <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
  <commonForms>CommonForm.AttachFile</commonForms>
@@ -1393,6 +1401,7 @@
  <commonForms>CommonForm.EditQuantity</commonForms>
  <commonForms>CommonForm.ChoiceTransactionBasis</commonForms>
  <commonForms>CommonForm.ChoicePaymentBasis</commonForms>
+ <commonForms>CommonForm.EditManualOffers</commonForms>
  <catalogs>Catalog.AccessGroups</catalogs>
  <catalogs>Catalog.AccessKey</catalogs>
  <catalogs>Catalog.AccessProfiles</catalogs>
@@ -1598,6 +1607,8 @@
  <documents>Document.WorkOrderClosing</documents>
  <documents>Document.WorkSheet</documents>
  <documents>Document.FixedAssetRevaluation</documents>
+ <documents>Document.IncomingExchRateAdjustmentInvoice</documents>
+ <documents>Document.OutgoingExchRateAdjustmentInvoice</documents>
  <sequences>Sequence.SimpleBatch</sequences>
  <enums>Enum.AccountingAnalyticTypes</enums>
  <enums>Enum.AccrualAndDeductionPeriodicity</enums>
@@ -1709,6 +1720,7 @@
  <enums>Enum.TradeAgentFeeTypes</enums>
  <enums>Enum.TypeEquipment</enums>
  <enums>Enum.TypeExternalObject</enums>
+ <enums>Enum.ManualOfferTypes</enums>
  <reports>Report.A0010_TrialBalance</reports>
  <reports>Report.A0011_TrialBalanceByAccount</reports>
  <reports>Report.A0012_AccountCard</reports>

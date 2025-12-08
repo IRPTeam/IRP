@@ -688,6 +688,8 @@ Function GetIgnored_Fields()
 	
 	Array.Add("RetailGoodsReceipt.R4010B_ActualStocks.SourceOfOrigin");
 	
+	Array.Add("IncomingExchRateAdjustmentInvoice.R5022T_Expenses.*");
+	
 	Map = New Map();
 	
 	For Each ExcludeItem In Array Do

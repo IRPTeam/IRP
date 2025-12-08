@@ -331,6 +331,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseManualOffers</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonForm.AddLinkedDocumentRows</name>
 		<right>
 			<name>View</name>

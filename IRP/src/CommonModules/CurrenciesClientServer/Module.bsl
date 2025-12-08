@@ -77,7 +77,6 @@ Function GetParameters_V15(Object, Row) Export
 	Return Parameters;
 EndFunction
 
-
 Function GetParameters_V7(Object, RowKey, Currency, Amount, Agreement = Undefined) Export
 	Parameters = New Structure();
 	Parameters.Insert("Ref"            , Object.Ref);
@@ -196,6 +195,19 @@ Function GetParameters_GR_Preliminary(Object, Row) Export
 	Parameters.Insert("RowKey"         , Row.Key);
 	Parameters.Insert("DocumentAmount" , Row.PreliminaryAmount);
 	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies));
+	Return Parameters;
+EndFunction
+
+Function GetParameters_ExchDiffInvoce(Object, Row) Export
+	Parameters = New Structure();
+	Parameters.Insert("Ref"            , Object.Ref);
+	Parameters.Insert("Date"           , Object.Date);
+	Parameters.Insert("Company"        , Object.Company);
+	Parameters.Insert("Currency"       , Object.Currency);
+	Parameters.Insert("Agreement"      , Object.Agreement);
+	Parameters.Insert("RowKey"         , Row.Key);
+	Parameters.Insert("DocumentAmount" , Row.TotalAmount);
+	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies, Row.Key));
 	Return Parameters;
 EndFunction
 

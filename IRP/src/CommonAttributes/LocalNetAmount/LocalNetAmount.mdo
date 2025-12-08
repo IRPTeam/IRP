@@ -61,6 +61,14 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.IncomingExchRateAdjustmentInvoice</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.OutgoingExchRateAdjustmentInvoice</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.RetailSalesReceipt</metadata>
   <use>Use</use>
  </content>

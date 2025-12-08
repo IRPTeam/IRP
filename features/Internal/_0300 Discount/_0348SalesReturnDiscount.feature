@@ -310,7 +310,178 @@ Scenario: _034805 check 2 Document Discount (sum)
 			Then the number of "SpecialOffers" table lines is "равно" "2"
 			And I close all client application windows
 			
-
+Scenario: _034806 check additional manual discount (SO-SI-SR)
+	And I close all client application windows
+	* Create SO (document discount)
+		* Open form for creating Sales order
+			Given I open hyperlink "e1cib/list/Document.SalesOrder"
+			And I click the button named "FormCreate"
+		* Filling in customer's info
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'Ferron BP'      |
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I activate "Description" field in "List" table
+			And I go to line in "List" table
+				| 'Description'           |
+				| 'Company Ferron BP'     |
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'            |
+				| 'Basic Partner terms, TRY'     |
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'Store 01'        |
+			And I select current line in "List" table
+		* Filling in items table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'Dress'           |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item key'     |
+				| 'M/White'      |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'Dress'           |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			Then "Item keys" window is opened
+			And I go to line in "List" table
+				| 'Item key'     |
+				| 'L/Green'      |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'Trousers'        |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| '#'    | 'Item'     | 'Item key'    | 'Unit'     |
+				| '1'    | 'Dress'    | 'M/White'     | 'pcs'      |
+			And I activate "Quantity" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "100" text in "Quantity" field of "ItemList" table
+			And I input "200" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| '#'    | 'Item'     | 'Item key'    | 'Unit'     |
+				| '2'    | 'Dress'    | 'L/Green'     | 'pcs'      |
+			And I select current line in "ItemList" table
+			And I input "200" text in "Quantity" field of "ItemList" table
+			And I input "210" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| '#'    | 'Item'        | 'Item key'     | 'Unit'     |
+				| '3'    | 'Trousers'    | '36/Yellow'    | 'pcs'      |
+			And I select current line in "ItemList" table
+			And I input "300" text in "Quantity" field of "ItemList" table
+			And I input "250" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Dicount calculation
+			And I go to line in "ItemList" table
+				| "#" | "Item"  | "Item key" | "Net amount" | "Price"  | "Quantity" | "Tax amount" | "Total amount" | "Unit" | "VAT" |
+				| "1" | "Dress" | "M/White"  | "16 949,15"  | "200,00" | "100,000"  | "3 050,85"   | "20 000,00"    | "pcs"  | "18%" |
+			And I move one line down in "ItemList" table and select line
+			And in the table "ItemList" I click "% Discount" button
+			Then "Pickup special offers" window is opened
+			And I activate "Amount" field in "Offers" table
+			And I go to line in "Offers" table
+				| 'Presentation'              |
+				| 'Discount for selected row' |
+			And I select current line in "Offers" table
+			And I change the radio button named "Type" value to "Percent"
+			And I input "10,00" text in the field named "Percent"
+			And I click the button named "Ok"
+			Then "Pickup special offers" window is opened
+			And in the table "Offers" I click "OK" button
+		* Check discount calculation
+			And "ItemList" table became equal
+				| '#' | 'Item'     | 'Item key'  | 'Quantity' | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| '1' | 'Dress'    | 'M/White'   | '100,000'  | 'pcs'  | '200,00' | '18%' | '2 000,00'      | '2 745,76'   | '15 254,24'  | '18 000,00'    |
+				| '2' | 'Dress'    | 'L/Green'   | '200,000'  | 'pcs'  | '210,00' | '18%' | '4 200,00'      | '5 766,10'   | '32 033,90'  | '37 800,00'    |
+				| '3' | 'Trousers' | '36/Yellow' | '300,000'  | 'pcs'  | '250,00' | '18%' | ''              | '11 440,68'  | '63 559,32'  | '75 000,00'    |
+			And I click "Save" button
+			And I click "Post" button
+	* Create SI based on SO
+		And I click "Sales invoice" button
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click "Ok" button
+		And I activate "Manual offer type" field in "ItemList" table
+		And I go to line in "ItemList" table
+			| "Item"  | "Item key" | "Offers amount" | "Price"  | "Quantity" |
+			| "Dress" | "M/White"  | "2 000,00"      | "200,00" | "100,000"  |
+		And I select current line in "ItemList" table
+		And I select "Percent" exact value from "Manual offer type" drop-down list in "ItemList" table
+		And I input "10,00" text in "Manual offer percent" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| "Item"  | "Item key" | "Offers amount" | "Price"  | "Quantity" |
+			| "Dress" | "L/Green"  | "4 200,00"      | "210,00" | "200,000"  |
+		And I activate "Manual offer type" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Amount" exact value from "Manual offer type" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Manual offer percent" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I activate "Manual offer amount" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "1 000,00" text in "Manual offer amount" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| "Item"     | "Item key"  | "Price"  | "Quantity" |
+			| "Trousers" | "36/Yellow" | "250,00" | "300,000"  |
+		And I activate "Manual offer type" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Percent" exact value from "Manual offer type" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Manual offer percent" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "5,00" text in "Manual offer percent" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "10,00" text in "Manual offer percent" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check discount
+		And "ItemList" table became equal
+			| 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Manual offer amount' | 'Quantity' | 'Price'  | 'Manual offer type' | 'Offers amount' | 'VAT' | 'Manual offer percent' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Store'    | 'Use shipment confirmation' | 'Sales order' |
+			| 'Dress'    | 'M/White'   | 'No'                 | '2 440,68'   | 'pcs'  | '2 000,00'            | '100,000'  | '200,00' | 'Percent'           | '2 000,00'      | '18%' | '10,00'                | '13 559,32'  | '16 000,00'    | 'No'             | 'Store 01' | 'No'                        | '*'           |
+			| 'Dress'    | 'L/Green'   | 'No'                 | '5 613,56'   | 'pcs'  | '1 000,00'            | '200,000'  | '210,00' | 'Amount'            | '4 200,00'      | '18%' | ''                     | '31 186,44'  | '36 800,00'    | 'No'             | 'Store 01' | 'No'                        | '*'           |
+			| 'Trousers' | '36/Yellow' | 'No'                 | '10 296,61'  | 'pcs'  | '7 500,00'            | '300,000'  | '250,00' | 'Percent'           | ''              | '18%' | '10,00'                | '57 203,39'  | '67 500,00'    | 'No'             | 'Store 01' | 'No'                        | '*'           |
+		And I click "Post" button
+	* Create SR and check discount
+		And I click "Sales return" button
+		Then "Add linked document rows" window is opened
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Manual offer amount' | 'Quantity' | 'Price'  | 'Manual offer type' | 'Offers amount' | 'VAT' | 'Manual offer percent' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Store'    | 'Use shipment confirmation' | 'Sales invoice' |
+			| 'Dress'    | 'M/White'   | 'No'                 | '2 440,68'   | 'pcs'  | '2 000,00'            | '100,000'  | '200,00' | 'Percent'           | '2 000,00'      | '18%' | '10,00'                | '13 559,32'  | '16 000,00'    | 'No'             | 'Store 01' | 'No'                        | '*'             |
+			| 'Dress'    | 'L/Green'   | 'No'                 | '5 613,56'   | 'pcs'  | '1 000,00'            | '200,000'  | '210,00' | 'Amount'            | '4 200,00'      | '18%' | ''                     | '31 186,44'  | '36 800,00'    | 'No'             | 'Store 01' | 'No'                        | '*'             |
+			| 'Trousers' | '36/Yellow' | 'No'                 | '10 296,61'  | 'pcs'  | '7 500,00'            | '300,000'  | '250,00' | 'Percent'           | ''              | '18%' | '10,00'                | '57 203,39'  | '67 500,00'    | 'No'             | 'Store 01' | 'No'                        | '*'             |
+		And I close all client application windows
+		
+							
 			
 			
 						

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cd4562f3-421e-4783-b0cb-c008a86b6717">
+ <name>DocIncomingExchRateAdjustmentInvoiceClient</name>
+ <synonym>
+  <key>tr</key>
+  <value>Doc incoming exch rate adjustment invoice client</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ корректировки обменного курса входящего счета клиента</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc incoming exch rate adjustment invoice client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

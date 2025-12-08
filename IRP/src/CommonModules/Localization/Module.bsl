@@ -4272,6 +4272,26 @@ Strings.Insert("FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFi
 	NStr("en='FixedAssetRevaluation DR (R5022T Expenses) CR (R8510B BookValueOfFixedAsset)';
 		|ru='Переоценка основных средств Дт (R5022T Expenses) Кт (R8510B BookValueOfFixedAsset)';
 		|tr='Sabit Varlık Yeniden Değerlemesi Borç (R5022T Giderleri) Alacak (R8510B Sabit Varlığın Defter Değeri)'", Lang));
+
+Strings.Insert("IncomingExchRateAdjustmentInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
+	NStr("en='IncomingExchRateAdjustmentInvoice DR (R1040B TaxesOutgoing) CR (R1021B VendorsTransactions)';
+		|ru='Корректировка обменного курса входящего счета DR (R1040B TaxesOutgoing) CR (R1021B VendorsTransactions)';
+		|tr='IncomingExchRateAdjustmentInvoice DR (R1040B TaxesOutgoing) CR (R1021B VendorsTransactions)'", Lang));
+
+Strings.Insert("IncomingExchRateAdjustmentInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
+	NStr("en='IncomingExchRateAdjustmentInvoice DR (R5022T Expenses) CR (R1021B VendorsTransactions)';
+		|ru='Корректировка обменного курса входящего счета DR (R5022T Expenses) CR (R1021B VendorsTransactions)';
+		|tr='IncomingExchRateAdjustmentInvoice DR (R5022T Expenses) CR (R1021B VendorsTransactions)'", Lang));
+
+Strings.Insert("OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming",
+	NStr("en='OutgoingExchRateAdjustmentInvoice DR (R2021B CustomersTransactions) CR (R2040B TaxesIncoming)';
+		|ru='Корректировка обменного курса исходящего счета DR (R2021B CustomersTransactions) CR (R2040B TaxesIncoming)';
+		|tr='OutgoingExchRateAdjustmentInvoice DR (R2021B CustomersTransactions) CR (R2040B TaxesIncoming)'", Lang));
+
+Strings.Insert("OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
+	NStr("en='OutgoingExchRateAdjustmentInvoice (DR R2021B CustomersTransactions) (CR R5021T_Revenues)';
+		|ru='Корректировка обменного курса исходящего счета (DR R2021B CustomersTransactions) (CR R5021T_Revenues)';
+		|tr='OutgoingExchRateAdjustmentInvoice (DR R2021B CustomersTransactions) (CR R5021T_Revenues)'", Lang));
 	
 Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External accounting operation exchange report';
 	|ru='Отчет по обменам внешних бухгалтерских операци';

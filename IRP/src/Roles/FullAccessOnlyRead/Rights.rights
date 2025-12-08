@@ -2297,6 +2297,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseManualOffers</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonForm.AddLinkedDocumentRows</name>
 		<right>
 			<name>View</name>

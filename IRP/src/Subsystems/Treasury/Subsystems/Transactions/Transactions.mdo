@@ -26,5 +26,7 @@
  <content>Document.DebitCreditNote</content>
  <content>Document.TaxesOperation</content>
  <content>Document.CashStatement</content>
+ <content>Document.IncomingExchRateAdjustmentInvoice</content>
+ <content>Document.OutgoingExchRateAdjustmentInvoice</content>
  <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

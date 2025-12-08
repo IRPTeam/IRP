@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 
 @tree
 @Positive
@@ -1382,7 +1382,7 @@ Scenario: _033532 check the discount order (same application rule), Discount Pri
 	And I click the button named "FormPostAndClose"
 	And Delay 2
 	And "List" table contains lines
-		| 'Partner'          | 'Amount'         |
+		| 'Partner'          | 'Amount'   |
 		| 'Lomaniti'         | '2 495,00' |
 		| 'Lomaniti'         | '2 495,00' |
 		| 'Lomaniti'         | '2 495,00' |
@@ -1401,3 +1401,136 @@ Scenario: _033532 check the discount order (same application rule), Discount Pri
 		| 'Lomaniti'         | '2 495,00' |
 		| 'Lomaniti'         | '2 495,00' |
 		| 'Lomaniti'         | '2 495,00' |
+
+
+Scenario: _033533 check the Document discount by selected row in Sales order
+	And I close all client application windows
+	When Create catalog SpecialOffers objects (Document discount for selected row)
+	And Delay 2
+* Activating discount Discount for selected row
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click "List" button
+	And I go to line in "List" table
+		| 'Description'          |
+		| 'Discount for selected row'    |
+	And I select current line in "List" table
+	And I select from "Special offer type" drop-down list by "Document discount" string	
+	And I set checkbox "Launch"
+	And I click "Save and close" button
+* Create Sales order
+	* Open form for creating Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+	* Filling in customer's info
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Ferron BP'      |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Company Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'            |
+			| 'Basic Partner terms, TRY'     |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Store 01'        |
+		And I select current line in "List" table
+	* Filling in items table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Dress'           |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key'     |
+			| 'M/White'      |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Dress'           |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item key'     |
+			| 'L/Green'      |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Trousers'        |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#'    | 'Item'     | 'Item key'    | 'Unit'     |
+			| '1'    | 'Dress'    | 'M/White'     | 'pcs'      |
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100" text in "Quantity" field of "ItemList" table
+		And I input "200" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#'    | 'Item'     | 'Item key'    | 'Unit'     |
+			| '2'    | 'Dress'    | 'L/Green'     | 'pcs'      |
+		And I select current line in "ItemList" table
+		And I input "200" text in "Quantity" field of "ItemList" table
+		And I input "210" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#'    | 'Item'        | 'Item key'     | 'Unit'     |
+			| '3'    | 'Trousers'    | '36/Yellow'    | 'pcs'      |
+		And I select current line in "ItemList" table
+		And I input "300" text in "Quantity" field of "ItemList" table
+		And I input "250" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Dicount calculation
+		And I go to line in "ItemList" table
+			| "#" | "Item"  | "Item key" | "Net amount" | "Price"  | "Quantity" | "Tax amount" | "Total amount" | "Unit" | "VAT" |
+			| "1" | "Dress" | "M/White"  | "16 949,15"  | "200,00" | "100,000"  | "3 050,85"   | "20 000,00"    | "pcs"  | "18%" |
+		And I move one line down in "ItemList" table and select line
+		And in the table "ItemList" I click "% Discount" button
+		Then "Pickup special offers" window is opened
+		And I activate "Amount" field in "Offers" table
+		And I go to line in "Offers" table
+			| 'Presentation'              |
+			| 'Discount for selected row' |
+		And I select current line in "Offers" table
+		And I change the radio button named "Type" value to "Percent"
+		And I input "10,00" text in the field named "Percent"
+		And I click the button named "Ok"
+		Then "Pickup special offers" window is opened
+		And in the table "Offers" I click "OK" button
+	* Check discount calculation
+		And "ItemList" table became equal
+			| '#' | 'Item'     | 'Item key'  | 'Quantity' | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| '1' | 'Dress'    | 'M/White'   | '100,000'  | 'pcs'  | '200,00' | '18%' | '2 000,00'      | '2 745,76'   | '15 254,24'  | '18 000,00'    |
+			| '2' | 'Dress'    | 'L/Green'   | '200,000'  | 'pcs'  | '210,00' | '18%' | '4 200,00'      | '5 766,10'   | '32 033,90'  | '37 800,00'    |
+			| '3' | 'Trousers' | '36/Yellow' | '300,000'  | 'pcs'  | '250,00' | '18%' | ''              | '11 440,68'  | '63 559,32'  | '75 000,00'    |
+		And I click "Save" button
+		And I click "Post" button
+		And "ItemList" table became equal
+			| '#' | 'Item'     | 'Item key'  | 'Quantity' | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| '1' | 'Dress'    | 'M/White'   | '100,000'  | 'pcs'  | '200,00' | '18%' | '2 000,00'      | '2 745,76'   | '15 254,24'  | '18 000,00'    |
+			| '2' | 'Dress'    | 'L/Green'   | '200,000'  | 'pcs'  | '210,00' | '18%' | '4 200,00'      | '5 766,10'   | '32 033,90'  | '37 800,00'    |
+			| '3' | 'Trousers' | '36/Yellow' | '300,000'  | 'pcs'  | '250,00' | '18%' | ''              | '11 440,68'  | '63 559,32'  | '75 000,00'    |
+	And I close all client application windows

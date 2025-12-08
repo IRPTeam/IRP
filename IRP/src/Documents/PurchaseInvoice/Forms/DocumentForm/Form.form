@@ -3243,6 +3243,53 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
+     <name>SpecialOffersExternalOffer</name>
+     <id>1101</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.SpecialOffers.ExternalOffer</segments>
+     </dataPath>
+     <titleLocation>None</titleLocation>
+     <extendedTooltip>
+      <name>SpecialOffersExternalOfferExtendedTooltip</name>
+      <id>1103</id>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>SpecialOffersExternalOfferContextMenu</name>
+      <id>1102</id>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>PictureField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:ImageFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <horizontalStretch>true</horizontalStretch>
+      <verticalStretch>true</verticalStretch>
+      <valuesPicture xsi:type="core:PictureRef">
+       <picture>CommonPicture.FillByTemplate</picture>
+      </valuesPicture>
+      <border xsi:type="core:BorderDef">
+       <style>Single</style>
+       <width>1</width>
+      </border>
+      <fileDragMode>AsFileRef</fileDragMode>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
      <name>SpecialOffersOffer</name>
      <id>637</id>
      <visible>true</visible>
@@ -6741,6 +6788,36 @@
    <tablePath xsi:type="form:DataPath">
     <segments>Object.Currencies</segments>
    </tablePath>
+  </additionalColumns>
+  <additionalColumns>
+   <tablePath xsi:type="form:DataPath">
+    <segments>Object.SpecialOffers</segments>
+   </tablePath>
+   <columns>
+    <name>ExternalOffer</name>
+    <title>
+     <key>tr</key>
+     <value>External offer</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Внешняя скидка</value>
+    </title>
+    <title>
+     <key>en</key>
+     <value>External offer</value>
+    </title>
+    <id>184</id>
+    <valueType>
+     <types>Boolean</types>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+   </columns>
   </additionalColumns>
  </attributes>
  <attributes>

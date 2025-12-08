@@ -73,7 +73,15 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.IncomingExchRateAdjustmentInvoice</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.Payroll</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.OutgoingExchRateAdjustmentInvoice</metadata>
   <use>Use</use>
  </content>
  <content>

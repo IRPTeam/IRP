@@ -1211,7 +1211,7 @@
    <name>ManualOfferAmount</name>
    <synonym>
     <key>tr</key>
-    <value>Manual offer amount</value>
+    <value>Manuel indirim tutarı</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -1233,7 +1233,7 @@
    <name>ManualOfferPercent</name>
    <synonym>
     <key>tr</key>
-    <value>Manual offer percent</value>
+    <value>Manuel indirim yüzdesi</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -1255,7 +1255,7 @@
    <name>ManualOfferType</name>
    <synonym>
     <key>tr</key>
-    <value>Manual offer type</value>
+    <value>Manuel indirim türü</value>
    </synonym>
    <synonym>
     <key>ru</key>

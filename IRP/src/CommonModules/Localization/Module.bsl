@@ -4276,22 +4276,22 @@ Strings.Insert("FixedAssetRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFi
 Strings.Insert("IncomingExchRateAdjustmentInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
 	NStr("en='IncomingExchRateAdjustmentInvoice DR (R1040B TaxesOutgoing) CR (R1021B VendorsTransactions)';
 		|ru='Корректировка обменного курса входящего счета DR (R1040B TaxesOutgoing) CR (R1021B VendorsTransactions)';
-		|tr='IncomingExchRateAdjustmentInvoice DR (R1040B TaxesOutgoing) CR (R1021B VendorsTransactions)'", Lang));
+		|tr='Gelen Döviz Kuru Ayarlaması Fatura DR (R1040B Vergiler Giden) CR (R1021B Satıcı İşlemleri)'", Lang));
 
 Strings.Insert("IncomingExchRateAdjustmentInvoice_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
 	NStr("en='IncomingExchRateAdjustmentInvoice DR (R5022T Expenses) CR (R1021B VendorsTransactions)';
 		|ru='Корректировка обменного курса входящего счета DR (R5022T Expenses) CR (R1021B VendorsTransactions)';
-		|tr='IncomingExchRateAdjustmentInvoice DR (R5022T Expenses) CR (R1021B VendorsTransactions)'", Lang));
+		|tr='Gelen Döviz Kuru Ayarlama Faturası DR (R5022T Giderleri) CR (R1021B Satıcı İşlemleri)'", Lang));
 
 Strings.Insert("OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming",
 	NStr("en='OutgoingExchRateAdjustmentInvoice DR (R2021B CustomersTransactions) CR (R2040B TaxesIncoming)';
 		|ru='Корректировка обменного курса исходящего счета DR (R2021B CustomersTransactions) CR (R2040B TaxesIncoming)';
-		|tr='OutgoingExchRateAdjustmentInvoice DR (R2021B CustomersTransactions) CR (R2040B TaxesIncoming)'", Lang));
+		|tr='Giden Döviz Kuru Ayarlaması Fatura DR (R2021B Müşteriler İşlemler) CR (R2040B Vergiler Gelen)'", Lang));
 
 Strings.Insert("OutgoingExchRateAdjustmentInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
 	NStr("en='OutgoingExchRateAdjustmentInvoice (DR R2021B CustomersTransactions) (CR R5021T_Revenues)';
 		|ru='Корректировка обменного курса исходящего счета (DR R2021B CustomersTransactions) (CR R5021T_Revenues)';
-		|tr='OutgoingExchRateAdjustmentInvoice (DR R2021B CustomersTransactions) (CR R5021T_Revenues)'", Lang));
+		|tr='Giden Döviz Kuru Ayarlama Faturası (DR R2021B Müşteriler İşlemler) (CR R5021T_Gelirler)'", Lang));
 	
 Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External accounting operation exchange report';
 	|ru='Отчет по обменам внешних бухгалтерских операци';

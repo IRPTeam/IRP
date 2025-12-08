@@ -270,7 +270,7 @@
   <name>ManualOfferType</name>
   <title>
    <key>tr</key>
-   <value>Manual offer type</value>
+   <value>Manuel indirim türü</value>
   </title>
   <title>
    <key>ru</key>
@@ -295,7 +295,7 @@
   <name>ManualOfferPercent</name>
   <title>
    <key>tr</key>
-   <value>Manual offer percent</value>
+   <value>Manuel indirim yüzdesi</value>
   </title>
   <title>
    <key>ru</key>
@@ -320,7 +320,7 @@
   <name>ManualOfferAmount</name>
   <title>
    <key>tr</key>
-   <value>Manual offer amount</value>
+   <value>Manuel indirim tutarı</value>
   </title>
   <title>
    <key>ru</key>
@@ -444,7 +444,7 @@
    <name>ManualOfferAmount</name>
    <title>
     <key>tr</key>
-    <value>Manual offer amount</value>
+    <value>Manuel indirim tutarı</value>
    </title>
    <title>
     <key>ru</key>
@@ -469,7 +469,7 @@
    <name>ManualOfferPercent</name>
    <title>
     <key>tr</key>
-    <value>Manual offer percent</value>
+    <value>Manuel indirim yüzdesi</value>
    </title>
    <title>
     <key>ru</key>

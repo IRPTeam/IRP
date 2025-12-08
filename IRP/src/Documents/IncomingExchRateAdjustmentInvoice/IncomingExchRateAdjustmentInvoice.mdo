@@ -10,7 +10,7 @@
  <name>IncomingExchRateAdjustmentInvoice</name>
  <synonym>
   <key>tr</key>
-  <value>Incoming exch. rate adjustment invoice</value>
+  <value>Gelen döviz kuru düzeltme faturası</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -57,7 +57,7 @@
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
   <key>tr</key>
-  <value>Incoming exch. rate adjustment invoice</value>
+  <value>Gelen döviz kuru düzeltme faturası</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
@@ -69,7 +69,7 @@
  </objectPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Incoming exch. rate adjustment invoices</value>
+  <value>Gelen döviz kuru düzeltme faturaları</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
@@ -172,7 +172,7 @@
   <name>DocDate</name>
   <synonym>
    <key>tr</key>
-   <value>Evrak tarihi</value>
+   <value>Belge tarihi</value>
   </synonym>
   <synonym>
    <key>ru</key>

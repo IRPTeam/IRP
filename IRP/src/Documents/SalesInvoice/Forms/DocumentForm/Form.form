@@ -6996,7 +6996,7 @@
      <id>1562</id>
      <title>
       <key>tr</key>
-      <value>Manual offers</value>
+      <value>Manuel indirimler</value>
      </title>
      <title>
       <key>ru</key>
@@ -7051,7 +7051,7 @@
     </userVisible>
     <title>
      <key>tr</key>
-     <value>Group total manual offers</value>
+     <value>Grup toplam manuel indirimleri</value>
     </title>
     <title>
      <key>ru</key>
@@ -7857,7 +7857,7 @@
     <name>ExternalOffer</name>
     <title>
      <key>tr</key>
-     <value>External offer</value>
+     <value>Dış indirim</value>
     </title>
     <title>
      <key>ru</key>
@@ -8932,7 +8932,7 @@
   <name>SetManualOffers</name>
   <title>
    <key>tr</key>
-   <value>% Manual offers</value>
+   <value>% Ручные скидки</value>
   </title>
   <title>
    <key>ru</key>

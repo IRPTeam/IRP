@@ -95,6 +95,7 @@ Function GetAdditionalQueryParameters(Ref)
 	ArrayOfReceivable.Add(Enums.DebtTypes.TransactionCustomer);
 	ArrayOfReceivable.Add(Enums.DebtTypes.OtherPartnerReceivable);
 	ArrayOfReceivable.Add(Enums.DebtTypes.EmployeeReceivable);
+	ArrayOfReceivable.Add(Enums.DebtTypes.EmployeePayable);
 	StrParams.Insert("ArrayOfReceivable", ArrayOfReceivable);
 	
 	// Payable
@@ -102,7 +103,6 @@ Function GetAdditionalQueryParameters(Ref)
 	ArrayOfPayable.Add(Enums.DebtTypes.AdvanceCustomer);
 	ArrayOfPayable.Add(Enums.DebtTypes.TransactionVendor);
 	ArrayOfPayable.Add(Enums.DebtTypes.OtherPartnerPayable);
-	ArrayOfPayable.Add(Enums.DebtTypes.EmployeePayable);
 	StrParams.Insert("ArrayOfPayable", ArrayOfPayable);
 	
 	Return StrParams;

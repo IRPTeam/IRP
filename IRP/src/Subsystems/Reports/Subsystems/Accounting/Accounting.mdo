@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="22193eb0-2a0d-4f79-98c0-fa98718d05b9">
+  <name>Accounting</name>
+  <synonym>
+    <key>en</key>
+    <value>Accounting</value>
+  </synonym>
+  <includeHelpInContents>true</includeHelpInContents>
+  <includeInCommandInterface>true</includeInCommandInterface>
+  <content>CommonCommand.OpenReport_A0010_TrialBalance</content>
+  <content>CommonCommand.OpenReport_A0011_TrialBalanceByAccount</content>
+  <content>CommonCommand.OpenReport_A0012_AccountCard</content>
+  <content>CommonCommand.OpenReport_A0013_AccountAnalysis</content>
+  <content>CommonCommand.OpenReport_A0014_AccountingPLReport</content>
+  <parentSubsystem>Subsystem.Reports</parentSubsystem>
+</mdclass:Subsystem>

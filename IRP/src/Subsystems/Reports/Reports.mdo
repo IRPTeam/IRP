@@ -16,4 +16,6 @@
   <subsystems>PurchaseAP</subsystems>
   <subsystems>SalesAR</subsystems>
   <subsystems>TechnicalReports</subsystems>
+  <subsystems>FixedAssets</subsystems>
+  <subsystems>Accounting</subsystems>
 </mdclass:Subsystem>

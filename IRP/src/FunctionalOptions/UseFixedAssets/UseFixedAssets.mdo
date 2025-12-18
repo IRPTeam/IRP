@@ -24,4 +24,5 @@
   <content>Document.FixedAssetRevaluation</content>
   <content>Document.DepreciationCalculation</content>
   <content>Report.R8510B_BookValueOfFixedAsset</content>
+  <content>Subsystem.Reports.Subsystem.FixedAssets</content>
 </mdclass:FunctionalOption>

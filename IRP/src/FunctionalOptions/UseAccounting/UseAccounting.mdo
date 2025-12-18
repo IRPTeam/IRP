@@ -36,4 +36,5 @@
   <content>InformationRegister.T9016S_AccountsEmployee</content>
   <content>Catalog.PLSections</content>
   <content>Report.A0014_AccountingPLReport</content>
+  <content>Subsystem.Reports.Subsystem.FixedAssets</content>
 </mdclass:FunctionalOption>

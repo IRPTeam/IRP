@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6c16cf82-c98d-4d16-b343-f3e347484847">
+  <name>OpenReport_F0012_DepreciationStatement</name>
+  <synonym>
+    <key>en</key>
+    <value>F0012 Depreciation statement</value>
+  </synonym>
+  <group>NavigationPanelOrdinary</group>
+  <representation>Auto</representation>
+</mdclass:CommonCommand>

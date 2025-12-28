@@ -10,7 +10,7 @@
   <content>CommonCommand.OpenReport_A0010_TrialBalance</content>
   <content>CommonCommand.OpenReport_A0011_TrialBalanceByAccount</content>
   <content>CommonCommand.OpenReport_A0012_AccountCard</content>
-  <content>CommonCommand.OpernReport_A0013_AccountAnalysis</content>
+  <content>CommonCommand.OpenReport_A0013_AccountAnalysis</content>
   <content>CommonCommand.OpenReport_A0014_AccountingPLReport</content>
   <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

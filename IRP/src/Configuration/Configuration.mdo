@@ -1197,12 +1197,12 @@
   <commonCommands>CommonCommand.OpenReport_A0010_TrialBalance</commonCommands>
   <commonCommands>CommonCommand.OpenReport_A0011_TrialBalanceByAccount</commonCommands>
   <commonCommands>CommonCommand.OpenReport_A0012_AccountCard</commonCommands>
-  <commonCommands>CommonCommand.OpenReport_A0013_AccountAnalysis</commonCommands>
   <commonCommands>CommonCommand.OpenReport_A0014_AccountingPLReport</commonCommands>
   <commonCommands>CommonCommand.OpenReport_F0010_FixedAssetsTransferCost</commonCommands>
   <commonCommands>CommonCommand.OpenReport_F0011_InventoryBook</commonCommands>
   <commonCommands>CommonCommand.OpenReport_F0012_DepreciationStatement</commonCommands>
   <commonCommands>CommonCommand.OpenReport_R8510B_BookValueOfFixedAsset</commonCommands>
+  <commonCommands>CommonCommand.OpenReport_A0013_AccountAnalysis</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <commandGroups>CommandGroup.Fiscalization</commandGroups>

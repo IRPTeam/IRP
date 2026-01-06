@@ -12959,7 +12959,18 @@ Function LinkUnlinkDocumentRows(Object, FillingValues, CalculateRows = True) Exp
 	AttributeNames_LinkedDocuments = GetAttributeNames_LinkedDocuments();
 	
 	// Refreshable tables on unlink documents
-	TableNames_Refreshable = GetTableNames_Refreshable("SerialLotNumbers, SourceOfOrigins");
+	
+	// https://github.com/IRPTeam/IRP/issues/1581
+	// https://bilistteam.atlassian.net/browse/IRP-802
+	//
+	// This excluding only for Return Documents SR or PR
+	Is = Is(Object.Ref);
+	ExcludingTableNames = "";
+	If Is.SR Or Is.PR Then
+		ExcludingTableNames = "SerialLotNumbers, SourceOfOrigins";
+	EndIf;
+	
+	TableNames_Refreshable = GetTableNames_Refreshable(ExcludingTableNames);
 
 	UpdatedProperties = New Array();
 	UpdatedRows = New Array();

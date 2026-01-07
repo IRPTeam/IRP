@@ -9,5 +9,4 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	ChoiceData.Add(OtherPartnerPayable);
 	ChoiceData.Add(OtherPartnerReceivable);
 	ChoiceData.Add(EmployeeReceivable);
-	ChoiceData.Add(EmployeePayable);
 EndProcedure

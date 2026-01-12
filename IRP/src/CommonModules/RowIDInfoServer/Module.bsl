@@ -3120,7 +3120,10 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
 	|	ItemList.SalesPerson,
-	|	ItemList.VatRate
+	|	ItemList.VatRate,
+	|	ItemList.ManualOfferType,
+	|	ItemList.ManualOfferAmount,
+	|	ItemList.ManualOfferPercent
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
@@ -13739,7 +13742,10 @@ Function GetColumnNames_ItemList()
 		   |VatRate,
 		   |ShipmentPlaningOrder,
 		   |GoodsReceipt,
-		   |ShipmentConfirmation";		
+		   |ShipmentConfirmation,
+		   |ManualOfferType,
+		   |ManualOfferAmount,
+		   |ManualOfferPercent";		
 EndFunction
 
 Function GetEmptyTable_ItemList()

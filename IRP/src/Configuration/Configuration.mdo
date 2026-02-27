@@ -956,6 +956,7 @@
   <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceServer</commonModules>
   <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceClient</commonModules>
   <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceServer</commonModules>
+  <commonModules>CommonModule.PDFFunctionsClientServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>

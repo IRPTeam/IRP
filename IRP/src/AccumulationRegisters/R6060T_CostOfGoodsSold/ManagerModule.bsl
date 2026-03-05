@@ -613,7 +613,19 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 		PostingServer.SetPostingDataTable(Parameters.PostingDataTables, Parameters, RegMetadata.Name, RecordsTable);
 		Parameters.PostingDataTables[RegMetadata].WriteInTransaction = False;
 	
-		CurrenciesServer.PreparePostingDataTables(Parameters, Undefined);
+		CurrenciesTableParams = New Structure();
+		CurrenciesTableParams.Insert("Ref"            , Parameters.Object);
+		CurrenciesTableParams.Insert("Date"           , Parameters.Object.Date);
+		CurrenciesTableParams.Insert("Company"        , Parameters.Object.Company);
+		CurrenciesTableParams.Insert("Currency"       , Parameters.Object.Company.LandedCostCurrencyMovementType.Currency);
+		CurrenciesTableParams.Insert("Agreement"      , Undefined);
+		CurrenciesTableParams.Insert("RowKey"         , "");
+		CurrenciesTableParams.Insert("DocumentAmount" , 0);
+		CurrenciesTableParams.Insert("Currencies"     , New Array());
+		
+		CurrenciesTable = Parameters.Object.Currencies.UnloadColumns();
+		CurrenciesServer.UpdateCurrencyTable(CurrenciesTableParams, CurrenciesTable);
+		CurrenciesServer.PreparePostingDataTables(Parameters, CurrenciesTable);
 		CurrenciesServer.ExcludePostingDataTable(Parameters, RegMetadata);
 		
 		RecordSet.Load(Parameters.PostingDataTables[RegMetadata].PrepareTable);

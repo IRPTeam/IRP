@@ -309,7 +309,7 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 						RowRefObject = Row.RowRef.GetObject();
 						RowRefObject.IsFixedItemKey = False;
 						RowRefObject.IsFixedStore = False;
-						RowRefObject.Write();
+						WriteRowIDCatalog(RowRefObject);
 					EndIf;
 				EndIf;
 			EndIf;

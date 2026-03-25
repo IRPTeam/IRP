@@ -71,6 +71,18 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndIf;
 
+	If Not Cancel = True Then
+		For Each Row In ThisObject.ItemList Do
+			If Row.Store.ForbidShipmentBeforeFinancialDocuments And Not ValueIsFilled(Row.ShipmentBasis) Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(
+					R().Error_190, 
+					"Object.ItemList[" + (Row.LineNumber - 1) + "].ShipmentBasis", 
+					"Object.ItemList");
+			EndIf;
+		EndDo;
+	EndIf;
+
 	If ValueIsFilled(ThisObject.Company) Then
 		Query = New Query;
 		Query.Text =

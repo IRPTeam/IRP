@@ -1825,6 +1825,8 @@ Function R4050B_StockInventory()
 		   |	ItemList.Company,
 		   |	ItemList.Store,
 		   |	ItemList.ItemKey,
+		   |	ItemList.SerialLotNumber,
+		   |	ItemList.SourceOfOrigin,
 		   |	SUM(ItemList.Quantity) AS Quantity
 		   |INTO R4050B_StockInventory
 		   |FROM
@@ -1836,7 +1838,9 @@ Function R4050B_StockInventory()
 		   |	ItemList.Period,
 		   |	ItemList.Company,
 		   |	ItemList.Store,
-		   |	ItemList.ItemKey
+		   |	ItemList.ItemKey,
+		   |	ItemList.SerialLotNumber,
+		   |	ItemList.SourceOfOrigin
 		   |
 		   |UNION ALL
 		   |
@@ -1846,6 +1850,8 @@ Function R4050B_StockInventory()
 		   |	ShipmentToTradeAgent.Company,
 		   |	ShipmentToTradeAgent.StoreTradeAgent,
 		   |	ShipmentToTradeAgent.ItemKey,
+		   |	ShipmentToTradeAgent.SerialLotNumber,
+		   |	ShipmentToTradeAgent.SourceOfOrigin,
 		   |	SUM(ShipmentToTradeAgent.Quantity) AS Quantity
 		   |FROM
 		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
@@ -1856,7 +1862,9 @@ Function R4050B_StockInventory()
 		   |	ShipmentToTradeAgent.Period,
 		   |	ShipmentToTradeAgent.Company,
 		   |	ShipmentToTradeAgent.StoreTradeAgent,
-		   |	ShipmentToTradeAgent.ItemKey
+		   |	ShipmentToTradeAgent.ItemKey,
+		   |	ShipmentToTradeAgent.SerialLotNumber,
+		   |	ShipmentToTradeAgent.SourceOfOrigin
 		   |
 		   |UNION ALL
 		   |
@@ -1866,6 +1874,8 @@ Function R4050B_StockInventory()
 		   |	ShipmentToTradeAgent.Company,
 		   |	ShipmentToTradeAgent.Store,
 		   |	ShipmentToTradeAgent.ItemKey,
+		   |	ShipmentToTradeAgent.SerialLotNumber,
+		   |	ShipmentToTradeAgent.SourceOfOrigin,
 		   |	SUM(ShipmentToTradeAgent.Quantity) AS Quantity
 		   |FROM
 		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
@@ -1876,7 +1886,9 @@ Function R4050B_StockInventory()
 		   |	ShipmentToTradeAgent.Period,
 		   |	ShipmentToTradeAgent.Company,
 		   |	ShipmentToTradeAgent.Store,
-		   |	ShipmentToTradeAgent.ItemKey";
+		   |	ShipmentToTradeAgent.ItemKey,
+		   |	ShipmentToTradeAgent.SerialLotNumber,
+		   |	ShipmentToTradeAgent.SourceOfOrigin";
 EndFunction
 
 Function R8015T_ConsignorPrices()

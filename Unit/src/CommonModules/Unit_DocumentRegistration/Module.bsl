@@ -689,6 +689,7 @@ Function GetIgnored_Fields()
 	Array.Add("RetailGoodsReceipt.R4010B_ActualStocks.SourceOfOrigin");
 	
 	Array.Add("IncomingExchRateAdjustmentInvoice.R5022T_Expenses.*");
+	Array.Add("*.R6510B_StockBalance.*");
 	
 	Map = New Map();
 	

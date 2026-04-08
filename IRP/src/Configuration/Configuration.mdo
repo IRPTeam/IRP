@@ -587,6 +587,8 @@
   <roles>Role.Report_T0001_FilesAnalyser</roles>
   <roles>Role.Document_IncomingExchRateAdjustmentInvoice</roles>
   <roles>Role.Document_OutgoingExchRateAdjustmentInvoice</roles>
+  <roles>Role.AccumulationRegisters_R6510B_StockBalance</roles>
+  <roles>Role.Report_R6510A_StockBalance</roles>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -1717,6 +1719,7 @@
   <reports>Report.R9510A_Salary</reports>
   <reports>Report.S1001L_VendorsPrices</reports>
   <reports>Report.T0001_FilesAnalyser</reports>
+  <reports>Report.R6510A_StockBalance</reports>
   <dataProcessors>DataProcessor.AccountantAutomatedWorkplace</dataProcessors>
   <dataProcessors>DataProcessor.AccountingService</dataProcessors>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
@@ -1972,6 +1975,7 @@
   <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.B1040B_AgingKey</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6510B_StockBalance</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

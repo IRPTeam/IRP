@@ -431,7 +431,8 @@ Function R4050B_StockInventory()
 		   |	Materials.Company,
 		   |	Materials.ItemKey,
 		   |	Materials.Store,
-		   |	Materials.Quantity
+		   |	Materials.Quantity,
+		   |	0 AS PreliminaryQuantity
 		   |INTO R4050B_StockInventory
 		   |FROM
 		   |	Materials AS Materials

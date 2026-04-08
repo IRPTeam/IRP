@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6ba9f5e1-ca19-420f-bab6-eb28686cdc87">
+  <name>OpenReport_A0012_AccountCard</name>
+  <synonym>
+    <key>en</key>
+    <value>A0012 Account card</value>
+  </synonym>
+  <group>NavigationPanelOrdinary</group>
+  <representation>Auto</representation>
+</mdclass:CommonCommand>

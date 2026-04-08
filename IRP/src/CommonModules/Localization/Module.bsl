@@ -2852,6 +2852,9 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("Error_UnknownRefType", NStr("en = 'Unknown ref type: %1'", Lang));
 	Strings.Insert("Error_StepsEnablerNotDefined", NStr("en = 'Steps enabler is not defined [%1]'", Lang));
 	Strings.Insert("Error_UnsupportedExternalLinkSC3", NStr("en = 'Not supported External link for [SC] to [%1]'", Lang));
+	Strings.Insert("Error_CreatingPDF", NStr("en = 'Error creating PDF'", Lang));
+	Strings.Insert("Error_ReadingPDF", NStr("en = 'Error reading PDF'", Lang));
+	Strings.Insert("Error_ChromiumNotFound", NStr("en = 'Chromium not found'", Lang));
 #EndRegion
 
 #Region Tasks

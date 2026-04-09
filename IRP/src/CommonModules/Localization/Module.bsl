@@ -1005,6 +1005,10 @@
 // * Error_UnknownRefType - String - 
 // * Error_StepsEnablerNotDefined - String - 
 // * Error_UnsupportedExternalLinkSC3 - String - 
+// * Error_CreatingPDF - String -
+// * Error_ReadingPDF - String -
+// * Error_ChromiumNotFound - String -
+// * Error_TableNotSupportedInBuilder - String -
 // * Task_Result_Execution - String - 
 // * Task_Result_Execution_Not - String - 
 // * Task_Result_Verification - String - 
@@ -2855,6 +2859,7 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("Error_CreatingPDF", NStr("en = 'Error creating PDF'", Lang));
 	Strings.Insert("Error_ReadingPDF", NStr("en = 'Error reading PDF'", Lang));
 	Strings.Insert("Error_ChromiumNotFound", NStr("en = 'Chromium not found'", Lang));
+	Strings.Insert("Error_TableNotSupportedInBuilder", NStr("en = 'Table [%1] is not supported in Builder API'", Lang));
 #EndRegion
 
 #Region Tasks

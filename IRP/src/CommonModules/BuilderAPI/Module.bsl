@@ -449,10 +449,11 @@ EndFunction
 //  TableName - String - Table name
 //  ReturnRowKey - Boolean -
 //  RowKey - String -
+//  LineNumber - Number -
 // 
 // Returns:
 //  ValueTableRow, String
-Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False, RowKey = "") Export
+Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False, RowKey = "", LineNumber = 0) Export
 	If TableName = Undefined Then
 		TableName = Wrapper.DefaultTable;
 	EndIf;
@@ -466,12 +467,19 @@ Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False, RowKey = "
 			NewRow.Key = RowKey;
 		EndIf;
 	EndIf;
+	If LineNumber > 0 Then
+		NewRow.LineNumber = LineNumber;
+	EndIf;
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
 	ServerParameters.TableName = TableName;
 	Rows = New Array(); // Array Of DocumentTabularSectionRow.SalesInvoice.ItemList
 	Rows.Add(NewRow);
 	ServerParameters.Rows = Rows;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+	If ControllerClientServer_V2.IsFullTransferTabularSection(Parameters, TableName) 
+			OR ControllerClientServer_V2.IsFullLoadTabularSection(Parameters, TableName) Then
+		Raise StrTemplate(R().Error_TableNotSupportedInBuilder, TableName);
+	EndIf;
 	ControllerClientServer_V2.AddNewRow(TableName, Parameters);
 	If KeyFieldExists Then
 		NewRow = WrapperTable.FindRows(New Structure("Key", NewRow.Key))[0];

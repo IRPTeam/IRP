@@ -1825,7 +1825,8 @@ Function R4050B_StockInventory()
 		   |	ItemList.Company,
 		   |	ItemList.Store,
 		   |	ItemList.ItemKey,
-		   |	SUM(ItemList.Quantity) AS Quantity
+		   |	SUM(ItemList.Quantity) AS Quantity,
+		   |	0 AS PreliminaryQuantity
 		   |INTO R4050B_StockInventory
 		   |FROM
 		   |	ItemList AS ItemList
@@ -1846,7 +1847,8 @@ Function R4050B_StockInventory()
 		   |	ShipmentToTradeAgent.Company,
 		   |	ShipmentToTradeAgent.StoreTradeAgent,
 		   |	ShipmentToTradeAgent.ItemKey,
-		   |	SUM(ShipmentToTradeAgent.Quantity) AS Quantity
+		   |	SUM(ShipmentToTradeAgent.Quantity) AS Quantity,
+		   |	0 AS PreliminaryQuantity
 		   |FROM
 		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
 		   |WHERE
@@ -1866,7 +1868,8 @@ Function R4050B_StockInventory()
 		   |	ShipmentToTradeAgent.Company,
 		   |	ShipmentToTradeAgent.Store,
 		   |	ShipmentToTradeAgent.ItemKey,
-		   |	SUM(ShipmentToTradeAgent.Quantity) AS Quantity
+		   |	SUM(ShipmentToTradeAgent.Quantity) AS Quantity,
+		   |	0 AS PreliminaryQuantity
 		   |FROM
 		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
 		   |WHERE

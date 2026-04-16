@@ -142,6 +142,7 @@
   <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
   <registerRecords>AccumulationRegister.B1040B_AgingKey</registerRecords>
+  <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -730,6 +730,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	
 	// Stock inventory
 	AccumulationRegisters.R4050B_StockInventory.StockInventory_LoadRecords(CalculationSettings.CalculationMovementCostRef);
+	AccumulationRegisters.R6510B_StockBalance.StockBalance_LoadRecords(CalculationSettings.CalculationMovementCostRef);
 	
 	// Relevance
 	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Clear(CalculationSettings.Company, CalculationSettings.EndPeriod);

@@ -340,6 +340,20 @@
 		</right>
 	</object>
 	<object>
+		<name>AccumulationRegister.R6510B_StockBalance</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Store", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.R8515T_CostOfFixedAsset.Attribute.CalculationMovementCost</name>
 		<right>
 			<name>Edit</name>

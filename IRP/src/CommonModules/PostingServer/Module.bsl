@@ -305,7 +305,7 @@ Function RecordSetIsEqual(RecordSet, TableForLoad)
 
 	RecordSet.Load(TableForLoad);
 	
-	Result = CommonFunctionsServer.TablesIsEqual(RecordSet.Unload(), TableOldRecords, "Recorder,LineNumber,PointInTime,UniqueID");
+	Result = CommonFunctionsServer.TablesIsEqual(RecordSet.Unload(), TableOldRecords, "Recorder,LineNumber,PointInTime,UniqueID", True);
 	
 	Return Result;
 EndFunction

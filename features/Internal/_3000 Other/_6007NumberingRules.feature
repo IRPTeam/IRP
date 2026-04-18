@@ -136,19 +136,19 @@ Scenario: _607701 check numeration for documents (continuous numbering is used f
 		And I click "Create" button
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I click "Save" button
-		Then the form attribute named "DocumentNumber" became equal to "72530016"
+		Then the form attribute named "DocumentNumber" became equal to "72630016"
 	* Create PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click "Create" button
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I click "Save" button
-		Then the form attribute named "DocumentNumber" became equal to "72530017"
+		Then the form attribute named "DocumentNumber" became equal to "72630017"
 	* Create SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click "Create" button
 		And I select from the drop-down list named "Company" by "Main Company" string
 		And I click "Save" button
-		Then the form attribute named "DocumentNumber" became equal to "72520001"
+		Then the form attribute named "DocumentNumber" became equal to "72620001"
 				
 		
 Scenario: _607702 check numeration for catalog (partner term)
@@ -160,10 +160,10 @@ Scenario: _607702 check numeration for catalog (partner term)
 		And I input "test" text in "ENG" field
 		And I select from "Multi currency movement type" drop-down list by "eu" string
 		And I expand "Agreement info" group
-		And I input "24.01.2025" text in the field named "Date"
+		And I input "24.01.2026" text in the field named "Date"
 		And I change the radio button named "Type" value to "Customer"
 		And I click "Save" button
-		Then the form attribute named "Number" became equal to "72510128"
+		Then the form attribute named "Number" became equal to "72610128"
 	And I close all client application windows
 
 Scenario: _607703 check manual editing for numerator

@@ -145,10 +145,10 @@ Scenario: _051504 check Commissioning of fixed asset movements by the Register "
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Commissioning of fixed asset 11 dated 12.01.2024 12:00:00' | ''                    | ''           | ''             | ''         | ''              | ''         | ''                     | ''                        |
-			| 'Register  "R4050 Stock inventory"'                         | ''                    | ''           | ''             | ''         | ''              | ''         | ''                     | ''                        |
-			| ''                                                          | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key'      | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
-			| ''                                                          | '12.01.2024 12:00:00' | 'Expense'    | 'Main Company' | 'Store 02' | 'Fixed asset 1' | '1'        | ''                     | ''                        |		
+			| 'Commissioning of fixed asset 11 dated 12.01.2024 12:00:00' | ''                    | ''           | ''             | ''         | ''              | ''                  | ''                 | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'                         | ''                    | ''           | ''             | ''         | ''              | ''                  | ''                 | ''         | ''                     | ''                        |
+			| ''                                                          | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key'      | 'Serial lot number' | 'Source of origin' | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                                          | '12.01.2024 12:00:00' | 'Expense'    | 'Main Company' | 'Store 02' | 'Fixed asset 1' | ''                  | ''                 | '1'        | ''                     | ''                        |
 	And I close all client application windows
 
 Scenario: _051505 check Commissioning of fixed asset movements by the Register "R6020 Batch balance"

@@ -744,7 +744,8 @@ Function R4050B_StockInventory()
 		   |	Header.ItemKey,
 		   |	VALUE(Catalog.SerialLotNumbers.EmptyRef) as SerialLotNumber,
 		   |	VALUE(Catalog.SourceOfOrigins.EmptyRef) as SourceOfOrigin,
-		   |	SUM(Header.Quantity) AS Quantity
+		   |	SUM(Header.Quantity) AS Quantity,
+		   |	0 AS PreliminaryQuantity
 		   |INTO R4050B_StockInventory
 		   |FROM
 		   |	Header AS Header
@@ -768,7 +769,8 @@ Function R4050B_StockInventory()
 		   |	Materials.ItemKey,
 		   |	VALUE(Catalog.SerialLotNumbers.EmptyRef) as SerialLotNumber,
 		   |	VALUE(Catalog.SourceOfOrigins.EmptyRef) as SourceOfOrigin,
-		   |	SUM(Materials.Quantity) AS Quantity
+		   |	SUM(Materials.Quantity) AS Quantity,
+		   |	0 AS PreliminaryQuantity
 		   |FROM
 		   |	Materials AS Materials
 		   |WHERE

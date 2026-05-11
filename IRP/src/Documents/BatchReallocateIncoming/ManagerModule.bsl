@@ -129,7 +129,8 @@ Function R4050B_StockInventory()
 		   |	ItemList.ItemKey,
 		   |	VALUE(Catalog.SerialLotNumbers.EmptyRef) as SerialLotNumber,
 		   |	VALUE(Catalog.SourceOfOrigins.EmptyRef) as SourceOfOrigin,
-		   |	SUM(ItemList.Quantity) AS Quantity
+		   |	SUM(ItemList.Quantity) AS Quantity,
+		   |	0 AS PreliminaryQuantity
 		   |INTO R4050B_StockInventory
 		   |FROM
 		   |	ItemList AS ItemList

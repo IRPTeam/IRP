@@ -433,7 +433,8 @@ Function R4050B_StockInventory()
 		   |	VALUE(Catalog.SerialLotNumbers.EmptyRef) as SerialLotNumber,
 		   |	VALUE(Catalog.SourceOfOrigins.EmptyRef) as SourceOfOrigin,
 		   |	Materials.Store,
-		   |	Materials.Quantity
+		   |	Materials.Quantity,
+		   |	0 AS PreliminaryQuantity
 		   |INTO R4050B_StockInventory
 		   |FROM
 		   |	Materials AS Materials

@@ -1799,6 +1799,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_187", NStr("en = 'Error chage quantity for [%1]'", Lang));
 	Strings.Insert("Error_188", NStr("en = 'Section with name [%1] already exists'", Lang));
 	Strings.Insert("Error_189", NStr("en = 'Ext. dimension number is required field'", Lang));
+	Strings.Insert("Error_190", NStr("en = 'Shipment without financial documents is prohibited'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	

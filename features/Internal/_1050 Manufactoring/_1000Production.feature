@@ -1704,13 +1704,13 @@ Scenario: _10342 check movements Production (Repacking)
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button	
 		Then "ResultTable" spreadsheet document is equal
-			| '$$Production1041$$'                  | ''              | ''                         | ''            | ''                    | ''               | ''           | ''                                 | ''                         |
-			| 'Document registrations records'      | ''              | ''                         | ''            | ''                    | ''               | ''           | ''                                 | ''                         |
-			| 'Register  "R4050 Stock inventory"'   | ''              | ''                         | ''            | ''                    | ''               | ''           | ''                                 | ''                         |
-			| ''                                    | 'Record type'   | 'Period'                   | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''                                 |'Attributes'                |
-			| ''                                    | ''              | ''                         | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'                         |'Calculation movement cost' |
-			| ''                                    | 'Receipt'       | '$$DateProduction1041$$'   | '2'           | ''                    | 'Main Company'   | 'Store 02'   | 'Стремянка номер 5 ступенчатая'    | ''                         |
-			| ''                                    | 'Expense'       | '$$DateProduction1041$$'   | '2'           | ''                    | 'Main Company'   | 'Store 03'   | 'Стремянка номер 8'                | ''                         |
+			| '$$Production1041$$'                  | ''              | ''                         | ''            | ''                    | ''               | ''           | ''                                 | ''                  | ''                 | ''                         |
+			| 'Document registrations records'      | ''              | ''                         | ''            | ''                    | ''               | ''           | ''                                 | ''                  | ''                 | ''                         |
+			| 'Register  "R4050 Stock inventory"'   | ''              | ''                         | ''            | ''                    | ''               | ''           | ''                                 | ''                  | ''                 | ''                         |
+			| ''                                    | 'Record type'   | 'Period'                   | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''                                 | ''                  | ''                 |'Attributes'                |
+			| ''                                    | ''              | ''                         | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'                         | 'Serial lot number' | 'Source of origin' |'Calculation movement cost' |
+			| ''                                    | 'Receipt'       | '$$DateProduction1041$$'   | '2'           | ''                    | 'Main Company'   | 'Store 02'   | 'Стремянка номер 5 ступенчатая'    | ''                  | ''                 | ''                         |
+			| ''                                    | 'Expense'       | '$$DateProduction1041$$'   | '2'           | ''                    | 'Main Company'   | 'Store 03'   | 'Стремянка номер 8'                | ''                  | ''                 | ''                         |
 	* T6010 Batches info
 		And I select "T6010 Batches info" exact value from "Register" drop-down list
 		And I click "Generate report" button	

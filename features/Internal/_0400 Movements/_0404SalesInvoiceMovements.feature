@@ -289,13 +289,13 @@ Scenario: _040135 check Sales invoice movements by the Register  "R4050 Stock in
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
-			| 'Document registrations records'              | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
-			| 'Register  "R4050 Stock inventory"'           | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
-			| ''                                            | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''            |'Attributes'                |
-			| ''                                            | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'    |'Calculation movement cost' |
-			| ''                                            | 'Expense'       | '28.01.2021 18:48:53'   | '1'           | ''                    | 'Main Company'   | 'Store 02'   | 'XS/Blue'     | ''                         |
-			| ''                                            | 'Expense'       | '28.01.2021 18:48:53'   | '10'          | ''                    | 'Main Company'   | 'Store 02'   | '36/Red'      | ''                         |
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''                     | ''             | ''         | ''         | ''                  | ''                 | ''                          |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''                     | ''             | ''         | ''         | ''                  | ''                 | ''                          |
+			| 'Register  "R4050 Stock inventory"'         | ''            | ''                    | ''          | ''                     | ''             | ''         | ''         | ''                  | ''                 | ''                          |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | ''                     | 'Dimensions'   | ''         | ''         | ''                  | ''                 | 'Attributes'                |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Preliminary quantity' | 'Company'      | 'Store'    | 'Item key' | 'Serial lot number' | 'Source of origin' | 'Calculation movement cost' |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '1'         | ''                     | 'Main Company' | 'Store 02' | 'XS/Blue'  | ''                  | ''                 | ''                          |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '10'        | ''                     | 'Main Company' | 'Store 02' | '36/Red'   | ''                  | ''                 | ''                          |
 			
 		And I close all client application windows
 		
@@ -1043,19 +1043,19 @@ Scenario: _0401333 check Sales invoice movements by the Register  "R4050 Stock i
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 192 dated 02.11.2022 10:53:19'   | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                         |
-			| 'Document registrations records'                | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                         |
-			| 'Register  "R4050 Stock inventory"'             | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                         |
-			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''                    | ''            |'Attributes'                |
-			| ''                                              | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'               | 'Item key'    |'Calculation movement cost' |
-			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '1'           | ''                    | 'Main Company'   | 'Trade agent store'   | '37/18SD'     | ''                         |
-			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '2'           | ''                    | 'Main Company'   | 'Trade agent store'   | 'UNIQ'        | ''                         |
-			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '4'           | ''                    | 'Main Company'   | 'Trade agent store'   | 'XS/Blue'     | ''                         |
-			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '4'           | ''                    |'Main Company'    | 'Trade agent store'   | 'PZU'         | ''                         |
-			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '1'           | ''                    | 'Main Company'   | 'Store 01'            | '37/18SD'     | ''                         |
-			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '2'           | ''                    | 'Main Company'   | 'Store 01'            | 'UNIQ'        | ''                         |
-			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '4'           | ''                    | 'Main Company'   | 'Store 01'            | 'XS/Blue'     | ''                         |
-			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '4'           | ''                    | 'Main Company'   | 'Store 01'            | 'PZU'         | ''                         |
+			| 'Sales invoice 192 dated 02.11.2022 10:53:19'   | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                  | ''                 | ''                         |
+			| 'Document registrations records'                | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                  | ''                 | ''                         |
+			| 'Register  "R4050 Stock inventory"'             | ''              | ''                      | ''            | ''                    | ''               | ''                    | ''            | ''                  | ''                 | ''                         |
+			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''                    | ''            | ''                  | ''                 |'Attributes'                |
+			| ''                                              | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'               | 'Item key'    | 'Serial lot number' | 'Source of origin' |'Calculation movement cost' |
+			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '1'           | ''                    | 'Main Company'   | 'Trade agent store'   | '37/18SD'     | ''                  | ''                 | ''                         |
+			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '2'           | ''                    | 'Main Company'   | 'Trade agent store'   | 'UNIQ'        | ''                  | ''                 | ''                         |
+			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '4'           | ''                    | 'Main Company'   | 'Trade agent store'   | 'XS/Blue'     | ''                  | ''                 | ''                         |
+			| ''                                              | 'Receipt'       | '02.11.2022 10:53:19'   | '4'           | ''                    |'Main Company'    | 'Trade agent store'   | 'PZU'         | ''                  | ''                 | ''                         |
+			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '1'           | ''                    | 'Main Company'   | 'Store 01'            | '37/18SD'     | ''                  | ''                 | ''                         |
+			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '2'           | ''                    | 'Main Company'   | 'Store 01'            | 'UNIQ'        | ''                  | ''                 | ''                         |
+			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '4'           | ''                    | 'Main Company'   | 'Store 01'            | 'XS/Blue'     | ''                  | ''                 | ''                         |
+			| ''                                              | 'Expense'       | '02.11.2022 10:53:19'   | '4'           | ''                    | 'Main Company'   | 'Store 01'            | 'PZU'         | ''                  | ''                 | ''                         |
 	And I close all client application windows						
 
 
@@ -1285,13 +1285,13 @@ Scenario: _0401347 check Sales invoice movements by the Register  "R4050 Stock i
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 194 dated 04.11.2022 16:33:38'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
-			| 'Document registrations records'                | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
-			| 'Register  "R4050 Stock inventory"'             | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                         |
-			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''            |'Attributes'                |
-			| ''                                              | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'    |'Calculation movement cost' |
-			| ''                                              | 'Expense'       | '04.11.2022 16:33:38'   | '1'           | ''                    | 'Main Company'   | 'Store 02'   | 'XS/Blue'     | ''                         |
-			| ''                                              | 'Expense'       | '04.11.2022 16:33:38'   | '1'           | ''                    | 'Main Company'   | 'Store 02'   | 'UNIQ'        | ''                         |
+			| 'Sales invoice 194 dated 04.11.2022 16:33:38'   | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                  | ''                 | ''                         |
+			| 'Document registrations records'                | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                  | ''                 | ''                         |
+			| 'Register  "R4050 Stock inventory"'             | ''              | ''                      | ''            | ''                    | ''               | ''           | ''            | ''                  | ''                 | ''                         |
+			| ''                                              | 'Record type'   | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''           | ''            | ''                  | ''                 |'Attributes'                |
+			| ''                                              | ''              | ''                      | 'Quantity'    | 'Preliminary quantity'| 'Company'        | 'Store'      | 'Item key'    | 'Serial lot number' | 'Source of origin' |'Calculation movement cost' |
+			| ''                                              | 'Expense'       | '04.11.2022 16:33:38'   | '1'           | ''                    | 'Main Company'   | 'Store 02'   | 'XS/Blue'     | ''                  | ''                 | ''                         |
+			| ''                                              | 'Expense'       | '04.11.2022 16:33:38'   | '1'           | ''                    | 'Main Company'   | 'Store 02'   | 'UNIQ'        | ''                  | ''                 | ''                         |
 		And I close all client application windows	
 
 Scenario: _0401348 check Sales invoice movements by the Register  "R4014 Serial lot numbers" (consignor and own stocks)
@@ -1597,10 +1597,10 @@ Scenario: _0401358 check Sales invoice movements by the Register  "R4050 Stock i
 		And Delay 10
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     | ''                        |
-			| 'Register  "R4050 Stock inventory"'           | ''                    | ''           | ''             | ''         | ''                  | ''         | ''                     | ''                        |
-			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key'          | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
-			| ''                                            | '04.06.2025 13:43:50' | 'Expense'    | 'Main Company' | 'Store 01' | 'Trousers/Trousers' | '10'       | ''                     | ''                        |
+			| 'Sales invoice 135 dated 04.06.2025 13:43:50' | ''                    | ''           | ''             | ''         | ''                  | ''                  | ''                 | ''         | ''                     | ''                        |
+			| 'Register  "R4050 Stock inventory"'           | ''                    | ''           | ''             | ''         | ''                  | ''                  | ''                 | ''         | ''                     | ''                        |
+			| ''                                            | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key'          | 'Serial lot number' | 'Source of origin' | 'Quantity' | 'Preliminary quantity' |'Calculation movement cost'|
+			| ''                                            | '04.06.2025 13:43:50' | 'Expense'    | 'Main Company' | 'Store 01' | 'Trousers/Trousers' | ''                  | ''                 | '10'       | ''                     | ''                        |
 	And I close all client application windows
 
 Scenario: _0401359 check Sales invoice movements by the Register  "R5010 Reconciliation statement" (partner Other)

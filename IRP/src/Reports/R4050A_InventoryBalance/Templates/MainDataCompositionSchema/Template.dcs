@@ -225,12 +225,28 @@
 				</v8:item>
 			</title>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SerialLotNumber</dataPath>
+			<field>SerialLotNumber</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SourceOfOrigin</dataPath>
+			<field>SourceOfOrigin</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT ALLOWED
 	R4050B_StockInventoryBalanceAndTurnovers.Company AS Company,
 	R4050B_StockInventoryBalanceAndTurnovers.Store AS Store,
 	R4050B_StockInventoryBalanceAndTurnovers.ItemKey.Item AS Item,
 	R4050B_StockInventoryBalanceAndTurnovers.ItemKey AS ItemKey,
+	R4050B_StockInventoryBalanceAndTurnovers.SerialLotNumber AS SerialLotNumber,
+	R4050B_StockInventoryBalanceAndTurnovers.SourceOfOrigin AS SourceOfOrigin,
 	R4050B_StockInventoryBalanceAndTurnovers.QuantityOpeningBalance AS QuantityOpeningBalance,
 	R4050B_StockInventoryBalanceAndTurnovers.QuantityReceipt AS QuantityReceipt,
 	R4050B_StockInventoryBalanceAndTurnovers.QuantityExpense AS QuantityExpense,

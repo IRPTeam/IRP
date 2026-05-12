@@ -416,7 +416,8 @@ Function R4050B_StockInventory()
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.SerialLotNumber AS SerialLotNumber,
 		|	VALUE(Catalog.SourceOfOrigins.EmptyRef) as SourceOfOrigin,
-		|	SUM(ItemList.Quantity) AS Quantity
+		|	SUM(ItemList.Quantity) AS Quantity,
+		|	0 as PreliminaryQuantity
 		|INTO R4050B_StockInventory
 		|FROM
 		|	ItemList AS ItemList
@@ -440,7 +441,8 @@ Function R4050B_StockInventory()
 		|	ItemList.ItemKeyWriteOff AS ItemKey,
 		|	ItemList.SerialLotNumberWriteOff,
 		|	VALUE(Catalog.SourceOfOrigins.EmptyRef),
-		|	SUM(ItemList.Quantity) AS Quantity
+		|	SUM(ItemList.Quantity) AS Quantity,
+		|	0 as PreliminaryQuantity
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE

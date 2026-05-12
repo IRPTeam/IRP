@@ -794,7 +794,8 @@ Function R4050B_StockInventory()
 		|		when SerialLotNumbers.SerialLotNumber.Ref is null
 		|			then ItemList.Quantity
 		|		else SerialLotNumbers.Quantity
-		|	end) as Quantity
+		|	end) as Quantity,
+		|	0 as PreliminaryQuantity
 		|INTO R4050B_StockInventory
 		|FROM
 		|	ItemList AS ItemList

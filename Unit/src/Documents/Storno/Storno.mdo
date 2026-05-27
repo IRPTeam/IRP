@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="a247b9c1-971d-4419-9f18-de7c6d992a21" extendedConfigurationObject="24bda5db-0172-46dd-bbda-efd554a25cdd">
+  <producedTypes>
+    <objectType typeId="b9942f51-49c0-479d-b288-9383acb2cdfd" valueTypeId="6aa68811-ad12-4fe8-a07e-c24abca61172"/>
+    <refType typeId="f44d4de6-1be7-4cda-adf9-1c72450c7162" valueTypeId="9cd2e6a0-a415-4030-8b70-c8de782b75ea"/>
+    <selectionType typeId="35f650cf-61c3-4784-b7e7-9503ca4db2e6" valueTypeId="1e26bfb6-8bee-460b-93aa-b4376dc45aa3"/>
+    <listType typeId="653b7008-9ccd-4ded-9575-6ceaab2a7c8b" valueTypeId="02d76408-5b05-4bb0-9b9e-fbc78e14baab"/>
+    <managerType typeId="c3607cbb-bed4-4f71-941d-453cb01db478" valueTypeId="e1ecae5f-0dbf-4014-b6e1-355afec6a52f"/>
+  </producedTypes>
+  <name>Storno</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

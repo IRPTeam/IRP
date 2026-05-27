@@ -174,6 +174,26 @@ EndProcedure
 
 // Event subscriptions: Posting_RowID
 Procedure Posting_RowID(Source, Cancel, PostingMode) Export
+	If Is(Source).Storno Then
+		Tables = Source.AdditionalProperties.RowIDTables;
+		If Tables.Property("TM1010B_RowIDMovements") Then
+			Source.RegisterRecords.TM1010B_RowIDMovements.Load(Tables.TM1010B_RowIDMovements);
+			Source.RegisterRecords.TM1010B_RowIDMovements.Write();
+		EndIf;
+		
+		If Tables.Property("TM1010T_RowIDMovements") Then
+			Source.RegisterRecords.TM1010T_RowIDMovements.Load(Tables.TM1010T_RowIDMovements);
+			Source.RegisterRecords.TM1010T_RowIDMovements.Write();
+		EndIf;
+		
+		If Tables.Property("T1040T_RowIDSerialLotNumbers") Then
+			Source.RegisterRecords.T1040T_RowIDSerialLotNumbers.Load(Tables.T1040T_RowIDSerialLotNumbers);
+			Source.RegisterRecords.T1040T_RowIDSerialLotNumbers.Write();
+		EndIf;
+		
+		Return;
+	EndIf;
+	
 	If Is(Source).SOC Then
 		Posting_TM1010B_RowIDMovements_SOC(Source, Cancel, PostingMode);
 	EndIf;
@@ -14549,7 +14569,10 @@ Function Is(Source)
 		Or TypeOf = Type("DocumentRef.RetailGoodsReceipt"));		
 	Result.Insert("SPO",
 		TypeOf = Type("DocumentObject.ShipmentPlaningOrder")
-		Or TypeOf = Type("DocumentRef.ShipmentPlaningOrder"));	
+		Or TypeOf = Type("DocumentRef.ShipmentPlaningOrder"));			
+	Result.Insert("Storno",
+		TypeOf = Type("DocumentObject.Storno")
+		Or TypeOf = Type("DocumentRef.Storno"));	
 		
 	Return Result;
 EndFunction

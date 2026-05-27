@@ -589,6 +589,7 @@
   <roles>Role.Document_OutgoingExchRateAdjustmentInvoice</roles>
   <roles>Role.AccumulationRegisters_R6510B_StockBalance</roles>
   <roles>Role.Report_R6510A_StockBalance</roles>
+  <roles>Role.Document_Storno</roles>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -959,6 +960,8 @@
   <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceClient</commonModules>
   <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceServer</commonModules>
   <commonModules>CommonModule.PDFFunctionsClientServer</commonModules>
+  <commonModules>CommonModule.DocStornoClient</commonModules>
+  <commonModules>CommonModule.DocStornoServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1146,6 +1149,7 @@
   <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
+  <definedTypes>DefinedType.typeDocumentsWithStorno</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.AttachedFiles</commonCommands>
   <commonCommands>CommonCommand.EditConstants</commonCommands>
@@ -1541,6 +1545,7 @@
   <documents>Document.FixedAssetRevaluation</documents>
   <documents>Document.IncomingExchRateAdjustmentInvoice</documents>
   <documents>Document.OutgoingExchRateAdjustmentInvoice</documents>
+  <documents>Document.Storno</documents>
   <sequences>Sequence.SimpleBatch</sequences>
   <enums>Enum.AccountingAnalyticTypes</enums>
   <enums>Enum.AccrualAndDeductionPeriodicity</enums>

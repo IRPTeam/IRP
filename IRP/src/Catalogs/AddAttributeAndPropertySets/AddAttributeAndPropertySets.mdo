@@ -1020,6 +1020,13 @@
         <value>167</value>
       </code>
     </items>
+    <items id="f3f5fd66-b87e-410f-9051-551f5c5bf759">
+      <name>Document_Storno</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>168</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

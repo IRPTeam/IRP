@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="da034ba3-0af7-4020-901a-326c4aede57a">
+  <producedTypes>
+    <selectionType typeId="67e53df1-070b-48d1-b8c2-5690433e0c2f" valueTypeId="08a38bab-4d21-4305-9e7b-38c6992d173c"/>
+    <listType typeId="32718c32-fe3b-4e03-a843-0986a02eae0c" valueTypeId="3da154c5-4fd9-46bd-8ca5-352cfcce39f6"/>
+    <managerType typeId="1bef586a-ecab-4588-8449-54e61b62d70d" valueTypeId="f422630a-007d-42d7-9139-f06e540a6fc5"/>
+    <recordSetType typeId="1e981b19-5faa-4405-9337-00c0632dd901" valueTypeId="91e814f2-6e1f-401b-be25-f91a3636ac8d"/>
+    <recordKeyType typeId="aa1a5166-a222-4411-be54-4aeb8869853b" valueTypeId="bbbfcf67-9c5d-4f2c-9828-2d473f0f2e66"/>
+    <recordType typeId="8be701da-fe81-4fef-9832-2f9b6cd24a9f" valueTypeId="cbfff133-db07-405e-9211-4f4d1bec067e"/>
+    <recordManagerType typeId="c1ab0e1c-7bf3-44fc-8084-cd0ebac49909" valueTypeId="b62df1c3-2110-4eba-8cd2-a8e1fdf5c552"/>
+  </producedTypes>
+  <name>T2018S_FixedOffsetOfAdvances</name>
+  <synonym>
+    <key>en</key>
+    <value>T2018S Fixed offset of advances</value>
+  </synonym>
+  <editType>InDialog</editType>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="c40bd437-f6a1-4835-b99a-ba91fdbc490b">
+    <name>Amount</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="f89a3d80-6b9d-483b-aaac-e627842f4e62">
+    <name>Document</name>
+    <synonym>
+      <key>en</key>
+      <value>Document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.VendorsAdvancesClosing</types>
+      <types>DocumentRef.CustomersAdvancesClosing</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <denyIncompleteValues>true</denyIncompleteValues>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <master>true</master>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="c1fa26fa-77c5-4cb5-aad2-f0406d4c30fe">
+    <name>IsFixed</name>
+    <synonym>
+      <key>en</key>
+      <value>Is fixed</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="024fe1f5-60b4-40be-baab-c1160ae7e5bd">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="587ad673-e73e-4052-9c12-aa2db7ee9a6d">
+    <name>Branch</name>
+    <synonym>
+      <key>en</key>
+      <value>Branch</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="6f2a2415-0836-4f49-904f-20e4888892ba">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="1acf6bea-e320-4661-be50-68aa4538ea4e">
+    <name>Partner</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="ecb4731c-9064-458a-98d6-7bef4f808ada">
+    <name>LegalName</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="1f2c299a-7ffa-4014-823b-0e9b6f8507ae">
+    <name>Agreement</name>
+    <synonym>
+      <key>en</key>
+      <value>Agreement</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Agreements</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="32c19a4b-dbf7-45cc-b555-7083b2a8bc5c">
+    <name>Order</name>
+    <synonym>
+      <key>en</key>
+      <value>Order</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.SalesOrder</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="8a22169b-25c7-4389-8fc8-f5add5a74fb1">
+    <name>Project</name>
+    <synonym>
+      <key>en</key>
+      <value>Project</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Projects</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="b016fe66-3b29-40db-bed0-dc39862e4751">
+    <name>TransactionDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.SalesReportFromTradeAgent</types>
+      <types>DocumentRef.CashTransferOrder</types>
+      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.DebitNote</types>
+      <types>DocumentRef.CreditNote</types>
+      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.SalesReturn</types>
+      <types>DocumentRef.SalesReportToConsignor</types>
+      <types>DocumentRef.SalesInvoice</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+</mdclass:InformationRegister>

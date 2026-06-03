@@ -418,6 +418,7 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 	|				THEN UNDEFINED
 	|			ELSE T2018S_FixedOffsetOfAdvances.TransactionDocument
 	|		END
+	|		and T2018S_FixedOffsetOfAdvances.Document = &Ref
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Branch,
@@ -450,6 +451,7 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 	Query.SetParameter("Partner"   , AdvanceRecordData.Partner);
 	Query.SetParameter("LegalName" , AdvanceRecordData.LegalName);
 	Query.SetParameter("Agreement" , AdvanceRecordData.Agreement);
+	Query.SetParameter("Ref" , Parameters.Object.Ref);
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -1783,6 +1785,7 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|		AND T2018S_FixedOffsetOfAdvances.IsFixed
 	|		and tmp.TransactionBasis = case when T2018S_FixedOffsetOfAdvances.TransactionDocument.ref is null then undefined 
 	|			else T2018S_FixedOffsetOfAdvances.TransactionDocument end
+	|		and T2018S_FixedOffsetOfAdvances.Document = &Ref
 	|GROUP BY
 	|	tmp.Date,
 	|	tmp.Document,
@@ -1808,6 +1811,7 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	Query.SetParameter("Branch"        , Parameters.Object.Branch);
 	Query.SetParameter("Filter_Branch" , ValueIsFilled(Parameters.Object.Branch));
 	Query.SetParameter("Order_EmptyRef", Parameters.Order_EmptyRef);
+	Query.SetParameter("Ref", Parameters.Object.Ref);
 	
 	If FilterRecorder <> Undefined Then 
 		Query.SetParameter("Filter_Recorder", True);

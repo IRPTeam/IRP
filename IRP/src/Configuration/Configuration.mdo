@@ -654,6 +654,8 @@
   <commonModules>CommonModule.CurrenciesClient</commonModules>
   <commonModules>CommonModule.CurrenciesClientServer</commonModules>
   <commonModules>CommonModule.CurrenciesServer</commonModules>
+  <commonModules>CommonModule.DashboardClient</commonModules>
+  <commonModules>CommonModule.DashboardServer</commonModules>
   <commonModules>CommonModule.DataVersioningServer</commonModules>
   <commonModules>CommonModule.DefaultDataServer</commonModules>
   <commonModules>CommonModule.DocAdditionalAccrualClient</commonModules>
@@ -719,6 +721,8 @@
   <commonModules>CommonModule.DocFixedAssetTransferServer</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptServer</commonModules>
+  <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceClient</commonModules>
+  <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceServer</commonModules>
   <commonModules>CommonModule.DocIncomingPaymentOrderClient</commonModules>
   <commonModules>CommonModule.DocIncomingPaymentOrderServer</commonModules>
   <commonModules>CommonModule.DocInternalSupplyRequestClient</commonModules>
@@ -744,6 +748,8 @@
   <commonModules>CommonModule.DocOpeningEntryClient</commonModules>
   <commonModules>CommonModule.DocOpeningEntryServer</commonModules>
   <commonModules>CommonModule.DocOrderClosingServer</commonModules>
+  <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceClient</commonModules>
+  <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceServer</commonModules>
   <commonModules>CommonModule.DocOutgoingPaymentOrderClient</commonModules>
   <commonModules>CommonModule.DocOutgoingPaymentOrderServer</commonModules>
   <commonModules>CommonModule.DocPayrollClient</commonModules>
@@ -849,6 +855,7 @@
   <commonModules>CommonModule.FilesClient</commonModules>
   <commonModules>CommonModule.FilesClientServer</commonModules>
   <commonModules>CommonModule.FilesServer</commonModules>
+  <commonModules>CommonModule.FillingClientServer</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataEvent</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataReuse</commonModules>
   <commonModules>CommonModule.FixDocumentProblemsServer</commonModules>
@@ -898,6 +905,7 @@
   <commonModules>CommonModule.OffersClientServer</commonModules>
   <commonModules>CommonModule.OffersServer</commonModules>
   <commonModules>CommonModule.OffsetOfAdvancesServer</commonModules>
+  <commonModules>CommonModule.PDFFunctionsClientServer</commonModules>
   <commonModules>CommonModule.PeriodClosingServer</commonModules>
   <commonModules>CommonModule.PictureViewerClient</commonModules>
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>
@@ -950,13 +958,6 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.DashboardClient</commonModules>
-  <commonModules>CommonModule.DashboardServer</commonModules>
-  <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceClient</commonModules>
-  <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceServer</commonModules>
-  <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceClient</commonModules>
-  <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceServer</commonModules>
-  <commonModules>CommonModule.PDFFunctionsClientServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>

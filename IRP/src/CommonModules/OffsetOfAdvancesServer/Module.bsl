@@ -161,7 +161,7 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|	NULL AS TransactionKeyUUID,
 	|	tmp_DocAdv.Document.PointInTime AS PointInTime,
 	|	tmp_DocAdv.Document AS Document,
-	|	0 as Priority
+	|	1 as Priority
 	|INTO tmp_AllKeys
 	|FROM
 	|	tmp_DocAdv AS tmp_DocAdv

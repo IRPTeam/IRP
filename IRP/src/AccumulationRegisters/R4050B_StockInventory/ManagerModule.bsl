@@ -46,6 +46,8 @@ Procedure StockInventory_LoadRecords(CalculationMovementCostRef) Export
 	|	T4050_StockInventoryInfo.Company AS Company,
 	|	T4050_StockInventoryInfo.Store AS Store,
 	|	T4050_StockInventoryInfo.ItemKey AS ItemKey,
+	|	T4050_StockInventoryInfo.SerialLotNumber AS SerialLotNumber,
+	|	T4050_StockInventoryInfo.SourceOfOrigin AS SourceOfOrigin,
 	|	T4050_StockInventoryInfo.Quantity AS Quantity,
 	|	T4050_StockInventoryInfo.PreliminaryQuantity AS PreliminaryQuantity
 	|FROM
@@ -109,7 +111,7 @@ Procedure AdditionalDataFilling(MovementsValueTable) Export
 EndProcedure
 
 Function GetLockFieldNames() Export
-	Return "Company, Store, ItemKey";
+	Return "Company, Store, ItemKey, SerialLotNumber, SourceOfOrigin";
 EndFunction
 
 Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
@@ -139,6 +141,8 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	"SELECT
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey,
+	|	ItemList.SerialLotNumber,
+	|	ItemList.SourceOfOrigin,
 	|	RegisterBalance.Company,
 	|	RegisterBalance.Store,
 	|	RegisterBalance.ItemKey,
@@ -151,17 +155,22 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|	&Unposting AS Unposting
 	|FROM
 	|	ItemList AS ItemList
-	|		INNER JOIN AccumulationRegister.R4050B_StockInventory.Balance(, (Company, Store, ItemKey) IN
+	|		INNER JOIN AccumulationRegister.R4050B_StockInventory.Balance(, 
+	|			(Company, Store, ItemKey, SerialLotNumber, SourceOfOrigin) IN
 	|			(SELECT
 	|				ItemList.Company,
 	|				ItemList.Store,
-	|				ItemList.ItemKey
+	|				ItemList.ItemKey,
+	|				ItemList.SerialLotNumber,
+	|				ItemList.SourceOfOrigin
 	|				
 	|			FROM
 	|				ItemList AS ItemList)) AS RegisterBalance
 	|		ON RegisterBalance.Company = ItemList.Company
 	|		AND RegisterBalance.Store = ItemList.Store
 	|		AND RegisterBalance.ItemKey = ItemList.ItemKey
+	|		AND RegisterBalance.SerialLotNumber = ItemList.SerialLotNumber
+	|		AND RegisterBalance.SourceOfOrigin = ItemList.SourceOfOrigin
 	|		AND ItemList.Store.NegativeStockControl
 	|		
 	|WHERE

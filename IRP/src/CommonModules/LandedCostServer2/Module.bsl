@@ -645,7 +645,8 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	// Stock inventory info
 	RecordSet = InformationRegisters.T4050_StockInventoryInfo.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
-	Tables.DataForStockInventory.GroupBy("Period, Document, Company, Store, ItemKey, Direction", _QuantityResources);
+	Tables.DataForStockInventory.GroupBy("Period, Document, Company, Store, ItemKey, Direction, SerialLotNumber, SourceOfOrigin", 
+		_QuantityResources);
 
 	For Each Row In Tables.DataForStockInventory Do
 		NewRecord = RecordSet.Add();
@@ -730,6 +731,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	
 	// Stock inventory
 	AccumulationRegisters.R4050B_StockInventory.StockInventory_LoadRecords(CalculationSettings.CalculationMovementCostRef);
+	AccumulationRegisters.R6510B_StockBalance.StockBalance_LoadRecords(CalculationSettings.CalculationMovementCostRef);
 	
 	// Relevance
 	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Clear(CalculationSettings.Company, CalculationSettings.EndPeriod);
@@ -867,6 +869,8 @@ Function GetBatchWiseBalance(CalculationSettings)
 	DataForStockInventory.Columns.Add("Company"  , RegMetadata.Dimensions.Company.Type);
 	DataForStockInventory.Columns.Add("Store"    , RegMetadata.Dimensions.Store.Type);
 	DataForStockInventory.Columns.Add("ItemKey"  , RegMetadata.Dimensions.ItemKey.Type);
+	DataForStockInventory.Columns.Add("SerialLotNumber", RegMetadata.Dimensions.SerialLotNumber.Type);	
+	DataForStockInventory.Columns.Add("SourceOfOrigin", RegMetadata.Dimensions.SourceOfOrigin.Type);	
 	DataForStockInventory.Columns.Add("Direction", RegMetadata.Dimensions.Direction.Type);	
 	DataForStockInventory.Columns.Add("Quantity" , RegMetadata.Resources.Quantity.Type);
 	DataForStockInventory.Columns.Add("PreliminaryQuantity", RegMetadata.Resources.PreliminaryQuantity.Type);
@@ -1042,6 +1046,8 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 		NewStockExpense.Company = BatchRow.Company;
 		NewStockExpense.Store   = Balance_Batch.BatchKey.Store;
 		NewStockExpense.ItemKey = Balance_Batch.BatchKey.ItemKey;
+		NewStockExpense.SerialLotNumber = Balance_Batch.BatchKey.SerialLotNumber;
+		NewStockExpense.SourceOfOrigin = Balance_Batch.BatchKey.SourceOfOrigin;
 		NewStockExpense.PreliminaryQuantity = ExpenseQuantity;
 		
 	EndDo; // preliminary batches on balance
@@ -1189,6 +1195,8 @@ Procedure Calculate_InvoiceByPreliminary(Document, BatchRow, Tables, Calculation
 				NewStockExpense.Company = BatchRow.Company;
 				NewStockExpense.Store   = BatchRow.BatchKey.Store;
 				NewStockExpense.ItemKey = BatchRow.BatchKey.ItemKey;
+				NewStockExpense.SerialLotNumber = BatchRow.BatchKey.SerialLotNumber;
+				NewStockExpense.SourceOfOrigin = BatchRow.BatchKey.SourceOfOrigin;
 				NewStockExpense.PreliminaryQuantity = UnrecoverExpense.PreliminaryQuantity;
 				
 			EndDo;

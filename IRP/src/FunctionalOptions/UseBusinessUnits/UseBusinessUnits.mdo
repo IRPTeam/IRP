@@ -78,4 +78,5 @@
  <content>InformationRegister.T2016S_VendorsAdvancesRelevance.Dimension.Branch</content>
  <content>AccumulationRegister.R3016B_ChequeAndBonds.Dimension.Branch</content>
  <content>AccumulationRegister.R1001T_Purchases.Dimension.Branch</content>
+ <content>CommonAttribute.Branch</content>
 </mdclass:FunctionalOption>

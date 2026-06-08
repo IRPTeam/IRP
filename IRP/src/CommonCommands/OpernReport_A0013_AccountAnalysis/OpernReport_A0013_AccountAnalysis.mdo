@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="737464f3-a732-44c4-96c3-3c8b9873a446">
+ <name>OpenReport_A0013_AccountAnalysis</name>
+ <synonym>
+  <key>tr</key>
+  <value>A0013 Hesap analizi</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>A0013 Анализ счета</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>A0013 Account analysis</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <representation>Auto</representation>
+</mdclass:CommonCommand>

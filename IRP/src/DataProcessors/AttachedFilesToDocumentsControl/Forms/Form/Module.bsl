@@ -1014,14 +1014,6 @@ Procedure WriteOtherAttachmentInput(Structure)
 EndProcedure
 
 &AtClient
-Function IsPDF(FileRef)
-	
-	Extension = CommonFunctionsServer.GetRefAttribute(FileRef, "Extension"); // String
-	Return Not StrCompare(Extension, "pdf");
-	
-EndFunction
-
-&AtClient
 Procedure CurrentFilesTableSelection(Item, SelectedRow, Field, StandardProcessing)
 	
 	FileRef = Item.CurrentData.File;
@@ -1030,7 +1022,7 @@ Procedure CurrentFilesTableSelection(Item, SelectedRow, Field, StandardProcessin
 	Structure.Insert("FileRef", FileRef);
 	Structure.Insert("Title", StrTemplate("%1", FileRef));
 	Structure.Insert("Description", "");
-	Structure.Insert("IsPdf", IsPDF(FileRef));
+	Structure.Insert("IsPdf", PDFFunctionsClientServer.IsPDF(FileRef));
 	OpenForm("DataProcessor.AttachedFilesToDocumentsControl.Form.PictureViewer", Structure, , , , , ,FormWindowOpeningMode.LockOwnerWindow);
 	
 EndProcedure

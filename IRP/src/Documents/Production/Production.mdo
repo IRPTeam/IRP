@@ -106,6 +106,7 @@
  <registerRecords>AccumulationRegister.R7050T_ProductionDurations</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
+ <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

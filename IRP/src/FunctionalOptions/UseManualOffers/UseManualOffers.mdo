@@ -18,4 +18,7 @@
  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ManualOfferAmount</content>
  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ManualOfferPercent</content>
  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.ManualOfferType</content>
+ <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ManualOfferType</content>
+ <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ManualOfferAmount</content>
+ <content>Document.SalesReturn.TabularSection.ItemList.Attribute.ManualOfferPercent</content>
 </mdclass:FunctionalOption>

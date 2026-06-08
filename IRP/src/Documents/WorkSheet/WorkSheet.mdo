@@ -102,6 +102,7 @@
  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+ <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="ba2fd651-850a-44fb-9d74-faedcb601490">
@@ -1611,7 +1612,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Сумма оплаты</value>
+    <value>Сумма</value>
    </synonym>
    <synonym>
     <key>en</key>

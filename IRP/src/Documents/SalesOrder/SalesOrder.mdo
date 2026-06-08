@@ -138,6 +138,7 @@
  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
  <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
+ <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -2337,7 +2338,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Сумма оплаты</value>
+    <value>Сумма</value>
    </synonym>
    <synonym>
     <key>en</key>

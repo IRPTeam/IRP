@@ -2692,6 +2692,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_189", NStr("en='Ext. dimension number is required field';
 		|ru='Субконто это обязательное поле';
 		|tr='Ek boyut numarası zorunlu alandır'", Lang));
+	Strings.Insert("Error_190", NStr("en='Shipment without financial documents is prohibited';
+		|ru='Отгрузка без финансовых документов запрещена';
+		|tr='Fatura olmadan ürün sevki yasaklandı'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -4865,6 +4868,15 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 	Strings.Insert("Error_UnsupportedExternalLinkSC3", NStr("en='Not supported External link for [SC] to [%1]';
 		|ru='Не поддерживаемая Внешняя ссылка для [SC] в [%1]';
 		|tr='[SC] ile [%1] arasındaki harici bağlantı desteklenmiyor'", Lang));
+	Strings.Insert("Error_CreatingPDF", NStr("en='Error creating PDF';
+		|ru='Ошибка создания PDF';
+		|tr='PDF oluşturma hatası'", Lang));
+	Strings.Insert("Error_ReadingPDF", NStr("en='Error reading PDF';
+		|ru='Ошибка чтения PDF';
+		|tr='PDF okuma hatası'", Lang));
+	Strings.Insert("Error_ChromiumNotFound", NStr("en='Chromium not found';
+		|ru='Chromium не найден';
+		|tr='Chromium bulunamadı'", Lang));
 #EndRegion
 
 #Region Tasks

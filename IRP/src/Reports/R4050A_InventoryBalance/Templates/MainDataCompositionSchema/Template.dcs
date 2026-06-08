@@ -345,16 +345,137 @@
 				</v8:item>
 			</title>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SerialLotNumber</dataPath>
+			<field>SerialLotNumber</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SourceOfOrigin</dataPath>
+			<field>SourceOfOrigin</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Preliminary.PreliminaryQuantityOpeningBalance</dataPath>
+			<field>PreliminaryQuantityOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Açılış bakiyesi</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Начальный осткток</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Opeening balance</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>PreliminaryQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Preliminary.PreliminaryQuantityReceipt</dataPath>
+			<field>PreliminaryQuantityReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Gelen</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Приход</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Receipt</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Preliminary.PreliminaryQuantityExpense</dataPath>
+			<field>PreliminaryQuantityExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Çıkan</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Расход</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Expense</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Preliminary.PreliminaryQuantityClosingBalance</dataPath>
+			<field>PreliminaryQuantityClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Kapanış bakiyesi</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Конечный остаток</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Closing balance</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>PreliminaryQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldFolder">
+			<dataPath>Preliminary</dataPath>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ön</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Предварительный</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary</v8:content>
+				</v8:item>
+			</title>
+		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT ALLOWED
 	R4050B_StockInventoryBalanceAndTurnovers.Company AS Company,
 	R4050B_StockInventoryBalanceAndTurnovers.Store AS Store,
 	R4050B_StockInventoryBalanceAndTurnovers.ItemKey.Item AS Item,
 	R4050B_StockInventoryBalanceAndTurnovers.ItemKey AS ItemKey,
+	R4050B_StockInventoryBalanceAndTurnovers.SerialLotNumber AS SerialLotNumber,
+	R4050B_StockInventoryBalanceAndTurnovers.SourceOfOrigin AS SourceOfOrigin,
 	R4050B_StockInventoryBalanceAndTurnovers.QuantityOpeningBalance AS QuantityOpeningBalance,
 	R4050B_StockInventoryBalanceAndTurnovers.QuantityReceipt AS QuantityReceipt,
 	R4050B_StockInventoryBalanceAndTurnovers.QuantityExpense AS QuantityExpense,
 	R4050B_StockInventoryBalanceAndTurnovers.QuantityClosingBalance AS QuantityClosingBalance,
+	
+	R4050B_StockInventoryBalanceAndTurnovers.PreliminaryQuantityOpeningBalance AS PreliminaryQuantityOpeningBalance,
+	R4050B_StockInventoryBalanceAndTurnovers.PreliminaryQuantityReceipt AS PreliminaryQuantityReceipt,
+	R4050B_StockInventoryBalanceAndTurnovers.PreliminaryQuantityExpense AS PreliminaryQuantityExpense,
+	R4050B_StockInventoryBalanceAndTurnovers.PreliminaryQuantityClosingBalance AS PreliminaryQuantityClosingBalance,
+	
 	R4050B_StockInventoryBalanceAndTurnovers.Recorder AS Recorder,
 	R4050B_StockInventoryBalanceAndTurnovers.SecondPeriod AS SecondPeriod
 FROM
@@ -375,6 +496,22 @@ FROM
 	<totalField>
 		<dataPath>Quantity.ClosingBalance</dataPath>
 		<expression>Sum(Quantity.ClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Preliminary.PreliminaryQuantityOpeningBalance</dataPath>
+		<expression>Sum(Preliminary.PreliminaryQuantityOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Preliminary.PreliminaryQuantityReceipt</dataPath>
+		<expression>Sum(Preliminary.PreliminaryQuantityReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Preliminary.PreliminaryQuantityExpense</dataPath>
+		<expression>Sum(Preliminary.PreliminaryQuantityExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Preliminary.PreliminaryQuantityClosingBalance</dataPath>
+		<expression>Sum(Preliminary.PreliminaryQuantityClosingBalance)</expression>
 	</totalField>
 	<parameter>
 		<name>ReportPeriod</name>

@@ -608,6 +608,9 @@ Procedure OnCopyDocumentProcessingOnCopy(Source, CopiedObject, AddInfo = Undefin
 		Source.NumeratorRules = Catalogs.NumeratorGroups.EmptyRef();
 	EndIf;
 	
+	If Not FOServer.IsUseBusinessUnits() Then
+		FillPropertyValues(Source, New Structure("Branch", Undefined));
+	EndIf;
 EndProcedure
 
 #EndRegion

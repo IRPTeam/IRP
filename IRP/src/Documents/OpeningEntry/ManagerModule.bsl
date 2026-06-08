@@ -1825,7 +1825,10 @@ Function R4050B_StockInventory()
 		   |	ItemList.Company,
 		   |	ItemList.Store,
 		   |	ItemList.ItemKey,
-		   |	SUM(ItemList.Quantity) AS Quantity
+		   |	ItemList.SerialLotNumber,
+		   |	ItemList.SourceOfOrigin,
+		   |	SUM(ItemList.Quantity) AS Quantity,
+		   |	0 AS PreliminaryQuantity
 		   |INTO R4050B_StockInventory
 		   |FROM
 		   |	ItemList AS ItemList
@@ -1836,7 +1839,9 @@ Function R4050B_StockInventory()
 		   |	ItemList.Period,
 		   |	ItemList.Company,
 		   |	ItemList.Store,
-		   |	ItemList.ItemKey
+		   |	ItemList.ItemKey,
+		   |	ItemList.SerialLotNumber,
+		   |	ItemList.SourceOfOrigin
 		   |
 		   |UNION ALL
 		   |
@@ -1846,7 +1851,10 @@ Function R4050B_StockInventory()
 		   |	ShipmentToTradeAgent.Company,
 		   |	ShipmentToTradeAgent.StoreTradeAgent,
 		   |	ShipmentToTradeAgent.ItemKey,
-		   |	SUM(ShipmentToTradeAgent.Quantity) AS Quantity
+		   |	ShipmentToTradeAgent.SerialLotNumber,
+		   |	ShipmentToTradeAgent.SourceOfOrigin,
+		   |	SUM(ShipmentToTradeAgent.Quantity) AS Quantity,
+		   |	0 AS PreliminaryQuantity
 		   |FROM
 		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
 		   |WHERE
@@ -1856,7 +1864,9 @@ Function R4050B_StockInventory()
 		   |	ShipmentToTradeAgent.Period,
 		   |	ShipmentToTradeAgent.Company,
 		   |	ShipmentToTradeAgent.StoreTradeAgent,
-		   |	ShipmentToTradeAgent.ItemKey
+		   |	ShipmentToTradeAgent.ItemKey,
+		   |	ShipmentToTradeAgent.SerialLotNumber,
+		   |	ShipmentToTradeAgent.SourceOfOrigin
 		   |
 		   |UNION ALL
 		   |
@@ -1866,7 +1876,10 @@ Function R4050B_StockInventory()
 		   |	ShipmentToTradeAgent.Company,
 		   |	ShipmentToTradeAgent.Store,
 		   |	ShipmentToTradeAgent.ItemKey,
-		   |	SUM(ShipmentToTradeAgent.Quantity) AS Quantity
+		   |	ShipmentToTradeAgent.SerialLotNumber,
+		   |	ShipmentToTradeAgent.SourceOfOrigin,
+		   |	SUM(ShipmentToTradeAgent.Quantity) AS Quantity,
+		   |	0 AS PreliminaryQuantity
 		   |FROM
 		   |	ShipmentToTradeAgent AS ShipmentToTradeAgent
 		   |WHERE
@@ -1876,7 +1889,9 @@ Function R4050B_StockInventory()
 		   |	ShipmentToTradeAgent.Period,
 		   |	ShipmentToTradeAgent.Company,
 		   |	ShipmentToTradeAgent.Store,
-		   |	ShipmentToTradeAgent.ItemKey";
+		   |	ShipmentToTradeAgent.ItemKey,
+		   |	ShipmentToTradeAgent.SerialLotNumber,
+		   |	ShipmentToTradeAgent.SourceOfOrigin";
 EndFunction
 
 Function R8015T_ConsignorPrices()

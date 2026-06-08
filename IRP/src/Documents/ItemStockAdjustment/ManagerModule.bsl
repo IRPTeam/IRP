@@ -407,44 +407,53 @@ Function R4014B_SerialLotNumber()
 EndFunction
 
 Function R4050B_StockInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO R4050B_StockInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKeyWriteOff AS ItemKey,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKeyWriteOff";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.SerialLotNumber AS SerialLotNumber,
+		|	VALUE(Catalog.SourceOfOrigins.EmptyRef) as SourceOfOrigin,
+		|	SUM(ItemList.Quantity) AS Quantity,
+		|	0 as PreliminaryQuantity
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.SerialLotNumber
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKeyWriteOff AS ItemKey,
+		|	ItemList.SerialLotNumberWriteOff,
+		|	VALUE(Catalog.SourceOfOrigins.EmptyRef),
+		|	SUM(ItemList.Quantity) AS Quantity,
+		|	0 as PreliminaryQuantity
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKeyWriteOff,
+		|	ItemList.SerialLotNumberWriteOff";
 EndFunction
 
 Function R4051T_StockAdjustmentAsWriteOff()

@@ -61,19 +61,42 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
- <resources uuid="e246ca83-846a-43f2-8abf-1dc8b0b904e7">
-  <name>CheckNumber</name>
+ <resources uuid="b8841297-d7a8-4c73-be98-77f5bedbafe3">
+  <name>Device</name>
   <synonym>
    <key>tr</key>
-   <value>Çek numarası</value>
+   <value>Cihaz</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Номер чека</value>
+   <value>Устройство</value>
   </synonym>
   <synonym>
    <key>en</key>
-   <value>Check number</value>
+   <value>Device</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Hardware</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="29538d99-67df-4149-a55e-76ea03fe15f3">
+  <name>DeviceNumber</name>
+  <synonym>
+   <key>tr</key>
+   <value>Cihaz numarası</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Номер устройства</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Device number</value>
   </synonym>
   <type>
    <types>String</types>
@@ -106,6 +129,56 @@
    <stringQualifiers>
     <length>50</length>
    </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="e246ca83-846a-43f2-8abf-1dc8b0b904e7">
+  <name>CheckNumber</name>
+  <synonym>
+   <key>tr</key>
+   <value>Çek numarası</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Номер чека</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Check number</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="4b1bde1e-fa56-4a1f-b88d-8e9e5d1fe5fa">
+  <name>CheckDate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Kontrol tarihi</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата чека</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Check date</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

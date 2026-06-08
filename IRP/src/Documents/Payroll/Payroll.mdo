@@ -580,7 +580,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Сумма оплаты</value>
+    <value>Сумма</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -914,7 +914,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Сумма оплаты</value>
+    <value>Сумма</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -1030,7 +1030,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Сумма оплаты</value>
+    <value>Сумма</value>
    </synonym>
    <synonym>
     <key>en</key>
@@ -1278,7 +1278,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Сумма оплаты</value>
+    <value>Сумма</value>
    </synonym>
    <synonym>
     <key>en</key>

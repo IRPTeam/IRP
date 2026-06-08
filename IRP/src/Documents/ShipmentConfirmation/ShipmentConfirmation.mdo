@@ -122,6 +122,7 @@
  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
+ <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -30,6 +30,7 @@ Procedure ClearSelfRecords(Cancel)
 	AccumulationRegisters.R5021T_Revenues.Revenues_Clear(ThisObject.Ref, Cancel);	
 	AccumulationRegisters.R8510B_BookValueOfFixedAsset.BookValueOfFixedAsset_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R4050B_StockInventory.StockInventory_Clear(ThisObject.Ref, Cancel);
+	AccumulationRegisters.R6510B_StockBalance.StockBalance_Clear(ThisObject.Ref, Cancel);
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

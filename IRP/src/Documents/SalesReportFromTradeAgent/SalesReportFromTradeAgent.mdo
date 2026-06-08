@@ -122,6 +122,7 @@
  <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1307,7 +1308,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Сумма оплаты</value>
+    <value>Сумма</value>
    </synonym>
    <synonym>
     <key>en</key>

@@ -1,0 +1,1387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataSource>
+		<name>DataSource1</name>
+		<dataSourceType>Local</dataSourceType>
+	</dataSource>
+	<dataSet xsi:type="DataSetQuery">
+		<name>DataSet1</name>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Store</dataPath>
+			<field>Store</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Depo</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Магазин</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Store</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Item</dataPath>
+			<field>Item</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Malzeme</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Номенклатура</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Item</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ItemKey</dataPath>
+			<field>ItemKey</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Varyant</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Характеристика</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Item key</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SecondPeriod</dataPath>
+			<field>SecondPeriod</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Periyot, saniye</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Период, второй</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Period, second</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:periodNumber>2</dcscom:periodNumber>
+				<dcscom:periodType>Main</dcscom:periodType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Recorder</dataPath>
+			<field>Recorder</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>İşlem evrakı</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Документ</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Recorder</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:periodNumber>1</dcscom:periodNumber>
+				<dcscom:periodType>Main</dcscom:periodType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SerialLotNumber</dataPath>
+			<field>SerialLotNumber</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Seri lot numaraları</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Серия номенклатуры</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Serial lot number</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SourceOfOrigin</dataPath>
+			<field>SourceOfOrigin</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldFolder">
+			<dataPath>OpeningBalance</dataPath>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Açılış bakiyesi</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Начальный остаток</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Opening balance</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Company</dataPath>
+			<field>Company</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Basis</dataPath>
+			<field>Basis</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.ActualQuantityOpeningBalance</dataPath>
+			<field>ActualQuantityOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Sevk edilen</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>На складе</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Actual</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>ActualQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.ActualQuantityReceipt</dataPath>
+			<field>ActualQuantityReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Sevk edilen</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>На складе</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Actual</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.ActualQuantityExpense</dataPath>
+			<field>ActualQuantityExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Sevk edilen</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>На складе</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Actual</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.ActualQuantityClosingBalance</dataPath>
+			<field>ActualQuantityClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Sevk edilen</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>На складе</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Actual</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>ActualQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.FreeQuantityReceipt</dataPath>
+			<field>FreeQuantityReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Serbest</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Свободный</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Free</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.FreeQuantityExpense</dataPath>
+			<field>FreeQuantityExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Serbest</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Свободный</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Free</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.ReservationQuantityOpeningBalance</dataPath>
+			<field>ReservationQuantityOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Rezerv</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>В резерве</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Reservation</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>ReservationQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.ReservationQuantityReceipt</dataPath>
+			<field>ReservationQuantityReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Rezerv</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>В резерве</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Reservation</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.ReservationQuantityExpense</dataPath>
+			<field>ReservationQuantityExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Rezerv</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>В резерве</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Reservation</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.ReservationQuantityClosingBalance</dataPath>
+			<field>ReservationQuantityClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Rezerv</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>В резерве</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Reservation</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>ReservationQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.TransitIncomingQuantityOpeningBalance</dataPath>
+			<field>TransitIncomingQuantityOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Yoldan gelen</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>К приходу</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Transit incoming</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>TransitIncomingQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.TransitIncomingQuantityReceipt</dataPath>
+			<field>TransitIncomingQuantityReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Yoldan gelen</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>К приходу</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Transit incoming</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.TransitIncomingQuantityExpense</dataPath>
+			<field>TransitIncomingQuantityExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Yoldan gelen</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>К приходу</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Transit incoming</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.TransitIncomingQuantityClosingBalance</dataPath>
+			<field>TransitIncomingQuantityClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Yoldan gelen</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>К приходу</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Transit incoming</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>TransitIncomingQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.TransitOutgoingQuantityOpeningBalance</dataPath>
+			<field>TransitOutgoingQuantityOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Yola çıkan</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>К расходу</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Transit outgoing</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>TransitOutgoingQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.TransitOutgoingQuantityReceipt</dataPath>
+			<field>TransitOutgoingQuantityReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Yola çıkan</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>К расходу</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Transit outgoing</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.TransitOutgoingQuantityExpense</dataPath>
+			<field>TransitOutgoingQuantityExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Yola çıkan</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>К расходу</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Transit outgoing</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.TransitOutgoingQuantityClosingBalance</dataPath>
+			<field>TransitOutgoingQuantityClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Yola çıkan</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>К расходу</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Transit outgoing</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>TransitOutgoingQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.InventoryQuantityOpeningBalance</dataPath>
+			<field>InventoryQuantityOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Stok</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Склад</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Inventory</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>InventoryQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.InventoryQuantityReceipt</dataPath>
+			<field>InventoryQuantityReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Stok</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Склад</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Inventory</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.InventoryQuantityExpense</dataPath>
+			<field>InventoryQuantityExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Stok</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Склад</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Inventory</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.InventoryQuantityClosingBalance</dataPath>
+			<field>InventoryQuantityClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Stok</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Склад</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Inventory</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>InventoryQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.PreliminaryQuantityOpeningBalance</dataPath>
+			<field>PreliminaryQuantityOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ön</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Предварительный</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>PreliminaryQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Receipt.PreliminaryQuantityReceipt</dataPath>
+			<field>PreliminaryQuantityReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ön</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Предварительный</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Expense.PreliminaryQuantityExpense</dataPath>
+			<field>PreliminaryQuantityExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ön</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Предварительный</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.PreliminaryQuantityClosingBalance</dataPath>
+			<field>PreliminaryQuantityClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ön</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Предварительный</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Preliminary</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>PreliminaryQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldFolder">
+			<dataPath>ClosingBalance</dataPath>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Kapanış bakiyesi</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Конечный остаток</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Closing balance</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldFolder">
+			<dataPath>Expense</dataPath>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Çıkan</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Расход</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Expense</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldFolder">
+			<dataPath>Receipt</dataPath>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Gelen</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Приход</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Receipt</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OpeningBalance.FreeQuantityOpeningBalance</dataPath>
+			<field>FreeQuantityOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Serbest</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Свободный</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Free</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>FreeQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ClosingBalance.FreeQuantityClosingBalance</dataPath>
+			<field>FreeQuantityClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Serbest</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Свободный</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Free</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>FreeQuantity</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<dataSource>DataSource1</dataSource>
+		<query>SELECT ALLOWED
+	R6510B_StockBalance.Company AS Company,
+	R6510B_StockBalance.Store AS Store,
+	R6510B_StockBalance.ItemKey.Item AS Item,
+	R6510B_StockBalance.ItemKey AS ItemKey,
+	R6510B_StockBalance.SerialLotNumber AS SerialLotNumber,
+	R6510B_StockBalance.SourceOfOrigin AS SourceOfOrigin,
+	R6510B_StockBalance.Basis AS Basis,
+	
+	R6510B_StockBalance.ActualQuantityOpeningBalance AS ActualQuantityOpeningBalance,
+	R6510B_StockBalance.ActualQuantityReceipt AS ActualQuantityReceipt,
+	R6510B_StockBalance.ActualQuantityExpense AS ActualQuantityExpense,
+	R6510B_StockBalance.ActualQuantityClosingBalance AS ActualQuantityClosingBalance,
+	
+	R6510B_StockBalance.FreeQuantityOpeningBalance AS FreeQuantityOpeningBalance,
+	R6510B_StockBalance.FreeQuantityReceipt AS FreeQuantityReceipt,
+	R6510B_StockBalance.FreeQuantityExpense AS FreeQuantityExpense,
+	R6510B_StockBalance.FreeQuantityClosingBalance AS FreeQuantityClosingBalance,
+	
+	R6510B_StockBalance.ReservationQuantityOpeningBalance AS ReservationQuantityOpeningBalance,
+	R6510B_StockBalance.ReservationQuantityReceipt AS ReservationQuantityReceipt,
+	R6510B_StockBalance.ReservationQuantityExpense AS ReservationQuantityExpense,
+	R6510B_StockBalance.ReservationQuantityClosingBalance AS ReservationQuantityClosingBalance,
+	
+	R6510B_StockBalance.TransitIncomingQuantityOpeningBalance AS TransitIncomingQuantityOpeningBalance,
+	R6510B_StockBalance.TransitIncomingQuantityReceipt AS TransitIncomingQuantityReceipt,
+	R6510B_StockBalance.TransitIncomingQuantityExpense AS TransitIncomingQuantityExpense,
+	R6510B_StockBalance.TransitIncomingQuantityClosingBalance AS TransitIncomingQuantityClosingBalance,
+	
+	R6510B_StockBalance.TransitOutgoingQuantityOpeningBalance AS TransitOutgoingQuantityOpeningBalance,
+	R6510B_StockBalance.TransitOutgoingQuantityReceipt AS TransitOutgoingQuantityReceipt,
+	R6510B_StockBalance.TransitOutgoingQuantityExpense AS TransitOutgoingQuantityExpense,
+	R6510B_StockBalance.TransitOutgoingQuantityClosingBalance AS TransitOutgoingQuantityClosingBalance,
+	
+	R6510B_StockBalance.InventoryQuantityOpeningBalance AS InventoryQuantityOpeningBalance,
+	R6510B_StockBalance.InventoryQuantityReceipt AS InventoryQuantityReceipt,
+	R6510B_StockBalance.InventoryQuantityExpense AS InventoryQuantityExpense,
+	R6510B_StockBalance.InventoryQuantityClosingBalance AS InventoryQuantityClosingBalance,
+	
+	R6510B_StockBalance.PreliminaryQuantityOpeningBalance AS PreliminaryQuantityOpeningBalance,
+	R6510B_StockBalance.PreliminaryQuantityReceipt AS PreliminaryQuantityReceipt,
+	R6510B_StockBalance.PreliminaryQuantityExpense AS PreliminaryQuantityExpense,
+	R6510B_StockBalance.PreliminaryQuantityClosingBalance AS PreliminaryQuantityClosingBalance,
+	
+	R6510B_StockBalance.Recorder AS Recorder,
+	R6510B_StockBalance.SecondPeriod AS SecondPeriod
+	
+FROM
+	AccumulationRegister.R6510B_StockBalance.BalanceAndTurnovers(, , Auto, , ) AS R6510B_StockBalance</query>
+	</dataSet>
+	<totalField>
+		<dataPath>ClosingBalance.ActualQuantityClosingBalance</dataPath>
+		<expression>sum(ClosingBalance.ActualQuantityClosingBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.InventoryQuantityClosingBalance</dataPath>
+		<expression>sum(ClosingBalance.InventoryQuantityClosingBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.PreliminaryQuantityClosingBalance</dataPath>
+		<expression>sum(ClosingBalance.PreliminaryQuantityClosingBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.ReservationQuantityClosingBalance</dataPath>
+		<expression>sum(ClosingBalance.ReservationQuantityClosingBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.TransitIncomingQuantityClosingBalance</dataPath>
+		<expression>sum(ClosingBalance.TransitIncomingQuantityClosingBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.TransitOutgoingQuantityClosingBalance</dataPath>
+		<expression>sum(ClosingBalance.TransitOutgoingQuantityClosingBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.ActualQuantityExpense</dataPath>
+		<expression>sum(Expense.ActualQuantityExpense)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.FreeQuantityExpense</dataPath>
+		<expression>sum(Expense.FreeQuantityExpense)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.InventoryQuantityExpense</dataPath>
+		<expression>sum(Expense.InventoryQuantityExpense)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.PreliminaryQuantityExpense</dataPath>
+		<expression>sum(Expense.PreliminaryQuantityExpense)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.ReservationQuantityExpense</dataPath>
+		<expression>sum(Expense.ReservationQuantityExpense)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.TransitIncomingQuantityExpense</dataPath>
+		<expression>sum(Expense.TransitIncomingQuantityExpense)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Expense.TransitOutgoingQuantityExpense</dataPath>
+		<expression>sum(Expense.TransitOutgoingQuantityExpense)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.ActualQuantityOpeningBalance</dataPath>
+		<expression>sum(OpeningBalance.ActualQuantityOpeningBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.InventoryQuantityOpeningBalance</dataPath>
+		<expression>sum(OpeningBalance.InventoryQuantityOpeningBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.PreliminaryQuantityOpeningBalance</dataPath>
+		<expression>sum(OpeningBalance.PreliminaryQuantityOpeningBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.ReservationQuantityOpeningBalance</dataPath>
+		<expression>sum(OpeningBalance.ReservationQuantityOpeningBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.TransitIncomingQuantityOpeningBalance</dataPath>
+		<expression>sum(OpeningBalance.TransitIncomingQuantityOpeningBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.TransitOutgoingQuantityOpeningBalance</dataPath>
+		<expression>sum(OpeningBalance.TransitOutgoingQuantityOpeningBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.ActualQuantityReceipt</dataPath>
+		<expression>sum(Receipt.ActualQuantityReceipt)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.FreeQuantityReceipt</dataPath>
+		<expression>sum(Receipt.FreeQuantityReceipt)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.InventoryQuantityReceipt</dataPath>
+		<expression>sum(Receipt.InventoryQuantityReceipt)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.PreliminaryQuantityReceipt</dataPath>
+		<expression>sum(Receipt.PreliminaryQuantityReceipt)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.ReservationQuantityReceipt</dataPath>
+		<expression>sum(Receipt.ReservationQuantityReceipt)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.TransitIncomingQuantityReceipt</dataPath>
+		<expression>sum(Receipt.TransitIncomingQuantityReceipt)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>Receipt.TransitOutgoingQuantityReceipt</dataPath>
+		<expression>sum(Receipt.TransitOutgoingQuantityReceipt)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>ClosingBalance.FreeQuantityClosingBalance</dataPath>
+		<expression>Sum(ClosingBalance.FreeQuantityClosingBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.FreeQuantityOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.FreeQuantityOpeningBalance)</expression>
+		<group>Item</group>
+		<group>ItemKey</group>
+		<group>SerialLotNumber</group>
+		<group>SourceOfOrigin</group>
+	</totalField>
+	<parameter>
+		<name>ReportPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Период</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Period</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>v8:StandardPeriod</v8:Type>
+		</valueType>
+		<value xsi:type="v8:StandardPeriod">
+			<v8:variant xsi:type="v8:StandardPeriodVariant">Custom</v8:variant>
+			<v8:startDate>0001-01-01T00:00:00</v8:startDate>
+			<v8:endDate>0001-01-01T00:00:00</v8:endDate>
+		</value>
+		<useRestriction>false</useRestriction>
+	</parameter>
+	<parameter>
+		<name>BeginOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem başı</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Начало периода</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Begin of period</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>true</useRestriction>
+		<expression>&amp;ReportPeriod.StartDate</expression>
+		<availableAsField>false</availableAsField>
+	</parameter>
+	<parameter>
+		<name>EndOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem sonu</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Конец периода</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>End of period</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>true</useRestriction>
+		<expression>&amp;ReportPeriod.EndDate</expression>
+		<availableAsField>false</availableAsField>
+	</parameter>
+	<settingsVariant>
+		<dcsset:name>Default</dcsset:name>
+		<dcsset:presentation xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Varsayılan</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>По умолчанию</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Default</v8:content>
+			</v8:item>
+		</dcsset:presentation>
+		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
+			<dcsset:selection>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Recorder</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
+					<dcsset:field>OpeningBalance</dcsset:field>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>OpeningBalance.ActualQuantityOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>OpeningBalance.FreeQuantityOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>OpeningBalance.InventoryQuantityOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>OpeningBalance.PreliminaryQuantityOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>OpeningBalance.ReservationQuantityOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>OpeningBalance.TransitIncomingQuantityOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>OpeningBalance.TransitOutgoingQuantityOpeningBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:placement>Auto</dcsset:placement>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
+					<dcsset:field>Receipt</dcsset:field>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Receipt.ActualQuantityReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Receipt.FreeQuantityReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Receipt.InventoryQuantityReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Receipt.PreliminaryQuantityReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Receipt.ReservationQuantityReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Receipt.TransitIncomingQuantityReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Receipt.TransitOutgoingQuantityReceipt</dcsset:field>
+					</dcsset:item>
+					<dcsset:placement>Auto</dcsset:placement>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
+					<dcsset:field>Expense</dcsset:field>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Expense.ActualQuantityExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Expense.FreeQuantityExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Expense.InventoryQuantityExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Expense.PreliminaryQuantityExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Expense.ReservationQuantityExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Expense.TransitIncomingQuantityExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>Expense.TransitOutgoingQuantityExpense</dcsset:field>
+					</dcsset:item>
+					<dcsset:placement>Auto</dcsset:placement>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
+					<dcsset:field>ClosingBalance</dcsset:field>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>ClosingBalance.ActualQuantityClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>ClosingBalance.FreeQuantityClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>ClosingBalance.InventoryQuantityClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>ClosingBalance.PreliminaryQuantityClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>ClosingBalance.ReservationQuantityClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>ClosingBalance.TransitIncomingQuantityClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>ClosingBalance.TransitOutgoingQuantityClosingBalance</dcsset:field>
+					</dcsset:item>
+					<dcsset:placement>Auto</dcsset:placement>
+				</dcsset:item>
+			</dcsset:selection>
+			<dcsset:dataParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>ReportPeriod</dcscor:parameter>
+					<dcscor:value xsi:type="v8:StandardPeriod">
+						<v8:variant xsi:type="v8:StandardPeriodVariant">Today</v8:variant>
+					</dcscor:value>
+					<dcsset:userSettingID>29cfc875-c72b-435a-9a79-18aee151a89e</dcsset:userSettingID>
+				</dcscor:item>
+			</dcsset:dataParameters>
+			<dcsset:order>
+				<dcsset:item xsi:type="dcsset:OrderItemField">
+					<dcsset:field>SecondPeriod</dcsset:field>
+					<dcsset:orderType>Asc</dcsset:orderType>
+				</dcsset:item>
+			</dcsset:order>
+			<dcsset:outputParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>AppearanceTemplate</dcscor:parameter>
+					<dcscor:value xsi:type="xs:string">Sea</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>HorizontalOverallPlacement</dcscor:parameter>
+					<dcscor:value xsi:type="dcscor:DataCompositionTotalPlacement">None</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>VerticalOverallPlacement</dcscor:parameter>
+					<dcscor:value xsi:type="dcscor:DataCompositionTotalPlacement">Begin</dcscor:value>
+				</dcscor:item>
+			</dcsset:outputParameters>
+			<dcsset:item xsi:type="dcsset:StructureItemGroup">
+				<dcsset:groupItems>
+					<dcsset:item xsi:type="dcsset:GroupItemField">
+						<dcsset:field>Store</dcsset:field>
+						<dcsset:groupType>Items</dcsset:groupType>
+						<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+						<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+						<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+					</dcsset:item>
+				</dcsset:groupItems>
+				<dcsset:order>
+					<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+				</dcsset:order>
+				<dcsset:selection>
+					<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+				</dcsset:selection>
+				<dcsset:item xsi:type="dcsset:StructureItemGroup">
+					<dcsset:groupItems>
+						<dcsset:item xsi:type="dcsset:GroupItemField">
+							<dcsset:field>Item</dcsset:field>
+							<dcsset:groupType>Items</dcsset:groupType>
+							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+						</dcsset:item>
+						<dcsset:item xsi:type="dcsset:GroupItemField">
+							<dcsset:field>ItemKey</dcsset:field>
+							<dcsset:groupType>Items</dcsset:groupType>
+							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+						</dcsset:item>
+					</dcsset:groupItems>
+					<dcsset:order>
+						<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+					</dcsset:order>
+					<dcsset:selection>
+						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+					</dcsset:selection>
+					<dcsset:item xsi:type="dcsset:StructureItemGroup">
+						<dcsset:groupItems>
+							<dcsset:item xsi:type="dcsset:GroupItemField">
+								<dcsset:field>SerialLotNumber</dcsset:field>
+								<dcsset:groupType>Items</dcsset:groupType>
+								<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+								<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+								<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+							</dcsset:item>
+							<dcsset:item xsi:type="dcsset:GroupItemField">
+								<dcsset:field>SourceOfOrigin</dcsset:field>
+								<dcsset:groupType>Items</dcsset:groupType>
+								<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							</dcsset:item>
+						</dcsset:groupItems>
+						<dcsset:order>
+							<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+						</dcsset:order>
+						<dcsset:selection>
+							<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+						</dcsset:selection>
+						<dcsset:item xsi:type="dcsset:StructureItemGroup">
+							<dcsset:filter>
+								<dcsset:item xsi:type="dcsset:FilterItemComparison">
+									<dcsset:left xsi:type="dcscor:Field">Recorder</dcsset:left>
+									<dcsset:comparisonType>Filled</dcsset:comparisonType>
+									<dcsset:viewMode>Inaccessible</dcsset:viewMode>
+								</dcsset:item>
+							</dcsset:filter>
+							<dcsset:order>
+								<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+							</dcsset:order>
+							<dcsset:selection>
+								<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+							</dcsset:selection>
+							<dcsset:outputParameters>
+								<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+									<dcscor:parameter>FilterOutput</dcscor:parameter>
+									<dcscor:value xsi:type="dcsset:DataCompositionTextOutputType">DontOutput</dcscor:value>
+								</dcscor:item>
+							</dcsset:outputParameters>
+						</dcsset:item>
+					</dcsset:item>
+				</dcsset:item>
+			</dcsset:item>
+		</dcsset:settings>
+	</settingsVariant>
+</DataCompositionSchema>

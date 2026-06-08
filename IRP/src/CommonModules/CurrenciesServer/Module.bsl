@@ -1719,6 +1719,12 @@ Procedure DebitCreditNoteDifference(Parameters)
 		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Expense);
 		TotalExpense  = Result.TotalAmount;
 	
+	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.EmployeeReceivable Then
+		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3027B_EmployeeCashAdvance].PrepareTable;
+		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Expense);
+		TotalExpense  = Result.TotalAmount;
+	
 	EndIf;
 				
 	// Receive (receipt)
@@ -1755,6 +1761,14 @@ Procedure DebitCreditNoteDifference(Parameters)
 		
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1020B_AdvancesToVendors].PrepareTable;
 		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Receipt);
+		BalanceType   = "active";
+		TotalReceipt  = Result.TotalAmount;
+		LegalCurrency = Result.LegalCurrency;
+		
+	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.EmployeeReceivable Then
+		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3027B_EmployeeCashAdvance].PrepareTable;
+		Result = GetAmountByRecordType(Table, "", AccumulationRecordType.Receipt);
 		BalanceType   = "active";
 		TotalReceipt  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;
@@ -1884,7 +1898,7 @@ Function GetAmountByRecordType(Table, IgnoreColumnName, RecordType)
 	Result = New Structure("LegalCurrency, TotalAmount", Undefined, 0);
 	
 	For Each Row In Table Do
-		If ValueIsFilled(Row[IgnoreColumnName]) Then
+		If ValueIsFilled(IgnoreColumnName) And ValueIsFilled(Row[IgnoreColumnName]) Then
 			Continue;
 		EndIf;
 		

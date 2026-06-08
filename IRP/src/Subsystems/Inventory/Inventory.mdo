@@ -33,6 +33,7 @@
  <content>Report.R6060A_CostOfGoodsSold</content>
  <content>Report.R6020_BatchBalance</content>
  <content>Report.R4010A_StockBalance</content>
+ <content>Report.R6510A_StockBalance</content>
  <subsystems>Items</subsystems>
  <subsystems>Transfers</subsystems>
  <subsystems>CostCalculation</subsystems>

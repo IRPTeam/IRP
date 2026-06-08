@@ -102,6 +102,7 @@
  <registerRecords>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</registerRecords>
  <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
  <registerRecords>AccumulationRegister.R4021B_StockTransferOrdersReceipt</registerRecords>
+ <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

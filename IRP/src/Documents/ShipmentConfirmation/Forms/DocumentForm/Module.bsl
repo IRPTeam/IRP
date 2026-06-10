@@ -99,7 +99,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
 	
-		ArrayOfOrders = New Array();
+	ArrayOfOrders = New Array();
 	For Each Row In Object.ItemList Do
 		If ValueIsFilled(Row.SalesOrder) Then
 			ArrayOfOrders.Add(New Structure("Key, DocOrder", Row.Key, Row.SalesOrder));
@@ -107,8 +107,12 @@ Procedure SetVisibilityAvailability(Object, Form)
 	EndDo;
 	ClosedRowKeys = DocOrderClosingServer.GetIsClosedSalesOrderInItemList(ArrayOfOrders);
 	For Each Row In Form.Object.ItemList Do
-			Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
+		Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
 	EndDo;
+	
+	ArrayOfClosingOrders = DocOrderClosingServer.GetArrayOfClosingOrders(Object.Ref);
+	Form.Items.Date.ReadOnly = (ArrayOfClosingOrders.Count() > 0);
+	Form.Items.EditDate.Visible = (ArrayOfClosingOrders.Count() > 0);
 EndProcedure
 
 &AtClient
@@ -623,6 +627,20 @@ EndProcedure
 &AtServer
 Procedure SplitRowAtServer()
 	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EditDateClick(Item)
+	Callack = New CallbackDescription("EditDateClickEnd", ThisObject);
+	OpenForm("CommonForm.EditOrderClosingDate", New Structure("DocRef", Object.Ref), 
+		ThisObject,,,,Callack, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditDateClickEnd(Result, Params) Export
+	If Result <> Undefined And Result.Success Then
+		ThisObject.Read();
+	EndIf;	
 EndProcedure
 
 #EndRegion

@@ -1049,9 +1049,9 @@ EndProcedure
 
 &AtClient
 Procedure EditDateClick(Item)
-	Callack = New CallbackDescription("EditDateClickEnd", ThisObject);
+	Callback = New CallbackDescription("EditDateClickEnd", ThisObject);
 	OpenForm("CommonForm.EditOrderClosingDate", New Structure("DocRef", Object.Ref), 
-		ThisObject,,,,Callack, FormWindowOpeningMode.LockOwnerWindow);
+		ThisObject,,,,Callback, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient

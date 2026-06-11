@@ -1800,6 +1800,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_188", NStr("en = 'Section with name [%1] already exists'", Lang));
 	Strings.Insert("Error_189", NStr("en = 'Ext. dimension number is required field'", Lang));
 	Strings.Insert("Error_190", NStr("en = 'Shipment without financial documents is prohibited'", Lang));
+	Strings.Insert("Error_191", NStr("en = '[%1] already exists for document [%2]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -1980,6 +1981,7 @@ Function Strings(Lang) Export
 		Lang));
 	Strings.Insert("QuestionToUser_032", NStr("en = 'Do you want to create new legal name?'", Lang));
 	Strings.Insert("QuestionToUser_033", NStr("en = 'Do you want to create new partner term?'", Lang));
+	Strings.Insert("QuestionToUser_034", NStr("en = 'Storno already exists. Open existing document?'", Lang));
 		
 #EndRegion
 

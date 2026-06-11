@@ -31,3 +31,29 @@ Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 #EndRegion
+
+Function IsDocumentWithStorno(DocRef, StornoRef = Undefined) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Storno.Ref
+	|FROM
+	|	Document.Storno AS Storno
+	|WHERE
+	|	Storno.Posted
+	|	AND Storno.Basis = &Basis
+	|	AND CASE
+	|		WHEN &Filter_Ref
+	|			THEN Storno.Ref <> &Ref
+	|		ELSE TRUE
+	|	END";
+	Query.SetParameter("Basis", DocRef);
+	Query.SetParameter("Filter_Ref", ValueIsFilled(StornoRef));
+	Query.SetParameter("Ref", StornoRef);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.Ref;
+	EndIf;
+	Return Undefined;
+Endfunction

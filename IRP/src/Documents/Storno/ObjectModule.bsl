@@ -38,5 +38,10 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	Return;
+	OtherStornoRef = DocStornoServer.IsDocumentWithStorno(ThisObject.Basis, ThisObject.Ref);
+	If ValueIsFilled(OtherStornoRef) Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(
+			StrTemplate(R().Error_191, String(OtherStornoRef), String(ThisObject.Basis)), "Basis", ThisObject);
+	EndIf;
 EndProcedure

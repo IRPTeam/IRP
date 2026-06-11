@@ -125,7 +125,9 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 	|	tmpRecorders.Recorder,
 	|	tmpRecorders.RowRef
 	|FROM
-	|	tmpRecorders AS tmpRecorders";
+	|	tmpRecorders AS tmpRecorders  
+	|	where
+	| 	not tmpRecorders.Recorder refs Document.Storno";
 	Query.SetParameter("RowIDInfo", Source.RowIDInfo.Unload());
 	QueryResult = Query.Execute();
 	RecordersByRowRef = QueryResult.Unload();

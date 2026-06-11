@@ -17,14 +17,46 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		
 	AccoumulationRegisterData = New Structure();
 	
-	For Each RegisterMetadata In Ref.Basis.Metadata().RegisterRecords Do	
-		If Metadata.AccumulationRegisters.Find(RegisterMetadata.Name) <> Undefined Then
-			RecordSet = AccumulationRegisters[RegisterMetadata.Name].CreateRecordSet();
-			RecordSet.Filter.Recorder.Set(Ref.Basis);
-			RecordSet.Read();
+	ArrayOfRegisterMetadata = New Array();
+	For Each RegisterMetadata In Ref.Basis.Metadata().RegisterRecords Do
+		ArrayOfRegisterMetadata.Add(RegisterMetadata);
+	EndDo;                       
+	
+	ArrayOfRegisterMetadata.Add(Metadata.AccumulationRegisters.R6010B_BatchWiseBalance);
+	
+	For Each RegisterMetadata In ArrayOfRegisterMetadata Do  
 		
-			If RecordSet.Count() = 0 Then
-				Continue;
+		If Metadata.AccumulationRegisters.Find(RegisterMetadata.Name) <> Undefined Then 
+			
+			RecordSet = AccumulationRegisters[RegisterMetadata.Name].CreateRecordSet();
+			
+			If RegisterMetadata = Metadata.AccumulationRegisters.R6010B_BatchWiseBalance Then
+				Query = New Query();
+				Query.Text = 
+				"SELECT *, undefined as Document
+				|FROM
+				|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
+				|WHERE
+				|	R6010B_BatchWiseBalance.Document = &Document 
+				|	and R6010B_BatchWiseBalance.Recorder <> &Ref";
+				Query.SetParameter("Document", Ref.Basis);
+				Query.SetParameter("Ref", Ref);
+				
+				QueryResult = Query.Execute();
+				QueryTable = QueryResult.Unload();
+				
+				RecordSet.Filter.Recorder.Set(Ref);
+				RecordSet.Read();
+				RecordSet.Clear();
+				RecordSet.Load(QueryTable);		
+			Else
+				RecordSet = AccumulationRegisters[RegisterMetadata.Name].CreateRecordSet();
+				RecordSet.Filter.Recorder.Set(Ref.Basis);
+				RecordSet.Read();
+		
+				If RecordSet.Count() = 0 Then
+					Continue;
+				EndIf;
 			EndIf;
 		
 			RegisterData = CreateColumnsByRegister(RegisterMetadata);
@@ -46,7 +78,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 			
 		EndIf;
 	EndDo;
-	
+		
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	ArrayOfQueryText = New Array();
@@ -99,6 +131,9 @@ Function CreateColumnsByRegister(RegisterMetadata)
 	EndDo;
 	
 	For Each Att In RegisterMetadata.Attributes Do
+		If Upper(Att.Name) = Upper("CalculationMovementCost") Then
+			Continue;
+		EndIf;
 		Result.Table.Columns.Add(Att.Name, Att.Type);
 		Result.Attributes.Add(Att.Name);
 	EndDo;

@@ -200,6 +200,7 @@ EndFunction
 Function RegisterRecords(Parameters)
 	
 	isManualRecordsHasDifference = False;
+	IsStorno = TypeOf(Parameters.Object.Ref) = Type("DocumentRef.Storno");
 	
 	RegisteredRecords = New Map();
 	For Each Row In Parameters.PostingDataTables Do
@@ -224,9 +225,10 @@ Function RegisterRecords(Parameters)
 			TableForLoad.FillValues(True, "Active");
 		EndIf;
 		
-		If Row.Value.Metadata = Metadata.AccumulationRegisters.R6020B_BatchBalance 
+		If (Row.Value.Metadata = Metadata.AccumulationRegisters.R6020B_BatchBalance 
 			Or Row.Value.Metadata = Metadata.AccumulationRegisters.R6060T_CostOfGoodsSold
-			Or Row.Value.Metadata = Metadata.AccumulationRegisters.R6025B_SimpleBatch Then
+			Or Row.Value.Metadata = Metadata.AccumulationRegisters.R6025B_SimpleBatch) 
+			And Not IsStorno Then
 				Continue; //Never rewrite
 		EndIf;
 		
@@ -243,7 +245,7 @@ Function RegisterRecords(Parameters)
 		
 		WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
 		
-		If Row.Value.Metadata = Metadata.InformationRegisters.T6020S_BatchKeysInfo Then
+		If Row.Value.Metadata = Metadata.InformationRegisters.T6020S_BatchKeysInfo And Not IsStorno Then
 			UpdateCosts(Parameters.Object, TableForLoad, RegisteredRecords);
 		EndIf;
 		

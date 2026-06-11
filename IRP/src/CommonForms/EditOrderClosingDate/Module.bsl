@@ -3,6 +3,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.DocRef = Parameters.DocRef;
 	ThisObject.Date = Parameters.DocRef.Date;
+	UpdateOrerClosingTable();
 EndProcedure
 
 &AtClient
@@ -13,6 +14,32 @@ Procedure Save(Command)
 			Close(New Structure("Success", Success));
 		EndIf;
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure DateOnChange(Item)
+	UpdateOrerClosingTable();
+EndProcedure
+
+&AtClient
+Procedure OrderClosingTableBeforeDeleteRow(Item, Cancel)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure OrderClosingTableBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtServer
+Procedure UpdateOrerClosingTable()
+	ArrayOfClosingOrders = DocOrderClosingServer.GetArrayOfClosingOrders(ThisObject.DocRef);
+	ThisObject.OrderClosingTable.Clear();
+	For Each ClosingOrder in ArrayOfClosingOrders Do
+		NewRow = ThisObject.OrderClosingTable.Add();
+		NewRow.DocRef = String(ClosingOrder); 
+		NewRow.Icon = 1;
+	EndDo;
 EndProcedure
 
 &AtServer
@@ -34,6 +61,7 @@ Function SaveAtServer()
 		DocObject.Write(?(ThisObject.DocRef.Posted, DocumentWriteMode.Posting, DocumentWriteMode.Write));
 	Except
 		HaveError = True;
+		ThisObject.Items.Expander.Visible = True;
 		CommonFunctionsClientServer.ShowUsersMessage(ErrorDescription());
 	EndTry;
 	
@@ -41,6 +69,7 @@ Function SaveAtServer()
 		RollbackTransaction();
 	Else
 		CommitTransaction();
+		RefreshReusableValues();
 	EndIf;
 	Return Not HaveError;
 EndFunction

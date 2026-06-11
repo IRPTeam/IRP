@@ -3,15 +3,19 @@
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	StornoRef = DocStornoServer.IsDocumentWithStorno(CommandParameter);
 	If ValueIsFilled(StornoRef) Then
-		Callback = New CallbackDescription("ShowQueryBoxEnd", ThisObject, New Structure("StornoRef", StornoRef));
+		Callback = New CallbackDescription("ShowQueryBox_OpenExistsEnd", ThisObject, New Structure("StornoRef", StornoRef));
 		ShowQueryBox(Callback, R().QuestionToUser_034 , QuestionDialogMode.YesNo);
 	Else
-		OpenFormNewStornoDocument(CommandParameter);
+		If Not CommonFunctionsServer.GetRefAttribute(CommandParameter, "Posted") Then
+			ShowMessageBox(,R().InfoMessage_PostingDocument);
+		Else
+			OpenFormNewStornoDocument(CommandParameter);
+		EndIf;
 	Endif;
 EndProcedure
 
 &AtClient
-Procedure ShowQueryBoxEnd(Result, Params) Export
+Procedure ShowQueryBox_OpenExistsEnd(Result, Params) Export
 	If Result = DialogReturnCode.Yes Then
 		OpenFormExistsStornoDocument(Params.StornoRef);
 	EndIf;

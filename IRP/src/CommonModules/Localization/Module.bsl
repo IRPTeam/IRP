@@ -1801,6 +1801,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_189", NStr("en = 'Ext. dimension number is required field'", Lang));
 	Strings.Insert("Error_190", NStr("en = 'Shipment without financial documents is prohibited'", Lang));
 	Strings.Insert("Error_191", NStr("en = '[%1] already exists for document [%2]'", Lang));
+	Strings.Insert("Error_192",   NStr("en = 'Document date [%1] less than Basis date [%2]'", Lang));
+	Strings.Insert("Error_193",   NStr("en = 'Basis document [%1] not posted'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -1939,6 +1941,7 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_DataSaved", NStr("en = 'The data has been saved'", Lang));
 	Strings.Insert("InfoMessage_SettingsApplied", NStr("en = 'The settings have been applied'", Lang));
 	Strings.Insert("InfoMessage_ImportError", NStr("en = 'Import data to product database is locked. Go to Settings page'", Lang));
+	Strings.Insert("InfoMessage_PostingDocument", NStr("en = 'Posting document, before continue'", Lang));
 	
 #EndRegion
 

@@ -44,4 +44,16 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		CommonFunctionsClientServer.ShowUsersMessage(
 			StrTemplate(R().Error_191, String(OtherStornoRef), String(ThisObject.Basis)), "Basis", ThisObject);
 	EndIf;
+
+	If ValueIsFilled(ThisObject.Basis) And ThisObject.Date < ThisObject.Basis.Date Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(
+			StrTemplate(R().Error_192, ThisObject.Date, ThisObject.Basis.Date), "Basis", ThisObject);		
+	EndIf;
+	
+	If ValueIsFilled(ThisObject.Basis) And Not  ThisObject.Basis.Posted Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(
+			StrTemplate(R().Error_193, String(ThisObject.Basis)), "Basis", ThisObject);
+	EndIf;	
 EndProcedure

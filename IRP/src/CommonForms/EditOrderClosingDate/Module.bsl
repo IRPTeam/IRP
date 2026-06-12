@@ -58,6 +58,9 @@ Function SaveAtServer()
 		EndDo;
 		DocObject = ThisObject.DocRef.GetObject();
 		DocObject.Date = ThisObject.Date;
+		If Not DocObject.CheckFilling() Then
+			Raise "";
+		EndIf;
 		DocObject.Write(?(ThisObject.DocRef.Posted, DocumentWriteMode.Posting, DocumentWriteMode.Write));
 	Except
 		HaveError = True;

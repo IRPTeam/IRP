@@ -32,7 +32,15 @@ Scenario: 960001 preparation (access rights system registers)
 	And I go to line in "List" table
 		| 'Description'          |
 		| 'Unit access group'    |
-	And I select current line in "List" table	
+	And I select current line in "List" table
+	And in the table "ObjectAccess" I click "Add" button
+	And I select "Store" exact value from "Access key" drop-down list in "ObjectAccess" table
+	And I move to the next attribute
+	And I click choice button of "Value ref" attribute in "ObjectAccess" table
+	And I finish line editing in "ObjectAccess" table
+	And I activate "Modify" field in "ObjectAccess" table
+	And I set "Modify" checkbox in "ObjectAccess" table
+	And I finish line editing in "ObjectAccess" table		
 	If "Profiles" table does not contain lines Then
 		| 'Profile'      |
 		| 'Unit profile' |

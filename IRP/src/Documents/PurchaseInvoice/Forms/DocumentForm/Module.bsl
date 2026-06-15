@@ -150,6 +150,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 			EndIf;
 		EndDo;
 	EndDo;
+	
+	ArrayOfClosingOrders = DocOrderClosingServer.GetArrayOfClosingOrders(Object.Ref);
+	Form.Items.Date.ReadOnly = (ArrayOfClosingOrders.Count() > 0);
+	Form.Items.EditDate.Visible = (ArrayOfClosingOrders.Count() > 0);
 EndProcedure
 
 &AtServerNoContext
@@ -965,6 +969,20 @@ EndProcedure
 &AtServer
 Procedure SplitRowAtServer()
 	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EditDateClick(Item)
+	Callback = New CallbackDescription("EditDateClickEnd", ThisObject);
+	OpenForm("CommonForm.EditOrderClosingDate", New Structure("DocRef", Object.Ref), 
+		ThisObject,,,,Callback, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditDateClickEnd(Result, Params) Export
+	If Result <> Undefined And Result.Success Then
+		ThisObject.Read();
+	EndIf;	
 EndProcedure
 
 #EndRegion

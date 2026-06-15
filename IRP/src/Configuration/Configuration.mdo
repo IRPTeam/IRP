@@ -1334,6 +1334,7 @@
   <commonForms>CommonForm.ChoiceTransactionBasis</commonForms>
   <commonForms>CommonForm.ChoicePaymentBasis</commonForms>
   <commonForms>CommonForm.EditManualOffers</commonForms>
+  <commonForms>CommonForm.EditOrderClosingDate</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessKey</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>

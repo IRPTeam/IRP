@@ -155,6 +155,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
 	EndIf;
 	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
+
+	ArrayOfClosingOrders = DocOrderClosingServer.GetArrayOfClosingOrders(Object.Ref);
+	Form.Items.Date.ReadOnly = (ArrayOfClosingOrders.Count() > 0);
+	Form.Items.EditDate.Visible = (ArrayOfClosingOrders.Count() > 0);
 EndProcedure
 
 &AtServerNoContext
@@ -1048,6 +1052,20 @@ Procedure SetNewNumberAtServer()
 			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
 	EndIf;
 	NumberingRulesServer.SetSourceNewNumber(Object);
+EndProcedure
+
+&AtClient
+Procedure EditDateClick(Item)
+	Callback = New CallbackDescription("EditDateClickEnd", ThisObject);
+	OpenForm("CommonForm.EditOrderClosingDate", New Structure("DocRef", Object.Ref), 
+		ThisObject,,,,Callback, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditDateClickEnd(Result, Params) Export
+	If Result <> Undefined And Result.Success Then
+		ThisObject.Read();
+	EndIf;	
 EndProcedure
 
 #EndRegion

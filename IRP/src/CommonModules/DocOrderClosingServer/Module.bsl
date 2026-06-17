@@ -459,3 +459,49 @@ Procedure RefreshClosing(Object, FillingData, BasisRowKeyColumnName, HeaderAttri
 		Object.ItemList.Delete(Item);
 	EndDo;
 EndProcedure
+
+Function GetArrayOfClosingOrders(DocRef) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	RowIDInfo.RowID AS RowID
+	|INTO TableRowID
+	|FROM
+	|	Document.%1.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TM1010B_RowIDMovements.Recorder AS Recorder
+	|INTO TableOrders
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements AS TM1010B_RowIDMovements
+	|		INNER JOIN TableRowID AS TableRowID
+	|		ON TableRowID.RowID = TM1010B_RowIDMovements.RowID
+	|		AND TM1010B_RowIDMovements.Recorder REFS Document.%2
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	DocOrderClosing.Ref AS Ref
+	|FROM
+	|	TableOrders AS TableOrders
+	|		INNER JOIN Document.%3 AS DocOrderClosing
+	|		ON TableOrders.Recorder = DocOrderClosing.%2
+	|		AND DocOrderClosing.Posted";
+	DocType = TypeOf(DocRef);
+	
+	If DocType = Type("DocumentRef.SalesInvoice") Or DocType = Type("DocumentRef.ShipmentConfirmation") Then
+		Query.Text = StrTemplate(Query.Text, DocRef.Metadata().Name, "SalesOrder", "SalesOrderClosing");
+	ElsIf DocType = Type("DocumentRef.PurchaseInvoice") Or DocType = Type("DocumentRef.GoodsReceipt") Then
+		Query.Text = StrTemplate(Query.Text, DocRef.Metadata().Name, "PurchaseOrder", "PurchaseOrderClosing");
+	Else
+		Raise "Unsupported document type";
+	EndIf;
+	Query.SetParameter("Ref", DocRef);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable.UnloadColumn("Ref");
+EndFunction

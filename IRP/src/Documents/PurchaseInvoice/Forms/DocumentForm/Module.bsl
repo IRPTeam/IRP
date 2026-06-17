@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocPurchaseInvoiceServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -47,6 +48,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 
 	If Not Source = ThisObject Then
@@ -150,6 +156,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 			EndIf;
 		EndDo;
 	EndDo;
+	
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
 EndProcedure
 
 &AtServerNoContext

@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocShipmentConfirmationServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -46,6 +47,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		If Source <> ThisObject Then
 			LockLinkedRows();
 		EndIf;
+	EndIf;
+	
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
 
@@ -107,8 +113,13 @@ Procedure SetVisibilityAvailability(Object, Form)
 	EndDo;
 	ClosedRowKeys = DocOrderClosingServer.GetIsClosedSalesOrderInItemList(ArrayOfOrders);
 	For Each Row In Form.Object.ItemList Do
-			Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
+		Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
 	EndDo;
+	
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
 EndProcedure
 
 &AtClient

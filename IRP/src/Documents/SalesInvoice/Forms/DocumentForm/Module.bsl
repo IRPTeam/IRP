@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocSalesInvoiceServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -49,7 +50,8 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
 	
-	If EventName = "CloseOrder" Then
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 	
@@ -148,6 +150,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 			EndIf;
 		EndDo;
 	EndDo;
+	
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
 EndProcedure
 
 &AtServerNoContext

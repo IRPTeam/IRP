@@ -50,6 +50,7 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	DocStornoClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+	Notify("Storno");
 EndProcedure
 
 &AtClient

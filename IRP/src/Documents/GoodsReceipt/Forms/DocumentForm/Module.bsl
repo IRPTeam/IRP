@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocGoodsReceiptServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -46,6 +47,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		If Source <> ThisObject Then
 			LockLinkedRows();
 		EndIf;
+	EndIf;
+	
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
 
@@ -127,6 +133,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListCurrency.Visible = IsPresentPreliminary;
 	Form.Items.ItemListPreliminaryAmount.Visible = IsPresentPreliminary;	
 	Form.Items.ItemListPreliminaryTaxAmount.Visible = IsPresentPreliminary;
+	
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
 EndProcedure
 
 &AtClient

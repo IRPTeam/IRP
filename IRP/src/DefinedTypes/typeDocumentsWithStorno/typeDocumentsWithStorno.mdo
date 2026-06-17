@@ -12,7 +12,6 @@
     <types>DocumentRef.SalesReportFromTradeAgent</types>
     <types>DocumentRef.SalesReturnOrder</types>
     <types>DocumentRef.CashPayment</types>
-    <types>DocumentRef.WorkOrderClosing</types>
     <types>DocumentRef.PurchaseInvoice</types>
     <types>DocumentRef.DebitNote</types>
     <types>DocumentRef.CreditNote</types>
@@ -33,7 +32,6 @@
     <types>DocumentRef.StockAdjustmentAsSurplus</types>
     <types>DocumentRef.StockAdjustmentAsWriteOff</types>
     <types>DocumentRef.RetailSalesReceipt</types>
-    <types>DocumentRef.RetailReceiptCorrection</types>
     <types>DocumentRef.WorkSheet</types>
     <types>DocumentRef.SalesReportToConsignor</types>
     <types>DocumentRef.ItemStockAdjustment</types>

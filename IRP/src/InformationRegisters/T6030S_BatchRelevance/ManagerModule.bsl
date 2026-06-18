@@ -137,6 +137,9 @@ Procedure BatchRelevance_SetBound(DocObject, TableForLoad) Export
 	While QuerySelection.Next() Do
 		If ValueIsFilled(QuerySelection.DateOld) Then
 			PointInTime = GetPointInTime(QuerySelection.DateOld, QuerySelection.CompanyOld, QuerySelection.StoreOld, QuerySelection.ItemKeyOld);
+			If PointInTime = Null Then
+				Continue;
+			EndIf;
 			If PointInTime.Compare(DocObject.PointInTime()) = 1 Then
 				ClearRecordSet(QuerySelection.DateOld, QuerySelection.CompanyOld, QuerySelection.StoreOld,
 					QuerySelection.ItemKeyOld);
@@ -394,7 +397,7 @@ Function GetPointInTime(Date, Company, Store, ItemKey)
 	If QuerySelection.Next() Then
 		Return QuerySelection.PointInTime;
 	Else
-                Raise R().CannotGetPointInTime;
+       	Raise R().CannotGetPointInTime;
 	EndIf;
 EndFunction
 

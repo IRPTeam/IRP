@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocTimeSheetServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	FillWorkersAtServer();
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
@@ -41,6 +42,11 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
+	EndIf;
+	
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
 
@@ -128,6 +134,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	EndDo;
 #ENDIF
 
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
 EndProcedure
 
 &AtClient

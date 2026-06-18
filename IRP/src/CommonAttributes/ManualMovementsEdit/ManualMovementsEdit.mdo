@@ -77,6 +77,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.Storno</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.CalculationDeservedVacations</metadata>
     <use>Use</use>
   </content>

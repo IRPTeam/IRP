@@ -1,0 +1,59 @@
+Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
+	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
+	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
+EndProcedure
+
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure
+
+Procedure Posting(Cancel, PostingMode)
+	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
+	RowIDInfoPrivileged.Posting_RowID(ThisObject, Cancel, PostingMode);
+EndProcedure
+
+Procedure UndoPosting(Cancel)
+	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
+	RowIDInfoPrivileged.UndoPosting_RowIDUndoPosting(ThisObject, Cancel);
+EndProcedure
+
+Procedure Filling(FillingData, FillingText, StandardProcessing)
+	If FillingData = Undefined Then
+		FillingData = New Structure();
+		FillPropertyValues(ThisObject, FillingData);
+		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+	EndIf;
+EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	OtherStornoRef = DocStornoServer.IsDocumentWithStorno(ThisObject.Basis, ThisObject.Ref);
+	If ValueIsFilled(OtherStornoRef) Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(
+			StrTemplate(R().Error_191, String(OtherStornoRef), String(ThisObject.Basis)), "Basis", ThisObject);
+	EndIf;
+
+	If ValueIsFilled(ThisObject.Basis) And ThisObject.Date < ThisObject.Basis.Date Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(
+			StrTemplate(R().Error_192, ThisObject.Date, ThisObject.Basis.Date), "Basis", ThisObject);		
+	EndIf;
+	
+	If ValueIsFilled(ThisObject.Basis) And Not  ThisObject.Basis.Posted Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(
+			StrTemplate(R().Error_193, String(ThisObject.Basis)), "Basis", ThisObject);
+	EndIf;	
+EndProcedure

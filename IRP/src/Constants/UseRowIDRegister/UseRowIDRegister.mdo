@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="779a52f5-bbbb-4e67-b15e-2cae4fe31ae0">
+  <producedTypes>
+    <managerType typeId="8746e112-70bf-42d0-80ed-e02a45956c1e" valueTypeId="6d75b3d6-9098-4fad-9106-a67ec35a6baf"/>
+    <valueManagerType typeId="9d6d7b6b-a7a4-4a7e-a045-32adae896e82" valueTypeId="23c75da3-5ca5-4bfa-85f8-571bcd4f1fa7"/>
+    <valueKeyType typeId="9559b90d-9eb8-46ef-92cf-441855d4e5bb" valueTypeId="6a02ac6c-1dd3-46e6-843f-a42785970ae6"/>
+  </producedTypes>
+  <name>UseRowIDRegister</name>
+  <synonym>
+    <key>en</key>
+    <value>Use row ID Register</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

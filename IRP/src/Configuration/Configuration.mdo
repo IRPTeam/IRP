@@ -1291,6 +1291,7 @@
   <constants>Constant.UseVariableStore</constants>
   <constants>Constant.UseWorkOrders</constants>
   <constants>Constant.UseManualOffers</constants>
+  <constants>Constant.UseRowIDRegister</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
@@ -1874,6 +1875,7 @@
   <informationRegisters>InformationRegister.TranformedObjectsLink</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.DashboardSettings</informationRegisters>
+  <informationRegisters>InformationRegister.RowIDData</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8010B_TradeAgentInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.DELETE_R8011B_TradeAgentSerialLotNumber</accumulationRegisters>

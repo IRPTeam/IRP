@@ -1,8 +1,8 @@
 
-#Region LockLinkedRows
-
 Function LinkedRowsIntegrityIsEnable() Export
 	Return Not Constants.DisableLinkedRowsIntegrity.Get();
 EndFunction
 
-#EndRegion
+Function GetUseRowIDRegister() Export
+	Return Constants.UseRowIDRegister.Get();
+EndFunction

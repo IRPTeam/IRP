@@ -17,7 +17,11 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 	
 	Is = Is(Source);
 	If Is.SO Then
-		FillRowID_SO(Source, Cancel);
+		If RowIDInfoServerReuse.GetUseRowIDRegister() Then
+			FillRowIDRegister_SO(Source, Cancel);
+		Else
+			FillRowID_SO(Source, Cancel);
+		EndIf;
 	ElsIf Is.SI Then
 		FillRowID_SI(Source, Cancel);
 	ElsIf Is.SC Then
@@ -88,6 +92,14 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 	
 	SetPrivilegedMode(True);
 	
+	If RowIDInfoServerReuse.GetUseRowIDRegister() Then
+		OnWrite_RowIDRegister(Source, Cancel);
+	Else
+		OnWrite_RowIDCatalog(Source, Cancel);
+	Endif;
+EndProcedure
+	
+Procedure OnWrite_RowIDCatalog(Source, Cancel)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -174,6 +186,102 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 	EndDo;
 EndProcedure
 
+Procedure OnWrite_RowIDRegister(Source, Cancel)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	RowIDInfo.RowID AS RowID
+	|INTO RowIDInfo
+	|FROM
+	|	&RowIDInfo AS RowIDInfo
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TM1010B_RowIDMovements.Recorder,
+	|	RowIDInfo.RowID
+	|INTO tmpRecorders
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements AS TM1010B_RowIDMovements
+	|		INNER JOIN RowIDInfo
+	|		ON TM1010B_RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND TM1010B_RowIDMovements.RecordType = VALUE(AccumulationRecordType.Expense)
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	TM1010T_RowIDMovements.Recorder,
+	|	RowIDInfo.RowID
+	|FROM
+	|	AccumulationRegister.TM1010T_RowIDMovements AS TM1010T_RowIDMovements
+	|		INNER JOIN RowIDInfo
+	|		ON TM1010T_RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND TM1010T_RowIDMovements.Quantity < 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpRecorders.Recorder,
+	|	tmpRecorders.RowID
+	|FROM
+	|	tmpRecorders AS tmpRecorders  
+	|	where
+	| 	not tmpRecorders.Recorder refs Document.Storno";
+	Query.SetParameter("RowIDInfo", Source.RowIDInfo.Unload());
+	QueryResult = Query.Execute();
+	RecordersByRowID = QueryResult.Unload();
+	
+	TableOfDifferenceFields = New ValueTable();
+	TableOfDifferenceFields.Columns.Add("FieldName");
+	TableOfDifferenceFields.Columns.Add("DataPath");
+	TableOfDifferenceFields.Columns.Add("LineNumber");
+	TableOfDifferenceFields.Columns.Add("ValueBefore");
+	TableOfDifferenceFields.Columns.Add("ValueAfter");
+	
+	For Each Row In Source.RowIDInfo Do
+		RowItemList = Source.ItemList.FindRows(New Structure("Key", Row.Key))[0];
+		
+		RowIDRecord = GetRowIDRecord(Source.Ref, Row.RowID);
+		//RowRefObject = Row.RowRef.GetObject();
+		
+		If Not ValueIsFilled(RowIDRecord.Basis) Then
+			RowIDRecord.Basis = Source.Ref;
+		EndIf;
+		//If Not ValueIsFilled(Row.RowRef.Basis) Then
+		//	RowRefObject.Basis = Source.Ref;
+		//EndIf;
+		
+		ArrayOfDifferenceFields = UpdateRowIDRecord(Source, Row, RowItemList, RowIDRecord, Cancel, RecordersByRowID);
+		//ArrayOfDifferenceFields = UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, RecordersByRowRef);
+		
+		For Each ItemOfDifferenceFields In ArrayOfDifferenceFields Do
+			NewRow = TableOfDifferenceFields.Add();
+			FillPropertyValues(NewRow, ItemOfDifferenceFields);
+			If StrFind(ItemOfDifferenceFields.DataPath, "ItemList") = 0 Then
+				NewRow.LineNumber = 0;
+			EndIf;
+		EndDo;
+	EndDo;
+	TableOfDifferenceFields.GroupBy("FieldName, DataPath, LineNumber, ValueBefore, ValueAfter");
+	For Each Difference In TableOfDifferenceFields Do
+		If ValueIsFilled(Difference.DataPath) Then
+			If StrFind(Difference.DataPath, "ItemList") <> 0 Then
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, 
+					Difference.LineNumber, Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
+					"ItemList[" + Format((Difference.LineNumber - 1), "NZ=0; NG=0;") + "]." 
+					+ StrReplace(Difference.DataPath, "ItemList.", ""), Source);
+			Else
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_099,
+					Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
+					Difference.DataPath, Source);
+			EndIf;
+		Else
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_100,
+				Difference.ValueBefore, Difference.ValueAfter));
+		EndIf;
+	EndDo;
+EndProcedure
+
 // Event subscriptions: Posting_RowID
 Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 	If Is(Source).Storno Then
@@ -196,6 +304,14 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 		Return;
 	EndIf;
 	
+	If RowIDInfoServerReuse.GetUseRowIDRegister() Then
+		Posting_RowIDRegister(Source, Cancel, PostingMode);
+	Else
+		Posting_RowIDCatalog(Source, Cancel, PostingMode);
+	EndIf;
+EndProcedure
+	
+Procedure Posting_RowIDCatalog(Source, Cancel, PostingMode)	
 	If Is(Source).SOC Then
 		Posting_TM1010B_RowIDMovements_SOC(Source, Cancel, PostingMode);
 	EndIf;
@@ -284,15 +400,170 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 	EndIf;
 EndProcedure
 
+// ???????
+Procedure Posting_RowIDRegister(Source, Cancel, PostingMode)	
+	If Is(Source).SOC Then
+		Posting_TM1010B_RowIDMovementsRegister_SOC(Source, Cancel, PostingMode);
+		//Posting_TM1010B_RowIDMovements_SOC(Source, Cancel, PostingMode);
+	EndIf;
+	
+	If Is(Source).POC Then
+		Posting_TM1010B_RowIDMovementsRegister_POC(Source, Cancel, PostingMode);
+		//Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode);
+	EndIf;
+	
+	If Is(Source).RSR OR Is(Source).RRR Then
+	 	If Source.StatusType = Enums.RetailReceiptStatusTypes.Canceled
+	 		OR Source.StatusType = Enums.RetailReceiptStatusTypes.Postponed Then
+			UndoPosting_RowIDUndoPostingRegister(Source, Cancel); // ??????
+			//UndoPosting_RowIDUndoPosting(Source, Cancel);
+			Return;
+		EndIf;
+	EndIf;
+		
+	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
+		Return;
+	EndIf;
+	
+	ItemList_InDocument = GetRowIDWithLineNumbers(Source);	
+	Records_InDocument = GetRecordsInDocumentRegister(Source).TM1010B_RowIDMovements;
+	//Records_InDocument = GetRecordsInDocument(Source).TM1010B_RowIDMovements;
+	Records_Exists = AccumulationRegisters.TM1010B_RowIDMovements.GetExistsRecords(Source.Ref);
+	
+	If Source.Metadata().Attributes.Find("Status") <> Undefined Then
+		StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Source.Ref);
+		If Not StatusInfo.Posting Then
+			Unposting = True;
+			Source.RegisterRecords.TM1010B_RowIDMovements.Clear();
+			Source.RegisterRecords.TM1010B_RowIDMovements.Write();
+			CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting);
+			Return;
+		EndIf;
+	EndIf;
+	
+	Unposting = False;
+		
+	Source.RegisterRecords.TM1010B_RowIDMovements.Load(Records_InDocument);
+	Source.RegisterRecords.TM1010B_RowIDMovements.Write();
+	CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting);	
+	
+	Is = Is(Source);
+	_Is_Invoice = (Is.SI Or Is.PI Or Is.RSR);
+	_Is_Return = (Is.SR Or Is.SRO Or Is.PR Or Is.PRO Or Is.RRR Or Is.RGR);
+	If Not Cancel Then
+			
+		// invoices
+		If _Is_Invoice Then
+			Posting_TM1010T_RowIDMovementsRegister_Invoice(Source, Cancel, PostingMode);
+			//Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode);
+			
+			If Is.RSR Then
+				Records_InDocument = GetRecordsInDocument_TM1010T_RSR(Source);
+				Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Receipt);
+				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Receipt, Unposting);
+			EndIf;
+		EndIf;
+		
+		// returns
+		If _Is_Return Then
+			Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode);
+			If Is.RRR Then
+				Records_InDocument = GetRecordsInDocument_TM1010T_RRR(Source);
+				ItemList_InDocument = GetItemListInDocument_RRR(Source);
+				Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
+				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
+			EndIf;
+		EndIf;
+	EndIf;
+	
+	// serial lot numbers
+	If Not Cancel Then
+		If Source.Metadata().TabularSections.Find("SerialLotNumbers") <> Undefined Then
+			Records_SerialLotNumbers = Posting_T1040T_RowIDSerialLotNumbers(Source);
+			
+			// invoices
+			If _Is_Invoice Then
+				Records_SerialLotNumbers_Invoice = Posting_T1040T_RowIDSerialLotNumbers_Invoice(Source);
+				For Each Row In Records_SerialLotNumbers_Invoice Do
+					FillPropertyValues(Records_SerialLotNumbers.Add(), Row);
+				EndDo;
+			EndIf;
+			
+			Source.RegisterRecords.T1040T_RowIDSerialLotNumbers.Load(Records_SerialLotNumbers);
+			Source.RegisterRecords.T1040T_RowIDSerialLotNumbers.Write();
+		EndIf;
+	EndIf;
+EndProcedure
+
 // Event subscriptions: UndoPosting_RowID
 Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;
+	If RowIDInfoServerReuse.GetUseRowIDRegister() Then
+		UndoPosting_RowIDUndoPostingRegister(Source, Cancel);
+	Else
+		UndoPosting_RowIDUndoPostingCatalog(Source, Cancel);
+	EndIf;
+EndProcedure
+	
+Procedure UndoPosting_RowIDUndoPostingCatalog(Source, Cancel)
 	Is = Is(Source);
 	
 	Records_Exists = AccumulationRegisters.TM1010B_RowIDMovements.GetExistsRecords(Source.Ref);
 	Records_InDocument  = GetRecordsInDocument(Source).TM1010B_RowIDMovements;
+	ItemList_InDocument = GetRowIDWithLineNumbers(Source);
+	
+	Unposting = True;
+	Source.RegisterRecords.TM1010B_RowIDMovements.Clear();
+	Source.RegisterRecords.TM1010B_RowIDMovements.Write();
+	
+	Source.RegisterRecords.T1040T_RowIDSerialLotNumbers.Clear();
+	Source.RegisterRecords.T1040T_RowIDSerialLotNumbers.Write();
+	
+	CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting);
+	
+	If Not Cancel And (Is.RSR Or Is.RRR Or Is.SI Or Is.SR) Then
+		Source.RegisterRecords.TM1010T_RowIDMovements.Clear();
+		Source.RegisterRecords.TM1010T_RowIDMovements.Write();
+	
+		If Is.RSR Then
+			Records_InDocument = GetRecordsInDocument_TM1010T_RSR(Source);
+			Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Receipt);
+			CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Receipt, Unposting);
+		EndIf;
+
+		If Is.RRR Then
+			Records_InDocument = GetRecordsInDocument_TM1010T_RRR(Source);
+			ItemList_InDocument = GetItemListInDocument_RRR(Source);
+			Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
+			CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
+		EndIf;		
+	EndIf;
+	
+	If Not Cancel Then
+		For Each Row In Source.RowIDInfo Do
+			If ValueIsFilled(Row.Basis) Then
+				IsBasis = Is(Row.Basis);
+				If IsBasis.SO Or IsBasis.PO Then
+					If Row.RowRef.IsFixedItemKey Or Row.RowRef.IsFixedStore Then
+						RowRefObject = Row.RowRef.GetObject();
+						RowRefObject.IsFixedItemKey = False;
+						RowRefObject.IsFixedStore = False;
+						WriteRowIDCatalog(RowRefObject);
+					EndIf;
+				EndIf;
+			EndIf;
+		EndDo;
+	EndIf;
+EndProcedure
+
+// ??????
+Procedure UndoPosting_RowIDUndoPostingRegister(Source, Cancel)
+	Is = Is(Source);
+	
+	Records_Exists = AccumulationRegisters.TM1010B_RowIDMovements.GetExistsRecords(Source.Ref);
+	Records_InDocument  = GetRecordsInDocumentRegister(Source).TM1010B_RowIDMovements;
 	ItemList_InDocument = GetRowIDWithLineNumbers(Source);
 	
 	Unposting = True;
@@ -394,6 +665,59 @@ Procedure Posting_TM1010B_RowIDMovements_SOC(Source, Cancel, PostingMode)
 	Source.RegisterRecords.TM1010B_RowIDMovements.Write = True;
 EndProcedure
 
+Procedure Posting_TM1010B_RowIDMovementsRegister_SOC(Source, Cancel, PostingMode)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	SalesOrderItemList.Ref.Date AS Period,
+	|	SalesOrderItemList.Ref.SalesOrder AS Order,
+	|	SalesOrderItemList.SalesOrderKey AS RowKey,
+	|	SalesOrderItemList.Cancel AS IsCanceled
+	|INTO ItemList
+	|FROM
+	|	Document.SalesOrderClosing.ItemList AS SalesOrderItemList
+	|WHERE
+	|	SalesOrderItemList.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.Key AS BasisKey,
+	|	RowIDInfo.NextStep AS Step,
+	|	ItemList.Order AS Basis
+	|INTO RowIDInfo
+	|FROM
+	|	Document.SalesOrder.RowIDInfo AS RowIDInfo
+	|		INNER JOIN ItemList
+	|		ON RowIDInfo.Ref = ItemList.Order
+	|		AND RowIDInfo.Key = ItemList.RowKey
+	|		AND ItemList.IsCanceled
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	&Period AS Period,
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	-TM1010B_RowIDMovementsBalance.QuantityBalance AS Quantity,
+	|	*
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&BalancePeriod, (RowID, Step, Basis, BasisKey) IN
+	|		(SELECT
+	|			RowIDInfo.RowID,
+	|			RowIDInfo.Step,
+	|			RowIDInfo.Basis,
+	|			RowIDInfo.BasisKey
+	|		FROM
+	|			RowIDInfo AS RowIDInfo)) AS TM1010B_RowIDMovementsBalance";
+	Query.SetParameter("Ref", Source.Ref);
+	Query.SetParameter("Period", Source.Ref.Date);
+	Query.SetParameter("BalancePeriod", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
+	QueryResult = Query.Execute().Unload();
+	Source.RegisterRecords.TM1010B_RowIDMovements.Load(QueryResult);
+	Source.RegisterRecords.TM1010B_RowIDMovements.Write = True;
+EndProcedure
+
 Procedure Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode)
 	Query = New Query();
 	Query.Text = 
@@ -439,6 +763,59 @@ Procedure Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode)
 	|			RowIDInfo.Basis,
 	|			RowIDInfo.BasisKey,
 	|			RowIDInfo.RowRef
+	|		FROM
+	|			RowIDInfo AS RowIDInfo)) AS TM1010B_RowIDMovementsBalance";
+	Query.SetParameter("Ref", Source.Ref);
+	Query.SetParameter("Period", Source.Ref.Date);
+	Query.SetParameter("BalancePeriod", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
+	QueryResult = Query.Execute().Unload();
+	Source.RegisterRecords.TM1010B_RowIDMovements.Load(QueryResult);
+	Source.RegisterRecords.TM1010B_RowIDMovements.Write = True;
+EndProcedure
+
+Procedure Posting_TM1010B_RowIDMovementsRegister_POC(Source, Cancel, PostingMode)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	PurchaseOrderItems.Ref.Date AS Period,
+	|	PurchaseOrderItems.Ref.PurchaseOrder AS Order,
+	|	PurchaseOrderItems.PurchaseOrderKey AS RowKey,
+	|	PurchaseOrderItems.Cancel AS IsCanceled
+	|INTO ItemList
+	|FROM
+	|	Document.PurchaseOrderClosing.ItemList AS PurchaseOrderItems
+	|WHERE
+	|	PurchaseOrderItems.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.NextStep AS Step,
+	|	RowIDInfo.Key AS BasisKey,
+	|	ItemList.Order AS Basis
+	|INTO RowIDInfo
+	|FROM
+	|	Document.PurchaseOrder.RowIDInfo AS RowIDInfo
+	|		INNER JOIN ItemList
+	|		ON RowIDInfo.Ref = ItemList.Order
+	|		AND RowIDInfo.Key = ItemList.RowKey
+	|		AND ItemList.IsCanceled
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	&Period AS Period,
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	-TM1010B_RowIDMovementsBalance.QuantityBalance AS Quantity,
+	|	*
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&BalancePeriod, (RowID, Step, Basis, BasisKey) IN
+	|		(SELECT
+	|			RowIDInfo.RowID,
+	|			RowIDInfo.Step,
+	|			RowIDInfo.Basis,
+	|			RowIDInfo.BasisKey
 	|		FROM
 	|			RowIDInfo AS RowIDInfo)) AS TM1010B_RowIDMovementsBalance";
 	Query.SetParameter("Ref", Source.Ref);
@@ -519,6 +896,46 @@ Procedure Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode)
 	|	RowIDInfo.Key,
 	|	RowIDInfo.Quantity,
 	|	RowIDInfo.RowRef";
+	Query.SetParameter("Ref", Source.Ref);
+
+	NextStep = Undefined;
+	Is = Is(Source);
+	If Is.SI Then
+		NextStep = Catalogs.MovementRules.SRO_SR;
+	ElsIf Is.PI Then
+		NextStep = Catalogs.MovementRules.PRO_PR;
+	ElsIf Is.RSR Then
+		NextStep = Catalogs.MovementRules.RRR_RGR;
+	EndIf;
+
+	Query.SetParameter("NextStep", NextStep);
+
+	QueryResult = Query.Execute().Unload();
+	Source.RegisterRecords.TM1010T_RowIDMovements.Load(QueryResult);
+	Source.RegisterRecords.TM1010T_RowIDMovements.Write();
+EndProcedure
+
+Procedure Posting_TM1010T_RowIDMovementsRegister_Invoice(Source, Cancel, PostingMode)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	RowIDInfo.Ref.Date AS Period,
+	|	RowIDInfo.Ref AS Recorder,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.Key AS BasisKey,
+	|	&NextStep AS Step,
+	|	RowIDInfo.Quantity,
+	|	RowIDInfo.Ref AS Basis
+	|FROM
+	|	Document." + Source.Metadata().Name + ".RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref.Date,
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.Key,
+	|	RowIDInfo.Quantity";
 	Query.SetParameter("Ref", Source.Ref);
 
 	NextStep = Undefined;
@@ -779,6 +1196,103 @@ Function GetRecordsInDocument(Source)
 	Return New Structure("TM1010B_RowIDMovements", Query.Execute().Unload());
 EndFunction
 
+Function GetRecordsInDocumentRegister(Source)
+	Query = New Query();
+	Query.Text = 
+		"SELECT
+		|	Table.Ref AS Recorder,
+		|	Table.Ref.Date AS Period, 
+		|	Table.RowID,
+		|	Table.BasisKey,
+		|	Table.CurrentStep,
+		| 	Table.Basis,
+		|	SUM(Table.Quantity) AS Quantity
+		|INTO RowIDMovements
+		|FROM
+		|	Document." + Source.Metadata().Name + ".RowIDInfo AS Table
+		|WHERE
+		|	Table.Ref = &Ref
+		|GROUP BY
+		|	Table.Ref,
+		|	Table.Ref.Date, 
+		|	Table.RowID,
+		|	Table.BasisKey,
+		|	Table.CurrentStep,
+		| 	Table.Basis
+		|;
+		|//////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Table.Ref AS Recorder,
+		|	Table.Ref.Date AS Period, 
+		|	Table.RowID,
+		|	Table.Key,
+		|	Table.NextStep,
+		| 	Table.Basis,
+		|	Table.Quantity
+		|INTO RowIDMovementsFull
+		|FROM
+		|	Document." + Source.Metadata().Name + ".RowIDInfo AS Table
+		|WHERE
+		|	Table.Ref = &Ref
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	Table.Recorder,
+		|	Table.Period,
+		|	Table.RowID,
+		|	Table.BasisKey,
+		|	Table.CurrentStep AS Step,
+		|	CASE
+		|		WHEN Table.Basis.Ref IS NULL
+		|			THEN &Ref
+		|		ELSE Table.Basis
+		|	END AS Basis,
+		|	CASE
+		|		WHEN ISNULL(TM1010B_RowIDMovements.QuantityBalance, 0) < Table.Quantity
+		|			THEN ISNULL(TM1010B_RowIDMovements.QuantityBalance, 0)
+		|		ELSE Table.Quantity
+		|	END AS Quantity
+		|FROM
+		|	RowIDMovements AS Table
+		|		INNER JOIN AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, (RowID, BasisKey, Step, Basis) IN
+		|			(SELECT
+		|				Table.RowID,
+		|				Table.BasisKey,
+		|				Table.CurrentStep,
+		|				Table.Basis
+		|			FROM
+		|				RowIDMovements AS Table
+		|			WHERE
+		|				NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef))) AS TM1010B_RowIDMovements
+		|		ON TM1010B_RowIDMovements.RowID = Table.RowID
+		|		AND TM1010B_RowIDMovements.BasisKey = Table.BasisKey
+		|		AND TM1010B_RowIDMovements.Step = Table.CurrentStep
+		|		AND TM1010B_RowIDMovements.Basis = Table.Basis
+		|WHERE
+		|	NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	Table.Recorder,
+		|	Table.Period,
+		|	Table.RowID,
+		|	Table.Key,
+		|	Table.NextStep AS Step,
+		|	&Ref,
+		|	Table.Quantity
+		|FROM
+		|	RowIDMovementsFull AS Table
+		|WHERE
+		|	NOT Table.NextStep = VALUE(Catalog.MovementRules.EmptyRef)";
+
+	Query.SetParameter("Ref", Source.Ref);
+	Query.SetParameter("Period", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
+	Return New Structure("TM1010B_RowIDMovements", Query.Execute().Unload());
+EndFunction
+
 Function Posting_T1040T_RowIDSerialLotNumbers(Source)
 	Query = New Query();
 	Query.Text = 
@@ -999,6 +1513,45 @@ Procedure FillRowID_SO(Source, Cancel)
 		EndIf;
 
 		FillRowID(Row, RowItemList);
+		Row.NextStep = GetNextStep_SO(Source, RowItemList, Row);
+
+		If RowItemList.ProcurementMethod = Enums.ProcurementMethods.IncomingReserve Then
+			NewRow = Source.RowIDInfo.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.CurrentStep = Undefined;
+			NewRow.NextStep = Catalogs.MovementRules.PRR;
+		EndIf;
+	EndDo;
+EndProcedure
+
+Procedure FillRowIDRegister_SO(Source, Cancel)
+	ArrayForDelete = New Array();
+	For Each Row In Source.RowIDInfo Do
+		If Row.NextStep = Catalogs.MovementRules.PRR Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+
+	For Each ItemForDelete In ArrayForDelete Do
+		Source.RowIDInfo.Delete(ItemForDelete);
+	EndDo;
+
+	For Each RowItemList In Source.ItemList Do
+
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+		ElsIf IDInfoRows.Count() = 1 Then
+			Row = IDInfoRows[0];
+		EndIf;
+
+		If RowItemList.Cancel Then
+			Source.RowIDInfo.Delete(Row);
+			Continue;
+		EndIf;
+
+		FillRowIDRegister(Row, RowItemList);
 		Row.NextStep = GetNextStep_SO(Source, RowItemList, Row);
 
 		If RowItemList.ProcurementMethod = Enums.ProcurementMethods.IncomingReserve Then
@@ -1743,7 +2296,7 @@ EndProcedure
 #EndRegion
 
 #Region GetNextStep
-
+// ok
 Function GetNextStep_SO(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	
@@ -1956,9 +2509,22 @@ Procedure FillRowID(RowRowIDInfo, RowItemList)
 	Else
 		RowRowIDInfo.Quantity = RowItemList.QuantityInBaseUnit;
 	EndIf;
+	// ###
 	RowRowIDInfo.RowRef = FindOrCreateRowIDRef(RowRowIDInfo.RowID);
 EndProcedure
 
+// Ok
+Procedure FillRowIDRegister(RowRowIDInfo, RowItemList)
+	RowRowIDInfo.Key      = RowItemList.Key;
+	RowRowIDInfo.RowID    = RowItemList.Key;
+	If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then
+		RowRowIDInfo.Quantity = ?(RowItemList.Difference < 0, -RowItemList.Difference, RowItemList.Difference);
+	Else
+		RowRowIDInfo.Quantity = RowItemList.QuantityInBaseUnit;
+	EndIf;
+EndProcedure
+
+// ###
 Function FindOrCreateRowIDRef(RowID)
 	Query = New Query();
 	Query.Text =
@@ -1984,11 +2550,14 @@ Function FindOrCreateRowIDRef(RowID)
 	
 	RowRefObject.RowID       = RowID;
 	RowRefObject.Description = RowID;
+	
+	// ###
 	WriteRowIDCatalog(RowRefObject);
 	
 	Return RowRefObject.Ref;
 EndFunction
 
+// ###
 Function GetMD5RowIDs(RowID)
 	AllAttributes = New Structure;
 	For Each Attr In Metadata.Catalogs.RowIDs.Attributes Do
@@ -2001,10 +2570,7 @@ Function GetMD5RowIDs(RowID)
 	Return CommonFunctionsServer.GetMD5(AllAttributes);
 EndFunction
 
-// Write row IDCatalog.
-// 
-// Parameters:
-//  Obj - CatalogObject.RowIDs - Obj
+// ###
 Procedure WriteRowIDCatalog(Obj)
 	If Obj.Ref.isEmpty() Then
 		// first write
@@ -2020,6 +2586,52 @@ Procedure WriteRowIDCatalog(Obj)
 		Obj.Write();
 	EndIf;
 EndProcedure
+
+Procedure WriteRowIDRecord(RowIDRecord, SourceRef)
+	RecordSet = InformationRegisters.RowIDData.CreateRecordSet();
+	RecordSet.Filter.Recorder.Set(SourceRef);
+	RecordSet.Read();
+	
+	ArrayForDelete = New Array();
+	For Each Record In RecordSet Do
+		If Record.RowID = RowIDRecord.RowID Then
+			ArrayForDelete.Add(Record);
+		EndIf;
+	EndDo;
+	
+	For Each ArrayItem In ArrayForDelete Do
+		RecordSet.Delete(ArrayItem);
+	EndDo;
+	
+	NewRecord = RecordSet.Add();
+	FillPropertyValues(NewRecord, RowIDRecord);
+	NewRecord.Recorder = SourceRef;
+	NewRecord.Period = SourceRef.Date;
+	RecordSet.Write();
+EndProcedure
+
+Function GetRowIDRecord(SourceRef, RowID)
+	Query = New Query();
+	Query.Text = 
+	"SELECT *,
+	|	RowIDDataSliceLast.RowID
+	|FROM
+	|	InformationRegister.RowIDData.SliceLast(&Period, RowID = &RowID) AS RowIDDataSliceLast";
+	Query.SetParameter("Period", SourceRef.PointInTime());
+	Query.SetParameter("RowID", RowID);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Result = New Structure();
+	For Each Column In QueryTable.Columns Do
+		Result.Insert(Column.Name, Undefined);
+	EndDo;
+	For Each Row In QueryTable Do
+		For Each Column In QueryTable.Columns Do
+			Result[Column.Name] = Row[Column.Name];
+		EndDo;
+	EndDo;
+	Return Result;
+EndFunction
 
 Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, RecordersByRowRef)
 	FieldsForCheckRowRef = Undefined;
@@ -2343,12 +2955,381 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	Return ArrayOfDifferenceFields;
 EndFunction
 
+Function UpdateRowIDRecord(Source, Row, RowItemList, RowIDRecord, Cancel, RecordersByRowID)
+	FieldsForCheckRowIDRecord = Undefined;
+	CachedRowIDRecordBefore   = Undefined;
+	CachedRowIDRecordAfter    = Undefined;
+	If Not Source.Ref.isEmpty() Then
+		FieldsForCheckRowIDRecord = GetFieldsForCheckRowIDRecord(Source, RowIDRecord, RecordersByRowID);
+		CachedRowIDRecordBefore   = GetRowIDRecordCache(RowIDRecord, FieldsForCheckRowIDRecord);
+	EndIf;
+	
+	Is = Is(Source);
+	If Is.SC And Is(RowIDRecord.Basis).ISR Then
+		FillPropertyValues(RowIDRecord, RowItemList, , "Store");
+	ElsIf Is.SC And Is(RowIDRecord.Basis).IT Then
+		FillPropertyValues(RowIDRecord, RowItemList, , "Store");
+	ElsIf Is.GR And Is(RowIDRecord.Basis).IT Then
+		FillPropertyValues(RowIDRecord, RowItemList, , "Store");		
+	ElsIf Is.RRR Or Is.SR Then
+		FillPropertyValues(RowIDRecord, RowItemList, , "Store");
+		RowIDRecord.StoreReturn = RowItemList.Store;
+	ElsIf Is.RGR And Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer Then
+		FillPropertyValues(RowIDRecord, RowItemList, , "Store");
+		RowIDRecord.StoreReturn = RowItemList.Store;
+	ElsIf Is.SO And RowItemList.ProcurementMethod = Enums.ProcurementMethods.Purchase Then
+		FillPropertyValues(RowIDRecord, RowItemList, , "Store");
+		RowIDRecord.StoreSales = RowItemList.Store;
+	ElsIf Is.PO And ValueIsFilled(RowItemList.SalesOrder) Then
+		FillPropertyValues(RowIDRecord, RowItemList, , "Store"); 
+		RowIDRecord.StorePurchases = RowItemList.Store;
+	ElsIf Is.PI And ValueIsFilled(RowItemList.SalesOrder) Then
+		FillPropertyValues(RowIDRecord, RowItemList, , "Store"); 
+		RowIDRecord.StorePurchases = RowItemList.Store;
+	ElsIf Is.SO And RowItemList.IsVariableStore Then
+		FillPropertyValues(RowIDRecord, RowItemList, , "Store");
+	ElsIf Is.PO And RowItemList.IsVariableStore Then
+		FillPropertyValues(RowIDRecord, RowItemList, , "Store");		
+	Else
+		FillPropertyValues(RowIDRecord, RowItemList);
+	EndIf;
+	
+	If Is.RRR Or Is.SR Then
+		FillPropertyValues(RowIDRecord, Source, , "Company, Branch");
+		RowIDRecord.CompanyReturn = Source.Company;
+		RowIDRecord.BranchReturn  = Source.Branch;
+	ElsIf Is.RGR And Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer Then
+		FillPropertyValues(RowIDRecord, Source, , "Company, Branch");
+		RowIDRecord.CompanyReturn = Source.Company;
+		RowIDRecord.BranchReturn  = Source.Branch;		
+	ElsIf Is.GR And Source.TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer Then
+		FillPropertyValues(RowIDRecord, Source, , "Branch");
+	ElsIf Is.GR And Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer Then
+	    FillPropertyValues(RowIDRecord, Source, , "Company, Branch");
+		RowIDRecord.CompanyReturn = Source.Company;
+		RowIDRecord.BranchReturn  = Source.Branch;
+	Else
+		FillPropertyValues(RowIDRecord, Source);
+	EndIf;
+	
+	RowIDRecord.RowID       = Row.RowID;
+	//RowIDRecord.Description = Row.RowID;
+		
+	If Is.ITO Or Is.IT Then
+		RowIDRecord.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.InventoryTransfer;
+		RowIDRecord.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.InventoryTransfer;
+	ElsIf Is.SO Or Is.SI Then
+		RowIDRecord.TransactionTypeSales = Source.TransactionType;
+		
+		If Source.TransactionType = Enums.SalesTransactionTypes.Sales Then
+			
+			RowIDRecord.TransactionTypeSC       = Enums.ShipmentConfirmationTransactionTypes.Sales;
+			RowIDRecord.TransactionTypeGRReturn = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
+			RowIDRecord.TransactionTypeSR       = Enums.SalesReturnTransactionTypes.ReturnFromCustomer;
+		
+		ElsIf Source.TransactionType = Enums.SalesTransactionTypes.ShipmentToTradeAgent Then
+			
+			RowIDRecord.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent;
+			RowIDRecord.TransactionTypeGRReturn = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent;
+			RowIDRecord.TransactionTypeSR = Enums.SalesReturnTransactionTypes.ReturnFromTradeAgent;
+			
+		EndIf;
+		
+		RowIDRecord.Requester = Source.Ref;
+	ElsIf Is.PO Or Is.PI Then
+		RowIDRecord.TransactionTypePurchases = Source.TransactionType;
+		
+		If Source.TransactionType = Enums.PurchaseTransactionTypes.Purchase Then
+			
+			RowIDRecord.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.Purchase;
+			RowIDRecord.TransactionTypeSCReturn = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
+			RowIDRecord.TransactionTypePR = Enums.PurchaseReturnTransactionTypes.ReturnToVendor;
+			
+		ElsIf Source.TransactionType = Enums.PurchaseTransactionTypes.ReceiptFromConsignor Then
+			
+			RowIDRecord.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor;
+			RowIDRecord.TransactionTypeSCReturn = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor;
+			RowIDRecord.TransactionTypePR = Enums.PurchaseReturnTransactionTypes.ReturnToConsignor;
+			
+		EndIf;
+		
+	ElsIf Is.SC Then
+		If Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor
+			Or Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor Then
+			RowIDRecord.TransactionTypeSCReturn = Source.TransactionType;
+		ElsIf Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales Then
+			RowIDRecord.TransactionTypeSC = Source.TransactionType;
+			If Not (ValueIsFilled(Row.Basis) And TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt"))
+				And (ValueIsFilled(RowIDRecord.Basis) And TypeOf(RowIDRecord.Basis) <> Type("DocumentRef.SalesOrder")) Then
+				RowIDRecord.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
+			EndIf;
+		Else
+			RowIDRecord.TransactionTypeSC = Source.TransactionType;
+		EndIf;
+	ElsIf Is.GR Then
+		If Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent
+			Or Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer Then
+			RowIDRecord.TransactionTypeGRReturn = Source.TransactionType;
+		ElsIf Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase Then
+			RowIDRecord.TransactionTypeGR = Source.TransactionType;
+			If ValueIsFilled(RowItemList.SalesOrder) Then
+				RowIDRecord.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.Sales;
+			Else
+				RowIDRecord.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
+			EndIf;
+		Else
+			RowIDRecord.TransactionTypeGR = Source.TransactionType;
+		EndIf;
+	ElsIf Is.PR Or Is.PRO Then
+		RowIDRecord.TransactionTypePR = Source.TransactionType;
+		
+		If Source.TransactionType = Enums.PurchaseReturnTransactionTypes.ReturnToVendor Then
+			
+			RowIDRecord.TransactionTypeSCReturn = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
+		
+		ElsIf Source.TransactionType = Enums.PurchaseReturnTransactionTypes.ReturnToConsignor Then
+			
+			RowIDRecord.TransactionTypeSCReturn = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor;
+
+		EndIf;
+	ElsIf Is.SR Or Is.SRO Then
+		RowIDRecord.TransactionTypeSR = Source.TransactionType;
+		
+		If Source.TransactionType = Enums.SalesReturnTransactionTypes.ReturnFromCustomer Then
+			
+			RowIDRecord.TransactionTypeGRReturn = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
+
+		ElsIf Source.TransactionType = Enums.SalesReturnTransactionTypes.ReturnFromTradeAgent Then
+			
+			RowIDRecord.TransactionTypeGRReturn = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent;
+
+		EndIf;
+	ElsIf Is.WO Or Is.WS Then
+		
+		RowIDRecord.TransactionTypeSales = Enums.SalesTransactionTypes.Sales;
+		
+	ElsIf Is.ITO Or Is.IT Then
+		RowIDRecord.StoreSender = Source.StoreSender;
+		RowIDRecord.StoreReceiver = Source.StoreReceiver;
+	EndIf;
+	
+	If Is.SI Or Is.SRO Or Is.SR Or Is.RSR Or Is.WO Then
+		RowIDRecord.PartnerSales         = Source.Partner;
+		RowIDRecord.LegalNameSales       = Source.LegalName;
+		RowIDRecord.AgreementSales       = Source.Agreement;
+		RowIDRecord.CurrencySales        = Source.Currency;
+		RowIDRecord.PriceIncludeTaxSales = Source.PriceIncludeTax;
+
+		If Is.RSR Then
+			RowIDRecord.TransactionTypeRGR = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer;	
+		EndIf;
+	ElsIf Is.SO Then
+		If Source.TransactionType = Enums.SalesTransactionTypes.RetailSales Then
+			RowIDRecord.RetailCustomer = Source.RetailCustomer;
+			RowIDRecord.TransactionTypeRSC = Source.ShipmentMode;
+		Else
+			RowIDRecord.PartnerSales   = Source.Partner;
+			RowIDRecord.LegalNameSales = Source.LegalName;
+			RowIDRecord.AgreementSales = Source.Agreement;		
+		EndIf;
+		RowIDRecord.CurrencySales        = Source.Currency;
+		RowIDRecord.PriceIncludeTaxSales = Source.PriceIncludeTax;
+	ElsIf Is.PO Or Is.PI Or Is.PRO Or Is.PR Then
+		RowIDRecord.PartnerPurchases         = Source.Partner;
+		RowIDRecord.LegalNamePurchases       = Source.LegalName;
+		RowIDRecord.AgreementPurchases       = Source.Agreement;
+		RowIDRecord.CurrencyPurchases        = Source.Currency;
+		RowIDRecord.PriceIncludeTaxPurchases = Source.PriceIncludeTax;
+	ElsIf Is.SC Then
+		If Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales 
+			Or Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent Then
+			RowIDRecord.PartnerSales   = Source.Partner;
+			RowIDRecord.LegalNameSales = Source.LegalName;
+		ElsIf Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor
+			Or Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor Then 
+			RowIDRecord.PartnerPurchases   = Source.Partner;
+			RowIDRecord.LegalNamePurchases = Source.LegalName;
+		EndIf;
+	ElsIf Is.SPO Then
+		RowIDRecord.PartnerSales   = Source.Partner;
+		RowIDRecord.LegalNameSales = Source.LegalName;
+	ElsIf Is.GR Then
+		If Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase
+			Or Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor Then
+			RowIDRecord.PartnerPurchases         = Source.Partner;
+			RowIDRecord.LegalNamePurchases       = Source.LegalName;
+		ElsIf Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer
+			Or Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent Then
+			RowIDRecord.PartnerSales   = Source.Partner;
+			RowIDRecord.LegalNameSales = Source.LegalName;
+		EndIf;
+
+	ElsIf Is.WS Then
+		RowIDRecord.PartnerSales    = Source.Partner;
+		RowIDRecord.LegalNameSales  = Source.LegalName;
+	EndIf;
+	
+	If Is.RSC Then
+		RowIDRecord.TransactionTypeRSC = Source.TransactionType;
+	EndIf;
+	
+	If Is.RGR Then
+		If Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.CourierDelivery Then
+			RowIDRecord.TransactionTypeRSC = Enums.RetailShipmentConfirmationTransactionTypes.CourierDelivery;
+		ElsIf Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.Pickup Then
+			RowIDRecord.TransactionTypeRSC = Enums.RetailShipmentConfirmationTransactionTypes.Pickup;
+		ElsIf Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer Then
+			RowIDRecord.TransactionTypeRGR = Source.TransactionType;		
+		Else
+            Raise StrTemplate(R().UnsupportedTransactionType, Source.TransactionType);
+		EndIf;
+	EndIf;
+	
+	If Is.SO Or Is.PO Then	
+		If RowIDRecord.IsVariableItemKey = True Then
+			Rows = FieldsForCheckRowIDRecord.FindRows(New Structure("FieldName", "ItemKey"));
+			For Each Row In Rows Do
+				FieldsForCheckRowIDRecord.Delete(Row);
+			EndDo;
+		EndIf;
+		
+		If Not RowIDRecord.IsFixedItemKey = True Then 
+			
+			RowIDRecord.Item = Catalogs.Items.EmptyRef();
+			RowIDRecord.ItemKey = Catalogs.ItemKeys.EmptyRef();
+			
+			If RowIDRecord.IsVariableItemKey = True Then
+				RowIDRecord.Item = RowItemList.ItemKey.Item;	
+			Else
+				RowIDRecord.ItemKey = RowItemList.ItemKey;
+			EndIf;
+		
+		EndIf;	
+		
+		If RowIDRecord.IsVariableStore = True Then
+			Rows = FieldsForCheckRowIDRecord.FindRows(New Structure("FieldName", "Store"));
+			For Each Row In Rows Do
+				FieldsForCheckRowIDRecord.Delete(Row);
+			EndDo;
+		EndIf;
+		
+		If Not RowIDRecord.IsFixedStore = True Then 
+			
+			RowIDRecord.Store = Catalogs.Stores.EmptyRef();
+			
+			If Not RowIDRecord.IsVariableStore = True Then
+				RowIDRecord.Store = RowItemList.Store;
+			EndIf;
+		
+		EndIf;
+	
+	Else                        
+		If RowIDRecord.IsVariableItemKey = True Then
+			If Not RowIDRecord.IsFixedItemKey = True Then
+				RowIDRecord.ItemKey = RowItemList.ItemKey;
+				Rows = FieldsForCheckRowIDRecord.FindRows(New Structure("FieldName", "ItemKey"));
+				For Each Row In Rows Do
+					FieldsForCheckRowIDRecord.Delete(Row);
+				EndDo;  
+				RowIDRecord.IsFixedItemKey = True;
+			Else
+			    RowIDRecord.ItemKey = RowItemList.ItemKey;
+			EndIf;
+		EndIf;		
+		
+		If RowIDRecord.IsVariableStore = True Then
+			If Not RowIDRecord.IsFixedStore = True Then
+				RowIDRecord.Store = RowItemList.Store;
+				Rows = FieldsForCheckRowIDRecord.FindRows(New Structure("FieldName", "Store"));
+				For Each Row In Rows Do
+					FieldsForCheckRowIDRecord.Delete(Row);
+				EndDo; 
+				RowIDRecord.IsFixedStore = True; 
+			Else
+				RowIDRecord.Store = RowItemList.Store;
+			EndIf;
+		EndIf;
+	EndIf;
+	
+	ArrayOfDifferenceFields = New Array();
+	If LinkedRowsIntegrityIsEnable() Then
+		If ValueIsFilled(Source.Ref) Then
+			CachedRowIDRecordAfter = GetRowIDRecordCache(RowIDRecord, FieldsForCheckRowIDRecord);
+			IsDifference = IsDifferenceInCachedObjects(CachedRowIDRecordBefore, CachedRowIDRecordAfter, FieldsForCheckRowIDRecord);
+			If IsDifference.Difference Then
+				Cancel = True;
+				For Each Difference In IsDifference.Fields Do
+					ItemOfDifferenceFields = New Structure();
+					ItemOfDifferenceFields.Insert("FieldName"   , Difference.FieldName);
+					ItemOfDifferenceFields.Insert("DataPath"    , Difference.DataPath);
+					ItemOfDifferenceFields.Insert("LineNumber"  , RowItemList.LineNumber);
+					ItemOfDifferenceFields.Insert("ValueBefore" , Difference.ValueBefore);
+					ItemOfDifferenceFields.Insert("ValueAfter"  , Difference.ValueAfter);
+					ArrayOfDifferenceFields.Add(ItemOfDifferenceFields);
+				EndDo;
+			EndIf;
+		EndIf;
+	EndIf;
+	
+	If Not Cancel Then
+		WriteRowIDRecord(RowIDRecord, Source.Ref);
+		//WriteRowIDCatalog(RowRefObject);
+	EndIf;
+	Return ArrayOfDifferenceFields;
+EndFunction
+
 Function GetFieldsForCheckRowRef(Source, RowRefObject, RecordersByRowRef)
 	
 	RecordersTable = RecordersByRowRef.Copy(New Structure("RowRef", RowRefObject.Ref));
 	RecordersTable.GroupBy("Recorder");
+	
+	ExternalLinkedDocsTable = New ValueTable();
+	ExternalLinkedDocsTable.Columns.Add("Doc");
+	
+	DocAliases = DocAliases();
+	
+	For Each Row In RecordersTable Do
+		For Each KeyValue In Is(Row.Recorder) Do
+			If KeyValue.Value Then
+				ExternalLinkedDocsTable.Add().Doc = DocAliases[KeyValue.Key];
+				Break;
+			EndIf;
+		EndDo;
+	EndDo;
+	ExternalLinkedDocsTable.GroupBy("Doc");
+	
+	FieldsToLock_ExternalLinkedDocs =
+	GetFieldsToLock_ExternalLinkedDocs(Source.Ref, ExternalLinkedDocsTable.UnloadColumn("Doc"));
+	
+	AllFields = New ValueTable();
+	AllFields.Columns.Add("FieldName");
+	AllFields.Columns.Add("DataPath");
+	IsFieldName = True;
+	For Each Row In FieldsToLock_ExternalLinkedDocs.RowRefFilter Do
+		If IsFieldName Then
+			NewRow = AllFields.Add();
+			NewRow.FieldName = Row.FieldName;
+			IsFieldName = False;
+		Else
+			NewRow.DataPath = Row.FieldName;
+			IsFieldName = True;
+		EndIf;
+	EndDo;
+	If AllFields.Count() Then
+		AllFields.Add().FieldName = "RowID";
+		AllFields.Add().FieldName = "Basis";
+	EndIf;
+	
+	AllFields.GroupBy("FieldName, DataPath");
+	Return AllFields;
+EndFunction
 
-		
+// ok
+Function GetFieldsForCheckRowIDRecord(Source, RowIDRecord, RecordersByRowID)
+	
+	RecordersTable = RecordersByRowID.Copy(New Structure("RowID", RowIDRecord.RowID));
+	RecordersTable.GroupBy("Recorder");
+	
 	ExternalLinkedDocsTable = New ValueTable();
 	ExternalLinkedDocsTable.Columns.Add("Doc");
 	
@@ -2396,6 +3377,15 @@ Function GetRowRefCache(RowRefObject, FieldsForCheckRowRef)
 		CachedObject.Insert(TrimAll(Row.FieldName), RowRefObject[TrimAll(Row.FieldName)]);
 	EndDo;
 	Return CachedObject;
+EndFunction
+
+// ok
+Function GetRowIDRecordCache(RowIDRecord, FieldsForCheckRowIDRecord)
+	CachedRecord = New Structure();
+	For Each Row In FieldsForCheckRowIDRecord Do
+		CachedRecord.Insert(TrimAll(Row.FieldName), RowIDRecord[TrimAll(Row.FieldName)]);
+	EndDo;
+	Return CachedRecord;
 EndFunction
 
 Function IsDifferenceInCachedObjects(CachedObjectBefore, CachedObjectAfter, FieldsForCheck)

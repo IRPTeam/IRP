@@ -89,6 +89,7 @@
   <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
+  <registerRecords>InformationRegister.RowIDStamps</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="00efd9a7-ea17-470d-af39-54b18a153791">

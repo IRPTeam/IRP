@@ -176,6 +176,27 @@ EndProcedure
 
 // Event subscriptions: Posting_RowID
 Procedure Posting_RowID(Source, Cancel, PostingMode) Export
+	
+	If Source.AdditionalProperties.Property("RowIDStampRecords") Then
+		StampRecordsTable = New ValueTable();
+		StampRecordsTable.Columns.Add("Period");
+		StampRecordsTable.Columns.Add("RowRef");
+		StampRecordsTable.Columns.Add("Attribute");
+		StampRecordsTable.Columns.Add("Value");
+		For Each RowIDStamp In Source.AdditionalProperties.RowIDStampRecords Do
+			For Each Row In RowIDStamp.Value Do
+				StampRecord = StampRecordsTable.Add();
+				StampRecord.Period = Source.Date;
+				StampRecord.RowRef = RowIDStamp.Key;
+				StampRecord.Attribute = Row.Key;
+				StampRecord.Value = Row.Value;
+			EndDo;
+		EndDo;
+		StampRecordsTable.GroupBy("Period, RowRef, Attribute, Value");
+		Source.RegisterRecords.RowIDStamps.Load(StampRecordsTable);
+		Source.RegisterRecords.RowIDStamps.Write = True;
+	EndIf;
+	
 	If Is(Source).Storno Then
 		Tables = Source.AdditionalProperties.RowIDTables;
 		If Tables.Property("TM1010B_RowIDMovements") Then
@@ -323,20 +344,119 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 	EndIf;
 	
 	If Not Cancel Then
-		For Each Row In Source.RowIDInfo Do
-			If ValueIsFilled(Row.Basis) Then
-				IsBasis = Is(Row.Basis);
-				If IsBasis.SO Or IsBasis.PO Then
-					If Row.RowRef.IsFixedItemKey Or Row.RowRef.IsFixedStore Then
-						RowRefObject = Row.RowRef.GetObject();
-						RowRefObject.IsFixedItemKey = False;
-						RowRefObject.IsFixedStore = False;
-						WriteRowIDCatalog(RowRefObject);
+		RestoreRowIDStamp(Source);
+//		For Each Row In Source.RowIDInfo Do
+//			If ValueIsFilled(Row.Basis) Then
+//				IsBasis = Is(Row.Basis);
+//				If IsBasis.SO Or IsBasis.PO Then
+//					If Row.RowRef.IsFixedItemKey Or Row.RowRef.IsFixedStore Then
+//						RowRefObject = Row.RowRef.GetObject();
+//						RowRefObject.IsFixedItemKey = False;
+//						RowRefObject.IsFixedStore = False;
+//						WriteRowIDCatalog(Source, RowRefObject);
+//					EndIf;
+//				EndIf;
+//			EndIf;
+//		EndDo;		
+	EndIf;
+EndProcedure
+
+Procedure RestoreRowIDStamp(Source)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	RowIDStamps.RowRef AS RowRef,
+	|	RowIDStamps.Recorder AS Recorder
+	|FROM
+	|	InformationRegister.RowIDStamps AS RowIDStamps
+	|		INNER JOIN Document.%1.RowIDInfo AS RowIDInfo
+	|		ON RowIDInfo.RowRef = RowIDStamps.RowRef
+	|		AND RowIDInfo.Ref = &Ref
+	|		AND RowIDStamps.Recorder <> &Ref
+	|		AND RowIDStamps.Recorder.Ref.PointInTime < RowIDInfo.Ref.PointInTime
+	|GROUP BY
+	|	RowIDStamps.RowRef,
+	|	RowIDStamps.Recorder
+	|TOTALS
+	|BY
+	|	RowRef";
+	
+	Query.Text = StrTemplate(Query.Text, Source.Metadata().Name);
+	Query.SetParameter("Ref", Source.Ref);
+	QueryResult = Query.Execute();
+	QueryTree = QueryResult.Select(QueryResultIteration.ByGroups);
+	
+	PrevStamp = New ValueTable();
+	PrevStamp.Columns.Add("RowRef", Metadata.InformationRegisters.RowIDStamps.Dimensions.RowRef.Type);
+	PrevStamp.Columns.Add("Recorder", Metadata.InformationRegisters.RowIDStamps.StandardAttributes.Recorder.Type);
+	
+	While QueryTree.Next() Do
+		NewRow = PrevStamp.Add();
+		NewRow.RowRef = QueryTree.RowRef;
+		QueryDetails = QueryTree.Select();
+		If QueryDetails.Count() = 1 Then
+			QueryDetails.Next();
+			NewRow.Recorder = QueryDetails.Recorder;
+		Else
+			MaxRecorder = Undefined;
+			While QueryDetails.Next() Do
+				If MaxRecorder = Undefined Then
+					MaxRecorder = QueryDetails.Recorder;
+				Else
+					If MaxRecorder.PointInTime().Compare(QueryDetails.Recorder.PointInTime()) < 0 Then
+						MaxRecorder = QueryDetails.Recorder; 
 					EndIf;
 				EndIf;
+			EndDo;
+			NewRow.Recorder = MaxRecorder;
+		EndIf;
+	EndDo;
+	
+	Query.SetParameter("PrevStamp", PrevStamp);
+	Query.Text = 
+	"SELECT
+	|	PrevStamp.RowRef AS RowRef,
+	|	PrevStamp.Recorder AS Recorder
+	|INTO PrevStamp
+	|FROM
+	|	&PrevStamp AS PrevStamp
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RowIDStamps.RowRef AS RowRef,
+	|	RowIDStamps.Attribute AS Attribute,
+	|	RowIDStamps.Value AS Value
+	|FROM
+	|	PrevStamp AS PrevStamp
+	|		INNER JOIN InformationRegister.RowIDStamps AS RowIDStamps
+	|		ON PrevStamp.Recorder = RowIDStamps.Recorder
+	|		AND PrevStamp.RowRef = RowIDStamps.RowRef
+	|TOTALS
+	|BY
+	|	RowRef";
+	
+	QueryResult = Query.Execute();
+	QueryTree = QueryResult.Select(QueryResultIteration.ByGroups);
+	While QueryTree.Next() Do
+		RowIDObj = QueryTree.RowRef.GetObject();
+		AllAttributes = New Structure();
+		For Each Attr In Metadata.Catalogs.RowIDs.Attributes Do
+			If Attr.Name = "Hash" Or Attr.Name = "RowID" Then
+				Continue;
+			EndIf;
+			AllAttributes.Insert(Attr.Name, 
+				?(Attr.Type.ContainsType(Type("Boolean")), False, Undefined));
+		EndDo;
+		QueryDetails = QueryTree.Select();
+		While QueryDetails.Next() Do
+			If AllAttributes.Property(QueryDetails.Attribute) Then
+				AllAttributes[QueryDetails.Attribute] = QueryDetails.Value;
 			EndIf;
 		EndDo;
-	EndIf;
+		FillPropertyValues(RowIDObj, AllAttributes);
+		WriteRowIDCatalog(Source, RowIDObj);
+	EndDo;
 EndProcedure
 
 Procedure Posting_TM1010B_RowIDMovements_SOC(Source, Cancel, PostingMode)
@@ -998,7 +1118,7 @@ Procedure FillRowID_SO(Source, Cancel)
 			Continue;
 		EndIf;
 
-		FillRowID(Row, RowItemList);
+		FillRowID(Source, Row, RowItemList);
 		Row.NextStep = GetNextStep_SO(Source, RowItemList, Row);
 
 		If RowItemList.ProcurementMethod = Enums.ProcurementMethods.IncomingReserve Then
@@ -1016,7 +1136,7 @@ Procedure FillRowID_SI(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1024,7 +1144,7 @@ Procedure FillRowID_SI(Source, Cancel)
 					Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1037,7 +1157,7 @@ Procedure FillRowID_SC(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_SC(Source, RowItemList, Row);
 		Else
 
@@ -1086,7 +1206,7 @@ Procedure FillRowID_SPO(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_SPO(Source, RowItemList, Row);
 		Else
 
@@ -1135,7 +1255,7 @@ Procedure FillRowID_RSC(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_RSC(Source, RowItemList, Row);
 		Else
 
@@ -1190,7 +1310,7 @@ Procedure FillRowID_PO(Source, Cancel)
 		EndIf;
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_PO(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1198,7 +1318,7 @@ Procedure FillRowID_PO(Source, Cancel)
 					Row.NextStep = GetNextStep_PO(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_PO(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1245,7 +1365,7 @@ Procedure FillRowID_PI(Source, Cancel)
 		EndIf;
 		
 		NewRowID = Source.RowIDInfo.Add();
-		FillRowID(NewRowID, RowItemList);
+		FillRowID(Source, NewRowID, RowItemList);
 		NewRowID.NextStep = GetNextStep_PI(Source, RowItemList, NewRowID);
 	EndDo;
 		
@@ -1267,7 +1387,7 @@ Procedure FillRowID_PI(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(Filter);
 		If IDInfoRows.Count() = 0 Then
 			NewRowID = Source.RowIDInfo.Add();
-			FillRowID(NewRowID, RowItemList);
+			FillRowID(Source, NewRowID, RowItemList);
 		EndIf;
 	EndDo;
 EndProcedure
@@ -1278,7 +1398,7 @@ Procedure FillRowID_GR(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_GR(Source, RowItemList, Row);
 		Else
 
@@ -1348,7 +1468,7 @@ Procedure FillRowID_RGR(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_RGR(Source, RowItemList, Row);
 		Else
 
@@ -1398,7 +1518,7 @@ Procedure FillRowID_ITO(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_ITO(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1406,7 +1526,7 @@ Procedure FillRowID_ITO(Source, Cancel)
 					Row.NextStep = GetNextStep_ITO(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_ITO(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1432,7 +1552,7 @@ Procedure FillRowID_IT(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_IT(Source, RowItemList, Row);
 		Else
 			Row = IDInfoRows[0];
@@ -1482,7 +1602,7 @@ Procedure FillRowID_ISR(Source, Cancel)
 			Row = IDInfoRows[0];
 		EndIf;
 
-		FillRowID(Row, RowItemList);
+		FillRowID(Source, Row, RowItemList);
 		Row.NextStep = GetNextStep_ISR(Source, RowItemList, Row);
 	EndDo;
 EndProcedure
@@ -1498,7 +1618,7 @@ Procedure FillRowID_PhysicalInventory(Source, Cancel)
 			Row = IDInfoRows[0];
 		EndIf;
 
-		FillRowID(Row, RowItemList);
+		FillRowID(Source, Row, RowItemList);
 		Row.NextStep = GetNextStep_PhysicalInventory(Source, RowItemList, Row);
 		If Not ValueIsFilled(Row.Quantity) Then
 			ArrayForDelete.Add(Row);
@@ -1515,7 +1635,7 @@ Procedure FillRowID_StockAdjustmentAsSurplus(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_StockAdjustmentAsSurplus(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1523,7 +1643,7 @@ Procedure FillRowID_StockAdjustmentAsSurplus(Source, Cancel)
 					Row.NextStep = GetNextStep_StockAdjustmentAsSurplus(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_StockAdjustmentAsSurplus(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1536,7 +1656,7 @@ Procedure FillRowID_StockAdjustmentAsWriteOff(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_StockAdjustmentAsWriteOff(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1544,7 +1664,7 @@ Procedure FillRowID_StockAdjustmentAsWriteOff(Source, Cancel)
 					Row.NextStep = GetNextStep_StockAdjustmentAsWriteOff(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_StockAdjustmentAsWriteOff(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1557,7 +1677,7 @@ Procedure FillRowID_PR(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_PR(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1565,7 +1685,7 @@ Procedure FillRowID_PR(Source, Cancel)
 					Row.NextStep = GetNextStep_PR(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_PR(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1578,7 +1698,7 @@ Procedure FillRowID_PRO(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_PRO(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1586,7 +1706,7 @@ Procedure FillRowID_PRO(Source, Cancel)
 					Row.NextStep = GetNextStep_PRO(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_PRO(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1599,7 +1719,7 @@ Procedure FillRowID_SR(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_SR(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1607,7 +1727,7 @@ Procedure FillRowID_SR(Source, Cancel)
 					Row.NextStep = GetNextStep_SR(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_SR(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1620,7 +1740,7 @@ Procedure FillRowID_SRO(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_SRO(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1628,7 +1748,7 @@ Procedure FillRowID_SRO(Source, Cancel)
 					Row.NextStep = GetNextStep_SRO(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_SRO(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1641,7 +1761,7 @@ Procedure FillRowID_RSR(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_RSR(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1649,7 +1769,7 @@ Procedure FillRowID_RSR(Source, Cancel)
 					Row.NextStep = GetNextStep_RSR(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_RSR(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1662,7 +1782,7 @@ Procedure FillRowID_RRR(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_RRR(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1670,7 +1790,7 @@ Procedure FillRowID_RRR(Source, Cancel)
 					Row.NextStep = GetNextStep_RRR(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_RRR(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1683,7 +1803,7 @@ Procedure FillRowID_PRR(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_PRR(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1691,7 +1811,7 @@ Procedure FillRowID_PRR(Source, Cancel)
 					Row.NextStep = GetNextStep_PRR(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_PRR(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1704,7 +1824,7 @@ Procedure FillRowID_WO(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_WO(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1712,7 +1832,7 @@ Procedure FillRowID_WO(Source, Cancel)
 					Row.NextStep = GetNextStep_WO(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_WO(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1725,7 +1845,7 @@ Procedure FillRowID_WS(Source, Cancel)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Row, RowItemList);
+			FillRowID(Source, Row, RowItemList);
 			Row.NextStep = GetNextStep_WS(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -1733,7 +1853,7 @@ Procedure FillRowID_WS(Source, Cancel)
 					Row.NextStep = GetNextStep_WS(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Row, RowItemList);
+				FillRowID(Source, Row, RowItemList);
 				Row.NextStep = GetNextStep_WS(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1948,7 +2068,7 @@ EndFunction
 
 #EndRegion
 
-Procedure FillRowID(RowRowIDInfo, RowItemList)
+Procedure FillRowID(Source, RowRowIDInfo, RowItemList)
 	RowRowIDInfo.Key      = RowItemList.Key;
 	RowRowIDInfo.RowID    = RowItemList.Key;
 	If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then
@@ -1956,10 +2076,10 @@ Procedure FillRowID(RowRowIDInfo, RowItemList)
 	Else
 		RowRowIDInfo.Quantity = RowItemList.QuantityInBaseUnit;
 	EndIf;
-	RowRowIDInfo.RowRef = FindOrCreateRowIDRef(RowRowIDInfo.RowID);
+	RowRowIDInfo.RowRef = FindOrCreateRowIDRef(Source, RowRowIDInfo.RowID);
 EndProcedure
 
-Function FindOrCreateRowIDRef(RowID)
+Function FindOrCreateRowIDRef(Source, RowID)
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -1984,7 +2104,7 @@ Function FindOrCreateRowIDRef(RowID)
 	
 	RowRefObject.RowID       = RowID;
 	RowRefObject.Description = RowID;
-	WriteRowIDCatalog(RowRefObject);
+	WriteRowIDCatalog(Source, RowRefObject);
 	
 	Return RowRefObject.Ref;
 EndFunction
@@ -2005,11 +2125,12 @@ EndFunction
 // 
 // Parameters:
 //  Obj - CatalogObject.RowIDs - Obj
-Procedure WriteRowIDCatalog(Obj)
+Procedure WriteRowIDCatalog(Source, Obj)
 	If Obj.Ref.isEmpty() Then
 		// first write
 		Obj.Hash = GetMD5RowIDs(Obj);
 		Obj.Write();
+		WriteRowIDStampRegister(Source, Obj);
 		Return;
 	EndIf;
 	
@@ -2018,7 +2139,24 @@ Procedure WriteRowIDCatalog(Obj)
 	If Not Obj.Hash = Hash Then
 		Obj.Hash = Hash;
 		Obj.Write();
+		WriteRowIDStampRegister(Source, Obj);
 	EndIf;
+EndProcedure
+
+Procedure WriteRowIDStampRegister(Source, Obj)
+	AddProps = Source.AdditionalProperties;
+	If Not AddProps.Property("RowIDStampRecords") Then
+		AddProps.Insert("RowIDStampRecords", New Map());
+	EndIf;
+	
+	RowIDData = New Structure();
+	For Each Attr In Metadata.Catalogs.RowIDs.Attributes Do
+		If Not ValueIsFilled(Obj[Attr.Name]) Or Attr.Name = "Hash" Or Attr.Name = "RowID" Then
+			Continue;
+		EndIf;
+		RowIDData.Insert(Attr.Name, Obj[Attr.Name]);
+	EndDo;
+	AddProps.RowIDStampRecords.Insert(Obj.Ref, RowIDData);	
 EndProcedure
 
 Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, RecordersByRowRef)
@@ -2338,7 +2476,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	EndIf;
 	
 	If Not Cancel Then
-		WriteRowIDCatalog(RowRefObject);
+		WriteRowIDCatalog(Source, RowRefObject);
 	EndIf;
 	Return ArrayOfDifferenceFields;
 EndFunction

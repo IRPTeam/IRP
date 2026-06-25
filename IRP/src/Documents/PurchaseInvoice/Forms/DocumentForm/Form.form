@@ -4112,7 +4112,7 @@
         </items>
         <items xsi:type="form:Decoration">
           <name>EditDate</name>
-          <id>1104</id>
+          <id>1112</id>
           <title>
             <key>en</key>
             <value>Edit date</value>
@@ -4124,7 +4124,7 @@
           </userVisible>
           <extendedTooltip>
             <name>EditDateExtendedTooltip</name>
-            <id>1106</id>
+            <id>1114</id>
             <type>Label</type>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -4134,7 +4134,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>EditDateContextMenu</name>
-            <id>1105</id>
+            <id>1113</id>
             <autoFill>true</autoFill>
           </contextMenu>
           <type>Label</type>

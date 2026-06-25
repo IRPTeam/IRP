@@ -72,7 +72,6 @@
       <value>Group editing of properties</value>
     </synonym>
     <group>FormCommandBarImportant</group>
-    <commandParameterType/>
     <parameterUseMode>Multiple</parameterUseMode>
     <modifiesData>true</modifiesData>
     <representation>Picture</representation>

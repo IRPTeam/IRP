@@ -37,11 +37,11 @@
   <registerRecords>AccumulationRegister.TM1030B_TransactionsKey</registerRecords>
   <registerRecords>InformationRegister.T2013S_OffsetOfAging</registerRecords>
   <registerRecords>InformationRegister.T2010S_OffsetOfAdvances</registerRecords>
+  <registerRecords>AccumulationRegister.B1040B_AgingKey</registerRecords>
   <registerRecords>AccumulationRegister.TM1020B_AdvancesKey</registerRecords>
   <registerRecords>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</registerRecords>
   <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>InformationRegister.DELETE_T2011S_TransactionsCurrencyRevaluation</registerRecords>
-  <registerRecords>AccumulationRegister.B1040B_AgingKey</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="0c3fe97d-7a1f-4b9a-8063-5b8f338711fa">

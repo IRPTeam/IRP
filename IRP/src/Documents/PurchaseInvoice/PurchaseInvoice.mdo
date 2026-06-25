@@ -104,6 +104,7 @@
   <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R6025B_SimpleBatch</registerRecords>
   <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.R1001T_Purchases</registerRecords>
   <registerRecords>AccumulationRegister.R1005T_PurchaseSpecialOffers</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
@@ -112,6 +113,7 @@
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
   <registerRecords>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.B1040B_AgingKey</registerRecords>
   <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
@@ -141,8 +143,6 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
-  <registerRecords>AccumulationRegister.B1040B_AgingKey</registerRecords>
-  <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -225,9 +225,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
+    <fillValue xsi:type="core:StringValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -1760,7 +1758,6 @@
       <value>Currency revaluation invoce</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType/>
     <representation>Auto</representation>
   </commands>
 </mdclass:Document>

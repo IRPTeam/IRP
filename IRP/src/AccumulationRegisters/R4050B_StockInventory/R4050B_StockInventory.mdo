@@ -97,4 +97,32 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="68350de9-2cb5-4ad2-a98e-13e3be30da34">
+    <name>SerialLotNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot number</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.SerialLotNumbers</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="01dbb57d-043f-4f96-a086-6f1410cd6e24">
+    <name>SourceOfOrigin</name>
+    <synonym>
+      <key>en</key>
+      <value>Source of origin</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.SourceOfOrigins</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
 </mdclass:AccumulationRegister>

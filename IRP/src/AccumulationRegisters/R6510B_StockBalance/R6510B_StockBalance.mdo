@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2a476582-5fbb-4afc-9e80-49d78f04f32d">
+  <producedTypes>
+    <selectionType typeId="01fd4d63-3d7f-41d2-a882-104da91de3c4" valueTypeId="0d9f12a3-01af-47ef-9735-88660048e7be"/>
+    <listType typeId="c4556952-6ecf-47a6-8ef9-297a10854dbb" valueTypeId="011b9e82-d8ab-4c90-a10a-68b8bffd725f"/>
+    <managerType typeId="df55a40d-44bb-41b2-a979-e491843faf4f" valueTypeId="8dbd9ca9-e158-49f7-a3ed-88e99737e64d"/>
+    <recordSetType typeId="ccb534a6-272c-467c-8cf0-1edad35e7494" valueTypeId="d66c5da5-0d7d-4de3-acfd-0e41fd601182"/>
+    <recordKeyType typeId="fb2ac822-7837-4c34-87ed-68803d1b65ad" valueTypeId="1e859ba7-9579-45b6-bc22-c353f016a2a5"/>
+    <recordType typeId="7c9d146e-8784-471e-a350-f8451e189cc3" valueTypeId="19fd3bdb-3c0c-4c3e-9dad-e12ba3cb37eb"/>
+  </producedTypes>
+  <name>R6510B_StockBalance</name>
+  <synonym>
+    <key>en</key>
+    <value>R6510 Stock balance</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="f71b1441-64e9-4252-92c0-04b52c771598">
+    <name>ActualQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Actual quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="e1c6119d-dbfe-4182-9fdb-34dce91e8d77">
+    <name>FreeQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Free quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="01b41bf5-f5f7-4038-a917-31b14f2ba093">
+    <name>ReservationQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Reservation quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="af2f7821-51c9-426f-b4c4-9776fd9a8d2b">
+    <name>TransitIncomingQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Transit incoming quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="c0078334-f219-41af-95b8-9265053a3cb5">
+    <name>TransitOutgoingQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Transit outgoing quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="4e935898-10ae-49ea-a0c0-a671202686ec">
+    <name>InventoryQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Inventory quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="9055e9e1-8f80-4471-8a68-745c1f1c615a">
+    <name>PreliminaryQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Preliminary quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <attributes uuid="d069b6f6-50e9-4691-b3c0-91df49e7a505">
+    <name>CalculationMovementCost</name>
+    <synonym>
+      <key>en</key>
+      <value>Calculation movement cost</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.CalculationMovementCosts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <dimensions uuid="59a988d6-9b39-4c26-89b7-6b802658a541">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="15c6e8cb-d4ae-4a2a-8078-5e186124e7db">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="9e5f29cd-3178-4e34-906f-42286f927451">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="1b167532-eca4-4d8d-836c-15667ee37314">
+    <name>SerialLotNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot number</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.SerialLotNumbers</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="f6f95b30-5280-4e9c-a583-0b8364830ca7">
+    <name>SourceOfOrigin</name>
+    <synonym>
+      <key>en</key>
+      <value>Source of origin</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.SourceOfOrigins</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="9ff85e95-7208-45b4-9af4-f56b5eb0efe9">
+    <name>Basis</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.RetailShipmentConfirmation</types>
+      <types>DocumentRef.PurchaseReturnOrder</types>
+      <types>DocumentRef.ShipmentConfirmation</types>
+      <types>DocumentRef.Unbundling</types>
+      <types>DocumentRef.WorkOrder</types>
+      <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.SalesOrder</types>
+      <types>DocumentRef.SalesReturn</types>
+      <types>DocumentRef.StockAdjustmentAsSurplus</types>
+      <types>DocumentRef.Bundling</types>
+      <types>DocumentRef.RetailSalesReceipt</types>
+      <types>DocumentRef.ShipmentPlaningOrder</types>
+      <types>DocumentRef.InventoryTransferOrder</types>
+      <types>DocumentRef.InventoryTransfer</types>
+      <types>DocumentRef.GoodsReceipt</types>
+      <types>DocumentRef.PhysicalInventory</types>
+      <types>DocumentRef.SalesInvoice</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+</mdclass:AccumulationRegister>

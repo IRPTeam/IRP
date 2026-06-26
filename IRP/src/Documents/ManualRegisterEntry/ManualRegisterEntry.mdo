@@ -74,12 +74,14 @@
   <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
   <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
   <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.R1001T_Purchases</registerRecords>
   <registerRecords>AccumulationRegister.R1005T_PurchaseSpecialOffers</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</registerRecords>
   <registerRecords>AccumulationRegister.R3022B_CashInTransitOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.B1040B_AgingKey</registerRecords>
   <registerRecords>AccumulationRegister.R4020T_StockTransferOrders</registerRecords>
   <registerRecords>AccumulationRegister.R4015T_InternalSupplyRequests</registerRecords>
   <registerRecords>AccumulationRegister.R4022B_StockTransferOrdersShipment</registerRecords>
@@ -125,7 +127,6 @@
   <registerRecords>AccumulationRegister.R3016B_ChequeAndBonds</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
-  <registerRecords>AccumulationRegister.B1040B_AgingKey</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="0efb3e65-ce41-418b-bedd-d2b4e61ae11a">

@@ -67,6 +67,7 @@
   <defaultChoiceForm>Document.InventoryTransferOrder.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
   <registerRecords>AccumulationRegister.R4020T_StockTransferOrders</registerRecords>

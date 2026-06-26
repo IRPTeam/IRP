@@ -848,7 +848,8 @@ Scenario: 964003 deletion mark AdditionalCostAllocation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
-		| "Doc = Documents.AdditionalCostAllocation.FindByNumber(26).GetObject();" |
+		| "УстановитьПривилегированныйРежим(False);"      |
+		| "Doc = Documents.AdditionalCostAllocation.FindByNumber(25).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
 		| "Except"                                                  |
@@ -866,13 +867,14 @@ Scenario: 964004 deletion mark AdditionalRevenueAllocation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
-		| "Doc = Documents.AdditionalRevenueAllocation.FindByNumber(26).GetObject();" |
+		| "УстановитьПривилегированныйРежим(False);"      |
+		| "Doc = Documents.AdditionalRevenueAllocation.FindByNumber(30).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
 		| "Except"                                                  |
 		| "EndTry"                                                  |
 	And 1C:Enterprise language expression "{!Documents.AdditionalRevenueAllocation.FindByNumber(2).DeletionMark=False}" is true
-	And 1C:Enterprise language expression "{!Documents.AdditionalRevenueAllocation.FindByNumber(26).DeletionMark=True}" is true
+	And 1C:Enterprise language expression "{!Documents.AdditionalRevenueAllocation.FindByNumber(27).DeletionMark=True}" is true
 
 Scenario: 964005 deletion mark BankPayment (LimitedAccess)
 	And I execute the built-in language code at server (Extension)
@@ -884,6 +886,7 @@ Scenario: 964005 deletion mark BankPayment (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.BankPayment.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -902,6 +905,7 @@ Scenario: 964006 deletion mark BankReceipt (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.BankReceipt.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -920,6 +924,7 @@ Scenario: 964007 deletion mark BatchReallocateIncoming (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.BatchReallocateIncoming.FindByNumber(10).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -938,6 +943,7 @@ Scenario: 964008 deletion mark BatchReallocateOutgoing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.BatchReallocateOutgoing.FindByNumber(10).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -956,6 +962,7 @@ Scenario: 964009 deletion mark Bundling (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.Bundling.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -974,6 +981,7 @@ Scenario: 964010 deletion mark CalculationMovementCosts (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CalculationMovementCosts.FindByNumber(2).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -992,6 +1000,7 @@ Scenario: 964011 deletion mark CashExpense (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CashExpense.FindByNumber(41).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1010,6 +1019,7 @@ Scenario: 964012 deletion mark CashPayment (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CashPayment.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1028,6 +1038,7 @@ Scenario: 964013 deletion mark CashReceipt (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CashReceipt.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1046,6 +1057,7 @@ Scenario: 964014 deletion mark CashRevenue (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CashRevenue.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1064,6 +1076,7 @@ Scenario: 964015 deletion mark CashStatement (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CashStatement.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1082,6 +1095,7 @@ Scenario: 964016 deletion mark CashTransferOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CashTransferOrder.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1100,6 +1114,7 @@ Scenario: 964017 deletion mark ChequeBondTransaction (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ChequeBondTransaction.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1118,6 +1133,7 @@ Scenario: 964018 deletion mark ChequeBondTransactionItem (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ChequeBondTransactionItem.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1136,6 +1152,7 @@ Scenario: 964019 deletion mark ConsolidatedRetailSales (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ConsolidatedRetailSales.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1154,6 +1171,7 @@ Scenario: 964020 deletion mark CreditNote (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CreditNote.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1172,6 +1190,7 @@ Scenario: 964021 deletion mark CustomersAdvancesClosing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CustomersAdvancesClosing.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1190,6 +1209,7 @@ Scenario: 964022 deletion mark DebitNote (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.DebitNote.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1208,6 +1228,7 @@ Scenario: 964023 deletion mark EmployeeCashAdvance (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.EmployeeCashAdvance.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1226,6 +1247,7 @@ Scenario: 964024 deletion mark ForeignCurrencyRevaluation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ForeignCurrencyRevaluation.FindByNumber(2).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1244,6 +1266,7 @@ Scenario: 964025 deletion mark GoodsReceipt (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.GoodsReceipt.FindByNumber(11).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1262,6 +1285,7 @@ Scenario: 964026 deletion mark IncomingPaymentOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.IncomingPaymentOrder.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1280,6 +1304,7 @@ Scenario: 964027 deletion mark InternalSupplyRequest (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.InternalSupplyRequest.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1298,6 +1323,7 @@ Scenario: 964028 deletion mark InventoryTransfer (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.InventoryTransfer.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1316,6 +1342,7 @@ Scenario: 964029 deletion mark InventoryTransferOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.InventoryTransferOrder.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1334,6 +1361,7 @@ Scenario: 964030 deletion mark ItemStockAdjustment (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ItemStockAdjustment.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1353,6 +1381,7 @@ Scenario: 964032 deletion mark Labeling (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.Labeling.FindByNumber(2).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1371,6 +1400,7 @@ Scenario: 964033 deletion mark ManualRegisterEntry (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ManualRegisterEntry.FindByNumber(2).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1389,6 +1419,7 @@ Scenario: 964034 deletion mark MoneyTransfer (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.MoneyTransfer.FindByNumber(14).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1407,6 +1438,7 @@ Scenario: 964035 deletion mark OpeningEntry (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.OpeningEntry.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1425,6 +1457,7 @@ Scenario: 964036 deletion mark OutgoingPaymentOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.OutgoingPaymentOrder.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1444,6 +1477,7 @@ Scenario: 964037 deletion mark Payroll (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.Payroll.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1462,6 +1496,7 @@ Scenario: 964038 deletion mark PhysicalCountByLocation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PhysicalCountByLocation.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1480,6 +1515,7 @@ Scenario: 964039 deletion mark PhysicalInventory (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PhysicalInventory.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1498,6 +1534,7 @@ Scenario: 964040 deletion mark PlannedReceiptReservation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PlannedReceiptReservation.FindByNumber(118).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1516,6 +1553,7 @@ Scenario: 964041 deletion mark PriceList (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PriceList.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1534,6 +1572,7 @@ Scenario: 964042 deletion mark Production (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.Production.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1552,6 +1591,7 @@ Scenario: 964043 deletion mark ProductionCostsAllocation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ProductionCostsAllocation.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1570,6 +1610,7 @@ Scenario: 964044 deletion mark ProductionPlanning (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ProductionPlanning.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1588,6 +1629,7 @@ Scenario: 964045 deletion mark ProductionPlanningClosing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ProductionPlanningClosing.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1606,6 +1648,7 @@ Scenario: 964046 deletion mark ProductionPlanningCorrection (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ProductionPlanningCorrection.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1624,6 +1667,7 @@ Scenario: 964047 deletion mark PurchaseInvoice (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PurchaseInvoice.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1642,6 +1686,7 @@ Scenario: 964048 deletion mark PurchaseOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PurchaseOrder.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1660,6 +1705,7 @@ Scenario: 964049 deletion mark PurchaseOrderClosing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PurchaseOrderClosing.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1678,6 +1724,7 @@ Scenario: 964050 deletion mark PurchaseReturn (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PurchaseReturn.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1696,6 +1743,7 @@ Scenario: 964051 deletion mark PurchaseReturnOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.PurchaseReturnOrder.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1714,6 +1762,7 @@ Scenario: 964052 deletion mark ReconciliationStatement (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ReconciliationStatement.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1732,6 +1781,7 @@ Scenario: 964053 deletion mark RetailGoodsReceipt (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.RetailGoodsReceipt.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1750,6 +1800,7 @@ Scenario: 964054 deletion mark RetailReturnReceipt (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.RetailReturnReceipt.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1768,6 +1819,7 @@ Scenario: 964055 deletion mark RetailSalesReceipt (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.RetailSalesReceipt.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1786,6 +1838,7 @@ Scenario: 964056 deletion mark RetailShipmentConfirmation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.RetailShipmentConfirmation.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1804,6 +1857,7 @@ Scenario: 964057 deletion mark SalesInvoice (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesInvoice.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1822,6 +1876,7 @@ Scenario: 964058 deletion mark SalesOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesOrder.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1840,6 +1895,7 @@ Scenario: 964059 deletion mark SalesOrderClosing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesOrderClosing.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1858,6 +1914,7 @@ Scenario: 964060 deletion mark SalesReportFromTradeAgent (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesReportFromTradeAgent.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1876,6 +1933,7 @@ Scenario: 964061 deletion mark SalesReportToConsignor (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesReportToConsignor.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1894,6 +1952,7 @@ Scenario: 964062 deletion mark SalesReturn (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesReturn.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1912,6 +1971,7 @@ Scenario: 964063 deletion mark SalesReturnOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.SalesReturnOrder.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1930,6 +1990,7 @@ Scenario: 964064 deletion mark ShipmentConfirmation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ShipmentConfirmation.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1948,6 +2009,7 @@ Scenario: 964065 deletion mark StockAdjustmentAsSurplus (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.StockAdjustmentAsSurplus.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1966,6 +2028,7 @@ Scenario: 964066 deletion mark StockAdjustmentAsWriteOff (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.StockAdjustmentAsWriteOff.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -1984,6 +2047,7 @@ Scenario: 964067 deletion mark TimeSheet (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.TimeSheet.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2002,6 +2066,7 @@ Scenario: 964068 deletion mark Unbundling (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.Unbundling.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2020,6 +2085,7 @@ Scenario: 964069 deletion mark VendorsAdvancesClosing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.VendorsAdvancesClosing.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2038,6 +2104,7 @@ Scenario: 964070 deletion mark WorkOrder (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.WorkOrder.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2056,6 +2123,7 @@ Scenario: 964071 deletion mark WorkOrderClosing (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.WorkOrderClosing.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2074,6 +2142,7 @@ Scenario: 964072 deletion mark WorkSheet (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.WorkSheet.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2092,6 +2161,7 @@ Scenario: 964073 deletion mark CommissioningOfFixedAsset (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.CommissioningOfFixedAsset.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2110,6 +2180,7 @@ Scenario: 964074 deletion mark DecommissioningOfFixedAsset (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.DecommissioningOfFixedAsset.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2128,6 +2199,7 @@ Scenario: 964075 deletion mark DepreciationCalculation (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.DepreciationCalculation.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2146,6 +2218,7 @@ Scenario: 964076 deletion mark FixedAssetTransfer (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.FixedAssetTransfer.FindByNumber(5).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |
@@ -2164,6 +2237,7 @@ Scenario: 964077 deletion mark ModernizationOfFixedAsset (LimitedAccess)
 		| "EndTry"                                                  |
 	And I execute the built-in language code at server (Extension)
 		| "Try"                                                     |
+		| "УстановитьПривилегированныйРежим(False);"      |
 		| "Doc = Documents.ModernizationOfFixedAsset.FindByNumber(26).GetObject();" |
 		| "Doc.DeletionMark = False;"                               |
 		| "Doc.Write();"                                            |

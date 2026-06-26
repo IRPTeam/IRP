@@ -35,6 +35,7 @@
   <defaultChoiceForm>Document.BatchReallocateIncoming.Form.ChoiceForm</defaultChoiceForm>
   <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
   <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+  <registerRecords>AccumulationRegister.R6510B_StockBalance</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>

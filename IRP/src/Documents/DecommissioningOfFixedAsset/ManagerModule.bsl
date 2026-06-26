@@ -426,10 +426,31 @@ Function R4050B_StockInventory()
 		|	ItemList.Company,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
-		|	SUM(ItemList.Quantity) AS Quantity
+		|	CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber.BatchBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber.Ref IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity,
+		|	0 AS PreliminaryQuantity
 		|INTO R4050B_StockInventory
 		|FROM
 		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON ItemList.Key = SourceOfOrigins.Key
+		|		AND ISNULL(SerialLotNumbers.SerialLotNumber,
+		|			VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
 		|WHERE
 		|	TRUE
 		|GROUP BY
@@ -437,7 +458,18 @@ Function R4050B_StockInventory()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Store,
-		|	ItemList.ItemKey";
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber.BatchBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 Function T6010S_BatchesInfo()

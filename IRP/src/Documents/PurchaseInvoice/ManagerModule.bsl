@@ -1609,12 +1609,22 @@ Function R4050B_StockInventory()
 		|	ItemList.Company,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
-		|	SUM(ItemList.Quantity) AS Quantity,
+		|
+		|	case when SerialLotNumbers.SerialLotNumber.BatchBalanceDetail then SerialLotNumbers.SerialLotNumber 
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef) end as SerialLotNumber,
+		|	case when SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail then SourceOfOrigins.SourceOfOrigin 
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef) end as SourceOfOrigin,
+		|		
+		|	sum(case when SerialLotNumbers.SerialLotNumber.Ref is null then ItemList.Quantity else SerialLotNumbers.Quantity end) as Quantity,
+		|
 		|	0 AS PreliminaryQuantity,
 		|	Undefined as CalculationMovementCost
 		|INTO R4050B_StockInventory
 		|FROM
 		|	ItemList AS ItemList
+		|	left join SerialLotNumbers as SerialLotNumbers on ItemList.Key = SerialLotNumbers.Key
+		|	left join SourceOfOrigins AS SourceOfOrigins on ItemList.Key = SourceOfOrigins.Key
+		|	and ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) = SourceOfOrigins.SerialLotNumberStock
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND ItemList.IsPurchase
@@ -1623,7 +1633,12 @@ Function R4050B_StockInventory()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Store,
-		|	ItemList.ItemKey
+		|	ItemList.ItemKey,
+		|
+		|	case when SerialLotNumbers.SerialLotNumber.BatchBalanceDetail then SerialLotNumbers.SerialLotNumber 
+		|		else VALUE(Catalog.SerialLotNumbers.EmptyRef) end,
+		|	case when SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail then SourceOfOrigins.SourceOfOrigin 
+		|		else VALUE(Catalog.SourceOfOrigins.EmptyRef) end
 		|
 		|UNION ALL
 		|
@@ -1637,6 +1652,8 @@ Function R4050B_StockInventory()
 		|	T4050_StockInventoryInfo.Company,
 		|	T4050_StockInventoryInfo.Store,
 		|	T4050_StockInventoryInfo.ItemKey,
+		|	T4050_StockInventoryInfo.SerialLotNumber,
+		|	T4050_StockInventoryInfo.SourceOfOrigin,
 		|	SUM(T4050_StockInventoryInfo.Quantity),
 		|	SUM(T4050_StockInventoryInfo.PreliminaryQuantity),
 		|	T4050_StockInventoryInfo.Recorder
@@ -1654,6 +1671,8 @@ Function R4050B_StockInventory()
 		|	T4050_StockInventoryInfo.Company,
 		|	T4050_StockInventoryInfo.Store,
 		|	T4050_StockInventoryInfo.ItemKey,
+		|	T4050_StockInventoryInfo.SerialLotNumber,
+		|	T4050_StockInventoryInfo.SourceOfOrigin,
 		|	T4050_StockInventoryInfo.Recorder";
 EndFunction
 

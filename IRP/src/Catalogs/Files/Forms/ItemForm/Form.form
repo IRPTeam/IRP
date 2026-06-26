@@ -519,11 +519,6 @@
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:PDFDocumentFieldExtInfo">
         <viewStatusAddition>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
           <name>PDFViewStatus</name>
           <id>84</id>
           <extendedTooltip>

@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocBankReceiptServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -37,6 +38,11 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
+	EndIf;
+	
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
 
@@ -399,6 +405,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.PaymentListPaymentDateNoSplits.ReadOnly = 
 		Not (ValueIsFilled(Form.PaymentListBasisDocumentNoSplits)
 			And TypeOf(Form.PaymentListBasisDocumentNoSplits) = Type("DocumentRef.PurchaseInvoice"));
+			
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
 EndProcedure
 
 &AtClient

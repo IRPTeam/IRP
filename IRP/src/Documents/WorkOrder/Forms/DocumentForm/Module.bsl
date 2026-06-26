@@ -5,6 +5,7 @@
 Procedure OnReadAtServer(CurrentObject)
 	DocWorkOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	ThisObject.ClosingOrder = DocWorkOrderClosingServer.GetLastWorkOrderClosingByWorkOrder(Object.Ref);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);	
 EndProcedure
 
@@ -45,6 +46,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		EndIf;
 	EndIf;
 	
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
@@ -108,6 +114,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
 	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
+	
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
 EndProcedure
 
 &AtClient

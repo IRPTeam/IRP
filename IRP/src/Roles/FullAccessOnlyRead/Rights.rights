@@ -2395,6 +2395,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.Storno</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T1020S_Cache.Dimension.UUID</name>
 		<right>
 			<name>Edit</name>
@@ -10496,6 +10507,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.IncomingExchRateAdjustmentInvoice</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T3010S_RowIDInfo.Resource.Unit</name>
 		<right>
 			<name>Edit</name>
@@ -10901,6 +10923,17 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.OutgoingExchRateAdjustmentInvoice</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>

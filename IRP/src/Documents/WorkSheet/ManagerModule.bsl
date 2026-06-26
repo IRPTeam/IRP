@@ -430,8 +430,11 @@ Function R4050B_StockInventory()
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	Materials.Company,
 		   |	Materials.ItemKey,
+		   |	VALUE(Catalog.SerialLotNumbers.EmptyRef) as SerialLotNumber,
+		   |	VALUE(Catalog.SourceOfOrigins.EmptyRef) as SourceOfOrigin,
 		   |	Materials.Store,
-		   |	Materials.Quantity
+		   |	Materials.Quantity,
+		   |	0 AS PreliminaryQuantity
 		   |INTO R4050B_StockInventory
 		   |FROM
 		   |	Materials AS Materials

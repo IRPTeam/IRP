@@ -14,9 +14,7 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:StringValue">
-    <value></value>
-  </fillValue>
+  <fillValue xsi:type="core:StringValue"/>
   <content>
     <metadata>Document.BatchReallocateOutgoing</metadata>
     <use>Use</use>
@@ -87,6 +85,10 @@
   </content>
   <content>
     <metadata>Document.ChequeBondTransaction</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.Storno</metadata>
     <use>Use</use>
   </content>
   <content>

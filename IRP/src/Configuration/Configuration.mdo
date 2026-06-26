@@ -961,13 +961,6 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.DashboardClient</commonModules>
-  <commonModules>CommonModule.DashboardServer</commonModules>
-  <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceClient</commonModules>
-  <commonModules>CommonModule.DocIncomingExchRateAdjustmentInvoiceServer</commonModules>
-  <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceClient</commonModules>
-  <commonModules>CommonModule.DocOutgoingExchRateAdjustmentInvoiceServer</commonModules>
-  <commonModules>CommonModule.PDFFunctionsClientServer</commonModules>
   <commonModules>CommonModule.DocStornoClient</commonModules>
   <commonModules>CommonModule.DocStornoServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>

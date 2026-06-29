@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocGoodsReceiptServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -46,6 +47,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		If Source <> ThisObject Then
 			LockLinkedRows();
 		EndIf;
+	EndIf;
+	
+	If EventName = "Storno" Then
+		ThisObject.DocStorno = DocStornoServer.IsDocumentWithStorno(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
 
@@ -127,6 +133,15 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListCurrency.Visible = IsPresentPreliminary;
 	Form.Items.ItemListPreliminaryAmount.Visible = IsPresentPreliminary;	
 	Form.Items.ItemListPreliminaryTaxAmount.Visible = IsPresentPreliminary;
+	
+	If Not Form.ReadOnly Then
+		Form.ReadOnly = ValueIsFilled(Form.DocStorno);
+	EndIf;
+	Form.Items.GroupHeadStorno.Visible = ValueIsFilled(Form.DocStorno);
+
+	ArrayOfClosingOrders = DocOrderClosingServer.GetArrayOfClosingOrders(Object.Ref);
+	Form.Items.Date.ReadOnly = (ArrayOfClosingOrders.Count() > 0);
+	Form.Items.EditDate.Visible = (ArrayOfClosingOrders.Count() > 0);
 EndProcedure
 
 &AtClient
@@ -664,6 +679,20 @@ EndProcedure
 &AtServer
 Procedure SplitRowAtServer()
 	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EditDateClick(Item)
+	Callback = New CallbackDescription("EditDateClickEnd", ThisObject);
+	OpenForm("CommonForm.EditOrderClosingDate", New Structure("DocRef", Object.Ref), 
+		ThisObject,,,,Callback, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditDateClickEnd(Result, Params) Export
+	If Result <> Undefined And Result.Success Then
+		ThisObject.Read();
+	EndIf;	
 EndProcedure
 
 #EndRegion

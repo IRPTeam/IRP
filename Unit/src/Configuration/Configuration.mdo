@@ -196,6 +196,7 @@
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
   <documents>Document.DebitCreditNote</documents>
+  <documents>Document.Storno</documents>
   <enums>Enum.CurrencyType</enums>
   <enums>Enum.ItemTypes</enums>
   <enums>Enum.REP_ReportParametrTypes</enums>

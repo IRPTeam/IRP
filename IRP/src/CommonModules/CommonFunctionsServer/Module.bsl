@@ -1259,9 +1259,13 @@ Function RecalculateExpression(Params) Export
 	ResultInfo = RecalculateExpressionResult();
 	
 	If Params.Property("JobKey") And Params.JobKey <> "" Then
+		CurrentJob = GetCurrentInfoBaseSession().GetBackgroundJob();
 	    Jobs = BackgroundJobs.GetBackgroundJobs(New Structure("Key", Params.JobKey));
-	    For Each CurrentJob In Jobs Do
-		    If CurrentJob.State = BackgroundJobState.Active Then
+	    For Each ChekedJob In Jobs Do
+	    	If ChekedJob = CurrentJob Then
+	    		Continue;
+	    	EndIf;
+		    If ChekedJob.State = BackgroundJobState.Active Then
 				ResultInfo.isError = True;
 				ResultInfo.Description = R().BgJ_Title_001;
 		        Return ResultInfo;

@@ -221,6 +221,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	WrappedRows = WrapRows(Parameters, ServerParameters.Rows);
 	If WrappedRows.Count() Then
 		Parameters.Insert("Rows", WrappedRows);
+		Parameters.Insert("CurrentRow", WrappedRows[0].LineNumber);
 	EndIf;
 		
 	Parameters.Insert("NextSteps"    , New Array());
@@ -273,6 +274,9 @@ Function WrapRows(Parameters, Rows) Export
 			NewRow.Insert("Key", RowLine);
 			RowLine = RowLine + 1;
 		EndIf;
+		If Not NewRow.Property("LineNumber") Then
+			NewRow.Insert("LineNumber", 0);
+		EndIf;		
 		ArrayOfRows.Add(NewRow);
 		
 		// SpecialOffers
@@ -404,6 +408,7 @@ Function GetEventHandlerMap(Parameters, DataPath, IsBuilder)
 	EventHandlerMap.Insert("ItemList.ExpCount"           , "SetItemListExpCount");
 	EventHandlerMap.Insert("ItemList.SalesInvoice"       , "SetItemListSalesDocument");
 	EventHandlerMap.Insert("ItemList.RetailSalesReceipt" , "SetItemListSalesDocument");
+	EventHandlerMap.Insert("ItemList.OffersAmount"       , "StepItemListCalculations_IsOffersChanged");
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor" Then
 		EventHandlerMap.Insert("ItemList.TotalAmount", 
@@ -499,7 +504,11 @@ Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False, Settin
 	If ArrayOfEventHandlers = Undefined Then // no steps, no setter, no commands
 		If IsColumn Then
 			For Each Row In GetRows(Parameters, Parameters.TableName) Do
-				SetterObject("BindVoid", Property.DataPath, Parameters, ResultArray(Row.Key, Value));
+				RowKey = Row.Key;
+				If RowKey = 0 And Row.Property("LineNumber") Then
+					RowKey = Row.LineNumber;
+				EndIf;
+				SetterObject("BindVoid", Property.DataPath, Parameters, ResultArray(RowKey, Value));
 			EndDo;
 		Else
 			SetterObject("BindVoid", Property.DataPath, Parameters, ResultArray(Undefined, Value));
@@ -872,7 +881,11 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined, LaunchSteps =
 		If Default <> Undefined Then
 	
 			RegisterNextSteps(Parameters, True , Default.StepsEnabler, DataPath);
-			
+
+		// service attribute
+		ElsIf ColumnName = "LineNumber" Then
+			Continue;
+						
 		// if column is filled  and has its own handler .OnChage call it
 		ElsIf ValueIsFilled(NewRow[ColumnName]) Then
 			SetPropertyObject(Parameters, DataPath, NewRow.Key, NewRow[ColumnName]);
@@ -17912,7 +17925,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 EndProcedure	
 #ENDIF
 
-Function IsFullTransferTabularSection(Parameters, PropertyName)
+Function IsFullTransferTabularSection(Parameters, PropertyName) Export
 	_PropertyName = Upper(PropertyName);
 	If _PropertyName = Upper("SerialLotNumbers") 
 		Or _PropertyName = Upper("SpecialOffers")
@@ -17928,7 +17941,7 @@ Function IsFullTransferTabularSection(Parameters, PropertyName)
 	Return False;
 EndFunction
 
-Function IsFullLoadTabularSection(Parameters, PropertyName)
+Function IsFullLoadTabularSection(Parameters, PropertyName) Export
 	_PropertyName = Upper(PropertyName);
 	If _PropertyName = Upper("SourceOfOrigins") Then
 		Return True;
@@ -17985,7 +17998,8 @@ Procedure _CommitChainChanges(Cache, Source, Parameters)
 						If FoundedRowInMap <> Undefined Then
 							FoundedRowInMap[KeyValue.Key] = KeyValue.Value;
 						EndIf;
-						If Not TypeOf(Row.Key) = Type("Number") Then
+						// If Not TypeOf(Row.Key) = Type("Number") Then // ?????
+						If KeyValue.Key <> "Key" Then
 							FoundedRow[KeyValue.Key] = KeyValue.Value;
 						EndIf;
 					EndDo;

@@ -252,8 +252,10 @@ Procedure WriteMovementsOnServer(Cancel, RegisterSelfControl = False)
 				If Metadata.AccumulationRegisters.Contains(RegisterRecords.Metadata()) Then
 					IsSelfControlled = True;
 					RegisterName = Row.RegisterName;
-					//@skip-check dynamic-access-method-not-found
-					AccumulationRegisters[RegisterName].AdditionalDataFilling(VT_Movements);
+					Try
+						AccumulationRegisters[RegisterName].AdditionalDataFilling(VT_Movements);
+					Except
+					EndTry;
 				EndIf;
 			EndIf;
 			RegisterRecords.Load(VT_Movements);

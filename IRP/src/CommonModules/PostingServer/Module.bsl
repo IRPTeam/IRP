@@ -1748,6 +1748,12 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 	Count = 0; 
 	LastPercentLogged = 0;
 	StartDate = CurrentUniversalDateInMilliseconds();
+	
+	ExludeRegisters = New Array();
+	ExludeRegisters.Add(Metadata.AccumulationRegisters.R6020B_BatchBalance); 
+	ExludeRegisters.Add(Metadata.AccumulationRegisters.R6060T_CostOfGoodsSold);
+	ExludeRegisters.Add(Metadata.AccumulationRegisters.R6025B_SimpleBatch); 			
+	
 	For Each Doc In DocumentArray Do
 		BeginTransaction();
 		
@@ -1763,6 +1769,12 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 		
 			RegisteredRecords = RegisterRecords(Parameters);
 			
+			For Each ExludeRegister In ExludeRegisters Do
+				If RegisteredRecords.Get(ExludeRegister) <> Undefined Then
+					RegisteredRecords.Delete(ExludeRegister);
+				EndIf;
+			EndDo;
+		
 			If RegisteredRecords.Count() > 0 Then
 				Result = New Structure;
 				Result.Insert("Ref", Doc);

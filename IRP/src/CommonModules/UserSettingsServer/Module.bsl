@@ -120,6 +120,21 @@ Function GetUserSettingsForClientModule(Ref) Export
 	Return UserSettingsServerReuse.GetUserSettingsForClientModule(Ref);
 EndFunction
 
+// Get user settings.
+// 
+// Parameters:
+//  User - CatalogRef.Users - User
+//  FilterParameters - Structure - Filter parameters:
+// * MetadataObject - String - 
+//  CallFromClient - Boolean - Call from client
+// 
+// Returns:
+//  Array of Structure - Get user settings :
+//	* UserOrGroup - CatalogRef.UserGroups, CatalogRef.Users - 
+//	* MetadataObject - String - 
+//	* AttributeName - String -
+//	* KindOfAttribute - EnumRef.KindsOfAttributes -
+//	* Value - Boolean, String, Date, Number, AnyRef -
 Function GetUserSettings(User, FilterParameters, CallFromClient = False) Export
 	If FilterParameters.Property("MetadataObject") 
 		And TypeOf(FilterParameters.MetadataObject) <> Type("String") Then

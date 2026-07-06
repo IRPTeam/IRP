@@ -1,3 +1,34 @@
+// @strict-types
+
+#Region Public
+
+Procedure FillingCatalogsWithDefaultData(Source, FillingData, FillingText, StandardProcessing) Export
+	Data = New Structure();
+
+	FilterParameters = New Structure();
+	FilterParameters.Insert("MetadataObject", Source.Metadata());
+	UserSettings = UserSettingsServer.GetUserSettings(SessionParameters.CurrentUser, FilterParameters); // See UserSettingsServer.GetUserSettings
+
+	Data = New Structure();
+	
+	For Each Row In UserSettings Do
+		If Row.KindOfAttribute = Enums.KindsOfAttributes.Regular 
+			Or Row.KindOfAttribute = Enums.KindsOfAttributes.Common Then
+			Data.Insert(Row.AttributeName, Row.Value);
+		EndIf;
+	EndDo;
+	
+	For Each KeyValue In Data Do
+		If CommonFunctionsClientServer.ObjectHasProperty(Source, KeyValue.Key) Then
+			If TypeOf(Source[KeyValue.Key]) = Type("Boolean") And Not Source[KeyValue.Key] Then
+				Source[KeyValue.Key] = KeyValue.Value;
+			ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Then
+				Source[KeyValue.Key] = KeyValue.Value;
+			EndIf;
+		EndIf;
+	EndDo;
+EndProcedure
+
 Procedure FillingDocumentsWithDefaultData(Source, FillingData, FillingText, StandardProcessing, Force = False) Export
 	If Force = Undefined Then
 		Force = False;
@@ -12,7 +43,7 @@ Procedure FillingDocumentsWithDefaultData(Source, FillingData, FillingText, Stan
 
 	FilterParameters = New Structure();
 	FilterParameters.Insert("MetadataObject", Source.Metadata());
-	UserSettings = UserSettingsServer.GetUserSettings(SessionParameters.CurrentUser, FilterParameters);
+	UserSettings = UserSettingsServer.GetUserSettings(SessionParameters.CurrentUser, FilterParameters); // See UserSettingsServer.GetUserSettings
 
 	Data = New Structure();
 	Data.Insert("ManagerSegment", SessionParameters.CurrentUserPartner);
@@ -30,13 +61,13 @@ Procedure FillingDocumentsWithDefaultData(Source, FillingData, FillingText, Stan
 	EndIf;
 	
 	If IsUsedNewFunctionality Then
-		ArrayOfAllMainTables = New Array();
+		ArrayOfAllMainTables = New Array(); // Array of String
 		ArrayOfAllMainTables.Add("ItemList");
 		ArrayOfAllMainTables.Add("PaymentList");
 		ArrayOfAllMainTables.Add("Transactions");
 		ArrayOfAllMainTables.Add("Productions");
 		
-		ArrayOfMainTables = New Array();
+		ArrayOfMainTables = New Array();  // Array of String
 		For Each TableName In ArrayOfAllMainTables Do
 			If CommonFunctionsClientServer.ObjectHasProperty(Source, TableName) Then
 				ArrayOfMainTables.Add(TableName);
@@ -46,10 +77,10 @@ Procedure FillingDocumentsWithDefaultData(Source, FillingData, FillingText, Stan
 			ArrayOfMainTables.Add("");
 		EndIf;
 		
-		ArrayOfAllSubordinateTables = New Array();
+		ArrayOfAllSubordinateTables = New Array();  // Array of String
 		ArrayOfAllSubordinateTables.Add("Materials");
 		
-		ArrayOfSubordinateTables = New Array();
+		ArrayOfSubordinateTables = New Array();  // Array of String
 		For Each TableName In ArrayOfAllSubordinateTables Do
 			If CommonFunctionsClientServer.ObjectHasProperty(Source, TableName) Then
 				ArrayOfSubordinateTables.Add(TableName);
@@ -57,7 +88,7 @@ Procedure FillingDocumentsWithDefaultData(Source, FillingData, FillingText, Stan
 		EndDo;
 		
 		// properties from UserSettings
-		ArrayOfUserSettingsProperties = New Array();
+		ArrayOfUserSettingsProperties = New Array();  // Array of String
 		For Each KeyValue In Data Do
 			If CommonFunctionsClientServer.ObjectHasProperty(Source, KeyValue.Key) 
 				And ValueIsFilled(Data[KeyValue.Key]) Then				
@@ -81,8 +112,8 @@ Procedure FillingDocumentsWithDefaultData(Source, FillingData, FillingText, Stan
 		ArrayOfAllProperties = StrSplit(ReadOnlyProperties, ",");
 		
 		ArrayOfUserSettingsProperties   = StrSplit(UserSettingsProperties, ",");
-		ArrayOfBasisDocumentProperties = New Array();
-		ArrayOfSubordinateTablesProperties = New Array();
+		ArrayOfBasisDocumentProperties = New Array();  // Array of String
+		ArrayOfSubordinateTablesProperties = New Array();  // Array of String
 		
 		For Each SubordinateTableName In ArrayOfSubordinateTables Do
 			For Each DataPath In ArrayOfAllProperties Do
@@ -114,14 +145,14 @@ Procedure FillingDocumentsWithDefaultData(Source, FillingData, FillingText, Stan
 		Info.Insert("Data"                   , Data);
 		
 		For Each TableName In ArrayOfMainTables Do
-			ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfBasisDocumentProperties);
+			ProcessTablePropertiesByList(Info, Source, IsBasedOn, TableName, ArrayOfBasisDocumentProperties);
 			RecalculationCommand = CommonFunctionsClientServer.GetFromAddInfo(Source.AdditionalProperties, 
 				"RecalculationCommand", "Command_RecalculationWhenBasedOn");
 			ViewServer_V2.ExecuteCommandAtServer(Source, TableName, RecalculationCommand);
 		EndDo;
 		
 		For Each TableName In ArrayOfSubordinateTables Do
-			ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfSubordinateTablesProperties);
+			ProcessTablePropertiesByList(Info, Source, IsBasedOn, TableName, ArrayOfSubordinateTablesProperties);
 		EndDo;
 		
 		For Each TableName In ArrayOfMainTables Do
@@ -164,35 +195,33 @@ Procedure FillingDocumentsWithDefaultData(Source, FillingData, FillingText, Stan
 
 	AgreementAttribute = Attributes.Find("Agreement");
 	If AgreementAttribute <> Undefined And AgreementAttribute.Type = New TypeDescription("CatalogRef.Agreements") Then
-
 		If Attributes.Find("Partner") <> Undefined 
-			And ValueIsFilled(Source.Partner) 
-			And ValueIsFilled(Source.Agreement) Then
-				AgreementParameters = New Structure();
-				AgreementParameters.Insert("Partner"        , Source.Partner);
-				AgreementParameters.Insert("Agreement"      , Source.Agreement);
-				AgreementParameters.Insert("CurrentDate"    , CommonFunctionsServer.GetCurrentSessionDate());
-				AgreementParameters.Insert("ArrayOfFilters" , New Array());
-				AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark",
-					True, ComparisonType.NotEqual));
-				AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind",
-					PredefinedValue("Enum.AgreementKinds.Standard"), ComparisonType.NotEqual));
-				Source.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
+					And ValueIsFilled(Source.Partner) And ValueIsFilled(Source.Agreement) Then
+			AgreementParameters = New Structure();
+			AgreementParameters.Insert("Partner"        , Source.Partner);
+			AgreementParameters.Insert("Agreement"      , Source.Agreement);
+			AgreementParameters.Insert("CurrentDate"    , CommonFunctionsServer.GetCurrentSessionDate());
+			ArrayOfFilters = New Array; // Array of Structure
+			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(
+					"DeletionMark", True, ComparisonType.NotEqual));
+			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(
+					"Kind", PredefinedValue("Enum.AgreementKinds.Standard"), ComparisonType.NotEqual));
+			AgreementParameters.Insert("ArrayOfFilters" , ArrayOfFilters);
+			Source.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 		EndIf;
-
 	EndIf;
 
 EndProcedure
 
 Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
-	TypeOfSource = TypeOf(Source);
-	ArrayOfExclude = New Array();
+	
+	ArrayOfExclude = New Array(); // Array of type
 	ArrayOfExclude.Add(Type("DocumentObject.PriceList"));
 	ArrayOfExclude.Add(Type("DocumentObject.AdditionalCostAllocation"));
 	ArrayOfExclude.Add(Type("DocumentObject.AdditionalRevenueAllocation"));
 	ArrayOfExclude.Add(Type("DocumentObject.ExpenseAccruals"));
 	ArrayOfExclude.Add(Type("DocumentObject.RevenueAccruals"));
-	If ArrayOfExclude.Find(TypeOfSource) <> Undefined Then
+	If ArrayOfExclude.Find(TypeOf(Source)) <> Undefined Then
 		Return;
 	EndIf;
 	
@@ -204,6 +233,7 @@ Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
 	EndDo;
 	For Each TabularSectionMetadata In SourceMetadata.TabularSections Do
 		For Each AttributeMetadata In TabularSectionMetadata.Attributes Do
+			//@skip-check variable-value-type
 			For Each Row In Source[TabularSectionMetadata.Name] Do
 				If CommonFunctionsServer.IsDocumentRef(Row[AttributeMetadata.Name]) Then
 					Row[AttributeMetadata.Name] = Undefined;
@@ -238,6 +268,7 @@ Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
 				Continue;
 			EndIf;
 			If TabularSectionMetadata.Attributes.Find("Key") <> Undefined Then
+				//@skip-check typed-value-adding-to-untyped-collection
 				LinkedTables.Add(Source[TabularSectionMetadata.Name]);
 			EndIf;
 		EndDo;
@@ -245,15 +276,34 @@ Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
 	EndIf;
 EndProcedure
 
-Procedure ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfProperties)
-	// BasisDocument
+#EndRegion
+
+#Region Private
+
+// Process table properties by list.
+// 
+// Parameters:
+//  Info - Structure - Info:
+// * ReadOnlyProperties - String - 
+// * UserSettingsProperties - String - 
+// * Data - Structure - :
+// ** ManagerSegment - CatalogRef.Partners - 
+// ** Workstation - CatalogRef.Workstations - 
+// ** Store - CatalogRef.Stores - 
+// * Data 
+//  Source - CatalogObject, DocumentObject - Source
+//  IsBasedOn - Boolean - Is based on
+//  TableName - String - Table name
+//  ListOfProperties - Array - List of properties
+Procedure ProcessTablePropertiesByList(Info, Source, IsBasedOn, TableName, ListOfProperties)
+	
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
 	ServerParameters.IsBasedOn          = IsBasedOn;
 	ServerParameters.TableName          = TableName;
 	ServerParameters.ReadOnlyProperties = Info.ReadOnlyProperties;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
 			
-	For Each DataPath In ArrayOfProperties Do
+	For Each DataPath In ListOfProperties Do
 		_DataPath = TrimAll(DataPath);
 		If Not ValueIsFilled(_DataPath) Then
 			Continue;
@@ -363,30 +413,4 @@ Function UsedNewFunctionality(Source)
 	Return IsUsedNewFunctionality;
 EndFunction
 
-Procedure FillingCatalogsWithDefaultData(Source, FillingData, FillingText, StandardProcessing) Export
-	Data = New Structure();
-
-	FilterParameters = New Structure();
-	FilterParameters.Insert("MetadataObject", Source.Metadata());
-	UserSettings = UserSettingsServer.GetUserSettings(SessionParameters.CurrentUser, FilterParameters);
-
-	Data = New Structure();
-	
-	For Each Row In UserSettings Do
-		If Row.KindOfAttribute = Enums.KindsOfAttributes.Regular 
-			Or Row.KindOfAttribute = Enums.KindsOfAttributes.Common Then
-			Data.Insert(Row.AttributeName, Row.Value);
-		EndIf;
-	EndDo;
-	
-	For Each KeyValue In Data Do
-		If CommonFunctionsClientServer.ObjectHasProperty(Source, KeyValue.Key) Then
-			If TypeOf(Source[KeyValue.Key]) = Type("Boolean") And Not Source[KeyValue.Key] Then
-				Source[KeyValue.Key] = KeyValue.Value;
-			ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Then
-				Source[KeyValue.Key] = KeyValue.Value;
-			EndIf;
-		EndIf;
-	EndDo;
-EndProcedure
-
+#EndRegion

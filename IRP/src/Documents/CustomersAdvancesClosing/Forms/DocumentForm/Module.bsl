@@ -10,6 +10,11 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 EndProcedure
 
 &AtClient
+Procedure BeforeWrite(Cancel, WriteParameters)
+	SaveFixedOffsetAtServer();	
+EndProcedure
+
+&AtClient
 Procedure SaveFixedOffset(Command)
 	SaveFixedOffsetAtServer();
 EndProcedure
@@ -22,6 +27,13 @@ Procedure SaveFixedOffsetAtServer()
 		FillPropertyValues(RecordSet.Add(), Row);
 	EndDo;
 	RecordSet.Write();
+EndProcedure
+
+&AtClient
+Procedure UncheckAll(Command)
+	For Each Row In ThisObject.FixedOffsetOfAdvances Do
+		Row.IsFixed = False;
+	EndDo;	
 EndProcedure
 
 &AtClient
@@ -84,6 +96,50 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocumentsServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure FixedOffsetOfAdvancesAgreementStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	CurrentData = Items.FixedOffsetOfAdvances.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
+	
+	OpenSettings.FormParameters = New Structure();
+	OpenSettings.FormParameters.Insert("Partner"                     , CurrentData.Partner);
+	OpenSettings.FormParameters.Insert("IncludeFilterByPartner"      , True);
+	OpenSettings.FormParameters.Insert("IncludePartnerSegments"      , True);
+	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate" , False);
+	
+	OpenSettings.FillingData = New Structure();
+	OpenSettings.FillingData.Insert("Partner"   , CurrentData.Partner);
+	OpenSettings.FillingData.Insert("LegalName" , CurrentData.LegalName);
+	OpenSettings.FillingData.Insert("Company"   , Object.Company);
+	DocumentsClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, OpenSettings);	
+EndProcedure
+
+&AtClient
+Procedure FixedOffsetOfAdvancesAgreementEditTextChange(Item, Text, StandardProcessing)
+	CurrentData = Items.FixedOffsetOfAdvances.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"),ComparisonType.NotEqual));
+	AdditionalParameters = New Structure();
+	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate" , False);
+	AdditionalParameters.Insert("IncludeFilterByPartner"      , True);
+	AdditionalParameters.Insert("IncludePartnerSegments"      , True);
+	AdditionalParameters.Insert("Partner", CurrentData.Partner);
+	DocumentsClient.AgreementEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
 EndProcedure
 
 #Region COMMANDS

@@ -436,6 +436,11 @@
         <segments>FixedOffsetOfAdvances.IsFixed</segments>
       </dataPath>
       <titleLocation>None</titleLocation>
+      <toolTip>
+        <key>en</key>
+        <value>Set automatically for rows edited manually. Only checked rows are stored as a fixed offset by &quot;Save fixed offset&quot;; unchecked rows are recalculated automatically.</value>
+      </toolTip>
+      <toolTipRepresentation>Balloon</toolTipRepresentation>
       <extendedTooltip>
         <name>FixedOffsetOfAdvancesIsFixedExtendedTooltip</name>
         <id>128</id>
@@ -690,6 +695,14 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
+        <handlers>
+          <event>EditTextChange</event>
+          <name>FixedOffsetOfAdvancesAgreementEditTextChange</name>
+        </handlers>
+        <handlers>
+          <event>StartChoice</event>
+          <name>FixedOffsetOfAdvancesAgreementStartChoice</name>
+        </handlers>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <wrap>true</wrap>
@@ -819,6 +832,47 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>FixedOffsetOfAdvancesAmount</name>
+      <id>132</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>FixedOffsetOfAdvances.Amount</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>FixedOffsetOfAdvancesAmountExtendedTooltip</name>
+        <id>134</id>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>FixedOffsetOfAdvancesAmountContextMenu</name>
+        <id>133</id>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <readOnly>true</readOnly>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>FixedOffsetOfAdvancesDocument</name>
       <id>129</id>
       <enabled>true</enabled>
@@ -857,49 +911,34 @@
         <textEdit>true</textEdit>
       </extInfo>
     </items>
-    <items xsi:type="form:FormField">
-      <name>FixedOffsetOfAdvancesAmount</name>
-      <id>132</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>FixedOffsetOfAdvances.Amount</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>FixedOffsetOfAdvancesAmountExtendedTooltip</name>
-        <id>134</id>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>FixedOffsetOfAdvancesAmountContextMenu</name>
-        <id>133</id>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
     <autoCommandBar>
       <name>FixedOffsetOfAdvancesCommandBar</name>
       <id>87</id>
+      <items xsi:type="form:Button">
+        <name>FixedOffsetOfAdvancesUncheckAll</name>
+        <id>137</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <extendedTooltip>
+          <name>FixedOffsetOfAdvancesUncheckAllExtendedTooltip</name>
+          <id>138</id>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <commandName>Form.Command.UncheckAll</commandName>
+        <representation>Auto</representation>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <placementArea>UserCmds</placementArea>
+        <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
       <items xsi:type="form:Button">
         <name>FixedOffsetOfAdvancesSaveFixedOffset</name>
         <id>135</id>
@@ -1354,18 +1393,42 @@
     <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
+  <formCommands>
+    <name>UncheckAll</name>
+    <title>
+      <key>en</key>
+      <value>Uncheck all</value>
+    </title>
+    <id>3</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.UncheckAll</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>UncheckAll</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
     <handlers>
+      <event>AfterWriteAtServer</event>
+      <name>AfterWriteAtServer</name>
+    </handlers>
+    <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
     </handlers>
     <handlers>
-      <event>AfterWriteAtServer</event>
-      <name>AfterWriteAtServer</name>
+      <event>BeforeWrite</event>
+      <name>BeforeWrite</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

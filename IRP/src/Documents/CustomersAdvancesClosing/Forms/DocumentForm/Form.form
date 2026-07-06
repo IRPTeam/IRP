@@ -298,6 +298,15 @@
         <segments>FixedOffsetOfAdvances.IsFixed</segments>
       </dataPath>
       <titleLocation>None</titleLocation>
+      <toolTip>
+        <key>en</key>
+        <value>Set automatically for rows edited manually. Only checked rows are stored as a fixed offset by &quot;Save fixed offset&quot;; unchecked rows are recalculated automatically.</value>
+      </toolTip>
+      <toolTipRepresentation>Balloon</toolTipRepresentation>
+      <handlers>
+        <event>OnChange</event>
+        <name>FixedOffsetOfAdvancesIsFixedOnChange</name>
+      </handlers>
       <extendedTooltip>
         <name>FixedOffsetOfAdvancesIsFixedExtendedTooltip</name>
         <id>70</id>
@@ -558,18 +567,20 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
+        <handlers>
+          <event>EditTextChange</event>
+          <name>FixedOffsetOfAdvancesAgreementEditTextChange</name>
+        </handlers>
+        <handlers>
+          <event>StartChoice</event>
+          <name>FixedOffsetOfAdvancesAgreementStartChoice</name>
+        </handlers>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <wrap>true</wrap>
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
-        <choiceParameterLinks>
-          <name>Filter.Partner</name>
-          <datapath xsi:type="form:DataPath">
-            <segments>Items.FixedOffsetOfAdvances.CurrentData.Partner</segments>
-          </datapath>
-        </choiceParameterLinks>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -719,6 +730,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>InputField</type>
+      <readOnly>true</readOnly>
       <editMode>Enter</editMode>
       <showInHeader>true</showInHeader>
       <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -774,6 +786,31 @@
     <autoCommandBar>
       <name>FixedOffsetOfAdvancesCommandBar</name>
       <id>29</id>
+      <items xsi:type="form:Button">
+        <name>FixedOffsetOfAdvancesUncheckAll</name>
+        <id>79</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <extendedTooltip>
+          <name>FixedOffsetOfAdvancesUncheckAllExtendedTooltip</name>
+          <id>80</id>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <commandName>Form.Command.UncheckAll</commandName>
+        <representation>Auto</representation>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <placementArea>UserCmds</placementArea>
+        <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
       <items xsi:type="form:Button">
         <name>FixedOffsetOfAdvancesSaveFixedOffset</name>
         <id>77</id>
@@ -1202,6 +1239,26 @@
     <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
+  <formCommands>
+    <name>UncheckAll</name>
+    <title>
+      <key>en</key>
+      <value>Uncheck all</value>
+    </title>
+    <id>2</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.UncheckAll</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>UncheckAll</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>
@@ -1214,6 +1271,10 @@
     <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWrite</event>
+      <name>BeforeWrite</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

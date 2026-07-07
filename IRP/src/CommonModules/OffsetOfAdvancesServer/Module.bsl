@@ -1900,7 +1900,7 @@ Procedure DistributeTransactionToAging(Parameters, PointInTime, Document, Transa
 	|) AS RegAging";
 	
 	Query.SetParameter("Period"          , 
-		New Boundary(New PointInTime(PointInTime.Date, Parameters.Object.Ref), BoundaryType.Excluding));
+		New Boundary(New PointInTime(PointInTime.Date + 1, Parameters.Object.Ref), BoundaryType.Excluding));
 	Query.SetParameter("Company"         , TransactionData.Company);
 	Query.SetParameter("Branch"          , TransactionData.Branch);
 	Query.SetParameter("Currency"        , TransactionData.Currency);

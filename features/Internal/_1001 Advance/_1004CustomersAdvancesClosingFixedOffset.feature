@@ -21,6 +21,7 @@ Scenario: _1004000 preparation (customers advances closing fixed offset)
 		When Create catalog Companies objects (own Second company)
 		When Create catalog CashAccounts objects
 		When Create catalog Agreements objects
+		When Create catalog Agreements objects (Advance offset)
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
@@ -48,6 +49,7 @@ Scenario: _1004000 preparation (customers advances closing fixed offset)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create information register CurrencyRates records (Advance offset)
 		When Create information register Taxes records (VAT)
 	* Load documents
 		When Create document BankReceipt objects (advance)
